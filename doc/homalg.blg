@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
+The top-level auxiliary file: homalg.aux
+The style file: alpha.bst
+Database file #1: homalg.bib
+Warning--empty journal in BR
+You've used 1 entry,
+            2543 wiz_defined-function locations,
+            563 strings with 4675 characters,
+and the built_in function-call counts, 355 in all, are:
+= -- 33
+> -- 19
+< -- 0
++ -- 6
+- -- 6
+* -- 21
+:= -- 71
+add.period$ -- 4
+call.type$ -- 1
+change.case$ -- 6
+chr.to.int$ -- 1
+cite$ -- 2
+duplicate$ -- 13
+empty$ -- 21
+format.name$ -- 7
+if$ -- 66
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 9
+num.names$ -- 3
+pop$ -- 6
+preamble$ -- 1
+purify$ -- 7
+quote$ -- 0
+skip$ -- 14
+stack$ -- 0
+substring$ -- 7
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 1
+while$ -- 3
+width$ -- 2
+write$ -- 15
+(There was 1 warning)

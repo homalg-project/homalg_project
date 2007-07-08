@@ -1,0 +1,9 @@
+#SIXFORMAT  GapDocGAP
+HELPBOOKINFOSIXTMP := rec(
+bookname := "homalg",
+entries :=
+[ [ "Title page", "", [ 0, 0, 0 ], 1, 1 ], [ "Copyright", "-1", [ 0, 0, 1 ], 28, 2 ], [ "Table of contents", "-2", [ 0, 0, 2 ], 36, 3 ], [ "\033[1m\033[4m\033[31mIntroduction\033[0m", "1.", [ 1, 0, 0 ], 1, 
+      4 ], [ "\033[1m\033[4m\033[31mPhilosophy\033[0m", "1.1", [ 1, 1, 0 ], 4, 4 ], [ "\033[1m\033[4m\033[31mOverview over this manual\033[0m", "1.2", [ 1, 2, 0 ], 9, 4 ], 
+  [ "\033[1m\033[4m\033[31mInstallation of the \033[1mhomalg\033[1m\033[4m\033[31m-Package\033[0m", "2.", [ 2, 0, 0 ], 1, 5 ], [ "\033[1m\033[4m\033[31mExamples\033[0m", "3.", [ 3, 0, 0 ], 1, 6 ], 
+  [ "Bibliography", "bib.", [ "Bib", 0, 0 ], 1, 7 ], [ "References", "bib.", [ "Bib", 0, 0 ], 1, 7 ], [ "Index", "ind.", [ "Ind", 0, 0 ], 1, 8 ], [ "\033[1mhomalg\033[0m", "2.", [ 2, 0, 0 ], 1, 5 ] ]
+);

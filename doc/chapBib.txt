@@ -1,0 +1,13 @@
+  
+  
+  [1m[4m[31mReferences[0m
+  
+  [33m[BR07]  [0m[1m[31mBarakat,  M.  and  Robertz,  D. [0m, [34m$\mathtthomalg$ -- an abstract
+  package  for  homological  algebra[0m,  ,  [34m[0m  ()  (2007),  , (submitted. \tt
+  arXiv:math.AC/0701146                                                and
+  (\hrefhttp://wwwb.math.rwth-aachen.de/homalg\tt
+  http://wwwb.math.rwth-aachen.de/homalg))
+  
+  
+  
+  -------------------------------------------------------
