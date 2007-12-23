@@ -21,7 +21,7 @@ PackageName := "homalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "homalg - An Abstract Package for Homological Algebra",
+Subtitle := "homalg - a meta package for homological algebra",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update

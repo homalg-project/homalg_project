@@ -8,4 +8,6 @@
 ##
 #############################################################################
 
-ReadPackage("module","gap/module.gd");
+ReadPackage("homalg","gap/homalg.gd");
+ReadPackage("homalg","gap/RingForHomalg.gd");
+ReadPackage("homalg","gap/Module.gd");
