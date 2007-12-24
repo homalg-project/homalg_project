@@ -11,7 +11,7 @@
 
 ####################################
 #
-# Declarations for rings:
+# declarations for homalg tables:
 #
 ####################################
 
@@ -31,7 +31,7 @@ DeclareOperation( "CreateHomalgTable", [IsSemiringWithOneAndZero]);
 
 ####################################
 #
-# Filters:
+# filters and operations:
 #
 ####################################
 
@@ -64,19 +64,23 @@ DeclareAttribute("TriangularBasis",IsHomalgTable); ## needed by `homalg/BasisOfM
 
 ## Can optionally be provided by the RingPackage
 ## (homalg functions check if these functions are defined or not)
-## (`homalg/tablename` gives no default value)
+## (HomalgTable gives no default value)
 DeclareAttribute("BestBasis",IsHomalgTable);
 #DeclareAttribute("IsRingElement",IsHomalgTable);
 DeclareAttribute("RingElementNormalForm",IsHomalgTable);
 DeclareAttribute("SimplifyBasis",IsHomalgTable);
 
 ## Must only then be provided by the RingPackage in case the default
-## value provided by `homalg/tablename` does not match the Ring
+## value provided by HomalgTable does not match the Ring
 #DeclareAttribute("IsUnit",IsHomalgTable);
 DeclareAttribute("DivideByUnit",IsHomalgTable);
 DeclareAttribute("matrix",IsHomalgTable);
 DeclareAttribute("Minus",IsHomalgTable);
 DeclareAttribute("One",IsHomalgTable);
+
+## Operations:
+DeclareOperation( "CertainRows", [IsObject, IsList]);
+
 
 #######################################################################
 # The following loads the sub-package "XX":

@@ -37,11 +37,18 @@ InstallMethod( CertainRows,
         [IsHomalgTable],
         
   function(RP)
-    local certain_rows;
     
-    certain_rows := function(M,plist) return M.normal{plist}; end;
+    return CertainRows;
     
-    return certain_rows;
+end );
+
+InstallMethod( CertainRows,
+        "for a homalg matrix",
+        [IsObject, IsList],
+        
+  function(M, plist)
+    
+    return M.normal{plist};
     
 end );
 
