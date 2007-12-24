@@ -15,17 +15,8 @@
 #
 ####################################
 
-# A new Family
-BindGlobal("ModulesFamily",NewFamily("ModulesFamily"));
-
 # A new category of objects:
 DeclareCategory( "IsModuleForHomalg", IsAttributeStoringRep );
-
-# We have different representations:
-DeclareRepresentation( "IsFinitelyPresentedModuleRep", IsModuleForHomalg, []);
-
-BindGlobal("LeftModuleFinitelyPresentedType",NewType(ModulesFamily,
-                                                     IsLeftModule and IsFinitelyPresentedModuleRep));
 
 # Now the constructor method:
 DeclareOperation( "Presentation", [IsList, IsSemiringWithOneAndZero]);
@@ -40,7 +31,7 @@ DeclareOperation( "BasisOfModule", [IsObject, IsSemiringWithOneAndZero]);
 
 ####################################
 #
-# Filters:
+# filters and operations:
 #
 ####################################
 

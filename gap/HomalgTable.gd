@@ -15,16 +15,8 @@
 #
 ####################################
 
-# A new Family
-BindGlobal("HomalgTableFamily",NewFamily("HomalgTableFamily"));
-
 # A new category of objects:
 DeclareCategory( "IsHomalgTable", IsAttributeStoringRep );
-
-# We have different representations:
-DeclareRepresentation( "IsHomalgTableRep", IsHomalgTable, ["ring"]);
-
-BindGlobal("HomalgTableType",NewType(HomalgTableFamily,IsHomalgTableRep));
 
 ## Now the constructor method:
 DeclareOperation( "CreateHomalgTable", [IsSemiringWithOneAndZero]);
@@ -80,7 +72,6 @@ DeclareAttribute("One",IsHomalgTable);
 
 ## Operations:
 DeclareOperation( "CertainRows", [IsObject, IsList]);
-
 
 #######################################################################
 # The following loads the sub-package "XX":

@@ -8,6 +8,18 @@
 ##
 #############################################################################
 
+# A new Family
+BindGlobal("HomalgTableFamily",
+        NewFamily("HomalgTableFamily"));
+
+# We have different representations:
+DeclareRepresentation( "IsHomalgTableRep", IsHomalgTable, ["ring"]);
+
+BindGlobal("HomalgTableType",
+        NewType(HomalgTableFamily,
+                IsHomalgTableRep));
+
+##
 InstallMethod( CreateHomalgTable,
         "for a ring",
         [IsSemiringWithOneAndZero],
@@ -22,6 +34,7 @@ InstallMethod( CreateHomalgTable,
     return RP;
 end );
 
+##
 InstallMethod( ViewObj,
         "for a homalg ring package conversion table",
         [IsHomalgTable],
@@ -32,6 +45,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( CertainRows,
         "for a homalg table",
         [IsHomalgTable],
@@ -42,6 +56,7 @@ InstallMethod( CertainRows,
     
 end );
 
+##
 InstallMethod( CertainRows,
         "for a homalg matrix",
         [IsObject, IsList],

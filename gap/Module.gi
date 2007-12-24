@@ -8,6 +8,17 @@
 ##
 #############################################################################
 
+# A new Family
+BindGlobal( "ModulesFamily",
+        NewFamily("ModulesFamily"));
+
+# We have different representations:
+DeclareRepresentation( "IsFinitelyPresentedModuleRep", IsModuleForHomalg, []);
+
+BindGlobal( "LeftModuleFinitelyPresentedType",
+        NewType(ModulesFamily,
+                IsLeftModule and IsFinitelyPresentedModuleRep));
+
 ##
 InstallMethod( Presentation,
         "constructor",
@@ -31,13 +42,12 @@ InstallMethod( Presentation,
     
     M := rec(generators:=gen,relations:=rel);
     
-    Objectify( LeftModuleFinitelyPresentedType, M);
-    
-    SetDefaultRelations(M,1);
-    SetGeneratorsRelationsCounter(M,1);
-    
-    SetLeftActingDomain(M,arg[2]);
-    SetGeneratorsOfLeftOperatorAdditiveGroup(M,M!.generators.(M!.DefaultRelations));
+    ObjectifyWithAttributes(
+            M, LeftModuleFinitelyPresentedType,
+            LeftActingDomain, arg[2],
+            GeneratorsOfLeftOperatorAdditiveGroup, M!.generators.1,
+            DefaultRelations, 1,
+            GeneratorsRelationsCounter, 1 );
     
     if is_zero_module = true then
         SetIsZeroModule(M,true);
@@ -65,13 +75,12 @@ InstallMethod( Presentation,
     
     M := rec(generators:=gen,relations:=rel);
     
-    Objectify( LeftModuleFinitelyPresentedType, M);
-    
-    SetDefaultRelations(M,1);
-    SetGeneratorsRelationsCounter(M,1);
-    
-    SetLeftActingDomain(M,arg[3]);
-    SetGeneratorsOfLeftOperatorAdditiveGroup(M,M!.generators.(M!.DefaultRelations));
+    ObjectifyWithAttributes(
+            M, LeftModuleFinitelyPresentedType,
+            LeftActingDomain, arg[3],
+            GeneratorsOfLeftOperatorAdditiveGroup, M!.generators.1,
+            DefaultRelations, 1,
+            GeneratorsRelationsCounter, 1 );
     
     return M;
     
@@ -168,6 +177,17 @@ InstallMethod( RankOfGauss,
     
 end );
 
+##
+InstallOtherMethod( BasisOfModule,
+        "for a homalg module",
+	[IsModuleForHomalg],
+        
+  function(M)
+    
+    return BasisOfModule(RelationsOfModule(M),LeftActingDomain(M));
+    
+end );
+          
 ##
 InstallMethod( BasisOfModule,
         "for a set of relations",
