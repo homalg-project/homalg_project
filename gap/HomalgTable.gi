@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  RingForHomalg.gi        homalg package                   Mohamed Barakat
+##  HomalgTable.gi          homalg package                   Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -22,19 +22,6 @@ InstallMethod( CreateHomalgTable,
     return RP;
 end );
 
-InstallMethod( CertainRows,
-        "for a homalg matrix",
-        [IsHomalgTable],
-        
-  function(RP)
-    local certain_rows;
-    
-    certain_rows := function(M,plist) return M.normal{plist}; end;
-    
-    return certain_rows;
-    
-end );
-
 InstallMethod( ViewObj,
         "for a homalg ring package conversion table",
         [IsHomalgTable],
@@ -45,30 +32,16 @@ InstallMethod( ViewObj,
     
 end );
 
-InstallMethod( HomalgTable,
-        "for the integers",
-        [IsIntegers],
+InstallMethod( CertainRows,
+        "for a homalg table",
+        [IsHomalgTable],
         
-  function( arg )
-    local R,RP;
+  function(RP)
+    local certain_rows;
     
-    R := arg[1];
+    certain_rows := function(M,plist) return M.normal{plist}; end;
     
-    SetGlobalDim(R,1);
-    
-    RP := CreateHomalgTable(R);
-    
-    ## Can optionally be provided by the RingPackage
-    ## (homalg functions check if these functions are defined or not)
-    ## (`homalg/tablename` gives no default value)
-    SetBestBasis(RP,SmithNormalFormIntegerMatTransforms);
-    
-    ## Must be defined if other functions are not defined
-    SetTriangularBasis(RP,HermiteNormalFormIntegerMatTransform);
-    
-    SetHomalgTable(R,RP);
-    
-    return RP;
+    return certain_rows;
     
 end );
 

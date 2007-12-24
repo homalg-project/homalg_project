@@ -9,5 +9,5 @@
 #############################################################################
 
 ReadPackage("homalg","gap/homalg.gd");
-ReadPackage("homalg","gap/RingForHomalg.gd");
+ReadPackage("homalg","gap/HomalgTable.gd");
 ReadPackage("homalg","gap/Module.gd");

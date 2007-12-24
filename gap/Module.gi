@@ -188,7 +188,7 @@ InstallMethod( BasisOfModule,
     
     #=====# begin of the core procedure #=====#
     
-    M := ShallowCopy(_M);
+    M := _M;
     
     B := RP!.TriangularBasis(M);
     

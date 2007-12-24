@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  RingForHomalg.gd           homalg package                Mohamed Barakat
+##  HomalgTable.gd             homalg package                Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -35,16 +35,17 @@ DeclareOperation( "CreateHomalgTable", [IsSemiringWithOneAndZero]);
 #
 ####################################
 
+## ring theoretic attributes and properties:
 DeclareAttribute("GlobalDim",IsSemiringWithOneAndZero);
 
+## The homalg ring package conversion table:
 DeclareAttribute("HomalgTable",IsSemiringWithOneAndZero);
 
-## The homalg table:
+## The defaults provided by the table:
 DeclareAttribute("RingRelations",IsHomalgTable);
 
-DeclareAttribute("CertainColumns",IsHomalgTable);
 DeclareAttribute("CertainRows",IsHomalgTable);
-
+DeclareAttribute("CertainColumns",IsHomalgTable);
 
 ## Must only then be provided by the RingPackage in case the default
 ## "service" function does not match the Ring
