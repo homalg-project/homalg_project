@@ -10,26 +10,29 @@
 
 InstallMethod( HomalgTable,
         "for the integers",
-        [IsIntegers],
+        [ IsIntegers ],
         
   function( arg )
-    local R,RP;
+    local R, RP;
     
     R := arg[1];
     
-    SetGlobalDim(R,1);
+    SetGlobalDim( R, 1 );
     
-    RP := CreateHomalgTable(R);
+    RP := rec( ring := R );
     
-    ## Can optionally be provided by the RingPackage
-    ## (homalg functions check if these functions are defined or not)
-    ## (`homalg/tablename` gives no default value)
-    SetBestBasis(RP,SmithNormalFormIntegerMatTransforms);
+    ObjectifyWithAttributes(
+            RP, HomalgTableType,
+            
+            ## Can optionally be provided by the RingPackage
+            ## (homalg functions check if these functions are defined or not)
+            ## (HomalgTable gives no default value)
+            BestBasis, SmithNormalFormIntegerMatTransforms,
+            
+            ## Must be defined if other functions are not defined
+            TriangularBasis, HermiteNormalFormIntegerMatTransform );
     
-    ## Must be defined if other functions are not defined
-    SetTriangularBasis(RP,HermiteNormalFormIntegerMatTransform);
-    
-    SetHomalgTable(R,RP);
+    SetHomalgTable( R, RP );
     
     return RP;
     

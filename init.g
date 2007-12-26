@@ -10,4 +10,6 @@
 
 ReadPackage("homalg","gap/homalg.gd");
 ReadPackage("homalg","gap/HomalgTable.gd");
-ReadPackage("homalg","gap/Module.gd");
+ReadPackage("homalg","gap/MatrixForHomalg.gd");
+ReadPackage("homalg","gap/SetsOfRelations.gd");
+ReadPackage("homalg","gap/ModuleForHomalg.gd");

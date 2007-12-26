@@ -11,4 +11,6 @@
 ReadPackage("homalg","gap/homalg.gi");
 ReadPackage("homalg","gap/HomalgTable.gi");
 ReadPackage("homalg","gap/Integers.gi");
-ReadPackage("homalg","gap/Module.gi");
+ReadPackage("homalg","gap/MatrixForHomalg.gi");
+ReadPackage("homalg","gap/SetsOfRelations.gi");
+ReadPackage("homalg","gap/ModuleForHomalg.gi");
