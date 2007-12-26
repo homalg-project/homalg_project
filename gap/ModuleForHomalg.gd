@@ -71,6 +71,9 @@ DeclareProperty( "IsReflexiveLeftModule",
 DeclareProperty( "IsTorsionFreeLeftModule",
         IsLeftModule and IsModuleForHomalg );
 
+DeclareProperty( "IsCyclicLeftModule",
+        IsLeftModule and IsModuleForHomalg );
+
 DeclareProperty( "IsTorsionLeftModule",
         IsLeftModule and IsModuleForHomalg );
 

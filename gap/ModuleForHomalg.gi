@@ -55,6 +55,12 @@ InstallTrueMethod( IsTorsionLeftModule,
 InstallTrueMethod( IsHolonomicLeftModule,
         IsZeroModule );
 
+## IsCyclicLeftModule:
+
+InstallTrueMethod( IsCyclicLeftModule,
+        IsZeroModule );
+
+
 #############################################
 # immediate methods for logical implications:
 #############################################
