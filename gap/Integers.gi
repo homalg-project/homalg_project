@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Integers.gi             homalg package                   Mohamed Barakat
+##  Integers.gi                 homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -8,7 +8,13 @@
 ##
 #############################################################################
 
-InstallMethod( HomalgTable,
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+InstallMethod( CreateHomalgTable,
         "for the integers",
         [ IsIntegers ],
         
@@ -17,9 +23,7 @@ InstallMethod( HomalgTable,
     
     R := arg[1];
     
-    SetGlobalDim( R, 1 );
-    
-    RP := rec( ring := R );
+    RP := rec( );
     
     ObjectifyWithAttributes(
             RP, HomalgTableType,
@@ -31,8 +35,6 @@ InstallMethod( HomalgTable,
             
             ## Must be defined if other functions are not defined
             TriangularBasis, HermiteNormalFormIntegerMatTransform );
-    
-    SetHomalgTable( R, RP );
     
     return RP;
     

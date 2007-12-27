@@ -1,21 +1,29 @@
 #############################################################################
 ##
-##  ModuleForHomalg.gi       homalg package                  Mohamed Barakat
+##  ModuleForHomalg.gi          homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for modules.
+##  Implementation stuff for homalg modules.
 ##
 #############################################################################
 
-###############
-# declarations:
-###############
+####################################
+#
+# representations:
+#
+####################################
 
 # a new representation for the category IsModuleForHomalg:
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsModuleForHomalg,
         [ ] );
+
+####################################
+#
+# families and types:
+#
+####################################
 
 # a new family:
 BindGlobal( "ModulesFamily",
@@ -26,53 +34,144 @@ BindGlobal( "LeftModuleFinitelyPresentedType",
         NewType( ModulesFamily ,
                 IsLeftModule and IsFinitelyPresentedModuleRep ));
 
-#######################
-# logical implications:
-#######################
+####################################
+#
+# global variables:
+#
+####################################
 
-## IsTorsionFreeLeftModule:
+InstallValue( SimpleLogicalImplicationsForHomalgModules,
+        [ ## IsTorsionFreeLeftModule:
+          
+          [ IsZeroModule,
+            "implies", IsFreeModule ], ## FIXME: the name should be changed to IsFreeLeftModule
+          
+          [ IsFreeModule, ## FIXME: the name should be changed to IsFreeLeftModule
+            "implies", IsStablyFreeLeftModule ],
+          
+          [ IsStablyFreeLeftModule,
+            "implies", IsProjectiveLeftModule ],
+          
+          [ IsProjectiveLeftModule,
+            "implies", IsReflexiveLeftModule ],
+          
+          [ IsReflexiveLeftModule,
+            "implies", IsTorsionFreeLeftModule ],
+          
+          ## IsTorsionLeftModule:
+          
+          [ IsZeroModule,
+            "implies", IsHolonomicLeftModule ],
+          
+          [ IsHolonomicLeftModule,
+            "implies", IsTorsionLeftModule ],
+          
+          [ IsHolonomicLeftModule,
+            "implies", IsArtinianLeftModule ],
+          
+          ## IsCyclicLeftModule:
+          
+          [ IsZeroModule,
+            "implies", IsCyclicLeftModule ],
+          
+          ## IsZeroModule:
+          
+          [ IsTorsionLeftModule, "and", IsTorsionFreeLeftModule,
+            "imply", IsZeroModule ]
+          
+          ] );
 
-InstallTrueMethod( IsTorsionFreeLeftModule,
-        IsReflexiveLeftModule );
+####################################
+#
+# logical implications methods:
+#
+####################################
 
-InstallTrueMethod( IsReflexiveLeftModule,
-        IsProjectiveLeftModule );
+#LogicalImplicationsForHomalg( SimpleLogicalImplicationsForHomalgModules );
 
-InstallTrueMethod( IsProjectiveLeftModule,
-        IsStablyFreeLeftModule );
+## FIXME: find a way to activate the above line and to delete the following
+for property in SimpleLogicalImplicationsForHomalgModules do;
+    
+    if Length(property) = 3 then
+        
+        InstallTrueMethod( property[3],
+                property[1] );
+        
+        InstallImmediateMethod( property[1],
+                IsModuleForHomalg, 0, ## FIXME: find a way to put Tester(property[3]) here
+                
+          function( M )
+            if Tester(property[3])( M ) and not property[3]( M ) then
+                return false;
+            else
+                TryNextMethod();
+            fi;
+            
+        end );
+        
+    elif Length(property) = 5 then
+        
+        InstallTrueMethod( property[5],
+                property[1] and property[3] );
+        
+        InstallImmediateMethod( property[1],
+                IsModuleForHomalg, 0, ## FIXME: find a way to put Tester(property[3]) and Tester(property[5]) here
+                
+          function( M )
+            if Tester(property[3])( M ) and Tester(property[5])( M )
+               and property[3]( M ) and not property[5]( M ) then
+                return false;
+            else
+                TryNextMethod();
+            fi;
+            
+        end );
+        
+        InstallImmediateMethod( property[3],
+                IsModuleForHomalg, 0, ## FIXME: find a way to put Tester(property[1]) and Tester(property[5]) here
+                
+          function( M )
+            if Tester(property[1])( M ) and Tester(property[5])( M )
+               and property[1]( M ) and not property[5]( M ) then
+                return false;
+            else
+                TryNextMethod();
+            fi;
+            
+        end );
+        
+    fi;
+    
+od;
 
-InstallTrueMethod( IsStablyFreeLeftModule,
-        IsFreeModule );
+####################################
+#
+# immediate methods for properties:
+#
+####################################
 
-InstallTrueMethod( IsFreeModule,
-        IsZeroModule );
-
-## IsTorsionLeftModule:
-
-InstallTrueMethod( IsTorsionLeftModule,
-        IsHolonomicLeftModule );
-
-InstallTrueMethod( IsHolonomicLeftModule,
-        IsZeroModule );
-
-## IsCyclicLeftModule:
-
-InstallTrueMethod( IsCyclicLeftModule,
-        IsZeroModule );
-
-
-#############################################
-# immediate methods for logical implications:
-#############################################
-
-## IsTorsionLeftModule:
-
-## IsTorsionFreeLeftModule and not IsZeroModule => not IsTorsionLeftModule
+# strictly less relations than generators => not IsTorsionLeftModule
 InstallImmediateMethod( IsTorsionLeftModule,
-        IsFinitelyPresentedModuleRep and HasIsTorsionFreeLeftModule and HasIsZeroModule, 0,
+        IsFinitelyPresentedModuleRep, 0,
         
- function( M )
-    if IsTorsionFreeLeftModule( M ) and not IsZeroModule( M ) then
+  function( M )
+    local l, b, i, rel;
+    
+    l := M!.SetsOfRelations!.ListOfNumbersOfKnownSetsOfRelations;
+    
+    b := false;
+    
+    for i in [1..Length(l)] do;
+        rel := M!.SetsOfRelations!.(i);
+        if not IsString(rel) and HasNrRows(rel) and HasNrColumns(rel)
+           and NrColumns(rel) > NrRows(rel) then
+            b := true;
+            break;
+        fi;
+    od;
+    
+    if b then
+        SetIsZeroModule( M, false );
         return false;
     else
         TryNextMethod();
@@ -80,115 +179,125 @@ InstallImmediateMethod( IsTorsionLeftModule,
     
 end );
 
-## not IsTorsionLeftModule => not IsHolonomicLeftModule
-InstallImmediateMethod( IsHolonomicLeftModule,
-        IsFinitelyPresentedModuleRep and HasIsTorsionLeftModule, 0,
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( GeneratorsOfModule,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
         
- function( M )
-    if not IsTorsionLeftModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
+  function( M )
+  
+    return M!.SetsOfGenerators!.(NumberOfDefaultSetOfGenerators(M));
     
 end );
 
-## not IsHolonomicLeftModule => not IsZeroModule
-InstallImmediateMethod( IsZeroModule,
-        IsFinitelyPresentedModuleRep and HasIsHolonomicLeftModule, 0,
+##
+InstallMethod( RelationsOfModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
         
- function( M )
-    if not IsHolonomicLeftModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
+  function( M )
+  
+    return M!.SetsOfRelations!.(NumberOfDefaultSetOfRelations(M));
     
 end );
 
-## IsTorsionFreeLeftModule:
-
-## IsTorsionLeftModule and not IsZeroModule => not IsTorsionFreeLeftModule
-InstallImmediateMethod( IsTorsionFreeLeftModule,
-        IsFinitelyPresentedModuleRep and HasIsTorsionLeftModule and HasIsZeroModule, 0,
-        
- function( M )
-    if IsTorsionLeftModule( M ) and not IsZeroModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
+##
+InstallMethod( NrGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+  function( M )
+  
+    return NrRows(GeneratorsOfModule(M));
     
 end );
 
-## not IsTorsionFreeLeftModule => not IsReflexiveLeftModule
-InstallImmediateMethod( IsReflexiveLeftModule,
-        IsFinitelyPresentedModuleRep and HasIsTorsionFreeLeftModule, 0,
+##
+InstallMethod( NrRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
         
- function( M )
-    if not IsTorsionFreeLeftModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
+  function( M )
+  
+    return NrRows(RelationsOfModule(M));
     
 end );
 
-## not IsReflexiveLeftModule => not IsProjectiveLeftModule
-InstallImmediateMethod( IsProjectiveLeftModule,
-        IsFinitelyPresentedModuleRep and HasIsReflexiveLeftModule, 0,
+##
+InstallOtherMethod( RankOfGauss,
+        "for sets of relations",
+	[ IsObject ],
         
- function( M )
-    if not IsReflexiveLeftModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
+  function( M )
+    
+    return M.rank;
     
 end );
 
-## not IsProjectiveLeftModule => not IsStablyFreeLeftModule
-InstallImmediateMethod( IsStablyFreeLeftModule,
-        IsFinitelyPresentedModuleRep and HasIsProjectiveLeftModule, 0,
+##
+InstallOtherMethod( BasisOfModule,
+        "for a homalg module",
+	[ IsLeftModule and IsFinitelyPresentedModuleRep ],
         
- function( M )
-    if not IsProjectiveLeftModule( M ) then
-        return false;
-    else
-        TryNextMethod();
+  function( M )
+    
+    return BasisOfModule(RelationsOfModule(M),LeftActingDomain(M));
+    
+end );
+          
+##
+InstallOtherMethod( BasisOfModule,
+        "for sets of relations",
+	[ IsObject, IsRingForHomalg ],
+        
+  function( _M, R )
+    local RP, ring_rel, M, B, rank;
+    
+    RP := R!.HomalgTable;
+  
+    if HasBasisOfModule(RP) then
+        return RP!.BasisOfModule(_M);
     fi;
+    
+    if HasRingRelations(RP) then
+        ring_rel := RingRelations(RP);
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    M := _M;
+    
+    B := RP!.TriangularBasis(M);
+    
+    rank := RankOfGauss(B);
+    
+    B := CertainRows(RP)(B,[1..rank]);
+    
+    return B;
     
 end );
 
-## not IsStablyFreeLeftModule => not IsFreeModule
-InstallImmediateMethod( IsFreeModule,
-        IsFinitelyPresentedModuleRep and HasIsStablyFreeLeftModule, 0,
+##
+InstallOtherMethod( CertainRows,
+        "for homalg matrices",
+        [ IsObject, IsList ],
         
- function( M )
-    if not IsStablyFreeLeftModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
+  function(M, plist)
+    
+    return M.normal{plist};
     
 end );
 
-## not IsFreeModule => not IsZeroModule
-InstallImmediateMethod( IsZeroModule,
-        IsFinitelyPresentedModuleRep and HasIsFreeModule, 0,
-        
- function( M )
-    if not IsFreeModule( M ) then
-        return false;
-    else
-        TryNextMethod();
-    fi;
-    
-end );
-
-######################
-# constructor methods:
-######################
+####################################
+#
+# constructor functions and methods:
+#
+####################################
 
 InstallMethod( Presentation,
         "constructor",
@@ -256,136 +365,15 @@ InstallMethod( Presentation,
     
 end );
 
-####################
-# immediate methods:
-####################
-
-# strictly less relations than generators => not IsTorsionLeftModule
-InstallImmediateMethod( IsTorsionLeftModule,
-        IsFinitelyPresentedModuleRep, 0,
-        
-  function( M )
-    local l, b, i, rel;
-    
-    l := M!.SetsOfRelations!.ListOfNumbersOfKnownSetsOfRelations;
-    
-    b := false;
-    
-    for i in [1..Length(l)] do;
-        rel := M!.SetsOfRelations!.(i);
-        if not IsString(rel) and HasNrRows(rel) and HasNrColumns(rel)
-           and NrColumns(rel) > NrRows(rel) then
-            b := true;
-            break;
-        fi;
-    od;
-    
-    if b then
-        SetIsZeroModule( M, false );
-        return false;
-    else
-        TryNextMethod();
-    fi;
-    
-end );
-
-################
-# basic methods:
-################
-
-##
-InstallMethod( GeneratorsOfModule,
-        "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-  
-    return M!.SetsOfGenerators!.(NumberOfDefaultSetOfGenerators(M));
-    
-end );
-
-##
-InstallMethod( RelationsOfModule,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-  
-    return M!.SetsOfRelations!.(NumberOfDefaultSetOfRelations(M));
-    
-end );
-
-##
-InstallMethod( NrGenerators,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-  function( M )
-  
-    return NrRows(GeneratorsOfModule(M));
-    
-end );
-
-##
-InstallMethod( NrRelations,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-  
-    return NrRows(RelationsOfModule(M));
-    
-end );
-
-##
-InstallOtherMethod( BasisOfModule,
-        "for sets of relations",
-	[ IsObject, IsSemiringWithOneAndZero ],
-        
-  function( _M, R )
-    local RP, ring_rel, M, B, rank;
-    
-    RP := HomalgTable(R);
-  
-    if HasBasisOfModule(RP) then
-        return RP!.BasisOfModule(_M);
-    fi;
-    
-    if HasRingRelations(RP) then
-        ring_rel := RingRelations(RP);
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    M := _M;
-    
-    B := RP!.TriangularBasis(M);
-    
-    rank := RankOfGauss(B);
-    
-    B := CertainRows(RP)(B,[1..rank]);
-    
-    return B;
-    
-end );
-
-##
-InstallOtherMethod( CertainRows,
-        "for homalg matrices",
-        [IsObject, IsList],
-        
-  function(M, plist)
-    
-    return M.normal{plist};
-    
-end );
-
-###################################
+####################################
+#
 # View, Print, and Display methods:
-###################################
+#
+####################################
 
 InstallMethod( ViewObj,
         "for homalg modules",
-        [IsLeftModule and IsFinitelyPresentedModuleRep],
+        [ IsLeftModule and IsFinitelyPresentedModuleRep ],
         
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
@@ -413,7 +401,7 @@ InstallMethod( ViewObj,
                 rel_string := " relations";
             fi;
         fi;
-        Print( "A module on ", num_gen, gen_string, num_rel, rel_string );
+        Print( "A left module on ", num_gen, gen_string, num_rel, rel_string );
     fi;
     Print( ">" );
     
@@ -422,7 +410,7 @@ end );
 ##
 InstallMethod( PrintObj,
         "for homalg modules",
-        [IsLeftModule and IsFinitelyPresentedModuleRep],
+        [ IsLeftModule and IsFinitelyPresentedModuleRep ],
         
   function( M )
     

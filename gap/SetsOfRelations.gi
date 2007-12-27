@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SetsOfRelations.gd         homalg package                Mohamed Barakat
+##  SetsOfRelations.gd          homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -54,7 +54,7 @@ end );
 
 InstallMethod( ViewObj,
         "for sets of relations",
-        [ IsSetsOfRelations ],
+        [ IsSetsOfRelationsRep ],
         
   function( o )
     

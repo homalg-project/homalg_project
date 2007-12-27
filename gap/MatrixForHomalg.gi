@@ -1,12 +1,18 @@
 #############################################################################
 ##
-##  MatrixForHomalg.gi       homalg package                  Mohamed Barakat
+##  MatrixForHomalg.gi          homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for matrices.
+##  Implementation stuff for homalg matrices.
 ##
 #############################################################################
+
+####################################
+#
+# representations:
+#
+####################################
 
 # two new representations for the category IsMatrixForHomalg:
 DeclareRepresentation( "IsHomalgInternalMatrixRep",
@@ -17,22 +23,30 @@ DeclareRepresentation( "IsHomalgExternalMatrixRep",
         IsMatrixForHomalg,
         [ ] );
 
+####################################
+#
+# families and types:
+#
+####################################
+
 # a new family:
-BindGlobal( "HomalgMatrixFamily",
-        NewFamily( "HomalgMatrixFamily" ));
+BindGlobal( "HomalgMatricesFamily",
+        NewFamily( "HomalgMatricesFamily" ));
 
 # two new types:
 BindGlobal( "HomalgInternalMatrixType",
-        NewType( HomalgMatrixFamily ,
+        NewType( HomalgMatricesFamily ,
                 IsHomalgInternalMatrixRep ));
 
 BindGlobal( "HomalgExternalMatrixType",
-        NewType( HomalgMatrixFamily ,
+        NewType( HomalgMatricesFamily ,
                 IsHomalgExternalMatrixRep ));
 
-######################
-# constructor methods:
-######################
+####################################
+#
+# constructor functions and methods:
+#
+####################################
 
 InstallGlobalFunction( MatrixForHomalg,
   function( arg )
@@ -97,9 +111,11 @@ InstallGlobalFunction( MatrixForHomalg,
     
 end );
   
-###################################
+####################################
+#
 # View, Print, and Display methods:
-###################################
+#
+####################################
 
 InstallMethod( ViewObj,
         "for homalg matrices",

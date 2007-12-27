@@ -1,37 +1,30 @@
 #############################################################################
 ##
-##  MatrixForHomalg.gd       homalg package                  Mohamed Barakat
+##  MatrixForHomalg.gd          homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for matrices.
+##  Declaration stuff for homalg matrices.
 ##
 #############################################################################
 
 
 ####################################
 #
-# Declarations for matrices:
+# categories:
 #
 ####################################
 
-# A new category of objects:
+# a new category of objects:
 
 DeclareCategory( "IsMatrixForHomalg",
         IsAttributeStoringRep );
 
-# Now the constructor method:
-
-DeclareGlobalFunction( "MatrixForHomalg" );
-
-# Basic operations:
-
-DeclareOperation( "Compose",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
-
-####################
-# matrix properties:
-####################
+####################################
+#
+# properties:
+#
+####################################
 
 DeclareProperty( "IsZeroMatrix",
         IsMatrixForHomalg );
@@ -39,9 +32,11 @@ DeclareProperty( "IsZeroMatrix",
 DeclareProperty( "IsIdentityMatrix",
         IsMatrixForHomalg );
 
-####################
-# matrix attributes:
-####################
+####################################
+#
+# attributes:
+#
+####################################
 
 DeclareAttribute( "Eval",
         IsMatrixForHomalg );
@@ -51,4 +46,19 @@ DeclareAttribute( "NrRows",
 
 DeclareAttribute( "NrColumns",
         IsMatrixForHomalg );
+
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# constructor methods:
+
+DeclareGlobalFunction( "MatrixForHomalg" );
+
+# basic operations:
+
+DeclareOperation( "Compose",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 

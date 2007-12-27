@@ -8,14 +8,22 @@
 ##
 #############################################################################
 
-###############
-# declarations:
-###############
+####################################
+#
+# representations:
+#
+####################################
 
 # a new representation for the category IsHomalgTable:
 DeclareRepresentation( "IsHomalgTableRep",
         IsHomalgTable,
         [ "ring" ] );
+
+####################################
+#
+# families and types:
+#
+####################################
 
 # a new family:
 BindGlobal( "HomalgTableFamily",
@@ -26,9 +34,11 @@ BindGlobal( "HomalgTableType",
         NewType( HomalgTableFamily,
                 IsHomalgTableRep ));
 
-######################
-# constructor methods:
-######################
+####################################
+#
+# constructor functions and methods:
+#
+####################################
 
 InstallMethod( CreateHomalgTable,
         "for rings",
@@ -45,10 +55,16 @@ InstallMethod( CreateHomalgTable,
     
 end );
 
+####################################
+#
+# methods for attributes:
+#
+####################################
+
 ##
 InstallMethod( BasisOfModule,
         "for homalg tables",
-        [ IsHomalgTable ],
+        [ IsHomalgTableRep ],
         
   function( RP )
     
@@ -59,7 +75,7 @@ end );
 ##
 InstallMethod( CertainRows,
         "for homalg tables",
-        [ IsHomalgTable ],
+        [ IsHomalgTableRep ],
         
   function( RP )
     
@@ -67,35 +83,15 @@ InstallMethod( CertainRows,
     
 end );
 
-##
-InstallOtherMethod( RankOfGauss,
-        "for sets of relations",
-	[ IsObject ],
-        
-  function( M )
-    
-    return M.rank;
-    
-end );
-
-##
-InstallOtherMethod( BasisOfModule,
-        "for a homalg module",
-	[ IsModuleForHomalg ],
-        
-  function( M )
-    
-    return BasisOfModule(RelationsOfModule(M),LeftActingDomain(M));
-    
-end );
-          
-###################################
+####################################
+#
 # View, Print, and Display methods:
-###################################
+#
+####################################
 
 InstallMethod( ViewObj,
         "for a homalg ring package conversion table",
-        [ IsHomalgTable ],
+        [ IsHomalgTableRep ],
         
   function( o )
     

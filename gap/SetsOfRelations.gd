@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SetsOfRelations.gd         homalg package                Mohamed Barakat
+##  SetsOfRelations.gd          homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -11,7 +11,7 @@
 
 ####################################
 #
-# Declarations for sets of matrices:
+# categories:
 #
 ####################################
 
@@ -20,20 +20,30 @@
 DeclareCategory( "IsSetsOfRelations",
         IsAttributeStoringRep );
 
-# Now the constructor method:
+####################################
+#
+# properties:
+#
+####################################
+
+####################################
+#
+# attributes:
+#
+####################################
+
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# constructor methods:
 
 DeclareGlobalFunction( "CreateSetsOfRelations" );
 
-# Basic operations:
+# basic operations:
 
 DeclareOperation( "NumberOfLastStoredSet",
         [ IsSetsOfRelations ] );
-
-###############################
-# sets of relations properties:
-###############################
-
-###############################
-# sets of relations attributes:
-###############################
 

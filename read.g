@@ -10,6 +10,7 @@
 
 ReadPackage("homalg","gap/homalg.gi");
 ReadPackage("homalg","gap/HomalgTable.gi");
+ReadPackage("homalg","gap/RingForHomalg.gi");
 ReadPackage("homalg","gap/Integers.gi");
 ReadPackage("homalg","gap/MatrixForHomalg.gi");
 ReadPackage("homalg","gap/SetsOfRelations.gi");
