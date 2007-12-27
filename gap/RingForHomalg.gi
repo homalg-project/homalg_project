@@ -179,27 +179,56 @@ od;
 #
 ####################################
 
-InstallGlobalFunction( RingForHomalg,
+InstallGlobalFunction( CreateRingForHomalg,
   function( arg )
-    local homalg_ring, M;
+    local nar, homalg_ring, type;
     
-    homalg_ring := rec( ring := arg[1], HomalgTable := arg[2] );
+    nar := Length(arg);
     
-    if IsSemiringWithOneAndZero(arg[1]) then ## HomalgInternalRingType
+    homalg_ring := rec( ring := arg[1] );
+    
+    if IsSemiringWithOneAndZero(arg[1]) then
         
-        ## Objectify:
-        ObjectifyWithAttributes(
-                homalg_ring, HomalgInternalRingType );
+        type := HomalgInternalRingType;
         
-    else ## HomalgExternalRingType
+    else
         
-        ## Objectify:
-        ObjectifyWithAttributes(
-                homalg_ring, HomalgExternalRingType );
+        type := HomalgExternalRingType;
         
     fi;
     
-    return matrix;
+    ## Objectify:
+    ObjectifyWithAttributes(
+            homalg_ring, type,
+            HomalgTable, arg[nar] );
+    
+    return homalg_ring;
     
 end );
-  
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+InstallMethod( ViewObj,
+        "for a homalg ring package conversion table",
+        [ IsInternalRingRep ],
+        
+  function( o )
+    
+    Print("<A homalg internal ring>");
+    
+end );
+
+InstallMethod( ViewObj,
+        "for a homalg ring package conversion table",
+        [ IsExternalRingRep ],
+        
+  function( o )
+    
+    Print("<A homalg external ring>");
+    
+end );
+

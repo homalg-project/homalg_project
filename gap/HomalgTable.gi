@@ -36,27 +36,6 @@ BindGlobal( "HomalgTableType",
 
 ####################################
 #
-# constructor functions and methods:
-#
-####################################
-
-InstallMethod( CreateHomalgTable,
-        "for rings",
-        [ IsSemiringWithOneAndZero ],
-        
-  function ( arg )
-    local RP;
-    
-    RP := rec( ring := arg[1] );
-    
-    Objectify( HomalgTableType, RP );
-    
-    return RP;
-    
-end );
-
-####################################
-#
 # methods for attributes:
 #
 ####################################
@@ -80,6 +59,27 @@ InstallMethod( CertainRows,
   function( RP )
     
     return CertainRows;
+    
+end );
+
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+InstallMethod( CreateHomalgTable,
+        "for rings",
+        [ IsSemiringWithOneAndZero ],
+        
+  function ( arg )
+    local RP;
+    
+    RP := rec( ring := arg[1] );
+    
+    Objectify( HomalgTableType, RP );
+    
+    return RP;
     
 end );
 

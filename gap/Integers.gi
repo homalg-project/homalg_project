@@ -19,11 +19,9 @@ InstallMethod( CreateHomalgTable,
         [ IsIntegers ],
         
   function( arg )
-    local R, RP;
+    local RP;
     
-    R := arg[1];
-    
-    RP := rec( );
+    RP := rec( ring := arg[1] );
     
     ObjectifyWithAttributes(
             RP, HomalgTableType,

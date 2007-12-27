@@ -87,6 +87,10 @@ DeclareProperty( "IsSimpleRing",
 #
 ####################################
 
+## The homalg ring package conversion table:
+DeclareAttribute( "HomalgTable",
+        IsRingForHomalg, "mutable" );
+
 ## residue class rings for homalg:
 DeclareAttribute( "RingRelations",
         IsRingForHomalg );
@@ -99,5 +103,5 @@ DeclareAttribute( "RingRelations",
 
 # constructor methods:
 
-DeclareGlobalFunction( "RingForHomalg" );
+DeclareGlobalFunction( "CreateRingForHomalg" );
 

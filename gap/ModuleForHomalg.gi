@@ -324,7 +324,7 @@ InstallMethod( Presentation,
     ## Objectify:
     ObjectifyWithAttributes(
             M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, arg[2],
+            LeftActingDomain, CreateRingForHomalg(arg[2],CreateHomalgTable(arg[2])),
             GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
             NumberOfDefaultSetOfRelations, 1 );
     
@@ -357,7 +357,7 @@ InstallMethod( Presentation,
     ## Objectify:
     ObjectifyWithAttributes(
             M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, arg[3],
+            LeftActingDomain, CreateRingForHomalg(arg[3],CreateHomalgTable(arg[3])),
             GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
             NumberOfDefaultSetOfRelations, 1 );
     
