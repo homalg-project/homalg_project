@@ -127,10 +127,10 @@ for property in SimpleLogicalImplicationsForHomalgRings do;
                 property[1] );
         
         InstallImmediateMethod( property[1],
-                IsRingForHomalg, 0, ## FIXME: find a way to put Tester(property[3]) here
+                IsModuleForHomalg and Tester(property[3]), 0, ## NOTE: don't drop the Tester here!
                 
           function( M )
-            if Tester(property[3])( M ) and not property[3]( M ) then
+            if Tester(property[3])( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
                 return false;
             else
                 TryNextMethod();
@@ -144,10 +144,10 @@ for property in SimpleLogicalImplicationsForHomalgRings do;
                 property[1] and property[3] );
         
         InstallImmediateMethod( property[1],
-                IsRingForHomalg, 0, ## FIXME: find a way to put Tester(property[3]) and Tester(property[5]) here
+                IsModuleForHomalg and Tester(property[3]) and Tester(property[5]), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
-            if Tester(property[3])( M ) and Tester(property[5])( M )
+            if Tester(property[3])( M ) and Tester(property[5])( M )  ## FIXME: find a way to get rid of the Testers here
                and property[3]( M ) and not property[5]( M ) then
                 return false;
             else
@@ -157,10 +157,10 @@ for property in SimpleLogicalImplicationsForHomalgRings do;
         end );
         
         InstallImmediateMethod( property[3],
-                IsRingForHomalg, 0, ## FIXME: find a way to put Tester(property[1]) and Tester(property[5]) here
+                IsModuleForHomalg and Tester(property[1]) and Tester(property[5]), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
-            if Tester(property[1])( M ) and Tester(property[5])( M )
+            if Tester(property[1])( M ) and Tester(property[5])( M ) ## FIXME: find a way to get rid of the Testers here
                and property[1]( M ) and not property[5]( M ) then
                 return false;
             else
