@@ -34,13 +34,23 @@ DeclareCategory( "IsSetsOfRelations",
 
 ####################################
 #
+# function-operation-Attribute triples
+#
+####################################
+
+KeyDependentOperation( "TransitionMatrix", IsSetsOfRelations, IsList, ReturnTrue );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateSetsOfRelations" );
+DeclareGlobalFunction( "CreateSetsOfRelationsForLeftModule" );
+
+DeclareGlobalFunction( "CreateSetsOfRelationsForRightModule" );
 
 # basic operations:
 

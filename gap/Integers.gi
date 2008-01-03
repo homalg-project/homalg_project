@@ -21,18 +21,19 @@ InstallMethod( CreateHomalgTable,
   function( arg )
     local RP;
     
-    RP := rec( );
-    
-    ObjectifyWithAttributes(
-            RP, HomalgTableType,
-            
-            ## Can optionally be provided by the RingPackage
-            ## (homalg functions check if these functions are defined or not)
-            ## (HomalgTable gives no default value)
-            BestBasis, SmithNormalFormIntegerMatTransforms,
-            
-            ## Must be defined if other functions are not defined
-            TriangularBasis, HermiteNormalFormIntegerMatTransform );
+    RP := rec( 
+               ## Can optionally be provided by the RingPackage
+               ## (homalg functions check if these functions are defined or not)
+               ## (HomalgTable gives no default value)
+               BestBasis := 
+                 function( M, R )  return SmithNormalFormIntegerMatTransforms( Eval( M ) );  end,
+               
+               ## Must be defined if other functions are not defined
+               TriangularBasis :=
+                 function( M, R ) return HermiteNormalFormIntegerMatTransform ( Eval ( M ) ); end 
+          );
+                 
+    Objectify( HomalgTableType, RP );
     
     return RP;
     

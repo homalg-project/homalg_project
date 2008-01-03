@@ -14,7 +14,7 @@
 #
 ####################################
 
-# two new representations for the category IsMatrixForHomalg:
+# two new representations for the category IsRingForHomalg:
 DeclareRepresentation( "IsInternalRingRep",
         IsRingForHomalg,
         [ "ring", "HomalgTable" ] );

@@ -26,19 +26,35 @@ BindGlobal( "SetsOfRelationsType",
 # constructor methods:
 ######################
 
-InstallGlobalFunction( CreateSetsOfRelations,
-  function( arg )
+InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
+  function( mat, R )
     local relations;
     
-    if IsString( arg[1] ) and arg[1] <> [] and LowercaseString(arg[1]{[1..3]}) = "unk" then
+    if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
         relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
-    elif IsMatrixForHomalg( arg[1] ) then
-        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
-                          1 := arg[1] );
     else
         relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
-                          1 := MatrixForHomalg( arg[1] ) );
+                          1 := RelationsOfLeftModule( mat, R ) );
+    fi;
+    
+    ## Objectify:
+    Objectify( SetsOfRelationsType, relations );
+    
+    return relations;
+    
+end );
+  
+InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
+  function( mat, R )
+    local relations;
+    
+    if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
+        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
+                          1 := "unknown relations" );
+    else
+        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
+                          1 := RelationsOfRightModule( mat, R ) );
     fi;
     
     ## Objectify:
@@ -58,7 +74,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<An object containg sets of relations containing>" );
+    Print( "<Sets of relations of a homalg module>" );
     
 end );
 

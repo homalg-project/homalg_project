@@ -74,12 +74,6 @@ DeclareProperty( "IsZeroModule",
 #
 ####################################
 
-DeclareAttribute( "NumberOfDefaultSetOfRelations",
-        IsModuleForHomalg, "mutable" );
-
-DeclareSynonymAttr( "NumberOfDefaultSetOfGenerators",
-        NumberOfDefaultSetOfRelations );
-
 ####################################
 #
 # global functions and operations:
@@ -88,13 +82,31 @@ DeclareSynonymAttr( "NumberOfDefaultSetOfGenerators",
 
 # constructor methods:
 
-DeclareOperation( "Presentation",
+DeclareOperation( "LeftPresentation",
         [ IsList, IsSemiringWithOneAndZero ] );
 
-DeclareOperation( "Presentation",
+DeclareOperation( "LeftPresentation",
+        [ IsList, IsList, IsSemiringWithOneAndZero ] );
+
+DeclareOperation( "RightPresentation",
+        [ IsList, IsSemiringWithOneAndZero ] );
+
+DeclareOperation( "RightPresentation",
         [ IsList, IsList, IsSemiringWithOneAndZero ] );
 
 # basic operations:
+
+DeclareOperation( "NumberOfTheDefaultSetOfRelations",
+        [ IsModuleForHomalg ] );
+
+DeclareSynonym( "NumberOfTheDefaultSetOfGenerators",
+        NumberOfTheDefaultSetOfRelations );
+
+DeclareOperation( "SetsOfGenerators",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "SetsOfRelations",
+        [ IsModuleForHomalg ] );
 
 DeclareOperation( "GeneratorsOfModule",
         [ IsModuleForHomalg ] );
@@ -108,6 +120,15 @@ DeclareOperation( "NrGenerators",
 DeclareOperation( "NrRelations",
         [ IsModuleForHomalg ] );
 
-DeclareOperation( "NumberOfKnownGeneratorRelationPairs",
+DeclareOperation( "NumberOfKnownPresentations",
         [ IsModuleForHomalg ] );
+
+DeclareOperation( "RankOfGauss",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "CertainRows",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "BasisOfModule",
+        [ IsMatrixForHomalg, IsRingForHomalg ] );
 

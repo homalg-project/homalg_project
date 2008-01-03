@@ -40,28 +40,6 @@ BindGlobal( "HomalgTableType",
 #
 ####################################
 
-##
-InstallMethod( BasisOfModule,
-        "for homalg tables",
-        [ IsHomalgTableRep ],
-        
-  function( RP )
-    
-    return BasisOfModule;
-    
-end );
-
-##
-InstallMethod( CertainRows,
-        "for homalg tables",
-        [ IsHomalgTableRep ],
-        
-  function( RP )
-    
-    return CertainRows;
-    
-end );
-
 ####################################
 #
 # constructor functions and methods:

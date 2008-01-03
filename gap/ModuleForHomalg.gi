@@ -29,10 +29,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 BindGlobal( "ModulesFamily",
         NewFamily( "ModulesFamily" ));
 
-# a new type:
+# two new types:
 BindGlobal( "LeftModuleFinitelyPresentedType",
         NewType( ModulesFamily ,
                 IsLeftModule and IsFinitelyPresentedModuleRep ));
+
+BindGlobal( "RightModuleFinitelyPresentedType",
+        NewType( ModulesFamily ,
+                IsRightModule and IsFinitelyPresentedModuleRep ));
 
 ####################################
 #
@@ -94,9 +98,11 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
     
     if Length(property) = 3 then
         
+        ## a => b:
         InstallTrueMethod( property[3],
                 property[1] );
         
+        ## not b => not a:
         InstallImmediateMethod( property[1],
                 IsModuleForHomalg and Tester(property[3]), 0, ## NOTE: don't drop the Tester here!
                 
@@ -111,9 +117,11 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
     elif Length(property) = 5 then
         
+        ## a and b => c:
         InstallTrueMethod( property[5],
                 property[1] and property[3] );
         
+        ## b and not c => not a:
         InstallImmediateMethod( property[1],
                 IsModuleForHomalg and Tester(property[3]) and Tester(property[5]), 0, ## NOTE: don't drop the Testers here!
                 
@@ -127,6 +135,7 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
             
         end );
         
+        ## a and not c => not b:
         InstallImmediateMethod( property[3],
                 IsModuleForHomalg and Tester(property[1]) and Tester(property[5]), 0, ## NOTE: don't drop the Testers here!
                 
@@ -155,23 +164,29 @@ InstallImmediateMethod( IsTorsionLeftModule,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
-    local l, b, i, rel;
+    local l, b, i, rel, mat;
     
-    l := M!.SetsOfRelations!.ListOfNumbersOfKnownSetsOfRelations;
+    l := SetsOfRelations(M)!.ListOfNumbersOfKnownSetsOfRelations;
     
     b := false;
     
     for i in [1..Length(l)] do;
-        rel := M!.SetsOfRelations!.(i);
-        if not IsString(rel) and HasNrRows(rel) and HasNrColumns(rel)
-           and NrColumns(rel) > NrRows(rel) then
-            b := true;
-            break;
+        
+        rel := SetsOfRelations(M)!.(i);
+        
+        if not IsString(rel) then
+	    mat := rel!.relations;
+     
+            if HasNrRows(mat) and HasNrColumns(mat)
+              and NrColumns(mat) > NrRows(mat) then
+                b := true;
+                break;
+            fi;
         fi;
+        
     od;
     
     if b then
-        SetIsZeroModule( M, false );
         return false;
     else
         TryNextMethod();
@@ -186,13 +201,62 @@ end );
 ####################################
 
 ##
+InstallMethod( NumberOfTheDefaultSetOfRelations,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    if IsBound(M!.NumberOfTheDefaultSetOfRelations) then
+        return M!.NumberOfTheDefaultSetOfRelations;
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
+InstallMethod( SetsOfGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    if IsBound(M!.SetsOfGenerators) then
+        return M!.SetsOfGenerators;
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
+InstallMethod( SetsOfRelations,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    if IsBound(M!.SetsOfRelations) then
+        return M!.SetsOfRelations;
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
 InstallMethod( GeneratorsOfModule,
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-  
-    return M!.SetsOfGenerators!.(NumberOfDefaultSetOfGenerators(M));
+    
+    if IsBound(SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators(M))) then
+        return SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators(M));
+    else
+        return fail;
+    fi;
     
 end );
 
@@ -202,8 +266,12 @@ InstallMethod( RelationsOfModule,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-  
-    return M!.SetsOfRelations!.(NumberOfDefaultSetOfRelations(M));
+    
+    if IsBound(SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations(M))) then;
+        return SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations(M));
+    else
+        return fail;
+    fi;
     
 end );
 
@@ -212,7 +280,7 @@ InstallMethod( NrGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
   function( M )
-  
+    
     return NrRows(GeneratorsOfModule(M));
     
 end );
@@ -223,15 +291,15 @@ InstallMethod( NrRelations,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-  
-    return NrRows(RelationsOfModule(M));
+    
+    return NrRows(RelationsOfModule(M)!.relations);
     
 end );
 
 ##
 InstallOtherMethod( RankOfGauss,
         "for sets of relations",
-	[ IsObject ],
+	[ IsRecord ],
         
   function( M )
     
@@ -242,41 +310,52 @@ end );
 ##
 InstallOtherMethod( BasisOfModule,
         "for a homalg module",
-	[ IsLeftModule and IsFinitelyPresentedModuleRep ],
+	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return BasisOfModule(RelationsOfModule(M),LeftActingDomain(M));
+    return BasisOfModule( RelationsOfModule ( M ) );
     
 end );
-          
+
 ##
 InstallOtherMethod( BasisOfModule,
-        "for sets of relations",
-	[ IsObject, IsRingForHomalg ],
+        "for a homalg module",
+	[ IsRelationsForHomalg ],
+        
+  function( rel )
+    
+    return BasisOfModule( rel!.relations, rel!.ring );
+    
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg, IsRingForHomalg ],
         
   function( _M, R )
     local RP, ring_rel, M, B, rank;
     
-    RP := R!.HomalgTable;
+    RP := HomalgTable(R);
   
-    if HasBasisOfModule(RP) then
-        return RP!.BasisOfModule(_M);
+    if IsBound(RP!.BasisOfModule) then
+        return RP!.BasisOfModule(_M, R); ## the ring contains possible ring relations
     fi;
     
-    if HasRingRelations(RP) then
-        ring_rel := RingRelations(RP);
+    if HasRingRelations(R) then
+        ring_rel := RingRelations(R);
     fi;
     
     #=====# begin of the core procedure #=====#
     
     M := _M;
     
-    B := RP!.TriangularBasis(M);
+    B := RP!.TriangularBasis(M, R);
     
     rank := RankOfGauss(B);
     
-    B := CertainRows(RP)(B,[1..rank]);
+    B := CertainRows(B,[1..rank]);
     
     return B;
     
@@ -285,7 +364,7 @@ end );
 ##
 InstallOtherMethod( CertainRows,
         "for homalg matrices",
-        [ IsObject, IsList ],
+        [ IsRecord, IsList ],
         
   function(M, plist)
     
@@ -299,67 +378,79 @@ end );
 #
 ####################################
 
-InstallMethod( Presentation,
+InstallMethod( LeftPresentation,
         "constructor",
         [ IsList, IsSemiringWithOneAndZero ],
         
-  function( arg )
-    local gen, rel, M, is_zero_module;
+  function( rel, ring )
+    local R, gens, rels, M, is_zero_module;
+    
+    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
     
     is_zero_module := false;
     
-    if Length(arg[1]) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gen := rec( 1 := MatrixForHomalg( []) );
+    if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
+        gens := rec( 1 := MatrixForHomalg( [] ) );
         is_zero_module := true;
-    elif IsList(arg[1][1]) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
-        gen := rec( 1 := MatrixForHomalg( "IdentityMatrix", Length(arg[1][1]) ) );
+    elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
+        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", Length( rel[1] ) ) );
     else ## only one generator
-        gen := rec( 1 := MatrixForHomalg( "IdentityMatrix", 1 ) );
+        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", 1 ) );
     fi;
     
-    rel := CreateSetsOfRelations( arg[1] );
+    rels := CreateSetsOfRelationsForLeftModule( rel, R );
     
-    M := rec( SetsOfGenerators := gen, SetsOfRelations := rel );
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              NumberOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(
             M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, CreateRingForHomalg(arg[2],CreateHomalgTable(arg[2])),
-            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-            NumberOfDefaultSetOfRelations, 1 );
+            LeftActingDomain, R,
+            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     
     if is_zero_module = true then
         SetIsZeroModule( M, true );
     fi;
+    
+#    SetParent(gens, M);
+#    SetParent(rels, M);
     
     return M;
     
 end );
   
 ##
-InstallMethod( Presentation,
+InstallMethod( LeftPresentation,
         "constructor",
         [ IsList, IsList, IsSemiringWithOneAndZero ],
         
-  function( arg )
-    local gen, rel, M;
+  function( gen, rel, ring )
+    local R, gens, rels, M;
     
-    gen := rec( 1 := MatrixForHomalg( arg[1] ) );
+    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
     
-    if arg[2] = [] and arg[1] <> [] then
-        rel := CreateSetsOfRelations( "unknown relations" );
+    gens := rec( 1 := MatrixForHomalg( gen ) );
+    
+    if rel = [] and gen <> [] then
+        rels := CreateSetsOfRelationsForLeftModule( "unknown relations", R );
     else
-        rel := CreateSetsOfRelations( arg[2] );
+        rels := CreateSetsOfRelationsForLeftModule( rel, R );
     fi;
     
-    M := rec( SetsOfGenerators := gen, SetsOfRelations := rel );
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              NumberOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(
             M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, CreateRingForHomalg(arg[3],CreateHomalgTable(arg[3])),
-            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-            NumberOfDefaultSetOfRelations, 1 );
+            LeftActingDomain, R,
+            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+#    SetParent(gens, M);
+#    SetParent(rels, M);
     
     return M;
     
@@ -414,7 +505,7 @@ InstallMethod( PrintObj,
         
   function( M )
     
-    Print( "Presentation( " );
+    Print( "LeftPresentation( " );
     if HasIsZeroModule(M) and IsZeroModule(M) then
         Print( "[], ", LeftActingDomain(M) ); ## no generators, empty relations, ring
     else
@@ -424,9 +515,9 @@ InstallMethod( PrintObj,
         else
             Print( RelationsOfModule(M), ", " );
         fi;
-        Print( LeftActingDomain(M) );
+        Print( LeftActingDomain(M), " " );
     fi;
-    Print(" )");
+    Print(")");
     
 end );
 
