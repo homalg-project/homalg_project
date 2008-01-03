@@ -195,3 +195,12 @@ InstallMethod( ViewObj,
     
 end );
 
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep ],
+        
+  function( o )
+    
+    Print(Eval(o), "\n");
+    
+end);

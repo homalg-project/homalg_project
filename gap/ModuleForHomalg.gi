@@ -252,8 +252,8 @@ InstallMethod( GeneratorsOfModule,
         
   function( M )
     
-    if IsBound(SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators(M))) then
-        return SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators(M));
+    if IsBound(SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators( M ))) then
+        return SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators( M ));
     else
         return fail;
     fi;
@@ -267,8 +267,8 @@ InstallMethod( RelationsOfModule,
         
   function( M )
     
-    if IsBound(SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations(M))) then;
-        return SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations(M));
+    if IsBound(SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations( M ))) then;
+        return SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations( M ));
     else
         return fail;
     fi;
@@ -281,7 +281,7 @@ InstallMethod( NrGenerators,
         [ IsFinitelyPresentedModuleRep ],
   function( M )
     
-    return NrRows(GeneratorsOfModule(M));
+    return NrRows( GeneratorsOfModule( M ) );
     
 end );
 
@@ -292,18 +292,7 @@ InstallMethod( NrRelations,
         
   function( M )
     
-    return NrRows(RelationsOfModule(M)!.relations);
-    
-end );
-
-##
-InstallOtherMethod( RankOfGauss,
-        "for sets of relations",
-	[ IsRecord ],
-        
-  function( M )
-    
-    return M.rank;
+    return NrRows( RelationsOfModule(M)!.relations );
     
 end );
 
@@ -313,8 +302,34 @@ InstallOtherMethod( BasisOfModule,
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
+    local rel, B, rels, l;
     
-    return BasisOfModule( RelationsOfModule ( M ) );
+    rel := RelationsOfModule ( M );
+    
+    if not ( HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) ) then
+        
+        B := BasisOfModule( rel );
+        
+        if IsLeftModule( M ) then
+            rel := RelationsOfLeftModule( B, LeftActingDomain( M ) );
+        else
+            rel := RelationsOfRightModule( B, RightActingDomain( M ) );
+        fi;
+        
+        SetCanBeUsedToEffictivelyDecideZero( rel, true );
+        
+        rels := SetsOfRelations( M );
+        
+        l := NumberOfLastStoredSet( rels );
+        
+        rels!.ListOfNumbersOfKnownSetsOfRelations[l+1] := l+1;
+        
+        rels!.(l+1) := rel;
+        
+        M!.NumberOfTheDefaultSetOfRelations := l+1;
+    fi;
+    
+    return rel!.relations;
     
 end );
 
@@ -325,51 +340,14 @@ InstallOtherMethod( BasisOfModule,
         
   function( rel )
     
-    return BasisOfModule( rel!.relations, rel!.ring );
-    
-end );
-
-##
-InstallMethod( BasisOfModule,
-        "for a homalg matrix",
-	[ IsMatrixForHomalg, IsRingForHomalg ],
-        
-  function( _M, R )
-    local RP, ring_rel, M, B, rank;
-    
-    RP := HomalgTable(R);
-  
-    if IsBound(RP!.BasisOfModule) then
-        return RP!.BasisOfModule(_M, R); ## the ring contains possible ring relations
+    if HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) then
+        return rel!.relations;
+    elif not IsBound(rel!.BasisOfModule) then
+        rel!.BasisOfModule := BasisOfModule( rel!.relations, rel!.ring );
+        SetCanBeUsedToEffictivelyDecideZero( rel, false );
     fi;
     
-    if HasRingRelations(R) then
-        ring_rel := RingRelations(R);
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    M := _M;
-    
-    B := RP!.TriangularBasis(M, R);
-    
-    rank := RankOfGauss(B);
-    
-    B := CertainRows(B,[1..rank]);
-    
-    return B;
-    
-end );
-
-##
-InstallOtherMethod( CertainRows,
-        "for homalg matrices",
-        [ IsRecord, IsList ],
-        
-  function(M, plist)
-    
-    return M.normal{plist};
-    
+    return rel!.BasisOfModule;
 end );
 
 ####################################
@@ -378,6 +356,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( LeftPresentation,
         "constructor",
         [ IsList, IsSemiringWithOneAndZero ],

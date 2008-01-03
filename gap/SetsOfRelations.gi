@@ -8,10 +8,22 @@
 ##
 #############################################################################
 
+####################################
+#
+# representations:
+#
+####################################
+
 # a new representation for the category IsSetsOfRelations:
 DeclareRepresentation( "IsSetsOfRelationsRep",
         IsSetsOfRelations,
         [ ] );
+
+####################################
+#
+# families and types:
+#
+####################################
 
 # a new family:
 BindGlobal( "SetsOfRelationsFamily",
@@ -22,9 +34,28 @@ BindGlobal( "SetsOfRelationsType",
         NewType( SetsOfRelationsFamily ,
                 IsSetsOfRelationsRep ));
 
-######################
-# constructor methods:
-######################
+####################################
+#
+# methods for operations:
+#
+####################################
+
+InstallMethod( NumberOfLastStoredSet,
+        "for sets of relations",
+        [ IsSetsOfRelationsRep ],
+        
+  function( rels )
+    
+    return Length( rels!.ListOfNumbersOfKnownSetsOfRelations );
+    
+end );
+
+
+####################################
+#
+# constructor functions and methods:
+#
+####################################
 
 InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
   function( mat, R )
@@ -64,9 +95,11 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
     
 end );
   
-###################################
+####################################
+#
 # View, Print, and Display methods:
-###################################
+#
+####################################
 
 InstallMethod( ViewObj,
         "for sets of relations",

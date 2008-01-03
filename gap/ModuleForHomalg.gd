@@ -96,17 +96,20 @@ DeclareOperation( "RightPresentation",
 
 # basic operations:
 
-DeclareOperation( "NumberOfTheDefaultSetOfRelations",
-        [ IsModuleForHomalg ] );
-
-DeclareSynonym( "NumberOfTheDefaultSetOfGenerators",
-        NumberOfTheDefaultSetOfRelations );
-
 DeclareOperation( "SetsOfGenerators",
         [ IsModuleForHomalg ] );
 
 DeclareOperation( "SetsOfRelations",
         [ IsModuleForHomalg ] );
+
+DeclareOperation( "NumberOfKnownPresentations",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "NumberOfTheDefaultSetOfRelations",
+        [ IsModuleForHomalg ] );
+
+DeclareSynonym( "NumberOfTheDefaultSetOfGenerators",
+        NumberOfTheDefaultSetOfRelations );
 
 DeclareOperation( "GeneratorsOfModule",
         [ IsModuleForHomalg ] );
@@ -119,16 +122,4 @@ DeclareOperation( "NrGenerators",
 
 DeclareOperation( "NrRelations",
         [ IsModuleForHomalg ] );
-
-DeclareOperation( "NumberOfKnownPresentations",
-        [ IsModuleForHomalg ] );
-
-DeclareOperation( "RankOfGauss",
-        [ IsMatrixForHomalg ] );
-
-DeclareOperation( "CertainRows",
-        [ IsMatrixForHomalg ] );
-
-DeclareOperation( "BasisOfModule",
-        [ IsMatrixForHomalg, IsRingForHomalg ] );
 

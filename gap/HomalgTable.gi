@@ -61,6 +61,17 @@ InstallMethod( CreateHomalgTable,
     
 end );
 
+##
+InstallOtherMethod( CertainRows,
+        "for homalg matrices",
+        [ IsRecord, IsList ],
+        
+  function(M, plist)
+    
+    return M.normal{plist};
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

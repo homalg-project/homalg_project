@@ -42,3 +42,8 @@ DeclareCategory( "IsHomalgTable",
 DeclareOperation( "CreateHomalgTable",
         [ IsSemiringWithOneAndZero ] );
 
+# basic operations:
+
+DeclareOperation( "CertainRows",
+        [ IsMatrixForHomalg, IsList ] );
+
