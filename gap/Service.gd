@@ -1,0 +1,3 @@
+DeclareOperation( "BasisOfModule",
+        [ IsMatrixForHomalg, IsRingForHomalg ] );
+

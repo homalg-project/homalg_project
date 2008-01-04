@@ -1,0 +1,3 @@
+DeclareOperation( "RankOfGauss",
+        [ IsMatrixForHomalg ] );
+
