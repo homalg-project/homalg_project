@@ -2,7 +2,7 @@
 ##
 ##  ModuleForHomalg.gd          homalg package               Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Declaration stuff for homalg modules.
 ##
@@ -105,11 +105,11 @@ DeclareOperation( "SetsOfRelations",
 DeclareOperation( "NumberOfKnownPresentations",
         [ IsModuleForHomalg ] );
 
-DeclareOperation( "NumberOfTheDefaultSetOfRelations",
+DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsModuleForHomalg ] );
 
 DeclareSynonym( "NumberOfTheDefaultSetOfGenerators",
-        NumberOfTheDefaultSetOfRelations );
+        PositionOfTheDefaultSetOfRelations );
 
 DeclareOperation( "GeneratorsOfModule",
         [ IsModuleForHomalg ] );
@@ -121,5 +121,8 @@ DeclareOperation( "NrGenerators",
         [ IsModuleForHomalg ] );
 
 DeclareOperation( "NrRelations",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "BasisOfModule",
         [ IsModuleForHomalg ] );
 

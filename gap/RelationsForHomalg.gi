@@ -2,7 +2,7 @@
 ##
 ##  RelationsForHomalg.gi       homalg package               Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for a set of relations.
 ##
@@ -41,6 +41,29 @@ BindGlobal( "LeftRelationsForHomalgType",
 BindGlobal( "RightRelationsForHomalgType",
         NewType(  RelationsForHomalgFamily,
                 IsRightRelationsForHomalgRep ));
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( BasisOfModule,
+        "for a set of relations of a homalg module",
+	[ IsRelationsForHomalg ],
+        
+  function( rel )
+    
+    if HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) then
+        return rel!.relations;
+    elif not IsBound(rel!.BasisOfModule) then
+        rel!.BasisOfModule := BasisOfModule( rel!.relations, rel!.ring );
+        SetCanBeUsedToEffictivelyDecideZero( rel, false );
+    fi;
+    
+    return rel!.BasisOfModule;
+end );
 
 ####################################
 #

@@ -2,7 +2,7 @@
 ##
 ##  RelationsForHomalg.gd       homalg package               Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Declaration stuff for a set of relations.
 ##
@@ -45,4 +45,9 @@ DeclareProperty( "CanBeUsedToEffictivelyDecideZero",
 
 DeclareGlobalFunction( "RelationsOfLeftModule" );
 DeclareGlobalFunction( "RelationsOfRightModule" );
+
+# basic operations:
+
+DeclareOperation( "BasisOfModule",
+        [ IsRelationsForHomalg ] );
 

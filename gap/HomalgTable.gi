@@ -2,7 +2,7 @@
 ##
 ##  HomalgTable.gi          homalg package                   Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for rings.
 ##
@@ -62,13 +62,13 @@ InstallMethod( CreateHomalgTable,
 end );
 
 ##
-InstallOtherMethod( CertainRows,
+InstallMethod( CertainRows,
         "for homalg matrices",
-        [ IsRecord, IsList ],
+        [ IsMatrixForHomalg, IsList ],
         
-  function(M, plist)
+  function( M, plist )
     
-    return M.normal{plist};
+    return Eval( M ){plist};
     
 end );
 
@@ -87,4 +87,3 @@ InstallMethod( ViewObj,
     Print("<A homalg ring package conversion table>");
     
 end );
-

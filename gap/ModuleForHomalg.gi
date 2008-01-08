@@ -2,7 +2,7 @@
 ##
 ##  ModuleForHomalg.gi          homalg package               Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for homalg modules.
 ##
@@ -201,14 +201,14 @@ end );
 ####################################
 
 ##
-InstallMethod( NumberOfTheDefaultSetOfRelations,
+InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    if IsBound(M!.NumberOfTheDefaultSetOfRelations) then
-        return M!.NumberOfTheDefaultSetOfRelations;
+    if IsBound(M!.PositionOfTheDefaultSetOfRelations) then
+        return M!.PositionOfTheDefaultSetOfRelations;
     else
         return fail;
     fi;
@@ -267,8 +267,8 @@ InstallMethod( RelationsOfModule,
         
   function( M )
     
-    if IsBound(SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations( M ))) then;
-        return SetsOfRelations(M)!.(NumberOfTheDefaultSetOfRelations( M ));
+    if IsBound(SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ))) then;
+        return SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ));
     else
         return fail;
     fi;
@@ -297,7 +297,7 @@ InstallMethod( NrRelations,
 end );
 
 ##
-InstallOtherMethod( BasisOfModule,
+InstallMethod( BasisOfModule,
         "for a homalg module",
 	[ IsFinitelyPresentedModuleRep ],
         
@@ -326,28 +326,11 @@ InstallOtherMethod( BasisOfModule,
         
         rels!.(l+1) := rel;
         
-        M!.NumberOfTheDefaultSetOfRelations := l+1;
+        M!.PositionOfTheDefaultSetOfRelations := l+1;
     fi;
     
     return rel!.relations;
     
-end );
-
-##
-InstallOtherMethod( BasisOfModule,
-        "for a homalg module",
-	[ IsRelationsForHomalg ],
-        
-  function( rel )
-    
-    if HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) then
-        return rel!.relations;
-    elif not IsBound(rel!.BasisOfModule) then
-        rel!.BasisOfModule := BasisOfModule( rel!.relations, rel!.ring );
-        SetCanBeUsedToEffictivelyDecideZero( rel, false );
-    fi;
-    
-    return rel!.BasisOfModule;
 end );
 
 ####################################
@@ -381,7 +364,7 @@ InstallMethod( LeftPresentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
-              NumberOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(
@@ -420,7 +403,7 @@ InstallMethod( LeftPresentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
-              NumberOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(

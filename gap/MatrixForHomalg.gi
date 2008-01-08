@@ -2,7 +2,7 @@
 ##
 ##  MatrixForHomalg.gi          homalg package               Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for homalg matrices.
 ##
