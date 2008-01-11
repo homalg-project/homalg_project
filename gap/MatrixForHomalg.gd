@@ -32,6 +32,12 @@ DeclareProperty( "IsZeroMatrix",
 DeclareProperty( "IsIdentityMatrix",
         IsMatrixForHomalg );
 
+DeclareProperty( "IsFullRowRankMatrix",
+        IsMatrixForHomalg );
+
+DeclareProperty( "IsFullColumnRankMatrix",
+        IsMatrixForHomalg );
+
 ####################################
 #
 # attributes:

@@ -15,12 +15,24 @@
 ####################################
 
 ##
-InstallMethod( RankOfGauss,
-        "for sets of relations",
-	[ IsMatrixForHomalg and HasRankOfMatrix ],
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsList ],
         
-  function( M )
+  function( M, plist )
+    local R, RP;
     
-    return RankOfMatrix( M );
+    R := M!.ring;
+    
+    RP := HomalgTable( R );
+  
+    if IsBound( RP!.CertainRows ) then
+        return RP!.CertainRows( M, plist );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return MatrixForHomalg( Eval( M ){plist}, M!.ring );
     
 end );
+

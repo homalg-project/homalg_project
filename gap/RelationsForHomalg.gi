@@ -17,11 +17,11 @@
 # two new representations for the category IsRelationsForHomalg:
 DeclareRepresentation( "IsLeftRelationsForHomalgRep",
         IsRelationsForHomalg,
-        [ "ring", "relations" ] );
+        [ "relations" ] );
 
 DeclareRepresentation( "IsRightRelationsForHomalgRep",
         IsRelationsForHomalg,
-        [ "ring", "relations" ] );
+        [ "relations" ] );
 
 ####################################
 #
@@ -57,8 +57,8 @@ InstallMethod( BasisOfModule,
     
     if HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) then
         return rel!.relations;
-    elif not IsBound(rel!.BasisOfModule) then
-        rel!.BasisOfModule := BasisOfModule( rel!.relations, rel!.ring );
+    elif not IsBound( rel!.BasisOfModule ) then
+        rel!.BasisOfModule := BasisOfModule( rel!.relations );
         SetCanBeUsedToEffictivelyDecideZero( rel, false );
     fi;
     
@@ -72,15 +72,13 @@ end );
 ####################################
 
 InstallGlobalFunction( RelationsOfLeftModule,
-  function( rel, R )
-    local relations;
+  function( arg )
+    local rel, relations;
     
-    if IsMatrixForHomalg( rel ) then
-        relations := rec( ring := R,
-                          relations := rel );
+    if IsMatrixForHomalg( arg[1] ) then
+        relations := rec( relations := arg[1] );
     else
-        relations := rec( ring := R,
-                          relations := MatrixForHomalg( rel ) );
+        relations := rec( relations := MatrixForHomalg( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:
@@ -91,15 +89,13 @@ InstallGlobalFunction( RelationsOfLeftModule,
 end );
 
 InstallGlobalFunction( RelationsOfRightModule,
-  function( rel, R )
+  function( arg )
     local relations;
     
-    if IsMatrixForHomalg( rel ) then
-        relations := rec( ring := R,
-                          relations := rel );
+    if IsMatrixForHomalg( arg[1] ) then
+        relations := rec( relations := arg[1] );
     else
-        relations := rec( ring := R,
-                          relations := MatrixForHomalg( rel ) );
+        relations := rec( relations := MatrixForHomalg( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:

@@ -61,17 +61,6 @@ InstallMethod( CreateHomalgTable,
     
 end );
 
-##
-InstallMethod( CertainRows,
-        "for homalg matrices",
-        [ IsMatrixForHomalg, IsList ],
-        
-  function( M, plist )
-    
-    return Eval( M ){plist};
-    
-end );
-
 ####################################
 #
 # View, Print, and Display methods:

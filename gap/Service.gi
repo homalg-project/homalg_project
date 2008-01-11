@@ -15,17 +15,61 @@
 ####################################
 
 ##
+InstallMethod( TriangularBasis,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP;
+    
+    R := M!.ring;
+    
+    RP := HomalgTable( R );
+  
+    if IsBound( RP!.TriangularBasis ) then
+        return RP!.TriangularBasis( M );
+    else
+        TryNextMethod();
+    fi;
+    
+end );    
+
+##
+InstallMethod( TriangularBasis,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( M )
+    
+    return( M );
+    
+end );
+    
+##
+InstallMethod( TriangularBasis,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg and IsIdentityMatrix ],
+        
+  function( M )
+    
+    return( M );
+    
+end );
+    
+##
 InstallMethod( BasisOfModule,
         "for a homalg matrix",
-	[ IsMatrixForHomalg, IsRingForHomalg ],
+	[ IsMatrixForHomalg ],
         
-  function( _M, R )
-    local RP, ring_rel, M, B, rank;
+  function( _M )
+    local R, RP, ring_rel, M, B, rank;
+    
+    R := _M!.ring;
     
     RP := HomalgTable( R );
   
     if IsBound( RP!.BasisOfModule ) then
-        return RP!.BasisOfModule( _M, R ); ## the ring contains possible ring relations
+        return RP!.BasisOfModule( _M );
     fi;
     
     if HasRingRelations( R ) then
@@ -36,15 +80,19 @@ InstallMethod( BasisOfModule,
     
     M := _M;
     
-    B := RP!.TriangularBasis( M, R );
+    B := TriangularBasis( M );
     
-    rank := RankOfGauss( B );
+    rank := RankOfMatrix( B );
     
-    B := CertainRows( B, [1..rank] );
-    
-    B := MatrixForHomalg( B );
-    
-    SetRankOfMatrix( B, rank );
+    if rank = 0 then
+        B := MatrixForHomalg( "zero", 0, NrColumns( B ), R);
+    else
+        B := CertainRows( B, [1..rank] );
+        
+        SetRankOfMatrix( B, rank );
+	
+        SetIsFullRowRankMatrix( B, true );
+    fi;
     
     return B;
     

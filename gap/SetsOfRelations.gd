@@ -38,7 +38,7 @@ DeclareCategory( "IsSetsOfRelations",
 #
 ####################################
 
-KeyDependentOperation( "TransitionMatrix", IsSetsOfRelations, IsList, ReturnTrue );
+KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
 
 ####################################
 #

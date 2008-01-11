@@ -166,7 +166,7 @@ InstallImmediateMethod( IsTorsionLeftModule,
   function( M )
     local l, b, i, rel, mat;
     
-    l := SetsOfRelations(M)!.ListOfNumbersOfKnownSetsOfRelations;
+    l := SetsOfRelations(M)!.ListOfPositionsOfKnownSetsOfRelations;
     
     b := false;
     
@@ -322,10 +322,18 @@ InstallMethod( BasisOfModule,
         
         l := NumberOfLastStoredSet( rels );
         
-        rels!.ListOfNumbersOfKnownSetsOfRelations[l+1] := l+1;
+	## define the (l+1)st generators
+	SetsOfGenerators( M )!.(l+1) := SetsOfGenerators( M )!.(l);
+	
+	M!.GeneratorsOfLeftOperatorAdditiveGroup := SetsOfGenerators( M )!.(l);
         
+	## define the (l+1)st relations
         rels!.(l+1) := rel;
+	
+	## adjust the list of positions:
+        rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
         
+	## adjust the default position:
         M!.PositionOfTheDefaultSetOfRelations := l+1;
     fi;
     
@@ -352,12 +360,12 @@ InstallMethod( LeftPresentation,
     is_zero_module := false;
     
     if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gens := rec( 1 := MatrixForHomalg( [] ) );
+        gens := rec( 1 := MatrixForHomalg( [], R ) );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
-        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", Length( rel[1] ) ) );
+        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", Length( rel[1] ), R ) );
     else ## only one generator
-        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", 1 ) );
+        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", 1, R ) );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -393,7 +401,7 @@ InstallMethod( LeftPresentation,
     
     R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
     
-    gens := rec( 1 := MatrixForHomalg( gen ) );
+    gens := rec( 1 := MatrixForHomalg( gen, R ) );
     
     if rel = [] and gen <> [] then
         rels := CreateSetsOfRelationsForLeftModule( "unknown relations", R );

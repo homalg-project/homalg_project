@@ -46,7 +46,7 @@ InstallMethod( NumberOfLastStoredSet,
         
   function( rels )
     
-    return Length( rels!.ListOfNumbersOfKnownSetsOfRelations );
+    return Length( rels!.ListOfPositionsOfKnownSetsOfRelations );
     
 end );
 
@@ -62,10 +62,10 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
     local relations;
     
     if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
-        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
+        relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
-        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
+        relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := RelationsOfLeftModule( mat, R ) );
     fi;
     
@@ -81,10 +81,10 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
     local relations;
     
     if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
-        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
+        relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
-        relations := rec( ListOfNumbersOfKnownSetsOfRelations := [ 1 ],
+        relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := RelationsOfRightModule( mat, R ) );
     fi;
     

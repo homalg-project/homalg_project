@@ -44,26 +44,64 @@ BindGlobal( "HomalgExternalMatrixType",
 
 ####################################
 #
+# logical implications methods:
+#
+####################################
+
+
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
 
 InstallGlobalFunction( MatrixForHomalg,
   function( arg )
-    local matrix, M;
+    local nar, R, matrix, M;
     
-    matrix := rec( );
+    nar := Length( arg );
     
+    R := arg[nar];
+    
+    if not IsRingForHomalg( R ) then
+        Error("the last argument must be an IsRingForHomalg");
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ## the identity matrix:
     if IsString(arg[1]) and arg[1] <> [] and LowercaseString(arg[1]{[1..2]}) = "id" then
         
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, HomalgInternalMatrixType,
-                IsIdentityMatrix, true );
+                IsIdentityMatrix, true,
+                IsFullRowRankMatrix, true,
+                IsFullColumnRankMatrix, true );
         
-        if Length(arg) > 1 and IsPosInt(arg[2]) then
+        if Length(arg) > 2 and IsPosInt(arg[2]) then
             SetNrRows( matrix, arg[2] );
             SetNrColumns( matrix, arg[2] );
+            SetRankOfMatrix( matrix, arg[2] );
+        fi;
+        
+        return matrix;
+        
+    fi;
+    
+    ## the zero matrix:
+    if IsString(arg[1]) and arg[1] <> [] and LowercaseString(arg[1]{[1..4]}) = "zero" then
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, HomalgInternalMatrixType,
+                IsZeroMatrix, true );
+        
+        if Length(arg) > 2 and IsPosInt(arg[2]) then
+            SetNrRows( matrix, arg[2] );
+            SetNrColumns( matrix, arg[3] );
+            SetRankOfMatrix( matrix, 0 );
         fi;
         
         return matrix;
@@ -132,7 +170,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasNrRows( o ) then
-        Print( NrRows(o), " " );
+        Print( NrRows( o ), " " );
     fi;
     
     if HasNrColumns( o ) then
@@ -158,7 +196,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasNrRows( o ) then
-        Print( NrRows(o), " " );
+        Print( NrRows( o ), " " );
     fi;
     
     if HasNrColumns( o ) then
@@ -184,7 +222,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasNrRows( o ) then
-        Print( NrRows(o), " " );
+        Print( NrRows( o ), " " );
     fi;
     
     if HasNrColumns( o ) then
@@ -201,6 +239,6 @@ InstallMethod( Display,
         
   function( o )
     
-    Print(Eval(o), "\n");
+    Print( Eval( o ), "\n" );
     
 end);

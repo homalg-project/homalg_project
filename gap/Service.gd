@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Service.gi                  homalg package               Mohamed Barakat
+##  Service.gd                  homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -16,6 +16,9 @@
 
 # basic operations:
 
+DeclareOperation( "TriangularBasis",
+        [ IsMatrixForHomalg ] );
+
 DeclareOperation( "BasisOfModule",
-        [ IsMatrixForHomalg, IsRingForHomalg ] );
+        [ IsMatrixForHomalg ] );
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Tools.gi                    homalg package               Mohamed Barakat
+##  Tools.gd                    homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -16,6 +16,6 @@
 
 # basic operations:
 
-DeclareOperation( "RankOfGauss",
-        [ IsMatrixForHomalg ] );
+DeclareOperation( "CertainRows",
+        [ IsMatrixForHomalg, IsList ] );
 
