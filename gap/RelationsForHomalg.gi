@@ -65,15 +65,37 @@ InstallMethod( BasisOfModule,
     return rel!.BasisOfModule;
 end );
 
+##
+InstallMethod( NrRelations,
+        "for a set of relations of a homalg module",
+        [ IsLeftRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    return NrRows ( rel!.relations );
+    
+end );
+
+##
+InstallMethod( NrRelations,
+        "for a set of relations of a homalg module",
+        [ IsRightRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    return NrColumns ( rel!.relations );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
 #
 ####################################
 
-InstallGlobalFunction( RelationsOfLeftModule,
+InstallGlobalFunction( CreateRelationsForLeftModule,
   function( arg )
-    local rel, relations;
+    local relations;
     
     if IsMatrixForHomalg( arg[1] ) then
         relations := rec( relations := arg[1] );
@@ -88,7 +110,7 @@ InstallGlobalFunction( RelationsOfLeftModule,
     
 end );
 
-InstallGlobalFunction( RelationsOfRightModule,
+InstallGlobalFunction( CreateRelationsForRightModule,
   function( arg )
     local relations;
     
@@ -116,16 +138,25 @@ InstallMethod( ViewObj,
         [ IsRelationsForHomalg ],
         
   function( o )
+    local m;
     
-    Print( "<A set of relations of a homalg" );
+    m := NrRelations( o );
     
-    if IsLeftRelationsForHomalgRep( o ) then
-        Print( " left" );
+    if m = 0 then
+        Print( "<An empty set of relations of a homalg " );
+    elif m = 1 then
+        Print( "<A set containing a single relation of a homalg " );
     else
-        Print( " right" );
+        Print( "<A set of ", m, " relations of a homalg " );
     fi;
     
-    Print( " module>" );
+    if IsLeftRelationsForHomalgRep( o ) then
+        Print( "left " );
+    else
+        Print( "right " );
+    fi;
+    
+    Print( "module>" );
     
 end );
 

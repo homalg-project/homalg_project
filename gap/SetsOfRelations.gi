@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SetsOfRelations.gd          homalg package               Mohamed Barakat
+##  SetsOfRelations.gi          homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -40,7 +40,7 @@ BindGlobal( "SetsOfRelationsType",
 #
 ####################################
 
-InstallMethod( NumberOfLastStoredSet,
+InstallMethod( PositionOfLastStoredSet,
         "for sets of relations",
         [ IsSetsOfRelationsRep ],
         
@@ -66,7 +66,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
                           1 := "unknown relations" );
     else
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
-                          1 := RelationsOfLeftModule( mat, R ) );
+                          1 := CreateRelationsForLeftModule( mat, R ) );
     fi;
     
     ## Objectify:
@@ -85,7 +85,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
                           1 := "unknown relations" );
     else
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
-                          1 := RelationsOfRightModule( mat, R ) );
+                          1 := CreateRelationsForRightModule( mat, R ) );
     fi;
     
     ## Objectify:
@@ -106,8 +106,15 @@ InstallMethod( ViewObj,
         [ IsSetsOfRelationsRep ],
         
   function( o )
+    local l;
     
-    Print( "<Sets of relations of a homalg module>" );
+    l := Length( o!.ListOfPositionsOfKnownSetsOfRelations );
+    
+    if l = 1 then
+        Print( "<A set containing a single set of relations of a homalg module>" );
+    else
+        Print( "<A set containing ", l, " sets of relations of a homalg module>" );
+    fi;
     
 end );
 

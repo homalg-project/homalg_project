@@ -43,11 +43,14 @@ DeclareProperty( "CanBeUsedToEffictivelyDecideZero",
 
 # constructor methods:
 
-DeclareGlobalFunction( "RelationsOfLeftModule" );
-DeclareGlobalFunction( "RelationsOfRightModule" );
+DeclareGlobalFunction( "CreateRelationsForLeftModule" );
+DeclareGlobalFunction( "CreateRelationsForRightModule" );
 
 # basic operations:
 
 DeclareOperation( "BasisOfModule",
+        [ IsRelationsForHomalg ] );
+
+DeclareOperation( "NrRelations",
         [ IsRelationsForHomalg ] );
 

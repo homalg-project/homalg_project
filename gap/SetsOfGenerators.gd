@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SetsOfRelations.gd          homalg package               Mohamed Barakat
+##  SetsOfGenerators.gd         homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for sets of relations.
+##  Declaration stuff for sets of generators.
 ##
 #############################################################################
 
@@ -17,7 +17,7 @@
 
 # A new category of objects:
 
-DeclareCategory( "IsSetsOfRelations",
+DeclareCategory( "IsSetsOfGenerators",
         IsAttributeStoringRep );
 
 ####################################
@@ -38,7 +38,7 @@ DeclareCategory( "IsSetsOfRelations",
 #
 ####################################
 
-KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
+KeyDependentOperation( "TransitionMap", IsSetsOfGenerators, IsList, ReturnTrue );
 
 ####################################
 #
@@ -48,12 +48,12 @@ KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateSetsOfRelationsForLeftModule" );
+DeclareGlobalFunction( "CreateSetsOfGeneratorsForLeftModule" );
 
-DeclareGlobalFunction( "CreateSetsOfRelationsForRightModule" );
+DeclareGlobalFunction( "CreateSetsOfGeneratorsForRightModule" );
 
 # basic operations:
 
 DeclareOperation( "PositionOfLastStoredSet",
-        [ IsSetsOfRelations ] );
+        [ IsSetsOfGenerators ] );
 

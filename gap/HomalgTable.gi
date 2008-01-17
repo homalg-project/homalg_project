@@ -73,6 +73,6 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print("<A homalg ring package conversion table>");
+    Print( "<A homalg ring package conversion table>" );
     
 end );

@@ -17,6 +17,8 @@ ReadPackage("homalg","gap/RingForHomalg.gi");
 
 ReadPackage("homalg","gap/RelationsForHomalg.gi");
 ReadPackage("homalg","gap/SetsOfRelations.gi");
+ReadPackage("homalg","gap/GeneratorsForHomalg.gi");
+ReadPackage("homalg","gap/SetsOfGenerators.gi");
 ReadPackage("homalg","gap/ModuleForHomalg.gi");
 
 ReadPackage("homalg","gap/Tools.gi");

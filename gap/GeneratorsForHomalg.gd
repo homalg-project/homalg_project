@@ -1,10 +1,11 @@
 #############################################################################
 ##
-##  SetsOfRelations.gd          homalg package               Mohamed Barakat
+##  GeneratorsForHomalg.gd      homalg package               Mohamed Barakatxb
+
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for sets of relations.
+##  Declaration stuff for a set of generators.
 ##
 #############################################################################
 
@@ -17,7 +18,7 @@
 
 # A new category of objects:
 
-DeclareCategory( "IsSetsOfRelations",
+DeclareCategory( "IsGeneratorsForHomalg",
         IsAttributeStoringRep );
 
 ####################################
@@ -25,6 +26,9 @@ DeclareCategory( "IsSetsOfRelations",
 # properties:
 #
 ####################################
+
+DeclareProperty( "IsReduced",
+        IsGeneratorsForHomalg );
 
 ####################################
 #
@@ -34,26 +38,20 @@ DeclareCategory( "IsSetsOfRelations",
 
 ####################################
 #
-# function-operation-Attribute triples
-#
-####################################
-
-KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateSetsOfRelationsForLeftModule" );
-
-DeclareGlobalFunction( "CreateSetsOfRelationsForRightModule" );
+DeclareGlobalFunction( "CreateGeneratorsForLeftModule" );
+DeclareGlobalFunction( "CreateGeneratorsForRightModule" );
 
 # basic operations:
 
-DeclareOperation( "PositionOfLastStoredSet",
-        [ IsSetsOfRelations ] );
+DeclareOperation( "Reduce",
+        [ IsGeneratorsForHomalg ] );
+
+DeclareOperation( "NrGenerators",
+        [ IsGeneratorsForHomalg ] );
 

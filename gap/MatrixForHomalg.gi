@@ -65,7 +65,7 @@ InstallGlobalFunction( MatrixForHomalg,
     R := arg[nar];
     
     if not IsRingForHomalg( R ) then
-        Error("the last argument must be an IsRingForHomalg");
+        Error( "the last argument must be an IsRingForHomalg" );
     fi;
     
     matrix := rec( ring := R );
@@ -98,9 +98,11 @@ InstallGlobalFunction( MatrixForHomalg,
                 matrix, HomalgInternalMatrixType,
                 IsZeroMatrix, true );
         
-        if Length(arg) > 2 and IsPosInt(arg[2]) then
+        if Length(arg) > 2 and IsInt(arg[2]) and arg[2] >= 0 then
             SetNrRows( matrix, arg[2] );
-            SetNrColumns( matrix, arg[3] );
+	    if Length(arg) > 3 and IsInt(arg[3]) and arg[3] >=0 then
+                SetNrColumns( matrix, arg[3] );
+            fi;    
             SetRankOfMatrix( matrix, 0 );
         fi;
         

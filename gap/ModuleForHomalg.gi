@@ -177,8 +177,8 @@ InstallImmediateMethod( IsTorsionLeftModule,
         if not IsString(rel) then
 	    mat := rel!.relations;
      
-            if HasNrRows(mat) and HasNrColumns(mat)
-              and NrColumns(mat) > NrRows(mat) then
+            if HasNrRows( mat ) and HasNrColumns( mat )
+              and NrColumns( mat ) > NrRows( mat ) then
                 b := true;
                 break;
             fi;
@@ -281,7 +281,7 @@ InstallMethod( NrGenerators,
         [ IsFinitelyPresentedModuleRep ],
   function( M )
     
-    return NrRows( GeneratorsOfModule( M ) );
+    return NrGenerators( GeneratorsOfModule( M ) );
     
 end );
 
@@ -292,7 +292,7 @@ InstallMethod( NrRelations,
         
   function( M )
     
-    return NrRows( RelationsOfModule(M)!.relations );
+    return NrRelations ( RelationsOfModule(M) );
     
 end );
 
@@ -302,7 +302,7 @@ InstallMethod( BasisOfModule,
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, B, rels, l;
+    local rel, B, gens, rels, l;
     
     rel := RelationsOfModule ( M );
     
@@ -311,29 +311,31 @@ InstallMethod( BasisOfModule,
         B := BasisOfModule( rel );
         
         if IsLeftModule( M ) then
-            rel := RelationsOfLeftModule( B, LeftActingDomain( M ) );
+            rel := CreateRelationsForLeftModule( B, LeftActingDomain( M ) );
         else
-            rel := RelationsOfRightModule( B, RightActingDomain( M ) );
+            rel := CreateRelationsForRightModule( B, RightActingDomain( M ) );
         fi;
         
         SetCanBeUsedToEffictivelyDecideZero( rel, true );
         
+	gens := SetsOfGenerators( M );
         rels := SetsOfRelations( M );
         
-        l := NumberOfLastStoredSet( rels );
+        l := PositionOfLastStoredSet( rels );
         
-	## define the (l+1)st generators
-	SetsOfGenerators( M )!.(l+1) := SetsOfGenerators( M )!.(l);
+        ## define the (l+1)st set of generators
+        gens!.(l+1) := gens!.(l);
 	
-	M!.GeneratorsOfLeftOperatorAdditiveGroup := SetsOfGenerators( M )!.(l);
+        ## adjust the list of positions:
+        gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
         
-	## define the (l+1)st relations
+        ## define the (l+1)st set of relations
         rels!.(l+1) := rel;
-	
-	## adjust the list of positions:
+        
+        ## adjust the list of positions:
         rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
         
-	## adjust the default position:
+        ## adjust the default position:
         M!.PositionOfTheDefaultSetOfRelations := l+1;
     fi;
     
@@ -360,12 +362,12 @@ InstallMethod( LeftPresentation,
     is_zero_module := false;
     
     if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gens := rec( 1 := MatrixForHomalg( [], R ) );
+        gens := CreateSetsOfGeneratorsForLeftModule( [], R );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
-        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", Length( rel[1] ), R ) );
+        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", Length( rel[1] ), R ), R );
     else ## only one generator
-        gens := rec( 1 := MatrixForHomalg( "IdentityMatrix", 1, R ) );
+        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -401,7 +403,7 @@ InstallMethod( LeftPresentation,
     
     R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
     
-    gens := rec( 1 := MatrixForHomalg( gen, R ) );
+    gens := CreateSetsOfGeneratorsForLeftModule( gen, R );
     
     if rel = [] and gen <> [] then
         rels := CreateSetsOfRelationsForLeftModule( "unknown relations", R );
@@ -439,9 +441,9 @@ InstallMethod( ViewObj,
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
     
-    Print("<");
+    Print( "<" );
     if HasIsZeroModule(M) and IsZeroModule(M) then
-        Print("The zero module");
+        Print( "The zero module" );
     else
         num_gen := NrGenerators(M);
         if num_gen = 1 then
@@ -487,7 +489,7 @@ InstallMethod( PrintObj,
         fi;
         Print( LeftActingDomain(M), " " );
     fi;
-    Print(")");
+    Print( ")" );
     
 end );
 

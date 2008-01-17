@@ -218,7 +218,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print("<A homalg internal ring>");
+    Print( "<A homalg internal ring>" );
     
 end );
 
@@ -228,7 +228,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print("<A homalg external ring>");
+    Print( "<A homalg external ring>" );
     
 end );
 
