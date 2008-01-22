@@ -38,6 +38,9 @@ DeclareProperty( "IsFullRowRankMatrix",
 DeclareProperty( "IsFullColumnRankMatrix",
         IsMatrixForHomalg );
 
+DeclareProperty( "IsEmptyMatrix",
+        IsMatrixForHomalg );
+
 ####################################
 #
 # attributes:
@@ -53,8 +56,74 @@ DeclareAttribute( "NrRows",
 DeclareAttribute( "NrColumns",
         IsMatrixForHomalg );
 
-DeclareAttribute( "RankOfMatrix",
+DeclareAttribute( "RowRankOfMatrix",
         IsMatrixForHomalg );
+
+DeclareAttribute( "ColumnRankOfMatrix",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalCertainRows",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalCertainColumns",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalUnionOfRows",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalUnionOfColumns",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalDiagMat",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalMul",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalAdd",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalSub",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalCompose",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "RightHandSide",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "LeftHandSide",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "UpSide",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "BottomSide",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "CompatiblityConditions",
+        IsMatrixForHomalg );
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonym( "AddRhs",
+        SetRightHandSide );
+
+DeclareSynonym ( "AddLhs",
+        SetLeftHandSide );
+
+DeclareSynonym( "AddBts",
+        SetBottomSide );
+
+DeclareSynonym ( "AddUps",
+        SetUpSide );
+
+DeclareSynonymAttr( "CompCond",
+        CompatiblityConditions );
 
 ####################################
 #
@@ -68,6 +137,27 @@ DeclareGlobalFunction( "MatrixForHomalg" );
 
 # basic operations:
 
-DeclareOperation( "Compose",
+DeclareOperation( "CertainRows",
+        [ IsMatrixForHomalg, IsList ] );
+
+DeclareOperation( "CertainColumns",
+        [ IsMatrixForHomalg, IsList ] );
+
+DeclareOperation( "UnionOfRows",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "UnionOfColumns",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "DiagMat",
+        [ IsList ] );
+
+DeclareOperation( "+",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "-",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "*",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 

@@ -48,9 +48,21 @@ DeclareGlobalFunction( "CreateRelationsForRightModule" );
 
 # basic operations:
 
+DeclareOperation( "NrRelations",
+        [ IsRelationsForHomalg ] );
+
 DeclareOperation( "BasisOfModule",
         [ IsRelationsForHomalg ] );
 
-DeclareOperation( "NrRelations",
-        [ IsRelationsForHomalg ] );
+DeclareOperation( "DecideZero",
+        [ IsMatrixForHomalg, IsRelationsForHomalg ] );
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonym ( "Reduce",
+        DecideZero );
 

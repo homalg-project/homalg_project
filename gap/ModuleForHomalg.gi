@@ -96,7 +96,7 @@ InstallValue( SimpleLogicalImplicationsForHomalgModules,
 ## FIXME: find a way to activate the above line and to delete the following
 for property in SimpleLogicalImplicationsForHomalgModules do;
     
-    if Length(property) = 3 then
+    if Length( property ) = 3 then
         
         ## a => b:
         InstallTrueMethod( property[3],
@@ -104,18 +104,18 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## not b => not a:
         InstallImmediateMethod( property[1],
-                IsModuleForHomalg and Tester(property[3]), 0, ## NOTE: don't drop the Tester here!
+                IsModuleForHomalg and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
                 
           function( M )
-            if Tester(property[3])( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
+            if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
                 return false;
             else
-                TryNextMethod();
+                TryNextMethod( );
             fi;
             
         end );
         
-    elif Length(property) = 5 then
+    elif Length( property ) = 5 then
         
         ## a and b => c:
         InstallTrueMethod( property[5],
@@ -123,28 +123,28 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## b and not c => not a:
         InstallImmediateMethod( property[1],
-                IsModuleForHomalg and Tester(property[3]) and Tester(property[5]), 0, ## NOTE: don't drop the Testers here!
+                IsModuleForHomalg and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
-            if Tester(property[3])( M ) and Tester(property[5])( M )  ## FIXME: find a way to get rid of the Testers here
+            if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
                and property[3]( M ) and not property[5]( M ) then
                 return false;
             else
-                TryNextMethod();
+                TryNextMethod( );
             fi;
             
         end );
         
         ## a and not c => not b:
         InstallImmediateMethod( property[3],
-                IsModuleForHomalg and Tester(property[1]) and Tester(property[5]), 0, ## NOTE: don't drop the Testers here!
+                IsModuleForHomalg and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
-            if Tester(property[1])( M ) and Tester(property[5])( M ) ## FIXME: find a way to get rid of the Testers here
+            if Tester( property[1] )( M ) and Tester( property[5] )( M ) ## FIXME: find a way to get rid of the Testers here
                and property[1]( M ) and not property[5]( M ) then
                 return false;
             else
-                TryNextMethod();
+                TryNextMethod( );
             fi;
             
         end );
@@ -166,15 +166,15 @@ InstallImmediateMethod( IsTorsionLeftModule,
   function( M )
     local l, b, i, rel, mat;
     
-    l := SetsOfRelations(M)!.ListOfPositionsOfKnownSetsOfRelations;
+    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
     
     b := false;
     
-    for i in [1..Length(l)] do;
+    for i in [ 1.. Length( l ) ] do;
         
-        rel := SetsOfRelations(M)!.(i);
+        rel := SetsOfRelations( M )!.(i);
         
-        if not IsString(rel) then
+        if not IsString( rel ) then
 	    mat := rel!.relations;
      
             if HasNrRows( mat ) and HasNrColumns( mat )
@@ -189,7 +189,7 @@ InstallImmediateMethod( IsTorsionLeftModule,
     if b then
         return false;
     else
-        TryNextMethod();
+        TryNextMethod( );
     fi;
     
 end );
@@ -252,8 +252,8 @@ InstallMethod( GeneratorsOfModule,
         
   function( M )
     
-    if IsBound(SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators( M ))) then
-        return SetsOfGenerators(M)!.(NumberOfTheDefaultSetOfGenerators( M ));
+    if IsBound(SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ))) then
+        return SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ));
     else
         return fail;
     fi;
@@ -292,7 +292,7 @@ InstallMethod( NrRelations,
         
   function( M )
     
-    return NrRelations ( RelationsOfModule(M) );
+    return NrRelations ( RelationsOfModule( M ) );
     
 end );
 
@@ -318,14 +318,14 @@ InstallMethod( BasisOfModule,
         
         SetCanBeUsedToEffictivelyDecideZero( rel, true );
         
-	gens := SetsOfGenerators( M );
+        gens := SetsOfGenerators( M );
         rels := SetsOfRelations( M );
         
         l := PositionOfLastStoredSet( rels );
         
         ## define the (l+1)st set of generators
         gens!.(l+1) := gens!.(l);
-	
+        
         ## adjust the list of positions:
         gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
         
@@ -340,6 +340,20 @@ InstallMethod( BasisOfModule,
     fi;
     
     return rel!.relations;
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for a homalg module",
+	[ IsMatrixForHomalg, IsFinitelyPresentedModuleRep ],
+        
+  function( mat, M )
+    local rel;
+    
+    rel := RelationsOfModule ( M );
+    
+    return DecideZero( mat, rel ) ;
     
 end );
 
@@ -386,8 +400,8 @@ InstallMethod( LeftPresentation,
         SetIsZeroModule( M, true );
     fi;
     
-#    SetParent(gens, M);
-#    SetParent(rels, M);
+#    SetParent( gens, M );
+#    SetParent( rels, M );
     
     return M;
     
@@ -421,8 +435,8 @@ InstallMethod( LeftPresentation,
             LeftActingDomain, R,
             GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     
-#    SetParent(gens, M);
-#    SetParent(rels, M);
+#    SetParent( gens, M );
+#    SetParent( rels, M );
     
     return M;
     
@@ -442,20 +456,20 @@ InstallMethod( ViewObj,
     local num_gen, num_rel, gen_string, rel_string;
     
     Print( "<" );
-    if HasIsZeroModule(M) and IsZeroModule(M) then
+    if HasIsZeroModule( M ) and IsZeroModule( M ) then
         Print( "The zero module" );
     else
-        num_gen := NrGenerators(M);
+        num_gen := NrGenerators( M );
         if num_gen = 1 then
             gen_string := " generator and ";
         else
             gen_string := " generators and ";
         fi;
-        if RelationsOfModule(M) = "unknown relations" then
+        if RelationsOfModule( M ) = "unknown relations" then
             num_rel := "unknown";
             rel_string := " relations";
         else
-            num_rel := NrRelations(M);
+            num_rel := NrRelations( M );
             if num_rel = 0 then
                 rel_string := " no relations";
             elif num_rel = 1 then
@@ -478,16 +492,16 @@ InstallMethod( PrintObj,
   function( M )
     
     Print( "LeftPresentation( " );
-    if HasIsZeroModule(M) and IsZeroModule(M) then
-        Print( "[], ", LeftActingDomain(M) ); ## no generators, empty relations, ring
+    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+        Print( "[], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
     else
-        Print( GeneratorsOfModule(M), ", " );
-        if RelationsOfModule(M) = "unknown relations" then
+        Print( GeneratorsOfModule( M ), ", " );
+        if RelationsOfModule( M ) = "unknown relations" then
             Print( "[], " ) ; ## empty relations
         else
-            Print( RelationsOfModule(M), ", " );
+            Print( RelationsOfModule( M ), ", " );
         fi;
-        Print( LeftActingDomain(M), " " );
+        Print( LeftActingDomain( M ), " " );
     fi;
     Print( ")" );
     

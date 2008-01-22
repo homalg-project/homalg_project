@@ -16,6 +16,3 @@
 
 # basic operations:
 
-DeclareOperation( "CertainRows",
-        [ IsMatrixForHomalg, IsList ] );
-

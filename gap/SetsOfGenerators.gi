@@ -61,7 +61,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
   function( mat, R )
     local generators;
     
-    if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
+    if IsString( mat ) and Length(mat) > 2 and LowercaseString(mat{[1..3]}) = "unk" then
         generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
                           1 := "unknown generators" );
     else
@@ -80,7 +80,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForRightModule,
   function( mat, R )
     local generators;
     
-    if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
+    if IsString( mat ) and Length(mat) > 2 and LowercaseString(mat{[1..3]}) = "unk" then
         generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
                           1 := "unknown generators" );
     else

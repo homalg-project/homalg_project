@@ -95,6 +95,18 @@ DeclareAttribute( "HomalgTable",
 DeclareAttribute( "RingRelations",
         IsRingForHomalg );
 
+## zero:
+DeclareAttribute( "Zero",
+        IsRingForHomalg );
+
+## zero:
+DeclareAttribute( "One",
+        IsRingForHomalg );
+
+## zero:
+DeclareAttribute( "MinusOne",
+        IsRingForHomalg );
+
 ####################################
 #
 # global functions and operations:

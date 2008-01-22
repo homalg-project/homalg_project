@@ -49,16 +49,51 @@ BindGlobal( "RightRelationsForHomalgType",
 ####################################
 
 ##
-InstallMethod( BasisOfModule,
-        "for a set of relations of a homalg module",
-	[ IsRelationsForHomalg ],
+InstallMethod( NrRelations,
+        "for sets of relations of a homalg module",
+        [ IsLeftRelationsForHomalgRep ],
         
   function( rel )
     
-    if HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) then
-        return rel!.relations;
-    elif not IsBound( rel!.BasisOfModule ) then
-        rel!.BasisOfModule := BasisOfModule( rel!.relations );
+    return NrRows( rel!.relations );
+    
+end );
+
+##
+InstallMethod( NrRelations,
+        "for sets of relations of a homalg module",
+        [ IsRightRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    return NrColumns( rel!.relations );
+    
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for sets of relations of a homalg module",
+	[ IsLeftRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    if not IsBound( rel!.BasisOfModule ) then
+            rel!.BasisOfModule := BasisOfRows( rel!.relations );
+            SetCanBeUsedToEffictivelyDecideZero( rel, false );
+    fi;
+    
+    return rel!.BasisOfModule;
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for sets of relations of a homalg module",
+	[ IsRightRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    if not IsBound( rel!.BasisOfModule ) then
+        rel!.BasisOfModule := BasisOfColumns( rel!.relations );
         SetCanBeUsedToEffictivelyDecideZero( rel, false );
     fi;
     
@@ -66,24 +101,39 @@ InstallMethod( BasisOfModule,
 end );
 
 ##
-InstallMethod( NrRelations,
-        "for a set of relations of a homalg module",
-        [ IsLeftRelationsForHomalgRep ],
+InstallMethod( BasisOfModule,
+        "for sets of relations of a homalg module",
+	[ IsRelationsForHomalg and CanBeUsedToEffictivelyDecideZero ],
         
   function( rel )
     
-    return NrRows ( rel!.relations );
+    return rel!.relations;
     
 end );
 
 ##
-InstallMethod( NrRelations,
-        "for a set of relations of a homalg module",
-        [ IsRightRelationsForHomalgRep ],
+InstallMethod( DecideZero,
+        "for sets of relations of a homalg module",
+	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
         
-  function( rel )
+  function( mat, rel )
     
-    return NrColumns ( rel!.relations );
+    BasisOfModule( rel );
+    
+    return DecideZeroRows( mat, rel!.relations );
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for sets of relations of a homalg module",
+	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
+        
+  function( mat, rel )
+    
+    BasisOfModule( rel );
+    
+    return DecideZeroColumns( mat, rel );
     
 end );
 

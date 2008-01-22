@@ -49,23 +49,31 @@ InstallMethod( CreateHomalgTable,
                    # return U:
                    if nar > 1 then
                        SetEval( arg[2], N.rowtrans );
+		       SetNrRows( arg[2], NrRows( M ) );
+		       SetNrColumns( arg[2], NrRows( M ) );
+		       SetIsFullRowRankMatrix( arg[2], true );
+		       SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
                    # return V;
                    if nar > 2 then
                        SetEval( arg[3], N.coltrans );
+		       SetNrRows( arg[3], NrColumns( M ) );
+		       SetNrColumns( arg[3], NrColumns( M ) );
+		       SetIsFullRowRankMatrix( arg[3], true );
+		       SetIsFullColumnRankMatrix( arg[3], true );
                    fi;
                    
                    S := MatrixForHomalg( N.normal, R );
                    
-                   SetRankOfMatrix( S, N.rank );
+                   SetRowRankOfMatrix( S, N.rank );
                    
                    return S;
                    
                  end,
                
                ## Must be defined if other functions are not defined
-               TriangularBasis :=
+               TriangularBasisOfRows :=
                  function( arg )
                    local M, R, nar, N, H;
                    
@@ -75,10 +83,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nar := Length( arg );
                    
-                   if nar > 2 then
-                       ## compute N, U, and V: (0+2+4+8)
-                       N := NormalFormIntMat( Eval( M ), 14 );
-                   elif nar > 1 then
+                   if nar > 1 then
                        ## compute N and U: (0+2+4)
                        N := NormalFormIntMat( Eval( M ), 6 );
                    else
@@ -89,16 +94,15 @@ InstallMethod( CreateHomalgTable,
                    # return U:
                    if nar > 1 then
                        SetEval( arg[2], N.rowtrans );
-                   fi;
-                   
-                   # return V;
-                   if nar > 2 then
-                       SetEval( arg[3], N.coltrans );
+		       SetNrRows( arg[2], NrRows( M ) );
+		       SetNrColumns( arg[2], NrRows( M ) );
+		       SetIsFullRowRankMatrix( arg[2], true );
+		       SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
                    H := MatrixForHomalg( N.normal, R );
                    
-                   SetRankOfMatrix( H, N.rank );
+                   SetRowRankOfMatrix( H, N.rank );
                    
                    return H;
                    

@@ -108,9 +108,6 @@ DeclareOperation( "NumberOfKnownPresentations",
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsModuleForHomalg ] );
 
-DeclareSynonym( "NumberOfTheDefaultSetOfGenerators",
-        PositionOfTheDefaultSetOfRelations );
-
 DeclareOperation( "GeneratorsOfModule",
         [ IsModuleForHomalg ] );
 
@@ -125,4 +122,16 @@ DeclareOperation( "NrRelations",
 
 DeclareOperation( "BasisOfModule",
         [ IsModuleForHomalg ] );
+
+DeclareOperation( "DecideZero",
+        [ IsMatrixForHomalg, IsModuleForHomalg ] );
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
+        PositionOfTheDefaultSetOfRelations );
 

@@ -44,11 +44,414 @@ BindGlobal( "HomalgExternalMatrixType",
 
 ####################################
 #
-# logical implications methods:
+# methods for properties:
 #
 ####################################
 
+##
+InstallMethod( IsEmptyMatrix,
+        "for homalg matrices",
+        [ IsMatrixForHomalg ],
+        
+  function( M )
+    
+    if NrRows( M ) = 0 or NrColumns( M ) = 0 then
+        return true;
+    else
+        return false;
+    fi;
+    
+end );
 
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsMatrixForHomalg, IsList ],
+        
+  function( M, plist )
+    local R, C;
+    
+    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+    fi;
+    
+    if NrRows( M ) = 0 then
+        return M;
+    fi;
+    
+    R := M!.ring;
+    
+    if IsHomalgInternalMatrixRep( M ) then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalCertainRows( C, [ M, plist ] );
+    
+    SetNrRows( C, Length( plist ) );
+    SetNrColumns( C, NrColumns( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsMatrixForHomalg, IsList ],
+        
+  function( M, plist )
+    local R, C;
+    
+    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+    fi;
+    
+    if NrColumns( M ) = 0 then
+        return M;
+    fi;
+    
+    R := M!.ring;
+    
+    if IsHomalgInternalMatrixRep( M ) then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalCertainColumns( C, [ M, plist ] );
+    
+    SetNrRows( C, NrRows( M ) );
+    SetNrColumns( C, Length( plist ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( UnionOfRows,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ],
+        
+  function( A, B )
+    local R, C;
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    R := A!.ring;
+    
+    if IsHomalgInternalMatrixRep( A ) and IsHomalgInternalMatrixRep( B )  then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalUnionOfRows( C, [ A, B ] );
+    
+    SetNrRows( C, NrRows( A ) + NrRows( B ) );
+    SetNrColumns( C, NrColumns( A ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( UnionOfRows,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsEmptyMatrix ],
+        
+  function( A, B )
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( UnionOfRows,
+        "of two homalg matrices",
+        [ IsEmptyMatrix, IsMatrixForHomalg ],
+        
+  function( A, B )
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( UnionOfColumns,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ],
+        
+  function( A, B )
+    local R, C;
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    R := A!.ring;
+    
+    if IsHomalgInternalMatrixRep( A ) and IsHomalgInternalMatrixRep( B )  then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalUnionOfColumns( C, [ A, B ] );
+    
+    SetNrRows( C, NrRows( A ) );
+    SetNrColumns( C, NrColumns( A ) + NrColumns( B ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( UnionOfColumns,
+        "of two homalg matrices",
+        [ IsEmptyMatrix, IsMatrixForHomalg ],
+        
+  function( A, B )
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( UnionOfColumns,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsEmptyMatrix ],
+        
+  function( A, B )
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( DiagMat,
+        "of two homalg matrices",
+        [ IsHomogeneousList ],
+        
+  function( l )
+    local R, C;
+    
+    if l = [] then
+        Error( "recieved an empty list\n" );
+    fi;
+    
+    if not ForAll( l, IsMatrixForHomalg ) then
+        Error( "at least one of the matrices in the list is not a homalg matrix\n" );
+    fi;
+    
+    R := l[1]!.ring;
+    
+    if ForAll( l, IsHomalgInternalMatrixRep ) then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalDiagMat( C, l );
+    
+    SetNrRows( C, Sum( List( l, NrRows ) ) );
+    SetNrColumns( C, Sum( List( l, NrColumns ) ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ],
+        
+  function( A, B )
+    local R, C;
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    R := A!.ring;
+    
+    if IsHomalgInternalMatrixRep( A ) and IsHomalgInternalMatrixRep( B )  then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalAdd( C, [ A, B ] );
+    
+    SetNrRows( C, NrRows( A ) );
+    SetNrColumns( C, NrColumns( A ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg matrices",
+        [ IsZeroMatrix, IsMatrixForHomalg ],
+        
+  function( A, B )
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsZeroMatrix ],
+        
+  function( A, B )
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ],
+        
+  function( A, B )
+    local R, C;
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    R := A!.ring;
+    
+    if IsHomalgInternalMatrixRep( A ) and IsHomalgInternalMatrixRep( B )  then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalCompose( C, [ A, B ] );
+    
+    SetNrRows( C, NrRows( A ) );
+    SetNrColumns( C, NrColumns( B ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsZeroMatrix, IsMatrixForHomalg ],
+        
+  function( A, B )
+    local R;
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    R := A!.ring;
+    
+    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( B ), R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsZeroMatrix ],
+        
+  function( A, B )
+    local R;
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    R := B!.ring;
+    
+    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( B ), R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsIdentityMatrix, IsMatrixForHomalg ],
+        
+  function( A, B )
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg, IsIdentityMatrix ],
+        
+  function( A, B )
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    return A;
+    
+end );
 
 ####################################
 #
@@ -70,8 +473,26 @@ InstallGlobalFunction( MatrixForHomalg,
     
     matrix := rec( ring := R );
     
+    ## an empty matrix:
+    if IsString( arg[1] ) and Length( arg[1] ) > 2 then
+        if LowercaseString( arg[1]{[1..3]} ) = "int" then
+            
+            ## Objectify:
+            Objectify( HomalgInternalMatrixType, matrix );
+            
+            return matrix;
+            
+        elif LowercaseString( arg[1]{[1..3]} ) = "ext" then
+            ## Objectify:
+            Objectify( HomalgExternalMatrixType, matrix );
+            
+            return matrix;
+            
+        fi;
+    fi;
+    
     ## the identity matrix:
-    if IsString(arg[1]) and arg[1] <> [] and LowercaseString(arg[1]{[1..2]}) = "id" then
+    if IsString( arg[1] ) and Length( arg[1] ) > 1 and  LowercaseString( arg[1]{[1..2]} ) = "id" then
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -80,10 +501,11 @@ InstallGlobalFunction( MatrixForHomalg,
                 IsFullRowRankMatrix, true,
                 IsFullColumnRankMatrix, true );
         
-        if Length(arg) > 2 and IsPosInt(arg[2]) then
+        if Length( arg ) > 2 and IsPosInt( arg[2] ) then
             SetNrRows( matrix, arg[2] );
             SetNrColumns( matrix, arg[2] );
-            SetRankOfMatrix( matrix, arg[2] );
+            SetRowRankOfMatrix( matrix, arg[2] );
+            SetColumnRankOfMatrix( matrix, arg[2] );
         fi;
         
         return matrix;
@@ -91,52 +513,61 @@ InstallGlobalFunction( MatrixForHomalg,
     fi;
     
     ## the zero matrix:
-    if IsString(arg[1]) and arg[1] <> [] and LowercaseString(arg[1]{[1..4]}) = "zero" then
+    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
         
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, HomalgInternalMatrixType,
                 IsZeroMatrix, true );
         
-        if Length(arg) > 2 and IsInt(arg[2]) and arg[2] >= 0 then
+        if Length( arg ) > 2 and IsInt( arg[2] ) and arg[2] >= 0 then
             SetNrRows( matrix, arg[2] );
-	    if Length(arg) > 3 and IsInt(arg[3]) and arg[3] >=0 then
+            if arg[2] = 0 then
+                SetIsFullRowRankMatrix( matrix, true );
+                SetIsEmptyMatrix( matrix, true );
+            fi;
+	    if Length( arg ) > 3 and IsInt( arg[3] ) and arg[3] >=0 then
                 SetNrColumns( matrix, arg[3] );
-            fi;    
-            SetRankOfMatrix( matrix, 0 );
+                if arg[3] = 0 then
+                    SetIsFullColumnRankMatrix( matrix, true );
+                    SetIsEmptyMatrix( matrix, true );
+                fi;
+            fi;
+            SetRowRankOfMatrix( matrix, 0 );
+            SetColumnRankOfMatrix( matrix, 0 );
         fi;
         
         return matrix;
         
     fi;
         
-    if IsList(arg[1]) and Length(arg[1]) <> 0 and not IsList(arg[1][1]) then
-        M := List( arg[1], a->[a] ); ## NormalizeInput
+    if IsList( arg[1] ) and Length( arg[1] ) <> 0 and not IsList( arg[1][1] ) then
+        M := List( arg[1], a -> [a] ); ## NormalizeInput
     else
         M := arg[1];
     fi;
     
-    if IsList(arg[1]) then ## HomalgInternalMatrixType
+    if IsList( arg[1] ) then ## HomalgInternalMatrixType
         
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, HomalgInternalMatrixType,
                 Eval, M );
         
-        if Length(arg[1]) = 0 then
+        if Length( arg[1] ) = 0 then
             SetNrRows( matrix, 0 );
             SetNrColumns( matrix, 0 );
             SetIsZeroMatrix( matrix, true );
         elif arg[1][1] = [] then
-            SetNrRows( matrix, Length(arg[1]) );
+            SetNrRows( matrix, Length( arg[1] ) );
             SetNrColumns( matrix, 0 );
             SetIsZeroMatrix( matrix, true );
-        elif not IsList(arg[1][1]) then
-            SetNrRows( matrix, Length(arg[1]) );
+        elif not IsList( arg[1][1] ) then
+            SetNrRows( matrix, Length( arg[1] ) );
             SetNrColumns( matrix, 1 );
-        elif IsMatrix(arg[1]) then
-            SetNrRows( matrix, Length(arg[1]) );
-            SetNrColumns( matrix, Length(arg[1][1]) );
+        elif IsMatrix( arg[1] ) then
+            SetNrRows( matrix, Length( arg[1] ) );
+            SetNrColumns( matrix, Length( arg[1][1] ) );
         fi;
     else ## HomalgExternalMatrixType
         

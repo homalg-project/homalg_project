@@ -36,18 +36,12 @@ BindGlobal( "HomalgTableType",
 
 ####################################
 #
-# methods for attributes:
-#
-####################################
-
-####################################
-#
 # constructor functions and methods:
 #
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for rings",
+        "for homalg ring package conversion tables",
         [ IsSemiringWithOneAndZero ],
         
   function ( arg )
@@ -68,7 +62,7 @@ end );
 ####################################
 
 InstallMethod( ViewObj,
-        "for a homalg ring package conversion table",
+        "for homalg ring package conversion tables",
         [ IsHomalgTableRep ],
         
   function( o )

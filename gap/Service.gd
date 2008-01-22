@@ -16,9 +16,27 @@
 
 # basic operations:
 
-DeclareOperation( "TriangularBasis",
+DeclareOperation( "TriangularBasisOfRows",
         [ IsMatrixForHomalg ] );
 
-DeclareOperation( "BasisOfModule",
+DeclareOperation( "TriangularBasisOfRows",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "TriangularBasisOfColumns",
         [ IsMatrixForHomalg ] );
+
+DeclareOperation( "TriangularBasisOfColumns",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "BasisOfRows",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "BasisOfColumns",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "DecideZeroRows",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "DecideZeroColumns",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 

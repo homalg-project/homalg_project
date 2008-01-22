@@ -61,7 +61,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
   function( mat, R )
     local relations;
     
-    if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
+    if IsString( mat ) and Length(mat) > 2 and LowercaseString(mat{[1..3]}) = "unk" then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
@@ -80,7 +80,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
   function( mat, R )
     local relations;
     
-    if IsString( mat ) and mat <> [] and LowercaseString(mat{[1..3]}) = "unk" then
+    if IsString( mat ) and Length(mat) > 2 and LowercaseString(mat{[1..3]}) = "unk" then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
