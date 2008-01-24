@@ -26,7 +26,7 @@ DeclareCategory( "IsRelationsForHomalg",
 #
 ####################################
 
-DeclareProperty( "CanBeUsedToEffictivelyDecideZero",
+DeclareProperty( "CanBeUsedToEffectivelyDecideZero",
         IsRelationsForHomalg );
 
 ####################################
@@ -48,6 +48,15 @@ DeclareGlobalFunction( "CreateRelationsForRightModule" );
 
 # basic operations:
 
+DeclareOperation( "MatrixOfRelations",
+        [ IsRelationsForHomalg ] );
+
+DeclareOperation( "HomalgRing",
+        [ IsRelationsForHomalg ] );
+
+DeclareOperation( "NrGenerators",
+        [ IsRelationsForHomalg ] );
+
 DeclareOperation( "NrRelations",
         [ IsRelationsForHomalg ] );
 
@@ -57,6 +66,18 @@ DeclareOperation( "BasisOfModule",
 DeclareOperation( "DecideZero",
         [ IsMatrixForHomalg, IsRelationsForHomalg ] );
 
+DeclareOperation( "BasisCoeff",
+        [ IsRelationsForHomalg ] );
+
+DeclareOperation( "EffectivelyDecideZero",
+        [ IsMatrixForHomalg, IsRelationsForHomalg ] );
+
+DeclareOperation( "SyzygiesGenerators",
+        [ IsRelationsForHomalg, IsRelationsForHomalg ] );
+
+DeclareOperation( "SyzygiesGenerators",
+        [ IsRelationsForHomalg, IsList ] );
+
 ####################################
 #
 # synonyms:
@@ -65,4 +86,10 @@ DeclareOperation( "DecideZero",
 
 DeclareSynonym ( "Reduce",
         DecideZero );
+
+DeclareSynonym ( "ReduceCoeff",
+        EffectivelyDecideZero );
+
+DeclareSynonym ( "DecideZeroCoeff",
+        EffectivelyDecideZero );
 

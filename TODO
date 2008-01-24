@@ -1,0 +1,4 @@
+- ring relations
+- AddRhs and AddBts to create new matrices
+- GetSide
+- ring packages should be able to provide different methods!!

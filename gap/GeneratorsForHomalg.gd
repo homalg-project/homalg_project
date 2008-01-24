@@ -49,9 +49,18 @@ DeclareGlobalFunction( "CreateGeneratorsForRightModule" );
 
 # basic operations:
 
-DeclareOperation( "Reduce",
+DeclareOperation( "MatrixOfGenerators",
+        [ IsGeneratorsForHomalg ] );
+
+DeclareOperation( "HomalgRing",
+        [ IsGeneratorsForHomalg ] );
+
+DeclareOperation( "MatrixOfRelations",
         [ IsGeneratorsForHomalg ] );
 
 DeclareOperation( "NrGenerators",
+        [ IsGeneratorsForHomalg ] );
+
+DeclareOperation( "DecideZero",
         [ IsGeneratorsForHomalg ] );
 

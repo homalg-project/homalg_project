@@ -96,6 +96,9 @@ DeclareOperation( "RightPresentation",
 
 # basic operations:
 
+DeclareOperation( "HomalgRing",
+        [ IsModuleForHomalg ] );
+
 DeclareOperation( "SetsOfGenerators",
         [ IsModuleForHomalg ] );
 
@@ -114,17 +117,41 @@ DeclareOperation( "GeneratorsOfModule",
 DeclareOperation( "RelationsOfModule",
         [ IsModuleForHomalg ] );
 
+DeclareOperation( "MatrixOfGenerators",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "MatrixOfRelations",
+        [ IsModuleForHomalg ] );
+
 DeclareOperation( "NrGenerators",
         [ IsModuleForHomalg ] );
 
 DeclareOperation( "NrRelations",
         [ IsModuleForHomalg ] );
 
+DeclareOperation( "AddANewPresentation",
+        [ IsModuleForHomalg, IsGeneratorsForHomalg ] );
+
+DeclareOperation( "AddANewPresentation",
+        [ IsModuleForHomalg, IsRelationsForHomalg ] );
+
 DeclareOperation( "BasisOfModule",
         [ IsModuleForHomalg ] );
 
 DeclareOperation( "DecideZero",
         [ IsMatrixForHomalg, IsModuleForHomalg ] );
+
+DeclareOperation( "BasisCoeff",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "EffectivelyDecideZero",
+        [ IsMatrixForHomalg, IsModuleForHomalg ] );
+
+DeclareOperation( "SyzygiesGenerators",
+        [ IsModuleForHomalg, IsModuleForHomalg ] );
+
+DeclareOperation( "SyzygiesGenerators",
+        [ IsModuleForHomalg, IsList ] );
 
 ####################################
 #

@@ -31,7 +31,7 @@ InstallMethod( CreateHomalgTable,
                    
                    M := arg[1];
                    
-                   R := M!.ring;
+                   R := HomalgRing( M );
                    
                    nar := Length( arg );
                    
@@ -79,7 +79,7 @@ InstallMethod( CreateHomalgTable,
                    
                    M := arg[1];
                    
-                   R := M!.ring;
+                   R := HomalgRing( M );
                    
                    nar := Length( arg );
                    

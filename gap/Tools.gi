@@ -22,7 +22,7 @@ InstallMethod( Eval,
   function( C )
     local z;
     
-    z := Zero( C!.ring );
+    z := Zero( HomalgRing( C ) );
     
     #=====# begin of the core procedure #=====#
     
@@ -38,8 +38,8 @@ InstallMethod( Eval,
   function( C )
     local o, z, zz, id;
     
-    z := Zero( C!.ring );
-    o := One( C!.ring );
+    z := Zero( HomalgRing( C ) );
+    o := One( HomalgRing( C ) );
     
     #=====# begin of the core procedure #=====#
     
@@ -60,7 +60,7 @@ InstallMethod( Eval,
   function( C )
     local R, RP, e, M, plist;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
@@ -87,7 +87,7 @@ InstallMethod( Eval,
   function( C )
     local R, RP, e, M, plist;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
@@ -114,7 +114,7 @@ InstallMethod( Eval,
   function( C )
     local R, RP, e, A, B, U;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
@@ -145,7 +145,7 @@ InstallMethod( Eval,
   function( C )
     local R, RP, e, A, B, U;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
@@ -176,7 +176,7 @@ InstallMethod( Eval,
   function( C )
     local R, RP, e, z, m, n, diag, mat;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
@@ -186,7 +186,7 @@ InstallMethod( Eval,
         return RP!.DiagMat( e );
     fi;
     
-    z := Zero( e[1]!.ring );
+    z := Zero( HomalgRing( e[1] ) );
     
     m := Sum( List( e, NrRows ) );
     n := Sum( List( e, NrColumns ) );
@@ -211,22 +211,49 @@ end );
 ##
 InstallMethod( Eval,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep and HasEvalAdd ],
+        [ IsHomalgInternalMatrixRep and HasEvalMulMat ],
+        
+  function( C )
+    local R, RP, e, a, A;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    e :=  EvalMulMat( C );
+    
+    a := e[1];
+    A := e[2];
+    
+    if IsBound(RP!.MulMat) then
+        return RP!.MulMat( a, A );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return a * Eval( A );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasEvalAddMat ],
         
   function( C )
     local R, RP, e, A, B;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
-    e :=  EvalAdd( C );
+    e :=  EvalAddMat( C );
     
     A := e[1];
     B := e[2];
     
-    if IsBound(RP!.Add) then
-        return RP!.Add( A, B );
+    if IsBound(RP!.AddMat) then
+        return RP!.AddMat( A, B );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -238,12 +265,39 @@ end );
 ##
 InstallMethod( Eval,
         "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasEvalSubMat ],
+        
+  function( C )
+    local R, RP, e, A, B;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    e :=  EvalSubMat( C );
+    
+    A := e[1];
+    B := e[2];
+    
+    if IsBound(RP!.SubMat) then
+        return RP!.SubMat( A, B );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Eval( A ) - Eval( B );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
         [ IsHomalgInternalMatrixRep and HasEvalCompose ],
         
   function( C )
     local R, RP, e, A, B;
     
-    R := C!.ring;
+    R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
@@ -259,6 +313,111 @@ InstallMethod( Eval,
     #=====# begin of the core procedure #=====#
     
     return Eval( A ) * Eval( B );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasPreEval ],
+        
+  function( C )
+    local R, RP, e;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    e :=  PreEval( C );
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Eval( e );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasEvalAddRhs ],
+        
+  function( C )
+    local R, RP, A, B;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    A := EvalAddRhs( C );
+    B := RightHandSide( C );
+    
+    if IsBound(RP!.AddRhs) then
+        return RP!.AddRhs( A, B );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Eval( A );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasEvalAddBts ],
+        
+  function( C )
+    local R, RP, A, B;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    A := EvalAddBts( C );
+    B := BottomSide( C );
+    
+    if IsBound(RP!.AddBts) then
+        return RP!.AddBts( A, B );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Eval( A );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasEvalGetSide ],
+        
+  function( C )
+    local R, RP, e, side, A;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    e :=  EvalGetSide( C );
+    
+    side := e[1];
+    A := e[2];
+    
+    if IsBound(RP!.GetSide) then
+        return RP!.GetSide( side, A );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    if side = "rhs" then
+        return RightHandSide( A );
+    elif side = "bts" then
+        return BottomSide( A );
+    elif side = "lhs" or side = "ups" then
+        return Eval( A );
+    else
+        Error( "the first argument must be either \"rhs\", \"bts\", \"lhs\", or \"ups\", but received: ", side, "\n" );
+    fi;
     
 end );
 

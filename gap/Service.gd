@@ -40,3 +40,15 @@ DeclareOperation( "DecideZeroRows",
 DeclareOperation( "DecideZeroColumns",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 
+DeclareOperation( "SyzygiesGeneratorsOfRows",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "SyzygiesGeneratorsOfRows",
+        [ IsMatrixForHomalg, IsList ] );
+
+DeclareOperation( "SyzygiesGeneratorsOfColumns",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "SyzygiesGeneratorsOfColumns",
+        [ IsMatrixForHomalg, IsList ] );
+

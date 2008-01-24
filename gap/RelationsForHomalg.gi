@@ -49,13 +49,57 @@ BindGlobal( "RightRelationsForHomalgType",
 ####################################
 
 ##
+InstallMethod( MatrixOfRelations,
+        "for sets of relations of a homalg module",
+        [ IsRelationsForHomalg ],
+        
+  function( rel )
+    
+    return rel!.relations;
+    
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for sets of relations of a homalg module",
+        [ IsRelationsForHomalg ],
+        
+  function( rel )
+    
+    return HomalgRing( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( NrGenerators,
+        "for sets of relations of a homalg module",
+        [ IsLeftRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    return NrColumns( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( NrGenerators,
+        "for sets of relations of a homalg module",
+        [ IsRightRelationsForHomalgRep ],
+        
+  function( rel )
+    
+    return NrRows( MatrixOfRelations( rel ) );
+    
+end );
+
+##
 InstallMethod( NrRelations,
         "for sets of relations of a homalg module",
         [ IsLeftRelationsForHomalgRep ],
         
   function( rel )
     
-    return NrRows( rel!.relations );
+    return NrRows( MatrixOfRelations( rel ) );
     
 end );
 
@@ -66,7 +110,7 @@ InstallMethod( NrRelations,
         
   function( rel )
     
-    return NrColumns( rel!.relations );
+    return NrColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -76,13 +120,18 @@ InstallMethod( BasisOfModule,
 	[ IsLeftRelationsForHomalgRep ],
         
   function( rel )
+    local bas;
     
     if not IsBound( rel!.BasisOfModule ) then
-            rel!.BasisOfModule := BasisOfRows( rel!.relations );
-            SetCanBeUsedToEffictivelyDecideZero( rel, false );
+        rel!.BasisOfModule := BasisOfRows( MatrixOfRelations( rel ) );
+        SetCanBeUsedToEffectivelyDecideZero( rel, false );
     fi;
     
-    return rel!.BasisOfModule;
+    bas := CreateRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    
+    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+        
+    return bas;
 end );
 
 ##
@@ -91,23 +140,28 @@ InstallMethod( BasisOfModule,
 	[ IsRightRelationsForHomalgRep ],
         
   function( rel )
+    local bas;
     
     if not IsBound( rel!.BasisOfModule ) then
-        rel!.BasisOfModule := BasisOfColumns( rel!.relations );
-        SetCanBeUsedToEffictivelyDecideZero( rel, false );
+        rel!.BasisOfModule := BasisOfColumns( MatrixOfRelations( rel ) );
+        SetCanBeUsedToEffectivelyDecideZero( rel, false );
     fi;
     
-    return rel!.BasisOfModule;
+    bas := CreateRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    
+    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+        
+    return bas;
 end );
 
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of a homalg module",
-	[ IsRelationsForHomalg and CanBeUsedToEffictivelyDecideZero ],
+	[ IsRelationsForHomalg and CanBeUsedToEffectivelyDecideZero ],
         
   function( rel )
     
-    return rel!.relations;
+    return MatrixOfRelations( rel );
     
 end );
 
@@ -118,9 +172,7 @@ InstallMethod( DecideZero,
         
   function( mat, rel )
     
-    BasisOfModule( rel );
-    
-    return DecideZeroRows( mat, rel!.relations );
+    return DecideZeroRows( mat, BasisOfModule( rel ) );
     
 end );
 
@@ -131,9 +183,115 @@ InstallMethod( DecideZero,
         
   function( mat, rel )
     
-    BasisOfModule( rel );
+    return DecideZeroColumns( mat, BasisOfModule( rel ) );
     
-    return DecideZeroColumns( mat, rel );
+end );
+
+##
+InstallMethod( BasisCoeff,
+        "for sets of relations of a homalg module",
+	[ IsLeftRelationsForHomalgRep ],
+        
+  function( rel )
+    local bas;
+    
+    if not IsBound( rel!.BasisOfModule ) then
+        rel!.BasisOfModule := BasisOfRowsCoeff( MatrixOfRelations( rel ) );
+        SetCanBeUsedToEffectivelyDecideZero( rel, false );
+    fi;
+    
+    bas := CreateRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    
+    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+        
+    return bas;
+    
+end );
+
+##
+InstallMethod( BasisCoeff,
+        "for sets of relations of a homalg module",
+	[ IsRightRelationsForHomalgRep ],
+        
+  function( rel )
+    local bas;
+    
+    if not IsBound( rel!.BasisOfModule ) then
+        rel!.BasisOfModule := BasisOfColumnsCoeff( MatrixOfRelations( rel ) );
+        SetCanBeUsedToEffectivelyDecideZero( rel, false );
+    fi;
+    
+    bas := CreateRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    
+    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    
+    return bas;
+    
+end );
+
+##
+InstallMethod( EffectivelyDecideZero,
+        "for sets of relations of a homalg module",
+	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
+        
+  function( mat, rel )
+    
+    return EffectivelyDecideZeroRows( mat, BasisOfModule( rel ) );
+    
+end );
+
+##
+InstallMethod( EffectivelyDecideZero,
+        "for sets of relations of a homalg module",
+	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
+        
+  function( mat, rel )
+    
+    return EffectivelyDecideZeroColumns( mat, BasisOfModule( rel ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of a homalg module",
+        [ IsLeftRelationsForHomalgRep, IsLeftRelationsForHomalgRep ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M1 ), MatrixOfRelations( M2 ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of a homalg module",
+        [ IsLeftRelationsForHomalgRep, IsList and IsEmpty ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M1 ), [ ] );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of a homalg module",
+        [ IsRightRelationsForHomalgRep, IsRightRelationsForHomalgRep ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M1 ), MatrixOfRelations( M2 ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of a homalg module",
+        [ IsRightRelationsForHomalgRep, IsList and IsEmpty ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M1 ), [ ] );
     
 end );
 
@@ -188,17 +346,28 @@ InstallMethod( ViewObj,
         [ IsRelationsForHomalg ],
         
   function( o )
-    local m;
+    local m, n;
     
     m := NrRelations( o );
+    n := NrGenerators( o );
     
     if m = 0 then
-        Print( "<An empty set of relations of a homalg " );
+        Print( "<An empty set of relations " );
     elif m = 1 then
-        Print( "<A set containing a single relation of a homalg " );
+        Print( "<A set containing a single relation " );
     else
-        Print( "<A set of ", m, " relations of a homalg " );
+        Print( "<A set of ", m, " relations " );
     fi;
+    
+    if n = 0 then
+        Print( "on an empty set of generators " );
+    elif n = 1 then
+        Print( "on a single generator " );
+    else
+        Print( "on ", n, " generators " );
+    fi;
+    
+    Print( "of a homalg " );
     
     if IsLeftRelationsForHomalgRep( o ) then
         Print( "left " );

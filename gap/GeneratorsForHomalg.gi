@@ -49,20 +49,36 @@ BindGlobal( "RightGeneratorsForHomalgType",
 ####################################
 
 ##
-InstallMethod( Reduce,
+InstallMethod( MatrixOfGenerators,
         "for a set of generators of a homalg module",
-	[ IsGeneratorsForHomalg ],
+        [ IsGeneratorsForHomalg ],
         
   function( gen )
     
-    if HasIsReduced( gen ) and IsReduced( gen ) then
-        return gen!.generators;
-    elif not IsBound( gen!.Reduce ) then
-        gen!.Reduce := Reduce( gen!.generators, gen!.relations );
-        SetIsReduced( gen, false );
-    fi;
+    return gen!.generators;
     
-    return gen!.Reduce;
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for a set of generators of a homalg module",
+        [ IsGeneratorsForHomalg ],
+        
+  function( gen )
+    
+    return HomalgRing( MatrixOfGenerators( gen ) );
+    
+end );
+
+##
+InstallMethod( MatrixOfRelations,
+        "for a set of generators of a homalg module",
+        [ IsGeneratorsForHomalg ],
+        
+  function( gen )
+    
+    return gen!.relations;
+    
 end );
 
 ##
@@ -72,7 +88,7 @@ InstallMethod( NrGenerators,
         
   function( gen )
     
-    return NrRows ( gen!.generators );
+    return NrRows ( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -83,8 +99,25 @@ InstallMethod( NrGenerators,
         
   function( gen )
     
-    return NrColumns ( gen!.generators );
+    return NrColumns ( MatrixOfGenerators( gen ) );
     
+end );
+
+##
+InstallMethod( DecideZero,
+        "for a set of generators of a homalg module",
+	[ IsGeneratorsForHomalg ],
+        
+  function( gen )
+    
+    if HasIsReduced( gen ) and IsReduced( gen ) then
+        return MatrixOfGenerators( gen );
+    elif not IsBound( gen!.DecideZero ) then
+        gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), MatrixOfRelations( gen ) );
+        SetIsReduced( gen, false );
+    fi;
+    
+    return gen!.DecideZero;
 end );
 
 ####################################

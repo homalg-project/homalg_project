@@ -175,7 +175,7 @@ InstallImmediateMethod( IsTorsionLeftModule,
         rel := SetsOfRelations( M )!.(i);
         
         if not IsString( rel ) then
-	    mat := rel!.relations;
+	    mat := MatrixOfRelations( rel );
      
             if HasNrRows( mat ) and HasNrColumns( mat )
               and NrColumns( mat ) > NrRows( mat ) then
@@ -201,17 +201,24 @@ end );
 ####################################
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,
+InstallMethod( HomalgRing,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
     
-    if IsBound(M!.PositionOfTheDefaultSetOfRelations) then
-        return M!.PositionOfTheDefaultSetOfRelations;
-    else
-        return fail;
-    fi;
+    return LeftActingDomain( M );
+    
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep and IsRightModule ],
+        
+  function( M )
+    
+    return RightActingDomain( M );
     
 end );
 
@@ -239,6 +246,21 @@ InstallMethod( SetsOfRelations,
     
     if IsBound(M!.SetsOfRelations) then
         return M!.SetsOfRelations;
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
+InstallMethod( PositionOfTheDefaultSetOfRelations,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    if IsBound(M!.PositionOfTheDefaultSetOfRelations) then
+        return M!.PositionOfTheDefaultSetOfRelations;
     else
         return fail;
     fi;
@@ -276,6 +298,27 @@ InstallMethod( RelationsOfModule,
 end );
 
 ##
+InstallMethod( MatrixOfGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+  function( M )
+    
+    return MatrixOfGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( MatrixOfRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return MatrixOfRelations( RelationsOfModule( M ) );
+    
+end );
+
+##
 InstallMethod( NrGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -292,68 +335,161 @@ InstallMethod( NrRelations,
         
   function( M )
     
-    return NrRelations ( RelationsOfModule( M ) );
+    return NrRelations( RelationsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( AddANewPresentation,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsGeneratorsForHomalg ],
+        
+  function( M, gen )
+    local gens, rels, l;
+    
+    gens := SetsOfGenerators( M );
+    rels := SetsOfRelations( M );
+    
+    l := PositionOfLastStoredSet( rels );
+    
+    ## define the (l+1)st set of generators
+    gens!.(l+1) := gen;
+    
+    ## adjust the list of positions:
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
+    
+    ## define the (l+1)st set of relations
+    rels!.(l+1) := rels!.(l);
+    
+    ## adjust the list of positions:
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
+    
+        ## adjust the default position:
+    M!.PositionOfTheDefaultSetOfRelations := l+1;
+    
+end );
+
+##
+InstallMethod( AddANewPresentation,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsRelationsForHomalg ],
+        
+  function( M, rel )
+    local gens, rels, l;
+    
+    gens := SetsOfGenerators( M );
+    rels := SetsOfRelations( M );
+    
+    l := PositionOfLastStoredSet( rels );
+    
+    ## define the (l+1)st set of generators
+    gens!.(l+1) := gens!.(l);
+    
+    ## adjust the list of positions:
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
+    
+    ## define the (l+1)st set of relations
+    rels!.(l+1) := rel;
+    
+    ## adjust the list of positions:
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
+    
+        ## adjust the default position:
+    M!.PositionOfTheDefaultSetOfRelations := l+1;
     
 end );
 
 ##
 InstallMethod( BasisOfModule,
-        "for a homalg module",
+        "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, B, gens, rels, l;
+    local rel;
     
-    rel := RelationsOfModule ( M );
+    rel := RelationsOfModule( M );
     
-    if not ( HasCanBeUsedToEffictivelyDecideZero( rel ) and CanBeUsedToEffictivelyDecideZero( rel ) ) then
+    if not ( HasCanBeUsedToEffectivelyDecideZero( rel ) and CanBeUsedToEffectivelyDecideZero( rel ) ) then
         
-        B := BasisOfModule( rel );
+        rel := BasisOfModule( rel );
         
-        if IsLeftModule( M ) then
-            rel := CreateRelationsForLeftModule( B, LeftActingDomain( M ) );
-        else
-            rel := CreateRelationsForRightModule( B, RightActingDomain( M ) );
-        fi;
+        AddANewPresentation( M, rel );
         
-        SetCanBeUsedToEffictivelyDecideZero( rel, true );
-        
-        gens := SetsOfGenerators( M );
-        rels := SetsOfRelations( M );
-        
-        l := PositionOfLastStoredSet( rels );
-        
-        ## define the (l+1)st set of generators
-        gens!.(l+1) := gens!.(l);
-        
-        ## adjust the list of positions:
-        gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
-        
-        ## define the (l+1)st set of relations
-        rels!.(l+1) := rel;
-        
-        ## adjust the list of positions:
-        rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
-        
-        ## adjust the default position:
-        M!.PositionOfTheDefaultSetOfRelations := l+1;
     fi;
     
-    return rel!.relations;
+    return rel;
     
 end );
 
 ##
 InstallMethod( DecideZero,
-        "for a homalg module",
+        "for homalg modules",
 	[ IsMatrixForHomalg, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     local rel;
     
-    rel := RelationsOfModule ( M );
+    rel := RelationsOfModule( M );
     
     return DecideZero( mat, rel ) ;
+    
+end );
+
+##
+InstallMethod( BasisCoeff,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local rel;
+    
+    rel := RelationsOfModule( M );
+    
+    if not ( HasCanBeUsedToEffectivelyDecideZero( rel ) and CanBeUsedToEffectivelyDecideZero( rel ) ) then
+        
+        rel := BasisCoeff( RelationsOfModule( M ) ) ;
+        
+        AddANewPresentation( M, rel );
+        
+    fi;
+    
+    return rel;
+    
+end );
+
+##
+InstallMethod( EffectivelyDecideZero,
+        "for homalg modules",
+	[ IsMatrixForHomalg, IsFinitelyPresentedModuleRep ],
+        
+  function( mat, M )
+    local rel;
+    
+    rel := RelationsOfModule( M );
+    
+    return EffectivelyDecideZero( mat, rel ) ;
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGenerators( RelationsOfModule( M1 ), RelationsOfModule( M2 ) ) ;
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsList and IsEmpty ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGenerators( RelationsOfModule( M1 ), [ ] ) ;
     
 end );
 

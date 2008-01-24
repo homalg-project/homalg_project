@@ -77,31 +77,37 @@ DeclareAttribute( "EvalUnionOfColumns",
 DeclareAttribute( "EvalDiagMat",
         IsMatrixForHomalg );
 
-DeclareAttribute( "EvalMul",
+DeclareAttribute( "EvalMulMat",
         IsMatrixForHomalg );
 
-DeclareAttribute( "EvalAdd",
+DeclareAttribute( "EvalAddMat",
         IsMatrixForHomalg );
 
-DeclareAttribute( "EvalSub",
+DeclareAttribute( "EvalSubMat",
         IsMatrixForHomalg );
 
 DeclareAttribute( "EvalCompose",
         IsMatrixForHomalg );
 
+DeclareAttribute( "EvalAddRhs",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalAddBts",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "EvalGetSide",
+        IsMatrixForHomalg );
+
 DeclareAttribute( "RightHandSide",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "LeftHandSide",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "UpSide",
         IsMatrixForHomalg );
 
 DeclareAttribute( "BottomSide",
         IsMatrixForHomalg );
 
-DeclareAttribute( "CompatiblityConditions",
+DeclareAttribute( "CompatibilityConditions",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "PreEval",
         IsMatrixForHomalg );
 
 ####################################
@@ -110,20 +116,8 @@ DeclareAttribute( "CompatiblityConditions",
 #
 ####################################
 
-DeclareSynonym( "AddRhs",
-        SetRightHandSide );
-
-DeclareSynonym ( "AddLhs",
-        SetLeftHandSide );
-
-DeclareSynonym( "AddBts",
-        SetBottomSide );
-
-DeclareSynonym ( "AddUps",
-        SetUpSide );
-
 DeclareSynonymAttr( "CompCond",
-        CompatiblityConditions );
+        CompatibilityConditions );
 
 ####################################
 #
@@ -136,6 +130,9 @@ DeclareSynonymAttr( "CompCond",
 DeclareGlobalFunction( "MatrixForHomalg" );
 
 # basic operations:
+
+DeclareOperation( "HomalgRing",
+        [ IsMatrixForHomalg ] );
 
 DeclareOperation( "CertainRows",
         [ IsMatrixForHomalg, IsList ] );
@@ -152,12 +149,33 @@ DeclareOperation( "UnionOfColumns",
 DeclareOperation( "DiagMat",
         [ IsList ] );
 
+DeclareOperation( "*",
+        [ IsRingElement, IsMatrixForHomalg ] );
+
 DeclareOperation( "+",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "AdditiveInverseSameMutability",
+        [ IsMatrixForHomalg ] );
 
 DeclareOperation( "-",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 
 DeclareOperation( "*",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "AddRhs",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "AddRhs",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "AddBts",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "AddBts",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "GetSide",
+        [ IsString, IsMatrixForHomalg ] );
 
