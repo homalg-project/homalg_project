@@ -115,6 +115,55 @@ InstallMethod( CertainRows,
 end );
 
 ##
+InstallMethod( Involution,
+        "for homalg matrices",
+        [ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, C;
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgInternalMatrixRep( M ) then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalInvolution( C, M );
+    
+    SetNrRows( C, NrColumns( M ) );
+    SetNrColumns( C, NrRows( M ) );
+    
+    if HasIsFullColumnRankMatrix( M ) then
+        if IsFullColumnRankMatrix( M ) then
+            SetIsFullRowRankMatrix( C, true );
+        else
+            SetIsFullRowRankMatrix( C, false );
+        fi;
+    fi;
+    
+    if HasIsFullRowRankMatrix( M ) then
+        if IsFullRowRankMatrix( M ) then
+            SetIsFullColumnRankMatrix( C, true );
+        else
+            SetIsFullColumnRankMatrix( C, false );
+        fi;
+    fi;
+    
+    if HasRowRankOfMatrix( M ) then
+        SetColumnRankOfMatrix( C, RowRankOfMatrix( M ) );
+    fi;
+    
+    if HasColumnRankOfMatrix( M ) then
+        SetRowRankOfMatrix( C, ColumnRankOfMatrix( M ) );
+    fi;
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( CertainColumns,
         "for homalg matrices",
         [ IsMatrixForHomalg, IsList ],

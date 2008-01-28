@@ -55,6 +55,30 @@ end );
 ##
 InstallMethod( Eval,
         "for homalg matrices",
+        [ IsHomalgInternalMatrixRep and HasEvalInvolution ],
+        
+  function( C )
+    local R, RP, M;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    M :=  EvalInvolution( C );
+    
+    if IsBound(RP!.Involution) then
+        return RP!.Involution( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return TransposedMat( Eval( M ) );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices",
         [ IsHomalgInternalMatrixRep and HasEvalCertainRows ],
         
   function( C )
@@ -231,7 +255,13 @@ InstallMethod( Eval,
     
     #=====# begin of the core procedure #=====#
     
-    return a * Eval( A );
+    e := a * Eval( A );
+    
+    if HasRingRelations( R ) then
+        return  DecideZero( e );
+    fi;
+    
+    return e;
     
 end );
 
@@ -258,7 +288,13 @@ InstallMethod( Eval,
     
     #=====# begin of the core procedure #=====#
     
-    return Eval( A ) + Eval( B );
+    e := Eval( A ) + Eval( B );
+    
+    if HasRingRelations( R ) then
+        return  DecideZero( e );
+    fi;
+    
+    return e;
     
 end );
 
@@ -285,7 +321,13 @@ InstallMethod( Eval,
     
     #=====# begin of the core procedure #=====#
     
-    return Eval( A ) - Eval( B );
+    e := Eval( A ) - Eval( B );
+    
+    if HasRingRelations( R ) then
+        return  DecideZero( e );
+    fi;
+    
+    return e;
     
 end );
 
@@ -312,7 +354,13 @@ InstallMethod( Eval,
     
     #=====# begin of the core procedure #=====#
     
-    return Eval( A ) * Eval( B );
+    e := Eval( A ) * Eval( B );
+    
+    if HasRingRelations( R ) then
+        return  DecideZero( e );
+    fi;
+    
+    return e;
     
 end );
 

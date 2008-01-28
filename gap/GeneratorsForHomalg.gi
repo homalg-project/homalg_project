@@ -88,7 +88,7 @@ InstallMethod( NrGenerators,
         
   function( gen )
     
-    return NrRows ( MatrixOfGenerators( gen ) );
+    return NrRows( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -99,7 +99,7 @@ InstallMethod( NrGenerators,
         
   function( gen )
     
-    return NrColumns ( MatrixOfGenerators( gen ) );
+    return NrColumns( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -178,6 +178,52 @@ end );
 
 InstallGlobalFunction( CreateGeneratorsForRightModule,
   function( arg )
+    local nar, ar, R, generators, relations_of_hullmodule, gen;
+    
+    nar := Length( arg );
+    
+    for ar in arg{[2..nar]} do
+        if IsRingForHomalg( ar ) then
+            R := ar;
+            break;
+        fi;
+    od;
+    
+    if IsMatrixForHomalg( arg[1] ) then
+        generators := arg[1];
+    elif IsBound( R ) then
+        generators := MatrixForHomalg( arg[1], R );
+    else
+        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nar], "\n" );
+    fi;
+    
+    for ar in arg{[2..nar]} do
+        if IsRelationsForHomalg( ar ) then
+            relations_of_hullmodule := ar;
+            break;
+        elif IsMatrixForHomalg( ar ) then
+            relations_of_hullmodule := CreateRelationsForRightModule( ar );
+            break;
+        elif nar > 2 then
+            if IsBound( R ) then
+                relations_of_hullmodule := CreateRelationsForRightModule( ar, R );
+                break;
+            else
+                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nar], "\n" );
+            fi;
+        else
+            relations_of_hullmodule := CreateRelationsForRightModule( MatrixForHomalg( "zero", 0, NrColumns( generators ), R ), R );
+        fi;
+    od;
+    
+    gen := rec( generators := generators,
+                relations_of_hullmodule := relations_of_hullmodule );
+    
+    ## Objectify:
+    Objectify( RightGeneratorsForHomalgType, gen );
+    
+    return gen;
+    
 end );
 
 ####################################

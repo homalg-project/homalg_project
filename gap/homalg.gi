@@ -38,9 +38,9 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
               function( M )
                 if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of the Tester here
                     return false;
-                else
-                    TryNextMethod( );
                 fi;
+                
+                TryNextMethod( );
                 
             end );
             
@@ -56,9 +56,9 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
                 if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
                    and property[3]( M ) and not property[5]( M ) then
                     return false;
-                else
-                    TryNextMethod( );
                 fi;
+                
+                TryNextMethod( );
                 
             end );
             
@@ -69,9 +69,9 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
                 if Tester( property[1] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
                    and property[1]( M ) and not property[5]( M ) then
                     return false;
-                else
-                    TryNextMethod( );
                 fi;
+                
+                TryNextMethod( );
                 
             end );
             

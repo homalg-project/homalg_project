@@ -62,6 +62,9 @@ DeclareAttribute( "RowRankOfMatrix",
 DeclareAttribute( "ColumnRankOfMatrix",
         IsMatrixForHomalg );
 
+DeclareAttribute( "EvalInvolution",
+        IsMatrixForHomalg );
+
 DeclareAttribute( "EvalCertainRows",
         IsMatrixForHomalg );
 
@@ -132,6 +135,9 @@ DeclareGlobalFunction( "MatrixForHomalg" );
 # basic operations:
 
 DeclareOperation( "HomalgRing",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "Involution",
         [ IsMatrixForHomalg ] );
 
 DeclareOperation( "CertainRows",

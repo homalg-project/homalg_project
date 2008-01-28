@@ -109,9 +109,9 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
           function( M )
             if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
                 return false;
-            else
-                TryNextMethod( );
             fi;
+            
+            TryNextMethod( );
             
         end );
         
@@ -129,9 +129,9 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
             if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
                and property[3]( M ) and not property[5]( M ) then
                 return false;
-            else
-                TryNextMethod( );
             fi;
+            
+            TryNextMethod( );
             
         end );
         
@@ -143,9 +143,9 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
             if Tester( property[1] )( M ) and Tester( property[5] )( M ) ## FIXME: find a way to get rid of the Testers here
                and property[1]( M ) and not property[5]( M ) then
                 return false;
-            else
-                TryNextMethod( );
             fi;
+            
+            TryNextMethod( );
             
         end );
         
@@ -188,9 +188,9 @@ InstallImmediateMethod( IsTorsionLeftModule,
     
     if b then
         return false;
-    else
-        TryNextMethod( );
     fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -515,7 +515,7 @@ InstallMethod( LeftPresentation,
         gens := CreateSetsOfGeneratorsForLeftModule( [], R );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
-        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", Length( rel[1] ), R ), R );
+        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", 1, R ), R );
     fi;
@@ -578,6 +578,85 @@ InstallMethod( LeftPresentation,
     
 end );
 
+##
+InstallMethod( RightPresentation,
+        "constructor",
+        [ IsList, IsSemiringWithOneAndZero ],
+        
+  function( rel, ring )
+    local R, gens, rels, M, is_zero_module;
+    
+    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
+    
+    is_zero_module := false;
+    
+    if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
+        gens := CreateSetsOfGeneratorsForRightModule( [], R );
+        is_zero_module := true;
+    elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
+        gens := CreateSetsOfGeneratorsForRightModule( MatrixForHomalg( "IdentityMatrix", Length( rel ), R ), R ); ## FIXME: Length( rel )
+    else ## only one generator
+        gens := CreateSetsOfGeneratorsForRightModule( MatrixForHomalg( "IdentityMatrix", 1, R ), R );
+    fi;
+    
+    rels := CreateSetsOfRelationsForRightModule( rel, R );
+    
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PositionOfTheDefaultSetOfRelations := 1 );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            M, RightModuleFinitelyPresentedType,
+            RightActingDomain, R,
+            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+    if is_zero_module = true then
+        SetIsZeroModule( M, true );
+    fi;
+    
+#    SetParent( gens, M );
+#    SetParent( rels, M );
+    
+    return M;
+    
+end );
+  
+##
+InstallMethod( RightPresentation,
+        "constructor",
+        [ IsList, IsList, IsSemiringWithOneAndZero ],
+        
+  function( gen, rel, ring )
+    local R, gens, rels, M;
+    
+    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
+    
+    gens := CreateSetsOfGeneratorsForRightModule( gen, R );
+    
+    if rel = [] and gen <> [] then
+        rels := CreateSetsOfRelationsForRightModule( "unknown relations", R );
+    else
+        rels := CreateSetsOfRelationsForRightModule( rel, R );
+    fi;
+    
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PositionOfTheDefaultSetOfRelations := 1 );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            M, RightModuleFinitelyPresentedType,
+            RightActingDomain, R,
+            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+#    SetParent( gens, M );
+#    SetParent( rels, M );
+    
+    return M;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
@@ -586,14 +665,14 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsLeftModule and IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
     
     Print( "<" );
     if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "The zero module" );
+        Print( "The zero left module" ); ## FIXME: the zero module should be universal
     else
         num_gen := NrGenerators( M );
         if num_gen = 1 then
@@ -620,10 +699,46 @@ InstallMethod( ViewObj,
     
 end );
 
+InstallMethod( ViewObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        
+  function( M )
+    local num_gen, num_rel, gen_string, rel_string;
+    
+    Print( "<" );
+    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+        Print( "The zero right module" ); ## FIXME: the zero module should be universal
+    else
+        num_gen := NrGenerators( M );
+        if num_gen = 1 then
+            gen_string := " generator and ";
+        else
+            gen_string := " generators and ";
+        fi;
+        if RelationsOfModule( M ) = "unknown relations" then
+            num_rel := "unknown";
+            rel_string := " relations";
+        else
+            num_rel := NrRelations( M );
+            if num_rel = 0 then
+                rel_string := " no relations";
+            elif num_rel = 1 then
+                rel_string := " relation";
+            else
+                rel_string := " relations";
+            fi;
+        fi;
+        Print( "A right module on ", num_gen, gen_string, num_rel, rel_string );
+    fi;
+    Print( ">" );
+    
+end );
+
 ##
 InstallMethod( PrintObj,
         "for homalg modules",
-        [ IsLeftModule and IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
     
@@ -638,6 +753,29 @@ InstallMethod( PrintObj,
             Print( RelationsOfModule( M ), ", " );
         fi;
         Print( LeftActingDomain( M ), " " );
+    fi;
+    Print( ")" );
+    
+end );
+
+##
+InstallMethod( PrintObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        
+  function( M )
+    
+    Print( "RightPresentation( " );
+    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+        Print( "[], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
+    else
+        Print( GeneratorsOfModule( M ), ", " );
+        if RelationsOfModule( M ) = "unknown relations" then
+            Print( "[], " ) ; ## empty relations
+        else
+            Print( RelationsOfModule( M ), ", " );
+        fi;
+        Print( RightActingDomain( M ), " " );
     fi;
     Print( ")" );
     

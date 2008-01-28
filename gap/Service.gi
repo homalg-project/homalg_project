@@ -17,7 +17,7 @@
 ##
 InstallMethod( TriangularBasisOfRows,
         "for a homalg matrix",
-	[ IsMatrixForHomalg ],
+        [ IsMatrixForHomalg ],
         
   function( M )
     local R, RP;
@@ -28,16 +28,16 @@ InstallMethod( TriangularBasisOfRows,
   
     if IsBound(RP!.TriangularBasisOfRows) then
         return RP!.TriangularBasisOfRows( M );
-    else
-        TryNextMethod( );
     fi;
+    
+    TryNextMethod( );
     
 end ); 
 
 ##
 InstallMethod( TriangularBasisOfRows,
         "for a homalg matrix",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+        [ IsMatrixForHomalg, IsMatrixForHomalg ],
         
   function( M, U )
     local R, RP;
@@ -45,19 +45,19 @@ InstallMethod( TriangularBasisOfRows,
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
-  
+    
     if IsBound(RP!.TriangularBasisOfRows) then
         return RP!.TriangularBasisOfRows( M, U );
-    else
-        TryNextMethod( );
     fi;
+    
+    TryNextMethod( );
     
 end ); 
 
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for a homalg matrix",
-	[ IsMatrixForHomalg ],
+        [ IsMatrixForHomalg ],
         
   function( M )
     local R, RP;
@@ -65,12 +65,12 @@ InstallMethod( TriangularBasisOfColumns,
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
-  
+    
     if IsBound(RP!.TriangularBasisOfColumns) then
         return RP!.TriangularBasisOfColumns( M );
-    else
-        TryNextMethod( );
     fi;
+    
+    return Involution( TriangularBasisOfRows( Involution( M ) ) );
     
 end ); 
 
@@ -80,17 +80,27 @@ InstallMethod( TriangularBasisOfColumns,
 	[ IsMatrixForHomalg, IsMatrixForHomalg ],
         
   function( M, U )
-    local R, RP;
+    local R, RP, T, V;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
-  
+    
     if IsBound(RP!.TriangularBasisOfColumns) then
         return RP!.TriangularBasisOfColumns( M, U );
-    else
-        TryNextMethod( );
     fi;
+    
+    if IsHomalgInternalMatrixRep( U ) then
+        V := MatrixForHomalg( "internal", R );
+    else
+        V := MatrixForHomalg( "external", R );
+    fi;
+    
+    T := Involution( TriangularBasisOfRows( Involution( M ), V ) );
+    
+    U := Involution( V );
+    
+    return T;
     
 end ); 
 
@@ -377,6 +387,38 @@ InstallMethod( DecideZeroColumns,
     fi;
     
     return C;
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, ring_rel, rel;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.DecideZero) then
+        return RP!.DecideZero( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ring_rel := RingRelations( R );
+    
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsLeftRelationsForHomalgRep( ring_rel ) then
+        rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+        return DecideZeroRows( M, rel );
+    else
+        rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+        return DecideZeroColumns( M, rel );
+    fi;
     
 end );
 
