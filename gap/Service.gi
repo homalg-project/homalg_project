@@ -98,8 +98,12 @@ InstallMethod( TriangularBasisOfColumns,
     
     T := Involution( TriangularBasisOfRows( Involution( M ), V ) );
     
-    U := Involution( V );
-    
+    SetEvalInvolution( U, V );
+    SetNrRows( U, NrColumns( V ) );
+    SetNrColumns( U, NrRows( V ) );
+    SetIsFullRowRankMatrix( U, true );
+    SetIsFullColumnRankMatrix( U, true );
+         
     return T;
     
 end ); 
