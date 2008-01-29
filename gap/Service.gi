@@ -79,30 +79,30 @@ InstallMethod( TriangularBasisOfColumns,
         "for a homalg matrix",
 	[ IsMatrixForHomalg, IsMatrixForHomalg ],
         
-  function( M, U )
-    local R, RP, T, V;
+  function( M, V )
+    local R, RP, T, U;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
     
     if IsBound(RP!.TriangularBasisOfColumns) then
-        return RP!.TriangularBasisOfColumns( M, U );
+        return RP!.TriangularBasisOfColumns( M, V );
     fi;
     
-    if IsHomalgInternalMatrixRep( U ) then
-        V := MatrixForHomalg( "internal", R );
+    if IsHomalgInternalMatrixRep( V ) then
+        U := MatrixForHomalg( "internal", R );
     else
-        V := MatrixForHomalg( "external", R );
+        U := MatrixForHomalg( "external", R );
     fi;
     
-    T := Involution( TriangularBasisOfRows( Involution( M ), V ) );
+    T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
     
-    SetEvalInvolution( U, V );
-    SetNrRows( U, NrColumns( V ) );
-    SetNrColumns( U, NrRows( V ) );
-    SetIsFullRowRankMatrix( U, true );
-    SetIsFullColumnRankMatrix( U, true );
+    SetEvalInvolution( V, U );
+    SetNrRows( V, NrColumns( U ) );
+    SetNrColumns( V, NrRows( U ) );
+    SetIsFullRowRankMatrix( V, true );
+    SetIsFullColumnRankMatrix( V, true );
          
     return T;
     
