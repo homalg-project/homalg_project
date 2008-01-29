@@ -103,7 +103,7 @@ InstallMethod( TriangularBasisOfColumns,
     SetNrColumns( V, NrRows( U ) );
     SetIsFullRowRankMatrix( V, true );
     SetIsFullColumnRankMatrix( V, true );
-         
+    
     return T;
     
 end ); 
