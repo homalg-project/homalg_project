@@ -157,24 +157,98 @@ InstallMethod( BasisOfRows,
         "for a homalg matrix",
 	[ IsMatrixForHomalg ],
         
-  function( _M )
-    local R, RP, ring_rel, M, U, B, rank, Ur, Uc;
+  function( M )
+    local R, RP, ring_rel, rel, Mrel, side, zz;
     
-    R := HomalgRing( _M );
+    R := HomalgRing( M );
     
     RP := HomalgTable( R );
   
     if IsBound(RP!.BasisOfRows) then
-        return RP!.BasisOfRows( _M );
-    fi;
-    
-    if HasRingRelations( R ) then
-        ring_rel := RingRelations( R );
+        return RP!.BasisOfRows( M );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    M := _M;
+    if not HasRingRelations( R ) then
+        return M;
+    fi;
+    
+    ring_rel := RingRelations( R );
+    
+    rel := MatrixOfRelations( ring_rel );
+    
+    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+    
+    Mrel := UnionOfRows( M, rel );
+    
+    if HasRightHandSide( M ) then
+        side := RightHandSide( M );
+        zz := MatrixForHomalg( "zero", NrRows( rel ), NrColumns( side ), R );
+        SetRightHandSide( Mrel, UnionOfRows( side, zz ) );
+    fi;
+    
+    return BasisOfRowModule( Mrel );
+    
+end );
+
+##
+InstallMethod( BasisOfColumns,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, ring_rel, rel, Mrel, side, zz;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.BasisOfColumns) then
+        return RP!.BasisOfColumns( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    if not HasRingRelations( R ) then
+        return M;
+    fi;
+    
+    ring_rel := RingRelations( R );
+    
+    rel := MatrixOfRelations( ring_rel );
+    
+    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+    
+    Mrel := UnionOfColumns( M, rel );
+    
+    if HasBottomSide( M ) then
+        side := BottomSide( M );
+        zz := MatrixForHomalg( "zero", NrRows( side ), NrColumns( rel ), R );
+        SetBottomSide( Mrel, UnionOfColumns( side, zz ) );
+    fi;
+    
+    return BasisOfColumnModule( Mrel );
+    
+end );
+
+##
+InstallMethod( BasisOfRowModule,
+        "for a homalg matrix",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, U, B, rank, Ur, Uc;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.BasisOfRowModule) then
+        return RP!.BasisOfRowModule( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
     
     if HasRightHandSide( M ) then
         if IsHomalgInternalMatrixRep( M ) then
@@ -214,28 +288,22 @@ InstallMethod( BasisOfRows,
 end );
 
 ##
-InstallMethod( BasisOfColumns,
+InstallMethod( BasisOfColumnModule,
         "for a homalg matrix",
 	[ IsMatrixForHomalg ],
         
-  function( _M )
-    local R, RP, ring_rel, M, U, B, rank, Ur, Uc;
+  function( M )
+    local R, RP, U, B, rank, Ur, Uc;
     
-    R := HomalgRing( _M );
+    R := HomalgRing( M );
     
     RP := HomalgTable( R );
   
-    if IsBound(RP!.BasisOfColumns) then
-        return RP!.BasisOfColumns( _M );
-    fi;
-    
-    if HasRingRelations( R ) then
-        ring_rel := RingRelations( R );
+    if IsBound(RP!.BasisOfColumnModule) then
+        return RP!.BasisOfColumnModule( M );
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    M := _M;
     
     if HasBottomSide( M ) then
         if IsHomalgInternalMatrixRep( M ) then

@@ -31,7 +31,13 @@ DeclareOperation( "TriangularBasisOfColumns",
 DeclareOperation( "BasisOfRows",
         [ IsMatrixForHomalg ] );
 
+DeclareOperation( "BasisOfRowModule",
+        [ IsMatrixForHomalg ] );
+
 DeclareOperation( "BasisOfColumns",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "BasisOfColumnModule",
         [ IsMatrixForHomalg ] );
 
 DeclareOperation( "DecideZeroRows",
@@ -54,4 +60,13 @@ DeclareOperation( "SyzygiesGeneratorsOfColumns",
 
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
         [ IsMatrixForHomalg, IsList ] );
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonym( "ReduceRingElements",
+        DecideZero );
 
