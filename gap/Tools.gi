@@ -258,7 +258,8 @@ InstallMethod( Eval,
     e := a * Eval( A );
     
     if HasRingRelations( R ) then
-        return  DecideZero( e );
+        e := MatrixForHomalg( e, R );
+        return Eval( DecideZero( e ) );
     fi;
     
     return e;
@@ -291,7 +292,8 @@ InstallMethod( Eval,
     e := Eval( A ) + Eval( B );
     
     if HasRingRelations( R ) then
-        return  DecideZero( e );
+        e := MatrixForHomalg( e, R );
+        return Eval( DecideZero( e ) );
     fi;
     
     return e;
@@ -324,7 +326,8 @@ InstallMethod( Eval,
     e := Eval( A ) - Eval( B );
     
     if HasRingRelations( R ) then
-        return  DecideZero( e );
+        e := MatrixForHomalg( e, R );
+        return Eval( DecideZero( e ) );
     fi;
     
     return e;
@@ -357,7 +360,8 @@ InstallMethod( Eval,
     e := Eval( A ) * Eval( B );
     
     if HasRingRelations( R ) then
-        return  DecideZero( e );
+        e := MatrixForHomalg( e, R );
+        return Eval( DecideZero( e ) );
     fi;
     
     return e;
