@@ -500,6 +500,90 @@ end );
 ####################################
 
 ##
+InstallMethod( Presentation,
+        "constructor",
+        [ IsLeftRelationsForHomalgRep ],
+        
+  function( rel )
+    local R, is_zero_module, gens, rels, M;
+    
+    R := HomalgRing( rel );
+    
+    is_zero_module := false;
+    
+    if NrGenerators( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
+        gens := CreateSetsOfGeneratorsForLeftModule( [], R );
+        is_zero_module := true;
+    else
+        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", NrGenerators( rel ), R ), R );
+    fi;
+    
+    rels := CreateSetsOfRelationsForLeftModule( rel );
+    
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PositionOfTheDefaultSetOfRelations := 1 );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            M, LeftModuleFinitelyPresentedType,
+            LeftActingDomain, R,
+            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+    if is_zero_module = true then
+        SetIsZeroModule( M, true );
+    fi;
+    
+#    SetParent( gens, M );
+#    SetParent( rels, M );
+    
+    return M;
+    
+end );
+  
+##
+InstallMethod( Presentation,
+        "constructor",
+        [ IsRightRelationsForHomalgRep ],
+        
+  function( rel )
+    local R, is_zero_module, gens, rels, M;
+    
+    R := HomalgRing( rel );
+    
+    is_zero_module := false;
+    
+    if NrGenerators( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
+        gens := CreateSetsOfGeneratorsForRightModule( [], R );
+        is_zero_module := true;
+    else
+        gens := CreateSetsOfGeneratorsForRightModule( MatrixForHomalg( "IdentityMatrix", NrGenerators( rel ), R ), R );
+    fi;
+    
+    rels := CreateSetsOfRelationsForRightModule( rel );
+    
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PositionOfTheDefaultSetOfRelations := 1 );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            M, RightModuleFinitelyPresentedType,
+            RightActingDomain, R,
+            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+    if is_zero_module = true then
+        SetIsZeroModule( M, true );
+    fi;
+    
+#    SetParent( gens, M );
+#    SetParent( rels, M );
+    
+    return M;
+    
+end );
+  
+##
 InstallMethod( LeftPresentation,
         "constructor",
         [ IsList, IsSemiringWithOneAndZero ],
@@ -507,7 +591,7 @@ InstallMethod( LeftPresentation,
   function( rel, ring )
     local R, gens, rels, M, is_zero_module;
     
-    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
     
     is_zero_module := false;
     
@@ -551,7 +635,7 @@ InstallMethod( LeftPresentation,
   function( gen, rel, ring )
     local R, gens, rels, M;
     
-    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
     
     gens := CreateSetsOfGeneratorsForLeftModule( gen, R );
     
@@ -586,7 +670,7 @@ InstallMethod( RightPresentation,
   function( rel, ring )
     local R, gens, rels, M, is_zero_module;
     
-    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
     
     is_zero_module := false;
     
@@ -630,7 +714,7 @@ InstallMethod( RightPresentation,
   function( gen, rel, ring )
     local R, gens, rels, M;
     
-    R := CreateRingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
     
     gens := CreateSetsOfGeneratorsForRightModule( gen, R );
     
@@ -686,7 +770,8 @@ InstallMethod( ViewObj,
         else
             num_rel := NrRelations( M );
             if num_rel = 0 then
-                rel_string := " no relations";
+	        num_rel := "";
+                rel_string := "no relations";
             elif num_rel = 1 then
                 rel_string := " relation";
             else
@@ -722,6 +807,7 @@ InstallMethod( ViewObj,
         else
             num_rel := NrRelations( M );
             if num_rel = 0 then
+	        num_rel := "";
                 rel_string := " no relations";
             elif num_rel = 1 then
                 rel_string := " relation";

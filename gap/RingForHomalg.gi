@@ -218,7 +218,7 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( CreateRingForHomalg,
+InstallGlobalFunction( RingForHomalg,
   function( arg )
     local nar, homalg_ring, type;
     

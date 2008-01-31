@@ -115,5 +115,5 @@ DeclareAttribute( "MinusOne",
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateRingForHomalg" );
+DeclareGlobalFunction( "RingForHomalg" );
 

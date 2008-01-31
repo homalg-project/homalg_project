@@ -24,5 +24,6 @@ ReadPackage("homalg","gap/ModuleForHomalg.gi");
 ReadPackage("homalg","gap/Tools.gi");
 ReadPackage("homalg","gap/Service.gi");
 ReadPackage("homalg","gap/Basic.gi");
+ReadPackage("homalg","gap/Modules.gi");
 
 ReadPackage("homalg","gap/Integers.gi");

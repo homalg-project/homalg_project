@@ -99,7 +99,7 @@ InstallMethod( Eval,
     
     #=====# begin of the core procedure #=====#
     
-    return Eval( M ){plist};
+    return Eval( M ){ plist };
     
 end );
 

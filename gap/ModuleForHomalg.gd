@@ -82,6 +82,9 @@ DeclareProperty( "IsZeroModule",
 
 # constructor methods:
 
+DeclareOperation( "Presentation",
+        [ IsRelationsForHomalg ] );
+
 DeclareOperation( "LeftPresentation",
         [ IsList, IsSemiringWithOneAndZero ] );
 

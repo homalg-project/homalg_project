@@ -58,15 +58,18 @@ end );
 ####################################
 
 InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
-  function( mat, R )
+  function( arg )
     local relations;
     
-    if IsString( mat ) and Length(mat) > 2 and LowercaseString(mat{[1..3]}) = "unk" then
+    if Length( arg ) = 1 then
+        relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
+                          1 := arg[1] );
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{ [1..3] } ) = "unk" then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
-                          1 := CreateRelationsForLeftModule( mat, R ) );
+                          1 := CreateRelationsForLeftModule( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:
@@ -77,15 +80,18 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
 end );
   
 InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
-  function( mat, R )
+  function( arg )
     local relations;
     
-    if IsString( mat ) and Length(mat) > 2 and LowercaseString(mat{[1..3]}) = "unk" then
+    if Length( arg ) = 1 then
+        relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
+                          1 := arg[1] );
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{ [1..3] }) = "unk" then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
-                          1 := CreateRelationsForRightModule( mat, R ) );
+                          1 := CreateRelationsForRightModule( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:

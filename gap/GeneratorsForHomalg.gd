@@ -61,6 +61,9 @@ DeclareOperation( "MatrixOfRelations",
 DeclareOperation( "NrGenerators",
         [ IsGeneratorsForHomalg ] );
 
+DeclareOperation( "BasisOfModule",
+        [ IsGeneratorsForHomalg ] );
+
 DeclareOperation( "DecideZero",
         [ IsGeneratorsForHomalg ] );
 

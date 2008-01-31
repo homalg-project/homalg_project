@@ -44,14 +44,34 @@ BindGlobal( "HomalgExternalMatrixType",
 
 ####################################
 #
-# methods for properties:
+# logical implications methods:
 #
 ####################################
 
 ##
-InstallMethod( IsEmptyMatrix,
-        "for homalg matrices",
-        [ IsMatrixForHomalg ],
+InstallTrueMethod( IsZeroMatrix, IsMatrixForHomalg and IsEmptyMatrix );
+
+##
+InstallTrueMethod( IsFullRowRankMatrix, IsMatrixForHomalg and IsIdentityMatrix );
+
+##
+InstallTrueMethod( IsFullColumnRankMatrix, IsMatrixForHomalg and IsIdentityMatrix );
+
+####################################
+#
+# methods for properties:
+#
+####################################
+
+####################################
+#
+# immediate methods for properties:
+#
+####################################
+
+##
+InstallImmediateMethod( IsEmptyMatrix,
+        IsMatrixForHomalg and HasNrRows and HasNrColumns, 0,
         
   function( M )
     
@@ -63,6 +83,157 @@ InstallMethod( IsEmptyMatrix,
     
 end );
 
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsMatrixForHomalg and HasEvalCertainRows, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalCertainRows( M )[1] ) and IsZeroMatrix( EvalCertainRows( M )[1] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsMatrixForHomalg and HasEvalCertainColumns, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalCertainColumns( M )[1] ) and IsZeroMatrix( EvalCertainColumns( M )[1] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullRowRankMatrix,
+        IsMatrixForHomalg and HasNrRows, 0,
+        
+  function( M )
+    
+    if NrRows( M ) = 0 then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullColumnRankMatrix,
+        IsMatrixForHomalg and HasNrColumns, 0,
+        
+  function( M )
+    
+    if NrColumns( M ) = 0 then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullRowRankMatrix,
+        IsMatrixForHomalg and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsFullColumnRankMatrix( EvalInvolution( M ) ) then
+        return IsFullColumnRankMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullColumnRankMatrix,
+        IsMatrixForHomalg and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsFullRowRankMatrix( EvalInvolution( M ) ) then
+        return IsFullRowRankMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsMatrixForHomalg and HasIsIdentityMatrix and HasNrRows, 0,
+        
+  function( M )
+    
+    return NrRows( M );
+        
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsMatrixForHomalg and HasIsIdentityMatrix and HasNrColumns, 0,
+        
+  function( M )
+    
+    return NrColumns( M );
+        
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsMatrixForHomalg and HasIsZeroMatrix, 0,
+        
+  function( M )
+    
+    return 0;
+        
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsMatrixForHomalg and HasIsZeroMatrix, 0,
+        
+  function( M )
+    
+    return 0;
+        
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsMatrixForHomalg and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasColumnRankOfMatrix( EvalInvolution( M ) ) then
+        return ColumnRankOfMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsMatrixForHomalg and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasRowRankOfMatrix( EvalInvolution( M ) ) then
+        return RowRankOfMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ####################################
 #
@@ -78,6 +249,31 @@ InstallMethod( HomalgRing,
   function( M )
     
     return M!.ring;
+    
+end );
+
+##
+InstallMethod( Involution,
+        "for homalg matrices",
+        [ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, C;
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgInternalMatrixRep( M ) then
+        C := MatrixForHomalg( "internal", R );
+    else
+        C := MatrixForHomalg( "external", R );
+    fi;
+    
+    SetEvalInvolution( C, M );
+    
+    SetNrRows( C, NrColumns( M ) );
+    SetNrColumns( C, NrRows( M ) );
+    
+    return C;
     
 end );
 
@@ -109,55 +305,6 @@ InstallMethod( CertainRows,
     
     SetNrRows( C, Length( plist ) );
     SetNrColumns( C, NrColumns( M ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( Involution,
-        "for homalg matrices",
-        [ IsMatrixForHomalg ],
-        
-  function( M )
-    local R, C;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgInternalMatrixRep( M ) then
-        C := MatrixForHomalg( "internal", R );
-    else
-        C := MatrixForHomalg( "external", R );
-    fi;
-    
-    SetEvalInvolution( C, M );
-    
-    SetNrRows( C, NrColumns( M ) );
-    SetNrColumns( C, NrRows( M ) );
-    
-    if HasIsFullColumnRankMatrix( M ) then
-        if IsFullColumnRankMatrix( M ) then
-            SetIsFullRowRankMatrix( C, true );
-        else
-            SetIsFullRowRankMatrix( C, false );
-        fi;
-    fi;
-    
-    if HasIsFullRowRankMatrix( M ) then
-        if IsFullRowRankMatrix( M ) then
-            SetIsFullColumnRankMatrix( C, true );
-        else
-            SetIsFullColumnRankMatrix( C, false );
-        fi;
-    fi;
-    
-    if HasRowRankOfMatrix( M ) then
-        SetColumnRankOfMatrix( C, RowRankOfMatrix( M ) );
-    fi;
-    
-    if HasColumnRankOfMatrix( M ) then
-        SetRowRankOfMatrix( C, ColumnRankOfMatrix( M ) );
-    fi;
     
     return C;
     
@@ -205,7 +352,7 @@ InstallMethod( UnionOfRows,
     local R, C;
     
     if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
     R := HomalgRing( A );
@@ -228,12 +375,12 @@ end );
 ##
 InstallMethod( UnionOfRows,
         "of two homalg matrices",
-        [ IsMatrixForHomalg, IsEmptyMatrix ],
+        [ IsMatrixForHomalg, IsMatrixForHomalg and IsEmptyMatrix ],
         
   function( A, B )
     
     if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
     return A;
@@ -243,15 +390,30 @@ end );
 ##
 InstallMethod( UnionOfRows,
         "of two homalg matrices",
-        [ IsEmptyMatrix, IsMatrixForHomalg ],
+        [ IsMatrixForHomalg and IsEmptyMatrix, IsMatrixForHomalg ],
         
   function( A, B )
     
     if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
     return B;
+    
+end );
+
+##
+InstallMethod( UnionOfRows,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg and IsEmptyMatrix, IsMatrixForHomalg and IsEmptyMatrix ],
+        
+  function( A, B )
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    return MatrixForHomalg( "zero", NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
     
 end );
 
@@ -264,7 +426,7 @@ InstallMethod( UnionOfColumns,
     local R, C;
     
     if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
     
     R := HomalgRing( A );
@@ -287,12 +449,12 @@ end );
 ##
 InstallMethod( UnionOfColumns,
         "of two homalg matrices",
-        [ IsEmptyMatrix, IsMatrixForHomalg ],
+        [ IsMatrixForHomalg and IsEmptyMatrix, IsMatrixForHomalg ],
         
   function( A, B )
     
     if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
     
     return B;
@@ -302,15 +464,30 @@ end );
 ##
 InstallMethod( UnionOfColumns,
         "of two homalg matrices",
-        [ IsMatrixForHomalg, IsEmptyMatrix ],
+        [ IsMatrixForHomalg, IsMatrixForHomalg and IsEmptyMatrix ],
         
   function( A, B )
     
     if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
     
     return A;
+    
+end );
+
+##
+InstallMethod( UnionOfColumns,
+        "of two homalg matrices",
+        [ IsMatrixForHomalg and IsEmptyMatrix, IsMatrixForHomalg and IsEmptyMatrix ],
+        
+  function( A, B )
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
     
 end );
 
@@ -545,11 +722,11 @@ InstallMethod( \-,
   function( A, B )
     
     if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
     
     if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
     return -B;
@@ -564,11 +741,11 @@ InstallMethod( \-,
   function( A, B )
     
     if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
     
     if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
     return A;
@@ -643,7 +820,7 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
-        [ IsIdentityMatrix, IsMatrixForHomalg ],
+        [ IsMatrixForHomalg and IsIdentityMatrix, IsMatrixForHomalg ],
         
   function( A, B )
     
@@ -658,7 +835,7 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
-        [ IsMatrixForHomalg, IsIdentityMatrix ],
+        [ IsMatrixForHomalg, IsMatrixForHomalg and IsIdentityMatrix ],
         
   function( A, B )
     
@@ -851,15 +1028,11 @@ InstallGlobalFunction( MatrixForHomalg,
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, HomalgInternalMatrixType,
-                IsIdentityMatrix, true,
-                IsFullRowRankMatrix, true,
-                IsFullColumnRankMatrix, true );
+                IsIdentityMatrix, true );
         
-        if Length( arg ) > 2 and IsPosInt( arg[2] ) then
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
             SetNrColumns( matrix, arg[2] );
-            SetRowRankOfMatrix( matrix, arg[2] );
-            SetColumnRankOfMatrix( matrix, arg[2] );
         fi;
         
         return matrix;
@@ -874,21 +1047,11 @@ InstallGlobalFunction( MatrixForHomalg,
                 matrix, HomalgInternalMatrixType,
                 IsZeroMatrix, true );
         
-        if Length( arg ) > 2 and IsInt( arg[2] ) and arg[2] >= 0 then
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-            if arg[2] = 0 then
-                SetIsFullRowRankMatrix( matrix, true );
-                SetIsEmptyMatrix( matrix, true );
-            fi;
-	    if Length( arg ) > 3 and IsInt( arg[3] ) and arg[3] >=0 then
+	    if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
                 SetNrColumns( matrix, arg[3] );
-                if arg[3] = 0 then
-                    SetIsFullColumnRankMatrix( matrix, true );
-                    SetIsEmptyMatrix( matrix, true );
-                fi;
             fi;
-            SetRowRankOfMatrix( matrix, 0 );
-            SetColumnRankOfMatrix( matrix, 0 );
         fi;
         
         return matrix;
@@ -911,11 +1074,9 @@ InstallGlobalFunction( MatrixForHomalg,
         if Length( arg[1] ) = 0 then
             SetNrRows( matrix, 0 );
             SetNrColumns( matrix, 0 );
-            SetIsZeroMatrix( matrix, true );
         elif arg[1][1] = [] then
             SetNrRows( matrix, Length( arg[1] ) );
             SetNrColumns( matrix, 0 );
-            SetIsZeroMatrix( matrix, true );
         elif not IsList( arg[1][1] ) then
             SetNrRows( matrix, Length( arg[1] ) );
             SetNrColumns( matrix, 1 );

@@ -50,7 +50,7 @@ BindGlobal( "RightRelationsForHomalgType",
 
 ##
 InstallMethod( MatrixOfRelations,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsRelationsForHomalg ],
         
   function( rel )
@@ -61,7 +61,7 @@ end );
 
 ##
 InstallMethod( HomalgRing,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsRelationsForHomalg ],
         
   function( rel )
@@ -72,7 +72,7 @@ end );
 
 ##
 InstallMethod( NrGenerators,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsLeftRelationsForHomalgRep ],
         
   function( rel )
@@ -83,7 +83,7 @@ end );
 
 ##
 InstallMethod( NrGenerators,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsRightRelationsForHomalgRep ],
         
   function( rel )
@@ -94,7 +94,7 @@ end );
 
 ##
 InstallMethod( NrRelations,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsLeftRelationsForHomalgRep ],
         
   function( rel )
@@ -105,7 +105,7 @@ end );
 
 ##
 InstallMethod( NrRelations,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsRightRelationsForHomalgRep ],
         
   function( rel )
@@ -116,7 +116,7 @@ end );
 
 ##
 InstallMethod( BasisOfModule,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsLeftRelationsForHomalgRep ],
         
   function( rel )
@@ -136,7 +136,7 @@ end );
 
 ##
 InstallMethod( BasisOfModule,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsRightRelationsForHomalgRep ],
         
   function( rel )
@@ -156,7 +156,7 @@ end );
 
 ##
 InstallMethod( BasisOfModule,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsRelationsForHomalg and CanBeUsedToEffectivelyDecideZero ],
         
   function( rel )
@@ -167,7 +167,7 @@ end );
 
 ##
 InstallMethod( DecideZero,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
         
   function( mat, rel )
@@ -178,7 +178,7 @@ end );
 
 ##
 InstallMethod( DecideZero,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
         
   function( mat, rel )
@@ -189,7 +189,7 @@ end );
 
 ##
 InstallMethod( BasisCoeff,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsLeftRelationsForHomalgRep ],
         
   function( rel )
@@ -210,7 +210,7 @@ end );
 
 ##
 InstallMethod( BasisCoeff,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsRightRelationsForHomalgRep ],
         
   function( rel )
@@ -231,7 +231,7 @@ end );
 
 ##
 InstallMethod( EffectivelyDecideZero,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
         
   function( mat, rel )
@@ -242,7 +242,7 @@ end );
 
 ##
 InstallMethod( EffectivelyDecideZero,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
 	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
         
   function( mat, rel )
@@ -253,7 +253,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGenerators,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsLeftRelationsForHomalgRep, IsLeftRelationsForHomalgRep ],
         
   function( M1, M2 )
@@ -264,7 +264,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGenerators,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsLeftRelationsForHomalgRep, IsList and IsEmpty ],
         
   function( M1, M2 )
@@ -275,7 +275,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGenerators,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsRightRelationsForHomalgRep, IsRightRelationsForHomalgRep ],
         
   function( M1, M2 )
@@ -286,7 +286,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGenerators,
-        "for sets of relations of a homalg module",
+        "for sets of relations of homalg modules",
         [ IsRightRelationsForHomalgRep, IsList and IsEmpty ],
         
   function( M1, M2 )
