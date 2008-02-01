@@ -27,16 +27,16 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 
 # a new family:
 BindGlobal( "ModulesFamily",
-        NewFamily( "ModulesFamily" ));
+        NewFamily( "ModulesFamily" ) );
 
 # two new types:
 BindGlobal( "LeftModuleFinitelyPresentedType",
         NewType( ModulesFamily ,
-                IsLeftModule and IsFinitelyPresentedModuleRep ));
+                IsFinitelyPresentedModuleRep and IsLeftModule ) );
 
 BindGlobal( "RightModuleFinitelyPresentedType",
         NewType( ModulesFamily ,
-                IsRightModule and IsFinitelyPresentedModuleRep ));
+                IsFinitelyPresentedModuleRep and IsRightModule ) );
 
 ####################################
 #
@@ -100,7 +100,7 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## a => b:
         InstallTrueMethod( property[3],
-                property[1] );
+                IsModuleForHomalg and property[1] );
         
         ## not b => not a:
         InstallImmediateMethod( property[1],
@@ -119,7 +119,7 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## a and b => c:
         InstallTrueMethod( property[5],
-                property[1] and property[3] );
+                IsModuleForHomalg and property[1] and property[3] );
         
         ## b and not c => not a:
         InstallImmediateMethod( property[1],
@@ -159,7 +159,7 @@ od;
 #
 ####################################
 
-# strictly less relations than generators => not IsTorsionLeftModule
+## strictly less relations than generators => not IsTorsionLeftModule
 InstallImmediateMethod( IsTorsionLeftModule,
         IsFinitelyPresentedModuleRep, 0,
         
@@ -188,6 +188,34 @@ InstallImmediateMethod( IsTorsionLeftModule,
     
     if b then
         return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFreeModule,
+        IsFinitelyPresentedModuleRep and IsLeftModule, 0,
+        
+  function( M )
+    
+    if NrRelations( M ) = 0 then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RankOfLeftModule,
+        IsFinitelyPresentedModuleRep and IsLeftModule and IsFreeModule, 0,
+        
+  function( M )
+    
+    if NrRelations( M ) = 0 then
+        return NrGenerators( M );
     fi;
     
     TryNextMethod( );
@@ -334,8 +362,15 @@ InstallMethod( NrRelations,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
+    local rel;
     
-    return NrRelations( RelationsOfModule( M ) );
+    rel := RelationsOfModule( M );
+    
+    if IsString( rel ) then
+        return fail;
+    else
+        return NrRelations( rel );
+    fi;
     
 end );
 
@@ -747,6 +782,54 @@ end );
 #
 ####################################
 
+##
+InstallMethod( ViewObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1,
+        
+  function( M )
+    
+    if IsLeftModule( M ) then
+        Print( "<The zero left module>" ); ## FIXME: the zero module should be universal
+    else
+        Print( "<The zero right module>" ); ## FIXME: the zero module should be universal
+    fi;
+    
+end );
+    
+##
+InstallMethod( ViewObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsFreeModule ],
+        
+  function( M )
+    local r, rk;
+    
+    Print( "<A free left module" );
+    
+    r := NrGenerators( M );
+    
+    if HasRankOfLeftModule( M ) then
+        rk := RankOfLeftModule( M );
+        Print( " of rank ", rk, " on " );
+        if r = rk then
+            if r = 1 then
+                Print( "a free generator" );
+            else
+                Print( "free generators" );
+            fi;
+        else ## => r > 1
+            Print( r, " non-free generators" );
+        fi;
+    else
+        
+    fi;
+    
+    Print( ">" );
+    
+end );
+    
+##
 InstallMethod( ViewObj,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
@@ -754,36 +837,33 @@ InstallMethod( ViewObj,
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
     
-    Print( "<" );
-    if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "The zero left module" ); ## FIXME: the zero module should be universal
+    num_gen := NrGenerators( M );
+    
+    if num_gen = 1 then
+        gen_string := " generator and ";
     else
-        num_gen := NrGenerators( M );
-        if num_gen = 1 then
-            gen_string := " generator and ";
-        else
-            gen_string := " generators and ";
-        fi;
-        if RelationsOfModule( M ) = "unknown relations" then
-            num_rel := "unknown";
-            rel_string := " relations";
-        else
-            num_rel := NrRelations( M );
-            if num_rel = 0 then
-	        num_rel := "";
-                rel_string := "no relations";
-            elif num_rel = 1 then
-                rel_string := " relation";
-            else
-                rel_string := " relations";
-            fi;
-        fi;
-        Print( "A left module on ", num_gen, gen_string, num_rel, rel_string );
+        gen_string := " generators and ";
     fi;
-    Print( ">" );
+    if RelationsOfModule( M ) = "unknown relations" then
+        num_rel := "unknown";
+        rel_string := " relations";
+    else
+        num_rel := NrRelations( M );
+        if num_rel = 0 then
+            num_rel := "";
+            rel_string := "no relations";
+        elif num_rel = 1 then
+            rel_string := " relation";
+        else
+            rel_string := " relations";
+        fi;
+    fi;
+    
+    Print( "<A left module on ", num_gen, gen_string, num_rel, rel_string, ">" );
     
 end );
 
+##
 InstallMethod( ViewObj,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsRightModule ],
@@ -791,33 +871,27 @@ InstallMethod( ViewObj,
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
     
-    Print( "<" );
-    if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "The zero right module" ); ## FIXME: the zero module should be universal
+    num_gen := NrGenerators( M );
+    if num_gen = 1 then
+        gen_string := " generator and ";
     else
-        num_gen := NrGenerators( M );
-        if num_gen = 1 then
-            gen_string := " generator and ";
-        else
-            gen_string := " generators and ";
-        fi;
-        if RelationsOfModule( M ) = "unknown relations" then
-            num_rel := "unknown";
-            rel_string := " relations";
-        else
-            num_rel := NrRelations( M );
-            if num_rel = 0 then
-	        num_rel := "";
-                rel_string := " no relations";
-            elif num_rel = 1 then
-                rel_string := " relation";
-            else
-                rel_string := " relations";
-            fi;
-        fi;
-        Print( "A right module on ", num_gen, gen_string, num_rel, rel_string );
+        gen_string := " generators and ";
     fi;
-    Print( ">" );
+    if RelationsOfModule( M ) = "unknown relations" then
+        num_rel := "unknown";
+        rel_string := " relations";
+    else
+        num_rel := NrRelations( M );
+        if num_rel = 0 then
+            num_rel := "";
+            rel_string := "no relations";
+        elif num_rel = 1 then
+            rel_string := " relation";
+        else
+            rel_string := " relations";
+        fi;
+    fi;
+    Print( "A right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
     
 end );
 

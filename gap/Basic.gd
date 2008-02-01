@@ -28,3 +28,15 @@ DeclareOperation( "EffectivelyDecideZeroRows",
 DeclareOperation( "EffectivelyDecideZeroColumns",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 
+DeclareOperation( "SyzygiesBasisOfRows",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "SyzygiesBasisOfColumns",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "SyzygiesBasisOfRows",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "SyzygiesBasisOfColumns",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+

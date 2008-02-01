@@ -31,16 +31,16 @@ DeclareRepresentation( "IsRightGeneratorsForHomalgRep",
 
 # a new family:
 BindGlobal( "GeneratorsForHomalgFamily",
-        NewFamily( "GeneratorsForHomalgFamily" ));
+        NewFamily( "GeneratorsForHomalgFamily" ) );
 
 # two new types:
 BindGlobal( "LeftGeneratorsForHomalgType",
         NewType(  GeneratorsForHomalgFamily,
-                IsLeftGeneratorsForHomalgRep ));
+                IsLeftGeneratorsForHomalgRep ) );
 
 BindGlobal( "RightGeneratorsForHomalgType",
         NewType(  GeneratorsForHomalgFamily,
-                IsRightGeneratorsForHomalgRep ));
+                IsRightGeneratorsForHomalgRep ) );
 
 ####################################
 #

@@ -27,12 +27,12 @@ DeclareRepresentation( "IsSetsOfRelationsRep",
 
 # a new family:
 BindGlobal( "SetsOfRelationsFamily",
-        NewFamily( "SetsOfRelationsFamily" ));
+        NewFamily( "SetsOfRelationsFamily" ) );
 
 # a new type:
 BindGlobal( "SetsOfRelationsType",
         NewType( SetsOfRelationsFamily ,
-                IsSetsOfRelationsRep ));
+                IsSetsOfRelationsRep ) );
 
 ####################################
 #

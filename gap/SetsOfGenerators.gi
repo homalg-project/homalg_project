@@ -27,12 +27,12 @@ DeclareRepresentation( "IsSetsOfGeneratorsRep",
 
 # a new family:
 BindGlobal( "SetsOfGeneratorsFamily",
-        NewFamily( "SetsOfGeneratorsFamily" ));
+        NewFamily( "SetsOfGeneratorsFamily" ) );
 
 # a new type:
 BindGlobal( "SetsOfGeneratorsType",
         NewType( SetsOfGeneratorsFamily ,
-                IsSetsOfGeneratorsRep ));
+                IsSetsOfGeneratorsRep ) );
 
 ####################################
 #

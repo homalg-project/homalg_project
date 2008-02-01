@@ -27,12 +27,12 @@ DeclareRepresentation( "IsHomalgTableRep",
 
 # a new family:
 BindGlobal( "HomalgTableFamily",
-        NewFamily( "HomalgTableFamily" ));
+        NewFamily( "HomalgTableFamily" ) );
 
 # a new type:
 BindGlobal( "HomalgTableType",
         NewType( HomalgTableFamily,
-                IsHomalgTableRep ));
+                IsHomalgTableRep ) );
 
 ####################################
 #

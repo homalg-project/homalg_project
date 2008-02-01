@@ -31,16 +31,16 @@ DeclareRepresentation( "IsRightRelationsForHomalgRep",
 
 # a new family:
 BindGlobal( "RelationsForHomalgFamily",
-        NewFamily( "RelationsForHomalgFamily" ));
+        NewFamily( "RelationsForHomalgFamily" ) );
 
 # two new types:
 BindGlobal( "LeftRelationsForHomalgType",
         NewType(  RelationsForHomalgFamily,
-                IsLeftRelationsForHomalgRep ));
+                IsLeftRelationsForHomalgRep ) );
 
 BindGlobal( "RightRelationsForHomalgType",
         NewType(  RelationsForHomalgFamily,
-                IsRightRelationsForHomalgRep ));
+                IsRightRelationsForHomalgRep ) );
 
 ####################################
 #

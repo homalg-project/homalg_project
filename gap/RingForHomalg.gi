@@ -31,16 +31,16 @@ DeclareRepresentation( "IsExternalRingRep",
 
 # a new family:
 BindGlobal( "HomalgRingsFamily",
-        NewFamily( "HomalgRingsFamily" ));
+        NewFamily( "HomalgRingsFamily" ) );
 
 # two new types:
 BindGlobal( "HomalgInternalRingType",
         NewType( HomalgRingsFamily ,
-                IsInternalRingRep ));
+                IsInternalRingRep ) );
 
 BindGlobal( "HomalgExternalRingType",
         NewType( HomalgRingsFamily ,
-                IsExternalRingRep ));
+                IsExternalRingRep ) );
 
 ####################################
 #

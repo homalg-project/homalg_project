@@ -37,31 +37,31 @@ DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgModules" );
 ## left modules:
 
 DeclareProperty( "IsFreeModule", ## FIXME: the name should be changed to IsFreeLeftModule
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsStablyFreeLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsProjectiveLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsReflexiveLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsTorsionFreeLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsArtinianLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsCyclicLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsTorsionLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 DeclareProperty( "IsHolonomicLeftModule",
-        IsLeftModule and IsModuleForHomalg );
+        IsModuleForHomalg and IsLeftModule );
 
 ## all modules:
 
@@ -73,6 +73,9 @@ DeclareProperty( "IsZeroModule",
 # attributes:
 #
 ####################################
+
+DeclareAttribute( "RankOfLeftModule",
+        IsModuleForHomalg and IsLeftModule );
 
 ####################################
 #
@@ -164,4 +167,7 @@ DeclareOperation( "SyzygiesGenerators",
 
 DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
         PositionOfTheDefaultSetOfRelations );
+
+DeclareSynonym( "EulerCharacteristicOfLeftModule",
+        RankOfLeftModule );
 

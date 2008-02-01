@@ -110,3 +110,99 @@ InstallMethod( EffectivelyDecideZeroColumns,
     
 end );
 
+##
+InstallMethod( SyzygiesBasisOfRows,
+        "for homalg matrices",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, S;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.SyzygiesBasisOfRows) then
+        return RP!.SyzygiesBasisOfRows( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    S := SyzygiesGeneratorsOfRows( M, [ ] );
+    
+    return BasisOfRows( S );
+    
+end );
+
+##
+InstallMethod( SyzygiesBasisOfRows,
+        "for homalg matrices",
+	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+        
+  function( M1, M2 )
+    local R, RP, S;
+    
+    R := HomalgRing( M1 );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.SyzygiesBasisOfRows) then
+        return RP!.SyzygiesBasisOfRows( M1, M2 );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    S := SyzygiesGeneratorsOfRows( M1, M2 );
+    
+    return BasisOfRows( S );
+    
+end );
+
+##
+InstallMethod( SyzygiesBasisOfColumns,
+        "for homalg matrices",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, S;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.SyzygiesBasisOfColumns) then
+        return RP!.SyzygiesBasisOfColumns( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    S := SyzygiesGeneratorsOfColumns( M, [ ] );
+    
+    return BasisOfColumns( S );
+    
+end );
+
+##
+InstallMethod( SyzygiesBasisOfColumns,
+        "for homalg matrices",
+	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+        
+  function( M1, M2 )
+    local R, RP, S;
+    
+    R := HomalgRing( M1 );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.SyzygiesBasisOfColumns) then
+        return RP!.SyzygiesBasisOfColumns( M1, M2 );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    S := SyzygiesGeneratorsOfColumns( M1, M2 );
+    
+    return BasisOfColumns( S );
+    
+end );
+

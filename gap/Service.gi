@@ -302,7 +302,7 @@ InstallMethod( BasisOfColumns,
   function( M )
     local C, bts;
     
-    C := MatrixForHomalg( "zero", 0, NrColumns( M ), HomalgRing( M ) );
+    C := MatrixForHomalg( "zero", NrRows( M ), 0, HomalgRing( M ) );
     
     if HasBottomSide( M ) then
         bts := BottomSide( M );
@@ -322,7 +322,7 @@ InstallMethod( BasisOfColumns,
   function( M )
     local C, bts;
     
-    C := MatrixForHomalg( "identity", 0, NrColumns( M ), HomalgRing( M ) );
+    C := MatrixForHomalg( "identity", NrColumns( M ), HomalgRing( M ) );
     
     if HasBottomSide( M ) then
         bts := BottomSide( M );

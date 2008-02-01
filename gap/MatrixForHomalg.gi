@@ -31,16 +31,16 @@ DeclareRepresentation( "IsHomalgExternalMatrixRep",
 
 # a new family:
 BindGlobal( "HomalgMatricesFamily",
-        NewFamily( "HomalgMatricesFamily" ));
+        NewFamily( "HomalgMatricesFamily" ) );
 
 # two new types:
 BindGlobal( "HomalgInternalMatrixType",
         NewType( HomalgMatricesFamily ,
-                IsHomalgInternalMatrixRep ));
+                IsHomalgInternalMatrixRep ) );
 
 BindGlobal( "HomalgExternalMatrixType",
         NewType( HomalgMatricesFamily ,
-                IsHomalgExternalMatrixRep ));
+                IsHomalgExternalMatrixRep ) );
 
 ####################################
 #
