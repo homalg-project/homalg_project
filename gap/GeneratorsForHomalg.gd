@@ -55,6 +55,9 @@ DeclareOperation( "MatrixOfGenerators",
 DeclareOperation( "HomalgRing",
         [ IsGeneratorsForHomalg ] );
 
+DeclareOperation( "RelationsOfHullModule",
+        [ IsGeneratorsForHomalg ] );
+
 DeclareOperation( "MatrixOfRelations",
         [ IsGeneratorsForHomalg ] );
 

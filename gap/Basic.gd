@@ -40,3 +40,13 @@ DeclareOperation( "SyzygiesBasisOfRows",
 DeclareOperation( "SyzygiesBasisOfColumns",
         [ IsMatrixForHomalg, IsMatrixForHomalg ] );
 
+DeclareOperation( "RightDivide",
+        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+
+DeclareOperation( "Leftinverse",
+        [ IsMatrixForHomalg ] );
+
+# global functions:
+
+DeclareGlobalFunction( "BetterGenerators" );
+

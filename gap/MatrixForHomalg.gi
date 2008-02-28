@@ -59,12 +59,6 @@ InstallTrueMethod( IsFullColumnRankMatrix, IsMatrixForHomalg and IsIdentityMatri
 
 ####################################
 #
-# methods for properties:
-#
-####################################
-
-####################################
-#
 # immediate methods for properties:
 #
 ####################################
@@ -80,6 +74,20 @@ InstallImmediateMethod( IsEmptyMatrix,
     else
         return false;
     fi;
+    
+end );
+
+##
+InstallImmediateMethod( IsEmptyMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsEmptyMatrix( PreEval( M ) ) then
+        return IsEmptyMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -112,6 +120,20 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
+InstallImmediateMethod( IsZeroMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( PreEval( M ) ) then
+        return IsZeroMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsFullRowRankMatrix,
         IsMatrixForHomalg and HasNrRows, 0,
         
@@ -126,6 +148,20 @@ InstallImmediateMethod( IsFullRowRankMatrix,
 end );
 
 ##
+InstallImmediateMethod( IsFullRowRankMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsFullRowRankMatrix( PreEval( M ) ) then
+        return IsFullRowRankMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsFullColumnRankMatrix,
         IsMatrixForHomalg and HasNrColumns, 0,
         
@@ -133,6 +169,20 @@ InstallImmediateMethod( IsFullColumnRankMatrix,
     
     if NrColumns( M ) = 0 then
         return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullColumnRankMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsFullColumnRankMatrix( PreEval( M ) ) then
+        return IsFullColumnRankMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -161,6 +211,40 @@ InstallImmediateMethod( IsFullColumnRankMatrix,
     
     if HasIsFullRowRankMatrix( EvalInvolution( M ) ) then
         return IsFullRowRankMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
+# immediate methods for attributes:
+#
+####################################
+
+##
+InstallImmediateMethod( NrRows,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasNrRows( PreEval( M ) ) then
+        return NrRows( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( NrColumns,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasNrColumns( PreEval( M ) ) then
+        return NrColumns( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -235,6 +319,53 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     
 end );
 
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasRowRankOfMatrix( PreEval( M ) ) then
+        return RowRankOfMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasColumnRankOfMatrix( PreEval( M ) ) then
+        return ColumnRankOfMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsZeroMatrix,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep ],
+        
+  function( M )
+    
+    return M = MatrixForHomalg( "zero", NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+
+
 ####################################
 #
 # methods for operations:
@@ -249,6 +380,17 @@ InstallMethod( HomalgRing,
   function( M )
     
     return M!.ring;
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalMatrixRep ],
+        
+  function( M1, M2 )
+    
+    return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) and Eval( M1 ) = Eval( M2 );
     
 end );
 
@@ -984,6 +1126,72 @@ InstallMethod( GetSide,
     
 end );
 
+##
+InstallMethod( ZeroRows,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( C )
+    
+    return [ 1 .. NrRows( C ) ];
+    
+end );
+
+##
+InstallMethod( ZeroColumns,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( C )
+    
+    return [ 1 .. NrColumns( C ) ];
+    
+end );
+
+##
+InstallMethod( NonZeroRows,
+        "for homalg matrices",
+        [ IsMatrixForHomalg ],
+        
+  function( C )
+    
+    return Filtered( [ 1 .. NrRows( C ) ], x -> not x in ZeroRows( C ) );
+    
+end );
+
+##
+InstallMethod( NonZeroColumns,
+        "for homalg matrices",
+        [ IsMatrixForHomalg ],
+        
+  function( C )
+    
+    return Filtered( [ 1 .. NrColumns( C ) ], x -> not x in ZeroColumns( C ) );
+    
+end );
+
+##
+InstallMethod( NonZeroRows,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( C )
+    
+    return [ ];
+    
+end );
+
+##
+InstallMethod( NonZeroColumns,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( C )
+    
+    return [ ];
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -992,11 +1200,11 @@ end );
 
 InstallGlobalFunction( MatrixForHomalg,
   function( arg )
-    local nar, R, matrix, M;
+    local nargs, R, matrix, M;
     
-    nar := Length( arg );
+    nargs := Length( arg );
     
-    R := arg[nar];
+    R := arg[nargs];
     
     if not IsRingForHomalg( R ) then
         Error( "the last argument must be an IsRingForHomalg" );

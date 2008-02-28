@@ -159,6 +159,9 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "SyzygiesGenerators",
         [ IsModuleForHomalg, IsList ] );
 
+DeclareOperation( "BetterPresentation",
+        [ IsModuleForHomalg ] );
+
 ####################################
 #
 # synonyms:

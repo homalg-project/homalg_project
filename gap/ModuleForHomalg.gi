@@ -550,7 +550,8 @@ InstallMethod( Presentation,
         gens := CreateSetsOfGeneratorsForLeftModule( [], R );
         is_zero_module := true;
     else
-        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", NrGenerators( rel ), R ), R );
+        gens := CreateSetsOfGeneratorsForLeftModule(
+                        MatrixForHomalg( "identity", NrGenerators( rel ), R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
@@ -592,7 +593,8 @@ InstallMethod( Presentation,
         gens := CreateSetsOfGeneratorsForRightModule( [], R );
         is_zero_module := true;
     else
-        gens := CreateSetsOfGeneratorsForRightModule( MatrixForHomalg( "IdentityMatrix", NrGenerators( rel ), R ), R );
+        gens := CreateSetsOfGeneratorsForRightModule(
+                        MatrixForHomalg( "identity", NrGenerators( rel ), R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel );
@@ -634,9 +636,11 @@ InstallMethod( LeftPresentation,
         gens := CreateSetsOfGeneratorsForLeftModule( [], R );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
-        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
+        gens := CreateSetsOfGeneratorsForLeftModule(
+                        MatrixForHomalg( "identity", Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
     else ## only one generator
-        gens := CreateSetsOfGeneratorsForLeftModule( MatrixForHomalg( "IdentityMatrix", 1, R ), R );
+        gens := CreateSetsOfGeneratorsForLeftModule(
+                        MatrixForHomalg( "identity", 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -713,9 +717,11 @@ InstallMethod( RightPresentation,
         gens := CreateSetsOfGeneratorsForRightModule( [], R );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
-        gens := CreateSetsOfGeneratorsForRightModule( MatrixForHomalg( "IdentityMatrix", Length( rel ), R ), R ); ## FIXME: Length( rel )
+        gens := CreateSetsOfGeneratorsForRightModule(
+                        MatrixForHomalg( "identity", Length( rel ), R ), R ); ## FIXME: Length( rel )
     else ## only one generator
-        gens := CreateSetsOfGeneratorsForRightModule( MatrixForHomalg( "IdentityMatrix", 1, R ), R );
+        gens := CreateSetsOfGeneratorsForRightModule(
+                        MatrixForHomalg( "identity", 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel, R );
@@ -891,7 +897,7 @@ InstallMethod( ViewObj,
             rel_string := " relations";
         fi;
     fi;
-    Print( "A right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
+    Print( "<A right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
     
 end );
 

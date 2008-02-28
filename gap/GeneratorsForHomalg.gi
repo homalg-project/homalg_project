@@ -14,6 +14,8 @@
 #
 ####################################
 
+## CAUTION: in the code we use the the following two reps are the only ones!!!!
+
 # two new representations for the category IsGeneratorsForHomalg:
 DeclareRepresentation( "IsLeftGeneratorsForHomalgRep",
         IsGeneratorsForHomalg,
@@ -71,18 +73,29 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( RelationsOfHullModule,
+        "for sets of generators of homalg modules",
+        [ IsGeneratorsForHomalg ],
+        
+  function( gen )
+    
+    return gen!.relations_of_hullmodule;
+    
+end );
+
+##
 InstallMethod( MatrixOfRelations,
         "for sets of generators of homalg modules",
         [ IsGeneratorsForHomalg ],
         
   function( gen )
     
-    return gen!.relations;
+    return MatrixOfRelations( RelationsOfHullModule( gen ) );
     
 end );
 
 ##
-InstallMethod( NrGenerators,
+InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
         [ IsLeftGeneratorsForHomalgRep ],
         
@@ -93,7 +106,7 @@ InstallMethod( NrGenerators,
 end );
 
 ##
-InstallMethod( NrGenerators,
+InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
         [ IsRightGeneratorsForHomalgRep ],
         
@@ -119,7 +132,7 @@ InstallMethod( BasisOfModule,
     bas := CreateGeneratorsForLeftModule( gen!.BasisOfModule, HomalgRing( gen ) );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
-        
+    
     return MatrixOfGenerators( bas ); ## FIXME
 end );
 
@@ -146,31 +159,14 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of generators of homalg modules",
-	[ IsLeftGeneratorsForHomalgRep ],
+	[ IsGeneratorsForHomalg ],
         
   function( gen )
     
     if HasIsReduced( gen ) and IsReduced( gen ) then
         return MatrixOfGenerators( gen );
     elif not IsBound( gen!.DecideZero ) then
-        gen!.DecideZero := DecideZeroRows( MatrixOfGenerators( gen ), MatrixOfRelations( gen ) );
-        SetIsReduced( gen, false );
-    fi;
-    
-    return gen!.DecideZero;
-end );
-
-##
-InstallMethod( DecideZero,
-        "for sets of generators of homalg modules",
-	[ IsRightGeneratorsForHomalgRep ],
-        
-  function( gen )
-    
-    if HasIsReduced( gen ) and IsReduced( gen ) then
-        return MatrixOfGenerators( gen );
-    elif not IsBound( gen!.DecideZero ) then
-        gen!.DecideZero := DecideZeroColumns( MatrixOfGenerators( gen ), MatrixOfRelations( gen ) );
+        gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), RelationsOfHullModule( gen ) );
         SetIsReduced( gen, false );
     fi;
     
@@ -185,11 +181,11 @@ end );
 
 InstallGlobalFunction( CreateGeneratorsForLeftModule,
   function( arg )
-    local nar, ar, R, generators, relations_of_hullmodule, gen;
+    local nargs, ar, R, generators, relations_of_hullmodule, gen;
     
-    nar := Length( arg );
+    nargs := Length( arg );
     
-    for ar in arg{ [2 .. nar ] } do
+    for ar in arg{ [ 2 .. nargs ] } do
         if IsRingForHomalg( ar ) then
             R := ar;
             break;
@@ -201,22 +197,22 @@ InstallGlobalFunction( CreateGeneratorsForLeftModule,
     elif IsBound( R ) then
         generators := MatrixForHomalg( arg[1], R );
     else
-        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nar], "\n" );
+        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
     fi;
     
-    for ar in arg{ [ 2 .. nar ] } do
+    for ar in arg{ [ 2 .. nargs ] } do
         if IsRelationsForHomalg( ar ) then
             relations_of_hullmodule := ar;
             break;
         elif IsMatrixForHomalg( ar ) then
             relations_of_hullmodule := CreateRelationsForLeftModule( ar );
             break;
-        elif nar > 2 then
+        elif nargs > 2 then
             if IsBound( R ) then
                 relations_of_hullmodule := CreateRelationsForLeftModule( ar, R );
                 break;
             else
-                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nar], "\n" );
+                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
             fi;
         fi;
     od;
@@ -242,11 +238,11 @@ end );
 
 InstallGlobalFunction( CreateGeneratorsForRightModule,
   function( arg )
-    local nar, ar, R, generators, relations_of_hullmodule, gen;
+    local nargs, ar, R, generators, relations_of_hullmodule, gen;
     
-    nar := Length( arg );
+    nargs := Length( arg );
     
-    for ar in arg{ [ 2 .. nar ] } do
+    for ar in arg{ [ 2 .. nargs ] } do
         if IsRingForHomalg( ar ) then
             R := ar;
             break;
@@ -258,22 +254,22 @@ InstallGlobalFunction( CreateGeneratorsForRightModule,
     elif IsBound( R ) then
         generators := MatrixForHomalg( arg[1], R );
     else
-        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nar], "\n" );
+        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
     fi;
     
-    for ar in arg{ [ 2 .. nar ] } do
+    for ar in arg{ [ 2 .. nargs ] } do
         if IsRelationsForHomalg( ar ) then
             relations_of_hullmodule := ar;
             break;
         elif IsMatrixForHomalg( ar ) then
             relations_of_hullmodule := CreateRelationsForRightModule( ar );
             break;
-        elif nar > 2 then
+        elif nargs > 2 then
             if IsBound( R ) then
                 relations_of_hullmodule := CreateRelationsForRightModule( ar, R );
                 break;
             else
-                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nar], "\n" );
+                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
             fi;
         fi;
     od;

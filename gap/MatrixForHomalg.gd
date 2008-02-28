@@ -50,18 +50,6 @@ DeclareProperty( "IsEmptyMatrix",
 DeclareAttribute( "Eval",
         IsMatrixForHomalg );
 
-DeclareAttribute( "NrRows",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "NrColumns",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "RowRankOfMatrix",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "ColumnRankOfMatrix",
-        IsMatrixForHomalg );
-
 DeclareAttribute( "EvalInvolution",
         IsMatrixForHomalg );
 
@@ -101,6 +89,21 @@ DeclareAttribute( "EvalAddBts",
 DeclareAttribute( "EvalGetSide",
         IsMatrixForHomalg );
 
+DeclareAttribute( "PreEval",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "NrRows",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "NrColumns",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "RowRankOfMatrix",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "ColumnRankOfMatrix",
+        IsMatrixForHomalg );
+
 DeclareAttribute( "RightHandSide",
         IsMatrixForHomalg );
 
@@ -108,9 +111,6 @@ DeclareAttribute( "BottomSide",
         IsMatrixForHomalg );
 
 DeclareAttribute( "CompatibilityConditions",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "PreEval",
         IsMatrixForHomalg );
 
 ####################################
@@ -184,4 +184,16 @@ DeclareOperation( "AddBts",
 
 DeclareOperation( "GetSide",
         [ IsString, IsMatrixForHomalg ] );
+
+DeclareOperation( "ZeroRows",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "ZeroColumns",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "NonZeroRows",
+        [ IsMatrixForHomalg ] );
+
+DeclareOperation( "NonZeroColumns",
+        [ IsMatrixForHomalg ] );
 

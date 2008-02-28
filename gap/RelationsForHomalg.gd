@@ -78,6 +78,12 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "SyzygiesGenerators",
         [ IsRelationsForHomalg, IsList ] );
 
+DeclareOperation( "NonZeroGenerators",
+        [ IsRelationsForHomalg ] );
+
+DeclareOperation( "BetterBasis",
+        [ IsRelationsForHomalg ] );
+
 ####################################
 #
 # synonyms:

@@ -175,7 +175,117 @@ InstallMethod( TriangularBasisOfColumns,
 end );
 
 ##
-InstallMethod( BasisOfRows,
+InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
+        "for homalg matrices",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, U, B, rank, Ur, Uc;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.BasisOfRowModule) then
+        return RP!.BasisOfRowModule( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    if HasRightHandSide( M ) then
+        if IsHomalgInternalMatrixRep( M ) then
+            U := MatrixForHomalg( "internal", R );
+        else
+            U := MatrixForHomalg( "external", R );
+        fi;
+        
+        B := TriangularBasisOfRows( M, U );
+    else
+        B := TriangularBasisOfRows( M );
+    fi;
+    
+    rank := RowRankOfMatrix( B );
+    
+    if rank = 0 then
+        B := MatrixForHomalg( "zero", 0, NrColumns( B ), R);
+    else
+        B := CertainRows( B, [1..rank] );
+        
+        SetRowRankOfMatrix( B, rank );
+	
+        SetIsFullRowRankMatrix( B, true );
+    fi;
+    
+    if HasRightHandSide( M ) then
+        Ur := CertainRows( U, [ 1 .. rank ] );
+        Uc := CertainRows( U, [ rank + 1 .. NrRows( M ) ] );
+        
+        SetRightHandSide( B, Ur * RightHandSide( M ) );
+        
+        SetCompatibilityConditions( B, Uc * RightHandSide( M ) );
+    fi;
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfModule (low-level))
+        "for homalg matrices",
+	[ IsMatrixForHomalg ],
+        
+  function( M )
+    local R, RP, U, B, rank, Ur, Uc;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.BasisOfColumnModule) then
+        return RP!.BasisOfColumnModule( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    if HasBottomSide( M ) then
+        if IsHomalgInternalMatrixRep( M ) then
+            U := MatrixForHomalg( "internal", R );
+        else
+            U := MatrixForHomalg( "external", R );
+        fi;
+        
+        B := TriangularBasisOfColumns( M, U );
+    else
+        B := TriangularBasisOfColumns( M );
+    fi;
+    
+    rank := ColumnRankOfMatrix( B );
+    
+    if rank = 0 then
+        B := MatrixForHomalg( "zero", NrRows( B ), 0, R);
+    else
+        B := CertainColumns( B, [1..rank] );
+        
+        SetColumnRankOfMatrix( B, rank );
+	
+        SetIsFullColumnRankMatrix( B, true );
+    fi;
+    
+    if HasBottomSide( M ) then
+        Ur := CertainColumns( U, [ 1 .. rank ] );
+        Uc := CertainColumns( U, [ rank + 1 .. NrColumns( M ) ] );
+        
+        SetBottomSide( B, BottomSide( M ) * Ur );
+        
+        SetCompatibilityConditions( B, BottomSide( M ) * Uc );
+    fi;
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-level))
         "for homalg matrices",
 	[ IsMatrixForHomalg ],
         
@@ -255,7 +365,7 @@ InstallMethod( BasisOfRows,
 end );
 
 ##
-InstallMethod( BasisOfColumns,
+InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (high-level))
         "for homalg matrices",
 	[ IsMatrixForHomalg ],
         
@@ -335,117 +445,7 @@ InstallMethod( BasisOfColumns,
 end );
 
 ##
-InstallMethod( BasisOfRowModule,
-        "for homalg matrices",
-	[ IsMatrixForHomalg ],
-        
-  function( M )
-    local R, RP, U, B, rank, Ur, Uc;
-    
-    R := HomalgRing( M );
-    
-    RP := HomalgTable( R );
-  
-    if IsBound(RP!.BasisOfRowModule) then
-        return RP!.BasisOfRowModule( M );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    if HasRightHandSide( M ) then
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
-        
-        B := TriangularBasisOfRows( M, U );
-    else
-        B := TriangularBasisOfRows( M );
-    fi;
-    
-    rank := RowRankOfMatrix( B );
-    
-    if rank = 0 then
-        B := MatrixForHomalg( "zero", 0, NrColumns( B ), R);
-    else
-        B := CertainRows( B, [1..rank] );
-        
-        SetRowRankOfMatrix( B, rank );
-	
-        SetIsFullRowRankMatrix( B, true );
-    fi;
-    
-    if HasRightHandSide( M ) then
-        Ur := CertainRows( U, [ 1 .. rank ] );
-        Uc := CertainRows( U, [ rank + 1 .. NrRows( M ) ] );
-        
-        SetRightHandSide( B, Ur * RightHandSide( M ) );
-        
-        SetCompatibilityConditions( B, Uc * RightHandSide( M ) );
-    fi;
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( BasisOfColumnModule,
-        "for homalg matrices",
-	[ IsMatrixForHomalg ],
-        
-  function( M )
-    local R, RP, U, B, rank, Ur, Uc;
-    
-    R := HomalgRing( M );
-    
-    RP := HomalgTable( R );
-  
-    if IsBound(RP!.BasisOfColumnModule) then
-        return RP!.BasisOfColumnModule( M );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    if HasBottomSide( M ) then
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
-        
-        B := TriangularBasisOfColumns( M, U );
-    else
-        B := TriangularBasisOfColumns( M );
-    fi;
-    
-    rank := ColumnRankOfMatrix( B );
-    
-    if rank = 0 then
-        B := MatrixForHomalg( "zero", NrRows( B ), 0, R);
-    else
-        B := CertainColumns( B, [1..rank] );
-        
-        SetColumnRankOfMatrix( B, rank );
-	
-        SetIsFullColumnRankMatrix( B, true );
-    fi;
-    
-    if HasBottomSide( M ) then
-        Ur := CertainColumns( U, [ 1 .. rank ] );
-        Uc := CertainColumns( U, [ rank + 1 .. NrColumns( M ) ] );
-        
-        SetBottomSide( B, BottomSide( M ) * Ur );
-        
-        SetCompatibilityConditions( B, BottomSide( M ) * Uc );
-    fi;
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( DecideZeroRows,
+InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         "for homalg matrices",
 	[ IsMatrixForHomalg, IsMatrixForHomalg ],
         
@@ -527,7 +527,7 @@ InstallMethod( DecideZeroRows,
 end );
 
 ##
-InstallMethod( DecideZeroColumns,
+InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         "for homalg matrices",
 	[ IsMatrixForHomalg, IsMatrixForHomalg ],
         
@@ -641,7 +641,7 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( SyzygiesGeneratorsOfRows,
+InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
         "for homalg matrices",
 	[ IsMatrixForHomalg, IsMatrixForHomalg ],
         
@@ -699,7 +699,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
 end );
 
 ##
-InstallMethod( SyzygiesGeneratorsOfColumns,
+InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
         "for homalg matrices",
 	[ IsMatrixForHomalg, IsMatrixForHomalg ],
         

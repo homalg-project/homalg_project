@@ -27,18 +27,18 @@ InstallMethod( CreateHomalgTable,
                ## (HomalgTable gives no default value)
                BestBasis := 
                  function( arg )
-                   local M, R, nar, N, S;
+                   local M, R, nargs, N, S;
                    
                    M := arg[1];
                    
                    R := HomalgRing( M );
                    
-                   nar := Length( arg );
+                   nargs := Length( arg );
                    
-                   if nar > 2 then
+                   if nargs > 2 then
                        ## compute N, U, and V: (1+4+8)
                        N := NormalFormIntMat( Eval( M ), 13 );
-                   elif nar > 1 then
+                   elif nargs > 1 then
                        ## compute N and U: (1+4)
                        N := NormalFormIntMat( Eval( M ), 5 );
                    else
@@ -47,7 +47,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # return U:
-                   if nar > 1 then
+                   if nargs > 1 then
                        SetEval( arg[2], N.rowtrans );
 		       SetNrRows( arg[2], NrRows( M ) );
 		       SetNrColumns( arg[2], NrRows( M ) );
@@ -56,7 +56,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # return V;
-                   if nar > 2 then
+                   if nargs > 2 then
                        SetEval( arg[3], N.coltrans );
 		       SetNrRows( arg[3], NrColumns( M ) );
 		       SetNrColumns( arg[3], NrColumns( M ) );
@@ -75,15 +75,15 @@ InstallMethod( CreateHomalgTable,
                ## Must be defined if other functions are not defined
                TriangularBasisOfRows :=
                  function( arg )
-                   local M, R, nar, N, H;
+                   local M, R, nargs, N, H;
                    
                    M := arg[1];
                    
                    R := HomalgRing( M );
                    
-                   nar := Length( arg );
+                   nargs := Length( arg );
                    
-                   if nar > 1 then
+                   if nargs > 1 then
                        ## compute N and U: (0+2+4)
                        N := NormalFormIntMat( Eval( M ), 6 );
                    else
@@ -92,7 +92,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # return U:
-                   if nar > 1 then
+                   if nargs > 1 then
                        SetEval( arg[2], N.rowtrans );
 		       SetNrRows( arg[2], NrRows( M ) );
 		       SetNrColumns( arg[2], NrRows( M ) );

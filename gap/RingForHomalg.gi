@@ -220,9 +220,9 @@ end );
 
 InstallGlobalFunction( RingForHomalg,
   function( arg )
-    local nar, homalg_ring, type;
+    local nargs, homalg_ring, type;
     
-    nar := Length( arg );
+    nargs := Length( arg );
     
     homalg_ring := rec( ring := arg[1] );
     
@@ -239,7 +239,7 @@ InstallGlobalFunction( RingForHomalg,
     ## Objectify:
     ObjectifyWithAttributes(
             homalg_ring, type,
-            HomalgTable, arg[nar] );
+            HomalgTable, arg[nargs] );
     
     return homalg_ring;
     

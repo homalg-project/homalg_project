@@ -64,7 +64,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
     if Length( arg ) = 1 then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := arg[1] );
-    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{ [1..3] } ) = "unk" then
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else
@@ -86,7 +86,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
     if Length( arg ) = 1 then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := arg[1] );
-    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{ [1..3] }) = "unk" then
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
                           1 := "unknown relations" );
     else

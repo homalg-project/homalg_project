@@ -14,6 +14,8 @@
 #
 ####################################
 
+## CAUTION: in the code we use the the following two reps are the only ones!!!!
+
 # two new representations for the category IsRelationsForHomalg:
 DeclareRepresentation( "IsLeftRelationsForHomalgRep",
         IsRelationsForHomalg,
@@ -71,7 +73,7 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( NrGenerators,
+InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsLeftRelationsForHomalgRep ],
         
@@ -82,7 +84,7 @@ InstallMethod( NrGenerators,
 end );
 
 ##
-InstallMethod( NrGenerators,
+InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsRightRelationsForHomalgRep ],
         
@@ -93,7 +95,7 @@ InstallMethod( NrGenerators,
 end );
 
 ##
-InstallMethod( NrRelations,
+InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
         [ IsLeftRelationsForHomalgRep ],
         
@@ -104,7 +106,7 @@ InstallMethod( NrRelations,
 end );
 
 ##
-InstallMethod( NrRelations,
+InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
         [ IsRightRelationsForHomalgRep ],
         
@@ -161,7 +163,7 @@ InstallMethod( BasisOfModule,
         
   function( rel )
     
-    return MatrixOfRelations( rel );
+    return rel;
     
 end );
 
@@ -292,6 +294,64 @@ InstallMethod( SyzygiesGenerators,
   function( M1, M2 )
     
     return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M1 ), [ ] );
+    
+end );
+
+##
+InstallMethod( NonZeroGenerators,
+        "for sets of relations of homalg modules",
+        [ IsRelationsForHomalg ],
+        
+  function( M )
+    local R, RP, id, gen;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+    
+    id := MatrixForHomalg( "identity", NrGenerators( M ), R );
+    
+    if IsLeftRelationsForHomalgRep( M ) then
+        gen := CreateGeneratorsForLeftModule( id, BasisOfModule( M ) );
+        gen := DecideZero( gen );
+        return NonZeroRows( gen );
+    else
+        gen := CreateGeneratorsForRightModule( id, BasisOfModule( M ) );
+        gen := DecideZero( gen );
+        return NonZeroColumns( gen );
+    fi;
+    
+end );
+
+##
+InstallMethod( BetterBasis,			### defines: BetterBasis
+        "for sets of relations of homalg modules",
+        [ IsRelationsForHomalg ],
+        
+  function( _M )
+    local R, RP, M;
+    
+    R := HomalgRing( _M );
+    
+    RP := HomalgTable( R );
+    
+    if IsLeftRelationsForHomalgRep( _M ) then
+        if IsBound(RP!.SimplifyBasisOfRows) then
+            M := RP!.SimplifyBasisOfRows( _M );
+        else
+            M := MatrixOfRelations( _M );
+        fi;
+        
+        return CreateRelationsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
+    else
+        if IsBound(RP!.SimplifyBasisOfColumns) then
+            M := RP!.SimplifyBasisOfColumns( _M );
+        else
+            M := MatrixOfRelations( _M );
+        fi;
+        
+        return CreateRelationsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
+    fi;
     
 end );
 
