@@ -174,7 +174,7 @@ InstallMethod( DecideZero,
         
   function( mat, rel )
     
-    return DecideZeroRows( mat, BasisOfModule( rel ) );
+    return DecideZeroRows( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
     
 end );
 
@@ -185,7 +185,7 @@ InstallMethod( DecideZero,
         
   function( mat, rel )
     
-    return DecideZeroColumns( mat, BasisOfModule( rel ) );
+    return DecideZeroColumns( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
     
 end );
 
@@ -233,23 +233,23 @@ end );
 
 ##
 InstallMethod( EffectivelyDecideZero,
-        "for sets of relations of homalg modules",
+        "modulo a set of relations of a homalg module",
 	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
         
   function( mat, rel )
     
-    return EffectivelyDecideZeroRows( mat, BasisOfModule( rel ) );
+    return EffectivelyDecideZeroRows( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
     
 end );
 
 ##
 InstallMethod( EffectivelyDecideZero,
-        "for sets of relations of homalg modules",
+        "modulo a set of relations of a homalg module",
 	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
         
   function( mat, rel )
     
-    return EffectivelyDecideZeroColumns( mat, BasisOfModule( rel ) );
+    return EffectivelyDecideZeroColumns( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
     
 end );
 
