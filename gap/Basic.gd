@@ -48,5 +48,5 @@ DeclareOperation( "Leftinverse",
 
 # global functions:
 
-DeclareGlobalFunction( "BetterGenerators" );
+DeclareGlobalFunction( "BetterEquivalentMatrix" );
 

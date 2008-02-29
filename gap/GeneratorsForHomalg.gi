@@ -133,7 +133,7 @@ InstallMethod( BasisOfModule,
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
     
-    return MatrixOfGenerators( bas ); ## FIXME
+    return CreateRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME
 end );
 
 ##
@@ -153,7 +153,7 @@ InstallMethod( BasisOfModule,
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
         
-    return MatrixOfGenerators( bas ); ## FIXME
+    return CreateRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME
 end );
 
 ##
@@ -167,6 +167,21 @@ InstallMethod( DecideZero,
         return MatrixOfGenerators( gen );
     elif not IsBound( gen!.DecideZero ) then
         gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), RelationsOfHullModule( gen ) );
+        SetIsReduced( gen, false );
+    fi;
+    
+    return gen!.DecideZero;
+end );
+
+##
+InstallMethod( DecideZero,
+        "for sets of generators of homalg modules",
+	[ IsGeneratorsForHomalg, IsRelationsForHomalg ],
+        
+  function( gen, rel )
+    
+    if not IsBound( gen!.DecideZero ) then
+        gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), rel );
         SetIsReduced( gen, false );
     fi;
     

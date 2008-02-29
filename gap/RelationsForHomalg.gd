@@ -29,6 +29,9 @@ DeclareCategory( "IsRelationsForHomalg",
 DeclareProperty( "CanBeUsedToEffectivelyDecideZero",
         IsRelationsForHomalg );
 
+DeclareProperty( "IsReducedSetOfRelations",
+        IsRelationsForHomalg );
+
 ####################################
 #
 # attributes:
@@ -65,6 +68,9 @@ DeclareOperation( "BasisOfModule",
 
 DeclareOperation( "DecideZero",
         [ IsMatrixForHomalg, IsRelationsForHomalg ] );
+
+DeclareOperation( "DecideZero",
+        [ IsRelationsForHomalg, IsRelationsForHomalg ] );
 
 DeclareOperation( "BasisCoeff",
         [ IsRelationsForHomalg ] );

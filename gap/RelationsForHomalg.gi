@@ -190,6 +190,28 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( DecideZero,
+        "for sets of relations of homalg modules",
+	[ IsLeftRelationsForHomalgRep, IsLeftRelationsForHomalgRep ],
+        
+  function( rel_, rel )
+    
+    return CreateRelationsForLeftModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for sets of relations of homalg modules",
+	[ IsRightRelationsForHomalgRep, IsRightRelationsForHomalgRep ],
+        
+  function( rel_, rel )
+    
+    return CreateRelationsForRightModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
+    
+end );
+
+##
 InstallMethod( BasisCoeff,
         "for sets of relations of homalg modules",
 	[ IsLeftRelationsForHomalgRep ],
@@ -337,7 +359,7 @@ InstallMethod( BetterBasis,			### defines: BetterBasis
     
     if IsLeftRelationsForHomalgRep( _M ) then
         if IsBound(RP!.SimplifyBasisOfRows) then
-            M := RP!.SimplifyBasisOfRows( _M );
+            M := CreateRelationsForLeftModule( RP!.SimplifyBasisOfRows( _M ), R );
         else
             M := MatrixOfRelations( _M );
         fi;
@@ -345,7 +367,7 @@ InstallMethod( BetterBasis,			### defines: BetterBasis
         return CreateRelationsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
     else
         if IsBound(RP!.SimplifyBasisOfColumns) then
-            M := RP!.SimplifyBasisOfColumns( _M );
+            M := CreateRelationsForRightModule( RP!.SimplifyBasisOfColumns( _M ), R );
         else
             M := MatrixOfRelations( _M );
         fi;

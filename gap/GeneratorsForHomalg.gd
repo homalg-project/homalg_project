@@ -70,3 +70,6 @@ DeclareOperation( "BasisOfModule",
 DeclareOperation( "DecideZero",
         [ IsGeneratorsForHomalg ] );
 
+DeclareOperation( "DecideZero",
+        [ IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+

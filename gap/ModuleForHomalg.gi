@@ -296,7 +296,7 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,
 end );
 
 ##
-InstallMethod( GeneratorsOfModule,
+InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
@@ -311,7 +311,7 @@ InstallMethod( GeneratorsOfModule,
 end );
 
 ##
-InstallMethod( RelationsOfModule,
+InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -399,7 +399,7 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
     
-        ## adjust the default position:
+    ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
     
 end );
@@ -435,7 +435,37 @@ InstallMethod( AddANewPresentation,
 end );
 
 ##
-InstallMethod( BasisOfModule,
+InstallMethod( AddANewPresentation,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsGeneratorsForHomalg, IsRelationsForHomalg ],
+        
+  function( M, gen, rel )
+    local gens, rels, l;
+    
+    gens := SetsOfGenerators( M );
+    rels := SetsOfRelations( M );
+    
+    l := PositionOfLastStoredSet( rels );
+    
+    ## define the (l+1)st set of generators
+    gens!.(l+1) := gen;
+    
+    ## adjust the list of positions:
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
+    
+    ## define the (l+1)st set of relations
+    rels!.(l+1) := rel;
+    
+    ## adjust the list of positions:
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
+    
+    ## adjust the default position:
+    M!.PositionOfTheDefaultSetOfRelations := l+1;
+    
+end );
+
+##
+InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly changing the module M
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
@@ -471,7 +501,7 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( BasisCoeff,
+InstallMethod( BasisCoeff,			### CAUTION: has the side effect of possibly changing the module M
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
@@ -528,6 +558,83 @@ InstallMethod( SyzygiesGenerators,
     
 end );
 
+##
+InstallMethod( NonZeroGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return NonZeroGenerators( BasisOfModule( RelationsOfModule( M ) ) );
+    
+end );
+
+##
+InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (BetterPresentation) (incomplete)
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, bl, rel, gen;
+    
+    bl := NonZeroGenerators( M );
+    
+    if Length( bl ) <> NrGenerators( M ) then
+        
+        if IsLeftModule( M ) then
+            rel := CertainColumns( MatrixOfRelations( M ), bl );
+            rel := CertainRows( rel, NonZeroRows( rel ) );
+            rel := CreateRelationsForLeftModule( rel );
+            gen := CreateGeneratorsForLeftModule( CertainRows( MatrixOfGenerators( M ), bl ) );
+        else
+            rel := CertainRows( MatrixOfRelations( M ), bl );
+            rel := CertainColumns( rel, NonZeroColumns( rel ) );
+            rel := CreateRelationsForRightModule( rel );
+            gen := CreateGeneratorsForRightModule( CertainColumns( MatrixOfGenerators( M ), bl ) );
+        fi;
+        
+        AddANewPresentation( M, gen, rel );
+    
+    fi;
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( BetterGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        
+  function( M )
+    local R, rel, V, VI, gen;
+    
+    R := HomalgRing( M );
+    
+    rel := MatrixOfRelations( M );
+    
+    if IsHomalgInternalMatrixRep( rel ) then
+        V := MatrixForHomalg( "internal", R );
+        VI := MatrixForHomalg( "internal", R );
+    else
+        V := MatrixForHomalg( "external", R );
+        VI := MatrixForHomalg( "external", R );
+    fi;
+    
+    rel := BetterEquivalentMatrix( rel, V, VI, "", "" );
+    
+    rel := CreateRelationsForLeftModule( rel );
+    
+    gen := VI * MatrixOfGenerators( M ); ## FIXME: ...
+    
+    gen := CreateGeneratorsForLeftModule( gen );
+    
+    AddANewPresentation( M, gen, rel );
+    
+    return GetRidOfZeroGenerators( M );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -580,6 +687,47 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
+        [ IsLeftGeneratorsForHomalgRep, IsLeftRelationsForHomalgRep ],
+        
+  function( gen, rel )
+    local R, is_zero_module, gens, rels, M;
+    
+    R := HomalgRing( rel );
+    
+    is_zero_module := false;
+    
+    gens := CreateSetsOfGeneratorsForLeftModule( gen );
+    
+    if NrGenerators( rel ) = 0 then
+        is_zero_module := true;
+    fi;
+    
+    rels := CreateSetsOfRelationsForLeftModule( rel );
+    
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PositionOfTheDefaultSetOfRelations := 1 );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            M, LeftModuleFinitelyPresentedType,
+            LeftActingDomain, R,
+            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+    if is_zero_module = true then
+        SetIsZeroModule( M, true );
+    fi;
+    
+#    SetParent( gens, M );
+#    SetParent( rels, M );
+    
+    return M;
+    
+end );
+  
+##
+InstallMethod( Presentation,
+        "constructor",
         [ IsRightRelationsForHomalgRep ],
         
   function( rel )
@@ -595,6 +743,47 @@ InstallMethod( Presentation,
     else
         gens := CreateSetsOfGeneratorsForRightModule(
                         MatrixForHomalg( "identity", NrGenerators( rel ), R ), R );
+    fi;
+    
+    rels := CreateSetsOfRelationsForRightModule( rel );
+    
+    M := rec( SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PositionOfTheDefaultSetOfRelations := 1 );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            M, RightModuleFinitelyPresentedType,
+            RightActingDomain, R,
+            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+    if is_zero_module = true then
+        SetIsZeroModule( M, true );
+    fi;
+    
+#    SetParent( gens, M );
+#    SetParent( rels, M );
+    
+    return M;
+    
+end );
+  
+##
+InstallMethod( Presentation,
+        "constructor",
+        [ IsRightGeneratorsForHomalgRep, IsRightRelationsForHomalgRep ],
+        
+  function( gen, rel )
+    local R, is_zero_module, gens, rels, M;
+    
+    R := HomalgRing( rel );
+    
+    is_zero_module := false;
+    
+    gens := CreateSetsOfGeneratorsForRightModule( gen );
+    
+    if NrGenerators( rel ) = 0 then
+        is_zero_module := true;
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel );

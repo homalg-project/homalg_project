@@ -269,7 +269,7 @@ InstallMethod( Leftinverse,			### defines: Leftinverse (LeftinverseF)
 end );
 
 ##
-InstallGlobalFunction( BetterGenerators,	### defines: BetterGenerators (incomplete)
+InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
         nar_U, nar_V, nar_UI, nar_VI, m, n, finished, barg, A, CM;
@@ -284,27 +284,27 @@ InstallGlobalFunction( BetterGenerators,	### defines: BetterGenerators (incomple
     
     RP := HomalgTable( R );
   
-    if IsBound(RP!.BetterGenerators) then
-        return RP!.BetterGenerators( arg );
+    if IsBound(RP!.BetterEquivalentMatrix) then
+        return RP!.BetterEquivalentMatrix( arg );
     fi;
     
     nargs := Length( arg );
     
     if nargs = 1 then
-        ## BetterGenerators(M)
+        ## BetterEquivalentMatrix(M)
         compute_U := false;
         compute_V := false;
         compute_UI := false;
         compute_VI := false;
     elif nargs = 2 and IsMatrixForHomalg( arg[2] ) then
-        ## BetterGenerators(M,V)
+        ## BetterEquivalentMatrix(M,V)
         compute_U := false;
         compute_V := true;
         compute_UI := false;
         compute_VI := false;
         nar_V := 2;
     elif nargs > 2 and IsMatrixForHomalg( arg[2] ) and IsString( arg[3] ) then
-        ## BetterGenerators(M,VI,"")
+        ## BetterEquivalentMatrix(M,VI,"")
         compute_U := false;
         compute_V := false;
         compute_UI := false;
@@ -312,16 +312,25 @@ InstallGlobalFunction( BetterGenerators,	### defines: BetterGenerators (incomple
         nar_VI := 2;
     elif nargs > 4 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
       and IsString( arg[4] ) and IsString( arg[5] ) then
-        ## BetterGenerators(M,V,VI,"","")
+        ## BetterEquivalentMatrix(M,V,VI,"","")
         compute_U := false;
         compute_V := true;
         compute_UI := false;
         compute_VI := true;
         nar_V := 2;
         nar_VI := 3;
+    elif nargs > 5 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
+      and IsString( arg[4] ) and IsString( arg[5] ) and IsString( arg[6] ) then
+        ## BetterEquivalentMatrix(M,U,UI,"","","")
+        compute_U := true;
+        compute_V := false;
+        compute_UI := true;
+        compute_VI := false;
+        nar_U := 2;
+        nar_UI := 3;
     elif nargs > 3 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
       and IsString( arg[5] ) then
-        ## BetterGenerators(M,UI,VI,"")
+        ## BetterEquivalentMatrix(M,UI,VI,"")
         compute_U := false;
         compute_V := false;
         compute_UI := true;
@@ -330,7 +339,7 @@ InstallGlobalFunction( BetterGenerators,	### defines: BetterGenerators (incomple
         nar_VI := 3;
     elif nargs > 4 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
       and IsMatrixForHomalg( arg[4] ) and IsMatrixForHomalg( arg[5] ) then
-        ## BetterGenerators(M,U,V,UI,VI)
+        ## BetterEquivalentMatrix(M,U,V,UI,VI)
         compute_U := true;
         compute_V := true;
         compute_UI := true;
@@ -340,7 +349,7 @@ InstallGlobalFunction( BetterGenerators,	### defines: BetterGenerators (incomple
         nar_UI := 4;
         nar_VI := 5;
     elif IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] ) then
-        ## BetterGenerators(M,U,V)
+        ## BetterEquivalentMatrix(M,U,V)
         compute_U := true;
         compute_V := true;
         compute_UI := false;
@@ -356,7 +365,7 @@ InstallGlobalFunction( BetterGenerators,	### defines: BetterGenerators (incomple
     
     finished := false;
     
-    if (compute_U or compute_UI) then
+    if (compute_U or compute_UI or compute_V or compute_VI) then ## this is not a mistake
         if IsHomalgInternalMatrixRep( M ) then
             U := MatrixForHomalg( "internal", R );
         else

@@ -88,6 +88,9 @@ DeclareAttribute( "RankOfLeftModule",
 DeclareOperation( "Presentation",
         [ IsRelationsForHomalg ] );
 
+DeclareOperation( "Presentation",
+        [ IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+
 DeclareOperation( "LeftPresentation",
         [ IsList, IsSemiringWithOneAndZero ] );
 
@@ -141,6 +144,9 @@ DeclareOperation( "AddANewPresentation",
 DeclareOperation( "AddANewPresentation",
         [ IsModuleForHomalg, IsRelationsForHomalg ] );
 
+DeclareOperation( "AddANewPresentation",
+        [ IsModuleForHomalg, IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+
 DeclareOperation( "BasisOfModule",
         [ IsModuleForHomalg ] );
 
@@ -159,7 +165,13 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "SyzygiesGenerators",
         [ IsModuleForHomalg, IsList ] );
 
-DeclareOperation( "BetterPresentation",
+DeclareOperation( "NonZeroGenerators",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "GetRidOfZeroGenerators",
+        [ IsModuleForHomalg ] );
+
+DeclareOperation( "BetterGenerators",
         [ IsModuleForHomalg ] );
 
 ####################################
@@ -173,4 +185,7 @@ DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
 
 DeclareSynonym( "EulerCharacteristicOfLeftModule",
         RankOfLeftModule );
+
+DeclareSynonym( "BetterPresentation",
+        GetRidOfZeroGenerators );
 
