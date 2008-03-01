@@ -302,6 +302,8 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
         
   function( M )
     
+    #=====# begin of the core procedure #=====#
+    
     if IsBound(SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ))) then
         return SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ));
     else
@@ -316,6 +318,8 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
+    
+    #=====# begin of the core procedure #=====#
     
     if IsBound(SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ))) then;
         return SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ));
@@ -575,20 +579,60 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, bl, rel, gen;
+    local R, bl, rel, diagonal, upper, lower, gen;
+    
+    #=====# begin of the core procedure #=====#
     
     bl := NonZeroGenerators( M );
     
     if Length( bl ) <> NrGenerators( M ) then
         
+        rel := MatrixOfRelations( M );
+        
+        if HasIsDiagonalMatrix( rel ) then
+            if IsDiagonalMatrix( rel ) then
+                diagonal := true;
+            else
+                diagonal := false;
+            fi;
+        else
+            diagonal := fail;
+        fi;
+        
+        if HasIsUpperTriangularMatrix( rel ) then
+            if IsUpperTriangularMatrix( rel ) then
+                upper := true;
+            else
+                upper := false;
+            fi;
+        else
+            upper := fail;
+        fi;
+        
+        if HasIsLowerTriangularMatrix( rel ) then
+            if IsLowerTriangularMatrix( rel ) then
+                lower := true;
+            else
+                lower := false;
+            fi;
+        else
+            lower := fail;
+        fi;
+        
         if IsLeftModule( M ) then
-            rel := CertainColumns( MatrixOfRelations( M ), bl );
+            rel := CertainColumns( rel, bl );
             rel := CertainRows( rel, NonZeroRows( rel ) );
+            if diagonal <> fail and diagonal then
+                SetIsDiagonalMatrix( rel, true );
+            fi;
             rel := CreateRelationsForLeftModule( rel );
             gen := CreateGeneratorsForLeftModule( CertainRows( MatrixOfGenerators( M ), bl ) );
         else
-            rel := CertainRows( MatrixOfRelations( M ), bl );
+            rel := CertainRows( rel, bl );
             rel := CertainColumns( rel, NonZeroColumns( rel ) );
+            if diagonal <> fail and diagonal then
+                SetIsDiagonalMatrix( rel, true );
+            fi;
             rel := CreateRelationsForRightModule( rel );
             gen := CreateGeneratorsForRightModule( CertainColumns( MatrixOfGenerators( M ), bl ) );
         fi;

@@ -41,6 +41,27 @@ DeclareProperty( "IsFullColumnRankMatrix",
 DeclareProperty( "IsEmptyMatrix",
         IsMatrixForHomalg );
 
+DeclareProperty( "IsDiagonalMatrix",
+        IsMatrixForHomalg );
+
+DeclareProperty( "IsUpperTriangularMatrix",
+        IsMatrixForHomalg );
+
+DeclareProperty( "IsLowerTriangularMatrix",
+        IsMatrixForHomalg );
+
+DeclareProperty( "IsStrictUpperTriangularMatrix",
+        IsMatrixForHomalg );
+
+DeclareProperty( "IsStrictLowerTriangularMatrix",
+        IsMatrixForHomalg );
+
+DeclareProperty( "EvalAddRhs",
+        IsMatrixForHomalg );
+
+DeclareProperty( "EvalAddBts",
+        IsMatrixForHomalg );
+
 ####################################
 #
 # attributes:
@@ -78,12 +99,6 @@ DeclareAttribute( "EvalSubMat",
         IsMatrixForHomalg );
 
 DeclareAttribute( "EvalCompose",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "EvalAddRhs",
-        IsMatrixForHomalg );
-
-DeclareAttribute( "EvalAddBts",
         IsMatrixForHomalg );
 
 DeclareAttribute( "EvalGetSide",

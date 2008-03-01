@@ -115,10 +115,10 @@ InstallMethod( TriangularBasisOfRows,
         
   function( M )
     
-    return M;
+    return  M;
     
 end );
-    
+
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
@@ -145,28 +145,6 @@ end );
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
 	[ IsMatrixForHomalg and IsIdentityMatrix ],
-        
-  function( M )
-    
-    return  M;
-    
-end );
-
-##
-InstallMethod( TriangularBasisOfRows,
-        "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix ],
-        
-  function( M )
-    
-    return  M;
-    
-end );
-
-##
-InstallMethod( TriangularBasisOfColumns,
-        "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix ],
         
   function( M )
     
@@ -209,7 +187,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     if rank = 0 then
         B := MatrixForHomalg( "zero", 0, NrColumns( B ), R);
     else
-        B := CertainRows( B, [1..rank] );
+        B := CertainRows( B, [ 1 .. rank ] );
         
         SetRowRankOfMatrix( B, rank );
 	

@@ -68,6 +68,8 @@ InstallMethod( CreateHomalgTable,
                    
                    SetRowRankOfMatrix( S, N.rank );
                    
+		   SetIsDiagonalMatrix( S, true );
+		   
                    return S;
                    
                  end,
@@ -104,6 +106,12 @@ InstallMethod( CreateHomalgTable,
                    
                    SetRowRankOfMatrix( H, N.rank );
                    
+		   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
+                       SetIsDiagonalMatrix( H, true );   
+                   else
+                       SetIsUpperTriangularMatrix( H, true );
+                   fi;
+		   
                    return H;
                    
                  end

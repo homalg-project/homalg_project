@@ -371,7 +371,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddRhs
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddRhs ],
+        [ IsMatrixForHomalg and HasEvalAddRhs and EvalAddRhs ],
         
   function( C )
     local R, RP, A, B;
@@ -380,7 +380,7 @@ InstallMethod( Eval,				### defines: AddRhs
     
     RP := HomalgTable( R );
     
-    A := EvalAddRhs( C );
+    A := PreEval( C );
     B := RightHandSide( C );
     
     if IsBound(RP!.AddRhs) then
@@ -396,7 +396,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddBts
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddBts ],
+        [ IsMatrixForHomalg and HasEvalAddBts and EvalAddBts ],
         
   function( C )
     local R, RP, A, B;
@@ -405,7 +405,7 @@ InstallMethod( Eval,				### defines: AddBts
     
     RP := HomalgTable( R );
     
-    A := EvalAddBts( C );
+    A := PreEval( C );
     B := BottomSide( C );
     
     if IsBound(RP!.AddBts) then
@@ -445,8 +445,10 @@ InstallMethod( Eval,				### defines: GetSide
         return RightHandSide( A );
     elif side = "bts" then
         return BottomSide( A );
-    elif side = "lhs" or side = "ups" then
-        return Eval( A );
+    elif side = "lhs" then
+	return Eval( CertainColumns( A, [ 1 .. NrColumns( A ) ] ) ); ## this is in general not obsolete
+    elif side = "ups" then
+        return Eval( CertainRows( A, [ 1 .. NrRows( A ) ] ) ); ## this is in general not obsolete
     else
         Error( "the first argument must be either \"rhs\", \"bts\", \"lhs\", or \"ups\", but received: ", side, "\n" );
     fi;

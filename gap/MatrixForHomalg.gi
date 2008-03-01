@@ -57,6 +57,30 @@ InstallTrueMethod( IsFullRowRankMatrix, IsMatrixForHomalg and IsIdentityMatrix )
 ##
 InstallTrueMethod( IsFullColumnRankMatrix, IsMatrixForHomalg and IsIdentityMatrix );
 
+##
+InstallTrueMethod( IsUpperTriangularMatrix, IsMatrixForHomalg and IsDiagonalMatrix );
+
+##
+InstallTrueMethod( IsLowerTriangularMatrix, IsMatrixForHomalg and IsDiagonalMatrix );
+
+##
+InstallTrueMethod( IsUpperTriangularMatrix, IsMatrixForHomalg and IsStrictUpperTriangularMatrix );
+
+##
+InstallTrueMethod( IsLowerTriangularMatrix, IsMatrixForHomalg and IsStrictLowerTriangularMatrix );
+
+##
+InstallTrueMethod( IsDiagonalMatrix, IsMatrixForHomalg and IsUpperTriangularMatrix and IsLowerTriangularMatrix );
+
+##
+InstallTrueMethod( IsDiagonalMatrix, IsMatrixForHomalg and IsZeroMatrix );
+
+##
+InstallTrueMethod( IsDiagonalMatrix, IsMatrixForHomalg and IsIdentityMatrix );
+
+##
+InstallTrueMethod( IsZeroMatrix, IsMatrixForHomalg and IsStrictUpperTriangularMatrix and IsStrictLowerTriangularMatrix );
+
 ####################################
 #
 # immediate methods for properties:
@@ -211,6 +235,173 @@ InstallImmediateMethod( IsFullColumnRankMatrix,
     
     if HasIsFullRowRankMatrix( EvalInvolution( M ) ) then
         return IsFullRowRankMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsMatrixForHomalg and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsLowerTriangularMatrix( EvalInvolution( M ) ) then
+        return IsLowerTriangularMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsMatrixForHomalg and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsUpperTriangularMatrix( EvalInvolution( M ) ) then
+        return IsUpperTriangularMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsMatrixForHomalg and HasEvalCertainRows, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainRows( M );
+    
+    if HasIsUpperTriangularMatrix( C[1] ) and IsUpperTriangularMatrix( C[1] )
+       and ( C[2] = NrRows( C[1] ) + [ - Length( C[2] ) .. 0 ]
+             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsMatrixForHomalg and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainColumns( M );
+    
+    if HasIsLowerTriangularMatrix( C[1] ) and IsLowerTriangularMatrix( C[1] )
+       and ( C[2] = NrColumns( C[1] ) + [ - Length( C[2] ) .. 0 ]
+             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsDiagonalMatrix,
+        IsMatrixForHomalg and HasEvalCertainRows, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainRows( M );
+    
+    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] )
+       and C[2] = [ 1 .. Length( C[2] ) ] then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsDiagonalMatrix,
+        IsMatrixForHomalg and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainColumns( M );
+    
+    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] )
+       and C[2] = [ 1 .. Length( C[2] ) ] then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+InstallImmediateMethod( IsDiagonalMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsDiagonalMatrix( PreEval( M ) ) then
+        return IsDiagonalMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsUpperTriangularMatrix( PreEval( M ) ) then
+        return IsUpperTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsLowerTriangularMatrix( PreEval( M ) ) then
+        return IsLowerTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+InstallImmediateMethod( IsStrictUpperTriangularMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsStrictUpperTriangularMatrix( PreEval( M ) ) then
+        return IsStrictUpperTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+InstallImmediateMethod( IsStrictLowerTriangularMatrix,
+        IsMatrixForHomalg and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsStrictLowerTriangularMatrix( PreEval( M ) ) then
+        return IsStrictLowerTriangularMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -395,6 +586,29 @@ InstallMethod( \=,
 end );
 
 ##
+InstallMethod( \=,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsZeroMatrix, IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( M1, M2 )
+    
+    return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
+           and NrRows( M1 ) = NrRows( M2 ) and NrColumns( M1 ) = NrColumns( M2 );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsIdentityMatrix, IsMatrixForHomalg and IsIdentityMatrix ],
+        
+  function( M1, M2 )
+    
+    return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) and NrRows( M1 ) = NrRows( M2 );
+    
+end );
+
+##
 InstallMethod( Involution,
         "for homalg matrices",
         [ IsMatrixForHomalg ],
@@ -420,6 +634,28 @@ InstallMethod( Involution,
 end );
 
 ##
+InstallMethod( Involution,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsZeroMatrix ],
+        
+  function( M )
+    
+    return MatrixForHomalg( "zero", NrColumns( M ), NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( Involution,
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsIdentityMatrix ],
+        
+  function( M )
+    
+    return MatrixForHomalg( "identity", NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
 InstallMethod( CertainRows,
         "for homalg matrices",
         [ IsMatrixForHomalg, IsList ],
@@ -431,7 +667,7 @@ InstallMethod( CertainRows,
         Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
     fi;
     
-    if NrRows( M ) = 0 then
+    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
         return M;
     fi;
     
@@ -464,7 +700,7 @@ InstallMethod( CertainColumns,
         Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
     fi;
     
-    if NrColumns( M ) = 0 then
+    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
         return M;
     fi;
     
@@ -990,23 +1226,18 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( AddRhs,
+InstallMethod( AddRhs,				### defines: AddRhs
         "of homalg matrices",
         [ IsMatrixForHomalg ],
         
   function( A )
-    local R, C;
+    local C;
     
-    R := HomalgRing( A );
+    C := MatrixForHomalg( A );
     
-    if IsHomalgInternalMatrixRep( A ) then
-        C := MatrixForHomalg( "internal", R );
-    else
-        C := MatrixForHomalg( "external", R );
-    fi;
+    SetEvalAddRhs( C, true );
     
-    SetEvalAddRhs( C, A );
-    SetRightHandSide( C, MatrixForHomalg( "identity", NrRows( A ), R ) );
+    SetRightHandSide( C, MatrixForHomalg( "identity", NrRows( A ), HomalgRing( A ) ) );
     
     SetNrRows( C, NrRows( A ) );
     SetNrColumns( C, NrColumns( A ) );
@@ -1016,26 +1247,21 @@ InstallMethod( AddRhs,
 end );
 
 ##
-InstallMethod( AddRhs,
+InstallMethod( AddRhs,				### defines: AddRhs
         "of two homalg matrices",
         [ IsMatrixForHomalg, IsMatrixForHomalg ],
         
   function( A, B )
-    local R, C;
+    local C;
     
     if NrRows( A ) <> NrRows( B ) then
         Error( "the second matrix cannot become a right hand side of the first, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
     
-    R := HomalgRing( A );
+    C := MatrixForHomalg( A );
     
-    if IsHomalgInternalMatrixRep( A ) and IsHomalgInternalMatrixRep( B ) then
-        C := MatrixForHomalg( "internal", R );
-    else
-        C := MatrixForHomalg( "external", R );
-    fi;
+    SetEvalAddRhs( C, true );
     
-    SetEvalAddRhs( C, A );
     SetRightHandSide( C, B );
     
     SetNrRows( C, NrRows( A ) );
@@ -1046,23 +1272,18 @@ InstallMethod( AddRhs,
 end );
 
 ##
-InstallMethod( AddBts,
+InstallMethod( AddBts,				### defines: AddBts
         "of homalg matrices",
         [ IsMatrixForHomalg ],
         
   function( A )
-    local R, C;
+    local C;
     
-    R := HomalgRing( A );
+    C := MatrixForHomalg( A );
     
-    if IsHomalgInternalMatrixRep( A ) then
-        C := MatrixForHomalg( "internal", R );
-    else
-        C := MatrixForHomalg( "external", R );
-    fi;
+    SetEvalAddBts( C, true );
     
-    SetEvalAddBts( C, A );
-    SetBottomSide( C, MatrixForHomalg( "identity", NrColumns( A ), R ) );
+    SetBottomSide( C, MatrixForHomalg( "identity", NrColumns( A ), HomalgRing( A ) ) );
     
     SetNrRows( C, NrRows( A ) );
     SetNrColumns( C, NrColumns( A ) );
@@ -1072,26 +1293,21 @@ InstallMethod( AddBts,
 end );
 
 ##
-InstallMethod( AddBts,
+InstallMethod( AddBts,				### defines: AddBts
         "of two homalg matrices",
         [ IsMatrixForHomalg, IsMatrixForHomalg ],
         
   function( A, B )
-    local R, C;
+    local C;
     
     if NrColumns( A ) <> NrColumns( B ) then
         Error( "the second matrix cannot become a bottom side of the first, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), " column(s)\n" );
     fi;
     
-    R := HomalgRing( A );
+    C := MatrixForHomalg( A );
     
-    if IsHomalgInternalMatrixRep( A ) and IsHomalgInternalMatrixRep( B ) then
-        C := MatrixForHomalg( "internal", R );
-    else
-        C := MatrixForHomalg( "external", R );
-    fi;
+    SetEvalAddBts( C, true );
     
-    SetEvalAddBts( C, A );
     SetBottomSide( C, B );
     
     SetNrRows( C, NrRows( A ) );
@@ -1201,6 +1417,21 @@ end );
 InstallGlobalFunction( MatrixForHomalg,
   function( arg )
     local nargs, R, matrix, M;
+    
+    if IsMatrixForHomalg( arg[1] ) then
+        
+        R := HomalgRing( arg[1] );
+        
+        if IsHomalgInternalMatrixRep( arg[1] ) then
+            M := MatrixForHomalg( "internal", R );
+        else
+            M := MatrixForHomalg( "external", R );
+        fi;
+        
+        SetPreEval( M, arg[1] );
+        
+        return M;
+    fi;
     
     nargs := Length( arg );
     

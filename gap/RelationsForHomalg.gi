@@ -320,7 +320,7 @@ InstallMethod( SyzygiesGenerators,
 end );
 
 ##
-InstallMethod( NonZeroGenerators,
+InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
         "for sets of relations of homalg modules",
         [ IsRelationsForHomalg ],
         
@@ -330,6 +330,8 @@ InstallMethod( NonZeroGenerators,
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
+    
+    #=====# begin of the core procedure #=====#
     
     id := MatrixForHomalg( "identity", NrGenerators( M ), R );
     
@@ -346,7 +348,7 @@ InstallMethod( NonZeroGenerators,
 end );
 
 ##
-InstallMethod( BetterBasis,			### defines: BetterBasis
+InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (BetterBasis)
         "for sets of relations of homalg modules",
         [ IsRelationsForHomalg ],
         
@@ -356,6 +358,8 @@ InstallMethod( BetterBasis,			### defines: BetterBasis
     R := HomalgRing( _M );
     
     RP := HomalgTable( R );
+    
+    #=====# begin of the core procedure #=====#
     
     if IsLeftRelationsForHomalgRep( _M ) then
         if IsBound(RP!.SimplifyBasisOfRows) then

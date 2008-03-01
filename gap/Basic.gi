@@ -435,6 +435,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         fi;
         
         M := A;
+	
     fi;
     
     if compute_U then

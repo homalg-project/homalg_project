@@ -87,7 +87,7 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "NonZeroGenerators",
         [ IsRelationsForHomalg ] );
 
-DeclareOperation( "BetterBasis",
+DeclareOperation( "GetRidOfTrivialRelations",
         [ IsRelationsForHomalg ] );
 
 ####################################
@@ -104,4 +104,7 @@ DeclareSynonym ( "ReduceCoeff",
 
 DeclareSynonym ( "DecideZeroCoeff",
         EffectivelyDecideZero );
+
+DeclareSynonym ( "BetterBasis",
+        GetRidOfTrivialRelations );
 
