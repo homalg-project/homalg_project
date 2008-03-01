@@ -371,7 +371,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddRhs
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddRhs and EvalAddRhs ],
+        [ IsMatrixForHomalg and HasEvalAddRhs and EvalAddRhs and HasPreEval ], ## don't remove HasPreEval
         
   function( C )
     local R, RP, A, B;
@@ -396,7 +396,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddBts
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddBts and EvalAddBts ],
+        [ IsMatrixForHomalg and HasEvalAddBts and EvalAddBts and HasPreEval ], ## don't remove HasPreEval
         
   function( C )
     local R, RP, A, B;

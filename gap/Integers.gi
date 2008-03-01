@@ -114,6 +114,27 @@ InstallMethod( CreateHomalgTable,
 		   
                    return H;
                    
+                 end,
+                   
+               ## Can optionally be provided by the RingPackage
+               ## (homalg functions check if these functions are defined or not)
+               ## (HomalgTable gives no default value)
+               ElementaryDivisors :=
+                 function( arg )
+                   local M, e, z;    
+                   
+                   M := arg[1];
+                   
+                   e := ElementaryDivisorsMat( Eval( M ) );
+                   
+                   z := ListWithIdenticalEntries( NrColumns( M ), 0 );
+                   
+                   z{ [ 1 .. Length( e ) ] } := e;
+                   
+                   e := Filtered( z, x -> x <> 1 );
+                   
+                   return  e;
+                   
                  end
           );
                  

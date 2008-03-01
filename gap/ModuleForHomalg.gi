@@ -679,6 +679,26 @@ InstallMethod( BetterGenerators,
     
 end );
 
+##
+InstallMethod( ElementaryDivisorsOfLeftModule,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        
+  function( M )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.ElementaryDivisors) then
+        return RP!.ElementaryDivisors( MatrixOfRelations( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

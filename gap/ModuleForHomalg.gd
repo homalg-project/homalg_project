@@ -77,6 +77,9 @@ DeclareProperty( "IsZeroModule",
 DeclareAttribute( "RankOfLeftModule",
         IsModuleForHomalg and IsLeftModule );
 
+DeclareAttribute( "ElementaryDivisorsOfLeftModule",
+        IsModuleForHomalg and IsLeftModule );
+
 ####################################
 #
 # global functions and operations:

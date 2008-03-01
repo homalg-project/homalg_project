@@ -1416,9 +1416,11 @@ end );
 
 InstallGlobalFunction( MatrixForHomalg,
   function( arg )
-    local nargs, R, matrix, M;
+    local nargs, R, ar, matrix, M;
     
-    if IsMatrixForHomalg( arg[1] ) then
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsMatrixForHomalg( arg[1] ) then
         
         R := HomalgRing( arg[1] );
         
@@ -1431,9 +1433,8 @@ InstallGlobalFunction( MatrixForHomalg,
         SetPreEval( M, arg[1] );
         
         return M;
+        
     fi;
-    
-    nargs := Length( arg );
     
     R := arg[nargs];
     
