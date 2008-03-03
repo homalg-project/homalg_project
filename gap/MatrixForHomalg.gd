@@ -56,6 +56,9 @@ DeclareProperty( "IsStrictUpperTriangularMatrix",
 DeclareProperty( "IsStrictLowerTriangularMatrix",
         IsMatrixForHomalg );
 
+DeclareProperty( "IsTriangularMatrix",
+        IsMatrixForHomalg );
+
 DeclareProperty( "EvalAddRhs",
         IsMatrixForHomalg );
 
@@ -126,6 +129,18 @@ DeclareAttribute( "BottomSide",
         IsMatrixForHomalg );
 
 DeclareAttribute( "CompatibilityConditions",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "ZeroRows",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "ZeroColumns",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "NonZeroRows",
+        IsMatrixForHomalg );
+
+DeclareAttribute( "NonZeroColumns",
         IsMatrixForHomalg );
 
 ####################################
@@ -199,16 +214,4 @@ DeclareOperation( "AddBts",
 
 DeclareOperation( "GetSide",
         [ IsString, IsMatrixForHomalg ] );
-
-DeclareOperation( "ZeroRows",
-        [ IsMatrixForHomalg ] );
-
-DeclareOperation( "ZeroColumns",
-        [ IsMatrixForHomalg ] );
-
-DeclareOperation( "NonZeroRows",
-        [ IsMatrixForHomalg ] );
-
-DeclareOperation( "NonZeroColumns",
-        [ IsMatrixForHomalg ] );
 

@@ -70,6 +70,12 @@ InstallTrueMethod( IsUpperTriangularMatrix, IsMatrixForHomalg and IsStrictUpperT
 InstallTrueMethod( IsLowerTriangularMatrix, IsMatrixForHomalg and IsStrictLowerTriangularMatrix );
 
 ##
+InstallTrueMethod( IsTriangularMatrix, IsMatrixForHomalg and IsUpperTriangularMatrix );
+
+##
+InstallTrueMethod( IsTriangularMatrix, IsMatrixForHomalg and IsLowerTriangularMatrix );
+
+##
 InstallTrueMethod( IsDiagonalMatrix, IsMatrixForHomalg and IsUpperTriangularMatrix and IsLowerTriangularMatrix );
 
 ##
@@ -1343,9 +1349,9 @@ InstallMethod( GetSide,
 end );
 
 ##
-InstallMethod( ZeroRows,
+InstallMethod( ZeroRows,			 	## FIXME: make it an InstallImmediateMethod
         "for homalg matrices",
-        [ IsMatrixForHomalg and IsZeroMatrix ],
+        [ IsMatrixForHomalg and IsZeroMatrix and HasNrRows ],
         
   function( C )
     
@@ -1354,13 +1360,35 @@ InstallMethod( ZeroRows,
 end );
 
 ##
-InstallMethod( ZeroColumns,
+InstallMethod( ZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
         "for homalg matrices",
-        [ IsMatrixForHomalg and IsZeroMatrix ],
+        [ IsMatrixForHomalg and IsZeroMatrix and HasNrColumns ],
         
   function( C )
     
     return [ 1 .. NrColumns( C ) ];
+    
+end );
+
+##
+InstallMethod( ZeroRows,			 	## FIXME: make it an InstallImmediateMethod
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsIdentityMatrix ],
+        
+  function( C )
+    
+    return [ ];
+    
+end );
+
+##
+InstallMethod( ZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsIdentityMatrix ],
+        
+  function( C )
+    
+    return [ ];
     
 end );
 
@@ -1387,7 +1415,7 @@ InstallMethod( NonZeroColumns,
 end );
 
 ##
-InstallMethod( NonZeroRows,
+InstallMethod( NonZeroRows,			 	## FIXME: make it an InstallImmediateMethod
         "for homalg matrices",
         [ IsMatrixForHomalg and IsZeroMatrix ],
         
@@ -1398,7 +1426,7 @@ InstallMethod( NonZeroRows,
 end );
 
 ##
-InstallMethod( NonZeroColumns,
+InstallMethod( NonZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
         "for homalg matrices",
         [ IsMatrixForHomalg and IsZeroMatrix ],
         
@@ -1406,6 +1434,48 @@ InstallMethod( NonZeroColumns,
     
     return [ ];
     
+end );
+
+##
+InstallMethod( NonZeroRows,			 	## FIXME: make it an InstallImmediateMethod
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsIdentityMatrix and HasNrRows ],
+        
+  function( C )
+    
+    return [ 1 .. NrRows( C ) ];
+    
+end );
+
+##
+InstallMethod( NonZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
+        "for homalg matrices",
+        [ IsMatrixForHomalg and IsIdentityMatrix and HasNrColumns ],
+        
+  function( C )
+    
+    return [ 1 .. NrColumns( C ) ];
+    
+end );
+
+##
+InstallMethod( RowRankOfMatrix,			 	## FIXME: make it an InstallImmediateMethod
+        [ IsMatrixForHomalg and IsTriangularMatrix ],
+        
+  function( M )
+    
+    return Length( NonZeroRows( M ) );
+        
+end );
+
+##
+InstallMethod( ColumnRankOfMatrix,			## FIXME: make it an InstallImmediateMethod
+        [ IsMatrixForHomalg and IsTriangularMatrix ],
+        
+  function( M )
+    
+    return Length( NonZeroColumns( M ) );
+        
 end );
 
 ####################################

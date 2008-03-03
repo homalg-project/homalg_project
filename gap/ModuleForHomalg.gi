@@ -2,7 +2,7 @@
 ##
 ##  ModuleForHomalg.gi          homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B fÃ¼r Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for homalg modules.
 ##
@@ -219,6 +219,19 @@ InstallImmediateMethod( RankOfLeftModule,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RankOfLeftModule,
+        IsFinitelyPresentedModuleRep and HasElementaryDivisorsOfLeftModule, 0,
+        
+  function( M )
+    local z;
+    
+    z := Zero( HomalgRing( M ) );
+    
+    return Length( Filtered( ElementaryDivisorsOfLeftModule( M ), x -> x = z ) );
     
 end );
 
@@ -699,6 +712,42 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
     
 end );
 
+##
+InstallMethod( ElementaryDivisorsOfLeftModule,			 ## FIXME: make it an InstallImmediateMethod
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsLeftModule and IsZeroModule ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    #if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
+        return [ ];
+    #fi;
+    
+    #TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( ElementaryDivisorsOfLeftModule,			 ## FIXME: make it an InstallImmediateMethod
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsLeftModule and IsFreeModule ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    #if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
+        return ListWithIdenticalEntries( NrGenerators( M ), Zero( R ) );
+    #fi;
+    
+    #TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -718,7 +767,7 @@ InstallMethod( Presentation,
     is_zero_module := false;
     
     if NrGenerators( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gens := CreateSetsOfGeneratorsForLeftModule( [], R );
+        gens := CreateSetsOfGeneratorsForLeftModule( [ ], R );
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForLeftModule(
@@ -732,13 +781,17 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    ObjectifyWithAttributes(
-            M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, R,
-            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
-    
-    if is_zero_module = true then
-        SetIsZeroModule( M, true );
+    if is_zero_module then
+        ObjectifyWithAttributes(
+                M, LeftModuleFinitelyPresentedType,
+                LeftActingDomain, R,
+                GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
+                IsZeroModule, true );
+    else
+        ObjectifyWithAttributes(
+                M, LeftModuleFinitelyPresentedType,
+                LeftActingDomain, R,
+                GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
     
 #    SetParent( gens, M );
@@ -773,13 +826,17 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    ObjectifyWithAttributes(
-            M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, R,
-            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
-    
-    if is_zero_module = true then
-        SetIsZeroModule( M, true );
+    if is_zero_module then
+        ObjectifyWithAttributes(
+                M, LeftModuleFinitelyPresentedType,
+                LeftActingDomain, R,
+                GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
+                IsZeroModule, true );
+    else
+        ObjectifyWithAttributes(
+                M, LeftModuleFinitelyPresentedType,
+                LeftActingDomain, R,
+                GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
     
 #    SetParent( gens, M );
@@ -802,7 +859,7 @@ InstallMethod( Presentation,
     is_zero_module := false;
     
     if NrGenerators( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gens := CreateSetsOfGeneratorsForRightModule( [], R );
+        gens := CreateSetsOfGeneratorsForRightModule( [ ], R );
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForRightModule(
@@ -816,13 +873,17 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    ObjectifyWithAttributes(
-            M, RightModuleFinitelyPresentedType,
-            RightActingDomain, R,
-            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
-    
-    if is_zero_module = true then
-        SetIsZeroModule( M, true );
+    if is_zero_module then
+        ObjectifyWithAttributes(
+                M, RightModuleFinitelyPresentedType,
+                RightActingDomain, R,
+                GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
+                IsZeroModule, true );
+    else
+        ObjectifyWithAttributes(
+                M, RightModuleFinitelyPresentedType,
+                RightActingDomain, R,
+                GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
     
 #    SetParent( gens, M );
@@ -857,13 +918,17 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    ObjectifyWithAttributes(
-            M, RightModuleFinitelyPresentedType,
-            RightActingDomain, R,
-            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
-    
-    if is_zero_module = true then
-        SetIsZeroModule( M, true );
+    if is_zero_module then
+        ObjectifyWithAttributes(
+                M, RightModuleFinitelyPresentedType,
+                RightActingDomain, R,
+                GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
+                IsZeroModule, true );
+    else
+        ObjectifyWithAttributes(
+                M, RightModuleFinitelyPresentedType,
+                RightActingDomain, R,
+                GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
     
 #    SetParent( gens, M );
@@ -886,7 +951,7 @@ InstallMethod( LeftPresentation,
     is_zero_module := false;
     
     if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gens := CreateSetsOfGeneratorsForLeftModule( [], R );
+        gens := CreateSetsOfGeneratorsForLeftModule( [ ], R );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForLeftModule(
@@ -903,13 +968,17 @@ InstallMethod( LeftPresentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    ObjectifyWithAttributes(
-            M, LeftModuleFinitelyPresentedType,
-            LeftActingDomain, R,
-            GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
-    
-    if is_zero_module = true then
-        SetIsZeroModule( M, true );
+    if is_zero_module then
+        ObjectifyWithAttributes(
+                M, LeftModuleFinitelyPresentedType,
+                LeftActingDomain, R,
+                GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
+                IsZeroModule, true );
+    else
+        ObjectifyWithAttributes(
+                M, LeftModuleFinitelyPresentedType,
+                LeftActingDomain, R,
+                GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
     
 #    SetParent( gens, M );
@@ -931,7 +1000,7 @@ InstallMethod( LeftPresentation,
     
     gens := CreateSetsOfGeneratorsForLeftModule( gen, R );
     
-    if rel = [] and gen <> [] then
+    if rel = [ ] and gen <> [ ] then
         rels := CreateSetsOfRelationsForLeftModule( "unknown relations", R );
     else
         rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -967,7 +1036,7 @@ InstallMethod( RightPresentation,
     is_zero_module := false;
     
     if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
-        gens := CreateSetsOfGeneratorsForRightModule( [], R );
+        gens := CreateSetsOfGeneratorsForRightModule( [ ], R );
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForRightModule(
@@ -984,13 +1053,17 @@ InstallMethod( RightPresentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    ObjectifyWithAttributes(
-            M, RightModuleFinitelyPresentedType,
-            RightActingDomain, R,
-            GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
-    
-    if is_zero_module = true then
-        SetIsZeroModule( M, true );
+    if is_zero_module then
+        ObjectifyWithAttributes(
+                M, RightModuleFinitelyPresentedType,
+                RightActingDomain, R,
+                GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
+                IsZeroModule, true );
+    else
+        ObjectifyWithAttributes(
+                M, RightModuleFinitelyPresentedType,
+                RightActingDomain, R,
+                GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
     
 #    SetParent( gens, M );
@@ -1012,7 +1085,7 @@ InstallMethod( RightPresentation,
     
     gens := CreateSetsOfGeneratorsForRightModule( gen, R );
     
-    if rel = [] and gen <> [] then
+    if rel = [ ] and gen <> [ ] then
         rels := CreateSetsOfRelationsForRightModule( "unknown relations", R );
     else
         rels := CreateSetsOfRelationsForRightModule( rel, R );
@@ -1099,9 +1172,9 @@ InstallMethod( ViewObj,
     num_gen := NrGenerators( M );
     
     if num_gen = 1 then
-        gen_string := " generator and ";
+        gen_string := " generator";
     else
-        gen_string := " generators and ";
+        gen_string := " generators";
     fi;
     if RelationsOfModule( M ) = "unknown relations" then
         num_rel := "unknown";
@@ -1110,15 +1183,15 @@ InstallMethod( ViewObj,
         num_rel := NrRelations( M );
         if num_rel = 0 then
             num_rel := "";
-            rel_string := "no relations";
+            rel_string := "no relations for ";
         elif num_rel = 1 then
-            rel_string := " relation";
+            rel_string := " relation for ";
         else
-            rel_string := " relations";
+            rel_string := " relations for ";
         fi;
     fi;
     
-    Print( "<A left module on ", num_gen, gen_string, num_rel, rel_string, ">" );
+    Print( "<A left module defined by ", num_rel, rel_string, num_gen, gen_string, ">" );
     
 end );
 
@@ -1155,6 +1228,58 @@ InstallMethod( ViewObj,
 end );
 
 ##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ],
+        
+  function( M )
+    
+    Print( 0, "\n" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsLeftModule and HasElementaryDivisorsOfLeftModule ],
+        
+  function( M )
+    local R, RP, name, z, r, display;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.RingName) then
+        name := RP!.RingName;
+    else
+        name := "D";
+    fi;
+    
+    z := Zero( R );
+    
+    r := RankOfLeftModule( M );
+    
+    display := ElementaryDivisorsOfLeftModule( M );
+    display := Filtered( display, x -> x <> z );
+    
+    if display <> [ ] then
+        display := List( display, x -> [ name, " / < ", String( x ), " > + " ] );
+        display := Concatenation( display );
+        display := Concatenation( display );
+    else
+        display := "";
+    fi;
+    
+    if r <> 0 then
+        Print( display, name, " ^ ", r,"\n" );
+    else
+        Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
+    fi;
+    
+end );
+
+##
 InstallMethod( PrintObj,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
@@ -1163,11 +1288,11 @@ InstallMethod( PrintObj,
     
     Print( "LeftPresentation( " );
     if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "[], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
+        Print( "[ ], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
     else
         Print( GeneratorsOfModule( M ), ", " );
         if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[], " ) ; ## empty relations
+            Print( "[ ], " ) ; ## empty relations
         else
             Print( RelationsOfModule( M ), ", " );
         fi;
@@ -1186,11 +1311,11 @@ InstallMethod( PrintObj,
     
     Print( "RightPresentation( " );
     if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "[], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
+        Print( "[ ], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
     else
         Print( GeneratorsOfModule( M ), ", " );
         if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[], " ) ; ## empty relations
+            Print( "[ ], " ) ; ## empty relations
         else
             Print( RelationsOfModule( M ), ", " );
         fi;

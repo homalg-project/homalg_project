@@ -383,8 +383,30 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     
     #=====# begin of the core procedure #=====#
     
-    if not finished
-       and IsBound( RP!.BestBasis ) and not ( HasIsZeroMatrix( M ) and IsZeroMatrix( M ) ) then
+    if HasIsZeroMatrix( M ) and IsZeroMatrix( M ) then
+        
+        if compute_U then
+            SetPreEval( U, MatrixForHomalg( "identity", NrRows( M ), R ) );
+        fi;
+        
+        if compute_V then
+            SetPreEval( V, MatrixForHomalg( "identity", NrColumns( M ), R ) );
+        fi;
+        
+        if compute_UI then
+            UI := MatrixForHomalg( "identity", NrRows( M ), R );
+        fi;
+        
+        if compute_VI then
+            VI := MatrixForHomalg( "identity", NrColumns( M ), R );
+        fi;
+        
+        
+        finished := true;
+        
+    fi;
+    
+    if not finished and IsBound( RP!.BestBasis ) then
         
         if not (compute_U or compute_UI or compute_V or compute_VI) then
             barg := [ M ];

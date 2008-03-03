@@ -25,6 +25,8 @@ InstallMethod( CreateHomalgTable,
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
+               RingName := "Z",
+               
                BestBasis := 
                  function( arg )
                    local M, R, nargs, N, S;
@@ -55,7 +57,7 @@ InstallMethod( CreateHomalgTable,
 		       SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
-                   # return V;
+                   # return V:
                    if nargs > 2 then
                        SetEval( arg[3], N.coltrans );
 		       SetNrRows( arg[3], NrColumns( M ) );
@@ -74,6 +76,24 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               ElementaryDivisors :=
+                 function( arg )
+                   local M, e, z;    
+                   
+                   M := arg[1];
+                   
+                   e := ElementaryDivisorsMat( Eval( M ) );
+                   
+                   z := ListWithIdenticalEntries( NrColumns( M ), 0 );
+                   
+                   z{ [ 1 .. Length( e ) ] } := e;
+                   
+                   e := Filtered( z, x -> x <> 1 );
+                   
+                   return  e;
+                   
+                 end,
+                   
                ## Must be defined if other functions are not defined
                TriangularBasisOfRows :=
                  function( arg )
@@ -114,28 +134,8 @@ InstallMethod( CreateHomalgTable,
 		   
                    return H;
                    
-                 end,
-                   
-               ## Can optionally be provided by the RingPackage
-               ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
-               ElementaryDivisors :=
-                 function( arg )
-                   local M, e, z;    
-                   
-                   M := arg[1];
-                   
-                   e := ElementaryDivisorsMat( Eval( M ) );
-                   
-                   z := ListWithIdenticalEntries( NrColumns( M ), 0 );
-                   
-                   z{ [ 1 .. Length( e ) ] } := e;
-                   
-                   e := Filtered( z, x -> x <> 1 );
-                   
-                   return  e;
-                   
                  end
+                   
           );
                  
     Objectify( HomalgTableType, RP );
