@@ -1264,7 +1264,7 @@ InstallMethod( Display,
     display := Filtered( display, x -> x <> z );
     
     if display <> [ ] then
-        display := List( display, x -> [ name, " / < ", String( x ), " > + " ] );
+        display := List( display, x -> [ name, " / ( Z * ", String( x ), " ) + " ] );
         display := Concatenation( display );
         display := Concatenation( display );
     else
@@ -1272,7 +1272,7 @@ InstallMethod( Display,
     fi;
     
     if r <> 0 then
-        Print( display, name, " ^ ", r,"\n" );
+        Print( display, name, " ^ ( 1 x ", r," )\n" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;
