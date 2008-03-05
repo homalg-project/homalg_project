@@ -8,7 +8,6 @@
 ##
 #############################################################################
 
-
 ####################################
 #
 # categories:
@@ -17,7 +16,7 @@
 
 # a new category of objects:
 
-DeclareCategory( "IsRingForHomalg",
+DeclareCategory( "IsHomalgRing",
         IsAttributeStoringRep );
 
 ####################################
@@ -37,49 +36,49 @@ DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgRings" );
 ## properties listed alphabetically (ignoring left/right):
 
 DeclareProperty( "IsGlobalDimensionFinite",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsLeftGlobalDimensionFinite",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsRightGlobalDimensionFinite",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsIntegralDomain",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsNoetherian", 
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsLeftNoetherian",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsRightNoetherian",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsOreDomain", 
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsLeftOreDomain",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsRightOreDomain",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsPrincipalIdealRing",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsLeftPrincipalIdealRing",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsRightPrincipalIdealRing",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsRegular",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 DeclareProperty( "IsSimpleRing",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 ####################################
 #
@@ -89,29 +88,46 @@ DeclareProperty( "IsSimpleRing",
 
 ## The homalg ring package conversion table:
 DeclareAttribute( "HomalgTable",
-        IsRingForHomalg, "mutable" );
+        IsHomalgRing, "mutable" );
 
 ## residue class rings for homalg:
 DeclareAttribute( "RingRelations",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 ## zero:
 DeclareAttribute( "Zero",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 ## zero:
 DeclareAttribute( "One",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 ## zero:
 DeclareAttribute( "MinusOne",
-        IsRingForHomalg );
+        IsHomalgRing );
 
 ####################################
 #
 # global functions and operations:
 #
 ####################################
+
+# basic operations:
+
+DeclareOperation( "HomalgPointer",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "HomalgExternalCASystem",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "HomalgExternalCASystemVersion",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "HomalgStream",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "HomalgExternalCASystemPID",
+        [ IsHomalgRing ] );
 
 # constructor methods:
 

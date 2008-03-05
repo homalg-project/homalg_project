@@ -8,7 +8,6 @@
 ##
 #############################################################################
 
-
 ####################################
 #
 # categories:
@@ -40,7 +39,7 @@ DeclareCategory( "IsHomalgTable",
 # constructor methods:
 
 DeclareOperation( "CreateHomalgTable",
-        [ IsSemiringWithOneAndZero ] );
+        [ IsObject ] );
 
 # basic operations:
 

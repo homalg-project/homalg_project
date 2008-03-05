@@ -170,7 +170,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsLeftRelationsForHomalgRep ],
         
   function( mat, rel )
     
@@ -181,7 +181,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsRightRelationsForHomalgRep ],
         
   function( mat, rel )
     
@@ -256,7 +256,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZero,
         "modulo a set of relations of a homalg module",
-	[ IsMatrixForHomalg, IsLeftRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsLeftRelationsForHomalgRep ],
         
   function( mat, rel )
     
@@ -267,7 +267,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZero,
         "modulo a set of relations of a homalg module",
-	[ IsMatrixForHomalg, IsRightRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsRightRelationsForHomalgRep ],
         
   function( mat, rel )
     
@@ -391,7 +391,7 @@ InstallGlobalFunction( CreateRelationsForLeftModule,
   function( arg )
     local relations;
     
-    if IsMatrixForHomalg( arg[1] ) then
+    if IsHomalgMatrix( arg[1] ) then
         relations := rec( relations := arg[1] );
     else
         relations := rec( relations := MatrixForHomalg( arg[1], arg[2] ) );
@@ -408,7 +408,7 @@ InstallGlobalFunction( CreateRelationsForRightModule,
   function( arg )
     local relations;
     
-    if IsMatrixForHomalg( arg[1] ) then
+    if IsHomalgMatrix( arg[1] ) then
         relations := rec( relations := arg[1] );
     else
         relations := rec( relations := MatrixForHomalg( arg[1], arg[2] ) );

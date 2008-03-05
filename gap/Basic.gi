@@ -17,7 +17,7 @@
 ##
 InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         "for a homalg matrix",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP;
@@ -39,7 +39,7 @@ end );
 ##
 InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         "for a homalg matrix",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP;
@@ -61,7 +61,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows (ReduceCoeff)
         "for a homalg matrix",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
     local R, RP, zz, A_zz;
@@ -87,7 +87,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroColumns (ReduceCoeff)
         "for a homalg matrix",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
     local R, RP, zz, A_zz;
@@ -113,7 +113,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesBasis)
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, S;
@@ -137,7 +137,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesBasis)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP, S;
@@ -161,7 +161,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, S;
@@ -185,7 +185,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP, S;
@@ -209,7 +209,7 @@ end );
 ##
 InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A )
     local R, RP, IA, CA, NF, CB;
@@ -247,7 +247,7 @@ end );
 ##
 InstallMethod( Leftinverse,			### defines: Leftinverse (LeftinverseF)
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( L )
     local R, RP, Id;
@@ -274,7 +274,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
         nar_U, nar_V, nar_UI, nar_VI, m, n, finished, barg, A, CM;
     
-    if not IsMatrixForHomalg( arg[1] ) then
+    if not IsHomalgMatrix( arg[1] ) then
         Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
     fi;
     
@@ -296,21 +296,21 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_V := false;
         compute_UI := false;
         compute_VI := false;
-    elif nargs = 2 and IsMatrixForHomalg( arg[2] ) then
+    elif nargs = 2 and IsHomalgMatrix( arg[2] ) then
         ## BetterEquivalentMatrix(M,V)
         compute_U := false;
         compute_V := true;
         compute_UI := false;
         compute_VI := false;
         nar_V := 2;
-    elif nargs > 2 and IsMatrixForHomalg( arg[2] ) and IsString( arg[3] ) then
+    elif nargs > 2 and IsHomalgMatrix( arg[2] ) and IsString( arg[3] ) then
         ## BetterEquivalentMatrix(M,VI,"")
         compute_U := false;
         compute_V := false;
         compute_UI := false;
         compute_VI := true;
         nar_VI := 2;
-    elif nargs > 4 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
+    elif nargs > 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[4] ) and IsString( arg[5] ) then
         ## BetterEquivalentMatrix(M,V,VI,"","")
         compute_U := false;
@@ -319,7 +319,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_VI := true;
         nar_V := 2;
         nar_VI := 3;
-    elif nargs > 5 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
+    elif nargs > 5 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[4] ) and IsString( arg[5] ) and IsString( arg[6] ) then
         ## BetterEquivalentMatrix(M,U,UI,"","","")
         compute_U := true;
@@ -328,7 +328,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_VI := false;
         nar_U := 2;
         nar_UI := 3;
-    elif nargs > 3 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
+    elif nargs > 3 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[5] ) then
         ## BetterEquivalentMatrix(M,UI,VI,"")
         compute_U := false;
@@ -337,8 +337,8 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_VI := true;
         nar_UI := 2;
         nar_VI := 3;
-    elif nargs > 4 and IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] )
-      and IsMatrixForHomalg( arg[4] ) and IsMatrixForHomalg( arg[5] ) then
+    elif nargs > 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
+      and IsHomalgMatrix( arg[4] ) and IsHomalgMatrix( arg[5] ) then
         ## BetterEquivalentMatrix(M,U,V,UI,VI)
         compute_U := true;
         compute_V := true;
@@ -348,7 +348,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         nar_V := 3;
         nar_UI := 4;
         nar_VI := 5;
-    elif IsMatrixForHomalg( arg[2] ) and IsMatrixForHomalg( arg[3] ) then
+    elif IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] ) then
         ## BetterEquivalentMatrix(M,U,V)
         compute_U := true;
         compute_V := true;

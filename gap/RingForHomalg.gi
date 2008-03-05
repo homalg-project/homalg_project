@@ -14,13 +14,13 @@
 #
 ####################################
 
-# two new representations for the category IsRingForHomalg:
-DeclareRepresentation( "IsInternalRingRep",
-        IsRingForHomalg,
+# two new representations for the category IsHomalgRing:
+DeclareRepresentation( "IsHomalgInternalRingRep",
+        IsHomalgRing,
         [ "ring", "HomalgTable" ] );
 
-DeclareRepresentation( "IsExternalRingRep",
-        IsRingForHomalg,
+DeclareRepresentation( "IsHomalgExternalRingRep",
+        IsHomalgRing,
         [ "ring", "HomalgTable" ] );
 
 ####################################
@@ -36,11 +36,11 @@ BindGlobal( "HomalgRingsFamily",
 # two new types:
 BindGlobal( "HomalgInternalRingType",
         NewType( HomalgRingsFamily ,
-                IsInternalRingRep ) );
+                IsHomalgInternalRingRep ) );
 
 BindGlobal( "HomalgExternalRingType",
         NewType( HomalgRingsFamily ,
-                IsExternalRingRep ) );
+                IsHomalgExternalRingRep ) );
 
 ####################################
 #
@@ -182,7 +182,7 @@ od;
 ##
 InstallMethod( Zero,
         "for homalg rings",
-        [ IsInternalRingRep ],
+        [ IsHomalgInternalRingRep ],
         
   function( R )
     
@@ -193,7 +193,7 @@ end );
 ##
 InstallMethod( One,
         "for homalg rings",
-        [ IsInternalRingRep ],
+        [ IsHomalgInternalRingRep ],
         
   function( R )
     
@@ -204,11 +204,72 @@ end );
 ##
 InstallMethod( MinusOne,
         "for homalg rings",
-        [ IsInternalRingRep ],
+        [ IsHomalgInternalRingRep ],
         
   function( R )
     
     return -One( R!.ring );
+    
+end );
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( HomalgPointer,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return HomalgPointer( R!.ring );
+    
+end );
+
+##
+InstallMethod( HomalgExternalCASystem,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return HomalgExternalCASystem( R!.ring );
+    
+end );
+
+##
+InstallMethod( HomalgExternalCASystemVersion,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return HomalgExternalCASystemVersion( R!.ring );
+    
+end );
+
+##
+InstallMethod( HomalgStream,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return HomalgStream( R!.ring );
+    
+end );
+
+##
+InstallMethod( HomalgExternalCASystemPID,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return HomalgExternalCASystemPID( R!.ring );
     
 end );
 
@@ -220,26 +281,33 @@ end );
 
 InstallGlobalFunction( RingForHomalg,
   function( arg )
-    local nargs, homalg_ring, type;
+    local nargs, homalg_ring, table;
     
     nargs := Length( arg );
     
     homalg_ring := rec( ring := arg[1] );
     
-    if IsSemiringWithOneAndZero( arg[1] ) then
-        
-        type := HomalgInternalRingType;
-        
+    if nargs = 1 then
+        table := CreateHomalgTable( arg[1] );
     else
-        
-        type := HomalgExternalRingType;
-        
+        table := arg[nargs];
     fi;
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            homalg_ring, type,
-            HomalgTable, arg[nargs] );
+    if IsSemiringWithOneAndZero( arg[1] ) then
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                homalg_ring, HomalgInternalRingType,
+                HomalgTable, table );
+    
+    elif IsHomalgExternalObjectIORep( arg[1] ) then
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                homalg_ring, HomalgExternalRingType,
+                HomalgTable, table );
+    
+    fi;
     
     return homalg_ring;
     
@@ -253,7 +321,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg rings",
-        [ IsInternalRingRep ],
+        [ IsHomalgInternalRingRep ],
         
   function( o )
     
@@ -263,11 +331,28 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg rings",
-        [ IsExternalRingRep ],
+        [ IsHomalgExternalRingRep ],
         
   function( o )
     
     Print( "<A homalg external ring>" );
     
+end );
+
+InstallMethod( Display,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( o )
+    local RP;
+    
+    RP := HomalgTable( o );
+    
+    if IsBound(RP!.RingName) then
+        Print( RP!.RingName, "\n" );
+    else
+        TryNextMethod( );
+    fi;
+	
 end );
 

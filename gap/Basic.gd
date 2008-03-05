@@ -17,34 +17,34 @@
 # basic operations:
 
 DeclareOperation( "BasisOfRowsCoeff",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfColumnsCoeff",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "EffectivelyDecideZeroRows",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "EffectivelyDecideZeroColumns",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesBasisOfRows",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesBasisOfColumns",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesBasisOfRows",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesBasisOfColumns",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "RightDivide",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "Leftinverse",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 # global functions:
 

@@ -8,7 +8,6 @@
 ##
 #############################################################################
 
-
 ####################################
 #
 # categories:
@@ -17,7 +16,7 @@
 
 # a new category of objects:
 
-DeclareCategory( "IsMatrixForHomalg",
+DeclareCategory( "IsHomalgMatrix",
         IsAttributeStoringRep );
 
 ####################################
@@ -27,43 +26,43 @@ DeclareCategory( "IsMatrixForHomalg",
 ####################################
 
 DeclareProperty( "IsZeroMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsIdentityMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsFullRowRankMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsFullColumnRankMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsEmptyMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsDiagonalMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsUpperTriangularMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsLowerTriangularMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsStrictUpperTriangularMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsStrictLowerTriangularMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "IsTriangularMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "EvalAddRhs",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareProperty( "EvalAddBts",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 ####################################
 #
@@ -72,76 +71,76 @@ DeclareProperty( "EvalAddBts",
 ####################################
 
 DeclareAttribute( "Eval",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalInvolution",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalCertainRows",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalCertainColumns",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalUnionOfRows",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalUnionOfColumns",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalDiagMat",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalMulMat",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalAddMat",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalSubMat",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalCompose",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "EvalGetSide",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "PreEval",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "NrRows",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "NrColumns",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "RowRankOfMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "ColumnRankOfMatrix",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "RightHandSide",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "BottomSide",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "CompatibilityConditions",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "ZeroRows",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "ZeroColumns",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "NonZeroRows",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 DeclareAttribute( "NonZeroColumns",
-        IsMatrixForHomalg );
+        IsHomalgMatrix );
 
 ####################################
 #
@@ -165,53 +164,68 @@ DeclareGlobalFunction( "MatrixForHomalg" );
 # basic operations:
 
 DeclareOperation( "HomalgRing",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgPointer",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgExternalCASystem",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgExternalCASystemVersion",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgStream",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgExternalCASystemPID",
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "Involution",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "CertainRows",
-        [ IsMatrixForHomalg, IsList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "CertainColumns",
-        [ IsMatrixForHomalg, IsList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "UnionOfRows",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "UnionOfColumns",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagMat",
         [ IsList ] );
 
 DeclareOperation( "*",
-        [ IsRingElement, IsMatrixForHomalg ] );
+        [ IsRingElement, IsHomalgMatrix ] );
 
 DeclareOperation( "+",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "AdditiveInverseSameMutability",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "-",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "*",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "AddRhs",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "AddRhs",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "AddBts",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "AddBts",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "GetSide",
-        [ IsString, IsMatrixForHomalg ] );
+        [ IsString, IsHomalgMatrix ] );
 

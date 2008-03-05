@@ -9,11 +9,11 @@
 #############################################################################
 
 
-# Our info class:
+# our info class:
 DeclareInfoClass( "InfoHomalg" );
 SetInfoLevel( InfoHomalg, 1 );
 
-# A central place for configurations:
+# a central place for configurations:
 DeclareGlobalVariable( "HOMALG" );
 
 DeclareGlobalFunction( "LogicalImplicationsForHomalg" );

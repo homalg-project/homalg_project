@@ -506,7 +506,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg modules",
-	[ IsMatrixForHomalg, IsFinitelyPresentedModuleRep ],
+	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     local rel;
@@ -542,7 +542,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZero,
         "for homalg modules",
-	[ IsMatrixForHomalg, IsFinitelyPresentedModuleRep ],
+	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     local rel;
@@ -1228,6 +1228,52 @@ InstallMethod( ViewObj,
 end );
 
 ##
+InstallMethod( PrintObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        
+  function( M )
+    
+    Print( "LeftPresentation( " );
+    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+        Print( "[ ], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
+    else
+        Print( GeneratorsOfModule( M ), ", " );
+        if RelationsOfModule( M ) = "unknown relations" then
+            Print( "[ ], " ) ; ## empty relations
+        else
+            Print( RelationsOfModule( M ), ", " );
+        fi;
+        Print( LeftActingDomain( M ), " " );
+    fi;
+    Print( ")" );
+    
+end );
+
+##
+InstallMethod( PrintObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        
+  function( M )
+    
+    Print( "RightPresentation( " );
+    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+        Print( "[ ], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
+    else
+        Print( GeneratorsOfModule( M ), ", " );
+        if RelationsOfModule( M ) = "unknown relations" then
+            Print( "[ ], " ) ; ## empty relations
+        else
+            Print( RelationsOfModule( M ), ", " );
+        fi;
+        Print( RightActingDomain( M ), " " );
+    fi;
+    Print( ")" );
+    
+end );
+
+##
 InstallMethod( Display,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsZeroModule ],
@@ -1276,52 +1322,6 @@ InstallMethod( Display,
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;
-    
-end );
-
-##
-InstallMethod( PrintObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
-        
-  function( M )
-    
-    Print( "LeftPresentation( " );
-    if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "[ ], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
-    else
-        Print( GeneratorsOfModule( M ), ", " );
-        if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[ ], " ) ; ## empty relations
-        else
-            Print( RelationsOfModule( M ), ", " );
-        fi;
-        Print( LeftActingDomain( M ), " " );
-    fi;
-    Print( ")" );
-    
-end );
-
-##
-InstallMethod( PrintObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsRightModule ],
-        
-  function( M )
-    
-    Print( "RightPresentation( " );
-    if HasIsZeroModule( M ) and IsZeroModule( M ) then
-        Print( "[ ], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
-    else
-        Print( GeneratorsOfModule( M ), ", " );
-        if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[ ], " ) ; ## empty relations
-        else
-            Print( RelationsOfModule( M ), ", " );
-        fi;
-        Print( RightActingDomain( M ), " " );
-    fi;
-    Print( ")" );
     
 end );
 

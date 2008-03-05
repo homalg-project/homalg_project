@@ -8,7 +8,6 @@
 ##
 #############################################################################
 
-
 ####################################
 #
 # categories:
@@ -67,7 +66,7 @@ DeclareOperation( "BasisOfModule",
         [ IsRelationsForHomalg ] );
 
 DeclareOperation( "DecideZero",
-        [ IsMatrixForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgMatrix, IsRelationsForHomalg ] );
 
 DeclareOperation( "DecideZero",
         [ IsRelationsForHomalg, IsRelationsForHomalg ] );
@@ -76,7 +75,7 @@ DeclareOperation( "BasisCoeff",
         [ IsRelationsForHomalg ] );
 
 DeclareOperation( "EffectivelyDecideZero",
-        [ IsMatrixForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgMatrix, IsRelationsForHomalg ] );
 
 DeclareOperation( "SyzygiesGenerators",
         [ IsRelationsForHomalg, IsRelationsForHomalg ] );

@@ -25,7 +25,8 @@ InstallMethod( CreateHomalgTable,
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
-               RingName := "Z",
+               
+               RingName := "Z", ## only relevant to the GAP display method of homalg modules
                
                BestBasis := 
                  function( arg )
@@ -48,53 +49,46 @@ InstallMethod( CreateHomalgTable,
                        N := NormalFormIntMat( Eval( M ), 1 );
                    fi;
                    
-                   # return U:
+                   # assign U:
                    if nargs > 1 then
                        SetEval( arg[2], N.rowtrans );
-		       SetNrRows( arg[2], NrRows( M ) );
-		       SetNrColumns( arg[2], NrRows( M ) );
-		       SetIsFullRowRankMatrix( arg[2], true );
-		       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetNrRows( arg[2], NrRows( M ) );
+                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetIsFullRowRankMatrix( arg[2], true );
+                       SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
-                   # return V:
+                   # assign V:
                    if nargs > 2 then
                        SetEval( arg[3], N.coltrans );
-		       SetNrRows( arg[3], NrColumns( M ) );
-		       SetNrColumns( arg[3], NrColumns( M ) );
-		       SetIsFullRowRankMatrix( arg[3], true );
-		       SetIsFullColumnRankMatrix( arg[3], true );
+                       SetNrRows( arg[3], NrColumns( M ) );
+                       SetNrColumns( arg[3], NrColumns( M ) );
+                       SetIsFullRowRankMatrix( arg[3], true );
+                       SetIsFullColumnRankMatrix( arg[3], true );
                    fi;
                    
                    S := MatrixForHomalg( N.normal, R );
                    
                    SetRowRankOfMatrix( S, N.rank );
                    
-		   SetIsDiagonalMatrix( S, true );
-		   
+                   SetIsDiagonalMatrix( S, true );
+                   
                    return S;
                    
                  end,
                
                ElementaryDivisors :=
                  function( arg )
-                   local M, e, z;    
+                   local M;    
                    
                    M := arg[1];
                    
-                   e := ElementaryDivisorsMat( Eval( M ) );
-                   
-                   z := ListWithIdenticalEntries( NrColumns( M ), 0 );
-                   
-                   z{ [ 1 .. Length( e ) ] } := e;
-                   
-                   e := Filtered( z, x -> x <> 1 );
-                   
-                   return  e;
+                   return ElementaryDivisorsMat( Eval( M ) );
                    
                  end,
                    
                ## Must be defined if other functions are not defined
+                   
                TriangularBasisOfRows :=
                  function( arg )
                    local M, R, nargs, N, H;
@@ -113,25 +107,25 @@ InstallMethod( CreateHomalgTable,
                        N := NormalFormIntMat( Eval( M ), 2 );
                    fi;
                    
-                   # return U:
+                   # assign U:
                    if nargs > 1 then
                        SetEval( arg[2], N.rowtrans );
-		       SetNrRows( arg[2], NrRows( M ) );
-		       SetNrColumns( arg[2], NrRows( M ) );
-		       SetIsFullRowRankMatrix( arg[2], true );
-		       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetNrRows( arg[2], NrRows( M ) );
+                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetIsFullRowRankMatrix( arg[2], true );
+                       SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
                    H := MatrixForHomalg( N.normal, R );
                    
                    SetRowRankOfMatrix( H, N.rank );
                    
-		   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
+                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( H, true );   
                    else
                        SetIsUpperTriangularMatrix( H, true );
                    fi;
-		   
+                   
                    return H;
                    
                  end

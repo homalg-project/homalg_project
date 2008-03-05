@@ -17,7 +17,7 @@
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
-        [ IsMatrixForHomalg ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP;
@@ -37,7 +37,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, U )
     local R, RP;
@@ -57,7 +57,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
-        [ IsMatrixForHomalg ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP;
@@ -77,7 +77,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, V )
     local R, RP, T, U;
@@ -111,7 +111,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix ],
+	[ IsHomalgMatrix and IsZeroMatrix ],
         
   function( M )
     
@@ -122,7 +122,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix ],
+	[ IsHomalgMatrix and IsZeroMatrix ],
         
   function( M )
     
@@ -133,7 +133,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsIdentityMatrix ],
+	[ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
     
@@ -144,7 +144,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsIdentityMatrix ],
+	[ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
     
@@ -155,7 +155,7 @@ end );
 ##
 InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, U, B, rank, Ur, Uc;
@@ -210,7 +210,7 @@ end );
 ##
 InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfModule (low-level))
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, U, B, rank, Ur, Uc;
@@ -265,7 +265,7 @@ end );
 ##
 InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, ring_rel, rel, Mrel, side, zz;
@@ -305,7 +305,7 @@ end );
 ##
 InstallMethod( BasisOfRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix ],
+	[ IsHomalgMatrix and IsZeroMatrix ],
         
   function( M )
     local C, rhs;
@@ -325,7 +325,7 @@ end );
 ##
 InstallMethod( BasisOfRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsIdentityMatrix ],
+	[ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
     local C, rhs;
@@ -345,7 +345,7 @@ end );
 ##
 InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, ring_rel, rel, Mrel, side, zz;
@@ -385,7 +385,7 @@ end );
 ##
 InstallMethod( BasisOfColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix ],
+	[ IsHomalgMatrix and IsZeroMatrix ],
         
   function( M )
     local C, bts;
@@ -405,7 +405,7 @@ end );
 ##
 InstallMethod( BasisOfColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsIdentityMatrix ],
+	[ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
     local C, bts;
@@ -425,7 +425,7 @@ end );
 ##
 InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( L, B )
     local R, RP, l, m, n, id, zz, M, U, C, Ul, T;
@@ -485,7 +485,7 @@ end );
 ##
 InstallMethod( DecideZeroRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg and IsZeroMatrix ],
+	[ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
         
   function( L, B )
     
@@ -496,7 +496,7 @@ end );
 ##
 InstallMethod( DecideZeroRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix, IsMatrixForHomalg ],
+	[ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
         
   function( L, B )
     
@@ -507,7 +507,7 @@ end );
 ##
 InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( L, B )
     local R, RP, l, m, n, id, zz, M, U, C, Ul, T;
@@ -567,7 +567,7 @@ end );
 ##
 InstallMethod( DecideZeroColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg and IsZeroMatrix ],
+	[ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
         
   function( L, B )
     
@@ -578,7 +578,7 @@ end );
 ##
 InstallMethod( DecideZeroColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg and IsZeroMatrix, IsMatrixForHomalg ],
+	[ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
         
   function( L, B )
     
@@ -589,7 +589,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg matrices",
-	[ IsMatrixForHomalg ],
+	[ IsHomalgMatrix ],
         
   function( M )
     local R, RP, ring_rel, rel;
@@ -621,7 +621,7 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP, id, zz, L, BL;
@@ -653,7 +653,7 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsList and IsEmpty ],
+	[ IsHomalgMatrix, IsList and IsEmpty ],
         
   function( M1, M2 )
     local R, RP, L, BL;
@@ -679,7 +679,7 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsMatrixForHomalg ],
+	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP, id, zz, L, BL;
@@ -711,7 +711,7 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
         "for homalg matrices",
-	[ IsMatrixForHomalg, IsList and IsEmpty ],
+	[ IsHomalgMatrix, IsList and IsEmpty ],
         
   function( M1, M2 )
     local R, RP, L, BL;

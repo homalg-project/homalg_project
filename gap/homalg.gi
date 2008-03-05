@@ -8,18 +8,17 @@
 ##
 #############################################################################
 
-
 ####################################
 #
 # global variables:
 #
 ####################################
 
-# A central place for configuration variables:
+# a central place for configuration variables:
 
 InstallValue( HOMALG, rec( ) );
 
-# A global function for logical implications:
+# a global function for logical implications:
 
 InstallGlobalFunction( LogicalImplicationsForHomalg,
   function( arg )

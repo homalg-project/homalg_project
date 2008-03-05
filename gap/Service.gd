@@ -17,49 +17,49 @@
 # basic operations:
 
 DeclareOperation( "TriangularBasisOfRows",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "TriangularBasisOfRows",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "TriangularBasisOfColumns",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "TriangularBasisOfColumns",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfRows",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfRowModule",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfColumns",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfColumnModule",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZeroRows",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZeroColumns",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",
-        [ IsMatrixForHomalg ] );
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfRows",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfRows",
-        [ IsMatrixForHomalg, IsList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
-        [ IsMatrixForHomalg, IsMatrixForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
-        [ IsMatrixForHomalg, IsList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 ####################################
 #

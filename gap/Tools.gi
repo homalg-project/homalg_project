@@ -17,10 +17,22 @@
 ##
 InstallMethod( Eval,				### defines: ZeroMap
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep and IsZeroMatrix ],
+        [ IsHomalgMatrix and IsZeroMatrix ],
         
   function( C )
-    local z;
+    local R, RP, z;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    if IsHomalgExternalMatrixRep( C ) then
+        if IsBound( RP!.ZeroMatrix ) then
+            RP!.ZeroMatrix( C );
+        else
+            Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the HomalgTable", RP, "\n" );
+        fi;
+    fi;
     
     z := Zero( HomalgRing( C ) );
     
@@ -33,10 +45,22 @@ end );
 ##
 InstallMethod( Eval,				### defines: IdentityMap
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep and IsIdentityMatrix ],
+        [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( C )
-    local o, z, zz, id;
+    local R, RP, o, z, zz, id;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    if IsHomalgExternalMatrixRep( C ) then
+        if IsBound( RP!.IdentityMatrix ) then
+            RP!.IdentityMatrix( C );
+        else
+            Error( "could not find a procedure called IdentityMatrix to evaluate an external identity matrix in the HomalgTable", RP, "\n" );
+        fi;
+    fi;
     
     z := Zero( HomalgRing( C ) );
     o := One( HomalgRing( C ) );
@@ -55,7 +79,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: Involution
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalInvolution ],
+        [ IsHomalgMatrix and HasEvalInvolution ],
         
   function( C )
     local R, RP, M;
@@ -79,7 +103,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: CertainRows
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalCertainRows ],
+        [ IsHomalgMatrix and HasEvalCertainRows ],
         
   function( C )
     local R, RP, e, M, plist;
@@ -106,7 +130,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: CertainColumns
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalCertainColumns ],
+        [ IsHomalgMatrix and HasEvalCertainColumns ],
         
   function( C )
     local R, RP, e, M, plist;
@@ -133,7 +157,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: UnionOfRows
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalUnionOfRows ],
+        [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( C )
     local R, RP, e, A, B, U;
@@ -164,7 +188,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: UnionOfColumns
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalUnionOfColumns ],
+        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
     local R, RP, e, A, B, U;
@@ -195,7 +219,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: DiagMat
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalDiagMat ],
+        [ IsHomalgMatrix and HasEvalDiagMat ],
         
   function( C )
     local R, RP, e, z, m, n, diag, mat;
@@ -235,7 +259,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: MulMat
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalMulMat ],
+        [ IsHomalgMatrix and HasEvalMulMat ],
         
   function( C )
     local R, RP, e, a, A;
@@ -250,7 +274,16 @@ InstallMethod( Eval,				### defines: MulMat
     A := e[2];
     
     if IsBound(RP!.MulMat) then
-        return RP!.MulMat( a, A );
+        
+        e := RP!.MulMat( a, A );
+        
+        if HasRingRelations( R ) then
+            e := MatrixForHomalg( e, R );
+            return Eval( DecideZero( e ) );
+        fi;
+        
+        return e;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -269,7 +302,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddMat
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddMat ],
+        [ IsHomalgMatrix and HasEvalAddMat ],
         
   function( C )
     local R, RP, e, A, B;
@@ -284,7 +317,16 @@ InstallMethod( Eval,				### defines: AddMat
     B := e[2];
     
     if IsBound(RP!.AddMat) then
-        return RP!.AddMat( A, B );
+        
+        e := RP!.AddMat( A, B );
+        
+        if HasRingRelations( R ) then
+            e := MatrixForHomalg( e, R );
+            return Eval( DecideZero( e ) );
+        fi;
+        
+        return e;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -303,7 +345,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: SubMat
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalSubMat ],
+        [ IsHomalgMatrix and HasEvalSubMat ],
         
   function( C )
     local R, RP, e, A, B;
@@ -318,7 +360,16 @@ InstallMethod( Eval,				### defines: SubMat
     B := e[2];
     
     if IsBound(RP!.SubMat) then
-        return RP!.SubMat( A, B );
+        
+        e := RP!.SubMat( A, B );
+        
+        if HasRingRelations( R ) then
+            e := MatrixForHomalg( e, R );
+            return Eval( DecideZero( e ) );
+        fi;
+        
+        return e;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -337,7 +388,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: Compose
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalCompose ],
+        [ IsHomalgMatrix and HasEvalCompose ],
         
   function( C )
     local R, RP, e, A, B;
@@ -352,7 +403,16 @@ InstallMethod( Eval,				### defines: Compose
     B := e[2];
     
     if IsBound(RP!.Compose) then
-        return RP!.Compose( A, B );
+        
+        e := RP!.Compose( A, B );
+        
+        if HasRingRelations( R ) then
+            e := MatrixForHomalg( e, R );
+            return Eval( DecideZero( e ) );
+        fi;
+        
+        return e;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -371,7 +431,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddRhs
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddRhs and EvalAddRhs and HasPreEval ], ## don't remove HasPreEval
+        [ IsHomalgMatrix and EvalAddRhs and HasPreEval ], ## don't remove HasPreEval
         
   function( C )
     local R, RP, A, B;
@@ -396,7 +456,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: AddBts
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalAddBts and EvalAddBts and HasPreEval ], ## don't remove HasPreEval
+        [ IsHomalgMatrix and EvalAddBts and HasPreEval ], ## don't remove HasPreEval
         
   function( C )
     local R, RP, A, B;
@@ -421,7 +481,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: GetSide
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasEvalGetSide ],
+        [ IsHomalgMatrix and HasEvalGetSide ],
         
   function( C )
     local R, RP, e, side, A;
@@ -458,7 +518,7 @@ end );
 ##
 InstallMethod( Eval,
         "for homalg matrices",
-        [ IsMatrixForHomalg and HasPreEval ],
+        [ IsHomalgMatrix and HasPreEval ],
         
   function( C )
     local R, RP, e;
@@ -482,7 +542,7 @@ end );
 ##
 InstallMethod( NrRows,				### defines: NrRows
         "for homalg matrices",
-        [ IsMatrixForHomalg ],
+        [ IsHomalgMatrix ],
         
   function( C )
     local R, RP;
@@ -504,7 +564,7 @@ end );
 ##
 InstallMethod( NrColumns,			### defines: NrColumns
         "for homalg matrices",
-        [ IsMatrixForHomalg ],
+        [ IsHomalgMatrix ],
         
   function( C )
     local R, RP;
@@ -526,7 +586,7 @@ end );
 ##
 InstallMethod( ZeroRows,			### defines: ZeroRows
         "for homalg matrices",
-        [ IsMatrixForHomalg ],
+        [ IsHomalgMatrix ],
         
   function( C )
     local R, RP, z;
@@ -550,7 +610,7 @@ end );
 ##
 InstallMethod( ZeroColumns,			### defines: ZeroColumns
         "for homalg matrices",
-        [ IsMatrixForHomalg ],
+        [ IsHomalgMatrix ],
         
   function( C )
     local R, RP, z;

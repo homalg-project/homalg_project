@@ -201,25 +201,25 @@ InstallGlobalFunction( CreateGeneratorsForLeftModule,
     nargs := Length( arg );
     
     for ar in arg{ [ 2 .. nargs ] } do
-        if IsRingForHomalg( ar ) then
+        if IsHomalgRing( ar ) then
             R := ar;
             break;
         fi;
     od;
     
-    if IsMatrixForHomalg( arg[1] ) then
+    if IsHomalgMatrix( arg[1] ) then
         generators := arg[1];
     elif IsBound( R ) then
         generators := MatrixForHomalg( arg[1], R );
     else
-        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
+        Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
     fi;
     
     for ar in arg{ [ 2 .. nargs ] } do
         if IsRelationsForHomalg( ar ) then
             relations_of_hullmodule := ar;
             break;
-        elif IsMatrixForHomalg( ar ) then
+        elif IsHomalgMatrix( ar ) then
             relations_of_hullmodule := CreateRelationsForLeftModule( ar );
             break;
         elif nargs > 2 then
@@ -227,7 +227,7 @@ InstallGlobalFunction( CreateGeneratorsForLeftModule,
                 relations_of_hullmodule := CreateRelationsForLeftModule( ar, R );
                 break;
             else
-                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
+                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
             fi;
         fi;
     od;
@@ -258,25 +258,25 @@ InstallGlobalFunction( CreateGeneratorsForRightModule,
     nargs := Length( arg );
     
     for ar in arg{ [ 2 .. nargs ] } do
-        if IsRingForHomalg( ar ) then
+        if IsHomalgRing( ar ) then
             R := ar;
             break;
         fi;
     od;
     
-    if IsMatrixForHomalg( arg[1] ) then
+    if IsHomalgMatrix( arg[1] ) then
         generators := arg[1];
     elif IsBound( R ) then
         generators := MatrixForHomalg( arg[1], R );
     else
-        Error( "if the first argument isn't of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
+        Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
     fi;
     
     for ar in arg{ [ 2 .. nargs ] } do
         if IsRelationsForHomalg( ar ) then
             relations_of_hullmodule := ar;
             break;
-        elif IsMatrixForHomalg( ar ) then
+        elif IsHomalgMatrix( ar ) then
             relations_of_hullmodule := CreateRelationsForRightModule( ar );
             break;
         elif nargs > 2 then
@@ -284,7 +284,7 @@ InstallGlobalFunction( CreateGeneratorsForRightModule,
                 relations_of_hullmodule := CreateRelationsForRightModule( ar, R );
                 break;
             else
-                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsMatrixForHomalg, then the last argument must be of type IsRingForHomalg; but recieved: ", arg[nargs], "\n" );
+                Error( "if more than two arguments are provided and the second argument is neither of type IsRelationsForHomalg nor of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
             fi;
         fi;
     od;

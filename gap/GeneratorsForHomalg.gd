@@ -1,14 +1,12 @@
 #############################################################################
 ##
 ##  GeneratorsForHomalg.gd      homalg package               Mohamed Barakatxb
-
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Declaration stuff for a set of generators.
 ##
 #############################################################################
-
 
 ####################################
 #
