@@ -32,6 +32,7 @@ ReadPackage( "homalg", "gap/Fields.gi" );
 
 ReadPackage( "homalg", "gap/sage.g" );
 ReadPackage( "homalg", "gap/singular.g" );
+ReadPackage( "homalg", "gap/maple9.g" );
 ReadPackage( "homalg", "gap/maple95.g" );
 ReadPackage( "homalg", "gap/maple10.g" );
 
