@@ -670,13 +670,8 @@ InstallMethod( BetterGenerators,
     
     rel := MatrixOfRelations( M );
     
-    if IsHomalgInternalMatrixRep( rel ) then
-        V := MatrixForHomalg( "internal", R );
-        VI := MatrixForHomalg( "internal", R );
-    else
-        V := MatrixForHomalg( "external", R );
-        VI := MatrixForHomalg( "external", R );
-    fi;
+    V := MatrixForHomalg( R );
+    VI := MatrixForHomalg( R );
     
     rel := BetterEquivalentMatrix( rel, V, VI, "", "" );
     

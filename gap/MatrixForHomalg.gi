@@ -553,7 +553,7 @@ end );
 ##
 InstallMethod( IsZeroMatrix,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep ],
+        [ IsHomalgMatrix ],
         
   function( M )
     
@@ -641,6 +641,30 @@ InstallMethod( \=,
   function( M1, M2 )
     
     return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) and Eval( M1 ) = Eval( M2 );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalMatrixRep ],
+        
+  function( M1, M2 )
+    local R, RP;
+    
+    if not IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) then
+        return false;
+    fi;
+    
+    R := HomalgRing( M1 );
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.Equal) and IsBound(RP!.True) then
+        return RP!.Equal( M1, M2 ) = RP!.True;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -1495,7 +1519,7 @@ end );
 
 InstallGlobalFunction( MatrixForHomalg,
   function( arg )
-    local nargs, R, ar, matrix, M;
+    local nargs, R, type, ar, matrix, M;
     
     nargs := Length( arg );
     
@@ -1503,11 +1527,7 @@ InstallGlobalFunction( MatrixForHomalg,
         
         R := HomalgRing( arg[1] );
         
-        if IsHomalgInternalMatrixRep( arg[1] ) then
-            M := MatrixForHomalg( "internal", R );
-        else
-            M := MatrixForHomalg( "external", R );
-        fi;
+        M := MatrixForHomalg( R );
         
         SetPreEval( M, arg[1] );
         
@@ -1521,28 +1541,23 @@ InstallGlobalFunction( MatrixForHomalg,
         Error( "the last argument must be an IsHomalgRing" );
     fi;
     
+    if IsHomalgInternalRingRep( R ) then
+        type := HomalgInternalMatrixType;
+    else
+        type := HomalgExternalMatrixType;
+    fi;
+    
     matrix := rec( ring := R );
     
     ## an empty matrix:
     if nargs = 1 then ## only the ring is given
         
-        if IsHomalgInternalRingRep( R ) then
-            
-            ## Objectify:
-            Objectify( HomalgInternalMatrixType, matrix );
-            
-            return matrix;
-            
-        else
-            
-            ## Objectify:
-            Objectify( HomalgExternalMatrixType, matrix );
-            
-            return matrix;
-            
-        fi;
+        ## Objectify:
+        Objectify( type, matrix );
         
-    elif IsString( arg[1] ) and Length( arg[1] ) > 2 then
+        return matrix;
+        
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 then ## it can get obscure ;)
         
         if LowercaseString( arg[1]{[1..3]} ) = "int" then
             
@@ -1567,7 +1582,7 @@ InstallGlobalFunction( MatrixForHomalg,
         
         ## Objectify:
         ObjectifyWithAttributes(
-                matrix, HomalgInternalMatrixType,
+                matrix, type,
                 IsIdentityMatrix, true );
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
@@ -1584,7 +1599,7 @@ InstallGlobalFunction( MatrixForHomalg,
         
         ## Objectify:
         ObjectifyWithAttributes(
-                matrix, HomalgInternalMatrixType,
+                matrix, type,
                 IsZeroMatrix, true );
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
@@ -1764,5 +1779,15 @@ InstallMethod( Display,
   function( o )
     
     Display( Eval( o ) );
+    
+end);
+
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep ],
+        
+  function( o )
+    
+    Print( Concatenation( HomalgSendBlocking( [ o ], "need_output" ), "\n" ) );
     
 end);

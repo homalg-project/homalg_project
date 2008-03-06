@@ -28,7 +28,7 @@ InstallMethod( Eval,				### defines: ZeroMap
     
     if IsHomalgExternalMatrixRep( C ) then
         if IsBound( RP!.ZeroMatrix ) then
-            RP!.ZeroMatrix( C );
+            return RP!.ZeroMatrix( C );
         else
             Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the HomalgTable", RP, "\n" );
         fi;
@@ -56,7 +56,7 @@ InstallMethod( Eval,				### defines: IdentityMap
     
     if IsHomalgExternalMatrixRep( C ) then
         if IsBound( RP!.IdentityMatrix ) then
-            RP!.IdentityMatrix( C );
+            return RP!.IdentityMatrix( C );
         else
             Error( "could not find a procedure called IdentityMatrix to evaluate an external identity matrix in the HomalgTable", RP, "\n" );
         fi;

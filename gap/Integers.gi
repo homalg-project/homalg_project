@@ -69,8 +69,9 @@ InstallMethod( CreateHomalgTable,
                    
                    S := MatrixForHomalg( N.normal, R );
                    
+                   SetNrRows( S, NrRows( M ) );
+                   SetNrColumns( S, NrColumns( M ) );
                    SetRowRankOfMatrix( S, N.rank );
-                   
                    SetIsDiagonalMatrix( S, true );
                    
                    return S;
@@ -118,6 +119,8 @@ InstallMethod( CreateHomalgTable,
                    
                    H := MatrixForHomalg( N.normal, R );
                    
+                   SetNrRows( H, NrRows( M ) );
+                   SetNrColumns( H, NrColumns( M ) );
                    SetRowRankOfMatrix( H, N.rank );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
@@ -129,9 +132,9 @@ InstallMethod( CreateHomalgTable,
                    return H;
                    
                  end
-                   
-          );
                  
+          );
+    
     Objectify( HomalgTableType, RP );
     
     return RP;

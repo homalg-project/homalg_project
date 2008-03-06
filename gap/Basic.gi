@@ -366,19 +366,11 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     finished := false;
     
     if (compute_U or compute_UI or compute_V or compute_VI) then ## this is not a mistake
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
+        U := MatrixForHomalg( R );
     fi;
         
     if (compute_V or compute_VI) then
-        if IsHomalgInternalMatrixRep( M ) then
-            V := MatrixForHomalg( "internal", R );
-        else
-            V := MatrixForHomalg( "external", R );
-        fi;
+        V := MatrixForHomalg( R );
     fi;
     
     #=====# begin of the core procedure #=====#

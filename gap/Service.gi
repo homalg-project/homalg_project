@@ -90,11 +90,7 @@ InstallMethod( TriangularBasisOfColumns,
         return RP!.TriangularBasisOfColumns( M, V );
     fi;
     
-    if IsHomalgInternalMatrixRep( V ) then
-        U := MatrixForHomalg( "internal", R );
-    else
-        U := MatrixForHomalg( "external", R );
-    fi;
+    U := MatrixForHomalg( R );
     
     T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
     
@@ -171,11 +167,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     #=====# begin of the core procedure #=====#
     
     if HasRightHandSide( M ) then
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
+        U := MatrixForHomalg( R );
         
         B := TriangularBasisOfRows( M, U );
     else
@@ -226,11 +218,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     #=====# begin of the core procedure #=====#
     
     if HasBottomSide( M ) then
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
+        U := MatrixForHomalg( R );
         
         B := TriangularBasisOfColumns( M, U );
     else
@@ -278,11 +266,11 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
         return RP!.BasisOfRows( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
-    
     if not HasRingRelations( R ) then
         return BasisOfRowModule( M );
     fi;
+    
+    #=====# begin of the core procedure #=====#
     
     ring_rel := RingRelations( R );
     
@@ -358,11 +346,11 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
         return RP!.BasisOfColumns( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
-    
     if not HasRingRelations( R ) then
         return BasisOfColumnModule( M );
     fi;
+    
+    #=====# begin of the core procedure #=====#
     
     ring_rel := RingRelations( R );
     
@@ -452,11 +440,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     M := UnionOfRows( UnionOfColumns( id, L ), UnionOfColumns( zz, B ) );
     
     if HasRightHandSide( B ) then
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
+        U := MatrixForHomalg( R );
         
         M := TriangularBasisOfRows( M, U );
     else
@@ -534,11 +518,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     M := UnionOfColumns( UnionOfRows( id, L ), UnionOfRows( zz, B ) );
     
     if HasBottomSide( B ) then
-        if IsHomalgInternalMatrixRep( M ) then
-            U := MatrixForHomalg( "internal", R );
-        else
-            U := MatrixForHomalg( "external", R );
-        fi;
+        U := MatrixForHomalg( R );
         
         M := TriangularBasisOfColumns( M, U );
     else
@@ -600,6 +580,10 @@ InstallMethod( DecideZero,
   
     if IsBound(RP!.DecideZero) then
         return RP!.DecideZero( M );
+    fi;
+    
+    if not HasRingRelations( R ) then
+        return M;
     fi;
     
     #=====# begin of the core procedure #=====#
