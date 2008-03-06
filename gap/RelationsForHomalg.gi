@@ -12,9 +12,9 @@
 #
 # representations:
 #
+# CAUTION: in the code we use the the following two reps are the only ones!!!!
+#
 ####################################
-
-## CAUTION: in the code we use the the following two reps are the only ones!!!!
 
 # two new representations for the category IsRelationsForHomalg:
 DeclareRepresentation( "IsLeftRelationsForHomalgRep",

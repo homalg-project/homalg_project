@@ -16,7 +16,7 @@
 
 InstallMethod( CreateHomalgTable,
                "for Sage Integers",
-               [ IsHomalgExternalObjectIORep and IsSageIntegers ],
+               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsSageIntegers ],
 
   function( arg )
     local RP;
@@ -42,9 +42,9 @@ InstallMethod( CreateHomalgTable,
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
                        HomalgSendBlocking( [ "_S,_U,_V =", M, ".dense_matrix().smith_form()" ], "need_command" );
                        HomalgSendBlocking( [ "left_matrix=matrix(ZZ,", NrRows( M ), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrRows( M ), "):\n  left_matrix[i,", NrRows( M ) - 1, "]=1\n\n" ], "need_command", R );
+                       HomalgSendBlocking( [ "for i in range(", NrRows( M ), "):\n  left_matrix[i,", NrRows( M ) - 1, "-i]=1\n\n" ], "need_command", R );
                        HomalgSendBlocking( [ "right_matrix=matrix(ZZ,", NrColumns( M ), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrColumns( M ), "):\n  right_matrix[i,", NrColumns( M ) - 1, "]=1\n\n" ], "need_command", R );
+                       HomalgSendBlocking( [ "for i in range(", NrColumns( M ), "):\n  right_matrix[i,", NrColumns( M ) - 1, "-i]=1\n\n" ], "need_command", R );
                        rank_of_S := Int( HomalgSendBlocking( [ "_S.rank()" ], "need_output", R ) );
                        S := HomalgSendBlocking( [ "left_matrix*_S.sparse_matrix()*right_matrix" ], R );
                        U := HomalgSendBlocking( [ "left_matrix*_U.sparse_matrix()" ], R );
@@ -89,14 +89,11 @@ InstallMethod( CreateHomalgTable,
                
                ElementaryDivisors :=
                  function( arg )
-                   local M, list_string;
+                   local M;
                    
                    M:=arg[1];
                    
-                   list_string := HomalgSendBlocking( [ M, ".elementary_divisors()" ], "need_output" );
-                   list_string := List( list_string, x -> Int( [x] ) );
-                   list_string := Filtered( list_string, x -> not x=fail);
-                   return list_string;
+                   return HomalgSendBlocking( [ M, ".elementary_divisors()" ] );
                    
                  end,
                  
@@ -159,11 +156,11 @@ InstallMethod( CreateHomalgTable,
                    
                True := "True",
                
-               Zero := "0",
+               Zero := HomalgExternalObject( "0", "Sage" ),
                
-               One := "1",
+               One := HomalgExternalObject( "1", "Sage" ),
                
-               MinusOne := "-1",
+               MinusOne := HomalgExternalObject( "(-1)", "Sage" ),
                
                Equal :=
                  function( A, B )

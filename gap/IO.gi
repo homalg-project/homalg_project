@@ -21,7 +21,7 @@ BindGlobal( "HomalgExternalObjectFamily",
 # a new type:
 BindGlobal( "HomalgExternalObjectType",
         NewType( HomalgExternalObjectFamily,
-                IsHomalgExternalObjectIORep ) );
+                IsHomalgExternalObjectRep ) );
 
 ####################################
 #
@@ -32,7 +32,7 @@ BindGlobal( "HomalgExternalObjectType",
 ##
 InstallMethod( HomalgPointer,
         "for homalg matrices",
-        [ IsHomalgExternalObjectIORep ],
+        [ IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
@@ -47,7 +47,7 @@ end );
 ##
 InstallMethod( HomalgExternalCASystem,
         "for homalg matrices",
-        [ IsHomalgExternalObjectIORep ],
+        [ IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
@@ -62,7 +62,7 @@ end );
 ##
 InstallMethod( HomalgExternalCASystemVersion,
         "for homalg matrices",
-        [ IsHomalgExternalObjectIORep ],
+        [ IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
@@ -77,7 +77,7 @@ end );
 ##
 InstallMethod( HomalgStream,
         "for homalg matrices",
-        [ IsHomalgExternalObjectIORep ],
+        [ IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
@@ -92,7 +92,7 @@ end );
 ##
 InstallMethod( HomalgExternalCASystemPID,
         "for homalg matrices",
-        [ IsHomalgExternalObjectIORep ],
+        [ IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
@@ -116,7 +116,7 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
                              if IsString( L[a] ) then
                                  return L[a];
                              else
-                                 if IsHomalgExternalObjectIORep( L[a] )
+                                 if IsHomalgExternalObjectRep( L[a] )
                                     or IsHomalgExternalMatrixRep( L[a] ) then
                                      t := HomalgPointer( L[a] );
                                  else
@@ -135,7 +135,7 @@ end );
 ##
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
-    local L, nargs, option, R, ext_obj, e, RP, cas, cas_version, stream, homalg_variable,
+    local L, nargs, properties, ar, option, R, ext_obj, e, RP, cas, cas_version, stream, homalg_variable,
           SendBlocking, define, l, eol_verbose, eol_quiet, eol, enter;
     
     if not IsList( arg[1] ) then
@@ -146,39 +146,40 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     nargs := Length( arg );
     
-    if nargs = 2 then
-        if IsString( arg[2] ) then
-            option := arg[2];
-        elif IsHomalgExternalRingRep( arg[2] ) then
-            R := arg[2];
+    properties := [];
+    
+    for ar in arg{[ 2 .. nargs ]} do
+        if not IsBound( option ) and IsString( ar ) then
+            option := ar;
+        elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
+            R := ar;
             ext_obj := R;
+        elif not IsBound( ext_obj )
+          and HasIsHomalgExternalObjectWithIOStream( ar ) and IsHomalgExternalObjectWithIOStream( ar ) then
+            ext_obj := ar;
+        elif IsOperation( ar ) then
+            Add( properties, ar );
         else
-            Error( "if two arguments are provided, then the second argument must be a string or an IsHomalgExternalRingRep" );
+            Error( "this argument should be in { IsString, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
         fi;
-    elif nargs = 3 then
-        if IsString( arg[2] ) and IsHomalgExternalRingRep( arg[3] ) then
-            option := arg[2];
-            R := arg[3];
-            ext_obj := R;
-        else
-            Error( "if three arguments are provided, then the second argument must be a string and the third an IsHomalgExternalRingRep" );
-        fi;
-    fi;
+    od;
     
     if not IsBound( ext_obj ) then
-        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) );
+        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) ); ## after adding things here the Error message below has to be updated
         if e <> [ ] then
             ext_obj := e[1];
             R := HomalgRing( ext_obj ); ## we assume that ext_obj is either a matrix or an external ring element
         else
-            Error( "since the last argument is not an external ring the first argument must be a list containing at least one external object\n" );
+            Error( "since the last argument is not an external ring or an external object the list provided the first argument must contain at least one external matrix\n" );
         fi;
     fi;
     
-    RP := HomalgTable( R );
-    
-    if IsBound(RP!.HomalgSendBlocking) then
-        return RP!.HomalgSendBlocking( arg );
+    if IsBound( R ) then
+        RP := HomalgTable( R );
+        
+        if IsBound(RP!.HomalgSendBlocking) then
+            return RP!.HomalgSendBlocking( arg );
+        fi;
     fi;
     
     cas := HomalgExternalCASystem( ext_obj );
@@ -186,27 +187,27 @@ InstallGlobalFunction( HomalgSendBlocking,
     stream := HomalgStream( ext_obj );
     
     if not IsBound( option ) then
-        if not IsBound( RP!.ExternalVariableCounter ) then
-            RP!.ExternalVariableCounter := 1;
+        if not IsBound( stream.ExternalVariableCounter ) then
+            stream.ExternalVariableCounter := 1;
         fi;
-        homalg_variable := Concatenation( "homalg_variable_", String( RP!.ExternalVariableCounter ) );
+        homalg_variable := Concatenation( "homalg_variable_", String( stream.ExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
-        RP!.ExternalVariableCounter := RP!.ExternalVariableCounter + 1;
+        stream.ExternalVariableCounter := stream.ExternalVariableCounter + 1;
     fi;
     
     L := HomalgCreateStringForExternalCASystem( L );
     
-    if LowercaseString( cas{[1..4]} ) = "sage" then
+    if Length( cas ) > 3 and LowercaseString( cas{[1..4]} ) = "sage" then
         SendBlocking := SendSageBlocking;
         define := "=";
         eol_verbose := "";
         eol_quiet := ";";
-    elif LowercaseString( cas{[1..8]} ) = "singular" then
+    elif Length( cas ) > 7 and LowercaseString( cas{[1..8]} ) = "singular" then
         SendBlocking := SendSingularBlocking;
         define := "=";
         eol_verbose := ";";
         eol_quiet := ";";
-    elif LowercaseString( cas{[1..5]} ) = "maple" then
+    elif Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
         if cas_version = "10" then
             SendBlocking := SendMaple10Blocking;
         elif cas_version = "9.5" then
@@ -249,7 +250,15 @@ InstallGlobalFunction( HomalgSendBlocking,
     SendBlocking( stream, L );
     
     if not IsBound( option ) then
-        return HomalgExternalObject( homalg_variable, cas, stream );
+        L := HomalgExternalObject( homalg_variable, cas, stream );
+        
+        if properties <> [ ] and IsHomalgExternalObjectWithIOStream( L ) then
+            for ar in properties do
+                Setter( ar )( L, true );
+            od;
+        fi;
+        
+        return L;
     else
         return stream.lines;
     fi;
@@ -264,12 +273,41 @@ end );
 
 InstallGlobalFunction( HomalgExternalObject,
   function( arg )
-    local obj;
+    local nargs, properties, ar, stream, obj;
     
-    obj := rec( pointer := arg[1], cas := arg[2], stream := arg[3] );
+    nargs := Length( arg );
     
-    ## Objectify:
-    Objectify( HomalgExternalObjectType, obj );
+    properties := [ ];
+    
+    for ar in arg{[ 3 .. nargs ]} do
+        if not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
+            stream := ar;
+        elif IsOperation( ar ) then
+            Add( properties, ar );
+        else
+            Error( "this argument should be in { IsRecord, IsOperation } bur recieved: ", ar,"\n" );
+        fi;
+    od;
+    
+    if IsBound( stream ) then
+        obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                obj, HomalgExternalObjectType,
+                IsHomalgExternalObjectWithIOStream, true );
+    else
+        obj := rec( pointer := arg[1], cas := arg[2] );
+        
+        ## Objectify:
+        Objectify( HomalgExternalObjectType, obj );
+    fi;
+    
+    if properties <> [ ] then
+        for ar in properties do
+            Setter( ar )( obj, true );
+        od;
+    fi;
     
     return obj;
     
@@ -283,7 +321,18 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg matrices",
-        [ IsHomalgExternalObjectIORep ],
+        [ IsHomalgExternalObjectRep ],
+        
+  function( o )
+    
+    Print( "<A homalg external object for the CAS " );
+    Print( HomalgExternalCASystem( o ), ">" ); 
+    
+end );
+
+InstallMethod( ViewObj,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     

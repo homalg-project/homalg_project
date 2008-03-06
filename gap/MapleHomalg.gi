@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageIntegers.gi             homalg package               Mohamed Barakat
+##  MapleHomalg.gi              homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,8 +15,8 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-               "for Sage Integers",
-               [ IsHomalgExternalObjectIORep and IsMapleHomalgRing ],
+               "for maple homalg rings",
+               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsHomalgMapleRing ],
 
   function( arg )
     local RP;

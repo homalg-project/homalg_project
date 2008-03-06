@@ -15,5 +15,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsMapleHomalgRing",
+DeclareProperty( "IsHomalgMapleRing",
         IsHomalgRing );

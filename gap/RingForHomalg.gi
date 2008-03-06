@@ -354,7 +354,7 @@ InstallGlobalFunction( RingForHomalg,
                 homalg_ring, HomalgInternalRingType,
                 HomalgTable, table );
     
-    elif IsHomalgExternalObjectIORep( arg[1] ) then
+    elif IsHomalgExternalObjectRep( arg[1] ) then
         
         ## Objectify:
         ObjectifyWithAttributes(

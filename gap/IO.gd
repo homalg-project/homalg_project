@@ -28,9 +28,18 @@ DeclareCategory( "IsHomalgExternalObject",
 ####################################
 
 # a new representation for the category IsHomalgExternalObject:
-DeclareRepresentation( "IsHomalgExternalObjectIORep",
+DeclareRepresentation( "IsHomalgExternalObjectRep",
         IsHomalgExternalObject,
-        [ "object", "cas", "stream" ] );
+        [ "object", "cas" ] );
+
+####################################
+#
+# properties:
+#
+####################################
+
+DeclareProperty( "IsHomalgExternalObjectWithIOStream",
+        IsHomalgExternalObject );
 
 ####################################
 #

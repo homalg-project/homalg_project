@@ -15,6 +15,37 @@
 ####################################
 
 ##
+InstallMethod( Eval,				### defines: an initial matrix full with zeros
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsInitialMatrix ],
+        
+  function( C )
+    local R, RP, z;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    if IsHomalgExternalMatrixRep( C ) then
+        if IsBound( RP!.ZeroMatrix ) then
+            ResetFilterObj( C, IsInitialMatrix );
+            return RP!.ZeroMatrix( C );
+        else
+            Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the HomalgTable", RP, "\n" );
+        fi;
+    fi;
+    
+    z := Zero( HomalgRing( C ) );
+    
+    #=====# begin of the core procedure #=====#
+    
+    ResetFilterObj( C, IsInitialMatrix );
+    
+    return ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) );
+    
+end );
+
+##
 InstallMethod( Eval,				### defines: ZeroMap
         "for homalg matrices",
         [ IsHomalgMatrix and IsZeroMatrix ],

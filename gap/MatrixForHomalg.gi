@@ -82,6 +82,12 @@ InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsUpperTriangularMatrix 
 InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsZeroMatrix );
 
 ##
+InstallTrueMethod( IsStrictUpperTriangularMatrix, IsHomalgMatrix and IsZeroMatrix );
+
+##
+InstallTrueMethod( IsStrictLowerTriangularMatrix, IsHomalgMatrix and IsZeroMatrix );
+
+##
 InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsIdentityMatrix );
 
 ##
@@ -984,6 +990,27 @@ end );
 
 ##
 InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgExternalObject, IsHomalgMatrix ],
+        
+  function( a, A )
+    local R, C;
+    
+    R := HomalgRing( A );
+    
+    C := MatrixForHomalg( R );
+    
+    SetEvalMulMat( C, [ a, A ] );
+    
+    SetNrRows( C, NrRows( A ) );
+    SetNrColumns( C, NrColumns( A ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( \*,
         "of homalg matrices with ring elements",
         [ IsRingElement and IsZero, IsHomalgMatrix ],
         
@@ -1594,6 +1621,25 @@ InstallGlobalFunction( MatrixForHomalg,
         
     fi;
     
+    ## an empty matrix filled zeros:
+    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "init" then
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsInitialMatrix, true );
+        
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+            SetNrRows( matrix, arg[2] );
+	    if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+                SetNrColumns( matrix, arg[3] );
+            fi;
+        fi;
+        
+        return matrix;
+        
+    fi;
+        
     ## the zero matrix:
     if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
         

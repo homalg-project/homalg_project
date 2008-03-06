@@ -25,6 +25,9 @@ DeclareCategory( "IsHomalgMatrix",
 #
 ####################################
 
+DeclareProperty( "IsInitialMatrix",
+        IsHomalgMatrix );
+
 DeclareProperty( "IsZeroMatrix",
         IsHomalgMatrix );
 
@@ -201,6 +204,9 @@ DeclareOperation( "DiagMat",
 
 DeclareOperation( "*",
         [ IsRingElement, IsHomalgMatrix ] );
+
+DeclareOperation( "*",
+        [ IsHomalgExternalObject, IsHomalgMatrix ] );
 
 DeclareOperation( "+",
         [ IsHomalgMatrix, IsHomalgMatrix ] );

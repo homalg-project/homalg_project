@@ -13,6 +13,8 @@ ReadPackage( "homalg", "gap/homalg.gd" );
 ReadPackage( "homalg", "gap/HomalgTable.gd" );
 ReadPackage( "homalg", "gap/RingForHomalg.gd" );
 
+ReadPackage( "homalg", "gap/IO.gd" );
+
 ReadPackage( "homalg", "gap/MatrixForHomalg.gd" );
 
 ReadPackage( "homalg", "gap/RelationsForHomalg.gd" );
@@ -25,7 +27,5 @@ ReadPackage( "homalg", "gap/Tools.gd" );
 ReadPackage( "homalg", "gap/Service.gd" );
 ReadPackage( "homalg", "gap/Basic.gd" );
 ReadPackage( "homalg", "gap/Modules.gd" );
-
-ReadPackage( "homalg", "gap/IO.gd" );
 
 ReadPackage( "homalg", "gap/SageIntegers.gd" );
