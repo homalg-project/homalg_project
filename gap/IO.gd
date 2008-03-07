@@ -72,3 +72,6 @@ DeclareGlobalFunction( "HomalgCreateStringForExternalCASystem" );
 
 DeclareGlobalFunction( "HomalgSendBlocking" ); ## this name was implicitly suggested by Max Neunhoeffer ;)
 
+DeclareGlobalFunction( "StringToIntList" );
+
+DeclareGlobalFunction( "StringToElementStringList" );

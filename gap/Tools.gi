@@ -620,21 +620,23 @@ InstallMethod( ZeroRows,			### defines: ZeroRows
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, z;
+    local R, RP, M, z;
     
     R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
+    M := DecideZero( C );
+    
     if IsBound(RP!.ZeroRows) then
-        return RP!.ZeroRows( C );
+        return RP!.ZeroRows( M );
     fi;
     
     #=====# begin of the core procedure #=====#
     
     z := MatrixForHomalg( "zero", 1, NrColumns( C ), R );
     
-    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( M, [ a ] ) = z );
     
 end );
 
@@ -644,21 +646,23 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, z;
+    local R, RP, M, z;
     
     R := HomalgRing( C );
     
     RP := HomalgTable( R );
     
+    M := DecideZero( C );
+    
     if IsBound(RP!.ZeroColumns) then
-        return RP!.ZeroColumns( C );
+        return RP!.ZeroColumns( M );
     fi;
     
     #=====# begin of the core procedure #=====#
     
     z := MatrixForHomalg( "zero", NrRows( C ), 1, R );
     
-    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( M, [ a ] ) = z );
     
 end );
 

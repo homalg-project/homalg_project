@@ -363,7 +363,7 @@ InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (
     
     if IsLeftRelationsForHomalgRep( _M ) then
         if IsBound(RP!.SimplifyBasisOfRows) then
-            M := CreateRelationsForLeftModule( RP!.SimplifyBasisOfRows( _M ), R );
+            M := RP!.SimplifyBasisOfRows( _M );
         else
             M := MatrixOfRelations( _M );
         fi;
@@ -371,7 +371,7 @@ InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (
         return CreateRelationsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
     else
         if IsBound(RP!.SimplifyBasisOfColumns) then
-            M := CreateRelationsForRightModule( RP!.SimplifyBasisOfColumns( _M ), R );
+            M := RP!.SimplifyBasisOfColumns( _M );
         else
             M := MatrixOfRelations( _M );
         fi;

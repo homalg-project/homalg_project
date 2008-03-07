@@ -272,7 +272,7 @@ InstallMethod( CreateHomalgTable,
                NrColumns :=
                  function( C )
                    
-                   return Int( HomalgSendBlocking( [ C, ".nrows()" ], "need_output" ) );
+                   return Int( HomalgSendBlocking( [ C, ".ncols()" ], "need_output" ) );
                    
                  end,
                
@@ -285,8 +285,7 @@ InstallMethod( CreateHomalgTable,
                    HomalgSendBlocking( [ "Checklist=[", C, ".row(x).is_zero() for x in range(", NrRows( C ), ")]" ], "need_command" );
                    HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
                    list_string := HomalgSendBlocking( [ "filter(check,range(", NrRows( C ), "))" ], "need_output", R );
-                   list_string := List( list_string, x -> Int( [x] ) );
-                   list_string := Filtered( list_string, x -> not x=fail);
+		   list_string := StringToIntList( list_string );
                    return list_string + 1;
                    
                  end,
@@ -300,8 +299,7 @@ InstallMethod( CreateHomalgTable,
                    HomalgSendBlocking( [ "Checklist=[", C, ".column(x).is_zero() for x in range(", NrColumns( C ), ")]" ], "need_command" );
                    HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
                    list_string := HomalgSendBlocking( [ "filter(check,range(", NrColumns( C ), "))" ], "need_output", R );
-                   list_string := List( list_string, x -> Int( [x] ) );
-                   list_string := Filtered( list_string, x -> not x=fail);
+		   list_string := StringToIntList( list_string );
                    return list_string + 1;
                    
                  end

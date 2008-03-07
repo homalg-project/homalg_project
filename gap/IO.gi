@@ -29,6 +29,20 @@ BindGlobal( "HomalgExternalObjectType",
 #
 ####################################
 
+InstallMethod( \=,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectRep, IsHomalgExternalObjectRep ],
+        
+  function( o1, o2 )
+    
+    if not HasIsHomalgExternalObjectWithIOStream( o1 )
+       and not HasIsHomalgExternalObjectWithIOStream( o2 ) then
+        return HomalgPointer( o1 ) = HomalgPointer( o2 ); ## we are comparing strings in GAP
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 ##
 InstallMethod( HomalgPointer,
         "for homalg matrices",
@@ -132,6 +146,7 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
     return Flat( s );
                            
 end );
+
 ##
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
@@ -140,6 +155,8 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
+    elif IsString( arg[1] ) then
+        L := [ arg[1] ];
     else
         L := arg[1];
     fi;
@@ -226,7 +243,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     l := Length( L );
     
-    if L{[l-1..l]} = "\n" then
+    if Length( L ) > 0 and L{[l..l]} = "\n" then
         enter := "";
         eol := "";
     else
@@ -262,6 +279,30 @@ InstallGlobalFunction( HomalgSendBlocking,
     else
         return stream.lines;
     fi;
+    
+end );
+
+##
+InstallGlobalFunction( StringToIntList,
+  function( arg )
+    local l, lint;
+    
+    l := SplitString( arg[1], ",", "[ ]\n" );
+    lint := List( l, Int ); 
+    
+    if fail in lint then
+        Error( "the first argument is not a string containg a list of integers: ", arg[1], "\n");
+    fi;
+    
+    return lint;
+    
+end );
+
+##
+InstallGlobalFunction( StringToElementStringList,
+  function( arg )
+    
+    return SplitString( arg[1], ",", "[ ]\n" );
     
 end );
 

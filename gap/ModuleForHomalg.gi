@@ -419,6 +419,12 @@ InstallMethod( AddANewPresentation,
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
     
+    if NrGenerators( gen ) = 0 then
+        SetIsZeroModule( M, true );
+    fi;
+    
+    return M;
+    
 end );
 
 ##
@@ -446,8 +452,14 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
     
-        ## adjust the default position:
+    ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
+    
+    if NrRelations( rel ) = 0 then
+        SetIsFreeModule( M, true );
+    fi;
+    
+    return M;
     
 end );
 
@@ -479,6 +491,16 @@ InstallMethod( AddANewPresentation,
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
     
+    if NrGenerators( gen ) = 0 then
+        SetIsZeroModule( M, true );
+    fi;
+    
+    if NrRelations( rel ) = 0 then
+        SetIsFreeModule( M, true );
+    fi;
+    
+    return M;
+
 end );
 
 ##
@@ -693,14 +715,16 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
 	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
-    local R, RP;
+    local R, RP, e;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
     
     if IsBound(RP!.ElementaryDivisors) then
-        return RP!.ElementaryDivisors( MatrixOfRelations( M ) );
+        e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
+        e := StringToElementStringList( e );
+        return List( e, a -> HomalgExternalObject( a, HomalgExternalCASystem( R ) ) );
     fi;
     
     TryNextMethod( );
@@ -1186,7 +1210,7 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    Print( "<A left module defined by ", num_rel, rel_string, num_gen, gen_string, ">" );
+    Print( "<A left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
     
 end );
 
