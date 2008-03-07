@@ -70,7 +70,7 @@ CheckMaple10Output := function(s)
                   #        pos
               if pos <> fail then 
                   s.mapleready := true;
-                  s.lines := s.lines{[2..Length(s.lines)-MAPLE_READY_LENGTH-4]};
+                  s.lines := s.lines{[1..Length(s.lines)-MAPLE_READY_LENGTH-4]};
               fi;
           else
               Error("Maple10 process seems to have died!");

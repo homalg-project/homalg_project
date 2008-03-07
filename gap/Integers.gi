@@ -50,7 +50,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # assign U:
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                        SetEval( arg[2], N.rowtrans );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
@@ -59,7 +59,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # assign V:
-                   if nargs > 2 then
+                   if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                        SetEval( arg[3], N.coltrans );
                        SetNrRows( arg[3], NrColumns( M ) );
                        SetNrColumns( arg[3], NrColumns( M ) );
@@ -109,7 +109,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # assign U:
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        SetEval( arg[2], N.rowtrans );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );

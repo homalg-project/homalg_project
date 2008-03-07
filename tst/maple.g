@@ -1,0 +1,11 @@
+maple_stream := LaunchMaple10( );
+init_ext_obj:=HomalgExternalObject( "", "Maple", maple_stream );
+HomalgSendBlocking( "with(PIR): with(homalg):", "execute", init_ext_obj );
+RPP := HomalgSendBlocking( "`PIR/homalg`", init_ext_obj, IsHomalgMapleRing );
+ZZ := HomalgSendBlocking( [ "[[],", RPP, "]"], init_ext_obj, IsHomalgMapleRing );
+Print(HomalgSendBlocking( [ "Pvar(", ZZ, "[1])" ], "need_output", init_ext_obj ),"\n");
+ZZ := RingForHomalg( ZZ );
+wmat := HomalgSendBlocking( "matrix([[ 262, -33, 75, -40 ], [ 682, -86, 196, -104 ], [ 1186, -151, 341, -180 ],[ -1932, 248, -556, 292 ], [ 1018, -127, 293, -156 ] ])", ZZ );
+wmat := MatrixForHomalg( wmat, ZZ );
+wrel := CreateRelationsForLeftModule( wmat );
+#W := Presentation( wrel );

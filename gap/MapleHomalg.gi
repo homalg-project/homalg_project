@@ -38,15 +38,15 @@ InstallMethod( CreateHomalgTable,
                    
                    if nargs > 1 then
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       HomalgSendBlocking( [ "_S,_U,_V =", M, ".smith_form()" ], "need_command" );
+                       HomalgSendBlocking( [ "_S,_U,_V =", M, ".dense_matrix().smith_form()" ], "need_command" );
                        HomalgSendBlocking( [ "left_matrix=matrix(ZZ,", NrRows( M ), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrRows( M ), "):\n  left_matrix[i,", NrRows( M ) - 1, "]=1\n\n" ], "need_command", R );
+                       HomalgSendBlocking( [ "for i in range(", NrRows( M ), "):\n  left_matrix[i,", NrRows( M ) - 1, "-i]=1\n\n" ], "need_command", R );
                        HomalgSendBlocking( [ "right_matrix=matrix(ZZ,", NrColumns( M ), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrColumns( M ), "):\n  right_matrix[i,", NrColumns( M ) - 1, "]=1\n\n" ], "need_command", R );
+                       HomalgSendBlocking( [ "for i in range(", NrColumns( M ), "):\n  right_matrix[i,", NrColumns( M ) - 1, "-i]=1\n\n" ], "need_command", R );
                        rank_of_S := Int( HomalgSendBlocking( [ "_S.rank()" ], "need_output", R ) );
-                       S := HomalgSendBlocking( [ "left_matrix*_S*right_matrix" ], R );
-                       U := HomalgSendBlocking( [ "left_matrix*_U" ], R );
-                       if nargs > 2 then V := HomalgSendBlocking( [ "_V*right_matrix" ], R ); fi;
+                       S := HomalgSendBlocking( [ "left_matrix*_S.sparse_matrix()*right_matrix" ], R );
+                       U := HomalgSendBlocking( [ "left_matrix*_U.sparse_matrix()" ], R );
+                       if nargs > 2 then V := HomalgSendBlocking( [ "_V.sparse_matrix()*right_matrix" ], R ); fi;
                    else
                        ## compute S only:
                        HomalgSendBlocking( [ "elemdivlist=", M, ".elementary_divisors()" ], "need_command" );
@@ -57,7 +57,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # assign U:
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                        SetEval( arg[2], U );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
@@ -66,7 +66,7 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    # assign V:
-                   if nargs > 2 then
+                   if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                        SetEval( arg[3], V );
                        SetNrRows( arg[3], NrColumns( M ) );
                        SetNrColumns( arg[3], NrColumns( M ) );
@@ -87,14 +87,11 @@ InstallMethod( CreateHomalgTable,
                
                ElementaryDivisors :=
                  function( arg )
-                   local M, list_string;
+                   local M;
                    
                    M:=arg[1];
                    
-                   list_string := HomalgSendBlocking( [ M, ".elementary_divisors()" ], "need_output" );
-                   list_string := List( list_string, x -> Int( [x] ) );
-                   list_string := Filtered( list_string, x -> not x=fail);
-                   return list_string;
+                   return HomalgSendBlocking( [ M, ".elementary_divisors()" ] );
                    
                  end,
                  
@@ -120,15 +117,15 @@ InstallMethod( CreateHomalgTable,
                        HomalgSendBlocking( [ "_N=0; _U=0;" ], "need_command", R );
                    else
                        ## compute N only:
-                       HomalgSendBlocking( [ "_N = ", M, "echelon_form()" ], "need_command" );
+                       HomalgSendBlocking( [ "_N = ", M, ".echelon_form()" ], "need_command" );
                        HomalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
                        rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
                        N := HomalgSendBlocking( [ "_N" ], R );
-                       HomalgSendBlocking( [ "_N=\"x\";" ], "need_command", R );
+                       HomalgSendBlocking( [ "_N=0;" ], "need_command", R );
                    fi;
                    
                    # assign U:
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        SetEval( arg[2], U );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
@@ -155,13 +152,13 @@ InstallMethod( CreateHomalgTable,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                    
-               True := "true",
+               True := "True",
                
-               Zero := "0",
+               Zero := HomalgExternalObject( "0", "Maple" ),
                
-               One := "1",
+               One := HomalgExternalObject( "1", "Maple" ),
                
-               MinusOne := "-1",
+               MinusOne := HomalgExternalObject( "(-1)", "Maple" ),
                
                Equal :=
                  function( A, B )
@@ -265,15 +262,21 @@ InstallMethod( CreateHomalgTable,
                
                NrRows :=
                  function( C )
+                   local R;
                    
-                   return Int( HomalgSendBlocking( [ C, ".nrows()" ], "need_output" ) );
+                   R := HomalgRing( C );
+                   
+                   return Int( NormalizedWhitespace( HomalgSendBlocking( [ R, "[2][NumberOfRows](", C, ")" ], "need_output" ) ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
+                   local R;
                    
-                   return Int( HomalgSendBlocking( [ C, ".nrows()" ], "need_output" ) );
+                   R := HomalgRing( C );
+                   
+                   return Int( NormalizedWhitespace( HomalgSendBlocking( [ R, "[2][NumberOfGenerators](", C, ")" ], "need_output" ) ) );
                    
                  end,
                
@@ -286,8 +289,7 @@ InstallMethod( CreateHomalgTable,
                    HomalgSendBlocking( [ "Checklist=[", C, ".row(x).is_zero() for x in range(", NrRows( C ), ")]" ], "need_command" );
                    HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
                    list_string := HomalgSendBlocking( [ "filter(check,range(", NrRows( C ), "))" ], "need_output", R );
-                   list_string := List( list_string, x -> Int( [x] ) );
-                   list_string := Filtered( list_string, x -> not x=fail);
+		   list_string := StringToIntList( list_string );
                    return list_string + 1;
                    
                  end,
@@ -301,8 +303,7 @@ InstallMethod( CreateHomalgTable,
                    HomalgSendBlocking( [ "Checklist=[", C, ".column(x).is_zero() for x in range(", NrColumns( C ), ")]" ], "need_command" );
                    HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
                    list_string := HomalgSendBlocking( [ "filter(check,range(", NrColumns( C ), "))" ], "need_output", R );
-                   list_string := List( list_string, x -> Int( [x] ) );
-                   list_string := Filtered( list_string, x -> not x=fail);
+		   list_string := StringToIntList( list_string );
                    return list_string + 1;
                    
                  end

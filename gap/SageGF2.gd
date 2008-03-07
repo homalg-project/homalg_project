@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageIntegers.gd             homalg package                 Simon Görtzen
+##  SageGF2.gd                  homalg package                 Simon Görtzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,5 +15,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsSageIntegers",
+DeclareProperty( "IsSageGF2",
         IsHomalgRing );

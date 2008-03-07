@@ -61,7 +61,7 @@ end );
 ##
 InstallMethod( HomalgExternalCASystem,
         "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectRep ],
         
   function( o )
     
@@ -131,6 +131,7 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
                                  return L[a];
                              else
                                  if IsHomalgExternalObjectRep( L[a] )
+                                    or IsHomalgExternalRingRep( L[a] )
                                     or IsHomalgExternalMatrixRep( L[a] ) then
                                      t := HomalgPointer( L[a] );
                                  else
@@ -182,12 +183,16 @@ InstallGlobalFunction( HomalgSendBlocking,
     od;
     
     if not IsBound( ext_obj ) then
-        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) ); ## after adding things here the Error message below has to be updated
+        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) );
         if e <> [ ] then
             ext_obj := e[1];
-            R := HomalgRing( ext_obj ); ## we assume that ext_obj is either a matrix or an external ring element
+            if IsHomalgExternalRingRep( ext_obj ) then
+                R := ext_obj;
+            else
+                R := HomalgRing( ext_obj );
+            fi;
         else
-            Error( "since the last argument is not an external ring or an external object the list provided the first argument must contain at least one external matrix\n" );
+            Error( "since non of the non-first argument(s) is an external ring or an external object the list provided the first argument must contain at least one external matrix or the external ring\n" );
         fi;
     fi;
     
@@ -243,13 +248,14 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     l := Length( L );
     
-    if Length( L ) > 0 and L{[l..l]} = "\n" then
+    if l > 0 and L{[l..l]} = "\n" then
         enter := "";
         eol := "";
     else
         enter := "\n";
-        if L{[l-Length( eol_verbose )+1..l]} = eol_verbose
-           or L{[l-Length( eol_quiet )+1..l]} = eol_quiet then
+        if l > 0 and
+           ( L{[l-Length( eol_verbose )+1..l]} = eol_verbose
+             or L{[l-Length( eol_quiet )+1..l]} = eol_quiet ) then
             eol := "";
         elif not IsBound( option ) then
             eol := eol_quiet;

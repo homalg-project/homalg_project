@@ -269,6 +269,49 @@ InstallMethod( Leftinverse,			### defines: Leftinverse (LeftinverseF)
 end );
 
 ##
+InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
+  function( arg )
+    local M, R, RP, nargs, B, U, V;
+    
+    if not IsHomalgMatrix( arg[1] ) then
+        Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
+    fi;
+    
+    M := arg[1];
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.BestBasis) then
+        
+        return CallFuncList( RP!.BestBasis, arg );
+        
+    elif IsBound(RP!.TriangularBasisOfRows) then
+        
+        nargs := Length( arg );
+        
+        if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
+            B := TriangularBasisOfRows( M, arg[2] );
+        else
+            B := TriangularBasisOfRows( M );
+        fi;
+        
+        if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
+            B := TriangularBasisOfColumns( B, arg[3] );
+        else
+            B := TriangularBasisOfColumns( B );
+        fi;
+        
+        return B;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
@@ -365,17 +408,17 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     
     finished := false;
     
-    if (compute_U or compute_UI or compute_V or compute_VI) then ## this is not a mistake
+    if compute_U or compute_UI then
         U := MatrixForHomalg( R );
     fi;
         
-    if (compute_V or compute_VI) then
+    if compute_V or compute_VI then
         V := MatrixForHomalg( R );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    if HasIsZeroMatrix( M ) and IsZeroMatrix( M ) then
+    if IsZeroMatrix( M ) then
         
         if compute_U then
             SetPreEval( U, MatrixForHomalg( "identity", NrRows( M ), R ) );
@@ -393,25 +436,29 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
             VI := MatrixForHomalg( "identity", NrColumns( M ), R );
         fi;
         
-        
         finished := true;
         
     fi;
     
-    if not finished and IsBound( RP!.BestBasis ) then
+    if not finished
+       and ( IsBound( RP!.BestBasis )
+             or IsBound( RP!.TriangularBasisOfRows )
+             or IsBound( RP!.TriangularBasisOfColumns ) ) then
         
-        if not (compute_U or compute_UI or compute_V or compute_VI) then
+        if not ( compute_U or compute_UI or compute_V or compute_VI ) then
             barg := [ M ];
-        elif (compute_U or compute_UI) and not (compute_V or compute_VI) then
+        elif ( compute_U or compute_UI ) and not ( compute_V or compute_VI ) then
             barg := [ M, U ];
+        elif ( compute_V or compute_VI ) and not ( compute_U or compute_UI ) then
+            barg := [ M, "", V ];
         else
             barg := [ M, U, V ];
         fi;
         
-        M := CallFuncList( RP!.BestBasis, barg );
+        M := CallFuncList( BestBasis, barg );
         
         ## FIXME:
-        #if (compute_V or compute_VI) then
+        #if ( compute_V or compute_VI ) then
         #    if IsList( V ) and V <> [] and IsString( V[1] ) then
         #        if LowercaseString( V[1]{[1..3]} ) = "inv" then
         #            VI := V[2];
@@ -431,6 +478,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
                 UI := Leftinverse( U );
             fi;
         fi;
+        
         if compute_VI and not IsBound( VI ) then
             VI := Leftinverse( V );
         fi;

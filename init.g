@@ -28,4 +28,7 @@ ReadPackage( "homalg", "gap/Service.gd" );
 ReadPackage( "homalg", "gap/Basic.gd" );
 ReadPackage( "homalg", "gap/Modules.gd" );
 
+ReadPackage( "homalg", "gap/MapleHomalg.gd" );
+
 ReadPackage( "homalg", "gap/SageIntegers.gd" );
+ReadPackage( "homalg", "gap/SageGF2.gd" );

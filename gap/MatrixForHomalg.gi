@@ -1833,7 +1833,14 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ],
         
   function( o )
+    local cas;
     
-    Print( Concatenation( HomalgSendBlocking( [ o ], "need_output" ), "\n" ) );
+    cas := HomalgExternalCASystem( o );
+    
+    if Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
+        Print( HomalgSendBlocking( [ "eval(", o, ")" ], "need_output" ), "\n" );
+    else
+        Print( HomalgSendBlocking( [ o ], "need_output" ), "\n" );
+    fi;
     
 end);
