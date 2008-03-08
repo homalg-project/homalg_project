@@ -57,9 +57,9 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    if N.vectors = [ ] then
-                       H := MatrixForHomalg( "zero", 0, Length( N.heads ), R );
+                       H := HomalgMatrix( "zero", 0, Length( N.heads ), R );
                    else
-                       H := MatrixForHomalg( N.vectors, R );
+                       H := HomalgMatrix( N.vectors, R );
                    fi;
                    
                    SetNrColumns( H, NrColumns( M ) );

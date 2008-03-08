@@ -76,7 +76,7 @@ InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows
     
     #=====# begin of the core procedure #=====#
     
-    zz := MatrixForHomalg( "zero", NrRows( A ), NrRows( B ), R );
+    zz := HomalgMatrix( "zero", NrRows( A ), NrRows( B ), R );
     
     A_zz := AddRhs( A, zz );
     
@@ -102,7 +102,7 @@ InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroC
     
     #=====# begin of the core procedure #=====#
     
-    zz := MatrixForHomalg( "zero", NrColumns( B ), NrColumns( A ), R );
+    zz := HomalgMatrix( "zero", NrColumns( B ), NrColumns( A ), R );
     
     A_zz := AddBts( A, zz );
     
@@ -262,7 +262,7 @@ InstallMethod( Leftinverse,			### defines: Leftinverse (LeftinverseF)
     
     #=====# begin of the core procedure #=====#
     
-    Id := MatrixForHomalg( "identity", NrColumns( L ), R );
+    Id := HomalgMatrix( "identity", NrColumns( L ), R );
     
     return RightDivide( Id, L );
     
@@ -409,11 +409,11 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     finished := false;
     
     if compute_U or compute_UI then
-        U := MatrixForHomalg( R );
+        U := HomalgMatrix( R );
     fi;
         
     if compute_V or compute_VI then
-        V := MatrixForHomalg( R );
+        V := HomalgMatrix( R );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -421,19 +421,19 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     if IsZeroMatrix( M ) then
         
         if compute_U then
-            SetPreEval( U, MatrixForHomalg( "identity", NrRows( M ), R ) );
+            SetPreEval( U, HomalgMatrix( "identity", NrRows( M ), R ) );
         fi;
         
         if compute_V then
-            SetPreEval( V, MatrixForHomalg( "identity", NrColumns( M ), R ) );
+            SetPreEval( V, HomalgMatrix( "identity", NrColumns( M ), R ) );
         fi;
         
         if compute_UI then
-            UI := MatrixForHomalg( "identity", NrRows( M ), R );
+            UI := HomalgMatrix( "identity", NrRows( M ), R );
         fi;
         
         if compute_VI then
-            VI := MatrixForHomalg( "identity", NrColumns( M ), R );
+            VI := HomalgMatrix( "identity", NrColumns( M ), R );
         fi;
         
         finished := true;

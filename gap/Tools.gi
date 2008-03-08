@@ -309,7 +309,7 @@ InstallMethod( Eval,				### defines: MulMat
         e := RP!.MulMat( a, A );
         
         if HasRingRelations( R ) then
-            e := MatrixForHomalg( e, R );
+            e := HomalgMatrix( e, R );
             return Eval( DecideZero( e ) );
         fi;
         
@@ -322,7 +322,7 @@ InstallMethod( Eval,				### defines: MulMat
     e := a * Eval( A );
     
     if HasRingRelations( R ) then
-        e := MatrixForHomalg( e, R );
+        e := HomalgMatrix( e, R );
         return Eval( DecideZero( e ) );
     fi;
     
@@ -352,7 +352,7 @@ InstallMethod( Eval,				### defines: AddMat
         e := RP!.AddMat( A, B );
         
         if HasRingRelations( R ) then
-            e := MatrixForHomalg( e, R );
+            e := HomalgMatrix( e, R );
             return Eval( DecideZero( e ) );
         fi;
         
@@ -365,7 +365,7 @@ InstallMethod( Eval,				### defines: AddMat
     e := Eval( A ) + Eval( B );
     
     if HasRingRelations( R ) then
-        e := MatrixForHomalg( e, R );
+        e := HomalgMatrix( e, R );
         return Eval( DecideZero( e ) );
     fi;
     
@@ -395,7 +395,7 @@ InstallMethod( Eval,				### defines: SubMat
         e := RP!.SubMat( A, B );
         
         if HasRingRelations( R ) then
-            e := MatrixForHomalg( e, R );
+            e := HomalgMatrix( e, R );
             return Eval( DecideZero( e ) );
         fi;
         
@@ -408,7 +408,7 @@ InstallMethod( Eval,				### defines: SubMat
     e := Eval( A ) - Eval( B );
     
     if HasRingRelations( R ) then
-        e := MatrixForHomalg( e, R );
+        e := HomalgMatrix( e, R );
         return Eval( DecideZero( e ) );
     fi;
     
@@ -438,7 +438,7 @@ InstallMethod( Eval,				### defines: Compose
         e := RP!.Compose( A, B );
         
         if HasRingRelations( R ) then
-            e := MatrixForHomalg( e, R );
+            e := HomalgMatrix( e, R );
             return Eval( DecideZero( e ) );
         fi;
         
@@ -451,7 +451,7 @@ InstallMethod( Eval,				### defines: Compose
     e := Eval( A ) * Eval( B );
     
     if HasRingRelations( R ) then
-        e := MatrixForHomalg( e, R );
+        e := HomalgMatrix( e, R );
         return Eval( DecideZero( e ) );
     fi;
     
@@ -634,7 +634,7 @@ InstallMethod( ZeroRows,			### defines: ZeroRows
     
     #=====# begin of the core procedure #=====#
     
-    z := MatrixForHomalg( "zero", 1, NrColumns( C ), R );
+    z := HomalgMatrix( "zero", 1, NrColumns( C ), R );
     
     return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( M, [ a ] ) = z );
     
@@ -660,7 +660,7 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
     
     #=====# begin of the core procedure #=====#
     
-    z := MatrixForHomalg( "zero", NrRows( C ), 1, R );
+    z := HomalgMatrix( "zero", NrRows( C ), 1, R );
     
     return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( M, [ a ] ) = z );
     

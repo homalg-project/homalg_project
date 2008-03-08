@@ -66,7 +66,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
                           1 := "unknown generators" );
     else
         generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
-                          1 := CreateGeneratorsForLeftModule( mat, R ) );
+                          1 := HomalgGeneratorsForLeftModule( mat, R ) );
     fi;
     
     ## Objectify:
@@ -85,7 +85,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForRightModule,
                           1 := "unknown generators" );
     else
         generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
-                          1 := CreateGeneratorsForRightModule( mat, R ) );
+                          1 := HomalgGeneratorsForRightModule( mat, R ) );
     fi;
     
     ## Objectify:

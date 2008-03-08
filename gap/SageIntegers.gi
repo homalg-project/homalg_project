@@ -76,7 +76,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[3], true );
                    fi;
                    
-                   S := MatrixForHomalg( S, R );
+                   S := HomalgMatrix( S, R );
                    
                    SetNrRows( S, NrRows( M ) );
                    SetNrColumns( S, NrColumns( M ) );
@@ -135,7 +135,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
-                   N := MatrixForHomalg( N, R );
+                   N := HomalgMatrix( N, R );
                    
                    SetNrRows( N, NrRows( M ) );
                    SetNrColumns( N, NrColumns( M ) );
@@ -172,7 +172,7 @@ InstallMethod( CreateHomalgTable,
                ZeroMatrix :=
                  function( C )
                    
-                   return HomalgSendBlocking( [ "matrix(ZZ,", NrRows(C), ",",  NrColumns(C), ", sparse=true)" ], HomalgRing(C) );
+                   return HomalgSendBlocking( [ "matrix(", HomalgRing(C), NrRows( C ), NrColumns( C ), ", sparse=true)" ] );
                    
                  end,
              
@@ -180,9 +180,9 @@ InstallMethod( CreateHomalgTable,
                  function( C )
                    local R;
                    
-                   R := HomalgRing(C);
+                   R := HomalgRing( C );
                    
-                   HomalgSendBlocking( [ "_id = identity_matrix(ZZ,", NrRows(C), ")" ], "need_command", R );
+                   HomalgSendBlocking( [ "_id = identity_matrix(", R, NrRows( C ), ")" ], "need_command" );
                    return HomalgSendBlocking( [ "_id.sparse_matrix()" ], R );
                  end,
                
@@ -210,14 +210,14 @@ InstallMethod( CreateHomalgTable,
                  end,
                
                UnionOfRows :=
-                 function( A, B)
+                 function( A, B )
                    
                    return HomalgSendBlocking( [ "block_matrix([", A, B, "],2)" ] );
                    
                  end,
                
                UnionOfColumns :=
-                 function( A, B)
+                 function( A, B )
                    
                    return HomalgSendBlocking( [ "block_matrix([", A, B, "],1)" ] );
                    

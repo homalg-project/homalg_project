@@ -45,8 +45,8 @@ DeclareProperty( "IsReducedSetOfRelations",
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateRelationsForLeftModule" );
-DeclareGlobalFunction( "CreateRelationsForRightModule" );
+DeclareGlobalFunction( "HomalgRelationsForLeftModule" );
+DeclareGlobalFunction( "HomalgRelationsForRightModule" );
 
 # basic operations:
 

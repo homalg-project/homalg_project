@@ -67,7 +67,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[3], true );
                    fi;
                    
-                   S := MatrixForHomalg( N.normal, R );
+                   S := HomalgMatrix( N.normal, R );
                    
                    SetNrRows( S, NrRows( M ) );
                    SetNrColumns( S, NrColumns( M ) );
@@ -117,7 +117,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
-                   H := MatrixForHomalg( N.normal, R );
+                   H := HomalgMatrix( N.normal, R );
                    
                    SetNrRows( H, NrRows( M ) );
                    SetNrColumns( H, NrColumns( M ) );

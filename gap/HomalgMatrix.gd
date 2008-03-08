@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MatrixForHomalg.gd          homalg package               Mohamed Barakat
+##  HomalgMatrix.gd             homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -17,7 +17,10 @@
 # a new category of objects:
 
 DeclareCategory( "IsHomalgMatrix",
-        IsAttributeStoringRep );
+        IsAdditiveElementWithInverse
+        and IsExtLElement
+        and IsMultiplicativeElementWithOne
+        and IsAttributeStoringRep );
 
 ####################################
 #
@@ -26,6 +29,9 @@ DeclareCategory( "IsHomalgMatrix",
 ####################################
 
 DeclareProperty( "IsInitialMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 
 DeclareProperty( "IsZeroMatrix",
@@ -162,7 +168,7 @@ DeclareSynonymAttr( "CompCond",
 
 # constructor methods:
 
-DeclareGlobalFunction( "MatrixForHomalg" );
+DeclareGlobalFunction( "HomalgMatrix" );
 
 # basic operations:
 
@@ -184,6 +190,9 @@ DeclareOperation( "HomalgStream",
 DeclareOperation( "HomalgExternalCASystemPID",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "AreComparableMatrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "Involution",
         [ IsHomalgMatrix ] );
 
@@ -203,22 +212,7 @@ DeclareOperation( "DiagMat",
         [ IsList ] );
 
 DeclareOperation( "*",
-        [ IsRingElement, IsHomalgMatrix ] );
-
-DeclareOperation( "*",
         [ IsHomalgExternalObject, IsHomalgMatrix ] );
-
-DeclareOperation( "+",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "AdditiveInverseSameMutability",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "-",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "*",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "AddRhs",
         [ IsHomalgMatrix ] );

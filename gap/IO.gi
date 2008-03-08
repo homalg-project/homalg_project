@@ -46,7 +46,7 @@ end );
 ##
 InstallMethod( HomalgPointer,
         "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectRep ],
         
   function( o )
     
@@ -76,7 +76,7 @@ end );
 ##
 InstallMethod( HomalgExternalCASystemVersion,
         "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectRep ],
         
   function( o )
     
@@ -182,17 +182,24 @@ InstallGlobalFunction( HomalgSendBlocking,
         fi;
     od;
     
-    if not IsBound( ext_obj ) then
-        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) );
+    if not IsBound( ext_obj ) then ## R is also not yet defined
+        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) or 
+                     ( IsHomalgExternalObjectRep( a )
+                       and HasIsHomalgExternalObjectWithIOStream( a )
+                       and IsHomalgExternalObjectWithIOStream( a ) ) );
         if e <> [ ] then
             ext_obj := e[1];
-            if IsHomalgExternalRingRep( ext_obj ) then
-                R := ext_obj;
-            else
-                R := HomalgRing( ext_obj );
-            fi;
+            for ar in e do
+                if IsHomalgExternalMatrixRep( ar ) then
+                    R := HomalgRing( ar );
+                    break;
+                elif IsHomalgExternalRingRep( ar ) then
+                    R := ar;
+                    break;
+                fi;
+            od;
         else
-            Error( "since non of the non-first argument(s) is an external ring or an external object the list provided the first argument must contain at least one external matrix or the external ring\n" );
+            Error( "either the list provided by the first argument must contain at least one external matrix or an external ring or one of the remaining arguments must be an external ring or an external object with IO stream\n" );
         fi;
     fi;
     
@@ -367,7 +374,7 @@ end );
 ####################################
 
 InstallMethod( ViewObj,
-        "for homalg matrices",
+        "for homalg external objects",
         [ IsHomalgExternalObjectRep ],
         
   function( o )
@@ -378,7 +385,7 @@ InstallMethod( ViewObj,
 end );
 
 InstallMethod( ViewObj,
-        "for homalg matrices",
+        "for homalg external objects with an IO stream",
         [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
         
   function( o )
@@ -388,3 +395,12 @@ InstallMethod( ViewObj,
     
 end );
 
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectRep ],
+        
+  function( o )
+    
+    Print( HomalgPointer( o ), "\n" );
+    
+end );

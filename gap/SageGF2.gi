@@ -67,7 +67,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
-                   N := MatrixForHomalg( N, R );
+                   N := HomalgMatrix( N, R );
                    
                    SetNrRows( N, NrRows( M ) );
                    SetNrColumns( N, NrColumns( M ) );
@@ -104,7 +104,7 @@ InstallMethod( CreateHomalgTable,
                ZeroMatrix :=
                  function( C )
                    
-                   return HomalgSendBlocking( [ "matrix(GF(2),", NrRows(C), ",",  NrColumns(C), ", sparse=True)" ], HomalgRing(C) );
+                   return HomalgSendBlocking( [ "matrix(", HomalgRing(C), NrRows( C ), NrColumns( C ), ", sparse=True)" ] );
                    
                  end,
              
@@ -112,9 +112,10 @@ InstallMethod( CreateHomalgTable,
                  function( C )
                    local R;
                    
-                   R := HomalgRing(C);
+                   R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "_id = identity_matrix(GF(2),", NrRows(C), ").sparse_matrix()" ], R );
+                   return HomalgSendBlocking( [ "_id = identity_matrix(", R, NrRows( C ), ").sparse_matrix()" ] );
+		   
                  end,
                
                Involution :=
@@ -141,14 +142,14 @@ InstallMethod( CreateHomalgTable,
                  end,
                
                UnionOfRows :=
-                 function( A, B)
+                 function( A, B )
                    
                    return HomalgSendBlocking( [ "block_matrix([", A, B, "],2)" ] );
                    
                  end,
                
                UnionOfColumns :=
-                 function( A, B)
+                 function( A, B )
                    
                    return HomalgSendBlocking( [ "block_matrix([", A, B, "],1)" ] );
                    

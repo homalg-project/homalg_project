@@ -39,9 +39,9 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     N := DecideZero( M1, B );
     
     if IsLeftGeneratorsForHomalgRep( M1 ) then
-        N := CreateRelationsForLeftModule( N );
+        N := HomalgRelationsForLeftModule( N );
     else
-        N := CreateRelationsForRightModule( N );
+        N := HomalgRelationsForRightModule( N );
     fi;
     
     # get a better basis for N
@@ -51,9 +51,9 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     S := SyzygiesGenerators( N, B );
     
     if IsLeftGeneratorsForHomalgRep( M1 ) then
-        return Presentation( CreateRelationsForLeftModule( S ) );
+        return Presentation( HomalgRelationsForLeftModule( S ) );
     else
-        return Presentation( CreateRelationsForRightModule( S ) );
+        return Presentation( HomalgRelationsForRightModule( S ) );
     fi;
     
 end );

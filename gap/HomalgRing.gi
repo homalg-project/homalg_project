@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  RingForHomalg.gi            homalg package               Mohamed Barakat
+##  HomalgRing.gi               homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -127,7 +127,7 @@ for property in SimpleLogicalImplicationsForHomalgRings do;
                 property[1] );
         
         InstallImmediateMethod( property[1],
-                IsModuleForHomalg and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
+                IsHomalgModule and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
                 
           function( M )
             if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
@@ -144,7 +144,7 @@ for property in SimpleLogicalImplicationsForHomalgRings do;
                 property[1] and property[3] );
         
         InstallImmediateMethod( property[1],
-                IsModuleForHomalg and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
+                IsHomalgModule and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
             if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
@@ -157,7 +157,7 @@ for property in SimpleLogicalImplicationsForHomalgRings do;
         end );
         
         InstallImmediateMethod( property[3],
-                IsModuleForHomalg and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
+                IsHomalgModule and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
             if Tester( property[1] )( M ) and Tester( property[5] )( M ) ## FIXME: find a way to get rid of the Testers here
@@ -201,7 +201,11 @@ InstallMethod( Zero,
     RP := HomalgTable( R );
     
     if IsBound(RP!.Zero) then
-        return RP!.Zero;
+        if IsFunction( RP!.Zero ) then
+            return RP!.Zero( R );
+        else
+            return RP!.Zero;
+        fi;
     fi;
     
     TryNextMethod( );
@@ -230,7 +234,11 @@ InstallMethod( One,
     RP := HomalgTable( R );
     
     if IsBound(RP!.One) then
-        return RP!.One;
+        if IsFunction( RP!.One ) then
+            return RP!.One( R );
+        else
+            return RP!.One;
+        fi;
     fi;
     
     TryNextMethod( );
@@ -259,7 +267,11 @@ InstallMethod( MinusOne,
     RP := HomalgTable( R );
     
     if IsBound(RP!.MinusOne) then
-        return RP!.MinusOne;
+        if IsFunction( RP!.MinusOne ) then
+            return RP!.MinusOne( R );
+        else
+            return RP!.MinusOne;
+        fi;
     fi;
     
     TryNextMethod( );

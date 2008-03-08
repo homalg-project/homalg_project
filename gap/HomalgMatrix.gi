@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MatrixForHomalg.gi          homalg package               Mohamed Barakat
+##  HomalgMatrix.gi             homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -47,6 +47,9 @@ BindGlobal( "HomalgExternalMatrixType",
 # logical implications methods:
 #
 ####################################
+
+##
+InstallTrueMethod( IsReducedModuloRingRelations, IsHomalgMatrix and IsZeroMatrix );
 
 ##
 InstallTrueMethod( IsZeroMatrix, IsHomalgMatrix and IsEmptyMatrix );
@@ -121,6 +124,20 @@ InstallImmediateMethod( IsEmptyMatrix,
     
     if HasIsEmptyMatrix( PreEval( M ) ) then
         return IsEmptyMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsReducedModuloRingRelations,
+        IsHomalgMatrix, 0,
+        
+  function( M )
+    
+    if not HasRingRelations( HomalgRing( M ) ) then
+        return true;
     fi;
     
     TryNextMethod( );
@@ -563,7 +580,9 @@ InstallMethod( IsZeroMatrix,
         
   function( M )
     
-    return M = MatrixForHomalg( "zero", NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    ## From the documentation ?Zero: `ZeroSameMutability( <obj> )' is equivalent to `0 * <obj>'.
+    
+    return M = 0 * M;
     
 end );
 
@@ -640,27 +659,68 @@ InstallMethod( HomalgExternalCASystemPID,
 end );
 
 ##
-InstallMethod( \=,
+InstallMethod( AreComparableMatrices,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgInternalMatrixRep ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     
-    return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) and Eval( M1 ) = Eval( M2 );
+    if HasNrRows( M1 ) or HasNrRows( M2 ) then ## trigger as few as possible operations
+        return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
+               and NrRows( M1 ) = NrRows( M2 ) and NrColumns( M1 ) = NrColumns( M2 );
+    else ## no other choice
+        return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
+               and NrColumns( M1 ) = NrColumns( M2 ) and NrRows( M1 ) = NrRows( M2 );
+    fi;
     
 end );
 
 ##
 InstallMethod( \=,
         "for homalg matrices",
-        [ IsHomalgExternalMatrixRep, IsHomalgExternalMatrixRep ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 1001,
+        
+  function( M1, M2 )
+    
+    if not AreComparableMatrices( M1, M2 ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg comparable matrices", ## the above method ensures that the two matrices a comparable
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    
+    return DecideZero( M1 ) = DecideZero( M2 );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg comparable matrices",
+        [ IsHomalgInternalMatrixRep and IsReducedModuloRingRelations,
+          IsHomalgInternalMatrixRep and IsReducedModuloRingRelations ],
+        
+  function( M1, M2 )
+    
+    return Eval( M1 ) = Eval( M2 );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg comparable matrices",
+        [ IsHomalgExternalMatrixRep and IsReducedModuloRingRelations,
+          IsHomalgExternalMatrixRep and IsReducedModuloRingRelations ],
         
   function( M1, M2 )
     local R, RP;
-    
-    if not IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) then
-        return false;
-    fi;
     
     R := HomalgRing( M1 );
     
@@ -681,8 +741,7 @@ InstallMethod( \=,
         
   function( M1, M2 )
     
-    return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
-           and NrRows( M1 ) = NrRows( M2 ) and NrColumns( M1 ) = NrColumns( M2 );
+    return AreComparableMatrices( M1, M2 );
     
 end );
 
@@ -693,7 +752,18 @@ InstallMethod( \=,
         
   function( M1, M2 )
     
-    return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) and NrRows( M1 ) = NrRows( M2 );
+    return AreComparableMatrices( M1, M2 );
+    
+end );
+
+##
+InstallMethod( ZeroMutable,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return HomalgMatrix( "zero", NrRows( M ), NrColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -707,7 +777,7 @@ InstallMethod( Involution,
     
     R := HomalgRing( M );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalInvolution( C, M );
     
@@ -725,7 +795,7 @@ InstallMethod( Involution,
         
   function( M )
     
-    return MatrixForHomalg( "zero", NrColumns( M ), NrRows( M ), HomalgRing( M ) );
+    return HomalgMatrix( "zero", NrColumns( M ), NrRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -736,7 +806,7 @@ InstallMethod( Involution,
         
   function( M )
     
-    return MatrixForHomalg( "identity", NrRows( M ), HomalgRing( M ) );
+    return HomalgMatrix( "identity", NrRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -758,7 +828,7 @@ InstallMethod( CertainRows,
     
     R := HomalgRing( M );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalCertainRows( C, [ M, plist ] );
     
@@ -787,7 +857,7 @@ InstallMethod( CertainColumns,
     
     R := HomalgRing( M );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalCertainColumns( C, [ M, plist ] );
     
@@ -812,7 +882,7 @@ InstallMethod( UnionOfRows,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalUnionOfRows( C, [ A, B ] );
     
@@ -864,7 +934,7 @@ InstallMethod( UnionOfRows,
         Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
-    return MatrixForHomalg( "zero", NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
+    return HomalgMatrix( "zero", NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
     
 end );
 
@@ -882,7 +952,7 @@ InstallMethod( UnionOfColumns,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalUnionOfColumns( C, [ A, B ] );
     
@@ -934,7 +1004,7 @@ InstallMethod( UnionOfColumns,
         Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
     
-    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
+    return HomalgMatrix( "zero", NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
     
 end );
 
@@ -956,7 +1026,7 @@ InstallMethod( DiagMat,
     
     R := HomalgRing( l[1] );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalDiagMat( C, l );
     
@@ -970,14 +1040,14 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
-        [ IsRingElement, IsHomalgMatrix ],
+        [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into ``PROD: negative integer * additive element with inverse'', value: 24
         
   function( a, A )
     local R, C;
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalMulMat( C, [ a, A ] );
     
@@ -998,7 +1068,7 @@ InstallMethod( \*,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalMulMat( C, [ a, A ] );
     
@@ -1015,11 +1085,8 @@ InstallMethod( \*,
         [ IsRingElement and IsZero, IsHomalgMatrix ],
         
   function( a, A )
-    local R;
     
-    R := HomalgRing( A );
-    
-    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( A ), R );
+    return 0 * A;
     
 end );
 
@@ -1063,7 +1130,7 @@ InstallMethod( \+,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalAddMat( C, [ A, B ] );
     
@@ -1113,7 +1180,7 @@ InstallMethod( \+,
 end );
 
 ## a synonym of `-<elm>':
-InstallMethod( AdditiveInverseSameMutability,
+InstallMethod( AdditiveInverseMutable,
         "of homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1127,7 +1194,7 @@ InstallMethod( AdditiveInverseSameMutability,
 end );
 
 ## a synonym of `-<elm>':
-InstallMethod( AdditiveInverseSameMutability,
+InstallMethod( AdditiveInverseMutable,
         "of homalg matrices",
         [ IsHomalgMatrix and IsZeroMatrix ],
         
@@ -1155,7 +1222,7 @@ InstallMethod( \-,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalSubMat( C, [ A, B ] );
     
@@ -1163,6 +1230,21 @@ InstallMethod( \-,
     SetNrColumns( C, NrColumns( A ) );
     
     return C;
+    
+end );
+
+##
+InstallMethod( \-,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ], 1000,
+        
+  function( A, B )
+    
+    if IsIdenticalObj( A, B ) then
+        return 0 * A;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -1218,7 +1300,7 @@ InstallMethod( \*,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalCompose( C, [ A, B ] );
     
@@ -1243,7 +1325,7 @@ InstallMethod( \*,
     
     R := HomalgRing( A );
     
-    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( B ), R );
+    return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), R );
     
 end );
 
@@ -1261,7 +1343,7 @@ InstallMethod( \*,
     
     R := HomalgRing( B );
     
-    return MatrixForHomalg( "zero", NrRows( A ), NrColumns( B ), R );
+    return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), R );
     
 end );
 
@@ -1303,11 +1385,11 @@ InstallMethod( AddRhs,				### defines: AddRhs
   function( A )
     local C;
     
-    C := MatrixForHomalg( A );
+    C := HomalgMatrix( A );
     
     SetEvalAddRhs( C, true );
     
-    SetRightHandSide( C, MatrixForHomalg( "identity", NrRows( A ), HomalgRing( A ) ) );
+    SetRightHandSide( C, HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) ) );
     
     SetNrRows( C, NrRows( A ) );
     SetNrColumns( C, NrColumns( A ) );
@@ -1328,7 +1410,7 @@ InstallMethod( AddRhs,				### defines: AddRhs
         Error( "the second matrix cannot become a right hand side of the first, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
     
-    C := MatrixForHomalg( A );
+    C := HomalgMatrix( A );
     
     SetEvalAddRhs( C, true );
     
@@ -1349,11 +1431,11 @@ InstallMethod( AddBts,				### defines: AddBts
   function( A )
     local C;
     
-    C := MatrixForHomalg( A );
+    C := HomalgMatrix( A );
     
     SetEvalAddBts( C, true );
     
-    SetBottomSide( C, MatrixForHomalg( "identity", NrColumns( A ), HomalgRing( A ) ) );
+    SetBottomSide( C, HomalgMatrix( "identity", NrColumns( A ), HomalgRing( A ) ) );
     
     SetNrRows( C, NrRows( A ) );
     SetNrColumns( C, NrColumns( A ) );
@@ -1374,7 +1456,7 @@ InstallMethod( AddBts,				### defines: AddBts
         Error( "the second matrix cannot become a bottom side of the first, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), " column(s)\n" );
     fi;
     
-    C := MatrixForHomalg( A );
+    C := HomalgMatrix( A );
     
     SetEvalAddBts( C, true );
     
@@ -1397,7 +1479,7 @@ InstallMethod( GetSide,
     
     R := HomalgRing( A );
     
-    C := MatrixForHomalg( R );
+    C := HomalgMatrix( R );
     
     SetEvalGetSide( C, [ side, A ] );
     
@@ -1544,7 +1626,7 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( MatrixForHomalg,
+InstallGlobalFunction( HomalgMatrix,
   function( arg )
     local nargs, R, type, ar, matrix, M;
     
@@ -1554,7 +1636,7 @@ InstallGlobalFunction( MatrixForHomalg,
         
         R := HomalgRing( arg[1] );
         
-        M := MatrixForHomalg( R );
+        M := HomalgMatrix( R );
         
         SetPreEval( M, arg[1] );
         
@@ -1790,6 +1872,32 @@ InstallMethod( ViewObj,
         Print( "<A " );
     else
         Print( "<An unevaluated " );
+    fi;
+    
+    if HasIsZeroMatrix( o ) and not IsZeroMatrix( o ) then ## actually if this method is applicable we already know that o is a non-zero homalg matrix
+        Print( "non-zero " );
+    fi;
+    
+    if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
+        Print( "diagonal " );
+    elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
+        Print( "strict upper triangular " );
+    elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
+        Print( "strict lower triangular " );
+    elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
+        Print( "upper triangular " );
+    elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
+        Print( "lower triangular " );
+    elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
+        Print( "triangular " );
+    fi;
+    
+    if HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
+        Print( "full row rank " );
+    fi;
+    
+    if HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
+        Print( "full column rank " );
     fi;
     
     Print( "homalg " );

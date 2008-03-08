@@ -70,7 +70,7 @@ InstallMethod( CreateHomalgTable,
                        N := N[1];
                    fi;
                    
-                   S := MatrixForHomalg( N, R );
+                   S := HomalgMatrix( N, R );
                    
 		   SetIsDiagonalMatrix( S, true );
      
@@ -128,7 +128,7 @@ InstallMethod( CreateHomalgTable,
                        N := N[1];
                    fi;
                    
-                   H := MatrixForHomalg( N, R );
+                   H := HomalgMatrix( N, R );
                    
 		   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( H, true );   

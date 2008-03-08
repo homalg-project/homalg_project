@@ -42,8 +42,8 @@ DeclareProperty( "IsReduced",
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateGeneratorsForLeftModule" );
-DeclareGlobalFunction( "CreateGeneratorsForRightModule" );
+DeclareGlobalFunction( "HomalgGeneratorsForLeftModule" );
+DeclareGlobalFunction( "HomalgGeneratorsForRightModule" );
 
 # basic operations:
 

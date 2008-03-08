@@ -69,7 +69,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
                           1 := "unknown relations" );
     else
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
-                          1 := CreateRelationsForLeftModule( arg[1], arg[2] ) );
+                          1 := HomalgRelationsForLeftModule( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:
@@ -91,7 +91,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
                           1 := "unknown relations" );
     else
         relations := rec( ListOfPositionsOfKnownSetsOfRelations := [ 1 ],
-                          1 := CreateRelationsForRightModule( arg[1], arg[2] ) );
+                          1 := HomalgRelationsForRightModule( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:

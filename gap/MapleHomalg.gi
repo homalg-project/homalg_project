@@ -74,7 +74,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[3], true );
                    fi;
                    
-                   S := MatrixForHomalg( S, R );
+                   S := HomalgMatrix( S, R );
                    
                    SetNrRows( S, NrRows( M ) );
                    SetNrColumns( S, NrColumns( M ) );
@@ -133,7 +133,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsFullColumnRankMatrix( arg[2], true );
                    fi;
                    
-                   N := MatrixForHomalg( N, R );
+                   N := HomalgMatrix( N, R );
                    
                    SetNrRows( N, NrRows( M ) );
                    SetNrColumns( N, NrColumns( M ) );
@@ -152,7 +152,7 @@ InstallMethod( CreateHomalgTable,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                    
-               True := "True",
+               True := "true",
                
                Zero := HomalgExternalObject( "0", "Maple" ),
                
@@ -163,14 +163,17 @@ InstallMethod( CreateHomalgTable,
                Equal :=
                  function( A, B )
                  
-                   return HomalgSendBlocking( [ A, "==", B ], "need_ouput" );
+                   return HomalgSendBlocking( [ A, "=", B ], "need_ouput" );
                  
                  end,
                
                ZeroMatrix :=
                  function( C )
+                   local R;
                    
-                   return HomalgSendBlocking( [ "matrix(ZZ,", NrRows(C), ",",  NrColumns(C), ", sparse=true)" ], HomalgRing(C) );
+                   R := HomalgRing( C );
+                   
+                   return HomalgSendBlocking( [ "ZeroMap(", NrRows( C ), NrColumns( C ), R, "[1],", R, "[2])" ] );
                    
                  end,
              
@@ -178,46 +181,59 @@ InstallMethod( CreateHomalgTable,
                  function( C )
                    local R;
                    
-                   R := HomalgRing(C);
+                   R := HomalgRing( C );
                    
-                   HomalgSendBlocking( [ "_id = identity_matrix(ZZ,", NrRows(C), ")" ], "need_command", R );
-                   return HomalgSendBlocking( [ "_id.sparse_matrix()" ], R );
+                   return HomalgSendBlocking( [ "IdentityMap(", NrRows( C ), R, "[1],", R, "[2])" ] );
+                   
                  end,
                
                Involution :=
                  function( M )
+                   local R;
                    
-                   return HomalgSendBlocking( [ M, ".transpose()" ] );
+                   R := HomalgRing( M );
+                   
+                   return HomalgSendBlocking( [ "Involution(", M, R, "[1],", R, "[2])" ] );
                    
                  end,
                
                CertainRows :=
                  function( M, plist )
+                   local R;
                    
-                   plist := plist - 1;
-                   return HomalgSendBlocking( [ M, ".matrix_from_rows(", plist, ")"] );
+                   R := HomalgRing( M );
+                   
+                   return HomalgSendBlocking( [ R, "[2][CertainRows](", M, plist, ")" ] );
                    
                  end,
                
                CertainColumns :=
                  function( M, plist )
+                   local R;
                    
-                   plist := plist - 1;
-                   return HomalgSendBlocking( [ M, ".matrix_from_columns(", plist, ")" ] );
+                   R := HomalgRing( M );
+                   
+                   return HomalgSendBlocking( [ R, "[2][CertainColumns](", M, plist, ")" ] );
                    
                  end,
                
                UnionOfRows :=
-                 function( A, B)
+                 function( A, B )
+                   local R;
                    
-                   return HomalgSendBlocking( [ "block_matrix([", A, B, "],2)" ] );
+                   R := HomalgRing( A );
+                   
+                   return HomalgSendBlocking( [ R, "[2][matrix](", R, "[2][UnionOfRows](", A, B, "))" ] );
                    
                  end,
                
                UnionOfColumns :=
-                 function( A, B)
+                 function( A, B )
+                   local R;
                    
-                   return HomalgSendBlocking( [ "block_matrix([", A, B, "],1)" ] );
+                   R := HomalgRing( A );
+                   
+                   return HomalgSendBlocking( [ R, "[2][matrix](", R, "[2][UnionOfColumns](", A, B, "))" ] );
                    
                  end,
                
@@ -234,29 +250,41 @@ InstallMethod( CreateHomalgTable,
                
                MulMat :=
                  function( a, A )
+                   local R;
                    
-                   return HomalgSendBlocking( [a, "*", A] );
+                   R := HomalgRing( A );
+                   
+                   return HomalgSendBlocking( [ "MulMat(", a, A, R, "[1],", R, "[2])" ] );
                    
                  end,
                
                AddMat :=
                  function( A, B )
+                   local R;
                    
-                   return HomalgSendBlocking( [ A, "+", B ] );
+                   R := HomalgRing( A );
+                   
+                   return HomalgSendBlocking( [ "AddMat(", A, B, R, "[1],", R, "[2])" ] );
                    
                  end,
                
                SubMat :=
                  function( A, B )
+                   local R;
                    
-                   return HomalgSendBlocking( [ A, "-", B ] );
+                   R := HomalgRing( A );
+                   
+                   return HomalgSendBlocking( [ "SubMat(", A, B, R, "[1],", R, "[2])" ] );
                    
                  end,
                
                Compose :=
                  function( A, B )
+                   local R;
                    
-                   return HomalgSendBlocking( [ A, "*", B ] );
+                   R := HomalgRing( A );
+                   
+                   return HomalgSendBlocking( [ "Compose(", A, B, R, "[1],", R, "[2])" ] );
                    
                  end,
                

@@ -11,15 +11,15 @@
 ReadPackage( "homalg", "gap/homalg.gi" );
 
 ReadPackage( "homalg", "gap/HomalgTable.gi" );
-ReadPackage( "homalg", "gap/RingForHomalg.gi" );
+ReadPackage( "homalg", "gap/HomalgRing.gi" );
 
-ReadPackage( "homalg", "gap/MatrixForHomalg.gi" );
+ReadPackage( "homalg", "gap/HomalgMatrix.gi" );
 
-ReadPackage( "homalg", "gap/RelationsForHomalg.gi" );
+ReadPackage( "homalg", "gap/HomalgRelations.gi" );
 ReadPackage( "homalg", "gap/SetsOfRelations.gi" );
-ReadPackage( "homalg", "gap/GeneratorsForHomalg.gi" );
+ReadPackage( "homalg", "gap/HomalgGenerators.gi" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
-ReadPackage( "homalg", "gap/ModuleForHomalg.gi" );
+ReadPackage( "homalg", "gap/HomalgModule.gi" );
 
 ReadPackage( "homalg", "gap/Tools.gi" );
 ReadPackage( "homalg", "gap/Service.gi" );

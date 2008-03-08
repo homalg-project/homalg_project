@@ -90,7 +90,7 @@ InstallMethod( TriangularBasisOfColumns,
         return RP!.TriangularBasisOfColumns( M, V );
     fi;
     
-    U := MatrixForHomalg( R );
+    U := HomalgMatrix( R );
     
     T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
     
@@ -167,7 +167,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     #=====# begin of the core procedure #=====#
     
     if HasRightHandSide( M ) then
-        U := MatrixForHomalg( R );
+        U := HomalgMatrix( R );
         
         B := TriangularBasisOfRows( M, U );
     else
@@ -177,7 +177,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     rank := RowRankOfMatrix( B );
     
     if rank = 0 then
-        B := MatrixForHomalg( "zero", 0, NrColumns( B ), R);
+        B := HomalgMatrix( "zero", 0, NrColumns( B ), R);
     else
         B := CertainRows( B, [ 1 .. rank ] );
         
@@ -218,7 +218,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     #=====# begin of the core procedure #=====#
     
     if HasBottomSide( M ) then
-        U := MatrixForHomalg( R );
+        U := HomalgMatrix( R );
         
         B := TriangularBasisOfColumns( M, U );
     else
@@ -228,7 +228,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     rank := ColumnRankOfMatrix( B );
     
     if rank = 0 then
-        B := MatrixForHomalg( "zero", NrRows( B ), 0, R);
+        B := HomalgMatrix( "zero", NrRows( B ), 0, R);
     else
         B := CertainColumns( B, [1..rank] );
         
@@ -282,7 +282,7 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     if HasRightHandSide( M ) then
         side := RightHandSide( M );
-        zz := MatrixForHomalg( "zero", NrRows( rel ), NrColumns( side ), R );
+        zz := HomalgMatrix( "zero", NrRows( rel ), NrColumns( side ), R );
         SetRightHandSide( Mrel, UnionOfRows( side, zz ) );
     fi;
     
@@ -298,11 +298,11 @@ InstallMethod( BasisOfRows,
   function( M )
     local C, rhs;
     
-    C := MatrixForHomalg( "zero", 0, NrColumns( M ), HomalgRing( M ) );
+    C := HomalgMatrix( "zero", 0, NrColumns( M ), HomalgRing( M ) );
     
     if HasRightHandSide( M ) then
         rhs := RightHandSide( M );
-        SetRightHandSide( C, MatrixForHomalg( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
+        SetRightHandSide( C, HomalgMatrix( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
         SetCompatibilityConditions( C, rhs );
     fi;
     
@@ -318,12 +318,12 @@ InstallMethod( BasisOfRows,
   function( M )
     local C, rhs;
     
-    C := MatrixForHomalg( "identity", NrRows( M ), HomalgRing( M ) );
+    C := HomalgMatrix( "identity", NrRows( M ), HomalgRing( M ) );
     
     if HasRightHandSide( M ) then
         rhs := RightHandSide( M );
         SetRightHandSide( C, rhs );
-        SetCompatibilityConditions( C, MatrixForHomalg( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
+        SetCompatibilityConditions( C, HomalgMatrix( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
     fi;
     
     return C;
@@ -362,7 +362,7 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     if HasBottomSide( M ) then
         side := BottomSide( M );
-        zz := MatrixForHomalg( "zero", NrRows( side ), NrColumns( rel ), R );
+        zz := HomalgMatrix( "zero", NrRows( side ), NrColumns( rel ), R );
         SetBottomSide( Mrel, UnionOfColumns( side, zz ) );
     fi;
     
@@ -378,11 +378,11 @@ InstallMethod( BasisOfColumns,
   function( M )
     local C, bts;
     
-    C := MatrixForHomalg( "zero", NrRows( M ), 0, HomalgRing( M ) );
+    C := HomalgMatrix( "zero", NrRows( M ), 0, HomalgRing( M ) );
     
     if HasBottomSide( M ) then
         bts := BottomSide( M );
-        SetBottomSide( C, MatrixForHomalg( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
+        SetBottomSide( C, HomalgMatrix( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
         SetCompatibilityConditions( C, bts );
     fi;
     
@@ -398,12 +398,12 @@ InstallMethod( BasisOfColumns,
   function( M )
     local C, bts;
     
-    C := MatrixForHomalg( "identity", NrColumns( M ), HomalgRing( M ) );
+    C := HomalgMatrix( "identity", NrColumns( M ), HomalgRing( M ) );
     
     if HasBottomSide( M ) then
         bts := BottomSide( M );
         SetBottomSide( C, bts );
-        SetCompatibilityConditions( C, MatrixForHomalg( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
+        SetCompatibilityConditions( C, HomalgMatrix( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
     fi;
     
     return C;
@@ -433,14 +433,14 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     n := NrRows( B );
     
-    id := MatrixForHomalg( "identity", l, R );
+    id := HomalgMatrix( "identity", l, R );
     
-    zz := MatrixForHomalg( "zero", n, l, R );
+    zz := HomalgMatrix( "zero", n, l, R );
     
     M := UnionOfRows( UnionOfColumns( id, L ), UnionOfColumns( zz, B ) );
     
     if HasRightHandSide( B ) then
-        U := MatrixForHomalg( R );
+        U := HomalgMatrix( R );
         
         M := TriangularBasisOfRows( M, U );
     else
@@ -511,14 +511,14 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     n := NrColumns( B );
     
-    id := MatrixForHomalg( "identity", l, R );
+    id := HomalgMatrix( "identity", l, R );
     
-    zz := MatrixForHomalg( "zero", l, n, R );
+    zz := HomalgMatrix( "zero", l, n, R );
     
     M := UnionOfColumns( UnionOfRows( id, L ), UnionOfRows( zz, B ) );
     
     if HasBottomSide( B ) then
-        U := MatrixForHomalg( R );
+        U := HomalgMatrix( R );
         
         M := TriangularBasisOfColumns( M, U );
     else
@@ -572,17 +572,30 @@ InstallMethod( DecideZero,
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ring_rel, rel;
+    local R, RP, ring_rel, rel, red;
+    
+    if HasIsReducedModuloRingRelations( M ) and IsReducedModuloRingRelations( M ) then
+        return M;
+    fi;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
   
     if IsBound(RP!.DecideZero) then
-        return RP!.DecideZero( M );
+        red := RP!.DecideZero( M );
+        
+        SetIsReducedModuloRingRelations( red, true );
+        IsZeroMatrix( red );
+        
+        return red;
     fi;
     
     if not HasRingRelations( R ) then
+        
+        SetIsReducedModuloRingRelations( M, true );
+        IsZeroMatrix( M );
+        
         return M;
     fi;
     
@@ -594,11 +607,16 @@ InstallMethod( DecideZero,
     
     if IsLeftRelationsForHomalgRep( ring_rel ) then
         rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
-        return DecideZeroRows( M, rel );
+        red := DecideZeroRows( M, rel );
     else
         rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
-        return DecideZeroColumns( M, rel );
+        red := DecideZeroColumns( M, rel );
     fi;
+    
+    SetIsReducedModuloRingRelations( red, true );
+    IsZeroMatrix( red );
+    
+    return red;
     
 end );
 
@@ -620,9 +638,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     #=====# begin of the core procedure #=====#
     
-    id := MatrixForHomalg( "identity", NrRows( M1 ), R );
+    id := HomalgMatrix( "identity", NrRows( M1 ), R );
     
-    zz := MatrixForHomalg( "zero", NrRows( M2 ), NrRows( M1 ), R );
+    zz := HomalgMatrix( "zero", NrRows( M2 ), NrRows( M1 ), R );
     
     L := UnionOfRows( M1, M2 );
     
@@ -678,9 +696,9 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     #=====# begin of the core procedure #=====#
     
-    id := MatrixForHomalg( "identity", NrColumns( M1 ), R );
+    id := HomalgMatrix( "identity", NrColumns( M1 ), R );
     
-    zz := MatrixForHomalg( "zero", NrColumns( M1 ), NrColumns( M2 ), R );
+    zz := HomalgMatrix( "zero", NrColumns( M1 ), NrColumns( M2 ), R );
     
     L := UnionOfColumns( M1, M2 );
     

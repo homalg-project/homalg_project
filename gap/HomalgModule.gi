@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ModuleForHomalg.gi          homalg package               Mohamed Barakat
+##  HomalgModule.gi             homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,9 +14,9 @@
 #
 ####################################
 
-# a new representation for the category IsModuleForHomalg:
+# a new representation for the category IsHomalgModule:
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
-        IsModuleForHomalg,
+        IsHomalgModule,
         [ ] );
 
 ####################################
@@ -100,11 +100,11 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## a => b:
         InstallTrueMethod( property[3],
-                IsModuleForHomalg and property[1] );
+                IsHomalgModule and property[1] );
         
         ## not b => not a:
         InstallImmediateMethod( property[1],
-                IsModuleForHomalg and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
+                IsHomalgModule and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
                 
           function( M )
             if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
@@ -119,11 +119,11 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## a and b => c:
         InstallTrueMethod( property[5],
-                IsModuleForHomalg and property[1] and property[3] );
+                IsHomalgModule and property[1] and property[3] );
         
         ## b and not c => not a:
         InstallImmediateMethod( property[1],
-                IsModuleForHomalg and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
+                IsHomalgModule and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
             if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
@@ -137,7 +137,7 @@ for property in SimpleLogicalImplicationsForHomalgModules do;
         
         ## a and not c => not b:
         InstallImmediateMethod( property[3],
-                IsModuleForHomalg and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
+                IsHomalgModule and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
                 
           function( M )
             if Tester( property[1] )( M ) and Tester( property[5] )( M ) ## FIXME: find a way to get rid of the Testers here
@@ -660,16 +660,16 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
             if diagonal <> fail and diagonal then
                 SetIsDiagonalMatrix( rel, true );
             fi;
-            rel := CreateRelationsForLeftModule( rel );
-            gen := CreateGeneratorsForLeftModule( CertainRows( MatrixOfGenerators( M ), bl ) );
+            rel := HomalgRelationsForLeftModule( rel );
+            gen := HomalgGeneratorsForLeftModule( CertainRows( MatrixOfGenerators( M ), bl ) );
         else
             rel := CertainRows( rel, bl );
             rel := CertainColumns( rel, NonZeroColumns( rel ) );
             if diagonal <> fail and diagonal then
                 SetIsDiagonalMatrix( rel, true );
             fi;
-            rel := CreateRelationsForRightModule( rel );
-            gen := CreateGeneratorsForRightModule( CertainColumns( MatrixOfGenerators( M ), bl ) );
+            rel := HomalgRelationsForRightModule( rel );
+            gen := HomalgGeneratorsForRightModule( CertainColumns( MatrixOfGenerators( M ), bl ) );
         fi;
         
         AddANewPresentation( M, gen, rel );
@@ -692,16 +692,16 @@ InstallMethod( BetterGenerators,
     
     rel := MatrixOfRelations( M );
     
-    V := MatrixForHomalg( R );
-    VI := MatrixForHomalg( R );
+    V := HomalgMatrix( R );
+    VI := HomalgMatrix( R );
     
     rel := BetterEquivalentMatrix( rel, V, VI, "", "" );
     
-    rel := CreateRelationsForLeftModule( rel );
+    rel := HomalgRelationsForLeftModule( rel );
     
     gen := VI * MatrixOfGenerators( M ); ## FIXME: ...
     
-    gen := CreateGeneratorsForLeftModule( gen );
+    gen := HomalgGeneratorsForLeftModule( gen );
     
     AddANewPresentation( M, gen, rel );
     
@@ -790,7 +790,7 @@ InstallMethod( Presentation,
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        MatrixForHomalg( "identity", NrGenerators( rel ), R ), R );
+                        HomalgMatrix( "identity", NrGenerators( rel ), R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
@@ -882,7 +882,7 @@ InstallMethod( Presentation,
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForRightModule(
-                        MatrixForHomalg( "identity", NrGenerators( rel ), R ), R );
+                        HomalgMatrix( "identity", NrGenerators( rel ), R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel );
@@ -974,10 +974,10 @@ InstallMethod( LeftPresentation,
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        MatrixForHomalg( "identity", Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
+                        HomalgMatrix( "identity", Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        MatrixForHomalg( "identity", 1, R ), R );
+                        HomalgMatrix( "identity", 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -1059,10 +1059,10 @@ InstallMethod( RightPresentation,
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForRightModule(
-                        MatrixForHomalg( "identity", Length( rel ), R ), R ); ## FIXME: Length( rel )
+                        HomalgMatrix( "identity", Length( rel ), R ), R ); ## FIXME: Length( rel )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForRightModule(
-                        MatrixForHomalg( "identity", 1, R ), R );
+                        HomalgMatrix( "identity", 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel, R );

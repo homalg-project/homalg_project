@@ -129,7 +129,7 @@ InstallMethod( BasisOfModule,
         SetCanBeUsedToEffectivelyDecideZero( rel, false );
     fi;
     
-    bas := CreateRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    bas := HomalgRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
         
@@ -149,7 +149,7 @@ InstallMethod( BasisOfModule,
         SetCanBeUsedToEffectivelyDecideZero( rel, false );
     fi;
     
-    bas := CreateRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    bas := HomalgRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
         
@@ -196,7 +196,7 @@ InstallMethod( DecideZero,
         
   function( rel_, rel )
     
-    return CreateRelationsForLeftModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
+    return HomalgRelationsForLeftModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
     
 end );
 
@@ -207,7 +207,7 @@ InstallMethod( DecideZero,
         
   function( rel_, rel )
     
-    return CreateRelationsForRightModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
+    return HomalgRelationsForRightModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
     
 end );
 
@@ -224,7 +224,7 @@ InstallMethod( BasisCoeff,
         SetCanBeUsedToEffectivelyDecideZero( rel, false );
     fi;
     
-    bas := CreateRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    bas := HomalgRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
         
@@ -245,7 +245,7 @@ InstallMethod( BasisCoeff,
         SetCanBeUsedToEffectivelyDecideZero( rel, false );
     fi;
     
-    bas := CreateRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    bas := HomalgRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
     
@@ -333,14 +333,14 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
     
     #=====# begin of the core procedure #=====#
     
-    id := MatrixForHomalg( "identity", NrGenerators( M ), R );
+    id := HomalgMatrix( "identity", NrGenerators( M ), R );
     
     if IsLeftRelationsForHomalgRep( M ) then
-        gen := CreateGeneratorsForLeftModule( id, BasisOfModule( M ) );
+        gen := HomalgGeneratorsForLeftModule( id, BasisOfModule( M ) );
         gen := DecideZero( gen );
         return NonZeroRows( gen );
     else
-        gen := CreateGeneratorsForRightModule( id, BasisOfModule( M ) );
+        gen := HomalgGeneratorsForRightModule( id, BasisOfModule( M ) );
         gen := DecideZero( gen );
         return NonZeroColumns( gen );
     fi;
@@ -368,7 +368,7 @@ InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (
             M := MatrixOfRelations( _M );
         fi;
         
-        return CreateRelationsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
+        return HomalgRelationsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
     else
         if IsBound(RP!.SimplifyBasisOfColumns) then
             M := RP!.SimplifyBasisOfColumns( _M );
@@ -376,7 +376,7 @@ InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (
             M := MatrixOfRelations( _M );
         fi;
         
-        return CreateRelationsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
+        return HomalgRelationsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
     fi;
     
 end );
@@ -387,14 +387,14 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( CreateRelationsForLeftModule,
+InstallGlobalFunction( HomalgRelationsForLeftModule,
   function( arg )
     local relations;
     
     if IsHomalgMatrix( arg[1] ) then
         relations := rec( relations := arg[1] );
     else
-        relations := rec( relations := MatrixForHomalg( arg[1], arg[2] ) );
+        relations := rec( relations := HomalgMatrix( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:
@@ -404,14 +404,14 @@ InstallGlobalFunction( CreateRelationsForLeftModule,
     
 end );
 
-InstallGlobalFunction( CreateRelationsForRightModule,
+InstallGlobalFunction( HomalgRelationsForRightModule,
   function( arg )
     local relations;
     
     if IsHomalgMatrix( arg[1] ) then
         relations := rec( relations := arg[1] );
     else
-        relations := rec( relations := MatrixForHomalg( arg[1], arg[2] ) );
+        relations := rec( relations := HomalgMatrix( arg[1], arg[2] ) );
     fi;
     
     ## Objectify:
@@ -465,3 +465,12 @@ InstallMethod( ViewObj,
     
 end );
 
+InstallMethod( Display,
+        "for homalg relations",
+        [ IsRelationsForHomalg ],
+        
+  function( o )
+    
+    Display( MatrixOfRelations( o ) );
+    
+end );

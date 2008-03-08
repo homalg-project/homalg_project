@@ -1,0 +1,16 @@
+##
+InstallMethod( ZeroSameMutability,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return HomalgMatrix( "zero", NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+               Zero := R -> HomalgSendBlocking( [ R, "[2][Zero]()" ], "need_output" ),
+               
+               One := R -> HomalgExternalObject( [ R, "[2][One]()" ], "need_output" ),
+               
+               MinusOne := R -> HomalgExternalObject( [ R, "[2][Minus](", R, "[2][Zero]()", R, R, "[2][One]())" ], "need_output" ),

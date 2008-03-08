@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ModuleForHomalg.gd          homalg package               Mohamed Barakat
+##  HomalgModule.gd             homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -16,7 +16,7 @@
 
 # a new category of objects:
 
-DeclareCategory( "IsModuleForHomalg",
+DeclareCategory( "IsHomalgModule",
         IsAttributeStoringRep );
 
 ####################################
@@ -36,36 +36,36 @@ DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgModules" );
 ## left modules:
 
 DeclareProperty( "IsFreeModule", ## FIXME: the name should be changed to IsFreeLeftModule
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsStablyFreeLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsProjectiveLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsReflexiveLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsTorsionFreeLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsArtinianLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsCyclicLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsTorsionLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareProperty( "IsHolonomicLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 ## all modules:
 
 DeclareProperty( "IsZeroModule",
-        IsModuleForHomalg );
+        IsHomalgModule );
 
 ####################################
 #
@@ -74,10 +74,10 @@ DeclareProperty( "IsZeroModule",
 ####################################
 
 DeclareAttribute( "RankOfLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 DeclareAttribute( "ElementaryDivisorsOfLeftModule",
-        IsModuleForHomalg and IsLeftModule );
+        IsHomalgModule and IsLeftModule );
 
 ####################################
 #
@@ -108,73 +108,73 @@ DeclareOperation( "RightPresentation",
 # basic operations:
 
 DeclareOperation( "HomalgRing",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "SetsOfGenerators",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "SetsOfRelations",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "NumberOfKnownPresentations",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "GeneratorsOfModule",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "RelationsOfModule",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "MatrixOfGenerators",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "MatrixOfRelations",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "NrGenerators",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "NrRelations",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsModuleForHomalg, IsGeneratorsForHomalg ] );
+        [ IsHomalgModule, IsGeneratorsForHomalg ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsModuleForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgModule, IsRelationsForHomalg ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsModuleForHomalg, IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgModule, IsGeneratorsForHomalg, IsRelationsForHomalg ] );
 
 DeclareOperation( "BasisOfModule",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix, IsModuleForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "BasisCoeff",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "EffectivelyDecideZero",
-        [ IsHomalgMatrix, IsModuleForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsModuleForHomalg, IsModuleForHomalg ] );
+        [ IsHomalgModule, IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsModuleForHomalg, IsList ] );
+        [ IsHomalgModule, IsList ] );
 
 DeclareOperation( "NonZeroGenerators",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "GetRidOfZeroGenerators",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "BetterGenerators",
-        [ IsModuleForHomalg ] );
+        [ IsHomalgModule ] );
 
 ####################################
 #
