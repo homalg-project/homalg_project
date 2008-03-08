@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MapleHomalg.gi              homalg package               Mohamed Barakat
+##  MapleHomalgPIR.gi           homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,8 +15,10 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-               "for maple homalg rings",
-               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsHomalgMapleRing ],
+        "for homalg rings provided by the maple package PIR",
+        [ IsHomalgExternalObjectRep
+          and IsHomalgExternalObjectWithIOStream
+          and IsHomalgPIRMapleRing ],
 
   function( arg )
     local RP;
@@ -25,6 +27,8 @@ InstallMethod( CreateHomalgTable,
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
+               
+               RingName := R -> HomalgSendBlocking( [ "Pvar(", R, "[1])" ], "need_output" ),
                
                BestBasis :=
                  function( arg )

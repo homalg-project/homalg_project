@@ -15,9 +15,11 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-               "for Sage Integers",
-               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsSageIntegers ],
-
+        "for Sage Integers",
+        [ IsHomalgExternalObjectRep
+          and IsHomalgExternalObjectWithIOStream
+          and IsSageIntegers ],
+        
   function( arg )
     local RP;
 

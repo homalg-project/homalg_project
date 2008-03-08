@@ -415,7 +415,11 @@ InstallMethod( Display,
     RP := HomalgTable( o );
     
     if IsBound(RP!.RingName) then
-        Print( RP!.RingName, "\n" );
+        if IsFunction( RP!.RingName ) then
+            Print( RP!.RingName( o ), "\n" );
+        else
+            Print( RP!.RingName, "\n" );
+        fi;
     else
         TryNextMethod( );
     fi;
