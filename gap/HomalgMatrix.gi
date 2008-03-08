@@ -1878,26 +1878,28 @@ InstallMethod( ViewObj,
         Print( "non-zero " );
     fi;
     
-    if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
-        Print( "diagonal " );
-    elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
-        Print( "strict upper triangular " );
-    elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
-        Print( "strict lower triangular " );
-    elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
-        Print( "upper triangular " );
-    elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
-        Print( "lower triangular " );
-    elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
-        Print( "triangular " );
-    fi;
-    
-    if HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
-        Print( "full row rank " );
-    fi;
-    
-    if HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
-        Print( "full column rank " );
+    if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
+        if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
+            Print( "diagonal " );
+        elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
+            Print( "strict upper triangular " );
+        elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
+            Print( "strict lower triangular " );
+        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
+            Print( "upper triangular " );
+        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
+            Print( "lower triangular " );
+        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
+            Print( "triangular " );
+        fi;
+        
+        if HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
+            Print( "full row rank " );
+        fi;
+        
+        if HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
+            Print( "full column rank " );
+        fi;
     fi;
     
     Print( "homalg " );

@@ -19,8 +19,7 @@
 DeclareCategory( "IsHomalgMatrix",
         IsAdditiveElementWithInverse
         and IsExtLElement
-        and IsMultiplicativeElementWithOne
-        and IsAttributeStoringRep );
+        and IsAttributeStoringRep ); ## CAUTION: never let homalg matrices be multiplicative elements!!
 
 ####################################
 #
@@ -213,6 +212,9 @@ DeclareOperation( "DiagMat",
 
 DeclareOperation( "*",
         [ IsHomalgExternalObject, IsHomalgMatrix ] );
+
+DeclareOperation( "*",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "AddRhs",
         [ IsHomalgMatrix ] );
