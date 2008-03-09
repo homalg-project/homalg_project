@@ -526,15 +526,15 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly cha
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel;
+    local rel, bas;
     
     rel := RelationsOfModule( M );
     
+    bas := BasisOfModule( rel );
+    
     if not ( HasCanBeUsedToEffectivelyDecideZero( rel ) and CanBeUsedToEffectivelyDecideZero( rel ) ) then
         
-        rel := BasisOfModule( rel );
-        
-        AddANewPresentation( M, rel );
+        AddANewPresentation( M, bas );
         
     fi;
     

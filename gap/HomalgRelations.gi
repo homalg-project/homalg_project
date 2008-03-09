@@ -144,17 +144,27 @@ InstallMethod( BasisOfModule,
 	[ IsHomalgLeftRelationsRep ],
         
   function( rel )
-    local bas;
+    local mat, bas;
     
     if not IsBound( rel!.BasisOfModule ) then
-        rel!.BasisOfModule := BasisOfRows( MatrixOfRelations( rel ) );
-        SetCanBeUsedToEffectivelyDecideZero( rel, false );
+        mat := MatrixOfRelations( rel );
+        
+        bas := BasisOfRows( mat );
+        
+        if bas <> mat then
+            rel!.BasisOfModule := bas;
+            SetCanBeUsedToEffectivelyDecideZero( rel, false );
+        else
+            SetCanBeUsedToEffectivelyDecideZero( rel, true );
+        fi;
+    else
+        bas := rel!.BasisOfModule;
     fi;
     
-    bas := HomalgRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    bas := HomalgRelationsForLeftModule( bas );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
-        
+    
     return bas;
 end );
 
@@ -164,17 +174,28 @@ InstallMethod( BasisOfModule,
 	[ IsHomalgRightRelationsRep ],
         
   function( rel )
-    local bas;
+    local mat, bas;
     
     if not IsBound( rel!.BasisOfModule ) then
-        rel!.BasisOfModule := BasisOfColumns( MatrixOfRelations( rel ) );
-        SetCanBeUsedToEffectivelyDecideZero( rel, false );
+        
+        mat := MatrixOfRelations( rel );
+        
+        bas := BasisOfColumns( mat );
+        
+        if bas <> mat then
+            rel!.BasisOfModule := bas;
+            SetCanBeUsedToEffectivelyDecideZero( rel, false );
+        else
+            SetCanBeUsedToEffectivelyDecideZero( rel, true );
+        fi;
+    else
+        bas := rel!.BasisOfModule;
     fi;
     
-    bas := HomalgRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
+    bas := HomalgRelationsForLeftModule( bas );
     
     SetCanBeUsedToEffectivelyDecideZero( bas, true );
-        
+    
     return bas;
 end );
 
