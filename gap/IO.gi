@@ -216,12 +216,12 @@ InstallGlobalFunction( HomalgSendBlocking,
     stream := HomalgStream( ext_obj );
     
     if not IsBound( option ) then
-        if not IsBound( stream.ExternalVariableCounter ) then
-            stream.ExternalVariableCounter := 1;
+        if not IsBound( stream.HomalgExternalVariableCounter ) then
+            stream.HomalgExternalVariableCounter := 1;
         fi;
-        homalg_variable := Concatenation( "homalg_variable_", String( stream.ExternalVariableCounter ) );
+        homalg_variable := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
-        stream.ExternalVariableCounter := stream.ExternalVariableCounter + 1;
+        stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
     fi;
     
     L := HomalgCreateStringForExternalCASystem( L );
