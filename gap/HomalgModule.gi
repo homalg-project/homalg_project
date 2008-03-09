@@ -538,7 +538,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly cha
         
     fi;
     
-    return rel;
+    return bas;
     
 end );
 
