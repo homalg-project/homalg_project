@@ -578,6 +578,10 @@ InstallMethod( DecideZero,
         return M;
     fi;
     
+    ## the upper exit condition and setting SetIsReducedModuloRingRelations to true in the following
+    ## avoids infinite loops when IsZeroMatrix is called (as below), since the latter, in turn,
+    ## calls DecideZero first!
+    
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
@@ -605,7 +609,7 @@ InstallMethod( DecideZero,
     
     rel := MatrixOfRelations( ring_rel );
     
-    if IsLeftRelationsForHomalgRep( ring_rel ) then
+    if IsHomalgLeftRelationsRep( ring_rel ) then
         rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
         red := DecideZeroRows( M, rel );
     else

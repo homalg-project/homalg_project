@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  RelationsForHomalg.gi       homalg package               Mohamed Barakat
+##  HomalgRelations.gi       homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -16,13 +16,13 @@
 #
 ####################################
 
-# two new representations for the category IsRelationsForHomalg:
-DeclareRepresentation( "IsLeftRelationsForHomalgRep",
-        IsRelationsForHomalg,
+# two new representations for the category IsHomalgRelations:
+DeclareRepresentation( "IsHomalgLeftRelationsRep",
+        IsHomalgRelations,
         [ "relations" ] );
 
-DeclareRepresentation( "IsRightRelationsForHomalgRep",
-        IsRelationsForHomalg,
+DeclareRepresentation( "IsHomalgRightRelationsRep",
+        IsHomalgRelations,
         [ "relations" ] );
 
 ####################################
@@ -32,17 +32,17 @@ DeclareRepresentation( "IsRightRelationsForHomalgRep",
 ####################################
 
 # a new family:
-BindGlobal( "RelationsForHomalgFamily",
-        NewFamily( "RelationsForHomalgFamily" ) );
+BindGlobal( "HomalgRelationsFamily",
+        NewFamily( "HomalgRelationsFamily" ) );
 
 # two new types:
-BindGlobal( "LeftRelationsForHomalgType",
-        NewType(  RelationsForHomalgFamily,
-                IsLeftRelationsForHomalgRep ) );
+BindGlobal( "HomalgLeftRelationsType",
+        NewType(  HomalgRelationsFamily,
+                IsHomalgLeftRelationsRep ) );
 
-BindGlobal( "RightRelationsForHomalgType",
-        NewType(  RelationsForHomalgFamily,
-                IsRightRelationsForHomalgRep ) );
+BindGlobal( "HomalgRightRelationsType",
+        NewType(  HomalgRelationsFamily,
+                IsHomalgRightRelationsRep ) );
 
 ####################################
 #
@@ -53,7 +53,7 @@ BindGlobal( "RightRelationsForHomalgType",
 ##
 InstallMethod( MatrixOfRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsForHomalg ],
+        [ IsHomalgRelations ],
         
   function( rel )
     
@@ -62,9 +62,31 @@ InstallMethod( MatrixOfRelations,
 end );
 
 ##
+InstallMethod( \=,
+        "for homalg comparable matrices",
+        [ IsHomalgLeftRelationsRep, IsHomalgLeftRelationsRep ],
+        
+  function( rel1, rel2 )
+    
+    return MatrixOfRelations( rel1 ) = MatrixOfRelations( rel2 );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg comparable matrices",
+        [ IsHomalgRightRelationsRep, IsHomalgRightRelationsRep ],
+        
+  function( rel1, rel2 )
+    
+    return MatrixOfRelations( rel1 ) = MatrixOfRelations( rel2 );
+    
+end );
+
+##
 InstallMethod( HomalgRing,
         "for sets of relations of homalg modules",
-        [ IsRelationsForHomalg ],
+        [ IsHomalgRelations ],
         
   function( rel )
     
@@ -75,7 +97,7 @@ end );
 ##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
-        [ IsLeftRelationsForHomalgRep ],
+        [ IsHomalgLeftRelationsRep ],
         
   function( rel )
     
@@ -86,7 +108,7 @@ end );
 ##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
-        [ IsRightRelationsForHomalgRep ],
+        [ IsHomalgRightRelationsRep ],
         
   function( rel )
     
@@ -97,7 +119,7 @@ end );
 ##
 InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
-        [ IsLeftRelationsForHomalgRep ],
+        [ IsHomalgLeftRelationsRep ],
         
   function( rel )
     
@@ -108,7 +130,7 @@ end );
 ##
 InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
-        [ IsRightRelationsForHomalgRep ],
+        [ IsHomalgRightRelationsRep ],
         
   function( rel )
     
@@ -119,7 +141,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
-	[ IsLeftRelationsForHomalgRep ],
+	[ IsHomalgLeftRelationsRep ],
         
   function( rel )
     local bas;
@@ -139,7 +161,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
-	[ IsRightRelationsForHomalgRep ],
+	[ IsHomalgRightRelationsRep ],
         
   function( rel )
     local bas;
@@ -159,7 +181,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
-	[ IsRelationsForHomalg and CanBeUsedToEffectivelyDecideZero ],
+	[ IsHomalgRelations and CanBeUsedToEffectivelyDecideZero ],
         
   function( rel )
     
@@ -170,7 +192,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-	[ IsHomalgMatrix, IsLeftRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsHomalgLeftRelationsRep ],
         
   function( mat, rel )
     
@@ -181,7 +203,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-	[ IsHomalgMatrix, IsRightRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsHomalgRightRelationsRep ],
         
   function( mat, rel )
     
@@ -192,7 +214,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-	[ IsLeftRelationsForHomalgRep, IsLeftRelationsForHomalgRep ],
+	[ IsHomalgLeftRelationsRep, IsHomalgLeftRelationsRep ],
         
   function( rel_, rel )
     
@@ -203,7 +225,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-	[ IsRightRelationsForHomalgRep, IsRightRelationsForHomalgRep ],
+	[ IsHomalgRightRelationsRep, IsHomalgRightRelationsRep ],
         
   function( rel_, rel )
     
@@ -214,7 +236,7 @@ end );
 ##
 InstallMethod( BasisCoeff,
         "for sets of relations of homalg modules",
-	[ IsLeftRelationsForHomalgRep ],
+	[ IsHomalgLeftRelationsRep ],
         
   function( rel )
     local bas;
@@ -235,7 +257,7 @@ end );
 ##
 InstallMethod( BasisCoeff,
         "for sets of relations of homalg modules",
-	[ IsRightRelationsForHomalgRep ],
+	[ IsHomalgRightRelationsRep ],
         
   function( rel )
     local bas;
@@ -256,7 +278,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZero,
         "modulo a set of relations of a homalg module",
-	[ IsHomalgMatrix, IsLeftRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsHomalgLeftRelationsRep ],
         
   function( mat, rel )
     
@@ -267,7 +289,7 @@ end );
 ##
 InstallMethod( EffectivelyDecideZero,
         "modulo a set of relations of a homalg module",
-	[ IsHomalgMatrix, IsRightRelationsForHomalgRep ],
+	[ IsHomalgMatrix, IsHomalgRightRelationsRep ],
         
   function( mat, rel )
     
@@ -278,7 +300,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsLeftRelationsForHomalgRep, IsLeftRelationsForHomalgRep ],
+        [ IsHomalgLeftRelationsRep, IsHomalgLeftRelationsRep ],
         
   function( M1, M2 )
     
@@ -289,7 +311,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsLeftRelationsForHomalgRep, IsList and IsEmpty ],
+        [ IsHomalgLeftRelationsRep, IsList and IsEmpty ],
         
   function( M1, M2 )
     
@@ -300,7 +322,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsRightRelationsForHomalgRep, IsRightRelationsForHomalgRep ],
+        [ IsHomalgRightRelationsRep, IsHomalgRightRelationsRep ],
         
   function( M1, M2 )
     
@@ -311,7 +333,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsRightRelationsForHomalgRep, IsList and IsEmpty ],
+        [ IsHomalgRightRelationsRep, IsList and IsEmpty ],
         
   function( M1, M2 )
     
@@ -322,7 +344,7 @@ end );
 ##
 InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
         "for sets of relations of homalg modules",
-        [ IsRelationsForHomalg ],
+        [ IsHomalgRelations ],
         
   function( M )
     local R, RP, id, gen;
@@ -335,7 +357,7 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
     
     id := HomalgMatrix( "identity", NrGenerators( M ), R );
     
-    if IsLeftRelationsForHomalgRep( M ) then
+    if IsHomalgLeftRelationsRep( M ) then
         gen := HomalgGeneratorsForLeftModule( id, BasisOfModule( M ) );
         gen := DecideZero( gen );
         return NonZeroRows( gen );
@@ -350,7 +372,7 @@ end );
 ##
 InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (BetterBasis)
         "for sets of relations of homalg modules",
-        [ IsRelationsForHomalg ],
+        [ IsHomalgRelations ],
         
   function( _M )
     local R, RP, M;
@@ -361,7 +383,7 @@ InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (
     
     #=====# begin of the core procedure #=====#
     
-    if IsLeftRelationsForHomalgRep( _M ) then
+    if IsHomalgLeftRelationsRep( _M ) then
         if IsBound(RP!.SimplifyBasisOfRows) then
             M := RP!.SimplifyBasisOfRows( _M );
         else
@@ -398,7 +420,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
     fi;
     
     ## Objectify:
-    Objectify( LeftRelationsForHomalgType, relations );
+    Objectify( HomalgLeftRelationsType, relations );
     
     return relations;
     
@@ -415,7 +437,7 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
     fi;
     
     ## Objectify:
-    Objectify( RightRelationsForHomalgType, relations );
+    Objectify( HomalgRightRelationsType, relations );
     
     return relations;
     
@@ -429,7 +451,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg relations",
-        [ IsRelationsForHomalg ],
+        [ IsHomalgRelations ],
         
   function( o )
     local m, n;
@@ -455,7 +477,7 @@ InstallMethod( ViewObj,
     
     Print( "of a homalg " );
     
-    if IsLeftRelationsForHomalgRep( o ) then
+    if IsHomalgLeftRelationsRep( o ) then
         Print( "left " );
     else
         Print( "right " );
@@ -467,7 +489,7 @@ end );
 
 InstallMethod( Display,
         "for homalg relations",
-        [ IsRelationsForHomalg ],
+        [ IsHomalgRelations ],
         
   function( o )
     

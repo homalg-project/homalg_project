@@ -17,5 +17,5 @@
 # basic operations:
 
 DeclareOperation( "/",
-        [ IsGeneratorsForHomalg, IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators, IsHomalgGenerators ] );
 

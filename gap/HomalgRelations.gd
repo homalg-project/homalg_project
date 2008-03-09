@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  RelationsForHomalg.gd       homalg package               Mohamed Barakat
+##  HomalgRelations.gd       homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -16,7 +16,7 @@
 
 # A new category of objects:
 
-DeclareCategory( "IsRelationsForHomalg",
+DeclareCategory( "IsHomalgRelations",
         IsAttributeStoringRep );
 
 ####################################
@@ -26,10 +26,10 @@ DeclareCategory( "IsRelationsForHomalg",
 ####################################
 
 DeclareProperty( "CanBeUsedToEffectivelyDecideZero",
-        IsRelationsForHomalg );
+        IsHomalgRelations );
 
 DeclareProperty( "IsReducedSetOfRelations",
-        IsRelationsForHomalg );
+        IsHomalgRelations );
 
 ####################################
 #
@@ -51,43 +51,43 @@ DeclareGlobalFunction( "HomalgRelationsForRightModule" );
 # basic operations:
 
 DeclareOperation( "MatrixOfRelations",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "HomalgRing",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "NrGenerators",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "NrRelations",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "BasisOfModule",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix, IsRelationsForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgRelations ] );
 
 DeclareOperation( "DecideZero",
-        [ IsRelationsForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgRelations, IsHomalgRelations ] );
 
 DeclareOperation( "BasisCoeff",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "EffectivelyDecideZero",
-        [ IsHomalgMatrix, IsRelationsForHomalg ] );
+        [ IsHomalgMatrix, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsRelationsForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgRelations, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsRelationsForHomalg, IsList ] );
+        [ IsHomalgRelations, IsList ] );
 
 DeclareOperation( "NonZeroGenerators",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "GetRidOfTrivialRelations",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 ####################################
 #

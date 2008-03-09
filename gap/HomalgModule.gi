@@ -237,6 +237,23 @@ end );
 
 ####################################
 #
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsZeroModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return NonZeroGenerators( M ) = [ ];
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -394,7 +411,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsGeneratorsForHomalg ],
+	[ IsFinitelyPresentedModuleRep, IsHomalgGenerators ],
         
   function( M, gen )
     local gens, rels, l;
@@ -430,7 +447,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsRelationsForHomalg ],
+	[ IsFinitelyPresentedModuleRep, IsHomalgRelations ],
         
   function( M, rel )
     local gens, rels, l;
@@ -466,7 +483,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsGeneratorsForHomalg, IsRelationsForHomalg ],
+	[ IsFinitelyPresentedModuleRep, IsHomalgGenerators, IsHomalgRelations ],
         
   function( M, gen, rel )
     local gens, rels, l;
@@ -686,16 +703,20 @@ InstallMethod( BetterGenerators,
 	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
-    local R, rel, V, VI, gen;
+    local R, rel_old, rel, V, VI, gen;
     
     R := HomalgRing( M );
     
-    rel := MatrixOfRelations( M );
+    rel_old := MatrixOfRelations( M );
     
     V := HomalgMatrix( R );
     VI := HomalgMatrix( R );
     
-    rel := BetterEquivalentMatrix( rel, V, VI, "", "" );
+    rel := BetterEquivalentMatrix( rel_old, V, VI, "", "" );
+    
+    if rel_old = rel then
+        return M;
+    fi;
     
     rel := HomalgRelationsForLeftModule( rel );
     
@@ -776,7 +797,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsLeftRelationsForHomalgRep ],
+        [ IsHomalgLeftRelationsRep ],
         
   function( rel )
     local R, is_zero_module, gens, rels, M;
@@ -823,7 +844,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsLeftGeneratorsForHomalgRep, IsLeftRelationsForHomalgRep ],
+        [ IsHomalgLeftGeneratorsRep, IsHomalgLeftRelationsRep ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -868,7 +889,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsRightRelationsForHomalgRep ],
+        [ IsHomalgRightRelationsRep ],
         
   function( rel )
     local R, is_zero_module, gens, rels, M;
@@ -915,7 +936,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsRightGeneratorsForHomalgRep, IsRightRelationsForHomalgRep ],
+        [ IsHomalgRightGeneratorsRep, IsHomalgRightRelationsRep ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -1197,7 +1218,7 @@ InstallMethod( ViewObj,
     fi;
     if RelationsOfModule( M ) = "unknown relations" then
         num_rel := "unknown";
-        rel_string := " relations";
+        rel_string := " relations for ";
     else
         num_rel := NrRelations( M );
         if num_rel = 0 then

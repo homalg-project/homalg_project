@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GeneratorsForHomalg.gd      homalg package               Mohamed Barakat
+##  HomalgGenerators.gd      homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -16,7 +16,7 @@
 
 # A new category of objects:
 
-DeclareCategory( "IsGeneratorsForHomalg",
+DeclareCategory( "IsHomalgGenerators",
         IsAttributeStoringRep );
 
 ####################################
@@ -26,7 +26,7 @@ DeclareCategory( "IsGeneratorsForHomalg",
 ####################################
 
 DeclareProperty( "IsReduced",
-        IsGeneratorsForHomalg );
+        IsHomalgGenerators );
 
 ####################################
 #
@@ -48,26 +48,26 @@ DeclareGlobalFunction( "HomalgGeneratorsForRightModule" );
 # basic operations:
 
 DeclareOperation( "MatrixOfGenerators",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "HomalgRing",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "RelationsOfHullModule",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "MatrixOfRelations",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "NrGenerators",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "BasisOfModule",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "DecideZero",
-        [ IsGeneratorsForHomalg ] );
+        [ IsHomalgGenerators ] );
 
 DeclareOperation( "DecideZero",
-        [ IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgGenerators, IsHomalgRelations ] );
 

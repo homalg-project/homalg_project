@@ -579,10 +579,24 @@ InstallMethod( IsZeroMatrix,
         [ IsHomalgMatrix ],
         
   function( M )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    RP := HomalgTable( R );
+    
+    ## since DecideZero calls IsZeroMatrix, the attribute IsReducedModuloRingRelations is used
+    ## in DecideZero to avoid infinite loops
+    
+    if IsBound(RP!.IsZeroMatrix) then
+        return RP!.IsZeroMatrix( DecideZero( M ) ); ## with this, \= can fall back to IsZeroMatrix
+    fi;
+    
+    #=====# begin of the core procedure #=====#
     
     ## From the documentation ?Zero: `ZeroSameMutability( <obj> )' is equivalent to `0 * <obj>'.
     
-    return M = 0 * M;
+    return M = 0 * M; ## hence, by default, IsZeroMatrix falls back to \= (see below)
     
 end );
 
@@ -726,8 +740,15 @@ InstallMethod( \=,
     
     RP := HomalgTable( R );
     
-    if IsBound(RP!.Equal) and IsBound(RP!.True) then
-        return RP!.Equal( M1, M2 ) = RP!.True;
+    if IsBound(RP!.AreEqualMatrices) then
+        ## CAUTION: the external system must be able to check equality modulo possible ring relations!
+        return RP!.AreEqualMatrices( M1, M2 );
+    elif IsBound(RP!.Equal) then
+        ## CAUTION: the external system must be able to check equality modulo possible ring relations!
+        return RP!.Equal( M1, M2 );
+    elif IsBound(RP!.IsZeroMatrix) then
+        ## offhand, the following way does not allow garbage collection in the external system
+        return RP!.IsZeroMatrix( DecideZero( M1 - M2 ) );
     fi;
     
     TryNextMethod( );
@@ -1325,7 +1346,11 @@ InstallMethod( \*,
     
     R := HomalgRing( A );
     
-    return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), R );
+    if NrRows( B ) = NrColumns( B ) then
+        return A;
+    else
+        return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), R );
+    fi;
     
 end );
 
@@ -1343,7 +1368,11 @@ InstallMethod( \*,
     
     R := HomalgRing( B );
     
-    return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), R );
+    if NrRows( A ) = NrColumns( A ) then
+        return B;
+    else
+        return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), R );
+    fi;
     
 end );
 

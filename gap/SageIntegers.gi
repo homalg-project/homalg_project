@@ -24,6 +24,34 @@ InstallMethod( CreateHomalgTable,
     local RP;
 
     RP := rec( 
+               ZeroRows :=
+                 function( C )
+                   local R, list_string;
+                   
+                   R := HomalgRing( C );
+                   
+                   HomalgSendBlocking( [ "Checklist=[", C, ".row(x).is_zero() for x in range(", NrRows( C ), ")]" ], "need_command" );
+                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
+                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrRows( C ), "))" ], "need_output", R );
+                   list_string := StringToIntList( list_string );
+                   return list_string + 1;
+                   
+                 end,
+               
+               ZeroColumns :=
+                 function( C )
+                   local R, list_string;
+                   
+                   R := HomalgRing( C );
+                   
+                   HomalgSendBlocking( [ "Checklist=[", C, ".column(x).is_zero() for x in range(", NrColumns( C ), ")]" ], "need_command" );
+                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
+                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrColumns( C ), "))" ], "need_output", R );
+                   list_string := StringToIntList( list_string );
+                   return list_string + 1;
+                   
+                 end,
+       
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
@@ -167,7 +195,7 @@ InstallMethod( CreateHomalgTable,
                Equal :=
                  function( A, B )
                  
-                   return HomalgSendBlocking( [ A, "==", B ], "need_ouput" );
+                   return HomalgSendBlocking( [ A, "==", B ], "need_ouput" ) = "True";
                  
                  end,
                
@@ -230,7 +258,7 @@ InstallMethod( CreateHomalgTable,
                    local f;
                    
                    f := ShallowCopy( e );
-                   Add( f, "block_diagonal_matrix(" ,1 );
+                   Add( f, "block_diagonal_matrix(", 1 );
                    Add( f, ")" );
                    return HomalgSendBlocking( f );
                    
@@ -276,36 +304,8 @@ InstallMethod( CreateHomalgTable,
                    
                    return Int( HomalgSendBlocking( [ C, ".ncols()" ], "need_output" ) );
                    
-                 end,
-               
-               ZeroRows :=
-                 function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "Checklist=[", C, ".row(x).is_zero() for x in range(", NrRows( C ), ")]" ], "need_command" );
-                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
-                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrRows( C ), "))" ], "need_output", R );
-		   list_string := StringToIntList( list_string );
-                   return list_string + 1;
-                   
-                 end,
-               
-               ZeroColumns :=
-                 function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "Checklist=[", C, ".column(x).is_zero() for x in range(", NrColumns( C ), ")]" ], "need_command" );
-                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
-                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrColumns( C ), "))" ], "need_output", R );
-		   list_string := StringToIntList( list_string );
-                   return list_string + 1;
-                   
                  end
-       
+               
           );
     
     Objectify( HomalgTableType, RP );

@@ -88,10 +88,10 @@ DeclareAttribute( "ElementaryDivisorsOfLeftModule",
 # constructor methods:
 
 DeclareOperation( "Presentation",
-        [ IsRelationsForHomalg ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "Presentation",
-        [ IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgGenerators, IsHomalgRelations ] );
 
 DeclareOperation( "LeftPresentation",
         [ IsList, IsSemiringWithOneAndZero ] );
@@ -141,13 +141,13 @@ DeclareOperation( "NrRelations",
         [ IsHomalgModule ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsHomalgModule, IsGeneratorsForHomalg ] );
+        [ IsHomalgModule, IsHomalgGenerators ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsHomalgModule, IsRelationsForHomalg ] );
+        [ IsHomalgModule, IsHomalgRelations ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsHomalgModule, IsGeneratorsForHomalg, IsRelationsForHomalg ] );
+        [ IsHomalgModule, IsHomalgGenerators, IsHomalgRelations ] );
 
 DeclareOperation( "BasisOfModule",
         [ IsHomalgModule ] );
