@@ -1977,9 +1977,9 @@ InstallMethod( Display,
     cas := HomalgExternalCASystem( o );
     
     if Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
-        Print( HomalgSendBlocking( [ "eval(", o, ")" ], "need_output" ), "\n" );
+        Print( HomalgSendBlocking( [ "eval(", o, ")" ], "need_display" ) );
     else
-        Print( HomalgSendBlocking( [ o ], "need_output" ), "\n" );
+        Print( HomalgSendBlocking( [ o ], "need_display" ) );
     fi;
     
 end);

@@ -151,8 +151,8 @@ end );
 ##
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
-    local L, nargs, properties, ar, option, R, ext_obj, e, RP, cas, cas_version, stream, homalg_variable,
-          SendBlocking, define, l, eol_verbose, eol_quiet, eol, enter;
+    local L, nargs, properties, ar, option, R, ext_obj, e, RP, CAS, cas_version, stream, cas,
+          homalg_variable, SendBlocking, define, l, eol_verbose, eol_quiet, eol, enter;
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -211,7 +211,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         fi;
     fi;
     
-    cas := HomalgExternalCASystem( ext_obj );
+    CAS := HomalgExternalCASystem( ext_obj );
     cas_version := HomalgExternalCASystemVersion( ext_obj );
     stream := HomalgStream( ext_obj );
     
@@ -226,17 +226,20 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     L := HomalgCreateStringForExternalCASystem( L );
     
-    if Length( cas ) > 3 and LowercaseString( cas{[1..4]} ) = "sage" then
+    if Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
+        cas := "sage";
         SendBlocking := SendSageBlocking;
         define := "=";
         eol_verbose := "";
         eol_quiet := ";";
-    elif Length( cas ) > 7 and LowercaseString( cas{[1..8]} ) = "singular" then
+    elif Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "singular" then
+        cas := "singular";
         SendBlocking := SendSingularBlocking;
         define := "=";
         eol_verbose := ";";
         eol_quiet := ";";
-    elif Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
+    elif Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "maple" then
+        cas := "maple";
         if cas_version = "10" then
             SendBlocking := SendMaple10Blocking;
         elif cas_version = "9.5" then
@@ -250,7 +253,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         eol_verbose := ";";
         eol_quiet := ":";
     else
-        Error( "the computer algebra system ", cas, " is not yet supported as an external computing engine for homalg\n" );
+        Error( "the computer algebra system ", CAS, " is not yet supported as an external computing engine for homalg\n" );
     fi;
     
     l := Length( L );
@@ -265,9 +268,13 @@ InstallGlobalFunction( HomalgSendBlocking,
              or L{[l-Length( eol_quiet )+1..l]} = eol_quiet ) then
             eol := "";
         elif not IsBound( option ) then
-            eol := eol_quiet;
+            eol := eol_quiet; ## as little back-traffic over the stream as possible
         else
-            eol := eol_verbose;
+            if PositionSublist( LowercaseString( option ), "command" ) <> fail then
+                eol := eol_quiet; ## as little back-traffic over the stream as possible
+            else
+                eol := eol_verbose;
+            fi;
         fi;
     fi;
     
@@ -289,6 +296,15 @@ InstallGlobalFunction( HomalgSendBlocking,
         fi;
         
         return L;
+    elif PositionSublist( LowercaseString( option ), "display" ) <> fail then
+        if cas = "maple" then
+            return stream.lines{[ 1 .. Length( stream.lines ) - 36 ]};
+        else
+            return Concatenation( stream.lines, "\n" );
+        fi;
+    elif cas = "maple" then
+        ## unless meant for display, normalize the white spaces caused by Maple
+        return NormalizedWhitespace( stream.lines );
     else
         return stream.lines;
     fi;
