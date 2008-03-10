@@ -123,7 +123,7 @@ InstallMethod( CreateHomalgTable,
                    
                    M:=arg[1];
                    
-                   return HomalgSendBlocking( [ M, ".elementary_divisors()" ] );
+                   return HomalgSendBlocking( [ M, ".transpose().elementary_divisors()" ], "need_output" );
                    
                  end,
                  

@@ -416,7 +416,7 @@ InstallMethod( Display,
     
     if IsBound(RP!.RingName) then
         if IsFunction( RP!.RingName ) then
-            Print( RP!.RingName( o ) );
+            Print( RP!.RingName( o ), "\n" );
         else
             Print( RP!.RingName, "\n" );
         fi;

@@ -38,7 +38,10 @@ ReadPackage( "homalg", "gap/maple10.g" );
 
 ReadPackage( "homalg", "gap/IO.gi" );
 
+ReadPackage( "homalg", "gap/MapleHomalgTools.gi" );
+ReadPackage( "homalg", "gap/MapleHomalgBestBasis.gi" );
 ReadPackage( "homalg", "gap/MapleHomalgPIR.gi" );
+ReadPackage( "homalg", "gap/MapleHomalgInvolutive.gi" );
 
 ReadPackage( "homalg", "gap/SageIntegers.gi" );
 ReadPackage( "homalg", "gap/SageGF2.gi" );

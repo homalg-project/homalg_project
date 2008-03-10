@@ -4,7 +4,8 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations of homalg procedures for modules.
+## Declarations for the rings provided by the Maple package PIR
+## accessed via the Maple implementation of homalg.
 ##
 #############################################################################
 

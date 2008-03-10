@@ -736,7 +736,7 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
 	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
-    local R, RP, e;
+    local R, RP, e, one;
     
     R := HomalgRing( M );
     
@@ -744,8 +744,14 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
     
     if IsBound(RP!.ElementaryDivisors) then
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
-        e := StringToElementStringList( e );
-        return List( e, a -> HomalgExternalObject( a, HomalgExternalCASystem( R ) ) );
+        if IsString( e ) then
+            e := StringToElementStringList( e );
+            e := List( e, a -> HomalgExternalObject( a, HomalgExternalCASystem( R ) ) );
+        fi;
+        
+        one := One( R );
+        
+        return Filtered( e, x -> x <> one );
     fi;
     
     TryNextMethod( );
@@ -1330,14 +1336,18 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep and IsLeftModule and HasElementaryDivisorsOfLeftModule ],
         
   function( M )
-    local R, RP, name, z, r, display;
+    local R, RP, name, z, r, display, get_string;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
     
     if IsBound(RP!.RingName) then
-        name := RP!.RingName;
+        if IsFunction( RP!.RingName ) then
+            name := RP!.RingName( R );
+        else
+            name := RP!.RingName;
+        fi;
     else
         name := "D";
     fi;
@@ -1347,10 +1357,17 @@ InstallMethod( Display,
     r := RankOfLeftModule( M );
     
     display := ElementaryDivisorsOfLeftModule( M );
+    
+    if IsHomalgExternalObjectRep( display[1] ) then
+        get_string := HomalgPointer;
+    else
+        get_string := String;
+    fi;
+    
     display := Filtered( display, x -> x <> z );
     
     if display <> [ ] then
-        display := List( display, x -> [ name, " / ( Z * ", String( x ), " ) + " ] );
+        display := List( display, x -> [ name, " / ( ", name, " * ", get_string( x ), " ) + " ] );
         display := Concatenation( display );
         display := Concatenation( display );
     else
