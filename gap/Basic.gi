@@ -211,7 +211,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         "for homalg matrices",
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( B, A )
+  function( B, A )				## CAUTION: Do not use lazy evaluation here!!!
     local R, RP, IA, CA, NF, CB;
     
     R := HomalgRing( B );
@@ -245,26 +245,49 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
 end );
 
 ##
-InstallMethod( Leftinverse,			### defines: Leftinverse (LeftinverseF)
+InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+	[ IsHomalgMatrix and HasEvalLeftInverse ],
         
-  function( L )
-    local R, RP, Id;
+  function( LI )
+    local R, RP, RI, Id, left_inv;
     
-    R := HomalgRing( L );
+    R := HomalgRing( LI );
     
     RP := HomalgTable( R );
-  
-    if IsBound(RP!.Leftinverse) then
-        return RP!.Leftinverse( L );
+    
+    RI := EvalLeftInverse( LI );
+    
+    if IsBound(RP!.LeftInverse) then
+        left_inv := RP!.LeftInverse( RI );
+        SetIsLeftInvertibleMatrix( RI, true );
+        
+        if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then
+            SetIsInvertibleMatrix( LI, true );
+        else
+            SetIsRightInvertibleMatrix( LI, true );
+        fi;
+        
+        return left_inv;
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    Id := HomalgMatrix( "identity", NrColumns( L ), R );
+    Id := HomalgMatrix( "identity", NrColumns( RI ), R );
     
-    return RightDivide( Id, L );
+    left_inv := RightDivide( Id, RI );
+    
+    ## CAUTION: for the following SetXXX RightDivide is assumed not to be lazy evaluated!!!
+    
+    SetIsLeftInvertibleMatrix( RI, true );
+    
+    if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then
+        SetIsInvertibleMatrix( LI, true );
+    else
+        SetIsRightInvertibleMatrix( LI, true );
+    fi;
+    
+    return Eval( left_inv );
     
 end );
 
@@ -463,7 +486,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         #        if LowercaseString( V[1]{[1..3]} ) = "inv" then
         #            VI := V[2];
         #            if compute_V then
-        #                V := Leftinverse( VI, arg[1], "NO_CHECK");
+        #                V := LeftInverse( VI, arg[1], "NO_CHECK");
         #            fi;
         #        else
         #            Error( "Cannot interpret the first string in V ", V[1], "\n" );
@@ -475,12 +498,12 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
             if IsString( U ) then
                 UI := U;
             else
-                UI := Leftinverse( U );
+                UI := LeftInverse( U );
             fi;
         fi;
         
         if compute_VI and not IsBound( VI ) then
-            VI := Leftinverse( V );
+            VI := LeftInverse( V );
         fi;
     
         A := BasisOfRowsCoeff( M );

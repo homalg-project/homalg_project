@@ -30,16 +30,16 @@ DeclareRepresentation( "IsHomalgExternalMatrixRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgMatricesFamily",
-        NewFamily( "HomalgMatricesFamily" ) );
+BindGlobal( "HomalgMatrixFamily",
+        NewFamily( "HomalgMatrixFamily" ) );
 
 # two new types:
 BindGlobal( "HomalgInternalMatrixType",
-        NewType( HomalgMatricesFamily ,
+        NewType( HomalgMatrixFamily ,
                 IsHomalgInternalMatrixRep ) );
 
 BindGlobal( "HomalgExternalMatrixType",
-        NewType( HomalgMatricesFamily ,
+        NewType( HomalgMatrixFamily ,
                 IsHomalgExternalMatrixRep ) );
 
 ####################################
@@ -59,6 +59,21 @@ InstallTrueMethod( IsFullRowRankMatrix, IsHomalgMatrix and IsIdentityMatrix );
 
 ##
 InstallTrueMethod( IsFullColumnRankMatrix, IsHomalgMatrix and IsIdentityMatrix );
+
+##
+InstallTrueMethod( IsFullRowRankMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
+
+##
+InstallTrueMethod( IsFullColumnRankMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
+
+##
+InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
+
+##
+InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
+
+## a surjective and an injective morphism between two free modules of finite rank is invertible
+InstallTrueMethod( IsInvertibleMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix and IsRightInvertibleMatrix );
 
 ##
 InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsDiagonalMatrix );
@@ -174,6 +189,36 @@ end );
 
 ##
 InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalUnionOfRows( M )[1] ) and IsZeroMatrix( EvalUnionOfRows( M )[1] )
+       and HasIsZeroMatrix( EvalUnionOfRows( M )[2] ) and IsZeroMatrix( EvalUnionOfRows( M )[2] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalUnionOfColumns( M )[1] ) and IsZeroMatrix( EvalUnionOfColumns( M )[1] )
+       and HasIsZeroMatrix( EvalUnionOfColumns( M )[2] ) and IsZeroMatrix( EvalUnionOfColumns( M )[2] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
@@ -187,13 +232,27 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsFullRowRankMatrix,
+InstallImmediateMethod( IsRightInvertibleMatrix,
         IsHomalgMatrix and HasNrRows, 0,
         
   function( M )
     
     if NrRows( M ) = 0 then
         return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightInvertibleMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsRightInvertibleMatrix( PreEval( M ) ) then
+        return IsRightInvertibleMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -215,13 +274,27 @@ InstallImmediateMethod( IsFullRowRankMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsFullColumnRankMatrix,
+InstallImmediateMethod( IsLeftInvertibleMatrix,
         IsHomalgMatrix and HasNrColumns, 0,
         
   function( M )
     
     if NrColumns( M ) = 0 then
         return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftInvertibleMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsLeftInvertibleMatrix( PreEval( M ) ) then
+        return IsLeftInvertibleMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -236,6 +309,34 @@ InstallImmediateMethod( IsFullColumnRankMatrix,
     
     if HasIsFullColumnRankMatrix( PreEval( M ) ) then
         return IsFullColumnRankMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightInvertibleMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsLeftInvertibleMatrix( EvalInvolution( M ) ) then
+        return IsLeftInvertibleMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftInvertibleMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsRightInvertibleMatrix( EvalInvolution( M ) ) then
+        return IsRightInvertibleMatrix( EvalInvolution( M ) );
     fi;
     
     TryNextMethod( );
@@ -812,6 +913,17 @@ end );
 ##
 InstallMethod( Involution,
         "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalInvolution ],
+        
+  function( M )
+    
+    return EvalInvolution( M );
+    
+end );
+
+##
+InstallMethod( Involution,
+        "for homalg matrices",
         [ IsHomalgMatrix and IsZeroMatrix ],
         
   function( M )
@@ -827,7 +939,7 @@ InstallMethod( Involution,
         
   function( M )
     
-    return HomalgMatrix( "identity", NrRows( M ), HomalgRing( M ) );
+    return M;
     
 end );
 
@@ -861,6 +973,105 @@ InstallMethod( CertainRows,
 end );
 
 ##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
+        
+  function( M, plist )
+    local R, A, B, plistA, plistB, C;
+    
+    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+    fi;
+    
+    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    A := EvalUnionOfRows( M )[1];
+    B := EvalUnionOfRows( M )[2];
+    
+    plistA := Intersection2( plist, [ 1 .. NrRows( A ) ] );
+    plistB := Intersection2( plist - NrRows( A ), [ 1 .. NrRows( B ) ] );
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalUnionOfRows( C, [ CertainRows( A, plistA ), CertainRows( B, plistB ) ] );
+    
+    SetNrRows( C, Length( plist ) );
+    SetNrColumns( C, NrColumns( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
+        
+  function( M, plist )
+    local R, A, B, C;
+    
+    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+    fi;
+    
+    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    A := EvalUnionOfColumns( M )[1];
+    B := EvalUnionOfColumns( M )[2];
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalUnionOfColumns( C, [ CertainRows( A, plist ), CertainRows( B, plist ) ] );
+    
+    SetNrRows( C, Length( plist ) );
+    SetNrColumns( C, NrColumns( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalCompose, IsList ],
+        
+  function( M, plist )
+    local R, A, B, C;
+    
+    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+    fi;
+    
+    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    A := EvalCompose( M )[1];
+    B := EvalCompose( M )[2];
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalCompose( C, [ CertainRows( A, plist ), B ] );
+    
+    SetNrRows( C, Length( plist ) );
+    SetNrColumns( C, NrColumns( M ) );
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( CertainColumns,
         "for homalg matrices",
         [ IsHomalgMatrix, IsList ],
@@ -882,8 +1093,107 @@ InstallMethod( CertainColumns,
     
     SetEvalCertainColumns( C, [ M, plist ] );
     
-    SetNrRows( C, NrRows( M ) );
     SetNrColumns( C, Length( plist ) );
+    SetNrRows( C, NrRows( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
+        
+  function( M, plist )
+    local R, A, B, plistA, plistB, C;
+    
+    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+    fi;
+    
+    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    A := EvalUnionOfColumns( M )[1];
+    B := EvalUnionOfColumns( M )[2];
+    
+    plistA := Intersection2( plist, [ 1 .. NrColumns( A ) ] );
+    plistB := Intersection2( plist - NrColumns( A ), [ 1 .. NrColumns( B ) ] );
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalUnionOfColumns( C, [ CertainColumns( A, plistA ), CertainColumns( B, plistB ) ] );
+    
+    SetNrColumns( C, Length( plist ) );
+    SetNrRows( C, NrRows( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
+        
+  function( M, plist )
+    local R, A, B, C;
+    
+    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+    fi;
+    
+    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    A := EvalUnionOfRows( M )[1];
+    B := EvalUnionOfRows( M )[2];
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalUnionOfRows( C, [ CertainColumns( A, plist ), CertainColumns( B, plist ) ] );
+    
+    SetNrColumns( C, Length( plist ) );
+    SetNrRows( C, NrRows( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalCompose, IsList ],
+        
+  function( M, plist )
+    local R, A, B, C;
+    
+    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+    fi;
+    
+    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    A := EvalCompose( M )[1];
+    B := EvalCompose( M )[2];
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalCompose( C, [ A, CertainColumns( B, plist ) ] );
+    
+    SetNrColumns( C, Length( plist ) );
+    SetNrRows( C, NrRows( M ) );
     
     return C;
     
@@ -1062,27 +1372,6 @@ end );
 InstallMethod( \*,
         "of two homalg matrices",
         [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into ``PROD: negative integer * additive element with inverse'', value: 24
-        
-  function( a, A )
-    local R, C;
-    
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetEvalMulMat( C, [ a, A ] );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgExternalObject, IsHomalgMatrix ],
         
   function( a, A )
     local R, C;
@@ -1403,6 +1692,210 @@ InstallMethod( \*,
     fi;
     
     return A;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfRows, IsHomalgMatrix ],
+        
+  function( A, B )
+    local R, A1, A2, C;
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    R := HomalgRing( A );
+    
+    A1 := EvalUnionOfRows( A )[1];
+    A2 := EvalUnionOfRows( A )[2];
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalUnionOfRows( C, [ A1 * B, A2* B ] );
+    
+    SetNrRows( C, NrRows( A ) );
+    SetNrColumns( C, NrColumns( B ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfColumns ],
+        
+  function( A, B )
+    local R, B1, B2, C;
+    
+    if NrColumns( A ) <> NrRows( B ) then
+        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
+    fi;
+    
+    R := HomalgRing( A );
+    
+    B1 := EvalUnionOfColumns( B )[1];
+    B2 := EvalUnionOfColumns( B )[2];
+    
+    C := HomalgMatrix( R );
+    
+    SetEvalUnionOfColumns( C, [ A * B1, A * B2 ] );
+    
+    SetNrRows( C, NrRows( A ) );
+    SetNrColumns( C, NrColumns( B ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, C;
+    
+    R := HomalgRing( M );
+    
+    C := HomalgMatrix( R );
+    
+    if NrRows( M ) < NrColumns( M ) then
+        Error( "the number of rows ", NrRows( M ), "is smaller than the number of columns ", NrColumns( M ), "\n" );
+    fi;
+    
+    SetEvalLeftInverse( C, M );
+    SetEvalRightInverse( M, C );
+    
+    SetNrRows( C, NrColumns( M ) );
+    SetNrColumns( C, NrRows( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalRightInverse ], 1,
+        
+  function( M )
+    
+    return EvalRightInverse( M );
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalInverse ],
+        
+  function( M )
+    
+    return EvalInverse( M );
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZeroMatrix ],
+        
+  function( M )
+    
+    if NrColumns( M ) = 0 then
+        return HomalgMatrix( "zero", 0, NrRows( M ), HomalgRing( M ) );
+    else
+        Error( "a zero matrix with positive number of columns has no left inverse!" );
+    fi;
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( M )
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, C;
+    
+    R := HomalgRing( M );
+    
+    C := HomalgMatrix( R );
+    
+    if NrColumns( M ) < NrRows( M ) then
+        Error( "the number of columns ", NrColumns( M ), "is smaller than the number of rows ", NrRows( M ), "\n" );
+    fi;
+    
+    SetEvalRightInverse( C, M );
+    SetEvalLeftInverse( M, C );
+    
+    SetNrColumns( C, NrRows( M ) );
+    SetNrRows( C, NrColumns( M ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalLeftInverse ], 1,
+        
+  function( M )
+    
+    return EvalLeftInverse( M );
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalInverse ],
+        
+  function( M )
+    
+    return EvalInverse( M );
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZeroMatrix ],
+        
+  function( M )
+    
+    if NrRows( M ) = 0 then
+        return HomalgMatrix( "zero", NrColumns( M ), 0, HomalgRing( M ) );
+    else
+        Error( "a zero matrix with positive number of rows has no left inverse!" );
+    fi;
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( M )
+    
+    return M;
     
 end );
 
@@ -1898,40 +2391,56 @@ InstallMethod( ViewObj,
   function( o )
     
     if HasEval( o ) then
-        Print( "<A " );
+        Print( "<A" );
     else
-        Print( "<An unevaluated " );
+        Print( "<An unevaluated" );
     fi;
     
-    if HasIsZeroMatrix( o ) and not IsZeroMatrix( o ) then ## actually if this method is applicable we already know that o is a non-zero homalg matrix
-        Print( "non-zero " );
+    if HasIsZeroMatrix( o ) then ## if this method is applicable and HasIsZeroMatrix is set we already know that o is a non-zero homalg matrix
+        Print( " non-zero" );
     fi;
     
     if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
         if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
-            Print( "diagonal " );
+            Print( " diagonal" );
         elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
-            Print( "strict upper triangular " );
+            Print( " strict upper triangular" );
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
-            Print( "strict lower triangular " );
+            Print( " strict lower triangular" );
         elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
-            Print( "upper triangular " );
+            if HasEval( o ) and not HasIsZeroMatrix( o ) then
+                Print( "n upper triangular" );
+            else
+                Print( " upper triangular" );
+            fi;
         elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
-            Print( "lower triangular " );
+            Print( " lower triangular" );
         elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
-            Print( "triangular " );
+            Print( " triangular" );
         fi;
         
-        if HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
-            Print( "full row rank " );
-        fi;
-        
-        if HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
-            Print( "full column rank " );
+        if HasIsInvertibleMatrix( o ) and IsInvertibleMatrix( o ) then
+            if HasEval( o ) and not HasIsZeroMatrix( o ) then
+                Print( "n invertible" );
+            else
+                Print( " invertible" );
+            fi;
+        else
+            if HasIsRightInvertibleMatrix( o ) and IsRightInvertibleMatrix( o ) then
+                Print( " right invertible" );
+            elif HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
+                Print( " full row rank" );
+            fi;
+            
+            if HasIsLeftInvertibleMatrix( o ) and IsLeftInvertibleMatrix( o ) then
+                Print( " left invertible" );
+            elif HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
+                Print( " full column rank" );
+            fi;
         fi;
     fi;
     
-    Print( "homalg " );
+    Print( " homalg " );
     
     if IsHomalgInternalMatrixRep( o ) then
         Print( "internal " );

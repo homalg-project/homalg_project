@@ -45,6 +45,15 @@ DeclareProperty( "IsFullRowRankMatrix",
 DeclareProperty( "IsFullColumnRankMatrix",
         IsHomalgMatrix );
 
+DeclareProperty( "IsInvertibleMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsLeftInvertibleMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsRightInvertibleMatrix",
+        IsHomalgMatrix );
+
 DeclareProperty( "IsEmptyMatrix",
         IsHomalgMatrix );
 
@@ -109,6 +118,15 @@ DeclareAttribute( "EvalSubMat",
         IsHomalgMatrix );
 
 DeclareAttribute( "EvalCompose",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalLeftInverse",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalRightInverse",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalInverse",
         IsHomalgMatrix );
 
 DeclareAttribute( "EvalGetSide",
@@ -195,6 +213,12 @@ DeclareOperation( "AreComparableMatrices",
 DeclareOperation( "Involution",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "LeftInverse",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightInverse",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "CertainRows",
         [ IsHomalgMatrix, IsList ] );
 
@@ -210,11 +234,8 @@ DeclareOperation( "UnionOfColumns",
 DeclareOperation( "DiagMat",
         [ IsList ] );
 
-DeclareOperation( "*",
-        [ IsHomalgExternalObject, IsHomalgMatrix ] );
-
-DeclareOperation( "*",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
+DeclareOperation( "*",				## this must remain, since an element in IsHomalgMatrix
+        [ IsHomalgMatrix, IsHomalgMatrix ] );	## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "AddRhs",
         [ IsHomalgMatrix ] );
@@ -230,4 +251,16 @@ DeclareOperation( "AddBts",
 
 DeclareOperation( "GetSide",
         [ IsString, IsHomalgMatrix ] );
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonym( "Leftinverse",
+        LeftInverse );
+
+DeclareSynonym( "Rightinverse",
+        RightInverse );
 

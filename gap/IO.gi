@@ -1,92 +1,18 @@
 #############################################################################
 ##
-##  IO.gd                       homalg package               Mohamed Barakat
+##  IO.gi                       homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff to use the legendary GAP4 I/O package of Max Neunhoeffer
+##  Implementation stuff to use the legendary GAP4 I/O package of Max Neunhoeffer.
 ##
 #############################################################################
-
-####################################
-#
-# families and types:
-#
-####################################
-
-# a new family:
-BindGlobal( "HomalgExternalObjectFamily",
-        NewFamily( "HomalgExternalObjectFamily" ) );
-
-# a new type:
-BindGlobal( "HomalgExternalObjectType",
-        NewType( HomalgExternalObjectFamily,
-                IsHomalgExternalObjectRep ) );
 
 ####################################
 #
 # methods for operations:
 #
 ####################################
-
-InstallMethod( \=,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep, IsHomalgExternalObjectRep ],
-        
-  function( o1, o2 )
-    
-    if not HasIsHomalgExternalObjectWithIOStream( o1 )
-       and not HasIsHomalgExternalObjectWithIOStream( o2 ) then
-        return HomalgPointer( o1 ) = HomalgPointer( o2 ); ## we are comparing strings in GAP
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-##
-InstallMethod( HomalgPointer,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
-        
-  function( o )
-    
-    if IsBound(o!.pointer) then
-        return o!.pointer;
-    fi;
-    
-    return fail;
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystem,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
-        
-  function( o )
-    
-    if IsBound(o!.cas) then
-        return o!.cas;
-    fi;
-    
-    return fail;
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystemVersion,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
-        
-  function( o )
-    
-    if IsBound(o!.cas_version) then
-        return o!.cas_version;
-    fi;
-    
-    return fail;
-    
-end );
 
 ##
 InstallMethod( HomalgStream,
@@ -151,8 +77,8 @@ end );
 ##
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
-    local L, nargs, properties, ar, option, R, ext_obj, e, RP, CAS, cas_version, stream, cas,
-          homalg_variable, SendBlocking, define, l, eol_verbose, eol_quiet, eol, enter;
+    local L, nargs, properties, ar, option, R, ext_obj, e, RP, CAS, cas_version, stream,
+          homalg_variable, l, eol, enter, max;
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -215,46 +141,52 @@ InstallGlobalFunction( HomalgSendBlocking,
     cas_version := HomalgExternalCASystemVersion( ext_obj );
     stream := HomalgStream( ext_obj );
     
-    if not IsBound( option ) then
-        if not IsBound( stream.HomalgExternalVariableCounter ) then
-            stream.HomalgExternalVariableCounter := 1;
+    if not IsBound( stream.HomalgExternalVariableCounter ) then
+        
+        if Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
+            stream.cas := "sage"; ## normalized name on which the user should have no control
+            stream.SendBlocking := SendSageBlocking;
+            stream.define := "=";
+            stream.eol_verbose := "";
+            stream.eol_quiet := ";";
+        elif Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "singular" then
+            stream.cas := "singular"; ## normalized name on which the user should have no control
+            stream.SendBlocking := SendSingularBlocking;
+            stream.define := "=";
+            stream.eol_verbose := ";";
+            stream.eol_quiet := ";";
+        elif Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "maple" then
+            stream.cas := "maple"; ## normalized name on which the user should have no control
+            if cas_version = "10" then
+                stream.SendBlocking := SendMaple10Blocking;
+            elif cas_version = "9.5" then
+                stream.SendBlocking := SendMaple95Blocking;
+            elif cas_version = "9" then
+                stream.SendBlocking := SendMaple9Blocking;
+            else
+                stream.SendBlocking := SendMaple10Blocking;
+            fi;
+            stream.define := ":=";
+            stream.eol_verbose := ";";
+            stream.eol_quiet := ":";
+        else
+            Error( "the computer algebra system ", CAS, " is not yet supported as an external computing engine for homalg\n" );
         fi;
+        
+        stream.HomalgExternalVariableCounter := 1;
+        stream.HomalgExternalOutputCounter := 0;
+        stream.HomalgExternalCallCounter := 1;
+        stream.HomalgBackStreamMaximumLength := 0;
+        
+    fi;
+    
+    if not IsBound( option ) then
         homalg_variable := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
         stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
     fi;
     
     L := HomalgCreateStringForExternalCASystem( L );
-    
-    if Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
-        cas := "sage";
-        SendBlocking := SendSageBlocking;
-        define := "=";
-        eol_verbose := "";
-        eol_quiet := ";";
-    elif Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "singular" then
-        cas := "singular";
-        SendBlocking := SendSingularBlocking;
-        define := "=";
-        eol_verbose := ";";
-        eol_quiet := ";";
-    elif Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "maple" then
-        cas := "maple";
-        if cas_version = "10" then
-            SendBlocking := SendMaple10Blocking;
-        elif cas_version = "9.5" then
-            SendBlocking := SendMaple95Blocking;
-        elif cas_version = "9" then
-            SendBlocking := SendMaple9Blocking;
-        else
-            SendBlocking := SendMaple10Blocking;
-        fi;
-        define := ":=";
-        eol_verbose := ";";
-        eol_quiet := ":";
-    else
-        Error( "the computer algebra system ", CAS, " is not yet supported as an external computing engine for homalg\n" );
-    fi;
     
     l := Length( L );
     
@@ -264,30 +196,45 @@ InstallGlobalFunction( HomalgSendBlocking,
     else
         enter := "\n";
         if l > 0 and
-           ( L{[l-Length( eol_verbose )+1..l]} = eol_verbose
-             or L{[l-Length( eol_quiet )+1..l]} = eol_quiet ) then
+           ( L{[l-Length( stream.eol_verbose )+1..l]} = stream.eol_verbose
+             or L{[l-Length( stream.eol_quiet )+1..l]} = stream.eol_quiet ) then
             eol := "";
         elif not IsBound( option ) then
-            eol := eol_quiet; ## as little back-traffic over the stream as possible
+            eol := stream.eol_quiet; ## as little back-traffic over the stream as possible
         else
             if PositionSublist( LowercaseString( option ), "command" ) <> fail then
-                eol := eol_quiet; ## as little back-traffic over the stream as possible
+                eol := stream.eol_quiet; ## as little back-traffic over the stream as possible
             else
-                eol := eol_verbose;
+                eol := stream.eol_verbose;
             fi;
         fi;
     fi;
     
     if not IsBound( option ) then
-        L := Concatenation( homalg_variable, define, L, eol, enter );
+        L := Concatenation( homalg_variable, stream.define, L, eol, enter );
     else
         L := Concatenation( L, eol, enter );
+        
+        if PositionSublist( LowercaseString( option ), "command" ) = fail then
+            stream.HomalgExternalOutputCounter := stream.HomalgExternalOutputCounter + 1;
+        fi;
     fi;
     
-    SendBlocking( stream, L );
+    stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
+    
+    stream.SendBlocking( stream, L );
+    
+    max := Maximum( stream.HomalgBackStreamMaximumLength, Length( stream.lines ) );
+    
+    if max > stream.HomalgBackStreamMaximumLength then
+        stream.HomalgBackStreamMaximumLength := max;
+        if HOMALG.SaveHomalgMaximumBackStream = true then
+            stream.HomalgMaximumBackStream := stream.lines;
+        fi;
+    fi;
     
     if not IsBound( option ) then
-        L := HomalgExternalObject( homalg_variable, cas, stream );
+        L := HomalgExternalObject( homalg_variable, CAS, stream );
         
         if properties <> [ ] and IsHomalgExternalObjectWithIOStream( L ) then
             for ar in properties do
@@ -297,12 +244,12 @@ InstallGlobalFunction( HomalgSendBlocking,
         
         return L;
     elif PositionSublist( LowercaseString( option ), "display" ) <> fail then
-        if cas = "maple" then
+        if stream.cas = "maple" then
             return stream.lines{[ 1 .. Length( stream.lines ) - 36 ]};
         else
             return Concatenation( stream.lines, "\n" );
         fi;
-    elif cas = "maple" then
+    elif stream.cas = "maple" then
         ## unless meant for display, normalize the white spaces caused by Maple
         return NormalizedWhitespace( stream.lines );
     else
@@ -337,68 +284,9 @@ end );
 
 ####################################
 #
-# constructor functions and methods:
-#
-####################################
-
-InstallGlobalFunction( HomalgExternalObject,
-  function( arg )
-    local nargs, properties, ar, stream, obj;
-    
-    nargs := Length( arg );
-    
-    properties := [ ];
-    
-    for ar in arg{[ 3 .. nargs ]} do
-        if not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
-            stream := ar;
-        elif IsOperation( ar ) then
-            Add( properties, ar );
-        else
-            Error( "this argument should be in { IsRecord, IsOperation } bur recieved: ", ar,"\n" );
-        fi;
-    od;
-    
-    if IsBound( stream ) then
-        obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                obj, HomalgExternalObjectType,
-                IsHomalgExternalObjectWithIOStream, true );
-    else
-        obj := rec( pointer := arg[1], cas := arg[2] );
-        
-        ## Objectify:
-        Objectify( HomalgExternalObjectType, obj );
-    fi;
-    
-    if properties <> [ ] then
-        for ar in properties do
-            Setter( ar )( obj, true );
-        od;
-    fi;
-    
-    return obj;
-    
-end );
-
-####################################
-#
 # View, Print, and Display methods:
 #
 ####################################
-
-InstallMethod( ViewObj,
-        "for homalg external objects",
-        [ IsHomalgExternalObjectRep ],
-        
-  function( o )
-    
-    Print( "<A homalg external object for the CAS " );
-    Print( HomalgExternalCASystem( o ), ">" ); 
-    
-end );
 
 InstallMethod( ViewObj,
         "for homalg external objects with an IO stream",
@@ -411,12 +299,3 @@ InstallMethod( ViewObj,
     
 end );
 
-InstallMethod( Display,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
-        
-  function( o )
-    
-    Print( HomalgPointer( o ), "\n" );
-    
-end );

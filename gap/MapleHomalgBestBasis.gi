@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MapleHomalg.gi              homalg package               Mohamed Barakat
+##  MapleHomalgBestBasis.gi     homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-## Implementations for the rings with BestBasis provided by the ring packages
+## Implementations for the rings provided by the ring packages
 ## of the Maple implementation of homalg.
 ##
 #############################################################################
@@ -53,8 +53,7 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                        SetEval( arg[2], U );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    # assign V:
@@ -62,8 +61,7 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                        SetEval( arg[3], V );
                        SetNrRows( arg[3], NrColumns( M ) );
                        SetNrColumns( arg[3], NrColumns( M ) );
-                       SetIsFullRowRankMatrix( arg[3], true );
-                       SetIsFullColumnRankMatrix( arg[3], true );
+                       SetIsInvertibleMatrix( arg[3], true );
                    fi;
                    
                    S := HomalgMatrix( S, R );

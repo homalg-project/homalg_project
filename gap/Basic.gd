@@ -43,9 +43,6 @@ DeclareOperation( "SyzygiesBasisOfColumns",
 DeclareOperation( "RightDivide",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "Leftinverse",
-        [ IsHomalgMatrix ] );
-
 # global functions:
 
 DeclareGlobalFunction( "BestBasis" );

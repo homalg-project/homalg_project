@@ -52,8 +52,7 @@ InstallMethod( CreateHomalgTable,
                        SetEval( arg[2], Concatenation( N.coeffs, N.relations ) );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    if N.vectors = [ ] then

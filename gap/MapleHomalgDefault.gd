@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MapleHomalgBestBasis.gd     homalg package               Mohamed Barakat
+##  MapleHomalgDefault.gd       homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-## Declarations for the rings provided by the ring packages
+## Declarations for the rings with BestBasis provided by the ring packages
 ## of the Maple implementation of homalg.
 ##
 #############################################################################
@@ -15,5 +15,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForMapleHomalgBestBasis" );
+DeclareGlobalVariable( "CommonHomalgTableForMapleHomalgDefault" );
 

@@ -31,6 +31,12 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
+               Zero := HomalgExternalRingElement( "0", "Maple", IsZero ),
+               
+               One := HomalgExternalRingElement( "1", "Maple", IsOne ),
+               
+               MinusOne := HomalgExternalRingElement( "(-1)", "Maple" ),
+               
                AreEqualMatrices :=
                  function( A, B )
                    local R;

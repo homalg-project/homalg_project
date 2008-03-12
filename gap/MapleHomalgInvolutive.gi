@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MapleHomalgInvolutive.gi           homalg package               Mohamed Barakat
+##  MapleHomalgInvolutive.gi    homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -22,31 +22,27 @@ InstallMethod( CreateHomalgTable,
           and IsHomalgInvolutiveMapleRing ],
 
   function( arg )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, RP_default, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
+    
+    RP_default := ShallowCopy( CommonHomalgTableForMapleHomalgDefault );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
     
     RP_specific :=
-          rec( 
-               
+          rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
-               RingName := R -> HomalgSendBlocking( [ "\"Q[", R, "[1]\"" ], "need_display" ),
-               
-               ## Must only then be provided by the RingPackage in case the default
-               ## "service" function does not match the Ring
-                   
-               Zero := HomalgExternalObject( "0", "Maple" ),
-               
-               One := HomalgExternalObject( "1", "Maple" ),
-               
-               MinusOne := HomalgExternalObject( "(-1)", "Maple" )
+               RingName := R -> HomalgSendBlocking( [ "\"Q[", R, "[1]\"" ], "need_output" )
                
           );
+    
+    for component in NamesOfComponents( RP_default ) do
+        RP.(component) := RP_default.(component);
+    od;
     
     for component in NamesOfComponents( RP_specific ) do
         RP.(component) := RP_specific.(component);

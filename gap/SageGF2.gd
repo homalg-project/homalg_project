@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SageGF2.gd                  homalg package                 Simon Görtzen
+##  SageGF2.gd                  sage rings for homalg          Simon Görtzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations of homalg procedures for modules.
+##  Declarations for the sage field GF(2).
 ##
 #############################################################################
 

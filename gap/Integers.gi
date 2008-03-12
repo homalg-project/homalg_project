@@ -113,8 +113,7 @@ InstallMethod( CreateHomalgTable,
                        SetEval( arg[2], N.rowtrans );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    H := HomalgMatrix( N.normal, R );

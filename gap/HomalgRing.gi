@@ -23,6 +23,11 @@ DeclareRepresentation( "IsHomalgExternalRingRep",
         IsHomalgRing,
         [ "ring", "HomalgTable" ] );
 
+# a new representation for the category IsHomalgExternalRingElement
+DeclareRepresentation( "IsHomalgExternalRingElementRep",
+        IsHomalgExternalObjectRep and IsHomalgExternalRingElement,
+        [ "object", "cas" ] );
+
 ####################################
 #
 # families and types:
@@ -41,6 +46,15 @@ BindGlobal( "HomalgInternalRingType",
 BindGlobal( "HomalgExternalRingType",
         NewType( HomalgRingsFamily ,
                 IsHomalgExternalRingRep ) );
+
+# a new family:
+BindGlobal( "HomalgExternalRingElementFamily",
+        NewFamily( "HomalgExternalRingElementFamily" ) );
+
+# a new type:
+BindGlobal( "HomalgExternalRingElementType",
+        NewType( HomalgExternalRingElementFamily,
+                IsHomalgExternalRingElementRep ) );
 
 ####################################
 #
@@ -376,6 +390,54 @@ InstallGlobalFunction( RingForHomalg,
     fi;
     
     return homalg_ring;
+    
+end );
+
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+InstallGlobalFunction( HomalgExternalRingElement,
+  function( arg )
+    local nargs, properties, ar, stream, obj;
+    
+    nargs := Length( arg );
+    
+    properties := [ ];
+    
+    for ar in arg{[ 3 .. nargs ]} do
+        if not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
+            stream := ar;
+        elif IsOperation( ar ) then
+            Add( properties, ar );
+        else
+            Error( "this argument should be in { IsRecord, IsOperation } bur recieved: ", ar,"\n" );
+        fi;
+    od;
+    
+    if IsBound( stream ) then
+        obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                obj, HomalgExternalRingElementType,
+                IsHomalgExternalRingElementWithIOStream, true );
+    else
+        obj := rec( pointer := arg[1], cas := arg[2] );
+        
+        ## Objectify:
+        Objectify( HomalgExternalRingElementType, obj );
+    fi;
+    
+    if properties <> [ ] then
+        for ar in properties do
+            Setter( ar )( obj, true );
+        od;
+    fi;
+    
+    return obj;
     
 end );
 

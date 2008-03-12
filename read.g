@@ -10,6 +10,8 @@
 
 ReadPackage( "homalg", "gap/homalg.gi" );
 
+ReadPackage( "homalg", "gap/HomalgExternalObject.gi" );
+
 ReadPackage( "homalg", "gap/HomalgTable.gi" );
 ReadPackage( "homalg", "gap/HomalgRing.gi" );
 
@@ -39,9 +41,15 @@ ReadPackage( "homalg", "gap/maple10.g" );
 ReadPackage( "homalg", "gap/IO.gi" );
 
 ReadPackage( "homalg", "gap/MapleHomalgTools.gi" );
+ReadPackage( "homalg", "gap/MapleHomalgDefault.gi" );
 ReadPackage( "homalg", "gap/MapleHomalgBestBasis.gi" );
+
 ReadPackage( "homalg", "gap/MapleHomalgPIR.gi" );
 ReadPackage( "homalg", "gap/MapleHomalgInvolutive.gi" );
+
+ReadPackage( "homalg", "gap/SageTools.gi" );
+ReadPackage( "homalg", "gap/SageDefault.gi" );
+ReadPackage( "homalg", "gap/SageBestBasis.gi" );
 
 ReadPackage( "homalg", "gap/SageIntegers.gi" );
 ReadPackage( "homalg", "gap/SageGF2.gi" );

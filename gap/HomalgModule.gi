@@ -1358,7 +1358,7 @@ InstallMethod( Display,
     
     display := ElementaryDivisorsOfLeftModule( M );
     
-    if IsHomalgExternalObjectRep( display[1] ) then
+    if IsHomalgExternalObjectRep( display[1] ) then ## display is only empty in case the module is trivial, but this is taken care of above
         get_string := HomalgPointer;
     else
         get_string := String;

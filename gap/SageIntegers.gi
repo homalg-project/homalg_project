@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SageIntegers.gi             homalg package                 Simon Görtzen
+##  SageIntegers.gi             sage rings for homalg          Simon Görtzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  The ring of Sage integers
+##  Implementations for the sage integers.
 ##
 #############################################################################
 
@@ -21,109 +21,31 @@ InstallMethod( CreateHomalgTable,
           and IsSageIntegers ],
         
   function( arg )
-    local RP;
-
-    RP := rec( 
-               ZeroRows :=
-                 function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "Checklist=[", C, ".row(x).is_zero() for x in range(", NrRows( C ), ")]" ], "need_command" );
-                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
-                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrRows( C ), "))" ], "need_output", R );
-                   list_string := StringToIntList( list_string );
-                   return list_string + 1;
-                   
-                 end,
-               
-               ZeroColumns :=
-                 function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "Checklist=[", C, ".column(x).is_zero() for x in range(", NrColumns( C ), ")]" ], "need_command" );
-                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
-                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrColumns( C ), "))" ], "need_output", R );
-                   list_string := StringToIntList( list_string );
-                   return list_string + 1;
-                   
-                 end,
-       
+    local RP, RP_BestBasis, RP_specific, component;
+    
+    RP := ShallowCopy( CommonHomalgTableForSageTools );
+    
+    RP_BestBasis := ShallowCopy( CommonHomalgTableForSageBestBasis );
+    
+    RP_specific :=
+          rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
                RingName := "Z",
                
-               BestBasis :=
-                 function( arg )
-                   local M, R, nargs, S, rank_of_S, U, V;
-                   
-                   M := arg[1];
-                   
-                   R := HomalgRing( M );
-                   
-                   nargs := Length( arg );
-                   
-                   if nargs > 1 then
-                       ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       HomalgSendBlocking( [ "_S,_U,_V =", M, ".dense_matrix().smith_form()" ], "need_command" );
-                       HomalgSendBlocking( [ "left_matrix=matrix(ZZ,", NrRows( M ), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrRows( M ), "):\n  left_matrix[i,", NrRows( M ) - 1, "-i]=1\n\n" ], "need_command", R );
-                       HomalgSendBlocking( [ "right_matrix=matrix(ZZ,", NrColumns( M ), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrColumns( M ), "):\n  right_matrix[i,", NrColumns( M ) - 1, "-i]=1\n\n" ], "need_command", R );
-                       rank_of_S := Int( HomalgSendBlocking( [ "_S.rank()" ], "need_output", R ) );
-                       S := HomalgSendBlocking( [ "left_matrix*_S.sparse_matrix()*right_matrix" ], R );
-                       U := HomalgSendBlocking( [ "left_matrix*_U.sparse_matrix()" ], R );
-                       if nargs > 2 then V := HomalgSendBlocking( [ "_V.sparse_matrix()*right_matrix" ], R ); fi;
-                   else
-                       ## compute S only:
-                       HomalgSendBlocking( [ "elemdivlist=", M, ".elementary_divisors()" ], "need_command" );
-                       HomalgSendBlocking( [ "TempMat=matrix(ZZ,", NrRows(M), ",", NrColumns(M), ",sparse=true)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(len(elemdivlist)):\n  TempMat[i,i]=elemdivlist[i]\n\n" ], "need_command", R );
-                       rank_of_S := Int( HomalgSendBlocking( [ "TempMat.rank()" ], "need_output", R ) );
-                       S := HomalgSendBlocking( [ "TempMat" ], R );
-                   fi;
-                   
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
-                       SetEval( arg[2], U );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
-                   fi;
-                   
-                   # assign V:
-                   if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
-                       SetEval( arg[3], V );
-                       SetNrRows( arg[3], NrColumns( M ) );
-                       SetNrColumns( arg[3], NrColumns( M ) );
-                       SetIsFullRowRankMatrix( arg[3], true );
-                       SetIsFullColumnRankMatrix( arg[3], true );
-                   fi;
-                   
-                   S := HomalgMatrix( S, R );
-                   
-                   SetNrRows( S, NrRows( M ) );
-                   SetNrColumns( S, NrColumns( M ) );
-                   SetRowRankOfMatrix( S, rank_of_S );
-                   SetIsDiagonalMatrix( S, true );
-                   
-                   return S;
-                   
-                 end,
-               
                ElementaryDivisors :=
                  function( arg )
-                   local M;
+                   local M, R;
                    
                    M:=arg[1];
+		   
+		   R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ M, ".transpose().elementary_divisors()" ], "need_output" );
+                   HomalgSendBlocking( [ "_tmp = ", M, ".transpose()" ], "need_command" );
+                   HomalgSendBlocking( [ "_tmp = _tmp.elementary_divisors()" ], "need_command", R );
+		   return HomalgSendBlocking( [ "_tmp" ], "need_output", R );
                    
                  end,
                  
@@ -161,8 +83,7 @@ InstallMethod( CreateHomalgTable,
                        SetEval( arg[2], U );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    N := HomalgMatrix( N, R );
@@ -179,134 +100,17 @@ InstallMethod( CreateHomalgTable,
                    
                    return N;
                    
-                 end,
-               
-               ## Must only then be provided by the RingPackage in case the default
-               ## "service" function does not match the Ring
-                   
-               True := "True",
-               
-               Zero := HomalgExternalObject( "0", "Sage" ),
-               
-               One := HomalgExternalObject( "1", "Sage" ),
-               
-               MinusOne := HomalgExternalObject( "(-1)", "Sage" ),
-               
-               Equal :=
-                 function( A, B )
-                 
-                   return HomalgSendBlocking( [ A, "==", B ], "need_ouput" ) = "True";
-                 
-                 end,
-               
-               ZeroMatrix :=
-                 function( C )
-                   
-                   return HomalgSendBlocking( [ "matrix(", HomalgRing(C), NrRows( C ), NrColumns( C ), ", sparse=true)" ] );
-                   
-                 end,
-             
-               IdentityMatrix :=
-                 function( C )
-                   local R;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "_id = identity_matrix(", R, NrRows( C ), ")" ], "need_command" );
-                   return HomalgSendBlocking( [ "_id.sparse_matrix()" ], R );
-                 end,
-               
-               Involution :=
-                 function( M )
-                   
-                   return HomalgSendBlocking( [ M, ".transpose()" ] );
-                   
-                 end,
-               
-               CertainRows :=
-                 function( M, plist )
-                   
-                   plist := plist - 1;
-                   return HomalgSendBlocking( [ M, ".matrix_from_rows(", plist, ")"] );
-                   
-                 end,
-               
-               CertainColumns :=
-                 function( M, plist )
-                   
-                   plist := plist - 1;
-                   return HomalgSendBlocking( [ M, ".matrix_from_columns(", plist, ")" ] );
-                   
-                 end,
-               
-               UnionOfRows :=
-                 function( A, B )
-                   
-                   return HomalgSendBlocking( [ "block_matrix([", A, B, "],2)" ] );
-                   
-                 end,
-               
-               UnionOfColumns :=
-                 function( A, B )
-                   
-                   return HomalgSendBlocking( [ "block_matrix([", A, B, "],1)" ] );
-                   
-                 end,
-               
-               DiagMat :=
-                 function( e )
-                   local f;
-                   
-                   f := ShallowCopy( e );
-                   Add( f, "block_diagonal_matrix(", 1 );
-                   Add( f, ")" );
-                   return HomalgSendBlocking( f );
-                   
-                 end,
-               
-               MulMat :=
-                 function( a, A )
-                   
-                   return HomalgSendBlocking( [a, "*", A] );
-                   
-                 end,
-               
-               AddMat :=
-                 function( A, B )
-                   
-                   return HomalgSendBlocking( [ A, "+", B ] );
-                   
-                 end,
-               
-               SubMat :=
-                 function( A, B )
-                   
-                   return HomalgSendBlocking( [ A, "-", B ] );
-                   
-                 end,
-               
-               Compose :=
-                 function( A, B )
-                   
-                   return HomalgSendBlocking( [ A, "*", B ] );
-                   
-                 end,
-               
-               NrRows :=
-                 function( C )
-                   
-                   return Int( HomalgSendBlocking( [ C, ".nrows()" ], "need_output" ) );
-                   
-                 end,
-               
-               NrColumns :=
-                 function( C )
-                   
-                   return Int( HomalgSendBlocking( [ C, ".ncols()" ], "need_output" ) );
-                   
                  end
                
           );
+    
+    for component in NamesOfComponents( RP_BestBasis ) do
+        RP.(component) := RP_BestBasis.(component);
+    od;
+    
+    for component in NamesOfComponents( RP_specific ) do
+        RP.(component) := RP_specific.(component);
+    od;
     
     Objectify( HomalgTableType, RP );
     

@@ -19,6 +19,16 @@
 DeclareCategory( "IsHomalgRing",
         IsAttributeStoringRep );
 
+DeclareCategory( "IsHomalgExternalRingElement",
+        IsExtAElement
+        and IsExtLElement
+        and IsExtRElement
+        and IsAdditiveElementWithInverse
+        and IsMultiplicativeElementWithInverse
+        and IsAssociativeElement
+        and IsAdditivelyCommutativeElement
+        and IsHomalgExternalObject );
+
 ####################################
 #
 # global variables:
@@ -132,4 +142,6 @@ DeclareOperation( "HomalgExternalCASystemPID",
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalg" );
+
+DeclareGlobalFunction( "HomalgExternalRingElement" );
 
