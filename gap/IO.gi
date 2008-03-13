@@ -89,8 +89,9 @@ end );
 ##
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
-    local L, nargs, properties, ar, option, R, ext_obj, e, RP, CAS, cas_version, stream,
-          homalg_variable, l, eol, enter, max;
+    local L, nargs, properties, ar, option, need_command, need_display, need_output,
+          R, ext_obj, e, RP, CAS, cas_version, stream, homalg_variable,
+          l, eol, enter, max;
     
     if IsBound( HOMALG.HomalgSendBlockingInput ) then
         Add( HOMALG.HomalgSendBlockingInput, arg );
@@ -111,7 +112,22 @@ InstallGlobalFunction( HomalgSendBlocking,
     properties := [];
     
     for ar in arg{[ 2 .. nargs ]} do
-        if not IsBound( option ) and IsString( ar ) then
+        if not IsBound( option ) and IsString( ar ) then ## the first occurrence of an option decides
+            if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
+                need_command := true;
+                need_display := false;
+                need_output := false;
+            elif PositionSublist( LowercaseString( ar ), "display" ) <> fail then
+                need_display := true;
+                need_command := false;
+                need_output := false;
+            elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
+                need_output := true;
+                need_command := false;
+                need_display := false;
+            else
+                Error( "option must be one of {\"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
+            fi;
             option := ar;
         elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
             R := ar;
@@ -222,7 +238,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         elif not IsBound( option ) then
             eol := stream.eol_quiet; ## as little back-traffic over the stream as possible
         else
-            if PositionSublist( LowercaseString( option ), "command" ) <> fail then
+            if need_command then
                 eol := stream.eol_quiet; ## as little back-traffic over the stream as possible
             else
                 eol := stream.eol_verbose;
@@ -235,7 +251,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     else
         L := Concatenation( L, eol, enter );
         
-        if PositionSublist( LowercaseString( option ), "command" ) <> fail then
+        if need_command then
             stream.HomalgExternalCommandCounter := stream.HomalgExternalCommandCounter + 1;
         else
             stream.HomalgExternalOutputCounter := stream.HomalgExternalOutputCounter + 1;
@@ -271,7 +287,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         fi;
         
         return L;
-    elif PositionSublist( LowercaseString( option ), "display" ) <> fail then
+    elif need_display then
         if stream.cas = "maple" then
             return stream.lines{[ 1 .. Length( stream.lines ) - 36 ]};
         else
@@ -284,8 +300,8 @@ InstallGlobalFunction( HomalgSendBlocking,
         L := stream.lines;
     fi;
     
-    if PositionSublist( LowercaseString( option ), "output" ) <> fail then
-        Info( InfoHomalg, 7, Concatenation( "<-- ", L ) );
+    if need_output then
+        Info( InfoHomalg, 7, Concatenation( "<========= ", L ) );
     fi;
     
     return L;
