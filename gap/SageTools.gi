@@ -59,7 +59,7 @@ InstallValue( CommonHomalgTableForSageTools,
                Equal :=
                  function( A, B )
                  
-                   return HomalgSendBlocking( [ A, "==", B ], "need_ouput" ) = "True";
+                   return HomalgSendBlocking( [ A, "==", B ], "need_output" ) = "True";
                  
                  end,
                

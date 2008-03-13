@@ -216,7 +216,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     else
         enter := "\n";
         if l > 0 and
-           ( L{[l-Length( stream.eol_verbose )+1..l]} = stream.eol_verbose
+           ( ( Length( stream.eol_verbose ) > 0 and L{[l-Length( stream.eol_verbose )+1..l]} = stream.eol_verbose )
              or L{[l-Length( stream.eol_quiet )+1..l]} = stream.eol_quiet ) then
             eol := "";
         elif not IsBound( option ) then
@@ -279,10 +279,16 @@ InstallGlobalFunction( HomalgSendBlocking,
         fi;
     elif stream.cas = "maple" then
         ## unless meant for display, normalize the white spaces caused by Maple
-        return NormalizedWhitespace( stream.lines );
+        L := NormalizedWhitespace( stream.lines );
     else
-        return stream.lines;
+        L := stream.lines;
     fi;
+    
+    if PositionSublist( LowercaseString( option ), "output" ) <> fail then
+        Info( InfoHomalg, 7, Concatenation( "<-- ", L ) );
+    fi;
+    
+    return L;
     
 end );
 
