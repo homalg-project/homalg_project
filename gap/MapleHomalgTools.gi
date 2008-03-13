@@ -28,6 +28,28 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               ZeroRows :=
+                 function( C )
+                   local R, list_string;
+                   
+                   R := HomalgRing( C );
+                   
+                   list_string := HomalgSendBlocking( [ "`homalg/ZeroRows`(", C, R, "[1],", R, "[2])" ], "need_output" );
+                   return StringToIntList( list_string );
+                   
+                 end,
+               
+               ZeroColumns :=
+                 function( C )
+                   local R, list_string;
+                   
+                   R := HomalgRing( C );
+                   
+                   list_string := HomalgSendBlocking( [ "`homalg/ZeroColumns`(", C, R, "[1],", R, "[2])" ], "need_output" );
+                   return StringToIntList( list_string );
+                   
+                 end,
+               
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                

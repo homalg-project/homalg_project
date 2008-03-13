@@ -118,6 +118,34 @@ InstallTrueMethod( IsZeroMatrix, IsHomalgMatrix and IsStrictUpperTriangularMatri
 ####################################
 
 ##
+InstallImmediateMethod( IsInitialMatrix,
+        IsHomalgMatrix, 0,
+        
+  function( M )
+    
+    if not HasIsInitialMatrix( M ) then
+        return false;
+    fi;
+    
+    ## no need for a TryNextMethod() here ;)
+    
+end );
+
+##
+InstallImmediateMethod( IsVoidMatrix,
+        IsHomalgMatrix, 0,
+        
+  function( M )
+    
+    if not HasIsVoidMatrix( M ) then
+        return false;
+    fi;
+    
+    ## no need for a TryNextMethod() here ;)
+    
+end );
+
+##
 InstallImmediateMethod( IsEmptyMatrix,
         IsHomalgMatrix and HasNrRows and HasNrColumns, 0,
         
@@ -2225,13 +2253,32 @@ InstallGlobalFunction( HomalgMatrix,
         
     fi;
     
-    ## an empty matrix filled zeros:
+    ## an initial matrix filled zeros BUT not marked as a IsZeroMatrix:
     if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "init" then
         
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
                 IsInitialMatrix, true );
+        
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+            SetNrRows( matrix, arg[2] );
+	    if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+                SetNrColumns( matrix, arg[3] );
+            fi;
+        fi;
+        
+        return matrix;
+        
+    fi;
+        
+    ## a void matrix filled with nothing having the flag IsVoidMatrix:
+    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsVoidMatrix, true );
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );

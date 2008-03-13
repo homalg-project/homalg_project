@@ -1,9 +1,9 @@
 maple_stream := LaunchMaple10( );
 init := HomalgExternalObject( "", "Maple", maple_stream );
-HomalgSendBlocking( "with(Involutive): with(homalg):", "execute", init );
+HomalgSendBlocking( "with(Involutive): with(homalg)", "execute_command", init );
 RPI := HomalgSendBlocking( "`Involutive/homalg`", init );
 Unbind(init);
-HomalgSendBlocking( [ "homalg_options(", RPI, "):" ], "execute" );
+HomalgSendBlocking( [ "homalg_options(", RPI, ")" ], "execute_command" );
 Qxyz := HomalgSendBlocking( [ "[[x,y,z],", RPI, "]"], IsHomalgInvolutiveMapleRing );
 Qxyz := RingForHomalg( Qxyz );
 Display(Qxyz);

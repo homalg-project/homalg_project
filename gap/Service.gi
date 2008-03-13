@@ -90,7 +90,7 @@ InstallMethod( TriangularBasisOfColumns,
         return RP!.TriangularBasisOfColumns( M, V );
     fi;
     
-    U := HomalgMatrix( R );
+    U := HomalgMatrix( "void", R );
     
     T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
     
@@ -167,7 +167,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     #=====# begin of the core procedure #=====#
     
     if HasRightHandSide( M ) then
-        U := HomalgMatrix( R );
+        U := HomalgMatrix( "void", R );
         
         B := TriangularBasisOfRows( M, U );
     else
@@ -218,7 +218,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     #=====# begin of the core procedure #=====#
     
     if HasBottomSide( M ) then
-        U := HomalgMatrix( R );
+        U := HomalgMatrix( "void", R );
         
         B := TriangularBasisOfColumns( M, U );
     else
@@ -440,7 +440,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     M := UnionOfRows( UnionOfColumns( id, L ), UnionOfColumns( zz, B ) );
     
     if HasRightHandSide( B ) then
-        U := HomalgMatrix( R );
+        U := HomalgMatrix( "void", R );
         
         M := TriangularBasisOfRows( M, U );
     else
@@ -518,7 +518,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     M := UnionOfColumns( UnionOfRows( id, L ), UnionOfRows( zz, B ) );
     
     if HasBottomSide( B ) then
-        U := HomalgMatrix( R );
+        U := HomalgMatrix( "void", R );
         
         M := TriangularBasisOfColumns( M, U );
     else

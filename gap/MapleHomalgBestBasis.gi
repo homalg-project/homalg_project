@@ -24,7 +24,7 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                
                BestBasis :=
                  function( arg )
-                   local M, R, nargs, S, rank_of_S, U, V;
+                   local M, R, nargs, S, U, V, rank_of_S;
                    
                    M := arg[1];
                    
@@ -32,44 +32,38 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                    
                    nargs := Length( arg );
                    
+                   S := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   SetIsDiagonalMatrix( S, true );
+                   
                    if nargs > 1 then
+                       # assign U:
+                       if IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
+                           U := arg[2];
+                           SetNrRows( U, NrRows( M ) );
+                           SetNrColumns( U, NrRows( M ) );
+                           SetIsInvertibleMatrix( U, true );
+                       else
+                           U := HomalgMatrix( "void", R );
+                       fi;
+                       
+                       # assign V:
+                       if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
+                           V := arg[3];
+                           SetNrRows( V, NrColumns( M ) );
+                           SetNrColumns( V, NrColumns( M ) );
+                           SetIsInvertibleMatrix( V, true );
+                       else
+                           V := HomalgMatrix( "void", R );
+                       fi;
+                       
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       HomalgSendBlocking( [ "_S := ", R, "[2][BestBasis](", M, R, "[1],", "_U,_V):" ], "need_command" );
-                       rank_of_S := Int( HomalgSendBlocking( [ "`homalg/RankOfGauss`(copy(_S),", R,"[2])" ], "need_output" ) );
-                       S := HomalgSendBlocking( [ "copy(_S)" ], R );
-                       U := HomalgSendBlocking( [ "copy(_U)" ], R );
-                       V := HomalgSendBlocking( [ "copy(_V)" ], R );
-                       HomalgSendBlocking( [ "unassign(_S): unassign(_U): unassign(_V):" ], "need_command", R );
+                       rank_of_S := Int( HomalgSendBlocking( [ S, ":=", R, "[2][BestBasis](", M, R, "[1],", U, V, "): `homalg/RankOfGauss`(", S, R,"[2])" ], "need_output" ) );
                    else
                        ## compute S only:
-                       HomalgSendBlocking( [ "_S := ", R, "[2][BestBasis](", M, R, "[1]):" ], "need_command" );
-                       rank_of_S := Int( HomalgSendBlocking( [ "`homalg/RankOfGauss`(copy(_S),", R,"[2])" ], "need_output" ) );
-                       S := HomalgSendBlocking( [ "copy(_S)" ], R );
-                       HomalgSendBlocking( [ "unassign(_S):" ], "need_command", R );
+                       rank_of_S := Int( HomalgSendBlocking( [ S, ":=", R, "[2][BestBasis](", M, R, "[1]): `homalg/RankOfGauss`(", S, R,"[2])" ], "need_output" ) );
                    fi;
                    
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
-                       SetEval( arg[2], U );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsInvertibleMatrix( arg[2], true );
-                   fi;
-                   
-                   # assign V:
-                   if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
-                       SetEval( arg[3], V );
-                       SetNrRows( arg[3], NrColumns( M ) );
-                       SetNrColumns( arg[3], NrColumns( M ) );
-                       SetIsInvertibleMatrix( arg[3], true );
-                   fi;
-                   
-                   S := HomalgMatrix( S, R );
-                   
-                   SetNrRows( S, NrRows( M ) );
-                   SetNrColumns( S, NrColumns( M ) );
                    SetRowRankOfMatrix( S, rank_of_S );
-                   SetIsDiagonalMatrix( S, true );
                    
                    return S;
                    

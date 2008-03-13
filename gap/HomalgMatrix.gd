@@ -30,6 +30,9 @@ DeclareCategory( "IsHomalgMatrix",
 DeclareProperty( "IsInitialMatrix",
         IsHomalgMatrix );
 
+DeclareProperty( "IsVoidMatrix",
+        IsHomalgMatrix );
+
 DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 

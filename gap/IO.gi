@@ -52,14 +52,26 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
     l := Length( L );
     
     s := List( [ 1 .. l ], function( a )
-                             local t;
+                             local R, CAS, stream, t;
                              if IsString( L[a] ) then
                                  return L[a];
                              else
                                  if IsHomalgExternalObjectRep( L[a] )
-                                    or IsHomalgExternalRingRep( L[a] )
-                                    or IsHomalgExternalMatrixRep( L[a] ) then
+                                    or IsHomalgExternalRingRep( L[a] ) then
                                      t := HomalgPointer( L[a] );
+                                 elif IsHomalgExternalMatrixRep( L[a] ) then
+                                     if not IsVoidMatrix( L[a] ) then
+                                         t := HomalgPointer( L[a] ); ## now we enforce evaluation!!!
+                                     else
+                                         R := HomalgRing( L[a] );
+                                         CAS := HomalgExternalCASystem( R );
+                                         stream := HomalgStream( R );
+                                         stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
+                                         t := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
+                                         MakeImmutable( t );
+                                         SetEval( L[a], HomalgExternalObject( t, CAS, stream ) ); ## CAUTION: HomalgPointer( L[a] ) now exists but still points to nothing!!!
+                                         ResetFilterObj( L[a], IsVoidMatrix );
+                                     fi;
                                  else
                                      t := String( L[a] );
                                  fi;
@@ -79,6 +91,10 @@ InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, R, ext_obj, e, RP, CAS, cas_version, stream,
           homalg_variable, l, eol, enter, max;
+    
+    if IsBound( HOMALG.HomalgSendBlockingInput ) then
+        Add( HOMALG.HomalgSendBlockingInput, arg );
+    fi;
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -118,6 +134,7 @@ InstallGlobalFunction( HomalgSendBlocking,
             for ar in e do
                 if IsHomalgExternalMatrixRep( ar ) then
                     R := HomalgRing( ar );
+                    ext_obj := R;
                     break;
                 elif IsHomalgExternalRingRep( ar ) then
                     R := ar;
@@ -173,17 +190,18 @@ InstallGlobalFunction( HomalgSendBlocking,
             Error( "the computer algebra system ", CAS, " is not yet supported as an external computing engine for homalg\n" );
         fi;
         
-        stream.HomalgExternalVariableCounter := 1;
+        stream.HomalgExternalVariableCounter := 0;
+        stream.HomalgExternalCommandCounter := 0;
         stream.HomalgExternalOutputCounter := 0;
-        stream.HomalgExternalCallCounter := 1;
+        stream.HomalgExternalCallCounter := 0;
         stream.HomalgBackStreamMaximumLength := 0;
         
     fi;
     
     if not IsBound( option ) then
+        stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
         homalg_variable := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
-        stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
     fi;
     
     L := HomalgCreateStringForExternalCASystem( L );
@@ -215,9 +233,15 @@ InstallGlobalFunction( HomalgSendBlocking,
     else
         L := Concatenation( L, eol, enter );
         
-        if PositionSublist( LowercaseString( option ), "command" ) = fail then
+        if PositionSublist( LowercaseString( option ), "command" ) <> fail then
+            stream.HomalgExternalCommandCounter := stream.HomalgExternalCommandCounter + 1;
+        else
             stream.HomalgExternalOutputCounter := stream.HomalgExternalOutputCounter + 1;
         fi;
+    fi;
+    
+    if IsBound( HOMALG.HomalgSendBlocking ) then
+        Add( HOMALG.HomalgSendBlocking, L );
     fi;
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;

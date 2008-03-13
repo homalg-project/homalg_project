@@ -1,9 +1,9 @@
 maple_stream := LaunchMaple10( );
 init := HomalgExternalObject( "", "Maple", maple_stream );
-HomalgSendBlocking( "with(PIR): with(homalg):", "execute", init );
+HomalgSendBlocking( "with(PIR): with(homalg)", "execute_command", init );
 RPP := HomalgSendBlocking( "`PIR/homalg`", init );
 Unbind(init);
-HomalgSendBlocking( [ "homalg_options(", RPP, "):" ], "execute" );
+HomalgSendBlocking( [ "homalg_options(", RPP, ")" ], "execute_command" );
 ZZ := HomalgSendBlocking( [ "[[],", RPP, "]"], IsHomalgPIRMapleRing );
 ZZ := RingForHomalg( ZZ );
 Display(ZZ);

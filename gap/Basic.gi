@@ -432,11 +432,11 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     finished := false;
     
     if compute_U or compute_UI then
-        U := HomalgMatrix( R );
+        U := HomalgMatrix( "void", R );
     fi;
         
     if compute_V or compute_VI then
-        V := HomalgMatrix( R );
+        V := HomalgMatrix( "void", R );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -444,11 +444,11 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     if IsZeroMatrix( M ) then
         
         if compute_U then
-            SetPreEval( U, HomalgMatrix( "identity", NrRows( M ), R ) );
+            U := HomalgMatrix( "identity", NrRows( M ), R );
         fi;
         
         if compute_V then
-            SetPreEval( V, HomalgMatrix( "identity", NrColumns( M ), R ) );
+            V := HomalgMatrix( "identity", NrColumns( M ), R );
         fi;
         
         if compute_UI then
