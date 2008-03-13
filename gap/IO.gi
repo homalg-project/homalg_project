@@ -96,6 +96,8 @@ InstallGlobalFunction( HomalgSendBlocking,
         Add( HOMALG.HomalgSendBlockingInput, arg );
     fi;
     
+    Info( InfoHomalg, 10, arg );
+    
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
     elif IsString( arg[1] ) then
@@ -243,6 +245,8 @@ InstallGlobalFunction( HomalgSendBlocking,
     if IsBound( HOMALG.HomalgSendBlocking ) then
         Add( HOMALG.HomalgSendBlocking, L );
     fi;
+    
+    Info( InfoHomalg, 5, L{[ 1 .. Length( L ) -1 ]} );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
