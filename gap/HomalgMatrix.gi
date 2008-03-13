@@ -2263,7 +2263,7 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-	    if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
                 SetNrColumns( matrix, arg[3] );
             fi;
         fi;
@@ -2271,7 +2271,7 @@ InstallGlobalFunction( HomalgMatrix,
         return matrix;
         
     fi;
-        
+    
     ## a void matrix filled with nothing having the flag IsVoidMatrix:
     if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
         
@@ -2282,7 +2282,7 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-	    if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
                 SetNrColumns( matrix, arg[3] );
             fi;
         fi;
@@ -2290,7 +2290,7 @@ InstallGlobalFunction( HomalgMatrix,
         return matrix;
         
     fi;
-        
+    
     ## the zero matrix:
     if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
         
@@ -2301,7 +2301,7 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-	    if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
                 SetNrColumns( matrix, arg[3] );
             fi;
         fi;
@@ -2309,7 +2309,7 @@ InstallGlobalFunction( HomalgMatrix,
         return matrix;
         
     fi;
-        
+    
     if IsList( arg[1] ) and Length( arg[1] ) <> 0 and not IsList( arg[1][1] ) then
         M := List( arg[1], a -> [a] ); ## NormalizeInput
     else

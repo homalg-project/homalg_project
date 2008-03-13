@@ -15,7 +15,7 @@
 ####################################
 
 ##
-InstallMethod( Eval,				### defines: an initial matrix full with zeros
+InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         "for homalg matrices",
         [ IsHomalgMatrix and IsInitialMatrix ],
         
