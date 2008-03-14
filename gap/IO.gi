@@ -178,7 +178,13 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     if not IsBound( stream.HomalgExternalVariableCounter ) then
         
-        if Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
+        if Length( CAS ) > 2 and LowercaseString( CAS{[1..3]} ) = "gap" then
+            stream.cas := "gap"; ## normalized name on which the user should have no control
+            stream.SendBlocking := SendGAPBlocking;
+            stream.define := ":=";
+            stream.eol_verbose := ";";
+            stream.eol_quiet := ";;";
+        elif Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
             stream.cas := "sage"; ## normalized name on which the user should have no control
             stream.SendBlocking := SendSageBlocking;
             stream.define := "=";
@@ -262,7 +268,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         Add( HOMALG.HomalgSendBlocking, L );
     fi;
     
-    Info( InfoHomalg, 5, L{[ 1 .. Length( L ) -1 ]} );
+    Info( InfoHomalg, 7, L{[ 1 .. Length( L ) -1 ]} );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
@@ -301,7 +307,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if need_output then
-        Info( InfoHomalg, 7, Concatenation( "<========= ", L ) );
+        Info( InfoHomalg, 5, Concatenation( "<========= \"", L, "\"" ) );
     fi;
     
     return L;

@@ -2532,7 +2532,9 @@ InstallMethod( Display,
     
     cas := HomalgExternalCASystem( o );
     
-    if Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
+    if Length( cas ) > 2 and LowercaseString( cas{[1..3]} ) = "gap" then
+        Print( HomalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
+    elif Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
         Print( HomalgSendBlocking( [ "eval(", o, ")" ], "need_display" ) );
     else
         Print( HomalgSendBlocking( [ o ], "need_display" ) );

@@ -24,7 +24,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", M, R, "[1],", R, "[2])" ] , "need_output" ) = "true";
+                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", M, R, ")" ] , "need_output" ) = "true";
                    
                  end,
                
@@ -34,7 +34,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := HomalgSendBlocking( [ "`homalg/ZeroRows`(", C, R, "[1],", R, "[2])" ], "need_output" );
+                   list_string := HomalgSendBlocking( [ "`homalg/ZeroRows`(", C, R, ")" ], "need_output" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -45,7 +45,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := HomalgSendBlocking( [ "`homalg/ZeroColumns`(", C, R, "[1],", R, "[2])" ], "need_output" );
+                   list_string := HomalgSendBlocking( [ "`homalg/ZeroColumns`(", C, R, ")" ], "need_output" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -65,7 +65,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", "`homalg/SubMat`(", A, B, R, "[1],", R, "[2]),", R, "[1],", R, "[2])" ] , "need_output" ) = "true";
+                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", "`homalg/SubMat`(", A, B, R, "),", R, ")" ] , "need_output" ) = "true";
                    
                  end,
                
@@ -75,7 +75,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, ")" ] );
                    
                  end,
              
@@ -85,7 +85,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "`homalg/IdentityMap`(", NrRows( C ), R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/IdentityMap`(", NrRows( C ), R, ")" ] );
                    
                  end,
                
@@ -95,7 +95,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "`homalg/Involution`(", M, R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/Involution`(", M, R, ")" ] );
                    
                  end,
                
@@ -157,7 +157,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/MulMat`(", a, A, R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/MulMat`(", a, A, R, ")" ] );
                    
                  end,
                
@@ -167,7 +167,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/AddMat`(", A, B, R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/AddMat`(", A, B, R, ")" ] );
                    
                  end,
                
@@ -177,7 +177,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/SubMat`(", A, B, R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/SubMat`(", A, B, R, ")" ] );
                    
                  end,
                
@@ -187,7 +187,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/Compose`(", A, B, R, "[1],", R, "[2])" ] );
+                   return HomalgSendBlocking( [ "`homalg/Compose`(", A, B, R, ")" ] );
                    
                  end,
                

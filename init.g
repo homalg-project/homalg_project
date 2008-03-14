@@ -30,6 +30,13 @@ ReadPackage( "homalg", "gap/Modules.gd" );
 
 ReadPackage( "homalg", "gap/IO.gd" );
 
+ReadPackage( "homalg", "gap/GAPHomalgTools.gd" );
+#ReadPackage( "homalg", "gap/GAPHomalgDefault.gd" );
+ReadPackage( "homalg", "gap/GAPHomalgBestBasis.gd" );
+
+ReadPackage( "homalg", "gap/GAPHomalgPIR.gd" );
+#ReadPackage( "homalg", "gap/GAPHomalgInvolutive.gd" );
+
 ReadPackage( "homalg", "gap/MapleHomalgTools.gd" );
 ReadPackage( "homalg", "gap/MapleHomalgDefault.gd" );
 ReadPackage( "homalg", "gap/MapleHomalgBestBasis.gd" );

@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  MapleHomalgPIR.gi           homalg package               Mohamed Barakat
+##  GAPHomalgPIR.gi             homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-## Implementations for the rings provided by the Maple package PIR
-## accessed via the Maple implementation of homalg.
+## Implementations for the external rings provided by the GAP package homalg
 ##
 #############################################################################
 
@@ -19,14 +18,14 @@ InstallMethod( CreateHomalgTable,
         "for homalg rings provided by the maple package PIR",
         [ IsHomalgExternalObjectRep
           and IsHomalgExternalObjectWithIOStream
-          and IsHomalgPIRMapleRing ],
+          and IsHomalgPIRGAPRing ],
 
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;
     
-    RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
+    RP := ShallowCopy( CommonHomalgTableForGAPHomalgTools );
     
-    RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
+    RP_BestBasis := ShallowCopy( CommonHomalgTableForGAPHomalgBestBasis );
     
     RP_specific :=
           rec(
@@ -34,7 +33,7 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
-               RingName := R -> HomalgSendBlocking( [ "`PIR/Pvar`(", R, "[1])" ], "need_output" ),
+               RingName := R -> HomalgSendBlocking( [ "Display(", R, ")" ], "need_output" ),
                
                ElementaryDivisors :=
                  function( arg )
@@ -44,7 +43,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "`homalg/DiagonalElementsAndRank`(", R, "[2][BestBasis](", M, R, "[1]),", R, ")[1]" ], "need_output" );
+                   return HomalgSendBlocking( [ "HomalgTable(", R, "!.ElementaryDivisors(", M, ")" ], "need_output" );
                    
                  end,
                  
@@ -76,10 +75,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, ":=", R, "[2][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
+                       rank_of_N := Int( HomalgSendBlocking( [ U, ":=HomalgMatrix(\"void\",", R, ");; ", N, ":=HomalgTable(", R, ")!.TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, ":=", R, "[2][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
+                       rank_of_N := Int( HomalgSendBlocking( [ N, ":=HomalgTable(", R, ")!.TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );
