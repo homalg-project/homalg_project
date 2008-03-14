@@ -18,13 +18,9 @@
 InstallValue( CommonHomalgTableForMapleHomalgDefault,
         
         rec(
-               ## Can optionally be provided by the RingPackage
-               ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
-               
-               BasisOfRowModule :=
+               BasisOfRowsCoeff :=
                  function( arg )
-                   local M, R, nargs, N, rank_of_N, U;
+                   local M, R, nargs, N, U;
                    
                    M := arg[1];
                    
@@ -32,41 +28,40 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 then
+                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrColumns( M ), R );
+                   
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BasisOfRowsCoeff( M, "" )
+                       # assign U:
+                       U := arg[2];
+                       SetNrColumns( U, NrRows( M ) );
+                       
                        ## compute N and U:
-                       HomalgSendBlocking( [ "_N := ", R, "[2][TriangularBasis](", M, R, "[1],", "_U)" ], "need_command" );
-                       rank_of_N := Int( HomalgSendBlocking( [ "`homalg/RankOfGauss`(copy(_N),", R, "[2])" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "copy(_N)" ], R );
-                       U := HomalgSendBlocking( [ "copy(_U)" ], R );
-                       HomalgSendBlocking( [ "unassign(_N): unassign(_U)" ], "need_command", R );
+                       HomalgSendBlocking( [ N, " := `homalg/BasisCoeff`(", M, R, "[1],", U, R, "[2])" ], "need_command" );
                    else
                        ## compute N only:
-                       HomalgSendBlocking( [ "_N := ", R, "[2][TriangularBasis](", M, R, "[1])" ], "need_command" );
-                       rank_of_N := Int( HomalgSendBlocking( [ "`homalg/RankOfGauss`(copy(_N),", R, "[2])" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "copy(_N)" ], R );
-                       HomalgSendBlocking( [ "unassign(_N)" ], "need_command", R );
+                       HomalgSendBlocking( [ N, " := `homalg/BasisCoeff`(", M, R, ")" ], "need_command" );
                    fi;
                    
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
-                       SetEval( arg[2], U );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
-                   fi;
+                   return N;
                    
-                   N := HomalgMatrix( N, R );
+                 end,
+                 
+               ## Must only then be provided by the RingPackage in case the default
+               ## "service" function does not match the Ring
+               
+               BasisOfRowModule :=
+                 function( arg )
+                   local M, R, nargs, N, U;
                    
-                   SetNrRows( N, NrRows( M ) );
-                   SetNrColumns( N, NrColumns( M ) );
-                   SetRowRankOfMatrix( N, rank_of_N );
+                   M := arg[1];
                    
-                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
-                       SetIsDiagonalMatrix( N, true );
-                   else
-                       SetIsUpperTriangularMatrix( N, true );
-                   fi;
+                   R := HomalgRing( M );
+                   
+                   nargs := Length( arg );
+                   
+                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrColumns( M ), R );
+                   
+                   HomalgSendBlocking( [ N, " := `homalg/BasisOfModule`(", M, R, ")" ], "need_command" );
                    
                    return N;
                    

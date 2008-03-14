@@ -184,18 +184,24 @@ InstallGlobalFunction( HomalgSendBlocking,
             stream.define := ":=";
             stream.eol_verbose := ";";
             stream.eol_quiet := ";;";
+	    stream.prompt := "gap> ";
+	    stream.output_prompt := "\033[1;37;44m<gap\033[0m ";
         elif Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
             stream.cas := "sage"; ## normalized name on which the user should have no control
             stream.SendBlocking := SendSageBlocking;
             stream.define := "=";
             stream.eol_verbose := "";
             stream.eol_quiet := ";";
+	    stream.prompt := "sage: ";
+	    stream.output_prompt := "\033[1;34;43m<sage\033[0m ";
         elif Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "singular" then
             stream.cas := "singular"; ## normalized name on which the user should have no control
             stream.SendBlocking := SendSingularBlocking;
             stream.define := "=";
             stream.eol_verbose := ";";
             stream.eol_quiet := ";";
+	    stream.prompt := "singular> ";
+	    stream.output_prompt := "\033[1;30;43m<singular\033[0m ";
         elif Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "maple" then
             stream.cas := "maple"; ## normalized name on which the user should have no control
             if cas_version = "10" then
@@ -210,6 +216,8 @@ InstallGlobalFunction( HomalgSendBlocking,
             stream.define := ":=";
             stream.eol_verbose := ";";
             stream.eol_quiet := ":";
+	    stream.prompt := "maple> ";
+	    stream.output_prompt := "\033[1;34;47m<maple\033[0m ";
         else
             Error( "the computer algebra system ", CAS, " is not yet supported as an external computing engine for homalg\n" );
         fi;
@@ -253,7 +261,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if not IsBound( option ) then
-        L := Concatenation( homalg_variable, stream.define, L, eol, enter );
+        L := Concatenation( homalg_variable, " ", stream.define, " ", L, eol, enter );
     else
         L := Concatenation( L, eol, enter );
         
@@ -268,7 +276,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         Add( HOMALG.HomalgSendBlocking, L );
     fi;
     
-    Info( InfoHomalg, 7, L{[ 1 .. Length( L ) -1 ]} );
+    Info( InfoHomalg, 7, Concatenation( stream.prompt, L{[ 1 .. Length( L ) -1 ]} ) );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
@@ -307,7 +315,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if need_output then
-        Info( InfoHomalg, 5, Concatenation( "<========= \"", L, "\"" ) );
+        Info( InfoHomalg, 5, Concatenation( stream.output_prompt, "\"", L, "\"" ) );
     fi;
     
     return L;

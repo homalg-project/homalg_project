@@ -165,7 +165,7 @@ DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgModule, IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgModule, IsList ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );

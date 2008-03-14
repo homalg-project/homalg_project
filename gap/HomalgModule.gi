@@ -606,11 +606,11 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsList and IsEmpty ],
+	[ IsFinitelyPresentedModuleRep ],
         
-  function( M1, M2 )
+  function( M )
     
-    return SyzygiesGenerators( RelationsOfModule( M1 ), [ ] ) ;
+    return SyzygiesGenerators( RelationsOfModule( M ) ) ;
     
 end );
 

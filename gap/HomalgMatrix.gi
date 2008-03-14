@@ -2182,6 +2182,7 @@ InstallGlobalFunction( HomalgMatrix,
     
     nargs := Length( arg );
     
+    ## "copy" the matrix:
     if nargs > 0 and IsHomalgMatrix( arg[1] ) then
         
         R := HomalgRing( arg[1] );
@@ -2208,15 +2209,16 @@ InstallGlobalFunction( HomalgMatrix,
     
     matrix := rec( ring := R );
     
-    ## an empty matrix:
     if nargs = 1 then ## only the ring is given
+    ## an empty matrix
         
         ## Objectify:
         Objectify( type, matrix );
         
         return matrix;
         
-    elif IsString( arg[1] ) and Length( arg[1] ) > 2 then ## it can get obscure ;)
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 then
+    ## it can get obscure ;)
         
         if LowercaseString( arg[1]{[1..3]} ) = "int" then
             
@@ -2234,10 +2236,10 @@ InstallGlobalFunction( HomalgMatrix,
             
         fi;
         
-    fi;
+    fi; ## CAUTION: don't make an elif here!!!
     
-    ## the identity matrix:
     if IsString( arg[1] ) and Length( arg[1] ) > 1 and  LowercaseString( arg[1]{[1..2]} ) = "id" then
+    ## the identity matrix:
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -2251,10 +2253,9 @@ InstallGlobalFunction( HomalgMatrix,
         
         return matrix;
         
-    fi;
-    
-    ## an initial matrix filled zeros BUT not marked as a IsZeroMatrix:
-    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "init" then
+    elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "init" then
+    ## an initial matrix having the flag IsInitialMatrix
+    ## and filled with zeros BUT NOT marked as an IsZeroMatrix:
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -2263,17 +2264,16 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-                SetNrColumns( matrix, arg[3] );
-            fi;
+        fi;
+        
+        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            SetNrColumns( matrix, arg[3] );
         fi;
         
         return matrix;
         
-    fi;
-    
+    elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
     ## a void matrix filled with nothing having the flag IsVoidMatrix:
-    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -2282,17 +2282,16 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-                SetNrColumns( matrix, arg[3] );
-            fi;
         fi;
         
+        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            SetNrColumns( matrix, arg[3] );
+        fi;
+            
         return matrix;
         
-    fi;
-    
+    elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
     ## the zero matrix:
-    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -2301,9 +2300,10 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-                SetNrColumns( matrix, arg[3] );
-            fi;
+        fi;
+        
+        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            SetNrColumns( matrix, arg[3] );
         fi;
         
         return matrix;
@@ -2535,7 +2535,7 @@ InstallMethod( Display,
     if Length( cas ) > 2 and LowercaseString( cas{[1..3]} ) = "gap" then
         Print( HomalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
     elif Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
-        Print( HomalgSendBlocking( [ "eval(", o, ")" ], "need_display" ) );
+        Print( HomalgSendBlocking( [ "convert(", o, ",matrix)" ], "need_display" ) );
     else
         Print( HomalgSendBlocking( [ o ], "need_display" ) );
     fi;

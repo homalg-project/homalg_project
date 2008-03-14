@@ -1,4 +1,4 @@
-maple_stream := LaunchMaple10( );
+maple_stream := LaunchMaple9( );
 init := HomalgExternalObject( "", "Maple", maple_stream );
 HomalgSendBlocking( "with(PIR): with(homalg)", "execute_command", init );
 RPP := HomalgSendBlocking( "`PIR/homalg`", init );

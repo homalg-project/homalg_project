@@ -57,10 +57,10 @@ InstallValue( CommonHomalgTableForGAPHomalgBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( HomalgSendBlocking( [ U, ":=HomalgMatrix(\"void\",", R, ");; ", V, ":=HomalgMatrix(\"void\",", R, ");; ", S, ":=HomalgTable(", R, ")!.BestBasis(", M, U, V, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );
+                       rank_of_S := Int( HomalgSendBlocking( [ U, " := HomalgMatrix(\"void\",", R, ");; ", V, " := HomalgMatrix(\"void\",", R, ");; ", S, " := HomalgTable(", R, ")!.BestBasis(", M, U, V, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );
                    else
                        ## compute S only:
-                       rank_of_S := Int( HomalgSendBlocking( [ S, ":=HomalgTable(", R, ")!.BestBasis(", M, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );
+                       rank_of_S := Int( HomalgSendBlocking( [ S, " := HomalgTable(", R, ")!.BestBasis(", M, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( S, rank_of_S );

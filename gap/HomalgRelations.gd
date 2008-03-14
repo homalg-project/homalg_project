@@ -81,7 +81,7 @@ DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgRelations, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgRelations, IsList ] );
+        [ IsHomalgRelations ] );
 
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgRelations ] );

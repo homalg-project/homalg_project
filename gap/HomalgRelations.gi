@@ -332,11 +332,11 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgLeftRelationsRep, IsList and IsEmpty ],
+        [ IsHomalgLeftRelationsRep ],
         
-  function( M1, M2 )
+  function( M )
     
-    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M1 ), [ ] );
+    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M ), [ ] );
     
 end );
 
@@ -354,11 +354,11 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgRightRelationsRep, IsList and IsEmpty ],
+        [ IsHomalgRightRelationsRep ],
         
-  function( M1, M2 )
+  function( M )
     
-    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M1 ), [ ] );
+    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M ), [ ] );
     
 end );
 

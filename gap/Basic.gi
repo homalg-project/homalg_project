@@ -433,10 +433,12 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     
     if compute_U or compute_UI then
         U := HomalgMatrix( "void", R );
+	UI := HomalgMatrix( "void", R );
     fi;
         
     if compute_V or compute_VI then
         V := HomalgMatrix( "void", R );
+        VI := HomalgMatrix( "void", R );
     fi;
     
     #=====# begin of the core procedure #=====#
