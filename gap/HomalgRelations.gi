@@ -336,7 +336,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( M )
     
-    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M ), [ ] );
+    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M ) );
     
 end );
 
@@ -358,7 +358,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( M )
     
-    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M ), [ ] );
+    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M ) );
     
 end );
 

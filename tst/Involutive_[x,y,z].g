@@ -1,5 +1,6 @@
-LoadPackage("HomalgRings.g");
+LoadPackage( "HomalgRings" );
 HOMALG_RINGS.color_display := true;
+SetInfoLevel( InfoHomalgRings, 7 );
 maple_stream := LaunchMaple9( );
 init := HomalgExternalObject( "", "Maple", maple_stream );
 HomalgSendBlocking( "with(Involutive): with(homalg)", "execute_command", init );
@@ -13,3 +14,7 @@ wmat := HomalgSendBlocking( "matrix([[x*z, z*y, z^2, 0, 0, y], [0, 0, 0, z^2*y-z
 wmat := HomalgMatrix( wmat, Qxyz );
 wrel := HomalgRelationsForLeftModule( wmat );
 W := Presentation( wrel );
+BasisOfModule( W );
+BasisOfModule( W );
+SyzygiesGenerators( W );
+Display(last);
