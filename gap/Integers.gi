@@ -52,19 +52,19 @@ InstallMethod( CreateHomalgTable,
                    # assign U:
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                        SetEval( arg[2], N.rowtrans );
+                       ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsFullRowRankMatrix( arg[2], true );
-                       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    # assign V:
                    if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                        SetEval( arg[3], N.coltrans );
+                       ResetFilterObj( arg[3], IsVoidMatrix );
                        SetNrRows( arg[3], NrColumns( M ) );
                        SetNrColumns( arg[3], NrColumns( M ) );
-                       SetIsFullRowRankMatrix( arg[3], true );
-                       SetIsFullColumnRankMatrix( arg[3], true );
+                       SetIsInvertibleMatrix( arg[3], true );
                    fi;
                    
                    S := HomalgMatrix( N.normal, R );
@@ -111,6 +111,7 @@ InstallMethod( CreateHomalgTable,
                    # assign U:
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        SetEval( arg[2], N.rowtrans );
+                       ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );

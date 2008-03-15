@@ -21,13 +21,18 @@ DeclareCategory( "IsHomalgExternalObject",
 
 ####################################
 #
-# global functions and operations:
+# properties:
 #
 ####################################
 
-# constructor methods:
+DeclareProperty( "IsHomalgExternalObjectWithIOStream",
+        IsHomalgExternalObject );
 
-DeclareGlobalFunction( "HomalgExternalObject" );
+####################################
+#
+# global functions and operations:
+#
+####################################
 
 # basic operations:
 
@@ -39,4 +44,8 @@ DeclareOperation( "HomalgExternalCASystem",
 
 DeclareOperation( "HomalgExternalCASystemVersion",
         [ IsHomalgExternalObject ] );
+
+# constructor methods:
+
+DeclareGlobalFunction( "HomalgExternalObject" );
 

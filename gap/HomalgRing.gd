@@ -43,6 +43,9 @@ DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgRings" );
 #
 ####################################
 
+DeclareProperty( "IsHomalgExternalRingElementWithIOStream",
+        IsHomalgExternalRingElement );
+
 ## properties listed alphabetically (ignoring left/right):
 
 DeclareProperty( "IsGlobalDimensionFinite",
@@ -108,11 +111,11 @@ DeclareAttribute( "RingRelations",
 DeclareAttribute( "Zero",
         IsHomalgRing );
 
-## zero:
+## one:
 DeclareAttribute( "One",
         IsHomalgRing );
 
-## zero:
+## minus one:
 DeclareAttribute( "MinusOne",
         IsHomalgRing );
 
@@ -144,4 +147,6 @@ DeclareOperation( "HomalgExternalCASystemPID",
 DeclareGlobalFunction( "RingForHomalg" );
 
 DeclareGlobalFunction( "HomalgExternalRingElement" );
+
+DeclareGlobalFunction( "StringToElementStringList" );
 

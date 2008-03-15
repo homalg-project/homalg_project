@@ -1,3 +1,5 @@
+LoadPackage( "HomalgRings" );
+HOMALG_RINGS.color_display := true;
 sage_stream := LaunchSage( );
 ZZ := HomalgExternalObject( "ZZ", "Sage", sage_stream, IsSageIntegers );
 ZZ := RingForHomalg( ZZ );

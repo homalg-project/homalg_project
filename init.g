@@ -28,25 +28,3 @@ ReadPackage( "homalg", "gap/Service.gd" );
 ReadPackage( "homalg", "gap/Basic.gd" );
 ReadPackage( "homalg", "gap/Modules.gd" );
 
-ReadPackage( "homalg", "gap/IO.gd" );
-
-ReadPackage( "homalg", "gap/GAPHomalgTools.gd" );
-#ReadPackage( "homalg", "gap/GAPHomalgDefault.gd" );
-ReadPackage( "homalg", "gap/GAPHomalgBestBasis.gd" );
-
-ReadPackage( "homalg", "gap/GAPHomalgPIR.gd" );
-#ReadPackage( "homalg", "gap/GAPHomalgInvolutive.gd" );
-
-ReadPackage( "homalg", "gap/MapleHomalgTools.gd" );
-ReadPackage( "homalg", "gap/MapleHomalgDefault.gd" );
-ReadPackage( "homalg", "gap/MapleHomalgBestBasis.gd" );
-
-ReadPackage( "homalg", "gap/MapleHomalgPIR.gd" );
-ReadPackage( "homalg", "gap/MapleHomalgInvolutive.gd" );
-
-ReadPackage( "homalg", "gap/SageTools.gd" );
-ReadPackage( "homalg", "gap/SageDefault.gd" );
-ReadPackage( "homalg", "gap/SageBestBasis.gd" );
-
-ReadPackage( "homalg", "gap/SageIntegers.gd" );
-ReadPackage( "homalg", "gap/SageGF2.gd" );

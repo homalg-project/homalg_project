@@ -2362,9 +2362,9 @@ InstallMethod( ViewObj,
   function( o )
     
     if HasEval( o ) then
-        Print( "<A " );
+        Print( "<A" );
     else
-        Print( "<An unevaluated " );
+        Print( "<An unevaluated" );
     fi;
     
     Print( "homalg " );
@@ -2436,15 +2436,24 @@ InstallMethod( ViewObj,
         [ IsHomalgMatrix ],
         
   function( o )
+    local first_attribute;
     
-    if HasEval( o ) then
-        Print( "<A" );
-    else
+    first_attribute := true;
+    
+    if IsVoidMatrix( o ) then
+        Print( "<A void" );
+    elif IsInitialMatrix( o ) then
+        Print( "<An initial" );
+    elif not HasEval( o ) then
         Print( "<An unevaluated" );
+    else
+        Print( "<A" );
+        first_attribute := false;
     fi;
     
-    if HasIsZeroMatrix( o ) then ## if this method is applicable and HasIsZeroMatrix is set we already know that o is a non-zero homalg matrix
+    if HasIsZeroMatrix( o ) then ## if this method applies and HasIsZeroMatrix is set we already know that o is a non-zero homalg matrix
         Print( " non-zero" );
+        first_attribute := true;
     fi;
     
     if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
@@ -2455,7 +2464,7 @@ InstallMethod( ViewObj,
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
             Print( " strict lower triangular" );
         elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
-            if HasEval( o ) and not HasIsZeroMatrix( o ) then
+            if not first_attribute then
                 Print( "n upper triangular" );
             else
                 Print( " upper triangular" );
@@ -2464,10 +2473,18 @@ InstallMethod( ViewObj,
             Print( " lower triangular" );
         elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
             Print( " triangular" );
+        elif not first_attribute then
+            first_attribute := fail;
+        fi;
+        
+        if first_attribute <> fail then
+            first_attribute := true;
+        else
+            first_attribute := false;
         fi;
         
         if HasIsInvertibleMatrix( o ) and IsInvertibleMatrix( o ) then
-            if HasEval( o ) and not HasIsZeroMatrix( o ) then
+            if not first_attribute then
                 Print( "n invertible" );
             else
                 Print( " invertible" );
@@ -2523,21 +2540,3 @@ InstallMethod( Display,
     
 end);
 
-InstallMethod( Display,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( o )
-    local cas;
-    
-    cas := HomalgExternalCASystem( o );
-    
-    if Length( cas ) > 2 and LowercaseString( cas{[1..3]} ) = "gap" then
-        Print( HomalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
-    elif Length( cas ) > 4 and LowercaseString( cas{[1..5]} ) = "maple" then
-        Print( HomalgSendBlocking( [ "convert(", o, ",matrix)" ], "need_display" ) );
-    else
-        Print( HomalgSendBlocking( [ o ], "need_display" ) );
-    fi;
-    
-end);

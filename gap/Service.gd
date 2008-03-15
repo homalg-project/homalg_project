@@ -28,17 +28,17 @@ DeclareOperation( "TriangularBasisOfColumns",
 DeclareOperation( "TriangularBasisOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "BasisOfRows",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "BasisOfRowModule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "BasisOfColumns",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfColumnModule",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "BasisOfRowsCoeff",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "BasisOfColumnsCoeff",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZeroRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
@@ -46,20 +46,23 @@ DeclareOperation( "DecideZeroRows",
 DeclareOperation( "DecideZeroColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "DecideZero",
+DeclareOperation( "EffectivelyDecideZeroRows",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "EffectivelyDecideZeroColumns",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "SyzygiesGeneratorsOfRows",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "SyzygiesGeneratorsOfRows",
-        [ IsHomalgMatrix, IsList ] );
+DeclareOperation( "SyzygiesGeneratorsOfColumns",
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "SyzygiesGeneratorsOfColumns",
-        [ IsHomalgMatrix, IsList ] );
 
 ####################################
 #

@@ -32,32 +32,3 @@ ReadPackage( "homalg", "gap/Integers.gi" );
 #ReadPackage( "homalg", "gap/EDIM.gi" );
 ReadPackage( "homalg", "gap/Fields.gi" );
 
-ReadPackage( "homalg", "gap/gap.g" );
-ReadPackage( "homalg", "gap/sage.g" );
-ReadPackage( "homalg", "gap/singular.g" );
-ReadPackage( "homalg", "gap/maple9.g" );
-ReadPackage( "homalg", "gap/maple95.g" );
-ReadPackage( "homalg", "gap/maple10.g" );
-
-ReadPackage( "homalg", "gap/IO.gi" );
-
-ReadPackage( "homalg", "gap/GAPHomalgTools.gi" );
-#ReadPackage( "homalg", "gap/GAPHomalgDefault.gi" );
-ReadPackage( "homalg", "gap/GAPHomalgBestBasis.gi" );
-
-ReadPackage( "homalg", "gap/GAPHomalgPIR.gi" );
-#ReadPackage( "homalg", "gap/GAPHomalgInvolutive.gi" );
-
-ReadPackage( "homalg", "gap/MapleHomalgTools.gi" );
-ReadPackage( "homalg", "gap/MapleHomalgDefault.gi" );
-ReadPackage( "homalg", "gap/MapleHomalgBestBasis.gi" );
-
-ReadPackage( "homalg", "gap/MapleHomalgPIR.gi" );
-ReadPackage( "homalg", "gap/MapleHomalgInvolutive.gi" );
-
-ReadPackage( "homalg", "gap/SageTools.gi" );
-ReadPackage( "homalg", "gap/SageDefault.gi" );
-ReadPackage( "homalg", "gap/SageBestBasis.gi" );
-
-ReadPackage( "homalg", "gap/SageIntegers.gi" );
-ReadPackage( "homalg", "gap/SageGF2.gi" );

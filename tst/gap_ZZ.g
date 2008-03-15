@@ -1,3 +1,5 @@
+LoadPackage( "HomalgRings" );
+HOMALG_RINGS.color_display := true;
 gap_stream := LaunchGAP( );
 init := HomalgExternalObject( "", "GAP", gap_stream );
 HomalgSendBlocking( "LoadPackage(\"homalg\")", "execute_command", init );

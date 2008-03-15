@@ -1,5 +1,5 @@
   
-  [1m[4m[31m3. Examples[0m
+  [1X3 Examples[0X
   
   Here comes text.
   

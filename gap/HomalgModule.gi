@@ -746,7 +746,7 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
-            e := List( e, a -> HomalgExternalObject( a, HomalgExternalCASystem( R ) ) );
+            e := List( e, a -> HomalgExternalRingElement( a, HomalgExternalCASystem( R ) ) );
         fi;
         
         one := One( R );

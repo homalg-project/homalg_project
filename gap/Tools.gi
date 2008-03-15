@@ -10,9 +10,75 @@
 
 ####################################
 #
-# methods for operations:
+# methods for operations (you MUST replace for an external CAS):
 #
 ####################################
+
+##
+InstallMethod( Zero,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    local RP;
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.Zero) then
+        if IsFunction( RP!.Zero ) then
+            return RP!.Zero( R );
+        else
+            return RP!.Zero;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( One,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    local RP;
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.One) then
+        if IsFunction( RP!.One ) then
+            return RP!.One( R );
+        else
+            return RP!.One;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( MinusOne,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    local RP;
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.MinusOne) then
+        if IsFunction( RP!.MinusOne ) then
+            return RP!.MinusOne( R );
+        else
+            return RP!.MinusOne;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( Eval,				### defines: an initial matrix filled with zeros
@@ -460,6 +526,114 @@ InstallMethod( Eval,				### defines: Compose
 end );
 
 ##
+InstallMethod( NrRows,				### defines: NrRows
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.NrRows) then
+        return RP!.NrRows( C );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Length( Eval( C ) );
+    
+end );
+
+##
+InstallMethod( NrColumns,			### defines: NrColumns
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    if IsBound(RP!.NrColumns) then
+        return RP!.NrColumns( C );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Length( Eval( C )[ 1 ] );
+    
+end );
+
+####################################
+#
+# methods for operations (you probably want to replace for an external CAS):
+#
+####################################
+
+##
+InstallMethod( ZeroRows,			### defines: ZeroRows
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, M, z;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    M := DecideZero( C );
+    
+    if IsBound(RP!.ZeroRows) then
+        return RP!.ZeroRows( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    z := HomalgMatrix( "zero", 1, NrColumns( C ), R );
+    
+    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( M, [ a ] ) = z );
+    
+end );
+
+##
+InstallMethod( ZeroColumns,			### defines: ZeroColumns
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, M, z;
+    
+    R := HomalgRing( C );
+    
+    RP := HomalgTable( R );
+    
+    M := DecideZero( C );
+    
+    if IsBound(RP!.ZeroColumns) then
+        return RP!.ZeroColumns( M );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    z := HomalgMatrix( "zero", NrRows( C ), 1, R );
+    
+    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( M, [ a ] ) = z );
+    
+end );
+
+#############################################################################
+#
+# methods for operations: (you probably don't need to replace for an external CAS)
+#
+#############################################################################
+
+##
 InstallMethod( Eval,				### defines: AddRhs
         "for homalg matrices",
         [ IsHomalgMatrix and EvalAddRhs and HasPreEval ], ## don't remove HasPreEval
@@ -567,102 +741,6 @@ InstallMethod( Eval,
     #=====# begin of the core procedure #=====#
     
     return Eval( e );
-    
-end );
-
-##
-InstallMethod( NrRows,				### defines: NrRows
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    local R, RP;
-    
-    R := HomalgRing( C );
-    
-    RP := HomalgTable( R );
-    
-    if IsBound(RP!.NrRows) then
-        return RP!.NrRows( C );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    return Length( Eval( C ) );
-    
-end );
-
-##
-InstallMethod( NrColumns,			### defines: NrColumns
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    local R, RP;
-    
-    R := HomalgRing( C );
-    
-    RP := HomalgTable( R );
-    
-    if IsBound(RP!.NrColumns) then
-        return RP!.NrColumns( C );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    return Length( Eval( C )[ 1 ] );
-    
-end );
-
-##
-InstallMethod( ZeroRows,			### defines: ZeroRows
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    local R, RP, M, z;
-    
-    R := HomalgRing( C );
-    
-    RP := HomalgTable( R );
-    
-    M := DecideZero( C );
-    
-    if IsBound(RP!.ZeroRows) then
-        return RP!.ZeroRows( M );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    z := HomalgMatrix( "zero", 1, NrColumns( C ), R );
-    
-    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( M, [ a ] ) = z );
-    
-end );
-
-##
-InstallMethod( ZeroColumns,			### defines: ZeroColumns
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    local R, RP, M, z;
-    
-    R := HomalgRing( C );
-    
-    RP := HomalgTable( R );
-    
-    M := DecideZero( C );
-    
-    if IsBound(RP!.ZeroColumns) then
-        return RP!.ZeroColumns( M );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    z := HomalgMatrix( "zero", NrRows( C ), 1, R );
-    
-    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( M, [ a ] ) = z );
     
 end );
 

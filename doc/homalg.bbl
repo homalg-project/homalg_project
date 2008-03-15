@@ -1,11 +1,11 @@
-\begin{thebibliography}{BR07}
+\begin{thebibliography}{BR}
 
-\bibitem[BR07]{BR}
+\bibitem[BR]{BR}
 Mohamed Barakat and Daniel Robertz.
-\newblock {$\mathtt{homalg}$ -- an abstract package for homological algebra}.
-\newblock 2007.
-\newblock submitted. {\tt arXiv:math.AC/0701146} and
-  (\href{http://wwwb.math.rwth-aachen.de/homalg}{\tt
+\newblock {$\mathtt{homalg}$ -- {A} meta-package for homological algebra}.
+\newblock accepted for publication in Journal of Algebra and its Applications.
+  (\href{http://arxiv.org/abs/math.AC/0701146}{\tt arXiv:math.AC/0701146} and
+  \href{http://wwwb.math.rwth-aachen.de/homalg}{\tt
   http://wwwb.math.rwth-aachen.de/homalg}).
 
 \end{thebibliography}

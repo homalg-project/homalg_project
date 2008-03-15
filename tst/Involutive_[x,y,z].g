@@ -1,3 +1,5 @@
+LoadPackage("HomalgRings.g");
+HOMALG_RINGS.color_display := true;
 maple_stream := LaunchMaple9( );
 init := HomalgExternalObject( "", "Maple", maple_stream );
 HomalgSendBlocking( "with(Involutive): with(homalg)", "execute_command", init );

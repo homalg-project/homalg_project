@@ -37,7 +37,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, U )
     local R, RP;
@@ -77,7 +77,7 @@ end );
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, V )
     local R, RP, T, U;
@@ -94,11 +94,10 @@ InstallMethod( TriangularBasisOfColumns,
     
     T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
     
-    SetEvalInvolution( V, U );
+    SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
     SetNrRows( V, NrColumns( U ) );
     SetNrColumns( V, NrRows( U ) );
-    SetIsFullRowRankMatrix( V, true );
-    SetIsFullColumnRankMatrix( V, true );
+    SetIsInvertibleMatrix( V, true );
     
     return T;
     
@@ -251,162 +250,58 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
 end );
 
 ##
-InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-level))
-        "for homalg matrices",
-	[ IsHomalgMatrix ],
+InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
+        "for a homalg matrix",
+	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M )
-    local R, RP, ring_rel, rel, Mrel, side, zz;
+  function( M, U )
+    local R, RP, bas;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
-  
-    if IsBound(RP!.BasisOfRows) then
-        return RP!.BasisOfRows( M );
-    fi;
     
-    if not HasRingRelations( R ) then
-        return BasisOfRowModule( M );
+    if IsBound(RP!.BasisOfRowsCoeff) then
+        return RP!.BasisOfRowsCoeff( M, U );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    ring_rel := RingRelations( R );
+    bas := BasisOfRows( AddRhs( M ) );
     
-    rel := MatrixOfRelations( ring_rel );
+    SetPreEval( U, RightHandSide( bas ) ); ResetFilterObj( U, IsVoidMatrix );
+    SetNrRows( U, NrRows( bas ) );
+    SetNrColumns( U, NrRows( M ) );
     
-    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
-    
-    Mrel := UnionOfRows( M, rel );
-    
-    if HasRightHandSide( M ) then
-        side := RightHandSide( M );
-        zz := HomalgMatrix( "zero", NrRows( rel ), NrColumns( side ), R );
-        SetRightHandSide( Mrel, UnionOfRows( side, zz ) );
-    fi;
-    
-    return BasisOfRowModule( Mrel );
+    return bas;
     
 end );
 
 ##
-InstallMethod( BasisOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix ],
+InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
+        "for a homalg matrix",
+	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M )
-    local C, rhs;
-    
-    C := HomalgMatrix( "zero", 0, NrColumns( M ), HomalgRing( M ) );
-    
-    if HasRightHandSide( M ) then
-        rhs := RightHandSide( M );
-        SetRightHandSide( C, HomalgMatrix( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
-        SetCompatibilityConditions( C, rhs );
-    fi;
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( BasisOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    local C, rhs;
-    
-    C := HomalgMatrix( "identity", NrRows( M ), HomalgRing( M ) );
-    
-    if HasRightHandSide( M ) then
-        rhs := RightHandSide( M );
-        SetRightHandSide( C, rhs );
-        SetCompatibilityConditions( C, HomalgMatrix( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
-    fi;
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (high-level))
-        "for homalg matrices",
-	[ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP, ring_rel, rel, Mrel, side, zz;
+  function( M, V )
+    local R, RP, U, ibas;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
-  
-    if IsBound(RP!.BasisOfColumns) then
-        return RP!.BasisOfColumns( M );
-    fi;
     
-    if not HasRingRelations( R ) then
-        return BasisOfColumnModule( M );
+    if IsBound(RP!.BasisOfColumnsCoeff) then
+        return RP!.BasisOfColumnsCoeff( M, V );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    ring_rel := RingRelations( R );
+    U := HomalgMatrix( "void", R );
     
-    rel := MatrixOfRelations( ring_rel );
+    ibas := BasisOfRowsCoeff( Involution( M ), U );
     
-    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+    SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
     
-    Mrel := UnionOfColumns( M, rel );
-    
-    if HasBottomSide( M ) then
-        side := BottomSide( M );
-        zz := HomalgMatrix( "zero", NrRows( side ), NrColumns( rel ), R );
-        SetBottomSide( Mrel, UnionOfColumns( side, zz ) );
-    fi;
-    
-    return BasisOfColumnModule( Mrel );
-    
-end );
-
-##
-InstallMethod( BasisOfColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    local C, bts;
-    
-    C := HomalgMatrix( "zero", NrRows( M ), 0, HomalgRing( M ) );
-    
-    if HasBottomSide( M ) then
-        bts := BottomSide( M );
-        SetBottomSide( C, HomalgMatrix( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
-        SetCompatibilityConditions( C, bts );
-    fi;
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( BasisOfColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    local C, bts;
-    
-    C := HomalgMatrix( "identity", NrColumns( M ), HomalgRing( M ) );
-    
-    if HasBottomSide( M ) then
-        bts := BottomSide( M );
-        SetBottomSide( C, bts );
-        SetCompatibilityConditions( C, HomalgMatrix( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
-    fi;
-    
-    return C;
+    return Involution( ibas );
     
 end );
 
@@ -567,60 +462,88 @@ InstallMethod( DecideZeroColumns,
 end );
 
 ##
-InstallMethod( DecideZero,
+InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows (ReduceCoeff)
+        "for a homalg matrix",
+	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        
+  function( A, B, U )
+    local R, RP, zz, A_zz, red;
+    
+    R := HomalgRing( B );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.EffectivelyDecideZeroRows) then
+        return RP!.EffectivelyDecideZeroRows( A, B, U );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    zz := HomalgMatrix( "zero", NrRows( A ), NrRows( B ), R );
+    
+    A_zz := AddRhs( A, zz );
+    
+    red := DecideZeroRows( A_zz, AddRhs( B ) );
+    
+    SetPreEval( U, RightHandSide( red ) ); ResetFilterObj( U, IsVoidMatrix );
+    SetNrRows( U, NrRows( red ) );
+    SetNrColumns( U, NrRows( A ) );
+    
+    return red;
+    
+end );
+
+##
+InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroColumns (ReduceCoeff)
+        "for a homalg matrix",
+	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        
+  function( A, B, V )
+    local R, RP, U, ired;
+    
+    R := HomalgRing( B );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.EffectivelyDecideZeroColumns) then
+        return RP!.EffectivelyDecideZeroColumns( A, B, V );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    U := HomalgMatrix( "void", R );
+    
+    ired := EffectivelyDecideZeroRows( Involution( A ), Involution( B ), U );
+    
+    SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
+    
+    return Involution( ired );
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfRows,
         "for homalg matrices",
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ring_rel, rel, red;
-    
-    if HasIsReducedModuloRingRelations( M ) and IsReducedModuloRingRelations( M ) then
-        return M;
-    fi;
-    
-    ## the upper exit condition and setting SetIsReducedModuloRingRelations to true in the following
-    ## avoids infinite loops when IsZeroMatrix is called (as below), since the latter, in turn,
-    ## calls DecideZero first!
+    local R, RP, L, BL;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
   
-    if IsBound(RP!.DecideZero) then
-        red := RP!.DecideZero( M );
-        
-        SetIsReducedModuloRingRelations( red, true );
-        IsZeroMatrix( red );
-        
-        return red;
-    fi;
-    
-    if not HasRingRelations( R ) then
-        
-        SetIsReducedModuloRingRelations( M, true );
-        IsZeroMatrix( M );
-        
-        return M;
+    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        return RP!.SyzygiesGeneratorsOfRows( M );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    ring_rel := RingRelations( R );
+    L := AddRhs( M );
     
-    rel := MatrixOfRelations( ring_rel );
+    BL := BasisOfRows( L );
     
-    if IsHomalgLeftRelationsRep( ring_rel ) then
-        rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
-        red := DecideZeroRows( M, rel );
-    else
-        rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
-        red := DecideZeroColumns( M, rel );
-    fi;
-    
-    SetIsReducedModuloRingRelations( red, true );
-    IsZeroMatrix( red );
-    
-    return red;
+    return CompatibilityConditions( BL );
     
 end );
 
@@ -657,28 +580,24 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
 end );
 
 ##
-InstallMethod( SyzygiesGeneratorsOfRows,
+InstallMethod( SyzygiesGeneratorsOfColumns,
         "for homalg matrices",
-	[ IsHomalgMatrix, IsList and IsEmpty ],
+	[ IsHomalgMatrix ],
         
-  function( M1, M2 )
-    local R, RP, L, BL;
+  function( M )
+    local R, RP;
     
-    R := HomalgRing( M1 );
+    R := HomalgRing( M );
     
     RP := HomalgTable( R );
   
-    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        return RP!.SyzygiesGeneratorsOfRows( M1, M2 );
+    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        return RP!.SyzygiesGeneratorsOfColumns( M );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    L := AddRhs( M1 );
-    
-    BL := BasisOfRows( L );
-    
-    return CompatibilityConditions( BL );
+    return SyzygiesGeneratorsOfRows( Involution( M ) );
     
 end );
 
@@ -688,7 +607,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP, id, zz, L, BL;
+    local R, RP;
     
     R := HomalgRing( M1 );
     
@@ -700,43 +619,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     #=====# begin of the core procedure #=====#
     
-    id := HomalgMatrix( "identity", NrColumns( M1 ), R );
-    
-    zz := HomalgMatrix( "zero", NrColumns( M1 ), NrColumns( M2 ), R );
-    
-    L := UnionOfColumns( M1, M2 );
-    
-    SetBottomSide( L, UnionOfColumns( id, zz ) );
-    
-    BL := BasisOfColumns( L );
-    
-    return CompatibilityConditions( BL );
-    
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix, IsList and IsEmpty ],
-        
-  function( M1, M2 )
-    local R, RP, L, BL;
-    
-    R := HomalgRing( M1 );
-    
-    RP := HomalgTable( R );
-  
-    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        return RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    L := AddBts( M1 );
-    
-    BL := BasisOfColumns( L );
-    
-    return CompatibilityConditions( BL );
+    return SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) );
     
 end );
 

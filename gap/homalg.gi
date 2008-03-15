@@ -16,7 +16,7 @@
 
 # a central place for configuration variables:
 
-InstallValue( HOMALG, rec( SaveHomalgMaximumBackStream := false ) );
+InstallValue( HOMALG, rec( ) );
 
 # a global function for logical implications:
 

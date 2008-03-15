@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2006.8.28)  14 MAR 2007 19:38
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2008.1.23)  15 MAR 2008 21:35
 entering extended mode
 **homalg
 (./homalg.tex
@@ -164,7 +164,7 @@ Package hyperref Info: Link coloring ON on input line 2636.
 \c@Item=\count95
 \c@Hfootnote=\count96
 )
-*hyperref using default driver hpdftex*
+*hyperref using driver hpdftex*
 (/sw/share/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2003/11/30 v6.74m Hyperref driver for pdfTeX
 
@@ -186,30 +186,29 @@ File: upsy.fd 2001/06/04 font definitions for U/psy.
 \pagenrlog=\write6
 \openout6 = `homalg.pnr'.
 
-\backslashbox=\box27
  (./homalg.aux)
 \openout1 = `homalg.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 51.
-LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 51
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 43.
+LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 43
 .
 
 (/sw/share/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
 
 (/sw/share/texmf-dist/tex/context/base/supp-pdf.tex
 (/sw/share/texmf-dist/tex/context/base/supp-mis.tex
@@ -220,7 +219,7 @@ loading : Context Support Macros / Miscellaneous (2004.10.26)
 \scratchdimen=\dimen106
 \scratchskip=\skip43
 \scratchmuskip=\muskip11
-\scratchbox=\box28
+\scratchbox=\box27
 \scratchread=\read2
 \scratchwrite=\write7
 \zeropoint=\dimen107
@@ -230,7 +229,7 @@ loading : Context Support Macros / Miscellaneous (2004.10.26)
 \thousandpoint=\dimen110
 \onerealpoint=\dimen111
 \emptytoks=\toks19
-\nextbox=\box29
+\nextbox=\box28
 \nextdepth=\dimen112
 \everyline=\toks20
 \!!counta=\count101
@@ -245,27 +244,27 @@ loading : Context Support Macros / PDF (2004.03.26)
 \MPnumerator=\count107
 \everyMPtoPDFconversion=\toks21
 )
-Package hyperref Info: Link coloring ON on input line 51.
+Package hyperref Info: Link coloring ON on input line 43.
  (/sw/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2003/12/03 v2.21 Cross-referencing by name of section
 \c@section@level=\count108
 )
-LaTeX Info: Redefining \ref on input line 51.
-LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \ref on input line 43.
+LaTeX Info: Redefining \pageref on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 55.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 47.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 55.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 47.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 22.39185pt on input line 55.
+(Font)              scaled to size 22.39185pt on input line 47.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 58.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 50.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 62.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--74
+Underfull \hbox (badness 10000) in paragraph at lines 58--66
 
  []
 
@@ -273,14 +272,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--74
 
 {/sw/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 80.
+(Font)              Font shape `OMS/pzccm/m/n' tried instead on input line 72.
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--84
+Underfull \hbox (badness 10000) in paragraph at lines 74--76
 
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 7.19995pt on input line 84.
+(Font)              scaled to size 7.19995pt on input line 76.
 [2] (./homalg.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
@@ -328,13 +327,13 @@ LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
 ]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 92.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 84.
 [4
 
 ]
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 9.85492pt on input line 118.
+(Font)              scaled to size 9.85492pt on input line 114.
 [5
 
 ]
@@ -345,35 +344,23 @@ Chapter 3.
 
  [6
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 10--10
-[]\OT1/ptm/m/n/10.95 Mohamed Barakat and Daniel Robertz.  $[]$ -- an ab-stract 
-pack-age
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 10--10
-\OT1/ptm/m/n/10.95 for ho-mo-log-i-cal al-ge-bra.  2007.  sub-mit-ted. \OT1/pcr
-/m/n/10.95 arXiv:math.AC/0701146 \OT1/ptm/m/n/10.95 and
- []
-
-) (./homalg.ind [7
+]) (./homalg.ind [7
 
 ] [8
 
 
 ]) (./homalg.aux) ) 
 Here is how much of TeX's memory you used:
- 3553 strings out of 94500
- 48180 string characters out of 1176114
- 94169 words of memory out of 1000000
- 6633 multiletter control sequences out of 10000+50000
- 41660 words of font info for 82 fonts, out of 500000 for 2000
- 580 hyphenation exceptions out of 1000
- 27i,6n,27p,234b,275s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 3558 strings out of 94500
+ 48299 string characters out of 1176114
+ 94136 words of memory out of 1500000
+ 6631 multiletter control sequences out of 10000+50000
+ 41660 words of font info for 82 fonts, out of 1200000 for 2000
+ 580 hyphenation exceptions out of 8191
+ 27i,6n,27p,234b,275s stack positions out of 5000i,500n,6000p,200000b,5000s
 PDF statistics:
- 92 PDF objects out of 300000
- 18 named destinations out of 131072
+ 100 PDF objects out of 65536
+ 25 named destinations out of 20000
  17 words of extra memory for PDF output out of 65536
 </sw/share/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb>{/sw
 /share/texmf-dist/fonts/enc/dvips/psnfss/8r.enc}</sw/share/texmf-dist/fonts/typ
@@ -384,4 +371,4 @@ imes/utmr8a.pfb></sw/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></sw/s
 hare/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></sw/share/texmf-dist/fonts/ty
 pe1/urw/helvetic/uhvb8a.pfb></sw/share/texmf-dist/fonts/type1/urw/times/utmb8a.
 pfb>
-Output written on homalg.pdf (8 pages, 97285 bytes).
+Output written on homalg.pdf (8 pages, 98497 bytes).

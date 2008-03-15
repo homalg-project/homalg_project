@@ -16,17 +16,14 @@
 
 # basic operations:
 
-DeclareOperation( "BasisOfRowsCoeff",
+DeclareOperation( "BasisOfRows",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "BasisOfColumnsCoeff",
+DeclareOperation( "BasisOfColumns",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "EffectivelyDecideZeroRows",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "EffectivelyDecideZeroColumns",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
+DeclareOperation( "DecideZero",
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesBasisOfRows",
         [ IsHomalgMatrix ] );

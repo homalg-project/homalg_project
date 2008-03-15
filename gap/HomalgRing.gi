@@ -205,28 +205,6 @@ InstallMethod( Zero,
 end );
 
 ##
-InstallMethod( Zero,
-        "for homalg rings",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    local RP;
-    
-    RP := HomalgTable( R );
-    
-    if IsBound(RP!.Zero) then
-        if IsFunction( RP!.Zero ) then
-            return RP!.Zero( R );
-        else
-            return RP!.Zero;
-        fi;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallMethod( One,
         "for homalg rings",
         [ IsHomalgInternalRingRep ],
@@ -238,28 +216,6 @@ InstallMethod( One,
 end );
 
 ##
-InstallMethod( One,
-        "for homalg rings",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    local RP;
-    
-    RP := HomalgTable( R );
-    
-    if IsBound(RP!.One) then
-        if IsFunction( RP!.One ) then
-            return RP!.One( R );
-        else
-            return RP!.One;
-        fi;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallMethod( MinusOne,
         "for homalg rings",
         [ IsHomalgInternalRingRep ],
@@ -267,28 +223,6 @@ InstallMethod( MinusOne,
   function( R )
     
     return -One( R!.ring );
-    
-end );
-
-##
-InstallMethod( MinusOne,
-        "for homalg rings",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    local RP;
-    
-    RP := HomalgTable( R );
-    
-    if IsBound(RP!.MinusOne) then
-        if IsFunction( RP!.MinusOne ) then
-            return RP!.MinusOne( R );
-        else
-            return RP!.MinusOne;
-        fi;
-    fi;
-    
-    TryNextMethod( );
     
 end );
 
@@ -359,6 +293,7 @@ end );
 #
 ####################################
 
+##
 InstallGlobalFunction( RingForHomalg,
   function( arg )
     local nargs, homalg_ring, table;
@@ -393,12 +328,7 @@ InstallGlobalFunction( RingForHomalg,
     
 end );
 
-####################################
-#
-# constructor functions and methods:
-#
-####################################
-
+##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
     local nargs, properties, ar, stream, obj;
@@ -438,6 +368,14 @@ InstallGlobalFunction( HomalgExternalRingElement,
     fi;
     
     return obj;
+    
+end );
+
+##
+InstallGlobalFunction( StringToElementStringList,
+  function( arg )
+    
+    return SplitString( arg[1], ",", "[ ]\n" );
     
 end );
 

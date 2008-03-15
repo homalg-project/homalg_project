@@ -25,7 +25,7 @@ InstallMethod( CreateHomalgTable,
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
-	       RingName := "Field",
+               RingName := "Field",
                
                ## Must be defined if other functions are not defined
                    
@@ -50,6 +50,7 @@ InstallMethod( CreateHomalgTable,
                    # assign U:
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        SetEval( arg[2], Concatenation( N.coeffs, N.relations ) );
+                       ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );

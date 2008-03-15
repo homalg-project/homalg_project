@@ -1,12 +1,13 @@
   
   
-  [1m[4m[31mReferences[0m
+  [1XReferences[0X
   
-  [33m[BR07]  [0m[1m[31mBarakat,  M.  and  Robertz,  D. [0m, [34m$\mathtthomalg$ -- an abstract
-  package  for  homological  algebra[0m,  ,  [34m[0m  ()  (2007),  , (submitted. \tt
-  arXiv:math.AC/0701146                                                and
-  (\hrefhttp://wwwb.math.rwth-aachen.de/homalg\tt
-  http://wwwb.math.rwth-aachen.de/homalg))
+  [[20XBR[15X]  [16XBarakat,  M.  and  Robertz, D.[15X, [17Xmathtthomalg -- A meta-package for
+  homological  algebra[15X,  [18X[15X, [19X[15X, (), , (accepted for publication in Journal of
+  Algebra                and               its               Applications.
+  (\href{http://arxiv.org/abs/math.AC/0701146}{\tt  arXiv:math.AC/0701146}
+  and                    \href{http://wwwb.math.rwth-aachen.de/homalg}{\tt
+  http://wwwb.math.rwth-aachen.de/homalg}))
   
   
   

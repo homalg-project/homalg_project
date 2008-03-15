@@ -1,17 +1,17 @@
   
-  [1m[4m[31m1. Introduction[0m
+  [1X1 Introduction[0X
   
   
-  [1m[4m[31m1.1 Philosophy[0m
+  [1X1.1 Philosophy[0X
   
   This package is about homological algebra. To be written further.
   
   
-  [1m[4m[31m1.2 Overview over this manual[0m
+  [1X1.2 Overview over this manual[0X
   
-  Chapter  [1m2.[0m  describes  the installation of this package. [22m[36mMore text on other
+  Chapter  [14X2[0m  describes  the  installation of this package. [13XMore text on other
   chapters to be written.[0m
   
-  Finally,  Chapter  [1m3.[0m  shows  instructive  examples  for  the  usage of this
-  package. The main reference for the Maple implementation is [BR07].
+  Finally, Chapter [14X3[0m shows instructive examples for the usage of this package.
+  The main reference for the Maple implementation is [BR].
   

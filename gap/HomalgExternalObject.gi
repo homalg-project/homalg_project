@@ -48,7 +48,7 @@ InstallMethod( \=,
   function( o1, o2 )
     local components;
     
-    components := [ "pointer", "cas", "cas_version" ];
+    components := [ "pointer", "cas" ]; ## don't add more!!!
     
     if IsSubset( NamesOfComponents( o1 ), components )
        and IsSubset( NamesOfComponents( o2 ), components ) then

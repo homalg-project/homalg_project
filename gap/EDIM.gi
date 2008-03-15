@@ -51,19 +51,19 @@ InstallMethod( CreateHomalgTable,
                    # return U:
                    if nargs > 1 then
                        SetEval( arg[2], N[2] );
-		       SetNrRows( arg[2], NrRows( M ) );
-		       SetNrColumns( arg[2], NrRows( M ) );
-		       SetIsFullRowRankMatrix( arg[2], true );
-		       SetIsFullColumnRankMatrix( arg[2], true );
+                       ResetFilterObj( arg[2], IsVoidMatrix );
+                       SetNrRows( arg[2], NrRows( M ) );
+                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    # return V:
                    if nargs > 2 then
                        SetEval( arg[3], N[3] );
-		       SetNrRows( arg[3], NrColumns( M ) );
-		       SetNrColumns( arg[3], NrColumns( M ) );
-		       SetIsFullRowRankMatrix( arg[3], true );
-		       SetIsFullColumnRankMatrix( arg[3], true );
+                       ResetFilterObj( arg[3], IsVoidMatrix );
+                       SetNrRows( arg[3], NrColumns( M ) );
+                       SetNrColumns( arg[3], NrColumns( M ) );
+                       SetIsInvertibleMatrix( arg[3], true );
                    fi;
                    
                    if nargs > 1 then
@@ -72,7 +72,7 @@ InstallMethod( CreateHomalgTable,
                    
                    S := HomalgMatrix( N, R );
                    
-		   SetIsDiagonalMatrix( S, true );
+                   SetIsDiagonalMatrix( S, true );
      
                    return S;
                    
@@ -118,10 +118,9 @@ InstallMethod( CreateHomalgTable,
                    # return U:
                    if nargs > 1 then
                        SetEval( arg[2], N[2] );
-		       SetNrRows( arg[2], NrRows( M ) );
-		       SetNrColumns( arg[2], NrRows( M ) );
-		       SetIsFullRowRankMatrix( arg[2], true );
-		       SetIsFullColumnRankMatrix( arg[2], true );
+                       SetNrRows( arg[2], NrRows( M ) );
+                       SetNrColumns( arg[2], NrRows( M ) );
+                       SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
                    if nargs > 1 then
@@ -130,12 +129,12 @@ InstallMethod( CreateHomalgTable,
                    
                    H := HomalgMatrix( N, R );
                    
-		   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
+                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( H, true );   
                    else
                        SetIsUpperTriangularMatrix( H, true );
                    fi;
-		   
+                   
                    return H;
                    
                  end
