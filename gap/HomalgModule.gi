@@ -992,7 +992,7 @@ InstallMethod( LeftPresentation,
   function( rel, ring )
     local R, gens, rels, M, is_zero_module;
     
-    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
     
     is_zero_module := false;
     
@@ -1042,7 +1042,7 @@ InstallMethod( LeftPresentation,
   function( gen, rel, ring )
     local R, gens, rels, M;
     
-    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
     
     gens := CreateSetsOfGeneratorsForLeftModule( gen, R );
     
@@ -1077,7 +1077,7 @@ InstallMethod( RightPresentation,
   function( rel, ring )
     local R, gens, rels, M, is_zero_module;
     
-    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
     
     is_zero_module := false;
     
@@ -1127,7 +1127,7 @@ InstallMethod( RightPresentation,
   function( gen, rel, ring )
     local R, gens, rels, M;
     
-    R := RingForHomalg( ring, CreateHomalgTable( ring ) );
+    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
     
     gens := CreateSetsOfGeneratorsForRightModule( gen, R );
     

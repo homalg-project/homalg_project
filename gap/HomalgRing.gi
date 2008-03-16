@@ -294,7 +294,7 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( RingForHomalg,
+InstallGlobalFunction( CreateHomalgRing,
   function( arg )
     local nargs, homalg_ring, table;
     
@@ -401,7 +401,8 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A homalg external ring>" );
+    Print( "<A homalg external object residing in the CAS " );
+    Print( HomalgExternalCASystem( o ), ">" ); 
     
 end );
 

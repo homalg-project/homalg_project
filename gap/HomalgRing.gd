@@ -144,7 +144,7 @@ DeclareOperation( "HomalgExternalCASystemPID",
 
 # constructor methods:
 
-DeclareGlobalFunction( "RingForHomalg" );
+DeclareGlobalFunction( "CreateHomalgRing" );
 
 DeclareGlobalFunction( "HomalgExternalRingElement" );
 

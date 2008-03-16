@@ -190,7 +190,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A homalg external object for the CAS " );
+    Print( "<A homalg external object residing in the CAS " );
     Print( HomalgExternalCASystem( o ), ">" ); 
     
 end );
