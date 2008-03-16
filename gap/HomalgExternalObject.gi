@@ -104,6 +104,32 @@ InstallMethod( HomalgExternalCASystemVersion,
     
 end );
 
+##
+InstallMethod( HomalgStream,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectWithIOStream ],
+        
+  function( o )
+    
+    if IsBound(o!.stream) then
+        return o!.stream;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( HomalgExternalCASystemPID,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectWithIOStream ],
+        
+  function( o )
+    
+    return HomalgStream( o ).pid;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

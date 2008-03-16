@@ -753,7 +753,7 @@ InstallMethod( HomalgPointer,
         
   function( M )
     
-    return HomalgPointer( Eval( M ) );
+    return HomalgPointer( Eval( M ) ); ## here we must evaluate
     
 end );
 
@@ -763,8 +763,15 @@ InstallMethod( HomalgExternalCASystem,
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
+    local R;
     
-    return HomalgExternalCASystem( Eval( M ) );
+    R := HomalgRing( M );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return HomalgExternalCASystem( R ); ## avoid evaluating the matrix
+    else
+        return HomalgExternalCASystem( Eval( M ) );
+    fi;
     
 end );
 
@@ -774,8 +781,15 @@ InstallMethod( HomalgExternalCASystemVersion,
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
+    local R;
     
-    return HomalgExternalCASystemVersion( Eval( M ) );
+    R := HomalgRing( M );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return HomalgExternalCASystemVersion( R ); ## avoid evaluating the matrix
+    else
+        return HomalgExternalCASystemVersion( Eval( M ) );
+    fi;
     
 end );
 
@@ -785,8 +799,15 @@ InstallMethod( HomalgStream,
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
+    local R;
     
-    return HomalgStream( Eval( M ) );
+    R := HomalgRing( M );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return HomalgStream( R ); ## avoid evaluating the matrix
+    else
+        return HomalgStream( Eval( M ) );
+    fi;
     
 end );
 
@@ -796,8 +817,15 @@ InstallMethod( HomalgExternalCASystemPID,
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
+    local R;
     
-    return HomalgExternalCASystemPID( Eval( M ) );
+    R := HomalgRing( M );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return HomalgExternalCASystemPID( R ); ## avoid evaluating the matrix
+    else
+        return HomalgExternalCASystemPID( Eval( M ) );
+    fi;
     
 end );
 

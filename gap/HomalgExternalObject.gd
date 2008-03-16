@@ -45,6 +45,12 @@ DeclareOperation( "HomalgExternalCASystem",
 DeclareOperation( "HomalgExternalCASystemVersion",
         [ IsHomalgExternalObject ] );
 
+DeclareOperation( "HomalgStream",
+        [ IsHomalgExternalObject ] );
+
+DeclareOperation( "HomalgExternalCASystemPID",
+        [ IsHomalgExternalObject ] );
+
 # constructor methods:
 
 DeclareGlobalFunction( "HomalgExternalObject" );
