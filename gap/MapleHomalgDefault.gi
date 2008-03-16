@@ -55,7 +55,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrColumns( A ), R );
+                   N := HomalgMatrix( "void", NrRows( A ), NrColumns( A ), R );
                    
                    HomalgSendBlocking( [ N, " := `homalg/Reduce`(", A, B, R, ")" ], "need_command" );
                    
@@ -69,7 +69,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrColumns( A ), R );
+                   N := HomalgMatrix( "void", NrRows( A ), NrColumns( A ), R );
                    
                    HomalgSendBlocking( [ N, " := `homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[2])" ], "need_command" );
                    
