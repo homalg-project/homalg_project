@@ -16,5 +16,5 @@ wrel := HomalgRelationsForLeftModule( wmat );
 W := Presentation( wrel );
 BasisOfModule( W );
 BasisOfModule( W );
-SyzygiesGenerators( W );
-Display(last);
+rsyz:=SyzygiesGenerators( W );
+Display(rsyz);
