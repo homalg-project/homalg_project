@@ -340,10 +340,10 @@ InstallGlobalFunction( HomalgExternalRingElement,
     for ar in arg{[ 3 .. nargs ]} do
         if not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
             stream := ar;
-        elif IsOperation( ar ) then
+        elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsRecord, IsOperation } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsRecord, IsFilter } bur recieved: ", ar,"\n" );
         fi;
     od;
     
