@@ -14,12 +14,6 @@
 #
 ####################################
 
-DeclareOperation( "HomalgStream",
-        [ IsHomalgExternalObject ] );
-
-DeclareOperation( "HomalgExternalCASystemPID",
-        [ IsHomalgExternalObject ] );
-
 DeclareGlobalFunction( "HomalgCreateStringForExternalCASystem" );
 
 DeclareGlobalFunction( "HomalgSendBlocking" ); ## this name was implicitly suggested by Max Neunhoeffer ;)

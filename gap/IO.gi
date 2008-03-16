@@ -15,32 +15,6 @@
 ####################################
 
 ##
-InstallMethod( HomalgStream,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
-        
-  function( o )
-    
-    if IsBound(o!.stream) then
-        return o!.stream;
-    fi;
-    
-    return fail;
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystemPID,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
-        
-  function( o )
-    
-    return HomalgStream( o ).pid;
-    
-end );
-
-##
 InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
   function( L )
     local l, s;
@@ -52,7 +26,7 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
     l := Length( L );
     
     s := List( [ 1 .. l ], function( a )
-                             local R, CAS, stream, t;
+                             local CAS, stream, t;
                              if IsString( L[a] ) then
                                  return L[a];
                              else
@@ -63,9 +37,8 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
                                      if not IsVoidMatrix( L[a] ) or HasEval( L[a] ) then
                                          t := HomalgPointer( L[a] ); ## now we enforce evaluation!!!
                                      else
-                                         R := HomalgRing( L[a] );
-                                         CAS := HomalgExternalCASystem( R );
-                                         stream := HomalgStream( R );
+                                         CAS := HomalgExternalCASystem( L[a] );
+                                         stream := HomalgStream( L[a] );
                                          stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
                                          t := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
                                          MakeImmutable( t );
@@ -132,13 +105,13 @@ InstallGlobalFunction( HomalgSendBlocking,
         elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
             R := ar;
             ext_obj := R;
-        elif not IsBound( ext_obj )
+        elif not IsBound( ext_obj ) and IsHomalgExternalObject( ar )
           and HasIsHomalgExternalObjectWithIOStream( ar ) and IsHomalgExternalObjectWithIOStream( ar ) then
             ext_obj := ar;
-        elif IsOperation( ar ) then
+        elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsString, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsString, IsFilter, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
         fi;
     od;
     
@@ -152,7 +125,6 @@ InstallGlobalFunction( HomalgSendBlocking,
             for ar in e do
                 if IsHomalgExternalMatrixRep( ar ) then
                     R := HomalgRing( ar );
-                    ext_obj := R;
                     break;
                 elif IsHomalgExternalRingRep( ar ) then
                     R := ar;

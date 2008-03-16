@@ -1,10 +1,11 @@
 #############################################################################
 ##
-##  GAPHomalgPIR.gd           HomalgRings package            Mohamed Barakat
+##  MapleHomalgOreModules.gd  HomalgRings package            Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the external rings provided by the GAP package homalg.
+##  Declarations for the rings provided by the Maple package OreModules
+##  accessed via the Maple implementation of homalg.
 ##
 #############################################################################
 
@@ -15,14 +16,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgPIRGAPRing",
+DeclareProperty( "IsHomalgOreModulesMapleRing",
         IsHomalgRing );
-
-####################################
-#
-# synonyms:
-#
-####################################
-
-DeclareSynonym( "IsHomalgPIRGapRing",
-        IsHomalgPIRGAPRing );

@@ -16,7 +16,7 @@ ReadPackage( "HomalgRings", "gap/HomalgRings.gd" );
 ReadPackage( "HomalgRings", "gap/IO.gd" );
 
 ReadPackage( "HomalgRings", "gap/GAPHomalgTools.gd" );
-#ReadPackage( "HomalgRings", "gap/GAPHomalgDefault.gd" );
+ReadPackage( "HomalgRings", "gap/GAPHomalgDefault.gd" );
 ReadPackage( "HomalgRings", "gap/GAPHomalgBestBasis.gd" );
 
 ReadPackage( "HomalgRings", "gap/GAPHomalgPIR.gd" );
@@ -28,6 +28,9 @@ ReadPackage( "HomalgRings", "gap/MapleHomalgBestBasis.gd" );
 
 ReadPackage( "HomalgRings", "gap/MapleHomalgPIR.gd" );
 ReadPackage( "HomalgRings", "gap/MapleHomalgInvolutive.gd" );
+ReadPackage( "HomalgRings", "gap/MapleHomalgJanet.gd" );
+ReadPackage( "HomalgRings", "gap/MapleHomalgJanetOre.gd" );
+ReadPackage( "HomalgRings", "gap/MapleHomalgOreModules.gd" );
 
 ReadPackage( "HomalgRings", "gap/SageTools.gd" );
 ReadPackage( "HomalgRings", "gap/SageDefault.gd" );

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SageDefault.gd            HomalgRings package              Simon Görtzen
+##  GAPHomalgDefault.gd       HomalgRings package            Mohamed Barakat
 ##
-##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the rings provided by sage.
+##  Declarations for the external rings provided by the GAP package homalg.
 ##
 #############################################################################
 
@@ -15,7 +15,7 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgSageRing",
+DeclareProperty( "IsHomalgGAPRing",
         IsHomalgRing );
 
 ####################################
@@ -24,5 +24,5 @@ DeclareProperty( "IsHomalgSageRing",
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForSageDefault" );
+DeclareGlobalVariable( "CommonHomalgTableForGAPDefault" );
 
