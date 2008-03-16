@@ -23,7 +23,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                
                BasisOfRowModule :=
                  function( M )
-                   local R;
+                   local R, N;
                    
                    R := HomalgRing( M );
                    
