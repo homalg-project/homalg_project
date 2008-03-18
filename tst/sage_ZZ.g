@@ -1,4 +1,4 @@
-LoadPackage( "HomalgRings" );
+LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
 ZZ := RingForHomalgInSage( "ZZ", IsSageIntegers );
 Display(ZZ);

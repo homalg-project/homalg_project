@@ -17,3 +17,4 @@ SetInfoLevel( InfoHomalg, 1 );
 DeclareGlobalVariable( "HOMALG" );
 
 DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
+
