@@ -159,12 +159,12 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     RP := HomalgTable( R );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule", "\033[0m" );
+    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.BasisOfRowModule) then
         B :=RP!.BasisOfRowModule( M );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule", "\033[0m" );
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
         
         return B;
     fi;
@@ -200,7 +200,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         SetCompatibilityConditions( B, Uc * RightHandSide( M ) );
     fi;
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule", "\033[0m" );
+    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
     
     return B;
     
@@ -218,12 +218,12 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     RP := HomalgTable( R );
   
-    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule", "\033[0m" );
+    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.BasisOfColumnModule) then
         B := RP!.BasisOfColumnModule( M );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule", "\033[0m" );
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
         
         return B;
     fi;
@@ -259,7 +259,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         SetCompatibilityConditions( B, BottomSide( M ) * Uc );
     fi;
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule", "\033[0m" );
+    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
     
     return B;
     
