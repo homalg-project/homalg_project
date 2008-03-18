@@ -113,20 +113,61 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
-    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+    if not HasEval( M ) then ## otherwise we take CertainRows of a bigger matrix
+        
+        if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+            Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+        fi;
+        
+        if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
+            return M;
+        fi;
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( CertainRows )", "\033[0m" );
+        
+        A := EvalCertainRows( M )[1];
+        plistA := EvalCertainRows( M )[2];
+        
+        return CertainRows( A, plistA{plist} );
+        
     fi;
     
-    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-        return M;
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalCertainColumns, IsList ],
+        
+  function( M, plist )
+    local A, plistA;
+    
+    if not HasEval( M ) then ## otherwise we take CertainRows of a bigger matrix
+        
+        if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+            Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+        fi;
+        
+        if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
+            return M;
+        fi;
+        
+        A := EvalCertainColumns( M )[1];
+        plistA := EvalCertainColumns( M )[2];
+        
+        if Length( plist ) * NrColumns( A ) < Length( plistA ) * NrRows( A ) then
+            
+            Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( CertainColumns )", "\033[0m" );
+            
+            return CertainColumns( CertainRows( A, plist ), plistA );
+            
+        fi;
+        
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( CertainRows )", "\033[0m" );
-    
-    A := EvalCertainRows( M )[1];
-    plistA := EvalCertainRows( M )[2];
-    
-    return CertainRows( A, plistA{plist} );
+    TryNextMethod( );
     
 end );
 
@@ -141,7 +182,7 @@ InstallMethod( CertainRows,
     if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
         Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
     fi;
-    
+        
     if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
         return M;
     fi;
@@ -220,20 +261,61 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
-    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+    if not HasEval( M ) then ## otherwise we take CertainColumns of a bigger matrix
+        
+        if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+            Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+        fi;
+        
+        if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
+            return M;
+        fi;
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( CertainColumns )", "\033[0m" );
+    
+        A := EvalCertainColumns( M )[1];
+        plistA := EvalCertainColumns( M )[2];
+        
+        return CertainColumns( A, plistA{plist} );
+        
     fi;
     
-    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-        return M;
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalCertainRows, IsList ],
+        
+  function( M, plist )
+    local A, plistA;
+    
+    if not HasEval( M ) then ## otherwise we take CertainColumns of a bigger matrix
+        
+        if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+            Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+        fi;
+        
+        if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
+            return M;
+        fi;
+        
+        A := EvalCertainRows( M )[1];
+        plistA := EvalCertainRows( M )[2];
+        
+        if Length( plist ) * NrRows( A ) < Length( plistA ) * NrColumns( A ) then
+            
+            Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( CertainRows )", "\033[0m" );
+            
+            return CertainRows( CertainColumns( A, plist ), plistA );
+            
+        fi;
+        
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( CertainColumns )", "\033[0m" );
-    
-    A := EvalCertainColumns( M )[1];
-    plistA := EvalCertainColumns( M )[2];
-    
-    return CertainColumns( A, plistA{plist} );
+    TryNextMethod( );
     
 end );
 
@@ -301,11 +383,11 @@ InstallMethod( CertainColumns,
     if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
         Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
     fi;
-    
+        
     if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
         return M;
     fi;
-    
+        
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( Compose )", "\033[0m" );
     
     A := EvalCompose( M )[1];

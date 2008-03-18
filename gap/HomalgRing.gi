@@ -296,17 +296,25 @@ end );
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, homalg_ring, table;
+    local nargs, homalg_ring, table, properties, ar;
     
     nargs := Length( arg );
     
     homalg_ring := rec( ring := arg[1] );
     
-    if nargs = 1 then
-        table := CreateHomalgTable( arg[1] );
-    else
+    if nargs > 1 and IsHomalgTable( arg[nargs] ) then
         table := arg[nargs];
+    else
+        table := CreateHomalgTable( arg[1] );
     fi;
+    
+    properties := [ ];
+    
+    for ar in arg{[ 2 .. nargs ]} do
+        if IsFilter( ar ) then
+            Add( properties, ar );
+        fi;
+    od;
     
     if IsSemiringWithOneAndZero( arg[1] ) then
         
@@ -322,6 +330,12 @@ InstallGlobalFunction( CreateHomalgRing,
                 homalg_ring, HomalgExternalRingType,
                 HomalgTable, table );
     
+    fi;
+    
+    if properties <> [ ] then
+        for ar in properties do
+            Setter( ar )( homalg_ring, true );
+        od;
     fi;
     
     return homalg_ring;
@@ -401,7 +415,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A homalg external object residing in the CAS " );
+    Print( "<A homalg external ring residing in the CAS " );
     Print( HomalgExternalCASystem( o ), ">" ); 
     
 end );
