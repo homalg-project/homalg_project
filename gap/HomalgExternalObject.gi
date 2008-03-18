@@ -107,7 +107,7 @@ end );
 ##
 InstallMethod( HomalgStream,
         "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
@@ -122,11 +122,15 @@ end );
 ##
 InstallMethod( HomalgExternalCASystemPID,
         "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
         
   function( o )
     
-    return HomalgStream( o ).pid;
+    if IsRecord( HomalgStream( o ) ) and IsBound( HomalgStream( o ).pid ) then
+        return HomalgStream( o ).pid;
+    fi;
+    
+    return fail;
     
 end );
 
