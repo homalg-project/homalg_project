@@ -159,14 +159,22 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     RP := HomalgTable( R );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    if HasRightHandSide( M ) then
+        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule (compute U): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    else
+        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    fi;
     
     t := HomalgTotalRuntimes( );
     
     if IsBound(RP!.BasisOfRowModule) then
         B := RP!.BasisOfRowModule( M );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
+        if HasRightHandSide( M ) then
+            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule (compute U): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
+        else
+            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
+        fi;
         
         return B;
     fi;
@@ -202,7 +210,11 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         SetCompatibilityConditions( B, Uc * RightHandSide( M ) );
     fi;
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
+    if HasRightHandSide( M ) then
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule (compute U): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
+    else
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
+    fi;
     
     return B;
     
@@ -214,7 +226,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, U, B, rank, Ur, Uc;
+    local R, RP, t, V, B, rank, Vr, Vc;
     
     R := HomalgRing( M );
     
@@ -222,12 +234,20 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
   
     t := HomalgTotalRuntimes( );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    if HasBottomSide( M ) then
+        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule (compute V): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    else
+        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    fi;
     
     if IsBound(RP!.BasisOfColumnModule) then
         B := RP!.BasisOfColumnModule( M );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
+        if HasBottomSide( M ) then
+            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule (compute V): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
+        else
+            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
+        fi;
         
         return B;
     fi;
@@ -235,9 +255,9 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     #=====# begin of the core procedure #=====#
     
     if HasBottomSide( M ) then
-        U := HomalgMatrix( "void", R );
+        V := HomalgMatrix( "void", R );
         
-        B := TriangularBasisOfColumns( M, U ); t := HomalgTotalRuntimes( t );
+        B := TriangularBasisOfColumns( M, V ); t := HomalgTotalRuntimes( t );
     else
         B := TriangularBasisOfColumns( M ); t := HomalgTotalRuntimes( t );
     fi;
@@ -255,15 +275,19 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     fi;
     
     if HasBottomSide( M ) then
-        Ur := CertainColumns( U, [ 1 .. rank ] );
-        Uc := CertainColumns( U, [ rank + 1 .. NrColumns( M ) ] );
+        Vr := CertainColumns( V, [ 1 .. rank ] );
+        Vc := CertainColumns( V, [ rank + 1 .. NrColumns( M ) ] );
         
-        SetBottomSide( B, BottomSide( M ) * Ur );
+        SetBottomSide( B, BottomSide( M ) * Vr );
         
-        SetCompatibilityConditions( B, BottomSide( M ) * Uc );
+        SetCompatibilityConditions( B, BottomSide( M ) * Vc );
     fi;
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
+    if HasBottomSide( M ) then
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule (compute V): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
+    else
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
+    fi;
     
     return B;
     
