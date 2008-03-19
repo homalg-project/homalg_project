@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MapleHomalgJanet.gd       HomalgRings package            Mohamed Barakat
+##  MapleHomalgJanet.gd       RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

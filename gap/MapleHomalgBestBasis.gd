@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MapleHomalgBestBasis.gd   HomalgRings package            Mohamed Barakat
+##  MapleHomalgBestBasis.gd   RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

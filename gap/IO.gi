@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  IO.gi                     HomalgRings package            Mohamed Barakat
+##  IO.gi                     RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -70,7 +70,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         Add( HOMALG_RINGS.HomalgSendBlockingInput, arg );
     fi;
     
-    Info( InfoHomalgRings, 10, arg );
+    Info( InfoRingsForHomalg, 10, arg );
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -162,18 +162,6 @@ InstallGlobalFunction( HomalgSendBlocking,
                and IsBound( HOMALG_RINGS.gap_display ) then
                 stream.display_color := HOMALG_RINGS.gap_display;
             fi;
-        elif Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
-            stream.cas := "sage"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendSageBlocking;
-            stream.define := "=";
-            stream.eol_verbose := "";
-            stream.eol_quiet := ";";
-            stream.prompt := "sage: ";
-            stream.output_prompt := "\033[1;34;43m<sage\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.sage_display ) then
-                stream.display_color := HOMALG_RINGS.sage_display;
-            fi;
         elif Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "singular" then
             stream.cas := "singular"; ## normalized name on which the user should have no control
             stream.SendBlocking := SendSingularBlocking;
@@ -198,6 +186,30 @@ InstallGlobalFunction( HomalgSendBlocking,
             if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
                and IsBound( HOMALG_RINGS.M2_display ) then
                 stream.display_color := HOMALG_RINGS.M2_display;
+            fi;
+        elif Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
+            stream.cas := "sage"; ## normalized name on which the user should have no control
+            stream.SendBlocking := SendSageBlocking;
+            stream.define := "=";
+            stream.eol_verbose := "";
+            stream.eol_quiet := ";";
+            stream.prompt := "sage: ";
+            stream.output_prompt := "\033[1;34;43m<sage\033[0m ";
+            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
+               and IsBound( HOMALG_RINGS.sage_display ) then
+                stream.display_color := HOMALG_RINGS.sage_display;
+            fi;
+        elif ( Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "magma" ) then
+            stream.cas := "magma"; ## normalized name on which the user should have no control
+            stream.SendBlocking := SendMagmaBlocking;
+            stream.define := ":=";
+            stream.eol_verbose := ";";
+            stream.eol_quiet := ";;";
+            stream.prompt := "magma> ";
+            stream.output_prompt := "\033[1;31;47m<magma\033[0m ";
+            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
+               and IsBound( HOMALG_RINGS.magma_display ) then
+                stream.display_color := HOMALG_RINGS.magma_display;
             fi;
         elif Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "maple" then
             stream.cas := "maple"; ## normalized name on which the user should have no control
@@ -277,7 +289,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         Add( HOMALG_RINGS.HomalgSendBlocking, L );
     fi;
     
-    Info( InfoHomalgRings, 7, stream.prompt, L{[ 1 .. Length( L ) -1 ]} );
+    Info( InfoRingsForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) -1 ]} );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
@@ -316,7 +328,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if need_output then
-        Info( InfoHomalgRings, 5, stream.output_prompt, "\"", L, "\"" );
+        Info( InfoRingsForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
     fi;
     
     return L;
@@ -351,7 +363,18 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A homalg object defined externally in the CAS " );
+    Print( "<A homalg external object residing in the CAS " );
+    Print( HomalgExternalCASystem( o ), " running with pid ", HomalgExternalCASystemPID( o ), ">" ); 
+    
+end );
+
+InstallMethod( ViewObj,
+        "for homalg external objects with an IO stream",
+        [ IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( o )
+    
+    Print( "<A homalg external ring residing in the CAS " );
     Print( HomalgExternalCASystem( o ), " running with pid ", HomalgExternalCASystemPID( o ), ">" ); 
     
 end );

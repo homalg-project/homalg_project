@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SageIntegers.gd           RingsForHomalg package           Simon Görtzen
+##  MagmaDefault.gd           RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the integers in Sage.
+##  Declarations for the rings provided by sage.
 ##
 #############################################################################
 
@@ -15,5 +15,14 @@
 ####################################
 
 ##
-DeclareProperty( "IsSageIntegers",
+DeclareProperty( "IsHomalgMagmaRing",
         IsHomalgRing );
+
+####################################
+#
+# global variables:
+#
+####################################
+
+DeclareGlobalVariable( "CommonHomalgTableForMagmaDefault" );
+

@@ -1,9 +1,9 @@
   
   
-                           [1XGAP 4 Package [5XHomalgRings[0m[1X[0m
+                          [1XGAP 4 Package [5XRingsForHomalg[0m[1X[0m
   
   
-          [1XHomalgRings --- An Abstract Package for Homological Algebra[0m
+         [1XRingsForHomalg --- An Abstract Package for Homological Algebra[0m
   
   
                                Version 2008.03.15
@@ -35,12 +35,12 @@
   -------------------------------------------------------
   
   
-  [1XContents (HomalgRings)[0X
+  [1XContents (RingsForHomalg)[0X
   
   1 Introduction
     1.1 Philosophy
     1.2 Overview over this manual
-  2 Installation of the [5XHomalgRings[0m-Package
+  2 Installation of the [5XRingsForHomalg[0m-Package
   3 Examples
   
   

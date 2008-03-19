@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgRings.gd            HomalgRings package            Mohamed Barakat
+##  RingsForHomalg.gd         RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -10,8 +10,8 @@
 
 
 # our info class:
-DeclareInfoClass( "InfoHomalgRings" );
-SetInfoLevel( InfoHomalgRings, 1 );
+DeclareInfoClass( "InfoRingsForHomalg" );
+SetInfoLevel( InfoRingsForHomalg, 1 );
 
 # a central place for configurations:
 DeclareGlobalVariable( "HOMALG_RINGS" );
@@ -33,6 +33,8 @@ DeclareGlobalFunction( "RingForHomalgInSingular" );
 DeclareGlobalFunction( "RingForHomalgInSage" );
 
 DeclareGlobalFunction( "RingForHomalgInMacaulay2" );
+
+DeclareGlobalFunction( "RingForHomalgInMagma" );
 
 DeclareGlobalFunction( "RingForHomalgInPIRMaple9" );
 

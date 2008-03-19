@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  MapleHomalgBestBasis.gi   RingsForHomalg package         Mohamed Barakat
+##  MagmaBestBasis.gi         RingsForHomalg package         Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the rings provided by the ring packages
-##  of the Maple implementation of homalg.
+##  Implementations for the rings with BestBasis provided by MAGMA.
 ##
 #############################################################################
 
@@ -15,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
+InstallValue( CommonHomalgTableForMagmaBestBasis,
         
         rec(
                ## Can optionally be provided by the RingPackage
@@ -57,10 +56,10 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( HomalgSendBlocking( [ S, " := ", R, "[2][BestBasis](", M, R, "[1],", U, V, "): `homalg/RankOfGauss`(", S, R,"[2])" ], "need_output" ) );
+                       rank_of_S := Int( HomalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, "): Rank(", S, ")" ], "need_output" ) );
                    else
                        ## compute S only:
-                       rank_of_S := Int( HomalgSendBlocking( [ S, " := ", R, "[2][BestBasis](", M, R, "[1]): `homalg/RankOfGauss`(", S, R,"[2])" ], "need_output" ) );
+                       rank_of_S := Int( HomalgSendBlocking( [ S, " := ", "SmithForm(", M, "): Rank(", S, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( S, rank_of_S );

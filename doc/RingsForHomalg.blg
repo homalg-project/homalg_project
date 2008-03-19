@@ -1,12 +1,12 @@
 This is BibTeX, Version 0.99c (Web2C 7.5.4)
-The top-level auxiliary file: HomalgRings.aux
+The top-level auxiliary file: RingsForHomalg.aux
 The style file: alpha.bst
-Database file #1: HomalgRings.bib
+Database file #1: RingsForHomalg.bib
 Warning--empty journal in BR
 Warning--empty year in BR
 You've used 1 entry,
             2543 wiz_defined-function locations,
-            562 strings with 4779 characters,
+            562 strings with 4785 characters,
 and the built_in function-call counts, 351 in all, are:
 = -- 31
 > -- 19

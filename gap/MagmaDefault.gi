@@ -1,19 +1,22 @@
 #############################################################################
 ##
-##  SageIntegers.gd           RingsForHomalg package           Simon Görtzen
+##  MagmaDefault.gi           RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the integers in Sage.
+##  Implementations for the rings provided by sage.
 ##
 #############################################################################
 
 ####################################
 #
-# properties:
+# global variables:
 #
 ####################################
 
-##
-DeclareProperty( "IsSageIntegers",
-        IsHomalgRing );
+InstallValue( CommonHomalgTableForMagmaDefault,
+        
+        rec(
+               
+        )
+ );

@@ -1,7 +1,7 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2008.1.23)  15 MAR 2008 22:55
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2008.1.23)  17 MAR 2008 21:26
 entering extended mode
-**HomalgRings
-(./HomalgRings.tex
+**RingsForHomalg
+(./RingsForHomalg.tex
 LaTeX2e <2003/12/01>
 Babel <v3.8d> and hyphenation patterns for american, french, german, ngerman, b
 ahasa, basque, bulgarian, catalan, croatian, czech, danish, dutch, esperanto, e
@@ -53,10 +53,10 @@ File: latin1.def 2004/02/05 v1.0d Input encoding file
 Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
 )
 \@indexfile=\write3
-\openout3 = `HomalgRings.idx'.
+\openout3 = `RingsForHomalg.idx'.
 
 
-Writing index file HomalgRings.idx
+Writing index file RingsForHomalg.idx
 (/sw/share/texmf-dist/tex/latex/graphics/color.sty
 Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
 
@@ -184,10 +184,10 @@ File: upsy.fd 2001/06/04 font definitions for U/psy.
 \@outlinefile=\write5
 )
 \pagenrlog=\write6
-\openout6 = `HomalgRings.pnr'.
+\openout6 = `RingsForHomalg.pnr'.
 
- (./HomalgRings.aux)
-\openout1 = `HomalgRings.aux'.
+ (./RingsForHomalg.aux)
+\openout1 = `RingsForHomalg.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
@@ -280,7 +280,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 74--76
 
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
 (Font)              scaled to size 7.19995pt on input line 76.
-[2] (./HomalgRings.toc
+[2] (./RingsForHomalg.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 2.
@@ -320,7 +320,7 @@ LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
 (Font)              scaled to size 9.85492pt on input line 4.
 )
 \tf@toc=\write8
-\openout8 = `HomalgRings.toc'.
+\openout8 = `RingsForHomalg.toc'.
 
  [3
 
@@ -338,38 +338,38 @@ LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
 
 ]
 Chapter 3.
-(./HomalgRings.bbl (./HomalgRings.brf)
+(./RingsForHomalg.bbl (./RingsForHomalg.brf)
 \tf@brf=\write9
-\openout9 = `HomalgRings.brf'.
+\openout9 = `RingsForHomalg.brf'.
 
  [6
 
-]) (./HomalgRings.ind [7
+]) (./RingsForHomalg.ind
+[7
 
 ] [8
 
 
-])
-(./HomalgRings.aux) ) 
+]) (./RingsForHomalg.aux) ) 
 Here is how much of TeX's memory you used:
  3559 strings out of 94500
- 48392 string characters out of 1176114
- 94141 words of memory out of 1500000
+ 48443 string characters out of 1176114
+ 94144 words of memory out of 1500000
  6632 multiletter control sequences out of 10000+50000
  41660 words of font info for 82 fonts, out of 1200000 for 2000
  580 hyphenation exceptions out of 8191
- 27i,6n,27p,249b,275s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 27i,6n,27p,258b,275s stack positions out of 5000i,500n,6000p,200000b,5000s
 PDF statistics:
  100 PDF objects out of 65536
  25 named destinations out of 20000
  17 words of extra memory for PDF output out of 65536
-</sw/share/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb>{/
-sw/share/texmf-dist/fonts/enc/dvips/psnfss/8r.enc}</sw/share/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvr8a.pfb></sw/share/texmf-dist/fonts/type1/urw/times/utmri8
-a.pfb></sw/share/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></sw/share/texmf-
-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></sw/share/texmf-dist/fonts/type1/urw
-/times/utmr8a.pfb></sw/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></sw
-/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></sw/share/texmf-dist/fonts/
-type1/urw/helvetic/uhvb8a.pfb></sw/share/texmf-dist/fonts/type1/urw/times/utmb8
-a.pfb>
-Output written on HomalgRings.pdf (8 pages, 101457 bytes).
+</sw/share/texmf-dist/fonts/type1/bluesky/cm/cmtt10.
+pfb>{/sw/share/texmf-dist/fonts/enc/dvips/psnfss/8r.enc}</sw/share/texmf-dist/f
+onts/type1/urw/helvetic/uhvr8a.pfb></sw/share/texmf-dist/fonts/type1/urw/times/
+utmri8a.pfb></sw/share/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></sw/share/
+texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></sw/share/texmf-dist/fonts/typ
+e1/urw/times/utmr8a.pfb></sw/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pf
+b></sw/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></sw/share/texmf-dist/
+fonts/type1/urw/helvetic/uhvb8a.pfb></sw/share/texmf-dist/fonts/type1/urw/times
+/utmb8a.pfb>
+Output written on RingsForHomalg.pdf (8 pages, 102497 bytes).

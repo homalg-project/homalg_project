@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageDefault.gd            HomalgRings package              Simon Görtzen
+##  SageDefault.gd            RingsForHomalg package           Simon Görtzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

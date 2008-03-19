@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  MapleHomalgTools.gd       RingsForHomalg package         Mohamed Barakat
+##  MagmaTools.gi             RingsForHomalg package         Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the rings provided by the ring packages
-##  of the Maple implementation of homalg.
+##  Implementations for the rings provided by MAGMA.
 ##
 #############################################################################
 
@@ -15,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMapleHomalgTools,
+InstallValue( CommonHomalgTableForMagmaTools,
         
         rec(
                IsZeroMatrix :=
@@ -193,23 +192,17 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                
                NrRows :=
                  function( C )
-                   local R;
                    
-                   R := HomalgRing( C );
-                   
-                   return Int( HomalgSendBlocking( [ R, "[2][NumberOfRows](", C, ")" ], "need_output" ) );
+                   return Int( HomalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output" ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
-                   local R;
                    
-                   R := HomalgRing( C );
-                   
-                   return Int( HomalgSendBlocking( [ R, "[2][NumberOfGenerators](", C, ")" ], "need_output" ) );
+                   return Int( HomalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output" ) );
                    
                  end
-                 
+               
         )
  );

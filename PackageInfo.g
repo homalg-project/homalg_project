@@ -1,9 +1,10 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `HomalgRings'              Mohamed Barakat
+##  PackageInfo.g for the package `RingsForHomalg'           Mohamed Barakat
 ##                                                           Simon Görtzen
 ##                                                           Max Neunhöffer
 ##                                                           Daniel Robertz
+##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
 
@@ -20,22 +21,22 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "HomalgRings",
+PackageName := "RingsForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "HomalgRings - internal and external rings for the GAP package homalg",
+Subtitle := "RingsForHomalg - internal and external rings for the GAP package homalg",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.03.15",
+Version := "2008.03.17",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "15/03/2008",
+Date := "17/03/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -45,7 +46,7 @@ Date := "15/03/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/HomalgRing",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -218,9 +219,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/HomalgRings/README.HomalgRings",
+  "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/README.RingsForHomalg",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/HomalgRings/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -268,10 +269,10 @@ PackageInfoURL :=
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "HomalgRings",
+  BookName  := "RingsForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/HomalgRings/HomalgRingsDoc.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/RingsForHomalgDoc.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -280,7 +281,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "HomalgRings - Internal and External Rings for the GAP Package homalg",
+  LongTitle := "RingsForHomalg - Internal and External Rings for the GAP Package homalg",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -296,7 +297,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2008.03.15"], , ["IO", ">= 2.3"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2008.03.18"], , ["IO", ">= 2.3"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -329,7 +330,7 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  HomalgRings ", ~.Version, "\n",
+  "Loading  RingsForHomalg ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
@@ -338,7 +339,7 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
-  "For help, type: ?HomalgRings package \n",
+  "For help, type: ?RingsForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 

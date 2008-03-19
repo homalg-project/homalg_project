@@ -4,18 +4,18 @@
 
 <!--
 
-  HomalgRings.xml          HomalgRings package documentation              Mohamed Barakat
+  RingsForHomalg.xml          RingsForHomalg package documentation        Mohamed Barakat
                                                                           Simon Görtzen
 
   Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
 
 -->
 
-<Book Name="HomalgRings">
+<Book Name="RingsForHomalg">
 
 <TitlePage>
-    <Title>GAP 4 Package <Package>HomalgRings</Package></Title>
-    <Subtitle>HomalgRings --- An Abstract Package for Homological Algebra</Subtitle>
+    <Title>GAP 4 Package <Package>RingsForHomalg</Package></Title>
+    <Subtitle>RingsForHomalg --- An Abstract Package for Homological Algebra</Subtitle>
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
@@ -51,7 +51,7 @@ Germany
 <#Include SYSTEM "examples.xml">
 </Body>
 
-<Bibliography Databases="HomalgRings"/>
+<Bibliography Databases="RingsForHomalg"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SageIntegers.gi           RingsForHomalg package           Simon Görtzen
+##  MagmaGF2.gd               RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the integers in Sage.
+##  Implementations for the field GF(2) in MAGMA.
 ##
 #############################################################################
 
@@ -15,11 +15,9 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for Sage Integers",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsSageIntegers ],
-        
+               "for finite Sage field GF(2) with 2 Elements",
+               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsSageGF2 ],
+
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;
     
@@ -33,22 +31,8 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
-               RingName := "Z",
+               RingName := "GF(2)",
                
-               ElementaryDivisors :=
-                 function( arg )
-                   local M, R;
-                   
-                   M:=arg[1];
-		   
-		   R := HomalgRing( M );
-                   
-                   HomalgSendBlocking( [ "_tmp = ", M, ".transpose()" ], "need_command" );
-                   HomalgSendBlocking( [ "_tmp = _tmp.elementary_divisors()" ], "need_command", R );
-		   return HomalgSendBlocking( [ "_tmp" ], "need_output", R );
-                   
-                 end,
-                 
                ## Must be defined if other functions are not defined
                
                TriangularBasisOfRows :=
@@ -62,13 +46,14 @@ InstallMethod( CreateHomalgTable,
                    nargs := Length( arg );
                    
                    if nargs > 1 then
-                       ## compute N and U:
-                       HomalgSendBlocking( [ "_N,_U = ", M, ".dense_matrix().echelon_form(transformation=True)" ], "need_command" );
-                       HomalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
+                       ## compute N and U: N = U*M, create M|Id_NrRows(N) and do Gauss there
+                       HomalgSendBlocking( [ "_Id = identity_matrix(GF(2),", NrRows(M), ").sparse_matrix()" ], "need_command", R );
+                       HomalgSendBlocking( [ "_MId = block_matrix([", M, ".sparse_matrix(),_Id],2).echelonize()" ], "need_command" );
+                       HomalgSendBlocking( [ "_N=_MId.matrix_from_columns(range(", NrColumns(M) ,"))"], "need_command", R );
                        rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N" ], R );
-                       U := HomalgSendBlocking( [ "_U.sparse_matrix()" ], R );
-                       HomalgSendBlocking( [ "_N=0; _U=0;" ], "need_command", R );
+                       N := HomalgSendBlocking( [ "_N.copy()"], R );
+                       U := HomalgSendBlocking( [ "_MId.matrix_from_columns(range(", NrColumns(M), ",", NrColumns(M)+NrRows(M), ")).copy()"], R );
+                       #HomalgSendBlocking( [ "_N=0; _MId=0" ], "need_command", R);
                    else
                        ## compute N only:
                        HomalgSendBlocking( [ "_N = ", M, ".echelon_form()" ], "need_command" );
@@ -100,7 +85,12 @@ InstallMethod( CreateHomalgTable,
                    
                    return N;
                    
-                 end
+                 end,
+               
+               ## Must only then be provided by the RingPackage in case the default
+               ## "service" function does not match the Ring
+                   
+               MinusOne := HomalgExternalRingElement( "1", "Sage", IsOne ) ## CAUTION: only over GF(2)
                
           );
     

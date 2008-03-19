@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SageGF2.gi                HomalgRings package              Simon Görtzen
+##  SageGF2.gi                RingsForHomalg package           Simon Görtzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the sage field GF(2).
+##  Implementations for the field GF(2) in Sage.
 ##
 #############################################################################
 

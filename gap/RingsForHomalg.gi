@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgRings.gi            HomalgRings package            Mohamed Barakat
+##  RingsForHomalg.gi         RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -20,10 +20,11 @@ InstallValue( HOMALG_RINGS,
         rec(
             SaveHomalgMaximumBackStream := false,
             color_display := "false",
-            maple_display := "\033[0;34m",
             gap_display := "\033[0;35m",
             singular_display := "\033[0;30;47m",
-            sage_display  := "\033[0;34;43m" ) );
+	    sage_display  := "\033[0;34;43m",
+	    magma_display  := "\033[0;30;47m",
+            maple_display := "\033[0;34m" ) );
 
 ####################################
 #
@@ -59,7 +60,7 @@ InstallGlobalFunction( RingForHomalg,
         ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgGAPRing, init );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -80,7 +81,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgGAPRing, init );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -97,7 +98,24 @@ InstallGlobalFunction( RingForHomalgInSage,
         ext_obj := HomalgExternalObject( arg[1], "Sage", stream, IsHomalgSageRing );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    
+end );
+
+##
+InstallGlobalFunction( RingForHomalgInMagma,
+  function( arg )
+    local stream, ext_obj;
+    
+    stream := LaunchMagma( );
+    
+    if Length( arg ) > 1 and IsFilter( arg[2] ) then
+        ext_obj := HomalgExternalObject( arg[1], "MAGMA", stream, arg[2] );
+    else
+        ext_obj := HomalgExternalObject( arg[1], "MAGMA", stream, IsHomalgMagmaRing );
+    fi;
+    
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -122,7 +140,7 @@ InstallGlobalFunction( RingForHomalgInPIRMaple9,
         ext_obj := HomalgSendBlocking( [ arg[1], ",", table ], IsHomalgPIRMapleRing );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -147,7 +165,7 @@ InstallGlobalFunction( RingForHomalgInInvolutiveMaple9,
         ext_obj := HomalgSendBlocking( [ arg[1], ",", table ], IsHomalgInvolutiveMapleRing );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -172,7 +190,7 @@ InstallGlobalFunction( RingForHomalgInJanetMaple9,
         ext_obj := HomalgSendBlocking( [ arg[1], ",", table ], IsHomalgJanetMapleRing );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -197,7 +215,7 @@ InstallGlobalFunction( RingForHomalgInJanetOreMaple9,
         ext_obj := HomalgSendBlocking( [ arg[1], ",", table ], IsHomalgJanetOreMapleRing );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 
@@ -222,7 +240,7 @@ InstallGlobalFunction( RingForHomalgInOreModulesMaple9,
         ext_obj := HomalgSendBlocking( [ arg[1], ",", table ], IsHomalgOreModulesMapleRing );
     fi;
     
-    return CreateHomalgRing( ext_obj );
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
 end );
 

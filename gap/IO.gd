@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  IO.gd                     HomalgRings package            Mohamed Barakat
+##  IO.gd                     RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

@@ -1,15 +1,15 @@
-    README file for the `HomalgRings' GAP4 package
+    README file for the `RingsForHomalg' GAP4 package
         
 To get the newest version of this GAP 4 package download one of the
 archive files
-    HomalgRings-x.x.tar.gz
-    HomalgRings-x.x.zoo
-    HomalgRings-x.x.tar.bz2
-    HomalgRings-x.x.zip
+    RingsForHomalg-x.x.tar.gz
+    RingsForHomalg-x.x.zoo
+    RingsForHomalg-x.x.tar.bz2
+    RingsForHomalg-x.x.zip
 and unpack it using 
-    gunzip HomalgRings-x.x.tar.gz; tar xvf HomalgRings-x.x.tar
+    gunzip RingsForHomalg-x.x.tar.gz; tar xvf RingsForHomalg-x.x.tar
 respectively
-    unzoo -x HomalgRings-x.x.zoo
+    unzoo -x RingsForHomalg-x.x.zoo
 and so on.
 
 (Note that if you use a browser like `netscape' for downloading the
@@ -18,12 +18,12 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `HomalgRings'.
+of your GAP 4 installation. It creates a subdirectory called `RingsForHomalg'.
 
 This completes the installation of the package.
 
 Recompiling the documentation is possible by the command `gap makedoc.g'
-in the HomalgRings directory. But this should not be necessary.
+in the RingsForHomalg directory. But this should not be necessary.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.
