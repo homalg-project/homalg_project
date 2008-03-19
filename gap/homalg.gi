@@ -18,10 +18,39 @@
 
 InstallValue( HOMALG,
         rec(
+            TotalRuntimes := 0,
             color_start_FOB := "\033[1m\033[4;37;45m",
             color_end_FOB := "\033[1m\033[4;35;47m",
             color_start_FO := "\033[1;33;41m",
             color_end_FO := "\033[1;31;43m" ) );
+
+InstallGlobalFunction( HomalgTotalRuntimes,
+  function( arg )
+    local r, t;
+    
+    r := Runtimes( );
+    
+    HOMALG.TotalRuntimes := r.user_time;
+    
+    if IsBound( r.system_time ) then
+        HOMALG.TotalRuntimes := HOMALG.TotalRuntimes + r.system_time;
+    fi;
+    
+    if IsBound( r.user_time_children ) then
+        HOMALG.TotalRuntimes := HOMALG.TotalRuntimes + r.user_time_children;
+    fi;
+    
+    if IsBound( r.system_time_children ) then
+        HOMALG.TotalRuntimes := HOMALG.TotalRuntimes + r.system_time_children;
+    fi;
+    
+    if Length( arg ) = 0 then
+        return HOMALG.TotalRuntimes;
+    fi;
+    
+    return TimeToString( HOMALG.TotalRuntimes - arg[1] );
+    
+end );
 
 # a global function for logical implications:
 

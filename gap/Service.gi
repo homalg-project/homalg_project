@@ -153,7 +153,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, bas, U, B, rank, Ur, Uc;
+    local R, RP, t, U, B, rank, Ur, Uc;
     
     R := HomalgRing( M );
     
@@ -161,10 +161,12 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
+    t := HomalgTotalRuntimes( );
+    
     if IsBound(RP!.BasisOfRowModule) then
-        B :=RP!.BasisOfRowModule( M );
+        B := RP!.BasisOfRowModule( M );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return B;
     fi;
@@ -174,9 +176,9 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     if HasRightHandSide( M ) then
         U := HomalgMatrix( "void", R );
         
-        B := TriangularBasisOfRows( M, U );
+        B := TriangularBasisOfRows( M, U ); t := HomalgTotalRuntimes( t );
     else
-        B := TriangularBasisOfRows( M );
+        B := TriangularBasisOfRows( M ); t := HomalgTotalRuntimes( t );
     fi;
     
     rank := RowRankOfMatrix( B );
@@ -200,7 +202,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         SetCompatibilityConditions( B, Uc * RightHandSide( M ) );
     fi;
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
+    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
     
     return B;
     
@@ -212,12 +214,14 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, U, B, rank, Ur, Uc;
+    local R, RP, t, U, B, rank, Ur, Uc;
     
     R := HomalgRing( M );
     
     RP := HomalgTable( R );
   
+    t := HomalgTotalRuntimes( );
+    
     Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.BasisOfColumnModule) then
@@ -233,9 +237,9 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     if HasBottomSide( M ) then
         U := HomalgMatrix( "void", R );
         
-        B := TriangularBasisOfColumns( M, U );
+        B := TriangularBasisOfColumns( M, U ); t := HomalgTotalRuntimes( t );
     else
-        B := TriangularBasisOfColumns( M );
+        B := TriangularBasisOfColumns( M ); t := HomalgTotalRuntimes( t );
     fi;
     
     rank := ColumnRankOfMatrix( B );
@@ -259,7 +263,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         SetCompatibilityConditions( B, BottomSide( M ) * Uc );
     fi;
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
+    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
     
     return B;
     
@@ -271,7 +275,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
 	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, U )
-    local R, RP, bas;
+    local R, RP, t, bas;
     
     R := HomalgRing( M );
     
@@ -280,9 +284,12 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowsCoeff", "\033[0m" );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
+        
+        t := HomalgTotalRuntimes( );
+        
         bas := RP!.BasisOfRowsCoeff( M, U );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff", "\033[0m" );
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return bas;
     fi;
@@ -307,7 +314,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
 	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, V )
-    local R, RP, bas, U, ibas;
+    local R, RP, t, bas, U, ibas;
     
     R := HomalgRing( M );
     
@@ -316,9 +323,12 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnsCoeff", "\033[0m" );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
+        
+        t := HomalgTotalRuntimes( );
+        
         bas := RP!.BasisOfColumnsCoeff( M, V );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff", "\033[0m" );
+        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return bas;
     fi;
@@ -343,7 +353,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( L, B )
-    local R, RP, l, m, n, id, zz, M, U, C, Ul, T;
+    local R, RP, t, l, m, n, id, zz, M, U, C, Ul, T;
     
     R := HomalgRing( B );
     
@@ -352,9 +362,12 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroRows", "\033[0m" );
     
     if IsBound(RP!.DecideZeroRows) then
+        
+        t := HomalgTotalRuntimes( );
+        
         C := RP!.DecideZeroRows( L, B );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRows", "\033[0m" );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRows", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return C;
     fi;
@@ -429,7 +442,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( L, B )
-    local R, RP, l, m, n, id, zz, M, U, C, Ul, T;
+    local R, RP, t, l, m, n, id, zz, M, U, C, Ul, T;
     
     R := HomalgRing( B );
     
@@ -438,9 +451,12 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroColumns", "\033[0m" );
     
     if IsBound(RP!.DecideZeroColumns) then
+        
+        t := HomalgTotalRuntimes( );
+        
         C := RP!.DecideZeroColumns( L, B );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumns", "\033[0m" );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumns", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return C;
     fi;
@@ -515,7 +531,7 @@ InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows
 	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( A, B, U )
-    local R, RP, zz, A_zz, red;
+    local R, RP, t, zz, A_zz, red;
     
     R := HomalgRing( B );
     
@@ -524,9 +540,12 @@ InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows
     Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: EffectivelyDecideZeroRows", "\033[0m" );
     
     if IsBound(RP!.EffectivelyDecideZeroRows) then
+        
+        t := HomalgTotalRuntimes( );
+        
         red := RP!.EffectivelyDecideZeroRows( A, B, U );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroRows", "\033[0m" );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroRows", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return red;
     fi;
@@ -555,7 +574,7 @@ InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroC
 	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( A, B, V )
-    local R, RP, red, U, ired;
+    local R, RP, t, red, U, ired;
     
     R := HomalgRing( B );
     
@@ -564,9 +583,12 @@ InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroC
     Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: EffectivelyDecideZeroColumns", "\033[0m" );
     
     if IsBound(RP!.EffectivelyDecideZeroColumns) then
+        
+        t := HomalgTotalRuntimes( );
+        
         red := RP!.EffectivelyDecideZeroColumns( A, B, V );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroColumns", "\033[0m" );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroColumns", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return red;
     fi;
@@ -591,7 +613,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, C, L, BL;
+    local R, RP, t, C, L, BL;
     
     R := HomalgRing( M );
     
@@ -600,6 +622,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: SyzygiesGeneratorsOfRows", "\033[0m" );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        t := HomalgTotalRuntimes( );
+        
         C := RP!.SyzygiesGeneratorsOfRows( M );
         
         Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m" );
@@ -625,7 +650,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP, C, id, zz, L, BL;
+    local R, RP, t, C, id, zz, L, BL;
     
     R := HomalgRing( M1 );
     
@@ -634,9 +659,12 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: SyzygiesGeneratorsOfRows", "\033[0m" );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        t := HomalgTotalRuntimes( );
+        
         C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m" );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return C;
     fi;

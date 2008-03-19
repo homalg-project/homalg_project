@@ -19,5 +19,7 @@ SetInfoLevel( InfoHomalgOperations, 1 );
 # a central place for configurations:
 DeclareGlobalVariable( "HOMALG" );
 
+DeclareGlobalFunction( "HomalgTotalRuntimes" );
+
 DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
 

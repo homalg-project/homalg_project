@@ -113,7 +113,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we take CertainRows of a bigger matrix
+    if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
         
         if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
             Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
@@ -123,7 +123,7 @@ InstallMethod( CertainRows,
             return M;
         fi;
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( CertainRows )", "\033[0m" );
+        Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainRows( CertainRows )", "\033[0m" );
         
         A := EvalCertainRows( M )[1];
         plistA := EvalCertainRows( M )[2];
@@ -144,7 +144,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we take CertainRows of a bigger matrix
+    if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
         
         if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
             Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
@@ -159,7 +159,7 @@ InstallMethod( CertainRows,
         
         if Length( plist ) * NrColumns( A ) < Length( plistA ) * NrRows( A ) then
             
-            Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( CertainColumns )", "\033[0m" );
+            Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainRows( CertainColumns )", "\033[0m" );
             
             return CertainColumns( CertainRows( A, plist ), plistA );
             
@@ -261,7 +261,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we take CertainColumns of a bigger matrix
+    if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
         
         if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
             Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
@@ -271,7 +271,7 @@ InstallMethod( CertainColumns,
             return M;
         fi;
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( CertainColumns )", "\033[0m" );
+        Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainColumns( CertainColumns )", "\033[0m" );
     
         A := EvalCertainColumns( M )[1];
         plistA := EvalCertainColumns( M )[2];
@@ -292,7 +292,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we take CertainColumns of a bigger matrix
+    if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
         
         if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
             Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
@@ -307,7 +307,7 @@ InstallMethod( CertainColumns,
         
         if Length( plist ) * NrRows( A ) < Length( plistA ) * NrColumns( A ) then
             
-            Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( CertainRows )", "\033[0m" );
+            Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainColumns( CertainRows )", "\033[0m" );
             
             return CertainRows( CertainColumns( A, plist ), plistA );
             
@@ -569,7 +569,7 @@ InstallMethod( \+,
         Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix + IsHomalgMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix + IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
     return B;
     
@@ -590,7 +590,7 @@ InstallMethod( \+,
         Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix + IsZeroMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix + IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
     return A;
     
@@ -747,7 +747,7 @@ InstallMethod( \-,
     
     if IsIdenticalObj( A, B ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: M - M", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: M - M", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
         
         return 0 * A;
         
@@ -772,7 +772,7 @@ InstallMethod( \-,
         Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix - IsHomalgMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix - IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
     return -B;
     
@@ -793,7 +793,7 @@ InstallMethod( \-,
         Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix - IsZeroMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix - IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
     return A;
     
@@ -854,7 +854,7 @@ InstallMethod( \*,
         Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix * IsHomalgMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     if NrRows( B ) = NrColumns( B ) then
         return A;
@@ -875,7 +875,7 @@ InstallMethod( \*,
         Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsZeroMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     if NrRows( A ) = NrColumns( A ) then
         return B;
@@ -896,7 +896,7 @@ InstallMethod( \*,
         Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsIdentityMatrix * IsHomalgMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsIdentityMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return B;
     
@@ -913,7 +913,7 @@ InstallMethod( \*,
         Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsIdentityMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsIdentityMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return A;
     
