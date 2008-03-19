@@ -204,7 +204,7 @@ InstallGlobalFunction( HomalgSendBlocking,
             stream.SendBlocking := SendMagmaBlocking;
             stream.define := ":=";
             stream.eol_verbose := ";";
-            stream.eol_quiet := ";;";
+            stream.eol_quiet := ";";
             stream.prompt := "magma> ";
             stream.output_prompt := "\033[1;31;47m<magma\033[0m ";
             if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true

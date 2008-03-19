@@ -17,6 +17,38 @@
 InstallValue( CommonHomalgTableForMagmaTools,
         
         rec(
+               IsZeroMatrix :=
+                 function( M )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   return HomalgSendBlocking( [ M, " eq ZeroMatrix(", R, NrRows( M ), NrColumns( M ), ")" ] , "need_output" ) = "true";
+                   
+                 end,
+               
+               ZeroRows :=
+                 function( C )
+                   local R, list_string;
+                   
+                   R := HomalgRing( C );
+                   
+                   list_string := HomalgSendBlocking( [ "z := ZeroMatrix(", R, ",1,", NrColumns( C ), "); [i: i in [ 1 .. ", NrRows( C ), " ] | RowSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
+                   return StringToIntList( list_string );
+                   
+                 end,
+               
+               ZeroColumns :=
+                 function( C )
+                   local R, list_string;
+                   
+                   R := HomalgRing( C );
+                   
+                   list_string := HomalgSendBlocking( [ "z := ZeroMatrix(", R, NrRows( C ), ",1); [i: i in [ 1 .. ", NrColumns( C ), " ] | ColumnSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
+                   return StringToIntList( list_string );
+                   
+                 end,
+               
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                

@@ -37,7 +37,7 @@ InstallMethod( CreateHomalgTable,
                
                TriangularBasisOfRows :=
                  function( arg )
-                   local M, R, nargs, N, rank_of_N, U;
+                   local M, R, nargs, N, U, rank_of_N;
                    
                    M := arg[1];
                    
@@ -45,37 +45,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 then
-                       ## compute N and U: N = U*M, create M|Id_NrRows(N) and do Gauss there
-                       HomalgSendBlocking( [ "_Id = identity_matrix(GF(2),", NrRows(M), ").sparse_matrix()" ], "need_command", R );
-                       HomalgSendBlocking( [ "_MId = block_matrix([", M, ".sparse_matrix(),_Id],2).echelonize()" ], "need_command" );
-                       HomalgSendBlocking( [ "_N=_MId.matrix_from_columns(range(", NrColumns(M) ,"))"], "need_command", R );
-                       rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N.copy()"], R );
-                       U := HomalgSendBlocking( [ "_MId.matrix_from_columns(range(", NrColumns(M), ",", NrColumns(M)+NrRows(M), ")).copy()"], R );
-                       #HomalgSendBlocking( [ "_N=0; _MId=0" ], "need_command", R);
-                   else
-                       ## compute N only:
-                       HomalgSendBlocking( [ "_N = ", M, ".echelon_form()" ], "need_command" );
-                       HomalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
-                       rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N" ], R );
-                       HomalgSendBlocking( [ "_N=0;" ], "need_command", R );
-                   fi;
-                   
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
-                       SetEval( arg[2], U );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsInvertibleMatrix( arg[2], true );
-                   fi;
-                   
-                   N := HomalgMatrix( N, R );
-                   
-                   SetNrRows( N, NrRows( M ) );
-                   SetNrColumns( N, NrColumns( M ) );
-                   SetRowRankOfMatrix( N, rank_of_N );
+                   N := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );
@@ -83,14 +53,25 @@ InstallMethod( CreateHomalgTable,
                        SetIsUpperTriangularMatrix( N, true );
                    fi;
                    
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                       # assign U:
+                       U := arg[2];
+                       SetNrRows( U, NrRows( M ) );
+                       SetNrColumns( U, NrRows( M ) );
+                       SetIsInvertibleMatrix( U, true );
+                       
+                       ## compute N and U:
+                       rank_of_N := Int( HomalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                   else
+                       ## compute N only:
+                       rank_of_N := Int( HomalgSendBlocking( [ N, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                   fi;
+                   
+                   SetRowRankOfMatrix( N, rank_of_N );
+                   
                    return N;
                    
-                 end,
-               
-               ## Must only then be provided by the RingPackage in case the default
-               ## "service" function does not match the Ring
-                   
-               MinusOne := HomalgExternalRingElement( "1", "Sage", IsOne ) ## CAUTION: only over GF(2)
+                 end
                
           );
     
