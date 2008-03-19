@@ -66,7 +66,7 @@ InstallValue( CommonHomalgTableForSageTools,
                ZeroMatrix :=
                  function( C )
                    
-                   return HomalgSendBlocking( [ "matrix(", HomalgRing(C), NrRows( C ), NrColumns( C ), ", sparse=True)" ] );
+                   return HomalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ", sparse=True)" ] );
                    
                  end,
              

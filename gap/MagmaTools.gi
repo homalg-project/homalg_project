@@ -17,46 +17,14 @@
 InstallValue( CommonHomalgTableForMagmaTools,
         
         rec(
-               IsZeroMatrix :=
-                 function( M )
-                   local R;
-                   
-                   R := HomalgRing( M );
-                   
-                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", M, R, ")" ] , "need_output" ) = "true";
-                   
-                 end,
-               
-               ZeroRows :=
-                 function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   list_string := HomalgSendBlocking( [ "`homalg/ZeroRows`(", C, R, ")" ], "need_output" );
-                   return StringToIntList( list_string );
-                   
-                 end,
-               
-               ZeroColumns :=
-                 function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   list_string := HomalgSendBlocking( [ "`homalg/ZeroColumns`(", C, R, ")" ], "need_output" );
-                   return StringToIntList( list_string );
-                   
-                 end,
-               
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
-               Zero := HomalgExternalRingElement( "0", "Maple", IsZero ),
+               Zero := HomalgExternalRingElement( "0", "MAGMA", IsZero ),
                
-               One := HomalgExternalRingElement( "1", "Maple", IsOne ),
+               One := HomalgExternalRingElement( "1", "MAGMA", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( "(-1)", "Maple" ),
+               MinusOne := HomalgExternalRingElement( "(-1)", "MAGMA" ),
                
                AreEqualMatrices :=
                  function( A, B )
@@ -64,7 +32,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", "`homalg/SubMat`(", A, B, R, "),", R, ")" ] , "need_output" ) = "true";
+                   return HomalgSendBlocking( [ A, " eq ",  B ] , "need_output" ) = "true";
                    
                  end,
                
@@ -74,7 +42,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, ")" ] );
+                   return HomalgSendBlocking( [ "ZeroMatrix(", R, NrRows( C ), NrColumns( C ), ")" ] );
                    
                  end,
              
@@ -84,7 +52,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "`homalg/IdentityMap`(", NrRows( C ), R, ")" ] );
+                   return HomalgSendBlocking( [ "ScalarMatrix(", R, NrRows( C ), ",1)" ] );
                    
                  end,
                
@@ -94,7 +62,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "`homalg/Involution`(", M, R, ")" ] );
+                   return HomalgSendBlocking( [ "Transpose(", M, ")" ] );
                    
                  end,
                
@@ -104,7 +72,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ R, "[2][CertainRows](", M, plist, ")" ] );
+                   return HomalgSendBlocking( [ "Matrix(", M, "[", plist, "])" ] );
                    
                  end,
                
@@ -114,7 +82,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ R, "[2][CertainColumns](", M, plist, ")" ] );
+                   return HomalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[",plist, "]))" ] );
                    
                  end,
                
@@ -124,7 +92,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ R, "[2][matrix](", R, "[2][UnionOfRows](", A, B, "))" ] );
+                   return HomalgSendBlocking( [ "VerticalJoin(", A, B, ")" ] );
                    
                  end,
                
@@ -134,17 +102,15 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ R, "[2][matrix](", R, "[2][UnionOfColumns](", A, B, "))" ] );
+                   return HomalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ] );
                    
                  end,
                
                DiagMat :=
                  function( e )
-                   local R, f;
+                   local f;
                    
-                   R := HomalgRing( e[1] );
-                   
-                   f := Concatenation( [ "`homalg/DiagMat`(" ], e, [ R, "[2])" ] );
+                   f := Concatenation( [ "DiagonalJoin([" ], e, [ "])" ] );
                    
                    return HomalgSendBlocking( f );
                    
@@ -156,7 +122,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/MulMat`(", a, A, R, ")" ] );
+                   return HomalgSendBlocking( [ a, "*", A ] );
                    
                  end,
                
@@ -166,7 +132,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/AddMat`(", A, B, R, ")" ] );
+                   return HomalgSendBlocking( [ A, "+", B ] );
                    
                  end,
                
@@ -176,7 +142,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/SubMat`(", A, B, R, ")" ] );
+                   return HomalgSendBlocking( [ A, "-", B ] );
                    
                  end,
                
@@ -186,7 +152,7 @@ InstallValue( CommonHomalgTableForMagmaTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/Compose`(", A, B, R, ")" ] );
+                   return HomalgSendBlocking( [ A, "*", B ] );
                    
                  end,
                

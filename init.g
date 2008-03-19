@@ -15,6 +15,8 @@ ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/IO.gd" );
 
+ReadPackage( "RingsForHomalg", "gap/HomalgExternalMatrix.gd" );
+
 ## GAP
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgTools.gd" );
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgDefault.gd" );
