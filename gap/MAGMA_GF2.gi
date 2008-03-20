@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MagmaGF2.gd               RingsForHomalg package         Mohamed Barakat
+##  MAGMAGF2.gd               RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

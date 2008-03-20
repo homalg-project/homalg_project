@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MagmaIntegers.gd          RingsForHomalg package         Mohamed Barakat
+##  MAGMAIntegers.gd          RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,17 +15,17 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for Magma Integers",
+        "for MAGMA Integers",
         [ IsHomalgExternalObjectRep
           and IsHomalgExternalObjectWithIOStream
-          and IsMagmaIntegers ],
+          and IsMAGMAIntegers ],
         
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;
     
-    RP := ShallowCopy( CommonHomalgTableForMagmaTools );
+    RP := ShallowCopy( CommonHomalgTableForMAGMATools );
     
-    RP_BestBasis := ShallowCopy( CommonHomalgTableForMagmaBestBasis );
+    RP_BestBasis := ShallowCopy( CommonHomalgTableForMAGMABestBasis );
     
     RP_specific :=
           rec(
