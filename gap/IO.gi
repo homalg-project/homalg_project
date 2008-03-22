@@ -201,7 +201,7 @@ InstallGlobalFunction( HomalgSendBlocking,
             fi;
         elif ( Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "magma" ) then
             stream.cas := "magma"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendMagmaBlocking;
+            stream.SendBlocking := SendMAGMABlocking;
             stream.define := ":=";
             stream.eol_verbose := ";";
             stream.eol_quiet := ";";

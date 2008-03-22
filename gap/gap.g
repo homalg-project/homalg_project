@@ -102,7 +102,7 @@ LaunchGAP := function(arg)
   s := IO_Popen3(Filename(DirectoriesSystemPrograms(),"gapL"),
                  [ "-b -q" ]);
   if s = fail then
-      Error("No gapR executable available");
+      Error("No gapL executable available");
   fi;
   s.stdout!.rbufsize := false;   # switch off buffering
   s.stderr!.rbufsize := false;   # switch off buffering

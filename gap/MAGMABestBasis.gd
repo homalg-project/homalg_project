@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MagmaBestBasis.gd         RingsForHomalg package         Mohamed Barakat
+##  MAGMABestBasis.gd         RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,5 +14,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForMagmaBestBasis" );
+DeclareGlobalVariable( "CommonHomalgTableForMAGMABestBasis" );
 

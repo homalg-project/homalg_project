@@ -15,10 +15,10 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for homalg rings provided by the maple package PIR",
+        "for rings provided by the gap package homalg",
         [ IsHomalgExternalObjectRep
           and IsHomalgExternalObjectWithIOStream
-          and IsHomalgPIRGAPRing ],
+          and IsPIRForHomalgInExternalGAP ],
 
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

@@ -20,18 +20,36 @@
 DeclareOperation( "HomalgMatrixInExternalGAP",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
+DeclareOperation( "HomalgMatrixInExternalGAP",
+        [ IsString, IsHomalgRing ] );
+
 DeclareOperation( "HomalgMatrixInSingular",
         [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInSingular",
+        [ IsString, IsHomalgRing ] );
 
 DeclareOperation( "HomalgMatrixInSage",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
+DeclareOperation( "HomalgMatrixInSage",
+        [ IsString, IsHomalgRing ] );
+
 DeclareOperation( "HomalgMatrixInMacaulay2",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
-DeclareOperation( "HomalgMatrixInMagma",
+DeclareOperation( "HomalgMatrixInMacaulay2",
+        [ IsString, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInMAGMA",
         [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInMAGMA",
+        [ IsString, IsHomalgRing ] );
 
 DeclareOperation( "HomalgMatrixInMaple",
         [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInMaple",
+        [ IsString, IsHomalgRing ] );
 

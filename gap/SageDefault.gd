@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the rings provided by sage.
+##  Declarations for the rings provided by Sage.
 ##
 #############################################################################
 
@@ -15,7 +15,7 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgSageRing",
+DeclareProperty( "IsHomalgRingInSage",
         IsHomalgRing );
 
 ####################################

@@ -16,5 +16,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgOreModulesMapleRing",
+DeclareProperty( "IsHomalgRingInMapleOreModules",
         IsHomalgRing );

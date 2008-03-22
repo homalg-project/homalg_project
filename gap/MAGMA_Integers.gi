@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MAGMAIntegers.gd          RingsForHomalg package         Mohamed Barakat
+##  MAGMA_Integers.gd         RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the integers in MAGMA.
+##  Implementations for the ring of integers in MAGMA.
 ##
 #############################################################################
 
@@ -15,10 +15,10 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for MAGMA Integers",
+        "for the ring of integers in MAGMA",
         [ IsHomalgExternalObjectRep
           and IsHomalgExternalObjectWithIOStream
-          and IsMAGMAIntegers ],
+          and IsIntegersForHomalgInMAGMA ],
         
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MAGMAGF2.gd               RingsForHomalg package         Mohamed Barakat
+##  MAGMA_GF2.gd              RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,5 +15,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsMAGMAGF2",
+DeclareProperty( "IsGF2ForHomalgInMAGMA",
         IsHomalgRing );

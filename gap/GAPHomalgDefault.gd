@@ -15,7 +15,7 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgGAPRing",
+DeclareProperty( "IsHomalgRingInExternalGAP",
         IsHomalgRing );
 
 ####################################

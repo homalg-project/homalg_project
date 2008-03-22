@@ -15,8 +15,10 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-               "for finite Sage field GF(2) with 2 Elements",
-               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsSageGF2 ],
+        "for the finite field GF(2) in Sage",
+        [ IsHomalgExternalObjectRep
+          and IsHomalgExternalObjectWithIOStream
+          and IsGF2ForHomalgInSage ],
 
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

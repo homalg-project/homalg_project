@@ -2,7 +2,7 @@ MAGMA_BUFSIZE := 1024;
 MAGMA_READY := "!$%&/(";
 MAGMA_READY_LENGTH := Length( MAGMA_READY );
 
-TermMagma := function(s)
+TermMAGMA := function(s)
   IO_Close(s.stdin);
   IO_Close(s.stdout);
   IO_Close(s.stderr);
@@ -26,7 +26,7 @@ SendForking := function ( f, st )
   return true;
 end;
 
-SendMagma := function(s,command)
+SendMAGMA := function(s,command)
   local cmd;
   if command[Length(command)] <> '\n' then
       Add(command,'\n');
@@ -44,7 +44,7 @@ SendMagma := function(s,command)
   s.magmaready := false;
 end;
 
-CheckMagmaOutput := function(s)
+CheckMAGMAOutput := function(s)
   local bytes,gotsomething,l,le,nr,pos;
   gotsomething := false;
   while true do  # will be exited with break or return
@@ -87,16 +87,16 @@ CheckMagmaOutput := function(s)
   # never reached
 end;
 
-SendMagmaBlocking := function(s,command)
+SendMAGMABlocking := function(s,command)
   local l,nr;
-  SendMagma(s,command);
+  SendMAGMA(s,command);
   repeat
       l := [IO_GetFD(s.stdout),IO_GetFD(s.stderr)];
       nr := IO_select(l,[],[],fail,fail);   # wait for input ready!
-  until CheckMagmaOutput(s) = true;
+  until CheckMAGMAOutput(s) = true;
 end;
 
-LaunchMagma := function(arg)
+LaunchMAGMA := function(arg)
   local s;
   s := IO_Popen3(Filename(DirectoriesSystemPrograms(),"magma"),
                  [ ]);
@@ -105,7 +105,7 @@ LaunchMagma := function(arg)
   fi;
   s.stdout!.rbufsize := false;   # switch off buffering
   s.stderr!.rbufsize := false;   # switch off buffering
-  SendMagmaBlocking(s,"\n");
+  SendMAGMABlocking(s,"\n");
   if Length(arg) > 0 and arg[1] = true then
       Print(s.lines);
   fi;

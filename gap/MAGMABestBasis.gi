@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MagmaBestBasis.gi         RingsForHomalg package         Mohamed Barakat
+##  MAGMABestBasis.gi         RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMagmaBestBasis,
+InstallValue( CommonHomalgTableForMAGMABestBasis,
         
         rec(
                ## Can optionally be provided by the RingPackage

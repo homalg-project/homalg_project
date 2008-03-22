@@ -16,5 +16,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgInvolutiveMapleRing",
+DeclareProperty( "IsHomalgRingInMapleInvolutive",
         IsHomalgRing );

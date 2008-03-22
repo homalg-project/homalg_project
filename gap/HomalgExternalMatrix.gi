@@ -29,6 +29,20 @@ InstallMethod( HomalgMatrixInExternalGAP,
 end );
 
 ##
+InstallMethod( HomalgMatrixInExternalGAP,
+        "for homalg matrices",
+        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "HomalgMatrix( ", M, ", ", R, " )" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
 InstallMethod( HomalgMatrixInSage,
         "for homalg matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
@@ -43,7 +57,21 @@ InstallMethod( HomalgMatrixInSage,
 end );
 
 ##
-InstallMethod( HomalgMatrixInMagma,
+InstallMethod( HomalgMatrixInSage,
+        "for homalg matrices",
+        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "matrix(", R, ",", M, ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInMAGMA,
         "for homalg matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
         
@@ -51,6 +79,20 @@ InstallMethod( HomalgMatrixInMagma,
     local ext_obj;
     
     ext_obj := HomalgSendBlocking( [ "Matrix(", R, ",", String( Eval( M ) ), ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInMAGMA,
+        "for homalg matrices",
+        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "Matrix(", R, ",", M, ")" ] );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -65,6 +107,20 @@ InstallMethod( HomalgMatrixInMaple,
     local ext_obj;
     
     ext_obj := HomalgSendBlocking( [ R, "[2][matrix](", String( Eval( M ) ), ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInMaple,
+        "for homalg matrices",
+        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ R, "[2][matrix](", M, ")" ] );
     
     return HomalgMatrix( ext_obj, R );
     

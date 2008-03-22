@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MagmaDefault.gd           RingsForHomalg package         Mohamed Barakat
+##  MAGMADefault.gd           RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the rings provided by sage.
+##  Declarations for the rings provided by MAGMA.
 ##
 #############################################################################
 
@@ -15,7 +15,7 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgMagmaRing",
+DeclareProperty( "IsHomalgRingInMAGMA",
         IsHomalgRing );
 
 ####################################
@@ -24,5 +24,5 @@ DeclareProperty( "IsHomalgMagmaRing",
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForMagmaDefault" );
+DeclareGlobalVariable( "CommonHomalgTableForMAGMADefault" );
 

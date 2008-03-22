@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MAGMAGF2.gd               RingsForHomalg package         Mohamed Barakat
+##  MAGMA_GF2.gd              RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,15 +15,17 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-               "for finite Sage field GF(2) with 2 Elements",
-               [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream and IsSageGF2 ],
+        "for the finite field GF(2) in MAGMA",
+        [ IsHomalgExternalObjectRep
+          and IsHomalgExternalObjectWithIOStream
+          and IsGF2ForHomalgInMAGMA ],
 
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;
     
-    RP := ShallowCopy( CommonHomalgTableForSageTools );
+    RP := ShallowCopy( CommonHomalgTableForMAGMATools );
     
-    RP_BestBasis := ShallowCopy( CommonHomalgTableForSageBestBasis );
+    RP_BestBasis := ShallowCopy( CommonHomalgTableForMAGMABestBasis );
     
     RP_specific :=
           rec(

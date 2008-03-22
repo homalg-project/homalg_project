@@ -19,7 +19,7 @@ InstallMethod( CreateHomalgTable,
         "for homalg rings provided by the maple package Janet",
         [ IsHomalgExternalObjectRep
           and IsHomalgExternalObjectWithIOStream
-          and IsHomalgJanetMapleRing ],
+          and IsHomalgRingInMapleJanet ],
 
   function( arg )
     local RP, RP_default, RP_BestBasis, RP_specific, component;

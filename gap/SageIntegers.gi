@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the integers in Sage.
+##  Implementations for the ring of integers in Sage.
 ##
 #############################################################################
 
@@ -15,10 +15,10 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for Sage Integers",
+        "for the ring of integers in Sage",
         [ IsHomalgExternalObjectRep
           and IsHomalgExternalObjectWithIOStream
-          and IsSageIntegers ],
+          and IsIntegersForHomalgInSage ],
         
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

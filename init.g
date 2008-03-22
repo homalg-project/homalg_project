@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  init.g                    RingsForHomalg package            Mohamed Barakat
+##  init.g                    RingsForHomalg package         Mohamed Barakat
 ##                                                           Simon Görtzen
 ##                                                           Max Neunhöffer
 ##                                                           Daniel Robertz
@@ -45,9 +45,9 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gd" );
 
 ## MAGMA
-ReadPackage( "RingsForHomalg", "gap/MagmaTools.gd" );
-ReadPackage( "RingsForHomalg", "gap/MagmaDefault.gd" );
-ReadPackage( "RingsForHomalg", "gap/MagmaBestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMATools.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gd" );
 
-ReadPackage( "RingsForHomalg", "gap/MagmaIntegers.gd" );
-ReadPackage( "RingsForHomalg", "gap/MagmaGF2.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA_Integers.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA_GF2.gd" );

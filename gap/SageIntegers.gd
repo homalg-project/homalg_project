@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the integers in Sage.
+##  Declarations for the ring of integers in Sage.
 ##
 #############################################################################
 
@@ -15,5 +15,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsSageIntegers",
+DeclareProperty( "IsIntegersForHomalgInSage",
         IsHomalgRing );

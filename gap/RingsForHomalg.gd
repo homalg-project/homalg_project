@@ -34,7 +34,7 @@ DeclareGlobalFunction( "RingForHomalgInSage" );
 
 DeclareGlobalFunction( "RingForHomalgInMacaulay2" );
 
-DeclareGlobalFunction( "RingForHomalgInMagma" );
+DeclareGlobalFunction( "RingForHomalgInMAGMA" );
 
 DeclareGlobalFunction( "RingForHomalgInPIRMaple9" );
 

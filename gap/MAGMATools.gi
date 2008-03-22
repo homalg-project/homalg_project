@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MagmaTools.gi             RingsForHomalg package         Mohamed Barakat
+##  MAGMATools.gi             RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMagmaTools,
+InstallValue( CommonHomalgTableForMAGMATools,
         
         rec(
                IsZeroMatrix :=

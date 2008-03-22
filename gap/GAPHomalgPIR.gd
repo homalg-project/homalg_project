@@ -15,14 +15,6 @@
 ####################################
 
 ##
-DeclareProperty( "IsHomalgPIRGAPRing",
+DeclareProperty( "IsPIRForHomalgInExternalGAP",
         IsHomalgRing );
 
-####################################
-#
-# synonyms:
-#
-####################################
-
-DeclareSynonym( "IsHomalgPIRGapRing",
-        IsHomalgPIRGAPRing );

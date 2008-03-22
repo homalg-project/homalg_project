@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the rings with BestBasis provided by sage.
+##  Implementations for the rings with BestBasis provided by Sage.
 ##
 #############################################################################
 

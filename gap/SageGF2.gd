@@ -15,5 +15,5 @@
 ####################################
 
 ##
-DeclareProperty( "IsSageGF2",
+DeclareProperty( "IsGF2ForHomalgInSage",
         IsHomalgRing );
