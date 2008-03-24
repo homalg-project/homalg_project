@@ -352,7 +352,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
     ## NF = B + CB * IA
     CB := HomalgMatrix( "void", R );
-    NF := EffectivelyDecideZeroRows( B, IA, CB );
+    NF := DecideZeroRowsEffectively( B, IA, CB );
     
     ## NF <> 0
     if not IsZeroMatrix( NF ) then

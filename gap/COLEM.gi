@@ -6,7 +6,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for COLEM subpackage.
+##  Implementation stuff for the COLEM subpackage.
 ##
 #############################################################################
 
@@ -24,69 +24,760 @@ InstallValue( COLEM,
 
 ####################################
 #
+# logical implications methods:
+#
+####################################
+
+##
+InstallImmediateMethod( IsEmptyMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsEmptyMatrix( PreEval( M ) ) then
+        return IsEmptyMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( PreEval( M ) ) then
+        return IsZeroMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalInvolution( M ) ) then
+        return IsZeroMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalLeftInverse, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalLeftInverse( M ) ) then
+        return IsZeroMatrix( EvalLeftInverse( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalRightInverse, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalRightInverse( M ) ) then
+        return IsZeroMatrix( EvalRightInverse( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalInverse, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalInverse( M ) ) then
+        return IsZeroMatrix( EvalInverse( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalCertainRows( M )[1] ) and IsZeroMatrix( EvalCertainRows( M )[1] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalCertainColumns( M )[1] ) and IsZeroMatrix( EvalCertainColumns( M )[1] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalUnionOfRows( M )[1] ) and IsZeroMatrix( EvalUnionOfRows( M )[1] )
+       and HasIsZeroMatrix( EvalUnionOfRows( M )[2] ) and IsZeroMatrix( EvalUnionOfRows( M )[2] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
+        
+  function( M )
+    
+    if HasIsZeroMatrix( EvalUnionOfColumns( M )[1] ) and IsZeroMatrix( EvalUnionOfColumns( M )[1] )
+       and HasIsZeroMatrix( EvalUnionOfColumns( M )[2] ) and IsZeroMatrix( EvalUnionOfColumns( M )[2] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZeroMatrix,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow, 0,
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfFirstNonZeroEntryPerRow( M );
+    
+    return Set( pos ) in [ [ ], [ 0 ] ];
+    
+end );
+
+##
+InstallImmediateMethod( IsIdentityMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsIdentityMatrix( PreEval( M ) ) then
+        return IsIdentityMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsIdentityMatrix,
+        IsHomalgMatrix and IsPermutationMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasNrRows, 0,
+        
+  function( M )
+    
+    return PositionOfFirstNonZeroEntryPerRow( M ) = [ 1 .. NrRows( M ) ];
+    
+end );
+
+##
+InstallImmediateMethod( IsPermutationMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsPermutationMatrix( PreEval( M ) ) then
+        return IsPermutationMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsSubidentityMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsSubidentityMatrix( PreEval( M ) ) then
+        return IsSubidentityMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsSubidentityMatrix,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    local mat, plist, pos, pos_non_zero;
+    
+    mat := EvalCertainRows( M )[1];
+    plist := EvalCertainRows( M )[2];
+    
+    if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
+        
+        if HasNrRows( mat ) and HasNrColumns( mat )
+           and NrRows( mat ) <= NrColumns( mat ) then
+            
+            return IsDuplicateFree( plist );
+            
+        fi;
+        
+        if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNrColumns( mat ) then
+            
+            pos := PositionOfFirstNonZeroEntryPerRow( mat );
+            
+            pos := pos{ plist };
+            
+            pos_non_zero := Filtered( pos, i -> i <> 0 );
+            
+            if not IsDuplicateFree( pos_non_zero ) then
+                return false;
+            fi;
+            
+            if not 0 in pos					## NrRows( M ) <= NrColumns( M )
+               or  Length( pos_non_zero ) = NrColumns( mat )	## NrColumns( M ) <= NrRows( M )
+               then
+                return true;
+            fi;
+            
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsSubidentityMatrix,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local mat, plist, pos, plist_non_zero;
+    
+    mat := EvalCertainColumns( M )[1];
+    plist := EvalCertainColumns( M )[2];
+    
+    if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
+        
+        if HasNrColumns( mat ) and HasNrRows( mat )
+           and NrColumns( mat ) <= NrRows( mat ) then
+            
+            return IsDuplicateFree( plist );
+            
+        fi;
+        
+        
+        if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNrRows( mat ) then
+            
+            pos := PositionOfFirstNonZeroEntryPerRow( mat );
+            
+            plist := List( plist, function( i ) if i in pos then return i; else return 0; fi; end );
+            
+            plist_non_zero := Filtered( plist, i -> i <> 0 );
+            
+            if not IsDuplicateFree( plist_non_zero ) then
+                return false;
+            fi;
+            
+            if not 0 in plist 					## NrColumns( M ) <= NrRows( M )
+               or Length( plist_non_zero ) = NrRows( mat )	## NrRows( M ) <= NrColumns( M )
+               then
+                return true;
+            fi;
+            
+        fi;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightInvertibleMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsRightInvertibleMatrix( PreEval( M ) ) then
+        return IsRightInvertibleMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightInvertibleMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsLeftInvertibleMatrix( EvalInvolution( M ) ) then
+        return IsLeftInvertibleMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftInvertibleMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsLeftInvertibleMatrix( PreEval( M ) ) then
+        return IsLeftInvertibleMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftInvertibleMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsRightInvertibleMatrix( EvalInvolution( M ) ) then
+        return IsRightInvertibleMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullRowRankMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsFullRowRankMatrix( PreEval( M ) ) then
+        return IsFullRowRankMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullRowRankMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsFullColumnRankMatrix( EvalInvolution( M ) ) then
+        return IsFullColumnRankMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullColumnRankMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsFullColumnRankMatrix( PreEval( M ) ) then
+        return IsFullColumnRankMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFullColumnRankMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsFullRowRankMatrix( EvalInvolution( M ) ) then
+        return IsFullRowRankMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsLowerTriangularMatrix( EvalInvolution( M ) ) then
+        return IsLowerTriangularMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainRows( M );
+    
+    if HasIsUpperTriangularMatrix( C[1] ) and IsUpperTriangularMatrix( C[1] )
+       and ( C[2] = NrRows( C[1] ) + [ - Length( C[2] ) .. 0 ]
+             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsUpperTriangularMatrix( PreEval( M ) ) then
+        return IsUpperTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsUpperTriangularMatrix( EvalInvolution( M ) ) then
+        return IsUpperTriangularMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainColumns( M );
+    
+    if HasIsLowerTriangularMatrix( C[1] ) and IsLowerTriangularMatrix( C[1] )
+       and ( C[2] = NrColumns( C[1] ) + [ - Length( C[2] ) .. 0 ]
+             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsLowerTriangularMatrix( PreEval( M ) ) then
+        return IsLowerTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsDiagonalMatrix,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainRows( M );
+    
+    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] )
+       and C[2] = [ 1 .. Length( C[2] ) ] then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsDiagonalMatrix,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainColumns( M );
+    
+    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] )
+       and C[2] = [ 1 .. Length( C[2] ) ] then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsDiagonalMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsDiagonalMatrix( PreEval( M ) ) then
+        return IsDiagonalMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsStrictUpperTriangularMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsStrictUpperTriangularMatrix( PreEval( M ) ) then
+        return IsStrictUpperTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsStrictLowerTriangularMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsStrictLowerTriangularMatrix( PreEval( M ) ) then
+        return IsStrictLowerTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
+# immediate methods for attributes:
+#
+####################################
+
+##
+InstallImmediateMethod( NrRows,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasNrRows( PreEval( M ) ) then
+        return NrRows( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( NrColumns,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasNrColumns( PreEval( M ) ) then
+        return NrColumns( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasColumnRankOfMatrix( EvalInvolution( M ) ) then
+        return ColumnRankOfMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasRowRankOfMatrix( EvalInvolution( M ) ) then
+        return RowRankOfMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasRowRankOfMatrix( PreEval( M ) ) then
+        return RowRankOfMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasColumnRankOfMatrix( PreEval( M ) ) then
+        return ColumnRankOfMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    local mat, pos;
+    
+    mat := EvalCertainRows( M )[1];
+    
+    if HasPositionOfFirstNonZeroEntryPerRow( mat ) then
+        
+        pos := PositionOfFirstNonZeroEntryPerRow( mat );
+        
+        return pos{ EvalCertainRows( M )[2] };
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
+        IsHomalgMatrix and HasEvalCertainColumns and HasNrRows, 0,
+        
+  function( M )
+    local mat, pos, plist;
+    
+    mat := EvalCertainColumns( M )[1];
+    
+    if HasPositionOfFirstNonZeroEntryPerRow( mat ) then
+        
+        pos := PositionOfFirstNonZeroEntryPerRow( mat );
+        
+        plist := EvalCertainColumns( M )[2];
+        
+        return List( [ 1 .. NrRows( M ) ], function( i ) if pos[i] in plist then return Position( plist, pos[i] ); else return 0; fi; end );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroRows,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasNrRows, 0,
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfFirstNonZeroEntryPerRow( M );
+    
+    return Filtered( [ 1 .. NrRows( M ) ], i -> pos[i] = 0 );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroColumns,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow and IsSubidentityMatrix and HasNrColumns, 0,
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfFirstNonZeroEntryPerRow( M );
+    
+    return Filtered( [ 1 .. NrColumns( M ) ], i -> not i in pos );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
 
 #-----------------------------------
-# \=
-#-----------------------------------
-
-##
-InstallMethod( \=,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M1, M2 )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix = IsZeroMatrix", "\033[0m" );
-    
-    return AreComparableMatrices( M1, M2 );
-    
-end );
-
-##
-InstallMethod( \=,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M1, M2 )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsIdentityMatrix = IsIdentityMatrix", "\033[0m" );
-    
-    return AreComparableMatrices( M1, M2 );
-    
-end );
-
-#-----------------------------------
 # Involution
 #-----------------------------------
-
-##
-InstallMethod( Involution,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( IsZeroMatrix )", "\033[0m" );
-    
-    return HomalgMatrix( "zero", NrColumns( M ), NrRows( M ), HomalgRing( M ) );
-    
-end );
-
-##
-InstallMethod( Involution,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( IsIdentityMatrix )", "\033[0m" );
-    
-    return M;
-    
-end );
 
 ##
 InstallMethod( Involution,
@@ -177,7 +868,7 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
         
   function( M, plist )
-    local A, B, plistA, plistB;
+    local A, B, rowsA, rowsB, plistA, plistB;
     
     if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
         Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
@@ -192,8 +883,11 @@ InstallMethod( CertainRows,
     A := EvalUnionOfRows( M )[1];
     B := EvalUnionOfRows( M )[2];
     
-    plistA := Intersection2( plist, [ 1 .. NrRows( A ) ] );
-    plistB := Intersection2( plist - NrRows( A ), [ 1 .. NrRows( B ) ] );
+    rowsA := [ 1 .. NrRows( A ) ];
+    rowsB := [ 1 .. NrRows( B ) ];
+    
+    plistA := Filtered( plist, x -> x in rowsA );		## CAUTION: don't use Intersection(2)
+    plistB := Filtered( plist - NrRows( A ), x -> x in rowsB );	## CAUTION: don't use Intersection(2)
     
     return UnionOfRows( CertainRows( A, plistA ), CertainRows( B, plistB ) );
     
@@ -325,7 +1019,7 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
         
   function( M, plist )
-    local A, B, plistA, plistB;
+    local A, B, columnsA, columnsB, plistA, plistB;
     
     if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
         Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
@@ -340,8 +1034,11 @@ InstallMethod( CertainColumns,
     A := EvalUnionOfColumns( M )[1];
     B := EvalUnionOfColumns( M )[2];
     
-    plistA := Intersection2( plist, [ 1 .. NrColumns( A ) ] );
-    plistB := Intersection2( plist - NrColumns( A ), [ 1 .. NrColumns( B ) ] );
+    columnsA := [ 1 .. NrColumns( A ) ];
+    columnsB := [ 1 .. NrColumns( B ) ];
+    
+    plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
+    plistB := Filtered( plist - NrColumns( A ), x -> x in columnsB );	## CAUTION: don't use Intersection(2)
     
     return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
     
@@ -398,203 +1095,8 @@ InstallMethod( CertainColumns,
 end );
 
 #-----------------------------------
-# UnionOfRows
-#-----------------------------------
-
-##
-InstallMethod( UnionOfRows,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfRows( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return A;
-    
-end );
-
-##
-InstallMethod( UnionOfRows,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfRows( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( UnionOfRows,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfRows( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return HomalgMatrix( "zero", NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
-    
-end );
-
-#-----------------------------------
-# UnionOfColumns
-#-----------------------------------
-
-##
-InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfColumns( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfColumns( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return A;
-    
-end );
-
-##
-InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfColumns( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
-    
-    return HomalgMatrix( "zero", NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
-    
-end );
-
-#-----------------------------------
-# MulMat
-#-----------------------------------
-
-##
-InstallMethod( \*,
-        "of homalg matrices with ring elements",
-        [ IsRingElement and IsZero, IsHomalgMatrix ],
-        
-  function( a, A )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZero * IsHomalgMatrix", "\033[0m" );
-    
-    return 0 * A;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of homalg matrices with ring elements",
-        [ IsRingElement and IsOne, IsHomalgMatrix ],
-        
-  function( a, A )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsOne * IsHomalgMatrix", "\033[0m" );
-    
-    return A;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of homalg matrices",
-        [ IsRingElement, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( a, A )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsRingElement * IsZeroMatrix", "\033[0m" );
-    
-    return A;
-    
-end );
-
-#-----------------------------------
 # AddMat
 #-----------------------------------
-
-##
-InstallMethod( \+,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix + IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( \+,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix + IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
-    
-    return A;
-    
-end );
 
 ##
 InstallMethod( \+,
@@ -703,19 +1205,6 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( A )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: -IsZeroMatrix", "\033[0m" );
-    
-    return A;
-    
-end );
-
-## a synonym of `-<elm>':
-InstallMethod( AdditiveInverseMutable,
-        "of homalg matrices",
         [ IsHomalgMatrix and HasEvalMulMat ],
         
   function( A )
@@ -737,67 +1226,6 @@ end );
 #-----------------------------------
 # SubMat
 #-----------------------------------
-
-##
-InstallMethod( \-,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ], 1000,
-        
-  function( A, B )
-    
-    if IsIdenticalObj( A, B ) then
-        
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: M - M", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
-        
-        return 0 * A;
-        
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( \-,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix - IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
-    
-    return -B;
-    
-end );
-
-##
-InstallMethod( \-,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix - IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
-    
-    return A;
-    
-end );
 
 ##
 InstallMethod( \-,
@@ -842,82 +1270,6 @@ end );
 #-----------------------------------
 # Compose
 #-----------------------------------
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsZeroMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
-    
-    if NrRows( B ) = NrColumns( B ) then
-        return A;
-    else
-        return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), HomalgRing( A ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
-    
-    if NrRows( A ) = NrColumns( A ) then
-        return B;
-    else
-        return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), HomalgRing( B ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsIdentityMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( A, B )
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsIdentityMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
-    
-    return A;
-    
-end );
 
 ##
 InstallMethod( \*,
@@ -1039,19 +1391,6 @@ InstallMethod( LeftInverse,
     
 end );
 
-##
-InstallMethod( LeftInverse,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: LeftInverse( IsIdentityMatrix )", "\033[0m" );
-    
-    return M;
-    
-end );
-
 #-----------------------------------
 # RightInverse
 #-----------------------------------
@@ -1080,170 +1419,5 @@ InstallMethod( RightInverse,
     
     return EvalInverse( M );
     
-end );
-
-##
-InstallMethod( RightInverse,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: RightInverse( IsIdentityMatrix )", "\033[0m" );
-    
-    return M;
-    
-end );
-
-#-----------------------------------
-# ZeroRows
-#-----------------------------------
-
-##
-InstallMethod( ZeroRows,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix and HasNrRows ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: ZeroRows( IsZeroMatrix )", "\033[0m" );
-    
-    return [ 1 .. NrRows( C ) ];
-    
-end );
-
-##
-InstallMethod( ZeroRows,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: ZeroRows( IsIdentityMatrix )", "\033[0m" );
-    
-    return [ ];
-    
-end );
-
-#-----------------------------------
-# ZeroColumns
-#-----------------------------------
-
-##
-InstallMethod( ZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix and HasNrColumns ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: ZeroColumns( IsZeroMatrix )", "\033[0m" );
-    
-    return [ 1 .. NrColumns( C ) ];
-    
-end );
-
-##
-InstallMethod( ZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: ZeroColumns( IsIdentityMatrix )", "\033[0m" );
-    
-    return [ ];
-    
-end );
-
-#-----------------------------------
-# NonZeroRows
-#-----------------------------------
-
-##
-InstallMethod( NonZeroRows,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: NonZeroRows( IsZeroMatrix )", "\033[0m" );
-    
-    return [ ];
-    
-end );
-
-##
-InstallMethod( NonZeroRows,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: NonZeroRows( IsIdentityMatrix )", "\033[0m" );
-    
-    return [ 1 .. NrRows( C ) ];
-    
-end );
-
-#-----------------------------------
-# NonZeroColumns
-#-----------------------------------
-
-##
-InstallMethod( NonZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: NonZeroColumns( IsZeroMatrix )", "\033[0m" );
-    
-    return [ ];
-    
-end );
-
-##
-InstallMethod( NonZeroColumns,			 	## FIXME: make it an InstallImmediateMethod
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix and HasNrColumns ],
-        
-  function( C )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: NonZeroColumns( IsIdentityMatrix )", "\033[0m" );
-    
-    return [ 1 .. NrColumns( C ) ];
-    
-end );
-
-#-----------------------------------
-# RowRankOfMatrix
-#-----------------------------------
-
-##
-InstallMethod( RowRankOfMatrix,			 	## FIXME: make an extra InstallImmediateMethod when NonZeroRows( M ) is set
-        [ IsHomalgMatrix and IsTriangularMatrix ],
-        
-  function( M )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: RowRankOfMatrix( IsTriangularMatrix )", "\033[0m" );
-    
-    return Length( NonZeroRows( M ) );
-        
-end );
-
-#-----------------------------------
-# ColumnRankOfMatrix
-#-----------------------------------
-
-##
-InstallMethod( ColumnRankOfMatrix,			## FIXME: make an extra InstallImmediateMethod when NonZeroColumns( M ) is set
-        [ IsHomalgMatrix and IsTriangularMatrix ],
-        
-  function( M )
-    
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: ColumnRankOfMatrix( IsTriangularMatrix )", "\033[0m" );
-    
-    return Length( NonZeroColumns( M ) );
-        
 end );
 

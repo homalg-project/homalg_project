@@ -42,6 +42,12 @@ DeclareProperty( "IsZeroMatrix",
 DeclareProperty( "IsIdentityMatrix",
         IsHomalgMatrix );
 
+DeclareProperty( "IsPermutationMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsSubidentityMatrix",
+        IsHomalgMatrix );
+
 DeclareProperty( "IsFullRowRankMatrix",
         IsHomalgMatrix );
 
@@ -169,6 +175,12 @@ DeclareAttribute( "NonZeroRows",
         IsHomalgMatrix );
 
 DeclareAttribute( "NonZeroColumns",
+        IsHomalgMatrix );
+
+DeclareAttribute( "PositionOfFirstNonZeroEntryPerRow",
+        IsHomalgMatrix );
+
+DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
         IsHomalgMatrix );
 
 ####################################

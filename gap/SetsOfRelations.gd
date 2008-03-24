@@ -53,6 +53,6 @@ DeclareGlobalFunction( "CreateSetsOfRelationsForRightModule" );
 
 # basic operations:
 
-DeclareOperation( "PositionOfLastStoredSet",
+DeclareOperation( "PositionOfLastStoredSetOfRelations",
         [ IsSetsOfRelations ] );
 

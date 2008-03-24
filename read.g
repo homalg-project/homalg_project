@@ -17,6 +17,7 @@ ReadPackage( "homalg", "gap/HomalgRing.gi" );
 
 ReadPackage( "homalg", "gap/HomalgMatrix.gi" );
 
+ReadPackage( "homalg", "gap/LIMAT.gi" );
 ReadPackage( "homalg", "gap/COLEM.gi" );
 
 ReadPackage( "homalg", "gap/HomalgRelations.gi" );

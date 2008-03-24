@@ -46,10 +46,10 @@ DeclareOperation( "DecideZeroRows",
 DeclareOperation( "DecideZeroColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "EffectivelyDecideZeroRows",
+DeclareOperation( "DecideZeroRowsEffectively",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "EffectivelyDecideZeroColumns",
+DeclareOperation( "DecideZeroColumnsEffectively",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfRows",

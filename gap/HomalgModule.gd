@@ -155,17 +155,14 @@ DeclareOperation( "BasisOfModule",
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
-DeclareOperation( "BasisCoeff",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "EffectivelyDecideZero",
+DeclareOperation( "DecideZeroEffectively",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgModule, IsHomalgModule ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgModule ] );
+        [ IsHomalgModule, IsHomalgModule ] );
 
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );

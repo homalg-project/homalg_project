@@ -53,6 +53,6 @@ DeclareGlobalFunction( "CreateSetsOfGeneratorsForRightModule" );
 
 # basic operations:
 
-DeclareOperation( "PositionOfLastStoredSet",
+DeclareOperation( "PositionOfLastStoredSetOfGenerators",
         [ IsSetsOfGenerators ] );
 

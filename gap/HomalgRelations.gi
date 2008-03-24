@@ -153,9 +153,9 @@ InstallMethod( BasisOfModule,
         
         if bas <> mat then
             rel!.BasisOfModule := bas;
-            SetCanBeUsedToEffectivelyDecideZero( rel, false );
+            SetCanBeUsedToDecideZeroEffectively( rel, false );
         else
-            SetCanBeUsedToEffectivelyDecideZero( rel, true );
+            SetCanBeUsedToDecideZeroEffectively( rel, true );
         fi;
     else
         bas := rel!.BasisOfModule;
@@ -163,7 +163,7 @@ InstallMethod( BasisOfModule,
     
     bas := HomalgRelationsForLeftModule( bas );
     
-    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
     
     return bas;
 end );
@@ -184,9 +184,9 @@ InstallMethod( BasisOfModule,
         
         if bas <> mat then
             rel!.BasisOfModule := bas;
-            SetCanBeUsedToEffectivelyDecideZero( rel, false );
+            SetCanBeUsedToDecideZeroEffectively( rel, false );
         else
-            SetCanBeUsedToEffectivelyDecideZero( rel, true );
+            SetCanBeUsedToDecideZeroEffectively( rel, true );
         fi;
     else
         bas := rel!.BasisOfModule;
@@ -194,7 +194,7 @@ InstallMethod( BasisOfModule,
     
     bas := HomalgRelationsForLeftModule( bas );
     
-    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
     
     return bas;
 end );
@@ -202,7 +202,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
-	[ IsHomalgRelations and CanBeUsedToEffectivelyDecideZero ],
+	[ IsHomalgRelations and CanBeUsedToDecideZeroEffectively ],
         
   function( rel )
     
@@ -264,12 +264,12 @@ InstallMethod( BasisCoeff,
     
     if not IsBound( rel!.BasisOfModule ) then
         rel!.BasisOfModule := BasisOfRowsCoeff( MatrixOfRelations( rel ) );
-        SetCanBeUsedToEffectivelyDecideZero( rel, false );
+        SetCanBeUsedToDecideZeroEffectively( rel, false );
     fi;
     
     bas := HomalgRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
-    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
         
     return bas;
     
@@ -285,36 +285,36 @@ InstallMethod( BasisCoeff,
     
     if not IsBound( rel!.BasisOfModule ) then
         rel!.BasisOfModule := BasisOfColumnsCoeff( MatrixOfRelations( rel ) );
-        SetCanBeUsedToEffectivelyDecideZero( rel, false );
+        SetCanBeUsedToDecideZeroEffectively( rel, false );
     fi;
     
     bas := HomalgRelationsForRightModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
-    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
     
     return bas;
     
 end );
 
 ##
-InstallMethod( EffectivelyDecideZero,
+InstallMethod( DecideZeroEffectively,
         "modulo a set of relations of a homalg module",
 	[ IsHomalgMatrix, IsHomalgLeftRelationsRep ],
         
   function( mat, rel )
     
-    return EffectivelyDecideZeroRows( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+    return DecideZeroRowsEffectively( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
     
 end );
 
 ##
-InstallMethod( EffectivelyDecideZero,
+InstallMethod( DecideZeroEffectively,
         "modulo a set of relations of a homalg module",
 	[ IsHomalgMatrix, IsHomalgRightRelationsRep ],
         
   function( mat, rel )
     
-    return EffectivelyDecideZeroColumns( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+    return DecideZeroColumnsEffectively( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
     
 end );
 

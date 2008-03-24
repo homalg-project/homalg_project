@@ -26,12 +26,12 @@ DeclareRepresentation( "IsSetsOfGeneratorsRep",
 ####################################
 
 # a new family:
-BindGlobal( "SetsOfGeneratorsFamily",
-        NewFamily( "SetsOfGeneratorsFamily" ) );
+BindGlobal( "HomalgSetsOfGeneratorsFamily",
+        NewFamily( "HomalgSetsOfGeneratorsFamily" ) );
 
 # a new type:
-BindGlobal( "SetsOfGeneratorsType",
-        NewType( SetsOfGeneratorsFamily ,
+BindGlobal( "HomalgSetsOfGeneratorsType",
+        NewType( HomalgSetsOfGeneratorsFamily ,
                 IsSetsOfGeneratorsRep ) );
 
 ####################################
@@ -40,7 +40,7 @@ BindGlobal( "SetsOfGeneratorsType",
 #
 ####################################
 
-InstallMethod( PositionOfLastStoredSet,
+InstallMethod( PositionOfLastStoredSetOfGenerators,
         "for sets of generators",
         [ IsSetsOfGeneratorsRep ],
         
@@ -70,7 +70,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
     fi;
     
     ## Objectify:
-    Objectify( SetsOfGeneratorsType, generators );
+    Objectify( HomalgSetsOfGeneratorsType, generators );
     
     return generators;
     
@@ -89,7 +89,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForRightModule,
     fi;
     
     ## Objectify:
-    Objectify( SetsOfGeneratorsType, generators );
+    Objectify( HomalgSetsOfGeneratorsType, generators );
     
     return generators;
     

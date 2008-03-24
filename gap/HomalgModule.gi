@@ -17,7 +17,7 @@
 # a new representation for the category IsHomalgModule:
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsHomalgModule,
-        [ ] );
+        [ "SetsOfGenerators", "SetsOfRelations" ] );
 
 ####################################
 #
@@ -26,16 +26,16 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 ####################################
 
 # a new family:
-BindGlobal( "ModulesFamily",
-        NewFamily( "ModulesFamily" ) );
+BindGlobal( "HomalgModulesFamily",
+        NewFamily( "HomalgModulesFamily" ) );
 
 # two new types:
-BindGlobal( "LeftModuleFinitelyPresentedType",
-        NewType( ModulesFamily ,
+BindGlobal( "HomalgLeftModuleFinitelyPresentedType",
+        NewType( HomalgModulesFamily ,
                 IsFinitelyPresentedModuleRep and IsLeftModule ) );
 
-BindGlobal( "RightModuleFinitelyPresentedType",
-        NewType( ModulesFamily ,
+BindGlobal( "HomalgRightModuleFinitelyPresentedType",
+        NewType( HomalgModulesFamily ,
                 IsFinitelyPresentedModuleRep and IsRightModule ) );
 
 ####################################
@@ -419,19 +419,19 @@ InstallMethod( AddANewPresentation,
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
-    l := PositionOfLastStoredSet( rels );
+    l := PositionOfLastStoredSetOfRelations( rels );
     
     ## define the (l+1)st set of generators
     gens!.(l+1) := gen;
     
     ## adjust the list of positions:
-    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations
-    rels!.(l+1) := rels!.(l);
+    rels!.(l+1) := rels!.(l);			## FIXME: is rels!.(l) always assigned?
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
@@ -455,19 +455,19 @@ InstallMethod( AddANewPresentation,
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
-    l := PositionOfLastStoredSet( rels );
+    l := PositionOfLastStoredSetOfRelations( rels );
     
     ## define the (l+1)st set of generators
     gens!.(l+1) := gens!.(l);
     
     ## adjust the list of positions:
-    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
@@ -491,19 +491,19 @@ InstallMethod( AddANewPresentation,
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
-    l := PositionOfLastStoredSet( rels );
+    l := PositionOfLastStoredSetOfRelations( rels );
     
     ## define the (l+1)st set of generators
     gens!.(l+1) := gen;
     
     ## adjust the list of positions:
-    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;
+    gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
@@ -521,7 +521,7 @@ InstallMethod( AddANewPresentation,
 end );
 
 ##
-InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly changing the module M
+InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly affecting the module M
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
@@ -530,15 +530,15 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly cha
     
     rel := RelationsOfModule( M );
     
-    bas := BasisOfModule( rel );
-    
-    if not ( HasCanBeUsedToEffectivelyDecideZero( rel ) and CanBeUsedToEffectivelyDecideZero( rel ) ) then
+    if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and CanBeUsedToDecideZeroEffectively( rel ) ) then
+        
+        bas := BasisOfModule( rel );
         
         AddANewPresentation( M, bas );
         
     fi;
     
-    return bas;
+    return RelationsOfModule( M );
     
 end );
 
@@ -557,29 +557,7 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( BasisCoeff,			### CAUTION: has the side effect of possibly changing the module M
-        "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local rel;
-    
-    rel := RelationsOfModule( M );
-    
-    if not ( HasCanBeUsedToEffectivelyDecideZero( rel ) and CanBeUsedToEffectivelyDecideZero( rel ) ) then
-        
-        rel := BasisCoeff( RelationsOfModule( M ) ) ;
-        
-        AddANewPresentation( M, rel );
-        
-    fi;
-    
-    return rel;
-    
-end );
-
-##
-InstallMethod( EffectivelyDecideZero,
+InstallMethod( DecideZeroEffectively,
         "for homalg modules",
 	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
@@ -588,18 +566,7 @@ InstallMethod( EffectivelyDecideZero,
     
     rel := RelationsOfModule( M );
     
-    return EffectivelyDecideZero( mat, rel ) ;
-    
-end );
-
-##
-InstallMethod( SyzygiesGenerators,
-        "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
-        
-  function( M1, M2 )
-    
-    return SyzygiesGenerators( RelationsOfModule( M1 ), RelationsOfModule( M2 ) ) ;
+    return DecideZeroEffectively( mat, rel ) ;
     
 end );
 
@@ -611,6 +578,17 @@ InstallMethod( SyzygiesGenerators,
   function( M )
     
     return SyzygiesGenerators( RelationsOfModule( M ) ) ;
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( M1, M2 )
+    
+    return SyzygiesGenerators( RelationsOfModule( M1 ), RelationsOfModule( M2 ) ) ;
     
 end );
 
@@ -720,11 +698,11 @@ InstallMethod( BetterGenerators,
     
     rel := HomalgRelationsForLeftModule( rel );
     
-    gen := VI * MatrixOfGenerators( M ); ## FIXME: ...
+    gen := VI * MatrixOfGenerators( M ); ## FIXME: the relations of these generators are not transfered
     
     gen := HomalgGeneratorsForLeftModule( gen );
     
-    AddANewPresentation( M, gen, rel );
+    AddANewPresentation( M, gen, rel, V, VI );
     
     return GetRidOfZeroGenerators( M );
     
@@ -824,18 +802,19 @@ InstallMethod( Presentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, LeftModuleFinitelyPresentedType,
+                M, HomalgLeftModuleFinitelyPresentedType,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZeroModule, true );
     else
         ObjectifyWithAttributes(
-                M, LeftModuleFinitelyPresentedType,
+                M, HomalgLeftModuleFinitelyPresentedType,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
@@ -869,18 +848,19 @@ InstallMethod( Presentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, LeftModuleFinitelyPresentedType,
+                M, HomalgLeftModuleFinitelyPresentedType,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZeroModule, true );
     else
         ObjectifyWithAttributes(
-                M, LeftModuleFinitelyPresentedType,
+                M, HomalgLeftModuleFinitelyPresentedType,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
@@ -916,18 +896,19 @@ InstallMethod( Presentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, RightModuleFinitelyPresentedType,
+                M, HomalgRightModuleFinitelyPresentedType,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZeroModule, true );
     else
         ObjectifyWithAttributes(
-                M, RightModuleFinitelyPresentedType,
+                M, HomalgRightModuleFinitelyPresentedType,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
@@ -961,18 +942,19 @@ InstallMethod( Presentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, RightModuleFinitelyPresentedType,
+                M, HomalgRightModuleFinitelyPresentedType,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZeroModule, true );
     else
         ObjectifyWithAttributes(
-                M, RightModuleFinitelyPresentedType,
+                M, HomalgRightModuleFinitelyPresentedType,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
@@ -1011,18 +993,19 @@ InstallMethod( LeftPresentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, LeftModuleFinitelyPresentedType,
+                M, HomalgLeftModuleFinitelyPresentedType,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZeroModule, true );
     else
         ObjectifyWithAttributes(
-                M, LeftModuleFinitelyPresentedType,
+                M, HomalgLeftModuleFinitelyPresentedType,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
@@ -1054,11 +1037,12 @@ InstallMethod( LeftPresentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(
-            M, LeftModuleFinitelyPresentedType,
+            M, HomalgLeftModuleFinitelyPresentedType,
             LeftActingDomain, R,
             GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     
@@ -1096,18 +1080,19 @@ InstallMethod( RightPresentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, RightModuleFinitelyPresentedType,
+                M, HomalgRightModuleFinitelyPresentedType,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZeroModule, true );
     else
         ObjectifyWithAttributes(
-                M, RightModuleFinitelyPresentedType,
+                M, HomalgRightModuleFinitelyPresentedType,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     fi;
@@ -1139,11 +1124,12 @@ InstallMethod( RightPresentation,
     
     M := rec( SetsOfGenerators := gens,
               SetsOfRelations := rels,
+              TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(
-            M, RightModuleFinitelyPresentedType,
+            M, HomalgRightModuleFinitelyPresentedType,
             RightActingDomain, R,
             GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     

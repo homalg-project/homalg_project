@@ -550,7 +550,7 @@ InstallMethod( DecideZeroColumns,
 end );
 
 ##
-InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows (ReduceCoeff)
+InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively (ReduceCoeff)
         "for a homalg matrix",
 	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -561,15 +561,15 @@ InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows
     
     RP := HomalgTable( R );
   
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: EffectivelyDecideZeroRows", "\033[0m" );
+    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroRowsEffectively", "\033[0m" );
     
-    if IsBound(RP!.EffectivelyDecideZeroRows) then
+    if IsBound(RP!.DecideZeroRowsEffectively) then
         
         t := HomalgTotalRuntimes( );
         
-        red := RP!.EffectivelyDecideZeroRows( A, B, U );
+        red := RP!.DecideZeroRowsEffectively( A, B, U );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroRows", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRowsEffectively", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return red;
     fi;
@@ -586,14 +586,14 @@ InstallMethod( EffectivelyDecideZeroRows,	### defines: EffectivelyDecideZeroRows
     SetNrRows( U, NrRows( red ) );
     SetNrColumns( U, NrRows( A ) );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroRows", "\033[0m" );
+    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRowsEffectively", "\033[0m" );
         
     return red;
     
 end );
 
 ##
-InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroColumns (ReduceCoeff)
+InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffectively (ReduceCoeff)
         "for a homalg matrix",
 	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -604,15 +604,15 @@ InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroC
     
     RP := HomalgTable( R );
   
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: EffectivelyDecideZeroColumns", "\033[0m" );
+    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroColumnsEffectively", "\033[0m" );
     
-    if IsBound(RP!.EffectivelyDecideZeroColumns) then
+    if IsBound(RP!.DecideZeroColumnsEffectively) then
         
         t := HomalgTotalRuntimes( );
         
-        red := RP!.EffectivelyDecideZeroColumns( A, B, V );
+        red := RP!.DecideZeroColumnsEffectively( A, B, V );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroColumns", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
+        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumnsEffectively", "\033[0m", "	in ", HomalgTotalRuntimes( t ) );
         
         return red;
     fi;
@@ -621,11 +621,11 @@ InstallMethod( EffectivelyDecideZeroColumns,	### defines: EffectivelyDecideZeroC
     
     U := HomalgMatrix( "void", R );
     
-    ired := EffectivelyDecideZeroRows( Involution( A ), Involution( B ), U );
+    ired := DecideZeroRowsEffectively( Involution( A ), Involution( B ), U );
     
     SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   EffectivelyDecideZeroColumns", "\033[0m" );
+    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumnsEffectively", "\033[0m" );
     
     return Involution( ired );
     

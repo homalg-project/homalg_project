@@ -126,12 +126,12 @@ InstallMethod( BasisOfModule,
     
     if not IsBound( gen!.BasisOfModule ) then
         gen!.BasisOfModule := BasisOfRows( MatrixOfGenerators( gen ) );
-        SetCanBeUsedToEffectivelyDecideZero( gen, false );
+        SetCanBeUsedToDecideZeroEffectively( gen, false );
     fi;
     
     bas := HomalgGeneratorsForLeftModule( gen!.BasisOfModule, HomalgRing( gen ) );
     
-    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
     
     return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME
 end );
@@ -146,12 +146,12 @@ InstallMethod( BasisOfModule,
     
     if not IsBound( gen!.BasisOfModule ) then
         gen!.BasisOfModule := BasisOfColumns( MatrixOfGenerators( gen ) );
-        SetCanBeUsedToEffectivelyDecideZero( gen, false );
+        SetCanBeUsedToDecideZeroEffectively( gen, false );
     fi;
     
     bas := HomalgGeneratorsForRightModule( gen!.BasisOfModule, HomalgRing( gen ) );
     
-    SetCanBeUsedToEffectivelyDecideZero( bas, true );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
         
     return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME
 end );

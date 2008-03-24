@@ -25,7 +25,7 @@ DeclareCategory( "IsHomalgRelations",
 #
 ####################################
 
-DeclareProperty( "CanBeUsedToEffectivelyDecideZero",
+DeclareProperty( "CanBeUsedToDecideZeroEffectively",
         IsHomalgRelations );
 
 DeclareProperty( "IsReducedSetOfRelations",
@@ -74,7 +74,7 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "BasisCoeff",
         [ IsHomalgRelations ] );
 
-DeclareOperation( "EffectivelyDecideZero",
+DeclareOperation( "DecideZeroEffectively",
         [ IsHomalgMatrix, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",
@@ -99,10 +99,7 @@ DeclareSynonym ( "Reduce",
         DecideZero );
 
 DeclareSynonym ( "ReduceCoeff",
-        EffectivelyDecideZero );
-
-DeclareSynonym ( "DecideZeroCoeff",
-        EffectivelyDecideZero );
+        DecideZeroEffectively );
 
 DeclareSynonym ( "BetterBasis",
         GetRidOfTrivialRelations );
