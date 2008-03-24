@@ -81,6 +81,12 @@ end );
 #
 ####################################
 
+##------------------------------------------------------------------------------
+#
+# put all methods to trace errors in LIMAT.gi with the very high priority 10001:
+#
+##------------------------------------------------------------------------------
+
 ##
 InstallMethod( HomalgRing,
         "for homalg matrices",
@@ -295,14 +301,6 @@ InstallMethod( CertainRows,
   function( M, plist )
     local R, C;
     
-    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
-    fi;
-    
-    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-        return M;
-    fi;
-    
     R := HomalgRing( M );
     
     C := HomalgMatrix( R );
@@ -323,14 +321,6 @@ InstallMethod( CertainColumns,
         
   function( M, plist )
     local R, C;
-    
-    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
-    fi;
-    
-    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-        return M;
-    fi;
     
     R := HomalgRing( M );
     
@@ -353,10 +343,6 @@ InstallMethod( UnionOfRows,
   function( A, B )
     local R, C;
     
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     R := HomalgRing( A );
     
     C := HomalgMatrix( R );
@@ -377,10 +363,6 @@ InstallMethod( UnionOfColumns,
         
   function( A, B )
     local R, C;
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
     
     R := HomalgRing( A );
     
@@ -453,14 +435,6 @@ InstallMethod( \+,
   function( A, B )
     local R, C;
     
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     R := HomalgRing( A );
     
     C := HomalgMatrix( R );
@@ -513,14 +487,6 @@ InstallMethod( \-,
   function( A, B )
     local R, C;
     
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not substractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not substractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     R := HomalgRing( A );
     
     C := HomalgMatrix( R );
@@ -541,10 +507,6 @@ InstallMethod( \*,
         
   function( A, B )
     local R, C;
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
     
     R := HomalgRing( A );
     
@@ -595,10 +557,6 @@ InstallMethod( LeftInverse,
   function( M )
     local R, C;
     
-    if NrRows( M ) < NrColumns( M ) then
-        Error( "the number of rows ", NrRows( M ), "is smaller than the number of columns ", NrColumns( M ), "\n" );
-    fi;
-    
     R := HomalgRing( M );
     
     C := HomalgMatrix( R );
@@ -614,31 +572,12 @@ InstallMethod( LeftInverse,
 end );
 
 ##
-InstallMethod( LeftInverse,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    
-    if NrColumns( M ) = 0 then
-        return HomalgMatrix( "zero", 0, NrRows( M ), HomalgRing( M ) );
-    else
-        Error( "a zero matrix with positive number of columns has no left inverse!" );
-    fi;
-    
-end );
-
-##
 InstallMethod( RightInverse,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
     local R, C;
-    
-    if NrColumns( M ) < NrRows( M ) then
-        Error( "the number of columns ", NrColumns( M ), "is smaller than the number of rows ", NrRows( M ), "\n" );
-    fi;
     
     R := HomalgRing( M );
     
@@ -651,21 +590,6 @@ InstallMethod( RightInverse,
     SetEvalLeftInverse( M, C );
     
     return C;
-    
-end );
-
-##
-InstallMethod( RightInverse,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    
-    if NrRows( M ) = 0 then
-        return HomalgMatrix( "zero", NrColumns( M ), 0, HomalgRing( M ) );
-    else
-        Error( "a zero matrix with positive number of rows has no left inverse!" );
-    fi;
     
 end );
 

@@ -272,6 +272,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                 return true;
             fi;
             
+            return false;
+            
         fi;
     fi;
     
@@ -298,7 +300,6 @@ InstallImmediateMethod( IsSubidentityMatrix,
             
         fi;
         
-        
         if HasPositionOfFirstNonZeroEntryPerRow( mat ) and HasNrRows( mat ) then
             
             pos := PositionOfFirstNonZeroEntryPerRow( mat );
@@ -316,6 +317,8 @@ InstallImmediateMethod( IsSubidentityMatrix,
                then
                 return true;
             fi;
+            
+            return false;
             
         fi;
         
@@ -645,12 +648,40 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasRowRankOfMatrix( PreEval( M ) ) then
+        return RowRankOfMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
     
     if HasColumnRankOfMatrix( EvalInvolution( M ) ) then
         return ColumnRankOfMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasColumnRankOfMatrix( PreEval( M ) ) then
+        return ColumnRankOfMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -672,27 +703,13 @@ InstallImmediateMethod( ColumnRankOfMatrix,
 end );
 
 ##
-InstallImmediateMethod( RowRankOfMatrix,
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
     
-    if HasRowRankOfMatrix( PreEval( M ) ) then
-        return RowRankOfMatrix( PreEval( M ) );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and HasPreEval, 0,
-        
-  function( M )
-    
-    if HasColumnRankOfMatrix( PreEval( M ) ) then
-        return ColumnRankOfMatrix( PreEval( M ) );
+    if HasPositionOfFirstNonZeroEntryPerRow( PreEval( M ) ) then
+        return PositionOfFirstNonZeroEntryPerRow( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -806,14 +823,6 @@ InstallMethod( CertainRows,
     
     if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
         
-        if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-            Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
-        fi;
-        
-        if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-            return M;
-        fi;
-        
         Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainRows( CertainRows )", "\033[0m" );
         
         A := EvalCertainRows( M )[1];
@@ -836,14 +845,6 @@ InstallMethod( CertainRows,
     local A, plistA;
     
     if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
-        
-        if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-            Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
-        fi;
-        
-        if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-            return M;
-        fi;
         
         A := EvalCertainColumns( M )[1];
         plistA := EvalCertainColumns( M )[2];
@@ -870,14 +871,6 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, B, rowsA, rowsB, plistA, plistB;
     
-    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
-    fi;
-        
-    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-        return M;
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( UnionOfRows )", "\033[0m" );
     
     A := EvalUnionOfRows( M )[1];
@@ -901,14 +894,6 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, B;
     
-    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
-    fi;
-    
-    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-        return M;
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( UnionOfColumns )", "\033[0m" );
     
     A := EvalUnionOfColumns( M )[1];
@@ -925,14 +910,6 @@ InstallMethod( CertainRows,
         
   function( M, plist )
     local A, B;
-    
-    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
-        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
-    fi;
-    
-    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
-        return M;
-    fi;
     
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( Compose )", "\033[0m" );
     
@@ -957,14 +934,6 @@ InstallMethod( CertainColumns,
     
     if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
         
-        if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-            Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
-        fi;
-        
-        if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-            return M;
-        fi;
-        
         Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainColumns( CertainColumns )", "\033[0m" );
     
         A := EvalCertainColumns( M )[1];
@@ -987,14 +956,6 @@ InstallMethod( CertainColumns,
     local A, plistA;
     
     if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
-        
-        if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-            Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
-        fi;
-        
-        if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-            return M;
-        fi;
         
         A := EvalCertainRows( M )[1];
         plistA := EvalCertainRows( M )[2];
@@ -1021,14 +982,6 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B, columnsA, columnsB, plistA, plistB;
     
-    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
-    fi;
-    
-    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-        return M;
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( UnionOfColumns )", "\033[0m" );
     
     A := EvalUnionOfColumns( M )[1];
@@ -1052,14 +1005,6 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B;
     
-    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
-    fi;
-    
-    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-        return M;
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( UnionOfRows )", "\033[0m" );
     
     A := EvalUnionOfRows( M )[1];
@@ -1077,14 +1022,6 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B;
     
-    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
-        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
-    fi;
-        
-    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
-        return M;
-    fi;
-        
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( Compose )", "\033[0m" );
     
     A := EvalCompose( M )[1];
@@ -1105,14 +1042,6 @@ InstallMethod( \+,
         
   function( A, B )
     local C;
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
     
     C := EvalCompose( A )[1];
     
@@ -1146,14 +1075,6 @@ InstallMethod( \+,
   function( A, B )
     local R;
     
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     R := HomalgRing( A );
     
     if EvalMulMat( A )[1] = MinusOne( R ) then
@@ -1175,14 +1096,6 @@ InstallMethod( \+,
         
   function( A, B )
     local R;
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
     
     R := HomalgRing( B );
     
@@ -1235,14 +1148,6 @@ InstallMethod( \-,
   function( A, B )
     local C;
     
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     C := EvalCompose( A )[1];
     
     if IsIdenticalObj( C , EvalCompose( B )[1] ) then
@@ -1279,10 +1184,6 @@ InstallMethod( \*,
   function( A, B )
     local A1, A2;
     
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfRows * IsHomalgMatrix", "\033[0m" );
     
     A1 := EvalUnionOfRows( A )[1];
@@ -1300,10 +1201,6 @@ InstallMethod( \*,
   function( A, B )
     local B1, B2;
     
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * UnionOfColumns", "\033[0m" );
     
     B1 := EvalUnionOfColumns( B )[1];
@@ -1320,10 +1217,6 @@ InstallMethod( \*,
         
   function( A, B )
     local A1, A2, B1, B2;
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
     
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfColumns * IsHomalgMatrix", "\033[0m" );
     
@@ -1345,10 +1238,6 @@ InstallMethod( \*,
   function( A, B )
     local B1, B2, A1, A2;
     
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * UnionOfRows", "\033[0m" );
     
     B1 := EvalUnionOfRows( B )[1];
@@ -1358,6 +1247,87 @@ InstallMethod( \*,
     A2 := CertainColumns( A, [ 1 .. NrRows( B2 ) ] );
     
     return A1 * B1 + A2 * B2;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and IsSubidentityMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    if NrRows( A ) <= NrColumns( A ) and HasPositionOfFirstNonZeroEntryPerRow( A ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsSubidentityMatrix * IsHomalgMatrix", "\033[0m" );
+        
+        return CertainRows( B, PositionOfFirstNonZeroEntryPerRow( A ) );
+        
+    fi;
+        
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsSubidentityMatrix ],
+        
+  function( A, B )
+    local pos, plist;
+    
+    if NrColumns( B ) <= NrRows( B ) and HasPositionOfFirstNonZeroEntryPerRow( B ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsSubidentityMatrix", "\033[0m" );
+        
+        pos := PositionOfFirstNonZeroEntryPerRow( B );
+        
+        plist := List( [ 1 .. NrColumns( B ) ], i -> Position( pos, i ) );
+        
+        return CertainColumns( A, plist );
+        
+    fi;
+        
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and HasEvalLeftInverse, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    if IsIdenticalObj( EvalLeftInverse( A ), B ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: LeftInverse * IsHomalgMatrix", "\033[0m" );
+        
+        return HomalgMatrix( "identity", NrColumns( B ), HomalgRing( A ) );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalRightInverse ],
+        
+  function( A, B )
+    
+    if IsIdenticalObj( A, EvalRightInverse( B ) ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * RightInverse", "\033[0m" );
+        
+        return HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) );
+        
+    fi;
+    
+    TryNextMethod( );
     
 end );
 

@@ -423,8 +423,69 @@ InstallMethod( Involution,
 end );
 
 #-----------------------------------
+# CertainRows
+#-----------------------------------
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ], 10001,
+        
+  function( M, plist )
+    
+    if not IsSubset( [ 1 .. NrRows( M ) ], plist ) then
+        Error( "the list of row positions ", plist, " must be in the range [ 1 .. ", NrRows( M ), " ]\n" );
+    fi;
+    
+    if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
+        return M;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+#-----------------------------------
+# CertainColumns
+#-----------------------------------
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ], 10001,
+        
+  function( M, plist )
+    
+    if not IsSubset( [ 1 .. NrColumns( M ) ], plist ) then
+        Error( "the list of column positions ", plist, " must be in the range [ 1 .. ", NrColumns( M ), " ]\n" );
+    fi;
+    
+    if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
+        return M;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+#-----------------------------------
 # UnionOfRows
 #-----------------------------------
+
+##
+InstallMethod( UnionOfRows,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
+        
+  function( A, B )
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( UnionOfRows,
@@ -432,10 +493,6 @@ InstallMethod( UnionOfRows,
         [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfRows( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
     
@@ -450,10 +507,6 @@ InstallMethod( UnionOfRows,
         
   function( A, B )
     
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfRows( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
     
     return B;
@@ -466,10 +519,6 @@ InstallMethod( UnionOfRows,
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfRows( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
     
@@ -484,13 +533,24 @@ end );
 ##
 InstallMethod( UnionOfColumns,
         "of two homalg matrices",
-        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
     
     if NrRows( A ) <> NrRows( B ) then
         Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( UnionOfColumns,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfColumns( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
     
@@ -505,10 +565,6 @@ InstallMethod( UnionOfColumns,
         
   function( A, B )
     
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfColumns( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
     
     return A;
@@ -521,10 +577,6 @@ InstallMethod( UnionOfColumns,
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfColumns( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
     
@@ -582,7 +634,7 @@ end );
 ##
 InstallMethod( \+,
         "of two homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
     
@@ -593,6 +645,17 @@ InstallMethod( \+,
     if NrColumns( A ) <> NrColumns( B ) then
         Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsZeroMatrix + IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
@@ -606,14 +669,6 @@ InstallMethod( \+,
         [ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
         
   function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not summable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsHomalgMatrix + IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
@@ -645,6 +700,25 @@ end );
 ##
 InstallMethod( \-,
         "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
+        
+  function( A, B )
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
+    fi;
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \-,
+        "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ], 1000,
         
   function( A, B )
@@ -668,14 +742,6 @@ InstallMethod( \-,
         
   function( A, B )
     
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
-    
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsZeroMatrix - IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
     return -B;
@@ -688,14 +754,6 @@ InstallMethod( \-,
         [ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
         
   function( A, B )
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the two matrices are not subtractable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
-    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsHomalgMatrix - IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ) );
     
@@ -710,13 +768,24 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
     
     if NrColumns( A ) <> NrRows( B ) then
         Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
     fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsZeroMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
@@ -735,10 +804,6 @@ InstallMethod( \*,
         
   function( A, B )
     
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsHomalgMatrix * IsZeroMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     if NrRows( A ) = NrColumns( A ) then
@@ -756,10 +821,6 @@ InstallMethod( \*,
         
   function( A, B )
     
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsIdentityMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
     return B;
@@ -772,10 +833,6 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
         
   function( A, B )
-    
-    if NrColumns( A ) <> NrRows( B ) then
-        Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: IsHomalgMatrix * IsIdentityMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
@@ -790,6 +847,21 @@ end );
 ##
 InstallMethod( LeftInverse,
         "for homalg matrices",
+        [ IsHomalgMatrix ], 10001,
+        
+  function( M )
+    
+    if NrRows( M ) < NrColumns( M ) then
+        Error( "the number of rows ", NrRows( M ), "is smaller than the number of columns ", NrColumns( M ), "\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -800,9 +872,61 @@ InstallMethod( LeftInverse,
     
 end );
 
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsSubidentityMatrix ],
+        
+  function( M )
+    local C;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: LeftInverse( IsSubidentityMatrix )", "\033[0m" );
+    
+    C := Involution( M );
+    
+    SetEvalRightInverse( M, C );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZeroMatrix ],
+        
+  function( M )
+    
+    if NrColumns( M ) = 0 then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: LeftInverse( ? x 0 -- IsZeroMatrix )", "\033[0m" );
+        
+        return HomalgMatrix( "zero", 0, NrRows( M ), HomalgRing( M ) );
+        
+    else
+        Error( "a zero matrix with positive number of columns has no left inverse!" );
+    fi;
+    
+end );
+
 #-----------------------------------
 # RightInverse
 #-----------------------------------
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix ], 10001,
+        
+  function( M )
+    
+    if NrColumns( M ) < NrRows( M ) then
+        Error( "the number of columns ", NrColumns( M ), "is smaller than the number of rows ", NrRows( M ), "\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( RightInverse,
@@ -814,6 +938,43 @@ InstallMethod( RightInverse,
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: RightInverse( IsIdentityMatrix )", "\033[0m" );
     
     return M;
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsSubidentityMatrix ],
+        
+  function( M )
+    local C;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: RightInverse( IsSubidentityMatrix )", "\033[0m" );
+    
+    C := Involution( M );
+    
+    SetEvalLeftInverse( M, C );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZeroMatrix ],
+        
+  function( M )
+    
+    if NrRows( M ) = 0 then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: RightInverse( 0 x ? -- IsZeroMatrix )", "\033[0m" );
+        
+        return HomalgMatrix( "zero", NrColumns( M ), 0, HomalgRing( M ) );
+        
+    else
+        Error( "a zero matrix with positive number of rows has no left inverse!" );
+    fi;
     
 end );
 

@@ -1,4 +1,1 @@
 - GARBAGE COLLECTION in the code
-- Q: if a method satisfies more properties, does it necessarily dominate
-     a method satisfying less properties with any high rank?
-     ( AreComparableMatrices )
