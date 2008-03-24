@@ -147,7 +147,7 @@ DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgRelations ] );
 
 DeclareOperation( "AddANewPresentation",
-        [ IsHomalgModule, IsHomalgGenerators, IsHomalgRelations ] );
+        [ IsHomalgModule, IsHomalgRelations, IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfModule",
         [ IsHomalgModule ] );

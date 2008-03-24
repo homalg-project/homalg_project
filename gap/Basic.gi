@@ -217,7 +217,7 @@ InstallMethod( DecideZero,
     
     rel := MatrixOfRelations( ring_rel );
     
-    if IsHomalgLeftRelationsRep( ring_rel ) then
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
         rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
         red := DecideZeroRows( M, rel );
     else
@@ -624,7 +624,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         fi;
         
         if compute_VI and not IsBound( VI ) then
-            VI := LeftInverse( V );
+            VI := LeftInverse( V ); ## this is in fact a RightInverse but for quadratic matrices, which we assume here, they coincide!!!
         fi;
         
         CM := HomalgMatrix( "void", R );

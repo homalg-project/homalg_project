@@ -17,7 +17,7 @@
 ##
 InstallMethod( \/,				### defines: SubfactorModule (incomplete)
         "for a homalg matrix",
-	[ IsHomalgGenerators, IsHomalgGenerators ],
+	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M1, M2 )
     local R, RP, B, N, S;
@@ -38,7 +38,7 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     # normal forms of generators of M1 with respect to B
     N := DecideZero( M1, B );
     
-    if IsHomalgLeftGeneratorsRep( M1 ) then
+    if IsHomalgGeneratorsOfLeftModule( M1 ) then
         N := HomalgRelationsForLeftModule( N );
     else
         N := HomalgRelationsForRightModule( N );
@@ -50,7 +50,7 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     # compute the syzygies module of N modulo B
     S := SyzygiesGenerators( N, B );
     
-    if IsHomalgLeftGeneratorsRep( M1 ) then
+    if IsHomalgGeneratorsOfLeftModule( M1 ) then
         return Presentation( HomalgRelationsForLeftModule( S ) );
     else
         return Presentation( HomalgRelationsForRightModule( S ) );

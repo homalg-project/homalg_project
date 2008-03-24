@@ -19,6 +19,15 @@
 DeclareCategory( "IsHomalgGenerators",
         IsAttributeStoringRep );
 
+## CAUTION: in the code we use the the following the following two categories
+##          are the only ones for sets of generators!!!!
+
+DeclareCategory( "IsHomalgGeneratorsOfLeftModule",
+        IsHomalgGenerators );
+
+DeclareCategory( "IsHomalgGeneratorsOfRightModule",
+        IsHomalgGenerators );
+
 ####################################
 #
 # properties:
@@ -71,3 +80,5 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "DecideZero",
         [ IsHomalgGenerators, IsHomalgRelations ] );
 
+DeclareOperation( "*",
+        [ IsHomalgMatrix, IsHomalgGenerators ] );

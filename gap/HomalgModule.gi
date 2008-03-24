@@ -411,15 +411,17 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsHomalgGenerators ],
+	[ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
-    local gens, rels, l;
+    local gens, rels, l, d, id;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
     l := PositionOfLastStoredSetOfRelations( rels );
+    
+    d := PositionOfTheDefaultSetOfRelations( M );
     
     ## define the (l+1)st set of generators
     gens!.(l+1) := gen;
@@ -428,13 +430,20 @@ InstallMethod( AddANewPresentation,
     gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## define the (l+1)st set of relations
-    rels!.(l+1) := rels!.(l);			## FIXME: is rels!.(l) always assigned?
+    if IsBound( rels!.(l) ) then
+        rels!.(l+1) := rels!.(l);
+    fi;
     
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
+    
+    id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
+    
+    M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := id;
+    M!.TransitionMatrices.( String( [ l+1, l ] ) ) := id;
     
     if NrGenerators( gen ) = 0 then
         SetIsZeroModule( M, true );
@@ -447,15 +456,17 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsHomalgRelations ],
+	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
-    local gens, rels, l;
+    local gens, rels, l, d, id;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
     l := PositionOfLastStoredSetOfRelations( rels );
+    
+    d := PositionOfTheDefaultSetOfRelations( M );
     
     ## define the (l+1)st set of generators
     gens!.(l+1) := gens!.(l);
@@ -472,6 +483,11 @@ InstallMethod( AddANewPresentation,
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
     
+    id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
+    
+    M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
+    M!.TransitionMatrices.( String( [ l+1, d ] ) ) := id;
+    
     if NrRelations( rel ) = 0 then
         SetIsFreeModule( M, true );
     fi;
@@ -483,15 +499,19 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsHomalgGenerators, IsHomalgRelations ],
+	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( M, gen, rel )
-    local gens, rels, l;
+  function( M, rel, T, TI )
+    local gens, rels, l, d, gen;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
     l := PositionOfLastStoredSetOfRelations( rels );
+    
+    d := PositionOfTheDefaultSetOfRelations( M );
+    
+    gen := TI * GeneratorsOfModule( M );
     
     ## define the (l+1)st set of generators
     gens!.(l+1) := gen;
@@ -507,6 +527,9 @@ InstallMethod( AddANewPresentation,
     
     ## adjust the default position:
     M!.PositionOfTheDefaultSetOfRelations := l+1;
+    
+    M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := TI;
+    M!.TransitionMatrices.( String( [ l+1, d ] ) ) := T;
     
     if NrGenerators( gen ) = 0 then
         SetIsZeroModule( M, true );
@@ -609,7 +632,7 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, bl, rel, diagonal, upper, lower, gen;
+    local bl, rel, diagonal, upper, lower, id, T, TI;
     
     #=====# begin of the core procedure #=====#
     
@@ -649,6 +672,8 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
             lower := fail;
         fi;
         
+        id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
+        
         if IsLeftModule( M ) then
             rel := CertainColumns( rel, bl );
             rel := CertainRows( rel, NonZeroRows( rel ) );
@@ -656,7 +681,8 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
                 SetIsDiagonalMatrix( rel, true );
             fi;
             rel := HomalgRelationsForLeftModule( rel );
-            gen := HomalgGeneratorsForLeftModule( CertainRows( MatrixOfGenerators( M ), bl ) );
+            T := CertainColumns( id, bl );
+            TI := CertainRows( id, bl );
         else
             rel := CertainRows( rel, bl );
             rel := CertainColumns( rel, NonZeroColumns( rel ) );
@@ -664,11 +690,12 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
                 SetIsDiagonalMatrix( rel, true );
             fi;
             rel := HomalgRelationsForRightModule( rel );
-            gen := HomalgGeneratorsForRightModule( CertainColumns( MatrixOfGenerators( M ), bl ) );
+            T := CertainColumns( id, bl );
+            TI := CertainRows( id, bl );
         fi;
         
-        AddANewPresentation( M, gen, rel );
-    
+        AddANewPresentation( M, rel, T, TI );
+        
     fi;
     
     return M;
@@ -681,7 +708,7 @@ InstallMethod( BetterGenerators,
 	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
-    local R, rel_old, rel, V, VI, gen;
+    local R, rel_old, rel, V, VI;
     
     R := HomalgRing( M );
     
@@ -698,11 +725,7 @@ InstallMethod( BetterGenerators,
     
     rel := HomalgRelationsForLeftModule( rel );
     
-    gen := VI * MatrixOfGenerators( M ); ## FIXME: the relations of these generators are not transfered
-    
-    gen := HomalgGeneratorsForLeftModule( gen );
-    
-    AddANewPresentation( M, gen, rel, V, VI );
+    AddANewPresentation( M, rel, V, VI );
     
     return GetRidOfZeroGenerators( M );
     
@@ -781,7 +804,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgLeftRelationsRep ],
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     local R, is_zero_module, gens, rels, M;
@@ -829,7 +852,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgLeftGeneratorsRep, IsHomalgLeftRelationsRep ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule, IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -875,7 +898,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgRightRelationsRep ],
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( rel )
     local R, is_zero_module, gens, rels, M;
@@ -923,7 +946,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgRightGeneratorsRep, IsHomalgRightRelationsRep ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule, IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;

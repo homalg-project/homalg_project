@@ -19,6 +19,15 @@
 DeclareCategory( "IsHomalgRelations",
         IsAttributeStoringRep );
 
+## CAUTION: in the code we use the the following the following two categories
+##          are the only ones for sets of relations!!!!
+
+DeclareCategory( "IsHomalgRelationsOfLeftModule",
+        IsHomalgRelations );
+
+DeclareCategory( "IsHomalgRelationsOfRightModule",
+        IsHomalgRelations );
+
 ####################################
 #
 # properties:

@@ -14,14 +14,8 @@
 #
 ####################################
 
-## CAUTION: in the code we use the the following two reps are the only ones!!!!
-
-# two new representations for the category IsHomalgGenerators:
-DeclareRepresentation( "IsHomalgLeftGeneratorsRep",
-        IsHomalgGenerators,
-        [ "generators", "relations_of_hullmodule" ] );
-
-DeclareRepresentation( "IsHomalgRightGeneratorsRep",
+# a new representation for the category IsHomalgGenerators:
+DeclareRepresentation( "IsHomalgGeneratorsOfFinitelyGeneratedModuleRep",
         IsHomalgGenerators,
         [ "generators", "relations_of_hullmodule" ] );
 
@@ -36,13 +30,13 @@ BindGlobal( "HomalgGeneratorsFamily",
         NewFamily( "HomalgGeneratorsFamily" ) );
 
 # two new types:
-BindGlobal( "HomalgLeftGeneratorsType",
+BindGlobal( "HomalgGeneratorsOfLeftModuleType",
         NewType(  HomalgGeneratorsFamily,
-                IsHomalgLeftGeneratorsRep ) );
+                IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ) );
 
-BindGlobal( "HomalgRightGeneratorsType",
+BindGlobal( "HomalgGeneratorsOfRightModuleType",
         NewType(  HomalgGeneratorsFamily,
-                IsHomalgRightGeneratorsRep ) );
+                IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ) );
 
 ####################################
 #
@@ -53,7 +47,7 @@ BindGlobal( "HomalgRightGeneratorsType",
 ##
 InstallMethod( MatrixOfGenerators,
         "for sets of generators of homalg modules",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
     
@@ -64,7 +58,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for sets of generators of homalg modules",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
     
@@ -75,7 +69,7 @@ end );
 ##
 InstallMethod( RelationsOfHullModule,
         "for sets of generators of homalg modules",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
     
@@ -86,7 +80,7 @@ end );
 ##
 InstallMethod( MatrixOfRelations,
         "for sets of generators of homalg modules",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
     
@@ -97,7 +91,7 @@ end );
 ##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
-        [ IsHomalgLeftGeneratorsRep ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
         
   function( gen )
     
@@ -108,7 +102,7 @@ end );
 ##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
-        [ IsHomalgRightGeneratorsRep ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
         
   function( gen )
     
@@ -119,7 +113,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
-	[ IsHomalgLeftGeneratorsRep ],
+	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
         
   function( gen )
     local bas;
@@ -139,7 +133,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
-	[ IsHomalgRightGeneratorsRep ],
+	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
         
   function( gen )
     local bas;
@@ -159,7 +153,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of generators of homalg modules",
-	[ IsHomalgGenerators ],
+	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
     
@@ -186,6 +180,25 @@ InstallMethod( DecideZero,
     fi;
     
     return gen!.DecideZero;
+end );
+
+##
+InstallMethod( \*,
+        "for sets of generators of homalg modules",
+	[ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        
+  function( TI, gen )
+    local generators, relations_of_hullmodule;
+    
+    generators := gen!.generators;
+    relations_of_hullmodule := gen!.relations_of_hullmodule;
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) then
+        return HomalgGeneratorsForLeftModule( TI * generators, relations_of_hullmodule );
+    else
+        return HomalgGeneratorsForRightModule( generators * TI, relations_of_hullmodule );
+    fi;
+    
 end );
 
 ####################################
@@ -245,7 +258,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
                 relations_of_hullmodule := relations_of_hullmodule );
     
     ## Objectify:
-    Objectify( HomalgLeftGeneratorsType, gen );
+    Objectify( HomalgGeneratorsOfLeftModuleType, gen );
     
     return gen;
     
@@ -302,7 +315,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
                 relations_of_hullmodule := relations_of_hullmodule );
     
     ## Objectify:
-    Objectify( HomalgRightGeneratorsType, gen );
+    Objectify( HomalgGeneratorsOfRightModuleType, gen );
     
     return gen;
     
@@ -316,7 +329,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg generators",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( o )
     local m;
@@ -331,7 +344,7 @@ InstallMethod( ViewObj,
         Print( "<A set of ", m, " generators of a homalg " );
     fi;
     
-    if IsHomalgLeftGeneratorsRep( o ) then
+    if IsHomalgGeneratorsOfLeftModule( o ) then
         Print( "left " );
     else
         Print( "right " );
@@ -343,7 +356,7 @@ end );
 
 InstallMethod( Display,
         "for homalg generators",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( o )
     

@@ -29,7 +29,7 @@ DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
 BindGlobal( "HomalgMorphismsFamily",
         NewFamily( "HomalgMorphismsFamily" ) );
 
-# a new type:
+# two new types:
 BindGlobal( "HomalgMorphismOfLeftModulesType",
         NewType( HomalgMorphismsFamily ,
                 IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ) );
