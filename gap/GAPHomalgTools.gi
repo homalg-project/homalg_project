@@ -75,7 +75,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "HomalgMatrix(\"identity\",", NrRows( C ), NrColumns( C ), R, ")" ] );
+                   return HomalgSendBlocking( [ "HomalgMatrix(\"identity\",", NrRows( C ), R, ")" ] );
                    
                  end,
                
