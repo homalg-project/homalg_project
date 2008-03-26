@@ -449,13 +449,13 @@ InstallMethod( AddANewPresentation,
         
         if IsHomalgGeneratorsOfLeftModule( gen ) then
             for i in [ d .. l-1 ] do
-                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
-                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
+                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
+                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
             od;
         else
             for i in [ d .. l-1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
-                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
+                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
+                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
             od;
         fi;
         
@@ -514,13 +514,13 @@ InstallMethod( AddANewPresentation,
         
         if IsHomalgRelationsOfLeftModule( rel ) then
             for i in [ d .. l-1 ] do
-                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
-                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
+                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
+                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
             od;
         else
             for i in [ d .. l-1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
-                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
+                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
+                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
             od;
         fi;
         
@@ -579,13 +579,13 @@ InstallMethod( AddANewPresentation,
         
         if IsHomalgRelationsOfLeftModule( rel ) then
             for i in [ d .. l-1 ] do
-                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
-                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
+                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
+                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
             od;
         else
             for i in [ d .. l-1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
-                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
+                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
+                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
             od;
         fi;
         
