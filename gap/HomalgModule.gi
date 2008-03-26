@@ -414,7 +414,7 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
-    local gens, rels, l, d, id;
+    local gens, rels, l, d, id, tr, itr, i;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
@@ -437,13 +437,35 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    ## adjust the default position:
-    M!.PositionOfTheDefaultSetOfRelations := l+1;
-    
     id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
     
-    M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := id;
-    M!.TransitionMatrices.( String( [ l+1, l ] ) ) := id;
+    M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
+    M!.TransitionMatrices.( String( [ l+1, d ] ) ) := id;
+    
+    if d <> l then
+        
+        ## there is no waste of performance since the LIMAT is active:
+        tr := id; itr := id;
+        
+        if IsHomalgGeneratorsOfLeftModule( gen ) then
+            for i in [ d .. l-1 ] do
+                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
+                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
+            od;
+        else
+            for i in [ d .. l-1 ] do
+                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
+                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
+            od;
+        fi;
+        
+        M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
+        M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
+    
+    fi;
+    
+    ## adjust the default position:
+    M!.PositionOfTheDefaultSetOfRelations := l+1;
     
     if NrGenerators( gen ) = 0 then
         SetIsZeroModule( M, true );
@@ -459,7 +481,7 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
-    local gens, rels, l, d, id;
+    local gens, rels, l, d, id, tr, itr, i;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
@@ -480,13 +502,35 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    ## adjust the default position:
-    M!.PositionOfTheDefaultSetOfRelations := l+1;
-    
     id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
     
     M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
     M!.TransitionMatrices.( String( [ l+1, d ] ) ) := id;
+    
+    if d <> l then
+        
+        ## there is no waste of performance since the LIMAT is active:
+        tr := id; itr := id;
+        
+        if IsHomalgRelationsOfLeftModule( rel ) then
+            for i in [ d .. l-1 ] do
+                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
+                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
+            od;
+        else
+            for i in [ d .. l-1 ] do
+                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
+                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
+            od;
+        fi;
+        
+        M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
+        M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
+    
+    fi;
+    
+    ## adjust the default position:
+    M!.PositionOfTheDefaultSetOfRelations := l+1;
     
     if NrRelations( rel ) = 0 then
         SetIsFreeModule( M, true );
@@ -502,7 +546,7 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, rel, T, TI )
-    local gens, rels, l, d, gen;
+    local gens, rels, l, d, gen, tr, itr, i;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
@@ -525,11 +569,33 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    ## adjust the default position:
-    M!.PositionOfTheDefaultSetOfRelations := l+1;
-    
     M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := TI;
     M!.TransitionMatrices.( String( [ l+1, d ] ) ) := T;
+    
+    if d <> l then
+        
+        ## there is no waste of performance since the LIMAT is active:
+        tr := TI; itr := T;
+        
+        if IsHomalgRelationsOfLeftModule( rel ) then
+            for i in [ d .. l-1 ] do
+                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
+                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
+            od;
+        else
+            for i in [ d .. l-1 ] do
+                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
+                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
+            od;
+        fi;
+        
+        M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
+        M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
+    
+    fi;
+    
+    ## adjust the default position:
+    M!.PositionOfTheDefaultSetOfRelations := l+1;
     
     if NrGenerators( gen ) = 0 then
         SetIsZeroModule( M, true );

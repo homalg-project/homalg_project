@@ -403,7 +403,11 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     n := NrRows( B );
     
-    id := HomalgMatrix( "identity", l, R );
+    if IsIdentityMatrix( L ) then ## save as much new definitions as possible
+        id := L;
+    else
+        id := HomalgMatrix( "identity", l, R );
+    fi;
     
     zz := HomalgMatrix( "zero", n, l, R );
     
@@ -492,7 +496,11 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     n := NrColumns( B );
     
-    id := HomalgMatrix( "identity", l, R );
+    if IsIdentityMatrix( L ) then ## save as much new definitions as possible
+        id := L;
+    else
+        id := HomalgMatrix( "identity", l, R );
+    fi;
     
     zz := HomalgMatrix( "zero", l, n, R );
     
