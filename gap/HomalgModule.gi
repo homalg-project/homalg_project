@@ -31,11 +31,11 @@ BindGlobal( "HomalgModulesFamily",
 
 # two new types:
 BindGlobal( "HomalgLeftModuleFinitelyPresentedType",
-        NewType( HomalgModulesFamily ,
+        NewType( HomalgModulesFamily,
                 IsFinitelyPresentedModuleRep and IsLeftModule ) );
 
 BindGlobal( "HomalgRightModuleFinitelyPresentedType",
-        NewType( HomalgModulesFamily ,
+        NewType( HomalgModulesFamily,
                 IsFinitelyPresentedModuleRep and IsRightModule ) );
 
 ####################################
@@ -409,12 +409,60 @@ InstallMethod( NrRelations,
 end );
 
 ##
+InstallMethod( TransitionMatrix,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsPosInt, IsPosInt ],
+        
+  function( M, pres_a, pres_b )
+    local sets_of_generators, sign, i, tr;
+    
+    sets_of_generators := M!.SetsOfGenerators;
+    
+    if not IsBound( sets_of_generators!.( pres_a ) ) then
+        
+        Error( "the module given by the first argument has no ", pres_a, ". set of generators\n" );
+        
+    elif not IsBound( sets_of_generators!.( pres_b ) ) then
+        
+        Error( "the module given by the first argument has no ", pres_b, ". set of generators\n" );
+        
+    elif pres_a = pres_b then
+        
+        return HomalgMatrix( "identity", NrGenerators( sets_of_generators!.( pres_a ) ), HomalgRing( M ) );
+        
+    else
+        
+        sign := SignInt( pres_b - pres_a );
+        
+        tr := M!.TransitionMatrices.( String( [ pres_a, pres_a + sign ] ) );
+        
+        if IsLeftModule( M ) then
+            
+            for i in [ 1 .. AbsInt( pres_b - pres_a ) - 1 ] do
+                tr := M!.TransitionMatrices.( String( [ pres_a + sign * i, pres_a + sign * (i+1) ] ) ) * tr;
+            od;
+            
+        else
+            
+            for i in [ 1 .. AbsInt( pres_b - pres_a ) - 1 ] do
+                tr := tr * M!.TransitionMatrices.( String( [ pres_a + sign * i, pres_a + sign * (i+1) ] ) );
+            od;
+            
+        fi;
+        
+        return tr;
+        
+    fi;
+    
+end );
+
+##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
-    local gens, rels, l, d, id, tr, itr, i;
+    local gens, rels, l, d, id, tr, itr;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
@@ -448,15 +496,11 @@ InstallMethod( AddANewPresentation,
         tr := id; itr := id;
         
         if IsHomalgGeneratorsOfLeftModule( gen ) then
-            for i in [ d .. l-1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
-                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
-            od;
+                tr := tr * TransitionMatrix( M, l, d );
+                itr :=  TransitionMatrix( M, d, l ) * itr;
         else
-            for i in [ d .. l-1 ] do
-                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
-                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
-            od;
+                tr := TransitionMatrix( M, l, d ) * tr;
+                itr :=  itr * TransitionMatrix( M, d, l );
         fi;
         
         M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
@@ -481,7 +525,7 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
-    local gens, rels, l, d, id, tr, itr, i;
+    local gens, rels, l, d, id, tr, itr;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
@@ -513,15 +557,11 @@ InstallMethod( AddANewPresentation,
         tr := id; itr := id;
         
         if IsHomalgRelationsOfLeftModule( rel ) then
-            for i in [ d .. l-1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
-                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
-            od;
+                tr := tr * TransitionMatrix( M, l, d );
+                itr :=  TransitionMatrix( M, d, l ) * itr;
         else
-            for i in [ d .. l-1 ] do
-                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
-                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
-            od;
+                tr := TransitionMatrix( M, l, d ) * tr;
+                itr :=  itr * TransitionMatrix( M, d, l );
         fi;
         
         M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
@@ -546,7 +586,7 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, rel, T, TI )
-    local gens, rels, l, d, gen, tr, itr, i;
+    local gens, rels, l, d, gen, tr, itr;
     
     gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
@@ -578,15 +618,11 @@ InstallMethod( AddANewPresentation,
         tr := TI; itr := T;
         
         if IsHomalgRelationsOfLeftModule( rel ) then
-            for i in [ d .. l-1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ i+1, i ] ) );
-                itr :=  M!.TransitionMatrices.( String( [ i, i+1 ] ) ) * itr;
-            od;
+                tr := tr * TransitionMatrix( M, l, d );
+                itr :=  TransitionMatrix( M, d, l ) * itr;
         else
-            for i in [ d .. l-1 ] do
-                tr := M!.TransitionMatrices.( String( [ i+1, i ] ) ) * tr;
-                itr :=  itr * M!.TransitionMatrices.( String( [ i, i+1 ] ) );
-            od;
+                tr := TransitionMatrix( M, l, d ) * tr;
+                itr :=  itr * TransitionMatrix( M, d, l );
         fi;
         
         M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
@@ -621,9 +657,11 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
     
     if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and CanBeUsedToDecideZeroEffectively( rel ) ) then
         
-        bas := BasisOfModule( rel );
+        bas := BasisOfModule( rel );		## CAUTION: might have a side effect on rel
         
-        AddANewPresentation( M, bas );
+        if not IsIdenticalObj( bas, rel ) then	## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
+            AddANewPresentation( M, bas );
+        fi;
         
     fi;
     
@@ -1238,53 +1276,6 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1,
-        
-  function( M )
-    
-    if IsLeftModule( M ) then
-        Print( "<The zero left module>" ); ## FIXME: the zero module should be universal
-    else
-        Print( "<The zero right module>" ); ## FIXME: the zero module should be universal
-    fi;
-    
-end );
-    
-##
-InstallMethod( ViewObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFreeModule ],
-        
-  function( M )
-    local r, rk;
-    
-    Print( "<A free left module" );
-    
-    r := NrGenerators( M );
-    
-    if HasRankOfLeftModule( M ) then
-        rk := RankOfLeftModule( M );
-        Print( " of rank ", rk, " on " );
-        if r = rk then
-            if r = 1 then
-                Print( "a free generator" );
-            else
-                Print( "free generators" );
-            fi;
-        else ## => r > 1
-            Print( r, " non-free generators" );
-        fi;
-    else
-        
-    fi;
-    
-    Print( ">" );
-    
-end );
-    
-##
-InstallMethod( ViewObj,
-        "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
@@ -1349,6 +1340,53 @@ InstallMethod( ViewObj,
 end );
 
 ##
+InstallMethod( ViewObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsFreeModule ],
+        
+  function( M )
+    local r, rk;
+    
+    Print( "<A free left module" );
+    
+    r := NrGenerators( M );
+    
+    if HasRankOfLeftModule( M ) then
+        rk := RankOfLeftModule( M );
+        Print( " of rank ", rk, " on " );
+        if r = rk then
+            if r = 1 then
+                Print( "a free generator" );
+            else
+                Print( "free generators" );
+            fi;
+        else ## => r > 1
+            Print( r, " non-free generators" );
+        fi;
+    else
+        
+    fi;
+    
+    Print( ">" );
+    
+end );
+    
+##
+InstallMethod( ViewObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1,
+        
+  function( M )
+    
+    if IsLeftModule( M ) then
+        Print( "<The zero left module>" ); ## FIXME: the zero module should be universal
+    else
+        Print( "<The zero right module>" ); ## FIXME: the zero module should be universal
+    fi;
+    
+end );
+    
+##
 InstallMethod( PrintObj,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
@@ -1397,17 +1435,6 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ],
-        
-  function( M )
-    
-    Print( 0, "\n" );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule and HasElementaryDivisorsOfLeftModule ],
         
   function( M )
@@ -1433,7 +1460,7 @@ InstallMethod( Display,
     
     display := ElementaryDivisorsOfLeftModule( M );
     
-    if IsHomalgExternalObjectRep( display[1] ) then ## display is only empty in case the module is trivial, but this is taken care of above
+    if IsHomalgExternalObjectRep( display[1] ) then ## display is only empty in case the module is trivial, but this is taken care of my a special method
         get_string := HomalgPointer;
     else
         get_string := String;
@@ -1454,6 +1481,17 @@ InstallMethod( Display,
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ],
+        
+  function( M )
+    
+    Print( 0, "\n" );
     
 end );
 

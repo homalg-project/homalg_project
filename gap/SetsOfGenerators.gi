@@ -31,7 +31,7 @@ BindGlobal( "HomalgSetsOfGeneratorsFamily",
 
 # a new type:
 BindGlobal( "HomalgSetsOfGeneratorsType",
-        NewType( HomalgSetsOfGeneratorsFamily ,
+        NewType( HomalgSetsOfGeneratorsFamily,
                 IsSetsOfGeneratorsRep ) );
 
 ####################################

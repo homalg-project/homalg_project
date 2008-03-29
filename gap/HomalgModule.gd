@@ -140,6 +140,9 @@ DeclareOperation( "NrGenerators",
 DeclareOperation( "NrRelations",
         [ IsHomalgModule ] );
 
+DeclareOperation( "TransitionMatrix",
+        [ IsHomalgModule, IsPosInt, IsPosInt ] );
+
 DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgGenerators ] );
 

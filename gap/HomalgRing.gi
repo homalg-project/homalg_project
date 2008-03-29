@@ -40,11 +40,11 @@ BindGlobal( "HomalgRingsFamily",
 
 # two new types:
 BindGlobal( "HomalgInternalRingType",
-        NewType( HomalgRingsFamily ,
+        NewType( HomalgRingsFamily,
                 IsHomalgInternalRingRep ) );
 
 BindGlobal( "HomalgExternalRingType",
-        NewType( HomalgRingsFamily ,
+        NewType( HomalgRingsFamily,
                 IsHomalgExternalRingRep ) );
 
 # a new family:

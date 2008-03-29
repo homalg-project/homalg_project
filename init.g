@@ -26,6 +26,8 @@ ReadPackage( "homalg", "gap/HomalgGenerators.gd" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gd" );
 ReadPackage( "homalg", "gap/HomalgModule.gd" );
 
+ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
+
 ReadPackage( "homalg", "gap/Tools.gd" );
 ReadPackage( "homalg", "gap/Service.gd" );
 ReadPackage( "homalg", "gap/Basic.gd" );

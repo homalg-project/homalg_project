@@ -114,3 +114,24 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
     
 end );
 
+InstallGlobalFunction( HomalgNamesOfComponentsToIntLists,
+  function( arg )
+    
+    return Filtered(
+                   List( NamesOfComponents( arg[1] ),
+                         function( a )
+                           local l;
+                           l := SplitString( a, ",", "[ ]" );
+                           if Length( l ) = 1 then
+                               if Length( l[1] ) <= 24 then
+                                   return Int( l[1] );
+                               else
+                                   return fail;
+                               fi;
+                           else
+                               return List( l, Int );
+                           fi;
+                         end
+                       ),
+                  b -> b <> fail );
+end );

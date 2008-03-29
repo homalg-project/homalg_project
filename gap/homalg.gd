@@ -23,3 +23,5 @@ DeclareGlobalFunction( "HomalgTotalRuntimes" );
 
 DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
 
+DeclareGlobalFunction( "HomalgNamesOfComponentsToIntLists" );
+

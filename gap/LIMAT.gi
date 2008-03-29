@@ -55,19 +55,19 @@ InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsPermutationMatri
 ##
 InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
 
-##
+## a split injective morphism (of free modules) is injective
 InstallTrueMethod( IsFullRowRankMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
 
 ##
 InstallTrueMethod( IsFullColumnRankMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
 
-##
+## an isomorphism is split injective
 InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
 
-##
+## an isomorphism is split surjective
 InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
 
-## a surjective and an injective morphism between two free modules of finite rank is invertible
+## a split surjective and split injective morphism (of free modules) is an isomorphism
 InstallTrueMethod( IsInvertibleMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix and IsRightInvertibleMatrix );
 
 ##

@@ -799,6 +799,19 @@ end );
 ##
 InstallMethod( Involution,
         "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( PreEval )", "\033[0m" );
+    
+    return Involution( PreEval( M ) );
+    
+end );
+
+##
+InstallMethod( Involution,
+        "for homalg matrices",
         [ IsHomalgMatrix and HasEvalInvolution ],
         
   function( M )
@@ -812,6 +825,19 @@ end );
 #-----------------------------------
 # CertainRows
 #-----------------------------------
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsList ],
+        
+  function( M, plist )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: CertainRows( PreEval )", "\033[0m" );
+    
+    return CertainRows( PreEval( M ), plist );
+    
+end );
 
 ##
 InstallMethod( CertainRows,
@@ -927,6 +953,19 @@ end );
 ##
 InstallMethod( CertainColumns,
         "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsList ],
+        
+  function( M, plist )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: CertainColumns( PreEval )", "\033[0m" );
+    
+    return CertainColumns( PreEval( M ), plist );
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
         [ IsHomalgMatrix and HasEvalCertainColumns, IsList ],
         
   function( M, plist )
@@ -1032,8 +1071,94 @@ InstallMethod( CertainColumns,
 end );
 
 #-----------------------------------
+# UnionOfRows
+#-----------------------------------
+
+##
+InstallMethod( UnionOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfRows( PreEval, IsHomalgMatrix )", "\033[0m" );
+    
+    return UnionOfRows( PreEval( A ), B );
+    
+end );
+
+##
+InstallMethod( UnionOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfRows( IsHomalgMatrix, PreEval )", "\033[0m" );
+    
+    return UnionOfRows( A, PreEval( B ) );
+    
+end );
+
+#-----------------------------------
+# UnionOfColumns
+#-----------------------------------
+
+##
+InstallMethod( UnionOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( PreEval, IsHomalgMatrix )", "\033[0m" );
+    
+    return UnionOfColumns( PreEval( A ), B );
+    
+end );
+
+##
+InstallMethod( UnionOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( IsHomalgMatrix, PreEval )", "\033[0m" );
+    
+    return UnionOfColumns( A, PreEval( B ) );
+    
+end );
+
+#-----------------------------------
 # AddMat
 #-----------------------------------
+
+##
+InstallMethod( \+,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: PreEval + IsHomalgMatrix", "\033[0m" );
+    
+    return PreEval( A ) + B;
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: IsHomalgMatrix + PreEval", "\033[0m" );
+    
+    return A + PreEval( B );
+    
+end );
 
 ##
 InstallMethod( \+,
@@ -1112,8 +1237,38 @@ InstallMethod( \+,
 end );
 
 #-----------------------------------
+# MulMat
+#-----------------------------------
+
+##
+InstallMethod( \*,
+        "of homalg matrices with ring elements",
+        [ IsRingElement, IsHomalgMatrix and HasPreEval ],
+        
+  function( a, A )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: IsRingElement * PreEval", "\033[0m" );
+    
+    return a * PreEval( A );
+    
+end );
+
+#-----------------------------------
 # AdditiveInverseMutable
 #-----------------------------------
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval ],
+        
+  function( A )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: -PreEval", "\033[0m" );
+    
+    return -PreEval( A );
+    
+end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
@@ -1139,6 +1294,32 @@ end );
 #-----------------------------------
 # SubMat
 #-----------------------------------
+
+##
+InstallMethod( \-,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: PreEval - IsHomalgMatrix", "\033[0m" );
+    
+    return PreEval( A ) - B;
+    
+end );
+
+##
+InstallMethod( \-,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: IsHomalgMatrix - PreEval", "\033[0m" );
+    
+    return A - PreEval( B );
+    
+end );
 
 ##
 InstallMethod( \-,
@@ -1175,6 +1356,32 @@ end );
 #-----------------------------------
 # Compose
 #-----------------------------------
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: PreEval * IsHomalgMatrix", "\033[0m" );
+    
+    return PreEval( A ) * B;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
+        
+  function( A, B )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: IsHomalgMatrix * PreEval", "\033[0m" );
+    
+    return A * PreEval( B );
+    
+end );
 
 ##
 InstallMethod( \*,
@@ -1302,7 +1509,7 @@ InstallMethod( \*,
     
     if IsIdenticalObj( EvalLeftInverse( A ), B ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: LeftInverse * IsHomalgMatrix", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: (its LeftInverse) * IsHomalgMatrix", "\033[0m" );
         
         return HomalgMatrix( "identity", NrColumns( B ), HomalgRing( A ) );
         
@@ -1321,9 +1528,102 @@ InstallMethod( \*,
     
     if IsIdenticalObj( A, EvalRightInverse( B ) ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * RightInverse", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * (its RightInverse)", "\033[0m" );
         
         return HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and HasEvalCertainRows, IsHomalgMatrix ],
+        
+  function( A, B )
+    local C, plist;
+    
+    C := EvalCertainRows( A )[1];
+    
+    if HasEvalLeftInverse( C ) then	## give it a chance
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( LeftInverse ) * IsHomalgMatrix", "\033[0m" );
+        
+        plist := EvalCertainRows( A )[2];
+        
+        return CertainRows( C * B, plist );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalCertainColumns ],
+        
+  function( A, B )
+    
+    local C, plist;
+    
+    C := EvalCertainColumns( B )[1];
+    
+    if HasEvalRightInverse( C ) then	## give it a chance
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * CertainColumns( RightInverse )", "\033[0m" );
+        
+        plist := EvalCertainColumns( B )[2];
+        
+        return CertainColumns( A * C, plist );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix and HasEvalCompose, IsHomalgMatrix ],
+        
+  function( A, B )
+    local LI;
+    
+    LI := EvalCompose( A )[2];
+    
+    if HasEvalLeftInverse( LI ) then	## give it a chance
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: ( IsHomalgMatrix * LeftInverse ) * IsHomalgMatrix", "\033[0m" );
+        
+        return EvalCompose( A )[1] * ( LI * B ); 
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalCompose ],
+        
+  function( A, B )
+    local RI;
+    
+    RI := EvalCompose( B )[1];
+    
+    if HasEvalRightInverse( RI ) then	## give it a chance
+        
+        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * ( RightInverse * IsHomalgMatrix )", "\033[0m" );
+        
+        return ( A * RI ) * EvalCompose( B )[2]; 
         
     fi;
     
@@ -1334,6 +1634,19 @@ end );
 #-----------------------------------
 # LeftInverse
 #-----------------------------------
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: LeftInverse( PreEval )", "\033[0m" );
+    
+    return LeftInverse( PreEval( M ) );
+    
+end );
 
 ##
 InstallMethod( LeftInverse,
@@ -1364,6 +1677,19 @@ end );
 #-----------------------------------
 # RightInverse
 #-----------------------------------
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasPreEval ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: RightInverse( PreEval )", "\033[0m" );
+    
+    return RightInverse( PreEval( M ) );
+    
+end );
 
 ##
 InstallMethod( RightInverse,

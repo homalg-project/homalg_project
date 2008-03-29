@@ -14,12 +14,16 @@
 #
 ####################################
 
-# three new category of objects:
+# four new category of objects:
 
 DeclareCategory( "IsHomalgMorphism",
         IsAdditiveElementWithInverse
         and IsExtLElement
-        and IsAttributeStoringRep ); ## CAUTION: never let homalg morphisms be multiplicative elements!!
+        and IsAttributeStoringRep ); ## CAUTION: never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!
+
+DeclareCategory( "IsHomalgEndomorphism", ## it is extremely important to let this filter be a category and NOT a representation or a property,
+        IsHomalgMorphism                 ## since endomorphisms should be multiplicative elements from the beginning!!
+        and IsMultiplicativeElementWithInverse );
 
 DeclareCategory( "IsHomalgMorphismOfLeftModules",
         IsHomalgMorphism );
@@ -45,10 +49,10 @@ DeclareProperty( "IsMonomorphism",
 DeclareProperty( "IsEpimorphism",
         IsHomalgMorphism );
 
-DeclareProperty( "IsLeftInvertibleMorphism",
+DeclareProperty( "IsSplitMonomorphism",
         IsHomalgMorphism );
 
-DeclareProperty( "IsRightInvertibleMorphism",
+DeclareProperty( "IsSplitEpimorphism",
         IsHomalgMorphism );
 
 DeclareProperty( "IsIsomorphism",
@@ -72,19 +76,19 @@ DeclareGlobalFunction( "HomalgMorphism" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgMorphism ] );
 
+DeclareOperation( "SourceOfMorphism",
+        [ IsHomalgMorphism ] );
+
+DeclareOperation( "TargetOfMorphism",
+        [ IsHomalgMorphism ] );
+
 DeclareOperation( "MatrixOfMorphism",
         [ IsHomalgMorphism ] );
 
-DeclareOperation( "AnyMatrixOfMorphism",
-        [ IsHomalgMorphism ] );
-
-DeclareOperation( "AnyIndicesOfTwoComparableMorphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AnyIndicesOfTwoComposableMorphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
 DeclareOperation( "AreComparableMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "AreComposableMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "LeftInverse",

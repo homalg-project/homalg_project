@@ -35,11 +35,11 @@ BindGlobal( "HomalgMatrixFamily",
 
 # two new types:
 BindGlobal( "HomalgInternalMatrixType",
-        NewType( HomalgMatrixFamily ,
+        NewType( HomalgMatrixFamily,
                 IsHomalgInternalMatrixRep ) );
 
 BindGlobal( "HomalgExternalMatrixType",
-        NewType( HomalgMatrixFamily ,
+        NewType( HomalgMatrixFamily,
                 IsHomalgExternalMatrixRep ) );
 
 ####################################
@@ -774,19 +774,22 @@ InstallGlobalFunction( HomalgMatrix,
         
     fi; ## CAUTION: don't make an elif here!!!
     
-    if IsString( arg[1] ) and Length( arg[1] ) > 1 and  LowercaseString( arg[1]{[1..2]} ) = "id" then
-    ## the identity matrix:
+    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
+    ## a void matrix filled with nothing having the flag IsVoidMatrix:
         
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                IsIdentityMatrix, true );
+                IsVoidMatrix, true );
         
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             SetNrRows( matrix, arg[2] );
-            SetNrColumns( matrix, arg[2] );
         fi;
         
+        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            SetNrColumns( matrix, arg[3] );
+        fi;
+            
         return matrix;
         
     elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "init" then
@@ -808,24 +811,6 @@ InstallGlobalFunction( HomalgMatrix,
         
         return matrix;
         
-    elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
-    ## a void matrix filled with nothing having the flag IsVoidMatrix:
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, type,
-                IsVoidMatrix, true );
-        
-        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-            SetNrRows( matrix, arg[2] );
-        fi;
-        
-        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-            SetNrColumns( matrix, arg[3] );
-        fi;
-            
-        return matrix;
-        
     elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
     ## the zero matrix:
         
@@ -840,6 +825,21 @@ InstallGlobalFunction( HomalgMatrix,
         
         if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
             SetNrColumns( matrix, arg[3] );
+        fi;
+        
+        return matrix;
+        
+    elif IsString( arg[1] ) and Length( arg[1] ) > 1 and  LowercaseString( arg[1]{[1..2]} ) = "id" then
+    ## the identity matrix:
+        
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsIdentityMatrix, true );
+        
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+            SetNrRows( matrix, arg[2] );
+            SetNrColumns( matrix, arg[2] );
         fi;
         
         return matrix;
@@ -890,6 +890,111 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
+
+##
+InstallMethod( ViewObj,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( o )
+    local first_attribute;
+    
+    first_attribute := true;
+    
+    if IsVoidMatrix( o ) then
+        Print( "<A void" );
+    elif IsInitialMatrix( o ) then
+        Print( "<An initial" );
+    elif not HasEval( o ) then
+        Print( "<An unevaluated" );
+    else
+        Print( "<A" );
+        first_attribute := false;
+    fi;
+    
+    if not ( HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) )
+       and HasIsZeroMatrix( o ) then ## if this method applies and HasIsZeroMatrix is set we already know that o is a non-zero homalg matrix
+        Print( " non-zero" );
+        first_attribute := true;
+    fi;
+    
+    if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
+        if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
+            Print( " diagonal" );
+        elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
+            Print( " strict upper triangular" );
+        elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
+            Print( " strict lower triangular" );
+        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
+            if not first_attribute then
+                Print( "n upper triangular" );
+            else
+                Print( " upper triangular" );
+            fi;
+        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
+            Print( " lower triangular" );
+        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
+            Print( " triangular" );
+        elif not first_attribute then
+            first_attribute := fail;
+        fi;
+        
+        if first_attribute <> fail then
+            first_attribute := true;
+        else
+            first_attribute := false;
+        fi;
+        
+        if HasIsInvertibleMatrix( o ) and IsInvertibleMatrix( o ) then
+            if not first_attribute then
+                Print( "n invertible" );
+            else
+                Print( " invertible" );
+            fi;
+        else
+            if HasIsRightInvertibleMatrix( o ) and IsRightInvertibleMatrix( o ) then
+                Print( " right invertible" );
+            elif HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
+                Print( " full row rank" );
+            fi;
+            
+            if HasIsLeftInvertibleMatrix( o ) and IsLeftInvertibleMatrix( o ) then
+                Print( " left invertible" );
+            elif HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
+                Print( " full column rank" );
+            fi;
+        fi;
+    fi;
+    
+    if HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) then
+        Print( " sub-identity" );
+    fi;
+    
+    Print( " homalg " );
+    
+    if IsHomalgInternalMatrixRep( o ) then
+        Print( "internal " );
+    else
+        Print( "external " );
+    fi;
+    
+    if HasNrRows( o ) then
+        Print( NrRows( o ), " " );
+        if not HasNrColumns( o ) then
+            Print( "by (unknown number of columns) " );
+        fi;
+    fi;
+    
+    if HasNrColumns( o ) then
+        if not HasNrRows( o ) then
+            Print( "(unknown number of rows) " );
+        fi;
+        Print( "by ", NrColumns( o ), " " );
+    fi;
+    
+    Print( "matrix>" );
+    
+end );
 
 ##
 InstallMethod( ViewObj,
@@ -1005,111 +1110,6 @@ InstallMethod( ViewObj,
     fi;
     
     Print( "zero matrix>" );
-    
-end );
-
-##
-InstallMethod( ViewObj,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( o )
-    local first_attribute;
-    
-    first_attribute := true;
-    
-    if IsVoidMatrix( o ) then
-        Print( "<A void" );
-    elif IsInitialMatrix( o ) then
-        Print( "<An initial" );
-    elif not HasEval( o ) then
-        Print( "<An unevaluated" );
-    else
-        Print( "<A" );
-        first_attribute := false;
-    fi;
-    
-    if not ( HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) )
-       and HasIsZeroMatrix( o ) then ## if this method applies and HasIsZeroMatrix is set we already know that o is a non-zero homalg matrix
-        Print( " non-zero" );
-        first_attribute := true;
-    fi;
-    
-    if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
-        if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
-            Print( " diagonal" );
-        elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
-            Print( " strict upper triangular" );
-        elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
-            Print( " strict lower triangular" );
-        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
-            if not first_attribute then
-                Print( "n upper triangular" );
-            else
-                Print( " upper triangular" );
-            fi;
-        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
-            Print( " lower triangular" );
-        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
-            Print( " triangular" );
-        elif not first_attribute then
-            first_attribute := fail;
-        fi;
-        
-        if first_attribute <> fail then
-            first_attribute := true;
-        else
-            first_attribute := false;
-        fi;
-        
-        if HasIsInvertibleMatrix( o ) and IsInvertibleMatrix( o ) then
-            if not first_attribute then
-                Print( "n invertible" );
-            else
-                Print( " invertible" );
-            fi;
-        else
-            if HasIsRightInvertibleMatrix( o ) and IsRightInvertibleMatrix( o ) then
-                Print( " right invertible" );
-            elif HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
-                Print( " full row rank" );
-            fi;
-            
-            if HasIsLeftInvertibleMatrix( o ) and IsLeftInvertibleMatrix( o ) then
-                Print( " left invertible" );
-            elif HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
-                Print( " full column rank" );
-            fi;
-        fi;
-    fi;
-    
-    if HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) then
-        Print( " sub-identity" );
-    fi;
-    
-    Print( " homalg " );
-    
-    if IsHomalgInternalMatrixRep( o ) then
-        Print( "internal " );
-    else
-        Print( "external " );
-    fi;
-    
-    if HasNrRows( o ) then
-        Print( NrRows( o ), " " );
-        if not HasNrColumns( o ) then
-            Print( "by (unknown number of columns) " );
-        fi;
-    fi;
-    
-    if HasNrColumns( o ) then
-        if not HasNrRows( o ) then
-            Print( "(unknown number of rows) " );
-        fi;
-        Print( "by ", NrColumns( o ), " " );
-    fi;
-    
-    Print( "matrix>" );
     
 end );
 

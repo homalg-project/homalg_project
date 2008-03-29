@@ -145,11 +145,13 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfRows( mat );
         
-        if bas <> mat then
+        if bas = mat and IsReducedModuloRingRelations( mat ) then
+            SetCanBeUsedToDecideZeroEffectively( rel, true );
+	    rel!.relations := bas; ## CAUTION: be very careful here!!!
+	    return rel;
+        else
             rel!.BasisOfModule := bas;
             SetCanBeUsedToDecideZeroEffectively( rel, false );
-        else
-            SetCanBeUsedToDecideZeroEffectively( rel, true );
         fi;
     else
         bas := rel!.BasisOfModule;

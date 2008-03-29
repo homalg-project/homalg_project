@@ -31,7 +31,7 @@ BindGlobal( "HomalgSetsOfRelationsFamily",
 
 # a new type:
 BindGlobal( "HomalgSetsOfRelationsType",
-        NewType( HomalgSetsOfRelationsFamily ,
+        NewType( HomalgSetsOfRelationsFamily,
                 IsSetsOfRelationsRep ) );
 
 ####################################

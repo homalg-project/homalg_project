@@ -356,11 +356,47 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
     ## NF <> 0
     if not IsZeroMatrix( NF ) then
-        Error( "The second argument is not a right factor of the first, i.e. the second argument is not a generating set!\n" );
+        Error( "The second argument is not a right factor of the first, i.e. rows of the second argument are not a generating set!\n" );
     fi;
     
     ## CD = -CB * CA => CD * A = B
-    return -CB * CA;
+    return -CB * CA;				## -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    
+end );
+
+##
+InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
+        "for homalg matrices",
+	[ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )				## CAUTION: Do not use lazy evaluation here!!!
+    local R, RP, IA, CA, NF, CB;
+    
+    R := HomalgRing( B );
+    
+    RP := HomalgTable( R );
+  
+    if IsBound(RP!.LeftDivide) then
+        return RP!.LeftDivide( A, B );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ## A * CA = IA
+    CA := HomalgMatrix( "void", R );
+    IA := BasisOfColumnsCoeff( A, CA );
+    
+    ## NF = B + IA * CB
+    CB := HomalgMatrix( "void", R );
+    NF := DecideZeroColumnsEffectively( B, IA, CB );
+    
+    ## NF <> 0
+    if not IsZeroMatrix( NF ) then
+        Error( "The second argument is not a left factor of the first, i.e. the columns of the second argument are not a generating set!\n" );
+    fi;
+    
+    ## CD = -CA * CB => A * CD = B
+    return CA * -CB;				## CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
     
 end );
 
@@ -409,6 +445,54 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     fi;
     
     return Eval( left_inv );
+    
+end );
+
+##
+InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
+        "for homalg matrices",
+	[ IsHomalgMatrix and HasEvalRightInverse ],
+        
+  function( RI )
+    local R, RP, LI, Id, right_inv;
+    
+    R := HomalgRing( RI );
+    
+    RP := HomalgTable( R );
+    
+    LI := EvalRightInverse( RI );
+    
+    if IsBound(RP!.RightInverse) then
+        right_inv := RP!.RightInverse( LI );
+        
+        SetIsRightInvertibleMatrix( LI, true );
+        
+        if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then
+            SetIsInvertibleMatrix( RI, true );
+        else
+            SetIsLeftInvertibleMatrix( RI, true );
+        fi;
+        
+        return right_inv;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    Id := HomalgMatrix( "identity", NrRows( LI ), R );
+    
+    right_inv := LeftDivide( LI, Id );
+    
+    ## CAUTION: for the following SetXXX LeftDivide is assumed not to be lazy evaluated!!!
+    
+    SetIsRightInvertibleMatrix( LI, true );
+    
+    if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then
+        SetIsInvertibleMatrix( RI, true );
+    else
+        SetIsLeftInvertibleMatrix( RI, true );
+    fi;
+    
+    return Eval( right_inv );
     
 end );
 

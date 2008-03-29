@@ -590,7 +590,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     red := DecideZeroRows( A_zz, AddRhs( B ) );
     
-    SetPreEval( U, RightHandSide( red ) ); ResetFilterObj( U, IsVoidMatrix );
+    SetPreEval( U, -RightHandSide( red ) ); ResetFilterObj( U, IsVoidMatrix );
     SetNrRows( U, NrRows( red ) );
     SetNrColumns( U, NrRows( A ) );
     
