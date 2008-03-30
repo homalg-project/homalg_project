@@ -167,16 +167,22 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local pos_s, pos_t, l, dist, min, pos, matrix;
+    local pos_s, pos_t, index_pair, l, dist, min, pos, matrix;
     
     pos_s := PositionOfTheDefaultSetOfRelations( SourceOfMorphism( phi ) );
     pos_t := PositionOfTheDefaultSetOfRelations( TargetOfMorphism( phi ) );
     
+    if IsHomalgMorphismOfLeftModules( phi ) then
+        index_pair := [ pos_s, pos_t ];
+    else
+        index_pair := [ pos_t, pos_s ];
+    fi;
+    
     l := phi!.index_pairs_of_presentations;
     
-    if not [ pos_s, pos_t ] in l then
+    if not index_pair in l then
         
-        dist := List( l, a -> AbsInt( pos_s - a[1] ) + AbsInt( pos_t - a[2] ) );
+        dist := List( l, a -> AbsInt( index_pair[1] - a[1] ) + AbsInt( index_pair[2] - a[2] ) );
         
         min := Minimum( dist );
         
@@ -184,9 +190,9 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
         
         if IsHomalgMorphismOfLeftModules( phi ) then
             matrix :=
-              TransitionMatrix( SourceOfMorphism( phi ), l[pos][1], pos_s )
+              TransitionMatrix( SourceOfMorphism( phi ), pos_s, l[pos][1] )
               * phi!.matrices.( String( l[pos] ) )
-              * TransitionMatrix( TargetOfMorphism( phi ), pos_t, l[pos][2] );
+              * TransitionMatrix( TargetOfMorphism( phi ), l[pos][2], pos_t );
         else
             matrix :=
               TransitionMatrix( TargetOfMorphism( phi ), pos_t, l[pos][2] )
@@ -194,13 +200,13 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
               * TransitionMatrix( SourceOfMorphism( phi ), l[pos][1], pos_s );
         fi;
         
-        phi!.matrices.( String( [ pos_s, pos_t ] ) ) := matrix;
+        phi!.matrices.( String( index_pair ) ) := matrix;
         
-        Add( l, [ pos_s, pos_t ] );
+        Add( l, index_pair );
         
     fi;
         
-    return phi!.matrices.( String( [ pos_s, pos_t ] ) );
+    return phi!.matrices.( String( index_pair ) );
     
 end );
 
@@ -366,7 +372,7 @@ end );
 InstallGlobalFunction( HomalgMorphism,
   function( arg )
     local nargs, source, pos_s, target, pos_t, R, type, matrix, matrices, morphism,
-          nr_rows, nr_columns;
+          nr_rows, nr_columns, index_pair;
     
     nargs := Length( arg );
     
@@ -426,9 +432,11 @@ InstallGlobalFunction( HomalgMorphism,
     if IsLeftModule( source ) then
         nr_rows := NrGenerators( source!.SetsOfRelations!.( pos_s ) );
         nr_columns := NrGenerators( target!.SetsOfRelations!.( pos_t ) );
+        index_pair := [ pos_s, pos_t ];
     else
         nr_columns := NrGenerators( source!.SetsOfRelations!.( pos_s ) );
         nr_rows := NrGenerators( target!.SetsOfRelations!.( pos_t ) );
+        index_pair := [ pos_t, pos_s ];
     fi;
     
     matrices := rec( );
@@ -437,12 +445,14 @@ InstallGlobalFunction( HomalgMorphism,
                      source := source,
                      target := target,
                      matrices := matrices,
-                     index_pairs_of_presentations := [ [ pos_s, pos_t ] ]);
+                     index_pairs_of_presentations := [ index_pair ]);
     
     if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
     ## the zero morphism:
         
         matrix := HomalgMatrix( "zero", nr_rows, nr_columns, R );
+        
+        matrices.( String( index_pair ) ) := matrix;
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -458,7 +468,7 @@ InstallGlobalFunction( HomalgMorphism,
         
         matrix := HomalgMatrix( "identity", nr_rows, R );
         
-        matrices.( String( [ pos_s, pos_t ] ) ) := matrix;
+        matrices.( String( index_pair ) ) := matrix;
         
         if IsIdenticalObj( source, target ) then
             if pos_s = pos_t then
@@ -489,7 +499,7 @@ InstallGlobalFunction( HomalgMorphism,
             Error( "the first argument must be in { IsHomalgMatrix, IsMatrix, IsList } but received: ",  arg[1], "\n" );
         fi;
         
-        matrices.( String( [ pos_s, pos_t ] ) ) := matrix;
+        matrices.( String( index_pair ) ) := matrix;
     
         ## Objectify:
         ObjectifyWithAttributes(

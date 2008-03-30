@@ -852,7 +852,7 @@ InstallMethod( LeftInverse,
   function( M )
     
     if NrRows( M ) < NrColumns( M ) then
-        Error( "the number of rows ", NrRows( M ), "is smaller than the number of columns ", NrColumns( M ), "\n" );
+        Error( "the number of rows ", NrRows( M ), " is smaller than the number of columns ", NrColumns( M ), "\n" );
     fi;
     
     TryNextMethod( );
@@ -921,7 +921,7 @@ InstallMethod( RightInverse,
   function( M )
     
     if NrColumns( M ) < NrRows( M ) then
-        Error( "the number of columns ", NrColumns( M ), "is smaller than the number of rows ", NrRows( M ), "\n" );
+        Error( "the number of columns ", NrColumns( M ), " is smaller than the number of rows ", NrRows( M ), "\n" );
     fi;
     
     TryNextMethod( );

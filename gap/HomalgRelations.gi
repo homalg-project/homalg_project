@@ -188,7 +188,7 @@ InstallMethod( BasisOfModule,
         bas := rel!.BasisOfModule;
     fi;
     
-    bas := HomalgRelationsForLeftModule( bas );
+    bas := HomalgRelationsForRightModule( bas );
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
     

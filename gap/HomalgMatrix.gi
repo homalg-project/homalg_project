@@ -288,8 +288,20 @@ InstallMethod( Involution,
     SetNrColumns( C, NrRows( M ) );
     
     SetEvalInvolution( C, M );
+    SetItsInvolution( M, C );
     
     return C;
+    
+end );
+
+##
+InstallMethod( Involution,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasItsInvolution ],
+        
+  function( M )
+    
+    return ItsInvolution( M );
     
 end );
 
@@ -565,9 +577,20 @@ InstallMethod( LeftInverse,
     SetNrColumns( C, NrRows( M ) );
     
     SetEvalLeftInverse( C, M );
-    SetEvalRightInverse( M, C );
+    SetItsLeftInverse( M, C );
     
     return C;
+    
+end );
+
+##
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasItsLeftInverse ],
+        
+  function( M )
+    
+    return ItsLeftInverse( M );
     
 end );
 
@@ -587,9 +610,20 @@ InstallMethod( RightInverse,
     SetNrRows( C, NrColumns( M ) );
     
     SetEvalRightInverse( C, M );
-    SetEvalLeftInverse( M, C );
+    SetItsRightInverse( M, C );
     
     return C;
+    
+end );
+
+##
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasItsRightInverse ],
+        
+  function( M )
+    
+    return ItsRightInverse( M );
     
 end );
 

@@ -946,6 +946,22 @@ InstallMethod( CertainRows,
     
 end );
 
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalLeftInverse, IsList ],
+        
+  function( M, plist )
+    local A;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( LeftInverse )", "\033[0m" );
+    
+    A := EvalLeftInverse( M );
+    
+    return LeftInverse( CertainColumns( A, plist ) );
+    
+end );
+
 #-----------------------------------
 # CertainColumns
 #-----------------------------------
@@ -1067,6 +1083,22 @@ InstallMethod( CertainColumns,
     B := EvalCompose( M )[2];
     
     return A * CertainColumns( B, plist );
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalRightInverse, IsList ],
+        
+  function( M, plist )
+    local A;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( RightInverse )", "\033[0m" );
+    
+    A := EvalRightInverse( M );
+    
+    return RightInverse( CertainRows( A, plist ) );
     
 end );
 
@@ -1541,20 +1573,25 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
-        [ IsHomalgMatrix and HasEvalCertainRows, IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalLeftInverse, IsHomalgMatrix and HasEvalCertainColumns ],
         
   function( A, B )
-    local C, plist;
+    local C, D;
     
-    C := EvalCertainRows( A )[1];
+    C := EvalLeftInverse( A );
+    D := EvalCertainColumns( B );
     
-    if HasEvalLeftInverse( C ) then	## give it a chance
+    if HasEvalCertainColumns( C ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( LeftInverse ) * IsHomalgMatrix", "\033[0m" );
+        C := EvalCertainColumns( C );
         
-        plist := EvalCertainRows( A )[2];
-        
-        return CertainRows( C * B, plist );
+        if IsIdenticalObj( C[1], D[1] ) and C[2] = D[2] then
+            
+            Info( InfoCOLEM, 2, COLEM.color, "COLEM: (its LeftInverse) * CertainColumns( IsHomalgMatrix )", "\033[0m" );
+            
+            return HomalgMatrix( "identity", NrColumns( B ), HomalgRing( A ) );
+            
+        fi;
         
     fi;
     
@@ -1565,21 +1602,26 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalCertainColumns ],
+        [ IsHomalgMatrix and HasEvalCertainRows, IsHomalgMatrix and HasEvalRightInverse ],
         
   function( A, B )
+    local C, D;
     
-    local C, plist;
+    C := EvalCertainRows( A );
+    D := EvalRightInverse( B );
     
-    C := EvalCertainColumns( B )[1];
     
-    if HasEvalRightInverse( C ) then	## give it a chance
+    if HasEvalCertainRows( D ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * CertainColumns( RightInverse )", "\033[0m" );
+        D := EvalCertainRows( D );
         
-        plist := EvalCertainColumns( B )[2];
+        if IsIdenticalObj( C[1], D[1] ) and C[2] = D[2] then
         
-        return CertainColumns( A * C, plist );
+            Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( IsHomalgMatrix ) * (its RightInverse)", "\033[0m" );
+            
+            return HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) );
+            
+        fi;
         
     fi;
     

@@ -102,6 +102,9 @@ DeclareAttribute( "Eval",
 DeclareAttribute( "EvalInvolution",
         IsHomalgMatrix );
 
+DeclareAttribute( "ItsInvolution",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalCertainRows",
         IsHomalgMatrix );
 
@@ -132,7 +135,13 @@ DeclareAttribute( "EvalCompose",
 DeclareAttribute( "EvalLeftInverse",
         IsHomalgMatrix );
 
+DeclareAttribute( "ItsLeftInverse",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalRightInverse",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ItsRightInverse",
         IsHomalgMatrix );
 
 DeclareAttribute( "EvalInverse",

@@ -125,20 +125,38 @@ DeclareOperation( "PositionOfTheDefaultSetOfRelations",
 DeclareOperation( "GeneratorsOfModule",
         [ IsHomalgModule ] );
 
+DeclareOperation( "GeneratorsOfModule",
+        [ IsHomalgModule, IsPosInt ] );
+
 DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule ] );
+
+DeclareOperation( "RelationsOfModule",
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "MatrixOfGenerators",
         [ IsHomalgModule ] );
 
+DeclareOperation( "MatrixOfGenerators",
+        [ IsHomalgModule, IsPosInt ] );
+
 DeclareOperation( "MatrixOfRelations",
         [ IsHomalgModule ] );
+
+DeclareOperation( "MatrixOfRelations",
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "NrGenerators",
         [ IsHomalgModule ] );
 
+DeclareOperation( "NrGenerators",
+        [ IsHomalgModule, IsPosInt ] );
+
 DeclareOperation( "NrRelations",
         [ IsHomalgModule ] );
+
+DeclareOperation( "NrRelations",
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "TransitionMatrix",
         [ IsHomalgModule, IsPosInt, IsPosInt ] );

@@ -343,6 +343,23 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
 end );
 
 ##
+InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    
+    #=====# begin of the core procedure #=====#
+    
+    if IsBound(SetsOfGenerators(M)!.(pos)) then
+        return SetsOfGenerators(M)!.(pos);
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
 InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -360,12 +377,46 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
 end );
 
 ##
+InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    
+    #=====# begin of the core procedure #=====#
+    
+    if IsBound(SetsOfRelations(M)!.(pos)) then;
+        return SetsOfRelations(M)!.(pos);
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
 InstallMethod( MatrixOfGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
   function( M )
     
     return MatrixOfGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( MatrixOfGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+  function( M, pos )
+    local gen;
+    
+    gen := GeneratorsOfModule( M, pos );
+    
+    if IsHomalgGenerators( gen ) then
+        return MatrixOfGenerators( gen );
+    else
+        return fail;
+    fi;
     
 end );
 
@@ -381,12 +432,47 @@ InstallMethod( MatrixOfRelations,
 end );
 
 ##
+InstallMethod( MatrixOfRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    local rel;
+    
+    rel := RelationsOfModule( M, pos );
+    
+    if IsHomalgRelations( rel ) then
+        return MatrixOfRelations( rel );
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
 InstallMethod( NrGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
   function( M )
     
     return NrGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( NrGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+  function( M, pos )
+    local gen;
+    
+    gen := GeneratorsOfModule( M, pos );
+    
+    if IsHomalgGenerators( gen ) then
+        return NrGenerators( gen );
+    else
+        return fail;
+    fi;
     
 end );
 
@@ -400,10 +486,28 @@ InstallMethod( NrRelations,
     
     rel := RelationsOfModule( M );
     
-    if IsString( rel ) then
-        return fail;
-    else
+    if IsHomalgRelations( rel ) then
         return NrRelations( rel );
+    else
+        return fail;
+    fi;
+    
+end );
+
+##
+InstallMethod( NrRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    local rel;
+    
+    rel := RelationsOfModule( M, pos );
+    
+    if IsHomalgRelations( rel ) then
+        return NrRelations( rel );
+    else
+        return fail;
     fi;
     
 end );
@@ -413,8 +517,16 @@ InstallMethod( TransitionMatrix,
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep, IsPosInt, IsPosInt ],
         
-  function( M, pres_a, pres_b )
-    local sets_of_generators, sign, i, tr;
+  function( M, pos1, pos2 )
+    local pres_a, pres_b, sets_of_generators, tr, sign, i, j;
+    
+    if IsLeftModule( M ) then
+        pres_a := pos2;
+        pres_b := pos1;
+    else
+        pres_a := pos1;
+        pres_b := pos2;
+    fi;
     
     sets_of_generators := M!.SetsOfGenerators;
     
@@ -432,20 +544,35 @@ InstallMethod( TransitionMatrix,
         
     else
         
+        ## starting with the identity is no waste of performance since the subpackage LIMAT is active:
+        tr := HomalgMatrix( "identity",  NrGenerators( sets_of_generators!.( pres_a ) ), HomalgRing( M ) );
+        
         sign := SignInt( pres_b - pres_a );
         
-        tr := M!.TransitionMatrices.( String( [ pres_a, pres_a + sign ] ) );
+        i := pres_a;
         
         if IsLeftModule( M ) then
             
-            for i in [ 1 .. AbsInt( pres_b - pres_a ) - 1 ] do
-                tr := M!.TransitionMatrices.( String( [ pres_a + sign * i, pres_a + sign * (i+1) ] ) ) * tr;
+            while AbsInt( pres_b - i ) > 0 do
+                for j in pres_b - sign * [ 0 .. AbsInt( pres_b - i ) - 1 ]  do
+                    if IsBound( M!.TransitionMatrices.( String( [ j, i ] ) ) ) then
+                        tr := M!.TransitionMatrices.( String( [ j, i ] ) ) * tr;
+                        i := j;
+                        break;
+                    fi;
+                od;
             od;
             
         else
             
-            for i in [ 1 .. AbsInt( pres_b - pres_a ) - 1 ] do
-                tr := tr * M!.TransitionMatrices.( String( [ pres_a + sign * i, pres_a + sign * (i+1) ] ) );
+            while AbsInt( pres_b - i ) > 0 do
+                for j in pres_b - sign * [ 0 .. AbsInt( pres_b - i ) - 1 ]  do
+                    if IsBound( M!.TransitionMatrices.( String( [ i, j ] ) ) ) then
+                        tr := tr * M!.TransitionMatrices.( String( [ i, j ] ) );
+                        i := j;
+                        break;
+                    fi;
+                od;
             od;
             
         fi;
@@ -462,24 +589,24 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
-    local gens, rels, l, d, id, tr, itr;
+    local rels, gens, d, l, id, tr, itr;
     
-    gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
-    
-    l := PositionOfLastStoredSetOfRelations( rels );
+    gens := SetsOfGenerators( M );
     
     d := PositionOfTheDefaultSetOfRelations( M );
     
-    ## define the (l+1)st set of generators
+    l := PositionOfLastStoredSetOfRelations( rels );
+    
+    ## define the (l+1)st set of generators:
     gens!.(l+1) := gen;
     
     ## adjust the list of positions:
     gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    ## define the (l+1)st set of relations
-    if IsBound( rels!.(l) ) then
-        rels!.(l+1) := rels!.(l);
+    ## define the (l+1)st set of relations:
+    if IsBound( rels!.(d) ) then
+        rels!.(l+1) := rels!.(d);
     fi;
     
     ## adjust the list of positions:
@@ -487,25 +614,33 @@ InstallMethod( AddANewPresentation,
     
     id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
     
+    ## no need to distinguish between left and right modules here:
     M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
     M!.TransitionMatrices.( String( [ l+1, d ] ) ) := id;
     
     if d <> l then
         
-        ## there is no waste of performance since the LIMAT is active:
+        ## starting with the identity is no waste of performance since the subpackage LIMAT is active:
         tr := id; itr := id;
         
         if IsHomalgGeneratorsOfLeftModule( gen ) then
-                tr := tr * TransitionMatrix( M, l, d );
-                itr :=  TransitionMatrix( M, d, l ) * itr;
+            
+            tr := tr * TransitionMatrix( M, d, l );
+            itr :=  TransitionMatrix( M, l, d ) * itr;
+            
+            M!.TransitionMatrices.( String( [ l+1, l ] ) ) := tr;
+            M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := itr;
+            
         else
-                tr := TransitionMatrix( M, l, d ) * tr;
-                itr :=  itr * TransitionMatrix( M, d, l );
+            
+            tr := TransitionMatrix( M, l, d ) * tr;
+            itr :=  itr * TransitionMatrix( M, d, l );
+            
+            M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
+            M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
+            
         fi;
         
-        M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
-        M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
-    
     fi;
     
     ## adjust the default position:
@@ -525,48 +660,74 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
-    local gens, rels, l, d, id, tr, itr;
+    local rels, lpos, d, gens, l, id, tr, itr;
     
-    gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
     
-    l := PositionOfLastStoredSetOfRelations( rels );
+    lpos := rels!.ListOfPositionsOfKnownSetsOfRelations;
+    
+    ## don't add an old set of relations, but let it be the default set of relations instead:
+    for d in lpos do
+        if IsIdenticalObj( rel, rels!.(d) ) then
+            M!.PositionOfTheDefaultSetOfRelations := d;
+            return M;
+        fi;
+    od;
+    
+    for d in lpos do
+        if MatrixOfRelations( rel ) = MatrixOfRelations( rels!.(d) ) then
+            M!.PositionOfTheDefaultSetOfRelations := d;
+            return M;
+        fi;
+    od;
+    
+    gens := SetsOfGenerators( M );
     
     d := PositionOfTheDefaultSetOfRelations( M );
     
-    ## define the (l+1)st set of generators
-    gens!.(l+1) := gens!.(l);
+    l := PositionOfLastStoredSetOfRelations( rels );
+    
+    ## define the (l+1)st set of generators:
+    gens!.(l+1) := gens!.(d);
     
     ## adjust the list of positions:
     gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    ## define the (l+1)st set of relations
+    ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
-    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    lpos[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
     
+    ## no need to distinguish between left and right modules here:
     M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
     M!.TransitionMatrices.( String( [ l+1, d ] ) ) := id;
     
     if d <> l then
         
-        ## there is no waste of performance since the LIMAT is active:
+        ## starting with the identity is no waste of performance since the subpackage LIMAT is active:
         tr := id; itr := id;
         
         if IsHomalgRelationsOfLeftModule( rel ) then
-                tr := tr * TransitionMatrix( M, l, d );
-                itr :=  TransitionMatrix( M, d, l ) * itr;
+            
+            tr := tr * TransitionMatrix( M, d, l );
+            itr :=  TransitionMatrix( M, l, d ) * itr;
+            
+            M!.TransitionMatrices.( String( [ l+1, l ] ) ) := tr;
+            M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := itr;
+            
         else
-                tr := TransitionMatrix( M, l, d ) * tr;
-                itr :=  itr * TransitionMatrix( M, d, l );
+            
+            tr := TransitionMatrix( M, l, d ) * tr;
+            itr :=  itr * TransitionMatrix( M, d, l );
+            
+            M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
+            M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
+            
         fi;
         
-        M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
-        M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
-    
     fi;
     
     ## adjust the default position:
@@ -586,48 +747,59 @@ InstallMethod( AddANewPresentation,
 	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, rel, T, TI )
-    local gens, rels, l, d, gen, tr, itr;
+    local rels, gens, d, l, gen, tr, itr;
     
-    gens := SetsOfGenerators( M );
     rels := SetsOfRelations( M );
-    
-    l := PositionOfLastStoredSetOfRelations( rels );
+    gens := SetsOfGenerators( M );
     
     d := PositionOfTheDefaultSetOfRelations( M );
     
+    l := PositionOfLastStoredSetOfRelations( rels );
+    
     gen := TI * GeneratorsOfModule( M );
     
-    ## define the (l+1)st set of generators
+    ## define the (l+1)st set of generators:
     gens!.(l+1) := gen;
     
     ## adjust the list of positions:
     gens!.ListOfPositionsOfKnownSetsOfGenerators[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    ## define the (l+1)st set of relations
+    ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := TI;
-    M!.TransitionMatrices.( String( [ l+1, d ] ) ) := T;
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := T;
+        M!.TransitionMatrices.( String( [ l+1, d ] ) ) := TI;
+    else
+        M!.TransitionMatrices.( String( [ l+1, d ] ) ) := T;
+        M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := TI;
+    fi;
     
     if d <> l then
         
-        ## there is no waste of performance since the LIMAT is active:
         tr := TI; itr := T;
         
         if IsHomalgRelationsOfLeftModule( rel ) then
-                tr := tr * TransitionMatrix( M, l, d );
-                itr :=  TransitionMatrix( M, d, l ) * itr;
+            
+            tr := tr * TransitionMatrix( M, d, l );
+            itr :=  TransitionMatrix( M, l, d ) * itr;
+            
+            M!.TransitionMatrices.( String( [ l+1, l ] ) ) := tr;
+            M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := itr;
+            
         else
-                tr := TransitionMatrix( M, l, d ) * tr;
-                itr :=  itr * TransitionMatrix( M, d, l );
+            
+            tr := TransitionMatrix( M, l, d ) * tr;
+            itr :=  itr * TransitionMatrix( M, d, l );
+            
+            M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
+            M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
+            
         fi;
         
-        M!.TransitionMatrices.( String( [ l, l+1 ] ) ) := tr;
-        M!.TransitionMatrices.( String( [ l+1, l ] ) ) := itr;
-    
     fi;
     
     ## adjust the default position:
@@ -659,9 +831,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         
         bas := BasisOfModule( rel );		## CAUTION: might have a side effect on rel
         
-        if not IsIdenticalObj( bas, rel ) then	## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
-            AddANewPresentation( M, bas );
-        fi;
+        AddANewPresentation( M, bas );		## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
         
     fi;
     
@@ -794,8 +964,8 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
                 SetIsDiagonalMatrix( rel, true );
             fi;
             rel := HomalgRelationsForRightModule( rel );
-            T := CertainColumns( id, bl );
-            TI := CertainRows( id, bl );
+            T := CertainRows( id, bl );
+            TI := CertainColumns( id, bl );
         fi;
         
         AddANewPresentation( M, rel, T, TI );
@@ -830,6 +1000,35 @@ InstallMethod( BetterGenerators,
     rel := HomalgRelationsForLeftModule( rel );
     
     AddANewPresentation( M, rel, V, VI );
+    
+    return GetRidOfZeroGenerators( M );
+    
+end );
+
+##
+InstallMethod( BetterGenerators,
+        "for homalg modules",
+	[ IsFinitelyPresentedModuleRep and IsRightModule ],
+        
+  function( M )
+    local R, rel_old, rel, U, UI;
+    
+    R := HomalgRing( M );
+    
+    rel_old := MatrixOfRelations( M );
+    
+    U := HomalgMatrix( R );
+    UI := HomalgMatrix( R );
+    
+    rel := BetterEquivalentMatrix( rel_old, U, UI, "", "", "" );
+    
+    if rel_old = rel then
+        return M;
+    fi;
+    
+    rel := HomalgRelationsForRightModule( rel );
+    
+    AddANewPresentation( M, rel, U, UI );
     
     return GetRidOfZeroGenerators( M );
     

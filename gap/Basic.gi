@@ -574,23 +574,14 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_UI := false;
         compute_VI := false;
         nar_V := 2;
-    elif nargs > 2 and IsHomalgMatrix( arg[2] ) and IsString( arg[3] ) then
+    elif nargs = 3 and IsHomalgMatrix( arg[2] ) and IsString( arg[3] ) then
         ## BetterEquivalentMatrix(M,VI,"")
         compute_U := false;
         compute_V := false;
         compute_UI := false;
         compute_VI := true;
         nar_VI := 2;
-    elif nargs > 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
-      and IsString( arg[4] ) and IsString( arg[5] ) then
-        ## BetterEquivalentMatrix(M,V,VI,"","")
-        compute_U := false;
-        compute_V := true;
-        compute_UI := false;
-        compute_VI := true;
-        nar_V := 2;
-        nar_VI := 3;
-    elif nargs > 5 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
+    elif nargs = 6 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[4] ) and IsString( arg[5] ) and IsString( arg[6] ) then
         ## BetterEquivalentMatrix(M,U,UI,"","","")
         compute_U := true;
@@ -599,7 +590,16 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_VI := false;
         nar_U := 2;
         nar_UI := 3;
-    elif nargs > 3 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
+    elif nargs = 5 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
+      and IsString( arg[4] ) and IsString( arg[5] ) then
+        ## BetterEquivalentMatrix(M,V,VI,"","")
+        compute_U := false;
+        compute_V := true;
+        compute_UI := false;
+        compute_VI := true;
+        nar_V := 2;
+        nar_VI := 3;
+    elif nargs = 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[5] ) then
         ## BetterEquivalentMatrix(M,UI,VI,"")
         compute_U := false;
@@ -608,7 +608,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         compute_VI := true;
         nar_UI := 2;
         nar_VI := 3;
-    elif nargs > 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
+    elif nargs = 5 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsHomalgMatrix( arg[4] ) and IsHomalgMatrix( arg[5] ) then
         ## BetterEquivalentMatrix(M,U,V,UI,VI)
         compute_U := true;
@@ -703,28 +703,27 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
             if IsString( U ) then
                 UI := U;
             else
-                UI := LeftInverse( U );
+                UI := RightInverse( U );
             fi;
         fi;
         
         if compute_VI and not IsBound( VI ) then
-            VI := LeftInverse( V ); ## this is in fact a RightInverse but for quadratic matrices, which we assume here, they coincide!!!
+            VI := LeftInverse( V ); ## this is indeed a LeftInverse
         fi;
         
-        CM := HomalgMatrix( "void", R );
-        
-        A := BasisOfRowsCoeff( M, CM );
-        
-        if compute_U and not IsString( U ) then
-            U := CM * U;
-        fi;
-        
-        if compute_UI and not IsString( UI ) then
-            RightDivide( M, A );
-            UI := UI * last;
-        fi;
-        
-        M := A;
+        #CM := HomalgMatrix( "void", R );
+        #
+        #A := BasisOfRowsCoeff( M, CM );
+        #
+        #if compute_U and not IsString( U ) then
+        #    U := CM * U;
+        #fi;
+        #
+        #if compute_UI and not IsString( UI ) then
+        #    UI := UI * RightDivide( M, A );
+        #fi;
+        #
+        #M := A;
 	
     fi;
     
