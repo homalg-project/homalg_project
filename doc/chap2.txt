@@ -12,5 +12,5 @@
   etc.  concerning this package. Also, I would like to hear about applications
   of this package.
   
-  Mohamed Barakat and Simon Görtzen
+  Mohamed Barakat and Simon GÃ¶rtzen
   

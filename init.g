@@ -1,11 +1,11 @@
 #############################################################################
 ##
 ##  init.g                    RingsForHomalg package         Mohamed Barakat
-##                                                           Simon Görtzen
-##                                                           Max Neunhöffer
+##                                                           Simon GÃ¶rtzen
+##                                                           Max NeunhÃ¶ffer
 ##                                                           Daniel Robertz
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B fÃ¼r Mathematik, RWTH Aachen
 ##
 ##  Reading the declaration part of the RingsForHomalg package.
 ##

@@ -1,11 +1,11 @@
 #############################################################################
 ##  
 ##  PackageInfo.g for the package `RingsForHomalg'           Mohamed Barakat
-##                                                           Simon Görtzen
-##                                                           Max Neunhöffer
+##                                                           Simon GÃ¶rtzen
+##                                                           Max NeunhÃ¶ffer
 ##                                                           Daniel Robertz
 ##
-##  (created from Frank Lübeck's PackageInfo.g template file)
+##  (created from Frank LÃ¼beck's PackageInfo.g template file)
 ##  
 
 ##  For the LoadPackage mechanism in GAP >= 4.4 only the entries
@@ -95,7 +95,7 @@ ArchiveFormats := ".tar.gz",
 ##     rec(
 ##     # these are compulsory, characters are interpreted as latin-1, so
 ##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
+##     LastName := "MÃ¼ller",
 ##     FirstNames := "Fritz Eduard",
 ##  
 ##     # At least one of the following two entries must be given and set 
@@ -111,7 +111,7 @@ ArchiveFormats := ".tar.gz",
 ##     # complete URL, starting with protocol
 ##     WWWHome := "http://www.no.org/~Mueller",
 ##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
+##     PostalAddress := "Dr. F. MÃ¼ller\nNo Org Institute\nNo Place 13\n\
 ##     12345 Notown\nNocountry"
 ##     
 ##     # If you want, add one or both of the following entries (*optional*)
@@ -137,14 +137,14 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec( 
-    LastName      := "Goertzen",
+    LastName      := "GÃ¶rtzen",
     FirstNames    := "Simon",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon",
     PostalAddress := Concatenation( [
-                       "Simon Görtzen\n",
+                       "Simon GÃ¶rtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
@@ -153,14 +153,14 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec( 
-    LastName      := "Neunhoeffer",
+    LastName      := "NeunhÃ¶ffer",
     FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
     WWWHome       := "http://www-groups.mcs.st-and.ac.uk/~neunhoef",
     PostalAddress := Concatenation( [
-                       "Max Neunhöffer\n",
+                       "Max NeunhÃ¶ffer\n",
                        "School of Mathematics and Statistics \n",
                        "Mathematical Institute \n",
                        "North Haugh\n",
