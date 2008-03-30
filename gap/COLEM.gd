@@ -4,7 +4,7 @@
 ##
 ##         COLEM = Clever Operations for Lazy Evaluated Matrices
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B fÃ¼r Mathematik, RWTH Aachen
 ##
 ##  Declaration stuff for the COLEM subpackage.
 ## 

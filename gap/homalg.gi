@@ -2,7 +2,7 @@
 ##
 ##  homalg.gi                   homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B fÃ¼r Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for homalg.
 ##

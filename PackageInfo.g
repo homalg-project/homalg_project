@@ -1,7 +1,7 @@
 #############################################################################
 ##  
 ##  PackageInfo.g for the package `homalg'                    Mohamed Barakat
-##  (created from Frank Lübeck's PackageInfo.g template file)
+##  (created from Frank LÃ¼beck's PackageInfo.g template file)
 ##  
 
 ##  For the LoadPackage mechanism in GAP >= 4.4 only the entries
@@ -26,13 +26,13 @@ Subtitle := "homalg - a meta package for homological algebra",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.03.18",
+Version := "2008.03.30",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "18/03/2008",
+Date := "30/03/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -91,7 +91,7 @@ ArchiveFormats := ".tar.gz",
 ##     rec(
 ##     # these are compulsory, characters are interpreted as latin-1, so
 ##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
+##     LastName := "MÃ¼ller",
 ##     FirstNames := "Fritz Eduard",
 ##  
 ##     # At least one of the following two entries must be given and set 
@@ -107,7 +107,7 @@ ArchiveFormats := ".tar.gz",
 ##     # complete URL, starting with protocol
 ##     WWWHome := "http://www.no.org/~Mueller",
 ##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
+##     PostalAddress := "Dr. F. MÃ¼ller\nNo Org Institute\nNo Place 13\n\
 ##     12345 Notown\nNocountry"
 ##     
 ##     # If you want, add one or both of the following entries (*optional*)
