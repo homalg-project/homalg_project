@@ -99,11 +99,29 @@ DeclareOperation( "LeftPresentation",
 DeclareOperation( "LeftPresentation",
         [ IsList, IsList, IsSemiringWithOneAndZero ] );
 
+DeclareOperation( "LeftPresentation",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "RightPresentation",
         [ IsList, IsSemiringWithOneAndZero ] );
 
 DeclareOperation( "RightPresentation",
         [ IsList, IsList, IsSemiringWithOneAndZero ] );
+
+DeclareOperation( "RightPresentation",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgFreeLeftModule",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "HomalgFreeRightModule",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "HomalgZeroLeftModule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "HomalgZeroRightModule",
+        [ IsHomalgRing ] );
 
 # basic operations:
 

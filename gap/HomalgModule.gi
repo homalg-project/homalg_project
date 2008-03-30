@@ -1380,6 +1380,17 @@ InstallMethod( LeftPresentation,
 end );
 
 ##
+InstallMethod( LeftPresentation,
+        "constructor",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    
+    return Presentation( HomalgRelationsForLeftModule( mat ) );
+    
+end );
+
+##
 InstallMethod( RightPresentation,
         "constructor",
         [ IsList, IsSemiringWithOneAndZero ],
@@ -1463,6 +1474,61 @@ InstallMethod( RightPresentation,
 #    SetParent( rels, M );
     
     return M;
+    
+end );
+
+##
+InstallMethod( RightPresentation,
+        "constructor",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    
+    return Presentation( HomalgRelationsForRightModule( mat ) );
+    
+end );
+
+##
+InstallMethod( HomalgFreeLeftModule,
+        "constructor",
+        [ IsInt, IsHomalgRing ],
+        
+  function( rank, ring )
+    
+    return LeftPresentation( HomalgMatrix( "zero", 0, rank, ring ) );
+    
+end );
+
+##
+InstallMethod( HomalgFreeRightModule,
+        "constructor",
+        [ IsInt, IsHomalgRing ],
+        
+  function( rank, ring )
+    
+    return RightPresentation( HomalgMatrix( "zero", rank, 0, ring ) );
+    
+end );
+
+##
+InstallMethod( HomalgZeroLeftModule,
+        "constructor",
+        [ IsHomalgRing ],
+        
+  function( ring )
+    
+    return HomalgFreeLeftModule( 0, ring );
+    
+end );
+
+##
+InstallMethod( HomalgZeroRightModule,
+        "constructor",
+        [ IsHomalgRing ],
+        
+  function( ring )
+    
+    return HomalgFreeRightModule( 0, ring );
     
 end );
 

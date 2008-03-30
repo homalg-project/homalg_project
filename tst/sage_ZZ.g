@@ -10,5 +10,4 @@ wmat := HomalgMatrixInSage( " \
   [ -1932, 248, -556, 292 ], \
   [ 1018, -127, 293, -156 ] ] \
 ", ZZ );
-wrel := HomalgRelationsForLeftModule( wmat );
-W := Presentation( wrel );
+W := LeftPresentation( wmat );

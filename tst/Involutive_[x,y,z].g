@@ -14,8 +14,7 @@ wmat := HomalgMatrixInMaple( " \
   [x^2*y-x^2, x*y^2-x*y, x*z*y-x*z, -y^3+2*y^2-y, -z*y^2+z*y, 0], \
   [0, 0, 0, z*y-z, z^2, x^3-y^2] ] \
 ", Qxyz );
-wrel := HomalgRelationsForLeftModule( wmat );
-W := Presentation( wrel );
+W := LeftPresentation( wmat );
 BasisOfModule( W );
 BasisOfModule( W );
 rsyz:=SyzygiesGenerators( W );

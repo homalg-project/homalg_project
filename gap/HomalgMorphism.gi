@@ -390,7 +390,42 @@ InstallGlobalFunction( HomalgMorphism,
     fi;
     
     if not IsBound( source ) then
-        Error( "the source module must be provided as the second argument\n" );
+        
+        if IsHomalgMatrix( arg[1] ) then
+            matrix := arg[1];
+            R := HomalgRing( matrix );
+        elif IsHomalgRing( arg[nargs] ) then
+            matrix := HomalgMatrix( arg[1], arg[nargs] );
+        else
+            Error( "The second argument must be the source module or the last argument should be an IsHomalgRing\n" );
+        fi;
+        
+        if nargs > 1 and IsString( arg[2] ) and Length( arg[2] ) > 0 and  LowercaseString( arg[2]{[1..1]} ) = "r" then
+            source := HomalgFreeRightModule( NrColumns( matrix ), R );
+            target := HomalgFreeRightModule( NrRows( matrix ), R );
+            type := HomalgMorphismOfRightModulesType;
+        else
+            source := HomalgFreeLeftModule( NrRows( matrix ), R );
+            target := HomalgFreeLeftModule( NrColumns( matrix ), R );
+            type := HomalgMorphismOfLeftModulesType;
+        fi;
+        
+        matrices := rec( );
+        
+        morphism := rec( 
+                         source := source,
+                         target := target,
+                         matrices := matrices,
+                         index_pairs_of_presentations := [ [ 1, 1 ] ]);
+    
+        matrices.( String( [ 1, 1 ] ) ) := matrix;
+    
+        ## Objectify:
+        ObjectifyWithAttributes(
+                morphism, type );
+        
+        return morphism;
+        
     fi;
     
     if Length( arg ) > 2 then
@@ -503,8 +538,7 @@ InstallGlobalFunction( HomalgMorphism,
     
         ## Objectify:
         ObjectifyWithAttributes(
-                morphism, type,
-                IsIdentityMorphism, true );
+                morphism, type );
         
     fi;
     

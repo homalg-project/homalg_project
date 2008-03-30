@@ -51,9 +51,9 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     S := SyzygiesGenerators( N, B );
     
     if IsHomalgGeneratorsOfLeftModule( M1 ) then
-        return Presentation( HomalgRelationsForLeftModule( S ) );
+        return LeftPresentation( S );
     else
-        return Presentation( HomalgRelationsForRightModule( S ) );
+        return RightPresentation( S );
     fi;
     
 end );
