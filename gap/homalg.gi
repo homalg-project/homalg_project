@@ -22,7 +22,9 @@ InstallValue( HOMALG,
             color_start_FOB := "\033[1m\033[4;37;45m",
             color_end_FOB := "\033[1m\033[4;35;47m",
             color_start_FO := "\033[1;33;41m",
-            color_end_FO := "\033[1;31;43m" ) );
+            color_end_FO := "\033[1;31;43m"
+           )
+);
 
 InstallGlobalFunction( HomalgTotalRuntimes,
   function( arg )
