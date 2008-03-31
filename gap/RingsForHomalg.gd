@@ -36,43 +36,13 @@ DeclareGlobalFunction( "RingForHomalgInMacaulay2" );
 
 DeclareGlobalFunction( "RingForHomalgInMAGMA" );
 
-DeclareGlobalFunction( "RingForHomalgInPIRMaple9" );
+DeclareGlobalFunction( "RingForHomalgInPIRMaple" );
 
-DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple9" );
+DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple" );
 
-DeclareGlobalFunction( "RingForHomalgInJanetMaple9" );
+DeclareGlobalFunction( "RingForHomalgInJanetMaple" );
 
-DeclareGlobalFunction( "RingForHomalgInJanetOreMaple9" );
+DeclareGlobalFunction( "RingForHomalgInJanetOreMaple" );
 
-DeclareGlobalFunction( "RingForHomalgInOreModulesMaple9" );
-
-DeclareGlobalFunction( "RingForHomalgInPIRMaple95" );
-
-DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple95" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetMaple95" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetOreMaple95" );
-
-DeclareGlobalFunction( "RingForHomalgInOreModulesMaple95" );
-
-DeclareGlobalFunction( "RingForHomalgInPIRMaple10" );
-
-DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple10" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetMaple10" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetOreMaple10" );
-
-DeclareGlobalFunction( "RingForHomalgInOreModulesMaple10" );
-
-DeclareGlobalFunction( "RingForHomalgInPIRMaple11" );
-
-DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple11" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetMaple11" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetOreMaple11" );
-
-DeclareGlobalFunction( "RingForHomalgInOreModulesMaple11" );
+DeclareGlobalFunction( "RingForHomalgInOreModulesMaple" );
 

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  IO.gi                     RingsForHomalg package         Mohamed Barakat
+##  IO.gi                     RingsForHomalg package          Max Neunhöffer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff to use the legendary GAP4 I/O package of Max Neunhoeffer.
+##  Implementation stuff to use the GAP4 I/O package.
 ##
 #############################################################################
 
@@ -14,368 +14,195 @@
 #
 ####################################
 
-##
-InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
-  function( L )
-    local l, s;
-    
-    if not IsList( L ) then
-        Error( "the first argument must be a list\n" );
-    fi;
-    
-    l := Length( L );
-    
-    s := List( [ 1 .. l ], function( a )
-                             local CAS, stream, t;
-                             if IsString( L[a] ) then
-                                 return L[a];
-                             else
-                                 if IsHomalgExternalObjectRep( L[a] )
-                                    or IsHomalgExternalRingRep( L[a] ) then
-                                     t := HomalgPointer( L[a] );
-                                 elif IsHomalgExternalMatrixRep( L[a] ) then
-                                     if not IsVoidMatrix( L[a] ) or HasEval( L[a] ) then
-                                         t := HomalgPointer( L[a] ); ## now we enforce evaluation!!!
-                                     else
-                                         CAS := HomalgExternalCASystem( L[a] );
-                                         stream := HomalgStream( L[a] );
-                                         stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
-                                         t := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
-                                         MakeImmutable( t );
-                                         SetEval( L[a], HomalgExternalObject( t, CAS, stream ) ); ## CAUTION: HomalgPointer( L[a] ) now exists but still points to nothing!!!
-                                         ResetFilterObj( L[a], IsVoidMatrix );
-                                     fi;
-                                 else
-                                     t := String( L[a] );
-                                 fi;
-                                 if a < l and not IsString( L[a+1] ) then
-                                     t := Concatenation( t, "," );
-                                 fi;
-                                 return t;
-                             fi;
-                           end );
-    
-    return Flat( s );
-                           
-end );
+####################################
+#
+# constructor functions:
+#
+####################################
 
 ##
-InstallGlobalFunction( HomalgSendBlocking,
-  function( arg )
-    local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          R, ext_obj, e, RP, CAS, cas_version, stream, homalg_variable,
-          l, eol, enter, max;
+InstallGlobalFunction( TermCAS,
+  function( s )
     
-    if IsBound( HOMALG_RINGS.HomalgSendBlockingInput ) then
-        Add( HOMALG_RINGS.HomalgSendBlockingInput, arg );
+    IO_Close( s.stdin );
+    IO_Close( s.stdout );
+    IO_Close( s.stderr );
+    s.stdin := fail;
+    s.stdout := fail;
+    s.stderr := fail;
+    
+end );
+
+InstallGlobalFunction( SendForkingToCAS,
+  function ( f, st )
+    local  pid, len;
+    
+    IO_Flush( f );
+    pid := IO_fork(  );
+    
+    if pid = -1  then
+        return fail;
     fi;
     
-    Info( InfoRingsForHomalg, 10, arg );
+    if pid = 0  then
+        len := IO_Write( f, st );
+        IO_Flush( f );
+        IO_exit( 0 );
+    fi;
     
-    if not IsList( arg[1] ) then
-        Error( "the first argument must be a list\n" );
-    elif IsString( arg[1] ) then
-        L := [ arg[1] ];
+    return true;
+    
+end );
+
+InstallGlobalFunction( SendToCAS,
+  function( s, command )
+    local cmd;
+    
+    if command[ Length( command ) ] <> '\n' then
+        Add( command, '\n' );
+    fi;
+    
+    if Length( command ) < 1024 then
+        IO_Write( s.stdin,command );
+        IO_Write( s.stdin, "\"", s.READY, "\"", s.eoc_verbose, "\n" );
+        IO_Flush( s.stdin );
     else
-        L := arg[1];
+        cmd := Concatenation( command, "\"", s.READY, "\"", s.eoc_verbose, "\n" );
+        SendForkingToCAS( s.stdin, cmd );
     fi;
+    
+    s.lines := "";
+    s.errors := "";
+    s.casready := false;
+    
+end );
+
+InstallGlobalFunction( CheckOutputOfCAS,
+  function( s )
+    local bytes, gotsomething, l, nr, pos;
+    
+    gotsomething := false;
+    
+    while true do	# will be exited with break or return
+        l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
+        nr := IO_select( l, [], [], 0, 0 );
+        #Print( "select: nr=", nr, "\n" );
+        
+        if nr = 0 then 
+            if not ( gotsomething ) then
+                return fail;
+            fi;  # nothing new whatsoever
+            return s.casready;
+        fi;
+        #Print( "select: l=", l, "\n" );
+        
+        if l[1] <> fail then	# something on stdout
+          pos := Length( s.lines );
+          bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
+          if bytes > 0 then
+              #Print( "stdout bytes:", bytes, "\n" );
+              gotsomething := true;
+              pos := PositionSublist( s.lines, s.READY, pos - s.READY_LENGTH + 1 );
+                    # ........NEWNEWNEWNEWNEW
+                    #        ^
+                    #        pos
+              if pos <> fail then 
+                  s.casready := true;
+                  s.lines := s.lines{ [ s.CUT_BEGIN .. Length( s.lines ) - s.READY_LENGTH - s.CUT_END ] };
+              fi;
+          else
+              Error( s.name, " process seems to have died!\n" );
+          fi;
+      fi;
+      
+      if l[2] <> fail then   # something on stderr
+          bytes := IO_read( l[2], s.errors, Length( s.errors ), s.BUFSIZE );
+          if bytes > 0 then
+              #Print( "stderr bytes:", bytes, "\n" );
+              gotsomething := true;
+          else
+              Error( s.name, " process seems to have died!\n" );
+          fi;
+      fi;
+  od;
+  # never reached
+  
+end );
+
+InstallGlobalFunction( SendBlockingToCAS,
+  function( s, command )
+    local l, nr;
+    
+    SendToCAS( s, command );
+    repeat
+        l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
+        nr := IO_select( l, [], [], fail, fail );   # wait for input ready!
+    until CheckOutputOfCAS( s ) = true;
+    
+end );
+
+InstallGlobalFunction( LaunchCAS,
+  function( arg )
+    local nargs, HOMALG_IO_CAS, executables, e, s;
     
     nargs := Length( arg );
     
-    properties := [];
+    HOMALG_IO_CAS := arg[1];
     
-    for ar in arg{[ 2 .. nargs ]} do
-        if not IsBound( option ) and IsString( ar ) then ## the first occurrence of an option decides
-            if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
-                need_command := true;
-                need_display := false;
-                need_output := false;
-            elif PositionSublist( LowercaseString( ar ), "display" ) <> fail then
-                need_display := true;
-                need_command := false;
-                need_output := false;
-            elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
-                need_output := true;
-                need_command := false;
-                need_display := false;
-            else
-                Error( "option must be one of {\"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
-            fi;
-            option := ar;
-        elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
-            R := ar;
-            ext_obj := R;
-        elif not IsBound( ext_obj ) and IsHomalgExternalObject( ar )
-          and HasIsHomalgExternalObjectWithIOStream( ar ) and IsHomalgExternalObjectWithIOStream( ar ) then
-            ext_obj := ar;
-        elif IsFilter( ar ) then
-            Add( properties, ar );
+    executables := [ ];
+    
+    if nargs > 1 and IsString( arg[2] ) then
+        Add( executables, arg[2] );
+    fi;
+    
+    if IsBound( HOMALG_IO_CAS.executable ) then
+        Add( executables, HOMALG_IO_CAS.executable );
+    fi;
+    
+    e := 1;
+    while true do
+        if IsBound( HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) ) then
+            Add( executables, HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) );
+            e := e + 1;
         else
-            Error( "this argument should be in { IsString, IsFilter, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
+            break;
         fi;
     od;
     
-    if not IsBound( ext_obj ) then ## R is also not yet defined
-        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) or 
-                     ( IsHomalgExternalObjectRep( a )
-                       and HasIsHomalgExternalObjectWithIOStream( a )
-                       and IsHomalgExternalObjectWithIOStream( a ) ) );
-        if e <> [ ] then
-            ext_obj := e[1];
-            for ar in e do
-                if IsHomalgExternalMatrixRep( ar ) then
-                    R := HomalgRing( ar );
-                    break;
-                elif IsHomalgExternalRingRep( ar ) then
-                    R := ar;
-                    break;
-                fi;
-            od;
-        else
-            Error( "either the list provided by the first argument must contain at least one external matrix or an external ring or one of the remaining arguments must be an external ring or an external object with IO stream\n" );
-        fi;
+    if executables = [ ] then
+        Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
     fi;
     
-    if IsBound( R ) then
-        RP := HomalgTable( R );
+    for e in executables do
         
-        if IsBound(RP!.HomalgSendBlocking) then
-            return RP!.HomalgSendBlocking( arg );
-        fi;
-    fi;
-    
-    CAS := HomalgExternalCASystem( ext_obj );
-    cas_version := HomalgExternalCASystemVersion( ext_obj );
-    stream := HomalgStream( ext_obj );
-    
-    if not IsBound( stream.HomalgExternalVariableCounter ) then
+        s := IO_Popen3( Filename( DirectoriesSystemPrograms( ), e ),
+                     HOMALG_IO_CAS.options );
         
-        if Length( CAS ) > 2 and LowercaseString( CAS{[1..3]} ) = "gap" then
-            stream.cas := "gap"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendGAPBlocking;
-            stream.define := ":=";
-            stream.eol_verbose := ";";
-            stream.eol_quiet := ";;";
-            stream.prompt := "gap> ";
-            stream.output_prompt := "\033[1;37;44m<gap\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.gap_display ) then
-                stream.display_color := HOMALG_RINGS.gap_display;
-            fi;
-        elif Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "singular" then
-            stream.cas := "singular"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendSingularBlocking;
-            stream.define := "=";
-            stream.eol_verbose := ";";
-            stream.eol_quiet := ";";
-            stream.prompt := "singular> ";
-            stream.output_prompt := "\033[1;30;43m<singular\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.singular_display ) then
-                stream.display_color := HOMALG_RINGS.singular_display;
-            fi;
-        elif ( Length( CAS ) > 7 and LowercaseString( CAS{[1..8]} ) = "macaulay" ) or
-          ( Length( CAS ) > 1 and LowercaseString( CAS{[1..2]} ) = "m2" ) then
-            stream.cas := "macaulay2"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendMacaulay2Blocking;
-            stream.define := "=";
-            stream.eol_verbose := "";
-            stream.eol_quiet := ";";
-            stream.prompt := "M2> ";
-            stream.output_prompt := "\033[1;30;43m<M2\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.M2_display ) then
-                stream.display_color := HOMALG_RINGS.M2_display;
-            fi;
-        elif Length( CAS ) > 3 and LowercaseString( CAS{[1..4]} ) = "sage" then
-            stream.cas := "sage"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendSageBlocking;
-            stream.define := "=";
-            stream.eol_verbose := "";
-            stream.eol_quiet := ";";
-            stream.prompt := "sage: ";
-            stream.output_prompt := "\033[1;34;43m<sage\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.sage_display ) then
-                stream.display_color := HOMALG_RINGS.sage_display;
-            fi;
-        elif ( Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "magma" ) then
-            stream.cas := "magma"; ## normalized name on which the user should have no control
-            stream.SendBlocking := SendMAGMABlocking;
-            stream.define := ":=";
-            stream.eol_verbose := ";";
-            stream.eol_quiet := ";";
-            stream.prompt := "magma> ";
-            stream.output_prompt := "\033[1;31;47m<magma\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.magma_display ) then
-                stream.display_color := HOMALG_RINGS.magma_display;
-            fi;
-        elif Length( CAS ) > 4 and LowercaseString( CAS{[1..5]} ) = "maple" then
-            stream.cas := "maple"; ## normalized name on which the user should have no control
-            if cas_version = "10" then
-                stream.SendBlocking := SendMaple10Blocking;
-            elif cas_version = "9.5" then
-                stream.SendBlocking := SendMaple95Blocking;
-            elif cas_version = "9" then
-                stream.SendBlocking := SendMaple9Blocking;
-            else
-                stream.SendBlocking := SendMaple10Blocking;
-            fi;
-            stream.define := ":=";
-            stream.eol_verbose := ";";
-            stream.eol_quiet := ":";
-            stream.prompt := "maple> ";
-            stream.output_prompt := "\033[1;34;47m<maple\033[0m ";
-            if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
-               and IsBound( HOMALG_RINGS.maple_display ) then
-                stream.display_color := HOMALG_RINGS.maple_display;
-            fi;
-        else
-            Error( "the computer algebra system ", CAS, " is not yet supported as an external computing engine for homalg\n" );
+        if s <> fail then
+            break;
         fi;
         
-        stream.HomalgExternalVariableCounter := 0;
-        stream.HomalgExternalCommandCounter := 0;
-        stream.HomalgExternalOutputCounter := 0;
-        stream.HomalgExternalCallCounter := 0;
-        stream.HomalgBackStreamMaximumLength := 0;
+    od;
+    
+    if s = fail then
+        Error( "found no ",  HOMALG_IO_CAS.executable, " executable in PATH while searching the following list:\n", executables, "\n" );
+    fi;
+    
+    s.stdout!.rbufsize := false;   # switch off buffering
+    s.stderr!.rbufsize := false;   # switch off buffering
+    
+    for e in NamesOfComponents( HOMALG_IO_CAS ) do
+        s.( e ) := HOMALG_IO_CAS.( e );
+    od;
+    
+    if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
+       and IsBound( s.display_color ) then
+        s.color_display := s.display_color;
+    fi;
         
-    fi;
+    SendBlockingToCAS( s, "\n" );
     
-    if not IsBound( option ) then
-        stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;
-        homalg_variable := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
-        MakeImmutable( homalg_variable );
-    fi;
-    
-    L := HomalgCreateStringForExternalCASystem( L );
-    
-    l := Length( L );
-    
-    if l > 0 and L{[l..l]} = "\n" then
-        enter := "";
-        eol := "";
-    else
-        enter := "\n";
-        if l > 0 and
-           ( ( Length( stream.eol_verbose ) > 0 and L{[l-Length( stream.eol_verbose )+1..l]} = stream.eol_verbose )
-             or L{[l-Length( stream.eol_quiet )+1..l]} = stream.eol_quiet ) then
-            eol := "";
-        elif not IsBound( option ) then
-            eol := stream.eol_quiet; ## as little back-traffic over the stream as possible
-        else
-            if need_command then
-                eol := stream.eol_quiet; ## as little back-traffic over the stream as possible
-            else
-                eol := stream.eol_verbose;
-            fi;
-        fi;
-    fi;
-    
-    if not IsBound( option ) then
-        L := Concatenation( homalg_variable, " ", stream.define, " ", L, eol, enter );
-    else
-        L := Concatenation( L, eol, enter );
-        
-        if need_command then
-            stream.HomalgExternalCommandCounter := stream.HomalgExternalCommandCounter + 1;
-        else
-            stream.HomalgExternalOutputCounter := stream.HomalgExternalOutputCounter + 1;
-        fi;
-    fi;
-    
-    if IsBound( HOMALG_RINGS.HomalgSendBlocking ) then
-        Add( HOMALG_RINGS.HomalgSendBlocking, L );
-    fi;
-    
-    Info( InfoRingsForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) -1 ]} );
-    
-    stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
-    
-    stream.SendBlocking( stream, L );
-    
-    max := Maximum( stream.HomalgBackStreamMaximumLength, Length( stream.lines ) );
-    
-    if max > stream.HomalgBackStreamMaximumLength then
-        stream.HomalgBackStreamMaximumLength := max;
-        if HOMALG_RINGS.SaveHomalgMaximumBackStream = true then
-            stream.HomalgMaximumBackStream := stream.lines;
-        fi;
-    fi;
-    
-    if not IsBound( option ) then
-        L := HomalgExternalObject( homalg_variable, CAS, stream );
-        
-        if properties <> [ ] and IsHomalgExternalObjectWithIOStream( L ) then
-            for ar in properties do
-                Setter( ar )( L, true );
-            od;
-        fi;
-        
-        return L;
-    elif need_display then
-        if stream.cas = "maple" then
-            return stream.lines{[ 1 .. Length( stream.lines ) - 36 ]};
-        else
-            return Concatenation( stream.lines, "\n" );
-        fi;
-    elif stream.cas = "maple" then
-        ## unless meant for display, normalize the white spaces caused by Maple
-        L := NormalizedWhitespace( stream.lines );
-    else
-        L := stream.lines;
-    fi;
-    
-    if need_output then
-        Info( InfoRingsForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
-    fi;
-    
-    return L;
-    
-end );
-
-##
-InstallGlobalFunction( StringToIntList,
-  function( arg )
-    local l, lint;
-    
-    l := SplitString( arg[1], ",", "[ ]\n" );
-    lint := List( l, Int ); 
-    
-    if fail in lint then
-        Error( "the first argument is not a string containg a list of integers: ", arg[1], "\n");
-    fi;
-    
-    return lint;
-    
-end );
-
-####################################
-#
-# View, Print, and Display methods:
-#
-####################################
-
-InstallMethod( ViewObj,
-        "for homalg external objects with an IO stream",
-        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
-        
-  function( o )
-    
-    Print( "<A homalg external object residing in the CAS " );
-    Print( HomalgExternalCASystem( o ), " running with pid ", HomalgExternalCASystemPID( o ), ">" ); 
-    
-end );
-
-InstallMethod( ViewObj,
-        "for homalg external objects with an IO stream",
-        [ IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
-        
-  function( o )
-    
-    Print( "<A homalg external ring residing in the CAS " );
-    Print( HomalgExternalCASystem( o ), " running with pid ", HomalgExternalCASystemPID( o ), ">" ); 
+    return s;
     
 end );
 

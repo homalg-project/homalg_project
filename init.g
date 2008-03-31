@@ -11,9 +11,19 @@
 ##
 #############################################################################
 
+ReadPackage( "RingsForHomalg", "gap/IO.gd" );
+
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
 
-ReadPackage( "RingsForHomalg", "gap/IO.gd" );
+## all the supported external computer algebra systems
+ReadPackage( "RingsForHomalg", "gap/GAP.gd" );
+ReadPackage( "RingsForHomalg", "gap/Singular.gd" );
+ReadPackage( "RingsForHomalg", "gap/Macaulay2.gd" );
+ReadPackage( "RingsForHomalg", "gap/Sage.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA.gd" );
+ReadPackage( "RingsForHomalg", "gap/Maple.gd" );
+
+ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/HomalgExternalMatrix.gd" );
 

@@ -11,19 +11,19 @@
 ##
 #############################################################################
 
-ReadPackage( "RingsForHomalg", "gap/gap.g" );
-ReadPackage( "RingsForHomalg", "gap/singular.g" );
-ReadPackage( "RingsForHomalg", "gap/macaulay2.g" );
-ReadPackage( "RingsForHomalg", "gap/sage.g" );
-ReadPackage( "RingsForHomalg", "gap/magma.g" );
-ReadPackage( "RingsForHomalg", "gap/maple9.g" );
-ReadPackage( "RingsForHomalg", "gap/maple95.g" );
-ReadPackage( "RingsForHomalg", "gap/maple10.g" );
-ReadPackage( "RingsForHomalg", "gap/maple11.g" );
+ReadPackage( "RingsForHomalg", "gap/IO.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gi" );
 
-ReadPackage( "RingsForHomalg", "gap/IO.gi" );
+## all the supported external computer algebra systems
+ReadPackage( "RingsForHomalg", "gap/GAP.gi" );
+ReadPackage( "RingsForHomalg", "gap/Singular.gi" );
+ReadPackage( "RingsForHomalg", "gap/Macaulay2.gi" );
+ReadPackage( "RingsForHomalg", "gap/Sage.gi" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA.gi" );
+ReadPackage( "RingsForHomalg", "gap/Maple.gi" );
+
+ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/HomalgExternalMatrix.gi" );
 

@@ -19,16 +19,13 @@
 InstallValue( HOMALG_RINGS,
         rec(
             SaveHomalgMaximumBackStream := false,
-            color_display := "false",
-            gap_display := "\033[0;35m",
-            singular_display := "\033[0;30;47m",
-	    sage_display  := "\033[0;34;43m",
-	    magma_display  := "\033[0;30;47m",
-            maple_display := "\033[0;34m" ) );
+            color_display := "false"
+           )
+);
 
 ####################################
 #
-# constructor functions and methods:
+# constructor functions:
 #
 ####################################
 
@@ -69,7 +66,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
     local stream, init, table, ext_obj;
     
-    stream := LaunchGAP( );
+    stream := LaunchCAS( HOMALG_IO_GAP );
     
     init := HomalgExternalObject( "", "GAP", stream );
     
@@ -90,7 +87,7 @@ InstallGlobalFunction( RingForHomalgInSage,
   function( arg )
     local stream, ext_obj;
     
-    stream := LaunchSage( );
+    stream := LaunchCAS( HOMALG_IO_Sage );
     
     if Length( arg ) > 1 and IsFilter( arg[2] ) then
         ext_obj := HomalgExternalObject( arg[1], "Sage", stream, arg[2] );
@@ -107,7 +104,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
   function( arg )
     local stream, ext_obj;
     
-    stream := LaunchMAGMA( );
+    stream := LaunchCAS( HOMALG_IO_MAGMA );
     
     if Length( arg ) > 1 and IsFilter( arg[2] ) then
         ext_obj := HomalgExternalObject( arg[1], "MAGMA", stream, arg[2] );
@@ -120,11 +117,11 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInPIRMaple9,
+InstallGlobalFunction( RingForHomalgInPIRMaple,
   function( arg )
     local stream, init, table, ext_obj;
     
-    stream := LaunchMaple9( );
+    stream := LaunchCAS( HOMALG_IO_Maple );
     
     init := HomalgExternalObject( "", "Maple", stream );
     
@@ -145,11 +142,11 @@ InstallGlobalFunction( RingForHomalgInPIRMaple9,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInInvolutiveMaple9,
+InstallGlobalFunction( RingForHomalgInInvolutiveMaple,
   function( arg )
     local stream, init, table, ext_obj;
     
-    stream := LaunchMaple9( );
+    stream := LaunchCAS( HOMALG_IO_Maple );
     
     init := HomalgExternalObject( "", "Maple", stream );
     
@@ -170,11 +167,11 @@ InstallGlobalFunction( RingForHomalgInInvolutiveMaple9,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInJanetMaple9,
+InstallGlobalFunction( RingForHomalgInJanetMaple,
   function( arg )
     local stream, init, table, ext_obj;
     
-    stream := LaunchMaple9( );
+    stream := LaunchCAS( HOMALG_IO_Maple );
     
     init := HomalgExternalObject( "", "Maple", stream );
     
@@ -195,11 +192,11 @@ InstallGlobalFunction( RingForHomalgInJanetMaple9,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInJanetOreMaple9,
+InstallGlobalFunction( RingForHomalgInJanetOreMaple,
   function( arg )
     local stream, init, table, ext_obj;
     
-    stream := LaunchMaple9( );
+    stream := LaunchCAS( HOMALG_IO_Maple );
     
     init := HomalgExternalObject( "", "Maple", stream );
     
@@ -220,11 +217,11 @@ InstallGlobalFunction( RingForHomalgInJanetOreMaple9,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInOreModulesMaple9,
+InstallGlobalFunction( RingForHomalgInOreModulesMaple,
   function( arg )
     local stream, init, table, ext_obj;
     
-    stream := LaunchMaple9( );
+    stream := LaunchCAS( HOMALG_IO_Maple );
     
     init := HomalgExternalObject( "", "Maple", stream );
     
@@ -276,8 +273,8 @@ InstallMethod( Display,
         ## the normalized name of the CAS is now saved in the stream
         cas := stream.cas;
         
-        if IsBound( stream.display_color ) then
-            display_color := stream.display_color;
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
         else
             display_color := "";
         fi;
@@ -314,8 +311,8 @@ InstallMethod( Display,
     ## the normalized name of the CAS is now saved in the stream
     cas := stream.cas;
     
-    if IsBound( stream.display_color ) then
-        display_color := stream.display_color;
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
     else
         display_color := "";
     fi;

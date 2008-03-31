@@ -65,7 +65,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(", "`homalg/SubMat`(", A, B, R, "),", R, ")" ] , "need_output" ) = "true";
+                   return HomalgSendBlocking( [ "`homalg/IsZeroMapF`(`homalg/SubMat`(", A, B, R, "),", R, ")" ] , "need_output" ) = "true";
                    
                  end,
                

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  IO.gd                     RingsForHomalg package         Mohamed Barakat
+##  IO.gd                     RingsForHomalg package          Max Neunhöffer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff to use the legendary GAP4 I/O package of Max Neunhoeffer.
+##  Declaration stuff to use the GAP4 I/O package.
 ##
 #############################################################################
 
@@ -14,9 +14,15 @@
 #
 ####################################
 
-DeclareGlobalFunction( "HomalgCreateStringForExternalCASystem" );
+DeclareGlobalFunction( "TermCAS" );
 
-DeclareGlobalFunction( "HomalgSendBlocking" ); ## this name was implicitly suggested by Max Neunhoeffer ;)
+DeclareGlobalFunction( "SendForkingToCAS" );
 
-DeclareGlobalFunction( "StringToIntList" );
+DeclareGlobalFunction( "SendToCAS" );
+
+DeclareGlobalFunction( "CheckOutputOfCAS" );
+
+DeclareGlobalFunction( "SendBlockingToCAS" );
+
+DeclareGlobalFunction( "LaunchCAS" );
 
