@@ -63,7 +63,7 @@ end );
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          R, ext_obj, e, RP, CAS, cas_version, stream, homalg_variable,
+          R, ext_obj, prefix, e, RP, CAS, cas_version, stream, homalg_variable,
           l, eoc, enter, max;
     
     if IsBound( HOMALG_RINGS.HomalgSendBlockingInput ) then
@@ -110,6 +110,8 @@ InstallGlobalFunction( HomalgSendBlocking,
             ext_obj := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
+        elif not IsBound( prefix ) and IsList( ar ) and not IsString( ar ) then
+            prefix := ar;
         else
             Error( "this argument should be in { IsString, IsFilter, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
         fi;
@@ -164,6 +166,10 @@ InstallGlobalFunction( HomalgSendBlocking,
         MakeImmutable( homalg_variable );
     fi;
     
+    if IsBound( prefix ) then
+        prefix := HomalgCreateStringForExternalCASystem( prefix );
+    fi;
+    
     L := HomalgCreateStringForExternalCASystem( L );
     
     l := Length( L );
@@ -174,8 +180,12 @@ InstallGlobalFunction( HomalgSendBlocking,
     else
         enter := "\n";
         if l > 0 and
-           ( ( Length( stream.eoc_verbose ) > 0 and L{[l-Length( stream.eoc_verbose )+1..l]} = stream.eoc_verbose )
-             or L{[l-Length( stream.eoc_quiet )+1..l]} = stream.eoc_quiet ) then
+           ( ( Length( stream.eoc_verbose ) > 0
+               and l-Length( stream.eoc_verbose )+1 > 0
+               and L{[l-Length( stream.eoc_verbose )+1..l]} = stream.eoc_verbose )
+             or
+             ( l-Length( stream.eoc_quiet )+1 > 0
+               and L{[l-Length( stream.eoc_quiet )+1..l]} = stream.eoc_quiet ) ) then
             eoc := "";
         elif not IsBound( option ) then
             eoc := stream.eoc_quiet; ## as little back-traffic over the stream as possible
@@ -189,9 +199,20 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if not IsBound( option ) then
-        L := Concatenation( homalg_variable, " ", stream.define, " ", L, eoc, enter );
+        
+        if IsBound( prefix ) then
+            L := Concatenation( prefix, " ", homalg_variable, " ", stream.define, " ", L, eoc, enter );
+        else
+            L := Concatenation( homalg_variable, " ", stream.define, " ", L, eoc, enter );
+        fi;
+        
     else
-        L := Concatenation( L, eoc, enter );
+        
+        if IsBound( prefix ) then
+            L := Concatenation( prefix, " ", L, eoc, enter );
+        else
+            L := Concatenation( L, eoc, enter );
+        fi;
         
         if need_command then
             stream.HomalgExternalCommandCounter := stream.HomalgExternalCommandCounter + 1;
