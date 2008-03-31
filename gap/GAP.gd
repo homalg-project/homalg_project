@@ -16,3 +16,19 @@
 
 DeclareGlobalVariable( "HOMALG_IO_GAP" );
 
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# constructor methods:
+
+DeclareGlobalFunction( "RingForHomalgInExternalGAP" );
+
+DeclareOperation( "HomalgMatrixInExternalGAP",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInExternalGAP",
+        [ IsString, IsHomalgRing ] );
+

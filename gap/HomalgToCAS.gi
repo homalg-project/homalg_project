@@ -252,9 +252,9 @@ InstallGlobalFunction( HomalgSendBlocking,
         return L;
     elif need_display then
         if stream.cas = "maple" then
-            return stream.lines{[ 1 .. Length( stream.lines ) - 36 ]};
+            return Concatenation( stream.lines{ [ 1 .. Length( stream.lines ) - 36 ] }, "\033[0m" );
         else
-            return Concatenation( stream.lines, "\n" );
+            return Concatenation( stream.lines, "\033[0m\n" );
         fi;
     elif stream.cas = "maple" then
         ## unless meant for display, normalize the white spaces caused by Maple

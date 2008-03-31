@@ -35,3 +35,58 @@ InstallValue( HOMALG_IO_GAP,
 
 HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+##
+InstallGlobalFunction( RingForHomalgInExternalGAP,
+  function( arg )
+    local stream, init, table, ext_obj;
+    
+    stream := LaunchCAS( HOMALG_IO_GAP );
+    
+    init := HomalgExternalObject( "", "GAP", stream );
+    
+    HomalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", init );
+    
+    if Length( arg ) > 1 and IsFilter( arg[2] ) then
+        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], arg[2], init );
+    else
+        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgRingInExternalGAP, init );
+    fi;
+    
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInExternalGAP,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "HomalgMatrix( ", String( Eval( M ) ), ", ", R, " )" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInExternalGAP,
+        "for homalg matrices",
+        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "HomalgMatrix( ", M, ", ", R, " )" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+

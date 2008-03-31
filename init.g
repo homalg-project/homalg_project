@@ -15,6 +15,8 @@ ReadPackage( "RingsForHomalg", "gap/IO.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
 
+ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gd" );
+
 ## all the supported external computer algebra systems
 ReadPackage( "RingsForHomalg", "gap/GAP.gd" );
 ReadPackage( "RingsForHomalg", "gap/Singular.gd" );
@@ -23,10 +25,6 @@ ReadPackage( "RingsForHomalg", "gap/Sage.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA.gd" );
 ReadPackage( "RingsForHomalg", "gap/Maple.gd" );
 
-ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gd" );
-
-ReadPackage( "RingsForHomalg", "gap/HomalgExternalMatrix.gd" );
-
 ## GAP
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgTools.gd" );
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgDefault.gd" );
@@ -34,6 +32,13 @@ ReadPackage( "RingsForHomalg", "gap/GAPHomalgBestBasis.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgPIR.gd" );
 #ReadPackage( "RingsForHomalg", "gap/GAPHomalgInvolutive.gd" );
+
+## Singular
+#ReadPackage( "RingsForHomalg", "gap/SingularTools.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularDefault.gd" );
+#ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
+
+#ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gd" );

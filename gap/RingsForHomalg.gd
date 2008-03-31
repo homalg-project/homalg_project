@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for homalg.
+##  Declaration stuff for RingsForHomalg.
 ##
 #############################################################################
 
@@ -25,24 +25,4 @@ DeclareGlobalVariable( "HOMALG_RINGS" );
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalg" );
-
-DeclareGlobalFunction( "RingForHomalgInExternalGAP" );
-
-DeclareGlobalFunction( "RingForHomalgInSingular" );
-
-DeclareGlobalFunction( "RingForHomalgInSage" );
-
-DeclareGlobalFunction( "RingForHomalgInMacaulay2" );
-
-DeclareGlobalFunction( "RingForHomalgInMAGMA" );
-
-DeclareGlobalFunction( "RingForHomalgInPIRMaple" );
-
-DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetMaple" );
-
-DeclareGlobalFunction( "RingForHomalgInJanetOreMaple" );
-
-DeclareGlobalFunction( "RingForHomalgInOreModulesMaple" );
 

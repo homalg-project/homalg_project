@@ -16,3 +16,19 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Singular" );
 
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# constructor methods:
+
+DeclareGlobalFunction( "RingForHomalgInSingular" );
+
+DeclareOperation( "HomalgMatrixInSingular",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInSingular",
+        [ IsString, IsHomalgRing ] );
+

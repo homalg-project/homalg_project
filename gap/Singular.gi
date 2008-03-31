@@ -23,7 +23,7 @@ InstallValue( HOMALG_IO_Singular,
             BUFSIZE := 1024,
             READY := "!$%&/(",
 	    CUT_BEGIN := 1,	## these is the most
-            CUT_END := 4,	## delicate values!
+            CUT_END := 2,	## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
             define := "=",
@@ -34,4 +34,31 @@ InstallValue( HOMALG_IO_Singular,
 );
 
 HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
+
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+##
+InstallGlobalFunction( RingForHomalgInSingular,
+  function( arg )
+    local stream, init, ext_obj;
+    
+    stream := LaunchCAS( HOMALG_IO_Singular );
+    
+    init := HomalgExternalObject( "", "Singular", stream );
+    
+    HomalgSendBlocking( "LIB \"nctools.lib\"", "need_command", init );
+    
+    if Length( arg ) > 1 and IsFilter( arg[2] ) then
+        ext_obj := HomalgSendBlocking( [ arg[1] ], [ "ring" ], arg[2], init );
+    else
+        ext_obj := HomalgSendBlocking( [ arg[1] ], [ "ring" ], IsHomalgRingInSingular, init );
+    fi;
+    
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    
+end );
 

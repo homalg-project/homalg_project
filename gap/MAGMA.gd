@@ -16,3 +16,19 @@
 
 DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# constructor methods:
+
+DeclareGlobalFunction( "RingForHomalgInMAGMA" );
+
+DeclareOperation( "HomalgMatrixInMAGMA",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "HomalgMatrixInMAGMA",
+        [ IsString, IsHomalgRing ] );
+

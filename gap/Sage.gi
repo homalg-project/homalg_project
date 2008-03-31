@@ -35,3 +35,54 @@ InstallValue( HOMALG_IO_Sage,
             
 HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+##
+InstallGlobalFunction( RingForHomalgInSage,
+  function( arg )
+    local stream, ext_obj;
+    
+    stream := LaunchCAS( HOMALG_IO_Sage );
+    
+    if Length( arg ) > 1 and IsFilter( arg[2] ) then
+        ext_obj := HomalgExternalObject( arg[1], "Sage", stream, arg[2] );
+    else
+        ext_obj := HomalgExternalObject( arg[1], "Sage", stream, IsHomalgRingInSage );
+    fi;
+    
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInSage,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "matrix(", R, ",", String( Eval( M ) ), ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( HomalgMatrixInSage,
+        "for homalg matrices",
+        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( M, R )
+    local ext_obj;
+    
+    ext_obj := HomalgSendBlocking( [ "matrix(", R, ",", M, ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
