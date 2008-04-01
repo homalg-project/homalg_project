@@ -48,6 +48,15 @@ ReadPackage( "RingsForHomalg", "gap/SageBestBasis.gi" );
 ReadPackage( "RingsForHomalg", "gap/SageIntegers.gi" );
 ReadPackage( "RingsForHomalg", "gap/SageGF2.gi" );
 
+## MAGMA
+ReadPackage( "RingsForHomalg", "gap/MAGMATools.gi" );
+ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gi" );
+ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gi" );
+
+ReadPackage( "RingsForHomalg", "gap/MAGMA_PIR.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA_Integers.gi" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA_GF2.gi" );
+
 ## Maple (using the Maple implementation of homalg)
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgTools.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgDefault.gi" );
@@ -58,12 +67,3 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanet.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gi" );
-
-## MAGMA
-ReadPackage( "RingsForHomalg", "gap/MAGMATools.gi" );
-ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gi" );
-ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gi" );
-
-ReadPackage( "RingsForHomalg", "gap/MAGMA_Integers.gi" );
-ReadPackage( "RingsForHomalg", "gap/MAGMA_GF2.gi" );
-

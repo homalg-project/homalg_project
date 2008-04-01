@@ -46,7 +46,7 @@ HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
 ####################################
 
 ##
-InstallGlobalFunction( RingForHomalgInPIRMaple,
+InstallGlobalFunction( RingForHomalgInMaplePIR,
   function( arg )
     local stream, init, table, ext_obj;
     
@@ -71,7 +71,7 @@ InstallGlobalFunction( RingForHomalgInPIRMaple,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInInvolutiveMaple,
+InstallGlobalFunction( RingForHomalgInMapleInvolutive,
   function( arg )
     local stream, init, table, ext_obj;
     
@@ -96,7 +96,7 @@ InstallGlobalFunction( RingForHomalgInInvolutiveMaple,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInJanetMaple,
+InstallGlobalFunction( RingForHomalgInMapleJanet,
   function( arg )
     local stream, init, table, ext_obj;
     
@@ -121,7 +121,7 @@ InstallGlobalFunction( RingForHomalgInJanetMaple,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInJanetOreMaple,
+InstallGlobalFunction( RingForHomalgInMapleJanetOre,
   function( arg )
     local stream, init, table, ext_obj;
     
@@ -146,7 +146,7 @@ InstallGlobalFunction( RingForHomalgInJanetOreMaple,
 end );
 
 ##
-InstallGlobalFunction( RingForHomalgInOreModulesMaple,
+InstallGlobalFunction( RingForHomalgInMapleOreModules,
   function( arg )
     local stream, init, table, ext_obj;
     

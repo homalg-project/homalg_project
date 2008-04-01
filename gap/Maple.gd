@@ -24,15 +24,15 @@ DeclareGlobalVariable( "HOMALG_IO_Maple" );
 
 # constructor methods:
 
-DeclareGlobalFunction( "RingForHomalgInPIRMaple" );
+DeclareGlobalFunction( "RingForHomalgInMaplePIR" );
 
-DeclareGlobalFunction( "RingForHomalgInInvolutiveMaple" );
+DeclareGlobalFunction( "RingForHomalgInMapleInvolutive" );
 
-DeclareGlobalFunction( "RingForHomalgInJanetMaple" );
+DeclareGlobalFunction( "RingForHomalgInMapleJanet" );
 
-DeclareGlobalFunction( "RingForHomalgInJanetOreMaple" );
+DeclareGlobalFunction( "RingForHomalgInMapleJanetOre" );
 
-DeclareGlobalFunction( "RingForHomalgInOreModulesMaple" );
+DeclareGlobalFunction( "RingForHomalgInMapleOreModules" );
 
 DeclareOperation( "HomalgMatrixInMaple",
         [ IsHomalgMatrix, IsHomalgRing ] );
