@@ -34,11 +34,11 @@ ReadPackage( "RingsForHomalg", "gap/GAPHomalgPIR.gd" );
 #ReadPackage( "RingsForHomalg", "gap/GAPHomalgInvolutive.gd" );
 
 ## Singular
-#ReadPackage( "RingsForHomalg", "gap/SingularTools.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularTools.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularDefault.gd" );
-#ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
 
-#ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gd" );
