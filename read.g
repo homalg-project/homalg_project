@@ -53,7 +53,7 @@ ReadPackage( "RingsForHomalg", "gap/MAGMATools.gi" );
 ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gi" );
 ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gi" );
 
-ReadPackage( "RingsForHomalg", "gap/MAGMA_PIR.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMA_PIR.gi" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA_Integers.gi" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA_GF2.gi" );
 
