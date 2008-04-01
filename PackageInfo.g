@@ -1,9 +1,10 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `RingsForHomalg'           Mohamed Barakat
-##                                                           Simon Görtzen
-##                                                           Max Neunhöffer
-##                                                           Daniel Robertz
+##  PackageInfo.g for the package `RingsForHomalg'    Mohamed Barakat
+##                                                    Simon Görtzen
+##                                                    Markus Lange-Hegermann
+##                                                    Max Neunhöffer
+##                                                    Daniel Robertz
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  

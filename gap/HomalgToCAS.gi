@@ -63,7 +63,7 @@ end );
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          R, ext_obj, prefix, e, RP, CAS, cas_version, stream, homalg_variable,
+          R, ext_obj, prefix, suffix, e, RP, CAS, cas_version, stream, homalg_variable,
           l, eoc, enter, max;
     
     if IsBound( HOMALG_RINGS.HomalgSendBlockingInput ) then
@@ -110,8 +110,10 @@ InstallGlobalFunction( HomalgSendBlocking,
             ext_obj := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
-        elif not IsBound( prefix ) and IsList( ar ) and not IsString( ar ) then
+        elif not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [] ) then
             prefix := ar;
+        elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
+            suffix := ar;
         else
             Error( "this argument should be in { IsString, IsFilter, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
         fi;
@@ -166,8 +168,12 @@ InstallGlobalFunction( HomalgSendBlocking,
         MakeImmutable( homalg_variable );
     fi;
     
-    if IsBound( prefix ) then
-        prefix := HomalgCreateStringForExternalCASystem( prefix );
+    if IsBound( prefix ) and prefix <> [ ] then
+        prefix := Concatenation( HomalgCreateStringForExternalCASystem( prefix ), " " );
+    fi;
+    
+    if IsBound( suffix ) then
+        suffix := HomalgCreateStringForExternalCASystem( suffix );
     fi;
     
     L := HomalgCreateStringForExternalCASystem( L );
@@ -201,7 +207,11 @@ InstallGlobalFunction( HomalgSendBlocking,
     if not IsBound( option ) then
         
         if IsBound( prefix ) then
-            L := Concatenation( prefix, " ", homalg_variable, " ", stream.define, " ", L, eoc, enter );
+            if IsBound( suffix ) then
+                L := Concatenation( prefix, homalg_variable, suffix, " ", stream.define, " ", L, eoc, enter );
+            else
+                L := Concatenation( prefix, homalg_variable, " ", stream.define, " ", L, eoc, enter );
+            fi;
         else
             L := Concatenation( homalg_variable, " ", stream.define, " ", L, eoc, enter );
         fi;
