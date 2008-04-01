@@ -18,4 +18,4 @@ wmat := HomalgMatrixInSingular( " \
 #BasisOfModule( W );
 #BasisOfModule( W );
 #rsyz:=SyzygiesGenerators( W );
-#Display(rsyz);
+#Display( rsyz );

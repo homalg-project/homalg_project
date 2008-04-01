@@ -2,7 +2,7 @@ LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
 ZZ := RingForHomalgInMAGMA( "IntegerRing()", IsIntegersForHomalgInMAGMA );
-Display(ZZ);
+Display( ZZ );
 wmat := HomalgMatrixInMAGMA( " \
 [ [ 262, -33, 75, -40 ], \
   [ 682, -86, 196, -104 ], \

@@ -1,8 +1,8 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
-ZZ := RingForHomalgInPIRMaple( "[]" );
-Display(ZZ);
+ZZ := RingForHomalgInMaplePIR( "[]" );
+Display( ZZ );
 wmat := HomalgMatrixInMaple( " \
 [ [ 262, -33, 75, -40 ], \
   [ 682, -86, 196, -104 ], \

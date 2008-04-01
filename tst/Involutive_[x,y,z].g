@@ -2,7 +2,7 @@ LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
 #SetInfoLevel( InfoRingsForHomalg, 7 );
-Qxyz := RingForHomalgInInvolutiveMaple( "[x,y,z]" );
+Qxyz := RingForHomalgInMapleInvolutive( "[x,y,z]" );
 Display( Qxyz );
 wmat := HomalgMatrixInMaple( " \
 [ [x*z, z*y, z^2, 0, 0, y], \
@@ -18,4 +18,4 @@ W := LeftPresentation( wmat );
 BasisOfModule( W );
 BasisOfModule( W );
 rsyz:=SyzygiesGenerators( W );
-Display(rsyz);
+Display( rsyz );
