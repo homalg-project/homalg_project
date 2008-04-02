@@ -29,6 +29,7 @@ InstallValue( HOMALG_IO_Singular,
             eoc_verbose := ";",
             eoc_quiet := ";",
             break_lists := true,	## a Singular specific
+            handle_output := true,	## a Singular specific
             check_output := true,	## a Singular specific
             define := "=",
             prompt := "singular> ",

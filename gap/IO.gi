@@ -79,7 +79,19 @@ end );
 
 InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
-    local bytes, gotsomething, l, nr, pos, CAS, PID, COLOR;
+    local READY, READY_LENGTH, CUT_BEGIN, CUT_END, handle_output, gotsomething, l, nr, pos, bytes,
+          CAS, PID, COLOR;
+    
+    READY := s.READY;
+    READY_LENGTH := s.READY_LENGTH;
+    CUT_BEGIN := s.CUT_BEGIN;
+    CUT_END := s.CUT_END;
+    
+    if IsBound( s.handle_output ) and s.handle_output = true then
+        handle_output := true;
+    else
+        handle_output := false;
+    fi;
     
     gotsomething := false;
     
@@ -102,13 +114,30 @@ InstallGlobalFunction( CheckOutputOfCAS,
           if bytes > 0 then
               #Print( "stdout bytes:", bytes, "\n" );
               gotsomething := true;
-              pos := PositionSublist( s.lines, s.READY, pos - s.READY_LENGTH + 1 );
+              Print( "s.lines = ", s.lines, ".\n" );
+              Print( "pos = ", pos, ".\n" );
+              pos := PositionSublist( s.lines, READY, pos - READY_LENGTH + 1 );
+              Print( "pos = ", pos, ".\n" );
                     # ........NEWNEWNEWNEWNEW
                     #        ^
                     #        pos
               if pos <> fail then 
                   s.casready := true;
-                  s.lines := s.lines{ [ s.CUT_BEGIN .. Length( s.lines ) - s.READY_LENGTH - s.CUT_END ] };
+                  if handle_output = true then
+                      s.lines_original := ShallowCopy( s.lines );
+                      if s.lines[1] = '\n' then
+                          s.lines := Concatenation( s.lines{ [ 2 .. pos - 2 ] },
+                                             s.lines{ [ pos + READY_LENGTH + 1 .. Length( s.lines ) ] } );
+                      elif s.lines[Length( s.lines )] = '\n' then
+                          s.lines := Concatenation( s.lines{ [ 1 .. pos - 2 ] },
+                                             s.lines{ [ pos + READY_LENGTH + 1 .. Length( s.lines ) ] } );
+                      else
+                          s.lines := Concatenation( s.lines{ [ 1 .. pos - 2 ] },
+                                             s.lines{ [ pos + READY_LENGTH + 2 .. Length( s.lines ) ] } );
+                      fi;
+                  else
+                      s.lines := s.lines{ [ CUT_BEGIN .. Length( s.lines ) - READY_LENGTH - CUT_END ] };
+                  fi;
               fi;
           else
               if IsBound( s.name ) then
