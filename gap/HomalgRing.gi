@@ -287,6 +287,28 @@ InstallMethod( HomalgExternalCASystemPID,
     
 end );
 
+##
+InstallMethod( HomalgLastWarning,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    HomalgLastWarning( R!.ring );
+    
+end );
+
+##
+InstallMethod( HomalgNrOfWarnings,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return HomalgNrOfWarnings( R!.ring );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

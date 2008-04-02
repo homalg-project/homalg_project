@@ -134,6 +134,42 @@ InstallMethod( HomalgExternalCASystemPID,
     
 end );
 
+##
+InstallMethod( HomalgLastWarning,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( o )
+    local stream;
+    
+    stream := HomalgStream( o );
+    
+    if IsBound(stream.warnings) then
+        Print( stream.warnings );
+    else
+        Print( "" );
+    fi;
+    
+end );
+
+##
+InstallMethod( HomalgNrOfWarnings,
+        "for homalg matrices",
+        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        
+  function( o )
+    local stream;
+    
+    stream := HomalgStream( o );
+    
+    if IsBound(stream.HomalgExternalWarningsCounter) then
+        return stream.HomalgExternalWarningsCounter;
+    fi;
+    
+    return 0;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

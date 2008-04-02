@@ -142,6 +142,12 @@ DeclareOperation( "HomalgStream",
 DeclareOperation( "HomalgExternalCASystemPID",
         [ IsHomalgRing ] );
 
+DeclareOperation( "HomalgLastWarning",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "HomalgNrOfWarnings",
+        [ IsHomalgRing ] );
+
 # constructor methods:
 
 DeclareGlobalFunction( "CreateHomalgRing" );
