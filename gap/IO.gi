@@ -114,10 +114,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
           if bytes > 0 then
               #Print( "stdout bytes:", bytes, "\n" );
               gotsomething := true;
-              Print( "s.lines = ", s.lines, ".\n" );
-              Print( "pos = ", pos, ".\n" );
               pos := PositionSublist( s.lines, READY, pos - READY_LENGTH + 1 );
-              Print( "pos = ", pos, ".\n" );
                     # ........NEWNEWNEWNEWNEW
                     #        ^
                     #        pos
