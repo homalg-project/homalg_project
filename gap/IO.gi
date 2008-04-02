@@ -79,7 +79,7 @@ end );
 
 InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
-    local bytes, gotsomething, l, nr, pos, CAS, PID;
+    local bytes, gotsomething, l, nr, pos, CAS, PID, COLOR;
     
     gotsomething := false;
     
@@ -121,7 +121,12 @@ InstallGlobalFunction( CheckOutputOfCAS,
               else
                   PID := "";
               fi;
-              Error( "\033[5;31;43m", "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
+              if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true then
+                  COLOR := "\033[5;31;43m";
+              else
+                  COLOR := "";
+              fi;
+              Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
           fi;
       fi;
       
@@ -141,7 +146,12 @@ InstallGlobalFunction( CheckOutputOfCAS,
               else
                   PID := "";
               fi;
-              Error( "\033[5;31;43m", "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
+              if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true then
+                  COLOR := "\033[5;31;43m";
+              else
+                  COLOR := "";
+              fi;
+              Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
           fi;
       fi;
   od;
