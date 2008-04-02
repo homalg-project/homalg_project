@@ -16,14 +16,27 @@
 
 ##
 InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
-  function( L )
-    local l, s;
+  function( arg )
+    local nargs, L, l, stream, break_lists, s;
     
-    if not IsList( L ) then
+    nargs := Length( arg );
+    
+    if nargs = 0 or not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
     fi;
     
+    L := arg[1];
+    
     l := Length( L );
+    
+    break_lists := false;
+    
+    if nargs > 0 and IsRecord( arg[2] ) then
+        stream := arg[2];
+        if IsBound( stream.break_lists ) and stream.break_lists = true then
+            break_lists := true;
+        fi;
+    fi;
     
     s := List( [ 1 .. l ], function( a )
                              local CAS, stream, t;
@@ -45,6 +58,9 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
                                          SetEval( L[a], HomalgExternalObject( t, CAS, stream ) ); ## CAUTION: HomalgPointer( L[a] ) now exists but still points to nothing!!!
                                          ResetFilterObj( L[a], IsVoidMatrix );
                                      fi;
+                                 elif break_lists and IsList( L[a] ) and not IsString( L[a] ) then
+                                     t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
+                                     t := t{ [ 2 .. Length( t ) - 1 ] };
                                  else
                                      t := String( L[a] );
                                  fi;
@@ -63,14 +79,14 @@ end );
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          R, ext_obj, prefix, suffix, e, RP, CAS, cas_version, stream, homalg_variable,
+          R, ext_obj, prefix, suffix, e, RP, CAS, PID, stream, homalg_variable,
           l, eoc, enter, max;
     
     if IsBound( HOMALG_RINGS.HomalgSendBlockingInput ) then
         Add( HOMALG_RINGS.HomalgSendBlockingInput, arg );
     fi;
     
-    Info( InfoRingsForHomalg, 10, arg );
+    Info( InfoRingsForHomalg, 10, "HomalgSendBlocking <-- ", arg );
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -85,7 +101,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     properties := [];
     
     for ar in arg{[ 2 .. nargs ]} do
-        if not IsBound( option ) and IsString( ar ) then ## the first occurrence of an option decides
+        if not IsBound( option ) and IsString( ar ) and ar <> "" then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
                 need_display := false;
@@ -105,9 +121,20 @@ InstallGlobalFunction( HomalgSendBlocking,
         elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
             R := ar;
             ext_obj := R;
+            stream := HomalgStream( ext_obj );
+        elif not IsBound( R ) and IsHomalgExternalMatrixRep( ar ) then
+            R := HomalgRing( ar );
+            ext_obj := R;
+            stream := HomalgStream( ext_obj );
         elif not IsBound( ext_obj ) and IsHomalgExternalObject( ar )
           and HasIsHomalgExternalObjectWithIOStream( ar ) and IsHomalgExternalObjectWithIOStream( ar ) then
             ext_obj := ar;
+            stream := HomalgStream( ext_obj );
+        elif not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
+            stream := ar;
+            if IsBound( stream.name ) then
+                ext_obj := HomalgExternalObject( "", stream.name, stream );
+            fi;
         elif IsFilter( ar ) then
             Add( properties, ar );
         elif not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [] ) then
@@ -115,15 +142,17 @@ InstallGlobalFunction( HomalgSendBlocking,
         elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
             suffix := ar;
         else
-            Error( "this argument should be in { IsString, IsFilter, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IsHomalgExternalObjectWithIOStream, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } bur recieved: ", ar,"\n" );
         fi;
     od;
     
     if not IsBound( ext_obj ) then ## R is also not yet defined
+        
         e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) or 
                      ( IsHomalgExternalObjectRep( a )
                        and HasIsHomalgExternalObjectWithIOStream( a )
                        and IsHomalgExternalObjectWithIOStream( a ) ) );
+        
         if e <> [ ] then
             ext_obj := e[1];
             for ar in e do
@@ -138,6 +167,9 @@ InstallGlobalFunction( HomalgSendBlocking,
         else
             Error( "either the list provided by the first argument must contain at least one external matrix or an external ring or one of the remaining arguments must be an external ring or an external object with IO stream\n" );
         fi;
+        
+        stream := HomalgStream( ext_obj );
+        
     fi;
     
     if IsBound( R ) then
@@ -149,8 +181,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     CAS := HomalgExternalCASystem( ext_obj );
-    cas_version := HomalgExternalCASystemVersion( ext_obj );
-    stream := HomalgStream( ext_obj );
+    PID := HomalgExternalCASystemPID( ext_obj );
     
     if not IsBound( stream.HomalgExternalVariableCounter ) then
         
@@ -159,6 +190,7 @@ InstallGlobalFunction( HomalgSendBlocking,
         stream.HomalgExternalOutputCounter := 0;
         stream.HomalgExternalCallCounter := 0;
         stream.HomalgBackStreamMaximumLength := 0;
+        stream.HomalgExternalWarningsCounter := 0;
         
     fi;
     
@@ -169,14 +201,14 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if IsBound( prefix ) and prefix <> [ ] then
-        prefix := Concatenation( HomalgCreateStringForExternalCASystem( prefix ), " " );
+        prefix := Concatenation( HomalgCreateStringForExternalCASystem( prefix, stream ), " " );
     fi;
     
     if IsBound( suffix ) then
-        suffix := HomalgCreateStringForExternalCASystem( suffix );
+        suffix := HomalgCreateStringForExternalCASystem( suffix, stream );
     fi;
     
-    L := HomalgCreateStringForExternalCASystem( L );
+    L := HomalgCreateStringForExternalCASystem( L, stream );
     
     l := Length( L );
     
@@ -241,6 +273,15 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     SendBlockingToCAS( stream, L );
     
+    if stream.errors <> "" then
+        if IsBound( stream.only_warning ) and PositionSublist( stream.errors, stream.only_warning ) <> fail then
+            stream.warnings := stream.errors;
+            stream.HomalgExternalWarningsCounter := stream.HomalgExternalWarningsCounter + 1;
+        else
+            Error( "\033[1m", "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", stream.errors ,"\033[0m\n" );
+        fi;
+    fi;
+    
     max := Maximum( stream.HomalgBackStreamMaximumLength, Length( stream.lines ) );
     
     if max > stream.HomalgBackStreamMaximumLength then
@@ -275,6 +316,10 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     if need_output then
         Info( InfoRingsForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
+        if IsBound( stream.check_output ) and stream.check_output = true
+           and '\n' in L and not ',' in L then
+            Error( "\033[1m", "the output received from the external CAS ", CAS, " (running with PID ", PID, ") contains an ENTER = '\\n' but no COMMA = ',' ... this is most probably a mistakte!!!", "\033[0m\n" );
+        fi;
     fi;
     
     return L;

@@ -32,7 +32,7 @@ InstallValue( HOMALG_RINGS,
 ##
 InstallGlobalFunction( RingForHomalg,
   function( arg )
-    local nargs, properties, ar, stream, init, table, ext_obj;
+    local nargs, properties, ar, stream, init, ext_obj;
     
     nargs := Length( arg );
     
@@ -104,10 +104,10 @@ end);
 
 InstallMethod( Display,
         "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
+        [ IsHomalgExternalMatrixRep ], 0, ## never higher!!!
         
   function( o )
-    local stream, cas, display_color;
+    local stream, display_color;
     
     stream := HomalgStream( o );
     
@@ -117,15 +117,7 @@ InstallMethod( Display,
         display_color := "";
     fi;
     
-    cas := stream.cas;
-    
-    if cas = "gap" then
-        Print( display_color, HomalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
-    elif cas = "maple" then
-        Print( display_color, HomalgSendBlocking( [ "convert(", o, ",matrix)" ], "need_display" ) );
-    else
-        Print( display_color, HomalgSendBlocking( [ o ], "need_display" ) );
-    fi;
+    Print( display_color, HomalgSendBlocking( [ o ], "need_display" ) );
     
 end);
 

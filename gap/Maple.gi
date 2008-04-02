@@ -16,7 +16,7 @@
 
 InstallValue( HOMALG_IO_Maple,
         rec(
-            cas := "maple",	## normalized name on which the user should have no control
+            cas := "maple",		## normalized name on which the user should have no control
             name := "Maple",
             executable := "maple_for_homalg",
             executable_alt1 := "maple9",
@@ -26,8 +26,8 @@ InstallValue( HOMALG_IO_Maple,
             options := [ "-q" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-	    CUT_BEGIN := 1,	## these is the most
-            CUT_END := 4,	## delicate values!
+            CUT_BEGIN := 1,		## these is the most
+            CUT_END := 4,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ":",
             define := ":=",
@@ -48,15 +48,13 @@ HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
 ##
 InstallGlobalFunction( RingForHomalgInMaplePIR,
   function( arg )
-    local stream, init, table, ext_obj;
+    local stream, table, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_Maple );
     
-    init := HomalgExternalObject( "", "Maple", stream );
+    HomalgSendBlocking( "with(PIR): with(homalg)", "need_command", stream );
     
-    HomalgSendBlocking( "with(PIR): with(homalg)", "need_command", init );
-    
-    table := HomalgSendBlocking( "`PIR/homalg`", init );
+    table := HomalgSendBlocking( "`PIR/homalg`", stream );
     
     HomalgSendBlocking( [ "homalg_options(", table, ")" ], "need_command" );
     
@@ -73,15 +71,13 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleInvolutive,
   function( arg )
-    local stream, init, table, ext_obj;
+    local stream, table, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_Maple );
     
-    init := HomalgExternalObject( "", "Maple", stream );
+    HomalgSendBlocking( "with(Involutive): with(homalg)", "need_command", stream );
     
-    HomalgSendBlocking( "with(Involutive): with(homalg)", "need_command", init );
-    
-    table := HomalgSendBlocking( "`Involutive/homalg`", init );
+    table := HomalgSendBlocking( "`Involutive/homalg`", stream );
     
     HomalgSendBlocking( [ "homalg_options(", table, ")" ], "need_command" );
     
@@ -98,15 +94,13 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleJanet,
   function( arg )
-    local stream, init, table, ext_obj;
+    local stream, table, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_Maple );
     
-    init := HomalgExternalObject( "", "Maple", stream );
+    HomalgSendBlocking( "with(Janet): with(homalg)", "need_command", stream );
     
-    HomalgSendBlocking( "with(Janet): with(homalg)", "need_command", init );
-    
-    table := HomalgSendBlocking( "`Janet/homalg`", init );
+    table := HomalgSendBlocking( "`Janet/homalg`", stream );
     
     HomalgSendBlocking( [ "homalg_options(", table, ")" ], "need_command" );
     
@@ -123,15 +117,13 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleJanetOre,
   function( arg )
-    local stream, init, table, ext_obj;
+    local stream, table, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_Maple );
     
-    init := HomalgExternalObject( "", "Maple", stream );
+    HomalgSendBlocking( "with(JanetOre): with(homalg)", "need_command", stream );
     
-    HomalgSendBlocking( "with(JanetOre): with(homalg)", "need_command", init );
-    
-    table := HomalgSendBlocking( "`JanetOre/homalg`", init );
+    table := HomalgSendBlocking( "`JanetOre/homalg`", stream );
     
     HomalgSendBlocking( [ "homalg_options(", table, ")" ], "need_command" );
     
@@ -148,15 +140,13 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleOreModules,
   function( arg )
-    local stream, init, table, ext_obj;
+    local stream, table, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_Maple );
     
-    init := HomalgExternalObject( "", "Maple", stream );
+    HomalgSendBlocking( "with(OreModules): with(homalg)", "need_command", stream );
     
-    HomalgSendBlocking( "with(OreModules): with(homalg)", "need_command", init );
-    
-    table := HomalgSendBlocking( "`OreModules/homalg`", init );
+    table := HomalgSendBlocking( "`OreModules/homalg`", stream );
     
     HomalgSendBlocking( [ "homalg_options(", table, ")" ], "need_command" );
     
@@ -198,3 +188,37 @@ InstallMethod( HomalgMatrixInMaple,
     
 end );
 
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep ], 1,
+        
+  function( o )
+    local cas, stream, display_color;
+    
+    stream := HomalgStream( o );
+    
+    cas := stream.cas;
+    
+    if cas = "maple" then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        Print( display_color, HomalgSendBlocking( [ "convert(", o, ",matrix)" ], "need_display" ) );
+        
+    else
+        
+        TryNextMethod( );
+        
+    fi;
+    
+end);

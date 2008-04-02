@@ -1,13 +1,14 @@
 #############################################################################
 ##
-##  read.g                    RingsForHomalg package         Mohamed Barakat
-##                                                           Simon Görtzen
-##                                                           Max Neunhöffer
-##                                                           Daniel Robertz
+##  read.g                    RingsForHomalg package  Mohamed Barakat
+##                                                    Simon Görtzen
+##                                                    Markus Lange-Hegermann
+##                                                    Max Neunhöffer
+##                                                    Daniel Robertz
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Reading the implementation part of the homalg package.
+##  Reading the implementation part of the RingsForHomalg package.
 ##
 #############################################################################
 
@@ -39,6 +40,7 @@ ReadPackage( "RingsForHomalg", "gap/SingularDefault.gi" );
 ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/SingularGF2.gi" );
+ReadPackage( "RingsForHomalg", "gap/SingularQX.gi" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gi" );

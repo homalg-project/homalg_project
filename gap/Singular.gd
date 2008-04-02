@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  Singular.gd               RingsForHomalg package         Mohamed Barakat
+##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -30,5 +31,5 @@ DeclareOperation( "HomalgMatrixInSingular",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "HomalgMatrixInSingular",
-        [ IsString, IsHomalgRing ] );
+        [ IsInt, IsInt, IsString, IsHomalgRing ] );
 

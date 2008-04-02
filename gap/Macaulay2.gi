@@ -16,14 +16,14 @@
 
 InstallValue( HOMALG_IO_Macaulay2,
         rec(
-            cas := "macaulay2",	## normalized name on which the user should have no control
+            cas := "macaulay2",		## normalized name on which the user should have no control
             name := "Macaulay2",
             executable := "M2",
             options := [ "--no-prompts", "--silent", "--no-readline" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-	    CUT_BEGIN := 1,	## these is the most
-            CUT_END := 16,	## delicate values!
+            CUT_BEGIN := 1,		## these is the most
+            CUT_END := 16,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
             define := "=",

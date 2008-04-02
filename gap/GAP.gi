@@ -16,14 +16,14 @@
 
 InstallValue( HOMALG_IO_GAP,
         rec(
-            cas := "gap",	## normalized name on which the user should have no control
+            cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
             executable := "gapL",
             options := [ "-b -q" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-	    CUT_BEGIN := 1,	## these is the most
-            CUT_END := 4,	## delicate values!
+            CUT_BEGIN := 1,		## these is the most
+            CUT_END := 4,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";;",
             define := ":=",
@@ -44,18 +44,16 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 ##
 InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
-    local stream, init, table, ext_obj;
+    local stream, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_GAP );
     
-    init := HomalgExternalObject( "", "GAP", stream );
-    
-    HomalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", init );
+    HomalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
     
     if Length( arg ) > 1 and IsFilter( arg[2] ) then
-        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], arg[2], init );
+        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], arg[2], stream );
     else
-        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgRingInExternalGAP, init );
+        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgRingInExternalGAP, stream );
     fi;
     
     return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
@@ -90,3 +88,37 @@ InstallMethod( HomalgMatrixInExternalGAP,
     
 end );
 
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep ], 1,
+        
+  function( o )
+    local cas, stream, display_color;
+    
+    stream := HomalgStream( o );
+    
+    cas := stream.cas;
+    
+    if cas = "gap" then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        Print( display_color, HomalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
+        
+    else
+        
+        TryNextMethod( );
+        
+    fi;
+    
+end);

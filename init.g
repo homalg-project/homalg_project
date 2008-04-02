@@ -1,9 +1,10 @@
 #############################################################################
 ##
-##  init.g                    RingsForHomalg package         Mohamed Barakat
-##                                                           Simon Görtzen
-##                                                           Max Neunhöffer
-##                                                           Daniel Robertz
+##  init.g                    RingsForHomalg package  Mohamed Barakat
+##                                                    Simon Görtzen
+##                                                    Markus Lange-Hegermann
+##                                                    Max Neunhöffer
+##                                                    Daniel Robertz
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -39,6 +40,7 @@ ReadPackage( "RingsForHomalg", "gap/SingularDefault.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularQX.gd" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gd" );

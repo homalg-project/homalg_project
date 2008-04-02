@@ -16,14 +16,14 @@
 
 InstallValue( HOMALG_IO_MAGMA,
         rec(
-            cas := "magma",	## normalized name on which the user should have no control
+            cas := "magma",		## normalized name on which the user should have no control
             name := "MAGMA",
             executable := "magma",
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-	    CUT_BEGIN := 1,	## these is the most
-            CUT_END := 2,	## delicate values!
+            CUT_BEGIN := 1,		## these is the most
+            CUT_END := 2,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
             define := ":=",
@@ -44,15 +44,17 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 ##
 InstallGlobalFunction( RingForHomalgInMAGMA,
   function( arg )
-    local stream, ext_obj;
+    local stream, ar, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_MAGMA );
     
-    if Length( arg ) > 1 and IsFilter( arg[2] ) then
-        ext_obj := HomalgExternalObject( arg[1], "MAGMA", stream, arg[2] );
+    if Length( arg ) > 1 and IsFilter( arg[Length(arg)] ) then
+        ar := Concatenation( arg, [ stream ] );
     else
-        ext_obj := HomalgExternalObject( arg[1], "MAGMA", stream, IsHomalgRingInMAGMA );
+        ar := HomalgSendBlocking( arg, [ IsHomalgRingInMAGMA, stream ] );
     fi;
+    
+    ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
     return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
