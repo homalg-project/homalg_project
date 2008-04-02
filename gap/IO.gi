@@ -79,7 +79,7 @@ end );
 
 InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
-    local bytes, gotsomething, l, nr, pos;
+    local bytes, gotsomething, l, nr, pos, CAS, PID;
     
     gotsomething := false;
     
@@ -111,7 +111,17 @@ InstallGlobalFunction( CheckOutputOfCAS,
                   s.lines := s.lines{ [ s.CUT_BEGIN .. Length( s.lines ) - s.READY_LENGTH - s.CUT_END ] };
               fi;
           else
-              Error( s.name, " process seems to have died!\n" );
+              if IsBound( s.name ) then
+                  CAS := Concatenation( s.name, " " );
+              else
+                  CAS := "";
+              fi;
+              if IsBound( s.pid ) then
+                  PID := Concatenation( "(which should be running with PID ", s.pid, ") " );
+              else
+                  PID := "";
+              fi;
+              Error( "\033[5;31;43m", "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
           fi;
       fi;
       
@@ -121,7 +131,17 @@ InstallGlobalFunction( CheckOutputOfCAS,
               #Print( "stderr bytes:", bytes, "\n" );
               gotsomething := true;
           else
-              Error( s.name, " process seems to have died!\n" );
+              if IsBound( s.name ) then
+                  CAS := Concatenation( s.name, " " );
+              else
+                  CAS := "";
+              fi;
+              if IsBound( s.pid ) then
+                  PID := Concatenation( "(which should be running with PID ", s.pid, ") " );
+              else
+                  PID := "";
+              fi;
+              Error( "\033[5;31;43m", "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
           fi;
       fi;
   od;
