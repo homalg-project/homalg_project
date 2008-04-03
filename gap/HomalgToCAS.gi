@@ -38,6 +38,10 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
         fi;
     fi;
     
+    if nargs > 1 and arg[3] = "break_lists" then
+        break_lists := true;
+    fi;
+    
     s := List( [ 1 .. l ], function( a )
                              local CAS, stream, t;
                              if IsString( L[a] ) then
@@ -59,8 +63,12 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
                                          ResetFilterObj( L[a], IsVoidMatrix );
                                      fi;
                                  elif break_lists and IsList( L[a] ) and not IsString( L[a] ) then
-                                     t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
-                                     t := t{ [ 2 .. Length( t ) - 1 ] };
+                                     if ForAll( L[a], IsString ) then
+                                         t := JoinStringsWithSeparator( L[a] );
+                                     else
+                                         t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
+                                         t := t{ [ 2 .. Length( t ) - 1 ] };
+                                     fi;
                                  else
                                      t := String( L[a] );
                                  fi;
@@ -79,8 +87,8 @@ end );
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          R, ext_obj, prefix, suffix, e, RP, CAS, PID, stream, homalg_variable,
-          l, eoc, enter, max;
+          break_lists, R, ext_obj, prefix, suffix, e, RP, CAS, PID, stream,
+          homalg_variable, l, eoc, enter, max;
     
     if IsBound( HOMALG_RINGS.HomalgSendBlockingInput ) then
         Add( HOMALG_RINGS.HomalgSendBlockingInput, arg );
@@ -101,7 +109,7 @@ InstallGlobalFunction( HomalgSendBlocking,
     properties := [];
     
     for ar in arg{[ 2 .. nargs ]} do
-        if not IsBound( option ) and IsString( ar ) and ar <> "" then ## the first occurrence of an option decides
+        if not IsBound( option ) and IsString( ar ) and not ar in [ "", "break_lists" ] then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
                 need_display := false;
@@ -118,6 +126,8 @@ InstallGlobalFunction( HomalgSendBlocking,
                 Error( "option must be one of {\"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
             fi;
             option := ar;
+        elif not IsBound( break_lists ) and IsString( ar ) and ar = "break_lists" then
+            break_lists := ar;
         elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
             R := ar;
             ext_obj := R;
@@ -137,12 +147,14 @@ InstallGlobalFunction( HomalgSendBlocking,
             fi;
         elif IsFilter( ar ) then
             Add( properties, ar );
-        elif not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [] ) then
+        elif IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then
+            Append( properties, ar );
+        elif not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [ ] ) then
             prefix := ar;
         elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
             suffix := ar;
         else
-            Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IsHomalgExternalObjectWithIOStream, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IsHomalgExternalObjectWithIOStream, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
         fi;
     od;
     
@@ -200,15 +212,19 @@ InstallGlobalFunction( HomalgSendBlocking,
         MakeImmutable( homalg_variable );
     fi;
     
+    if not IsBound( break_lists ) then
+        break_lists := "do_not_break_lists";
+    fi;
+    
     if IsBound( prefix ) and prefix <> [ ] then
-        prefix := Concatenation( HomalgCreateStringForExternalCASystem( prefix, stream ), " " );
+        prefix := Concatenation( HomalgCreateStringForExternalCASystem( prefix, stream, break_lists ), " " );
     fi;
     
     if IsBound( suffix ) then
-        suffix := HomalgCreateStringForExternalCASystem( suffix, stream );
+        suffix := HomalgCreateStringForExternalCASystem( suffix, stream, break_lists );
     fi;
     
-    L := HomalgCreateStringForExternalCASystem( L, stream );
+    L := HomalgCreateStringForExternalCASystem( L, stream, break_lists );
     
     l := Length( L );
     

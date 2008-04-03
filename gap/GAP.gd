@@ -26,6 +26,8 @@ DeclareGlobalVariable( "HOMALG_IO_GAP" );
 
 DeclareGlobalFunction( "RingForHomalgInExternalGAP" );
 
+# basic operations:
+
 DeclareOperation( "HomalgMatrixInExternalGAP",
         [ IsHomalgMatrix, IsHomalgRing ] );
 

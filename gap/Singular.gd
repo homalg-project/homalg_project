@@ -27,6 +27,8 @@ DeclareGlobalVariable( "HOMALG_IO_Singular" );
 
 DeclareGlobalFunction( "RingForHomalgInSingular" );
 
+# basic operations:
+
 DeclareOperation( "HomalgMatrixInSingular",
         [ IsHomalgMatrix, IsHomalgRing ] );
 

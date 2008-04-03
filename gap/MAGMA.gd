@@ -18,6 +18,16 @@ DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 
 ####################################
 #
+# properties:
+#
+####################################
+
+##
+DeclareProperty( "IsPolynomialRingForHomalgInMAGMA",
+        IsHomalgRing );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
@@ -25,6 +35,15 @@ DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInMAGMA" );
+
+DeclareGlobalFunction( "HomalgRingOfIntegersInMAGMA" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationalsInMAGMA" );
+
+# basic operations:
+
+DeclareOperation( "PolynomialRing",
+        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "HomalgMatrixInMAGMA",
         [ IsHomalgMatrix, IsHomalgRing ] );

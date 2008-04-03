@@ -34,6 +34,8 @@ DeclareGlobalFunction( "RingForHomalgInMapleJanetOre" );
 
 DeclareGlobalFunction( "RingForHomalgInMapleOreModules" );
 
+# basic operations:
+
 DeclareOperation( "HomalgMatrixInMaple",
         [ IsHomalgMatrix, IsHomalgRing ] );
 

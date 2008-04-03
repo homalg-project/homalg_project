@@ -51,10 +51,59 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     if Length( arg ) > 1 and IsFilter( arg[Length(arg)] ) then
         ar := Concatenation( arg, [ stream ] );
     else
-        ar := HomalgSendBlocking( arg, [ IsHomalgRingInMAGMA, stream ] );
+        ar := Concatenation( arg, [ IsHomalgRingInMAGMA, stream ] );
     fi;
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
+    
+    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream, IsHomalgRingInMAGMA );
+    
+end );
+
+##
+InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
+  function( arg )
+    local nargs, m;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 then
+        m := arg[1];
+    else
+        m := "";
+    fi;
+    
+    return RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsIntegersForHomalgInMAGMA );
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
+  function( arg )
+    
+    return RingForHomalgInMAGMA( [ "Rationals()" ], IsPIRForHomalgInMAGMA );
+    
+end );
+
+##
+InstallMethod( PolynomialRing,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep and IsHomalgRingInMAGMA, IsList ],
+        
+  function( R, indets )
+    local properties, ext_obj;
+    
+    if not ( indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) ) then
+        Error( "a non-empty list of indeterminates must be provided as the second argument\n" );
+    fi;
+    
+    properties := [ IsPolynomialRingForHomalgInMAGMA ];
+    
+    if Length( indets ) = 1 then
+        Add( properties, IsPIRForHomalgInMAGMA );
+    fi;
+    
+    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", indets, ">" ], properties, "break_lists" );
     
     return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
     
