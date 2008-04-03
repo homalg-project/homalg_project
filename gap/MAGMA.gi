@@ -22,7 +22,7 @@ InstallValue( HOMALG_IO_MAGMA,
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 1,		## these is the most
+            CUT_BEGIN := 1,		## these are the most
             CUT_END := 2,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
@@ -63,25 +63,38 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
   function( arg )
-    local nargs, m;
+    local nargs, m, c, R;
     
     nargs := Length( arg );
     
-    if nargs > 0 then
-        m := arg[1];
-    else
+    if nargs = 0 or arg[1] = 0 then
         m := "";
+        c := 0;
+    elif IsInt( arg[1] ) then
+        m := AbsInt( arg[1] );
+        c := m;
+    else
+        Error( "the first argument must be an integer\n" );
     fi;
     
-    return RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsIntegersForHomalgInMAGMA );
+    R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsIntegersForHomalgInMAGMA );
+    
+    SetCharacteristic( R, c );
+    
+    return R;
     
 end );
 
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
   function( arg )
+    local R;
     
-    return RingForHomalgInMAGMA( [ "Rationals()" ], IsPIRForHomalgInMAGMA );
+    R := RingForHomalgInMAGMA( [ "Rationals()" ], IsPIRForHomalgInMAGMA );
+    
+    SetCharacteristic( R, 0 );
+    
+    return R;
     
 end );
 
@@ -91,21 +104,36 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingRep and IsHomalgRingInMAGMA, IsList ],
         
   function( R, indets )
-    local properties, ext_obj;
+    local var, properties, ext_obj;
     
-    if not ( indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) ) then
-        Error( "a non-empty list of indeterminates must be provided as the second argument\n" );
+    if IsString( indets ) and indets <> "" then
+        var := SplitString( indets, "," ); 
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        var := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
     fi;
     
     properties := [ IsPolynomialRingForHomalgInMAGMA ];
     
-    if Length( indets ) = 1 then
+    if Length( var ) = 1 then
         Add( properties, IsPIRForHomalgInMAGMA );
     fi;
     
     ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", indets, ">" ], properties, "break_lists" );
     
     return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep and IsHomalgRingInMAGMA, IsString ],
+        
+  function( R, indets )
+    
+    return PolynomialRing( R, SplitString( indets, "," ) );
     
 end );
 

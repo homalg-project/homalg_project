@@ -33,7 +33,21 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
-               RingName := "Z",
+               RingName :=
+                 function( R )
+                   local c;
+                     
+                     c := Characteristic( R );
+                     
+                     if c = 0 then
+                       return "Z";
+                     elif IsPrime( c ) then
+                       return Concatenation( "GF(", String( c ), ")" );
+                     else
+                       return Concatenation( "Z/", String( c ), "Z" );
+                     fi;
+                     
+                 end,
                
                ElementaryDivisors :=
                  function( M )

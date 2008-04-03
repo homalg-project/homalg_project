@@ -22,7 +22,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             options := [ "--no-prompts", "--silent", "--no-readline" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 1,		## these is the most
+            CUT_BEGIN := 1,		## these are the most
             CUT_END := 16,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
