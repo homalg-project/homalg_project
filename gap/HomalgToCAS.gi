@@ -343,6 +343,21 @@ InstallGlobalFunction( HomalgSendBlocking,
 end );
 
 ##
+InstallGlobalFunction( HomalgSendBlockingDisplay,
+  function( arg )
+    local L;
+    
+    if IsList( arg[1] ) then
+        L := arg[1];
+    else
+        L := [ arg[1] ];
+    fi;
+    
+    Print( HomalgSendBlocking( L, "need_display" ) );
+    
+end );
+
+##
 InstallGlobalFunction( StringToIntList,
   function( arg )
     local l, lint;
