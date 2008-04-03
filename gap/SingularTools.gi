@@ -85,19 +85,15 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                CertainRows :=
                  function( M, plist )
-                   
-                    return HomalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrColumns( M ), ")" ], [ "matrix" ] );
-                    # HomalgSendBlocking( [ "intvec iv=", plist ], "need_command", M );
-                    # return HomalgSendBlocking( [ "submat(", M, ",iv,1..", NrColumns(M), ")" ], [ "matrix" ] );
-                   
+                    
+                   return HomalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrColumns( M ), ")" ], [ "matrix" ] );
+                    
                  end,
                
                CertainColumns :=
                  function( M, plist )
                    
                    return HomalgSendBlocking( [ "submat(", M, ",1..", NrRows(M), ",intvec(", plist, "))" ], [ "matrix" ] );
-                   # HomalgSendBlocking( [ "intvec iv=", plist ], "need_command", M );
-                   # return HomalgSendBlocking( [ "submat(", M, ",1..", NrRows(M), ",iv)" ], [ "matrix" ] );
                    
                  end,
                
