@@ -48,6 +48,15 @@ DeclareProperty( "IsHomalgExternalRingElementWithIOStream",
 
 ## properties listed alphabetically (ignoring left/right):
 
+DeclareProperty( "IsIntegersForHomalg",
+        IsHomalgRing );
+
+DeclareProperty( "IsRationalsForHomalg",
+        IsHomalgRing );
+
+DeclareProperty( "IsFieldForHomalg",
+        IsHomalgRing );
+
 DeclareProperty( "IsGlobalDimensionFinite",
         IsHomalgRing );
 

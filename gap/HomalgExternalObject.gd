@@ -21,15 +21,6 @@ DeclareCategory( "IsHomalgExternalObject",
 
 ####################################
 #
-# properties:
-#
-####################################
-
-DeclareProperty( "IsHomalgExternalObjectWithIOStream",
-        IsHomalgExternalObject );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

@@ -1,8 +1,7 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
-#SetInfoLevel( InfoRingsForHomalg, 7 );
-Qxyz := RingForHomalgInMapleInvolutive( "[x,y,z]" );
+Qxyz := HomalgFieldOfRationalsInMaple( ) * "x,y,z";
 Display( Qxyz );
 wmat := HomalgMatrixInMaple( " \
 [ [x*z, z*y, z^2, 0, 0, y], \

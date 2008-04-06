@@ -19,6 +19,11 @@ DeclareRepresentation( "IsHomalgExternalObjectRep",
         IsHomalgExternalObject,
         [ "object", "cas" ] );
 
+# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+DeclareRepresentation( "IsHomalgExternalObjectWithIOStreamRep",
+        IsHomalgExternalObjectRep,
+        [ "object", "cas" ] );
+
 ####################################
 #
 # families and types:
@@ -33,6 +38,11 @@ BindGlobal( "HomalgExternalObjectFamily",
 BindGlobal( "HomalgExternalObjectType",
         NewType( HomalgExternalObjectFamily,
                 IsHomalgExternalObjectRep ) );
+
+# a new type:
+BindGlobal( "HomalgExternalObjectWithIOStreamType",
+        NewType( HomalgExternalObjectFamily,
+                IsHomalgExternalObjectWithIOStreamRep ) );
 
 ####################################
 #
@@ -107,7 +117,7 @@ end );
 ##
 InstallMethod( HomalgStream,
         "for homalg matrices",
-        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     
@@ -122,7 +132,7 @@ end );
 ##
 InstallMethod( HomalgExternalCASystemPID,
         "for homalg matrices",
-        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     
@@ -137,7 +147,7 @@ end );
 ##
 InstallMethod( HomalgLastWarning,
         "for homalg matrices",
-        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     local stream;
@@ -155,7 +165,7 @@ end );
 ##
 InstallMethod( HomalgNrOfWarnings,
         "for homalg matrices",
-        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     local stream;
@@ -178,7 +188,7 @@ end );
 
 InstallGlobalFunction( HomalgExternalObject,
   function( arg )
-    local nargs, properties, ar, stream, obj;
+    local nargs, properties, ar, stream, obj, type;
     
     nargs := Length( arg );
     
@@ -187,26 +197,31 @@ InstallGlobalFunction( HomalgExternalObject,
     for ar in arg{[ 3 .. nargs ]} do
         if not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
             stream := ar;
+        elif not IsBound( type ) and IsType( ar ) then
+            type := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsRecord, IsFilter } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsRecord, IsType, IsFilter } bur recieved: ", ar,"\n" );
         fi;
     od;
     
     if IsBound( stream ) then
         obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
         
-        ## Objectify:
-        ObjectifyWithAttributes(
-                obj, HomalgExternalObjectType,
-                IsHomalgExternalObjectWithIOStream, true );
+        if not IsBound( type ) then
+            type := HomalgExternalObjectWithIOStreamType;
+        fi;
     else
         obj := rec( pointer := arg[1], cas := arg[2] );
         
-        ## Objectify:
-        Objectify( HomalgExternalObjectType, obj );
+        if not IsBound( type ) then
+            type := HomalgExternalObjectType;
+        fi;
     fi;
+    
+    ## Objectify:
+    Objectify( type, obj );
     
     if properties <> [ ] then
         for ar in properties do

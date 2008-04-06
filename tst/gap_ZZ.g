@@ -1,7 +1,7 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
-ZZ := RingForHomalgInExternalGAP( "Integers", IsPIRForHomalgInExternalGAP );
+ZZ := RingForHomalgInExternalGAP( "Integers", IsPrincipalIdealRing );
 Display( ZZ );
 wmat := HomalgMatrixInExternalGAP( " \
 [ [ 262, -33, 75, -40 ], \

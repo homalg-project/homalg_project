@@ -318,7 +318,7 @@ end );
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, homalg_ring, table, properties, ar;
+    local nargs, homalg_ring, table, properties, ar, type;
     
     nargs := Length( arg );
     
@@ -335,24 +335,23 @@ InstallGlobalFunction( CreateHomalgRing,
     for ar in arg{[ 2 .. nargs ]} do
         if IsFilter( ar ) then
             Add( properties, ar );
+        elif not IsBound( type ) and IsType( ar ) then
+            type := ar;
         fi;
     od;
     
-    if IsSemiringWithOneAndZero( arg[1] ) then
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                homalg_ring, HomalgInternalRingType,
-                HomalgTable, table );
-    
-    elif IsHomalgExternalObjectRep( arg[1] ) then
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                homalg_ring, HomalgExternalRingType,
-                HomalgTable, table );
-    
+    if not IsBound( type ) then
+        if IsSemiringWithOneAndZero( arg[1] ) then
+            type := HomalgInternalRingType;
+        else
+            type := HomalgExternalRingType;
+        fi;
     fi;
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            homalg_ring, type,
+            HomalgTable, table );
     
     if properties <> [ ] then
         for ar in properties do
