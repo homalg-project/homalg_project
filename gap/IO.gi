@@ -21,8 +21,15 @@
 ####################################
 
 ##
-InstallGlobalFunction( TermCAS,
-  function( s )
+InstallGlobalFunction( TerminateCAS,
+  function( arg )
+    local s;
+    
+    if IsRecord( arg[1] ) and IsBound( arg[1].lines ) and IsBound( arg[1].pid ) then
+        s := arg[1];
+    else
+        s := HomalgStream( arg[1] );
+    fi;
     
     IO_Close( s.stdin );
     IO_Close( s.stdout );

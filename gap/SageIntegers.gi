@@ -16,9 +16,8 @@
 
 InstallMethod( CreateHomalgTable,
         "for the ring of integers in Sage",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsIntegersForHomalgInSage ],
+        [ IsHomalgExternalRingObjectInSageRep
+          and IsIntegersForHomalg ],
         
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

@@ -24,15 +24,19 @@ DeclareGlobalVariable( "HOMALG_IO_Maple" );
 
 # constructor methods:
 
-DeclareGlobalFunction( "RingForHomalgInMaplePIR" );
+DeclareGlobalFunction( "RingForHomalgInMapleUsingPIR" );
 
-DeclareGlobalFunction( "RingForHomalgInMapleInvolutive" );
+DeclareGlobalFunction( "RingForHomalgInMapleUsingInvolutive" );
 
-DeclareGlobalFunction( "RingForHomalgInMapleJanet" );
+DeclareGlobalFunction( "RingForHomalgInMapleUsingJanet" );
 
-DeclareGlobalFunction( "RingForHomalgInMapleJanetOre" );
+DeclareGlobalFunction( "RingForHomalgInMapleUsingJanetOre" );
 
-DeclareGlobalFunction( "RingForHomalgInMapleOreModules" );
+DeclareGlobalFunction( "RingForHomalgInMapleUsingOreModules" );
+
+DeclareGlobalFunction( "HomalgRingOfIntegersInMaple" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationalsInMaple" );
 
 # basic operations:
 

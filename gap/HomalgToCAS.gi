@@ -31,14 +31,14 @@ InstallGlobalFunction( HomalgCreateStringForExternalCASystem,
     
     break_lists := false;
     
-    if nargs > 0 and IsRecord( arg[2] ) then
+    if nargs > 1 and IsRecord( arg[2] ) then
         stream := arg[2];
         if IsBound( stream.break_lists ) and stream.break_lists = true then
             break_lists := true;
         fi;
     fi;
     
-    if nargs > 1 and arg[3] = "break_lists" then
+    if nargs > 2 and arg[3] = "break_lists" then
         break_lists := true;
     fi;
     
@@ -87,7 +87,7 @@ end );
 InstallGlobalFunction( HomalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          break_lists, R, ext_obj, prefix, suffix, e, RP, CAS, PID, stream,
+          break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS, PID,
           homalg_variable, l, eoc, enter, max;
     
     if IsBound( HOMALG_RINGS.HomalgSendBlockingInput ) then
@@ -137,14 +137,18 @@ InstallGlobalFunction( HomalgSendBlocking,
             ext_obj := R;
             stream := HomalgStream( ext_obj );
         elif not IsBound( ext_obj ) and IsHomalgExternalObject( ar )
-          and HasIsHomalgExternalObjectWithIOStream( ar ) and IsHomalgExternalObjectWithIOStream( ar ) then
+          and IsHomalgExternalObjectWithIOStreamRep( ar ) then
             ext_obj := ar;
             stream := HomalgStream( ext_obj );
-        elif not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
-            stream := ar;
-            if IsBound( stream.name ) then
-                ext_obj := HomalgExternalObject( "", stream.name, stream );
+        elif IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
+            if not IsBound( stream ) or not IsBound( ext_obj ) then
+                stream := ar;
+                if IsBound( stream.name ) then
+                    ext_obj := HomalgExternalObject( "", stream.name, stream );
+                fi;
             fi;
+        elif not IsBound( type ) and IsType( ar ) then
+            type := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
         elif IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then
@@ -154,16 +158,13 @@ InstallGlobalFunction( HomalgSendBlocking,
         elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
             suffix := ar;
         else
-            Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IsHomalgExternalObjectWithIOStream, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IsHomalgExternalObjectWithIOStreamRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
         fi;
     od;
     
     if not IsBound( ext_obj ) then ## R is also not yet defined
         
-        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) or 
-                     ( IsHomalgExternalObjectRep( a )
-                       and HasIsHomalgExternalObjectWithIOStream( a )
-                       and IsHomalgExternalObjectWithIOStream( a ) ) );
+        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) or IsHomalgExternalObjectWithIOStreamRep( a ) );
         
         if e <> [ ] then
             ext_obj := e[1];
@@ -308,9 +309,14 @@ InstallGlobalFunction( HomalgSendBlocking,
     fi;
     
     if not IsBound( option ) then
-        L := HomalgExternalObject( homalg_variable, CAS, stream );
         
-        if properties <> [ ] and IsHomalgExternalObjectWithIOStream( L ) then
+        if not IsBound( type ) then
+            L := HomalgExternalObject( homalg_variable, CAS, stream );
+        else
+            L := HomalgExternalObject( homalg_variable, CAS, stream, type );
+        fi;
+        
+        if properties <> [ ] and IsHomalgExternalObjectWithIOStreamRep( L ) then
             for ar in properties do
                 Setter( ar )( L, true );
             od;
@@ -343,7 +349,7 @@ InstallGlobalFunction( HomalgSendBlocking,
 end );
 
 ##
-InstallGlobalFunction( HomalgSendBlockingDisplay,
+InstallGlobalFunction( HomalgDisplay,
   function( arg )
     local L;
     
@@ -381,7 +387,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg external objects with an IO stream",
-        [ IsHomalgExternalObjectRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     
@@ -392,7 +398,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg external objects with an IO stream",
-        [ IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgExternalRingRep ],
         
   function( o )
     

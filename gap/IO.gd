@@ -14,7 +14,7 @@
 #
 ####################################
 
-DeclareGlobalFunction( "TermCAS" );
+DeclareGlobalFunction( "TerminateCAS" );
 
 DeclareGlobalFunction( "SendForkingToCAS" );
 

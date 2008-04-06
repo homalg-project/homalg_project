@@ -37,6 +37,38 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 
 ####################################
 #
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
+        IsHomalgExternalObjectWithIOStreamRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInMAGMARep",
+        IsHomalgExternalRingRep,
+        [  ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
+# a new type:
+BindGlobal( "HomalgExternalRingObjectInMAGMAType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingObjectInMAGMARep ) );
+
+# a new type:
+BindGlobal( "HomalgExternalRingInMAGMAType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingInMAGMARep ) );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -44,42 +76,82 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 ##
 InstallGlobalFunction( RingForHomalgInMAGMA,
   function( arg )
-    local stream, ar, ext_obj;
+    local nargs, stream, o, ar, ext_obj;
     
-    stream := LaunchCAS( HOMALG_IO_MAGMA );
+    nargs := Length( arg );
     
-    if Length( arg ) > 1 and IsFilter( arg[Length(arg)] ) then
-        ar := Concatenation( arg, [ stream ] );
+    if nargs > 1 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := HomalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if not IsBound( stream ) then
+        stream := LaunchCAS( HOMALG_IO_MAGMA );
+        o := 0;
     else
-        ar := Concatenation( arg, [ IsHomalgRingInMAGMA, stream ] );
+        o := 1;
+    fi;
+    
+    ar := [ arg[1], HomalgExternalRingObjectInMAGMAType, stream ];
+    
+    if Length( arg ) > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
     fi;
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream, IsHomalgRingInMAGMA );
+    return CreateHomalgRing( ext_obj, HomalgExternalRingInMAGMAType );
     
 end );
 
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
   function( arg )
-    local nargs, m, c, R;
+    local nargs, stream, m, c, R;
     
     nargs := Length( arg );
     
-    if nargs = 0 or arg[1] = 0 then
+    if nargs > 0 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := HomalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
         m := "";
         c := 0;
+        R := "[ ]";
     elif IsInt( arg[1] ) then
         m := AbsInt( arg[1] );
         c := m;
+        if IsPrime( c ) then
+            R := [ c ];
+        else
+            R := [ [ ], [ c ] ];
+        fi;
     else
         Error( "the first argument must be an integer\n" );
     fi;
     
-    R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsIntegersForHomalgInMAGMA );
+    if IsBound( stream ) then
+        R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing, stream );
+    else
+        R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing );
+    fi;
     
     SetCharacteristic( R, c );
+    
+    if IsPrime( c ) then
+        SetIsFieldForHomalg( R, true );
+    else
+        SetIsFieldForHomalg( R, false );
+        SetIsIntegersForHomalg( R, true );
+    fi;
     
     return R;
     
@@ -88,11 +160,15 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
   function( arg )
-    local R;
+    local ar, R;
     
-    R := RingForHomalgInMAGMA( [ "Rationals()" ], IsPIRForHomalgInMAGMA );
+    ar := Concatenation( [ "Rationals()" ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInMAGMA, ar );
     
     SetCharacteristic( R, 0 );
+    
+    SetIsFieldForHomalg( R, true );
     
     return R;
     
@@ -101,10 +177,10 @@ end );
 ##
 InstallMethod( PolynomialRing,
         "for homalg rings",
-        [ IsHomalgExternalRingRep and IsHomalgRingInMAGMA, IsList ],
+        [ IsHomalgExternalRingInMAGMARep, IsList ],
         
   function( R, indets )
-    local var, properties, ext_obj;
+    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v;
     
     if IsString( indets ) and indets <> "" then
         var := SplitString( indets, "," ); 
@@ -114,22 +190,51 @@ InstallMethod( PolynomialRing,
         Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
     fi;
     
-    properties := [ IsPolynomialRingForHomalgInMAGMA ];
+    c := Characteristic( R );
     
-    if Length( var ) = 1 then
-        Add( properties, IsPIRForHomalgInMAGMA );
+    properties := [ IsCommutative ];
+    
+    if Length( var ) = 1 and IsFieldForHomalg( R ) then
+        Add( properties, IsPrincipalIdealRing );
     fi;
     
-    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", indets, ">" ], properties, "break_lists" );
+    r := R;
     
-    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+        var_of_coeff_ring := IndeterminatesOfPolynomialRing( R );
+        if not ForAll( var_of_coeff_ring, HasName ) then
+            Error( "the indeterminates of coefficients ring must all have a name (use SetName)\n" );
+        fi;
+        var_of_coeff_ring := List( var_of_coeff_ring, Name );
+        if Intersection2( var_of_coeff_ring, var ) <> [ ] then
+            Error( "the following indeterminates are already elements of the coefficients ring: ", Intersection2( var_of_coeff_ring, var ), "\n" );
+        fi;
+        var := Concatenation( var_of_coeff_ring, var );
+    fi;
+    
+    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], HomalgExternalRingObjectInMAGMAType, properties, "break_lists" );
+    
+    S := CreateHomalgRing( ext_obj, HomalgExternalRingInMAGMAType );
+    
+    var := List( var, a -> HomalgExternalRingElement( a, "Maple" ) );
+    
+    for v in var do
+        SetName( v, HomalgPointer( v ) );
+    od;
+    
+    SetCoefficientsRing( S, r );
+    SetCharacteristic( S, c );
+    SetIndeterminatesOfPolynomialRing( S, var );
+    
+    return S;
     
 end );
 
 ##
 InstallMethod( \*,
         "for homalg rings",
-        [ IsHomalgExternalRingRep and IsHomalgRingInMAGMA, IsString ],
+        [ IsHomalgExternalRingInMAGMARep, IsString ],
         
   function( R, indets )
     
@@ -140,7 +245,7 @@ end );
 ##
 InstallMethod( HomalgMatrixInMAGMA,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
         
   function( M, R )
     local ext_obj;
@@ -154,7 +259,7 @@ end );
 ##
 InstallMethod( HomalgMatrixInMAGMA,
         "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsString, IsHomalgExternalRingRep ],
         
   function( M, R )
     local ext_obj;

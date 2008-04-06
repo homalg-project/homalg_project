@@ -18,16 +18,6 @@ DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 
 ####################################
 #
-# properties:
-#
-####################################
-
-##
-DeclareProperty( "IsPolynomialRingForHomalgInMAGMA",
-        IsHomalgRing );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

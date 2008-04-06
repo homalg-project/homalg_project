@@ -19,12 +19,12 @@ ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
 ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gd" );
 
 ## all the supported external computer algebra systems
-ReadPackage( "RingsForHomalg", "gap/GAP.gd" );
+ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gd" );
 ReadPackage( "RingsForHomalg", "gap/Singular.gd" );
 ReadPackage( "RingsForHomalg", "gap/Macaulay2.gd" );
 ReadPackage( "RingsForHomalg", "gap/Sage.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA.gd" );
-ReadPackage( "RingsForHomalg", "gap/Maple.gd" );
+ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gd" );
 
 ## GAP
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgTools.gd" );
@@ -56,8 +56,6 @@ ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/MAGMA_PIR.gd" );
-ReadPackage( "RingsForHomalg", "gap/MAGMA_Integers.gd" );
-ReadPackage( "RingsForHomalg", "gap/MAGMA_GF2.gd" );
 
 ## Maple (using the Maple implementation of homalg)
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgTools.gd" );

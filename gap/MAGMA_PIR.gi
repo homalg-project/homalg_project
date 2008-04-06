@@ -16,9 +16,8 @@
 
 InstallMethod( CreateHomalgTable,
         "for the ring of integers in MAGMA",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsPIRForHomalgInMAGMA ],
+        [ IsHomalgExternalRingObjectInMAGMARep
+          and IsPrincipalIdealRing ],
         
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;
@@ -33,7 +32,45 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
-               RingName := "K[x]",
+               RingName :=
+                 function( R )
+                   local c, v, r;
+                     
+                     c := Characteristic( R );
+                     
+                     if HasIndeterminatesOfPolynomialRing( R ) then
+                         v := IndeterminatesOfPolynomialRing( R );
+                         if HasName( v[1] ) then
+                             v := Name( v[1] );
+                         else
+                             v := "x";
+                         fi;
+                         if Length( v ) = 1 then
+                             r := CoefficientsRing( R );
+                             if HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
+                                 if IsPrime( c ) then
+                                     return Flat( [ "GF(", String( c ), ")[", v, "]" ] );
+                                 elif c = 0 then
+                                     return Flat( [ "Q[", v, "]" ] );
+                                 fi;
+                             fi;
+                         fi;
+                         Error( "the argument is not a principal ideal ring\n" );
+                     elif c = 0 then
+                         if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+                             return "Q";
+                         else
+                             return "Z";
+                         fi;
+                     elif IsPrime( c ) then
+                         return Flat( [ "GF(", String( c ), ")" ] );
+                     else
+                         return Flat( [ "Z/", String( c ), "Z" ] );
+                     fi;
+                     
+		     return "couldn't find a way to display";
+		     
+                 end,
                
                ElementaryDivisors :=
                  function( M )

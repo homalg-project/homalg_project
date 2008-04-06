@@ -17,9 +17,7 @@
 
 InstallMethod( CreateHomalgTable,
         "for homalg rings provided by the maple package OreModules",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsHomalgRingInMapleOreModules ],
+        [ IsHomalgExternalRingInMapleUsingOreModulesRep ],
 
   function( arg )
     local RP, RP_default, RP_BestBasis, RP_specific, component;

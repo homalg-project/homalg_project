@@ -16,10 +16,9 @@
 
 InstallMethod( CreateHomalgTable,
         "for rings provided by the gap package homalg",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsPIRForHomalgInExternalGAP ],
-
+        [ IsHomalgExternalRingObjectInGAPRep
+          and IsPrincipalIdealRing ],
+        
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;
     

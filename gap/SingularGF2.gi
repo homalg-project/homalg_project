@@ -16,9 +16,8 @@
 
 InstallMethod( CreateHomalgTable,
         "for the finite field GF(2) in Singular",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsGF2ForHomalgInSingular ],
+        [ IsHomalgExternalRingObjectInSingularRep
+          and IsPrimeField and IsFinite ],
 
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

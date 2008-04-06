@@ -39,6 +39,38 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 
 ####################################
 #
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
+        IsHomalgExternalObjectWithIOStreamRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInSageRep",
+        IsHomalgExternalRingRep,
+        [  ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
+# a new type:
+BindGlobal( "HomalgExternalRingObjectInSageType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingObjectInSageRep ) );
+
+# a new type:
+BindGlobal( "HomalgExternalRingInSageType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingInSageRep ) );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -46,24 +78,26 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 ##
 InstallGlobalFunction( RingForHomalgInSage,
   function( arg )
-    local stream, ext_obj;
+    local stream, ar, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_Sage );
     
-    if Length( arg ) > 1 and IsFilter( arg[2] ) then
-        ext_obj := HomalgExternalObject( arg[1], "Sage", stream, arg[2] );
-    else
-        ext_obj := HomalgExternalObject( arg[1], "Sage", stream, IsHomalgRingInSage );
+    ar := [ [ arg[1] ], HomalgExternalRingObjectInSageType, stream ];
+    
+    if Length( arg ) > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
     fi;
     
-    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    ext_obj := CallFuncList( HomalgSendBlocking, ar );
+    
+    return CreateHomalgRing( ext_obj, HomalgExternalRingInSageType );
     
 end );
 
 ##
 InstallMethod( HomalgMatrixInSage,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
         
   function( M, R )
     local ext_obj;
@@ -77,7 +111,7 @@ end );
 ##
 InstallMethod( HomalgMatrixInSage,
         "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsString, IsHomalgExternalRingRep ],
         
   function( M, R )
     local ext_obj;

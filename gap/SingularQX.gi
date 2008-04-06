@@ -16,9 +16,8 @@
 
 InstallMethod( CreateHomalgTable,
         "for the pricipal ideal ring Q[x] in Singular",
-        [ IsHomalgExternalObjectRep
-          and IsHomalgExternalObjectWithIOStream
-          and IsQXForHomalgInSingular ],
+        [ IsHomalgExternalRingObjectInSingularRep
+          and IsPrincipalIdealRing ],
 
   function( arg )
     local RP, RP_BestBasis, RP_specific, component;

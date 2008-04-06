@@ -42,6 +42,38 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 
 ####################################
 #
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
+        IsHomalgExternalObjectWithIOStreamRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInSingularRep",
+        IsHomalgExternalRingRep,
+        [  ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
+# a new type:
+BindGlobal( "HomalgExternalRingObjectInSingularType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingObjectInSingularRep ) );
+
+# a new type:
+BindGlobal( "HomalgExternalRingInSingularType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingInSingularRep ) );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -49,28 +81,44 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 ##
 InstallGlobalFunction( RingForHomalgInSingular,
   function( arg )
-    local stream, ext_obj;
+    local nargs, stream, o, ar, ext_obj;
     
-    stream := LaunchCAS( HOMALG_IO_Singular );
+    nargs := Length( arg );
     
-    HomalgSendBlocking( "LIB \"nctools.lib\"", "need_command", stream );
-    HomalgSendBlocking( "LIB \"matrix.lib\"", "need_command", stream );
-    HomalgSendBlocking( "LIB \"control.lib\"", "need_command", stream );
-    
-    if Length( arg ) > 1 and IsFilter( arg[2] ) then
-        ext_obj := HomalgSendBlocking( [ arg[1] ], [ "ring" ], arg[2], stream );
-    else
-        ext_obj := HomalgSendBlocking( [ arg[1] ], [ "ring" ], IsHomalgRingInSingular, stream );
+    if nargs > 1 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := HomalgStream( arg[nargs] );
+        fi;
     fi;
     
-    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    if not IsBound( stream ) then
+        stream := LaunchCAS( HOMALG_IO_Singular );
+        HomalgSendBlocking( "LIB \"nctools.lib\"", "need_command", stream );
+        HomalgSendBlocking( "LIB \"matrix.lib\"", "need_command", stream );
+        HomalgSendBlocking( "LIB \"control.lib\"", "need_command", stream );
+        o := 0;
+    else
+        o := 1;
+    fi;
+    
+    ar := [ [ arg[1] ], [ "ring" ], HomalgExternalRingObjectInSingularType, stream ];
+    
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+    fi;
+    
+    ext_obj := CallFuncList( HomalgSendBlocking, ar );
+    
+    return CreateHomalgRing( ext_obj, HomalgExternalRingInSingularType );
     
 end );
 
 ##
 InstallMethod( HomalgMatrixInSingular,
         "for homalg matrices",
-        [ IsInt, IsInt, IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
         
   function( r, c, M, R )
     local ext_obj;

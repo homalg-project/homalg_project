@@ -37,6 +37,38 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 
 ####################################
 #
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
+        IsHomalgExternalObjectWithIOStreamRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInGAPRep",
+        IsHomalgExternalRingRep,
+        [  ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
+# a new type:
+BindGlobal( "HomalgExternalRingObjectInGAPType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingObjectInGAPRep ) );
+
+# a new type:
+BindGlobal( "HomalgExternalRingInGAPType",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingInGAPRep ) );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -44,26 +76,28 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 ##
 InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
-    local stream, ext_obj;
+    local stream, ar, ext_obj;
     
     stream := LaunchCAS( HOMALG_IO_GAP );
     
     HomalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
     
-    if Length( arg ) > 1 and IsFilter( arg[2] ) then
-        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], arg[2], stream );
-    else
-        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgRingInExternalGAP, stream );
+    ar := [ [ "CreateHomalgRing( ", arg[1], ")" ], HomalgExternalRingObjectInGAPType, stream ];
+    
+    if Length( arg ) > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
     fi;
     
-    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    ext_obj := CallFuncList( HomalgSendBlocking, ar );
+    
+    return CreateHomalgRing( ext_obj, HomalgExternalRingInGAPType );
     
 end );
 
 ##
 InstallMethod( HomalgMatrixInExternalGAP,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
         
   function( M, R )
     local ext_obj;
@@ -77,7 +111,7 @@ end );
 ##
 InstallMethod( HomalgMatrixInExternalGAP,
         "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep and IsHomalgExternalObjectWithIOStream ],
+        [ IsString, IsHomalgExternalRingRep ],
         
   function( M, R )
     local ext_obj;

@@ -34,3 +34,35 @@ InstallValue( HOMALG_IO_Macaulay2,
             
 HOMALG_IO_Macaulay2.READY_LENGTH := Length( HOMALG_IO_Macaulay2.READY );
 
+####################################
+#
+# representations:
+#
+####################################
+
+# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
+        IsHomalgExternalObjectWithIOStreamRep,
+        [  ] );
+
+# a new subrepresentation of the representation IsHomalgExternalRingRep:
+DeclareRepresentation( "IsHomalgExternalRingInMacaulay2Rep",
+        IsHomalgExternalRingRep,
+        [  ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
+# a new type:
+BindGlobal( "HomalgExternalRingObjectInMacaulay2Type",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingObjectInMacaulay2Rep ) );
+
+# a new type:
+BindGlobal( "HomalgExternalRingInMacaulay2Type",
+        NewType( HomalgRingsFamily,
+                IsHomalgExternalRingInMacaulay2Rep ) );
+

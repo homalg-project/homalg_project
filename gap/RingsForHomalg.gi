@@ -38,26 +38,7 @@ InstallGlobalFunction( RingForHomalg,
     
     properties := [ ];
     
-    for ar in arg{[ 2 .. nargs ]} do
-        if not IsBound( init ) and IsHomalgExternalRingRep( ar ) then
-            init := ar;
-        elif not IsBound( init ) and IsHomalgExternalObject( ar )
-          and HasIsHomalgExternalObjectWithIOStream( ar ) and IsHomalgExternalObjectWithIOStream( ar ) then
-            init := ar;
-        elif IsFilter( ar ) then
-            Add( properties, ar );
-        else
-            Error( "this argument should be in { IsString, IsFilter, IsHomalgExternalRingRep, IsHomalgExternalObjectWithIOStream } bur recieved: ", ar,"\n" );
-        fi;
-    od;
-    
-    if Length( arg ) > 1 and IsFilter( arg[2] ) then
-        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], init );
-    else
-        ext_obj := HomalgSendBlocking( [ "CreateHomalgRing(", arg[1], ")" ], IsHomalgRingInExternalGAP, init );
-    fi;
-    
-    return CreateHomalgRing( ext_obj, IsHomalgExternalObjectWithIOStream );
+    ## COMPLETE ME
     
 end );
 
