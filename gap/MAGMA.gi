@@ -125,15 +125,9 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
     if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
         m := "";
         c := 0;
-        R := "[ ]";
     elif IsInt( arg[1] ) then
         m := AbsInt( arg[1] );
         c := m;
-        if IsPrime( c ) then
-            R := [ c ];
-        else
-            R := [ [ ], [ c ] ];
-        fi;
     else
         Error( "the first argument must be an integer\n" );
     fi;

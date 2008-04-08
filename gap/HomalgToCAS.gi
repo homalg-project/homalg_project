@@ -108,8 +108,31 @@ InstallGlobalFunction( HomalgSendBlocking,
     
     properties := [];
     
-    for ar in arg{[ 2 .. nargs ]} do
-        if not IsBound( option ) and IsString( ar ) and not ar in [ "", "break_lists" ] then ## the first occurrence of an option decides
+    for ar in arg{[ 2 .. nargs ]} do ## the order of the following might be important for the performance!!!
+        if not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [ ] ) then
+            prefix := ar;
+        elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
+            suffix := ar;
+        elif not IsBound( R ) and IsHomalgExternalMatrixRep( ar ) then
+            R := HomalgRing( ar );
+            ext_obj := R;
+            stream := HomalgStream( ext_obj );
+        elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
+            R := ar;
+            ext_obj := R;
+            stream := HomalgStream( ext_obj );
+        elif not IsBound( ext_obj ) and IsHomalgExternalObject( ar )
+          and IsHomalgExternalObjectWithIOStreamRep( ar ) then
+            ext_obj := ar;
+            stream := HomalgStream( ext_obj );
+        elif IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
+            if not IsBound( stream ) or not IsBound( ext_obj ) then
+                stream := ar;
+                if IsBound( stream.name ) then
+                    ext_obj := HomalgExternalObject( "", stream.name, stream );
+                fi;
+            fi;
+        elif not IsBound( option ) and IsString( ar ) and not ar in [ "", "break_lists" ] then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
                 need_display := false;
@@ -126,37 +149,14 @@ InstallGlobalFunction( HomalgSendBlocking,
                 Error( "option must be one of {\"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
             fi;
             option := ar;
-        elif not IsBound( break_lists ) and IsString( ar ) and ar = "break_lists" then
-            break_lists := ar;
-        elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
-            R := ar;
-            ext_obj := R;
-            stream := HomalgStream( ext_obj );
-        elif not IsBound( R ) and IsHomalgExternalMatrixRep( ar ) then
-            R := HomalgRing( ar );
-            ext_obj := R;
-            stream := HomalgStream( ext_obj );
-        elif not IsBound( ext_obj ) and IsHomalgExternalObject( ar )
-          and IsHomalgExternalObjectWithIOStreamRep( ar ) then
-            ext_obj := ar;
-            stream := HomalgStream( ext_obj );
-        elif IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
-            if not IsBound( stream ) or not IsBound( ext_obj ) then
-                stream := ar;
-                if IsBound( stream.name ) then
-                    ext_obj := HomalgExternalObject( "", stream.name, stream );
-                fi;
-            fi;
         elif not IsBound( type ) and IsType( ar ) then
             type := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
         elif IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then
             Append( properties, ar );
-        elif not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [ ] ) then
-            prefix := ar;
-        elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
-            suffix := ar;
+        elif not IsBound( break_lists ) and IsString( ar ) and ar = "break_lists" then
+            break_lists := ar;
         else
             Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IsHomalgExternalObjectWithIOStreamRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
         fi;
