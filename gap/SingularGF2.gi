@@ -46,7 +46,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   N := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );

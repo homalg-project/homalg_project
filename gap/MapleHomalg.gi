@@ -456,23 +456,9 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( HomalgMatrixInMaple,
+InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
-        
-  function( M, R )
-    local ext_obj;
-    
-    ext_obj := HomalgSendBlocking( [ R, "[2][matrix](", String( Eval( M ) ), ")" ] );
-    
-    return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( HomalgMatrixInMaple,
-        "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep ],
+        [ IsString, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
     local ext_obj;
@@ -494,13 +480,11 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local cas, stream, display_color;
+    local stream, display_color;
     
     stream := HomalgStream( o );
     
-    cas := stream.cas;
-    
-    if cas = "maple" then
+    if IsHomalgExternalRingInMapleRep( HomalgRing( o ) ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;

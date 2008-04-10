@@ -32,7 +32,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBestBasis,
                    
                    nargs := Length( arg );
                    
-                   S := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   S := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    SetIsDiagonalMatrix( S, true );
                    
                    if nargs > 1 then
@@ -43,7 +43,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBestBasis,
                            SetNrColumns( U, NrRows( M ) );
                            SetIsInvertibleMatrix( U, true );
                        else
-                           U := HomalgMatrix( "void", R );
+                           U := HomalgVoidMatrix( R );
                        fi;
                        
                        # assign V:
@@ -53,11 +53,11 @@ InstallValue( CommonHomalgTableForGAPHomalgBestBasis,
                            SetNrColumns( V, NrColumns( M ) );
                            SetIsInvertibleMatrix( V, true );
                        else
-                           V := HomalgMatrix( "void", R );
+                           V := HomalgVoidMatrix( R );
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( HomalgSendBlocking( [ U, " := HomalgMatrix(\"void\",", R, ");; ", V, " := HomalgMatrix(\"void\",", R, ");; ", S, " := HomalgTable(", R, ")!.BestBasis(", M, U, V, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );
+                       rank_of_S := Int( HomalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", V, " := HomalgVoidMatrix(", R, ");; ", S, " := HomalgTable(", R, ")!.BestBasis(", M, U, V, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );
                    else
                        ## compute S only:
                        rank_of_S := Int( HomalgSendBlocking( [ S, " := HomalgTable(", R, ")!.BestBasis(", M, ");; RowRankOfMatrix(", S, ")" ], "need_output" ) );

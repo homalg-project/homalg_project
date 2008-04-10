@@ -242,23 +242,9 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( HomalgMatrixInSage,
+InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
-        
-  function( M, R )
-    local ext_obj;
-    
-    ext_obj := HomalgSendBlocking( [ "matrix(", R, ",", String( Eval( M ) ), ")" ] );
-    
-    return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( HomalgMatrixInSage,
-        "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep ],
+        [ IsString, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
     local ext_obj;

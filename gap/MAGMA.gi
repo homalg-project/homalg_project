@@ -211,7 +211,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, HomalgExternalRingInMAGMAType );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Maple" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "MAGMA" ) );
     
     for v in var do
         SetName( v, HomalgPointer( v ) );
@@ -226,34 +226,9 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( \*,
-        "for homalg rings",
-        [ IsHomalgExternalRingInMAGMARep, IsString ],
-        
-  function( R, indets )
-    
-    return PolynomialRing( R, SplitString( indets, "," ) );
-    
-end );
-
-##
-InstallMethod( HomalgMatrixInMAGMA,
+InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
-        
-  function( M, R )
-    local ext_obj;
-    
-    ext_obj := HomalgSendBlocking( [ "Matrix(", R, ",", String( Eval( M ) ), ")" ] );
-    
-    return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( HomalgMatrixInMAGMA,
-        "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep ],
+        [ IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( M, R )
     local ext_obj;

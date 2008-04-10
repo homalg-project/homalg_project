@@ -27,7 +27,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
                    HomalgSendBlocking( [ N, " := `homalg/BasisOfModule`(", M, R, ")" ], "need_command" );
                    
@@ -41,7 +41,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
                    HomalgSendBlocking( [ N, " := `homalg/BasisCoeff`(", M, R, "[1],", U, R, "[2])" ], "need_command" );
                    
@@ -55,7 +55,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgMatrix( "void", NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
                    HomalgSendBlocking( [ N, " := `homalg/Reduce`(", A, B, R, ")" ], "need_command" );
                    
@@ -69,7 +69,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgMatrix( "void", NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
                    HomalgSendBlocking( [ N, " := `homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[2])" ], "need_command" );
                    
@@ -85,7 +85,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgMatrix( "void", "unknown_number_of_rows", NrRows( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), R );
                    
                    if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
                        

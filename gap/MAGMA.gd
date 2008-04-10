@@ -35,9 +35,6 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInMAGMA" );
 DeclareOperation( "PolynomialRing",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsString ] );
-
 DeclareOperation( "HomalgMatrixInMAGMA",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
