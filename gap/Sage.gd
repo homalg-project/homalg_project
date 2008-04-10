@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Sage.gd                   RingsForHomalg package         Mohamed Barakat
+##  Sage.gd                   RingsForHomalg package         Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -27,6 +27,8 @@ DeclareGlobalVariable( "HOMALG_IO_Sage" );
 DeclareGlobalFunction( "RingForHomalgInSage" );
 
 DeclareGlobalFunction( "HomalgRingOfIntegersInSage" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationalsInSage" );
 
 # basic operations:
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageIntegers.gi           RingsForHomalg package           Simon Görtzen
+##  SageIntegers.gi           RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -17,7 +17,7 @@
 InstallMethod( CreateHomalgTable,
         "for the ring of integers in Sage",
         [ IsHomalgExternalRingObjectInSageRep
-          and IsPrincipalIdealRing ],
+          and IsIntegersForHomalg ],
         
   function( R )
     local RP, RP_BestBasis, command, RP_specific, component;
@@ -34,20 +34,16 @@ InstallMethod( CreateHomalgTable,
             "  return M.transpose().elementary_divisors()\n\n",
             
             "def TriangularBasisOfRows_NU(M):\n",
-            "  M = M.dense_matrix()\n",
             "  N, U = M.echelon_form(transformation=True)\n",
-            "  N = N.sparse_matrix()\n",
-            "  U = U.sparse_matrix()\n",
             "  return N, U\n\n",
             
             "def TriangularBasisOfRows_N_only(M):\n",
             "  N = M.echelon_form()\n",
-            "  N = N.sparse_matrix()\n",
             "  return N\n\n"
             
             );
             
-    HomalgSendBlocking( [ command ], "need_command", R ); ## the last lines to initialize
+    HomalgSendBlocking( [ command ], "need_command", R ); ## the last procedures to initialize
     
     RP_specific :=
           rec(
@@ -55,7 +51,45 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (HomalgTable gives no default value)
                
-               RingName := "Z",
+               RingName :=
+                 function( R )
+                   local c, v, r;
+                     
+                     c := Characteristic( R );
+                     
+                     if HasIndeterminatesOfPolynomialRing( R ) then
+                         v := IndeterminatesOfPolynomialRing( R );
+                         if HasName( v[1] ) then
+                             v := Name( v[1] );
+                         else
+                             v := "x";
+                         fi;
+                         if Length( v ) = 1 then
+                             r := CoefficientsRing( R );
+                             if HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
+                                 if IsPrime( c ) then
+                                     return Flat( [ "GF(", String( c ), ")[", v, "]" ] );
+                                 elif c = 0 then
+                                     return Flat( [ "Q[", v, "]" ] );
+                                 fi;
+                             fi;
+                         fi;
+                         Error( "the argument is not a principal ideal ring\n" );
+                     elif c = 0 then
+                         if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+                             return "Q";
+                         else
+                             return "Z";
+                         fi;
+                     elif IsPrime( c ) then
+                         return Flat( [ "GF(", String( c ), ")" ] );
+                     else
+                         return Flat( [ "Z/", String( c ), "Z" ] );
+                     fi;
+                     
+         return "couldn't find a way to display";
+         
+                 end,
                
                ElementaryDivisors :=
                  function( arg )

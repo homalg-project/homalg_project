@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Sage.gi                   RingsForHomalg package         Mohamed Barakat
+##  Sage.gi                   RingsForHomalg package         Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -26,7 +26,7 @@ InstallValue( HOMALG_IO_Sage,
             CUT_END := 10,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
-            check_output := true,	## a Singular specific
+            check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
             prompt := "sage: ",
@@ -111,7 +111,7 @@ end );
 
 InstallGlobalFunction( HomalgRingOfIntegersInSage,
   function( arg )
-    local nargs, stream, m, c, R;
+    local nargs, stream, c, R, command;
     
     nargs := Length( arg );
     
@@ -124,32 +124,120 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
     fi;
     
     if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
-        m := "";
         c := 0;
-        R := "[ ]";
     elif IsInt( arg[1] ) then
-        m := AbsInt( arg[1] );
-        c := m;
+        c := AbsInt( arg[1] );
     else
         Error( "the first argument must be an integer\n" );
     fi;
     
-    if IsBound( stream ) then
-        R := RingForHomalgInSage( [ "ZZ" ], IsPrincipalIdealRing, stream ); #no characteristic yet!
+    if IsPrime(c) then
+        command := "GF(";
     else
-        R := RingForHomalgInSage( [ "ZZ" ], IsPrincipalIdealRing ); #no characteristic yet!
+        command := "IntegerModRing(";
     fi;
     
-    SetCharacteristic( R, c );
+    if IsBound( stream ) then
+        R := RingForHomalgInSage( [ command, c, ")" ], IsPrincipalIdealRing, stream );
+    else
+        R := RingForHomalgInSage( [ command, c, ")" ], IsPrincipalIdealRing );
+    fi;
     
-    if IsPrime( c ) then
+    if IsPrime(c) then
         SetIsFieldForHomalg( R, true );
     else
         SetIsFieldForHomalg( R, false );
         SetIsIntegersForHomalg( R, true );
     fi;
     
+    
+    SetCharacteristic( R, c );
+    
     return R;
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFieldOfRationalsInSage,
+  function( arg )
+    local ar, R;
+    
+    ar := Concatenation( [ "QQ" ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInSage, ar );
+    
+    SetCharacteristic( R, 0 );
+    
+    SetIsFieldForHomalg( R, true );
+    
+    return R;
+    
+end );
+##
+InstallMethod( PolynomialRing,
+        "for homalg rings",
+        [ IsHomalgExternalRingInSageRep, IsList ],
+        
+  function( R, indets )
+    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v;
+    
+    if IsString( indets ) and indets <> "" then
+        var := SplitString( indets, "," ); 
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        var := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    c := Characteristic( R );
+    
+    properties := [ IsCommutative ];
+    
+    if Length( var ) = 1 and IsFieldForHomalg( R ) then
+        Add( properties, IsPrincipalIdealRing );
+    fi;
+    
+    r := R;
+    
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+        var_of_coeff_ring := IndeterminatesOfPolynomialRing( R );
+        if not ForAll( var_of_coeff_ring, HasName ) then
+            Error( "the indeterminates of coefficients ring must all have a name (use SetName)\n" );
+        fi;
+        var_of_coeff_ring := List( var_of_coeff_ring, Name );
+        if Intersection2( var_of_coeff_ring, var ) <> [ ] then
+            Error( "the following indeterminates are already elements of the coefficients ring: ", Intersection2( var_of_coeff_ring, var ), "\n" );
+        fi;
+        var := Concatenation( var_of_coeff_ring, var );
+    fi;
+    
+    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], HomalgExternalRingObjectInSageType, properties, "break_lists" );
+    
+    S := CreateHomalgRing( ext_obj, HomalgExternalRingInSageType );
+    
+    var := List( var, a -> HomalgExternalRingElement( a, "Sage" ) );
+    
+    for v in var do
+        SetName( v, HomalgPointer( v ) );
+    od;
+    
+    SetCoefficientsRing( S, r );
+    SetCharacteristic( S, c );
+    SetIndeterminatesOfPolynomialRing( S, var );
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgExternalRingInSageRep, IsString ],
+        
+  function( R, indets )
+    
+    return PolynomialRing( R, SplitString( indets, "," ) );
     
 end );
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageTools.gi              RingsForHomalg package           Simon Görtzen
+##  SageTools.gi              RingsForHomalg package           Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -73,7 +73,7 @@ InstallValue( CommonHomalgTableForSageTools,
                ZeroMatrix :=
                  function( C )
                    
-                   return HomalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ", sparse=True)" ] );
+                   return HomalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ")" ] );
                    
                  end,
                
@@ -83,7 +83,7 @@ InstallValue( CommonHomalgTableForSageTools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "_id.sparse_matrix(); _id=0" ], [ "_id = identity_matrix(", R, NrRows( C ), ");" ], R );
+                   return HomalgSendBlocking( [ "identity_matrix(", R, NrRows( C ), ")" ], R );
                    
                  end,
                

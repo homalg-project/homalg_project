@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageBestBasis.gi          RingsForHomalg package           Simon Görtzen
+##  SageBestBasis.gi          RingsForHomalg package           Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -21,7 +21,7 @@ InstallValue( InitializeSageBestBasis,
           command := Concatenation(
 
             "def BestBasis_SUV( M ):\n",
-            "  S, U, V = M.dense_matrix().smith_form()\n",
+            "  S, U, V = M.smith_form()\n",
             "  InvertedRowList = range(M.nrows()-1,-1,-1)\n",
             "  InvertedColumnList = range(M.ncols()-1,-1,-1)\n",
             "  S = S.matrix_from_rows_and_columns(InvertedRowList, InvertedColumnList)\n",
@@ -31,7 +31,7 @@ InstallValue( InitializeSageBestBasis,
             
             "def BestBasis_S_only(M):\n",
             "  elemdivlist=M.elementary_divisors()\n",
-            "  TempMat=matrix(ZZ,M.nrows(),M.ncols(),sparse=True)\n",
+            "  TempMat=matrix(M.base_ring(),M.nrows(),M.ncols())\n",
             "  for i in range(len(elemdivlist)):\n",
             "    TempMat[i,i]=elemdivlist[i]\n",
             "  return TempMat\n\n"
