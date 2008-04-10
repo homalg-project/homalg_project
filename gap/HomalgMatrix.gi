@@ -268,7 +268,7 @@ InstallMethod( ZeroMutable,
         
   function( M )
     
-    return HomalgMatrix( "zero", NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
     
 end );
 
@@ -642,7 +642,7 @@ InstallMethod( AddRhs,				### defines: AddRhs
     
     SetEvalAddRhs( C, true );
     
-    SetRightHandSide( C, HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) ) );
+    SetRightHandSide( C, HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) ) );
     
     return C;
     
@@ -688,7 +688,7 @@ InstallMethod( AddBts,				### defines: AddBts
     
     SetEvalAddBts( C, true );
     
-    SetBottomSide( C, HomalgMatrix( "identity", NrColumns( A ), HomalgRing( A ) ) );
+    SetBottomSide( C, HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) ) );
     
     return C;
     
@@ -746,22 +746,24 @@ end );
 #
 ####################################
 
+##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, type, ar, matrix, M;
+    local nargs, R, type, matrix, option, M;
     
     nargs := Length( arg );
     
     ## "copy" the matrix:
-    if nargs > 0 and IsHomalgMatrix( arg[1] ) then
-        
+    if nargs = 1 and IsHomalgMatrix( arg[1] ) then
         R := HomalgRing( arg[1] );
-        
         M := HomalgMatrix( R );
-        
         SetPreEval( M, arg[1] );
-        
         return M;
+    fi;
+    
+    if nargs > 1 and ( IsHomalgMatrix( arg[1] ) or ( IsString( arg[1] ) and arg[1] <> [ ] ) ) then
+        
+        return CallFuncList( ConvertHomalgMatrix, arg );
         
     fi;
     
@@ -787,100 +789,87 @@ InstallGlobalFunction( HomalgMatrix,
         
         return matrix;
         
-    elif IsString( arg[1] ) and Length( arg[1] ) > 2 then
-    ## it can get obscure ;)
-        
-        if LowercaseString( arg[1]{[1..3]} ) = "int" then
-            
-            ## Objectify:
-            Objectify( HomalgInternalMatrixType, matrix );
-            
-            return matrix;
-            
-        elif LowercaseString( arg[1]{[1..3]} ) = "ext" then
-            
-            ## Objectify:
-            Objectify( HomalgExternalMatrixType, matrix );
-            
-            return matrix;
-            
-        fi;
-        
     fi; ## CAUTION: don't make an elif here!!!
     
-    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "void" then
-    ## a void matrix filled with nothing having the flag IsVoidMatrix:
+    if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 then
         
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, type,
-                IsVoidMatrix, true );
-        
-        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-            SetNrRows( matrix, arg[2] );
-        fi;
-        
-        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-            SetNrColumns( matrix, arg[3] );
-        fi;
+	option := arg[1][1];
+	
+        if Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "void" then
+        ## a void matrix filled with nothing having the flag IsVoidMatrix:
             
-        return matrix;
-        
-    elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "init" then
-    ## an initial matrix having the flag IsInitialMatrix
-    ## and filled with zeros BUT NOT marked as an IsZeroMatrix:
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, type,
-                IsInitialMatrix, true );
-        
-        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-            SetNrRows( matrix, arg[2] );
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, type,
+                    IsVoidMatrix, true );
+            
+            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+                SetNrRows( matrix, arg[2] );
+            fi;
+            
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+                SetNrColumns( matrix, arg[3] );
+            fi;
+            
+            return matrix;
+            
+        elif Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "init" then
+        ## an initial matrix having the flag IsInitialMatrix
+        ## and filled with zeros BUT NOT marked as an IsZeroMatrix:
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, type,
+                    IsInitialMatrix, true );
+            
+            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+                SetNrRows( matrix, arg[2] );
+            fi;
+            
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+                SetNrColumns( matrix, arg[3] );
+            fi;
+            
+            return matrix;
+            
+        elif Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "zero" then
+        ## the zero matrix:
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, type,
+                    IsZeroMatrix, true );
+            
+            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+                SetNrRows( matrix, arg[2] );
+            fi;
+            
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+                SetNrColumns( matrix, arg[3] );
+            fi;
+            
+            return matrix;
+            
+        elif Length( option ) > 1 and  LowercaseString( option{[1..2]} ) = "id" then
+        ## the identity matrix:
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, type,
+                    IsIdentityMatrix, true );
+            
+            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+                SetNrRows( matrix, arg[2] );
+                SetNrColumns( matrix, arg[2] );
+            fi;
+            
+            return matrix;
+            
         fi;
-        
-        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-            SetNrColumns( matrix, arg[3] );
-        fi;
-        
-        return matrix;
-        
-    elif IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
-    ## the zero matrix:
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, type,
-                IsZeroMatrix, true );
-        
-        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-            SetNrRows( matrix, arg[2] );
-        fi;
-        
-        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-            SetNrColumns( matrix, arg[3] );
-        fi;
-        
-        return matrix;
-        
-    elif IsString( arg[1] ) and Length( arg[1] ) > 1 and  LowercaseString( arg[1]{[1..2]} ) = "id" then
-    ## the identity matrix:
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, type,
-                IsIdentityMatrix, true );
-        
-        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-            SetNrRows( matrix, arg[2] );
-            SetNrColumns( matrix, arg[2] );
-        fi;
-        
-        return matrix;
         
     fi;
     
-    if IsList( arg[1] ) and Length( arg[1] ) <> 0 and not IsList( arg[1][1] ) then
+    if IsList( arg[1] ) and Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
         M := List( arg[1], a -> [a] ); ## NormalizeInput
     else
         M := arg[1];
@@ -919,6 +908,38 @@ InstallGlobalFunction( HomalgMatrix,
     
 end );
   
+##
+InstallGlobalFunction( HomalgZeroMatrix,
+  function( arg )
+    
+    return CallFuncList( HomalgMatrix, Concatenation( [ [ "zero" ] ], arg ) );
+    
+end );
+
+##
+InstallGlobalFunction( HomalgIdentityMatrix,
+  function( arg )
+    
+    return CallFuncList( HomalgMatrix, Concatenation( [ [ "identity" ] ], arg ) );
+    
+end );
+
+##
+InstallGlobalFunction( HomalgInitialMatrix,
+  function( arg )
+    
+    return CallFuncList( HomalgMatrix, Concatenation( [ [ "init" ] ], arg ) );
+    
+end );
+
+##
+InstallGlobalFunction( HomalgVoidMatrix,
+  function( arg )
+    
+    return CallFuncList( HomalgMatrix, Concatenation( [ [ "void" ] ], arg ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

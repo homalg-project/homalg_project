@@ -4,7 +4,7 @@ HOMALG_RINGS.color_display := true;
 SetInfoLevel( InfoRingsForHomalg, 7 );
 A3 := RingForHomalgInSingular( "0,(x,d1,y,d2,z,d3),dp; Weyl()" );
 Display( A3 );
-wmat := HomalgMatrixInSingular( " \
+wmat := HomalgMatrix( " \
 [ [x*z, z*y, z^2, 0, 0, y], \
   [0, 0, 0, z^2*y-z^2, z^3, x*z], \
   [0, 0, 0, z*y^2-z*y, z^2*y, x*y], \

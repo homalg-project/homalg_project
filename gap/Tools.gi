@@ -595,7 +595,7 @@ InstallMethod( ZeroRows,			### defines: ZeroRows
     
     #=====# begin of the core procedure #=====#
     
-    z := HomalgMatrix( "zero", 1, NrColumns( C ), R );
+    z := HomalgZeroMatrix( 1, NrColumns( C ), R );
     
     return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( M, [ a ] ) = z );
     
@@ -621,7 +621,7 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
     
     #=====# begin of the core procedure #=====#
     
-    z := HomalgMatrix( "zero", NrRows( C ), 1, R );
+    z := HomalgZeroMatrix( NrRows( C ), 1, R );
     
     return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( M, [ a ] ) = z );
     

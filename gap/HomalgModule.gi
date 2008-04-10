@@ -540,12 +540,12 @@ InstallMethod( TransitionMatrix,
         
     elif pres_a = pres_b then
         
-        return HomalgMatrix( "identity", NrGenerators( sets_of_generators!.( pres_a ) ), HomalgRing( M ) );
+        return HomalgIdentityMatrix( NrGenerators( sets_of_generators!.( pres_a ) ), HomalgRing( M ) );
         
     else
         
         ## starting with the identity is no waste of performance since the subpackage LIMAT is active:
-        tr := HomalgMatrix( "identity",  NrGenerators( sets_of_generators!.( pres_a ) ), HomalgRing( M ) );
+        tr := HomalgIdentityMatrix(  NrGenerators( sets_of_generators!.( pres_a ) ), HomalgRing( M ) );
         
         sign := SignInt( pres_b - pres_a );
         
@@ -612,7 +612,7 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
+    id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
     
     ## no need to distinguish between left and right modules here:
     M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
@@ -699,7 +699,7 @@ InstallMethod( AddANewPresentation,
     ## adjust the list of positions:
     lpos[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
-    id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
+    id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
     
     ## no need to distinguish between left and right modules here:
     M!.TransitionMatrices.( String( [ d, l+1 ] ) ) := id;
@@ -946,7 +946,7 @@ InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (Bet
             lower := fail;
         fi;
         
-        id := HomalgMatrix( "identity", NrGenerators( M ), HomalgRing( M ) );
+        id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
         
         if IsLeftModule( M ) then
             rel := CertainColumns( rel, bl );
@@ -1121,7 +1121,7 @@ InstallMethod( Presentation,
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgMatrix( "identity", NrGenerators( rel ), R ), R );
+                        HomalgIdentityMatrix( NrGenerators( rel ), R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
@@ -1215,7 +1215,7 @@ InstallMethod( Presentation,
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgMatrix( "identity", NrGenerators( rel ), R ), R );
+                        HomalgIdentityMatrix( NrGenerators( rel ), R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel );
@@ -1309,10 +1309,10 @@ InstallMethod( LeftPresentation,
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgMatrix( "identity", Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
+                        HomalgIdentityMatrix( Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgMatrix( "identity", 1, R ), R );
+                        HomalgIdentityMatrix( 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -1407,10 +1407,10 @@ InstallMethod( RightPresentation,
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgMatrix( "identity", Length( rel ), R ), R ); ## FIXME: Length( rel )
+                        HomalgIdentityMatrix( Length( rel ), R ), R ); ## FIXME: Length( rel )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgMatrix( "identity", 1, R ), R );
+                        HomalgIdentityMatrix( 1, R ), R );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel, R );
@@ -1495,7 +1495,7 @@ InstallMethod( HomalgFreeLeftModule,
         
   function( rank, ring )
     
-    return LeftPresentation( HomalgMatrix( "zero", 0, rank, ring ) );
+    return LeftPresentation( HomalgZeroMatrix( 0, rank, ring ) );
     
 end );
 
@@ -1506,7 +1506,7 @@ InstallMethod( HomalgFreeRightModule,
         
   function( rank, ring )
     
-    return RightPresentation( HomalgMatrix( "zero", rank, 0, ring ) );
+    return RightPresentation( HomalgZeroMatrix( rank, 0, ring ) );
     
 end );
 

@@ -1,7 +1,7 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_RINGS.color_display := true;
-Qx := HomalgFieldOfRationalsInMAGMA() * "x";
+Qx := HomalgFieldOfRationalsInSage( ) * "x";
 Display( Qx );
 wmat := HomalgMatrix( " \
 [ [1, 2*x+x^2, 2*x+3*x^3-3*x^2-x^4, -1+x^3+2*x^4-2*x^2+x-x^5], \

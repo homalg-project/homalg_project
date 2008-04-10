@@ -46,7 +46,7 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     if HasRightHandSide( M ) then
         side := RightHandSide( M );
-        zz := HomalgMatrix( "zero", NrRows( rel ), NrColumns( side ), R );
+        zz := HomalgZeroMatrix( NrRows( rel ), NrColumns( side ), R );
         SetRightHandSide( Mrel, UnionOfRows( side, zz ) );
     fi;
     
@@ -62,11 +62,11 @@ InstallMethod( BasisOfRows,
   function( M )
     local C, rhs;
     
-    C := HomalgMatrix( "zero", 0, NrColumns( M ), HomalgRing( M ) );
+    C := HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
     
     if HasRightHandSide( M ) then
         rhs := RightHandSide( M );
-        SetRightHandSide( C, HomalgMatrix( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
+        SetRightHandSide( C, HomalgZeroMatrix( 0, NrColumns( rhs ), HomalgRing( M ) ) );
         SetCompatibilityConditions( C, rhs );
     fi;
     
@@ -82,12 +82,12 @@ InstallMethod( BasisOfRows,
   function( M )
     local C, rhs;
     
-    C := HomalgMatrix( "identity", NrRows( M ), HomalgRing( M ) );
+    C := HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
     
     if HasRightHandSide( M ) then
         rhs := RightHandSide( M );
         SetRightHandSide( C, rhs );
-        SetCompatibilityConditions( C, HomalgMatrix( "zero", 0, NrColumns( rhs ), HomalgRing( M ) ) );
+        SetCompatibilityConditions( C, HomalgZeroMatrix( 0, NrColumns( rhs ), HomalgRing( M ) ) );
     fi;
     
     return C;
@@ -126,7 +126,7 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     if HasBottomSide( M ) then
         side := BottomSide( M );
-        zz := HomalgMatrix( "zero", NrRows( side ), NrColumns( rel ), R );
+        zz := HomalgZeroMatrix( NrRows( side ), NrColumns( rel ), R );
         SetBottomSide( Mrel, UnionOfColumns( side, zz ) );
     fi;
     
@@ -142,11 +142,11 @@ InstallMethod( BasisOfColumns,
   function( M )
     local C, bts;
     
-    C := HomalgMatrix( "zero", NrRows( M ), 0, HomalgRing( M ) );
+    C := HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
     
     if HasBottomSide( M ) then
         bts := BottomSide( M );
-        SetBottomSide( C, HomalgMatrix( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
+        SetBottomSide( C, HomalgZeroMatrix( NrRows( bts ), 0, HomalgRing( M ) ) );
         SetCompatibilityConditions( C, bts );
     fi;
     
@@ -162,12 +162,12 @@ InstallMethod( BasisOfColumns,
   function( M )
     local C, bts;
     
-    C := HomalgMatrix( "identity", NrColumns( M ), HomalgRing( M ) );
+    C := HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
     
     if HasBottomSide( M ) then
         bts := BottomSide( M );
         SetBottomSide( C, bts );
-        SetCompatibilityConditions( C, HomalgMatrix( "zero", NrRows( bts ), 0, HomalgRing( M ) ) );
+        SetCompatibilityConditions( C, HomalgZeroMatrix( NrRows( bts ), 0, HomalgRing( M ) ) );
     fi;
     
     return C;
@@ -347,11 +347,11 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     #=====# begin of the core procedure #=====#
     
     ## CA * A = IA
-    CA := HomalgMatrix( "void", R );
+    CA := HomalgVoidMatrix( R );
     IA := BasisOfRowsCoeff( A, CA );
     
     ## NF = B + CB * IA
-    CB := HomalgMatrix( "void", R );
+    CB := HomalgVoidMatrix( R );
     NF := DecideZeroRowsEffectively( B, IA, CB );
     
     ## NF <> 0
@@ -383,11 +383,11 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     #=====# begin of the core procedure #=====#
     
     ## A * CA = IA
-    CA := HomalgMatrix( "void", R );
+    CA := HomalgVoidMatrix( R );
     IA := BasisOfColumnsCoeff( A, CA );
     
     ## NF = B + IA * CB
-    CB := HomalgMatrix( "void", R );
+    CB := HomalgVoidMatrix( R );
     NF := DecideZeroColumnsEffectively( B, IA, CB );
     
     ## NF <> 0
@@ -430,7 +430,7 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     
     #=====# begin of the core procedure #=====#
     
-    Id := HomalgMatrix( "identity", NrColumns( RI ), R );
+    Id := HomalgIdentityMatrix( NrColumns( RI ), R );
     
     left_inv := RightDivide( Id, RI );
     
@@ -478,7 +478,7 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     
     #=====# begin of the core procedure #=====#
     
-    Id := HomalgMatrix( "identity", NrRows( LI ), R );
+    Id := HomalgIdentityMatrix( NrRows( LI ), R );
     
     right_inv := LeftDivide( LI, Id );
     
@@ -637,11 +637,11 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     finished := false;
     
     if compute_U or compute_UI then
-        U := HomalgMatrix( "void", R );
+        U := HomalgVoidMatrix( R );
     fi;
         
     if compute_V or compute_VI then
-        V := HomalgMatrix( "void", R );
+        V := HomalgVoidMatrix( R );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -649,19 +649,19 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     if IsZeroMatrix( M ) then
         
         if compute_U then
-            U := HomalgMatrix( "identity", NrRows( M ), R );
+            U := HomalgIdentityMatrix( NrRows( M ), R );
         fi;
         
         if compute_V then
-            V := HomalgMatrix( "identity", NrColumns( M ), R );
+            V := HomalgIdentityMatrix( NrColumns( M ), R );
         fi;
         
         if compute_UI then
-            UI := HomalgMatrix( "identity", NrRows( M ), R );
+            UI := HomalgIdentityMatrix( NrRows( M ), R );
         fi;
         
         if compute_VI then
-            VI := HomalgMatrix( "identity", NrColumns( M ), R );
+            VI := HomalgIdentityMatrix( NrColumns( M ), R );
         fi;
         
         finished := true;
@@ -711,7 +711,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
             VI := LeftInverse( V ); ## this is indeed a LeftInverse
         fi;
         
-        #CM := HomalgMatrix( "void", R );
+        #CM := HomalgVoidMatrix( R );
         #
         #A := BasisOfRowsCoeff( M, CM );
         #

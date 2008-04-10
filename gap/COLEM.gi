@@ -1543,7 +1543,7 @@ InstallMethod( \*,
         
         Info( InfoCOLEM, 2, COLEM.color, "COLEM: (its LeftInverse) * IsHomalgMatrix", "\033[0m" );
         
-        return HomalgMatrix( "identity", NrColumns( B ), HomalgRing( A ) );
+        return HomalgIdentityMatrix( NrColumns( B ), HomalgRing( A ) );
         
     fi;
     
@@ -1562,7 +1562,7 @@ InstallMethod( \*,
         
         Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * (its RightInverse)", "\033[0m" );
         
-        return HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) );
+        return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
         
     fi;
     
@@ -1589,7 +1589,7 @@ InstallMethod( \*,
             
             Info( InfoCOLEM, 2, COLEM.color, "COLEM: (its LeftInverse) * CertainColumns( IsHomalgMatrix )", "\033[0m" );
             
-            return HomalgMatrix( "identity", NrColumns( B ), HomalgRing( A ) );
+            return HomalgIdentityMatrix( NrColumns( B ), HomalgRing( A ) );
             
         fi;
         
@@ -1619,7 +1619,7 @@ InstallMethod( \*,
         
             Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( IsHomalgMatrix ) * (its RightInverse)", "\033[0m" );
             
-            return HomalgMatrix( "identity", NrRows( A ), HomalgRing( A ) );
+            return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
             
         fi;
         

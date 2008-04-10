@@ -99,6 +99,43 @@ InstallImmediateMethod( IsZeroMorphism,
     
 end );
 
+##
+InstallImmediateMethod( IsZeroMorphism,
+        IsMorphismOfFinitelyGeneratedModulesRep, 0,
+        
+  function( phi )
+    
+    if HasIsZeroMatrix( MatrixOfMorphism( phi ) ) and IsZeroMatrix( MatrixOfMorphism( phi ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+## FIXME: when do immediate methods apply? immediately after objectifying?
+InstallImmediateMethod( IsZeroMorphism,
+        IsMorphismOfFinitelyGeneratedModulesRep, 0,
+        
+  function( phi )
+    local index_pair, matrix;
+    
+    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    
+    if IsBound( phi!.reduced_matrices.( String( index_pair ) ) ) then
+        
+        matrix := phi!.reduced_matrices.( String( index_pair ) );
+        
+        if HasIsZeroMatrix( matrix ) then
+            return IsZeroMatrix( matrix );
+        fi;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # immediate methods for attributes:
@@ -114,11 +151,11 @@ end );
 ##
 InstallMethod( IsZeroMorphism,
         "for homalg morphisms",
-        [ IsHomalgMorphism ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    IsZeroMatrix( MatrixOfMorphism( phi ) );
+    IsZeroMatrix( DecideZero( phi ) );
     
 end );
 
@@ -158,6 +195,25 @@ InstallMethod( TargetOfMorphism,
   function( phi )
     
     return phi!.target;
+    
+end );
+
+##
+InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local pos_s, pos_t;
+    
+    pos_s := PositionOfTheDefaultSetOfRelations( SourceOfMorphism( phi ) );
+    pos_t := PositionOfTheDefaultSetOfRelations( TargetOfMorphism( phi ) );
+    
+    if IsHomalgMorphismOfLeftModules( phi ) then
+        return [ pos_s, pos_t ];
+    else
+        return [ pos_t, pos_s ];
+    fi;
     
 end );
 
@@ -205,8 +261,12 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
         Add( l, index_pair );
         
     fi;
-        
-    return phi!.matrices.( String( index_pair ) );
+    
+    if IsBound( phi!.reduced_matrices.( String( index_pair ) ) ) then
+        return phi!.reduced_matrices.( String( index_pair ) );
+    else
+        return phi!.matrices.( String( index_pair ) );
+    fi;
     
 end );
 
@@ -247,7 +307,7 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable morphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
     
@@ -255,14 +315,14 @@ InstallMethod( \=,
         return false;
     fi;
     
-    return MatrixOfMorphism( phi1 ) = MatrixOfMorphism( phi2 );
+    return MatrixOfMorphism( phi1 ) = MatrixOfMorphism( phi2 ); ## FIXME: compare any already evaluated matrices
     
 end );
 
 ##
 InstallMethod( ZeroMutable,
         "for homalg morphisms",
-        [ IsHomalgMorphism ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -273,7 +333,7 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg morphisms",
-        [ IsRingElement, IsHomalgMorphism ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
+        [ IsRingElement, IsMorphismOfFinitelyGeneratedModulesRep ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
         
   function( a, phi )
     
@@ -284,7 +344,7 @@ end );
 ##
 InstallMethod( \+,
         "of two homalg morphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
     
@@ -299,7 +359,7 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg morphisms",
-        [ IsHomalgMorphism ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -321,7 +381,7 @@ end );
 ##
 InstallMethod( \-,
         "of two homalg morphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
     
@@ -336,12 +396,13 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg morphisms",
-        [ IsHomalgMorphismOfLeftModules, IsHomalgMorphismOfLeftModules ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
         
   function( phi1, phi2 )
     
     if not AreComposableMorphisms( phi1, phi2 ) then
-        return false;
+        Error( "the two morphisms are not composable, since the target of the left one is not \033[1midentical\033[0m to the source of right one\n" );
     fi;
     
     return HomalgMorphism( MatrixOfMorphism( phi1 ) * MatrixOfMorphism( phi2 ), SourceOfMorphism( phi1 ), TargetOfMorphism( phi2 ) );
@@ -351,15 +412,55 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg morphisms",
-        [ IsHomalgMorphismOfRightModules, IsHomalgMorphismOfRightModules ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
         
   function( phi2, phi1 )
     
     if not AreComposableMorphisms( phi2, phi1 ) then
-        return false;
+        Error( "the two morphisms are not composable, since the target of the right one is not \033[1midentical\033[0m to the target of the left one\n" );
     fi;
     
     return HomalgMorphism( MatrixOfMorphism( phi2 ) * MatrixOfMorphism( phi1 ), SourceOfMorphism( phi1 ), TargetOfMorphism( phi2 ) );
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( phi, rel )
+    
+    return DecideZero( MatrixOfMorphism( phi ) , rel );
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local pos_t, rel, index_pair, matrix, reduced;
+    
+    pos_t := PositionOfTheDefaultSetOfRelations( TargetOfMorphism( phi ) );
+    
+    rel := RelationsOfModule( TargetOfMorphism( phi ), pos_t );
+    
+    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    
+    matrix := MatrixOfMorphism( phi );
+    
+    reduced := DecideZero( matrix, rel );
+    
+    if reduced = matrix then
+        reduced := matrix;
+    fi;
+    
+    phi!.reduced_matrices.( String( index_pair ) ) := reduced;
+    
+    return reduced;
     
 end );
 
@@ -371,8 +472,8 @@ end );
 
 InstallGlobalFunction( HomalgMorphism,
   function( arg )
-    local nargs, source, pos_s, target, pos_t, R, type, matrix, matrices, morphism,
-          nr_rows, nr_columns, index_pair;
+    local nargs, source, pos_s, target, pos_t, R, type, matrix, matrices, reduced_matrices,
+          nr_rows, nr_columns, index_pair, morphism;
     
     nargs := Length( arg );
     
@@ -412,10 +513,13 @@ InstallGlobalFunction( HomalgMorphism,
         
         matrices := rec( );
         
+        reduced_matrices := rec( );
+        
         morphism := rec( 
                          source := source,
                          target := target,
                          matrices := matrices,
+                         reduced_matrices := reduced_matrices,
                          index_pairs_of_presentations := [ [ 1, 1 ] ]);
     
         matrices.( String( [ 1, 1 ] ) ) := matrix;
@@ -476,18 +580,23 @@ InstallGlobalFunction( HomalgMorphism,
     
     matrices := rec( );
     
+    reduced_matrices := rec( );
+    
     morphism := rec( 
                      source := source,
                      target := target,
                      matrices := matrices,
+                     reduced_matrices := reduced_matrices,
                      index_pairs_of_presentations := [ index_pair ]);
     
     if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
     ## the zero morphism:
         
-        matrix := HomalgMatrix( "zero", nr_rows, nr_columns, R );
+        matrix := HomalgZeroMatrix( nr_rows, nr_columns, R );
         
         matrices.( String( index_pair ) ) := matrix;
+        
+        reduced_matrices.( String( index_pair ) ) := matrix;
         
         ## Objectify:
         ObjectifyWithAttributes(
@@ -501,7 +610,7 @@ InstallGlobalFunction( HomalgMorphism,
             Error( "for a matrix of a morphism to be the identity matrix the number of generators of the source and target module must coincide\n" );
         fi;
         
-        matrix := HomalgMatrix( "identity", nr_rows, R );
+        matrix := HomalgIdentityMatrix( nr_rows, R );
         
         matrices.( String( index_pair ) ) := matrix;
         

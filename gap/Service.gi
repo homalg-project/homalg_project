@@ -90,7 +90,7 @@ InstallMethod( TriangularBasisOfColumns,
         return RP!.TriangularBasisOfColumns( M, V );
     fi;
     
-    U := HomalgMatrix( "void", R );
+    U := HomalgVoidMatrix( R );
     
     T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
     
@@ -182,7 +182,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     #=====# begin of the core procedure #=====#
     
     if HasRightHandSide( M ) then
-        U := HomalgMatrix( "void", R );
+        U := HomalgVoidMatrix( R );
         
         B := TriangularBasisOfRows( M, U ); t := HomalgTotalRuntimes( t );
     else
@@ -192,7 +192,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     rank := RowRankOfMatrix( B );
     
     if rank = 0 then
-        B := HomalgMatrix( "zero", 0, NrColumns( B ), R);
+        B := HomalgZeroMatrix( 0, NrColumns( B ), R);
     else
         B := CertainRows( B, [ 1 .. rank ] );
         
@@ -255,7 +255,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     #=====# begin of the core procedure #=====#
     
     if HasBottomSide( M ) then
-        V := HomalgMatrix( "void", R );
+        V := HomalgVoidMatrix( R );
         
         B := TriangularBasisOfColumns( M, V ); t := HomalgTotalRuntimes( t );
     else
@@ -265,7 +265,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     rank := ColumnRankOfMatrix( B );
     
     if rank = 0 then
-        B := HomalgMatrix( "zero", NrRows( B ), 0, R);
+        B := HomalgZeroMatrix( NrRows( B ), 0, R);
     else
         B := CertainColumns( B, [1..rank] );
         
@@ -359,7 +359,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     #=====# begin of the core procedure #=====#
     
-    U := HomalgMatrix( "void", R );
+    U := HomalgVoidMatrix( R );
     
     ibas := BasisOfRowsCoeff( Involution( M ), U );
     
@@ -406,15 +406,15 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     if HasIsIdentityMatrix( L ) and IsIdentityMatrix( L ) then ## save as much new definitions as possible
         id := L;
     else
-        id := HomalgMatrix( "identity", l, R );
+        id := HomalgIdentityMatrix( l, R );
     fi;
     
-    zz := HomalgMatrix( "zero", n, l, R );
+    zz := HomalgZeroMatrix( n, l, R );
     
     M := UnionOfRows( UnionOfColumns( id, L ), UnionOfColumns( zz, B ) );
     
     if HasRightHandSide( B ) then
-        U := HomalgMatrix( "void", R );
+        U := HomalgVoidMatrix( R );
         
         M := TriangularBasisOfRows( M, U );
     else
@@ -499,15 +499,15 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     if HasIsIdentityMatrix( L ) and IsIdentityMatrix( L ) then ## save as much new definitions as possible
         id := L;
     else
-        id := HomalgMatrix( "identity", l, R );
+        id := HomalgIdentityMatrix( l, R );
     fi;
     
-    zz := HomalgMatrix( "zero", l, n, R );
+    zz := HomalgZeroMatrix( l, n, R );
     
     M := UnionOfColumns( UnionOfRows( id, L ), UnionOfRows( zz, B ) );
     
     if HasBottomSide( B ) then
-        U := HomalgMatrix( "void", R );
+        U := HomalgVoidMatrix( R );
         
         M := TriangularBasisOfColumns( M, U );
     else
@@ -584,7 +584,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     #=====# begin of the core procedure #=====#
     
-    zz := HomalgMatrix( "zero", NrRows( A ), NrRows( B ), R );
+    zz := HomalgZeroMatrix( NrRows( A ), NrRows( B ), R );
     
     A_zz := AddRhs( A, zz );
     
@@ -627,7 +627,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     #=====# begin of the core procedure #=====#
     
-    U := HomalgMatrix( "void", R );
+    U := HomalgVoidMatrix( R );
     
     ired := DecideZeroRowsEffectively( Involution( A ), Involution( B ), U );
     
@@ -703,9 +703,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     #=====# begin of the core procedure #=====#
     
-    id := HomalgMatrix( "identity", NrRows( M1 ), R );
+    id := HomalgIdentityMatrix( NrRows( M1 ), R );
     
-    zz := HomalgMatrix( "zero", NrRows( M2 ), NrRows( M1 ), R );
+    zz := HomalgZeroMatrix( NrRows( M2 ), NrRows( M1 ), R );
     
     L := UnionOfRows( M1, M2 );
     

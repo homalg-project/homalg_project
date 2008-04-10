@@ -405,7 +405,7 @@ InstallMethod( Involution,
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: Involution( IsZeroMatrix )", "\033[0m" );
     
-    return HomalgMatrix( "zero", NrColumns( M ), NrRows( M ), HomalgRing( M ) );
+    return HomalgZeroMatrix( NrColumns( M ), NrRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -522,7 +522,7 @@ InstallMethod( UnionOfRows,
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfRows( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
     
-    return HomalgMatrix( "zero", NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
+    return HomalgZeroMatrix( NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
     
 end );
 
@@ -580,7 +580,7 @@ InstallMethod( UnionOfColumns,
     
     Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: UnionOfColumns( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
     
-    return HomalgMatrix( "zero", NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
+    return HomalgZeroMatrix( NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
     
 end );
 
@@ -792,7 +792,7 @@ InstallMethod( \*,
     if NrRows( B ) = NrColumns( B ) then
         return A;
     else
-        return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), HomalgRing( A ) );
+        return HomalgZeroMatrix( NrRows( A ), NrColumns( B ), HomalgRing( A ) );
     fi;
     
 end );
@@ -809,7 +809,7 @@ InstallMethod( \*,
     if NrRows( A ) = NrColumns( A ) then
         return B;
     else
-        return HomalgMatrix( "zero", NrRows( A ), NrColumns( B ), HomalgRing( B ) );
+        return HomalgZeroMatrix( NrRows( A ), NrColumns( B ), HomalgRing( B ) );
     fi;
     
 end );
@@ -901,7 +901,7 @@ InstallMethod( LeftInverse,
         
         Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: LeftInverse( ? x 0 -- IsZeroMatrix )", "\033[0m" );
         
-        return HomalgMatrix( "zero", 0, NrRows( M ), HomalgRing( M ) );
+        return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
         
     else
         Error( "a zero matrix with positive number of columns has no left inverse!" );
@@ -970,7 +970,7 @@ InstallMethod( RightInverse,
         
         Info( InfoLIMAT, 2, LIMAT.color, "LIMAT: RightInverse( 0 x ? -- IsZeroMatrix )", "\033[0m" );
         
-        return HomalgMatrix( "zero", NrColumns( M ), 0, HomalgRing( M ) );
+        return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
         
     else
         Error( "a zero matrix with positive number of rows has no left inverse!" );

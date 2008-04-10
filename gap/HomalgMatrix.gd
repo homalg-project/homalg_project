@@ -211,6 +211,16 @@ DeclareSynonymAttr( "CompCond",
 
 DeclareGlobalFunction( "HomalgMatrix" );
 
+DeclareGlobalFunction( "HomalgZeroMatrix" );
+
+DeclareGlobalFunction( "HomalgIdentityMatrix" );
+
+DeclareGlobalFunction( "HomalgInitialMatrix" );
+
+DeclareGlobalFunction( "HomalgVoidMatrix" );
+
+DeclareGlobalFunction( "ConvertHomalgMatrix" );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

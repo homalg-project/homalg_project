@@ -372,7 +372,7 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
     
     #=====# begin of the core procedure #=====#
     
-    id := HomalgMatrix( "identity", NrGenerators( M ), R );
+    id := HomalgIdentityMatrix( NrGenerators( M ), R );
     
     if IsHomalgRelationsOfLeftModule( M ) then
         gen := HomalgGeneratorsForLeftModule( id, BasisOfModule( M ) );

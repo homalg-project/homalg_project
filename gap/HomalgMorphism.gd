@@ -82,6 +82,9 @@ DeclareOperation( "SourceOfMorphism",
 DeclareOperation( "TargetOfMorphism",
         [ IsHomalgMorphism ] );
 
+DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
+        [ IsHomalgMorphism ] );
+
 DeclareOperation( "MatrixOfMorphism",
         [ IsHomalgMorphism ] );
 
@@ -100,3 +103,8 @@ DeclareOperation( "RightInverse",
 DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement
 
+DeclareOperation( "DecideZero",
+        [ IsHomalgMorphism, IsHomalgRelations ] );
+
+DeclareOperation( "DecideZero",
+        [ IsHomalgMorphism ] );

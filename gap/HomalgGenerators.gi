@@ -251,7 +251,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
     
     if not IsBound( relations_of_hullmodule ) then
         relations_of_hullmodule :=
-          HomalgRelationsForLeftModule( HomalgMatrix( "zero", 0, NrRows( generators ), R ), R );
+          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NrRows( generators ), R ), R );
     fi;
     
     gen := rec( generators := generators,
@@ -308,7 +308,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
     
     if not IsBound( relations_of_hullmodule ) then
         relations_of_hullmodule :=
-          HomalgRelationsForLeftModule( HomalgMatrix( "zero", 0, NrRows( generators ), R ), R );
+          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NrRows( generators ), R ), R );
     fi;
     
     gen := rec( generators := generators,
