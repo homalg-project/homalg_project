@@ -18,6 +18,8 @@ ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gi" );
 
+ReadPackage( "RingsForHomalg", "gap/ConvertHomalgMatrix.gi" );
+
 ## all the supported external computer algebra systems
 ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gi" );
 ReadPackage( "RingsForHomalg", "gap/Singular.gi" );

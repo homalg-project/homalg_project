@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GAP.gi                    RingsForHomalg package         Mohamed Barakat
+##  GAPHomalg.gi              RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -95,23 +95,9 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
 end );
 
 ##
-InstallMethod( HomalgMatrixInExternalGAP,
+InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
-        
-  function( M, R )
-    local ext_obj;
-    
-    ext_obj := HomalgSendBlocking( [ "HomalgMatrix( ", String( Eval( M ) ), ", ", R, " )" ] );
-    
-    return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( HomalgMatrixInExternalGAP,
-        "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep ],
+        [ IsString, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
     local ext_obj;
@@ -133,13 +119,11 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local cas, stream, display_color;
+    local stream, display_color;
     
     stream := HomalgStream( o );
     
-    cas := stream.cas;
-    
-    if cas = "gap" then
+    if IsHomalgExternalRingInGAPRep( HomalgRing( o ) ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;

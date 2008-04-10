@@ -58,7 +58,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   N := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );
@@ -74,7 +74,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( HomalgSendBlocking( [ U, " := HomalgMatrix(\"void\",", R, ");; ", N, " := HomalgTable(", R, ")!.TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( HomalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", N, " := HomalgTable(", R, ")!.TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
                    else
                        ## compute N only:
                        rank_of_N := Int( HomalgSendBlocking( [ N, " := HomalgTable(", R, ")!.TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );

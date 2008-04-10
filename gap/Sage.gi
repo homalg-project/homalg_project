@@ -26,7 +26,7 @@ InstallValue( HOMALG_IO_Sage,
             CUT_END := 10,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
-            check_output := true,	## a Singular specific
+            check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
             prompt := "sage: ",
@@ -95,23 +95,9 @@ InstallGlobalFunction( RingForHomalgInSage,
 end );
 
 ##
-InstallMethod( HomalgMatrixInSage,
+InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
-        
-  function( M, R )
-    local ext_obj;
-    
-    ext_obj := HomalgSendBlocking( [ "matrix(", R, ",", String( Eval( M ) ), ")" ] );
-    
-    return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( HomalgMatrixInSage,
-        "for homalg matrices",
-        [ IsString, IsHomalgExternalRingRep ],
+        [ IsString, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
     local ext_obj;

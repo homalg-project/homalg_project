@@ -116,14 +116,14 @@ InstallGlobalFunction( RingForHomalgInSingular,
 end );
 
 ##
-InstallMethod( HomalgMatrixInSingular,
+InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
-        [ IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
-  function( r, c, M, R )
+  function( M, r, c, R )
     local ext_obj;
     
-    ext_obj := HomalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R);
+    ext_obj := HomalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -140,13 +140,11 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local cas, stream, display_color;
+    local stream, display_color;
     
     stream := HomalgStream( o );
     
-    cas := stream.cas;
-    
-    if cas = "singular" then
+    if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;

@@ -295,7 +295,7 @@ InstallGlobalFunction( HomalgSendBlocking,
             stream.warnings := stream.errors;
             stream.HomalgExternalWarningsCounter := stream.HomalgExternalWarningsCounter + 1;
         else
-            Error( "\033[1m", "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", stream.errors ,"\033[0m\n" );
+            Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[1m", stream.errors ,"\033[0m\n" );
         fi;
     fi;
     

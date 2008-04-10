@@ -25,7 +25,7 @@ InstallValue( HOMALG_RINGS,
 
 ####################################
 #
-# constructor functions:
+# constructor functions and methods:
 #
 ####################################
 
@@ -38,7 +38,18 @@ InstallGlobalFunction( RingForHomalg,
     
     properties := [ ];
     
-    ## COMPLETE ME
+    ## FIXME: COMPLETE ME
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep, IsString ],
+        
+  function( R, indets )
+    
+    return PolynomialRing( R, SplitString( indets, "," ) );
     
 end );
 

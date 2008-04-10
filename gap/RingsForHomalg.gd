@@ -26,3 +26,8 @@ DeclareGlobalVariable( "HOMALG_RINGS" );
 
 DeclareGlobalFunction( "RingForHomalg" );
 
+# basic operations:
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsString ] );
+
