@@ -17,7 +17,7 @@
 InstallMethod( CreateHomalgTable,
         "for the ring of integers in Sage",
         [ IsHomalgExternalRingObjectInSageRep
-          and IsIntegersForHomalg ],
+          and IsPrincipalIdealRing ],
         
   function( R )
     local RP, RP_BestBasis, command, RP_specific, component;
@@ -113,7 +113,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   N := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );

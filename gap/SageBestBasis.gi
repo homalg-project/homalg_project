@@ -61,7 +61,7 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                    
                    nargs := Length( arg );
                    
-                   S := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   S := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    SetIsDiagonalMatrix( S, true );
                    
                    if nargs > 1 then
@@ -72,7 +72,7 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                            SetNrColumns( U, NrRows( M ) );
                            SetIsInvertibleMatrix( U, true );
                        else
-                           U := HomalgMatrix( "void", R );
+                           U := HomalgVoidMatrix( R );
                        fi;
                        
                        # assign V:
@@ -82,7 +82,7 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                            SetNrColumns( V, NrColumns( M ) );
                            SetIsInvertibleMatrix( V, true );
                        else
-                           V := HomalgMatrix( "void", R );
+                           V := HomalgVoidMatrix( R );
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
