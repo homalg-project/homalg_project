@@ -26,6 +26,8 @@ DeclareGlobalVariable( "HOMALG_IO_Sage" );
 
 DeclareGlobalFunction( "RingForHomalgInSage" );
 
+DeclareGlobalFunction( "HomalgRingOfIntegersInSage" );
+
 # basic operations:
 
 DeclareOperation( "HomalgMatrixInSage",

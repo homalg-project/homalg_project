@@ -14,6 +14,36 @@
 #
 ####################################
 
+InstallValue( InitializeSageBestBasis,
+        
+        function( R )
+          local command;
+          command := Concatenation(
+
+            "def BestBasis_SUV( M ):\n",
+            "  S, U, V = M.dense_matrix().smith_form()\n",
+            "  InvertedRowList = range(M.nrows()-1,-1,-1)\n",
+            "  InvertedColumnList = range(M.ncols()-1,-1,-1)\n",
+            "  S = S.matrix_from_rows_and_columns(InvertedRowList, InvertedColumnList)\n",
+            "  U = U.matrix_from_rows( InvertedRowList )\n",
+            "  V = V.matrix_from_columns( InvertedColumnList )\n",
+            "  return S, U, V\n\n",
+            
+            "def BestBasis_S_only(M):\n",
+            "  elemdivlist=M.elementary_divisors()\n",
+            "  TempMat=matrix(ZZ,M.nrows(),M.ncols(),sparse=True)\n",
+            "  for i in range(len(elemdivlist)):\n",
+            "    TempMat[i,i]=elemdivlist[i]\n",
+            "  return TempMat\n\n"
+            
+          );
+            
+          HomalgSendBlocking( [ command ], "need_command", R );
+          
+        end
+);
+
+
 InstallValue( CommonHomalgTableForSageBestBasis,
         
         rec(
@@ -23,7 +53,7 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                
                BestBasis :=
                  function( arg )
-                   local M, R, nargs, S, rank_of_S, U, V;
+                   local M, R, nargs, S, U, V, rank_of_S;
                    
                    M := arg[1];
                    
@@ -31,52 +61,42 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                    
                    nargs := Length( arg );
                    
+                   S := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
+                   SetIsDiagonalMatrix( S, true );
+                   
                    if nargs > 1 then
+                       # assign U:
+                       if IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
+                           U := arg[2];
+                           SetNrRows( U, NrRows( M ) );
+                           SetNrColumns( U, NrRows( M ) );
+                           SetIsInvertibleMatrix( U, true );
+                       else
+                           U := HomalgMatrix( "void", R );
+                       fi;
+                       
+                       # assign V:
+                       if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
+                           V := arg[3];
+                           SetNrRows( V, NrColumns( M ) );
+                           SetNrColumns( V, NrColumns( M ) );
+                           SetIsInvertibleMatrix( V, true );
+                       else
+                           V := HomalgMatrix( "void", R );
+                       fi;
+                       
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       HomalgSendBlocking( [ "_S,_U,_V =", M, ".dense_matrix().smith_form()" ], "need_command" );
-                       HomalgSendBlocking( [ "left_matrix=matrix(ZZ,", NrRows( M ), ",sparse=True)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrRows( M ), "):\n  left_matrix[i,", NrRows( M ) - 1, "-i]=1\n\n" ], "need_command", R );
-                       HomalgSendBlocking( [ "right_matrix=matrix(ZZ,", NrColumns( M ), ",sparse=True)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(", NrColumns( M ), "):\n  right_matrix[i,", NrColumns( M ) - 1, "-i]=1\n\n" ], "need_command", R );
-                       rank_of_S := Int( HomalgSendBlocking( [ "_S.rank()" ], "need_output", R ) );
-                       S := HomalgSendBlocking( [ "left_matrix*_S.sparse_matrix()*right_matrix" ], R );
-                       U := HomalgSendBlocking( [ "left_matrix*_U.sparse_matrix()" ], R );
-                       if nargs > 2 then V := HomalgSendBlocking( [ "_V.sparse_matrix()*right_matrix" ], R ); fi;
+                       rank_of_S := Int( HomalgSendBlocking( [ S, U, V, "= BestBasis_SUV(", M, "); ", S, ".rank()" ], "need_output" ) );
                    else
                        ## compute S only:
-                       HomalgSendBlocking( [ "elemdivlist=", M, ".elementary_divisors()" ], "need_command" );
-                       HomalgSendBlocking( [ "TempMat=matrix(ZZ,", NrRows(M), ",", NrColumns(M), ",sparse=True)" ], "need_command", R );
-                       HomalgSendBlocking( [ "for i in range(len(elemdivlist)):\n  TempMat[i,i]=elemdivlist[i]\n\n" ], "need_command", R );
-                       rank_of_S := Int( HomalgSendBlocking( [ "TempMat.rank()" ], "need_output", R ) );
-                       S := HomalgSendBlocking( [ "TempMat" ], R );
+                       rank_of_S := Int( HomalgSendBlocking( [ S, " = BestBasis_S_only(", M, "); ", S, ".rank()" ], "need_output" ) );
                    fi;
                    
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
-                       SetEval( arg[2], U );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsInvertibleMatrix( arg[2], true );
-                   fi;
-                   
-                   # assign V:
-                   if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
-                       SetEval( arg[3], V );
-                       SetNrRows( arg[3], NrColumns( M ) );
-                       SetNrColumns( arg[3], NrColumns( M ) );
-                       SetIsInvertibleMatrix( arg[3], true );
-                   fi;
-                   
-                   S := HomalgMatrix( S, R );
-                   
-                   SetNrRows( S, NrRows( M ) );
-                   SetNrColumns( S, NrColumns( M ) );
                    SetRowRankOfMatrix( S, rank_of_S );
-                   SetIsDiagonalMatrix( S, true );
                    
                    return S;
                    
                  end
-               
+
         )
  );

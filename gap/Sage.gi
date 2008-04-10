@@ -78,11 +78,26 @@ BindGlobal( "HomalgExternalRingInSageType",
 ##
 InstallGlobalFunction( RingForHomalgInSage,
   function( arg )
-    local stream, ar, ext_obj;
+    local nargs, stream, o, ar, ext_obj;
     
-    stream := LaunchCAS( HOMALG_IO_Sage );
+    nargs := Length( arg );
     
-    ar := [ [ arg[1] ], HomalgExternalRingObjectInSageType, stream ];
+    if nargs > 1 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := HomalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if not IsBound( stream ) then
+        stream := LaunchCAS( HOMALG_IO_Sage );
+        o := 0;
+    else
+        o := 1;
+    fi;
+    
+    ar := [ arg[1], HomalgExternalRingObjectInSageType, stream ];
     
     if Length( arg ) > 1 then
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
@@ -91,6 +106,50 @@ InstallGlobalFunction( RingForHomalgInSage,
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
     return CreateHomalgRing( ext_obj, HomalgExternalRingInSageType );
+    
+end );
+
+InstallGlobalFunction( HomalgRingOfIntegersInSage,
+  function( arg )
+    local nargs, stream, m, c, R;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := HomalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
+        m := "";
+        c := 0;
+        R := "[ ]";
+    elif IsInt( arg[1] ) then
+        m := AbsInt( arg[1] );
+        c := m;
+    else
+        Error( "the first argument must be an integer\n" );
+    fi;
+    
+    if IsBound( stream ) then
+        R := RingForHomalgInSage( [ "ZZ" ], IsPrincipalIdealRing, stream ); #no characteristic yet!
+    else
+        R := RingForHomalgInSage( [ "ZZ" ], IsPrincipalIdealRing ); #no characteristic yet!
+    fi;
+    
+    SetCharacteristic( R, c );
+    
+    if IsPrime( c ) then
+        SetIsFieldForHomalg( R, true );
+    else
+        SetIsFieldForHomalg( R, false );
+        SetIsIntegersForHomalg( R, true );
+    fi;
+    
+    return R;
     
 end );
 

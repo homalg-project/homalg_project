@@ -14,35 +14,42 @@
 #
 ####################################
 
+InstallValue( InitializeSageTools,
+        
+        function( R )
+          local command;
+          command := Concatenation(
+
+            "def ZeroRows(C):\n",
+            "  def check_rows(i):\n",
+            "    return RowChecklist[i]\n",
+            "  RowChecklist=[C.row(x).is_zero() for x in range(C.nrows())]\n",
+            "  return filter(check_rows,range(C.nrows()))\n\n",
+            
+            "def ZeroColumns(C):\n",
+            "  def check_cols(i):\n",
+            "    return ColChecklist[i]\n",
+            "  ColChecklist=[C.column(x).is_zero() for x in range(C.ncols())]\n",
+            "  return filter(check_cols,range(C.ncols()))\n\n"
+            
+          );
+            
+          HomalgSendBlocking( [ command ], "need_command", R );
+
+        end
+);
+
 InstallValue( CommonHomalgTableForSageTools,
         
         rec(
                ZeroRows :=
                  function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "Checklist=[", C, ".row(x).is_zero() for x in range(", NrRows( C ), ")]" ], "need_command" );
-                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
-                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrRows( C ), "))" ], "need_output", R );
-                   list_string := StringToIntList( list_string );
-                   return list_string + 1;
-                   
+                   return StringToIntList( HomalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output" ) ) + 1;
                  end,
                
                ZeroColumns :=
                  function( C )
-                   local R, list_string;
-                   
-                   R := HomalgRing( C );
-                   
-                   HomalgSendBlocking( [ "Checklist=[", C, ".column(x).is_zero() for x in range(", NrColumns( C ), ")]" ], "need_command" );
-                   HomalgSendBlocking( [ "def check(i):\n  return Checklist[i]\n\n" ], "need_command", R );
-                   list_string := HomalgSendBlocking( [ "filter(check,range(", NrColumns( C ), "))" ], "need_output", R );
-                   list_string := StringToIntList( list_string );
-                   return list_string + 1;
-                   
+                   return StringToIntList( HomalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output" ) ) + 1;
                  end,
        
                ## Must only then be provided by the RingPackage in case the default
@@ -69,15 +76,14 @@ InstallValue( CommonHomalgTableForSageTools,
                    return HomalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ", sparse=True)" ] );
                    
                  end,
-             
+               
                IdentityMatrix :=
                  function( C )
                    local R;
                    
                    R := HomalgRing( C );
                    
-                   HomalgSendBlocking( [ "_id = identity_matrix(", R, NrRows( C ), ")" ], "need_command" );
-                   return HomalgSendBlocking( [ "_id.sparse_matrix()" ], R );
+                   return HomalgSendBlocking( [ "_id.sparse_matrix(); _id=0" ], [ "_id = identity_matrix(", R, NrRows( C ), ");" ], R );
                    
                  end,
                

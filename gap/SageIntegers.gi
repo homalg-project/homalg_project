@@ -17,14 +17,37 @@
 InstallMethod( CreateHomalgTable,
         "for the ring of integers in Sage",
         [ IsHomalgExternalRingObjectInSageRep
-          and IsIntegersForHomalg ],
+          and IsPrincipalIdealRing ],
         
-  function( arg )
-    local RP, RP_BestBasis, RP_specific, component;
+  function( R )
+    local RP, RP_BestBasis, command, RP_specific, component;
     
+    InitializeSageTools( R );
     RP := ShallowCopy( CommonHomalgTableForSageTools );
     
+    InitializeSageBestBasis( R );
     RP_BestBasis := ShallowCopy( CommonHomalgTableForSageBestBasis );
+    
+    command := Concatenation(
+            
+            "def ElementaryDivisors(M):\n",
+            "  return M.transpose().elementary_divisors()\n\n",
+            
+            "def TriangularBasisOfRows_NU(M):\n",
+            "  M = M.dense_matrix()\n",
+            "  N, U = M.echelon_form(transformation=True)\n",
+            "  N = N.sparse_matrix()\n",
+            "  U = U.sparse_matrix()\n",
+            "  return N, U\n\n",
+            
+            "def TriangularBasisOfRows_N_only(M):\n",
+            "  N = M.echelon_form()\n",
+            "  N = N.sparse_matrix()\n",
+            "  return N\n\n"
+            
+            );
+            
+    HomalgSendBlocking( [ command ], "need_command", R ); ## the last lines to initialize
     
     RP_specific :=
           rec(
@@ -36,23 +59,19 @@ InstallMethod( CreateHomalgTable,
                
                ElementaryDivisors :=
                  function( arg )
-                   local M, R;
+                   local M;
                    
                    M:=arg[1];
-		   
-		   R := HomalgRing( M );
-                   
-                   HomalgSendBlocking( [ "_tmp = ", M, ".transpose()" ], "need_command" );
-                   HomalgSendBlocking( [ "_tmp = _tmp.elementary_divisors()" ], "need_command", R );
-		   return HomalgSendBlocking( [ "_tmp" ], "need_output", R );
+
+                   return HomalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
                    
                  end,
                  
                ## Must be defined if other functions are not defined
-               
+                 
                TriangularBasisOfRows :=
                  function( arg )
-                   local M, R, nargs, N, rank_of_N, U;
+                   local M, R, nargs, N, U, rank_of_N;
                    
                    M := arg[1];
                    
@@ -60,36 +79,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 then
-                       ## compute N and U:
-                       HomalgSendBlocking( [ "_N,_U = ", M, ".dense_matrix().echelon_form(transformation=True)" ], "need_command" );
-                       HomalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
-                       rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N" ], R );
-                       U := HomalgSendBlocking( [ "_U.sparse_matrix()" ], R );
-                       HomalgSendBlocking( [ "_N=0; _U=0;" ], "need_command", R );
-                   else
-                       ## compute N only:
-                       HomalgSendBlocking( [ "_N = ", M, ".echelon_form()" ], "need_command" );
-                       HomalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
-                       rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N" ], R );
-                       HomalgSendBlocking( [ "_N=0;" ], "need_command", R );
-                   fi;
-                   
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
-                       SetEval( arg[2], U );
-                       SetNrRows( arg[2], NrRows( M ) );
-                       SetNrColumns( arg[2], NrRows( M ) );
-                       SetIsInvertibleMatrix( arg[2], true );
-                   fi;
-                   
-                   N := HomalgMatrix( N, R );
-                   
-                   SetNrRows( N, NrRows( M ) );
-                   SetNrColumns( N, NrColumns( M ) );
-                   SetRowRankOfMatrix( N, rank_of_N );
+                   N := HomalgMatrix( "void", NrRows( M ), NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );
@@ -97,10 +87,25 @@ InstallMethod( CreateHomalgTable,
                        SetIsUpperTriangularMatrix( N, true );
                    fi;
                    
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                       # assign U:
+                       U := arg[2];
+                       SetNrRows( U, NrRows( M ) );
+                       SetNrColumns( U, NrRows( M ) );
+                       SetIsInvertibleMatrix( U, true );
+                       
+                       ## compute N and U:
+                       rank_of_N := Int( HomalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output" ) );
+                   else
+                       ## compute N only:
+                       rank_of_N := Int( HomalgSendBlocking( [ N, " = TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output" ) );
+                   fi; 
+                   
+                   SetRowRankOfMatrix( N, rank_of_N );
+                   
                    return N;
                    
                  end
-               
           );
     
     for component in NamesOfComponents( RP_BestBasis ) do
