@@ -68,6 +68,14 @@ InstallValue( SimpleLogicalImplicationsForHomalgRings,
           [ IsEuclideanRing,
             "implies", IsLeftPrincipalIdealRing ],
           
+          ##
+          
+          [ IsIntegersForHomalg,
+            "implies", IsPrincipalIdealRing ],
+          
+          [ IsFieldForHomalg,
+            "implies", IsPrincipalIdealRing ],
+          
           ## Serre's theorem: IsRegular <=> IsGlobalDimensionFinite:
           
           [ IsRegular,
