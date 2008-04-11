@@ -63,13 +63,13 @@ DeclareRepresentation( "IsHomalgExternalRingInSingularRep",
 ####################################
 
 # a new type:
-BindGlobal( "HomalgExternalRingObjectInSingularType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingObjectInSingular",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingObjectInSingularRep ) );
 
 # a new type:
-BindGlobal( "HomalgExternalRingInSingularType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInSingular",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInSingularRep ) );
 
 ####################################
@@ -103,7 +103,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
         o := 1;
     fi;
     
-    ar := [ [ arg[1] ], [ "ring" ], HomalgExternalRingObjectInSingularType, stream ];
+    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -111,7 +111,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInSingularType );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
 end );
 

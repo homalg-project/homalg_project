@@ -29,9 +29,3 @@ DeclareGlobalFunction( "RingForHomalgInSingular" );
 
 # basic operations:
 
-DeclareOperation( "HomalgMatrixInSingular",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "HomalgMatrixInSingular",
-        [ IsInt, IsInt, IsString, IsHomalgRing ] );
-

@@ -58,13 +58,13 @@ DeclareRepresentation( "IsHomalgExternalRingInGAPRep",
 ####################################
 
 # a new type:
-BindGlobal( "HomalgExternalRingObjectInGAPType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingObjectInGAP",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingObjectInGAPRep ) );
 
 # a new type:
-BindGlobal( "HomalgExternalRingInGAPType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInGAP",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInGAPRep ) );
 
 ####################################
@@ -82,7 +82,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     HomalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
     
-    ar := [ [ "CreateHomalgRing( ", arg[1], ")" ], HomalgExternalRingObjectInGAPType, stream ];
+    ar := [ [ "CreateHomalgRing( ", arg[1], ")" ], TheTypeHomalgExternalRingObjectInGAP, stream ];
     
     if Length( arg ) > 1 then
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
@@ -90,7 +90,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInGAPType );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInGAP );
     
 end );
 

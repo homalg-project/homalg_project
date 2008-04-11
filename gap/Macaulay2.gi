@@ -57,12 +57,12 @@ DeclareRepresentation( "IsHomalgExternalRingInMacaulay2Rep",
 ####################################
 
 # a new type:
-BindGlobal( "HomalgExternalRingObjectInMacaulay2Type",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingObjectInMacaulay2",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingObjectInMacaulay2Rep ) );
 
 # a new type:
-BindGlobal( "HomalgExternalRingInMacaulay2Type",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMacaulay2",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMacaulay2Rep ) );
 

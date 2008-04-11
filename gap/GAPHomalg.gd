@@ -28,9 +28,3 @@ DeclareGlobalFunction( "RingForHomalgInExternalGAP" );
 
 # basic operations:
 
-DeclareOperation( "HomalgMatrixInExternalGAP",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "HomalgMatrixInExternalGAP",
-        [ IsString, IsHomalgRing ] );
-

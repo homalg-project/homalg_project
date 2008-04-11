@@ -40,9 +40,3 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInMaple" );
 
 # basic operations:
 
-DeclareOperation( "HomalgMatrixInMaple",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "HomalgMatrixInMaple",
-        [ IsString, IsHomalgRing ] );
-

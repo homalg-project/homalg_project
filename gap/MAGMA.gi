@@ -58,13 +58,13 @@ DeclareRepresentation( "IsHomalgExternalRingInMAGMARep",
 ####################################
 
 # a new type:
-BindGlobal( "HomalgExternalRingObjectInMAGMAType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingObjectInMAGMA",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingObjectInMAGMARep ) );
 
 # a new type:
-BindGlobal( "HomalgExternalRingInMAGMAType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMAGMA",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMAGMARep ) );
 
 ####################################
@@ -95,7 +95,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
         o := 1;
     fi;
     
-    ar := [ arg[1], HomalgExternalRingObjectInMAGMAType, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream ];
     
     if Length( arg ) > 1 then
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
@@ -103,7 +103,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInMAGMAType );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
 end );
 
@@ -207,9 +207,9 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], HomalgExternalRingObjectInMAGMAType, properties, "break_lists" );
+    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists" );
     
-    S := CreateHomalgRing( ext_obj, HomalgExternalRingInMAGMAType );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
     var := List( var, a -> HomalgExternalRingElement( a, "MAGMA" ) );
     

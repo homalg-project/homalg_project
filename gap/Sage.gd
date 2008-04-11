@@ -32,9 +32,3 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInSage" );
 
 # basic operations:
 
-DeclareOperation( "HomalgMatrixInSage",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "HomalgMatrixInSage",
-        [ IsString, IsHomalgRing ] );
-

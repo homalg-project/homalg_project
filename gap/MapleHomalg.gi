@@ -83,29 +83,29 @@ DeclareRepresentation( "IsHomalgExternalRingInMapleUsingOreModulesRep",
 ####################################
 
 # a new type:
-BindGlobal( "HomalgExternalRingObjectInMapleType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingObjectInMaple",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingObjectInMapleRep ) );
 
 # five new types:
-BindGlobal( "HomalgExternalRingInMapleUsingPIRType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMapleUsingPIR",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMapleUsingPIRRep ) );
 
-BindGlobal( "HomalgExternalRingInMapleUsingInvolutiveType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMapleUsingInvolutive",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMapleUsingInvolutiveRep ) );
 
-BindGlobal( "HomalgExternalRingInMapleUsingJanetType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMapleUsingJanet",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMapleUsingJanetRep ) );
 
-BindGlobal( "HomalgExternalRingInMapleUsingJanetOreType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMapleUsingJanetOre",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMapleUsingJanetOreRep ) );
 
-BindGlobal( "HomalgExternalRingInMapleUsingOreModulesType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRingInMapleUsingOreModules",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInMapleUsingOreModulesRep ) );
 
 ####################################
@@ -140,7 +140,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     HomalgSendBlocking( [ "`homalg/homalg_options`(", table, ")" ], "need_command" );
     
-    ar := [ [ arg[1], ",", table ], HomalgExternalRingObjectInMapleType, IsCommutative, IsPrincipalIdealRing, stream ];
+    ar := [ [ arg[1], ",", table ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, IsPrincipalIdealRing, stream ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -148,7 +148,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInMapleUsingPIRType, IsCommutative, IsPrincipalIdealRing );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingPIR, IsCommutative, IsPrincipalIdealRing );
     
 end );
 
@@ -184,7 +184,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
     
-    ar := [ [ var, ",", table ], HomalgExternalRingObjectInMapleType, IsCommutative, stream ];
+    ar := [ [ var, ",", table ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, stream ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -192,7 +192,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInMapleUsingInvolutiveType, IsCommutative );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingInvolutive, IsCommutative );
     
 end );
 
@@ -228,7 +228,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
     
-    ar := [ [ var, ",", table ], HomalgExternalRingObjectInMapleType, IsCommutative, stream ];
+    ar := [ [ var, ",", table ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, stream ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -236,7 +236,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInMapleUsingJanetType );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingJanet );
     
 end );
 
@@ -266,7 +266,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     HomalgSendBlocking( [ "`homalg/homalg_options`(", table, ")" ], "need_command" );
     
-    ar := [ [ arg[1], ",", table ], HomalgExternalRingObjectInMapleType, stream ];
+    ar := [ [ arg[1], ",", table ], TheTypeHomalgExternalRingObjectInMaple, stream ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -274,7 +274,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInMapleUsingJanetOreType );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingJanetOre );
     
 end );
 
@@ -304,7 +304,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     HomalgSendBlocking( [ "`homalg/homalg_options`(", table, ")" ], "need_command" );
     
-    ar := [ [ arg[1], ",", table ], HomalgExternalRingObjectInMapleType, stream ];
+    ar := [ [ arg[1], ",", table ], TheTypeHomalgExternalRingObjectInMaple, stream ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -312,7 +312,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     ext_obj := CallFuncList( HomalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, HomalgExternalRingInMapleUsingOreModulesType );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingOreModules );
     
 end );
 

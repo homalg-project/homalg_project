@@ -129,7 +129,7 @@ InstallMethod( CreateHomalgTable,
         RP.(component) := RP_specific.(component);
     od;
     
-    Objectify( HomalgTableType, RP );
+    Objectify( TheTypeHomalgTable, RP );
     
     return RP;
     
