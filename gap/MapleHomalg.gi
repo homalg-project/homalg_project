@@ -445,17 +445,6 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( \*,
-        "for homalg rings",
-        [ IsHomalgExternalRingInMapleRep, IsString ],
-        
-  function( R, indets )
-    
-    return PolynomialRing( R, SplitString( indets, "," ) );
-    
-end );
-
-##
 InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
         [ IsString, IsHomalgExternalRingInMapleRep ],
