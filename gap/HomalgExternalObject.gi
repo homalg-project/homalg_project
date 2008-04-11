@@ -31,17 +31,17 @@ DeclareRepresentation( "IsHomalgExternalObjectWithIOStreamRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgExternalObjectFamily",
-        NewFamily( "HomalgExternalObjectFamily" ) );
+BindGlobal( "TheFamilyOfHomalgExternalObjects",
+        NewFamily( "TheFamilyOfHomalgExternalObjects" ) );
 
 # a new type:
-BindGlobal( "HomalgExternalObjectType",
-        NewType( HomalgExternalObjectFamily,
+BindGlobal( "TheTypeHomalgExternalObject",
+        NewType( TheFamilyOfHomalgExternalObjects,
                 IsHomalgExternalObjectRep ) );
 
 # a new type:
-BindGlobal( "HomalgExternalObjectWithIOStreamType",
-        NewType( HomalgExternalObjectFamily,
+BindGlobal( "TheTypeHomalgExternalObjectWithIOStream",
+        NewType( TheFamilyOfHomalgExternalObjects,
                 IsHomalgExternalObjectWithIOStreamRep ) );
 
 ####################################
@@ -210,13 +210,13 @@ InstallGlobalFunction( HomalgExternalObject,
         obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
         
         if not IsBound( type ) then
-            type := HomalgExternalObjectWithIOStreamType;
+            type := TheTypeHomalgExternalObjectWithIOStream;
         fi;
     else
         obj := rec( pointer := arg[1], cas := arg[2] );
         
         if not IsBound( type ) then
-            type := HomalgExternalObjectType;
+            type := TheTypeHomalgExternalObject;
         fi;
     fi;
     

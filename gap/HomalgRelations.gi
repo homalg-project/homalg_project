@@ -26,16 +26,16 @@ DeclareRepresentation( "IsHomalgRelationsOfFinitelyPresentedModuleRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgRelationsFamily",
-        NewFamily( "HomalgRelationsFamily" ) );
+BindGlobal( "TheFamilyOfHomalgRelations",
+        NewFamily( "TheFamilyOfHomalgRelations" ) );
 
 # two new types:
-BindGlobal( "HomalgRelationsOfLeftModuleType",
-        NewType(  HomalgRelationsFamily,
+BindGlobal( "TheTypeHomalgRelationsOfLeftModule",
+        NewType(  TheFamilyOfHomalgRelations,
                 IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ) );
 
-BindGlobal( "HomalgRelationsOfRightModuleType",
-        NewType(  HomalgRelationsFamily,
+BindGlobal( "TheTypeHomalgRelationsOfRightModule",
+        NewType(  TheFamilyOfHomalgRelations,
                 IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ) );
 
 ####################################
@@ -437,7 +437,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
     fi;
     
     ## Objectify:
-    Objectify( HomalgRelationsOfLeftModuleType, relations );
+    Objectify( TheTypeHomalgRelationsOfLeftModule, relations );
     
     return relations;
     
@@ -454,7 +454,7 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
     fi;
     
     ## Objectify:
-    Objectify( HomalgRelationsOfRightModuleType, relations );
+    Objectify( TheTypeHomalgRelationsOfRightModule, relations );
     
     return relations;
     

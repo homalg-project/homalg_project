@@ -35,25 +35,25 @@ DeclareRepresentation( "IsHomalgExternalRingElementRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgRingsFamily",
-        NewFamily( "HomalgRingsFamily" ) );
+BindGlobal( "TheFamilyOfHomalgRings",
+        NewFamily( "TheFamilyOfHomalgRings" ) );
 
 # two new types:
-BindGlobal( "HomalgInternalRingType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgInternalRing",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgInternalRingRep ) );
 
-BindGlobal( "HomalgExternalRingType",
-        NewType( HomalgRingsFamily,
+BindGlobal( "TheTypeHomalgExternalRing",
+        NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingRep ) );
 
 # a new family:
-BindGlobal( "HomalgExternalRingElementFamily",
-        NewFamily( "HomalgExternalRingElementFamily" ) );
+BindGlobal( "TheFamilyOfHomalgExternalRingElements",
+        NewFamily( "TheFamilyOfHomalgExternalRingElements" ) );
 
 # a new type:
-BindGlobal( "HomalgExternalRingElementType",
-        NewType( HomalgExternalRingElementFamily,
+BindGlobal( "TheTypeHomalgExternalRingElement",
+        NewType( TheFamilyOfHomalgExternalRingElements,
                 IsHomalgExternalRingElementRep ) );
 
 ####################################
@@ -350,9 +350,9 @@ InstallGlobalFunction( CreateHomalgRing,
     
     if not IsBound( type ) then
         if IsSemiringWithOneAndZero( arg[1] ) then
-            type := HomalgInternalRingType;
+            type := TheTypeHomalgInternalRing;
         else
-            type := HomalgExternalRingType;
+            type := TheTypeHomalgExternalRing;
         fi;
     fi;
     
@@ -395,13 +395,13 @@ InstallGlobalFunction( HomalgExternalRingElement,
         
         ## Objectify:
         ObjectifyWithAttributes(
-                obj, HomalgExternalRingElementType,
+                obj, TheTypeHomalgExternalRingElement,
                 IsHomalgExternalRingElementWithIOStream, true );
     else
         obj := rec( pointer := arg[1], cas := arg[2] );
         
         ## Objectify:
-        Objectify( HomalgExternalRingElementType, obj );
+        Objectify( TheTypeHomalgExternalRingElement, obj );
     fi;
     
     if properties <> [ ] then

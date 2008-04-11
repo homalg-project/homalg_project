@@ -30,16 +30,16 @@ DeclareRepresentation( "IsHomalgExternalMatrixRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgMatrixFamily",
-        NewFamily( "HomalgMatrixFamily" ) );
+BindGlobal( "TheFamilyOfHomalgMatrices",
+        NewFamily( "TheFamilyOfHomalgMatrices" ) );
 
 # two new types:
-BindGlobal( "HomalgInternalMatrixType",
-        NewType( HomalgMatrixFamily,
+BindGlobal( "TheTypeHomalgInternalMatrix",
+        NewType( TheFamilyOfHomalgMatrices,
                 IsHomalgInternalMatrixRep ) );
 
-BindGlobal( "HomalgExternalMatrixType",
-        NewType( HomalgMatrixFamily,
+BindGlobal( "TheTypeHomalgExternalMatrix",
+        NewType( TheFamilyOfHomalgMatrices,
                 IsHomalgExternalMatrixRep ) );
 
 ####################################
@@ -774,9 +774,9 @@ InstallGlobalFunction( HomalgMatrix,
     fi;
     
     if IsHomalgInternalRingRep( R ) then
-        type := HomalgInternalMatrixType;
+        type := TheTypeHomalgInternalMatrix;
     else
-        type := HomalgExternalMatrixType;
+        type := TheTypeHomalgExternalMatrix;
     fi;
     
     matrix := rec( ring := R );
@@ -875,11 +875,11 @@ InstallGlobalFunction( HomalgMatrix,
         M := arg[1];
     fi;
     
-    if IsList( arg[1] ) then ## HomalgInternalMatrixType
+    if IsList( arg[1] ) then ## TheTypeHomalgInternalMatrix
         
         ## Objectify:
         ObjectifyWithAttributes(
-                matrix, HomalgInternalMatrixType,
+                matrix, TheTypeHomalgInternalMatrix,
                 Eval, M );
         
         if Length( arg[1] ) = 0 then
@@ -895,11 +895,11 @@ InstallGlobalFunction( HomalgMatrix,
             SetNrRows( matrix, Length( arg[1] ) );
             SetNrColumns( matrix, Length( arg[1][1] ) );
         fi;
-    else ## HomalgExternalMatrixType
+    else ## TheTypeHomalgExternalMatrix
         
         ## Objectify:
         ObjectifyWithAttributes(
-                matrix, HomalgExternalMatrixType,
+                matrix, TheTypeHomalgExternalMatrix,
                 Eval, M );
         
     fi;

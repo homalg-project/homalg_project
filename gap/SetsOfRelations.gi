@@ -26,12 +26,12 @@ DeclareRepresentation( "IsSetsOfRelationsRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgSetsOfRelationsFamily",
-        NewFamily( "HomalgSetsOfRelationsFamily" ) );
+BindGlobal( "TheFamilyOfHomalgSetsOfRelations",
+        NewFamily( "TheFamilyOfHomalgSetsOfRelations" ) );
 
 # a new type:
-BindGlobal( "HomalgSetsOfRelationsType",
-        NewType( HomalgSetsOfRelationsFamily,
+BindGlobal( "TheTypeHomalgSetsOfRelations",
+        NewType( TheFamilyOfHomalgSetsOfRelations,
                 IsSetsOfRelationsRep ) );
 
 ####################################
@@ -73,7 +73,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForLeftModule,
     fi;
     
     ## Objectify:
-    Objectify( HomalgSetsOfRelationsType, relations );
+    Objectify( TheTypeHomalgSetsOfRelations, relations );
     
     return relations;
     
@@ -95,7 +95,7 @@ InstallGlobalFunction( CreateSetsOfRelationsForRightModule,
     fi;
     
     ## Objectify:
-    Objectify( HomalgSetsOfRelationsType, relations );
+    Objectify( TheTypeHomalgSetsOfRelations, relations );
     
     return relations;
     

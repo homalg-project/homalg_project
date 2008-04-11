@@ -26,12 +26,12 @@ DeclareRepresentation( "IsHomalgTableRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgTableFamily",
-        NewFamily( "HomalgTableFamily" ) );
+BindGlobal( "TheFamilyOfHomalgTables",
+        NewFamily( "TheFamilyOfHomalgTables" ) );
 
 # a new type:
-BindGlobal( "HomalgTableType",
-        NewType( HomalgTableFamily,
+BindGlobal( "TheTypeHomalgTable",
+        NewType( TheFamilyOfHomalgTables,
                 IsHomalgTableRep ) );
 
 ####################################
@@ -49,7 +49,7 @@ InstallMethod( CreateHomalgTable,
     
     RP := rec( );
     
-    Objectify( HomalgTableType, RP );
+    Objectify( TheTypeHomalgTable, RP );
     
     return RP;
     

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgMorphism.gi             homalg package               Mohamed Barakat
+##  HomalgMorphism.gi           homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -26,24 +26,24 @@ DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgMorphismsFamily",
-        NewFamily( "HomalgMorphismsFamily" ) );
+BindGlobal( "TheFamilyOfHomalgMorphisms",
+        NewFamily( "TheFamilyOfHomalgMorphisms" ) );
 
 # four new types:
-BindGlobal( "HomalgMorphismOfLeftModulesType",
-        NewType( HomalgMorphismsFamily,
+BindGlobal( "TheTypeHomalgMorphismOfLeftModules",
+        NewType( TheFamilyOfHomalgMorphisms,
                 IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ) );
 
-BindGlobal( "HomalgMorphismOfRightModulesType",
-        NewType( HomalgMorphismsFamily,
+BindGlobal( "TheTypeHomalgMorphismOfRightModules",
+        NewType( TheFamilyOfHomalgMorphisms,
                 IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ) );
 
-BindGlobal( "HomalgEndomorphismOfLeftModulesType",
-        NewType( HomalgMorphismsFamily,
+BindGlobal( "TheTypeHomalgEndomorphismOfLeftModules",
+        NewType( TheFamilyOfHomalgMorphisms,
                 IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and IsHomalgMorphismOfLeftModules ) );
 
-BindGlobal( "HomalgEndomorphismOfRightModulesType",
-        NewType( HomalgMorphismsFamily,
+BindGlobal( "TheTypeHomalgEndomorphismOfRightModules",
+        NewType( TheFamilyOfHomalgMorphisms,
                 IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and IsHomalgMorphismOfRightModules ) );
 
 ####################################
@@ -504,11 +504,11 @@ InstallGlobalFunction( HomalgMorphism,
         if nargs > 1 and IsString( arg[2] ) and Length( arg[2] ) > 0 and  LowercaseString( arg[2]{[1..1]} ) = "r" then
             source := HomalgFreeRightModule( NrColumns( matrix ), R );
             target := HomalgFreeRightModule( NrRows( matrix ), R );
-            type := HomalgMorphismOfRightModulesType;
+            type := TheTypeHomalgMorphismOfRightModules;
         else
             source := HomalgFreeLeftModule( NrRows( matrix ), R );
             target := HomalgFreeLeftModule( NrColumns( matrix ), R );
-            type := HomalgMorphismOfLeftModulesType;
+            type := TheTypeHomalgMorphismOfLeftModules;
         fi;
         
         matrices := rec( );
@@ -553,18 +553,18 @@ InstallGlobalFunction( HomalgMorphism,
         if not IsIdenticalObj( R, HomalgRing( target ) ) then
             Error( "the source and target modules must be defined over the same ring\n" );
         elif IsLeftModule( source ) and IsLeftModule( target ) then
-            type := HomalgMorphismOfLeftModulesType;
+            type := TheTypeHomalgMorphismOfLeftModules;
         elif IsRightModule( source ) and IsRightModule( target ) then
-            type := HomalgMorphismOfRightModulesType;
+            type := TheTypeHomalgMorphismOfRightModules;
         else
             Error( "the source and target modules of a morphism must either both be left or both be right modules\n" );
         fi;
     else
         target := source;
         if IsLeftModule( source ) then
-            type := HomalgEndomorphismOfLeftModulesType;
+            type := TheTypeHomalgEndomorphismOfLeftModules;
         else
-            type := HomalgEndomorphismOfRightModulesType;
+            type := TheTypeHomalgEndomorphismOfRightModules;
         fi;
     fi;
     

@@ -77,7 +77,7 @@ InstallMethod( CreateHomalgTable,
                  
           );
     
-    Objectify( HomalgTableType, RP );
+    Objectify( TheTypeHomalgTable, RP );
     
     return RP;
     

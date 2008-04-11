@@ -26,16 +26,16 @@ DeclareRepresentation( "IsHomalgGeneratorsOfFinitelyGeneratedModuleRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgGeneratorsFamily",
-        NewFamily( "HomalgGeneratorsFamily" ) );
+BindGlobal( "TheFamilyOfHomalgGenerators",
+        NewFamily( "TheFamilyOfHomalgGenerators" ) );
 
 # two new types:
-BindGlobal( "HomalgGeneratorsOfLeftModuleType",
-        NewType(  HomalgGeneratorsFamily,
+BindGlobal( "TheTypeHomalgGeneratorsOfLeftModule",
+        NewType(  TheFamilyOfHomalgGenerators,
                 IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ) );
 
-BindGlobal( "HomalgGeneratorsOfRightModuleType",
-        NewType(  HomalgGeneratorsFamily,
+BindGlobal( "TheTypeHomalgGeneratorsOfRightModule",
+        NewType(  TheFamilyOfHomalgGenerators,
                 IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ) );
 
 ####################################
@@ -258,7 +258,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
                 relations_of_hullmodule := relations_of_hullmodule );
     
     ## Objectify:
-    Objectify( HomalgGeneratorsOfLeftModuleType, gen );
+    Objectify( TheTypeHomalgGeneratorsOfLeftModule, gen );
     
     return gen;
     
@@ -315,7 +315,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
                 relations_of_hullmodule := relations_of_hullmodule );
     
     ## Objectify:
-    Objectify( HomalgGeneratorsOfRightModuleType, gen );
+    Objectify( TheTypeHomalgGeneratorsOfRightModule, gen );
     
     return gen;
     
