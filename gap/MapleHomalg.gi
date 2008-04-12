@@ -45,7 +45,7 @@ HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMapleRep",
         IshomalgExternalObjectWithIOStreamRep,
         [  ] );

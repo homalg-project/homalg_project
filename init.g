@@ -12,13 +12,7 @@
 ##
 #############################################################################
 
-ReadPackage( "RingsForHomalg", "gap/IO.gd" );
-
-ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gd" );
-
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
-
-ReadPackage( "RingsForHomalg", "gap/ConvertHomalgMatrix.gd" );
 
 ## all the supported external computer algebra systems
 ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gd" );

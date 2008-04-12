@@ -41,7 +41,7 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
         IshomalgExternalObjectWithIOStreamRep,
         [  ] );

@@ -41,7 +41,7 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
         IshomalgExternalObjectWithIOStreamRep,
         [  ] );

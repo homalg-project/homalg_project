@@ -46,7 +46,7 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
         IshomalgExternalObjectWithIOStreamRep,
         [  ] );
