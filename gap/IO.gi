@@ -1,18 +1,12 @@
 #############################################################################
 ##
-##  IO.gi                     RingsForHomalg package          Max Neunhöffer
+##  IO.gi                     IO_ForHomalg package           Max Neunhoeffer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff to use the GAP4 I/O package.
 ##
 #############################################################################
-
-####################################
-#
-# methods for operations:
-#
-####################################
 
 ####################################
 #
@@ -154,7 +148,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
               else
                   PID := "";
               fi;
-              if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true then
+              if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true then
                   COLOR := "\033[5;31;43m";
               else
                   COLOR := "";
@@ -179,7 +173,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
               else
                   PID := "";
               fi;
-              if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true then
+              if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true then
                   COLOR := "\033[5;31;43m";
               else
                   COLOR := "";
@@ -258,7 +252,7 @@ InstallGlobalFunction( LaunchCAS,
         s.( e ) := HOMALG_IO_CAS.( e );
     od;
     
-    if IsBound( HOMALG_RINGS.color_display ) and HOMALG_RINGS.color_display = true
+    if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true
        and IsBound( s.display_color ) then
         s.color_display := s.display_color;
     fi;

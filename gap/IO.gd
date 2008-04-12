@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  IO.gd                     RingsForHomalg package          Max Neunhöffer
+##  IO.gd                     IO_ForHomalg package           Max Neunhoeffer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

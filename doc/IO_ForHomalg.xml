@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd">
 
 <!--
 
-  RingsForHomalg.xml          RingsForHomalg package documentation        Mohamed Barakat
-                                                                          Simon Görtzen
+  IO_ForHomalg.xml          IO_ForHomalg package documentation            Mohamed Barakat
+                                                                           Simon Goertzen
 
   Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
 
 -->
 
-<Book Name="RingsForHomalg">
+<Book Name="IO_ForHomalg">
 
 <TitlePage>
-    <Title>GAP 4 Package <Package>RingsForHomalg</Package></Title>
-    <Subtitle>RingsForHomalg --- An Abstract Package for Homological Algebra</Subtitle>
+    <Title>GAP 4 Package <Package>IO_ForHomalg</Package></Title>
+    <Subtitle>IO_ForHomalg --- An Abstract Package for Homological Algebra</Subtitle>
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
@@ -51,7 +51,7 @@ Germany
 <#Include SYSTEM "examples.xml">
 </Body>
 
-<Bibliography Databases="RingsForHomalg"/>
+<Bibliography Databases="IO_ForHomalg"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

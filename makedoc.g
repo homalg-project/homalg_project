@@ -6,9 +6,9 @@
 
 LoadPackage("GAPDoc");
 
-MakeGAPDocDoc("doc", "RingsForHomalg", [], "RingsForHomalg");
+MakeGAPDocDoc("doc", "IO_ForHomalg", [], "IO_ForHomalg");
 
-GAPDocManualLab("RingsForHomalg");
+GAPDocManualLab("IO_ForHomalg");
 
 quit;
 

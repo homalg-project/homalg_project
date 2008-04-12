@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  IO.gi                     RingsForHomalg package         Mohamed Barakat
+##  HomalgToCAS.gi            IO_ForHomalg package           Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff to use the fantastic GAP4 I/O package of Max Neunhöffer.
+##  Implementation stuff to use the fantastic GAP4 I/O package of Max Neunhoeffer.
 ##
 #############################################################################
 
@@ -90,11 +90,11 @@ InstallGlobalFunction( homalgSendBlocking,
           break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS, PID,
           homalg_variable, l, eoc, enter, max;
     
-    if IsBound( HOMALG_RINGS.homalgSendBlockingInput ) then
-        Add( HOMALG_RINGS.homalgSendBlockingInput, arg );
+    if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
+        Add( HOMALG_IO.homalgSendBlockingInput, arg );
     fi;
     
-    Info( InfoRingsForHomalg, 10, "homalgSendBlocking <-- ", arg );
+    Info( InfoIO_ForHomalg, 10, "homalgSendBlocking <-- ", arg );
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -280,11 +280,11 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
     fi;
     
-    if IsBound( HOMALG_RINGS.homalgSendBlocking ) then
-        Add( HOMALG_RINGS.homalgSendBlocking, L );
+    if IsBound( HOMALG_IO.homalgSendBlocking ) then
+        Add( HOMALG_IO.homalgSendBlocking, L );
     fi;
     
-    Info( InfoRingsForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) -1 ]} );
+    Info( InfoIO_ForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) -1 ]} );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
@@ -303,7 +303,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if max > stream.HomalgBackStreamMaximumLength then
         stream.HomalgBackStreamMaximumLength := max;
-        if HOMALG_RINGS.SaveHomalgMaximumBackStream = true then
+        if HOMALG_IO.SaveHomalgMaximumBackStream = true then
             stream.HomalgMaximumBackStream := stream.lines;
         fi;
     fi;
@@ -337,7 +337,7 @@ InstallGlobalFunction( homalgSendBlocking,
     fi;
     
     if need_output then
-        Info( InfoRingsForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
+        Info( InfoIO_ForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
         if IsBound( stream.check_output ) and stream.check_output = true
            and '\n' in L and not ',' in L then
             Error( "\033[1m", "the output received from the external CAS ", CAS, " (running with PID ", PID, ") contains an ENTER = '\\n' but no COMMA = ',' ... this is most probably a mistakte!!!", "\033[0m\n" );

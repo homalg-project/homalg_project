@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  IO.gd                     RingsForHomalg package         Mohamed Barakat
+##  HomalgToCAS.gd            IO_ForHomalg package           Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff to use the fantastic GAP4 I/O package of Max Neunhöffer.
+##  Declaration stuff to use the fantastic GAP4 I/O package of Max Neunhoeffer.
 ##
 #############################################################################
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `RingsForHomalg'           Mohamed Barakat
+##  PackageInfo.g for the package `IO_ForHomalg'             Mohamed Barakat
 ##                                                            Simon Goertzen
 ##                                                    Markus Lange-Hegermann
 ##                                                           Max Neunhoeffer
@@ -22,11 +22,11 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "RingsForHomalg",
+PackageName := "IO_ForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "RingsForHomalg - internal and external rings for the GAP package homalg",
+Subtitle := "IO_ForHomalg - internal and external rings for the GAP package homalg",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -47,7 +47,7 @@ Date := "12/04/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/IO_ForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -154,22 +154,6 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec( 
-    LastName      := "Lange-Hegermann",
-    FirstNames    := "Markus",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "markus.lange.hegermann@rwth-aachen.de",
-    WWWHome       := "",
-    PostalAddress := Concatenation( [
-                       "Markus Lange-Hegermann\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
-  ),
-  rec( 
     LastName      := "Neunhöffer",
     FirstNames    := "Max",
     IsAuthor      := true,
@@ -185,22 +169,6 @@ Persons := [
                        "Scotland, UK" ] ),
     Place         := "St Andrews",
     Institution   := "St Andrews University"
-  ),
-  rec( 
-    LastName      := "Robertz",
-    FirstNames    := "Daniel",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "daniel@momo.math.rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel",
-    PostalAddress := Concatenation( [
-                       "Daniel Robertz\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
   ),
 # provide such a record for each author and/or maintainer ...
   
@@ -236,9 +204,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/README.RingsForHomalg",
+  "http://wwwb.math.rwth-aachen.de/~barakat/gap/IO_ForHomalg/README.IO_ForHomalg",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/~barakat/gap/IO_ForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -286,10 +254,10 @@ PackageInfoURL :=
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "RingsForHomalg",
+  BookName  := "IO_ForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/RingsForHomalgDoc.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/~barakat/gap/IO_ForHomalg/IO_ForHomalgDoc.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -298,7 +266,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "RingsForHomalg - Internal and External Rings for the GAP Package homalg",
+  LongTitle := "IO_ForHomalg - Internal and External Rings for the GAP Package homalg",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -347,18 +315,14 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  RingsForHomalg ", ~.Version, "\n",
+  "Loading  IO_ForHomalg ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
-  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-        " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
-  "For help, type: ?RingsForHomalg package \n",
+  "For help, type: ?IO_ForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 

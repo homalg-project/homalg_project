@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  RingsForHomalg.gi         RingsForHomalg package         Mohamed Barakat
+##  HomalgExternalRing.gi     IO_ForHomalg package           Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for RingsForHomalg.
+##  Implementation stuff for IO_ForHomalg.
 ##
 #############################################################################
 
@@ -16,7 +16,7 @@
 
 # a central place for configuration variables:
 
-InstallValue( HOMALG_RINGS,
+InstallValue( HOMALG_IO,
         rec(
             SaveHomalgMaximumBackStream := false,
             color_display := "false"
@@ -103,36 +103,6 @@ InstallMethod( homalgNrOfWarnings,
   function( R )
     
     return homalgNrOfWarnings( R!.ring );
-    
-end );
-
-####################################
-#
-# constructor functions and methods:
-#
-####################################
-
-##
-InstallMethod( \*,
-        "for homalg rings",
-        [ IsHomalgExternalRingRep, IsString ],
-        
-  function( R, indets )
-    
-    return PolynomialRing( R, SplitString( indets, "," ) );
-    
-end );
-
-##
-InstallGlobalFunction( RingForHomalg,
-  function( arg )
-    local nargs, properties, ar, stream, init, ext_obj;
-    
-    nargs := Length( arg );
-    
-    properties := [ ];
-    
-    ## FIXME: COMPLETE ME
     
 end );
 
