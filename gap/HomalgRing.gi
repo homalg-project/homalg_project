@@ -289,6 +289,17 @@ InstallGlobalFunction( CreateHomalgRing,
 end );
 
 ##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep, IsString ],
+        
+  function( R, indets )
+    
+    return PolynomialRing( R, SplitString( indets, "," ) );
+    
+end );
+
+##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
     local nargs, properties, ar, stream, obj;
