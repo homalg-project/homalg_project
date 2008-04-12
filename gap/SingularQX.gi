@@ -30,7 +30,7 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName := "Q[x]",
                
@@ -62,12 +62,12 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-#rank_of_N := Int( HomalgSendBlocking( [ "list l=rowred(", M, ",1);", U, "=l[2];", N, "=l[1]; rank(", N, ")" ], "need_output" ) );
-                       HomalgSendBlocking( [ "list l=rowred(", M, ",1);", U, "=l[2];", N, "=l[1]" ], "need_command" );
+#rank_of_N := Int( homalgSendBlocking( [ "list l=rowred(", M, ",1);", U, "=l[2];", N, "=l[1]; rank(", N, ")" ], "need_output" ) );
+                       homalgSendBlocking( [ "list l=rowred(", M, ",1);", U, "=l[2];", N, "=l[1]" ], "need_command" );
                    else
                        ## compute N only:
-#rank_of_N := Int( HomalgSendBlocking( [ "matrix ", N, " = rowred(", M, "); rank(", N, ")" ], "need_output" ) );
-                       HomalgSendBlocking( [ "matrix ", N, " = rowred(", M, ")" ], "need_command" );
+#rank_of_N := Int( homalgSendBlocking( [ "matrix ", N, " = rowred(", M, "); rank(", N, ")" ], "need_output" ) );
+                       homalgSendBlocking( [ "matrix ", N, " = rowred(", M, ")" ], "need_command" );
                    fi;
                    
 #SetRowRankOfMatrix( N, rank_of_N );

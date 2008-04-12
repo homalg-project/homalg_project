@@ -26,11 +26,3 @@ DeclareGlobalVariable( "HOMALG_RINGS" );
 
 DeclareGlobalFunction( "RingForHomalg" );
 
-# basic operations:
-
-DeclareOperation( "PolynomialRing",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "*",
-        [ IsHomalgRing, IsString ] );
-

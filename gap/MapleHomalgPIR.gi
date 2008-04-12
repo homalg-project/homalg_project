@@ -31,7 +31,7 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName :=
                  function( R )
@@ -79,7 +79,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "`homalg/DiagonalElementsAndRank`(", R, "[2][BestBasis](", M, R, "[1]),", R, ")[1]" ], "need_output" );
+                   return homalgSendBlocking( [ "`homalg/DiagonalElementsAndRank`(", R, "[2][BestBasis](", M, R, "[1]),", R, ")[1]" ], "need_output" );
                    
                  end,
                  
@@ -111,10 +111,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, " := ", R, "[2][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[2][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, " := ", R, "[2][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[2][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );

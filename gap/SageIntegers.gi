@@ -43,13 +43,13 @@ InstallMethod( CreateHomalgTable,
             
             );
             
-    HomalgSendBlocking( [ command ], "need_command", R ); ## the last procedures to initialize
+    homalgSendBlocking( [ command ], "need_command", R ); ## the last procedures to initialize
     
     RP_specific :=
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName :=
                  function( R )
@@ -97,7 +97,7 @@ InstallMethod( CreateHomalgTable,
                    
                    M:=arg[1];
 
-                   return HomalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
+                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
                    
                  end,
                  
@@ -129,10 +129,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, " = TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " = TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output" ) );
                    fi; 
                    
                    SetRowRankOfMatrix( N, rank_of_N );

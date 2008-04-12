@@ -33,7 +33,7 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName :=
                  function( R )

@@ -19,7 +19,7 @@ InstallValue( CommonHomalgTableForMAGMABestBasis,
         rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                BestBasis :=
                  function( arg )
@@ -56,10 +56,10 @@ InstallValue( CommonHomalgTableForMAGMABestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( HomalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output" ) );
+                       rank_of_S := Int( homalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output" ) );
                    else
                        ## compute S only:
-                       rank_of_S := Int( HomalgSendBlocking( [ S, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output" ) );
+                       rank_of_S := Int( homalgSendBlocking( [ S, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( S, rank_of_S );

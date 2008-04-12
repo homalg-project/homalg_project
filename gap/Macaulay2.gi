@@ -40,9 +40,9 @@ HOMALG_IO_Macaulay2.READY_LENGTH := Length( HOMALG_IO_Macaulay2.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
-        IsHomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectWithIOStreamRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:

@@ -23,7 +23,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ M, " eq ZeroMatrix(", R, NrRows( M ), NrColumns( M ), ")" ] , "need_output" ) = "true";
+                   return homalgSendBlocking( [ M, " eq ZeroMatrix(", R, NrRows( M ), NrColumns( M ), ")" ] , "need_output" ) = "true";
                    
                  end,
                
@@ -33,7 +33,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := HomalgSendBlocking( [ "z := ZeroMatrix(", R, ",1,", NrColumns( C ), "); [i: i in [ 1 .. ", NrRows( C ), " ] | RowSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, ",1,", NrColumns( C ), "); [i: i in [ 1 .. ", NrRows( C ), " ] | RowSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -44,7 +44,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := HomalgSendBlocking( [ "z := ZeroMatrix(", R, NrRows( C ), ",1); [i: i in [ 1 .. ", NrColumns( C ), " ] | ColumnSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, NrRows( C ), ",1); [i: i in [ 1 .. ", NrColumns( C ), " ] | ColumnSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -64,7 +64,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ A, " eq ",  B ] , "need_output" ) = "true";
+                   return homalgSendBlocking( [ A, " eq ",  B ] , "need_output" ) = "true";
                    
                  end,
                
@@ -74,7 +74,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "ZeroMatrix(", R, NrRows( C ), NrColumns( C ), ")" ] );
+                   return homalgSendBlocking( [ "ZeroMatrix(", R, NrRows( C ), NrColumns( C ), ")" ] );
                    
                  end,
              
@@ -84,7 +84,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   return HomalgSendBlocking( [ "ScalarMatrix(", R, NrRows( C ), ",1)" ] );
+                   return homalgSendBlocking( [ "ScalarMatrix(", R, NrRows( C ), ",1)" ] );
                    
                  end,
                
@@ -94,7 +94,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "Transpose(", M, ")" ] );
+                   return homalgSendBlocking( [ "Transpose(", M, ")" ] );
                    
                  end,
                
@@ -104,7 +104,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "Matrix(", M, "[", plist, "])" ] );
+                   return homalgSendBlocking( [ "Matrix(", M, "[", plist, "])" ] );
                    
                  end,
                
@@ -114,7 +114,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return HomalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[",plist, "]))" ] );
+                   return homalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[",plist, "]))" ] );
                    
                  end,
                
@@ -124,7 +124,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "VerticalJoin(", A, B, ")" ] );
+                   return homalgSendBlocking( [ "VerticalJoin(", A, B, ")" ] );
                    
                  end,
                
@@ -134,7 +134,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ] );
+                   return homalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ] );
                    
                  end,
                
@@ -144,7 +144,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    f := Concatenation( [ "DiagonalJoin([" ], e, [ "])" ] );
                    
-                   return HomalgSendBlocking( f );
+                   return homalgSendBlocking( f );
                    
                  end,
                
@@ -154,7 +154,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ a, "*", A ] );
+                   return homalgSendBlocking( [ a, "*", A ] );
                    
                  end,
                
@@ -164,7 +164,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ A, "+", B ] );
+                   return homalgSendBlocking( [ A, "+", B ] );
                    
                  end,
                
@@ -174,7 +174,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ A, "-", B ] );
+                   return homalgSendBlocking( [ A, "-", B ] );
                    
                  end,
                
@@ -184,21 +184,21 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return HomalgSendBlocking( [ A, "*", B ] );
+                   return homalgSendBlocking( [ A, "*", B ] );
                    
                  end,
                
                NrRows :=
                  function( C )
                    
-                   return Int( HomalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output" ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return Int( HomalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output" ) );
                    
                  end
                

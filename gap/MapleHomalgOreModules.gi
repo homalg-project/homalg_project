@@ -32,9 +32,9 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
-               RingName := R -> HomalgSendBlocking( [ "K[op(", R, "[1])]" ], "need_output" )
+               RingName := R -> homalgSendBlocking( [ "K[op(", R, "[1])]" ], "need_output" )
                
           );
     

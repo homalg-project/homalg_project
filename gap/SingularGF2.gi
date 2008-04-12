@@ -30,7 +30,7 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName := "GF(2)",
                
@@ -62,10 +62,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );

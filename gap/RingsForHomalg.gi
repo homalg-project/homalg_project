@@ -25,9 +25,103 @@ InstallValue( HOMALG_RINGS,
 
 ####################################
 #
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( homalgPointer,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return homalgPointer( R!.ring );
+    
+end );
+
+##
+InstallMethod( homalgExternalCASystem,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return homalgExternalCASystem( R!.ring );
+    
+end );
+
+##
+InstallMethod( homalgExternalCASystemVersion,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return homalgExternalCASystemVersion( R!.ring );
+    
+end );
+
+##
+InstallMethod( homalgStream,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return homalgStream( R!.ring );
+    
+end );
+
+##
+InstallMethod( homalgExternalCASystemPID,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return homalgExternalCASystemPID( R!.ring );
+    
+end );
+
+##
+InstallMethod( homalgLastWarning,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    homalgLastWarning( R!.ring );
+    
+end );
+
+##
+InstallMethod( homalgNrOfWarnings,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( R )
+    
+    return homalgNrOfWarnings( R!.ring );
+    
+end );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
+
+##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgExternalRingRep, IsString ],
+        
+  function( R, indets )
+    
+    return PolynomialRing( R, SplitString( indets, "," ) );
+    
+end );
 
 ##
 InstallGlobalFunction( RingForHomalg,
@@ -42,22 +136,22 @@ InstallGlobalFunction( RingForHomalg,
     
 end );
 
-##
-InstallMethod( \*,
-        "for homalg rings",
-        [ IsHomalgExternalRingRep, IsString ],
-        
-  function( R, indets )
-    
-    return PolynomialRing( R, SplitString( indets, "," ) );
-    
-end );
-
 ####################################
 #
 # View, Print, and Display methods:
 #
 ####################################
+
+InstallMethod( ViewObj,
+        "for homalg external rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( o )
+    
+    Print( "<A homalg external ring residing in the CAS " );
+    Print( homalgExternalCASystem( o ), " running with pid ", homalgExternalCASystemPID( o ), ">" );
+    
+end );
 
 InstallMethod( Display,
         "for homalg matrices",
@@ -66,7 +160,7 @@ InstallMethod( Display,
   function( o )
     local RP, ring, stream, cas, display_color;
     
-    RP := HomalgTable( o );
+    RP := homalgTable( o );
     
     if IsBound(RP!.RingName) then
         
@@ -76,7 +170,7 @@ InstallMethod( Display,
             ring := RP!.RingName;
         fi;
         
-        stream := HomalgStream( o );
+        stream := homalgStream( o );
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -101,7 +195,7 @@ InstallMethod( Display,
   function( o )
     local stream, display_color;
     
-    stream := HomalgStream( o );
+    stream := homalgStream( o );
     
     if IsBound( stream.color_display ) then
         display_color := stream.color_display;
@@ -109,7 +203,7 @@ InstallMethod( Display,
         display_color := "";
     fi;
     
-    Print( display_color, HomalgSendBlocking( [ o ], "need_display" ) );
+    Print( display_color, homalgSendBlocking( [ o ], "need_display" ) );
     
 end);
 

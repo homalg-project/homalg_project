@@ -30,7 +30,7 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName := "GF(2)",
                
@@ -48,20 +48,20 @@ InstallMethod( CreateHomalgTable,
                    
                    if nargs > 1 then
                        ## compute N and U: N = U*M, create M|Id_NrRows(N) and do Gauss there
-                       HomalgSendBlocking( [ "_Id = identity_matrix(GF(2),", NrRows(M), ").sparse_matrix()" ], "need_command", R );
-                       HomalgSendBlocking( [ "_MId = block_matrix([", M, ".sparse_matrix(),_Id],2).echelonize()" ], "need_command" );
-                       HomalgSendBlocking( [ "_N=_MId.matrix_from_columns(range(", NrColumns(M) ,"))"], "need_command", R );
-                       rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N.copy()"], R );
-                       U := HomalgSendBlocking( [ "_MId.matrix_from_columns(range(", NrColumns(M), ",", NrColumns(M)+NrRows(M), ")).copy()"], R );
-                       #HomalgSendBlocking( [ "_N=0; _MId=0" ], "need_command", R);
+                       homalgSendBlocking( [ "_Id = identity_matrix(GF(2),", NrRows(M), ").sparse_matrix()" ], "need_command", R );
+                       homalgSendBlocking( [ "_MId = block_matrix([", M, ".sparse_matrix(),_Id],2).echelonize()" ], "need_command" );
+                       homalgSendBlocking( [ "_N=_MId.matrix_from_columns(range(", NrColumns(M) ,"))"], "need_command", R );
+                       rank_of_N := Int( homalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
+                       N := homalgSendBlocking( [ "_N.copy()"], R );
+                       U := homalgSendBlocking( [ "_MId.matrix_from_columns(range(", NrColumns(M), ",", NrColumns(M)+NrRows(M), ")).copy()"], R );
+                       #homalgSendBlocking( [ "_N=0; _MId=0" ], "need_command", R);
                    else
                        ## compute N only:
-                       HomalgSendBlocking( [ "_N = ", M, ".echelon_form()" ], "need_command" );
-                       HomalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
-                       rank_of_N := Int( HomalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
-                       N := HomalgSendBlocking( [ "_N" ], R );
-                       HomalgSendBlocking( [ "_N=0;" ], "need_command", R );
+                       homalgSendBlocking( [ "_N = ", M, ".echelon_form()" ], "need_command" );
+                       homalgSendBlocking( [ "_N = _N.sparse_matrix()" ], "need_command", R );
+                       rank_of_N := Int( homalgSendBlocking( [ "_N.rank()" ], "need_output", R ) );
+                       N := homalgSendBlocking( [ "_N" ], R );
+                       homalgSendBlocking( [ "_N=0;" ], "need_command", R );
                    fi;
                    
                    # assign U:

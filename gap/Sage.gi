@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Sage.gi                   RingsForHomalg package         Simon Goertzen
+##  Sage.gi                   RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -43,9 +43,9 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
-        IsHomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectWithIOStreamRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -85,8 +85,8 @@ InstallGlobalFunction( RingForHomalgInSage,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := HomalgStream( arg[nargs] );
+        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := homalgStream( arg[nargs] );
         fi;
     fi;
     
@@ -103,7 +103,7 @@ InstallGlobalFunction( RingForHomalgInSage,
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
     fi;
     
-    ext_obj := CallFuncList( HomalgSendBlocking, ar );
+    ext_obj := CallFuncList( homalgSendBlocking, ar );
     
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
@@ -118,8 +118,8 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
     if nargs > 0 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IsHomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := HomalgStream( arg[nargs] );
+        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := homalgStream( arg[nargs] );
         fi;
     fi;
     
@@ -212,14 +212,14 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := HomalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists" );
+    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists" );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
     var := List( var, a -> HomalgExternalRingElement( a, "Sage" ) );
     
     for v in var do
-        SetName( v, HomalgPointer( v ) );
+        SetName( v, homalgPointer( v ) );
     od;
     
     SetCoefficientsRing( S, r );
@@ -238,7 +238,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
   function( M, R )
     local ext_obj;
     
-    ext_obj := HomalgSendBlocking( [ "matrix(", R, ",", M, ")" ] );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", M, ")" ] );
     
     return HomalgMatrix( ext_obj, R );
     

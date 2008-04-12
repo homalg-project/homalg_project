@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  init.g                    RingsForHomalg package  Mohamed Barakat
-##                                                    Simon Görtzen
+##  init.g                    RingsForHomalg package         Mohamed Barakat
+##                                                            Simon Goertzen
 ##                                                    Markus Lange-Hegermann
-##                                                    Max Neunhöffer
-##                                                    Daniel Robertz
+##                                                           Max Neunhoeffer
+##                                                            Daniel Robertz
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,9 +14,9 @@
 
 ReadPackage( "RingsForHomalg", "gap/IO.gd" );
 
-ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
-
 ReadPackage( "RingsForHomalg", "gap/HomalgToCAS.gd" );
+
+ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/ConvertHomalgMatrix.gd" );
 

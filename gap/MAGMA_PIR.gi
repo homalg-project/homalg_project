@@ -30,7 +30,7 @@ InstallMethod( CreateHomalgTable,
           rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                RingName :=
                  function( R )
@@ -75,7 +75,7 @@ InstallMethod( CreateHomalgTable,
                ElementaryDivisors :=
                  function( M )
                    
-                   return HomalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
+                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
                    
                  end,
                  
@@ -107,10 +107,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, U, " := HermiteForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " := HermiteForm(", M, "); Rank(", N, ")" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( HomalgSendBlocking( [ N, " := HermiteForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := HermiteForm(", M, "); Rank(", N, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );

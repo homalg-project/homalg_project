@@ -19,7 +19,7 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
         rec(
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
-               ## (HomalgTable gives no default value)
+               ## (homalgTable gives no default value)
                
                BestBasis :=
                   function( arg )
@@ -56,12 +56,12 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                         fi;
                         
                         ## compute S, U and (if nargs > 2) V: S = U*M*V
-                        HomalgSendBlocking( [ "list l=smith(", M, "); matrix ", U, "=l[3]; matrix ", V, "=l[4]; matrix ", S, "=l[1]" ], "need_command" );
-                        rank_of_S := Int( HomalgSendBlocking( [ "l[2]" ], "need_output", R ) );
+                        homalgSendBlocking( [ "list l=smith(", M, "); matrix ", U, "=l[3]; matrix ", V, "=l[4]; matrix ", S, "=l[1]" ], "need_command" );
+                        rank_of_S := Int( homalgSendBlocking( [ "l[2]" ], "need_output", R ) );
                      else
                         ## compute S only:
-                        HomalgSendBlocking( [ "list l=smith(", M, "); matrix ", S, "=l[1]" ], "need_command" );
-                        rank_of_S := Int( HomalgSendBlocking( [ "l[2]" ], "need_output", R ) );
+                        homalgSendBlocking( [ "list l=smith(", M, "); matrix ", S, "=l[1]" ], "need_command" );
+                        rank_of_S := Int( homalgSendBlocking( [ "l[2]" ], "need_output", R ) );
                      fi;
                      
                      SetRowRankOfMatrix( S, rank_of_S );

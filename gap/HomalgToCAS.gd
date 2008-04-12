@@ -14,11 +14,11 @@
 #
 ####################################
 
-DeclareGlobalFunction( "HomalgCreateStringForExternalCASystem" );
+DeclareGlobalFunction( "homalgCreateStringForExternalCASystem" );
 
-DeclareGlobalFunction( "HomalgSendBlocking" ); ## this name was implicitly suggested by Max Neunhöffer ;)
+DeclareGlobalFunction( "homalgSendBlocking" ); ## this name was implicitly suggested by Max Neunhöffer ;)
 
-DeclareGlobalFunction( "HomalgDisplay" );
+DeclareGlobalFunction( "homalgDisplay" );
 
 DeclareGlobalFunction( "StringToIntList" );
 

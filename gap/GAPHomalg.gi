@@ -41,9 +41,9 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IsHomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
-        IsHomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectWithIOStreamRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -76,11 +76,26 @@ BindGlobal( "TheTypeHomalgExternalRingInGAP",
 ##
 InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
-    local stream, ar, ext_obj;
+    local nargs, stream, o, ar, ext_obj;
     
-    stream := LaunchCAS( HOMALG_IO_GAP );
+    nargs := Length( arg );
     
-    HomalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
+    if nargs > 1 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := homalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if not IsBound( stream ) then
+        stream := LaunchCAS( HOMALG_IO_GAP );
+        o := 0;
+    else
+        o := 1;
+    fi;
+    
+    homalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
     
     ar := [ [ "CreateHomalgRing( ", arg[1], ")" ], TheTypeHomalgExternalRingObjectInGAP, stream ];
     
@@ -88,7 +103,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
     fi;
     
-    ext_obj := CallFuncList( HomalgSendBlocking, ar );
+    ext_obj := CallFuncList( homalgSendBlocking, ar );
     
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInGAP );
     
@@ -102,7 +117,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
   function( M, R )
     local ext_obj;
     
-    ext_obj := HomalgSendBlocking( [ "HomalgMatrix( ", M, ", ", R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", M, ", ", R, " )" ] );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -121,7 +136,7 @@ InstallMethod( Display,
   function( o )
     local stream, display_color;
     
-    stream := HomalgStream( o );
+    stream := homalgStream( o );
     
     if IsHomalgExternalRingInGAPRep( HomalgRing( o ) ) then
         
@@ -131,7 +146,7 @@ InstallMethod( Display,
             display_color := "";
         fi;
         
-        Print( display_color, HomalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
+        Print( display_color, homalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
         
     else
         
