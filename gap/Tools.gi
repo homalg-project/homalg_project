@@ -22,7 +22,7 @@ InstallMethod( Zero,
   function( R )
     local RP;
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.Zero) then
         if IsFunction( RP!.Zero ) then
@@ -44,7 +44,7 @@ InstallMethod( One,
   function( R )
     local RP;
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.One) then
         if IsFunction( RP!.One ) then
@@ -66,7 +66,7 @@ InstallMethod( MinusOne,
   function( R )
     local RP;
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.MinusOne) then
         if IsFunction( RP!.MinusOne ) then
@@ -90,14 +90,14 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsHomalgExternalMatrixRep( C ) then
         if IsBound( RP!.ZeroMatrix ) then
             ResetFilterObj( C, IsInitialMatrix );
             return RP!.ZeroMatrix( C );
         else
-            Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the HomalgTable", RP, "\n" );
+            Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the homalgTable", RP, "\n" );
         fi;
     fi;
     
@@ -121,13 +121,13 @@ InstallMethod( Eval,				### defines: ZeroMap
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsHomalgExternalMatrixRep( C ) then
         if IsBound( RP!.ZeroMatrix ) then
             return RP!.ZeroMatrix( C );
         else
-            Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the HomalgTable", RP, "\n" );
+            Error( "could not find a procedure called ZeroMatrix to evaluate an external zero matrix in the homalgTable", RP, "\n" );
         fi;
     fi;
     
@@ -149,13 +149,13 @@ InstallMethod( Eval,				### defines: IdentityMap
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsHomalgExternalMatrixRep( C ) then
         if IsBound( RP!.IdentityMatrix ) then
             return RP!.IdentityMatrix( C );
         else
-            Error( "could not find a procedure called IdentityMatrix to evaluate an external identity matrix in the HomalgTable", RP, "\n" );
+            Error( "could not find a procedure called IdentityMatrix to evaluate an external identity matrix in the homalgTable", RP, "\n" );
         fi;
     fi;
     
@@ -183,7 +183,7 @@ InstallMethod( Eval,				### defines: Involution
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     M :=  EvalInvolution( C );
     
@@ -207,7 +207,7 @@ InstallMethod( Eval,				### defines: CertainRows
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalCertainRows( C );
     
@@ -234,7 +234,7 @@ InstallMethod( Eval,				### defines: CertainColumns
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalCertainColumns( C );
     
@@ -261,7 +261,7 @@ InstallMethod( Eval,				### defines: UnionOfRows
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalUnionOfRows( C );
     
@@ -292,7 +292,7 @@ InstallMethod( Eval,				### defines: UnionOfColumns
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalUnionOfColumns( C );
     
@@ -323,7 +323,7 @@ InstallMethod( Eval,				### defines: DiagMat
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalDiagMat( C );
     
@@ -363,7 +363,7 @@ InstallMethod( Eval,				### defines: MulMat
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalMulMat( C );
     
@@ -406,7 +406,7 @@ InstallMethod( Eval,				### defines: AddMat
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalAddMat( C );
     
@@ -449,7 +449,7 @@ InstallMethod( Eval,				### defines: SubMat
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalSubMat( C );
     
@@ -492,7 +492,7 @@ InstallMethod( Eval,				### defines: Compose
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalCompose( C );
     
@@ -535,7 +535,7 @@ InstallMethod( NrRows,				### defines: NrRows
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.NrRows) then
         return RP!.NrRows( C );
@@ -557,7 +557,7 @@ InstallMethod( NrColumns,			### defines: NrColumns
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.NrColumns) then
         return RP!.NrColumns( C );
@@ -585,7 +585,7 @@ InstallMethod( ZeroRows,			### defines: ZeroRows
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     M := DecideZero( C );
     
@@ -611,7 +611,7 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     M := DecideZero( C );
     
@@ -643,7 +643,7 @@ InstallMethod( Eval,				### defines: AddRhs
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     A := PreEval( C );
     B := RightHandSide( C );
@@ -668,7 +668,7 @@ InstallMethod( Eval,				### defines: AddBts
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     A := PreEval( C );
     B := BottomSide( C );
@@ -693,7 +693,7 @@ InstallMethod( Eval,				### defines: GetSide
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  EvalGetSide( C );
     
@@ -730,7 +730,7 @@ InstallMethod( Eval,
     
     R := HomalgRing( C );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     e :=  PreEval( C );
     

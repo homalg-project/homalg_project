@@ -226,19 +226,19 @@ DeclareGlobalFunction( "ConvertHomalgMatrix" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgPointer",
+DeclareOperation( "homalgPointer",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgExternalCASystem",
+DeclareOperation( "homalgExternalCASystem",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgExternalCASystemVersion",
+DeclareOperation( "homalgExternalCASystemVersion",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgStream",
+DeclareOperation( "homalgStream",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgExternalCASystemPID",
+DeclareOperation( "homalgExternalCASystemPID",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "AreComparableMatrices",

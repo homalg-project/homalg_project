@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgExternalObject.gi     homalg package               Mohamed Barakat
+##  homalgExternalObject.gi     homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,14 +14,14 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgExternalObject:
-DeclareRepresentation( "IsHomalgExternalObjectRep",
-        IsHomalgExternalObject,
+# a new representation for the category IshomalgExternalObject:
+DeclareRepresentation( "IshomalgExternalObjectRep",
+        IshomalgExternalObject,
         [ "object", "cas" ] );
 
-# a new subrepresentation of the representation IsHomalgExternalObjectRep:
-DeclareRepresentation( "IsHomalgExternalObjectWithIOStreamRep",
-        IsHomalgExternalObjectRep,
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
+DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
+        IshomalgExternalObjectRep,
         [ "object", "cas" ] );
 
 ####################################
@@ -37,12 +37,12 @@ BindGlobal( "TheFamilyOfHomalgExternalObjects",
 # a new type:
 BindGlobal( "TheTypeHomalgExternalObject",
         NewType( TheFamilyOfHomalgExternalObjects,
-                IsHomalgExternalObjectRep ) );
+                IshomalgExternalObjectRep ) );
 
 # a new type:
 BindGlobal( "TheTypeHomalgExternalObjectWithIOStream",
         NewType( TheFamilyOfHomalgExternalObjects,
-                IsHomalgExternalObjectWithIOStreamRep ) );
+                IshomalgExternalObjectWithIOStreamRep ) );
 
 ####################################
 #
@@ -52,8 +52,8 @@ BindGlobal( "TheTypeHomalgExternalObjectWithIOStream",
 
 ##
 InstallMethod( \=,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep, IsHomalgExternalObjectRep ],
+        "for homalg external objects",
+        [ IshomalgExternalObjectRep, IshomalgExternalObjectRep ],
         
   function( o1, o2 )
     local components;
@@ -62,7 +62,7 @@ InstallMethod( \=,
     
     if IsSubset( NamesOfComponents( o1 ), components )
        and IsSubset( NamesOfComponents( o2 ), components ) then
-        return HomalgPointer( o1 ) = HomalgPointer( o2 ); ## we merely are comparing strings in GAP
+        return homalgPointer( o1 ) = homalgPointer( o2 ); ## we merely are comparing strings in GAP
     fi;
     
     TryNextMethod( );
@@ -70,9 +70,9 @@ InstallMethod( \=,
 end );
 
 ##
-InstallMethod( HomalgPointer,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
+InstallMethod( homalgPointer,
+        "for homalg external objects",
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
@@ -85,9 +85,9 @@ InstallMethod( HomalgPointer,
 end );
 
 ##
-InstallMethod( HomalgExternalCASystem,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
+InstallMethod( homalgExternalCASystem,
+        "for homalg external objects",
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
@@ -100,9 +100,9 @@ InstallMethod( HomalgExternalCASystem,
 end );
 
 ##
-InstallMethod( HomalgExternalCASystemVersion,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
+InstallMethod( homalgExternalCASystemVersion,
+        "for homalg external objects",
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
@@ -115,9 +115,9 @@ InstallMethod( HomalgExternalCASystemVersion,
 end );
 
 ##
-InstallMethod( HomalgStream,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStreamRep ],
+InstallMethod( homalgStream,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     
@@ -130,14 +130,14 @@ InstallMethod( HomalgStream,
 end );
 
 ##
-InstallMethod( HomalgExternalCASystemPID,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStreamRep ],
+InstallMethod( homalgExternalCASystemPID,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     
-    if IsRecord( HomalgStream( o ) ) and IsBound( HomalgStream( o ).pid ) then
-        return HomalgStream( o ).pid;
+    if IsRecord( homalgStream( o ) ) and IsBound( homalgStream( o ).pid ) then
+        return homalgStream( o ).pid;
     fi;
     
     return fail;
@@ -145,14 +145,14 @@ InstallMethod( HomalgExternalCASystemPID,
 end );
 
 ##
-InstallMethod( HomalgLastWarning,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStreamRep ],
+InstallMethod( homalgLastWarning,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     local stream;
     
-    stream := HomalgStream( o );
+    stream := homalgStream( o );
     
     if IsBound(stream.warnings) then
         Print( stream.warnings );
@@ -163,14 +163,14 @@ InstallMethod( HomalgLastWarning,
 end );
 
 ##
-InstallMethod( HomalgNrOfWarnings,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectWithIOStreamRep ],
+InstallMethod( homalgNrOfWarnings,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep ],
         
   function( o )
     local stream;
     
-    stream := HomalgStream( o );
+    stream := homalgStream( o );
     
     if IsBound(stream.HomalgExternalWarningsCounter) then
         return stream.HomalgExternalWarningsCounter;
@@ -186,7 +186,7 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( HomalgExternalObject,
+InstallGlobalFunction( homalgExternalObject,
   function( arg )
     local nargs, properties, ar, stream, obj, type;
     
@@ -241,21 +241,21 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg external objects",
-        [ IsHomalgExternalObjectRep ],
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
     Print( "<A homalg external object residing in the CAS " );
-    Print( HomalgExternalCASystem( o ), ">" ); 
+    Print( homalgExternalCASystem( o ), ">" ); 
     
 end );
 
 InstallMethod( Display,
-        "for homalg matrices",
-        [ IsHomalgExternalObjectRep ],
+        "for homalg external objects",
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
-    Print( HomalgPointer( o ), "\n" );
+    Print( homalgPointer( o ), "\n" );
     
 end );

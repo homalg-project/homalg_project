@@ -27,7 +27,7 @@ DeclareCategory( "IsHomalgExternalRingElement",
         and IsMultiplicativeElementWithInverse
         and IsAssociativeElement
         and IsAdditivelyCommutativeElement
-        and IsHomalgExternalObject );
+        and IshomalgExternalObject );
 
 ####################################
 #
@@ -109,7 +109,7 @@ DeclareProperty( "IsSimpleRing",
 ####################################
 
 ## The homalg ring package conversion table:
-DeclareAttribute( "HomalgTable",
+DeclareAttribute( "homalgTable",
         IsHomalgRing, "mutable" );
 
 ## residue class rings for homalg:
@@ -136,26 +136,32 @@ DeclareAttribute( "MinusOne",
 
 # basic operations:
 
-DeclareOperation( "HomalgPointer",
+DeclareOperation( "homalgPointer",
         [ IsHomalgRing ] );
 
-DeclareOperation( "HomalgExternalCASystem",
+DeclareOperation( "homalgExternalCASystem",
         [ IsHomalgRing ] );
 
-DeclareOperation( "HomalgExternalCASystemVersion",
+DeclareOperation( "homalgExternalCASystemVersion",
         [ IsHomalgRing ] );
 
-DeclareOperation( "HomalgStream",
+DeclareOperation( "homalgStream",
         [ IsHomalgRing ] );
 
-DeclareOperation( "HomalgExternalCASystemPID",
+DeclareOperation( "homalgExternalCASystemPID",
         [ IsHomalgRing ] );
 
-DeclareOperation( "HomalgLastWarning",
+DeclareOperation( "homalgLastWarning",
         [ IsHomalgRing ] );
 
-DeclareOperation( "HomalgNrOfWarnings",
+DeclareOperation( "homalgNrOfWarnings",
         [ IsHomalgRing ] );
+
+DeclareOperation( "PolynomialRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsString ] );
 
 # constructor methods:
 

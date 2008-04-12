@@ -58,7 +58,7 @@ InstallMethod( IsZeroMatrix,
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     ## since DecideZero calls IsZeroMatrix, the attribute IsReducedModuloRingRelations is used
     ## in DecideZero to avoid infinite loops
@@ -95,89 +95,6 @@ InstallMethod( HomalgRing,
   function( M )
     
     return M!.ring;
-    
-end );
-
-##
-InstallMethod( HomalgPointer,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    
-    return HomalgPointer( Eval( M ) ); ## here we must evaluate
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystem,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgExternalRingRep( R ) then
-        return HomalgExternalCASystem( R ); ## avoid evaluating the matrix
-    else
-        return HomalgExternalCASystem( Eval( M ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystemVersion,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgExternalRingRep( R ) then
-        return HomalgExternalCASystemVersion( R ); ## avoid evaluating the matrix
-    else
-        return HomalgExternalCASystemVersion( Eval( M ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( HomalgStream,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgExternalRingRep( R ) then
-        return HomalgStream( R ); ## avoid evaluating the matrix
-    else
-        return HomalgStream( Eval( M ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystemPID,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgExternalRingRep( R ) then
-        return HomalgExternalCASystemPID( R ); ## avoid evaluating the matrix
-    else
-        return HomalgExternalCASystemPID( Eval( M ) );
-    fi;
     
 end );
 
@@ -244,7 +161,7 @@ InstallMethod( \=,
     
     R := HomalgRing( M1 );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.AreEqualMatrices) then
         ## CAUTION: the external system must be able to check equality modulo possible ring relations!

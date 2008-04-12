@@ -24,7 +24,7 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.BasisOfRows) then
         return RP!.BasisOfRows( M );
@@ -104,7 +104,7 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.BasisOfColumns) then
         return RP!.BasisOfColumns( M );
@@ -192,7 +192,7 @@ InstallMethod( DecideZero,
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.DecideZero) then
         red := RP!.DecideZero( M );
@@ -242,7 +242,7 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.SyzygiesBasisOfRows) then
         return RP!.SyzygiesBasisOfRows( M );
@@ -266,7 +266,7 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.SyzygiesBasisOfColumns) then
         return RP!.SyzygiesBasisOfColumns( M );
@@ -290,7 +290,7 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
     
     R := HomalgRing( M1 );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.SyzygiesBasisOfRows) then
         return RP!.SyzygiesBasisOfRows( M1, M2 );
@@ -314,7 +314,7 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
     
     R := HomalgRing( M1 );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.SyzygiesBasisOfColumns) then
         return RP!.SyzygiesBasisOfColumns( M1, M2 );
@@ -338,7 +338,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
     R := HomalgRing( B );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.RightDivide) then
         return RP!.RightDivide( B, A );
@@ -374,7 +374,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     
     R := HomalgRing( B );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.LeftDivide) then
         return RP!.LeftDivide( A, B );
@@ -410,7 +410,7 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     
     R := HomalgRing( LI );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     RI := EvalLeftInverse( LI );
     
@@ -458,7 +458,7 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     
     R := HomalgRing( RI );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     LI := EvalRightInverse( RI );
     
@@ -509,7 +509,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.BestBasis) then
         
@@ -553,7 +553,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
   
     if IsBound(RP!.BetterEquivalentMatrix) then
         return RP!.BetterEquivalentMatrix( arg );

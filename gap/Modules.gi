@@ -24,7 +24,7 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     
     R := HomalgRing( M1 );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.SubfactorModule) then
         return RP!.SubfactorModule( M1, M2 );

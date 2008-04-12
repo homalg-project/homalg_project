@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgTable.gi              homalg package               Mohamed Barakat
+##  homalgTable.gi              homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,9 +14,9 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgTable:
-DeclareRepresentation( "IsHomalgTableRep",
-        IsHomalgTable,
+# a new representation for the category IshomalgTable:
+DeclareRepresentation( "IshomalgTableRep",
+        IshomalgTable,
         [ "ring" ] );
 
 ####################################
@@ -32,7 +32,7 @@ BindGlobal( "TheFamilyOfHomalgTables",
 # a new type:
 BindGlobal( "TheTypeHomalgTable",
         NewType( TheFamilyOfHomalgTables,
-                IsHomalgTableRep ) );
+                IshomalgTableRep ) );
 
 ####################################
 #
@@ -63,7 +63,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg ring package conversion tables",
-        [ IsHomalgTableRep ],
+        [ IshomalgTableRep ],
         
   function( o )
     

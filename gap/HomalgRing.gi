@@ -17,15 +17,15 @@
 # two new representations for the category IsHomalgRing:
 DeclareRepresentation( "IsHomalgInternalRingRep",
         IsHomalgRing,
-        [ "ring", "HomalgTable" ] );
+        [ "ring", "homalgTable" ] );
 
 DeclareRepresentation( "IsHomalgExternalRingRep",
         IsHomalgRing,
-        [ "ring", "HomalgTable" ] );
+        [ "ring", "homalgTable" ] );
 
 # a new representation for the category IsHomalgExternalRingElement
 DeclareRepresentation( "IsHomalgExternalRingElementRep",
-        IsHomalgExternalObjectRep and IsHomalgExternalRingElement,
+        IshomalgExternalObjectRep and IsHomalgExternalRingElement,
         [ "object", "cas" ] );
 
 ####################################
@@ -236,89 +236,6 @@ end );
 
 ####################################
 #
-# methods for operations:
-#
-####################################
-
-##
-InstallMethod( HomalgPointer,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    return HomalgPointer( R!.ring );
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystem,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    return HomalgExternalCASystem( R!.ring );
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystemVersion,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    return HomalgExternalCASystemVersion( R!.ring );
-    
-end );
-
-##
-InstallMethod( HomalgStream,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    return HomalgStream( R!.ring );
-    
-end );
-
-##
-InstallMethod( HomalgExternalCASystemPID,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    return HomalgExternalCASystemPID( R!.ring );
-    
-end );
-
-##
-InstallMethod( HomalgLastWarning,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    HomalgLastWarning( R!.ring );
-    
-end );
-
-##
-InstallMethod( HomalgNrOfWarnings,
-        "for homalg matrices",
-        [ IsHomalgExternalRingRep ],
-        
-  function( R )
-    
-    return HomalgNrOfWarnings( R!.ring );
-    
-end );
-
-####################################
-#
 # constructor functions and methods:
 #
 ####################################
@@ -332,7 +249,7 @@ InstallGlobalFunction( CreateHomalgRing,
     
     homalg_ring := rec( ring := arg[1] );
     
-    if nargs > 1 and IsHomalgTable( arg[nargs] ) then
+    if nargs > 1 and IshomalgTable( arg[nargs] ) then
         table := arg[nargs];
     else
         table := CreateHomalgTable( arg[1] );
@@ -359,7 +276,7 @@ InstallGlobalFunction( CreateHomalgRing,
     ## Objectify:
     ObjectifyWithAttributes(
             homalg_ring, type,
-            HomalgTable, table );
+            homalgTable, table );
     
     if properties <> [ ] then
         for ar in properties do
@@ -445,7 +362,7 @@ InstallMethod( ViewObj,
   function( o )
     
     Print( "<A homalg external ring residing in the CAS " );
-    Print( HomalgExternalCASystem( o ), ">" ); 
+    Print( homalgExternalCASystem( o ), ">" ); 
     
 end );
 
@@ -456,7 +373,7 @@ InstallMethod( Display,
   function( o )
     local RP;
     
-    RP := HomalgTable( o );
+    RP := homalgTable( o );
     
     if IsBound(RP!.RingName) then
         if IsFunction( RP!.RingName ) then

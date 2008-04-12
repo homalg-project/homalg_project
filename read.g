@@ -10,9 +10,9 @@
 
 ReadPackage( "homalg", "gap/homalg.gi" );
 
-ReadPackage( "homalg", "gap/HomalgExternalObject.gi" );
+ReadPackage( "homalg", "gap/homalgExternalObject.gi" );
 
-ReadPackage( "homalg", "gap/HomalgTable.gi" );
+ReadPackage( "homalg", "gap/homalgTable.gi" );
 ReadPackage( "homalg", "gap/HomalgRing.gi" );
 
 ReadPackage( "homalg", "gap/HomalgMatrix.gi" );

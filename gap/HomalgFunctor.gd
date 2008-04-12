@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  HomalgTable.gd              homalg package               Mohamed Barakat
+##  HomalgFunctor.gd            homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for rings.
+##  Declaration stuff for functors.
 ##
 #############################################################################
 
@@ -14,8 +14,9 @@
 #
 ####################################
 
-# a new category of objects:
-DeclareCategory( "IsHomalgTable",
+# A new category of objects:
+
+DeclareCategory( "IsHomalgFunctor",
         IsAttributeStoringRep );
 
 ####################################
@@ -38,8 +39,10 @@ DeclareCategory( "IsHomalgTable",
 
 # constructor methods:
 
-DeclareOperation( "CreateHomalgTable",
-        [ IsObject ] );
+#DeclareGlobalFunction( "CreateHomalgFunctor" );
 
 # basic operations:
+
+#DeclareOperation( "MatrixOfGenerators",
+#        [ IsHomalgFunctor ] );
 

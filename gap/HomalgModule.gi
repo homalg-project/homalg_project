@@ -1044,13 +1044,13 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.ElementaryDivisors) then
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
-            e := List( e, a -> HomalgExternalRingElement( a, HomalgExternalCASystem( R ) ) );
+            e := List( e, a -> HomalgExternalRingElement( a, homalgExternalCASystem( R ) ) );
         fi;
         
         one := One( R );
@@ -1707,7 +1707,7 @@ InstallMethod( Display,
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     if IsBound(RP!.RingName) then
         if IsFunction( RP!.RingName ) then
@@ -1725,8 +1725,8 @@ InstallMethod( Display,
     
     display := ElementaryDivisorsOfLeftModule( M );
     
-    if IsHomalgExternalObjectRep( display[1] ) then ## display is only empty in case the module is trivial, but this is taken care of my a special method
-        get_string := HomalgPointer;
+    if IsHomalgExternalRingElementRep( display[1] ) then ## display is only empty in case the module is trivial, but this is taken care of my a special method
+        get_string := homalgPointer;
     else
         get_string := String;
     fi;

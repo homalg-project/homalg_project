@@ -26,7 +26,7 @@ InstallValue( HOMALG,
            )
 );
 
-InstallGlobalFunction( HomalgTotalRuntimes,
+InstallGlobalFunction( homalgTotalRuntimes,
   function( arg )
     local r, t;
     
@@ -116,7 +116,7 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
     
 end );
 
-InstallGlobalFunction( HomalgNamesOfComponentsToIntLists,
+InstallGlobalFunction( homalgNamesOfComponentsToIntLists,
   function( arg )
     
     return Filtered(

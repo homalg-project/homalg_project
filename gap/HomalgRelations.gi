@@ -368,7 +368,7 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
     
     R := HomalgRing( M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     #=====# begin of the core procedure #=====#
     
@@ -396,7 +396,7 @@ InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (
     
     R := HomalgRing( _M );
     
-    RP := HomalgTable( R );
+    RP := homalgTable( R );
     
     #=====# begin of the core procedure #=====#
     
