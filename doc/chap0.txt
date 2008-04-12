@@ -1,0 +1,47 @@
+  
+  
+                           [1XGAP 4 Package [5XIO_ForHomalg[0m[1X[0m
+  
+  
+          [1XIO_ForHomalg --- An Abstract Package for Homological Algebra[0m
+  
+  
+                               Version 2008.03.15
+  
+  
+                                   March 2007
+  
+  
+                                Mohamed Barakat
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:mohamed.barakat@rwth-aachen.de[0m
+      Homepage: [7Xhttp://www.math.rwth-aachen.de/~barakat[0m
+      Address:  Lehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[0m
+  © 2007 by Mohamed Barakat
+  
+  This  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (IO_ForHomalg)[0X
+  
+  1 Introduction
+    1.1 Philosophy
+    1.2 Overview over this manual
+  2 Installation of the [5XIO_ForHomalg[0m-Package
+  3 Examples
+  
+  
+  -------------------------------------------------------
