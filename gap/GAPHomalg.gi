@@ -97,7 +97,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     homalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
     
-    ar := [ [ "CreateHomalgRing( ", arg[1], ")" ], TheTypeHomalgExternalRingObjectInGAP, stream ];
+    ar := [ [ "CreateHomalgRing( ", arg[1], " )" ], TheTypeHomalgExternalRingObjectInGAP, stream ];
     
     if Length( arg ) > 1 then
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
