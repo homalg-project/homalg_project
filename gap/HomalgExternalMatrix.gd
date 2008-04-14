@@ -29,3 +29,15 @@ DeclareOperation( "CreateHomalgMatrixInExternalCAS",
 DeclareOperation( "CreateHomalgMatrixInExternalCAS",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
+DeclareOperation( "GetListOfHomalgExternalMatrixAsString",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetListOfHomalgExternalMatrixAsString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "GetListListOfHomalgExternalMatrixAsString",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetListListOfHomalgExternalMatrixAsString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
