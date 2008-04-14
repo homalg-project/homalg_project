@@ -260,9 +260,9 @@ end );
 
 InstallMethod( GetListOfHomalgExternalMatrixAsString,
                "for sage matrices",
-	       [ IsHomalgExternalMatrixInSageRep ],
+	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
 
-  function( M )
+  function( M, R )
     
     return homalgSendBlocking( [ M, ".list()" ], "need_output");
     
