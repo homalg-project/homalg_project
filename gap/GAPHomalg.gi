@@ -114,12 +114,47 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
-  function( M, R )
+  function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", M, ", ", R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", S, ", ", R, " )" ] );
     
     return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixInExternalCAS,
+        "for a list of an (external) matrix",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
+  function( S, r, c, R )
+    local ext_obj;
+    
+    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ListToListList( ", S, ", ", r, c , " ), ", R, " )" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgExternalMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "Concatenation( Eval( ", M, " ) )" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgExternalMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "Eval( ", M, " )" ], "need_output" );
     
 end );
 

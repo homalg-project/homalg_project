@@ -458,6 +458,42 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
     
 end );
 
+##
+InstallMethod( CreateHomalgMatrixInExternalCAS,
+        "for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, R )
+    local ext_obj;
+    
+    ext_obj := homalgSendBlocking( [ R, "[2][matrix](matrix(", r, c, ",", M, "))" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgExternalMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "map(op,convert(", M, ",listlist))" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgExternalMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "convert(", M, ",listlist)" ], "need_output" );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

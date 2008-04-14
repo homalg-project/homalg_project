@@ -230,10 +230,24 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
         "for homalg matrices",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
         
-  function( M, R )
+  function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "Matrix(", R, ",", M, ")" ] );
+    ext_obj := homalgSendBlocking( [ "Matrix(", R, ",", S, ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixInExternalCAS,
+        "for a list of an (external) matrix",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+  function( S, r, c, R )
+    
+    local ext_obj;
+    
+    ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ] );
     
     return HomalgMatrix( ext_obj, R );
     
