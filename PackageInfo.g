@@ -2,9 +2,7 @@
 ##  
 ##  PackageInfo.g for the package `IO_ForHomalg'             Mohamed Barakat
 ##                                                            Simon Goertzen
-##                                                    Markus Lange-Hegermann
 ##                                                           Max Neunhoeffer
-##                                                            Daniel Robertz
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
