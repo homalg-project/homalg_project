@@ -244,3 +244,12 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
     
 end );
 
+InstallMethod( GetListOfHomalgExternalMatrixAsString,
+               "for sage matrices",
+	       [ IsHomalgExternalMatrixInSageRep ],
+
+  function( M )
+    
+    return homalgSendBlocking( [ M, ".list()" ], "need_output");
+    
+end );
