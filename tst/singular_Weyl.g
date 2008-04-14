@@ -1,7 +1,7 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
-HOMALG_RINGS.color_display := true;
-SetInfoLevel( InfoRingsForHomalg, 7 );
+HOMALG_IO.color_display := true;
+SetInfoLevel( InfoIO_ForHomalg, 7 );
 A3 := RingForHomalgInSingular( "0,(x,d1,y,d2,z,d3),dp; Weyl()" );
 Display( A3 );
 wmat := HomalgMatrix( " \

@@ -1,6 +1,6 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
-HOMALG_RINGS.color_display := true;
+HOMALG_IO.color_display := true;
 Qx := RingForHomalgInSingular( "0,x,dp", IsPrincipalIdealRing );
 Display( Qx );
 wmat := HomalgMatrix( " \

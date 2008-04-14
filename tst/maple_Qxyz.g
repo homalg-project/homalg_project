@@ -1,6 +1,6 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
-HOMALG_RINGS.color_display := true;
+HOMALG_IO.color_display := true;
 Qxyz := HomalgFieldOfRationalsInMaple( ) * "x,y,z";
 Display( Qxyz );
 wmat := HomalgMatrix( " \
