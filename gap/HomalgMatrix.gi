@@ -857,6 +857,21 @@ InstallGlobalFunction( HomalgVoidMatrix,
     
 end );
 
+##
+InstallGlobalFunction( ListToListList,
+  function( L, r, c )
+    local M, i;
+    
+    M := [ ];
+    
+    for i in [ 1 .. r ] do
+        Append( M, [ L{[ (i-1)*c+1 .. i*c ]} ] );
+    od;
+    
+    return M;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

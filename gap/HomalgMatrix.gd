@@ -221,6 +221,8 @@ DeclareGlobalFunction( "HomalgVoidMatrix" );
 
 DeclareGlobalFunction( "ConvertHomalgMatrix" );
 
+DeclareGlobalFunction( "ListToListList" );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
