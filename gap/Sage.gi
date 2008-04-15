@@ -233,7 +233,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixInExternalCAS,
-        "for homalg matrices",
+        "for a listlist of an (external) matrix",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
   function( S, R )
@@ -245,6 +245,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
     
 end );
 
+##
 InstallMethod( CreateHomalgMatrixInExternalCAS,
                "for a list of an (external) matrix",
 	       [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
@@ -258,6 +259,19 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
    
 end );
 
+##
+InstallMethod( CreateSparseHomalgMatrixInExternalCAS,
+               "for a sparse list of an (external) matrix",
+	       [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
+
+  function( S, r, c, R )
+  
+    local M;
+    M := HomalgZeroMatrix( r, c, R);
+    homalgSendBlocking( [ "FillMatrix(", M, ",",  S, ")" ], "need_command", R );
+    return M;
+
+##
 InstallMethod( GetListListOfHomalgExternalMatrixAsString,
                "for sage matrices",
 	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
@@ -268,6 +282,7 @@ InstallMethod( GetListListOfHomalgExternalMatrixAsString,
   
 end );
 
+##
 InstallMethod( GetListOfHomalgExternalMatrixAsString,
                "for sage matrices",
 	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
@@ -276,4 +291,15 @@ InstallMethod( GetListOfHomalgExternalMatrixAsString,
     
     return homalgSendBlocking( [ M, ".list()" ], "need_output" );
     
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgExternalMatrixAsString,
+               "for sage matrices",
+	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
+	       
+  function( M , R )
+  
+    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not M[r,c]==0 ]" ], "need_output" );
+
 end );

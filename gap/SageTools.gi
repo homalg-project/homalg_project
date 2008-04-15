@@ -32,6 +32,9 @@ InstallValue( InitializeSageTools,
             "  ColChecklist=[C.column(x).is_zero() for x in range(C.ncols())]\n",
             "  return filter(check_cols,range(C.ncols()))\n\n"
             
+	    "def FillMatrix(M,L):\n",
+            "  for x in L:\n",
+	    "    M[x[0]-1,x[1]-1] = x[2]\n\n"
           );
             
           homalgSendBlocking( [ command ], "need_command", R );
