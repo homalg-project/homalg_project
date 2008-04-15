@@ -19,12 +19,14 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInSingularRep
           and IsPrincipalIdealRing ],
 
-  function( arg )
+  function( R )
     local RP, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForSingularTools );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForSingularBestBasis );
+    
+    InitializeSingularBestBasis( R );
     
     RP_specific :=
           rec(
@@ -61,13 +63,13 @@ InstallMethod( CreateHomalgTable,
                        SetNrColumns( U, NrRows( M ) );
                        SetIsInvertibleMatrix( U, true );
                        
-                       ## compute N and U:
-#rank_of_N := Int( homalgSendBlocking( [ "list l=rowred(", M, ",1);", U, "=l[2];", N, "=l[1]; rank(", N, ")" ], "need_output" ) );
-                       homalgSendBlocking( [ "list l=rowred(", M, ",1);", U, "=l[2];", N, "=l[1]" ], "need_command" );
+                       ## compute N and U, such that N=UM
+                       homalgSendBlocking( [ "list l=gauss_row(", M, ",1);",
+                                             U, "=transpose(l[2]);", N, "=transpose(l[1])"
+                                           ], "need_command" );
                    else
                        ## compute N only:
-#rank_of_N := Int( homalgSendBlocking( [ "matrix ", N, " = rowred(", M, "); rank(", N, ")" ], "need_output" ) );
-                       homalgSendBlocking( [ "matrix ", N, " = rowred(", M, ")" ], "need_command" );
+                       homalgSendBlocking( [ "matrix ", N, " = gauss_row(", M, ")" ], "need_command" );
                    fi;
                    
 #SetRowRankOfMatrix( N, rank_of_N );
