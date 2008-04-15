@@ -116,7 +116,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
