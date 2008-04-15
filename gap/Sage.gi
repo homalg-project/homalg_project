@@ -267,7 +267,7 @@ InstallMethod( CreateHomalgSparseMatrixInExternalCAS,
   function( S, r, c, R )
   
     local M;
-    M := HomalgInitialMatrix( r, c, R);
+    M := HomalgInitialMatrix( r, c, R );
     homalgSendBlocking( [ "FillMatrix(", M, ",",  S, ")" ], "need_command", R );
     return M;
 
@@ -280,7 +280,7 @@ InstallMethod( GetListListOfHomalgExternalMatrixAsString,
 	       
   function( M, R )
   
-    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows(M), ")]" ], "need_output" );
+    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output" );
   
 end );
 
