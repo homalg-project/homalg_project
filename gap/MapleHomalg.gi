@@ -479,7 +479,7 @@ InstallMethod( GetListOfHomalgExternalMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "map(op,convert(", M, ",listlist))" ], "need_output" );
+    return homalgSendBlocking( [ "convert(map(op,convert(", M, ",listlist)),symbol)" ], "need_output" );
     
 end );
 
@@ -490,7 +490,7 @@ InstallMethod( GetListListOfHomalgExternalMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "convert(", M, ",listlist)" ], "need_output" );
+    return homalgSendBlocking( [ "convert(convert(", M, ",listlist),symbol)" ], "need_output" );
     
 end );
 
