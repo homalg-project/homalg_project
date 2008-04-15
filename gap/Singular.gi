@@ -111,6 +111,8 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
+    homalgSendBlocking( "list l;matrix S;matrix U;matrix V;", "need_command", ext_obj );
+    
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
 end );
