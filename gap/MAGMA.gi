@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  MAGMA.gi                  RingsForHomalg package         Mohamed Barakat
+##                                                          Markus Kirschmer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -26,6 +27,7 @@ InstallValue( HOMALG_IO_MAGMA,
             CUT_END := 2,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
+            remove_enter := true,       ## a MAGMA specific
             define := ":=",
             prompt := "magma> ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
@@ -250,6 +252,28 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
     ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ] );
     
     return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgExternalMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "Eltseq(", M, ")" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgExternalMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output" );
     
 end );
 

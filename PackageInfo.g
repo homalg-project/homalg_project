@@ -2,6 +2,7 @@
 ##  
 ##  PackageInfo.g for the package `RingsForHomalg'           Mohamed Barakat
 ##                                                            Simon Goertzen
+##                                                          Markus Kirschmer
 ##                                                    Markus Lange-Hegermann
 ##                                                           Max Neunhoeffer
 ##                                                            Daniel Robertz
@@ -147,6 +148,22 @@ Persons := [
     PostalAddress := Concatenation( [
                        "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec( 
+    LastName      := "Kirschmer",
+    FirstNames    := "Markus",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "markus.kischmer@math.rwth-aachen.de",
+    WWWHome       := "http://www.math.rwth-aachen.de/~Markus.Kirschmer/",
+    PostalAddress := Concatenation( [
+                       "Markus Kirschmer\n",
+                       "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
                        "Germany" ] ),
@@ -358,6 +375,8 @@ BannerString := Concatenation(
         " (", ~.Persons[4].WWWHome, ")\n",
   "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
         " (", ~.Persons[5].WWWHome, ")\n",
+  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
+        " (", ~.Persons[6].WWWHome, ")\n",
   "For help, type: ?RingsForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 

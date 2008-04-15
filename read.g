@@ -2,6 +2,7 @@
 ##
 ##  read.g                    RingsForHomalg package         Mohamed Barakat
 ##                                                            Simon Goertzen
+##                                                          Markus Kirschmer
 ##                                                    Markus Lange-Hegermann
 ##                                                           Max Neunhoeffer
 ##                                                            Daniel Robertz
