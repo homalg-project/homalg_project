@@ -18,26 +18,3 @@
 
 ## ConvertHomalgMatrix have been declared in homalg since it is called there
 
-# basic operations:
-
-DeclareOperation( "CreateHomalgMatrixInExternalCAS",
-        [ IsString, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgMatrixInExternalCAS",
-        [ IsString, IsInt, IsInt, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgMatrixInExternalCAS",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "GetListOfHomalgExternalMatrixAsString",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "GetListOfHomalgExternalMatrixAsString",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "GetListListOfHomalgExternalMatrixAsString",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "GetListListOfHomalgExternalMatrixAsString",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-

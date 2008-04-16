@@ -340,6 +340,7 @@ InstallGlobalFunction( homalgSendBlocking,
         if IsBound( stream.remove_enter ) and stream.remove_enter = true then
             RemoveCharacters( L, "\n" );
         fi;
+	RemoveCharacters( L, "\\ " );
         Info( InfoIO_ForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
         if IsBound( stream.check_output ) and stream.check_output = true
            and '\n' in L and not ',' in L then

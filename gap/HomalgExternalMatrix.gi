@@ -98,13 +98,13 @@ end );
 ####################################
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
         
   function( M, R )
     
-    return CreateHomalgMatrixInExternalCAS( String( Eval( M ) ), R );
+    return CreateHomalgMatrix( String( Eval( M ) ), R );
     
 end );
 
@@ -117,33 +117,41 @@ InstallGlobalFunction( ConvertHomalgMatrix,
     
     if nargs = 2 and ( IsHomalgMatrix( arg[1] ) or IsString( arg[1] ) ) and IsHomalgRing( arg[2] ) then
         
-        if IsHomalgInternalMatrixRep( arg[1] ) or IsString( arg[1] ) then
-            M := arg[1];
-        else
-            M := GetListListOfHomalgExternalMatrixAsString( arg[1] );
-            o := homalgStream( HomalgRing( arg[1] ) );
-            if not ( IsBound( o.leave_spaces ) and o.leave_spaces = true ) then
-                RemoveCharacters( M, " " );
+        M := arg[1];
+        
+        if not ( IsHomalgInternalMatrixRep( M ) or IsString( M ) ) then
+            if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
+                M := GetSparseListOfHomalgMatrixAsString( M );
+            else
+                M := GetListListOfHomalgMatrixAsString( M );
             fi;
         fi;
         
         R := arg[2];
         
         if IsHomalgInternalRingRep( R ) then
-            return HomalgMatrix( EvalString( M ), R );
+            if IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
+                return CreateHomalgSparseMatrix( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
+            else
+                return HomalgMatrix( EvalString( M ), R );
+            fi;
         else
-            return CreateHomalgMatrixInExternalCAS( M, R );
+            if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
+                return CreateHomalgSparseMatrix( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
+            else
+                return CreateHomalgMatrix( M, R );
+            fi;
         fi;
         
     elif nargs = 4 and ( IsHomalgMatrix( arg[1] ) or IsString( arg[1] ) ) and IsHomalgRing( arg[4] ) then
         
-        if IsHomalgInternalMatrixRep( arg[1] ) or IsString( arg[1] ) then
-            M := arg[1];
-        else
-            M := GetListOfHomalgExternalMatrixAsString( arg[1] );
-            o := homalgStream( HomalgRing( arg[1] ) );
-            if not ( IsBound( o.leave_spaces ) and o.leave_spaces = true ) then
-                RemoveCharacters( M, " " );
+        M := arg[1];
+        
+        if not ( IsHomalgInternalMatrixRep( M ) or IsString( M ) ) then
+            if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
+                M := GetSparseListOfHomalgMatrixAsString( M );
+            else
+                M := GetListOfHomalgMatrixAsString( M );
             fi;
         fi;
         
@@ -156,34 +164,16 @@ InstallGlobalFunction( ConvertHomalgMatrix,
             M := ListToListList( M );
             return HomalgMatrix( M, R );
         else
-            return CreateHomalgMatrixInExternalCAS( M, r, c, R );
+            if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
+                return CreateHomalgSparseMatrix( M, r, c, R );
+            else
+                return CreateHomalgMatrix( M, r, c, R );
+            fi;
         fi;
         
     fi;
     
     Error( "wrong syntax\n" );
-    
-end );
-
-##
-InstallMethod( GetListOfHomalgExternalMatrixAsString,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    
-    return GetListOfHomalgExternalMatrixAsString( M, HomalgRing( M ) );
-    
-end );
-
-##
-InstallMethod( GetListListOfHomalgExternalMatrixAsString,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    
-    return GetListListOfHomalgExternalMatrixAsString( M, HomalgRing( M ) );
     
 end );
 
