@@ -110,7 +110,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
@@ -124,7 +124,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for a list of an (external) matrix",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
@@ -137,7 +137,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( GetListOfHomalgExternalMatrixAsString,
+InstallMethod( GetListOfHomalgMatrixAsString,
         "for maple matrices",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
@@ -148,7 +148,7 @@ InstallMethod( GetListOfHomalgExternalMatrixAsString,
 end );
 
 ##
-InstallMethod( GetListListOfHomalgExternalMatrixAsString,
+InstallMethod( GetListListOfHomalgMatrixAsString,
         "for maple matrices",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         

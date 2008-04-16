@@ -445,7 +445,7 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsHomalgExternalRingInMapleRep ],
         
@@ -459,7 +459,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
@@ -473,7 +473,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixInExternalCAS,
+InstallMethod( CreateHomalgSparseMatrix,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
@@ -491,7 +491,7 @@ InstallMethod( CreateHomalgSparseMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( GetListOfHomalgExternalMatrixAsString,
+InstallMethod( GetListOfHomalgMatrixAsString,
         "for maple matrices",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
@@ -502,7 +502,7 @@ InstallMethod( GetListOfHomalgExternalMatrixAsString,
 end );
 
 ##
-InstallMethod( GetListListOfHomalgExternalMatrixAsString,
+InstallMethod( GetListListOfHomalgMatrixAsString,
         "for maple matrices",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
@@ -513,13 +513,13 @@ InstallMethod( GetListListOfHomalgExternalMatrixAsString,
 end );
 
 ##
-InstallMethod( GetSparseListOfHomalgExternalMatrixAsString,
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
         "for maple matrices",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
     
-    return homalgSendBlocking( [ "map(i->op(map(j->if ", M, "[i,j]<>", Zero( R ), " then [i,j,eval(", M, "[i,j])] fi, [$1..", NrColumns( M ),"])), [$1..", NrRows( M ),"])" ], "need_output" );
+    return homalgSendBlocking( [ "map(i->op(map(j->if ", M, "[i,j]<>", Zero( R ), " then [i,j,convert(", M, "[i,j],symbol)] fi, [$1..", NrColumns( M ),"])), [$1..", NrRows( M ),"])" ], "need_output" );
     
 end );
 

@@ -232,7 +232,7 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
         "for a listlist of an (external) matrix",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
@@ -246,7 +246,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
+InstallMethod( CreateHomalgMatrix,
                "for a list of an (external) matrix",
 	       [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
@@ -260,7 +260,7 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixInExternalCAS,
+InstallMethod( CreateHomalgSparseMatrix,
                "for a sparse list of an (external) matrix",
 	       [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
@@ -274,7 +274,7 @@ InstallMethod( CreateHomalgSparseMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( GetListListOfHomalgExternalMatrixAsString,
+InstallMethod( GetListListOfHomalgMatrixAsString,
                "for sage matrices",
 	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
 	       
@@ -285,7 +285,7 @@ InstallMethod( GetListListOfHomalgExternalMatrixAsString,
 end );
 
 ##
-InstallMethod( GetListOfHomalgExternalMatrixAsString,
+InstallMethod( GetListOfHomalgMatrixAsString,
                "for sage matrices",
 	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
 
@@ -296,7 +296,7 @@ InstallMethod( GetListOfHomalgExternalMatrixAsString,
 end );
 
 ##
-InstallMethod( GetSparseListOfHomalgExternalMatrixAsString,
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
                "for sage matrices",
 	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
 	       
