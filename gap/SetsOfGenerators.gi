@@ -58,15 +58,18 @@ end );
 ####################################
 
 InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
-  function( mat, R )
+  function( arg )
     local generators;
     
-    if IsString( mat ) and Length( mat ) > 2 and LowercaseString( mat{[1..3]} ) = "unk" then
-        generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
-                          1 := "unknown generators" );
+    generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ] );
+    
+    if IsHomalgGeneratorsOfFinitelyGeneratedModuleRep( arg[1] )
+       and IsHomalgGeneratorsOfLeftModule( arg[1] ) then
+        generators.1 := arg[1];
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
+        generators.1 := "unknown generators";
     else
-        generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
-                          1 := HomalgGeneratorsForLeftModule( mat, R ) );
+        generators.1 := HomalgGeneratorsForLeftModule( arg[1], arg[2] );
     fi;
     
     ## Objectify:
@@ -77,15 +80,18 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
 end );
   
 InstallGlobalFunction( CreateSetsOfGeneratorsForRightModule,
-  function( mat, R )
+  function( arg )
     local generators;
     
-    if IsString( mat ) and Length( mat ) > 2 and LowercaseString( mat{[1..3]} ) = "unk" then
-        generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
-                          1 := "unknown generators" );
+    generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ] );
+    
+    if IsHomalgGeneratorsOfFinitelyGeneratedModuleRep( arg[1] )
+       and IsHomalgGeneratorsOfRightModule( arg[1] ) then
+        generators.1 := arg[1];
+    elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
+        generators.1 := "unknown generators";
     else
-        generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ],
-                          1 := HomalgGeneratorsForRightModule( mat, R ) );
+        generators.1 := HomalgGeneratorsForRightModule( arg[1], arg[2] );
     fi;
     
     ## Objectify:

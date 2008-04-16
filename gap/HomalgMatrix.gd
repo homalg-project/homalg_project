@@ -228,6 +228,44 @@ DeclareGlobalFunction( "ListToListList" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "SetExtractHomalgMatrixAsSparse",
+        [ IsHomalgMatrix, IsBool ] );
+
+# basic operations:
+
+DeclareOperation( "CreateHomalgMatrix",
+        [ IsString, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgMatrix",
+        [ IsString, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgMatrix",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgSparseMatrix",
+        [ IsString, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgSparseMatrix",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "GetListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "GetListListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetListListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
 DeclareOperation( "homalgPointer",
         [ IsHomalgMatrix ] );
 

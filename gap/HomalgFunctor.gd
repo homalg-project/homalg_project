@@ -39,10 +39,5 @@ DeclareCategory( "IsHomalgFunctor",
 
 # constructor methods:
 
-#DeclareGlobalFunction( "CreateHomalgFunctor" );
-
-# basic operations:
-
-#DeclareOperation( "MatrixOfGenerators",
-#        [ IsHomalgFunctor ] );
+DeclareGlobalFunction( "CreateHomalgFunctor" );
 

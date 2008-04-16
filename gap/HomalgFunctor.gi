@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgGenerators:
+# a new representation for the category IsHomalgFunctor:
 DeclareRepresentation( "IsHomalgFunctorRep",
         IsHomalgFunctor,
         [ ] );
@@ -26,40 +26,41 @@ DeclareRepresentation( "IsHomalgFunctorRep",
 ####################################
 
 # a new family:
-BindGlobal( "HomalgFunctorFamily",
-        NewFamily( "TheFamilyOfHomalgGenerators" ) );
+BindGlobal( "TheFamilyOfHomalgFunctors",
+        NewFamily( "TheFamilyOfHomalgFunctors" ) );
 
-# two new types:
-BindGlobal( "TheTypeHomalgGeneratorsOfLeftModule",
-        NewType(  TheFamilyOfHomalgGenerators,
-                IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ) );
-
-BindGlobal( "TheTypeHomalgGeneratorsOfRightModule",
-        NewType(  TheFamilyOfHomalgGenerators,
-                IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ) );
-
-####################################
-#
-# methods for operations:
-#
-####################################
-
-##
-InstallMethod( MatrixOfGenerators,
-        "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
-        
-  function( gen )
-    
-    return gen!.generators;
-    
-end );
+# a new type:
+BindGlobal( "TheTypeHomalgFunctor",
+        NewType(  TheFamilyOfHomalgFunctors,
+                IsHomalgFunctorRep ) );
 
 ####################################
 #
 # constructor functions and methods:
 #
 ####################################
+
+InstallGlobalFunction( CreateHomalgFunctor,
+  function( arg )
+    local ar, functor, type;
+    
+    functor := rec( );
+    
+    for ar in arg do
+        if not IsString( ar ) and IsList( ar ) and Length( ar ) = 2 and IsString( ar[1] ) then
+            functor.( ar[1] ) := ar[2];
+        fi;
+    od;
+    
+    type := TheTypeHomalgFunctor;
+    
+    ## Objectify:
+    Objectify( type, functor );
+    
+    return functor;
+    
+end );
+
 
 ####################################
 #
@@ -68,38 +69,21 @@ end );
 ####################################
 
 InstallMethod( ViewObj,
-        "for homalg generators",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
         
   function( o )
-    local m;
     
-    m := NrGenerators( o );
-    
-    if m = 0 then
-        Print( "<An empty set of generators of a homalg " );
-    elif m = 1 then
-        Print( "<A set consisting of a single generator of a homalg " );
-    else
-        Print( "<A set of ", m, " generators of a homalg " );
-    fi;
-    
-    if IsHomalgGeneratorsOfLeftModule( o ) then
-        Print( "left " );
-    else
-        Print( "right " );
-    fi;
-    
-    Print( "module>" );
+    Print( "<A functor for homalg>" );
     
 end );
 
 InstallMethod( Display,
-        "for homalg generators",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
         
   function( o )
     
-    Display( MatrixOfGenerators( o ) );
+    Print( o!.name );
     
 end );

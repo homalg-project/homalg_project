@@ -99,6 +99,90 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( SetExtractHomalgMatrixAsSparse,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsBool ],
+        
+  function( M, b )
+    
+    M!.ExtractHomalgMatrixAsSparse := b;
+    
+end );
+
+##
+InstallMethod( CreateHomalgSparseMatrix,
+        "for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( S, r, c, R )
+    local M, e;
+    
+    M := List( [ 1 .. r ], a -> List( [ 1 .. c ], b -> Zero( R ) ) );
+    
+    for e in EvalString( S ) do
+        M[e[1]][e[2]] := e[3];
+    od;
+    
+    return HomalgMatrix( M, r, c, R );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetListOfHomalgMatrixAsString( M, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetListListOfHomalgMatrixAsString( M, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetSparseListOfHomalgMatrixAsString( M, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
+        
+  function( M, R )
+    local r, c, z, E, l;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    z := Zero( R );
+    
+    E := Eval( M );
+    
+    l := List( [ 1 .. r ], a -> Filtered( List( [ 1 .. c ], function( b ) if E[a][b] <> z then return [ a, b, E[a][b] ]; else return 0; fi; end ), x -> x <> 0 ) );
+    
+    l := Concatenation( l );
+    
+    return String( l );
+    
+end );
+
+##
 InstallMethod( AreComparableMatrices,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -666,7 +750,7 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, type, matrix, option, M;
+    local nargs, R, M, ar, type, matrix, option;
     
     nargs := Length( arg );
     
@@ -678,10 +762,23 @@ InstallGlobalFunction( HomalgMatrix,
         return M;
     fi;
     
-    if nargs > 1 and ( IsHomalgMatrix( arg[1] ) or ( IsString( arg[1] ) and arg[1] <> [ ] ) ) then
-        
-        return CallFuncList( ConvertHomalgMatrix, arg );
-        
+    if nargs > 1 then
+        if IsHomalgMatrix( arg[1] ) or ( IsString( arg[1] ) and arg[1] <> [ ] ) then
+            return CallFuncList( ConvertHomalgMatrix, arg );
+        elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] )
+          and not ( Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 ) then
+            if Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
+                M := List( arg[1], a -> [a] ); ## NormalizeInput
+            else
+                M := arg[1];
+            fi;
+            
+            M := String( M );
+            
+            ar := Concatenation( [ M ], arg{[ 2 .. nargs ]} );
+            
+            return CallFuncList( ConvertHomalgMatrix, ar );
+        fi;
     fi;
     
     R := arg[nargs];
