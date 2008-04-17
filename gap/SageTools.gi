@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( InitializeSageTools,
+InstallGlobalFunction( InitializeSageTools,
         
         function( R )
           local command;
