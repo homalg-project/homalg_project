@@ -18,3 +18,14 @@
 
 ## ConvertHomalgMatrix have been declared in homalg since it is called there
 
+DeclareOperation( "ConvertHomalgMatrixViaFile",
+        [ IsHomalgMatrix, IsHomalgRing ]
+        );
+
+DeclareOperation( "SaveDataOfHomalgMatrixInFile",
+        [ IsString, IsHomalgMatrix, IsHomalgRing ]
+        );
+
+DeclareOperation( "LoadDataOfHomalgMatrixFromFile",
+        [ IsString, IsHomalgRing ]
+        );
