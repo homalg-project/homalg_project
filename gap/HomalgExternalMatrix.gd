@@ -26,6 +26,10 @@ DeclareOperation( "SaveDataOfHomalgMatrixInFile",
         [ IsString, IsHomalgMatrix, IsHomalgRing ]
         );
 
+DeclareOperation( "SaveDataOfHomalgMatrixInFile",
+        [ IsString, IsHomalgMatrix ]
+        );
+
 DeclareOperation( "LoadDataOfHomalgMatrixFromFile",
         [ IsString, IsHomalgRing ]
         );

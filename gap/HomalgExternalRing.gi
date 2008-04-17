@@ -19,7 +19,8 @@
 InstallValue( HOMALG_IO,
         rec(
             SaveHomalgMaximumBackStream := false,
-            color_display := "false"
+            color_display := false,
+	    DirectoryForTemporaryFiles := "./"
            )
 );
 

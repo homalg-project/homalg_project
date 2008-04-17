@@ -120,11 +120,13 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         M := arg[1];
         R := arg[2];
 	
-        if not ( IsHomalgInternalMatrixRep( M ) or IsString( M ) ) then
-            if IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = true and IsHomalgExternalRingRep( arg[2] ) then
-                return ConvertHomalgMatrixViaFile( M, arg[2] );
+        if not IsString( M ) then
+            if IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = true then
+                return ConvertHomalgMatrixViaFile( M, R );
 	    fi;
-	    
+        fi;	
+	
+	if not ( IsHomalgInternalMatrixRep( M ) or IsString( M ) ) then
 	    if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
                 M := GetSparseListOfHomalgMatrixAsString( M );
             else
@@ -182,20 +184,108 @@ end );
 ##
 InstallMethod( ConvertHomalgMatrixViaFile,
         "convert an external matrix into an external ring via file saving and loading",
-        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingRep ],
+        [ IsHomalgMatrix, IsHomalgRing ],
         
-  function( M, R )
+  function( M, RR )
     
-    local filename, MM;
+    local R, directory, pointer, pid, filename, MM;
     
-    filename := "temporary.txt"; #temporary name for testing purposes
+    R := HomalgRing( M ); # the source ring
     
-    SaveDataOfHomalgMatrixInFile( filename, M, HomalgRing( M ) );
+    if IsBound( HOMALG_IO.DirectoryForTemporaryFiles ) then
+        directory := HOMALG_IO.DirectoryForTemporaryFiles;
+        if directory[Length(directory)] <> '\/' then
+            directory[Length(directory) + 1] := '\/';
+        fi;
+    else
+        directory := "";
+    fi;
     
-    MM := LoadDataOfHomalgMatrixFromFile( filename, R );
+    if IsHomalgExternalMatrixRep( M ) then
+        pointer := homalgPointer( M );
+        pid := String( homalgExternalCASystemPID( R ) );
+    else
+        pointer := "Internal"; #FIXME
+        pid := "GAP";
+    fi;
+    
+    filename := Concatenation( directory, pointer, "_PID_", pid );
+    
+    SaveDataOfHomalgMatrixInFile( filename, M );
+    
+    MM := LoadDataOfHomalgMatrixFromFile( filename, RR ); # matrix in target ring
     
     Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
     
     return MM;
+    
+end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for two arguments instead of three",
+        [ IsString, IsHomalgMatrix ],
+        
+  function( filename, M )
+    
+    return SaveDataOfHomalgMatrixInFile( filename, M, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for an internal homalg matrix",
+        [ IsString, IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
+        
+  function( filename, M, R )
+    local mode, fs;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        
+        fs := IO_File( filename, "w" );
+        
+        IO_Write( fs, GetListListOfHomalgMatrixAsString( M ) );
+        
+        IO_Close( fs );
+        
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for an internal homalg ring",
+        [ IsString, IsHomalgInternalRingRep ],
+        
+  function( filename, R )
+    local mode, fs, str, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        
+        fs := IO_File( filename, "r" );
+        
+        str := IO_ReadLine( fs );
+        
+        IO_Close( fs );
+        
+        M := HomalgMatrix( EvalString( str ), R );
+        
+    fi;
+    
+    return M;
     
 end );
