@@ -256,6 +256,24 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
+InstallMethod( CreateHomalgSparseMatrix,
+        "for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  function( S, r, c, R )
+    local M, l;
+    
+    M := HomalgVoidMatrix( r, c, R );
+    
+    l := homalgSendBlocking( S, R );
+    
+    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", S, "] ))" ] , "need_command" );
+    
+    return M;
+    
+end );
+
+##
 InstallMethod( GetListOfHomalgMatrixAsString,
         "for maple matrices",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
@@ -274,6 +292,17 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
   function( M, R )
     
     return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for maple matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output" );
     
 end );
 

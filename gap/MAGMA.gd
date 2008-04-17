@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  MAGMA.gd                  RingsForHomalg package         Mohamed Barakat
+##                                                          Markus Kirschmer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
