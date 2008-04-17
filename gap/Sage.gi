@@ -327,3 +327,61 @@ InstallMethod( SetElementOfHomalgMatrix,
     return homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command" );
     
 end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for sage matrices",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSageRep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        command := [ "_fs = open('", filename, "','w'); ",
+                     "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
+                     "_fs.close()" ];
+                
+        homalgSendBlocking( command, "need_command" );
+                
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for sage rings",
+        [ IsString, IsHomalgExternalRingInSageRep ],
+        
+  function( filename, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ "_fs = open('", filename, "','r'); ",
+                     "_str = _fs.readline(); ",
+                     "_fs.close(); ",
+                     M, "= matrix(", R, ",eval(_str))" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return M;
+    
+end );
