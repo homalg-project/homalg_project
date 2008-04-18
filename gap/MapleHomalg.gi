@@ -569,7 +569,7 @@ InstallMethod( SaveDataOfHomalgMatrixInFile,
     
     if mode = "ListList" then
         command := [ "_fs := fopen(\"", filename, "\",WRITE): ",
-                     "fprintf( _fs, %s,  convert(convert(convert(", M, ",listlist),symbol),string) ): ",
+                     "fprintf( _fs, %s, convert(convert(", M, ",listlist),string)): ",
 		     "fflush( _fs ): ",
                      "fclose( _fs )" ];
         

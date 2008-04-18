@@ -107,10 +107,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ N, U, " := HermiteForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := HermiteForm(", M, "); Rank(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );
