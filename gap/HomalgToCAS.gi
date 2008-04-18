@@ -348,7 +348,9 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
     fi;
     
-    return L;
+    if not need_command then
+        return L;
+    fi;
     
 end );
 

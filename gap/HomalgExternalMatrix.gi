@@ -215,7 +215,9 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     MM := LoadDataOfHomalgMatrixFromFile( filename, RR ); # matrix in target ring
     
-    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+    if not ( IsBound( HOMALG_IO.do_not_delete_tmp_files ) and HOMALG_IO.do_not_delete_tmp_files = true ) then
+        Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+    fi;
     
     return MM;
     
