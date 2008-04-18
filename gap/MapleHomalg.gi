@@ -446,6 +446,35 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallGlobalFunction( MapleHomalgOptions,
+  function( arg )
+    local nargs, R, s, ar;
+    
+    nargs := Length( arg );
+    
+    R := arg[nargs];
+    
+    if not IsHomalgExternalRingInMapleRep( R ) then
+        Error( "the last argument must be an external ring residing in Maple\n" );
+    fi;
+    
+    s := "";
+    
+    for ar in arg{[ 1 .. nargs-1 ]} do
+        if IsString( ar ) then
+            s := Concatenation( s, ar, "," );
+        elif IsList( ar ) and Length( ar ) = 2 and ForAll( ar, IsString ) then
+            s := Concatenation( s, "\"", ar[1], "\"=", ar[2] , "," );
+        else
+            Error( "wrong argument: ", ar, "\n" );
+        fi;
+    od;
+    
+    Print( homalgSendBlocking( [ "`homalg/homalg_options`(", s, R, "[2])" ], "need_display" ) );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsHomalgExternalRingInMapleRep ],
