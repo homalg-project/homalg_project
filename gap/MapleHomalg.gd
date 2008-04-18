@@ -38,5 +38,7 @@ DeclareGlobalFunction( "HomalgRingOfIntegersInMaple" );
 
 DeclareGlobalFunction( "HomalgFieldOfRationalsInMaple" );
 
+DeclareGlobalFunction( "MapleHomalgOptions" );
+
 # basic operations:
 
