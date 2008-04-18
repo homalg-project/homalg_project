@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  MapleHomalg.gi            RingsForHomalg package         Mohamed Barakat
+##                                                            Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -522,6 +523,68 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     return homalgSendBlocking( [ "map(i->op(map(j->if ", M, "[i,j]<>", Zero( R ), " then [i,j,convert(", M, "[i,j],symbol)] fi, [$1..", NrColumns( M ),"])), [$1..", NrRows( M ),"])" ], "need_output" );
     
 end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for sage matrices",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMapleRep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        command := [ "_fs := fopen(\"", filename, "\",WRITE): ",
+                     "fprintf( _fs, %s,  convert(convert(convert(", M, ",listlist),symbol),string) ): ",
+		     "fflush( _fs ): ",
+                     "fclose( _fs )" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for sage rings",
+        [ IsString, IsHomalgExternalRingInMapleRep ],
+        
+  function( filename, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ "_fs := fopen(\"", filename, "\",READ): ",
+                     "_str := readline( _fs ): ",
+                     "fclose( _fs ): ",
+                     M, ":=", R, "[2][matrix]( parse( _str ))" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return M;
+    
+end );
+
+
+
 
 ####################################
 #
