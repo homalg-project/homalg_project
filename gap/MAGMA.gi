@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  MAGMA.gi                  RingsForHomalg package         Mohamed Barakat
+##                                                            Simon Goertzen
 ##                                                          Markus Kirschmer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
@@ -303,6 +304,61 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
   function( M, R )
     
     return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output" );
+    
+end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for magma matrices",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMAGMARep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        command := [ "_str := [ Sprint( RowSequence(", M, ")[x]) : x in [1..", NrRows( M ), "]]; ",
+                     "_fs := Open(\"", filename, "\",\"w\"); ",
+                     "Put( _fs, Sprint(_str) ); Flush( _fs ); delete( _fs )" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for magma rings",
+        [ IsString, IsHomalgExternalRingInMAGMARep ],
+        
+        function( filename, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ M, ":= Matrix(", R, ", eval( Read( \"", filename ,"\" ) ) )" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return M;
     
 end );
 
