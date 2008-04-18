@@ -71,6 +71,15 @@ DeclareOperation( "NrGenerators",
 DeclareOperation( "NrRelations",
         [ IsHomalgRelations ] );
 
+DeclareOperation( "UnionOfRelations",
+        [ IsHomalgRelations, IsHomalgRelations ] );
+
+DeclareOperation( "UnionOfRelations",
+        [ IsHomalgMatrix, IsHomalgRelations ] );
+
+DeclareOperation( "UnionOfRelations",
+        [ IsHomalgRelations, IsHomalgMatrix ] );
+
 DeclareOperation( "BasisOfModule",
         [ IsHomalgRelations ] );
 

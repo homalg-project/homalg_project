@@ -167,6 +167,10 @@ DeclareOperation( "*",
 
 DeclareGlobalFunction( "CreateHomalgRing" );
 
+DeclareGlobalFunction( "HomalgRingOfIntegers" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationals" );
+
 DeclareGlobalFunction( "HomalgExternalRingElement" );
 
 DeclareGlobalFunction( "StringToElementStringList" );

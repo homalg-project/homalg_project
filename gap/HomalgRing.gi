@@ -289,6 +289,38 @@ InstallGlobalFunction( CreateHomalgRing,
 end );
 
 ##
+InstallGlobalFunction( HomalgRingOfIntegers,
+  function( arg )
+    local nargs, R, c;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        R := CreateHomalgRing( Integers );
+    elif IsInt( arg[1] ) then
+        c := arg[1];
+        if IsPrime( arg[1] ) then
+            R := CreateHomalgRing( GF( c ) );
+        else
+            R := CreateHomalgRing( ZmodnZ( c ) );
+        fi;
+    else
+        Error( "the first argument must be an integer\n" );
+    fi;
+    
+    return R;
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFieldOfRationals,
+  function( arg )
+    
+    return CreateHomalgRing( Rationals );
+    
+end );
+
+##
 InstallMethod( \*,
         "for homalg rings",
         [ IsHomalgExternalRingRep, IsString ],

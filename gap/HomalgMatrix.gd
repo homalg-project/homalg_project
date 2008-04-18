@@ -231,7 +231,16 @@ DeclareOperation( "HomalgRing",
 DeclareOperation( "SetExtractHomalgMatrixAsSparse",
         [ IsHomalgMatrix, IsBool ] );
 
+DeclareOperation( "SetExtractHomalgMatrixToFile",
+        [ IsHomalgMatrix, IsBool ] );
+
 # basic operations:
+
+DeclareOperation( "SetElementOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString ] );
+
+DeclareOperation( "SetElementOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
 
 DeclareOperation( "CreateHomalgMatrix",
         [ IsString, IsHomalgRing ] );
@@ -247,6 +256,9 @@ DeclareOperation( "CreateHomalgSparseMatrix",
 
 DeclareOperation( "CreateHomalgSparseMatrix",
         [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "GetElementOfHomalgMatrixAsString",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
 
 DeclareOperation( "GetListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );

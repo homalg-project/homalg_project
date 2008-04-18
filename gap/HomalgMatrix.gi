@@ -110,6 +110,28 @@ InstallMethod( SetExtractHomalgMatrixAsSparse,
 end );
 
 ##
+InstallMethod( SetExtractHomalgMatrixToFile,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsBool ],
+        
+  function( M, b )
+    
+    M!.ExtractHomalgMatrixToFile := b;
+    
+end );
+
+##
+InstallMethod( SetElementOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        
+  function( M, r, c, s )
+    
+    return SetElementOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
+    
+end );
+
+##
 InstallMethod( CreateHomalgSparseMatrix,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
@@ -139,6 +161,17 @@ InstallMethod( GetListOfHomalgMatrixAsString,
 end );
 
 ##
+InstallMethod( GetListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
+        
+  function( M, R )
+    
+    return String( Concatenation( Eval( M ) ) );
+    
+end );
+
+##
 InstallMethod( GetListListOfHomalgMatrixAsString,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -146,6 +179,17 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
   function( M )
     
     return GetListListOfHomalgMatrixAsString( M, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
+        
+  function( M, R )
+    
+    return String( Eval ( M ) );
     
 end );
 

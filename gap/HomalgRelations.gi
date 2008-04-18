@@ -133,6 +133,84 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
 end );
 
 ##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( mat1, rel2 )
+    local rel;
+    
+    rel := UnionOfRows( mat1, MatrixOfRelations( rel2 ) );
+    
+    return HomalgRelationsForLeftModule( rel );
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
+          IsHomalgMatrix ],
+        
+  function( rel1, mat2 )
+    
+    return UnionOfRelations( mat2, rel1 );
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( rel1, rel2 )
+    
+    return UnionOfRelations( MatrixOfRelations( rel1 ), rel2 );
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( mat1, rel2 )
+    local rel;
+    
+    rel := UnionOfColumns( mat1, MatrixOfRelations( rel2 ) );
+    
+    return HomalgRelationsForRightModule( rel );
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
+          IsHomalgMatrix ],
+        
+  function( rel1, mat2 )
+    
+    return UnionOfRelations( mat2, rel1 );
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( rel1, rel2 )
+    
+    return UnionOfRelations( MatrixOfRelations( rel1 ), rel2 );
+    
+end );
+
+##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
 	[ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
