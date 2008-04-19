@@ -256,7 +256,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local r, c, z, E, l;
+    local r, c, z, E, l, s;
     
     r := NrRows( M );
     c := NrColumns( M );
@@ -268,7 +268,11 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     
     l := Concatenation( l );
     
-    return String( l );
+    s := String( l );
+    
+    RemoveCharacters( s, "\\\n " );
+    
+    return s;
     
 end );
 
