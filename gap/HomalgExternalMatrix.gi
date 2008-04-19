@@ -120,32 +120,24 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         M := arg[1];
         R := arg[2];
 	
-        if not IsString( M ) then
+        if IsHomalgMatrix( M ) then
+            
             if IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = true then
                 return ConvertHomalgMatrixViaFile( M, R );
-	    fi;
-        fi;	
-	
-	if not ( IsHomalgInternalMatrixRep( M ) or IsString( M ) ) then
-	    if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
+            fi;
+            
+            if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
                 M := GetSparseListOfHomalgMatrixAsString( M );
             else
                 M := GetListListOfHomalgMatrixAsString( M );
             fi;
+            
         fi;
         
-        if IsHomalgInternalRingRep( R ) then
-            if IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-                return CreateHomalgSparseMatrix( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
-            else
-                return HomalgMatrix( EvalString( M ), R );
-            fi;
+        if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
+            return CreateHomalgSparseMatrix( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
         else
-            if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-                return CreateHomalgSparseMatrix( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
-            else
-                return CreateHomalgMatrix( M, R );
-            fi;
+            return CreateHomalgMatrix( M, R );
         fi;
         
     elif nargs = 4 and ( IsHomalgMatrix( arg[1] ) or IsString( arg[1] ) ) and IsHomalgRing( arg[4] ) then
@@ -155,7 +147,7 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         c := arg[3];
         R := arg[4];
         
-        if not ( IsHomalgInternalMatrixRep( M ) or IsString( M ) ) then
+        if IsHomalgMatrix( M ) then
             if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
                 M := GetSparseListOfHomalgMatrixAsString( M );
             else
@@ -163,16 +155,10 @@ InstallGlobalFunction( ConvertHomalgMatrix,
             fi;
         fi;
         
-        if IsHomalgInternalRingRep( R ) then
-            M := EvalString( M );
-            M := ListToListList( M );
-            return HomalgMatrix( M, R );
+        if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
+            return CreateHomalgSparseMatrix( M, r, c, R );
         else
-            if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-                return CreateHomalgSparseMatrix( M, r, c, R );
-            else
-                return CreateHomalgMatrix( M, r, c, R );
-            fi;
+            return CreateHomalgMatrix( M, r, c, R );
         fi;
         
     fi;
@@ -255,7 +241,7 @@ InstallMethod( SaveDataOfHomalgMatrixInFile,
     if not IsBound( M!.SaveAs ) then
         mode := "ListList";
     else
-        mode := M!.SaveAs; #not yet supported
+        mode := M!.SaveAs; ## FIXME: not yet supported
     fi;
     
     if mode = "ListList" then
@@ -276,6 +262,8 @@ InstallMethod( SaveDataOfHomalgMatrixInFile,
         
     fi;
     
+    return true;
+    
 end );
 
 ##
@@ -289,7 +277,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
     else
-        mode := R!.LoadAs; #not yet supported
+        mode := R!.LoadAs; ## FIXME: not yet supported
     fi;
     
     if mode = "ListList" then
