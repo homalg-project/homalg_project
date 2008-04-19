@@ -252,13 +252,19 @@ InstallMethod( SaveDataOfHomalgMatrixInFile,
         
         fs := IO_File( filename, "w" );
         
-        IO_Write( fs, GetListListOfHomalgMatrixAsString( M ) );
+        if fs = fail then
+            Error( "unable to open the file ", filename, " for writing\n" );
+        fi;
         
-        IO_Close( fs );
+        if IO_WriteFlush( fs, GetListListOfHomalgMatrixAsString( M ) ) = fail then
+            Error( "unable to write in the file ", filename, "\n" );
+        fi;
+        
+        if IO_Close( fs ) = fail then
+            Error( "unable to close the file ", filename, "\n" );
+        fi;
         
     fi;
-    
-    return true;
     
 end );
 
@@ -280,9 +286,19 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         fs := IO_File( filename, "r" );
         
-        str := IO_ReadLine( fs );
+        if fs = fail then
+            Error( "unable to open the file ", filename, " for reading\n" );
+        fi;
         
-        IO_Close( fs );
+        str := IO_ReadUntilEOF( fs );
+        
+        if str = fail then
+            Error( "unable to read lines from the file ", filename, "\n" );
+        fi;
+        
+        if IO_Close( fs ) = fail then
+            Error( "unable to close the file ", filename, "\n" );
+        fi;
         
         M := HomalgMatrix( EvalString( str ), R );
         
