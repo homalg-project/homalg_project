@@ -25,3 +25,5 @@ DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 
+DeclareOperation( "homalgLaTeX",
+        [ IsObject ] ); 

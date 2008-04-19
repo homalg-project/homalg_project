@@ -1,4 +1,40 @@
 - GARBAGE COLLECTION in the code
 - talk with the GAP people about:
   IsFreeLeftModule is a category and should become a property
+
+
 - when do immediate methods apply? immediately after objectifying?
+##
+InstallImmediateMethod( ElementaryDivisorsOfLeftModule,
+        IsFinitelyPresentedModuleRep and IsZeroModule and HasLeftActingDomain, 0, ## FIXME: remove HasLeftActingDomain
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
+        return [ ];
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ElementaryDivisorsOfLeftModule,
+        IsFinitelyPresentedModuleRep and IsFreeModule and HasLeftActingDomain, 0, ## FIXME: remove HasLeftActingDomain
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
+        return ListWithIdenticalEntries( NrGenerators( M ), Zero( R ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
