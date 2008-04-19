@@ -121,13 +121,34 @@ InstallMethod( SetExtractHomalgMatrixToFile,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
+InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        [ IsString, IsHomalgInternalRingRep ],
         
-  function( M, r, c, s )
+  function( S, R )
+    local s;
     
-    return SetElementOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "\\\n\" " );
+    
+    return HomalgMatrix( EvalString( s ), R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrix,
+        "for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( S, r, c, R )
+    local s;
+    
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "\\\n\" " );
+    
+    return HomalgMatrix( ListToListList( EvalString( s ), r, c ), R );
     
 end );
 
@@ -137,15 +158,30 @@ InstallMethod( CreateHomalgSparseMatrix,
         [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
         
   function( S, r, c, R )
-    local M, e;
+    local s, M, e;
+    
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "\\\n\" " );
     
     M := List( [ 1 .. r ], a -> List( [ 1 .. c ], b -> Zero( R ) ) );
     
-    for e in EvalString( S ) do
+    for e in EvalString( s ) do
         M[e[1]][e[2]] := e[3];
     od;
     
     return HomalgMatrix( M, r, c, R );
+    
+end );
+
+##
+InstallMethod( SetElementOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        
+  function( M, r, c, s )
+    
+    return SetElementOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
     
 end );
 
@@ -166,8 +202,13 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
+    local s;
     
-    return String( Concatenation( Eval( M ) ) );
+    s := String( Concatenation( Eval( M ) ) );
+    
+    RemoveCharacters( s, "\\\n " );
+    
+    return s;
     
 end );
 
@@ -188,8 +229,13 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
+    local s;
     
-    return String( Eval ( M ) );
+    s := String( Eval ( M ) );
+    
+    RemoveCharacters( s, "\\\n " );
+    
+    return s;
     
 end );
 
