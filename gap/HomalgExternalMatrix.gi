@@ -188,7 +188,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         
   function( M, RR )
     
-    local R, directory, pointer, pid, filename, MM;
+    local R, directory, pointer, pid, filename, fs, MM;
     
     R := HomalgRing( M ); # the source ring
     
@@ -210,6 +210,16 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     fi;
     
     filename := Concatenation( directory, pointer, "_PID_", pid );
+    
+    fs := IO_File( filename, "w" );
+    
+    if fs = fail then
+        Error( "unable to open the file ", filename, " for writing\n" );
+    fi;
+    
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename, "\n" );
+    fi;
     
     SaveDataOfHomalgMatrixInFile( filename, M );
     
