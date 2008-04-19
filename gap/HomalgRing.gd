@@ -136,6 +136,9 @@ DeclareAttribute( "MinusOne",
 
 # basic operations:
 
+DeclareOperation( "RingName",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "homalgPointer",
         [ IsHomalgRing ] );
 

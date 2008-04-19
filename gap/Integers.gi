@@ -26,8 +26,6 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := "Z", ## only relevant to the GAP display method of homalg modules
-               
                BestBasis := 
                  function( arg )
                    local M, R, nargs, N, S;

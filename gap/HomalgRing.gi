@@ -236,6 +236,70 @@ end );
 
 ####################################
 #
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( RingName,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local RP, c, v, r;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.RingName) then
+        if IsFunction( RP!.RingName ) then
+            return RP!.RingName( R );
+        else
+            return RP!.RingName;
+        fi;
+    elif HasCharacteristic( R ) then
+        
+        c := Characteristic( R );
+        
+        if HasIndeterminatesOfPolynomialRing( R ) then
+            v := IndeterminatesOfPolynomialRing( R );
+            if ForAll( v, HasName ) then
+                v := List( v, Name );
+            elif Length( v ) = 1 then
+                v := [ "x" ];
+            else
+                v := List( [ 1 .. Length( v ) ], i -> Flat( [ "x", String( i ) ] ) );
+            fi;
+            v := JoinStringsWithSeparator( v );
+            if IsPrime( c ) then
+                return Flat( [ "GF(", String( c ), ")[", v, "]" ] );
+            elif c = 0 then
+                r := CoefficientsRing( R );
+                if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+                    return Flat( [ "Z[", v, "]" ] );
+                elif HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
+                    return Flat( [ "Q[", v, "]" ] );
+                fi;
+            fi;
+        elif c = 0 then
+            if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
+                return "Z";
+            else
+                return "Q";
+            fi;
+        elif IsPrime( c ) then
+            return Flat( [ "GF(", String( c ), ")" ] );
+        else
+            return Flat( [ "Z/", String( c ), "Z" ] );
+        fi;
+        
+    fi;
+    
+    return "couldn't find a way to display";
+        
+end );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -243,16 +307,22 @@ end );
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, homalg_ring, table, properties, ar, type;
+    local nargs, r, homalg_ring, table, properties, ar, type;
     
     nargs := Length( arg );
     
-    homalg_ring := rec( ring := arg[1] );
+    if nargs = 0 then
+        Error( "expecting a ring as the first argument\n" );
+    fi;
+    
+    r := arg[1];
+    
+    homalg_ring := rec( ring := r );
     
     if nargs > 1 and IshomalgTable( arg[nargs] ) then
         table := arg[nargs];
     else
-        table := CreateHomalgTable( arg[1] );
+        table := CreateHomalgTable( r );
     fi;
     
     properties := [ ];
@@ -284,6 +354,18 @@ InstallGlobalFunction( CreateHomalgRing,
         od;
     fi;
     
+    if IsRing( r ) then
+        SetCharacteristic( homalg_ring, Characteristic( r ) );
+    fi;
+    
+    if HasIsField( r ) then
+        SetIsFieldForHomalg( homalg_ring, IsField( r ) );
+    fi;
+    
+    if IsIntegers( r ) then
+        SetIsIntegersForHomalg( homalg_ring, true );
+    fi;
+    
     return homalg_ring;
     
 end );
@@ -299,7 +381,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
         c := arg[1];
-        if IsPrime( arg[1] ) then
+        if IsPrime( c ) then
             R := CreateHomalgRing( GF( c ) );
         else
             R := CreateHomalgRing( ZmodnZ( c ) );
@@ -315,8 +397,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationals,
   function( arg )
+    local R;
     
-    return CreateHomalgRing( Rationals );
+    R := CreateHomalgRing( Rationals );
+    
+    SetIsFieldForHomalg( R, true );
+    
+    return R;
     
 end );
 
@@ -414,19 +501,8 @@ InstallMethod( Display,
         [ IsHomalgRing ],
         
   function( o )
-    local RP;
     
-    RP := homalgTable( o );
+    Print( RingName( o ), "\n" );
     
-    if IsBound(RP!.RingName) then
-        if IsFunction( RP!.RingName ) then
-            Print( RP!.RingName( o ), "\n" );
-        else
-            Print( RP!.RingName, "\n" );
-        fi;
-    else
-        TryNextMethod( );
-    fi;
-	
 end );
 
