@@ -276,7 +276,7 @@ end);
 ####################################
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for external matrices in Singular",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSingularRep ],
         
