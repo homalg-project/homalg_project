@@ -1709,15 +1709,7 @@ InstallMethod( Display,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.RingName) then
-        if IsFunction( RP!.RingName ) then
-            name := RP!.RingName( R );
-        else
-            name := RP!.RingName;
-        fi;
-    else
-        name := "D";
-    fi;
+    name := RingName( R );
     
     z := Zero( R );
     

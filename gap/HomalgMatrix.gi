@@ -856,7 +856,7 @@ InstallGlobalFunction( HomalgMatrix,
         return M;
     fi;
     
-    if nargs > 1 then
+    if nargs > 1 and arg[1] <> [ ] then
         if IsHomalgMatrix( arg[1] ) or ( IsString( arg[1] ) and arg[1] <> [ ] ) then
             return CallFuncList( ConvertHomalgMatrix, arg );
         elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] )
