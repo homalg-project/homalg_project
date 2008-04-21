@@ -96,6 +96,9 @@ DeclareOperation( "DecideZeroEffectively",
         [ IsHomalgMatrix, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",
+        [ IsHomalgMatrix, IsHomalgRelations ] );
+
+DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgRelations, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",

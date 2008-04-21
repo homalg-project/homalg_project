@@ -401,12 +401,24 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( mat, M )
+    
+    return SyzygiesGeneratorsOfRows( mat, MatrixOfRelations( M ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
           IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( M1, M2 )
     
-    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M1 ), MatrixOfRelations( M2 ) );
+    return SyzygiesGenerators( MatrixOfRelations( M1 ), M2 );
     
 end );
 
@@ -424,12 +436,24 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( mat, M )
+    
+    return SyzygiesGeneratorsOfColumns( mat, MatrixOfRelations( M ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
           IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( M1, M2 )
     
-    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M1 ), MatrixOfRelations( M2 ) );
+    return SyzygiesGenerators( MatrixOfRelations( M1 ), M2 );
     
 end );
 
