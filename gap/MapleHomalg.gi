@@ -593,7 +593,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for external matrices in Maple",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMapleRep ],
         
@@ -639,7 +639,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     if mode = "ListList" then
         
         command := [ "_fs := fopen(\"", filename, "\",READ): ",
-                     "_str := readline( _fs ): ",
+                     "_str := readbytes( _fs, infinity, TEXT ): ",
                      "fclose( _fs ): ",
                      M, ":=", R, "[2][matrix]( parse( _str ))" ];
         

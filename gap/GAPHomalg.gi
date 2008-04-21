@@ -256,7 +256,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for external matrices in GAP",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInGAPRep ],
         
@@ -270,7 +270,7 @@ InstallMethod( SaveDataOfHomalgMatrixInFile,
     fi;
     
     if mode = "ListList" then
-        command := [ "SaveDataOfHomalgMatrixInFile( \"", filename, "\", ", M, " )" ];
+        command := [ "SaveDataOfHomalgMatrixToFile( \"", filename, "\", ", M, " )" ];
                 
         homalgSendBlocking( command, "need_command" );
                 
