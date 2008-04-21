@@ -189,7 +189,7 @@ InstallMethod( PolynomialRing,
     fi;
 
     ##create the new ring
-    ext_obj := homalgSendBlocking( [ c,"(",var,")",dp ], [ "ring" ], [ ], TheTypeHomalgExternalRingObjectInSingular, properties, "break_lists" );
+    ext_obj := homalgSendBlocking( [ c,"(",var,"),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties);
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
