@@ -1,3 +1,4 @@
+HOMALG_IO.DirectoryForTemporaryFiles := "/Users/barakat/.shm";                  
 b := true;
 nr := NrRows( imat );
 nc := NrColumns( imat );

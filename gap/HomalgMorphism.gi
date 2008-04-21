@@ -220,13 +220,10 @@ end );
 ##
 InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortest ways
         "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsPosInt, IsPosInt ],
         
-  function( phi )
-    local pos_s, pos_t, index_pair, l, dist, min, pos, matrix;
-    
-    pos_s := PositionOfTheDefaultSetOfRelations( SourceOfMorphism( phi ) );
-    pos_t := PositionOfTheDefaultSetOfRelations( TargetOfMorphism( phi ) );
+  function( phi, pos_s, pos_t )
+    local index_pair, l, dist, min, pos, matrix;
     
     if IsHomalgMorphismOfLeftModules( phi ) then
         index_pair := [ pos_s, pos_t ];
@@ -267,6 +264,32 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
     else
         return phi!.matrices.( String( index_pair ) );
     fi;
+    
+end );
+
+##
+InstallMethod( MatrixOfMorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism, IsPosInt ],
+        
+  function( phi, pos_s_t )
+    
+    return MatrixOfMorphism( phi, pos_s_t, pos_s_t );
+    
+end );
+
+##
+InstallMethod( MatrixOfMorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local pos_s, pos_t;
+    
+    pos_s := PositionOfTheDefaultSetOfRelations( SourceOfMorphism( phi ) );
+    pos_t := PositionOfTheDefaultSetOfRelations( TargetOfMorphism( phi ) );
+    
+    return MatrixOfMorphism( phi, pos_s, pos_t );
     
 end );
 

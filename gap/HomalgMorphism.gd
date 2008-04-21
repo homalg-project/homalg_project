@@ -86,6 +86,12 @@ DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "MatrixOfMorphism",
+        [ IsHomalgMorphism, IsPosInt, IsPosInt ] );
+
+DeclareOperation( "MatrixOfMorphism",
+        [ IsHomalgMorphism, IsPosInt ] );
+
+DeclareOperation( "MatrixOfMorphism",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "AreComparableMorphisms",
