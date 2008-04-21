@@ -4,26 +4,9 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for IO_ForHomalg.
+##  Implementation stuff for external rings.
 ##
 #############################################################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
-# a central place for configuration variables:
-
-InstallValue( HOMALG_IO,
-        rec(
-            SaveHomalgMaximumBackStream := false,
-            color_display := false,
-	    DirectoryForTemporaryFiles := "./",
-	    DoNotDeleteTmpFiles := false
-           )
-);
 
 ####################################
 #
@@ -157,25 +140,6 @@ InstallMethod( Display,
         TryNextMethod( );
         
     fi;
-    
-end);
-
-InstallMethod( Display,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ], 0, ## never higher!!!
-        
-  function( o )
-    local stream, display_color;
-    
-    stream := homalgStream( o );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
-    
-    Print( display_color, homalgSendBlocking( [ o ], "need_display" ) );
     
 end);
 

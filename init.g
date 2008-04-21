@@ -10,6 +10,8 @@
 ##
 #############################################################################
 
+ReadPackage( "IO_ForHomalg", "gap/IO_ForHomalg.gd" );
+
 ReadPackage( "IO_ForHomalg", "gap/IO.gd" );
 
 ReadPackage( "IO_ForHomalg", "gap/HomalgToCAS.gd" );

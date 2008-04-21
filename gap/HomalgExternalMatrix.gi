@@ -174,17 +174,24 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         
   function( M, RR )
     
-    local R, r, c, directory, pointer, pid, filename, fs, MM;
+    local R, r, c, separator, directory, pointer, pid, file, filename, fs, MM;
     
     R := HomalgRing( M ); # the source ring
     
     r := NrRows( M );
     c := NrColumns( M );
     
+    ## figure out the directory separtor:
+    if IsBound( GAPInfo.UserHome ) then
+        separator := GAPInfo.UserHome[1];
+    else
+        separator := '/';
+    fi;
+    
     if IsBound( HOMALG_IO.DirectoryForTemporaryFiles ) then
         directory := HOMALG_IO.DirectoryForTemporaryFiles;
-        if directory[Length(directory)] <> '\/' then
-            directory[Length(directory) + 1] := '\/';
+        if directory[Length(directory)] <> separator then
+            directory[Length(directory) + 1] := separator;
         fi;
     else
         directory := "";
@@ -198,12 +205,25 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         pid := "GAP";
     fi;
     
-    filename := Concatenation( directory, pointer, "_PID_", pid );
+    file := Concatenation( pointer, "_PID_", pid );
+    
+    filename := Concatenation( directory, file );
     
     fs := IO_File( filename, "w" );
     
     if fs = fail then
-        Error( "unable to open the file ", filename, " for writing\n" );
+        if not ( IsBound( HOMALG_IO.DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles ) 
+                 and HOMALG_IO.DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles = true ) then
+            directory := FigureOutAnAlternativeDirectoryForTemporaryFiles( file );
+            if directory <> fail then
+                filename := Concatenation( directory, file );
+		fs := IO_File( filename, "w" );
+            else
+                Error( "unable to (find alternative directories to) open the file ", filename, " for writing\n" );
+            fi;
+        else
+            Error( "unable to open the file ", filename, " for writing\n" );
+        fi;
     fi;
     
     if IO_Close( fs ) = fail then
@@ -319,3 +339,29 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     return LoadDataOfHomalgMatrixFromFile( filename, R );
     
 end );
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep ], 0, ## never higher!!!
+        
+  function( o )
+    local stream, display_color;
+    
+    stream := homalgStream( o );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    Print( display_color, homalgSendBlocking( [ o ], "need_display" ) );
+    
+end);
+
