@@ -26,5 +26,9 @@ DeclareGlobalVariable( "HOMALG_IO_GAP" );
 
 DeclareGlobalFunction( "RingForHomalgInExternalGAP" );
 
+DeclareGlobalFunction( "HomalgRingOfIntegersInExternalGAP" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationalsInExternalGAP" );
+
 # basic operations:
 

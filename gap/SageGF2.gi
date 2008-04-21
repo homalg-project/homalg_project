@@ -28,12 +28,6 @@ InstallMethod( CreateHomalgTable,
     
     RP_specific :=
           rec(
-               ## Can optionally be provided by the RingPackage
-               ## (homalg functions check if these functions are defined or not)
-               ## (homalgTable gives no default value)
-               
-               RingName := "GF(2)",
-               
                ## Must be defined if other functions are not defined
                
                TriangularBasisOfRows :=

@@ -24,27 +24,47 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-#               ZeroRows :=
-#                 function( C )
-#                   local R, list_string;
-#                   
-#                   R := HomalgRing( C );
-#                   
-#                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, ",1,", NrColumns( C ), "); [i: i in #[ 1 .. ", NrRows( C ), " ] | RowSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
-#                   return StringToIntList( list_string );
-#                   
-#                 end,
+               ZeroRows :=
+                 function( C )
+                   local R, list_string;
+
+                   R := HomalgRing( C );
+
+                   homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "]" ] , C, "need_command" );
+
+                   homalgSendBlocking( [ "for (int i=1; i<=", NrRows(C), "; i=i+1) { if (transpose(", C, ")[i] == Zero_Row) {l=l,i;} }" ] , "need_command" );
+
+                   list_string := homalgSendBlocking( [ "l" ], C, "need_output" );
+
+                   #trying to understand singular's output
+                   if list_string = "empty list" or list_string = "emptylist" then
+                     return StringToIntList( "[]" );
+                   else
+                     return StringToIntList( list_string );
+                   fi;
+
+                 end,
                
-#               ZeroColumns :=
-#                 function( C )
-#                   local R, list_string;
-#                   
-#                   R := HomalgRing( C );
-#                   
-#                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, NrRows( C ), ",1); [i: i in [ 1 .. #", NrColumns( C ), " ] | ColumnSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
-#                   return StringToIntList( list_string );
-#                   
-#                 end,
+               ZeroColumns :=
+                 function( C )
+                   local R, list_string;
+
+                   R := HomalgRing( C );
+
+                   homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]" ] , C, "need_command" );
+
+                   homalgSendBlocking( [ "for (int i=1; i<=", NrColumns(C), "; i=i+1) { if ", C, "[i] == Zero_Row) {l=l,i;} }" ] , "need_command" );
+
+                   list_string := homalgSendBlocking( [ "l" ], C, "need_output" );
+
+                   #trying to understand singular's output
+                   if list_string = "empty list" or list_string = "emptylist" then
+                     return StringToIntList( "[]" );
+                   else
+                     return StringToIntList( list_string );
+                   fi;
+
+                 end,
                
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
