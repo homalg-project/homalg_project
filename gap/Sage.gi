@@ -374,7 +374,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     if mode = "ListList" then
         
         command := [ "_fs = open('", filename, "','r'); ",
-                     "_str = _fs.readline(); ",
+                     "_str = _fs.read(); ",
                      "_fs.close(); ",
                      M, "= matrix(", R, ",eval(_str))" ];
         
