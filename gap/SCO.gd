@@ -9,27 +9,29 @@
 #############################################################################
 
 ##
-DeclareCategory("IsOrbifoldTriangulation",
-                IsAttributeStoringRep);
+DeclareCategory( "IsOrbifoldTriangulation",
+        IsAttributeStoringRep );
 
-DeclareOperation("OrbifoldTriangulation",[IsList,IsRecord,IsList]);
-
-##
-DeclareCategory("IsSimplicialSet",
-                IsAttributeStoringRep);
-
-DeclareOperation("SimplicialSet",[IsOrbifoldTriangulation,IsInt]);
-
-DeclareAttribute("Dimension",IsSimplicialSet);
+DeclareOperation( "OrbifoldTriangulation",
+        [ IsList, IsRecord, IsList ] );
 
 ##
-DeclareOperation("BoundaryOperator",[IsInt,IsList,IsFunction]);
+DeclareCategory( "IsSimplicialSet",
+        IsAttributeStoringRep );
+
+DeclareOperation( "SimplicialSet",
+        [ IsOrbifoldTriangulation, IsInt ] );
+
+DeclareAttribute( "Dimension",
+        IsSimplicialSet );
 
 ##
-DeclareOperation("CreateCohomologyMatrix",[IsOrbifoldTriangulation,IsSimplicialSet]);
+DeclareOperation( "BoundaryOperator",
+        [ IsInt, IsList, IsFunction ] );
 
-DeclareOperation("CreateHomologyMatrix",[IsOrbifoldTriangulation,IsSimplicialSet]);
+##
+DeclareOperation( "CreateCohomologyMatrix",
+        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
 
-DeclareOperation("CreateExternalCohomologyMatrix",[IsOrbifoldTriangulation,IsSimplicialSet,IsHomalgRing]);
-
-DeclareOperation("CreateExternalHomologyMatrix",[IsOrbifoldTriangulation,IsSimplicialSet,IsHomalgRing]);
+DeclareOperation( "CreateHomologyMatrix",
+        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );

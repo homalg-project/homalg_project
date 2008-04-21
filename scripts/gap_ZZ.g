@@ -1,8 +1,7 @@
 Read("start.g");
 
-R := CreateHomalgRing( Integers );
-RP := HomalgTable( R );
+R := HomalgRingOfIntegers();
 
-M:=CreateHomologyMatrix(ot,ss);;
+M := CreateHomologyMatrix( ot, ss, R );;
 
 Read("finish.g");
