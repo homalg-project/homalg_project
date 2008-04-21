@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( InitializeSageBestBasis,
+InstallGlobalFunction( InitializeSageBestBasis,
         
         function( R )
           local command;

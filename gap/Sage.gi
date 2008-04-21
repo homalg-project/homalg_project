@@ -232,8 +232,8 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
-        "for homalg matrices",
+InstallMethod( CreateHomalgMatrix,
+        "for a listlist of an external matrix in Sage",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
   function( S, R )
@@ -246,26 +246,142 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
-               "for a list of an (external) matrix",
-	       [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
+InstallMethod( CreateHomalgMatrix,
+        "for a list of an external matrix in Sage",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
- 
-   local ext_obj;
-   
-   ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ] );
-   
-   return HomalgMatrix( ext_obj, R );
-   
+    
+    local ext_obj;
+    
+    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ] );
+    
+    return HomalgMatrix( ext_obj, R );
+    
 end );
 
 ##
-InstallMethod( GetListOfHomalgExternalMatrixAsString,
-               "for sage matrices",
-	       [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
+InstallMethod( CreateHomalgSparseMatrix,
+        "for a sparse list of an external matrix in Sage",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
+  function( S, r, c, R )
+    
+    local M;
+    M := HomalgInitialMatrix( r, c, R );
+    homalgSendBlocking( [ "FillMatrix(", M, ",",  S, ")" ], "need_command", R );
+    return M;
+    
+end );
+
+##
+InstallMethod( SetElementOfHomalgMatrix,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSageRep ],
+	       
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
+        
   function( M, R )
     
-    return homalgSendBlocking( [ M, ".list()" ], "need_output");
+    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgMatrixAsString,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ M, ".list()" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
+        
+  function( M , R )
+    
+    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetElementOfHomalgMatrixAsString,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
+
+  function( M, r, c, R )
+    
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for external matrices in Sage",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSageRep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        command := [ "_fs = open('", filename, "','w'); ",
+                     "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
+                     "_fs.close()" ];
+                
+        homalgSendBlocking( command, "need_command" );
+                
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for external rings in Sage",
+        [ IsString, IsHomalgExternalRingInSageRep ],
+        
+  function( filename, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ "_fs = open('", filename, "','r'); ",
+                     "_str = _fs.readline(); ",
+                     "_fs.close(); ",
+                     M, "= matrix(", R, ",eval(_str))" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return M;
     
 end );

@@ -1,6 +1,8 @@
 #############################################################################
 ##
 ##  MAGMA.gi                  RingsForHomalg package         Mohamed Barakat
+##                                                            Simon Goertzen
+##                                                          Markus Kirschmer
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -26,6 +28,7 @@ InstallValue( HOMALG_IO_MAGMA,
             CUT_END := 2,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
+            remove_enter := true,       ## a MAGMA specific
             define := ":=",
             prompt := "magma> ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
@@ -170,7 +173,7 @@ end );
 
 ##
 InstallMethod( PolynomialRing,
-        "for homalg rings",
+        "for homalg rings in MAGMA",
         [ IsHomalgExternalRingInMAGMARep, IsList ],
         
   function( R, indets )
@@ -226,8 +229,8 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
-        "for homalg matrices",
+InstallMethod( CreateHomalgMatrix,
+        "for homalg matrices in MAGMA",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( S, R )
@@ -240,8 +243,8 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
-        "for a list of an (external) matrix",
+InstallMethod( CreateHomalgMatrix,
+        "for a list of an external matrix in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
   function( S, r, c, R )
     
@@ -250,6 +253,123 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
     ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ] );
     
     return HomalgMatrix( ext_obj, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgSparseMatrix,
+        "for a sparse list of an external matrix in MAGMA",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  function( S, r, c, R )
+    local M, l;
+    
+    M := HomalgVoidMatrix( r, c, R );
+    
+    l := homalgSendBlocking( S, R );
+    
+    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", S, "] ))" ] , "need_command" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( SetElementOfHomalgMatrix,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
+	       
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgMatrixAsString,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "Eltseq(", M, ")" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for external matrices",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output" );
+    
+end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for external matrices in MAGMA",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMAGMARep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        command := [ "_str := [ Sprint( RowSequence(", M, ")[x]) : x in [1..", NrRows( M ), "]]; ",
+                     "_fs := Open(\"", filename, "\",\"w\"); ",
+                     "Put( _fs, Sprint(_str) ); Flush( _fs ); delete( _fs )" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for external rings in MAGMA",
+        [ IsString, IsHomalgExternalRingInMAGMARep ],
+        
+        function( filename, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ M, ":= Matrix(", R, ", eval( Read( \"", filename ,"\" ) ) )" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return M;
     
 end );
 

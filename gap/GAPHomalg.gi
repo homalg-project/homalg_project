@@ -95,9 +95,9 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         o := 1;
     fi;
     
-    homalgSendBlocking( "LoadPackage(\"homalg\")", "need_command", stream );
+    homalgSendBlocking( "LoadPackage(\"RingsForHomalg\")", "need_command", stream );
     
-    ar := [ [ "CreateHomalgRing( ", arg[1], " )" ], TheTypeHomalgExternalRingObjectInGAP, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream ];
     
     if Length( arg ) > 1 then
         ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
@@ -110,13 +110,75 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
-        "for homalg matrices",
+InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
+  function( arg )
+    local nargs, stream, m, c, R;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := homalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
+        m := "";
+        c := 0;
+    elif IsInt( arg[1] ) then
+        m := AbsInt( arg[1] );
+        c := m;
+    else
+        Error( "the first argument must be an integer\n" );
+    fi;
+    
+    if IsBound( stream ) then
+        R := RingForHomalgInExternalGAP( [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing, stream );
+    else
+        R := RingForHomalgInExternalGAP( [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing );
+    fi;
+    
+    SetCharacteristic( R, c );
+    
+    if IsPrime( c ) then
+        SetIsFieldForHomalg( R, true );
+    else
+        SetIsFieldForHomalg( R, false );
+        SetIsIntegersForHomalg( R, true );
+    fi;
+    
+    return R;
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
+  function( arg )
+    local ar, R;
+    
+    ar := Concatenation( [ "HomalgFieldOfRationals( )" ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInExternalGAP, ar );
+    
+    SetCharacteristic( R, 0 );
+    
+    SetIsFieldForHomalg( R, true );
+    
+    return R;
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrix,
+        "for a listlist of an external matrix in Sage",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
   function( S, R )
     local ext_obj;
     
+    ## external GAP sees S as a listlist (and not as a string)
     ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", S, ", ", R, " )" ] );
     
     return HomalgMatrix( ext_obj, R );
@@ -124,37 +186,125 @@ InstallMethod( CreateHomalgMatrixInExternalCAS,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrixInExternalCAS,
-        "for a list of an (external) matrix",
+InstallMethod( CreateHomalgMatrix,
+        "for a list of an external matrix in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ListToListList( ", S, ", ", r, c , " ), ", R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrix( \"", S, "\", ", r, c , R, " )" ] );
     
     return HomalgMatrix( ext_obj, R );
     
 end );
 
 ##
-InstallMethod( GetListOfHomalgExternalMatrixAsString,
-        "for maple matrices",
-        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
-        
-  function( M, R )
+InstallMethod( CreateHomalgSparseMatrix,
+        "for a sparse list of an external matrix in GAP",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
+  function( S, r, c, R )
+    local ext_obj;
     
-    return homalgSendBlocking( [ "Concatenation( Eval( ", M, " ) )" ], "need_output" );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrix( \"", S, "\", ", r, c , R, " )" ] );
+    
+    return HomalgMatrix( ext_obj, R );
     
 end );
 
 ##
-InstallMethod( GetListListOfHomalgExternalMatrixAsString,
-        "for maple matrices",
+InstallMethod( SetElementOfHomalgMatrix,
+        "for external matrices in GAP",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
+	       
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ "SetElementOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command" );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgMatrixAsString,
+        "for external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
     
-    return homalgSendBlocking( [ "Eval( ", M, " )" ], "need_output" );
+    return homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for external matrices in GAP",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( SaveDataOfHomalgMatrixInFile,
+        "for external matrices in GAP",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInGAPRep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+        command := [ "SaveDataOfHomalgMatrixInFile( \"", filename, "\", ", M, " )" ];
+                
+        homalgSendBlocking( command, "need_command" );
+                
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for external rings in GAP",
+        [ IsString, IsHomalgExternalRingInGAPRep ],
+        
+  function( filename, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ M, " := LoadDataOfHomalgMatrixFromFile( \"", filename, "\", ", R, " )" ];
+        
+        homalgSendBlocking( command, "need_command" );
+        
+    fi;
+    
+    return M;
     
 end );
 
