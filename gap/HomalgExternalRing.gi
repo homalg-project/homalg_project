@@ -20,7 +20,8 @@ InstallValue( HOMALG_IO,
         rec(
             SaveHomalgMaximumBackStream := false,
             color_display := false,
-	    DirectoryForTemporaryFiles := "./"
+	    DirectoryForTemporaryFiles := "./",
+	    DoNotDeleteTmpFiles := false
            )
 );
 
