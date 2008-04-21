@@ -22,14 +22,18 @@ DeclareOperation( "ConvertHomalgMatrixViaFile",
         [ IsHomalgMatrix, IsHomalgRing ]
         );
 
-DeclareOperation( "SaveDataOfHomalgMatrixInFile",
+DeclareOperation( "SaveDataOfHomalgMatrixToFile",
         [ IsString, IsHomalgMatrix, IsHomalgRing ]
         );
 
-DeclareOperation( "SaveDataOfHomalgMatrixInFile",
+DeclareOperation( "SaveDataOfHomalgMatrixToFile",
         [ IsString, IsHomalgMatrix ]
         );
 
 DeclareOperation( "LoadDataOfHomalgMatrixFromFile",
         [ IsString, IsHomalgRing ]
+        );
+
+DeclareOperation( "LoadDataOfHomalgMatrixFromFile",
+        [ IsString, IsInt, IsInt, IsHomalgRing ]
         );

@@ -174,9 +174,12 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         
   function( M, RR )
     
-    local R, directory, pointer, pid, filename, fs, MM;
+    local R, r, c, directory, pointer, pid, filename, fs, MM;
     
     R := HomalgRing( M ); # the source ring
+    
+    r := NrRows( M );
+    c := NrColumns( M );
     
     if IsBound( HOMALG_IO.DirectoryForTemporaryFiles ) then
         directory := HOMALG_IO.DirectoryForTemporaryFiles;
@@ -207,9 +210,9 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         Error( "unable to close the file ", filename, "\n" );
     fi;
     
-    SaveDataOfHomalgMatrixInFile( filename, M );
+    SaveDataOfHomalgMatrixToFile( filename, M );
     
-    MM := LoadDataOfHomalgMatrixFromFile( filename, RR ); # matrix in target ring
+    MM := LoadDataOfHomalgMatrixFromFile( filename, r, c, RR ); # matrix in target ring
     
     if not ( IsBound( HOMALG_IO.do_not_delete_tmp_files ) and HOMALG_IO.do_not_delete_tmp_files = true ) then
         Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
@@ -220,18 +223,18 @@ InstallMethod( ConvertHomalgMatrixViaFile,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for two arguments instead of three",
         [ IsString, IsHomalgMatrix ],
         
   function( filename, M )
     
-    return SaveDataOfHomalgMatrixInFile( filename, M, HomalgRing( M ) );
+    return SaveDataOfHomalgMatrixToFile( filename, M, HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for an internal homalg matrix",
         [ IsString, IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
@@ -303,5 +306,16 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     fi;
     
     return M;
+    
+end );
+
+##
+InstallMethod( LoadDataOfHomalgMatrixFromFile,
+        "for an internal homalg ring",
+        [ IsString, IsInt, IsInt, IsHomalgRing ], 0, ## lowest rank method
+        
+  function( filename, r, c, R )
+    
+    return LoadDataOfHomalgMatrixFromFile( filename, R );
     
 end );
