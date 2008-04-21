@@ -329,7 +329,7 @@ InstallMethod( GetElementOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for external matrices in Sage",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSageRep ],
         
