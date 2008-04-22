@@ -35,3 +35,7 @@ DeclareOperation( "CreateCohomologyMatrix",
 
 DeclareOperation( "CreateHomologyMatrix",
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
+
+##
+DeclareOperation( "SCO_Examples",
+        [ ] );

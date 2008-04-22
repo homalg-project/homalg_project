@@ -178,3 +178,24 @@ InstallMethod( CreateCohomologyMatrix, "for an external ring",
     internal_ring := HomalgRingOfIntegers();    # FIXME ?
     return List( CreateCohomologyMatrix( ot, s, internal_ring ), function(m) SetExtractHomalgMatrixToFile( m, true ); return HomalgMatrix( m, R ); end );    
 end );
+
+##
+InstallMethod( SCO_Examples, "",
+        [ ],
+  function( )
+    local directory, separator;
+    if IsBound( PackageInfo("SCO")[1] ) and IsBound( PackageInfo("SCO")[1].InstallationPath ) then
+        directory := PackageInfo("SCO")[1].InstallationPath;
+    else
+        directory := "./";
+    fi;
+    if IsBound( GAPInfo.UserHome ) then
+        separator := GAPInfo.UserHome{[1]};
+    else
+        separator := "/";
+    fi;
+    if Length( directory ) > 0 and directory{[Length( directory )]} <> separator then
+        directory := Concatenation( directory, separator );
+    fi;
+    Read( Concatenation( directory, "examples", separator, "examples.g" ) );
+end );
