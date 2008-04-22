@@ -51,7 +51,8 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                     or IsHomalgExternalRingRep( L[a] ) then
                                      t := homalgPointer( L[a] );
                                  elif IsHomalgExternalMatrixRep( L[a] ) then
-                                     if not IsVoidMatrix( L[a] ) or HasEval( L[a] ) then
+                                     if not ( HasIsVoidMatrix( L[a] ) and IsVoidMatrix( L[a] ) )
+                                        or HasEval( L[a] ) then
                                          t := homalgPointer( L[a] ); ## now we enforce evaluation!!!
                                      else
                                          CAS := homalgExternalCASystem( L[a] );
