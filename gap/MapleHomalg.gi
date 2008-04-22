@@ -593,7 +593,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixInFile,
+InstallMethod( SaveDataOfHomalgMatrixToFile,
         "for external matrices in Maple",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMapleRep ],
         
