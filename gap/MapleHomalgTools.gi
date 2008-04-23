@@ -217,7 +217,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/GetUnitPosition(", M, pos_list, R, ")" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "`homalg/GetUnitPosition`(", M, pos_list, R, ")" ], "need_output" );
                    
                    if list_string = "" then
                        return fail;
@@ -233,7 +233,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions(", M, clean_columns, R, ")" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions`(", M, clean_columns, R, ")" ], "need_output" );
                    
                    if list_string = "" then
                        return fail;

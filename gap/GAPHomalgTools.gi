@@ -170,7 +170,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  function( M, pos_list )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "`homalg/GetUnitPosition( ", M, pos_list, " )" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "GetUnitPosition( ", M, pos_list, " )" ], "need_output" );
                    
                    if list_string = "fail" then
                        return fail;
@@ -186,7 +186,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions( ", M, clean_columns, " )" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions( ", M, clean_columns, " )" ], "need_output" );
                    
                    if list_string = "fail" then
                        return fail;
