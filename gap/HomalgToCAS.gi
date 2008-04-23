@@ -44,7 +44,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     
     s := List( [ 1 .. l ], function( a )
                              local CAS, stream, t;
-                             if IsString( L[a] ) then
+                             if IsString( L[a] ) and L[a] <> [ ] then
                                  return L[a];
                              else
                                  if IshomalgExternalObjectRep( L[a] )
@@ -73,7 +73,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                  else
                                      t := String( L[a] );
                                  fi;
-                                 if a < l and not IsString( L[a+1] ) then
+                                 if a < l and not ( IsString( L[a+1] ) and L[a+1] <> [ ] ) then
                                      t := Concatenation( t, "," );
                                  fi;
                                  return t;
