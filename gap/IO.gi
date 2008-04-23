@@ -208,7 +208,7 @@ InstallGlobalFunction( LaunchCAS,
     
     executables := [ ];
     
-    if nargs > 1 and IsString( arg[2] ) then
+    if nargs > 1 and IsStringRep( arg[2] ) then
         Add( executables, arg[2] );
     fi;
     

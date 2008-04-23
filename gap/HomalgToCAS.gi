@@ -44,7 +44,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     
     s := List( [ 1 .. l ], function( a )
                              local CAS, stream, t;
-                             if IsString( L[a] ) and L[a] <> [ ] then
+                             if IsStringRep( L[a] ) then
                                  return L[a];
                              else
                                  if IshomalgExternalObjectRep( L[a] )
@@ -63,8 +63,8 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          SetEval( L[a], homalgExternalObject( t, CAS, stream ) ); ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
                                          ResetFilterObj( L[a], IsVoidMatrix );
                                      fi;
-                                 elif break_lists and IsList( L[a] ) and not IsString( L[a] ) then
-                                     if ForAll( L[a], IsString ) then
+                                 elif break_lists and IsList( L[a] ) and not IsStringRep( L[a] ) then
+                                     if ForAll( L[a], IsStringRep ) then
                                          t := JoinStringsWithSeparator( L[a] );
                                      else
                                          t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
@@ -73,7 +73,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                  else
                                      t := String( L[a] );
                                  fi;
-                                 if a < l and not ( IsString( L[a+1] ) and L[a+1] <> [ ] ) then
+                                 if a < l and not IsStringRep( L[a+1] ) then
                                      t := Concatenation( t, "," );
                                  fi;
                                  return t;
@@ -99,7 +99,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
-    elif IsString( arg[1] ) then
+    elif IsStringRep( arg[1] ) then
         L := [ arg[1] ];
     else
         L := arg[1];
@@ -110,9 +110,9 @@ InstallGlobalFunction( homalgSendBlocking,
     properties := [];
     
     for ar in arg{[ 2 .. nargs ]} do ## the order of the following might be important for the performance!!!
-        if not IsBound( prefix ) and ( ( IsList( ar ) and not IsString( ar ) ) or ar = [ ] ) then
+        if not IsBound( prefix ) and IsList( ar ) and not IsStringRep( ar ) then
             prefix := ar;
-        elif not IsBound( suffix ) and IsList( ar ) and not IsString( ar ) then
+        elif not IsBound( suffix ) and IsList( ar ) and not IsStringRep( ar ) then
             suffix := ar;
         elif not IsBound( R ) and IsHomalgExternalMatrixRep( ar ) then
             R := HomalgRing( ar );
@@ -133,7 +133,7 @@ InstallGlobalFunction( homalgSendBlocking,
                     ext_obj := homalgExternalObject( "", stream.name, stream );
                 fi;
             fi;
-        elif not IsBound( option ) and IsString( ar ) and not ar in [ "", "break_lists" ] then ## the first occurrence of an option decides
+        elif not IsBound( option ) and IsStringRep( ar ) and not ar in [ "", "break_lists" ] then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
                 need_display := false;
@@ -156,10 +156,10 @@ InstallGlobalFunction( homalgSendBlocking,
             Add( properties, ar );
         elif IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then
             Append( properties, ar );
-        elif not IsBound( break_lists ) and IsString( ar ) and ar = "break_lists" then
+        elif not IsBound( break_lists ) and ar = "break_lists" then
             break_lists := ar;
         else
-            Error( "this argument should be in { IsList, IsString, IsFilter, IsRecord, IshomalgExternalObjectWithIOStreamRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsList, IsStringRep, IsFilter, IsRecord, IshomalgExternalObjectWithIOStreamRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
         fi;
     od;
     
@@ -281,11 +281,13 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
     fi;
     
+    ConvertToStringRep( L );
+    
     if IsBound( HOMALG_IO.homalgSendBlocking ) then
         Add( HOMALG_IO.homalgSendBlocking, L );
     fi;
     
-    Info( InfoIO_ForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) -1 ]} );
+    Info( InfoIO_ForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     

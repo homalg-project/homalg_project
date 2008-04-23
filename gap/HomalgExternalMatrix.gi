@@ -115,7 +115,7 @@ InstallGlobalFunction( ConvertHomalgMatrix,
     
     nargs := Length( arg );
     
-    if nargs = 2 and ( IsHomalgMatrix( arg[1] ) or IsString( arg[1] ) ) and IsHomalgRing( arg[2] ) then
+    if nargs = 2 and ( IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) ) and IsHomalgRing( arg[2] ) then
         
         M := arg[1];
         R := arg[2];
@@ -140,7 +140,7 @@ InstallGlobalFunction( ConvertHomalgMatrix,
             return CreateHomalgMatrix( M, R );
         fi;
         
-    elif nargs = 4 and ( IsHomalgMatrix( arg[1] ) or IsString( arg[1] ) ) and IsHomalgRing( arg[4] ) then
+    elif nargs = 4 and ( IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) ) and IsHomalgRing( arg[4] ) then
         
         M := arg[1];
         r := arg[2];
