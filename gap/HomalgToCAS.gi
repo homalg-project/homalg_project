@@ -358,7 +358,7 @@ end );
 ##
 InstallGlobalFunction( homalgDisplay,
   function( arg )
-    local L;
+    local L, ar;
     
     if IsList( arg[1] ) then
         L := arg[1];
@@ -366,7 +366,9 @@ InstallGlobalFunction( homalgDisplay,
         L := [ arg[1] ];
     fi;
     
-    Print( homalgSendBlocking( L, "need_display" ) );
+    ar := Concatenation( [ L ], arg{[ 2 .. Length( arg ) ]}, [ "need_display" ] );
+    
+    Print( CallFuncList( homalgSendBlocking, ar ) );
     
 end );
 
