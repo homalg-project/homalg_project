@@ -121,6 +121,28 @@ InstallMethod( SetExtractHomalgMatrixToFile,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        
+  function( M, r, c, s )
+    
+    SetEntryOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgExternalRingElement ],
+        
+  function( M, r, c, s )
+    
+    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), HomalgRing( M ) );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsHomalgInternalRingRep ],
@@ -175,13 +197,46 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
+InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
         
-  function( M, r, c, s )
+  function( M, r, c, R )
     
-    return SetElementOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
+    return String( Eval( M )[r][c] );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt ],
+        
+  function( M, r, c )
+    
+    return GetEntryOfHomalgMatrixAsString( M, r, c, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( M, r, c, R )
+    
+    return Eval( M )[r][c];
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt ],
+        
+  function( M, r, c )
+    
+    return GetEntryOfHomalgMatrix( M, r, c, HomalgRing( M ) );
     
 end );
 
@@ -273,6 +328,28 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     RemoveCharacters( s, "\\\n " );
     
     return s;
+    
+end );
+
+##
+InstallMethod( GetUnitPosition,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetUnitPosition( M, [ ] );
+    
+end );
+
+##
+InstallMethod( GetCleanRowsPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetCleanRowsPositions( M, [ 1 .. NrColumns( M ) ] );
     
 end );
 
@@ -901,8 +978,8 @@ InstallGlobalFunction( HomalgMatrix,
     
     if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 then
         
-	option := arg[1][1];
-	
+        option := arg[1][1];
+        
         if Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "void" then
         ## a void matrix filled with nothing having the flag IsVoidMatrix:
             
@@ -940,6 +1017,22 @@ InstallGlobalFunction( HomalgMatrix,
             
             return matrix;
             
+        elif Length( option ) > 5 and LowercaseString( option{[1..6]} ) = "idinit" then
+        ## an square initial matrix having the flag IsInitialIdentityMatrix
+        ## and filled with an identity matrix BUT NOT marked as an IsIdentityMatrix:
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, type,
+                    IsInitialIdentityMatrix, true );
+            
+            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+                SetNrRows( matrix, arg[2] );
+                SetNrColumns( matrix, arg[2] );
+            fi;
+            
+            return matrix;
+            
         elif Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "zero" then
         ## the zero matrix:
             
@@ -958,7 +1051,7 @@ InstallGlobalFunction( HomalgMatrix,
             
             return matrix;
             
-        elif Length( option ) > 1 and  LowercaseString( option{[1..2]} ) = "id" then
+        elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
         ## the identity matrix:
             
             ## Objectify:
@@ -973,6 +1066,8 @@ InstallGlobalFunction( HomalgMatrix,
             
             return matrix;
             
+        else
+            Error( "wrong first argument: ", arg[1], "\n" );
         fi;
         
     fi;
@@ -1041,6 +1136,14 @@ InstallGlobalFunction( HomalgInitialMatrix,
 end );
 
 ##
+InstallGlobalFunction( HomalgInitialIdentityMatrix,
+  function( arg )
+    
+    return CallFuncList( HomalgMatrix, Concatenation( [ [ "idinit" ] ], arg ) );
+    
+end );
+
+##
 InstallGlobalFunction( HomalgVoidMatrix,
   function( arg )
     
@@ -1079,10 +1182,12 @@ InstallMethod( ViewObj,
     
     first_attribute := true;
     
-    if IsVoidMatrix( o ) then
+    if HasIsVoidMatrix( o ) and IsVoidMatrix( o ) then
         Print( "<A void" );
-    elif IsInitialMatrix( o ) then
+    elif HasIsInitialMatrix( o ) and IsInitialMatrix( o ) then
         Print( "<An initial" );
+    elif HasIsInitialIdentityMatrix( o ) and IsInitialIdentityMatrix( o ) then
+        Print( "<An initial identity" );
     elif not HasEval( o ) then
         Print( "<An unevaluated" );
     else

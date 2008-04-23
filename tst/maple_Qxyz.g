@@ -2,6 +2,7 @@ LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_IO.color_display := true;
 Qxyz := HomalgFieldOfRationalsInMaple( ) * "x,y,z";
+MapleHomalgOptions( [ "matrixtype", "Matrix" ], Qxyz );
 Display( Qxyz );
 wmat := HomalgMatrix( " \
 [ [x*z, z*y, z^2, 0, 0, y], \

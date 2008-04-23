@@ -47,14 +47,21 @@ BindGlobal( "TheTypeHomalgExternalRing",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingRep ) );
 
-# a new family:
+# two new families:
 BindGlobal( "TheFamilyOfHomalgExternalRingElements",
         NewFamily( "TheFamilyOfHomalgExternalRingElements" ) );
 
-# a new type:
+BindGlobal( "TheFamilyOfHomalgExternalRingElementsWithIOStream",
+        NewFamily( "TheFamilyOfHomalgExternalRingElementsWithIOStream" ) );
+
+# two new types:
 BindGlobal( "TheTypeHomalgExternalRingElement",
         NewType( TheFamilyOfHomalgExternalRingElements,
                 IsHomalgExternalRingElementRep ) );
+
+BindGlobal( "TheTypeHomalgExternalRingElementWithIOStream",
+        NewType( TheFamilyOfHomalgExternalRingElementsWithIOStream,
+                IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ) );
 
 ####################################
 #
@@ -241,6 +248,28 @@ end );
 ####################################
 
 ##
+InstallMethod( homalgStream,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( o )
+    
+    return homalgStream( HomalgRing( o ) );
+    
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for external homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    
+    return r!.ring;
+    
+end );
+
+##
 InstallMethod( RingName,
         "for homalg rings",
         [ IsHomalgRing ],
@@ -307,7 +336,7 @@ end );
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, r, homalg_ring, table, properties, ar, type;
+    local nargs, r, homalg_ring, table, properties, ar, type, c, el;
     
     nargs := Length( arg );
     
@@ -366,6 +395,16 @@ InstallGlobalFunction( CreateHomalgRing,
         SetIsIntegersForHomalg( homalg_ring, true );
     fi;
     
+    for c in NamesOfComponents( table ) do
+        if IsHomalgExternalRingElementRep( table!.( c ) ) then
+            el := table!.( c );
+            properties := KnownTruePropertiesOfObject( el );
+            ar := [ homalgPointer( el ), homalgExternalCASystem( el ), homalg_ring ];
+            Append( ar, List( properties, ValueGlobal ) );
+            table!.( c ) := CallFuncList( HomalgExternalRingElement, ar );
+        fi;
+    od;
+    
     return homalg_ring;
     
 end );
@@ -421,15 +460,15 @@ end );
 ##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
-    local nargs, properties, ar, stream, obj;
+    local nargs, properties, ar, ring, obj;
     
     nargs := Length( arg );
     
     properties := [ ];
     
     for ar in arg{[ 3 .. nargs ]} do
-        if not IsBound( stream ) and IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
-            stream := ar;
+        if not IsBound( ring ) and IsHomalgExternalRingRep( ar ) then
+            ring := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
@@ -437,13 +476,12 @@ InstallGlobalFunction( HomalgExternalRingElement,
         fi;
     od;
     
-    if IsBound( stream ) then
-        obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
+    if IsBound( ring ) then
+        obj := rec( pointer := arg[1], cas := arg[2], ring := ring );
         
         ## Objectify:
         ObjectifyWithAttributes(
-                obj, TheTypeHomalgExternalRingElement,
-                IsHomalgExternalRingElementWithIOStream, true );
+                obj, TheTypeHomalgExternalRingElementWithIOStream );
     else
         obj := rec( pointer := arg[1], cas := arg[2] );
         
@@ -492,7 +530,7 @@ InstallMethod( ViewObj,
   function( o )
     
     Print( "<A homalg external ring residing in the CAS " );
-    Print( homalgExternalCASystem( o ), ">" ); 
+    Print( homalgExternalCASystem( o ), ">" );
     
 end );
 
@@ -503,6 +541,17 @@ InstallMethod( Display,
   function( o )
     
     Print( RingName( o ), "\n" );
+    
+end );
+
+InstallMethod( ViewObj,
+        "for homalg external objects",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( o )
+    
+    Print( "<A homalg external ring element for the CAS " );
+    Print( homalgExternalCASystem( o ), ">" );
     
 end );
 

@@ -20,7 +20,7 @@ DeclareGlobalFunction( "_Functor_Cokernel_OnObjects" );
 DeclareGlobalVariable( "Functor_Cokernel" );
 
 ## Kernel
-DeclareGlobalVariable( "_Functor_Kernel_OnObjects" );
+DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
 
 DeclareGlobalVariable( "Functor_Kernel" );
 

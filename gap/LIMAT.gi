@@ -113,34 +113,6 @@ InstallTrueMethod( IsZeroMatrix, IsHomalgMatrix and IsStrictUpperTriangularMatri
 ####################################
 
 ##
-InstallImmediateMethod( IsInitialMatrix,
-        IsHomalgMatrix, 0,
-        
-  function( M )
-    
-    if not HasIsInitialMatrix( M ) then
-        return false;
-    fi;
-    
-    ## no need for a TryNextMethod() here ;)
-    
-end );
-
-##
-InstallImmediateMethod( IsVoidMatrix,
-        IsHomalgMatrix, 0,
-        
-  function( M )
-    
-    if not HasIsVoidMatrix( M ) then
-        return false;
-    fi;
-    
-    ## no need for a TryNextMethod() here ;)
-    
-end );
-
-##
 InstallImmediateMethod( IsEmptyMatrix,
         IsHomalgMatrix and HasNrRows and HasNrColumns, 0,
         

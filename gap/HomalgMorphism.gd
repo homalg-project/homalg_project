@@ -71,6 +71,10 @@ DeclareProperty( "IsAutomorphism",
 
 DeclareGlobalFunction( "HomalgMorphism" );
 
+DeclareGlobalFunction( "HomalgZeroMorphism" );
+
+DeclareGlobalFunction( "HomalgIdentityMorphism" );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
@@ -113,4 +117,10 @@ DeclareOperation( "DecideZero",
         [ IsHomalgMorphism, IsHomalgRelations ] );
 
 DeclareOperation( "DecideZero",
+        [ IsHomalgMorphism ] );
+
+DeclareOperation( "UnionOfRelations",
+        [ IsHomalgMorphism ] );
+
+DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgMorphism ] );

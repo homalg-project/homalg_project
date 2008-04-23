@@ -197,11 +197,14 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "DecideZeroEffectively",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
+DeclareOperation( "UnionOfRelations",
+        [ IsHomalgMatrix, IsHomalgModule ] );
+
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgModule, IsHomalgModule ] );
+        [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );

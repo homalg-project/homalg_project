@@ -543,7 +543,8 @@ end );
 InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
-        nar_U, nar_V, nar_UI, nar_VI, m, n, finished, barg, A, CM;
+          nar_U, nar_V, nar_UI, nar_VI, m, n, finished, barg, mm, nn, Id_U, Id_V, zero, one,
+          clean_rows, unclean_rows, clean_columns, unclean_columns, eliminate_units, b, a, v, u, l;
     
     if not IsHomalgMatrix( arg[1] ) then
         Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
@@ -631,8 +632,8 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         Error( "Wrong input!\n" );
     fi;
     
-    m := NrColumns( M );
-    n := NrRows( M );
+    m := NrRows( M );
+    n := NrColumns( M );
     
     finished := false;
     
@@ -649,19 +650,19 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     if IsZeroMatrix( M ) then
         
         if compute_U then
-            U := HomalgIdentityMatrix( NrRows( M ), R );
+            U := HomalgIdentityMatrix( m, R );
         fi;
         
         if compute_V then
-            V := HomalgIdentityMatrix( NrColumns( M ), R );
+            V := HomalgIdentityMatrix( n, R );
         fi;
         
         if compute_UI then
-            UI := HomalgIdentityMatrix( NrRows( M ), R );
+            UI := HomalgIdentityMatrix( m, R );
         fi;
         
         if compute_VI then
-            VI := HomalgIdentityMatrix( NrColumns( M ), R );
+            VI := HomalgIdentityMatrix( n, R );
         fi;
         
         finished := true;
@@ -711,20 +712,197 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
             VI := LeftInverse( V ); ## this is indeed a LeftInverse
         fi;
         
-        #CM := HomalgVoidMatrix( R );
-        #
-        #A := BasisOfRowsCoeff( M, CM );
-        #
-        #if compute_U and not IsString( U ) then
-        #    U := CM * U;
-        #fi;
-        #
-        #if compute_UI and not IsString( UI ) then
-        #    UI := UI * RightDivide( M, A );
-        #fi;
-        #
-        #M := A;
-	
+        ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!
+        ## this differs from the Maple code, where we only worked with left modules
+        
+    elif not finished then
+        
+        SetExtractHomalgMatrixToFile( M , true ); ## FIXME: find a way to copy matrices internally
+        M := HomalgMatrix( M, R );
+            
+        m := NrRows( M );
+        n := NrColumns( M );
+        
+        Id_U := HomalgIdentityMatrix( m, R );
+        
+        ## in case the resulting matrix has different dimensions
+        ## we fix the row dimension of the original one
+        mm := NrColumns( Id_U );
+        
+        if compute_U then
+            U := Id_U;
+        fi;
+        if compute_UI then
+            UI := Id_U;
+        fi;
+        
+        Id_V := HomalgIdentityMatrix( n, R );
+        
+        ## in case the resulting matrix has different dimensions
+        ## we fix the column dimension of the original one
+        nn := NrRows( Id_V );
+        
+        if compute_V then
+            V := Id_V;
+        fi;
+        if compute_VI then
+            VI := Id_V;
+        fi;
+        
+        zero := Zero( R );
+        one := One( R );
+        
+        clean_rows := [ ];
+        unclean_rows := [ 1 .. m ];
+        clean_columns := [ ];
+        unclean_columns := [ 1 .. n ];
+        
+        eliminate_units := function( arg )
+            local pos, i, j, r, q, a, v, vi, u, ui, l, k;
+            
+            if Length( arg ) > 0 then
+                pos := arg[1];
+            else
+                pos := GetUnitPosition( M, clean_columns );
+            fi;
+            
+            if pos = fail then
+                clean_rows := GetCleanRowsPositions( M, clean_columns );
+                unclean_rows := Filtered( [ 1 .. m ], a -> not a in clean_rows );
+                
+                return clean_columns;
+            else
+                b := false;
+            fi;
+            
+            while true do
+                i := pos[1];
+                j := pos[2];
+                
+                Add( clean_columns, j );
+                Remove( unclean_columns, Position( unclean_columns, j ) );
+                
+                ## divide the i-th row by the unit M[i][j]
+                
+                r := GetEntryOfHomalgMatrix( M, i, j ); 
+                if r <> one then
+                    q := r ^ -1;
+                    
+                    SetEntryOfHomalgMatrix( M, i, j, one );
+                    for a in [ 1 .. n ] do
+                        if a <> j then
+                            SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / r );
+                        fi;
+                    od;
+                    
+                    if compute_U then
+                        for a in [ 1 .. mm ] do
+                            SetEntryOfHomalgMatrix( U, i, a, GetEntryOfHomalgMatrix( U, i, a ) / r );
+                        od;
+                    fi;
+                    
+                    if compute_UI then
+                        for a in [ 1 .. mm ] do
+                            SetEntryOfHomalgMatrix( UI, a, i, GetEntryOfHomalgMatrix( UI, a, i ) / q );
+                        od;
+                    fi;
+                fi;
+                
+                ## cleanup the i-th row
+                
+                v := HomalgInitialIdentityMatrix( n, R );
+                
+                if compute_VI then
+                    vi := HomalgInitialIdentityMatrix( n, R );
+                fi;
+                
+                for l in [ 1 .. n ] do
+                    r := GetEntryOfHomalgMatrix( M, i, l );
+                    if l <> j and r <> zero then
+                        SetEntryOfHomalgMatrix( v, j, l, -r );
+                        if compute_VI then
+                            SetEntryOfHomalgMatrix( vi, j, l, r );
+                        fi;
+                    fi;
+                od;
+                
+                if compute_V then
+                    V := V * v;
+                fi;
+        
+                if compute_VI then
+                    VI := vi * VI;
+                fi;
+                
+                M := M * v;
+                
+                ## cleanup the j-th column
+                
+                if compute_U then
+                    u := HomalgInitialIdentityMatrix( NrRows( U ), R );
+                fi;
+                
+                if compute_UI then
+                    ui := HomalgInitialIdentityMatrix( NrRows( U ), R );
+                fi;
+                
+                if compute_U or compute_UI then
+                    for k in [ 1 .. m ] do
+                        if k <> i and GetEntryOfHomalgMatrix( M, k, j ) <> zero then
+                            r := GetEntryOfHomalgMatrix( M, k, j );
+                            if compute_U then
+                                SetEntryOfHomalgMatrix( u, k, i, -r );
+                            fi;
+                            if compute_UI then
+                                SetEntryOfHomalgMatrix( ui, k, i, r );
+                            fi;
+                        fi;
+                    od;
+                fi;
+                
+                if compute_U then
+                    U := u * U;
+                fi;
+                
+                if compute_UI then
+                    UI := UI * ui;
+                fi;
+          
+                for k in Concatenation( [ 1 .. i-1 ], [ i+1 .. n ] ) do
+                    SetEntryOfHomalgMatrix( M, k, j, zero );
+                od;
+                
+                pos := GetUnitPosition( M, clean_columns );
+                
+                if pos = fail then
+                    break;
+                fi;
+            od;
+            
+            clean_rows := GetCleanRowsPositions( M, clean_columns );
+            unclean_rows := Filtered( [ 1 .. m ], a -> not a in clean_rows );
+            
+            return clean_columns;
+        end;
+        
+        while true do
+            
+            ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!
+            ## this differs from the Maple code, where we only worked with left modules
+            
+            m := NrRows( M );
+            n := NrColumns( M );
+            
+            b := true;
+            
+            eliminate_units();
+            
+            ## FIXME: add heuristics
+            
+            if b then
+                break;
+            fi;
+        od;
     fi;
     
     if compute_U then
@@ -737,14 +915,14 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     
     if compute_UI then
         if not IsBound( UI ) then
-            UI := HomalgMatrix( "id", NrRows( M ), R );
+            UI := HomalgIdentityMatrix( NrRows( M ), R );
         fi;
         SetPreEval( arg[nar_UI], UI );
     fi;
     
     if compute_VI then
         if not IsBound( VI ) then
-            VI := HomalgMatrix( "id", NrColumns( M ), R );
+            VI := HomalgIdentityMatrix( NrColumns( M ), R );
         fi;
         SetPreEval( arg[nar_VI], VI );
     fi;

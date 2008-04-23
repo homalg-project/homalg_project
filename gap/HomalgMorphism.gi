@@ -487,6 +487,28 @@ InstallMethod( DecideZero,
     
 end );
 
+##
+InstallMethod( UnionOfRelations,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return UnionOfRelations( MatrixOfMorphism( phi ), TargetOfMorphism( phi ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return SyzygiesGenerators( MatrixOfMorphism( phi ), TargetOfMorphism( phi ) );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -496,7 +518,7 @@ end );
 InstallGlobalFunction( HomalgMorphism,
   function( arg )
     local nargs, source, pos_s, target, pos_t, R, type, matrix, matrices, reduced_matrices,
-          nr_rows, nr_columns, index_pair, morphism;
+          nr_rows, nr_columns, index_pair, morphism, option;
     
     nargs := Length( arg );
     
@@ -612,48 +634,56 @@ InstallGlobalFunction( HomalgMorphism,
                      reduced_matrices := reduced_matrices,
                      index_pairs_of_presentations := [ index_pair ]);
     
-    if IsString( arg[1] ) and Length( arg[1] ) > 3 and LowercaseString( arg[1]{[1..4]} ) = "zero" then
-    ## the zero morphism:
+    if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 then
         
-        matrix := HomalgZeroMatrix( nr_rows, nr_columns, R );
+        option := arg[1][1];
         
-        matrices.( String( index_pair ) ) := matrix;
-        
-        reduced_matrices.( String( index_pair ) ) := matrix;
-        
-        ## Objectify:
-        ObjectifyWithAttributes(
-                morphism, type,
-                IsZeroMorphism, true );
-        
-    elif IsString( arg[1] ) and Length( arg[1] ) > 1 and  LowercaseString( arg[1]{[1..2]} ) = "id" then
-    ## the identity morphism:
-        
-        if nr_rows <> nr_columns then
-            Error( "for a matrix of a morphism to be the identity matrix the number of generators of the source and target module must coincide\n" );
-        fi;
-        
-        matrix := HomalgIdentityMatrix( nr_rows, R );
-        
-        matrices.( String( index_pair ) ) := matrix;
-        
-        if IsIdenticalObj( source, target ) then
-            if pos_s = pos_t then
-                ## Objectify:
-                ObjectifyWithAttributes(
-                        morphism, type,
-                        IsIdentityMorphism, true );
+        if Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "zero" then
+        ## the zero morphism:
+            
+            matrix := HomalgZeroMatrix( nr_rows, nr_columns, R );
+            
+            matrices.( String( index_pair ) ) := matrix;
+            
+            reduced_matrices.( String( index_pair ) ) := matrix;
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    morphism, type,
+                    IsZeroMorphism, true );
+            
+        elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
+            ## the identity morphism:
+            
+            if nr_rows <> nr_columns then
+                Error( "for a matrix of a morphism to be the identity matrix the number of generators of the source and target module must coincide\n" );
+            fi;
+            
+            matrix := HomalgIdentityMatrix( nr_rows, R );
+            
+            matrices.( String( index_pair ) ) := matrix;
+            
+            if IsIdenticalObj( source, target ) then
+                if pos_s = pos_t then
+                    ## Objectify:
+                    ObjectifyWithAttributes(
+                            morphism, type,
+                            IsIdentityMorphism, true );
+                else
+                    ## Objectify:
+                    ObjectifyWithAttributes(
+                            morphism, type,
+                            IsAutomorphism, true );
+                fi;
             else
                 ## Objectify:
                 ObjectifyWithAttributes(
                         morphism, type,
-                        IsAutomorphism, true );
+                        IsIsomorphism, true );
             fi;
+            
         else
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    morphism, type,
-                    IsIsomorphism, true );
+            Error( "wrong first argument: ", arg[1], "\n" );
         fi;
         
     else
@@ -678,6 +708,22 @@ InstallGlobalFunction( HomalgMorphism,
     
 end );
   
+##
+InstallGlobalFunction( HomalgZeroMorphism,
+  function( arg )
+    
+    return CallFuncList( HomalgMorphism, Concatenation( [ [ "zero" ] ], arg ) );
+    
+end );
+
+##
+InstallGlobalFunction( HomalgIdentityMorphism,
+  function( arg )
+    
+    return CallFuncList( HomalgMorphism, Concatenation( [ [ "identity" ] ], arg ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

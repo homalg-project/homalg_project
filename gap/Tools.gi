@@ -80,6 +80,109 @@ InstallMethod( MinusOne,
     
 end );
 
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "for homalg rings elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R, RP, minus_r;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Minus) and IsBound(RP!.Zero) then
+        minus_r := RP!.Minus( RP!.Zero, r );
+        return HomalgExternalRingElement( minus_r, homalgExternalCASystem( R ), R );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, pos_list )
+    local R, RP, m, n, mat, i, j;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsHomalgExternalMatrixRep( M ) then
+        if IsBound( RP!.GetUnitPosition ) then
+            return RP!.GetUnitPosition( M, pos_list );
+        else
+            Error( "could not find a procedure called GetUnitPosition in the homalgTable", RP, "\n" );
+        fi;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    mat := Eval( M );
+    
+    for i in [ 1 .. m ] do
+        for j in [ 1 .. n ] do
+            if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R!.ring, mat[i][j] ) then
+                return [ i, j ];
+            fi;
+        od;
+    od;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, clean_columns )
+    local R, RP, one, clean_rows, m, mat, j, i;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsHomalgExternalMatrixRep( M ) then
+        if IsBound( RP!.GetCleanRowsPositions ) then
+            return RP!.GetCleanRowsPositions( M, clean_columns );
+        else
+            Error( "could not find a procedure called GetCleanRowsPositions in the homalgTable", RP, "\n" );
+        fi;
+    fi;
+    
+    one := One( R );
+    
+    #=====# begin of the core procedure #=====#
+    
+    clean_rows := [ ];
+    
+    m := NrRows( M );
+    
+    mat := Eval( M );
+    
+    for j in clean_columns do
+        for i in [ 1 .. m ] do
+            if mat[i][j] = one then
+                Add( clean_rows, i );
+                break;
+            fi;
+        od;
+    od;
+    
+    return  clean_rows;
+    
+end );
+
 ##
 InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         "for homalg matrices",
@@ -136,6 +239,41 @@ InstallMethod( Eval,				### defines: ZeroMap
     #=====# begin of the core procedure #=====#
     
     return ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) );
+    
+end );
+
+##
+InstallMethod( Eval,				### defines: an initial matrix filled with zeros
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsInitialIdentityMatrix ],
+        
+  function( C )
+    local R, RP, o, z, zz, id;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsHomalgExternalMatrixRep( C ) then
+        if IsBound( RP!.IdentityMatrix ) then
+            ResetFilterObj( C, IsInitialIdentityMatrix );
+            return RP!.IdentityMatrix( C );
+        else
+            Error( "could not find a procedure called IdentityMatrix to evaluate an external identity matrix in the homalgTable", RP, "\n" );
+        fi;
+    fi;
+    
+    z := Zero( HomalgRing( C ) );
+    o := One( HomalgRing( C ) );
+    
+    #=====# begin of the core procedure #=====#
+    
+    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    
+    id := List( [ 1 .. NrRows( C ) ],
+                function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
+    
+    return id;
     
 end );
 

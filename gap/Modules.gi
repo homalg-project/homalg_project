@@ -58,3 +58,63 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     
 end );
 
+##
+InstallMethod( \/,				### defines: SubfactorModule (incomplete)
+        "for a homalg matrix",
+	[ IsHomalgMatrix, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( mat, rel )
+    local R, RP, B, N, S;
+    
+    R := HomalgRing( mat );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.SubfactorModule) then
+        return RP!.SubfactorModule( mat, rel );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    # basis of rel
+    B := BasisOfModule( rel );
+    
+    # normal forms of mat with respect to B
+    N := DecideZero( mat, B );
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        N := HomalgRelationsForLeftModule( N );
+    else
+        N := HomalgRelationsForRightModule( N );
+    fi;
+    
+    # get a better basis for N
+    N := GetRidOfTrivialRelations( N );
+    
+    # compute the syzygies module of N modulo B
+    S := SyzygiesGenerators( N, B );
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        return HomalgRelationsForLeftModule( S );
+    else
+        return HomalgRelationsForRightModule( S );
+    fi;
+    
+end );
+
+##
+InstallMethod( \/,
+        "for a homalg matrix",
+	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        
+  function( mat, M )
+    local gen, rel;
+    
+    gen := mat * GeneratorsOfModule( M );
+    
+    rel := mat / RelationsOfModule( M );
+    
+    return Presentation( gen, rel );
+    
+end );
+

@@ -43,9 +43,6 @@ DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgRings" );
 #
 ####################################
 
-DeclareProperty( "IsHomalgExternalRingElementWithIOStream",
-        IsHomalgExternalRingElement );
-
 ## properties listed alphabetically (ignoring left/right):
 
 DeclareProperty( "IsIntegersForHomalg",
@@ -135,6 +132,9 @@ DeclareAttribute( "MinusOne",
 ####################################
 
 # basic operations:
+
+DeclareOperation( "HomalgRing",
+        [ IsHomalgExternalRingElement ] );
 
 DeclareOperation( "RingName",
         [ IsHomalgRing ] );

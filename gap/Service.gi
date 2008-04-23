@@ -737,7 +737,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     #=====# begin of the core procedure #=====#
     
-    return SyzygiesGeneratorsOfRows( Involution( M ) );
+    return Involution( SyzygiesGeneratorsOfRows( Involution( M ) ) );
     
 end );
 
@@ -759,7 +759,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     #=====# begin of the core procedure #=====#
     
-    return SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) );
+    return Involution( SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
     
 end );
 

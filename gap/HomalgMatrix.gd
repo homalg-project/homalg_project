@@ -30,6 +30,9 @@ DeclareCategory( "IsHomalgMatrix",
 DeclareProperty( "IsInitialMatrix",
         IsHomalgMatrix );
 
+DeclareProperty( "IsInitialIdentityMatrix",
+        IsHomalgMatrix );
+
 DeclareProperty( "IsVoidMatrix",
         IsHomalgMatrix );
 
@@ -217,6 +220,8 @@ DeclareGlobalFunction( "HomalgIdentityMatrix" );
 
 DeclareGlobalFunction( "HomalgInitialMatrix" );
 
+DeclareGlobalFunction( "HomalgInitialIdentityMatrix" );
+
 DeclareGlobalFunction( "HomalgVoidMatrix" );
 
 DeclareGlobalFunction( "ConvertHomalgMatrix" );
@@ -234,13 +239,14 @@ DeclareOperation( "SetExtractHomalgMatrixAsSparse",
 DeclareOperation( "SetExtractHomalgMatrixToFile",
         [ IsHomalgMatrix, IsBool ] );
 
-# basic operations:
+DeclareOperation( "SetEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
 
-DeclareOperation( "SetElementOfHomalgMatrix",
+DeclareOperation( "SetEntryOfHomalgMatrix",
         [ IsHomalgMatrix, IsInt, IsInt, IsString ] );
 
-DeclareOperation( "SetElementOfHomalgMatrix",
-        [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
+DeclareOperation( "SetEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgExternalRingElement ] );
 
 DeclareOperation( "CreateHomalgMatrix",
         [ IsString, IsHomalgRing ] );
@@ -257,26 +263,35 @@ DeclareOperation( "CreateHomalgSparseMatrix",
 DeclareOperation( "CreateHomalgSparseMatrix",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
-DeclareOperation( "GetElementOfHomalgMatrixAsString",
+DeclareOperation( "GetEntryOfHomalgMatrixAsString",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
 
+DeclareOperation( "GetEntryOfHomalgMatrixAsString",
+        [ IsHomalgMatrix, IsInt, IsInt ] );
+
+DeclareOperation( "GetEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "GetEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt ] );
+
+DeclareOperation( "GetListOfHomalgMatrixAsString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
 DeclareOperation( "GetListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "GetListOfHomalgMatrixAsString",
+DeclareOperation( "GetListListOfHomalgMatrixAsString",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "GetListListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "GetListListOfHomalgMatrixAsString",
+DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );
-
-DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
-        [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "homalgPointer",
         [ IsHomalgMatrix ] );
@@ -295,6 +310,18 @@ DeclareOperation( "homalgExternalCASystemPID",
 
 DeclareOperation( "AreComparableMatrices",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "GetUnitPosition",
+        [ IsHomalgMatrix, IsHomogeneousList ] );
+
+DeclareOperation( "GetUnitPosition",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetCleanRowsPositions",
+        [ IsHomalgMatrix, IsHomogeneousList ] );
+
+DeclareOperation( "GetCleanRowsPositions",
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "Involution",
         [ IsHomalgMatrix ] );

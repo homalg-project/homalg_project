@@ -868,6 +868,17 @@ InstallMethod( DecideZeroEffectively,
 end );
 
 ##
+InstallMethod( UnionOfRelations,
+        "for homalg modules",
+	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        
+  function( mat, M )
+    
+    return UnionOfRelations( mat, RelationsOfModule( M ) ) ;
+    
+end );
+
+##
 InstallMethod( SyzygiesGenerators,
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
@@ -881,11 +892,11 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
-  function( M1, M2 )
+  function( mat, M )
     
-    return SyzygiesGenerators( RelationsOfModule( M1 ), RelationsOfModule( M2 ) ) ;
+    return SyzygiesGenerators( mat, RelationsOfModule( M ) ) ;
     
 end );
 
@@ -994,7 +1005,7 @@ InstallMethod( BetterGenerators,
     rel := BetterEquivalentMatrix( rel_old, V, VI, "", "" );
     
     if rel_old = rel then
-        return M;
+        return GetRidOfZeroGenerators( M );
     fi;
     
     rel := HomalgRelationsForLeftModule( rel );
@@ -1023,7 +1034,7 @@ InstallMethod( BetterGenerators,
     rel := BetterEquivalentMatrix( rel_old, U, UI, "", "", "" );
     
     if rel_old = rel then
-        return M;
+        return GetRidOfZeroGenerators( M );
     fi;
     
     rel := HomalgRelationsForRightModule( rel );
@@ -1694,6 +1705,40 @@ InstallMethod( PrintObj,
         Print( RightActingDomain( M ), " " );
     fi;
     Print( ")" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    R := RingName( R );
+    
+    Print( "Cokernel of the map ", R, "^(1x", NrRelations( M ), ") --> ", R, "^(1x", NrGenerators( M ), "), with matrix:\n\n" );
+    Display( MatrixOfRelations( M ) );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    R := RingName( R );
+    
+    Print( "Cokernel of the map ", R, "^(", NrRelations( M ), "x1) --> ", R, "^(", NrGenerators( M ), "x1), with matrix:\n\n" );
+    Display( MatrixOfRelations( M ) );
     
 end );
 
