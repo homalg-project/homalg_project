@@ -687,7 +687,9 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local stream, display_color;
+    local R, stream, display_color;
+    
+    R := HomalgRing( o );
     
     stream := homalgStream( o );
     
@@ -699,7 +701,7 @@ InstallMethod( Display,
             display_color := "";
         fi;
         
-        Print( display_color, homalgSendBlocking( [ "convert(", o, ",matrix)" ], "need_display" ) );
+        Print( display_color, homalgSendBlocking( [ R, "[2][matrix](", o, ")" ], "need_display" ) );
         
     else
         
