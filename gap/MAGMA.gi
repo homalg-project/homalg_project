@@ -214,7 +214,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "MAGMA" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "MAGMA", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -306,7 +306,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
     
-    return HomalgExternalRingElement( Mrc, "MAGMA" );
+    return HomalgExternalRingElement( Mrc, "MAGMA", R );
     
 end );
 

@@ -459,7 +459,7 @@ InstallMethod( PolynomialRing,
         S := RingForHomalgInMapleUsingInvolutive( var, R );
     fi;
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Maple" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "Maple", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -580,7 +580,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
     
-    return HomalgExternalRingElement( Mrc, "Maple" );
+    return HomalgExternalRingElement( Mrc, "Maple", R );
     
 end );
 

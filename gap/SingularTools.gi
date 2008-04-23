@@ -184,7 +184,14 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    return Int( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output" ) );
                    
-                 end
+                 end,
+               
+               Minus :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output" );
+                   
+                 end,
                
         )
  );

@@ -200,7 +200,14 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    return Int( homalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output" ) );
                    
-                 end
+                 end,
                
+               Minus :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output" );
+                   
+                 end,
+                 
         )
  );

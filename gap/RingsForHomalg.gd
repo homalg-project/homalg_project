@@ -24,5 +24,5 @@ DeclareGlobalVariable( "HOMALG_RINGS" );
 
 # constructor methods:
 
-DeclareGlobalFunction( "RingForHomalg" );
+#DeclareGlobalFunction( "RingForHomalg" );
 

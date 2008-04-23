@@ -197,7 +197,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Singular" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "Singular", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
