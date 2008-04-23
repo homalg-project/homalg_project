@@ -1720,7 +1720,7 @@ InstallMethod( Display,
     
     R := RingName( R );
     
-    Print( "Cokernel of the map ", R, "^(1x", NrRelations( M ), ") --> ", R, "^(1x", NrGenerators( M ), "), with matrix:\n\n" );
+    Print( "Cokernel of the map:\n", R, "^(1x\033[1m", NrRelations( M ), "\033[0m) --> ", R, "^(1x\033[1m", NrGenerators( M ), "\033[0m), with matrix\n\n" );
     Display( MatrixOfRelations( M ) );
     
 end );
@@ -1737,7 +1737,7 @@ InstallMethod( Display,
     
     R := RingName( R );
     
-    Print( "Cokernel of the map ", R, "^(", NrRelations( M ), "x1) --> ", R, "^(", NrGenerators( M ), "x1), with matrix:\n\n" );
+    Print( "Cokernel of the map:\n", R, "^(\033[1m", NrRelations( M ), "\033[0mx1) --> ", R, "^(\033[1m", NrGenerators( M ), "\033[0mx1), with matrix\n\n" );
     Display( MatrixOfRelations( M ) );
     
 end );
@@ -1771,7 +1771,7 @@ InstallMethod( Display,
     display := Filtered( display, x -> x <> z );
     
     if display <> [ ] then
-        display := List( display, x -> [ name, " / ( ", name, " * ", get_string( x ), " ) + " ] );
+        display := List( display, x -> [ name, " / ( ", name, " \033[1m", get_string( x ), "\033[0m ) + " ] );
         display := Concatenation( display );
         display := Concatenation( display );
     else
@@ -1779,7 +1779,7 @@ InstallMethod( Display,
     fi;
     
     if r <> 0 then
-        Print( display, name, " ^ ( 1 x ", r," )\n" );
+        Print( display, name, " ^ (1 x", " \033[1m", r, "\033[0m)\n" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;
