@@ -171,8 +171,19 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in GAP",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command" );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
-        "for a listlist of an external matrix in Sage",
+        "for a listlist of an external matrix in GAP",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
   function( S, R )
@@ -212,13 +223,27 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
+InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in GAP",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
-	       
-  function( M, r, c, s, R )
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, r, c, R )
     
-    homalgSendBlocking( [ "SetElementOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command" );
+    return homalgSendBlocking( [ "GetEntryOfHomalgMatrix( ", M, r, c, R, " )" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in GAP",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "GAP" );
     
 end );
 

@@ -229,6 +229,17 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
         "for homalg matrices in MAGMA",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
@@ -275,13 +286,27 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
+InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
-	       
-  function( M, r, c, s, R )
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "MAGMA" );
     
 end );
 

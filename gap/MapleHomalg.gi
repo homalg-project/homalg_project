@@ -503,6 +503,17 @@ InstallGlobalFunction( MapleHomalgOptions,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
         "for homalg matrices in Maple",
         [ IsString, IsHomalgExternalRingInMapleRep ],
@@ -549,13 +560,27 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
-        "for external matrices in Sage",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
-	       
-  function( M, r, c, s, R )
+InstallMethod( GetEntryOfHomalgMatrixAsString,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    return homalgSendBlocking( [ "convert(", M, "[", r, c, "],symbol)" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "Maple" );
     
 end );
 

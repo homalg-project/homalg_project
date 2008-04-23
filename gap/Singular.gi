@@ -212,6 +212,17 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in Singular",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command" );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
@@ -222,17 +233,6 @@ InstallMethod( CreateHomalgMatrix,
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R );
     
     return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( SetElementOfHomalgMatrix,
-        "for external matrices in Singular",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
-	       
-  function( M, r, c, s, R )
-    
-    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command" );
     
 end );
 
