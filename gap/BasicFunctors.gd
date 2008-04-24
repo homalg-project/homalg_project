@@ -24,6 +24,11 @@ DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
 
 DeclareGlobalVariable( "Functor_Kernel" );
 
+## Hom
+DeclareGlobalFunction( "_Functor_Hom_OnObjects" );
+
+DeclareGlobalVariable( "Functor_Hom" );
+
 ####################################
 #
 # global functions and operations:
@@ -35,5 +40,14 @@ DeclareGlobalVariable( "Functor_Kernel" );
 DeclareOperation( "Cokernel",
         [ IsHomalgMorphism ] );
 
-## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]);
+## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
+
+DeclareOperation( "Hom",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgModule, IsHomalgRing ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgRing, IsHomalgModule ] );
 

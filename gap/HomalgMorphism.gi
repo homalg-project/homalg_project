@@ -526,6 +526,8 @@ InstallGlobalFunction( HomalgMorphism,
         if IsHomalgModule( arg[2] ) then
             source := arg[2];
             pos_s := source!.PositionOfTheDefaultSetOfRelations;
+        elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then
+            source := "ring";
         elif IsList( arg[2] ) and IsHomalgModule( arg[2][1] ) and IsPosInt( arg[2][2] ) then
             source := arg[2][1];
             pos_s := arg[2][2];
@@ -539,14 +541,15 @@ InstallGlobalFunction( HomalgMorphism,
         
         if IsHomalgMatrix( arg[1] ) then
             matrix := arg[1];
-            R := HomalgRing( matrix );
         elif IsHomalgRing( arg[nargs] ) then
             matrix := HomalgMatrix( arg[1], arg[nargs] );
         else
             Error( "The second argument must be the source module or the last argument should be an IsHomalgRing\n" );
         fi;
         
-        if nargs > 1 and IsString( arg[2] ) and Length( arg[2] ) > 0 and  LowercaseString( arg[2]{[1..1]} ) = "r" then
+        R := HomalgRing( matrix );
+        
+        if nargs > 1 and IsStringRep( arg[2] ) and Length( arg[2] ) > 0 and  LowercaseString( arg[2]{[1..1]} ) = "r" then
             source := HomalgFreeRightModule( NrColumns( matrix ), R );
             target := HomalgFreeRightModule( NrRows( matrix ), R );
             type := TheTypeHomalgMorphismOfRightModules;
@@ -581,6 +584,19 @@ InstallGlobalFunction( HomalgMorphism,
         if IsHomalgModule( arg[3] ) then
             target := arg[3];
             pos_t := target!.PositionOfTheDefaultSetOfRelations;
+        elif IsHomalgRing( arg[3] ) then
+            if source = "ring" then
+                source := HomalgFreeLeftModule( 1, arg[2] );
+                if not IsIdenticalObj( arg[2], arg[3] ) then
+                    Error( "the source and target modules must be defined over the same ring\n" );
+                fi;
+                target := source;	## we get an endomorphism
+                pos_s := source!.PositionOfTheDefaultSetOfRelations;
+                pos_t := pos_s;
+            else
+                target := HomalgFreeLeftModule( 1, arg[3] );
+                pos_t := target!.PositionOfTheDefaultSetOfRelations;
+            fi;
         elif IsList( arg[3] ) and IsHomalgModule( arg[3][1] ) and IsPosInt( arg[3][2] ) then
             target := arg[3][1];
             pos_t := arg[3][2];
@@ -588,6 +604,11 @@ InstallGlobalFunction( HomalgMorphism,
                 Error( "the target module does not possess a ", arg[3][2], ". set of relations (this positive number is given as the second entry of the list provided as the third argument)\n" );
             fi;
         fi;
+    elif source = "ring" then
+        source := HomalgFreeLeftModule( 1, arg[2] );
+        target := source;	## we get an endomorphism
+        pos_s := source!.PositionOfTheDefaultSetOfRelations;
+        pos_t := pos_s;
     else
         pos_t := pos_s;
     fi;
@@ -689,11 +710,24 @@ InstallGlobalFunction( HomalgMorphism,
     else
         
         if IsHomalgMatrix( arg[1] ) then
+            if not IsIdenticalObj( HomalgRing( arg[1] ), R ) then
+                Error( "the rings of the matrix and of the modules do not coincide\n" );
+            fi;
             matrix := arg[1];
         elif IsList( arg[1] ) then
             matrix := HomalgMatrix( arg[1], R );
         else
             Error( "the first argument must be in { IsHomalgMatrix, IsMatrix, IsList } but received: ",  arg[1], "\n" );
+        fi;
+        
+        if IsLeftModule( source )
+           and ( NrGenerators( source ) <> NrRows( matrix )
+                 or NrGenerators( target ) <> NrColumns( matrix ) ) then
+            Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
+        elif IsRightModule( source )
+           and ( NrGenerators( source ) <> NrColumns( matrix )
+                 or NrGenerators( target ) <> NrRows( matrix ) ) then
+            Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
         fi;
         
         matrices.( String( index_pair ) ) := matrix;

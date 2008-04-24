@@ -45,42 +45,42 @@ BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
 ####################################
 
 InstallValue( SimpleLogicalImplicationsForHomalgModules,
-        [ ## IsTorsionFreeLeftModule:
+        [ ## IsTorsionFreeModule:
           
           [ IsZeroModule,
-            "implies", IsFreeModule ], ## FIXME: the name should be changed to IsFreeLeftModule
+            "implies", IsFreeModule ],
           
-          [ IsFreeModule, ## FIXME: the name should be changed to IsFreeLeftModule
-            "implies", IsStablyFreeLeftModule ],
+          [ IsFreeModule,
+            "implies", IsStablyFreeModule ],
           
-          [ IsStablyFreeLeftModule,
-            "implies", IsProjectiveLeftModule ],
+          [ IsStablyFreeModule,
+            "implies", IsProjectiveModule ],
           
-          [ IsProjectiveLeftModule,
-            "implies", IsReflexiveLeftModule ],
+          [ IsProjectiveModule,
+            "implies", IsReflexiveModule ],
           
-          [ IsReflexiveLeftModule,
-            "implies", IsTorsionFreeLeftModule ],
+          [ IsReflexiveModule,
+            "implies", IsTorsionFreeModule ],
           
-          ## IsTorsionLeftModule:
-          
-          [ IsZeroModule,
-            "implies", IsHolonomicLeftModule ],
-          
-          [ IsHolonomicLeftModule,
-            "implies", IsTorsionLeftModule ],
-          
-          [ IsHolonomicLeftModule,
-            "implies", IsArtinianLeftModule ],
-          
-          ## IsCyclicLeftModule:
+          ## IsTorsionModule:
           
           [ IsZeroModule,
-            "implies", IsCyclicLeftModule ],
+            "implies", IsHolonomicModule ],
+          
+          [ IsHolonomicModule,
+            "implies", IsTorsionModule ],
+          
+          [ IsHolonomicModule,
+            "implies", IsArtinianModule ],
+          
+          ## IsCyclicModule:
+          
+          [ IsZeroModule,
+            "implies", IsCyclicModule ],
           
           ## IsZeroModule:
           
-          [ IsTorsionLeftModule, "and", IsTorsionFreeLeftModule,
+          [ IsTorsionModule, "and", IsTorsionFreeModule,
             "imply", IsZeroModule ]
           
           ] );
@@ -159,8 +159,8 @@ od;
 #
 ####################################
 
-## strictly less relations than generators => not IsTorsionLeftModule
-InstallImmediateMethod( IsTorsionLeftModule,
+## strictly less relations than generators => not IsTorsionModule
+InstallImmediateMethod( IsTorsionModule,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
@@ -196,7 +196,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFreeModule,
-        IsFinitelyPresentedModuleRep and IsLeftModule, 0,
+        IsFinitelyPresentedModuleRep, 0,
         
   function( M )
     
@@ -216,6 +216,20 @@ InstallImmediateMethod( RankOfModule,
     
     if NrRelations( M ) = 0 then
         return NrGenerators( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsionModule,
+        IsFinitelyPresentedModuleRep and HasRankOfModule, 0,
+        
+  function( M )
+    
+    if RankOfModule( M ) > 0 then
+        return false;
     fi;
     
     TryNextMethod( );
@@ -1606,7 +1620,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFreeModule ],
+        [ IsFinitelyPresentedModuleRep and IsFreeModule ], 1001,
         
   function( M )
     local r, rk;
@@ -1644,7 +1658,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1,
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1001,
         
   function( M )
     
@@ -1746,6 +1760,10 @@ InstallMethod( Display,
     
     rel := MatrixOfRelations( M );
     
+    if not HasRankOfModule( M ) then
+        TryNextMethod( );
+    fi;
+    
     if not ( HasIsDiagonalMatrix( rel ) and IsDiagonalMatrix( rel ) )
        and not HasElementaryDivisors( M ) then ## this should have no side effect on M
         TryNextMethod( );
@@ -1768,14 +1786,13 @@ InstallMethod( Display,
     
     diag := Filtered( diag, x  -> x <> zero and x <> one );
     
-    r := NrGenerators( M ) - Length( diag );
+    r := RankOfModule( M );
     
     if IsHomalgExternalRingElementRep( zero ) then
         get_string := homalgPointer;
     else
         get_string := String;
     fi;
-    
     
     if diag <> [ ] then
         display := List( diag, x -> [ name, "/< \033[1m", get_string( x ), "\033[0m > + " ] );

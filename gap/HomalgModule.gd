@@ -33,36 +33,32 @@ DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgModules" );
 #
 ####################################
 
-## left modules:
+DeclareProperty( "IsFreeModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsFreeModule", ## FIXME: the name should be changed to IsFreeLeftModule
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsStablyFreeModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsStablyFreeLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsProjectiveModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsProjectiveLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsReflexiveModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsReflexiveLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsTorsionFreeModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsTorsionFreeLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsArtinianModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsArtinianLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsCyclicModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsCyclicLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareProperty( "IsTorsionModule",
+        IsHomalgModule );
 
-DeclareProperty( "IsTorsionLeftModule",
-        IsHomalgModule and IsLeftModule );
-
-DeclareProperty( "IsHolonomicLeftModule",
-        IsHomalgModule and IsLeftModule );
-
-## all modules:
+DeclareProperty( "IsHolonomicModule",
+        IsHomalgModule );
 
 DeclareProperty( "IsZeroModule",
         IsHomalgModule );
