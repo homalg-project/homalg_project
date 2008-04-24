@@ -33,20 +33,27 @@ Print( Concatenation( "\nSelect Computer Algebra System:\n",
 
 CAS := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
 
+Print( "\nSelect Z/nZ (default: n=0)\n:" );
+n := Int( Filtered( ReadLine( input ), c -> c<>'\n' ) );
+
+if n = fail then
+    n := 0;
+fi;
+
 if CAS = fail or not CAS in [1..5] then
     CAS := 1;
 fi;
 
 if CAS = 1 then
-    R := HomalgRingOfIntegers();
+    R := HomalgRingOfIntegers(n);
 elif CAS = 2 then
-    R := HomalgRingOfIntegersInExternalGAP();
+    R := HomalgRingOfIntegersInExternalGAP(n);
 elif CAS = 3 then
-    R := HomalgRingOfIntegersInSage();
+    R := HomalgRingOfIntegersInSage(n);
 elif CAS = 4 then
-    R := HomalgRingOfIntegersInMAGMA();
+    R := HomalgRingOfIntegersInMAGMA(n);
 elif CAS = 5 then
-    R := HomalgRingOfIntegersInMaple();
+    R := HomalgRingOfIntegersInMaple(n);
 fi;
 
 if IsBound( PackageInfo( "SCO" )[1] ) and IsBound( PackageInfo( "SCO" )[1].InstallationPath ) then
@@ -96,7 +103,6 @@ for i in [1..Length( M ) - 1] do
     Q[i] := ker[i] / im[i];
     Print( "computing BetterGenerators...\n" );
     BetterGenerators( Q[i] );
-    ElementaryDivisorsOfLeftModule( Q[i] );;
-    Print( "----------------------------->>>>  " );
+    Print( "----------------------------------------------->>>>  " );
     Display( Q[i] );
 od;
