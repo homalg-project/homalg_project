@@ -188,6 +188,34 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
     
 end );
 
+##
+InstallImmediateMethod( IsUpperTriangularMatrix,
+        IsHomalgMatrix and HasNrRows, 0,
+        
+  function( M )
+    
+    if NrRows( M ) = 1 then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerTriangularMatrix,
+        IsHomalgMatrix and HasNrColumns, 0,
+        
+  function( M )
+    
+    if NrColumns( M ) = 1 then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # immediate methods for attributes:

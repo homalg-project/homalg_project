@@ -912,6 +912,20 @@ InstallMethod( GetSide,
     
 end );
 
+##
+InstallMethod( DiagonalEntries,
+        "of homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local m;
+    
+    m := Minimum( NrRows( M ), NrColumns( M ) );
+    
+    return List( [ 1 .. m ], a -> GetEntryOfHomalgMatrix( M, a, a ) );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -921,7 +935,7 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, M, ar, type, matrix, option;
+    local nargs, R, M, ar, type, matrix;
     
     nargs := Length( arg );
     
@@ -976,102 +990,6 @@ InstallGlobalFunction( HomalgMatrix,
         
     fi; ## CAUTION: don't make an elif here!!!
     
-    if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 then
-        
-        option := arg[1][1];
-        
-        if Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "void" then
-        ## a void matrix filled with nothing having the flag IsVoidMatrix:
-            
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    matrix, type,
-                    IsVoidMatrix, true );
-            
-            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-                SetNrRows( matrix, arg[2] );
-            fi;
-            
-            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-                SetNrColumns( matrix, arg[3] );
-            fi;
-            
-            return matrix;
-            
-        elif Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "init" then
-        ## an initial matrix having the flag IsInitialMatrix
-        ## and filled with zeros BUT NOT marked as an IsZeroMatrix:
-            
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    matrix, type,
-                    IsInitialMatrix, true );
-            
-            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-                SetNrRows( matrix, arg[2] );
-            fi;
-            
-            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-                SetNrColumns( matrix, arg[3] );
-            fi;
-            
-            return matrix;
-            
-        elif Length( option ) > 5 and LowercaseString( option{[1..6]} ) = "idinit" then
-        ## an square initial matrix having the flag IsInitialIdentityMatrix
-        ## and filled with an identity matrix BUT NOT marked as an IsIdentityMatrix:
-            
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    matrix, type,
-                    IsInitialIdentityMatrix, true );
-            
-            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-                SetNrRows( matrix, arg[2] );
-                SetNrColumns( matrix, arg[2] );
-            fi;
-            
-            return matrix;
-            
-        elif Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "zero" then
-        ## the zero matrix:
-            
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    matrix, type,
-                    IsZeroMatrix, true );
-            
-            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-                SetNrRows( matrix, arg[2] );
-            fi;
-            
-            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-                SetNrColumns( matrix, arg[3] );
-            fi;
-            
-            return matrix;
-            
-        elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
-        ## the identity matrix:
-            
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    matrix, type,
-                    IsIdentityMatrix, true );
-            
-            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-                SetNrRows( matrix, arg[2] );
-                SetNrColumns( matrix, arg[2] );
-            fi;
-            
-            return matrix;
-            
-        else
-            Error( "wrong first argument: ", arg[1], "\n" );
-        fi;
-        
-    fi;
-    
     if IsList( arg[1] ) and Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
         M := List( arg[1], a -> [a] ); ## NormalizeInput
     else
@@ -1113,41 +1031,175 @@ end );
   
 ##
 InstallGlobalFunction( HomalgZeroMatrix,
-  function( arg )
+  function( arg )		## the zero matrix
+    local R, type, matrix;
     
-    return CallFuncList( HomalgMatrix, Concatenation( [ [ "zero" ] ], arg ) );
+    R := arg[Length( arg )];
+    
+    if not IsHomalgRing( R ) then
+        Error( "the last argument must be an IsHomalgRing" );
+    fi;
+    
+    if IsHomalgInternalRingRep( R ) then
+        type := TheTypeHomalgInternalMatrix;
+    else
+        type := TheTypeHomalgExternalMatrix;
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            matrix, type,
+            IsZeroMatrix, true );
+    
+    if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
+        SetNrRows( matrix, arg[1] );
+    fi;
+    
+    if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+        SetNrColumns( matrix, arg[2] );
+    fi;
+    
+    return matrix;
     
 end );
 
 ##
 InstallGlobalFunction( HomalgIdentityMatrix,
-  function( arg )
+  function( arg )		## the identity matrix
+    local R, type, matrix;
     
-    return CallFuncList( HomalgMatrix, Concatenation( [ [ "identity" ] ], arg ) );
+    R := arg[Length( arg )];
+    
+    if not IsHomalgRing( R ) then
+        Error( "the last argument must be an IsHomalgRing" );
+    fi;
+    
+    if IsHomalgInternalRingRep( R ) then
+        type := TheTypeHomalgInternalMatrix;
+    else
+        type := TheTypeHomalgExternalMatrix;
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            matrix, type,
+            IsIdentityMatrix, true );
+    
+    if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
+        SetNrRows( matrix, arg[1] );
+        SetNrColumns( matrix, arg[1] );
+    fi;
+    
+    return matrix;
     
 end );
 
 ##
 InstallGlobalFunction( HomalgInitialMatrix,
-  function( arg )
+  function( arg )	        ## an initial matrix having the flag IsInitialMatrix
+    local R, type, matrix;	## and filled with zeros BUT NOT marked as an IsZeroMatrix
     
-    return CallFuncList( HomalgMatrix, Concatenation( [ [ "init" ] ], arg ) );
+    R := arg[Length( arg )];
+    
+    if not IsHomalgRing( R ) then
+        Error( "the last argument must be an IsHomalgRing" );
+    fi;
+    
+    if IsHomalgInternalRingRep( R ) then
+        type := TheTypeHomalgInternalMatrix;
+    else
+        type := TheTypeHomalgExternalMatrix;
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            matrix, type,
+            IsInitialMatrix, true );
+    
+    if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
+        SetNrRows( matrix, arg[1] );
+    fi;
+    
+    if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+        SetNrColumns( matrix, arg[2] );
+    fi;
+    
+    return matrix;
     
 end );
 
 ##
 InstallGlobalFunction( HomalgInitialIdentityMatrix,
-  function( arg )
+  function( arg )		## an square initial matrix having the flag IsInitialIdentityMatrix
+    local R, type, matrix;	## and filled with an identity matrix BUT NOT marked as an IsIdentityMatrix
     
-    return CallFuncList( HomalgMatrix, Concatenation( [ [ "idinit" ] ], arg ) );
+    R := arg[Length( arg )];
+    
+    if not IsHomalgRing( R ) then
+        Error( "the last argument must be an IsHomalgRing" );
+    fi;
+    
+    if IsHomalgInternalRingRep( R ) then
+        type := TheTypeHomalgInternalMatrix;
+    else
+        type := TheTypeHomalgExternalMatrix;
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            matrix, type,
+            IsInitialIdentityMatrix, true );
+    
+    if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
+        SetNrRows( matrix, arg[1] );
+        SetNrColumns( matrix, arg[1] );
+    fi;
+    
+    return matrix;
     
 end );
 
-##
+## 
 InstallGlobalFunction( HomalgVoidMatrix,
-  function( arg )
+  function( arg )	## a void matrix filled with nothing having the flag IsVoidMatrix
+    local R, type, matrix;
     
-    return CallFuncList( HomalgMatrix, Concatenation( [ [ "void" ] ], arg ) );
+    R := arg[Length( arg )];
+    
+    if not IsHomalgRing( R ) then
+        Error( "the last argument must be an IsHomalgRing" );
+    fi;
+    
+    if IsHomalgInternalRingRep( R ) then
+        type := TheTypeHomalgInternalMatrix;
+    else
+        type := TheTypeHomalgExternalMatrix;
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            matrix, type,
+            IsVoidMatrix, true );
+    
+    if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
+        SetNrRows( matrix, arg[1] );
+    fi;
+    
+    if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+        SetNrColumns( matrix, arg[2] );
+    fi;
+    
+    return matrix;
     
 end );
 

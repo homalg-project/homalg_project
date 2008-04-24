@@ -40,6 +40,46 @@ BindGlobal( "TheTypeHomalgRelationsOfRightModule",
 
 ####################################
 #
+# immediate methods for properties:
+#
+####################################
+
+##
+InstallImmediateMethod( IsInjectivePresentation,
+        IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule, 0,
+        
+  function( rel )
+    local mat;
+    
+    mat := MatrixOfRelations( rel );
+    
+    if HasIsFullRowRankMatrix( mat ) and IsFullRowRankMatrix( mat ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsInjectivePresentation,
+        IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule, 0,
+        
+  function( rel )
+    local mat;
+    
+    mat := MatrixOfRelations( rel );
+    
+    if HasIsFullColumnRankMatrix( mat ) and IsFullColumnRankMatrix( mat ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -226,6 +266,9 @@ InstallMethod( BasisOfModule,
         if bas = mat and IsReducedModuloRingRelations( mat ) then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas; ## CAUTION: be very careful here!!!
+            if HasIsFullRowRankMatrix( bas ) and IsFullRowRankMatrix( bas ) then
+                SetIsInjectivePresentation( rel, true );
+            fi;
             return rel;
         else
             rel!.BasisOfModule := bas;
@@ -251,16 +294,20 @@ InstallMethod( BasisOfModule,
     local mat, bas;
     
     if not IsBound( rel!.BasisOfModule ) then
-        
         mat := MatrixOfRelations( rel );
         
         bas := BasisOfColumns( mat );
         
-        if bas <> mat then
+        if bas = mat and IsReducedModuloRingRelations( mat ) then
+            SetCanBeUsedToDecideZeroEffectively( rel, true );
+            rel!.relations := bas; ## CAUTION: be very careful here!!!
+            if HasIsFullColumnRankMatrix( bas ) and IsFullColumnRankMatrix( bas ) then
+                SetIsInjectivePresentation( rel, true );
+            fi;
+            return rel;
+        else
             rel!.BasisOfModule := bas;
             SetCanBeUsedToDecideZeroEffectively( rel, false );
-        else
-            SetCanBeUsedToDecideZeroEffectively( rel, true );
         fi;
     else
         bas := rel!.BasisOfModule;
@@ -619,7 +666,60 @@ InstallMethod( Display,
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( o )
+    local m, n;
     
-    Display( MatrixOfRelations( o ) );
+    m := NrRelations( o );
+    n := NrGenerators( o );
+    
+    if m = 0 then
+        Print( "an empty set of relations " );
+        if n = 0 then
+            Print( "on an empty set of generators\n" );
+        elif n = 1 then
+            Print( "on a single generator\n" );
+        else
+            Print( "on ", n, " generators\n" );
+        fi;
+    else
+        if m = 1 then
+            Print( "a single relation " );
+        else
+            Print( m, " relations " );
+        fi;
+        
+        if n = 0 then
+            Print( "on an empty set of generators\n" );
+        else
+            if n = 1 then
+                Print( "on a single generator " );
+            else
+                Print( "on ", n, " generators " );
+            fi;
+            
+            Print( "given by " );
+            
+            if m = 1 then
+                Print( "(" );
+            fi;
+            
+            Print( "the " );
+            
+            if IsHomalgRelationsOfLeftModule( o ) then
+                Print( "row" );
+            else
+                Print( "column" );
+            fi;
+            
+            if m = 1 then
+                Print( " of)" );
+            else
+                Print( "s of" );
+            fi;
+            
+            Print( " the matrix \n\n" );
+            
+            Display( MatrixOfRelations( o ) );
+        fi;
+    fi;
     
 end );

@@ -416,7 +416,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     
     nargs := Length( arg );
     
-    if nargs = 0 then
+    if nargs = 0 or arg[1] = 0 then
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
         c := arg[1];
@@ -460,7 +460,7 @@ end );
 ##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
-    local nargs, properties, ar, ring, obj;
+    local nargs, properties, ar, ring, r;
     
     nargs := Length( arg );
     
@@ -477,25 +477,29 @@ InstallGlobalFunction( HomalgExternalRingElement,
     od;
     
     if IsBound( ring ) then
-        obj := rec( pointer := arg[1], cas := arg[2], ring := ring );
+        r := rec( pointer := arg[1], cas := arg[2], ring := ring );
         
         ## Objectify:
         ObjectifyWithAttributes(
-                obj, TheTypeHomalgExternalRingElementWithIOStream );
+                r, TheTypeHomalgExternalRingElementWithIOStream );
     else
-        obj := rec( pointer := arg[1], cas := arg[2] );
+        r := rec( pointer := arg[1], cas := arg[2] );
         
         ## Objectify:
-        Objectify( TheTypeHomalgExternalRingElement, obj );
+        Objectify( TheTypeHomalgExternalRingElement, r );
     fi;
     
     if properties <> [ ] then
         for ar in properties do
-            Setter( ar )( obj, true );
+            Setter( ar )( r, true );
         od;
     fi;
     
-    return obj;
+    if not ( Length( arg[1] ) > 17 and arg[1]{[1..16]} = "homalg_variable_" ) then
+	SetName( r, arg[1] );
+    fi;
+    
+    return r;
     
 end );
 

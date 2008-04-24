@@ -209,8 +209,8 @@ InstallImmediateMethod( IsFreeModule,
 end );
 
 ##
-InstallImmediateMethod( RankOfLeftModule,
-        IsFinitelyPresentedModuleRep and IsLeftModule and IsFreeModule, 0,
+InstallImmediateMethod( RankOfModule,
+        IsFinitelyPresentedModuleRep and IsFreeModule, 0,
         
   function( M )
     
@@ -219,19 +219,6 @@ InstallImmediateMethod( RankOfLeftModule,
     fi;
     
     TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( RankOfLeftModule,
-        IsFinitelyPresentedModuleRep and HasElementaryDivisorsOfLeftModule, 0,
-        
-  function( M )
-    local z;
-    
-    z := Zero( HomalgRing( M ) );
-    
-    return Length( Filtered( ElementaryDivisorsOfLeftModule( M ), x -> x = z ) );
     
 end );
 
@@ -828,11 +815,16 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
     rel := RelationsOfModule( M );
     
     if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and CanBeUsedToDecideZeroEffectively( rel ) ) then
-        
         bas := BasisOfModule( rel );		## CAUTION: might have a side effect on rel
         
         AddANewPresentation( M, bas );		## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
-        
+    else
+        bas := rel;
+    fi;
+    
+    if not HasRankOfModule( M )
+       and HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
+        SetRankOfModule( M, NrGenerators( M ) - NrRelations( M ) );
     fi;
     
     return RelationsOfModule( M );
@@ -1046,27 +1038,34 @@ InstallMethod( BetterGenerators,
 end );
 
 ##
-InstallMethod( ElementaryDivisorsOfLeftModule,
+InstallMethod( ElementaryDivisors,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
+	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, RP, e, one;
+    local rel, b, R, RP, e, zero, one;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ElementaryDivisors) then
+    if IsBound(RP!.ElementaryDivisors) and HasRankOfModule( M ) then
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
-            e := List( e, a -> HomalgExternalRingElement( a, homalgExternalCASystem( R ) ) );
+            e := List( e, a -> HomalgExternalRingElement( a, homalgExternalCASystem( R ), R ) );
         fi;
         
+        ## since the computer algebra systems have different
+        ## conventions for elementary divisors, we fix our own here:
+        zero := Zero( R );
         one := One( R );
         
-        return Filtered( e, x -> x <> one );
+        e := Filtered( e, x -> x <> one and x <> zero );
+        
+        Append( e, ListWithIdenticalEntries( RankOfModule( M ), zero ) );
+        
+        return e;
     fi;
     
     TryNextMethod( );
@@ -1074,38 +1073,27 @@ InstallMethod( ElementaryDivisorsOfLeftModule,
 end );
 
 ##
-InstallMethod( ElementaryDivisorsOfLeftModule,			 ## FIXME: make it an InstallImmediateMethod
+InstallMethod( ElementaryDivisors,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule and IsZeroModule ],
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ],
         
   function( M )
-    local R;
     
-    R := HomalgRing( M );
-    
-    #if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
-        return [ ];
-    #fi;
-    
-    #TryNextMethod( );
+    return [ ];
     
 end );
 
 ##
-InstallMethod( ElementaryDivisorsOfLeftModule,			 ## FIXME: make it an InstallImmediateMethod
+InstallMethod( ElementaryDivisors,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule and IsFreeModule ],
+        [ IsFinitelyPresentedModuleRep and IsFreeModule ],
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    #if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
-        return ListWithIdenticalEntries( NrGenerators( M ), Zero( R ) );
-    #fi;
-    
-    #TryNextMethod( );
+    return ListWithIdenticalEntries( NrGenerators( M ), Zero( R ) );
     
 end );
 
@@ -1623,12 +1611,20 @@ InstallMethod( ViewObj,
   function( M )
     local r, rk;
     
-    Print( "<A free left module" );
+    Print( "<A free " );
+    
+    if IsLeftModule( M ) then
+        Print( "left " );
+    else
+        Print( "right " );
+    fi;
+    
+    Print( "module" );
     
     r := NrGenerators( M );
     
-    if HasRankOfLeftModule( M ) then
-        rk := RankOfLeftModule( M );
+    if HasRankOfModule( M ) then
+        rk := RankOfModule( M );
         Print( " of rank ", rk, " on " );
         if r = rk then
             if r = 1 then
@@ -1639,8 +1635,6 @@ InstallMethod( ViewObj,
         else ## => r > 1
             Print( r, " non-free generators" );
         fi;
-    else
-        
     fi;
     
     Print( ">" );
@@ -1745,10 +1739,17 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule and HasElementaryDivisorsOfLeftModule ],
+        [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
-    local R, RP, name, z, r, display, get_string;
+    local rel, R, RP, name, zero, one, diag, display, r, get_string;
+    
+    rel := MatrixOfRelations( M );
+    
+    if not ( HasIsDiagonalMatrix( rel ) and IsDiagonalMatrix( rel ) )
+       and not HasElementaryDivisors( M ) then ## this should have no side effect on M
+        TryNextMethod( );
+    fi;
     
     R := HomalgRing( M );
     
@@ -1756,22 +1757,28 @@ InstallMethod( Display,
     
     name := RingName( R );
     
-    z := Zero( R );
+    zero := Zero( R );
+    one := One( R );
     
-    r := RankOfLeftModule( M );
+    if HasElementaryDivisors( M ) then
+        diag := ElementaryDivisors( M );
+    else
+        diag := DiagonalEntries( rel );
+    fi;
     
-    display := ElementaryDivisorsOfLeftModule( M );
+    diag := Filtered( diag, x  -> x <> zero and x <> one );
     
-    if IsHomalgExternalRingElementRep( display[1] ) then ## display is only empty in case the module is trivial, but this is taken care of my a special method
+    r := NrGenerators( M ) - Length( diag );
+    
+    if IsHomalgExternalRingElementRep( zero ) then
         get_string := homalgPointer;
     else
         get_string := String;
     fi;
     
-    display := Filtered( display, x -> x <> z );
     
-    if display <> [ ] then
-        display := List( display, x -> [ name, " / ( ", name, " \033[1m", get_string( x ), "\033[0m ) + " ] );
+    if diag <> [ ] then
+        display := List( diag, x -> [ name, "/< \033[1m", get_string( x ), "\033[0m > + " ] );
         display := Concatenation( display );
         display := Concatenation( display );
     else
@@ -1779,7 +1786,7 @@ InstallMethod( Display,
     fi;
     
     if r <> 0 then
-        Print( display, name, " ^ (1 x", " \033[1m", r, "\033[0m)\n" );
+        Print( display, name, "^(1 x", " \033[1m", r, "\033[0m)\n" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;
@@ -1789,7 +1796,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ],
+        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1001,
         
   function( M )
     

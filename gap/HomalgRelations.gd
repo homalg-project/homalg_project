@@ -40,6 +40,9 @@ DeclareProperty( "CanBeUsedToDecideZeroEffectively",
 DeclareProperty( "IsReducedSetOfRelations",
         IsHomalgRelations );
 
+DeclareProperty( "IsInjectivePresentation",
+        IsHomalgRelations );
+
 ####################################
 #
 # attributes:

@@ -332,17 +332,19 @@ InstallMethod( ViewObj,
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( o )
-    local m;
+    local g;
     
-    m := NrGenerators( o );
+    g := NrGenerators( o );
     
-    if m = 0 then
-        Print( "<An empty set of generators of a homalg " );
-    elif m = 1 then
-        Print( "<A set consisting of a single generator of a homalg " );
+    if g = 0 then
+        Print( "<An empty set of generators " );
+    elif g = 1 then
+        Print( "<A set consisting of a single generator " );
     else
-        Print( "<A set of ", m, " generators of a homalg " );
+        Print( "<A set of ", g, " generators " );
     fi;
+    
+    Print( "of a homalg " );
     
     if IsHomalgGeneratorsOfLeftModule( o ) then
         Print( "left " );
@@ -359,7 +361,34 @@ InstallMethod( Display,
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( o )
+    local g;
     
-    Display( MatrixOfGenerators( o ) );
+    g := NrGenerators( o );
+    
+    if g = 0 then
+        Print( "an empty set of generators\n" );
+    else
+        if g = 1 then
+            Print( "a set consisting of a single generator given by (the" );
+        else
+            Print( "a set of ", g, " generators given by the" );
+        fi;
+        
+        if IsHomalgGeneratorsOfLeftModule( o ) then
+            Print( " row" );
+        else
+            Print( " column" );
+        fi;
+        
+        if g = 1 then
+            Print( " of)" );
+        else
+            Print( "s of" );
+        fi;
+        
+        Print( " the matrix\n\n" );
+        
+        Display( MatrixOfGenerators( o ) );
+    fi;
     
 end );

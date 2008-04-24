@@ -365,6 +365,9 @@ DeclareOperation( "AddBts",
 DeclareOperation( "GetSide",
         [ IsString, IsHomalgMatrix ] );
 
+DeclareOperation( "DiagonalEntries",
+        [ IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:

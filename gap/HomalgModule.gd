@@ -73,11 +73,11 @@ DeclareProperty( "IsZeroModule",
 #
 ####################################
 
-DeclareAttribute( "RankOfLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareAttribute( "RankOfModule",
+        IsHomalgModule );
 
-DeclareAttribute( "ElementaryDivisorsOfLeftModule",
-        IsHomalgModule and IsLeftModule );
+DeclareAttribute( "ElementaryDivisors",
+        IsHomalgModule );
 
 ####################################
 #
@@ -224,8 +224,8 @@ DeclareOperation( "BetterGenerators",
 DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
         PositionOfTheDefaultSetOfRelations );
 
-DeclareSynonym( "EulerCharacteristicOfLeftModule",
-        RankOfLeftModule );
+DeclareSynonym( "EulerCharacteristicOfModule",
+        RankOfModule );
 
 DeclareSynonym( "BetterPresentation",
         GetRidOfZeroGenerators );
