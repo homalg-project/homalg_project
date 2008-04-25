@@ -467,6 +467,7 @@ InstallMethod( PolynomialRing,
     
     SetCoefficientsRing( S, r );
     SetCharacteristic( S, c );
+    SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;
@@ -683,25 +684,14 @@ end );
 ####################################
 
 InstallMethod( Display,
-        "for homalg matrices",
+        "for homalg matrices in Maple",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local R, stream, display_color;
-    
-    R := HomalgRing( o );
-    
-    stream := homalgStream( o );
     
     if IsHomalgExternalRingInMapleRep( HomalgRing( o ) ) then
         
-        if IsBound( stream.color_display ) then
-            display_color := stream.color_display;
-        else
-            display_color := "";
-        fi;
-        
-        Print( display_color, homalgSendBlocking( [ R, "[2][matrix](", o, ")" ], "need_display" ) );
+        Print(  homalgSendBlocking( [ HomalgRing( o ), "[2][matrix](", o, ")" ], "need_display" ) );
         
     else
         
@@ -709,4 +699,4 @@ InstallMethod( Display,
         
     fi;
     
-end);
+end );

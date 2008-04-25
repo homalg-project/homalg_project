@@ -100,8 +100,8 @@ InstallGlobalFunction( RingForHomalgInSage,
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );

@@ -100,8 +100,8 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
@@ -222,6 +222,7 @@ InstallMethod( PolynomialRing,
     
     SetCoefficientsRing( S, r );
     SetCharacteristic( S, c );
+    SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;

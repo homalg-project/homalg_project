@@ -133,7 +133,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     ##without "dummy_variable" to Singular. Since homalg in GAP
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
-    ar := Concatenation( [ "0,dummy_variable,dp" ], [ "ring" ], [ IsPrincipalIdealRing ], arg );
+    ar := Concatenation( [ "0,dummy_variable,dp" ], [ IsPrincipalIdealRing ], arg );
     
     R := CallFuncList( RingForHomalgInSingular, ar );
     
@@ -192,7 +192,7 @@ InstallMethod( PolynomialRing,
 
     ##create the new ring
     ##todo: this creates a block ordering with a new "dp"-block
-    ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, properties);
+    ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, properties, R );
     homalgSendBlocking( ["setring ", ext_obj ], "need_command");
     
     ##prints output in a compatible format
@@ -213,6 +213,7 @@ InstallMethod( PolynomialRing,
     
     SetCoefficientsRing( S, r );
     SetCharacteristic( S, c );
+    SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;
@@ -243,58 +244,6 @@ InstallMethod( CreateHomalgMatrix,
     return HomalgMatrix( ext_obj, R );
     
 end );
-
-####################################
-#
-# View, Print, and Display methods:
-#
-####################################
-
-InstallMethod( Display,
-        "for homalg matrices in Singular",
-        [ IsHomalgExternalMatrixRep ], 1,
-        
-  function( o )
-    local stream, display_color;
-    
-    stream := homalgStream( o );
-    
-    if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
-        
-        if IsBound( stream.color_display ) then
-            display_color := stream.color_display;
-        else
-            display_color := "";
-        fi;
-        
-        Print( display_color, homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
-        
-    else
-        
-        TryNextMethod( );
-        
-    fi;
-    
-end);
-
-InstallMethod( Display,
-        "for homalg rings in Singular",
-        [ IsHomalgExternalRingInSingularRep ], 1,
-        
-  function( o )
-    local stream, display_color;
-    
-    stream := homalgStream( o );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
-
-    Print( display_color, homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
-
-end);
 
 ####################################
 #
@@ -365,3 +314,38 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     return M;
     
 end );
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+InstallMethod( Display,
+        "for homalg matrices in Singular",
+        [ IsHomalgExternalMatrixRep ], 1,
+        
+  function( o )
+    
+    if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
+        
+        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
+        
+    else
+        
+        TryNextMethod( );
+        
+    fi;
+    
+end );
+
+InstallMethod( Display,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep ], 1,
+        
+  function( o )
+    
+    Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
+    
+end );
+
