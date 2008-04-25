@@ -1,7 +1,10 @@
 LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_IO.color_display := true;
+## replace the following to lines with HomalgFieldOfRationalsInSingular() * "x"
 Qx := RingForHomalgInSingular( "0,x,dp", IsPrincipalIdealRing );
+SetName( Qx, "Q[x]" );
+##
 Display( Qx );
 wmat := HomalgMatrix( " \
 1, 2*x+x^2, 2*x+3*x^3-3*x^2-x^4, -1+x^3+2*x^4-2*x^2+x-x^5, \

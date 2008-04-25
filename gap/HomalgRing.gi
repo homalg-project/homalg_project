@@ -285,6 +285,8 @@ InstallMethod( RingName,
         else
             return RP!.RingName;
         fi;
+    elif HasName( R ) then
+        return Name( R );
     elif HasCharacteristic( R ) then
         
         c := Characteristic( R );
