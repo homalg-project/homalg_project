@@ -89,7 +89,7 @@ InstallGlobalFunction( homalgSendBlocking,
   function( arg )
     local L, nargs, properties, ar, option, need_command, need_display, need_output,
           break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS, PID,
-          homalg_variable, l, eoc, enter, max;
+          homalg_variable, l, eoc, enter, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -110,7 +110,9 @@ InstallGlobalFunction( homalgSendBlocking,
     properties := [];
     
     for ar in arg{[ 2 .. nargs ]} do ## the order of the following might be important for the performance!!!
-        if not IsBound( prefix ) and IsList( ar ) and not IsStringRep( ar ) then
+        if IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then	## this must come before prefix and suffix
+            Append( properties, ar );
+        elif not IsBound( prefix ) and IsList( ar ) and not IsStringRep( ar ) then
             prefix := ar;
         elif not IsBound( suffix ) and IsList( ar ) and not IsStringRep( ar ) then
             suffix := ar;
@@ -154,8 +156,6 @@ InstallGlobalFunction( homalgSendBlocking,
             type := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
-        elif IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then
-            Append( properties, ar );
         elif not IsBound( break_lists ) and ar = "break_lists" then
             break_lists := ar;
         else
@@ -327,11 +327,17 @@ InstallGlobalFunction( homalgSendBlocking,
         
         return L;
     elif need_display then
-        if stream.cas = "maple" then
-            return Concatenation( stream.lines{ [ 1 .. Length( stream.lines ) - 36 ] }, "\033[0m" );
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
         else
-            return Concatenation( stream.lines, "\033[0m\n" );
+            display_color := "";
         fi;
+        if stream.cas = "maple" then
+            L := stream.lines{ [ 1 .. Length( stream.lines ) - 36 ] };
+        else
+            L := stream.lines;
+        fi;
+        return Concatenation( display_color, L, "\033[0m\n" );
     elif stream.cas = "maple" then
         ## unless meant for display, normalize the white spaces caused by Maple
         L := NormalizedWhitespace( stream.lines );
