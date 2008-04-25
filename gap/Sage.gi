@@ -217,7 +217,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Sage" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "Sage", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -228,6 +228,17 @@ InstallMethod( PolynomialRing,
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSageRep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command" );
     
 end );
 
@@ -274,13 +285,27 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
+InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in Sage",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSageRep ],
-	       
-  function( M, r, c, s, R )
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
+        
+  function( M, r, c, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command" );
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "Sage", R );
     
 end );
 
@@ -318,7 +343,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( GetElementOfHomalgMatrixAsString,
+InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 

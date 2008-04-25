@@ -205,7 +205,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    var := List( Concatenation( var_of_coeff_ring, var ), a -> HomalgExternalRingElement( a, "Singular" ) );
+    var := List( Concatenation( var_of_coeff_ring, var ), a -> HomalgExternalRingElement( a, "Singular", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -220,6 +220,17 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in Singular",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command" );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrix,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
@@ -230,17 +241,6 @@ InstallMethod( CreateHomalgMatrix,
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R );
     
     return HomalgMatrix( ext_obj, R );
-    
-end );
-
-##
-InstallMethod( SetElementOfHomalgMatrix,
-        "for external matrices in Singular",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
-	       
-  function( M, r, c, s, R )
-    
-    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command" );
     
 end );
 

@@ -459,7 +459,7 @@ InstallMethod( PolynomialRing,
         S := RingForHomalgInMapleUsingInvolutive( var, R );
     fi;
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Maple" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "Maple", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -499,6 +499,17 @@ InstallGlobalFunction( MapleHomalgOptions,
     od;
     
     Print( homalgSendBlocking( [ "`homalg/homalg_options`(", s, R, "[2])" ], "need_display" ) );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
     
 end );
 
@@ -549,13 +560,27 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
-        "for external matrices in Sage",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
-	       
-  function( M, r, c, s, R )
+InstallMethod( GetEntryOfHomalgMatrixAsString,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    return homalgSendBlocking( [ "convert(", M, "[", r, c, "],symbol)" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "Maple", R );
     
 end );
 
@@ -662,7 +687,9 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local stream, display_color;
+    local R, stream, display_color;
+    
+    R := HomalgRing( o );
     
     stream := homalgStream( o );
     
@@ -674,7 +701,7 @@ InstallMethod( Display,
             display_color := "";
         fi;
         
-        Print( display_color, homalgSendBlocking( [ "convert(", o, ",matrix)" ], "need_display" ) );
+        Print( display_color, homalgSendBlocking( [ R, "[2][matrix](", o, ")" ], "need_display" ) );
         
     else
         

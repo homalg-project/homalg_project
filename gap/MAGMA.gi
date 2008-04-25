@@ -214,7 +214,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "MAGMA" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "MAGMA", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -225,6 +225,17 @@ InstallMethod( PolynomialRing,
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
     
 end );
 
@@ -275,13 +286,27 @@ InstallMethod( CreateHomalgSparseMatrix,
 end );
 
 ##
-InstallMethod( SetElementOfHomalgMatrix,
+InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
-	       
-  function( M, r, c, s, R )
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "MAGMA", R );
     
 end );
 

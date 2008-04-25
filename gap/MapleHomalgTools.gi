@@ -209,7 +209,49 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    return Int( homalgSendBlocking( [ R, "[2][NumberOfGenerators](", C, ")" ], "need_output" ) );
                    
-                 end
+                 end,
+                 
+               Minus :=
+                 function( a, b )
+                   local R;
+                   
+                   R := HomalgRing( a );
+                   
+                   return homalgSendBlocking( [ R, "[2][Minus](", a, ",", b, ")" ], "need_output" ); ## in case a and b are passed as strings
+                   
+                 end,
+                 
+               GetUnitPosition :=
+                 function( M, pos_list )
+                   local R, list_string;
+                   
+                   R := HomalgRing( M );
+                   
+                   list_string := homalgSendBlocking( [ "`homalg/GetUnitPosition`(", M, pos_list, R, ")" ], "need_output" );
+                   
+                   if list_string = "" then
+                       return fail;
+                   else
+                       return StringToIntList( list_string );
+                   fi;
+                   
+                 end,
+                 
+               GetCleanRowsPositions :=
+                 function( M, clean_columns )
+                   local R, list_string;
+                   
+                   R := HomalgRing( M );
+                   
+                   list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions`(", M, clean_columns, R, ")" ], "need_output" );
+                   
+                   if list_string = "" then
+                       return fail;
+                   else
+                       return StringToIntList( list_string );
+                   fi;
+                   
+                 end,
                  
         )
  );

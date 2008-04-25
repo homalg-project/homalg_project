@@ -172,13 +172,20 @@ InstallValue( CommonHomalgTableForSageTools,
                    return Int( homalgSendBlocking( [ C, ".nrows()" ], "need_output" ) );
                    
                  end,
-               
+                 
                NrColumns :=
                  function( C )
                    
                    return Int( homalgSendBlocking( [ C, ".ncols()" ], "need_output" ) );
                    
-                 end
-               
+                 end,
+                 
+               Minus :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output" );
+                   
+                 end,
+                 
         )
  );
