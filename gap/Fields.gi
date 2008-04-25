@@ -52,9 +52,10 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    if N.vectors = [ ] then
-                       H := HomalgZeroMatrix( 0, Length( N.heads ), R );
+                       H := HomalgZeroMatrix( 0, NrColumns( M ), R );
                    else
-                       H := HomalgMatrix( N.vectors, R );
+                       H := HomalgMatrix( N.vectors, R ); ## and since this is not i.g. triangular:
+                       H := CertainRows( H, Filtered( N.heads, a -> a <> 0 ) );
                    fi;
                    
                    SetNrColumns( H, NrColumns( M ) );
