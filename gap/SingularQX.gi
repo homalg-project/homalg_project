@@ -59,7 +59,8 @@ InstallMethod( CreateHomalgTable,
                        
                        ## compute N and U, such that N=UM
                        homalgSendBlocking( [ "list l=gauss_row(", M, ",1);",
-                                             U, "=transpose(l[2]);", N, "=transpose(l[1])"
+                                             "matrix ", U, "=transpose(l[2]);",
+                                             "matrix ", N, "=transpose(l[1])"
                                            ], "need_command" );
                    else
                        ## compute N only:

@@ -22,17 +22,20 @@ InstallValue( InitializeSingularBestBasis,
 
             "proc BestBasis_SUV(M)\n",
             "{\n",
-            "  S=transpose(std(transpose(M)));\n",
-            "  V=transpose(lift(transpose(S),transpose(M),U));\n",
+            "  matrix S[nrows(M)][ncols(M)]=transpose(std(transpose(M)));\n",
+            "  matrix U[nrows(M)][nrows(M)];\n",
+            "  matrix V[ncols(M)][ncols(M)]=transpose(lift(transpose(S),transpose(M),U));\n",
             "  U=transpose(U);\n",
-            "  return(nrows(S))\n",
+            "  export(S,U,V);\n",
+            "  return(nrows(S));\n",
             "};\n\n",
-            
+
             "proc BestBasis_S(M)\n",
             "{\n",
-            "  S=transpose(std(transpose(M)));\n",
-            "  return(nrows(S))\n",
-            "};\n\n"
+            "  matrix S[nrows(M)][ncols(M)]=transpose(std(transpose(M)));\n",
+            "  export(S);\n",
+            "  return(nrows(S));\n",
+            "};\n\n",
 
           );
           
