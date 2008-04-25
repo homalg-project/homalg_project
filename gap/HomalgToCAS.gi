@@ -298,7 +298,7 @@ InstallGlobalFunction( homalgSendBlocking,
             stream.warnings := stream.errors;
             stream.HomalgExternalWarningsCounter := stream.HomalgExternalWarningsCounter + 1;
         else
-            Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[1m", stream.errors ,"\033[0m\n" );
+            Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.errors ,"\033[0m\n" );
         fi;
     fi;
     
@@ -353,7 +353,7 @@ InstallGlobalFunction( homalgSendBlocking,
         Info( InfoIO_ForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
         if IsBound( stream.check_output ) and stream.check_output = true
            and '\n' in L and not ',' in L then
-            Error( "\033[1m", "the output received from the external CAS ", CAS, " (running with PID ", PID, ") contains an ENTER = '\\n' but no COMMA = ',' ... this is most probably a mistakte!!!", "\033[0m\n" );
+            Error( "\033[01m", "the output received from the external CAS ", CAS, " (running with PID ", PID, ") contains an ENTER = '\\n' but no COMMA = ',' ... this is most probably a mistakte!!!", "\033[0m\n" );
         fi;
     fi;
     
