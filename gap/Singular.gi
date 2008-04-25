@@ -100,13 +100,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);", "need_command", stream );
-        ##prints output in a compatible format
-        homalgSendBlocking( "short=1;", "need_command", stream );
-        homalgSendBlocking( "LIB \"nctools.lib\"", "need_command", stream );
-        homalgSendBlocking( "LIB \"matrix.lib\"", "need_command", stream );
-        homalgSendBlocking( "LIB \"control.lib\"", "need_command", stream );
-        homalgSendBlocking( "LIB \"ring.lib\"", "need_command", stream );
+        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream );
         o := 0;
     else
         o := 1;
@@ -121,6 +115,9 @@ InstallGlobalFunction( RingForHomalgInSingular,
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
+    
+    ##prints output in a compatible format
+    homalgSendBlocking( "short=0;", "need_command", stream );
     
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -197,6 +194,9 @@ InstallMethod( PolynomialRing,
     ##todo: this creates a block ordering with a new "dp"-block
     ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, properties);
     homalgSendBlocking( ["setring ", ext_obj ], "need_command");
+    
+    ##prints output in a compatible format
+    homalgSendBlocking( "short=0;", "need_command", ext_obj );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
