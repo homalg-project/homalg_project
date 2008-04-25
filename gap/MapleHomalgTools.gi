@@ -151,6 +151,16 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               KroneckerMat :=
+                 function( A, B )
+                   local R;
+                   
+                   R := HomalgRing( A );
+                   
+                   return homalgSendBlocking( [ "`homalg/KroneckerMat`(", A, B, R, ")" ] );
+                   
+                 end,
+               
                MulMat :=
                  function( a, A )
                    local R;
