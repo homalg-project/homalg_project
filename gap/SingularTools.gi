@@ -32,11 +32,11 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "]" ] , C, "need_command" );
 
-                   homalgSendBlocking( [ "for (int i=1; i<=", NrRows(C), "; i=i+1) { if (transpose(", C, ")[i] == Zero_Row) {l=l,i;} }" ] , "need_command" );
+                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrRows(C), "; i=i+1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }" ] , "need_command" );
 
-                   list_string := homalgSendBlocking( [ "l" ], C, "need_output" );
+                   list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
 
-                   #trying to understand singular's output
+                   #trying to understand singular's output with removed spaces from homalg
                    if list_string = "empty list" or list_string = "emptylist" then
                      return StringToIntList( "[]" );
                    else
@@ -53,9 +53,9 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]" ] , C, "need_command" );
 
-                   homalgSendBlocking( [ "for (int i=1; i<=", NrColumns(C), "; i=i+1) { if ", C, "[i] == Zero_Row) {l=l,i;} }" ] , "need_command" );
+                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrColumns(C), "; i=i+1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }" ] , "need_command" );
 
-                   list_string := homalgSendBlocking( [ "l" ], C, "need_output" );
+                   list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
 
                    #trying to understand singular's output
                    if list_string = "empty list" or list_string = "emptylist" then
