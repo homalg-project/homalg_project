@@ -211,6 +211,16 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                  
+               Minus :=
+                 function( a, b )
+                   local R;
+                   
+                   R := HomalgRing( a );
+                   
+                   return homalgSendBlocking( [ R, "[2][Minus](", a, ",", b, ")" ], "need_output" ); ## in case a and b are passed as strings
+                   
+                 end,
+                 
                GetUnitPosition :=
                  function( M, pos_list )
                    local R, list_string;
@@ -241,7 +251,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                        return StringToIntList( list_string );
                    fi;
                    
-                 end
+                 end,
                  
         )
  );

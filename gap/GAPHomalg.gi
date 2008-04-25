@@ -19,7 +19,7 @@ InstallValue( HOMALG_IO_GAP,
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
             executable := "gapL",
-            options := [ "-b -q" ],
+            options := [ "-b -q -T" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
             CUT_BEGIN := 1,		## these are the most
@@ -243,7 +243,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
     
-    return HomalgExternalRingElement( Mrc, "GAP" );
+    return HomalgExternalRingElement( Mrc, "GAP", R );
     
 end );
 

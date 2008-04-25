@@ -166,6 +166,13 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                  
+               Minus :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output" );
+                   
+                 end,
+                 
                GetUnitPosition :=
                  function( M, pos_list )
                    local list_string;

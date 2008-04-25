@@ -217,7 +217,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Sage" ) );
+    var := List( var, a -> HomalgExternalRingElement( a, "Sage", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -305,7 +305,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
     
-    return HomalgExternalRingElement( Mrc, "Sage" );
+    return HomalgExternalRingElement( Mrc, "Sage", R );
     
 end );
 
