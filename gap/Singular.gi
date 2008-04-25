@@ -21,7 +21,7 @@ InstallValue( HOMALG_IO_Singular,
             cas := "singular",		## normalized name on which the user should have no control
             name := "Singular",
             executable := "Singular",
-            options := [ "-t" , "--echo=0" ],
+            options := [ "-t" , "--echo=0" , "--no-warn" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
             CUT_BEGIN := 1,		## these are the most
@@ -99,10 +99,8 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ##a new Singular-process
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
-        homalgSendBlocking( "option(noredefine);", "need_command", stream );
-        homalgSendBlocking( "LIB \"nctools.lib\"", "need_command", stream );
-        homalgSendBlocking( "LIB \"matrix.lib\"", "need_command", stream );
-        homalgSendBlocking( "LIB \"control.lib\"", "need_command", stream );
+        ##shut down the "redefining" messages
+        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream );
         o := 0;
     else
         o := 1;
@@ -117,6 +115,9 @@ InstallGlobalFunction( RingForHomalgInSingular,
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
+    
+    ##prints output in a compatible format
+    homalgSendBlocking( "short=0;", "need_command", stream );
     
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -150,7 +151,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v;
+    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v, nr_var;
     
     ##compute the new indeterminates for the ring and save them in var
     if IsString( indets ) and indets <> "" then
@@ -160,6 +161,8 @@ InstallMethod( PolynomialRing,
     else
         Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
     fi;
+    
+    nr_var := Length( indets );
     
     c := Characteristic( R );
     
@@ -183,21 +186,26 @@ InstallMethod( PolynomialRing,
         if Intersection2( var_of_coeff_ring, var ) <> [ ] then
             Error( "the following indeterminates are already elements of the coefficients ring: ", Intersection2( var_of_coeff_ring, var ), "\n" );
         fi;
-        var := Concatenation( var_of_coeff_ring, var );
     else
       r := R;
     fi;
 
     ##create the new ring
-    ext_obj := homalgSendBlocking( [ c,"(",var,"),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties);
+    ##todo: this creates a block ordering with a new "dp"-block
+    ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, properties);
+    homalgSendBlocking( ["setring ", ext_obj ], "need_command");
+    
+    ##prints output in a compatible format
+    homalgSendBlocking( "short=0;", "need_command", ext_obj );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
-    ##todo!!!
+    ##todo: kill old ring to reduce memory?
+    homalgSendBlocking( ["imapall(", R, ")" ], "need_command");
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "Singular", S ) );
+    var := List( Concatenation( var_of_coeff_ring, var ), a -> HomalgExternalRingElement( a, "Singular", S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -243,7 +251,7 @@ end );
 ####################################
 
 InstallMethod( Display,
-        "for homalg matrices",
+        "for homalg matrices in Singular",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
@@ -269,9 +277,28 @@ InstallMethod( Display,
     
 end);
 
+InstallMethod( Display,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep ], 1,
+        
+  function( o )
+    local stream, display_color;
+    
+    stream := homalgStream( o );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+
+    Print( display_color, homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
+
+end);
+
 ####################################
 #
-# File related methods methods:
+# File related methods:
 #
 ####################################
 
@@ -292,12 +319,12 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
     if mode = "ListList" then
 
         command := [ 
-          "matrix m[1,ncols(", M, ")];",
-          "s = \"[\";",
-          "for(i=1;i<=nrows(", M, ");i=i+1){m = ", M, "[i,1..ncols(", M, ")]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
+          "matrix m[1][", NrColumns( M ), "];",
+          "string s = \"[\";",
+          "for(int i=1;i<=", NrRows( M ), ";i=i+1)",
+          "{m = ", M, "[i,1..", NrColumns( M ), "]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
           "s=s+\"]\";",
-          "write(w: ", filename,",s);",
-          "matrix m;"
+          "write(\"w: ", filename,"\",s);"
         ];
 
         homalgSendBlocking( command, "need_command" );
@@ -329,7 +356,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         command := [ "string s=read(r: ", filename, ");",
                       "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
-                     M, "[", ,"][", , "]= matrix(", R, ",eval(_str))" ];
+                      "execute(", M, "[", r, "][", c, "]= w;);" ];
         
         homalgSendBlocking( command, "need_command" );
         

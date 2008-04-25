@@ -22,16 +22,19 @@ InstallValue( InitializeSingularBestBasis,
 
             "proc BestBasis_SUV(M)\n",
             "{\n",
-            "  S=transpose(std(transpose(M)));\n",
-            "  V=transpose(lift(transpose(S),transpose(M),U));\n",
+            "  matrix S[nrows(M)][ncols(M)]=transpose(std(transpose(M)));\n",
+            "  matrix U[nrows(M)][nrows(M)];\n",
+            "  matrix V[ncols(M)][ncols(M)]=transpose(lift(transpose(S),transpose(M),U));\n",
             "  U=transpose(U);\n",
-            "  return(nrows(S))\n",
+            "  export(S,U,V);\n",
+            "  return(nrows(S));\n",
             "};\n\n",
-            
+
             "proc BestBasis_S(M)\n",
             "{\n",
-            "  S=transpose(std(transpose(M)));\n",
-            "  return(nrows(S))\n",
+            "  matrix S[nrows(M)][ncols(M)]=transpose(std(transpose(M)));\n",
+            "  export(S);\n",
+            "  return(nrows(S));\n",
             "};\n\n"
 
           );
@@ -48,7 +51,7 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               BestBasis :=
+                BestBasis :=
                   function( arg )
                      local M, R, nargs, S, U, V, rank_of_S, RP;
                      
@@ -62,7 +65,9 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                      
                      #create void matrix for S
                      S := HomalgVoidMatrix( R );
-                     SetIsDiagonalMatrix( S, true );
+                     
+                     #todo: reinsert, as soon as smith works
+                     #SetIsDiagonalMatrix( S, true );
                      
                      if nargs > 1 then
                         # assign U:
@@ -85,24 +90,26 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                            V := HomalgVoidMatrix( R );
                         fi;
                         
-                        ## compute S, U and (if nargs > 2) V with V*S = U*M as side effect
+                        ## compute S, U and (if nargs > 2) V with S = U*M*V as side effect
                         ## but these Matrices are only exported and have to be set
                         ## and return the rank
-                        rank_of_S := Int( homalgSendBlocking( [ "BestBasis_SUV(",M,")" ], "need_output") );
-                        homalgSendBlocking( [ "matrix ",S,"=S" ], "need_command");
-                        homalgSendBlocking( [ "matrix ",U,"=U" ], "need_command");
-                        homalgSendBlocking( [ "matrix ",V,"=V" ], "need_command");
+                        homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command");
+                        rank_of_S := Int( homalgSendBlocking( [ "l[2]" ], R, "need_output") );
+                        homalgSendBlocking( [ "matrix ",S,"=l[1]" ], "need_command");
+                        homalgSendBlocking( [ "matrix ",U,"=l[3]" ], "need_command");
+                        homalgSendBlocking( [ "matrix ",V,"=l[4]" ], "need_command");
                      else
                         ## compute S only - same as above
-                        rank_of_S := Int( [ "BestBasis_S(",M,")" ], "need_output" );
-                        homalgSendBlocking( [ "matrix ",S,"=S" ], "need_command");
+                        homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command");
+                        rank_of_S := Int( homalgSendBlocking( [ "l[2]" ], "need_output") );
+                        homalgSendBlocking( [ "matrix ",S,"=l[1]" ], "need_command");
                      fi;
                      
                      SetRowRankOfMatrix( S, rank_of_S );
                      
                      return S;
                      
-                  end
-                  
+                  end,
+
         )
  );
