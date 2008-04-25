@@ -228,11 +228,7 @@ InstallImmediateMethod( IsTorsionModule,
         
   function( M )
     
-    if RankOfModule( M ) > 0 then
-        return false;
-    fi;
-    
-    TryNextMethod( );
+    return RankOfModule( M ) = 0;
     
 end );
 
@@ -824,7 +820,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, bas;
+    local rel, bas, mat, diag, zero, rk;
     
     rel := RelationsOfModule( M );
     
@@ -836,9 +832,17 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         bas := rel;
     fi;
     
-    if not HasRankOfModule( M )
-       and HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
-        SetRankOfModule( M, NrGenerators( M ) - NrRelations( M ) );
+    if not HasRankOfModule( M ) then
+       mat := MatrixOfRelations( rel );
+       if HasIsDiagonalMatrix( mat ) and IsDiagonalMatrix( mat ) then
+           diag := DiagonalEntries( mat );
+           zero := Zero( HomalgRing( M ) );
+           rk := Length( Filtered( diag, d -> d = zero ) ) + NrGenerators( M ) - Length( diag );
+           SetRankOfModule( M, rk );
+       elif HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
+           rk := NrGenerators( M ) - NrRelations( M );
+           SetRankOfModule( M, rk );
+       fi;
     fi;
     
     return RelationsOfModule( M );
@@ -1756,16 +1760,12 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
-    local rel, R, RP, name, zero, one, diag, display, r, get_string;
+    local rel, R, RP, name, zero, one, diag, display, rk, get_string;
     
     rel := MatrixOfRelations( M );
     
-    if not HasRankOfModule( M ) then
-        TryNextMethod( );
-    fi;
-    
-    if not ( HasIsDiagonalMatrix( rel ) and IsDiagonalMatrix( rel ) )
-       and not HasElementaryDivisors( M ) then ## this should have no side effect on M
+    if not ( HasElementaryDivisors( M ) and HasRankOfModule( M ) ) ## this should have no side effect on M
+       and not ( HasIsDiagonalMatrix( rel ) and IsDiagonalMatrix( rel ) ) then
         TryNextMethod( );
     fi;
     
@@ -1782,11 +1782,13 @@ InstallMethod( Display,
         diag := ElementaryDivisors( M );
     else
         diag := DiagonalEntries( rel );
+        rk := Length( Filtered( diag, d -> d = zero ) ) + NrGenerators( M ) - Length( diag );
+        SetRankOfModule( M, rk );
     fi;
     
     diag := Filtered( diag, x  -> x <> zero and x <> one );
     
-    r := RankOfModule( M );
+    rk := RankOfModule( M );
     
     if IsHomalgExternalRingElementRep( zero ) then
         get_string := homalgPointer;
@@ -1802,8 +1804,8 @@ InstallMethod( Display,
         display := "";
     fi;
     
-    if r <> 0 then
-        Print( display, name, "^(1 x", " \033[1m", r, "\033[0m)\n" );
+    if rk <> 0 then
+        Print( display, name, "^(1 x", " \033[1m", rk, "\033[0m)\n" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;
