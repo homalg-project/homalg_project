@@ -29,7 +29,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/BasisOfModule`(", M, R, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/BasisOfModule`(", M, R, "),", R, "[2])" ], "need_command" );
                    
                    return N;
                    
@@ -43,7 +43,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/BasisCoeff`(", M, R, "[1],", U, R, "[2])" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/BasisCoeff`(", M, R, "[1],", U, R, "[2]),", R, "[2])" ], "need_command" );
                    
                    return N;
                    
@@ -57,7 +57,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/Reduce`(", A, B, R, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/Reduce`(", A, B, R, "),", R, "[2])" ], "need_command" );
                    
                    return N;
                    
@@ -71,7 +71,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[2])" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[2]),", R, "[2])" ], "need_command" );
                    
                    return N;
                    
@@ -91,11 +91,11 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                        
                        M2 := arg[2];
                        
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGenerators`(", M, M2, R, ")" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/SyzygiesGenerators`(", M, M2, R, "),", R, "[2])" ], "need_command" );
                        
                    else
                        
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGenerators`(", M, ",[],", R, ")" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/SyzygiesGenerators`(", M, ",[],", R, "),", R, "[2])" ], "need_command" );
                        
                    fi;
                    

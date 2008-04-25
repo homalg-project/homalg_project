@@ -27,16 +27,3 @@ InstallValue( HOMALG_RINGS,
 #
 ####################################
 
-##
-InstallGlobalFunction( RingForHomalg,
-  function( arg )
-    local nargs, properties, ar, stream, init, ext_obj;
-    
-    nargs := Length( arg );
-    
-    properties := [ ];
-    
-    ## FIXME: COMPLETE ME
-    
-end );
-
