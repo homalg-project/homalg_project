@@ -349,8 +349,10 @@ InstallGlobalFunction( homalgSendBlocking,
         if IsBound( stream.remove_enter ) and stream.remove_enter = true then
             RemoveCharacters( L, "\n" );
         fi;
-	RemoveCharacters( L, "\\ " );
+        RemoveCharacters( L, "\\ " );
+        Info( InfoIO_ForHomalg, 5, "--------------------" );
         Info( InfoIO_ForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
+        Info( InfoIO_ForHomalg, 5, "====================" );
         if IsBound( stream.check_output ) and stream.check_output = true
            and '\n' in L and not ',' in L then
             Error( "\033[01m", "the output received from the external CAS ", CAS, " (running with PID ", PID, ") contains an ENTER = '\\n' but no COMMA = ',' ... this is most probably a mistakte!!!", "\033[0m\n" );

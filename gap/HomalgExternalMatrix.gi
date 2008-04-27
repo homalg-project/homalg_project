@@ -351,17 +351,8 @@ InstallMethod( Display,
         [ IsHomalgExternalMatrixRep ], 0, ## never higher!!!
         
   function( o )
-    local stream, display_color;
     
-    stream := homalgStream( o );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
-    
-    Print( display_color, homalgSendBlocking( [ o ], "need_display" ) );
+    Print( homalgSendBlocking( [ o ], "need_display" ) );
     
 end);
 

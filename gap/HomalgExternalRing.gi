@@ -118,28 +118,23 @@ InstallMethod( Display,
     RP := homalgTable( o );
     
     if IsBound(RP!.RingName) then
-        
         if IsFunction( RP!.RingName ) then
             ring := RP!.RingName( o );
         else
             ring := RP!.RingName;
         fi;
-        
-        stream := homalgStream( o );
-        
-        if IsBound( stream.color_display ) then
-            display_color := stream.color_display;
-        else
-            display_color := "";
-        fi;
-        
-        Print( display_color, ring, "\033[0m\n" );
-        
     else
-        
-        TryNextMethod( );
-        
+        ring := RingName( o );
     fi;
     
-end);
-
+    stream := homalgStream( o );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    Print( display_color, ring, "\033[0m\n" );
+    
+end );
