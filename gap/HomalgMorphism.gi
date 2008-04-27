@@ -425,7 +425,7 @@ InstallMethod( \*,
   function( phi1, phi2 )
     
     if not AreComposableMorphisms( phi1, phi2 ) then
-        Error( "the two morphisms are not composable, since the target of the left one is not \033[1midentical\033[0m to the source of right one\n" );
+        Error( "the two morphisms are not composable, since the target of the left one is not \033[01midentical\033[0m to the source of right one\n" );
     fi;
     
     return HomalgMorphism( MatrixOfMorphism( phi1 ) * MatrixOfMorphism( phi2 ), SourceOfMorphism( phi1 ), TargetOfMorphism( phi2 ) );
@@ -441,7 +441,7 @@ InstallMethod( \*,
   function( phi2, phi1 )
     
     if not AreComposableMorphisms( phi2, phi1 ) then
-        Error( "the two morphisms are not composable, since the target of the right one is not \033[1midentical\033[0m to the target of the left one\n" );
+        Error( "the two morphisms are not composable, since the target of the right one is not \033[01midentical\033[0m to the target of the left one\n" );
     fi;
     
     return HomalgMorphism( MatrixOfMorphism( phi2 ) * MatrixOfMorphism( phi1 ), SourceOfMorphism( phi1 ), TargetOfMorphism( phi2 ) );

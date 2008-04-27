@@ -448,35 +448,11 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
-        
-  function( mat, M )
-    
-    return SyzygiesGeneratorsOfRows( mat, MatrixOfRelations( M ) );
-    
-end );
-
-##
-InstallMethod( SyzygiesGenerators,
-        "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
-        
-  function( M1, M2 )
-    
-    return SyzygiesGenerators( MatrixOfRelations( M1 ), M2 );
-    
-end );
-
-##
-InstallMethod( SyzygiesGenerators,
-        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
-  function( M )
+  function( rel )
     
-    return SyzygiesGeneratorsOfRows( MatrixOfRelations( M ) );
+    return SyzygiesGeneratorsOfRows( MatrixOfRelations( rel ) );
     
 end );
 
@@ -484,23 +460,11 @@ end );
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix,
-          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
-  function( mat, M )
+  function( mat, rel )
     
-    return SyzygiesGeneratorsOfColumns( mat, MatrixOfRelations( M ) );
-    
-end );
-
-##
-InstallMethod( SyzygiesGenerators,
-        "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
-        
-  function( M1, M2 )
-    
-    return SyzygiesGenerators( MatrixOfRelations( M1 ), M2 );
+    return SyzygiesGeneratorsOfRows( mat, MatrixOfRelations( rel ) );
     
 end );
 
@@ -509,9 +473,21 @@ InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
-  function( M )
+  function( rel )
     
-    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( M ) );
+    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( mat, rel )
+    
+    return SyzygiesGeneratorsOfColumns( mat, MatrixOfRelations( rel ) );
     
 end );
 
@@ -544,7 +520,7 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
 end );
 
 ##
-InstallMethod( GetRidOfTrivialRelations,	### defines: GetRidOfTrivialRelations (BetterBasis)
+InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
@@ -642,11 +618,11 @@ InstallMethod( ViewObj,
     fi;
     
     if n = 0 then
-        Print( "on an empty set of generators " );
+        Print( "for an empty set of generators " );
     elif n = 1 then
-        Print( "on a single generator " );
+        Print( "for a single generator " );
     else
-        Print( "on ", n, " generators " );
+        Print( "for ", n, " generators " );
     fi;
     
     Print( "of a homalg " );
@@ -688,12 +664,12 @@ InstallMethod( Display,
         fi;
         
         if n = 0 then
-            Print( "on an empty set of generators\n" );
+            Print( "for an empty set of generators\n" );
         else
             if n = 1 then
-                Print( "on a single generator " );
+                Print( "for a single generator " );
             else
-                Print( "on ", n, " generators " );
+                Print( "for ", n, " generators " );
             fi;
             
             Print( "given by " );

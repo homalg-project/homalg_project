@@ -186,7 +186,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         "for homalg matrices",
-        [ IsHomalgMatrix and IsInitialMatrix ],
+        [ IsHomalgMatrix and IsInitialMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, z;
@@ -217,7 +217,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: ZeroMap
         "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
+        [ IsHomalgMatrix and IsZeroMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, z;
@@ -225,6 +225,10 @@ InstallMethod( Eval,				### defines: ZeroMap
     R := HomalgRing( C );
     
     RP := homalgTable( R );
+    
+    if NrRows( C ) = 0 or NrColumns( C ) = 0 then
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix is being evaluated!\033[0m" );
+    fi;
     
     if IsHomalgExternalMatrixRep( C ) then
         if IsBound( RP!.ZeroMatrix ) then
@@ -245,7 +249,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         "for homalg matrices",
-        [ IsHomalgMatrix and IsInitialIdentityMatrix ],
+        [ IsHomalgMatrix and IsInitialIdentityMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, o, z, zz, id;
@@ -280,7 +284,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: IdentityMap
         "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
+        [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, o, z, zz, id;
@@ -469,7 +473,7 @@ InstallMethod( Eval,				### defines: DiagMat
         return RP!.DiagMat( e );
     fi;
     
-    z := Zero( HomalgRing( e[1] ) );
+    z := Zero( R );
     
     m := Sum( List( e, NrRows ) );
     n := Sum( List( e, NrColumns ) );
@@ -488,6 +492,31 @@ InstallMethod( Eval,				### defines: DiagMat
     od;
     
     return diag;
+    
+end );
+
+##
+InstallMethod( Eval,				### defines: KroneckerMat
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalKroneckerMat ],
+        
+  function( C )
+    local R, RP, A, B;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    A :=  EvalKroneckerMat( C )[1];
+    B :=  EvalKroneckerMat( C )[2];
+    
+    if IsBound(RP!.KroneckerMat) then
+        return RP!.KroneckerMat( A, B );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return KroneckerProduct( Eval( A ), Eval( B ) ); ## this was easy :)
     
 end );
 
@@ -765,99 +794,6 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
     
 end );
 
-#############################################################################
-#
-# methods for operations: (you probably don't need to replace for an external CAS)
-#
-#############################################################################
-
-##
-InstallMethod( Eval,				### defines: AddRhs
-        "for homalg matrices",
-        [ IsHomalgMatrix and EvalAddRhs and HasPreEval ], ## don't remove HasPreEval
-        
-  function( C )
-    local R, RP, A, B;
-    
-    R := HomalgRing( C );
-    
-    RP := homalgTable( R );
-    
-    A := PreEval( C );
-    B := RightHandSide( C );
-    
-    if IsBound(RP!.AddRhs) then
-        return RP!.AddRhs( A, B );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    return Eval( A );
-    
-end );
-
-##
-InstallMethod( Eval,				### defines: AddBts
-        "for homalg matrices",
-        [ IsHomalgMatrix and EvalAddBts and HasPreEval ], ## don't remove HasPreEval
-        
-  function( C )
-    local R, RP, A, B;
-    
-    R := HomalgRing( C );
-    
-    RP := homalgTable( R );
-    
-    A := PreEval( C );
-    B := BottomSide( C );
-    
-    if IsBound(RP!.AddBts) then
-        return RP!.AddBts( A, B );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    return Eval( A );
-    
-end );
-
-##
-InstallMethod( Eval,				### defines: GetSide
-        "for homalg matrices",
-        [ IsHomalgMatrix and HasEvalGetSide ],
-        
-  function( C )
-    local R, RP, e, side, A;
-    
-    R := HomalgRing( C );
-    
-    RP := homalgTable( R );
-    
-    e :=  EvalGetSide( C );
-    
-    side := e[1];
-    A := e[2];
-    
-    if IsBound(RP!.GetSide) then
-        return RP!.GetSide( side, A );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    if side = "rhs" then
-        return RightHandSide( A );
-    elif side = "bts" then
-        return BottomSide( A );
-    elif side = "lhs" then
-	return Eval( CertainColumns( A, [ 1 .. NrColumns( A ) ] ) ); ## this is in general not obsolete
-    elif side = "ups" then
-        return Eval( CertainRows( A, [ 1 .. NrRows( A ) ] ) ); ## this is in general not obsolete
-    else
-        Error( "the first argument must be either \"rhs\", \"bts\", \"lhs\", or \"ups\", but received: ", side, "\n" );
-    fi;
-    
-end );
-
 ##
 InstallMethod( Eval,
         "for homalg matrices",
@@ -881,4 +817,3 @@ InstallMethod( Eval,
     return Eval( e );
     
 end );
-

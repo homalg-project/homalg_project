@@ -113,7 +113,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
-	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
         
   function( gen )
     local bas;
@@ -133,7 +133,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
-	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
         
   function( gen )
     local bas;
@@ -153,7 +153,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of generators of homalg modules",
-	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
     
@@ -170,7 +170,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of generators of homalg modules",
-	[ IsHomalgGenerators, IsHomalgRelations ],
+        [ IsHomalgGenerators, IsHomalgRelations ],
         
   function( gen, rel )
     
@@ -183,9 +183,67 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterBasis)
+        "for sets of relations of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        
+  function( _M )
+    local R, RP, M;
+    
+    R := HomalgRing( _M );
+    
+    RP := homalgTable( R );
+    
+    #=====# begin of the core procedure #=====#
+    
+    if IsHomalgGeneratorsOfLeftModule( _M ) then
+        if IsBound(RP!.SimplifyBasisOfRows) then
+            M := RP!.SimplifyBasisOfRows( _M );
+        else
+            M := MatrixOfGenerators( _M );
+        fi;
+        
+        return HomalgGeneratorsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
+    else
+        if IsBound(RP!.SimplifyBasisOfColumns) then
+            M := RP!.SimplifyBasisOfColumns( _M );
+        else
+            M := MatrixOfGenerators( _M );
+        fi;
+        
+        return HomalgGeneratorsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( gen, rel )
+    
+    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    
+end );
+
+##
+InstallMethod( SyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule,
+          IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( gen, rel )
+    
+    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    
+end );
+
+##
 InstallMethod( \*,
         "for sets of generators of homalg modules",
-	[ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        [ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( TI, gen )
     local generators, relations_of_hullmodule;
@@ -198,6 +256,30 @@ InstallMethod( \*,
     else
         return HomalgGeneratorsForRightModule( generators * TI, relations_of_hullmodule );
     fi;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule,
+          IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        
+  function( gen1, gen2 )
+    
+    return MatrixOfGenerators( gen1 ) * gen2;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule,
+          IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
+        
+  function( gen1, gen2 )
+    
+    return MatrixOfGenerators( gen1 ) * gen2;
     
 end );
 

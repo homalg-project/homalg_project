@@ -99,18 +99,15 @@ DeclareOperation( "DecideZeroEffectively",
         [ IsHomalgMatrix, IsHomalgRelations ] );
 
 DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgMatrix, IsHomalgRelations ] );
-
-DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgRelations, IsHomalgRelations ] );
-
-DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgRelations ] );
+
+DeclareOperation( "SyzygiesGenerators",
+        [ IsHomalgMatrix, IsHomalgRelations ] );
 
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgRelations ] );
 
-DeclareOperation( "GetRidOfTrivialRelations",
+DeclareOperation( "GetRidOfObsoleteRelations",
         [ IsHomalgRelations ] );
 
 ####################################
@@ -126,5 +123,5 @@ DeclareSynonym ( "ReduceCoeff",
         DecideZeroEffectively );
 
 DeclareSynonym ( "BetterBasis",
-        GetRidOfTrivialRelations );
+        GetRidOfObsoleteRelations );
 

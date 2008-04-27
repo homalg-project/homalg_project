@@ -90,19 +90,19 @@ DeclareOperation( "Presentation",
         [ IsHomalgGenerators, IsHomalgRelations ] );
 
 DeclareOperation( "LeftPresentation",
-        [ IsList, IsSemiringWithOneAndZero ] );
+        [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "LeftPresentation",
-        [ IsList, IsList, IsSemiringWithOneAndZero ] );
+        [ IsList, IsList, IsHomalgRing ] );
 
 DeclareOperation( "LeftPresentation",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "RightPresentation",
-        [ IsList, IsSemiringWithOneAndZero ] );
+        [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "RightPresentation",
-        [ IsList, IsList, IsSemiringWithOneAndZero ] );
+        [ IsList, IsList, IsHomalgRing ] );
 
 DeclareOperation( "RightPresentation",
         [ IsHomalgMatrix ] );
@@ -205,7 +205,7 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );
 
-DeclareOperation( "GetRidOfZeroGenerators",
+DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgModule ] );
 
 DeclareOperation( "BetterGenerators",
@@ -224,5 +224,5 @@ DeclareSynonym( "EulerCharacteristicOfModule",
         RankOfModule );
 
 DeclareSynonym( "BetterPresentation",
-        GetRidOfZeroGenerators );
+        GetRidOfObsoleteGenerators );
 

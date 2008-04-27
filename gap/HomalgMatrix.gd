@@ -87,12 +87,6 @@ DeclareProperty( "IsStrictLowerTriangularMatrix",
 DeclareProperty( "IsTriangularMatrix",
         IsHomalgMatrix );
 
-DeclareProperty( "EvalAddRhs",
-        IsHomalgMatrix );
-
-DeclareProperty( "EvalAddBts",
-        IsHomalgMatrix );
-
 ####################################
 #
 # attributes:
@@ -121,6 +115,9 @@ DeclareAttribute( "EvalUnionOfColumns",
         IsHomalgMatrix );
 
 DeclareAttribute( "EvalDiagMat",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalKroneckerMat",
         IsHomalgMatrix );
 
 DeclareAttribute( "EvalMulMat",
@@ -166,12 +163,6 @@ DeclareAttribute( "RowRankOfMatrix",
         IsHomalgMatrix );
 
 DeclareAttribute( "ColumnRankOfMatrix",
-        IsHomalgMatrix );
-
-DeclareAttribute( "RightHandSide",
-        IsHomalgMatrix );
-
-DeclareAttribute( "BottomSide",
         IsHomalgMatrix );
 
 DeclareAttribute( "CompatibilityConditions",
@@ -347,23 +338,11 @@ DeclareOperation( "UnionOfColumns",
 DeclareOperation( "DiagMat",
         [ IsList ] );
 
+DeclareOperation( "KroneckerMat",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "*",				## this must remain, since an element in IsHomalgMatrix
         [ IsHomalgMatrix, IsHomalgMatrix ] );	## is not a priori IsMultiplicativeElement
-
-DeclareOperation( "AddRhs",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "AddRhs",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "AddBts",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "AddBts",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "GetSide",
-        [ IsString, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagonalEntries",
         [ IsHomalgMatrix ] );

@@ -19,10 +19,14 @@
 InstallValue( HOMALG,
         rec(
             TotalRuntimes := 0,
-            color_start_FOB := "\033[1m\033[4;37;45m",
-            color_end_FOB := "\033[1m\033[4;35;47m",
-            color_start_FO := "\033[1;33;41m",
-            color_end_FO := "\033[1;31;43m"
+            color_start_FOT := "\033[01m\033[4;37;40m",		## (T)riangular basis:
+            color_end_FOT := "\033[01m\033[4;30;47m",		## TriangularBasisOfRows/Columns
+            color_start_FOB := "\033[01m\033[4;37;45m",		## (B)asis:
+            color_end_FOB := "\033[01m\033[4;35;47m",		## BasisOfRow/ColumnModule, BasisOfRows/ColumnsCoeff
+            color_start_FOP := "\033[01m\033[4;37;42m",		## (P)articular solution:
+            color_end_FOP := "\033[01m\033[4;32;47m",		## DecideZeroRows/Columns(Effectively)
+            color_start_FOH := "\033[01m\033[4;33;41m",		## solutions of the (H)omogeneous system:
+            color_end_FOH := "\033[01m\033[4;31;43m",		## SyzygiesGeneratorsOfRows/Columns
            )
 );
 

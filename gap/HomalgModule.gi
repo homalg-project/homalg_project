@@ -922,7 +922,7 @@ InstallMethod( NonZeroGenerators,
 end );
 
 ##
-InstallMethod( GetRidOfZeroGenerators,		### defines: GetRidOfZeroGenerators (BetterPresentation) (incomplete)
+InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterPresentation) (incomplete)
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep ],
         
@@ -1015,14 +1015,14 @@ InstallMethod( BetterGenerators,
     rel := BetterEquivalentMatrix( rel_old, V, VI, "", "" );
     
     if rel_old = rel then
-        return GetRidOfZeroGenerators( M );
+        return GetRidOfObsoleteGenerators( M );
     fi;
     
     rel := HomalgRelationsForLeftModule( rel );
     
     AddANewPresentation( M, rel, V, VI );
     
-    return GetRidOfZeroGenerators( M );
+    return GetRidOfObsoleteGenerators( M );
     
 end );
 
@@ -1044,14 +1044,14 @@ InstallMethod( BetterGenerators,
     rel := BetterEquivalentMatrix( rel_old, U, UI, "", "", "" );
     
     if rel_old = rel then
-        return GetRidOfZeroGenerators( M );
+        return GetRidOfObsoleteGenerators( M );
     fi;
     
     rel := HomalgRelationsForRightModule( rel );
     
     AddANewPresentation( M, rel, U, UI );
     
-    return GetRidOfZeroGenerators( M );
+    return GetRidOfObsoleteGenerators( M );
     
 end );
 
@@ -1177,6 +1177,10 @@ InstallMethod( Presentation,
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
     
+    if NrGenerators( gen ) <> NrGenerators( rel ) then
+        Error( "the first argument is a set of ", NrGenerators( gen ), " generator(s) while the second argument is a set of relations for ", NrGenerators( rel ), " generators\n" );
+    fi;
+    
     R := HomalgRing( rel );
     
     is_zero_module := false;
@@ -1271,6 +1275,10 @@ InstallMethod( Presentation,
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
     
+    if NrGenerators( gen ) <> NrGenerators( rel ) then
+        Error( "the first argument is a set of ", NrGenerators( gen ), " generator(s) while the second argument is a set of relations for ", NrGenerators( rel ), " generators\n" );
+    fi;
+    
     R := HomalgRing( rel );
     
     is_zero_module := false;
@@ -1312,12 +1320,10 @@ end );
 ##
 InstallMethod( LeftPresentation,
         "constructor",
-        [ IsList, IsSemiringWithOneAndZero ],
+        [ IsList, IsHomalgRing ],
         
-  function( rel, ring )
-    local R, gens, rels, M, is_zero_module;
-    
-    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
+  function( rel, R )
+    local gens, rels, M, is_zero_module;
     
     is_zero_module := false;
     
@@ -1363,12 +1369,10 @@ end );
 ##
 InstallMethod( LeftPresentation,
         "constructor",
-        [ IsList, IsList, IsSemiringWithOneAndZero ],
+        [ IsList, IsList, IsHomalgRing ],
         
-  function( gen, rel, ring )
-    local R, gens, rels, M;
-    
-    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
+  function( gen, rel, R )
+    local gens, rels, M;
     
     gens := CreateSetsOfGeneratorsForLeftModule( gen, R );
     
@@ -1410,12 +1414,10 @@ end );
 ##
 InstallMethod( RightPresentation,
         "constructor",
-        [ IsList, IsSemiringWithOneAndZero ],
+        [ IsList, IsHomalgRing ],
         
-  function( rel, ring )
-    local R, gens, rels, M, is_zero_module;
-    
-    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
+  function( rel, R )
+    local gens, rels, M, is_zero_module;
     
     is_zero_module := false;
     
@@ -1461,12 +1463,10 @@ end );
 ##
 InstallMethod( RightPresentation,
         "constructor",
-        [ IsList, IsList, IsSemiringWithOneAndZero ],
+        [ IsList, IsList, IsHomalgRing ],
         
-  function( gen, rel, ring )
-    local R, gens, rels, M;
-    
-    R := CreateHomalgRing( ring, CreateHomalgTable( ring ) );
+  function( gen, rel, R )
+    local gens, rels, M;
     
     gens := CreateSetsOfGeneratorsForRightModule( gen, R );
     
@@ -1732,7 +1732,7 @@ InstallMethod( Display,
     
     R := RingName( R );
     
-    Print( "Cokernel of the map:\n", R, "^(1x\033[1m", NrRelations( M ), "\033[0m) --> ", R, "^(1x\033[1m", NrGenerators( M ), "\033[0m), with matrix\n\n" );
+    Print( "Cokernel of the map:\n", R, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", R, "^(1x\033[01m", NrGenerators( M ), "\033[0m), with matrix\n\n" );
     Display( MatrixOfRelations( M ) );
     
 end );
@@ -1749,7 +1749,7 @@ InstallMethod( Display,
     
     R := RingName( R );
     
-    Print( "Cokernel of the map:\n", R, "^(\033[1m", NrRelations( M ), "\033[0mx1) --> ", R, "^(\033[1m", NrGenerators( M ), "\033[0mx1), with matrix\n\n" );
+    Print( "Cokernel of the map:\n", R, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", R, "^(\033[01m", NrGenerators( M ), "\033[0mx1), with matrix\n\n" );
     Display( MatrixOfRelations( M ) );
     
 end );
@@ -1797,7 +1797,7 @@ InstallMethod( Display,
     fi;
     
     if diag <> [ ] then
-        display := List( diag, x -> [ name, "/< \033[1m", get_string( x ), "\033[0m > + " ] );
+        display := List( diag, x -> [ name, "/< \033[01m", get_string( x ), "\033[0m > + " ] );
         display := Concatenation( display );
         display := Concatenation( display );
     else
@@ -1805,7 +1805,7 @@ InstallMethod( Display,
     fi;
     
     if rk <> 0 then
-        Print( display, name, "^(1 x", " \033[1m", rk, "\033[0m)\n" );
+        Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;

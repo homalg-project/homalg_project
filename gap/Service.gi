@@ -20,39 +20,83 @@ InstallMethod( TriangularBasisOfRows,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP;
+    local R, RP, t, B;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
-  
+    
+    t := homalgTotalRuntimes( );
+    
     if IsBound(RP!.TriangularBasisOfRows) then
-        return RP!.TriangularBasisOfRows( M );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start_FOT, "start: TriangularBasisOfRows: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        
+        B := RP!.TriangularBasisOfRows( M );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end_FOT, "end:   TriangularBasisOfRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
+    elif IsBound(RP!.TriangularBasisOfColumns) then
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start_FOT, "start: TriangularBasisOfRows: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        
+        B := Involution( RP!.TriangularBasisOfColumns( Involution( M ) ) );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end_FOT, "end:   TriangularBasisOfRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     TryNextMethod( );
     
-end ); 
+end );
 
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M, U )
-    local R, RP;
+  function( M, T )
+    local R, RP, t, TI, B;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
+    t := homalgTotalRuntimes( );
+    
     if IsBound(RP!.TriangularBasisOfRows) then
-        return RP!.TriangularBasisOfRows( M, U );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start_FOT, "start: TriangularBasisOfRows (M,T): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        
+        B := RP!.TriangularBasisOfRows( M, T );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end_FOT, "end:   TriangularBasisOfRows (M,T)", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
+    elif IsBound(RP!.TriangularBasisOfColumns) then
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start_FOT, "start: TriangularBasisOfRows (M,T): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        
+        TI := HomalgVoidMatrix( R );
+        
+        B := Involution( RP!.TriangularBasisOfColumns( Involution( M ), TI ) );
+        
+        SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end_FOT, "end:   TriangularBasisOfRows (M,T)", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     TryNextMethod( );
     
-end ); 
+end );
 
 ##
 InstallMethod( TriangularBasisOfColumns,
@@ -60,161 +104,115 @@ InstallMethod( TriangularBasisOfColumns,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP;
+    local R, RP, t, B;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
     if IsBound(RP!.TriangularBasisOfColumns) then
-        return RP!.TriangularBasisOfColumns( M );
+        
+        t := homalgTotalRuntimes( );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start_FOT, "start: TriangularBasisOfColumns: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        
+        B := RP!.TriangularBasisOfColumns( M );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end_FOT, "end:   TriangularBasisOfColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     return Involution( TriangularBasisOfRows( Involution( M ) ) );
     
-end ); 
+end );
 
 ##
 InstallMethod( TriangularBasisOfColumns,
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M, V )
-    local R, RP, T, U;
+  function( M, T )
+    local R, RP, t, TI, B;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
     if IsBound(RP!.TriangularBasisOfColumns) then
-        return RP!.TriangularBasisOfColumns( M, V );
+        
+        t := homalgTotalRuntimes( );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start_FOT, "start: TriangularBasisOfColumns (M,T): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        
+        B := RP!.TriangularBasisOfColumns( M, T );
+        
+        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end_FOT, "end:   TriangularBasisOfColumns (M,T)", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
-    U := HomalgVoidMatrix( R );
+    TI := HomalgVoidMatrix( R );
     
-    T := Involution( TriangularBasisOfRows( Involution( M ), U ) );
+    B := Involution( TriangularBasisOfRows( Involution( M ), TI ) );
     
-    SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
-    SetNrRows( V, NrColumns( U ) );
-    SetNrColumns( V, NrRows( U ) );
-    SetIsInvertibleMatrix( V, true );
+    SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    return T;
-    
-end ); 
-
-##
-InstallMethod( TriangularBasisOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    
-    return  M;
-    
-end );
-
-##
-InstallMethod( TriangularBasisOfColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    
-    return M;
-    
-end );
-    
-##
-InstallMethod( TriangularBasisOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    
-    return M;
-    
-end );
-    
-##
-InstallMethod( TriangularBasisOfColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    
-    return  M;
+    return B;
     
 end );
 
 ##
 InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, U, B, rank, Ur, Uc;
+    local R, RP, t, B, rank;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
-    if HasRightHandSide( M ) then
-        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule (M,U): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
-    else
-        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
-    fi;
-    
     t := homalgTotalRuntimes( );
     
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start_FOB, "start: BasisOfRowModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    
     if IsBound(RP!.BasisOfRowModule) then
+        
         B := RP!.BasisOfRowModule( M );
         
-        if HasRightHandSide( M ) then
-            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule (M,U): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        else
-            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        fi;
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
         return B;
+        
+    elif IsBound(RP!.BasisOfColumnModule) then
+        
+        B := Involution( RP!.BasisOfColumnModule( Involution( M ) ) );
+        
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    if HasRightHandSide( M ) then
-        U := HomalgVoidMatrix( R );
-        
-        B := TriangularBasisOfRows( M, U ); t := homalgTotalRuntimes( t );
-    else
-        B := TriangularBasisOfRows( M ); t := homalgTotalRuntimes( t );
-    fi;
+    B := TriangularBasisOfRows( M );
     
     rank := RowRankOfMatrix( B );
     
     if rank = 0 then
-        B := HomalgZeroMatrix( 0, NrColumns( B ), R);
+        B := HomalgZeroMatrix( 0, NrColumns( B ), R );
     else
         B := CertainRows( B, [ 1 .. rank ] );
         
-        SetRowRankOfMatrix( B, rank );
-	
         SetIsFullRowRankMatrix( B, true );
     fi;
     
-    if HasRightHandSide( M ) then
-        Ur := CertainRows( U, [ 1 .. rank ] );
-        Uc := CertainRows( U, [ rank + 1 .. NrRows( M ) ] );
-        
-        SetRightHandSide( B, Ur * RightHandSide( M ) );
-        
-        SetCompatibilityConditions( B, Uc * RightHandSide( M ) );
-    fi;
-    
-    if HasRightHandSide( M ) then
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule (M,U): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
-    else
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
-    fi;
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfRowModule: ", NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
     
     return B;
     
@@ -223,71 +221,52 @@ end );
 ##
 InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfModule (low-level))
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, V, B, rank, Vr, Vc;
+    local R, RP, t, B, rank;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
-  
+    
     t := homalgTotalRuntimes( );
     
-    if HasBottomSide( M ) then
-        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule (M,V): ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
-    else
-        Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
-    fi;
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start_FOB, "start: BasisOfColumnModule: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.BasisOfColumnModule) then
+        
         B := RP!.BasisOfColumnModule( M );
         
-        if HasBottomSide( M ) then
-            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule (M,V): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
-        else
-            Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m" );
-        fi;
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
         return B;
+        
+    elif IsBound(RP!.BasisOfRowModule) then
+        
+        B := Involution( RP!.BasisOfRowModule( Involution( M ) ) );
+        
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    if HasBottomSide( M ) then
-        V := HomalgVoidMatrix( R );
-        
-        B := TriangularBasisOfColumns( M, V ); t := homalgTotalRuntimes( t );
-    else
-        B := TriangularBasisOfColumns( M ); t := homalgTotalRuntimes( t );
-    fi;
+    B := TriangularBasisOfColumns( M );
     
     rank := ColumnRankOfMatrix( B );
     
     if rank = 0 then
-        B := HomalgZeroMatrix( NrRows( B ), 0, R);
+        B := HomalgZeroMatrix( NrRows( B ), 0, R );
     else
-        B := CertainColumns( B, [1..rank] );
+        B := CertainColumns( B, [ 1 .. rank ] );
         
-        SetColumnRankOfMatrix( B, rank );
-	
         SetIsFullColumnRankMatrix( B, true );
     fi;
     
-    if HasBottomSide( M ) then
-        Vr := CertainColumns( V, [ 1 .. rank ] );
-        Vc := CertainColumns( V, [ rank + 1 .. NrColumns( M ) ] );
-        
-        SetBottomSide( B, BottomSide( M ) * Vr );
-        
-        SetCompatibilityConditions( B, BottomSide( M ) * Vc );
-    fi;
-    
-    if HasBottomSide( M ) then
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule (M,V): ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
-    else
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrRows( B ), " x ", NrColumns( B ), "\033[0m", "	in ", t );
-    fi;
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfColumnModule: ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
     
     return B;
     
@@ -298,76 +277,126 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         "for a homalg matrix",
 	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M, U )
-    local R, RP, t, bas;
+  function( M, T )
+    local R, RP, t, TI, B, TT, rank;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfRowsCoeff", "\033[0m" );
+    t := homalgTotalRuntimes( );
+        
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start_FOB, "start: BasisOfRowsCoeff: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
         
-        t := homalgTotalRuntimes( );
+        B := RP!.BasisOfRowsCoeff( M, T );
         
-        bas := RP!.BasisOfRowsCoeff( M, U );
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff: ", NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        return B;
         
-        return bas;
+    elif IsBound(RP!.BasisOfColumnsCoeff) then
+        
+        TI := HomalgVoidMatrix( R );
+        
+        B := Involution( RP!.BasisOfColumnsCoeff( Involution( M ), TI ) );
+        
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
+        
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff: ", NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    bas := BasisOfRows( AddRhs( M ) );
+    TT := HomalgVoidMatrix( R );
     
-    SetPreEval( U, RightHandSide( bas ) ); ResetFilterObj( U, IsVoidMatrix );
-    SetNrRows( U, NrRows( bas ) );
-    SetNrColumns( U, NrRows( M ) );
+    B := TriangularBasisOfRows( M, TT );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff", "\033[0m" );
+    rank := RowRankOfMatrix( B );
     
-    return bas;
+    if rank = 0 then
+        B := HomalgZeroMatrix( 0, NrColumns( B ), R);
+    else
+        B := CertainRows( B, [ 1 .. rank ] );
+        
+        SetRowRankOfMatrix( B, rank );
+        
+        SetIsFullRowRankMatrix( B, true );
+    fi;
+    
+    SetPreEval( T, CertainRows( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfRowsCoeff: ", NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return B;
     
 end );
 
 ##
-InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
+InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoeff)
         "for a homalg matrix",
 	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M, V )
-    local R, RP, t, bas, U, ibas;
+  function( M, T )
+    local R, RP, t, TI, B, TT, rank;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_start_FOB, "start: BasisOfColumnsCoeff", "\033[0m" );
+    t := homalgTotalRuntimes( );
+        
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start_FOB, "start: BasisOfColumnsCoeff: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
         
-        t := homalgTotalRuntimes( );
+        B := RP!.BasisOfColumnsCoeff( M, T );
         
-        bas := RP!.BasisOfColumnsCoeff( M, V );
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff: ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
-        Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        return B;
         
-        return bas;
+    elif IsBound(RP!.BasisOfRowsCoeff) then
+        
+        TI := HomalgVoidMatrix( R );
+        
+        B := Involution( RP!.BasisOfRowsCoeff( Involution( M ), TI ) );
+        
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
+        
+        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff: ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return B;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    U := HomalgVoidMatrix( R );
+    TT := HomalgVoidMatrix( R );
     
-    ibas := BasisOfRowsCoeff( Involution( M ), U );
+    B := TriangularBasisOfColumns( M, TT );
     
-    SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
+    rank := ColumnRankOfMatrix( B );
     
-    Info( InfoHomalgOperations, 2, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff", "\033[0m" );
+    if rank = 0 then
+        B := HomalgZeroMatrix( NrRows( B ), 0, R);
+    else
+        B := CertainColumns( B, [ 1 .. rank ] );
+        
+        SetColumnRankOfMatrix( B, rank );
+        
+        SetIsFullColumnRankMatrix( B, true );
+    fi;
     
-    return Involution( ibas );
+    SetPreEval( T, CertainColumns( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end_FOB, "end:   BasisOfColumnsCoeff: ", NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return B;
     
 end );
 
@@ -376,91 +405,59 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         "for homalg matrices",
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( L, B )
-    local R, RP, t, l, m, n, id, zz, M, U, C, Ul, T;
+  function( A, B )
+    local R, RP, t, l, m, n, id, zz, M, C;
     
     R := HomalgRing( B );
     
     RP := homalgTable( R );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroRows", "\033[0m" );
+    t := homalgTotalRuntimes( );
+        
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOP, "start: DecideZeroRows: ( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ), "\033[0m" );
     
     if IsBound(RP!.DecideZeroRows) then
         
-        t := homalgTotalRuntimes( );
+        C := RP!.DecideZeroRows( A, B );
         
-        C := RP!.DecideZeroRows( L, B );
-        
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
         return C;
+        
+    elif IsBound(RP!.DecideZeroColumns) then
+        
+        C := Involution( RP!.DecideZeroColumns( Involution( A ), Involution( B ) ) );
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    l := NrRows( L );
-    m := NrColumns( L );
+    l := NrRows( A );
+    m := NrColumns( A );
     
     n := NrRows( B );
     
-    if HasIsIdentityMatrix( L ) and IsIdentityMatrix( L ) then ## save as much new definitions as possible
-        id := L;
+    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
+        id := A;
     else
         id := HomalgIdentityMatrix( l, R );
     fi;
     
     zz := HomalgZeroMatrix( n, l, R );
     
-    M := UnionOfRows( UnionOfColumns( id, L ), UnionOfColumns( zz, B ) );
+    M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
     
-    if HasRightHandSide( B ) then
-        U := HomalgVoidMatrix( R );
-        
-        M := TriangularBasisOfRows( M, U );
-    else
-        M := TriangularBasisOfRows( M );
-    fi;
+    M := TriangularBasisOfRows( M );
     
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    if HasRightHandSide( B ) then
-        
-        Ul := CertainRows( U, [ 1 .. l ] );
-        
-        if HasRightHandSide( L ) then
-            T := Ul * UnionOfRows( RightHandSide( L ), RightHandSide( B ) );
-        else
-            T := CertainColumns( Ul, [ l + 1 .. l + n ] ) * RightHandSide( B );
-        fi;
-        
-        SetRightHandSide( C, T );
-    fi;
-    
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRows", "\033[0m" );
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
     
     return C;
-    
-end );
-
-##
-InstallMethod( DecideZeroRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( L, B )
-    
-    return L;
-    
-end );
-
-##
-InstallMethod( DecideZeroRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
-        
-  function( L, B )
-    
-    return L;
     
 end );
 
@@ -469,173 +466,201 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         "for homalg matrices",
 	[ IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( L, B )
-    local R, RP, t, l, m, n, id, zz, M, U, C, Ul, T;
+  function( A, B )
+    local R, RP, t, l, m, n, id, zz, M, C;
     
     R := HomalgRing( B );
     
     RP := homalgTable( R );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroColumns", "\033[0m" );
+    t := homalgTotalRuntimes( );
+        
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOP, "start: DecideZeroColumns: ", NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )", "\033[0m" );
     
     if IsBound(RP!.DecideZeroColumns) then
         
-        t := homalgTotalRuntimes( );
+        C := RP!.DecideZeroColumns( A, B );
         
-        C := RP!.DecideZeroColumns( L, B );
-        
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
         return C;
+        
+    elif IsBound(RP!.DecideZeroRows) then
+        
+        C := Involution( RP!.DecideZeroRows( Involution( A ), Involution( B ) ) );
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    l := NrColumns( L );
-    m := NrRows( L );
+    l := NrColumns( A );
+    m := NrRows( A );
     
     n := NrColumns( B );
     
-    if HasIsIdentityMatrix( L ) and IsIdentityMatrix( L ) then ## save as much new definitions as possible
-        id := L;
+    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
+        id := A;
     else
         id := HomalgIdentityMatrix( l, R );
     fi;
     
     zz := HomalgZeroMatrix( l, n, R );
     
-    M := UnionOfColumns( UnionOfRows( id, L ), UnionOfRows( zz, B ) );
+    M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
     
-    if HasBottomSide( B ) then
-        U := HomalgVoidMatrix( R );
-        
-        M := TriangularBasisOfColumns( M, U );
-    else
-        M := TriangularBasisOfColumns( M );
-    fi;
+    M := TriangularBasisOfColumns( M );
     
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    if HasBottomSide( B ) then
-        
-        Ul := CertainColumns( U, [ 1 .. l ] );
-        
-        if HasBottomSide( L ) then
-            T := UnionOfColumns( BottomSide( L ), BottomSide( B ) ) * Ul;
-        else
-            T := BottomSide( B ) * CertainRows( Ul, [ l + 1 .. l + n ] );
-        fi;
-        
-        SetBottomSide( C, T );
-    fi;
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumns", "\033[0m" );
-        
     return C;
-    
-end );
-
-##
-InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( L, B )
-    
-    return L;
-    
-end );
-
-##
-InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix, IsHomalgMatrix ],
-        
-  function( L, B )
-    
-    return L;
     
 end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively (ReduceCoeff)
         "for a homalg matrix",
-	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( A, B, U )
-    local R, RP, t, zz, A_zz, red;
+  function( A, B, T )
+    local R, RP, t, TI, l, m, n, id, zz, M, TT;
     
     R := HomalgRing( B );
     
     RP := homalgTable( R );
-  
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroRowsEffectively", "\033[0m" );
+    
+    t := homalgTotalRuntimes( );
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOP, "start: DecideZeroRowsEffectively: ( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ), "\033[0m" );
     
     if IsBound(RP!.DecideZeroRowsEffectively) then
         
-        t := homalgTotalRuntimes( );
+        M := RP!.DecideZeroRowsEffectively( A, B, T );
         
-        red := RP!.DecideZeroRowsEffectively( A, B, U );
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        return M;
         
-        return red;
+    elif IsBound(RP!.DecideZeroColumnsEffectively) then
+        
+        TI := HomalgVoidMatrix( R );
+        
+        M := Involution( RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI ) );
+        
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return M;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    zz := HomalgZeroMatrix( NrRows( A ), NrRows( B ), R );
+    l := NrRows( A );
+    m := NrColumns( A );
     
-    A_zz := AddRhs( A, zz );
+    n := NrRows( B );
     
-    red := DecideZeroRows( A_zz, AddRhs( B ) );
+    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
+        id := A;
+    else
+        id := HomalgIdentityMatrix( l, R );
+    fi;
     
-    SetPreEval( U, -RightHandSide( red ) ); ResetFilterObj( U, IsVoidMatrix );
-    SetNrRows( U, NrRows( red ) );
-    SetNrColumns( U, NrRows( A ) );
+    zz := HomalgZeroMatrix( n, l, R );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroRowsEffectively", "\033[0m" );
-        
-    return red;
+    M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
+    
+    TT := HomalgVoidMatrix( R );
+    
+    M := TriangularBasisOfRows( M, TT );
+    
+    M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
+    
+    SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return M;
     
 end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffectively (ReduceCoeff)
         "for a homalg matrix",
-	[ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( A, B, V )
-    local R, RP, t, red, U, ired;
+  function( A, B, T )
+    local R, RP, t, TI, l, m, n, id, zz, M, TT;
     
     R := HomalgRing( B );
     
     RP := homalgTable( R );
-  
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: DecideZeroColumnsEffectively", "\033[0m" );
+    
+    t := homalgTotalRuntimes( );
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOP, "start: DecideZeroColumnsEffectively: ", NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )", "\033[0m" );
     
     if IsBound(RP!.DecideZeroColumnsEffectively) then
         
-        t := homalgTotalRuntimes( );
+        M := RP!.DecideZeroColumnsEffectively( A, B, T );
         
-        red := RP!.DecideZeroColumnsEffectively( A, B, V );
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        return M;
         
-        return red;
+    elif IsBound(RP!.DecideZeroRowsEffectively) then
+        
+        TI := HomalgVoidMatrix( R );
+        
+        M := Involution( RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI ) );
+        
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return M;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    U := HomalgVoidMatrix( R );
+    l := NrColumns( A );
+    m := NrRows( A );
     
-    ired := DecideZeroRowsEffectively( Involution( A ), Involution( B ), U );
+    n := NrColumns( B );
     
-    SetEvalInvolution( V, U ); ResetFilterObj( V, IsVoidMatrix );
+    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
+        id := A;
+    else
+        id := HomalgIdentityMatrix( l, R );
+    fi;
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   DecideZeroColumnsEffectively", "\033[0m" );
+    zz := HomalgZeroMatrix( l, n, R );
     
-    return Involution( ired );
+    M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
+    
+    TT := HomalgVoidMatrix( R );
+    
+    M := TriangularBasisOfColumns( M, TT );
+    
+    M := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
+    
+    SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOP, "end:   DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return M;
     
 end );
 
@@ -645,77 +670,71 @@ InstallMethod( SyzygiesGeneratorsOfRows,
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, L, BL;
+    local R, RP, t, C, B, rank;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
-  
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: SyzygiesGeneratorsOfRows", "\033[0m" );
+    
+    t := homalgTotalRuntimes( );
+        
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOH, "start: SyzygiesGeneratorsOfRows: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        
-        t := homalgTotalRuntimes( );
         
         C := RP!.SyzygiesGeneratorsOfRows( M );
         
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m" );
-    
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullRowRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfRows: ", NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
         return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullRowRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfRows: ", NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    L := AddRhs( M );
+    C := HomalgVoidMatrix( R );
     
-    BL := BasisOfRows( L );
+    B := TriangularBasisOfRows( M, C );
     
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m" );
+    rank := RowRankOfMatrix( B );
     
-    return CompatibilityConditions( BL );
+    C := CertainRows( C, [ rank + 1 .. NrRows( M ) ] );
     
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
-        "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+    if IsZeroMatrix( C ) then
         
-  function( M1, M2 )
-    local R, RP, t, C, id, zz, L, BL;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-  
-    Info( InfoHomalgOperations, 3, HOMALG.color_start_FO, "start: SyzygiesGeneratorsOfRows", "\033[0m" );
-    
-    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        SetIsFullRowRankMatrix( M, true );
         
-        t := homalgTotalRuntimes( );
+        C := HomalgZeroMatrix( 0, NrRows( M ), R );
         
-        C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
-        
-        Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        
-        return C;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfRows: ", NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
     
-    id := HomalgIdentityMatrix( NrRows( M1 ), R );
-    
-    zz := HomalgZeroMatrix( NrRows( M2 ), NrRows( M1 ), R );
-    
-    L := UnionOfRows( M1, M2 );
-    
-    SetRightHandSide( L, UnionOfRows( id, zz ) );
-    
-    BL := BasisOfRows( L );
-    
-    Info( InfoHomalgOperations, 3, HOMALG.color_end_FO, "end:   SyzygiesGeneratorsOfRows", "\033[0m" );
-    
-    return CompatibilityConditions( BL );
+    return C;
     
 end );
 
@@ -725,41 +744,211 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
 	[ IsHomalgMatrix ],
         
   function( M )
-    local R, RP;
+    local R, RP, t, C, B, rank;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
-  
+    
+    t := homalgTotalRuntimes( );
+        
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOH, "start: SyzygiesGeneratorsOfColumns: ", NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        return RP!.SyzygiesGeneratorsOfColumns( M );
+        
+        C := RP!.SyzygiesGeneratorsOfColumns( M );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullColumnRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfColumns: ", NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullColumnRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfColumns: ", NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    return Involution( SyzygiesGeneratorsOfRows( Involution( M ) ) );
+    C := HomalgVoidMatrix( R );
+    
+    B := TriangularBasisOfColumns( M, C );
+    
+    rank := ColumnRankOfMatrix( B );
+    
+    C := CertainColumns( C, [ rank + 1 .. NrColumns( M ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        SetIsFullColumnRankMatrix( M, true );
+        
+        C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+        
+    fi;
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfColumns: ", NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    local R, RP, t, M, C, rank;
+    
+    R := HomalgRing( M1 );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOH, "start: SyzygiesGeneratorsOfRows: ( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ), "\033[0m" );
+    
+    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfRows: ", NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M1 ), Involution( M2 ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfRows: ", NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    M := UnionOfRows( M1, M2 );
+    
+    C := HomalgVoidMatrix( R );
+    
+    M := TriangularBasisOfRows( M, C );
+    
+    rank := RowRankOfMatrix( M );
+    
+    C := CertainColumns( CertainRows( C, [ rank + 1 .. NrRows( M ) ] ), [ 1 .. NrRows( M1 ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+        
+    fi;
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfRows: ", NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return C;
     
 end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP;
+    local R, RP, t, M, C, rank;
     
     R := HomalgRing( M1 );
     
     RP := homalgTable( R );
-  
+    
+    t := homalgTotalRuntimes( );
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start_FOH, "start: SyzygiesGeneratorsOfColumns: ", NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )", "\033[0m" );
+    
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        return RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
+        
+        C := RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfColumns: ", NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+            
+        fi;
+        
+        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfColumns: ", NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        
+        return C;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    return Involution( SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
+    M := UnionOfColumns( M1, M2 );
+    
+    C := HomalgVoidMatrix( R );
+    
+    M := TriangularBasisOfColumns( M, C );
+    
+    rank := ColumnRankOfMatrix( M );
+    
+    C := CertainRows( CertainColumns( C, [ rank + 1 .. NrColumns( M ) ] ), [ 1 .. NrColumns( M1 ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+        
+    fi;
+    
+    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end_FOH, "end:   SyzygiesGeneratorsOfColumns: ", NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+    
+    return C;
     
 end );
 

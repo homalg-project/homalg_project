@@ -44,53 +44,7 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     Mrel := UnionOfRows( M, rel );
     
-    if HasRightHandSide( M ) then
-        side := RightHandSide( M );
-        zz := HomalgZeroMatrix( NrRows( rel ), NrColumns( side ), R );
-        SetRightHandSide( Mrel, UnionOfRows( side, zz ) );
-    fi;
-    
     return BasisOfRowModule( Mrel );
-    
-end );
-
-##
-InstallMethod( BasisOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix ],
-        
-  function( M )
-    local C, rhs;
-    
-    C := HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
-    
-    if HasRightHandSide( M ) then
-        rhs := RightHandSide( M );
-        SetRightHandSide( C, HomalgZeroMatrix( 0, NrColumns( rhs ), HomalgRing( M ) ) );
-        SetCompatibilityConditions( C, rhs );
-    fi;
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( BasisOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( M )
-    local C, rhs;
-    
-    C := HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
-    
-    if HasRightHandSide( M ) then
-        rhs := RightHandSide( M );
-        SetRightHandSide( C, rhs );
-        SetCompatibilityConditions( C, HomalgZeroMatrix( 0, NrColumns( rhs ), HomalgRing( M ) ) );
-    fi;
-    
-    return C;
     
 end );
 
@@ -124,53 +78,87 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     Mrel := UnionOfColumns( M, rel );
     
-    if HasBottomSide( M ) then
-        side := BottomSide( M );
-        zz := HomalgZeroMatrix( NrRows( side ), NrColumns( rel ), R );
-        SetBottomSide( Mrel, UnionOfColumns( side, zz ) );
-    fi;
-    
     return BasisOfColumnModule( Mrel );
     
 end );
 
 ##
-InstallMethod( BasisOfColumns,
+InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsHomalgMatrix and IsZeroMatrix ],
+	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M )
-    local C, bts;
+  function( M, T )
+    local R, RP, ring_rel, rel, Mrel, id, zz, TT, bas;
     
-    C := HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
+    R := HomalgRing( M );
     
-    if HasBottomSide( M ) then
-        bts := BottomSide( M );
-        SetBottomSide( C, HomalgZeroMatrix( NrRows( bts ), 0, HomalgRing( M ) ) );
-        SetCompatibilityConditions( C, bts );
+    RP := homalgTable( R );
+  
+    if IsBound(RP!.BasisOfRows) then
+        return RP!.BasisOfRows( M, T );
     fi;
     
-    return C;
+    if not HasRingRelations( R ) then
+        return BasisOfRowsCoeff( M, T );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ring_rel := RingRelations( R );
+    
+    rel := MatrixOfRelations( ring_rel );
+    
+    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
+    
+    Mrel := UnionOfRows( M, rel );
+    
+    TT := HomalgVoidMatrix( NrRows( Mrel ), NrRows( Mrel ), R );
+    
+    bas := BasisOfRowsCoeff( Mrel, TT );
+    
+    SetPreEval( T, CertainRows( TT, [ 1 .. NrRows( M ) ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return bas;
     
 end );
 
 ##
-InstallMethod( BasisOfColumns,
+InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsHomalgMatrix and IsIdentityMatrix ],
+	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
-  function( M )
-    local C, bts;
+  function( M, T )
+    local R, RP, ring_rel, rel, Mrel, id, zz, TT, bas;
     
-    C := HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
+    R := HomalgRing( M );
     
-    if HasBottomSide( M ) then
-        bts := BottomSide( M );
-        SetBottomSide( C, bts );
-        SetCompatibilityConditions( C, HomalgZeroMatrix( NrRows( bts ), 0, HomalgRing( M ) ) );
+    RP := homalgTable( R );
+  
+    if IsBound(RP!.BasisOfColumns) then
+        return RP!.BasisOfColumns( M, T );
     fi;
     
-    return C;
+    if not HasRingRelations( R ) then
+        return BasisOfColumnsCoeff( M, T );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ring_rel := RingRelations( R );
+    
+    rel := MatrixOfRelations( ring_rel );
+    
+    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
+    
+    Mrel := UnionOfColumns( M, rel );
+    
+    TT := HomalgVoidMatrix( NrColumns( Mrel ), NrColumns( Mrel ), R );
+    
+    bas := BasisOfColumnsCoeff( Mrel, TT );
+    
+    SetPreEval( T, CertainColumns( TT, [ 1 .. NrColumns( M ) ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return bas;
     
 end );
 

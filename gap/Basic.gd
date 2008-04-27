@@ -19,8 +19,14 @@
 DeclareOperation( "BasisOfRows",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "BasisOfRows",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "BasisOfColumns",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "BasisOfColumns",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix ] );

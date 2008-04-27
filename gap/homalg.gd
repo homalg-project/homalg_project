@@ -13,8 +13,8 @@
 DeclareInfoClass( "InfoHomalg" );
 SetInfoLevel( InfoHomalg, 1 );
 
-DeclareInfoClass( "InfoHomalgOperations" );
-SetInfoLevel( InfoHomalgOperations, 1 );
+DeclareInfoClass( "InfoHomalgBasicOperations" );
+SetInfoLevel( InfoHomalgBasicOperations, 1 );
 
 # a central place for configurations:
 DeclareGlobalVariable( "HOMALG" );

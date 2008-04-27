@@ -26,10 +26,6 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.SubfactorModule) then
-        return RP!.SubfactorModule( M1, M2 );
-    fi;
-    
     #=====# begin of the core procedure #=====#
     
     # basis of M2
@@ -45,7 +41,7 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     fi;
     
     # get a better basis for N
-    N := GetRidOfTrivialRelations( N );
+    N := GetRidOfObsoleteRelations( N );
     
     # compute the syzygies module of N modulo B
     S := SyzygiesGenerators( N, B );
@@ -59,62 +55,42 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
 end );
 
 ##
-InstallMethod( \/,				### defines: SubfactorModule (incomplete)
-        "for a homalg matrix",
-	[ IsHomalgMatrix, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
-        
-  function( mat, rel )
-    local R, RP, B, N, S;
-    
-    R := HomalgRing( mat );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.SubfactorModule) then
-        return RP!.SubfactorModule( mat, rel );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    # basis of rel
-    B := BasisOfModule( rel );
-    
-    # normal forms of mat with respect to B
-    N := DecideZero( mat, B );
-    
-    if IsHomalgRelationsOfLeftModule( rel ) then
-        N := HomalgRelationsForLeftModule( N );
-    else
-        N := HomalgRelationsForRightModule( N );
-    fi;
-    
-    # get a better basis for N
-    N := GetRidOfTrivialRelations( N );
-    
-    # compute the syzygies module of N modulo B
-    S := SyzygiesGenerators( N, B );
-    
-    if IsHomalgRelationsOfLeftModule( rel ) then
-        return HomalgRelationsForLeftModule( S );
-    else
-        return HomalgRelationsForRightModule( S );
-    fi;
-    
-end );
-
-##
 InstallMethod( \/,
         "for a homalg matrix",
 	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
-    local gen, rel;
+    local B, N, gen, S;
     
-    gen := mat * GeneratorsOfModule( M );
+    # basis of rel
+    B := BasisOfModule( M );
     
-    rel := mat / RelationsOfModule( M );
+    # normal forms of mat with respect to B
+    N := DecideZero( mat, B );
     
-    return Presentation( gen, rel );
+    if IsLeftModule( M ) then
+        N := HomalgGeneratorsForLeftModule( N );
+    else
+        N := HomalgGeneratorsForRightModule( N );
+    fi;
+    
+    # get a better basis for N
+    N := GetRidOfObsoleteGenerators( N );
+    
+    gen := N * GeneratorsOfModule( M );
+    
+    # compute the syzygies module of N modulo B
+    S := SyzygiesGenerators( N, B );
+    
+    if IsLeftModule( M ) then
+        S := HomalgRelationsForLeftModule( S );
+    else
+        S := HomalgRelationsForRightModule( S );
+    fi;
+    
+    S := Presentation( N, S );
+    
+    return AddANewPresentation( S, gen );
     
 end );
 

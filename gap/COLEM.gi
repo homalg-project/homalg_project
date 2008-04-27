@@ -675,6 +675,20 @@ InstallImmediateMethod( RowRankOfMatrix,
 end );
 
 ##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasIsFullRowRankMatrix and HasNrRows, 0,
+        
+  function( M )
+    
+    if IsFullRowRankMatrix( M ) then
+        return NrRows( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( ColumnRankOfMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
@@ -696,6 +710,20 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     
     if HasRowRankOfMatrix( EvalInvolution( M ) ) then
         return RowRankOfMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasIsFullColumnRankMatrix and HasNrColumns, 0,
+        
+  function( M )
+    
+    if IsFullColumnRankMatrix( M ) then
+        return NrColumns( M );
     fi;
     
     TryNextMethod( );
@@ -819,6 +847,24 @@ InstallMethod( Involution,
     Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( Involution )", "\033[0m" );
     
     return EvalInvolution( M );
+    
+end );
+
+##
+InstallMethod( Involution,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalDiagMat ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( DiagMat )", "\033[0m" );
+    
+    e := EvalDiagMat( M );
+    
+    e := List( e, Involution );
+    
+    return DiagMat( e );
     
 end );
 
@@ -1463,7 +1509,7 @@ InstallMethod( \*,
     A2 := EvalUnionOfColumns( A )[2];
     
     B1 := CertainRows( B, [ 1 .. NrColumns( A1 ) ] );
-    B2 := CertainRows( B, [ 1 .. NrColumns( A2 ) ] );
+    B2 := CertainRows( B, [ NrColumns( A1 ) + 1 .. NrRows( B ) ] );
     
     return A1 * B1 +  A2 * B2;
     
@@ -1483,7 +1529,7 @@ InstallMethod( \*,
     B2 := EvalUnionOfRows( B )[2];
     
     A1 := CertainColumns( A, [ 1 .. NrRows( B1 ) ] );
-    A2 := CertainColumns( A, [ 1 .. NrRows( B2 ) ] );
+    A2 := CertainColumns( A, [ NrRows( B1 ) + 1 .. NrColumns( A ) ] );
     
     return A1 * B1 + A2 * B2;
     

@@ -80,5 +80,14 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "DecideZero",
         [ IsHomalgGenerators, IsHomalgRelations ] );
 
+DeclareOperation( "SyzygiesGenerators",
+        [ IsHomalgGenerators, IsHomalgRelations ] );
+
+DeclareOperation( "GetRidOfObsoleteGenerators",
+        [ IsHomalgGenerators ] );
+
 DeclareOperation( "*",
         [ IsHomalgMatrix, IsHomalgGenerators ] );
+
+DeclareOperation( "*",
+        [ IsHomalgGenerators, IsHomalgGenerators ] );

@@ -569,14 +569,6 @@ InstallMethod( DiagMat,
   function( l )
     local R, C;
     
-    if l = [] then
-        Error( "recieved an empty list\n" );
-    fi;
-    
-    if not ForAll( l, IsHomalgMatrix ) then
-        Error( "at least one of the matrices in the list is not a homalg matrix\n" );
-    fi;
-    
     R := HomalgRing( l[1] );
     
     C := HomalgMatrix( R );
@@ -585,6 +577,27 @@ InstallMethod( DiagMat,
     SetNrColumns( C, Sum( List( l, NrColumns ) ) );
     
     SetEvalDiagMat( C, l );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( KroneckerMat,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    local R, C;
+    
+    R := HomalgRing( A );
+    
+    C := HomalgMatrix( R );
+    
+    SetNrRows( C, NrRows( A ) * NrRows( B ) );
+    SetNrColumns( C, NrColumns( A ) * NrColumns ( B ) );
+    
+    SetEvalKroneckerMat( C, [ A, B ] );
     
     return C;
     
@@ -796,119 +809,6 @@ InstallMethod( RightInverse,
   function( M )
     
     return ItsRightInverse( M );
-    
-end );
-
-##
-InstallMethod( AddRhs,				### defines: AddRhs
-        "of homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( A )
-    local C;
-    
-    C := HomalgMatrix( A );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalAddRhs( C, true );
-    
-    SetRightHandSide( C, HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( AddRhs,				### defines: AddRhs
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    local C;
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the second matrix cannot become a right hand side of the first, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), " row(s)\n" );
-    fi;
-    
-    C := HomalgMatrix( A );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalAddRhs( C, true );
-    
-    SetRightHandSide( C, B );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( AddBts,				### defines: AddBts
-        "of homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( A )
-    local C;
-    
-    C := HomalgMatrix( A );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalAddBts( C, true );
-    
-    SetBottomSide( C, HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( AddBts,				### defines: AddBts
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    local C;
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the second matrix cannot become a bottom side of the first, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), " column(s)\n" );
-    fi;
-    
-    C := HomalgMatrix( A );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalAddBts( C, true );
-    
-    SetBottomSide( C, B );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( GetSide,
-        "of homalg matrices",
-        [ IsString, IsHomalgMatrix ],
-        
-  function( side, A )
-    local R, C;
-    
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalGetSide( C, [ side, A ] );
-    
-    return C;
     
 end );
 

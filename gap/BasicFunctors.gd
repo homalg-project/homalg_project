@@ -51,3 +51,6 @@ DeclareOperation( "Hom",
 DeclareOperation( "Hom",
         [ IsHomalgRing, IsHomalgModule ] );
 
+DeclareOperation( "Hom",
+        [ IsHomalgRing, IsHomalgRing ] );
+

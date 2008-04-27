@@ -37,23 +37,62 @@ end );
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,
   function( phi )
-    local S, gen, p, emb, ker;
+    local S, p, ker, emb;
     
     S := SourceOfMorphism( phi );
     
-    gen := GeneratorsOfModule( S );
-    
-    emb := SyzygiesGenerators( phi );
-    
     p := PositionOfTheDefaultSetOfRelations( S ); ## avoid future possible side effects by the following command(s)
     
-    ker := emb / S;
+    ker := SyzygiesGenerators( phi ) / S;
+    
+    emb := MatrixOfGenerators( ker, 1 );
     
     ## emb is the matrix of the embedding morphism
     ## w.r.t. the first set of relations of ker and the p-th set of relations of S
     ker!.NaturalEmbedding := HomalgMorphism( emb, [ ker, 1 ], [ S, p ] );
     
     return ker;
+    
+end );
+
+InstallGlobalFunction( _Functor_Hom_OnObjects,
+  function( M, N )
+    local R, l0, l1, _l0, matM, matN, HP0N, HP1N, alpha, idN, hom;
+    
+    R := HomalgRing( M );
+    
+    if not IsIdenticalObj( R, HomalgRing( N ) ) then
+        Error( "the rings of the source and target modules are not identical\n" );
+    fi;
+    
+    l0 := NrGenerators( M );
+    l1 := NrRelations( M );
+    
+    _l0 := NrGenerators( N );
+    
+    matM := MatrixOfRelations( M );
+    matN := MatrixOfRelations( N );
+    
+    HP0N := DiagMat( ListWithIdenticalEntries( l0, Involution( matN ) ) );
+    HP1N := DiagMat( ListWithIdenticalEntries( l1, Involution( matN ) ) );
+    
+    idN := HomalgIdentityMatrix( _l0, R );
+    
+    alpha := KroneckerMat( matM, idN );
+    
+    if IsLeftModule( M ) then
+        HP0N := RightPresentation( HP0N );
+        HP1N := RightPresentation( HP1N );
+    else
+        HP0N := LeftPresentation( HP0N );
+        HP1N := LeftPresentation( HP1N );
+    fi;
+    
+    alpha := HomalgMorphism( alpha, HP0N, HP1N );
+    
+    hom := Kernel( alpha );
+    
+    return hom;
     
 end );
 
@@ -70,6 +109,13 @@ InstallValue( Functor_Kernel,
                 [ "name", "Kernel" ],
                 [ "covariant", true ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
+                )
+);
+
+InstallValue( Functor_Hom,
+        CreateHomalgFunctor(
+                [ "name", "Hom" ],
+                [ "OnObjects", _Functor_Hom_OnObjects ]
                 )
 );
 
@@ -128,6 +174,85 @@ InstallMethod( Kernel,
     phi!.Kernel := ker; ## here we mimic an attribute (specific for Kernel)
     
     return ker;
+    
+end );
+
+##
+InstallMethod( Hom,
+        "for homalg morphisms",
+        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( M, N )
+    local functor, hom;
+    
+    functor := Functor_Hom;
+    
+    hom := functor!.OnObjects( M, N );
+    
+    return hom;
+    
+end );
+
+##
+InstallMethod( Hom,
+        "for two homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsHomalgRing ],
+        
+  function( M, R )
+    local functor, N, hom;
+    
+    functor := Functor_Hom;
+    
+    if IsLeftModule( M ) then
+        N := HomalgFreeLeftModule( 1, R );
+    else
+        N := HomalgFreeRightModule( 1, R );
+    fi;
+    
+    hom := functor!.OnObjects( M, N );
+    
+    return hom;
+    
+end );
+
+##
+InstallMethod( Hom,
+        "for two homalg modules",
+        [ IsHomalgRing, IsFinitelyPresentedModuleRep ],
+        
+  function( R, N )
+    local functor, M, hom;
+    
+    functor := Functor_Hom;
+    
+    if IsLeftModule( N ) then
+        M := HomalgFreeLeftModule( 1, R );
+    else
+        M := HomalgFreeRightModule( 1, R );
+    fi;
+    
+    hom := functor!.OnObjects( M, N );
+    
+    return hom;
+    
+end );
+
+##
+InstallMethod( Hom,
+        "for two homalg modules",
+        [ IsHomalgRing, IsHomalgRing ],
+        
+  function( R1, R2 )
+    local functor, M, N, hom;
+    
+    functor := Functor_Hom;
+    
+    M := HomalgFreeLeftModule( 1, R1 );
+    N := HomalgFreeRightModule( 1, R2 );
+    
+    hom := functor!.OnObjects( M, N );
+    
+    return hom;
     
 end );
 
