@@ -32,8 +32,6 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> homalgSendBlocking( [ "Display(", R, ")" ], "need_output" ),
-               
                ElementaryDivisors :=
                  function( arg )
                    local M, R;

@@ -21,7 +21,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                IsZeroMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsZeroMatrix(", M, ")" ] , "need_output" ) = "true";
+                   return homalgSendBlocking( [ "IsZeroMatrix( ", M, " )" ] , "need_output" ) = "true";
                    
                  end,
                
@@ -29,7 +29,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "ZeroRows( ", C, " )" ], "need_output" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -38,7 +38,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "ZeroColumns( ", C, " )" ], "need_output" );
                    return StringToIntList( list_string );
                    
                  end,
@@ -55,7 +55,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                AreEqualMatrices :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "=", B ] , "need_output" ) = "true";
+                   return homalgSendBlocking( [ A, " = ", B ] , "need_output" ) = "true";
                    
                  end,
                
@@ -82,7 +82,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                Involution :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "Involution(", M, ")" ] );
+                   return homalgSendBlocking( [ "Involution( ", M, " )" ] );
                    
                  end,
                
@@ -124,45 +124,52 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
+               KroneckerMat :=
+                 function( A, B )
+                   
+                   return homalgSendBlocking( [ "KroneckerMat(", A, B, ")" ] );
+                   
+                 end,
+               
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [ a, "*", A ] );
+                   return homalgSendBlocking( [ a, " * ", A ] );
                    
                  end,
                
                AddMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "+", B ] );
+                   return homalgSendBlocking( [ A, " + ", B ] );
                    
                  end,
                
                SubMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "-", B ] );
+                   return homalgSendBlocking( [ A, " - ", B ] );
                    
                  end,
                
                Compose :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "*", B ] );
+                   return homalgSendBlocking( [ A, " * ", B ] );
                    
                  end,
                
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "NrRows(", C, ")" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ "NrRows( ", C, " )" ], "need_output" ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "NrColumns(", C, ")" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ "NrColumns( ", C, " )" ], "need_output" ) );
                    
                  end,
                  
@@ -177,7 +184,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  function( M, pos_list )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "GetUnitPosition( ", M, pos_list, " )" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, pos_list, ")" ], "need_output" );
                    
                    if list_string = "fail" then
                        return fail;
@@ -193,7 +200,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions( ", M, clean_columns, " )" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output" );
                    
                    if list_string = "fail" then
                        return fail;

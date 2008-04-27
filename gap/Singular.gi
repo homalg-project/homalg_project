@@ -32,7 +32,7 @@ InstallValue( HOMALG_IO_Singular,
             handle_output := true,	## a Singular specific
             check_output := true,	## a Singular specific
             define := "=",
-            prompt := "singular> ",
+            prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
            )

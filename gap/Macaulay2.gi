@@ -27,7 +27,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             eoc_verbose := "",
             eoc_quiet := ";",
             define := "=",
-            prompt := "M2> ",
+            prompt := "\033[01mM2>\033[1m ",
             output_prompt := "\033[1;30;43m<M2\033[0m "
            )
 );

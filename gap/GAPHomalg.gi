@@ -27,7 +27,7 @@ InstallValue( HOMALG_IO_GAP,
             eoc_verbose := ";",
             eoc_quiet := ";;",
             define := ":=",
-            prompt := "gap> ",
+            prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",           
            )

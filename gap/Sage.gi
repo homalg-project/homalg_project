@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_Sage,
 	    check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
-            prompt := "sage: ",
+            prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
             display_color := "\033[0;34;43m",
            )

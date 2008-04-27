@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_MAGMA,
             eoc_quiet := ";",
             remove_enter := true,       ## a MAGMA specific
             define := ":=",
-            prompt := "magma> ",
+            prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
            )
