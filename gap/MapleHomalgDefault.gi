@@ -29,7 +29,21 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/BasisOfModule`(", M, R, "),", R, "[-1])" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/BasisOfRowModule`(", M, R, ")" ], "need_command" );
+                   
+                   return N;
+                   
+                 end,
+               
+               BasisOfColumnModule :=
+                 function( M )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
+                   
+                   homalgSendBlocking( [ N, " := `homalg/BasisOfColumnModule`(", M, R, ")" ], "need_command" );
                    
                    return N;
                    
@@ -57,7 +71,21 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/Reduce`(", A, B, R, "),", R, "[-1])" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/DecideZeroRows`(", A, B, R, ")" ], "need_command" );
+                   
+                   return N;
+                   
+                 end,
+                 
+               DecideZeroColumns :=
+                 function( A, B )
+                   local R, N;
+                   
+                   R := HomalgRing( A );
+                   
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   
+                   homalgSendBlocking( [ N, " := `homalg/DecideZeroColumns`(", A, B, R, ")" ], "need_command" );
                    
                    return N;
                    
@@ -91,17 +119,43 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                        
                        M2 := arg[2];
                        
-                       homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/SyzygiesGenerators`(", M, M2, R, "),", R, "[-1])" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, M2, R, ")" ], "need_command" );
                        
                    else
                        
-                       homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/SyzygiesGenerators`(", M, ",[],", R, "),", R, "[-1])" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, ",[],", R, ")" ], "need_command" );
                        
                    fi;
                    
                    return N;
                    
-                 end
+                 end,
+                 
+               SyzygiesGeneratorsOfColumns :=
+                 function( arg )
+                   local M, R, N, M2;
+                   
+                   M := arg[1];
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", R );
+                   
+                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
+                       
+                       M2 := arg[2];
+                       
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, M2, R, ")" ], "need_command" );
+                       
+                   else
+                       
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, ",[],", R, ")" ], "need_command" );
+                       
+                   fi;
+                   
+                   return N;
+                   
+                 end,
                  
         )
  );
