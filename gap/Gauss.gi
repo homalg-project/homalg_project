@@ -83,8 +83,8 @@ InstallMethod( EchelonMatTransformationDestructive,
             Add( vectors, row  * x );
             heads[j]:= Length( vectors );
             
-            #else
-            #    Add( relations, row2 );
+        else
+            Add( relations, row2 );
         fi;
         
     od;
@@ -115,7 +115,7 @@ InstallMethod( EchelonMatTransformationDestructive,
     
     coeffs{[1..rank]} := coeffs{list};
     
-    return [ vectors, coeffs ];
+    return [ vectors, Concatenation( coeffs, relations ) ];
     
 end );
 
