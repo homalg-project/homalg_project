@@ -87,9 +87,10 @@ end );
 ##
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
-    local L, nargs, properties, ar, option, need_command, need_display, need_output,
-          break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS, PID,
-          homalg_variable, l, eoc, enter, max, display_color;
+    local L, nargs, properties, ar, option, info_level,
+          need_command, need_display, need_output,
+          break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS,
+          PID, homalg_variable, l, eoc, enter, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -106,6 +107,8 @@ InstallGlobalFunction( homalgSendBlocking,
     fi;
     
     nargs := Length( arg );
+    
+    info_level := 7;
     
     properties := [];
     
@@ -144,6 +147,7 @@ InstallGlobalFunction( homalgSendBlocking,
                 need_display := true;
                 need_command := false;
                 need_output := false;
+                info_level := 8;
             elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
                 need_output := true;
                 need_command := false;
@@ -287,7 +291,7 @@ InstallGlobalFunction( homalgSendBlocking,
         Add( HOMALG_IO.homalgSendBlocking, L );
     fi;
     
-    Info( InfoIO_ForHomalg, 7, stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+    Info( InfoIO_ForHomalg, info_level, stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
