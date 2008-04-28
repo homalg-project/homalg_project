@@ -1,8 +1,4 @@
 LoadPackage( "SCO" );
-HOMALG_IO.color_display := true;
-SetInfoLevel( InfoLIMAT, 2 );
-SetInfoLevel( InfoCOLEM, 2 );
-SetInfoLevel( InfoHomalgOperations, 3 );
 
 input := InputTextUser();
 
