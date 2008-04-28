@@ -9,33 +9,20 @@
 #############################################################################
 
 ##
-DeclareCategory( "IsOrbifoldTriangulation",
-        IsAttributeStoringRep );
+DeclareOperation( "EchelonMatTransformationDestructive", #RREF over a field, returns [ RREF, Transformation_Matrix ]
+        [ IsMatrix ] );
 
-DeclareOperation( "OrbifoldTriangulation",
-        [ IsList, IsRecord, IsList ] );
-
-##
-DeclareCategory( "IsSimplicialSet",
-        IsAttributeStoringRep );
-
-DeclareOperation( "SimplicialSet",
-        [ IsOrbifoldTriangulation, IsInt ] );
-
-DeclareAttribute( "Dimension",
-        IsSimplicialSet );
+DeclareOperation( "EchelonMatTransformation",
+        [ IsMatrix ] );
 
 ##
-DeclareOperation( "BoundaryOperator",
-        [ IsInt, IsList, IsFunction ] );
+DeclareOperation( "EchelonMatDestructive", #RREF over a field, returns only RREF (Zero Rows are omitted). Could be changed to return Rank as well
+        [ IsMatrix ] );
+
+DeclareOperation( "EchelonMat",
+        [ IsMatrix ] );
 
 ##
-DeclareOperation( "CreateCohomologyMatrix",
-        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
+DeclareOperation( "ReduceMatWithEchelonMat", #Reduce the rows of a matrix with another matrix, which MUST be at least in REF.
+        [ IsMatrix, IsMatrix ] );
 
-DeclareOperation( "CreateHomologyMatrix",
-        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
-
-##
-DeclareOperation( "Gauss_Examples",
-        [ ] );
