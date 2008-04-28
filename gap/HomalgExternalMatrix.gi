@@ -323,6 +323,9 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         M := HomalgMatrix( EvalString( str ), R );
         
+        #if HasCharacteristic( R ) and HasCharacteristic( R ) > 0 then
+            M := One( R ) * M;
+        #fi;
     fi;
     
     return M;
