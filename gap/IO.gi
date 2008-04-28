@@ -99,7 +99,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
     while true do	# will be exited with break or return
         l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
         nr := IO_select( l, [], [], 0, 0 );
-        #Print( "select: nr=", nr, "\n" );
+        Print( "select: nr=", nr, "\n" );
         
         if nr = 0 then 
             if not ( gotsomething ) then
@@ -107,13 +107,13 @@ InstallGlobalFunction( CheckOutputOfCAS,
             fi;  # nothing new whatsoever
             return s.casready;
         fi;
-        #Print( "select: l=", l, "\n" );
+        Print( "select: l=", l, "\n" );
         
         if l[1] <> fail then	# something on stdout
           pos := Length( s.lines );
           bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
           if bytes > 0 then
-              #Print( "stdout bytes:", bytes, "\n" );
+              Print( "stdout bytes:", bytes, "\n" );
               gotsomething := true;
               pos := PositionSublist( s.lines, READY, pos - READY_LENGTH + 1 );
                     # ........NEWNEWNEWNEWNEW
@@ -190,6 +190,7 @@ InstallGlobalFunction( SendBlockingToCAS,
   function( s, command )
     local l, nr;
     
+    Print("Hallo\n");
     SendToCAS( s, command );
     repeat
         l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
