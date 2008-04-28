@@ -63,7 +63,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                  end,
                  
-               EffectivelyDecideZeroRows :=
+               DecideZeroRowsEffectively :=
                  function( A, B, U )
                    local R, N;
                    
