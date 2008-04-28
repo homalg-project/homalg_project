@@ -227,7 +227,7 @@ InstallMethod( Eval,				### defines: ZeroMap
     RP := homalgTable( R );
     
     if NrRows( C ) = 0 or NrColumns( C ) = 0 then
-        Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix is being evaluated!\033[0m" );
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix has been evaluated!\033[0m" );
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then

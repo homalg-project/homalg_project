@@ -75,6 +75,30 @@ InstallMethod( IsZeroMatrix,
     
 end );
 
+##
+InstallMethod( IsDiagonalMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, diag;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsDiagonalMatrix) then
+        return RP!.IsDiagonalMatrix( DecideZero ( M ) );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    diag := DiagonalEntries( M );
+    
+    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
+    
+end );
+
 ####################################
 #
 # methods for operations:
@@ -170,7 +194,15 @@ InstallMethod( CreateHomalgMatrix,
     
     RemoveCharacters( s, "\\\n\" " );
     
-    return HomalgMatrix( ListToListList( EvalString( s ), r, c ), R );
+    s := EvalString( s );
+    
+    if IsMatrix( s ) then
+        return HomalgMatrix( s, r, c, R );
+    elif IsHomogeneousList( s ) then
+        return HomalgMatrix( ListToListList( s, r, c ), R );
+    else
+        Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}: " );
+    fi;
     
 end );
 
@@ -923,6 +955,14 @@ InstallGlobalFunction( HomalgMatrix,
                 matrix, TheTypeHomalgExternalMatrix,
                 Eval, M );
         
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+            SetNrRows( matrix, arg[2] );
+        fi;
+        
+        if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+            SetNrColumns( matrix, arg[3] );
+        fi;
+        
     fi;
     
     return matrix;
@@ -1104,6 +1144,67 @@ InstallGlobalFunction( HomalgVoidMatrix,
 end );
 
 ##
+InstallGlobalFunction( HomalgDiagonalMatrix,
+  function( arg )		## the diagonal matrix
+    local nargs, R, diag, d, M;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        Error( "no arguments provided\n" );
+    fi;
+    
+    if IsHomalgRing( arg[nargs] ) then
+        R := arg[nargs];
+    fi;
+    
+    if IsRingElement( arg[1] ) or IsHomalgExternalRingElement( arg[1] ) then
+        diag := [ arg[1] ];
+    elif ForAll( arg[1], IsRingElement ) or ForAll( arg[1], IsHomalgExternalRingElement ) then
+        diag := arg[1];
+    fi;
+    
+    if not IsBound( R ) and IsBound( diag ) and diag <> [ ] and IsHomalgExternalRingElement( diag[1] ) then
+        R := HomalgRing( diag[1] );
+    fi;
+    
+    if not IsBound( diag ) then
+        return CallFuncList( DiagMat, arg );
+    elif not IsBound( R ) then
+        Error( "no homalg ring provided" );
+    fi;
+    
+    if diag = [ ] then
+        return HomalgZeroMatrix( 0, 0, R );
+    fi;
+    
+    diag := List( diag, a -> HomalgMatrix( [[ a ]], 1, 1, R ) );
+    
+    M := DiagMat( diag );
+    
+    d := Length( diag );
+    
+    if nargs > 1 and IsInt( arg[2] ) then
+        if arg[2] > d then
+            M := UnionOfRows( M, HomalgZeroMatrix( arg[2] - d, d, R ) );
+        elif arg[2] < d then
+            M := CertainRows( M, [ 1 .. arg[2] ] );
+        fi;
+    fi;
+    
+    if nargs > 2 and IsInt( arg[3] ) then
+        if arg[3] > d then
+            M := UnionOfColumns( M, HomalgZeroMatrix( NrRows( M ), arg[3] - d, R ) );
+        elif arg[3] < d then
+            M := CertainColumns( M, [ 1 .. arg[3] ] );
+        fi;
+    fi;
+    
+    return M;
+    
+end );
+
+##
 InstallGlobalFunction( ListToListList,
   function( L, r, c )
     local M, i;
@@ -1160,13 +1261,13 @@ InstallMethod( ViewObj,
             Print( " strict upper triangular" );
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
             Print( " strict lower triangular" );
-        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) then
+        elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) and not ( HasNrRows( o ) and NrRows( o ) = 1 ) then
             if not first_attribute then
                 Print( "n upper triangular" );
             else
                 Print( " upper triangular" );
             fi;
-        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) then
+        elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
             Print( " lower triangular" );
         elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
             Print( " triangular" );

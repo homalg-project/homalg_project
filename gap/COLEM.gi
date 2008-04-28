@@ -831,7 +831,7 @@ InstallMethod( Involution,
         
   function( M )
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( PreEval )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "Involution( PreEval )", "\033[0m" );
     
     return Involution( PreEval( M ) );
     
@@ -844,7 +844,7 @@ InstallMethod( Involution,
         
   function( M )
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( Involution )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "Involution( Involution )", "\033[0m" );
     
     return EvalInvolution( M );
     
@@ -858,7 +858,7 @@ InstallMethod( Involution,
   function( M )
     local e;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: Involution( DiagMat )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "Involution( DiagMat )", "\033[0m" );
     
     e := EvalDiagMat( M );
     
@@ -895,7 +895,7 @@ InstallMethod( CertainRows,
     
     if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
         
-        Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainRows( CertainRows )", "\033[0m" );
+        Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( CertainRows )", "\033[0m" );
         
         A := EvalCertainRows( M )[1];
         plistA := EvalCertainRows( M )[2];
@@ -923,7 +923,7 @@ InstallMethod( CertainRows,
         
         if Length( plist ) * NrColumns( A ) < Length( plistA ) * NrRows( A ) then
             
-            Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainRows( CertainColumns )", "\033[0m" );
+            Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( CertainColumns )", "\033[0m" );
             
             return CertainColumns( CertainRows( A, plist ), plistA );
             
@@ -943,7 +943,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, B, rowsA, rowsB, plistA, plistB;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( UnionOfRows )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfRows )", "\033[0m" );
     
     A := EvalUnionOfRows( M )[1];
     B := EvalUnionOfRows( M )[2];
@@ -966,7 +966,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, B;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( UnionOfColumns )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfColumns )", "\033[0m" );
     
     A := EvalUnionOfColumns( M )[1];
     B := EvalUnionOfColumns( M )[2];
@@ -983,7 +983,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, B;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( Compose )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( Compose )", "\033[0m" );
     
     A := EvalCompose( M )[1];
     B := EvalCompose( M )[2];
@@ -1000,7 +1000,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( LeftInverse )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( LeftInverse )", "\033[0m" );
     
     A := EvalLeftInverse( M );
     
@@ -1035,7 +1035,7 @@ InstallMethod( CertainColumns,
     
     if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
         
-        Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainColumns( CertainColumns )", "\033[0m" );
+        Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( CertainColumns )", "\033[0m" );
     
         A := EvalCertainColumns( M )[1];
         plistA := EvalCertainColumns( M )[2];
@@ -1063,7 +1063,7 @@ InstallMethod( CertainColumns,
         
         if Length( plist ) * NrRows( A ) < Length( plistA ) * NrColumns( A ) then
             
-            Info( InfoCOLEM, 4, COLEM.color, "COLEM: CertainColumns( CertainRows )", "\033[0m" );
+            Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( CertainRows )", "\033[0m" );
             
             return CertainRows( CertainColumns( A, plist ), plistA );
             
@@ -1083,7 +1083,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B, columnsA, columnsB, plistA, plistB;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( UnionOfColumns )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( UnionOfColumns )", "\033[0m" );
     
     A := EvalUnionOfColumns( M )[1];
     B := EvalUnionOfColumns( M )[2];
@@ -1106,7 +1106,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( UnionOfRows )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( UnionOfRows )", "\033[0m" );
     
     A := EvalUnionOfRows( M )[1];
     B := EvalUnionOfRows( M )[2];
@@ -1123,7 +1123,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( Compose )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( Compose )", "\033[0m" );
     
     A := EvalCompose( M )[1];
     B := EvalCompose( M )[2];
@@ -1140,7 +1140,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainColumns( RightInverse )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( RightInverse )", "\033[0m" );
     
     A := EvalRightInverse( M );
     
@@ -1250,7 +1250,7 @@ InstallMethod( \+,
     
     if IsIdenticalObj( C , EvalCompose( B )[1] ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: C * E + C * F", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "C * E + C * F", "\033[0m" );
         
         return C * ( EvalCompose( A )[2] + EvalCompose( B )[2] );
         
@@ -1260,7 +1260,7 @@ InstallMethod( \+,
     
     if IsIdenticalObj( C , EvalCompose( B )[2] ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: E * C + F * C", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "E * C + F * C", "\033[0m" );
         
         return ( EvalCompose( A )[1] + EvalCompose( B )[1] ) * C;
         
@@ -1282,7 +1282,7 @@ InstallMethod( \+,
     
     if EvalMulMat( A )[1] = MinusOne( R ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: -A + B", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-A + B", "\033[0m" );
         
         return B - EvalMulMat( A )[2];
         
@@ -1304,7 +1304,7 @@ InstallMethod( \+,
     
     if EvalMulMat( B )[1] = MinusOne( R ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: A + (-B)", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "A + (-B)", "\033[0m" );
         
         return A - EvalMulMat( B )[2];
         
@@ -1360,7 +1360,7 @@ InstallMethod( AdditiveInverseMutable,
     
     if EvalMulMat( A )[1] = MinusOne( R ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: -(-IsHomalgMatrix)", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-(-IsHomalgMatrix)", "\033[0m" );
         
         return EvalMulMat( A )[2];
     fi;
@@ -1411,7 +1411,7 @@ InstallMethod( \-,
     
     if IsIdenticalObj( C , EvalCompose( B )[1] ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: C * E - C * F", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "C * E - C * F", "\033[0m" );
         
         return C * ( EvalCompose( A )[2] - EvalCompose( B )[2] );
         
@@ -1421,7 +1421,7 @@ InstallMethod( \-,
     
     if IsIdenticalObj( C , EvalCompose( B )[2] ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: E * C - F * C", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "E * C - F * C", "\033[0m" );
         
         return ( EvalCompose( A )[1] - EvalCompose( B )[1] ) * C;
         
@@ -1469,7 +1469,7 @@ InstallMethod( \*,
   function( A, B )
     local A1, A2;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfRows * IsHomalgMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfRows * IsHomalgMatrix", "\033[0m" );
     
     A1 := EvalUnionOfRows( A )[1];
     A2 := EvalUnionOfRows( A )[2];
@@ -1486,7 +1486,7 @@ InstallMethod( \*,
   function( A, B )
     local B1, B2;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * UnionOfColumns", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfColumns", "\033[0m" );
     
     B1 := EvalUnionOfColumns( B )[1];
     B2 := EvalUnionOfColumns( B )[2];
@@ -1503,7 +1503,7 @@ InstallMethod( \*,
   function( A, B )
     local A1, A2, B1, B2;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: UnionOfColumns * IsHomalgMatrix", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfColumns * IsHomalgMatrix", "\033[0m" );
     
     A1 := EvalUnionOfColumns( A )[1];
     A2 := EvalUnionOfColumns( A )[2];
@@ -1523,7 +1523,7 @@ InstallMethod( \*,
   function( A, B )
     local B1, B2, A1, A2;
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * UnionOfRows", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfRows", "\033[0m" );
     
     B1 := EvalUnionOfRows( B )[1];
     B2 := EvalUnionOfRows( B )[2];
@@ -1544,7 +1544,7 @@ InstallMethod( \*,
     
     if NrRows( A ) <= NrColumns( A ) and HasPositionOfFirstNonZeroEntryPerRow( A ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsSubidentityMatrix * IsHomalgMatrix", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsSubidentityMatrix * IsHomalgMatrix", "\033[0m" );
         
         return CertainRows( B, PositionOfFirstNonZeroEntryPerRow( A ) );
         
@@ -1564,7 +1564,7 @@ InstallMethod( \*,
     
     if NrColumns( B ) <= NrRows( B ) and HasPositionOfFirstNonZeroEntryPerRow( B ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * IsSubidentityMatrix", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * IsSubidentityMatrix", "\033[0m" );
         
         pos := PositionOfFirstNonZeroEntryPerRow( B );
         
@@ -1587,7 +1587,7 @@ InstallMethod( \*,
     
     if IsIdenticalObj( EvalLeftInverse( A ), B ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: (its LeftInverse) * IsHomalgMatrix", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "(its LeftInverse) * IsHomalgMatrix", "\033[0m" );
         
         return HomalgIdentityMatrix( NrColumns( B ), HomalgRing( A ) );
         
@@ -1606,7 +1606,7 @@ InstallMethod( \*,
     
     if IsIdenticalObj( A, EvalRightInverse( B ) ) then
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * (its RightInverse)", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * (its RightInverse)", "\033[0m" );
         
         return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
         
@@ -1633,7 +1633,7 @@ InstallMethod( \*,
         
         if IsIdenticalObj( C[1], D[1] ) and C[2] = D[2] then
             
-            Info( InfoCOLEM, 2, COLEM.color, "COLEM: (its LeftInverse) * CertainColumns( IsHomalgMatrix )", "\033[0m" );
+            Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "(its LeftInverse) * CertainColumns( IsHomalgMatrix )", "\033[0m" );
             
             return HomalgIdentityMatrix( NrColumns( B ), HomalgRing( A ) );
             
@@ -1663,7 +1663,7 @@ InstallMethod( \*,
         
         if IsIdenticalObj( C[1], D[1] ) and C[2] = D[2] then
         
-            Info( InfoCOLEM, 2, COLEM.color, "COLEM: CertainRows( IsHomalgMatrix ) * (its RightInverse)", "\033[0m" );
+            Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( IsHomalgMatrix ) * (its RightInverse)", "\033[0m" );
             
             return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
             
@@ -1687,7 +1687,7 @@ InstallMethod( \*,
     
     if HasEvalLeftInverse( LI ) then	## give it a chance
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: ( IsHomalgMatrix * LeftInverse ) * IsHomalgMatrix", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "( IsHomalgMatrix * LeftInverse ) * IsHomalgMatrix", "\033[0m" );
         
         return EvalCompose( A )[1] * ( LI * B ); 
         
@@ -1709,7 +1709,7 @@ InstallMethod( \*,
     
     if HasEvalRightInverse( RI ) then	## give it a chance
         
-        Info( InfoCOLEM, 2, COLEM.color, "COLEM: IsHomalgMatrix * ( RightInverse * IsHomalgMatrix )", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * ( RightInverse * IsHomalgMatrix )", "\033[0m" );
         
         return ( A * RI ) * EvalCompose( B )[2]; 
         
@@ -1743,7 +1743,7 @@ InstallMethod( LeftInverse,
         
   function( M )
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: LeftInverse( RightInverse )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "LeftInverse( RightInverse )", "\033[0m" );
     
     return EvalRightInverse( M );
     
@@ -1756,7 +1756,7 @@ InstallMethod( LeftInverse,
         
   function( M )
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: LeftInverse( Inverse )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "LeftInverse( Inverse )", "\033[0m" );
     
     return EvalInverse( M );
     
@@ -1786,7 +1786,7 @@ InstallMethod( RightInverse,
         
   function( M )
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: RightInverse( LeftInverse )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "RightInverse( LeftInverse )", "\033[0m" );
     
     return EvalLeftInverse( M );
     
@@ -1799,7 +1799,7 @@ InstallMethod( RightInverse,
         
   function( M )
     
-    Info( InfoCOLEM, 2, COLEM.color, "COLEM: RightInverse( Inverse )", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "RightInverse( Inverse )", "\033[0m" );
     
     return EvalInverse( M );
     

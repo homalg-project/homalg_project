@@ -35,13 +35,13 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     N := DecideZero( M1, B );
     
     if IsHomalgGeneratorsOfLeftModule( M1 ) then
-        N := HomalgRelationsForLeftModule( N );
+        N := HomalgGeneratorsForLeftModule( N );
     else
-        N := HomalgRelationsForRightModule( N );
+        N := HomalgGeneratorsForRightModule( N );
     fi;
     
     # get a better basis for N
-    N := GetRidOfObsoleteRelations( N );
+    N := GetRidOfObsoleteGenerators( N );
     
     # compute the syzygies module of N modulo B
     S := SyzygiesGenerators( N, B );

@@ -98,21 +98,19 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        ## compute N and U: (0+2+4)
                        N := NormalFormIntMat( Eval( M ), 6 );
-                   else
-                       ## compute N only: (0+2)
-                       N := NormalFormIntMat( Eval( M ), 2 );
-                   fi;
-                   
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                       
+                       # assign U:
                        SetEval( arg[2], N.rowtrans );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
+                   else
+                       ## compute N only: (0+2)
+                       N := NormalFormIntMat( Eval( M ), 2 );
                    fi;
                    
                    H := HomalgMatrix( N.normal, R );

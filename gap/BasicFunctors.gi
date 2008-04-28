@@ -57,7 +57,7 @@ end );
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,
   function( M, N )
-    local R, l0, l1, _l0, matM, matN, HP0N, HP1N, alpha, idN, hom;
+    local R, l0, l1, _l0, matM, matN, HP0N, HP1N, alpha, idN, hom, gen;
     
     R := HomalgRing( M );
     
@@ -91,6 +91,10 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     alpha := HomalgMorphism( alpha, HP0N, HP1N );
     
     hom := Kernel( alpha );
+    
+    gen := GeneratorsOfModule( hom );
+    
+    ##
     
     return hom;
     

@@ -215,6 +215,8 @@ DeclareGlobalFunction( "HomalgInitialIdentityMatrix" );
 
 DeclareGlobalFunction( "HomalgVoidMatrix" );
 
+DeclareGlobalFunction( "HomalgDiagonalMatrix" );
+
 DeclareGlobalFunction( "ConvertHomalgMatrix" );
 
 DeclareGlobalFunction( "ListToListList" );

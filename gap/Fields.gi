@@ -15,7 +15,7 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for the integers",
+        "for fields",
         [ IsField ],
         
   function( arg )
@@ -34,21 +34,19 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        ## compute N and U:
                        N := SemiEchelonMatTransformation( Eval( M ) );
-                   else
-                       ## compute N only:
-                       N := SemiEchelonMat( Eval( M ) );
-                   fi;
-                   
-                   # assign U:
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                       
+                       # assign U:
                        SetEval( arg[2], Concatenation( N.coeffs, N.relations ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
+                   else
+                       ## compute N only:
+                       N := SemiEchelonMat( Eval( M ) );
                    fi;
                    
                    if N.vectors = [ ] then

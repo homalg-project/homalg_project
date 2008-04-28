@@ -107,20 +107,18 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 then
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        ## compute N and U:
                        N := HermiteIntMatLLLTrans( Eval( M ) );
-                   else
-                       ## compute N only:
-                       N := HermiteIntMatLLL( Eval( M ) );
-                   fi;
-                   
-                   # return U:
-                   if nargs > 1 then
+                       
+                       # return U:
                        SetEval( arg[2], N[2] );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
+                   else
+                       ## compute N only:
+                       N := HermiteIntMatLLL( Eval( M ) );
                    fi;
                    
                    if nargs > 1 then

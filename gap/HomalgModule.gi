@@ -1765,7 +1765,7 @@ InstallMethod( Display,
     rel := MatrixOfRelations( M );
     
     if not ( HasElementaryDivisors( M ) and HasRankOfModule( M ) ) ## this should have no side effect on M
-       and not ( HasIsDiagonalMatrix( rel ) and IsDiagonalMatrix( rel ) ) then
+       and not IsDiagonalMatrix( rel ) then
         TryNextMethod( );
     fi;
     
