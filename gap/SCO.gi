@@ -160,7 +160,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
             od;
         fi;
     od;
-    return List( matrices, m->HomalgMatrix( m, R ) );
+    return List( matrices, m->HomalgMatrix( m * One( R ), R ) );
 end );
 
 ##
