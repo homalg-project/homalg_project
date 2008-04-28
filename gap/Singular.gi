@@ -241,7 +241,7 @@ InstallMethod( CreateHomalgMatrix,
     
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R );
     
-    return HomalgMatrix( ext_obj, R );
+    return HomalgMatrix( ext_obj, r, c, R );
     
 end );
 

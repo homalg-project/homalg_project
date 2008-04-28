@@ -130,7 +130,7 @@ InstallValue( CommonHomalgTableForGAPDefault,
                    
                  end,
                  
-               DecideZeroRows :=
+               DecideZeroColumns :=
                  function( A, B )
                    local R, N;
                    
@@ -138,13 +138,13 @@ InstallValue( CommonHomalgTableForGAPDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroRows(", A, B, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := DecideZeroColumns(", A, B, ")" ], "need_command" );
                    
                    return N;
                    
                  end,
                  
-               DecideZeroRowsEffectively :=
+               DecideZeroColumnsEffectively :=
                  function( A, B, U )
                    local R, N;
                    
@@ -152,7 +152,7 @@ InstallValue( CommonHomalgTableForGAPDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroRowsEffectively(", A, B, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := DecideZeroColumnsEffectively(", A, B, ")" ], "need_command" );
                    
                    return N;
                    
