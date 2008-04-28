@@ -354,5 +354,5 @@ InstallMethod( Display,
     
     Print( homalgSendBlocking( [ o ], "need_display" ) );
     
-end);
+end );
 
