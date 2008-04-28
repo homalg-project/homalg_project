@@ -27,7 +27,7 @@ InstallValue( HOMALG_IO_GAP,
             eoc_verbose := ";",
             eoc_quiet := ";;",
             define := ":=",
-            prompt := "gap> ",
+            prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",           
            )
@@ -99,8 +99,8 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
@@ -340,23 +340,14 @@ end );
 ####################################
 
 InstallMethod( Display,
-        "for homalg matrices",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local stream, display_color;
-    
-    stream := homalgStream( o );
     
     if IsHomalgExternalRingInGAPRep( HomalgRing( o ) ) then
         
-        if IsBound( stream.color_display ) then
-            display_color := stream.color_display;
-        else
-            display_color := "";
-        fi;
-        
-        Print( display_color, homalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
+        Print( homalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
         
     else
         
@@ -364,4 +355,4 @@ InstallMethod( Display,
         
     fi;
     
-end);
+end );

@@ -58,12 +58,13 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U, such that N=UM
-                       homalgSendBlocking( [ "list l=gauss_row(", M, ",1);",
-                                             U, "=transpose(l[2]);", N, "=transpose(l[1])"
+                       homalgSendBlocking( [ "list l=rowred(", M, ",1);",
+                                             "matrix ", U, "=transpose(l[2]);",
+                                             "matrix ", N, "=transpose(l[1])"
                                            ], "need_command" );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ "matrix ", N, " = gauss_row(", M, ")" ], "need_command" );
+                       homalgSendBlocking( [ "matrix ", N, " = rowred(", M, ")" ], "need_command" );
                    fi;
                    
 #SetRowRankOfMatrix( N, rank_of_N );

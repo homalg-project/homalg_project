@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_MAGMA,
             eoc_quiet := ";",
             remove_enter := true,       ## a MAGMA specific
             define := ":=",
-            prompt := "magma> ",
+            prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
            )
@@ -100,8 +100,8 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
@@ -222,6 +222,7 @@ InstallMethod( PolynomialRing,
     
     SetCoefficientsRing( S, r );
     SetCharacteristic( S, c );
+    SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;
