@@ -14,6 +14,8 @@
 #
 ####################################
 
+DeclareGlobalFunction( "ColoredInfoForService" );
+
 # basic operations:
 
 DeclareOperation( "TriangularBasisOfRows",

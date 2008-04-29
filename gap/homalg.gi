@@ -23,8 +23,8 @@ InstallValue( HOMALG,
             color_FOB := "\033[01m\033[4;37;45m",		## (B)asis: BasisOfRow/ColumnModule, BasisOfRows/ColumnsCoeff
             color_FOP := "\033[01m\033[4;37;42m",		## (P)articular solution: DecideZeroRows/Columns(Effectively)
             color_FOH := "\033[01m\033[4;37;41m",		## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
-            color_start := "\033[01m\033[4;31;40m",
-            color_end := "\033[01m\033[4;32;40m",
+            color_busy := "\033[01m\033[4;31;40m",
+            color_done := "\033[01m\033[4;32;40m",
            )
 );
 

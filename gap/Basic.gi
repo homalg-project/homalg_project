@@ -487,7 +487,7 @@ end );
 ##
 InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
   function( arg )
-    local M, R, RP, nargs, B, U, V;
+    local M, R, RP, nargs, m, n, B, U, V;
     
     if not IsHomalgMatrix( arg[1] ) then
         Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
@@ -507,6 +507,9 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
         
         nargs := Length( arg );
         
+        m := NrRows( M );
+        n := NrColumns( M );
+        
         if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
             B := TriangularBasisOfRows( M, arg[2] );
         else
@@ -519,7 +522,15 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
             B := TriangularBasisOfColumns( B );
         fi;
         
-        return B;
+        if m - NrRows( B ) = 0 and n - NrColumns( B ) = 0 then
+            return B;
+        elif m - NrRows( B ) = 0 and n - NrColumns( B ) > 0 then
+            return UnionOfColumns( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
+        elif m - NrRows( B ) > 0 and n - NrColumns( B ) = 0 then
+            return UnionOfRows( B, HomalgZeroMatrix( m - NrRows( B ), n, R ) );
+	else
+            return DiagMat( [ B, HomalgZeroMatrix( m - NrRows( B ), n - NrColumns( B ), R ) ] );
+        fi;
         
     fi;
     

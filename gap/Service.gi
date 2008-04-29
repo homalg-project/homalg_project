@@ -10,6 +10,66 @@
 
 ####################################
 #
+# functions:
+#
+####################################
+
+InstallGlobalFunction( ColoredInfoForService,
+  function( arg )
+    local nargs, l, s;
+    
+    nargs := Length( arg );
+    
+    l := arg[2];
+    
+    if l{[1]} = "T" then
+        l := 4;
+    elif l{[1]} = "B" then
+        l := 3;
+    elif l{[1]} = "D" then
+        l := 2;
+    elif l{[1]} = "S" then
+        l := 2;
+    fi;
+    
+    if arg[1] = "busy" then
+        
+        s := Concatenation( HOMALG.color_busy, "BUSY>\033[0m ", arg[3] );
+        
+        s := Concatenation( s, arg[2], "\033[0m \033[7m" );
+        
+        Append( s, Concatenation( List( arg{[3..nargs]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
+        
+        s := Concatenation( s, "\033[0m " );
+        
+        if l < 4 then
+            Info( InfoHomalgBasicOperations, l , "" );
+        fi;
+        
+        Info( InfoHomalgBasicOperations, l, s );
+    
+    else
+        
+        s := Concatenation( HOMALG.color_done, "<DONE\033[0m ", arg[3] );
+        
+        s := Concatenation( s, arg[2], "\033[0m \033[7m" );
+        
+        Append( s, Concatenation( List( arg{[3..nargs]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
+        
+        s := Concatenation( s, "\033[0m ", "	in ", homalgTotalRuntimes( arg[1] ) );
+        
+        Info( InfoHomalgBasicOperations, l, s );
+    
+        if l < 4 then
+            Info( InfoHomalgBasicOperations, l , "" );
+        fi;
+        
+    fi;
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -30,21 +90,21 @@ InstallMethod( TriangularBasisOfRows,
     
     if IsBound(RP!.TriangularBasisOfRows) then
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows\033[0m ", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        ColoredInfoForService( "busy", "TriangularBasisOfRows", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := RP!.TriangularBasisOfRows( M );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows", HOMALG.color_FOT, RowRankOfMatrix( B ) );
         
         return B;
         
     elif IsBound(RP!.TriangularBasisOfColumns) then
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows\033[0m ", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        ColoredInfoForService( "busy", "TriangularBasisOfRows", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := Involution( RP!.TriangularBasisOfColumns( Involution( M ) ) );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows", HOMALG.color_FOT, RowRankOfMatrix( B ) );
         
         return B;
         
@@ -70,17 +130,17 @@ InstallMethod( TriangularBasisOfRows,
     
     if IsBound(RP!.TriangularBasisOfRows) then
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows (M,T)\033[0m ", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        ColoredInfoForService( "busy", "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := RP!.TriangularBasisOfRows( M, T );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows (M,T)", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, RowRankOfMatrix( B ) );
         
         return B;
         
     elif IsBound(RP!.TriangularBasisOfColumns) then
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows (M,T)\033[0m ", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        ColoredInfoForService( "busy", "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         TI := HomalgVoidMatrix( R );
         
@@ -88,7 +148,7 @@ InstallMethod( TriangularBasisOfRows,
         
         SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOT, "TriangularBasisOfRows (M,T)", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, RowRankOfMatrix( B ) );
         
         return B;
         
@@ -114,11 +174,11 @@ InstallMethod( TriangularBasisOfColumns,
         
         t := homalgTotalRuntimes( );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOT, "TriangularBasisOfColumns\033[0m ", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        ColoredInfoForService( "busy", "TriangularBasisOfColumns", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := RP!.TriangularBasisOfColumns( M );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOT, "TriangularBasisOfColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        ColoredInfoForService( t, "TriangularBasisOfColumns", HOMALG.color_FOT, ColumnRankOfMatrix( B ) );
         
         return B;
         
@@ -144,11 +204,11 @@ InstallMethod( TriangularBasisOfColumns,
         
         t := homalgTotalRuntimes( );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOT, "TriangularBasisOfColumns (M,T)\033[0m ", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+        ColoredInfoForService( "busy", "TriangularBasisOfColumns (M,T)", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := RP!.TriangularBasisOfColumns( M, T );
         
-        Info( InfoHomalgBasicOperations, 4, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOT, "TriangularBasisOfColumns (M,T)", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
+        ColoredInfoForService( t, "TriangularBasisOfColumns (M,T)", HOMALG.color_FOT, ColumnRankOfMatrix( B ) );
         
         return B;
         
@@ -178,15 +238,13 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     t := homalgTotalRuntimes( );
     
-    Info( InfoHomalgBasicOperations, 3, "" );
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOB, "BasisOfRowModule\033[0m ", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    ColoredInfoForService( "busy", "BasisOfRowModule", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfRowModule) then
         
         B := RP!.BasisOfRowModule( M );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfRowModule\033[0m ", HOMALG.color_FOB, NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfRowModule\033[0m ", HOMALG.color_FOB, NrRows( B ) );
         
         return B;
         
@@ -194,8 +252,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         B := Involution( RP!.BasisOfColumnModule( Involution( M ) ) );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfRowModule\033[0m ", HOMALG.color_FOB, NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfRowModule", HOMALG.color_FOB, NrRows( B ) );
         
         return B;
         
@@ -207,6 +264,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     rank := RowRankOfMatrix( B );
     
+    SetRowRankOfMatrix( M, rank );
+    
     if rank = 0 then
         B := HomalgZeroMatrix( 0, NrColumns( B ), R );
     else
@@ -215,8 +274,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         SetIsFullRowRankMatrix( B, true );
     fi;
     
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfRowModule\033[0m ", HOMALG.color_FOB, NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 3, "" );
+    ColoredInfoForService( t, "BasisOfRowModule", HOMALG.color_FOB, NrRows( B ) );
     
     return B;
     
@@ -236,15 +294,13 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     t := homalgTotalRuntimes( );
     
-    Info( InfoHomalgBasicOperations, 3, "" );
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOB, "BasisOfColumnModule\033[0m ", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    ColoredInfoForService( "busy", "BasisOfColumnModule", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfColumnModule) then
         
         B := RP!.BasisOfColumnModule( M );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfColumnModule\033[0m ", HOMALG.color_FOB, NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfColumnModule", HOMALG.color_FOB, NrColumns( B ) );
         
         return B;
         
@@ -252,8 +308,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         B := Involution( RP!.BasisOfRowModule( Involution( M ) ) );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfColumnModule\033[0m ", HOMALG.color_FOB, NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfColumnModule", HOMALG.color_FOB, NrColumns( B ) );
         
         return B;
         
@@ -265,6 +320,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     rank := ColumnRankOfMatrix( B );
     
+    SetColumnRankOfMatrix( M, rank );
+    
     if rank = 0 then
         B := HomalgZeroMatrix( NrRows( B ), 0, R );
     else
@@ -273,8 +330,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         SetIsFullColumnRankMatrix( B, true );
     fi;
     
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfColumnModule\033[0m ", HOMALG.color_FOB, NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 3, "" );
+    ColoredInfoForService( t, "BasisOfColumnModule", HOMALG.color_FOB, NrColumns( B ) );
     
     return B;
     
@@ -294,15 +350,13 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     t := homalgTotalRuntimes( );
         
-    Info( InfoHomalgBasicOperations, 3, "" );
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOB, "BasisOfRowsCoeff\033[0m ", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    ColoredInfoForService( "busy", "BasisOfRowsCoeff", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
         
         B := RP!.BasisOfRowsCoeff( M, T );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfRowsCoeff\033[0m ", HOMALG.color_FOB, NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfRowsCoeff", HOMALG.color_FOB, NrRows( B ) );
         
         return B;
         
@@ -314,8 +368,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfRowsCoeff\033[0m ", HOMALG.color_FOB, NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfRowsCoeff", HOMALG.color_FOB, NrRows( B ) );
         
         return B;
         
@@ -329,6 +382,8 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     rank := RowRankOfMatrix( B );
     
+    SetRowRankOfMatrix( M, rank );
+    
     if rank = 0 then
         B := HomalgZeroMatrix( 0, NrColumns( B ), R);
     else
@@ -341,8 +396,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     SetPreEval( T, CertainRows( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfRowsCoeff\033[0m ", HOMALG.color_FOB, NrRows( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 3, "" );
+    ColoredInfoForService( t, "BasisOfRowsCoeff", HOMALG.color_FOB, NrRows( B ) );
     
     return B;
     
@@ -362,15 +416,13 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     t := homalgTotalRuntimes( );
         
-    Info( InfoHomalgBasicOperations, 3, "" );
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOB, "BasisOfColumnsCoeff\033[0m ", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", HOMALG.color_FOB, NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
         
         B := RP!.BasisOfColumnsCoeff( M, T );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfColumnsCoeff\033[0m ", HOMALG.color_FOB, NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfColumnsCoeff", HOMALG.color_FOB, NrColumns( B ) );
         
         return B;
         
@@ -382,8 +434,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
-        Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfColumnsCoeff\033[0m ", HOMALG.color_FOB, NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 3, "" );
+        ColoredInfoForService( t, "BasisOfColumnsCoeff", HOMALG.color_FOB, NrColumns( B ) );
         
         return B;
         
@@ -397,6 +448,8 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     rank := ColumnRankOfMatrix( B );
     
+    SetColumnRankOfMatrix( M, rank );
+    
     if rank = 0 then
         B := HomalgZeroMatrix( NrRows( B ), 0, R);
     else
@@ -409,8 +462,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     SetPreEval( T, CertainColumns( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    Info( InfoHomalgBasicOperations, 3, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOB, "BasisOfColumnsCoeff\033[0m ", HOMALG.color_FOB, NrColumns( B ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 3, "" );
+    ColoredInfoForService( t, "BasisOfColumnsCoeff", HOMALG.color_FOB, NrColumns( B ) );
     
     return B;
     
@@ -430,15 +482,13 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     t := homalgTotalRuntimes( );
         
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOP, "DecideZeroRows\033[0m ", HOMALG.color_FOP, "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ), "\033[0m" );
+    ColoredInfoForService( "busy", "DecideZeroRows", HOMALG.color_FOP, "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
     
     if IsBound(RP!.DecideZeroRows) then
         
         C := RP!.DecideZeroRows( A, B );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
         
         return C;
         
@@ -446,8 +496,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         C := Involution( RP!.DecideZeroColumns( Involution( A ), Involution( B ) ) );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
         
         return C;
         
@@ -474,8 +523,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroRows", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
     
     return C;
     
@@ -495,15 +543,13 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     t := homalgTotalRuntimes( );
         
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOP, "DecideZeroColumns\033[0m ", HOMALG.color_FOP, NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )", "\033[0m" );
+    ColoredInfoForService( "busy", "DecideZeroColumns", HOMALG.color_FOP, NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )" );
     
     if IsBound(RP!.DecideZeroColumns) then
         
         C := RP!.DecideZeroColumns( A, B );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
         
         return C;
         
@@ -511,8 +557,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         C := Involution( RP!.DecideZeroRows( Involution( A ), Involution( B ) ) );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
         
         return C;
         
@@ -539,8 +584,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroColumns", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
     
     return C;
     
@@ -560,15 +604,13 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     t := homalgTotalRuntimes( );
     
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOP, "DecideZeroRowsEffectively\033[0m ",  HOMALG.color_FOP, "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ), "\033[0m" );
+    ColoredInfoForService( "busy", "DecideZeroRowsEffectively",  HOMALG.color_FOP, "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
     
     if IsBound(RP!.DecideZeroRowsEffectively) then
         
         M := RP!.DecideZeroRowsEffectively( A, B, T );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroRowsEffectively", HOMALG.color_FOP );
         
         return M;
         
@@ -580,8 +622,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroRowsEffectively", HOMALG.color_FOP );
         
         return M;
         
@@ -614,8 +655,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroRowsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "DecideZeroRowsEffectively", HOMALG.color_FOP );
     
     return M;
     
@@ -635,15 +675,13 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     t := homalgTotalRuntimes( );
     
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOP, "DecideZeroColumnsEffectively\033[0m ", HOMALG.color_FOP, NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )", "\033[0m" );
+    ColoredInfoForService( "busy", "DecideZeroColumnsEffectively", HOMALG.color_FOP, NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )" );
     
     if IsBound(RP!.DecideZeroColumnsEffectively) then
         
         M := RP!.DecideZeroColumnsEffectively( A, B, T );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroColumnsEffectively", HOMALG.color_FOP );
         
         return M;
         
@@ -655,8 +693,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "DecideZeroColumnsEffectively", HOMALG.color_FOP );
         
         return M;
         
@@ -689,8 +726,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOP, "DecideZeroColumnsEffectively", "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "DecideZeroColumnsEffectively", HOMALG.color_FOP );
     
     return M;
     
@@ -710,8 +746,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     t := homalgTotalRuntimes( );
         
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
         
@@ -725,8 +760,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
         
         return C;
         
@@ -742,8 +776,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
         
         return C;
         
@@ -767,8 +800,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
     fi;
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
     
     return C;
     
@@ -788,8 +820,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     t := homalgTotalRuntimes( );
         
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ), "\033[0m" );
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
         
@@ -803,8 +834,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
         
         return C;
         
@@ -820,8 +850,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
         
         return C;
         
@@ -845,8 +874,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
     fi;
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
     
     return C;
     
@@ -866,8 +894,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     t := homalgTotalRuntimes( );
     
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m", HOMALG.color_FOH, "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ), "\033[0m" );
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
         
@@ -879,8 +906,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
         
         return C;
         
@@ -894,8 +920,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
         
         return C;
         
@@ -911,7 +936,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     rank := RowRankOfMatrix( M );
     
-    C := CertainColumns( CertainRows( C, [ rank + 1 .. NrRows( M ) ] ), [ 1 .. NrRows( M1 ) ] );
+    C := CertainColumns( CertainRows( C, [ rank + 1 .. NrColumns( C ) ] ), [ 1 .. NrRows( M1 ) ] );
     
     if IsZeroMatrix( C ) then
         
@@ -919,8 +944,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         
     fi;
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfRows\033[0m ", HOMALG.color_FOH, NrRows( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
     
     return C;
     
@@ -940,8 +964,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     t := homalgTotalRuntimes( );
     
-    Info( InfoHomalgBasicOperations, 2, "" );
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_start, "BUSY>\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )", "\033[0m" );
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )" );
     
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
         
@@ -953,8 +976,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
         
         return C;
         
@@ -968,8 +990,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
             
         fi;
         
-        Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-        Info( InfoHomalgBasicOperations, 2, "" );
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
         
         return C;
         
@@ -985,7 +1006,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     rank := ColumnRankOfMatrix( M );
     
-    C := CertainRows( CertainColumns( C, [ rank + 1 .. NrColumns( M ) ] ), [ 1 .. NrColumns( M1 ) ] );
+    C := CertainRows( CertainColumns( C, [ rank + 1 .. NrRows( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
     
     if IsZeroMatrix( C ) then
         
@@ -993,8 +1014,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         
     fi;
     
-    Info( InfoHomalgBasicOperations, 2, HOMALG.color_end, "<DONE\033[0m ", HOMALG.color_FOH, "SyzygiesGeneratorsOfColumns\033[0m ", HOMALG.color_FOH, NrColumns( C ), "\033[0m", "	in ", homalgTotalRuntimes( t ) );
-    Info( InfoHomalgBasicOperations, 2, "" );
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
     
     return C;
     

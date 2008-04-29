@@ -689,6 +689,88 @@ InstallImmediateMethod( RowRankOfMatrix,
 end );
 
 ##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and EvalUnionOfColumns, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfColumns( M );
+    
+    if HasRowRankOfMatrix( e[1] ) and HasRowRankOfMatrix( e[2] ) then
+        if RowRankOfMatrix( e[1] ) = 0 then
+            return RowRankOfMatrix( e[2] );
+        elif RowRankOfMatrix( e[2] ) = 0 then
+            return RowRankOfMatrix( e[1] );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and EvalUnionOfRows, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfRows( M );
+    
+    if HasRowRankOfMatrix( e[1] ) and HasRowRankOfMatrix( e[2] ) then
+        if RowRankOfMatrix( e[1] ) = 0 then
+            return RowRankOfMatrix( e[2] );
+        elif RowRankOfMatrix( e[2] ) = 0 then
+            return RowRankOfMatrix( e[1] );
+        fi;
+    fi;
+    
+    if HasRowRankOfMatrix( e[1] ) and RowRankOfMatrix( e[1] ) = NrColumns( e[1] ) then
+        return NrColumns( e[1] );
+    elif HasRowRankOfMatrix( e[2] ) and RowRankOfMatrix( e[2] ) = NrColumns( e[2] ) then
+        return NrColumns( e[2] );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and EvalDiagMat, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalDiagMat( M );
+    
+    if ForAll( e, HasRowRankOfMatrix ) then
+        return Sum( List( e, RowRankOfMatrix ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasColumnRankOfMatrix, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then ## FIXME: make me more general!
+        return ColumnRankOfMatrix( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( ColumnRankOfMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
@@ -724,6 +806,88 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     
     if IsFullColumnRankMatrix( M ) then
         return NrColumns( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and EvalUnionOfRows, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfRows( M );
+    
+    if HasColumnRankOfMatrix( e[1] ) and HasColumnRankOfMatrix( e[2] ) then
+        if ColumnRankOfMatrix( e[1] ) = 0 then
+            return ColumnRankOfMatrix( e[2] );
+        elif ColumnRankOfMatrix( e[2] ) = 0 then
+            return ColumnRankOfMatrix( e[1] );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and EvalUnionOfColumns, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfColumns( M );
+    
+    if HasColumnRankOfMatrix( e[1] ) and HasColumnRankOfMatrix( e[2] ) then
+        if ColumnRankOfMatrix( e[1] ) = 0 then
+            return ColumnRankOfMatrix( e[2] );
+        elif ColumnRankOfMatrix( e[2] ) = 0 then
+            return ColumnRankOfMatrix( e[1] );
+        fi;
+    fi;
+    
+    if HasColumnRankOfMatrix( e[1] ) and ColumnRankOfMatrix( e[1] ) = NrRows( e[1] ) then
+        return NrRows( e[1] );
+    elif HasColumnRankOfMatrix( e[2] ) and ColumnRankOfMatrix( e[2] ) = NrRows( e[2] ) then
+        return NrRows( e[2] );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and EvalDiagMat, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalDiagMat( M );
+    
+    if ForAll( e, HasColumnRankOfMatrix ) then
+        return Sum( List( e, ColumnRankOfMatrix ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasRowRankOfMatrix, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then ## FIXME: make me more general!
+        return RowRankOfMatrix( M );
     fi;
     
     TryNextMethod( );
