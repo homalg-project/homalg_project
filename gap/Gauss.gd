@@ -9,14 +9,14 @@
 #############################################################################
 
 ##
-DeclareOperation( "EchelonMatTransformationDestructive", #RREF over a field, returns [ RREF, Transformation_Matrix ]
+DeclareOperation( "EchelonMatTransformationDestructive", #RREF over a field, returns the same record as SemiEchelonMatTransformation but w/ ordered vectors
         [ IsMatrix ] );
 
 DeclareOperation( "EchelonMatTransformation",
         [ IsMatrix ] );
 
 ##
-DeclareOperation( "EchelonMatDestructive", #RREF over a field, returns only RREF (Zero Rows are omitted). Could be changed to return Rank as well
+DeclareOperation( "EchelonMatDestructive", #RREF over a field, returns the same record as SemiEchelonMat but with ordered vectors
         [ IsMatrix ] );
 
 DeclareOperation( "EchelonMat",

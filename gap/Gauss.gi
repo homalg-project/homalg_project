@@ -75,7 +75,7 @@ InstallMethod( EchelonMatTransformationDestructive,
         if j <= ncols then
             
             # We found a new basis vector.
-            x:= Inverse( row[j] );
+            x := Inverse( row[j] );
             if x = fail then
                 TryNextMethod();
             fi;
@@ -109,13 +109,19 @@ InstallMethod( EchelonMatTransformationDestructive,
         fi;
     od;
     
-    #exchange rows:
+    #order rows:
     
     vectors := vectors{list};
     
-    coeffs{[1..rank]} := coeffs{list};
+    coeffs := coeffs{list};
     
-    return [ vectors, Concatenation( coeffs, relations ) ];
+    list := Filtered( [1..ncols], j -> heads[j] <> 0 );
+    heads{list} := [1..rank];  #just for compatibilty, vectors are ordered already
+    
+    return rec( heads := heads,
+                vectors := vectors,
+                coeffs := coeffs,
+                relations := relations );
     
 end );
 
@@ -175,15 +181,13 @@ InstallMethod( EchelonMatDestructive,
         
         j:= PositionNot( row, zero );
         if j <= ncols then
-            
             # We found a new basis vector.
-            x:= Inverse( row[j] );
+            x := Inverse( row[j] );
             if x = fail then
                 TryNextMethod();
             fi;
             Add( vectors, row  * x );
             heads[j]:= Length( vectors );
-            
         fi;
         
     od;
@@ -206,13 +210,15 @@ InstallMethod( EchelonMatDestructive,
         fi;
     od;
     
-    #exchange rows:
-    
-    list := Filtered( heads, x->x<>0 );
+    #order rows:
     
     vectors := vectors{list};
     
-    return vectors;
+    list := Filtered( [1..ncols], j -> heads[j] <> 0 );
+    heads{list} := [1..rank]; #just for compatibility, vectors are ordered already
+    
+    return rec( heads := heads,
+                vectors := vectors );
     
 end );
 
