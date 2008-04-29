@@ -70,7 +70,7 @@ InstallValue( CommonHomalgTableForGAPHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroRowsEffectively(", A, B, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := DecideZeroRowsEffectively(", A, B, U, ")" ], "need_command" );
                    
                    return N;
                    
@@ -152,7 +152,7 @@ InstallValue( CommonHomalgTableForGAPHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroColumnsEffectively(", A, B, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := DecideZeroColumnsEffectively(", A, B, U, ")" ], "need_command" );
                    
                    return N;
                    
