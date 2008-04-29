@@ -329,6 +329,17 @@ InstallMethod( RingName,
         
 end );
 
+##
+InstallOtherMethod( AsList,
+        "for external homalg ring elements",
+        [ IsHomalgInternalRingRep ],
+        
+  function( r )
+    
+    return AsList( r!.ring );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

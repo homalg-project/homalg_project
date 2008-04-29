@@ -289,9 +289,22 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local s;
+    local s, m;
     
-    s := String( Concatenation( Eval( M ) ) );
+    s := Eval( M );
+    
+    if HasCharacteristic( R ) then
+        m := Characteristic( R );
+        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): c = Size( R ) !!!
+            if IsPrime( m ) then
+                s := List( s, a -> List( a, IntFFE ) );
+            else
+                s := List( s, a -> List( a, b -> b![1] ) );
+            fi;
+        fi;
+    fi;
+    
+    s := String( Concatenation( s ) );
     
     RemoveCharacters( s, "\\\n " );
     
@@ -316,9 +329,22 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local s;
+    local s, m;
     
-    s := String( Eval ( M ) );
+    s := Eval ( M );
+    
+    if HasCharacteristic( R ) then
+        m := Characteristic( R );
+        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): c = Size( R ) !!!
+            if IsPrime( m ) then
+                s := List( s, a -> List( a, IntFFE ) );
+            else
+                s := List( s, a -> List( a, b -> b![1] ) );
+            fi;
+        fi;
+    fi;
+    
+    s := String( s );
     
     RemoveCharacters( s, "\\\n " );
     
@@ -343,19 +369,30 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local r, c, z, E, l, s;
+    local r, c, z, s, m;
     
     r := NrRows( M );
     c := NrColumns( M );
     z := Zero( R );
     
-    E := Eval( M );
+    s := Eval( M );
     
-    l := List( [ 1 .. r ], a -> Filtered( List( [ 1 .. c ], function( b ) if E[a][b] <> z then return [ a, b, E[a][b] ]; else return 0; fi; end ), x -> x <> 0 ) );
+    if HasCharacteristic( R ) then
+        m := Characteristic( R );
+        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): c = Size( R ) !!!
+            if IsPrime( m ) then
+                s := List( s, a -> List( a, IntFFE ) );
+            else
+                s := List( s, a -> List( a, b -> b![1] ) );
+            fi;
+        fi;
+    fi;
     
-    l := Concatenation( l );
+    s := List( [ 1 .. r ], a -> Filtered( List( [ 1 .. c ], function( b ) if s[a][b] <> z then return [ a, b, s[a][b] ]; else return 0; fi; end ), x -> x <> 0 ) );
     
-    s := String( l );
+    s := Concatenation( s );
+    
+    s := String( s );
     
     RemoveCharacters( s, "\\\n " );
     
@@ -1269,7 +1306,7 @@ InstallMethod( ViewObj,
             fi;
         elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
             Print( " lower triangular" );
-        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) then
+        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) and not ( HasNrRows( o ) and NrRows( o ) = 1 ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
             Print( " triangular" );
         elif not first_attribute then
             first_attribute := fail;
