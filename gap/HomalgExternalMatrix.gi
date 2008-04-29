@@ -208,7 +208,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
             Error( "HOMALG_IO.FileNameCounter is not bound, filename creation for internal object failed.\n" );
         fi;
         
-        if not IsBound( HOMALG_IO.PID ) then
+        if not IsBound( HOMALG_IO.PID ) or not IsInt( HOMALG_IO.PID ) then
             HOMALG_IO.PID := 99999; #this is not the real PID!
         fi;
         
