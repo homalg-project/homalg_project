@@ -19,9 +19,11 @@ InstallMethod( CreateHomalgTable,
         [ IsField ],
         
   function( arg )
-    local RP;
+    local RP_default, RP_specific, RP, component;
     
-    RP := rec( 
+    RP_default := ShallowCopy( CommonHomalgTableForGaussDefault );
+    
+    RP_specific := rec( 
                ## Must be defined if other functions are not defined
                    
                TriangularBasisOfRows :=
@@ -69,7 +71,17 @@ InstallMethod( CreateHomalgTable,
                  end
                  
           );
+                 
+    RP := rec( );
     
+    for component in NamesOfComponents( RP_default ) do
+        RP.(component) := RP_default.(component);
+    od;
+    
+    for component in NamesOfComponents( RP_specific ) do
+        RP.(component) := RP_specific.(component);
+    od;
+                 
     Objectify( TheTypeHomalgTable, RP );
     
     return RP;
