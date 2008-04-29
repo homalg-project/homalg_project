@@ -64,3 +64,6 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanet.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gd" );
+
+## Gauss
+ReadPackage( "RingsForHomalg", "gap/GaussDefault.gd" );
