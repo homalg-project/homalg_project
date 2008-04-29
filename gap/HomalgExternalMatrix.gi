@@ -199,13 +199,24 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     if IsHomalgExternalMatrixRep( M ) then
         pointer := homalgPointer( M );
-        pid := String( homalgExternalCASystemPID( R ) );
+        pid := Concatenation( "_PID_", String( homalgExternalCASystemPID( R ) ) );
     else
-        pointer := "Internal"; #FIXME
-        pid := "GAP";
+        if IsBound( HOMALG_IO.FileNameCounter ) then
+            pointer := Concatenation( "homalg_internal_", String( HOMALG_IO.FileNameCounter ) );
+            HOMALG_IO.FileNameCounter := HOMALG_IO.FileNameCounter + 1;
+        else
+            Error( "HOMALG_IO.FileNameCounter is not bound, filename creation for internal object failed.\n" );
+        fi;
+        
+        if not IsBound( HOMALG_IO.PID ) then
+            HOMALG_IO.PID := 99999; #this is not the real PID!
+        fi;
+        
+        pid := Concatenation( "_PID_", String( HOMALG_IO.PID ) );
+        
     fi;
     
-    file := Concatenation( pointer, "_PID_", pid );
+    file := Concatenation( pointer, pid );
     
     filename := Concatenation( directory, file );
     
@@ -234,7 +245,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     MM := LoadDataOfHomalgMatrixFromFile( filename, r, c, RR ); # matrix in target ring
     
-    if not ( IsBound( HOMALG_IO.DoNotDeleteTmpFiles ) and HOMALG_IO.DoNotDeleteTmpFiles = true ) then
+    if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
         Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
     fi;
     

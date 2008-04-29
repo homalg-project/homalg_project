@@ -24,6 +24,8 @@ InstallValue( HOMALG_IO,
 	    DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles := false,
 	    DoNotDeleteTemporaryFiles := false,
 	    ListOfAlternativeDirectoryForTemporaryFiles := [ "/dev/shm/", "/var/tmp/", "/tmp/" ],
+	    FileNameCounter := 1
+	    # HOMALG_IO.PID is not bound, so that it is initialized with a random 5-digit-integer
            )
 );
 
