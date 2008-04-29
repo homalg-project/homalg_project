@@ -21,9 +21,11 @@ InstallMethod( CreateHomalgTable,
           and IsCommutative and IsPrincipalIdealRing ],
         
   function( arg )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, RP_default, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
+    
+    RP_default := ShallowCopy( CommonHomalgTableForMapleHomalgDefault );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
     
@@ -87,6 +89,10 @@ InstallMethod( CreateHomalgTable,
     
     for component in NamesOfComponents( RP_BestBasis ) do
         RP.(component) := RP_BestBasis.(component);
+    od;
+    
+    for component in NamesOfComponents( RP_default ) do
+        RP.(component) := RP_default.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

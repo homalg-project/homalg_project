@@ -14,5 +14,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForGAPDefault" );
+DeclareGlobalVariable( "CommonHomalgTableForGAPHomalgDefault" );
 

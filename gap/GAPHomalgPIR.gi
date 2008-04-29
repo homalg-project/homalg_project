@@ -24,7 +24,7 @@ InstallMethod( CreateHomalgTable,
     
     RP := ShallowCopy( CommonHomalgTableForGAPHomalgTools );
     
-    RP_default := ShallowCopy( CommonHomalgTableForGAPDefault );
+    RP_default := ShallowCopy( CommonHomalgTableForGAPHomalgDefault );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForGAPHomalgBestBasis );
     
@@ -42,7 +42,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "homalgTable(", R, "!.ElementaryDivisors(", M, ")" ], "need_output" );
+                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
                    
                  end,
                  
@@ -58,7 +58,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );
@@ -74,10 +74,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", N, " := homalgTable(", R, ")!.TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", N, " := TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := homalgTable(", R, ")!.TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );
