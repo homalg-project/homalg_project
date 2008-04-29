@@ -37,16 +37,16 @@ InstallMethod( CreateHomalgTable,
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then
                        ## compute N and U:
                        result := EchelonMatTransformation( Eval( M ) );
-                       N := result[1];
+                       N := result.vectors;
                        ## assign U:
-                       SetEval( arg[2], result[2] );
+                       SetEval( arg[2], Concatenation( result.coeffs, result.relations ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    else
                        ## compute N only:
-                       N := EchelonMat( Eval( M ) );
+                       N := EchelonMat( Eval( M ) ).vectors;
                    fi;
                    
                    if N = [ ] then
