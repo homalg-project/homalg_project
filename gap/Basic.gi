@@ -539,7 +539,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
 end );
 
 ##
-InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatrix (BetterGenerators) (incomplete)
+InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
           nar_U, nar_V, nar_UI, nar_VI, m, n, finished, barg, mm, nn, Id_U, Id_V, zero, one,
@@ -555,27 +555,27 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.BetterEquivalentMatrix) then
-        return RP!.BetterEquivalentMatrix( arg );
+    if IsBound(RP!.SimplerEquivalentMatrix) then
+        return RP!.SimplerEquivalentMatrix( arg );
     fi;
     
     nargs := Length( arg );
     
     if nargs = 1 then
-        ## BetterEquivalentMatrix(M)
+        ## SimplerEquivalentMatrix(M)
         compute_U := false;
         compute_V := false;
         compute_UI := false;
         compute_VI := false;
     elif nargs = 2 and IsHomalgMatrix( arg[2] ) then
-        ## BetterEquivalentMatrix(M,V)
+        ## SimplerEquivalentMatrix(M,V)
         compute_U := false;
         compute_V := true;
         compute_UI := false;
         compute_VI := false;
         nar_V := 2;
     elif nargs = 3 and IsHomalgMatrix( arg[2] ) and IsString( arg[3] ) then
-        ## BetterEquivalentMatrix(M,VI,"")
+        ## SimplerEquivalentMatrix(M,VI,"")
         compute_U := false;
         compute_V := false;
         compute_UI := false;
@@ -583,7 +583,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         nar_VI := 2;
     elif nargs = 6 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[4] ) and IsString( arg[5] ) and IsString( arg[6] ) then
-        ## BetterEquivalentMatrix(M,U,UI,"","","")
+        ## SimplerEquivalentMatrix(M,U,UI,"","","")
         compute_U := true;
         compute_V := false;
         compute_UI := true;
@@ -592,7 +592,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         nar_UI := 3;
     elif nargs = 5 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[4] ) and IsString( arg[5] ) then
-        ## BetterEquivalentMatrix(M,V,VI,"","")
+        ## SimplerEquivalentMatrix(M,V,VI,"","")
         compute_U := false;
         compute_V := true;
         compute_UI := false;
@@ -601,7 +601,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         nar_VI := 3;
     elif nargs = 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsString( arg[5] ) then
-        ## BetterEquivalentMatrix(M,UI,VI,"")
+        ## SimplerEquivalentMatrix(M,UI,VI,"")
         compute_U := false;
         compute_V := false;
         compute_UI := true;
@@ -610,7 +610,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         nar_VI := 3;
     elif nargs = 5 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
       and IsHomalgMatrix( arg[4] ) and IsHomalgMatrix( arg[5] ) then
-        ## BetterEquivalentMatrix(M,U,V,UI,VI)
+        ## SimplerEquivalentMatrix(M,U,V,UI,VI)
         compute_U := true;
         compute_V := true;
         compute_UI := true;
@@ -620,7 +620,7 @@ InstallGlobalFunction( BetterEquivalentMatrix,	### defines: BetterEquivalentMatr
         nar_UI := 4;
         nar_VI := 5;
     elif IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] ) then
-        ## BetterEquivalentMatrix(M,U,V)
+        ## SimplerEquivalentMatrix(M,U,V)
         compute_U := true;
         compute_V := true;
         compute_UI := false;

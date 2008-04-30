@@ -1012,7 +1012,7 @@ InstallMethod( BetterGenerators,
     V := HomalgMatrix( R );
     VI := HomalgMatrix( R );
     
-    rel := BetterEquivalentMatrix( rel_old, V, VI, "", "" );
+    rel := SimplerEquivalentMatrix( rel_old, V, VI, "", "" );
     
     if rel_old = rel then
         return GetRidOfObsoleteGenerators( M );
@@ -1041,7 +1041,7 @@ InstallMethod( BetterGenerators,
     U := HomalgMatrix( R );
     UI := HomalgMatrix( R );
     
-    rel := BetterEquivalentMatrix( rel_old, U, UI, "", "", "" );
+    rel := SimplerEquivalentMatrix( rel_old, U, UI, "", "", "" );
     
     if rel_old = rel then
         return GetRidOfObsoleteGenerators( M );

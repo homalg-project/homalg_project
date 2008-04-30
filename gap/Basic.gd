@@ -53,5 +53,5 @@ DeclareOperation( "LeftDivide",
 
 DeclareGlobalFunction( "BestBasis" );
 
-DeclareGlobalFunction( "BetterEquivalentMatrix" );
+DeclareGlobalFunction( "SimplerEquivalentMatrix" );
 

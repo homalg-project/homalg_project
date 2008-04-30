@@ -921,8 +921,8 @@ InstallGlobalFunction( HomalgMatrix,
             return CallFuncList( ConvertHomalgMatrix, arg );
         elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] )
           and not ( Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 ) then
-            if Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
-                M := List( arg[1], a -> [a] ); ## NormalizeInput
+            if Length( arg[1] ) > 0 and not IsList( arg[1][1] ) and not ( nargs > 1 and IsInt( arg[2]) ) and not ( nargs > 2 and IsInt( arg[3] ) ) then
+                M := List( arg[1], a -> [a] ); ## CAUTION: some CAS only accept a list and not a listlist
             else
                 M := arg[1];
             fi;
@@ -1215,7 +1215,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
         return HomalgZeroMatrix( 0, 0, R );
     fi;
     
-    diag := List( diag, a -> HomalgMatrix( [[ a ]], 1, 1, R ) );
+    diag := List( diag, a -> HomalgMatrix( [ a ], 1, 1, R ) );
     
     M := DiagMat( diag );
     
