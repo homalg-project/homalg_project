@@ -86,11 +86,11 @@ InstallMethod( TriangularBasisOfRows,
     
     RP := homalgTable( R );
     
+    ColoredInfoForService( "busy", "TriangularBasisOfRows", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
+    
     t := homalgTotalRuntimes( );
     
     if IsBound(RP!.TriangularBasisOfRows) then
-        
-        ColoredInfoForService( "busy", "TriangularBasisOfRows", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := RP!.TriangularBasisOfRows( M );
         
@@ -99,8 +99,6 @@ InstallMethod( TriangularBasisOfRows,
         return B;
         
     elif IsBound(RP!.TriangularBasisOfColumns) then
-        
-        ColoredInfoForService( "busy", "TriangularBasisOfRows", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := Involution( RP!.TriangularBasisOfColumns( Involution( M ) ) );
         
@@ -126,11 +124,11 @@ InstallMethod( TriangularBasisOfRows,
     
     RP := homalgTable( R );
     
+    ColoredInfoForService( "busy", "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
+    
     t := homalgTotalRuntimes( );
     
     if IsBound(RP!.TriangularBasisOfRows) then
-        
-        ColoredInfoForService( "busy", "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         B := RP!.TriangularBasisOfRows( M, T );
         
@@ -139,8 +137,6 @@ InstallMethod( TriangularBasisOfRows,
         return B;
         
     elif IsBound(RP!.TriangularBasisOfColumns) then
-        
-        ColoredInfoForService( "busy", "TriangularBasisOfRows (M,T)", HOMALG.color_FOT, NrRows( M ), " x ", NrColumns( M ) );
         
         TI := HomalgVoidMatrix( R );
         
@@ -224,6 +220,8 @@ InstallMethod( TriangularBasisOfColumns,
     
 end );
 
+#### could become lazy
+
 ##
 InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
         "for homalg matrices",
@@ -244,7 +242,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         B := RP!.BasisOfRowModule( M );
         
-        ColoredInfoForService( t, "BasisOfRowModule\033[0m ", HOMALG.color_FOB, NrRows( B ) );
+        ColoredInfoForService( t, "BasisOfRowModule", HOMALG.color_FOB, NrRows( B ) );
         
         return B;
         
@@ -335,6 +333,418 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     return B;
     
 end );
+
+##
+InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
+        "for homalg matrices",
+	[ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    local R, RP, t, l, m, n, id, zz, M, C;
+    
+    R := HomalgRing( B );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+        
+    ColoredInfoForService( "busy", "DecideZeroRows", HOMALG.color_FOP, "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
+    
+    if IsBound(RP!.DecideZeroRows) then
+        
+        C := RP!.DecideZeroRows( A, B );
+        
+        ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
+        
+        return C;
+        
+    elif IsBound(RP!.DecideZeroColumns) then
+        
+        C := Involution( RP!.DecideZeroColumns( Involution( A ), Involution( B ) ) );
+        
+        ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    l := NrRows( A );
+    m := NrColumns( A );
+    
+    n := NrRows( B );
+    
+    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
+        id := A;
+    else
+        id := HomalgIdentityMatrix( l, R );
+    fi;
+    
+    zz := HomalgZeroMatrix( n, l, R );
+    
+    M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
+    
+    M := TriangularBasisOfRows( M );
+    
+    C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
+        "for homalg matrices",
+	[ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    local R, RP, t, l, m, n, id, zz, M, C;
+    
+    R := HomalgRing( B );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    ColoredInfoForService( "busy", "DecideZeroColumns", HOMALG.color_FOP, NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )" );
+    
+    if IsBound(RP!.DecideZeroColumns) then
+        
+        C := RP!.DecideZeroColumns( A, B );
+        
+        ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
+        
+        return C;
+        
+    elif IsBound(RP!.DecideZeroRows) then
+        
+        C := Involution( RP!.DecideZeroRows( Involution( A ), Involution( B ) ) );
+        
+        ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    l := NrColumns( A );
+    m := NrRows( A );
+    
+    n := NrColumns( B );
+    
+    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
+        id := A;
+    else
+        id := HomalgIdentityMatrix( l, R );
+    fi;
+    
+    zz := HomalgZeroMatrix( l, n, R );
+    
+    M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
+    
+    M := TriangularBasisOfColumns( M );
+    
+    C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfRows,
+        "for homalg matrices",
+	[ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, t, C, B, rank;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+        
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ) );
+    
+    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := RP!.SyzygiesGeneratorsOfRows( M );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullRowRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullRowRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    C := HomalgVoidMatrix( R );
+    
+    B := TriangularBasisOfRows( M, C );
+    
+    rank := RowRankOfMatrix( B );
+    
+    C := CertainRows( C, [ rank + 1 .. NrRows( C ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        SetIsFullRowRankMatrix( M, true );
+        
+        C := HomalgZeroMatrix( 0, NrRows( M ), R );
+        
+    fi;
+    
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    local R, RP, t, M, C, rank;
+    
+    R := HomalgRing( M1 );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ) );
+    
+    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M1 ), Involution( M2 ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    M := UnionOfRows( M1, M2 );
+    
+    C := HomalgVoidMatrix( R );
+    
+    M := TriangularBasisOfRows( M, C );
+    
+    rank := RowRankOfMatrix( M );
+    
+    C := CertainColumns( CertainRows( C, [ rank + 1 .. NrRows( C ) ] ), [ 1 .. NrRows( M1 ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+        
+    fi;
+    
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfColumns,
+        "for homalg matrices",
+	[ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, t, C, B, rank;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+        
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ) );
+    
+    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        
+        C := RP!.SyzygiesGeneratorsOfColumns( M );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullColumnRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            SetIsFullColumnRankMatrix( M, true );
+            
+            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    C := HomalgVoidMatrix( R );
+    
+    B := TriangularBasisOfColumns( M, C );
+    
+    rank := ColumnRankOfMatrix( B );
+    
+    C := CertainColumns( C, [ rank + 1 .. NrColumns( C ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        SetIsFullColumnRankMatrix( M, true );
+        
+        C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+        
+    fi;
+    
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    local R, RP, t, M, C, rank;
+    
+    R := HomalgRing( M1 );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )" );
+    
+    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+        
+        C := RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
+        
+        return C;
+        
+    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
+        
+        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
+        
+        if IsZeroMatrix( C ) then
+            
+            C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+            
+        fi;
+        
+        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    M := UnionOfColumns( M1, M2 );
+    
+    C := HomalgVoidMatrix( R );
+    
+    M := TriangularBasisOfColumns( M, C );
+    
+    rank := ColumnRankOfMatrix( M );
+    
+    C := CertainRows( CertainColumns( C, [ rank + 1 .. NrColumns( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
+    
+    if IsZeroMatrix( C ) then
+        
+        C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+        
+    fi;
+    
+    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
+    
+    return C;
+    
+end );
+
+#### Effectively:
 
 ##
 InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
@@ -465,128 +875,6 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     ColoredInfoForService( t, "BasisOfColumnsCoeff", HOMALG.color_FOB, NrColumns( B ) );
     
     return B;
-    
-end );
-
-##
-InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
-        "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    local R, RP, t, l, m, n, id, zz, M, C;
-    
-    R := HomalgRing( B );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-        
-    ColoredInfoForService( "busy", "DecideZeroRows", HOMALG.color_FOP, "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
-    
-    if IsBound(RP!.DecideZeroRows) then
-        
-        C := RP!.DecideZeroRows( A, B );
-        
-        ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
-        
-        return C;
-        
-    elif IsBound(RP!.DecideZeroColumns) then
-        
-        C := Involution( RP!.DecideZeroColumns( Involution( A ), Involution( B ) ) );
-        
-        ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    l := NrRows( A );
-    m := NrColumns( A );
-    
-    n := NrRows( B );
-    
-    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
-        id := A;
-    else
-        id := HomalgIdentityMatrix( l, R );
-    fi;
-    
-    zz := HomalgZeroMatrix( n, l, R );
-    
-    M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
-    
-    M := TriangularBasisOfRows( M );
-    
-    C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
-    
-    ColoredInfoForService( t, "DecideZeroRows", HOMALG.color_FOP );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
-        "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    local R, RP, t, l, m, n, id, zz, M, C;
-    
-    R := HomalgRing( B );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-        
-    ColoredInfoForService( "busy", "DecideZeroColumns", HOMALG.color_FOP, NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )" );
-    
-    if IsBound(RP!.DecideZeroColumns) then
-        
-        C := RP!.DecideZeroColumns( A, B );
-        
-        ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
-        
-        return C;
-        
-    elif IsBound(RP!.DecideZeroRows) then
-        
-        C := Involution( RP!.DecideZeroRows( Involution( A ), Involution( B ) ) );
-        
-        ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    l := NrColumns( A );
-    m := NrRows( A );
-    
-    n := NrColumns( B );
-    
-    if HasIsIdentityMatrix( A ) and IsIdentityMatrix( A ) then ## save as much new definitions as possible
-        id := A;
-    else
-        id := HomalgIdentityMatrix( l, R );
-    fi;
-    
-    zz := HomalgZeroMatrix( l, n, R );
-    
-    M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
-    
-    M := TriangularBasisOfColumns( M );
-    
-    C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
-    
-    ColoredInfoForService( t, "DecideZeroColumns", HOMALG.color_FOP );
-    
-    return C;
     
 end );
 
@@ -729,294 +1017,6 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     ColoredInfoForService( t, "DecideZeroColumnsEffectively", HOMALG.color_FOP );
     
     return M;
-    
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
-	[ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP, t, C, B, rank;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-        
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ) );
-    
-    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        
-        C := RP!.SyzygiesGeneratorsOfRows( M );
-        
-        if IsZeroMatrix( C ) then
-            
-            SetIsFullRowRankMatrix( M, true );
-            
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
-        
-        return C;
-        
-    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        
-        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M ) ) );
-        
-        if IsZeroMatrix( C ) then
-            
-            SetIsFullRowRankMatrix( M, true );
-            
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    C := HomalgVoidMatrix( R );
-    
-    B := TriangularBasisOfRows( M, C );
-    
-    rank := RowRankOfMatrix( B );
-    
-    C := CertainRows( C, [ rank + 1 .. NrRows( M ) ] );
-    
-    if IsZeroMatrix( C ) then
-        
-        SetIsFullRowRankMatrix( M, true );
-        
-        C := HomalgZeroMatrix( 0, NrRows( M ), R );
-        
-    fi;
-    
-    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
-	[ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP, t, C, B, rank;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-        
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrRows( M ), " x ", NrColumns( M ) );
-    
-    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        
-        C := RP!.SyzygiesGeneratorsOfColumns( M );
-        
-        if IsZeroMatrix( C ) then
-            
-            SetIsFullColumnRankMatrix( M, true );
-            
-            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
-        
-        return C;
-        
-    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        
-        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M ) ) );
-        
-        if IsZeroMatrix( C ) then
-            
-            SetIsFullColumnRankMatrix( M, true );
-            
-            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    C := HomalgVoidMatrix( R );
-    
-    B := TriangularBasisOfColumns( M, C );
-    
-    rank := ColumnRankOfMatrix( B );
-    
-    C := CertainColumns( C, [ rank + 1 .. NrColumns( M ) ] );
-    
-    if IsZeroMatrix( C ) then
-        
-        SetIsFullColumnRankMatrix( M, true );
-        
-        C := HomalgZeroMatrix( NrColumns( M ), 0, R );
-        
-    fi;
-    
-    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( M1, M2 )
-    local R, RP, t, M, C, rank;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-    
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ) );
-    
-    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        
-        C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
-        
-        if IsZeroMatrix( C ) then
-            
-            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
-        
-        return C;
-        
-    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        
-        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M1 ), Involution( M2 ) ) );
-        
-        if IsZeroMatrix( C ) then
-            
-            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    M := UnionOfRows( M1, M2 );
-    
-    C := HomalgVoidMatrix( R );
-    
-    M := TriangularBasisOfRows( M, C );
-    
-    rank := RowRankOfMatrix( M );
-    
-    C := CertainColumns( CertainRows( C, [ rank + 1 .. NrColumns( C ) ] ), [ 1 .. NrRows( M1 ) ] );
-    
-    if IsZeroMatrix( C ) then
-        
-        C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
-        
-    fi;
-    
-    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", HOMALG.color_FOH, NrRows( C ) );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( M1, M2 )
-    local R, RP, t, M, C, rank;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-    
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )" );
-    
-    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        
-        C := RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
-        
-        if IsZeroMatrix( C ) then
-            
-            C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
-        
-        return C;
-        
-    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        
-        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
-        
-        if IsZeroMatrix( C ) then
-            
-            C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    M := UnionOfColumns( M1, M2 );
-    
-    C := HomalgVoidMatrix( R );
-    
-    M := TriangularBasisOfColumns( M, C );
-    
-    rank := ColumnRankOfMatrix( M );
-    
-    C := CertainRows( CertainColumns( C, [ rank + 1 .. NrRows( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
-    
-    if IsZeroMatrix( C ) then
-        
-        C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
-        
-    fi;
-    
-    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", HOMALG.color_FOH, NrColumns( C ) );
-    
-    return C;
     
 end );
 
