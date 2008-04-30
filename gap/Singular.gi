@@ -100,7 +100,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream, "ini" );
+        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
@@ -108,7 +108,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ##this will lead to the call
     ##ring homalg_variable_something = arg[1];
-    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream, "R:=" ];
+    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -117,7 +117,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
     ##prints output in a compatible format
-    homalgSendBlocking( "short=0;", "need_command", stream, "ini" );
+    homalgSendBlocking( "short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -192,16 +192,16 @@ InstallMethod( PolynomialRing,
 
     ##create the new ring
     ##todo: this creates a block ordering with a new "dp"-block
-    ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, properties, R );
-    homalgSendBlocking( ["setring ", ext_obj ], "need_command", "R:=" );
+    ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ HOMALG_IO.Pictograms.define ], TheTypeHomalgExternalRingObjectInSingular, properties, R );
+    homalgSendBlocking( ["setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.CreateHomalgRing );
     
     ##prints output in a compatible format
-    homalgSendBlocking( "short=0;", "need_command", ext_obj, "ini" );
+    homalgSendBlocking( "short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
     ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", R, ")" ], "need_command", "ini" );
+    homalgSendBlocking( ["imapall(", R, ")" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -227,7 +227,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command", "ij>" );
+    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -239,7 +239,7 @@ InstallMethod( CreateHomalgMatrix,
   function( M, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, "A:=" );
+    ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -252,7 +252,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", "<ij" );
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
     
 end );
 
@@ -301,7 +301,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
           "write(\"w: ", filename,"\",s);"
         ];
 
-        homalgSendBlocking( command, "need_command", "A>>" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
 
     fi;
     
@@ -332,7 +332,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                       "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
                       "execute(", M, "[", r, "][", c, "]= w;);" ];
         
-        homalgSendBlocking( command, "need_command", "<<A" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
     fi;
     
@@ -354,7 +354,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
         
-        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", "dsp" ) );
+        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", HOMALG_IO.Pictograms.Display ) );
         
     else
         
@@ -370,7 +370,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", "dsp" ) );
+    Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", HOMALG_IO.Pictograms.Display ) );
     
 end );
 

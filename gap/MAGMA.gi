@@ -99,7 +99,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
         o := 1;
     fi;
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, "R:=" ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -211,7 +211,7 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", "R:=" );
+    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
@@ -237,7 +237,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command", "ij>" );
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -249,7 +249,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "Matrix(", R, ",", S, ")" ], "A:=" );
+    ext_obj := homalgSendBlocking( [ "Matrix(", R, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -263,7 +263,7 @@ InstallMethod( CreateHomalgMatrix,
     
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ], "A:=" );
+    ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -279,9 +279,9 @@ InstallMethod( CreateHomalgSparseMatrix,
     
     M := HomalgVoidMatrix( r, c, R );
     
-    s := homalgSendBlocking( S, R, "spr" );
+    s := homalgSendBlocking( S, R, HOMALG_IO.Pictograms.sparse );
     
-    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", s, "] ))" ] , "need_command", "A:=" );
+    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", s, "] ))" ] , "need_command", HOMALG_IO.Pictograms.HomalgMatrix );
     
     return M;
     
@@ -294,7 +294,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", "<ij" );
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
     
 end );
 
@@ -319,7 +319,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "Eltseq(", M, ")" ], "need_output", "\"A\"" );
+    return homalgSendBlocking( [ "Eltseq(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
     
 end );
 
@@ -330,7 +330,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output", "\"A\"" );
+    return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
     
 end );
 
@@ -341,7 +341,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output", ".A." );
+    return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
     
 end );
 
@@ -364,7 +364,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
                      "_fs := Open(\"", filename, "\",\"w\"); ",
                      "Put( _fs, Sprint(_str) ); Flush( _fs ); delete( _fs )" ];
         
-        homalgSendBlocking( command, "need_command", "A>>" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
         
     fi;
     
@@ -392,7 +392,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         command := [ M, ":= Matrix(", R, ", eval( Read( \"", filename ,"\" ) ) )" ];
         
-        homalgSendBlocking( command, "need_command", "<<A" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
     fi;
     

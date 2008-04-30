@@ -73,10 +73,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[-1])" ], "need_output", "TRI" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[-1])" ], "need_output", "TRI" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );
