@@ -366,7 +366,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( homalgSendBlocking( [ o ], "need_display", "dsp" ) );
+    Print( homalgSendBlocking( [ o ], "need_display", HOMALG_IO.Pictograms.Display ) );
     
 end );
 
