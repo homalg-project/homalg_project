@@ -26,3 +26,8 @@ DeclareOperation( "EchelonMat",
 DeclareOperation( "ReduceMatWithEchelonMat", #Reduce the rows of a matrix with another matrix, which MUST be at least in REF.
         [ IsMatrix, IsMatrix ] );
 
+##
+DeclareOperation( "KernelMatDestructive", #REF over a field, returns a record with relations (list: certain columns of relations) as only entry
+        [ IsMatrix, IsList ] );
+
+DeclareGlobalFunction( "KernelMat" );
