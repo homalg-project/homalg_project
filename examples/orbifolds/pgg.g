@@ -3,7 +3,6 @@ G:=Group((1,2));
 Isotropy:=rec(1:=G,4:=G);
 mult:=[];
 
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,4);
+dim := 4;
 
 #5 doesnt work, 4 does: [ 0 ], [ 1 ], [ 2, 2, 2 ]

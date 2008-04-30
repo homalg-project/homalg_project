@@ -10,7 +10,6 @@ D8:=Group(c1,cd);
 Isotropy:=rec(1:=D8,2:=C1,3:=V4,5:=CD,6:=C2,7:=D8);
 mult:=[];
 
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,3);
+dim := 3;
 
 #[ 0 ], [ 1 ] :(

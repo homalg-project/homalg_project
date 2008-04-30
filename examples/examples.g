@@ -70,6 +70,17 @@ fi;
 
 Read( Concatenation( directory, "examples", separator, "orbifolds", separator, orbifold ) );
 
+Print( Concatenation( "\nSelect dimension (default = ", String( dim ), ")\n:" ) );
+
+d := Int( Filtered( ReadLine( input ), c -> c<>'\n' ) );
+
+if d <= 0 or d = fail then
+    d := dim;
+fi;
+
+ot := OrbifoldTriangulation( M, Isotropy, mult );
+ss := SimplicialSet( ot, d );
+
 ker := [];
 im := [];
 

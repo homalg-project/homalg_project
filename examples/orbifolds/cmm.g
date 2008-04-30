@@ -8,9 +8,6 @@ mult:=[
 [[6],[6,9],[5,6,9],[6,8,9],(x->(1,2)(3,4))],
 [[6],[6,9],[6,8,9],[5,6,9],(x->(1,2)(3,4))]
 ];
-
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,5);
-
+dim := 4;
 
 #works up to 4: [ 0 ], [ 1 ], [ 2, 2, 0 ]

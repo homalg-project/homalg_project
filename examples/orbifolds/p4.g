@@ -8,7 +8,6 @@ mult:=[
 [[5],[5,7],[4,5,7],[5,6,7],(x->x*(1,2,3,4))],
 [[5],[5,7],[5,6,7],[4,5,7],(x->x*(1,4,3,2))],
 ];
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,4);
+dim := 4;
 
 #[ 0 ], [ 1 ], [ 2, 4, 4 ] (>8 GB)

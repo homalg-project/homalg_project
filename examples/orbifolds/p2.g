@@ -11,7 +11,6 @@ mult:=[
  [[6],[4,6],[4,6,7],[4,5,6],(x->(1,2))],
  [[6],[4,6],[4,5,6],[4,6,7],(x->(1,2))]  ];
 
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,5);
+dim := 5;
 
 #up to 5 works, cohomology: [0],[1],[2,2,2,0],[1]

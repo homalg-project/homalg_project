@@ -3,5 +3,4 @@ G:=Group(());
 Isotropy:=rec();
 mult:=[];
 
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,4);
+dim := 4;
