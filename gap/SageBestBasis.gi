@@ -38,7 +38,7 @@ InstallGlobalFunction( InitializeSageBestBasis,
             
           );
             
-          homalgSendBlocking( [ command ], "need_command", R );
+          homalgSendBlocking( [ command ], "need_command", R, "def" );
           
         end
 );
@@ -86,10 +86,10 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( homalgSendBlocking( [ S, U, V, "= BestBasis_SUV(", M, "); ", S, ".rank()" ], "need_output" ) );
+                       rank_of_S := Int( homalgSendBlocking( [ S, U, V, "= BestBasis_SUV(", M, "); ", S, ".rank()" ], "need_output", "(\\)" ) );
                    else
                        ## compute S only:
-                       rank_of_S := Int( homalgSendBlocking( [ S, " = BestBasis_S_only(", M, "); ", S, ".rank()" ], "need_output" ) );
+                       rank_of_S := Int( homalgSendBlocking( [ S, " = BestBasis_S_only(", M, "); ", S, ".rank()" ], "need_output", "(\\)" ) );
                    fi;
                    
                    SetRowRankOfMatrix( S, rank_of_S );

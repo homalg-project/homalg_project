@@ -100,7 +100,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream );
+        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream, "ini" );
         o := 0;
     else
         o := 1;
@@ -108,7 +108,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ##this will lead to the call
     ##ring homalg_variable_something = arg[1];
-    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream ];
+    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -117,7 +117,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
     ##prints output in a compatible format
-    homalgSendBlocking( "short=0;", "need_command", stream );
+    homalgSendBlocking( "short=0;", "need_command", stream, "ini" );
     
     return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -193,15 +193,15 @@ InstallMethod( PolynomialRing,
     ##create the new ring
     ##todo: this creates a block ordering with a new "dp"-block
     ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, properties, R );
-    homalgSendBlocking( ["setring ", ext_obj ], "need_command");
+    homalgSendBlocking( ["setring ", ext_obj ], "need_command", "R:=" );
     
     ##prints output in a compatible format
-    homalgSendBlocking( "short=0;", "need_command", ext_obj );
+    homalgSendBlocking( "short=0;", "need_command", ext_obj, "ini" );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
     ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", R, ")" ], "need_command");
+    homalgSendBlocking( ["imapall(", R, ")" ], "need_command", "ini" );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -227,7 +227,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command" );
+    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command", "ij>" );
     
 end );
 
@@ -239,9 +239,34 @@ InstallMethod( CreateHomalgMatrix,
   function( M, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R );
+    ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, "A:=" );
     
     return HomalgMatrix( ext_obj, r, c, R );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrixAsString,
+        "for external matrices in Singular",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, r, c, R )
+    
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", "<ij" );
+    
+end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        "for external matrices in Singular",
+        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, r, c, R )
+    local Mrc;
+    
+    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    
+    return HomalgExternalRingElement( Mrc, "Singular", R );
     
 end );
 
@@ -276,7 +301,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
           "write(\"w: ", filename,"\",s);"
         ];
 
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "A>>" );
 
     fi;
     
@@ -307,7 +332,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                       "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
                       "execute(", M, "[", r, "][", c, "]= w;);" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "<<A" );
         
     fi;
     
@@ -329,7 +354,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
         
-        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
+        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", "dsp" ) );
         
     else
         
@@ -345,7 +370,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display" ) );
+    Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", "dsp" ) );
     
 end );
 

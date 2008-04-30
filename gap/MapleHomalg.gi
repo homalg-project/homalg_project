@@ -31,6 +31,7 @@ InstallValue( HOMALG_IO_Maple,
             CUT_END := 4,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ":",
+            error_stdout := "Error, ",	## a Maple specific
             define := ":=",
             prompt := "\033[01mmaple>\033[0m ",
             output_prompt := "\033[1;34;47m<maple\033[0m ",
@@ -127,7 +128,7 @@ InstallMethod( homalgLaTeX,
     
     if IsHomalgExternalRingInMapleRep( R ) then
         
-        Print( homalgSendBlocking( [ "latex(", o, ")" ], "need_display" ) );
+        Print( homalgSendBlocking( [ "latex(", o, ")" ], "need_display", "TeX" ) );
         
     else
         
@@ -165,7 +166,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
         o := 1;
     fi;
     
-    ar := [ [ arg[1], ",", "copy(`PIR/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, IsPrincipalIdealRing, stream ];
+    ar := [ [ arg[1], ",", "copy(`PIR/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, IsPrincipalIdealRing, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -175,7 +176,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingPIR, IsCommutative, IsPrincipalIdealRing );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command" );
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "ini" );
     
     return R;
     
@@ -209,7 +210,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
     
-    ar := [ [ var, ",", "copy(`Involutive/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, stream ];
+    ar := [ [ var, ",", "copy(`Involutive/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -219,7 +220,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingInvolutive, IsCommutative );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command" );
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "ini" );
     
     return R;
     
@@ -253,7 +254,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
     
-    ar := [ [ var, ",", "copy(`Janet/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, stream ];
+    ar := [ [ var, ",", "copy(`Janet/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, IsCommutative, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -263,7 +264,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingJanet );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command" );
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "ini" );
     
     return R;
     
@@ -291,7 +292,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
         o := 1;
     fi;
     
-    ar := [ [ arg[1], ",", "copy(`JanetOre/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, stream ];
+    ar := [ [ arg[1], ",", "copy(`JanetOre/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -301,7 +302,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingJanetOre );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command" );
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "ini" );
     
     return R;
     
@@ -329,7 +330,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
         o := 1;
     fi;
     
-    ar := [ [ arg[1], ",", "copy(`OreModules/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, stream ];
+    ar := [ [ arg[1], ",", "copy(`OreModules/homalg`)" ], TheTypeHomalgExternalRingObjectInMaple, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -339,7 +340,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMapleUsingOreModules );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command" );
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", "ini" );
     
     return R;
     
@@ -437,12 +438,12 @@ InstallMethod( PolynomialRing,
     else
         if c > 0 then
             if IsPrime( c ) then
-                homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"char\",", c, ")" ], "need_command", R );
+                homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"char\",", c, ")" ], "need_command", R, "ini" );
             else
                 Error( "the coefficients ring Z/", c, "Z is not directly supported by Involutive yet\n" );
             fi;
         elif HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"rational\",false)" ], "need_command", R );
+            homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"rational\",false)" ], "need_command", R, "ini" );
         fi;
         if HasIndeterminatesOfPolynomialRing( R ) then
             r := CoefficientsRing( R );
@@ -499,7 +500,7 @@ InstallGlobalFunction( MapleHomalgOptions,
         fi;
     od;
     
-    Print( homalgSendBlocking( [ "`homalg/homalg_options`(", s, R, "[-1])" ], "need_display" ) );
+    Print( homalgSendBlocking( [ "`homalg/homalg_options`(", s, R, "[-1])" ], "need_display", "ini" ) );
     
 end );
 
@@ -510,7 +511,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command", "ij>" );
     
 end );
 
@@ -522,7 +523,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ R, "[-1][matrix](", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ R, "[-1][matrix](", S, ")" ], "A:=" );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -536,7 +537,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ R, "[-1][matrix](matrix(", r, c, ",", S, "))" ] );
+    ext_obj := homalgSendBlocking( [ R, "[-1][matrix](matrix(", r, c, ",", S, "))" ], "A:=" );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -548,13 +549,13 @@ InstallMethod( CreateHomalgSparseMatrix,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( S, r, c, R )
-    local M, l;
+    local M, s;
     
     M := HomalgInitialMatrix( r, c, R );
     
-    l := homalgSendBlocking( S, R );
+    s := homalgSendBlocking( S, R, "spr" );
     
-    homalgSendBlocking( [ "for i in ", l, " do ", M, "[i[1],i[2]]:=i[3]: od" ] , "need_command" );
+    homalgSendBlocking( [ "for i in ", s, " do ", M, "[i[1],i[2]]:=i[3]: od" ] , "need_command", "A:=" );
     
     return M;
     
@@ -567,7 +568,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "convert(", M, "[", r, c, "],symbol)" ], "need_output" );
+    return homalgSendBlocking( [ "convert(", M, "[", r, c, "],symbol)" ], "need_output", "<ij" );
     
 end );
 
@@ -592,7 +593,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "convert(map(op,convert(", M, ",listlist)),symbol)" ], "need_output" );
+    return homalgSendBlocking( [ "convert(map(op,convert(", M, ",listlist)),symbol)" ], "need_output", "\"A\"" );
     
 end );
 
@@ -603,7 +604,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "convert(convert(", M, ",listlist),symbol)" ], "need_output" );
+    return homalgSendBlocking( [ "convert(convert(", M, ",listlist),symbol)" ], "need_output", "\"A\"" );
     
 end );
 
@@ -614,7 +615,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "map(i->op(map(j->if ", M, "[i,j]<>", Zero( R ), " then [i,j,convert(", M, "[i,j],symbol)] fi, [$1..", NrColumns( M ),"])), [$1..", NrRows( M ),"])" ], "need_output" );
+    return homalgSendBlocking( [ "map(i->op(map(j->if ", M, "[i,j]<>", Zero( R ), " then [i,j,convert(", M, "[i,j],symbol)] fi, [$1..", NrColumns( M ),"])), [$1..", NrRows( M ),"])" ], "need_output", ".A." );
     
 end );
 
@@ -638,7 +639,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
 		     "fflush( _fs ): ",
                      "fclose( _fs )" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "A>>" );
         
     fi;
     
@@ -669,7 +670,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                      "fclose( _fs ): ",
                      M, ":=", R, "[-1][matrix](parse( _str ))" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "<<A" );
         
     fi;
     
@@ -691,7 +692,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInMapleRep( HomalgRing( o ) ) then
         
-        Print(  homalgSendBlocking( [ HomalgRing( o ), "[-1][matrix](", o, ")" ], "need_display" ) );
+        Print(  homalgSendBlocking( [ HomalgRing( o ), "[-1][matrix](", o, ")" ], "need_display", "dsp" ) );
         
     else
         

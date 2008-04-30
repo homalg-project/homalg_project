@@ -37,7 +37,7 @@ InstallGlobalFunction( InitializeSageTools,
 	    "    M[x[0]-1,x[1]-1] = x[2]\n\n"
           );
             
-          homalgSendBlocking( [ command ], "need_command", R );
+          homalgSendBlocking( [ command ], "need_command", R, "def" );
 
         end
 );
@@ -47,12 +47,12 @@ InstallValue( CommonHomalgTableForSageTools,
         rec(
                ZeroRows :=
                  function( C )
-                   return StringToIntList( homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output" ) ) + 1;
+                   return StringToIntList( homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", "0==" ) ) + 1;
                  end,
                
                ZeroColumns :=
                  function( C )
-                   return StringToIntList( homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output" ) ) + 1;
+                   return StringToIntList( homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", "0||" ) ) + 1;
                  end,
        
                ## Must only then be provided by the RingPackage in case the default
@@ -69,14 +69,14 @@ InstallValue( CommonHomalgTableForSageTools,
                Equal :=
                  function( A, B )
                  
-                   return homalgSendBlocking( [ A, "==", B ], "need_output" ) = "True";
+                   return homalgSendBlocking( [ A, "==", B ], "need_output", "A=B" ) = "True";
                  
                  end,
                
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ")" ] );
+                   return homalgSendBlocking( [ "matrix(", HomalgRing( C ), NrRows( C ), NrColumns( C ), ")" ], "(0)" );
                    
                  end,
                
@@ -86,14 +86,14 @@ InstallValue( CommonHomalgTableForSageTools,
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "identity_matrix(", R, NrRows( C ), ")" ], R );
+                   return homalgSendBlocking( [ "identity_matrix(", R, NrRows( C ), ")" ], "(1)" );
                    
                  end,
                
                Involution :=
                  function( M )
                    
-                   return homalgSendBlocking( [ M, ".transpose()" ] );
+                   return homalgSendBlocking( [ M, ".transpose()" ], "A^*" );
                    
                  end,
                
@@ -101,7 +101,7 @@ InstallValue( CommonHomalgTableForSageTools,
                  function( M, plist )
                    
                    plist := plist - 1;
-                   return homalgSendBlocking( [ M, ".matrix_from_rows(", plist, ")"] );
+                   return homalgSendBlocking( [ M, ".matrix_from_rows(", plist, ")"], "===" );
                    
                  end,
                
@@ -109,21 +109,21 @@ InstallValue( CommonHomalgTableForSageTools,
                  function( M, plist )
                    
                    plist := plist - 1;
-                   return homalgSendBlocking( [ M, ".matrix_from_columns(", plist, ")" ] );
+                   return homalgSendBlocking( [ M, ".matrix_from_columns(", plist, ")" ], "|||" );
                    
                  end,
                
                UnionOfRows :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "block_matrix([", A, B, "],2)" ] );
+                   return homalgSendBlocking( [ "block_matrix([", A, B, "],2)" ], "A_B" );
                    
                  end,
                
                UnionOfColumns :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "block_matrix([", A, B, "],1)" ] );
+                   return homalgSendBlocking( [ "block_matrix([", A, B, "],1)" ], "A|B" );
                    
                  end,
                
@@ -134,56 +134,56 @@ InstallValue( CommonHomalgTableForSageTools,
                    f := ShallowCopy( e );
                    Add( f, "block_diagonal_matrix(", 1 );
                    Add( f, ")" );
-                   return homalgSendBlocking( f );
+                   return homalgSendBlocking( f, "A\\B" );
                    
                  end,
                
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [a, "*", A] );
+                   return homalgSendBlocking( [a, "*", A], "a*A" );
                    
                  end,
                
                AddMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "+", B ] );
+                   return homalgSendBlocking( [ A, "+", B ], "A+B" );
                    
                  end,
                
                SubMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "-", B ] );
+                   return homalgSendBlocking( [ A, "-", B ], "A-B" );
                    
                  end,
                
                Compose :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "*", B ] );
+                   return homalgSendBlocking( [ A, "*", B ], "A*B" );
                    
                  end,
                
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ C, ".nrows()" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ C, ".nrows()" ], "need_output", "#==" ) );
                    
                  end,
                  
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ C, ".ncols()" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ C, ".ncols()" ], "need_output", "#||" ) );
                    
                  end,
                  
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output" );
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", "a-b" );
                    
                  end,
                  

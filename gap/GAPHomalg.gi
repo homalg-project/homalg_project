@@ -95,9 +95,9 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         o := 1;
     fi;
     
-    homalgSendBlocking( "LoadPackage(\"RingsForHomalg\")", "need_command", stream );
+    homalgSendBlocking( "LoadPackage(\"RingsForHomalg\")", "need_command", stream, "ini" );
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -177,7 +177,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command" );
+    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command", "ij>" );
     
 end );
 
@@ -190,7 +190,7 @@ InstallMethod( CreateHomalgMatrix,
     local ext_obj;
     
     ## external GAP sees S as a listlist (and not as a string)
-    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", S, ", ", R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", S, ", ", R, " )" ], "A:=" );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -203,7 +203,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrix( \"", S, "\", ", r, c , R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrix( \"", S, "\", ", r, c , R, " )" ], "A:=" );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -214,9 +214,11 @@ InstallMethod( CreateHomalgSparseMatrix,
         "for a sparse list of an external matrix in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
-    local ext_obj;
+    local ext_obj, s;
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrix( \"", S, "\", ", r, c , R, " )" ] );
+    s := homalgSendBlocking( [ "\"", S, "\"" ], R, "spr" );
+    
+    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrix( ", s, r, c , R, " )" ], "A:=" );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -229,7 +231,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "GetEntryOfHomalgMatrix( ", M, r, c, R, " )" ], "need_output" );
+    return homalgSendBlocking( [ "GetEntryOfHomalgMatrix( ", M, r, c, R, " )" ], "need_output", "<ij" );
     
 end );
 
@@ -254,7 +256,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    return homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output", "\"A\"" );
     
 end );
 
@@ -265,7 +267,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    return homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output", "\"A\"" );
     
 end );
 
@@ -276,7 +278,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    return homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output", ".A." );
     
 end );
 
@@ -297,7 +299,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
     if mode = "ListList" then
         command := [ "SaveDataOfHomalgMatrixToFile( \"", filename, "\", ", M, " )" ];
                 
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "A>>" );
                 
     fi;
     
@@ -325,7 +327,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         command := [ M, " := LoadDataOfHomalgMatrixFromFile( \"", filename, "\", ", R, " )" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "<<A" );
         
     fi;
     
@@ -347,7 +349,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInGAPRep( HomalgRing( o ) ) then
         
-        Print( homalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
+        Print( homalgSendBlocking( [ "Display( ", o, " )" ], "need_display", "dsp" ) );
         
     else
         

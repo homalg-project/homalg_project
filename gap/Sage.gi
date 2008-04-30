@@ -98,7 +98,7 @@ InstallGlobalFunction( RingForHomalgInSage,
         o := 1;
     fi;
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream, "R:=" ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -213,7 +213,7 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists" );
+    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists", "R:=" );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
@@ -238,7 +238,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command" );
+    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command", "ij>" );
     
 end );
 
@@ -250,7 +250,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", S, ")" ], "A:=" );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -261,10 +261,9 @@ InstallMethod( CreateHomalgMatrix,
         "for a list of an external matrix in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
-    
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ], "A:=" );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -276,10 +275,14 @@ InstallMethod( CreateHomalgSparseMatrix,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( S, r, c, R )
+    local M, s;
     
-    local M;
     M := HomalgInitialMatrix( r, c, R );
-    homalgSendBlocking( [ "FillMatrix(", M, ",",  S, ")" ], "need_command", R );
+    
+    s := homalgSendBlocking( S, R, "spr" );
+    
+    homalgSendBlocking( [ "FillMatrix(", M, ",",  s, ")" ], "need_command", "A:=" );
+    
     return M;
     
 end );
@@ -288,10 +291,10 @@ end );
 InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
-        
+
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output" );
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", "<ij" );
     
 end );
 
@@ -316,7 +319,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output" );
+    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output", "\"A\"" );
     
 end );
 
@@ -327,7 +330,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ M, ".list()" ], "need_output" );
+    return homalgSendBlocking( [ M, ".list()" ], "need_output", "\"A\"" );
     
 end );
 
@@ -338,18 +341,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M , R )
     
-    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output" );
-    
-end );
-
-##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Sage",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
-
-  function( M, r, c, R )
-    
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output" );
+    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output", ".A." );
     
 end );
 
@@ -372,7 +364,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
                      "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
                      "_fs.close()" ];
                 
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "A>>" );
                 
     fi;
     
@@ -403,7 +395,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                      "_fs.close(); ",
                      M, "= matrix(", R, ",eval(_str))" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", "<<A" );
         
     fi;
     

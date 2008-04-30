@@ -29,7 +29,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/BasisOfRowModule`(", M, R, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/BasisOfRowModule`(", M, R, ")" ], "need_command", "BAS" );
                    
                    return N;
                    
@@ -43,7 +43,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/BasisOfColumnModule`(", M, R, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/BasisOfColumnModule`(", M, R, ")" ], "need_command", "BAS" );
                    
                    return N;
                    
@@ -57,7 +57,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/BasisCoeff`(", M, R, "[1],", U, R, "[-1]),", R, "[-1])" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/BasisCoeff`(", M, R, "[1],", U, R, "[-1]),", R, "[-1])" ], "need_command", "BAS" );
                    
                    return N;
                    
@@ -71,7 +71,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/DecideZeroRows`(", A, B, R, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/DecideZeroRows`(", A, B, R, ")" ], "need_command", "DC0" );
                    
                    return N;
                    
@@ -85,7 +85,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/DecideZeroColumns`(", A, B, R, ")" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/DecideZeroColumns`(", A, B, R, ")" ], "need_command", "DC0" );
                    
                    return N;
                    
@@ -99,7 +99,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[-1]),", R, "[-1])" ], "need_command" );
+                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[-1]),", R, "[-1])" ], "need_command", "DC0" );
                    
                    return N;
                    
@@ -119,11 +119,11 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                        
                        M2 := arg[2];
                        
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, M2, R, ")" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, M2, R, ")" ], "need_command", "SYZ" );
                        
                    else
                        
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, ",[],", R, ")" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, ",[],", R, ")" ], "need_command", "SYZ" );
                        
                    fi;
                    
@@ -145,11 +145,11 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                        
                        M2 := arg[2];
                        
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, M2, R, ")" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, M2, R, ")" ], "need_command", "SYZ" );
                        
                    else
                        
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, ",[],", R, ")" ], "need_command" );
+                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, ",[],", R, ")" ], "need_command", "SYZ" );
                        
                    fi;
                    

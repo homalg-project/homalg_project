@@ -43,7 +43,7 @@ InstallMethod( CreateHomalgTable,
             
             );
             
-    homalgSendBlocking( [ command ], "need_command", R ); ## the last procedures to initialize
+    homalgSendBlocking( [ command ], "need_command", R, "def" ); ## the last procedures to initialize
     
     RP_specific :=
           rec(
@@ -89,10 +89,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output", "TRI" ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " = TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " = TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output", "TRI" ) );
                    fi; 
                    
                    SetRowRankOfMatrix( N, rank_of_N );
