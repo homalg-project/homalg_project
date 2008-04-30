@@ -230,6 +230,10 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
   function( M )
     local R, RP, t, B, rank;
     
+    if HasIsBasisOfRowsMatrix( M ) and IsBasisOfRowsMatrix( M ) then
+        return M;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -242,6 +246,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         B := RP!.BasisOfRowModule( M );
         
+        SetIsBasisOfRowsMatrix( B, true );
+        
         ColoredInfoForService( t, "BasisOfRowModule", HOMALG.color_FOB, NrRows( B ) );
         
         return B;
@@ -249,6 +255,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     elif IsBound(RP!.BasisOfColumnModule) then
         
         B := Involution( RP!.BasisOfColumnModule( Involution( M ) ) );
+        
+        SetIsBasisOfRowsMatrix( B, true );
         
         ColoredInfoForService( t, "BasisOfRowModule", HOMALG.color_FOB, NrRows( B ) );
         
@@ -272,6 +280,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         SetIsFullRowRankMatrix( B, true );
     fi;
     
+    SetIsBasisOfRowsMatrix( B, true );
+        
     ColoredInfoForService( t, "BasisOfRowModule", HOMALG.color_FOB, NrRows( B ) );
     
     return B;
@@ -286,6 +296,10 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
   function( M )
     local R, RP, t, B, rank;
     
+    if HasIsBasisOfColumnsMatrix( M ) and IsBasisOfColumnsMatrix( M ) then
+        return M;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -298,6 +312,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         B := RP!.BasisOfColumnModule( M );
         
+        SetIsBasisOfColumnsMatrix( B, true );
+        
         ColoredInfoForService( t, "BasisOfColumnModule", HOMALG.color_FOB, NrColumns( B ) );
         
         return B;
@@ -305,6 +321,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     elif IsBound(RP!.BasisOfRowModule) then
         
         B := Involution( RP!.BasisOfRowModule( Involution( M ) ) );
+        
+        SetIsBasisOfColumnsMatrix( B, true );
         
         ColoredInfoForService( t, "BasisOfColumnModule", HOMALG.color_FOB, NrColumns( B ) );
         
@@ -328,6 +346,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         SetIsFullColumnRankMatrix( B, true );
     fi;
     
+    SetIsBasisOfColumnsMatrix( B, true );
+        
     ColoredInfoForService( t, "BasisOfColumnModule", HOMALG.color_FOB, NrColumns( B ) );
     
     return B;

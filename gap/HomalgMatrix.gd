@@ -87,6 +87,12 @@ DeclareProperty( "IsStrictLowerTriangularMatrix",
 DeclareProperty( "IsTriangularMatrix",
         IsHomalgMatrix );
 
+DeclareProperty( "IsBasisOfRowsMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsBasisOfColumnsMatrix",
+        IsHomalgMatrix );
+
 ####################################
 #
 # attributes:
