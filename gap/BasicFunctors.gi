@@ -57,7 +57,8 @@ end );
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,
   function( M, N )
-    local R, l0, l1, _l0, matM, matN, HP0N, HP1N, alpha, idN, hom, gen;
+    local R, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
+          gen, proc;
     
     R := HomalgRing( M );
     
@@ -81,9 +82,13 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     alpha := KroneckerMat( matM, idN );
     
     if IsLeftModule( M ) then
+        r := l0;
+        c := _l0;
         HP0N := RightPresentation( HP0N );
         HP1N := RightPresentation( HP1N );
     else
+        r := _l0;
+        c := l0;
         HP0N := LeftPresentation( HP0N );
         HP1N := LeftPresentation( HP1N );
     fi;
@@ -94,7 +99,12 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
     gen := GeneratorsOfModule( hom );
     
-    ##
+    proc :=
+      function( g, r, c )
+        return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( g ), r, c, HomalgRing( g ) );
+    end;
+    
+    SetProcedureToReadjustGenerators( gen, [ proc, r, c ] );
     
     return hom;
     

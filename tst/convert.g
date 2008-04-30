@@ -1,3 +1,4 @@
+LoadPackage( "RingsForHomalg" );
 b := true;
 nr := NrRows( imat );
 nc := NrColumns( imat );

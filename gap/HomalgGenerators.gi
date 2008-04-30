@@ -246,16 +246,22 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( TI, gen )
-    local generators, relations_of_hullmodule;
+    local generators, relations_of_hullmodule, gen_new;
     
     generators := gen!.generators;
     relations_of_hullmodule := gen!.relations_of_hullmodule;
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
-        return HomalgGeneratorsForLeftModule( TI * generators, relations_of_hullmodule );
+        gen_new := HomalgGeneratorsForLeftModule( TI * generators, relations_of_hullmodule );
     else
-        return HomalgGeneratorsForRightModule( generators * TI, relations_of_hullmodule );
+        gen_new := HomalgGeneratorsForRightModule( generators * TI, relations_of_hullmodule );
     fi;
+    
+    if HasProcedureToReadjustGenerators( gen ) then
+        SetProcedureToReadjustGenerators( gen_new, ProcedureToReadjustGenerators( gen ) );
+    fi;
+    
+    return gen_new;
     
 end );
 
@@ -471,6 +477,29 @@ InstallMethod( Display,
         Print( " the matrix\n\n" );
         
         Display( MatrixOfGenerators( o ) );
+    fi;
+    
+end );
+
+InstallMethod( Display,
+        "for homalg generators",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and HasProcedureToReadjustGenerators ],
+        
+  function( o )
+    local mat, proc, i;
+    
+    mat := MatrixOfGenerators( o );
+    
+    proc := ProcedureToReadjustGenerators( o );
+    
+    if IsHomalgGeneratorsOfLeftModule( o ) then
+        for i in [ 1 .. NrGenerators( o ) ] do
+            Display( proc[1]( CertainRows( mat, [ i ] ), proc[2], proc[3] ) ); Print( "\n" );
+        od;
+    else
+        for i in [ 1 .. NrGenerators( o ) ] do
+            Display( proc[1]( CertainColumns( mat, [ i ] ), proc[2], proc[3] ) ); Print( "\n" );
+        od;
     fi;
     
 end );

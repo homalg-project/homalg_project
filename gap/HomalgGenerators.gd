@@ -43,6 +43,9 @@ DeclareProperty( "IsReduced",
 #
 ####################################
 
+DeclareAttribute( "ProcedureToReadjustGenerators",
+        IsHomalgGenerators );
+
 ####################################
 #
 # global functions and operations:
