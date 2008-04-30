@@ -87,8 +87,8 @@ end );
 ##
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
-    local L, nargs, properties, ar, option, info_level,
-          need_command, need_display, need_output,
+    local L, nargs, io_info_level, info_level,properties,
+          ar, operation, option, need_command, need_display, need_output,
           break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS,
           PID, homalg_variable, l, eoc, enter, max, display_color;
     
@@ -108,6 +108,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     nargs := Length( arg );
     
+    io_info_level := InfoLevel( InfoIO_ForHomalg );
     info_level := 7;
     
     properties := [];
@@ -138,7 +139,9 @@ InstallGlobalFunction( homalgSendBlocking,
                     ext_obj := homalgExternalObject( "", stream.name, stream );
                 fi;
             fi;
-        elif not IsBound( option ) and IsStringRep( ar ) and not ar in [ "", "break_lists" ] then ## the first occurrence of an option decides
+        elif not IsBound( operation ) and IsStringRep( ar ) and Length( ar ) = 3 then
+            operation := ar;
+        elif not IsBound( option ) and IsStringRep( ar ) and Length( ar ) > 5 and ar <> "break_lists" then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
                 need_display := false;
@@ -188,6 +191,22 @@ InstallGlobalFunction( homalgSendBlocking,
         
         stream := homalgStream( ext_obj );
         
+    fi;
+    
+    if not IsBound( operation ) then
+        operation := "   ";
+    elif io_info_level >= 3 then
+        if operation = "TRI" and IsBound( HOMALG.color_FOT ) then
+            operation := Concatenation( HOMALG.color_FOT, operation, "\033[0m" );
+        elif operation = "BAS" and IsBound( HOMALG.color_FOB ) then
+            operation := Concatenation( HOMALG.color_FOB, operation, "\033[0m" );
+        elif operation = "DC0" and IsBound( HOMALG.color_FOP ) then
+            operation := Concatenation( HOMALG.color_FOP, operation, "\033[0m" );
+        elif operation = "SYZ" and IsBound( HOMALG.color_FOH ) then
+            operation := Concatenation( HOMALG.color_FOH, operation, "\033[0m" );
+        else
+            operation := Concatenation( "\033[1m\033[4;33;44m", operation, "\033[0m" );
+        fi;
     fi;
     
     if IsBound( R ) then
@@ -291,7 +310,15 @@ InstallGlobalFunction( homalgSendBlocking,
         Add( HOMALG_IO.homalgSendBlocking, L );
     fi;
     
-    Info( InfoIO_ForHomalg, info_level, stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+    
+    
+    if io_info_level >= 7 then
+        Info( InfoIO_ForHomalg, info_level, operation, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+    elif io_info_level >= 4 then
+        Info( InfoIO_ForHomalg, 4, operation, " ", stream.prompt, "..." );
+    elif io_info_level >= 3 then
+        Info( InfoIO_ForHomalg, 3, operation );
+    fi;
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
@@ -304,6 +331,8 @@ InstallGlobalFunction( homalgSendBlocking,
         else
             Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.errors ,"\033[0m\n" );
         fi;
+    elif IsBound( stream.error_stdout ) and IsSubset( stream.lines, stream.error_stdout ) then
+        Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.lines ,"\033[0m\n" );
     fi;
     
     max := Maximum( stream.HomalgBackStreamMaximumLength, Length( stream.lines ) );

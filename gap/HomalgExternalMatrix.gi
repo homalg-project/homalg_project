@@ -366,7 +366,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( homalgSendBlocking( [ o ], "need_display" ) );
+    Print( homalgSendBlocking( [ o ], "need_display", "dsp" ) );
     
 end );
 
