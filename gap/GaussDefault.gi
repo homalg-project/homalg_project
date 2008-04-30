@@ -36,24 +36,5 @@ InstallValue( CommonHomalgTableForGaussDefault,
                    
                  end,
 		 
-	       SyzygiesGeneratorsOfRows :=
-	         function( M )
-		   local R, N, S;
-		   
-		   R := HomalgRing( M );
-		   
-		   N := HomalgVoidMatrix( R );
-		   
-		   S := EchelonMatTransformation( Eval( M ) ).relations;
-		         
-		   SetEval( N, S ); ResetFilterObj( N, IsVoidMatrix );
-		   
-		   SetNrRows( N, Length( S ) );
-		   
-		   SetNrColumns( N, NrColumns( M ) );
-		   
-		   return N;
-
-		 end
         )
  );
