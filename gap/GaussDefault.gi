@@ -48,8 +48,11 @@ InstallValue( CommonHomalgTableForGaussDefault,
       ResetFilterObj( N, IsVoidMatrix );
       return N;
       
-    end
-      
+    end,
+    
+    BasisOfRowModule :=
+    function( M )
+      return TriangularBasisOfRows( M );
+    end,
       )
-     
 );

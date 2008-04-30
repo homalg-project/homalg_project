@@ -59,7 +59,8 @@ InstallMethod( CreateHomalgTable,
                    
                    SetNrColumns( H, NrColumns( M ) );
                    SetRowRankOfMatrix( H, NrRows( H ) );
-                   
+                   SetRowRankOfMatrix( M, NrRows( H ) );
+		   
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( H, true );   
                    else
