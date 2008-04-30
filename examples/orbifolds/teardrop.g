@@ -4,7 +4,7 @@ Isotropy:=rec(1:=G);
 mult:=[ [[3],[1,3],[1,2,3],[1,3,4],(x->(1,2))], [[3],[1,3],[1,3,4],[1,2,3],(x->(1,2))] ];
 
 ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,5);
+ss:=SimplicialSet(ot,6);
 
 #C:[ 0 ], [ 1 ], [ 0 ], [ 1 ], [ 2 ]
 #H:[ 0 ], [ 1 ], [ 0 ], [ 2 ], [ 1 ]
