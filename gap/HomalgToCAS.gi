@@ -87,8 +87,8 @@ end );
 ##
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
-    local L, nargs, io_info_level, info_level,properties,
-          ar, operation, option, need_command, need_display, need_output,
+    local L, nargs, io_info_level, info_level, properties,
+          need_command, need_display, need_output, ar, pictogram, option,
           break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS,
           PID, homalg_variable, l, eoc, enter, max, display_color;
     
@@ -112,6 +112,10 @@ InstallGlobalFunction( homalgSendBlocking,
     info_level := 7;
     
     properties := [];
+    
+    need_command := false;
+    need_display := false;
+    need_output := false;
     
     for ar in arg{[ 2 .. nargs ]} do ## the order of the following might be important for the performance!!!
         if IsList( ar ) and ar <> [ ] and ForAll( ar, IsFilter ) then	## this must come before prefix and suffix
@@ -139,22 +143,16 @@ InstallGlobalFunction( homalgSendBlocking,
                     ext_obj := homalgExternalObject( "", stream.name, stream );
                 fi;
             fi;
-        elif not IsBound( operation ) and IsStringRep( ar ) and Length( ar ) = 3 then
-            operation := ar;
+        elif not IsBound( pictogram ) and IsStringRep( ar ) and Length( ar ) <= 5 then
+            pictogram := ar;
         elif not IsBound( option ) and IsStringRep( ar ) and Length( ar ) > 5 and ar <> "break_lists" then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
-                need_display := false;
-                need_output := false;
             elif PositionSublist( LowercaseString( ar ), "display" ) <> fail then
                 need_display := true;
-                need_command := false;
-                need_output := false;
                 info_level := 8;
             elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
                 need_output := true;
-                need_command := false;
-                need_display := false;
             else
                 Error( "option must be one of {\"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
             fi;
@@ -193,19 +191,27 @@ InstallGlobalFunction( homalgSendBlocking,
         
     fi;
     
-    if not IsBound( operation ) then
-        operation := "   ";
+    if not IsBound( pictogram ) then
+        pictogram := "   ";
     elif io_info_level >= 3 then
-        if operation = "TRI" and IsBound( HOMALG.color_FOT ) then
-            operation := Concatenation( HOMALG.color_FOT, operation, "\033[0m" );
-        elif operation = "BAS" and IsBound( HOMALG.color_FOB ) then
-            operation := Concatenation( HOMALG.color_FOB, operation, "\033[0m" );
-        elif operation = "DC0" and IsBound( HOMALG.color_FOP ) then
-            operation := Concatenation( HOMALG.color_FOP, operation, "\033[0m" );
-        elif operation = "SYZ" and IsBound( HOMALG.color_FOH ) then
-            operation := Concatenation( HOMALG.color_FOH, operation, "\033[0m" );
+        if pictogram = HOMALG_IO.Pictograms.TriangularBasis and IsBound( HOMALG.color_BOT ) then
+            pictogram := Concatenation( HOMALG.color_BOT, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and IsBound( HOMALG.color_BOB ) then
+            pictogram := Concatenation( HOMALG.color_BOB, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.DecideZero and IsBound( HOMALG.color_BOD ) then
+            pictogram := Concatenation( HOMALG.color_BOD, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and IsBound( HOMALG.color_BOH ) then
+            pictogram := Concatenation( HOMALG.color_BOH, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.TriangularBasisC and IsBound( HOMALG.color_BOW ) then
+            pictogram := Concatenation( HOMALG.color_BOW, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and IsBound( HOMALG.color_BOC ) then
+            pictogram := Concatenation( HOMALG.color_BOC, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and IsBound( HOMALG.color_BOP ) then
+            pictogram := Concatenation( HOMALG.color_BOP, pictogram, "\033[0m" );
+        elif need_output or need_display then
+            pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_output, pictogram, "\033[0m" );
         else
-            operation := Concatenation( "\033[1m\033[4;33;44m", operation, "\033[0m" );
+            pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_command, pictogram, "\033[0m" );
         fi;
     fi;
     
@@ -313,11 +319,11 @@ InstallGlobalFunction( homalgSendBlocking,
     
     
     if io_info_level >= 7 then
-        Info( InfoIO_ForHomalg, info_level, operation, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+        Info( InfoIO_ForHomalg, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
     elif io_info_level >= 4 then
-        Info( InfoIO_ForHomalg, 4, operation, " ", stream.prompt, "..." );
+        Info( InfoIO_ForHomalg, 4, pictogram, " ", stream.prompt, "..." );
     elif io_info_level >= 3 then
-        Info( InfoIO_ForHomalg, 3, operation );
+        Info( InfoIO_ForHomalg, 3, pictogram );
     fi;
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;

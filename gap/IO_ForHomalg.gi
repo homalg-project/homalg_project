@@ -27,6 +27,10 @@ InstallValue( HOMALG_IO,
             FileNameCounter := 1,
             PID := IO_getpid(),
             Pictograms := rec(
+                ## colors:
+                color_need_command		:= "\033[1;33;44m",	## the color of a need_command or assignment operation's pictogram
+                color_need_output		:= "\033[1;34;43m",	## the color of a need_output or need_display operation's pictogram
+                
                 ## good morning computer algebra system:
                 initialize				:= "ini",	## initialize
                 define					:= "def",	## define macros
@@ -74,13 +78,16 @@ InstallValue( HOMALG_IO,
                 GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one
                 
                 ## basic operations:
-                TriangularBasis				:= "TRI",	## compute a triangular basis
-                BasisOfModule				:= "BAS",	## compute a "basis" of a given set of module elements
-                DecideZero				:= "DC0",	## decide the ideal/submodule membership problem
-                SyzygiesGenerators			:= "SYZ",	## compute a generating set of syzygies
+                TriangularBasis				:= "Tri",	## compute a (Tri)angular basis
+                BasisOfModule				:= "Bas",	## compute a "(Bas)is" of a given set of module elements
+                DecideZero				:= "dc0",	## (d)e(c)ide the ideal/submodule membership problem, i.e. if an element is (0) modulo the ideal/submodule
+                SyzygiesGenerators			:= "Syz",	## compute a generating set of (Syz)ygies
+                TriangularBasisC			:= "TRI",	## compute a (TRI)angular basis together with the matrix of coefficients
+                BasisCoeff				:= "BAS",	## compute a "(BAS)is" of a given set of module elements together with the matrix of coefficients
+                DecideZeroEffectively			:= "DC0",	## (D)e(C)ide the ideal/submodule membership problem, i.e. write an element effectively as (0) modulo the ideal/submodule
                 
                 ## optional operations:
-                BestBasis				:= "(\\)",	## compute a better equivalent matrix (Smith, Krull)
+                BestBasis				:= "(\\)",	## compute a better equivalent matrix (field -> row+col Gauss, PIR -> Smith, Dedekind domain -> Krull, etc ...)
                 ElementaryDivisors			:= "div",	## compute elementary divisors
                 
                 ## for the eye:
