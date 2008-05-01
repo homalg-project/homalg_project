@@ -1,0 +1,39 @@
+##
+## THE ARE WRONG COLEMs and therefore called WOLEMs ;)
+##
+## they are here as for history not to repeat itself!!!
+##
+
+
+##
+InstallMethod( CertainRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalLeftInverse, IsList ],
+        
+  function( M, plist )
+    local A;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( LeftInverse )", "\033[0m" );
+    
+    A := EvalLeftInverse( M );
+    
+    return LeftInverse( CertainColumns( A, plist ) );
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalRightInverse, IsList ],
+        
+  function( M, plist )
+    local A;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( RightInverse )", "\033[0m" );
+    
+    A := EvalRightInverse( M );
+    
+    return RightInverse( CertainRows( A, plist ) );
+    
+end );
+
