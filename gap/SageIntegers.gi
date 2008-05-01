@@ -89,7 +89,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " = TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
                    else
                        ## compute N only:
                        rank_of_N := Int( homalgSendBlocking( [ N, " = TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );

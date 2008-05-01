@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for the rings with BestBasis provided by the ring packages
+##  Implementations for the external rings provided by the by the ring packages
 ##  of the Maple implementation of homalg.
 ##
 #############################################################################
@@ -50,14 +50,28 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                  end,
                
                BasisOfRowsCoeff :=
-                 function( M, U )
+                 function( M, T )
                    local R, N;
                    
                    R := HomalgRing( M );
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/BasisCoeff`(", M, R, "[1],", U, R, "[-1]),", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ N, " := `homalg/BasisOfRowsCoeff`(", M, R, "[1],", T, R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   
+                   return N;
+                   
+                 end,
+                 
+               BasisOfColumnsCoeff :=
+                 function( M, T )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
+                   
+                   homalgSendBlocking( [ N, " := `homalg/BasisOfColumnsCoeff`(", M, R, "[1],", T, R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
                    return N;
                    
@@ -92,14 +106,28 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                  end,
                  
                DecideZeroRowsEffectively :=
-                 function( A, B, U )
+                 function( A, B, T )
                    local R, N;
                    
                    R := HomalgRing( A );
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := `homalg/NormalizeInput`(`homalg/ReduceCoeff`(", A, B, R, "[1],", U, R, "[-1]),", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ N, " := `homalg/DecideZeroRowsEffectively`(", A, B, R, "[1],", T, R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   
+                   return N;
+                   
+                 end,
+                 
+               DecideZeroColumnsEffectively :=
+                 function( A, B, T )
+                   local R, N;
+                   
+                   R := HomalgRing( A );
+                   
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   
+                   homalgSendBlocking( [ N, " := `homalg/DecideZeroColumnsEffectively`(", A, B, R, "[1],", T, R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
                    return N;
                    

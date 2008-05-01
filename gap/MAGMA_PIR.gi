@@ -67,7 +67,7 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
                    else
                        ## compute N only:
                        rank_of_N := Int( homalgSendBlocking( [ N, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
