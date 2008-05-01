@@ -19,10 +19,13 @@
 InstallValue( HOMALG,
         rec(
             TotalRuntimes := 0,
-            color_FOT := "\033[01m\033[4;37;40m",		## (T)riangular basis: TriangularBasisOfRows/Columns
-            color_FOB := "\033[01m\033[4;37;45m",		## (B)asis: BasisOfRow/ColumnModule, BasisOfRows/ColumnsCoeff
-            color_FOP := "\033[01m\033[4;37;42m",		## (P)articular solution: DecideZeroRows/Columns(Effectively)
-            color_FOH := "\033[01m\033[4;37;41m",		## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
+            color_BOT := "\033[1;37;40m",		## (T)riangular basis: TriangularBasisOfRows/Columns
+            color_BOW := "\033[1;37;40m",		## Triangular basis: TriangularBasisOfRows/Columns( M, W )
+            color_BOB := "\033[1;37;45m",		## (B)asis: BasisOfRow/ColumnModule
+            color_BOC := "\033[1;37;45m",		## Basis: BasisOfRows/Columns(C)oeff
+            color_BOD := "\033[1;37;42m",		## existence of a particular solution: (D)ecideZeroRows/Columns
+            color_BOP := "\033[1;37;42m",		## (P)articular solution: DecideZeroRows/Columns(Effectively)
+            color_BOH := "\033[1;37;41m",		## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
             color_busy := "\033[01m\033[4;31;40m",
             color_done := "\033[01m\033[4;32;40m",
            )

@@ -20,7 +20,11 @@
 
 InstallValue( COLEM,
         rec(
-            color := "\033[4;30;46m" ) );
+            color := "\033[4;30;46m",
+            level := 10,
+            single_operations := 10,
+            )
+        );
 
 ####################################
 #
@@ -1057,7 +1061,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
+    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainRows of a bigger matrix
         
         Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( CertainRows )", "\033[0m" );
         
@@ -1080,7 +1084,7 @@ InstallMethod( CertainRows,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we would take CertainRows of a bigger matrix
+    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainRows of a bigger matrix
         
         A := EvalCertainColumns( M )[1];
         plistA := EvalCertainColumns( M )[2];
@@ -1149,10 +1153,14 @@ InstallMethod( CertainRows,
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( Compose )", "\033[0m" );
     
-    A := EvalCompose( M )[1];
-    B := EvalCompose( M )[2];
+    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
+        A := EvalCompose( M )[1];
+        B := EvalCompose( M )[2];
+        
+        return CertainRows( A, plist ) * B;
+    fi;
     
-    return CertainRows( A, plist ) * B;
+    TryNextMethod( );
     
 end );
 
@@ -1181,7 +1189,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
+    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
         
         Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( CertainColumns )", "\033[0m" );
     
@@ -1204,7 +1212,7 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, plistA;
     
-    if not HasEval( M ) then ## otherwise we would take CertainColumns of a bigger matrix
+    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
         
         A := EvalCertainRows( M )[1];
         plistA := EvalCertainRows( M )[2];
@@ -1271,12 +1279,16 @@ InstallMethod( CertainColumns,
   function( M, plist )
     local A, B;
     
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( Compose )", "\033[0m" );
+    if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( Compose )", "\033[0m" );
+        
+        A := EvalCompose( M )[1];
+        B := EvalCompose( M )[2];
+        
+        return A * CertainColumns( B, plist );
+    fi;
     
-    A := EvalCompose( M )[1];
-    B := EvalCompose( M )[2];
-    
-    return A * CertainColumns( B, plist );
+    TryNextMethod( );
     
 end );
 
