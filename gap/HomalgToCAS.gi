@@ -90,7 +90,7 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, io_info_level, info_level, properties,
           need_command, need_display, need_output, ar, pictogram, option,
           break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS,
-          PID, homalg_variable, l, eoc, enter, max, display_color;
+          PID, homalg_variable, l, eoc, enter, fs, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -316,7 +316,29 @@ InstallGlobalFunction( homalgSendBlocking,
         Add( HOMALG_IO.homalgSendBlocking, L );
     fi;
     
-    
+    if ( IsBound( HOMALG_IO.CAS_commands_file ) and HOMALG_IO.CAS_commands_file = true )
+       or IsBound( stream.CAS_commands_file ) then
+        if not IsBound( stream.CAS_commands_file ) then
+            stream.CAS_commands_file := Concatenation( "commands_file_of_", CAS, "_with_PID_", String( PID ) );
+            fs := IO_File( stream.CAS_commands_file, "w" );
+            if fs = fail then
+                Error( "unable to open the file ", stream.CAS_commands_file, " for writing\n" );
+            fi;
+            if IO_Close( fs ) = fail then
+                Error( "unable to close the file ", stream.CAS_commands_file, "\n" );
+            fi;
+        fi;
+        
+        fs := IO_File( stream.CAS_commands_file, "a" );
+        
+        if IO_WriteFlush( fs, L ) = fail then
+            Error( "unable to write in the file ", stream.CAS_commands_file, "\n" );
+        fi;
+        
+        if IO_Close( fs ) = fail then
+            Error( "unable to close the file ", stream.CAS_commands_file, "\n" );
+        fi;
+    fi;
     
     if io_info_level >= 7 then
         Info( InfoIO_ForHomalg, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );

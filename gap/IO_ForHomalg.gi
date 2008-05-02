@@ -26,6 +26,7 @@ InstallValue( HOMALG_IO,
 	    ListOfAlternativeDirectoryForTemporaryFiles := [ "/dev/shm/", "/var/tmp/", "/tmp/" ],
             FileNameCounter := 1,
             PID := IO_getpid(),
+            CAS_commands_file := false,
             Pictograms := rec(
                 ## colors:
                 color_need_command		:= "\033[1;33;44m",	## the color of a need_command or assignment operation's pictogram
@@ -34,12 +35,14 @@ InstallValue( HOMALG_IO,
                 ## good morning computer algebra system:
                 initialize				:= "ini",	## initialize
                 define					:= "def",	## define macros
+                variables				:= "var",	## get the names of the "variables" defining the ring
                 
                 ## create rings:
                 CreateHomalgRing			:= "R:=",	## define a ring
                 
                 ## ring operations:
                 Minus					:= "a-b",	## substract two ring elements
+                DivideByUnit				:= "a/u",	## divide the element a by the unit u
                 
                 ## create matrices:
                 HomalgMatrix				:= "A:=",	## define a matrix
@@ -76,6 +79,8 @@ InstallValue( HOMALG_IO,
                 ## optional matrix operations:
                 ConvertRowToMatrix			:= "-%A",	## convert a single row matrix into a matrix with specified number of rows/columns
                 ConvertColumnToMatrix			:= "|%A",	## convert a single column matrix into a matrix with specified number of rows/columns
+                ConvertMatrixToRow			:= "A%-",	## convert a matrix into a single row matrix
+                ConvertColumnToMatrix			:= "A%|",	## convert a matrix into a single column matrix
                 IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal
                 
                 ## operations to compute a simpler equivalent matrix (one also needs Minus and DivideByUnit from above):
