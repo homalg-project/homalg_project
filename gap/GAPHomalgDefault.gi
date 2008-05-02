@@ -56,7 +56,7 @@ InstallValue( CommonHomalgTableForGAPHomalgDefault,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := BasisOfRowsCoeff(", M, T, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfRowsCoeff(", M, T, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
                    return N;
                    
@@ -70,7 +70,7 @@ InstallValue( CommonHomalgTableForGAPHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ N, " := BasisOfColumnsCoeff(", M, T, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := BasisOfColumnsCoeff(", M, T, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
                    return N;
                    
@@ -112,7 +112,7 @@ InstallValue( CommonHomalgTableForGAPHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroRowsEffectively(", A, B, T, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroRowsEffectively(", A, B, T, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
                    return N;
                    
@@ -126,7 +126,7 @@ InstallValue( CommonHomalgTableForGAPHomalgDefault,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " := DecideZeroColumnsEffectively(", A, B, T, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ T, " := HomalgVoidMatrix(", R, ");; ", N, " := DecideZeroColumnsEffectively(", A, B, T, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
                    return N;
                    

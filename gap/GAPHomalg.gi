@@ -255,8 +255,17 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
+    local s, l;
     
-    return homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
+    s := homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
+    
+    l := Length( s );
+    
+    if l < 3 then
+        return s;
+    fi;
+    
+    return s{[ 2 .. l-1 ]};
     
 end );
 
@@ -266,8 +275,17 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
+    local s, l;
     
-    return homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    s := homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    
+    l := Length( s );
+    
+    if l < 3 then
+        return s;
+    fi;
+    
+    return s{[ 2 .. l-1 ]};
     
 end );
 
@@ -277,8 +295,17 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
+    local s, l;
     
-    return homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    s := homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    
+    l := Length( s );
+    
+    if l < 3 then
+        return s;
+    fi;
+    
+    return s{[ 2 .. l-1 ]};
     
 end );
 

@@ -65,7 +65,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/IsZeroMapF`(`homalg/SubMat`(", A, B, R, "),", R, ")" ] , HOMALG_IO.Pictograms.AreEqualMatrices, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "`homalg/AreEqualMatrices`(", A, B, R, ")" ] , HOMALG_IO.Pictograms.AreEqualMatrices, "need_output" ) = "true";
                    
                  end,
                
@@ -263,5 +263,25 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                  
+               ConvertRowToMatrix :=
+                 function( M, r, c )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   return homalgSendBlocking( [ "`homalg/ConvertRowToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   
+                 end,
+               
+               ConvertColumnToMatrix :=
+                 function( M, r, c )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
+                   
+                 end,
+               
         )
  );

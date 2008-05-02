@@ -210,5 +210,26 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                  
+               ConvertRowToMatrix :=
+                 function( M, r, c )
+                   
+                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   
+                 end,
+               
+               ConvertColumnToMatrix :=
+                 function( M, r, c )
+                   
+                   return homalgSendBlocking( [ "ConvertColumnToMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
+                   
+                 end,
+               
+               IsDiagonalMatrix :=
+                 function( M )
+                   
+                   return homalgSendBlocking( [ "IsDiagonalMatrix( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.IsDiagonalMatrix ) = "true";
+                   
+                 end,
+               
         )
  );
