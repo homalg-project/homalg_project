@@ -17,8 +17,7 @@
 
 InstallMethod( CreateHomalgTable,
         "for homalg rings provided by the maple package Involutive",
-        [ IsHomalgExternalRingObjectInMapleRep
-          and IsCommutative ],
+        [ IsHomalgExternalRingObjectInMapleUsingInvolutiveRep ],
         
   function( arg )
     local RP, RP_default, RP_BestBasis, RP_specific, component;

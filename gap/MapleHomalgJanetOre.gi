@@ -17,7 +17,7 @@
 
 InstallMethod( CreateHomalgTable,
         "for homalg rings provided by the maple package JanetOre",
-        [ IsHomalgExternalRingInMapleUsingJanetOreRep ],
+        [ IsHomalgExternalRingObjectInMapleUsingJanetOreRep ],
 
   function( arg )
     local RP, RP_default, RP_BestBasis, RP_specific, component;
@@ -34,7 +34,7 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> homalgSendBlocking( [ "K[op(", R, "[1])]" ], "need_output" )
+               RingName := R -> Concatenation( "K<", homalgSendBlocking( [ "op(", R, "[1][1])" ], HOMALG_IO.Pictograms.variables, "need_output" ), "|", homalgSendBlocking( [ "op(", R, "[1][3])" ], HOMALG_IO.Pictograms.variables, "need_output" ), ">" ),
                
           );
     

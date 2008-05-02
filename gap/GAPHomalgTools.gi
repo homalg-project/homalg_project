@@ -180,6 +180,16 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                  
+               DivideByUnit :=
+                 function( a, u )
+                   local R;
+                   
+                   R := HomalgRing( a );
+                   
+                   return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
+                   
+                 end,
+                 
                GetUnitPosition :=
                  function( M, pos_list )
                    local list_string;
