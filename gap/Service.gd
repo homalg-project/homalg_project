@@ -30,12 +30,6 @@ DeclareOperation( "TriangularBasisOfColumns",
 DeclareOperation( "TriangularBasisOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "BasisOfRowModule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "BasisOfColumnModule",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "BasisOfRowsCoeff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 

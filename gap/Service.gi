@@ -234,10 +234,6 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
   function( M )
     local R, RP, t, B, rank;
     
-    if HasIsBasisOfRowsMatrix( M ) and IsBasisOfRowsMatrix( M ) then
-        return M;
-    fi;
-    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -299,10 +295,6 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
   function( M )
     local R, RP, t, B, rank;
-    
-    if HasIsBasisOfColumnsMatrix( M ) and IsBasisOfColumnsMatrix( M ) then
-        return M;
-    fi;
     
     R := HomalgRing( M );
     

@@ -785,7 +785,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 
                 r := GetEntryOfHomalgMatrix( M, i, j ); 
                 if r <> one then
-                    q := r ^ -1;
+                    q := one / r;
                     
                     SetEntryOfHomalgMatrix( M, i, j, one );
                     for a in [ 1 .. n ] do
@@ -867,7 +867,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                     UI := UI * ui;
                 fi;
           
-                for k in Concatenation( [ 1 .. i-1 ], [ i+1 .. n ] ) do
+                for k in Concatenation( [ 1 .. i-1 ], [ i+1 .. m ] ) do
                     SetEntryOfHomalgMatrix( M, k, j, zero );
                 od;
                 

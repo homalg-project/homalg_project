@@ -175,7 +175,7 @@ InstallImmediateMethod( IsTorsionModule,
         rel := SetsOfRelations( M )!.(i);
         
         if not IsString( rel ) then
-	    mat := MatrixOfRelations( rel );
+            mat := MatrixOfRelations( rel );
      
             if HasNrRows( mat ) and HasNrColumns( mat )
               and NrColumns( mat ) > NrRows( mat ) then
@@ -258,7 +258,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
     
@@ -269,7 +269,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep and IsRightModule ],
+        [ IsFinitelyPresentedModuleRep and IsRightModule ],
         
   function( M )
     
@@ -280,79 +280,75 @@ end );
 ##
 InstallMethod( SetsOfGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
     if IsBound(M!.SetsOfGenerators) then
         return M!.SetsOfGenerators;
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
 ##
 InstallMethod( SetsOfRelations,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
     if IsBound(M!.SetsOfRelations) then
         return M!.SetsOfRelations;
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
 ##
 InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
     if IsBound(M!.PositionOfTheDefaultSetOfRelations) then
         return M!.PositionOfTheDefaultSetOfRelations;
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
 ##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    #=====# begin of the core procedure #=====#
-    
     if IsBound(SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ))) then
         return SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ));
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
 ##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
         
   function( M, pos )
     
-    #=====# begin of the core procedure #=====#
-    
     if IsBound(SetsOfGenerators(M)!.(pos)) then
         return SetsOfGenerators(M)!.(pos);
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
@@ -363,13 +359,11 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
         
   function( M )
     
-    #=====# begin of the core procedure #=====#
-    
     if IsBound(SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ))) then;
         return SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ));
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
@@ -380,13 +374,46 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
         
   function( M, pos )
     
-    #=====# begin of the core procedure #=====#
-    
     if IsBound(SetsOfRelations(M)!.(pos)) then;
         return SetsOfRelations(M)!.(pos);
-    else
-        return fail;
     fi;
+    
+    return fail;
+    
+end );
+
+InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local gen;
+    
+    gen := GeneratorsOfModule( M );
+    
+    if gen <> fail then;
+        return RelationsOfHullModule( gen );
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    local gen;
+    
+    gen := GeneratorsOfModule( M, pos );
+    
+    if gen <> fail then;
+        return RelationsOfHullModule( gen );
+    fi;
+    
+    return fail;
     
 end );
 
@@ -411,9 +438,9 @@ InstallMethod( MatrixOfGenerators,
     
     if IsHomalgGenerators( gen ) then
         return MatrixOfGenerators( gen );
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
@@ -440,9 +467,9 @@ InstallMethod( MatrixOfRelations,
     
     if IsHomalgRelations( rel ) then
         return MatrixOfRelations( rel );
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
@@ -467,9 +494,9 @@ InstallMethod( NrGenerators,
     
     if IsHomalgGenerators( gen ) then
         return NrGenerators( gen );
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
@@ -485,9 +512,9 @@ InstallMethod( NrRelations,
     
     if IsHomalgRelations( rel ) then
         return NrRelations( rel );
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
@@ -503,16 +530,16 @@ InstallMethod( NrRelations,
     
     if IsHomalgRelations( rel ) then
         return NrRelations( rel );
-    else
-        return fail;
     fi;
+    
+    return fail;
     
 end );
 
 ##
 InstallMethod( TransitionMatrix,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsPosInt, IsPosInt ],
+        [ IsFinitelyPresentedModuleRep, IsPosInt, IsPosInt ],
         
   function( M, pos1, pos2 )
     local pres_a, pres_b, sets_of_generators, tr, sign, i, j;
@@ -583,7 +610,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        [ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
     local rels, gens, d, l, id, tr, itr;
@@ -654,7 +681,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
     local rels, lpos, d, gens, l, id, tr, itr;
@@ -741,7 +768,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, rel, T, TI )
     local rels, gens, d, l, gen, tr, itr;
@@ -817,7 +844,7 @@ end );
 ##
 InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly affecting the module M
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     local rel, bas, mat, diag, zero, rk;
@@ -852,68 +879,94 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg modules",
-	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local gen, red;
+    
+    gen := GeneratorsOfModule( M );
+    
+    if HasIsReduced( gen ) and IsReduced( gen ) then
+        return gen;
+    fi;
+    
+    red := DecideZero( gen );
+    
+    if MatrixOfGenerators( gen ) = MatrixOfGenerators( red ) then
+        return gen;
+    fi;
+    
+    AddANewPresentation( M, red );
+    
+    return red;
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg modules",
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     local rel;
     
     rel := RelationsOfModule( M );
     
-    return DecideZero( mat, rel ) ;
+    return DecideZero( mat, rel );
     
 end );
 
 ##
 InstallMethod( DecideZeroEffectively,
         "for homalg modules",
-	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     local rel;
     
     rel := RelationsOfModule( M );
     
-    return DecideZeroEffectively( mat, rel ) ;
+    return DecideZeroEffectively( mat, rel );
     
 end );
 
 ##
 InstallMethod( UnionOfRelations,
         "for homalg modules",
-	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     
-    return UnionOfRelations( mat, RelationsOfModule( M ) ) ;
+    return UnionOfRelations( mat, RelationsOfModule( M ) );
     
 end );
 
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return SyzygiesGenerators( RelationsOfModule( M ) ) ;
+    return SyzygiesGenerators( RelationsOfModule( M ) );
     
 end );
 
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg modules",
-	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     
-    return SyzygiesGenerators( mat, RelationsOfModule( M ) ) ;
+    return SyzygiesGenerators( mat, RelationsOfModule( M ) );
     
 end );
 
 ##
 InstallMethod( NonZeroGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
@@ -924,12 +977,10 @@ end );
 ##
 InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterPresentation) (incomplete)
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     local bl, rel, diagonal, upper, lower, id, T, TI;
-    
-    #=====# begin of the core procedure #=====#
     
     bl := NonZeroGenerators( M );
     
@@ -1000,7 +1051,7 @@ end );
 ##
 InstallMethod( BetterGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
     local R, rel_old, rel, V, VI;
@@ -1138,7 +1189,7 @@ InstallMethod( Presentation,
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgIdentityMatrix( NrGenerators( rel ), R ), R );
+                        HomalgIdentityMatrix( NrGenerators( rel ), R ), rel );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
@@ -1236,7 +1287,7 @@ InstallMethod( Presentation,
         is_zero_module := true;
     else
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgIdentityMatrix( NrGenerators( rel ), R ), R );
+                        HomalgIdentityMatrix( NrGenerators( rel ), R ), rel );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel );
@@ -1332,10 +1383,10 @@ InstallMethod( LeftPresentation,
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgIdentityMatrix( Length( rel[1] ), R ), R );  ## FIXME: Length( rel[1] )
+                        HomalgIdentityMatrix( Length( rel[1] ), R ), rel );  ## FIXME: Length( rel[1] )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgIdentityMatrix( 1, R ), R );
+                        HomalgIdentityMatrix( 1, R ), rel );
     fi;
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
@@ -1426,10 +1477,10 @@ InstallMethod( RightPresentation,
         is_zero_module := true;
     elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgIdentityMatrix( Length( rel ), R ), R ); ## FIXME: Length( rel )
+                        HomalgIdentityMatrix( Length( rel ), R ), rel ); ## FIXME: Length( rel )
     else ## only one generator
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgIdentityMatrix( 1, R ), R );
+                        HomalgIdentityMatrix( 1, R ), rel );
     fi;
     
     rels := CreateSetsOfRelationsForRightModule( rel, R );
@@ -1687,7 +1738,7 @@ InstallMethod( PrintObj,
     else
         Print( GeneratorsOfModule( M ), ", " );
         if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[ ], " ) ; ## empty relations
+            Print( "[ ], " ); ## empty relations
         else
             Print( RelationsOfModule( M ), ", " );
         fi;
@@ -1710,7 +1761,7 @@ InstallMethod( PrintObj,
     else
         Print( GeneratorsOfModule( M ), ", " );
         if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[ ], " ) ; ## empty relations
+            Print( "[ ], " ); ## empty relations
         else
             Print( RelationsOfModule( M ), ", " );
         fi;
@@ -1805,7 +1856,11 @@ InstallMethod( Display,
     fi;
     
     if rk <> 0 then
-        Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
+        if IsLeftModule ( M ) then
+            Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
+        else
+            Print( display, name, "^(\033[01m", rk, "\033[0m x 1)\n" );
+        fi;
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
     fi;

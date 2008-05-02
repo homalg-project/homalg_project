@@ -322,6 +322,18 @@ DeclareOperation( "GetCleanRowsPositions",
 DeclareOperation( "GetCleanRowsPositions",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "ConvertRowToMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt ] );
+
+DeclareOperation( "ConvertColumnToMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt ] );
+
+DeclareOperation( "ConvertMatrixToRow",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "ConvertMatrixToColumn",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "Involution",
         [ IsHomalgMatrix ] );
 
@@ -353,6 +365,12 @@ DeclareOperation( "*",				## this must remain, since an element in IsHomalgMatri
         [ IsHomalgMatrix, IsHomalgMatrix ] );	## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "DiagonalEntries",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "BasisOfRowModule",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "BasisOfColumnModule",
         [ IsHomalgMatrix ] );
 
 ####################################

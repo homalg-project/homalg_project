@@ -148,6 +148,12 @@ DeclareOperation( "RelationsOfModule",
 DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule, IsPosInt ] );
 
+DeclareOperation( "RelationsOfHullModule",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "RelationsOfHullModule",
+        [ IsHomalgModule, IsPosInt ] );
+
 DeclareOperation( "MatrixOfGenerators",
         [ IsHomalgModule ] );
 
@@ -185,6 +191,9 @@ DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgRelations, IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfModule",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "DecideZero",
         [ IsHomalgModule ] );
 
 DeclareOperation( "DecideZero",

@@ -509,11 +509,11 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
     
     if IsHomalgRelationsOfLeftModule( M ) then
         gen := HomalgGeneratorsForLeftModule( id, BasisOfModule( M ) );
-        gen := DecideZero( gen );
+        gen := MatrixOfGenerators( DecideZero( gen ) );
         return NonZeroRows( gen );
     else
         gen := HomalgGeneratorsForRightModule( id, BasisOfModule( M ) );
-        gen := DecideZero( gen );
+        gen := MatrixOfGenerators( DecideZero( gen ) );
         return NonZeroColumns( gen );
     fi;
     
@@ -566,7 +566,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
     if IsHomalgMatrix( arg[1] ) then
         relations := rec( relations := arg[1] );
     else
-        relations := rec( relations := HomalgMatrix( arg[1], arg[2] ) );
+        relations := rec( relations := CallFuncList( HomalgMatrix, arg ) );
     fi;
     
     ## Objectify:
@@ -583,7 +583,7 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
     if IsHomalgMatrix( arg[1] ) then
         relations := rec( relations := arg[1] );
     else
-        relations := rec( relations := HomalgMatrix( arg[1], arg[2] ) );
+        relations := rec( relations := CallFuncList( HomalgMatrix, arg ) );
     fi;
     
     ## Objectify:

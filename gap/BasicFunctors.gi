@@ -26,6 +26,8 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     
     rel := UnionOfRelations( phi );
     
+    gen := UnionOfRelations( gen, rel );
+    
     coker := Presentation( gen, rel );
     
     ## the identity matrix is the identity morphism (w.r.t. the first set of relations of coker)
@@ -58,7 +60,7 @@ end );
 InstallGlobalFunction( _Functor_Hom_OnObjects,
   function( M, N )
     local R, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
-          gen, proc;
+          gen, proc_to_readjust_generators, proc_to_normalize_generators;
     
     R := HomalgRing( M );
     
@@ -84,11 +86,15 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     if IsLeftModule( M ) then
         r := l0;
         c := _l0;
+        proc_to_normalize_generators := ConvertMatrixToColumn;
+        proc_to_readjust_generators := ConvertColumnToMatrix;
         HP0N := RightPresentation( HP0N );
         HP1N := RightPresentation( HP1N );
     else
         r := _l0;
         c := l0;
+        proc_to_normalize_generators := ConvertMatrixToRow;
+        proc_to_readjust_generators := ConvertRowToMatrix;
         HP0N := LeftPresentation( HP0N );
         HP1N := LeftPresentation( HP1N );
     fi;
@@ -99,12 +105,8 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
     gen := GeneratorsOfModule( hom );
     
-    proc :=
-      function( g, r, c )
-        return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( g ), r, c, HomalgRing( g ) );
-    end;
-    
-    SetProcedureToReadjustGenerators( gen, [ proc, r, c ] );
+    SetProcedureToNormalizeGenerators( gen, proc_to_normalize_generators );
+    SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, r, c ] );
     
     return hom;
     

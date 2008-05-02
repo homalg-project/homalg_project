@@ -1949,3 +1949,43 @@ InstallMethod( RightInverse,
     
 end );
 
+#-----------------------------------
+# BasisOfRowModule
+#-----------------------------------
+
+##
+InstallMethod( BasisOfRowModule,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalDiagMat ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: BasisOfRowModule( DiagMat )", "\033[0m" );
+    
+    e := EvalDiagMat( M );
+    
+    return DiagMat( List( e, BasisOfRowModule ) );
+    
+end );
+
+#-----------------------------------
+# BasisOfColumnModule
+#-----------------------------------
+
+##
+InstallMethod( BasisOfColumnModule,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalDiagMat ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: BasisOfColumnModule( DiagMat )", "\033[0m" );
+    
+    e := EvalDiagMat( M );
+    
+    return DiagMat( List( e, BasisOfColumnModule ) );
+    
+end );
+

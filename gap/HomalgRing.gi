@@ -270,6 +270,27 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( \/,
+        "for external homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
+          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( a, u )
+    local R, RP;
+    
+    R := HomalgRing( a );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.DivideByUnit) then
+        return HomalgExternalRingElement( RP!.DivideByUnit( a, u ), u!.cas, R );
+    fi;
+    
+    Error( "could not find a procedure called DivideByUnit in the homalgTable", RP, "\n" );
+    
+end );
+
+##
 InstallMethod( RingName,
         "for homalg rings",
         [ IsHomalgRing ],

@@ -93,7 +93,7 @@ InstallMethod( AdditiveInverseMutable,
     RP := homalgTable( R );
     
     if IsBound(RP!.Minus) and IsBound(RP!.Zero) then
-        minus_r := RP!.Minus( RP!.Zero, r );
+        minus_r := RP!.Minus( Zero( R ), r );
         return HomalgExternalRingElement( minus_r, homalgExternalCASystem( R ), R );
     fi;
     
@@ -113,12 +113,10 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
     
     RP := homalgTable( R );
     
-    if IsHomalgExternalMatrixRep( M ) then
-        if IsBound( RP!.GetUnitPosition ) then
-            return RP!.GetUnitPosition( M, pos_list );
-        else
-            Error( "could not find a procedure called GetUnitPosition in the homalgTable", RP, "\n" );
-        fi;
+    if IsBound(RP!.GetUnitPosition) then
+        return RP!.GetUnitPosition( M, pos_list );
+    elif IsHomalgExternalMatrixRep( M ) then
+        Error( "could not find a procedure called GetUnitPosition in the homalgTable", RP, "\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -152,12 +150,10 @@ InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
     
     RP := homalgTable( R );
     
-    if IsHomalgExternalMatrixRep( M ) then
-        if IsBound( RP!.GetCleanRowsPositions ) then
-            return RP!.GetCleanRowsPositions( M, clean_columns );
-        else
-            Error( "could not find a procedure called GetCleanRowsPositions in the homalgTable", RP, "\n" );
-        fi;
+    if IsBound(RP!.GetCleanRowsPositions) then
+        return RP!.GetCleanRowsPositions( M, clean_columns );
+    elif IsHomalgExternalMatrixRep( M ) then
+        Error( "could not find a procedure called GetCleanRowsPositions in the homalgTable", RP, "\n" );
     fi;
     
     one := One( R );
@@ -180,6 +176,122 @@ InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
     od;
     
     return  clean_rows;
+    
+end );
+
+##
+InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt ],
+        
+  function( M, r, c )
+    local R, RP, ext_obj;
+    
+    if NrRows( M ) <> 1 then
+        Error( "expecting a single row matrix as a first argument\n" );
+    fi;
+    
+    if r = 1 then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ConvertRowToMatrix) then
+        ext_obj := RP!.ConvertRowToMatrix( M, r, c );
+        return HomalgMatrix( ext_obj, R );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Involution( CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), c, r, R ) ); ## FIXME: replace Involuiton by transpose
+    
+end );
+
+##
+InstallMethod( ConvertColumnToMatrix,		### defines: ConvertColumnToMatrix
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt ],
+        
+  function( M, r, c )
+    local R, RP, ext_obj;
+    
+    if NrColumns( M ) <> 1 then
+        Error( "expecting a single column matrix as a first argument\n" );
+    fi;
+    
+    if c = 1 then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ConvertColumnToMatrix) then
+        ext_obj := RP!.ConvertColumnToMatrix( M, r, c );
+        return HomalgMatrix( ext_obj, R );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), r, c, R ); ## delicate
+    
+end );
+
+##
+InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, ext_obj;
+    
+    if NrRows( M ) = 1 then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ConvertMatrixToRow) then
+        ext_obj := RP!.ConvertMatrixToRow( M );
+        return HomalgMatrix( ext_obj, R );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( Involution ( M ) ), 1, NrRows( M ) * NrColumns( M ), R ); ## FIXME: replace Involuiton by transpose
+    
+end );
+
+##
+InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, ext_obj;
+    
+    if NrColumns( M ) = 1 then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ConvertMatrixToColumn) then
+        ext_obj := RP!.ConvertMatrixToColumn( M );
+        return HomalgMatrix( ext_obj, R );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), 1, NrColumns( M ) * NrRows( M ), R ); ## FIXME: replace Involuiton by transpose
     
 end );
 

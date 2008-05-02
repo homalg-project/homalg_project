@@ -111,6 +111,69 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
+InstallMethod( NewHomalgGenerators,
+        "for sets of generators of homalg modules",
+        [ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        
+  function( mat, gen )
+    local generators, relations_of_hullmodule, gen_new;
+    
+    generators := gen!.generators;
+    relations_of_hullmodule := gen!.relations_of_hullmodule;
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) then
+        gen_new := HomalgGeneratorsForLeftModule( mat, relations_of_hullmodule );
+    else
+        gen_new := HomalgGeneratorsForRightModule( mat, relations_of_hullmodule );
+    fi;
+    
+    if HasProcedureToReadjustGenerators( gen ) then
+        SetProcedureToReadjustGenerators( gen_new, ProcedureToReadjustGenerators( gen ) );
+    fi;
+    
+    if HasProcedureToNormalizeGenerators( gen ) then
+        SetProcedureToNormalizeGenerators( gen_new, ProcedureToNormalizeGenerators( gen ) );
+    fi;
+    
+    return gen_new;
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( gen, rel )
+    local gen_new, hull;
+    
+    gen_new := MatrixOfGenerators( gen );
+    
+    hull := RelationsOfHullModule( gen );
+    
+    hull := UnionOfRelations( hull, rel );
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) and IsHomalgRelationsOfLeftModule( rel ) then
+        gen_new := HomalgGeneratorsForLeftModule( gen_new, hull );
+    elif IsHomalgGeneratorsOfRightModule( gen ) and IsHomalgGeneratorsOfRightModule( rel ) then
+        gen_new := HomalgGeneratorsForRightModule( gen_new, hull );
+    else
+        Error( "the set of generators and the set of relations must either be both left or both right\n" );
+    fi;
+    
+    if HasProcedureToReadjustGenerators( gen ) then
+        SetProcedureToReadjustGenerators( gen_new, ProcedureToReadjustGenerators( gen ) );
+    fi;
+    
+    if HasProcedureToNormalizeGenerators( gen ) then
+        SetProcedureToNormalizeGenerators( gen_new, ProcedureToNormalizeGenerators( gen ) );
+    fi;
+    
+    return gen_new;
+    
+end );
+
+##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
@@ -127,7 +190,8 @@ InstallMethod( BasisOfModule,
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
     
-    return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME
+    return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
+    
 end );
 
 ##
@@ -147,7 +211,8 @@ InstallMethod( BasisOfModule,
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
         
-    return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME
+    return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
+    
 end );
 
 ##
@@ -156,30 +221,30 @@ InstallMethod( DecideZero,
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
+    local gen_new;
     
-    if HasIsReduced( gen ) and IsReduced( gen ) then
-        return MatrixOfGenerators( gen );
-    elif not IsBound( gen!.DecideZero ) then
+    if not IsBound( gen!.DecideZero ) then
         gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), RelationsOfHullModule( gen ) );
         SetIsReduced( gen, false );
     fi;
     
-    return gen!.DecideZero;
+    gen_new := NewHomalgGenerators( gen!.DecideZero, gen );
+    
+    SetIsReduced( gen_new, true );
+    
+    return gen_new;
+    
 end );
 
 ##
 InstallMethod( DecideZero,
         "for sets of generators of homalg modules",
-        [ IsHomalgGenerators, IsHomalgRelations ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsReduced ],
         
-  function( gen, rel )
+  function( gen )
     
-    if not IsBound( gen!.DecideZero ) then
-        gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), rel );
-        SetIsReduced( gen, false );
-    fi;
+    return gen;
     
-    return gen!.DecideZero;
 end );
 
 ##
@@ -187,32 +252,40 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
         "for sets of relations of homalg modules",
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
-  function( _M )
-    local R, RP, M;
+  function( _gen )
+    local R, RP, gen;
     
-    R := HomalgRing( _M );
+    R := HomalgRing( _gen );
     
     RP := homalgTable( R );
     
     #=====# begin of the core procedure #=====#
     
-    if IsHomalgGeneratorsOfLeftModule( _M ) then
+    gen := DecideZero( _gen );
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) then
+        
         if IsBound(RP!.SimplifyBasisOfRows) then
-            M := RP!.SimplifyBasisOfRows( _M );
+            gen := RP!.SimplifyBasisOfRows( gen );
         else
-            M := MatrixOfGenerators( _M );
+            gen := MatrixOfGenerators( gen );
         fi;
         
-        return HomalgGeneratorsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
+        gen := CertainRows( gen, NonZeroRows( gen ) );
+        
     else
+        
         if IsBound(RP!.SimplifyBasisOfColumns) then
-            M := RP!.SimplifyBasisOfColumns( _M );
+            gen := RP!.SimplifyBasisOfColumns( gen );
         else
-            M := MatrixOfGenerators( _M );
+            gen := MatrixOfGenerators( gen );
         fi;
         
-        return HomalgGeneratorsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
+        gen := CertainColumns( gen, NonZeroColumns( gen ) );
+        
     fi;
+    
+    return NewHomalgGenerators( gen, _gen );
     
 end );
 
@@ -224,7 +297,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( gen, rel )
     
-    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    return HomalgRelationsForLeftModule( SyzygiesGenerators( MatrixOfGenerators( gen ), rel ) );
     
 end );
 
@@ -236,7 +309,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( gen, rel )
     
-    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    return HomalgRelationsForRightModule( SyzygiesGenerators( MatrixOfGenerators( gen ), rel ) );
     
 end );
 
@@ -246,46 +319,34 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( TI, gen )
-    local generators, relations_of_hullmodule, gen_new;
+    local generators;
     
     generators := gen!.generators;
-    relations_of_hullmodule := gen!.relations_of_hullmodule;
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
-        gen_new := HomalgGeneratorsForLeftModule( TI * generators, relations_of_hullmodule );
+        return NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
     else
-        gen_new := HomalgGeneratorsForRightModule( generators * TI, relations_of_hullmodule );
+        return NewHomalgGenerators( generators * TI, gen ); ## the hull relations remain unchanged :)
     fi;
-    
-    if HasProcedureToReadjustGenerators( gen ) then
-        SetProcedureToReadjustGenerators( gen_new, ProcedureToReadjustGenerators( gen ) );
-    fi;
-    
-    return gen_new;
     
 end );
 
 ##
 InstallMethod( \*,
         "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule,
-          IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen1, gen2 )
+    local gen;
     
-    return MatrixOfGenerators( gen1 ) * gen2;
+    if not ( IsHomalgGeneratorsOfLeftModule( gen1 ) and IsHomalgGeneratorsOfLeftModule( gen2 ) )
+       and not ( IsHomalgGeneratorsOfRightModule( gen1 ) and IsHomalgGeneratorsOfRightModule( gen2 ) ) then
+        Error( "the two sets of generators must either be both left or both right\n" );
+    fi;
     
-end );
-
-##
-InstallMethod( \*,
-        "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule,
-          IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
-        
-  function( gen1, gen2 )
+    gen := MatrixOfGenerators( gen1 ) * gen2;
     
-    return MatrixOfGenerators( gen1 ) * gen2;
+    return gen;
     
 end );
 
@@ -316,12 +377,22 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
         Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
     fi;
     
+    if not IsBound( R ) then
+        R := HomalgRing( generators );
+    fi;
+    
     for ar in arg{ [ 2 .. nargs ] } do
         if IsHomalgRelations( ar ) then
+            if not IsHomalgRelationsOfLeftModule( ar ) then
+                Error( "the set of relations of the hull module of the generators is not a set of relations of a left module\n" );
+            fi;
             relations_of_hullmodule := ar;
             break;
         elif IsHomalgMatrix( ar ) then
             relations_of_hullmodule := HomalgRelationsForLeftModule( ar );
+            break;
+        elif IsList( ar ) and not IsStringRep( ar ) and IsBound( R ) then
+            relations_of_hullmodule := HomalgRelationsForLeftModule( ar, R );
             break;
         elif nargs > 2 then
             if IsBound( R ) then
@@ -333,13 +404,9 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
         fi;
     od;
     
-    if not IsBound( R ) then
-        R := HomalgRing( generators );
-    fi;
-    
     if not IsBound( relations_of_hullmodule ) then
         relations_of_hullmodule :=
-          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NrRows( generators ), R ), R );
+          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NrColumns( generators ), R ) );
     fi;
     
     gen := rec( generators := generators,
@@ -373,12 +440,22 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
         Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
     fi;
     
+    if not IsBound( R ) then
+        R := HomalgRing( generators );
+    fi;
+    
     for ar in arg{ [ 2 .. nargs ] } do
         if IsHomalgRelations( ar ) then
+            if not IsHomalgRelationsOfRightModule( ar ) then
+                Error( "the set of relations of the hull module of the generators is not a set of relations of a right module\n" );
+            fi;
             relations_of_hullmodule := ar;
             break;
         elif IsHomalgMatrix( ar ) then
             relations_of_hullmodule := HomalgRelationsForRightModule( ar );
+            break;
+        elif IsList( ar ) and not IsStringRep( ar ) and IsBound( R ) then
+            relations_of_hullmodule := HomalgRelationsForLeftModule( ar, R );
             break;
         elif nargs > 2 then
             if IsBound( R ) then
@@ -390,13 +467,9 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
         fi;
     od;
     
-    if not IsBound( R ) then
-        R := HomalgRing( generators );
-    fi;
-    
     if not IsBound( relations_of_hullmodule ) then
         relations_of_hullmodule :=
-          HomalgRelationsForLeftModule( HomalgZeroMatrix( 0, NrRows( generators ), R ), R );
+          HomalgRelationsForRightModule( HomalgZeroMatrix( NrRows( generators ), 0, R ) );
     fi;
     
     gen := rec( generators := generators,

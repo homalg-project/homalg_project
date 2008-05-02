@@ -59,7 +59,9 @@ end );
 
 InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
   function( arg )
-    local generators;
+    local nargs, generators;
+    
+    nargs := Length( arg );
     
     generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ] );
     
@@ -69,7 +71,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
     elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
         generators.1 := "unknown generators";
     else
-        generators.1 := HomalgGeneratorsForLeftModule( arg[1], arg[2] );
+        generators.1 := CallFuncList( HomalgGeneratorsForLeftModule, arg );
     fi;
     
     ## Objectify:
@@ -91,7 +93,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForRightModule,
     elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
         generators.1 := "unknown generators";
     else
-        generators.1 := HomalgGeneratorsForRightModule( arg[1], arg[2] );
+        generators.1 := CallFuncList( HomalgGeneratorsForRightModule, arg );
     fi;
     
     ## Objectify:

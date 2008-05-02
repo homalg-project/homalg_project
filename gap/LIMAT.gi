@@ -742,6 +742,29 @@ end );
 ##
 InstallMethod( KroneckerMat,
         "of homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( A, B )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    if ( HasNrRows( B ) and NrRows( B ) = 1 )
+       or ( HasNrRows( B ) and NrRows( B ) = 1 ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "KroneckerMat( IsHomalgMatrix, (1) )", "\033[0m" );
+        
+        return A;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( KroneckerMat,
+        "of homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZeroMatrix ],
         
   function( A, B )

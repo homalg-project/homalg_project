@@ -43,6 +43,9 @@ DeclareProperty( "IsReduced",
 #
 ####################################
 
+DeclareAttribute( "ProcedureToNormalizeGenerators",
+        IsHomalgGenerators );
+
 DeclareAttribute( "ProcedureToReadjustGenerators",
         IsHomalgGenerators );
 
@@ -73,6 +76,12 @@ DeclareOperation( "MatrixOfRelations",
 
 DeclareOperation( "NrGenerators",
         [ IsHomalgGenerators ] );
+
+DeclareOperation( "NewHomalgGenerators",
+        [ IsHomalgMatrix, IsHomalgGenerators ] );
+
+DeclareOperation( "UnionOfRelations",
+        [ IsHomalgGenerators, IsHomalgRelations ] );
 
 DeclareOperation( "BasisOfModule",
         [ IsHomalgGenerators ] );

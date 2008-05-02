@@ -1,3 +1,7 @@
+- Error messages for AddANewPresentation
+
+- Error messages for +, -, etc if the matrices are defined over different rings
+
 - GARBAGE COLLECTION in the code
 - talk with the GAP people about:
   IsFreeLeftModule is a category and should become a property
