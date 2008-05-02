@@ -73,11 +73,16 @@ InstallValue( HOMALG_IO,
                 NrRows					:= "#==",	## number of rows
                 NrColumns				:= "#||",	## number of columns
                 
+                ## optional matrix operations:
+                ConvertRowToMatrix			:= "-%A",	## convert a single row matrix into a matrix with specified number of rows/columns
+                ConvertColumnToMatrix			:= "|%A",	## convert a single column matrix into a matrix with specified number of rows/columns
+                IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal
+                
                 ## operations to compute a simpler equivalent matrix (one also needs Minus and DivideByUnit from above):
                 GetUnitPosition				:= "gup",	## get the position of the "first" unit in the matrix
                 GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one
                 
-                ## basic operations:
+                ## basic module operations:
                 TriangularBasis				:= "Tri",	## compute a (Tri)angular basis
                 BasisOfModule				:= "Bas",	## compute a "(Bas)is" of a given set of module elements
                 DecideZero				:= "dc0",	## (d)e(c)ide the ideal/submodule membership problem, i.e. if an element is (0) modulo the ideal/submodule
@@ -86,7 +91,7 @@ InstallValue( HOMALG_IO,
                 BasisCoeff				:= "BAS",	## compute a "(BAS)is" of a given set of module elements together with the matrix of coefficients
                 DecideZeroEffectively			:= "DC0",	## (D)e(C)ide the ideal/submodule membership problem, i.e. write an element effectively as (0) modulo the ideal/submodule
                 
-                ## optional operations:
+                ## optional module operations:
                 BestBasis				:= "(\\)",	## compute a better equivalent matrix (field -> row+col Gauss, PIR -> Smith, Dedekind domain -> Krull, etc ...)
                 ElementaryDivisors			:= "div",	## compute elementary divisors
                 
