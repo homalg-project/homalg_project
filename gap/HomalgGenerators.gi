@@ -116,9 +116,8 @@ InstallMethod( NewHomalgGenerators,
         [ IsHomalgMatrix, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( mat, gen )
-    local generators, relations_of_hullmodule, gen_new;
+    local relations_of_hullmodule, gen_new;
     
-    generators := gen!.generators;
     relations_of_hullmodule := gen!.relations_of_hullmodule;
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
@@ -455,7 +454,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
             relations_of_hullmodule := HomalgRelationsForRightModule( ar );
             break;
         elif IsList( ar ) and not IsStringRep( ar ) and IsBound( R ) then
-            relations_of_hullmodule := HomalgRelationsForLeftModule( ar, R );
+            relations_of_hullmodule := HomalgRelationsForRightModule( ar, R );
             break;
         elif nargs > 2 then
             if IsBound( R ) then
@@ -559,19 +558,20 @@ InstallMethod( Display,
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and HasProcedureToReadjustGenerators ],
         
   function( o )
-    local mat, proc, i;
+    local mat, proc, l, i;
     
     mat := MatrixOfGenerators( o );
     
     proc := ProcedureToReadjustGenerators( o );
+    l := Length( proc );
     
     if IsHomalgGeneratorsOfLeftModule( o ) then
         for i in [ 1 .. NrGenerators( o ) ] do
-            Display( proc[1]( CertainRows( mat, [ i ] ), proc[2], proc[3] ) ); Print( "\n" );
+            Display( CallFuncList( proc[1], Concatenation( [ CertainRows( mat, [ i ] ) ], proc{[ 2 .. l ]} ) ) ); Print( "\n" );
         od;
     else
         for i in [ 1 .. NrGenerators( o ) ] do
-            Display( proc[1]( CertainColumns( mat, [ i ] ), proc[2], proc[3] ) ); Print( "\n" );
+            Display( CallFuncList( proc[1], Concatenation( [ CertainColumns( mat, [ i ] ) ], proc{[ 2 .. l ]} ) ) ); Print( "\n" );
         od;
     fi;
     

@@ -711,7 +711,7 @@ InstallGlobalFunction( HomalgMorphism,
         
         if IsHomalgMatrix( arg[1] ) then
             if not IsIdenticalObj( HomalgRing( arg[1] ), R ) then
-                Error( "the rings of the matrix and of the modules do not coincide\n" );
+                Error( "the matrix and the modules are not defined over identically the same ring\n" );
             fi;
             matrix := arg[1];
         elif IsList( arg[1] ) then
@@ -721,12 +721,12 @@ InstallGlobalFunction( HomalgMorphism,
         fi;
         
         if IsLeftModule( source )
-           and ( NrGenerators( source ) <> NrRows( matrix )
-                 or NrGenerators( target ) <> NrColumns( matrix ) ) then
+           and ( NrGenerators( source, pos_s ) <> NrRows( matrix )
+                 or NrGenerators( target, pos_t ) <> NrColumns( matrix ) ) then
             Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
         elif IsRightModule( source )
-           and ( NrGenerators( source ) <> NrColumns( matrix )
-                 or NrGenerators( target ) <> NrRows( matrix ) ) then
+           and ( NrGenerators( source, pos_s ) <> NrColumns( matrix )
+                 or NrGenerators( target, pos_t ) <> NrRows( matrix ) ) then
             Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
         fi;
         

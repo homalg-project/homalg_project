@@ -534,6 +534,10 @@ InstallMethod( UnionOfRows,
         
   function( A, B )
     
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
+    
     if NrColumns( A ) <> NrColumns( B ) then
         Error( "the two matrices are not stackable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrColumns( B ), "\n" );
     fi;
@@ -592,6 +596,10 @@ InstallMethod( UnionOfColumns,
         
   function( A, B )
     
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
+    
     if NrRows( A ) <> NrRows( B ) then
         Error( "the two matrices are not augmentable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
     fi;
@@ -649,13 +657,20 @@ InstallMethod( DiagMat,
         [ IsHomogeneousList ], 10001,
         
   function( l )
+    local R;
     
     if l = [ ] then
         Error( "recieved an empty list\n" );
     fi;
     
+    R := HomalgRing( l[1] );
+    
     if not ForAll( l, IsHomalgMatrix ) then
         Error( "at least one of the matrices in the list is not a homalg matrix\n" );
+    fi;
+    
+    if not ForAll( l{[ 2 .. Length( l ) ]}, a -> IsIdenticalObj( HomalgRing( a ), R ) ) then
+        Error( "the matrices are not defined over identically the same ring\n" );
     fi;
     
     TryNextMethod( );
@@ -709,6 +724,21 @@ end );
 #-----------------------------------
 # KroneckerMat
 #-----------------------------------
+
+##
+InstallMethod( KroneckerMat,
+        "of homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
+        
+  function( A, B )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( KroneckerMat,
@@ -784,6 +814,21 @@ end );
 
 ##
 InstallMethod( \*,
+        "of homalg matrices",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsHomalgMatrix ], 10001,
+        
+  function( a, A )
+    
+    if not IsIdenticalObj( HomalgRing( a ), HomalgRing( A ) ) then
+        Error( "the ring element and the matrix are not defined over identically the same ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
         "of homalg matrices with ring elements",
         [ IsRingElement and IsZero, IsHomalgMatrix ],
         
@@ -831,6 +876,10 @@ InstallMethod( \+,
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
     
     if NrRows( A ) <> NrRows( B ) then
         Error( "the two matrices are not summable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
@@ -897,6 +946,10 @@ InstallMethod( \-,
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
     
     if NrRows( A ) <> NrRows( B ) then
         Error( "the two matrices are not subtractable, since the first one has ", NrRows( A ), " row(s), while the second ", NrRows( B ), "\n" );
@@ -965,6 +1018,10 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
     
     if NrColumns( A ) <> NrRows( B ) then
         Error( "the two matrices are not composable, since the first one has ", NrColumns( A ), " column(s), while the second ", NrRows( B ), " row(s)\n" );
@@ -1355,12 +1412,12 @@ InstallMethod( DecideZeroRows,
         
   function( L, B )
     
-    if NrColumns( L ) <> NrColumns( B ) then
-        Error( "the number of columns of the two matrices must coincide\n" );
+    if not IsIdenticalObj( HomalgRing( L ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
     fi;
     
-    if not IsIdenticalObj( HomalgRing( L ), HomalgRing( B ) ) then
-        Error( "the rings of the two matrices are not identical\n" );
+    if NrColumns( L ) <> NrColumns( B ) then
+        Error( "the number of columns of the two matrices must coincide\n" );
     fi;
     
     TryNextMethod( );
@@ -1417,12 +1474,12 @@ InstallMethod( DecideZeroColumns,
         
   function( L, B )
     
-    if NrRows( L ) <> NrRows( B ) then
-        Error( "the number of rows of the two matrices must coincide\n" );
+    if not IsIdenticalObj( HomalgRing( L ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
     fi;
     
-    if not IsIdenticalObj( HomalgRing( L ), HomalgRing( B ) ) then
-        Error( "the rings of the two matrices are not identical\n" );
+    if NrRows( L ) <> NrRows( B ) then
+        Error( "the number of rows of the two matrices must coincide\n" );
     fi;
     
     TryNextMethod( );
@@ -1479,12 +1536,12 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
   function( M1, M2 )
     
-    if NrColumns( M1 ) <> NrColumns( M2 ) then
-        Error( "the number of columns of the two matrices must coincide\n" );
+    if not IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
     fi;
     
-    if not IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) then
-        Error( "the rings of the two matrices are not identical\n" );
+    if NrColumns( M1 ) <> NrColumns( M2 ) then
+        Error( "the number of columns of the two matrices must coincide\n" );
     fi;
     
     TryNextMethod( );
@@ -1567,12 +1624,12 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
   function( M1, M2 )
     
-    if NrRows( M1 ) <> NrRows( M2 ) then
-        Error( "the number of rows of the two matrices must coincide\n" );
+    if not IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
     fi;
     
-    if not IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) ) then
-        Error( "the rings of the two matrices are not identical\n" );
+    if NrRows( M1 ) <> NrRows( M2 ) then
+        Error( "the number of rows of the two matrices must coincide\n" );
     fi;
     
     TryNextMethod( );

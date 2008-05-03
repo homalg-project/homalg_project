@@ -59,7 +59,7 @@ end );
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,
   function( M, N )
-    local R, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
+    local R, s, t, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
           gen, proc_to_readjust_generators, proc_to_normalize_generators;
     
     R := HomalgRing( M );
@@ -67,6 +67,9 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     if not IsIdenticalObj( R, HomalgRing( N ) ) then
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
+    
+    s := PositionOfTheDefaultSetOfGenerators( M );
+    t := PositionOfTheDefaultSetOfGenerators( N );
     
     l0 := NrGenerators( M );
     l1 := NrRelations( M );
@@ -86,15 +89,70 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     if IsLeftModule( M ) then
         r := l0;
         c := _l0;
-        proc_to_normalize_generators := ConvertMatrixToColumn;
-        proc_to_readjust_generators := ConvertColumnToMatrix;
+        
+        proc_to_normalize_generators :=
+          function( mat, M, N, s, t )
+            local mor, mat_old;
+            
+            ## we expect mat to be a matrix of a morphism
+            ## w.r.t. the CURRENT generators of source and target:
+            mor := HomalgMorphism( mat, M, N );
+            
+            mat_old := MatrixOfMorphism( mor, s, t );
+            
+            return ConvertMatrixToColumn( mat_old );
+        end;
+        
+        proc_to_readjust_generators :=
+          function( gen, M, N, s, t )
+            local r, c, mat_old, mor;
+            
+            r := NrGenerators( M, s );
+            c := NrGenerators( N, t );
+            
+            mat_old := ConvertColumnToMatrix( gen, r, c );
+            
+            mor := HomalgMorphism( mat_old, [ M, s ], [ N, t ] );
+            
+            ## return the matrix of the morphism
+            ## w.r.t. the CURRENT generators of source and target:
+            return MatrixOfMorphism( mor );
+        end;
+        
         HP0N := RightPresentation( HP0N );
         HP1N := RightPresentation( HP1N );
     else
         r := _l0;
         c := l0;
-        proc_to_normalize_generators := ConvertMatrixToRow;
-        proc_to_readjust_generators := ConvertRowToMatrix;
+        
+        proc_to_normalize_generators :=
+          function( mat, M, N, s, t )
+            local mor, mat_old;
+            
+            ## we expect mat to be a matrix of a morphism w.r.t. the CURRENT generators of source and target!
+            mor := HomalgMorphism( mat, M, N );
+            
+            mat_old := MatrixOfMorphism( mor, s, t );
+            
+            return ConvertMatrixToRow( mat_old );
+        end;
+        
+        proc_to_readjust_generators :=
+          function( gen, M, N, s, t )
+            local c, r, mat_old, mor;
+            
+            c := NrGenerators( M, s );
+            r := NrGenerators( N, t );
+            
+            mat_old := ConvertRowToMatrix( gen, r, c );
+            
+            mor := HomalgMorphism( mat_old, [ M, s ], [ N, t ] );
+            
+            ## return the matrix of the morphism
+            ## w.r.t. the CURRENT generators of source and target:
+            return MatrixOfMorphism( mor );
+        end;
+        
         HP0N := LeftPresentation( HP0N );
         HP1N := LeftPresentation( HP1N );
     fi;
@@ -105,8 +163,8 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
     gen := GeneratorsOfModule( hom );
     
-    SetProcedureToNormalizeGenerators( gen, proc_to_normalize_generators );
-    SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, r, c ] );
+    SetProcedureToNormalizeGenerators( gen, [ proc_to_normalize_generators, M, N, s, t ] );
+    SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, M, N, s, t ] );
     
     return hom;
     

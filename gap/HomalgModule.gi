@@ -615,6 +615,11 @@ InstallMethod( AddANewPresentation,
   function( M, gen )
     local rels, gens, d, l, id, tr, itr;
     
+    if not ( IsLeftModule( M ) and IsHomalgGeneratorsOfLeftModule( gen ) )
+       and not ( IsRightModule( M ) and IsHomalgGeneratorsOfRightModule( gen ) ) then
+        Error( "the module and the new set of generators must either be both left or both right\n" );
+    fi;
+    
     rels := SetsOfRelations( M );
     gens := SetsOfGenerators( M );
     
@@ -685,6 +690,11 @@ InstallMethod( AddANewPresentation,
         
   function( M, rel )
     local rels, lpos, d, gens, l, id, tr, itr;
+    
+    if not ( IsLeftModule( M ) and IsHomalgRelationsOfLeftModule( rel ) )
+       and not ( IsRightModule( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
+        Error( "the module and the new set of relations must either be both left or both right\n" );
+    fi;
     
     rels := SetsOfRelations( M );
     
@@ -772,6 +782,11 @@ InstallMethod( AddANewPresentation,
         
   function( M, rel, T, TI )
     local rels, gens, d, l, gen, tr, itr;
+    
+    if not ( IsLeftModule( M ) and IsHomalgRelationsOfLeftModule( rel ) )
+       and not ( IsRightModule( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
+        Error( "the module and the new set of relations must either be both left or both right\n" );
+    fi;
     
     rels := SetsOfRelations( M );
     gens := SetsOfGenerators( M );
