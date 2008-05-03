@@ -185,7 +185,7 @@ InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
         [ IsHomalgMatrix, IsInt, IsInt ],
         
   function( M, r, c )
-    local R, RP, ext_obj;
+    local R, RP, ext_obj, l, mat, j;
     
     if NrRows( M ) <> 1 then
         Error( "expecting a single row matrix as a first argument\n" );
@@ -206,7 +206,22 @@ InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
     
     #=====# begin of the core procedure #=====#
     
-    return Involution( CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), c, r, R ) ); ## FIXME: replace Involuiton by transpose
+    ## to use
+    ## CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), c, r, R )
+    ## we would need a transpose afterwards,
+    ## which differs from Involution in general:
+    
+    l := List( [ 1 .. c ],  j -> CertainColumns( M, [ (j-1) * r + 1 .. j * r ] ) );
+    l := List( l, GetListOfHomalgMatrixAsString );
+    l := List( l, a -> CreateHomalgMatrix( a, r, 1, R ) );
+    
+    mat := HomalgZeroMatrix( r, 0, R );
+    
+    for j in [ 1 .. c ] do
+        mat := UnionOfColumns( mat, l[j] );
+    od;
+    
+    return mat;
     
 end );
 
@@ -247,7 +262,7 @@ InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ext_obj;
+    local R, RP, ext_obj, r, c, l, mat, j;
     
     if NrRows( M ) = 1 then
         return M;
@@ -264,7 +279,24 @@ InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
     
     #=====# begin of the core procedure #=====#
     
-    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( Involution ( M ) ), 1, NrRows( M ) * NrColumns( M ), R ); ## FIXME: replace Involuiton by transpose
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    ## CreateHomalgMatrix( GetListOfHomalgMatrixAsString( "Transpose"( M ) ), 1, r * c, R )
+    ## would require a Transpose operation,
+    ## which differs from Involution in general:
+    
+    l := List( [ 1 .. c ],  j -> CertainColumns( M, [ j ] ) );
+    l := List( l, GetListOfHomalgMatrixAsString );
+    l := List( l, a -> CreateHomalgMatrix( a, 1, r, R ) );
+    
+    mat := HomalgZeroMatrix( 1, 0, R );
+    
+    for j in [ 1 .. c ] do
+        mat := UnionOfColumns( mat, l[j] );
+    od;
+    
+    return mat;
     
 end );
 
@@ -291,7 +323,7 @@ InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
     
     #=====# begin of the core procedure #=====#
     
-    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), 1, NrColumns( M ) * NrRows( M ), R ); ## FIXME: replace Involuiton by transpose
+    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), NrColumns( M ) * NrRows( M ), 1, R ); ## delicate
     
 end );
 

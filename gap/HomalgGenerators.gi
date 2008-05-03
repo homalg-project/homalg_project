@@ -155,7 +155,7 @@ InstallMethod( UnionOfRelations,
     
     if IsHomalgGeneratorsOfLeftModule( gen ) and IsHomalgRelationsOfLeftModule( rel ) then
         gen_new := HomalgGeneratorsForLeftModule( gen_new, hull );
-    elif IsHomalgGeneratorsOfRightModule( gen ) and IsHomalgGeneratorsOfRightModule( rel ) then
+    elif IsHomalgGeneratorsOfRightModule( gen ) and IsHomalgRelationsOfRightModule( rel ) then
         gen_new := HomalgGeneratorsForRightModule( gen_new, hull );
     else
         Error( "the set of generators and the set of relations must either be both left or both right\n" );
