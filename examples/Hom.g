@@ -2,9 +2,9 @@ LoadPackage( "RingsForHomalg" );
 
 ZZ := HomalgRingOfIntegersInExternalGAP( );
 Display( ZZ );
-k := LeftPresentation( [[1,2,3],[3,4,5]], ZZ );
-l := LeftPresentation( [[4,5,6,0],[0,2,0,2]], ZZ );
-HM := Hom( l, k );
+kk := LeftPresentation( [[1,2,3],[3,4,5]], ZZ );
+ll := LeftPresentation( [[4,5,6,0],[0,2,0,2]], ZZ );
+HM := Hom( ll, kk );
 
 R := HomalgRingOfIntegersInMaple( );
 Display( R );

@@ -663,11 +663,15 @@ InstallMethod( DiagMat,
         Error( "recieved an empty list\n" );
     fi;
     
-    R := HomalgRing( l[1] );
-    
     if not ForAll( l, IsHomalgMatrix ) then
         Error( "at least one of the matrices in the list is not a homalg matrix\n" );
     fi;
+    
+    if Length( l ) = 1 then
+        return l[1];
+    fi;
+    
+    R := HomalgRing( l[1] );
     
     if not ForAll( l{[ 2 .. Length( l ) ]}, a -> IsIdenticalObj( HomalgRing( a ), R ) ) then
         Error( "the matrices are not defined over identically the same ring\n" );

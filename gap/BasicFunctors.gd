@@ -51,6 +51,9 @@ DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgRing ] );
 
 DeclareOperation( "Hom",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "Hom",
         [ IsHomalgRing, IsHomalgModule ] );
 
 DeclareOperation( "Hom",
@@ -61,6 +64,9 @@ DeclareOperation( "Hom",
 
 DeclareOperation( "Hom",
         [ IsHomalgMorphism, IsHomalgRing ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgMorphism ] );

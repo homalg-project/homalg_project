@@ -116,6 +116,12 @@ DeclareOperation( "RightInverse",
 DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement
 
+DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
+
+DeclareOperation( "BetterGenerators",
+        [ IsHomalgMorphism ] );
+
 DeclareOperation( "DecideZero",
         [ IsHomalgMorphism, IsHomalgRelations ] );
 

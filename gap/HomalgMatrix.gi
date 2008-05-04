@@ -1237,7 +1237,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
         return HomalgZeroMatrix( 0, 0, R );
     fi;
     
-    diag := List( diag, a -> HomalgMatrix( [ a ], 1, 1, R ) );
+    diag := List( diag, a -> HomalgMatrix( [ [ a ] ], 1, 1, R ) );
     
     M := DiagMat( diag );
     

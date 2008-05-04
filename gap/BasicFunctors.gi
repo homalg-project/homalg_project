@@ -363,7 +363,7 @@ end );
 
 ##
 InstallMethod( Hom,
-        "for two homalg modules",
+        "for homalg modules",
         [ IsFinitelyPresentedModuleRep, IsHomalgRing ],
         
   function( M, R )
@@ -380,7 +380,7 @@ InstallMethod( Hom,
 end );
 
 InstallMethod( Hom,
-        "for two homalg modules",
+        "for homalg modules",
         [ IsMorphismOfFinitelyGeneratedModulesRep, IsHomalgRing ],
         
   function( phi, R )
@@ -393,6 +393,31 @@ InstallMethod( Hom,
     fi;
     
     return Hom( phi, N );
+    
+end );
+
+##
+## Hom( M ) := Hom( M, R )
+##
+
+##
+InstallMethod( Hom,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return Hom( M, HomalgRing( M ) );
+    
+end );
+
+InstallMethod( Hom,
+        "for homalg modules",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return Hom( phi, HomalgRing( phi ) );
     
 end );
 
@@ -424,7 +449,7 @@ end );
 
 ##
 InstallMethod( Hom,
-        "for two homalg modules",
+        "for homalg rings",
         [ IsHomalgRing, IsHomalgRing ],
         
   function( R1, R2 )

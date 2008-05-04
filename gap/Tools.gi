@@ -649,6 +649,10 @@ InstallMethod( Eval,				### defines: KroneckerMat
     
     R := HomalgRing( C );
     
+    if HasIsCommutative( R ) and not IsCommutative( R ) then
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47mthe Kronecker product is only defined for commutative rings!\033[0m" );
+    fi;
+    
     RP := homalgTable( R );
     
     A :=  EvalKroneckerMat( C )[1];

@@ -113,7 +113,7 @@ InstallImmediateMethod( IsZeroMorphism,
     
 end );
 
-## FIXME: when do immediate methods apply? immediately after objectifying?
+##
 InstallImmediateMethod( IsZeroMorphism,
         IsMorphismOfFinitelyGeneratedModulesRep, 0,
         
@@ -184,6 +184,50 @@ InstallMethod( IsZeroMorphism,
   function( phi )
     
     return IsZeroMatrix( DecideZero( phi ) );
+    
+end );
+
+##
+InstallMethod( IsEpimorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsMorphism( phi ) and IsZeroModule( Cokernel( phi ) );
+    
+end );
+
+##
+InstallMethod( IsMonomorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsMorphism( phi ) and IsZeroModule( Kernel( phi ) );
+    
+end );
+
+##
+InstallMethod( IsIsomorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsEpimorphism( phi ) and IsMonomorphism( phi );
+    
+end );
+
+##
+InstallMethod( IsAutomorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsHomalgEndomorphism( phi ) and IsIsomorphism( phi );
     
 end );
 
@@ -473,6 +517,40 @@ InstallMethod( \*,
     fi;
     
     return HomalgMorphism( MatrixOfMorphism( phi2 ) * MatrixOfMorphism( phi1 ), SourceOfMorphism( phi1 ), TargetOfMorphism( phi2 ) );
+    
+end );
+
+##
+InstallMethod( POW,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsInt ],
+        
+  function( phi, pow )
+    local id;
+    
+    if pow = -1 then
+        
+        id := HomalgIdentityMorphism( TargetOfMorphism( phi ) );
+        
+        return PostDivide( id, phi );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( BetterGenerators,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    BetterGenerators( SourceOfMorphism( phi ) );
+    BetterGenerators( TargetOfMorphism( phi ) );
+    
+    return phi;
     
 end );
 

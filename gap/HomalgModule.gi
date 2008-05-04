@@ -245,7 +245,7 @@ InstallMethod( IsZeroModule,
         
   function( M )
     
-    return NonZeroGenerators( M ) = [ ];
+    return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
     
 end );
 
@@ -985,7 +985,7 @@ InstallMethod( NonZeroGenerators,
         
   function( M )
     
-    return NonZeroGenerators( BasisOfModule( RelationsOfModule( M ) ) );
+    return NonZeroGenerators( BasisOfModule( M ) );	## this has a side effect on M, but one that does not change the generators
     
 end );
 
