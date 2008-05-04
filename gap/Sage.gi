@@ -22,8 +22,9 @@ InstallValue( HOMALG_IO_Sage,
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 7,		## these are the most
-            CUT_END := 10,		## delicate values!
+            SEARCH_READY_TWICE := 0,
+            CUT_POS_BEGIN := 7,		## these are the most
+            CUT_POS_END := 10,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
             remove_enter := true,       ## a Sage specific
