@@ -89,7 +89,12 @@ InstallGlobalFunction( CheckOutputOfCAS,
     READY_LENGTH := s.READY_LENGTH;
     CUT_POS_BEGIN := s.CUT_POS_BEGIN;
     CUT_POS_END := s.CUT_POS_END;
-    SEARCH_READY_TWICE := s.SEARCH_READY_TWICE;
+    
+    if IsBound( s.SEARCH_READY_TWICE ) and s.SEARCH_READY_TWICE = true then
+        SEARCH_READY_TWICE := true;
+    else
+        SEARCH_READY_TWICE := false;
+    fi;
     
     if IsBound( s.handle_output ) and s.handle_output = true then
         handle_output := true;
@@ -124,7 +129,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
                     #        pos
               if pos <> fail then 
                   s.casready := true;
-                  if handle_output = true then
+                  if handle_output = true then	## a Singular specific
                       s.lines_original := ShallowCopy( s.lines );
                       if s.lines[1] = '\n' then
                           s.lines := Concatenation( s.lines{ [ 2 .. pos - 2 ] },
@@ -136,7 +141,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
                           s.lines := Concatenation( s.lines{ [ 1 .. pos - 2 ] },
                                              s.lines{ [ pos + READY_LENGTH + 2 .. Length( s.lines ) ] } );
                       fi;
-                  elif SEARCH_READY_TWICE = 1 then
+                  elif SEARCH_READY_TWICE = true then	## a Macaulay2 specific
                       pos2 := PositionSublist( s.lines, READY );
                       pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
                       if pos3 = fail then
