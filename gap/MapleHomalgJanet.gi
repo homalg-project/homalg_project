@@ -34,7 +34,7 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> Concatenation( "B(", homalgSendBlocking( [ R, "[1]" ], "need_output" ), ")" )
+               RingName := R -> Concatenation( "B(", homalgSendBlocking( [ "op(", R, "[1])" ], HOMALG_IO.Pictograms.variables, "need_output" ), ")" )
                
           );
     

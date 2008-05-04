@@ -266,6 +266,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    SetIsCommutative( R, false );
+    
     return R;
     
 end );
@@ -692,7 +694,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInMapleRep( HomalgRing( o ) ) then
         
-        Print(  homalgSendBlocking( [ HomalgRing( o ), "[-1][matrix](", o, ")" ], "need_display", HOMALG_IO.Pictograms.Display ) );
+        Print(  homalgSendBlocking( [ "eval(", HomalgRing( o ), "[-1][matrix](", o, "))" ], "need_display", HOMALG_IO.Pictograms.Display ) );
         
     else
         
