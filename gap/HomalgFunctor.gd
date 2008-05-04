@@ -41,3 +41,11 @@ DeclareCategory( "IsHomalgFunctor",
 
 DeclareGlobalFunction( "CreateHomalgFunctor" );
 
+# basic operations:
+
+DeclareOperation( "FunctorMap",
+        [ IsHomalgFunctor, IsHomalgMorphism, IsList ] );
+
+DeclareOperation( "FunctorMap",
+        [ IsHomalgFunctor, IsHomalgMorphism ] );
+

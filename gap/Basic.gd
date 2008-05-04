@@ -46,8 +46,14 @@ DeclareOperation( "SyzygiesBasisOfColumns",
 DeclareOperation( "RightDivide",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "RightDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelations ] );
+
 DeclareOperation( "LeftDivide",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "LeftDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelations ] );
 
 # global functions:
 

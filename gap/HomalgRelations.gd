@@ -110,6 +110,9 @@ DeclareOperation( "NonZeroGenerators",
 DeclareOperation( "GetRidOfObsoleteRelations",
         [ IsHomalgRelations ] );
 
+DeclareOperation( "*",
+        [ IsHomalgRelations, IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:

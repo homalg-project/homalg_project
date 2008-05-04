@@ -1615,6 +1615,67 @@ InstallMethod( HomalgZeroRightModule,
     
 end );
 
+##
+InstallGlobalFunction( GetGenerators,
+  function( arg )
+    local nargs, M, pos, g, gen, mat, proc, l;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
+        
+        M := arg[1];
+        
+        if nargs > 2 and IsPosInt( arg[3] ) then
+            pos := arg[3];
+        else
+            pos := PositionOfTheDefaultSetOfGenerators( M );
+        fi;
+        
+        gen := GeneratorsOfModule( M, pos );
+        
+    elif nargs > 0 and IsHomalgGeneratorsOfFinitelyGeneratedModuleRep( arg[1] ) then
+        
+        gen := arg[1];
+        
+    else
+        
+        Error( "the first argument must be a homalg module or a set of generators of a homalg module\n" );
+        
+    fi;
+    
+    g := [ 1 .. NrGenerators( gen ) ];
+    
+    if nargs > 1 then
+        if IsPosInt( arg[2] ) then
+            g := [ arg[2] ];
+        elif IsHomogeneousList( arg[2] ) and ForAll( arg[2], IsPosInt ) then
+            g := arg[2];
+        fi;
+    fi;
+    
+    mat := MatrixOfGenerators( gen );
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) then
+        g := List( g, a -> CertainRows( mat, [ a ] ) );
+    else
+        g := List( g, a -> CertainColumns( mat, [ a ] ) );
+    fi;
+    
+    if HasProcedureToReadjustGenerators( gen ) then
+        proc := ProcedureToReadjustGenerators( gen );
+        l := Length( proc );
+        g := List( g, a -> CallFuncList( proc[1], Concatenation( [ a ], proc{[ 2 .. l ]} ) ) );
+    fi;
+    
+    if nargs > 1 and IsPosInt( arg[2] ) then
+        return g[1];
+    fi;
+    
+    return g;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

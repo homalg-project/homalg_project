@@ -27,6 +27,8 @@ DeclareGlobalVariable( "Functor_Kernel" );
 ## Hom
 DeclareGlobalFunction( "_Functor_Hom_OnObjects" );
 
+DeclareGlobalFunction( "_Functor_Hom_OnMorphisms" );
+
 DeclareGlobalVariable( "Functor_Hom" );
 
 ####################################
@@ -53,4 +55,16 @@ DeclareOperation( "Hom",
 
 DeclareOperation( "Hom",
         [ IsHomalgRing, IsHomalgRing ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgMorphism, IsHomalgModule ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgMorphism, IsHomalgRing ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgModule, IsHomalgMorphism ] );
+
+DeclareOperation( "Hom",
+        [ IsHomalgRing, IsHomalgMorphism ] );
 

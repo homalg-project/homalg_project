@@ -14,6 +14,10 @@
 #
 ####################################
 
+##
+## Cokernel
+##
+
 InstallGlobalFunction( _Functor_Cokernel_OnObjects,
   function( phi )
     local R, T, gen, rel, coker;
@@ -26,16 +30,29 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     
     rel := UnionOfRelations( phi );
     
-    gen := UnionOfRelations( gen, rel );
+    gen := UnionOfRelations( gen, rel * MatrixOfGenerators( gen ) );
     
     coker := Presentation( gen, rel );
     
-    ## the identity matrix is the identity morphism (w.r.t. the first set of relations of coker)
+    ## the identity matrix of the identity morphism (w.r.t. the first set of relations of coker)
     coker!.NaturalEmbedding := HomalgIdentityMorphism( [ coker, 1 ] );
     
     return coker;
     
 end );
+
+InstallValue( Functor_Cokernel,
+        CreateHomalgFunctor(
+                [ "name", "Cokernel" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", "covariant" ],
+                [ "OnObjects", _Functor_Cokernel_OnObjects ]
+                )
+);
+
+##
+## Kernel
+##
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,
   function( phi )
@@ -57,6 +74,19 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,
     
 end );
 
+InstallValue( Functor_Kernel,
+        CreateHomalgFunctor(
+                [ "name", "Kernel" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", "covariant" ],
+                [ "OnObjects", _Functor_Kernel_OnObjects ]
+                )
+);
+
+##
+## Hom
+##
+
 InstallGlobalFunction( _Functor_Hom_OnObjects,
   function( M, N )
     local R, s, t, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
@@ -66,6 +96,11 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
     if not IsIdenticalObj( R, HomalgRing( N ) ) then
         Error( "the rings of the source and target modules are not identical\n" );
+    fi;
+    
+    if not ( IsLeftModule( M ) and IsLeftModule( N ) )
+       and not ( IsRightModule( M ) and IsRightModule( N ) ) then
+        Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
     s := PositionOfTheDefaultSetOfGenerators( M );
@@ -170,26 +205,60 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
 end );
 
-InstallValue( Functor_Cokernel,
-        CreateHomalgFunctor(
-                [ "name", "Cokernel" ],
-                [ "covariant", true ],
-                [ "OnObjects", _Functor_Cokernel_OnObjects ]
-                )
-);
-
-InstallValue( Functor_Kernel,
-        CreateHomalgFunctor(
-                [ "name", "Kernel" ],
-                [ "covariant", true ],
-                [ "OnObjects", _Functor_Kernel_OnObjects ]
-                )
-);
+InstallGlobalFunction( _Functor_Hom_OnMorphisms,
+  function( M_or_mor, N_or_mor )
+    local phi, L, R, idL;
+    
+    R := HomalgRing( M_or_mor );
+    
+    if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
+        Error( "the module and the morphism are not defined over identically the same ring\n" );
+    fi;
+    
+    if IsMorphismOfFinitelyGeneratedModulesRep( M_or_mor )
+       and IsFinitelyPresentedModuleRep( N_or_mor ) then
+        
+        phi := M_or_mor;
+        L := N_or_mor;
+        
+        if not ( IsHomalgMorphismOfLeftModules( phi ) and IsLeftModule( L ) )
+           and not ( IsHomalgMorphismOfRightModules( phi ) and IsRightModule( L ) ) then
+            Error( "the morphism and the module must either be both left or both right\n" );
+        fi;
+        
+        idL := HomalgIdentityMatrix( NrGenerators( L ), R );
+        
+        return KroneckerMat( MatrixOfMorphism( phi ), idL );
+        
+    elif IsMorphismOfFinitelyGeneratedModulesRep( N_or_mor )
+      and IsFinitelyPresentedModuleRep( M_or_mor ) then
+        
+        phi := N_or_mor;
+        L := M_or_mor;
+        
+        if not ( IsHomalgMorphismOfLeftModules( phi ) and IsLeftModule( L ) )
+           and not ( IsHomalgMorphismOfRightModules( phi ) and IsRightModule( L ) ) then
+            Error( "the morphism and the module must either be both left or both right\n" );
+        fi;
+        
+        idL := HomalgIdentityMatrix( NrGenerators( L ), R );
+        
+        return Involution( KroneckerMat( idL, MatrixOfMorphism( phi ) ) );
+        
+    fi;
+    
+    Error( "one of the arguments must be a module and the other a morphism\n" );
+    
+end );
 
 InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
-                [ "OnObjects", _Functor_Hom_OnObjects ]
+                [ "number_of_arguments", 2 ],
+                [ "1", "contravariant" ],
+                [ "2", "covariant" ],
+                [ "OnObjects", _Functor_Hom_OnObjects ],
+                [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
 );
 
@@ -252,20 +321,45 @@ InstallMethod( Kernel,
 end );
 
 ##
+## Hom( M, N )
+##
+
+##
 InstallMethod( Hom,
         "for homalg morphisms",
         [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
         
   function( M, N )
-    local functor, hom;
     
-    functor := Functor_Hom;
-    
-    hom := functor!.OnObjects( M, N );
-    
-    return hom;
+    return Functor_Hom!.OnObjects( M, N );
     
 end );
+
+##
+InstallMethod( Hom,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsFinitelyPresentedModuleRep ],
+        
+  function( phi, L )
+    
+    return FunctorMap( Functor_Hom, phi, [ [ 2, L ] ] );
+    
+end );
+
+##
+InstallMethod( Hom,
+        "for homalg morphisms",
+        [ IsFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( L, phi )
+    
+    return FunctorMap( Functor_Hom, phi, [ [ 1, L ] ] );
+    
+end );
+
+##
+## Hom( M, R )
+##
 
 ##
 InstallMethod( Hom,
@@ -273,21 +367,38 @@ InstallMethod( Hom,
         [ IsFinitelyPresentedModuleRep, IsHomalgRing ],
         
   function( M, R )
-    local functor, N, hom;
-    
-    functor := Functor_Hom;
+    local N;
     
     if IsLeftModule( M ) then
-        N := HomalgFreeLeftModule( 1, R );
+        N := AsLeftModule( R );
     else
-        N := HomalgFreeRightModule( 1, R );
+        N := AsRightModule( R );
     fi;
     
-    hom := functor!.OnObjects( M, N );
-    
-    return hom;
+    return Hom( M, N );
     
 end );
+
+InstallMethod( Hom,
+        "for two homalg modules",
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsHomalgRing ],
+        
+  function( phi, R )
+    local N;
+    
+    if IsHomalgMorphismOfLeftModules( phi ) then
+        N := AsLeftModule( R );
+    else
+        N := AsRightModule( R );
+    fi;
+    
+    return Hom( phi, N );
+    
+end );
+
+##
+## Hom( R, N )
+##
 
 ##
 InstallMethod( Hom,
@@ -295,21 +406,21 @@ InstallMethod( Hom,
         [ IsHomalgRing, IsFinitelyPresentedModuleRep ],
         
   function( R, N )
-    local functor, M, hom;
-    
-    functor := Functor_Hom;
+    local M;
     
     if IsLeftModule( N ) then
-        M := HomalgFreeLeftModule( 1, R );
+        M := AsLeftModule( R );
     else
-        M := HomalgFreeRightModule( 1, R );
+        M := AsRightModule( R );
     fi;
     
-    hom := functor!.OnObjects( M, N );
-    
-    return hom;
-    
+    return Hom( M, N );
+        
 end );
+
+##
+## Hom( R, R )
+##
 
 ##
 InstallMethod( Hom,
@@ -317,16 +428,13 @@ InstallMethod( Hom,
         [ IsHomalgRing, IsHomalgRing ],
         
   function( R1, R2 )
-    local functor, M, N, hom;
+    local M, N;
     
-    functor := Functor_Hom;
+    ## I personally prefer the row convention and hence left modules:
+    M := AsLeftModule( R1 );
+    N := AsLeftModule( R2 );
     
-    M := HomalgFreeLeftModule( 1, R1 );
-    N := HomalgFreeRightModule( 1, R2 );
-    
-    hom := functor!.OnObjects( M, N );
-    
-    return hom;
+    return Hom( M, N );
     
 end );
 

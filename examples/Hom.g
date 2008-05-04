@@ -19,7 +19,7 @@ K := HomalgMatrix( " \
 ", Qxyz );
 K := LeftPresentation( K );
 L := HomalgMatrix( " \
-[[x,y]]\
+[[x,y]] \
 ", Qxyz );
 L := LeftPresentation( L );
 hom := Hom( L, K );

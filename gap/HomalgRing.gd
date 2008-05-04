@@ -160,6 +160,12 @@ DeclareOperation( "homalgLastWarning",
 DeclareOperation( "homalgNrOfWarnings",
         [ IsHomalgRing ] );
 
+DeclareOperation( "AsLeftModule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "AsRightModule",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "PolynomialRing",
         [ IsHomalgRing, IsList ] );
 

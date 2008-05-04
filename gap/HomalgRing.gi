@@ -361,6 +361,28 @@ InstallOtherMethod( AsList,
     
 end );
 
+##
+InstallMethod( AsLeftModule,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return R!.AsLeftModule;
+    
+end );
+
+##
+InstallMethod( AsRightModule,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return R!.AsRightModule;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -438,6 +460,9 @@ InstallGlobalFunction( CreateHomalgRing,
             table!.( c ) := CallFuncList( HomalgExternalRingElement, ar );
         fi;
     od;
+    
+    homalg_ring!.AsLeftModule := HomalgFreeLeftModule( 1, homalg_ring );
+    homalg_ring!.AsRightModule := HomalgFreeRightModule( 1, homalg_ring );
     
     return homalg_ring;
     

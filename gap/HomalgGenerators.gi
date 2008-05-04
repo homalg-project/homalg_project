@@ -118,7 +118,7 @@ InstallMethod( NewHomalgGenerators,
   function( mat, gen )
     local relations_of_hullmodule, gen_new;
     
-    relations_of_hullmodule := gen!.relations_of_hullmodule;
+    relations_of_hullmodule := RelationsOfHullModule( gen );
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
         gen_new := HomalgGeneratorsForLeftModule( mat, relations_of_hullmodule );
@@ -320,7 +320,7 @@ InstallMethod( \*,
   function( TI, gen )
     local generators;
     
-    generators := gen!.generators;
+    generators := MatrixOfGenerators( gen );
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
         return NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)

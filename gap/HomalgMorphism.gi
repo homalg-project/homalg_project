@@ -149,13 +149,41 @@ end );
 ####################################
 
 ##
+InstallMethod( IsMorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        
+  function( phi )
+    local mat;
+    
+    mat := MatrixOfRelations( SourceOfMorphism( phi ) ) * MatrixOfMorphism( phi );
+    
+    return IsZeroMatrix( DecideZero( mat , RelationsOfModule( TargetOfMorphism( phi ) ) ) );
+    
+end );
+
+##
+InstallMethod( IsMorphism,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        
+  function( phi )
+    local mat;
+    
+    mat := MatrixOfMorphism( phi ) * MatrixOfRelations( SourceOfMorphism( phi ) );
+    
+    return IsZeroMatrix( DecideZero( mat , RelationsOfModule( TargetOfMorphism( phi ) ) ) );
+    
+end );
+
+##
 InstallMethod( IsZeroMorphism,
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    IsZeroMatrix( DecideZero( phi ) );
+    return IsZeroMatrix( DecideZero( phi ) );
     
 end );
 
@@ -506,6 +534,109 @@ InstallMethod( SyzygiesGenerators,
   function( phi )
     
     return SyzygiesGenerators( MatrixOfMorphism( phi ), TargetOfMorphism( phi ) );
+    
+end );
+
+#=======================================================================
+# PostDivide
+#
+# M_ is free or beta is injective ( cf. [BR, Subsection 3.1.1] )
+#
+#     M_
+#     |   \
+#  (psi=?)  \ (gamma)
+#     |       \
+#     v         v
+#     N_ -(beta)-> N
+#
+#
+# row convention (left modules): psi := gamma * beta^(-1)	( -> RightDivide )
+# column convention (right modules): psi := beta^(-1) * gamma	( -> LeftDivide )
+#_______________________________________________________________________
+
+##
+InstallMethod( PostDivide,			## defines: PostDivide (RightDivide (high-level))
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        
+  function( gamma, beta )
+    local N, psi;
+    
+    N := TargetOfMorphism( beta );
+    
+    if not IsIdenticalObj( N, TargetOfMorphism( gamma ) ) then
+        Error( "the two morphisms don't have have identically the same target module\n" );
+    fi;
+    
+    N := RelationsOfModule( N );
+    
+    psi := RightDivide( MatrixOfMorphism( gamma ), MatrixOfMorphism( beta ), N );
+    
+    return HomalgMorphism( psi, SourceOfMorphism( gamma ), SourceOfMorphism( beta ) );
+    
+end );
+
+##
+InstallMethod( PostDivide,			## defines: PostDivide (LeftDivide (high-level))
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        
+  function( gamma, beta )
+    local N, psi;
+    
+    N := TargetOfMorphism( beta );
+    
+    if not IsIdenticalObj( N, TargetOfMorphism( gamma ) ) then
+        Error( "the two morphisms don't have have identically the same target module\n" );
+    fi;
+    
+    N := RelationsOfModule( N );
+    
+    psi := LeftDivide( MatrixOfMorphism( beta ), MatrixOfMorphism( gamma ), N );
+    
+    return HomalgMorphism( psi, SourceOfMorphism( gamma ), SourceOfMorphism( beta ) );
+    
+end );
+
+#=======================================================================
+# Complete an image-square
+#
+#  A_ is a free or beta1 is injective
+#
+#     A_ --(alpha1)--> A
+#     |                |
+#  (psi=?)    Sq1    (phi)
+#     |                |
+#     v                v
+#     B_ --(beta1)---> B
+#
+#_______________________________________________________________________
+
+##
+InstallMethod( CompleteImSq,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        
+  function( alpha1, phi, beta1 )
+    
+    return PostDivide( alpha1 * phi, beta1 );
+    
+end );
+
+##
+InstallMethod( CompleteImSq,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
+          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        
+  function( alpha1, phi, beta1 )
+    
+    return PostDivide( phi * alpha1, beta1 );
     
 end );
 

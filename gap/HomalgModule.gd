@@ -119,6 +119,8 @@ DeclareOperation( "HomalgZeroLeftModule",
 DeclareOperation( "HomalgZeroRightModule",
         [ IsHomalgRing ] );
 
+DeclareGlobalFunction( "GetGenerators" );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

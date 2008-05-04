@@ -19,7 +19,7 @@ K := HomalgMatrix( " \
 ", Qxyz );
 K := RightPresentation( Involution( K ) );
 L := HomalgMatrix( " \
-[[x,y]]\
+[[x,y]] \
 ", Qxyz );
 L := RightPresentation( Involution( L ) );
 hom := Hom( L, K );

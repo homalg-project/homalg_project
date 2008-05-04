@@ -37,6 +37,9 @@ DeclareCategory( "IsHomalgMorphismOfRightModules",
 #
 ####################################
 
+DeclareProperty( "IsMorphism",
+        IsHomalgMorphism );
+
 DeclareProperty( "IsZeroMorphism",
         IsHomalgMorphism );
 
@@ -124,3 +127,9 @@ DeclareOperation( "UnionOfRelations",
 
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgMorphism ] );
+
+DeclareOperation( "PostDivide",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "CompleteImSq",
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );

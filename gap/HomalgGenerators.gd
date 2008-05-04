@@ -103,3 +103,4 @@ DeclareOperation( "*",
 
 DeclareOperation( "*",
         [ IsHomalgGenerators, IsHomalgGenerators ] );
+

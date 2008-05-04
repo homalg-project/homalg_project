@@ -553,6 +553,23 @@ InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations
     
 end );
 
+InstallMethod( \*,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix ],
+        
+  function( rel, mat )
+    local relations;
+    
+    relations := MatrixOfRelations( rel );
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        return HomalgRelationsForLeftModule( relations * mat );
+    else
+        return HomalgRelationsForRightModule( mat * relations );
+    fi;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

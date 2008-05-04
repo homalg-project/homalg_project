@@ -17,7 +17,7 @@
 ##
 InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP, ring_rel, rel, Mrel, side, zz;
@@ -26,10 +26,6 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.BasisOfRows) then
-        return RP!.BasisOfRows( M );
-    fi;
-    
     if not HasRingRelations( R ) then
         return BasisOfRowModule( M );
     fi;
@@ -51,7 +47,7 @@ end );
 ##
 InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP, ring_rel, rel, Mrel, side, zz;
@@ -60,10 +56,6 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.BasisOfColumns) then
-        return RP!.BasisOfColumns( M );
-    fi;
-    
     if not HasRingRelations( R ) then
         return BasisOfColumnModule( M );
     fi;
@@ -85,7 +77,7 @@ end );
 ##
 InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
     local R, RP, ring_rel, rel, Mrel, id, zz, TT, bas;
@@ -94,10 +86,6 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.BasisOfRows) then
-        return RP!.BasisOfRows( M, T );
-    fi;
-    
     if not HasRingRelations( R ) then
         return BasisOfRowsCoeff( M, T );
     fi;
@@ -125,7 +113,7 @@ end );
 ##
 InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (high-level))
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
     local R, RP, ring_rel, rel, Mrel, id, zz, TT, bas;
@@ -134,10 +122,6 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.BasisOfColumns) then
-        return RP!.BasisOfColumns( M, T );
-    fi;
-    
     if not HasRingRelations( R ) then
         return BasisOfColumnsCoeff( M, T );
     fi;
@@ -165,7 +149,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP, ring_rel, rel, red;
@@ -182,15 +166,6 @@ InstallMethod( DecideZero,
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.DecideZero) then
-        red := RP!.DecideZero( M );
-        
-        SetIsReducedModuloRingRelations( red, true );
-        IsZeroMatrix( red );
-        
-        return red;
-    fi;
-    
     if not HasRingRelations( R ) then
         
         SetIsReducedModuloRingRelations( M, true );
@@ -223,7 +198,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesBasis)
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP, S;
@@ -232,10 +207,6 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.SyzygiesBasisOfRows) then
-        return RP!.SyzygiesBasisOfRows( M );
-    fi;
-    
     #=====# begin of the core procedure #=====#
     
     S := SyzygiesGeneratorsOfRows( M );
@@ -247,7 +218,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
-	[ IsHomalgMatrix ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP, S;
@@ -256,10 +227,6 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.SyzygiesBasisOfColumns) then
-        return RP!.SyzygiesBasisOfColumns( M );
-    fi;
-    
     #=====# begin of the core procedure #=====#
     
     S := SyzygiesGeneratorsOfColumns( M );
@@ -271,7 +238,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesBasis)
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP, S;
@@ -280,10 +247,6 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.SyzygiesBasisOfRows) then
-        return RP!.SyzygiesBasisOfRows( M1, M2 );
-    fi;
-    
     #=====# begin of the core procedure #=====#
     
     S := SyzygiesGeneratorsOfRows( M1, M2 );
@@ -295,7 +258,7 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP, S;
@@ -304,10 +267,6 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
     
     RP := homalgTable( R );
   
-    if IsBound(RP!.SyzygiesBasisOfColumns) then
-        return RP!.SyzygiesBasisOfColumns( M1, M2 );
-    fi;
-    
     #=====# begin of the core procedure #=====#
     
     S := SyzygiesGeneratorsOfColumns( M1, M2 );
@@ -316,20 +275,26 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
     
 end );
 
-##
+#=======================================================================
+# Right divide:
+# Solve the inhomogeneous linear system: B = XA
+# i.e.
+# perform the right division if possible B * A^(-1)
+# Generalizes Leftinverse: AI * A = Id <=> AI = Id * A^(-1)
+#_______________________________________________________________________
 InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, RP, IA, CA, NF, CB;
+    local R, RP, CA, IA, CB, NF;
     
     R := HomalgRing( B );
     
     RP := homalgTable( R );
-  
-    if IsBound(RP!.RightDivide) then
-        return RP!.RightDivide( B, A );
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the first and the second matrix must have the same number of columns\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -344,7 +309,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
     ## NF <> 0
     if not IsZeroMatrix( NF ) then
-        Error( "The second argument is not a right factor of the first, i.e. rows of the second argument are not a generating set!\n" );
+        Error( "The second argument is not a right factor of the first, i.e. the rows of the second argument are not a generating set!\n" );
     fi;
     
     ## CD = -CB * CA => CD * A = B
@@ -352,20 +317,26 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
 end );
 
-##
+#=======================================================================
+# Left divide:
+# Solve the inhomogeneous linear system: AX = B
+# i.e.
+# perform the left division if possible A^(-1) * B
+# Generalizes Rightinverse: A * AI = Id <=> AI = A^(-1) * Id
+#_______________________________________________________________________
 InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
         "for homalg matrices",
-	[ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, RP, IA, CA, NF, CB;
+    local R, RP, CA, IA, CB, NF;
     
     R := HomalgRing( B );
     
     RP := homalgTable( R );
-  
-    if IsBound(RP!.LeftDivide) then
-        return RP!.LeftDivide( A, B );
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the first and the second matrix must have the same number of rows\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -380,18 +351,128 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     
     ## NF <> 0
     if not IsZeroMatrix( NF ) then
-        Error( "The second argument is not a left factor of the first, i.e. the columns of the second argument are not a generating set!\n" );
+        Error( "The first argument is not a left factor of the second, i.e. the columns of the first argument are not a generating set!\n" );
     fi;
     
-    ## CD = -CA * CB => A * CD = B
+    ## CD = CA * -CB => A * CD = B
     return CA * -CB;				## CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
     
 end );
 
+#=======================================================================
+# Right divide modulo:
+# Solve the inhomogeneous linear system: B = XA mod L
+# i.e.
+# solve the inhomogeneous linear system: B = XA + YL
+# i.e.
+# perform the right division if possible B * A^(-1) mod L
+# Leftinverse is a special case: Id = AI * A mod L <=> AI = Id * A^(-1) mod L
+#_______________________________________________________________________
+InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
+        
+  function( B, A, L )				## CAUTION: Do not use lazy evaluation here!!!
+    local R, RP, AL, CA, IAL, CB, NF, a;
+    
+    R := HomalgRing( B );
+    
+    RP := homalgTable( R );
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the first and the second matrix must have the same number of columns\n" );
+    fi;
+    
+    if NrColumns( A ) <> NrGenerators( L ) then
+        Error( "the number of columns of the first matrix and the number of generators of the last argment do not coincide\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    AL := UnionOfRows( A, MatrixOfRelations( BasisOfModule( L ) ) );
+    
+    ## CA * AL = IAL
+    CA := HomalgVoidMatrix( R );
+    IAL := BasisOfRowsCoeff( AL, CA );
+    
+    ## NF = B + CB * IAL
+    CB := HomalgVoidMatrix( R );
+    NF := DecideZeroRowsEffectively( B, IAL, CB );
+    
+    ## NF <> 0
+    if not IsZeroMatrix( NF ) then
+        Error( "The second argument is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
+    fi;
+    
+    a := NrRows( A );
+    
+    ## CD = -CB * CA => CD * A = B
+    return -CB * CertainColumns( CA, [ 1 .. a ] );	## -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    
+end );
+
+#=======================================================================
+# Left divide modulo:
+# Solve the inhomogeneous linear system: AX = B mod L
+# i.e.
+# solve the inhomogeneous linear system: B = AX + LY
+# i.e.
+# perform the right division if possible A^(-1) * B mod L
+# Rightinverse is a special case: Id = A * AI mod L <=> AI = A^(-1) * Id mod L
+#_______________________________________________________________________
+InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
+        
+  function( A, B, L )				## CAUTION: Do not use lazy evaluation here!!!
+    local R, RP, AL, CA, IAL, CB, NF, a;
+    
+    R := HomalgRing( B );
+    
+    RP := homalgTable( R );
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the first and the second matrix must have the same number of rows\n" );
+    fi;
+    
+    if NrRows( A ) <> NrGenerators( L ) then
+        Error( "the number of rows of the first matrix and the number of generators of the last argment do not coincide\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    AL := UnionOfColumns( A, MatrixOfRelations( BasisOfModule( L ) ) );
+    
+    ## AL * CA = IAL
+    CA := HomalgVoidMatrix( R );
+    IAL := BasisOfColumnsCoeff( AL, CA );
+    
+    ## NF = B + IAL * CB
+    CB := HomalgVoidMatrix( R );
+    NF := DecideZeroColumnsEffectively( B, IAL, CB );
+    
+    ## NF <> 0
+    if not IsZeroMatrix( NF ) then
+        Error( "The first argument is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
+    fi;
+    
+    a := NrColumns( A );
+    
+    ## CD = CA * -CB => A * CD = B
+    return CertainRows( CA, [ 1 .. a ] ) * -CB;		## CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
+    
+end );
+
+##---------------------
+##
+## the lazy evaluation:
+##
+##---------------------
+
 ##
 InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
         "for homalg matrices",
-	[ IsHomalgMatrix and HasEvalLeftInverse ],
+        [ IsHomalgMatrix and HasEvalLeftInverse ],
         
   function( LI )
     local R, RP, RI, Id, left_inv;
@@ -401,20 +482,6 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     RP := homalgTable( R );
     
     RI := EvalLeftInverse( LI );
-    
-    if IsBound(RP!.LeftInverse) then
-        left_inv := RP!.LeftInverse( RI );
-        
-        SetIsLeftInvertibleMatrix( RI, true );
-        
-        if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then
-            SetIsInvertibleMatrix( LI, true );
-        else
-            SetIsRightInvertibleMatrix( LI, true );
-        fi;
-        
-        return left_inv;
-    fi;
     
     #=====# begin of the core procedure #=====#
     
@@ -439,7 +506,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
         "for homalg matrices",
-	[ IsHomalgMatrix and HasEvalRightInverse ],
+        [ IsHomalgMatrix and HasEvalRightInverse ],
         
   function( RI )
     local R, RP, LI, Id, right_inv;
@@ -449,20 +516,6 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     RP := homalgTable( R );
     
     LI := EvalRightInverse( RI );
-    
-    if IsBound(RP!.RightInverse) then
-        right_inv := RP!.RightInverse( LI );
-        
-        SetIsRightInvertibleMatrix( LI, true );
-        
-        if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then
-            SetIsInvertibleMatrix( RI, true );
-        else
-            SetIsLeftInvertibleMatrix( RI, true );
-        fi;
-        
-        return right_inv;
-    fi;
     
     #=====# begin of the core procedure #=====#
     
@@ -528,7 +581,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
             return UnionOfColumns( B, HomalgZeroMatrix( m, n - NrColumns( B ), R ) );
         elif m - NrRows( B ) > 0 and n - NrColumns( B ) = 0 then
             return UnionOfRows( B, HomalgZeroMatrix( m - NrRows( B ), n, R ) );
-	else
+        else
             return DiagMat( [ B, HomalgZeroMatrix( m - NrRows( B ), n - NrColumns( B ), R ) ] );
         fi;
         
