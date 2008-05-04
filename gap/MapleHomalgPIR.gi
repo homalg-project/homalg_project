@@ -90,10 +90,6 @@ InstallMethod( CreateHomalgTable,
         RP.(component) := RP_BestBasis.(component);
     od;
     
-    for component in NamesOfComponents( RP_default ) do
-        RP.(component) := RP_default.(component);
-    od;
-    
     for component in NamesOfComponents( RP_specific ) do
         RP.(component) := RP_specific.(component);
     od;

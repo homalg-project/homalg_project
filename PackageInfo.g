@@ -393,7 +393,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["rings", "ideals", "ideal membership problem", "syzygies" ]
+Keywords := [ "rings", "ideals", "ideal membership problem", "syzygies" ]
 
 ));
 
