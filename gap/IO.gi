@@ -80,13 +80,16 @@ end );
 
 InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
-    local READY, READY_LENGTH, CUT_BEGIN, CUT_END, handle_output, gotsomething, l, nr, pos, bytes,
+    local READY, READY_LENGTH, CUT_POS_BEGIN, CUT_POS_END,
+          SEARCH_READY_TWICE, handle_output, gotsomething,
+          l, nr, pos, bytes, pos1, pos2, pos3, pos4,
           CAS, PID, COLOR;
     
     READY := s.READY;
     READY_LENGTH := s.READY_LENGTH;
-    CUT_BEGIN := s.CUT_BEGIN;
-    CUT_END := s.CUT_END;
+    CUT_POS_BEGIN := s.CUT_POS_BEGIN;
+    CUT_POS_END := s.CUT_POS_END;
+    SEARCH_READY_TWICE := s.SEARCH_READY_TWICE;
     
     if IsBound( s.handle_output ) and s.handle_output = true then
         handle_output := true;
@@ -99,7 +102,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
     while true do	# will be exited with break or return
         l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
         nr := IO_select( l, [], [], 0, 0 );
-        Print( "select: nr=", nr, "\n" );
+        #Print( "select: nr=", nr, "\n" );
         
         if nr = 0 then 
             if not ( gotsomething ) then
@@ -107,13 +110,13 @@ InstallGlobalFunction( CheckOutputOfCAS,
             fi;  # nothing new whatsoever
             return s.casready;
         fi;
-        Print( "select: l=", l, "\n" );
+        #Print( "select: l=", l, "\n" );
         
         if l[1] <> fail then	# something on stdout
           pos := Length( s.lines );
           bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
           if bytes > 0 then
-              Print( "stdout bytes:", bytes, "\n" );
+              #Print( "stdout bytes:", bytes, "\n" );
               gotsomething := true;
               pos := PositionSublist( s.lines, READY, pos - READY_LENGTH + 1 );
                     # ........NEWNEWNEWNEWNEW
@@ -133,8 +136,39 @@ InstallGlobalFunction( CheckOutputOfCAS,
                           s.lines := Concatenation( s.lines{ [ 1 .. pos - 2 ] },
                                              s.lines{ [ pos + READY_LENGTH + 2 .. Length( s.lines ) ] } );
                       fi;
+                  elif SEARCH_READY_TWICE = 1 then
+                      pos2 := PositionSublist( s.lines, READY );
+                      pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
+                      if pos3 = fail then
+                          gotsomething := false;
+                      else
+                          #Print("s.lines", s.lines);
+                          pos1 := PositionSublist( s.lines, "\n\n" );
+                          if pos1 = fail then
+                              pos1 := 1;
+                          fi;
+                          pos3 := PositionSublist( s.lines, "\no", pos1 );
+                          if pos3 <> fail then
+                              pos4 := PositionSublist( s.lines, "=", pos3 + 1 );
+                              if pos4 <> fail then
+                                  s.lines := Concatenation( s.lines{ [ 1 .. pos3 ] },
+                                             s.lines{ [ pos4 + 2 .. Length( s.lines ) ] } );
+                              else
+                                  s.lines := Concatenation( s.lines{ [ 1 .. pos3 ] },
+                                             s.lines{ [ pos3 + 2 .. Length( s.lines ) ] } );
+                              fi;
+                              pos3 := PositionSublist( s.lines, "\no", pos3 + 1 );
+                              if pos3 <> fail then
+                                  s.lines := s.lines{ [ pos1 + 2 .. pos3 - 1 ] };
+                              else
+                                  s.lines := s.lines{ [ pos1 + 2 .. pos2 - 2 ] };
+                              fi;
+                          else
+                              s.lines := s.lines{ [ pos1 + 4 .. pos2 - 2 ] };
+                          fi;
+                      fi;
                   else
-                      s.lines := s.lines{ [ CUT_BEGIN .. Length( s.lines ) - READY_LENGTH - CUT_END ] };
+                      s.lines := s.lines{ [ CUT_POS_BEGIN .. Length( s.lines ) - READY_LENGTH - CUT_POS_END ] };
                   fi;
               fi;
           else
@@ -190,7 +224,6 @@ InstallGlobalFunction( SendBlockingToCAS,
   function( s, command )
     local l, nr;
     
-    Print("Hallo\n");
     SendToCAS( s, command );
     repeat
         l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
