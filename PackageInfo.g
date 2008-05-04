@@ -3,6 +3,7 @@
 ##  PackageInfo.g for the package `IO_ForHomalg'             Mohamed Barakat
 ##                                                            Simon Goertzen
 ##                                                           Max Neunhoeffer
+##                                                            Daniel Robertz
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
@@ -168,6 +169,22 @@ Persons := [
     Place         := "St Andrews",
     Institution   := "St Andrews University"
   ),
+  rec( 
+    LastName      := "Robertz",
+    FirstNames    := "Daniel",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "daniel@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel",
+    PostalAddress := Concatenation( [
+                       "Daniel Robertz\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
 # provide such a record for each author and/or maintainer ...
   
 ],
@@ -320,6 +337,8 @@ BannerString := Concatenation(
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
+  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+        " (", ~.Persons[4].WWWHome, ")\n",
   "For help, type: ?IO_ForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 
@@ -336,7 +355,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["rings", "ideals", "ideal membership problem", "syzygies" ]
+Keywords := [ "IO", "streams" ]
 
 ));
 
