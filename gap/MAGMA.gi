@@ -24,13 +24,12 @@ InstallValue( HOMALG_IO_MAGMA,
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            SEARCH_READY_TWICE := 0,
             CUT_POS_BEGIN := 1,		## these are the most
             CUT_POS_END := 2,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
-            remove_enter := true,       ## a MAGMA specific
-            error_stdout := " error: ",       ## a MAGMA specific
+            remove_enter := true,	## a MAGMA specific
+            error_stdout := " error: ",	## a MAGMA specific
             define := ":=",
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",

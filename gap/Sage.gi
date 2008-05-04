@@ -22,7 +22,6 @@ InstallValue( HOMALG_IO_Sage,
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            SEARCH_READY_TWICE := 0,
             CUT_POS_BEGIN := 7,		## these are the most
             CUT_POS_END := 10,		## delicate values!
             eoc_verbose := "",

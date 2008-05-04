@@ -27,7 +27,6 @@ InstallValue( HOMALG_IO_Maple,
             options := [ "-q" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            SEARCH_READY_TWICE := 0,
             CUT_POS_BEGIN := 1,		## these are the most
             CUT_POS_END := 4,		## delicate values!
             eoc_verbose := ";",

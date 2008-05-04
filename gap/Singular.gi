@@ -24,7 +24,6 @@ InstallValue( HOMALG_IO_Singular,
             options := [ "-t" , "--echo=0" , "--no-warn" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            SEARCH_READY_TWICE := 0,
             CUT_POS_BEGIN := 1,		## these are the most
             CUT_POS_END := 2,		## delicate values!
             eoc_verbose := ";",
