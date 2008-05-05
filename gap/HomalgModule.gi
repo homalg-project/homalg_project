@@ -985,7 +985,7 @@ InstallMethod( NonZeroGenerators,
         
   function( M )
     
-    return NonZeroGenerators( BasisOfModule( M ) );	## this has a side effect on M, but one that does not change the generators
+    return NonZeroGenerators( BasisOfModule( RelationsOfModule( M ) ) ); ## don't delete RelationsOfModule, since we don't want to add too much new relations to the module in an early stage!
     
 end );
 
