@@ -329,7 +329,7 @@ InstallMethod( SetPositionOfTheDefaultSetOfRelations,
         
   function( M, pos )
     
-    SetPositionOfTheDefaultSetOfRelations( M, pos );
+    M!.PositionOfTheDefaultSetOfRelations := pos;
     
 end );
 
