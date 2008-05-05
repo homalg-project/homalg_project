@@ -985,7 +985,15 @@ InstallMethod( ViewObj,
         Print( " non-zero" );
     fi;
     
-    Print( " morphism of" );
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            Print( " morphism of" );
+        else
+            Print( " non-well-defined map between" );
+        fi;
+    else
+        Print( " \"morphism\" of" );
+    fi;
     
     if IsHomalgMorphismOfLeftModules( o ) then
         Print( " left" );
@@ -1121,11 +1129,19 @@ InstallMethod( ViewObj,
     
     if HasIsZeroMorphism( o ) then ## if this method applies and HasIsZeroMorphism is set we already know that o is a non-zero morphism of homalg modules
         Print( " non-zero" );
-    else
+    elif not ( HasIsMorphism( o ) and not IsMorphism( o ) ) then
         Print( "n" );
     fi;
     
-    Print( " endomorphism of" );
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            Print( " endomorphism of" );
+        else
+            Print( " non-well-defined self-map of" );
+        fi;
+    else
+        Print( " \"morphism\" of" );
+    fi;
     
     if IsHomalgMorphismOfLeftModules( o ) then
         Print( " a left" );
