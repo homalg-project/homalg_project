@@ -323,6 +323,17 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,
 end );
 
 ##
+InstallMethod( SetPositionOfTheDefaultSetOfRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    
+    SetPositionOfTheDefaultSetOfRelations( M, pos );
+    
+end );
+
+##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -673,7 +684,7 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    M!.PositionOfTheDefaultSetOfRelations := l+1;
+    SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     
     if NrGenerators( gen ) = 0 then
         SetIsZeroModule( M, true );
@@ -703,14 +714,14 @@ InstallMethod( AddANewPresentation,
     ## don't add an old set of relations, but let it be the default set of relations instead:
     for d in lpos do
         if IsIdenticalObj( rel, rels!.(d) ) then
-            M!.PositionOfTheDefaultSetOfRelations := d;
+            SetPositionOfTheDefaultSetOfRelations( M, d );
             return M;
         fi;
     od;
     
     for d in lpos do
         if MatrixOfRelations( rel ) = MatrixOfRelations( rels!.(d) ) then
-            M!.PositionOfTheDefaultSetOfRelations := d;
+            SetPositionOfTheDefaultSetOfRelations( M, d );
             return M;
         fi;
     od;
@@ -765,7 +776,7 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    M!.PositionOfTheDefaultSetOfRelations := l+1;
+    SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     
     if NrRelations( rel ) = 0 then
         SetIsFreeModule( M, true );
@@ -842,7 +853,7 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    M!.PositionOfTheDefaultSetOfRelations := l+1;
+    SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     
     if NrGenerators( gen ) = 0 then
         SetIsZeroModule( M, true );

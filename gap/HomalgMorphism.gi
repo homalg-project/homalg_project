@@ -526,13 +526,19 @@ InstallMethod( POW,
         [ IsMorphismOfFinitelyGeneratedModulesRep, IsInt ],
         
   function( phi, pow )
-    local id;
+    local id, inv;
     
     if pow = -1 then
         
         id := HomalgIdentityMorphism( TargetOfMorphism( phi ) );
         
-        return PostDivide( id, phi );
+        inv := PostDivide( id, phi );
+        
+        if HasIsIsomorphism( phi ) then
+            SetIsIsomorphism( inv, IsIsomorphism( phi ) );
+        fi;
+        
+        return inv;
         
     fi;
     
@@ -734,13 +740,13 @@ InstallGlobalFunction( HomalgMorphism,
     if Length( arg ) > 1 then
         if IsHomalgModule( arg[2] ) then
             source := arg[2];
-            pos_s := source!.PositionOfTheDefaultSetOfRelations;
+            pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then
             source := "ring";
         elif IsList( arg[2] ) and IsHomalgModule( arg[2][1] ) and IsPosInt( arg[2][2] ) then
             source := arg[2][1];
             pos_s := arg[2][2];
-            if not IsBound( source!.SetsOfRelations!.( pos_s ) ) then
+            if not IsBound( SetsOfRelations( source )!.( pos_s ) ) then
                 Error( "the source module does not possess a ", arg[2][2], ". set of relations (this positive number is given as the second entry of the list provided as the second argument)\n" );
             fi;
         fi;
@@ -792,7 +798,7 @@ InstallGlobalFunction( HomalgMorphism,
     if Length( arg ) > 2 then
         if IsHomalgModule( arg[3] ) then
             target := arg[3];
-            pos_t := target!.PositionOfTheDefaultSetOfRelations;
+            pos_t := PositionOfTheDefaultSetOfRelations( target );
         elif IsHomalgRing( arg[3] ) then
             if source = "ring" then
                 source := HomalgFreeLeftModule( 1, arg[2] );
@@ -800,23 +806,23 @@ InstallGlobalFunction( HomalgMorphism,
                     Error( "the source and target modules must be defined over the same ring\n" );
                 fi;
                 target := source;	## we get an endomorphism
-                pos_s := source!.PositionOfTheDefaultSetOfRelations;
+                pos_s := PositionOfTheDefaultSetOfRelations( source );
                 pos_t := pos_s;
             else
                 target := HomalgFreeLeftModule( 1, arg[3] );
-                pos_t := target!.PositionOfTheDefaultSetOfRelations;
+                pos_t := PositionOfTheDefaultSetOfRelations( target );
             fi;
         elif IsList( arg[3] ) and IsHomalgModule( arg[3][1] ) and IsPosInt( arg[3][2] ) then
             target := arg[3][1];
             pos_t := arg[3][2];
-            if not IsBound( target!.SetsOfRelations!.( pos_t ) ) then
+            if not IsBound( SetsOfRelations( target )!.( pos_t ) ) then
                 Error( "the target module does not possess a ", arg[3][2], ". set of relations (this positive number is given as the second entry of the list provided as the third argument)\n" );
             fi;
         fi;
     elif source = "ring" then
         source := HomalgFreeLeftModule( 1, arg[2] );
         target := source;	## we get an endomorphism
-        pos_s := source!.PositionOfTheDefaultSetOfRelations;
+        pos_s := PositionOfTheDefaultSetOfRelations( source );
         pos_t := pos_s;
     else
         pos_t := pos_s;
@@ -844,12 +850,12 @@ InstallGlobalFunction( HomalgMorphism,
     fi;
     
     if IsLeftModule( source ) then
-        nr_rows := NrGenerators( source!.SetsOfRelations!.( pos_s ) );
-        nr_columns := NrGenerators( target!.SetsOfRelations!.( pos_t ) );
+        nr_rows := NrGenerators( source, pos_s );
+        nr_columns := NrGenerators( target, pos_t );
         index_pair := [ pos_s, pos_t ];
     else
-        nr_columns := NrGenerators( source!.SetsOfRelations!.( pos_s ) );
-        nr_rows := NrGenerators( target!.SetsOfRelations!.( pos_t ) );
+        nr_columns := NrGenerators( source, pos_s );
+        nr_rows := NrGenerators( target, pos_t );
         index_pair := [ pos_t, pos_s ];
     fi;
     

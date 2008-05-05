@@ -138,6 +138,9 @@ DeclareOperation( "NumberOfKnownPresentations",
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgModule ] );
 
+DeclareOperation( "SetPositionOfTheDefaultSetOfRelations",
+        [ IsHomalgModule, IsInt ] );
+
 DeclareOperation( "GeneratorsOfModule",
         [ IsHomalgModule ] );
 
@@ -230,6 +233,9 @@ DeclareOperation( "BetterGenerators",
 
 DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
         PositionOfTheDefaultSetOfRelations );
+
+DeclareSynonym( "SetPositionOfTheDefaultSetOfGenerators",
+        SetPositionOfTheDefaultSetOfRelations );
 
 DeclareSynonym( "EulerCharacteristicOfModule",
         RankOfModule );

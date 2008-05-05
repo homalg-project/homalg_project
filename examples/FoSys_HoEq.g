@@ -23,3 +23,9 @@ alpha := HomalgMorphism( " \
 [	1,	0,	0	] \
 ] \
 ", Mskl, Msys );
+
+delta := HomalgMorphism( " \
+[ \
+[	D	] \
+] \
+", Mskl );
