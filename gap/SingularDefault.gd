@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SingularDefault.gd        RingsForHomalg package         Mohamed Barakat
+##  SingularDefault.gd        RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

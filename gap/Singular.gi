@@ -240,6 +240,7 @@ InstallMethod( CreateHomalgMatrix,
     local ext_obj;
     
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
+    homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command" ); #added by Simon
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -354,7 +355,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
         
-        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", HOMALG_IO.Pictograms.Display ) );
+        Print( homalgSendBlocking( [ "print(transpose(", o, "))" ], "need_display", HOMALG_IO.Pictograms.Display ) );
         
     else
         

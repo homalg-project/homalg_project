@@ -24,7 +24,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               ZeroRows :=
+               ZeroColumns := #was: ZeroRows
                  function( C )
                    local R, list_string;
 
@@ -32,7 +32,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "]" ] , C, "need_command" );
 
-                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrRows(C), "; i=i+1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroRows );
+                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrColumns(C), "; i=i+1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroColumns );
 
                    list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
 
@@ -45,7 +45,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                  end,
                
-               ZeroColumns :=
+               ZeroRows := #was: ZeroColumns
                  function( C )
                    local R, list_string;
 
@@ -53,7 +53,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]" ] , C, "need_command" );
 
-                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrColumns(C), "; i=i+1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroColumns );
+                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrRows(C), "; i=i+1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroRows );
 
                    list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
 
@@ -85,7 +85,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[" , NrRows( C ) , "][" , NrColumns( C ) , "]" ], C, HOMALG_IO.Pictograms.ZeroMatrix );
+                   return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[" , NrColumns( C ) , "][" , NrRows( C ) , "]" ], C, HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
              
@@ -103,31 +103,31 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               CertainRows :=
+               CertainColumns := #was: CertainRows
                  function( M, plist )
                     
-                   return homalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrColumns( M ), ")" ], [ "matrix" ], HOMALG_IO.Pictograms.CertainRows );
+                   return homalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrRows( M ), ")" ], [ "matrix" ], HOMALG_IO.Pictograms.CertainColumns );
                     
                  end,
                
-               CertainColumns :=
+               CertainRows := #was: CertainColumns
                  function( M, plist )
                    
-                   return homalgSendBlocking( [ "submat(", M, ",1..", NrRows(M), ",intvec(", plist, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.CertainColumns );
+                   return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",intvec(", plist, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
                
-               UnionOfRows :=
+               UnionOfColumns := #was UnionOfRows
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, B ], [ "matrix" ], [ "[", NrRows(A) + NrRows(B), "][", NrColumns(A), "]" ], HOMALG_IO.Pictograms.UnionOfRows );
+                   return homalgSendBlocking( [ A, B ], [ "matrix" ], [ "[", NrColumns(A) + NrColumns(B), "][", NrRows(A), "]" ], HOMALG_IO.Pictograms.UnionOfColumns );
                    
                  end,
                
-               UnionOfColumns :=
+               UnionOfRows := #was: UnionOfColumns
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "concat(", A, B, ")" ], [ "matrix" ], [ "[", NrRows(A), "][", NrColumns(A) + NrColumns(B), "]" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ "concat(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns(A), "][", NrRows(A) + NrRows(B), "]" ], HOMALG_IO.Pictograms.UnionOfRows );
                    
                  end,
                
@@ -137,7 +137,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    f := Concatenation( [ "dsum(" ], e, [ ")" ] );
                    
-                   return homalgSendBlocking( f, [ "matrix" ], [ "[", Sum( List( e, NrRows ) ), "][", Sum( List( e, NrColumns ) ), "]" ], HOMALG_IO.Pictograms.DiagMat );
+                   return homalgSendBlocking( f, [ "matrix" ], [ "[", Sum( List( e, NrColumns ) ), "][", Sum( List( e, NrRows ) ), "]" ], HOMALG_IO.Pictograms.DiagMat );
                    
                  end,
                
@@ -168,21 +168,21 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ B, "*", A ], HOMALG_IO.Pictograms.Compose );
+                   return homalgSendBlocking( [ B, "*", A ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
                    
                  end,
                
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return Int( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return Int( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                
