@@ -32,7 +32,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "]" ] , C, "need_command" );
 
-                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrColumns(C), "; i=i+1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroColumns );
+                   homalgSendBlocking( [ "list l;for (int i=", NrColumns( C ), "; i>=1; i=i-1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroColumns );
 
                    list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
 
@@ -53,7 +53,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]" ] , C, "need_command" );
 
-                   homalgSendBlocking( [ "list l;for (int i=1; i<=", NrRows(C), "; i=i+1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroRows );
+                   homalgSendBlocking( [ "list l;for (int i=", NrRows( C ), "; i>=1; i=i-1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroRows );
 
                    list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
 
@@ -85,7 +85,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                ZeroMatrix :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[" , NrColumns( C ) , "][" , NrRows( C ) , "]" ], C, HOMALG_IO.Pictograms.ZeroMatrix );
+                   return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[", NrColumns( C ), "][", NrRows( C ), "]" ], C, HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
              
@@ -99,7 +99,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Involution :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "transpose(", M, ")" ], HOMALG_IO.Pictograms.Involution );
+                   return homalgSendBlocking( [ "transpose(", M, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Involution );
                    
                  end,
                
@@ -168,8 +168,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ B, "*", A ], [ "matrix" ], HOMALG_IO.Pictograms.Compose );
-                   
+                   return homalgSendBlocking( [ "transpose(", A, ") * transpose(", B, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
+		   
                  end,
                
                NrRows :=
@@ -188,10 +188,65 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                Minus :=
                  function( a, b )
+                     
+                     return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", HOMALG_IO.Pictograms.Minus );
+                     
+                 end,
                    
-                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", HOMALG_IO.Pictograms.Minus );
+               DivideByUnit :=
+                 function( a, u )
+                   
+                   return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
-               
+                   
+               GetUnitPosition := #FIXME : just for polynomial rings
+                 function( M, pos_list )
+                   local R, m, n, i, j, str;
+                   
+                   R := HomalgRing( M );
+                   
+                   m := NrRows( M );
+		   n := NrColumns( M );
+		   
+		   for i in [ 1 .. m ] do
+                     for j in [ 1 .. n ] do
+                       if not [ i, j ] in pos_list and not j in pos_list then
+                         str := homalgSendBlocking( [ "vdim(", M, "[",j,"][",i,"])" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                         if Int(str) = 0 then
+                             return [ i, j ];
+                         fi;
+                       fi;
+                     od;
+                   od;
+     
+                   return fail;
+                     
+                 end,
+                   
+               GetCleanRowsPositions :=
+                 function( M, clean_columns )
+                   local R, one, clean_rows, m, j, i, str;
+                  
+                   R := HomalgRing( M );
+                   one := One( R );
+                   
+                   clean_rows := [ ];
+                   
+                   m := NrRows( M );
+                   
+                   for j in clean_columns do
+                       for i in [ 1 .. m ] do
+                           str := homalgSendBlocking( [ M, "[", j, "][", i, "] == ", one ], "need_output", HOMALG_IO.Pictograms.GetCleanRowPosition );
+                           if Int(str) = 1 then
+                               Add( clean_rows, i );
+                               break;
+                           fi;
+                       od;
+                   od;
+                   
+                   return  clean_rows;
+                   
+                 end,
         )
- );
+);

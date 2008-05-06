@@ -100,7 +100,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"; LIB \"involut.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
@@ -294,10 +294,10 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
     if mode = "ListList" then
 
         command := [ 
-          "matrix m[1][", NrColumns( M ), "];",
+          "matrix m[", NrColumns( M ),"][1];",
           "string s = \"[\";",
           "for(int i=1;i<=", NrRows( M ), ";i=i+1)",
-          "{m = ", M, "[i,1..", NrColumns( M ), "]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
+          "{m = ", M, "[1..", NrColumns( M ), ",i]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
           "s=s+\"]\";",
           "write(\"w: ", filename,"\",s);"
         ];
@@ -329,9 +329,10 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     
     if mode = "ListList" then
         
-        command := [ "string s=read(r: ", filename, ");",
-                      "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
-                      "execute(", M, "[", r, "][", c, "]= w;);" ];
+        command := [ "string s=read(\"r: ", filename, "\");",
+                     "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
+                     "execute( \"matrix ", M, "[", r, "][", c, "] = \" + w + \";\" );",
+                     M, " = transpose(", M, ")" ];
         
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
