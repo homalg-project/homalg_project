@@ -247,6 +247,22 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( DecideZero,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGenerators, IsHomalgRelations ],
+        
+  function( gen, rel )
+    
+    if not IsBound( gen!.DecideZero ) then
+        gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), rel );
+        SetIsReduced( gen, false );
+    fi;
+    
+    return gen!.DecideZero;
+    
+end );
+
+##
 InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterBasis)
         "for sets of relations of homalg modules",
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],

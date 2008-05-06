@@ -1489,6 +1489,17 @@ InstallMethod( LeftPresentation,
 end );
 
 ##
+InstallOtherMethod( LeftPresentation,		## FIXME: should be removed!!!
+        "constructor",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    
+    return Presentation( rel );
+    
+end );
+
+##
 InstallMethod( RightPresentation,
         "constructor",
         [ IsList, IsHomalgRing ],
@@ -1579,6 +1590,17 @@ InstallMethod( RightPresentation,
   function( mat )
     
     return Presentation( HomalgRelationsForRightModule( mat ) );
+    
+end );
+
+##
+InstallOtherMethod( RightPresentation,		## FIXME: should be removed!!!
+        "constructor",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( rel )
+    
+    return Presentation( rel );
     
 end );
 
@@ -1864,13 +1886,28 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
   function( M )
-    local R;
+    local R, l, D;
     
     R := HomalgRing( M );
     
     R := RingName( R );
     
-    Print( "Cokernel of the map:\n", R, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", R, "^(1x\033[01m", NrGenerators( M ), "\033[0m), with matrix\n\n" );
+    l := 10;
+    
+    if Length( R ) < l then
+        D := R;
+    else
+        D := "D";
+    fi;
+    
+    Print( "Cokernel of the map:\n", D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
+    
+    if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
+        Print( " ( for D := ", R, "\033[0m )" );
+    fi;
+    
+    Print( " with matrix\n\n" );
+    
     Display( MatrixOfRelations( M ) );
     
 end );
@@ -1881,13 +1918,28 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep and IsRightModule ],
         
   function( M )
-    local R;
+    local R, l, D;
     
     R := HomalgRing( M );
     
     R := RingName( R );
     
-    Print( "Cokernel of the map:\n", R, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", R, "^(\033[01m", NrGenerators( M ), "\033[0mx1), with matrix\n\n" );
+    l := 10;
+    
+    if Length( R ) < l then
+        D := R;
+    else
+        D := "D";
+    fi;
+    
+    Print( "Cokernel of the map:\n", D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
+    
+    if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
+        Print( " ( for D := ", R, "\033[0m )" );
+    fi;
+    
+    Print( " with matrix\n\n" );
+    
     Display( MatrixOfRelations( M ) );
     
 end );
