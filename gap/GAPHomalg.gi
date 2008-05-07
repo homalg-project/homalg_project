@@ -19,7 +19,7 @@ InstallValue( HOMALG_IO_GAP,
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
             executable := "gapL",
-            options := [ "-b -q -T" ],
+            options := [ "-b -q -T -o 15g" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
             CUT_POS_BEGIN := 1,		## these are the most
