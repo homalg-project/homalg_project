@@ -227,7 +227,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ "convert(", R, "[-1][Minus](", a, ",", b, R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.Minus ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ "convert(", R, "[-1][Minus](", a, ",", b, ",", R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.Minus ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                  
@@ -237,7 +237,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ "convert(", R, "[-1][DivideByUnit](", a, ",", u, R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ "convert(", R, "[-1][DivideByUnit](", a, ",", u, ",", R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                  
