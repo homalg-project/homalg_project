@@ -265,7 +265,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
   function( M, i, j, R )
     local Mij;
     
-    Mij := homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
+    Mij := homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
     return HomalgExternalRingElement( homalgPointer( Mij ), "Singular", R );
     
