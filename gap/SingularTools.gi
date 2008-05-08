@@ -205,7 +205,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    if u{[1]} = "-" then
                      return homalgSendBlocking( [ "-(", a, ")/", u{[ 2..Length( u ) ]} ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    else
-                     return homalgSendBlocking( [ a, "/", u ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                     return homalgSendBlocking( [ "(",  a, ")/", u ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    fi;
                    
                  end,
