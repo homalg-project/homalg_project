@@ -73,7 +73,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                One := HomalgExternalRingElement( "1", "Singular", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( "(-1)", "Singular" ),
+               MinusOne := HomalgExternalRingElement( "-1", "Singular" ),
                
                AreEqualMatrices :=
                  function( A, B )
@@ -197,7 +197,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( a, e )
                    local u;
 		   if IsHomalgExternalRingElement( e ) then
-		     u := Name( e );
+		     u := homalgPointer( e );
 	           else
 		     u := e;
 	           fi;
