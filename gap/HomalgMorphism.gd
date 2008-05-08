@@ -119,7 +119,10 @@ DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorp
 DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
 
-DeclareOperation( "BetterGenerators",
+DeclareOperation( "OnLessGenerators",
+        [ IsHomalgMorphism ] );
+
+DeclareOperation( "BasisOfModule",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "DecideZero",

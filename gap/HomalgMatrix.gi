@@ -949,8 +949,6 @@ InstallGlobalFunction( HomalgMatrix,
                 M := arg[1];
             fi;
             
-            M := String( M );
-            
             ar := Concatenation( [ M ], arg{[ 2 .. nargs ]} );
             
             return CallFuncList( ConvertHomalgMatrix, ar );

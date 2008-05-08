@@ -12,12 +12,12 @@ phi := HomalgMatrix( " \
 F2 := HomalgFreeLeftModule( 2, Qxyz );
 phi := HomalgMorphism( phi, F2, M );
 N := Cokernel( phi );
-BetterGenerators( N );
+OnLessGenerators( N );
 BasisOfModule( N );
 psi := HomalgMatrix( "\
 [[y,0],[0,z-1]]\
 ", Qxyz );
 psi := HomalgMorphism( psi, F2, N );
 C := Cokernel( psi );
-BetterGenerators( C );
+OnLessGenerators( C );
 BasisOfModule( C );

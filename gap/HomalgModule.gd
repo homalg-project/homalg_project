@@ -222,7 +222,7 @@ DeclareOperation( "NonZeroGenerators",
 DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgModule ] );
 
-DeclareOperation( "BetterGenerators",
+DeclareOperation( "OnLessGenerators",
         [ IsHomalgModule ] );
 
 ####################################

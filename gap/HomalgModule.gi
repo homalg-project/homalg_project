@@ -1075,7 +1075,7 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
 end );
 
 ##
-InstallMethod( BetterGenerators,
+InstallMethod( OnLessGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
         
@@ -1104,7 +1104,7 @@ InstallMethod( BetterGenerators,
 end );
 
 ##
-InstallMethod( BetterGenerators,
+InstallMethod( OnLessGenerators,
         "for homalg modules",
 	[ IsFinitelyPresentedModuleRep and IsRightModule ],
         

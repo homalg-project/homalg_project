@@ -519,7 +519,7 @@ end );
 ##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
-    local nargs, properties, ar, ring, r;
+    local nargs, properties, ar, ring, pointer, r;
     
     nargs := Length( arg );
     
@@ -535,14 +535,20 @@ InstallGlobalFunction( HomalgExternalRingElement,
         fi;
     od;
     
+    pointer := arg[1];
+    
     if IsBound( ring ) then
-        r := rec( pointer := arg[1], cas := arg[2], ring := ring );
+        
+        if IsFunction( pointer ) then
+            pointer := pointer( ring );
+        fi;
+        
+        r := rec( pointer := pointer, cas := arg[2], ring := ring );
         
         ## Objectify:
-        ObjectifyWithAttributes(
-                r, TheTypeHomalgExternalRingElementWithIOStream );
+        Objectify( TheTypeHomalgExternalRingElementWithIOStream, r );
     else
-        r := rec( pointer := arg[1], cas := arg[2] );
+        r := rec( pointer := pointer, cas := arg[2] );
         
         ## Objectify:
         Objectify( TheTypeHomalgExternalRingElement, r );
@@ -554,8 +560,8 @@ InstallGlobalFunction( HomalgExternalRingElement,
         od;
     fi;
     
-    if not ( Length( arg[1] ) > 17 and arg[1]{[1..16]} = "homalg_variable_" ) then
-	SetName( r, arg[1] );
+    if not IsFunction( pointer ) and not ( Length( pointer ) > 17 and pointer{[1..16]} = "homalg_variable_" ) then
+	SetName( r, pointer );
     fi;
     
     return r;

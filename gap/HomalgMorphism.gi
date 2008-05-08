@@ -547,14 +547,28 @@ InstallMethod( POW,
 end );
 
 ##
-InstallMethod( BetterGenerators,
+InstallMethod( OnLessGenerators,
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    BetterGenerators( SourceOfMorphism( phi ) );
-    BetterGenerators( TargetOfMorphism( phi ) );
+    OnLessGenerators( SourceOfMorphism( phi ) );
+    OnLessGenerators( TargetOfMorphism( phi ) );
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    OnLessGenerators( SourceOfMorphism( phi ) );
+    OnLessGenerators( TargetOfMorphism( phi ) );
     
     return phi;
     
