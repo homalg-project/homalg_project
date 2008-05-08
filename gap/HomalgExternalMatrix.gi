@@ -115,9 +115,18 @@ InstallGlobalFunction( ConvertHomalgMatrix,
     
     nargs := Length( arg );
     
-    if nargs = 2 and ( IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) ) and IsHomalgRing( arg[2] ) then
+    if nargs = 2 and IsHomalgRing( arg[2] ) then
         
-        M := arg[1];
+        if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
+            M := arg[1];
+        elif IsMatrix( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
+        elif IsList( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], homalgPointer ) ), "]" );
+        else
+            M := String( arg[1] );
+        fi;
+        
         R := arg[2];
 	
         if IsHomalgMatrix( M ) then
@@ -140,9 +149,18 @@ InstallGlobalFunction( ConvertHomalgMatrix,
             return CreateHomalgMatrix( M, R );
         fi;
         
-    elif nargs = 4 and ( IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) ) and IsHomalgRing( arg[4] ) then
+    elif nargs = 4 and IsHomalgRing( arg[4] ) then
         
-        M := arg[1];
+        if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
+            M := arg[1];
+        elif IsMatrix( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
+        elif IsList( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], homalgPointer ) ), "]" );
+        else
+            M := String( arg[1] );
+        fi;
+        
         r := arg[2];
         c := arg[3];
         R := arg[4];
@@ -163,7 +181,7 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         
     fi;
     
-    Error( "wrong syntax\n" );
+    Error( "no ring specified\n" );
     
 end );
 
