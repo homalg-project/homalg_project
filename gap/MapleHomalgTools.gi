@@ -266,10 +266,30 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions`(", M, clean_columns, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    if list_string = "" then
-                       return [];
+                       return [ ];
                    else
                        return StringToIntList( list_string );
                    fi;
+                   
+                 end,
+                 
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetColumnIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+                 
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetRowIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
                  end,
                  
