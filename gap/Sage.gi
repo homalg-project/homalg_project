@@ -294,7 +294,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
 
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 
