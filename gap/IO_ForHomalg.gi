@@ -46,10 +46,10 @@ InstallValue( HOMALG_IO,
                 
                 ## create matrices:
                 HomalgMatrix				:= "A:=",	## define a matrix
-                LoadDataOfHomalgMatrixFromFile 		:= "<<A",	## load a matrix from file
+                LoadDataOfHomalgMatrixFromFile 		:= "A<<",	## load a matrix from file
                 SaveDataOfHomalgMatrixToFile		:= "A>>",	## save a matrix to file
-                GetEntryOfHomalgMatrixAsString		:= "<ij",	## get a matrix entry as a string
-                SetEntryOfHomalgMatrix			:= "ij>",	## set a matrix entry from a string
+                GetEntryOfHomalgMatrix			:= "<ij",	## get a matrix entry as a string
+                SetEntryOfHomalgMatrix			:= ">ij",	## set a matrix entry from a string
                 GetListOfHomalgMatrixAsString		:= "\"A\"",	## get a list of the matrix entries as a string
                 GetListListOfHomalgMatrixAsString	:= "\"A\"",	## get a listlist of the matrix entries as a string
                 GetSparseListOfHomalgMatrixAsString	:= ".A.",	## get a "sparse" list of the matrix entries as a string
