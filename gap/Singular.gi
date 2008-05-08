@@ -227,7 +227,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", c, r, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -252,8 +252,9 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
-    
-    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
+    local entry;
+    entry := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
+    return homalgPointer( entry );
     
 end );
 

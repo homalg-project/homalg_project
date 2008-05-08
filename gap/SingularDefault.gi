@@ -21,12 +21,41 @@ InstallValue( CommonHomalgTableForSingularDefault,
     DecideZeroRows :=
     function( A, B )
       local R, N;
-    
       R := HomalgRing( A );
-      N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+      N := HomalgVoidMatrix( R );
       homalgSendBlocking( [ "matrix ", N, " = reduce(", A, B, ")" ], "need_command" );
       ResetFilterObj( N, IsVoidMatrix );
       return N;
+    end,
+      
+    DecideZeroRowsEffectively :=
+    function( A, B, T )  
+      local R, l, m, n, id, zz, M, TT;
+      
+      R := HomalgRing( A );
+      
+      l := NrRows( A );
+      m := NrColumns( A );
+    
+      n := NrRows( B );
+    
+      id := HomalgIdentityMatrix( l, R );
+    
+      zz := HomalgZeroMatrix( n, l, R );
+    
+      M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
+    
+      TT := HomalgVoidMatrix( R );
+    
+      M := BasisOfRowsCoeff( M, TT );
+    
+      M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+      TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
+    
+      SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+      return M;
     
     end,
     
@@ -57,5 +86,19 @@ InstallValue( CommonHomalgTableForSingularDefault,
       ResetFilterObj( N, IsVoidMatrix );
       return N;
     end,
+    
+    BasisOfRowsCoeff :=
+    function( M, T )
+    local R, B;
+      R := HomalgRing( M );
+      B := HomalgVoidMatrix( R );
+      ## compute B and T, such that B=TM
+      homalgSendBlocking( [ "matrix ", T, "; matrix ", B, " = liftstd(", M, T, ");"
+              ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+      B := T * M;
+      ResetFilterObj( B, IsVoidMatrix );
+      return B;
+    end,
+    
   )
 );
