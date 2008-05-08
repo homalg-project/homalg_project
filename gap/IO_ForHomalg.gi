@@ -41,6 +41,8 @@ InstallValue( HOMALG_IO,
                 CreateHomalgRing			:= "R:=",	## define a ring
                 
                 ## ring operations:
+                IsZero					:= "a=0",	## a = 0 ?
+                IsOne					:= "a=1",	## a = 1 ?
                 Minus					:= "a-b",	## substract two ring elements
                 DivideByUnit				:= "a/u",	## divide the element a by the unit u
                 

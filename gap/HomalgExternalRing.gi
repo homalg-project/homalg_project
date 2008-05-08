@@ -91,6 +91,17 @@ InstallMethod( homalgNrOfWarnings,
     
 end );
 
+##
+InstallMethod( homalgSetName,
+        "for homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString ],
+        
+  function( r, name )
+    
+    SetName( r, homalgSendBlocking( [ r ], "need_output" ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
