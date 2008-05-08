@@ -270,6 +270,99 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( SUM,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
+          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r1, r2 )
+    local R, RP, cas;
+    
+    R := HomalgRing( r1 );
+    
+    if not IsIdenticalObj( R, HomalgRing( r2 ) ) then
+        return Error( "the two elements are not in the same ring\n" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Minus) then
+        cas := homalgExternalCASystem( R );
+        return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), cas, R ) ;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R, RP;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsZero) then
+        return RP!.IsZero( r );
+    else
+        return homalgPointer( r ) = homalgPointer( Zero( R ) ); ## FIXME
+    fi;
+    
+end );
+
+##
+InstallMethod( IsOne,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R, RP;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsOne) then
+        return RP!.IsOne( r );
+    else
+        return homalgPointer( r ) = homalgPointer( One( R ) ); ## FIXME
+    fi;
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
+          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r1, r2 )
+    local R, RP;
+    
+    if not IsIdenticalObj( homalgStream( r1 ), homalgStream( r2 ) ) then
+        return false;
+    elif homalgPointer( r1 ) = homalgPointer( r2 ) then
+        return true;
+    fi;
+    
+    R := HomalgRing( r1 );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Minus) then
+        return IsZero( r1 - r2 );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( \/,
         "for external homalg ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
@@ -380,6 +473,17 @@ InstallMethod( AsRightModule,
   function( R )
     
     return R!.AsRightModule;
+    
+end );
+
+##
+InstallMethod( homalgSetName,
+        "for homalg rings",
+        [ IsHomalgExternalRingElementRep, IsString ],
+        
+  function( r, name )
+    
+    SetName( r, name );
     
 end );
 
@@ -560,8 +664,8 @@ InstallGlobalFunction( HomalgExternalRingElement,
         od;
     fi;
     
-    if not IsFunction( pointer ) and not ( Length( pointer ) > 17 and pointer{[1..16]} = "homalg_variable_" ) then
-	SetName( r, pointer );
+    if not IsFunction( pointer ) and IshomalgExternalObjectWithIOStreamRep( r ) then
+	homalgSetName( r, pointer );
     fi;
     
     return r;

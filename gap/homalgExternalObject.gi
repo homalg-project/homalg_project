@@ -17,12 +17,12 @@
 # a new representation for the category IshomalgExternalObject:
 DeclareRepresentation( "IshomalgExternalObjectRep",
         IshomalgExternalObject,
-        [ "object", "cas" ] );
+        [ "pointer", "cas" ] );
 
 # a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
         IshomalgExternalObjectRep,
-        [ "object", "cas" ] );
+        [ "pointer", "cas" ] );
 
 ####################################
 #
@@ -49,25 +49,6 @@ BindGlobal( "TheTypeHomalgExternalObjectWithIOStream",
 # methods for operations:
 #
 ####################################
-
-##
-InstallMethod( \=,
-        "for homalg external objects",
-        [ IshomalgExternalObjectRep, IshomalgExternalObjectRep ],
-        
-  function( o1, o2 )
-    local components;
-    
-    components := [ "pointer", "cas" ]; ## don't add more!!!
-    
-    if IsSubset( NamesOfComponents( o1 ), components )
-       and IsSubset( NamesOfComponents( o2 ), components ) then
-        return homalgPointer( o1 ) = homalgPointer( o2 ); ## we merely are comparing strings in GAP
-    fi;
-    
-    TryNextMethod( );
-    
-end );
 
 ##
 InstallMethod( homalgPointer,
@@ -177,6 +158,26 @@ InstallMethod( homalgNrOfWarnings,
     fi;
     
     return 0;
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg external objects",
+        [ IshomalgExternalObjectRep, IshomalgExternalObjectRep ],
+        
+  function( o1, o2 )
+    local components;
+    
+    components := [ "pointer", "cas" ]; ## don't add more!!!
+    
+    if IsSubset( NamesOfComponents( o1 ), components )
+       and IsSubset( NamesOfComponents( o2 ), components ) then
+        return homalgExternalCASystem( o1 ) = homalgExternalCASystem( o2 )
+               and homalgPointer( o1 ) = homalgPointer( o2 ); ## we merely are comparing strings in GAP
+    fi;
+    
+    TryNextMethod( );
     
 end );
 

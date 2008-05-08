@@ -172,6 +172,9 @@ DeclareOperation( "PolynomialRing",
 DeclareOperation( "*",
         [ IsHomalgRing, IsString ] );
 
+DeclareOperation( "homalgSetName",
+        [ IsHomalgExternalRingElement, IsString ] );
+
 # constructor methods:
 
 DeclareGlobalFunction( "CreateHomalgRing" );
