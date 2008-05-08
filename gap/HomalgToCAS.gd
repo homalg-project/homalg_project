@@ -22,3 +22,5 @@ DeclareGlobalFunction( "homalgDisplay" );
 
 DeclareGlobalFunction( "StringToIntList" );
 
+DeclareGlobalFunction( "StringToDoubleIntList" );
+

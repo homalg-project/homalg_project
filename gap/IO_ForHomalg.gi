@@ -88,6 +88,8 @@ InstallValue( HOMALG_IO,
                 ## operations to compute a simpler equivalent matrix (one also needs Minus and DivideByUnit from above):
                 GetUnitPosition				:= "gup",	## get the position of the "first" unit in the matrix
                 GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one
+                GetColumnIndependentUnitPositions	:= "ciu",	## get "column-independent" unit positions
+                GetRowIndependentUnitPositions		:= "riu",	## get "row-independent" unit positions
                 
                 ## basic module operations:
                 TriangularBasis				:= "Tri",	## compute a (Tri)angular basis
