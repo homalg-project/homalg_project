@@ -42,6 +42,7 @@ ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/SingularGF2.gi" );
 ReadPackage( "RingsForHomalg", "gap/SingularQX.gi" );
+ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gi" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gi" );

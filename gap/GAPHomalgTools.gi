@@ -186,7 +186,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
                  
@@ -213,7 +213,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    if list_string = "fail" then
-                       return fail;
+                       return [];
                    else
                        return StringToIntList( list_string );
                    fi;

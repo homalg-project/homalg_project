@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_Singular,
             eoc_quiet := ";",
             break_lists := true,	## a Singular specific
             handle_output := true,	## a Singular specific
-            check_output := true,	## a Singular specific
+            check_output := false,	## a Singular specific looks for newlines without commas
             define := "=",
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
@@ -100,7 +100,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"; LIB \"involut.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
@@ -227,7 +227,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", c, r, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -240,6 +240,7 @@ InstallMethod( CreateHomalgMatrix,
     local ext_obj;
     
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
+    homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command" ); #added by Simon
     
     return HomalgMatrix( ext_obj, r, c, R );
     
@@ -261,12 +262,12 @@ InstallMethod( GetEntryOfHomalgMatrix,
         "for external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
-  function( M, r, c, R )
-    local Mrc;
+  function( M, i, j, R )
+    local Mij;
     
-    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    Mij := homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
     
-    return HomalgExternalRingElement( Mrc, "Singular", R );
+    return HomalgExternalRingElement( homalgPointer( Mij ), "Singular", R );
     
 end );
 
@@ -293,10 +294,10 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
     if mode = "ListList" then
 
         command := [ 
-          "matrix m[1][", NrColumns( M ), "];",
+          "matrix m[", NrColumns( M ),"][1];",
           "string s = \"[\";",
           "for(int i=1;i<=", NrRows( M ), ";i=i+1)",
-          "{m = ", M, "[i,1..", NrColumns( M ), "]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
+          "{m = ", M, "[1..", NrColumns( M ), ",i]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
           "s=s+\"]\";",
           "write(\"w: ", filename,"\",s);"
         ];
@@ -328,9 +329,10 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     
     if mode = "ListList" then
         
-        command := [ "string s=read(r: ", filename, ");",
-                      "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
-                      "execute(", M, "[", r, "][", c, "]= w;);" ];
+        command := [ "string s=read(\"r: ", filename, "\");",
+                     "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
+                     "execute( \"matrix ", M, "[", r, "][", c, "] = \" + w + \";\" );",
+                     M, " = transpose(", M, ")" ];
         
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
@@ -354,7 +356,7 @@ InstallMethod( Display,
     
     if IsHomalgExternalRingInSingularRep( HomalgRing( o ) ) then
         
-        Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", HOMALG_IO.Pictograms.Display ) );
+        Print( homalgSendBlocking( [ "print(transpose(", o, "))" ], "need_display", HOMALG_IO.Pictograms.Display ) );
         
     else
         

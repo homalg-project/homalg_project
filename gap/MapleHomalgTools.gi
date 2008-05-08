@@ -266,7 +266,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    list_string := homalgSendBlocking( [ "`homalg/GetCleanRowsPositions`(", M, clean_columns, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    if list_string = "" then
-                       return fail;
+                       return [];
                    else
                        return StringToIntList( list_string );
                    fi;
