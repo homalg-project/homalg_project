@@ -46,11 +46,11 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
-               Zero := R -> HomalgExternalRingElement( Concatenation( "Zero(", homalgPointer( R ), ")" ), "GAP", IsZero ),
+               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "Zero(", R, ")" ], "need_output" ), "GAP", IsZero ),
                
-               One := R -> HomalgExternalRingElement( Concatenation( "One(", homalgPointer( R ), ")" ), "GAP", IsOne ),
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "One(", R, ")" ], "need_output" ), "GAP", IsOne ),
                
-               MinusOne := R -> HomalgExternalRingElement( Concatenation( "MinusOne(", homalgPointer( R ), ")" ), "GAP" ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "MinusOne(", R, ")" ], "need_output" ), "GAP" ),
                
                AreEqualMatrices :=
                  function( A, B )
