@@ -194,12 +194,18 @@ InstallValue( CommonHomalgTableForSingularTools,
                  end,
                    
                DivideByUnit :=
-                 function( a, u )
-                   
+                 function( a, e )
+                   local u;
+		   if IsHomalgExternalRingElement( e ) then
+		     u := Name( e );
+	           else
+		     u := e;
+	           fi;
+		   
                    if u{[1]} = "-" then
-                     return homalgSendBlocking( [ "-", a, " / ", u{[ 2..Length( u ) ]}, ")" ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                     return homalgSendBlocking( [ "-(", a, ")/", u{[ 2..Length( u ) ]} ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    else
-                     return homalgSendBlocking( [ a, " / ", u ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                     return homalgSendBlocking( [ a, "/", u ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    fi;
                    
                  end,

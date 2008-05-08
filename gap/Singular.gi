@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_Singular,
             eoc_quiet := ";",
             break_lists := true,	## a Singular specific
             handle_output := true,	## a Singular specific
-            check_output := true,	## a Singular specific
+            check_output := false,	## a Singular specific looks for newlines without commas
             define := "=",
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
@@ -252,10 +252,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
-    local entry;
-    entry := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
-    return homalgPointer( entry );
-    
+    return homalgSendBlocking( [ M, "[", c, r, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
 end );
 
 ##
@@ -263,12 +260,12 @@ InstallMethod( GetEntryOfHomalgMatrix,
         "for external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
-  function( M, r, c, R )
-    local Mrc;
+  function( M, i, j, R )
+    local Mij;
     
-    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    Mij := homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrixAsString );
     
-    return HomalgExternalRingElement( Mrc, "Singular", R );
+    return HomalgExternalRingElement( homalgPointer( Mij ), "Singular", R );
     
 end );
 
