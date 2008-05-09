@@ -76,7 +76,7 @@ InstallMethod( ConvertSparseMatrixToMatrix,
     if SM!.nrows = 0 then
 	return [ ];
     elif SM!.ncols = 0 then
-        return ListWithIdenticalEntries( nrows, [] );
+        return ListWithIdenticalEntries( SM!.nrows, [] );
     fi;
     indices := SM!.indices;
     entries := SM!.entries;
