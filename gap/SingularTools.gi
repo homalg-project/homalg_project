@@ -262,5 +262,36 @@ InstallValue( CommonHomalgTableForSingularTools,
                    return  clean_rows;
                    
                  end,
-        )
+                   
+                 GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local m, n, positions, columns_to_be_checked, i, j;
+                   m := NrRows( M );
+                   n := NrColumns( M );
+                   positions := [];
+                   columns_to_be_checked := [ 1 .. n ];
+                   found_unit := false;
+                   possible_columns := [];
+                   for i in [ 1..m ] do
+                       for j in columns_to_be_checked do
+                           if not [ i, j ] in pos_list then
+                               str := homalgSendBlocking( [ "vdim(", M, "[", j, "][", i, "])" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions );
+                               if Int( str ) = -1 then
+                                   Add( possible_columns, j );
+                               elif found_unit = false and Int( str ) = 0 then
+                                   found_unit := true;
+                                   Add( positions, [ i, j ] );
+                               fi;
+                           fi;
+                       od;
+                       columns_to_be_checked := possible_columns;
+                       possible_columns := [];
+                       found_unit := false;
+                   od;
+                   
+                   return positions;
+                   
+                 end,
+                   
+      )
 );
