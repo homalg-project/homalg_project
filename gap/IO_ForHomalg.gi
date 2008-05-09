@@ -35,12 +35,16 @@ InstallValue( HOMALG_IO,
                 ## good morning computer algebra system:
                 initialize				:= "ini",	## initialize
                 define					:= "def",	## define macros
-                variables				:= "var",	## get the names of the "variables" defining the ring
                 
                 ## create rings:
                 CreateHomalgRing			:= "R:=",	## define a ring
+                variables				:= "var",	## get the names of the "variables" defining the ring
+                Zero					:= "0:=",	## define zero
+                One					:= "1:=",	## define one
+                MinusOne				:= "-:=",	## define minus one
                 
                 ## ring operations:
+                homalgSetName				:= "\"a\"",	## get the name of an element
                 IsZero					:= "a=0",	## a = 0 ?
                 IsOne					:= "a=1",	## a = 1 ?
                 Minus					:= "a-b",	## substract two ring elements
@@ -48,6 +52,7 @@ InstallValue( HOMALG_IO,
                 
                 ## create matrices:
                 HomalgMatrix				:= "A:=",	## define a matrix
+                CopyMatrix				:= "A>A",	## copy a matrix
                 LoadDataOfHomalgMatrixFromFile 		:= "A<<",	## load a matrix from file
                 SaveDataOfHomalgMatrixToFile		:= "A>>",	## save a matrix to file
                 GetEntryOfHomalgMatrix			:= "<ij",	## get a matrix entry as a string

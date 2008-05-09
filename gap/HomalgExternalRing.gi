@@ -98,7 +98,18 @@ InstallMethod( homalgSetName,
         
   function( r, name )
     
-    SetName( r, homalgSendBlocking( [ r ], "need_output" ) );
+    homalgSetName( r, name, HomalgRing( r ) );
+    
+end );
+
+##
+InstallMethod( homalgSetName,
+        "for homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingRep ],
+        
+  function( r, name, R )
+    
+    SetName( r, homalgSendBlocking( [ r ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
     
 end );
 
