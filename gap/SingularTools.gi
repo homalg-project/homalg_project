@@ -226,7 +226,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 		   for i in [ 1 .. m ] do
                      for j in [ 1 .. n ] do
                        if not [ i, j ] in pos_list and not j in pos_list then
-                         str := homalgSendBlocking( [ "vdim(", M, "[",j,i,"])" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                         str := homalgSendBlocking( [ "deg(", M, "[",j,i,"])" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
                          if Int(str) = 0 then
                              return [ i, j ];
                          fi;
@@ -251,7 +251,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    for j in clean_columns do
                        for i in [ 1 .. m ] do
-                           str := homalgSendBlocking( [ M, "[", j, "][", i, "] == ", one ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
+                           str := homalgSendBlocking( [ M, "[", j, i, "] == ", one ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                            if Int(str) = 1 then
                                Add( clean_rows, i );
                                break;
@@ -265,33 +265,45 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  GetColumnIndependentUnitPositions :=
                  function( M, pos_list )
-                   local m, n, positions, columns_to_be_checked, i, j;
+                   local m, n, positions, columns_to_be_checked, found_unit, possible_columns, i, j, str;
                    m := NrRows( M );
                    n := NrColumns( M );
                    positions := [];
-                   columns_to_be_checked := [ 1 .. n ];
-                   found_unit := false;
-                   possible_columns := [];
+                   possible_columns := [ 1 .. n ];
                    for i in [ 1..m ] do
+		       columns_to_be_checked := possible_columns;
+		       found_unit := false;
                        for j in columns_to_be_checked do
                            if not [ i, j ] in pos_list then
-                               str := homalgSendBlocking( [ "vdim(", M, "[", j, "][", i, "])" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions );
-                               if Int( str ) = -1 then
-                                   Add( possible_columns, j );
-                               elif found_unit = false and Int( str ) = 0 then
+                               str := homalgSendBlocking( [ "deg(", M, "[", j, i, "])" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions );
+                               if Int( str ) <> -1 then
+                                   possible_columns := Difference( possible_columns, [ j ] );
+			       fi;
+                               if found_unit = false and Int( str ) = 0 then
                                    found_unit := true;
                                    Add( positions, [ i, j ] );
                                fi;
                            fi;
                        od;
-                       columns_to_be_checked := possible_columns;
-                       possible_columns := [];
-                       found_unit := false;
+		       if found_unit = false then
+                           possible_columns := columns_to_be_checked; #reset if there was no unit in row i
+                       fi;
                    od;
                    
                    return positions;
                    
                  end,
+                 
+		   
+                 GetRowIndependentUnitPositions :=
+                 function( MM, pos_list )
+                   local M;
+                   M := HomalgVoidMatrix( NrColumns( MM ), NrRows( MM ), R );
+                   homalgSendBlocking( [ M, " = transpose(", MM, ")" ], [ "matrix" ], "need_command" );
+                   ResetFilterObj( M, IsVoidMatrix );
+                   return GetColumnIndependentUnitPositions( M, pos_list );
+                   
+               end,
                    
       )
 );
