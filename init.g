@@ -9,3 +9,5 @@
 #############################################################################
 
 ReadPackage( "Gauss", "gap/Gauss.gd" );
+
+ReadPackage( "Gauss", "gap/Sparse.gd" );
