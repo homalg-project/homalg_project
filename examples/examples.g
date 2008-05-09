@@ -108,8 +108,8 @@ for i in [1..Length( M ) - 1] do
     Print( Concatenation( "-------- #", String(i), ": --------\n" ) );
     Print( "computing the quotient...\n" );
     Q[i] := ker[i] / im[i];
-    Print( "computing BetterGenerators...\n" );
-    BetterGenerators( Q[i] );
+    Print( "computing OnLessGenerators...\n" );
+    OnLessGenerators( Q[i] );
     Print( "----------------------------------------------->>>>  " );
     Display( Q[i] );
 od;
