@@ -58,13 +58,15 @@ InstallValue( CommonHomalgTableForSageTools,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
-               True := "True",
+               IsZero := r -> homalgSendBlocking( [ r, " == ", Zero( r ) ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "True",
                
-               Zero := HomalgExternalRingElement( "0", "Sage", IsZero ),
+               IsOne := r -> homalgSendBlocking( [ r, " == ", One( r ) ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "True",
                
-               One := HomalgExternalRingElement( "1", "Sage", IsOne ),
+               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".zero_element()" ], "need_output", HOMALG_IO.Pictograms.Zero ), "Sage", IsZero ),
                
-               MinusOne := HomalgExternalRingElement( "(-1)", "Sage" ),
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".one_element()" ], "need_output", HOMALG_IO.Pictograms.One ), "Sage", IsOne ),
+               
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one_element()" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "Sage" ),
                
                Equal :=
                  function( A, B )

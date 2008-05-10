@@ -680,6 +680,17 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     
 end );
 
+##
+InstallMethod( homalgSetName,
+        "for homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMapleRep ],
+        
+  function( r, name, R )
+    
+    SetName( r, homalgSendBlocking( [ "convert( ", r, ", symbol )" ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

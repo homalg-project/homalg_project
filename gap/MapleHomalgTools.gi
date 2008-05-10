@@ -53,11 +53,16 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
-               Zero := HomalgExternalRingElement( "0", "Maple", IsZero ),
+               IsZero := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  Zero( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                
-               One := HomalgExternalRingElement( "1", "Maple", IsOne ),
+               IsOne := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  One( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "true",
                
-               MinusOne := HomalgExternalRingElement( "(-1)", "Maple" ),
+               Zero := HomalgExternalRingElement( function( R ) homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+                                                                return homalgSendBlocking( [ "convert( ", R, "[-1][Zero](), symbol )" ], "need_output", HOMALG_IO.Pictograms.Zero ); end, "Maple", IsZero ),
+               
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "convert( ", R, "[-1][One], symbol )" ], "need_output", HOMALG_IO.Pictograms.One ), "Maple", IsOne ),
+               
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "convert( ", R, "[-1][Minus](", Zero( R ), One( R ), R, "[1]), symbol )" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "Maple" ),
                
                AreEqualMatrices :=
                  function( A, B )

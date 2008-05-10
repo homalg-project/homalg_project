@@ -69,9 +69,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
-               IsZero := r -> homalgSendBlocking( [ r, " == ",  0 ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
+               IsZero := r -> homalgSendBlocking( [ r, " == 0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
                
-               IsOne := r -> homalgSendBlocking( [ r, " == ",  1 ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "1",
+               IsOne := r -> homalgSendBlocking( [ r, " == 1" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "1",
                
                Zero := HomalgExternalRingElement( "0", "Singular", IsZero ),
                
@@ -298,7 +298,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                  GetRowIndependentUnitPositions :=
                  function( MM, pos_list )
                    local M;
-                   M := HomalgVoidMatrix( NrColumns( MM ), NrRows( MM ), R );
+                   M := HomalgVoidMatrix( NrColumns( MM ), NrRows( MM ), HomalgRing( MM ) );
                    homalgSendBlocking( [ M, " = transpose(", MM, ")" ], [ "matrix" ], "need_command" );
                    ResetFilterObj( M, IsVoidMatrix );
                    return GetColumnIndependentUnitPositions( M, pos_list );
