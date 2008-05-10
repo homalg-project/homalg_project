@@ -175,6 +175,9 @@ DeclareOperation( "*",
 DeclareOperation( "homalgSetName",
         [ IsHomalgExternalRingElement, IsString ] );
 
+DeclareOperation( "homalgSetName",
+        [ IsHomalgExternalRingElement, IsString, IsHomalgRing ] );
+
 # constructor methods:
 
 DeclareGlobalFunction( "CreateHomalgRing" );

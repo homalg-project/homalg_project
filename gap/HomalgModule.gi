@@ -873,7 +873,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, bas, mat, diag, zero, rk;
+    local rel, bas, mat, diag, rk;
     
     rel := RelationsOfModule( M );
     
@@ -889,8 +889,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
        mat := MatrixOfRelations( rel );
        if HasIsDiagonalMatrix( mat ) and IsDiagonalMatrix( mat ) then
            diag := DiagonalEntries( mat );
-           zero := Zero( HomalgRing( M ) );
-           rk := Length( Filtered( diag, d -> d = zero ) ) + NrGenerators( M ) - Length( diag );
+           rk := Length( Filtered( diag, IsZero ) ) + NrGenerators( M ) - Length( diag );
            SetRankOfModule( M, rk );
        elif HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
            rk := NrGenerators( M ) - NrRelations( M );
@@ -1074,7 +1073,10 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
     
 end );
 
-##
+#=======================================================================
+# Compute a smaller presentation allowing the transformation of the generators
+# (i.e. allowing column/row operations for left/right relation matrices)
+#_______________________________________________________________________
 InstallMethod( OnLessGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsLeftModule ],
@@ -1138,7 +1140,7 @@ InstallMethod( ElementaryDivisors,
 	[ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, b, R, RP, e, zero, one;
+    local rel, b, R, RP, e;
     
     R := HomalgRing( M );
     
@@ -1153,12 +1155,9 @@ InstallMethod( ElementaryDivisors,
         
         ## since the computer algebra systems have different
         ## conventions for elementary divisors, we fix our own here:
-        zero := Zero( R );
-        one := One( R );
+        e := Filtered( e, x -> not IsOne( x ) and not IsZero( x ) );
         
-        e := Filtered( e, x -> x <> one and x <> zero );
-        
-        Append( e, ListWithIdenticalEntries( RankOfModule( M ), zero ) );
+        Append( e, ListWithIdenticalEntries( RankOfModule( M ), Zero( R ) ) );
         
         return e;
     fi;
@@ -1950,7 +1949,7 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
-    local rel, R, RP, name, zero, one, diag, display, rk, get_string;
+    local rel, R, RP, name, diag, display, rk, get_string;
     
     rel := MatrixOfRelations( M );
     
@@ -1965,22 +1964,19 @@ InstallMethod( Display,
     
     name := RingName( R );
     
-    zero := Zero( R );
-    one := One( R );
-    
     if HasElementaryDivisors( M ) then
         diag := ElementaryDivisors( M );
     else
         diag := DiagonalEntries( rel );
-        rk := Length( Filtered( diag, d -> d = zero ) ) + NrGenerators( M ) - Length( diag );
+        rk := Length( Filtered( diag, IsZero ) ) + NrGenerators( M ) - Length( diag );
         SetRankOfModule( M, rk );
     fi;
     
-    diag := Filtered( diag, x  -> x <> zero and x <> one );
+    diag := Filtered( diag, x -> not IsOne( x ) and not IsZero( x ) );
     
     rk := RankOfModule( M );
     
-    if IsHomalgExternalRingElementRep( zero ) then
+    if IsHomalgExternalRingRep( R ) then
         get_string := homalgPointer;
     else
         get_string := String;

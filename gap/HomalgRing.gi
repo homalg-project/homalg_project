@@ -241,6 +241,28 @@ InstallMethod( MinusOne,
     
 end );
 
+##
+InstallMethod( Zero,
+        "for homalg rings",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    
+    return Zero( HomalgRing( r ) );
+    
+end );
+
+##
+InstallMethod( One,
+        "for homalg rings",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    
+    return One( HomalgRing( r ) );
+    
+end );
+
 ####################################
 #
 # methods for operations:
@@ -664,8 +686,8 @@ InstallGlobalFunction( HomalgExternalRingElement,
         od;
     fi;
     
-    if not IsFunction( pointer ) and IshomalgExternalObjectWithIOStreamRep( r ) then
-	homalgSetName( r, pointer );
+    if not IsFunction( pointer ) and IsBound( ring ) then
+	homalgSetName( r, pointer, ring );
     fi;
     
     return r;

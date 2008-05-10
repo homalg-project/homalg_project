@@ -322,6 +322,18 @@ DeclareOperation( "GetCleanRowsPositions",
 DeclareOperation( "GetCleanRowsPositions",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "GetColumnIndependentUnitPositions",
+        [ IsHomalgMatrix, IsHomogeneousList ] );
+
+DeclareOperation( "GetColumnIndependentUnitPositions",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetRowIndependentUnitPositions",
+        [ IsHomalgMatrix, IsHomogeneousList ] );
+
+DeclareOperation( "GetRowIndependentUnitPositions",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "ConvertRowToMatrix",
         [ IsHomalgMatrix, IsInt, IsInt ] );
 

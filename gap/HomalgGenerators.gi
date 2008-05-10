@@ -312,7 +312,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( gen, rel )
     
-    return HomalgRelationsForLeftModule( SyzygiesGenerators( MatrixOfGenerators( gen ), rel ) );
+    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
     
 end );
 
@@ -324,7 +324,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( gen, rel )
     
-    return HomalgRelationsForRightModule( SyzygiesGenerators( MatrixOfGenerators( gen ), rel ) );
+    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
     
 end );
 

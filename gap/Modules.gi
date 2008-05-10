@@ -46,11 +46,7 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     # compute the syzygies module of N modulo B
     S := SyzygiesGenerators( N, B );
     
-    if IsHomalgGeneratorsOfLeftModule( gen1 ) then
-        return LeftPresentation( S );
-    else
-        return RightPresentation( S );
-    fi;
+    return Presentation( S );
     
 end );
 
@@ -88,3 +84,13 @@ InstallMethod( \/,
     
 end );
 
+##
+InstallMethod( \/,
+        "for a set of homalg relations",
+	[ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
+        
+  function( rel, M )
+    
+    return MatrixOfRelations( rel ) / M;
+    
+end );

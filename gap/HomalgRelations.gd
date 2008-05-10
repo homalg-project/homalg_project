@@ -74,6 +74,9 @@ DeclareOperation( "NrGenerators",
 DeclareOperation( "NrRelations",
         [ IsHomalgRelations ] );
 
+DeclareOperation( "CertainRelations",
+        [ IsHomalgRelations, IsList ] );
+
 DeclareOperation( "UnionOfRelations",
         [ IsHomalgRelations, IsHomalgRelations ] );
 
@@ -108,6 +111,12 @@ DeclareOperation( "NonZeroGenerators",
         [ IsHomalgRelations ] );
 
 DeclareOperation( "GetRidOfObsoleteRelations",
+        [ IsHomalgRelations ] );
+
+DeclareOperation( "GetIndependentUnitPositions",
+        [ IsHomalgRelations, IsHomogeneousList ] );
+
+DeclareOperation( "GetIndependentUnitPositions",
         [ IsHomalgRelations ] );
 
 DeclareOperation( "*",

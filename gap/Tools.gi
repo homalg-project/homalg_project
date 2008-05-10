@@ -180,6 +180,76 @@ InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
 end );
 
 ##
+InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndependentUnitPositions (GetIndependentUnitPositions)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, pos_list )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetColumnIndependentUnitPositions) then
+        return RP!.GetColumnIndependentUnitPositions( M, pos_list );
+    elif IsHomalgExternalMatrixRep( M ) then
+        Error( "could not find a procedure called GetColumnIndependentUnitPositions in the homalgTable", RP, "\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( GetColumnIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetColumnIndependentUnitPositions( M, [ ] );
+    
+end );
+
+##
+InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUnitPositions (GetIndependentUnitPositions)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, pos_list )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetRowIndependentUnitPositions) then
+        return RP!.GetRowIndependentUnitPositions( M, pos_list );
+    elif IsHomalgExternalMatrixRep( M ) then
+        Error( "could not find a procedure called GetRowIndependentUnitPositions in the homalgTable", RP, "\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( GetRowIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetRowIndependentUnitPositions( M, [ ] );
+    
+end );
+
+##
 InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt ],

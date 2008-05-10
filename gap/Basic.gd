@@ -59,5 +59,7 @@ DeclareOperation( "LeftDivide",
 
 DeclareGlobalFunction( "BestBasis" );
 
+DeclareGlobalFunction( "ReducedBasisOfModule" );
+
 DeclareGlobalFunction( "SimplerEquivalentMatrix" );
 

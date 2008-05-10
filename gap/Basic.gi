@@ -592,6 +592,61 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
 end );
 
 ##
+InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule) (incomplete)
+  function( arg )
+    local nargs, M, COMPUTE_BASIS, RETURN_SYZYGIES, ar, S, unit_pos;
+    
+    nargs := Length( arg );
+    
+    if not ( nargs > 0 and IsHomalgRelationsOfFinitelyPresentedModuleRep( arg[1] ) ) then
+        Error( "the first argument must be a set of relations\n" );
+    fi;
+    
+    M := arg[1];
+    
+    if NrRelations( M ) = 0 then
+        return M;
+    elif IsBound( M!.ReducedBasisOfModule ) then
+        return M!.ReducedBasisOfModule;
+    fi;
+    
+    COMPUTE_BASIS := false;
+    RETURN_SYZYGIES := false;
+    
+    for ar in arg{[ 2 .. nargs ]} do
+        if ar = "COMPUTE_BASIS" then
+            COMPUTE_BASIS := true;
+        elif ar = "RETURN_SYZYGIES" then
+            RETURN_SYZYGIES := true;
+        fi;
+    od;
+    
+    if COMPUTE_BASIS then
+        M := BasisOfModule( M );
+    fi;
+    
+    ## FIXME: missing: take care of ring relations
+    
+    ## iterate the syzygy trick
+    while true do
+        S := SyzygiesGenerators( M );
+        unit_pos := GetIndependentUnitPositions( S );
+        unit_pos := List( unit_pos, a -> a[2] );	## due to the convention followed in GetRow/ColumnIndependentUnitPositions we are always interested in a[2]
+        if IsEmptyMatrix( S ) or unit_pos = [ ] then
+            break;
+        fi;
+        M := CertainRelations( M, Filtered( [ 1 .. NrRelations( M ) ], j -> not j in unit_pos ) );
+    od;
+    
+    if RETURN_SYZYGIES then
+        return [ S, M ];
+    else
+        return M;
+    fi;
+    
+end );
+
+##
 InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,

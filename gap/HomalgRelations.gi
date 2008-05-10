@@ -173,6 +173,30 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
 end );
 
 ##
+InstallMethod( CertainRelations,		### defines: CertainRelations
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
+          IsList ],
+        
+  function( rel, plist )
+    
+    return HomalgRelationsForLeftModule( CertainRows( MatrixOfRelations( rel ), plist ) );
+    
+end );
+
+##
+InstallMethod( CertainRelations,			### defines: CertainRelations
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
+          IsList ],
+        
+  function( rel, plist )
+    
+    return HomalgRelationsForRightModule( CertainColumns( MatrixOfRelations( rel ), plist ) );
+    
+end );
+
+##
 InstallMethod( UnionOfRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix,
@@ -452,7 +476,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( rel )
     
-    return SyzygiesGeneratorsOfRows( MatrixOfRelations( rel ) );
+    return HomalgRelationsForLeftModule( SyzygiesGeneratorsOfRows( MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -464,7 +488,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( mat, rel )
     
-    return SyzygiesGeneratorsOfRows( mat, MatrixOfRelations( rel ) );
+    return HomalgRelationsForLeftModule( SyzygiesGeneratorsOfRows( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -475,7 +499,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( rel )
     
-    return SyzygiesGeneratorsOfColumns( MatrixOfRelations( rel ) );
+    return HomalgRelationsForRightModule( SyzygiesGeneratorsOfColumns( MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -487,7 +511,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( mat, rel )
     
-    return SyzygiesGeneratorsOfColumns( mat, MatrixOfRelations( rel ) );
+    return HomalgRelationsForRightModule( SyzygiesGeneratorsOfColumns( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -550,6 +574,52 @@ InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations
         
         return HomalgRelationsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
     fi;
+    
+end );
+
+##
+InstallMethod( GetIndependentUnitPositions,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
+          IsHomogeneousList ],
+        
+  function( rel, pos_list )
+    
+    return GetColumnIndependentUnitPositions( MatrixOfRelations( rel ), pos_list );
+    
+end );
+
+##
+InstallMethod( GetIndependentUnitPositions,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    
+    return GetColumnIndependentUnitPositions( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( GetIndependentUnitPositions,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
+          IsHomogeneousList ],
+        
+  function( rel, pos_list )
+    
+    return GetRowIndependentUnitPositions( MatrixOfRelations( rel ), pos_list );
+    
+end );
+
+##
+InstallMethod( GetIndependentUnitPositions,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( rel )
+    
+    return GetRowIndependentUnitPositions( MatrixOfRelations( rel ) );
     
 end );
 

@@ -20,8 +20,8 @@ DeclareOperation( "/",
         [ IsHomalgGenerators, IsHomalgGenerators ] );
 
 DeclareOperation( "/",
-        [ IsHomalgMatrix, IsHomalgRelations ] );
+        [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "/",
-        [ IsHomalgMatrix, IsHomalgModule ] );
+        [ IsHomalgRelations, IsHomalgModule ] );
 
