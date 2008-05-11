@@ -632,11 +632,13 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
         S := SyzygiesGenerators( M );
         unit_pos := GetIndependentUnitPositions( S );
         unit_pos := List( unit_pos, a -> a[2] );	## due to the convention followed in GetRow/ColumnIndependentUnitPositions we are always interested in a[2]
-        if IsEmptyMatrix( S ) or unit_pos = [ ] then
+        if NrRelations( S ) = 0 or unit_pos = [ ] then
             break;
         fi;
         M := CertainRelations( M, Filtered( [ 1 .. NrRelations( M ) ], j -> not j in unit_pos ) );
     od;
+    
+    arg[1]!.ReducedBasisOfModule := M;
     
     if RETURN_SYZYGIES then
         return [ S, M ];

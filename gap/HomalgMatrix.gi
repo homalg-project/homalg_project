@@ -1515,5 +1515,5 @@ InstallMethod( Display,
     
     Display( Eval( o ) );
     
-end);
+end );
 

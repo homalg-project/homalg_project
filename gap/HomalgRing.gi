@@ -372,15 +372,7 @@ InstallMethod( \=,
         return true;
     fi;
     
-    R := HomalgRing( r1 );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.Minus) then
-        return IsZero( r1 - r2 );
-    fi;
-    
-    TryNextMethod( );
+    return IsZero( r1 - r2 );
     
 end );
 

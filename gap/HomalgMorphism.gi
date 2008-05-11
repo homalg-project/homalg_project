@@ -1314,5 +1314,5 @@ InstallMethod( Display,
     
     Display( MatrixOfMorphism( o ) );
     
-end);
+end );
 
