@@ -278,6 +278,50 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallOtherMethod( Zero,
+        "for homalg modules",
+        [ IsHomalgModule and IsLeftModule ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        
+  function( M )
+    
+    return HomalgRing( M )!.ZeroLeftModule;
+    
+end );
+
+##
+InstallOtherMethod( Zero,
+        "for homalg modules",
+        [ IsHomalgModule and IsRightModule ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        
+  function( M )
+    
+    return HomalgRing( M )!.ZeroRightModule;
+    
+end );
+
+##
+InstallOtherMethod( One,
+        "for homalg modules",
+        [ IsHomalgModule and IsLeftModule ],
+        
+  function( M )
+    
+    return HomalgRing( M )!.AsLeftModule;
+    
+end );
+
+##
+InstallOtherMethod( One,
+        "for homalg modules",
+        [ IsHomalgModule and IsRightModule ],
+        
+  function( M )
+    
+    return HomalgRing( M )!.AsRightModule;
+    
+end );
+
+##
 InstallMethod( SetsOfGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],

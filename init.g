@@ -34,6 +34,9 @@ ReadPackage( "homalg", "gap/HomalgModule.gd" );
 ## morphisms
 ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
 
+## complexes
+ReadPackage( "homalg", "gap/HomalgComplex.gd" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 

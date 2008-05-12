@@ -17,7 +17,9 @@
 # a new category of objects:
 
 DeclareCategory( "IsHomalgModule",
-        IsAttributeStoringRep );
+        IsAdditiveElementWithZero
+        and IsExtLElement
+        and IsAttributeStoringRep );
 
 ####################################
 #

@@ -582,6 +582,9 @@ InstallGlobalFunction( CreateHomalgRing,
     homalg_ring!.AsLeftModule := HomalgFreeLeftModule( 1, homalg_ring );
     homalg_ring!.AsRightModule := HomalgFreeRightModule( 1, homalg_ring );
     
+    homalg_ring!.ZeroLeftModule := HomalgZeroLeftModule( homalg_ring );
+    homalg_ring!.ZeroRightModule := HomalgZeroRightModule( homalg_ring );
+    
     return homalg_ring;
     
 end );

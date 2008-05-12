@@ -31,15 +31,6 @@ DeclareCategory( "IsHomalgComplexOfRightModules",
 #
 ####################################
 
-DeclareProperty( "IsComplex",
-        IsHomalgComplex );
-
-DeclareProperty( "IsExactSequence",
-        IsHomalgComplex );
-
-DeclareProperty( "IsShortExactSequence",
-        IsHomalgComplex );
-
 ####################################
 #
 # global functions and operations:
@@ -50,6 +41,28 @@ DeclareProperty( "IsShortExactSequence",
 
 DeclareGlobalFunction( "HomalgComplex" );
 
+DeclareGlobalFunction( "HomalgCocomplex" );
+
+# basic operations:
+
 DeclareOperation( "HomalgRing",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "IsSequence",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "IsComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "IsZeroComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "IsGradedObject",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "IsExactSequence",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "IsShortExactSequence",
         [ IsHomalgComplex ] );
 
