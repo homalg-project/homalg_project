@@ -49,7 +49,7 @@ BindGlobal( "TheTypeHomalgExternalMatrix",
 ####################################
 
 ##
-InstallMethod( IsZeroMatrix,
+InstallMethod( IsZero,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -60,18 +60,18 @@ InstallMethod( IsZeroMatrix,
     
     RP := homalgTable( R );
     
-    ## since DecideZero calls IsZeroMatrix, the attribute IsReducedModuloRingRelations is used
+    ## since DecideZero calls IsZero(Matrix), the attribute IsReducedModuloRingRelations is used
     ## in DecideZero to avoid infinite loops
     
     if IsBound(RP!.IsZeroMatrix) then
-        return RP!.IsZeroMatrix( DecideZero( M ) ); ## with this, \= can fall back to IsZeroMatrix
+        return RP!.IsZeroMatrix( DecideZero( M ) ); ## with this, \= can fall back to IsZero(Matrix)
     fi;
     
     #=====# begin of the core procedure #=====#
     
     ## From the documentation ?Zero: `ZeroSameMutability( <obj> )' is equivalent to `0 * <obj>'.
     
-    return M = 0 * M; ## hence, by default, IsZeroMatrix falls back to \= (see below)
+    return M = 0 * M; ## hence, by default, IsZero(Matrix) falls back to \= (see below)
     
 end );
 
@@ -726,8 +726,8 @@ InstallMethod( AdditiveInverseMutable,
     
     C := MinusOne( R ) * A;
     
-    if HasIsZeroMatrix( A ) then
-        SetIsZeroMatrix( C, IsZeroMatrix( A ) );
+    if HasIsZero( A ) then
+        SetIsZero( C, IsZero( A ) );
     fi;
     
     return C;
@@ -737,7 +737,7 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
+        [ IsHomalgMatrix and IsZero ],
         
   function( A )
     
@@ -1048,7 +1048,7 @@ InstallGlobalFunction( HomalgZeroMatrix,
     ## Objectify:
     ObjectifyWithAttributes(
             matrix, type,
-            IsZeroMatrix, true );
+            IsZero, true );
     
     if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
         SetNrRows( matrix, arg[1] );
@@ -1098,7 +1098,7 @@ end );
 ##
 InstallGlobalFunction( HomalgInitialMatrix,
   function( arg )	        ## an initial matrix having the flag IsInitialMatrix
-    local R, type, matrix;	## and filled with zeros BUT NOT marked as an IsZeroMatrix
+    local R, type, matrix;	## and filled with zeros BUT NOT marked as an IsZero
     
     R := arg[Length( arg )];
     
@@ -1306,7 +1306,7 @@ InstallMethod( ViewObj,
     fi;
     
     if not ( HasIsSubidentityMatrix( o ) and IsSubidentityMatrix( o ) )
-       and HasIsZeroMatrix( o ) then ## if this method applies and HasIsZeroMatrix is set we already know that o is a non-zero homalg matrix
+       and HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero homalg matrix
         Print( " non-zero" );
         first_attribute := true;
     fi;
@@ -1470,7 +1470,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix ],
+        [ IsHomalgMatrix and IsZero ],
         
   function( o )
     

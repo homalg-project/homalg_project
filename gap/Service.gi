@@ -492,7 +492,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         C := RP!.SyzygiesGeneratorsOfRows( M );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             SetIsFullRowRankMatrix( M, true );
             
@@ -508,7 +508,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M ) ) );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             SetIsFullRowRankMatrix( M, true );
             
@@ -532,7 +532,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     C := CertainRows( C, [ rank + 1 .. NrRows( C ) ] );
     
-    if IsZeroMatrix( C ) then
+    if IsZero( C ) then
         
         SetIsFullRowRankMatrix( M, true );
         
@@ -566,7 +566,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         
         C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
             
@@ -580,7 +580,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         
         C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M1 ), Involution( M2 ) ) );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
             
@@ -604,7 +604,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     C := CertainColumns( CertainRows( C, [ rank + 1 .. NrRows( C ) ] ), [ 1 .. NrRows( M1 ) ] );
     
-    if IsZeroMatrix( C ) then
+    if IsZero( C ) then
         
         C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
         
@@ -636,7 +636,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         C := RP!.SyzygiesGeneratorsOfColumns( M );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             SetIsFullColumnRankMatrix( M, true );
             
@@ -652,7 +652,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M ) ) );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             SetIsFullColumnRankMatrix( M, true );
             
@@ -676,7 +676,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     C := CertainColumns( C, [ rank + 1 .. NrColumns( C ) ] );
     
-    if IsZeroMatrix( C ) then
+    if IsZero( C ) then
         
         SetIsFullColumnRankMatrix( M, true );
         
@@ -710,7 +710,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         
         C := RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
             
@@ -724,7 +724,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         
         C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
         
-        if IsZeroMatrix( C ) then
+        if IsZero( C ) then
             
             C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
             
@@ -748,7 +748,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     C := CertainRows( CertainColumns( C, [ rank + 1 .. NrColumns( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
     
-    if IsZeroMatrix( C ) then
+    if IsZero( C ) then
         
         C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
         

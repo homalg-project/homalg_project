@@ -159,7 +159,7 @@ InstallMethod( DecideZero,
     fi;
     
     ## the upper exit condition and setting SetIsReducedModuloRingRelations to true in the following
-    ## avoids infinite loops when IsZeroMatrix is called (as below), since the latter, in turn,
+    ## avoids infinite loops when IsZero(Matrix) is called (as below), since the latter, in turn,
     ## calls DecideZero first!
     
     R := HomalgRing( M );
@@ -169,7 +169,7 @@ InstallMethod( DecideZero,
     if not HasRingRelations( R ) then
         
         SetIsReducedModuloRingRelations( M, true );
-        IsZeroMatrix( M );
+        IsZero( M );
         
         return M;
     fi;
@@ -189,7 +189,7 @@ InstallMethod( DecideZero,
     fi;
     
     SetIsReducedModuloRingRelations( red, true );
-    IsZeroMatrix( red );
+    IsZero( red );
     
     return red;
     
@@ -308,7 +308,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     NF := DecideZeroRowsEffectively( B, IA, CB );
     
     ## NF <> 0
-    if not IsZeroMatrix( NF ) then
+    if not IsZero( NF ) then
         Error( "The second argument is not a right factor of the first, i.e. the rows of the second argument are not a generating set!\n" );
     fi;
     
@@ -350,7 +350,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     NF := DecideZeroColumnsEffectively( B, IA, CB );
     
     ## NF <> 0
-    if not IsZeroMatrix( NF ) then
+    if not IsZero( NF ) then
         Error( "The first argument is not a left factor of the second, i.e. the columns of the first argument are not a generating set!\n" );
     fi;
     
@@ -400,7 +400,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     NF := DecideZeroRowsEffectively( B, IAL, CB );
     
     ## NF <> 0
-    if not IsZeroMatrix( NF ) then
+    if not IsZero( NF ) then
         Error( "The second argument is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
     fi;
     
@@ -452,7 +452,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     NF := DecideZeroColumnsEffectively( B, IAL, CB );
     
     ## NF <> 0
-    if not IsZeroMatrix( NF ) then
+    if not IsZero( NF ) then
         Error( "The first argument is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
     fi;
     
@@ -756,7 +756,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     
     #=====# begin of the core procedure #=====#
     
-    if IsZeroMatrix( M ) then
+    if IsZero( M ) then
         
         if compute_U then
             U := HomalgIdentityMatrix( m, R );

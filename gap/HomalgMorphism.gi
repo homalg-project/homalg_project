@@ -86,12 +86,12 @@ InstallTrueMethod( IsIsomorphism, IsHomalgMorphism and IsEpimorphism and IsMonom
 ####################################
 
 ##
-InstallImmediateMethod( IsZeroMorphism,
+InstallImmediateMethod( IsZero,
         IsHomalgMorphism, 0,
         
   function( phi )
     
-    if IsZeroModule( SourceOfMorphism( phi ) ) or IsZeroModule( TargetOfMorphism( phi ) ) then
+    if IsZero( SourceOfMorphism( phi ) ) or IsZero( TargetOfMorphism( phi ) ) then
         return true;
     fi;
     
@@ -100,12 +100,12 @@ InstallImmediateMethod( IsZeroMorphism,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMorphism,
+InstallImmediateMethod( IsZero,
         IsMorphismOfFinitelyGeneratedModulesRep, 0,
         
   function( phi )
     
-    if HasIsZeroMatrix( MatrixOfMorphism( phi ) ) and IsZeroMatrix( MatrixOfMorphism( phi ) ) then
+    if HasIsZero( MatrixOfMorphism( phi ) ) and IsZero( MatrixOfMorphism( phi ) ) then
         return true;
     fi;
     
@@ -114,7 +114,7 @@ InstallImmediateMethod( IsZeroMorphism,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMorphism,
+InstallImmediateMethod( IsZero,
         IsMorphismOfFinitelyGeneratedModulesRep, 0,
         
   function( phi )
@@ -126,8 +126,8 @@ InstallImmediateMethod( IsZeroMorphism,
         
         matrix := phi!.reduced_matrices.( String( index_pair ) );
         
-        if HasIsZeroMatrix( matrix ) then
-            return IsZeroMatrix( matrix );
+        if HasIsZero( matrix ) then
+            return IsZero( matrix );
         fi;
         
     fi;
@@ -158,7 +158,7 @@ InstallMethod( IsMorphism,
     
     mat := MatrixOfRelations( SourceOfMorphism( phi ) ) * MatrixOfMorphism( phi );
     
-    return IsZeroMatrix( DecideZero( mat , RelationsOfModule( TargetOfMorphism( phi ) ) ) );
+    return IsZero( DecideZero( mat , RelationsOfModule( TargetOfMorphism( phi ) ) ) );
     
 end );
 
@@ -172,18 +172,18 @@ InstallMethod( IsMorphism,
     
     mat := MatrixOfMorphism( phi ) * MatrixOfRelations( SourceOfMorphism( phi ) );
     
-    return IsZeroMatrix( DecideZero( mat , RelationsOfModule( TargetOfMorphism( phi ) ) ) );
+    return IsZero( DecideZero( mat , RelationsOfModule( TargetOfMorphism( phi ) ) ) );
     
 end );
 
 ##
-InstallMethod( IsZeroMorphism,
+InstallMethod( IsZero,
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    return IsZeroMatrix( DecideZero( phi ) );
+    return IsZero( DecideZero( phi ) );
     
 end );
 
@@ -194,7 +194,7 @@ InstallMethod( IsEpimorphism,
         
   function( phi )
     
-    return IsMorphism( phi ) and IsZeroModule( Cokernel( phi ) );
+    return IsMorphism( phi ) and IsZero( Cokernel( phi ) );
     
 end );
 
@@ -205,7 +205,7 @@ InstallMethod( IsMonomorphism,
         
   function( phi )
     
-    return IsMorphism( phi ) and IsZeroModule( Kernel( phi ) );
+    return IsMorphism( phi ) and IsZero( Kernel( phi ) );
     
 end );
 
@@ -465,7 +465,7 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg morphisms",
-        [ IsHomalgMorphism and IsZeroMorphism ],
+        [ IsHomalgMorphism and IsZero ],
         
   function( phi )
     
@@ -900,7 +900,7 @@ InstallGlobalFunction( HomalgMorphism,
             ## Objectify:
             ObjectifyWithAttributes(
                     morphism, type,
-                    IsZeroMorphism, true );
+                    IsZero, true );
             
         elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
             ## the identity morphism:
@@ -1001,7 +1001,7 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsZeroMorphism( o ) then ## if this method applies and HasIsZeroMorphism is set we already know that o is a non-zero morphism of homalg modules
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero morphism of homalg modules
         Print( " non-zero" );
     fi;
     
@@ -1123,7 +1123,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg morphisms",
-        [ IsHomalgMorphism and IsZeroMorphism ],
+        [ IsHomalgMorphism and IsZero ],
         
   function( o )
     
@@ -1147,7 +1147,7 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsZeroMorphism( o ) then ## if this method applies and HasIsZeroMorphism is set we already know that o is a non-zero morphism of homalg modules
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero morphism of homalg modules
         Print( " non-zero" );
     elif not ( HasIsMorphism( o ) and not IsMorphism( o ) ) then
         Print( "n" );
@@ -1290,7 +1290,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsZeroMorphism ],
+        [ IsHomalgEndomorphism and IsZero ],
         
   function( o )
     

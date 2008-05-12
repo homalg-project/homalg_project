@@ -39,9 +39,6 @@ DeclareProperty( "IsVoidMatrix",
 DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 
-DeclareProperty( "IsZeroMatrix",
-        IsHomalgMatrix );
-
 DeclareProperty( "IsIdentityMatrix",
         IsHomalgMatrix );
 

@@ -431,7 +431,7 @@ end );
 ##
 InstallMethod( Eval,				### defines: ZeroMap
         "for homalg matrices",
-        [ IsHomalgMatrix and IsZeroMatrix and HasNrRows and HasNrColumns ],
+        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, z;

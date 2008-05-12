@@ -40,9 +40,6 @@ DeclareCategory( "IsHomalgMorphismOfRightModules",
 DeclareProperty( "IsMorphism",
         IsHomalgMorphism );
 
-DeclareProperty( "IsZeroMorphism",
-        IsHomalgMorphism );
-
 DeclareProperty( "IsIdentityMorphism",
         IsHomalgMorphism );
 

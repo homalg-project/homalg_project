@@ -47,7 +47,7 @@ BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
 InstallValue( SimpleLogicalImplicationsForHomalgModules,
         [ ## IsTorsionFreeModule:
           
-          [ IsZeroModule,
+          [ IsZero,
             "implies", IsFreeModule ],
           
           [ IsFreeModule,
@@ -64,7 +64,7 @@ InstallValue( SimpleLogicalImplicationsForHomalgModules,
           
           ## IsTorsionModule:
           
-          [ IsZeroModule,
+          [ IsZero,
             "implies", IsHolonomicModule ],
           
           [ IsHolonomicModule,
@@ -75,13 +75,13 @@ InstallValue( SimpleLogicalImplicationsForHomalgModules,
           
           ## IsCyclicModule:
           
-          [ IsZeroModule,
+          [ IsZero,
             "implies", IsCyclicModule ],
           
-          ## IsZeroModule:
+          ## IsZero:
           
           [ IsTorsionModule, "and", IsTorsionFreeModule,
-            "imply", IsZeroModule ]
+            "imply", IsZero ]
           
           ] );
 
@@ -239,7 +239,7 @@ end );
 ####################################
 
 ##
-InstallMethod( IsZeroModule,
+InstallMethod( IsZero,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -731,7 +731,7 @@ InstallMethod( AddANewPresentation,
     SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     
     if NrGenerators( gen ) = 0 then
-        SetIsZeroModule( M, true );
+        SetIsZero( M, true );
     fi;
     
     return M;
@@ -900,7 +900,7 @@ InstallMethod( AddANewPresentation,
     SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     
     if NrGenerators( gen ) = 0 then
-        SetIsZeroModule( M, true );
+        SetIsZero( M, true );
     fi;
     
     if NrRelations( rel ) = 0 then
@@ -1213,7 +1213,7 @@ end );
 ##
 InstallMethod( ElementaryDivisors,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ],
+        [ IsFinitelyPresentedModuleRep and IsZero ],
         
   function( M )
     
@@ -1274,7 +1274,7 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-                IsZeroModule, true );
+                IsZero, true );
     else
         ObjectifyWithAttributes(
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
@@ -1324,7 +1324,7 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-                IsZeroModule, true );
+                IsZero, true );
     else
         ObjectifyWithAttributes(
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
@@ -1372,7 +1372,7 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgRightModuleFinitelyPresented,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-                IsZeroModule, true );
+                IsZero, true );
     else
         ObjectifyWithAttributes(
                 M, TheTypeHomalgRightModuleFinitelyPresented,
@@ -1422,7 +1422,7 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgRightModuleFinitelyPresented,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-                IsZeroModule, true );
+                IsZero, true );
     else
         ObjectifyWithAttributes(
                 M, TheTypeHomalgRightModuleFinitelyPresented,
@@ -1471,7 +1471,7 @@ InstallMethod( LeftPresentation,
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-                IsZeroModule, true );
+                IsZero, true );
     else
         ObjectifyWithAttributes(
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
@@ -1576,7 +1576,7 @@ InstallMethod( RightPresentation,
                 M, TheTypeHomalgRightModuleFinitelyPresented,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
-                IsZeroModule, true );
+                IsZero, true );
     else
         ObjectifyWithAttributes(
                 M, TheTypeHomalgRightModuleFinitelyPresented,
@@ -1865,7 +1865,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1001,
+        [ IsFinitelyPresentedModuleRep and IsZero ], 1001,
         
   function( M )
     
@@ -1885,7 +1885,7 @@ InstallMethod( PrintObj,
   function( M )
     
     Print( "LeftPresentation( " );
-    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+    if HasIsZero( M ) and IsZero( M ) then
         Print( "[ ], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
     else
         Print( GeneratorsOfModule( M ), ", " );
@@ -1908,7 +1908,7 @@ InstallMethod( PrintObj,
   function( M )
     
     Print( "RightPresentation( " );
-    if HasIsZeroModule( M ) and IsZeroModule( M ) then
+    if HasIsZero( M ) and IsZero( M ) then
         Print( "[ ], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
     else
         Print( GeneratorsOfModule( M ), ", " );
@@ -2049,7 +2049,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZeroModule ], 1001,
+        [ IsFinitelyPresentedModuleRep and IsZero ], 1001,
         
   function( M )
     

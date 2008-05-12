@@ -47,13 +47,13 @@ InstallImmediateMethod( IsEmptyMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( PreEval( M ) ) then
-        return IsZeroMatrix( PreEval( M ) );
+    if HasIsZero( PreEval( M ) ) then
+        return IsZero( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -61,13 +61,13 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalInvolution( M ) ) then
-        return IsZeroMatrix( EvalInvolution( M ) );
+    if HasIsZero( EvalInvolution( M ) ) then
+        return IsZero( EvalInvolution( M ) );
     fi;
     
     TryNextMethod( );
@@ -75,13 +75,13 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalLeftInverse, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalLeftInverse( M ) ) then
-        return IsZeroMatrix( EvalLeftInverse( M ) );
+    if HasIsZero( EvalLeftInverse( M ) ) then
+        return IsZero( EvalLeftInverse( M ) );
     fi;
     
     TryNextMethod( );
@@ -89,13 +89,13 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalRightInverse, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalRightInverse( M ) ) then
-        return IsZeroMatrix( EvalRightInverse( M ) );
+    if HasIsZero( EvalRightInverse( M ) ) then
+        return IsZero( EvalRightInverse( M ) );
     fi;
     
     TryNextMethod( );
@@ -103,13 +103,13 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalInverse, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalInverse( M ) ) then
-        return IsZeroMatrix( EvalInverse( M ) );
+    if HasIsZero( EvalInverse( M ) ) then
+        return IsZero( EvalInverse( M ) );
     fi;
     
     TryNextMethod( );
@@ -117,12 +117,12 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalCertainRows( M )[1] ) and IsZeroMatrix( EvalCertainRows( M )[1] ) then
+    if HasIsZero( EvalCertainRows( M )[1] ) and IsZero( EvalCertainRows( M )[1] ) then
         return true;
     fi;
     
@@ -131,12 +131,12 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalCertainColumns, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalCertainColumns( M )[1] ) and IsZeroMatrix( EvalCertainColumns( M )[1] ) then
+    if HasIsZero( EvalCertainColumns( M )[1] ) and IsZero( EvalCertainColumns( M )[1] ) then
         return true;
     fi;
     
@@ -145,13 +145,13 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalUnionOfRows, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalUnionOfRows( M )[1] ) and IsZeroMatrix( EvalUnionOfRows( M )[1] )
-       and HasIsZeroMatrix( EvalUnionOfRows( M )[2] ) and IsZeroMatrix( EvalUnionOfRows( M )[2] ) then
+    if HasIsZero( EvalUnionOfRows( M )[1] ) and IsZero( EvalUnionOfRows( M )[1] )
+       and HasIsZero( EvalUnionOfRows( M )[2] ) and IsZero( EvalUnionOfRows( M )[2] ) then
         return true;
     fi;
     
@@ -160,13 +160,13 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
     
-    if HasIsZeroMatrix( EvalUnionOfColumns( M )[1] ) and IsZeroMatrix( EvalUnionOfColumns( M )[1] )
-       and HasIsZeroMatrix( EvalUnionOfColumns( M )[2] ) and IsZeroMatrix( EvalUnionOfColumns( M )[2] ) then
+    if HasIsZero( EvalUnionOfColumns( M )[1] ) and IsZero( EvalUnionOfColumns( M )[1] )
+       and HasIsZero( EvalUnionOfColumns( M )[2] ) and IsZero( EvalUnionOfColumns( M )[2] ) then
         return true;
     fi;
     
@@ -175,7 +175,7 @@ InstallImmediateMethod( IsZeroMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsZeroMatrix,
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow, 0,
         
   function( M )

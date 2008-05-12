@@ -62,9 +62,6 @@ DeclareProperty( "IsTorsionModule",
 DeclareProperty( "IsHolonomicModule",
         IsHomalgModule );
 
-DeclareProperty( "IsZeroModule",
-        IsHomalgModule );
-
 ####################################
 #
 # attributes:
