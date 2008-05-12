@@ -21,7 +21,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                IsZeroMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsZeroMatrix( ", M, " )" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsZero( ", M, " )" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
                    
                  end,
                
