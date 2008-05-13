@@ -236,6 +236,13 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                  
+               IsUnit :=
+                 function( R, r )
+		   
+                   return homalgSendBlocking( [ "evalb( `homalg/InverseElement`(", r, R, ") <> FAIL )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "true";
+                   
+                 end,
+               
                DivideByUnit :=
                  function( a, u )
                    local R;

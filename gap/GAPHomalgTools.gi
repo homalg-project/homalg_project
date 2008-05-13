@@ -184,6 +184,13 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                  
+               IsUnit :=
+                 function( R, u )
+                   
+                   return homalgSendBlocking( [ "IsUnit(", R, u, ")" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "true";
+                   
+                 end,
+                 
                DivideByUnit :=
                  function( a, u )
                    local R;
@@ -217,10 +224,30 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    if list_string = "fail" then
-                       return [];
+                       return [ ];
                    else
                        return StringToIntList( list_string );
                    fi;
+                   
+                 end,
+                 
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+                 
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local R;
+                   
+                   R := HomalgRing( M );
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
                  end,
                  
