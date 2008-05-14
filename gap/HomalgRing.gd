@@ -125,6 +125,14 @@ DeclareAttribute( "One",
 DeclareAttribute( "MinusOne",
         IsHomalgRing );
 
+##
+DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
+        IsHomalgRing );
+
+##
+DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:
@@ -134,6 +142,12 @@ DeclareAttribute( "MinusOne",
 # basic operations:
 
 DeclareOperation( "HomalgRing",
+        [ IsHomalgExternalRingElement ] );
+
+DeclareOperation( "IsUnit",
+        [ IsHomalgRing, IsRingElement ] );
+
+DeclareOperation( "IsUnit",
         [ IsHomalgExternalRingElement ] );
 
 DeclareOperation( "RingName",
@@ -167,6 +181,9 @@ DeclareOperation( "AsRightModule",
         [ IsHomalgRing ] );
 
 DeclareOperation( "PolynomialRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "RingOfDerivations",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "*",

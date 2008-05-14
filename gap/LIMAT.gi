@@ -1704,3 +1704,55 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     return HomalgIdentityMatrix( NrColumns( M1 ), HomalgRing( M1 ) );
     
 end );
+
+#-----------------------------------
+# GetUnitPosition
+#-----------------------------------
+
+##
+InstallMethod( GetUnitPosition,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetUnitPosition( IsZero(Matrix) )", "\033[0m" );
+    
+    return fail;
+    
+end );
+
+#-----------------------------------
+# GetColumnIndependentUnitPositions
+#-----------------------------------
+
+##
+InstallMethod( GetColumnIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetColumnIndependentUnitPositions( IsZero(Matrix) )", "\033[0m" );
+    
+    return [ ];
+    
+end );
+
+#-----------------------------------
+# GetRowIndependentUnitPositions
+#-----------------------------------
+
+##
+InstallMethod( GetRowIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetRowIndependentUnitPositions( IsZero(Matrix) )", "\033[0m" );
+    
+    return [ ];
+    
+end );
+

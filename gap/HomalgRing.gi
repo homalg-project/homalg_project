@@ -308,7 +308,10 @@ InstallMethod( SUM,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.Minus) then
+    if IsBound(RP!.Sum) then
+        cas := homalgExternalCASystem( R );
+        return HomalgExternalRingElement( RP!.Sum( r1,  r2 ), cas, R ) ;
+    elif IsBound(RP!.Minus) then
         cas := homalgExternalCASystem( R );
         return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), cas, R ) ;
     fi;

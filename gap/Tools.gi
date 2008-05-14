@@ -15,6 +15,45 @@
 ####################################
 
 ##
+InstallMethod( IsUnit,
+        "for homalg ring elements",
+        [ IsHomalgRing, IsRingElement ],
+        
+  function( R, r )
+    local RP;
+    
+    if HasIsZero( r ) and IsZero( r ) then
+        return false;
+    elif HasIsOne( r ) and IsOne( r ) then
+        return true;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsUnit) then
+        return RP!.IsUnit( R, r );
+    fi;
+    
+    if Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) <> fail then
+        return true;
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( IsUnit,
+        "for homalg ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    
+    return IsUnit( HomalgRing( r ), r );
+    
+end );
+
+##
 InstallMethod( Zero,
         "for homalg rings",
         [ IsHomalgExternalRingRep ],
@@ -107,7 +146,7 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, pos_list )
-    local R, RP, m, n, mat, i, j;
+    local R, RP, m, n, i, j;
     
     R := HomalgRing( M );
     
@@ -115,8 +154,6 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
     
     if IsBound(RP!.GetUnitPosition) then
         return RP!.GetUnitPosition( M, pos_list );
-    elif IsHomalgExternalMatrixRep( M ) then
-        Error( "could not find a procedure called GetUnitPosition in the homalgTable", RP, "\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -124,17 +161,15 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
     m := NrRows( M );
     n := NrColumns( M );
     
-    mat := Eval( M );
-    
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
-            if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R!.ring, mat[i][j] ) then
+            if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
                 return [ i, j ];
             fi;
         od;
     od;
     
-    return fail;
+    return fail;	## the Maple version returns NULL and we return fail
     
 end );
 
@@ -144,7 +179,7 @@ InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, clean_columns )
-    local R, RP, one, clean_rows, m, mat, j, i;
+    local R, RP, one, clean_rows, m, j, i;
     
     R := HomalgRing( M );
     
@@ -152,8 +187,6 @@ InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
     
     if IsBound(RP!.GetCleanRowsPositions) then
         return RP!.GetCleanRowsPositions( M, clean_columns );
-    elif IsHomalgExternalMatrixRep( M ) then
-        Error( "could not find a procedure called GetCleanRowsPositions in the homalgTable", RP, "\n" );
     fi;
     
     one := One( R );
@@ -164,18 +197,16 @@ InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
     
     m := NrRows( M );
     
-    mat := Eval( M );
-    
     for j in clean_columns do
         for i in [ 1 .. m ] do
-            if mat[i][j] = one then
+            if IsOne( GetEntryOfHomalgMatrix( M, i, j ) ) then
                 Add( clean_rows, i );
                 break;
             fi;
         od;
     od;
     
-    return  clean_rows;
+    return clean_rows;
     
 end );
 
@@ -185,7 +216,7 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, pos_list )
-    local R, RP;
+    local R, RP, m, n, nn, dep_list, rest, r, pos, i, j, k;
     
     R := HomalgRing( M );
     
@@ -193,13 +224,38 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
     
     if IsBound(RP!.GetColumnIndependentUnitPositions) then
         return RP!.GetColumnIndependentUnitPositions( M, pos_list );
-    elif IsHomalgExternalMatrixRep( M ) then
-        Error( "could not find a procedure called GetColumnIndependentUnitPositions in the homalgTable", RP, "\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    TryNextMethod( );
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    nn := [ 1 .. n ];
+    
+    dep_list := [ ];
+    
+    rest := nn;
+    
+    r := n;
+    
+    pos := [ ];
+    
+    for i in [ 1 .. m ] do
+        for j in [ 1 .. r ] do
+            k := rest[ r - j + 1 ];
+            if not [ i, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, k ) ) then
+                Add( pos, [ i, k ] );
+                Append( dep_list,
+                        Filtered( nn, a -> not IsZero( GetEntryOfHomalgMatrix( M, i, a ) ) ) );
+                rest := Difference( nn, dep_list );
+                r := Length( rest );
+                break;
+            fi;
+        od;
+    od;
+    
+    return pos;
     
 end );
 
@@ -220,7 +276,7 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, pos_list )
-    local R, RP;
+    local R, RP, m, n, mm, dep_list, rest, r, pos, j, i, k;
     
     R := HomalgRing( M );
     
@@ -228,13 +284,38 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
     
     if IsBound(RP!.GetRowIndependentUnitPositions) then
         return RP!.GetRowIndependentUnitPositions( M, pos_list );
-    elif IsHomalgExternalMatrixRep( M ) then
-        Error( "could not find a procedure called GetRowIndependentUnitPositions in the homalgTable", RP, "\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
     
-    TryNextMethod( );
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    mm := [ 1 .. m ];
+    
+    dep_list := [ ];
+    
+    rest := mm;
+    
+    r := m;
+    
+    pos := [ ];
+    
+    for j in [ 1 .. n ] do
+        for i in [ 1 .. r ] do
+            k := rest[ r - i + 1 ];
+            if not [ j, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, k, j ) ) then
+                Add( pos, [ j, k ] );
+                Append( dep_list,
+                        Filtered( mm, a -> not IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) ) );
+                rest := Difference( mm, dep_list );
+                r := Length( rest );
+                break;
+            fi;
+        od;
+    od;
+    
+    return pos;
     
 end );
 

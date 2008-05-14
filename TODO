@@ -1,10 +1,5 @@
 - make the generation of the methods for functors automatic
 
-- GARBAGE COLLECTION in the code
-- talk with the GAP people about:
-  IsFreeLeftModule is a category and should become a property
-
-
 - when do immediate methods apply? immediately after objectifying?
 ##
 InstallImmediateMethod( ElementaryDivisorsOfLeftModule,

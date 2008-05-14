@@ -24,6 +24,11 @@ DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
         IshomalgExternalObjectRep,
         [ "pointer", "cas" ] );
 
+# a new representation for the category IsContainerForWeakPointersOnHomalgExternalObjects:
+DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalObjectsRep",
+        IsContainerForWeakPointersOnHomalgExternalObjects,
+        [ "weak_pointers", "homalg_pointers", "obsolete" ] );
+
 ####################################
 #
 # families and types:
@@ -43,6 +48,15 @@ BindGlobal( "TheTypeHomalgExternalObject",
 BindGlobal( "TheTypeHomalgExternalObjectWithIOStream",
         NewType( TheFamilyOfHomalgExternalObjects,
                 IshomalgExternalObjectWithIOStreamRep ) );
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOnHomalgExternalObjects",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOnHomalgExternalObjects" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOnHomalgExternalObjects",
+        NewType( TheFamilyOfContainersForWeakPointersOnHomalgExternalObjects,
+                IsContainerForWeakPointersOnHomalgExternalObjectsRep ) );
 
 ####################################
 #
@@ -203,7 +217,7 @@ InstallGlobalFunction( homalgExternalObject,
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsRecord, IsType, IsFilter } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsRecord, IsType, IsFilter } bur recieved: ", ar, "\n" );
         fi;
     od;
     
@@ -234,6 +248,23 @@ InstallGlobalFunction( homalgExternalObject,
     
 end );
 
+InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalObjects,
+  function( arg )
+    local container, type;
+    
+    container := rec( weak_pointers := WeakPointerObj( [ ] ),
+                      homalg_pointers := [ ],
+		      obsolete := [ ] );
+    
+    type := TheTypeContainerForWeakPointersOnHomalgExternalObjects;
+    
+    ## Objectify:
+    Objectify( type, container );
+    
+    return container;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
@@ -247,7 +278,7 @@ InstallMethod( ViewObj,
   function( o )
     
     Print( "<A homalg external object residing in the CAS " );
-    Print( homalgExternalCASystem( o ), ">" ); 
+    Print( homalgExternalCASystem( o ), ">" );
     
 end );
 
@@ -260,3 +291,30 @@ InstallMethod( Display,
     Print( homalgPointer( o ), "\n" );
     
 end );
+
+InstallMethod( ViewObj,
+        "for containers of weak pointers to homalg external objects",
+        [ IsContainerForWeakPointersOnHomalgExternalObjectsRep ],
+        
+  function( o )
+    local del;
+    
+    del := Length( o!.obsolete );
+    
+    Print( "<A container of weak pointers to homalg external objects: active = ", Length( o!.homalg_pointers ) - del, ", deleted = ", del, ">" );
+    
+end );
+
+InstallMethod( Display,
+        "for containers of weak pointers to homalg external objects",
+        [ IsContainerForWeakPointersOnHomalgExternalObjectsRep ],
+        
+  function( o )
+    local weak_pointers;
+    
+    weak_pointers := o!.weak_pointers;
+    
+    Print( List( [ 1 .. LengthWPObj( weak_pointers ) ], function( i ) if IsBoundElmWPObj( weak_pointers, i ) then return i; else return 0; fi; end ), "\n" );
+    
+end );
+
