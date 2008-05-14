@@ -19,15 +19,15 @@ InstallValue( HOMALG_IO_GAP,
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
             executable := "gapL",
-            options := [ "-b -q -T" ],
+            options := [ "-b -q -T -o 15g" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 1,		## these are the most
-            CUT_END := 4,		## delicate values!
+            CUT_POS_BEGIN := 1,		## these are the most
+            CUT_POS_END := 4,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";;",
             define := ":=",
-            prompt := "gap> ",
+            prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",           
            )
@@ -95,12 +95,12 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         o := 1;
     fi;
     
-    homalgSendBlocking( "LoadPackage(\"RingsForHomalg\")", "need_command", stream );
+    homalgSendBlocking( "LoadPackage(\"RingsForHomalg\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
@@ -177,7 +177,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command" );
+    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -190,7 +190,7 @@ InstallMethod( CreateHomalgMatrix,
     local ext_obj;
     
     ## external GAP sees S as a listlist (and not as a string)
-    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", S, ", ", R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "HomalgMatrix( ", S, ", ", R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -203,9 +203,9 @@ InstallMethod( CreateHomalgMatrix,
   function( S, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrix( \"", S, "\", ", r, c , R, " )" ] );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrix( \"", S, "\", ", r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
-    return HomalgMatrix( ext_obj, R );
+    return HomalgMatrix( ext_obj, r, c, R );
     
 end );
 
@@ -214,9 +214,11 @@ InstallMethod( CreateHomalgSparseMatrix,
         "for a sparse list of an external matrix in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
-    local ext_obj;
+    local ext_obj, s;
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrix( \"", S, "\", ", r, c , R, " )" ] );
+    s := homalgSendBlocking( [ "\"", S, "\"" ], R, HOMALG_IO.Pictograms.sparse );
+    
+    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrix( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -229,7 +231,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "GetEntryOfHomalgMatrix( ", M, r, c, R, " )" ], "need_output" );
+    return homalgSendBlocking( [ "GetEntryOfHomalgMatrix( ", M, r, c, R, " )" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 
@@ -253,8 +255,17 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
+    local s, l;
     
-    return homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    s := homalgSendBlocking( [ "GetListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
+    
+    l := Length( s );
+    
+    if l < 3 then
+        return s;
+    fi;
+    
+    return s{[ 2 .. l-1 ]};
     
 end );
 
@@ -264,8 +275,17 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
+    local s, l;
     
-    return homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    s := homalgSendBlocking( [ "GetListListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    
+    l := Length( s );
+    
+    if l < 3 then
+        return s;
+    fi;
+    
+    return s{[ 2 .. l-1 ]};
     
 end );
 
@@ -275,8 +295,17 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
+    local s, l;
     
-    return homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output" );
+    s := homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    
+    l := Length( s );
+    
+    if l < 3 then
+        return s;
+    fi;
+    
+    return s{[ 2 .. l-1 ]};
     
 end );
 
@@ -297,7 +326,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
     if mode = "ListList" then
         command := [ "SaveDataOfHomalgMatrixToFile( \"", filename, "\", ", M, " )" ];
                 
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
                 
     fi;
     
@@ -325,7 +354,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         command := [ M, " := LoadDataOfHomalgMatrixFromFile( \"", filename, "\", ", R, " )" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
     fi;
     
@@ -340,23 +369,14 @@ end );
 ####################################
 
 InstallMethod( Display,
-        "for homalg matrices",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
-    local stream, display_color;
-    
-    stream := homalgStream( o );
     
     if IsHomalgExternalRingInGAPRep( HomalgRing( o ) ) then
         
-        if IsBound( stream.color_display ) then
-            display_color := stream.color_display;
-        else
-            display_color := "";
-        fi;
-        
-        Print( display_color, homalgSendBlocking( [ "Display(", o, ")" ], "need_display" ) );
+        Print( homalgSendBlocking( [ "Display( ", o, " )" ], "need_display", HOMALG_IO.Pictograms.Display ) );
         
     else
         
@@ -364,4 +384,4 @@ InstallMethod( Display,
         
     fi;
     
-end);
+end );

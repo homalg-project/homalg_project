@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  GAPHomalgDefault.gd       RingsForHomalg package         Mohamed Barakat
+##  GaussDefault.gd           RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the external rings provided by the GAP package homalg.
+##  Declarations for the Gauss Fields
 ##
 #############################################################################
 
@@ -14,5 +14,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForGAPHomalgDefault" );
+DeclareGlobalVariable( "CommonHomalgTableForGaussDefault" );
 

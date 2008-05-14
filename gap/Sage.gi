@@ -22,15 +22,15 @@ InstallValue( HOMALG_IO_Sage,
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 7,		## these are the most
-            CUT_END := 10,		## delicate values!
+            CUT_POS_BEGIN := 7,		## these are the most
+            CUT_POS_END := 10,		## delicate values!
             eoc_verbose := "",
             eoc_quiet := ";",
             remove_enter := true,       ## a Sage specific
 	    check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
-            prompt := "sage: ",
+            prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
             display_color := "\033[0;34;43m",
            )
@@ -98,10 +98,10 @@ InstallGlobalFunction( RingForHomalgInSage,
         o := 1;
     fi;
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
@@ -213,7 +213,7 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists" );
+    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
@@ -238,7 +238,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command" );
+    homalgSendBlocking( [ M, "[", r-1, c-1, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -250,7 +250,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -261,12 +261,11 @@ InstallMethod( CreateHomalgMatrix,
         "for a list of an external matrix in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
-    
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ "matrix(", R, r, c, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
-    return HomalgMatrix( ext_obj, R );
+    return HomalgMatrix( ext_obj, r, c, R );
     
 end );
 
@@ -276,10 +275,14 @@ InstallMethod( CreateHomalgSparseMatrix,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( S, r, c, R )
+    local M, s;
     
-    local M;
     M := HomalgInitialMatrix( r, c, R );
-    homalgSendBlocking( [ "FillMatrix(", M, ",",  S, ")" ], "need_command", R );
+    
+    s := homalgSendBlocking( S, R, HOMALG_IO.Pictograms.sparse );
+    
+    homalgSendBlocking( [ "FillMatrix(", M, ",",  s, ")" ], "need_command", HOMALG_IO.Pictograms.HomalgMatrix );
+    
     return M;
     
 end );
@@ -288,10 +291,10 @@ end );
 InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
-        
+
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output" );
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 
@@ -310,24 +313,24 @@ InstallMethod( GetEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
-        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
-        
-  function( M, R )
-    
-    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output" );
-    
-end );
-
-##
 InstallMethod( GetListOfHomalgMatrixAsString,
         "for external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
     
-    return homalgSendBlocking( [ M, ".list()" ], "need_output" );
+    return homalgSendBlocking( [ M, ".list()" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for external matrices in Sage",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
+        
+  function( M, R )
+    
+    return homalgSendBlocking( [ "[", M, "[x].list() for x in range(", NrRows( M ), ")]" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
     
 end );
 
@@ -338,18 +341,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M , R )
     
-    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output" );
-    
-end );
-
-##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Sage",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
-
-  function( M, r, c, R )
-    
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output" );
+    return homalgSendBlocking( [ "[ [r+1,c+1,", M, "[r,c]] for r in range(", NrRows(M), ") for c in range(", NrColumns(M), ") if not ", M, "[r,c]==", Zero( R ), " ]" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
     
 end );
 
@@ -372,7 +364,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
                      "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
                      "_fs.close()" ];
                 
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
                 
     fi;
     
@@ -403,7 +395,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                      "_fs.close(); ",
                      M, "= matrix(", R, ",eval(_str))" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
     fi;
     

@@ -20,9 +20,11 @@ InstallMethod( CreateHomalgTable,
           and IsPrincipalIdealRing ],
         
   function( arg )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, RP_default, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForGAPHomalgTools );
+    
+    RP_default := ShallowCopy( CommonHomalgTableForGAPHomalgDefault );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForGAPHomalgBestBasis );
     
@@ -32,8 +34,6 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> homalgSendBlocking( [ "Display(", R, ")" ], "need_output" ),
-               
                ElementaryDivisors :=
                  function( arg )
                    local M, R;
@@ -42,7 +42,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "homalgTable(", R, "!.ElementaryDivisors(", M, ")" ], "need_output" );
+                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", HOMALG_IO.Pictograms.ElementaryDivisors );
                    
                  end,
                  
@@ -58,7 +58,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( N, true );
@@ -74,10 +74,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", N, " := homalgTable(", R, ")!.TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", N, " := TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := homalgTable(", R, ")!.TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );
@@ -90,6 +90,10 @@ InstallMethod( CreateHomalgTable,
     
     for component in NamesOfComponents( RP_BestBasis ) do
         RP.(component) := RP_BestBasis.(component);
+    od;
+    
+    for component in NamesOfComponents( RP_default ) do
+        RP.(component) := RP_default.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

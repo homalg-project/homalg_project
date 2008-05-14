@@ -17,13 +17,14 @@
 
 InstallMethod( CreateHomalgTable,
         "for homalg rings provided by the maple package PIR",
-        [ IsHomalgExternalRingObjectInMapleRep
-          and IsCommutative and IsPrincipalIdealRing ],
+        [ IsHomalgExternalRingObjectInMapleUsingPIRRep ],
         
   function( arg )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, RP_default, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
+    
+    RP_default := ShallowCopy( CommonHomalgTableForMapleHomalgDefault );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
     
@@ -39,7 +40,7 @@ InstallMethod( CreateHomalgTable,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "convert(`homalg/DiagonalElementsAndRank`(", R, "[2][BestBasis](", M, R, "[1]),", R, ")[1],symbol)" ], "need_output" );
+                   return homalgSendBlocking( [ "convert(`homalg/DiagonalElementsAndRank`(", R, "[-1][BestBasis](", M, R, "[1]),", R, ")[1],symbol)" ], "need_output" );
                    
                  end,
                  
@@ -71,10 +72,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[2][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1],", U, "): `homalg/RankOfGauss`(", N, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
                    else
                        ## compute N only:
-                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[2][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[2])" ], "need_output" ) );
+                       rank_of_N := Int( homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1]): `homalg/RankOfGauss`(", N, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );

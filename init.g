@@ -38,6 +38,7 @@ ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularQX.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gd" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gd" );
@@ -64,3 +65,6 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanet.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gd" );
+
+## Gauss
+ReadPackage( "RingsForHomalg", "gap/GaussDefault.gd" );

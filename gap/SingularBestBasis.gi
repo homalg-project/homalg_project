@@ -22,24 +22,23 @@ InstallValue( InitializeSingularBestBasis,
 
             "proc BestBasis_SUV(M)\n",
             "{\n",
-            "  matrix S[nrows(M)][ncols(M)]=transpose(std(transpose(M)));\n",
+            "  matrix S[nrows(M)][ncols(M)]=std(M);\n",
             "  matrix U[nrows(M)][nrows(M)];\n",
-            "  matrix V[ncols(M)][ncols(M)]=transpose(lift(transpose(S),transpose(M),U));\n",
-            "  U=transpose(U);\n",
+            "  matrix V[ncols(M)][ncols(M)]=lift(S,M,U);\n",
             "  export(S,U,V);\n",
             "  return(nrows(S));\n",
             "};\n\n",
 
             "proc BestBasis_S(M)\n",
             "{\n",
-            "  matrix S[nrows(M)][ncols(M)]=transpose(std(transpose(M)));\n",
+            "  matrix S[nrows(M)][ncols(M)]=std(M);\n",
             "  export(S);\n",
             "  return(nrows(S));\n",
             "};\n\n"
 
           );
           
-          homalgSendBlocking( [ command ], "need_command", R );
+          homalgSendBlocking( [ command ], "need_command", R, HOMALG_IO.Pictograms.define );
           
         end
 );
@@ -93,14 +92,14 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                         ## compute S, U and (if nargs > 2) V with S = U*M*V as side effect
                         ## but these Matrices are only exported and have to be set
                         ## and return the rank
-                        homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command");
+                        homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
                         rank_of_S := Int( homalgSendBlocking( [ "l[2]" ], R, "need_output") );
                         homalgSendBlocking( [ "matrix ",S,"=l[1]" ], "need_command");
                         homalgSendBlocking( [ "matrix ",U,"=l[3]" ], "need_command");
                         homalgSendBlocking( [ "matrix ",V,"=l[4]" ], "need_command");
                      else
                         ## compute S only - same as above
-                        homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command");
+                        homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
                         rank_of_S := Int( homalgSendBlocking( [ "l[2]" ], "need_output") );
                         homalgSendBlocking( [ "matrix ",S,"=l[1]" ], "need_command");
                      fi;

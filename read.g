@@ -15,6 +15,10 @@
 
 ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gi" );
 
+##(Internal) GAP using extended functionality of the Gauss package
+ReadPackage( "RingsForHomalg", "gap/GaussDefault.gi" );
+ReadPackage( "RingsForHomalg", "gap/GaussFields.gi" );
+
 ## all the supported external computer algebra systems
 ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gi" );
 ReadPackage( "RingsForHomalg", "gap/Singular.gi" );
@@ -38,6 +42,7 @@ ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/SingularGF2.gi" );
 ReadPackage( "RingsForHomalg", "gap/SingularQX.gi" );
+ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gi" );
 
 ## Sage
 ReadPackage( "RingsForHomalg", "gap/SageTools.gi" );

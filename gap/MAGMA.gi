@@ -24,13 +24,14 @@ InstallValue( HOMALG_IO_MAGMA,
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 1,		## these are the most
-            CUT_END := 2,		## delicate values!
+            CUT_POS_BEGIN := 1,		## these are the most
+            CUT_POS_END := 2,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
-            remove_enter := true,       ## a MAGMA specific
+            remove_enter := true,	## a MAGMA specific
+            error_stdout := " error: ",	## a MAGMA specific
             define := ":=",
-            prompt := "magma> ",
+            prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
            )
@@ -98,10 +99,10 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
         o := 1;
     fi;
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream ];
+    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
-    if Length( arg ) > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. Length( arg ) ]} );
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
     fi;
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
@@ -210,7 +211,7 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists" );
+    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
@@ -222,6 +223,7 @@ InstallMethod( PolynomialRing,
     
     SetCoefficientsRing( S, r );
     SetCharacteristic( S, c );
+    SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
     
     return S;
@@ -235,7 +237,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command" );
+    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -247,7 +249,7 @@ InstallMethod( CreateHomalgMatrix,
   function( S, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "Matrix(", R, ",", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ "Matrix(", R, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -261,9 +263,9 @@ InstallMethod( CreateHomalgMatrix,
     
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ] );
+    ext_obj := homalgSendBlocking( [ "Matrix(", R, r, c, ",", S, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
-    return HomalgMatrix( ext_obj, R );
+    return HomalgMatrix( ext_obj, r, c, R );
     
 end );
 
@@ -273,13 +275,13 @@ InstallMethod( CreateHomalgSparseMatrix,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( S, r, c, R )
-    local M, l;
+    local M, s;
     
     M := HomalgVoidMatrix( r, c, R );
     
-    l := homalgSendBlocking( S, R );
+    s := homalgSendBlocking( S, R, HOMALG_IO.Pictograms.sparse );
     
-    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", S, "] ))" ] , "need_command" );
+    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", s, "] ))" ] , "need_command", HOMALG_IO.Pictograms.HomalgMatrix );
     
     return M;
     
@@ -292,7 +294,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output" );
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 
@@ -317,7 +319,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "Eltseq(", M, ")" ], "need_output" );
+    return homalgSendBlocking( [ "Eltseq(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetListOfHomalgMatrixAsString );
     
 end );
 
@@ -328,7 +330,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output" );
+    return homalgSendBlocking( [ "RowSequence(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
     
 end );
 
@@ -339,7 +341,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M, R )
     
-    return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output" );
+    return homalgSendBlocking( [ "[ [s[1], s[2], m[s[1], s[2] ] ] : s in Support(m)] where m:=", M ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
     
 end );
 
@@ -362,7 +364,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
                      "_fs := Open(\"", filename, "\",\"w\"); ",
                      "Put( _fs, Sprint(_str) ); Flush( _fs ); delete( _fs )" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
         
     fi;
     
@@ -390,7 +392,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         
         command := [ M, ":= Matrix(", R, ", eval( Read( \"", filename ,"\" ) ) )" ];
         
-        homalgSendBlocking( command, "need_command" );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
         
     fi;
     

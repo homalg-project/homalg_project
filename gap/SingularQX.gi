@@ -61,10 +61,10 @@ InstallMethod( CreateHomalgTable,
                        homalgSendBlocking( [ "list l=rowred(", M, ",1);",
                                              "matrix ", U, "=transpose(l[2]);",
                                              "matrix ", N, "=transpose(l[1])"
-                                           ], "need_command" );
+                                           ], "need_command", HOMALG_IO.Pictograms.TriangularBasisC );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ "matrix ", N, " = rowred(", M, ")" ], "need_command" );
+                       homalgSendBlocking( [ "matrix ", N, " = rowred(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
                    fi;
                    
 #SetRowRankOfMatrix( N, rank_of_N );

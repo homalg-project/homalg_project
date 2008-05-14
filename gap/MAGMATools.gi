@@ -23,7 +23,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ M, " eq ZeroMatrix(", R, NrRows( M ), NrColumns( M ), ")" ] , "need_output" ) = "true";
+                   return homalgSendBlocking( [ M, " eq ZeroMatrix(", R, NrRows( M ), NrColumns( M ), ")" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
                    
                  end,
                
@@ -33,7 +33,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, ",1,", NrColumns( C ), "); [i: i in [ 1 .. ", NrRows( C ), " ] | RowSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, ",1,", NrColumns( C ), "); [i: i in [ 1 .. ", NrRows( C ), " ] | RowSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
                    return StringToIntList( list_string );
                    
                  end,
@@ -44,7 +44,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, NrRows( C ), ",1); [i: i in [ 1 .. ", NrColumns( C ), " ] | ColumnSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output" );
+                   list_string := homalgSendBlocking( [ "z := ZeroMatrix(", R, NrRows( C ), ",1); [i: i in [ 1 .. ", NrColumns( C ), " ] | ColumnSubmatrixRange(", C, ",i,i) eq z ];" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
                    return StringToIntList( list_string );
                    
                  end,
@@ -52,11 +52,15 @@ InstallValue( CommonHomalgTableForMAGMATools,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
-               Zero := HomalgExternalRingElement( "0", "MAGMA", IsZero ),
+               IsZero := r -> homalgSendBlocking( [ "IsZero( ", r, " )" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                
-               One := HomalgExternalRingElement( "1", "MAGMA", IsOne ),
+               IsOne := r -> homalgSendBlocking( [ "IsOne( ", r, " )" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "true",
                
-               MinusOne := HomalgExternalRingElement( "(-1)", "MAGMA" ),
+               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "Zero(", R, ")" ], "need_output", HOMALG_IO.Pictograms.Zero ), "MAGMA", IsZero ),
+               
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.One ), "MAGMA", IsOne ),
+               
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "MAGMA" ),
                
                AreEqualMatrices :=
                  function( A, B )
@@ -64,7 +68,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ A, " eq ",  B ] , "need_output" ) = "true";
+                   return homalgSendBlocking( [ A, " eq ",  B ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "true";
                    
                  end,
                
@@ -74,7 +78,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "ZeroMatrix(", R, NrRows( C ), NrColumns( C ), ")" ] );
+                   return homalgSendBlocking( [ "ZeroMatrix(", R, NrRows( C ), NrColumns( C ), ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
              
@@ -84,7 +88,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( C );
                    
-                   return homalgSendBlocking( [ "ScalarMatrix(", R, NrRows( C ), ",1)" ] );
+                   return homalgSendBlocking( [ "ScalarMatrix(", R, NrRows( C ), ",1)" ], HOMALG_IO.Pictograms.IdentityMatrix );
                    
                  end,
                
@@ -94,7 +98,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "Transpose(", M, ")" ] );
+                   return homalgSendBlocking( [ "Transpose(", M, ")" ], HOMALG_IO.Pictograms.Involution );
                    
                  end,
                
@@ -104,7 +108,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "Matrix(", M, "[", plist, "])" ] );
+                   return homalgSendBlocking( [ "Matrix(", M, "[", plist, "])" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
                
@@ -114,7 +118,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[",plist, "]))" ] );
+                   return homalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[",plist, "]))" ], HOMALG_IO.Pictograms.CertainColumns );
                    
                  end,
                
@@ -124,7 +128,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "VerticalJoin(", A, B, ")" ] );
+                   return homalgSendBlocking( [ "VerticalJoin(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfRows );
                    
                  end,
                
@@ -134,7 +138,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ] );
+                   return homalgSendBlocking( [ "HorizontalJoin(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumns );
                    
                  end,
                
@@ -142,7 +146,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                  function( e )
                    local f;
                    
-                   f := Concatenation( [ "DiagonalJoin([" ], e, [ "])" ] );
+                   f := Concatenation( [ "DiagonalJoin([" ], e, [ "])" ], HOMALG_IO.Pictograms.DiagMat );
                    
                    return homalgSendBlocking( f );
                    
@@ -154,7 +158,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ a, "*", A ] );
+                   return homalgSendBlocking( [ a, "*", A ], HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                
@@ -164,7 +168,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ A, "+", B ] );
+                   return homalgSendBlocking( [ A, "+", B ], HOMALG_IO.Pictograms.AddMat );
                    
                  end,
                
@@ -174,7 +178,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ A, "-", B ] );
+                   return homalgSendBlocking( [ A, "-", B ], HOMALG_IO.Pictograms.SubMat );
                    
                  end,
                
@@ -184,28 +188,28 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ A, "*", B ] );
+                   return homalgSendBlocking( [ A, "*", B ], HOMALG_IO.Pictograms.Compose );
                    
                  end,
                
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ "NumberOfRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output" ) );
+                   return Int( homalgSendBlocking( [ "NumberOfColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output" );
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", HOMALG_IO.Pictograms.Minus );
                    
                  end,
                  

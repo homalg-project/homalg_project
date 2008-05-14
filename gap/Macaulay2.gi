@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Macaulay2.gi              RingsForHomalg package         Mohamed Barakat
+##  Macaulay2.gi              RingsForHomalg package          Daniel Robertz
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -22,12 +22,13 @@ InstallValue( HOMALG_IO_Macaulay2,
             options := [ "--no-prompts", "--silent", "--no-readline" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_BEGIN := 1,		## these are the most
-            CUT_END := 16,		## delicate values!
+            SEARCH_READY_TWICE := true,	## a Macaulay2 specific
+            CUT_POS_BEGIN := -1,	## these values are
+            CUT_POS_END := -1,		## not important for Macaulay2
             eoc_verbose := "",
             eoc_quiet := ";",
             define := "=",
-            prompt := "M2> ",
+            prompt := "\033[01mM2>\033[1m ",
             output_prompt := "\033[1;30;43m<M2\033[0m "
            )
 );
