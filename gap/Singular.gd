@@ -28,6 +28,8 @@ DeclareGlobalVariable( "HOMALG_IO_Singular" );
 #
 ####################################
 
+DeclareGlobalFunction( "SETRING_Singular" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInSingular" );

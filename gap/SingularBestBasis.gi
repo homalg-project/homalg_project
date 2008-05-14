@@ -14,35 +14,6 @@
 #
 ####################################
 
-InstallValue( InitializeSingularBestBasis,
-        
-        function( R )
-          local command;
-          command := Concatenation(
-
-            "proc BestBasis_SUV(M)\n",
-            "{\n",
-            "  matrix S[nrows(M)][ncols(M)]=std(M);\n",
-            "  matrix U[nrows(M)][nrows(M)];\n",
-            "  matrix V[ncols(M)][ncols(M)]=lift(S,M,U);\n",
-            "  export(S,U,V);\n",
-            "  return(nrows(S));\n",
-            "};\n\n",
-
-            "proc BestBasis_S(M)\n",
-            "{\n",
-            "  matrix S[nrows(M)][ncols(M)]=std(M);\n",
-            "  export(S);\n",
-            "  return(nrows(S));\n",
-            "};\n\n"
-
-          );
-          
-          homalgSendBlocking( [ command ], "need_command", R, HOMALG_IO.Pictograms.define );
-          
-        end
-);
-
 InstallValue( CommonHomalgTableForSingularBestBasis,
         
         rec(
