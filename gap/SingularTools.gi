@@ -17,24 +17,13 @@
 InstallValue( CommonHomalgTableForSingularTools,
         
         rec(
-               IsZeroMatrix :=
-                 function( M )
-                   homalgSendBlocking( [ "matrix Zero_Matrix[", NrColumns( M ), "][", NrRows( M ), "]" ], "need_command", M );
-                   return homalgSendBlocking( [ M, "==Zero_Matrix" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "1";
-                   
-                 end,
-               
                ZeroColumns := #was: ZeroRows
                  function( C )
                    local R, list_string;
 
                    R := HomalgRing( C );
 
-                   homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "]" ] , C, "need_command" );
-
-                   homalgSendBlocking( [ "list l;for (int i=", NrColumns( C ), "; i>=1; i=i-1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroColumns );
-
-                   list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
+                   list_string := homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "]; list l;for (int i=", NrColumns( C ), "; i>=1; i=i-1) { if (transpose(", C, ")[i] == Zero_Row || transpose(", C, ")[i] == 0) {l=insert(l,i);} }; string(l)" ] , "need_output", HOMALG_IO.Pictograms.ZeroColumns );
 
                    #trying to understand singular's output with removed spaces from homalg
                    if list_string = "empty list" or list_string = "emptylist" then
@@ -51,11 +40,9 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    R := HomalgRing( C );
 
-                   homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]" ] , C, "need_command" );
+                   homalgSendBlocking( [  ] , C, "need_command", HOMALG_IO.Pictograms.ZeroMatrix );
 
-                   homalgSendBlocking( [ "list l;for (int i=", NrRows( C ), "; i>=1; i=i-1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }" ] , "need_command", HOMALG_IO.Pictograms.ZeroRows );
-
-                   list_string := homalgSendBlocking( [ "string(l)" ], C, "need_output" );
+                   list_string := homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]; list l;for (int i=", NrRows( C ), "; i>=1; i=i-1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }; string(l)" ] , "need_output", HOMALG_IO.Pictograms.ZeroRows );
 
                    #trying to understand singular's output
                    if list_string = "empty list" or list_string = "emptylist" then
@@ -197,6 +184,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                      
                  end,
                    
+               IsUnit :=	#FIXME: just for polynomial rings(?)
+                 function( R, r )
+		   
+                   return homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "0";
+                   
+                 end,
+               
                DivideByUnit :=
                  function( a, e )
                    local u;
@@ -213,97 +207,6 @@ InstallValue( CommonHomalgTableForSingularTools,
                    fi;
                    
                  end,
-                   
-               GetUnitPosition := #FIXME : just for polynomial rings
-                 function( M, pos_list )
-                   local R, m, n, i, j, str;
-                   
-                   R := HomalgRing( M );
-                   
-                   m := NrRows( M );
-		   n := NrColumns( M );
-		   
-		   for i in [ 1 .. m ] do
-                     for j in [ 1 .. n ] do
-                       if not [ i, j ] in pos_list and not j in pos_list then
-                         str := homalgSendBlocking( [ "deg(", M, "[",j,i,"])" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
-                         if Int(str) = 0 then
-                             return [ i, j ];
-                         fi;
-                       fi;
-                     od;
-                   od;
-     
-                   return fail;
-                     
-                 end,
-                   
-               GetCleanRowsPositions :=
-                 function( M, clean_columns )
-                   local R, one, clean_rows, m, j, i, str;
-                  
-                   R := HomalgRing( M );
-                   one := One( R );
-                   
-                   clean_rows := [ ];
-                   
-                   m := NrRows( M );
-                   
-                   for j in clean_columns do
-                       for i in [ 1 .. m ] do
-                           str := homalgSendBlocking( [ M, "[", j, i, "] == ", one ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
-                           if Int(str) = 1 then
-                               Add( clean_rows, i );
-                               break;
-                           fi;
-                       od;
-                   od;
-                   
-                   return  clean_rows;
-                   
-                 end,
-                   
-                 GetColumnIndependentUnitPositions :=
-                 function( M, pos_list )
-                   local m, n, positions, columns_to_be_checked, found_unit, possible_columns, i, j, str;
-                   m := NrRows( M );
-                   n := NrColumns( M );
-                   positions := [];
-                   possible_columns := [ 1 .. n ];
-                   for i in [ 1..m ] do
-		       columns_to_be_checked := possible_columns;
-		       found_unit := false;
-                       for j in columns_to_be_checked do
-                           if not [ i, j ] in pos_list then
-                               str := homalgSendBlocking( [ "deg(", M, "[", j, i, "])" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions );
-                               if Int( str ) <> -1 then
-                                   possible_columns := Difference( possible_columns, [ j ] );
-			       fi;
-                               if found_unit = false and Int( str ) = 0 then
-                                   found_unit := true;
-                                   Add( positions, [ i, j ] );
-                               fi;
-                           fi;
-                       od;
-		       if found_unit = false then
-                           possible_columns := columns_to_be_checked; #reset if there was no unit in row i
-                       fi;
-                   od;
-                   
-                   return positions;
-                   
-                 end,
-                 
-		   
-                 GetRowIndependentUnitPositions :=
-                 function( MM, pos_list )
-                   local M;
-                   M := HomalgVoidMatrix( NrColumns( MM ), NrRows( MM ), HomalgRing( MM ) );
-                   homalgSendBlocking( [ M, " = transpose(", MM, ")" ], [ "matrix" ], "need_command" );
-                   ResetFilterObj( M, IsVoidMatrix );
-                   return GetColumnIndependentUnitPositions( M, pos_list );
-                   
-               end,
                    
       )
 );

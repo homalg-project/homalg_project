@@ -16,19 +16,21 @@
 
 InstallValue( CommonHomalgTableForSingularDefault,
 
-  rec(               
-  
+  rec(
+    ## Must only then be provided by the RingPackage in case the default
+    ## "service" function does not match the Ring
+    
     DecideZeroRows :=
     function( A, B )
       local R, N;
       R := HomalgRing( A );
       N := HomalgVoidMatrix( R );
-      homalgSendBlocking( [ "matrix ", N, " = reduce(", A, B, ")" ], "need_command" );
+      homalgSendBlocking( [ "matrix ", N, " = reduce(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
       ResetFilterObj( N, IsVoidMatrix );
       return N;
     end,
       
-    DecideZeroRowsEffectively :=
+    DecideZeroRowsEffectively := ## FIXME: this is wrong in general
     function( A, B, T )  
       local R, l, m, n, id, zz, M, TT;
       
@@ -66,10 +68,10 @@ InstallValue( CommonHomalgTableForSingularDefault,
       R := HomalgRing( M );
       N := HomalgVoidMatrix(  R );
       if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-        homalgSendBlocking( [ "matrix ", N, " = syz(", UnionOfRows( M, arg[2] ), ")" ], "need_command" );
+        homalgSendBlocking( [ "matrix ", N, " = syz(", UnionOfRows( M, arg[2] ), ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
 	N := CertainColumns( N, [1.. NrRows( M )] );
       else
-        homalgSendBlocking( [ "matrix ", N, " = syz(", M, ")" ], "need_command" );
+        homalgSendBlocking( [ "matrix ", N, " = syz(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
       fi;
       SetNrColumns( N, NrRows( M ) );
       ResetFilterObj( N, IsVoidMatrix );
@@ -82,7 +84,7 @@ InstallValue( CommonHomalgTableForSingularDefault,
       local R, N;
       R := HomalgRing( M );
       N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
-      homalgSendBlocking( [ "matrix ", N, " = std(", M, ")" ], "need_command" );
+      homalgSendBlocking( [ "matrix ", N, " = std(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
       ResetFilterObj( N, IsVoidMatrix );
       return N;
     end,

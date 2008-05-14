@@ -1,0 +1,98 @@
+               IsZeroMatrix :=
+                 function( M )
+                   homalgSendBlocking( [ "matrix Zero_Matrix[", NrColumns( M ), "][", NrRows( M ), "]" ], "need_command", M, HOMALG_IO.Pictograms.ZeroMatrix );
+                   return homalgSendBlocking( [ M, "==Zero_Matrix" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "1";
+                   
+                 end,
+               
+               GetUnitPosition := #FIXME : just for polynomial rings
+                 function( M, pos_list )
+                   local R, m, n, i, j, str;
+                   
+                   R := HomalgRing( M );
+                   
+                   m := NrRows( M );
+		   n := NrColumns( M );
+		   
+		   for i in [ 1 .. m ] do
+                     for j in [ 1 .. n ] do
+                       if not [ i, j ] in pos_list and not j in pos_list then
+                         str := homalgSendBlocking( [ "deg(", M, "[",j,i,"])" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                         if Int(str) = 0 then
+                             return [ i, j ];
+                         fi;
+                       fi;
+                     od;
+                   od;
+     
+                   return fail;
+                     
+                 end,
+                   
+               GetCleanRowsPositions :=
+                 function( M, clean_columns )
+                   local R, one, clean_rows, m, j, i, str;
+                  
+                   R := HomalgRing( M );
+                   one := One( R );
+                   
+                   clean_rows := [ ];
+                   
+                   m := NrRows( M );
+                   
+                   for j in clean_columns do
+                       for i in [ 1 .. m ] do
+                           str := homalgSendBlocking( [ M, "[", j, i, "] == ", one ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
+                           if Int(str) = 1 then
+                               Add( clean_rows, i );
+                               break;
+                           fi;
+                       od;
+                   od;
+                   
+                   return  clean_rows;
+                   
+                 end,
+                   
+                 GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local m, n, positions, columns_to_be_checked, found_unit, possible_columns, i, j, str;
+                   m := NrRows( M );
+                   n := NrColumns( M );
+                   positions := [];
+                   possible_columns := [ 1 .. n ];
+                   for i in [ 1..m ] do
+		       columns_to_be_checked := possible_columns;
+		       found_unit := false;
+                       for j in columns_to_be_checked do
+                           if not [ i, j ] in pos_list then
+                               str := homalgSendBlocking( [ "deg(", M, "[", j, i, "])" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions );
+                               if Int( str ) <> -1 then
+                                   possible_columns := Difference( possible_columns, [ j ] );
+			       fi;
+                               if found_unit = false and Int( str ) = 0 then
+                                   found_unit := true;
+                                   Add( positions, [ i, j ] );
+                               fi;
+                           fi;
+                       od;
+		       if found_unit = false then
+                           possible_columns := columns_to_be_checked; #reset if there was no unit in row i
+                       fi;
+                   od;
+                   
+                   return positions;
+                   
+                 end,
+                 
+		   
+                 GetRowIndependentUnitPositions :=
+                 function( MM, pos_list )
+                   local M;
+                   M := HomalgVoidMatrix( NrColumns( MM ), NrRows( MM ), HomalgRing( MM ) );
+                   homalgSendBlocking( [ M, " = transpose(", MM, ")" ], [ "matrix" ], "need_command" );
+                   ResetFilterObj( M, IsVoidMatrix );
+                   return GetColumnIndependentUnitPositions( M, pos_list );
+                   
+               end,
+                   

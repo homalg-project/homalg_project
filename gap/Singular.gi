@@ -88,7 +88,7 @@ InstallGlobalFunction( SETRING_Singular,
     
     stream.active_ring := R;
     
-    homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.CreateHomalgRing );
+    homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
     
 end );
 
@@ -194,7 +194,7 @@ InstallMethod( PolynomialRing,
     properties := [ IsCommutative ];
     
     ##K[x] is a principal ideal ring for a field K
-    if Length( var ) = 1 and HasIsFieldForHomalg(R) and IsFieldForHomalg( R ) then
+    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
         Add( properties, IsPrincipalIdealRing );
     fi;
     
@@ -219,12 +219,11 @@ InstallMethod( PolynomialRing,
     ##create the new ring
     ##todo: this creates a block ordering with a new "dp"-block
     if var_of_coeff_ring = [] then
-      ext_obj := homalgSendBlocking( [ c, ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.define );
+      ext_obj := homalgSendBlocking( [ c, ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-      ext_obj := homalgSendBlocking( [ c, ",(", var_of_coeff_ring, var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.define );
+      ext_obj := homalgSendBlocking( [ c, ",(", var_of_coeff_ring, var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
-
-    homalgSendBlocking( ["setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.CreateHomalgRing );
+    homalgSendBlocking( [ "setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
@@ -257,7 +256,7 @@ InstallMethod( RingOfDerivations,
     local properties, r, var_of_coeff_ring, ext_obj, S, v, der, nr_der, var, nr_var, PR;
 
     #check whether base ring is polynomial and then extract needed data
-    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative(R) then
+    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
       var := IndeterminatesOfPolynomialRing( R );
       nr_var := Length( var );
     else
@@ -292,9 +291,9 @@ InstallMethod( RingOfDerivations,
     ##create the new ring in 2 steps: expand polynomial ring with derivatives and then
     ##add the Weyl-structure
     ##todo: this creates a block ordering with a new "dp"-block
-    PR := homalgSendBlocking( [ Characteristic( R ), ",(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.define );
-    ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, properties, PR );
-    homalgSendBlocking( [ "setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.define );
+    PR := homalgSendBlocking( [ Characteristic( R ), ",(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, properties, PR, HOMALG_IO.Pictograms.CreateHomalgRing );
+    homalgSendBlocking( [ "setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
@@ -308,7 +307,7 @@ InstallMethod( RingOfDerivations,
         SetName( v, homalgPointer( v ) );
     od;
     
-    SetCoefficientsRing( S, CoefficientsRing(R) );
+    SetCoefficientsRing( S, CoefficientsRing( R ) );
     SetCharacteristic( S, Characteristic( R ) );
     SetIsCommutative( S, false );
     SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
@@ -338,7 +337,7 @@ InstallMethod( CreateHomalgMatrix,
     local ext_obj;
     
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
-    homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command" ); #added by Simon
+    homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix ); #added by Simon
     
     return HomalgMatrix( ext_obj, r, c, R );
     
