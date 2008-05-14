@@ -33,6 +33,7 @@ InstallValue( HOMALG_IO_Maple,
             eoc_quiet := ":",
             error_stdout := "Error, ",	## a Maple specific
             define := ":=",
+            delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             prompt := "\033[01mmaple>\033[0m ",
             output_prompt := "\033[1;34;47m<maple\033[0m ",
             display_color := "\033[0;34m",
