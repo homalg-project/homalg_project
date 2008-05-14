@@ -31,6 +31,7 @@ InstallValue( HOMALG_IO_Singular,
             break_lists := true,	## a Singular specific
             handle_output := true,	## a Singular specific
             check_output := false,	## a Singular specific looks for newlines without commas
+            setring := SETRING_Singular,## a Singular specific
             define := "=",
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
@@ -74,6 +75,25 @@ BindGlobal( "TheTypeHomalgExternalRingInSingular",
 
 ####################################
 #
+# global functions:
+#
+####################################
+
+##
+InstallGlobalFunction( SETRING_Singular,
+  function( R )
+    local stream;
+    
+    stream := homalgStream( R );
+    
+    stream.active_ring := R;
+    
+    homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+end );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -81,7 +101,7 @@ BindGlobal( "TheTypeHomalgExternalRingInSingular",
 ##
 InstallGlobalFunction( RingForHomalgInSingular,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, stream, o, ar, ext_obj, R;
     
     nargs := Length( arg );
     
@@ -99,8 +119,9 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ##a new Singular-process
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
+	
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\"; LIB \"involut.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
@@ -117,9 +138,13 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
     ##prints output in a compatible format
-    homalgSendBlocking( "short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
-    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    stream.active_ring := R;
+    
+    return R;
     
 end );
 
@@ -162,14 +187,14 @@ InstallMethod( PolynomialRing,
         Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
     fi;
     
-    nr_var := Length( indets );
+    nr_var := Length( var );
     
     c := Characteristic( R );
     
     properties := [ IsCommutative ];
     
     ##K[x] is a principal ideal ring for a field K
-    if Length( var ) = 1 and IsFieldForHomalg( R ) then
+    if Length( var ) = 1 and HasIsFieldForHomalg(R) and IsFieldForHomalg( R ) then
         Add( properties, IsPrincipalIdealRing );
     fi;
     
@@ -188,15 +213,18 @@ InstallMethod( PolynomialRing,
         fi;
     else
       r := R;
+      var_of_coeff_ring := [];
     fi;
 
     ##create the new ring
     ##todo: this creates a block ordering with a new "dp"-block
-    ext_obj := homalgSendBlocking( [ "extendring(", nr_var, var, ",dp)" ], [ HOMALG_IO.Pictograms.define ], TheTypeHomalgExternalRingObjectInSingular, properties, R );
+    if var_of_coeff_ring = [] then
+      ext_obj := homalgSendBlocking( [ c, ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.define );
+    else
+      ext_obj := homalgSendBlocking( [ c, ",(", var_of_coeff_ring, var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.define );
+    fi;
+
     homalgSendBlocking( ["setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.CreateHomalgRing );
-    
-    ##prints output in a compatible format
-    homalgSendBlocking( "short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
@@ -215,6 +243,76 @@ InstallMethod( PolynomialRing,
     SetCharacteristic( S, c );
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( RingOfDerivations,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( R, indets )
+    local properties, r, var_of_coeff_ring, ext_obj, S, v, der, nr_der, var, nr_var, PR;
+
+    #check whether base ring is polynomial and then extract needed data
+    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative(R) then
+      var := IndeterminatesOfPolynomialRing( R );
+      nr_var := Length( var );
+    else
+      Error( "base ring is not a polynomial ring" );
+    fi;
+    
+    ##compute the new indeterminates (the derivatives) for the ring and save them in der
+    if IsString( indets ) and indets <> "" then
+        der := SplitString( indets, "," ); 
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        der := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    nr_der := Length( der );
+    
+    if not(nr_var=nr_der) then
+      Error( "number of indeterminates in base ring does not equal the number of given derivations" );
+    fi;
+    
+    if Intersection2( der , var ) <> [ ] then
+      Error( "the following indeterminates are already elements of the base ring: ", Intersection2( der , var ), "\n" );
+    fi;
+    
+    if not ForAll( var, HasName ) then
+      Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
+    fi;
+    
+    properties := [ ];
+    
+    ##create the new ring in 2 steps: expand polynomial ring with derivatives and then
+    ##add the Weyl-structure
+    ##todo: this creates a block ordering with a new "dp"-block
+    PR := homalgSendBlocking( [ Characteristic( R ), ",(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.define );
+    ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, properties, PR );
+    homalgSendBlocking( [ "setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.define );
+    
+    ##since variables in Singular are stored inside a ring it is necessary to
+    ##map all variables from the to ring to the new one
+    ##todo: kill old ring to reduce memory?
+    homalgSendBlocking( ["imapall(", R, ")" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    der := List( der , a -> HomalgExternalRingElement( a, "Singular", S ) );
+    for v in der do
+        SetName( v, homalgPointer( v ) );
+    od;
+    
+    SetCoefficientsRing( S, CoefficientsRing(R) );
+    SetCharacteristic( S, Characteristic( R ) );
+    SetIsCommutative( S, false );
+    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
     
     return S;
     
