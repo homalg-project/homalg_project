@@ -126,7 +126,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "mohamed.barakat@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
     PostalAddress := Concatenation( [
                        "Mohamed Barakat\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -136,13 +136,29 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec( 
+  rec(
+    LastName      := "Breuer",
+    FirstNames    := "Thomas",
+    IsAuthor      := false,
+    IsMaintainer  := false,
+    Email         := "sam@math.rwth-aachen.de",
+    WWWHome       := "http://www.math.rwth-aachen.de/~Thomas.Breuer/",
+    PostalAddress := Concatenation( [
+                       "Thomas Breuer\n",
+                       "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
     LastName      := "Görtzen",
     FirstNames    := "Simon",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon/",
     PostalAddress := Concatenation( [
                        "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -152,13 +168,29 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec( 
+  rec(
+    LastName      := "Lübeck",
+    FirstNames    := "Frank",
+    IsAuthor      := false,
+    IsMaintainer  := false,
+    Email         := "frank.luebeck@@math.rwth-aachen.de",
+    WWWHome       := "http://www.math.rwth-aachen.de/~Frank.Luebeck/",
+    PostalAddress := Concatenation( [
+                       "Frank Lübeck\n",
+                       "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
     LastName      := "Neunhöffer",
     FirstNames    := "Max",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://www-groups.mcs.st-and.ac.uk/~neunhoef",
+    WWWHome       := "http://www-groups.mcs.st-and.ac.uk/~neunhoef/",
     PostalAddress := Concatenation( [
                        "Max Neunhöffer\n",
                        "School of Mathematics and Statistics \n",
@@ -169,13 +201,13 @@ Persons := [
     Place         := "St Andrews",
     Institution   := "St Andrews University"
   ),
-  rec( 
+  rec(
     LastName      := "Robertz",
     FirstNames    := "Daniel",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "daniel@momo.math.rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel/",
     PostalAddress := Concatenation( [
                        "Daniel Robertz\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -297,7 +329,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2008.05.13"], ["IO", ">= 2.3"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2008.05.14"], ["IO", ">= 2.3"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -339,6 +371,10 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
+  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+        " (", ~.Persons[5].WWWHome, ")\n",
+  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
+        " (", ~.Persons[6].WWWHome, ")\n",
   "For help, type: ?IO_ForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 

@@ -14,6 +14,10 @@
 #
 ####################################
 
+DeclareGlobalFunction( "homalgFlush" );
+
+DeclareGlobalFunction( "_SetElmWPObj_ForHomalg" );
+
 DeclareGlobalFunction( "homalgCreateStringForExternalCASystem" );
 
 DeclareGlobalFunction( "homalgSendBlocking" ); ## this name was implicitly suggested by Max Neunhöffer ;)

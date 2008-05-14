@@ -35,6 +35,7 @@ InstallValue( HOMALG_IO,
                 ## good morning computer algebra system:
                 initialize				:= "ini",	## initialize
                 define					:= "def",	## define macros
+                delete					:= "xxx",	## define macros
                 
                 ## create rings:
                 CreateHomalgRing			:= "R:=",	## define a ring

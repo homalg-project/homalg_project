@@ -295,7 +295,9 @@ InstallGlobalFunction( LaunchCAS,
        and IsBound( s.display_color ) then
         s.color_display := s.display_color;
     fi;
-        
+    
+    s.homalgExternalObjectsPointingToVariables := ContainerForWeakPointersOnHomalgExternalObjects( );
+    
     SendBlockingToCAS( s, "\n" );
     
     return s;
