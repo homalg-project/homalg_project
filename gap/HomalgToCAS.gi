@@ -216,6 +216,14 @@ InstallGlobalFunction( homalgSendBlocking,
     fi;
     
     if IsBound( R ) then
+        
+        if IsBound( stream.active_ring )
+           and not IsIdenticalObj( R, stream.active_ring )
+           and IsBound( stream.setring )
+           and IsFunction( stream.setring ) then
+            stream.setring( R );
+        fi;
+        
         RP := homalgTable( R );
         
         if IsBound(RP!.homalgSendBlocking) then
