@@ -22,6 +22,8 @@ DeclareGlobalVariable( "HOMALG_IO_GAP" );
 #
 ####################################
 
+DeclareGlobalFunction( "_ExternalGAP_multiple_delete" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInExternalGAP" );

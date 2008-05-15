@@ -122,13 +122,13 @@ ArchiveFormats := ".tar.gz",
 ##     )
 ##  
 Persons := [
-  rec( 
+  rec(
     LastName      := "Barakat",
     FirstNames    := "Mohamed",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "mohamed.barakat@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
     PostalAddress := Concatenation( [
                        "Mohamed Barakat\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -138,13 +138,13 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec( 
+  rec(
     LastName      := "Görtzen",
     FirstNames    := "Simon",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon/",
     PostalAddress := Concatenation( [
                        "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -154,7 +154,7 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec( 
+  rec(
     LastName      := "Kirschmer",
     FirstNames    := "Markus",
     IsAuthor      := true,
@@ -170,7 +170,7 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec( 
+  rec(
     LastName      := "Lange-Hegermann",
     FirstNames    := "Markus",
     IsAuthor      := true,
@@ -186,13 +186,13 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec( 
+  rec(
     LastName      := "Neunhöffer",
     FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://www-groups.mcs.st-and.ac.uk/~neunhoef",
+    WWWHome       := "http://www-groups.mcs.st-and.ac.uk/~neunhoef/",
     PostalAddress := Concatenation( [
                        "Max Neunhöffer\n",
                        "School of Mathematics and Statistics \n",
@@ -203,13 +203,13 @@ Persons := [
     Place         := "St Andrews",
     Institution   := "St Andrews University"
   ),
-  rec( 
+  rec(
     LastName      := "Robertz",
     FirstNames    := "Daniel",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "daniel@momo.math.rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel/",
     PostalAddress := Concatenation( [
                        "Daniel Robertz\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",

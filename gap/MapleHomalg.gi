@@ -34,6 +34,8 @@ InstallValue( HOMALG_IO_Maple,
             error_stdout := "Error, ",	## a Maple specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            multiple_delete := _Maple_multiple_delete,
+            garbage_collector := function( stream ) homalgSendBlocking( [ "gc()" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
             prompt := "\033[01mmaple>\033[0m ",
             output_prompt := "\033[1;34;47m<maple\033[0m ",
             display_color := "\033[0;34m",
@@ -137,6 +139,23 @@ InstallMethod( homalgLaTeX,
         
     fi;
 
+end );
+
+####################################
+#
+# global functions:
+#
+####################################
+
+##
+InstallGlobalFunction( _Maple_multiple_delete,
+  function( var_list, stream )
+    local str;
+    
+    str := [ "for _del in ", String( var_list ), " do unassign(convert(_del,symbol)) od" ];
+    
+    homalgSendBlocking( str, "need_command", stream, HOMALG_IO.Pictograms.multiple_delete );
+    
 end );
 
 ####################################

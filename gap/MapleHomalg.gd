@@ -22,6 +22,8 @@ DeclareGlobalVariable( "HOMALG_IO_Maple" );
 #
 ####################################
 
+DeclareGlobalFunction( "_Maple_multiple_delete" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInMapleUsingPIR" );

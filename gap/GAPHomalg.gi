@@ -28,6 +28,8 @@ InstallValue( HOMALG_IO_GAP,
             eoc_quiet := ";;",
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "Unbind( ", var, " )" ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            multiple_delete := _ExternalGAP_multiple_delete,
+            garbage_collector := function( stream ) homalgSendBlocking( [ "GASMAN( \"collect\" )" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
             prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",           
@@ -67,6 +69,23 @@ BindGlobal( "TheTypeHomalgExternalRingObjectInGAP",
 BindGlobal( "TheTypeHomalgExternalRingInGAP",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInGAPRep ) );
+
+####################################
+#
+# global functions:
+#
+####################################
+
+##
+InstallGlobalFunction( _ExternalGAP_multiple_delete,
+  function( var_list, stream )
+    local str;
+    
+    str := [ "for _del in ", String( var_list ), " do UnbindGlobal( _del ); od" ];
+    
+    homalgSendBlocking( str, "need_command", stream, HOMALG_IO.Pictograms.multiple_delete );
+    
+end );
 
 ####################################
 #
