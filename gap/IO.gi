@@ -296,6 +296,13 @@ InstallGlobalFunction( LaunchCAS,
         s.color_display := s.display_color;
     fi;
     
+    s.HomalgExternalVariableCounter := 0;
+    s.HomalgExternalCommandCounter := 0;
+    s.HomalgExternalOutputCounter := 0;
+    s.HomalgExternalCallCounter := 0;
+    s.HomalgBackStreamMaximumLength := 0;
+    s.HomalgExternalWarningsCounter := 0;
+    
     s.homalgExternalObjectsPointingToVariables := ContainerForWeakPointersOnHomalgExternalObjects( );
     
     SendBlockingToCAS( s, "\n" );

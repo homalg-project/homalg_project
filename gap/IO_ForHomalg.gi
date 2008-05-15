@@ -99,6 +99,7 @@ InstallValue( HOMALG_IO,
                 ConvertMatrixToRow			:= "A%-",	## convert a matrix into a single row matrix
                 ConvertColumnToMatrix			:= "A%|",	## convert a matrix into a single column matrix
                 IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal (needed by the display method)
+                TransposedMatrix			:= "^tr",	## transposed matrix
                 GetUnitPosition				:= "gup",	## get the position of the "first" unit in the matrix (needed by SimplerEquivalentMatrix)
                 GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one (needed by SimplerEquivalentMatrix)
                 GetColumnIndependentUnitPositions	:= "ciu",	## get "column-independent" unit positions (needed by ReducedBasisOfModule)

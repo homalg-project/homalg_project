@@ -17,7 +17,7 @@
 ##
 InstallGlobalFunction( homalgFlush,
   function( o )
-    local stream, container, weak_pointers, homalg_pointers, l, obsolete, var, v;
+    local stream, container, weak_pointers, l, deleted, var, v;
     
     GASMAN( "collect" );
     
@@ -30,50 +30,52 @@ InstallGlobalFunction( homalgFlush,
     container := stream.homalgExternalObjectsPointingToVariables;
     
     weak_pointers := container!.weak_pointers;
-    homalg_pointers := container!.homalg_pointers;
     
-    l := Length( homalg_pointers );
-    
-    obsolete := homalg_pointers{ Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) ) };
-    
-    var := Difference( obsolete, container!.obsolete );
+    l := container!.homalg_variable_counter;
     
     if IsBound( stream.delete ) then
+        
+        deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+        var := Difference( deleted, container!.deleted );
+        
         for v in var do
             stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
         od;
+        
+        container!.deleted := deleted;
+        
     fi;
-    
-    container!.obsolete := obsolete;
     
 end );
 
 ##
 InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush for performance reasons
-  function( stream, counter, ext_obj )
-    local container, weak_pointers, homalg_pointers, l, obsolete, var, v;
+  function( stream, ext_obj )
+    local container, weak_pointers, l, deleted, var, v;
     
     container := stream.homalgExternalObjectsPointingToVariables;
     
     weak_pointers := container!.weak_pointers;
-    homalg_pointers := container!.homalg_pointers;
     
-    l := Length( homalg_pointers ) + 1;
+    l := container!.homalg_variable_counter + 1;
+    container!.homalg_variable_counter := l;
     
     SetElmWPObj( weak_pointers, l, ext_obj );
-    Add( homalg_pointers, counter );
-    
-    obsolete := homalg_pointers{ Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) ) };
-    
-    var := Difference( obsolete, container!.obsolete );
     
     if IsBound( stream.delete ) then
+        
+        deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+        var := Difference( deleted, container!.deleted );
+        
         for v in var do
             stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
         od;
+        
+        container!.deleted := deleted;
+        
     fi;
-    
-    container!.obsolete := obsolete;
     
 end );
 
@@ -124,7 +126,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          t := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
                                          MakeImmutable( t );
                                          SetEval( L[a], homalgExternalObject( t, CAS, stream ) ); ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
-                                         _SetElmWPObj_ForHomalg( stream, stream.HomalgExternalVariableCounter, Eval( L[a] ) );
+                                         _SetElmWPObj_ForHomalg( stream, Eval( L[a] ) );
                                          ResetFilterObj( L[a], IsVoidMatrix );
                                      fi;
                                  elif break_lists and IsList( L[a] ) and not IsStringRep( L[a] ) then
@@ -154,7 +156,7 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, io_info_level, info_level, properties,
           need_command, need_display, need_output, ar, pictogram, option,
           break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS,
-          PID, homalg_variable, counter, l, eoc, enter, fs, max, display_color;
+          PID, homalg_variable, l, eoc, enter, fs, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -298,28 +300,6 @@ InstallGlobalFunction( homalgSendBlocking,
     CAS := homalgExternalCASystem( ext_obj );
     PID := homalgExternalCASystemPID( ext_obj );
     
-    if not IsBound( stream.HomalgExternalVariableCounter ) then
-        
-        stream.HomalgExternalVariableCounter := 0;
-        stream.HomalgExternalCommandCounter := 0;
-        stream.HomalgExternalOutputCounter := 0;
-        stream.HomalgExternalCallCounter := 0;
-        stream.HomalgBackStreamMaximumLength := 0;
-        stream.HomalgExternalWarningsCounter := 0;
-        
-    fi;
-    
-    if not IsBound( option ) then
-        ## since stream.HomalgExternalVariableCounter might
-        ## change its value through side effects caused by
-        ## calling homalgCreateStringForExternalCASystem, we
-        ## need to protect the current value in counter:
-        counter := stream.HomalgExternalVariableCounter + 1;
-        stream.HomalgExternalVariableCounter := counter;	## never interchange this line with the next one
-        homalg_variable := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
-        MakeImmutable( homalg_variable );
-    fi;
-    
     if not IsBound( break_lists ) then
         break_lists := "do_not_break_lists";
     fi;
@@ -362,6 +342,10 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsBound( option ) then
         
+        stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;	## never interchange this line with the next one
+        homalg_variable := Concatenation( "homalg_variable_", String( stream.HomalgExternalVariableCounter ) );
+        MakeImmutable( homalg_variable );
+        
         if IsBound( prefix ) then
             if IsBound( suffix ) then
                 L := Concatenation( prefix, homalg_variable, suffix, " ", stream.define, " ", L, eoc, enter );
@@ -388,10 +372,6 @@ InstallGlobalFunction( homalgSendBlocking,
     fi;
     
     ConvertToStringRep( L );
-    
-    if IsBound( HOMALG_IO.homalgSendBlocking ) then
-        Add( HOMALG_IO.homalgSendBlocking, L );
-    fi;
     
     if ( IsBound( HOMALG_IO.CAS_commands_file ) and HOMALG_IO.CAS_commands_file = true )
        or IsBound( stream.CAS_commands_file ) then
@@ -463,7 +443,7 @@ InstallGlobalFunction( homalgSendBlocking,
             od;
         fi;
         
-        _SetElmWPObj_ForHomalg( stream, counter, L );
+        _SetElmWPObj_ForHomalg( stream, L );	## this relies on the feature, that homalgExternalObjects are now assigned homalg_variables strictly sequentially!!!
         
         return L;
         
