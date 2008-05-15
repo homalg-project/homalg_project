@@ -28,6 +28,11 @@ DeclareRepresentation( "IsHomalgExternalRingElementRep",
         IshomalgExternalObjectRep and IsHomalgExternalRingElement,
         [ "object", "cas" ] );
 
+# a new representation for the category IsContainerForWeakPointersOnHomalgExternalRings:
+DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalRingsRep",
+        IsContainerForWeakPointersOnHomalgExternalRings,
+        [ "weak_pointers", "streams", "counter", "deleted" ] );
+
 ####################################
 #
 # families and types:
@@ -62,6 +67,15 @@ BindGlobal( "TheTypeHomalgExternalRingElement",
 BindGlobal( "TheTypeHomalgExternalRingElementWithIOStream",
         NewType( TheFamilyOfHomalgExternalRingElementsWithIOStream,
                 IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ) );
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOnHomalgExternalRings",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOnHomalgExternalRings" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOnHomalgExternalRings",
+        NewType( TheFamilyOfContainersForWeakPointersOnHomalgExternalRings,
+                IsContainerForWeakPointersOnHomalgExternalRingsRep ) );
 
 ####################################
 #
@@ -510,10 +524,31 @@ end );
 #
 ####################################
 
+InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalRings,
+  function( arg )
+    local container, type;
+    
+    container := rec( weak_pointers := WeakPointerObj( [ ] ),
+                      streams := [ ],
+                      counter := 0,
+                      deleted := [ ] );
+    
+    type := TheTypeContainerForWeakPointersOnHomalgExternalRings;
+    
+    ## Objectify:
+    Objectify( type, container );
+    
+    return container;
+    
+end );
+
+HOMALG.ContainerForWeakPointersOnHomalgExternalRings := ContainerForWeakPointersOnHomalgExternalRings( );
+
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, r, homalg_ring, table, properties, ar, type, c, el;
+    local nargs, r, homalg_ring, table, properties, ar, type, c, el,
+          container, weak_pointers, l, deleted;
     
     nargs := Length( arg );
     
@@ -587,6 +622,27 @@ InstallGlobalFunction( CreateHomalgRing,
     
     homalg_ring!.ZeroLeftModule := HomalgZeroLeftModule( homalg_ring );
     homalg_ring!.ZeroRightModule := HomalgZeroRightModule( homalg_ring );
+    
+    if IsHomalgExternalRingRep( homalg_ring ) then
+        
+        container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
+        
+        weak_pointers := container!.weak_pointers;
+        
+        l := container!.counter + 1;
+        container!.counter := l;
+        
+	Add( container!.streams, homalgStream( homalg_ring ) );
+	
+	container!.streams := DuplicateFreeList( container!.streams );
+	
+        SetElmWPObj( container!.weak_pointers, l, homalg_ring );
+        
+        deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+        container!.deleted := deleted;
+        
+    fi;
     
     return homalg_ring;
     
@@ -745,6 +801,32 @@ InstallMethod( ViewObj,
     
     Print( "<A homalg external ring element for the CAS " );
     Print( homalgExternalCASystem( o ), ">" );
+    
+end );
+
+InstallMethod( ViewObj,
+        "for containers of weak pointers to homalg external rings",
+        [ IsContainerForWeakPointersOnHomalgExternalRingsRep ],
+        
+  function( o )
+    local del;
+    
+    del := Length( o!.deleted );
+    
+    Print( "<A container of weak pointers to homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ">" );
+    
+end );
+
+InstallMethod( Display,
+        "for containers of weak pointers to homalg external rings",
+        [ IsContainerForWeakPointersOnHomalgExternalRingsRep ],
+        
+  function( o )
+    local weak_pointers;
+    
+    weak_pointers := o!.weak_pointers;
+    
+    Print( List( [ 1 .. LengthWPObj( weak_pointers ) ], function( i ) if IsBoundElmWPObj( weak_pointers, i ) then return i; else return 0; fi; end ), "\n" );
     
 end );
 

@@ -53,7 +53,7 @@ DeclareOperation( "homalgNrOfWarnings",
 
 # constructor methods:
 
-DeclareGlobalFunction( "homalgExternalObject" );
-
 DeclareGlobalFunction( "ContainerForWeakPointersOnHomalgExternalObjects" );
+
+DeclareGlobalFunction( "homalgExternalObject" );
 

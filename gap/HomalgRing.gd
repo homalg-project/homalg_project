@@ -29,6 +29,9 @@ DeclareCategory( "IsHomalgExternalRingElement",
         and IsAdditivelyCommutativeElement
         and IshomalgExternalObject );
 
+DeclareCategory( "IsContainerForWeakPointersOnHomalgExternalRings",
+        IsComponentObjectRep );
+
 ####################################
 #
 # global variables:
@@ -133,6 +136,18 @@ DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
 DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
         IsHomalgRing );
 
+## minus one:
+DeclareAttribute( "LeftGlobalDimension",
+        IsHomalgRing );
+
+## minus one:
+DeclareAttribute( "RightGlobalDimension",
+        IsHomalgRing );
+
+## minus one:
+DeclareAttribute( "GlobalDimension",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:
@@ -196,6 +211,8 @@ DeclareOperation( "homalgSetName",
         [ IsHomalgExternalRingElement, IsString, IsHomalgRing ] );
 
 # constructor methods:
+
+DeclareGlobalFunction( "ContainerForWeakPointersOnHomalgExternalRings" );
 
 DeclareGlobalFunction( "CreateHomalgRing" );
 

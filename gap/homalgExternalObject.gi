@@ -27,7 +27,7 @@ DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
 # a new representation for the category IsContainerForWeakPointersOnHomalgExternalObjects:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalObjectsRep",
         IsContainerForWeakPointersOnHomalgExternalObjects,
-        [ "weak_pointers", "deleted" ] );
+        [ "weak_pointers", "counter", "deleted" ] );
 
 ####################################
 #
@@ -201,6 +201,23 @@ end );
 #
 ####################################
 
+InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalObjects,
+  function( arg )
+    local container, type;
+    
+    container := rec( weak_pointers := WeakPointerObj( [ ] ),
+                      counter := 0,
+                      deleted := [ ] );
+    
+    type := TheTypeContainerForWeakPointersOnHomalgExternalObjects;
+    
+    ## Objectify:
+    Objectify( type, container );
+    
+    return container;
+    
+end );
+
 InstallGlobalFunction( homalgExternalObject,
   function( arg )
     local nargs, properties, ar, stream, obj, type;
@@ -248,23 +265,6 @@ InstallGlobalFunction( homalgExternalObject,
     
 end );
 
-InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalObjects,
-  function( arg )
-    local container, type;
-    
-    container := rec( weak_pointers := WeakPointerObj( [ ] ),
-                      homalg_variable_counter := 0,
-                      deleted := [ ] );
-    
-    type := TheTypeContainerForWeakPointersOnHomalgExternalObjects;
-    
-    ## Objectify:
-    Objectify( type, container );
-    
-    return container;
-    
-end );
-
 ####################################
 #
 # View, Print, and Display methods:
@@ -301,7 +301,7 @@ InstallMethod( ViewObj,
     
     del := Length( o!.deleted );
     
-    Print( "<A container of weak pointers to homalg external objects: active = ", o!.homalg_variable_counter - del, ", deleted = ", del, ">" );
+    Print( "<A container of weak pointers to homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ">" );
     
 end );
 
