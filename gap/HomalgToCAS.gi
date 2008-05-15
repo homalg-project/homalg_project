@@ -16,34 +16,108 @@
 
 ##
 InstallGlobalFunction( homalgFlush,
-  function( o )
-    local stream, container, weak_pointers, l, deleted, var, v;
+  function( arg )
+    local nargs, stream, container, weak_pointers, l, i, deleted, var, v,
+          pids, streams;
     
+    ## the internal garbage collector:
     GASMAN( "collect" );
     
-    if IsRecord( o ) then
-        stream := o;
-    else
-        stream := homalgStream( o );
-    fi;
+    nargs := Length( arg );
     
-    container := stream.homalgExternalObjectsPointingToVariables;
-    
-    weak_pointers := container!.weak_pointers;
-    
-    l := container!.homalg_variable_counter;
-    
-    if IsBound( stream.delete ) then
+    if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
+        
+        container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
+        
+        weak_pointers := container!.weak_pointers;
+        
+        l := container!.counter;
+        
+        for i in [ 1 .. l ] do
+            if IsBoundElmWPObj( weak_pointers, i ) then
+                homalgFlush( weak_pointers[i] );
+            fi;
+        od;
+        
+        deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+        container!.deleted := deleted;
+        
+        if IsBound( HOMALG_IO.InformAboutCASystemsWithoutActiveRings )
+           and HOMALG_IO.InformAboutCASystemsWithoutActiveRings = true then
+            
+            pids := [ ];
+            
+            for i in [ 1 .. l ] do
+                if IsBoundElmWPObj( weak_pointers, i ) then
+                    Add( pids, homalgExternalCASystemPID( weak_pointers[i] ) );
+                fi;
+            od;
+            
+            pids := DuplicateFreeList( pids );
+            
+            streams := container!.streams;
+            
+            l := Length( streams );
+            
+            deleted := [ ];
+            
+            for i in [ 1 .. l ] do
+                if not streams[i].pid in pids then
+                    Add( deleted, streams[i].pid );
+                fi;
+            od;
+            
+            if deleted <> [ ] then
+                Print( "the external CASs with pids ", deleted, " have no active rings: they can be terminated by launching TerminateCAS()\n" );
+            fi;
+            
+        fi;
+        
+    elif nargs > 0 then
+        
+        if IsRecord( arg[1] ) then
+            stream := arg[1];
+        else
+            stream := homalgStream( arg[1] );
+        fi;
+        
+        container := stream.homalgExternalObjectsPointingToVariables;
+        
+        weak_pointers := container!.weak_pointers;
+        
+        l := container!.counter;
         
         deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
         
         var := Difference( deleted, container!.deleted );
         
-        for v in var do
-            stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
-        od;
+        l := Length( var );
         
-        container!.deleted := deleted;
+        if IsBound( stream.multiple_delete ) and ( l > 1 or not IsBound( stream.delete ) ) then
+            
+            stream.multiple_delete( List( var, v -> Concatenation( "homalg_variable_", String( v ) ) ), stream );
+            
+            container!.deleted := deleted;
+            
+        elif IsBound( stream.delete ) and l > 0 then
+            
+            for v in var do
+                stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
+            od;
+            
+            container!.deleted := deleted;
+            
+        fi;
+        
+        if IsBound( stream.garbage_collector ) then
+            
+            ## the external garbage collector:
+            stream.garbage_collector( stream );
+            
+            Print( "completed garbage collection in the external CAS ", stream.name, " with pid ", stream.pid, "\n" );
+            
+        fi;
         
     fi;
     
@@ -58,16 +132,28 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     weak_pointers := container!.weak_pointers;
     
-    l := container!.homalg_variable_counter + 1;
-    container!.homalg_variable_counter := l;
+    l := container!.counter + 1;
+    container!.counter := l;
+    
+    if not Concatenation( "homalg_variable_", String( l ) ) = homalgPointer( ext_obj ) then
+        Error( "\033[01m\033[5;31;47mexpecting an external object with pointer = ", Concatenation( "homalg_variable_", String( l ) ), "but recieved one with pointer = ", homalgPointer( ext_obj ), "\033[0m" );
+    fi;
     
     SetElmWPObj( weak_pointers, l, ext_obj );
     
-    if IsBound( stream.delete ) then
+    deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+    
+    var := Difference( deleted, container!.deleted );
+    
+    l := Length( var );
+    
+    if IsBound( stream.multiple_delete ) and ( l > 1 or not IsBound( stream.delete ) ) then
         
-        deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        stream.multiple_delete( List( var, v -> Concatenation( "homalg_variable_", String( v ) ) ), stream );
         
-        var := Difference( deleted, container!.deleted );
+        container!.deleted := deleted;
+        
+    elif IsBound( stream.delete ) and l > 0 then
         
         for v in var do
             stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
@@ -76,6 +162,8 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
         container!.deleted := deleted;
         
     fi;
+    
+    ## never call the external garbage collector in this procedure
     
 end );
 

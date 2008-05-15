@@ -18,6 +18,7 @@
 
 InstallValue( HOMALG_IO,
         rec(
+            InformAboutCASystemsWithoutActiveRings := true,
             SaveHomalgMaximumBackStream := false,
             color_display := false,
             DirectoryForTemporaryFiles := "./",
@@ -35,7 +36,11 @@ InstallValue( HOMALG_IO,
                 ## good morning computer algebra system:
                 initialize				:= "ini",	## initialize
                 define					:= "def",	## define macros
-                delete					:= "xxx",	## define macros
+                
+                ## don't add more weight than necessary:
+                delete					:= "xxx",	## delete a variable
+                multiple_delete				:= "XXX",	## delete serveral variables
+                garbage_collector			:= "grb",	## trigger the garbage collector
                 
                 ## create rings:
                 CreateHomalgRing			:= "R:=",	## define a ring

@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  IO.gi                     IO_ForHomalg package           Max Neunhoeffer
+##                                                           Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -17,20 +18,59 @@
 ##
 InstallGlobalFunction( TerminateCAS,
   function( arg )
-    local s;
+    local nargs, container, weak_pointers, l, pids, i, streams, s;
     
-    if IsRecord( arg[1] ) and IsBound( arg[1].lines ) and IsBound( arg[1].pid ) then
-        s := arg[1];
-    else
-        s := homalgStream( arg[1] );
+    nargs := Length( arg );
+    
+    if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
+	
+        container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
+        
+        weak_pointers := container!.weak_pointers;
+        
+        l := container!.counter;
+        
+        pids := [ ];
+        
+        for i in [ 1 .. l ] do
+            if IsBoundElmWPObj( weak_pointers, i ) then
+                Add( pids, homalgExternalCASystemPID( weak_pointers[i] ) );
+            fi;
+        od;
+        
+        pids := DuplicateFreeList( pids );
+        
+        streams := container!.streams;
+        
+        l := Length( streams );
+        
+        for i in [ 1 .. l ] do
+            if not streams[i].pid in pids then
+                TerminateCAS( streams[i] );
+                Unbind( streams[i] );
+            fi;
+        od;
+        
+        container!.streams := DuplicateFreeList( streams );
+        
+    elif nargs > 0 then
+        
+        if IsRecord( arg[1] ) and IsBound( arg[1].lines ) and IsBound( arg[1].pid ) then
+            s := arg[1];
+        else
+            s := homalgStream( arg[1] );
+        fi;
+        
+        IO_Close( s.stdin );
+        IO_Close( s.stdout );
+        IO_Close( s.stderr );
+        s.stdin := fail;
+        s.stdout := fail;
+        s.stderr := fail;
+        
+        Print( "terminated the external CAS ", s.name, " with pid ", s.pid, "\n" );
+        
     fi;
-    
-    IO_Close( s.stdin );
-    IO_Close( s.stdout );
-    IO_Close( s.stderr );
-    s.stdin := fail;
-    s.stdout := fail;
-    s.stderr := fail;
     
 end );
 
