@@ -51,7 +51,19 @@ InstallGlobalFunction( TerminateCAS,
             fi;
         od;
         
-        container!.streams := DuplicateFreeList( streams );
+        ## don't replace the following by DuplicateFreeList since
+        ## it runs into a "no method found"-error when comparing subobjects:
+        pids := [ ];
+        l := [ ];
+        
+        for s in streams do
+            if not s.pid in pids then
+                Add( l, s );
+                Add( pids, s.pid );
+            fi;
+        od;
+        
+        container!.streams := l;
         
     elif nargs > 0 then
         

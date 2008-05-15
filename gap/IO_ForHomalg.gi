@@ -29,6 +29,7 @@ InstallValue( HOMALG_IO,
             PID := IO_getpid(),
             CAS_commands_file := false,
             Pictograms := rec(
+                
                 ## colors:
                 color_need_command		:= "\033[1;33;44m",	## pictogram color of a "need_command" or assignment operation
                 color_need_output		:= "\033[1;34;43m",	## pictogram color of a "need_output" or "need_display" operation
@@ -51,6 +52,7 @@ InstallValue( HOMALG_IO,
                 
                 ## mandatory ring operations:
                 homalgSetName				:= "\"a\"",	## get the name of an element (important if the CAS pretty-prints ring elements, we need names that can be used as input!)
+									## (install a method instead of a homalgTable entry)
                 IsZero					:= "a=0",	## a = 0 ?
                 IsOne					:= "a=1",	## a = 1 ?
                 Minus					:= "a-b",	## substract two ring elements (also needed by SimplerEquivalentMatrix)
@@ -77,9 +79,9 @@ InstallValue( HOMALG_IO,
                 sparse					:= "spr",	## assign a "sparse" list of matrix entries to a variable
                 
                 ## mandatory matrix operations:
-                IsZeroMatrix				:= "A=0",	## test if a matrix is the zero matrix
                 ZeroMatrix				:= "(0)",	## create a zero matrix
                 IdentityMatrix				:= "(1)",	## create an identity matrix                                     
+                AreEqualMatrices			:= "A=B",	## test if two matrices are equal	(CAUTION: the external system must be able to check equality modulo possible ring relations!)
                 Involution				:= "A^*",	## "transpose" a matrix (with "the" involution of the ring)
                 CertainRows				:= "===",	## get certain rows of a matrix
                 CertainColumns				:= "|||",	## get certain columns of a matrix
@@ -96,14 +98,15 @@ InstallValue( HOMALG_IO,
                 
                 ## important matrix operations:
                 ## (important for performance since existing fall-back methods cause a lot of traffic):
+                IsZeroMatrix				:= "A=0",	## test if a matrix is the zero matrix	(CAUTION: the external system must be able to check equality modulo possible ring relations!)
+                IsIdentityMatrix			:= "A=1",	## test if a matrix is the identity matrix
+                IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal (needed by the display method)
                 ZeroRows				:= "0==",	## get the positions of the zero rows
                 ZeroColumns				:= "0||",	## get the positions of the zero columns
-                AreEqualMatrices			:= "A=B",	## test if two matrices are equal
                 ConvertRowToMatrix			:= "-%A",	## convert a single row matrix into a matrix with specified number of rows/columns
                 ConvertColumnToMatrix			:= "|%A",	## convert a single column matrix into a matrix with specified number of rows/columns
                 ConvertMatrixToRow			:= "A%-",	## convert a matrix into a single row matrix
-                ConvertColumnToMatrix			:= "A%|",	## convert a matrix into a single column matrix
-                IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal (needed by the display method)
+                ConvertMatrixToColumn			:= "A%|",	## convert a matrix into a single column matrix
                 TransposedMatrix			:= "^tr",	## transposed matrix
                 GetUnitPosition				:= "gup",	## get the position of the "first" unit in the matrix (needed by SimplerEquivalentMatrix)
                 GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one (needed by SimplerEquivalentMatrix)
@@ -126,6 +129,7 @@ InstallValue( HOMALG_IO,
                 ## for the eye:
                 Display					:= "dsp",	## display whatever you want ;)
                 homalgLaTeX				:= "TeX",	## the LaTeX code of the mathematical entity
+                
               )
            )
 );
