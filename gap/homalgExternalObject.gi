@@ -27,7 +27,7 @@ DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
 # a new representation for the category IsContainerForWeakPointersOnHomalgExternalObjects:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalObjectsRep",
         IsContainerForWeakPointersOnHomalgExternalObjects,
-        [ "weak_pointers", "homalg_pointers", "obsolete" ] );
+        [ "weak_pointers", "deleted" ] );
 
 ####################################
 #
@@ -253,8 +253,8 @@ InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalObjects,
     local container, type;
     
     container := rec( weak_pointers := WeakPointerObj( [ ] ),
-                      homalg_pointers := [ ],
-		      obsolete := [ ] );
+                      homalg_variable_counter := 0,
+                      deleted := [ ] );
     
     type := TheTypeContainerForWeakPointersOnHomalgExternalObjects;
     
@@ -299,9 +299,9 @@ InstallMethod( ViewObj,
   function( o )
     local del;
     
-    del := Length( o!.obsolete );
+    del := Length( o!.deleted );
     
-    Print( "<A container of weak pointers to homalg external objects: active = ", Length( o!.homalg_pointers ) - del, ", deleted = ", del, ">" );
+    Print( "<A container of weak pointers to homalg external objects: active = ", o!.homalg_variable_counter - del, ", deleted = ", del, ">" );
     
 end );
 
