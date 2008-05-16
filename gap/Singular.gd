@@ -30,11 +30,15 @@ DeclareGlobalVariable( "HOMALG_IO_Singular" );
 
 DeclareGlobalFunction( "SETRING_Singular" );
 
+DeclareGlobalFunction( "_Singular_multiple_delete" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInSingular" );
 
 DeclareGlobalFunction( "HomalgFieldOfRationalsInSingular" );
+
+DeclareGlobalFunction( "HomalgFieldOfPrimeOrderInSingular" );
 
 # basic operations:
 

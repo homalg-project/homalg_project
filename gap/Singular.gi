@@ -32,6 +32,7 @@ InstallValue( HOMALG_IO_Singular,
             handle_output := true,	## a Singular specific
             check_output := false,	## a Singular specific looks for newlines without commas
             setring := SETRING_Singular,## a Singular specific
+            multiple_delete := _Singular_multiple_delete,
             define := "=",
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
@@ -89,6 +90,21 @@ InstallGlobalFunction( SETRING_Singular,
     stream.active_ring := R;
     
     homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+end );
+
+##
+InstallGlobalFunction( _Singular_multiple_delete,
+  function( var_list, stream )
+    local str, var;
+    
+    str:="";
+    
+    for var in var_list do
+      str := Concatenation( str, "kill ", String ( var ) , ";" );
+    od;
+    
+    homalgSendBlocking( str, "need_command", stream, HOMALG_IO.Pictograms.multiple_delete );
     
 end );
 
@@ -153,7 +169,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
     local ar, R;
     
-    ##It seems that Singular does not know the filed of rationals.
+    ##It seems that Singular does not know the fields.
     ##Instead we create Q[dummy_variable] and feed only expressions
     ##without "dummy_variable" to Singular. Since homalg in GAP
     ##does not know of the dummy_variable, during the next ring extension
@@ -163,6 +179,32 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     R := CallFuncList( RingForHomalgInSingular, ar );
     
     SetCharacteristic( R, 0 );
+    
+    SetIsFieldForHomalg( R, true );
+    
+    return R;
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFieldOfPrimeOrderInSingular,
+  function( p )
+    local ar, R;
+    
+    if not IsPrime(p) then
+      Error("given number ist not prime");
+    fi;
+    
+    ##It seems that Singular does not know fields.
+    ##Instead we create GF(p)[dummy_variable] and feed only expressions
+    ##without "dummy_variable" to Singular. Since homalg in GAP
+    ##does not know of the dummy_variable, during the next ring extension
+    ##it will vanish and not slow down basis calculations.
+    ar := Concatenation( [ Concatenation( String(p), ",dummy_variable,dp") ], [ IsPrincipalIdealRing ] );
+    
+    R := CallFuncList( RingForHomalgInSingular, ar );
+    
+    SetCharacteristic( R, p );
     
     SetIsFieldForHomalg( R, true );
     
@@ -217,7 +259,6 @@ InstallMethod( PolynomialRing,
     fi;
 
     ##create the new ring
-    ##todo: this creates a block ordering with a new "dp"-block
     if var_of_coeff_ring = [] then
       ext_obj := homalgSendBlocking( [ c, ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     else

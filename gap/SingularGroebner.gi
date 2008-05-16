@@ -19,40 +19,47 @@ InstallMethod( CreateHomalgTable,
         "for homalg rings with Groebner Basis calculations provided by Singular",
         [ IsHomalgExternalRingObjectInSingularRep ],
         
-  function( arg )
-    local RP, RP_default, RP_specific, component;
+  function( ext_obj )
+    local RP, RP_default, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForSingularTools );
     
     RP_default := ShallowCopy( CommonHomalgTableForSingularDefault );
+    
+    RP_BestBasis := ShallowCopy( CommonHomalgTableForSingularBestBasis );
     
     RP_specific := 
       rec(
            RingName :=
 	     function ( R )#todo: more cases than Weylalgebra and Polynomials Ring
 	       local var,der;
-	       if HasIndeterminateCoordinatesOfRingOfDerivations(R) and HasIndeterminateDerivationsOfRingOfDerivations(R) then
-	         var := List( IndeterminateCoordinatesOfRingOfDerivations(R), a->[ String(a) , "," ] );
-	         var := Concatenation( var );
-	         var := var{ [1..Length(var)-1] };
-	         der := List( IndeterminateDerivationsOfRingOfDerivations(R), a->[ String(a) , "," ] );
-	         der := Concatenation( der );
-	         der := der{ [1..Length(der)-1] };
-	         return Concatenation(Concatenation( [ RingName(CoefficientsRing(R)) , "[" ] , var, [ "]<" ], der, [ ">" ] ));
-	       elif HasIndeterminatesOfPolynomialRing(R) then
-	         var := List( IndeterminatesOfPolynomialRing(R), a->[ String(a) , "," ] );
-	         var := Concatenation( var );
-	         var := var{ [1..Length(var)-1] };
-	         return Concatenation(Concatenation( [ RingName(CoefficientsRing(R)) , "[" ] , var, [ "]" ] ));
-	       elif IsFieldForHomalg(R) then
-	         if Characteristic(R) = 0 then
+	       
+	       if HasName( R ) then 
+	         return Name( R );
+	       fi;
+	       
+	       if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
+                 var := JoinStringsWithSeparator( 
+                           List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) 
+                          );
+                 der := JoinStringsWithSeparator( 
+                            List( IndeterminateDerivationsOfRingOfDerivations( R ), String ) 
+                          );
+	         return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]<", der, ">" ] ) );
+	       elif HasIndeterminatesOfPolynomialRing( R ) then
+                  var := JoinStringsWithSeparator( 
+                            List( IndeterminatesOfPolynomialRing( R ), String ) 
+                          );
+                  return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]" ] ) );
+	       elif IsFieldForHomalg( R ) then
+	         if Characteristic( R ) = 0 then
 	           return "Q";
 	         else
-	           return Concatenation( "Z_" , String(Characteristic(R)) );
+	           return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
 	         fi;
 	       else
 	         return "some Ring";
-	       fi;	     
+	       fi;
 	     end,
 
            Involution :=
@@ -60,13 +67,13 @@ InstallMethod( CreateHomalgTable,
                local R, I;
                R := HomalgRing( M );
                I := HomalgVoidMatrix( NrColumns( M ), NrRows( M ), R );
-               if HasIndeterminateCoordinatesOfRingOfDerivations(R) and HasIndeterminateDerivationsOfRingOfDerivations(R) then
+               if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
                  ## in case of a non-commutative ring (right now: in case of a wezl algebra: todo)
                  homalgSendBlocking( Concatenation(
                                         [ "map F = ", R, ", " ],
-                                        IndeterminateCoordinatesOfRingOfDerivations(R),
+                                        IndeterminateCoordinatesOfRingOfDerivations( R ),
                                         [ ", " ] ,
-                                        Concatenation(List(IndeterminateDerivationsOfRingOfDerivations(R), a -> [ "-" , a ] )),
+                                        Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ "-" , a ] ) ),
                                         [ "; matrix ", I, " = transpose( involution( ", M, ", F ) )" ]
                                       ), "need_command", HOMALG_IO.Pictograms.Involution );
                else
@@ -78,6 +85,13 @@ InstallMethod( CreateHomalgTable,
              end,
              
       );
+    
+#todo: insert again, as soon as Singular really computes smith forms
+#    if HasPrincipalIdealRing( ext_obj ) and IsPrincipalIdealRing( ext_obj ) then
+#      for component in NamesOfComponents( RP_BestBasis ) do
+#          RP.(component) := RP_BestBasis.(component);
+#      od;
+#    fi;
     
     for component in NamesOfComponents( RP_default ) do
         RP.(component) := RP_default.(component);
