@@ -19,7 +19,7 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInMAGMARep
           and IsPrincipalIdealRing ],
         
-  function( arg )
+  function( ext_ring_obj )
     local RP, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMAGMATools );

@@ -19,13 +19,13 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInSageRep
           and IsPrincipalIdealRing ],
         
-  function( R )
+  function( ext_ring_obj )
     local RP, RP_BestBasis, command, RP_specific, component;
     
-    InitializeSageTools( R );
+    InitializeSageTools( ext_ring_obj );
     RP := ShallowCopy( CommonHomalgTableForSageTools );
     
-    InitializeSageBestBasis( R );
+    InitializeSageBestBasis( ext_ring_obj );
     RP_BestBasis := ShallowCopy( CommonHomalgTableForSageBestBasis );
     
     command := Concatenation(
@@ -43,7 +43,7 @@ InstallMethod( CreateHomalgTable,
             
             );
             
-    homalgSendBlocking( [ command ], "need_command", R, HOMALG_IO.Pictograms.define ); ## the last procedures to initialize
+    homalgSendBlocking( [ command ], "need_command", ext_ring_obj, HOMALG_IO.Pictograms.define ); ## the last procedures to initialize
     
     RP_specific :=
           rec(

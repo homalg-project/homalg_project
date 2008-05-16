@@ -18,7 +18,7 @@ InstallMethod( CreateHomalgTable,
         "for a field",
         [ IsField ],
         
-  function( arg )
+  function( ext_ring_obj )
     local RP_default, RP_specific, RP, component;
     
     RP_default := ShallowCopy( CommonHomalgTableForGaussDefault );

@@ -19,7 +19,7 @@ InstallMethod( CreateHomalgTable,
         "for homalg rings with Groebner Basis calculations provided by Singular",
         [ IsHomalgExternalRingObjectInSingularRep ],
         
-  function( ext_obj )
+  function( ext_ring_obj )
     local RP, RP_default, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForSingularTools );
@@ -87,7 +87,7 @@ InstallMethod( CreateHomalgTable,
       );
     
 #todo: insert again, as soon as Singular really computes smith forms
-#    if HasPrincipalIdealRing( ext_obj ) and IsPrincipalIdealRing( ext_obj ) then
+#    if HasPrincipalIdealRing( ext_ring_obj ) and IsPrincipalIdealRing( ext_ring_obj ) then
 #      for component in NamesOfComponents( RP_BestBasis ) do
 #          RP.(component) := RP_BestBasis.(component);
 #      od;

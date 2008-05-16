@@ -19,7 +19,7 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInSageRep
           and IsPrimeField and IsFinite ],
 
-  function( arg )
+  function( ext_ring_obj )
     local RP, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForSageTools );

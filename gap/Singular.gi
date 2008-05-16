@@ -21,7 +21,7 @@ InstallValue( HOMALG_IO_Singular,
             cas := "singular",		## normalized name on which the user should have no control
             name := "Singular",
             executable := "Singular",
-            options := [ "-t" , "--echo=0" , "--no-warn" ],
+            options := [ "-t", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",
             CUT_POS_BEGIN := 1,		## these are the most
@@ -403,9 +403,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
   function( M, i, j, R )
     local Mij;
     
-    Mij := homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
-    
-    return HomalgExternalRingElement( homalgPointer( Mij ), "Singular", R );
+    return homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 
