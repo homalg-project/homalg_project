@@ -105,7 +105,7 @@ InstallGlobalFunction( homalgFlush,
         
         l := Length( var );
         
-        if IsBound( stream.multiple_delete ) and ( l > 1 or not IsBound( stream.delete ) ) then
+        if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
             
             stream.multiple_delete( List( var, v -> Concatenation( "homalg_variable_", String( v ) ) ), stream );
             
@@ -160,7 +160,7 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     l := Length( var );
     
-    if IsBound( stream.multiple_delete ) and ( l > 1 or not IsBound( stream.delete ) ) then
+    if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
         
         stream.multiple_delete( List( var, v -> Concatenation( "homalg_variable_", String( v ) ) ), stream );
         
