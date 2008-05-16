@@ -17,8 +17,8 @@
 ##
 InstallGlobalFunction( homalgFlush,
   function( arg )
-    local nargs, verbose, stream, container, weak_pointers, l, i, deleted,
-          var, v, pids, streams;
+    local nargs, verbose, stream, container, weak_pointers, l, pids, p, i,
+          deleted, var, streams;
     
     ## the internal garbage collector:
     GASMAN( "collect" );
@@ -40,12 +40,18 @@ InstallGlobalFunction( homalgFlush,
         
         l := container!.counter;
         
+        pids := [ ];
+        
         for i in [ 1 .. l ] do
             if IsBoundElmWPObj( weak_pointers, i ) then
-                if verbose then
-                    homalgFlush( weak_pointers[i] );
-                else
-                    homalgFlush( weak_pointers[i], "quiet" );
+                p := homalgExternalCASystemPID( weak_pointers[i] );
+                if not p in pids then
+                    Add( pids, p );
+                    if verbose then
+                        homalgFlush( weak_pointers[i] );
+                    else
+                        homalgFlush( weak_pointers[i], "quiet" );
+                    fi;
                 fi;
             fi;
         od;
@@ -113,8 +119,8 @@ InstallGlobalFunction( homalgFlush,
             
         elif IsBound( stream.delete ) and l > 0 then
             
-            for v in var do
-                stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
+            for p in var do
+                stream.delete( Concatenation( "homalg_variable_", String( p ) ), stream );
             od;
             
             container!.deleted := deleted;
@@ -139,7 +145,7 @@ end );
 ##
 InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush for performance reasons
   function( stream, ext_obj )
-    local container, weak_pointers, l, deleted, var, v;
+    local container, weak_pointers, l, deleted, var, p;
     
     container := stream.homalgExternalObjectsPointingToVariables;
     
@@ -168,8 +174,8 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
         
     elif IsBound( stream.delete ) and l > 0 then
         
-        for v in var do
-            stream.delete( Concatenation( "homalg_variable_", String( v ) ), stream );
+        for p in var do
+            stream.delete( Concatenation( "homalg_variable_", String( p ) ), stream );
         od;
         
         container!.deleted := deleted;
@@ -255,9 +261,9 @@ end );
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
     local L, nargs, io_info_level, info_level, properties,
-          need_command, need_display, need_output, ar, pictogram, option,
-          break_lists, R, ext_obj, stream, type, prefix, suffix, e, RP, CAS,
-          PID, homalg_variable, l, eoc, enter, fs, max, display_color;
+          need_command, need_display, need_output, ar, pictogram, ring_element,
+	  option, break_lists, R, ext_obj, stream, type, prefix, suffix, e,
+	  RP, CAS, PID, homalg_variable, l, eoc, enter, fs, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -312,6 +318,8 @@ InstallGlobalFunction( homalgSendBlocking,
             fi;
         elif not IsBound( pictogram ) and IsStringRep( ar ) and Length( ar ) <= 5 then
             pictogram := ar;
+        elif not IsBound( ring_element ) and ar = "return_ring_element"  then
+            ring_element := true;
         elif not IsBound( option ) and IsStringRep( ar ) and Length( ar ) > 5 and ar <> "break_lists" then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
@@ -532,10 +540,18 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsBound( option ) then
         
-        if not IsBound( type ) then
-            L := homalgExternalObject( homalg_variable, CAS, stream );
+        if IsBound( ring_element ) then
+            if not IsBound( type ) then
+                L := HomalgExternalRingElement( homalg_variable, CAS, R );
+            else
+                L := HomalgExternalRingElement( homalg_variable, CAS, R, type );
+            fi;
         else
-            L := homalgExternalObject( homalg_variable, CAS, stream, type );
+            if not IsBound( type ) then
+                L := homalgExternalObject( homalg_variable, CAS, stream );
+            else
+                L := homalgExternalObject( homalg_variable, CAS, stream, type );
+            fi;
         fi;
         
         if properties <> [ ] and IshomalgExternalObjectWithIOStreamRep( L ) then

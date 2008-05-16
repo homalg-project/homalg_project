@@ -235,7 +235,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
                   CAS := "";
               fi;
               if IsBound( s.pid ) then
-                  PID := Concatenation( "(which should be running with PID ", s.pid, ") " );
+                  PID := Concatenation( "(which should be running with PID ", String( s.pid ), ") " );
               else
                   PID := "";
               fi;
@@ -260,7 +260,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
                   CAS := "";
               fi;
               if IsBound( s.pid ) then
-                  PID := Concatenation( "(which should be running with PID ", s.pid, ") " );
+                  PID := Concatenation( "(which should be running with PID ", String( s.pid ), ") " );
               else
                   PID := "";
               fi;
