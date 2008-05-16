@@ -25,3 +25,11 @@ DeclareOperation( "/",
 DeclareOperation( "/",
         [ IsHomalgRelations, IsHomalgModule ] );
 
+DeclareOperation( "FreeHullModule",
+        [ IsHomalgRelations ] );
+
+DeclareOperation( "FreeHullModule",
+        [ IsHomalgModule ] );
+
+DeclareGlobalFunction( "ResolutionOfModule" );
+

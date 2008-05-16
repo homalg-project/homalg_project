@@ -53,6 +53,12 @@ BindGlobal( "TheTypeHomalgEndomorphismOfRightModules",
 ####################################
 
 ##
+InstallTrueMethod( IsMorphism, IsHomalgMorphism and IsMonomorphism );
+
+##
+InstallTrueMethod( IsMorphism, IsHomalgMorphism and IsEpimorphism );
+
+##
 InstallTrueMethod( IsIsomorphism, IsHomalgMorphism and IsAutomorphism );
 
 ##
@@ -320,9 +326,9 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
               * TransitionMatrix( TargetOfMorphism( phi ), l[pos][2], pos_t );
         else
             matrix :=
-              TransitionMatrix( TargetOfMorphism( phi ), pos_t, l[pos][2] )
+              TransitionMatrix( TargetOfMorphism( phi ), pos_t, l[pos][1] )
               * phi!.matrices.( String( l[pos] ) )
-              * TransitionMatrix( SourceOfMorphism( phi ), l[pos][1], pos_s );
+              * TransitionMatrix( SourceOfMorphism( phi ), l[pos][2], pos_s );
         fi;
         
         phi!.matrices.( String( index_pair ) ) := matrix;
@@ -671,6 +677,10 @@ InstallMethod( PostDivide,			## defines: PostDivide (RightDivide (high-level))
     
     psi := RightDivide( MatrixOfMorphism( gamma ), MatrixOfMorphism( beta ), N );
     
+    if psi = fail then
+        Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
+    fi;
+    
     return HomalgMorphism( psi, SourceOfMorphism( gamma ), SourceOfMorphism( beta ) );
     
 end );
@@ -693,6 +703,10 @@ InstallMethod( PostDivide,			## defines: PostDivide (LeftDivide (high-level))
     N := RelationsOfModule( N );
     
     psi := LeftDivide( MatrixOfMorphism( beta ), MatrixOfMorphism( gamma ), N );
+    
+    if psi = fail then
+        Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
+    fi;
     
     return HomalgMorphism( psi, SourceOfMorphism( gamma ), SourceOfMorphism( beta ) );
     
@@ -746,14 +760,29 @@ end );
 
 InstallGlobalFunction( HomalgMorphism,
   function( arg )
-    local nargs, source, pos_s, target, pos_t, R, type, matrix, matrices, reduced_matrices,
+    local nargs, source, pos_s, target, pos_t, R, type, matrix, left, matrices, reduced_matrices,
           nr_rows, nr_columns, index_pair, morphism, option;
     
     nargs := Length( arg );
     
-    if Length( arg ) > 1 then
+    if nargs > 1 then
         if IsHomalgModule( arg[2] ) then
             source := arg[2];
+            pos_s := PositionOfTheDefaultSetOfRelations( source );
+        elif arg[2] = "free" and nargs > 2 and IsHomalgModule( arg[3] )
+          and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
+            if IsHomalgMatrix( arg[1] ) then
+                nr_rows := NrRows( arg[1] );
+                nr_columns := NrColumns( arg[1] );
+            elif IsHomalgRelations( arg[1] ) then
+                nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
+                nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
+            fi;
+            if IsLeftModule( arg[3] ) then
+                source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[1] ) );
+            else
+                source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[1] ) );
+            fi;
             pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then
             source := "ring";
@@ -770,6 +799,13 @@ InstallGlobalFunction( HomalgMorphism,
         
         if IsHomalgMatrix( arg[1] ) then
             matrix := arg[1];
+        elif IsHomalgRelations( arg[1] ) then
+            matrix := MatrixOfRelations( arg[1] );
+            if IsHomalgRelationsOfLeftModule( arg[1] ) then
+                left := true;
+            else
+                left := false;
+            fi;
         elif IsHomalgRing( arg[nargs] ) then
             matrix := HomalgMatrix( arg[1], arg[nargs] );
         else
@@ -778,14 +814,21 @@ InstallGlobalFunction( HomalgMorphism,
         
         R := HomalgRing( matrix );
         
-        if nargs > 1 and IsStringRep( arg[2] ) and Length( arg[2] ) > 0 and  LowercaseString( arg[2]{[1..1]} ) = "r" then
-            source := HomalgFreeRightModule( NrColumns( matrix ), R );
-            target := HomalgFreeRightModule( NrRows( matrix ), R );
-            type := TheTypeHomalgMorphismOfRightModules;
-        else
+        if nargs > 1 and IsStringRep( arg[2] ) and Length( arg[2] ) > 0
+           and  LowercaseString( arg[2]{[1..1]} ) = "r" then
+            left := false;	## we explicitly asked for a morphism of right modules
+        elif not IsBound( left ) then
+            left := true;
+        fi;
+        
+        if left then
             source := HomalgFreeLeftModule( NrRows( matrix ), R );
             target := HomalgFreeLeftModule( NrColumns( matrix ), R );
             type := TheTypeHomalgMorphismOfLeftModules;
+        else
+            source := HomalgFreeRightModule( NrColumns( matrix ), R );
+            target := HomalgFreeRightModule( NrRows( matrix ), R );
+            type := TheTypeHomalgMorphismOfRightModules;
         fi;
         
         matrices := rec( );
@@ -800,7 +843,7 @@ InstallGlobalFunction( HomalgMorphism,
                          index_pairs_of_presentations := [ [ 1, 1 ] ]);
     
         matrices.( String( [ 1, 1 ] ) ) := matrix;
-    
+        
         ## Objectify:
         ObjectifyWithAttributes(
                 morphism, type );
@@ -809,7 +852,7 @@ InstallGlobalFunction( HomalgMorphism,
         
     fi;
     
-    if Length( arg ) > 2 then
+    if nargs > 2 then
         if IsHomalgModule( arg[3] ) then
             target := arg[3];
             pos_t := PositionOfTheDefaultSetOfRelations( target );
@@ -943,10 +986,15 @@ InstallGlobalFunction( HomalgMorphism,
                 Error( "the matrix and the modules are not defined over identically the same ring\n" );
             fi;
             matrix := arg[1];
+        elif IsHomalgRelations( arg[1] ) then
+            if not IsIdenticalObj( HomalgRing( arg[1] ), R ) then
+                Error( "the matrix and the modules are not defined over identically the same ring\n" );
+            fi;
+            matrix := MatrixOfRelations( arg[1] );
         elif IsList( arg[1] ) then
             matrix := HomalgMatrix( arg[1], R );
         else
-            Error( "the first argument must be in { IsHomalgMatrix, IsMatrix, IsList } but received: ",  arg[1], "\n" );
+            Error( "the first argument must be in { IsHomalgMatrix, IsHomalgRelations, IsMatrix, IsList } but received: ",  arg[1], "\n" );
         fi;
         
         if IsLeftModule( source )
@@ -1051,7 +1099,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A epimorphism of" );
+    Print( "<An epimorphism of" );
     
     if IsHomalgMorphismOfLeftModules( o ) then
         Print( " left" );

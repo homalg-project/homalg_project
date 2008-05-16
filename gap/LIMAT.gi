@@ -127,6 +127,20 @@ InstallImmediateMethod( IsEmptyMatrix,
 end );
 
 ##
+InstallImmediateMethod( IsIdentityMatrix,
+        IsHomalgMatrix and HasNrRows and HasNrColumns, 0,
+        
+  function( M )
+    
+    if NrRows( M ) <> NrColumns( M ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsReducedModuloRingRelations,
         IsHomalgMatrix, 0,
         

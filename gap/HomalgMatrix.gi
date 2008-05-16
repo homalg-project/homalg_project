@@ -44,63 +44,6 @@ BindGlobal( "TheTypeHomalgExternalMatrix",
 
 ####################################
 #
-# methods for properties:
-#
-####################################
-
-##
-InstallMethod( IsZero,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    ## since DecideZero calls IsZero(Matrix), the attribute IsReducedModuloRingRelations is used
-    ## in DecideZero to avoid infinite loops
-    
-    if IsBound(RP!.IsZeroMatrix) then
-        return RP!.IsZeroMatrix( DecideZero( M ) ); ## with this, \= can fall back to IsZero(Matrix)
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    ## From the documentation ?Zero: `ZeroSameMutability( <obj> )' is equivalent to `0 * <obj>'.
-    
-    return M = 0 * M; ## hence, by default, IsZero(Matrix) falls back to \= (see below)
-    
-end );
-
-##
-InstallMethod( IsDiagonalMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP, diag;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.IsDiagonalMatrix) then
-        return RP!.IsDiagonalMatrix( DecideZero ( M ) );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    diag := DiagonalEntries( M );
-    
-    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
-    
-end );
-
-####################################
-#
 # methods for operations:
 #
 ####################################
@@ -467,38 +410,6 @@ InstallMethod( \=,
     fi;
     
     return Eval( M1 ) = Eval( M2 );
-    
-end );
-
-##
-InstallMethod( \=,
-        "for homalg comparable matrices",
-        [ IsHomalgExternalMatrixRep and IsReducedModuloRingRelations,
-          IsHomalgExternalMatrixRep and IsReducedModuloRingRelations ],
-        
-  function( M1, M2 )
-    local R, RP;
-    
-    if not AreComparableMatrices( M1, M2 ) then
-        return false;
-    fi;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.AreEqualMatrices) then
-        ## CAUTION: the external system must be able to check equality modulo possible ring relations!
-        return RP!.AreEqualMatrices( M1, M2 );
-    elif IsBound(RP!.Equal) then
-        ## CAUTION: the external system must be able to check equality modulo possible ring relations!
-        return RP!.Equal( M1, M2 );
-    elif IsBound(RP!.IsZeroMatrix) then
-        ## offhand, the following way does not allow garbage collection in the external system
-        return RP!.IsZeroMatrix( DecideZero( M1 - M2 ) );
-    fi;
-    
-    TryNextMethod( );
     
 end );
 

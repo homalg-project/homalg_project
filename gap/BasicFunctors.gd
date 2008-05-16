@@ -33,6 +33,18 @@ DeclareGlobalVariable( "Functor_Hom" );
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "CokernelEpi",
+        IsHomalgMorphism );
+
+DeclareAttribute( "KernelEmb",
+        IsHomalgMorphism );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################

@@ -18,7 +18,7 @@ InstallMethod( CreateHomalgTable,
         "for fields",
         [ IsField ],
         
-  function( arg )
+  function( ext_ring_obj )
     local RP;
     
     RP := rec( 

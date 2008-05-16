@@ -20,11 +20,14 @@
 
 InstallGlobalFunction( _Functor_Cokernel_OnObjects,
   function( phi )
-    local R, T, gen, rel, coker;
+    local R, T, p, gen, rel, coker, id, epi, emb;
     
     R := HomalgRing( phi );
     
     T := TargetOfMorphism( phi );
+    
+    ## this is probably obsolete but clarifies our idea:
+    p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects by the following command(s)
     
     gen := GeneratorsOfModule( T );
     
@@ -34,10 +37,22 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     
     coker := Presentation( gen, rel );
     
-    ## the identity matrix of the identity morphism (w.r.t. the first set of relations of coker)
-    coker!.NaturalEmbedding := HomalgIdentityMorphism( [ coker, 1 ] );
+    ## the identity matrix is the matrix of the natural epimorphism
+    ## w.r.t. p-th set of relations of T and the first set of relations of coker:
+    id := HomalgIdentityMatrix( NrGenerators( gen ), R );
     
-    return coker;
+    ## the natural epimorphism:
+    epi := HomalgMorphism( id, [ T, p ], [ coker, 1 ] );
+    
+    SetIsEpimorphism( epi, true );
+    
+    ## this is in general NOT a morphism,
+    ## BUT it is one modulo the image of phi in T (and this is enough for us!)
+    emb := HomalgMorphism( id, [ coker, 1 ], [ T, p ] );
+    
+    coker!.NaturalEmbedding := emb;
+    
+    return epi;
     
 end );
 
@@ -60,17 +75,22 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,
     
     S := SourceOfMorphism( phi );
     
-    p := PositionOfTheDefaultSetOfRelations( S ); ## avoid future possible side effects by the following command(s)
+    ## this is probably obsolete but clarifies our idea:
+    p := PositionOfTheDefaultSetOfGenerators( S ); ## avoid future possible side effects by the following command(s)
     
     ker := SyzygiesGenerators( phi ) / S;
     
+    ## emb is the matrix of the natural embedding
+    ## w.r.t. the first set of relations of ker and the p-th set of relations of S
     emb := MatrixOfGenerators( ker, 1 );
     
-    ## emb is the matrix of the embedding morphism
-    ## w.r.t. the first set of relations of ker and the p-th set of relations of S
-    ker!.NaturalEmbedding := HomalgMorphism( emb, [ ker, 1 ], [ S, p ] );
+    emb := HomalgMorphism( emb, [ ker, 1 ], [ S, p ] );
     
-    return ker;
+    SetIsMonomorphism( emb, true );
+    
+    ker!.NaturalEmbedding := emb;
+    
+    return emb;
     
 end );
 
@@ -269,54 +289,68 @@ InstallValue( Functor_Hom,
 ####################################
 
 ##
-## Cokernel could've been treated as an attribute of phi,
-## but since Kernel was defined as an operation in the GAP library
-## we are forced to mimic attributes.
+InstallMethod( CokernelEpi,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local functor, cokernel_epi;
+    
+    if IsBound(phi!.CokernelEpi) then
+        return phi!.CokernelEpi;
+    fi;
+    
+    functor := Functor_Cokernel;
+    
+    cokernel_epi := functor!.OnObjects( phi );
+    
+    phi!.CokernelEpi := cokernel_epi;	## here we mimic an attribute (specific for Cokernel)
+    
+    return cokernel_epi;
+    
+end );
+
 ##
 InstallMethod( Cokernel,
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local functor, coker;
     
-    if IsBound(phi!.Cokernel) then
-        return phi!.Cokernel;
-    fi;
-    
-    functor := Functor_Cokernel;
-    
-    coker := functor!.OnObjects( phi );
-    
-    phi!.Cokernel := coker; ## here we mimic an attribute (specific for Cokernel)
-    
-    return coker;
+    return TargetOfMorphism( CokernelEpi( phi ) );
     
 end );
 
 ##
-## Kernel could've been treated as an attribute of phi,
-## but since Kernel was defined as an operation in the GAP library
-## we are forced to mimic attributes.
+InstallMethod( KernelEmb,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local functor, kernel_emb;
+    
+    if IsBound(phi!.KernelEmb) then
+        return phi!.KernelEmb;
+    fi;
+    
+    functor := Functor_Kernel;
+    
+    kernel_emb := functor!.OnObjects( phi );
+    
+    phi!.KernelEmb := kernel_emb;	## here we mimic an attribute (specific for Kernel)
+    
+    return kernel_emb;
+    
+end );
+
 ##
 InstallMethod( Kernel,
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local functor, ker;
     
-    if IsBound(phi!.Kernel) then
-        return phi!.Kernel;
-    fi;
-    
-    functor := Functor_Kernel;
-    
-    ker := functor!.OnObjects( phi );
-    
-    phi!.Kernel := ker; ## here we mimic an attribute (specific for Kernel)
-    
-    return ker;
+    return SourceOfMorphism( KernelEmb( phi ) );
     
 end );
 

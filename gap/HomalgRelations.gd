@@ -49,6 +49,9 @@ DeclareProperty( "IsInjectivePresentation",
 #
 ####################################
 
+DeclareAttribute( "FreeResolution",
+        IsHomalgRelations );
+
 ####################################
 #
 # global functions and operations:

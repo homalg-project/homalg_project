@@ -306,75 +306,6 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( SUM,
-        "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( r1, r2 )
-    local R, RP, cas;
-    
-    R := HomalgRing( r1 );
-    
-    if not IsIdenticalObj( R, HomalgRing( r2 ) ) then
-        return Error( "the two elements are not in the same ring\n" );
-    fi;
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.Sum) then
-        cas := homalgExternalCASystem( R );
-        return HomalgExternalRingElement( RP!.Sum( r1,  r2 ), cas, R ) ;
-    elif IsBound(RP!.Minus) then
-        cas := homalgExternalCASystem( R );
-        return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), cas, R ) ;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( r )
-    local R, RP;
-    
-    R := HomalgRing( r );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.IsZero) then
-        return RP!.IsZero( r );
-    else
-        return homalgPointer( r ) = homalgPointer( Zero( R ) ); ## FIXME
-    fi;
-    
-end );
-
-##
-InstallMethod( IsOne,
-        "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( r )
-    local R, RP;
-    
-    R := HomalgRing( r );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.IsOne) then
-        return RP!.IsOne( r );
-    else
-        return homalgPointer( r ) = homalgPointer( One( R ) ); ## FIXME
-    fi;
-    
-end );
-
-##
 InstallMethod( \=,
         "for homalg external objects",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
@@ -390,27 +321,6 @@ InstallMethod( \=,
     fi;
     
     return IsZero( r1 - r2 );
-    
-end );
-
-##
-InstallMethod( \/,
-        "for external homalg ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( a, u )
-    local R, RP;
-    
-    R := HomalgRing( a );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.DivideByUnit) then
-        return HomalgExternalRingElement( RP!.DivideByUnit( a, u ), u!.cas, R );
-    fi;
-    
-    Error( "could not find a procedure called DivideByUnit in the homalgTable", RP, "\n" );
     
 end );
 
@@ -548,7 +458,7 @@ HOMALG.ContainerForWeakPointersOnHomalgExternalRings := ContainerForWeakPointers
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
     local nargs, r, homalg_ring, table, properties, ar, type, c, el,
-          container, weak_pointers, l, deleted;
+          container, weak_pointers, l, deleted, streams;
     
     nargs := Length( arg );
     
@@ -620,6 +530,9 @@ InstallGlobalFunction( CreateHomalgRing,
     homalg_ring!.AsLeftModule := HomalgFreeLeftModule( 1, homalg_ring );
     homalg_ring!.AsRightModule := HomalgFreeRightModule( 1, homalg_ring );
     
+    homalg_ring!.AsLeftModule!.distinguished := true;
+    homalg_ring!.AsRightModule!.distinguished := true;
+    
     homalg_ring!.ZeroLeftModule := HomalgZeroLeftModule( homalg_ring );
     homalg_ring!.ZeroRightModule := HomalgZeroRightModule( homalg_ring );
     
@@ -632,16 +545,18 @@ InstallGlobalFunction( CreateHomalgRing,
         l := container!.counter + 1;
         container!.counter := l;
         
-	Add( container!.streams, homalgStream( homalg_ring ) );
-	
-	container!.streams := DuplicateFreeList( container!.streams );
-	
         SetElmWPObj( container!.weak_pointers, l, homalg_ring );
         
         deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
         
         container!.deleted := deleted;
         
+        streams := container!.streams;
+        
+        if not homalgExternalCASystemPID( homalg_ring ) in List( streams, s -> s.pid ) then
+            Add( streams, homalgStream( homalg_ring ) );
+        fi;
+	
     fi;
     
     return homalg_ring;
@@ -711,7 +626,7 @@ InstallGlobalFunction( HomalgExternalRingElement,
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsRecord, IsFilter } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsHomalgExternalRingRep, IsFilter } bur recieved: ", ar,"\n" );
         fi;
     od;
     

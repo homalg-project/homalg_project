@@ -309,7 +309,8 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
     ## NF <> 0
     if not IsZero( NF ) then
-        Error( "The second argument is not a right factor of the first, i.e. the rows of the second argument are not a generating set!\n" );
+        #Error( "The second argument is not a right factor of the first, i.e. the rows of the second argument are not a generating set!\n" );
+        return fail;
     fi;
     
     ## CD = -CB * CA => CD * A = B
@@ -351,7 +352,8 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     
     ## NF <> 0
     if not IsZero( NF ) then
-        Error( "The first argument is not a left factor of the second, i.e. the columns of the first argument are not a generating set!\n" );
+        #Error( "The first argument is not a left factor of the second, i.e. the columns of the first argument are not a generating set!\n" );
+        return fail;
     fi;
     
     ## CD = CA * -CB => A * CD = B
@@ -401,7 +403,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     
     ## NF <> 0
     if not IsZero( NF ) then
-        Error( "The second argument is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
+        return fail;
     fi;
     
     a := NrRows( A );
@@ -453,7 +455,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     
     ## NF <> 0
     if not IsZero( NF ) then
-        Error( "The first argument is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
+        return fail;
     fi;
     
     a := NrColumns( A );
@@ -489,6 +491,10 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     
     left_inv := RightDivide( Id, RI );
     
+    if left_inv = fail then
+        return fail;
+    fi;
+    
     ## CAUTION: for the following SetXXX RightDivide is assumed not to be lazy evaluated!!!
     
     SetIsLeftInvertibleMatrix( RI, true );
@@ -522,6 +528,10 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     Id := HomalgIdentityMatrix( NrRows( LI ), R );
     
     right_inv := LeftDivide( LI, Id );
+    
+    if right_inv = fail then
+        return fail;
+    fi;
     
     ## CAUTION: for the following SetXXX LeftDivide is assumed not to be lazy evaluated!!!
     
@@ -594,32 +604,41 @@ end );
 ##
 InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule) (incomplete)
   function( arg )
-    local nargs, M, COMPUTE_BASIS, RETURN_SYZYGIES, ar, S, unit_pos;
+    local nargs, M, COMPUTE_BASIS, STORE_SYZYGIES, ar, S, unit_pos;
     
     nargs := Length( arg );
     
+    if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
+        return CallFuncList( ReducedBasisOfModule,
+                       Concatenation( [ RelationsOfModule( arg[1] ) ], arg{[2..nargs]} ) );
+    fi;
+    
     if not ( nargs > 0 and IsHomalgRelationsOfFinitelyPresentedModuleRep( arg[1] ) ) then
-        Error( "the first argument must be a set of relations\n" );
+        Error( "the first argument must be a module or a set of relations\n" );
     fi;
     
     M := arg[1];
     
     if NrRelations( M ) = 0 then
         return M;
-    elif IsBound( M!.ReducedBasisOfModule ) then
-        return M!.ReducedBasisOfModule;
     fi;
     
     COMPUTE_BASIS := false;
-    RETURN_SYZYGIES := false;
+    STORE_SYZYGIES := false;
     
     for ar in arg{[ 2 .. nargs ]} do
         if ar = "COMPUTE_BASIS" then
             COMPUTE_BASIS := true;
-        elif ar = "RETURN_SYZYGIES" then
-            RETURN_SYZYGIES := true;
+        elif ar = "STORE_SYZYGIES" then
+            STORE_SYZYGIES := true;
         fi;
     od;
+    
+    if COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule ) then
+        return M!.ReducedBasisOfModule;
+    elif not COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS) then
+        return M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS;
+    fi;
     
     if COMPUTE_BASIS then
         M := BasisOfModule( M );
@@ -638,13 +657,17 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
         M := CertainRelations( M, Filtered( [ 1 .. NrRelations( M ) ], j -> not j in unit_pos ) );
     od;
     
-    arg[1]!.ReducedBasisOfModule := M;
-    
-    if RETURN_SYZYGIES then
-        return [ S, M ];
+    if COMPUTE_BASIS then
+        arg[1]!.ReducedBasisOfModule := M;
     else
-        return M;
+        arg[1]!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M;
     fi;
+    
+    if STORE_SYZYGIES then
+        M!.SyzygiesGenerators := S;
+    fi;
+    
+    return M;
     
 end );
 

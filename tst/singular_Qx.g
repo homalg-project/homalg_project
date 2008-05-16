@@ -2,7 +2,7 @@ LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_IO.color_display := true;
 ## replace the following to lines with HomalgFieldOfRationalsInSingular() * "x"
-Qx := RingForHomalgInSingular( "0,x,dp", IsPrincipalIdealRing );
+Qx := HomalgFieldOfRationalsInSingular( ) * "x";
 SetName( Qx, "Q[x]" );
 ##
 Display( Qx );

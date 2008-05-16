@@ -17,7 +17,9 @@
 # four new category of objects:
 
 DeclareCategory( "IsHomalgComplex",
-        IsAttributeStoringRep );
+        IsAdditiveElementWithZero
+        and IsExtLElement
+        and IsAttributeStoringRep );
 
 DeclareCategory( "IsHomalgComplexOfLeftModules",
         IsHomalgComplex );
@@ -31,11 +33,28 @@ DeclareCategory( "IsHomalgComplexOfRightModules",
 #
 ####################################
 
+DeclareProperty( "IsSequence",
+        IsHomalgComplex );
+
+DeclareProperty( "IsComplex",
+        IsHomalgComplex );
+
+DeclareProperty( "IsGradedObject",
+        IsHomalgComplex );
+
+DeclareProperty( "IsExactSequence",
+        IsHomalgComplex );
+
+DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
+        IsHomalgComplex );
+
 ####################################
 #
 # global functions and operations:
 #
 ####################################
+
+DeclareGlobalFunction( "homalgResetFiltersOfComplex" );
 
 # constructor methods:
 
@@ -48,21 +67,9 @@ DeclareGlobalFunction( "HomalgCocomplex" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "IsSequence",
+DeclareOperation( "SupportOfComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "IsComplex",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "IsZeroComplex",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "IsGradedObject",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "IsExactSequence",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "IsShortExactSequence",
-        [ IsHomalgComplex ] );
+DeclareOperation( "Add",
+        [ IsHomalgComplex, IsHomalgMorphism ] );
 

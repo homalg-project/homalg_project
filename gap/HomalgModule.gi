@@ -611,11 +611,11 @@ InstallMethod( TransitionMatrix,
     
     if not IsBound( sets_of_generators!.( pres_a ) ) then
         
-        Error( "the module given by the first argument has no ", pres_a, ". set of generators\n" );
+        Error( "the module given as the first argument has no ", pres_a, ". set of generators\n" );
         
     elif not IsBound( sets_of_generators!.( pres_b ) ) then
         
-        Error( "the module given by the first argument has no ", pres_b, ". set of generators\n" );
+        Error( "the module given as the first argument has no ", pres_b, ". set of generators\n" );
         
     elif pres_a = pres_b then
         
@@ -1827,12 +1827,18 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFreeModule ], 1001,
+        [ IsFinitelyPresentedModuleRep and IsFreeModule ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
         
   function( M )
     local r, rk;
     
-    Print( "<A free " );
+    if IsBound( M!.distinguished ) then
+        Print( "<The" );
+    else
+        Print( "<A" );
+    fi;
+    
+    Print( " free " );
     
     if IsLeftModule( M ) then
         Print( "left " );
@@ -1865,14 +1871,14 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZero ], 1001,
+        [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
         
   function( M )
     
     if IsLeftModule( M ) then
-        Print( "<The zero left module>" ); ## FIXME: the zero module should be universal
+        Print( "<The zero left module>" );
     else
-        Print( "<The zero right module>" ); ## FIXME: the zero module should be universal
+        Print( "<The zero right module>" );
     fi;
     
 end );
@@ -1940,13 +1946,13 @@ InstallMethod( Display,
     if Length( R ) < l then
         D := R;
     else
-        D := "D";
+        D := "R";
     fi;
     
     Print( "Cokernel of the map:\n", D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
     
     if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
-        Print( " ( for D := ", R, "\033[0m )" );
+        Print( " ( for ", D, " := ", R, "\033[0m )" );
     fi;
     
     Print( " with matrix\n\n" );
@@ -1972,13 +1978,13 @@ InstallMethod( Display,
     if Length( R ) < l then
         D := R;
     else
-        D := "D";
+        D := "R";
     fi;
     
     Print( "Cokernel of the map:\n", D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
     
     if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
-        Print( " ( for D := ", R, "\033[0m )" );
+        Print( " ( for ", D, " := ", R, "\033[0m )" );
     fi;
     
     Print( " with matrix\n\n" );
@@ -2049,7 +2055,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZero ], 1001,
+        [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
         
   function( M )
     
