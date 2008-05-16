@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff to use the fantastic GAP4 I/O package of Max Neunhoeffer.
+##  Declaration stuff to use the fantastic GAP4 I/O package of Max.
 ##
 #############################################################################
 

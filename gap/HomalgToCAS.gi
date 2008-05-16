@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff to use the fantastic GAP4 I/O package of Max Neunhoeffer.
+##  Implementation stuff to use the fantastic GAP4 I/O package of Max.
 ##
 #############################################################################
 
@@ -17,13 +17,20 @@
 ##
 InstallGlobalFunction( homalgFlush,
   function( arg )
-    local nargs, stream, container, weak_pointers, l, i, deleted, var, v,
-          pids, streams;
+    local nargs, verbose, stream, container, weak_pointers, l, i, deleted,
+          var, v, pids, streams;
     
     ## the internal garbage collector:
     GASMAN( "collect" );
     
     nargs := Length( arg );
+    
+    verbose := true;
+    
+    if nargs > 0 and IsStringRep( arg[nargs] ) then
+        nargs := nargs - 1;
+        verbose := false;
+    fi;
     
     if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
         
@@ -35,7 +42,11 @@ InstallGlobalFunction( homalgFlush,
         
         for i in [ 1 .. l ] do
             if IsBoundElmWPObj( weak_pointers, i ) then
-                homalgFlush( weak_pointers[i] );
+                if verbose then
+                    homalgFlush( weak_pointers[i] );
+                else
+                    homalgFlush( weak_pointers[i], "quiet" );
+                fi;
             fi;
         od;
         
@@ -68,7 +79,7 @@ InstallGlobalFunction( homalgFlush,
                 fi;
             od;
             
-            if deleted <> [ ] then
+            if deleted <> [ ] and verbose then
                 Print( "the external CASs with pids ", deleted, " have no active rings: they can be terminated by launching TerminateCAS()\n" );
             fi;
             
@@ -115,7 +126,9 @@ InstallGlobalFunction( homalgFlush,
             ## the external garbage collector:
             stream.garbage_collector( stream );
             
-            Print( "completed garbage collection in the external CAS ", stream.name, " with pid ", stream.pid, "\n" );
+            if verbose then
+                Print( "completed garbage collection in the external CAS ", stream.name, " with pid ", stream.pid, "\n" );
+            fi;
             
         fi;
         
