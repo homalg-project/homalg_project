@@ -75,7 +75,7 @@ InstallMethod( \/,
     
     gen := N * GeneratorsOfModule( M );
     
-    # compute the syzygies module of N modulo B
+    # compute the syzygies of N modulo B, i.e. the relations among N modulo B
     S := SyzygiesGenerators( N, B );
     
     S := Presentation( N, S );
@@ -209,8 +209,12 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
         F_j := SourceOfMorphism( d_j );
         
         d!.LastSyzygies := S;
-    
+        
     od;
+    
+    if NrRelations( S ) = 0 then
+        SetHasFiniteFreeResolution( M, true );
+    fi;
     
     return d;
     

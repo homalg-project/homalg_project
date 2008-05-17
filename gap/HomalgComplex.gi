@@ -62,19 +62,11 @@ InstallMethod( IsZero,
         [ IsHomalgComplex ],
         
   function( C )
-    local indices, l;
+    local modules;
     
-    indices := C!.indices;
+    modules := ModulesOfComplex( C );
     
-    l := Length( indices );
-    
-    if l = 1 then
-        return IsZero( C!.( indices[1] ) );
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        return ForAll( indices{[2..l]}, i -> IsZero( TargetOfMorphism( C!.(i) ) ) ) and IsZero( SourceOfMorphism( C!.( indices[l] ) ) );
-    else
-        return ForAll( indices{[1..l-1]}, i -> IsZero( SourceOfMorphism( C!.(i) ) ) ) and IsZero( TargetOfMorphism( C!.( indices[l - 1] ) ) );
-    fi;
+    return ForAll( modules, IsZero );
     
 end );
 
@@ -84,19 +76,11 @@ InstallMethod( IsGradedObject,
         [ IsHomalgComplex ],
         
   function( C )
-    local indices, l;
+    local morphisms;
     
-    indices := C!.indices;
+    morphisms := MorphismsOfComplex( C );
     
-    l := Length( indices );
-    
-    if l = 1 then
-        return true;
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        return ForAll( indices{[2..l]}, i -> IsZero( C!.(i) ) );
-    else
-        return ForAll( indices{[1..l-1]}, i -> IsZero( C!.(i) ) );
-    fi;
+    return ForAll( morphisms, IsZero );
     
 end );
 
@@ -106,19 +90,11 @@ InstallMethod( IsSequence,
         [ IsHomalgComplex ],
         
   function( C )
-    local indices, l;
+    local morphisms;
     
-    indices := C!.indices;
+    morphisms := MorphismsOfComplex( C );
     
-    l := Length( indices );
-    
-    if l = 1 then
-        return true;
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        return ForAll( indices{[2..l]}, i -> IsMorphism( C!.(i) ) );
-    else
-        return ForAll( indices{[1..l-1]}, i -> IsMorphism( C!.(i) ) );
-    fi;
+    return ForAll( morphisms, IsMorphism );
     
 end );
 
@@ -128,30 +104,50 @@ InstallMethod( IsComplex,
         [ IsHomalgComplex ],
         
   function( C )
-    local indices, l;
+    local indices;
     
     if not IsSequence( C ) then
         return false;
     fi;
     
-    indices := C!.indices;
+    indices := MorphismIndicesOfComplex( C );
     
-    l := Length( indices );
+    indices := indices{[ 1 .. Length( indices ) - 1 ]};
     
-    if l <= 2 then
+    if indices = [ ] then
         return true;
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        if IsHomalgComplexOfLeftModules( C ) then
-            return ForAll( indices{[2..l-1]}, i -> IsZero( C!.((i + 1)) * C!.(i) ) );
-        else
-            return ForAll( indices{[2..l-1]}, i -> IsZero( C!.(i) * C!.((i + 1)) ) );
-        fi;
+    elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
+      or not ( IsComplexOfFinitelyPresentedModulesRep( C ) or IsHomalgComplexOfLeftModules( C ) ) then
+        return ForAll( indices, i -> IsZero( C!.((i + 1)) * C!.(i) ) );
     else
-        if IsHomalgComplexOfLeftModules( C ) then
-            return ForAll( indices{[1..l-2]}, i -> IsZero( C!.(i) * C!.((i + 1)) ) );
-        else
-            return ForAll( indices{[1..l-2]}, i -> IsZero( C!.((i + 1)) * C!.(i) ) );
-        fi;
+        return ForAll( indices, i -> IsZero( C!.(i) * C!.((i + 1)) ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( IsExactSequence,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local indices;
+    
+    if not IsSequence( C ) then
+        return false;
+    fi;
+    
+    indices := MorphismIndicesOfComplex( C );
+    
+    indices := indices{[ 1 .. Length( indices ) - 1 ]};
+    
+    if indices = [ ] then
+        return true;
+    elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
+      or not ( IsComplexOfFinitelyPresentedModulesRep( C ) or IsHomalgComplexOfLeftModules( C ) ) then
+        return ForAll( indices, i -> IsZero( DefectOfHoms( C!.((i + 1)), C!.(i) ) ) );
+    else
+        return ForAll( indices, i -> IsZero( DefectOfHoms( C!.(i), C!.((i + 1)) ) ) );
     fi;
     
 end );
@@ -163,13 +159,103 @@ end );
 ####################################
 
 ##
-InstallMethod( HomalgRing,
+InstallMethod( ModuleIndicesOfComplex,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
     
-    return HomalgRing( C!.( C!.indices[1] ) );
+    return C!.indices;
+    
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local indices, l, o;
+    
+    indices := ModuleIndicesOfComplex( C );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        o := C!.(indices[1]);
+    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
+        o := C!.(indices[l]);
+    else
+        o := C!.(indices[1]);
+    fi;
+    
+    return HomalgRing( o );
+    
+end );
+
+##
+InstallMethod( MorphismIndicesOfComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local indices, l;
+    
+    indices := ModuleIndicesOfComplex( C );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        return [  ];
+    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
+        return indices{[ 2 .. l ]};
+    else
+        return indices{[ 1 .. l - 1 ]};
+    fi;
+    
+end );
+
+##
+InstallMethod( MorphismsOfComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local indices;
+    
+    indices := MorphismIndicesOfComplex( C );
+    
+    if Length( indices ) = 0 then
+        return [  ];
+    fi;
+    
+    return List( indices, i -> C!.(i) );
+    
+end );
+
+##
+InstallMethod( ModulesOfComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local morphisms, l, modules;
+    
+    morphisms := MorphismsOfComplex( C );
+    
+    l := Length( morphisms );
+    
+    if l = 0 then
+        return [ C!.( ModuleIndicesOfComplex( C )[1] ) ];
+    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
+        modules := List( morphisms, TargetOfMorphism );
+        Add( modules, SourceOfMorphism( morphisms[l] ) );
+    else
+        modules := List( morphisms, SourceOfMorphism );
+        Add( modules, TargetOfMorphism( morphisms[l] ) );
+    fi;
+    
+    return modules;
     
 end );
 
@@ -179,27 +265,14 @@ InstallMethod( SupportOfComplex,
         [ IsHomalgComplex ],
         
   function( C )
-    local indices, l, supp;
+    local indices, modules, l;
     
-    indices := C!.indices;
+    indices := ModuleIndicesOfComplex( C );
+    modules := ModulesOfComplex( C );
     
     l := Length( indices );
     
-    if l = 1 then
-        return Filtered( indices, i -> not IsZero( C!.(i) ) );
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        supp := Filtered( indices{[2..l]}, i -> not IsZero( TargetOfMorphism( C!.(i) ) ) ) - 1;
-        if not IsZero( SourceOfMorphism( C!.( indices[l] ) ) ) then
-            Add( supp, indices[l] );
-        fi;
-    else
-        supp := Filtered( indices{[1..l-1]}, i -> not IsZero( SourceOfMorphism( C!.(i) ) ) );
-        if IsZero( TargetOfMorphism( C!.( indices[l - 1] ) ) ) then
-            Add( supp, indices[l] );
-        fi;
-    fi;
-    
-    return supp;
+    return indices{ Filtered( [ 1 .. l ], i -> not IsZero( modules[i] ) ) };
     
 end );
 
@@ -211,7 +284,7 @@ InstallMethod( Add,
   function( C, phi )
     local indices, l;
     
-    indices := C!.indices;
+    indices := ModuleIndicesOfComplex( C );
     
     l := Length( indices );
     
@@ -255,7 +328,7 @@ InstallMethod( Add,
   function( C, phi )
     local indices, l;
     
-    indices := C!.indices;
+    indices := ModuleIndicesOfComplex( C );
     
     l := Length( indices );
     
@@ -405,7 +478,7 @@ InstallMethod( ViewObj,
         [ IsHomalgComplex ],
         
   function( o )
-    local first_attribute;
+    local first_attribute, indices, l;
     
     first_attribute := false;
     
@@ -417,56 +490,92 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsShortExactSequence( o ) and IsShortExactSequence( o ) then
-        Print( " short exact sequence of" );
+        Print( " short exact sequence" );
     elif HasIsExactSequence( o ) and IsExactSequence( o ) then
         if first_attribute then
-            Print( " exact sequence of" );
+            Print( " exact sequence" );
         else
-            Print( "n exact sequence of" );
+            Print( "n exact sequence" );
         fi;
     elif HasIsComplex( o ) then
         if IsComplex( o ) then
             if IsComplexOfFinitelyPresentedModulesRep( o ) then
-                Print( " complex of" );
+                Print( " complex" );
             else
-                Print( " cocomplex of" );
+                Print( " cocomplex" );
             fi;
         else
             if IsComplexOfFinitelyPresentedModulesRep( o ) then
-                Print( " non-complex of" );
+                Print( " non-complex" );
             else
-                Print( " non-cocomplex of" );
+                Print( " non-cocomplex" );
             fi;
         fi;
     elif HasIsSequence( o ) then
         if IsSequence( o ) then
             if IsComplexOfFinitelyPresentedModulesRep( o ) then
-                Print( " sequence of" );
+                Print( " sequence" );
             else
-                Print( " co-sequence of" );
+                Print( " co-sequence" );
             fi;
         else
             if IsComplexOfFinitelyPresentedModulesRep( o ) then
-                Print( " sequence of non-well-definded maps between" );
+                Print( " sequence of non-well-definded maps" );
             else
-                Print( " co-sequence of non-well-definded maps between" );
+                Print( " co-sequence of non-well-definded maps" );
             fi;
         fi;
     else
         if IsComplexOfFinitelyPresentedModulesRep( o ) then
-            Print( " \"complex\" of" );
+            Print( " \"complex\"" );
         else
-            Print( " \"cocomplex\" of" );
+            Print( " \"cocomplex\"" );
         fi;
     fi;
     
-    if IsHomalgComplexOfLeftModules( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
-    fi;
+    Print( " containing " );
     
-    Print( " modules>" );
+    indices := ModuleIndicesOfComplex( o );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        
+        Print( "a single " );
+        
+        if IsHomalgComplexOfLeftModules( o ) then
+            Print( "left" );
+        else
+            Print( "right" );
+        fi;
+        
+        Print( " module at " );
+        
+        if IsCocomplexOfFinitelyPresentedModulesRep( o ) then
+            Print( "co" );
+        fi;
+        
+        Print( "homological degree ", indices[1], ">" );
+        
+    else
+        
+        if l = 2 then
+            Print( "a single morphism" );
+        else
+            Print( l - 1, " morphisms" );
+        fi;
+        
+        Print( " of " );
+        
+        if IsHomalgComplexOfLeftModules( o ) then
+            Print( "left" );
+        else
+            Print( "right" );
+        fi;
+        
+        Print( " modules>" );
+        
+    fi;
     
 end );
 
@@ -477,7 +586,9 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A graded (homological) object of" );
+    Print( "<A graded (homological) object consisting of " );
+    
+    Print( Length( ModuleIndicesOfComplex( o ) ) );
     
     if IsHomalgComplexOfLeftModules( o ) then
         Print( " right" );
@@ -496,7 +607,9 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A graded (cohomological) object of" );
+    Print( "<A graded (cohomological) object consisting of " );
+    
+    Print( Length( ModuleIndicesOfComplex( o ) ) );
     
     if IsHomalgComplexOfLeftModules( o ) then
         Print( " right" );
@@ -515,12 +628,12 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A zero" );
+    Print( "<A zero " );
     
     if IsHomalgComplexOfLeftModules( o ) then
-        Print( " right" );
+        Print( "right" );
     else
-        Print( " left" );
+        Print( "left" );
     fi;
     
     Print( " complex>" );
@@ -534,12 +647,12 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A zero" );
+    Print( "<A zero " );
     
     if IsHomalgComplexOfLeftModules( o ) then
-        Print( " right" );
+        Print( "right" );
     else
-        Print( " left" );
+        Print( "left" );
     fi;
     
     Print( " cocomplex>" );

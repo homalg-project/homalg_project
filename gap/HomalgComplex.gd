@@ -64,7 +64,19 @@ DeclareGlobalFunction( "HomalgCocomplex" );
 
 # basic operations:
 
+DeclareOperation( "ModuleIndicesOfComplex",
+        [ IsHomalgComplex ] );
+
 DeclareOperation( "HomalgRing",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "MorphismIndicesOfComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "MorphismsOfComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "ModulesOfComplex",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "SupportOfComplex",

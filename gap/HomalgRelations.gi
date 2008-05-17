@@ -185,7 +185,7 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
 end );
 
 ##
-InstallMethod( CertainRelations,			### defines: CertainRelations
+InstallMethod( CertainRelations,		### defines: CertainRelations
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
           IsList ],
@@ -197,7 +197,7 @@ InstallMethod( CertainRelations,			### defines: CertainRelations
 end );
 
 ##
-InstallMethod( UnionOfRelations,
+InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix,
           IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
@@ -236,7 +236,7 @@ InstallMethod( UnionOfRelations,
 end );
 
 ##
-InstallMethod( UnionOfRelations,
+InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix,
           IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],

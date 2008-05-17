@@ -61,6 +61,9 @@ DeclareProperty( "IsIsomorphism",
 DeclareProperty( "IsAutomorphism",
         IsHomalgMorphism );
 
+DeclareProperty( "IsTobBeViewedAsAMonomorphism",
+        IsHomalgMorphism );
+
 ####################################
 #
 # global functions and operations:

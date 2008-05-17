@@ -27,7 +27,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     T := TargetOfMorphism( phi );
     
     ## this is probably obsolete but clarifies our idea:
-    p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects by the following command(s)
+    p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects of the following command(s)
     
     gen := GeneratorsOfModule( T );
     
@@ -46,13 +46,19 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     
     SetIsEpimorphism( epi, true );
     
-    ## this is in general NOT a morphism,
-    ## BUT it is one modulo the image of phi in T (and this is enough for us!)
-    emb := HomalgMorphism( id, [ coker, 1 ], [ T, p ] );
+    ## set the attribute CokernelEpi (specific for Cokernel):
+    SetCokernelEpi( phi, epi );
     
+    ## this is in general NOT a morphism,
+    ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
+    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1.(2), 3.1.2] )
+    emb := HomalgMorphism( id, [ coker, 1 ], [ T, p ] );
+    SetIsTobBeViewedAsAMonomorphism( emb, true );
+    
+    ## save the natural embedding in the cokernel (thanks GAP):
     coker!.NaturalEmbedding := emb;
     
-    return epi;
+    return coker;
     
 end );
 
@@ -70,15 +76,15 @@ InstallValue( Functor_Cokernel,
 ##
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,
-  function( phi )
+  function( psi )
     local S, p, ker, emb;
     
-    S := SourceOfMorphism( phi );
+    S := SourceOfMorphism( psi );
     
     ## this is probably obsolete but clarifies our idea:
-    p := PositionOfTheDefaultSetOfGenerators( S ); ## avoid future possible side effects by the following command(s)
+    p := PositionOfTheDefaultSetOfGenerators( S ); ## avoid future possible side effects of the following command(s)
     
-    ker := SyzygiesGenerators( phi ) / S;
+    ker := SyzygiesGenerators( psi ) / S;
     
     ## emb is the matrix of the natural embedding
     ## w.r.t. the first set of relations of ker and the p-th set of relations of S
@@ -88,9 +94,13 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,
     
     SetIsMonomorphism( emb, true );
     
+    ## set the attribute KernelEmb (specific for Kernel):
+    SetKernelEmb( psi, emb );
+    
+    ## save the natural embedding in the kernel (thanks GAP):
     ker!.NaturalEmbedding := emb;
     
-    return emb;
+    return ker;
     
 end );
 
@@ -100,6 +110,77 @@ InstallValue( Functor_Kernel,
                 [ "number_of_arguments", 1 ],
                 [ "1", "covariant" ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
+                )
+);
+
+##
+## DefectOfHoms
+##
+
+InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
+  function( phi, psi )
+    local R, pre, post, M, p, gen, rel, coker, ker, emb;
+    
+    R := HomalgRing( phi );
+    
+    if not IsIdenticalObj( R, HomalgRing( psi ) ) then
+        Error( "the rings of the two morphisms are not identical\n" );
+    fi;
+    
+    if IsHomalgMorphismOfLeftModules( phi ) and IsHomalgMorphismOfLeftModules( psi ) then
+        if not AreComposableMorphisms( phi, psi ) then
+            Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
+        fi;
+        
+        pre := phi;
+        post := psi;
+        
+    elif IsHomalgMorphismOfRightModules( phi ) and IsHomalgMorphismOfRightModules( psi ) then
+        if not AreComposableMorphisms( phi, psi ) then
+            Error( "the two morphisms are not composable, since the target of the right one and the target of the left one are not \033[01midentical\033[0m\n" );
+        fi;
+        
+        pre := psi;
+        post := phi;
+        
+    else
+        Error( "the two morphisms must either be both left or both right morphisms\n" );
+    fi;
+    
+    M := TargetOfMorphism( pre );
+    
+    ## this is probably obsolete but clarifies our idea:
+    p := PositionOfTheDefaultSetOfGenerators( M );  ## avoid future possible side effects of the following command(s)
+    
+    gen := GeneratorsOfModule( M );
+    
+    rel := UnionOfRelations( pre );
+    
+    gen := UnionOfRelations( gen, rel * MatrixOfGenerators( gen ) );
+    
+    coker := Presentation( gen, rel );
+    
+    ker := SyzygiesGenerators( post ) / coker;
+    
+    ## emb is the matrix of the natural embedding
+    ## w.r.t. the first set of relations of ker and the p-th set of relations of M
+    emb := MatrixOfGenerators( ker, 1 );
+    
+    emb := HomalgMorphism( emb, [ ker, 1 ], [ M, p ] );
+    
+    ## save the natural embedding in the defect (thanks GAP):
+    ker!.NaturalEmbedding := emb;
+    
+    return ker;
+    
+end );
+
+InstallValue( Functor_DefectOfHoms,
+        CreateHomalgFunctor(
+                [ "name", "DefectOfHoms" ],
+                [ "number_of_arguments", 1 ],	## this is not a mistake
+                [ "1", "covariant" ],
+                [ "OnObjects", _Functor_DefectOfHoms_OnObjects ]
                 )
 );
 
@@ -284,31 +365,13 @@ InstallValue( Functor_Hom,
 
 ####################################
 #
-# methods for operations:
+# methods for operations & attributes:
 #
 ####################################
 
 ##
-InstallMethod( CokernelEpi,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local functor, cokernel_epi;
-    
-    if IsBound(phi!.CokernelEpi) then
-        return phi!.CokernelEpi;
-    fi;
-    
-    functor := Functor_Cokernel;
-    
-    cokernel_epi := functor!.OnObjects( phi );
-    
-    phi!.CokernelEpi := cokernel_epi;	## here we mimic an attribute (specific for Cokernel)
-    
-    return cokernel_epi;
-    
-end );
+## Cokernel( phi )
+##
 
 ##
 InstallMethod( Cokernel,
@@ -316,8 +379,43 @@ InstallMethod( Cokernel,
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local functor;
     
-    return TargetOfMorphism( CokernelEpi( phi ) );
+    functor := Functor_Cokernel;
+    
+    return functor!.OnObjects( phi );
+    
+end );
+
+##
+InstallMethod( CokernelEpi,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local coker;
+    
+    coker := Cokernel( phi );	## this sets the attribute CokernelEpi
+    
+    return CokernelEpi( phi );	## not an infinite loop because of the side effect of the above line
+    
+end );
+
+##
+## Kernel( phi )
+##
+
+##
+InstallMethod( Kernel,
+        "for homalg morphisms",
+        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local functor;
+    
+    functor := Functor_Kernel;
+    
+    return functor!.OnObjects( phi );
     
 end );
 
@@ -327,30 +425,29 @@ InstallMethod( KernelEmb,
         [ IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local functor, kernel_emb;
+    local ker;
     
-    if IsBound(phi!.KernelEmb) then
-        return phi!.KernelEmb;
-    fi;
+    ker := Kernel( phi );	## this sets the attribute KernelEmb
     
-    functor := Functor_Kernel;
-    
-    kernel_emb := functor!.OnObjects( phi );
-    
-    phi!.KernelEmb := kernel_emb;	## here we mimic an attribute (specific for Kernel)
-    
-    return kernel_emb;
+    return KernelEmb( phi );	## not an infinite loop because of the side effect of the above line
     
 end );
 
 ##
-InstallMethod( Kernel,
+## DefectOfHoms( phi, psi )
+##
+
+##
+InstallMethod( DefectOfHoms,
         "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
-  function( phi )
+  function( phi, psi )
+    local functor;
     
-    return SourceOfMorphism( KernelEmb( phi ) );
+    functor := Functor_DefectOfHoms;
+    
+    return functor!.OnObjects( phi, psi );
     
 end );
 
@@ -364,8 +461,11 @@ InstallMethod( Hom,
         [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
         
   function( M, N )
+    local functor;
     
-    return Functor_Hom!.OnObjects( M, N );
+    functor := Functor_Hom;
+    
+    return functor!.OnObjects( M, N );
     
 end );
 
