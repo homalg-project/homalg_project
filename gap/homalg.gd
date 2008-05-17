@@ -19,11 +19,20 @@ SetInfoLevel( InfoHomalgBasicOperations, 1 );
 # a central place for configurations:
 DeclareGlobalVariable( "HOMALG" );
 
+####################################
+#
+# global functions and operations:
+#
+####################################
+
 DeclareGlobalFunction( "homalgTotalRuntimes" );
 
 DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 
+# basic operations:
+
 DeclareOperation( "homalgLaTeX",
         [ IsObject ] ); 
+

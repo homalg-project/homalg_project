@@ -278,6 +278,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( IsLeft,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return IsLeftModule( M );
+    
+end );
+
+##
 InstallOtherMethod( Zero,
         "for homalg modules",
         [ IsHomalgModule and IsLeftModule ], 10001,	## FIXME: is it O.K. to use such a high ranking

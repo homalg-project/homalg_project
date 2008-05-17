@@ -1173,7 +1173,7 @@ InstallMethod( LeftInverse,
         return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
         
     else
-        Error( "a zero matrix with positive number of columns has no left inverse!" );
+        Error( "a zero matrix with positive number of columns has no left inverse!\n" );
     fi;
     
 end );
@@ -1242,7 +1242,7 @@ InstallMethod( RightInverse,
         return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
         
     else
-        Error( "a zero matrix with positive number of rows has no left inverse!" );
+        Error( "a zero matrix with positive number of rows has no left inverse!\n" );
     fi;
     
 end );

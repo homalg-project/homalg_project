@@ -64,6 +64,9 @@ DeclareGlobalFunction( "HomalgCocomplex" );
 
 # basic operations:
 
+DeclareOperation( "IsLeft",
+        [ IsHomalgComplex ] );
+
 DeclareOperation( "ModuleIndicesOfComplex",
         [ IsHomalgComplex ] );
 

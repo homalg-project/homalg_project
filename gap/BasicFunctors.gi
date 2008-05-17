@@ -22,6 +22,10 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
   function( phi )
     local R, T, p, gen, rel, coker, id, epi, emb;
     
+    if HasCokernelEpi( phi ) then
+        return TargetOfMorphism( CokernelEpi( phi ) );
+    fi;
+    
     R := HomalgRing( phi );
     
     T := TargetOfMorphism( phi );
@@ -65,8 +69,9 @@ end );
 InstallValue( Functor_Cokernel,
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
+                [ "natural_transformation", "CokernelEpi" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", "covariant" ],
+                [ "1", [ "covariant", IsMorphismOfFinitelyGeneratedModulesRep ] ],
                 [ "OnObjects", _Functor_Cokernel_OnObjects ]
                 )
 );
@@ -78,6 +83,10 @@ InstallValue( Functor_Cokernel,
 InstallGlobalFunction( _Functor_Kernel_OnObjects,
   function( psi )
     local S, p, ker, emb;
+    
+    if HasKernelEmb( psi ) then
+        return SourceOfMorphism( KernelEmb( psi ) );
+    fi;
     
     S := SourceOfMorphism( psi );
     
@@ -107,8 +116,9 @@ end );
 InstallValue( Functor_Kernel,
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
+                [ "natural_transformation", "KernelEmb" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", "covariant" ],
+                [ "1", [ "covariant", IsMorphismOfFinitelyGeneratedModulesRep ] ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
 );
@@ -118,8 +128,15 @@ InstallValue( Functor_Kernel,
 ##
 
 InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
-  function( phi, psi )
-    local R, pre, post, M, p, gen, rel, coker, ker, emb;
+  function( phi_psi )
+    local phi, psi, R, pre, post, M, p, gen, rel, coker, ker, emb;
+    
+    if not ( IsList( phi_psi) and Length( phi_psi ) = 2 and ForAll( phi_psi, IsMorphismOfFinitelyGeneratedModulesRep ) ) then
+	Error( "expecting a list containing two morphisms\n" );
+    fi;
+    
+    phi := phi_psi[1];
+    psi := phi_psi[2];
     
     R := HomalgRing( phi );
     
@@ -162,11 +179,15 @@ InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
     
     ker := SyzygiesGenerators( post ) / coker;
     
-    ## emb is the matrix of the natural embedding
+    ## emb is the matrix of the "natural embedding" (see below)
     ## w.r.t. the first set of relations of ker and the p-th set of relations of M
     emb := MatrixOfGenerators( ker, 1 );
     
+    ## this is in general NOT a morphism,
+    ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
+    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1.(2), 3.1.2] )
     emb := HomalgMorphism( emb, [ ker, 1 ], [ M, p ] );
+    SetIsTobBeViewedAsAMonomorphism( emb, true );
     
     ## save the natural embedding in the defect (thanks GAP):
     ker!.NaturalEmbedding := emb;
@@ -178,8 +199,8 @@ end );
 InstallValue( Functor_DefectOfHoms,
         CreateHomalgFunctor(
                 [ "name", "DefectOfHoms" ],
-                [ "number_of_arguments", 1 ],	## this is not a mistake
-                [ "1", "covariant" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ "covariant", IsHomogeneousList ] ],
                 [ "OnObjects", _Functor_DefectOfHoms_OnObjects ]
                 )
 );
@@ -215,8 +236,17 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     matM := MatrixOfRelations( M );
     matN := MatrixOfRelations( N );
     
-    HP0N := DiagMat( ListWithIdenticalEntries( l0, Involution( matN ) ) );
-    HP1N := DiagMat( ListWithIdenticalEntries( l1, Involution( matN ) ) );
+    if l0 = 0 then
+        HP0N := HomalgZeroMatrix( 0, 0, R );
+    else
+        HP0N := DiagMat( ListWithIdenticalEntries( l0, Involution( matN ) ) );
+    fi;
+    
+    if l1 = 0 then
+        HP1N := HomalgZeroMatrix( 0, 0, R );
+    else
+        HP1N := DiagMat( ListWithIdenticalEntries( l1, Involution( matN ) ) );
+    fi;
     
     idN := HomalgIdentityMatrix( _l0, R );
     
@@ -356,8 +386,8 @@ InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", "contravariant" ],
-                [ "2", "covariant" ],
+                [ "1", [ "contravariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep ] ],
+                [ "2", [ "covariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep ] ],
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
@@ -370,230 +400,28 @@ InstallValue( Functor_Hom,
 ####################################
 
 ##
-## Cokernel( phi )
+## Cokernel( phi ) and CokernelEpi( phi )
 ##
 
-##
-InstallMethod( Cokernel,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local functor;
-    
-    functor := Functor_Cokernel;
-    
-    return functor!.OnObjects( phi );
-    
-end );
+InstallFunctorOnObjects( Functor_Cokernel );
 
 ##
-InstallMethod( CokernelEpi,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local coker;
-    
-    coker := Cokernel( phi );	## this sets the attribute CokernelEpi
-    
-    return CokernelEpi( phi );	## not an infinite loop because of the side effect of the above line
-    
-end );
-
-##
-## Kernel( phi )
+## Kernel( phi ) and KernelEmb( phi )
 ##
 
-##
-InstallMethod( Kernel,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local functor;
-    
-    functor := Functor_Kernel;
-    
-    return functor!.OnObjects( phi );
-    
-end );
+InstallFunctorOnObjects( Functor_Kernel );
 
 ##
-InstallMethod( KernelEmb,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local ker;
-    
-    ker := Kernel( phi );	## this sets the attribute KernelEmb
-    
-    return KernelEmb( phi );	## not an infinite loop because of the side effect of the above line
-    
-end );
-
-##
-## DefectOfHoms( phi, psi )
+## DefectOfHoms( [ phi, psi ] )
 ##
 
-##
-InstallMethod( DefectOfHoms,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi, psi )
-    local functor;
-    
-    functor := Functor_DefectOfHoms;
-    
-    return functor!.OnObjects( phi, psi );
-    
-end );
+InstallFunctorOnObjects( Functor_DefectOfHoms );
 
 ##
 ## Hom( M, N )
 ##
 
-##
-InstallMethod( Hom,
-        "for homalg morphisms",
-        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
-        
-  function( M, N )
-    local functor;
-    
-    functor := Functor_Hom;
-    
-    return functor!.OnObjects( M, N );
-    
-end );
+InstallFunctorOnObjects( Functor_Hom );
 
-##
-InstallMethod( Hom,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsFinitelyPresentedModuleRep ],
-        
-  function( phi, L )
-    
-    return FunctorMap( Functor_Hom, phi, [ [ 2, L ] ] );
-    
-end );
-
-##
-InstallMethod( Hom,
-        "for homalg morphisms",
-        [ IsFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( L, phi )
-    
-    return FunctorMap( Functor_Hom, phi, [ [ 1, L ] ] );
-    
-end );
-
-##
-## Hom( M, R )
-##
-
-##
-InstallMethod( Hom,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRing ],
-        
-  function( M, R )
-    local N;
-    
-    if IsLeftModule( M ) then
-        N := AsLeftModule( R );
-    else
-        N := AsRightModule( R );
-    fi;
-    
-    return Hom( M, N );
-    
-end );
-
-InstallMethod( Hom,
-        "for homalg modules",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsHomalgRing ],
-        
-  function( phi, R )
-    local N;
-    
-    if IsHomalgMorphismOfLeftModules( phi ) then
-        N := AsLeftModule( R );
-    else
-        N := AsRightModule( R );
-    fi;
-    
-    return Hom( phi, N );
-    
-end );
-
-##
-## Hom( M ) := Hom( M, R )
-##
-
-##
-InstallMethod( Hom,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return Hom( M, HomalgRing( M ) );
-    
-end );
-
-InstallMethod( Hom,
-        "for homalg modules",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return Hom( phi, HomalgRing( phi ) );
-    
-end );
-
-##
-## Hom( R, N )
-##
-
-##
-InstallMethod( Hom,
-        "for two homalg modules",
-        [ IsHomalgRing, IsFinitelyPresentedModuleRep ],
-        
-  function( R, N )
-    local M;
-    
-    if IsLeftModule( N ) then
-        M := AsLeftModule( R );
-    else
-        M := AsRightModule( R );
-    fi;
-    
-    return Hom( M, N );
-        
-end );
-
-##
-## Hom( R, R )
-##
-
-##
-InstallMethod( Hom,
-        "for homalg rings",
-        [ IsHomalgRing, IsHomalgRing ],
-        
-  function( R1, R2 )
-    local M, N;
-    
-    ## I personally prefer the row convention and hence left modules:
-    M := AsLeftModule( R1 );
-    N := AsLeftModule( R2 );
-    
-    return Hom( M, N );
-    
-end );
+InstallFunctorOnMorphisms( Functor_Hom );
 

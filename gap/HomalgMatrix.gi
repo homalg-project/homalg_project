@@ -144,7 +144,7 @@ InstallMethod( CreateHomalgMatrix,
     elif IsHomogeneousList( s ) then
         return HomalgMatrix( ListToListList( s, r, c ), R );
     else
-        Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}: " );
+        Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}\n" );
     fi;
     
 end );
@@ -869,7 +869,7 @@ InstallGlobalFunction( HomalgMatrix,
     R := arg[nargs];
     
     if not IsHomalgRing( R ) then
-        Error( "the last argument must be an IsHomalgRing" );
+        Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -945,7 +945,7 @@ InstallGlobalFunction( HomalgZeroMatrix,
     R := arg[Length( arg )];
     
     if not IsHomalgRing( R ) then
-        Error( "the last argument must be an IsHomalgRing" );
+        Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -981,7 +981,7 @@ InstallGlobalFunction( HomalgIdentityMatrix,
     R := arg[Length( arg )];
     
     if not IsHomalgRing( R ) then
-        Error( "the last argument must be an IsHomalgRing" );
+        Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -1014,7 +1014,7 @@ InstallGlobalFunction( HomalgInitialMatrix,
     R := arg[Length( arg )];
     
     if not IsHomalgRing( R ) then
-        Error( "the last argument must be an IsHomalgRing" );
+        Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -1050,7 +1050,7 @@ InstallGlobalFunction( HomalgInitialIdentityMatrix,
     R := arg[Length( arg )];
     
     if not IsHomalgRing( R ) then
-        Error( "the last argument must be an IsHomalgRing" );
+        Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -1083,7 +1083,7 @@ InstallGlobalFunction( HomalgVoidMatrix,
     R := arg[Length( arg )];
     
     if not IsHomalgRing( R ) then
-        Error( "the last argument must be an IsHomalgRing" );
+        Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -1139,7 +1139,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
     if not IsBound( diag ) then
         return CallFuncList( DiagMat, arg );
     elif not IsBound( R ) then
-        Error( "no homalg ring provided" );
+        Error( "no homalg ring provided\n" );
     fi;
     
     if diag = [ ] then

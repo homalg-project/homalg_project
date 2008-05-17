@@ -125,6 +125,9 @@ DeclareGlobalFunction( "GetGenerators" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgModule ] );
 
+DeclareOperation( "IsLeft",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "SetsOfGenerators",
         [ IsHomalgModule ] );
 

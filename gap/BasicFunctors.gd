@@ -62,35 +62,8 @@ DeclareOperation( "Cokernel",
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
 
 DeclareOperation( "DefectOfHoms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
+        [ IsHomogeneousList ] );
 
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgModule, IsHomalgRing ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgRing, IsHomalgModule ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgRing, IsHomalgRing ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgMorphism, IsHomalgModule ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgMorphism, IsHomalgRing ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgMorphism ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgModule, IsHomalgMorphism ] );
-
-DeclareOperation( "Hom",
-        [ IsHomalgRing, IsHomalgMorphism ] );
 

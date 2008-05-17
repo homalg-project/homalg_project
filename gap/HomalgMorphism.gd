@@ -83,6 +83,9 @@ DeclareGlobalFunction( "HomalgIdentityMorphism" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgMorphism ] );
 
+DeclareOperation( "IsLeft",
+        [ IsHomalgMorphism ] );
+
 DeclareOperation( "SourceOfMorphism",
         [ IsHomalgMorphism ] );
 

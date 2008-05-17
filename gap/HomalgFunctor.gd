@@ -43,9 +43,27 @@ DeclareGlobalFunction( "CreateHomalgFunctor" );
 
 # basic operations:
 
+DeclareOperation( "NameOfFunctor",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "MultiplicityOfFunctor",
+        [ IsHomalgFunctor ] );
+
 DeclareOperation( "FunctorMap",
         [ IsHomalgFunctor, IsHomalgMorphism, IsList ] );
 
 DeclareOperation( "FunctorMap",
         [ IsHomalgFunctor, IsHomalgMorphism ] );
+
+DeclareOperation( "InstallFunctorOnObjects",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "InstallFunctorOnMorphisms",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "InstallFunctorOnComplexes",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "InstallFunctorOnChainMaps",
+        [ IsHomalgFunctor ] );
 

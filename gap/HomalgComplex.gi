@@ -145,9 +145,9 @@ InstallMethod( IsExactSequence,
         return true;
     elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
       or not ( IsComplexOfFinitelyPresentedModulesRep( C ) or IsHomalgComplexOfLeftModules( C ) ) then
-        return ForAll( indices, i -> IsZero( DefectOfHoms( C!.((i + 1)), C!.(i) ) ) );
+        return ForAll( indices, i -> IsZero( DefectOfHoms( [ C!.((i + 1)), C!.(i) ] ) ) );
     else
-        return ForAll( indices, i -> IsZero( DefectOfHoms( C!.(i), C!.((i + 1)) ) ) );
+        return ForAll( indices, i -> IsZero( DefectOfHoms( [ C!.(i), C!.((i + 1)) ] ) ) );
     fi;
     
 end );
@@ -157,6 +157,17 @@ end );
 # methods for operations:
 #
 ####################################
+
+##
+InstallMethod( IsLeft,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    return IsHomalgComplexOfLeftModules( C );
+    
+end );
 
 ##
 InstallMethod( ModuleIndicesOfComplex,

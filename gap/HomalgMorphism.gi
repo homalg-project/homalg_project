@@ -255,6 +255,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( IsLeft,
+        "for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    
+    return IsHomalgMorphismOfLeftModules( phi );
+    
+end );
+
+##
 InstallMethod( SourceOfMorphism,
         "for homalg morphisms",
         [ IsHomalgMorphism ],
