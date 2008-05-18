@@ -23,43 +23,35 @@ DeclareCategory( "IsHomalgModule",
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgModules" );
-
-####################################
-#
 # properties:
 #
 ####################################
 
-DeclareProperty( "IsFreeModule",
+DeclareProperty( "IsFree",
         IsHomalgModule );
 
-DeclareProperty( "IsStablyFreeModule",
+DeclareProperty( "IsStablyFree",
         IsHomalgModule );
 
-DeclareProperty( "IsProjectiveModule",
+DeclareProperty( "IsProjective",
         IsHomalgModule );
 
-DeclareProperty( "IsReflexiveModule",
+DeclareProperty( "IsReflexive",
         IsHomalgModule );
 
-DeclareProperty( "IsTorsionFreeModule",
+DeclareProperty( "IsTorsionFree",
         IsHomalgModule );
 
-DeclareProperty( "IsArtinianModule",
+DeclareProperty( "IsArtinian",
         IsHomalgModule );
 
-DeclareProperty( "IsCyclicModule",
+DeclareProperty( "IsCyclic",
         IsHomalgModule );
 
-DeclareProperty( "IsTorsionModule",
+DeclareProperty( "IsTorsion",
         IsHomalgModule );
 
-DeclareProperty( "IsHolonomicModule",
+DeclareProperty( "IsHolonomic",
         IsHomalgModule );
 
 ####################################
@@ -173,14 +165,26 @@ DeclareOperation( "MatrixOfRelations",
 DeclareOperation( "MatrixOfRelations",
         [ IsHomalgModule, IsPosInt ] );
 
+DeclareOperation( "HasNrGenerators",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "NrGenerators",
         [ IsHomalgModule ] );
+
+DeclareOperation( "HasNrGenerators",
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "NrGenerators",
         [ IsHomalgModule, IsPosInt ] );
 
+DeclareOperation( "HasNrRelations",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "NrRelations",
         [ IsHomalgModule ] );
+
+DeclareOperation( "HasNrRelations",
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "NrRelations",
         [ IsHomalgModule, IsPosInt ] );

@@ -40,140 +40,6 @@ BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-InstallValue( SimpleLogicalImplicationsForHomalgModules,
-        [ ## IsTorsionFreeModule:
-          
-          [ IsZero,
-            "implies", IsFreeModule ],
-          
-          [ IsFreeModule,
-            "implies", IsStablyFreeModule ],
-          
-          [ IsStablyFreeModule,
-            "implies", IsProjectiveModule ],
-          
-          [ IsProjectiveModule,
-            "implies", IsReflexiveModule ],
-          
-          [ IsReflexiveModule,
-            "implies", IsTorsionFreeModule ],
-          
-          ## IsTorsionModule:
-          
-          [ IsZero,
-            "implies", IsHolonomicModule ],
-          
-          [ IsHolonomicModule,
-            "implies", IsTorsionModule ],
-          
-          [ IsHolonomicModule,
-            "implies", IsArtinianModule ],
-          
-          ## IsCyclicModule:
-          
-          [ IsZero,
-            "implies", IsCyclicModule ],
-          
-          ## IsZero:
-          
-          [ IsTorsionModule, "and", IsTorsionFreeModule,
-            "imply", IsZero ]
-          
-          ] );
-
-####################################
-#
-# logical implications methods:
-#
-####################################
-
-InstallLogicalImplicationsForHomalg( SimpleLogicalImplicationsForHomalgModules, IsHomalgModule );
-
-####################################
-#
-# immediate methods for properties:
-#
-####################################
-
-## strictly less relations than generators => not IsTorsionModule
-InstallImmediateMethod( IsTorsionModule,
-        IsFinitelyPresentedModuleRep, 0,
-        
-  function( M )
-    local l, b, i, rel, mat;
-    
-    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
-    
-    b := false;
-    
-    for i in [ 1.. Length( l ) ] do;
-        
-        rel := SetsOfRelations( M )!.(i);
-        
-        if not IsString( rel ) then
-            mat := MatrixOfRelations( rel );
-     
-            if HasNrRows( mat ) and HasNrColumns( mat )
-              and NrColumns( mat ) > NrRows( mat ) then
-                b := true;
-                break;
-            fi;
-        fi;
-        
-    od;
-    
-    if b then
-        return false;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsFreeModule,
-        IsFinitelyPresentedModuleRep, 0,
-        
-  function( M )
-    
-    if NrRelations( M ) = 0 then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( RankOfModule,
-        IsFinitelyPresentedModuleRep and IsFreeModule, 0,
-        
-  function( M )
-    
-    if NrRelations( M ) = 0 then
-        return NrGenerators( M );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsTorsionModule,
-        IsFinitelyPresentedModuleRep and HasRankOfModule, 0,
-        
-  function( M )
-    
-    return RankOfModule( M ) = 0;
-    
-end );
-
-####################################
-#
 # methods for properties:
 #
 ####################################
@@ -186,6 +52,28 @@ InstallMethod( IsZero,
   function( M )
     
     return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
+    
+end );
+
+##
+InstallMethod( IsTorsionFree,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return IsZero( TorsionSubmodule( M ) );
+    
+end );
+
+##
+InstallMethod( IsTorsion,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return IsZero( TorsionFreeFactor( M ) );
     
 end );
 
@@ -480,12 +368,39 @@ InstallMethod( MatrixOfRelations,
 end );
 
 ##
+InstallMethod( HasNrGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+  function( M )
+    
+    return HasNrGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
 InstallMethod( NrGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
   function( M )
     
     return NrGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+  function( M, pos )
+    local gen;
+    
+    gen := GeneratorsOfModule( M, pos );
+    
+    if IsHomalgGenerators( gen ) then
+        return HasNrGenerators( gen );
+    fi;
+    
+    return fail;
     
 end );
 
@@ -507,6 +422,24 @@ InstallMethod( NrGenerators,
 end );
 
 ##
+InstallMethod( HasNrRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local rel;
+    
+    rel := RelationsOfModule( M );
+    
+    if IsHomalgRelations( rel ) then
+        return HasNrRelations( rel );
+    fi;
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( NrRelations,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -518,6 +451,24 @@ InstallMethod( NrRelations,
     
     if IsHomalgRelations( rel ) then
         return NrRelations( rel );
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( HasNrRelations,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    local rel;
+    
+    rel := RelationsOfModule( M, pos );
+    
+    if IsHomalgRelations( rel ) then
+        return HasNrRelations( rel );
     fi;
     
     return fail;
@@ -773,8 +724,8 @@ InstallMethod( AddANewPresentation,
     ## adjust the default position:
     SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     
-    if NrRelations( rel ) = 0 then
-        SetIsFreeModule( M, true );
+    if HasNrRelations( rel ) = true and NrRelations( rel ) = 0 then
+        SetIsFree( M, true );
     fi;
     
     return M;
@@ -854,8 +805,8 @@ InstallMethod( AddANewPresentation,
         SetIsZero( M, true );
     fi;
     
-    if NrRelations( rel ) = 0 then
-        SetIsFreeModule( M, true );
+    if HasNrRelations( rel ) = true and NrRelations( rel ) = 0 then
+        SetIsFree( M, true );
     fi;
     
     return M;
@@ -1175,7 +1126,7 @@ end );
 ##
 InstallMethod( ElementaryDivisors,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFreeModule ],
+        [ IsFinitelyPresentedModuleRep and IsFree ],
         
   function( M )
     local R;
@@ -1724,10 +1675,11 @@ InstallMethod( ViewObj,
     else
         gen_string := " generators";
     fi;
+    
     if RelationsOfModule( M ) = "unknown relations" then
         num_rel := "unknown";
         rel_string := " relations for ";
-    else
+    elif HasNrRelations( M ) = true then
         num_rel := NrRelations( M );
         if num_rel = 0 then
             num_rel := "";
@@ -1752,15 +1704,17 @@ InstallMethod( ViewObj,
     local num_gen, num_rel, gen_string, rel_string;
     
     num_gen := NrGenerators( M );
+    
     if num_gen = 1 then
         gen_string := " generator and ";
     else
         gen_string := " generators and ";
     fi;
+    
     if RelationsOfModule( M ) = "unknown relations" then
         num_rel := "unknown";
         rel_string := " relations";
-    else
+    elif HasNrRelations( M ) = true then
         num_rel := NrRelations( M );
         if num_rel = 0 then
             num_rel := "";
@@ -1778,7 +1732,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFreeModule ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
+        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
         
   function( M )
     local r, rk;

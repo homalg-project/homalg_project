@@ -14,6 +14,11 @@
 #
 ####################################
 
+## TorsionFreeFactor
+DeclareGlobalFunction( "_Functor_TorsionFreeFactor_OnObjects" );
+
+DeclareGlobalVariable( "Functor_TorsionFreeFactor" );
+
 ## TorsionSubmodule
 DeclareGlobalFunction( "_Functor_TorsionSubmodule_OnObjects" );
 
@@ -25,6 +30,9 @@ DeclareGlobalVariable( "Functor_TorsionSubmodule" );
 #
 ####################################
 
+DeclareAttribute( "TorsionFreeFactorEpi",
+        IsHomalgMorphism );
+
 DeclareAttribute( "TorsionSubmoduleEmb",
         IsHomalgMorphism );
 
@@ -35,6 +43,9 @@ DeclareAttribute( "TorsionSubmoduleEmb",
 ####################################
 
 # basic operations:
+
+DeclareOperation( "TorsionFreeFactor",
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "TorsionSubmodule",
         [ IsHomalgMorphism ] );

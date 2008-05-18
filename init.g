@@ -20,10 +20,6 @@ ReadPackage( "homalg", "gap/HomalgRing.gd" );
 ## matrices
 ReadPackage( "homalg", "gap/HomalgMatrix.gd" );
 
-## subpackages
-ReadPackage( "homalg", "gap/LIMAT.gd" );
-ReadPackage( "homalg", "gap/COLEM.gd" );
-
 ## modules
 ReadPackage( "homalg", "gap/HomalgRelations.gd" );
 ReadPackage( "homalg", "gap/SetsOfRelations.gd" );
@@ -41,6 +37,12 @@ ReadPackage( "homalg", "gap/HomalgComplex.gd" );
 ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 ReadPackage( "homalg", "gap/BasicFunctors.gd" );
 ReadPackage( "homalg", "gap/OtherFunctors.gd" );
+
+## subpackages
+ReadPackage( "homalg", "gap/LIRNG.gd" );
+ReadPackage( "homalg", "gap/LIMAT.gd" );
+ReadPackage( "homalg", "gap/COLEM.gd" );
+ReadPackage( "homalg", "gap/LIMOD.gd" );
 
 ## tools/service/basic
 ReadPackage( "homalg", "gap/Tools.gd" );

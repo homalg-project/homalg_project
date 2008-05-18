@@ -1067,11 +1067,17 @@ InstallMethod( ViewObj,
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
             Print( " morphism of" );
+        elif HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
+            Print( " \"monomorphism\" of" );
         else
             Print( " non-well-defined map between" );
         fi;
     else
-        Print( " \"morphism\" of" );
+        if HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
+            Print( " \"monomorphism\" of" );
+        else
+            Print( " \"morphism\" of" );
+        fi;
     fi;
     
     if IsHomalgMorphismOfLeftModules( o ) then

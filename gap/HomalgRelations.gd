@@ -74,7 +74,13 @@ DeclareOperation( "MatrixOfRelations",
 DeclareOperation( "HomalgRing",
         [ IsHomalgRelations ] );
 
+DeclareOperation( "HasNrGenerators",
+        [ IsHomalgRelations ] );
+
 DeclareOperation( "NrGenerators",
+        [ IsHomalgRelations ] );
+
+DeclareOperation( "HasNrRelations",
         [ IsHomalgRelations ] );
 
 DeclareOperation( "NrRelations",

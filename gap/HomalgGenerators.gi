@@ -78,6 +78,28 @@ InstallMethod( RelationsOfHullModule,
 end );
 
 ##
+InstallMethod( HasNrRelations,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        
+  function( gen )
+    
+    return HasNrRelations( RelationsOfHullModule( gen ) );
+    
+end );
+
+##
+InstallMethod( NrRelations,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        
+  function( gen )
+    
+    return NrRelations( RelationsOfHullModule( gen ) );
+    
+end );
+
+##
 InstallMethod( MatrixOfRelations,
         "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
@@ -85,6 +107,28 @@ InstallMethod( MatrixOfRelations,
   function( gen )
     
     return MatrixOfRelations( RelationsOfHullModule( gen ) );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        
+  function( gen )
+    
+    return HasNrRows( MatrixOfGenerators( gen ) );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
+        
+  function( gen )
+    
+    return HasNrColumns( MatrixOfGenerators( gen ) );
     
 end );
 

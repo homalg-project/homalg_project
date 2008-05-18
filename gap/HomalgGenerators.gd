@@ -71,7 +71,16 @@ DeclareOperation( "HomalgRing",
 DeclareOperation( "RelationsOfHullModule",
         [ IsHomalgGenerators ] );
 
+DeclareOperation( "HasNrRelations",
+        [ IsHomalgGenerators ] );
+
+DeclareOperation( "NrRelations",
+        [ IsHomalgGenerators ] );
+
 DeclareOperation( "MatrixOfRelations",
+        [ IsHomalgGenerators ] );
+
+DeclareOperation( "HasNrGenerators",
         [ IsHomalgGenerators ] );
 
 DeclareOperation( "NrGenerators",

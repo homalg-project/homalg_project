@@ -129,6 +129,28 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( HasNrGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    
+    return HasNrColumns( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( rel )
+    
+    return HasNrRows( MatrixOfRelations( rel ) );
+    
+end );
+
+##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
@@ -147,6 +169,28 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
   function( rel )
     
     return NrRows( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( HasNrRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    
+    return HasNrRows( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( HasNrRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( rel )
+    
+    return HasNrColumns( MatrixOfRelations( rel ) );
     
 end );
 

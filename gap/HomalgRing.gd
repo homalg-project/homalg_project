@@ -31,14 +31,6 @@ DeclareCategory( "IsHomalgExternalRingElement",
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-DeclareGlobalVariable( "SimpleLogicalImplicationsForHomalgRings" );
-
-####################################
-#
 # properties:
 #
 ####################################

@@ -35,10 +35,7 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,
     
     tor := SourceOfMorphism( emb );
     
-    SetIsTorsionModule( tor, true );
-    
-    ## save the natural embedding in the kernel (thanks GAP):
-    tor!.NaturalEmbedding := emb;
+    SetIsTorsion( tor, true );
     
     return tor;
     
@@ -51,6 +48,43 @@ InstallValue( Functor_TorsionSubmodule,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ "covariant", IsFinitelyPresentedModuleRep, IsHomalgRing ] ],
                 [ "OnObjects", _Functor_TorsionSubmodule_OnObjects ]
+                )
+);
+
+##
+## TorsionFreeFactor
+##
+
+InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,
+  function( M )
+    local emb, epi, M0;
+    
+    if HasTorsionFreeFactorEpi( M ) then
+        return TargetOfMorphism( TorsionFreeFactorEpi( M ) );
+    fi;
+    
+    emb := TorsionSubmoduleEmb( M );
+    
+    epi := CokernelEpi( emb );
+    
+    ## set the attribute TorsionFreeFactorEpi (specific for TorsionFreeFactor):
+    SetTorsionFreeFactorEpi( M, epi );
+    
+    M0 := TargetOfMorphism( epi );
+    
+    SetIsTorsionFree( M0, true );
+    
+    return M0;
+    
+end );
+
+InstallValue( Functor_TorsionFreeFactor,
+        CreateHomalgFunctor(
+                [ "name", "TorsionFreeFactor" ],
+                [ "natural_transformation", "TorsionFreeFactorEpi" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ "covariant", IsFinitelyPresentedModuleRep, IsHomalgRing ] ],
+                [ "OnObjects", _Functor_TorsionFreeFactor_OnObjects ]
                 )
 );
 
@@ -67,4 +101,12 @@ InstallValue( Functor_TorsionSubmodule,
 InstallFunctorOnObjects( Functor_TorsionSubmodule );
 
 InstallFunctorOnMorphisms( Functor_TorsionSubmodule );
+
+##
+## TorsionFreeFactor( M )
+##
+
+InstallFunctorOnObjects( Functor_TorsionFreeFactor );
+
+InstallFunctorOnMorphisms( Functor_TorsionFreeFactor );
 
