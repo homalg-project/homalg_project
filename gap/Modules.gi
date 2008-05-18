@@ -220,3 +220,45 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
 end );
 
+##
+InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule	(incomplete)
+  function( arg )
+    local nargs, M, R, mat, par, F;
+    
+    nargs := Length( arg );
+    
+    if IsHomalgModule( arg[1] ) then
+        M := RelationsOfModule( arg[1] );
+    elif IsHomalgRelations( arg[1] ) then
+        M := arg[1];
+    fi;
+    
+    R := HomalgRing( M );
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRelationsOfLeftModule( M ) then
+        
+        par := SyzygiesGeneratorsOfColumns( mat );
+        
+        F := HomalgFreeLeftModule( NrColumns( par ), R );
+        
+    else
+        
+        par := SyzygiesGeneratorsOfRows( mat );
+        
+        F := HomalgFreeRightModule( NrRows( par ), R );
+        
+    fi;
+    
+    if IsHomalgModule( arg[1] ) then
+        
+        par := HomalgMorphism( par, arg[1], F );
+        
+        SetIsMorphism( par, true );
+        
+    fi;
+    
+    return par;
+    
+end );

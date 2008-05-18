@@ -29,9 +29,6 @@ DeclareCategory( "IsHomalgExternalRingElement",
         and IsAdditivelyCommutativeElement
         and IshomalgExternalObject );
 
-DeclareCategory( "IsContainerForWeakPointersOnHomalgExternalRings",
-        IsComponentObjectRep );
-
 ####################################
 #
 # global variables:
@@ -211,8 +208,6 @@ DeclareOperation( "homalgSetName",
         [ IsHomalgExternalRingElement, IsString, IsHomalgRing ] );
 
 # constructor methods:
-
-DeclareGlobalFunction( "ContainerForWeakPointersOnHomalgExternalRings" );
 
 DeclareGlobalFunction( "CreateHomalgRing" );
 

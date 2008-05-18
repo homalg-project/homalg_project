@@ -24,9 +24,9 @@ DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
         IshomalgExternalObjectRep,
         [ "pointer", "cas" ] );
 
-# a new representation for the category IsContainerForWeakPointersOnHomalgExternalObjects:
+# a new subrepresentation of the representation IsContainerForWeakPointersRep:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalObjectsRep",
-        IsContainerForWeakPointersOnHomalgExternalObjects,
+        IsContainerForWeakPointersRep,
         [ "weak_pointers", "counter", "deleted" ] );
 
 ####################################
@@ -201,23 +201,6 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalObjects,
-  function( arg )
-    local container, type;
-    
-    container := rec( weak_pointers := WeakPointerObj( [ ] ),
-                      counter := 0,
-                      deleted := [ ] );
-    
-    type := TheTypeContainerForWeakPointersOnHomalgExternalObjects;
-    
-    ## Objectify:
-    Objectify( type, container );
-    
-    return container;
-    
-end );
-
 InstallGlobalFunction( homalgExternalObject,
   function( arg )
     local nargs, properties, ar, stream, obj, type;
@@ -293,7 +276,7 @@ InstallMethod( Display,
 end );
 
 InstallMethod( ViewObj,
-        "for containers of weak pointers to homalg external objects",
+        "for containers of weak pointers on homalg external objects",
         [ IsContainerForWeakPointersOnHomalgExternalObjectsRep ],
         
   function( o )
@@ -301,12 +284,12 @@ InstallMethod( ViewObj,
     
     del := Length( o!.deleted );
     
-    Print( "<A container of weak pointers to homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ">" );
+    Print( "<A container of weak pointers on homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ">" );
     
 end );
 
 InstallMethod( Display,
-        "for containers of weak pointers to homalg external objects",
+        "for containers of weak pointers on homalg external objects",
         [ IsContainerForWeakPointersOnHomalgExternalObjectsRep ],
         
   function( o )

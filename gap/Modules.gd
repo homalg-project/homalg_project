@@ -33,3 +33,5 @@ DeclareOperation( "FreeHullModule",
 
 DeclareGlobalFunction( "ResolutionOfModule" );
 
+DeclareGlobalFunction( "ParametrizeModule" );
+

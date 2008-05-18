@@ -91,67 +91,7 @@ InstallValue( SimpleLogicalImplicationsForHomalgModules,
 #
 ####################################
 
-#LogicalImplicationsForHomalg( SimpleLogicalImplicationsForHomalgModules );
-
-## FIXME: find a way to activate the above line and to delete the following
-for property in SimpleLogicalImplicationsForHomalgModules do;
-    
-    if Length( property ) = 3 then
-        
-        ## a => b:
-        InstallTrueMethod( property[3],
-                IsHomalgModule and property[1] );
-        
-        ## not b => not a:
-        InstallImmediateMethod( property[1],
-                IsHomalgModule and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
-                
-          function( M )
-            if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
-                return false;
-            fi;
-            
-            TryNextMethod( );
-            
-        end );
-        
-    elif Length( property ) = 5 then
-        
-        ## a and b => c:
-        InstallTrueMethod( property[5],
-                IsHomalgModule and property[1] and property[3] );
-        
-        ## b and not c => not a:
-        InstallImmediateMethod( property[1],
-                IsHomalgModule and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
-                
-          function( M )
-            if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
-               and property[3]( M ) and not property[5]( M ) then
-                return false;
-            fi;
-            
-            TryNextMethod( );
-            
-        end );
-        
-        ## a and not c => not b:
-        InstallImmediateMethod( property[3],
-                IsHomalgModule and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
-                
-          function( M )
-            if Tester( property[1] )( M ) and Tester( property[5] )( M ) ## FIXME: find a way to get rid of the Testers here
-               and property[1]( M ) and not property[5]( M ) then
-                return false;
-            fi;
-            
-            TryNextMethod( );
-            
-        end );
-        
-    fi;
-    
-od;
+InstallLogicalImplicationsForHomalg( SimpleLogicalImplicationsForHomalgModules, IsHomalgModule );
 
 ####################################
 #

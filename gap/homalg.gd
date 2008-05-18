@@ -21,13 +21,28 @@ DeclareGlobalVariable( "HOMALG" );
 
 ####################################
 #
+# categories:
+#
+####################################
+
+# a new category of objects:
+
+DeclareCategory( "IsContainerForWeakPointers",
+        IsComponentObjectRep );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
 
+DeclareGlobalFunction( "ContainerForWeakPointers" );
+
 DeclareGlobalFunction( "homalgTotalRuntimes" );
 
 DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
+
+DeclareGlobalFunction( "InstallLogicalImplicationsForHomalg" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 

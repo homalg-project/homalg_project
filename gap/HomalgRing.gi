@@ -28,9 +28,9 @@ DeclareRepresentation( "IsHomalgExternalRingElementRep",
         IshomalgExternalObjectRep and IsHomalgExternalRingElement,
         [ "object", "cas" ] );
 
-# a new representation for the category IsContainerForWeakPointersOnHomalgExternalRings:
+# a new subrepresentation of the representation IsContainerForWeakPointersRep:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalRingsRep",
-        IsContainerForWeakPointersOnHomalgExternalRings,
+        IsContainerForWeakPointersRep,
         [ "weak_pointers", "streams", "counter", "deleted" ] );
 
 ####################################
@@ -85,9 +85,6 @@ BindGlobal( "TheTypeContainerForWeakPointersOnHomalgExternalRings",
 
 InstallValue( SimpleLogicalImplicationsForHomalgRings,
         [ ## listed alphabetically (ignoring left/right):
-          
-          [ IsEuclideanRing,
-            "implies", IsLeftPrincipalIdealRing ],
           
           ##
           
@@ -159,62 +156,9 @@ InstallValue( SimpleLogicalImplicationsForHomalgRings,
 #
 ####################################
 
-#LogicalImplicationsForHomalg( SimpleLogicalImplicationsForHomalgRings );
+InstallLogicalImplicationsForHomalg( SimpleLogicalImplicationsForHomalgRings, IsHomalgRing );
 
-## FIXME: find a way to activate the above line and to delete the following
-for property in SimpleLogicalImplicationsForHomalgRings do;
-    
-    if Length( property ) = 3 then
-        
-        InstallTrueMethod( property[3],
-                property[1] );
-        
-        InstallImmediateMethod( property[1],
-                IsHomalgModule and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
-                
-          function( M )
-            if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of Tester here
-                return false;
-            fi;
-            
-            TryNextMethod( );
-            
-        end );
-        
-    elif Length( property ) = 5 then
-        
-        InstallTrueMethod( property[5],
-                property[1] and property[3] );
-        
-        InstallImmediateMethod( property[1],
-                IsHomalgModule and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
-                
-          function( M )
-            if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
-               and property[3]( M ) and not property[5]( M ) then
-                return false;
-            fi;
-            
-            TryNextMethod( );
-            
-        end );
-        
-        InstallImmediateMethod( property[3],
-                IsHomalgModule and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
-                
-          function( M )
-            if Tester( property[1] )( M ) and Tester( property[5] )( M ) ## FIXME: find a way to get rid of the Testers here
-               and property[1]( M ) and not property[5]( M ) then
-                return false;
-            fi;
-            
-            TryNextMethod( );
-            
-        end );
-        
-    fi;
-    
-od;
+InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
 
 ####################################
 #
@@ -434,25 +378,8 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( ContainerForWeakPointersOnHomalgExternalRings,
-  function( arg )
-    local container, type;
-    
-    container := rec( weak_pointers := WeakPointerObj( [ ] ),
-                      streams := [ ],
-                      counter := 0,
-                      deleted := [ ] );
-    
-    type := TheTypeContainerForWeakPointersOnHomalgExternalRings;
-    
-    ## Objectify:
-    Objectify( type, container );
-    
-    return container;
-    
-end );
-
-HOMALG.ContainerForWeakPointersOnHomalgExternalRings := ContainerForWeakPointersOnHomalgExternalRings( );
+HOMALG.ContainerForWeakPointersOnHomalgExternalRings :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalRings, [ "streams", [ ] ] );
 
 ##
 InstallGlobalFunction( CreateHomalgRing,
@@ -720,7 +647,7 @@ InstallMethod( ViewObj,
 end );
 
 InstallMethod( ViewObj,
-        "for containers of weak pointers to homalg external rings",
+        "for containers of weak pointers on homalg external rings",
         [ IsContainerForWeakPointersOnHomalgExternalRingsRep ],
         
   function( o )
@@ -728,12 +655,12 @@ InstallMethod( ViewObj,
     
     del := Length( o!.deleted );
     
-    Print( "<A container of weak pointers to homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ">" );
+    Print( "<A container of weak pointers on homalg external rings: active = ", o!.counter - del, ", deleted = ", del, ">" );
     
 end );
 
 InstallMethod( Display,
-        "for containers of weak pointers to homalg external rings",
+        "for containers of weak pointers on homalg external rings",
         [ IsContainerForWeakPointersOnHomalgExternalRingsRep ],
         
   function( o )

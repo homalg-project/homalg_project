@@ -39,8 +39,8 @@ ReadPackage( "homalg", "gap/HomalgComplex.gd" );
 
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
-
 ReadPackage( "homalg", "gap/BasicFunctors.gd" );
+ReadPackage( "homalg", "gap/OtherFunctors.gd" );
 
 ## tools/service/basic
 ReadPackage( "homalg", "gap/Tools.gd" );

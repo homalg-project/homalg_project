@@ -10,6 +10,32 @@
 
 ####################################
 #
+# representations:
+#
+####################################
+
+# a new representation for the category IsContainerForWeakPointers:
+DeclareRepresentation( "IsContainerForWeakPointersRep",
+        IsContainerForWeakPointers,
+        [ "weak_pointers", "counter", "deleted" ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointers",
+        NewFamily( "TheFamilyOfContainersForWeakPointers" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointers",
+        NewType( TheFamilyOfContainersForWeakPointers,
+                IsContainerForWeakPointersRep ) );
+
+####################################
+#
 # global variables:
 #
 ####################################
@@ -30,6 +56,35 @@ InstallValue( HOMALG,
             color_done := "\033[01m\033[4;32;40m",
            )
 );
+
+####################################
+#
+# global functions:
+#
+####################################
+
+InstallGlobalFunction( ContainerForWeakPointers,
+  function( arg )
+    local nargs, container, component, type;
+    
+    nargs := Length( arg );
+    
+    container := rec( weak_pointers := WeakPointerObj( [ ] ),
+                      counter := 0,
+                      deleted := [ ] );
+    
+    for component in arg{[ 2 .. nargs ]} do
+        container.( component[1] ) := component[2];
+    od;
+               
+    type := arg[1];
+    
+    ## Objectify:
+    Objectify( type, container );
+    
+    return container;
+    
+end );
 
 InstallGlobalFunction( homalgTotalRuntimes,
   function( arg )
@@ -62,60 +117,71 @@ end );
 # a global function for logical implications:
 
 InstallGlobalFunction( LogicalImplicationsForHomalg,
-  function( arg )
+  function( property, filter )
+    local propA, propB, propC;
+    
+    if Length( property ) = 3 then
+        
+        propA := property[1];
+        propB := property[3];
+        
+        InstallTrueMethod( propB, filter and propA );
+        
+        InstallImmediateMethod( propA,
+                filter and Tester( propB ), 0,
+                
+          function( M )
+            if filter( M ) and not propB( M ) then
+                return false;
+            fi;
+            
+            TryNextMethod( );
+            
+        end );
+        
+    elif Length( property ) = 5 then
+        
+        propA := property[1];
+        propB := property[3];
+        propC := property[5];
+        
+        InstallTrueMethod( propC, filter and propA and propB );
+        
+        InstallImmediateMethod( propA,
+                filter and Tester( propB ) and Tester( propC ), 0,
+                
+          function( M )
+            if filter( M ) and propB( M ) and not propC( M ) then
+                return false;
+            fi;
+            
+            TryNextMethod( );
+            
+        end );
+        
+        InstallImmediateMethod( propB,
+                filter and Tester( propA ) and Tester( propC ), 0,
+                
+          function( M )
+            if filter( M ) and propA( M ) and not propC( M ) then
+                return false;
+            fi;
+            
+            TryNextMethod( );
+            
+        end );
+        
+    fi;
+    
+end );
+
+InstallGlobalFunction( InstallLogicalImplicationsForHomalg,
+  function( properties, filter )
     local property;
     
-    for property in arg do;
+    for property in properties do;
         
-        if Length( property ) = 3 then
-            
-            InstallTrueMethod( property[3],
-                    property[1] );
-            
-            InstallImmediateMethod( property[1],
-                    IsHomalgModule and Tester( property[3] ), 0, ## NOTE: don't drop the Tester here!
-                    
-              function( M )
-                if Tester( property[3] )( M ) and not property[3]( M ) then  ## FIXME: find a way to get rid of the Tester here
-                    return false;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-        elif Length( property ) = 5 then
-            
-            InstallTrueMethod( property[5],
-                    property[1] and property[3] );
-            
-            InstallImmediateMethod( property[1],
-                    IsHomalgModule and Tester( property[3] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
-                    
-              function( M )
-                if Tester( property[3] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
-                   and property[3]( M ) and not property[5]( M ) then
-                    return false;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-            InstallImmediateMethod( property[3],
-                    IsHomalgModule and Tester( property[1] ) and Tester( property[5] ), 0, ## NOTE: don't drop the Testers here!
-                    
-              function( M )
-                if Tester( property[1] )( M ) and Tester( property[5] )( M )  ## FIXME: find a way to get rid of the Testers here
-                   and property[1]( M ) and not property[5]( M ) then
-                    return false;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-        fi;
+        LogicalImplicationsForHomalg( property, filter );
         
     od;
     

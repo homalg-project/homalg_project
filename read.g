@@ -39,8 +39,8 @@ ReadPackage( "homalg", "gap/HomalgComplex.gi" );
 
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
-
 ReadPackage( "homalg", "gap/BasicFunctors.gi" );
+ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
 ## tools/service/basic
 ReadPackage( "homalg", "gap/Tools.gi" );

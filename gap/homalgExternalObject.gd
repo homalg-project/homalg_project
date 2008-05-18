@@ -19,9 +19,6 @@
 DeclareCategory( "IshomalgExternalObject",
         IsAttributeStoringRep );
 
-DeclareCategory( "IsContainerForWeakPointersOnHomalgExternalObjects",
-        IsComponentObjectRep );
-
 ####################################
 #
 # global functions and operations:
@@ -52,8 +49,6 @@ DeclareOperation( "homalgNrOfWarnings",
         [ IshomalgExternalObject ] );
 
 # constructor methods:
-
-DeclareGlobalFunction( "ContainerForWeakPointersOnHomalgExternalObjects" );
 
 DeclareGlobalFunction( "homalgExternalObject" );
 
