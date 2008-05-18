@@ -18,6 +18,7 @@
 
 InstallValue( HOMALG_IO,
         rec(
+            variable_name := "homalg_variable_",
             InformAboutCASystemsWithoutActiveRings := true,
             SaveHomalgMaximumBackStream := false,
             color_display := false,

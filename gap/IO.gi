@@ -355,7 +355,8 @@ InstallGlobalFunction( LaunchCAS,
     s.HomalgBackStreamMaximumLength := 0;
     s.HomalgExternalWarningsCounter := 0;
     
-    s.homalgExternalObjectsPointingToVariables := ContainerForWeakPointersOnHomalgExternalObjects( );
+    s.homalgExternalObjectsPointingToVariables :=
+      ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalObjects );
     
     SendBlockingToCAS( s, "\n" );
     
