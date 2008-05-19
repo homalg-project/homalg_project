@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  read.g                    Gauss package         Simon Goertzen
+##  read.g                    Gauss package                   Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B f�r Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Reading the implementation part of the Gauss package.
 ##
