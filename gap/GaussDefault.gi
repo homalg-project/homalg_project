@@ -20,7 +20,7 @@ InstallValue( CommonHomalgTableForGaussDefault,
       ## Must only then be provided by the RingPackage in case the default
       ## "service" function does not match the Ring
       
-    lDecideZeroRows :=
+    DecideZeroRows :=
     function( A, B )
       local R, N;
      
