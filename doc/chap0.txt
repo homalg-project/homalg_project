@@ -9,7 +9,7 @@
                                Version 2008.03.25
   
   
-                                   March 2007
+                                    May 2008
   
   
                                  Simon Goertzen
@@ -26,7 +26,7 @@
   
   -------------------------------------------------------
   [1XCopyright[0m
-  © 2007 by Simon Goertzen
+  © 2008 by Simon Goertzen
   
   This  package  may  be distributed under the terms and conditions of the GNU
   Public License Version 2.

@@ -40,16 +40,21 @@ if CAS = fail or not CAS in [1..5] then
     CAS := 1;
 fi;
 
+LoadPackage( "homalg" );
+
 if CAS = 1 then
     R := HomalgRingOfIntegers(n);
-elif CAS = 2 then
-    R := HomalgRingOfIntegersInExternalGAP(n);
-elif CAS = 3 then
-    R := HomalgRingOfIntegersInSage(n);
-elif CAS = 4 then
-    R := HomalgRingOfIntegersInMAGMA(n);
-elif CAS = 5 then
-    R := HomalgRingOfIntegersInMaple(n);
+else
+    LoadPackage( "RingsForHomalg" );
+    if CAS = 2 then
+        R := HomalgRingOfIntegersInExternalGAP(n);
+    elif CAS = 3 then
+        R := HomalgRingOfIntegersInSage(n);
+    elif CAS = 4 then
+        R := HomalgRingOfIntegersInMAGMA(n);
+    elif CAS = 5 then
+        R := HomalgRingOfIntegersInMaple(n);
+    fi;
 fi;
 
 if IsBound( PackageInfo( "SCO" )[1] ) and IsBound( PackageInfo( "SCO" )[1].InstallationPath ) then

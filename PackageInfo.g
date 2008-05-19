@@ -26,13 +26,13 @@ Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.05.09",
+Version := "2008.05.19",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "09/05/2008",
+Date := "19/05/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -166,9 +166,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/SCO/README.SCO",
+  "http://wwwb.math.rwth-aachen.de/~simon/gap/SCO/README.SCO",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/SCO/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/~simon/gap/SCO/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -219,7 +219,7 @@ PackageDoc := rec(
   BookName  := "SCO",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/SCO/SCODoc.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/~simon/gap/SCO/SCODoc.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -244,7 +244,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["RingsForHomalg", ">= 2008.05.09"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["homalg", ">= 2008.05.19"]],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [ ],
   # needed external conditions (programs, operating system, ...)  provide 

@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2006.11.27)  14 APR 2008 13:06
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2006.11.27)  19 MAY 2008 13:49
 entering extended mode
 **SCO
 (./SCO.tex
@@ -146,9 +146,9 @@ Package hyperref Info: Bookmarks OFF on input line 2010.
 (/usr/share/texmf/tex/latex/hyperref/backref.sty
 Package: backref 2003/03/20 v1.23 Bibliographical back referencing
 )
-(/usr/share/texmf/tex/latex/url/url.sty
-\Urlmuskip=\muskip10
-Package: url 2004/03/15  ver 3.1  Verb mode for urls, etc.
+(/usr/share/texmf/tex/latex/html/url.sty
+Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
+ names
 )
 LaTeX Info: Redefining \url on input line 2143.
 \Fld@menulength=\count94
@@ -317,10 +317,10 @@ Chapter 3.
 
 ]) (./SCO.aux) ) 
 Here is how much of TeX's memory you used:
- 3226 strings out of 94499
- 43754 string characters out of 1172809
- 91125 words of memory out of 3500000
- 6304 multiletter control sequences out of 10000+50000
+ 3199 strings out of 94499
+ 43420 string characters out of 1172809
+ 90852 words of memory out of 3500000
+ 6277 multiletter control sequences out of 10000+50000
  41660 words of font info for 82 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
  27i,6n,27p,225b,275s stack positions out of 1500i,500n,5000p,200000b,5000s
