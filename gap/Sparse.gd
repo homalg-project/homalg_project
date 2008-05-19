@@ -32,3 +32,11 @@ DeclareOperation( "EchelonMatTransformation",
 DeclareOperation( "EchelonMatTransformationDestructive",
         [ IsSparseMatrix ] );
 
+DeclareOperation( "ReduceMatWithEchelonMat",
+        [ IsSparseMatrix, IsSparseMatrix ] ) ;
+
+DeclareGlobalFunction( "KernelMatSparse" );
+
+DeclareOperation( "KernelMatDestructive",
+        [ IsSparseMatrix, IsList ] );
+

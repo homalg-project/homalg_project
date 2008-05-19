@@ -114,7 +114,6 @@ InstallMethod( AddRow,
     i := 1;
     j := 1;
     
-    
     while i <= m do
         if j > Length( row2_indices ) then
             Append( row2_indices, row1_indices{[ i .. m ]} );
@@ -393,6 +392,162 @@ InstallMethod( EchelonMatTransformationDestructive,
                 vectors := SparseMatrix( rank, ncols, vectors.indices, vectors.entries ),
                 coeffs := SparseMatrix( rank, nrows, coeffs.indices, coeffs.entries ),
                 relations := SparseMatrix( nrows - rank, nrows, relations.indices, relations.entries ) );
+    
+end );
+
+##
+InstallMethod( ReduceMatWithEchelonMat,
+        "for sparse matrices over a field, second argument must be in REF",
+        [ IsSparseMatrix, IsSparseMatrix ],
+        function( mat, N )
+    local nrows1, ncols, nrows2, M, i, j, k, x, p, row1_indices, row1_entries, row2_indices;
+    nrows1 :=  mat!.nrows;
+    nrows2 := N!.nrows;
+    
+    if nrows1 = 0 or nrows2 = 0 then
+        return mat;
+    fi;
+    
+    ncols := mat!.ncols;
+    if ncols <> N!.ncols then
+        return fail;
+    elif ncols = 0 then
+        return mat;
+    fi;
+    
+    M := rec( indices := [], entries := [] );
+    for i in [ 1 .. nrows1 ] do
+        M.indices[i] := ShallowCopy( mat!.indices[i] );
+	M.entries[i] := ShallowCopy( mat!.entries[i] );
+    od;
+    
+    
+    for i in [ 1 .. nrows2 ] do
+        row2_indices := N!.indices[i];
+        if Length( row2_indices ) > 0 then
+            j := row2_indices[1];
+            for k in [ 1 .. nrows1 ] do
+                row1_indices := M!.indices[k];
+                row1_entries := M!.entries[k];
+                p := PositionSet( row1_indices, j );
+		if p <> fail then
+                    x := - row1_entries[p];
+                    AddRow( row2_indices, N!.entries[i] * x, row1_indices, row1_entries );
+                fi;
+            od;
+        fi;
+    od;
+    
+    return SparseMatrix( nrows1, ncols, M.indices, M.entries );
+
+end);
+
+##
+InstallGlobalFunction( KernelMatSparse,
+  function( arg )
+    local M, copy_indices, copy_entries, i;
+    copy_indices := [];
+    copy_entries := [];
+    
+    M := arg[1];
+    
+    for i in [ 1 .. M!.nrows ] do
+        copy_indices[i] := ShallowCopy( M!.indices[i] );
+        copy_entries[i] := ShallowCopy( M!.entries[i] );
+    od;                                                                                                                                                                    
+    
+    if Length( arg ) = 1 then
+        return KernelMatDestructive( SparseMatrix( M!.nrows, M!.ncols, copy_indices, copy_entries ), [ 1 .. M!.nrows ] );
+    elif Length( arg ) > 1 then
+        return KernelMatDestructive( SparseMatrix( M!.nrows, M!.ncols, copy_indices, copy_entries ), arg[2] );
+    fi;
+    
+end );
+                                                                                                                                                                          
+##
+InstallMethod( KernelMatDestructive,
+        "method for sparse matrices",
+        [ IsSparseMatrix, IsList ],
+        function( mat, L )
+    local nrows,
+          ncols,
+          indices,
+          entries,
+          vectors,
+          heads,
+          coeffs,
+          relations,
+          field,
+          i,
+          j,
+          T,
+          row, head, x, row2, rank, list,
+          row_indices,
+          row_entries,
+          p,
+          e;
+    
+    nrows := mat!.nrows;
+    ncols := mat!.ncols;    
+    indices := mat!.indices;
+    entries := mat!.entries;    
+    heads   := ListWithIdenticalEntries( ncols, 0 );
+    vectors := rec( indices := [], entries := [] );
+    coeffs := rec( indices := [], entries := [] );
+    relations := rec( indices := [], entries := [] );
+    i := 1;
+    while not IsBound( field ) and i <= nrows  do
+        if indices[i] <> [] then
+            field := Field( entries[i][1] );
+        fi;
+        i := i + 1;
+    od;
+    
+    if not IsBound( field) then
+        field := Rationals;
+    fi;
+    
+    T := rec( indices := ListWithIdenticalEntries( nrows, [ ] ), entries := ListWithIdenticalEntries( nrows, [ ] ) );
+    for i in [ 1 .. Length( L ) ] do
+        T.indices[L[i]] := [i];
+        T.entries[L[i]] := [ One( field ) ];
+    od;
+    
+    for i in [ 1 .. nrows ] do
+	row_indices := indices[i];        
+        # Reduce the row with the known basis vectors.
+        for j in [ 1 .. ncols ] do
+            head := heads[j];
+            if head <> 0 then
+                p := PositionSet( row_indices, j );
+                if p <> fail then
+                    row_entries := entries[i];
+                    x := - row_entries[p];
+                    AddRow( vectors.indices[ head ], vectors.entries[ head ] * x, row_indices, row_entries );
+                    AddRow( coeffs.indices[ head ], coeffs.entries[ head ] * x, T.indices[i], T.entries[i] );
+                fi;
+            fi;
+        od;
+        if Length( row_indices ) > 0 then
+            j := row_indices[1];
+            row_entries := entries[i];
+            # We found a new basis vector.
+            x := Inverse( row_entries[1] );
+            if x = fail then
+                TryNextMethod();
+            fi;
+            Add( vectors.indices, row_indices );
+            Add( vectors.entries, row_entries * x );
+            heads[j]:= Length( vectors.indices );
+            Add( coeffs.indices, T.indices[ i ] );
+            Add( coeffs.entries, T.entries[ i ] * x );
+        else
+            Add( relations.indices, T.indices[ i ] );
+            Add( relations.entries, T.entries[ i ] );
+        fi;
+    od;
+    
+    return rec( relations := SparseMatrix( Length( relations.indices ), Length( L ), relations.indices, relations.entries ) );
     
 end );
 

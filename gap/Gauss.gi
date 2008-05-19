@@ -273,6 +273,10 @@ InstallGlobalFunction( KernelMat,
   function( arg )
     local copymat, f, v, vc;
     
+    if IsSparseMatrix( arg[1] ) then
+        return CallFuncList( KernelMatSparse, arg );
+    fi;
+        
     copymat := [];
     f := DefaultFieldOfMatrix( arg[1] );
     for v in arg[1] do
