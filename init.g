@@ -51,4 +51,5 @@ ReadPackage( "homalg", "gap/Basic.gd" );
 
 ## main
 ReadPackage( "homalg", "gap/Modules.gd" );
+ReadPackage( "homalg", "gap/Complexes.gd" );
 

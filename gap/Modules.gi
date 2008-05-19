@@ -16,17 +16,13 @@
 
 ##
 InstallMethod( \/,				### defines: SubfactorModule (incomplete)
-        "for a homalg matrix",
-	[ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        "for homalg generators",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen1, gen2 )
-    local R, RP, B, N, S;
+    local R, B, N, S;
     
     R := HomalgRing( gen1 );
-    
-    RP := homalgTable( R );
-    
-    #=====# begin of the core procedure #=====#
     
     # basis of gen2
     B := BasisOfModule( gen2 );
@@ -53,7 +49,7 @@ end );
 ##
 InstallMethod( \/,
         "for a homalg matrix",
-	[ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
     local B, N, gen, S;
@@ -87,7 +83,7 @@ end );
 ##
 InstallMethod( \/,					## needed by _Functor_Kernel_OnObjects since SyzygiesGenerators returns a set of relations
         "for a set of homalg relations",
-	[ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
         
   function( rel, M )
     
@@ -98,7 +94,7 @@ end );
 ##
 InstallMethod( FreeHullModule,
         "for sets of homalg relations",
-	[ IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( M )
     local R;
@@ -116,7 +112,7 @@ end );
 ##
 InstallMethod( FreeHullModule,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
@@ -185,7 +181,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
             id := HomalgIdentityMatrix( NrGenerators( B ), R );
             ## the zero'th component of the quasi-isomorphism,
             ## which in this case is simplfy the natural epimorphism on the module
-            d_j!.CokernelEpi := HomalgMorphism( id, TargetOfMorphism( d_j ), arg[1] );
+            SetCokernelEpi( d_j, HomalgMorphism( id, TargetOfMorphism( d_j ), arg[1] ) );
             SetIsEpimorphism( d_j!.CokernelEpi, true );
         fi;
         SetFreeResolution( M, d );

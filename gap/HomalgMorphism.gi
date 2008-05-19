@@ -1089,13 +1089,13 @@ InstallMethod( ViewObj,
         if IsMorphism( o ) then
             Print( " morphism of" );
         elif HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
-            Print( " /monomorphism/ of" );
+            Print( " monomorphism modulo im(0) of" );
         else
             Print( " non-well-defined map between" );
         fi;
     else
         if HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
-            Print( " /monomorphism/ of" );
+            Print( " monomorphism modulo im(0) of" );
         else
             Print( " \"morphism\" of" );
         fi;

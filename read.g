@@ -51,9 +51,10 @@ ReadPackage( "homalg", "gap/Basic.gi" );
 
 ## main
 ReadPackage( "homalg", "gap/Modules.gi" );
+ReadPackage( "homalg", "gap/Complexes.gi" );
 
 ## specific GAP4 internal rings
 ReadPackage( "homalg", "gap/Integers.gi" );
 #ReadPackage( "homalg", "gap/EDIM.gi" );
-ReadPackage( "homalg", "gap/Fields.gi" );
+#ReadPackage( "homalg", "gap/Fields.gi" );
 

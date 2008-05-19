@@ -76,8 +76,14 @@ DeclareOperation( "HomalgRing",
 DeclareOperation( "MorphismIndicesOfComplex",
         [ IsHomalgComplex ] );
 
+DeclareOperation( "CertainMorphismOfComplex",
+        [ IsHomalgComplex, IsInt ] );
+
 DeclareOperation( "MorphismsOfComplex",
         [ IsHomalgComplex ] );
+
+DeclareOperation( "CertainModuleOfComplex",
+        [ IsHomalgComplex, IsInt ] );
 
 DeclareOperation( "ModulesOfComplex",
         [ IsHomalgComplex ] );

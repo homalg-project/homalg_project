@@ -227,6 +227,21 @@ InstallMethod( MorphismIndicesOfComplex,
 end );
 
 ##
+InstallMethod( CertainMorphismOfComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex, IsInt ],
+        
+  function( C, i )
+    
+    if IsBound( C!.(i) ) and IsHomalgMorphism( C!.(i) ) then
+        return C!.(i);
+    fi;
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( MorphismsOfComplex,
         "for homalg complexes",
         [ IsHomalgComplex ],
@@ -267,6 +282,35 @@ InstallMethod( ModulesOfComplex,
     fi;
     
     return modules;
+    
+end );
+
+##
+InstallMethod( CertainModuleOfComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex, IsInt ],
+        
+  function( C, i )
+    local indices, l;
+    
+    if IsBound( C!.(i) ) then
+        if IsHomalgModule( C!.(i) ) then
+            return C!.(i);
+        else
+            return SourceOfMorphism( C!.(i) );
+        fi;
+    fi;
+    
+    indices := ModuleIndicesOfComplex( C );
+    l := Length( indices );
+    
+    if IsComplexOfFinitelyPresentedModulesRep( C ) and indices[1] = i then
+        return TargetOfMorphism( C!.((i + 1)) );
+    elif IsCocomplexOfFinitelyPresentedModulesRep( C ) and indices[l] = i then
+        return TargetOfMorphism( C!.((i - 1)) );
+    fi;
+    
+    return fail;
     
 end );
 
