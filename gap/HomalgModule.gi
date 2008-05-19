@@ -1554,9 +1554,9 @@ InstallMethod( HomalgFreeLeftModule,
         "constructor",
         [ IsInt, IsHomalgRing ],
         
-  function( rank, ring )
+  function( rank, R )
     
-    return LeftPresentation( HomalgZeroMatrix( 0, rank, ring ) );
+    return LeftPresentation( HomalgZeroMatrix( 0, rank, R ) );
     
 end );
 
@@ -1565,9 +1565,9 @@ InstallMethod( HomalgFreeRightModule,
         "constructor",
         [ IsInt, IsHomalgRing ],
         
-  function( rank, ring )
+  function( rank, R )
     
-    return RightPresentation( HomalgZeroMatrix( rank, 0, ring ) );
+    return RightPresentation( HomalgZeroMatrix( rank, 0, R ) );
     
 end );
 
@@ -1576,9 +1576,9 @@ InstallMethod( HomalgZeroLeftModule,
         "constructor",
         [ IsHomalgRing ],
         
-  function( ring )
+  function( R )
     
-    return HomalgFreeLeftModule( 0, ring );
+    return HomalgFreeLeftModule( 0, R );
     
 end );
 
@@ -1587,9 +1587,9 @@ InstallMethod( HomalgZeroRightModule,
         "constructor",
         [ IsHomalgRing ],
         
-  function( ring )
+  function( R )
     
-    return HomalgFreeRightModule( 0, ring );
+    return HomalgFreeRightModule( 0, R );
     
 end );
 
@@ -1676,10 +1676,7 @@ InstallMethod( ViewObj,
         gen_string := " generators";
     fi;
     
-    if RelationsOfModule( M ) = "unknown relations" then
-        num_rel := "unknown";
-        rel_string := " relations for ";
-    elif HasNrRelations( M ) = true then
+    if HasNrRelations( M ) = true then
         num_rel := NrRelations( M );
         if num_rel = 0 then
             num_rel := "";
@@ -1689,6 +1686,13 @@ InstallMethod( ViewObj,
         else
             rel_string := " relations for ";
         fi;
+    else
+        if RelationsOfModule( M ) = "unknown relations" then
+            num_rel := "unknown";
+        else
+            num_rel := "an unknown number of";
+        fi;
+        rel_string := " relations for ";
     fi;
     
     Print( "<A left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
@@ -1711,10 +1715,7 @@ InstallMethod( ViewObj,
         gen_string := " generators and ";
     fi;
     
-    if RelationsOfModule( M ) = "unknown relations" then
-        num_rel := "unknown";
-        rel_string := " relations";
-    elif HasNrRelations( M ) = true then
+    if HasNrRelations( M ) = true then
         num_rel := NrRelations( M );
         if num_rel = 0 then
             num_rel := "";
@@ -1724,6 +1725,13 @@ InstallMethod( ViewObj,
         else
             rel_string := " relations";
         fi;
+    else
+        if RelationsOfModule( M ) = "unknown relations" then
+            num_rel := "unknown";
+        else
+            num_rel := "an unknown number of";
+        fi;
+        rel_string := " relations";
     fi;
     Print( "<A right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
     
@@ -1780,11 +1788,21 @@ InstallMethod( ViewObj,
         
   function( M )
     
-    if IsLeftModule( M ) then
-        Print( "<The zero left module>" );
+    if IsBound( M!.distinguished ) then
+        Print( "<The" );
     else
-        Print( "<The zero right module>" );
+        Print( "<A" );
     fi;
+    
+    Print( " zero " );
+    
+    if IsLeftModule( M ) then
+        Print( "left" );
+    else
+        Print( "right" );
+    fi;
+    
+    Print( " module>" );
     
 end );
     

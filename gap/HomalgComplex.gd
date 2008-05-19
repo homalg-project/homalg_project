@@ -82,9 +82,18 @@ DeclareOperation( "MorphismsOfComplex",
 DeclareOperation( "ModulesOfComplex",
         [ IsHomalgComplex ] );
 
+DeclareOperation( "LowestDegreeModuleInComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "HighestDegreeModuleInComplex",
+        [ IsHomalgComplex ] );
+
 DeclareOperation( "SupportOfComplex",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMorphism ] );
+
+DeclareOperation( "Add",
+        [ IsHomalgComplex, IsHomalgMatrix ] );
 

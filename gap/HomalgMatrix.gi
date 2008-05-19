@@ -436,8 +436,13 @@ InstallMethod( Involution,
     
     C := HomalgMatrix( R );
     
-    SetNrRows( C, NrColumns( M ) );
-    SetNrColumns( C, NrRows( M ) );
+    if HasNrColumns( M ) then
+        SetNrRows( C, NrColumns( M ) );
+    fi;
+    
+    if HasNrRows( M ) then
+        SetNrColumns( C, NrRows( M ) );
+    fi;
     
     SetEvalInvolution( C, M );
     SetItsInvolution( M, C );

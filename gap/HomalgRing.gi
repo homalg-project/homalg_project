@@ -380,6 +380,9 @@ InstallGlobalFunction( CreateHomalgRing,
     homalg_ring!.ZeroLeftModule := HomalgZeroLeftModule( homalg_ring );
     homalg_ring!.ZeroRightModule := HomalgZeroRightModule( homalg_ring );
     
+    homalg_ring!.ZeroLeftModule!.distinguished := true;
+    homalg_ring!.ZeroRightModule!.distinguished := true;
+    
     if IsHomalgExternalRingRep( homalg_ring ) then
         
         container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
@@ -417,6 +420,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     if nargs = 0 or arg[1] = 0 then
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
+        LoadPackage( "Gauss" );
         c := arg[1];
         if IsPrime( c ) then
             R := CreateHomalgRing( GF( c ) );
@@ -440,7 +444,47 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     
     SetIsFieldForHomalg( R, true );
     
+    LoadPackage( "Gauss" );
+    
     return R;
+    
+end );
+
+##
+InstallMethod( \*,
+        "constructor",
+        [ IsInt, IsHomalgRing ],
+        
+  function( rank, R )
+    
+    if rank = 0 then
+        return R!.ZeroLeftModule;
+    elif rank = 1 then
+        return AsLeftModule( R );
+    elif rank > 1 then
+        return HomalgFreeLeftModule( rank, R );
+    fi;
+    
+    Error( "virtual modules are not supported (yet)\n" );
+    
+end );
+
+##
+InstallMethod( \*,
+        "constructor",
+        [ IsHomalgRing, IsInt ],
+        
+  function( R, rank )
+    
+    if rank = 0 then
+        return R!.ZeroRightModule;
+    elif rank = 1 then
+        return AsRightModule( R );
+    elif rank > 1 then
+        return HomalgFreeRightModule( rank, R );
+    fi;
+    
+    Error( "virtual modules are not supported (yet)\n" );
     
 end );
 

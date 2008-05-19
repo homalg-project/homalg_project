@@ -271,6 +271,86 @@ InstallMethod( ModulesOfComplex,
 end );
 
 ##
+InstallMethod( LowestDegreeModuleInComplex,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedModulesRep ],
+        
+  function( C )
+    local indices, l;
+    
+    indices := ModuleIndicesOfComplex( C );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        return C!.( indices[1] );
+    else
+        return TargetOfMorphism( C!.( indices[2] ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( LowestDegreeModuleInComplex,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedModulesRep ],
+        
+  function( C )
+    local indices, l;
+    
+    indices := ModuleIndicesOfComplex( C );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        return C!.( indices[1] );
+    else
+        return SourceOfMorphism( C!.( indices[1] ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( HighestDegreeModuleInComplex,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedModulesRep ],
+        
+  function( C )
+    local indices, l;
+    
+    indices := ModuleIndicesOfComplex( C );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        return C!.( indices[1] );
+    else
+        return SourceOfMorphism( C!.( indices[l] ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( HighestDegreeModuleInComplex,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedModulesRep ],
+        
+  function( C )
+    local indices, l;
+    
+    indices := ModuleIndicesOfComplex( C );
+    
+    l := Length( indices );
+    
+    if l = 1 then
+        return C!.( indices[1] );
+    else
+        return TargetOfMorphism( C!.( indices[l - 1] ) );
+    fi;
+    
+end );
+
+##
 InstallMethod( SupportOfComplex,
         "for homalg complexes",
         [ IsHomalgComplex ],
@@ -373,6 +453,34 @@ InstallMethod( Add,
     
 end );
 
+##
+InstallMethod( Add,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedModulesRep, IsHomalgMatrix ],
+        
+  function( C, mat )
+    local T;
+    
+    T := HighestDegreeModuleInComplex( C );
+    
+    Add( C, HomalgMorphism( mat, "free", T ) );
+    
+end );
+
+##
+InstallMethod( Add,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedModulesRep, IsHomalgMatrix ],
+        
+  function( C, mat )
+    local S;
+    
+    S := HighestDegreeModuleInComplex( C );
+    
+    Add( C, HomalgMorphism( mat, S, "free" ) );
+    
+end );
+
 ####################################
 #
 # global functions:
@@ -402,7 +510,7 @@ end );
 
 InstallGlobalFunction( HomalgComplex,
   function( arg )
-    local nargs, C, complex, indices, left, type;
+    local nargs, C, complex, indices, left, module, type;
     
     nargs := Length( arg );
     
@@ -425,6 +533,8 @@ InstallGlobalFunction( HomalgComplex,
         indices := [ 0 ];
     fi;
     
+    module := false;
+    
     if IsHomalgModule( arg[1] ) then
         C.indices := indices;
         if IsLeftModule( arg[1] ) then
@@ -432,6 +542,7 @@ InstallGlobalFunction( HomalgComplex,
         else
             left := false;
         fi;
+        module := true;
     elif IsHomalgMorphism( arg[1] ) then
         if complex then
             C.indices := [ indices[1] - 1, indices[1] ];
@@ -465,6 +576,10 @@ InstallGlobalFunction( HomalgComplex,
     
     ## Objectify
     Objectify( type, C );
+    
+    if module then
+        SetIsGradedObject( C, true );
+    fi;
     
     return C;
     
@@ -596,18 +711,41 @@ InstallMethod( ViewObj,
         [ IsComplexOfFinitelyPresentedModulesRep and IsGradedObject ],
         
   function( o )
+    local l, indices;
     
-    Print( "<A graded (homological) object consisting of " );
+    Print( "<A graded object consisting of " );
     
-    Print( Length( ModuleIndicesOfComplex( o ) ) );
+    indices := ModuleIndicesOfComplex( o );
     
-    if IsHomalgComplexOfLeftModules( o ) then
-        Print( " right" );
+    l := Length( indices );
+    
+    if l = 1 then
+        Print( "a single" );
     else
-        Print( " left" );
+        Print( l );
     fi;
     
-    Print( " modules>" );
+    if IsHomalgComplexOfLeftModules( o ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    Print( " module" );
+    
+    if l > 1 then
+        Print( "s" );
+    fi;
+    
+    Print( " at homological degree" );
+    
+    if l = 1 then
+        Print( " ", indices[1] );
+    else
+        Print( "s ", indices );
+    fi;
+    
+    Print( ">" );
     
 end );
 
@@ -617,18 +755,41 @@ InstallMethod( ViewObj,
         [ IsCocomplexOfFinitelyPresentedModulesRep and IsGradedObject ],
         
   function( o )
+    local l, indices;
     
-    Print( "<A graded (cohomological) object consisting of " );
+    Print( "<A graded object consisting of " );
     
-    Print( Length( ModuleIndicesOfComplex( o ) ) );
+    indices := ModuleIndicesOfComplex( o );
     
-    if IsHomalgComplexOfLeftModules( o ) then
-        Print( " right" );
+    l := Length( indices );
+    
+    if l = 1 then
+        Print( "a single" );
     else
-        Print( " left" );
+        Print( l );
     fi;
     
-    Print( " modules>" );
+    if IsHomalgComplexOfLeftModules( o ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    Print( " module" );
+    
+    if l > 1 then
+        Print( "s" );
+    fi;
+    
+    Print( " at cohomological degree" );
+    
+    if l = 1 then
+        Print( " ", indices[1] );
+    else
+        Print( "s ", indices );
+    fi;
+    
+    Print( ">" );
     
 end );
 
@@ -642,9 +803,9 @@ InstallMethod( ViewObj,
     Print( "<A zero " );
     
     if IsHomalgComplexOfLeftModules( o ) then
-        Print( "right" );
-    else
         Print( "left" );
+    else
+        Print( "right" );
     fi;
     
     Print( " complex>" );
@@ -661,9 +822,9 @@ InstallMethod( ViewObj,
     Print( "<A zero " );
     
     if IsHomalgComplexOfLeftModules( o ) then
-        Print( "right" );
-    else
         Print( "left" );
+    else
+        Print( "right" );
     fi;
     
     Print( " cocomplex>" );

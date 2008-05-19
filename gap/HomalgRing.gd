@@ -184,6 +184,12 @@ DeclareOperation( "AsLeftModule",
 DeclareOperation( "AsRightModule",
         [ IsHomalgRing ] );
 
+DeclareOperation( "*",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsInt ] );
+
 DeclareOperation( "PolynomialRing",
         [ IsHomalgRing, IsList ] );
 

@@ -218,7 +218,7 @@ InstallMethod( InstallFunctorOnObjects,
                     [ IsHomalgRing ],
               function( R )
                 
-                return Functor!.OnObjects( R!.AsLeftModule );
+                return Functor!.OnObjects( AsLeftModule( R ) );
                 
             end );
             
@@ -263,9 +263,9 @@ InstallMethod( InstallFunctorOnObjects,
                 local o2;
                 
                 if IsLeft( o1 ) then
-                    o2 := R!.AsLeftModule;
+                    o2 := AsLeftModule( R );
                 else
-                    o2 := R!.AsRightModule;
+                    o2 := AsRightModule( R );
                 fi;
                 
                 return Functor!.OnObjects( o1, o2  );
@@ -281,9 +281,9 @@ InstallMethod( InstallFunctorOnObjects,
                 R := HomalgRing( o1 );
                 
                 if IsLeft( o1 ) then
-                    o2 := R!.AsLeftModule;
+                    o2 := AsLeftModule( R );
                 else
-                    o2 := R!.AsRightModule;
+                    o2 := AsRightModule( R );
                 fi;
                 
                 return Functor!.OnObjects( o1, o2  );
@@ -311,9 +311,9 @@ InstallMethod( InstallFunctorOnObjects,
                 local o1;
                 
                 if IsLeft( o2 ) then
-                    o1 := R!.AsLeftModule;
+                    o1 := AsLeftModule( R );
                 else
-                    o1 := R!.AsRightModule;
+                    o1 := AsRightModule( R );
                 fi;
                 
                 return Functor!.OnObjects( o1, o2  );
@@ -425,9 +425,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                 local o;
                 
                 if IsLeft( m ) then
-                    o := R!.AsLeftModule;
+                    o := AsLeftModule( R );
                 else
-                    o := R!.AsRightModule;
+                    o := AsRightModule( R );
                 fi;
                 
                 return FunctorMap( Functor, m, [ [ 2, o ] ] );
@@ -443,9 +443,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                 R := HomalgRing( m );
                 
                 if IsLeft( m ) then
-                    o := R!.AsLeftModule;
+                    o := AsLeftModule( R );
                 else
-                    o := R!.AsRightModule;
+                    o := AsRightModule( R );
                 fi;
                 
                 return FunctorMap( Functor, m, [ [ 2, o ] ] );
@@ -468,9 +468,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                 local o;
                 
                 if IsLeft( m ) then
-                    o := R!.AsLeftModule;
+                    o := AsLeftModule( R );
                 else
-                    o := R!.AsRightModule;
+                    o := AsRightModule( R );
                 fi;
                 
                 return FunctorMap( Functor, m, [ [ 1, o ] ] );

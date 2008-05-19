@@ -782,16 +782,19 @@ InstallGlobalFunction( HomalgMorphism,
             pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif arg[2] = "free" and nargs > 2 and IsHomalgModule( arg[3] )
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
-            if IsHomalgMatrix( arg[1] ) then
-                nr_rows := NrRows( arg[1] );
-                nr_columns := NrColumns( arg[1] );
-            elif IsHomalgRelations( arg[1] ) then
-                nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
-                nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
-            fi;
             if IsLeftModule( arg[3] ) then
+                if IsHomalgMatrix( arg[1] ) then
+                    nr_rows := NrRows( arg[1] );
+                elif IsHomalgRelations( arg[1] ) then
+                    nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
+                fi;
                 source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[1] ) );
             else
+                if IsHomalgMatrix( arg[1] ) then
+                    nr_columns := NrColumns( arg[1] );
+                elif IsHomalgRelations( arg[1] ) then
+                    nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
+                fi;
                 source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[1] ) );
             fi;
             pos_s := PositionOfTheDefaultSetOfRelations( source );
@@ -866,6 +869,24 @@ InstallGlobalFunction( HomalgMorphism,
     if nargs > 2 then
         if IsHomalgModule( arg[3] ) then
             target := arg[3];
+            pos_t := PositionOfTheDefaultSetOfRelations( target );
+        elif arg[3] = "free" and IsHomalgModule ( source )
+          and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
+            if IsLeftModule( source ) then
+                if IsHomalgMatrix( arg[1] ) then
+                    nr_columns := NrColumns( arg[1] );
+                elif IsHomalgRelations( arg[1] ) then
+                    nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
+                fi;
+                target := HomalgFreeLeftModule( nr_columns, HomalgRing( arg[1] ) );
+            else
+                if IsHomalgMatrix( arg[1] ) then
+                    nr_rows := NrRows( arg[1] );
+                elif IsHomalgRelations( arg[1] ) then
+                    nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
+                fi;
+                target := HomalgFreeRightModule( nr_rows, HomalgRing( arg[1] ) );
+            fi;
             pos_t := PositionOfTheDefaultSetOfRelations( target );
         elif IsHomalgRing( arg[3] ) then
             if source = "ring" then
@@ -1068,13 +1089,13 @@ InstallMethod( ViewObj,
         if IsMorphism( o ) then
             Print( " morphism of" );
         elif HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
-            Print( " \"monomorphism\" of" );
+            Print( " /monomorphism/ of" );
         else
             Print( " non-well-defined map between" );
         fi;
     else
         if HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
-            Print( " \"monomorphism\" of" );
+            Print( " /monomorphism/ of" );
         else
             Print( " \"morphism\" of" );
         fi;
