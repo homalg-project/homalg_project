@@ -8,5 +8,7 @@
 ##
 #############################################################################
 
+ReadPackage( "GaussForHomalg", "gap/GaussTools.gd" );
+
 ReadPackage( "GaussForHomalg", "gap/GaussDefault.gd" );
 

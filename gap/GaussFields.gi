@@ -19,7 +19,9 @@ InstallMethod( CreateHomalgTable,
         [ IsField ],
         
   function( ext_ring_obj )
-    local RP_default, RP_specific, RP, component;
+    local RP, RP_default, RP_specific, component;
+    
+    RP := ShallowCopy( CommonHomalgTableForGaussTools );
     
     RP_default := ShallowCopy( CommonHomalgTableForGaussDefault );
     
@@ -41,7 +43,7 @@ InstallMethod( CreateHomalgTable,
                        result := EchelonMatTransformation( Eval( M ) );
                        N := result.vectors;
                        ## assign U:
-                       SetEval( arg[2], Concatenation( result.coeffs, result.relations ) );
+                       SetEval( arg[2], UnionOfRows( result.coeffs, result.relations ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
@@ -73,8 +75,6 @@ InstallMethod( CreateHomalgTable,
                  
           );
                  
-    RP := rec( );
-    
     for component in NamesOfComponents( RP_default ) do
         RP.(component) := RP_default.(component);
     od;
@@ -88,3 +88,11 @@ InstallMethod( CreateHomalgTable,
     return RP;
     
 end );
+
+##
+InstallMethod( GetEntryOfHomalgMatrix,
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgInternalRingRep ],
+  function( M, i, j, R )
+    return GetEntry( Eval( M ), i, j );
+  end
+);

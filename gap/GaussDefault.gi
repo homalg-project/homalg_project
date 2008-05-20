@@ -43,7 +43,7 @@ InstallValue( CommonHomalgTableForGaussDefault,
           syz := KernelMat( Eval( M ) ).relations;
       fi;
           
-      N := HomalgVoidMatrix( Length(syz), NrRows( M ), R );
+      N := HomalgVoidMatrix( nrows( syz ), NrRows( M ), R );
       SetEval( N, syz );
       ResetFilterObj( N, IsVoidMatrix );
       return N;
