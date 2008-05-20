@@ -45,6 +45,7 @@ BindGlobal( "TheTypeContainerForWeakPointers",
 InstallValue( HOMALG,
         rec(
             TotalRuntimes := 0,
+            OtherInternalMatrixTypes := [ ],
             color_BOT := "\033[1;37;40m",		## (T)riangular basis: TriangularBasisOfRows/Columns
             color_BOW := "\033[1;37;40m",		## Triangular basis: TriangularBasisOfRows/Columns( M, W )
             color_BOB := "\033[1;37;45m",		## (B)asis: BasisOfRow/ColumnModule

@@ -842,7 +842,7 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, M, ar, type, matrix;
+    local nargs, R, M, ar, type, matrix, internal;
     
     nargs := Length( arg );
     
@@ -857,10 +857,10 @@ InstallGlobalFunction( HomalgMatrix,
     if nargs > 1 and arg[1] <> [ ] then
         if IsHomalgMatrix( arg[1] ) or ( IsString( arg[1] ) and arg[1] <> [ ] ) then
             return CallFuncList( ConvertHomalgMatrix, arg );
-        elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] )
-          and not ( Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 ) then
-            if Length( arg[1] ) > 0 and not IsList( arg[1][1] ) and not ( nargs > 1 and IsInt( arg[2]) ) and not ( nargs > 2 and IsInt( arg[3] ) ) then
-                M := List( arg[1], a -> [a] ); ## CAUTION: some CAS only accept a list and not a listlist
+        elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] ) then
+            if Length( arg[1] ) > 0 and not IsList( arg[1][1] )
+               and not ( nargs > 1 and IsInt( arg[2]) ) and not ( nargs > 2 and IsInt( arg[3] ) ) then ## CAUTION: some CAS only accept a list and not a listlist
+                M := List( arg[1], a -> [a] );
             else
                 M := arg[1];
             fi;
@@ -893,7 +893,7 @@ InstallGlobalFunction( HomalgMatrix,
         
         return matrix;
         
-    fi; ## CAUTION: don't make an elif here!!!
+    fi;
     
     if IsList( arg[1] ) and Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
         M := List( arg[1], a -> [a] ); ## NormalizeInput
@@ -901,26 +901,41 @@ InstallGlobalFunction( HomalgMatrix,
         M := arg[1];
     fi;
     
-    if IsList( arg[1] ) then ## TheTypeHomalgInternalMatrix
+    internal := false;
+    
+    if IsMatrix( M ) then
+        internal := true;
+    elif IsList( M ) and ForAll( M, a -> a = [ ] ) then	## this must remain above the next ifs
+        internal := true;
+    elif IsBound( HOMALG.OtherInternalMatrixTypes ) then
+        for ar in HOMALG.OtherInternalMatrixTypes do
+            internal := internal or ar( M );
+            if internal then
+                break;
+            fi;
+        od;
+    fi;
+    
+    if internal then ## TheTypeHomalgInternalMatrix
         
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, TheTypeHomalgInternalMatrix,
                 Eval, M );
         
-        if Length( arg[1] ) = 0 then
-            SetNrRows( matrix, 0 );
-            SetNrColumns( matrix, 0 );
-        elif arg[1][1] = [] then
-            SetNrRows( matrix, Length( arg[1] ) );
-            SetNrColumns( matrix, 0 );
-        elif not IsList( arg[1][1] ) then
-            SetNrRows( matrix, Length( arg[1] ) );
-            SetNrColumns( matrix, 1 );
-        elif IsMatrix( arg[1] ) then
-            SetNrRows( matrix, Length( arg[1] ) );
-            SetNrColumns( matrix, Length( arg[1][1] ) );
+        if IsMatrix( M ) then
+            SetNrRows( matrix, Length( M ) );
+            SetNrColumns( matrix, Length( M[1] ) );
+        elif IsList( M ) then
+            if M = [ ] then
+                SetNrRows( matrix, 0 );
+                SetNrColumns( matrix, 0 );
+            elif M[1] = [] then
+                SetNrRows( matrix, Length( M ) );
+                SetNrColumns( matrix, 0 );
+            fi;
         fi;
+        
     else ## TheTypeHomalgExternalMatrix
         
         ## Objectify:

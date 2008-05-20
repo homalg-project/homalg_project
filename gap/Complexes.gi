@@ -23,16 +23,6 @@ InstallMethod( DefectOfHoms,
     local display, display_string, on_less_generators, left, indices, l,
           morphisms, T, H, i, S;
     
-    if IsGradedObject( C ) then
-        return C;
-    elif IsBound(C!.HomologyModules) then
-        return C!.HomologyModules;
-    fi;
-    
-    if not IsComplex( C ) then
-        Error( "the input is not a complex" );
-    fi;
-    
     if IsBound( C!.DisplayHomology ) and C!.DisplayHomology = true then
         display := true;
     else
@@ -51,6 +41,31 @@ InstallMethod( DefectOfHoms,
         on_less_generators := false;
     fi;
         
+    if IsGradedObject( C ) then
+        H := C;
+    elif IsBound(C!.HomologyModules) then
+        H := C!.HomologyModules;
+    fi;
+    
+    if IsBound( H ) then
+        if on_less_generators then
+            OnLessGenerators( H );
+        fi;
+        
+        if display then
+            for i in ModulesOfComplex( H ) do
+                Print( display_string );
+                Display( i );
+            od;
+        fi;
+        
+        return H;
+    fi;
+    
+    if not IsComplex( C ) then
+        Error( "the input is not a complex" );
+    fi;
+    
     if IsHomalgComplexOfLeftModules( C ) then
         left := true;
     else
@@ -136,16 +151,6 @@ InstallMethod( DefectOfHoms,
     local display, display_string, on_less_generators, left, indices, l,
           morphisms, S, H, i, T;
     
-    if IsGradedObject( C ) then
-        return C;
-    elif IsBound(C!.CohomologyModules) then
-        return C!.CohomologyModules;
-    fi;
-    
-    if not IsComplex( C ) then
-        Error( "the input is not a cocomplex" );
-    fi;
-    
     if IsBound( C!.DisplayCohomology ) and C!.DisplayCohomology = true then
         display := true;
     else
@@ -162,6 +167,31 @@ InstallMethod( DefectOfHoms,
         display_string := C!.StringBeforeDisplay;
     else
         display_string := "";
+    fi;
+    
+    if IsGradedObject( C ) then
+        H := C;
+    elif IsBound(C!.CohomologyModules) then
+        H := C!.CohomologyModules;
+    fi;
+    
+    if IsBound( H ) then
+        if on_less_generators then
+            OnLessGenerators( H );
+        fi;
+        
+        if display then
+            for i in ModulesOfComplex( H ) do
+                Print( display_string );
+                Display( i );
+            od;
+        fi;
+        
+        return H;
+    fi;
+    
+    if not IsComplex( C ) then
+        Error( "the input is not a cocomplex" );
     fi;
     
     if IsHomalgComplexOfLeftModules( C ) then
