@@ -163,7 +163,8 @@ InstallMethod( InstallFunctorOnObjects,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local name, number_of_arguments, natural_transformation, filter, filter1, filter2;
+    local name, number_of_arguments, natural_transformation,
+          filter_obj, filter1_obj, filter2_obj;
     
     name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -171,9 +172,9 @@ InstallMethod( InstallFunctorOnObjects,
     
     if number_of_arguments = 1 then
         
-        filter := Functor!.1[2];
+        filter_obj := Functor!.1[2];
         
-        if IsFilter( filter ) then
+        if IsFilter( filter_obj ) then
             
             if IsBound( Functor!.natural_transformation ) then
                 
@@ -181,7 +182,7 @@ InstallMethod( InstallFunctorOnObjects,
                 
                 InstallOtherMethod( natural_transformation,
                         "for homalg modules",
-                        [ filter ],
+                        [ filter_obj ],
                   function( o )
                     local obj;
                     
@@ -195,18 +196,18 @@ InstallMethod( InstallFunctorOnObjects,
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter ],
+                    [ filter_obj ],
               function( o )
                 
                 return Functor!.OnObjects( o );
                 
             end );
             
-        elif IsList( filter ) and Length( filter ) = 2 and ForAll( filter, IsFilter ) and filter[2] = IsHomalgRing then
+        elif IsList( filter_obj ) and Length( filter_obj ) = 2 and ForAll( filter_obj, IsFilter ) and filter_obj[2] = IsHomalgRing then
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter[1] ],
+                    [ filter_obj[1] ],
               function( o )
                 
                 return Functor!.OnObjects( o );
@@ -224,32 +225,32 @@ InstallMethod( InstallFunctorOnObjects,
             
         else
             
-            Error( "wrong syntax: ", filter, "\n" );
+            Error( "wrong syntax: ", filter_obj, "\n" );
             
         fi;
         
     elif number_of_arguments = 2 then
         
-        filter1 := Functor!.1[2];
-        filter2 := Functor!.2[2];
+        filter1_obj := Functor!.1[2];
+        filter2_obj := Functor!.2[2];
         
-        if IsFilter( filter1 ) and IsFilter( filter2 ) then
+        if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) then
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1, filter2 ],
+                    [ filter1_obj, filter2_obj ],
               function( o )
                 
                 return Functor!.OnObjects( o );
                 
             end );
             
-        elif IsList( filter1 ) and Length( filter1 ) = 2 and ForAll( filter1, IsFilter ) and filter1[2] = IsHomalgRing
-          and IsList( filter2 ) and Length( filter2 ) = 2 and ForAll( filter2, IsFilter ) and filter2[2] = IsHomalgRing then
+        elif IsList( filter1_obj ) and Length( filter1_obj ) = 2 and ForAll( filter1_obj, IsFilter ) and filter1_obj[2] = IsHomalgRing
+          and IsList( filter2_obj ) and Length( filter2_obj ) = 2 and ForAll( filter2_obj, IsFilter ) and filter2_obj[2] = IsHomalgRing then
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1[1], filter2[1] ],
+                    [ filter1_obj[1], filter2_obj[1] ],
               function( o1, o2 )
                 
                 return Functor!.OnObjects( o1, o2 );
@@ -258,7 +259,7 @@ InstallMethod( InstallFunctorOnObjects,
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1[1], IsHomalgRing ],
+                    [ filter1_obj[1], IsHomalgRing ],
               function( o1, R )
                 local o2;
                 
@@ -274,7 +275,7 @@ InstallMethod( InstallFunctorOnObjects,
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1[1] ],
+                    [ filter1_obj[1] ],
               function( o1 )
                 local R, o2;
                 
@@ -306,7 +307,7 @@ InstallMethod( InstallFunctorOnObjects,
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ IsHomalgRing, filter2[1] ],
+                    [ IsHomalgRing, filter2_obj[1] ],
               function( R, o2 )
                 local o1;
                 
@@ -336,7 +337,7 @@ InstallMethod( InstallFunctorOnObjects,
             
         else
             
-            Error( "wrong syntax: ", filter1, filter2, "\n" );
+            Error( "wrong syntax: ", filter1_obj, filter2_obj, "\n" );
             
         fi;
         
@@ -351,7 +352,7 @@ InstallMethod( InstallFunctorOnMorphisms,
         
   function( Functor )
     local name, number_of_arguments, filter_mor,
-          filter1, filter1_mor, filter2, filter2_mor;
+          filter1_obj, filter1_mor, filter2_obj, filter2_mor;
     
     name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -380,17 +381,17 @@ InstallMethod( InstallFunctorOnMorphisms,
         
     elif number_of_arguments = 2 then
         
-        filter1 := Functor!.1[2];
+        filter1_obj := Functor!.1[2];
         filter1_mor := Functor!.1[3];
         
-        filter2 := Functor!.2[2];
+        filter2_obj := Functor!.2[2];
         filter2_mor := Functor!.2[3];
         
-        if IsFilter( filter1 ) and IsFilter( filter2 ) then
+        if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) then
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1, filter2_mor ],
+                    [ filter1_obj, filter2_mor ],
               function( m, o )
                 
                 return FunctorMap( Functor, m, [ [ 2, o ] ] );
@@ -399,19 +400,19 @@ InstallMethod( InstallFunctorOnMorphisms,
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1_mor, filter2 ],
+                    [ filter1_mor, filter2_obj ],
               function( o, m )
                 
                 return FunctorMap( Functor, m, [ [ 1, o ] ] );
                 
             end );
             
-        elif IsList( filter1 ) and Length( filter1 ) = 2 and ForAll( filter1, IsFilter ) and filter1[2] = IsHomalgRing
-          and IsList( filter2 ) and Length( filter2 ) = 2 and ForAll( filter2, IsFilter ) and filter2[2] = IsHomalgRing then
+        elif IsList( filter1_obj ) and Length( filter1_obj ) = 2 and ForAll( filter1_obj, IsFilter ) and filter1_obj[2] = IsHomalgRing
+          and IsList( filter2_obj ) and Length( filter2_obj ) = 2 and ForAll( filter2_obj, IsFilter ) and filter2_obj[2] = IsHomalgRing then
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1_mor, filter2[1] ],
+                    [ filter1_mor, filter2_obj[1] ],
               function( m, o )
                 
                 return FunctorMap( Functor, m, [ [ 2, o ] ] );
@@ -454,7 +455,7 @@ InstallMethod( InstallFunctorOnMorphisms,
             
             InstallOtherMethod( name,
                     "for homalg modules",
-                    [ filter1[1], filter2_mor ],
+                    [ filter1_obj[1], filter2_mor ],
               function( o, m )
                 
                 return FunctorMap( Functor, m, [ [ 1, o ] ] );
@@ -479,11 +480,28 @@ InstallMethod( InstallFunctorOnMorphisms,
             
         else
             
-            Error( "wrong syntax: ", filter1, filter2, "\n" );
+            Error( "wrong syntax: ", filter1_obj, filter2_obj, "\n" );
             
         fi;
         
     fi;
+    
+end );
+
+##
+InstallMethod( InstallFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    InstallFunctorOnObjects( Functor );
+    
+    InstallFunctorOnMorphisms( Functor );
+    
+    #InstallFunctorOnComplexes( Functor );
+    
+    #InstallFunctorOnChainMaps( Functor );
     
 end );
 

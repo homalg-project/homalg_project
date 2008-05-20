@@ -103,3 +103,6 @@ DeclareOperation( "Add",
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMatrix ] );
 
+DeclareOperation( "OnLessGenerators",
+        [ IsHomalgComplex ] );
+

@@ -67,3 +67,6 @@ DeclareOperation( "InstallFunctorOnComplexes",
 DeclareOperation( "InstallFunctorOnChainMaps",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "InstallFunctor",
+        [ IsHomalgFunctor ] );
+

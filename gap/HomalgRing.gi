@@ -420,7 +420,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     if nargs = 0 or arg[1] = 0 then
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
-        LoadPackage( "Gauss" );
+        LoadPackage( "GaussForHomalg" );
         c := arg[1];
         if IsPrime( c ) then
             R := CreateHomalgRing( GF( c ) );
@@ -444,7 +444,7 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     
     SetIsFieldForHomalg( R, true );
     
-    LoadPackage( "Gauss" );
+    LoadPackage( "GaussForHomalg" );
     
     return R;
     

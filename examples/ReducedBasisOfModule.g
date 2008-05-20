@@ -19,3 +19,4 @@ BasisOfModule( W );
 BasisOfModule( W );
 rsyz:=SyzygiesGenerators( W );
 Display( rsyz );
+Y := Hom(Qxyz,W);

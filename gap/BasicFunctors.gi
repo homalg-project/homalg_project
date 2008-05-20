@@ -132,7 +132,7 @@ InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
     local phi, psi, R, pre, post, M, p, gen, rel, coker, ker, emb;
     
     if not ( IsList( phi_psi) and Length( phi_psi ) = 2 and ForAll( phi_psi, IsMorphismOfFinitelyGeneratedModulesRep ) ) then
-	Error( "expecting a list containing two morphisms\n" );
+        Error( "expecting a list containing two morphisms\n" );
     fi;
     
     phi := phi_psi[1];
@@ -386,8 +386,10 @@ InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ "contravariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep ] ],
-                [ "2", [ "covariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep ] ],
+                [ "1", [ "contravariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep,
+                        [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
+                [ "2", [ "covariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep,
+                        [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
@@ -421,7 +423,5 @@ InstallFunctorOnObjects( Functor_DefectOfHoms );
 ## Hom( M, N )
 ##
 
-InstallFunctorOnObjects( Functor_Hom );
-
-InstallFunctorOnMorphisms( Functor_Hom );
+InstallFunctor( Functor_Hom );
 

@@ -118,9 +118,9 @@ InstallMethod( IsComplex,
         return true;
     elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
       or not ( IsComplexOfFinitelyPresentedModulesRep( C ) or IsHomalgComplexOfLeftModules( C ) ) then
-        return ForAll( indices, i -> IsZero( C!.((i + 1)) * C!.(i) ) );
+        return ForAll( indices, i -> IsZero( C!.(String( i + 1 )) * C!.(String( i )) ) );
     else
-        return ForAll( indices, i -> IsZero( C!.(i) * C!.((i + 1)) ) );
+        return ForAll( indices, i -> IsZero( C!.(String( i )) * C!.(String( i + 1 )) ) );
     fi;
     
 end );
@@ -145,9 +145,9 @@ InstallMethod( IsExactSequence,
         return true;
     elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
       or not ( IsComplexOfFinitelyPresentedModulesRep( C ) or IsHomalgComplexOfLeftModules( C ) ) then
-        return ForAll( indices, i -> IsZero( DefectOfHoms( [ C!.((i + 1)), C!.(i) ] ) ) );
+        return ForAll( indices, i -> IsZero( DefectOfHoms( [ C!.(String( i + 1 )), C!.(String( i )) ] ) ) );
     else
-        return ForAll( indices, i -> IsZero( DefectOfHoms( [ C!.(i), C!.((i + 1)) ] ) ) );
+        return ForAll( indices, i -> IsZero( DefectOfHoms( [ C!.(String( i )), C!.(String( i + 1 )) ] ) ) );
     fi;
     
 end );
@@ -193,11 +193,11 @@ InstallMethod( HomalgRing,
     l := Length( indices );
     
     if l = 1 then
-        o := C!.(indices[1]);
+        o := C!.(String( indices[1] ));
     elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        o := C!.(indices[l]);
+        o := C!.(String( indices[l] ));
     else
-        o := C!.(indices[1]);
+        o := C!.(String( indices[1] ));
     fi;
     
     return HomalgRing( o );
@@ -233,8 +233,8 @@ InstallMethod( CertainMorphismOfComplex,
         
   function( C, i )
     
-    if IsBound( C!.(i) ) and IsHomalgMorphism( C!.(i) ) then
-        return C!.(i);
+    if IsBound( C!.(String( i )) ) and IsHomalgMorphism( C!.(String( i )) ) then
+        return C!.(String( i ));
     fi;
     
     return fail;
@@ -255,7 +255,7 @@ InstallMethod( MorphismsOfComplex,
         return [  ];
     fi;
     
-    return List( indices, i -> C!.(i) );
+    return List( indices, i -> C!.(String( i )) );
     
 end );
 
@@ -272,7 +272,7 @@ InstallMethod( ModulesOfComplex,
     l := Length( morphisms );
     
     if l = 0 then
-        return [ C!.( ModuleIndicesOfComplex( C )[1] ) ];
+        return [ C!.(String( ModuleIndicesOfComplex( C )[1] )) ];
     elif IsComplexOfFinitelyPresentedModulesRep( C ) then
         modules := List( morphisms, TargetOfMorphism );
         Add( modules, SourceOfMorphism( morphisms[l] ) );
@@ -293,11 +293,11 @@ InstallMethod( CertainModuleOfComplex,
   function( C, i )
     local indices, l;
     
-    if IsBound( C!.(i) ) then
-        if IsHomalgModule( C!.(i) ) then
-            return C!.(i);
+    if IsBound( C!.(String( i )) ) then
+        if IsHomalgModule( C!.(String( i )) ) then
+            return C!.(String( i ));
         else
-            return SourceOfMorphism( C!.(i) );
+            return SourceOfMorphism( C!.(String( i )) );
         fi;
     fi;
     
@@ -305,9 +305,9 @@ InstallMethod( CertainModuleOfComplex,
     l := Length( indices );
     
     if IsComplexOfFinitelyPresentedModulesRep( C ) and indices[1] = i then
-        return TargetOfMorphism( C!.((i + 1)) );
+        return TargetOfMorphism( C!.(String( i + 1 )) );
     elif IsCocomplexOfFinitelyPresentedModulesRep( C ) and indices[l] = i then
-        return TargetOfMorphism( C!.((i - 1)) );
+        return TargetOfMorphism( C!.(String( i - 1 )) );
     fi;
     
     return fail;
@@ -327,9 +327,9 @@ InstallMethod( LowestDegreeModuleInComplex,
     l := Length( indices );
     
     if l = 1 then
-        return C!.( indices[1] );
+        return C!.(String( indices[1] ));
     else
-        return TargetOfMorphism( C!.( indices[2] ) );
+        return TargetOfMorphism( C!.(String( indices[2] )) );
     fi;
     
 end );
@@ -347,9 +347,9 @@ InstallMethod( LowestDegreeModuleInComplex,
     l := Length( indices );
     
     if l = 1 then
-        return C!.( indices[1] );
+        return C!.(String( indices[1] ));
     else
-        return SourceOfMorphism( C!.( indices[1] ) );
+        return SourceOfMorphism( C!.(String( indices[1] )) );
     fi;
     
 end );
@@ -367,9 +367,9 @@ InstallMethod( HighestDegreeModuleInComplex,
     l := Length( indices );
     
     if l = 1 then
-        return C!.( indices[1] );
+        return C!.(String( indices[1] ));
     else
-        return SourceOfMorphism( C!.( indices[l] ) );
+        return SourceOfMorphism( C!.(String( indices[l] )) );
     fi;
     
 end );
@@ -387,9 +387,9 @@ InstallMethod( HighestDegreeModuleInComplex,
     l := Length( indices );
     
     if l = 1 then
-        return C!.( indices[1] );
+        return C!.(String( indices[1] ));
     else
-        return TargetOfMorphism( C!.( indices[l - 1] ) );
+        return TargetOfMorphism( C!.(String( indices[l - 1] )) );
     fi;
     
 end );
@@ -425,27 +425,27 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if not IsIdenticalObj( C!.( indices[1] ), TargetOfMorphism( phi ) ) then
+        if not IsIdenticalObj( C!.(String( indices[1] )), TargetOfMorphism( phi ) ) then
             Error( "the unique module in the complex and the target of the new morphism are not identical\n" );
         fi;
         
-        Unbind( C!.( indices[1] ) );
+        Unbind( C!.(String( indices[1] )) );
         
         Add( indices, indices[1] + 1 );
         
-        C!.( indices[1] + 1 ) := phi;
+        C!.(String( indices[1] + 1 )) := phi;
         
     else
         
         l := indices[l];
         
-        if not IsIdenticalObj( SourceOfMorphism( C!.(l) ), TargetOfMorphism( phi ) ) then
+        if not IsIdenticalObj( SourceOfMorphism( C!.(String( l )) ), TargetOfMorphism( phi ) ) then
             Error( "the source of the ", l, ". morphism in the complex (i.e. the highest one) and the target of the new morphism are not identically the same module\n" );
         fi;
         
         Add( indices, l + 1 );
         
-        C!.((l + 1)) := phi;
+        C!.(String( l + 1 )) := phi;
         
     fi;
     
@@ -469,25 +469,25 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if not IsIdenticalObj( C!.( indices[1] ), SourceOfMorphism( phi ) ) then
+        if not IsIdenticalObj( C!.(String( indices[1] )), SourceOfMorphism( phi ) ) then
             Error( "the unique module in the complex and the source of the new morphism are not identical\n" );
         fi;
         
         Add( indices, indices[1] + 1 );
         
-        C!.( indices[1] ) := phi;
+        C!.(String( indices[1] )) := phi;
         
     else
         
         l := indices[l - 1];
         
-        if not IsIdenticalObj( TargetOfMorphism( C!.(l) ), SourceOfMorphism( phi ) ) then
+        if not IsIdenticalObj( TargetOfMorphism( C!.(String( l )) ), SourceOfMorphism( phi ) ) then
             Error( "the target of the ", l, ". morphism in the complex (i.e. the highest one) and the source of the new morphism are not identically the same module\n" );
         fi;
         
         Add( indices, l + 2 );
         
-        C!.((l + 1)) := phi;
+        C!.(String( l + 1 )) := phi;
         
     fi;
     
@@ -522,6 +522,19 @@ InstallMethod( Add,
     S := HighestDegreeModuleInComplex( C );
     
     Add( C, HomalgMorphism( mat, S, "free" ) );
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    List( ModulesOfComplex( C ), OnLessGenerators );
+    
+    return C;
     
 end );
 

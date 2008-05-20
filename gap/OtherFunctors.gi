@@ -95,18 +95,13 @@ InstallValue( Functor_TorsionFreeFactor,
 ####################################
 
 ##
-## TorsionSubmodule( M )
+## TorsionSubmodule( M ) and TorsionSubmoduleEmb( M )
 ##
 
-InstallFunctorOnObjects( Functor_TorsionSubmodule );
-
-InstallFunctorOnMorphisms( Functor_TorsionSubmodule );
+InstallFunctor( Functor_TorsionSubmodule );
 
 ##
-## TorsionFreeFactor( M )
+## TorsionFreeFactor( M ) and TorsionFreeFactorEpi( M )
 ##
 
-InstallFunctorOnObjects( Functor_TorsionFreeFactor );
-
-InstallFunctorOnMorphisms( Functor_TorsionFreeFactor );
-
+InstallFunctor( Functor_TorsionFreeFactor );
