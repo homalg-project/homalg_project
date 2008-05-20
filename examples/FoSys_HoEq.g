@@ -1,0 +1,24 @@
+LoadPackage( "RingsForHomalg" );
+
+A1 := RingForHomalgInSingular( "(0,a,b,c),(t,D),dp" );
+homalgSendBlocking( [ A1, " = Weyl(1); setring ", A1 ], "need_command", A1 );
+
+Rskl := HomalgMatrix( " D^3 + a * D^2 + b * D + c ", 1, 1, A1 );
+
+Rskl := HomalgMorphism( Rskl );
+
+Mskl := Cokernel( Rskl );
+
+Rsys := HomalgMatrix( "D,-1,0,0,D,-1,c,b,a+D", 3, 3, A1 );
+
+Rsys := HomalgMorphism( Rsys );
+
+Msys := Cokernel( Rsys );
+
+alpha := HomalgMatrix( " 1,0,0 ", 1, 3, A1 );
+
+alpha := HomalgMorphism( alpha, Mskl, Msys );
+
+delta := HomalgMatrix( " D ", 1, 1, A1 );
+
+delta := HomalgMorphism( delta, Mskl );
