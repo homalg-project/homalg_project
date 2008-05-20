@@ -140,34 +140,74 @@ end );
 InstallMethod( CreateCohomologyMatrix, "for an internal ring",
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgInternalRingRep ],
   function( ot, s, R )
-    local d, S, matrices, k, m, p, i, ind;
+    local d, S, matrices, RP, k, m, p, i, ind, pos, res;
+    
     d := Dimension( s );
     S := s!.simplicial_set;
     matrices := [];
-    matrices[1] := NullMat( 1, Length( S[1] ) );
-    for k in [2..Dimension( s )] do
-        if Length( S[k] ) = 0 then
-            matrices[k] := NullMat( Length( S[k-1] ), 1 );
-        else
-            matrices[k] := NullMat( Length( S[k-1] ), Length( S[k] ) );
-            for p in [1..Length( S[k] )] do
-                for i in [0..k] do
-                    ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
-                    if not ind = fail then
-                        matrices[k][ind][p] := matrices[k][ind][p] + MinusOne( R )^i;
-                    fi;
+    RP := homalgTable( R );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) and IsBound( RP!.ZeroMatrix ) then #right now: always sparse!
+        
+        for k in [2..Dimension( s )] do
+            if Length( S[k] ) = 0 then
+                matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), 1, R ) ); #FIXME : ??
+            else
+                matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), Length( S[k] ), R ) );
+                for p in [1..Length( S[k] )] do
+                    for i in [0..k] do
+                        ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
+                        if not ind = fail then
+                            # matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
+                            pos := PositionSorted( matrices[k-1]!.indices[ind], p );
+                            if IsBound( matrices[k-1]!.indices[ind][pos] ) and matrices[k-1]!.indices[ind][pos] = p then
+                                res := matrices[k-1]!.entries[ind][pos] + MinusOne( R )^i;
+                                if res = Zero( R ) then
+                                    Remove( matrices[k-1]!.indices[ind], pos );
+                                    Remove( matrices[k-1]!.entries[ind], pos );
+                                else
+                                    matrices[k-1]!.entries[ind][pos] := res;
+                                fi;
+                            else
+                                Add( matrices[k-1]!.indices[ind], p, pos );
+                                Add( matrices[k-1]!.entries[ind], MinusOne( R )^i, pos );
+                            fi;
+                        fi;
+                    od;
                 od;
-            od;
-        fi;
-    od;
-    return List( matrices, m->HomalgMatrix( m * One( R ), R ) );
+            fi;
+        od;
+        
+        return List( matrices, function( m ) local s; s := HomalgVoidMatrix( R ); SetEval( s, m ); ResetFilterObj( s, IsVoidMatrix); return s; end );
+        
+    else
+        
+        for k in [2..Dimension( s )] do
+            if Length( S[k] ) = 0 then
+                matrices[k-1] := NullMat( Length( S[k-1] ), 1 );
+            else
+                matrices[k-1] := NullMat( Length( S[k-1] ), Length( S[k] ) );
+                for p in [1..Length( S[k] )] do
+                    for i in [0..k] do
+                        ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
+                        if not ind = fail then
+                            matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
+                        fi;
+                    od;
+                od;
+            fi;
+        od;
+        return List( matrices, m -> HomalgMatrix( m * One( R ), R ) );
+        
+    fi;
+    
 end );
 
 ##
 InstallMethod( CreateHomologyMatrix, "for any ring",
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ],
   function( ot, s, R )
-    return List( CreateCohomologyMatrix( ot, s, R ), m->Involution( m ) );    
+    return List( CreateCohomologyMatrix( ot, s, R ), Involution );    
 end);
 
 ##
@@ -178,6 +218,42 @@ InstallMethod( CreateCohomologyMatrix, "for an external ring",
     internal_ring := HomalgRingOfIntegers();    # FIXME ?
     return List( CreateCohomologyMatrix( ot, s, internal_ring ), function(m) SetExtractHomalgMatrixToFile( m, true ); return HomalgMatrix( m, R ); end );    
 end );
+
+##
+InstallMethod( Homology,
+        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ],
+  function( ot, s, R )
+    local morphisms, C, m;
+    morphisms := CreateHomologyMatrix( ot, s, R );
+    C := HomalgComplex( HomalgMorphism( morphisms[1] ), 0 );
+    for m in morphisms{[ 2 .. Length( morphisms ) ]} do
+        Add( C, m );
+    od;
+    C!.SkipHighestDegreeHomology := true;
+    C!.HomologyOnLessGenerators := true;
+    C!.DisplayHomology := true;
+    C!.StringBeforeDisplay := "----------------------------------------------->>>>  ";
+    return Homology( C );
+  end
+);
+  
+##
+InstallMethod( Cohomology,
+        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ],
+  function( ot, s, R )
+    local morphisms, C, m;
+    morphisms := CreateCohomologyMatrix( ot, s, R );
+    C := HomalgCocomplex( HomalgMorphism( morphisms[1] ), -1 );
+    for m in morphisms{[ 2 .. Length( morphisms ) ]} do
+        Add( C, m );
+    od;
+    C!.SkipHighestDegreeCohomology := true;
+    C!.CohomologyOnLessGenerators := true;
+    C!.DisplayCohomology := true;
+    C!.StringBeforeDisplay := "----------------------------------------------->>>>  ";
+    return Cohomology( C );
+  end
+);
 
 ##
 InstallMethod( SCO_Examples, "",

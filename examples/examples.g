@@ -86,35 +86,11 @@ fi;
 ot := OrbifoldTriangulation( M, Isotropy, mult );
 ss := SimplicialSet( ot, d );
 
-ker := [];
-im := [];
-
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
-    Print( "generating homology matrices...\n" );
     M := CreateHomologyMatrix( ot, ss, R );
-    Print( "computing kernels...\n" );
-    ker := List( [1..Length( M ) - 1], i->HomalgGeneratorsForLeftModule( SyzygiesBasisOfRows( M[i] ) ) );
-    Print( "computing images...\n" );
-    im := List( [2..Length( M )], i->HomalgGeneratorsForLeftModule( M[i] ) );
-    Print( "finished!\n\n         ***starting HOMOLOGY calculation***\n\n" );
+    H := Homology( ot, ss, R );
 else #cohomology:  ker( M[i+1] ) / im( M[i] )
-    Print( "generating cohomology matrices...\n" );
     M := CreateCohomologyMatrix( ot, ss, R );
-    Print( "computing kernels...\n" );
-    ker := List( [2..Length( M )], i->HomalgGeneratorsForLeftModule( SyzygiesBasisOfRows( M[i] ) ) );
-    Print( "computing images...\n" );
-    im := List( [1..Length( M ) - 1], i->HomalgGeneratorsForLeftModule( M[i] ) );
-    Print( "finished!\n\n         ***starting COHOMOLOGY calculation***\n\n" );
+    H := Cohomology( ot, ss, R );
 fi;
 
-Q := [];
-
-for i in [1..Length( M ) - 1] do
-    Print( Concatenation( "-------- #", String(i), ": --------\n" ) );
-    Print( "computing the quotient...\n" );
-    Q[i] := ker[i] / im[i];
-    Print( "computing OnLessGenerators...\n" );
-    OnLessGenerators( Q[i] );
-    Print( "----------------------------------------------->>>>  " );
-    Display( Q[i] );
-od;
