@@ -14,9 +14,10 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgModule:
+# a new representation for the category IsHomalgModule
+# which is a subrepresentation of IsHomalgRingOrFinitelyPresentedModuleRep:
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
-        IsHomalgModule,
+        IsHomalgModule and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations" ] );
 
 ####################################

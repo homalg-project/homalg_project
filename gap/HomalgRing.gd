@@ -16,8 +16,12 @@
 
 # a new category of objects:
 
-DeclareCategory( "IsHomalgRing",
+DeclareCategory( "IsHomalgRingOrHomalgModule",	## we need this category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
         IsAttributeStoringRep );
+
+DeclareCategory( "IsHomalgRing",
+        IsHomalgRingOrHomalgModule
+        and IsAttributeStoringRep );
 
 DeclareCategory( "IsHomalgExternalRingElement",
         IsExtAElement

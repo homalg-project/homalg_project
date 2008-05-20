@@ -386,9 +386,9 @@ InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ "contravariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep,
+                [ "1", [ "contravariant", IsHomalgRingOrFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep,
                         [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
-                [ "2", [ "covariant", [ IsFinitelyPresentedModuleRep, IsHomalgRing ], IsMorphismOfFinitelyGeneratedModulesRep,
+                [ "2", [ "covariant", IsHomalgRingOrFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep,
                         [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]

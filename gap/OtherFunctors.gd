@@ -45,8 +45,8 @@ DeclareAttribute( "TorsionSubmoduleEmb",
 # basic operations:
 
 DeclareOperation( "TorsionFreeFactor",
-        [ IsHomalgMorphism ] );
+        [ IsHomalgModule ] );
 
 DeclareOperation( "TorsionSubmodule",
-        [ IsHomalgMorphism ] );
+        [ IsHomalgModule ] );
 

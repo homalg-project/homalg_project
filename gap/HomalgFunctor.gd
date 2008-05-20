@@ -70,3 +70,7 @@ DeclareOperation( "InstallFunctorOnChainMaps",
 DeclareOperation( "InstallFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnComplexes" );
+
+DeclareGlobalFunction( "HelperToInstallBivariateFunctorOnComplexes" );
+

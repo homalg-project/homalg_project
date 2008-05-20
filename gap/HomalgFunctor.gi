@@ -46,18 +46,18 @@ InstallMethod( NameOfFunctor,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local name;
+    local functor_name;
     
     if IsBound( Functor!.name ) then
-        name := Functor!.name;
-        if not IsOperation( ValueGlobal( name ) ) and not IsFunction( ValueGlobal( name ) ) then
-            Error( "the functor ", name, " neither points to an operation nor a function\n" );
+        functor_name := Functor!.name;
+        if not IsOperation( ValueGlobal( functor_name ) ) and not IsFunction( ValueGlobal( functor_name ) ) then
+            Error( "the functor ", functor_name, " neither points to an operation nor a function\n" );
         fi;
     else
         Error( "the provided functor is nameless\n" );
     fi;
     
-    return name;
+    return functor_name;
     
 end );
 
@@ -82,15 +82,16 @@ InstallMethod( FunctorMap,
         [ IsHomalgFunctorRep, IsMorphismOfFinitelyGeneratedModulesRep, IsList ],
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
-    local name, number_of_arguments, arg_positions, S, T, pos, arg_before_pos, arg_behind_pos,
-          arg_source, arg_target, F_source, F_target, arg_phi, hull_phi, emb_source, emb_target;
+    local functor_name, number_of_arguments, arg_positions, S, T, pos,
+          arg_before_pos, arg_behind_pos, arg_source, arg_target,
+          F_source, F_target, arg_phi, hull_phi, emb_source, emb_target;
     
     if not fixed_arguments_of_multi_functor = [ ]
        and not ( ForAll( fixed_arguments_of_multi_functor, a -> IsList( a ) and Length( a ) = 2 and IsPosInt( a[1] ) ) ) then
         Error( "the last argument has a wrong syntax\n" );
     fi;
     
-    name := NameOfFunctor( Functor );
+    functor_name := NameOfFunctor( Functor );
         
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
@@ -123,11 +124,11 @@ InstallMethod( FunctorMap,
         arg_source := Concatenation( arg_before_pos, [ T ], arg_behind_pos );
         arg_target := Concatenation( arg_before_pos, [ S ], arg_behind_pos );
     else
-        Error( "the functor ", name, " must be either co- or contravriant in its argument number ", pos, "\n" );
+        Error( "the functor ", functor_name, " must be either co- or contravriant in its argument number ", pos, "\n" );
     fi;
     
-    F_source := CallFuncList( ValueGlobal( name ), arg_source );
-    F_target := CallFuncList( ValueGlobal( name ), arg_target );
+    F_source := CallFuncList( ValueGlobal( functor_name ), arg_source );
+    F_target := CallFuncList( ValueGlobal( functor_name ), arg_target );
     
     if IsBound( Functor!.OnMorphisms ) then
         arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
@@ -163,10 +164,10 @@ InstallMethod( InstallFunctorOnObjects,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local name, number_of_arguments, natural_transformation,
+    local functor_name, number_of_arguments, natural_transformation,
           filter_obj, filter1_obj, filter2_obj;
     
-    name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
@@ -184,9 +185,8 @@ InstallMethod( InstallFunctorOnObjects,
                         "for homalg modules",
                         [ filter_obj ],
                   function( o )
-                    local obj;
                     
-                    obj := name( o );			## this sets the attribute named "natural_transformation"
+                    functor_name( o );			## this sets the attribute named "natural_transformation"
                     
                     return natural_transformation( o );	## not an infinite loop because of the side effect of the above line
                     
@@ -194,32 +194,20 @@ InstallMethod( InstallFunctorOnObjects,
                 
             fi;
             
-            InstallOtherMethod( name,
+            InstallOtherMethod( functor_name,
                     "for homalg modules",
                     [ filter_obj ],
               function( o )
+                local obj;
                 
-                return Functor!.OnObjects( o );
+                if IsHomalgRing( o ) then
+                    ## I personally prefer the row convention and hence left modules:
+                    obj := AsLeftModule( o );
+                else
+                    obj := o;
+                fi;
                 
-            end );
-            
-        elif IsList( filter_obj ) and Length( filter_obj ) = 2 and ForAll( filter_obj, IsFilter ) and filter_obj[2] = IsHomalgRing then
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter_obj[1] ],
-              function( o )
-                
-                return Functor!.OnObjects( o );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ IsHomalgRing ],
-              function( R )
-                
-                return Functor!.OnObjects( AsLeftModule( R ) );
+                return Functor!.OnObjects( obj );
                 
             end );
             
@@ -236,102 +224,68 @@ InstallMethod( InstallFunctorOnObjects,
         
         if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) then
             
-            InstallOtherMethod( name,
+            InstallOtherMethod( functor_name,
                     "for homalg modules",
                     [ filter1_obj, filter2_obj ],
-              function( o )
-                
-                return Functor!.OnObjects( o );
-                
-            end );
-            
-        elif IsList( filter1_obj ) and Length( filter1_obj ) = 2 and ForAll( filter1_obj, IsFilter ) and filter1_obj[2] = IsHomalgRing
-          and IsList( filter2_obj ) and Length( filter2_obj ) = 2 and ForAll( filter2_obj, IsFilter ) and filter2_obj[2] = IsHomalgRing then
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_obj[1], filter2_obj[1] ],
               function( o1, o2 )
+                local obj1, obj2;
                 
-                return Functor!.OnObjects( o1, o2 );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_obj[1], IsHomalgRing ],
-              function( o1, R )
-                local o2;
-                
-                if IsLeft( o1 ) then
-                    o2 := AsLeftModule( R );
+                if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
+                    obj1 := o1;
+                    obj2 := o2;
+                elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
+                    obj1 := o1;
+                    
+                    if IsLeft( o1 ) then
+                        obj2 := AsLeftModule( o2 );
+                    else
+                        obj2 := AsRightModule( o2 );
+                    fi;
+                elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
+                    obj2 := o2;
+                    
+                    if IsLeft( o2 ) then
+                        obj1 := AsLeftModule( o1 );
+                    else
+                        obj1 := AsRightModule( o1 );
+                    fi;
+                elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
+                    if not IsIdenticalObj( o1, o2 ) then
+                        Error( "the two rings are not identical\n" );
+                    fi;
+                    
+                    ## I personally prefer the row convention and hence left modules:
+                    obj1 := AsLeftModule( o1 );
+                    obj2 := obj1;
                 else
-                    o2 := AsRightModule( R );
+                    ## the default:
+                    obj1 := o1;
+                    obj2 := o2;
                 fi;
                 
-                return Functor!.OnObjects( o1, o2  );
+                return Functor!.OnObjects( obj1, obj2 );
                 
             end );
             
-            InstallOtherMethod( name,
+            InstallOtherMethod( functor_name,
                     "for homalg modules",
-                    [ filter1_obj[1] ],
-              function( o1 )
-                local R, o2;
+                    [ filter1_obj ],
+              function( o )
+                local R;
                 
-                R := HomalgRing( o1 );
-                
-                if IsLeft( o1 ) then
-                    o2 := AsLeftModule( R );
+                if IsHomalgRing( o ) then
+                    ## I personally prefer the row convention and hence left modules:
+                    R := AsLeftModule( o );
                 else
-                    o2 := AsRightModule( R );
+                    R := HomalgRing( o );
+                    if IsLeft( o ) then
+                        R := AsLeftModule( R );
+                    else
+                        R := AsRightModule( R );
+                    fi;
                 fi;
                 
-                return Functor!.OnObjects( o1, o2  );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ IsHomalgRing ],
-              function( R )
-                local o1, o2;
-                
-                ## I personally prefer the row convention and hence left modules:
-                o1 := AsLeftModule( R );
-                o2 := AsLeftModule( R );
-                
-                return Functor!.OnObjects( o1, o2  );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ IsHomalgRing, filter2_obj[1] ],
-              function( R, o2 )
-                local o1;
-                
-                if IsLeft( o2 ) then
-                    o1 := AsLeftModule( R );
-                else
-                    o1 := AsRightModule( R );
-                fi;
-                
-                return Functor!.OnObjects( o1, o2  );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ IsHomalgRing, IsHomalgRing ],
-              function( R1, R2 )
-                local o1, o2;
-                
-                ## I personally prefer the row convention and hence left modules:
-                o1 := AsLeftModule( R1 );
-                o2 := AsLeftModule( R2 );
-                
-                return Functor!.OnObjects( o1, o2  );
+                return Functor!.OnObjects( o, R  );
                 
             end );
             
@@ -351,10 +305,10 @@ InstallMethod( InstallFunctorOnMorphisms,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local name, number_of_arguments, filter_mor,
+    local functor_name, number_of_arguments, filter_mor,
           filter1_obj, filter1_mor, filter2_obj, filter2_mor;
     
-    name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
@@ -364,12 +318,12 @@ InstallMethod( InstallFunctorOnMorphisms,
         
         if IsFilter( filter_mor ) then
             
-            InstallOtherMethod( name,
+            InstallOtherMethod( functor_name,
                     "for homalg morphisms",
                     [ filter_mor ],
-              function( o )
+              function( m )
                 
-                return Functor!.OnObjects( o );
+                return FunctorMap( Functor, m );
                 
             end );
             
@@ -387,100 +341,75 @@ InstallMethod( InstallFunctorOnMorphisms,
         filter2_obj := Functor!.2[2];
         filter2_mor := Functor!.2[3];
         
-        if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) then
+        if IsFilter( filter1_mor ) and IsFilter( filter2_mor ) then
             
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_obj, filter2_mor ],
-              function( m, o )
-                
-                return FunctorMap( Functor, m, [ [ 2, o ] ] );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_mor, filter2_obj ],
-              function( o, m )
-                
-                return FunctorMap( Functor, m, [ [ 1, o ] ] );
-                
-            end );
-            
-        elif IsList( filter1_obj ) and Length( filter1_obj ) = 2 and ForAll( filter1_obj, IsFilter ) and filter1_obj[2] = IsHomalgRing
-          and IsList( filter2_obj ) and Length( filter2_obj ) = 2 and ForAll( filter2_obj, IsFilter ) and filter2_obj[2] = IsHomalgRing then
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_mor, filter2_obj[1] ],
-              function( m, o )
-                
-                return FunctorMap( Functor, m, [ [ 2, o ] ] );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_mor, IsHomalgRing ],
-              function( m, R )
-                local o;
-                
-                if IsLeft( m ) then
-                    o := AsLeftModule( R );
-                else
-                    o := AsRightModule( R );
-                fi;
-                
-                return FunctorMap( Functor, m, [ [ 2, o ] ] );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
+            InstallOtherMethod( functor_name,
+                    "for homalg morphisms",
                     [ filter1_mor ],
               function( m )
-                local R, o;
+                local R;
                 
                 R := HomalgRing( m );
                 
                 if IsLeft( m ) then
-                    o := AsLeftModule( R );
+                    R := AsLeftModule( R );
                 else
-                    o := AsRightModule( R );
+                    R := AsRightModule( R );
                 fi;
                 
-                return FunctorMap( Functor, m, [ [ 2, o ] ] );
+                return FunctorMap( Functor, m, [ [ 2, R ] ] );
                 
             end );
             
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ filter1_obj[1], filter2_mor ],
+            InstallOtherMethod( functor_name,
+                    "for homalg morphisms",
+                    [ filter1_mor, filter2_obj ],
+              function( m, o )
+                local obj;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsLeft( m ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                return FunctorMap( Functor, m, [ [ 2, obj ] ] );
+                
+            end );
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg morphisms",
+                    [ filter1_obj, filter2_mor ],
               function( o, m )
+                local obj;
                 
-                return FunctorMap( Functor, m, [ [ 1, o ] ] );
-                
-            end );
-            
-            InstallOtherMethod( name,
-                    "for homalg modules",
-                    [ IsHomalgRing, filter2_mor ],
-              function( R, m )
-                local o;
-                
-                if IsLeft( m ) then
-                    o := AsLeftModule( R );
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsLeft( m ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
                 else
-                    o := AsRightModule( R );
+                    ## the default:
+                    obj := o;
                 fi;
                 
-                return FunctorMap( Functor, m, [ [ 1, o ] ] );
+                return FunctorMap( Functor, m, [ [ 1, obj ] ] );
                 
             end );
             
         else
             
-            Error( "wrong syntax: ", filter1_obj, filter2_obj, "\n" );
+            Error( "wrong syntax: ", filter1_mor, filter2_mor, "\n" );
             
         fi;
         
@@ -555,6 +484,6 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( o!.name );
+    Print( NameOfFunctor( o ) );
     
 end );
