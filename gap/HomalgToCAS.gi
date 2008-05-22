@@ -460,6 +460,35 @@ InstallGlobalFunction( homalgSendBlocking,
         homalg_variable := Concatenation( HOMALG_IO.variable_name, String( stream.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
         
+        ## now that we have just increased the variable counter
+        ## and created the new variable we we need to
+        ## quickly create the enveloping external object
+        ## and insert it in the weak pointer list using _SetElmWPObj_ForHomalg,
+        ## before we start executing commands in the external CAS,
+        ## that might cause an error (this would then lead to an
+        ## inconsistency in the weak pointer list of external objects)
+        if IsBound( ring_element ) then
+            if not IsBound( type ) then
+                ext_obj := HomalgExternalRingElement( homalg_variable, CAS, R );
+            else
+                ext_obj := HomalgExternalRingElement( homalg_variable, CAS, R, type );
+            fi;
+        else
+            if not IsBound( type ) then
+                ext_obj := homalgExternalObject( homalg_variable, CAS, stream );
+            else
+                ext_obj := homalgExternalObject( homalg_variable, CAS, stream, type );
+            fi;
+        fi;
+        
+        if properties <> [ ] and IshomalgExternalObjectWithIOStreamRep( ext_obj ) then
+            for ar in properties do
+                Setter( ar )( ext_obj, true );
+            od;
+        fi;
+        
+        _SetElmWPObj_ForHomalg( stream, ext_obj );	## this relies on the feature, that homalgExternalObjects are now assigned homalg_variables strictly sequentially!!!
+        
         if IsBound( prefix ) then
             if IsBound( suffix ) then
                 L := Concatenation( prefix, homalg_variable, suffix, " ", stream.define, " ", L, eoc, enter );
@@ -545,29 +574,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsBound( option ) then
         
-        if IsBound( ring_element ) then
-            if not IsBound( type ) then
-                L := HomalgExternalRingElement( homalg_variable, CAS, R );
-            else
-                L := HomalgExternalRingElement( homalg_variable, CAS, R, type );
-            fi;
-        else
-            if not IsBound( type ) then
-                L := homalgExternalObject( homalg_variable, CAS, stream );
-            else
-                L := homalgExternalObject( homalg_variable, CAS, stream, type );
-            fi;
-        fi;
-        
-        if properties <> [ ] and IshomalgExternalObjectWithIOStreamRep( L ) then
-            for ar in properties do
-                Setter( ar )( L, true );
-            od;
-        fi;
-        
-        _SetElmWPObj_ForHomalg( stream, L );	## this relies on the feature, that homalgExternalObjects are now assigned homalg_variables strictly sequentially!!!
-        
-        return L;
+        return ext_obj;
         
     elif need_display then
         if IsBound( stream.color_display ) then
