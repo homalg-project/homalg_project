@@ -360,6 +360,20 @@ InstallGlobalFunction( LaunchCAS,
     
     SendBlockingToCAS( s, "\n" );
     
+    if ( IsBound( s.show_banner ) and s.show_banner = true ) or
+       ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+       and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then
+        if IsBound( s.color_display ) then
+            Print( s.color_display );
+        fi;
+        if s.cas = "maple" then
+            Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );
+        else
+            Print( s.lines );
+        fi;
+        Print( "\033[0m\n" );
+    fi;
+    
     return s;
     
 end );

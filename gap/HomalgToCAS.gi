@@ -697,7 +697,12 @@ InstallMethod( ViewObj,
   function( o )
     
     Print( "<A homalg external object residing in the CAS " );
-    Print( homalgExternalCASystem( o ), " running with pid ", homalgExternalCASystemPID( o ), ">" );
+    
+    if IsBound( homalgStream( o ).color_display ) then
+        Print( "\033[1m" );
+    fi;
+    
+    Print( homalgExternalCASystem( o ), "\033[0m running with pid ", homalgExternalCASystemPID( o ), ">" );
     
 end );
 
