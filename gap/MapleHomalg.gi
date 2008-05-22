@@ -32,6 +32,7 @@ InstallValue( HOMALG_IO_Maple,
             eoc_verbose := ";",
             eoc_quiet := ":",
             error_stdout := "Error, ",	## a Maple specific
+            show_banner := false,	## delete this line whenever there is a way to display the banner while keeping the crucial option -q
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _Maple_multiple_delete,

@@ -19,7 +19,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             cas := "macaulay2",		## normalized name on which the user should have no control
             name := "Macaulay2",
             executable := "M2",
-            options := [ "--no-prompts", "--silent", "--no-readline" ],
+            options := [ "--no-prompts --no-readline" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
             SEARCH_READY_TWICE := true,	## a Macaulay2 specific
