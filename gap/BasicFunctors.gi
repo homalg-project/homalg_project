@@ -23,12 +23,12 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     local R, T, p, gen, rel, coker, id, epi, emb;
     
     if HasCokernelEpi( phi ) then
-        return TargetOfMorphism( CokernelEpi( phi ) );
+        return Target( CokernelEpi( phi ) );
     fi;
     
     R := HomalgRing( phi );
     
-    T := TargetOfMorphism( phi );
+    T := Target( phi );
     
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects of the following command(s)
@@ -76,6 +76,9 @@ InstallValue( Functor_Cokernel,
                 )
 );
 
+Functor_Cokernel!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
 ##
 ## Kernel
 ##
@@ -85,10 +88,10 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,
     local S, p, ker, emb;
     
     if HasKernelEmb( psi ) then
-        return SourceOfMorphism( KernelEmb( psi ) );
+        return Source( KernelEmb( psi ) );
     fi;
     
-    S := SourceOfMorphism( psi );
+    S := Source( psi );
     
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( S ); ## avoid future possible side effects of the following command(s)
@@ -122,6 +125,9 @@ InstallValue( Functor_Kernel,
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
 );
+
+Functor_Kernel!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## DefectOfHoms
@@ -164,7 +170,7 @@ InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
         Error( "the two morphisms must either be both left or both right morphisms\n" );
     fi;
     
-    M := TargetOfMorphism( pre );
+    M := Target( pre );
     
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( M );  ## avoid future possible side effects of the following command(s)
@@ -205,14 +211,18 @@ InstallValue( Functor_DefectOfHoms,
                 )
 );
 
+Functor_DefectOfHoms!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
 ##
 ## Hom
 ##
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,
   function( M, N )
-    local R, s, t, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
-          gen, proc_to_readjust_generators, proc_to_normalize_generators;
+    local R, container, weak_pointers, a, deleted, s, t, i, M_s_N_t,
+          l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
+          gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
     
@@ -225,8 +235,32 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
+    container := Functor_Hom!.ContainerForWeakPointersOnComputedModules;
+    
+    weak_pointers := container!.weak_pointers;
+    
+    a := container!.counter;
+        
+    deleted := Filtered( [ 1 .. a ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+    
+    container!.deleted := deleted;
+    
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
+    
+    for i in Difference( [ 1 .. a ], deleted ) do
+        hom := ElmWPObj( weak_pointers, i );
+        if hom <> fail then
+            M_s_N_t := Genesis( hom )[2];
+            if IsIdenticalObj( M_s_N_t[1][1], M ) and
+               IsIdenticalObj( M_s_N_t[2][1], N ) and
+               M_s_N_t[1][2] = s and M_s_N_t[2][2] = t then
+                return hom;
+            fi;
+        fi;
+    od;
+    
+    #=====# begin of the core procedure #=====#
     
     l0 := NrGenerators( M );
     l1 := NrRelations( M );
@@ -257,10 +291,17 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
         c := _l0;
         
         proc_to_normalize_generators :=
-          function( mat, M, N, s, t )
-            local mor, mat_old;
+          function( mat, M_with_s, N_with_t )
+            local M, s, N, t, mor, mat_old;
             
-            ## we expect mat to be a matrix of a morphism
+            ## for better readability of the code:
+            M := M_with_s[1];
+            s := M_with_s[2];
+            
+            N := N_with_t[1];
+            t := N_with_t[2];
+            
+            ## we assume mat to be a matrix of a morphism
             ## w.r.t. the CURRENT generators of source and target:
             mor := HomalgMorphism( mat, M, N );
             
@@ -270,15 +311,18 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
         end;
         
         proc_to_readjust_generators :=
-          function( gen, M, N, s, t )
-            local r, c, mat_old, mor;
+          function( gen, M_with_s, N_with_t )
+            local c, r, mat_old, mor;
             
-            r := NrGenerators( M, s );
-            c := NrGenerators( N, t );
+            ## M_with_s = [ M, s ]
+            ## N_with_t = [ N, t ]
+            
+            r := CallFuncList( NrGenerators, M_with_s );
+            c := CallFuncList( NrGenerators, N_with_t );
             
             mat_old := ConvertColumnToMatrix( gen, r, c );
             
-            mor := HomalgMorphism( mat_old, [ M, s ], [ N, t ] );
+            mor := HomalgMorphism( mat_old, M_with_s, N_with_t );
             
             ## return the matrix of the morphism
             ## w.r.t. the CURRENT generators of source and target:
@@ -292,10 +336,18 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
         c := l0;
         
         proc_to_normalize_generators :=
-          function( mat, M, N, s, t )
-            local mor, mat_old;
+          function( mat, M_with_s, N_with_t )
+            local M, s, N, t, mor, mat_old;
             
-            ## we expect mat to be a matrix of a morphism w.r.t. the CURRENT generators of source and target!
+            ## for better readability of the code:
+            M := M_with_s[1];
+            s := M_with_s[2];
+            
+            N := N_with_t[1];
+            t := N_with_t[2];
+            
+            ## we assume mat to be a matrix of a morphism
+            ## w.r.t. the CURRENT generators of source and target:
             mor := HomalgMorphism( mat, M, N );
             
             mat_old := MatrixOfMorphism( mor, s, t );
@@ -304,15 +356,18 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
         end;
         
         proc_to_readjust_generators :=
-          function( gen, M, N, s, t )
+          function( gen, M_with_s, N_with_t )
             local c, r, mat_old, mor;
             
-            c := NrGenerators( M, s );
-            r := NrGenerators( N, t );
+            ## M_with_s = [ M, s ]
+            ## N_with_t = [ N, t ]
+            
+            c := CallFuncList( NrGenerators, M_with_s );
+            r := CallFuncList( NrGenerators, N_with_t );
             
             mat_old := ConvertRowToMatrix( gen, r, c );
             
-            mor := HomalgMorphism( mat_old, [ M, s ], [ N, t ] );
+            mor := HomalgMorphism( mat_old, M_with_s, N_with_t );
             
             ## return the matrix of the morphism
             ## w.r.t. the CURRENT generators of source and target:
@@ -327,10 +382,22 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
     hom := Kernel( alpha );
     
+    #=====# end of the core procedure #=====#
+    
     gen := GeneratorsOfModule( hom );
     
-    SetProcedureToNormalizeGenerators( gen, [ proc_to_normalize_generators, M, N, s, t ] );
-    SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, M, N, s, t ] );
+    SetProcedureToNormalizeGenerators( gen, [ proc_to_normalize_generators, [ M, s ], [ N, t ] ] );
+    SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, [ M, s, ], [ N, t ] ] );
+    
+    p := PositionOfTheDefaultSetOfRelations( hom );
+    
+    SetGenesis( hom, [ Functor_Hom, [ [ M, s ], [ N, t ] ], p ] );
+    
+    a := a + 1;
+    
+    container!.counter := a;
+    
+    SetElmWPObj( weak_pointers, a, hom );
     
     return hom;
     
@@ -345,6 +412,8 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,
     if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
         Error( "the module and the morphism are not defined over identically the same ring\n" );
     fi;
+    
+    #=====# begin of the core procedure #=====#
     
     if IsMorphismOfFinitelyGeneratedModulesRep( M_or_mor )
        and IsFinitelyPresentedModuleRep( N_or_mor ) then
@@ -394,6 +463,12 @@ InstallValue( Functor_Hom,
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
 );
+
+Functor_Hom!.ContainerForWeakPointersOnComputedModules :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_Hom!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
 #

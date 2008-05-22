@@ -1449,9 +1449,9 @@ InstallMethod( DecideZeroRows,
         
   function( L, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRows( IsHomalgMatrix, IsInvertibleMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRows( IsHomalgMatrix, IsLeftInvertibleMatrix )", "\033[0m" );
     
-    return L;
+    return 0 * L;
     
 end );
 
@@ -1511,9 +1511,9 @@ InstallMethod( DecideZeroColumns,
         
   function( L, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumns( IsHomalgMatrix, IsInvertibleMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumns( IsHomalgMatrix, IsRightInvertibleMatrix )", "\033[0m" );
     
-    return L;
+    return 0 * L;
     
 end );
 
@@ -1540,6 +1540,188 @@ InstallMethod( DecideZeroColumns,
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumns( IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
     
     return L;
+    
+end );
+
+#-----------------------------------
+# DecideZeroRowsEffectively
+#-----------------------------------
+
+##
+InstallMethod( DecideZeroRowsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ], 10001,
+        
+  function( A, B, T )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
+    
+    if NrColumns( A ) <> NrColumns( B ) then
+        Error( "the number of columns of the two matrices must coincide\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DecideZeroRowsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasItsLeftInverse, IsVoidMatrix ],
+        
+  function( A, B, T )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, HasItsLeftInverse, T )", "\033[0m" );
+    
+    ## 0 = A + T * B
+    SetPreEval( T, -A * ItsLeftInverse( B ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return 0 * A;
+    
+end );
+
+##
+InstallMethod( DecideZeroRowsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, IsIdentityMatrix, T )", "\033[0m" );
+    
+    ## 0 = A + T * Id
+    SetPreEval( T, -A ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return 0 * A;
+    
+end );
+
+##
+InstallMethod( DecideZeroRowsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsVoidMatrix ],
+        
+  function( A, B, T )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, IsZero(Matrix), T )", "\033[0m" );
+    
+    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( DecideZeroRowsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsZero(Matrix), IsHomalgMatrix, T )", "\033[0m" );
+    
+    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return A;
+    
+end );
+
+#-----------------------------------
+# DecideZeroColumnsEffectively
+#-----------------------------------
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ], 10001,
+        
+  function( A, B, T )
+    
+    if not IsIdenticalObj( HomalgRing( A ), HomalgRing( B ) ) then
+        Error( "the two matrices are not defined over identically the same ring\n" );
+    fi;
+    
+    if NrRows( A ) <> NrRows( B ) then
+        Error( "the number of rows of the two matrices must coincide\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasItsRightInverse, IsVoidMatrix ],
+        
+  function( A, B, T )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, HasItsRightInverse, T )", "\033[0m" );
+    
+    ## 0 = A + B * T
+    SetPreEval( T, ItsRightInverse( B ) * -A ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return 0 * A;
+    
+end );
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, IsIdentityMatrix, T )", "\033[0m" );
+    
+    ## 0 = A + Id * T
+    SetPreEval( T, -A ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return 0 * A;
+    
+end );
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsVoidMatrix ],
+        
+  function( A, B, T )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, IsZero(Matrix), T )", "\033[0m" );
+    
+    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    local R;
+    
+    R := HomalgRing( A );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsZero(Matrix), IsHomalgMatrix, T )", "\033[0m" );
+    
+    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return A;
     
 end );
 

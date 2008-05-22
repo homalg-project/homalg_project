@@ -957,6 +957,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
+    ## M = A + T * B;
     SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
@@ -1028,6 +1029,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
+    ## M = A + B * T;
     SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );

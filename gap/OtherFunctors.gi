@@ -23,7 +23,7 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,
     local par, emb, tor;
     
     if HasTorsionSubmoduleEmb( M ) then
-        return SourceOfMorphism( TorsionSubmoduleEmb( M ) );
+        return Source( TorsionSubmoduleEmb( M ) );
     fi;
     
     par := ParametrizeModule( M );
@@ -33,7 +33,7 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,
     ## set the attribute TorsionSubmoduleEmb (specific for TorsionSubmodule):
     SetTorsionSubmoduleEmb( M, emb );
     
-    tor := SourceOfMorphism( emb );
+    tor := Source( emb );
     
     SetIsTorsion( tor, true );
     
@@ -52,6 +52,9 @@ InstallValue( Functor_TorsionSubmodule,
                 )
 );
 
+Functor_TorsionSubmodule!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
 ##
 ## TorsionFreeFactor
 ##
@@ -61,7 +64,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,
     local emb, epi, M0;
     
     if HasTorsionFreeFactorEpi( M ) then
-        return TargetOfMorphism( TorsionFreeFactorEpi( M ) );
+        return Target( TorsionFreeFactorEpi( M ) );
     fi;
     
     emb := TorsionSubmoduleEmb( M );
@@ -71,7 +74,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,
     ## set the attribute TorsionFreeFactorEpi (specific for TorsionFreeFactor):
     SetTorsionFreeFactorEpi( M, epi );
     
-    M0 := TargetOfMorphism( epi );
+    M0 := Target( epi );
     
     SetIsTorsionFree( M0, true );
     
@@ -89,6 +92,9 @@ InstallValue( Functor_TorsionFreeFactor,
                 [ "OnObjects", _Functor_TorsionFreeFactor_OnObjects ]
                 )
 );
+
+Functor_TorsionFreeFactor!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
 #

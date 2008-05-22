@@ -52,7 +52,6 @@ ReadPackage( "homalg", "gap/BasicFunctors.gi" );
 
 ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
-## subpackages
 ReadPackage( "homalg", "gap/LIRNG.gi" );
 ReadPackage( "homalg", "gap/LIMAT.gi" );
 ReadPackage( "homalg", "gap/COLEM.gi" );

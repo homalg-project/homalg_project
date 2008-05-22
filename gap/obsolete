@@ -1,0 +1,105 @@
+##
+## from change.log:
+##
+- added way to optionally ignore the logical subpackages
+  (LRING, LIMAT, COLEM, LIMOD) by setting the global variable
+  DoNotLoadLogicForHomalg to true (a warning will be issued)
+
+##
+## from read.g
+##
+
+## LogicForHomalg subpackages
+if not ( IsBound( DoNotLoadLogicForHomalg ) and DoNotLoadLogicForHomalg = true ) then
+    ReadPackage( "homalg", "gap/LIRNG.gi" );
+    ReadPackage( "homalg", "gap/LIMAT.gi" );
+    ReadPackage( "homalg", "gap/COLEM.gi" );
+    ReadPackage( "homalg", "gap/LIMOD.gi" );
+else
+    Print( "WARNING: the subpackage LogicForHomalg was not loaded!\n" );
+fi;
+
+
+
+##
+## from: HomalgGenerators.gi
+##
+
+##
+InstallMethod( BasisOfModule,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        
+  function( gen )
+    local bas;
+    
+    if not IsBound( gen!.BasisOfModule ) then
+        gen!.BasisOfModule := BasisOfRows( MatrixOfGenerators( gen ) );
+        SetCanBeUsedToDecideZeroEffectively( gen, false );
+    fi;
+    
+    bas := HomalgGeneratorsForLeftModule( gen!.BasisOfModule, HomalgRing( gen ) );
+    
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
+    
+    return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
+    
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
+        
+  function( gen )
+    local bas;
+    
+    if not IsBound( gen!.BasisOfModule ) then
+        gen!.BasisOfModule := BasisOfColumns( MatrixOfGenerators( gen ) );
+        SetCanBeUsedToDecideZeroEffectively( gen, false );
+    fi;
+    
+    bas := HomalgGeneratorsForRightModule( gen!.BasisOfModule, HomalgRing( gen ) );
+    
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
+        
+    return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
+    
+end );
+
+##
+## from: Modules.gi
+##
+
+##
+InstallMethod( \/,				### defines: SubfactorModule (incomplete)
+        "for homalg generators",
+        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        
+  function( gen1, gen2 )
+    local R, B, N, S;
+    
+    R := HomalgRing( gen1 );
+    
+    # basis of gen2
+    B := BasisOfModule( gen2 );
+    
+    # normal forms of generators of gen1 with respect to B
+    N := DecideZero( gen1, B );
+    
+    if IsHomalgGeneratorsOfLeftModule( gen1 ) then
+        N := HomalgGeneratorsForLeftModule( N );
+    else
+        N := HomalgGeneratorsForRightModule( N );
+    fi;
+    
+    # get a better basis for N
+    N := GetRidOfObsoleteGenerators( N );
+    
+    # compute the syzygies module of N modulo B
+    S := SyzygiesGenerators( N, B );
+    
+    return Presentation( S );
+    
+end );
+

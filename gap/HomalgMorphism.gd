@@ -66,6 +66,18 @@ DeclareProperty( "IsTobBeViewedAsAMonomorphism",
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "Source",
+        IsHomalgMorphism );
+
+DeclareAttribute( "Target",
+        IsHomalgMorphism );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
@@ -84,12 +96,6 @@ DeclareOperation( "HomalgRing",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "IsLeft",
-        [ IsHomalgMorphism ] );
-
-DeclareOperation( "SourceOfMorphism",
-        [ IsHomalgMorphism ] );
-
-DeclareOperation( "TargetOfMorphism",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",

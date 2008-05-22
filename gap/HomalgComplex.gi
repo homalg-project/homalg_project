@@ -274,11 +274,11 @@ InstallMethod( ModulesOfComplex,
     if l = 0 then
         return [ C!.(String( ModuleIndicesOfComplex( C )[1] )) ];
     elif IsComplexOfFinitelyPresentedModulesRep( C ) then
-        modules := List( morphisms, TargetOfMorphism );
-        Add( modules, SourceOfMorphism( morphisms[l] ) );
+        modules := List( morphisms, Target );
+        Add( modules, Source( morphisms[l] ) );
     else
-        modules := List( morphisms, SourceOfMorphism );
-        Add( modules, TargetOfMorphism( morphisms[l] ) );
+        modules := List( morphisms, Source );
+        Add( modules, Target( morphisms[l] ) );
     fi;
     
     return modules;
@@ -297,7 +297,7 @@ InstallMethod( CertainModuleOfComplex,
         if IsHomalgModule( C!.(String( i )) ) then
             return C!.(String( i ));
         else
-            return SourceOfMorphism( C!.(String( i )) );
+            return Source( C!.(String( i )) );
         fi;
     fi;
     
@@ -305,9 +305,9 @@ InstallMethod( CertainModuleOfComplex,
     l := Length( indices );
     
     if IsComplexOfFinitelyPresentedModulesRep( C ) and indices[1] = i then
-        return TargetOfMorphism( C!.(String( i + 1 )) );
+        return Target( C!.(String( i + 1 )) );
     elif IsCocomplexOfFinitelyPresentedModulesRep( C ) and indices[l] = i then
-        return TargetOfMorphism( C!.(String( i - 1 )) );
+        return Target( C!.(String( i - 1 )) );
     fi;
     
     return fail;
@@ -329,7 +329,7 @@ InstallMethod( LowestDegreeModuleInComplex,
     if l = 1 then
         return C!.(String( indices[1] ));
     else
-        return TargetOfMorphism( C!.(String( indices[2] )) );
+        return Target( C!.(String( indices[2] )) );
     fi;
     
 end );
@@ -349,7 +349,7 @@ InstallMethod( LowestDegreeModuleInComplex,
     if l = 1 then
         return C!.(String( indices[1] ));
     else
-        return SourceOfMorphism( C!.(String( indices[1] )) );
+        return Source( C!.(String( indices[1] )) );
     fi;
     
 end );
@@ -369,7 +369,7 @@ InstallMethod( HighestDegreeModuleInComplex,
     if l = 1 then
         return C!.(String( indices[1] ));
     else
-        return SourceOfMorphism( C!.(String( indices[l] )) );
+        return Source( C!.(String( indices[l] )) );
     fi;
     
 end );
@@ -389,7 +389,7 @@ InstallMethod( HighestDegreeModuleInComplex,
     if l = 1 then
         return C!.(String( indices[1] ));
     else
-        return TargetOfMorphism( C!.(String( indices[l - 1] )) );
+        return Target( C!.(String( indices[l - 1] )) );
     fi;
     
 end );
@@ -425,7 +425,7 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if not IsIdenticalObj( C!.(String( indices[1] )), TargetOfMorphism( phi ) ) then
+        if not IsIdenticalObj( C!.(String( indices[1] )), Target( phi ) ) then
             Error( "the unique module in the complex and the target of the new morphism are not identical\n" );
         fi;
         
@@ -439,7 +439,7 @@ InstallMethod( Add,
         
         l := indices[l];
         
-        if not IsIdenticalObj( SourceOfMorphism( C!.(String( l )) ), TargetOfMorphism( phi ) ) then
+        if not IsIdenticalObj( Source( C!.(String( l )) ), Target( phi ) ) then
             Error( "the source of the ", l, ". morphism in the complex (i.e. the highest one) and the target of the new morphism are not identically the same module\n" );
         fi;
         
@@ -469,7 +469,7 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if not IsIdenticalObj( C!.(String( indices[1] )), SourceOfMorphism( phi ) ) then
+        if not IsIdenticalObj( C!.(String( indices[1] )), Source( phi ) ) then
             Error( "the unique module in the complex and the source of the new morphism are not identical\n" );
         fi;
         
@@ -481,7 +481,7 @@ InstallMethod( Add,
         
         l := indices[l - 1];
         
-        if not IsIdenticalObj( TargetOfMorphism( C!.(String( l )) ), SourceOfMorphism( phi ) ) then
+        if not IsIdenticalObj( Target( C!.(String( l )) ), Source( phi ) ) then
             Error( "the target of the ", l, ". morphism in the complex (i.e. the highest one) and the source of the new morphism are not identically the same module\n" );
         fi;
         

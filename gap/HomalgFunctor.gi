@@ -19,6 +19,11 @@ DeclareRepresentation( "IsHomalgFunctorRep",
         IsHomalgFunctor,
         [ ] );
 
+# a new subrepresentation of the representation IsContainerForWeakPointersRep:
+DeclareRepresentation( "IsContainerForWeakPointersOnComputedValuesOfFunctorRep",
+        IsContainerForWeakPointersRep,
+        [ "weak_pointers", "counter", "deleted" ] );
+
 ####################################
 #
 # families and types:
@@ -33,6 +38,15 @@ BindGlobal( "TheFamilyOfHomalgFunctors",
 BindGlobal( "TheTypeHomalgFunctor",
         NewType(  TheFamilyOfHomalgFunctors,
                 IsHomalgFunctorRep ) );
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
+        NewType( TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor,
+                IsContainerForWeakPointersOnComputedValuesOfFunctorRep ) );
 
 ####################################
 #
@@ -82,14 +96,32 @@ InstallMethod( FunctorMap,
         [ IsHomalgFunctorRep, IsMorphismOfFinitelyGeneratedModulesRep, IsList ],
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
-    local functor_name, number_of_arguments, arg_positions, S, T, pos,
-          arg_before_pos, arg_behind_pos, arg_source, arg_target,
-          F_source, F_target, arg_phi, hull_phi, emb_source, emb_target;
+    local container, weak_pointers, a, deleted, functor_name,
+          number_of_arguments, arg_positions, S, T, pos,
+          arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
+          b, j, arg_source, arg_target, F_source, F_target, arg_phi, hull_phi,
+          emb_source, emb_target, mor;
     
     if not fixed_arguments_of_multi_functor = [ ]
        and not ( ForAll( fixed_arguments_of_multi_functor, a -> IsList( a ) and Length( a ) = 2 and IsPosInt( a[1] ) ) ) then
         Error( "the last argument has a wrong syntax\n" );
     fi;
+    
+    if IsBound( Functor!.ContainerForWeakPointersOnComputedMorphisms ) then
+        
+        container := Functor!.ContainerForWeakPointersOnComputedMorphisms;
+        
+        weak_pointers := container!.weak_pointers;
+        
+        a := container!.counter;
+        
+        deleted := Filtered( [ 1 .. a ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+        container!.deleted := deleted;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
     
     functor_name := NameOfFunctor( Functor );
         
@@ -101,12 +133,12 @@ InstallMethod( FunctorMap,
         Error( "the number of fixed arguments provided for the functor must be one less than the total number\n" );
     elif not IsDuplicateFree( arg_positions ) then
         Error( "the provided list of positions is not duplicate free: ", arg_positions, "\n" );
-    elif Maximum( arg_positions ) > number_of_arguments then
+    elif arg_positions <> [ ] and Maximum( arg_positions ) > number_of_arguments then
         Error( "the list of positions must be a subset of [ 1 .. ", number_of_arguments, " ], but received: :",  arg_positions, "\n" );
     fi;
     
-    S := SourceOfMorphism( phi );
-    T := TargetOfMorphism( phi );
+    S := Source( phi );
+    T := Target( phi );
     
     pos := Filtered( [ 1 .. number_of_arguments ], a -> not a in arg_positions )[1];
     
@@ -116,6 +148,29 @@ InstallMethod( FunctorMap,
     
     arg_before_pos := List( arg_positions{[ 1 .. pos - 1 ]}, a -> a[2] );
     arg_behind_pos := List( arg_positions{[ pos .. number_of_arguments - 1 ]}, a -> a[2] );
+    
+    if IsBound( container ) then
+        arg_all := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
+        for i in Difference( [ 1 .. a ], deleted ) do
+            phi_rest_mor := ElmWPObj( weak_pointers, i );
+            if IsList( phi_rest_mor ) and Length( phi_rest_mor ) = 2 then
+                arg_old := phi_rest_mor[1];
+                l := Length( arg_old );
+                if l = Length( arg_all ) then
+                    b := true;
+                    for j in [ 1 .. l ] do
+                        if not IsIdenticalObj( arg_old[j], arg_all[j] ) then
+                            b := false;
+                            break;
+                        fi;
+                    od;
+                    if b then
+                        return phi_rest_mor[2];
+                    fi;
+                fi;
+            fi;
+        od;
+    fi;
     
     if IsBound( Functor!.( pos ) ) and Functor!.( pos )[1] = "covariant" then
         arg_source := Concatenation( arg_before_pos, [ S ], arg_behind_pos );
@@ -130,20 +185,32 @@ InstallMethod( FunctorMap,
     F_source := CallFuncList( ValueGlobal( functor_name ), arg_source );
     F_target := CallFuncList( ValueGlobal( functor_name ), arg_target );
     
+    emb_source := F_source!.NaturalEmbedding;
+    emb_target := F_target!.NaturalEmbedding;
+        
     if IsBound( Functor!.OnMorphisms ) then
         arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
+	
+        hull_phi :=
+          HomalgMorphism( hull_phi, Target( emb_source ), Target( emb_target ) );
     else
         hull_phi := phi;
     fi;
     
-    emb_source := F_source!.NaturalEmbedding;
-    emb_target := F_target!.NaturalEmbedding;
+    mor := CompleteImSq( emb_source, hull_phi, emb_target );
     
-    hull_phi :=
-      HomalgMorphism( hull_phi, TargetOfMorphism( emb_source ), TargetOfMorphism( emb_target ) );
+    #=====# end of the core procedure #=====#
     
-    return CompleteImSq( emb_source, hull_phi, emb_target );
+    if IsBound( container ) then
+        a := a + 1;
+        
+        container!.counter := a;
+        
+        SetElmWPObj( weak_pointers, a, [ arg_all, mor ] );
+    fi;
+    
+    return mor;
     
 end );
 
@@ -417,6 +484,232 @@ InstallMethod( InstallFunctorOnMorphisms,
     
 end );
 
+InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
+  function( functor_name, filter_cpx, complex_or_cocomplex, i )
+    
+    InstallOtherMethod( functor_name,
+            "for homalg complexes",
+            [ filter_cpx ],	## complexes
+      function( c )
+        local indices, l, morphisms, Fc, m;
+        
+        indices := ModuleIndicesOfComplex( c );
+        
+        l := Length( indices );
+        
+        if l = 1 then
+            Fc := complex_or_cocomplex( functor_name( CertainModuleOfComplex( c, indices[1] ) ), indices[1] );
+        else
+            morphisms := MorphismsOfComplex( c );
+            Fc := complex_or_cocomplex( functor_name( morphisms[1] ), indices[i] );
+            for m in morphisms{[ 2 .. l - 1 ]} do
+                Add( Fc, functor_name( m ) );
+            od;
+        fi;
+        
+        return Fc;
+        
+    end );
+    
+end );
+
+InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
+  function( functor_name, filter1_cpx, filter2_cpx, filter1_obj, filter2_obj, complex_or_cocomplex1, complex_or_cocomplex2, i1, i2 )
+    
+    InstallOtherMethod( functor_name,
+            "for homalg morphisms",
+            [ filter1_cpx ],
+      function( c )
+        local R, indices, l, morphisms, Fc, m;
+        
+        R := HomalgRing( c );
+        
+        if IsLeft( c ) then
+            R := AsLeftModule( R );
+        else
+            R := AsRightModule( R );
+        fi;
+        
+        indices := ModuleIndicesOfComplex( c );
+        
+        l := Length( indices );
+        
+        if l = 1 then
+            Fc := complex_or_cocomplex1( functor_name( CertainModuleOfComplex( c, indices[1] ), R ), indices[1] );
+        else
+            morphisms := MorphismsOfComplex( c );
+            Fc := complex_or_cocomplex1( functor_name( morphisms[1], R ), indices[i1] );
+            for m in morphisms{[ 2 .. l - 1 ]} do
+                Add( Fc, functor_name( m, R ) );
+            od;
+        fi;
+        
+        return Fc;
+        
+    end );
+    
+    InstallOtherMethod( functor_name,
+            "for homalg morphisms",
+            [ filter1_cpx, filter2_obj ],
+      function( c, o )
+        local obj, indices, l, morphisms, Fc, m;
+        
+        if IsHomalgModule( o ) then	## the most probable case
+            obj := o;
+        elif IsHomalgRing( o ) then
+            if IsLeft( c ) then
+                obj := AsLeftModule( o );
+            else
+                obj := AsRightModule( o );
+            fi;
+        else
+            ## the default:
+            obj := o;
+        fi;
+                
+        indices := ModuleIndicesOfComplex( c );
+        
+        l := Length( indices );
+        
+        if l = 1 then
+            Fc := complex_or_cocomplex1( functor_name( CertainModuleOfComplex( c, indices[1] ), obj ), indices[1] );
+        else
+            morphisms := MorphismsOfComplex( c );
+            Fc := complex_or_cocomplex1( functor_name( morphisms[1], obj ), indices[i1] );
+            for m in morphisms{[ 2 .. l - 1 ]} do
+                Add( Fc, functor_name( m, obj ) );
+            od;
+        fi;
+        
+        return Fc;
+        
+    end );
+    
+    InstallOtherMethod( functor_name,
+            "for homalg morphisms",
+            [ filter1_obj, filter2_cpx ],
+      function( o, c )
+        local obj, indices, l, morphisms, Fc, m;
+        
+        if IsHomalgModule( o ) then	## the most probable case
+            obj := o;
+        elif IsHomalgRing( o ) then
+            if IsLeft( c ) then
+                obj := AsLeftModule( o );
+            else
+                obj := AsRightModule( o );
+            fi;
+        else
+            ## the default:
+            obj := o;
+        fi;
+        
+        indices := ModuleIndicesOfComplex( c );
+        
+        l := Length( indices );
+        
+        if l = 1 then
+            Fc := complex_or_cocomplex2( functor_name( obj, CertainModuleOfComplex( c, indices[1] ) ), indices[1] );
+        else
+            morphisms := MorphismsOfComplex( c );
+            Fc := complex_or_cocomplex2( functor_name( obj, morphisms[1] ), indices[i2] );
+            for m in morphisms{[ 2 .. l - 1 ]} do
+                Add( Fc, functor_name( obj, m ) );
+            od;
+        fi;
+        
+        return Fc;
+        
+    end );
+    
+end );
+
+##
+InstallMethod( InstallFunctorOnComplexes,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local functor_name, number_of_arguments, filter_cpx,
+          filter1_obj, filter1_cpx, filter2_obj, filter2_cpx,
+          complex, cocomplex, complex_complex, complex_cocomplex,
+	  cocomplex_complex, cocomplex_cocomplex;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        
+    number_of_arguments := MultiplicityOfFunctor( Functor );
+    
+    if number_of_arguments = 1 then
+        
+        filter_cpx := Functor!.1[4];
+        
+        if IsList( filter_cpx ) and Length( filter_cpx ) = 2 and ForAll( filter_cpx, IsFilter ) then
+            
+            if Functor!.1[1] = "covariant" then
+                complex := [ functor_name, filter_cpx[1], HomalgComplex, 2 ];
+                cocomplex := [ functor_name, filter_cpx[2], HomalgCocomplex, 1 ];
+            else
+                complex := [ functor_name, filter_cpx[1], HomalgCocomplex, 1 ];
+                cocomplex := [ functor_name, filter_cpx[2], HomalgComplex, 2  ];
+            fi;
+            
+            CallFuncList( HelperToInstallUnivariateFunctorOnComplexes, complex );
+            CallFuncList( HelperToInstallUnivariateFunctorOnComplexes, cocomplex );
+            
+        else
+            
+            Error( "wrong syntax: ", filter_cpx, "\n" );
+            
+        fi;
+        
+    elif number_of_arguments = 2 then
+        
+        filter1_obj := Functor!.1[2];
+        filter1_cpx := Functor!.1[4];
+        
+        filter2_obj := Functor!.2[2];
+        filter2_cpx := Functor!.2[4];
+        
+        if IsList( filter1_cpx ) and Length( filter1_cpx ) = 2 and ForAll( filter1_cpx, IsFilter )
+            and IsList( filter2_cpx ) and Length( filter2_cpx ) = 2 and ForAll( filter2_cpx, IsFilter ) then
+            
+            if Functor!.1[1] = "covariant" and Functor!.2[1] = "covariant" then
+                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
+                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
+                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
+                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
+            elif Functor!.1[1] = "covariant" then
+                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
+                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
+                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
+                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
+            elif Functor!.2[1] = "covariant" then
+                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
+                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
+                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
+                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
+            else
+                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
+                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
+                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
+                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
+            fi;
+            
+            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, complex_complex );
+            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, complex_cocomplex );
+            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, cocomplex_complex );
+            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, cocomplex_cocomplex );
+            
+        else
+            
+            Error( "wrong syntax: ", filter1_cpx, filter2_cpx, "\n" );
+            
+        fi;
+        
+    fi;
+    
+end );
+
 ##
 InstallMethod( InstallFunctor,
         "for homalg functors",
@@ -428,7 +721,7 @@ InstallMethod( InstallFunctor,
     
     InstallFunctorOnMorphisms( Functor );
     
-    #InstallFunctorOnComplexes( Functor );
+    InstallFunctorOnComplexes( Functor );
     
     #InstallFunctorOnChainMaps( Functor );
     
@@ -473,8 +766,15 @@ InstallMethod( ViewObj,
         [ IsHomalgFunctorRep ],
         
   function( o )
+    local functor_name;
     
-    Print( "<A functor for homalg>" );
+    functor_name := NameOfFunctor( o );
+    
+    if functor_name <> fail then
+        Print( "<The functor ", functor_name, ">" );
+    else
+        Print( "<A functor for homalg>" );
+    fi;
     
 end );
 
@@ -484,6 +784,33 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( NameOfFunctor( o ) );
+    Print( NameOfFunctor( o ), "\n" );
     
 end );
+
+InstallMethod( ViewObj,
+        "for containers of weak pointers on homalg external rings",
+        [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
+        
+  function( o )
+    local del;
+    
+    del := Length( o!.deleted );
+    
+    Print( "<A container of weak pointers on computed values of the functor : active = ", o!.counter - del, ", deleted = ", del, ">" );
+    
+end );
+
+InstallMethod( Display,
+        "for containers of weak pointers on homalg external rings",
+        [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
+        
+  function( o )
+    local weak_pointers;
+    
+    weak_pointers := o!.weak_pointers;
+    
+    Print( List( [ 1 .. LengthWPObj( weak_pointers ) ], function( i ) if IsBoundElmWPObj( weak_pointers, i ) then return i; else return 0; fi; end ), "\n" );
+    
+end );
+

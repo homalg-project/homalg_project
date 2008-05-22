@@ -15,38 +15,6 @@
 ####################################
 
 ##
-InstallMethod( \/,				### defines: SubfactorModule (incomplete)
-        "for homalg generators",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
-        
-  function( gen1, gen2 )
-    local R, B, N, S;
-    
-    R := HomalgRing( gen1 );
-    
-    # basis of gen2
-    B := BasisOfModule( gen2 );
-    
-    # normal forms of generators of gen1 with respect to B
-    N := DecideZero( gen1, B );
-    
-    if IsHomalgGeneratorsOfLeftModule( gen1 ) then
-        N := HomalgGeneratorsForLeftModule( N );
-    else
-        N := HomalgGeneratorsForRightModule( N );
-    fi;
-    
-    # get a better basis for N
-    N := GetRidOfObsoleteGenerators( N );
-    
-    # compute the syzygies module of N modulo B
-    S := SyzygiesGenerators( N, B );
-    
-    return Presentation( S );
-    
-end );
-
-##
 InstallMethod( \/,
         "for a homalg matrix",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
@@ -181,7 +149,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
             id := HomalgIdentityMatrix( NrGenerators( B ), R );
             ## the zero'th component of the quasi-isomorphism,
             ## which in this case is simplfy the natural epimorphism on the module
-            SetCokernelEpi( d_j, HomalgMorphism( id, TargetOfMorphism( d_j ), arg[1] ) );
+            SetCokernelEpi( d_j, HomalgMorphism( id, Target( d_j ), arg[1] ) );
             SetIsEpimorphism( d_j!.CokernelEpi, true );
         fi;
         SetFreeResolution( M, d );
@@ -189,7 +157,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
     #=====# begin of the core procedure #=====#
     
-    F_j := SourceOfMorphism( d_j );
+    F_j := Source( d_j );
     
     S := d!.LastSyzygies;
     
@@ -202,7 +170,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
         Add( d, d_j );
         S := B!.SyzygiesGenerators;
         
-        F_j := SourceOfMorphism( d_j );
+        F_j := Source( d_j );
         
         d!.LastSyzygies := S;
         
@@ -211,6 +179,8 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     if NrRelations( S ) = 0 then
         SetHasFiniteFreeResolution( M, true );
     fi;
+    
+    SetIsComplex( d, true );
     
     return d;
     

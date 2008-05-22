@@ -395,14 +395,17 @@ InstallGlobalFunction( CreateHomalgRing,
         
         weak_pointers := container!.weak_pointers;
         
-        l := container!.counter + 1;
-        container!.counter := l;
-        
-        SetElmWPObj( container!.weak_pointers, l, homalg_ring );
-        
+        l := container!.counter;
+	
         deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
         
         container!.deleted := deleted;
+        
+	l := l + 1;
+	
+        container!.counter := l;
+        
+        SetElmWPObj( weak_pointers, l, homalg_ring );
         
         streams := container!.streams;
         

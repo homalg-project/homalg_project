@@ -217,48 +217,6 @@ InstallMethod( UnionOfRelations,
 end );
 
 ##
-InstallMethod( BasisOfModule,
-        "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
-        
-  function( gen )
-    local bas;
-    
-    if not IsBound( gen!.BasisOfModule ) then
-        gen!.BasisOfModule := BasisOfRows( MatrixOfGenerators( gen ) );
-        SetCanBeUsedToDecideZeroEffectively( gen, false );
-    fi;
-    
-    bas := HomalgGeneratorsForLeftModule( gen!.BasisOfModule, HomalgRing( gen ) );
-    
-    SetCanBeUsedToDecideZeroEffectively( bas, true );
-    
-    return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
-    
-end );
-
-##
-InstallMethod( BasisOfModule,
-        "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
-        
-  function( gen )
-    local bas;
-    
-    if not IsBound( gen!.BasisOfModule ) then
-        gen!.BasisOfModule := BasisOfColumns( MatrixOfGenerators( gen ) );
-        SetCanBeUsedToDecideZeroEffectively( gen, false );
-    fi;
-    
-    bas := HomalgGeneratorsForRightModule( gen!.BasisOfModule, HomalgRing( gen ) );
-    
-    SetCanBeUsedToDecideZeroEffectively( bas, true );
-        
-    return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
-    
-end );
-
-##
 InstallMethod( DecideZero,
         "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],

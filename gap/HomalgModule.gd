@@ -66,6 +66,9 @@ DeclareAttribute( "RankOfModule",
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
+DeclareAttribute( "Genesis",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:
