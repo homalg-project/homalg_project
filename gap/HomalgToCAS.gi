@@ -17,7 +17,7 @@
 ##
 InstallGlobalFunction( homalgFlush,
   function( arg )
-    local nargs, verbose, stream, container, weak_pointers, l, pids, p, i,
+    local nargs, verbose, stream, container, weak_pointers, l, pids, R, p, i,
           deleted, var, streams;
     
     ## the internal garbage collector:
@@ -43,14 +43,15 @@ InstallGlobalFunction( homalgFlush,
         pids := [ ];
         
         for i in [ 1 .. l ] do
-            if IsBoundElmWPObj( weak_pointers, i ) then
-                p := homalgExternalCASystemPID( weak_pointers[i] );
+            R := ElmWPObj( weak_pointers, i );
+            if R <> fail then
+                p := homalgExternalCASystemPID( R );
                 if not p in pids then
                     Add( pids, p );
                     if verbose then
-                        homalgFlush( weak_pointers[i] );
+                        homalgFlush( R );
                     else
-                        homalgFlush( weak_pointers[i], "quiet" );
+                        homalgFlush( R, "quiet" );
                     fi;
                 fi;
             fi;
@@ -66,8 +67,9 @@ InstallGlobalFunction( homalgFlush,
             pids := [ ];
             
             for i in [ 1 .. l ] do
-                if IsBoundElmWPObj( weak_pointers, i ) then
-                    Add( pids, homalgExternalCASystemPID( weak_pointers[i] ) );
+                R := ElmWPObj( weak_pointers, i );
+                if R <> fail then
+                    Add( pids, homalgExternalCASystemPID( R ) );
                 fi;
             od;
             
@@ -151,16 +153,19 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     weak_pointers := container!.weak_pointers;
     
-    l := container!.counter + 1;
+    l := container!.counter;
+    
+    deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+    
+    l := l + 1;
+    
     container!.counter := l;
     
     if not Concatenation( HOMALG_IO.variable_name, String( l ) ) = homalgPointer( ext_obj ) then
-        Error( "\033[01m\033[5;31;47mexpecting an external object with pointer = ", Concatenation( HOMALG_IO.variable_name, String( l ) ), "but recieved one with pointer = ", homalgPointer( ext_obj ), "\033[0m" );
+        Error( "\033[01m\033[5;31;47mexpecting an external object with pointer = ", Concatenation( HOMALG_IO.variable_name, String( l ) ), " but recieved one with pointer = ", homalgPointer( ext_obj ), "\033[0m" );
     fi;
     
     SetElmWPObj( weak_pointers, l, ext_obj );
-    
-    deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
     
     var := Difference( deleted, container!.deleted );
     
@@ -182,7 +187,7 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
         
     fi;
     
-    ## never call the external garbage collector in this procedure
+    ## never ever call the internal or the external garbage collector in this procedure
     
 end );
 
