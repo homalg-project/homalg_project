@@ -68,7 +68,7 @@ InstallMethod( CreateHomalgTable,
                R := HomalgRing( M );
                I := HomalgVoidMatrix( NrColumns( M ), NrRows( M ), R );
                if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
-                 ## in case of a non-commutative ring (right now: in case of a wezl algebra: todo)
+                 ## in case of a non-commutative ring (right now: in case of a weyl algebra: todo)
                  homalgSendBlocking( Concatenation(
                                         [ "map F = ", R, ", " ],
                                         IndeterminateCoordinatesOfRingOfDerivations( R ),
