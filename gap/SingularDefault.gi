@@ -31,34 +31,39 @@ InstallValue( CommonHomalgTableForSingularDefault,
     end,
       
     DecideZeroRowsEffectively := ## FIXME: this is wrong in general
-    function( A, B, T )  
-      local R, l, m, n, id, zz, M, TT;
+    function( Atr, Btr, Ttr )  
+    local Mtr, TTtr, R;
       
-      R := HomalgRing( A );
+      R := HomalgRing( Atr );
       
-      l := NrRows( A );
-      m := NrColumns( A );
-    
-      n := NrRows( B );
-    
-      id := HomalgIdentityMatrix( l, R );
-    
-      zz := HomalgZeroMatrix( n, l, R );
-    
-      M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
-    
-      TT := HomalgVoidMatrix( R );
-    
-      M := BasisOfRowsCoeff( M, TT );
-    
-      M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
-    
-      TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
-    
-      SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
-    
-      return M;
-    
+#todo: read part of the unit matrix in singular help!
+#      it is ignored right now.
+# division(A^t,B^t) returns (TT^t, M^t, U^t) with
+#                A^t*U^t = B^t*TT^t + M^t
+# <=> (ignore U) M^t = A^t - B^t*TT^tr
+# <=>            M   = A   + (-TT) * B
+# <=> (T:=-TT)   M   = A   + T * B
+#M^t=A^t-T^t*B^t
+#      homalgSendBlocking( [ "list l = division(", Atr, Btr, ")" ], "need_command", 
+#      Mtr := HomalgVoidMatrix( R );
+#      homalgSendBlocking( [ Mtr, " = l[2]" ], [ "matrix" ], HOMALG_IO.Pictograms.DecideZero );
+#      ResetFilterObj( Mtr, IsVoidMatrix );
+#      TTtr := HomalgVoidMatrix( R );
+#      homalgSendBlocking( [ TTtr, " = l[1]" ], [ "matrix" ], HOMALG_IO.Pictograms.DecideZero );
+#      ResetFilterObj( TTtr, IsVoidMatrix );
+#      SetPreEval( Ttr, -TTtr ); ResetFilterObj( Ttr, IsVoidMatrix );
+      
+      Mtr := HomalgVoidMatrix( R );
+      homalgSendBlocking( [ "matrix ", Mtr, " = reduce(", Atr, Btr, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+      ResetFilterObj( Mtr, IsVoidMatrix );
+      
+      TTtr := HomalgVoidMatrix( R );
+      homalgSendBlocking( [ "matrix ", TTtr, " = lift(", Btr, Mtr - Atr, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+      SetPreEval( Ttr, TTtr ); 
+      ResetFilterObj( Ttr, IsVoidMatrix );
+      
+      return Mtr;
+      
     end,
     
     SyzygiesGeneratorsOfRows :=
