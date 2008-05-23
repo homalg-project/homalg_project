@@ -559,7 +559,7 @@ InstallGlobalFunction( homalgSendBlocking,
         else
             Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.errors ,"\033[0m\n" );
         fi;
-    elif IsBound( stream.error_stdout ) and IsSubset( stream.lines, stream.error_stdout ) then
+    elif IsBound( stream.error_stdout ) and PositionSublist( stream.lines, stream.error_stdout ) <> fail then
         Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.lines ,"\033[0m\n" );
     fi;
     
