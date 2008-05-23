@@ -378,7 +378,10 @@ InstallMethod( CreateHomalgMatrix,
     local ext_obj;
     
     ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
-    homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix ); #added by Simon
+    
+    if not ( r = 1 and c = 1 ) then
+        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix ); #added by Simon
+    fi;
     
     return HomalgMatrix( ext_obj, r, c, R );
     
