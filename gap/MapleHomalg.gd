@@ -30,6 +30,8 @@ DeclareGlobalFunction( "RingForHomalgInMapleUsingPIR" );
 
 DeclareGlobalFunction( "RingForHomalgInMapleUsingInvolutive" );
 
+DeclareGlobalFunction( "RingForHomalgInMapleUsingInvolutiveLocal" );
+
 DeclareGlobalFunction( "RingForHomalgInMapleUsingJanet" );
 
 DeclareGlobalFunction( "RingForHomalgInMapleUsingJanetOre" );
