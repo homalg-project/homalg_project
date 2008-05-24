@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd">
 
@@ -14,7 +14,7 @@
 
 <TitlePage>
     <Title>GAP 4 Package <Package>homalg</Package></Title>
-    <Subtitle>homalg --- An Abstract Package for Homological Algebra</Subtitle>
+    <Subtitle>homalg --- A Meta-Package for Homological Algebra</Subtitle>
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>

@@ -3,10 +3,10 @@
                               [1XGAP 4 Package [5Xhomalg[0m[1X[0m
   
   
-             [1Xhomalg --- An Abstract Package for Homological Algebra[0m
+               [1Xhomalg --- A Meta-Package for Homological Algebra[0m
   
   
-                               Version 2008.03.15
+                               Version 2008.05.24
   
   
                                    March 2007
@@ -19,7 +19,7 @@
   Mohamed Barakat
       Email:    [7Xmailto:mohamed.barakat@rwth-aachen.de[0m
       Homepage: [7Xhttp://www.math.rwth-aachen.de/~barakat[0m
-      Address:  Lehrstuhl  B  fÃ¼r  Mathematik, RWTH Aachen, Templergraben 64,
+      Address:  Lehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
                 52056 Aachen, Germany
   
   
