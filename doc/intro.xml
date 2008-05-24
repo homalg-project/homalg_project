@@ -1,0 +1,38 @@
+<!-- 
+
+  intro.xml             ExamplesForHomalg package documentation         Mohamed Barakat
+                                                                      Simon Goertzen
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Section Label="philosophy">
+<Heading>Philosophy</Heading>
+
+This package is about how to implement rings for the GAP package homalg. To be written further.
+</Section>
+
+<Section Label="overview">
+<Heading>Overview over this manual</Heading>
+
+Chapter <Ref Chap="install"/> describes the installation of this package.
+
+<E>More text on other chapters to be written.</E><P/>
+
+Finally, Chapter <Ref Chap="examples"/>
+shows instructive examples for the usage of this package.
+
+The main reference for the Maple implementation is <Cite Key="BR"/>.
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

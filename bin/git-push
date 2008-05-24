@@ -1,0 +1,7 @@
+#!/bin/sh
+
+git-checkout master
+git-merge devel
+git-checkout devel
+git-push
+git-status

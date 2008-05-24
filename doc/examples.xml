@@ -1,0 +1,20 @@
+<!-- 
+
+  examples.xml            ExamplesForHomalg package documentation         Mohamed Barakat
+                                                                           Simon Goertzen
+                                                                   Markus Lange-Hegermann
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This chapter gives examples for the usage of this package.
+
+-->
+
+<Chapter Label="examples">
+<Heading>Examples</Heading>
+
+Here comes text.<P/>
+
+<!-- ############################################################ -->
+
+</Chapter>

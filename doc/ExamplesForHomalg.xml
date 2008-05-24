@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+
+<!--
+
+  ExamplesForHomalg.xml          ExamplesForHomalg package documentation            Mohamed Barakat
+                                                                                     Simon Goertzen
+                                                                             Markus Lange-Hegermann
+
+  Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<Book Name="ExamplesForHomalg">
+
+<TitlePage>
+    <Title>GAP 4 Package <Package>ExamplesForHomalg</Package></Title>
+    <Subtitle>ExamplesForHomalg --- An Abstract Package for Homological Algebra</Subtitle>
+    <Version>
+      Version <#Include SYSTEM "../VERSION">
+    </Version>
+    <Author>Mohamed Barakat
+<Address>
+Lehrstuhl B für Mathematik,
+RWTH Aachen,
+Templergraben 64,
+52056 Aachen,
+Germany
+</Address>
+    <Email>mohamed.barakat@rwth-aachen.de</Email>
+    <Homepage>http://www.math.rwth-aachen.de/&tilde;barakat</Homepage>
+    </Author>
+    <Date>May 2008 </Date>
+
+<Copyright>
+  &copyright; 2008 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
+
+  This package may be distributed under the terms and conditions of the
+  GNU Public License Version 2.
+</Copyright>
+
+</TitlePage>
+
+<!--  TableOfContents  . . . . . .  generate a table of contents   -->
+<TableOfContents/>
+
+<!--  The only chapter of the book  --> 
+<Body>
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "install.xml">
+<#Include SYSTEM "examples.xml">
+</Body>
+
+<Bibliography Databases="ExamplesForHomalg"/>
+
+<!--  And finally an index as well   -->
+<TheIndex/>
+
+</Book>
+

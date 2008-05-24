@@ -1,0 +1,5 @@
+\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }Introduction}}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}\leavevmode {\color {Chapter }Philosophy}}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}\leavevmode {\color {Chapter }Overview over this manual}}{4}{section.1.2}
+\contentsline {chapter}{\numberline {2}\leavevmode {\color {Chapter }Installation of the \textsf {ExamplesForHomalg}-Package}}{5}{chapter.2}
+\contentsline {chapter}{\numberline {3}\leavevmode {\color {Chapter }Examples}}{6}{chapter.3}

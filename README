@@ -1,0 +1,32 @@
+    README file for the `ExamplesForHomalg' GAP4 package
+        
+To get the newest version of this GAP 4 package download one of the
+archive files
+    ExamplesForHomalg-x.x.tar.gz
+    ExamplesForHomalg-x.x.zoo
+    ExamplesForHomalg-x.x.tar.bz2
+    ExamplesForHomalg-x.x.zip
+and unpack it using 
+    gunzip ExamplesForHomalg-x.x.tar.gz; tar xvf ExamplesForHomalg-x.x.tar
+respectively
+    unzoo -x ExamplesForHomalg-x.x.zoo
+and so on.
+
+(Note that if you use a browser like `netscape' for downloading the
+archive file the `gunzip' step above may already be done by the browser,
+although the name of your file may still have the misleading `.gz'
+extension.)
+
+Do this preferably (but not necessarily) inside the `pkg' subdirectory
+of your GAP 4 installation. It creates a subdirectory called `ExamplesForHomalg'.
+
+This completes the installation of the package.
+
+Recompiling the documentation is possible by the command `gap makedoc.g'
+in the ExamplesForHomalg directory. But this should not be necessary.
+
+E-mail me if there are any questions, remarks, suggestions. Also, I
+would like to hear about applications of this package.
+
+
+Mohamed Barakat, e-mail: mohamed.barakat@.rwth-aachen.de 
