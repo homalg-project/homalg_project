@@ -5,7 +5,11 @@
 <!--
 
   IO_ForHomalg.xml          IO_ForHomalg package documentation            Mohamed Barakat
+                                                                            Thomas Breuer
                                                                            Simon Goertzen
+                                                                            Frank Luebeck
+                                                                          Max Neunhoeffer
+                                                                           Daniel Robertz
 
   Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
 
@@ -15,7 +19,7 @@
 
 <TitlePage>
     <Title>GAP 4 Package <Package>IO_ForHomalg</Package></Title>
-    <Subtitle>IO_ForHomalg --- An Abstract Package for Homological Algebra</Subtitle>
+    <Subtitle>IO_ForHomalg --- Use the IO Package for homalg</Subtitle>
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
@@ -30,10 +34,10 @@ Germany
     <Email>mohamed.barakat@rwth-aachen.de</Email>
     <Homepage>http://www.math.rwth-aachen.de/&tilde;barakat</Homepage>
     </Author>
-    <Date>March 2007 </Date>
+    <Date>May 2008 </Date>
 
 <Copyright>
-  &copyright; 2007 by Mohamed Barakat<P/>
+  &copyright; 2008 by Mohamed Barakat, Simon Goertzen, Max Neunhoeffer and Daniel Robertz<P/>
 
   This package may be distributed under the terms and conditions of the
   GNU Public License Version 2.

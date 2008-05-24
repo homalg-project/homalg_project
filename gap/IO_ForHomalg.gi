@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgExternalRing.gi     IO_ForHomalg package           Mohamed Barakat
+##  IO_ForHomalg.gi           IO_ForHomalg package           Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

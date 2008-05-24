@@ -4,7 +4,7 @@ encoding := "UTF-8",
 bookname := "IO_ForHomalg",
 entries :=
 [ [ "Title page", "", [ 0, 0, 0 ], 1, 1, "title page", "X7D2C85EC87DD46E5" ], [ "Copyright", "-1", [ 0, 0, 1 ], 28, 2, "copyright", "X81488B807F2A1CF1" ], 
-  [ "Table of Contents", "-2", [ 0, 0, 2 ], 36, 3, "table of contents", "X8537FEB07AF2BEC8" ], [ "\033[1XIntroduction\033[0X", "1", [ 1, 0, 0 ], 1, 4, "introduction", "X7DFB63A97E67C0A1" ], 
+  [ "Table of Contents", "-2", [ 0, 0, 2 ], 37, 3, "table of contents", "X8537FEB07AF2BEC8" ], [ "\033[1XIntroduction\033[0X", "1", [ 1, 0, 0 ], 1, 4, "introduction", "X7DFB63A97E67C0A1" ], 
   [ "\033[1XPhilosophy\033[0X", "1.1", [ 1, 1, 0 ], 4, 4, "philosophy", "X873C99678745ABAF" ], [ "\033[1XOverview over this manual\033[0X", "1.2", [ 1, 2, 0 ], 10, 4, "overview over this manual", 
       "X786BACDB82918A65" ], [ "\033[1XInstallation of the \033[5XIO_ForHomalg\033[1X-Package\033[0X", "2", [ 2, 0, 0 ], 1, 5, "installation of the io_forhomalg-package", "X800CA04B83199322" ], 
   [ "\033[1XExamples\033[0X", "3", [ 3, 0, 0 ], 1, 6, "examples", "X7A489A5D79DA9E5C" ], [ "Bibliography", "bib", [ "Bib", 0, 0 ], 1, 7, "bibliography", "X7A6F98FD85F02BFE" ], 

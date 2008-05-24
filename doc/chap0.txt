@@ -3,13 +3,13 @@
                            [1XGAP 4 Package [5XIO_ForHomalg[0m[1X[0m
   
   
-          [1XIO_ForHomalg --- An Abstract Package for Homological Algebra[0m
+                 [1XIO_ForHomalg --- Use the IO Package for homalg[0m
   
   
-                               Version 2008.03.15
+                               Version 2008.05.23
   
   
-                                   March 2007
+                                    May 2008
   
   
                                 Mohamed Barakat
@@ -26,7 +26,8 @@
   
   -------------------------------------------------------
   [1XCopyright[0m
-  © 2007 by Mohamed Barakat
+  ©  2008  by  Mohamed  Barakat,  Simon  Goertzen,  Max Neunhoeffer and Daniel
+  Robertz
   
   This  package  may  be distributed under the terms and conditions of the GNU
   Public License Version 2.
