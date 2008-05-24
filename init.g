@@ -35,6 +35,9 @@ ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gd" );
 
+## chain maps
+ReadPackage( "homalg", "gap/HomalgChainMap.gd" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 
@@ -46,7 +49,11 @@ ReadPackage( "homalg", "gap/Basic.gd" );
 ## main
 ReadPackage( "homalg", "gap/Modules.gd" );
 
+ReadPackage( "homalg", "gap/Morphisms.gd" );
+
 ReadPackage( "homalg", "gap/Complexes.gd" );
+
+ReadPackage( "homalg", "gap/ChainMaps.gd" );
 
 ReadPackage( "homalg", "gap/BasicFunctors.gd" );
 

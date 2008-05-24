@@ -14,6 +14,10 @@
 #
 ####################################
 
+DeclareGlobalFunction( "ResolutionOfModule" );
+
+DeclareGlobalFunction( "ParametrizeModule" );
+
 # basic operations:
 
 DeclareOperation( "/",
@@ -30,8 +34,4 @@ DeclareOperation( "FreeHullModule",
 
 DeclareOperation( "FreeHullModule",
         [ IsHomalgModule ] );
-
-DeclareGlobalFunction( "ResolutionOfModule" );
-
-DeclareGlobalFunction( "ParametrizeModule" );
 

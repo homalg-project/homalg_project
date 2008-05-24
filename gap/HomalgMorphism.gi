@@ -648,13 +648,13 @@ end );
 #_______________________________________________________________________
 
 ##
-InstallMethod( PostDivide,			## defines: PostDivide (RightDivide (high-level))
+InstallMethod( PostDivide,			### defines: PostDivide (RightDivide (high-level))
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
           IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
         
   function( gamma, beta )
-    local N, psi;
+    local N, psi, M_;
     
     N := Target( beta );
     
@@ -670,18 +670,29 @@ InstallMethod( PostDivide,			## defines: PostDivide (RightDivide (high-level))
         Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
     fi;
     
-    return HomalgMorphism( psi, Source( gamma ), Source( beta ) );
+    M_ := Source( gamma );
+    
+    psi := HomalgMorphism( psi, M_, Source( beta ) );
+    
+    if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
+       ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) then	## [BR, Subsection 3.1.1,(2)]
+        
+        SetIsMorphism( psi, true );
+        
+    fi;
+        
+    return psi;
     
 end );
 
 ##
-InstallMethod( PostDivide,			## defines: PostDivide (LeftDivide (high-level))
+InstallMethod( PostDivide,			### defines: PostDivide (LeftDivide (high-level))
         "for homalg morphisms",
         [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
           IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
         
   function( gamma, beta )
-    local N, psi;
+    local N, psi, M_;
     
     N := Target( beta );
     
@@ -697,14 +708,25 @@ InstallMethod( PostDivide,			## defines: PostDivide (LeftDivide (high-level))
         Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
     fi;
     
-    return HomalgMorphism( psi, Source( gamma ), Source( beta ) );
+    M_ := Source( gamma );
+    
+    psi := HomalgMorphism( psi, M_, Source( beta ) );
+    
+    if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
+       ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) then	## [BR, Subsection 3.1.1,(2)]
+        
+        SetIsMorphism( psi, true );
+        
+    fi;
+    
+    return psi;
     
 end );
 
 #=======================================================================
 # Complete an image-square
 #
-#  A_ is a free or beta1 is injective
+#  A_ is a free or beta1 is injective ( cf. [BR, Subsection 3.1.2] )
 #
 #     A_ --(alpha1)--> A
 #     |                |
@@ -793,11 +815,7 @@ InstallGlobalFunction( HomalgMorphism,
             matrix := arg[1];
         elif IsHomalgRelations( arg[1] ) then
             matrix := MatrixOfRelations( arg[1] );
-            if IsHomalgRelationsOfLeftModule( arg[1] ) then
-                left := true;
-            else
-                left := false;
-            fi;
+            left := IsHomalgRelationsOfLeftModule( arg[1] );
         elif IsHomalgRing( arg[nargs] ) then
             matrix := HomalgMatrix( arg[1], arg[nargs] );
         else
@@ -840,6 +858,10 @@ InstallGlobalFunction( HomalgMorphism,
                 Source, source,
                 Target, target );
         
+        if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
+            SetIsMorphism( morphism, true );
+        fi;
+	
         return morphism;
         
     fi;
@@ -1031,6 +1053,10 @@ InstallGlobalFunction( HomalgMorphism,
                 Source, source,
                 Target, target );
         
+    fi;
+    
+    if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
+        SetIsMorphism( morphism, true );
     fi;
     
     return morphism;

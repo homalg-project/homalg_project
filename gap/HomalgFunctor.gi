@@ -493,12 +493,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
       function( c )
         local indices, l, morphisms, Fc, m;
         
-        indices := ModuleIndicesOfComplex( c );
+        indices := ObjectDegreesOfComplex( c );
         
         l := Length( indices );
         
         if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( CertainModuleOfComplex( c, indices[1] ) ), indices[1] );
+            Fc := complex_or_cocomplex( functor_name( CertainObject( c, indices[1] ) ), indices[1] );
         else
             morphisms := MorphismsOfComplex( c );
             Fc := complex_or_cocomplex( functor_name( morphisms[1] ), indices[i] );
@@ -530,12 +530,12 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
             R := AsRightModule( R );
         fi;
         
-        indices := ModuleIndicesOfComplex( c );
+        indices := ObjectDegreesOfComplex( c );
         
         l := Length( indices );
         
         if l = 1 then
-            Fc := complex_or_cocomplex1( functor_name( CertainModuleOfComplex( c, indices[1] ), R ), indices[1] );
+            Fc := complex_or_cocomplex1( functor_name( CertainObject( c, indices[1] ), R ), indices[1] );
         else
             morphisms := MorphismsOfComplex( c );
             Fc := complex_or_cocomplex1( functor_name( morphisms[1], R ), indices[i1] );
@@ -567,12 +567,12 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
             obj := o;
         fi;
                 
-        indices := ModuleIndicesOfComplex( c );
+        indices := ObjectDegreesOfComplex( c );
         
         l := Length( indices );
         
         if l = 1 then
-            Fc := complex_or_cocomplex1( functor_name( CertainModuleOfComplex( c, indices[1] ), obj ), indices[1] );
+            Fc := complex_or_cocomplex1( functor_name( CertainObject( c, indices[1] ), obj ), indices[1] );
         else
             morphisms := MorphismsOfComplex( c );
             Fc := complex_or_cocomplex1( functor_name( morphisms[1], obj ), indices[i1] );
@@ -604,12 +604,12 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
             obj := o;
         fi;
         
-        indices := ModuleIndicesOfComplex( c );
+        indices := ObjectDegreesOfComplex( c );
         
         l := Length( indices );
         
         if l = 1 then
-            Fc := complex_or_cocomplex2( functor_name( obj, CertainModuleOfComplex( c, indices[1] ) ), indices[1] );
+            Fc := complex_or_cocomplex2( functor_name( obj, CertainObject( c, indices[1] ) ), indices[1] );
         else
             morphisms := MorphismsOfComplex( c );
             Fc := complex_or_cocomplex2( functor_name( obj, morphisms[1] ), indices[i2] );

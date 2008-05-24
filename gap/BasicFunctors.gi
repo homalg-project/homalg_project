@@ -18,7 +18,7 @@
 ## Cokernel
 ##
 
-InstallGlobalFunction( _Functor_Cokernel_OnObjects,
+InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
   function( phi )
     local R, T, p, gen, rel, coker, id, epi, emb;
     
@@ -55,7 +55,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,
     
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
-    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1.(2), 3.1.2] )
+    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
     emb := HomalgMorphism( id, [ coker, 1 ], [ T, p ] );
     SetIsTobBeViewedAsAMonomorphism( emb, true );
     
@@ -83,7 +83,7 @@ Functor_Cokernel!.ContainerForWeakPointersOnComputedMorphisms :=
 ## Kernel
 ##
 
-InstallGlobalFunction( _Functor_Kernel_OnObjects,
+InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
   function( psi )
     local S, p, ker, emb;
     
@@ -130,10 +130,10 @@ Functor_Kernel!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-## DefectOfHoms
+## DefectOfExactness
 ##
 
-InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
+InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: DefectOfExactness (DefectOfHoms)
   function( phi_psi )
     local phi, psi, R, pre, post, M, p, gen, rel, coker, ker, emb;
     
@@ -191,7 +191,7 @@ InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
     
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
-    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1.(2), 3.1.2] )
+    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
     emb := HomalgMorphism( emb, [ ker, 1 ], [ M, p ] );
     SetIsTobBeViewedAsAMonomorphism( emb, true );
     
@@ -202,23 +202,23 @@ InstallGlobalFunction( _Functor_DefectOfHoms_OnObjects,
     
 end );
 
-InstallValue( Functor_DefectOfHoms,
+InstallValue( Functor_DefectOfExactness,
         CreateHomalgFunctor(
-                [ "name", "DefectOfHoms" ],
+                [ "name", "DefectOfExactness" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ "covariant", IsHomogeneousList ] ],
-                [ "OnObjects", _Functor_DefectOfHoms_OnObjects ]
+                [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
 );
 
-Functor_DefectOfHoms!.ContainerForWeakPointersOnComputedMorphisms :=
+Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## Hom
 ##
 
-InstallGlobalFunction( _Functor_Hom_OnObjects,
+InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
   function( M, N )
     local R, container, weak_pointers, a, deleted, s, t, i, M_s_N_t,
           l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
@@ -403,7 +403,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,
     
 end );
 
-InstallGlobalFunction( _Functor_Hom_OnMorphisms,
+InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part)
   function( M_or_mor, N_or_mor )
     local phi, L, R, idL;
     
@@ -489,10 +489,10 @@ InstallFunctorOnObjects( Functor_Cokernel );
 InstallFunctorOnObjects( Functor_Kernel );
 
 ##
-## DefectOfHoms( [ phi, psi ] )
+## DefectOfExactness( [ phi, psi ] )
 ##
 
-InstallFunctorOnObjects( Functor_DefectOfHoms );
+InstallFunctorOnObjects( Functor_DefectOfExactness );
 
 ##
 ## Hom( M, N )

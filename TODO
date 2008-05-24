@@ -1,5 +1,12 @@
 - make the generation of the methods for functors automatic
 
+- ask Max:
+  . display issues ($COLUMNS) of external CAS
+  . searching for an alternative path fails
+  . saving objects
+  . test examples?
+  . GAPDoc
+
 - when do immediate methods apply? immediately after objectifying?
 ##
 InstallImmediateMethod( ElementaryDivisorsOfLeftModule,

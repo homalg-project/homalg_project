@@ -14,8 +14,8 @@
 #
 ####################################
 
-##
-InstallMethod( \/,
+## ( cf. [BR, Subsection 3.2.2] )
+InstallMethod( \/,			## defines: / (SubfactorModule)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
@@ -88,10 +88,10 @@ InstallMethod( FreeHullModule,
     
 end );
 
-##
+## ( cf. [BR, Subsection 3.2.1] )
 InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
   function( arg )
-    local nargs, M, R, q, B, d, indices, j, d_j, F_j, id, S;
+    local nargs, M, R, q, B, d, indices, j, d_j, F_j, id, S, i, left;
     
     ## all options of Maple's homalg are obsolete now:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
@@ -118,6 +118,12 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
         q := RightGlobalDimension( M );
     elif HasGlobalDimension( M ) then
         q := GlobalDimension( M );
+    elif IsBound( M!.MaximumNumberOfResolutionSteps )
+      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+        q := M!.MaximumNumberOfResolutionSteps;
+    elif IsBound( arg[1]!.MaximumNumberOfResolutionSteps )
+      and IsInt( arg[1]!.MaximumNumberOfResolutionSteps ) then
+        q := arg[1]!.MaximumNumberOfResolutionSteps;
     elif IsBound( R!.MaximumNumberOfResolutionSteps )
       and IsInt( R!.MaximumNumberOfResolutionSteps ) then
         q := R!.MaximumNumberOfResolutionSteps;
@@ -130,10 +136,10 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
     if HasFreeResolution( M ) then
         d := FreeResolution( M );
-        indices := d!.indices;
+        indices := ObjectDegreesOfComplex( d );
         j := Length( indices );
         j := indices[j];
-        d_j := d!.( j );
+        d_j := CertainMorphism( d, j );
         if not IsBound( d!.LastSyzygies ) then
             d!.LastSyzygies := SyzygiesGenerators( d_j );
         fi;
@@ -178,6 +184,21 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
     if NrRelations( S ) = 0 then
         SetHasFiniteFreeResolution( M, true );
+    fi;
+    
+    ## fill up with zero morphisms:
+    if q < infinity then
+        left := IsLeftModule( F_j );
+        for i in [ 1 .. q - j ] do
+            if left then
+                d_j := HomalgZeroMorphism( HomalgZeroLeftModule( R ), F_j );	## always create a new zero module to be able to distinguish them
+            else
+                d_j := HomalgZeroMorphism( HomalgZeroRightModule( R ), F_j );	## always create a new zero module to be able to distinguish them
+            fi;
+            
+            Add( d, d_j );
+            F_j := Source( d_j );
+        od;
     fi;
     
     SetIsComplex( d, true );

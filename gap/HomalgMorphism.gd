@@ -19,10 +19,10 @@
 DeclareCategory( "IsHomalgMorphism",
         IsAdditiveElementWithInverse
         and IsExtLElement
-        and IsAttributeStoringRep ); ## CAUTION: never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!
+        and IsAttributeStoringRep );		## CAUTION: never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!
 
-DeclareCategory( "IsHomalgEndomorphism", ## it is extremely important to let this filter be a category and NOT a representation or a property,
-        IsHomalgMorphism                 ## since endomorphisms should be multiplicative elements from the beginning!!
+DeclareCategory( "IsHomalgEndomorphism",	## it is extremely important to let this filter be a category and NOT a representation or a property,
+        IsHomalgMorphism			## since endomorphisms should be multiplicative elements from the beginning!!
         and IsMultiplicativeElementWithInverse );
 
 DeclareCategory( "IsHomalgMorphismOfLeftModules",

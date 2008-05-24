@@ -42,7 +42,7 @@ InstallMethod( BasisOfModule,
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
     
-    return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
+    return HomalgRelationsForLeftModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfExactness arrives)
     
 end );
 
@@ -63,7 +63,7 @@ InstallMethod( BasisOfModule,
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
         
-    return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfHoms arrives)
+    return HomalgRelationsForRightModule( MatrixOfGenerators( bas ) ); ## FIXME: written for \/ in Modules.gi (should become obsolete when DefectOfExactness arrives)
     
 end );
 

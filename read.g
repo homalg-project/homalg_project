@@ -35,6 +35,9 @@ ReadPackage( "homalg", "gap/HomalgMorphism.gi" );
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gi" );
 
+## chain maps
+ReadPackage( "homalg", "gap/HomalgChainMap.gi" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
 
@@ -46,12 +49,17 @@ ReadPackage( "homalg", "gap/Basic.gi" );
 ## main
 ReadPackage( "homalg", "gap/Modules.gi" );
 
+ReadPackage( "homalg", "gap/Morphisms.gi" );
+
 ReadPackage( "homalg", "gap/Complexes.gi" );
+
+ReadPackage( "homalg", "gap/ChainMaps.gi" );
 
 ReadPackage( "homalg", "gap/BasicFunctors.gi" );
 
 ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
+## LogicForHomalg subpackages
 ReadPackage( "homalg", "gap/LIRNG.gi" );
 ReadPackage( "homalg", "gap/LIMAT.gi" );
 ReadPackage( "homalg", "gap/COLEM.gi" );

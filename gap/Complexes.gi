@@ -15,7 +15,7 @@
 ####################################
 
 ##
-InstallMethod( DefectOfHoms,
+InstallMethod( DefectOfExactness,
         "for a homalg complexes",
         [ IsComplexOfFinitelyPresentedModulesRep ],
         
@@ -43,8 +43,8 @@ InstallMethod( DefectOfHoms,
         
     if IsGradedObject( C ) then
         H := C;
-    elif IsBound(C!.HomologyModules) then
-        H := C!.HomologyModules;
+    elif IsBound(C!.HomologyGradedObject) then
+        H := C!.HomologyGradedObject;
     fi;
     
     if IsBound( H ) then
@@ -53,7 +53,7 @@ InstallMethod( DefectOfHoms,
         fi;
         
         if display then
-            for i in ModulesOfComplex( H ) do
+            for i in ObjectsOfComplex( H ) do
                 Print( display_string );
                 Display( i );
             od;
@@ -66,13 +66,9 @@ InstallMethod( DefectOfHoms,
         Error( "the input is not a complex" );
     fi;
     
-    if IsHomalgComplexOfLeftModules( C ) then
-        left := true;
-    else
-        left := false;
-    fi;
+    left := IsHomalgComplexOfLeftModules( C );
     
-    indices := MorphismIndicesOfComplex( C );
+    indices := MorphismDegreesOfComplex( C );
     
     l := Length(indices);
     
@@ -83,9 +79,9 @@ InstallMethod( DefectOfHoms,
         H := HomalgComplex( T, indices[1] - 1 );
     else
         if left then
-            T := DefectOfHoms( [ morphisms[2], morphisms[1] ] );
+            T := DefectOfExactness( [ morphisms[2], morphisms[1] ] );
         else
-            T := DefectOfHoms( [ morphisms[1], morphisms[2] ] );
+            T := DefectOfExactness( [ morphisms[1], morphisms[2] ] );
         fi;
         H := HomalgComplex( T, indices[1] );
         morphisms := morphisms{[ 2 .. l ]};
@@ -103,9 +99,9 @@ InstallMethod( DefectOfHoms,
     
     for i in [ 1 .. l - 1 ] do
         if left then
-            S := DefectOfHoms( [ morphisms[i + 1], morphisms[i] ] );
+            S := DefectOfExactness( [ morphisms[i + 1], morphisms[i] ] );
         else
-            S := DefectOfHoms( [ morphisms[i], morphisms[i + 1] ] );
+            S := DefectOfExactness( [ morphisms[i], morphisms[i + 1] ] );
         fi;
         Add( H, HomalgZeroMorphism( S, T ) );
         T := S;
@@ -136,14 +132,14 @@ InstallMethod( DefectOfHoms,
     
     SetIsGradedObject( H, true );
     
-    C!.HomologyModules := H;
+    C!.HomologyGradedObject := H;
     
     return H;
     
 end );
 
 ##
-InstallMethod( DefectOfHoms,
+InstallMethod( DefectOfExactness,
         "for a homalg complexes",
         [ IsCocomplexOfFinitelyPresentedModulesRep ],
         
@@ -171,8 +167,8 @@ InstallMethod( DefectOfHoms,
     
     if IsGradedObject( C ) then
         H := C;
-    elif IsBound(C!.CohomologyModules) then
-        H := C!.CohomologyModules;
+    elif IsBound(C!.CohomologyGradedObject) then
+        H := C!.CohomologyGradedObject;
     fi;
     
     if IsBound( H ) then
@@ -181,7 +177,7 @@ InstallMethod( DefectOfHoms,
         fi;
         
         if display then
-            for i in ModulesOfComplex( H ) do
+            for i in ObjectsOfComplex( H ) do
                 Print( display_string );
                 Display( i );
             od;
@@ -194,13 +190,9 @@ InstallMethod( DefectOfHoms,
         Error( "the input is not a cocomplex" );
     fi;
     
-    if IsHomalgComplexOfLeftModules( C ) then
-        left := true;
-    else
-        left := false;
-    fi;
+    left := IsHomalgComplexOfLeftModules( C );
     
-    indices := MorphismIndicesOfComplex( C );
+    indices := MorphismDegreesOfComplex( C );
     
     l := Length(indices);
     
@@ -211,9 +203,9 @@ InstallMethod( DefectOfHoms,
         H := HomalgCocomplex( S, indices[1] );
     else
         if left then
-            S := DefectOfHoms( [ morphisms[1], morphisms[2] ] );
+            S := DefectOfExactness( [ morphisms[1], morphisms[2] ] );
         else
-            S := DefectOfHoms( [ morphisms[2], morphisms[1] ] );
+            S := DefectOfExactness( [ morphisms[2], morphisms[1] ] );
         fi;
         H := HomalgCocomplex( S, indices[1] + 1 );
         morphisms := morphisms{[ 2 .. l ]};
@@ -231,9 +223,9 @@ InstallMethod( DefectOfHoms,
     
     for i in [ 1 .. l - 1 ] do
         if left then
-            T := DefectOfHoms( [ morphisms[i], morphisms[i + 1] ] );
+            T := DefectOfExactness( [ morphisms[i], morphisms[i + 1] ] );
         else
-            T := DefectOfHoms( [ morphisms[i + 1], morphisms[i] ] );
+            T := DefectOfExactness( [ morphisms[i + 1], morphisms[i] ] );
         fi;
         Add( H, HomalgZeroMorphism( S, T ) );
         S := T;
@@ -264,39 +256,39 @@ InstallMethod( DefectOfHoms,
     
     SetIsGradedObject( H, true );
     
-    C!.CohomologyModules := H;
+    C!.CohomologyGradedObject := H;
     
     return H;
     
 end );
 
 ##
-InstallMethod( Homology,				### defines: Homology (HomologyModules)
+InstallMethod( Homology,			### defines: Homology (HomologyModules)
         "for a homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
     
     if IsCocomplexOfFinitelyPresentedModulesRep( C ) then
-        Error( "this is a cocomplex: use Cohomology instead\n" );
+        Error( "this is a cocomplex: use \033[1mCohomology\033[0m instead\n" );
     fi;
     
-    return DefectOfHoms( C );
+    return DefectOfExactness( C );
     
 end );
 
 ##
-InstallMethod( Cohomology,				### defines: Cohomology (CohomologyModules)
+InstallMethod( Cohomology,			### defines: Cohomology (CohomologyModules)
         "for a homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
     
     if IsComplexOfFinitelyPresentedModulesRep( C ) then
-        Error( "this is a complex: use Homology instead\n" );
+        Error( "this is a complex: use \033[1mHomology\033[0m instead\n" );
     fi;
     
-    return DefectOfHoms( C );
+    return DefectOfExactness( C );
     
 end );
 

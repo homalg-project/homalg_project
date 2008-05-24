@@ -1170,7 +1170,7 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
 end );
 
 ##
-InstallMethod( GetCleanRowsPositions,			### defines: GetCleanRowsPositions
+InstallMethod( GetCleanRowsPositions,		### defines: GetCleanRowsPositions
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomogeneousList ],
         

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Complexes.gd                homalg package               Mohamed Barakat
+##  Morphisms.gd                homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations of homalg procedures for complexes.
+##  Declarations of homalg procedures for morphisms.
 ##
 #############################################################################
 
@@ -14,14 +14,7 @@
 #
 ####################################
 
+DeclareGlobalFunction( "ResolutionOfMorphism" );
+
 # basic operations:
-
-DeclareOperation( "DefectOfExactness",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "Homology",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "Cohomology",
-        [ IsHomalgComplex ] );
 

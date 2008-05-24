@@ -67,31 +67,37 @@ DeclareGlobalFunction( "HomalgCocomplex" );
 DeclareOperation( "IsLeft",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "ModuleIndicesOfComplex",
+DeclareOperation( "ObjectDegreesOfComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "HomalgRing",
+DeclareOperation( "MorphismDegreesOfComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "MorphismIndicesOfComplex",
-        [ IsHomalgComplex ] );
+DeclareOperation( "CertainMorphism",
+        [ IsHomalgComplex, IsInt ] );
 
-DeclareOperation( "CertainMorphismOfComplex",
+DeclareOperation( "CertainObject",
         [ IsHomalgComplex, IsInt ] );
 
 DeclareOperation( "MorphismsOfComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "CertainModuleOfComplex",
-        [ IsHomalgComplex, IsInt ] );
-
-DeclareOperation( "ModulesOfComplex",
+DeclareOperation( "ObjectsOfComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "LowestDegreeModuleInComplex",
+DeclareOperation( "LowestDegreeInComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "HighestDegreeModuleInComplex",
+DeclareOperation( "HighestDegreeInComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "LowestDegreeObjectInComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "HighestDegreeObjectInComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "HomalgRing",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "SupportOfComplex",

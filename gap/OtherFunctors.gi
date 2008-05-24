@@ -18,7 +18,7 @@
 ## TorsionSubmodule
 ##
 
-InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,
+InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,	### defines: TorsionSubmodule(Emb)
   function( M )
     local par, emb, tor;
     
@@ -59,7 +59,7 @@ Functor_TorsionSubmodule!.ContainerForWeakPointersOnComputedMorphisms :=
 ## TorsionFreeFactor
 ##
 
-InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,
+InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: TorsionFreeFactor(Epi)
   function( M )
     local emb, epi, M0;
     

@@ -552,10 +552,6 @@ InstallGlobalFunction( HomalgExternalRingElement,
         od;
     fi;
     
-    if not IsFunction( pointer ) and IsBound( ring ) then
-	homalgSetName( r, pointer, ring );
-    fi;
-    
     return r;
     
 end );
@@ -605,14 +601,37 @@ InstallMethod( Display,
     
 end );
 
+InstallMethod( Name,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( o )
+    local pointer;
+    
+    pointer := homalgPointer( o );
+    
+    if not IsFunction( pointer ) then
+        
+        homalgSetName( o, pointer );
+        
+        return Name( o );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 InstallMethod( ViewObj,
-        "for homalg external objects",
+        "for homalg external ring elements",
         [ IsHomalgExternalRingElementRep ],
         
   function( o )
     
-    Print( "<A homalg external ring element for the CAS " );
-    Print( homalgExternalCASystem( o ), ">" );
+    Print( Name( o ) );	## this sets the attribute Name and the view method is never triggered again (as long as Name is set)
+    
+    #Print( "<A homalg external ring element for the CAS " );
+    #Print( homalgExternalCASystem( o ), ">" );
     
 end );
 

@@ -1,9 +1,14 @@
 LoadPackage( "RingsForHomalg" );
 
-A1 := RingForHomalgInMapleUsingJanetOre( "[[D,t],[],[weyl(D,t)]]" );
+W := RingForHomalgInMapleUsingJanetOre( "[[D,t],[],[weyl(D,t)]]" );
 
-M := HomalgMorphism( " \
-[[D,0,t,0],[0,D-t,D*t,0]] \
-", A1 );
+M := HomalgMorphism( " [\
+[D,0,  t,  0], \
+[0,D-t,t*D,0] \
+]", W );
 C := Cokernel( M );
-hC := Hom( C, A1 );
+hC := Hom( C, W );
+
+A := HomalgMatrix( "[ \
+D^2, t*D-t^2, 1+t*D+t^2*D,0 \
+] ", 1, 4, W );

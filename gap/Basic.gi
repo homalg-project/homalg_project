@@ -362,7 +362,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
 end );
 
 #=======================================================================
-# Right divide modulo:
+# Right divide modulo:	( cf. [BR, Subsection 3.1.1] )
 # Solve the inhomogeneous linear system: B = XA mod L
 # i.e.
 # solve the inhomogeneous linear system: B = XA + YL
@@ -414,7 +414,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
 end );
 
 #=======================================================================
-# Left divide modulo:
+# Left divide modulo:	( cf. [BR, Subsection 3.1.1] )
 # Solve the inhomogeneous linear system: AX = B mod L
 # i.e.
 # solve the inhomogeneous linear system: B = AX + LY
@@ -489,7 +489,7 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     
     Id := HomalgIdentityMatrix( NrColumns( RI ), R );
     
-    left_inv := RightDivide( Id, RI );
+    left_inv := RightDivide( Id, RI );		## ( cf. [BR, Subsection 3.1.3] )
     
     if left_inv = fail then
         return fail;
@@ -527,7 +527,7 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     
     Id := HomalgIdentityMatrix( NrRows( LI ), R );
     
-    right_inv := LeftDivide( LI, Id );
+    right_inv := LeftDivide( LI, Id );		## ( cf. [BR, Subsection 3.1.3] )
     
     if right_inv = fail then
         return fail;
@@ -548,7 +548,7 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
 end );
 
 ##
-InstallGlobalFunction( BestBasis,		### defines: BestBasis ( )
+InstallGlobalFunction( BestBasis,		### defines: BestBasis
   function( arg )
     local M, R, RP, nargs, m, n, B, U, V;
     

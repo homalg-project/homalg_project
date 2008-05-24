@@ -24,10 +24,10 @@ DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
 
 DeclareGlobalVariable( "Functor_Kernel" );
 
-## DefectOfHoms
-DeclareGlobalFunction( "_Functor_DefectOfHoms_OnObjects" );
+## DefectOfExactness
+DeclareGlobalFunction( "_Functor_DefectOfExactness_OnObjects" );
 
-DeclareGlobalVariable( "Functor_DefectOfHoms" );
+DeclareGlobalVariable( "Functor_DefectOfExactness" );
 
 ## Hom
 DeclareGlobalFunction( "_Functor_Hom_OnObjects" );
@@ -61,9 +61,18 @@ DeclareOperation( "Cokernel",
 
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
 
-DeclareOperation( "DefectOfHoms",
+DeclareOperation( "DefectOfExactness",
         [ IsHomogeneousList ] );
 
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonym( "DefectOfHoms",
+        DefectOfExactness );
 
