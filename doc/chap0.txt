@@ -3,13 +3,14 @@
                           [1XGAP 4 Package [5XRingsForHomalg[0m[1X[0m
   
   
-         [1XRingsForHomalg --- An Abstract Package for Homological Algebra[0m
+     [1XRingsForHomalg --- Rings in External Computer Algebra Systems for the
+                               GAP-Package homalg[0m
   
   
-                               Version 2008.03.15
+                               Version 2008.05.23
   
   
-                                   March 2007
+                                    May 2008
   
   
                                 Mohamed Barakat
@@ -19,14 +20,14 @@
   Mohamed Barakat
       Email:    [7Xmailto:mohamed.barakat@rwth-aachen.de[0m
       Homepage: [7Xhttp://www.math.rwth-aachen.de/~barakat[0m
-      Address:  Lehrstuhl  B  fÃ¼r  Mathematik, RWTH Aachen, Templergraben 64,
+      Address:  Lehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
                 52056 Aachen, Germany
   
   
   
   -------------------------------------------------------
   [1XCopyright[0m
-  © 2007 by Mohamed Barakat
+  © 2008 by Mohamed Barakat, Simon Goertzen and Markus Lange-Hegermann
   
   This  package  may  be distributed under the terms and conditions of the GNU
   Public License Version 2.
