@@ -14,7 +14,7 @@
 #
 ####################################
 
-# two new representations for the category IsHomalgMatrix:
+# two new representations for the GAP-category IsHomalgMatrix:
 DeclareRepresentation( "IsHomalgInternalMatrixRep",
         IsHomalgMatrix,
         [ ] );

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  HomalgMorphism.gi           homalg package               Mohamed Barakat
+##  HomalgMap.gi                homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for homalg morphisms.
+##  Implementation stuff for homalg maps ( = module homomorphisms ).
 ##
 #############################################################################
 
@@ -14,9 +14,10 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgMorphism:
-DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
-        IsHomalgMorphism,
+# a new representation for the GAP-category IsHomalgMap
+# which is a subrepresentation of the representation IsMorphismOfFinitelyGeneratedModulesRep:
+DeclareRepresentation( "IsMapOfFinitelyGeneratedModulesRep",
+        IsHomalgMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [ "source", "target", "matrices", "index_pairs_of_presentations" ] );
 
 ####################################
@@ -26,25 +27,25 @@ DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
 ####################################
 
 # a new family:
-BindGlobal( "TheFamilyOfHomalgMorphisms",
-        NewFamily( "TheFamilyOfHomalgMorphisms" ) );
+BindGlobal( "TheFamilyOfHomalgMaps",
+        NewFamily( "TheFamilyOfHomalgMaps" ) );
 
 # four new types:
-BindGlobal( "TheTypeHomalgMorphismOfLeftModules",
-        NewType( TheFamilyOfHomalgMorphisms,
-                IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ) );
+BindGlobal( "TheTypeHomalgMapOfLeftModules",
+        NewType( TheFamilyOfHomalgMaps,
+                IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgMorphismOfRightModules",
-        NewType( TheFamilyOfHomalgMorphisms,
-                IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ) );
+BindGlobal( "TheTypeHomalgMapOfRightModules",
+        NewType( TheFamilyOfHomalgMaps,
+                IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
-BindGlobal( "TheTypeHomalgEndomorphismOfLeftModules",
-        NewType( TheFamilyOfHomalgMorphisms,
-                IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and IsHomalgMorphismOfLeftModules ) );
+BindGlobal( "TheTypeHomalgSelfMapOfLeftModules",
+        NewType( TheFamilyOfHomalgMaps,
+                IsMapOfFinitelyGeneratedModulesRep and IsHomalgSelfMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgEndomorphismOfRightModules",
-        NewType( TheFamilyOfHomalgMorphisms,
-                IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and IsHomalgMorphismOfRightModules ) );
+BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
+        NewType( TheFamilyOfHomalgMaps,
+                IsMapOfFinitelyGeneratedModulesRep and IsHomalgSelfMap and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
 #
@@ -53,31 +54,31 @@ BindGlobal( "TheTypeHomalgEndomorphismOfRightModules",
 ####################################
 
 ##
-InstallTrueMethod( IsMorphism, IsHomalgMorphism and IsMonomorphism );
+InstallTrueMethod( IsMorphism, IsHomalgMap and IsMonomorphism );
 
 ##
-InstallTrueMethod( IsMorphism, IsHomalgMorphism and IsEpimorphism );
+InstallTrueMethod( IsMorphism, IsHomalgMap and IsEpimorphism );
 
 ##
-InstallTrueMethod( IsIsomorphism, IsHomalgMorphism and IsAutomorphism );
+InstallTrueMethod( IsIsomorphism, IsHomalgMap and IsAutomorphism );
 
 ##
-InstallTrueMethod( IsAutomorphism, IsHomalgEndomorphism and IsIsomorphism );
+InstallTrueMethod( IsAutomorphism, IsHomalgSelfMap and IsIsomorphism );
 
 ##
-InstallTrueMethod( IsSplitMonomorphism, IsHomalgMorphism and IsIsomorphism );
+InstallTrueMethod( IsSplitMonomorphism, IsHomalgMap and IsIsomorphism );
 
 ##
-InstallTrueMethod( IsSplitEpimorphism, IsHomalgMorphism and IsIsomorphism );
+InstallTrueMethod( IsSplitEpimorphism, IsHomalgMap and IsIsomorphism );
 
 ##
-InstallTrueMethod( IsEpimorphism, IsHomalgMorphism and IsSplitEpimorphism );
+InstallTrueMethod( IsEpimorphism, IsHomalgMap and IsSplitEpimorphism );
 
 ##
-InstallTrueMethod( IsMonomorphism, IsHomalgMorphism and IsSplitMonomorphism );
+InstallTrueMethod( IsMonomorphism, IsHomalgMap and IsSplitMonomorphism );
 
 ##
-InstallTrueMethod( IsIsomorphism, IsHomalgMorphism and IsEpimorphism and IsMonomorphism );
+InstallTrueMethod( IsIsomorphism, IsHomalgMap and IsEpimorphism and IsMonomorphism );
 
 ####################################
 #
@@ -93,7 +94,7 @@ InstallTrueMethod( IsIsomorphism, IsHomalgMorphism and IsEpimorphism and IsMonom
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgMorphism, 0,
+        IsHomalgMap, 0,
         
   function( phi )
     
@@ -107,7 +108,7 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
-        IsMorphismOfFinitelyGeneratedModulesRep, 0,
+        IsMapOfFinitelyGeneratedModulesRep, 0,
         
   function( phi )
     
@@ -121,7 +122,7 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
-        IsMorphismOfFinitelyGeneratedModulesRep, 0,
+        IsMapOfFinitelyGeneratedModulesRep, 0,
         
   function( phi )
     local index_pair, matrix;
@@ -156,8 +157,8 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( phi )
     local mat;
@@ -170,8 +171,8 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( phi )
     local mat;
@@ -184,8 +185,8 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -195,8 +196,8 @@ end );
 
 ##
 InstallMethod( IsEpimorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -206,8 +207,8 @@ end );
 
 ##
 InstallMethod( IsMonomorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -217,8 +218,8 @@ end );
 
 ##
 InstallMethod( IsIsomorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -228,12 +229,12 @@ end );
 
 ##
 InstallMethod( IsAutomorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    return IsHomalgEndomorphism( phi ) and IsIsomorphism( phi );
+    return IsHomalgSelfMap( phi ) and IsIsomorphism( phi );
     
 end );
 
@@ -245,8 +246,8 @@ end );
 
 ##
 InstallMethod( HomalgRing,
-        "for homalg morphisms",
-        [ IsHomalgMorphism ],
+        "for homalg maps",
+        [ IsHomalgMap ],
         
   function( phi )
     
@@ -255,20 +256,9 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( IsLeft,
-        "for homalg morphisms",
-        [ IsHomalgMorphism ],
-        
-  function( phi )
-    
-    return IsHomalgMorphismOfLeftModules( phi );
-    
-end );
-
-##
 InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local pos_s, pos_t;
@@ -276,7 +266,7 @@ InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
     pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
     pos_t := PositionOfTheDefaultSetOfRelations( Target( phi ) );
     
-    if IsHomalgMorphismOfLeftModules( phi ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         return [ pos_s, pos_t ];
     else
         return [ pos_t, pos_s ];
@@ -286,13 +276,13 @@ end );
 
 ##
 InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortest ways
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsPosInt, IsPosInt ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsPosInt, IsPosInt ],
         
   function( phi, pos_s, pos_t )
     local index_pair, l, dist, min, pos, matrix;
     
-    if IsHomalgMorphismOfLeftModules( phi ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         index_pair := [ pos_s, pos_t ];
     else
         index_pair := [ pos_t, pos_s ];
@@ -308,7 +298,7 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
         
         pos := PositionProperty( dist, a -> a = min );
         
-        if IsHomalgMorphismOfLeftModules( phi ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
             matrix :=
               TransitionMatrix( Source( phi ), pos_s, l[pos][1] )
               * phi!.matrices.( String( l[pos] ) )
@@ -336,8 +326,8 @@ end );
 
 ##
 InstallMethod( MatrixOfMorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism, IsPosInt ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgSelfMap, IsPosInt ],
         
   function( phi, pos_s_t )
     
@@ -347,8 +337,8 @@ end );
 
 ##
 InstallMethod( MatrixOfMorphism,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local pos_s, pos_t;
@@ -362,20 +352,21 @@ end );
 
 ##
 InstallMethod( AreComparableMorphisms,
-        "for homalg morphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ],
+        "for homalg maps",
+        [ IsHomalgMap, IsHomalgMap ],
         
   function( phi1, phi2 )
     
-    return IsIdenticalObj( Source( phi1 ), Source( phi2 ) )
-           and IsIdenticalObj( Target( phi1 ), Target( phi2 ) );
+    return IsIdenticalObj( Source( phi1 ), Source( phi2 ) ) and
+           IsIdenticalObj( Target( phi1 ), Target( phi2 ) );
     
 end );
 
 ##
 InstallMethod( AreComposableMorphisms,
-        "for homalg morphisms",
-        [ IsHomalgMorphismOfLeftModules, IsHomalgMorphismOfLeftModules ],
+        "for homalg maps",
+        [ IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( phi1, phi2 )
     
@@ -385,8 +376,9 @@ end );
 
 ##
 InstallMethod( AreComposableMorphisms,
-        "for homalg morphisms",
-        [ IsHomalgMorphismOfRightModules, IsHomalgMorphismOfRightModules ],
+        "for homalg maps",
+        [ IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( phi2, phi1 )
     
@@ -397,7 +389,7 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
     
@@ -411,8 +403,8 @@ end );
 
 ##
 InstallMethod( ZeroMutable,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -422,8 +414,8 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg morphisms",
-        [ IsRingElement, IsMorphismOfFinitelyGeneratedModulesRep ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
+        "of two homalg maps",
+        [ IsRingElement, IsMapOfFinitelyGeneratedModulesRep ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
         
   function( a, phi )
     
@@ -433,8 +425,8 @@ end );
 
 ##
 InstallMethod( \+,
-        "of two homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
     
@@ -449,7 +441,7 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -460,7 +452,7 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg morphisms",
-        [ IsHomalgMorphism and IsZero ],
+        [ IsHomalgMap and IsZero ],
         
   function( phi )
     
@@ -470,8 +462,8 @@ end );
 
 ##
 InstallMethod( \-,
-        "of two homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
     
@@ -485,9 +477,9 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( phi1, phi2 )
     
@@ -501,9 +493,9 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( phi2, phi1 )
     
@@ -517,8 +509,8 @@ end );
 
 ##
 InstallMethod( POW,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsInt ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsInt ],
         
   function( phi, pow )
     local id, inv;
@@ -543,8 +535,8 @@ end );
 
 ##
 InstallMethod( OnLessGenerators,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -557,8 +549,8 @@ end );
 
 ##
 InstallMethod( BasisOfModule,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -571,8 +563,8 @@ end );
 
 ##
 InstallMethod( DecideZero,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
         
   function( phi, rel )
     
@@ -582,8 +574,8 @@ end );
 
 ##
 InstallMethod( DecideZero,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local pos_t, rel, index_pair, matrix, reduced;
@@ -610,8 +602,8 @@ end );
 
 ##
 InstallMethod( UnionOfRelations,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -621,8 +613,8 @@ end );
 
 ##
 InstallMethod( SyzygiesGenerators,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
@@ -649,9 +641,9 @@ end );
 
 ##
 InstallMethod( PostDivide,			### defines: PostDivide (RightDivide (high-level))
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( gamma, beta )
     local N, psi, M_;
@@ -687,9 +679,9 @@ end );
 
 ##
 InstallMethod( PostDivide,			### defines: PostDivide (LeftDivide (high-level))
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( gamma, beta )
     local N, psi, M_;
@@ -739,10 +731,10 @@ end );
 
 ##
 InstallMethod( CompleteImSq,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfLeftModules ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( alpha1, phi, beta1 )
     
@@ -752,10 +744,10 @@ end );
 
 ##
 InstallMethod( CompleteImSq,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules,
-          IsMorphismOfFinitelyGeneratedModulesRep and IsHomalgMorphismOfRightModules ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( alpha1, phi, beta1 )
     
@@ -782,7 +774,7 @@ InstallGlobalFunction( HomalgMorphism,
             pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif arg[2] = "free" and nargs > 2 and IsHomalgModule( arg[3] )
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
-            if IsLeftModule( arg[3] ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[3] ) then
                 if IsHomalgMatrix( arg[1] ) then
                     nr_rows := NrRows( arg[1] );
                 elif IsHomalgRelations( arg[1] ) then
@@ -834,11 +826,11 @@ InstallGlobalFunction( HomalgMorphism,
         if left then
             source := HomalgFreeLeftModule( NrRows( matrix ), R );
             target := HomalgFreeLeftModule( NrColumns( matrix ), R );
-            type := TheTypeHomalgMorphismOfLeftModules;
+            type := TheTypeHomalgMapOfLeftModules;
         else
             source := HomalgFreeRightModule( NrColumns( matrix ), R );
             target := HomalgFreeRightModule( NrRows( matrix ), R );
-            type := TheTypeHomalgMorphismOfRightModules;
+            type := TheTypeHomalgMapOfRightModules;
         fi;
         
         matrices := rec( );
@@ -872,7 +864,7 @@ InstallGlobalFunction( HomalgMorphism,
             pos_t := PositionOfTheDefaultSetOfRelations( target );
         elif arg[3] = "free" and IsHomalgModule ( source )
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
-            if IsLeftModule( source ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) then
                 if IsHomalgMatrix( arg[1] ) then
                     nr_columns := NrColumns( arg[1] );
                 elif IsHomalgRelations( arg[1] ) then
@@ -922,23 +914,23 @@ InstallGlobalFunction( HomalgMorphism,
     if IsBound( target ) and not IsIdenticalObj( source, target ) then
         if not IsIdenticalObj( R, HomalgRing( target ) ) then
             Error( "the source and target modules must be defined over the same ring\n" );
-        elif IsLeftModule( source ) and IsLeftModule( target ) then
-            type := TheTypeHomalgMorphismOfLeftModules;
-        elif IsRightModule( source ) and IsRightModule( target ) then
-            type := TheTypeHomalgMorphismOfRightModules;
+        elif IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( target ) then
+            type := TheTypeHomalgMapOfLeftModules;
+        elif IsHomalgRightObjectOrMorphismOfRightObjects( source ) and IsHomalgRightObjectOrMorphismOfRightObjects( target ) then
+            type := TheTypeHomalgMapOfRightModules;
         else
             Error( "the source and target modules of a morphism must either both be left or both be right modules\n" );
         fi;
     else
         target := source;
-        if IsLeftModule( source ) then
-            type := TheTypeHomalgEndomorphismOfLeftModules;
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) then
+            type := TheTypeHomalgSelfMapOfLeftModules;
         else
-            type := TheTypeHomalgEndomorphismOfRightModules;
+            type := TheTypeHomalgSelfMapOfRightModules;
         fi;
     fi;
     
-    if IsLeftModule( source ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) then
         nr_rows := NrGenerators( source, pos_s );
         nr_columns := NrGenerators( target, pos_t );
         index_pair := [ pos_s, pos_t ];
@@ -1035,11 +1027,11 @@ InstallGlobalFunction( HomalgMorphism,
             Error( "the first argument must be in { IsHomalgMatrix, IsHomalgRelations, IsMatrix, IsList } but received: ",  arg[1], "\n" );
         fi;
         
-        if IsLeftModule( source )
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( source )
            and ( NrGenerators( source, pos_s ) <> NrRows( matrix )
                  or NrGenerators( target, pos_t ) <> NrColumns( matrix ) ) then
             Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
-        elif IsRightModule( source )
+        elif IsHomalgRightObjectOrMorphismOfRightObjects( source )
            and ( NrGenerators( source, pos_s ) <> NrColumns( matrix )
                  or NrGenerators( target, pos_t ) <> NrRows( matrix ) ) then
             Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
@@ -1086,8 +1078,8 @@ end );
 ####################################
 
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism ],
+        "for homalg maps",
+        [ IsHomalgMap ],
         
   function( o )
     
@@ -1099,7 +1091,7 @@ InstallMethod( ViewObj,
     
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
-            Print( " morphism of" );
+            Print( " homomorphism of" );
         elif HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
             Print( " monomorphism modulo im(0) of" );
         else
@@ -1109,11 +1101,11 @@ InstallMethod( ViewObj,
         if HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
             Print( " monomorphism modulo im(0) of" );
         else
-            Print( " \"morphism\" of" );
+            Print( " \"homomorphism\" of" );
         fi;
     fi;
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1125,14 +1117,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism and IsMonomorphism ], 996,
+        "for homalg maps",
+        [ IsHomalgMap and IsMonomorphism ], 996,
         
   function( o )
     
     Print( "<A monomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1144,14 +1136,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism and IsEpimorphism ], 997,
+        "for homalg maps",
+        [ IsHomalgMap and IsEpimorphism ], 997,
         
   function( o )
     
     Print( "<An epimorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1163,14 +1155,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism and IsSplitMonomorphism ], 998,
+        "for homalg maps",
+        [ IsHomalgMap and IsSplitMonomorphism ], 998,
         
   function( o )
     
     Print( "<A split monomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1182,14 +1174,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism and IsSplitEpimorphism ], 999,
+        "for homalg maps",
+        [ IsHomalgMap and IsSplitEpimorphism ], 999,
         
   function( o )
     
     Print( "<A split epimorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1201,14 +1193,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism and IsIsomorphism ], 1000,
+        "for homalg maps",
+        [ IsHomalgMap and IsIsomorphism ], 1000,
         
   function( o )
     
     Print( "<An isomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1220,14 +1212,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgMorphism and IsZero ], 1001,
+        "for homalg maps",
+        [ IsHomalgMap and IsZero ], 1001,
         
   function( o )
     
     Print( "<The zero morphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -1238,8 +1230,8 @@ InstallMethod( ViewObj,
 end );    
 
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism ],
+        "for homalg maps",
+        [ IsHomalgSelfMap ],
         
   function( o )
     
@@ -1258,10 +1250,10 @@ InstallMethod( ViewObj,
             Print( " non-well-defined self-map of" );
         fi;
     else
-        Print( " \"morphism\" of" );
+        Print( " \"homomorphism\" of" );
     fi;
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1273,14 +1265,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsMonomorphism ],
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsMonomorphism ],
         
   function( o )
     
     Print( "<A monic endomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1292,14 +1284,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsEpimorphism ], 996,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsEpimorphism ], 996,
         
   function( o )
     
     Print( "<An epic endomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1311,14 +1303,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsSplitMonomorphism ], 997,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsSplitMonomorphism ], 997,
         
   function( o )
     
     Print( "<A split monic endomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1330,14 +1322,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsSplitEpimorphism ], 998,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsSplitEpimorphism ], 998,
         
   function( o )
     
     Print( "<A split epic endomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1349,14 +1341,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsAutomorphism ], 999,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsAutomorphism ], 999,
         
   function( o )
     
     Print( "<An automorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1368,14 +1360,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsIdentityMorphism ], 1000,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsIdentityMorphism ], 1000,
         
   function( o )
     
     Print( "<The identity morphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1387,14 +1379,14 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg morphisms",
-        [ IsHomalgEndomorphism and IsZero ], 1001,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsZero ], 1001,
         
   function( o )
     
     Print( "<The zero endomorphism of" );
     
-    if IsHomalgMorphismOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " a left" );
     else
         Print( " a right" );
@@ -1405,8 +1397,8 @@ InstallMethod( ViewObj,
 end );    
 
 InstallMethod( Display,
-        "for homalg morphisms",
-        [ IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( o )
     

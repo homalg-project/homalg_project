@@ -2,7 +2,7 @@
 ##
 ##  read.g                homalg package                    Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Reading the implementation part of the homalg package.
 ##
@@ -30,7 +30,7 @@ ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
 ReadPackage( "homalg", "gap/HomalgModule.gi" );
 
 ## morphisms
-ReadPackage( "homalg", "gap/HomalgMorphism.gi" );
+ReadPackage( "homalg", "gap/HomalgMap.gi" );
 
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gi" );
@@ -49,7 +49,7 @@ ReadPackage( "homalg", "gap/Basic.gi" );
 ## main
 ReadPackage( "homalg", "gap/Modules.gi" );
 
-ReadPackage( "homalg", "gap/Morphisms.gi" );
+ReadPackage( "homalg", "gap/Maps.gi" );
 
 ReadPackage( "homalg", "gap/Complexes.gi" );
 

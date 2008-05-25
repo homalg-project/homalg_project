@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgRelations:
+# a new representation for the GAP-category IsHomalgRelations:
 DeclareRepresentation( "IsHomalgRelationsOfFinitelyPresentedModuleRep",
         IsHomalgRelations,
         [ "relations" ] );

@@ -14,18 +14,10 @@
 #
 ####################################
 
-# four new category of objects:
+# a new GAP-category:
 
 DeclareCategory( "IsHomalgComplex",
-        IsAdditiveElementWithZero
-        and IsExtLElement
-        and IsAttributeStoringRep );
-
-DeclareCategory( "IsHomalgComplexOfLeftModules",
-        IsHomalgComplex );
-
-DeclareCategory( "IsHomalgComplexOfRightModules",
-        IsHomalgComplex );
+        IsHomalgObject );
 
 ####################################
 #
@@ -63,9 +55,6 @@ DeclareGlobalFunction( "HomalgComplex" );
 DeclareGlobalFunction( "HomalgCocomplex" );
 
 # basic operations:
-
-DeclareOperation( "IsLeft",
-        [ IsHomalgComplex ] );
 
 DeclareOperation( "ObjectDegreesOfComplex",
         [ IsHomalgComplex ] );

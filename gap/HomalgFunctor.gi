@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgFunctor:
+# a new representation for the GAP-category IsHomalgFunctor:
 DeclareRepresentation( "IsHomalgFunctorRep",
         IsHomalgFunctor,
         [ ] );
@@ -48,6 +48,18 @@ BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
         NewType( TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor,
                 IsContainerForWeakPointersOnComputedValuesOfFunctorRep ) );
 
+####################################
+#
+# global values:
+#
+####################################
+
+HOMALG.FunctorOn :=
+  [ IsHomalgRingOrFinitelyPresentedObjectRep,
+    IsMapOfFinitelyGeneratedModulesRep,
+    [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
+    [ IsChainMapOfFinitelyPresentedObjectsRep, IsCochainMapOfFinitelyPresentedObjectsRep ] ];
+  
 ####################################
 #
 # methods for operations:
@@ -93,7 +105,7 @@ end );
 ##
 InstallMethod( FunctorMap,
         "for homalg morphisms",
-        [ IsHomalgFunctorRep, IsMorphismOfFinitelyGeneratedModulesRep, IsList ],
+        [ IsHomalgFunctorRep, IsMapOfFinitelyGeneratedModulesRep, IsList ],
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
     local container, weak_pointers, a, deleted, functor_name,
@@ -102,8 +114,8 @@ InstallMethod( FunctorMap,
           b, j, arg_source, arg_target, F_source, F_target, arg_phi, hull_phi,
           emb_source, emb_target, mor;
     
-    if not fixed_arguments_of_multi_functor = [ ]
-       and not ( ForAll( fixed_arguments_of_multi_functor, a -> IsList( a ) and Length( a ) = 2 and IsPosInt( a[1] ) ) ) then
+    if not fixed_arguments_of_multi_functor = [ ] and
+       not ( ForAll( fixed_arguments_of_multi_functor, a -> IsList( a ) and Length( a ) = 2 and IsPosInt( a[1] ) ) ) then
         Error( "the last argument has a wrong syntax\n" );
     fi;
     
@@ -172,10 +184,10 @@ InstallMethod( FunctorMap,
         od;
     fi;
     
-    if IsBound( Functor!.( pos ) ) and Functor!.( pos )[1] = "covariant" then
+    if IsBound( Functor!.( pos ) ) and Functor!.( pos )[1][1] = "covariant" then
         arg_source := Concatenation( arg_before_pos, [ S ], arg_behind_pos );
         arg_target := Concatenation( arg_before_pos, [ T ], arg_behind_pos );
-    elif IsBound( Functor!.( pos ) ) and Functor!.( pos )[1] = "contravariant" then
+    elif IsBound( Functor!.( pos ) ) and Functor!.( pos )[1][1] = "contravariant" then
         arg_source := Concatenation( arg_before_pos, [ T ], arg_behind_pos );
         arg_target := Concatenation( arg_before_pos, [ S ], arg_behind_pos );
     else
@@ -191,7 +203,7 @@ InstallMethod( FunctorMap,
     if IsBound( Functor!.OnMorphisms ) then
         arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
-	
+        
         hull_phi :=
           HomalgMorphism( hull_phi, Target( emb_source ), Target( emb_target ) );
     else
@@ -217,7 +229,7 @@ end );
 ##
 InstallMethod( FunctorMap,
         "for homalg morphisms",
-        [ IsHomalgFunctorRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsHomalgFunctorRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( Functor, phi )
     
@@ -240,7 +252,15 @@ InstallMethod( InstallFunctorOnObjects,
     
     if number_of_arguments = 1 then
         
-        filter_obj := Functor!.1[2];
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][1] ) then
+            return fail;
+        fi;
+        
+        filter_obj := Functor!.1[2][1];
         
         if IsFilter( filter_obj ) then
             
@@ -286,10 +306,42 @@ InstallMethod( InstallFunctorOnObjects,
         
     elif number_of_arguments = 2 then
         
-        filter1_obj := Functor!.1[2];
-        filter2_obj := Functor!.2[2];
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.2[2] ) then
+            Functor!.2[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][1] ) or not IsBound( Functor!.2[2][1] ) then
+            return fail;
+        fi;
+        
+        filter1_obj := Functor!.1[2][1];
+        filter2_obj := Functor!.2[2][1];
         
         if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) then
+            
+            if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+                
+                InstallOtherMethod( functor_name,
+                        "for homalg modules",
+                        [ filter1_obj ],
+                        function( o )
+                    local R;
+                    
+                    if IsHomalgRing( o ) then
+                        R := o;
+                    else
+                        R := HomalgRing( o );
+                    fi;
+                    
+                    return functor_name( o, R );
+                    
+                end );
+                
+            fi;
             
             InstallOtherMethod( functor_name,
                     "for homalg modules",
@@ -303,7 +355,7 @@ InstallMethod( InstallFunctorOnObjects,
                 elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
                     obj1 := o1;
                     
-                    if IsLeft( o1 ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
                         obj2 := AsLeftModule( o2 );
                     else
                         obj2 := AsRightModule( o2 );
@@ -311,7 +363,7 @@ InstallMethod( InstallFunctorOnObjects,
                 elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
                     obj2 := o2;
                     
-                    if IsLeft( o2 ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
                         obj1 := AsLeftModule( o1 );
                     else
                         obj1 := AsRightModule( o1 );
@@ -331,28 +383,6 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 return Functor!.OnObjects( obj1, obj2 );
-                
-            end );
-            
-            InstallOtherMethod( functor_name,
-                    "for homalg modules",
-                    [ filter1_obj ],
-              function( o )
-                local R;
-                
-                if IsHomalgRing( o ) then
-                    ## I personally prefer the row convention and hence left modules:
-                    R := AsLeftModule( o );
-                else
-                    R := HomalgRing( o );
-                    if IsLeft( o ) then
-                        R := AsLeftModule( R );
-                    else
-                        R := AsRightModule( R );
-                    fi;
-                fi;
-                
-                return Functor!.OnObjects( o, R  );
                 
             end );
             
@@ -381,7 +411,15 @@ InstallMethod( InstallFunctorOnMorphisms,
     
     if number_of_arguments = 1 then
         
-        filter_mor := Functor!.1[3];
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][2] ) then
+            return fail;
+        fi;
+        
+        filter_mor := Functor!.1[2][2];
         
         if IsFilter( filter_mor ) then
             
@@ -402,31 +440,42 @@ InstallMethod( InstallFunctorOnMorphisms,
         
     elif number_of_arguments = 2 then
         
-        filter1_obj := Functor!.1[2];
-        filter1_mor := Functor!.1[3];
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
         
-        filter2_obj := Functor!.2[2];
-        filter2_mor := Functor!.2[3];
+        if not IsBound( Functor!.2[2] ) then
+            Functor!.2[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][1] ) or not IsBound( Functor!.2[2][1] ) or
+           not IsBound( Functor!.1[2][2] ) or not IsBound( Functor!.2[2][2] ) then
+            return fail;
+        fi;
+        
+        filter1_obj := Functor!.1[2][1];
+        filter1_mor := Functor!.1[2][2];
+        
+        filter2_obj := Functor!.2[2][1];
+        filter2_mor := Functor!.2[2][2];
         
         if IsFilter( filter1_mor ) and IsFilter( filter2_mor ) then
             
-            InstallOtherMethod( functor_name,
-                    "for homalg morphisms",
-                    [ filter1_mor ],
-              function( m )
-                local R;
+            if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
                 
-                R := HomalgRing( m );
+                InstallOtherMethod( functor_name,
+                        "for homalg morphisms",
+                        [ filter1_mor ],
+                  function( m )
+                    local R;
+                    
+                    R := HomalgRing( m );
+                    
+                    return functor_name( m, R );
+                    
+                end );
                 
-                if IsLeft( m ) then
-                    R := AsLeftModule( R );
-                else
-                    R := AsRightModule( R );
-                fi;
-                
-                return FunctorMap( Functor, m, [ [ 2, R ] ] );
-                
-            end );
+            fi;
             
             InstallOtherMethod( functor_name,
                     "for homalg morphisms",
@@ -437,7 +486,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                 if IsHomalgModule( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
-                    if IsLeft( m ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                         obj := AsLeftModule( o );
                     else
                         obj := AsRightModule( o );
@@ -460,7 +509,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                 if IsHomalgModule( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
-                    if IsLeft( m ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                         obj := AsLeftModule( o );
                     else
                         obj := AsRightModule( o );
@@ -485,11 +534,14 @@ InstallMethod( InstallFunctorOnMorphisms,
 end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
-  function( functor_name, filter_cpx, complex_or_cocomplex, i )
+  function( Functor, filter_cpx, complex_or_cocomplex, i )
+    local functor_name;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
     InstallOtherMethod( functor_name,
             "for homalg complexes",
-            [ filter_cpx ],	## complexes
+            [ filter_cpx ],
       function( c )
         local indices, l, morphisms, Fc, m;
         
@@ -513,43 +565,30 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
     
 end );
 
-InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
-  function( functor_name, filter1_cpx, filter2_cpx, filter1_obj, filter2_obj, complex_or_cocomplex1, complex_or_cocomplex2, i1, i2 )
+InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes,
+  function( Functor, filter2_obj, filter1_cpx, complex_or_cocomplex, i )
+    local functor_name;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+        
+        InstallOtherMethod( functor_name,
+                "for homalg complexes",
+                [ filter1_cpx ],
+          function( c )
+            local R;
+            
+            R := HomalgRing( c );
+            
+            return functor_name( c, R );
+            
+        end );
+        
+    fi;
     
     InstallOtherMethod( functor_name,
-            "for homalg morphisms",
-            [ filter1_cpx ],
-      function( c )
-        local R, indices, l, morphisms, Fc, m;
-        
-        R := HomalgRing( c );
-        
-        if IsLeft( c ) then
-            R := AsLeftModule( R );
-        else
-            R := AsRightModule( R );
-        fi;
-        
-        indices := ObjectDegreesOfComplex( c );
-        
-        l := Length( indices );
-        
-        if l = 1 then
-            Fc := complex_or_cocomplex1( functor_name( CertainObject( c, indices[1] ), R ), indices[1] );
-        else
-            morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex1( functor_name( morphisms[1], R ), indices[i1] );
-            for m in morphisms{[ 2 .. l - 1 ]} do
-                Add( Fc, functor_name( m, R ) );
-            od;
-        fi;
-        
-        return Fc;
-        
-    end );
-    
-    InstallOtherMethod( functor_name,
-            "for homalg morphisms",
+            "for homalg complexes",
             [ filter1_cpx, filter2_obj ],
       function( c, o )
         local obj, indices, l, morphisms, Fc, m;
@@ -557,7 +596,7 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
         if IsHomalgModule( o ) then	## the most probable case
             obj := o;
         elif IsHomalgRing( o ) then
-            if IsLeft( c ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                 obj := AsLeftModule( o );
             else
                 obj := AsRightModule( o );
@@ -566,16 +605,16 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
             ## the default:
             obj := o;
         fi;
-                
+        
         indices := ObjectDegreesOfComplex( c );
         
         l := Length( indices );
         
         if l = 1 then
-            Fc := complex_or_cocomplex1( functor_name( CertainObject( c, indices[1] ), obj ), indices[1] );
+            Fc := complex_or_cocomplex( functor_name( CertainObject( c, indices[1] ), obj ), indices[1] );
         else
             morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex1( functor_name( morphisms[1], obj ), indices[i1] );
+            Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), indices[i] );
             for m in morphisms{[ 2 .. l - 1 ]} do
                 Add( Fc, functor_name( m, obj ) );
             od;
@@ -585,8 +624,16 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
         
     end );
     
+end );
+
+InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes,
+  function( Functor, filter1_obj, filter2_cpx, complex_or_cocomplex, i )
+    local functor_name;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    
     InstallOtherMethod( functor_name,
-            "for homalg morphisms",
+            "for homalg complexes",
             [ filter1_obj, filter2_cpx ],
       function( o, c )
         local obj, indices, l, morphisms, Fc, m;
@@ -594,7 +641,7 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
         if IsHomalgModule( o ) then	## the most probable case
             obj := o;
         elif IsHomalgRing( o ) then
-            if IsLeft( c ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                 obj := AsLeftModule( o );
             else
                 obj := AsRightModule( o );
@@ -609,10 +656,10 @@ InstallGlobalFunction( HelperToInstallBivariateFunctorOnComplexes,
         l := Length( indices );
         
         if l = 1 then
-            Fc := complex_or_cocomplex2( functor_name( obj, CertainObject( c, indices[1] ) ), indices[1] );
+            Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, indices[1] ) ), indices[1] );
         else
             morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex2( functor_name( obj, morphisms[1] ), indices[i2] );
+            Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), indices[i] );
             for m in morphisms{[ 2 .. l - 1 ]} do
                 Add( Fc, functor_name( obj, m ) );
             od;
@@ -630,28 +677,38 @@ InstallMethod( InstallFunctorOnComplexes,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local functor_name, number_of_arguments, filter_cpx,
+    local number_of_arguments, filter_cpx,
           filter1_obj, filter1_cpx, filter2_obj, filter2_cpx,
-          complex, cocomplex, complex_complex, complex_cocomplex,
-	  cocomplex_complex, cocomplex_cocomplex;
+          ar, i, complex, cocomplex, head;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
-        
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
     if number_of_arguments = 1 then
         
-        filter_cpx := Functor!.1[4];
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][3] ) then
+            return fail;
+        fi;
+        
+        filter_cpx := Functor!.1[2][3];
         
         if IsList( filter_cpx ) and Length( filter_cpx ) = 2 and ForAll( filter_cpx, IsFilter ) then
             
-            if Functor!.1[1] = "covariant" then
-                complex := [ functor_name, filter_cpx[1], HomalgComplex, 2 ];
-                cocomplex := [ functor_name, filter_cpx[2], HomalgCocomplex, 1 ];
+            if Functor!.1[1][1] = "covariant" then
+                complex := [ HomalgComplex, 2 ];
+                cocomplex := [ HomalgCocomplex, 1 ];
             else
-                complex := [ functor_name, filter_cpx[1], HomalgCocomplex, 1 ];
-                cocomplex := [ functor_name, filter_cpx[2], HomalgComplex, 2  ];
+                complex := [ HomalgCocomplex, 1 ];
+                cocomplex := [ HomalgComplex, 2  ];
             fi;
+            
+            head := [ Functor ];
+            
+            complex := Concatenation( head, [ filter_cpx[1] ], complex );
+            cocomplex := Concatenation( head, [ filter_cpx[2] ], cocomplex );
             
             CallFuncList( HelperToInstallUnivariateFunctorOnComplexes, complex );
             CallFuncList( HelperToInstallUnivariateFunctorOnComplexes, cocomplex );
@@ -664,45 +721,306 @@ InstallMethod( InstallFunctorOnComplexes,
         
     elif number_of_arguments = 2 then
         
-        filter1_obj := Functor!.1[2];
-        filter1_cpx := Functor!.1[4];
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
         
-        filter2_obj := Functor!.2[2];
-        filter2_cpx := Functor!.2[4];
+        if not IsBound( Functor!.2[2] ) then
+            Functor!.2[2] := HOMALG.FunctorOn;
+        fi;
         
-        if IsList( filter1_cpx ) and Length( filter1_cpx ) = 2 and ForAll( filter1_cpx, IsFilter )
-            and IsList( filter2_cpx ) and Length( filter2_cpx ) = 2 and ForAll( filter2_cpx, IsFilter ) then
+        if not IsBound( Functor!.1[2][1] ) or not IsBound( Functor!.2[2][1] ) or
+           not IsBound( Functor!.1[2][3] ) or not IsBound( Functor!.2[2][3] ) then
+            return fail;
+        fi;
+        
+        filter1_obj := Functor!.1[2][1];
+        filter1_cpx := Functor!.1[2][3];
+        
+        filter2_obj := Functor!.2[2][1];
+        filter2_cpx := Functor!.2[2][3];
+        
+        if IsList( filter1_cpx ) and Length( filter1_cpx ) = 2 and ForAll( filter1_cpx, IsFilter ) and
+           IsList( filter2_cpx ) and Length( filter2_cpx ) = 2 and ForAll( filter2_cpx, IsFilter ) then
             
-            if Functor!.1[1] = "covariant" and Functor!.2[1] = "covariant" then
-                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
-                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
-                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
-                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
-            elif Functor!.1[1] = "covariant" then
-                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
-                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
-                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
-                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
-            elif Functor!.2[1] = "covariant" then
-                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
-                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
-                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
-                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
-            else
-                complex_complex := [ functor_name, filter1_cpx[1], filter2_cpx[1], filter1_obj, filter2_obj, HomalgCocomplex, HomalgCocomplex, 1, 1 ];
-                complex_cocomplex := [ functor_name, filter1_cpx[1], filter2_cpx[2], filter1_obj, filter2_obj, HomalgCocomplex, HomalgComplex, 1, 2 ];
-                cocomplex_complex := [ functor_name, filter1_cpx[2], filter2_cpx[1], filter1_obj, filter2_obj, HomalgComplex, HomalgCocomplex, 2, 1 ];
-                cocomplex_cocomplex := [ functor_name, filter1_cpx[2], filter2_cpx[2], filter1_obj, filter2_obj, HomalgComplex, HomalgComplex, 2, 2 ];
-            fi;
+            ar := [ [ filter2_obj, filter1_cpx, HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes ],
+                    [ filter1_obj, filter2_cpx, HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes ] ];
             
-            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, complex_complex );
-            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, complex_cocomplex );
-            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, cocomplex_complex );
-            CallFuncList( HelperToInstallBivariateFunctorOnComplexes, cocomplex_cocomplex );
+            for i in [ 1 .. number_of_arguments ] do
+                
+                if Functor!.(i)[1][1] = "covariant" then
+                    complex :=  [ HomalgComplex, 2 ];
+                    cocomplex := [ HomalgCocomplex, 1 ];
+                else
+                    complex := [ HomalgCocomplex, 1 ];
+                    cocomplex := [ HomalgComplex, 2 ];
+                fi;
+                
+                head := [ Functor, ar[i][1] ];
+                
+                complex := Concatenation( head, [ ar[i][2][1] ], complex );
+                cocomplex := Concatenation( head, [ ar[i][2][2] ], cocomplex );
+                
+                CallFuncList( ar[i][3], complex );
+                CallFuncList( ar[i][3], cocomplex );
+                
+            od;
             
         else
             
             Error( "wrong syntax: ", filter1_cpx, filter2_cpx, "\n" );
+            
+        fi;
+        
+    fi;
+    
+end );
+
+InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
+  function( Functor, filter_chm, source_target, i )
+    local functor_name;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    InstallOtherMethod( functor_name,
+            "for homalg chain maps",
+            [ filter_chm ],
+      function( c )
+        local d, indices, l, source, target, morphisms, Fc, m;
+        
+        d := DegreeOfChainMap( c );
+        
+        indices := DegreesOfChainMap( c );
+        
+        l := Length( indices );
+        
+        source := functor_name( source_target[1]( c ) );
+        target := functor_name( source_target[2]( c ) );
+        
+        morphisms := MorphismsOfChainMap( c );
+        
+        Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ indices[1] + i * d, (-1)^i * d ] );
+        
+        for m in morphisms{[ 2 .. l ]} do
+            Add( Fc, functor_name( m ) );
+        od;
+        
+        return Fc;
+        
+    end );
+    
+end );
+
+InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps,
+  function( Functor, filter2_obj, filter1_chm, source_target, i )
+    local functor_name;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+        
+        InstallOtherMethod( functor_name,
+                "for homalg chain maps",
+                [ filter1_chm ],
+          function( c )
+            local R;
+            
+            R := HomalgRing( c );
+            
+            return functor_name( c, R );
+            
+        end );
+        
+    fi;
+    
+    InstallOtherMethod( functor_name,
+            "for homalg chain maps",
+            [ filter1_chm, filter2_obj ],
+      function( c, o )
+        local obj, d, indices, l, source, target, morphisms, Fc, m;
+        
+        if IsHomalgModule( o ) then	## the most probable case
+            obj := o;
+        elif IsHomalgRing( o ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                obj := AsLeftModule( o );
+            else
+                obj := AsRightModule( o );
+            fi;
+        else
+            ## the default:
+            obj := o;
+        fi;
+        
+        d := DegreeOfChainMap( c );
+        
+        indices := DegreesOfChainMap( c );
+        
+        l := Length( indices );
+        
+        source := functor_name( source_target[1]( c ), obj );
+        target := functor_name( source_target[2]( c ), obj );
+        
+        morphisms := MorphismsOfChainMap( c );
+        
+        Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ indices[1] + i * d, (-1)^i * d ] );
+        
+        for m in morphisms{[ 2 .. l ]} do
+            Add( Fc, functor_name( m, obj ) );
+        od;
+        
+        return Fc;
+        
+    end );
+    
+end );
+
+InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps,
+  function( Functor, filter1_obj, filter2_chm, source_target, i )
+    local functor_name;
+    
+    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    InstallOtherMethod( functor_name,
+            "for homalg chain maps",
+            [ filter1_obj, filter2_chm ],
+      function( o, c )
+        local obj, d, indices, l, source, target, morphisms, Fc, m;
+        
+        if IsHomalgModule( o ) then	## the most probable case
+            obj := o;
+        elif IsHomalgRing( o ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                obj := AsLeftModule( o );
+            else
+                obj := AsRightModule( o );
+            fi;
+        else
+            ## the default:
+            obj := o;
+        fi;
+        
+        d := DegreeOfChainMap( c );
+        
+        indices := DegreesOfChainMap( c );
+        
+        l := Length( indices );
+        
+        source := functor_name( obj, source_target[1]( c ) );
+        target := functor_name( obj, source_target[2]( c ) );
+        
+        morphisms := MorphismsOfChainMap( c );
+        
+        Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ indices[1] + i * d, (-1)^i * d ] );
+        
+        for m in morphisms{[ 2 .. l ]} do
+            Add( Fc, functor_name( obj, m ) );
+        od;
+        
+        return Fc;
+        
+    end );
+    
+end );
+
+##
+InstallMethod( InstallFunctorOnChainMaps,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local number_of_arguments, filter_chm,
+          filter1_obj, filter1_chm, filter2_obj, filter2_chm,
+          ar, i, chainmap, cochainmap, head;
+    
+    number_of_arguments := MultiplicityOfFunctor( Functor );
+    
+    if number_of_arguments = 1 then
+        
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][4] ) then
+            return fail;
+        fi;
+        
+        filter_chm := Functor!.1[2][4];
+        
+        if IsList( filter_chm ) and Length( filter_chm ) = 2 and ForAll( filter_chm, IsFilter ) then
+            
+            if Functor!.1[1][1] = "covariant" then
+                chainmap := [ [ Source, Target ], 0 ];
+                cochainmap := [ [ Source, Target ], 0 ];
+            else
+                chainmap := [ [ Target, Source ], 1 ];
+                cochainmap := [ [ Target, Source ], 1 ];
+            fi;
+            
+            head := [ Functor ];
+            
+            chainmap := Concatenation( head, [ filter_chm[1] ], chainmap );
+            cochainmap := Concatenation( head, [ filter_chm[2] ], cochainmap );
+            
+            CallFuncList( HelperToInstallUnivariateFunctorOnChainMaps, chainmap );
+            CallFuncList( HelperToInstallUnivariateFunctorOnChainMaps, cochainmap );
+            
+        else
+            
+            Error( "wrong syntax: ", filter_chm, "\n" );
+            
+        fi;
+        
+    elif number_of_arguments = 2 then
+        
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.2[2] ) then
+            Functor!.2[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][1] ) or not IsBound( Functor!.2[2][1] ) or
+           not IsBound( Functor!.1[2][4] ) or not IsBound( Functor!.2[2][4] ) then
+            return fail;
+        fi;
+        
+        filter1_obj := Functor!.1[2][1];
+        filter1_chm := Functor!.1[2][4];
+        
+        filter2_obj := Functor!.2[2][1];
+        filter2_chm := Functor!.2[2][4];
+        
+        if IsList( filter1_chm ) and Length( filter1_chm ) = 2 and ForAll( filter1_chm, IsFilter ) and
+           IsList( filter2_chm ) and Length( filter2_chm ) = 2 and ForAll( filter2_chm, IsFilter ) then
+            
+            ar := [ [ filter2_obj, filter1_chm, HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps ],
+                    [ filter1_obj, filter2_chm, HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps ] ];
+            
+            for i in [ 1 .. number_of_arguments ] do
+                
+                if Functor!.(i)[1][1] = "covariant" then
+                    chainmap := [ [ Source, Target ], 0 ];
+                    cochainmap := [ [ Source, Target ], 0 ];
+                else
+                    chainmap := [ [ Target, Source ], 1 ];
+                    cochainmap := [ [ Target, Source ], 1 ];
+                fi;
+                
+                head := [ Functor, ar[i][1] ];
+                
+                chainmap := Concatenation( head, [ ar[i][2][1] ], chainmap );
+                cochainmap := Concatenation( head, [ ar[i][2][2] ], cochainmap );
+                
+                CallFuncList( ar[i][3], chainmap );
+                CallFuncList( ar[i][3], cochainmap );
+                
+            od;
+            
+        else
+            
+            Error( "wrong syntax: ", filter1_chm, filter2_chm, "\n" );
             
         fi;
         
@@ -723,7 +1041,7 @@ InstallMethod( InstallFunctor,
     
     InstallFunctorOnComplexes( Functor );
     
-    #InstallFunctorOnChainMaps( Functor );
+    InstallFunctorOnChainMaps( Functor );
     
 end );
 

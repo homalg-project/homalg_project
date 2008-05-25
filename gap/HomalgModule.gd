@@ -14,12 +14,10 @@
 #
 ####################################
 
-# a new category of objects:
+# a new GAP-category:
 
 DeclareCategory( "IsHomalgModule",
-        IsAdditiveElementWithZero
-        and IsExtLElement
-        and IsAttributeStoringRep );
+        IsHomalgObject );
 
 ####################################
 #
@@ -118,9 +116,6 @@ DeclareGlobalFunction( "GetGenerators" );
 # basic operations:
 
 DeclareOperation( "HomalgRing",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "IsLeft",
         [ IsHomalgModule ] );
 
 DeclareOperation( "SetsOfGenerators",

@@ -43,10 +43,10 @@ DeclareGlobalVariable( "Functor_Hom" );
 ####################################
 
 DeclareAttribute( "CokernelEpi",
-        IsHomalgMorphism );
+        IsHomalgMap );
 
 DeclareAttribute( "KernelEmb",
-        IsHomalgMorphism );
+        IsHomalgMap );
 
 ####################################
 #
@@ -57,7 +57,7 @@ DeclareAttribute( "KernelEmb",
 # basic operations:
 
 DeclareOperation( "Cokernel",
-        [ IsHomalgMorphism ] );
+        [ IsHomalgMap ] );
 
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
 

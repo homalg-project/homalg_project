@@ -14,7 +14,7 @@
 #
 ####################################
 
-# A new category of objects:
+# A new GAP-category:
 
 DeclareCategory( "IsHomalgFunctor",
         IsAttributeStoringRep );
@@ -50,10 +50,10 @@ DeclareOperation( "MultiplicityOfFunctor",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "FunctorMap",
-        [ IsHomalgFunctor, IsHomalgMorphism, IsList ] );
+        [ IsHomalgFunctor, IsHomalgMap, IsList ] );
 
 DeclareOperation( "FunctorMap",
-        [ IsHomalgFunctor, IsHomalgMorphism ] );
+        [ IsHomalgFunctor, IsHomalgMap ] );
 
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
@@ -72,5 +72,13 @@ DeclareOperation( "InstallFunctor",
 
 DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnComplexes" );
 
-DeclareGlobalFunction( "HelperToInstallBivariateFunctorOnComplexes" );
+DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes" );
+
+DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes" );
+
+DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnChainMaps" );
+
+DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps" );
+
+DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps" );
 

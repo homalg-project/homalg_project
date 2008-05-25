@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Morphisms.gd                homalg package               Mohamed Barakat
+##  Maps.gd                     homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations of homalg procedures for morphisms.
+##  Declarations of homalg procedures for maps ( = module homomorphisms ).
 ##
 #############################################################################
 
@@ -14,7 +14,7 @@
 #
 ####################################
 
-DeclareGlobalFunction( "ResolutionOfMorphism" );
+DeclareGlobalFunction( "ResolutionOfHomomorphism" );
 
 # basic operations:
 

@@ -14,22 +14,17 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgRingOrHomalgModule
-DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
-        IsHomalgRingOrHomalgModule,
-        [ ] );
-
-# two new representations for the category IsHomalgRing
-# which are subrepresentations of IsHomalgRingOrFinitelyPresentedModuleRep:
+# two new representations for the GAP-category IsHomalgRing
+# which are subrepresentations of IsHomalgRingOrFinitelyPresentedObjectRep:
 DeclareRepresentation( "IsHomalgInternalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgRing and IsHomalgRingOrFinitelyPresentedObjectRep,
         [ "ring", "homalgTable" ] );
 
 DeclareRepresentation( "IsHomalgExternalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgRing and IsHomalgRingOrFinitelyPresentedObjectRep,
         [ "ring", "homalgTable" ] );
 
-# a new representation for the category IsHomalgExternalRingElement
+# a new representation for the GAP-category IsHomalgExternalRingElement:
 DeclareRepresentation( "IsHomalgExternalRingElementRep",
         IshomalgExternalObjectRep and IsHomalgExternalRingElement,
         [ "object", "cas" ] );

@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new category of objects:
+# a new GAP-category:
 
 DeclareCategory( "IsHomalgMatrix",
         IsAdditiveElementWithInverse

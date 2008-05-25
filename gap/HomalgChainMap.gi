@@ -14,13 +14,14 @@
 #
 ####################################
 
-# two new representations for the category IsHomalgChainMap:
-DeclareRepresentation( "IsChainMapOfFinitelyPresentedModulesRep",
-        IsHomalgChainMap,
+# two new representations for the GAP-category IsHomalgChainMap
+# which are subrepresentations of the representation IsMorphismOfFinitelyGeneratedModulesRep:
+DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
+        IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [  ] );
 
-DeclareRepresentation( "IsCochainMapOfFinitelyPresentedModulesRep",
-        IsHomalgChainMap,
+DeclareRepresentation( "IsCochainMapOfFinitelyPresentedObjectsRep",
+        IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [  ] );
 
 ####################################
@@ -34,37 +35,37 @@ BindGlobal( "TheFamilyOfHomalgChainMaps",
         NewFamily( "TheFamilyOfHomalgChainMaps" ) );
 
 # eight new types:
-BindGlobal( "TheTypeHomalgChainMapOfLeftModules",
+BindGlobal( "TheTypeHomalgChainMapOfLeftObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsChainMapOfFinitelyPresentedModulesRep and IsHomalgChainMapOfLeftModules ) );
+                IsChainMapOfFinitelyPresentedObjectsRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgChainMapOfRightModules",
+BindGlobal( "TheTypeHomalgChainMapOfRightObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsChainMapOfFinitelyPresentedModulesRep and IsHomalgChainMapOfRightModules ) );
+                IsChainMapOfFinitelyPresentedObjectsRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
-BindGlobal( "TheTypeHomalgCochainMapOfLeftModules",
+BindGlobal( "TheTypeHomalgCochainMapOfLeftObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsCochainMapOfFinitelyPresentedModulesRep and IsHomalgChainMapOfLeftModules ) );
+                IsCochainMapOfFinitelyPresentedObjectsRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgCochainMapOfRightModules",
+BindGlobal( "TheTypeHomalgCochainMapOfRightObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsCochainMapOfFinitelyPresentedModulesRep and IsHomalgChainMapOfRightModules ) );
+                IsCochainMapOfFinitelyPresentedObjectsRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
-BindGlobal( "TheTypeHomalgChainSelfMapOfLeftModules",
+BindGlobal( "TheTypeHomalgChainSelfMapOfLeftObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsChainMapOfFinitelyPresentedModulesRep and IsHomalgChainSelfMap and IsHomalgChainMapOfLeftModules ) );
+                IsChainMapOfFinitelyPresentedObjectsRep and IsHomalgChainSelfMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgChainSelfMapOfRightModules",
+BindGlobal( "TheTypeHomalgChainSelfMapOfRightObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsChainMapOfFinitelyPresentedModulesRep and IsHomalgChainSelfMap and IsHomalgChainMapOfRightModules ) );
+                IsChainMapOfFinitelyPresentedObjectsRep and IsHomalgChainSelfMap and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
-BindGlobal( "TheTypeHomalgCochainSelfMapOfLeftModules",
+BindGlobal( "TheTypeHomalgCochainSelfMapOfLeftObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsCochainMapOfFinitelyPresentedModulesRep and IsHomalgChainSelfMap and IsHomalgChainMapOfLeftModules ) );
+                IsCochainMapOfFinitelyPresentedObjectsRep and IsHomalgChainSelfMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgCochainSelfMapOfRightModules",
+BindGlobal( "TheTypeHomalgCochainSelfMapOfRightObjects",
         NewType( TheFamilyOfHomalgChainMaps,
-                IsCochainMapOfFinitelyPresentedModulesRep and IsHomalgChainSelfMap and IsHomalgChainMapOfRightModules ) );
+                IsCochainMapOfFinitelyPresentedObjectsRep and IsHomalgChainSelfMap and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
 #
@@ -87,7 +88,7 @@ InstallMethod( IsZero,
 end );
 
 ##
-InstallMethod( IsChainMap,
+InstallMethod( IsMorphism,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
         
@@ -115,11 +116,11 @@ InstallMethod( IsChainMap,
         else
             Error( "not implemented for chain maps containing as single morphism\n" );
         fi;
-    elif IsChainMapOfFinitelyPresentedModulesRep( c ) and IsHomalgChainMapOfLeftModules( c ) then
+    elif IsChainMapOfFinitelyPresentedObjectsRep( c ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
         return ForAll( indices, i -> CertainMorphism( c, i + 1 ) * CertainMorphism( T, i + 1 ) = CertainMorphism( S, i + 1 ) * CertainMorphism( c, i ) );
-    elif IsCochainMapOfFinitelyPresentedModulesRep( c ) and IsHomalgChainMapOfRightModules( c ) then
+    elif IsCochainMapOfFinitelyPresentedObjectsRep( c ) and IsHomalgRightObjectOrMorphismOfRightObjects( c ) then
         return ForAll( indices, i -> CertainMorphism( T, i ) * CertainMorphism( c, i ) = CertainMorphism( c, i + 1 ) * CertainMorphism( S, i ) );
-    elif IsChainMapOfFinitelyPresentedModulesRep( c ) and IsHomalgChainMapOfRightModules( c ) then
+    elif IsChainMapOfFinitelyPresentedObjectsRep( c ) and IsHomalgRightObjectOrMorphismOfRightObjects( c ) then
         return ForAll( indices, i -> CertainMorphism( T, i + 1 ) * CertainMorphism( c, i + 1 ) = CertainMorphism( c, i ) * CertainMorphism( S, i + 1 ) );
     else
         return ForAll( indices, i -> CertainMorphism( c, i ) * CertainMorphism( T, i ) = CertainMorphism( S, i ) * CertainMorphism( c, i + 1 ) );
@@ -132,17 +133,6 @@ end );
 # methods for operations:
 #
 ####################################
-
-##
-InstallMethod( IsLeft,
-        "for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( c )
-    
-    return IsHomalgChainMapOfLeftModules( c );
-    
-end );
 
 ##
 InstallMethod( HomalgRing,
@@ -284,7 +274,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg chain maps",
-        [ IsHomalgChainMap, IsHomalgMorphism ],
+        [ IsHomalgChainMap, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( c, phi )
     local indices, l;
@@ -327,7 +317,7 @@ InstallGlobalFunction( homalgResetFiltersOfChainMap,
     
     if not IsBound( HOMALG.PropertiesOfChainMaps ) then
         HOMALG.PropertiesOfChainMaps :=
-          [ IsZero, IsChainMap ];
+          [ IsZero, IsMorphism ];
     fi;
     
     for property in HOMALG.PropertiesOfChainMaps do
@@ -353,8 +343,8 @@ InstallGlobalFunction( HomalgChainMap,
         Error( "empty input\n" );
     fi;
     
-    if nargs > 0 and IsHomalgMorphism( arg[1] ) then
-        left := IsHomalgMorphismOfLeftModules( arg[1] );
+    if nargs > 0 and IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+        left := IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[1] );
     else
         Error( "the first argument must be a morphism" );
     fi;
@@ -363,15 +353,15 @@ InstallGlobalFunction( HomalgChainMap,
     
     if nargs > 1 and IsHomalgComplex( arg[2] ) then
         if not IsBound( left ) then
-            left := IsHomalgComplexOfLeftModules( arg[2] );
+            left := IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[2] );
         fi;
         source := arg[2];
     fi;
     
     if nargs > 2 and IsHomalgComplex( arg[3] ) then
-        if ( not IsHomalgComplexOfLeftModules( arg[3] ) and left ) or
-           ( IsHomalgComplexOfLeftModules( arg[3] ) and not left ) then
-            Error( "both complexes must either be both left or both right complexes\n" );
+        if ( IsHomalgRightObjectOrMorphismOfRightObjects( arg[3] ) and left ) or
+           ( IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[3] ) and not left ) then
+            Error( "the two complexes must either be both left or both right complexes\n" );
         fi;
         target := arg[3];
     else
@@ -399,11 +389,11 @@ InstallGlobalFunction( HomalgChainMap,
     
     c.(String( indices[1] )) := morphism;
     
-    if IsComplexOfFinitelyPresentedModulesRep( source ) and
-       IsComplexOfFinitelyPresentedModulesRep( target ) then
+    if IsComplexOfFinitelyPresentedObjectsRep( source ) and
+       IsComplexOfFinitelyPresentedObjectsRep( target ) then
         chainmap := true;
-    elif IsCocomplexOfFinitelyPresentedModulesRep( source ) and
-      IsComplexOfFinitelyPresentedModulesRep( target ) then
+    elif IsCocomplexOfFinitelyPresentedObjectsRep( source ) and
+      IsCocomplexOfFinitelyPresentedObjectsRep( target ) then
         chainmap := false;
     else
         Error( "source and target must either be both complexes or both cocomplexes\n" );
@@ -412,29 +402,29 @@ InstallGlobalFunction( HomalgChainMap,
     if IsIdenticalObj( source, target ) then
         if chainmap then
             if left then
-                type := TheTypeHomalgChainSelfMapOfLeftModules;
+                type := TheTypeHomalgChainSelfMapOfLeftObjects;
             else
-                type := TheTypeHomalgChainSelfMapOfRightModules;
+                type := TheTypeHomalgChainSelfMapOfRightObjects;
             fi;
         else
             if left then
-                type := TheTypeHomalgCochainSelfMapOfLeftModules;
+                type := TheTypeHomalgCochainSelfMapOfLeftObjects;
             else
-                type := TheTypeHomalgCochainSelfMapOfRightModules;
+                type := TheTypeHomalgCochainSelfMapOfRightObjects;
             fi;
         fi;
     else
         if chainmap then
             if left then
-                type := TheTypeHomalgChainMapOfLeftModules;
+                type := TheTypeHomalgChainMapOfLeftObjects;
             else
-                type := TheTypeHomalgChainMapOfRightModules;
+                type := TheTypeHomalgChainMapOfRightObjects;
             fi;
         else
             if left then
-                type := TheTypeHomalgCochainMapOfLeftModules;
+                type := TheTypeHomalgCochainMapOfLeftObjects;
             else
-                type := TheTypeHomalgCochainMapOfRightModules;
+                type := TheTypeHomalgCochainMapOfRightObjects;
             fi;
         fi;
     fi;
@@ -474,22 +464,22 @@ InstallMethod( ViewObj,
         first_attribute := true;
     fi;
     
-    if HasIsChainMap( o ) then
-        if IsChainMap( o ) then
-            if IsChainMapOfFinitelyPresentedModulesRep( o ) then
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            if IsChainMapOfFinitelyPresentedObjectsRep( o ) then
                 Print( " chain map" );
             else
                 Print( " cochain map" );
             fi;
         else
-            if IsChainMapOfFinitelyPresentedModulesRep( o ) then
+            if IsChainMapOfFinitelyPresentedObjectsRep( o ) then
                 Print( " non-chain map" );
             else
                 Print( " non-cochain map" );
             fi;
         fi;
     else
-        if IsChainMapOfFinitelyPresentedModulesRep( o ) then
+        if IsChainMapOfFinitelyPresentedObjectsRep( o ) then
             Print( " \"chain map\"" );
         else
             Print( " \"cochain map\"" );
@@ -510,7 +500,7 @@ InstallMethod( ViewObj,
         
         Print( "a single " );
         
-        if IsHomalgChainMapOfLeftModules( o ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
             Print( "left" );
         else
             Print( "right" );
@@ -518,7 +508,7 @@ InstallMethod( ViewObj,
         
         Print( " morphism at " );
         
-        if IsCochainMapOfFinitelyPresentedModulesRep( o ) then
+        if IsCochainMapOfFinitelyPresentedObjectsRep( o ) then
             Print( "co" );
         fi;
         
@@ -530,7 +520,7 @@ InstallMethod( ViewObj,
         
         Print( " of " );
         
-        if IsHomalgChainMapOfLeftModules( o ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
             Print( "left" );
         else
             Print( "right" );
@@ -545,13 +535,13 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg chain maps",
-        [ IsChainMapOfFinitelyPresentedModulesRep and IsZero ],
+        [ IsChainMapOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
     
     Print( "<A zero " );
     
-    if IsHomalgChainMapOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( "left" );
     else
         Print( "right" );
@@ -564,13 +554,13 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg chain maps",
-        [ IsCochainMapOfFinitelyPresentedModulesRep and IsZero ],
+        [ IsCochainMapOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
     
     Print( "<A zero " );
     
-    if IsHomalgChainMapOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( "left" );
     else
         Print( "right" );
@@ -583,7 +573,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg chain maps",
-        [ IsChainMapOfFinitelyPresentedModulesRep ],
+        [ IsChainMapOfFinitelyPresentedObjectsRep ],
         
   function( o )
     
@@ -594,7 +584,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg chain maps",
-        [ IsCochainMapOfFinitelyPresentedModulesRep ],
+        [ IsCochainMapOfFinitelyPresentedObjectsRep ],
         
   function( o )
     

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Morphisms.gi                homalg package               Mohamed Barakat
+##  Maps.gi                     homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations of homalg procedures for morphisms.
+##  Implementations of homalg procedures for maps ( = module homomorphisms ).
 ##
 #############################################################################
 
@@ -15,13 +15,13 @@
 ####################################
 
 ##
-InstallGlobalFunction( ResolutionOfMorphism,	### defines: ResolutionOfMorphism
+InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomorphism
   function( arg )
     local nargs, phi, R, q, d_S, d_T, c, j, d_S_j, d_T_j, phi_j;
     
     nargs := Length( arg );
     
-    if nargs = 0 or not IsHomalgMorphism( arg[1] ) then
+    if nargs = 0 or not IsHomalgMap( arg[1] ) then
         Error( "the first argument must be a morphism\n" );
     fi;
     

@@ -14,7 +14,7 @@
 #
 ####################################
 
-# A new category of objects:
+# A new GAP-category:
 
 DeclareCategory( "IsHomalgRelations",
         IsAttributeStoringRep );

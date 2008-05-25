@@ -46,8 +46,7 @@ InstallValue( Functor_TorsionSubmodule,
                 [ "name", "TorsionSubmodule" ],
                 [ "natural_transformation", "TorsionSubmoduleEmb" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ "covariant", IsHomalgRingOrFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep,
-                        [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ] ] ],
                 [ "OnObjects", _Functor_TorsionSubmodule_OnObjects ]
                 )
 );
@@ -87,8 +86,7 @@ InstallValue( Functor_TorsionFreeFactor,
                 [ "name", "TorsionFreeFactor" ],
                 [ "natural_transformation", "TorsionFreeFactorEpi" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ "covariant", IsHomalgRingOrFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep,
-                        [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ] ] ],
                 [ "OnObjects", _Functor_TorsionFreeFactor_OnObjects ]
                 )
 );

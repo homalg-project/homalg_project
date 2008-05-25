@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgComplex.gi           homalg package               Mohamed Barakat
+##  HomalgComplex.gi            homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,13 +14,14 @@
 #
 ####################################
 
-# two new representations for the category IsHomalgComplex:
-DeclareRepresentation( "IsComplexOfFinitelyPresentedModulesRep",
-        IsHomalgComplex,
+# two new representations for the GAP-category IsHomalgComplex
+# which are subrepresentations of the representation IsFinitelyPresentedObjectRep:
+DeclareRepresentation( "IsComplexOfFinitelyPresentedObjectsRep",
+        IsHomalgComplex and IsFinitelyPresentedObjectRep,
         [  ] );
 
-DeclareRepresentation( "IsCocomplexOfFinitelyPresentedModulesRep",
-        IsHomalgComplex,
+DeclareRepresentation( "IsCocomplexOfFinitelyPresentedObjectsRep",
+        IsHomalgComplex and IsFinitelyPresentedObjectRep,
         [  ] );
 
 ####################################
@@ -34,21 +35,21 @@ BindGlobal( "TheFamilyOfHomalgComplexes",
         NewFamily( "TheFamilyOfHomalgComplexes" ) );
 
 # four new types:
-BindGlobal( "TheTypeHomalgComplexOfLeftModules",
+BindGlobal( "TheTypeHomalgComplexOfLeftObjects",
         NewType( TheFamilyOfHomalgComplexes,
-                IsComplexOfFinitelyPresentedModulesRep and IsHomalgComplexOfLeftModules ) );
+                IsComplexOfFinitelyPresentedObjectsRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgComplexOfRightModules",
+BindGlobal( "TheTypeHomalgComplexOfRightObjects",
         NewType( TheFamilyOfHomalgComplexes,
-                IsComplexOfFinitelyPresentedModulesRep and IsHomalgComplexOfRightModules ) );
+                IsComplexOfFinitelyPresentedObjectsRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
-BindGlobal( "TheTypeHomalgCocomplexOfLeftModules",
+BindGlobal( "TheTypeHomalgCocomplexOfLeftObjects",
         NewType( TheFamilyOfHomalgComplexes,
-                IsCocomplexOfFinitelyPresentedModulesRep and IsHomalgComplexOfLeftModules ) );
+                IsCocomplexOfFinitelyPresentedObjectsRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgCocomplexOfRightModules",
+BindGlobal( "TheTypeHomalgCocomplexOfRightObjects",
         NewType( TheFamilyOfHomalgComplexes,
-                IsCocomplexOfFinitelyPresentedModulesRep and IsHomalgComplexOfRightModules ) );
+                IsCocomplexOfFinitelyPresentedObjectsRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
 #
@@ -116,8 +117,8 @@ InstallMethod( IsComplex,
     
     if indices = [ ] then
         return true;
-    elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
-      or ( IsCocomplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfRightModules( C ) ) then
+    elif ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
+      or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
         return ForAll( indices, i -> IsZero( CertainMorphism( C, i + 1 ) * CertainMorphism( C, i ) ) );
     else
         return ForAll( indices, i -> IsZero( CertainMorphism( C, i ) * CertainMorphism( C, i + 1 ) ) );
@@ -143,8 +144,33 @@ InstallMethod( IsExactSequence,
     
     if indices = [ ] then
         return true;
-    elif ( IsComplexOfFinitelyPresentedModulesRep( C ) and IsHomalgComplexOfLeftModules( C ) ) 
-      or not ( IsComplexOfFinitelyPresentedModulesRep( C ) or IsHomalgComplexOfLeftModules( C ) ) then
+    elif ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
+      or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
+        return ForAll( indices, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
+    else
+        return ForAll( indices, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( IsShortExactSequence,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local indices;
+    
+    indices := MorphismDegreesOfComplex( C );
+    
+    if Length( indices ) <> 2 then	## FIXME: this is probably not the last word
+        return false;
+    elif not IsSequence( C ) then
+        return false;
+    fi;
+    
+    if ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) ) or
+       ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
         return ForAll( indices, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
     else
         return ForAll( indices, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
@@ -157,17 +183,6 @@ end );
 # methods for operations:
 #
 ####################################
-
-##
-InstallMethod( IsLeft,
-        "for homalg complexes",
-        [ IsHomalgComplex ],
-        
-  function( C )
-    
-    return IsHomalgComplexOfLeftModules( C );
-    
-end );
 
 ##
 InstallMethod( ObjectDegreesOfComplex,
@@ -194,7 +209,7 @@ InstallMethod( MorphismDegreesOfComplex,
     
     if l = 1 then
         return [  ];
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
+    elif IsComplexOfFinitelyPresentedObjectsRep( C ) then
         return indices{[ 2 .. l ]};
     else
         return indices{[ 1 .. l - 1 ]};
@@ -226,7 +241,7 @@ InstallMethod( CertainObject,
     local indices, l;
     
     if IsBound( C!.(String( i )) ) then
-        if IsHomalgModule( C!.(String( i )) ) then
+        if IsHomalgObject( C!.(String( i )) ) then
             return C!.(String( i ));
         else
             return Source( C!.(String( i )) );
@@ -236,9 +251,9 @@ InstallMethod( CertainObject,
     indices := ObjectDegreesOfComplex( C );
     l := Length( indices );
     
-    if IsComplexOfFinitelyPresentedModulesRep( C ) and indices[1] = i then
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) and indices[1] = i then
         return Target( CertainMorphism( C, i + 1 ) );
-    elif IsCocomplexOfFinitelyPresentedModulesRep( C ) and indices[l] = i then
+    elif IsCocomplexOfFinitelyPresentedObjectsRep( C ) and indices[l] = i then
         return Target( CertainMorphism( C, i - 1 ) );
     fi;
     
@@ -278,7 +293,7 @@ InstallMethod( ObjectsOfComplex,
     
     if l = 0 then
         return [ CertainObject( C, ObjectDegreesOfComplex( C )[1] ) ];
-    elif IsComplexOfFinitelyPresentedModulesRep( C ) then
+    elif IsComplexOfFinitelyPresentedObjectsRep( C ) then
         modules := List( morphisms, Target );
         Add( modules, Source( morphisms[l] ) );
     else
@@ -371,7 +386,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep, IsHomalgMorphism ],
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( C, phi )
     local indices, l;
@@ -415,7 +430,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep, IsHomalgMorphism ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsHomalgMorphism ],
         
   function( C, phi )
     local indices, l;
@@ -457,7 +472,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep, IsHomalgMatrix ],
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsHomalgMatrix ],
         
   function( C, mat )
     local T;
@@ -471,7 +486,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep, IsHomalgMatrix ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsHomalgMatrix ],
         
   function( C, mat )
     local S;
@@ -524,7 +539,7 @@ end );
 
 InstallGlobalFunction( HomalgComplex,
   function( arg )
-    local nargs, C, complex, indices, left, module, type;
+    local nargs, C, complex, indices, object, obj_or_mor, left, type;
     
     nargs := Length( arg );
     
@@ -547,43 +562,49 @@ InstallGlobalFunction( HomalgComplex,
         indices := [ 0 ];
     fi;
     
-    module := false;
-    
-    if IsHomalgModule( arg[1] ) then
+    if IsHomalgRingOrFinitelyPresentedObjectRep( arg[1] ) then
+        object := true;
+        if IsHomalgRing( arg[1] ) then
+            obj_or_mor := AsLeftModule( arg[1] );
+        else
+            obj_or_mor := arg[1];
+        fi;
         C.indices := indices;
-        left := IsLeftModule( arg[1] );
-        module := true;
-    elif IsHomalgMorphism( arg[1] ) then
+        left := IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[1] );
+    elif IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+        object := false;
+        obj_or_mor := arg[1];
         if complex then
             C.indices := [ indices[1] - 1, indices[1] ];
         else
             C.indices := [ indices[1], indices[1] + 1 ];
         fi;
-        left := IsHomalgMorphismOfLeftModules( arg[1] );
     else
-        Error( "the first argument must be either a homalg module or a homalg morphism\n" );
+        Error( "the first argument must be either a homalg object or a homalg morphism\n" );
     fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( obj_or_mor );
     
     C.( String( indices[1] ) ) := arg[1];
     
     if complex then
         if left then
-            type := TheTypeHomalgComplexOfLeftModules;
+            type := TheTypeHomalgComplexOfLeftObjects;
         else
-            type := TheTypeHomalgComplexOfRightModules;
+            type := TheTypeHomalgComplexOfRightObjects;
         fi;
     else
         if left then
-            type := TheTypeHomalgCocomplexOfLeftModules;
+            type := TheTypeHomalgCocomplexOfLeftObjects;
         else
-            type := TheTypeHomalgCocomplexOfRightModules;
+            type := TheTypeHomalgCocomplexOfRightObjects;
         fi;
     fi;
     
     ## Objectify
     Objectify( type, C );
     
-    if module then
+    if object then
         SetIsGradedObject( C, true );
     fi;
     
@@ -631,13 +652,13 @@ InstallMethod( ViewObj,
         fi;
     elif HasIsComplex( o ) then
         if IsComplex( o ) then
-            if IsComplexOfFinitelyPresentedModulesRep( o ) then
+            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
                 Print( " complex" );
             else
                 Print( " cocomplex" );
             fi;
         else
-            if IsComplexOfFinitelyPresentedModulesRep( o ) then
+            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
                 Print( " non-complex" );
             else
                 Print( " non-cocomplex" );
@@ -645,20 +666,20 @@ InstallMethod( ViewObj,
         fi;
     elif HasIsSequence( o ) then
         if IsSequence( o ) then
-            if IsComplexOfFinitelyPresentedModulesRep( o ) then
+            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
                 Print( " sequence" );
             else
                 Print( " co-sequence" );
             fi;
         else
-            if IsComplexOfFinitelyPresentedModulesRep( o ) then
+            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
                 Print( " sequence of non-well-definded maps" );
             else
                 Print( " co-sequence of non-well-definded maps" );
             fi;
         fi;
     else
-        if IsComplexOfFinitelyPresentedModulesRep( o ) then
+        if IsComplexOfFinitelyPresentedObjectsRep( o ) then
             Print( " \"complex\"" );
         else
             Print( " \"cocomplex\"" );
@@ -675,7 +696,7 @@ InstallMethod( ViewObj,
         
         Print( "a single " );
         
-        if IsHomalgComplexOfLeftModules( o ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
             Print( "left" );
         else
             Print( "right" );
@@ -683,7 +704,7 @@ InstallMethod( ViewObj,
         
         Print( " module at " );
         
-        if IsCocomplexOfFinitelyPresentedModulesRep( o ) then
+        if IsCocomplexOfFinitelyPresentedObjectsRep( o ) then
             Print( "co" );
         fi;
         
@@ -699,7 +720,7 @@ InstallMethod( ViewObj,
         
         Print( " of " );
         
-        if IsHomalgComplexOfLeftModules( o ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
             Print( "left" );
         else
             Print( "right" );
@@ -714,7 +735,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep and IsGradedObject ],
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
         
   function( o )
     local l, indices;
@@ -731,7 +752,7 @@ InstallMethod( ViewObj,
         Print( l );
     fi;
     
-    if IsHomalgComplexOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -758,7 +779,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep and IsGradedObject ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
         
   function( o )
     local l, indices;
@@ -775,7 +796,7 @@ InstallMethod( ViewObj,
         Print( l );
     fi;
     
-    if IsHomalgComplexOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );
     else
         Print( " right" );
@@ -802,13 +823,13 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep and IsZero ],
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
     
     Print( "<A zero " );
     
-    if IsHomalgComplexOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( "left" );
     else
         Print( "right" );
@@ -821,13 +842,13 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep and IsZero ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
     
     Print( "<A zero " );
     
-    if IsHomalgComplexOfLeftModules( o ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( "left" );
     else
         Print( "right" );
@@ -840,7 +861,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep ],
+        [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( o )
     
@@ -851,7 +872,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( o )
     
@@ -862,7 +883,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep and IsGradedObject ],
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
         
   function( o )
     local i;
@@ -877,7 +898,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep and IsGradedObject ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
         
   function( o )
     local i;
@@ -892,7 +913,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep and IsZero ],
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
     
@@ -903,7 +924,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep and IsZero ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
     

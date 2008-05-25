@@ -28,7 +28,7 @@ InstallMethod( \/,			## defines: / (SubfactorModule)
     # normal forms of mat with respect to B
     N := DecideZero( mat, B );
     
-    if IsLeftModule( M ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         N := HomalgGeneratorsForLeftModule( N );
     else
         N := HomalgGeneratorsForRightModule( N );
@@ -188,7 +188,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
     ## fill up with zero morphisms:
     if q < infinity then
-        left := IsLeftModule( F_j );
+        left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
                 d_j := HomalgZeroMorphism( HomalgZeroLeftModule( R ), F_j );	## always create a new zero module to be able to distinguish them

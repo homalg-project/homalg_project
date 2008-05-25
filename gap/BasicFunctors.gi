@@ -71,7 +71,7 @@ InstallValue( Functor_Cokernel,
                 [ "name", "Cokernel" ],
                 [ "natural_transformation", "CokernelEpi" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ "covariant", IsMorphismOfFinitelyGeneratedModulesRep ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_Cokernel_OnObjects ]
                 )
 );
@@ -121,7 +121,7 @@ InstallValue( Functor_Kernel,
                 [ "name", "Kernel" ],
                 [ "natural_transformation", "KernelEmb" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ "covariant", IsMorphismOfFinitelyGeneratedModulesRep ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
 );
@@ -137,7 +137,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
   function( phi_psi )
     local phi, psi, R, pre, post, M, p, gen, rel, coker, ker, emb;
     
-    if not ( IsList( phi_psi) and Length( phi_psi ) = 2 and ForAll( phi_psi, IsMorphismOfFinitelyGeneratedModulesRep ) ) then
+    if not ( IsList( phi_psi) and Length( phi_psi ) = 2 and ForAll( phi_psi, IsMapOfFinitelyGeneratedModulesRep ) ) then
         Error( "expecting a list containing two morphisms\n" );
     fi;
     
@@ -150,7 +150,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
         Error( "the rings of the two morphisms are not identical\n" );
     fi;
     
-    if IsHomalgMorphismOfLeftModules( phi ) and IsHomalgMorphismOfLeftModules( psi ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( psi ) then
         if not AreComposableMorphisms( phi, psi ) then
             Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
         fi;
@@ -158,7 +158,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
         pre := phi;
         post := psi;
         
-    elif IsHomalgMorphismOfRightModules( phi ) and IsHomalgMorphismOfRightModules( psi ) then
+    elif IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( psi ) then
         if not AreComposableMorphisms( phi, psi ) then
             Error( "the two morphisms are not composable, since the target of the right one and the target of the left one are not \033[01midentical\033[0m\n" );
         fi;
@@ -206,7 +206,7 @@ InstallValue( Functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ "covariant", IsHomogeneousList ] ],
+                [ "1", [ [ "covariant" ], [ IsHomogeneousList ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
 );
@@ -230,8 +230,8 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
     
-    if not ( IsLeftModule( M ) and IsLeftModule( N ) )
-       and not ( IsRightModule( M ) and IsRightModule( N ) ) then
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) )
+       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
@@ -286,7 +286,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
     
     alpha := KroneckerMat( matM, idN );
     
-    if IsLeftModule( M ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         r := l0;
         c := _l0;
         
@@ -415,14 +415,14 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
     
     #=====# begin of the core procedure #=====#
     
-    if IsMorphismOfFinitelyGeneratedModulesRep( M_or_mor )
+    if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
        and IsFinitelyPresentedModuleRep( N_or_mor ) then
         
         phi := M_or_mor;
         L := N_or_mor;
         
-        if not ( IsHomalgMorphismOfLeftModules( phi ) and IsLeftModule( L ) )
-           and not ( IsHomalgMorphismOfRightModules( phi ) and IsRightModule( L ) ) then
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
+           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
             Error( "the morphism and the module must either be both left or both right\n" );
         fi;
         
@@ -430,14 +430,14 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
         
         return KroneckerMat( MatrixOfMorphism( phi ), idL );
         
-    elif IsMorphismOfFinitelyGeneratedModulesRep( N_or_mor )
+    elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
       and IsFinitelyPresentedModuleRep( M_or_mor ) then
         
         phi := N_or_mor;
         L := M_or_mor;
         
-        if not ( IsHomalgMorphismOfLeftModules( phi ) and IsLeftModule( L ) )
-           and not ( IsHomalgMorphismOfRightModules( phi ) and IsRightModule( L ) ) then
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
+           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
             Error( "the morphism and the module must either be both left or both right\n" );
         fi;
         
@@ -455,10 +455,8 @@ InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ "contravariant", IsHomalgRingOrFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep,
-                        [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
-                [ "2", [ "covariant", IsHomalgRingOrFinitelyPresentedModuleRep, IsMorphismOfFinitelyGeneratedModulesRep,
-                        [ IsComplexOfFinitelyPresentedModulesRep, IsCocomplexOfFinitelyPresentedModulesRep ] ] ],
+                [ "1", [ [ "contravariant", "distinguished" ] ] ],
+                [ "2", [ [ "covariant" ] ] ],
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )

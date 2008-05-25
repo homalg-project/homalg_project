@@ -14,22 +14,14 @@
 #
 ####################################
 
-# four new category of objects:
+# two new categories:
 
 DeclareCategory( "IsHomalgChainMap",
-        IsAdditiveElementWithInverse
-        and IsExtLElement
-        and IsAttributeStoringRep );		## CAUTION: never let homalg chain maps (which are not self chain maps) be multiplicative elements!!
+        IsHomalgMorphism );
 
-DeclareCategory( "IsHomalgChainSelfMap",	## it is extremely important to let this filter be a category and NOT a representation or a property,
+DeclareCategory( "IsHomalgChainSelfMap",	## it is extremely important to let this filter be a GAP-category and NOT a representation or a property,
         IsHomalgChainMap			## since chain self maps should be multiplicative elements from the beginning!!
         and IsMultiplicativeElementWithInverse );
-
-DeclareCategory( "IsHomalgChainMapOfLeftModules",
-        IsHomalgChainMap );
-
-DeclareCategory( "IsHomalgChainMapOfRightModules",
-        IsHomalgChainMap );
 
 ####################################
 #
@@ -37,7 +29,7 @@ DeclareCategory( "IsHomalgChainMapOfRightModules",
 #
 ####################################
 
-DeclareProperty( "IsChainMap",
+DeclareProperty( "IsMorphism",
         IsHomalgChainMap );
 
 ####################################
@@ -68,9 +60,6 @@ DeclareGlobalFunction( "homalgResetFiltersOfChainMap" );
 DeclareGlobalFunction( "HomalgChainMap" );
 
 # basic operations:
-
-DeclareOperation( "IsLeft",
-        [ IsHomalgChainMap ] );
 
 DeclareOperation( "HomalgRing",
         [ IsHomalgChainMap ] );

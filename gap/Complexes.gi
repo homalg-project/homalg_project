@@ -17,7 +17,7 @@
 ##
 InstallMethod( DefectOfExactness,
         "for a homalg complexes",
-        [ IsComplexOfFinitelyPresentedModulesRep ],
+        [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
     local display, display_string, on_less_generators, left, indices, l,
@@ -66,7 +66,7 @@ InstallMethod( DefectOfExactness,
         Error( "the input is not a complex" );
     fi;
     
-    left := IsHomalgComplexOfLeftModules( C );
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( C );
     
     indices := MorphismDegreesOfComplex( C );
     
@@ -141,7 +141,7 @@ end );
 ##
 InstallMethod( DefectOfExactness,
         "for a homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedModulesRep ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
     local display, display_string, on_less_generators, left, indices, l,
@@ -190,7 +190,7 @@ InstallMethod( DefectOfExactness,
         Error( "the input is not a cocomplex" );
     fi;
     
-    left := IsHomalgComplexOfLeftModules( C );
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( C );
     
     indices := MorphismDegreesOfComplex( C );
     
@@ -269,7 +269,7 @@ InstallMethod( Homology,			### defines: Homology (HomologyModules)
         
   function( C )
     
-    if IsCocomplexOfFinitelyPresentedModulesRep( C ) then
+    if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
         Error( "this is a cocomplex: use \033[1mCohomology\033[0m instead\n" );
     fi;
     
@@ -284,7 +284,7 @@ InstallMethod( Cohomology,			### defines: Cohomology (CohomologyModules)
         
   function( C )
     
-    if IsComplexOfFinitelyPresentedModulesRep( C ) then
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
         Error( "this is a complex: use \033[1mHomology\033[0m instead\n" );
     fi;
     

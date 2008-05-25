@@ -14,7 +14,23 @@
 #
 ####################################
 
-# a new representation for the category IsContainerForWeakPointers:
+# a new representation for the GAP-category IsHomalgRingOrObject:
+DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedObjectRep",
+        IsHomalgRingOrObject,
+        [ ] );
+
+# a new representation for the GAP-category IsHomalgObject
+# which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep:
+DeclareRepresentation( "IsFinitelyPresentedObjectRep",
+        IsHomalgObject and IsHomalgRingOrFinitelyPresentedObjectRep,
+        [ ] );
+
+# a new representation for the GAP-category IsHomalgMorphism:
+DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
+        IsHomalgMorphism,
+        [ ] );
+
+# a new representation for the GAP-category IsContainerForWeakPointers:
 DeclareRepresentation( "IsContainerForWeakPointersRep",
         IsContainerForWeakPointers,
         [ "weak_pointers", "counter", "deleted" ] );
@@ -46,6 +62,7 @@ InstallValue( HOMALG,
         rec(
             TotalRuntimes := 0,
             OtherInternalMatrixTypes := [ ],
+            
             color_BOT := "\033[1;37;40m",		## (T)riangular basis: TriangularBasisOfRows/Columns
             color_BOW := "\033[1;37;40m",		## Triangular basis: TriangularBasisOfRows/Columns( M, W )
             color_BOB := "\033[1;37;45m",		## (B)asis: BasisOfRow/ColumnModule

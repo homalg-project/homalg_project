@@ -2,7 +2,7 @@
 ##
 ##  init.g                homalg package                    Mohamed Barakat
 ##
-##  Copyright 2007 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Reading the declaration part of the homalg package.
 ##
@@ -30,7 +30,7 @@ ReadPackage( "homalg", "gap/SetsOfGenerators.gd" );
 ReadPackage( "homalg", "gap/HomalgModule.gd" );
 
 ## morphisms
-ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
+ReadPackage( "homalg", "gap/HomalgMap.gd" );
 
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gd" );
@@ -49,7 +49,7 @@ ReadPackage( "homalg", "gap/Basic.gd" );
 ## main
 ReadPackage( "homalg", "gap/Modules.gd" );
 
-ReadPackage( "homalg", "gap/Morphisms.gd" );
+ReadPackage( "homalg", "gap/Maps.gd" );
 
 ReadPackage( "homalg", "gap/Complexes.gd" );
 

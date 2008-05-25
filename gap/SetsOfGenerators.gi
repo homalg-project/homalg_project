@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IsSetsOfGenerators:
+# a new representation for the GAP-category IsSetsOfGenerators:
 DeclareRepresentation( "IsSetsOfGeneratorsRep",
         IsSetsOfGenerators,
         [ ] );

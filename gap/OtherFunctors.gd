@@ -31,10 +31,10 @@ DeclareGlobalVariable( "Functor_TorsionSubmodule" );
 ####################################
 
 DeclareAttribute( "TorsionFreeFactorEpi",
-        IsHomalgMorphism );
+        IsHomalgMap );
 
 DeclareAttribute( "TorsionSubmoduleEmb",
-        IsHomalgMorphism );
+        IsHomalgMap );
 
 ####################################
 #

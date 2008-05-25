@@ -17,7 +17,7 @@
 ##
 InstallMethod( DefectOfExactness,
         "for a homalg chain maps",
-        [ IsChainMapOfFinitelyPresentedModulesRep ],
+        [ IsChainMapOfFinitelyPresentedObjectsRep ],
         
   function( c )
     
@@ -26,7 +26,7 @@ end );
 ##
 InstallMethod( DefectOfExactness,
         "for a homalg chain maps",
-        [ IsCochainMapOfFinitelyPresentedModulesRep ],
+        [ IsCochainMapOfFinitelyPresentedObjectsRep ],
         
   function( c )
     

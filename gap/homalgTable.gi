@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IshomalgTable:
+# a new representation for the GAP-category IshomalgTable:
 DeclareRepresentation( "IshomalgTableRep",
         IshomalgTable,
         [ "ring" ] );

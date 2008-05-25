@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IshomalgExternalObject:
+# a new representation for the GAP-category IshomalgExternalObject:
 DeclareRepresentation( "IshomalgExternalObjectRep",
         IshomalgExternalObject,
         [ "pointer", "cas" ] );

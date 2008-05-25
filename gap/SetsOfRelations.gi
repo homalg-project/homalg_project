@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IsSetsOfRelations:
+# a new representation for the GAP-category IsSetsOfRelations:
 DeclareRepresentation( "IsSetsOfRelationsRep",
         IsSetsOfRelations,
         [ ] );

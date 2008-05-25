@@ -14,14 +14,10 @@
 #
 ####################################
 
-# a new category of objects:
-
-DeclareCategory( "IsHomalgRingOrHomalgModule",	## we need this category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
-        IsAttributeStoringRep );
+# a new GAP-category:
 
 DeclareCategory( "IsHomalgRing",
-        IsHomalgRingOrHomalgModule
-        and IsAttributeStoringRep );
+        IsHomalgRingOrObject );
 
 DeclareCategory( "IsHomalgExternalRingElement",
         IsExtAElement

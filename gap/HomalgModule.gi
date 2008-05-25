@@ -14,10 +14,10 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgModule
-# which is a subrepresentation of IsHomalgRingOrFinitelyPresentedModuleRep:
+# a new representation for the GAP-category IsHomalgModule
+# which is a subrepresentation of the representation IsFinitelyPresentedObjectRep:
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
-        IsHomalgModule and IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgModule and IsFinitelyPresentedObjectRep,
         [ "SetsOfGenerators", "SetsOfRelations" ] );
 
 ####################################
@@ -33,11 +33,11 @@ BindGlobal( "TheFamilyOfHomalgModules",
 # two new types:
 BindGlobal( "TheTypeHomalgLeftModuleFinitelyPresented",
         NewType( TheFamilyOfHomalgModules,
-                IsFinitelyPresentedModuleRep and IsLeftModule ) );
+                IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
 BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
         NewType( TheFamilyOfHomalgModules,
-                IsFinitelyPresentedModuleRep and IsRightModule ) );
+                IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
 #
@@ -87,7 +87,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     
@@ -98,7 +98,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     
@@ -107,20 +107,9 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( IsLeft,
-        "for homalg modules",
-        [ IsHomalgModule ],
-        
-  function( M )
-    
-    return IsLeftModule( M );
-    
-end );
-
-##
 InstallOtherMethod( Zero,
         "for homalg modules",
-        [ IsHomalgModule and IsLeftModule ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking
         
   function( M )
     
@@ -131,7 +120,7 @@ end );
 ##
 InstallOtherMethod( Zero,
         "for homalg modules",
-        [ IsHomalgModule and IsRightModule ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking
         
   function( M )
     
@@ -142,7 +131,7 @@ end );
 ##
 InstallOtherMethod( One,
         "for homalg modules",
-        [ IsHomalgModule and IsLeftModule ],
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     
@@ -153,7 +142,7 @@ end );
 ##
 InstallOtherMethod( One,
         "for homalg modules",
-        [ IsHomalgModule and IsRightModule ],
+        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     
@@ -502,7 +491,7 @@ InstallMethod( TransitionMatrix,
   function( M, pos1, pos2 )
     local pres_a, pres_b, sets_of_generators, tr, sign, i, j;
     
-    if IsLeftModule( M ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         pres_a := pos2;
         pres_b := pos1;
     else
@@ -533,7 +522,7 @@ InstallMethod( TransitionMatrix,
         
         i := pres_a;
         
-        if IsLeftModule( M ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
             
             while AbsInt( pres_b - i ) > 0 do
                 for j in pres_b - sign * [ 0 .. AbsInt( pres_b - i ) - 1 ]  do
@@ -573,8 +562,8 @@ InstallMethod( AddANewPresentation,
   function( M, gen )
     local rels, gens, d, l, id, tr, itr;
     
-    if not ( IsLeftModule( M ) and IsHomalgGeneratorsOfLeftModule( gen ) )
-       and not ( IsRightModule( M ) and IsHomalgGeneratorsOfRightModule( gen ) ) then
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgGeneratorsOfLeftModule( gen ) )
+       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgGeneratorsOfRightModule( gen ) ) then
         Error( "the module and the new set of generators must either be both left or both right\n" );
     fi;
     
@@ -649,8 +638,8 @@ InstallMethod( AddANewPresentation,
   function( M, rel )
     local rels, lpos, d, gens, l, id, tr, itr;
     
-    if not ( IsLeftModule( M ) and IsHomalgRelationsOfLeftModule( rel ) )
-       and not ( IsRightModule( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgRelationsOfLeftModule( rel ) )
+       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
         Error( "the module and the new set of relations must either be both left or both right\n" );
     fi;
     
@@ -741,8 +730,8 @@ InstallMethod( AddANewPresentation,
   function( M, rel, T, TI )
     local rels, gens, d, l, gen, tr, itr;
     
-    if not ( IsLeftModule( M ) and IsHomalgRelationsOfLeftModule( rel ) )
-       and not ( IsRightModule( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgRelationsOfLeftModule( rel ) )
+       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
         Error( "the module and the new set of relations must either be both left or both right\n" );
     fi;
     
@@ -992,7 +981,7 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
         
         id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
         
-        if IsLeftModule( M ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
             rel := CertainColumns( rel, bl );
             rel := CertainRows( rel, NonZeroRows( rel ) );
             if diagonal <> fail and diagonal then
@@ -1026,7 +1015,7 @@ end );
 #_______________________________________________________________________
 InstallMethod( OnLessGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     local R, rel_old, rel, V, VI;
@@ -1055,7 +1044,7 @@ end );
 ##
 InstallMethod( OnLessGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep and IsRightModule ],
+	[ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     local R, rel_old, rel, U, UI;
@@ -1664,7 +1653,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
@@ -1703,7 +1692,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     local num_gen, num_rel, gen_string, rel_string;
@@ -1754,7 +1743,7 @@ InstallMethod( ViewObj,
     
     Print( " free " );
     
-    if IsLeftModule( M ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         Print( "left " );
     else
         Print( "right " );
@@ -1797,7 +1786,7 @@ InstallMethod( ViewObj,
     
     Print( " zero " );
     
-    if IsLeftModule( M ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         Print( "left" );
     else
         Print( "right" );
@@ -1810,7 +1799,7 @@ end );
 ##
 InstallMethod( PrintObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     
@@ -1833,7 +1822,7 @@ end );
 ##
 InstallMethod( PrintObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     
@@ -1856,7 +1845,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsLeftModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     local R, l, D;
@@ -1888,7 +1877,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsRightModule ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     local R, l, D;
@@ -1965,7 +1954,7 @@ InstallMethod( Display,
     fi;
     
     if rk <> 0 then
-        if IsLeftModule ( M ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects ( M ) then
             Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
         else
             Print( display, name, "^(\033[01m", rk, "\033[0m x 1)\n" );

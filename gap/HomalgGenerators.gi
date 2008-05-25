@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new representation for the category IsHomalgGenerators:
+# a new representation for the GAP-category IsHomalgGenerators:
 DeclareRepresentation( "IsHomalgGeneratorsOfFinitelyGeneratedModuleRep",
         IsHomalgGenerators,
         [ "generators", "relations_of_hullmodule" ] );
