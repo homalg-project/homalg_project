@@ -1,5 +1,0 @@
-#!/bin/sh
-
-git-checkout devel
-git-checkout -b simon
-git-pull barakat@bob:/home/simon/gap/pkg/IO_ForHomalg simon
