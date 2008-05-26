@@ -78,7 +78,7 @@ InstallMethod( CreateHomalgTable,
                                       ), "need_command", HOMALG_IO.Pictograms.Involution );
                else
                   ## in case of a commutative ring
-                  homalgSendBlocking( [ "matrix ", I, " = transpose( involution( ", M, ", F ) )" ], "need_command", HOMALG_IO.Pictograms.Involution );
+                  homalgSendBlocking( [ "matrix ", I, " = transpose( ", M, " )" ], "need_command", HOMALG_IO.Pictograms.Involution );
                fi;
                ResetFilterObj( I, IsVoidMatrix );
                return I;
