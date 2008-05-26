@@ -115,9 +115,6 @@ DeclareGlobalFunction( "GetGenerators" );
 
 # basic operations:
 
-DeclareOperation( "HomalgRing",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "SetsOfGenerators",
         [ IsHomalgModule ] );
 
@@ -199,12 +196,6 @@ DeclareOperation( "AddANewPresentation",
 DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgRelations, IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "BasisOfModule",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "DecideZero",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
@@ -224,9 +215,6 @@ DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );
 
 DeclareOperation( "GetRidOfObsoleteGenerators",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "OnLessGenerators",
         [ IsHomalgModule ] );
 
 ####################################

@@ -20,7 +20,7 @@ InstallMethod( DefectOfExactness,
         [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
-    local display, display_string, on_less_generators, left, indices, l,
+    local display, display_string, on_less_generators, left, degrees, l,
           morphisms, T, H, i, S;
     
     if IsBound( C!.DisplayHomology ) and C!.DisplayHomology = true then
@@ -68,22 +68,22 @@ InstallMethod( DefectOfExactness,
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( C );
     
-    indices := MorphismDegreesOfComplex( C );
+    degrees := MorphismDegreesOfComplex( C );
     
-    l := Length(indices);
+    l := Length(degrees);
     
     morphisms := MorphismsOfComplex( C );
     
     if not IsBound( C!.SkipLowestDegreeHomology ) then
         T := Cokernel( morphisms[1] );
-        H := HomalgComplex( T, indices[1] - 1 );
+        H := HomalgComplex( T, degrees[1] - 1 );
     else
         if left then
             T := DefectOfExactness( [ morphisms[2], morphisms[1] ] );
         else
             T := DefectOfExactness( [ morphisms[1], morphisms[2] ] );
         fi;
-        H := HomalgComplex( T, indices[1] );
+        H := HomalgComplex( T, degrees[1] );
         morphisms := morphisms{[ 2 .. l ]};
         l := l - 1;
     fi;
@@ -144,7 +144,7 @@ InstallMethod( DefectOfExactness,
         [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
-    local display, display_string, on_less_generators, left, indices, l,
+    local display, display_string, on_less_generators, left, degrees, l,
           morphisms, S, H, i, T;
     
     if IsBound( C!.DisplayCohomology ) and C!.DisplayCohomology = true then
@@ -192,22 +192,22 @@ InstallMethod( DefectOfExactness,
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( C );
     
-    indices := MorphismDegreesOfComplex( C );
+    degrees := MorphismDegreesOfComplex( C );
     
-    l := Length(indices);
+    l := Length(degrees);
     
     morphisms := MorphismsOfComplex( C );
     
     if not IsBound( C!.SkipLowestDegreeCohomology ) then
         S := Kernel( morphisms[1] );
-        H := HomalgCocomplex( S, indices[1] );
+        H := HomalgCocomplex( S, degrees[1] );
     else
         if left then
             S := DefectOfExactness( [ morphisms[1], morphisms[2] ] );
         else
             S := DefectOfExactness( [ morphisms[2], morphisms[1] ] );
         fi;
-        H := HomalgCocomplex( S, indices[1] + 1 );
+        H := HomalgCocomplex( S, degrees[1] + 1 );
         morphisms := morphisms{[ 2 .. l ]};
         l := l - 1;
     fi;

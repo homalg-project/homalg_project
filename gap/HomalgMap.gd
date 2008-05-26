@@ -17,21 +17,17 @@
 # two new categories:
 
 DeclareCategory( "IsHomalgMap",
-        IsHomalgMorphism
-        and IsAttributeStoringRep );
+        IsHomalgMorphism );
 
-DeclareCategory( "IsHomalgSelfMap",	## it is extremely important to let this filter be a GAP-category and NOT a representation or a property,
-        IsHomalgMap				## since endomorphisms should be multiplicative elements from the beginning!!
-        and IsMultiplicativeElementWithInverse );
+DeclareCategory( "IsHomalgSelfMap",
+        IsHomalgMap and
+        IsHomalgEndomorphism );
 
 ####################################
 #
 # properties:
 #
 ####################################
-
-DeclareProperty( "IsMorphism",
-        IsHomalgMap );
 
 DeclareProperty( "IsIdentityMorphism",
         IsHomalgMap );
@@ -59,18 +55,6 @@ DeclareProperty( "IsTobBeViewedAsAMonomorphism",
 
 ####################################
 #
-# attributes:
-#
-####################################
-
-DeclareAttribute( "Source",
-        IsHomalgMap );
-
-DeclareAttribute( "Target",
-        IsHomalgMap );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
@@ -85,50 +69,20 @@ DeclareGlobalFunction( "HomalgIdentityMorphism" );
 
 # basic operations:
 
-DeclareOperation( "HomalgRing",
-        [ IsHomalgMap ] );
-
 DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
         [ IsHomalgMap ] );
 
-DeclareOperation( "MatrixOfMorphism",
+DeclareOperation( "MatrixOfHomomorphism",
         [ IsHomalgMap, IsPosInt, IsPosInt ] );
 
-DeclareOperation( "MatrixOfMorphism",
+DeclareOperation( "MatrixOfHomomorphism",
         [ IsHomalgMap, IsPosInt ] );
 
-DeclareOperation( "MatrixOfMorphism",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "AreComparableMorphisms",
-        [ IsHomalgMap, IsHomalgMap ] );
-
-DeclareOperation( "AreComposableMorphisms",
-        [ IsHomalgMap, IsHomalgMap ] );
-
-DeclareOperation( "LeftInverse",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "RightInverse",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "*",					## this must remain, since an element in IsHomalgMap
-        [ IsHomalgMap, IsHomalgMap ] );	## is not a priori IsMultiplicativeElement
-
-DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMap
-        [ IsHomalgMap, IsInt ] );			## is not a priori IsMultiplicativeElement
-
-DeclareOperation( "OnLessGenerators",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "BasisOfModule",
+DeclareOperation( "MatrixOfHomomorphism",
         [ IsHomalgMap ] );
 
 DeclareOperation( "DecideZero",
         [ IsHomalgMap, IsHomalgRelations ] );
-
-DeclareOperation( "DecideZero",
-        [ IsHomalgMap ] );
 
 DeclareOperation( "UnionOfRelations",
         [ IsHomalgMap ] );

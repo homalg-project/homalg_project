@@ -86,9 +86,6 @@ DeclareOperation( "LowestDegreeObjectInComplex",
 DeclareOperation( "HighestDegreeObjectInComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "HomalgRing",
-        [ IsHomalgComplex ] );
-
 DeclareOperation( "SupportOfComplex",
         [ IsHomalgComplex ] );
 
@@ -97,7 +94,4 @@ DeclareOperation( "Add",
 
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMatrix ] );
-
-DeclareOperation( "OnLessGenerators",
-        [ IsHomalgComplex ] );
 

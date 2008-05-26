@@ -19,33 +19,9 @@
 DeclareCategory( "IsHomalgChainMap",
         IsHomalgMorphism );
 
-DeclareCategory( "IsHomalgChainSelfMap",	## it is extremely important to let this filter be a GAP-category and NOT a representation or a property,
-        IsHomalgChainMap			## since chain self maps should be multiplicative elements from the beginning!!
-        and IsMultiplicativeElementWithInverse );
-
-####################################
-#
-# properties:
-#
-####################################
-
-DeclareProperty( "IsMorphism",
-        IsHomalgChainMap );
-
-####################################
-#
-# attributes:
-#
-####################################
-
-DeclareAttribute( "Source",
-        IsHomalgChainMap );
-
-DeclareAttribute( "Target",
-        IsHomalgChainMap );
-
-DeclareAttribute( "DegreeOfChainMap",
-        IsHomalgChainMap );
+DeclareCategory( "IsHomalgChainSelfMap",
+        IsHomalgChainMap and
+        IsHomalgEndomorphism );
 
 ####################################
 #
@@ -60,9 +36,6 @@ DeclareGlobalFunction( "homalgResetFiltersOfChainMap" );
 DeclareGlobalFunction( "HomalgChainMap" );
 
 # basic operations:
-
-DeclareOperation( "HomalgRing",
-        [ IsHomalgChainMap ] );
 
 DeclareOperation( "DegreesOfChainMap",
         [ IsHomalgChainMap ] );
@@ -102,7 +75,4 @@ DeclareOperation( "Add",
 
 DeclareOperation( "Add",
         [ IsHomalgChainMap, IsHomalgMatrix ] );
-
-DeclareOperation( "OnLessGenerators",
-        [ IsHomalgChainMap ] );
 

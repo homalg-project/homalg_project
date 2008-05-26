@@ -30,20 +30,22 @@ DeclareGlobalVariable( "HOMALG" );
 DeclareCategory( "IsHomalgRingOrObject",	## this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule and IsHomalgComplex:
         IsAttributeStoringRep );		## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
 
-DeclareCategory( "IsHomalgObjectOrMorphism",
-        IsExtLElement
-        and IsAttributeStoringRep );
+DeclareCategory( "IsHomalgObjectOrMorphism",	## this is the super GAP-category which will include the GAP-categories IsHomalgModule, IsHomalgMap, IsHomalgComplex and IsHomalgChainMap:
+        IsExtLElement and			## with this GAP-category we can have a common declaration for things like OnLessGenerators, BasisOfModule, DecideZero
+        IsAttributeStoringRep );
 
 DeclareCategory( "IsHomalgObject",		## this is the super GAP-category which will include the GAP-categories IsHomalgModule and IsHomalgComplex:
-        IsHomalgObjectOrMorphism		## and to be able to build complexes with *objects* being modules or again complexes!
-        and IsHomalgRingOrObject
-        and IsAdditiveElementWithZero
-        and IsAttributeStoringRep );
+        IsHomalgObjectOrMorphism and		## we need this GAP-category to be able to build complexes with *objects* being modules or again complexes!
+        IsHomalgRingOrObject and
+        IsAdditiveElementWithZero );
 
-DeclareCategory( "IsHomalgMorphism",		## this is the super GAP-category which will include the GAP-categories IsHomalgMorphism and IsHomalgChainMap:
-        IsHomalgObjectOrMorphism		## we need this GAP-category to be able to build chain maps with *morphisms* being homomorphisms or again chain maps!
-        and IsAdditiveElementWithInverse
-        and IsAttributeStoringRep );		## CAUTION: never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!
+DeclareCategory( "IsHomalgMorphism",		## this is the super GAP-category which will include the GAP-categories IsHomalgMap and IsHomalgChainMap:
+        IsHomalgObjectOrMorphism and		## we need this GAP-category to be able to build chain maps with *morphisms* being homomorphisms or again chain maps!
+        IsAdditiveElementWithInverse );		## CAUTION: never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!
+
+DeclareCategory( "IsHomalgEndomorphism",	## this is the super GAP-category which will include the GAP-categories IsHomalgSelfMap and IsHomalgChainSelfMap
+        IsHomalgMorphism and
+        IsMultiplicativeElementWithInverse );
 
 DeclareCategory( "IsHomalgLeftObjectOrMorphismOfLeftObjects",
         IsHomalgObjectOrMorphism );
@@ -55,6 +57,30 @@ DeclareCategory( "IsHomalgRightObjectOrMorphismOfRightObjects",
 
 DeclareCategory( "IsContainerForWeakPointers",
         IsComponentObjectRep );
+
+####################################
+#
+# properties:
+#
+####################################
+
+DeclareProperty( "IsMorphism",
+        IsHomalgMorphism );
+
+####################################
+#
+# attributes:
+#
+####################################
+
+DeclareAttribute( "Source",
+        IsHomalgMorphism );
+
+DeclareAttribute( "Target",
+        IsHomalgMorphism );
+
+DeclareAttribute( "DegreeOfMorphism",
+        IsHomalgMorphism );
 
 ####################################
 #
@@ -73,6 +99,36 @@ DeclareGlobalFunction( "InstallLogicalImplicationsForHomalg" );
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 
 # basic operations:
+
+DeclareOperation( "HomalgRing",
+        [ IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "AreComparableMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "AreComposableMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "LeftInverse",
+        [ IsHomalgMorphism ] );
+
+DeclareOperation( "RightInverse",
+        [ IsHomalgMorphism ] );
+
+DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement
+
+DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
+
+DeclareOperation( "OnLessGenerators",
+        [ IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "BasisOfModule",
+        [ IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "DecideZero",
+        [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "homalgLaTeX",
         [ IsObject ] ); 

@@ -94,7 +94,7 @@ InstallImmediateMethod( IsTorsion,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
-    local l, b, i, rel, mat;
+    local l, b, i, rel;
     
     l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
     
@@ -105,10 +105,8 @@ InstallImmediateMethod( IsTorsion,
         rel := SetsOfRelations( M )!.(i);
         
         if not IsString( rel ) then
-            mat := MatrixOfRelations( rel );
-     
-            if HasNrRows( mat ) and HasNrColumns( mat )
-              and NrColumns( mat ) > NrRows( mat ) then
+            if HasNrGenerators( rel ) and HasNrRelations( rel ) and
+               NrGenerators( rel ) > NrRelations( rel ) then
                 b := true;
                 break;
             fi;

@@ -543,17 +543,17 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
             "for homalg complexes",
             [ filter_cpx ],
       function( c )
-        local indices, l, morphisms, Fc, m;
+        local degrees, l, morphisms, Fc, m;
         
-        indices := ObjectDegreesOfComplex( c );
+        degrees := ObjectDegreesOfComplex( c );
         
-        l := Length( indices );
+        l := Length( degrees );
         
         if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( CertainObject( c, indices[1] ) ), indices[1] );
+            Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ) ), degrees[1] );
         else
             morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex( functor_name( morphisms[1] ), indices[i] );
+            Fc := complex_or_cocomplex( functor_name( morphisms[1] ), degrees[i] );
             for m in morphisms{[ 2 .. l - 1 ]} do
                 Add( Fc, functor_name( m ) );
             od;
@@ -591,7 +591,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
             "for homalg complexes",
             [ filter1_cpx, filter2_obj ],
       function( c, o )
-        local obj, indices, l, morphisms, Fc, m;
+        local obj, degrees, l, morphisms, Fc, m;
         
         if IsHomalgModule( o ) then	## the most probable case
             obj := o;
@@ -606,15 +606,15 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
             obj := o;
         fi;
         
-        indices := ObjectDegreesOfComplex( c );
+        degrees := ObjectDegreesOfComplex( c );
         
-        l := Length( indices );
+        l := Length( degrees );
         
         if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( CertainObject( c, indices[1] ), obj ), indices[1] );
+            Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ), obj ), degrees[1] );
         else
             morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), indices[i] );
+            Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), degrees[i] );
             for m in morphisms{[ 2 .. l - 1 ]} do
                 Add( Fc, functor_name( m, obj ) );
             od;
@@ -636,7 +636,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
             "for homalg complexes",
             [ filter1_obj, filter2_cpx ],
       function( o, c )
-        local obj, indices, l, morphisms, Fc, m;
+        local obj, degrees, l, morphisms, Fc, m;
         
         if IsHomalgModule( o ) then	## the most probable case
             obj := o;
@@ -651,15 +651,15 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
             obj := o;
         fi;
         
-        indices := ObjectDegreesOfComplex( c );
+        degrees := ObjectDegreesOfComplex( c );
         
-        l := Length( indices );
+        l := Length( degrees );
         
         if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, indices[1] ) ), indices[1] );
+            Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
         else
             morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), indices[i] );
+            Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), degrees[i] );
             for m in morphisms{[ 2 .. l - 1 ]} do
                 Add( Fc, functor_name( obj, m ) );
             od;
@@ -786,20 +786,20 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
             "for homalg chain maps",
             [ filter_chm ],
       function( c )
-        local d, indices, l, source, target, morphisms, Fc, m;
+        local d, degrees, l, source, target, morphisms, Fc, m;
         
-        d := DegreeOfChainMap( c );
+        d := DegreeOfMorphism( c );
         
-        indices := DegreesOfChainMap( c );
+        degrees := DegreesOfChainMap( c );
         
-        l := Length( indices );
+        l := Length( degrees );
         
         source := functor_name( source_target[1]( c ) );
         target := functor_name( source_target[2]( c ) );
         
         morphisms := MorphismsOfChainMap( c );
         
-        Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ indices[1] + i * d, (-1)^i * d ] );
+        Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
         
         for m in morphisms{[ 2 .. l ]} do
             Add( Fc, functor_name( m ) );
@@ -837,7 +837,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
             "for homalg chain maps",
             [ filter1_chm, filter2_obj ],
       function( c, o )
-        local obj, d, indices, l, source, target, morphisms, Fc, m;
+        local obj, d, degrees, l, source, target, morphisms, Fc, m;
         
         if IsHomalgModule( o ) then	## the most probable case
             obj := o;
@@ -852,18 +852,18 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
             obj := o;
         fi;
         
-        d := DegreeOfChainMap( c );
+        d := DegreeOfMorphism( c );
         
-        indices := DegreesOfChainMap( c );
+        degrees := DegreesOfChainMap( c );
         
-        l := Length( indices );
+        l := Length( degrees );
         
         source := functor_name( source_target[1]( c ), obj );
         target := functor_name( source_target[2]( c ), obj );
         
         morphisms := MorphismsOfChainMap( c );
         
-        Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ indices[1] + i * d, (-1)^i * d ] );
+        Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
         
         for m in morphisms{[ 2 .. l ]} do
             Add( Fc, functor_name( m, obj ) );
@@ -885,7 +885,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
             "for homalg chain maps",
             [ filter1_obj, filter2_chm ],
       function( o, c )
-        local obj, d, indices, l, source, target, morphisms, Fc, m;
+        local obj, d, degrees, l, source, target, morphisms, Fc, m;
         
         if IsHomalgModule( o ) then	## the most probable case
             obj := o;
@@ -900,18 +900,18 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
             obj := o;
         fi;
         
-        d := DegreeOfChainMap( c );
+        d := DegreeOfMorphism( c );
         
-        indices := DegreesOfChainMap( c );
+        degrees := DegreesOfChainMap( c );
         
-        l := Length( indices );
+        l := Length( degrees );
         
         source := functor_name( obj, source_target[1]( c ) );
         target := functor_name( obj, source_target[2]( c ) );
         
         morphisms := MorphismsOfChainMap( c );
         
-        Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ indices[1] + i * d, (-1)^i * d ] );
+        Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
         
         for m in morphisms{[ 2 .. l ]} do
             Add( Fc, functor_name( obj, m ) );

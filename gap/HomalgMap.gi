@@ -112,7 +112,7 @@ InstallImmediateMethod( IsZero,
         
   function( phi )
     
-    if HasIsZero( MatrixOfMorphism( phi ) ) and IsZero( MatrixOfMorphism( phi ) ) then
+    if HasIsZero( MatrixOfHomomorphism( phi ) ) and IsZero( MatrixOfHomomorphism( phi ) ) then
         return true;
     fi;
     
@@ -163,7 +163,7 @@ InstallMethod( IsMorphism,
   function( phi )
     local mat;
     
-    mat := MatrixOfRelations( Source( phi ) ) * MatrixOfMorphism( phi );
+    mat := MatrixOfRelations( Source( phi ) ) * MatrixOfHomomorphism( phi );
     
     return IsZero( DecideZero( mat , RelationsOfModule( Target( phi ) ) ) );
     
@@ -177,7 +177,7 @@ InstallMethod( IsMorphism,
   function( phi )
     local mat;
     
-    mat := MatrixOfMorphism( phi ) * MatrixOfRelations( Source( phi ) );
+    mat := MatrixOfHomomorphism( phi ) * MatrixOfRelations( Source( phi ) );
     
     return IsZero( DecideZero( mat , RelationsOfModule( Target( phi ) ) ) );
     
@@ -275,7 +275,7 @@ InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
 end );
 
 ##
-InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortest ways
+InstallMethod( MatrixOfHomomorphism,		## FIXME: make this optimal by finding shortest ways
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsPosInt, IsPosInt ],
         
@@ -325,18 +325,18 @@ InstallMethod( MatrixOfMorphism,		## FIXME: make this optimal by finding shortes
 end );
 
 ##
-InstallMethod( MatrixOfMorphism,
+InstallMethod( MatrixOfHomomorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgSelfMap, IsPosInt ],
         
   function( phi, pos_s_t )
     
-    return MatrixOfMorphism( phi, pos_s_t, pos_s_t );
+    return MatrixOfHomomorphism( phi, pos_s_t, pos_s_t );
     
 end );
 
 ##
-InstallMethod( MatrixOfMorphism,
+InstallMethod( MatrixOfHomomorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
@@ -346,7 +346,7 @@ InstallMethod( MatrixOfMorphism,
     pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
     pos_t := PositionOfTheDefaultSetOfRelations( Target( phi ) );
     
-    return MatrixOfMorphism( phi, pos_s, pos_t );
+    return MatrixOfHomomorphism( phi, pos_s, pos_t );
     
 end );
 
@@ -388,7 +388,7 @@ end );
 
 ##
 InstallMethod( \=,
-        "for homalg comparable morphisms",
+        "for two comparable homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
@@ -397,7 +397,7 @@ InstallMethod( \=,
         return false;
     fi;
     
-    return MatrixOfMorphism( phi1 ) = MatrixOfMorphism( phi2 ); ## FIXME: compare any already evaluated matrices
+    return MatrixOfHomomorphism( phi1 ) = MatrixOfHomomorphism( phi2 ); ## FIXME: compare any already evaluated matrices
     
 end );
 
@@ -408,7 +408,7 @@ InstallMethod( ZeroMutable,
         
   function( phi )
     
-    return HomalgMorphism( 0 * MatrixOfMorphism( phi ), Source( phi ), Target( phi ) );
+    return HomalgMorphism( 0 * MatrixOfHomomorphism( phi ), Source( phi ), Target( phi ) );
     
 end );
 
@@ -419,7 +419,7 @@ InstallMethod( \*,
         
   function( a, phi )
     
-    return HomalgMorphism( a * MatrixOfMorphism( phi ), Source( phi ), Target( phi ) );
+    return HomalgMorphism( a * MatrixOfHomomorphism( phi ), Source( phi ), Target( phi ) );
     
 end );
 
@@ -431,16 +431,16 @@ InstallMethod( \+,
   function( phi1, phi2 )
     
     if not AreComparableMorphisms( phi1, phi2 ) then
-        return false;
+        return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMorphism( MatrixOfMorphism( phi1 ) + MatrixOfMorphism( phi2 ), Source( phi1 ), Target( phi1 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) + MatrixOfHomomorphism( phi2 ), Source( phi1 ), Target( phi1 ) );
     
 end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "of homalg morphisms",
+        "of homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -451,7 +451,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "of homalg morphisms",
+        "of homalg maps",
         [ IsHomalgMap and IsZero ],
         
   function( phi )
@@ -468,10 +468,10 @@ InstallMethod( \-,
   function( phi1, phi2 )
     
     if not AreComparableMorphisms( phi1, phi2 ) then
-        return false;
+        return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMorphism( MatrixOfMorphism( phi1 ) - MatrixOfMorphism( phi2 ), Source( phi1 ), Target( phi1 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) - MatrixOfHomomorphism( phi2 ), Source( phi1 ), Target( phi1 ) );
     
 end );
 
@@ -487,7 +487,7 @@ InstallMethod( \*,
         Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMorphism( MatrixOfMorphism( phi1 ) * MatrixOfMorphism( phi2 ), Source( phi1 ), Target( phi2 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) * MatrixOfHomomorphism( phi2 ), Source( phi1 ), Target( phi2 ) );
     
 end );
 
@@ -503,7 +503,7 @@ InstallMethod( \*,
         Error( "the two morphisms are not composable, since the target of the right one and the target of the left one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMorphism( MatrixOfMorphism( phi2 ) * MatrixOfMorphism( phi1 ), Source( phi1 ), Target( phi2 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi2 ) * MatrixOfHomomorphism( phi1 ), Source( phi1 ), Target( phi2 ) );
     
 end );
 
@@ -554,8 +554,8 @@ InstallMethod( BasisOfModule,
         
   function( phi )
     
-    OnLessGenerators( Source( phi ) );
-    OnLessGenerators( Target( phi ) );
+    BasisOfModule( Source( phi ) );
+    BasisOfModule( Target( phi ) );
     
     return phi;
     
@@ -568,7 +568,7 @@ InstallMethod( DecideZero,
         
   function( phi, rel )
     
-    return DecideZero( MatrixOfMorphism( phi ) , rel );
+    return DecideZero( MatrixOfHomomorphism( phi ) , rel );
     
 end );
 
@@ -586,7 +586,7 @@ InstallMethod( DecideZero,
     
     index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
     
-    matrix := MatrixOfMorphism( phi );
+    matrix := MatrixOfHomomorphism( phi );
     
     reduced := DecideZero( matrix, rel );
     
@@ -607,7 +607,7 @@ InstallMethod( UnionOfRelations,
         
   function( phi )
     
-    return UnionOfRelations( MatrixOfMorphism( phi ), Target( phi ) );
+    return UnionOfRelations( MatrixOfHomomorphism( phi ), Target( phi ) );
     
 end );
 
@@ -618,7 +618,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( phi )
     
-    return SyzygiesGenerators( MatrixOfMorphism( phi ), Target( phi ) );
+    return SyzygiesGenerators( MatrixOfHomomorphism( phi ), Target( phi ) );
     
 end );
 
@@ -656,7 +656,7 @@ InstallMethod( PostDivide,			### defines: PostDivide (RightDivide (high-level))
     
     N := RelationsOfModule( N );
     
-    psi := RightDivide( MatrixOfMorphism( gamma ), MatrixOfMorphism( beta ), N );
+    psi := RightDivide( MatrixOfHomomorphism( gamma ), MatrixOfHomomorphism( beta ), N );
     
     if psi = fail then
         Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
@@ -694,7 +694,7 @@ InstallMethod( PostDivide,			### defines: PostDivide (LeftDivide (high-level))
     
     N := RelationsOfModule( N );
     
-    psi := LeftDivide( MatrixOfMorphism( beta ), MatrixOfMorphism( gamma ), N );
+    psi := LeftDivide( MatrixOfHomomorphism( beta ), MatrixOfHomomorphism( gamma ), N );
     
     if psi = fail then
         Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
@@ -1402,7 +1402,7 @@ InstallMethod( Display,
         
   function( o )
     
-    Display( MatrixOfMorphism( o ) );
+    Display( MatrixOfHomomorphism( o ) );
     
 end );
 

@@ -91,7 +91,7 @@ end );
 ## ( cf. [BR, Subsection 3.2.1] )
 InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
   function( arg )
-    local nargs, M, R, q, B, d, indices, j, d_j, F_j, id, S, i, left;
+    local nargs, M, R, q, B, d, degrees, j, d_j, F_j, id, S, i, left;
     
     ## all options of Maple's homalg are obsolete now:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
@@ -136,9 +136,9 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
     if HasFreeResolution( M ) then
         d := FreeResolution( M );
-        indices := ObjectDegreesOfComplex( d );
-        j := Length( indices );
-        j := indices[j];
+        degrees := ObjectDegreesOfComplex( d );
+        j := Length( degrees );
+        j := degrees[j];
         d_j := CertainMorphism( d, j );
         if not IsBound( d!.LastSyzygies ) then
             d!.LastSyzygies := SyzygiesGenerators( d_j );

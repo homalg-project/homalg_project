@@ -93,7 +93,7 @@ InstallMethod( IsMorphism,
         [ IsHomalgChainMap ],
         
   function( c )
-    local indices, l, S, T;
+    local degrees, l, S, T;
     
     if not IsComplex( Source( c ) ) then
         return false;
@@ -101,11 +101,11 @@ InstallMethod( IsMorphism,
         return false;
     fi;
     
-    indices := DegreesOfChainMap( c );
+    degrees := DegreesOfChainMap( c );
     
-    l := Length( indices );
+    l := Length( degrees );
     
-    indices := indices{[ 1 .. l - 1 ]};
+    degrees := degrees{[ 1 .. l - 1 ]};
     
     S := Source( c );
     T := Target( c );
@@ -117,13 +117,13 @@ InstallMethod( IsMorphism,
             Error( "not implemented for chain maps containing as single morphism\n" );
         fi;
     elif IsChainMapOfFinitelyPresentedObjectsRep( c ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-        return ForAll( indices, i -> CertainMorphism( c, i + 1 ) * CertainMorphism( T, i + 1 ) = CertainMorphism( S, i + 1 ) * CertainMorphism( c, i ) );
+        return ForAll( degrees, i -> CertainMorphism( c, i + 1 ) * CertainMorphism( T, i + 1 ) = CertainMorphism( S, i + 1 ) * CertainMorphism( c, i ) );
     elif IsCochainMapOfFinitelyPresentedObjectsRep( c ) and IsHomalgRightObjectOrMorphismOfRightObjects( c ) then
-        return ForAll( indices, i -> CertainMorphism( T, i ) * CertainMorphism( c, i ) = CertainMorphism( c, i + 1 ) * CertainMorphism( S, i ) );
+        return ForAll( degrees, i -> CertainMorphism( T, i ) * CertainMorphism( c, i ) = CertainMorphism( c, i + 1 ) * CertainMorphism( S, i ) );
     elif IsChainMapOfFinitelyPresentedObjectsRep( c ) and IsHomalgRightObjectOrMorphismOfRightObjects( c ) then
-        return ForAll( indices, i -> CertainMorphism( T, i + 1 ) * CertainMorphism( c, i + 1 ) = CertainMorphism( c, i ) * CertainMorphism( S, i + 1 ) );
+        return ForAll( degrees, i -> CertainMorphism( T, i + 1 ) * CertainMorphism( c, i + 1 ) = CertainMorphism( c, i ) * CertainMorphism( S, i + 1 ) );
     else
-        return ForAll( indices, i -> CertainMorphism( c, i ) * CertainMorphism( T, i ) = CertainMorphism( S, i ) * CertainMorphism( c, i + 1 ) );
+        return ForAll( degrees, i -> CertainMorphism( c, i ) * CertainMorphism( T, i ) = CertainMorphism( S, i ) * CertainMorphism( c, i + 1 ) );
     fi;
     
 end );
@@ -152,7 +152,7 @@ InstallMethod( DegreesOfChainMap,		## this might differ from ObjectDegreesOfComp
         
   function( c )
     
-    return c!.indices;
+    return c!.degrees;
     
 end );
 
@@ -199,11 +199,11 @@ InstallMethod( MorphismsOfChainMap,
         [ IsHomalgChainMap ],
         
   function( c )
-    local indices;
+    local degrees;
     
-    indices := DegreesOfChainMap( c );
+    degrees := DegreesOfChainMap( c );
     
-    return List( indices, i -> CertainMorphism( c, i ) );
+    return List( degrees, i -> CertainMorphism( c, i ) );
     
 end );
 
@@ -224,11 +224,11 @@ InstallMethod( HighestDegreeInChainMap,
         [ IsHomalgChainMap ],
         
   function( c )
-    local indices;
+    local degrees;
     
-    indices := ObjectDegreesOfComplex( c );
+    degrees := ObjectDegreesOfComplex( c );
     
-    return indices[Length( indices )];
+    return degrees[Length( degrees )];
     
 end );
 
@@ -260,14 +260,14 @@ InstallMethod( SupportOfChainMap,
         [ IsHomalgChainMap ],
         
   function( c )
-    local indices, morphisms, l;
+    local degrees, morphisms, l;
     
-    indices := DegreesOfChainMap( c );
+    degrees := DegreesOfChainMap( c );
     morphisms := MorphismsOfChainMap( c );
     
-    l := Length( indices );
+    l := Length( degrees );
     
-    return indices{ Filtered( [ 1 .. l ], i -> not IsZero( morphisms[i] ) ) };
+    return degrees{ Filtered( [ 1 .. l ], i -> not IsZero( morphisms[i] ) ) };
     
 end );
 
@@ -277,31 +277,338 @@ InstallMethod( Add,
         [ IsHomalgChainMap, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( c, phi )
-    local indices, l;
+    local degrees, l;
     
-    indices := DegreesOfChainMap( c );
+    degrees := DegreesOfChainMap( c );
     
-    l := Length( indices );
+    l := Length( degrees );
     
-    l := indices[l] + 1;
+    l := degrees[l] + 1;
     
     if not l in ObjectDegreesOfComplex( c ) then
         Error( "there is no module in the source complex with index ", l, "\n" );
     fi;
     
-    if not IsIdenticalObj( CertainObject( Source( c ), l ), Source( phi ) ) then
-        Error( "the ", l, ". module of the source complex in the chain map and the source of the new morphism are not identically the same module\n" );
-    elif not IsIdenticalObj( CertainObject( Target( c ), l ), Target( phi ) ) then
-        Error( "the ", l, ". module of the target complex in the chain map and the target of the new morphism are not identically the same module\n" );
+    if CertainObject( Source( c ), l ) <> Source( phi ) then
+        Error( "the ", l, ". module of the source complex in the chain map and the source of the new morphism are not the same object\n" );
+    elif CertainObject( Target( c ), l ) <> Target( phi ) then
+        Error( "the ", l, ". module of the target complex in the chain map and the target of the new morphism are not the same object\n" );
     fi;
     
-    Add( indices, l );
+    Add( degrees, l );
     
     c!.(String( l )) := phi;
     
     homalgResetFiltersOfChainMap( c );
     
     return c;
+    
+end );
+
+##
+InstallMethod( AreComparableMorphisms,
+        "for homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
+        
+  function( phi1, phi2 )
+    
+    return Source( phi1 ) = Source( phi2 ) and
+           Target( phi1 ) = Target( phi2 ) and
+           DegreeOfMorphism( phi1 ) = DegreeOfMorphism( phi2 );;
+    
+end );
+
+##
+InstallMethod( AreComposableMorphisms,
+        "for homalg chain maps",
+        [ IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi1, phi2 )
+    
+    return Target( phi1 ) = Source( phi2 );
+    
+end );
+
+##
+InstallMethod( AreComposableMorphisms,
+        "for homalg chain maps",
+        [ IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi2, phi1 )
+    
+    return Target( phi1 ) = Source( phi2 );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for two comparable homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
+        
+  function( phi1, phi2 )
+    local morphisms1, morphisms2;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return false;
+    fi;
+    
+    morphisms1 := MorphismsOfChainMap( phi1 );
+    morphisms2 := MorphismsOfChainMap( phi2 );
+    
+    return ForAll( [ 1 .. Length( morphisms1 ) ], i -> morphisms1[i] = morphisms2[i] );
+    
+end );
+
+##
+InstallMethod( ZeroMutable,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    local degree, S, T, degrees, morphisms, zeta, i;
+    
+    degree := DegreeOfMorphism( phi );
+    
+    S := Source( phi );
+    T := Target( phi );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms := MorphismsOfChainMap( phi );
+    
+    zeta := HomalgChainMap( 0 * morphisms[1], S, T, [ degrees[1], degree ] );
+    
+    for i in [ 2 .. Length( morphisms ) ] do
+        Add( zeta, 0 * morphisms[i] );
+    od;
+    
+    return zeta;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg chain maps",
+        [ IsRingElement, IsHomalgChainMap ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
+        
+  function( a, phi )
+    local degree, S, T, degrees, morphisms, psi, i;
+    
+    degree := DegreeOfMorphism( phi );
+    
+    S := Source( phi );
+    T := Target( phi );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms := MorphismsOfChainMap( phi );
+    
+    psi := HomalgChainMap( a * morphisms[1], S, T, [ degrees[1], degree ] );
+    
+    for i in [ 2 .. Length( morphisms ) ] do
+        Add( psi, a * morphisms[i] );
+    od;
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
+        
+  function( phi1, phi2 )
+    local degree, S, T, degrees, morphisms1, morphisms2, psi, i;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return Error( "the two chain maps are not comparable" );
+    fi;
+    
+    degree := DegreeOfMorphism( phi1 );
+    
+    S := Source( phi1 );
+    T := Target( phi1 );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms1 := MorphismsOfChainMap( phi1 );
+    morphisms2 := MorphismsOfChainMap( phi2 );
+    
+    psi := HomalgChainMap( morphisms1[1] + morphisms2[1], S, T, [ degrees[1], degree ] );
+    
+    for i in [ 2 .. Length( morphisms1 ) ] do
+        Add( psi, morphisms1[i] + morphisms2[i] );
+    od;
+    
+    return psi;
+    
+end );
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "of homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    return MinusOne( HomalgRing( phi ) ) * phi;
+    
+end );
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "of homalg chain maps",
+        [ IsHomalgChainMap and IsZero ],
+        
+  function( phi )
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( \-,
+        "of two homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
+        
+  function( phi1, phi2 )
+    local degree, S, T, degrees, morphisms1, morphisms2, psi, i;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return Error( "the two chain maps are not comparable" );
+    fi;
+    
+    degree := DegreeOfMorphism( phi1 );
+    
+    S := Source( phi1 );
+    T := Target( phi1 );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms1 := MorphismsOfChainMap( phi1 );
+    morphisms2 := MorphismsOfChainMap( phi2 );
+    
+    psi := HomalgChainMap( morphisms1[1] - morphisms2[1], S, T, [ degrees[1], degree ] );
+    
+    for i in [ 2 .. Length( morphisms1 ) ] do
+        Add( psi, morphisms1[i] - morphisms2[i] );
+    od;
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg chain maps",
+        [ IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi1, phi2 )
+    local degree1, degree2, S, T, degrees, morphisms1, morphisms2, psi, i;
+    
+    
+    if not AreComposableMorphisms( phi1, phi2 ) then
+        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal" );
+    fi;
+    
+    degree1 := DegreeOfMorphism( phi1 );
+    degree2 := DegreeOfMorphism( phi2 );
+    
+    S := Source( phi1 );
+    T := Target( phi2 );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms1 := MorphismsOfChainMap( phi1 );
+    morphisms2 := MorphismsOfChainMap( phi2 );
+    
+    psi := HomalgChainMap( morphisms1[1] * morphisms2[1], S, T, [ degrees[1], degree1 + degree2 ] );
+    
+    for i in [ 2 .. Length( morphisms1 ) ] do
+        Add( psi, morphisms1[i] * morphisms2[i] );
+    od;
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg chain maps",
+        [ IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi2, phi1 )
+    local degree1, degree2, S, T, degrees, morphisms1, morphisms2, psi, i;
+    
+    
+    if not AreComposableMorphisms( phi2, phi1 ) then
+        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal" );
+    fi;
+    
+    degree1 := DegreeOfMorphism( phi1 );
+    degree2 := DegreeOfMorphism( phi2 );
+    
+    S := Source( phi1 );
+    T := Target( phi2 );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms1 := MorphismsOfChainMap( phi1 );
+    morphisms2 := MorphismsOfChainMap( phi2 );
+    
+    psi := HomalgChainMap( morphisms2[1] * morphisms1[1], S, T, [ degrees[1], degree1 + degree2 ] );
+    
+    for i in [ 2 .. Length( morphisms1 ) ] do
+        Add( psi, morphisms2[i] * morphisms1[i] );
+    od;
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    OnLessGenerators( Source( phi ) );
+    OnLessGenerators( Target( phi ) );
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    BasisOfModule( Source( phi ) );
+    BasisOfModule( Target( phi ) );
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    List( MorphismsOfChainMap( phi ), DecideZero );
+    
+    return phi;
     
 end );
 
@@ -334,7 +641,7 @@ end );
 
 InstallGlobalFunction( HomalgChainMap,
   function( arg )
-    local nargs, morphism, left, source, target, indices, degree,
+    local nargs, morphism, left, source, target, degrees, degree,
           chainmap, type, c;
     
     nargs := Length( arg );
@@ -369,25 +676,33 @@ InstallGlobalFunction( HomalgChainMap,
     fi;
     
     if IsInt( arg[nargs] ) then
-        indices := [ arg[nargs] ];
+        degrees := [ arg[nargs] ];
         degree := 0;
     elif IsList( arg[nargs] ) and Length( arg[nargs] ) = 2 and ForAll( arg[nargs], IsInt ) then
-        indices := [ arg[nargs][1] ];
+        degrees := [ arg[nargs][1] ];
         degree := arg[nargs][2];
     else
-        indices := [ ObjectDegreesOfComplex( source )[1] ];
+        degrees := [ ObjectDegreesOfComplex( source )[1] ];
         degree := 0;
     fi;
     
-    if not IsIdenticalObj( Source( morphism ), CertainObject( source, indices[1] ) ) then
-        Error( "the morphism and the source complex do not match\n" );
-    elif not IsIdenticalObj( Target( morphism ), CertainObject( target, indices[1] ) ) then
-        Error( "the morphism and the target complex do not match\n" );
+    if IsHomalgMap( morphism ) then
+        if not IsIdenticalObj( Source( morphism ), CertainObject( source, degrees[1] ) ) then
+            Error( "the map and the source complex do not match\n" );
+        elif not IsIdenticalObj( Target( morphism ), CertainObject( target, degrees[1] ) ) then
+            Error( "the map and the target complex do not match\n" );
+        fi;
+    else
+        if Source( morphism ) <> CertainObject( source, degrees[1] ) then
+            Error( "the chain map and the source complex do not match\n" );
+        elif Target( morphism ) <> CertainObject( target, degrees[1] ) then
+            Error( "the chain map and the target complex do not match\n" );
+        fi;
     fi;
     
-    c := rec( indices := indices );
+    c := rec( degrees := degrees );
     
-    c.(String( indices[1] )) := morphism;
+    c.(String( degrees[1] )) := morphism;
     
     if IsComplexOfFinitelyPresentedObjectsRep( source ) and
        IsComplexOfFinitelyPresentedObjectsRep( target ) then
@@ -399,7 +714,7 @@ InstallGlobalFunction( HomalgChainMap,
         Error( "source and target must either be both complexes or both cocomplexes\n" );
     fi;
     
-    if IsIdenticalObj( source, target ) then
+    if source = target then
         if chainmap then
             if left then
                 type := TheTypeHomalgChainSelfMapOfLeftObjects;
@@ -434,7 +749,7 @@ InstallGlobalFunction( HomalgChainMap,
             c, type,
             Source, source,
             Target, target,
-            DegreeOfChainMap, degree
+            DegreeOfMorphism, degree
             );
     
     return c;
@@ -453,7 +768,7 @@ InstallMethod( ViewObj,
         [ IsHomalgChainMap ],
         
   function( o )
-    local first_attribute, indices, l;
+    local first_attribute, degrees, l;
     
     first_attribute := false;
     
@@ -486,15 +801,15 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    if HasDegreeOfChainMap( o ) and DegreeOfChainMap( o ) <> 0 then
-        Print( " of degree ", DegreeOfChainMap( o ) );
+    if HasDegreeOfMorphism( o ) and DegreeOfMorphism( o ) <> 0 then
+        Print( " of degree ", DegreeOfMorphism( o ) );
     fi;
     
     Print( " containing " );
     
-    indices := DegreesOfChainMap( o );
+    degrees := DegreesOfChainMap( o );
     
-    l := Length( indices );
+    l := Length( degrees );
     
     if l = 1 then
         
@@ -512,7 +827,7 @@ InstallMethod( ViewObj,
             Print( "co" );
         fi;
         
-        Print( "homology degree ", indices[1], ">" );
+        Print( "homology degree ", degrees[1], ">" );
         
     else
         
