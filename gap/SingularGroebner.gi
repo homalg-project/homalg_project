@@ -72,8 +72,7 @@ InstallMethod( CreateHomalgTable,
                  homalgSendBlocking( Concatenation(
                                         [ "map F = ", R, ", " ],
                                         IndeterminateCoordinatesOfRingOfDerivations( R ),
-                                        [ ", " ] ,
-                                        Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ "-" , a ] ) ),
+                                        Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , a ] ) ),
                                         [ "; matrix ", I, " = transpose( involution( ", M, ", F ) )" ]
                                       ), "need_command", HOMALG_IO.Pictograms.Involution );
                else
