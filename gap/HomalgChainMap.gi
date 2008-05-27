@@ -97,7 +97,7 @@ InstallMethod( IsMorphism,
     
     if not IsComplex( Source( c ) ) then
         return false;
-    elif not IsComplex( Target( c ) ) then
+    elif not IsComplex( Range( c ) ) then
         return false;
     fi;
     
@@ -108,7 +108,7 @@ InstallMethod( IsMorphism,
     degrees := degrees{[ 1 .. l - 1 ]};
     
     S := Source( c );
-    T := Target( c );
+    T := Range( c );
     
     if l = 1 then
         if Length( ObjectDegreesOfComplex( S ) ) = 1 then
@@ -291,7 +291,7 @@ InstallMethod( Add,
     
     if CertainObject( Source( c ), l ) <> Source( phi ) then
         Error( "the ", l, ". module of the source complex in the chain map and the source of the new morphism are not the same object\n" );
-    elif CertainObject( Target( c ), l ) <> Target( phi ) then
+    elif CertainObject( Range( c ), l ) <> Range( phi ) then
         Error( "the ", l, ". module of the target complex in the chain map and the target of the new morphism are not the same object\n" );
     fi;
     
@@ -313,7 +313,7 @@ InstallMethod( AreComparableMorphisms,
   function( phi1, phi2 )
     
     return Source( phi1 ) = Source( phi2 ) and
-           Target( phi1 ) = Target( phi2 ) and
+           Range( phi1 ) = Range( phi2 ) and
            DegreeOfMorphism( phi1 ) = DegreeOfMorphism( phi2 );;
     
 end );
@@ -326,7 +326,7 @@ InstallMethod( AreComposableMorphisms,
         
   function( phi1, phi2 )
     
-    return Target( phi1 ) = Source( phi2 );
+    return Range( phi1 ) = Source( phi2 );
     
 end );
 
@@ -338,7 +338,7 @@ InstallMethod( AreComposableMorphisms,
         
   function( phi2, phi1 )
     
-    return Target( phi1 ) = Source( phi2 );
+    return Range( phi1 ) = Source( phi2 );
     
 end );
 
@@ -372,7 +372,7 @@ InstallMethod( ZeroMutable,
     degree := DegreeOfMorphism( phi );
     
     S := Source( phi );
-    T := Target( phi );
+    T := Range( phi );
     
     degrees := ObjectDegreesOfComplex( S );
     
@@ -399,7 +399,7 @@ InstallMethod( \*,
     degree := DegreeOfMorphism( phi );
     
     S := Source( phi );
-    T := Target( phi );
+    T := Range( phi );
     
     degrees := ObjectDegreesOfComplex( S );
     
@@ -430,7 +430,7 @@ InstallMethod( \+,
     degree := DegreeOfMorphism( phi1 );
     
     S := Source( phi1 );
-    T := Target( phi1 );
+    T := Range( phi1 );
     
     degrees := ObjectDegreesOfComplex( S );
     
@@ -484,7 +484,7 @@ InstallMethod( \-,
     degree := DegreeOfMorphism( phi1 );
     
     S := Source( phi1 );
-    T := Target( phi1 );
+    T := Range( phi1 );
     
     degrees := ObjectDegreesOfComplex( S );
     
@@ -519,7 +519,7 @@ InstallMethod( \*,
     degree2 := DegreeOfMorphism( phi2 );
     
     S := Source( phi1 );
-    T := Target( phi2 );
+    T := Range( phi2 );
     
     degrees := ObjectDegreesOfComplex( S );
     
@@ -554,7 +554,7 @@ InstallMethod( \*,
     degree2 := DegreeOfMorphism( phi2 );
     
     S := Source( phi1 );
-    T := Target( phi2 );
+    T := Range( phi2 );
     
     degrees := ObjectDegreesOfComplex( S );
     
@@ -579,7 +579,7 @@ InstallMethod( OnLessGenerators,
   function( phi )
     
     OnLessGenerators( Source( phi ) );
-    OnLessGenerators( Target( phi ) );
+    OnLessGenerators( Range( phi ) );
     
     return phi;
     
@@ -593,7 +593,7 @@ InstallMethod( BasisOfModule,
   function( phi )
     
     BasisOfModule( Source( phi ) );
-    BasisOfModule( Target( phi ) );
+    BasisOfModule( Range( phi ) );
     
     return phi;
     
@@ -689,13 +689,13 @@ InstallGlobalFunction( HomalgChainMap,
     if IsHomalgMap( morphism ) then
         if not IsIdenticalObj( Source( morphism ), CertainObject( source, degrees[1] ) ) then
             Error( "the map and the source complex do not match\n" );
-        elif not IsIdenticalObj( Target( morphism ), CertainObject( target, degrees[1] ) ) then
+        elif not IsIdenticalObj( Range( morphism ), CertainObject( target, degrees[1] ) ) then
             Error( "the map and the target complex do not match\n" );
         fi;
     else
         if Source( morphism ) <> CertainObject( source, degrees[1] ) then
             Error( "the chain map and the source complex do not match\n" );
-        elif Target( morphism ) <> CertainObject( target, degrees[1] ) then
+        elif Range( morphism ) <> CertainObject( target, degrees[1] ) then
             Error( "the chain map and the target complex do not match\n" );
         fi;
     fi;
@@ -748,7 +748,7 @@ InstallGlobalFunction( HomalgChainMap,
     ObjectifyWithAttributes(
             c, type,
             Source, source,
-            Target, target,
+            Range, target,
             DegreeOfMorphism, degree
             );
     

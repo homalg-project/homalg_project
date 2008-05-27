@@ -63,7 +63,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
     local emb, epi, M0;
     
     if HasTorsionFreeFactorEpi( M ) then
-        return Target( TorsionFreeFactorEpi( M ) );
+        return Range( TorsionFreeFactorEpi( M ) );
     fi;
     
     emb := TorsionSubmoduleEmb( M );
@@ -73,7 +73,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
     ## set the attribute TorsionFreeFactorEpi (specific for TorsionFreeFactor):
     SetTorsionFreeFactorEpi( M, epi );
     
-    M0 := Target( epi );
+    M0 := Range( epi );
     
     SetIsTorsionFree( M0, true );
     

@@ -76,7 +76,7 @@ DeclareProperty( "IsMorphism",
 DeclareAttribute( "Source",
         IsHomalgMorphism );
 
-DeclareAttribute( "Target",
+DeclareAttribute( "Range",
         IsHomalgMorphism );
 
 DeclareAttribute( "DegreeOfMorphism",
@@ -132,4 +132,13 @@ DeclareOperation( "DecideZero",
 
 DeclareOperation( "homalgLaTeX",
         [ IsObject ] ); 
+
+####################################
+#
+# synonyms:
+#
+####################################
+
+DeclareSynonymAttr( "Target",
+        Range );
 

@@ -23,12 +23,12 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     local R, T, p, gen, rel, coker, id, epi, emb;
     
     if HasCokernelEpi( phi ) then
-        return Target( CokernelEpi( phi ) );
+        return Range( CokernelEpi( phi ) );
     fi;
     
     R := HomalgRing( phi );
     
-    T := Target( phi );
+    T := Range( phi );
     
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects of the following command(s)
@@ -170,7 +170,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
         Error( "the two morphisms must either be both left or both right morphisms\n" );
     fi;
     
-    M := Target( pre );
+    M := Range( pre );
     
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( M );  ## avoid future possible side effects of the following command(s)

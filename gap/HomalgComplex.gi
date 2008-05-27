@@ -165,14 +165,14 @@ InstallMethod( IsComplex,
 end );
 
 ##
-InstallMethod( IsExactSequence,
+InstallMethod( IsAcyclic,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees;
+    local degrees, l, b;
     
-    if not IsSequence( C ) then
+    if ObjectDegreesOfComplex( C )[1] <> 0 then
         return false;
     fi;
     
@@ -180,13 +180,66 @@ InstallMethod( IsExactSequence,
     
     degrees := degrees{[ 1 .. Length( degrees ) - 1 ]};
     
+    if not IsComplex( C ) then
+        return false;
+    fi;
+    
     if degrees = [ ] then
         return true;
     elif ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
       or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
-        return ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
     else
-        return ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
+    fi;
+    
+    if not b then
+        return b;
+    fi;
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        return IsZero( Kernel( HighestDegreeMorphismInComplex( C ) ) );
+    else
+        return IsZero( Cokernel( HighestDegreeMorphismInComplex( C ) ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( IsExactSequence,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local degrees, b;
+    
+    if not IsComplex( C ) then
+        return false;
+    fi;
+    
+    degrees := MorphismDegreesOfComplex( C );
+    
+    if degrees = [ ] then
+        return true;
+    fi;
+    
+    degrees := degrees{[ 1 .. Length( degrees ) - 1 ]};
+    
+    if ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
+      or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
+    else
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
+    fi;
+    
+    if not b then
+        return b;
+    fi;
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        return ForAll( [ Kernel( HighestDegreeMorphismInComplex( C ) ), Cokernel( LowestDegreeMorphismInComplex( C ) ) ], IsZero );
+    else
+        return ForAll( [ Cokernel( HighestDegreeMorphismInComplex( C ) ), Kernel( LowestDegreeMorphismInComplex( C ) ) ], IsZero );
     fi;
     
 end );
@@ -197,24 +250,19 @@ InstallMethod( IsShortExactSequence,
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees;
+    local support, l;
     
-    degrees := MorphismDegreesOfComplex( C );
+    support := SupportOfComplex( C );
     
-    if Length( degrees ) <> 2 then	## FIXME: this is probably not the last word
+    l := Length( support );
+    
+    if support = [ ] then			## the zero complex
+        return true;
+    elif support[l] - support[1] > 2 then	## too many non-trivial modules
         return false;
     fi;
     
-    if not IsSequence( C ) then
-        return false;
-    fi;
-    
-    if ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) ) or
-       ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
-        return ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
-    else
-        return ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
-    fi;
+    return IsExactSequence( C );
     
 end );
 
@@ -292,9 +340,9 @@ InstallMethod( CertainObject,
     l := Length( degrees );
     
     if IsComplexOfFinitelyPresentedObjectsRep( C ) and degrees[1] = i then
-        return Target( CertainMorphism( C, i + 1 ) );
+        return Range( CertainMorphism( C, i + 1 ) );
     elif IsCocomplexOfFinitelyPresentedObjectsRep( C ) and degrees[l] = i then
-        return Target( CertainMorphism( C, i - 1 ) );
+        return Range( CertainMorphism( C, i - 1 ) );
     fi;
     
     return fail;
@@ -334,11 +382,11 @@ InstallMethod( ObjectsOfComplex,
     if l = 0 then
         return [ CertainObject( C, ObjectDegreesOfComplex( C )[1] ) ];
     elif IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        modules := List( morphisms, Target );
+        modules := List( morphisms, Range );
         Add( modules, Source( morphisms[l] ) );
     else
         modules := List( morphisms, Source );
-        Add( modules, Target( morphisms[l] ) );
+        Add( modules, Range( morphisms[l] ) );
     fi;
     
     return modules;
@@ -396,6 +444,34 @@ InstallMethod( HighestDegreeObjectInComplex,
 end );
 
 ##
+InstallMethod( LowestDegreeMorphismInComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local degrees;
+    
+    degrees := MorphismDegreesOfComplex( C );
+    
+    return CertainMorphism( C, degrees[1] );
+    
+end );
+
+##
+InstallMethod( HighestDegreeMorphismInComplex,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local degrees;
+    
+    degrees := MorphismDegreesOfComplex( C );
+    
+    return CertainMorphism( C, degrees[Length( degrees )] );
+    
+end );
+
+##
 InstallMethod( HomalgRing,
         "for homalg complexes",
         [ IsHomalgComplex ],
@@ -412,12 +488,13 @@ InstallMethod( SupportOfComplex,
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees, modules, l;
+    local degrees, l, modules;
     
     degrees := ObjectDegreesOfComplex( C );
-    modules := ObjectsOfComplex( C );
     
     l := Length( degrees );
+    
+    modules := ObjectsOfComplex( C );
     
     return degrees{ Filtered( [ 1 .. l ], i -> not IsZero( modules[i] ) ) };
     
@@ -438,11 +515,11 @@ InstallMethod( Add,
     if l = 1 then
         
         if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Target( phi ) ) then
+            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
                 Error( "the unique object in the complex and the target of the new map are not identical\n" );
             fi;
         else
-            if CertainObject( C, degrees[1] ) <> Target( phi ) then
+            if CertainObject( C, degrees[1] ) <> Range( phi ) then
                 Error( "the unique object in the complex and the target of the new chain map are not equal\n" );
             fi;
         fi;
@@ -458,11 +535,11 @@ InstallMethod( Add,
         l := degrees[l];
         
         if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Target( phi ) ) then
+            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
                 Error( "the source of the ", l, ". map in the complex (i.e. the highest one) and the target of the new one are not identical\n" );
             fi;
         else
-            if Source( CertainMorphism( C, l ) ) <> Target( phi ) then
+            if Source( CertainMorphism( C, l ) ) <> Range( phi ) then
                 Error( "the source of the ", l, ". chain map in the complex (i.e. the highest one) and the target of the new one are not equal\n" );
             fi;
         fi;
@@ -472,6 +549,8 @@ InstallMethod( Add,
         C!.(String( l + 1 )) := phi;
         
     fi;
+    
+    ConvertToRangeRep( degrees );
     
     homalgResetFiltersOfComplex( C );
     
@@ -512,11 +591,11 @@ InstallMethod( Add,
         l := degrees[l - 1];
         
         if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( Target( CertainMorphism( C, l ) ), Source( phi ) ) then
+            if not IsIdenticalObj( Range( CertainMorphism( C, l ) ), Source( phi ) ) then
                 Error( "the target of the ", l, ". map in the complex (i.e. the highest one) and the source of the new one are not identical\n" );
             fi;
         else
-            if Target( CertainMorphism( C, l ) ) <>  Source( phi ) then
+            if Range( CertainMorphism( C, l ) ) <>  Source( phi ) then
                 Error( "the target of the ", l, ". chain map in the complex (i.e. the highest one) and the source of the new one are not equal\n" );
             fi;
         fi;
@@ -526,6 +605,8 @@ InstallMethod( Add,
         C!.(String( l + 1 )) := phi;
         
     fi;
+    
+    ConvertToRangeRep( degrees );
     
     homalgResetFiltersOfComplex( C );
     
@@ -599,7 +680,13 @@ InstallGlobalFunction( homalgResetFiltersOfComplex,
     
     if not IsBound( HOMALG.PropertiesOfComplexes ) then
         HOMALG.PropertiesOfComplexes :=
-          [ IsZero, IsSequence, IsComplex, IsGradedObject, IsExactSequence, IsShortExactSequence ];
+          [ IsZero,
+            IsSequence,
+            IsComplex,
+            IsAcyclic,
+            IsGradedObject,
+            IsExactSequence,
+            IsShortExactSequence ];
     fi;
     
     for property in HOMALG.PropertiesOfComplexes do
@@ -678,11 +765,17 @@ InstallGlobalFunction( HomalgComplex,
         fi;
     fi;
     
+    ConvertToRangeRep( C.degrees );
+    
     ## Objectify
     Objectify( type, C );
     
     if object then
-        SetIsGradedObject( C, true );
+        if degrees = [ 0 ] then
+            SetIsAcyclic( C, true );
+        else
+            SetIsGradedObject( C, true );
+        fi;
     fi;
     
     return C;
@@ -779,13 +872,13 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        Print( " module at " );
-        
-        if IsCocomplexOfFinitelyPresentedObjectsRep( o ) then
-            Print( "co" );
+        if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+            Print( " module" );
+        else
+            Print( " complex" );
         fi;
         
-        Print( "homology degree ", degrees[1], ">" );
+        Print( " at degree ", degrees[1], ">" );
         
     else
         
@@ -803,9 +896,111 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        Print( " modules>" );
+        if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+            Print( " modules" );
+        else
+            Print( " complexes" );
+        fi;
+        
+        Print( " at degrees ", degrees, ">" );
         
     fi;
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        
+  function( o )
+    local l, degrees;
+    
+    Print( "<An acyclic complex consisting of " );
+    
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
+    
+    if l = 1 then
+        Print( "a single" );
+    else
+        Print( l );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        Print( " module" );
+    else
+        Print( " complex" );
+    fi;
+    
+    if l > 1 then
+        Print( "s" );
+    fi;
+    
+    Print( " at degree" );
+    
+    if l = 1 then
+        Print( " ", degrees[1] );
+    else
+        Print( "s ", degrees );
+    fi;
+    
+    Print( ">" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        
+  function( o )
+    local l, degrees;
+    
+    Print( "<An acyclic cocomplex consisting of " );
+    
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
+    
+    if l = 1 then
+        Print( "a single" );
+    else
+        Print( l );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        Print( " module" );
+    else
+        Print( " complex" );
+    fi;
+    
+    if l > 1 then
+        Print( "s" );
+    fi;
+    
+    Print( " at cohomology degree" );
+    
+    if l = 1 then
+        Print( " ", degrees[1] );
+    else
+        Print( "s ", degrees );
+    fi;
+    
+    Print( ">" );
     
 end );
 
@@ -835,7 +1030,11 @@ InstallMethod( ViewObj,
         Print( " right" );
     fi;
     
-    Print( " module" );
+    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        Print( " module" );
+    else
+        Print( " complex" );
+    fi;
     
     if l > 1 then
         Print( "s" );
@@ -879,7 +1078,11 @@ InstallMethod( ViewObj,
         Print( " right" );
     fi;
     
-    Print( " module" );
+    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        Print( " module" );
+    else
+        Print( " complex" );
+    fi;
     
     if l > 1 then
         Print( "s" );

@@ -155,7 +155,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
             id := HomalgIdentityMatrix( NrGenerators( B ), R );
             ## the zero'th component of the quasi-isomorphism,
             ## which in this case is simplfy the natural epimorphism on the module
-            SetCokernelEpi( d_j, HomalgMorphism( id, Target( d_j ), arg[1] ) );
+            SetCokernelEpi( d_j, HomalgMorphism( id, Range( d_j ), arg[1] ) );
             SetIsEpimorphism( d_j!.CokernelEpi, true );
         fi;
         SetFreeResolution( M, d );
@@ -184,6 +184,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     
     if NrRelations( S ) = 0 then
         SetHasFiniteFreeResolution( M, true );
+        SetIsAcyclic( d, true );
     fi;
     
     ## fill up with zero morphisms:

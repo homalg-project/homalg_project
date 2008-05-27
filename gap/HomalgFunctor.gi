@@ -150,7 +150,7 @@ InstallMethod( FunctorMap,
     fi;
     
     S := Source( phi );
-    T := Target( phi );
+    T := Range( phi );
     
     pos := Filtered( [ 1 .. number_of_arguments ], a -> not a in arg_positions )[1];
     
@@ -205,7 +205,7 @@ InstallMethod( FunctorMap,
         hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
         
         hull_phi :=
-          HomalgMorphism( hull_phi, Target( emb_source ), Target( emb_target ) );
+          HomalgMorphism( hull_phi, Range( emb_source ), Range( emb_target ) );
     else
         hull_phi := phi;
     fi;
@@ -950,11 +950,11 @@ InstallMethod( InstallFunctorOnChainMaps,
         if IsList( filter_chm ) and Length( filter_chm ) = 2 and ForAll( filter_chm, IsFilter ) then
             
             if Functor!.1[1][1] = "covariant" then
-                chainmap := [ [ Source, Target ], 0 ];
-                cochainmap := [ [ Source, Target ], 0 ];
+                chainmap := [ [ Source, Range ], 0 ];
+                cochainmap := [ [ Source, Range ], 0 ];
             else
-                chainmap := [ [ Target, Source ], 1 ];
-                cochainmap := [ [ Target, Source ], 1 ];
+                chainmap := [ [ Range, Source ], 1 ];
+                cochainmap := [ [ Range, Source ], 1 ];
             fi;
             
             head := [ Functor ];
@@ -1001,11 +1001,11 @@ InstallMethod( InstallFunctorOnChainMaps,
             for i in [ 1 .. number_of_arguments ] do
                 
                 if Functor!.(i)[1][1] = "covariant" then
-                    chainmap := [ [ Source, Target ], 0 ];
-                    cochainmap := [ [ Source, Target ], 0 ];
+                    chainmap := [ [ Source, Range ], 0 ];
+                    cochainmap := [ [ Source, Range ], 0 ];
                 else
-                    chainmap := [ [ Target, Source ], 1 ];
-                    cochainmap := [ [ Target, Source ], 1 ];
+                    chainmap := [ [ Range, Source ], 1 ];
+                    cochainmap := [ [ Range, Source ], 1 ];
                 fi;
                 
                 head := [ Functor, ar[i][1] ];

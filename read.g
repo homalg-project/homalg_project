@@ -64,6 +64,7 @@ ReadPackage( "homalg", "gap/LIRNG.gi" );
 ReadPackage( "homalg", "gap/LIMAT.gi" );
 ReadPackage( "homalg", "gap/COLEM.gi" );
 ReadPackage( "homalg", "gap/LIMOD.gi" );
+ReadPackage( "homalg", "gap/LICPX.gi" );
 
 ## specific GAP4 internal rings
 ReadPackage( "homalg", "gap/Integers.gi" );

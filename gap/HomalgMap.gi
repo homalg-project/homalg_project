@@ -98,7 +98,7 @@ InstallImmediateMethod( IsZero,
         
   function( phi )
     
-    if IsZero( Source( phi ) ) or IsZero( Target( phi ) ) then
+    if IsZero( Source( phi ) ) or IsZero( Range( phi ) ) then
         return true;
     fi;
     
@@ -165,7 +165,7 @@ InstallMethod( IsMorphism,
     
     mat := MatrixOfRelations( Source( phi ) ) * MatrixOfHomomorphism( phi );
     
-    return IsZero( DecideZero( mat , RelationsOfModule( Target( phi ) ) ) );
+    return IsZero( DecideZero( mat , RelationsOfModule( Range( phi ) ) ) );
     
 end );
 
@@ -179,7 +179,7 @@ InstallMethod( IsMorphism,
     
     mat := MatrixOfHomomorphism( phi ) * MatrixOfRelations( Source( phi ) );
     
-    return IsZero( DecideZero( mat , RelationsOfModule( Target( phi ) ) ) );
+    return IsZero( DecideZero( mat , RelationsOfModule( Range( phi ) ) ) );
     
 end );
 
@@ -264,7 +264,7 @@ InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
     local pos_s, pos_t;
     
     pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
-    pos_t := PositionOfTheDefaultSetOfRelations( Target( phi ) );
+    pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         return [ pos_s, pos_t ];
@@ -302,10 +302,10 @@ InstallMethod( MatrixOfHomomorphism,		## FIXME: make this optimal by finding sho
             matrix :=
               TransitionMatrix( Source( phi ), pos_s, l[pos][1] )
               * phi!.matrices.( String( l[pos] ) )
-              * TransitionMatrix( Target( phi ), l[pos][2], pos_t );
+              * TransitionMatrix( Range( phi ), l[pos][2], pos_t );
         else
             matrix :=
-              TransitionMatrix( Target( phi ), pos_t, l[pos][1] )
+              TransitionMatrix( Range( phi ), pos_t, l[pos][1] )
               * phi!.matrices.( String( l[pos] ) )
               * TransitionMatrix( Source( phi ), l[pos][2], pos_s );
         fi;
@@ -344,7 +344,7 @@ InstallMethod( MatrixOfHomomorphism,
     local pos_s, pos_t;
     
     pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
-    pos_t := PositionOfTheDefaultSetOfRelations( Target( phi ) );
+    pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
     
     return MatrixOfHomomorphism( phi, pos_s, pos_t );
     
@@ -358,7 +358,7 @@ InstallMethod( AreComparableMorphisms,
   function( phi1, phi2 )
     
     return IsIdenticalObj( Source( phi1 ), Source( phi2 ) ) and
-           IsIdenticalObj( Target( phi1 ), Target( phi2 ) );
+           IsIdenticalObj( Range( phi1 ), Range( phi2 ) );
     
 end );
 
@@ -370,7 +370,7 @@ InstallMethod( AreComposableMorphisms,
         
   function( phi1, phi2 )
     
-    return IsIdenticalObj( Target( phi1 ), Source( phi2 ) );
+    return IsIdenticalObj( Range( phi1 ), Source( phi2 ) );
     
 end );
 
@@ -382,7 +382,7 @@ InstallMethod( AreComposableMorphisms,
         
   function( phi2, phi1 )
     
-    return IsIdenticalObj( Target( phi1 ), Source( phi2 ) );
+    return IsIdenticalObj( Range( phi1 ), Source( phi2 ) );
     
 end );
 
@@ -408,7 +408,7 @@ InstallMethod( ZeroMutable,
         
   function( phi )
     
-    return HomalgMorphism( 0 * MatrixOfHomomorphism( phi ), Source( phi ), Target( phi ) );
+    return HomalgMorphism( 0 * MatrixOfHomomorphism( phi ), Source( phi ), Range( phi ) );
     
 end );
 
@@ -419,7 +419,7 @@ InstallMethod( \*,
         
   function( a, phi )
     
-    return HomalgMorphism( a * MatrixOfHomomorphism( phi ), Source( phi ), Target( phi ) );
+    return HomalgMorphism( a * MatrixOfHomomorphism( phi ), Source( phi ), Range( phi ) );
     
 end );
 
@@ -434,7 +434,7 @@ InstallMethod( \+,
         return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) + MatrixOfHomomorphism( phi2 ), Source( phi1 ), Target( phi1 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) + MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
     
 end );
 
@@ -471,7 +471,7 @@ InstallMethod( \-,
         return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) - MatrixOfHomomorphism( phi2 ), Source( phi1 ), Target( phi1 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) - MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
     
 end );
 
@@ -487,7 +487,7 @@ InstallMethod( \*,
         Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) * MatrixOfHomomorphism( phi2 ), Source( phi1 ), Target( phi2 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) * MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi2 ) );
     
 end );
 
@@ -503,7 +503,7 @@ InstallMethod( \*,
         Error( "the two morphisms are not composable, since the target of the right one and the target of the left one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi2 ) * MatrixOfHomomorphism( phi1 ), Source( phi1 ), Target( phi2 ) );
+    return HomalgMorphism( MatrixOfHomomorphism( phi2 ) * MatrixOfHomomorphism( phi1 ), Source( phi1 ), Range( phi2 ) );
     
 end );
 
@@ -517,7 +517,7 @@ InstallMethod( POW,
     
     if pow = -1 then
         
-        id := HomalgIdentityMorphism( Target( phi ) );
+        id := HomalgIdentityMorphism( Range( phi ) );
         
         inv := PostDivide( id, phi );
         
@@ -541,7 +541,7 @@ InstallMethod( OnLessGenerators,
   function( phi )
     
     OnLessGenerators( Source( phi ) );
-    OnLessGenerators( Target( phi ) );
+    OnLessGenerators( Range( phi ) );
     
     return phi;
     
@@ -555,7 +555,7 @@ InstallMethod( BasisOfModule,
   function( phi )
     
     BasisOfModule( Source( phi ) );
-    BasisOfModule( Target( phi ) );
+    BasisOfModule( Range( phi ) );
     
     return phi;
     
@@ -580,9 +580,9 @@ InstallMethod( DecideZero,
   function( phi )
     local pos_t, rel, index_pair, matrix, reduced;
     
-    pos_t := PositionOfTheDefaultSetOfRelations( Target( phi ) );
+    pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
     
-    rel := RelationsOfModule( Target( phi ), pos_t );
+    rel := RelationsOfModule( Range( phi ), pos_t );
     
     index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
     
@@ -607,7 +607,7 @@ InstallMethod( UnionOfRelations,
         
   function( phi )
     
-    return UnionOfRelations( MatrixOfHomomorphism( phi ), Target( phi ) );
+    return UnionOfRelations( MatrixOfHomomorphism( phi ), Range( phi ) );
     
 end );
 
@@ -618,7 +618,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( phi )
     
-    return SyzygiesGenerators( MatrixOfHomomorphism( phi ), Target( phi ) );
+    return SyzygiesGenerators( MatrixOfHomomorphism( phi ), Range( phi ) );
     
 end );
 
@@ -648,9 +648,9 @@ InstallMethod( PostDivide,			### defines: PostDivide (RightDivide (high-level))
   function( gamma, beta )
     local N, psi, M_;
     
-    N := Target( beta );
+    N := Range( beta );
     
-    if not IsIdenticalObj( N, Target( gamma ) ) then
+    if not IsIdenticalObj( N, Range( gamma ) ) then
         Error( "the two morphisms don't have have identically the same target module\n" );
     fi;
     
@@ -686,9 +686,9 @@ InstallMethod( PostDivide,			### defines: PostDivide (LeftDivide (high-level))
   function( gamma, beta )
     local N, psi, M_;
     
-    N := Target( beta );
+    N := Range( beta );
     
-    if not IsIdenticalObj( N, Target( gamma ) ) then
+    if not IsIdenticalObj( N, Range( gamma ) ) then
         Error( "the two morphisms don't have have identically the same target module\n" );
     fi;
     
@@ -848,7 +848,7 @@ InstallGlobalFunction( HomalgMorphism,
         ObjectifyWithAttributes(
                 morphism, type,
                 Source, source,
-                Target, target );
+                Range, target );
         
         if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
             SetIsMorphism( morphism, true );
@@ -966,7 +966,7 @@ InstallGlobalFunction( HomalgMorphism,
             ObjectifyWithAttributes(
                     morphism, type,
                     Source, source,
-                    Target, target,
+                    Range, target,
                     IsZero, true );
             
         elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
@@ -986,14 +986,14 @@ InstallGlobalFunction( HomalgMorphism,
                     ObjectifyWithAttributes(
                             morphism, type,
                             Source, source,
-                            Target, target,
+                            Range, target,
                             IsIdentityMorphism, true );
                 else
                     ## Objectify:
                     ObjectifyWithAttributes(
                             morphism, type,
                             Source, source,
-                            Target, target,
+                            Range, target,
                             IsAutomorphism, true );
                 fi;
             else
@@ -1001,7 +1001,7 @@ InstallGlobalFunction( HomalgMorphism,
                 ObjectifyWithAttributes(
                         morphism, type,
                         Source, source,
-                        Target, target,
+                        Range, target,
                         IsIsomorphism, true );
             fi;
             
@@ -1043,7 +1043,7 @@ InstallGlobalFunction( HomalgMorphism,
         ObjectifyWithAttributes(
                 morphism, type,
                 Source, source,
-                Target, target );
+                Range, target );
         
     fi;
     

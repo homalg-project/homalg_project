@@ -31,6 +31,9 @@ DeclareProperty( "IsSequence",
 DeclareProperty( "IsComplex",
         IsHomalgComplex );
 
+DeclareProperty( "IsAcyclic",
+        IsHomalgComplex );
+
 DeclareProperty( "IsGradedObject",
         IsHomalgComplex );
 
@@ -84,6 +87,12 @@ DeclareOperation( "LowestDegreeObjectInComplex",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "HighestDegreeObjectInComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "LowestDegreeMorphismInComplex",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "HighestDegreeMorphismInComplex",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "SupportOfComplex",

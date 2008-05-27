@@ -15,7 +15,7 @@
 ####################################
 
 ##
-InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomorphism
+InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomorphism (ResolutionOfSeq)
   function( arg )
     local nargs, phi, R, q, d_S, d_T, c, j, d_S_j, d_T_j, phi_j;
     
@@ -45,12 +45,12 @@ InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomo
     fi;
     
     d_S := ResolutionOfModule( Source( phi ), q );
-    d_T := ResolutionOfModule( Target( phi ), q );
+    d_T := ResolutionOfModule( Range( phi ), q );
     
     q := Maximum( List( [ d_S, d_T ], HighestDegreeInComplex ) );
     
     d_S := ResolutionOfModule( Source( phi ), q );
-    d_T := ResolutionOfModule( Target( phi ), q );
+    d_T := ResolutionOfModule( Range( phi ), q );
     
     j := 0;
     
