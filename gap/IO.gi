@@ -362,7 +362,8 @@ InstallGlobalFunction( LaunchCAS,
     
     if ( IsBound( s.show_banner ) and s.show_banner = true ) or
        ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-       and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then
+         and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then
+        Print( "----------------------------------------------------------------\n" );
         if IsBound( s.color_display ) then
             Print( s.color_display );
         fi;
@@ -371,7 +372,7 @@ InstallGlobalFunction( LaunchCAS,
         else
             Print( s.lines );
         fi;
-        Print( "\033[0m\n" );
+        Print( "\033[0m\n----------------------------------------------------------------\n\n" );
     fi;
     
     return s;
