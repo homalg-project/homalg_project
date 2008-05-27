@@ -1,3 +1,4 @@
+Read( "ReducedBasisOfModule.g" );
 nu:=ResolutionOfHomomorphism(TorsionSubmoduleEmb(W));
 pi:=ResolutionOfHomomorphism(TorsionFreeFactorEpi(W));
 s:=HomalgComplex(pi);
