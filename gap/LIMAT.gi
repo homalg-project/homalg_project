@@ -774,7 +774,7 @@ end );
 ##
 InstallMethod( KroneckerMat,
         "of homalg matrices",
-        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higer the "KroneckerMat( IsIdentityMatrix, IsHomalgMatrix )", why?
         
   function( A, B )
     local R;

@@ -74,7 +74,7 @@ InstallValue( Functor_Cokernel,
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_Cokernel_OnObjects ]
                 )
-);
+        );
 
 Functor_Cokernel!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -124,7 +124,7 @@ InstallValue( Functor_Kernel,
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
-);
+        );
 
 Functor_Kernel!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -209,7 +209,7 @@ InstallValue( Functor_DefectOfExactness,
                 [ "1", [ [ "covariant" ], [ IsHomogeneousList ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
-);
+        );
 
 Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -460,7 +460,7 @@ InstallValue( Functor_Hom,
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
-);
+        );
 
 Functor_Hom!.ContainerForWeakPointersOnComputedModules :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -497,4 +497,12 @@ InstallFunctorOnObjects( Functor_DefectOfExactness );
 ##
 
 InstallFunctor( Functor_Hom );
+
+##
+## Ext( c, M, N )
+##
+
+InstallValue( Functor_Ext,
+        RightSatelliteOfCofunctor( Functor_Hom, "Ext", 1 )
+        );
 

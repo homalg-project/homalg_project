@@ -668,6 +668,36 @@ InstallMethod( BasisOfModule,
     
 end );
 
+##
+InstallMethod( DecideZero,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    List( MorphismsOfComplex( C ), DecideZero );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    if Length( ObjectDegreesOfComplex( C ) ) = 1 then
+        List( ObjectsOfComplex( C ), ByASmallerPresentation );
+    else
+        List( MorphismsOfComplex( C ), ByASmallerPresentation );
+    fi;
+    
+    return C;
+    
+end );
+
 ####################################
 #
 # global functions:
@@ -1088,7 +1118,7 @@ InstallMethod( ViewObj,
         Print( "s" );
     fi;
     
-    Print( " at cohomology degree" );
+    Print( " at degree" );
     
     if l = 1 then
         Print( " ", degrees[1] );
@@ -1169,7 +1199,8 @@ InstallMethod( Display,
     local i;
     
     for i in ObjectDegreesOfComplex( o ) do
-        Print( "at homology degree ", i, "\n" );
+        Print( "-------------------------\n" );
+        Print( "at homology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
     od;
     
@@ -1184,7 +1215,8 @@ InstallMethod( Display,
     local i;
     
     for i in ObjectDegreesOfComplex( o ) do
-        Print( "at cohomology degree ", i, "\n" );
+        Print( "---------------------------\n" );
+        Print( "at cohomology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
     od;
     

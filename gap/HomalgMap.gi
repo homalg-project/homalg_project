@@ -479,7 +479,7 @@ end );
 InstallMethod( \*,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
         
   function( phi1, phi2 )
     
@@ -495,7 +495,7 @@ end );
 InstallMethod( \*,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
         
   function( phi2, phi1 )
     
@@ -597,6 +597,21 @@ InstallMethod( DecideZero,
     phi!.reduced_matrices.( String( index_pair ) ) := reduced;
     
     return reduced;
+    
+end );
+
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    ByASmallerPresentation( Source( phi ) );
+    ByASmallerPresentation( Range( phi ) );
+    DecideZero( phi );
+    
+    return phi;
     
 end );
 
@@ -1250,7 +1265,7 @@ InstallMethod( ViewObj,
             Print( " non-well-defined self-map of" );
         fi;
     else
-        Print( " \"homomorphism\" of" );
+        Print( " \"endomorphism\" of" );
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then

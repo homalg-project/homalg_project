@@ -36,6 +36,9 @@ DeclareGlobalFunction( "_Functor_Hom_OnMorphisms" );
 
 DeclareGlobalVariable( "Functor_Hom" );
 
+## Hom
+DeclareGlobalVariable( "Functor_Ext" );
+
 ####################################
 #
 # attributes:
@@ -65,6 +68,9 @@ DeclareOperation( "DefectOfExactness",
         [ IsHomogeneousList ] );
 
 DeclareOperation( "Hom",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "Ext",
         [ IsHomalgModule, IsHomalgModule ] );
 
 ####################################

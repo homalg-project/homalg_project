@@ -122,6 +122,33 @@ InstallImmediateMethod( IsTorsion,
     
 end );
 
+## a presentation must be on a single generator
+InstallImmediateMethod( IsCyclic,
+        IsFinitelyPresentedModuleRep, 0,
+        
+  function( M )
+    local l, b, i, rel;
+    
+    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
+    
+    b := false;
+    
+    for i in [ 1.. Length( l ) ] do;
+        
+        rel := SetsOfRelations( M )!.(i);
+        
+        if not IsString( rel ) then
+            if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 then
+                return true;
+            fi;
+        fi;
+        
+    od;
+    
+    TryNextMethod( );
+    
+end );
+
 ##
 InstallImmediateMethod( IsFree,
         IsFinitelyPresentedModuleRep, 0,

@@ -130,6 +130,9 @@ DeclareOperation( "BasisOfModule",
 DeclareOperation( "DecideZero",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "ByASmallerPresentation",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "homalgLaTeX",
         [ IsObject ] ); 
 

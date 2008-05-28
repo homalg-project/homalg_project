@@ -606,6 +606,25 @@ InstallMethod( DecideZero,
         
   function( phi )
     
+    DecideZero( Source( phi ) );
+    DecideZero( Range( phi ) );
+    
+    List( MorphismsOfChainMap( phi ), DecideZero );
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    ByASmallerPresentation( Source( phi ) );
+    ByASmallerPresentation( Range( phi ) );
+    
     List( MorphismsOfChainMap( phi ), DecideZero );
     
     return phi;

@@ -72,6 +72,8 @@ InstallValue( HOMALG,
             color_BOH := "\033[1;37;41m",		## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
             color_busy := "\033[01m\033[4;31;40m",
             color_done := "\033[01m\033[4;32;40m",
+            
+            color_display := false,
            )
 );
 

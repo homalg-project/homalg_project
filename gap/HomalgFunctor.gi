@@ -76,6 +76,8 @@ InstallMethod( NameOfFunctor,
     
     if IsBound( Functor!.name ) then
         functor_name := Functor!.name;
+        ## for this to work you need to declare one instance of the funtor,
+        ## although all methods will be installed using InstallOtherMethod!
         if not IsOperation( ValueGlobal( functor_name ) ) and not IsFunction( ValueGlobal( functor_name ) ) then
             Error( "the functor ", functor_name, " neither points to an operation nor a function\n" );
         fi;
@@ -244,7 +246,7 @@ InstallMethod( InstallFunctorOnObjects,
         
   function( Functor )
     local functor_name, number_of_arguments, natural_transformation,
-          filter_obj, filter1_obj, filter2_obj;
+          filter_obj, filter1_obj, filter2_obj, filter3_obj;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -389,6 +391,101 @@ InstallMethod( InstallFunctorOnObjects,
         else
             
             Error( "wrong syntax: ", filter1_obj, filter2_obj, "\n" );
+            
+        fi;
+        
+    elif number_of_arguments = 3 then
+        
+        if not IsBound( Functor!.1[2] ) then
+            Functor!.1[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.2[2] ) then
+            Functor!.2[2] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.2[3] ) then
+            Functor!.2[3] := HOMALG.FunctorOn;
+        fi;
+        
+        if not IsBound( Functor!.1[2][1] ) or
+           not IsBound( Functor!.2[2][1] ) or
+           not IsBound( Functor!.3[2][1] ) then
+            return fail;
+        fi;
+        
+        filter1_obj := Functor!.1[2][1];
+        filter2_obj := Functor!.2[2][1];
+        filter3_obj := Functor!.3[2][1];
+        
+        if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) and IsFilter( filter3_obj ) then
+            
+            if Length( Functor!.2[1] ) = 2 and Functor!.2[1][2] = "distinguished" then
+                
+                InstallOtherMethod( functor_name,
+                        "for homalg modules",
+                        [ filter1_obj, filter2_obj ],
+                        function( o0, o )
+                    local R;
+                    
+                    if IsHomalgRing( o ) then
+                        R := o;
+                    else
+                        R := HomalgRing( o );
+                    fi;
+                    
+                    return functor_name( o0, o, R );
+                    
+                end );
+                
+            fi;
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg modules",
+                    [ filter1_obj, filter2_obj, filter3_obj ],
+              function( o0, o1, o2 )
+                local obj1, obj2;
+                
+                if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
+                    obj1 := o1;
+                    obj2 := o2;
+                elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
+                    obj1 := o1;
+                    
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
+                        obj2 := AsLeftModule( o2 );
+                    else
+                        obj2 := AsRightModule( o2 );
+                    fi;
+                elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
+                    obj2 := o2;
+                    
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
+                        obj1 := AsLeftModule( o1 );
+                    else
+                        obj1 := AsRightModule( o1 );
+                    fi;
+                elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
+                    if not IsIdenticalObj( o1, o2 ) then
+                        Error( "the two rings are not identical\n" );
+                    fi;
+                    
+                    ## I personally prefer the row convention and hence left modules:
+                    obj1 := AsLeftModule( o1 );
+                    obj2 := obj1;
+                else
+                    ## the default:
+                    obj1 := o1;
+                    obj2 := o2;
+                fi;
+                
+                return Functor!.OnObjects( o0, obj1, obj2 );
+                
+            end );
+            
+        else
+            
+            Error( "wrong syntax: ", filter1_obj, filter2_obj, filter3_obj, "\n" );
             
         fi;
         
@@ -1042,6 +1139,64 @@ InstallMethod( InstallFunctor,
     InstallFunctorOnComplexes( Functor );
     
     InstallFunctorOnChainMaps( Functor );
+    
+end );
+
+##
+InstallMethod( RightSatelliteOfCofunctor,
+        "for homalg morphisms",
+        [ IsHomalgFunctorRep, IsString, IsPosInt ],
+        
+  function( Functor, name, p )
+    local _Functor_OnObjects, _Functor_OnMorphisms, m, data, SF;
+    
+    _Functor_OnObjects :=
+      function( arg )
+        local functor_name, c, d, d_c_1, mu, ar, F_mu;
+        
+        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        
+        c := arg[1];
+        
+        d := ResolutionOfModule( arg[p + 1], c - 1 );
+        
+        if c < 0 then
+            Error( "the negative ", c, ". right satellite is not defined\n" );
+        elif c = 0 then
+            mu := TheIdentityMorphism( arg[p + 1] );
+        else
+            if c = 1 then
+                d_c_1 := CokernelEpi( CertainMorphism( d, 1 ) );
+            else
+                d_c_1 := CertainMorphism( d, c - 1 );
+            fi;
+            
+            mu := KernelEmb( d_c_1 );
+        fi;
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p+2 .. Length( arg) ]} );
+        
+        F_mu := CallFuncList( functor_name, ar );
+        
+        return Cokernel( F_mu );
+        
+    end;
+    
+    m := MultiplicityOfFunctor( Functor );
+    
+    data := List( [ 1 .. m ], i -> [ String( i + 1 ), Functor!.( i ) ] );
+    
+    data := Concatenation(
+                    [ [ "name", name ], [ "number_of_arguments", m + 1 ] ],
+                    [ [ "1", [ [ ], [ IsInt ] ] ] ],
+                    data,
+                    [ [ "OnObjects", _Functor_OnObjects ] ] );
+    
+    SF := CallFuncList( CreateHomalgFunctor, data );
+    
+    InstallFunctorOnObjects( SF );
+    
+    return SF;
     
 end );
 

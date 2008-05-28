@@ -55,6 +55,9 @@ DeclareOperation( "FunctorMap",
 DeclareOperation( "FunctorMap",
         [ IsHomalgFunctor, IsHomalgMap ] );
 
+DeclareOperation( "RightSatelliteOfCofunctor",
+        [ IsHomalgFunctor, IsString, IsPosInt ] );
+
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
 

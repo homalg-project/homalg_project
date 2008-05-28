@@ -80,6 +80,23 @@ end );
 
 ####################################
 #
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( TheIdentityMorphism,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return HomalgIdentityMorphism( M );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -1003,6 +1020,9 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
         
         AddANewPresentation( M, rel, T, TI );
         
+        if HasNrGenerators( M ) and NrGenerators( M ) = 1 then
+            SetIsCyclic( M, true );
+        fi;
     fi;
     
     return M;
@@ -1067,6 +1087,39 @@ InstallMethod( OnLessGenerators,
     AddANewPresentation( M, rel, U, UI );
     
     return GetRidOfObsoleteGenerators( M );
+    
+end );
+
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local g, r, p, rel;
+    
+    while true do
+        g := NrGenerators( M );
+        r := NrRelations( M );
+        p := PositionOfTheDefaultSetOfGenerators( M );
+        OnLessGenerators( M );
+        if NrGenerators( M ) = g then	## try to compute a basis first
+            rel := RelationsOfModule( M, p );
+            if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and
+                     CanBeUsedToDecideZeroEffectively( rel ) ) then
+                SetPositionOfTheDefaultSetOfGenerators( M, p );	## just in case
+                BasisOfModule( M );
+                OnLessGenerators( M );
+            fi;
+        fi;
+        if NrGenerators( M ) = g then	## there is nothing we can do more!
+            break;
+        fi;
+    od;
+    
+    DecideZero( M );
+    
+    return M;
     
 end );
 
@@ -1656,7 +1709,13 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
-    local num_gen, num_rel, gen_string, rel_string;
+    local properties, num_gen, num_rel, gen_string, rel_string;
+    
+    properties := "";
+    
+    if HasIsCyclic( M ) and IsCyclic( M ) then
+        properties := Concatenation( properties, " cyclic" );
+    fi;
     
     num_gen := NrGenerators( M );
     
@@ -1685,7 +1744,7 @@ InstallMethod( ViewObj,
         rel_string := " relations for ";
     fi;
     
-    Print( "<A left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
+    Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
     
 end );
 
@@ -1695,7 +1754,13 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
-    local num_gen, num_rel, gen_string, rel_string;
+    local properties, num_gen, num_rel, gen_string, rel_string;
+    
+    properties := "";
+    
+    if HasIsCyclic( M ) and IsCyclic( M ) then
+        properties := Concatenation( properties, " cyclic" );
+    fi;
     
     num_gen := NrGenerators( M );
     
@@ -1723,7 +1788,8 @@ InstallMethod( ViewObj,
         fi;
         rel_string := " relations";
     fi;
-    Print( "<A right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
+    
+    Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
     
 end );
 
@@ -1862,7 +1928,11 @@ InstallMethod( Display,
         D := "R";
     fi;
     
-    Print( "Cokernel of the map:\n", D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
+    if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
+        Print( "Cokernel of the map:\n", D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
+    else
+        Print( "Cokernel of the map:\n", D, "^(1x", NrRelations( M ), ") --> ", D, "^(1x", NrGenerators( M ), ")," );
+    fi;
     
     if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
         Print( " ( for ", D, " := ", R, "\033[0m )" );
@@ -1894,7 +1964,11 @@ InstallMethod( Display,
         D := "R";
     fi;
     
-    Print( "Cokernel of the map:\n", D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
+    if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
+        Print( "Cokernel of the map:\n", D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
+    else
+        Print( "Cokernel of the map:\n", D, "^(", NrRelations( M ), "x1) --> ", D, "^(", NrGenerators( M ), "x1)," );
+    fi;
     
     if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
         Print( " ( for ", D, " := ", R, "\033[0m )" );
@@ -1909,10 +1983,65 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ], 1000,
+        
+  function( M )
+    local r, rel, R, RP, name, elements, display, rk, get_string, color;
+    
+    r := NrRelations( M );
+    
+    rel := MatrixOfRelations( M );
+    
+    if not NrGenerators( M ) = 1 then
+        TryNextMethod( );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    name := RingName( R );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        elements := List( [ 1 .. r ], i -> GetEntryOfHomalgMatrix( rel, i, 1 ) );
+    else
+        elements := List( [ 1 .. r ], j -> GetEntryOfHomalgMatrix( rel, 1, j ) );
+    fi;
+    
+    elements := Filtered( elements, x -> not IsZero( x ) );
+    
+    if IsHomalgExternalRingRep( R ) then
+        get_string := Name;
+    else
+        get_string := String;
+    fi;
+    
+    if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
+        color := true;
+    else
+        color := false;
+    fi;
+    
+    if elements <> [ ] then	## this will never happen, since the below method will catch it
+        if color then
+            display := List( elements, x -> [ "\033[01m", get_string( x ), "\033[0m, " ] );
+        else
+            display := List( elements, x -> [ get_string( x ), ", " ] );
+        fi;
+        display := Concatenation( display );
+        display := Concatenation( display );
+        Print( name, "/< ", display{ [ 1 .. Length( display ) - 2 ] }, " >\n" );
+    fi;
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
-    local rel, R, RP, name, diag, display, rk, get_string;
+    local rel, R, RP, name, diag, display, rk, get_string, color;
     
     rel := MatrixOfRelations( M );
     
@@ -1940,24 +2069,44 @@ InstallMethod( Display,
     rk := RankOfModule( M );
     
     if IsHomalgExternalRingRep( R ) then
-        get_string := homalgPointer;
+        get_string := Name;
     else
         get_string := String;
     fi;
     
+    if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
+        color := true;
+    else
+        color := false;
+    fi;
+    
     if diag <> [ ] then
-        display := List( diag, x -> [ name, "/< \033[01m", get_string( x ), "\033[0m > + " ] );
+        if color then
+            display := List( diag, x -> [ name, "/< \033[01m", get_string( x ), "\033[0m > + " ] );
+        else
+            display := List( diag, x -> [ name, "/< ", get_string( x ), " > + " ] );
+        fi;
         display := Concatenation( display );
         display := Concatenation( display );
     else
+        BasisOfModule( M );
+        SetIsFree( M, true );
         display := "";
     fi;
     
     if rk <> 0 then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects ( M ) then
-            Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
+            if color then
+                Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
+            else
+                Print( display, name, "^(1 x", " ", rk, ")\n" );
+            fi;
         else
-            Print( display, name, "^(\033[01m", rk, "\033[0m x 1)\n" );
+            if color then
+                Print( display, name, "^(\033[01m", rk, "\033[0m x 1)\n" );
+            else
+                Print( display, name, "^(", rk, " x 1)\n" );
+            fi;
         fi;
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );

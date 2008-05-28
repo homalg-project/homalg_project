@@ -49,7 +49,7 @@ InstallValue( Functor_TorsionSubmodule,
                 [ "1", [ [ "covariant" ] ] ],
                 [ "OnObjects", _Functor_TorsionSubmodule_OnObjects ]
                 )
-);
+        );
 
 Functor_TorsionSubmodule!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -89,7 +89,7 @@ InstallValue( Functor_TorsionFreeFactor,
                 [ "1", [ [ "covariant" ] ] ],
                 [ "OnObjects", _Functor_TorsionFreeFactor_OnObjects ]
                 )
-);
+        );
 
 Functor_TorsionFreeFactor!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
