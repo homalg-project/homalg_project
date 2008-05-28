@@ -51,6 +51,9 @@ DeclareOperation( "SparseDiagMat",
 DeclareOperation( "*", #FIXME: What does SparseMatrix have to be for this to be obsolete?
         [ IsRingElement, IsSparseMatrix ] );
 
+DeclareOperation( "*",
+        [ IsSparseMatrix, IsSparseMatrix ] );
+
 DeclareOperation( "+", #see above
         [ IsSparseMatrix, IsSparseMatrix ] );
 

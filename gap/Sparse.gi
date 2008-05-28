@@ -230,7 +230,7 @@ InstallMethod( \=,
            A!.entries = B!.entries;
   end
 );
-
+  
 ##
 InstallMethod( TransposedSparseMat,
         [ IsSparseMatrix ],
@@ -323,6 +323,25 @@ InstallMethod( \*,
   end
 );
   
+##
+InstallMethod( \*,
+        [ IsSparseMatrix, IsSparseMatrix ],
+  function( A, B )
+    local C, i, j, rownr;
+    if A!.ncols <> B!.nrows or A!.field <> B!.field then
+        return fail;
+    fi;
+    C := SparseZeroMatrix( A!.nrows, B!.ncols, A!.field );
+    for i in [ 1 .. C!.nrows ] do
+        for j in [ 1 .. Length( A!.indices[i] ) ] do
+            rownr := A!.indices[i][j];
+            AddRow( B!.indices[ rownr ], A!.entries[i][j] * B!.entries[ rownr ], C!.indices[i], C!.entries[i] );
+        od;
+    od;
+    return C;
+  end
+);
+
 ##
 InstallMethod( \+,
         [ IsSparseMatrix, IsSparseMatrix ],
@@ -449,7 +468,6 @@ InstallMethod( AddRow, #with desired side effect!
   
 );
   
-##
 
   
   
