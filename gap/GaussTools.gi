@@ -1,4 +1,4 @@
-#############################################################################
+############################################################################
 ##
 ##  GaussTools.gi         GaussForHomalg package          Simon Goertzen
 ##
@@ -96,7 +96,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                Compose :=
                  function( A, B )
                    
-                   return SparseMatrix( ConvertSparseMatrixToMatrix( Eval( A ) ) * ConvertSparseMatrixToMatrix( Eval( B ) ) );
+                   return Eval( A ) * Eval( B );
                    
                  end,
                
