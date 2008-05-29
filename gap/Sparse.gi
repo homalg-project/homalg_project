@@ -139,7 +139,22 @@ InstallMethod( GetEntry,
 InstallMethod( Display,
         [ IsSparseMatrix ],
   function( M )
-    Display( ConvertSparseMatrixToMatrix( M ) );
+    local str, ws, i, last, j;
+    if Characteristic( M!.field ) = 0 then
+        str := Concatenation( "<a ", String( M!.nrows ), " x ", String( M!.ncols ), " matrix over ", String( M!.field ), ">\n" );
+    else
+        str := "";
+        ws := ListWithIdenticalEntries( Length( String( IntFFE( - One( M!.field ) ) ) ), ' ' );
+        for i in [ 1 .. M!.nrows ] do
+            last := 0;
+            for j in [ 1 .. Length( M!.indices[i] ) ] do
+		str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws{ [ 1 .. Length( ws ) + 1 - Length( String( IntFFE( M!.entries[i][j] ) ) ) ] }, String( IntFFE( M!.entries[i][j] ) ) );
+                last := M!.indices[i][j];
+            od;
+            str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.ncols - last, Concatenation( ws, "." ) ) ), "\n" );
+        od;
+    fi; 
+    Print( str );
     return;
   end
 );
