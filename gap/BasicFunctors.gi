@@ -220,9 +220,9 @@ Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedMorphisms :=
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
   function( M, N )
-    local R, container, weak_pointers, a, deleted, s, t, i, M_s_N_t,
-          l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, alpha, idN, hom,
-          gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
+    local R, container, weak_pointers, a, deleted, s, t, l0, l1, _l0,
+          matM, matN, HP0N, HP1N, r, c, alpha, idN, hom, gen,
+          proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
     
@@ -235,30 +235,8 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
-    container := Functor_Hom!.ContainerForWeakPointersOnComputedModules;
-    
-    weak_pointers := container!.weak_pointers;
-    
-    a := container!.counter;
-        
-    deleted := Filtered( [ 1 .. a ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
-    
-    container!.deleted := deleted;
-    
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
-    
-    for i in Difference( [ 1 .. a ], deleted ) do
-        hom := ElmWPObj( weak_pointers, i );
-        if hom <> fail then
-            M_s_N_t := Genesis( hom )[2];
-            if IsIdenticalObj( M_s_N_t[1][1], M ) and
-               IsIdenticalObj( M_s_N_t[2][1], N ) and
-               M_s_N_t[1][2] = s and M_s_N_t[2][2] = t then
-                return hom;
-            fi;
-        fi;
-    od;
     
     #=====# begin of the core procedure #=====#
     
@@ -388,16 +366,6 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
     
     SetProcedureToNormalizeGenerators( gen, [ proc_to_normalize_generators, [ M, s ], [ N, t ] ] );
     SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, [ M, s, ], [ N, t ] ] );
-    
-    p := PositionOfTheDefaultSetOfRelations( hom );
-    
-    SetGenesis( hom, [ Functor_Hom, [ [ M, s ], [ N, t ] ], p ] );
-    
-    a := a + 1;
-    
-    container!.counter := a;
-    
-    SetElmWPObj( weak_pointers, a, hom );
     
     return hom;
     

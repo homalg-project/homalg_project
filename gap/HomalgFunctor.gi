@@ -105,6 +105,77 @@ InstallMethod( MultiplicityOfFunctor,
 end );
 
 ##
+InstallMethod( FunctorObj,
+        "for homalg morphisms",
+        [ IsHomalgFunctorRep, IsList ],
+        
+  function( Functor, arguments_of_functor )
+    local container, weak_pointers, a, deleted, functor_name,
+          arg_all, p, i, arg_old, l, obj;
+    
+    if IsBound( Functor!.ContainerForWeakPointersOnComputedModules ) then
+        
+        container := Functor!.ContainerForWeakPointersOnComputedModules;
+        
+        weak_pointers := container!.weak_pointers;
+        
+        a := container!.counter;
+        
+        deleted := Filtered( [ 1 .. a ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+        container!.deleted := deleted;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    functor_name := NameOfFunctor( Functor );
+    
+    if IsBound( container ) then
+        if IsBound( Functor!.0 ) then
+            p := 1;
+        else
+            p := 0;
+        fi;
+        l := Length( arguments_of_functor );
+        arg_all :=
+          [ arguments_of_functor,
+            List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultSetOfRelations ) ];
+        for i in Difference( [ 1 .. a ], deleted ) do
+            obj := ElmWPObj( weak_pointers, i );
+            if obj <> fail then
+                arg_old := Genesis( obj ){[ 2 .. 3 ]};
+                if l = Length( arg_old[1] ) then
+                    if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arg_all[1][j] ) ) and
+                       ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = arg_all[2][j] ) then
+                        return obj;
+                    fi;
+                fi;
+            fi;
+        od;
+    fi;
+    
+    obj := CallFuncList( Functor!.OnObjects, arguments_of_functor );
+    
+    #=====# end of the core procedure #=====#
+    
+    if IsBound( container ) then
+        p := PositionOfTheDefaultSetOfRelations( obj );
+        
+        SetGenesis( obj, Concatenation( [ Functor ], arg_all, [ p ] ) );
+        
+        a := a + 1;
+        
+        container!.counter := a;
+        
+        SetElmWPObj( weak_pointers, a, obj );
+    fi;
+    
+    return obj;
+    
+end );
+
+##
 InstallMethod( FunctorMap,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsMapOfFinitelyGeneratedModulesRep, IsList ],
@@ -113,7 +184,7 @@ InstallMethod( FunctorMap,
     local container, weak_pointers, a, deleted, functor_name,
           number_of_arguments, arg_positions, S, T, pos,
           arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
-          b, j, arg_source, arg_target, F_source, F_target, arg_phi, hull_phi,
+          arg_source, arg_target, F_source, F_target, arg_phi, hull_phi,
           emb_source, emb_target, mor;
     
     if not fixed_arguments_of_multi_functor = [ ] and
@@ -138,7 +209,7 @@ InstallMethod( FunctorMap,
     #=====# begin of the core procedure #=====#
     
     functor_name := NameOfFunctor( Functor );
-        
+    
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
     arg_positions := List( fixed_arguments_of_multi_functor, a -> a[1] );
@@ -171,14 +242,7 @@ InstallMethod( FunctorMap,
                 arg_old := phi_rest_mor[1];
                 l := Length( arg_old );
                 if l = Length( arg_all ) then
-                    b := true;
-                    for j in [ 1 .. l ] do
-                        if not IsIdenticalObj( arg_old[j], arg_all[j] ) then
-                            b := false;
-                            break;
-                        fi;
-                    od;
-                    if b then
+                    if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[j], arg_all[j] ) ) then
                         return phi_rest_mor[2];
                     fi;
                 fi;
@@ -246,7 +310,7 @@ InstallMethod( InstallFunctorOnObjects,
         
   function( Functor )
     local functor_name, number_of_arguments, natural_transformation,
-          filter_obj, filter1_obj, filter2_obj, filter3_obj;
+          filter_obj, filter0_obj, filter1_obj, filter2_obj;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -266,39 +330,68 @@ InstallMethod( InstallFunctorOnObjects,
         
         if IsFilter( filter_obj ) then
             
-            if IsBound( Functor!.natural_transformation ) then
+            if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
                 
-                natural_transformation := ValueGlobal( Functor!.natural_transformation );
+                if Length( Functor!.0 ) = 1 then
+                    filter0_obj := Functor!.0[1];
+                else
+                    filter0_obj := IsList;
+                fi;
                 
-                InstallOtherMethod( natural_transformation,
+                InstallOtherMethod( functor_name,
+                        "for homalg modules",
+                        [ filter0_obj, filter_obj ],
+                  function( c, o )
+                    local obj;
+                    
+                    if IsHomalgRing( o ) then
+                        ## I personally prefer the row convention and hence left modules:
+                        obj := AsLeftModule( o );
+                    else
+                        obj := o;
+                    fi;
+                    
+                    return FunctorObj( Functor, [ c, obj ] );
+                    
+                end );
+                
+            else
+                
+                if IsBound( Functor!.natural_transformation ) then
+                    
+                    natural_transformation := ValueGlobal( Functor!.natural_transformation );
+                    
+                    InstallOtherMethod( natural_transformation,
+                            "for homalg modules",
+                            [ filter_obj ],
+                      function( o )
+                        
+                        functor_name( o );			## this sets the attribute named "natural_transformation"
+                        
+                        return natural_transformation( o );	## not an infinite loop because of the side effect of the above line
+                        
+                    end );
+                    
+                fi;
+                
+                InstallOtherMethod( functor_name,
                         "for homalg modules",
                         [ filter_obj ],
                   function( o )
+                    local obj;
                     
-                    functor_name( o );			## this sets the attribute named "natural_transformation"
+                    if IsHomalgRing( o ) then
+                        ## I personally prefer the row convention and hence left modules:
+                        obj := AsLeftModule( o );
+                    else
+                        obj := o;
+                    fi;
                     
-                    return natural_transformation( o );	## not an infinite loop because of the side effect of the above line
+                    return FunctorObj( Functor, [ obj ] );
                     
                 end );
                 
             fi;
-            
-            InstallOtherMethod( functor_name,
-                    "for homalg modules",
-                    [ filter_obj ],
-              function( o )
-                local obj;
-                
-                if IsHomalgRing( o ) then
-                    ## I personally prefer the row convention and hence left modules:
-                    obj := AsLeftModule( o );
-                else
-                    obj := o;
-                fi;
-                
-                return Functor!.OnObjects( obj );
-                
-            end );
             
         else
             
@@ -325,167 +418,147 @@ InstallMethod( InstallFunctorOnObjects,
         
         if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) then
             
-            if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+            if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+                
+                if Length( Functor!.0 ) = 1 then
+                    filter0_obj := Functor!.0[1];
+                else
+                    filter0_obj := IsList;
+                fi;
+                
+                if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg modules",
+                            [ filter0_obj, filter1_obj ],
+                      function( c, o )
+                        local R;
+                        
+                        if IsHomalgRing( o ) then
+                            R := o;
+                        else
+                            R := HomalgRing( o );
+                        fi;
+                        
+                        return functor_name( c, o, R );
+                        
+                    end );
+                    
+                fi;
                 
                 InstallOtherMethod( functor_name,
                         "for homalg modules",
-                        [ filter1_obj ],
-                        function( o )
-                    local R;
+                        [ filter0_obj, filter1_obj, filter2_obj ],
+                  function( c, o1, o2 )
+                    local obj1, obj2;
                     
-                    if IsHomalgRing( o ) then
-                        R := o;
+                    if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
+                        obj1 := o1;
+                        obj2 := o2;
+                    elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
+                        obj1 := o1;
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
+                            obj2 := AsLeftModule( o2 );
+                        else
+                            obj2 := AsRightModule( o2 );
+                        fi;
+                    elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
+                        obj2 := o2;
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
+                            obj1 := AsLeftModule( o1 );
+                        else
+                            obj1 := AsRightModule( o1 );
+                        fi;
+                    elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
+                        if not IsIdenticalObj( o1, o2 ) then
+                            Error( "the two rings are not identical\n" );
+                        fi;
+                        
+                        ## I personally prefer the row convention and hence left modules:
+                        obj1 := AsLeftModule( o1 );
+                        obj2 := obj1;
                     else
-                        R := HomalgRing( o );
+                        ## the default:
+                        obj1 := o1;
+                        obj2 := o2;
                     fi;
                     
-                    return functor_name( o, R );
+                    return FunctorObj( Functor, [ c, obj1, obj2 ] );
                     
                 end );
                 
-            fi;
-            
-            InstallOtherMethod( functor_name,
-                    "for homalg modules",
-                    [ filter1_obj, filter2_obj ],
-              function( o1, o2 )
-                local obj1, obj2;
+            else
                 
-                if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
-                    obj1 := o1;
-                    obj2 := o2;
-                elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
-                    obj1 := o1;
+                if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
                     
-                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
-                        obj2 := AsLeftModule( o2 );
-                    else
-                        obj2 := AsRightModule( o2 );
-                    fi;
-                elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
-                    obj2 := o2;
+                    InstallOtherMethod( functor_name,
+                            "for homalg modules",
+                            [ filter1_obj ],
+                      function( o )
+                        local R;
+                        
+                        if IsHomalgRing( o ) then
+                            R := o;
+                        else
+                            R := HomalgRing( o );
+                        fi;
+                        
+                        return functor_name( o, R );
+                        
+                    end );
                     
-                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
-                        obj1 := AsLeftModule( o1 );
-                    else
-                        obj1 := AsRightModule( o1 );
-                    fi;
-                elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
-                    if not IsIdenticalObj( o1, o2 ) then
-                        Error( "the two rings are not identical\n" );
-                    fi;
-                    
-                    ## I personally prefer the row convention and hence left modules:
-                    obj1 := AsLeftModule( o1 );
-                    obj2 := obj1;
-                else
-                    ## the default:
-                    obj1 := o1;
-                    obj2 := o2;
                 fi;
-                
-                return Functor!.OnObjects( obj1, obj2 );
-                
-            end );
-            
-        else
-            
-            Error( "wrong syntax: ", filter1_obj, filter2_obj, "\n" );
-            
-        fi;
-        
-    elif number_of_arguments = 3 then
-        
-        if not IsBound( Functor!.1[2] ) then
-            Functor!.1[2] := HOMALG.FunctorOn;
-        fi;
-        
-        if not IsBound( Functor!.2[2] ) then
-            Functor!.2[2] := HOMALG.FunctorOn;
-        fi;
-        
-        if not IsBound( Functor!.2[3] ) then
-            Functor!.2[3] := HOMALG.FunctorOn;
-        fi;
-        
-        if not IsBound( Functor!.1[2][1] ) or
-           not IsBound( Functor!.2[2][1] ) or
-           not IsBound( Functor!.3[2][1] ) then
-            return fail;
-        fi;
-        
-        filter1_obj := Functor!.1[2][1];
-        filter2_obj := Functor!.2[2][1];
-        filter3_obj := Functor!.3[2][1];
-        
-        if IsFilter( filter1_obj ) and IsFilter( filter2_obj ) and IsFilter( filter3_obj ) then
-            
-            if Length( Functor!.2[1] ) = 2 and Functor!.2[1][2] = "distinguished" then
                 
                 InstallOtherMethod( functor_name,
                         "for homalg modules",
                         [ filter1_obj, filter2_obj ],
-                        function( o0, o )
-                    local R;
+                  function( o1, o2 )
+                    local obj1, obj2;
                     
-                    if IsHomalgRing( o ) then
-                        R := o;
+                    if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
+                        obj1 := o1;
+                        obj2 := o2;
+                    elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
+                        obj1 := o1;
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
+                            obj2 := AsLeftModule( o2 );
+                        else
+                            obj2 := AsRightModule( o2 );
+                        fi;
+                    elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
+                        obj2 := o2;
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
+                            obj1 := AsLeftModule( o1 );
+                        else
+                            obj1 := AsRightModule( o1 );
+                        fi;
+                    elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
+                        if not IsIdenticalObj( o1, o2 ) then
+                            Error( "the two rings are not identical\n" );
+                        fi;
+                        
+                        ## I personally prefer the row convention and hence left modules:
+                        obj1 := AsLeftModule( o1 );
+                        obj2 := obj1;
                     else
-                        R := HomalgRing( o );
+                        ## the default:
+                        obj1 := o1;
+                        obj2 := o2;
                     fi;
                     
-                    return functor_name( o0, o, R );
+                    return FunctorObj( Functor, [ obj1, obj2 ] );
                     
                 end );
                 
             fi;
             
-            InstallOtherMethod( functor_name,
-                    "for homalg modules",
-                    [ filter1_obj, filter2_obj, filter3_obj ],
-              function( o0, o1, o2 )
-                local obj1, obj2;
-                
-                if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
-                    obj1 := o1;
-                    obj2 := o2;
-                elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
-                    obj1 := o1;
-                    
-                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
-                        obj2 := AsLeftModule( o2 );
-                    else
-                        obj2 := AsRightModule( o2 );
-                    fi;
-                elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
-                    obj2 := o2;
-                    
-                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
-                        obj1 := AsLeftModule( o1 );
-                    else
-                        obj1 := AsRightModule( o1 );
-                    fi;
-                elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
-                    if not IsIdenticalObj( o1, o2 ) then
-                        Error( "the two rings are not identical\n" );
-                    fi;
-                    
-                    ## I personally prefer the row convention and hence left modules:
-                    obj1 := AsLeftModule( o1 );
-                    obj2 := obj1;
-                else
-                    ## the default:
-                    obj1 := o1;
-                    obj2 := o2;
-                fi;
-                
-                return Functor!.OnObjects( o0, obj1, obj2 );
-                
-            end );
-            
         else
             
-            Error( "wrong syntax: ", filter1_obj, filter2_obj, filter3_obj, "\n" );
+            Error( "wrong syntax: ", filter1_obj, filter2_obj, "\n" );
             
         fi;
         
@@ -1148,7 +1221,7 @@ InstallMethod( RightSatelliteOfCofunctor,
         [ IsHomalgFunctorRep, IsString, IsPosInt ],
         
   function( Functor, name, p )
-    local _Functor_OnObjects, _Functor_OnMorphisms, m, data, SF;
+    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF;
     
     _Functor_OnObjects :=
       function( arg )
@@ -1184,15 +1257,32 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     m := MultiplicityOfFunctor( Functor );
     
-    data := List( [ 1 .. m ], i -> [ String( i + 1 ), Functor!.( i ) ] );
+    if IsBound( Functor!.0 ) then
+        if IsList( Functor!.0 ) then
+            z := Concatenation( [ IsInt ], Functor!.0 );
+        else
+            Error( "the zeroth argument of the functor is not a list" );
+        fi;
+    else
+        z := [ IsInt ];
+    fi;
+    
+    data := List( [ 1 .. m ], i -> [ String( i ), Functor!.( i ) ] );
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m + 1 ] ],
-                    [ [ "1", [ [ ], [ IsInt ] ] ] ],
+                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "0", z ] ],
                     data,
                     [ [ "OnObjects", _Functor_OnObjects ] ] );
     
     SF := CallFuncList( CreateHomalgFunctor, data );
+    
+    if m > 1 then
+        SF!.ContainerForWeakPointersOnComputedModules :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+        SF!.ContainerForWeakPointersOnComputedMorphisms :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    fi;
     
     InstallFunctorOnObjects( SF );
     

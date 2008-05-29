@@ -49,6 +49,9 @@ DeclareOperation( "NameOfFunctor",
 DeclareOperation( "MultiplicityOfFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "FunctorObj",
+        [ IsHomalgFunctor, IsList ] );
+
 DeclareOperation( "FunctorMap",
         [ IsHomalgFunctor, IsHomalgMap, IsList ] );
 

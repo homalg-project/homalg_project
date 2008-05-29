@@ -1,6 +1,7 @@
 - make the generation of the methods for functors automatic
 
 - ask Max:
+  . when does a "returned" function remember its context? Always?
   . display issues ($COLUMNS) of external CAS
   . searching for an alternative path fails
   . saving objects
