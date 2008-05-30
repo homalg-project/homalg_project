@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GaussFields.gi              RingsForHomalg package        Simon Goertzen
+##  GaussFields.gi              GaussForHomalg package        Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -28,7 +28,7 @@ InstallMethod( CreateHomalgTable,
     RP_specific := rec( 
                ## Must be defined if other functions are not defined
                    
-               TriangularBasisOfRows :=
+               TriangularBasisOfRows := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
                  function( arg )
                    local M, R, nargs, result, N, H;
                    
@@ -93,6 +93,6 @@ end );
 InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgInternalRingRep ],
   function( M, i, j, R )
-    return GetEntry( Eval( M ), i, j );
+    return GetEntry( Eval( M ), i, j ); #calls GetEntry for sparse matrices
   end
 );

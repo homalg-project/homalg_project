@@ -1,11 +1,10 @@
 #############################################################################
 ##
-##  GaussTools.gd         RingsForHomalg package         Mohamed Barakat
+##  GaussTools.gd         GaussForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the external rings provided by the ring packages
-##  of the Maple implementation of homalg.
+##  Declarations for the rings (fields) provided by GaussForHomalg
 ##
 #############################################################################
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GaussDefault.gi           RingsForHomalg package          Simon Goertzen
+##  GaussDefault.gi           GaussForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -19,7 +19,8 @@ InstallValue( CommonHomalgTableForGaussDefault,
   rec(
       ## Must only then be provided by the RingPackage in case the default
       ## "service" function does not match the Ring
-      
+    
+    #this uses the ReduceMatWithEchelonMat from the Gauss Package to reduce A with B
     DecideZeroRows :=
     function( A, B )
       local R, N;
@@ -32,6 +33,7 @@ InstallValue( CommonHomalgTableForGaussDefault,
     
     end,
   
+    #this uses KernelMat from the Gauss Package to compute Syzygies
     SyzygiesGeneratorsOfRows :=
     function( arg )
       local M, R, syz, N;
@@ -50,6 +52,7 @@ InstallValue( CommonHomalgTableForGaussDefault,
       
     end,
     
+    #this just calls TriangularBasisOfRows, which computes the RREF using EchelonMat from the Gauss Package
     BasisOfRowModule :=
     function( M )
       return TriangularBasisOfRows( M );

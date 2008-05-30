@@ -14,6 +14,7 @@
 #
 ####################################
 
+# add IsSparseMatrix to the list of types of homalg internal matrix types:
 if IsBound( HOMALG.OtherInternalMatrixTypes ) then
     Add( HOMALG.OtherInternalMatrixTypes, IsSparseMatrix );
 else
@@ -24,8 +25,11 @@ fi;
 
 InstallValue( CommonHomalgTableForGaussTools,
         
+        # most of these functions just call the corresponding operation
+        # in the Gauss package, check there in case of questions
+        
         rec(
-                 
+
                ZeroMatrix :=
                  function( C )
                    local R;
@@ -43,7 +47,8 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return SparseIdentityMatrix( NrRows( C ), R!.ring );
                    
                  end,
-               
+                   
+               # for a general ring (field) the involution is just the transposed matrix
                Involution :=
                  function( M )
                    
@@ -86,7 +91,8 @@ InstallValue( CommonHomalgTableForGaussTools,
                    
                  end,
                
-		XKroneckerMat :=
+               # FIXME: not yet implemented    
+               XKroneckerMat :=
                  function( A, B )
                    
                    return fail;
@@ -142,6 +148,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                    
                  end,
                
+               # FIXME: not yet implemented (see below)    
                XZeroColumns :=
                  function( C )
 
