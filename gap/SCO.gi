@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-##
+## FIXME: Explain definition of OT
 DeclareRepresentation( "IsOrbifoldTriangulationRep",
         IsOrbifoldTriangulation, [ "vertices", "max_simplices", "isotropy", "mu" ] );
 
@@ -39,6 +39,7 @@ InstallMethod( OrbifoldTriangulation, "constructor",
   function( s , i , m)
     local v, mm, ind, triangulation;
     v := Union( s );
+    #create the function mu based on m
     mm := function( x )
         for ind in m do
             if ind{[1..4]} = x then return ind[5]; fi;
@@ -49,7 +50,7 @@ InstallMethod( OrbifoldTriangulation, "constructor",
     return Objectify( TheTypeOrbifoldTriangulation, triangulation );
 end );
 
-##
+## this method creates a simplicial set from an OT by iterating the construction, removing unneccessary simplices (there might be more)
 InstallMethod( SimplicialSet, "constructor",
         [ IsOrbifoldTriangulation, IsInt ],
   function( ot, n )
@@ -102,7 +103,7 @@ InstallMethod( Dimension, "for Simplicial Sets",
     return Length( s!.simplicial_set );
 end );
 
-##
+## this computes the boundary, which is a bit complicated because "mu" has to be taken into account
 InstallMethod( BoundaryOperator, "calculate i-th boundary",
         [ IsInt, IsList, IsFunction ],
   function( i, L, mu)
@@ -136,7 +137,7 @@ InstallMethod( BoundaryOperator, "calculate i-th boundary",
 end );
 
 ##
-##
+## create cohomology matrices (as a list), right now these are sparse which makes a lot of sense
 InstallMethod( CreateCohomologyMatrix, "for an internal ring",
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgInternalRingRep ],
   function( ot, s, R )
@@ -151,7 +152,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
         
         for k in [2..Dimension( s )] do
             if Length( S[k] ) = 0 then
-                matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), 1, R ) ); #FIXME : ??
+                matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), 1, R ) ); #FIXME: is there a better way?
             else
                 matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), Length( S[k] ), R ) );
                 for p in [1..Length( S[k] )] do
@@ -159,6 +160,8 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                         ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             # matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
+                            # right now this uses the details of the IsSparseMatrix data structure,
+                            # FIXME: probably should be capsuled if possible (GetEntry, SetEntry)
                             pos := PositionSorted( matrices[k-1]!.indices[ind], p );
                             if IsBound( matrices[k-1]!.indices[ind][pos] ) and matrices[k-1]!.indices[ind][pos] = p then
                                 res := matrices[k-1]!.entries[ind][pos] + MinusOne( R )^i;
@@ -178,10 +181,13 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
             fi;
         od;
         
+        # wrap the matrices into HomalgMatrices
         return List( matrices, function( m ) local s; s := HomalgVoidMatrix( R ); SetEval( s, m ); ResetFilterObj( s, IsVoidMatrix); return s; end );
         
     else
         
+        # non-sparse:
+        # FIXME: should work for both
         for k in [2..Dimension( s )] do
             if Length( S[k] ) = 0 then
                 matrices[k-1] := NullMat( Length( S[k-1] ), 1 );
@@ -203,14 +209,14 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
     
 end );
 
-##
+## homology matrices are the transpose of cohomology matrices
 InstallMethod( CreateHomologyMatrix, "for any ring",
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ],
   function( ot, s, R )
     return List( CreateCohomologyMatrix( ot, s, R ), Involution );    
 end);
 
-##
+## create the matrices interally, then push them via file transfer
 InstallMethod( CreateCohomologyMatrix, "for an external ring",
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgExternalRingRep ],
   function( ot, s, R )
@@ -219,7 +225,7 @@ InstallMethod( CreateCohomologyMatrix, "for an external ring",
     return List( CreateCohomologyMatrix( ot, s, internal_ring ), function(m) SetExtractHomalgMatrixToFile( m, true ); return HomalgMatrix( m, R ); end );    
 end );
 
-##
+## set everything up to work with the homalg Homology method
 InstallMethod( Homology,
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ],
   function( ot, s, R )
@@ -237,7 +243,7 @@ InstallMethod( Homology,
   end
 );
   
-##
+## set everything up to work with the homalg Cohomology method
 InstallMethod( Cohomology,
         [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ],
   function( ot, s, R )
@@ -255,7 +261,7 @@ InstallMethod( Cohomology,
   end
 );
 
-##
+## an easy way of calling the example script SCO/examples/examples.g
 InstallMethod( SCO_Examples, "",
         [ ],
   function( )
