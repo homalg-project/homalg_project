@@ -850,11 +850,10 @@ InstallGlobalFunction( HomalgMorphism,
         
         matrices := rec( );
         
-        reduced_matrices := rec( );
-        
         morphism := rec( 
                          matrices := matrices,
-                         reduced_matrices := reduced_matrices,
+                         reduced_matrices := rec( ),
+                         free_resolutions := rec( ),
                          index_pairs_of_presentations := [ [ 1, 1 ] ]);
     
         matrices.( String( [ 1, 1 ] ) ) := matrix;
@@ -868,7 +867,7 @@ InstallGlobalFunction( HomalgMorphism,
         if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
             SetIsMorphism( morphism, true );
         fi;
-	
+        
         return morphism;
         
     fi;
@@ -962,6 +961,7 @@ InstallGlobalFunction( HomalgMorphism,
     morphism := rec( 
                      matrices := matrices,
                      reduced_matrices := reduced_matrices,
+                     free_resolutions := rec( ),
                      index_pairs_of_presentations := [ index_pair ]);
     
     if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 then

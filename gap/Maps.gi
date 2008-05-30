@@ -17,7 +17,8 @@
 ##
 InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomorphism (ResolutionOfSeq)
   function( arg )
-    local nargs, phi, R, q, d_S, d_T, c, j, d_S_j, d_T_j, phi_j;
+    local nargs, phi, R, q, S, T, d_S, d_T, index_pair,
+          j, d_S_j, d_T_j, phi_j, c;
     
     nargs := Length( arg );
     
@@ -44,22 +45,38 @@ InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomo
         q := infinity;
     fi;
     
-    d_S := ResolutionOfModule( Source( phi ), q );
-    d_T := ResolutionOfModule( Range( phi ), q );
+    S := Source( phi );
+    T := Range( phi );
     
-    q := Maximum( List( [ d_S, d_T ], HighestDegreeInComplex ) );
+    d_S := ResolutionOfModule( S, q );
+    d_T := ResolutionOfModule( T, q );
     
-    d_S := ResolutionOfModule( Source( phi ), q );
-    d_T := ResolutionOfModule( Range( phi ), q );
+    if q = infinity then
+        q := Maximum( List( [ d_S, d_T ], HighestDegreeInComplex ) );
+        d_S := ResolutionOfModule( Source( phi ), q );
+        d_T := ResolutionOfModule( Range( phi ), q );
+    fi;
     
-    j := 0;
+    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
     
-    d_S_j := CokernelEpi( CertainMorphism( d_S, j + 1 ) );
-    d_T_j := CokernelEpi( CertainMorphism( d_T, j + 1 ) );
+    if IsBound( phi!.free_resolutions.(String( index_pair )) ) then
+        c := phi!.free_resolutions.(String( index_pair ));
+        j := HighestDegreeInChainMap( c );
+        phi_j := HighestDegreeMorphismInChainMap( c );
+    else
+        j := 0;
+        
+        d_S_j := CokernelEpi( CertainMorphism( d_S, j + 1 ) );
+        d_T_j := CokernelEpi( CertainMorphism( d_T, j + 1 ) );
+        
+        phi_j := CompleteImSq( d_S_j, phi, d_T_j );
+        
+        c := HomalgChainMap( phi_j, d_S, d_T );
+        
+        phi!.free_resolutions.(String( index_pair )) := c;
+    fi;
     
-    phi_j := CompleteImSq( d_S_j, phi, d_T_j );
-    
-    c := HomalgChainMap( phi_j, d_S, d_T );
+    #=====# begin of the core procedure #=====#
     
     while j < q do
         
@@ -73,6 +90,8 @@ InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomo
         Add( c, phi_j );
         
     od;
+    
+    SetIsMorphism( c, true );
     
     return c;
     

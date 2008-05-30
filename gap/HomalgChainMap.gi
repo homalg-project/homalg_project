@@ -299,6 +299,8 @@ InstallMethod( Add,
     
     c!.(String( l )) := phi;
     
+    ConvertToRangeRep( c!.degrees );
+    
     homalgResetFiltersOfChainMap( c );
     
     return c;
@@ -719,6 +721,8 @@ InstallGlobalFunction( HomalgChainMap,
         fi;
     fi;
     
+    ConvertToRangeRep( degrees );
+    
     c := rec( degrees := degrees );
     
     c.(String( degrees[1] )) := morphism;
@@ -840,13 +844,7 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        Print( " morphism at " );
-        
-        if IsCochainMapOfFinitelyPresentedObjectsRep( o ) then
-            Print( "co" );
-        fi;
-        
-        Print( "homology degree ", degrees[1], ">" );
+        Print( " morphism at degree ", degrees[1], ">" );
         
     else
         
@@ -860,7 +858,7 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        Print( " modules>" );
+        Print( " modules at degrees ", degrees, ">" );
         
     fi;
     
