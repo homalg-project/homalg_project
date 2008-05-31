@@ -146,9 +146,9 @@ InstallValue( CommonHomalgTableForMAGMATools,
                  function( e )
                    local f;
                    
-                   f := Concatenation( [ "DiagonalJoin([" ], e, [ "])" ], HOMALG_IO.Pictograms.DiagMat );
+                   f := Concatenation( [ "DiagonalJoin([" ], e, [ "])" ] );
                    
-                   return homalgSendBlocking( f );
+                   return homalgSendBlocking( f, HOMALG_IO.Pictograms.DiagMat );
                    
                  end,
                
