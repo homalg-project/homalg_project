@@ -9,36 +9,25 @@ SM := SparseMatrix( M );
 REF := EchelonMat( N ).vectors;
 SREF := SparseMatrix( REF );
 
-Print( "\n------------------------------------\n");
+if not IsSparseZeroMatrix( SparseMatrix( EchelonMat( M ).vectors ) + EchelonMat( SM ).vectors ) then
+    Error( "EchelonMat mismatch!" );
+fi;
 
-Print( "- M:\n" );
-Display( M );
+if not IsSparseZeroMatrix( SparseMatrix( EchelonMatTransformation( M ).vectors ) + EchelonMatTransformation( SM ).vectors ) then
+    Error( "EchelonMatTransformation.vectors mismatch!" );
+fi;
 
-Print( "* EchelonMat dense:\n" );
-Display( EchelonMat( M ).vectors );
+if not IsSparseZeroMatrix( SparseMatrix( Concatenation( EchelonMatTransformation( M ).coeffs, EchelonMatTransformation( M ).relations ) ) + UnionOfRows( EchelonMatTransformation( SM ).coeffs, EchelonMatTransformation( SM ).relations ) ) then
+    Error( "EchelonMatTransformation.(coeffs && relations ) mismatch!" );
+fi;
 
-Print( "* EchelonMat sparse:\n" );
-Display( EchelonMat( SM ).vectors );
+if not IsSparseZeroMatrix( SparseMatrix( ReduceMatWithEchelonMat( M, REF ) ) + ReduceMatWithEchelonMat( SM, SREF ) ) then
+    Error( "ReduceMatWithEchelonMat mismatch!" );
+fi;
 
-Print( "@ EchelonMatTransformation dense:\n" );
-Display( Concatenation( EchelonMatTransformation( M ).coeffs, EchelonMatTransformation( M ).relations ) );
+if not IsSparseZeroMatrix( SparseMatrix( KernelMat( M ).relations ) + KernelMat( SM ).relations ) then
+    Error( "KernelMat mismatch!" );
+fi;
 
-Print( "@ EchelonMatTransformation sparse:\n" );
-Display( UnionOfRows( EchelonMatTransformation( SM ).coeffs, EchelonMatTransformation( SM ).relations ) );
+Print( "***all checks successful!***\n" );
 
-Print( "- REF:\n" );
-Display( REF );
-
-Print( "# ReduceMatWithEchelonMat dense:\n" );
-Display( ReduceMatWithEchelonMat( M, REF ) );
-
-Print( "# ReduceMatWithEchelonMat sparse:\n" );
-Display( ReduceMatWithEchelonMat( SM, SREF ) );
-
-Print( "^ KernelMat dense:\n" );
-Display( KernelMat( M ).relations );
-
-Print( "^ KernelMat sparse:\n" );
-Display( KernelMat( SM ).relations );
-
-Print( "------------------------------------\n\n");

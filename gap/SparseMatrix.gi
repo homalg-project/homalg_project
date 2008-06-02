@@ -140,7 +140,7 @@ InstallMethod( Display,
         [ IsSparseMatrix ],
   function( M )
     local str, ws, i, last, j;
-    if Characteristic( M!.field ) = 0 then
+    if Characteristic( M!.field ) = 0 or M!.nrows = 0 or M!.ncols = 0 then
         str := Concatenation( "<a ", String( M!.nrows ), " x ", String( M!.ncols ), " matrix over ", String( M!.field ), ">\n" );
     else
         str := "";
