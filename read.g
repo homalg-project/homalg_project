@@ -8,6 +8,8 @@
 ##
 #############################################################################
 
-ReadPackage( "Gauss", "gap/Gauss.gi" );
+ReadPackage( "Gauss", "gap/GaussDense.gi" );
 
-ReadPackage( "Gauss", "gap/Sparse.gi" );
+ReadPackage( "Gauss", "gap/SparseMatrix.gi" );
+
+ReadPackage( "Gauss", "gap/GaussSparse.gi" );

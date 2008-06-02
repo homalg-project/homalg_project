@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Gauss.gi               Gauss package                      Simon Goertzen
+##  GaussDense.gi               Gauss package                 Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for Gauss.
+##  Implementation stuff for Gauss algorithms on dense (IsMatrix) matrices.
 ##
 #############################################################################
 
@@ -39,7 +39,12 @@ InstallMethod( EchelonMatTransformationDestructive,
           T,         # transformation matrix
           coeffs,    # list of coefficient vectors for 'vectors'
           relations, # basis vectors of the null space of 'mat'
-          row, head, x, row2, rank, list;
+          row,
+          head,
+          x,
+          row2,
+          rank,
+          list;
     
     nrows := Length( mat );
     ncols := Length( mat[1] );
@@ -153,7 +158,12 @@ InstallMethod( EchelonMatDestructive,
           heads,     # list of pivot positions in 'vectors'
           i,         # loop over rows
           j,         # loop over columns
-          row, head, x, row2, rank, list;
+          row,
+          head,
+          x,
+          row2,
+          rank,
+          list;
     
     nrows := Length( mat );
     ncols := Length( mat[1] );
@@ -227,7 +237,20 @@ InstallMethod( ReduceMatWithEchelonMat,
         "for general matrices over a field, second argument must be in REF",
         [ IsMatrix, IsMatrix ],
   function( mat, N )
-    local nrows1, ncols, nrows2, M, f, v, vc, zero, i, row2, j, k, row1, x;
+    local nrows1,
+          ncols,
+          nrows2,
+          M,
+          f,
+          v,
+          vc,
+          zero,
+          i,
+          row2,
+          j,
+          k,
+          row1,
+          x;
     nrows1 := Length( mat );
     nrows2 := Length( N );
     if nrows1 = 0 or nrows2 = 0 then
@@ -271,7 +294,10 @@ end );
 ##
 InstallGlobalFunction( KernelMat,
   function( arg )
-    local copymat, f, v, vc;
+    local copymat,
+          f,
+          v,
+          vc;
     
     if IsSparseMatrix( arg[1] ) then
         return CallFuncList( KernelMatSparse, arg );
@@ -308,7 +334,10 @@ InstallMethod( KernelMatDestructive,
           T,         # transformation matrix
           coeffs,    # list of coefficient vectors for 'vectors'
           relations, # basis vectors of the null space of 'mat'
-          row, head, x, row2;
+          row,
+          head,
+          x,
+          row2;
     
     nrows := Length( mat );
     ncols := Length( mat[1] );

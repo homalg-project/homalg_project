@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Sparse.gd               Gauss package                     Simon Goertzen
+##  SparseMatrix.gd              Gauss package                Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for Gauss with sparse matrices.
+##  Declaration stuff for the Category IsSparseMatrix of sparse matrices.
 ##
 #############################################################################
 
@@ -77,24 +77,4 @@ DeclareOperation( "SparseZeroRows",
 
 DeclareOperation( "AddRow",
         [ IsList, IsList, IsList, IsList ] );
-
-DeclareOperation( "EchelonMat",
-        [ IsSparseMatrix ] );
-
-DeclareOperation( "EchelonMatDestructive",
-        [ IsSparseMatrix ] );
-
-DeclareOperation( "EchelonMatTransformation",
-        [ IsSparseMatrix ] );
-
-DeclareOperation( "EchelonMatTransformationDestructive",
-        [ IsSparseMatrix ] );
-
-DeclareOperation( "ReduceMatWithEchelonMat",
-        [ IsSparseMatrix, IsSparseMatrix ] ) ;
-
-DeclareGlobalFunction( "KernelMatSparse" );
-
-DeclareOperation( "KernelMatDestructive",
-        [ IsSparseMatrix, IsList ] );
 
