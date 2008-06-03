@@ -1,23 +1,23 @@
 #############################################################################
 ##
-##  GaussSparse.gd              Gauss package                 Simon Goertzen
+##  HermiteSparse.gd             Gauss package                Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for performing Gauss algorithms on sparse matrices.
+##  Declaration stuff for performing Hermite algorithms on sparse matrices.
 ##
 #############################################################################
 
 ##
-DeclareOperation( "EchelonMatDestructive",
+DeclareOperation( "HermiteMatDestructive",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "EchelonMatTransformationDestructive",
+DeclareOperation( "HermiteMatTransformationDestructive",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "ReduceMatWithEchelonMat",
+DeclareOperation( "ReduceMatWithHermiteMat",
         [ IsSparseMatrix, IsSparseMatrix ] ) ;
 
-DeclareOperation( "KernelEchelonMatDestructive",
+DeclareOperation( "KernelHermiteMatDestructive",
         [ IsSparseMatrix, IsList ] );
 

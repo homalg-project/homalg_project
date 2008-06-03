@@ -10,7 +10,7 @@
 
 ##
 DeclareRepresentation( "IsSparseMatrixRep",
-        IsSparseMatrix, [ "nrows", "ncols", "indices", "entries", "field" ] );
+        IsSparseMatrix, [ "nrows", "ncols", "indices", "entries", "ring" ] );
 
 ##
 BindGlobal( "TheFamilyOfSparseMatrices",
@@ -23,16 +23,16 @@ BindGlobal( "TheTypeSparseMatrix",
 ##
 InstallGlobalFunction( SparseMatrix,
   function( arg )
-    local nargs, M, nrows, ncols, i, j, indices, entries, field;
+    local nargs, M, nrows, ncols, i, j, indices, entries, ring;
     
     nargs := Length( arg );
     
     if nargs = 5 then
-        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], field := arg[5] ) );
+        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := arg[5] ) );
     elif nargs = 4 then
-        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], field := FindField( arg[4] ) ) );
+        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := FindRing( arg[4] ) ) );
     elif nargs > 1 then
-        Error( "wrong number of arguments! SparseMatrix expects nrows, ncols, indices, entries, [field]!" ); 
+        Error( "wrong number of arguments! SparseMatrix expects nrows, ncols, indices, entries, [ring]!" ); 
     elif not IsList( arg[ 1 ] ) then
         Error( "SparseMatrix constructor with 1 argument expects a (dense) Matrix or List!" );
     fi;
@@ -51,10 +51,10 @@ InstallGlobalFunction( SparseMatrix,
         return SparseMatrix( nrows, 0, List( [ 1 .. nrows ], i -> [] ), List( [ 1 .. nrows ], i -> [] ), "unknown" );
     fi;
     
+    ring := FindRing( List( M, i -> Filtered( i, j -> not IsZero(j) ) ) );
+    
     indices := [];
     entries := [];
-    
-    field := Field( M[1][1] );
     
     for i in [ 1..nrows ] do
         indices[i] := [];
@@ -67,7 +67,7 @@ InstallGlobalFunction( SparseMatrix,
         od;
     od;
     
-    return SparseMatrix( nrows, ncols, indices, entries, field );
+    return SparseMatrix( nrows, ncols, indices, entries, ring );
     
     end
 );
@@ -76,23 +76,23 @@ InstallGlobalFunction( SparseMatrix,
 InstallMethod( ConvertSparseMatrixToMatrix,
         [ IsSparseMatrix ],
   function( SM )
-    local indices, entries, i, j, field, M;
+    local indices, entries, i, j, ring, M;
     if SM!.nrows = 0 then
 	return [ ];
     elif SM!.ncols = 0 then
         return List( [ 1 .. SM!.nrows ], i -> [] );
     fi;
     
-    field := SM!.field;
+    ring := SM!.ring;
     
-    if field = "unknown" then
-        field := Rationals;
+    if ring = "unknown" then
+        ring := Rationals;
     fi;
     
     indices := SM!.indices;
     entries := SM!.entries;
 
-    M := NullMat( SM!.nrows, SM!.ncols, field );
+    M := NullMat( SM!.nrows, SM!.ncols, ring );
     
     for i in [ 1 .. SM!.nrows ] do
         for j in [ 1 .. Length( indices[i] ) ] do
@@ -107,7 +107,7 @@ InstallMethod( ConvertSparseMatrixToMatrix,
 );
   
 ##
-InstallMethod( CopyMat, #FIXME: several algorithms need to use this method instead of copying independently
+InstallMethod( CopyMat,
         [ IsSparseMatrix ],
   function( M )
     local indices, entries, i;
@@ -117,7 +117,7 @@ InstallMethod( CopyMat, #FIXME: several algorithms need to use this method inste
         indices[i] := ShallowCopy( M!.indices[i] );
         entries[i] := ShallowCopy( M!.entries[i] );
     od;
-    return SparseMatrix( M!.nrows, M!.ncols, indices, entries, M!.field );
+    return SparseMatrix( M!.nrows, M!.ncols, indices, entries, M!.ring );
   end
 );
 
@@ -128,7 +128,7 @@ InstallMethod( GetEntry,
     local p;
     p := PositionSet( M!.indices[i], j );
     if p = fail then
-        return Zero( M!.field );
+        return Zero( M!.ring );
     else
         return M!.entries[i][p];
     fi;
@@ -140,15 +140,15 @@ InstallMethod( Display,
         [ IsSparseMatrix ],
   function( M )
     local str, ws, i, last, j;
-    if Characteristic( M!.field ) = 0 or M!.nrows = 0 or M!.ncols = 0 then
-        str := Concatenation( "<a ", String( M!.nrows ), " x ", String( M!.ncols ), " matrix over ", String( M!.field ), ">\n" );
+    if M!.nrows = 0 or M!.ncols = 0 or Characteristic( M!.ring ) = 0 then
+        str := Concatenation( "<a ", String( M!.nrows ), " x ", String( M!.ncols ), " matrix over ", String( M!.ring ), ">\n" );
     else
         str := "";
-        ws := ListWithIdenticalEntries( Length( String( IntFFE( - One( M!.field ) ) ) ), ' ' );
+        ws := ListWithIdenticalEntries( Length( String( Int( - One( M!.ring ) ) ) ), ' ' );
         for i in [ 1 .. M!.nrows ] do
             last := 0;
             for j in [ 1 .. Length( M!.indices[i] ) ] do
-		str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws{ [ 1 .. Length( ws ) + 1 - Length( String( IntFFE( M!.entries[i][j] ) ) ) ] }, String( IntFFE( M!.entries[i][j] ) ) );
+		str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.indices[i][j] - 1 - last, Concatenation( ws, "." ) ) ), ws{ [ 1 .. Length( ws ) + 1 - Length( String( Int( M!.entries[i][j] ) ) ) ] }, String( Int( M!.entries[i][j] ) ) );
                 last := M!.indices[i][j];
             od;
             str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.ncols - last, Concatenation( ws, "." ) ) ), "\n" );
@@ -160,22 +160,22 @@ InstallMethod( Display,
 );
 
 ##
-InstallMethod( FindField,
+InstallMethod( FindRing,
         [ IsList ],
   function( entries )
-    local found_field, i, field;
-    found_field := false;
+    local found_ring, i, ring;
+    found_ring := false;
     i := 1;
-    while found_field = false and i <= Length( entries ) do
+    while found_ring = false and i <= Length( entries ) do
         if IsBound( entries[i][1] ) then
-            field := Field( entries[i][1] );
-            found_field := true;
+            ring := DefaultRing( entries[i][1] );
+            found_ring := true;
         fi;
         i := i + 1;
     od;
     
-    if found_field = true then
-        return field;
+    if found_ring = true then
+        return ring;
     else
         return "unknown";
     fi;
@@ -187,21 +187,21 @@ InstallMethod( FindField,
 ##
 InstallGlobalFunction( SparseZeroMatrix,
   function( arg )
-    local nargs, field;
+    local nargs, ring;
     
     nargs := Length( arg );
     
-    if IsField( arg[ nargs ] ) or arg[ nargs ] = "unknown" then
-        field := arg[ Length( arg ) ];
+    if IsRing( arg[ nargs ] ) or arg[ nargs ] = "unknown" then
+        ring := arg[ Length( arg ) ];
         nargs := nargs - 1;
     else
-        field := "unknown";
+        ring := "unknown";
     fi;
 
     if nargs = 1 then
-        return SparseMatrix( arg[1], arg[1], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), field );
+        return SparseMatrix( arg[1], arg[1], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), ring );
     elif nargs = 2 then
-        return SparseMatrix( arg[1], arg[2], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), field );
+        return SparseMatrix( arg[1], arg[2], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), ring );
     else
         return fail;
     fi;
@@ -212,21 +212,21 @@ InstallGlobalFunction( SparseZeroMatrix,
 ##
 InstallGlobalFunction( SparseIdentityMatrix,
   function( arg )
-    local nargs, field, indices, entries;
+    local nargs, ring, indices, entries;
     
     nargs := Length( arg );
     
-    if IsField( arg[ nargs ] ) then
-        field := arg[ Length( arg ) ];
+    if IsRing( arg[ nargs ] ) then
+        ring := arg[ Length( arg ) ];
         nargs := nargs - 1;
     else
-        field := Rationals;
+        ring := Rationals;
     fi;
     
     if nargs = 1 then
         indices := List( [ 1 .. arg[1] ], i -> [i] );
-        entries := List( [ 1 .. arg[1] ], i -> [ One( field ) ] );
-        return SparseMatrix( arg[1], arg[1], indices, entries, field );
+        entries := List( [ 1 .. arg[1] ], i -> [ One( ring ) ] );
+        return SparseMatrix( arg[1], arg[1], indices, entries, ring );
     else
         return fail;
     fi;
@@ -241,6 +241,7 @@ InstallMethod( \=,
   function( A, B )
     return A!.nrows = B!.nrows and
            A!.ncols = B!.ncols and
+           A!.ring = B!.ring and
            A!.indices = B!.indices and
            A!.entries = B!.entries;
   end
@@ -251,7 +252,7 @@ InstallMethod( TransposedSparseMat,
         [ IsSparseMatrix ],
   function( M )
     local T, i, j;
-    T := SparseZeroMatrix( M!.ncols, M!.nrows, M!.field );
+    T := SparseZeroMatrix( M!.ncols, M!.nrows, M!.ring );
     for i in [ 1 .. M!.nrows ] do
         for j in [ 1 .. Length( M!.indices[i] ) ] do
             Add( T!.indices[ M!.indices[i][j] ], i );
@@ -268,7 +269,7 @@ InstallMethod( TransposedSparseMat,
 InstallMethod( CertainRows,
         [ IsSparseMatrix, IsList ],
   function( M, L )
-    return SparseMatrix( Length( L ), M!.ncols, M!.indices{ L }, M!.entries{ L }, M!.field );
+    return SparseMatrix( Length( L ), M!.ncols, M!.indices{ L }, M!.entries{ L }, M!.ring );
   end
 );
   
@@ -291,7 +292,7 @@ InstallMethod( CertainColumns,
         od;
     od;
     
-    return SparseMatrix( M!.nrows, Length( L ), indices, entries, M!.field );
+    return SparseMatrix( M!.nrows, Length( L ), indices, entries, M!.ring );
     
   end
 );
@@ -300,7 +301,7 @@ InstallMethod( CertainColumns,
 InstallMethod( UnionOfRows,
         [ IsSparseMatrix, IsSparseMatrix ],
   function( A, B )
-    return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), Concatenation( A!.entries, B!.entries ), A!.field );
+    return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), Concatenation( A!.entries, B!.entries ), A!.ring );
   end
 );
   
@@ -308,7 +309,7 @@ InstallMethod( UnionOfRows,
 InstallMethod( UnionOfColumns,
         [ IsSparseMatrix, IsSparseMatrix ],
   function( A, B )
-    return SparseMatrix( A!.nrows, A!.ncols + B!.ncols, List( [ 1 .. A!.nrows ], i -> Concatenation( A!.indices[i], B!.indices[i] + A!.ncols ) ), List( [ 1 .. A!.nrows ], i -> Concatenation( A!.entries[i], B!.entries[i] ) ), A!.field );
+    return SparseMatrix( A!.nrows, A!.ncols + B!.ncols, List( [ 1 .. A!.nrows ], i -> Concatenation( A!.indices[i], B!.indices[i] + A!.ncols ) ), List( [ 1 .. A!.nrows ], i -> Concatenation( A!.entries[i], B!.entries[i] ) ), A!.ring );
   end
 );
 
@@ -331,9 +332,9 @@ InstallMethod( \*,
         [ IsRingElement, IsSparseMatrix ],
   function( a, A )
     if IsZero( a ) then
-        return SparseZeroMatrix( A!.nrows, A!.ncols, A!.field );
+        return SparseZeroMatrix( A!.nrows, A!.ncols, A!.ring );
     else
-        return SparseZeroMatrix( A!.nrows, A!.ncols, A!.indices, A!.entries * a, A!.field );
+        return SparseZeroMatrix( A!.nrows, A!.ncols, A!.indices, A!.entries * a, A!.ring );
     fi;
   end
 );
@@ -343,10 +344,10 @@ InstallMethod( \*,
         [ IsSparseMatrix, IsSparseMatrix ],
   function( A, B )
     local C, i, j, rownr;
-    if A!.ncols <> B!.nrows or A!.field <> B!.field then
+    if A!.ncols <> B!.nrows or A!.ring <> B!.ring then
         return fail;
     fi;
-    C := SparseZeroMatrix( A!.nrows, B!.ncols, A!.field );
+    C := SparseZeroMatrix( A!.nrows, B!.ncols, A!.ring );
     for i in [ 1 .. C!.nrows ] do
         for j in [ 1 .. Length( A!.indices[i] ) ] do
             rownr := A!.indices[i][j];
@@ -399,7 +400,7 @@ InstallMethod( IsSparseIdentityMatrix,
         [ IsSparseMatrix ],
   function( M )
     local one, i;
-    one := One( M!.field );
+    one := One( M!.ring );
     for i in [ 1 .. M!.nrows ] do
         if M!.indices[i] <> [i] or M!.entries[i] <> [ one ] then
             return false;

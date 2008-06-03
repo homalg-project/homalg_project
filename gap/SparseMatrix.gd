@@ -23,7 +23,7 @@ DeclareOperation( "CopyMat",
 DeclareOperation( "GetEntry",
         [ IsSparseMatrix, IsInt, IsInt ] );
 
-DeclareOperation( "FindField",
+DeclareOperation( "FindRing",
         [ IsList ] );
 
 DeclareGlobalFunction( "SparseZeroMatrix" );

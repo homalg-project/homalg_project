@@ -29,7 +29,7 @@ InstallMethod( EchelonMatTransformationDestructive,
         "generic method for matrices",
         [ IsMatrix and IsMutable ],
         function( mat )
-    local zero,      # zero of the field of <mat>
+    local zero,      # zero of the ring of <mat>
           nrows,     # number of rows in <mat>
           ncols,     # number of columns in <mat>
           vectors,   # list of basis vectors
@@ -151,7 +151,7 @@ InstallMethod( EchelonMatDestructive,
         "generic method for matrices",
         [ IsMatrix and IsMutable ],
         function( mat )
-    local zero,      # zero of the field of <mat>
+    local zero,      # zero of the ring of <mat>
           nrows,     # number of rows in <mat>
           ncols,     # number of columns in <mat>
           vectors,   # list of basis vectors
@@ -233,8 +233,16 @@ InstallMethod( EchelonMatDestructive,
 end );
 
 ##
+InstallMethod( ReduceMat,
+        [ IsMatrix, IsMatrix ],
+  function( mat, N )
+    return ReduceMatWithEchelonMat( mat, N );
+  end
+);
+
+##
 InstallMethod( ReduceMatWithEchelonMat,
-        "for general matrices over a field, second argument must be in REF",
+        "for general matrices over a ring, second argument must be in REF",
         [ IsMatrix, IsMatrix ],
   function( mat, N )
     local nrows1,
@@ -324,7 +332,7 @@ InstallMethod( KernelMatDestructive,
         "generic method for matrices",
         [ IsMatrix and IsMutable, IsList ],
   function( mat, L )
-    local zero,      # zero of the field of <mat>
+    local zero,      # zero of the ring of <mat>
           nrows,     # number of rows in <mat>
           ncols,     # number of columns in <mat>
           vectors,   # list of basis vectors

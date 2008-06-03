@@ -10,6 +10,14 @@
 
 ReadPackage( "Gauss", "gap/GaussDense.gd" );
 
+##
+
 ReadPackage( "Gauss", "gap/SparseMatrix.gd" );
 
+##
+
+ReadPackage( "Gauss", "gap/Sparse.gd" );
+
 ReadPackage( "Gauss", "gap/GaussSparse.gd" );
+
+ReadPackage( "Gauss", "gap/HermiteSparse.gd" );

@@ -1,19 +1,19 @@
 #############################################################################
 ##
-##  GaussSparse.gi               Gauss package                Simon Goertzen
+##  HermiteSparse.gi              Gauss package               Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B fÅ¸r Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for performing Gauss algorithms on sparse matrices.
+##  Implementation stuff for performing Hermite algorithms on sparse matrices.
 ##
 #############################################################################
 
 ########################################################
-## Gaussian Algorithms:
+## Hermite Algorithms:
 ########################################################
 
 ##
-InstallMethod( EchelonMatDestructive,
+InstallMethod( HermiteMatDestructive,
         "generic method for matrices",
         [ IsSparseMatrix ],
   function( mat )
@@ -112,7 +112,7 @@ InstallMethod( EchelonMatDestructive,
 );
 
 ##
-InstallMethod( EchelonMatTransformationDestructive,
+InstallMethod( HermiteMatTransformationDestructive,
         "method for sparse matrices",
         [ IsSparseMatrix ],
   function( mat )
@@ -237,7 +237,7 @@ InstallMethod( EchelonMatTransformationDestructive,
 );
 
 ##
-InstallMethod( ReduceMatWithEchelonMat,
+InstallMethod( ReduceMatWithHermiteMat,
         "for sparse matrices over a ring, second argument must be in REF",
         [ IsSparseMatrix, IsSparseMatrix ],
   function( mat, N )
@@ -291,7 +291,7 @@ InstallMethod( ReduceMatWithEchelonMat,
 end);
 
 ##
-InstallMethod( KernelEchelonMatDestructive,
+InstallMethod( KernelHermiteMatDestructive,
         "method for sparse matrices",
         [ IsSparseMatrix, IsList ],
   function( mat, L )
