@@ -23,18 +23,21 @@ InstallMethod( HermiteMatDestructive,
           entries,
           vectors,   # list of basis vectors
           heads,     # list of pivot positions in 'vectors'
+	  char,      # characteristic of the Ring
+	  column,    # loop over columns
           i,         # loop over rows
           j,         # loop over columns
-          row,
+          min,
+          g,
+          e,
           head,
           x,
-          row2,
-          rank,
+          m,
           list,
+          rank,
+          p,
 	  row_indices,
-	  row_entries,
-	  p;
-	  
+	  row_entries;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -45,34 +48,49 @@ InstallMethod( HermiteMatDestructive,
     heads   := ListWithIdenticalEntries( ncols, 0 );
     vectors := rec( indices := [], entries := [] );
     
-    for i in [ 1 .. nrows ] do
-        
-        row_indices := indices[i];
-        
-        # Reduce the row with the known basis vectors.
-        for j in [ 1 .. ncols ] do
-            head := heads[j];
-            if head <> 0 then
-                p := PositionSet( row_indices, j );
-                if p <> fail then
-                    row_entries := entries[i];
-                    x := - row_entries[p];
-                    AddRow( vectors.indices[ head ], vectors.entries[ head ] * x, row_indices, row_entries );
-                fi;
-            fi;
-        od;
+    char := Characteristic( mat!.ring );
+    
+    if Length( PrimePowersInt( char ) ) > 2 then
+        Error( "only Z / p^n * Z is supported right now!" );
+    fi;
+    
+    for column in [ 1 .. ncols ] do
+    
+        #find the basis vector with leftmost nonzero as-close-to-unit-as-possible entry
+        row_indices := Filtered( [ 1 .. nrows ], i -> Length( indices[i] ) > 0 and indices[i][1] = column );
         
         if Length( row_indices ) > 0 then
-            j := row_indices[1];
-            row_entries := entries[i];
-            # We found a new basis vector.
-            x := Inverse( row_entries[1] );
-            if x = fail then
-                TryNextMethod();
+            i := 1;
+            min := [ i, Gcd( Int( entries[ row_indices[i] ][ 1 ] ), char ) ];
+            while i < Length( row_indices ) and min[2] > 1 do
+                i := i + 1;
+                g := Gcd( Int( entries[ row_indices[i] ][ 1 ] ), char );
+                if min[2] > g then
+                    min := [ i, g ];
+                fi;
+            od;
+            #we found a new basis vector.
+            e := entries[ row_indices[ min[1] ] ][ 1 ];
+            if IsUnit( e ) then
+                x := Inverse( e );
+                Add( vectors.indices, indices[ row_indices[ min[1] ] ] );
+                Add( vectors.entries, entries[ row_indices[ min[1] ] ] * x );
+            else
+                Add( vectors.indices, indices[ row_indices[ min[1] ] ] );
+                Add( vectors.entries, entries[ row_indices[ min[1] ] ] );
             fi;
-            Add( vectors.indices, row_indices );
-            Add( vectors.entries, row_entries * x );
-            heads[j]:= Length( vectors.indices );
+            heads[column] := Length( vectors.indices );
+            
+            #reduce the other rows with the newfound basis vector.
+            head := heads[column];
+            e := vectors.entries[head][1];
+            for i in [ 1 .. Length( row_indices ) ] do
+                if i <> min[1] then
+                    x := - entries[ row_indices[i] ][1] / e;
+                    m := MultRow( vectors.indices[head], vectors.entries[head], x );
+                    AddRow( m.indices, m.entries, indices[ row_indices[i] ], entries[ row_indices[i] ] );
+                fi;
+            od;    
         fi;
         
     od;
@@ -85,13 +103,17 @@ InstallMethod( HermiteMatDestructive,
     for j in [ncols,ncols-1..1] do
         head := heads[j];
         if head <> 0 then
+            e := vectors.entries[ head ][1];
             for i in Filtered( [1..head-1], x -> not x in heads{[j+1..ncols]} ) do
                 row_indices := vectors.indices[i];
                 p := PositionSet( row_indices, j );
                 if p <> fail then
                     row_entries := vectors.entries[i];
-                    x := - row_entries[p];
-                    AddRow( vectors.indices[ head ], vectors.entries[ head ] * x, row_indices, row_entries );
+                    x := row_entries[p];
+                    if Gcd( Int( e ), char ) <= Gcd( Int( x ), char ) then
+                        m := MultRow( vectors.indices[ head ], vectors.entries[ head ], -x/e );
+                        AddRow( m.indices, m.entries, row_indices, row_entries );
+                    fi;
                 fi;
             od;
         fi;
@@ -99,11 +121,11 @@ InstallMethod( HermiteMatDestructive,
     
     #order rows:
     
-    vectors.indices := vectors.indices{list};
-    vectors.entries := vectors.entries{list};
+    #vectors.indices := vectors.indices{list};
+    #vectors.entries := vectors.entries{list};
     
-    list := Filtered( [1..ncols], j -> heads[j] <> 0 );
-    heads{list} := [1..rank]; #just for compatibility, vectors are ordered already
+    #list := Filtered( [1..ncols], j -> heads[j] <> 0 );
+    #heads{list} := [1..rank]; #just for compatibility, vectors are ordered already
     
     return rec( heads := heads,
                 vectors := SparseMatrix( rank, ncols, vectors.indices, vectors.entries, mat!.ring ) );

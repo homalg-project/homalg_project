@@ -433,7 +433,19 @@ InstallMethod( SparseZeroRows,
 );
 
 ##
-
+InstallMethod( MultRow, #no side effect!
+        [ IsList, IsList, IsRingElement ],
+  function( indices, entries, x )
+    local prod, list;
+    if IsUnit( x ) then
+        return rec( indices := indices, entries := entries * x );
+    else
+        prod := entries * x;
+        list := Filtered( [ 1 .. Length( prod ) ], i -> not IsZero( prod[i] ) );
+        return rec( indices := indices{ list }, entries := prod{ list } );
+    fi;
+  end
+);
 
 ##
 InstallMethod( AddRow, #with desired side effect!
