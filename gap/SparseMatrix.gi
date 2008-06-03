@@ -343,7 +343,7 @@ InstallMethod( \*,
 InstallMethod( \*,
         [ IsSparseMatrix, IsSparseMatrix ],
   function( A, B )
-    local C, i, j, rownr;
+    local C, i, j, rownr, m;
     if A!.ncols <> B!.nrows or A!.ring <> B!.ring then
         return fail;
     fi;
@@ -351,7 +351,8 @@ InstallMethod( \*,
     for i in [ 1 .. C!.nrows ] do
         for j in [ 1 .. Length( A!.indices[i] ) ] do
             rownr := A!.indices[i][j];
-            AddRow( B!.indices[ rownr ], A!.entries[i][j] * B!.entries[ rownr ], C!.indices[i], C!.entries[i] );
+	    m := MultRow( B!.indices[ rownr ], B!.entries[ rownr ], A!.entries[i][j] );
+            AddRow( m.indices, m.entries, C!.indices[i], C!.entries[i] );
         od;
     od;
     return C;
