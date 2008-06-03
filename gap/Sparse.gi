@@ -61,7 +61,7 @@ InstallGlobalFunction( KernelMatSparse,
     elif Length( arg ) = 1 then
         return KernelHermiteMatDestructive( M, [ 1 .. M!.nrows ] );
     elif Length( arg ) > 1 then
-        return KernelHermiteMatDestructive( M, [ 1 .. M!.nrows ] );
+        return KernelHermiteMatDestructive( M, arg[2] );
     fi;
     
   end
