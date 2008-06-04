@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Homalg Table for Fields in GAP with the Gauss package
+##  Homalg Table for Z / p^n * Z in GAP with the Gauss package
 ##
 #############################################################################
 
@@ -15,8 +15,8 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for a field",
-        [ IsField ],
+        "for Z / p^n * Z",
+        [ IsRing and IsFinite ],
         
   function( ext_ring_obj )
     local RP, RP_default, RP_specific, component;
@@ -91,8 +91,11 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
   function( M, i, j, R )
-    return GetEntry( Eval( M ), i, j ); #calls GetEntry for sparse matrices
+    if IsSparseMatrix( Eval( M ) ) then
+        return GetEntry( Eval( M ), i, j ); #calls GetEntry for sparse matrices
+    fi;
+    TryNextMethod();
   end
 );

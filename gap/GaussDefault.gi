@@ -20,14 +20,14 @@ InstallValue( CommonHomalgTableForGaussDefault,
       ## Must only then be provided by the RingPackage in case the default
       ## "service" function does not match the Ring
     
-    #this uses the ReduceMatWithEchelonMat from the Gauss Package to reduce A with B
+    #this uses ReduceMat from the Gauss Package to reduce A with B
     DecideZeroRows :=
     function( A, B )
       local R, N;
      
       R := HomalgRing( A );
       N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
-      SetEval( N, ReduceMatWithEchelonMat( Eval( A ), Eval ( B ) ) );
+      SetEval( N, ReduceMat( Eval( A ), Eval ( B ) ) );
       ResetFilterObj( N, IsVoidMatrix );
       return N;
     

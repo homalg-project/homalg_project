@@ -12,4 +12,4 @@ ReadPackage( "GaussForHomalg", "gap/GaussTools.gi" );
 
 ReadPackage( "GaussForHomalg", "gap/GaussDefault.gi" );
 
-ReadPackage( "GaussForHomalg", "gap/GaussFields.gi" );
+ReadPackage( "GaussForHomalg", "gap/GaussFQI.gi" );
