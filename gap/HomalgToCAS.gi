@@ -639,6 +639,18 @@ InstallGlobalFunction( homalgDisplay,
 end );
 
 ##
+InstallGlobalFunction( StringToInt,
+  function( s )
+    
+    if s = "" then
+        Error( "received an empty string while expecting a string containing an integer\n" );
+    else
+        return Int( s );
+    fi;
+    
+end );
+
+##
 InstallGlobalFunction( StringToIntList,
   function( arg )
     local l, lint;
@@ -660,24 +672,24 @@ end );
 
 ##
 InstallGlobalFunction( StringToDoubleIntList,
-  function( arg )
+  function( s )
     local l, lint;
     
-    if arg[1] = "[]" then
+    if s = "[]" then
         return [ ];
     fi;
     
-    l := SplitString( arg[1], "", ",[ ]\n" );
+    l := SplitString( s, "", ",[ ]\n" );
     lint := List( l, Int );
     
     if fail in lint then
-        Error( "the first argument is not a string containg a list of list of two integers: ", arg[1], "\n");
+        Error( "the first argument is not a string containg a list of list of two integers: ", s, "\n");
     fi;
     
     l := Length( lint );
     
     if IsOddInt( l ) then
-        Error( "expected an even number of integers: ", arg[1], "\n");
+        Error( "expected an even number of integers: ", s, "\n");
     fi;
     
     return List( [ 1 .. l/2 ], a -> [ lint[2*a-1], lint[2*a] ] ) ;

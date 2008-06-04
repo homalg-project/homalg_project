@@ -134,7 +134,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
     local READY, READY_LENGTH, CUT_POS_BEGIN, CUT_POS_END,
           SEARCH_READY_TWICE, handle_output, gotsomething,
-          l, nr, pos, bytes, pos1, pos2, pos3, pos4,
+          l, nr, pos, bytes, len, pos1, pos2, pos3, pos4,
           CAS, PID, COLOR;
     
     READY := s.READY;
@@ -161,38 +161,50 @@ InstallGlobalFunction( CheckOutputOfCAS,
         nr := IO_select( l, [], [], 0, 0 );
         #Print( "select: nr=", nr, "\n" );
         
-        if nr = 0 then 
+        if nr = 0 then
+            if handle_output = true then	## a Singular specific
+                len := Length( s.lines );
+                s.LINES_original := ShallowCopy( s.lines );
+                while len > 0 and s.lines[len] = '\n' do
+                    Remove( s.lines );
+                    len := len - 1;
+                od;
+            fi;
+            
             if not ( gotsomething ) then
                 return fail;
             fi;  # nothing new whatsoever
+            
             return s.casready;
         fi;
         #Print( "select: l=", l, "\n" );
         
         if l[1] <> fail then	# something on stdout
-          pos := Length( s.lines );
-          bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
-          if bytes > 0 then
-              #Print( "stdout bytes:", bytes, "\n" );
-              gotsomething := true;
-              pos := PositionSublist( s.lines, READY, pos - READY_LENGTH + 1 );
-                    # ........NEWNEWNEWNEWNEW
-                    #        ^
-                    #        pos
-              if pos <> fail then 
-                  s.casready := true;
-                  if handle_output = true then	## a Singular specific
-                      s.lines_original := ShallowCopy( s.lines );
-                      if s.lines[1] = '\n' then
-                          s.lines := Concatenation( s.lines{ [ 2 .. pos - 2 ] },
-                                             s.lines{ [ pos + READY_LENGTH + 1 .. Length( s.lines ) ] } );
-                      elif s.lines[Length( s.lines )] = '\n' then
-                          s.lines := Concatenation( s.lines{ [ 1 .. pos - 2 ] },
-                                             s.lines{ [ pos + READY_LENGTH + 1 .. Length( s.lines ) ] } );
-                      else
-                          s.lines := Concatenation( s.lines{ [ 1 .. pos - 2 ] },
-                                             s.lines{ [ pos + READY_LENGTH + 2 .. Length( s.lines ) ] } );
-                      fi;
+            pos := Length( s.lines );
+            bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
+            if bytes > 0 then
+                #Print( "stdout bytes:", bytes, "\n" );
+                gotsomething := true;
+                pos := PositionSublist( s.lines, READY, pos - READY_LENGTH + 1 );
+                        # ........NEWNEWNEWNEWNEW
+                        #        ^
+                        #        pos
+                if pos <> fail then
+                    s.casready := true;
+                    if handle_output = true then	## a Singular specific
+                        s.lines_original := ShallowCopy( s.lines );
+                        s.pos := pos;
+                        len := Length( s.lines );
+                        if s.lines[1] = '\n' then
+                            s.lines := Concatenation( s.lines{ [ 2 .. pos - 1 ] },
+                                               s.lines{ [ pos + READY_LENGTH + 1 .. len ] } );
+                        elif s.lines[len] = '\n' then
+                            s.lines := Concatenation( s.lines{ [ 1 .. pos - 1 ] },
+                                               s.lines{ [ pos + READY_LENGTH + 1 .. len - 1 ] } );
+                        else
+                            s.lines := Concatenation( s.lines{ [ 1 .. pos - 1 ] },
+                                               s.lines{ [ pos + READY_LENGTH + 1 .. len ] } );
+                        fi;
                   elif SEARCH_READY_TWICE = true then	## a Macaulay2 specific
                       pos2 := PositionSublist( s.lines, READY );
                       pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
@@ -224,57 +236,57 @@ InstallGlobalFunction( CheckOutputOfCAS,
                               s.lines := s.lines{ [ pos1 + 4 .. pos2 - 2 ] };
                           fi;
                       fi;
-                  else
-                      s.lines := s.lines{ [ CUT_POS_BEGIN .. Length( s.lines ) - READY_LENGTH - CUT_POS_END ] };
-                  fi;
-              fi;
-          else
-              if IsBound( s.name ) then
-                  CAS := Concatenation( s.name, " " );
-              else
-                  CAS := "";
-              fi;
-              if IsBound( s.pid ) then
-                  PID := Concatenation( "(which should be running with PID ", String( s.pid ), ") " );
-              else
-                  PID := "";
-              fi;
-              if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true then
-                  COLOR := "\033[5;31;43m";
-              else
-                  COLOR := "";
-              fi;
-              Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
-          fi;
-      fi;
-      
-      if l[2] <> fail then   # something on stderr
-          bytes := IO_read( l[2], s.errors, Length( s.errors ), s.BUFSIZE );
-          if bytes > 0 then
-              #Print( "stderr bytes:", bytes, "\n" );
-              gotsomething := true;
-          else
-              if IsBound( s.name ) then
-                  CAS := Concatenation( s.name, " " );
-              else
-                  CAS := "";
-              fi;
-              if IsBound( s.pid ) then
-                  PID := Concatenation( "(which should be running with PID ", String( s.pid ), ") " );
-              else
-                  PID := "";
-              fi;
-              if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true then
-                  COLOR := "\033[5;31;43m";
-              else
-                  COLOR := "";
-              fi;
-              Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
-          fi;
-      fi;
-  od;
-  # never reached
-  
+                    else
+                        s.lines := s.lines{ [ CUT_POS_BEGIN .. Length( s.lines ) - READY_LENGTH - CUT_POS_END ] };
+                    fi;
+                fi;
+            else
+                if IsBound( s.name ) then
+                    CAS := Concatenation( s.name, " " );
+                else
+                    CAS := "";
+                fi;
+                if IsBound( s.pid ) then
+                    PID := Concatenation( "(which should be running with PID ", String( s.pid ), ") " );
+                else
+                    PID := "";
+                fi;
+                if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true then
+                    COLOR := "\033[5;31;43m";
+                else
+                    COLOR := "";
+                fi;
+                Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
+            fi;
+        fi;
+        
+        if l[2] <> fail then   # something on stderr
+            bytes := IO_read( l[2], s.errors, Length( s.errors ), s.BUFSIZE );
+            if bytes > 0 then
+                #Print( "stderr bytes:", bytes, "\n" );
+                gotsomething := true;
+            else
+                if IsBound( s.name ) then
+                    CAS := Concatenation( s.name, " " );
+                else
+                    CAS := "";
+                fi;
+                if IsBound( s.pid ) then
+                    PID := Concatenation( "(which should be running with PID ", String( s.pid ), ") " );
+                else
+                    PID := "";
+                fi;
+                if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true then
+                    COLOR := "\033[5;31;43m";
+                else
+                    COLOR := "";
+                fi;
+                Error( COLOR, "the external CAS ", CAS, PID, "seems to have died!", "\033[0m\n" );
+            fi;
+        fi;
+    od;
+    # never reached
+    
 end );
 
 InstallGlobalFunction( SendBlockingToCAS,

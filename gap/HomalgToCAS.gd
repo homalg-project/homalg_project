@@ -24,6 +24,8 @@ DeclareGlobalFunction( "homalgSendBlocking" ); ## this name was implicitly sugge
 
 DeclareGlobalFunction( "homalgDisplay" );
 
+DeclareGlobalFunction( "StringToInt" );
+
 DeclareGlobalFunction( "StringToIntList" );
 
 DeclareGlobalFunction( "StringToDoubleIntList" );
