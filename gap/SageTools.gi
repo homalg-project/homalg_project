@@ -171,14 +171,14 @@ InstallValue( CommonHomalgTableForSageTools,
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ C, ".nrows()" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ C, ".nrows()" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                  
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ C, ".ncols()" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ C, ".ncols()" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                  

@@ -30,7 +30,7 @@ InstallValue( HOMALG_IO_Singular,
             eoc_quiet := ";",
             break_lists := true,	## a Singular specific
             handle_output := true,	## a Singular specific
-            check_output := false,	## a Singular specific looks for newlines without commas
+            check_output := true,	## a Singular specific looks for newlines without commas
             setring := SETRING_Singular,## a Singular specific
             multiple_delete := _Singular_multiple_delete,
             define := "=",

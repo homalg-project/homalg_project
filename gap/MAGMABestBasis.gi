@@ -56,10 +56,10 @@ InstallValue( CommonHomalgTableForMAGMABestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( homalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
+                       rank_of_S := StringToInt( homalgSendBlocking( [ S, U, V, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
                    else
                        ## compute S only:
-                       rank_of_S := Int( homalgSendBlocking( [ S, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
+                       rank_of_S := StringToInt( homalgSendBlocking( [ S, " := ", "SmithForm(", M, "); Rank(", S, ")" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
                    fi;
                    
                    SetRowRankOfMatrix( S, rank_of_S );

@@ -162,14 +162,14 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "NrRows( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ "NrRows( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "NrColumns( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ "NrColumns( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                  

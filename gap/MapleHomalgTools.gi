@@ -204,7 +204,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return Int( homalgSendBlocking( [ R, "[-1][NumberOfRows](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfRows](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
@@ -214,7 +214,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( C );
                    
-                   return Int( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                  

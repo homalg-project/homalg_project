@@ -57,10 +57,10 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := Int( homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1],", U, V, "): `homalg/RankOfGauss`(", S, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
+                       rank_of_S := StringToInt( homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1],", U, V, "): `homalg/RankOfGauss`(", S, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
                    else
                        ## compute S only:
-                       rank_of_S := Int( homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1]): `homalg/RankOfGauss`(", S, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
+                       rank_of_S := StringToInt( homalgSendBlocking( [ S, " := ", R, "[-1][BestBasis](", M, R, "[1]): `homalg/RankOfGauss`(", S, R, "[-1])" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
                    fi;
                    
                    SetRowRankOfMatrix( S, rank_of_S );

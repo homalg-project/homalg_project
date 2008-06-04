@@ -40,8 +40,6 @@ InstallValue( CommonHomalgTableForSingularTools,
 
                    R := HomalgRing( C );
 
-                   homalgSendBlocking( [  ] , C, "need_command", HOMALG_IO.Pictograms.ZeroMatrix );
-
                    list_string := homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "]; list l;for (int i=", NrRows( C ), "; i>=1; i=i-1) { if (", C, "[i] == Zero_Row || ", C, "[i] == 0) {l=insert(l,i);} }; string(l)" ] , "need_output", HOMALG_IO.Pictograms.ZeroRows );
 
                    #trying to understand singular's output
@@ -166,14 +164,14 @@ InstallValue( CommonHomalgTableForSingularTools,
                NrRows :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ "ncols(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return Int( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ "nrows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                
