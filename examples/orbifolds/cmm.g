@@ -11,3 +11,6 @@ mult:=[
 dim := 4;
 
 #works up to 4: [ 0 ], [ 1 ], [ 2, 2, 0 ]
+
+#cohomology over GF(2)
+# error??

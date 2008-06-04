@@ -14,3 +14,11 @@ mult:=[
 dim := 5;
 
 #up to 5 works, cohomology: [0],[1],[2,2,2,0],[1]
+
+#cohomology up to 6 over GF(2):
+# GF(2)^(1 x 1)
+# GF(2)^(1 x 3)
+# GF(2)^(1 x 4)
+# GF(2)^(1 x 4)
+# GF(2)^(1 x 4)
+# GF(2)^(1 x 4)

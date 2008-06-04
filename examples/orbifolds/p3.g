@@ -11,3 +11,9 @@ mult:=[
 dim := 4;
 
 #[ 0 ], [ 1 ], [ 3, 3, 0 ]
+
+#cohomology over GF(2):
+# 
+# 
+# 
+# 

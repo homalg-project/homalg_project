@@ -148,7 +148,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
     matrices := [];
     RP := homalgTable( R );
     
-    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) and IsBound( RP!.ZeroMatrix ) then #right now: always sparse!
+    if ( ( HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) ) or ( HasIsFiniteQuotientOfTheIntegers( R ) and IsFiniteQuotientOfTheIntegers( R ) ) ) and IsBound( RP!.ZeroMatrix ) then #right now: always sparse!
         
         for k in [2..Dimension( s )] do
             if Length( S[k] ) = 0 then

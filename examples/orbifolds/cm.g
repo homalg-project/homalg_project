@@ -5,3 +5,11 @@ mult:=[];
 dim := 4;
 
 #4 works, [0],[0],[2],? 5 should work! (compare to pm)
+
+#cohomology over GF(2):
+# GF(2)^(1 x 1)
+# GF(2)^(1 x 2)
+# GF(2)^(1 x 2)
+# GF(2)^(1 x 2)
+# GF(2)^(1 x 2)
+# (calculating - probably 1x2 too?)
