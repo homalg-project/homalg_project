@@ -294,7 +294,8 @@ InstallMethod( RingOfDerivations,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local properties, r, var_of_coeff_ring, ext_obj, S, v, der, nr_der, var, nr_var, PR;
+    local var, nr_var, der, nr_der, properties, stream, display_color,
+          PR, ext_obj, S, v;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -330,6 +331,24 @@ InstallMethod( RingOfDerivations,
     properties := [ ];
     
     homalgSendBlocking( [ "LIB \"nctools.lib\";" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+    
+    stream := homalgStream( R );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    Print( "----------------------------------------------------------------\n" );
+    
+    ## leave the below indentation untouched!
+    Print( display_color, "\
+                     SINGULAR::PLURAL\n\
+The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
+     by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
+FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
+----------------------------------------------------------------\n\n" );
     
     ##create the new ring in 2 steps: expand polynomial ring with derivatives and then
     ##add the Weyl-structure
