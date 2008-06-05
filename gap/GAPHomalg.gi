@@ -26,6 +26,7 @@ InstallValue( HOMALG_IO_GAP,
             CUT_POS_END := 4,		## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";;",
+            show_banner := false,	## the GAP banner screws the display of several terminals :(
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "Unbind( ", var, " )" ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _ExternalGAP_multiple_delete,
