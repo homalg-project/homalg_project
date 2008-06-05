@@ -137,7 +137,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
         stream := LaunchCAS( HOMALG_IO_Singular );
 	
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"nctools.lib\";LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
@@ -328,6 +328,8 @@ InstallMethod( RingOfDerivations,
     fi;
     
     properties := [ ];
+    
+    homalgSendBlocking( [ "LIB \"nctools.lib\";" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
     
     ##create the new ring in 2 steps: expand polynomial ring with derivatives and then
     ##add the Weyl-structure
