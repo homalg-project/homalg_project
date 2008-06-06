@@ -231,7 +231,7 @@ InstallMethod( Homology,
   function( ot, s, R )
     local morphisms, C, m;
     morphisms := CreateHomologyMatrix( ot, s, R );
-    C := HomalgComplex( HomalgMorphism( morphisms[1] ), 0 );
+    C := HomalgComplex( HomalgMorphism( morphisms[1] ), 1 );
     for m in morphisms{[ 2 .. Length( morphisms ) ]} do
         Add( C, m );
     od;
@@ -249,7 +249,7 @@ InstallMethod( Cohomology,
   function( ot, s, R )
     local morphisms, C, m;
     morphisms := CreateCohomologyMatrix( ot, s, R );
-    C := HomalgCocomplex( HomalgMorphism( morphisms[1] ), -1 );
+    C := HomalgCocomplex( HomalgMorphism( morphisms[1] ), 0 );
     for m in morphisms{[ 2 .. Length( morphisms ) ]} do
         Add( C, m );
     od;
