@@ -225,7 +225,7 @@ InstallMethod( HermiteMatTransformationDestructive,
         
     od;
     
-    #add kernel relations:
+    #add relations --- THIS IS NOT ALWAYS THE KERNEL BECAUSE OF ZERODIVISORS (compare KernelMat) ---:
     relations.indices := T.indices{ list_of_rows };
     relations.entries := T.entries{ list_of_rows };
     
@@ -344,6 +344,7 @@ InstallMethod( KernelHermiteMatDestructive,
           coeffs,
           relations,
           ring,
+          pp,
           i,         # loop over rows
           j,         # loop over columns
           min,
@@ -359,7 +360,8 @@ InstallMethod( KernelHermiteMatDestructive,
           row_entries,
           p,
           list_of_rows,
-          factor;
+          factor,
+          row;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -376,7 +378,8 @@ InstallMethod( KernelHermiteMatDestructive,
     
     char := Characteristic( ring );
     
-    if Length( PrimePowersInt( char ) ) > 2 then
+    pp := PrimePowersInt( char );    
+    if Length( pp ) > 2 then
         Error( "only Z / p^n * Z is supported right now!" );
     fi;
     
@@ -397,8 +400,7 @@ InstallMethod( KernelHermiteMatDestructive,
         if Length( row_indices ) > 0 then
             i := 1;
             min := [ i, Gcd( Int( entries[ row_indices[i] ][ 1 ] ), char ) ];
-            while i < Length( row_indices )
-              and min[2] > 1 do
+            while i < Length( row_indices ) and min[2] > 1 do
                 i := i + 1;
                 g := Gcd( Int( entries[ row_indices[i] ][ 1 ] ), char );
                 if min[2] > g then
@@ -417,6 +419,32 @@ InstallMethod( KernelHermiteMatDestructive,
             heads[column] := Length( vectors.indices );
             list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
             
+	    #check for "hidden" kernel relations
+            if min[2] > 1 then
+                row := vectors.entries[ Length( vectors.entries ) ];
+                i := 1;
+                while i < Length( row ) and min[2] > 1 do
+                    i := i + 1;
+                    g := Gcd( Int( row[i] ), char );
+                    if min[2] > g then
+                        min[2] := g;
+                    fi;
+                od;
+                # is the row a multiple of a non-unit?
+                if min[2] > 1 then
+                    # row is multiple of min[2]
+                    # therefore row * (char / min[2] ) = 0
+                    # but is the relations_row * this <> 0 ?
+                    row := coeffs.entries[ Length( coeffs.entries ) ];
+                    # you could run another min check, but it's easier to just multiply the row and check afterwards
+                    m := MultRow( coeffs.indices[ Length( coeffs.indices ) ], row, char / min[2] );
+                    if m.indices <> [] then
+                        Add( relations.indices, m.indices );
+                        Add( relations.entries, m.entries );
+                    fi;
+                fi;
+            fi;
+	    
             #reduce the other rows with the newfound basis vector.
             head := heads[column];
             e := vectors.entries[head][1];
@@ -434,8 +462,8 @@ InstallMethod( KernelHermiteMatDestructive,
     od;
     
     #add kernel relations:
-    relations.indices := T.indices{ list_of_rows };
-    relations.entries := T.entries{ list_of_rows };
+    relations.indices := Concatenation( relations.indices, T.indices{ list_of_rows } );
+    relations.entries := Concatenation( relations.entries, T.entries{ list_of_rows } );
     
     return rec( relations := SparseMatrix( Length( relations.indices ), Length( L ), relations.indices, relations.entries, ring ) );
     
