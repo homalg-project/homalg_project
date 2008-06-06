@@ -331,10 +331,17 @@ InstallMethod( SparseDiagMat,
 InstallMethod( \*,
         [ IsRingElement, IsSparseMatrix ],
   function( a, A )
+    local i, m;
     if IsZero( a ) then
         return SparseZeroMatrix( A!.nrows, A!.ncols, A!.ring );
-    else
+    elif IsUnit( a ) then
         return SparseZeroMatrix( A!.nrows, A!.ncols, A!.indices, A!.entries * a, A!.ring );
+    else
+        for i in [ 1 .. A!.nrows ] do
+            m := MultRow( A!.indices[ i ], A!.entries[ i ], a );
+            A!.indices[i] := m.indices;
+            A!.entries[i] := m.entries;
+        od;
     fi;
   end
 );

@@ -55,9 +55,9 @@ InstallGlobalFunction( KernelMatSparse,
     M := CopyMat( arg[1] );
     
     if IsField( M!.ring ) and Length( arg ) = 1 then
-        return KernelMatDestructive( M, [ 1 .. M!.nrows ] );
+        return KernelEchelonMatDestructive( M, [ 1 .. M!.nrows ] );
     elif IsField( M!.ring ) and Length( arg ) > 1 then
-        return KernelMatDestructive( M, arg[2] );
+        return KernelEchelonMatDestructive( M, arg[2] );
     elif Length( arg ) = 1 then
         return KernelHermiteMatDestructive( M, [ 1 .. M!.nrows ] );
     elif Length( arg ) > 1 then

@@ -320,15 +320,15 @@ InstallGlobalFunction( KernelMat,
     od;
     
     if Length( arg ) = 1 then
-        return KernelMatDestructive( copymat, [1..Length( arg[1] )] );
+        return KernelEchelonMatDestructive( copymat, [1..Length( arg[1] )] );
     elif Length( arg ) > 1 then
-        return KernelMatDestructive( copymat, arg[2] );
+        return KernelEchelonMatDestructive( copymat, arg[2] );
     fi;
         
 end );
 
 ##
-InstallMethod( KernelMatDestructive,
+InstallMethod( KernelEchelonMatDestructive,
         "generic method for matrices",
         [ IsMatrix and IsMutable, IsList ],
   function( mat, L )
