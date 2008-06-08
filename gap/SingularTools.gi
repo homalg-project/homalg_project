@@ -130,6 +130,16 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               KroneckerMat :=
+                 function( A, B )
+                   local R;
+                   
+                   R := HomalgRing( A );
+                   
+                   return homalgSendBlocking( [ "tensor(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns( A ) * NrColumns( B ), "][", NrRows( A ) * NrRows( B ), "]" ], HOMALG_IO.Pictograms.KroneckerMat );
+                   
+                 end,
+               
                MulMat :=
                  function( a, A )
                    
