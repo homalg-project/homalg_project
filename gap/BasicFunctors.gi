@@ -338,7 +338,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             ## w.r.t. the CURRENT generators of source and target:
             mor := HomalgMap( mat, M, N );
             
-            mat_old := MatrixOfHomomorphism( mor, s, t );
+            mat_old := MatrixOfMap( mor, s, t );
             
             return ConvertMatrixToColumn( mat_old );
         end;
@@ -359,7 +359,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             
             ## return the matrix of the morphism
             ## w.r.t. the CURRENT generators of source and target:
-            return MatrixOfHomomorphism( mor );
+            return MatrixOfMap( mor );
         end;
         
         HP0N := RightPresentation( HP0N );
@@ -383,7 +383,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             ## w.r.t. the CURRENT generators of source and target:
             mor := HomalgMap( mat, M, N );
             
-            mat_old := MatrixOfHomomorphism( mor, s, t );
+            mat_old := MatrixOfMap( mor, s, t );
             
             return ConvertMatrixToRow( mat_old );
         end;
@@ -404,7 +404,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             
             ## return the matrix of the morphism
             ## w.r.t. the CURRENT generators of source and target:
-            return MatrixOfHomomorphism( mor );
+            return MatrixOfMap( mor );
         end;
         
         HP0N := LeftPresentation( HP0N );
@@ -455,7 +455,7 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return KroneckerMat( MatrixOfHomomorphism( phi ), idL );
+        return KroneckerMat( MatrixOfMap( phi ), idL );
         
     elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
       and IsFinitelyPresentedModuleRep( M_or_mor ) then
@@ -470,7 +470,7 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return Involution( KroneckerMat( idL, MatrixOfHomomorphism( phi ) ) );
+        return Involution( KroneckerMat( idL, MatrixOfMap( phi ) ) );
         
     fi;
     
@@ -570,7 +570,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return KroneckerMat( MatrixOfHomomorphism( phi ), idL );
+        return KroneckerMat( MatrixOfMap( phi ), idL );
         
     elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
       and IsFinitelyPresentedModuleRep( M_or_mor ) then
@@ -585,7 +585,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return Involution( KroneckerMat( idL, MatrixOfHomomorphism( phi ) ) );
+        return Involution( KroneckerMat( idL, MatrixOfMap( phi ) ) );
         
     fi;
     

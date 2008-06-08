@@ -1448,3 +1448,14 @@ InstallMethod( Display,
     
 end );
 
+##
+InstallMethod( Display,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsEmptyMatrix ], 10001,
+        
+  function( o )
+    
+    Print( "(an empty ", NrRows( o ), " x ", NrColumns( o ), " matrix)\n" );
+    
+end );
+

@@ -144,7 +144,7 @@ InstallMethod( IsAdditiveFunctor,
     
     if IsBound( Functor!.(pos) ) and Length( Functor!.( pos )[1] ) > 1 then
         prop := Functor!.( pos )[1][2];
-        if prop in [ "additive", "left exact", "right exact" ] then
+        if prop in [ "additive", "left exact", "right exact", "exact" ] then
             return true;
         fi;
     fi;
@@ -2264,11 +2264,13 @@ InstallMethod( RightSatelliteOfCofunctor,
         
         c := arg[1];
         
-        d := Resolution( arg[p + 1], c - 1 );
-        
         if c < 0 then
             Error( "the negative ", c, ". right satellite is not defined\n" );
-        elif c = 0 then
+        fi;
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if c = 0 then
             mu := TheZeroMorphism( arg[p + 1] );
         else
             if c = 1 then
@@ -2296,15 +2298,30 @@ InstallMethod( RightSatelliteOfCofunctor,
         
         c := arg[1];
         
-        d := Resolution( arg[p + 1], c - 1 );
-        
         if c < 0 then
             Error( "the negative ", c, ". right satellite is not defined\n" );
-        elif c = 0 then
-            mu := arg[p + 1];
+        fi;
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if IsHomalgMap( arg[p + 1] ) then
+            if c = 0 then
+                mu := arg[p + 1];
+            else
+                d_c_1 := CertainMorphismAsKernelSquare( d, c - 1 );
+                mu := Kernel( d_c_1 );
+            fi;
         else
-            d_c_1 := CertainMorphismAsKernelSquare( d, c - 1 );
-            mu := Kernel( d_c_1 );
+	    ## the following is not really mu but Source( mu ):
+            if c = 0 then
+                mu := arg[p + 1];
+            else
+                if c = 1 then
+                    mu := Kernel( CokernelEpi( CertainMorphism( d, 1 ) ) );
+                else
+                    mu := Kernel( CertainMorphism( d, c - 1 ) );
+                fi;
+            fi;
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
@@ -2372,11 +2389,13 @@ InstallMethod( LeftSatelliteOfFunctor,
         
         c := arg[1];
         
-        d := Resolution( arg[p + 1], c - 1 );
-        
         if c < 0 then
             Error( "the negative ", c, ". left satellite is not defined\n" );
-        elif c = 0 then
+        fi;
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if c = 0 then
             mu := TheZeroMorphism( arg[p + 1] );
         else
             if c = 1 then
@@ -2404,15 +2423,30 @@ InstallMethod( LeftSatelliteOfFunctor,
         
         c := arg[1];
         
-        d := Resolution( arg[p + 1], c - 1 );
-        
         if c < 0 then
             Error( "the negative ", c, ". right satellite is not defined\n" );
-        elif c = 0 then
-            mu := arg[p + 1];
+        fi;
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if IsHomalgMap( arg[p + 1] ) then
+            if c = 0 then
+                mu := arg[p + 1];
+            else
+                d_c_1 := CertainMorphismAsKernelSquare( d, c - 1 );
+                mu := Kernel( d_c_1 );
+            fi;
         else
-            d_c_1 := CertainMorphismAsKernelSquare( d, c - 1 );
-            mu := Kernel( d_c_1 );
+	    ## the following is not really mu but Source( mu ):
+            if c = 0 then
+                mu := arg[p + 1];
+            else
+                if c = 1 then
+                    mu := Kernel( CokernelEpi( CertainMorphism( d, 1 ) ) );
+                else
+                    mu := Kernel( CertainMorphism( d, c - 1 ) );
+                fi;
+            fi;
         fi;
         
         mu := Kernel( d_c_1 );

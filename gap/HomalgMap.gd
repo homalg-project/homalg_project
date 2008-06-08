@@ -78,13 +78,13 @@ DeclareGlobalFunction( "HomalgIdentityMap" );
 DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
         [ IsHomalgMap ] );
 
-DeclareOperation( "MatrixOfHomomorphism",
+DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap, IsPosInt, IsPosInt ] );
 
-DeclareOperation( "MatrixOfHomomorphism",
+DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap, IsPosInt ] );
 
-DeclareOperation( "MatrixOfHomomorphism",
+DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap ] );
 
 DeclareOperation( "DecideZero",
