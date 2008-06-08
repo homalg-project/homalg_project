@@ -1,3 +1,34 @@
+#temporary
+DeclareOperation( "UCT_Homology",
+        [ IsHomalgComplex, IsHomalgModule ] );
+
+InstallMethod( UCT_Homology,
+        [ IsHomalgComplex and IsGradedObject, IsHomalgModule ],
+  function( H, G )
+    local uct;
+    
+    uct := Tor( 1, Shift( H, -1 ), G ) + H * G;
+    
+    return ByASmallerPresentation( uct );
+    
+  end
+);
+
+DeclareOperation( "UCT_Cohomology",
+        [ IsHomalgComplex, IsHomalgModule ] );
+
+InstallMethod( UCT_Cohomology,
+        [ IsHomalgComplex and IsGradedObject, IsHomalgModule ],
+  function( H, G )
+    local uct;
+    
+    uct := Hom( H, G ) + Ext( 1, Shift( H, -1 ), G );
+    
+    return ByASmallerPresentation( uct );
+    
+  end
+);
+
 LoadPackage( "SCO" );
 
 input := InputTextUser();
