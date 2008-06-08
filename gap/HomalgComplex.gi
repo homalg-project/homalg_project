@@ -561,7 +561,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsHomalgMorphism ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( C, phi )
     local degrees, l;
@@ -617,6 +617,66 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsFinitelyPresentedModuleRep ],
+        
+  function( C, M )
+    local T, grd, cpx, seq;
+    
+    T := HighestDegreeObjectInComplex( C );
+    
+    if HasIsGradedObject( C ) then
+        grd := IsGradedObject( C );
+    elif HasIsComplex( C ) then
+        cpx := IsComplex( C );
+    elif HasIsSequence( C ) then
+        seq := IsSequence ( C );
+    fi;
+    
+    Add( C, HomalgZeroMap( M, T ) );
+    
+    if IsBound( grd ) then
+        SetIsGradedObject( C, grd );
+    elif IsBound( cpx ) then
+        SetIsComplex( C, cpx );
+    elif IsBound( seq ) then
+        SetIsSequence( C, seq );
+    fi;
+    
+end );
+
+##
+InstallMethod( Add,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsFinitelyPresentedModuleRep ],
+        
+  function( C, M )
+    local S, grd, cpx, seq;
+    
+    S := HighestDegreeObjectInComplex( C );
+    
+    if HasIsGradedObject( C ) then
+        grd := IsGradedObject( C );
+    elif HasIsComplex( C ) then
+        cpx := IsComplex( C );
+    elif HasIsSequence( C ) then
+        seq := IsSequence ( C );
+    fi;
+    
+    Add( C, HomalgZeroMap( S, M ) );
+    
+    if IsBound( grd ) then
+        SetIsGradedObject( C, grd );
+    elif IsBound( cpx ) then
+        SetIsComplex( C, cpx );
+    elif IsBound( seq ) then
+        SetIsSequence( C, seq );
+    fi;
+    
+end );
+
+##
+InstallMethod( Add,
+        "for homalg complexes",
         [ IsComplexOfFinitelyPresentedObjectsRep, IsHomalgMatrix ],
         
   function( C, mat )
@@ -624,7 +684,7 @@ InstallMethod( Add,
     
     T := HighestDegreeObjectInComplex( C );
     
-    Add( C, HomalgMorphism( mat, "free", T ) );
+    Add( C, HomalgMap( mat, "free", T ) );
     
 end );
 
@@ -638,7 +698,225 @@ InstallMethod( Add,
     
     S := HighestDegreeObjectInComplex( C );
     
-    Add( C, HomalgMorphism( mat, S, "free" ) );
+    Add( C, HomalgMap( mat, S, "free" ) );
+    
+end );
+
+##
+InstallMethod( Shift,
+        "for homalg complexes",
+        [ IsHomalgComplex, IsInt ],
+        
+  function( C, s )
+    local d, Cd, Cs, m;
+    
+    d := LowestDegreeInComplex( C );
+    
+    Cd := LowestDegreeObjectInComplex( C );
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        Cs := HomalgComplex( Cd, d - s );
+    else
+        Cs := HomalgCocomplex( Cd, d - s );
+    fi;
+    
+    for m in MorphismsOfComplex( C ) do
+        Add( Cs, m );
+    od;
+    
+    if HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( Cs, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( Cs, true );
+    elif HasIsSequence( C ) and IsSequence( C ) then
+        SetIsSequence( Cs, true );
+    fi;
+    
+    return Cs;
+    
+end );
+
+##
+InstallMethod( \+,
+        "for two homalg complexes",
+        [ IsHomalgComplex and IsGradedObject, IsHomalgComplex and IsGradedObject ],
+        
+  function( C1, C2 )
+    local cpx, d1, d2, d, Cd, Cs, i;
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C1 ) and IsComplexOfFinitelyPresentedObjectsRep( C2 ) then
+        cpx := true;
+    elif IsCocomplexOfFinitelyPresentedObjectsRep( C1 ) and IsCocomplexOfFinitelyPresentedObjectsRep( C2 ) then
+        cpx := false;
+    else
+        Error( "first and second argument must either be both complexes or both cocomplexes\n" );
+    fi;
+    
+    d1 := LowestDegreeInComplex( C1 );
+    d2 := LowestDegreeInComplex( C2 );
+    
+    d := Minimum( d1, d2 );
+    
+    if d1 < d2 then
+        Cd := LowestDegreeObjectInComplex( C1 );
+    elif d2 < d1 then
+        Cd := LowestDegreeObjectInComplex( C2 );
+    else
+        Cd := LowestDegreeObjectInComplex( C1 ) + LowestDegreeObjectInComplex( C2 );
+    fi;
+    
+    if cpx then
+        Cs := HomalgComplex( Cd, d );
+    else
+        Cs := HomalgCocomplex( Cd, d );
+    fi;
+    
+    d1 := ObjectDegreesOfComplex( C1 );
+    d2 := ObjectDegreesOfComplex( C2 );
+    
+    for i in [ d + 1 .. Maximum( List( [ C1, C2 ], HighestDegreeInComplex ) ) ] do
+        if not i in d2 then
+            Cd := CertainObject( C1, i );
+        elif not i in d1 then
+            Cd := CertainObject( C2, i );
+        else
+            Cd := CertainObject( C1, i ) + CertainObject( C2, i );
+        fi;
+        
+        Add( Cs, Cd );
+    od;
+    
+    SetIsGradedObject( Cs, true );
+    
+    return Cs;
+    
+end );
+
+##
+InstallMethod( CertainMorphismAsSubcomplex,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( C, i )
+    local m, A;
+    
+    m := CertainMorphism( C, i );
+    
+    if m = fail then
+        m := CertainMorphism( C, i + 1 );
+        if m = fail then
+            return fail;
+        fi;
+        m := CokernelEpi( m );
+    fi;
+    
+    A := HomalgComplex( m, i );
+    
+    if HasIsZero( C ) and IsZero( C ) then
+        SetIsZero( A, true );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( A, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( A, true );
+    elif HasIsSequence( C ) and IsSequence( C ) then
+        SetIsComplex( A, true );	## this is not a mistake
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( CertainMorphismAsSubcomplex,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( C, i )
+    local m, A;
+    
+    m := CertainMorphism( C, i );
+    
+    if m = fail then
+        return fail;
+    fi;
+    
+    A := HomalgCocomplex( m, i );
+    
+    if HasIsZero( C ) and IsZero( C ) then
+        SetIsZero( A, true );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( A, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( A, true );
+    elif HasIsSequence( C ) and IsSequence( C ) then
+        SetIsComplex( A, true );	## this is not a mistake
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( CertainTwoMorphismsAsSubcomplex,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( C, i )
+    local m, A;
+    
+    m := CertainMorphism( C, i );
+    
+    if m = fail then
+        return fail;
+    fi;
+    
+    A := HomalgComplex( m, i );
+    
+    Add( A, CertainMorphism( C, i + 1 ) );
+    
+    if HasIsZero( C ) and IsZero( C ) then
+        SetIsZero( A, true );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( A, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( A, true );
+    elif HasIsSequence( C ) and IsSequence( C ) then
+        SetIsSequence( A, true );
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( CertainTwoMorphismsAsSubcomplex,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( C, i )
+    local m, A;
+    
+    m := CertainMorphism( C, i - 1 );
+    
+    if m = fail then
+        return fail;
+    fi;
+    
+    A := HomalgCocomplex( m, i - 1 );
+    
+    Add( A, CertainMorphism( C, i ) );
+    
+    if HasIsZero( C ) and IsZero( C ) then
+        SetIsZero( A, true );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( A, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( A, true );
+    elif HasIsSequence( C ) and IsSequence( C ) then
+        SetIsSequence( A, true );
+    fi;
+    
+    return A;
     
 end );
 
@@ -803,9 +1081,8 @@ InstallGlobalFunction( HomalgComplex,
     if object then
         if degrees = [ 0 ] then
             SetIsAcyclic( C, true );
-        else
-            SetIsGradedObject( C, true );
         fi;
+        SetIsGradedObject( C, true );
     fi;
     
     return C;
@@ -1174,8 +1451,23 @@ InstallMethod( Display,
         [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( o )
+    local i, degrees;
     
-    Print( "not implemented yet <--", "\n" );
+    degrees := ObjectDegreesOfComplex( o );
+    
+    Print( "-------------------------\n" );
+    Print( "at homology degree: ", degrees[1], "\n" );
+    Display( CertainObject( o, degrees[1] ) );
+    
+    for i in degrees{[ 2 .. Length( degrees ) ]} do
+        Print( "------------^------------\n" );
+        Display( CertainMorphism( o, i ) );
+        Print( "------------^------------\n" );
+        Print( "at homology degree: ", i, "\n" );
+        Display( CertainObject( o, i ) );
+    od;
+    
+    Print( "-------------------------\n" );
     
 end );
 
@@ -1185,8 +1477,25 @@ InstallMethod( Display,
         [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( o )
+    local i, degrees, l;
     
-    Print( "not implemented yet -->", "\n" );
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
+    
+    Print( "-------------------------\n" );
+    
+    for i in degrees{[ 1 .. l - 1 ]} do
+        Print( "at cohomology degree: ", i, "\n" );
+        Display( CertainObject( o, i ) );
+        Print( "------------v------------\n" );
+        Display( CertainMorphism( o, i ) );
+        Print( "------------v------------\n" );
+    od;
+    
+    Print( "at cohomology degree: ", degrees[l], "\n" );
+    Display( CertainObject( o, degrees[l] ) );
+    Print( "-------------------------\n" );
     
 end );
 
@@ -1204,6 +1513,8 @@ InstallMethod( Display,
         Display( CertainObject( o, i ) );
     od;
     
+    Print( "-------------------------\n" );
+    
 end );
 
 ##
@@ -1219,6 +1530,8 @@ InstallMethod( Display,
         Print( "at cohomology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
     od;
+    
+    Print( "-------------------------\n" );
     
 end );
 

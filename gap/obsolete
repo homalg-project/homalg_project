@@ -28,7 +28,7 @@ fi;
 ##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ],
         
   function( gen )
     local bas;
@@ -49,7 +49,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ],
         
   function( gen )
     local bas;
@@ -74,7 +74,7 @@ end );
 ##
 InstallMethod( \/,				### defines: SubfactorModule (incomplete)
         "for homalg generators",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep, IsGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen1, gen2 )
     local R, B, N, S;

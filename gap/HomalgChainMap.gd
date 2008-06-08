@@ -25,6 +25,21 @@ DeclareCategory( "IsHomalgChainSelfMap",
 
 ####################################
 #
+# properties:
+#
+####################################
+
+DeclareProperty( "IsImageSquare",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsKernelSquare",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsLambekPairOfSquares",
+        IsHomalgMorphism );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
@@ -75,4 +90,13 @@ DeclareOperation( "Add",
 
 DeclareOperation( "Add",
         [ IsHomalgChainMap, IsHomalgMatrix ] );
+
+DeclareOperation( "CertainMorphismAsKernelSquare",
+        [ IsHomalgChainMap, IsInt ] );
+
+DeclareOperation( "CertainMorphismAsImageSquare",
+        [ IsHomalgChainMap, IsInt ] );
+
+DeclareOperation( "CertainMorphismAsLambekPairOfSquares",
+        [ IsHomalgChainMap, IsInt ] );
 

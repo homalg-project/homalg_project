@@ -14,8 +14,6 @@
 #
 ####################################
 
-DeclareGlobalFunction( "ResolutionOfModule" );
-
 DeclareGlobalFunction( "ParametrizeModule" );
 
 # basic operations:
@@ -33,5 +31,17 @@ DeclareOperation( "FreeHullModule",
         [ IsHomalgRelations ] );
 
 DeclareOperation( "FreeHullModule",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "Resolution",
+        [ IsHomalgRelations, IsInt ] );
+
+DeclareOperation( "Resolution",
+        [ IsHomalgRelations ] );
+
+DeclareOperation( "Resolution",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "Resolution",
         [ IsHomalgModule ] );
 

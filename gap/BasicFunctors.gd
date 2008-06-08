@@ -36,8 +36,18 @@ DeclareGlobalFunction( "_Functor_Hom_OnMorphisms" );
 
 DeclareGlobalVariable( "Functor_Hom" );
 
-## Hom
+## TensorProduct
+DeclareGlobalFunction( "_Functor_TensorProduct_OnObjects" );
+
+DeclareGlobalFunction( "_Functor_TensorProduct_OnMorphisms" );
+
+DeclareGlobalVariable( "Functor_TensorProduct" );
+
+## Ext
 DeclareGlobalVariable( "Functor_Ext" );
+
+## Tor
+DeclareGlobalVariable( "Functor_Tor" );
 
 ####################################
 #
@@ -70,7 +80,13 @@ DeclareOperation( "DefectOfExactness",
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );
 
+DeclareOperation( "*",
+        [ IsHomalgModule, IsHomalgModule ] );
+
 DeclareOperation( "Ext",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "Tor",
         [ IsHomalgModule, IsHomalgModule ] );
 
 ####################################

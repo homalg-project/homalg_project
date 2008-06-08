@@ -58,6 +58,9 @@ DeclareProperty( "IsHolonomic",
 #
 ####################################
 
+DeclareAttribute( "TheZeroMorphism",
+        IsHomalgModule );
+
 DeclareAttribute( "TheIdentityMorphism",
         IsHomalgModule );
 

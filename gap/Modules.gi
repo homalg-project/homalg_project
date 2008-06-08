@@ -62,7 +62,7 @@ end );
 ##
 InstallMethod( FreeHullModule,
         "for sets of homalg relations",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        [ IsRelationsOfFinitelyPresentedModuleRep ],
         
   function( M )
     local R;
@@ -89,49 +89,22 @@ InstallMethod( FreeHullModule,
 end );
 
 ## ( cf. [BR, Subsection 3.2.1] )
-InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
-  function( arg )
-    local nargs, M, R, q, B, d, degrees, j, d_j, F_j, id, S, i, left;
+InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
+        "for homalg relations",
+        [ IsRelationsOfFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, _q )
+    local R, q, B, d, degrees, j, d_j, F_j, id, S, i, left;
     
-    ## all options of Maple's homalg are obsolete now:
+    ## all options of Maple's homalg are now obsolete:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
-    
-    nargs := Length( arg );
-    
-    if nargs = 0 or not ( IsHomalgRelations( arg[1] ) or IsHomalgModule( arg[1] ) ) then
-        Error( "the first argument must be a module or a set of relations\n" );
-    fi;
-    
-    M := arg[1];
-    
-    if IsHomalgModule( M ) then
-        M := RelationsOfModule( M );
-    fi;
     
     R := HomalgRing( M );
     
-    if nargs > 1 and IsInt( arg[2] ) then
-        q := arg[2];
-    elif IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
-        q := LeftGlobalDimension( M );
-    elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
-        q := RightGlobalDimension( M );
-    elif HasGlobalDimension( M ) then
-        q := GlobalDimension( M );
-    elif IsBound( M!.MaximumNumberOfResolutionSteps )
-      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
-        q := M!.MaximumNumberOfResolutionSteps;
-    elif IsBound( arg[1]!.MaximumNumberOfResolutionSteps )
-      and IsInt( arg[1]!.MaximumNumberOfResolutionSteps ) then
-        q := arg[1]!.MaximumNumberOfResolutionSteps;
-    elif IsBound( R!.MaximumNumberOfResolutionSteps )
-      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
-        q := R!.MaximumNumberOfResolutionSteps;
-    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
-      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
-        q := HOMALG.MaximumNumberOfResolutionSteps;
-    else
+    if _q < 1 then
         q := infinity;
+    else
+        q := _q;
     fi;
     
     if HasFreeResolution( M ) then
@@ -146,18 +119,10 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     else
         B := ReducedBasisOfModule( M, "COMPUTE_BASIS", "STORE_SYZYGIES" );
         j := 1;
-        d_j := HomalgMorphism( B );
+        d_j := HomalgMap( B );
         d := HomalgComplex( d_j, 1 );
         d!.LastSyzygies := B!.SyzygiesGenerators;
         
-        ## only for j = 1:
-        if IsHomalgModule( arg[1] ) then
-            id := HomalgIdentityMatrix( NrGenerators( B ), R );
-            ## the zero'th component of the quasi-isomorphism,
-            ## which in this case is simplfy the natural epimorphism on the module
-            SetCokernelEpi( d_j, HomalgMorphism( id, Range( d_j ), arg[1] ) );
-            SetIsEpimorphism( d_j!.CokernelEpi, true );
-        fi;
         SetFreeResolution( M, d );
     fi;
     
@@ -171,7 +136,7 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
         
         B := ReducedBasisOfModule( S, "COMPUTE_BASIS", "STORE_SYZYGIES" );
         j := j + 1;
-        d_j := HomalgMorphism( B, "free", F_j );
+        d_j := HomalgMap( B, "free", F_j );
         
         Add( d, d_j );
         S := B!.SyzygiesGenerators;
@@ -183,8 +148,8 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
     od;
     
     if NrRelations( S ) = 0 then
+        SetIsMonomorphism( d_j, true );
         SetHasFiniteFreeResolution( M, true );
-        SetIsAcyclic( d, true );
     fi;
     
     ## fill up with zero morphisms:
@@ -192,9 +157,9 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
-                d_j := HomalgZeroMorphism( HomalgZeroLeftModule( R ), F_j );	## always create a new zero module to be able to distinguish them
+                d_j := HomalgZeroMap( HomalgZeroLeftModule( R ), F_j );	## always create a new zero module to be able to distinguish them
             else
-                d_j := HomalgZeroMorphism( HomalgZeroRightModule( R ), F_j );	## always create a new zero module to be able to distinguish them
+                d_j := HomalgZeroMap( HomalgZeroRightModule( R ), F_j );	## always create a new zero module to be able to distinguish them
             fi;
             
             Add( d, d_j );
@@ -202,9 +167,104 @@ InstallGlobalFunction( ResolutionOfModule,	### defines: ResolutionOfModule
         od;
     fi;
     
-    SetIsComplex( d, true );
+    if NrRelations( S ) = 0 then
+        SetIsAcyclic( d, true );
+    else
+        SetIsComplex( d, true );
+    fi;
     
     return d;
+    
+end );
+
+InstallMethod( Resolution,
+        "for homalg relations",
+        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, q;
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
+        q := LeftGlobalDimension( M );
+    elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
+        q := RightGlobalDimension( M );
+    elif HasGlobalDimension( M ) then
+        q := GlobalDimension( M );
+    elif IsBound( M!.MaximumNumberOfResolutionSteps )
+      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+        q := M!.MaximumNumberOfResolutionSteps;
+    elif IsBound( R!.MaximumNumberOfResolutionSteps )
+      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+        q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG.MaximumNumberOfResolutionSteps;
+    else
+        q := 0;
+    fi;
+    
+    return Resolution( M, q );
+    
+end );
+
+InstallMethod( Resolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, q )
+    local rel, d, d_1;
+    
+    rel := RelationsOfModule( M );
+    
+    d := Resolution( rel, q );
+    
+    d_1 := CertainMorphism( d, 1 );
+    
+    if not HasCokernelEpi( d_1 ) then
+        ## the zero'th component of the quasi-isomorphism,
+        ## which in this case is simplfy the natural epimorphism onto the module
+        SetCokernelEpi( d_1, HomalgIdentityMap( Range( d_1 ), M ) );
+        SetIsEpimorphism( d_1!.CokernelEpi, true );
+    fi;
+    
+    return d;
+    
+end );
+
+InstallMethod( Resolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, q;
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
+        q := LeftGlobalDimension( M );
+    elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
+        q := RightGlobalDimension( M );
+    elif HasGlobalDimension( M ) then
+        q := GlobalDimension( M );
+    elif IsBound( M!.MaximumNumberOfResolutionSteps )
+      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+        q := M!.MaximumNumberOfResolutionSteps;
+    elif IsBound( M!.MaximumNumberOfResolutionSteps )
+      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+        q := M!.MaximumNumberOfResolutionSteps;
+    elif IsBound( R!.MaximumNumberOfResolutionSteps )
+      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+        q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG.MaximumNumberOfResolutionSteps;
+    else
+        q := 0;
+    fi;
+    
+    return Resolution( M, q );
     
 end );
 
@@ -241,7 +301,7 @@ InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule	(incomp
     
     if IsHomalgModule( arg[1] ) then
         
-        par := HomalgMorphism( par, arg[1], F );
+        par := HomalgMap( par, arg[1], F );
         
         SetIsMorphism( par, true );
         

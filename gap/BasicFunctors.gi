@@ -15,6 +15,11 @@
 ####################################
 
 ##
+## additive functors [HS. Prop. II.9.5] preserves chain complexes [HS. p. 118]
+## half exact functors are additive [HS. p. 132 & Ex. IV.5.8]
+##
+
+##
 ## Cokernel
 ##
 
@@ -46,7 +51,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     id := HomalgIdentityMatrix( NrGenerators( gen ), R );
     
     ## the natural epimorphism:
-    epi := HomalgMorphism( id, [ T, p ], [ coker, 1 ] );
+    epi := HomalgMap( id, [ T, p ], [ coker, 1 ] );
     
     SetIsEpimorphism( epi, true );
     
@@ -56,8 +61,8 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
-    emb := HomalgMorphism( id, [ coker, 1 ], [ T, p ] );
-    SetIsTobBeViewedAsAMonomorphism( emb, true );
+    emb := HomalgMap( id, [ coker, 1 ], [ T, p ] );
+    SetMonomorphismModuloImage( emb, phi );
     
     ## save the natural embedding in the cokernel (thanks GAP):
     coker!.NaturalEmbedding := emb;
@@ -102,7 +107,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     ## w.r.t. the first set of relations of ker and the p-th set of relations of S
     emb := MatrixOfGenerators( ker, 1 );
     
-    emb := HomalgMorphism( emb, [ ker, 1 ], [ S, p ] );
+    emb := HomalgMap( emb, [ ker, 1 ], [ S, p ] );
     
     SetIsMonomorphism( emb, true );
     
@@ -128,6 +133,61 @@ InstallValue( Functor_Kernel,
 
 Functor_Kernel!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+
+## install KernelEmb for kernel squares (this should be installed automatically in the future)
+InstallOtherMethod( KernelEmb,
+        "for homalg kernel squares",
+        [ IsHomalgChainMap and IsKernelSquare ],
+  function( sq )
+    local d, dS, dT, phi, muS, muT, kappa;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    dS := LowestDegreeMorphismInComplex( Source( sq ) );
+    dT := LowestDegreeMorphismInComplex( Range( sq ) );
+    
+    phi := CertainMorphism( sq, d );
+    
+    muS := KernelEmb( dS );
+    muT := KernelEmb( dT );
+    
+    kappa := CompleteImageSquare( muS, phi, muT );
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( Source( sq ) ) then
+        muS := HomalgComplex( muS, d + 1 );
+        muT := HomalgComplex( muT, d + 1 );
+        kappa := HomalgChainMap( kappa, muS, muT, d + 1 );
+    else
+        muS := HomalgCocomplex( muS, d - 1 );
+        muT := HomalgCocomplex( muT, d - 1 );
+        kappa := HomalgChainMap( kappa, muS, muT, d - 1 );
+    fi;
+    
+    return kappa;
+    
+end );
+
+## install Kernel for kernel squares (this should be installed automatically in the future)
+InstallOtherMethod( Kernel,
+        "for homalg kernel squares",
+        [ IsHomalgChainMap and IsKernelSquare ],
+  function( sq )
+    local d, dS, dT, phi, muS, muT;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    dS := LowestDegreeMorphismInComplex( Source( sq ) );
+    dT := LowestDegreeMorphismInComplex( Range( sq ) );
+    
+    phi := CertainMorphism( sq, d );
+    
+    muS := KernelEmb( dS );
+    muT := KernelEmb( dT );
+    
+    return CompleteImageSquare( muS, phi, muT );
+    
+end );
 
 ##
 ## DefectOfExactness
@@ -192,8 +252,8 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
-    emb := HomalgMorphism( emb, [ ker, 1 ], [ M, p ] );
-    SetIsTobBeViewedAsAMonomorphism( emb, true );
+    emb := HomalgMap( emb, [ ker, 1 ], [ M, p ] );
+    SetMonomorphismModuloImage( emb, pre );
     
     ## save the natural embedding in the defect (thanks GAP):
     ker!.NaturalEmbedding := emb;
@@ -220,9 +280,8 @@ Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedMorphisms :=
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
   function( M, N )
-    local R, container, weak_pointers, a, deleted, s, t, l0, l1, _l0,
-          matM, matN, HP0N, HP1N, r, c, alpha, idN, hom, gen,
-          proc_to_readjust_generators, proc_to_normalize_generators, p;
+    local R, s, t, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, idN, alpha, hom,
+          gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
     
@@ -260,10 +319,6 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         HP1N := DiagMat( ListWithIdenticalEntries( l1, Involution( matN ) ) );
     fi;
     
-    idN := HomalgIdentityMatrix( _l0, R );
-    
-    alpha := KroneckerMat( matM, idN );
-    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         r := l0;
         c := _l0;
@@ -281,7 +336,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             
             ## we assume mat to be a matrix of a morphism
             ## w.r.t. the CURRENT generators of source and target:
-            mor := HomalgMorphism( mat, M, N );
+            mor := HomalgMap( mat, M, N );
             
             mat_old := MatrixOfHomomorphism( mor, s, t );
             
@@ -300,7 +355,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             
             mat_old := ConvertColumnToMatrix( gen, r, c );
             
-            mor := HomalgMorphism( mat_old, M_with_s, N_with_t );
+            mor := HomalgMap( mat_old, M_with_s, N_with_t );
             
             ## return the matrix of the morphism
             ## w.r.t. the CURRENT generators of source and target:
@@ -326,7 +381,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             
             ## we assume mat to be a matrix of a morphism
             ## w.r.t. the CURRENT generators of source and target:
-            mor := HomalgMorphism( mat, M, N );
+            mor := HomalgMap( mat, M, N );
             
             mat_old := MatrixOfHomomorphism( mor, s, t );
             
@@ -345,7 +400,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             
             mat_old := ConvertRowToMatrix( gen, r, c );
             
-            mor := HomalgMorphism( mat_old, M_with_s, N_with_t );
+            mor := HomalgMap( mat_old, M_with_s, N_with_t );
             
             ## return the matrix of the morphism
             ## w.r.t. the CURRENT generators of source and target:
@@ -356,7 +411,11 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         HP1N := LeftPresentation( HP1N );
     fi;
     
-    alpha := HomalgMorphism( alpha, HP0N, HP1N );
+    idN := HomalgIdentityMatrix( _l0, R );
+    
+    alpha := KroneckerMat( matM, idN );
+    
+    alpha := HomalgMap( alpha, HP0N, HP1N );
     
     hom := Kernel( alpha );
     
@@ -423,8 +482,8 @@ InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "contravariant", "distinguished" ] ] ],
-                [ "2", [ [ "covariant" ] ] ],
+                [ "1", [ [ "contravariant", "left exact", "distinguished" ] ] ],
+                [ "2", [ [ "covariant", "left exact" ] ] ],
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
@@ -434,6 +493,121 @@ Functor_Hom!.ContainerForWeakPointersOnComputedModules :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 Functor_Hom!.ContainerForWeakPointersOnComputedMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+## TensorProduct
+##
+
+InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorProduct (object part)
+  function( M, N )
+    local R, s, t, l0, _l0, matM, matN, idM, idN, MN,
+          gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
+    
+    R := HomalgRing( M );
+    
+    if not IsIdenticalObj( R, HomalgRing( N ) ) then
+        Error( "the rings of the source and target modules are not identical\n" );
+    fi;
+    
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) )
+       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
+        Error( "the two modules must either be both left or both right modules\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    l0 := NrGenerators( M );
+    _l0 := NrGenerators( N );
+    
+    matM := MatrixOfRelations( M );
+    matN := MatrixOfRelations( N );
+    
+    idM := HomalgIdentityMatrix( l0, R );
+    idN := HomalgIdentityMatrix( _l0, R );
+    
+    matM := KroneckerMat( matM, idN );
+    matN := KroneckerMat( idM, matN );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        MN := UnionOfRows( matM, matN );
+        MN := HomalgMap( MN );
+    else
+        MN := UnionOfColumns( matM, matN );
+        MN := HomalgMap( MN, "r" );
+    fi;
+    
+    MN := Cokernel( MN );
+    
+    #=====# end of the core procedure #=====#
+    
+    return MN;
+    
+end );
+
+InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorProduct (morphism part)
+  function( M_or_mor, N_or_mor )
+    local phi, L, R, idL;
+    
+    R := HomalgRing( M_or_mor );
+    
+    if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
+        Error( "the module and the morphism are not defined over identically the same ring\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
+       and IsFinitelyPresentedModuleRep( N_or_mor ) then
+        
+        phi := M_or_mor;
+        L := N_or_mor;
+        
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
+           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+            Error( "the morphism and the module must either be both left or both right\n" );
+        fi;
+        
+        idL := HomalgIdentityMatrix( NrGenerators( L ), R );
+        
+        return KroneckerMat( MatrixOfHomomorphism( phi ), idL );
+        
+    elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
+      and IsFinitelyPresentedModuleRep( M_or_mor ) then
+        
+        phi := N_or_mor;
+        L := M_or_mor;
+        
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
+           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+            Error( "the morphism and the module must either be both left or both right\n" );
+        fi;
+        
+        idL := HomalgIdentityMatrix( NrGenerators( L ), R );
+        
+        return Involution( KroneckerMat( idL, MatrixOfHomomorphism( phi ) ) );
+        
+    fi;
+    
+    Error( "one of the arguments must be a module and the other a morphism\n" );
+    
+end );
+
+InstallValue( Functor_TensorProduct,
+        CreateHomalgFunctor(
+                [ "name", "*" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant", "right exact", "distinguished" ] ] ],
+                [ "2", [ [ "covariant", "right exact" ] ] ],
+                [ "OnObjects", _Functor_TensorProduct_OnObjects ],
+                [ "OnMorphisms", _Functor_TensorProduct_OnMorphisms ]
+                )
+        );
+
+Functor_TensorProduct!.ContainerForWeakPointersOnComputedModules :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_TensorProduct!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
@@ -467,10 +641,24 @@ InstallFunctorOnObjects( Functor_DefectOfExactness );
 InstallFunctor( Functor_Hom );
 
 ##
+## M * N		( TensorProduct( M, N ) )
+##
+
+InstallFunctor( Functor_TensorProduct );
+
+##
 ## Ext( c, M, N )
 ##
 
 InstallValue( Functor_Ext,
         RightSatelliteOfCofunctor( Functor_Hom, "Ext", 1 )
+        );
+
+##
+## Tor( c, M, N )
+##
+
+InstallValue( Functor_Tor,
+        LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor", 1 )
         );
 

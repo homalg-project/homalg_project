@@ -40,6 +40,9 @@ DeclareCategory( "IsHomalgExternalRingElement",
 DeclareProperty( "IsIntegersForHomalg",
         IsHomalgRing );
 
+DeclareProperty( "IsFiniteQuotientOfTheIntegers",
+        IsHomalgRing );
+
 DeclareProperty( "IsRationalsForHomalg",
         IsHomalgRing );
 

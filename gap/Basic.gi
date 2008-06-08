@@ -613,15 +613,11 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
                        Concatenation( [ RelationsOfModule( arg[1] ) ], arg{[2..nargs]} ) );
     fi;
     
-    if not ( nargs > 0 and IsHomalgRelationsOfFinitelyPresentedModuleRep( arg[1] ) ) then
+    if not ( nargs > 0 and IsRelationsOfFinitelyPresentedModuleRep( arg[1] ) ) then
         Error( "the first argument must be a module or a set of relations\n" );
     fi;
     
     M := arg[1];
-    
-    if NrRelations( M ) = 0 then
-        return M;
-    fi;
     
     COMPUTE_BASIS := false;
     STORE_SYZYGIES := false;
@@ -633,6 +629,13 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
             STORE_SYZYGIES := true;
         fi;
     od;
+    
+    if NrRelations( M ) = 0 then
+        if STORE_SYZYGIES then
+            M!.SyzygiesGenerators := SyzygiesGenerators( M );
+        fi;
+        return M;
+    fi;
     
     if COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule ) then
         return M!.ReducedBasisOfModule;

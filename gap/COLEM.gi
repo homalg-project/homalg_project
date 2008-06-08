@@ -1353,6 +1353,62 @@ InstallMethod( UnionOfColumns,
 end );
 
 #-----------------------------------
+# DiagMat
+#-----------------------------------
+
+##
+InstallMethod( DiagMat,
+        "of homalg matrices",
+        [ IsHomogeneousList ], 1,
+        
+  function( l )
+    local pos, R, r, c, len, L, k, diag;
+    
+    pos := PositionProperty( l, HasIsEmptyMatrix and IsEmptyMatrix );
+    
+    if pos <> fail then
+        
+        R := HomalgRing( l[1] );
+        
+        r := NrRows( l[pos] );
+        c := NrColumns( l[pos] );
+        
+        len := Length( l );	## we can assume l >= 2, since other methods would then apply
+        
+        if pos = 1 then
+            L := l{[ 2 .. len ]};
+            if r = 0 then
+                k := Sum( List( L, NrRows ) );
+                diag := UnionOfColumns( HomalgZeroMatrix( k, c, R ), DiagMat( L ) );
+            else
+                k := Sum( List( L, NrColumns ) );
+                diag := UnionOfRows( HomalgZeroMatrix( r, k, R ), DiagMat( L ) );
+            fi;
+        elif pos = len then
+            L := l{[ 1 .. len - 1 ]};
+            if r = 0 then
+                k := Sum( List( L, NrRows ) );
+                diag := UnionOfColumns( DiagMat( L ), HomalgZeroMatrix( k, c, R ) );
+            else
+                k := Sum( List( L, NrColumns ) );
+                diag := UnionOfRows( DiagMat( L ), HomalgZeroMatrix( r, k, R ) );
+            fi;
+        else
+            L := l{[ 1 .. pos ]};
+            diag := DiagMat( [ DiagMat( L ), DiagMat( l{[ pos + 1 .. len ]} ) ] );
+        fi;
+        
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "DiagMat( [ ..., empty matrix, ... ] )", "\033[0m" );
+        
+        return diag;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+#-----------------------------------
 # AddMat
 #-----------------------------------
 

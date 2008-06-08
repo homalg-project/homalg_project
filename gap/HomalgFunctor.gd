@@ -49,6 +49,18 @@ DeclareOperation( "NameOfFunctor",
 DeclareOperation( "MultiplicityOfFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "IsCovariantFunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "IsCovariantFunctor",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "IsAdditiveFunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "IsAdditiveFunctor",
+        [ IsHomalgFunctor ] );
+
 DeclareOperation( "FunctorObj",
         [ IsHomalgFunctor, IsList ] );
 
@@ -59,6 +71,9 @@ DeclareOperation( "FunctorMap",
         [ IsHomalgFunctor, IsHomalgMap ] );
 
 DeclareOperation( "RightSatelliteOfCofunctor",
+        [ IsHomalgFunctor, IsString, IsPosInt ] );
+
+DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor, IsString, IsPosInt ] );
 
 DeclareOperation( "InstallFunctorOnObjects",

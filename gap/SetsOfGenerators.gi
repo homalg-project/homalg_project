@@ -65,7 +65,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForLeftModule,
     
     generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ] );
     
-    if IsHomalgGeneratorsOfFinitelyGeneratedModuleRep( arg[1] )
+    if IsGeneratorsOfFinitelyGeneratedModuleRep( arg[1] )
        and IsHomalgGeneratorsOfLeftModule( arg[1] ) then
         generators.1 := arg[1];
     elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then
@@ -87,7 +87,7 @@ InstallGlobalFunction( CreateSetsOfGeneratorsForRightModule,
     
     generators := rec( ListOfPositionsOfKnownSetsOfGenerators := [ 1 ] );
     
-    if IsHomalgGeneratorsOfFinitelyGeneratedModuleRep( arg[1] )
+    if IsGeneratorsOfFinitelyGeneratedModuleRep( arg[1] )
        and IsHomalgGeneratorsOfRightModule( arg[1] ) then
         generators.1 := arg[1];
     elif IsString( arg[1] ) and Length( arg[1] ) > 2 and LowercaseString( arg[1]{[1..3]} ) = "unk" then

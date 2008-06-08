@@ -633,6 +633,114 @@ InstallMethod( ByASmallerPresentation,
     
 end );
 
+##
+InstallMethod( CertainMorphismAsKernelSquare,
+        "for homalg chain maps",
+        [ IsHomalgChainMap, IsInt ],
+        
+  function( c, i )
+    local degree, phi, S, T, sub;
+    
+    degree := DegreeOfMorphism( c );
+    
+    phi := CertainMorphism( c, i );
+    
+    S := CertainMorphismAsSubcomplex( Source( c ), i );
+    T := CertainMorphismAsSubcomplex( Range( c ), i );
+    
+    sub := HomalgChainMap( phi, S, T, [ i, degree ] );
+    
+    if HasIsMorphism( c ) and IsMorphism( c ) then
+        SetIsMorphism( sub, true );
+    fi;
+    
+    SetIsKernelSquare( sub, true );
+    
+    return sub;
+    
+end );
+
+##
+InstallMethod( CertainMorphismAsImageSquare,
+        "for homalg chain maps",
+        [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( c, i )
+    local degree, phi, S, T, sub;
+    
+    degree := DegreeOfMorphism( c );
+    
+    phi := CertainMorphism( c, i );
+    
+    S := CertainMorphismAsSubcomplex( Source( c ), i + 1 );
+    T := CertainMorphismAsSubcomplex( Range( c ), i + 1 );
+    
+    sub := HomalgChainMap( phi, S, T, [ i, degree ] );
+    
+    if HasIsMorphism( c ) and IsMorphism( c ) then
+        SetIsMorphism( sub, true );
+    fi;
+    
+    SetIsImageSquare( sub, true );
+    
+    return sub;
+    
+end );
+
+##
+InstallMethod( CertainMorphismAsImageSquare,
+        "for homalg chain maps",
+        [ IsCochainMapOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( c, i )
+    local degree, phi, S, T, sub;
+    
+    degree := DegreeOfMorphism( c );
+    
+    phi := CertainMorphism( c, i );
+    
+    S := CertainMorphismAsSubcomplex( Source( c ), i - 1 );
+    T := CertainMorphismAsSubcomplex( Range( c ), i - 1 );
+    
+    sub := HomalgChainMap( phi, S, T, [ i, degree ] );
+    
+    if HasIsMorphism( c ) and IsMorphism( c ) then
+        SetIsMorphism( sub, true );
+    fi;
+    
+    SetIsImageSquare( sub, true );
+    
+    return sub;
+    
+end );
+
+##
+InstallMethod( CertainMorphismAsLambekPairOfSquares,
+        "for homalg chain maps",
+        [ IsHomalgChainMap, IsInt ],
+        
+  function( c, i )
+    local degree, phi, S, T, sub;
+    
+    degree := DegreeOfMorphism( c );
+    
+    phi := CertainMorphism( c, i );
+    
+    S := CertainTwoMorphismsAsSubcomplex( Source( c ), i );
+    T := CertainTwoMorphismsAsSubcomplex( Range( c ), i );
+    
+    sub := HomalgChainMap( phi, S, T, [ i, degree ] );
+    
+    if HasIsMorphism( c ) and IsMorphism( c ) then
+        SetIsMorphism( sub, true );
+    fi;
+    
+    SetIsLambekPairOfSquares( sub, true );
+    
+    return sub;
+    
+end );
+
 ####################################
 #
 # global functions:
@@ -645,7 +753,7 @@ InstallGlobalFunction( homalgResetFiltersOfChainMap,
     
     if not IsBound( HOMALG.PropertiesOfChainMaps ) then
         HOMALG.PropertiesOfChainMaps :=
-          [ IsZero, IsMorphism ];
+          [ IsZero, IsMorphism, IsImageSquare, IsKernelSquare, IsLambekPairOfSquares ];
     fi;
     
     for property in HOMALG.PropertiesOfChainMaps do

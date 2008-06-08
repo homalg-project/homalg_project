@@ -80,9 +80,20 @@ end );
 
 ####################################
 #
-# methods for properties:
+# methods for attributes:
 #
 ####################################
+
+##
+InstallMethod( TheZeroMorphism,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return HomalgZeroMap( M, 0*M );	## never set its Kernel to M, since a possibly existing NaturalEmbedding in M will be overwritten!
+    
+end );
 
 ##
 InstallMethod( TheIdentityMorphism,
@@ -91,7 +102,7 @@ InstallMethod( TheIdentityMorphism,
         
   function( M )
     
-    return HomalgIdentityMorphism( M );
+    return HomalgIdentityMap( M );
     
 end );
 
@@ -574,7 +585,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgGeneratorsOfFinitelyGeneratedModuleRep ],
+        [ IsFinitelyPresentedModuleRep, IsGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
     local rels, gens, d, l, id, tr, itr;
@@ -650,7 +661,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep, IsRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
     local rels, lpos, d, gens, l, id, tr, itr;
@@ -742,7 +753,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsFinitelyPresentedModuleRep, IsRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M, rel, T, TI )
     local rels, gens, d, l, gen, tr, itr;
@@ -1189,7 +1200,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     local R, is_zero_module, gens, rels, M;
@@ -1237,7 +1248,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule, IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -1287,7 +1298,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( rel )
     local R, is_zero_module, gens, rels, M;
@@ -1335,7 +1346,7 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor",
-        [ IsHomalgGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule, IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -1479,7 +1490,7 @@ end );
 ##
 InstallOtherMethod( LeftPresentation,		## FIXME: should be removed!!!
         "constructor",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -1584,7 +1595,7 @@ end );
 ##
 InstallOtherMethod( RightPresentation,		## FIXME: should be removed!!!
         "constructor",
-        [ IsHomalgRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -1655,7 +1666,7 @@ InstallGlobalFunction( GetGenerators,
         
         gen := GeneratorsOfModule( M, pos );
         
-    elif nargs > 0 and IsHomalgGeneratorsOfFinitelyGeneratedModuleRep( arg[1] ) then
+    elif nargs > 0 and IsGeneratorsOfFinitelyGeneratedModuleRep( arg[1] ) then
         
         gen := arg[1];
         

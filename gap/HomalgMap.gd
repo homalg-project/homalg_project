@@ -50,7 +50,13 @@ DeclareProperty( "IsIsomorphism",
 DeclareProperty( "IsAutomorphism",
         IsHomalgMap );
 
-DeclareProperty( "IsTobBeViewedAsAMonomorphism",
+####################################
+#
+# attributes:
+#
+####################################
+
+DeclareAttribute( "MonomorphismModuloImage",
         IsHomalgMap );
 
 ####################################
@@ -61,11 +67,11 @@ DeclareProperty( "IsTobBeViewedAsAMonomorphism",
 
 # constructor methods:
 
-DeclareGlobalFunction( "HomalgMorphism" );
+DeclareGlobalFunction( "HomalgMap" );
 
-DeclareGlobalFunction( "HomalgZeroMorphism" );
+DeclareGlobalFunction( "HomalgZeroMap" );
 
-DeclareGlobalFunction( "HomalgIdentityMorphism" );
+DeclareGlobalFunction( "HomalgIdentityMap" );
 
 # basic operations:
 
@@ -93,6 +99,6 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "PostDivide",
         [ IsHomalgMap, IsHomalgMap ] );
 
-DeclareOperation( "CompleteImSq",
+DeclareOperation( "CompleteImageSquare",
         [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
 

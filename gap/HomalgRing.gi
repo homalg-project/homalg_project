@@ -427,9 +427,9 @@ InstallGlobalFunction( HomalgRingOfIntegers,
         LoadPackage( "GaussForHomalg" );
         c := arg[1];
         if IsPrime( c ) then
-            R := CreateHomalgRing( GF( c ) );
+            R := CreateHomalgRing( GF( c ), IsFiniteQuotientOfTheIntegers );
         else
-            R := CreateHomalgRing( ZmodnZ( c ) );
+            R := CreateHomalgRing( ZmodnZ( c ), IsFiniteQuotientOfTheIntegers );
         fi;
     else
         Error( "the first argument must be an integer\n" );

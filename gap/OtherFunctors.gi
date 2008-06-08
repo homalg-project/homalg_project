@@ -46,7 +46,7 @@ InstallValue( Functor_TorsionSubmodule,
                 [ "name", "TorsionSubmodule" ],
                 [ "natural_transformation", "TorsionSubmoduleEmb" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ] ] ],
+                [ "1", [ [ "covariant", "additive" ] ] ],
                 [ "OnObjects", _Functor_TorsionSubmodule_OnObjects ]
                 )
         );
@@ -86,13 +86,57 @@ InstallValue( Functor_TorsionFreeFactor,
                 [ "name", "TorsionFreeFactor" ],
                 [ "natural_transformation", "TorsionFreeFactorEpi" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ] ] ],
+                [ "1", [ [ "covariant", "additive" ] ] ],
                 [ "OnObjects", _Functor_TorsionFreeFactor_OnObjects ]
                 )
         );
 
 Functor_TorsionFreeFactor!.ContainerForWeakPointersOnComputedMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+## DirectSum
+##
+
+InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
+  function( M, N )
+    local R, matM, matN, sum;
+    
+    R := HomalgRing( M );
+    
+    if not IsIdenticalObj( R, HomalgRing( N ) ) then
+        Error( "the rings of the source and target modules are not identical\n" );
+    fi;
+    
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) )
+       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
+        Error( "the two modules must either be both left or both right modules\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    matM := MatrixOfRelations( M );
+    matN := MatrixOfRelations( N );
+    
+    sum := DiagMat( [ matM, matN ] );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        return LeftPresentation( sum );
+    else
+        return RightPresentation( sum );
+    fi;
+    
+end );
+
+InstallValue( Functor_DirectSum,
+        CreateHomalgFunctor(
+                [ "name", "+" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ] ] ],
+                [ "2", [ [ "covariant" ] ] ],
+                [ "OnObjects", _Functor_DirectSum_OnObjects ]
+                )
+        );
 
 ####################################
 #
@@ -111,3 +155,10 @@ InstallFunctor( Functor_TorsionSubmodule );
 ##
 
 InstallFunctor( Functor_TorsionFreeFactor );
+
+##
+## DirectSum( M, N ) ( M + N );
+##
+
+InstallFunctorOnObjects( Functor_DirectSum );
+

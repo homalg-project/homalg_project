@@ -102,5 +102,17 @@ DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMorphism ] );
 
 DeclareOperation( "Add",
+        [ IsHomalgComplex, IsHomalgModule ] );
+
+DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMatrix ] );
+
+DeclareOperation( "Shift",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "CertainMorphismAsSubcomplex",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "CertainTwoMorphismsAsSubcomplex",
+        [ IsHomalgComplex, IsInt ] );
 

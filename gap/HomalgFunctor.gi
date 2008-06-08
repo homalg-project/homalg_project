@@ -105,6 +105,66 @@ InstallMethod( MultiplicityOfFunctor,
 end );
 
 ##
+InstallMethod( IsCovariantFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt ],
+        
+  function( Functor, pos )
+    
+    if IsBound( Functor!.(pos) ) then
+        if Functor!.( pos )[1][1] = "covariant" then
+            return true;
+        elif Functor!.( pos )[1][1] = "contravariant" then
+            return false;
+        fi;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( IsCovariantFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return IsCovariantFunctor( Functor, 1 );
+    
+end );
+
+##
+InstallMethod( IsAdditiveFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt ],
+        
+  function( Functor, pos )
+    local prop;
+    
+    if IsBound( Functor!.(pos) ) and Length( Functor!.( pos )[1] ) > 1 then
+        prop := Functor!.( pos )[1][2];
+        if prop in [ "additive", "left exact", "right exact" ] then
+            return true;
+        fi;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( IsAdditiveFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return IsAdditiveFunctor( Functor, 1 );
+    
+end );
+
+##
 InstallMethod( FunctorObj,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsList ],
@@ -182,7 +242,7 @@ InstallMethod( FunctorMap,
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
     local container, weak_pointers, a, deleted, functor_name,
-          number_of_arguments, arg_positions, S, T, pos,
+          number_of_arguments, pos0, arg_positions, S, T, pos,
           arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
           arg_source, arg_target, F_source, F_target, arg_phi, hull_phi,
           emb_source, emb_target, mor;
@@ -211,6 +271,13 @@ InstallMethod( FunctorMap,
     functor_name := NameOfFunctor( Functor );
     
     number_of_arguments := MultiplicityOfFunctor( Functor );
+    
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+        number_of_arguments := number_of_arguments + 1;
+        pos0 := 1;
+    else
+        pos0 := 0;
+    fi;
     
     arg_positions := List( fixed_arguments_of_multi_functor, a -> a[1] );
     
@@ -250,10 +317,12 @@ InstallMethod( FunctorMap,
         od;
     fi;
     
-    if IsBound( Functor!.( pos ) ) and Functor!.( pos )[1][1] = "covariant" then
+    pos := pos - pos0;
+    
+    if IsCovariantFunctor( Functor, pos ) = true then
         arg_source := Concatenation( arg_before_pos, [ S ], arg_behind_pos );
         arg_target := Concatenation( arg_before_pos, [ T ], arg_behind_pos );
-    elif IsBound( Functor!.( pos ) ) and Functor!.( pos )[1][1] = "contravariant" then
+    elif IsCovariantFunctor( Functor, pos ) = false then	## not fail
         arg_source := Concatenation( arg_before_pos, [ T ], arg_behind_pos );
         arg_target := Concatenation( arg_before_pos, [ S ], arg_behind_pos );
     else
@@ -270,13 +339,15 @@ InstallMethod( FunctorMap,
         arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
         
-        hull_phi :=
-          HomalgMorphism( hull_phi, Range( emb_source ), Range( emb_target ) );
+        if IsHomalgMatrix( hull_phi ) then
+            hull_phi :=
+              HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
+        fi;
     else
         hull_phi := phi;
     fi;
     
-    mor := CompleteImSq( emb_source, hull_phi, emb_target );
+    mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
     
     #=====# end of the core procedure #=====#
     
@@ -310,7 +381,7 @@ InstallMethod( InstallFunctorOnObjects,
         
   function( Functor )
     local functor_name, number_of_arguments, natural_transformation,
-          filter_obj, filter0_obj, filter1_obj, filter2_obj;
+          filter_obj, filter0, filter1_obj, filter2_obj;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -333,14 +404,14 @@ InstallMethod( InstallFunctorOnObjects,
             if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
                 
                 if Length( Functor!.0 ) = 1 then
-                    filter0_obj := Functor!.0[1];
+                    filter0 := Functor!.0[1];
                 else
-                    filter0_obj := IsList;
+                    filter0 := IsList;
                 fi;
                 
                 InstallOtherMethod( functor_name,
                         "for homalg modules",
-                        [ filter0_obj, filter_obj ],
+                        [ filter0, filter_obj ],
                   function( c, o )
                     local obj;
                     
@@ -421,16 +492,16 @@ InstallMethod( InstallFunctorOnObjects,
             if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
                 
                 if Length( Functor!.0 ) = 1 then
-                    filter0_obj := Functor!.0[1];
+                    filter0 := Functor!.0[1];
                 else
-                    filter0_obj := IsList;
+                    filter0 := IsList;
                 fi;
                 
-                if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+                if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
                     
                     InstallOtherMethod( functor_name,
                             "for homalg modules",
-                            [ filter0_obj, filter1_obj ],
+                            [ filter0, filter1_obj ],
                       function( c, o )
                         local R;
                         
@@ -448,7 +519,7 @@ InstallMethod( InstallFunctorOnObjects,
                 
                 InstallOtherMethod( functor_name,
                         "for homalg modules",
-                        [ filter0_obj, filter1_obj, filter2_obj ],
+                        [ filter0, filter1_obj, filter2_obj ],
                   function( c, o1, o2 )
                     local obj1, obj2;
                     
@@ -491,7 +562,7 @@ InstallMethod( InstallFunctorOnObjects,
                 
             else
                 
-                if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+                if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
                     
                     InstallOtherMethod( functor_name,
                             "for homalg modules",
@@ -573,7 +644,7 @@ InstallMethod( InstallFunctorOnMorphisms,
         
   function( Functor )
     local functor_name, number_of_arguments, filter_mor,
-          filter1_obj, filter1_mor, filter2_obj, filter2_mor;
+          filter0, filter1_obj, filter1_mor, filter2_obj, filter2_mor;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -593,14 +664,35 @@ InstallMethod( InstallFunctorOnMorphisms,
         
         if IsFilter( filter_mor ) then
             
-            InstallOtherMethod( functor_name,
-                    "for homalg morphisms",
-                    [ filter_mor ],
-              function( m )
+            if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
                 
-                return FunctorMap( Functor, m );
+                if Length( Functor!.0 ) = 1 then
+                    filter0 := Functor!.0[1];
+                else
+                    filter0 := IsList;
+                fi;
                 
-            end );
+                InstallOtherMethod( functor_name,
+                        "for homalg morphisms",
+                        [ filter0, filter_mor ],
+                  function( c, m )
+                    
+                    return FunctorMap( Functor, m, [ [ 1, c ] ] );
+                    
+                end );
+                
+            else
+                
+                InstallOtherMethod( functor_name,
+                        "for homalg morphisms",
+                        [ filter_mor ],
+                  function( m )
+                    
+                    return FunctorMap( Functor, m );
+                    
+                end );
+                
+            fi;
             
         else
             
@@ -631,67 +723,141 @@ InstallMethod( InstallFunctorOnMorphisms,
         
         if IsFilter( filter1_mor ) and IsFilter( filter2_mor ) then
             
-            if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+            if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+                
+                if Length( Functor!.0 ) = 1 then
+                    filter0 := Functor!.0[1];
+                else
+                    filter0 := IsList;
+                fi;
+                
+                if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg morphisms",
+                            [ filter0, filter1_mor ],
+                      function( c, m )
+                        local R;
+                        
+                        R := HomalgRing( m );
+                        
+                        return functor_name( c, m, R );
+                        
+                    end );
+                    
+                fi;
                 
                 InstallOtherMethod( functor_name,
                         "for homalg morphisms",
-                        [ filter1_mor ],
-                  function( m )
-                    local R;
+                        [ filter0, filter1_mor, filter2_obj ],
+                  function( c, m, o )
+                    local obj;
                     
-                    R := HomalgRing( m );
+                    if IsHomalgModule( o ) then	## the most probable case
+                        obj := o;
+                    elif IsHomalgRing( o ) then
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
+                            obj := AsLeftModule( o );
+                        else
+                            obj := AsRightModule( o );
+                        fi;
+                    else
+                        ## the default:
+                        obj := o;
+                    fi;
                     
-                    return functor_name( m, R );
+                    return FunctorMap( Functor, m, [ [ 1, c ], [ 3, obj ] ] );
+                    
+                end );
+                
+                InstallOtherMethod( functor_name,
+                        "for homalg morphisms",
+                        [ filter0, filter1_obj, filter2_mor ],
+                  function( c, o, m )
+                    local obj;
+                    
+                    if IsHomalgModule( o ) then	## the most probable case
+                        obj := o;
+                    elif IsHomalgRing( o ) then
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
+                            obj := AsLeftModule( o );
+                        else
+                            obj := AsRightModule( o );
+                        fi;
+                    else
+                        ## the default:
+                        obj := o;
+                    fi;
+                    
+                    return FunctorMap( Functor, m, [ [ 1, c ], [ 2, obj ] ] );
+                    
+                end );
+                
+            else
+                
+                if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg morphisms",
+                            [ filter1_mor ],
+                      function( m )
+                        local R;
+                        
+                        R := HomalgRing( m );
+                        
+                        return functor_name( m, R );
+                        
+                    end );
+                    
+                fi;
+                
+                InstallOtherMethod( functor_name,
+                        "for homalg morphisms",
+                        [ filter1_mor, filter2_obj ],
+                  function( m, o )
+                    local obj;
+                    
+                    if IsHomalgModule( o ) then	## the most probable case
+                        obj := o;
+                    elif IsHomalgRing( o ) then
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
+                            obj := AsLeftModule( o );
+                        else
+                            obj := AsRightModule( o );
+                        fi;
+                    else
+                        ## the default:
+                        obj := o;
+                    fi;
+                    
+                    return FunctorMap( Functor, m, [ [ 2, obj ] ] );
+                    
+                end );
+                
+                InstallOtherMethod( functor_name,
+                        "for homalg morphisms",
+                        [ filter1_obj, filter2_mor ],
+                  function( o, m )
+                    local obj;
+                    
+                    if IsHomalgModule( o ) then	## the most probable case
+                        obj := o;
+                    elif IsHomalgRing( o ) then
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
+                            obj := AsLeftModule( o );
+                        else
+                            obj := AsRightModule( o );
+                        fi;
+                    else
+                        ## the default:
+                        obj := o;
+                    fi;
+                    
+                    return FunctorMap( Functor, m, [ [ 1, obj ] ] );
                     
                 end );
                 
             fi;
-            
-            InstallOtherMethod( functor_name,
-                    "for homalg morphisms",
-                    [ filter1_mor, filter2_obj ],
-              function( m, o )
-                local obj;
-                
-                if IsHomalgModule( o ) then	## the most probable case
-                    obj := o;
-                elif IsHomalgRing( o ) then
-                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                        obj := AsLeftModule( o );
-                    else
-                        obj := AsRightModule( o );
-                    fi;
-                else
-                    ## the default:
-                    obj := o;
-                fi;
-                
-                return FunctorMap( Functor, m, [ [ 2, obj ] ] );
-                
-            end );
-            
-            InstallOtherMethod( functor_name,
-                    "for homalg morphisms",
-                    [ filter1_obj, filter2_mor ],
-              function( o, m )
-                local obj;
-                
-                if IsHomalgModule( o ) then	## the most probable case
-                    obj := o;
-                elif IsHomalgRing( o ) then
-                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                        obj := AsLeftModule( o );
-                    else
-                        obj := AsRightModule( o );
-                    fi;
-                else
-                    ## the default:
-                    obj := o;
-                fi;
-                
-                return FunctorMap( Functor, m, [ [ 1, obj ] ] );
-                
-            end );
             
         else
             
@@ -705,139 +871,569 @@ end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
   function( Functor, filter_cpx, complex_or_cocomplex, i )
-    local functor_name;
+    local filter0, functor_name;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
-    InstallOtherMethod( functor_name,
-            "for homalg complexes",
-            [ filter_cpx ],
-      function( c )
-        local degrees, l, morphisms, Fc, m;
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
-        degrees := ObjectDegreesOfComplex( c );
-        
-        l := Length( degrees );
-        
-        if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ) ), degrees[1] );
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
         else
-            morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex( functor_name( morphisms[1] ), degrees[i] );
-            for m in morphisms{[ 2 .. l - 1 ]} do
-                Add( Fc, functor_name( m ) );
-            od;
+            filter0 := IsList;
         fi;
         
-        return Fc;
+        if IsAdditiveFunctor( Functor ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter_cpx ],
+              function( q, c )
+                local degrees, l, morphisms, Fc, m;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( q, m ) );
+                    od;
+                fi;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter_cpx ],
+              function( q, c )
+                local degrees, l, morphisms, Fc, m;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( q, m ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-    end );
+    else
+        
+        if IsAdditiveFunctor( Functor ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter_cpx ],
+              function( c )
+                local degrees, l, morphisms, Fc, m;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( m ) );
+                    od;
+                fi;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter_cpx ],
+              function( c )
+                local degrees, l, morphisms, Fc, m;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( m ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
+        
+    fi;
     
 end );
 
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter2_obj, filter1_cpx, complex_or_cocomplex, i )
-    local functor_name;
+    local filter0, functor_name;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
-    if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
-        InstallOtherMethod( functor_name,
-                "for homalg complexes",
-                [ filter1_cpx ],
-          function( c )
-            local R;
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
+        
+        if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
             
-            R := HomalgRing( c );
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter1_cpx ],
+              function( q, c )
+                local R;
+                
+                R := HomalgRing( c );
+                
+                return functor_name( q, c, R );
+                
+            end );
             
-            return functor_name( c, R );
+        fi;
+        
+        if IsAdditiveFunctor( Functor, 1 ) then
             
-        end );
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter1_cpx, filter2_obj ],
+              function( q, c, o )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1], obj ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( q, m, obj ) );
+                    od;
+                fi;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter1_cpx, filter2_obj ],
+              function( q, c, o )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1], obj ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( q, m, obj ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
+        
+    else
+        
+        if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter1_cpx ],
+              function( c )
+                local R;
+                
+                R := HomalgRing( c );
+                
+                return functor_name( c, R );
+                
+            end );
+            
+        fi;
+        
+        if IsAdditiveFunctor( Functor, 1 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter1_cpx, filter2_obj ],
+              function( c, o )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( m, obj ) );
+                    od;
+                fi;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter1_cpx, filter2_obj ],
+              function( c, o )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( m, obj ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
     fi;
-    
-    InstallOtherMethod( functor_name,
-            "for homalg complexes",
-            [ filter1_cpx, filter2_obj ],
-      function( c, o )
-        local obj, degrees, l, morphisms, Fc, m;
-        
-        if IsHomalgModule( o ) then	## the most probable case
-            obj := o;
-        elif IsHomalgRing( o ) then
-            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                obj := AsLeftModule( o );
-            else
-                obj := AsRightModule( o );
-            fi;
-        else
-            ## the default:
-            obj := o;
-        fi;
-        
-        degrees := ObjectDegreesOfComplex( c );
-        
-        l := Length( degrees );
-        
-        if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ), obj ), degrees[1] );
-        else
-            morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), degrees[i] );
-            for m in morphisms{[ 2 .. l - 1 ]} do
-                Add( Fc, functor_name( m, obj ) );
-            od;
-        fi;
-        
-        return Fc;
-        
-    end );
     
 end );
 
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter1_obj, filter2_cpx, complex_or_cocomplex, i )
-    local functor_name;
+    local filter0, functor_name;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
-    InstallOtherMethod( functor_name,
-            "for homalg complexes",
-            [ filter1_obj, filter2_cpx ],
-      function( o, c )
-        local obj, degrees, l, morphisms, Fc, m;
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
-        if IsHomalgModule( o ) then	## the most probable case
-            obj := o;
-        elif IsHomalgRing( o ) then
-            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                obj := AsLeftModule( o );
-            else
-                obj := AsRightModule( o );
-            fi;
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
         else
-            ## the default:
-            obj := o;
+            filter0 := IsList;
         fi;
         
-        degrees := ObjectDegreesOfComplex( c );
-        
-        l := Length( degrees );
-        
-        if l = 1 then
-            Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+        if IsAdditiveFunctor( Functor, 2 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter1_obj, filter2_cpx ],
+              function( q, o, c )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( q, obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( q, obj, morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( q, obj, m ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+            end );
+            
         else
-            morphisms := MorphismsOfComplex( c );
-            Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), degrees[i] );
-            for m in morphisms{[ 2 .. l - 1 ]} do
-                Add( Fc, functor_name( obj, m ) );
-            od;
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter0, filter1_obj, filter2_cpx ],
+              function( q, o, c )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( q, obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( q, obj, morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( q, obj, m ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+            end );
+            
         fi;
         
-        return Fc;
+    else
         
-    end );
+        if IsAdditiveFunctor( Functor, 2 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter1_obj, filter2_cpx ],
+              function( o, c )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( obj, m ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg complexes",
+                    [ filter1_obj, filter2_cpx ],
+              function( o, c )
+                local obj, degrees, l, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                if l = 1 then
+                    Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), degrees[i] );
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_name( obj, m ) );
+                    od;
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
+        
+    fi;
     
 end );
 
@@ -867,7 +1463,7 @@ InstallMethod( InstallFunctorOnComplexes,
         
         if IsList( filter_cpx ) and Length( filter_cpx ) = 2 and ForAll( filter_cpx, IsFilter ) then
             
-            if Functor!.1[1][1] = "covariant" then
+            if IsCovariantFunctor( Functor ) = true then
                 complex := [ HomalgComplex, 2 ];
                 cocomplex := [ HomalgCocomplex, 1 ];
             else
@@ -918,7 +1514,7 @@ InstallMethod( InstallFunctorOnComplexes,
             
             for i in [ 1 .. number_of_arguments ] do
                 
-                if Functor!.(i)[1][1] = "covariant" then
+                if IsCovariantFunctor( Functor, i ) = true then
                     complex :=  [ HomalgComplex, 2 ];
                     cocomplex := [ HomalgCocomplex, 1 ];
                 else
@@ -948,148 +1544,581 @@ end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
   function( Functor, filter_chm, source_target, i )
-    local functor_name;
+    local filter0, functor_name;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
-    InstallOtherMethod( functor_name,
-            "for homalg chain maps",
-            [ filter_chm ],
-      function( c )
-        local d, degrees, l, source, target, morphisms, Fc, m;
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
-        d := DegreeOfMorphism( c );
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
         
-        degrees := DegreesOfChainMap( c );
+        if IsAdditiveFunctor( Functor ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter_chm ],
+              function( q, c )
+                local d, degrees, l, source, target, morphisms, Fc, m;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( q, source_target[1]( c ) );
+                target := functor_name( q, source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( q, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( q, m ) );
+                od;
+                
+                if HasIsMorphism( c ) and IsMorphism( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter_chm ],
+              function( q, c )
+                local d, degrees, l, source, target, morphisms, Fc, m;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( q, source_target[1]( c ) );
+                target := functor_name( q, source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( q, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( q, m ) );
+                od;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-        l := Length( degrees );
+    else
         
-        source := functor_name( source_target[1]( c ) );
-        target := functor_name( source_target[2]( c ) );
+        if IsAdditiveFunctor( Functor ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter_chm ],
+              function( c )
+                local d, degrees, l, source, target, morphisms, Fc, m;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( source_target[1]( c ) );
+                target := functor_name( source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( m ) );
+                od;
+                
+                if HasIsMorphism( c ) and IsMorphism( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter_chm ],
+              function( c )
+                local d, degrees, l, source, target, morphisms, Fc, m;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( source_target[1]( c ) );
+                target := functor_name( source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( m ) );
+                od;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-        morphisms := MorphismsOfChainMap( c );
-        
-        Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
-        
-        for m in morphisms{[ 2 .. l ]} do
-            Add( Fc, functor_name( m ) );
-        od;
-        
-        return Fc;
-        
-    end );
+    fi;
     
 end );
 
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter2_obj, filter1_chm, source_target, i )
-    local functor_name;
+    local filter0, functor_name;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
-    if Length( Functor!.1[1] ) = 2 and Functor!.1[1][2] = "distinguished" then
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
-        InstallOtherMethod( functor_name,
-                "for homalg chain maps",
-                [ filter1_chm ],
-          function( c )
-            local R;
-            
-            R := HomalgRing( c );
-            
-            return functor_name( c, R );
-            
-        end );
-        
-    fi;
-    
-    InstallOtherMethod( functor_name,
-            "for homalg chain maps",
-            [ filter1_chm, filter2_obj ],
-      function( c, o )
-        local obj, d, degrees, l, source, target, morphisms, Fc, m;
-        
-        if IsHomalgModule( o ) then	## the most probable case
-            obj := o;
-        elif IsHomalgRing( o ) then
-            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                obj := AsLeftModule( o );
-            else
-                obj := AsRightModule( o );
-            fi;
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
         else
-            ## the default:
-            obj := o;
+            filter0 := IsList;
         fi;
         
-        d := DegreeOfMorphism( c );
+        if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter1_chm ],
+              function( q, c )
+                local R;
+                
+                R := HomalgRing( c );
+                
+                return functor_name( q, c, R );
+                
+            end );
+            
+        fi;
         
-        degrees := DegreesOfChainMap( c );
+        if IsAdditiveFunctor( Functor, 1 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter1_chm, filter2_obj ],
+              function( q, c, o )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( q, source_target[1]( c ), obj );
+                target := functor_name( q, source_target[2]( c ), obj );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( q, morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( q, m, obj ) );
+                od;
+                
+                if HasIsMorphism( c ) and IsMorphism( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter1_chm, filter2_obj ],
+              function( q, c, o )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( q, source_target[1]( c ), obj );
+                target := functor_name( q, source_target[2]( c ), obj );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( q, morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( q, m, obj ) );
+                od;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-        l := Length( degrees );
+    else
         
-        source := functor_name( source_target[1]( c ), obj );
-        target := functor_name( source_target[2]( c ), obj );
+        if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter1_chm ],
+              function( c )
+                local R;
+                
+                R := HomalgRing( c );
+                
+                return functor_name( c, R );
+                
+            end );
+            
+        fi;
         
-        morphisms := MorphismsOfChainMap( c );
+        if IsAdditiveFunctor( Functor, 1 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter1_chm, filter2_obj ],
+              function( c, o )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( source_target[1]( c ), obj );
+                target := functor_name( source_target[2]( c ), obj );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( m, obj ) );
+                od;
+                
+                if HasIsMorphism( c ) and IsMorphism( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter1_chm, filter2_obj ],
+              function( c, o )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( source_target[1]( c ), obj );
+                target := functor_name( source_target[2]( c ), obj );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( m, obj ) );
+                od;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-        Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
-        
-        for m in morphisms{[ 2 .. l ]} do
-            Add( Fc, functor_name( m, obj ) );
-        od;
-        
-        return Fc;
-        
-    end );
+    fi;
     
 end );
 
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter1_obj, filter2_chm, source_target, i )
-    local functor_name;
+    local filter0, functor_name;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
     
-    InstallOtherMethod( functor_name,
-            "for homalg chain maps",
-            [ filter1_obj, filter2_chm ],
-      function( o, c )
-        local obj, d, degrees, l, source, target, morphisms, Fc, m;
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
-        if IsHomalgModule( o ) then	## the most probable case
-            obj := o;
-        elif IsHomalgRing( o ) then
-            if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                obj := AsLeftModule( o );
-            else
-                obj := AsRightModule( o );
-            fi;
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
         else
-            ## the default:
-            obj := o;
+            filter0 := IsList;
         fi;
         
-        d := DegreeOfMorphism( c );
+        if IsAdditiveFunctor( Functor, 2 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter1_obj, filter2_chm ],
+              function( q, o, c )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( q, obj, source_target[1]( c ) );
+                target := functor_name( q, obj, source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( q, obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( q, obj, m ) );
+                od;
+                
+                if HasIsMorphism( c ) and IsMorphism( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter0, filter1_obj, filter2_chm ],
+              function( q, o, c )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( q, obj, source_target[1]( c ) );
+                target := functor_name( q, obj, source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( q, obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( q, obj, m ) );
+                od;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-        degrees := DegreesOfChainMap( c );
+    else
         
-        l := Length( degrees );
+        if IsAdditiveFunctor( Functor, 2 ) then
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter1_obj, filter2_chm ],
+              function( o, c )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( obj, source_target[1]( c ) );
+                target := functor_name( obj, source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( obj, m ) );
+                od;
+                
+                if HasIsMorphism( c ) and IsMorphism( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        else
+            
+            InstallOtherMethod( functor_name,
+                    "for homalg chain maps",
+                    [ filter1_obj, filter2_chm ],
+              function( o, c )
+                local obj, d, degrees, l, source, target, morphisms, Fc, m;
+                
+                if IsHomalgModule( o ) then	## the most probable case
+                    obj := o;
+                elif IsHomalgRing( o ) then
+                    if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
+                        obj := AsLeftModule( o );
+                    else
+                        obj := AsRightModule( o );
+                    fi;
+                else
+                    ## the default:
+                    obj := o;
+                fi;
+                
+                d := DegreeOfMorphism( c );
+                
+                degrees := DegreesOfChainMap( c );
+                
+                l := Length( degrees );
+                
+                source := functor_name( obj, source_target[1]( c ) );
+                target := functor_name( obj, source_target[2]( c ) );
+                
+                morphisms := MorphismsOfChainMap( c );
+                
+                Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                
+                for m in morphisms{[ 2 .. l ]} do
+                    Add( Fc, functor_name( obj, m ) );
+                od;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
         
-        source := functor_name( obj, source_target[1]( c ) );
-        target := functor_name( obj, source_target[2]( c ) );
-        
-        morphisms := MorphismsOfChainMap( c );
-        
-        Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
-        
-        for m in morphisms{[ 2 .. l ]} do
-            Add( Fc, functor_name( obj, m ) );
-        od;
-        
-        return Fc;
-        
-    end );
+    fi;
     
 end );
 
@@ -1119,7 +2148,7 @@ InstallMethod( InstallFunctorOnChainMaps,
         
         if IsList( filter_chm ) and Length( filter_chm ) = 2 and ForAll( filter_chm, IsFilter ) then
             
-            if Functor!.1[1][1] = "covariant" then
+            if IsCovariantFunctor( Functor ) = true then
                 chainmap := [ [ Source, Range ], 0 ];
                 cochainmap := [ [ Source, Range ], 0 ];
             else
@@ -1170,7 +2199,7 @@ InstallMethod( InstallFunctorOnChainMaps,
             
             for i in [ 1 .. number_of_arguments ] do
                 
-                if Functor!.(i)[1][1] = "covariant" then
+                if IsCovariantFunctor( Functor, i ) = true then
                     chainmap := [ [ Source, Range ], 0 ];
                     cochainmap := [ [ Source, Range ], 0 ];
                 else
@@ -1217,11 +2246,15 @@ end );
 
 ##
 InstallMethod( RightSatelliteOfCofunctor,
-        "for homalg morphisms",
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsString, IsPosInt ],
         
   function( Functor, name, p )
     local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF;
+    
+    if IsCovariantFunctor( Functor, p ) <> false then
+        Error( "the functor does not seem to be contravariant in its ", p, ". argument\n" );
+    fi;
     
     _Functor_OnObjects :=
       function( arg )
@@ -1231,12 +2264,12 @@ InstallMethod( RightSatelliteOfCofunctor,
         
         c := arg[1];
         
-        d := ResolutionOfModule( arg[p + 1], c - 1 );
+        d := Resolution( arg[p + 1], c - 1 );
         
         if c < 0 then
             Error( "the negative ", c, ". right satellite is not defined\n" );
         elif c = 0 then
-            mu := TheIdentityMorphism( arg[p + 1] );
+            mu := TheZeroMorphism( arg[p + 1] );
         else
             if c = 1 then
                 d_c_1 := CokernelEpi( CertainMorphism( d, 1 ) );
@@ -1247,11 +2280,36 @@ InstallMethod( RightSatelliteOfCofunctor,
             mu := KernelEmb( d_c_1 );
         fi;
         
-        ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p+2 .. Length( arg) ]} );
+        ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
         F_mu := CallFuncList( functor_name, ar );
         
         return Cokernel( F_mu );
+        
+    end;
+    
+    _Functor_OnMorphisms :=
+      function( arg )
+        local functor_name, c, d, d_c_1, mu, ar;
+        
+        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        
+        c := arg[1];
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if c < 0 then
+            Error( "the negative ", c, ". right satellite is not defined\n" );
+        elif c = 0 then
+            mu := arg[p + 1];
+        else
+            d_c_1 := CertainMorphismAsKernelSquare( d, c - 1 );
+            mu := Kernel( d_c_1 );
+        fi;
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        return CallFuncList( functor_name, ar );
         
     end;
     
@@ -1273,7 +2331,8 @@ InstallMethod( RightSatelliteOfCofunctor,
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
-                    [ [ "OnObjects", _Functor_OnObjects ] ] );
+                    [ [ "OnObjects", _Functor_OnObjects ] ],
+                    [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     
     SF := CallFuncList( CreateHomalgFunctor, data );
     
@@ -1285,6 +2344,119 @@ InstallMethod( RightSatelliteOfCofunctor,
     fi;
     
     InstallFunctorOnObjects( SF );
+    InstallFunctorOnMorphisms( SF );
+    InstallFunctorOnComplexes( SF );
+    InstallFunctorOnChainMaps( SF );
+    
+    return SF;
+    
+end );
+
+##
+InstallMethod( LeftSatelliteOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString, IsPosInt ],
+        
+  function( Functor, name, p )
+    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF;
+    
+    if IsCovariantFunctor( Functor, p ) <> true then
+        Error( "the functor does not seem to be covariant in its ", p, ". argument\n" );
+    fi;
+    
+    _Functor_OnObjects :=
+      function( arg )
+        local functor_name, c, d, d_c_1, mu, ar, F_mu;
+        
+        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        
+        c := arg[1];
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if c < 0 then
+            Error( "the negative ", c, ". left satellite is not defined\n" );
+        elif c = 0 then
+            mu := TheZeroMorphism( arg[p + 1] );
+        else
+            if c = 1 then
+                d_c_1 := CokernelEpi( CertainMorphism( d, 1 ) );
+            else
+                d_c_1 := CertainMorphism( d, c - 1 );
+            fi;
+            
+            mu := KernelEmb( d_c_1 );
+        fi;
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        F_mu := CallFuncList( functor_name, ar );
+        
+        return Kernel( F_mu );
+        
+    end;
+    
+    _Functor_OnMorphisms :=
+      function( arg )
+        local functor_name, c, d, d_c_1, mu, ar;
+        
+        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        
+        c := arg[1];
+        
+        d := Resolution( arg[p + 1], c - 1 );
+        
+        if c < 0 then
+            Error( "the negative ", c, ". right satellite is not defined\n" );
+        elif c = 0 then
+            mu := arg[p + 1];
+        else
+            d_c_1 := CertainMorphismAsKernelSquare( d, c - 1 );
+            mu := Kernel( d_c_1 );
+        fi;
+        
+        mu := Kernel( d_c_1 );
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        return CallFuncList( functor_name, ar );
+        
+    end;
+    
+    m := MultiplicityOfFunctor( Functor );
+    
+    if IsBound( Functor!.0 ) then
+        if IsList( Functor!.0 ) then
+            z := Concatenation( [ IsInt ], Functor!.0 );
+        else
+            Error( "the zeroth argument of the functor is not a list" );
+        fi;
+    else
+        z := [ IsInt ];
+    fi;
+    
+    data := List( [ 1 .. m ], i -> [ String( i ), Functor!.( i ) ] );
+    
+    data := Concatenation(
+                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "0", z ] ],
+                    data,
+                    [ [ "OnObjects", _Functor_OnObjects ] ],
+                    [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
+    
+    SF := CallFuncList( CreateHomalgFunctor, data );
+    
+    if m > 1 then
+        SF!.ContainerForWeakPointersOnComputedModules :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+        SF!.ContainerForWeakPointersOnComputedMorphisms :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    fi;
+    
+    InstallFunctorOnObjects( SF );
+    InstallFunctorOnMorphisms( SF );
+    InstallFunctorOnComplexes( SF );
+    InstallFunctorOnChainMaps( SF );
     
     return SF;
     

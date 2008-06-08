@@ -15,46 +15,27 @@
 ####################################
 
 ##
-InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomorphism (ResolutionOfSeq)
-  function( arg )
-    local nargs, phi, R, q, S, T, d_S, d_T, index_pair,
-          j, d_S_j, d_T_j, phi_j, c;
-    
-    nargs := Length( arg );
-    
-    if nargs = 0 or not IsHomalgMap( arg[1] ) then
-        Error( "the first argument must be a morphism\n" );
-    fi;
-    
-    phi := arg[1];
+InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single map)
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsInt ],
+        
+  function( phi, _q )
+    local R, q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, c;
     
     R := HomalgRing( phi );
     
-    if nargs > 1 and IsInt( arg[2] ) then
-        q := arg[2];
-    elif IsBound( phi!.MaximumNumberOfResolutionSteps )
-      and IsInt( phi!.MaximumNumberOfResolutionSteps ) then
-        q := phi!.MaximumNumberOfResolutionSteps;
-    elif IsBound( R!.MaximumNumberOfResolutionSteps )
-      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
-        q := R!.MaximumNumberOfResolutionSteps;
-    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
-      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
-        q := HOMALG.MaximumNumberOfResolutionSteps;
-    else
-        q := infinity;
-    fi;
+    q := _q;
     
     S := Source( phi );
     T := Range( phi );
     
-    d_S := ResolutionOfModule( S, q );
-    d_T := ResolutionOfModule( T, q );
+    d_S := Resolution( S, q );
+    d_T := Resolution( T, q );
     
-    if q = infinity then
+    if q < 1 then
         q := Maximum( List( [ d_S, d_T ], HighestDegreeInComplex ) );
-        d_S := ResolutionOfModule( Source( phi ), q );
-        d_T := ResolutionOfModule( Range( phi ), q );
+        d_S := Resolution( S, q );
+        d_T := Resolution( T, q );
     fi;
     
     index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
@@ -69,7 +50,7 @@ InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomo
         d_S_j := CokernelEpi( CertainMorphism( d_S, j + 1 ) );
         d_T_j := CokernelEpi( CertainMorphism( d_T, j + 1 ) );
         
-        phi_j := CompleteImSq( d_S_j, phi, d_T_j );
+        phi_j := CompleteImageSquare( d_S_j, phi, d_T_j );
         
         c := HomalgChainMap( phi_j, d_S, d_T );
         
@@ -85,7 +66,7 @@ InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomo
         d_S_j := CertainMorphism( d_S, j );
         d_T_j := CertainMorphism( d_T, j );
         
-        phi_j := CompleteImSq( d_S_j, phi_j, d_T_j );
+        phi_j := CompleteImageSquare( d_S_j, phi_j, d_T_j );
         
         Add( c, phi_j );
         
@@ -94,5 +75,31 @@ InstallGlobalFunction( ResolutionOfHomomorphism,	### defines: ResolutionOfHomomo
     SetIsMorphism( c, true );
     
     return c;
+    
+end );
+
+InstallMethod( Resolution,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local R, q;
+    
+    R := HomalgRing( phi );
+    
+    if IsBound( phi!.MaximumNumberOfResolutionSteps )
+      and IsInt( phi!.MaximumNumberOfResolutionSteps ) then
+        q := phi!.MaximumNumberOfResolutionSteps;
+    elif IsBound( R!.MaximumNumberOfResolutionSteps )
+      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+        q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG.MaximumNumberOfResolutionSteps;
+    else
+        q := 0;
+    fi;
+    
+    return Resolution( phi, q );
     
 end );

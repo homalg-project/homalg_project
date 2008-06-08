@@ -24,6 +24,11 @@ DeclareGlobalFunction( "_Functor_TorsionSubmodule_OnObjects" );
 
 DeclareGlobalVariable( "Functor_TorsionSubmodule" );
 
+## DirectSum
+DeclareGlobalFunction( "_Functor_DirectSum_OnObjects" );
+
+DeclareGlobalVariable( "Functor_DirectSum" );
+
 ####################################
 #
 # attributes:
@@ -49,4 +54,7 @@ DeclareOperation( "TorsionFreeFactor",
 
 DeclareOperation( "TorsionSubmodule",
         [ IsHomalgModule ] );
+
+DeclareOperation( "+",
+        [ IsHomalgModule, IsHomalgModule ] );
 

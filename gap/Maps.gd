@@ -14,7 +14,11 @@
 #
 ####################################
 
-DeclareGlobalFunction( "ResolutionOfHomomorphism" );
-
 # basic operations:
+
+DeclareOperation( "Resolution",
+        [ IsHomalgMap, IsInt ] );
+
+DeclareOperation( "Resolution",
+        [ IsHomalgMap ] );
 

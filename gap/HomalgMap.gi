@@ -145,12 +145,6 @@ end );
 
 ####################################
 #
-# immediate methods for attributes:
-#
-####################################
-
-####################################
-#
 # methods for properties:
 #
 ####################################
@@ -408,7 +402,7 @@ InstallMethod( ZeroMutable,
         
   function( phi )
     
-    return HomalgMorphism( 0 * MatrixOfHomomorphism( phi ), Source( phi ), Range( phi ) );
+    return HomalgMap( 0 * MatrixOfHomomorphism( phi ), Source( phi ), Range( phi ) );
     
 end );
 
@@ -419,7 +413,7 @@ InstallMethod( \*,
         
   function( a, phi )
     
-    return HomalgMorphism( a * MatrixOfHomomorphism( phi ), Source( phi ), Range( phi ) );
+    return HomalgMap( a * MatrixOfHomomorphism( phi ), Source( phi ), Range( phi ) );
     
 end );
 
@@ -434,7 +428,7 @@ InstallMethod( \+,
         return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) + MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
+    return HomalgMap( MatrixOfHomomorphism( phi1 ) + MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
     
 end );
 
@@ -471,7 +465,7 @@ InstallMethod( \-,
         return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) - MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
+    return HomalgMap( MatrixOfHomomorphism( phi1 ) - MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi1 ) );
     
 end );
 
@@ -487,7 +481,7 @@ InstallMethod( \*,
         Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi1 ) * MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi2 ) );
+    return HomalgMap( MatrixOfHomomorphism( phi1 ) * MatrixOfHomomorphism( phi2 ), Source( phi1 ), Range( phi2 ) );
     
 end );
 
@@ -500,10 +494,10 @@ InstallMethod( \*,
   function( phi2, phi1 )
     
     if not AreComposableMorphisms( phi2, phi1 ) then
-        Error( "the two morphisms are not composable, since the target of the right one and the target of the left one are not \033[01midentical\033[0m\n" );
+        Error( "the two morphisms are not composable, since the source of the left one and the target of the right one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMorphism( MatrixOfHomomorphism( phi2 ) * MatrixOfHomomorphism( phi1 ), Source( phi1 ), Range( phi2 ) );
+    return HomalgMap( MatrixOfHomomorphism( phi2 ) * MatrixOfHomomorphism( phi1 ), Source( phi1 ), Range( phi2 ) );
     
 end );
 
@@ -517,7 +511,7 @@ InstallMethod( POW,
     
     if pow = -1 then
         
-        id := HomalgIdentityMorphism( Range( phi ) );
+        id := HomalgIdentityMap( Range( phi ) );
         
         inv := PostDivide( id, phi );
         
@@ -564,7 +558,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsHomalgRelationsOfFinitelyPresentedModuleRep ],
+        [ IsMapOfFinitelyGeneratedModulesRep, IsRelationsOfFinitelyPresentedModuleRep ],
         
   function( phi, rel )
     
@@ -679,7 +673,7 @@ InstallMethod( PostDivide,			### defines: PostDivide (RightDivide (high-level))
     
     M_ := Source( gamma );
     
-    psi := HomalgMorphism( psi, M_, Source( beta ) );
+    psi := HomalgMap( psi, M_, Source( beta ) );
     
     if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
        ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) then	## [BR, Subsection 3.1.1,(2)]
@@ -717,7 +711,7 @@ InstallMethod( PostDivide,			### defines: PostDivide (LeftDivide (high-level))
     
     M_ := Source( gamma );
     
-    psi := HomalgMorphism( psi, M_, Source( beta ) );
+    psi := HomalgMap( psi, M_, Source( beta ) );
     
     if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
        ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) then	## [BR, Subsection 3.1.1,(2)]
@@ -745,7 +739,7 @@ end );
 #_______________________________________________________________________
 
 ##
-InstallMethod( CompleteImSq,
+InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
@@ -758,7 +752,7 @@ InstallMethod( CompleteImSq,
 end );
 
 ##
-InstallMethod( CompleteImSq,
+InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
@@ -776,7 +770,7 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( HomalgMorphism,
+InstallGlobalFunction( HomalgMap,
   function( arg )
     local nargs, source, pos_s, target, pos_t, R, type, matrix, left, matrices, reduced_matrices,
           nr_rows, nr_columns, index_pair, morphism, option;
@@ -1017,7 +1011,7 @@ InstallGlobalFunction( HomalgMorphism,
                         morphism, type,
                         Source, source,
                         Range, target,
-                        IsIsomorphism, true );
+                        IsEpimorphism, true );
             fi;
             
         else
@@ -1071,18 +1065,18 @@ InstallGlobalFunction( HomalgMorphism,
 end );
   
 ##
-InstallGlobalFunction( HomalgZeroMorphism,
+InstallGlobalFunction( HomalgZeroMap,
   function( arg )
     
-    return CallFuncList( HomalgMorphism, Concatenation( [ [ "zero" ] ], arg ) );
+    return CallFuncList( HomalgMap, Concatenation( [ [ "zero" ] ], arg ) );
     
 end );
 
 ##
-InstallGlobalFunction( HomalgIdentityMorphism,
+InstallGlobalFunction( HomalgIdentityMap,
   function( arg )
     
-    return CallFuncList( HomalgMorphism, Concatenation( [ [ "identity" ] ], arg ) );
+    return CallFuncList( HomalgMap, Concatenation( [ [ "identity" ] ], arg ) );
     
 end );
 
@@ -1107,14 +1101,14 @@ InstallMethod( ViewObj,
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
             Print( " homomorphism of" );
-        elif HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
-            Print( " monomorphism modulo im(0) of" );
+        elif HasMonomorphismModuloImage( o ) then
+            Print( " monomorphism (modulo a certain submodule) of" );
         else
             Print( " non-well-defined map between" );
         fi;
     else
-        if HasIsTobBeViewedAsAMonomorphism( o ) and IsTobBeViewedAsAMonomorphism( o ) then
-            Print( " monomorphism modulo im(0) of" );
+        if HasMonomorphismModuloImage( o ) then
+            Print( " monomorphism (modulo a certain submodule) of" );
         else
             Print( " \"homomorphism\" of" );
         fi;
