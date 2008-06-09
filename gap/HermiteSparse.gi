@@ -360,6 +360,7 @@ InstallMethod( KernelHermiteMatDestructive,
           row_entries,
           p,
           list_of_rows,
+          len,
           factor,
           row;
     
@@ -417,32 +418,33 @@ InstallMethod( KernelHermiteMatDestructive,
             Add( vectors.entries, entries[ row_indices[ min[1] ] ] * x );
             
             heads[column] := Length( vectors.indices );
-            list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
             
 	    #check for "hidden" kernel relations
             if min[2] > 1 then
-                row := vectors.entries[ Length( vectors.entries ) ];
-                i := 1;
-                while i < Length( row ) and min[2] > 1 do
-                    i := i + 1;
-                    g := Gcd( Int( row[i] ), char );
-                    if min[2] > g then
-                        min[2] := g;
-                    fi;
-                od;
-                # is the row a multiple of a non-unit?
-                if min[2] > 1 then
-                    # row is multiple of min[2]
-                    # therefore row * (char / min[2] ) = 0
-                    # but is the relations_row * this <> 0 ?
-                    row := coeffs.entries[ Length( coeffs.entries ) ];
-                    # you could run another min check, but it's easier to just multiply the row and check afterwards
-                    m := MultRow( coeffs.indices[ Length( coeffs.indices ) ], row, char / min[2] );
-                    if m.indices <> [] then
-                        Add( relations.indices, m.indices );
-                        Add( relations.entries, m.entries );
-                    fi;
-                fi;
+                len := heads[column];
+                #Print( "we have a basis vector with a non-unit pivot:  #", len, "!\n" );
+                m := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
+                T.indices[ row_indices[ min[1] ] ] := m.indices;
+                T.entries[ row_indices[ min[1] ] ] := m.entries;
+                m := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
+                indices[ row_indices[ min[1] ] ] := m.indices;
+                entries[ row_indices[ min[1] ] ] := m.entries;
+                # is the row a multiple of a non-unit? THIS DOESNT WORK: i.e. [[2,1],[0,1]] over Z/4Z
+                #if min[2] > 1 then
+                #    Print( "found a hidden kernel relation in basis vector #", Length( vectors.indices ), "!\n" );
+                #    # row is multiple of min[2]
+                #    # therefore row * (char / min[2] ) = 0
+                #    # but is the relations_row * this <> 0 ?
+                #    row := coeffs.entries[ Length( coeffs.entries ) ];
+                #    # you could run another min check, but it's easier to just multiply the row and check afterwards
+                #    m := MultRow( coeffs.indices[ Length( coeffs.indices ) ], row, char / min[2] );
+                #    if m.indices <> [] then
+                #        Add( relations.indices, m.indices );
+                #        Add( relations.entries, m.entries );
+                #    fi;
+                #fi;
+            else
+                list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
             fi;
 	    
             #reduce the other rows with the newfound basis vector.
