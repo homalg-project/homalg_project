@@ -22,3 +22,10 @@ dim := 5;
 # GF(2)^(1 x 4)
 # GF(2)^(1 x 4)
 # GF(2)^(1 x 4)
+
+#cohomology over Z/4Z:
+#--------------->>>>  Z/4Z^(1 x 1)
+#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
+#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 1)
+#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
+#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >

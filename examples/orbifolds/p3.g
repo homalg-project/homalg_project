@@ -10,10 +10,28 @@ mult:=[
 
 dim := 4;
 
-#[ 0 ], [ 1 ], [ 3, 3, 0 ]
+#cohomology over GF(2) (unneccessary):
+#------>>>>  GF(2)^(1 x 1)
+#------>>>>  0
+#------>>>>  GF(2)^(1 x 1)
+#------>>>>  0
 
-#cohomology over GF(2):
-# 
-# 
-# 
-# 
+#cohomology over Z:
+#------>>>>  Z^(1 x 1)
+#------>>>>  0
+#------>>>>  Z/< 3 > + Z/< 3 > + Z^(1 x 1)
+#------>>>>  0 ? (wild guess)
+#------>>>>  Z/< 3 > + Z/< 3 > + Z/< 3 > ? (wild guess)
+
+#cohomology over GF(3):
+#------>>>>  GF(3)^(1 x 1)
+#------>>>>  GF(3)^(1 x 2)
+#------>>>>  GF(3)^(1 x 3)
+#------>>>>  GF(3)^(1 x 3)
+
+#cohomology over GF(3^2): 
+#------>>>>  Z/9Z^(1 x 1)
+#------>>>>  Z/9Z/< ZmodnZObj(3,9) > + Z/9Z/< ZmodnZObj(3,9) >
+#------>>>>  Z/9Z/< ZmodnZObj(3,9) > + Z/9Z/< ZmodnZObj(3,9) > + Z/9Z^(1 x 1)
+#------>>>>  Z/9Z/< ZmodnZObj(3,9) > + Z/9Z/< ZmodnZObj(3,9) > + Z/9Z/< ZmodnZObj(3,9) >
+# see GF(3) for the rest

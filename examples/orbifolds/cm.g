@@ -14,25 +14,16 @@ dim := 4;
 # GF(2)^(1 x 2)
 # GF(2)^(1 x 2)
 
-#cohomology over Z/4Z: seems to be wrong!
-# Z/4Z^(1 x 1)
-# Z/4Z^(1 x 1)
-# Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 1)
-# Z/4Z/< ZmodnZObj(2,4) >
+#cohomology over Z/4Z:
+#----------------------------------------------->>>>  Z/4Z^(1 x 1)
+#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 1)
+#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
+#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
+#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
 
-#cohomology over Z/8Z: seems to be wrong!
-# Z/8Z^(1 x 1)
-# Z/8Z^(1 x 1)
-# Z/8Z/< ZmodnZObj(2,8) > + Z/8Z^(1 x 1)
-# Z/8Z/< ZmodnZObj(2,8) >
+
+#cohomology over Z/8Z: 
+# ...
 
 #cohomology over Z: Z, Z, Z/2Z, Z/2Z, ...
 #  homology over Z: Z, Z + Z/2Z, Z/2Z, Z/2Z, ... (probably Z/2Z all the way)
-
-# Ext:
-# H^q(C,G) = Hom(H_q(C),G) + Ext_Z^1(H_(q-1)(C),G)
-# 
-#
-#
-#
-

@@ -110,6 +110,9 @@ InstallMethod( BoundaryOperator, "calculate i-th boundary",
     local n, tau, rho, j, rand;
     rand := ShallowCopy( L );
     n := ( Length( L ) - 1 ) / 2;
+    if i < 0 or i > n then
+        Error( "BoundaryOperator index i is out of bounds ([0..", n, "])! i = ", i );
+    fi;
     tau := Intersection( Filtered( L, x->IsList( x ) ) );
     if i = 0 then
         rand := L{[3..Length( L )]};
@@ -128,7 +131,10 @@ InstallMethod( BoundaryOperator, "calculate i-th boundary",
     rho := Intersection( Filtered( rand, x->IsList( x ) ) );
     for j in [2,4..Length( rand ) - 1] do
         if j = 2*i then
-            rand[j] := mu( [ tau, rho, L[j-1], L[j+1] ] )( L[j] ) * mu( [ tau, rho, L[j+1], L[j+3] ] )( L[j+2] );
+            rand[j] := mu( [ tau, rho, L[j-1], L[j+3] ] )( L[j] * L[j+2] );
+            # according to moerdijk this should in the most cases be equal to
+            #  mu( [ tau, rho, L[j-1], L[j+1] ] )( L[j] ) * mu( [ tau, rho, L[j+1], L[j+3] ] )( L[j+2] )
+            # but there are cases where this will lead to different results - investigate?
         else
             rand[j] := mu( [ tau, rho, rand[j-1], rand[j+1] ] )( rand[j] );
         fi;
@@ -155,8 +161,8 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                 matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), 1, R ) ); #FIXME: is there a better way?
             else
                 matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), Length( S[k] ), R ) );
-                for p in [1..Length( S[k] )] do
-                    for i in [0..k] do
+                for p in [1..Length( S[k] )] do #column iterator
+                    for i in [0..k-1] do #row iterator
                         ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             # matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
@@ -194,7 +200,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
             else
                 matrices[k-1] := NullMat( Length( S[k-1] ), Length( S[k] ) );
                 for p in [1..Length( S[k] )] do
-                    for i in [0..k] do
+                    for i in [0..k-1] do
                         ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
