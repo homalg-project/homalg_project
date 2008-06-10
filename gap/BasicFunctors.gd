@@ -83,6 +83,9 @@ DeclareOperation( "DefectOfExactness",
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );
 
+DeclareOperation( "TensorProduct",
+        [ IsHomalgModule, IsHomalgModule ] );
+
 DeclareOperation( "*",
         [ IsHomalgModule, IsHomalgModule ] );
 

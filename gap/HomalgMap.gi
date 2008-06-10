@@ -423,8 +423,15 @@ InstallMethod( \*,
         [ IsRingElement, IsMapOfFinitelyGeneratedModulesRep ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
         
   function( a, phi )
+    local a_phi;
     
-    return HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    a_phi := HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( a_phi, true );
+    fi;
+    
+    return a_phi;
     
 end );
 
@@ -434,12 +441,20 @@ InstallMethod( \+,
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
+    local phi;
     
     if not AreComparableMorphisms( phi1, phi2 ) then
         return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMap( MatrixOfMap( phi1 ) + MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    phi := HomalgMap( MatrixOfMap( phi1 ) + MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
     
 end );
 
@@ -471,12 +486,20 @@ InstallMethod( \-,
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
+    local phi;
     
     if not AreComparableMorphisms( phi1, phi2 ) then
         return Error( "the two maps are not comparable" );
     fi;
     
-    return HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
     
 end );
 
@@ -487,12 +510,26 @@ InstallMethod( \*,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
         
   function( phi1, phi2 )
+    local phi;
     
     if not AreComposableMorphisms( phi1, phi2 ) then
         Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMap( MatrixOfMap( phi1 ) * MatrixOfMap( phi2 ), Source( phi1 ), Range( phi2 ) );
+    phi := HomalgMap( MatrixOfMap( phi1 ) * MatrixOfMap( phi2 ), Source( phi1 ), Range( phi2 ) );
+    
+    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
+       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
+        SetIsMonomorphism( phi, true );
+    elif HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
+      HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
+        SetIsEpimorphism( phi, true );
+    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
     
 end );
 
@@ -503,12 +540,26 @@ InstallMethod( \*,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
         
   function( phi2, phi1 )
+    local phi;
     
     if not AreComposableMorphisms( phi2, phi1 ) then
         Error( "the two morphisms are not composable, since the source of the left one and the target of the right one are not \033[01midentical\033[0m\n" );
     fi;
     
-    return HomalgMap( MatrixOfMap( phi2 ) * MatrixOfMap( phi1 ), Source( phi1 ), Range( phi2 ) );
+    phi := HomalgMap( MatrixOfMap( phi2 ) * MatrixOfMap( phi1 ), Source( phi1 ), Range( phi2 ) );
+    
+    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
+       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
+        SetIsMonomorphism( phi, true );
+    elif HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
+      HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
+        SetIsEpimorphism( phi, true );
+    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
     
 end );
 

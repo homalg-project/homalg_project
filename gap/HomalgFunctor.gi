@@ -834,6 +834,48 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                 end );
                 
+                if IsCovariantFunctor( Functor, 1 ) = true and
+                   IsCovariantFunctor( Functor, 2 ) = true then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg morphisms",
+                            [ filter0, filter1_mor, filter2_mor ],
+                      function( c, m1, m2 )
+                        local Fm1, Fm2;
+                        
+                        Fm1 := functor_name( c, m1, Source( m2 ) );
+                        Fm2 := functor_name( c, Range( m1 ), m2 );
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
+                            return Fm1 * Fm2;
+                        else
+                            return Fm2 * Fm1;
+                        fi;
+                        
+                    end );
+                
+                elif IsCovariantFunctor( Functor, 1 ) = false and
+                  IsCovariantFunctor( Functor, 2 ) = true then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg morphisms",
+                            [ filter0, filter1_mor, filter2_mor ],
+                      function( c, m1, m2 )
+                        local Fm1, Fm2;
+                        
+                        Fm1 := functor_name( c, m1, Source( m2 ) );
+                        Fm2 := functor_name( c, Source( m1 ), m2 );
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
+                            return Fm1 * Fm2;
+                        else
+                            return Fm2 * Fm1;
+                        fi;
+                        
+                    end );
+                
+                fi;
+                
             else
                 
                 if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
@@ -897,6 +939,48 @@ InstallMethod( InstallFunctorOnMorphisms,
                     return FunctorMap( Functor, m, [ [ 1, obj ] ] );
                     
                 end );
+                
+                if IsCovariantFunctor( Functor, 1 ) = true and
+                   IsCovariantFunctor( Functor, 2 ) = true then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg morphisms",
+                            [ filter1_mor, filter2_mor ],
+                      function( m1, m2 )
+                        local Fm1, Fm2;
+                        
+                        Fm1 := functor_name( m1, Source( m2 ) );
+                        Fm2 := functor_name( Range( m1 ), m2 );
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
+                            return Fm1 * Fm2;
+                        else
+                            return Fm2 * Fm1;
+                        fi;
+                        
+                    end );
+                
+                elif IsCovariantFunctor( Functor, 1 ) = false and
+                  IsCovariantFunctor( Functor, 2 ) = true then
+                    
+                    InstallOtherMethod( functor_name,
+                            "for homalg morphisms",
+                            [ filter1_mor, filter2_mor ],
+                      function( m1, m2 )
+                        local Fm1, Fm2;
+                        
+                        Fm1 := functor_name( m1, Source( m2 ) );
+                        Fm2 := functor_name( Source( m1 ), m2 );
+                        
+                        if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
+                            return Fm1 * Fm2;
+                        else
+                            return Fm2 * Fm1;
+                        fi;
+                        
+                    end );
+                
+                fi;
                 
             fi;
             
@@ -2465,7 +2549,7 @@ InstallMethod( LeftSatelliteOfFunctor,
         c := arg[1];
         
         if c < 0 then
-            Error( "the negative ", c, ". right satellite is not defined\n" );
+            Error( "the negative ", c, ". left satellite is not defined\n" );
         fi;
         
         d := Resolution( arg[p + 1], c - 1 );
@@ -2489,8 +2573,6 @@ InstallMethod( LeftSatelliteOfFunctor,
                 fi;
             fi;
         fi;
-        
-        mu := Kernel( d_c_1 );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         

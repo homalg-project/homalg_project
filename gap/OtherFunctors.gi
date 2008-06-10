@@ -125,7 +125,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     idN := HomalgIdentityMatrix( NrGenerators( N ), R );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        sum := LeftPresentation( sum );
+        sum := HomalgMap( sum );
         zeroMN := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         iotaM := UnionOfColumns( idM, zeroMN );
@@ -133,7 +133,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
         piM := UnionOfRows( idM, zeroNM );
         piN := UnionOfRows( zeroMN, idN );
     else
-        sum := RightPresentation( sum );
+        sum := HomalgMap( sum, "r" );
         zeroMN := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         iotaM := UnionOfRows( idM, zeroMN );
@@ -141,6 +141,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
         piM := UnionOfColumns( idM, zeroNM );
         piN := UnionOfColumns( zeroMN, idN );
     fi;
+    
+    sum := Cokernel( sum );
     
     iotaM := HomalgMap( iotaM, M, sum );
     iotaN := HomalgMap( iotaN, N, sum );
@@ -160,19 +162,71 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     
 end );
 
+InstallGlobalFunction( _Functor_DirectSum_OnMorphisms,	### defines: DirectSum (morphism part)
+  function( M_or_mor, N_or_mor )
+    local phi, L, R, idL;
+    
+    R := HomalgRing( M_or_mor );
+    
+    if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
+        Error( "the module and the morphism are not defined over identically the same ring\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
+       and IsFinitelyPresentedModuleRep( N_or_mor ) then
+        
+        phi := M_or_mor;
+        L := N_or_mor;
+        
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
+           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+            Error( "the morphism and the module must either be both left or both right\n" );
+        fi;
+        
+        idL := HomalgIdentityMatrix( NrGenerators( L ), R );
+        
+        return DiagMat( [ MatrixOfMap( phi ), idL ] );
+        
+    elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
+      and IsFinitelyPresentedModuleRep( M_or_mor ) then
+        
+        phi := N_or_mor;
+        L := M_or_mor;
+        
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
+           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+            Error( "the morphism and the module must either be both left or both right\n" );
+        fi;
+        
+        idL := HomalgIdentityMatrix( NrGenerators( L ), R );
+        
+        return DiagMat( [ idL, MatrixOfMap( phi ) ] );
+        
+    fi;
+    
+    Error( "one of the arguments must be a module and the other a morphism\n" );
+    
+end );
+
 InstallValue( Functor_DirectSum,
         CreateHomalgFunctor(
-                [ "name", "+" ],
+                [ "name", "DirectSum" ],
                 [ "natural_transformation1", "DirectSumEpis" ],
                 [ "natural_transformation2", "DirectSumEmbs" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ] ] ],
                 [ "2", [ [ "covariant" ] ] ],
-                [ "OnObjects", _Functor_DirectSum_OnObjects ]
+                [ "OnObjects", _Functor_DirectSum_OnObjects ],
+                [ "OnMorphisms", _Functor_DirectSum_OnMorphisms ]
                 )
         );
 
 Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -332,10 +386,21 @@ InstallFunctor( Functor_TorsionSubmodule );
 InstallFunctor( Functor_TorsionFreeFactor );
 
 ##
-## DirectSum( M, N ) ( M + N )
+## DirectSum( M, N )		( M + N )
 ##
 
-InstallFunctorOnObjects( Functor_DirectSum );
+InstallFunctor( Functor_DirectSum );
+
+##
+InstallMethod( \+,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( M, N )
+    
+    return DirectSum( M, N );
+    
+end );
 
 ##
 ## Pulback( chm_phi_beta1 )

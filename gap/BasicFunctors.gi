@@ -573,7 +573,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return Involution( KroneckerMat( idL, MatrixOfMap( phi ) ) );
+        return KroneckerMat( idL, MatrixOfMap( phi ) );
         
     fi;
     
@@ -583,7 +583,7 @@ end );
 
 InstallValue( Functor_TensorProduct,
         CreateHomalgFunctor(
-                [ "name", "*" ],
+                [ "name", "TensorProduct" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant", "right exact", "distinguished" ] ] ],
                 [ "2", [ [ "covariant", "right exact" ] ] ],
@@ -629,10 +629,21 @@ InstallFunctorOnObjects( Functor_DefectOfExactness );
 InstallFunctor( Functor_Hom );
 
 ##
-## M * N		( TensorProduct( M, N ) )
+## TensorProduct( M, N )	( M * N )
 ##
 
 InstallFunctor( Functor_TensorProduct );
+
+##
+InstallMethod( \*,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( M, N )
+    
+    return TensorProduct( M, N );
+    
+end );
 
 ##
 ## Ext( c, M, N )
