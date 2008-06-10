@@ -18,9 +18,9 @@ M := HomalgMatrix( M, A3 );	## copy M before setting entries
 SetEntryOfHomalgMatrix( M, 1, 2, "1" );
 SetEntryOfHomalgMatrix( M, 2, 3, "1" );
 SetEntryOfHomalgMatrix( M, 3, 3, "1" );
-M := HomalgMorphism( M );
+M := HomalgMap( M );
 M := Cokernel( M );
-id := HomalgIdentityMorphism( M );
+id := HomalgIdentityMap( M );
 
 hM := Hom( M, A3 );
 

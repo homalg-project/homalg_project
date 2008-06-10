@@ -2,14 +2,14 @@ LoadPackage( "RingsForHomalg" );
 
 A1 := RingForHomalgInMapleUsingJanetOre( "[[D,t],[],[weyl(D,t)]]" );
 
-Rskl := HomalgMorphism( " \
+Rskl := HomalgMap( " \
 [ \
 [ D^3 + a * D^2 + b * D + c ] \
 ] \
 ", A1 );
 Mskl := Cokernel( Rskl );
 
-Rsys := HomalgMorphism( " \
+Rsys := HomalgMap( " \
 [ \
 [	D,	-1,	 0	], \
 [	0,    	 D,	-1	], \
@@ -18,13 +18,13 @@ Rsys := HomalgMorphism( " \
 ", A1 );
 Msys := Cokernel( Rsys );
 
-alpha := HomalgMorphism( " \
+alpha := HomalgMap( " \
 [ \
 [	1,	0,	0	] \
 ] \
 ", Mskl, Msys );
 
-delta := HomalgMorphism( " \
+delta := HomalgMap( " \
 [ \
 [	D	] \
 ] \

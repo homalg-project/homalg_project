@@ -2,7 +2,7 @@ LoadPackage( "RingsForHomalg" );
 
 D := RingForHomalgInMapleUsingJanetOre( "[[Dx,Dy,x,y],[],[weyl(Dx,x),weyl(Dy,y)]]" );
 
-A := HomalgMorphism( " \
+A := HomalgMap( " \
 [ \
 [ Dx, -Dy ], \
 [ Dy,  Dx ] \

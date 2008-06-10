@@ -37,22 +37,12 @@ N := LeftPresentation( M * tau );
 
 M := LeftPresentation( M );
 
-tau := HomalgMorphism( tau, M, N );
+tau := HomalgMap( tau, M, N );
 
-OnLessGenerators( N );
-
-BasisOfModule( N );
-
-OnLessGenerators( N );
-
-BasisOfModule( N );
-
-OnLessGenerators( N );
-
-BasisOfModule( N );
+ByASmallerPresentation( N );
 
 DecideZero( tau );
 
-id := HomalgIdentityMorphism( M );
+id := HomalgIdentityMap( M );
 
 #hM := Hom( M, A3 );

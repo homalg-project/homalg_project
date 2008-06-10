@@ -1,6 +1,6 @@
 Read( "ReducedBasisOfModule.g" );
-nu:=ResolutionOfHomomorphism(TorsionSubmoduleEmb(W));
-pi:=ResolutionOfHomomorphism(TorsionFreeFactorEpi(W));
+nu:=Resolution(TorsionSubmoduleEmb(W));
+pi:=Resolution(TorsionFreeFactorEpi(W));
 s:=HomalgComplex(pi);
 Add(s,nu);
 IsComplex(s);

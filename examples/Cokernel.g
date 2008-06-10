@@ -10,14 +10,14 @@ phi := HomalgMatrix( " \
 [ [x^2,y^2,0], [1,0,z] ]\
 ", Qxyz );
 F2 := HomalgFreeLeftModule( 2, Qxyz );
-phi := HomalgMorphism( phi, F2, M );
+phi := HomalgMap( phi, F2, M );
 N := Cokernel( phi );
 OnLessGenerators( N );
 BasisOfModule( N );
 psi := HomalgMatrix( "\
 [[y,0],[0,z-1]]\
 ", Qxyz );
-psi := HomalgMorphism( psi, F2, N );
+psi := HomalgMap( psi, F2, N );
 C := Cokernel( psi );
 OnLessGenerators( C );
 BasisOfModule( C );

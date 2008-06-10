@@ -2,14 +2,14 @@ LoadPackage( "RingsForHomalg" );
 
 B1 := RingForHomalgInMapleUsingJanet( "[x]" );
 
-Rskl := HomalgMorphism( " \
+Rskl := HomalgMap( " \
 [[ \
 [ [1,[x,x,x]], [a(x),[x,x]], [b(x),[x]], [c(x),[]] ] \
 ]] \
 ", B1 );
 Mskl := Cokernel( Rskl );
 
-Rsys := HomalgMorphism( " \
+Rsys := HomalgMap( " \
 [ \
 [  [[1,[x]]]	,	[[-1,[]]]	,	        0		], \
 \
@@ -20,13 +20,13 @@ Rsys := HomalgMorphism( " \
 ", B1 );
 Msys := Cokernel( Rsys );
 
-alpha := HomalgMorphism( " \
+alpha := HomalgMap( " \
 [ \
 [ [[1,[]]]	,	0	,	0	] \
 ] \
 ", Mskl, Msys );
 
-delta := HomalgMorphism( " \
+delta := HomalgMap( " \
 [ \
 [	[[1,[x]]]	] \
 ] \

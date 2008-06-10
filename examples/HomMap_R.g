@@ -13,5 +13,5 @@ N := HomalgMatrix( " \
 [[x,y,z],[x^3,y^3,z^3]] \
 ", Qxyz );
 N := LeftPresentation( N );
-A := HomalgMorphism( HomalgIdentityMatrix( NrGenerators( M ), Qxyz ), M, N );
+A := HomalgMap( HomalgIdentityMatrix( NrGenerators( M ), Qxyz ), M, N );
 mor := Hom( A, Qxyz );
