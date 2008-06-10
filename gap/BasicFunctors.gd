@@ -75,7 +75,10 @@ DeclareOperation( "Cokernel",
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
 
 DeclareOperation( "DefectOfExactness",
-        [ IsHomogeneousList ] );
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "DefectOfExactness",
+        [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );

@@ -16,9 +16,6 @@
 
 # basic operations:
 
-DeclareOperation( "DefectOfExactness",
-        [ IsHomalgComplex ] );
-
 DeclareOperation( "Homology",
         [ IsHomalgComplex ] );
 

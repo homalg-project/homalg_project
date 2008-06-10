@@ -23,6 +23,10 @@ InstallMethod( DefectOfExactness,
     local display, display_string, on_less_generators, left, degrees, l,
           morphisms, T, H, i, S;
     
+    if HasIsComplexForDefectOfExactness( C ) and IsComplexForDefectOfExactness( C ) then
+        TryNextMethod( );
+    fi;
+    
     if IsBound( C!.DisplayHomology ) and C!.DisplayHomology = true then
         display := true;
     else
@@ -79,9 +83,9 @@ InstallMethod( DefectOfExactness,
         H := HomalgComplex( T, degrees[1] - 1 );
     else
         if left then
-            T := DefectOfExactness( [ morphisms[2], morphisms[1] ] );
+            T := DefectOfExactness( morphisms[2], morphisms[1] );
         else
-            T := DefectOfExactness( [ morphisms[1], morphisms[2] ] );
+            T := DefectOfExactness( morphisms[1], morphisms[2] );
         fi;
         H := HomalgComplex( T, degrees[1] );
         morphisms := morphisms{[ 2 .. l ]};
@@ -99,9 +103,9 @@ InstallMethod( DefectOfExactness,
     
     for i in [ 1 .. l - 1 ] do
         if left then
-            S := DefectOfExactness( [ morphisms[i + 1], morphisms[i] ] );
+            S := DefectOfExactness( morphisms[i + 1], morphisms[i] );
         else
-            S := DefectOfExactness( [ morphisms[i], morphisms[i + 1] ] );
+            S := DefectOfExactness( morphisms[i], morphisms[i + 1] );
         fi;
         Add( H, HomalgZeroMap( S, T ) );
         T := S;
@@ -203,9 +207,9 @@ InstallMethod( DefectOfExactness,
         H := HomalgCocomplex( S, degrees[1] );
     else
         if left then
-            S := DefectOfExactness( [ morphisms[1], morphisms[2] ] );
+            S := DefectOfExactness( morphisms[1], morphisms[2] );
         else
-            S := DefectOfExactness( [ morphisms[2], morphisms[1] ] );
+            S := DefectOfExactness( morphisms[2], morphisms[1] );
         fi;
         H := HomalgCocomplex( S, degrees[1] + 1 );
         morphisms := morphisms{[ 2 .. l ]};
@@ -223,9 +227,9 @@ InstallMethod( DefectOfExactness,
     
     for i in [ 1 .. l - 1 ] do
         if left then
-            T := DefectOfExactness( [ morphisms[i], morphisms[i + 1] ] );
+            T := DefectOfExactness( morphisms[i], morphisms[i + 1] );
         else
-            T := DefectOfExactness( [ morphisms[i + 1], morphisms[i] ] );
+            T := DefectOfExactness( morphisms[i + 1], morphisms[i] );
         fi;
         Add( H, HomalgZeroMap( S, T ) );
         S := T;

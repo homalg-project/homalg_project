@@ -81,7 +81,7 @@ InstallValue( Functor_Cokernel,
                 )
         );
 
-Functor_Cokernel!.ContainerForWeakPointersOnComputedMorphisms :=
+Functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -131,7 +131,7 @@ InstallValue( Functor_Kernel,
                 )
         );
 
-Functor_Kernel!.ContainerForWeakPointersOnComputedMorphisms :=
+Functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 
@@ -194,41 +194,15 @@ end );
 ##
 
 InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: DefectOfExactness (DefectOfHoms)
-  function( phi_psi )
-    local phi, psi, R, pre, post, M, p, gen, rel, coker, ker, emb;
+  function( cpx_post_pre )
+    local pre, post, M, p, gen, rel, coker, ker, emb;
     
-    if not ( IsList( phi_psi) and Length( phi_psi ) = 2 and ForAll( phi_psi, IsMapOfFinitelyGeneratedModulesRep ) ) then
-        Error( "expecting a list containing two morphisms\n" );
+    if not ( IsHomalgComplex( cpx_post_pre ) and ObjectDegreesOfComplex( cpx_post_pre ) = [ -1 .. 1 ] ) then
+        Error( "expecting a complex containing two morphisms\n" );
     fi;
     
-    phi := phi_psi[1];
-    psi := phi_psi[2];
-    
-    R := HomalgRing( phi );
-    
-    if not IsIdenticalObj( R, HomalgRing( psi ) ) then
-        Error( "the rings of the two morphisms are not identical\n" );
-    fi;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( psi ) then
-        if not AreComposableMorphisms( phi, psi ) then
-            Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
-        fi;
-        
-        pre := phi;
-        post := psi;
-        
-    elif IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( psi ) then
-        if not AreComposableMorphisms( phi, psi ) then
-            Error( "the two morphisms are not composable, since the target of the right one and the target of the left one are not \033[01midentical\033[0m\n" );
-        fi;
-        
-        pre := psi;
-        post := phi;
-        
-    else
-        Error( "the two morphisms must either be both left or both right morphisms\n" );
-    fi;
+    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
+    post := LowestDegreeMorphismInComplex( cpx_post_pre );
     
     M := Range( pre );
     
@@ -266,13 +240,27 @@ InstallValue( Functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomogeneousList ] ] ],
+                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsComplexForDefectOfExactness ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
         );
 
-Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedMorphisms :=
+Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+InstallMethod( DefectOfExactness,
+        "for a homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi, psi )
+    
+    return DefectOfExactness( AsComplex( phi, psi ) );
+    
+end );
 
 ##
 ## Hom
@@ -489,10 +477,10 @@ InstallValue( Functor_Hom,
                 )
         );
 
-Functor_Hom!.ContainerForWeakPointersOnComputedModules :=
+Functor_Hom!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_Hom!.ContainerForWeakPointersOnComputedMorphisms :=
+Functor_Hom!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -604,10 +592,10 @@ InstallValue( Functor_TensorProduct,
                 )
         );
 
-Functor_TensorProduct!.ContainerForWeakPointersOnComputedModules :=
+Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_TensorProduct!.ContainerForWeakPointersOnComputedMorphisms :=
+Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
@@ -629,7 +617,7 @@ InstallFunctorOnObjects( Functor_Cokernel );
 InstallFunctorOnObjects( Functor_Kernel );
 
 ##
-## DefectOfExactness( [ phi, psi ] )
+## DefectOfExactness( cpx_post_pre )
 ##
 
 InstallFunctorOnObjects( Functor_DefectOfExactness );

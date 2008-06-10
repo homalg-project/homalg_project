@@ -170,12 +170,12 @@ InstallMethod( FunctorObj,
         [ IsHomalgFunctorRep, IsList ],
         
   function( Functor, arguments_of_functor )
-    local container, weak_pointers, a, deleted, functor_name,
-          arg_all, p, i, arg_old, l, obj;
+    local container, weak_pointers, a, deleted, functor_name, p,
+          context_of_arguments, i, arg_old, l, obj, arg_all;
     
-    if IsBound( Functor!.ContainerForWeakPointersOnComputedModules ) then
+    if IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
         
-        container := Functor!.ContainerForWeakPointersOnComputedModules;
+        container := Functor!.ContainerForWeakPointersOnComputedBasicObjects;
         
         weak_pointers := container!.weak_pointers;
         
@@ -198,16 +198,15 @@ InstallMethod( FunctorObj,
             p := 0;
         fi;
         l := Length( arguments_of_functor );
-        arg_all :=
-          [ arguments_of_functor,
-            List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultSetOfRelations ) ];
+        context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultSetOfRelations );
         for i in Difference( [ 1 .. a ], deleted ) do
             obj := ElmWPObj( weak_pointers, i );
             if obj <> fail then
-                arg_old := Genesis( obj ){[ 2 .. 3 ]};
+                arg_old := Genesis( obj );
+                arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
                 if l = Length( arg_old[1] ) then
-                    if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arg_all[1][j] ) ) and
-                       ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = arg_all[2][j] ) then
+                    if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) and
+                       ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
                         return obj;
                     fi;
                 fi;
@@ -220,9 +219,16 @@ InstallMethod( FunctorObj,
     #=====# end of the core procedure #=====#
     
     if IsBound( container ) then
-        p := PositionOfTheDefaultSetOfRelations( obj );
         
-        SetGenesis( obj, Concatenation( [ Functor ], arg_all, [ p ] ) );
+        arg_all := rec( );
+        
+        arg_all.("arguments_of_functor") := arguments_of_functor;
+        arg_all.("context_of_arguments") := context_of_arguments;
+        arg_all.("Functor") := Functor;
+        arg_all.("PositionOfTheDefaultSetOfRelationsOfTheOutput")
+          := PositionOfTheDefaultSetOfRelations( obj );
+        
+        SetGenesis( obj, arg_all );
         
         a := a + 1;
         
@@ -252,9 +258,9 @@ InstallMethod( FunctorMap,
         Error( "the last argument has a wrong syntax\n" );
     fi;
     
-    if IsBound( Functor!.ContainerForWeakPointersOnComputedMorphisms ) then
+    if IsBound( Functor!.ContainerForWeakPointersOnComputedBasicMorphisms ) then
         
-        container := Functor!.ContainerForWeakPointersOnComputedMorphisms;
+        container := Functor!.ContainerForWeakPointersOnComputedBasicMorphisms;
         
         weak_pointers := container!.weak_pointers;
         
@@ -381,6 +387,7 @@ InstallMethod( InstallFunctorOnObjects,
         
   function( Functor )
     local functor_name, number_of_arguments, natural_transformation,
+          natural_transformation1, natural_transformation2,
           filter_obj, filter0, filter1_obj, filter2_obj;
     
     functor_name := ValueGlobal( NameOfFunctor( Functor ) );
@@ -440,6 +447,40 @@ InstallMethod( InstallFunctorOnObjects,
                         functor_name( o );			## this sets the attribute named "natural_transformation"
                         
                         return natural_transformation( o );	## not an infinite loop because of the side effect of the above line
+                        
+                    end );
+                    
+                fi;
+                
+                if IsBound( Functor!.natural_transformation1 ) then
+                    
+                    natural_transformation1 := ValueGlobal( Functor!.natural_transformation1 );
+                    
+                    InstallOtherMethod( natural_transformation1,
+                            "for homalg modules",
+                            [ filter_obj ],
+                      function( o )
+                        
+                        functor_name( o );			## this sets the attribute named "natural_transformation"
+                        
+                        return natural_transformation1( o );	## not an infinite loop because of the side effect of the above line
+                        
+                    end );
+                    
+                fi;
+                
+                if IsBound( Functor!.natural_transformation2 ) then
+                    
+                    natural_transformation2 := ValueGlobal( Functor!.natural_transformation2 );
+                    
+                    InstallOtherMethod( natural_transformation2,
+                            "for homalg modules",
+                            [ filter_obj ],
+                      function( o )
+                        
+                        functor_name( o );			## this sets the attribute named "natural_transformation"
+                        
+                        return natural_transformation2( o );	## not an infinite loop because of the side effect of the above line
                         
                     end );
                     
@@ -883,7 +924,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
             filter0 := IsList;
         fi;
         
-        if IsAdditiveFunctor( Functor ) then
+        if IsAdditiveFunctor( Functor ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg complexes",
@@ -947,7 +988,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
         
     else
         
-        if IsAdditiveFunctor( Functor ) then
+        if IsAdditiveFunctor( Functor ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg complexes",
@@ -1043,7 +1084,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
             
         fi;
         
-        if IsAdditiveFunctor( Functor, 1 ) then
+        if IsAdditiveFunctor( Functor, 1 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg complexes",
@@ -1149,7 +1190,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
             
         fi;
         
-        if IsAdditiveFunctor( Functor, 1 ) then
+        if IsAdditiveFunctor( Functor, 1 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg complexes",
@@ -1255,7 +1296,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
             filter0 := IsList;
         fi;
         
-        if IsAdditiveFunctor( Functor, 2 ) then
+        if IsAdditiveFunctor( Functor, 2 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg complexes",
@@ -1345,7 +1386,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
         
     else
         
-        if IsAdditiveFunctor( Functor, 2 ) then
+        if IsAdditiveFunctor( Functor, 2 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg complexes",
@@ -1556,7 +1597,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
             filter0 := IsList;
         fi;
         
-        if IsAdditiveFunctor( Functor ) then
+        if IsAdditiveFunctor( Functor ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg chain maps",
@@ -1622,7 +1663,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
         
     else
         
-        if IsAdditiveFunctor( Functor ) then
+        if IsAdditiveFunctor( Functor ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg chain maps",
@@ -1720,7 +1761,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
             
         fi;
         
-        if IsAdditiveFunctor( Functor, 1 ) then
+        if IsAdditiveFunctor( Functor, 1 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg chain maps",
@@ -1828,7 +1869,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
             
         fi;
         
-        if IsAdditiveFunctor( Functor, 1 ) then
+        if IsAdditiveFunctor( Functor, 1 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg chain maps",
@@ -1936,7 +1977,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
             filter0 := IsList;
         fi;
         
-        if IsAdditiveFunctor( Functor, 2 ) then
+        if IsAdditiveFunctor( Functor, 2 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg chain maps",
@@ -2028,7 +2069,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
         
     else
         
-        if IsAdditiveFunctor( Functor, 2 ) then
+        if IsAdditiveFunctor( Functor, 2 ) = true then
             
             InstallOtherMethod( functor_name,
                     "for homalg chain maps",
@@ -2354,9 +2395,9 @@ InstallMethod( RightSatelliteOfCofunctor,
     SF := CallFuncList( CreateHomalgFunctor, data );
     
     if m > 1 then
-        SF!.ContainerForWeakPointersOnComputedModules :=
+        SF!.ContainerForWeakPointersOnComputedBasicObjects :=
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-        SF!.ContainerForWeakPointersOnComputedMorphisms :=
+        SF!.ContainerForWeakPointersOnComputedBasicMorphisms :=
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
@@ -2481,9 +2522,9 @@ InstallMethod( LeftSatelliteOfFunctor,
     SF := CallFuncList( CreateHomalgFunctor, data );
     
     if m > 1 then
-        SF!.ContainerForWeakPointersOnComputedModules :=
+        SF!.ContainerForWeakPointersOnComputedBasicObjects :=
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-        SF!.ContainerForWeakPointersOnComputedMorphisms :=
+        SF!.ContainerForWeakPointersOnComputedBasicMorphisms :=
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     

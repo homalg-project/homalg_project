@@ -55,8 +55,8 @@ ReadPackage( "homalg", "gap/Complexes.gi" );
 
 ReadPackage( "homalg", "gap/ChainMaps.gi" );
 
+ReadPackage( "homalg", "gap/ToolFunctors.gi" );
 ReadPackage( "homalg", "gap/BasicFunctors.gi" );
-
 ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
 ## LogicForHomalg subpackages

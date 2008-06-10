@@ -38,6 +38,12 @@ DeclareProperty( "IsKernelSquare",
 DeclareProperty( "IsLambekPairOfSquares",
         IsHomalgMorphism );
 
+DeclareProperty( "IsChainMapForPullback",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsChainMapForPushout",
+        IsHomalgMorphism );
+
 ####################################
 #
 # global functions and operations:
@@ -51,6 +57,9 @@ DeclareGlobalFunction( "homalgResetFiltersOfChainMap" );
 DeclareGlobalFunction( "HomalgChainMap" );
 
 # basic operations:
+
+DeclareOperation( "PositionOfTheDefaultSetOfRelations",
+        [ IsHomalgChainMap ] );	## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "DegreesOfChainMap",
         [ IsHomalgChainMap ] );

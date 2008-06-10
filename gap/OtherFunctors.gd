@@ -29,6 +29,16 @@ DeclareGlobalFunction( "_Functor_DirectSum_OnObjects" );
 
 DeclareGlobalVariable( "Functor_DirectSum" );
 
+## Pullback
+DeclareGlobalFunction( "_Functor_Pullback_OnObjects" );
+
+DeclareGlobalVariable( "Functor_Pullback" );
+
+## Pushout
+DeclareGlobalFunction( "_Functor_Pushout_OnObjects" );
+
+DeclareGlobalVariable( "Functor_Pushout" );
+
 ####################################
 #
 # attributes:
@@ -39,6 +49,18 @@ DeclareAttribute( "TorsionFreeFactorEpi",
         IsHomalgMap );
 
 DeclareAttribute( "TorsionSubmoduleEmb",
+        IsHomalgMap );
+
+DeclareAttribute( "DirectSumEmbs",
+        IsHomalgMap );
+
+DeclareAttribute( "DirectSumEpis",
+        IsHomalgMap );
+
+DeclareAttribute( "PullbackPairOfMaps",
+        IsHomalgMap );
+
+DeclareAttribute( "PushoutPairOfMaps",
         IsHomalgMap );
 
 ####################################
@@ -57,4 +79,10 @@ DeclareOperation( "TorsionSubmodule",
 
 DeclareOperation( "+",
         [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "Pullback",
+        [ IsHomalgChainMap ] );
+
+DeclareOperation( "Pushout",
+        [ IsHomalgChainMap ] );
 

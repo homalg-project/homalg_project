@@ -146,6 +146,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfRelations,
+        "for homalg maps",
+        [ IsHomalgChainMap ],
+        
+  function( M )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( DegreesOfChainMap,		## this might differ from ObjectDegreesOfComplex( Source( c ) ) when the chain map is not full
         "for homalg chain maps",
         [ IsHomalgChainMap ],

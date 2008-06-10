@@ -188,9 +188,9 @@ InstallMethod( IsAcyclic,
         return true;
     elif ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
       or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ) ) );
     else
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ) ) );
     fi;
     
     if not b then
@@ -227,9 +227,9 @@ InstallMethod( IsExactSequence,
     
     if ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
       or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ] ) ) );
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ) ) );
     else
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( [ CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ] ) ) );
+        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ) ) );
     fi;
     
     if not b then
@@ -271,6 +271,17 @@ end );
 # methods for operations:
 #
 ####################################
+
+##
+InstallMethod( PositionOfTheDefaultSetOfRelations,
+        "for homalg maps",
+        [ IsHomalgComplex ],
+        
+  function( M )
+    
+    return fail;
+    
+end );
 
 ##
 InstallMethod( ObjectDegreesOfComplex,
@@ -994,12 +1005,21 @@ InstallGlobalFunction( homalgResetFiltersOfComplex,
             IsAcyclic,
             IsGradedObject,
             IsExactSequence,
-            IsShortExactSequence ];
+            IsShortExactSequence,
+            IsComplexForDefectOfExactness ];	## the output of AsComplex (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish between different methods for DefectOfExactness which all apply to complexes
     fi;
     
     for property in HOMALG.PropertiesOfComplexes do
         ResetFilterObj( C, property );
     od;
+    
+    if IsBound( C!.HomologyGradedObject ) then
+        Unbind( C!.HomologyGradedObject );
+    fi;
+    
+    if IsBound( C!.CohomologyGradedObject ) then
+        Unbind( C!.CohomologyGradedObject );
+    fi;
     
 end );
 
@@ -1083,6 +1103,8 @@ InstallGlobalFunction( HomalgComplex,
             SetIsAcyclic( C, true );
         fi;
         SetIsGradedObject( C, true );
+    elif HasIsMorphism( arg[1] ) and IsMorphism( arg[1] ) then
+        SetIsComplex( C, true );
     fi;
     
     return C;

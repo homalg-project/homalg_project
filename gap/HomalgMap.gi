@@ -250,6 +250,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfRelations,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( M )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
