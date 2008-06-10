@@ -30,6 +30,8 @@ InstallValue( HOMALG_IO_Sage,
 	    check_output := true,	## a Sage specific
             only_warning := "WARNING:",	## a Sage specific
             define := "=",
+            delete := function( var, stream ) homalgSendBlocking( [ "del ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            multiple_delete := _Sage_multiple_delete,
             prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
             display_color := "\033[0;34;43m",
@@ -69,6 +71,23 @@ BindGlobal( "TheTypeHomalgExternalRingObjectInSage",
 BindGlobal( "TheTypeHomalgExternalRingInSage",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInSageRep ) );
+
+####################################
+#
+# global functions:
+#
+####################################
+
+##
+InstallGlobalFunction( _Sage_multiple_delete,
+  function( var_list, stream )
+    local str;
+    
+    str := [ "del ", var_list ];
+    
+    homalgSendBlocking( str, "need_command", "break_lists", stream, HOMALG_IO.Pictograms.multiple_delete );
+    
+end );
 
 ####################################
 #

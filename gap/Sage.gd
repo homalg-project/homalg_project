@@ -22,6 +22,8 @@ DeclareGlobalVariable( "HOMALG_IO_Sage" );
 #
 ####################################
 
+DeclareGlobalFunction( "_Sage_multiple_delete" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInSage" );
