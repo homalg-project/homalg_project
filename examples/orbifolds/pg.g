@@ -12,3 +12,6 @@ ot:=OrbifoldTriangulation(M,Isotropy,mult);
 ss:=SimplicialSet(ot,7);
 
 #no problem: [ 0 ], [ 0 ], [ 2 ], [ 1 ], [ 1 ], [ 1 ] <Klein Bottle>
+#       Z
+#       Z
+# Z/2Z

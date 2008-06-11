@@ -10,6 +10,14 @@ mult:=[
 
 dim := 4;
 
+#matrix sizes:
+# [ <A homalg internal 10 by 119 matrix>,
+#   <A homalg internal 119 by 916 matrix>,
+#   <A homalg internal 916 by 8428 matrix>,
+#   <A homalg internal 8428 by 83152 matrix> ]
+#factors:
+# [ 11.9, 7.69748, 9.20087, 9.86616 ]
+
 #cohomology over GF(2) (unneccessary):
 #------>>>>  GF(2)^(1 x 1)
 #------>>>>  0

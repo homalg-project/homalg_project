@@ -1,6 +1,6 @@
 M := [[1, 5, 8], [1, 8, 9], [1, 5, 9], [2, 6, 9], [2, 9, 10], [2, 6, 10], [3, 7, 10], [3, 8, 10], [3, 7, 8], [4, 6, 7], [4, 5, 7], [4, 5, 6], [5, 7, 8], [8, 9, 10], [5, 6, 9], [6, 7, 10]];
-G:=Group((1,2));
-Isotropy:=rec(1:=G,2:=G,3:=G,4:=G);
+G := Group( (1,2) );
+Isotropy := rec( 1 := G, 2 := G, 3 := G, 4 := G );
 mult:=[
  [[5],[1,5],[1,5,8],[1,5,9],(x->(1,2))],
  [[5],[1,5],[1,5,9],[1,5,8],(x->(1,2))],
@@ -9,11 +9,23 @@ mult:=[
  [[7],[3,7],[3,7,10],[3,7,8],(x->(1,2))],
  [[7],[3,7],[3,7,8],[3,7,10],(x->(1,2))],
  [[6],[4,6],[4,6,7],[4,5,6],(x->(1,2))],
- [[6],[4,6],[4,5,6],[4,6,7],(x->(1,2))]  ];
+ [[6],[4,6],[4,5,6],[4,6,7],(x->(1,2))]
+];
 
 dim := 5;
 
-#up to 5 works, cohomology: [0],[1],[2,2,2,0],[1]
+#matrix sizes:
+#[ <A homalg internal 16 by 126 matrix>,
+#  <A homalg internal 126 by 420 matrix>,
+#  <A homalg internal 420 by 1590 matrix>,
+#  <A homalg internal 1590 by 7536 matrix>,
+#  <A homalg internal 7536 by 37506 matrix>,
+#  <A homalg internal 37506 by 187500 matrix> ]
+
+#factors:
+# [ 7.875, 3.33333, 3.78571, 4.73962, 4.97691, 4.9992 ]
+
+#up to 4 works, cohomology: [0],[1],[2,2,2,0],[1],[2,2,2,2],[1],...
 
 #cohomology up to 6 over GF(2):
 # GF(2)^(1 x 1)
@@ -23,9 +35,21 @@ dim := 5;
 # GF(2)^(1 x 4)
 # GF(2)^(1 x 4)
 
+#homology over GF(2):
+#----------->>>>  GF(2)^(1 x 1)
+#----------->>>>  GF(2)^(1 x 3)
+#----------->>>>  GF(2)^(1 x 4)
+#----------->>>>  GF(2)^(1 x 4)
+
 #cohomology over Z/4Z:
-#--------------->>>>  Z/4Z^(1 x 1)
-#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
-#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 1)
-#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
-#--------------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) > + Z/4Z/< ZmodnZObj(2,4) >
+#------>>>>  Z/4Z^(1 x 1)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 3)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 3) + Z/4Z^(1 x 1)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 4)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 4)
+
+#homology over Z/4Z:
+#------>>>>  Z/4Z^(1 x 1)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 3)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 3) + Z/4Z^(1 x 1)
+#------>>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 4)
