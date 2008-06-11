@@ -25,14 +25,17 @@ DeclareGlobalVariable( "HOMALG" );
 #
 ####################################
 
-# six new categories:
+# seven new categories:
+
+DeclareCategory( "IsHomalgRingOrObjectOrMorphism",	## this is the super super GAP-category which will include the GAP-categories IsHomalgRingOrObject and IsHomalgObjectOrMorphism:
+        IsAttributeStoringRep );			## we need this GAP-category for convenience
 
 DeclareCategory( "IsHomalgRingOrObject",	## this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule and IsHomalgComplex:
-        IsAttributeStoringRep );		## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
+        IsHomalgRingOrObjectOrMorphism );	## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
 
 DeclareCategory( "IsHomalgObjectOrMorphism",	## this is the super GAP-category which will include the GAP-categories IsHomalgModule, IsHomalgMap, IsHomalgComplex and IsHomalgChainMap:
         IsExtLElement and			## with this GAP-category we can have a common declaration for things like OnLessGenerators, BasisOfModule, DecideZero
-        IsAttributeStoringRep );
+        IsHomalgRingOrObjectOrMorphism );
 
 DeclareCategory( "IsHomalgObject",		## this is the super GAP-category which will include the GAP-categories IsHomalgModule and IsHomalgComplex:
         IsHomalgObjectOrMorphism and		## we need this GAP-category to be able to build complexes with *objects* being modules or again complexes!

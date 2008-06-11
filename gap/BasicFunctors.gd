@@ -43,12 +43,6 @@ DeclareGlobalFunction( "_Functor_TensorProduct_OnMorphisms" );
 
 DeclareGlobalVariable( "Functor_TensorProduct" );
 
-## Ext
-DeclareGlobalVariable( "Functor_Ext" );
-
-## Tor
-DeclareGlobalVariable( "Functor_Tor" );
-
 ####################################
 #
 # attributes:
@@ -84,15 +78,6 @@ DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );
 
 DeclareOperation( "TensorProduct",
-        [ IsHomalgModule, IsHomalgModule ] );
-
-DeclareOperation( "*",
-        [ IsHomalgModule, IsHomalgModule ] );
-
-DeclareOperation( "Ext",
-        [ IsHomalgModule, IsHomalgModule ] );
-
-DeclareOperation( "Tor",
         [ IsHomalgModule, IsHomalgModule ] );
 
 ####################################

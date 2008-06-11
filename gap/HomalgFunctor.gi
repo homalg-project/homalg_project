@@ -2372,10 +2372,10 @@ end );
 ##
 InstallMethod( RightSatelliteOfCofunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsString, IsPosInt ],
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
         
-  function( Functor, name, p )
-    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF;
+  function( Functor, p, name )
+    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF, fname;
     
     if IsCovariantFunctor( Functor, p ) <> false then
         Error( "the functor does not seem to be contravariant in its ", p, ". argument\n" );
@@ -2485,10 +2485,21 @@ InstallMethod( RightSatelliteOfCofunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
+    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    
     InstallFunctorOnObjects( SF );
     InstallFunctorOnMorphisms( SF );
     InstallFunctorOnComplexes( SF );
     InstallFunctorOnChainMaps( SF );
+    
+    fname := Concatenation( [ "Functor_", name ] );
+    
+    if IsBoundGlobal( fname ) then
+        Info( InfoWarning, 1, "unable to save the right satellite under the default name ", fname, " since it is reserved" );
+    else
+        DeclareGlobalVariable( fname );
+        InstallValue( ValueGlobal( fname ), SF );
+    fi;
     
     return SF;
     
@@ -2497,10 +2508,10 @@ end );
 ##
 InstallMethod( LeftSatelliteOfFunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsString, IsPosInt ],
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
         
-  function( Functor, name, p )
-    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF;
+  function( Functor, p, name )
+    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF, fname;
     
     if IsCovariantFunctor( Functor, p ) <> true then
         Error( "the functor does not seem to be covariant in its ", p, ". argument\n" );
@@ -2610,10 +2621,21 @@ InstallMethod( LeftSatelliteOfFunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
+    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    
     InstallFunctorOnObjects( SF );
     InstallFunctorOnMorphisms( SF );
     InstallFunctorOnComplexes( SF );
     InstallFunctorOnChainMaps( SF );
+    
+    fname := Concatenation( [ "Functor_", name ] );
+    
+    if IsBoundGlobal( fname ) then
+        Info( InfoWarning, 1, "unable to save the left satellite under the default name ", fname, " since it is reserved" );
+    else
+        DeclareGlobalVariable( fname );
+        InstallValue( ValueGlobal( fname ), SF );
+    fi;
     
     return SF;
     

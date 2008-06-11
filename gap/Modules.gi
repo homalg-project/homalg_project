@@ -94,7 +94,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         [ IsRelationsOfFinitelyPresentedModuleRep, IsInt ],
         
   function( M, _q )
-    local R, q, B, d, degrees, j, d_j, F_j, id, S, i, left;
+    local R, q, B, d, degrees, j, d_j, F_j, id, S, left, i;
     
     ## all options of Maple's homalg are now obsolete:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
@@ -157,7 +157,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
-                d_j := HomalgZeroMap( HomalgZeroLeftModule( R ), F_j );	## always create a new zero module to be able to distinguish them
+                d_j := HomalgZeroMap( HomalgZeroLeftModule( R ), F_j );		## always create a new zero module to be able to distinguish them
             else
                 d_j := HomalgZeroMap( HomalgZeroRightModule( R ), F_j );	## always create a new zero module to be able to distinguish them
             fi;

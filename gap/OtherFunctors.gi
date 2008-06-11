@@ -298,6 +298,17 @@ InstallValue( Functor_Pullback,
 Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
+## for convenience
+InstallMethod( Pullback,
+        "for homalg maps with identical target",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi, beta1 )
+    
+    return Pullback( AsChainMapForPullback( phi, beta1 ) );
+    
+end );
+
 ##
 ## Pushout
 ##
@@ -366,6 +377,17 @@ InstallValue( Functor_Pushout,
 
 Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+## for convenience
+InstallMethod( Pushout,
+        "for homalg maps with identical source",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( alpha1, psi )
+    
+    return Pushout( AsChainMapForPushout( alpha1, psi ) );
+    
+end );
 
 ####################################
 #

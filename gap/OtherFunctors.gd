@@ -85,6 +85,12 @@ DeclareOperation( "DirectSum",
 DeclareOperation( "Pullback",
         [ IsHomalgChainMap ] );
 
+DeclareOperation( "Pullback",
+        [ IsHomalgMap, IsHomalgMap ] );
+
 DeclareOperation( "Pushout",
         [ IsHomalgChainMap ] );
+
+DeclareOperation( "Pushout",
+        [ IsHomalgMap, IsHomalgMap ] );
 

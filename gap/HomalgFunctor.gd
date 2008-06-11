@@ -71,10 +71,10 @@ DeclareOperation( "FunctorMap",
         [ IsHomalgFunctor, IsHomalgMap ] );
 
 DeclareOperation( "RightSatelliteOfCofunctor",
-        [ IsHomalgFunctor, IsString, IsPosInt ] );
+        [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "LeftSatelliteOfFunctor",
-        [ IsHomalgFunctor, IsString, IsPosInt ] );
+        [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );

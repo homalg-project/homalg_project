@@ -20,9 +20,7 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         [ IsMapOfFinitelyGeneratedModulesRep, IsInt ],
         
   function( phi, _q )
-    local R, q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, c;
-    
-    R := HomalgRing( phi );
+    local q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, c;
     
     q := _q;
     

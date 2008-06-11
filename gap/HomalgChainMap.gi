@@ -225,7 +225,7 @@ InstallMethod( LowestDegreeInChainMap,
         
   function( c )
     
-    return ObjectDegreesOfComplex( c )[1];
+    return DegreesOfChainMap( c )[1];
     
 end );
 
@@ -237,7 +237,7 @@ InstallMethod( HighestDegreeInChainMap,
   function( c )
     local degrees;
     
-    degrees := ObjectDegreesOfComplex( c );
+    degrees := DegreesOfChainMap( c );
     
     return degrees[Length( degrees )];
     

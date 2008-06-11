@@ -251,9 +251,9 @@ Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
 Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-##
+## for convenience
 InstallMethod( DefectOfExactness,
-        "for a homalg composable maps",
+        "for homalg composable maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi, psi )
@@ -634,10 +634,21 @@ InstallFunctor( Functor_Hom );
 
 InstallFunctor( Functor_TensorProduct );
 
-##
-InstallMethod( \*,
+## for convenience
+InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgRingOrObjectOrMorphism, IsFinitelyPresentedModuleRep ],
+        
+  function( M, N )
+    
+    return TensorProduct( M, N );
+    
+end );
+
+## for convenience
+InstallOtherMethod( \*,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsHomalgRingOrObjectOrMorphism ],
         
   function( M, N )
     
@@ -649,15 +660,11 @@ end );
 ## Ext( c, M, N )
 ##
 
-InstallValue( Functor_Ext,
-        RightSatelliteOfCofunctor( Functor_Hom, "Ext", 1 )
-        );
+RightSatelliteOfCofunctor( Functor_Hom, 1, "Ext" );
 
 ##
 ## Tor( c, M, N )
 ##
 
-InstallValue( Functor_Tor,
-        LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor", 1 )
-        );
+LeftSatelliteOfFunctor( Functor_TensorProduct, 1, "Tor" );
 
