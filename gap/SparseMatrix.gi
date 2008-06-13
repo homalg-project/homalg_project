@@ -441,6 +441,15 @@ InstallMethod( SparseZeroRows,
 );
 
 ##
+InstallMethod( SparseZeroColumns,
+        [ IsSparseMatrix ],
+  function( M )
+    return Difference( [ 1 .. M!.ncols ], Union( M!.indices ) );
+  end
+);
+  
+
+##
 InstallMethod( MultRow, #no side effect!
         [ IsList, IsList, IsRingElement ],
   function( indices, entries, x )

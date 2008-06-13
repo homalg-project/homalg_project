@@ -75,6 +75,9 @@ DeclareOperation( "IsSparseDiagonalMatrix",
 DeclareOperation( "SparseZeroRows",
         [ IsSparseMatrix ] );
 
+DeclareOperation( "SparseZeroColumns",
+        [ IsSparseMatrix ] );
+
 DeclareOperation( "MultRow",
         [ IsList, IsList, IsRingElement ] );
 
