@@ -62,11 +62,11 @@ InstallMethod( SimplicialSet, "constructor",
         P[a] := [];
         P[a][1] := List( L[a], x->[x] );
         if not IsBound( ot!.isotropy.( a ) ) or Order( ot!.isotropy.( a ) ) = 1 then
-            for dim in [2..n+1] do
+            for dim in [2..n+2] do
                 P[a][dim] := Concatenation( List( P[a][dim-1], x->List( Filtered( L[a], y->y>x[1] ), z->Concatenation( [ z, () ], x ) ) ) );
             od;
         else
-            for dim in [2..n+1] do
+            for dim in [2..n+2] do
                 P[a][dim] := [];
                 for x in P[a][dim-1] do
                     for g in Elements( ot!.isotropy.( a ) ) do
@@ -84,7 +84,7 @@ InstallMethod( SimplicialSet, "constructor",
     S := [];
     S[1] := Set( ot!.max_simplices, x->[x] );
     
-    for dim in [2..n+1] do
+    for dim in [2..n+2] do
         u := [];
         for a in ot!.vertices do
             u := Union( u, P[a][dim]);
@@ -100,7 +100,7 @@ end );
 InstallMethod( Dimension, "for Simplicial Sets",
         [ IsSimplicialSetRep ],
   function( s )
-    return Length( s!.simplicial_set );
+    return Length( s!.simplicial_set ) - 1;
 end );
 
 ## this computes the boundary, which is a bit complicated because "mu" has to be taken into account
@@ -156,7 +156,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
     
     if ( ( HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) ) or ( HasIsFiniteQuotientOfTheIntegers( R ) and IsFiniteQuotientOfTheIntegers( R ) ) ) and IsBound( RP!.ZeroMatrix ) then #right now: always sparse!
         
-        for k in [2..Dimension( s )] do
+        for k in [ 2 .. d+1 ] do
             if Length( S[k] ) = 0 then
                 matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), 1, R ) ); #FIXME: is there a better way?
             else
@@ -194,7 +194,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
         
         # non-sparse:
         # FIXME: should work for both
-        for k in [2..Dimension( s )] do
+        for k in [ 2 .. d+1 ] do
             if Length( S[k] ) = 0 then
                 matrices[k-1] := NullMat( Length( S[k-1] ), 1 );
             else

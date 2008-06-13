@@ -1,3 +1,7 @@
+# p6m (p6mm)
+
+# http://en.wikipedia.org/wiki/Wallpaper_group#Group_p6m
+
 M:=[ [1,2,4], [1,4,6], [2,3,4], [3,4,5], [4,5,7], [4,6,7] ];
 
 C2n := Group( (1,4)(2,3)(5,6) ); #north

@@ -1,3 +1,7 @@
+# p3
+
+# http://en.wikipedia.org/wiki/Wallpaper_group#Group_p3
+
 M:=[[1,2,4],[1,2,6],[1,4,6],[2,3,4],[2,3,6],[3,4,5],[3,5,6],[4,5,7],[4,6,7],[5,6,7]];
 C3:=Group((1,2,3));
 Isotropy:=rec(1:=C3,3:=C3,7:=C3);

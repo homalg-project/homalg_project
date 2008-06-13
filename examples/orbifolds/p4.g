@@ -1,3 +1,7 @@
+# p4
+
+# http://en.wikipedia.org/wiki/Wallpaper_group#Group_p4
+
 M := [ [1,2,4], [1,2,6], [1,4,6], [2,3,4], [2,3,6], [3,4,5], [3,5,6], [4,5,7], [4,6,7], [5,6,7]]; #compare to p6, these look alike
 C4 := Group( (1,2,3,4) );
 C2 := Group( (1,3)(2,4) );
@@ -8,7 +12,7 @@ mult:=[
 [ [5], [5,7], [4,5,7], [5,6,7], x -> x*(1,2,3,4) ],
 [ [5], [5,7], [5,6,7], [4,5,7], x -> x*(1,4,3,2) ]
 ];
-dim := 3;
+dim := 2;
 
 #matrix sizes:
 # [ <A homalg internal 10 by 121 matrix>,
