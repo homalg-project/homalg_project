@@ -33,7 +33,7 @@ dim := 3;
 #------->>>>  Z/4Z^(1 x 1)
 #------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 1)
 #------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 2) (this is Z + Z/4Z)
-#------->>>>  calculating...
+#------->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 2)
 
 #cohomology over Z/8Z:
 #------->>>>  Z/8Z^(1 x 1)

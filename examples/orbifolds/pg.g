@@ -8,8 +8,10 @@ G:=Group(());
 Isotropy:=rec();
 mult:=[];
 
-ot:=OrbifoldTriangulation(M,Isotropy,mult);
-ss:=SimplicialSet(ot,7);
+dim := 6;
+
+#matrix sizes:
+# [ 18, 108, 180, 135, 54, 9 ]
 
 #no problem: [ 0 ], [ 0 ], [ 2 ], [ 1 ], [ 1 ], [ 1 ] <Klein Bottle>
 #       Z
