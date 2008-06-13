@@ -811,28 +811,6 @@ InstallMethod( DiagonalEntries,
     
 end );
 
-##
-InstallMethod( BasisOfRowModule,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsBasisOfRowsMatrix ],
-        
-  function( M )
-    
-    return M;
-    
-end );
-
-##
-InstallMethod( BasisOfColumnModule,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsBasisOfColumnsMatrix ],
-        
-  function( M )
-    
-    return M;
-    
-end );
-
 ####################################
 #
 # constructor functions and methods:

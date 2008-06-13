@@ -1286,6 +1286,19 @@ end );
 ##
 InstallMethod( BasisOfRowModule,
         "for homalg matrices",
+        [ IsHomalgMatrix and IsBasisOfRowsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "BasisOfRowModule( IsBasisOfRowsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( BasisOfRowModule,
+        "for homalg matrices",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -1312,6 +1325,19 @@ end );
 #-----------------------------------
 # BasisOfColumnModule
 #-----------------------------------
+
+##
+InstallMethod( BasisOfColumnModule,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsBasisOfColumnsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "BasisOfColumnModule( IsBasisOfColumnsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
 
 ##
 InstallMethod( BasisOfColumnModule,
