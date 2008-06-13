@@ -61,30 +61,23 @@ end );
 
 ##
 InstallMethod( FreeHullModule,
-        "for sets of homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgRelationsOfLeftModule( M ) then
-        HomalgFreeLeftModule( NrGenerators( M ), R );
-    else
-        HomalgFreeRightModule( NrGenerators( M ), R );
-    fi;
-    
-end );
-
-##
-InstallMethod( FreeHullModule,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    FreeHullModule( RelationsOfModule( M ) );
+    return CertainObject( Resolution( M ), 0 );
+    
+end );
+
+##
+InstallMethod( FreeHullMap,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return CokernelEpi( CertainMorphism( Resolution( M ), 1 ) );
     
 end );
 

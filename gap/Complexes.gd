@@ -23,5 +23,8 @@ DeclareOperation( "Cohomology",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "Resolution",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "Resolution",
         [ IsHomalgComplex ] );
 

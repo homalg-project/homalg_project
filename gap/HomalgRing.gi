@@ -424,7 +424,9 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     if nargs = 0 or arg[1] = 0 then
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
-        LoadPackage( "GaussForHomalg" );
+        if LoadPackage( "GaussForHomalg" ) <> true then
+            Error( "the package GaussForHomalg failed to load\n" );
+        fi;
         c := arg[1];
         if IsPrime( c ) then
             R := CreateHomalgRing( GF( c ), IsFiniteQuotientOfTheIntegers );

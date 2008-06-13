@@ -28,9 +28,9 @@ DeclareOperation( "/",
         [ IsHomalgRelations, IsHomalgModule ] );
 
 DeclareOperation( "FreeHullModule",
-        [ IsHomalgRelations ] );
+        [ IsHomalgModule ] );
 
-DeclareOperation( "FreeHullModule",
+DeclareOperation( "FreeHullMap",
         [ IsHomalgModule ] );
 
 DeclareOperation( "Resolution",

@@ -241,12 +241,14 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOfMaps)
   function( chm_phi_beta1 )
-    local phi, beta1, phi_beta1, ApB_, p, B, emb, pb, epis, pair;
+    local left, phi, beta1, phi_beta1, ApB_, p, B, emb, pb, epis, pair;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_phi_beta1 );
     
     phi := LowestDegreeMorphismInChainMap( chm_phi_beta1 );
     beta1 := LowestDegreeMorphismInComplex( Range( chm_phi_beta1 ) );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_phi_beta1 ) then
+    if left then
         phi_beta1 := UnionOfRows( MatrixOfMap( phi ), -MatrixOfMap( beta1 ) );
     else
         phi_beta1 := UnionOfColumns( MatrixOfMap( phi ), -MatrixOfMap( beta1 ) );
@@ -272,7 +274,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     
     epis := DirectSumEpis( ApB_ );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_phi_beta1 ) then
+    if left then
         pair := [ emb * epis[1], emb * epis[2] ];
     else
         pair := [ epis[1] * emb, epis[2] * emb ];
@@ -321,12 +323,14 @@ end );
 
 InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMaps)
   function( chm_alpha1_psi )
-    local psi, alpha1, alpha1_psi, ApB_, p, A_, epi, po, embs, pair;
+    local left, psi, alpha1, alpha1_psi, ApB_, p, A_, epi, po, embs, pair;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_alpha1_psi );
     
     psi := HighestDegreeMorphismInChainMap( chm_alpha1_psi );
     alpha1 := HighestDegreeMorphismInComplex( Source( chm_alpha1_psi ) );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_alpha1_psi ) then
+    if left then
         alpha1_psi := UnionOfColumns( MatrixOfMap( alpha1 ), MatrixOfMap( psi ) );
     else
         alpha1_psi := UnionOfRows( MatrixOfMap( alpha1 ), MatrixOfMap( psi ) );
@@ -352,7 +356,7 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     
     embs := DirectSumEmbs( ApB_ );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_alpha1_psi ) then
+    if left then
         pair := [ embs[1] * epi, embs[2] * epi ];
     else
         pair := [ epi * embs[1], epi * embs[2] ];
