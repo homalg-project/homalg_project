@@ -92,10 +92,10 @@ InstallValue( CommonHomalgTableForGaussTools,
                  end,
                
                # FIXME: not yet implemented    
-               XKroneckerMat :=
+               KroneckerMat :=
                  function( A, B )
                    
-                   return fail;
+                   return SparseMatrix( KroneckerProduct( ConvertSparseMatrixToMatrix( Eval( A ) ), ConvertSparseMatrixToMatrix( Eval( B ) ) ) );
                    
                  end,
                
@@ -149,10 +149,10 @@ InstallValue( CommonHomalgTableForGaussTools,
                  end,
                
                # FIXME: not yet implemented (see below)    
-               XZeroColumns :=
+               ZeroColumns :=
                  function( C )
 
-                   return true;
+                   return SparseZeroColumns( Eval( C ) );
                    
                  end,
                
