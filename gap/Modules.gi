@@ -15,7 +15,7 @@
 ####################################
 
 ## ( cf. [BR, Subsection 3.2.2] )
-InstallMethod( \/,			## defines: / (SubfactorModule)
+InstallMethod( \/,				### defines: / (SubfactorModule)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
@@ -49,7 +49,7 @@ InstallMethod( \/,			## defines: / (SubfactorModule)
 end );
 
 ##
-InstallMethod( \/,					## needed by _Functor_Kernel_OnObjects since SyzygiesGenerators returns a set of relations
+InstallMethod( \/,				## needed by _Functor_Kernel_OnObjects since SyzygiesGenerators returns a set of relations
         "for a set of homalg relations",
         [ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
         

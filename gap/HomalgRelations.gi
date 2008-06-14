@@ -737,10 +737,16 @@ InstallMethod( ViewObj,
   function( o )
     local m, n;
     
-    m := NrRelations( o );
+    if HasNrRelations( o ) then
+        m := NrRelations( o );
+    else
+        m := "unknown number";
+    fi;
     n := NrGenerators( o );
     
-    if m = 0 then
+    if IsString( m ) then
+        Print( "<A set of relations " );
+    elif m = 0 then
         Print( "<An empty set of relations " );
     elif m = 1 then
         Print( "<A set containing a single relation " );
