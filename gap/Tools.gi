@@ -230,38 +230,6 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
 end );
 
 ##
-InstallMethod( Eval,				### defines: ZeroMap
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ],
-        
-  function( C )
-    local R, RP, z;
-    
-    R := HomalgRing( C );
-    
-    RP := homalgTable( R );
-    
-    if NrRows( C ) = 0 or NrColumns( C ) = 0 then
-        Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix is about to get evaluated!\033[0m" );
-    fi;
-    
-    if IsBound( RP!.ZeroMatrix ) then
-        return RP!.ZeroMatrix( C );
-    fi;
-    
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external zero matrix", RP, "\n" );
-    fi;
-    
-    z := Zero( HomalgRing( C ) );
-    
-    #=====# begin of the core procedure #=====#
-    
-    return ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) );
-    
-end );
-
-##
 InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         "for homalg matrices",
         [ IsHomalgMatrix and IsInitialIdentityMatrix and HasNrRows and HasNrColumns ],
@@ -288,40 +256,6 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
     #=====# begin of the core procedure #=====#
     
     ResetFilterObj( C, IsInitialIdentityMatrix );
-    
-    zz := ListWithIdenticalEntries( NrColumns( C ), z );
-    
-    id := List( [ 1 .. NrRows( C ) ],
-                function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
-    
-    return id;
-    
-end );
-
-##
-InstallMethod( Eval,				### defines: IdentityMap
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows and HasNrColumns ],
-        
-  function( C )
-    local R, RP, o, z, zz, id;
-    
-    R := HomalgRing( C );
-    
-    RP := homalgTable( R );
-    
-    if IsBound( RP!.IdentityMatrix ) then
-        return RP!.IdentityMatrix( C );
-    fi;
-    
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external identity matrix", RP, "\n" );
-    fi;
-    
-    z := Zero( HomalgRing( C ) );
-    o := One( HomalgRing( C ) );
-    
-    #=====# begin of the core procedure #=====#
     
     zz := ListWithIdenticalEntries( NrColumns( C ), z );
     
@@ -754,6 +688,72 @@ InstallMethod( Eval,				### defines: Compose
     fi;
     
     return e;
+    
+end );
+
+##
+InstallMethod( Eval,				### defines: IdentityMap
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows and HasNrColumns ], 10,
+        
+  function( C )
+    local R, RP, o, z, zz, id;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.IdentityMatrix ) then
+        return RP!.IdentityMatrix( C );
+    fi;
+    
+    if IsHomalgExternalMatrixRep( C ) then
+        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external identity matrix", RP, "\n" );
+    fi;
+    
+    z := Zero( HomalgRing( C ) );
+    o := One( HomalgRing( C ) );
+    
+    #=====# begin of the core procedure #=====#
+    
+    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    
+    id := List( [ 1 .. NrRows( C ) ],
+                function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
+    
+    return id;
+    
+end );
+
+##
+InstallMethod( Eval,				### defines: ZeroMap
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 20,
+        
+  function( C )
+    local R, RP, z;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if NrRows( C ) = 0 or NrColumns( C ) = 0 then
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix is about to get evaluated!\033[0m" );
+    fi;
+    
+    if IsBound( RP!.ZeroMatrix ) then
+        return RP!.ZeroMatrix( C );
+    fi;
+    
+    if IsHomalgExternalMatrixRep( C ) then
+        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external zero matrix", RP, "\n" );
+    fi;
+    
+    z := Zero( HomalgRing( C ) );
+    
+    #=====# begin of the core procedure #=====#
+    
+    return ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) );
     
 end );
 
@@ -1256,17 +1256,6 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
 end );
 
 ##
-InstallMethod( GetColumnIndependentUnitPositions,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    
-    return GetColumnIndependentUnitPositions( M, [ ] );
-    
-end );
-
-##
 InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUnitPositions (GetIndependentUnitPositions)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomogeneousList ],
@@ -1312,17 +1301,6 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
     od;
     
     return pos;
-    
-end );
-
-##
-InstallMethod( GetRowIndependentUnitPositions,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    
-    return GetRowIndependentUnitPositions( M, [ ] );
     
 end );
 

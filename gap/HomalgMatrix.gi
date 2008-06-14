@@ -366,6 +366,28 @@ InstallMethod( GetCleanRowsPositions,
 end );
 
 ##
+InstallMethod( GetColumnIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetColumnIndependentUnitPositions( M, [ ] );
+    
+end );
+
+##
+InstallMethod( GetRowIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetRowIndependentUnitPositions( M, [ ] );
+    
+end );
+
+##
 InstallMethod( AreComparableMatrices,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],

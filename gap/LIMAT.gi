@@ -1951,9 +1951,9 @@ end );
 ##
 InstallMethod( GetColumnIndependentUnitPositions,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsZero ],
+        [ IsHomalgMatrix and IsZero, IsHomogeneousList ],
         
-  function( M )
+  function( M, pos_list )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetColumnIndependentUnitPositions( IsZero(Matrix) )", "\033[0m" );
     
@@ -1968,9 +1968,9 @@ end );
 ##
 InstallMethod( GetRowIndependentUnitPositions,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsZero ],
+        [ IsHomalgMatrix and IsZero, IsHomogeneousList ],
         
-  function( M )
+  function( M, pos_list )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetRowIndependentUnitPositions( IsZero(Matrix) )", "\033[0m" );
     
