@@ -116,7 +116,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         o := 1;
     fi;
     
-    homalgSendBlocking( "LoadPackage(\"RingsForHomalg\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "LoadPackage(\"IO_ForHomalg\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
