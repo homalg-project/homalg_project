@@ -19,3 +19,7 @@ BasisOfModule( W );
 BasisOfModule( W );
 rsyz:=SyzygiesGenerators( W );
 Y := Hom( Qxyz, W );
+iota := TorsionSubmoduleEmb( W );
+pi := TorsionFreeFactorEpi( W );
+C := HomalgComplex( pi );
+Add( C, iota );
