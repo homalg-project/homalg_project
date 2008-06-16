@@ -30,6 +30,9 @@ DeclareCategory( "IshomalgExternalObject",
 DeclareOperation( "homalgPointer",
         [ IshomalgExternalObject ] );
 
+DeclareOperation( "homalgPointer",
+        [ IsString ] );
+
 DeclareOperation( "homalgExternalCASystem",
         [ IshomalgExternalObject ] );
 

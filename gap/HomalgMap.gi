@@ -86,19 +86,14 @@ InstallTrueMethod( IsIsomorphism, IsHomalgMap and IsEpimorphism and IsMonomorphi
 #
 ####################################
 
-####################################
-#
-# logical implications methods:
-#
-####################################
-
 ##
 InstallImmediateMethod( IsZero,
         IsHomalgMap, 0,
         
   function( phi )
     
-    if IsZero( Source( phi ) ) or IsZero( Range( phi ) ) then
+    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) or
+       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then
         return true;
     fi;
     
@@ -923,7 +918,7 @@ InstallGlobalFunction( HomalgMap,
                          reduced_matrices := rec( ),
                          free_resolutions := rec( ),
                          index_pairs_of_presentations := [ [ 1, 1 ] ]);
-    
+        
         matrices.( String( [ 1, 1 ] ) ) := matrix;
         
         ## Objectify:
@@ -1037,7 +1032,7 @@ InstallGlobalFunction( HomalgMap,
         option := arg[1][1];
         
         if Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "zero" then
-        ## the zero morphism:
+            ## the zero morphism:
             
             matrix := HomalgZeroMatrix( nr_rows, nr_columns, R );
             
@@ -1121,7 +1116,7 @@ InstallGlobalFunction( HomalgMap,
         fi;
         
         matrices.( String( index_pair ) ) := matrix;
-    
+        
         ## Objectify:
         ObjectifyWithAttributes(
                 morphism, type,

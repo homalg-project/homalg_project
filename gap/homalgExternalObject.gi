@@ -80,6 +80,17 @@ InstallMethod( homalgPointer,
 end );
 
 ##
+InstallMethod( homalgPointer,
+        "for homalg external objects",
+        [ IsString ],
+        
+  function( o )
+    
+    Error( "expected an external object but got a string\n" );
+    
+end );
+
+##
 InstallMethod( homalgExternalCASystem,
         "for homalg external objects",
         [ IshomalgExternalObjectRep ],
