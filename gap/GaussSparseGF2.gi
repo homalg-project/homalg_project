@@ -122,7 +122,8 @@ InstallMethod( EchelonMatTransformationDestructive,
           rank,
           list,
           row_indices,
-          p;
+          p,
+	  a;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -173,7 +174,7 @@ InstallMethod( EchelonMatTransformationDestructive,
         head := heads[j];
         if head <> 0 then
             a := Difference( [1..head-1], heads{[j+1..ncols]} );
-            for i in a  do
+            for i in a do
                 row_indices := vectors.indices[i];
                 p := PositionSet( row_indices, j );
                 if p <> fail then
