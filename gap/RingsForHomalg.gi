@@ -17,7 +17,7 @@
 # a central place for configuration variables:
 
 InstallValue( HOMALG_RINGS,
-        rec(
+        rec( DefaultCAS := "Singular"
            )
 );
 
@@ -27,3 +27,25 @@ InstallValue( HOMALG_RINGS,
 #
 ####################################
 
+InstallMethod( HomalgRingOfIntegersInDefaultCAS,
+        [ IsInt ],
+  function( int )
+    if not IsBound( HOMALG_RINGS.DefaultCAS ) or HOMALG_RINGS.DefaultCAS = "" then
+        return HomalgRingOfIntegers( int );
+    else
+        return EvalString( Concatenation( "HomalgRingOfIntegersIn", HOMALG_RINGS.DefaultCAS, "(", String( int ), ")" ) );
+    fi;
+  end
+);
+  
+InstallMethod( HomalgFieldOfRationalsInDefaultCAS,
+        [ ],
+  function( )
+    if not IsBound( HOMALG_RINGS.DefaultCAS ) or HOMALG_RINGS.DefaultCAS = "" then
+        return HomalgFieldOfRationals( );
+    else
+        return EvalString( Concatenation( "HomalgFieldOfRationalsIn", HOMALG_RINGS.DefaultCAS, "()" ) );
+    fi;
+  end
+);
+  
