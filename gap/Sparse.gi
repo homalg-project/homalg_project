@@ -1,4 +1,4 @@
-#############################################################################
+############################################################################
 ##
 ##  Sparse.gi                  Gauss package                  Simon Goertzen
 ##
@@ -64,5 +64,31 @@ InstallGlobalFunction( KernelMatSparse,
         return KernelHermiteMatDestructive( M, arg[2] );
     fi;
     
+  end
+);
+
+##
+InstallOtherMethod( Rank,
+        "method for sparse matrices",
+        [ IsSparseMatrix ],
+  function( mat )
+    if IsField( mat!.ring ) then
+        return RankDestructive( CopyMat( mat ), mat!.ncols );
+    else
+        Error( "no Rank method for matrices over ", mat!.ring, "!" );
+    fi;
+  end
+);
+
+##
+InstallOtherMethod( Rank,
+        "method for sparse matrices",
+        [ IsSparseMatrix, IsInt ],
+  function( mat, upper_boundary )
+    if IsField( mat!.ring ) then
+        return RankDestructive( CopyMat( mat ), Minimum( upper_boundary, mat!.ncols ) );
+    else
+        Error( "no Rank method for matrices over ", mat!.ring, "!" );
+    fi;
   end
 );

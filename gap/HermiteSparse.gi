@@ -39,7 +39,8 @@ InstallMethod( HermiteMatDestructive,
           list_of_rows,
 	  row_indices,
 	  row_entries,
-          factor;
+          factor,
+	  a;
     
     nrows := mat!.nrows;
     ncols := mat!.ncols;
@@ -104,7 +105,8 @@ InstallMethod( HermiteMatDestructive,
         head := heads[j];
         if head <> 0 then
             e := vectors.entries[ head ][1];
-            for i in Filtered( [1..head-1], x -> not x in heads{[j+1..ncols]} ) do
+	    a := Difference( [1..head-1], heads{[j+1..ncols]} );
+            for i in a do
                 row_indices := vectors.indices[i];
                 p := PositionSet( row_indices, j );
                 if p <> fail then
@@ -156,7 +158,8 @@ InstallMethod( HermiteMatTransformationDestructive,
           row_entries,
           p,
           list_of_rows,
-          factor;
+          factor,
+	  a;
     
     
     nrows := mat!.nrows;
@@ -238,7 +241,8 @@ InstallMethod( HermiteMatTransformationDestructive,
         head := heads[j];
         if head <> 0 then
             e := vectors.entries[ head ][1];
-            for i in Filtered( [1..head-1], x -> not x in heads{[j+1..ncols]} ) do
+	    a := Difference( [1..head-1], heads{[j+1..ncols]} );
+            for i in a do
                 row_indices := vectors.indices[i];
                 p := PositionSet( row_indices, j );
                 if p <> fail then

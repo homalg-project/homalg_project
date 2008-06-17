@@ -22,6 +22,9 @@ DeclareOperation( "CopyMat",
 
 DeclareOperation( "GetEntry",
         [ IsSparseMatrix, IsInt, IsInt ] );
+	
+DeclareOperation( "AddEntry",
+        [ IsSparseMatrix, IsInt, IsInt, IsObject ] );
 
 DeclareOperation( "FindRing",
         [ IsList ] );

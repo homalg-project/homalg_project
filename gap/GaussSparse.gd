@@ -21,3 +21,6 @@ DeclareOperation( "ReduceMatWithEchelonMat",
 DeclareOperation( "KernelEchelonMatDestructive",
         [ IsSparseMatrix, IsList ] );
 
+DeclareOperation( "RankDestructive",
+        [ IsSparseMatrix, IsInt ] );
+

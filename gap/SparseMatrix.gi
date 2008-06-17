@@ -13,6 +13,10 @@ DeclareRepresentation( "IsSparseMatrixRep",
         IsSparseMatrix, [ "nrows", "ncols", "indices", "entries", "ring" ] );
 
 ##
+DeclareRepresentation( "IsSparseMatrixGF2Rep",
+        IsSparseMatrix, [ "nrows", "ncols", "indices", "ring" ] );
+
+##
 BindGlobal( "TheFamilyOfSparseMatrices",
         NewFamily( "TheFamilyOfSparseMatrices" ) );
 
@@ -21,18 +25,35 @@ BindGlobal( "TheTypeSparseMatrix",
         NewType( TheFamilyOfSparseMatrices, IsSparseMatrixRep ) );
 
 ##
+BindGlobal( "TheTypeSparseMatrixGF2",
+        NewType( TheFamilyOfSparseMatrices, IsSparseMatrixGF2Rep ) );
+
+##
 InstallGlobalFunction( SparseMatrix,
   function( arg )
     local nargs, M, nrows, ncols, i, j, indices, entries, ring;
     
     nargs := Length( arg );
     
-    if nargs = 5 then
-        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := arg[5] ) );
+    if IsRing( arg[ nargs ] ) then
+        ring := arg[ nargs ];
+        nargs := nargs - 1;
+    fi;
+    
+    if nargs = 3 then
+        return Objectify( TheTypeSparseMatrixGF2, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], ring := GF(2) ) );
     elif nargs = 4 then
-        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := FindRing( arg[4] ) ) );
-    elif nargs > 1 then
-        Error( "wrong number of arguments! SparseMatrix expects nrows, ncols, indices, entries, [ring]!" ); 
+        if not IsBound( ring ) then
+            ring := FindRing( arg[4] );
+        fi;
+        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := ring ) );
+    elif nargs = 5 then
+        return Objectify( TheTypeSparseMatrix, rec( nrows := arg[1], ncols := arg[2], indices := arg[3], entries := arg[4], ring := arg[5] ) );
+    fi;
+    
+    
+    if nargs > 1 then
+        Error( "wrong number of arguments! SparseMatrix expects nrows, ncols, indices, [entries], [ring]!" ); 
     elif not IsList( arg[ 1 ] ) then
         Error( "SparseMatrix constructor with 1 argument expects a (dense) Matrix or List!" );
     fi;
@@ -53,6 +74,11 @@ InstallGlobalFunction( SparseMatrix,
     
     ring := FindRing( List( M, i -> Filtered( i, j -> not IsZero(j) ) ) );
     
+    if ring = GF(2) then
+        indices := List( [ 1 .. nrows ], i -> Filtered( [ 1 .. ncols ], j -> IsOne( M[i][j] ) ) );
+        return SparseMatrix( nrows, ncols, indices );
+    fi;
+    
     indices := [];
     entries := [];
     
@@ -69,7 +95,7 @@ InstallGlobalFunction( SparseMatrix,
     
     return SparseMatrix( nrows, ncols, indices, entries, ring );
     
-    end
+  end
 );
 
 ##    
@@ -131,6 +157,36 @@ InstallMethod( GetEntry,
         return Zero( M!.ring );
     else
         return M!.entries[i][p];
+    fi;
+  end
+);
+
+##
+InstallMethod( AddEntry,
+        [ IsSparseMatrix, IsInt, IsInt, IsObject ],
+  function( M, i, j, e )
+    local ring, pos, res;
+    ring := M!.ring;
+    if not e in ring then
+        Error( "the element has to be in ", ring, "!" );
+    fi;
+    if e = Zero( ring ) then
+        return true;
+    fi;
+    pos := PositionSorted( M!.indices[i], j );
+    if IsBound( M!.indices[i][pos] ) and M!.indices[i][pos] = j then
+        res := M!.entries[i][pos] + e;
+        if res = Zero( ring ) then
+            Remove( M!.indices[i], pos );
+            Remove( M!.entries[i], pos );
+        else
+            M!.entries[i][pos] := res;
+        fi;
+	return res;
+    else
+        Add( M!.indices[i], j, pos );
+        Add( M!.entries[i], e, pos );
+        return e;
     fi;
   end
 );
@@ -198,13 +254,19 @@ InstallGlobalFunction( SparseZeroMatrix,
         ring := "unknown";
     fi;
 
-    if nargs = 1 then
+    if ring = GF(2) then
+        if nargs = 1 then
+            return SparseMatrix( arg[1], arg[1], List( [ 1 .. arg[1] ], i -> [] ) );
+        elif nargs = 2 then
+            return SparseMatrix( arg[1], arg[2], List( [ 1 .. arg[1] ], i -> [] ) );
+        fi;
+    elif nargs = 1 then
         return SparseMatrix( arg[1], arg[1], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), ring );
     elif nargs = 2 then
         return SparseMatrix( arg[1], arg[2], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), ring );
-    else
-        return fail;
     fi;
+    
+    return fail;
     
   end
 );
@@ -225,8 +287,12 @@ InstallGlobalFunction( SparseIdentityMatrix,
     
     if nargs = 1 then
         indices := List( [ 1 .. arg[1] ], i -> [i] );
-        entries := List( [ 1 .. arg[1] ], i -> [ One( ring ) ] );
-        return SparseMatrix( arg[1], arg[1], indices, entries, ring );
+        if ring = GF(2) then
+            return SparseMatrix( arg[1], arg[1], indices );
+        else
+            entries := List( [ 1 .. arg[1] ], i -> [ One( ring ) ] );
+            return SparseMatrix( arg[1], arg[1], indices, entries, ring );
+        fi;
     else
         return fail;
     fi;
@@ -322,7 +388,11 @@ InstallMethod( SparseDiagMat,
     elif Length( e ) > 2 then
         return SparseDiagMat( SparseDiagMat( e{[1,2]} ), e{[ 3 .. Length( e ) ]} );
     else
-        return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1]!.ncols ), Concatenation( e[1]!.entries, e[2]!.entries ) );
+        if IsSparseMatrixGF2Rep( e[1] ) then
+            return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1].ncols ) );
+        else
+            return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1]!.ncols ), Concatenation( e[1]!.entries, e[2]!.entries ), e[1]!.ring );
+        fi;
     fi;
   end
 );

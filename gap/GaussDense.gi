@@ -44,7 +44,8 @@ InstallMethod( EchelonMatTransformationDestructive,
           x,
           row2,
           rank,
-          list;
+          list,
+	  a;
     
     nrows := Length( mat );
     ncols := Length( mat[1] );
@@ -102,7 +103,8 @@ InstallMethod( EchelonMatTransformationDestructive,
     for j in [ncols,ncols-1..1] do
         head := heads[j];
         if head <> 0 then
-            for i in Filtered( [1..head-1], x -> not x in heads{[j+1..ncols]} ) do
+            a := Difference( [1..head-1], heads{[j+1..ncols]} );
+            for i in a do
                 row := vectors[i];
                 row2 := coeffs[i];
                 x := - row[j];
@@ -163,7 +165,8 @@ InstallMethod( EchelonMatDestructive,
           x,
           row2,
           rank,
-          list;
+          list,
+          a;
     
     nrows := Length( mat );
     ncols := Length( mat[1] );
@@ -210,7 +213,8 @@ InstallMethod( EchelonMatDestructive,
     for j in [ncols,ncols-1..1] do
         head := heads[j];
         if head <> 0 then
-            for i in Filtered( [1..head-1], x -> not x in heads{[j+1..ncols]} ) do
+            a := Difference( [1..head-1], heads{[j+1..ncols]} );
+            for i in a do
                 row := vectors[i];
                 x := - row[j];
                 if x <> zero then
@@ -222,7 +226,8 @@ InstallMethod( EchelonMatDestructive,
     
     #order rows:
     
-    vectors := vectors{list};
+    vectors :=  vectors{list};
+    #ConvertToMatrixRepNC( vectors ); FIXME: Is this important or neccessary?
     
     list := Filtered( [1..ncols], j -> heads[j] <> 0 );
     heads{list} := [1..rank]; #just for compatibility, vectors are ordered already
