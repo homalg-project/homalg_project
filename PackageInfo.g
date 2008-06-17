@@ -267,8 +267,13 @@ Dependencies := rec(
 ##  done automatically and need not be included in this function.
 #AvailabilityTest := ReturnTrue,
 AvailabilityTest := function()
-    return true;
-  end,
+  if (not("gauss" in SHOW_STAT())) and
+     (Filename(DirectoriesPackagePrograms("gauss"), "gauss.so") = fail) then
+    #Info(InfoWarning, 1, "Gauss: kernel functions not available.");
+    return fail;
+  fi;
+  return true;
+end,
 
 ##  The LoadPackage mechanism can produce a default banner from the info
 ##  in this file. If you are not happy with it, you can provide a string

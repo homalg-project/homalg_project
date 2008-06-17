@@ -8,6 +8,20 @@
 ##
 #############################################################################
 
+################################
+# First look after our C part: #
+################################
+
+# load kernel function if it is installed:
+if (not IsBound(ADD_SPARSE_GF2_VECS)) and ("gauss" in SHOW_STAT()) then
+  # try static module
+  LoadStaticModule("gauss");
+fi;
+if (not IsBound(ADD_SPARSE_GF2_VECS)) and
+   (Filename(DirectoriesPackagePrograms("gauss"), "gauss.so") <> fail) then
+  LoadDynamicModule(Filename(DirectoriesPackagePrograms("gauss"), "gauss.so"));
+fi;
+
 ReadPackage( "Gauss", "gap/GaussDense.gi" );
 
 ##
