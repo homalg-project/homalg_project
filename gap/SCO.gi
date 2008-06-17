@@ -166,21 +166,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                         ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             # matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
-                            # right now this uses the details of the IsSparseMatrix data structure,
-                            # FIXME: probably should be capsuled if possible (GetEntry, SetEntry)
-                            pos := PositionSorted( matrices[k-1]!.indices[ind], p );
-                            if IsBound( matrices[k-1]!.indices[ind][pos] ) and matrices[k-1]!.indices[ind][pos] = p then
-                                res := matrices[k-1]!.entries[ind][pos] + MinusOne( R )^i;
-                                if res = Zero( R ) then
-                                    Remove( matrices[k-1]!.indices[ind], pos );
-                                    Remove( matrices[k-1]!.entries[ind], pos );
-                                else
-                                    matrices[k-1]!.entries[ind][pos] := res;
-                                fi;
-                            else
-                                Add( matrices[k-1]!.indices[ind], p, pos );
-                                Add( matrices[k-1]!.entries[ind], MinusOne( R )^i, pos );
-                            fi;
+                            AddEntry( matrices[k-1], ind, p, MinusOne( R )^i );
                         fi;
                     od;
                 od;

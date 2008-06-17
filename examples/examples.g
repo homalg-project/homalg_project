@@ -46,8 +46,15 @@ fi;
 
 Print( "\nSelect Mode:\n 1) Cohomology (default)\n 2) Homology\n:" );
 mode := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
-if mode = fail or mode <> 2 then
+if mode = fail or not mode in [ 1, 2 ] then
     mode := 1;
+fi;
+
+Print( "\nSelect Method:\n 1) Full syzygie calculation (default)\n 2) matrix creation and rank calculation only\n:" );
+method := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
+
+if method = fail or not method in [ 1, 2 ] then
+    method := 1;
 fi;
 
 Print( Concatenation( "\nSelect Computer Algebra System:\n",
@@ -114,14 +121,59 @@ if d <= 0 or d = fail then
     d := dim;
 fi;
 
+Print( "Creating the simplicial set ...\n" );
+
 ot := OrbifoldTriangulation( M, Isotropy, mult );
 ss := SimplicialSet( ot, d );
 
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
+    Print( "Creating the homology matrices ...\n" );
     M := CreateHomologyMatrix( ot, ss, R );
-    H := Homology( ot, ss, R );
-else #cohomology:  ker( M[i+1] ) / im( M[i] )
+    if method = 1 then
+        Print( "Starting homology calculation ...\n" );
+        H := Homology( ot, ss, R );
+    elif method = 2 then
+        Print( "Starting rank calculation ...\n" );
+        L := [];
+        for i in [ 1 .. Length( M ) ] do
+            M[i] := Eval( M[i] );
+            L[i] :=[ nrows(  M[i] ), ncols( M[i] ) ];
+            Print( " ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
+	    L[i][3] := Rank( M[i] );
+	    L[i][4] := L[i][2] - L[i][3];
+            Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ".\n" );
+        od;
+        H := [ L[1][4] ]; #first image dimension
+        for i in [ 2 .. Length( L ) ] do
+            H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
+        od;
+        for i in [ 1 .. Length( H ) ] do
+            Print( "Homology dimension at degree ", i - 1, ":  GF(2)^(1 x ", H[i], ")\n" );
+        od;
+    fi;
+elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
+    Print( "Creating the cohomology matrices ...\n" );
     M := CreateCohomologyMatrix( ot, ss, R );
-    H := Cohomology( ot, ss, R );
+    if method = 1 then
+        Print( "Starting cohomology calculation ...\n" );
+        H := Cohomology( ot, ss, R );
+    elif method = 2 then
+        Print( "Starting rank calculation ...\n" );
+        L := [];
+        for i in [ 1 .. Length( M ) ] do
+            M[i] := Eval( M[i] );
+            L[i] :=[ nrows(  M[i] ), ncols( M[i] ) ];
+            Print( " ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
+            L[i][3] := Rank( M[i] );
+            L[i][4] := L[i][1] - L[i][3];
+            Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ".\n" );
+        od;
+        H := [ L[1][4] ]; #first kernel dimension
+        for i in [ 2 .. Length( L ) ] do
+            H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
+        od;
+        for i in [ 1 .. Length( H ) ] do
+            Print( "Cohomology dimension at degree ", i - 1, ":  GF(2)^(1 x ", H[i], ")\n" );
+        od;
+    fi;
 fi;
-
