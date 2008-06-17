@@ -1,6 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
-D := RingForHomalgInMapleUsingJanetOre( "[[Dx,Dy,x,y],[],[weyl(Dx,x),weyl(Dy,y)]]" );
+Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
+D := RingOfDerivations( Qxyz, "Dx,Dy" );
 
 A := HomalgMap( " \
 [ \

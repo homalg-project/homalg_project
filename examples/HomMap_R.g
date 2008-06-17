@@ -1,10 +1,9 @@
 LoadPackage( "RingsForHomalg" );
 
-R := HomalgRingOfIntegersInMaple( );
-Display( R );
+R := HomalgRingOfIntegersInDefaultCAS( );
 
-Qxyz := HomalgFieldOfRationalsInMaple( R ) * "x,y,z";
-Display( Qxyz );
+Qxyz := HomalgFieldOfRationalsInDefaultCAS( R ) * "x,y,z";
+
 M := HomalgMatrix( " \
 [[x,y,z]] \
 ", Qxyz );

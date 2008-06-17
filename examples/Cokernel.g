@@ -1,7 +1,7 @@
 LoadPackage( "RingsForHomalg" );
-HOMALG_IO.color_display := true;
-Qxyz := HomalgFieldOfRationalsInMaple( ) * "x,y,z";
-Display( Qxyz );
+
+Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
+
 M := HomalgMatrix( " \
 [ [x,y,z] ]\
 ", Qxyz );
