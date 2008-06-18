@@ -209,6 +209,7 @@ InstallValue( CommonHomalgTableForSingularTools,
 	           fi;
 		   
                    if u{[1]} = "-" then
+                     #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", u );
                      return homalgSendBlocking( [ "-(", a, ")/", u{[ 2..Length( u ) ]} ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    else
                      return homalgSendBlocking( [ "(",  a, ")/", u ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
@@ -216,5 +217,55 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                    
+               GetUnitPosition :=
+                 function( M, pos_list )
+                   local list, list_string;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+                       list := pos_list;
+                   fi;
+                   
+                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, ", list (", list, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetUnitPosition );
+                   
+                   if list_string = "fail" then
+                       return fail;
+                   else
+                       return StringToIntList( list_string );
+                   fi;
+                   
+                 end,
+                 
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+		       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+                 
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+		       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   
+                 end,
+                 
       )
 );

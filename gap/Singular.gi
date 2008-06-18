@@ -108,6 +108,152 @@ InstallGlobalFunction( _Singular_multiple_delete,
     
 end );
 
+##
+InstallGlobalFunction( InitializeSingularTools,
+  function( stream )
+    local IsMemberOfList, Difference, GetUnitPosition,
+          GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions;
+    
+    IsMemberOfList := "\n\
+proc IsMemberOfList (int i, list l)\n\
+{\n\
+  int k = size(l);\n\
+  \n\
+  for (int p=1; p<=k; p=p+1)\n\
+  {\n\
+    if (l[p]==i)\n\
+    {\n\
+      return(1); // this is not a mistake\n\
+    }\n\
+  }\n\
+  return(0);\n\
+}";
+    
+    Difference := "\n\
+proc Difference (list a, list b)\n\
+{\n\
+  list c;\n\
+  int s=size(a);\n\
+  \n\
+  for (int p=1; p<=s; p=p+1)\n\
+  {\n\
+    if (IsMemberOfList(a[p],b)==0)\n\
+    {\n\
+      c[size(c)+1] = a[p];\n\
+    }\n\
+  }\n\
+  return(c);\n\
+}";
+    
+    GetUnitPosition := "\n\
+proc GetUnitPosition (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  for (int j=1; j<=n; j=j+1)\n\
+  {\n\
+    for (int i=1; i<=m; i=i+1)\n\
+    {\n\
+      if (IsMemberOfList(i,pos_list) == 0 && deg(M[i,j]) == 0)\n\
+      {\n\
+        return(string(j,\",\",i)); // this is not a mistake\n\
+      }\n\
+    }\n\
+  }\n\
+  return(\"fail\");\n\
+}";
+    
+    GetColumnIndependentUnitPositions := "\n\
+proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list mm;\n\
+  for (int o=1; o<=m; o=o+1)\n\
+  {\n\
+    mm[size(mm)+1] = o;\n\
+  }\n\
+  list dep_list;\n\
+  list rest = mm;\n\
+  int r = m;\n\
+  list pos;\n\
+  int i; int k; int a;\n\
+  \n\
+  for (int j=1; j<=n; j=j+1)\n\
+  {\n\
+    for (i=1; i<=r; i=i+1)\n\
+    {\n\
+      k = rest[r-i+1];\n\
+      if (deg(M[k,j]) == 0)\n\
+      {\n\
+        pos[size(pos)+1] = list(j,k);\n\
+        for (a=1; a<=m; a=a+1)\n\
+        {\n\
+          if (M[mm[a],j] != 0)\n\
+          {\n\
+            dep_list[size(dep_list)+1] = mm[a];\n\
+          }\n\
+        }\n\
+        rest = Difference(mm,dep_list);\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}";
+    
+    GetRowIndependentUnitPositions := "\n\
+proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list nn;\n\
+  for (int o=1; o<=n; o=o+1)\n\
+  {\n\
+    nn[size(nn)+1] = o;\n\
+  }\n\
+  list dep_list;\n\
+  list rest = nn;\n\
+  int r = n;\n\
+  list pos;\n\
+  int j; int k; int a;\n\
+  \n\
+  for (int i=1; i<=m; i=i+1)\n\
+  {\n\
+    for (j=1; j<=r; j=j+1)\n\
+    {\n\
+      k = rest[r-j+1];\n\
+      if (deg(M[i,k]) == 0)\n\
+      {\n\
+        pos[size(pos)+1] = list(i,k);\n\
+        for (a=1; a<=n; a=a+1)\n\
+        {\n\
+          if (M[i,nn[a]] != 0)\n\
+          {\n\
+            dep_list[size(dep_list)+1] = nn[a];\n\
+          }\n\
+        }\n\
+        rest = Difference(nn,dep_list);\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}";
+    
+    homalgSendBlocking( IsMemberOfList, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( Difference, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -135,13 +281,15 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ##a new Singular-process
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Singular );
-	
+        
         ##shut down the "redefining" messages
         homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
+    
+    InitializeSingularTools( stream );
     
     ##this will lead to the call
     ##ring homalg_variable_something = arg[1];

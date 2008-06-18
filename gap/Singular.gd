@@ -32,6 +32,8 @@ DeclareGlobalFunction( "SETRING_Singular" );
 
 DeclareGlobalFunction( "_Singular_multiple_delete" );
 
+DeclareGlobalFunction( "InitializeSingularTools" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInSingular" );

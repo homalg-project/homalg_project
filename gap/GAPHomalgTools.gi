@@ -37,9 +37,6 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  
                DivideByUnit :=
                  function( a, u )
-                   local R;
-                   
-                   R := HomalgRing( a );
                    
                    return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    
@@ -54,21 +51,15 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  
                ZeroMatrix :=
                  function( C )
-                   local R;
                    
-                   R := HomalgRing( C );
-                   
-                   return homalgSendBlocking( [ "HomalgZeroMatrix(", NrRows( C ), NrColumns( C ), R, ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
+                   return homalgSendBlocking( [ "HomalgZeroMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
              
                IdentityMatrix :=
                  function( C )
-                   local R;
                    
-                   R := HomalgRing( C );
-                   
-                   return homalgSendBlocking( [ "HomalgIdentityMatrix(", NrRows( C ), R, ")" ], HOMALG_IO.Pictograms.IdentityMatrix );
+                   return homalgSendBlocking( [ "HomalgIdentityMatrix(", NrRows( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.IdentityMatrix );
                    
                  end,
                
@@ -199,6 +190,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    local list_string;
                    
                    list_string := homalgSendBlocking( [ "ZeroRows( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
+                   
                    return StringToIntList( list_string );
                    
                  end,
@@ -208,6 +200,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    local list_string;
                    
                    list_string := homalgSendBlocking( [ "ZeroColumns( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
+                   
                    return StringToIntList( list_string );
                    
                  end,
@@ -256,9 +249,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  
                GetCleanRowsPositions :=
                  function( M, clean_columns )
-                   local R, list_string;
-                   
-                   R := HomalgRing( M );
+                   local list_string;
                    
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
@@ -272,9 +263,6 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  
                GetColumnIndependentUnitPositions :=
                  function( M, pos_list )
-                   local R;
-                   
-                   R := HomalgRing( M );
                    
                    return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
@@ -282,9 +270,6 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  
                GetRowIndependentUnitPositions :=
                  function( M, pos_list )
-                   local R;
-                   
-                   R := HomalgRing( M );
                    
                    return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
