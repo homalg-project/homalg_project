@@ -47,6 +47,11 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return SparseIdentityMatrix( NrRows( C ), R!.ring );
                    
                  end,
+               
+               CopyMatrix :=
+                 function( C )
+                   return CopyMat( Eval( C ) );
+                 end,
                    
                # for a general ring (field) the involution is just the transposed matrix
                Involution :=
