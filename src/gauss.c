@@ -25,7 +25,7 @@ void __stack_chk_fail_local (void)
 #endif
 #endif
 
-Obj FuncADD_SPARSE_GF2_VECS( Obj self, Obj a, Obj b )
+Obj FuncSYMMETRIC_DIFFERENCE_SETS( Obj self, Obj a, Obj b )
 {
   Obj c;   /* for the result */
   Int len,lena,lenb;
@@ -101,9 +101,9 @@ Obj FuncADD_SPARSE_GF2_VECS( Obj self, Obj a, Obj b )
 */
 static StructGVarFunc GVarFuncs [] = {
 
-  { "ADD_SPARSE_GF2_VECS", 2, "a, b", 
-    FuncADD_SPARSE_GF2_VECS, 
-    "gauss.c:ADD_SPARSE_GF2_VECS" },
+  { "SYMMETRIC_DIFFERENCE_SETS", 2, "a, b",
+    FuncSYMMETRIC_DIFFERENCE_SETS,
+    "gauss.c:SYMMETRIC_DIFFERENCE_SETS" },
 
   { 0 }
 

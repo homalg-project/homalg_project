@@ -378,4 +378,45 @@ InstallMethod( RankDestructive,
   end
 );
 
+BindGlobal( "RankOfIndicesListList",
+  function( m )
+    # m must be a list of lists containing sets of positive integers
+    # this is interpreted as the sparse representation of a GF(2)
+    # matrix with as many rows as Length(m). The integers are the
+    # positions of ones in each row. This function basically does
+    # a semi-echelon-form
+    local cleanandextend,pos,seb,v;
+
+    # Initialise with some reasonable length:
+    seb := rec( vectors := EmptyPlist(QuoInt(Length(m),256)+16),
+                pivots := EmptyPlist(QuoInt(Length(m),256)+16) );
+
+    cleanandextend := function(v)
+      # cleans one vector v with seb, returns the relation
+      # as a list of indices or false a new basis vector
+      # has been added to extend seb.
+      local i,rel;
+      rel := EmptyPlist(Length(seb.vectors));
+      for i in [1..Length(seb.vectors)] do
+          pos := PositionSorted(v,seb.pivots[i]);
+          if pos <= Length(v) and v[pos] = seb.pivots[i] then
+              v := SYMMETRIC_DIFFERENCE_SETS(v,seb.vectors[i]);
+              Add(rel,i);
+          fi;
+      od;
+      if Length(v) > 0 then
+          Add(seb.vectors,v);
+          Add(seb.pivots,v[1]);
+          return false;
+      else
+          return rel;
+      fi;
+    end;
+
+    for v in m do
+        cleanandextend(v);
+    od;
+
+    return seb;
+  end );
 
