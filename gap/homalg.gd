@@ -139,12 +139,3 @@ DeclareOperation( "ByASmallerPresentation",
 DeclareOperation( "homalgLaTeX",
         [ IsObject ] ); 
 
-####################################
-#
-# synonyms:
-#
-####################################
-
-DeclareSynonymAttr( "Target",
-        Range );
-
