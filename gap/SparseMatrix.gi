@@ -190,14 +190,27 @@ InstallMethod( AddEntry,
     fi;
   end
 );
-
+  
+###############################  
+## View and Display methods: ##
+###############################
+  
+##
+InstallMethod( ViewObj,
+        [ IsSparseMatrix ],
+  function( M )
+    Print( "<a ", M!.nrows, " x ", M!.ncols, " sparse matrix over ", M!.ring, ">" );
+  end
+);
+  
+  
 ##
 InstallMethod( Display,
         [ IsSparseMatrix ],
   function( M )
     local str, ws, i, last, j;
     if M!.nrows = 0 or M!.ncols = 0 or Characteristic( M!.ring ) = 0 then
-        str := Concatenation( "<a ", String( M!.nrows ), " x ", String( M!.ncols ), " matrix over ", String( M!.ring ), ">\n" );
+        ViewObj( M );
     else
         str := "";
         ws := ListWithIdenticalEntries( Length( String( Int( - One( M!.ring ) ) ) ), ' ' );
@@ -209,12 +222,22 @@ InstallMethod( Display,
             od;
             str := Concatenation( str, Concatenation( ListWithIdenticalEntries( M!.ncols - last, Concatenation( ws, "." ) ) ), "\n" );
         od;
-    fi; 
-    Print( str );
-    return;
+        Print( str );    
+    fi;
   end
 );
+  
+##
+InstallMethod( PrintObj,
+        [ IsSparseMatrix ],
+  function( M )
+    Print( "SparseMatrix( ", M!.nrows, ", ", M!.ncols, ", ", M!.indices, ", ", M!.entries, ", ", M!.ring, " )" );
+  end
+);
+  
 
+###############################
+  
 ##
 InstallMethod( FindRing,
         [ IsList ],

@@ -95,7 +95,7 @@ InstallOtherMethod( AddEntry,
     return AddEntry( M, i, j, One( GF(2) ) );
   end
 );
-  
+
 ##
 InstallMethod( Display,
         [ IsSparseMatrixGF2Rep ],
@@ -120,6 +120,17 @@ InstallMethod( Display,
   end
 );
 
+##
+InstallMethod( PrintObj,
+        [ IsSparseMatrixGF2Rep ],
+  function( M )
+    Print( "SparseMatrix( ", M!.nrows, ", ", M!.ncols, ", ", M!.indices, ", ", M!.ring, " )" );
+  end
+);
+  
+  
+  
+  
 ##
 InstallMethod( \=,
         [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
