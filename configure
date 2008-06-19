@@ -1,17 +1,17 @@
 #!/bin/sh
 # configure script for Gauss package, Max Neunhoeffer
 # usage: ./configure gappath
-# this script creates a `Makefile' from `Makefile.in'
+# this script creates a `makefile' from `Makefile.in'
 if [ x"$1" = "x" ]; then GAPPATH=../..; echo "Using ../.. as default GAP path"; 
 else GAPPATH=$1; fi
-rm -f Makefile sedfile
-echo "#!/bin/sh" > Makefile
-cat $GAPPATH/sysinfo.gap >> Makefile
-echo "echo s/@GAPARCH@/\$GAParch/g >sedfile" >> Makefile
-chmod +x Makefile
-./Makefile
-rm -f Makefile
-echo GAPPATH=$GAPPATH >Makefile
-sed -f sedfile Makefile.in >>Makefile
+rm -f makefile sedfile
+echo "#!/bin/sh" > makefile
+cat $GAPPATH/sysinfo.gap >> makefile
+echo "echo s/@GAPARCH@/\$GAParch/g >sedfile" >> makefile
+chmod +x makefile
+./makefile
+rm -f makefile
+echo GAPPATH=$GAPPATH >makefile
+sed -f sedfile Makefile.in >>makefile
 rm -f sedfile
 

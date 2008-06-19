@@ -1,0 +1,47 @@
+  
+  
+                              [1XGAP 4 Package [5XGauss[0m[1X[0m
+  
+  
+                 [1XGauss --- Extended Gauss Functionality for GAP[0m
+  
+  
+                               Version 2008.03.25
+  
+  
+                                    May 2008
+  
+  
+                                 Simon Goertzen
+  
+  
+  
+  Simon Goertzen
+      Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[0m
+      Homepage: [7Xhttp://www.math.rwth-aachen.de/~simon[0m
+      Address:  Lehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[0m
+  © 2008 by Simon Goertzen
+  
+  This  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (Gauss)[0X
+  
+  1 Introduction
+    1.1 Philosophy
+    1.2 Overview over this manual
+  2 Installation of the [5XGauss[0m-Package
+  3 Examples
+  
+  
+  -------------------------------------------------------

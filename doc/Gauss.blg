@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
+The top-level auxiliary file: Gauss.aux
+The style file: alpha.bst
+Database file #1: Gauss.bib
+Warning--empty journal in BR
+Warning--empty year in BR
+You've used 1 entry,
+            2543 wiz_defined-function locations,
+            562 strings with 4767 characters,
+and the built_in function-call counts, 351 in all, are:
+= -- 31
+> -- 19
+< -- 0
++ -- 6
+- -- 6
+* -- 24
+:= -- 69
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 6
+chr.to.int$ -- 1
+cite$ -- 3
+duplicate$ -- 13
+empty$ -- 21
+format.name$ -- 7
+if$ -- 64
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 3
+pop$ -- 10
+preamble$ -- 1
+purify$ -- 7
+quote$ -- 0
+skip$ -- 11
+stack$ -- 0
+substring$ -- 7
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 2
+while$ -- 3
+width$ -- 2
+write$ -- 13
+(There were 2 warnings)
