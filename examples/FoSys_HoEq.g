@@ -3,30 +3,33 @@ LoadPackage( "RingsForHomalg" );
 Qt := HomalgFieldOfRationalsInDefaultCAS( ) * "t";
 A1 := RingOfDerivations( Qt, "D" );
 
-Rskl := HomalgMap( " \
-[ \
-[ D^3 + a * D^2 + b * D + c ] \
-] \
-", A1 );
+Rskl := HomalgMap( "[ D^3 + a * D^2 + b * D + c ]", 1, 1, A1 );
 Mskl := Cokernel( Rskl );
 
-Rsys := HomalgMap( " \
+Rsys := HomalgMatrix( " \
 [ \
-[	D,	-1,	 0	], \
-[	0,    	 D,	-1	], \
-[	c,	 b,	a+D	] \
+	D,	-1,	 0,\
+	0,    	 D,	-1,\
+	c,	 b,	a+D\
 ] \
-", A1 );
+", 3, 3, A1 );
+
+Rsys := HomalgMap( Rsys );
 Msys := Cokernel( Rsys );
 
-alpha := HomalgMap( " \
+alpha := HomalgMatrix( " \
 [ \
-[	1,	0,	0	] \
+	1,	0,	0	 \
 ] \
-", Mskl, Msys );
+", 1, 3, A1);
 
-delta := HomalgMap( " \
+alpha := HomalgMap( alpha, Mskl, Msys );
+
+delta := HomalgMatrix( " \
 [ \
-[	D	] \
+	D	 \
 ] \
-", Mskl );
+", 1, 1, A1 );
+
+delta := HomalgMap( delta, Mskl );
+
