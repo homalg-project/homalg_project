@@ -32,8 +32,27 @@ InstallValue( HOMALG_EXAMPLES,
 
 ##
 InstallGlobalFunction( ExamplesForHomalg,
-  function( arg )
+  function( arg )    
     
-    
-    
+end );
+
+## an easy way of calling the example script ExamplesForHomalg/examples/examples.g
+InstallMethod( HomalgExamples, "",
+        [ ],
+        function( )
+    local directory, separator;
+    if IsBound( PackageInfo("ExamplesForHomalg")[1] ) and IsBound( PackageInfo("ExamplesForHomalg")[1].InstallationPath ) then
+        directory := PackageInfo("ExamplesForHomalg")[1].InstallationPath;
+    else
+        directory := "./";
+    fi;
+    if IsBound( GAPInfo.UserHome ) then
+        separator := GAPInfo.UserHome{[1]};
+    else
+        separator := "/";
+    fi;
+    if Length( directory ) > 0 and directory{[Length( directory )]} <> separator then
+        directory := Concatenation( directory, separator );
+    fi;
+    Read( Concatenation( directory, "examples", separator, "examples.g" ) );
 end );
