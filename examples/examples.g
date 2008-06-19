@@ -74,24 +74,24 @@ if n = fail then
     n := 0;
 fi;
 
-if CAS = fail or not CAS in [1..5] then
+if CAS = fail or not CAS in [ 1 .. 5 ] then
     CAS := 1;
 fi;
 
 LoadPackage( "homalg" );
 
 if CAS = 1 then
-    R := HomalgRingOfIntegers(n);
+    R := HomalgRingOfIntegers( n );
 else
     LoadPackage( "RingsForHomalg" );
     if CAS = 2 then
-        R := HomalgRingOfIntegersInExternalGAP(n);
+        R := HomalgRingOfIntegersInExternalGAP( n );
     elif CAS = 3 then
-        R := HomalgRingOfIntegersInSage(n);
+        R := HomalgRingOfIntegersInSage( n );
     elif CAS = 4 then
-        R := HomalgRingOfIntegersInMAGMA(n);
+        R := HomalgRingOfIntegersInMAGMA( n );
     elif CAS = 5 then
-        R := HomalgRingOfIntegersInMaple(n);
+        R := HomalgRingOfIntegersInMaple( n );
     fi;
 fi;
 
@@ -148,7 +148,7 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
             H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
         od;
         for i in [ 1 .. Length( H ) ] do
-            Print( "Homology dimension at degree ", i - 1, ":  GF(2)^(1 x ", H[i], ")\n" );
+            Print( "Homology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
         od;
     fi;
 elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
@@ -173,7 +173,7 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
             H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
         od;
         for i in [ 1 .. Length( H ) ] do
-            Print( "Cohomology dimension at degree ", i - 1, ":  GF(2)^(1 x ", H[i], ")\n" );
+            Print( "Cohomology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
         od;
     fi;
 fi;

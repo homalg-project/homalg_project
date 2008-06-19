@@ -1,6 +1,7 @@
+# C4
+
 M := [ [1] ];
-G := Group( (1,2), (1,2,3) );
+G := Group( (1,2,3,4) );
 Isotropy := rec( 1 := G );
 mult := [];
-dim := 6;
-
+dim := 5;
