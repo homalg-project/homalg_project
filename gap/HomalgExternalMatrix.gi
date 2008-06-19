@@ -131,12 +131,10 @@ InstallGlobalFunction( ConvertHomalgMatrix,
 	
         if IsHomalgMatrix( M ) then
             
-            if IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = true then
-                return ConvertHomalgMatrixViaFile( M, R );
-            fi;
-            
             if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
                 M := GetSparseListOfHomalgMatrixAsString( M );
+            elif not ( IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = false ) then
+                return ConvertHomalgMatrixViaFile( M, R );
             else
                 M := GetListListOfHomalgMatrixAsString( M );
             fi;
@@ -166,11 +164,15 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         R := arg[4];
         
         if IsHomalgMatrix( M ) then
+            
             if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
                 M := GetSparseListOfHomalgMatrixAsString( M );
+            elif not ( IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = false ) then
+                return ConvertHomalgMatrixViaFile( M, R );
             else
                 M := GetListOfHomalgMatrixAsString( M );
             fi;
+            
         fi;
         
         if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
