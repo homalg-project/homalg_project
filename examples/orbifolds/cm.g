@@ -31,6 +31,14 @@ dim := 3;
 # GF(2)^(1 x 2)
 # GF(2)^(1 x 2)
 
+#1: 12 x 118 matrix with rank 11 and kernel dimension 1.
+#2: 118 x 568 matrix with rank 105 and kernel dimension 13.
+#3: 568 x 2965 matrix with rank 461 and kernel dimension 107.
+#4: 2965 x 17278 matrix with rank 2502 and kernel dimension 463.
+#5: 17278 x 105211 matrix with rank 14774 and kernel dimension 2504.
+#6: 105211 x 659548 matrix with rank 90435 and kernel dimension 14776.
+      
+
 #cohomology over Z/4Z:
 #---->>>>  Z/4Z^(1 x 1)
 #---->>>>  Z/4Z/< ZmodnZObj(2,4) > + Z/4Z^(1 x 1)
