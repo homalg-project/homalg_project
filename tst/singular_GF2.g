@@ -1,4 +1,3 @@
-LoadPackage( "homalg" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_IO.color_display := true;
 SetInfoLevel( InfoIO_ForHomalg, 7 );

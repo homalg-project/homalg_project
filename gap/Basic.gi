@@ -678,7 +678,7 @@ end );
 InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
-          nar_U, nar_V, nar_UI, nar_VI, m, n, finished, barg, mm, nn, Id_U, Id_V, zero, one,
+          nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished, barg, mm, nn, Id_U, Id_V, zero, one,
           clean_rows, unclean_rows, clean_columns, unclean_columns, eliminate_units, b, a, v, u, l;
     
     if not IsHomalgMatrix( arg[1] ) then
@@ -852,9 +852,12 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         
     elif not finished then
         
-        SetExtractHomalgMatrixToFile( M , true ); ## FIXME: find a way to copy matrices internally
-        M := HomalgMatrix( M, R );
-            
+        MM := ShallowCopy( M );
+        
+        if IsIdenticalObj( MM, M ) then
+            Error( "unable to get a real copy of the matrix\n" );
+        fi;
+        
         m := NrRows( M );
         n := NrColumns( M );
         

@@ -66,6 +66,69 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( ShallowCopy,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep ],
+        
+  function( M )
+    local R, RP, MM;
+    
+    R := HomalgRing( M );
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CopyMatrix) then
+        MM := RP!.CopyMatrix( M );
+        if not IsIdenticalObj( M, MM ) then
+            return MM;
+        fi;
+    fi;
+    
+    return HomalgMatrix( One( HomalgRing( M ) ) * Eval( M ), NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( ShallowCopy,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep ],
+        
+  function( M )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CopyMatrix) then
+        return RP!.CopyMatrix( M );
+    fi;
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ShallowCopy,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( M )
+    
+    return HomalgIdentityMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( ShallowCopy,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    return HomalgZeroMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+##
 InstallMethod( SetExtractHomalgMatrixAsSparse,
         "for homalg matrices",
         [ IsHomalgMatrix, IsBool ],
@@ -848,14 +911,20 @@ InstallGlobalFunction( HomalgMatrix,
     
     ## "copy" the matrix:
     if nargs = 1 and IsHomalgMatrix( arg[1] ) then
-        R := HomalgRing( arg[1] );
-        M := HomalgMatrix( R );
-        SetPreEval( M, arg[1] );
-        return M;
+        return HomalgMatrix( arg[1], HomalgRing( arg[1] ) );
     fi;
     
     if nargs > 1 and arg[1] <> [ ] then
-        if IsHomalgMatrix( arg[1] ) or ( IsString( arg[1] ) and arg[1] <> [ ] ) then
+        if IsHomalgMatrix( arg[1] ) and IsHomalgRing( arg[nargs] ) then
+            R := arg[nargs];
+            if IsIdenticalObj( HomalgRing( arg[1] ), R ) then
+                M := ShallowCopy( arg[1] );
+                if not IsIdenticalObj( M, arg[1] ) then
+                    return M;
+                fi;
+            fi;
+            return CallFuncList( ConvertHomalgMatrix, arg );
+        elif IsString( arg[1] ) then
             return CallFuncList( ConvertHomalgMatrix, arg );
         elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] ) then
             if Length( arg[1] ) > 0 and not IsList( arg[1][1] )
