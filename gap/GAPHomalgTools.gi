@@ -34,28 +34,35 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", HOMALG_IO.Pictograms.Minus );
                    
                  end,
-                 
+               
                DivideByUnit :=
                  function( a, u )
                    
                    return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
-                 
+               
                IsUnit :=
                  function( R, u )
                    
                    return homalgSendBlocking( [ "IsUnit(", R, u, ")" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "true";
                    
                  end,
-                 
+               
+               CopyMatrix :=
+                 function( C )
+                   
+                   return HomalgMatrix( homalgSendBlocking( [ "ShallowCopy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   
+                 end,
+               
                ZeroMatrix :=
                  function( C )
                    
                    return homalgSendBlocking( [ "HomalgZeroMatrix(", NrRows( C ), NrColumns( C ), HomalgRing( C ), ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
-             
+               
                IdentityMatrix :=
                  function( C )
                    

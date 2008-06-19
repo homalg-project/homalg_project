@@ -56,6 +56,13 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               CopyMatrix :=
+                 function( C )
+                   
+                   return HomalgMatrix( homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   
+                 end,
+               
                ZeroMatrix :=
                  function( C )
                    local R;
@@ -65,7 +72,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return homalgSendBlocking( [ "`homalg/ZeroMap`(", NrRows( C ), NrColumns( C ), R, ")" ], HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
-             
+               
                IdentityMatrix :=
                  function( C )
                    local R;

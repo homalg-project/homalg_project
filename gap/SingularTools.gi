@@ -71,13 +71,20 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               CopyMatrix :=
+                 function( C )
+                   
+                   return HomalgMatrix( homalgSendBlocking( [ C ], [ "matrix" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   
+                 end,
+               
                ZeroMatrix :=
                  function( C )
                    
                    return homalgSendBlocking( [ "0" ] , [ "matrix" ] , [ "[", NrColumns( C ), "][", NrRows( C ), "]" ], C, HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
-             
+               
                IdentityMatrix :=
                  function( C )
                    
