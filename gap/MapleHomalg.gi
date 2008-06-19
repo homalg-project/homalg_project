@@ -545,6 +545,77 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
+InstallMethod( RingOfDerivations,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInMapleRep, IsList ],
+        
+  function( R, indets )
+    local var, nr_var, der, nr_der, properties, stream, display_color,
+          ar, S, v;
+
+    #check whether base ring is polynomial and then extract needed data
+    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
+      var := IndeterminatesOfPolynomialRing( R );
+      nr_var := Length( var );
+    else
+      Error( "base ring is not a polynomial ring" );
+    fi;
+    
+    ##compute the new indeterminates (the derivatives) for the ring and save them in der
+    if IsString( indets ) and indets <> "" then
+        der := SplitString( indets, "," );
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        der := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    nr_der := Length( der );
+    
+    if not(nr_var=nr_der) then
+      Error( "number of indeterminates in base ring does not equal the number of given derivations" );
+    fi;
+    
+    if Intersection2( der , var ) <> [ ] then
+      Error( "the following indeterminates are already elements of the base ring: ", Intersection2( der , var ), "\n" );
+    fi;
+    
+    if not ForAll( var, HasName ) then
+      Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
+    fi;
+    
+    properties := [ ];
+    
+    stream := homalgStream( R );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    ar := JoinStringsWithSeparator( Concatenation( der, List( var, Name ) ) );
+    ar := Concatenation( "[ [ ", ar, " ], [ ], [ " );
+    ar := Concatenation( ar, JoinStringsWithSeparator( List( [ 1 .. nr_var ], i -> Concatenation( "weyl(", der[i], ",", Name( var[i] ), ")" ) ) ), " ] ]" );
+    
+    S := RingForHomalgInMapleUsingJanetOre( ar );
+    
+    der := List( der , a -> HomalgExternalRingElement( a, "Maple", S ) );
+    for v in der do
+        SetName( v, homalgPointer( v ) );
+    od;
+    
+    SetCoefficientsRing( S, CoefficientsRing( R ) );
+    SetCharacteristic( S, Characteristic( R ) );
+    SetIsCommutative( S, false );
+    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    
+    return S;
+    
+end );
+
+##
 InstallGlobalFunction( MapleHomalgOptions,
   function( arg )
     local nargs, R, s, ar;
