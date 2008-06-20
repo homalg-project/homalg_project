@@ -26,8 +26,6 @@ DeclareGlobalVariable( "HOMALG_RINGS" );
 
 #DeclareGlobalFunction( "RingForHomalg" );
 
-DeclareOperation( "HomalgRingOfIntegersInDefaultCAS",
-        [ IsInt ] );
+DeclareGlobalFunction( "HomalgRingOfIntegersInDefaultCAS" );
 
-DeclareOperation( "HomalgFieldOfRationalsInDefaultCAS",
-        [ ] );
+DeclareGlobalFunction( "HomalgFieldOfRationalsInDefaultCAS" );

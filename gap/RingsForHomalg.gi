@@ -17,7 +17,9 @@
 # a central place for configuration variables:
 
 InstallValue( HOMALG_RINGS,
-        rec( DefaultCAS := "Singular"
+        rec(
+            RingOfIntegersDefaultCAS := "Maple",
+            FieldOfRationalsDefaultCAS := "Singular",
            )
 );
 
@@ -27,25 +29,38 @@ InstallValue( HOMALG_RINGS,
 #
 ####################################
 
-InstallMethod( HomalgRingOfIntegersInDefaultCAS,
-        [ IsInt ],
-  function( int )
-    if not IsBound( HOMALG_RINGS.DefaultCAS ) or HOMALG_RINGS.DefaultCAS = "" then
-        return HomalgRingOfIntegers( int );
+InstallGlobalFunction( HomalgRingOfIntegersInDefaultCAS,
+  function( arg )
+    local nargs, integers;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsHomalgRing( arg[nargs] ) then
+        integers := ValueGlobal( Concatenation( "HomalgRingOfIntegersIn", homalgExternalCASystem( arg[nargs] ) ) );
+    elif not IsBound( HOMALG_RINGS.RingOfIntegersDefaultCAS ) or HOMALG_RINGS.RingOfIntegersDefaultCAS = "" then
+        integers := HomalgRingOfIntegers;
     else
-        return EvalString( Concatenation( "HomalgRingOfIntegersIn", HOMALG_RINGS.DefaultCAS, "(", String( int ), ")" ) );
+        integers := ValueGlobal( Concatenation( "HomalgRingOfIntegersIn", HOMALG_RINGS.RingOfIntegersDefaultCAS ) );
     fi;
-  end
-);
-  
-InstallMethod( HomalgFieldOfRationalsInDefaultCAS,
-        [ ],
-  function( )
-    if not IsBound( HOMALG_RINGS.DefaultCAS ) or HOMALG_RINGS.DefaultCAS = "" then
-        return HomalgFieldOfRationals( );
+    
+    return CallFuncList( integers, arg );
+    
+end );
+
+InstallGlobalFunction( HomalgFieldOfRationalsInDefaultCAS,
+  function( arg )
+    local nargs, rationals;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsHomalgRing( arg[nargs] ) then
+        rationals := ValueGlobal( Concatenation( "HomalgFieldOfRationalsIn", homalgExternalCASystem( arg[nargs] ) ) );
+    elif not IsBound( HOMALG_RINGS.FieldOfRationalsDefaultCAS ) or HOMALG_RINGS.FieldOfRationalsDefaultCAS = "" then
+        rationals := HomalgFieldOfRationals;
     else
-        return EvalString( Concatenation( "HomalgFieldOfRationalsIn", HOMALG_RINGS.DefaultCAS, "()" ) );
+        rationals := ValueGlobal(  Concatenation( "HomalgFieldOfRationalsIn", HOMALG_RINGS.FieldOfRationalsDefaultCAS ) );
     fi;
-  end
-);
-  
+    
+    return CallFuncList( rationals, arg );
+    
+end );
