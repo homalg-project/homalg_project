@@ -30,17 +30,11 @@ InstallValue( HOMALG_EXAMPLES,
 #
 ####################################
 
-##
-InstallGlobalFunction( ExamplesForHomalg,
-  function( arg )    
-    
-end );
-
 ## an easy way of calling the example script ExamplesForHomalg/examples/examples.g
-InstallMethod( HomalgExamples, "",
-        [ ],
-        function( )
+InstallGlobalFunction( HomalgExamples,
+  function( arg )
     local directory, separator;
+    
     if IsBound( PackageInfo("ExamplesForHomalg")[1] ) and IsBound( PackageInfo("ExamplesForHomalg")[1].InstallationPath ) then
         directory := PackageInfo("ExamplesForHomalg")[1].InstallationPath;
     else

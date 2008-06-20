@@ -20,14 +20,10 @@ Rsys := HomalgMap( " \
 ", B1 );
 Msys := Cokernel( Rsys );
 
-alpha := HomalgMap( " \
-[ \
+alpha := HomalgMap( "[\
 [ [[1,[]]]	,	0	,	0	] \
-] \
-", Mskl, Msys );
+]", Mskl, Msys );
 
-delta := HomalgMap( " \
-[ \
+delta := HomalgMap( "[\
 [	[[1,[x]]]	] \
-] \
-", Mskl );
+]", Mskl );

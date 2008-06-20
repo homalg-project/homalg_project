@@ -7,18 +7,12 @@ hm := Hom( l, k );
 
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( R ) * "x,y,z";
 
-K := HomalgMatrix( "\
-[
-x,y,0,\
-x^2,y^2,0,\
-x^3,y^3,z^3\
-]\
-", 3, 3, Qxyz );
+K := HomalgMatrix( "[ \
+  x,   y,   0, \
+x^2, y^2,   0, \
+x^3, y^3, z^3  \
+]", 3, 3, Qxyz );
 K := LeftPresentation( K );
-L := HomalgMatrix( "\
-[\
-x,y\
-]\
-", 1, 2, Qxyz );
+L := HomalgMatrix( "[ x, y ]", 1, 2, Qxyz );
 L := LeftPresentation( L );
 hom := Hom( L, K );
