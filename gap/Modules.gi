@@ -59,28 +59,6 @@ InstallMethod( \/,				## needed by _Functor_Kernel_OnObjects since SyzygiesGener
     
 end );
 
-##
-InstallMethod( FreeHullModule,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return CertainObject( Resolution( M ), 0 );
-    
-end );
-
-##
-InstallMethod( FreeHullMap,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return CokernelEpi( CertainMorphism( Resolution( M ), 1 ) );
-    
-end );
-
 ## ( cf. [BR, Subsection 3.2.1] )
 InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
@@ -113,7 +91,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         B := ReducedBasisOfModule( M, "COMPUTE_BASIS", "STORE_SYZYGIES" );
         j := 1;
         d_j := HomalgMap( B );
-        d := HomalgComplex( d_j, 1 );
+        d := HomalgComplex( d_j );
         d!.LastSyzygies := B!.SyzygiesGenerators;
         
         SetFreeResolution( M, d );
@@ -258,6 +236,96 @@ InstallMethod( Resolution,
     fi;
     
     return Resolution( M, q );
+    
+end );
+
+##
+InstallMethod( SyzygiesModuleEmb,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, q )
+    local d;
+    
+    if q < 0 then
+        Error( "a negative integer does not make sense\n" );
+    elif q = 0 then
+        ## this is not really an embedding, but spares us case distinctions at several places (e.g. Left/RightSatelliteOfFunctor)
+	return TheZeroMorphism( M );
+    elif q = 1 then
+        return KernelEmb( SyzygiesModuleEpi( M, 0 ) );
+    fi;
+    
+    d := Resolution( M, q - 1 );
+    
+    return KernelEmb( CertainMorphism( d, q - 1 ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, q )
+    local d;
+    
+    if q < 0 then
+        return 0 * M;
+    elif q = 0 then
+        return M;
+    fi;
+    
+    return Source( SyzygiesModuleEmb( M, q ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesModuleEpi,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, q )
+    local d, mu, epi;
+    
+    if q < 0 then
+        Error( "a netative integer does not make sense\n" );
+    elif q = 0 then
+        d := Resolution( M, 1 );
+        return CokernelEpi( CertainMorphism( d, 1 ) );
+    fi;
+    
+    d := Resolution( M, q );
+    
+    mu := SyzygiesModuleEmb( M , q );
+    
+    epi := PostDivide( CertainMorphism( d, q ), mu );
+    
+    SetIsEpimorphism( epi, true );
+    
+    return epi;
+    
+end );
+
+##
+InstallMethod( FreeHullMap,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return SyzygiesModuleEpi( M, 0 );
+    
+end );
+
+##
+InstallMethod( FreeHullModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return Source( FreeHullMap( M ) );
     
 end );
 

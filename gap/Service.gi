@@ -480,12 +480,16 @@ InstallMethod( SyzygiesGeneratorsOfRows,
   function( M )
     local R, RP, t, C, B, rank;
     
+    if IsBound(M!.SyzygiesGeneratorsOfRows) then
+        return M!.SyzygiesGeneratorsOfRows;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
-        
+    
     ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
@@ -502,6 +506,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
         
+        M!.SyzygiesGeneratorsOfRows := C;
+        
         return C;
         
     elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
@@ -517,6 +523,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
+        
+        M!.SyzygiesGeneratorsOfRows := C;
         
         return C;
         
@@ -541,6 +549,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     fi;
     
     ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
+    
+    M!.SyzygiesGeneratorsOfRows := C;
     
     return C;
     
@@ -624,12 +634,16 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
   function( M )
     local R, RP, t, C, B, rank;
     
+    if IsBound(M!.SyzygiesGeneratorsOfColumns) then
+        return M!.SyzygiesGeneratorsOfColumns;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
-        
+    
     ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
@@ -646,6 +660,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
+        M!.SyzygiesGeneratorsOfColumns := C;
+        
         return C;
         
     elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
@@ -661,6 +677,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        
+        M!.SyzygiesGeneratorsOfColumns := C;
         
         return C;
         
@@ -685,6 +703,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     fi;
     
     ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+    
+    M!.SyzygiesGeneratorsOfColumns := C;
     
     return C;
     

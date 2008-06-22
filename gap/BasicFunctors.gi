@@ -258,7 +258,7 @@ InstallMethod( DefectOfExactness,
         
   function( phi, psi )
     
-    return DefectOfExactness( AsComplex( phi, psi ) );
+    return DefectOfExactness( AsSequence( phi, psi ) );
     
 end );
 

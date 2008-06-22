@@ -43,7 +43,7 @@ DeclareProperty( "IsExactSequence",
 DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
         IsHomalgComplex );
 
-DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsComplex (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish
+DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish
         IsHomalgComplex );			##  between different methods for DefectOfExactness which all apply to complexes
 
 ####################################

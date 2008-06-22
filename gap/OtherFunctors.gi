@@ -241,44 +241,20 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOfMaps)
   function( chm_phi_beta1 )
-    local left, phi, beta1, phi_beta1, ApB_, p, B, emb, pb, epis, pair;
-    
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_phi_beta1 );
+    local phi, beta1, phi_beta1, ApB_, emb, pb, epis, pair;
     
     phi := LowestDegreeMorphismInChainMap( chm_phi_beta1 );
     beta1 := LowestDegreeMorphismInComplex( Range( chm_phi_beta1 ) );
     
-    if left then
-        phi_beta1 := UnionOfRows( MatrixOfMap( phi ), -MatrixOfMap( beta1 ) );
-    else
-        phi_beta1 := UnionOfColumns( MatrixOfMap( phi ), -MatrixOfMap( beta1 ) );
-    fi;
-    
-    ApB_ := Source( phi ) + Source( beta1 );
-    
-    ## get the position of the set of relations immediately after creating ApB_;
-    p := Genesis( ApB_ ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
-    
-    B := Range( phi );
-    
-    phi_beta1 := HomalgMap( phi_beta1, [ ApB_, p ], B );
-    
-    if HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( beta1 ) and IsMorphism( beta1 ) then
-        SetIsMorphism( phi_beta1, true );
-    fi;
+    phi_beta1 := StackMaps( phi, -beta1 );
     
     emb := KernelEmb( phi_beta1 );
     
     pb := Source( emb );
     
-    epis := DirectSumEpis( ApB_ );
+    epis := DirectSumEpis( Source( phi_beta1 ) );
     
-    if left then
-        pair := [ emb * epis[1], emb * epis[2] ];
-    else
-        pair := [ epis[1] * emb, epis[2] * emb ];
-    fi;
+    pair := [ PreCompose( emb, epis[1] ), PreCompose( emb, epis[2] ) ];
     
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
     SetPullbackPairOfMaps( pb, pair );
@@ -323,44 +299,20 @@ end );
 
 InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMaps)
   function( chm_alpha1_psi )
-    local left, psi, alpha1, alpha1_psi, ApB_, p, A_, epi, po, embs, pair;
-    
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_alpha1_psi );
+    local psi, alpha1, alpha1_psi, epi, po, embs, pair;
     
     psi := HighestDegreeMorphismInChainMap( chm_alpha1_psi );
     alpha1 := HighestDegreeMorphismInComplex( Source( chm_alpha1_psi ) );
     
-    if left then
-        alpha1_psi := UnionOfColumns( MatrixOfMap( alpha1 ), MatrixOfMap( psi ) );
-    else
-        alpha1_psi := UnionOfRows( MatrixOfMap( alpha1 ), MatrixOfMap( psi ) );
-    fi;
-    
-    ApB_ := Range( alpha1 ) + Range( psi );
-    
-    ## get the position of the set of relations immediately after creating ApB_;
-    p := Genesis( ApB_ ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
-    
-    A_ := Source( psi );
-    
-    alpha1_psi := HomalgMap( alpha1_psi, A_, [ ApB_, p ] );
-    
-    if HasIsMorphism( psi ) and IsMorphism( psi ) and
-       HasIsMorphism( alpha1 ) and IsMorphism( alpha1 ) then
-        SetIsMorphism( alpha1_psi, true );
-    fi;
+    alpha1_psi := AugmentMaps( alpha1, psi );
     
     epi := CokernelEpi( alpha1_psi );
     
     po := Range( epi );
     
-    embs := DirectSumEmbs( ApB_ );
+    embs := DirectSumEmbs( Range( alpha1_psi ) );
     
-    if left then
-        pair := [ embs[1] * epi, embs[2] * epi ];
-    else
-        pair := [ epi * embs[1], epi * embs[2] ];
-    fi;
+    pair := [ PreCompose( embs[1], epi ), PreCompose( embs[2], epi ) ];
     
     ## set the attribute PushoutPairOfMaps (specific for Pushout):
     SetPushoutPairOfMaps( po, pair );

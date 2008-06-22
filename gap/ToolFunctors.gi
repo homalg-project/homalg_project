@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToolFunctors.gi            homalg package               Mohamed Barakat
+##  ToolFunctors.gi             homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,10 +15,10 @@
 ####################################
 
 ##
-## AsComplex
+## AsSequence
 ##
 
-InstallGlobalFunction( _Functor_AsComplex_OnObjects,	### defines: AsComplex
+InstallGlobalFunction( _Functor_AsSequence_OnObjects,	### defines: AsSequence
   function( phi, psi )
     local R, pre, post, C;
     
@@ -38,7 +38,7 @@ InstallGlobalFunction( _Functor_AsComplex_OnObjects,	### defines: AsComplex
         Error( "the two morphisms must either be both left or both right morphisms\n" );
     fi;
     
-    C := HomalgComplex( post );
+    C := HomalgComplex( post, 0 );
     Add( C, pre );
     
     if HasIsMorphism( pre ) and IsMorphism( pre ) and
@@ -52,17 +52,17 @@ InstallGlobalFunction( _Functor_AsComplex_OnObjects,	### defines: AsComplex
     
 end );
 
-InstallValue( Functor_AsComplex,
+InstallValue( Functor_AsSequence,
         CreateHomalgFunctor(
-                [ "name", "AsComplex" ],
+                [ "name", "AsSequence" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgMap ] ] ],
                 [ "2", [ [ "covariant" ], [ IsHomalgMap ] ] ],
-                [ "OnObjects", _Functor_AsComplex_OnObjects ]
+                [ "OnObjects", _Functor_AsSequence_OnObjects ]
                 )
         );
 
-Functor_AsComplex!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_AsSequence!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -80,7 +80,7 @@ InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: As
     fi;
     
     S := HomalgComplex( Source( phi ), 0 );
-    T := HomalgComplex( beta1, 1 );
+    T := HomalgComplex( beta1 );
     
     c := HomalgChainMap( phi, S, T, 0 );
     
@@ -122,8 +122,8 @@ InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsC
         Error( "the rings of the two morphisms are not identical\n" );
     fi;
     
-    S := HomalgComplex( alpha1, 1 );
-    T := HomalgComplex( Range( psi ), 1 );
+    S := HomalgComplex( alpha1 );
+    T := HomalgComplex( Range( psi ) );
     
     c := HomalgChainMap( psi, S, T, 1 );
     
@@ -158,10 +158,10 @@ Functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
-## AsComplex( phi, psi )
+## AsSequence( phi, psi )
 ##
 
-InstallFunctorOnObjects( Functor_AsComplex );
+InstallFunctorOnObjects( Functor_AsSequence );
 
 ##
 ## AsChainMapForPullback( phi, beta1 )

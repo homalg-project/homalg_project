@@ -1,6 +1,6 @@
 #############################################################################
 ##
-## ToolFunctors.gd             homalg package               Mohamed Barakat
+## ToolFunctors.gd              homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,10 +14,10 @@
 #
 ####################################
 
-## AsComplex
-DeclareGlobalFunction( "_Functor_AsComplex_OnObjects" );
+## AsSequence
+DeclareGlobalFunction( "_Functor_AsSequence_OnObjects" );
 
-DeclareGlobalVariable( "Functor_AsComplex" );
+DeclareGlobalVariable( "Functor_AsSequence" );
 
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
@@ -37,7 +37,7 @@ DeclareGlobalVariable( "Functor_AsChainMapForPushout" );
 
 # basic operations:
 
-DeclareOperation( "AsComplex",
+DeclareOperation( "AsSequence",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsChainMapForPullback",

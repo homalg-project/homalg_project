@@ -688,6 +688,164 @@ InstallMethod( SyzygiesGenerators,
     
 end );
 
+##
+InstallMethod( StackMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi, psi )
+    local T, phi_psi, SpS, p;
+    
+    T := Range( phi );
+    
+    if not IsIdenticalObj( T, Range( psi ) ) then
+        Error( "the two morphisms must have identical target modules\n" );
+    fi;
+    
+    phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    SpS := Source( phi ) + Source( psi );
+    
+    ## get the position of the set of relations immediately after creating SpS;
+    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( StackMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi, psi )
+    local T, phi_psi, SpS, p;
+    
+    T := Range( phi );
+    
+    if not IsIdenticalObj( T, Range( psi ) ) then
+        Error( "the two morphisms must have identical target modules\n" );
+    fi;
+    
+    phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    SpS := Source( phi ) + Source( psi );
+    
+    ## get the position of the set of relations immediately after creating SpS;
+    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    T := Range( phi );
+    
+    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( StackMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi, psi )
+    local S, phi_psi, TpT, p;
+    
+    S := Range( phi );
+    
+    if not IsIdenticalObj( S, Source( psi ) ) then
+        Error( "the two morphisms must have identical source modules\n" );
+    fi;
+    
+    phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    TpT := Range( phi ) + Range( psi );
+    
+    ## get the position of the set of relations immediately after creating TpT;
+    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( StackMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi, psi )
+    local S, phi_psi, TpT, p;
+    
+    S := Range( phi );
+    
+    if not IsIdenticalObj( S, Source( psi ) ) then
+        Error( "the two morphisms must have identical source modules\n" );
+    fi;
+    
+    phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    TpT := Range( phi ) + Range( psi );
+    
+    ## get the position of the set of relations immediately after creating TpT;
+    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( PreCompose,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi1, phi2 )
+    
+    return phi1 * phi2;
+    
+end );
+
+##
+InstallMethod( PreCompose,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi1, phi2 )
+    
+    return phi2 * phi1;
+    
+end );
+
 #=======================================================================
 # PostDivide
 #

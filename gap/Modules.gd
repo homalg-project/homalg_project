@@ -27,12 +27,6 @@ DeclareOperation( "/",
 DeclareOperation( "/",
         [ IsHomalgRelations, IsHomalgModule ] );
 
-DeclareOperation( "FreeHullModule",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "FreeHullMap",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "Resolution",
         [ IsHomalgRelations, IsInt ] );
 
@@ -43,5 +37,20 @@ DeclareOperation( "Resolution",
         [ IsHomalgModule, IsInt ] );
 
 DeclareOperation( "Resolution",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "SyzygiesModuleEmb",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "SyzygiesModule",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "SyzygiesModuleEpi",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "FreeHullModule",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "FreeHullMap",
         [ IsHomalgModule ] );
 

@@ -2383,7 +2383,7 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     _Functor_OnObjects :=
       function( arg )
-        local functor_name, c, d, d_c_1, mu, ar, F_mu;
+        local functor_name, c, mu, ar, F_mu;
         
         functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -2393,19 +2393,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             Error( "the negative ", c, ". right satellite is not defined\n" );
         fi;
         
-        d := Resolution( arg[p + 1], c - 1 );
-        
-        if c = 0 then
-            mu := TheZeroMorphism( arg[p + 1] );
-        else
-            if c = 1 then
-                d_c_1 := CokernelEpi( CertainMorphism( d, 1 ) );
-            else
-                d_c_1 := CertainMorphism( d, c - 1 );
-            fi;
-            
-            mu := KernelEmb( d_c_1 );
-        fi;
+        mu := SyzygiesModuleEmb( arg[p + 1], c );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -2438,15 +2426,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             fi;
         else
 	    ## the following is not really mu but Source( mu ):
-            if c = 0 then
-                mu := arg[p + 1];
-            else
-                if c = 1 then
-                    mu := Kernel( CokernelEpi( CertainMorphism( d, 1 ) ) );
-                else
-                    mu := Kernel( CertainMorphism( d, c - 1 ) );
-                fi;
-            fi;
+            mu := SyzygiesModule( arg[p + 1], c );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
@@ -2519,7 +2499,7 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     _Functor_OnObjects :=
       function( arg )
-        local functor_name, c, d, d_c_1, mu, ar, F_mu;
+        local functor_name, c, mu, ar, F_mu;
         
         functor_name := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -2529,19 +2509,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             Error( "the negative ", c, ". left satellite is not defined\n" );
         fi;
         
-        d := Resolution( arg[p + 1], c - 1 );
-        
-        if c = 0 then
-            mu := TheZeroMorphism( arg[p + 1] );
-        else
-            if c = 1 then
-                d_c_1 := CokernelEpi( CertainMorphism( d, 1 ) );
-            else
-                d_c_1 := CertainMorphism( d, c - 1 );
-            fi;
-            
-            mu := KernelEmb( d_c_1 );
-        fi;
+        mu := SyzygiesModuleEmb( arg[p + 1], c );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -2574,15 +2542,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             fi;
         else
 	    ## the following is not really mu but Source( mu ):
-            if c = 0 then
-                mu := arg[p + 1];
-            else
-                if c = 1 then
-                    mu := Kernel( CokernelEpi( CertainMorphism( d, 1 ) ) );
-                else
-                    mu := Kernel( CertainMorphism( d, c - 1 ) );
-                fi;
-            fi;
+            mu := SyzygiesModule( arg[p + 1], c );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );

@@ -1006,7 +1006,7 @@ InstallGlobalFunction( homalgResetFiltersOfComplex,
             IsGradedObject,
             IsExactSequence,
             IsShortExactSequence,
-            IsComplexForDefectOfExactness ];	## the output of AsComplex (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish between different methods for DefectOfExactness which all apply to complexes
+            IsComplexForDefectOfExactness ];	## the output of AsSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish between different methods for DefectOfExactness which all apply to complexes
     fi;
     
     for property in HOMALG.PropertiesOfComplexes do
@@ -1050,6 +1050,8 @@ InstallGlobalFunction( HomalgComplex,
     if nargs > 1 and ( IsInt( arg[2] )
                or ( IsList( arg[2] ) and Length( arg[2] ) > 0 and ForAll( arg[2], IsInt ) ) ) then
         degrees := [ arg[2] ];
+    elif complex and IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+        degrees := [ 1 ];
     else
         degrees := [ 0 ];
     fi;
