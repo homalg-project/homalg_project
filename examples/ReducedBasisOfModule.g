@@ -19,5 +19,5 @@ rsyz:=SyzygiesGenerators( W );
 Y := Hom( Qxyz, W );
 iota := TorsionSubmoduleEmb( W );
 pi := TorsionFreeFactorEpi( W );
-C := HomalgComplex( pi );
+C := HomalgComplex( pi, 0 );
 Add( C, iota );
