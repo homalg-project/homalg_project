@@ -51,6 +51,6 @@ DeclareOperation( "SyzygiesModuleEpi",
 DeclareOperation( "FreeHullModule",
         [ IsHomalgModule ] );
 
-DeclareOperation( "FreeHullMap",
+DeclareOperation( "FreeHullEpi",
         [ IsHomalgModule ] );
 

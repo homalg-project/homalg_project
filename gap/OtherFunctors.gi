@@ -154,6 +154,11 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     SetIsSplitEpimorphism( piM, true );
     SetIsSplitEpimorphism( piN, true );
     
+    SetCokernelEpi( iotaM, piN );
+    SetCokernelEpi( iotaN, piM );
+    SetKernelEmb( piM, iotaN );
+    SetKernelEmb( piN, iotaM );
+    
     ## set the attributes DirectSumEmbs and DirectSumEpis (specific for DirectSum):
     SetDirectSumEmbs( sum, [ iotaM, iotaN ] );
     SetDirectSumEpis( sum, [ piM, piN ] );

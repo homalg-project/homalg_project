@@ -20,12 +20,10 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ring_rel, rel, Mrel, side, zz;
+    local R, ring_rel, rel, Mrel, side, zz;
     
     R := HomalgRing( M );
     
-    RP := homalgTable( R );
-  
     if not HasRingRelations( R ) then
         return BasisOfRowModule( M );
     fi;
@@ -50,12 +48,10 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ring_rel, rel, Mrel, side, zz;
+    local R, ring_rel, rel, Mrel, side, zz;
     
     R := HomalgRing( M );
     
-    RP := homalgTable( R );
-  
     if not HasRingRelations( R ) then
         return BasisOfColumnModule( M );
     fi;
@@ -80,12 +76,10 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, ring_rel, rel, Mrel, id, zz, TT, bas;
+    local R, ring_rel, rel, Mrel, id, zz, TT, bas;
     
     R := HomalgRing( M );
     
-    RP := homalgTable( R );
-  
     if not HasRingRelations( R ) then
         return BasisOfRowsCoeff( M, T );
     fi;
@@ -116,12 +110,10 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, ring_rel, rel, Mrel, id, zz, TT, bas;
+    local R, ring_rel, rel, Mrel, id, zz, TT, bas;
     
     R := HomalgRing( M );
     
-    RP := homalgTable( R );
-  
     if not HasRingRelations( R ) then
         return BasisOfColumnsCoeff( M, T );
     fi;
@@ -152,7 +144,7 @@ InstallMethod( DecideZero,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, ring_rel, rel, red;
+    local R, ring_rel, rel, red;
     
     if HasIsReducedModuloRingRelations( M ) and IsReducedModuloRingRelations( M ) then
         return M;
@@ -164,8 +156,6 @@ InstallMethod( DecideZero,
     
     R := HomalgRing( M );
     
-    RP := homalgTable( R );
-  
     if not HasRingRelations( R ) then
         
         SetIsReducedModuloRingRelations( M, true );
@@ -201,13 +191,7 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, S;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-  
-    #=====# begin of the core procedure #=====#
+    local S;
     
     S := SyzygiesGeneratorsOfRows( M );
     
@@ -221,13 +205,7 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, S;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-  
-    #=====# begin of the core procedure #=====#
+    local S;
     
     S := SyzygiesGeneratorsOfColumns( M );
     
@@ -241,13 +219,7 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP, S;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-  
-    #=====# begin of the core procedure #=====#
+    local S;
     
     S := SyzygiesGeneratorsOfRows( M1, M2 );
     
@@ -261,13 +233,7 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP, S;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-  
-    #=====# begin of the core procedure #=====#
+    local S;
     
     S := SyzygiesGeneratorsOfColumns( M1, M2 );
     
@@ -287,17 +253,9 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, RP, CA, IA, CB, NF;
+    local R, CA, IA, CB, NF;
     
     R := HomalgRing( B );
-    
-    RP := homalgTable( R );
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the first and the second matrix must have the same number of columns\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
     
     ## CA * A = IA
     CA := HomalgVoidMatrix( R );
@@ -330,17 +288,9 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, RP, CA, IA, CB, NF;
+    local R, CA, IA, CB, NF;
     
     R := HomalgRing( B );
-    
-    RP := homalgTable( R );
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the first and the second matrix must have the same number of rows\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
     
     ## A * CA = IA
     CA := HomalgVoidMatrix( R );
@@ -375,21 +325,9 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( B, A, L )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, RP, AL, CA, IAL, CB, NF, a;
+    local R, AL, CA, IAL, CB, NF, a;
     
     R := HomalgRing( B );
-    
-    RP := homalgTable( R );
-    
-    if NrColumns( A ) <> NrColumns( B ) then
-        Error( "the first and the second matrix must have the same number of columns\n" );
-    fi;
-    
-    if NrColumns( A ) <> NrGenerators( L ) then
-        Error( "the number of columns of the first matrix and the number of generators of the last argment do not coincide\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
     
     AL := UnionOfRows( A, MatrixOfRelations( BasisOfModule( L ) ) );
     
@@ -427,21 +365,9 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( A, B, L )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, RP, AL, CA, IAL, CB, NF, a;
+    local R, AL, CA, IAL, CB, NF, a;
     
     R := HomalgRing( B );
-    
-    RP := homalgTable( R );
-    
-    if NrRows( A ) <> NrRows( B ) then
-        Error( "the first and the second matrix must have the same number of rows\n" );
-    fi;
-    
-    if NrRows( A ) <> NrGenerators( L ) then
-        Error( "the number of rows of the first matrix and the number of generators of the last argment do not coincide\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
     
     AL := UnionOfColumns( A, MatrixOfRelations( BasisOfModule( L ) ) );
     
@@ -477,15 +403,11 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
         [ IsHomalgMatrix and HasEvalLeftInverse ],
         
   function( LI )
-    local R, RP, RI, Id, left_inv;
+    local R, RI, Id, left_inv;
     
     R := HomalgRing( LI );
     
-    RP := homalgTable( R );
-    
     RI := EvalLeftInverse( LI );
-    
-    #=====# begin of the core procedure #=====#
     
     Id := HomalgIdentityMatrix( NrColumns( RI ), R );
     
@@ -515,15 +437,11 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
         [ IsHomalgMatrix and HasEvalRightInverse ],
         
   function( RI )
-    local R, RP, LI, Id, right_inv;
+    local R, LI, Id, right_inv;
     
     R := HomalgRing( RI );
     
-    RP := homalgTable( R );
-    
     LI := EvalRightInverse( RI );
-    
-    #=====# begin of the core procedure #=====#
     
     Id := HomalgIdentityMatrix( NrRows( LI ), R );
     

@@ -1108,7 +1108,7 @@ InstallMethod( IsIdentityMatrix,
     
     #=====# begin of the core procedure #=====#
     
-    return M = One( M );
+    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
     
 end );
 

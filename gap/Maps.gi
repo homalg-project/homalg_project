@@ -45,8 +45,8 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     else
         j := 0;
         
-        d_S_j := CokernelEpi( CertainMorphism( d_S, j + 1 ) );
-        d_T_j := CokernelEpi( CertainMorphism( d_T, j + 1 ) );
+        d_S_j := FreeHullEpi( S );
+        d_T_j := FreeHullEpi( T );
         
         phi_j := CompleteImageSquare( d_S_j, phi, d_T_j );
         

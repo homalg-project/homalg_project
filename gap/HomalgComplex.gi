@@ -517,7 +517,7 @@ InstallMethod( Add,
         [ IsComplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( C, phi )
-    local degrees, l;
+    local degrees, l, psi;
     
     degrees := ObjectDegreesOfComplex( C );
     
@@ -563,7 +563,22 @@ InstallMethod( Add,
     
     ConvertToRangeRep( degrees );
     
-    homalgResetFiltersOfComplex( C );
+    if HasIsSequence( C ) and IsSequence( C ) and
+       HasIsMorphism( phi ) and IsMorphism( phi ) then
+        homalgResetFiltersOfComplex( C );
+        SetIsSequence( C, true );
+    else
+        homalgResetFiltersOfComplex( C );
+    fi;
+    
+    if Length( degrees ) = 3 then
+        psi := LowestDegreeMorphismInComplex( C );
+        if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) and
+           ( ( HasKernelEmb( psi ) and IsIdenticalObj( KernelEmb( psi ), phi ) ) or
+             ( HasCokernelEpi( phi ) and IsIdenticalObj( CokernelEpi( phi ), psi ) ) ) then
+            SetIsShortExactSequence( C, true );
+        fi;
+    fi;
     
     return C;
     
@@ -575,7 +590,7 @@ InstallMethod( Add,
         [ IsCocomplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( C, phi )
-    local degrees, l;
+    local degrees, l, psi;
     
     degrees := ObjectDegreesOfComplex( C );
     
@@ -619,7 +634,22 @@ InstallMethod( Add,
     
     ConvertToRangeRep( degrees );
     
-    homalgResetFiltersOfComplex( C );
+    if HasIsSequence( C ) and IsSequence( C ) and
+       HasIsMorphism( phi ) and IsMorphism( phi ) then
+        homalgResetFiltersOfComplex( C );
+        SetIsSequence( C, true );
+    else
+        homalgResetFiltersOfComplex( C );
+    fi;
+    
+    if Length( degrees ) = 3 then
+        psi := LowestDegreeMorphismInComplex( C );
+        if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) and
+           ( ( HasCokernelEpi( psi ) and IsIdenticalObj( CokernelEpi( psi ), phi ) ) or
+             ( HasKernelEmb( phi ) and IsIdenticalObj( KernelEmb( phi ), psi ) ) ) then
+            SetIsShortExactSequence( C, true );
+        fi;
+    fi;
     
     return C;
     
@@ -1132,7 +1162,9 @@ InstallMethod( ViewObj,
         [ IsHomalgComplex ],
         
   function( o )
-    local first_attribute, degrees, l;
+    local cpx, first_attribute, degrees, l;
+    
+    cpx := IsComplexOfFinitelyPresentedObjectsRep( o );
     
     first_attribute := false;
     
@@ -1144,7 +1176,11 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsShortExactSequence( o ) and IsShortExactSequence( o ) then
-        Print( " short exact sequence" );
+        if cpx then
+            Print( " short exact sequence" );
+        else
+            Print( " short exact cosequence" );
+        fi;
     elif HasIsExactSequence( o ) and IsExactSequence( o ) then
         if first_attribute then
             Print( " exact sequence" );
@@ -1153,13 +1189,13 @@ InstallMethod( ViewObj,
         fi;
     elif HasIsComplex( o ) then
         if IsComplex( o ) then
-            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
+            if cpx then
                 Print( " complex" );
             else
                 Print( " cocomplex" );
             fi;
         else
-            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
+            if cpx then
                 Print( " non-complex" );
             else
                 Print( " non-cocomplex" );
@@ -1167,20 +1203,20 @@ InstallMethod( ViewObj,
         fi;
     elif HasIsSequence( o ) then
         if IsSequence( o ) then
-            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
+            if cpx then
                 Print( " sequence" );
             else
                 Print( " co-sequence" );
             fi;
         else
-            if IsComplexOfFinitelyPresentedObjectsRep( o ) then
+            if cpx then
                 Print( " sequence of non-well-definded maps" );
             else
                 Print( " co-sequence of non-well-definded maps" );
             fi;
         fi;
     else
-        if IsComplexOfFinitelyPresentedObjectsRep( o ) then
+        if cpx then
             Print( " \"complex\"" );
         else
             Print( " \"cocomplex\"" );

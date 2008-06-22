@@ -712,7 +712,13 @@ InstallMethod( StackMaps,
     
     phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsMorphism( phi_psi, true );
     fi;
@@ -747,7 +753,13 @@ InstallMethod( StackMaps,
     
     phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsMorphism( phi_psi, true );
     fi;
@@ -757,7 +769,7 @@ InstallMethod( StackMaps,
 end );
 
 ##
-InstallMethod( StackMaps,
+InstallMethod( AugmentMaps,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
@@ -780,7 +792,13 @@ InstallMethod( StackMaps,
     
     phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsMorphism( phi_psi, true );
     fi;
@@ -790,7 +808,7 @@ InstallMethod( StackMaps,
 end );
 
 ##
-InstallMethod( StackMaps,
+InstallMethod( AugmentMaps,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
@@ -813,7 +831,13 @@ InstallMethod( StackMaps,
     
     phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsMorphism( phi_psi, true );
     fi;

@@ -296,3 +296,126 @@ InstallMethod( Cohomology,			### defines: Cohomology (CohomologyModules)
     
 end );
 
+## 0 <-- M <-(psi)- E <-(phi)- N <-- 0
+InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExactSeq)
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsInt ],
+        
+  function( C, _q )
+    local q, degrees, l, M, psi, E, phi, N, dM, dN, j, epsilonN, epsilonM,
+          epsilon, dj, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
+    
+    q := _q;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    l := Length( degrees );
+    
+    M := CertainObject( C, degrees[1] );
+    psi := CertainMorphism( C, degrees[2] );
+    E := CertainObject( C, degrees[2] );
+    phi := CertainMorphism( C, degrees[3] );
+    N := CertainObject( C, degrees[3] );
+    
+    dM := Resolution( M, q );
+    dN := Resolution( N, q );
+    
+    if q < 1 then
+        q := Maximum( List( [ dM, dN ], HighestDegreeInComplex ) );
+        dM := Resolution( M, q );
+        dN := Resolution( N, q );
+    fi;
+    
+    j := 0;
+    
+    epsilonM := FreeHullEpi( M );
+    epsilonN := FreeHullEpi( N );
+    
+    epsilonM := PostDivide( epsilonM, psi );
+    epsilonN := PreCompose( epsilonN, phi );
+    
+    epsilon := StackMaps( epsilonN, epsilonM );
+    
+    SetIsEpimorphism( epsilon, true );
+    
+    dj := epsilon;
+    
+    Pj := Source( dj );
+    
+    dE := HomalgComplex( Pj );
+    
+    psi := DirectSumEpis( Pj )[2];
+    phi := DirectSumEmbs( Pj )[1];
+    
+    d_psi := HomalgChainMap( psi, dE, dM );
+    d_phi := HomalgChainMap( phi, dN, dE );
+    
+    horse_shoe := HomalgComplex( d_psi, degrees[2] );
+    Add( horse_shoe, d_phi );
+    
+    while j < q do
+        j := j + 1;
+        
+        mu := KernelEmb( dj );
+        
+        psi := CompleteImageSquare( mu, psi, SyzygiesModuleEmb( M, j ) );
+        phi := CompleteImageSquare( SyzygiesModuleEmb( N, j ), phi, mu );
+        
+        epsilonM := SyzygiesModuleEpi( M, j );
+        epsilonN := SyzygiesModuleEpi( N, j );
+        
+        epsilonM := PostDivide( epsilonM, psi );
+        epsilonN := PreCompose( epsilonN, phi );
+        
+        epsilon_j := StackMaps( epsilonN, epsilonM );
+        
+        Pj := Source( epsilon_j );
+        
+        dj := PreCompose( epsilon_j, mu );
+        
+        if j = 1 then
+            SetCokernelEpi( dj, epsilon );
+        fi;
+        
+        Add( dE, dj );
+        
+        psi := DirectSumEpis( Pj )[2];
+        phi := DirectSumEmbs( Pj )[1];
+        
+        Add( d_psi, psi );
+        Add( d_phi, phi );
+        
+    od;
+    
+    SetIsAcyclic( dE, true );
+    SetIsExactSequence( horse_shoe, true );
+    
+    return horse_shoe;
+    
+end );
+
+InstallMethod( Resolution,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep ],
+        
+  function( C )
+    local R, q;
+    
+    R := HomalgRing( C );
+    
+    if IsBound( C!.MaximumNumberOfResolutionSteps )
+      and IsInt( C!.MaximumNumberOfResolutionSteps ) then
+        q := C!.MaximumNumberOfResolutionSteps;
+    elif IsBound( R!.MaximumNumberOfResolutionSteps )
+      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+        q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG.MaximumNumberOfResolutionSteps;
+    else
+        q := 0;
+    fi;
+    
+    return Resolution( C, q );
+    
+end );

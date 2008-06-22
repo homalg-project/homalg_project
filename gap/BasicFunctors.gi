@@ -58,6 +58,10 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## set the attribute CokernelEpi (specific for Cokernel):
     SetCokernelEpi( phi, epi );
     
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+        SetKernelEmb( epi, phi );
+    fi;
+    
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
@@ -113,6 +117,10 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     ## set the attribute KernelEmb (specific for Kernel):
     SetKernelEmb( psi, emb );
+    
+    if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetCokernelEpi( emb, psi );
+    fi;
     
     ## save the natural embedding in the kernel (thanks GAP):
     ker!.NaturalEmbedding := emb;

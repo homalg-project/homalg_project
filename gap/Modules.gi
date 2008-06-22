@@ -253,7 +253,7 @@ InstallMethod( SyzygiesModuleEmb,
         ## this is not really an embedding, but spares us case distinctions at several places (e.g. Left/RightSatelliteOfFunctor)
 	return TheZeroMorphism( M );
     elif q = 1 then
-        return KernelEmb( SyzygiesModuleEpi( M, 0 ) );
+        return KernelEmb( FreeHullEpi( M ) );
     fi;
     
     d := Resolution( M, q - 1 );
@@ -303,12 +303,15 @@ InstallMethod( SyzygiesModuleEpi,
     
     SetIsEpimorphism( epi, true );
     
+    ## this might simplify things later:
+    IsIdentityMatrix( MatrixOfMap( epi ) );
+    
     return epi;
     
 end );
 
 ##
-InstallMethod( FreeHullMap,
+InstallMethod( FreeHullEpi,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -325,7 +328,7 @@ InstallMethod( FreeHullModule,
         
   function( M )
     
-    return Source( FreeHullMap( M ) );
+    return Source( FreeHullEpi( M ) );
     
 end );
 
