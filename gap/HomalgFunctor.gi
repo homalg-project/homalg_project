@@ -78,7 +78,8 @@ InstallMethod( NameOfFunctor,
         functor_name := Functor!.name;
         ## for this to work you need to declare one instance of the funtor,
         ## although all methods will be installed using InstallOtherMethod!
-        if not IsOperation( ValueGlobal( functor_name ) ) and not IsFunction( ValueGlobal( functor_name ) ) then
+        if not IsOperation( ValueGlobal( functor_name ) ) and
+           not IsFunction( ValueGlobal( functor_name ) ) then
             Error( "the functor ", functor_name, " neither points to an operation nor a function\n" );
         fi;
     else
@@ -144,7 +145,7 @@ InstallMethod( IsAdditiveFunctor,
     
     if IsBound( Functor!.(pos) ) and Length( Functor!.( pos )[1] ) > 1 then
         prop := Functor!.( pos )[1][2];
-        if prop in [ "additive", "left exact", "right exact", "exact" ] then
+        if prop in [ "additive", "left exact", "right exact", "exact", "right adjoint", "left adjoint" ] then
             return true;
         fi;
     fi;
@@ -386,11 +387,11 @@ InstallMethod( InstallFunctorOnObjects,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local functor_name, number_of_arguments, natural_transformation,
+    local functor_operation, number_of_arguments, natural_transformation,
           natural_transformation1, natural_transformation2,
           filter_obj, filter0, filter1_obj, filter2_obj;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
         
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
@@ -416,7 +417,7 @@ InstallMethod( InstallFunctorOnObjects,
                     filter0 := IsList;
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg modules",
                         [ filter0, filter_obj ],
                   function( c, o )
@@ -444,7 +445,7 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_name( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this sets the attribute named "natural_transformation"
                         
                         return natural_transformation( o );	## not an infinite loop because of the side effect of the above line
                         
@@ -461,7 +462,7 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_name( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this sets the attribute named "natural_transformation"
                         
                         return natural_transformation1( o );	## not an infinite loop because of the side effect of the above line
                         
@@ -478,7 +479,7 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_name( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this sets the attribute named "natural_transformation"
                         
                         return natural_transformation2( o );	## not an infinite loop because of the side effect of the above line
                         
@@ -486,7 +487,7 @@ InstallMethod( InstallFunctorOnObjects,
                     
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg modules",
                         [ filter_obj ],
                   function( o )
@@ -540,7 +541,7 @@ InstallMethod( InstallFunctorOnObjects,
                 
                 if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg modules",
                             [ filter0, filter1_obj ],
                       function( c, o )
@@ -552,13 +553,13 @@ InstallMethod( InstallFunctorOnObjects,
                             R := HomalgRing( o );
                         fi;
                         
-                        return functor_name( c, o, R );
+                        return functor_operation( c, o, R );
                         
                     end );
                     
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg modules",
                         [ filter0, filter1_obj, filter2_obj ],
                   function( c, o1, o2 )
@@ -605,7 +606,7 @@ InstallMethod( InstallFunctorOnObjects,
                 
                 if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg modules",
                             [ filter1_obj ],
                       function( o )
@@ -617,13 +618,13 @@ InstallMethod( InstallFunctorOnObjects,
                             R := HomalgRing( o );
                         fi;
                         
-                        return functor_name( o, R );
+                        return functor_operation( o, R );
                         
                     end );
                     
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg modules",
                         [ filter1_obj, filter2_obj ],
                   function( o1, o2 )
@@ -684,10 +685,10 @@ InstallMethod( InstallFunctorOnMorphisms,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local functor_name, number_of_arguments, filter_mor,
+    local functor_operation, number_of_arguments, filter_mor,
           filter0, filter1_obj, filter1_mor, filter2_obj, filter2_mor;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
         
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
@@ -713,7 +714,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     filter0 := IsList;
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg morphisms",
                         [ filter0, filter_mor ],
                   function( c, m )
@@ -724,7 +725,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                 
             else
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg morphisms",
                         [ filter_mor ],
                   function( m )
@@ -774,7 +775,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                 
                 if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg morphisms",
                             [ filter0, filter1_mor ],
                       function( c, m )
@@ -782,13 +783,13 @@ InstallMethod( InstallFunctorOnMorphisms,
                         
                         R := HomalgRing( m );
                         
-                        return functor_name( c, m, R );
+                        return functor_operation( c, m, R );
                         
                     end );
                     
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg morphisms",
                         [ filter0, filter1_mor, filter2_obj ],
                   function( c, m, o )
@@ -811,7 +812,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                 end );
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg morphisms",
                         [ filter0, filter1_obj, filter2_mor ],
                   function( c, o, m )
@@ -837,14 +838,14 @@ InstallMethod( InstallFunctorOnMorphisms,
                 if IsCovariantFunctor( Functor, 1 ) = true and
                    IsCovariantFunctor( Functor, 2 ) = true then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg morphisms",
                             [ filter0, filter1_mor, filter2_mor ],
                       function( c, m1, m2 )
                         local Fm1, Fm2;
                         
-                        Fm1 := functor_name( c, m1, Source( m2 ) );
-                        Fm2 := functor_name( c, Range( m1 ), m2 );
+                        Fm1 := functor_operation( c, m1, Source( m2 ) );
+                        Fm2 := functor_operation( c, Range( m1 ), m2 );
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
                             return Fm1 * Fm2;
@@ -857,14 +858,14 @@ InstallMethod( InstallFunctorOnMorphisms,
                 elif IsCovariantFunctor( Functor, 1 ) = false and
                   IsCovariantFunctor( Functor, 2 ) = true then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg morphisms",
                             [ filter0, filter1_mor, filter2_mor ],
                       function( c, m1, m2 )
                         local Fm1, Fm2;
                         
-                        Fm1 := functor_name( c, m1, Source( m2 ) );
-                        Fm2 := functor_name( c, Source( m1 ), m2 );
+                        Fm1 := functor_operation( c, m1, Source( m2 ) );
+                        Fm2 := functor_operation( c, Source( m1 ), m2 );
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
                             return Fm1 * Fm2;
@@ -880,7 +881,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                 
                 if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg morphisms",
                             [ filter1_mor ],
                       function( m )
@@ -888,13 +889,13 @@ InstallMethod( InstallFunctorOnMorphisms,
                         
                         R := HomalgRing( m );
                         
-                        return functor_name( m, R );
+                        return functor_operation( m, R );
                         
                     end );
                     
                 fi;
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg morphisms",
                         [ filter1_mor, filter2_obj ],
                   function( m, o )
@@ -917,7 +918,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                 end );
                 
-                InstallOtherMethod( functor_name,
+                InstallOtherMethod( functor_operation,
                         "for homalg morphisms",
                         [ filter1_obj, filter2_mor ],
                   function( o, m )
@@ -943,14 +944,14 @@ InstallMethod( InstallFunctorOnMorphisms,
                 if IsCovariantFunctor( Functor, 1 ) = true and
                    IsCovariantFunctor( Functor, 2 ) = true then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg morphisms",
                             [ filter1_mor, filter2_mor ],
                       function( m1, m2 )
                         local Fm1, Fm2;
                         
-                        Fm1 := functor_name( m1, Source( m2 ) );
-                        Fm2 := functor_name( Range( m1 ), m2 );
+                        Fm1 := functor_operation( m1, Source( m2 ) );
+                        Fm2 := functor_operation( Range( m1 ), m2 );
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
                             return Fm1 * Fm2;
@@ -963,14 +964,14 @@ InstallMethod( InstallFunctorOnMorphisms,
                 elif IsCovariantFunctor( Functor, 1 ) = false and
                   IsCovariantFunctor( Functor, 2 ) = true then
                     
-                    InstallOtherMethod( functor_name,
+                    InstallOtherMethod( functor_operation,
                             "for homalg morphisms",
                             [ filter1_mor, filter2_mor ],
                       function( m1, m2 )
                         local Fm1, Fm2;
                         
-                        Fm1 := functor_name( m1, Source( m2 ) );
-                        Fm2 := functor_name( Source( m1 ), m2 );
+                        Fm1 := functor_operation( m1, Source( m2 ) );
+                        Fm2 := functor_operation( Source( m1 ), m2 );
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( Fm1 ) then
                             return Fm1 * Fm2;
@@ -996,9 +997,9 @@ end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
   function( Functor, filter_cpx, complex_or_cocomplex, i )
-    local filter0, functor_name;
+    local filter0, functor_operation;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -1010,7 +1011,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
         
         if IsAdditiveFunctor( Functor ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter_cpx ],
               function( q, c )
@@ -1021,12 +1022,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( q, CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( q, morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( q, m ) );
+                        Add( Fc, functor_operation( q, m ) );
                     od;
                 fi;
                 
@@ -1044,7 +1045,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter_cpx ],
               function( q, c )
@@ -1055,12 +1056,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( q, CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( q, morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( q, m ) );
+                        Add( Fc, functor_operation( q, m ) );
                     od;
                 fi;
                 
@@ -1074,7 +1075,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
         
         if IsAdditiveFunctor( Functor ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter_cpx ],
               function( c )
@@ -1085,12 +1086,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( m ) );
+                        Add( Fc, functor_operation( m ) );
                     od;
                 fi;
                 
@@ -1108,7 +1109,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter_cpx ],
               function( c )
@@ -1119,12 +1120,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( m ) );
+                        Add( Fc, functor_operation( m ) );
                     od;
                 fi;
                 
@@ -1140,9 +1141,9 @@ end );
 
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter2_obj, filter1_cpx, complex_or_cocomplex, i )
-    local filter0, functor_name;
+    local filter0, functor_operation;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -1154,7 +1155,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
         
         if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter1_cpx ],
               function( q, c )
@@ -1162,7 +1163,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 R := HomalgRing( c );
                 
-                return functor_name( q, c, R );
+                return functor_operation( q, c, R );
                 
             end );
             
@@ -1170,7 +1171,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
         
         if IsAdditiveFunctor( Functor, 1 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter1_cpx, filter2_obj ],
               function( q, c, o )
@@ -1194,12 +1195,12 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( q, CertainObject( c, degrees[1] ), obj ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1], obj ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( q, morphisms[1], obj ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( q, m, obj ) );
+                        Add( Fc, functor_operation( q, m, obj ) );
                     od;
                 fi;
                 
@@ -1217,7 +1218,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter1_cpx, filter2_obj ],
               function( q, c, o )
@@ -1241,12 +1242,12 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( q, CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( q, CertainObject( c, degrees[1] ), obj ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( q, morphisms[1], obj ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( q, morphisms[1], obj ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( q, m, obj ) );
+                        Add( Fc, functor_operation( q, m, obj ) );
                     od;
                 fi;
                 
@@ -1260,7 +1261,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
         
         if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter1_cpx ],
               function( c )
@@ -1268,7 +1269,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 R := HomalgRing( c );
                 
-                return functor_name( c, R );
+                return functor_operation( c, R );
                 
             end );
             
@@ -1276,7 +1277,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
         
         if IsAdditiveFunctor( Functor, 1 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter1_cpx, filter2_obj ],
               function( c, o )
@@ -1300,12 +1301,12 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( CertainObject( c, degrees[1] ), obj ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( morphisms[1], obj ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( m, obj ) );
+                        Add( Fc, functor_operation( m, obj ) );
                     od;
                 fi;
                 
@@ -1323,7 +1324,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter1_cpx, filter2_obj ],
               function( c, o )
@@ -1347,12 +1348,12 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( CertainObject( c, degrees[1] ), obj ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( CertainObject( c, degrees[1] ), obj ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( morphisms[1], obj ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( morphisms[1], obj ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( m, obj ) );
+                        Add( Fc, functor_operation( m, obj ) );
                     od;
                 fi;
                 
@@ -1368,9 +1369,9 @@ end );
 
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter1_obj, filter2_cpx, complex_or_cocomplex, i )
-    local filter0, functor_name;
+    local filter0, functor_operation;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -1382,7 +1383,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
         
         if IsAdditiveFunctor( Functor, 2 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter1_obj, filter2_cpx ],
               function( q, o, c )
@@ -1406,12 +1407,12 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( q, obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( q, obj, CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( q, obj, morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( q, obj, morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( q, obj, m ) );
+                        Add( Fc, functor_operation( q, obj, m ) );
                     od;
                 fi;
                 
@@ -1429,7 +1430,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter0, filter1_obj, filter2_cpx ],
               function( q, o, c )
@@ -1453,12 +1454,12 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( q, obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( q, obj, CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( q, obj, morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( q, obj, morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( q, obj, m ) );
+                        Add( Fc, functor_operation( q, obj, m ) );
                     od;
                 fi;
                 
@@ -1472,7 +1473,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
         
         if IsAdditiveFunctor( Functor, 2 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter1_obj, filter2_cpx ],
               function( o, c )
@@ -1496,12 +1497,12 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( obj, morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( obj, m ) );
+                        Add( Fc, functor_operation( obj, m ) );
                     od;
                 fi;
                 
@@ -1519,7 +1520,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg complexes",
                     [ filter1_obj, filter2_cpx ],
               function( o, c )
@@ -1543,12 +1544,12 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 l := Length( degrees );
                 
                 if l = 1 then
-                    Fc := complex_or_cocomplex( functor_name( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
+                    Fc := complex_or_cocomplex( functor_operation( obj, CertainObject( c, degrees[1] ) ), degrees[1] );
                 else
                     morphisms := MorphismsOfComplex( c );
-                    Fc := complex_or_cocomplex( functor_name( obj, morphisms[1] ), degrees[i] );
+                    Fc := complex_or_cocomplex( functor_operation( obj, morphisms[1] ), degrees[i] );
                     for m in morphisms{[ 2 .. l - 1 ]} do
-                        Add( Fc, functor_name( obj, m ) );
+                        Add( Fc, functor_operation( obj, m ) );
                     od;
                 fi;
                 
@@ -1669,9 +1670,9 @@ end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
   function( Functor, filter_chm, source_target, i )
-    local filter0, functor_name;
+    local filter0, functor_operation;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -1683,7 +1684,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
         
         if IsAdditiveFunctor( Functor ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter_chm ],
               function( q, c )
@@ -1695,15 +1696,15 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
                 
                 l := Length( degrees );
                 
-                source := functor_name( q, source_target[1]( c ) );
-                target := functor_name( q, source_target[2]( c ) );
+                source := functor_operation( q, source_target[1]( c ) );
+                target := functor_operation( q, source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( q, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( q, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( q, m ) );
+                    Add( Fc, functor_operation( q, m ) );
                 od;
                 
                 if HasIsMorphism( c ) and IsMorphism( c ) then
@@ -1716,7 +1717,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter_chm ],
               function( q, c )
@@ -1728,15 +1729,15 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
                 
                 l := Length( degrees );
                 
-                source := functor_name( q, source_target[1]( c ) );
-                target := functor_name( q, source_target[2]( c ) );
+                source := functor_operation( q, source_target[1]( c ) );
+                target := functor_operation( q, source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( q, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( q, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( q, m ) );
+                    Add( Fc, functor_operation( q, m ) );
                 od;
                 
                 return Fc;
@@ -1749,7 +1750,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
         
         if IsAdditiveFunctor( Functor ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter_chm ],
               function( c )
@@ -1761,15 +1762,15 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
                 
                 l := Length( degrees );
                 
-                source := functor_name( source_target[1]( c ) );
-                target := functor_name( source_target[2]( c ) );
+                source := functor_operation( source_target[1]( c ) );
+                target := functor_operation( source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( m ) );
+                    Add( Fc, functor_operation( m ) );
                 od;
                 
                 if HasIsMorphism( c ) and IsMorphism( c ) then
@@ -1782,7 +1783,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter_chm ],
               function( c )
@@ -1794,15 +1795,15 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
                 
                 l := Length( degrees );
                 
-                source := functor_name( source_target[1]( c ) );
-                target := functor_name( source_target[2]( c ) );
+                source := functor_operation( source_target[1]( c ) );
+                target := functor_operation( source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( m ) );
+                    Add( Fc, functor_operation( m ) );
                 od;
                 
                 return Fc;
@@ -1817,9 +1818,9 @@ end );
 
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter2_obj, filter1_chm, source_target, i )
-    local filter0, functor_name;
+    local filter0, functor_operation;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -1831,7 +1832,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
         
         if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter1_chm ],
               function( q, c )
@@ -1839,7 +1840,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 R := HomalgRing( c );
                 
-                return functor_name( q, c, R );
+                return functor_operation( q, c, R );
                 
             end );
             
@@ -1847,7 +1848,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
         
         if IsAdditiveFunctor( Functor, 1 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter1_chm, filter2_obj ],
               function( q, c, o )
@@ -1872,15 +1873,15 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 l := Length( degrees );
                 
-                source := functor_name( q, source_target[1]( c ), obj );
-                target := functor_name( q, source_target[2]( c ), obj );
+                source := functor_operation( q, source_target[1]( c ), obj );
+                target := functor_operation( q, source_target[2]( c ), obj );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( q, morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( q, morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( q, m, obj ) );
+                    Add( Fc, functor_operation( q, m, obj ) );
                 od;
                 
                 if HasIsMorphism( c ) and IsMorphism( c ) then
@@ -1893,7 +1894,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter1_chm, filter2_obj ],
               function( q, c, o )
@@ -1918,15 +1919,15 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 l := Length( degrees );
                 
-                source := functor_name( q, source_target[1]( c ), obj );
-                target := functor_name( q, source_target[2]( c ), obj );
+                source := functor_operation( q, source_target[1]( c ), obj );
+                target := functor_operation( q, source_target[2]( c ), obj );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( q, morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( q, morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( q, m, obj ) );
+                    Add( Fc, functor_operation( q, m, obj ) );
                 od;
                 
                 return Fc;
@@ -1939,7 +1940,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
         
         if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter1_chm ],
               function( c )
@@ -1947,7 +1948,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 R := HomalgRing( c );
                 
-                return functor_name( c, R );
+                return functor_operation( c, R );
                 
             end );
             
@@ -1955,7 +1956,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
         
         if IsAdditiveFunctor( Functor, 1 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter1_chm, filter2_obj ],
               function( c, o )
@@ -1980,15 +1981,15 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 l := Length( degrees );
                 
-                source := functor_name( source_target[1]( c ), obj );
-                target := functor_name( source_target[2]( c ), obj );
+                source := functor_operation( source_target[1]( c ), obj );
+                target := functor_operation( source_target[2]( c ), obj );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( m, obj ) );
+                    Add( Fc, functor_operation( m, obj ) );
                 od;
                 
                 if HasIsMorphism( c ) and IsMorphism( c ) then
@@ -2001,7 +2002,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter1_chm, filter2_obj ],
               function( c, o )
@@ -2026,15 +2027,15 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 l := Length( degrees );
                 
-                source := functor_name( source_target[1]( c ), obj );
-                target := functor_name( source_target[2]( c ), obj );
+                source := functor_operation( source_target[1]( c ), obj );
+                target := functor_operation( source_target[2]( c ), obj );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( morphisms[1], obj ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( m, obj ) );
+                    Add( Fc, functor_operation( m, obj ) );
                 od;
                 
                 return Fc;
@@ -2049,9 +2050,9 @@ end );
 
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter1_obj, filter2_chm, source_target, i )
-    local filter0, functor_name;
+    local filter0, functor_operation;
     
-    functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -2063,7 +2064,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
         
         if IsAdditiveFunctor( Functor, 2 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter1_obj, filter2_chm ],
               function( q, o, c )
@@ -2088,15 +2089,15 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 l := Length( degrees );
                 
-                source := functor_name( q, obj, source_target[1]( c ) );
-                target := functor_name( q, obj, source_target[2]( c ) );
+                source := functor_operation( q, obj, source_target[1]( c ) );
+                target := functor_operation( q, obj, source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( q, obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( q, obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( q, obj, m ) );
+                    Add( Fc, functor_operation( q, obj, m ) );
                 od;
                 
                 if HasIsMorphism( c ) and IsMorphism( c ) then
@@ -2109,7 +2110,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter0, filter1_obj, filter2_chm ],
               function( q, o, c )
@@ -2134,15 +2135,15 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 l := Length( degrees );
                 
-                source := functor_name( q, obj, source_target[1]( c ) );
-                target := functor_name( q, obj, source_target[2]( c ) );
+                source := functor_operation( q, obj, source_target[1]( c ) );
+                target := functor_operation( q, obj, source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( q, obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( q, obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( q, obj, m ) );
+                    Add( Fc, functor_operation( q, obj, m ) );
                 od;
                 
                 return Fc;
@@ -2155,7 +2156,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
         
         if IsAdditiveFunctor( Functor, 2 ) = true then
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter1_obj, filter2_chm ],
               function( o, c )
@@ -2180,15 +2181,15 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 l := Length( degrees );
                 
-                source := functor_name( obj, source_target[1]( c ) );
-                target := functor_name( obj, source_target[2]( c ) );
+                source := functor_operation( obj, source_target[1]( c ) );
+                target := functor_operation( obj, source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( obj, m ) );
+                    Add( Fc, functor_operation( obj, m ) );
                 od;
                 
                 if HasIsMorphism( c ) and IsMorphism( c ) then
@@ -2201,7 +2202,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
             
         else
             
-            InstallOtherMethod( functor_name,
+            InstallOtherMethod( functor_operation,
                     "for homalg chain maps",
                     [ filter1_obj, filter2_chm ],
               function( o, c )
@@ -2226,15 +2227,15 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 l := Length( degrees );
                 
-                source := functor_name( obj, source_target[1]( c ) );
-                target := functor_name( obj, source_target[2]( c ) );
+                source := functor_operation( obj, source_target[1]( c ) );
+                target := functor_operation( obj, source_target[2]( c ) );
                 
                 morphisms := MorphismsOfChainMap( c );
                 
-                Fc := HomalgChainMap( functor_name( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
+                Fc := HomalgChainMap( functor_operation( obj, morphisms[1] ), source, target, [ degrees[1] + i * d, (-1)^i * d ] );
                 
                 for m in morphisms{[ 2 .. l ]} do
-                    Add( Fc, functor_name( obj, m ) );
+                    Add( Fc, functor_operation( obj, m ) );
                 od;
                 
                 return Fc;
@@ -2375,17 +2376,20 @@ InstallMethod( RightSatelliteOfCofunctor,
         [ IsHomalgFunctorRep, IsPosInt, IsString ],
         
   function( Functor, p, name )
-    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF, fname;
+    local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
+          m, z, data, i, SF, fname;
     
     if IsCovariantFunctor( Functor, p ) <> false then
         Error( "the functor does not seem to be contravariant in its ", p, ". argument\n" );
     fi;
     
+    functor_name :=  NameOfFunctor( Functor );
+    
+    functor_operation := ValueGlobal( functor_name );
+    
     _Functor_OnObjects :=
       function( arg )
-        local functor_name, c, mu, ar, F_mu;
-        
-        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        local c, mu, ar, F_mu, sat;
         
         c := arg[1];
         
@@ -2397,17 +2401,19 @@ InstallMethod( RightSatelliteOfCofunctor,
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        F_mu := CallFuncList( functor_name, ar );
+        F_mu := CallFuncList( functor_operation, ar );
         
-        return Cokernel( F_mu );
+        sat := Cokernel( F_mu );
+        
+        SetAsCokernel( sat, F_mu );
+        
+        return sat;
         
     end;
     
     _Functor_OnMorphisms :=
       function( arg )
-        local functor_name, c, d, d_c_1, mu, ar;
-        
-        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        local c, d, d_c_1, mu, ar;
         
         c := arg[1];
         
@@ -2425,13 +2431,13 @@ InstallMethod( RightSatelliteOfCofunctor,
                 mu := Kernel( d_c_1 );
             fi;
         else
-	    ## the following is not really mu but Source( mu ):
+            ## the following is not really mu but Source( mu ):
             mu := SyzygiesModule( arg[p + 1], c );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        return CallFuncList( functor_name, ar );
+        return CallFuncList( functor_operation, ar );
         
     end;
     
@@ -2447,12 +2453,24 @@ InstallMethod( RightSatelliteOfCofunctor,
         z := [ IsInt ];
     fi;
     
-    data := List( [ 1 .. m ], i -> [ String( i ), Functor!.( i ) ] );
+    data := List( [ 1 .. m ], i -> [ String( i ), StructuralCopy( Functor!.(i) ) ] );
+    
+    for i in [ 1 .. m ] do
+        if IsBound( data[i][2] ) and IsBound( data[i][2][1] ) and IsBound( data[i][2][1][2] ) and
+           data[i][2][1][2] in [ "left exact", "right exact", "right adjoint", "left adjoint" ] then
+            data[i][2][1][2] := "additive";
+            if i = p or functor_name = "Hom" then
+                Add( data[i][2][1], "delta-functor", 3 );
+                Add( data[i][2][1], "effaceable", 4 );
+            fi;
+        fi;
+    od;
     
     data := Concatenation(
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
+                    [ [ "Genesis", [ "RightSatelliteOfCofunctor", Functor, p ] ] ],
                     [ [ "OnObjects", _Functor_OnObjects ] ],
                     [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     
@@ -2491,17 +2509,22 @@ InstallMethod( LeftSatelliteOfFunctor,
         [ IsHomalgFunctorRep, IsPosInt, IsString ],
         
   function( Functor, p, name )
-    local _Functor_OnObjects, _Functor_OnMorphisms, m, z, data, SF, fname;
+    local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
+          m, z, data, i, SF, fname;
     
     if IsCovariantFunctor( Functor, p ) <> true then
         Error( "the functor does not seem to be covariant in its ", p, ". argument\n" );
     fi;
     
+    functor_name :=  NameOfFunctor( Functor );
+    
+    functor_operation := ValueGlobal( functor_name );
+    
     _Functor_OnObjects :=
       function( arg )
-        local functor_name, c, mu, ar, F_mu;
+        local functor_operation, c, mu, ar, F_mu, sat;
         
-        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
         
         c := arg[1];
         
@@ -2513,17 +2536,21 @@ InstallMethod( LeftSatelliteOfFunctor,
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        F_mu := CallFuncList( functor_name, ar );
+        F_mu := CallFuncList( functor_operation, ar );
         
-        return Kernel( F_mu );
+        sat := Kernel( F_mu );
+        
+        SetAsKernel( sat, F_mu );
+        
+        return sat;
         
     end;
     
     _Functor_OnMorphisms :=
       function( arg )
-        local functor_name, c, d, d_c_1, mu, ar;
+        local functor_operation, c, d, d_c_1, mu, ar;
         
-        functor_name := ValueGlobal( NameOfFunctor( Functor ) );
+        functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
         
         c := arg[1];
         
@@ -2541,13 +2568,13 @@ InstallMethod( LeftSatelliteOfFunctor,
                 mu := Kernel( d_c_1 );
             fi;
         else
-	    ## the following is not really mu but Source( mu ):
+            ## the following is not really mu but Source( mu ):
             mu := SyzygiesModule( arg[p + 1], c );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        return CallFuncList( functor_name, ar );
+        return CallFuncList( functor_operation, ar );
         
     end;
     
@@ -2563,12 +2590,24 @@ InstallMethod( LeftSatelliteOfFunctor,
         z := [ IsInt ];
     fi;
     
-    data := List( [ 1 .. m ], i -> [ String( i ), Functor!.( i ) ] );
+    data := List( [ 1 .. m ], i -> [ String( i ), StructuralCopy( Functor!.(i) ) ] );
+    
+    for i in [ 1 .. m ] do
+        if IsBound( data[i][2] ) and IsBound( data[i][2][1] ) and IsBound( data[i][2][1][2] ) and
+           data[i][2][1][2] in [ "left exact", "right exact", "right adjoint", "left adjoint" ] then
+            data[i][2][1][2] := "additive";
+            if i = p or functor_name = "TensorProduct" then
+                Add( data[i][2][1], "delta-functor", 3 );
+                Add( data[i][2][1], "coeffaceable", 4 );
+            fi;
+        fi;
+    od;
     
     data := Concatenation(
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
+                    [ [ "Genesis", [ "LeftSatelliteOfFunctor", Functor, p ] ] ],
                     [ [ "OnObjects", _Functor_OnObjects ] ],
                     [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     

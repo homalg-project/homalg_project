@@ -85,6 +85,12 @@ DeclareAttribute( "Range",
 DeclareAttribute( "DegreeOfMorphism",
         IsHomalgMorphism );
 
+DeclareAttribute( "AsCokernel",
+        IsHomalgObjectOrMorphism );
+
+DeclareAttribute( "AsKernel",
+        IsHomalgObjectOrMorphism );
+
 ####################################
 #
 # global functions and operations:

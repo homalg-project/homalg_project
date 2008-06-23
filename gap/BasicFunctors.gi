@@ -17,6 +17,8 @@
 ##
 ## additive functors [HS. Prop. II.9.5] preserves chain complexes [HS. p. 118]
 ## half exact functors are additive [HS. p. 132 & Ex. IV.5.8]
+## a right adjoint functor is left exact [W. Thm. 2.6.1]
+## a left adjoint functor is right exact [W. Thm. 2.6.1]
 ##
 
 ##
@@ -141,7 +143,6 @@ InstallValue( Functor_Kernel,
 
 Functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
 
 ## install KernelEmb for kernel squares (this should be installed automatically in the future)
 InstallOtherMethod( KernelEmb,
@@ -285,8 +286,8 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
     
-    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) )
-       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) ) and
+       not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
@@ -444,8 +445,8 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
         phi := M_or_mor;
         L := N_or_mor;
         
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
-           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
+           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
             Error( "the morphism and the module must either be both left or both right\n" );
         fi;
         
@@ -459,8 +460,8 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
         phi := N_or_mor;
         L := M_or_mor;
         
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
-           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
+           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
             Error( "the morphism and the module must either be both left or both right\n" );
         fi;
         
@@ -478,7 +479,7 @@ InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "contravariant", "left exact", "distinguished" ] ] ],
+                [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
                 [ "2", [ [ "covariant", "left exact" ] ] ],
                 [ "OnObjects", _Functor_Hom_OnObjects ],
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
@@ -506,8 +507,8 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
     
-    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) )
-       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
+    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) ) and
+       not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
@@ -559,8 +560,8 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
         phi := M_or_mor;
         L := N_or_mor;
         
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
-           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
+           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
             Error( "the morphism and the module must either be both left or both right\n" );
         fi;
         
@@ -574,8 +575,8 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
         phi := N_or_mor;
         L := M_or_mor;
         
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
-           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
+        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
+           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
             Error( "the morphism and the module must either be both left or both right\n" );
         fi;
         
@@ -593,8 +594,8 @@ InstallValue( Functor_TensorProduct,
         CreateHomalgFunctor(
                 [ "name", "TensorProduct" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant", "right exact", "distinguished" ] ] ],
-                [ "2", [ [ "covariant", "right exact" ] ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
+                [ "2", [ [ "covariant", "left adjoint" ] ] ],
                 [ "OnObjects", _Functor_TensorProduct_OnObjects ],
                 [ "OnMorphisms", _Functor_TensorProduct_OnMorphisms ]
                 )
