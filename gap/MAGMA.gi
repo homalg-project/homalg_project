@@ -29,8 +29,10 @@ InstallValue( HOMALG_IO_MAGMA,
             eoc_verbose := ";",
             eoc_quiet := ";",
             remove_enter := true,	## a MAGMA specific
-            error_stdout := " error: ",	## a MAGMA specific
+            error_stdout := " error",	## a MAGMA specific
             define := ":=",
+            delete := function( var, stream ) homalgSendBlocking( [ "delete ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            multiple_delete := _MAGMA_multiple_delete,
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
@@ -73,6 +75,91 @@ BindGlobal( "TheTypeHomalgExternalRingInMAGMA",
 
 ####################################
 #
+# global functions:
+#
+####################################
+
+##
+InstallGlobalFunction( _MAGMA_multiple_delete,
+  function( var_list, stream )
+    local str;
+    
+    str := [ "delete ", var_list ];
+    
+    homalgSendBlocking( str, "need_command", stream, "break_lists", HOMALG_IO.Pictograms.multiple_delete );
+    
+end );
+
+##
+InstallGlobalFunction( InitializeMAGMATools,
+  function( stream )
+    local IsDiagonalMatrix, BasisOfRowModule, BasisOfRowsCoeff,
+          DecideZeroRows, DecideZeroRowsEffectively,
+          SyzygiesGeneratorsOfRows;
+    
+    IsDiagonalMatrix := "\n\
+IsDiagonalMatrix := function(M)\n\
+  n:= Nrows(M);\n\
+  m:= Ncols(M);\n\
+  for i:= 1 to Min(n,m) do M[i,i]:= 0; end for;\n\
+  return IsZero(M);\n\
+end function;\n\n";
+ 
+    
+    BasisOfRowModule := "\n\
+BasisOfRowModule := function(M)\n\
+  S := Rowspace(M);\n\
+  Groebner(S);\n\
+  return BasisMatrix(S);\n\
+end function;\n\n";
+    
+    BasisOfRowsCoeff := "\n\
+BasisOfRowsCoeff:= function(M)\n\
+  B := BasisOfRowModule(M);\n\
+  T := Solution(M, B);\n\
+  return B, T;\n\
+end function;\n\n";
+    
+    DecideZeroRows := "\n\
+DecideZeroRows:= function(A, B)\n\
+  S := Rowspace(B);\n\
+  F := Generic(S);\n\
+  return Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
+end function;\n\n";
+    
+    DecideZeroRowsEffectively := "\n\
+DecideZeroRowsEffectively:= function(A, B)\n\
+  S := Rowspace(B);\n\
+  F := Generic(S);\n\
+  M := Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
+  MA := M-A;\n\
+  T:= Matrix(BaseRing(A), [ Coordinates(S, S ! MA[i]): i in [1..Nrows(MA)]] );\n\
+  return M, T;\n\
+end function;\n\n";
+
+    SyzygiesGeneratorsOfRows := "\n\
+SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
+  if M2 cmpeq [] then\n\
+    S := Rowspace(M1);\n\
+  else\n\
+    S := Rowspace( VerticalJoin(M1, M2) );\n\
+  end if;\n\
+  SM := SyzygyModule(S);\n\
+  T := BasisMatrix(SM);\n\
+  return ColumnSubmatrix(T, 1, Nrows(M1));\n\
+end function;\n\n";
+
+    homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    
+end );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -98,6 +185,8 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     else
         o := 1;
     fi;
+    
+    InitializeMAGMATools( stream );
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
@@ -211,7 +300,11 @@ InstallMethod( PolynomialRing,
         var := Concatenation( var_of_coeff_ring, var );
     fi;
     
-    ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+    if Length( var ) = 1 then
+        ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, Length( var ), ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+    fi;
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     

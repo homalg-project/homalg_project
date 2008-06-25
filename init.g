@@ -54,6 +54,7 @@ ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/MAGMA_PIR.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMAGroebner.gd" );
 
 ## Maple (using the Maple implementation of homalg)
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgTools.gd" );

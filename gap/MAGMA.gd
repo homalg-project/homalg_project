@@ -23,6 +23,10 @@ DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 #
 ####################################
 
+DeclareGlobalFunction( "_MAGMA_multiple_delete" );
+
+DeclareGlobalFunction( "InitializeMAGMATools" );
+
 # constructor methods:
 
 DeclareGlobalFunction( "RingForHomalgInMAGMA" );

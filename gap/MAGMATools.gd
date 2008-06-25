@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MAGMATools.gd             RingsForHomalg package         Mohamed Barakat
+##  MAGMATools.gd             RingsForHomalg package        Markus Kirschmer
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
