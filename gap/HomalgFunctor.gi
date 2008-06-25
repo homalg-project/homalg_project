@@ -76,11 +76,11 @@ InstallMethod( NameOfFunctor,
     
     if IsBound( Functor!.name ) then
         functor_name := Functor!.name;
-        ## for this to work you need to declare one instance of the funtor,
+        ## for this to work you need to declare one instance of the functor,
         ## although all methods will be installed using InstallOtherMethod!
         if not IsOperation( ValueGlobal( functor_name ) ) and
            not IsFunction( ValueGlobal( functor_name ) ) then
-            Error( "the functor ", functor_name, " neither points to an operation nor a function\n" );
+            Error( "the functor ", functor_name, " neither points to an operation nor to a function\n" );
         fi;
     else
         Error( "the provided functor is nameless\n" );
@@ -206,8 +206,23 @@ InstallMethod( FunctorObj,
                 arg_old := Genesis( obj );
                 arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
                 if l = Length( arg_old[1] ) then
-                    if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) and
-                       ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
+                    if ForAny( arguments_of_functor, IsHomalgModule ) then
+                        if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) and
+                           ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
+                            return obj;
+                        fi;
+                    elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) and
+                      ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
+		      ## this "elif" is extremely important:
+		      ## To apply a certain functor (e.g. derived ones) to an object
+		      ## we might need to apply another functor to a morphism A. This
+		      ## morphisms could be the outcome of a third functor applied to another
+		      ## morphism B, and although there is a caching for functors applied
+		      ## to morphisms, B often becomes obsolete since it was only used in an
+		      ## intermediat step and gets deleted after a while
+		      ## (e.g. CompleteImageSquare( alpha1, Functor(morphism), beta1 )).
+		      ## Hence B has to be recomputed to get B' and A has to be recomputed
+		      ## using B' to get A'. Now A=A' but not identical!
                         return obj;
                     fi;
                 fi;
@@ -1033,10 +1048,18 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                 
                 if HasIsGradedObject( c ) and IsGradedObject( c ) then;
                     SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
                 elif HasIsComplex( c ) and IsComplex( c ) then
                     SetIsComplex( Fc, true );
                 elif HasIsSequence( c ) and IsSequence ( c ) then
                     SetIsSequence( Fc, true );
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1063,6 +1086,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( q, m ) );
                     od;
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1097,10 +1126,18 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                 
                 if HasIsGradedObject( c ) and IsGradedObject( c ) then;
                     SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
                 elif HasIsComplex( c ) and IsComplex( c ) then
                     SetIsComplex( Fc, true );
                 elif HasIsSequence( c ) and IsSequence ( c ) then
                     SetIsSequence( Fc, true );
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1127,6 +1164,12 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( m ) );
                     od;
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1159,11 +1202,19 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     "for homalg complexes",
                     [ filter0, filter1_cpx ],
               function( q, c )
-                local R;
+                local R, Fc;
                 
                 R := HomalgRing( c );
                 
-                return functor_operation( q, c, R );
+                Fc := functor_operation( q, c, R );
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
+                fi;
+                
+                return Fc;
                 
             end );
             
@@ -1206,10 +1257,18 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 if HasIsGradedObject( c ) and IsGradedObject( c ) then;
                     SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
                 elif HasIsComplex( c ) and IsComplex( c ) then
                     SetIsComplex( Fc, true );
                 elif HasIsSequence( c ) and IsSequence ( c ) then
                     SetIsSequence( Fc, true );
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1249,6 +1308,12 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( q, m, obj ) );
                     od;
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1265,11 +1330,19 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     "for homalg complexes",
                     [ filter1_cpx ],
               function( c )
-                local R;
+                local R, Fc;
                 
                 R := HomalgRing( c );
                 
-                return functor_operation( c, R );
+                Fc := functor_operation( c, R );
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
+                fi;
+                
+                return Fc;
                 
             end );
             
@@ -1312,10 +1385,18 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 if HasIsGradedObject( c ) and IsGradedObject( c ) then;
                     SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
                 elif HasIsComplex( c ) and IsComplex( c ) then
                     SetIsComplex( Fc, true );
                 elif HasIsSequence( c ) and IsSequence ( c ) then
                     SetIsSequence( Fc, true );
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1355,6 +1436,12 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( m, obj ) );
                     od;
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1416,15 +1503,23 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     od;
                 fi;
                 
-                return Fc;
-                
                 if HasIsGradedObject( c ) and IsGradedObject( c ) then;
                     SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
                 elif HasIsComplex( c ) and IsComplex( c ) then
                     SetIsComplex( Fc, true );
                 elif HasIsSequence( c ) and IsSequence ( c ) then
                     SetIsSequence( Fc, true );
                 fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
+                fi;
+                
+                return Fc;
                 
             end );
             
@@ -1461,6 +1556,12 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( q, obj, m ) );
                     od;
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -1506,15 +1607,23 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     od;
                 fi;
                 
-                return Fc;
-                
                 if HasIsGradedObject( c ) and IsGradedObject( c ) then;
                     SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
                 elif HasIsComplex( c ) and IsComplex( c ) then
                     SetIsComplex( Fc, true );
                 elif HasIsSequence( c ) and IsSequence ( c ) then
                     SetIsSequence( Fc, true );
                 fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
+                fi;
+                
+                return Fc;
                 
             end );
             
@@ -1551,6 +1660,12 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( obj, m ) );
                     od;
+                fi;
+                
+                if HasIsComplexForDefectOfExactness( c ) and
+                   IsComplexForDefectOfExactness( c ) then
+                    SetIsComplexForDefectOfExactness( Fc, true );
+                    Fc := AsATwoSequence( Fc );
                 fi;
                 
                 return Fc;
@@ -2637,6 +2752,256 @@ InstallMethod( LeftSatelliteOfFunctor,
     fi;
     
     return SF;
+    
+end );
+
+##
+InstallMethod( RightDerivedCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        
+  function( Functor, p, name )
+    local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
+          m, z, data, i, RF, fname;
+    
+    if IsCovariantFunctor( Functor, p ) <> false then
+        Error( "the functor does not seem to be contravariant in its ", p, ". argument\n" );
+    fi;
+    
+    functor_name :=  NameOfFunctor( Functor );
+    
+    functor_operation := ValueGlobal( functor_name );
+    
+    _Functor_OnObjects :=
+      function( arg )
+        local c, dd, ar, F_dd, der;
+        
+        c := arg[1];
+        
+        if c < 0 then
+            Error( "the negative ", c, ". right derived cofunctor is not defined\n" );
+        fi;
+        
+        dd := SubResolution( arg[p + 1], c );
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ dd ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        F_dd := CallFuncList( functor_operation, ar );
+        
+        der := DefectOfHoms( F_dd );
+        
+        return der;
+        
+    end;
+    
+    _Functor_OnMorphisms :=
+      function( arg )
+        local c, d, d_c, ar;
+        
+        c := arg[1];
+        
+        if c < 0 then
+            Error( "the negative ", c, ". right derived cofunctor is not defined\n" );
+        fi;
+        
+        d := Resolution( arg[p + 1], c );
+        
+        if IsHomalgMap( arg[p + 1] ) then
+            d_c := CertainMorphism( d, c );
+        else
+            d_c := CertainObject( d, c );
+        fi;
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ d_c ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        return CallFuncList( functor_operation, ar );
+        
+    end;
+    
+    m := MultiplicityOfFunctor( Functor );
+    
+    if IsBound( Functor!.0 ) then
+        if IsList( Functor!.0 ) then
+            z := Concatenation( [ IsInt ], Functor!.0 );
+        else
+            Error( "the zeroth argument of the functor is not a list" );
+        fi;
+    else
+        z := [ IsInt ];
+    fi;
+    
+    data := List( [ 1 .. m ], i -> [ String( i ), StructuralCopy( Functor!.(i) ) ] );
+    
+    for i in [ 1 .. m ] do
+        if IsBound( data[i][2] ) and IsBound( data[i][2][1] ) and IsBound( data[i][2][1][2] ) and
+           data[i][2][1][2] in [ "left exact", "right exact", "right adjoint", "left adjoint" ] then
+            data[i][2][1][2] := "additive";
+            if i = p or functor_name = "Hom" then
+                Add( data[i][2][1], "delta-functor", 3 );
+                Add( data[i][2][1], "effaceable", 4 );
+            fi;
+        fi;
+    od;
+    
+    data := Concatenation(
+                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "0", z ] ],
+                    data,
+                    [ [ "Genesis", [ "RightDerivedCofunctor", Functor, p ] ] ],
+                    [ [ "OnObjects", _Functor_OnObjects ] ],
+                    [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
+    
+    RF := CallFuncList( CreateHomalgFunctor, data );
+    
+    if m > 1 then
+        RF!.ContainerForWeakPointersOnComputedBasicObjects :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+        RF!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    fi;
+    
+    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    
+    InstallFunctorOnObjects( RF );
+    InstallFunctorOnMorphisms( RF );
+    InstallFunctorOnComplexes( RF );
+    InstallFunctorOnChainMaps( RF );
+    
+    fname := Concatenation( [ "Functor_", name ] );
+    
+    if IsBoundGlobal( fname ) then
+        Info( InfoWarning, 1, "unable to save the right derived cofunctor under the default name ", fname, " since it is reserved" );
+    else
+        DeclareGlobalVariable( fname );
+        InstallValue( ValueGlobal( fname ), RF );
+    fi;
+    
+    return RF;
+    
+end );
+
+##
+InstallMethod( LeftDerivedFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        
+  function( Functor, p, name )
+    local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
+          m, z, data, i, LF, fname;
+    
+    if IsCovariantFunctor( Functor, p ) <> true then
+        Error( "the functor does not seem to be covariant in its ", p, ". argument\n" );
+    fi;
+    
+    functor_name :=  NameOfFunctor( Functor );
+    
+    functor_operation := ValueGlobal( functor_name );
+    
+    _Functor_OnObjects :=
+      function( arg )
+        local c, dd, ar, F_dd, der;
+        
+        c := arg[1];
+        
+        if c < 0 then
+            Error( "the negative ", c, ". left derived functor is not defined\n" );
+        fi;
+        
+        dd := SubResolution( arg[p + 1], c );
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ dd ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        F_dd := CallFuncList( functor_operation, ar );
+        
+        der := DefectOfHoms( F_dd );
+        
+        return der;
+        
+    end;
+    
+    _Functor_OnMorphisms :=
+      function( arg )
+        local c, d, d_c, ar;
+        
+        c := arg[1];
+        
+        if c < 0 then
+            Error( "the negative ", c, ". left derived functor is not defined\n" );
+        fi;
+        
+        d := Resolution( arg[p + 1], c );
+        
+        if IsHomalgMap( arg[p + 1] ) then
+            d_c := CertainMorphism( d, c );
+        else
+            d_c := CertainObject( d, c );
+        fi;
+        
+        ar := Concatenation( arg{[ 2 .. p ]}, [ d_c ], arg{[ p + 2 .. Length( arg ) ]} );
+        
+        return CallFuncList( functor_operation, ar );
+        
+    end;
+    
+    m := MultiplicityOfFunctor( Functor );
+    
+    if IsBound( Functor!.0 ) then
+        if IsList( Functor!.0 ) then
+            z := Concatenation( [ IsInt ], Functor!.0 );
+        else
+            Error( "the zeroth argument of the functor is not a list" );
+        fi;
+    else
+        z := [ IsInt ];
+    fi;
+    
+    data := List( [ 1 .. m ], i -> [ String( i ), StructuralCopy( Functor!.(i) ) ] );
+    
+    for i in [ 1 .. m ] do
+        if IsBound( data[i][2] ) and IsBound( data[i][2][1] ) and IsBound( data[i][2][1][2] ) and
+           data[i][2][1][2] in [ "left exact", "right exact", "right adjoint", "left adjoint" ] then
+            data[i][2][1][2] := "additive";
+            if i = p or functor_name = "Hom" then
+                Add( data[i][2][1], "delta-functor", 3 );
+                Add( data[i][2][1], "coeffaceable", 4 );
+            fi;
+        fi;
+    od;
+    
+    data := Concatenation(
+                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "0", z ] ],
+                    data,
+                    [ [ "Genesis", [ "LeftDerivedFunctor", Functor, p ] ] ],
+                    [ [ "OnObjects", _Functor_OnObjects ] ],
+                    [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
+    
+    LF := CallFuncList( CreateHomalgFunctor, data );
+    
+    if m > 1 then
+        LF!.ContainerForWeakPointersOnComputedBasicObjects :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+        LF!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    fi;
+    
+    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    
+    InstallFunctorOnObjects( LF );
+    InstallFunctorOnMorphisms( LF );
+    InstallFunctorOnComplexes( LF );
+    InstallFunctorOnChainMaps( LF );
+    
+    fname := Concatenation( [ "Functor_", name ] );
+    
+    if IsBoundGlobal( fname ) then
+        Info( InfoWarning, 1, "unable to save the left derived functor under the default name ", fname, " since it is reserved" );
+    else
+        DeclareGlobalVariable( fname );
+        InstallValue( ValueGlobal( fname ), LF );
+    fi;
+    
+    return LF;
     
 end );
 

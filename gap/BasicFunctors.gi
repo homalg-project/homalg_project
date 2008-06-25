@@ -206,7 +206,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
   function( cpx_post_pre )
     local pre, post, M, p, gen, rel, coker, ker, emb;
     
-    if not ( IsHomalgComplex( cpx_post_pre ) and ObjectDegreesOfComplex( cpx_post_pre ) = [ -1 .. 1 ] ) then
+    if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
         Error( "expecting a complex containing two morphisms\n" );
     fi;
     
@@ -267,7 +267,7 @@ InstallMethod( DefectOfExactness,
         
   function( phi, psi )
     
-    return DefectOfExactness( AsSequence( phi, psi ) );
+    return DefectOfExactness( AsATwoSequence( phi, psi ) );
     
 end );
 
@@ -676,4 +676,16 @@ RightSatelliteOfCofunctor( Functor_Hom, 1, "Ext" );
 ##
 
 LeftSatelliteOfFunctor( Functor_TensorProduct, 1, "Tor" );
+
+##
+## RHom( c, M, N )
+##
+
+RightDerivedCofunctor( Functor_Hom, 1, "RHom" );
+
+##
+## LTensorProduct( c, M, N )
+##
+
+LeftDerivedFunctor( Functor_TensorProduct, 1, "LTensorProduct" );
 

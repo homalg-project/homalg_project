@@ -1036,7 +1036,7 @@ InstallGlobalFunction( homalgResetFiltersOfComplex,
             IsGradedObject,
             IsExactSequence,
             IsShortExactSequence,
-            IsComplexForDefectOfExactness ];	## the output of AsSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish between different methods for DefectOfExactness which all apply to complexes
+            IsSplitShortExactSequence ];
     fi;
     
     for property in HOMALG.PropertiesOfComplexes do
@@ -1175,7 +1175,13 @@ InstallMethod( ViewObj,
         first_attribute := true;
     fi;
     
-    if HasIsShortExactSequence( o ) and IsShortExactSequence( o ) then
+    if HasIsSplitShortExactSequence( o ) and IsSplitShortExactSequence( o ) then
+        if cpx then
+            Print( " split short exact sequence" );
+        else
+            Print( " split short exact cosequence" );
+        fi;
+    elif HasIsShortExactSequence( o ) and IsShortExactSequence( o ) then
         if cpx then
             Print( " short exact sequence" );
         else

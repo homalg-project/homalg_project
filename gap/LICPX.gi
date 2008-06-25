@@ -20,23 +20,12 @@
 
 InstallValue( LICPX,
         rec(
-            )
+            color := "\033[4;30;46m" )
         );
 
-####################################
-#
-# logical implications methods:
-#
-####################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
+##
 InstallValue( LogicalImplicationsForHomalgComplexes,
-        [ ## IsTorsionFreeModule:
+        [ 
           
           [ IsZero,
             "implies", IsGradedObject ],
@@ -47,11 +36,17 @@ InstallValue( LogicalImplicationsForHomalgComplexes,
           [ IsAcyclic,
             "implies", IsComplex ],
           
+          [ IsComplex,
+            "implies", IsSequence ],
+          
           [ IsExactSequence,
             "implies", IsComplex ],
           
           [ IsShortExactSequence,
             "implies", IsExactSequence ],
+          
+          [ IsSplitShortExactSequence,
+            "implies", IsShortExactSequence ],
           
           ] );
 

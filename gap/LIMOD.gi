@@ -20,20 +20,10 @@
 
 InstallValue( LIMOD,
         rec(
-            color := "\033[4;30;46m" ) );
+            color := "\033[4;30;46m" )
+        );
 
-####################################
-#
-# logical implications methods:
-#
-####################################
-
-####################################
-#
-# global variables:
-#
-####################################
-
+##
 InstallValue( LogicalImplicationsForHomalgModules,
         [ ## IsTorsionFreeModule:
           

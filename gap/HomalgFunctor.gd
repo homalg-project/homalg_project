@@ -76,6 +76,12 @@ DeclareOperation( "RightSatelliteOfCofunctor",
 DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
+DeclareOperation( "RightDerivedCofunctor",
+        [ IsHomalgFunctor, IsInt, IsString ] );
+
+DeclareOperation( "LeftDerivedFunctor",
+        [ IsHomalgFunctor, IsInt, IsString ] );
+
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
 

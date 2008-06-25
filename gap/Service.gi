@@ -363,7 +363,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
-        
+    
     ColoredInfoForService( "busy", "DecideZeroRows", "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
     
     if IsBound(RP!.DecideZeroRows) then
@@ -795,7 +795,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
-        
+    
     ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
@@ -840,6 +840,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetIsFullRowRankMatrix( B, true );
     fi;
     
+    ## B = T * M;
     SetPreEval( T, CertainRows( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
@@ -861,7 +862,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
-        
+    
     ColoredInfoForService( "busy", "BasisOfColumnsCoeff", NrRows( M ), " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
@@ -906,6 +907,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetIsFullColumnRankMatrix( B, true );
     fi;
     
+    ## B = M * T;
     SetPreEval( T, CertainColumns( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );

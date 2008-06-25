@@ -49,39 +49,6 @@ BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
 
 ####################################
 #
-# logical implications methods:
-#
-####################################
-
-##
-InstallTrueMethod( IsMorphism, IsHomalgMap and IsMonomorphism );
-
-##
-InstallTrueMethod( IsMorphism, IsHomalgMap and IsEpimorphism );
-
-##
-InstallTrueMethod( IsIsomorphism, IsHomalgMap and IsAutomorphism );
-
-##
-InstallTrueMethod( IsAutomorphism, IsHomalgSelfMap and IsIsomorphism );
-
-##
-InstallTrueMethod( IsSplitMonomorphism, IsHomalgMap and IsIsomorphism );
-
-##
-InstallTrueMethod( IsSplitEpimorphism, IsHomalgMap and IsIsomorphism );
-
-##
-InstallTrueMethod( IsEpimorphism, IsHomalgMap and IsSplitEpimorphism );
-
-##
-InstallTrueMethod( IsMonomorphism, IsHomalgMap and IsSplitMonomorphism );
-
-##
-InstallTrueMethod( IsIsomorphism, IsHomalgMap and IsEpimorphism and IsMonomorphism );
-
-####################################
-#
 # immediate methods for properties:
 #
 ####################################
@@ -1228,6 +1195,14 @@ InstallGlobalFunction( HomalgMap,
                     Source, source,
                     Range, target,
                     IsZero, true );
+            
+            if HasIsZero( source ) and IsZero( source ) then
+                SetIsSplitMonomorphism( morphism, true );
+            fi;
+            
+            if HasIsZero( target ) and IsZero( target ) then
+                SetIsSplitEpimorphism( morphism, true );
+            fi;
             
         elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
             ## the identity morphism:

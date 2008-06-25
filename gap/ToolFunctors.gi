@@ -15,10 +15,10 @@
 ####################################
 
 ##
-## AsSequence
+## AsATwoSequence
 ##
 
-InstallGlobalFunction( _Functor_AsSequence_OnObjects,	### defines: AsSequence
+InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects,	### defines: AsATwoSequence
   function( phi, psi )
     local R, pre, post, C;
     
@@ -52,18 +52,70 @@ InstallGlobalFunction( _Functor_AsSequence_OnObjects,	### defines: AsSequence
     
 end );
 
-InstallValue( Functor_AsSequence,
+InstallValue( Functor_AsATwoSequence,
         CreateHomalgFunctor(
-                [ "name", "AsSequence" ],
+                [ "name", "AsATwoSequence" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgMap ] ] ],
                 [ "2", [ [ "covariant" ], [ IsHomalgMap ] ] ],
-                [ "OnObjects", _Functor_AsSequence_OnObjects ]
+                [ "OnObjects", _Functor_AsATwoSequence_OnObjects ]
                 )
         );
 
-Functor_AsSequence!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_AsATwoSequence!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+InstallMethod( AsATwoSequence,
+        "for complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and
+          IsHomalgLeftObjectOrMorphismOfLeftObjects and
+          IsComplexForDefectOfExactness ],
+        
+  function( C )
+    
+    return AsATwoSequence( HighestDegreeMorphismInComplex( C ), LowestDegreeMorphismInComplex( C ) );
+    
+end );
+
+##
+InstallMethod( AsATwoSequence,
+        "for complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and
+          IsHomalgRightObjectOrMorphismOfRightObjects and
+          IsComplexForDefectOfExactness ],
+        
+  function( C )
+    
+    return AsATwoSequence( HighestDegreeMorphismInComplex( C ), LowestDegreeMorphismInComplex( C ) );
+    
+end );
+
+##
+InstallMethod( AsATwoSequence,
+        "for complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and
+          IsHomalgLeftObjectOrMorphismOfLeftObjects and
+          IsComplexForDefectOfExactness ],
+        
+  function( C )
+    
+    return AsATwoSequence( LowestDegreeMorphismInComplex( C ), HighestDegreeMorphismInComplex( C ) );
+    
+end );
+
+##
+InstallMethod( AsATwoSequence,
+        "for complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and
+          IsHomalgRightObjectOrMorphismOfRightObjects and
+          IsComplexForDefectOfExactness ],
+        
+  function( C )
+    
+    return AsATwoSequence( LowestDegreeMorphismInComplex( C ), HighestDegreeMorphismInComplex( C ) );
+    
+end );
 
 ##
 ## AsChainMapForPullback
@@ -158,10 +210,10 @@ Functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
-## AsSequence( phi, psi )
+## AsATwoSequence( phi, psi )
 ##
 
-InstallFunctorOnObjects( Functor_AsSequence );
+InstallFunctorOnObjects( Functor_AsATwoSequence );
 
 ##
 ## AsChainMapForPullback( phi, beta1 )

@@ -333,6 +333,90 @@ InstallMethod( FreeHullModule,
 end );
 
 ##
+InstallMethod( SubResolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects, IsInt ],
+        
+  function( M, q )
+    local d, dq1, res;
+    
+    if q < 0 then
+        Error( "a negative integer does not make sense\n" );
+    elif q = 0 then
+        d := Resolution( M, 1 );
+        dq1 := CertainMorphism( d, 1 );
+        res := AsATwoSequence( dq1, TheZeroMorphism( FreeHullModule( M ) ) );
+        if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
+            SetIsAcyclic( res, true );
+        else
+            SetIsComplex( res, true );
+        fi;
+        return res;
+    fi;
+    
+    d := Resolution( M, q + 1 );
+    
+    dq1 := CertainMorphism( d, q + 1 );
+    
+    res := AsATwoSequence( dq1, CertainMorphism( d, q ) );
+    
+    res := Shift( res, -q );
+    
+    if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
+        SetIsAcyclic( res, true );
+    else
+        SetIsComplex( res, true );
+    fi;
+    
+    SetIsComplexForDefectOfExactness( res, true );
+    
+    return res;
+    
+end );
+
+##
+InstallMethod( SubResolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects, IsInt ],
+        
+  function( M, q )
+    local d, dq1, res;
+    
+    if q < 0 then
+        Error( "a negative integer does not make sense\n" );
+    elif q = 0 then
+        d := Resolution( M, 1 );
+        dq1 := CertainMorphism( d, 1 );
+        res := AsATwoSequence( TheZeroMorphism( FreeHullModule( M ) ), dq1 );
+        if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
+            SetIsAcyclic( res, true );
+        else
+            SetIsComplex( res, true );
+        fi;
+        return res;
+    fi;
+    
+    d := Resolution( M, q + 1 );
+    
+    dq1 := CertainMorphism( d, q + 1 );
+    
+    res := AsATwoSequence( CertainMorphism( d, q ), dq1 );
+    
+    res := Shift( res, -q );
+    
+    if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
+        SetIsAcyclic( res, true );
+    else
+        SetIsComplex( res, true );
+    fi;
+    
+    SetIsComplexForDefectOfExactness( res, true );
+    
+    return res;
+    
+end );
+
+##
 InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule	(incomplete)
   function( arg )
     local nargs, M, R, mat, par, F;

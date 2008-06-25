@@ -54,3 +54,6 @@ DeclareOperation( "FreeHullModule",
 DeclareOperation( "FreeHullEpi",
         [ IsHomalgModule ] );
 
+DeclareOperation( "SubResolution",
+        [ IsHomalgModule, IsInt ] );
+

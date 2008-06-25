@@ -47,7 +47,7 @@ DeclareProperty( "IsSplitEpimorphism",
 DeclareProperty( "IsIsomorphism",
         IsHomalgMap );
 
-DeclareProperty( "IsAutomorphism",
+DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
         IsHomalgMap );
 
 ####################################

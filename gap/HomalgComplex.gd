@@ -43,8 +43,11 @@ DeclareProperty( "IsExactSequence",
 DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
         IsHomalgComplex );
 
-DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish
-        IsHomalgComplex );			##  between different methods for DefectOfExactness which all apply to complexes
+DeclareProperty( "IsSplitShortExactSequence",	## we also need this as property!!!
+        IsHomalgComplex );
+
+DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsATwoSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish
+        IsHomalgComplex );					##  between different methods for DefectOfExactness which all apply to complexes
 
 ####################################
 #
@@ -63,7 +66,7 @@ DeclareGlobalFunction( "HomalgCocomplex" );
 # basic operations:
 
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgComplex ] );	## provided to avoid branching in the code and always returns fail
+        [ IsHomalgComplex ] );			## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "ObjectDegreesOfComplex",
         [ IsHomalgComplex ] );

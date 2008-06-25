@@ -64,4 +64,5 @@ ReadPackage( "homalg", "gap/LIRNG.gd" );
 ReadPackage( "homalg", "gap/LIMAT.gd" );
 ReadPackage( "homalg", "gap/COLEM.gd" );
 ReadPackage( "homalg", "gap/LIMOD.gd" );
+ReadPackage( "homalg", "gap/LIMOR.gd" );
 ReadPackage( "homalg", "gap/LICPX.gd" );

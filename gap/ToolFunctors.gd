@@ -14,10 +14,10 @@
 #
 ####################################
 
-## AsSequence
-DeclareGlobalFunction( "_Functor_AsSequence_OnObjects" );
+## AsATwoSequence
+DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
-DeclareGlobalVariable( "Functor_AsSequence" );
+DeclareGlobalVariable( "Functor_AsATwoSequence" );
 
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
@@ -37,8 +37,11 @@ DeclareGlobalVariable( "Functor_AsChainMapForPushout" );
 
 # basic operations:
 
-DeclareOperation( "AsSequence",
+DeclareOperation( "AsATwoSequence",
         [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "AsATwoSequence",
+        [ IsHomalgComplex ] );
 
 DeclareOperation( "AsChainMapForPullback",
         [ IsHomalgMap, IsHomalgMap ] );

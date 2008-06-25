@@ -387,8 +387,10 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
     od;
     
+    SetIsEpimorphism( d_psi, true );
+    SetIsMonomorphism( d_phi, true );
     SetIsAcyclic( dE, true );
-    SetIsExactSequence( horse_shoe, true );
+    SetIsSplitShortExactSequence( horse_shoe, true );
     
     return horse_shoe;
     

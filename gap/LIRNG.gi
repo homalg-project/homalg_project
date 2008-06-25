@@ -20,14 +20,10 @@
 
 InstallValue( LIRNG,
         rec(
-            color := "\033[4;30;46m" ) );
+            color := "\033[4;30;46m" )
+        );
 
-####################################
-#
-# global variables:
-#
-####################################
-
+##
 InstallValue( LogicalImplicationsForHomalgRings,
         [ ## listed alphabetically (ignoring left/right):
           
