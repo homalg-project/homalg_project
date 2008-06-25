@@ -1,11 +1,11 @@
 #############################################################################
 ##
 ##  SingularGroebner          RingsForHomalg package          Simon Goertzen
-##                                                     Markus Lange-Hegermann
+##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for Grobner Basis calculations in Singular            
+##  Implementations for Groebner basis related computations in Singular.
 ##
 #############################################################################
 
@@ -16,7 +16,7 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for homalg rings with Groebner Basis calculations provided by Singular",
+        "for homalg rings with Groebner basis computations provided by Singular",
         [ IsHomalgExternalRingObjectInSingularRep ],
         
   function( ext_ring_obj )

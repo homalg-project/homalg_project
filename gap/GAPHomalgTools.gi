@@ -170,7 +170,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    return StringToInt( homalgSendBlocking( [ "NrColumns( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
-                 
+               
                IsZeroMatrix :=
                  function( M )
                    

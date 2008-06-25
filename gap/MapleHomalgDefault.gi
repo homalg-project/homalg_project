@@ -62,7 +62,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                BasisOfColumnsCoeff :=
                  function( M, T )
                    local R, N;
@@ -76,7 +76,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                DecideZeroRows :=
                  function( A, B )
                    local R, N;
@@ -90,7 +90,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                DecideZeroColumns :=
                  function( A, B )
                    local R, N;
@@ -104,7 +104,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                DecideZeroRowsEffectively :=
                  function( A, B, T )
                    local R, N;
@@ -118,7 +118,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
                    local R, N;
@@ -132,7 +132,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                SyzygiesGeneratorsOfRows :=
                  function( arg )
                    local M, R, N, M2;
@@ -158,7 +158,7 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
                SyzygiesGeneratorsOfColumns :=
                  function( arg )
                    local M, R, N, M2;
@@ -184,6 +184,6 @@ InstallValue( CommonHomalgTableForMapleHomalgDefault,
                    return N;
                    
                  end,
-                 
+               
         )
  );
