@@ -28,7 +28,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " := BasisOfRowModule( ", M, " )" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ N, " := BasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
                    
                    return N;
                    
@@ -42,7 +42,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ N, " := BasisOfColumnModule( ", M, " )" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ N, " := BasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
                    
                    return N;
                    
@@ -150,7 +150,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                        
                    else
                        
-                       homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows( ", M, " )" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                       homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                        
                    fi;
                    
@@ -176,7 +176,7 @@ InstallValue( CommonHomalgTableForGAPHomalgBasic,
                        
                    else
                        
-                       homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns( ", M, " )" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                       homalgSendBlocking( [ N, " := SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                        
                    fi;
                    

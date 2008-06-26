@@ -93,9 +93,11 @@ end );
 ##
 InstallGlobalFunction( InitializeMAGMATools,
   function( stream )
-    local IsDiagonalMatrix, BasisOfRowModule, BasisOfRowsCoeff,
-          DecideZeroRows, DecideZeroRowsEffectively,
-          SyzygiesGeneratorsOfRows;
+    local IsDiagonalMatrix, BasisOfRowModule, BasisOfColumnModule,
+          BasisOfRowsCoeff, BasisOfColumnsCoeff,
+          DecideZeroRows, DecideZeroColumns,
+          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
+          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns;
     
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix := function(M)\n\
@@ -104,13 +106,17 @@ IsDiagonalMatrix := function(M)\n\
   for i:= 1 to Min(n,m) do M[i,i]:= 0; end for;\n\
   return IsZero(M);\n\
 end function;\n\n";
- 
     
     BasisOfRowModule := "\n\
 BasisOfRowModule := function(M)\n\
   S := Rowspace(M);\n\
   Groebner(S);\n\
   return BasisMatrix(S);\n\
+end function;\n\n";
+    
+    BasisOfColumnModule := "\n\
+BasisOfColumnModule := function(M)\n\
+  return Transpose(BasisOfRowModule(Transpose(M)));\n\
 end function;\n\n";
     
     BasisOfRowsCoeff := "\n\
@@ -120,11 +126,22 @@ BasisOfRowsCoeff:= function(M)\n\
   return B, T;\n\
 end function;\n\n";
     
+    BasisOfColumnsCoeff := "\n\
+BasisOfColumnsCoeff:= function(M)\n\
+  B, T := BasisOfRowsCoeff(Transpose(M));\n\
+  return Transpose(B), Transpose(T);\n\
+end function;\n\n";
+    
     DecideZeroRows := "\n\
 DecideZeroRows:= function(A, B)\n\
   S := Rowspace(B);\n\
   F := Generic(S);\n\
   return Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
+end function;\n\n";
+    
+    DecideZeroColumns := "\n\
+DecideZeroColumns:= function(A, B)\n\
+  return Transpose(DecideZeroRows(Transpose(A),Transpose(B)));\n\
 end function;\n\n";
     
     DecideZeroRowsEffectively := "\n\
@@ -136,7 +153,13 @@ DecideZeroRowsEffectively:= function(A, B)\n\
   T:= Matrix(BaseRing(A), [ Coordinates(S, S ! MA[i]): i in [1..Nrows(MA)]] );\n\
   return M, T;\n\
 end function;\n\n";
-
+    
+    DecideZeroColumnsEffectively := "\n\
+DecideZeroColumnsEffectively:= function(A, B)\n\
+  M, T := DecideZeroRowsEffectively(Transpose(A),Transpose(B));\n\
+  return Transpose(M), Transpose(T);\n\
+end function;\n\n";
+    
     SyzygiesGeneratorsOfRows := "\n\
 SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
   if M2 cmpeq [] then\n\
@@ -148,13 +171,27 @@ SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
   T := BasisMatrix(SM);\n\
   return ColumnSubmatrix(T, 1, Nrows(M1));\n\
 end function;\n\n";
-
+    
+    SyzygiesGeneratorsOfColumns := "\n\
+SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
+  if M2 cmpeq [] then\n\
+    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),[]));\n\
+  else\n\
+    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
+  end if;\n\
+end function;\n\n";
+    
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     
 end );
 

@@ -38,7 +38,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return homalgSendBlocking( [ "convert(", R, "[-1][Minus](", a, ",", b, ",", R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.Minus ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
-                 
+               
                DivideByUnit :=
                  function( a, u )
                    local R;
@@ -48,7 +48,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return homalgSendBlocking( [ "convert(", R, "[-1][DivideByUnit](", a, ",", u, ",", R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
-                 
+               
                IsUnit :=
                  function( R, r )
 		   
@@ -224,7 +224,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return StringToInt( homalgSendBlocking( [ R, "[-1][NumberOfGenerators](", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
-                 
+               
                IsZeroMatrix :=
                  function( M )
                    local R;
@@ -292,7 +292,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    fi;
                    
                  end,
-                 
+               
                GetCleanRowsPositions :=
                  function( M, clean_columns )
                    local R, list_string;
@@ -308,7 +308,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    fi;
                    
                  end,
-                 
+               
                GetColumnIndependentUnitPositions :=
                  function( M, pos_list )
                    local R;
@@ -318,7 +318,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetColumnIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
                  end,
-                 
+               
                GetRowIndependentUnitPositions :=
                  function( M, pos_list )
                    local R;
@@ -328,6 +328,6 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetRowIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
                  end,
-                 
+               
         )
  );

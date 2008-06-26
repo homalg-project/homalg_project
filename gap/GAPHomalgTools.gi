@@ -24,21 +24,21 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                
                MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "MinusOne(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "GAP" ),
                
-               IsZero := r -> homalgSendBlocking( [ "IsZero( ", r, " )" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
+               IsZero := r -> homalgSendBlocking( [ "IsZero(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                
-               IsOne := r -> homalgSendBlocking( [ "IsOne( ", r, " )" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "true",
+               IsOne := r -> homalgSendBlocking( [ "IsOne(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "true",
                
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", HOMALG_IO.Pictograms.Minus );
+                   return homalgSendBlocking( [ a, "-(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Minus );
                    
                  end,
                
                DivideByUnit :=
                  function( a, u )
                    
-                   return homalgSendBlocking( [ a, " / ( ", u, " )"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                   return homalgSendBlocking( [ a, "/(", u, ")"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
                
@@ -52,7 +52,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                CopyMatrix :=
                  function( C )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ "ShallowCopy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   return HomalgMatrix( homalgSendBlocking( [ "ShallowCopy(", C, ")" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
                    
                  end,
                
@@ -73,14 +73,14 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                AreEqualMatrices :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, " = ", B ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "true";
+                   return homalgSendBlocking( [ A, "=", B ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "true";
                    
                  end,
                
                Involution :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "Involution( ", M, " )" ], HOMALG_IO.Pictograms.Involution );
+                   return homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution );
                    
                  end,
                
@@ -132,63 +132,63 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [ a, " * ", A ], HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ a, "*", A ], HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                
                AddMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, " + ", B ], HOMALG_IO.Pictograms.AddMat );
+                   return homalgSendBlocking( [ A, "+", B ], HOMALG_IO.Pictograms.AddMat );
                    
                  end,
                
                SubMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, " - ", B ], HOMALG_IO.Pictograms.SubMat );
+                   return homalgSendBlocking( [ A, "-", B ], HOMALG_IO.Pictograms.SubMat );
                    
                  end,
                
                Compose :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, " * ", B ], HOMALG_IO.Pictograms.Compose );
+                   return homalgSendBlocking( [ A, "*", B ], HOMALG_IO.Pictograms.Compose );
                    
                  end,
                
                NrRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NrRows( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ "NrRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NrColumns( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ "NrColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                
                IsZeroMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsZero( ", M, " )" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsZero(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
                    
                  end,
                
                IsIdentityMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsIdentityMatrix( ", M, " )" ] , "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsIdentityMatrix(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
                    
                  end,
                
                IsDiagonalMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsDiagonalMatrix( ", M, " )" ] , "need_output", HOMALG_IO.Pictograms.IsDiagonalMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsDiagonalMatrix(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsDiagonalMatrix ) = "true";
                    
                  end,
                
@@ -196,7 +196,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "ZeroRows( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
+                   list_string := homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
                    
                    return StringToIntList( list_string );
                    
@@ -206,7 +206,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "ZeroColumns( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
+                   list_string := homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
                    
                    return StringToIntList( list_string );
                    
@@ -229,14 +229,14 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                ConvertMatrixToRow :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "ConvertMatrixToRow( ", M, " )" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
+                   return homalgSendBlocking( [ "ConvertMatrixToRow(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
                    
                  end,
                
                ConvertMatrixToColumn :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "ConvertMatrixToColumn( ", M, " )" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
+                   return homalgSendBlocking( [ "ConvertMatrixToColumn(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
                    
                  end,
                
@@ -253,7 +253,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    fi;
                    
                  end,
-                 
+               
                GetCleanRowsPositions :=
                  function( M, clean_columns )
                    local list_string;
@@ -267,20 +267,20 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    fi;
                    
                  end,
-                 
+               
                GetColumnIndependentUnitPositions :=
                  function( M, pos_list )
                    
                    return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
                  end,
-                 
+               
                GetRowIndependentUnitPositions :=
                  function( M, pos_list )
                    
                    return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
                  end,
-                 
+               
         )
  );

@@ -34,7 +34,7 @@ InstallValue( CommonHomalgTableForMAGMABasic,
                    
                  end,
                
-               XBasisOfColumnModule :=
+               BasisOfColumnModule :=
                  function( M )
                    local R, N;
                    
@@ -62,7 +62,7 @@ InstallValue( CommonHomalgTableForMAGMABasic,
                    
                  end,
                
-               XBasisOfColumnsCoeff :=
+               BasisOfColumnsCoeff :=
                  function( M, T )
                    local R, N;
                    
@@ -90,7 +90,7 @@ InstallValue( CommonHomalgTableForMAGMABasic,
                    
                  end,
                
-               XDecideZeroColumns :=
+               DecideZeroColumns :=
                  function( A, B )
                    local R, N;
                    
@@ -118,7 +118,7 @@ InstallValue( CommonHomalgTableForMAGMABasic,
                    
                  end,
                
-               XDecideZeroColumnsEffectively :=
+               DecideZeroColumnsEffectively :=
                  function( A, B, T )
                    local R, N;
                    
@@ -158,7 +158,7 @@ InstallValue( CommonHomalgTableForMAGMABasic,
                    
                  end,
                
-               XSyzygiesGeneratorsOfColumns :=
+               SyzygiesGeneratorsOfColumns :=
                  function( arg )
                    local M, R, N, M2;
                    
