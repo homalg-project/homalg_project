@@ -23,43 +23,43 @@ ReadPackage( "RingsForHomalg", "gap/Sage.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMA.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gd" );
 
-## GAP
-ReadPackage( "RingsForHomalg", "gap/GAPHomalgTools.gd" );
-ReadPackage( "RingsForHomalg", "gap/GAPHomalgDefault.gd" );
+## GAP (using the GAP implementation of homalg)
+ReadPackage( "RingsForHomalg", "gap/GAPHomalgBasic.gd" );
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgBestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/GAPHomalgTools.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/GAPHomalgPIR.gd" );
 #ReadPackage( "RingsForHomalg", "gap/GAPHomalgInvolutive.gd" );
 
 ## Singular
-ReadPackage( "RingsForHomalg", "gap/SingularTools.gd" );
-ReadPackage( "RingsForHomalg", "gap/SingularDefault.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularBasic.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularBestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/SingularTools.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularQX.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gd" );
 
 ## Sage
-ReadPackage( "RingsForHomalg", "gap/SageTools.gd" );
-ReadPackage( "RingsForHomalg", "gap/SageDefault.gd" );
+ReadPackage( "RingsForHomalg", "gap/SageBasic.gd" );
 ReadPackage( "RingsForHomalg", "gap/SageBestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/SageTools.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/SageIntegers.gd" );
 ReadPackage( "RingsForHomalg", "gap/SageGF2.gd" );
 
 ## MAGMA
-ReadPackage( "RingsForHomalg", "gap/MAGMATools.gd" );
-ReadPackage( "RingsForHomalg", "gap/MAGMADefault.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMABasic.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMABestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/MAGMATools.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/MAGMA_PIR.gd" );
 ReadPackage( "RingsForHomalg", "gap/MAGMAGroebner.gd" );
 
 ## Maple (using the Maple implementation of homalg)
-ReadPackage( "RingsForHomalg", "gap/MapleHomalgTools.gd" );
-ReadPackage( "RingsForHomalg", "gap/MapleHomalgDefault.gd" );
+ReadPackage( "RingsForHomalg", "gap/MapleHomalgBasic.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgBestBasis.gd" );
+ReadPackage( "RingsForHomalg", "gap/MapleHomalgTools.gd" );
 
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgPIR.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gd" );

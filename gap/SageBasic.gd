@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  SingularDefault.gd        RingsForHomalg package          Simon Goertzen
+##  SageBasic.gd            RingsForHomalg package           Simon Görtzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the rings provided by Singular.
+##  Declarations for the rings provided by Sage.
 ##
 #############################################################################
 
@@ -14,5 +14,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForSingularDefault" );
+DeclareGlobalVariable( "CommonHomalgTableForSageBasic" );
 

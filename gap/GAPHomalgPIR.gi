@@ -20,11 +20,11 @@ InstallMethod( CreateHomalgTable,
           and IsPrincipalIdealRing ],
         
   function( ext_ring_obj )
-    local RP, RP_default, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForGAPHomalgTools );
     
-    RP_default := ShallowCopy( CommonHomalgTableForGAPHomalgDefault );
+    RP_Basic := ShallowCopy( CommonHomalgTableForGAPHomalgBasic );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForGAPHomalgBestBasis );
     
@@ -92,8 +92,8 @@ InstallMethod( CreateHomalgTable,
         RP.(component) := RP_BestBasis.(component);
     od;
     
-    for component in NamesOfComponents( RP_default ) do
-        RP.(component) := RP_default.(component);
+    for component in NamesOfComponents( RP_Basic ) do
+        RP.(component) := RP_Basic.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

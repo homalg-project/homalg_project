@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SingularDefault.gd        RingsForHomalg package          Simon Goertzen
+##  SingularBasic.gd        RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForSingularDefault,
+InstallValue( CommonHomalgTableForSingularBasic,
 
   rec(
     ## Must only then be provided by the RingPackage in case the default

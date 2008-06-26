@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MAGMADefault.gd           RingsForHomalg package        Markus Kirschmer
+##  SageBasic.gi            RingsForHomalg package           Simon Görtzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for the rings provided by MAGMA.
+##  Implementations for the rings provided by Sage.
 ##
 #############################################################################
 
@@ -14,5 +14,9 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForMAGMADefault" );
-
+InstallValue( CommonHomalgTableForSageBasic,
+        
+        rec(
+               
+        )
+ );

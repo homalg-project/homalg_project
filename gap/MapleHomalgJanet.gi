@@ -20,11 +20,11 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInMapleUsingJanetRep ],
 
   function( ext_ring_obj )
-    local RP, RP_default, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
     
-    RP_default := ShallowCopy( CommonHomalgTableForMapleHomalgDefault );
+    RP_Basic := ShallowCopy( CommonHomalgTableForMapleHomalgBasic );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
     
@@ -44,8 +44,8 @@ InstallMethod( CreateHomalgTable,
                
           );
     
-    for component in NamesOfComponents( RP_default ) do
-        RP.(component) := RP_default.(component);
+    for component in NamesOfComponents( RP_Basic ) do
+        RP.(component) := RP_Basic.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

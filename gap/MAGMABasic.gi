@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MAGMADefault.gi           RingsForHomalg package        Markus Kirschmer
+##  MAGMABasic.gi           RingsForHomalg package        Markus Kirschmer
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMAGMADefault,
+InstallValue( CommonHomalgTableForMAGMABasic,
         
         rec(
                ## Must only then be provided by the RingPackage in case the default

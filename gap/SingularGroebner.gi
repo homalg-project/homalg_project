@@ -20,11 +20,11 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInSingularRep ],
         
   function( ext_ring_obj )
-    local RP, RP_default, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForSingularTools );
     
-    RP_default := ShallowCopy( CommonHomalgTableForSingularDefault );
+    RP_Basic := ShallowCopy( CommonHomalgTableForSingularBasic );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForSingularBestBasis );
     
@@ -92,8 +92,8 @@ InstallMethod( CreateHomalgTable,
 #      od;
 #    fi;
     
-    for component in NamesOfComponents( RP_default ) do
-        RP.(component) := RP_default.(component);
+    for component in NamesOfComponents( RP_Basic ) do
+        RP.(component) := RP_Basic.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

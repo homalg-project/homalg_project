@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GAPHomalgDefault.gi       RingsForHomalg package         Mohamed Barakat
+##  GAPHomalgBasic.gi       RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForGAPHomalgDefault,
+InstallValue( CommonHomalgTableForGAPHomalgBasic,
         
         rec(
                ## Must only then be provided by the RingPackage in case the default

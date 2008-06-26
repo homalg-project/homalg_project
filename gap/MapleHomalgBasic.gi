@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MapleHomalgDefault.gi     RingsForHomalg package         Mohamed Barakat
+##  MapleHomalgBasic.gi     RingsForHomalg package         Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -15,7 +15,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForMapleHomalgDefault,
+InstallValue( CommonHomalgTableForMapleHomalgBasic,
         
         rec(
                ## Must only then be provided by the RingPackage in case the default

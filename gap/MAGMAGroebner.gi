@@ -19,11 +19,11 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInMAGMARep ],
         
   function( ext_ring_obj )
-    local RP, RP_default, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMAGMATools );
     
-    RP_default := ShallowCopy( CommonHomalgTableForMAGMADefault );
+    RP_Basic := ShallowCopy( CommonHomalgTableForMAGMABasic );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMAGMABestBasis );
     
@@ -63,8 +63,8 @@ InstallMethod( CreateHomalgTable,
 
       );
     
-    for component in NamesOfComponents( RP_default ) do
-        RP.(component) := RP_default.(component);
+    for component in NamesOfComponents( RP_Basic ) do
+        RP.(component) := RP_Basic.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do
