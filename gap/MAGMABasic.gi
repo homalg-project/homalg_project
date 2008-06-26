@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MAGMABasic.gi           RingsForHomalg package        Markus Kirschmer
+##  MAGMABasic.gi             RingsForHomalg package        Markus Kirschmer
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
