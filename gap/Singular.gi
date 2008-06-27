@@ -114,7 +114,7 @@ InstallGlobalFunction( InitializeSingularTools,
     local IsMemberOfList, Difference, GetUnitPosition,
           GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
           IsZeroMatrix, IsIdentityMatrix, IsDiagonalMatrix,
-          GetCleanRowsPosition;
+          GetCleanRowsPositions;
     
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
@@ -278,8 +278,8 @@ proc IsDiagonalMatrix (matrix m)\n\
   return(c==z);\n\
 }";
     
-    GetCleanRowsPosition := "\n\
-proc GetCleanRowsPosition (matrix m, list l)\n\
+    GetCleanRowsPositions := "\n\
+proc GetCleanRowsPositions (matrix m, list l)\n\
 {\n\
   list rows = list();\n\
   for (int i=1;i<=size(l);i=i+1)\n\
@@ -293,7 +293,7 @@ proc GetCleanRowsPosition (matrix m, list l)\n\
       }\n\
     }\n\
   }\n\
-  return(rows);\n\
+  return(string(rows));\n\
 }";
     
     homalgSendBlocking( IsMemberOfList, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -304,7 +304,7 @@ proc GetCleanRowsPosition (matrix m, list l)\n\
     homalgSendBlocking( IsZeroMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetCleanRowsPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     
   end
 );

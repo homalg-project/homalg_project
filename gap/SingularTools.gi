@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  SingularTools.gi          RingsForHomalg package  Markus Lange-Hegermann
+##                                                            Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -269,7 +270,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                        return [ ];
                    fi;
                    
-                   list_string := homalgSendBlocking( [ "GetCleanRowsPosition(", M, ", list (", clean_columns, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetCleanRowsPosition );
+                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", list (", clean_columns, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    if list_string = "empty list" or list_string = "emptylist" then
                        return StringToIntList( "[]" );
