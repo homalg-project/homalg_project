@@ -25,3 +25,6 @@ DeclareGlobalFunction( "KernelMatSparse" );
 #
 #DeclareOperation( "Rank", #Rank with a known upper boundary
 #        [ IsSparseMatrix, IsInt ] );
+
+DeclareGlobalFunction( "RankOfIndicesListList" );
+

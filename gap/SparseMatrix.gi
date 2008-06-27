@@ -28,6 +28,45 @@ BindGlobal( "TheTypeSparseMatrix",
 BindGlobal( "TheTypeSparseMatrixGF2",
         NewType( TheFamilyOfSparseMatrices, IsSparseMatrixGF2Rep ) );
 
+##  <#GAPDoc Label="SparseMatrix">
+##  <ManSection >
+##  <Func Arg="mat[, R]" Name="SparseMatrix" />
+##  <Returns>a sparse matrix over the ring <A>R</A></Returns>
+##  <Func Arg="nrows, ncols, indices" Name="SparseMatrix" />
+##  <Returns>a sparse matrix over GF(2)</Returns>
+##  <Func Arg="nrows, ncols, indices, entries[, R]" Name="SparseMatrix" />
+##  <Returns>a sparse matrix over the ring <A>R</A></Returns>
+##  <Description>
+##  The sparse matrix constructor.
+##  In the one-argument form the SparseMatrix constructor converts a &GAP; matrix
+##  to a sparse matrix. If not provided the base ring <A>R</A> is found automatically.
+##  For the multi-argument form <A>nrows</A> and <A>ncols</A> are the dimensions
+##  of the matrix. <A>indices</A> must be a list of length <A>nrows</A> containing
+##  lists of the column indices of the matrix in ascending order.
+##
+##  <Example>
+##  gap> M := [ [ 0 , 1 ], [ 3, 0 ] ] * One( GF(2) );
+##  [ [ 0*Z(2), Z(2)^0 ], [ Z(2)^0, 0*Z(2) ] ]
+##  gap> SM := SparseMatrix( M );
+##  <a 2 x 2 sparse matrix over GF(2)>
+##  gap> IsSparseMatrix( SM );
+##  true
+##  gap> Display( SM );
+##   . 1
+##   1 .
+##  gap> SN := SparseMatrix( 2, 2, [ [ 2 ], [ 1 ] ] );
+##  <a 2 x 2 sparse matrix over GF(2)>
+##  gap> SN = SM;
+##  true
+##  SN := SparseMatrix( 2, 3, [ [ 2 ], [ 1, 3 ] ], [ [ 1 ], [ 3, 2 ] ] * One( GF(5) ) );
+##  <a 2 x 3 sparse matrix over GF(5)>
+##  gap> Display( SN );
+##   . 1 .
+##   3 . 2
+##  </Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( SparseMatrix,
   function( arg )
@@ -72,7 +111,9 @@ InstallGlobalFunction( SparseMatrix,
         return SparseMatrix( nrows, 0, List( [ 1 .. nrows ], i -> [] ), List( [ 1 .. nrows ], i -> [] ), "unknown" );
     fi;
     
-    ring := FindRing( List( M, i -> Filtered( i, j -> not IsZero(j) ) ) );
+    if not IsBound( ring ) then
+        ring := FindRing( List( M, i -> Filtered( i, j -> not IsZero(j) ) ) );
+    fi;
     
     if ring = GF(2) then
         indices := List( [ 1 .. nrows ], i -> Filtered( [ 1 .. ncols ], j -> IsOne( M[i][j] ) ) );
@@ -97,7 +138,28 @@ InstallGlobalFunction( SparseMatrix,
     
   end
 );
-
+  
+##  <#GAPDoc Label="ConvertSparseMatrixToMatrix">
+##  <ManSection >
+##  <Meth Arg="sm" Name="ConvertSparseMatrixToMatrix" />
+##  <Returns>a &GAP; matrix, [], or a list of empty lists</Returns>
+##  <Description>
+##  This function converts the sparse matrix <A>sm</A> into a &GAP; matrix.
+##  In case of nrows( sm ) = 0 or ncols( sm ) = 0 the return value is a list
+##  or a list of empty lists, respectively.
+##  <Example>
+##  gap> M := [ [ 0 , 1 ], [ 3, 0 ] ] * One( GF(3) );
+##  [ [ 0*Z(3), Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ]
+##  gap> SM := SparseMatrix( M );
+##  <a 2 x 2 sparse matrix over GF(3)>
+##  gap> N := ConvertSparseMatrixToMatrix( SM );
+##  [ [ 0*Z(3), Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ]
+##  gap> M = N;
+##  true  
+##  </Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##    
 InstallMethod( ConvertSparseMatrixToMatrix,
         [ IsSparseMatrix ],
@@ -132,6 +194,12 @@ InstallMethod( ConvertSparseMatrixToMatrix,
   
 );
   
+##  <#GAPDoc Label="CopyMat">
+##  <ManSection >
+##  <Meth Arg="sm" Name="CopyMat" />
+##  <Returns>a shallow copy of the sparse matrix <A>sm</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( CopyMat,
         [ IsSparseMatrix ],
@@ -146,7 +214,13 @@ InstallMethod( CopyMat,
     return SparseMatrix( M!.nrows, M!.ncols, indices, entries, M!.ring );
   end
 );
-
+  
+##  <#GAPDoc Label="GetEntry">
+##  <ManSection >
+##  <Meth Arg="sm, i, j" Name="GetEntry" />
+##  <Returns>the entry <A>sm</A>[<A>i</A>,<A>j</A>] of the sparse matrix <A>sm</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( GetEntry,
         [ IsSparseMatrix, IsInt, IsInt ],
@@ -161,6 +235,17 @@ InstallMethod( GetEntry,
   end
 );
 
+##  <#GAPDoc Label="AddEntry">
+##  <ManSection >
+##  <Meth Arg="sm, i, j, elm" Name="AddEntry" />
+##  <Returns><K>true</K> or a ring element</Returns>
+##  <Description>
+##  AddEntry adds the element <A>elm</A> to the sparse matrix <A>sm</A> at the
+##  (<A>i</A>,<A>j</A>)-th position. This is a Method with a side effect which
+##  returns true if you tried to add the 0 of the ring or the sum otherwise.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( AddEntry,
         [ IsSparseMatrix, IsInt, IsInt, IsObject ],
@@ -191,7 +276,7 @@ InstallMethod( AddEntry,
   end
 );
   
-###############################  
+###############################
 ## View and Display methods: ##
 ###############################
   
@@ -252,18 +337,14 @@ InstallMethod( FindRing,
         fi;
         i := i + 1;
     od;
-    
     if found_ring = true then
         return ring;
     else
         return "unknown";
     fi;
-    
   end
-  
 );
-  
-##
+
 InstallGlobalFunction( SparseZeroMatrix,
   function( arg )
     local nargs, ring;
@@ -488,6 +569,34 @@ InstallMethod( ncols,
   end
 );
 
+##
+InstallMethod( indices,
+        [ IsSparseMatrix ],
+  function( M )
+    return M!.indices;
+  end
+);
+  
+##
+InstallMethod( entries,
+        [ IsSparseMatrix ],
+  function( M )
+    if IsSparseMatrixGF2Rep( M ) then
+        return List( M!.indices, row -> ListWithIdenticalEntries( Length( row ), One( GF(2) ) ) );
+    else
+        return M!.entries;
+    fi;
+  end
+);
+
+##
+InstallMethod( ring,
+        [ IsSparseMatrix ],
+  function( M )
+    return M!.ring;
+  end
+);
+  
 ##
 InstallMethod( IsSparseZeroMatrix,
         [ IsSparseMatrix ],

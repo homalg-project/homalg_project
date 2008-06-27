@@ -66,6 +66,15 @@ DeclareOperation( "nrows", #FIXME: NrRows led to a weird error? Maybe conflict w
 DeclareOperation( "ncols", #see above
         [ IsSparseMatrix ] );
 
+DeclareOperation( "indices",
+        [ IsSparseMatrix ] );
+
+DeclareOperation( "entries",
+        [ IsSparseMatrix ] );
+
+DeclareOperation( "ring",
+        [ IsSparseMatrix ] );
+
 DeclareOperation( "IsSparseZeroMatrix",
         [ IsSparseMatrix ] );
 

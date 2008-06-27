@@ -53,7 +53,7 @@ InstallMethod( EchelonMatDestructive,
             if head <> 0 then
                 p := PositionSet( row_indices, j );
                 if p <> fail then
-                    AddRow( vectors.indices[ head ], row_indices  );
+                    row_indices := AddRow( vectors.indices[ head ], row_indices  );
                 fi;
             fi;
         od;
@@ -77,10 +77,9 @@ InstallMethod( EchelonMatDestructive,
         if head <> 0 then
             a := Difference( [1..head-1], heads{[j+1..ncols]} );
             for i in a do
-                row_indices := vectors.indices[i];
-                p := PositionSet( row_indices, j );
+                p := PositionSet( vectors.indices[i], j );
                 if p <> fail then
-                    AddRow( vectors.indices[ head ], row_indices );
+                    vectors.indices[i] := AddRow( vectors.indices[ head ], vectors.indices[i] );
                 fi;
             od;
         fi;
@@ -147,8 +146,8 @@ InstallMethod( EchelonMatTransformationDestructive,
             if head <> 0 then
                 p := PositionSet( row_indices, j );
                 if p <> fail then
-                    AddRow( coeffs.indices[ head ], T.indices[i] );
-                    AddRow( vectors.indices[ head ], row_indices );
+                    T.indices[i] := AddRow( coeffs.indices[ head ], T.indices[i] );
+                    row_indices := AddRow( vectors.indices[ head ], row_indices );
                 fi;
             fi;
         od;
@@ -175,11 +174,10 @@ InstallMethod( EchelonMatTransformationDestructive,
         if head <> 0 then
             a := Difference( [1..head-1], heads{[j+1..ncols]} );
             for i in a do
-                row_indices := vectors.indices[i];
-                p := PositionSet( row_indices, j );
+                p := PositionSet( vectors.indices[i], j );
                 if p <> fail then
-                    AddRow( coeffs.indices[ head ], coeffs.indices[i] );
-                    AddRow( vectors.indices[ head ], row_indices );
+                    coeffs.indices[i] := AddRow( coeffs.indices[ head ], coeffs.indices[i] );
+                    vectors.indices[i] := AddRow( vectors.indices[ head ], vectors.indices[i] );
                 fi;
             od;
         fi;
@@ -240,10 +238,9 @@ InstallMethod( ReduceMatWithEchelonMat,
         if Length( row2_indices ) > 0 then
             j := row2_indices[1];
             for k in [ 1 .. nrows1 ] do
-                row1_indices := M!.indices[k];
-                p := PositionSet( row1_indices, j );
+                p := PositionSet( M!.indices[k], j );
 		if p <> fail then
-                    AddRow( row2_indices, row1_indices );
+                    M!.indices[k] := AddRow( row2_indices, M!.indices[k] );
                 fi;
             od;
         fi;
@@ -291,22 +288,21 @@ InstallMethod( KernelEchelonMatDestructive,
     od;
     
     for i in [ 1 .. nrows ] do
-	row_indices := indices[i];        
         # Reduce the row with the known basis vectors.
         for j in [ 1 .. ncols ] do
             head := heads[j];
             if head <> 0 then
-                p := PositionSet( row_indices, j );
+                p := PositionSet( indices[i], j );
                 if p <> fail then
-                    AddRow( vectors.indices[ head ], row_indices );
-                    AddRow( coeffs.indices[ head ], T.indices[i] );
+                    indices[i] := AddRow( vectors.indices[ head ], indices[i] );
+                    T.indices[i] := AddRow( coeffs.indices[ head ], T.indices[i] );
                 fi;
             fi;
         od;
-        if Length( row_indices ) > 0 then
-            j := row_indices[1];
+        if Length( indices[i] ) > 0 then
+            j := indices[i][1];
             # We found a new basis vector.
-            Add( vectors.indices, row_indices );
+            Add( vectors.indices, indices[i] );
             heads[j]:= Length( vectors.indices );
             Add( coeffs.indices, T.indices[ i ] );
         else
@@ -351,21 +347,20 @@ InstallMethod( RankDestructive,
     vectors := rec( indices := [] );
     
     for i in [ 1 .. nrows ] do
-        row_indices := indices[i];
         # Reduce the row with the known basis vectors.
         for j in [ 1 .. ncols ] do
             head := heads[j];
             if head <> 0 then
-                p := PositionSet( row_indices, j );
+                p := PositionSet( indices[i], j );
                 if p <> fail then
-                    AddRow( vectors.indices[ head ], row_indices );
+                    indices[i] := AddRow( vectors.indices[ head ], indices[i] );
                 fi;
             fi;
         od;
-        if Length( row_indices ) > 0 then
-            j := row_indices[1];
+        if Length( indices[i] ) > 0 then
+            j := indices[i][1];
             # We found a new basis vector.
-            Add( vectors.indices, row_indices );
+            Add( vectors.indices, indices[i] );
             heads[j]:= Length( vectors.indices );
 	    if heads[j] = upper_boundary then
                 return upper_boundary;
@@ -378,7 +373,7 @@ InstallMethod( RankDestructive,
   end
 );
 
-BindGlobal( "RankOfIndicesListList",
+InstallGlobalFunction( "RankOfIndicesListList",
   function( m )
     # m must be a list of lists containing sets of positive integers
     # this is interpreted as the sparse representation of a GF(2)

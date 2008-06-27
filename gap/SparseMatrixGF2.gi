@@ -229,7 +229,7 @@ InstallMethod( \*,
     for i in [ 1 .. C!.nrows ] do
         for j in [ 1 .. Length( A!.indices[i] ) ] do
             rownr := A!.indices[i][j];
-            AddRow( B!.indices[rownr], C!.indices[i] );
+            C!.indices[i] := AddRow( B!.indices[rownr], C!.indices[i] );
         od;
     od;
     return C;
@@ -243,7 +243,7 @@ InstallMethod( \+,
     local C, i;
     C := CopyMat( A );
     for i in [ 1 .. C!.nrows ] do
-        AddRow( B!.indices[i], C!.indices[i] );
+        C!.indices[i] := AddRow( B!.indices[i], C!.indices[i] );
     od;
     return C;
   end
@@ -264,42 +264,50 @@ InstallMethod( IsSparseIdentityMatrix,
 );
   
 ##
-InstallOtherMethod( AddRow, #with desired side effect!
+InstallOtherMethod( AddRow, #warning: this method does not have a side effect like the other AddRow!
         [ IsList, IsList ],
-  function( row1_indices,  row2_indices )
-    local m, j, i, index1, index2;
-    
-    m := Length( row1_indices );
-    
-    if m = 0 then
-        return rec( indices := row2_indices );
-    fi;
-    
-    i := 1;
-    j := 1;
-    
-    while i <= m do
-        if j > Length( row2_indices ) then
-            Append( row2_indices, row1_indices{[ i .. m ]} );
-            break;
-        fi;
-        
-        index1 := row1_indices[i];
-        index2 := row2_indices[j];
-        
-        if index1 > index2 then
-            j := j + 1;
-        elif index1 < index2 then
-            Add( row2_indices, index1, j );
-            i := i + 1;
-        else #index1 = index2
-            Remove( row2_indices, j );
-            i := i + 1;
-        fi;
-    od;
-    
-    return rec( indices := row2_indices );
-    
+  function( row1, row2 )
+    return SYMMETRIC_DIFFERENCE_SETS( row1, row2 );
   end
-  
 );
+
+##
+#InstallOtherMethod( AddRow, #old method, with desired side effect!
+#        [ IsList, IsList ],
+#  function( row1_indices,  row2_indices )
+#    local m, j, i, index1, index2;
+#    
+#    m := Length( row1_indices );
+#    
+#    if m = 0 then
+#        return rec( indices := row2_indices );
+#    fi;
+#    
+#    i := 1;
+#    j := 1;
+#    
+#    while i <= m do
+#        if j > Length( row2_indices ) then
+#            Append( row2_indices, row1_indices{[ i .. m ]} );
+#            break;
+#        fi;
+#        
+#        index1 := row1_indices[i];
+#        index2 := row2_indices[j];
+#        
+#        if index1 > index2 then
+#            j := j + 1;
+#        elif index1 < index2 then
+#            Add( row2_indices, index1, j );
+#            i := i + 1;
+#        else #index1 = index2
+#            Remove( row2_indices, j );
+#            i := i + 1;
+#        fi;
+#    od;
+#    
+#    return rec( indices := row2_indices );
+#    
+#  end
+#  
+#);
