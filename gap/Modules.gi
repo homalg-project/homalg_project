@@ -62,10 +62,10 @@ end );
 ## ( cf. [BR, Subsection 3.2.1] )
 InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep, IsInt ],
+        [ IsInt, IsRelationsOfFinitelyPresentedModuleRep ],
         
-  function( M, _q )
-    local R, q, B, d, degrees, j, d_j, F_j, id, S, left, i;
+  function( _q, M )
+    local R, max, q, B, d, degrees, j, d_j, F_j, id, S, left, i;
     
     ## all options of Maple's homalg are now obsolete:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
@@ -73,7 +73,24 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     R := HomalgRing( M );
     
     if _q < 1 then
-        q := infinity;
+        if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
+            q := LeftGlobalDimension( M );
+        elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
+            q := RightGlobalDimension( M );
+        elif HasGlobalDimension( M ) then
+            q := GlobalDimension( M );
+        elif IsBound( M!.MaximumNumberOfResolutionSteps )
+          and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+            q := M!.MaximumNumberOfResolutionSteps;
+        elif IsBound( R!.MaximumNumberOfResolutionSteps )
+          and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+            q := R!.MaximumNumberOfResolutionSteps;
+        elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+          and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+            q := HOMALG.MaximumNumberOfResolutionSteps;
+        else
+            q := infinity;
+        fi;
     else
         q := _q;
     fi;
@@ -124,7 +141,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     fi;
     
     ## fill up with zero morphisms:
-    if q < infinity then
+    if _q > 0 then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
@@ -153,43 +170,21 @@ InstallMethod( Resolution,
         [ IsRelationsOfFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, q;
     
-    R := HomalgRing( M );
-    
-    if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
-        q := LeftGlobalDimension( M );
-    elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
-        q := RightGlobalDimension( M );
-    elif HasGlobalDimension( M ) then
-        q := GlobalDimension( M );
-    elif IsBound( M!.MaximumNumberOfResolutionSteps )
-      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
-        q := M!.MaximumNumberOfResolutionSteps;
-    elif IsBound( R!.MaximumNumberOfResolutionSteps )
-      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
-        q := R!.MaximumNumberOfResolutionSteps;
-    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
-      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
-        q := HOMALG.MaximumNumberOfResolutionSteps;
-    else
-        q := 0;
-    fi;
-    
-    return Resolution( M, q );
+    return Resolution( 0, M );
     
 end );
 
 InstallMethod( Resolution,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsInt ],
+        [ IsInt, IsFinitelyPresentedModuleRep ],
         
-  function( M, q )
+  function( q, M )
     local rel, d, d_1;
     
     rel := RelationsOfModule( M );
     
-    d := Resolution( rel, q );
+    d := Resolution( q, rel );
     
     d_1 := CertainMorphism( d, 1 );
     
@@ -209,42 +204,17 @@ InstallMethod( Resolution,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, q;
     
-    R := HomalgRing( M );
-    
-    if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
-        q := LeftGlobalDimension( M );
-    elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
-        q := RightGlobalDimension( M );
-    elif HasGlobalDimension( M ) then
-        q := GlobalDimension( M );
-    elif IsBound( M!.MaximumNumberOfResolutionSteps )
-      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
-        q := M!.MaximumNumberOfResolutionSteps;
-    elif IsBound( M!.MaximumNumberOfResolutionSteps )
-      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
-        q := M!.MaximumNumberOfResolutionSteps;
-    elif IsBound( R!.MaximumNumberOfResolutionSteps )
-      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
-        q := R!.MaximumNumberOfResolutionSteps;
-    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
-      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
-        q := HOMALG.MaximumNumberOfResolutionSteps;
-    else
-        q := 0;
-    fi;
-    
-    return Resolution( M, q );
+    return Resolution( 0, M );
     
 end );
 
 ##
 InstallMethod( SyzygiesModuleEmb,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsInt ],
+        [ IsInt, IsFinitelyPresentedModuleRep ],
         
-  function( M, q )
+  function( q, M )
     local d;
     
     if q < 0 then
@@ -256,18 +226,29 @@ InstallMethod( SyzygiesModuleEmb,
         return KernelEmb( FreeHullEpi( M ) );
     fi;
     
-    d := Resolution( M, q - 1 );
+    d := Resolution( q - 1, M );
     
     return KernelEmb( CertainMorphism( d, q - 1 ) );
     
 end );
 
 ##
+InstallMethod( SyzygiesModuleEmb,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return SyzygiesModuleEmb( 1, M );
+    
+end );
+
+##
 InstallMethod( SyzygiesModule,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsInt ],
+        [ IsInt, IsFinitelyPresentedModuleRep ],
         
-  function( M, q )
+  function( q, M )
     local d;
     
     if q < 0 then
@@ -276,28 +257,39 @@ InstallMethod( SyzygiesModule,
         return M;
     fi;
     
-    return Source( SyzygiesModuleEmb( M, q ) );
+    return Source( SyzygiesModuleEmb( q, M ) );
+    
+end );
+
+##
+InstallMethod( SyzygiesModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return SyzygiesModule( 1, M );
     
 end );
 
 ##
 InstallMethod( SyzygiesModuleEpi,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsInt ],
+        [ IsInt, IsFinitelyPresentedModuleRep ],
         
-  function( M, q )
-    local d, mu, epi;
+  function( q, M )
+    local d, mu, epi, mat;
     
     if q < 0 then
         Error( "a netative integer does not make sense\n" );
     elif q = 0 then
-        d := Resolution( M, 1 );
+        d := Resolution( 1, M );
         return CokernelEpi( CertainMorphism( d, 1 ) );
     fi;
     
-    d := Resolution( M, q );
+    d := Resolution( q, M );
     
-    mu := SyzygiesModuleEmb( M , q );
+    mu := SyzygiesModuleEmb( q, M );
     
     epi := PostDivide( CertainMorphism( d, q ), mu );
     
@@ -311,13 +303,24 @@ InstallMethod( SyzygiesModuleEpi,
 end );
 
 ##
+InstallMethod( SyzygiesModuleEpi,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return SyzygiesModuleEpi( 1, M );
+    
+end );
+
+##
 InstallMethod( FreeHullEpi,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return SyzygiesModuleEpi( M, 0 );
+    return SyzygiesModuleEpi( 0, M );
     
 end );
 
@@ -335,15 +338,15 @@ end );
 ##
 InstallMethod( SubResolution,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects, IsInt ],
+        [ IsInt, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
-  function( M, q )
+  function( q, M )
     local d, dq1, res;
     
     if q < 0 then
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
-        d := Resolution( M, 1 );
+        d := Resolution( 1, M );
         dq1 := CertainMorphism( d, 1 );
         res := AsATwoSequence( dq1, TheZeroMorphism( FreeHullModule( M ) ) );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
@@ -354,7 +357,7 @@ InstallMethod( SubResolution,
         return res;
     fi;
     
-    d := Resolution( M, q + 1 );
+    d := Resolution( q + 1, M );
     
     dq1 := CertainMorphism( d, q + 1 );
     
@@ -377,15 +380,15 @@ end );
 ##
 InstallMethod( SubResolution,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects, IsInt ],
+        [ IsInt, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
-  function( M, q )
+  function( q, M )
     local d, dq1, res;
     
     if q < 0 then
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
-        d := Resolution( M, 1 );
+        d := Resolution( 1, M );
         dq1 := CertainMorphism( d, 1 );
         res := AsATwoSequence( TheZeroMorphism( FreeHullModule( M ) ), dq1 );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
@@ -396,7 +399,7 @@ InstallMethod( SubResolution,
         return res;
     fi;
     
-    d := Resolution( M, q + 1 );
+    d := Resolution( q + 1, M );
     
     dq1 := CertainMorphism( d, q + 1 );
     

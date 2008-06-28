@@ -74,6 +74,9 @@ InstallValue( HOMALG,
             color_done := "\033[01m\033[4;32;40m",
             
             color_display := false,
+            
+            MaximumNumberOfResolutionSteps := 1001,
+            
            )
 );
 

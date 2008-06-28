@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Integers.gi                 homalg package               Mohamed Barakat
+##  EDIM.gi                     homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -25,7 +25,6 @@ InstallMethod( CreateHomalgTable,
                ## Can optionally be provided by the RingPackage
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
-               RingName := "Z",
                
                BestBasis := 
                  function( arg )
@@ -48,8 +47,8 @@ InstallMethod( CreateHomalgTable,
                        N := SmithIntMatLLL( Eval( M ) );
                    fi;
                    
-                   # return U:
-                   if nargs > 1 then
+                   # assign U:
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
                        SetEval( arg[2], N[2] );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
@@ -57,23 +56,25 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( arg[2], true );
                    fi;
                    
-                   # return V:
-                   if nargs > 2 then
+                   # assign V:
+                   if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
                        SetEval( arg[3], N[3] );
                        ResetFilterObj( arg[3], IsVoidMatrix );
                        SetNrRows( arg[3], NrColumns( M ) );
                        SetNrColumns( arg[3], NrColumns( M ) );
                        SetIsInvertibleMatrix( arg[3], true );
                    fi;
-                   
+		   
                    if nargs > 1 then
                        N := N[1];
                    fi;
                    
                    S := HomalgMatrix( N, R );
                    
+                   SetNrRows( S, NrRows( M ) );
+                   SetNrColumns( S, NrColumns( M ) );
                    SetIsDiagonalMatrix( S, true );
-     
+                   
                    return S;
                    
                  end,
@@ -111,8 +112,9 @@ InstallMethod( CreateHomalgTable,
                        ## compute N and U:
                        N := HermiteIntMatLLLTrans( Eval( M ) );
                        
-                       # return U:
+                       # assign U:
                        SetEval( arg[2], N[2] );
+                       ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
@@ -127,6 +129,9 @@ InstallMethod( CreateHomalgTable,
                    
                    H := HomalgMatrix( N, R );
                    
+                   SetNrRows( H, NrRows( M ) );
+                   SetNrColumns( H, NrColumns( M ) );
+                   
                    if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
                        SetIsDiagonalMatrix( H, true );   
                    else
@@ -136,9 +141,9 @@ InstallMethod( CreateHomalgTable,
                    return H;
                    
                  end
-                   
-          );
                  
+          );
+    
     Objectify( TheTypeHomalgTable, RP );
     
     return RP;

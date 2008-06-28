@@ -43,7 +43,13 @@ DeclareProperty( "IsExactSequence",
 DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
         IsHomalgComplex );
 
-DeclareProperty( "IsSplitShortExactSequence",	## we also need this as property!!!
+DeclareProperty( "IsSplitShortExactSequence",
+        IsHomalgComplex );
+
+DeclareProperty( "IsTriangle",
+        IsHomalgComplex );
+
+DeclareProperty( "IsExactTriangle",
         IsHomalgComplex );
 
 DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsATwoSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish
@@ -124,4 +130,7 @@ DeclareOperation( "CertainMorphismAsSubcomplex",
 
 DeclareOperation( "CertainTwoMorphismsAsSubcomplex",
         [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "LongSequence",
+        [ IsHomalgComplex ] );
 

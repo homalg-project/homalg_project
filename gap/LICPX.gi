@@ -45,6 +45,12 @@ InstallValue( LogicalImplicationsForHomalgComplexes,
           [ IsShortExactSequence,
             "implies", IsExactSequence ],
           
+          [ IsExactTriangle,
+            "implies", IsTriangle ],
+          
+          [ IsExactTriangle,
+            "implies", IsExactSequence ],
+          
           [ IsSplitShortExactSequence,
             "implies", IsShortExactSequence ],
           

@@ -962,6 +962,60 @@ InstallMethod( CertainTwoMorphismsAsSubcomplex,
 end );
 
 ##
+InstallMethod( LongSequence,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsTriangle ],
+        
+  function( T )
+    local mor, deg, C, j;
+    
+    mor := MorphismsOfComplex( T );
+    
+    deg := DegreesOfChainMap( mor[1] );
+    
+    C := HomalgComplex( CertainMorphism( mor[1], deg[1] ) );
+    Add( C, CertainMorphism( mor[2], deg[1] ) );
+    
+    for j in deg{[ 2 .. Length( deg ) ]} do
+        
+        Add( C, CertainMorphism( mor[3], j ) );
+        Add( C, CertainMorphism( mor[1], j ) );
+        Add( C, CertainMorphism( mor[2], j ) );
+        
+    od;
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( LongSequence,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsTriangle ],
+        
+  function( T )
+    local mor, deg, C, j;
+    
+    mor := MorphismsOfComplex( T );
+    
+    deg := DegreesOfChainMap( mor[1] );
+    
+    C := HomalgCocomplex( CertainMorphism( mor[1], deg[1] ) );
+    Add( C, CertainMorphism( mor[2], deg[1] ) );
+    
+    for j in deg{[ 2 .. Length( deg ) ]} do
+        
+        Add( C, CertainMorphism( mor[3], j - 1 ) );
+        Add( C, CertainMorphism( mor[1], j ) );
+        Add( C, CertainMorphism( mor[2], j ) );
+        
+    od;
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( OnLessGenerators,
         "for homalg complexes",
         [ IsHomalgComplex ],
@@ -1036,6 +1090,8 @@ InstallGlobalFunction( homalgResetFiltersOfComplex,
             IsGradedObject,
             IsExactSequence,
             IsShortExactSequence,
+            IsTriangle,
+            IsExactTriangle,
             IsSplitShortExactSequence ];
     fi;
     
@@ -1175,7 +1231,16 @@ InstallMethod( ViewObj,
         first_attribute := true;
     fi;
     
-    if HasIsSplitShortExactSequence( o ) and IsSplitShortExactSequence( o ) then
+    if HasIsExactTriangle( o ) and IsExactTriangle( o ) then
+        if first_attribute then
+            Print( "n" );
+        fi;
+        if cpx then
+            Print( " exact triangle" );
+        else
+            Print( " exact cotriangle" );
+        fi;
+    elif HasIsSplitShortExactSequence( o ) and IsSplitShortExactSequence( o ) then
         if cpx then
             Print( " split short exact sequence" );
         else
@@ -1189,10 +1254,9 @@ InstallMethod( ViewObj,
         fi;
     elif HasIsExactSequence( o ) and IsExactSequence( o ) then
         if first_attribute then
-            Print( " exact sequence" );
-        else
-            Print( "n exact sequence" );
+            Print( "n" );
         fi;
+        Print( " exact sequence" );
     elif HasIsComplex( o ) then
         if IsComplex( o ) then
             if cpx then
@@ -1212,13 +1276,13 @@ InstallMethod( ViewObj,
             if cpx then
                 Print( " sequence" );
             else
-                Print( " co-sequence" );
+                Print( " cosequence" );
             fi;
         else
             if cpx then
                 Print( " sequence of non-well-definded maps" );
             else
-                Print( " co-sequence of non-well-definded maps" );
+                Print( " cosequence of non-well-definded maps" );
             fi;
         fi;
     else
@@ -1248,7 +1312,11 @@ InstallMethod( ViewObj,
         if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
             Print( " module" );
         else
-            Print( " complex" );
+            if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+                Print( " complex" );
+            else
+                Print( " cocomplex" );
+            fi;
         fi;
         
         Print( " at degree ", degrees[1], ">" );
@@ -1272,10 +1340,22 @@ InstallMethod( ViewObj,
         if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
             Print( " modules" );
         else
-            Print( " complexes" );
+            if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+                Print( " complexes" );
+            else
+                Print( " cocomplexes" );
+            fi;
         fi;
         
-        Print( " at degrees ", degrees, ">" );
+        if HasIsExactTriangle( o ) and IsExactTriangle( o ) then
+            if cpx then
+                Print( " at degrees ", [ degrees[2], degrees[3], degrees[4], degrees[2] ], ">" );
+            else
+                Print( " at degrees ", [ degrees[1], degrees[2], degrees[3], degrees[1] ], ">" );
+            fi;
+        else
+            Print( " at degrees ", degrees, ">" );
+        fi;
         
     fi;
     
@@ -1309,12 +1389,18 @@ InstallMethod( ViewObj,
     
     if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
         Print( " module" );
+        if l > 1 then
+            Print( "s" );
+        fi;
     else
-        Print( " complex" );
-    fi;
-    
-    if l > 1 then
-        Print( "s" );
+        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            Print( " complex" );
+        else
+            Print( " cocomplex" );
+        fi;
+        if l > 1 then
+            Print( "es" );
+        fi;
     fi;
     
     Print( " at degree" );
@@ -1357,12 +1443,18 @@ InstallMethod( ViewObj,
     
     if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
         Print( " module" );
+        if l > 1 then
+            Print( "s" );
+        fi;
     else
-        Print( " complex" );
-    fi;
-    
-    if l > 1 then
-        Print( "s" );
+        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            Print( " complex" );
+        else
+            Print( " cocomplex" );
+        fi;
+        if l > 1 then
+            Print( "es" );
+        fi;
     fi;
     
     Print( " at cohomology degree" );
@@ -1405,12 +1497,18 @@ InstallMethod( ViewObj,
     
     if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
         Print( " module" );
+        if l > 1 then
+            Print( "s" );
+        fi;
     else
-        Print( " complex" );
-    fi;
-    
-    if l > 1 then
-        Print( "s" );
+        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            Print( " complex" );
+        else
+            Print( " cocomplex" );
+        fi;
+        if l > 1 then
+            Print( "es" );
+        fi;
     fi;
     
     Print( " at degree" );
@@ -1453,12 +1551,18 @@ InstallMethod( ViewObj,
     
     if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
         Print( " module" );
+        if l > 1 then
+            Print( "s" );
+        fi;
     else
-        Print( " complex" );
-    fi;
-    
-    if l > 1 then
-        Print( "s" );
+        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            Print( " complex" );
+        else
+            Print( " cocomplex" );
+        fi;
+        if l > 1 then
+            Print( "es" );
+        fi;
     fi;
     
     Print( " at degree" );

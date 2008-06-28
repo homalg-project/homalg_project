@@ -28,25 +28,34 @@ DeclareOperation( "/",
         [ IsHomalgRelations, IsHomalgModule ] );
 
 DeclareOperation( "Resolution",
-        [ IsHomalgRelations, IsInt ] );
+        [ IsInt, IsHomalgRelations ] );
 
 DeclareOperation( "Resolution",
         [ IsHomalgRelations ] );
 
 DeclareOperation( "Resolution",
-        [ IsHomalgModule, IsInt ] );
+        [ IsInt, IsHomalgModule ] );
 
 DeclareOperation( "Resolution",
         [ IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesModuleEmb",
-        [ IsHomalgModule, IsInt ] );
+        [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "SyzygiesModuleEmb",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesModule",
-        [ IsHomalgModule, IsInt ] );
+        [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "SyzygiesModule",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "SyzygiesModuleEpi",
-        [ IsHomalgModule, IsInt ] );
+        [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "SyzygiesModuleEpi",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "FreeHullModule",
         [ IsHomalgModule ] );
@@ -55,5 +64,5 @@ DeclareOperation( "FreeHullEpi",
         [ IsHomalgModule ] );
 
 DeclareOperation( "SubResolution",
-        [ IsHomalgModule, IsInt ] );
+        [ IsInt, IsHomalgModule ] );
 

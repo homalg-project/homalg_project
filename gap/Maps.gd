@@ -17,7 +17,7 @@
 # basic operations:
 
 DeclareOperation( "Resolution",
-        [ IsHomalgMap, IsInt ] );
+        [ IsInt, IsHomalgMap ] );
 
 DeclareOperation( "Resolution",
         [ IsHomalgMap ] );

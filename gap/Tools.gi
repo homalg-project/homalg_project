@@ -1096,6 +1096,8 @@ InstallMethod( IsIdentityMatrix,
     
     if NrRows( M ) <> NrColumns( M ) then
         return false;
+    elif NrRows( M ) = 0 then
+        return true;
     fi;
     
     R := HomalgRing( M );

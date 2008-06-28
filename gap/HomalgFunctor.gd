@@ -31,6 +31,9 @@ DeclareCategory( "IsHomalgFunctor",
 #
 ####################################
 
+DeclareAttribute( "Genesis",
+        IsHomalgFunctor );
+
 ####################################
 #
 # global functions and operations:
@@ -42,6 +45,9 @@ DeclareCategory( "IsHomalgFunctor",
 DeclareGlobalFunction( "CreateHomalgFunctor" );
 
 # basic operations:
+
+DeclareOperation( "NaturalEmbedding",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "NameOfFunctor",
         [ IsHomalgFunctor ] );
@@ -97,6 +103,9 @@ DeclareOperation( "InstallFunctorOnChainMaps",
 DeclareOperation( "InstallFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "InstallDeltaFunctor",
+        [ IsHomalgFunctor ] );
+
 DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnComplexes" );
 
 DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes" );
@@ -108,4 +117,10 @@ DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnChainMaps" );
 DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps" );
 
 DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps" );
+
+DeclareGlobalFunction( "HelperToInstallUnivariateDeltaFunctor" );
+
+DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateDeltaFunctor" );
+
+DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateDeltaFunctor" );
 

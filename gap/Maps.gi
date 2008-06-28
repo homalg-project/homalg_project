@@ -17,9 +17,9 @@
 ##
 InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single map)
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsInt ],
+        [ IsInt, IsMapOfFinitelyGeneratedModulesRep ],
         
-  function( phi, _q )
+  function( _q, phi  )
     local q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, c;
     
     q := _q;
@@ -27,13 +27,13 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     S := Source( phi );
     T := Range( phi );
     
-    d_S := Resolution( S, q );
-    d_T := Resolution( T, q );
+    d_S := Resolution( q, S );
+    d_T := Resolution( q, T );
     
     if q < 1 then
         q := Maximum( List( [ d_S, d_T ], HighestDegreeInComplex ) );
-        d_S := Resolution( S, q );
-        d_T := Resolution( T, q );
+        d_S := Resolution( q, S );
+        d_T := Resolution( q, T );
     fi;
     
     index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
@@ -81,23 +81,7 @@ InstallMethod( Resolution,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local R, q;
     
-    R := HomalgRing( phi );
-    
-    if IsBound( phi!.MaximumNumberOfResolutionSteps )
-      and IsInt( phi!.MaximumNumberOfResolutionSteps ) then
-        q := phi!.MaximumNumberOfResolutionSteps;
-    elif IsBound( R!.MaximumNumberOfResolutionSteps )
-      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
-        q := R!.MaximumNumberOfResolutionSteps;
-    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
-      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
-        q := HOMALG.MaximumNumberOfResolutionSteps;
-    else
-        q := 0;
-    fi;
-    
-    return Resolution( phi, q );
+    return Resolution( 0, phi );
     
 end );

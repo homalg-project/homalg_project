@@ -67,6 +67,21 @@ HOMALG.FunctorOn :=
 ####################################
 
 ##
+InstallMethod( NaturalEmbedding,
+        "for homalg modules being values of functors on objects",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( FM )
+    
+    if IsBound(FM!.NaturalEmbedding) then
+        return FM!.NaturalEmbedding;
+    else
+        Error( "the module does not have a component \"NaturalEmbedding\"; either the module is not the result of a functor or the functor is not properly implemented (cf. arXiv:math/0701146)\n" );
+    fi;
+    
+end );
+
+##
 InstallMethod( NameOfFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -213,16 +228,16 @@ InstallMethod( FunctorObj,
                         fi;
                     elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) and
                       ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
-		      ## this "elif" is extremely important:
-		      ## To apply a certain functor (e.g. derived ones) to an object
-		      ## we might need to apply another functor to a morphism A. This
-		      ## morphisms could be the outcome of a third functor applied to another
-		      ## morphism B, and although there is a caching for functors applied
-		      ## to morphisms, B often becomes obsolete since it was only used in an
-		      ## intermediat step and gets deleted after a while
-		      ## (e.g. CompleteImageSquare( alpha1, Functor(morphism), beta1 )).
-		      ## Hence B has to be recomputed to get B' and A has to be recomputed
-		      ## using B' to get A'. Now A=A' but not identical!
+                        ## this "elif" is extremely important:
+                        ## To apply a certain functor (e.g. derived ones) to an object
+                        ## we might need to apply another functor to a morphism A. This
+                        ## morphisms could be the outcome of a third functor applied to another
+                        ## morphism B, and although there is a caching for functors applied
+                        ## to morphisms, B often becomes obsolete since it was only used in an
+                        ## intermediat step and gets deleted after a while
+                        ## (e.g. CompleteImageSquare( alpha1, Functor(morphism), beta1 )).
+                        ## Hence B has to be recomputed to get B' and A has to be recomputed
+                        ## using B' to get A'. Now A=A' but not identical!
                         return obj;
                     fi;
                 fi;
@@ -354,9 +369,9 @@ InstallMethod( FunctorMap,
     F_source := CallFuncList( ValueGlobal( functor_name ), arg_source );
     F_target := CallFuncList( ValueGlobal( functor_name ), arg_target );
     
-    emb_source := F_source!.NaturalEmbedding;
-    emb_target := F_target!.NaturalEmbedding;
-        
+    emb_source := NaturalEmbedding( F_source );
+    emb_target := NaturalEmbedding( F_target );
+    
     if IsBound( Functor!.OnMorphisms ) then
         arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
@@ -402,9 +417,17 @@ InstallMethod( InstallFunctorOnObjects,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local functor_operation, number_of_arguments, natural_transformation,
+    local genesis, der_arg, functor_operation, number_of_arguments,
+          natural_transformation,
           natural_transformation1, natural_transformation2,
           filter_obj, filter0, filter1_obj, filter2_obj;
+    
+    if HasGenesis( Functor ) then
+        genesis := Genesis( Functor );
+        if IsBound( genesis[3] ) then
+            der_arg := genesis[3];
+        fi;
+    fi;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -572,6 +595,22 @@ InstallMethod( InstallFunctorOnObjects,
                         
                     end );
                     
+                    InstallOtherMethod( functor_operation,
+                            "for homalg modules",
+                            [ IsInt, filter1_obj, IsString ],
+                      function( c, o, s )
+                        local R;
+                        
+                        if IsHomalgRing( o ) then
+                            R := o;
+                        else
+                            R := HomalgRing( o );
+                        fi;
+                        
+                        return functor_operation( c, o, R, s );
+                        
+                    end );
+                    
                 fi;
                 
                 InstallOtherMethod( functor_operation,
@@ -616,6 +655,68 @@ InstallMethod( InstallFunctorOnObjects,
                     return FunctorObj( Functor, [ c, obj1, obj2 ] );
                     
                 end );
+                
+                if IsBound( der_arg ) then
+                    
+                    if IsCovariantFunctor( Functor, der_arg ) then
+                        
+                        InstallOtherMethod( functor_operation,
+                                "for homalg modules",
+                                [ IsInt, filter1_obj, filter2_obj, IsString ],
+                          function( c, o1, o2, s )
+                            local H, C, j;
+                            
+                            if s <> "a" then
+                                TryNextMethod( );
+                            fi;
+                            
+                            H := functor_operation( 0, o1, o2 );
+                            
+                            C := HomalgComplex( H );
+                            
+                            for j in [ 1 .. c ] do
+                                
+                                H := functor_operation( j, o1, o2 );
+                                
+                                Add( C, H );
+                                
+                            od;
+                            
+                            return C;
+                            
+                        end );
+                        
+                    else
+                        
+                        InstallOtherMethod( functor_operation,
+                                "for homalg modules",
+                                [ IsInt, filter1_obj, filter2_obj, IsString ],
+                          function( c, o1, o2, s )
+                            local H, C, j;
+                            
+                            if s <> "a" then
+                                TryNextMethod( );
+                            fi;
+                            
+                            H := functor_operation( 0, o1, o2 );
+                            
+                            C := HomalgCocomplex( H );
+                            
+                            for j in [ 1 .. c ] do
+                                
+                                H := functor_operation( j, o1, o2 );
+                                
+                                Add( C, H );
+                                
+                            od;
+                            
+                            return C;
+                            
+                        end );
+                        
+                    fi;
+                    
+                fi;
                 
             else
                 
@@ -700,8 +801,15 @@ InstallMethod( InstallFunctorOnMorphisms,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local functor_operation, number_of_arguments, filter_mor,
+    local genesis, der_arg, functor_operation, number_of_arguments, filter_mor,
           filter0, filter1_obj, filter1_mor, filter2_obj, filter2_mor;
+    
+    if HasGenesis( Functor ) then
+        genesis := Genesis( Functor );
+        if IsBound( genesis[3] ) then
+            der_arg := genesis[3];
+        fi;
+    fi;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
         
@@ -802,6 +910,18 @@ InstallMethod( InstallFunctorOnMorphisms,
                         
                     end );
                     
+                    InstallOtherMethod( functor_operation,
+                            "for homalg morphisms",
+                            [ IsInt, filter1_mor, IsString ],
+                      function( c, m, s )
+                        local R;
+                        
+                        R := HomalgRing( m );
+                        
+                        return functor_operation( c, m, R, s );
+                        
+                    end );
+                    
                 fi;
                 
                 InstallOtherMethod( functor_operation,
@@ -890,6 +1010,84 @@ InstallMethod( InstallFunctorOnMorphisms,
                         
                     end );
                 
+                fi;
+                
+                if IsBound( der_arg ) then
+                    
+                    if IsCovariantFunctor( Functor, der_arg ) then
+                        
+                        InstallOtherMethod( functor_operation,
+                                "for homalg morphisms",
+                                [ IsInt, filter1_mor, filter2_obj, IsString ],
+                          function( q, m, o, s )
+                            local S, T, HS, HT, Hm, c, j;
+                            
+                            if s <> "a" then
+                                TryNextMethod( );
+                            fi;
+                            
+                            S := Source( m );
+                            T := Range( m );
+                            
+                            HS := functor_operation( q, S, o, "a" );
+                            HT := functor_operation( q, T, o, "a" );
+                            
+                            Hm := functor_operation( 0, m, o );
+                            
+                            c := HomalgChainMap( Hm, HS, HT );
+                            
+                            for j in [ 1 .. q ] do
+                                
+                                Hm := functor_operation( j, m, o );
+                                
+                                Add( c, Hm );
+                                
+                            od;
+                            
+                            SetIsMorphism( c, true );
+                            
+                            return c;
+                            
+                        end );
+                        
+                    else
+                        
+                        InstallOtherMethod( functor_operation,
+                                "for homalg morphisms",
+                                [ IsInt, filter1_mor, filter2_obj, IsString ],
+                          function( q, m, o, s )
+                            local S, T, HS, HT, Hm, c, j;
+                            
+                            if s <> "a" then
+                                TryNextMethod( );
+                            fi;
+                            
+                            S := Source( m );
+                            T := Range( m );
+                            
+                            HS := functor_operation( q, S, o, "a" );
+                            HT := functor_operation( q, T, o, "a" );
+                            
+                            Hm := functor_operation( 0, m, o );
+                            
+                            c := HomalgChainMap( Hm, HT, HS );
+                            
+                            for j in [ 1 .. q ] do
+                                
+                                Hm := functor_operation( j, m, o );
+                                
+                                Add( c, Hm );
+                                
+                            od;
+                            
+                            SetIsMorphism( c, true );
+                            
+                            return c;
+                            
+                        end );
+                        
+                    fi;
+                    
                 fi;
                 
             else
@@ -1012,7 +1210,7 @@ end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
   function( Functor, filter_cpx, complex_or_cocomplex, i )
-    local filter0, functor_operation;
+    local functor_operation, filter0;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
@@ -1184,7 +1382,7 @@ end );
 
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter2_obj, filter1_cpx, complex_or_cocomplex, i )
-    local filter0, functor_operation;
+    local functor_operation, filter0;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
@@ -1202,19 +1400,11 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     "for homalg complexes",
                     [ filter0, filter1_cpx ],
               function( q, c )
-                local R, Fc;
+                local R;
                 
                 R := HomalgRing( c );
                 
-                Fc := functor_operation( q, c, R );
-                
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
-                    Fc := AsATwoSequence( Fc );
-                fi;
-                
-                return Fc;
+                return functor_operation( q, c, R );
                 
             end );
             
@@ -1330,19 +1520,11 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     "for homalg complexes",
                     [ filter1_cpx ],
               function( c )
-                local R, Fc;
+                local R;
                 
                 R := HomalgRing( c );
                 
-                Fc := functor_operation( c, R );
-                
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
-                    Fc := AsATwoSequence( Fc );
-                fi;
-                
-                return Fc;
+                return functor_operation( c, R );
                 
             end );
             
@@ -1456,7 +1638,7 @@ end );
 
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter1_obj, filter2_cpx, complex_or_cocomplex, i )
-    local filter0, functor_operation;
+    local functor_operation, filter0;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
@@ -1785,7 +1967,7 @@ end );
 
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
   function( Functor, filter_chm, source_target, i )
-    local filter0, functor_operation;
+    local functor_operation, filter0;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
@@ -1933,7 +2115,7 @@ end );
 
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter2_obj, filter1_chm, source_target, i )
-    local filter0, functor_operation;
+    local functor_operation, filter0;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
@@ -2165,7 +2347,7 @@ end );
 
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter1_obj, filter2_chm, source_target, i )
-    local filter0, functor_operation;
+    local functor_operation, filter0;
     
     functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
     
@@ -2486,6 +2668,639 @@ InstallMethod( InstallFunctor,
 end );
 
 ##
+InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
+  function( Functor )
+    local genesis, der, original_operation, functor_operation,
+          filter0;
+    
+    genesis := Genesis( Functor );
+    
+    der := genesis[1];
+    
+    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+        
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
+        
+        if IsAdditiveFunctor( Functor ) = true then
+            
+            if der = "LeftDerivedFunctor" then
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, E, s )
+                    local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
+                    
+                    if s <> "c" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    horse_shoe := Resolution( n, E );
+                    
+                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
+                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    
+                    dE := Source( d_psi );
+                    
+                    FnM := functor_operation( n, M );
+                    Fn_1N := functor_operation( n - 1, N );
+                    
+                    j_n := CertainMorphism( d_psi, n );
+                    b_n := CertainMorphism( dE, n );
+                    i_n_1 := CertainMorphism( d_phi, n - 1 );
+                    
+                    j_n := original_operation( j_n );
+                    b_n := original_operation( b_n );
+                    i_n_1 := original_operation( i_n_1 );
+                    
+                    return ConnectingHomomorphism( FnM, j_n, b_n, i_n_1, Fn_1N );
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, E, s )
+                    local M, N, HM, HN, delta, c, j;
+                    
+                    if s <> "a" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    HM := functor_operation( n, M, "a" );
+                    HN := functor_operation( n, N, "a" );
+                    
+                    delta := functor_operation( 1, E, "c" );
+                    
+                    c := HomalgChainMap( delta, HM, HN, [ 1, -1 ] );
+                    
+                    for j in [ 2 .. n ] do
+                        
+                        delta := functor_operation( j, E, "c" );
+                        
+                        Add( c, delta );
+                        
+                    od;
+                    
+                    SetIsMorphism( c, true );
+                    
+                    return c;
+                    
+                end );
+                
+            elif der = "RightDerivedCofunctor" then
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ filter0, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, E, s )
+                    local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
+                    
+                    if s <> "c" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    horse_shoe := Resolution( n + 1, E );
+                    
+                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
+                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    
+                    dE := Source( d_psi );
+                    
+                    FnN := functor_operation( n, N );
+                    Fnp1M := functor_operation( n + 1, M );
+                    
+                    i_n := CertainMorphism( d_phi, n );
+                    b_np1 := CertainMorphism( dE, n + 1 );
+                    j_np1 := CertainMorphism( d_psi, n + 1 );
+                    
+                    i_n := original_operation( i_n );
+                    b_n := original_operation( b_np1 );
+                    j_np1 := original_operation( j_np1 );
+                    
+                    return ConnectingHomomorphism( FnN, i_n, b_n, j_np1, Fnp1M );
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, E, s )
+                    local M, N, HM, HN, delta, c, j;
+                    
+                    if s <> "a" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    HM := functor_operation( n + 1, M, "a" );
+                    HN := functor_operation( n + 1, N, "a" );
+                    
+                    delta := functor_operation( 0, E, "c" );
+                    
+                    c := HomalgChainMap( delta, HN, HM, [ 0, 1 ] );
+                    
+                    for j in [ 1 .. n ] do
+                        
+                        delta := functor_operation( j, E, "c" );
+                        
+                        Add( c, delta );
+                        
+                    od;
+                    
+                    SetIsMorphism( c, true );
+                    
+                    return c;
+                    
+                end );
+                
+            fi;
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
+  function( Functor )
+    local genesis, der, original_operation, functor_operation,
+          filter0;
+    
+    genesis := Genesis( Functor );
+    
+    der := genesis[1];
+    
+    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+        
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
+        
+        if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+            
+            InstallOtherMethod( functor_operation,
+                    "for homalg complexes",
+                    [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+              function( n, E, s )
+                local R;
+                
+                R := HomalgRing( E );
+                
+                return functor_operation( n, E, R, s );
+                
+            end );
+            
+        fi;
+        
+        if IsAdditiveFunctor( Functor, 1 ) = true then
+            
+            if der = "LeftDerivedFunctor" then
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                  function( n, E, o, s )
+                    local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
+                    
+                    if s <> "c" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    horse_shoe := Resolution( n, E );
+                    
+                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
+                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    
+                    dE := Source( d_psi );
+                    
+                    FnM := functor_operation( n, M, o );
+                    Fn_1N := functor_operation( n - 1, N, o );
+                    
+                    j_n := CertainMorphism( d_psi, n );
+                    b_n := CertainMorphism( dE, n );
+                    i_n_1 := CertainMorphism( d_phi, n - 1 );
+                    
+                    j_n := original_operation( j_n, o );
+                    b_n := original_operation( b_n, o );
+                    i_n_1 := original_operation( i_n_1, o );
+                    
+                    return ConnectingHomomorphism( FnM, j_n, b_n, i_n_1, Fn_1N );
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                  function( n, E, o, s )
+                    local M, N, HM, HN, delta, c, j;
+                    
+                    if s <> "a" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    HM := functor_operation( n, M, o, "a" );
+                    HN := functor_operation( n, N, o, "a" );
+                    
+                    delta := functor_operation( 1, E, o, "c" );
+                    
+                    c := HomalgChainMap( delta, HM, HN, [ 1, -1 ] );
+                    
+                    for j in [ 2 .. n ] do
+                        
+                        delta := functor_operation( j, E, o, "c" );
+                        
+                        Add( c, delta );
+                        
+                    od;
+                    
+                    SetIsMorphism( c, true );
+                    
+                    return c;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                  function( n, E, o, s )
+                    local psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    if s <> "l" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    psi := LowestDegreeMorphismInComplex( E );
+                    phi := HighestDegreeMorphismInComplex( E );
+                    
+		    Hpsi := functor_operation( n, psi, o, "a" );
+		    Hphi := functor_operation( n, phi, o, "a" );
+		    
+		    delta := functor_operation( n, E, o, "a" );
+		    
+		    T := HomalgComplex( Hpsi );
+		    Add( T, Hphi );
+		    Add( T, delta );
+		    
+		    SetIsExactTriangle( T, true );
+                    
+		    return T;
+		    
+                end );
+                
+            elif der = "RightDerivedCofunctor" then
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                  function( n, E, o, s )
+                    local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
+                    
+                    if s <> "c" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    horse_shoe := Resolution( n + 1, E );
+                    
+                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
+                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    
+                    dE := Source( d_psi );
+                    
+                    FnN := functor_operation( n, N, o );
+                    Fnp1M := functor_operation( n + 1, M, o );
+                    
+                    i_n := CertainMorphism( d_phi, n );
+                    b_np1 := CertainMorphism( dE, n + 1 );
+                    j_np1 := CertainMorphism( d_psi, n + 1 );
+                    
+                    i_n := original_operation( i_n, o );
+                    b_n := original_operation( b_np1, o );
+                    j_np1 := original_operation( j_np1, o );
+                    
+                    return ConnectingHomomorphism( FnN, i_n, b_n, j_np1, Fnp1M );
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                  function( n, E, o, s )
+                    local M, N, HM, HN, delta, c, j;
+                    
+                    if s <> "a" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    HM := functor_operation( n + 1, M, o, "a" );
+                    HN := functor_operation( n + 1, N, o, "a" );
+                    
+                    delta := functor_operation( 0, E, o, "c" );
+                    
+                    c := HomalgChainMap( delta, HN, HM, [ 0, 1 ] );
+                    
+                    for j in [ 1 .. n ] do
+                        
+                        delta := functor_operation( j, E, o, "c" );
+                        
+                        Add( c, delta );
+                        
+                    od;
+                    
+                    SetIsMorphism( c, true );
+                    
+                    return c;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                  function( n, E, o, s )
+                    local psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    if s <> "l" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    psi := LowestDegreeMorphismInComplex( E );
+                    phi := HighestDegreeMorphismInComplex( E );
+                    
+		    Hpsi := functor_operation( n + 1, psi, o, "a" );
+		    Hphi := functor_operation( n + 1, phi, o, "a" );
+		    
+		    delta := functor_operation( n, E, o, "a" );
+		    
+		    T := HomalgCocomplex( Hpsi );
+		    Add( T, Hphi );
+		    Add( T, delta );
+		    
+		    SetIsExactTriangle( T, true );
+                    
+		    return T;
+		    
+                end );
+                
+            fi;
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
+  function( Functor )
+    local genesis, der, covariant, original_operation, functor_operation,
+          filter0;
+    
+    genesis := Genesis( Functor );
+    
+    der := genesis[1];
+    
+    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+        
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
+        
+        if Length( Functor!.1[1] ) > 1 and Functor!.1[1][Length( Functor!.1[1] )] = "distinguished" then
+            
+            InstallOtherMethod( functor_operation,
+                    "for homalg complexes",
+                    [ filter0, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+              function( n, E, s )
+                local R;
+                
+                R := HomalgRing( E );
+                
+                return functor_operation( n, E, R, s );
+                
+            end );
+            
+        fi;
+        
+        if IsAdditiveFunctor( Functor, 1 ) = true then
+            
+            if der = "LeftDerivedFunctor" then
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, o, E, s )
+                    local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
+                    
+                    if s <> "c" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    horse_shoe := Resolution( n, E );
+                    
+                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
+                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    
+                    dE := Source( d_psi );
+                    
+                    FnM := functor_operation( n, o, M );
+                    Fn_1N := functor_operation( n - 1, o, N );
+                    
+                    j_n := CertainMorphism( d_psi, n );
+                    b_n := CertainMorphism( dE, n );
+                    i_n_1 := CertainMorphism( d_phi, n - 1 );
+                    
+                    j_n := original_operation( o, j_n );
+                    b_n := original_operation( o, b_n );
+                    i_n_1 := original_operation( o, i_n_1 );
+                    
+                    return ConnectingHomomorphism( FnM, j_n, b_n, i_n_1, Fn_1N );
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, o, E, s )
+                    local M, N, HM, HN, delta, c, j;
+                    
+                    if s <> "a" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    HM := functor_operation( n, o, M, "a" );
+                    HN := functor_operation( n, o, N, "a" );
+                    
+                    delta := functor_operation( 1, o, E, "c" );
+                    
+                    c := HomalgChainMap( delta, HM, HN, [ 1, -1 ] );
+                    
+                    for j in [ 2 .. n ] do
+                        
+                        delta := functor_operation( j, o, E, "c" );
+                        
+                        Add( c, delta );
+                        
+                    od;
+                    
+                    SetIsMorphism( c, true );
+                    
+                    return c;
+                    
+                end );
+                
+            elif der = "RightDerivedCofunctor" then
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ filter0, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, o, E, s )
+                    local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
+                    
+                    if s <> "c" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    horse_shoe := Resolution( n + 1, E );
+                    
+                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
+                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    
+                    dE := Source( d_psi );
+                    
+                    FnN := functor_operation( n, o, N );
+                    Fnp1M := functor_operation( n + 1, o, M );
+                    
+                    i_n := CertainMorphism( d_phi, n );
+                    b_np1 := CertainMorphism( dE, n + 1 );
+                    j_np1 := CertainMorphism( d_psi, n + 1 );
+                    
+                    i_n := original_operation( o, i_n );
+                    b_n := original_operation( o, b_np1 );
+                    j_np1 := original_operation( o, j_np1 );
+                    
+                    return ConnectingHomomorphism( FnN, i_n, b_n, j_np1, Fnp1M );
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                  function( n, o, E, s )
+                    local M, N, HM, HN, delta, c, j;
+                    
+                    if s <> "a" then
+                        TryNextMethod( );
+                    fi;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    HM := functor_operation( n + 1, o, M, "a" );
+                    HN := functor_operation( n + 1, o, N, "a" );
+                    
+                    delta := functor_operation( 0, o, E, "c" );
+                    
+                    c := HomalgChainMap( delta, HN, HM, [ 0, 1 ] );
+                    
+                    for j in [ 1 .. n ] do
+                        
+                        delta := functor_operation( j, o, E, "c" );
+                        
+                        Add( c, delta );
+                        
+                    od;
+                    
+                    SetIsMorphism( c, true );
+                    
+                    return c;
+                    
+                end );
+                
+            fi;
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( InstallDeltaFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local number_of_arguments;
+    
+    number_of_arguments := MultiplicityOfFunctor( Functor );
+    
+    if number_of_arguments = 1 then
+        
+        HelperToInstallUnivariateDeltaFunctor( Functor );
+        
+    elif number_of_arguments = 2 then
+        
+        HelperToInstallFirstArgumentOfBivariateDeltaFunctor( Functor );
+        HelperToInstallSecondArgumentOfBivariateDeltaFunctor( Functor );
+        
+    fi;
+    
+end );
+
+##
 InstallMethod( RightSatelliteOfCofunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep, IsPosInt, IsString ],
@@ -2512,7 +3327,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             Error( "the negative ", c, ". right satellite is not defined\n" );
         fi;
         
-        mu := SyzygiesModuleEmb( arg[p + 1], c );
+        mu := SyzygiesModuleEmb( c, arg[p + 1] );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -2536,7 +3351,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             Error( "the negative ", c, ". right satellite is not defined\n" );
         fi;
         
-        d := Resolution( arg[p + 1], c - 1 );
+        d := Resolution( c - 1, arg[p + 1] );
         
         if IsHomalgMap( arg[p + 1] ) then
             if c = 0 then
@@ -2547,7 +3362,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             fi;
         else
             ## the following is not really mu but Source( mu ):
-            mu := SyzygiesModule( arg[p + 1], c );
+            mu := SyzygiesModule( c, arg[p + 1] );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
@@ -2585,11 +3400,12 @@ InstallMethod( RightSatelliteOfCofunctor,
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
-                    [ [ "Genesis", [ "RightSatelliteOfCofunctor", Functor, p ] ] ],
                     [ [ "OnObjects", _Functor_OnObjects ] ],
                     [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     
     SF := CallFuncList( CreateHomalgFunctor, data );
+    
+    SetGenesis( SF, [ "RightSatelliteOfCofunctor", Functor, p ] );
     
     if m > 1 then
         SF!.ContainerForWeakPointersOnComputedBasicObjects :=
@@ -2600,10 +3416,7 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
     
-    InstallFunctorOnObjects( SF );
-    InstallFunctorOnMorphisms( SF );
-    InstallFunctorOnComplexes( SF );
-    InstallFunctorOnChainMaps( SF );
+    InstallFunctor( SF );
     
     fname := Concatenation( [ "Functor_", name ] );
     
@@ -2647,7 +3460,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             Error( "the negative ", c, ". left satellite is not defined\n" );
         fi;
         
-        mu := SyzygiesModuleEmb( arg[p + 1], c );
+        mu := SyzygiesModuleEmb( c, arg[p + 1] );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -2673,7 +3486,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             Error( "the negative ", c, ". left satellite is not defined\n" );
         fi;
         
-        d := Resolution( arg[p + 1], c - 1 );
+        d := Resolution( c - 1, arg[p + 1] );
         
         if IsHomalgMap( arg[p + 1] ) then
             if c = 0 then
@@ -2684,7 +3497,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             fi;
         else
             ## the following is not really mu but Source( mu ):
-            mu := SyzygiesModule( arg[p + 1], c );
+            mu := SyzygiesModule( c, arg[p + 1] );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
@@ -2722,11 +3535,12 @@ InstallMethod( LeftSatelliteOfFunctor,
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
-                    [ [ "Genesis", [ "LeftSatelliteOfFunctor", Functor, p ] ] ],
                     [ [ "OnObjects", _Functor_OnObjects ] ],
                     [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     
     SF := CallFuncList( CreateHomalgFunctor, data );
+    
+    SetGenesis( SF, [ "LeftSatelliteOfFunctor", Functor, p ] );
     
     if m > 1 then
         SF!.ContainerForWeakPointersOnComputedBasicObjects :=
@@ -2737,10 +3551,7 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
     
-    InstallFunctorOnObjects( SF );
-    InstallFunctorOnMorphisms( SF );
-    InstallFunctorOnComplexes( SF );
-    InstallFunctorOnChainMaps( SF );
+    InstallFunctor( SF );
     
     fname := Concatenation( [ "Functor_", name ] );
     
@@ -2782,7 +3593,7 @@ InstallMethod( RightDerivedCofunctor,
             Error( "the negative ", c, ". right derived cofunctor is not defined\n" );
         fi;
         
-        dd := SubResolution( arg[p + 1], c );
+        dd := SubResolution( c, arg[p + 1] );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ dd ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -2804,7 +3615,7 @@ InstallMethod( RightDerivedCofunctor,
             Error( "the negative ", c, ". right derived cofunctor is not defined\n" );
         fi;
         
-        d := Resolution( arg[p + 1], c );
+        d := Resolution( c, arg[p + 1] );
         
         if IsHomalgMap( arg[p + 1] ) then
             d_c := CertainMorphism( d, c );
@@ -2847,11 +3658,12 @@ InstallMethod( RightDerivedCofunctor,
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
-                    [ [ "Genesis", [ "RightDerivedCofunctor", Functor, p ] ] ],
                     [ [ "OnObjects", _Functor_OnObjects ] ],
                     [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     
     RF := CallFuncList( CreateHomalgFunctor, data );
+    
+    SetGenesis( RF, [ "RightDerivedCofunctor", Functor, p ] );
     
     if m > 1 then
         RF!.ContainerForWeakPointersOnComputedBasicObjects :=
@@ -2862,10 +3674,9 @@ InstallMethod( RightDerivedCofunctor,
     
     DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
     
-    InstallFunctorOnObjects( RF );
-    InstallFunctorOnMorphisms( RF );
-    InstallFunctorOnComplexes( RF );
-    InstallFunctorOnChainMaps( RF );
+    InstallFunctor( RF );
+    
+    InstallDeltaFunctor( RF );
     
     fname := Concatenation( [ "Functor_", name ] );
     
@@ -2907,7 +3718,7 @@ InstallMethod( LeftDerivedFunctor,
             Error( "the negative ", c, ". left derived functor is not defined\n" );
         fi;
         
-        dd := SubResolution( arg[p + 1], c );
+        dd := SubResolution( c, arg[p + 1] );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ dd ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -2929,7 +3740,7 @@ InstallMethod( LeftDerivedFunctor,
             Error( "the negative ", c, ". left derived functor is not defined\n" );
         fi;
         
-        d := Resolution( arg[p + 1], c );
+        d := Resolution( c, arg[p + 1] );
         
         if IsHomalgMap( arg[p + 1] ) then
             d_c := CertainMorphism( d, c );
@@ -2972,11 +3783,12 @@ InstallMethod( LeftDerivedFunctor,
                     [ [ "name", name ], [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
-                    [ [ "Genesis", [ "LeftDerivedFunctor", Functor, p ] ] ],
                     [ [ "OnObjects", _Functor_OnObjects ] ],
                     [ [ "OnMorphisms", _Functor_OnMorphisms ] ] );
     
     LF := CallFuncList( CreateHomalgFunctor, data );
+    
+    SetGenesis( LF, [ "LeftDerivedFunctor", Functor, p ] );
     
     if m > 1 then
         LF!.ContainerForWeakPointersOnComputedBasicObjects :=
@@ -2987,10 +3799,9 @@ InstallMethod( LeftDerivedFunctor,
     
     DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
     
-    InstallFunctorOnObjects( LF );
-    InstallFunctorOnMorphisms( LF );
-    InstallFunctorOnComplexes( LF );
-    InstallFunctorOnChainMaps( LF );
+    InstallFunctor( LF );
+    
+    InstallDeltaFunctor( LF );
     
     fname := Concatenation( [ "Functor_", name ] );
     

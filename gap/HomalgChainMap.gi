@@ -288,7 +288,9 @@ InstallMethod( Add,
         [ IsHomalgChainMap, IsMorphismOfFinitelyGeneratedModulesRep ],
         
   function( c, phi )
-    local degrees, l;
+    local d, degrees, l;
+    
+    d := DegreeOfMorphism( c );
     
     degrees := DegreesOfChainMap( c );
     
@@ -302,7 +304,7 @@ InstallMethod( Add,
     
     if CertainObject( Source( c ), l ) <> Source( phi ) then
         Error( "the ", l, ". module of the source complex in the chain map and the source of the new morphism are not the same object\n" );
-    elif CertainObject( Range( c ), l ) <> Range( phi ) then
+    elif CertainObject( Range( c ), l + d ) <> Range( phi ) then
         Error( "the ", l, ". module of the target complex in the chain map and the target of the new morphism are not the same object\n" );
     fi;
     
@@ -829,7 +831,7 @@ InstallGlobalFunction( HomalgChainMap,
     if IsHomalgMap( morphism ) then
         if not IsIdenticalObj( Source( morphism ), CertainObject( source, degrees[1] ) ) then
             Error( "the map and the source complex do not match\n" );
-        elif not IsIdenticalObj( Range( morphism ), CertainObject( target, degrees[1] ) ) then
+        elif not IsIdenticalObj( Range( morphism ), CertainObject( target, degrees[1] + degree ) ) then
             Error( "the map and the target complex do not match\n" );
         fi;
     else
