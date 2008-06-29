@@ -32,8 +32,9 @@ InstallValue( HOMALG_IO_Singular,
             handle_output := true,	## a Singular specific
             check_output := true,	## a Singular specific looks for newlines without commas
             setring := SETRING_Singular,## a Singular specific
-            multiple_delete := _Singular_multiple_delete,
             define := "=",
+            delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
+            multiple_delete := _Singular_multiple_delete,
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
