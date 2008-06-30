@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GaussDefault.gi           GaussForHomalg package          Simon Goertzen
+##  GaussBasic.gi             GaussForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,7 +14,7 @@
 #
 ####################################
 
-InstallValue( CommonHomalgTableForGaussDefault,
+InstallValue( CommonHomalgTableForGaussBasic,
         
   rec(
       ## Must only then be provided by the RingPackage in case the default
@@ -27,18 +27,21 @@ InstallValue( CommonHomalgTableForGaussDefault,
       R := HomalgRing( A );
       M := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
       SetEval( M, ReduceMat( Eval( A ), Eval ( B ) ).reduced_matrix );
+      ResetFilterObj( M, IsVoidMatrix );
       return M;
     end,
       
     #this uses ReduceMatTransformation from the Gauss Package to reduce A with B to M and return T such that M = A + T * B
     DecideZeroRowsEffectively :=
     function( A, B, T )
-      local R, M;
+      local R, M, RMT;
       R := HomalgRing( A );
       M := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
       RMT := ReduceMatTransformation( Eval( A ), Eval( B ) );
       SetEval( M, RMT.reduced_matrix );
       SetEval( T, RMT.transformation );
+      ResetFilterObj( M, IsVoidMatrix );
+      ResetFilterObj( T, IsVoidMatrix );
       return M;
     end,
         
@@ -55,6 +58,7 @@ InstallValue( CommonHomalgTableForGaussDefault,
       fi;
       N := HomalgVoidMatrix( nrows( syz ), NrRows( M ), R );
       SetEval( N, syz );
+      ResetFilterObj( N, IsVoidMatrix );
       return N;
     end,
     

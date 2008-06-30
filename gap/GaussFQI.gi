@@ -23,7 +23,7 @@ InstallMethod( CreateHomalgTable,
     
     RP := ShallowCopy( CommonHomalgTableForGaussTools );
     
-    RP_default := ShallowCopy( CommonHomalgTableForGaussDefault );
+    RP_default := ShallowCopy( CommonHomalgTableForGaussBasic );
     
     RP_specific := rec( 
                ## Must be defined if other functions are not defined

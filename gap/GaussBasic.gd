@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  GaussDefault.gd           GaussForHomalg package          Simon Goertzen
+##  GaussBasic.gd             GaussForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations for Gauss Default
+##  Declarations for Gauss Basic
 ##
 #############################################################################
 
@@ -14,5 +14,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "CommonHomalgTableForGaussDefault" );
+DeclareGlobalVariable( "CommonHomalgTableForGaussBasic" );
 
