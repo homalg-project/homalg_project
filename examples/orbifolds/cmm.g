@@ -19,9 +19,9 @@ mult:=[
 dim := 2;
 
 #matrix sizes: 
-# [ 124, 709, 4517, 30692, 211056 ]
+# [ 124, 709, 4517, 30692, 211056, 1458659 ]
 #factors:
-# [ 5.71774, 6.37094, 6.79478, 6.87658 ]
+# [ 5.71774, 6.37094, 6.79478, 6.87658, 6.91124 ]
 
 #cohomology over Z:
 #---------->>>>  Z^(1 x 1)
@@ -38,11 +38,19 @@ dim := 2;
 # V4 leads to growing non-periodic cohomologies
 
 #cohomology over GF(2):
-#---------->>>>  GF(2)^(1 x 1)
-#---------->>>>  GF(2)^(1 x 3)
-#---------->>>>  GF(2)^(1 x 5)
-#---------->>>>  GF(2)^(1 x 7)
-#---------->>>>  GF(2)^(1 x 9)
+# 1: 12 x 124 matrix with rank 11 and kernel dimension 1.
+# 2: 124 x 709 matrix with rank 110 and kernel dimension 14.
+# 3: 709 x 4517 matrix with rank 594 and kernel dimension 115.
+# 4: 4517 x 30692 matrix with rank 3916 and kernel dimension 601.
+# 5: 30692 x 211056 matrix with rank 26767 and kernel dimension 3925.
+# 6: 211056 x 1458659 matrix with rank 184278 and kernel dimension 26778.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 5)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 7)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 9)
+# Cohomology dimension at degree 5:  GF(2)^(1 x 11)
+    
 
 #cohomology over Z/4Z:
 #---------->>>>  Z/4Z^(1 x 1)

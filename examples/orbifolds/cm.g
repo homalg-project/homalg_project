@@ -24,12 +24,13 @@ dim := 3;
 #---------->>>>  Z/< 2 >
 
 #cohomology over GF(2):
-# GF(2)^(1 x 1)
-# GF(2)^(1 x 2)
-# GF(2)^(1 x 2)
-# GF(2)^(1 x 2)
-# GF(2)^(1 x 2)
-# GF(2)^(1 x 2)
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 5:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 6:  GF(2)^(1 x 2)
 
 #1: 12 x 118 matrix with rank 11 and kernel dimension 1.
 #2: 118 x 568 matrix with rank 105 and kernel dimension 13.
@@ -37,7 +38,7 @@ dim := 3;
 #4: 2965 x 17278 matrix with rank 2502 and kernel dimension 463.
 #5: 17278 x 105211 matrix with rank 14774 and kernel dimension 2504.
 #6: 105211 x 659548 matrix with rank 90435 and kernel dimension 14776.
-      
+#7: 659548 x 4236040 matrix with rank 569111 and kernel dimension 90437.
 
 #cohomology over Z/4Z:
 #---->>>>  Z/4Z^(1 x 1)

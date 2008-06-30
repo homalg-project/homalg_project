@@ -31,14 +31,21 @@ dim := 4;
 
 #up to 4 works, cohomology: [0],[1],[2,2,2,0],[1],[2,2,2,2],[1],...
 
-#cohomology up to 6 over GF(2):
-# GF(2)^(1 x 1)
-# GF(2)^(1 x 3)
-# GF(2)^(1 x 4)
-# GF(2)^(1 x 4)
-# GF(2)^(1 x 4)
-# GF(2)^(1 x 4)
-
+# 1: 16 x 126 matrix with rank 15 and kernel dimension 1.
+# 2: 126 x 420 matrix with rank 108 and kernel dimension 18.
+# 3: 420 x 1590 matrix with rank 308 and kernel dimension 112.
+# 4: 1590 x 7536 matrix with rank 1278 and kernel dimension 312.
+# 5: 7536 x 37506 matrix with rank 6254 and kernel dimension 1282.
+# 6: 37506 x 187500 matrix with rank 31248 and kernel dimension 6258.
+# 7: 187500 x 937500 matrix with rank 156248 and kernel dimension 31252.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 5:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 6:  GF(2)^(1 x 4)
+      
 #homology over GF(2):
 #----------->>>>  GF(2)^(1 x 1)
 #----------->>>>  GF(2)^(1 x 3)

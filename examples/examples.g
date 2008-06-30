@@ -50,7 +50,7 @@ if mode = fail or not mode in [ 1, 2 ] then
     mode := 1;
 fi;
 
-Print( "\nSelect Method:\n 1) Full syzygie calculation (default)\n 2) matrix creation and rank calculation only\n:" );
+Print( "\nSelect Method:\n 1) Full syzygy calculation (default)\n 2) matrix creation and rank calculation only\n:" );
 method := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
 
 if method = fail or not method in [ 1, 2 ] then
@@ -138,17 +138,19 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
         for i in [ 1 .. Length( M ) ] do
             M[i] := Eval( M[i] );
             L[i] :=[ nrows(  M[i] ), ncols( M[i] ) ];
-            Print( " ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
+            Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
+	    t := Runtimes().user_time;
 	    L[i][3] := Rank( M[i] );
+	    d := Runtimes().user_time - t;
 	    L[i][4] := L[i][2] - L[i][3];
-            Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ".\n" );
+            Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ". Time: ", TimeToString( d ), "\n" );
         od;
         H := [ L[1][4] ]; #first image dimension
         for i in [ 2 .. Length( L ) ] do
             H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
         od;
         for i in [ 1 .. Length( H ) ] do
-            Print( "Homology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
+            Print( "# Homology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
         od;
     fi;
 elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
@@ -163,17 +165,19 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
         for i in [ 1 .. Length( M ) ] do
             M[i] := Eval( M[i] );
             L[i] :=[ nrows(  M[i] ), ncols( M[i] ) ];
-            Print( " ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
+            Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
+            t := Runtimes().user_time;
             L[i][3] := Rank( M[i] );
+            d := Runtimes().user_time - t;
             L[i][4] := L[i][1] - L[i][3];
-            Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ".\n" );
+            Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ". Time: ", TimeToString( d ), "\n" );
         od;
         H := [ L[1][4] ]; #first kernel dimension
         for i in [ 2 .. Length( L ) ] do
             H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
         od;
         for i in [ 1 .. Length( H ) ] do
-            Print( "Cohomology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
+            Print( "# Cohomology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
         od;
     fi;
 fi;
