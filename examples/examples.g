@@ -26,7 +26,8 @@ fi;
 
 List_of_CAS := [ "", "ExternalGAP", "Sage", "MAGMA", "Maple", "Singular" ];
 
-HOMALG_RINGS.DefaultCAS := List_of_CAS[ CAS ];
+HOMALG_RINGS.RingOfIntegersDefaultCAS := List_of_CAS[ CAS ];
+HOMALG_RINGS.FieldOfRationalsDefaultCAS := List_of_CAS[ CAS ];
 
 Print( "Select Mode:\n 1) Read example from file (default)\n 2) Create your own ring\n:" );
 mode := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
