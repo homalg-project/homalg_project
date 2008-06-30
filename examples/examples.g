@@ -11,23 +11,25 @@ Print( Concatenation( "\nSelect Computer Algebra System:\n",
         " 2) External GAP\n",
         " 3) Sage\n",
         " 4) MAGMA\n",
-        " 5) Maple\n",
-        " 6) Singular (default)\n",
+        " 5) Maple	(default for Z-algebras)\n",
+        " 6) Singular	(default for Q-algebras)\n",
         ":" ) );
 
 CAS := Filtered( ReadLine( input ), c->c <> '\n' );
 i := Int( CAS );
 
 if CAS = "" or i = fail then
-    CAS := 6;
+    CAS := "default";
 else
     CAS := i;
 fi;
 
 List_of_CAS := [ "", "ExternalGAP", "Sage", "MAGMA", "Maple", "Singular" ];
 
-HOMALG_RINGS.RingOfIntegersDefaultCAS := List_of_CAS[ CAS ];
-HOMALG_RINGS.FieldOfRationalsDefaultCAS := List_of_CAS[ CAS ];
+if CAS <> "default" then
+    HOMALG_RINGS.RingOfIntegersDefaultCAS := List_of_CAS[ CAS ];
+    HOMALG_RINGS.FieldOfRationalsDefaultCAS := List_of_CAS[ CAS ];
+fi;
 
 Print( "Select Mode:\n 1) Read example from file (default)\n 2) Create your own ring\n:" );
 mode := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
