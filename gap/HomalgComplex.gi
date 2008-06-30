@@ -1232,7 +1232,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsExactTriangle( o ) and IsExactTriangle( o ) then
-        if first_attribute then
+        if not first_attribute then
             Print( "n" );
         fi;
         if cpx then
@@ -1253,10 +1253,14 @@ InstallMethod( ViewObj,
             Print( " short exact cosequence" );
         fi;
     elif HasIsExactSequence( o ) and IsExactSequence( o ) then
-        if first_attribute then
+        if not first_attribute then
             Print( "n" );
         fi;
-        Print( " exact sequence" );
+        if cpx then
+            Print( " exact sequence" );
+        else
+            Print( " exact cosequence" );
+        fi;
     elif HasIsComplex( o ) then
         if IsComplex( o ) then
             if cpx then

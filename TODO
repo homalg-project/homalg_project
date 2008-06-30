@@ -1,7 +1,8 @@
 - make the generation of the methods for functors automatic
 
 - ask Max:
-  . echo on for Read?
+  . why does GAP become slow when getting in the range
+    of definig 1/2 million variables in Singular?
   . when does a "returned" function remember its context? Always?
   . display issues ($COLUMNS) of external CAS
   . searching for an alternative path fails
