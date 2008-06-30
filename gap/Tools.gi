@@ -821,6 +821,17 @@ InstallMethod( IsUnit,
         [ IsHomalgRing, IsRingElement ],
         
   function( R, r )
+    
+    return IsUnit( R!.ring, r );
+    
+end );
+
+##
+InstallMethod( IsUnit,
+        "for homalg ring elements",
+        [ IsHomalgRing, IsRingElement and IsHomalgExternalRingElement ],
+        
+  function( R, r )
     local RP;
     
     if HasIsZero( r ) and IsZero( r ) then
