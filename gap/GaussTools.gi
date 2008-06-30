@@ -53,6 +53,12 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return CopyMat( Eval( C ) );
                  end,
                    
+               # this enables Homalg to prevent calling sparse algorithms on GAP dense matrices
+               ConvertMatrix :=
+                 function( M, R )
+                   return SparseMatrix( M, R );
+                 end,
+                   
                # for a general ring (field) the involution is just the transposed matrix
                Involution :=
                  function( M )
