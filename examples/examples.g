@@ -50,7 +50,7 @@ if mode = fail or not mode in [ 1, 2 ] then
     mode := 1;
 fi;
 
-Print( "\nSelect Method:\n 1) Full syzygy calculation (default)\n 2) matrix creation and rank calculation only\n:" );
+Print( "\nSelect Method:\n 1) Full syzygy computation (default)\n 2) matrix creation and rank computation only\n:" );
 method := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
 
 if method = fail or not method in [ 1, 2 ] then
@@ -130,10 +130,10 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
     Print( "Creating the homology matrices ...\n" );
     M := CreateHomologyMatrix( ot, ss, R );
     if method = 1 then
-        Print( "Starting homology calculation ...\n" );
+        Print( "Starting homology computation ...\n" );
         H := Homology( ot, ss, R );
     elif method = 2 then
-        Print( "Starting rank calculation ...\n" );
+        Print( "Starting rank computation ...\n" );
         L := [];
         for i in [ 1 .. Length( M ) ] do
             M[i] := Eval( M[i] );
@@ -157,10 +157,10 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
     Print( "Creating the cohomology matrices ...\n" );
     M := CreateCohomologyMatrix( ot, ss, R );
     if method = 1 then
-        Print( "Starting cohomology calculation ...\n" );
+        Print( "Starting cohomology computation ...\n" );
         H := Cohomology( ot, ss, R );
     elif method = 2 then
-        Print( "Starting rank calculation ...\n" );
+        Print( "Starting rank computation ...\n" );
         L := [];
         for i in [ 1 .. Length( M ) ] do
             M[i] := Eval( M[i] );
