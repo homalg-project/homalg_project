@@ -905,7 +905,7 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, M, ar, type, matrix, internal;
+    local nargs, R, M, ar, type, matrix, RP, internal;
     
     nargs := Length( arg );
     
@@ -966,6 +966,10 @@ InstallGlobalFunction( HomalgMatrix,
     
     if IsList( arg[1] ) and Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
         M := List( arg[1], a -> [a] ); ## NormalizeInput
+        RP := homalgTable( R );
+        if IsBound(RP!.ConvertMatrix) then
+            M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
+        fi;
     else
         M := arg[1];
     fi;

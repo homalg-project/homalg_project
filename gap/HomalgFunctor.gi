@@ -3564,7 +3564,7 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                   function( n, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -3663,7 +3663,7 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                   function( n, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -3810,7 +3810,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                   function( n, E, o, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -3909,7 +3909,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                   function( n, E, o, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4040,7 +4040,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                   function( n, o, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4139,7 +4139,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                   function( n, o, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4286,7 +4286,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                   function( n, E, o2, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4385,7 +4385,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                   function( n, E, o2, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4516,7 +4516,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                   function( n, o1, E, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4615,7 +4615,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                   function( n, o1, E, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4746,7 +4746,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                   function( n, o1, o2, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
@@ -4845,7 +4845,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                   function( n, o1, o2, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
-                    if s <> "l" then
+                    if s <> "t" then
                         TryNextMethod( );
                     fi;
                     
