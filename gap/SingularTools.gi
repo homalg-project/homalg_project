@@ -46,8 +46,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                        e := u;
                    fi;
                    if e{[1]} = "-" then
-                     #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", e );
-                     return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], "need_output", HOMALG_IO.Pictograms.DivideByUnit);
+                       #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", e );
+                       return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], "need_output", HOMALG_IO.Pictograms.DivideByUnit);
                    else
                        return homalgSendBlocking( [ "(",  a, ")/", e ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    fi;

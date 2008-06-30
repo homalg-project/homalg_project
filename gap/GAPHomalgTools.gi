@@ -38,7 +38,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                DivideByUnit :=
                  function( a, u )
                    
-                   return homalgSendBlocking( [ a, "/(", u, ")"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                   return homalgSendBlocking( [ "(", a, ")/(", u, ")"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
                
@@ -132,7 +132,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [ a, "*", A ], HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ "(", a, ")*", A ], HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                

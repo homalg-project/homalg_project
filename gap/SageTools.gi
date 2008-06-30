@@ -143,7 +143,7 @@ InstallValue( CommonHomalgTableForSageTools,
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [a, "*", A], HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ "(", a, ")*", A ], HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                
