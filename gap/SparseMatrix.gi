@@ -370,7 +370,7 @@ InstallGlobalFunction( SparseZeroMatrix,
         return SparseMatrix( arg[1], arg[2], List( [ 1 .. arg[1] ], i -> [] ), List( [ 1 .. arg[1] ], i -> [] ), ring );
     fi;
     
-    return fail;
+    Error( "wrong number of arguments in SparseZeroMatrix!" );
     
   end
 );
@@ -508,8 +508,8 @@ InstallMethod( \*,
     local i, m;
     if IsZero( a ) then
         return SparseZeroMatrix( A!.nrows, A!.ncols, A!.ring );
-    elif IsUnit( a ) then
-        return SparseZeroMatrix( A!.nrows, A!.ncols, A!.indices, A!.entries * a, A!.ring );
+    elif IsUnit( A!.ring, a ) then
+        return SparseMatrix( A!.nrows, A!.ncols, A!.indices, A!.entries * a, A!.ring );
     else
         for i in [ 1 .. A!.nrows ] do
             m := MultRow( A!.indices[ i ], A!.entries[ i ], a );

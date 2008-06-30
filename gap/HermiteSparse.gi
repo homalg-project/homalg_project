@@ -298,7 +298,7 @@ InstallMethod( ReduceMatWithHermiteMat,
     
     ncols := mat!.ncols;
     if ncols <> N!.ncols then
-        return fail;
+        Error( "different number of columns - can't reduce!" );
     elif ncols = 0 then
         return rec( reduced_matrix := mat );
     fi;
@@ -371,7 +371,7 @@ InstallMethod( ReduceMatWithHermiteMatTransformation,
     
     ncols := mat!.ncols;
     if ncols <> N!.ncols then
-        return fail;
+        Error( "different number of columns - can't reduce!" );
     elif ncols = 0 then
         return rec( reduced_matrix := mat, transformation := T );
     fi;
