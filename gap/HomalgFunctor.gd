@@ -61,6 +61,12 @@ DeclareOperation( "IsCovariantFunctor",
 DeclareOperation( "IsCovariantFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "IsDistinguishedArgumentOfFunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "IsDistinguishedFirstArgumentOfFunctor",
+        [ IsHomalgFunctor ] );
+
 DeclareOperation( "IsAdditiveFunctor",
         [ IsHomalgFunctor, IsInt ] );
 
@@ -79,14 +85,41 @@ DeclareOperation( "FunctorMap",
 DeclareOperation( "RightSatelliteOfCofunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
+DeclareOperation( "RightSatelliteOfCofunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
 DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
+
+DeclareOperation( "LeftSatelliteOfFunctor",
+        [ IsHomalgFunctor, IsInt ] );
 
 DeclareOperation( "RightDerivedCofunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "LeftDerivedFunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
+
+DeclareOperation( "RightDerivedCofunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "LeftDerivedFunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "ComposeFunctors",
+        [ IsHomalgFunctor, IsInt, IsHomalgFunctor, IsString ] );
+
+DeclareOperation( "ComposeFunctors",
+        [ IsHomalgFunctor, IsInt, IsHomalgFunctor ] );
+
+DeclareOperation( "ComposeFunctors",
+        [ IsHomalgFunctor, IsHomalgFunctor, IsString ] );
+
+DeclareOperation( "ComposeFunctors",
+        [ IsHomalgFunctor, IsHomalgFunctor ] );
+
+DeclareOperation( "*",
+        [ IsHomalgFunctor, IsHomalgFunctor ] );
 
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
@@ -123,4 +156,10 @@ DeclareGlobalFunction( "HelperToInstallUnivariateDeltaFunctor" );
 DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateDeltaFunctor" );
 
 DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateDeltaFunctor" );
+
+DeclareGlobalFunction( "HelperToInstallFirstArgumentOfTrivariateDeltaFunctor" );
+
+DeclareGlobalFunction( "HelperToInstallSecondArgumentOfTrivariateDeltaFunctor" );
+
+DeclareGlobalFunction( "HelperToInstallThirdArgumentOfTrivariateDeltaFunctor" );
 

@@ -681,11 +681,23 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, 1, "Tor" );
 ## RHom( c, M, N )
 ##
 
-RightDerivedCofunctor( Functor_Hom, 1, "RHom" );
+RightDerivedCofunctor( Functor_Hom, 1 );
 
 ##
 ## LTensorProduct( c, M, N )
 ##
 
-LeftDerivedFunctor( Functor_TensorProduct, 1, "LTensorProduct" );
+LeftDerivedFunctor( Functor_TensorProduct, 1 );
+
+##
+## HomHom( M, K, N ) = Hom( Hom( M, K ), N )
+##
+
+Functor_Hom * Functor_Hom;
+
+##
+## LHomHom( M, K, N ) = L(Hom( Hom( -, K ), N ))( M )
+##
+
+LeftDerivedFunctor( Functor_HomHom, 1 );
 
