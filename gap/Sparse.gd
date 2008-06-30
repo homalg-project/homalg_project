@@ -16,7 +16,10 @@ DeclareOperation( "EchelonMatTransformation",
         [ IsSparseMatrix ] );
 
 DeclareOperation( "ReduceMat",
-        [ IsSparseMatrix, IsSparseMatrix ] ) ;
+        [ IsSparseMatrix, IsSparseMatrix ] );
+
+DeclareOperation( "ReduceMatTransformation",
+        [ IsSparseMatrix, IsSparseMatrix ] );
 
 DeclareGlobalFunction( "KernelMatSparse" );
 

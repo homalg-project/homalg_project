@@ -221,14 +221,14 @@ InstallMethod( ReduceMatWithEchelonMat,
     nrows2 := N!.nrows;
     
     if nrows1 = 0 or nrows2 = 0 then
-        return mat;
+        return rec( reduced_matrix := mat );
     fi;
     
     ncols := mat!.ncols;
     if ncols <> N!.ncols then
         return fail;
     elif ncols = 0 then
-        return mat;
+        return rec( reduced_matrix := mat );
     fi;
     
     M := CopyMat( mat );
@@ -246,9 +246,65 @@ InstallMethod( ReduceMatWithEchelonMat,
         fi;
     od;
     
-    return M;
+    return rec( reduced_matrix := M );
 
 end);
+
+##
+InstallMethod( ReduceMatWithEchelonMatTransformation,
+        "for sparse matrices over a ring, second argument must be in REF",
+        [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
+        function( mat, N )
+    local nrows1,
+          ncols,
+          nrows2,
+          M,
+          T,
+          i,
+          j,
+          k,
+          x,
+          p,
+          row1_indices,
+          row2_indices;
+    
+    nrows1 :=  mat!.nrows;
+    nrows2 := N!.nrows;
+    
+    T := SparseZeroMatrix( nrows1, nrows2, GF(2) );
+	
+    
+    if nrows1 = 0 or nrows2 = 0 then
+        return rec( reduced_matrix := mat, transformation := T );
+    fi;
+    
+    ncols := mat!.ncols;
+    if ncols <> N!.ncols then
+        return fail;
+    elif ncols = 0 then
+        return rec( reduced_matrix := mat, transformation := T );
+    fi;
+    
+    M := CopyMat( mat );
+    
+    for i in [ 1 .. nrows2 ] do
+        row2_indices := N!.indices[i];
+        if Length( row2_indices ) > 0 then
+            j := row2_indices[1];
+            for k in [ 1 .. nrows1 ] do
+                p := PositionSet( M!.indices[k], j );
+                if p <> fail then
+                    M!.indices[k] := AddRow( row2_indices, M!.indices[k] );
+                    Add( T!.indices[k], i );
+                fi;
+            od;
+        fi;
+    od;
+    
+    return rec( reduced_matrix := M, transformation := T );
+    
+  end
+);
 
 ##
 InstallMethod( KernelEchelonMatDestructive,

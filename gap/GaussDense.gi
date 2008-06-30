@@ -267,13 +267,13 @@ InstallMethod( ReduceMatWithEchelonMat,
     nrows1 := Length( mat );
     nrows2 := Length( N );
     if nrows1 = 0 or nrows2 = 0 then
-        return mat;
+        return rec( reduced_matrix := mat );
     fi;
     ncols := Length( mat[1] );
     if ncols <> Length( N[1] ) then
         return fail;
     elif ncols = 0 then
-        return mat;
+        return rec( reduced_matrix := mat );
     fi;
     
     M := [];
@@ -300,7 +300,7 @@ InstallMethod( ReduceMatWithEchelonMat,
         fi;
     od;
     
-    return M;
+    return rec( reduced_matrix := M );
     
 end );
 

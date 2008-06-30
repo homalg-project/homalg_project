@@ -11,7 +11,7 @@
 ##  <#GAPDoc Label="EchelonMat">
 ##  <ManSection>
 ##  <Meth Arg="mat" Name="EchelonMat" />
-##  <Returns>a record that contains information about a echelonized form of the matrix <mat>.<P/>
+##  <Returns>a record that contains information about a echelonized form of the matrix <A>mat</A>.<P/>
 ##  The components of this record are<P/>
 ##  `vectors'<P/>
 ##      the reduced row echelon / hermite form of the matrix <A>mat</A> without zero rows.<P/>
@@ -88,7 +88,7 @@ InstallMethod( EchelonMat,
 ##  <Description>
 ##  computes the reduced row echelon form RREF of a dense or sparse matrix <A>mat</A> over a field,<P/>
 ##  or the hermite form of a sparse matrix <A>mat</A> over <M>Z / < p^n * Z ></M>.<P/>
-##  In either case, the transformation matrix <M>T</M> is calcualated as the row union of `coeffs' and `relations'.
+##  In either case, the transformation matrix <M>T</M> is calculated as the row union of `coeffs' and `relations'.
 ##  <Example>
 ##  gap> M := RandomMat( 5, 3, GF(2) );
 ##  <a 5x3 matrix over GF2>
@@ -158,6 +158,19 @@ InstallMethod( ReduceMat,
         return ReduceMatWithEchelonMat( mat, N );
     else
         return ReduceMatWithHermiteMat( mat, N );
+    fi;
+  end
+);
+
+##
+InstallMethod( ReduceMatTransformation,
+        "for sparse matrices over a ring, second argument must be in REF",
+        [ IsSparseMatrix, IsSparseMatrix ],
+  function( mat, N )
+    if IsField( mat!.ring ) then
+        return ReduceMatWithEchelonMatTransformation( mat, N );
+    else
+        return ReduceMatWithHermiteMatTransformation( mat, N );
     fi;
   end
 );

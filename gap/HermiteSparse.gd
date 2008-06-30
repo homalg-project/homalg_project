@@ -16,7 +16,10 @@ DeclareOperation( "HermiteMatTransformationDestructive",
         [ IsSparseMatrix ] );
 
 DeclareOperation( "ReduceMatWithHermiteMat",
-        [ IsSparseMatrix, IsSparseMatrix ] ) ;
+        [ IsSparseMatrix, IsSparseMatrix ] );
+
+DeclareOperation( "ReduceMatWithHermiteMatTransformation",
+        [ IsSparseMatrix, IsSparseMatrix ] );
 
 DeclareOperation( "KernelHermiteMatDestructive",
         [ IsSparseMatrix, IsList ] );

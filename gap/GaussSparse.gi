@@ -262,14 +262,14 @@ InstallMethod( ReduceMatWithEchelonMat,
     nrows2 := N!.nrows;
     
     if nrows1 = 0 or nrows2 = 0 then
-        return mat;
+        return rec( reduced_matrix := mat );
     fi;
     
     ncols := mat!.ncols;
     if ncols <> N!.ncols then
         return fail;
     elif ncols = 0 then
-        return mat;
+        return rec( reduced_matrix := mat );
     fi;
     
     M := CopyMat( mat );
@@ -290,9 +290,72 @@ InstallMethod( ReduceMatWithEchelonMat,
         fi;
     od;
     
-    return M;
+    return rec( reduced_matrix := M );
 
-end);
+  end
+);
+
+##
+InstallMethod( ReduceMatWithEchelonMatTransformation,
+        "for sparse matrices over a ring, second argument must be in REF",
+        [ IsSparseMatrix, IsSparseMatrix ],
+  function( mat, N )
+    local nrows1,
+          ncols,
+          nrows2,
+	  r,
+          M,
+          T,
+          i,
+          j,
+          k,
+          x,
+          p,
+          row1_indices,
+          row1_entries,
+          row2_indices;
+    
+    nrows1 :=  mat!.nrows;
+    nrows2 := N!.nrows;
+    r := mat!.ring;
+    
+    T := SparseZeroMatrix( nrows1, nrows2, r );
+    
+    if nrows1 = 0 or nrows2 = 0 then
+        return rec( reduced_matrix := mat, transformation := T );
+    fi;
+    
+    ncols := mat!.ncols;
+    if ncols <> N!.ncols then
+        return fail;
+    elif ncols = 0 then
+        return rec( reduced_matrix := mat, transformation := T );
+    fi;
+    
+    M := CopyMat( mat );
+    
+    for i in [ 1 .. nrows2 ] do
+        row2_indices := N!.indices[i];
+        if Length( row2_indices ) > 0 then
+            j := row2_indices[1];
+            for k in [ 1 .. nrows1 ] do
+                row1_indices := M!.indices[k];
+                row1_entries := M!.entries[k];
+                p := PositionSet( row1_indices, j );
+                if p <> fail then
+                    x := - row1_entries[p];
+                    AddRow( row2_indices, N!.entries[i] * x, row1_indices, row1_entries );
+                    Add( T!.indices[k], i );
+                    Add( T!.entries[k], x );
+                fi;
+            od;
+        fi;
+    od;
+    
+    return rec( reduced_matrix := M, transformation := T );
+    
+  end
+);
 
 ##
 InstallMethod( KernelEchelonMatDestructive,
