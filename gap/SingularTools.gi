@@ -234,13 +234,35 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               #ConvertRowToMatrix :=
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
                
-               #ConvertColumnToMatrix :=
-               
-               #ConvertMatrixToRow :=
-               
-               #ConvertMatrixToColumn :=
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   
+                 end,
                
                GetUnitPosition :=
                  function( M, pos_list )
@@ -280,35 +302,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               GetColumnIndependentUnitPositions :=
-                 function( M, pos_list )
-                   local list;
-                   
-                   if pos_list = [ ] then
-                       list := [ 0 ];
-                   else
-                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
-                       list := pos_list;
-                   fi;
-                   
-                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
-                   
-                 end,
+               #ConvertRowToMatrix :=
                
-               GetRowIndependentUnitPositions :=
-                 function( M, pos_list )
-                   local list;
-                   
-                   if pos_list = [ ] then
-                       list := [ 0 ];
-                   else
-                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
-                       list := pos_list;
-                   fi;
-                   
-                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
-                   
-                 end,
+               #ConvertColumnToMatrix :=
+               
+               #ConvertMatrixToRow :=
+               
+               #ConvertMatrixToColumn :=
                
         )
  );

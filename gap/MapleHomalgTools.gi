@@ -257,23 +257,23 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               ConvertRowToMatrix :=
-                 function( M, r, c )
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
                    local R;
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "`homalg/ConvertRowToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetColumnIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
                  end,
                
-               ConvertColumnToMatrix :=
-                 function( M, r, c )
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
                    local R;
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetRowIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
                  end,
                
@@ -309,23 +309,23 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               GetColumnIndependentUnitPositions :=
-                 function( M, pos_list )
+               ConvertRowToMatrix :=
+                 function( M, r, c )
                    local R;
                    
                    R := HomalgRing( M );
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetColumnIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   return homalgSendBlocking( [ "`homalg/ConvertRowToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
                    
                  end,
                
-               GetRowIndependentUnitPositions :=
-                 function( M, pos_list )
+               ConvertColumnToMatrix :=
+                 function( M, r, c )
                    local R;
                    
                    R := HomalgRing( M );
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "`homalg/GetRowIndependentUnitPositions`(", M, pos_list, R, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
                    
                  end,
                
