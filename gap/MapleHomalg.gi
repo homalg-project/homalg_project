@@ -269,7 +269,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname", "need_command", stream );
+    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream );
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -278,6 +278,102 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
     fi;
     
     ar := [ [ var, ",", "copy(`LocalInvolutive/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingInvolutive, IsCommutative, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+    fi;
+    
+    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
+    
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    return R;
+    
+end );
+
+##
+InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
+  function( arg )
+    local nargs, stream, o, var, ar, ext_obj, R;
+    
+    nargs := Length( arg );
+    
+    if nargs > 1 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := homalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if not IsBound( stream ) then
+        stream := LaunchCAS( HOMALG_IO_Maple );
+        o := 0;
+    else
+        o := 1;
+    fi;
+    
+    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream );
+    
+    if IsString( arg[1] ) then
+        var := arg[1];
+    else
+        var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
+    fi;
+    
+    Print( var );
+    
+    ar := [ [ var, ",", "copy(`LocalInvolutiveBasisfree/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingInvolutive, IsCommutative, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    
+    if nargs > 1 then
+        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+    fi;
+    
+    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
+    
+    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    return R;
+    
+end );
+
+##
+InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
+  function( arg )
+    local nargs, stream, o, var, ar, ext_obj, R;
+    
+    nargs := Length( arg );
+    
+    if nargs > 1 then
+        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
+            stream := arg[nargs];
+        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+            stream := homalgStream( arg[nargs] );
+        fi;
+    fi;
+    
+    if not IsBound( stream ) then
+        stream := LaunchCAS( HOMALG_IO_Maple );
+        o := 0;
+    else
+        o := 1;
+    fi;
+    
+    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream );
+    
+    if IsString( arg[1] ) then
+        var := arg[1];
+    else
+        var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
+    fi;
+    
+    Print( var );
+    
+    ar := [ [ var, ",", "copy(`LocalInvolutiveBasisfreeGINV/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingInvolutive, IsCommutative, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
