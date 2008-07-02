@@ -17,17 +17,17 @@
 ## AsATwoSequence
 DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
-DeclareGlobalVariable( "Functor_AsATwoSequence" );
+DeclareGlobalVariable( "functor_AsATwoSequence" );
 
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
 
-DeclareGlobalVariable( "Functor_AsChainMapForPullback" );
+DeclareGlobalVariable( "functor_AsChainMapForPullback" );
 
 ## AsChainMapForPushout
 DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );
 
-DeclareGlobalVariable( "Functor_AsChainMapForPushout" );
+DeclareGlobalVariable( "functor_AsChainMapForPushout" );
 
 ####################################
 #

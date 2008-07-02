@@ -250,6 +250,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
         
+        IncreaseRingStatistics( R, "BasisOfRowModule" );
+        
         return B;
         
     elif IsBound(RP!.BasisOfColumnModule) then
@@ -259,6 +261,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         SetIsBasisOfRowsMatrix( B, true );
         
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
+        
+        IncreaseRingStatistics( R, "BasisOfColumnModule" );
         
         return B;
         
@@ -283,6 +287,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     SetIsBasisOfRowsMatrix( B, true );
         
     ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
+    
+    IncreaseRingStatistics( R, "BasisOfRowModule" );
     
     return B;
     
@@ -312,6 +318,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
         
+        IncreaseRingStatistics( R, "BasisOfColumnModule" );
+        
         return B;
         
     elif IsBound(RP!.BasisOfRowModule) then
@@ -321,6 +329,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         SetIsBasisOfColumnsMatrix( B, true );
         
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
+        
+        IncreaseRingStatistics( R, "BasisOfRowModule" );
         
         return B;
         
@@ -345,6 +355,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     SetIsBasisOfColumnsMatrix( B, true );
         
     ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
+    
+    IncreaseRingStatistics( R, "BasisOfColumnModule" );
     
     return B;
     
@@ -372,6 +384,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
+        IncreaseRingStatistics( R, "DecideZeroRows" );
+        
         return C;
         
     elif IsBound(RP!.DecideZeroColumns) then
@@ -379,6 +393,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         C := Involution( RP!.DecideZeroColumns( Involution( A ), Involution( B ) ) );
         
         ColoredInfoForService( t, "DecideZeroRows" );
+        
+        IncreaseRingStatistics( R, "DecideZeroColumns" );
         
         return C;
         
@@ -407,6 +423,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     ColoredInfoForService( t, "DecideZeroRows" );
     
+    IncreaseRingStatistics( R, "DecideZeroRows" );
+    
     return C;
     
 end );
@@ -433,6 +451,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
+        IncreaseRingStatistics( R, "DecideZeroColumns" );
+        
         return C;
         
     elif IsBound(RP!.DecideZeroRows) then
@@ -440,6 +460,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         C := Involution( RP!.DecideZeroRows( Involution( A ), Involution( B ) ) );
         
         ColoredInfoForService( t, "DecideZeroColumns" );
+        
+        IncreaseRingStatistics( R, "DecideZeroRows" );
         
         return C;
         
@@ -467,6 +489,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
     ColoredInfoForService( t, "DecideZeroColumns" );
+    
+    IncreaseRingStatistics( R, "DecideZeroColumns" );
     
     return C;
     
@@ -508,6 +532,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         M!.SyzygiesGeneratorsOfRows := C;
         
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
+        
         return C;
         
     elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
@@ -525,6 +551,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
         
         M!.SyzygiesGeneratorsOfRows := C;
+        
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
         
         return C;
         
@@ -551,6 +579,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
     
     M!.SyzygiesGeneratorsOfRows := C;
+    
+    IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
     
     return C;
     
@@ -584,6 +614,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
         
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
+        
         return C;
         
     elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
@@ -597,6 +629,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
+        
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
         
         return C;
         
@@ -621,6 +655,8 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     fi;
     
     ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
+    
+    IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
     
     return C;
     
@@ -662,6 +698,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         M!.SyzygiesGeneratorsOfColumns := C;
         
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
+        
         return C;
         
     elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
@@ -679,6 +717,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
         M!.SyzygiesGeneratorsOfColumns := C;
+        
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
         
         return C;
         
@@ -705,6 +745,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
     
     M!.SyzygiesGeneratorsOfColumns := C;
+    
+    IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
     
     return C;
     
@@ -738,6 +780,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
+        
         return C;
         
     elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
@@ -751,6 +795,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        
+        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
         
         return C;
         
@@ -775,6 +821,8 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     fi;
     
     ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+    
+    IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
     
     return C;
     
@@ -804,6 +852,8 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
         
+        IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
+        
         return B;
         
     elif IsBound(RP!.BasisOfColumnsCoeff) then
@@ -815,6 +865,8 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
         ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
+        
+        IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
         
         return B;
         
@@ -845,6 +897,8 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
     
+    IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
+    
     return B;
     
 end );
@@ -871,6 +925,8 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
         
+        IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
+        
         return B;
         
     elif IsBound(RP!.BasisOfRowsCoeff) then
@@ -882,6 +938,8 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
         ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
+        
+        IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
         
         return B;
         
@@ -912,6 +970,8 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
     
+    IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
+    
     return B;
     
 end );
@@ -938,6 +998,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
+        IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
+        
         return M;
         
     elif IsBound(RP!.DecideZeroColumnsEffectively) then
@@ -949,6 +1011,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
+        
+        IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
         return M;
         
@@ -984,6 +1048,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
+    IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
+    
     return M;
     
 end );
@@ -1010,6 +1076,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
+        IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
+        
         return M;
         
     elif IsBound(RP!.DecideZeroRowsEffectively) then
@@ -1021,6 +1089,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
+        
+        IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
         return M;
         
@@ -1055,6 +1125,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
+    
+    IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
     
     return M;
     

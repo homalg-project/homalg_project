@@ -595,9 +595,10 @@ end );
 ##
 InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
-    local M, R, RP, nargs, U, V, UI, VI, compute_U, compute_V, compute_UI, compute_VI,
-          nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished, barg, mm, nn, Id_U, Id_V, zero, one,
-          clean_rows, unclean_rows, clean_columns, unclean_columns, eliminate_units, b, a, v, u, l;
+    local M, R, RP, nargs, compute_U, compute_V, compute_UI, compute_VI,
+          U, V, UI, VI, nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished,
+          barg, one, clean_rows, unclean_rows, clean_columns, unclean_columns,
+          eliminate_units, b, a, v, u, l;
     
     if not IsHomalgMatrix( arg[1] ) then
         Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
@@ -776,36 +777,25 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
             Error( "unable to get a real copy of the matrix\n" );
         fi;
         
+        M := MM;
+	
         m := NrRows( M );
         n := NrColumns( M );
         
-        Id_U := HomalgIdentityMatrix( m, R );
-        
-        ## in case the resulting matrix has different dimensions
-        ## we fix the row dimension of the original one
-        mm := NrColumns( Id_U );
-        
         if compute_U then
-            U := Id_U;
+            U := HomalgIdentityMatrix( m, R );
         fi;
         if compute_UI then
-            UI := Id_U;
+            UI := HomalgIdentityMatrix( m, R );
         fi;
-        
-        Id_V := HomalgIdentityMatrix( n, R );
-        
-        ## in case the resulting matrix has different dimensions
-        ## we fix the column dimension of the original one
-        nn := NrRows( Id_V );
         
         if compute_V then
-            V := Id_V;
+            V := HomalgIdentityMatrix( n, R );
         fi;
         if compute_VI then
-            VI := Id_V;
+            VI := HomalgIdentityMatrix( n, R );
         fi;
         
-        zero := Zero( R );
         one := One( R );
         
         clean_rows := [ ];
@@ -814,7 +804,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         unclean_columns := [ 1 .. n ];
         
         eliminate_units := function( arg )
-            local pos, i, j, r, q, a, v, vi, u, ui, l, k;
+            local pos, i, j, r, q, v, vi, u, ui;
             
             if Length( arg ) > 0 then
                 pos := arg[1];
@@ -841,26 +831,17 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 ## divide the i-th row by the unit M[i][j]
                 
                 r := GetEntryOfHomalgMatrix( M, i, j ); 
-                if r <> one then
-                    q := one / r;
+                if not IsOne( r ) then
                     
-                    SetEntryOfHomalgMatrix( M, i, j, one );
-                    for a in [ 1 .. n ] do
-                        if a <> j then
-                            SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / r );
-                        fi;
-                    od;
+                    M := DivideRowByUnit( M, i, r, j );
                     
                     if compute_U then
-                        for a in [ 1 .. mm ] do
-                            SetEntryOfHomalgMatrix( U, i, a, GetEntryOfHomalgMatrix( U, i, a ) / r );
-                        od;
+                        U := DivideRowByUnit( U, i, r, 0 );
                     fi;
                     
                     if compute_UI then
-                        for a in [ 1 .. mm ] do
-                            SetEntryOfHomalgMatrix( UI, a, i, GetEntryOfHomalgMatrix( UI, a, i ) / q );
-                        od;
+                        q := one / r;
+                        UI := DivideColumnByUnit( UI, i, q, 0 );
                     fi;
                 fi;
                 
@@ -870,22 +851,16 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 
                 if compute_VI then
                     vi := HomalgInitialIdentityMatrix( n, R );
+                else
+                    vi := "";
                 fi;
                 
-                for l in [ 1 .. n ] do
-                    r := GetEntryOfHomalgMatrix( M, i, l );
-                    if l <> j and r <> zero then
-                        SetEntryOfHomalgMatrix( v, j, l, -r );
-                        if compute_VI then
-                            SetEntryOfHomalgMatrix( vi, j, l, r );
-                        fi;
-                    fi;
-                od;
+                CopyRowToIdentityMatrix( M, i, [ v, vi ], j );
                 
                 if compute_V then
                     V := V * v;
                 fi;
-        
+                
                 if compute_VI then
                     VI := vi * VI;
                 fi;
@@ -896,24 +871,18 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 
                 if compute_U then
                     u := HomalgInitialIdentityMatrix( NrRows( U ), R );
+                else
+                    u := "";
                 fi;
                 
                 if compute_UI then
                     ui := HomalgInitialIdentityMatrix( NrRows( U ), R );
+                else
+                    ui := "";
                 fi;
                 
                 if compute_U or compute_UI then
-                    for k in [ 1 .. m ] do
-                        if k <> i and GetEntryOfHomalgMatrix( M, k, j ) <> zero then
-                            r := GetEntryOfHomalgMatrix( M, k, j );
-                            if compute_U then
-                                SetEntryOfHomalgMatrix( u, k, i, -r );
-                            fi;
-                            if compute_UI then
-                                SetEntryOfHomalgMatrix( ui, k, i, r );
-                            fi;
-                        fi;
-                    od;
+                    CopyColumnToIdentityMatrix( M, j, [ u, ui ], i );
                 fi;
                 
                 if compute_U then
@@ -923,10 +892,9 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 if compute_UI then
                     UI := UI * ui;
                 fi;
-          
-                for k in Concatenation( [ 1 .. i-1 ], [ i+1 .. m ] ) do
-                    SetEntryOfHomalgMatrix( M, k, j, zero );
-                od;
+                
+                # an M := u * M would simply cause:
+                M := SetColumnToZero( M, i, j );
                 
                 pos := GetUnitPosition( M, clean_columns );
                 
@@ -963,10 +931,12 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     
     if compute_U then
         SetPreEval( arg[nar_U], U );
+        ResetFilterObj( arg[nar_U], IsVoidMatrix );
     fi;
     
     if compute_V then
         SetPreEval( arg[nar_V], V );
+        ResetFilterObj( arg[nar_V], IsVoidMatrix );
     fi;
     
     if compute_UI then
@@ -974,6 +944,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
             UI := HomalgIdentityMatrix( NrRows( M ), R );
         fi;
         SetPreEval( arg[nar_UI], UI );
+        ResetFilterObj( arg[nar_UI], IsVoidMatrix );
     fi;
     
     if compute_VI then
@@ -981,6 +952,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
             VI := HomalgIdentityMatrix( NrColumns( M ), R );
         fi;
         SetPreEval( arg[nar_VI], VI );
+        ResetFilterObj( arg[nar_VI], IsVoidMatrix );
     fi;
     
     return M;

@@ -77,7 +77,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     
 end );
 
-InstallValue( Functor_Cokernel,
+InstallValue( functor_Cokernel,
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
                 [ "natural_transformation", "CokernelEpi" ],
@@ -87,7 +87,7 @@ InstallValue( Functor_Cokernel,
                 )
         );
 
-Functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -131,7 +131,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
 end );
 
-InstallValue( Functor_Kernel,
+InstallValue( functor_Kernel,
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
                 [ "natural_transformation", "KernelEmb" ],
@@ -141,7 +141,7 @@ InstallValue( Functor_Kernel,
                 )
         );
 
-Functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## install KernelEmb for kernel squares (this should be installed automatically in the future)
@@ -245,7 +245,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     
 end );
 
-InstallValue( Functor_DefectOfExactness,
+InstallValue( functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "number_of_arguments", 1 ],
@@ -254,10 +254,10 @@ InstallValue( Functor_DefectOfExactness,
                 )
         );
 
-Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
@@ -617,19 +617,19 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## Cokernel( phi ) and CokernelEpi( phi )
 ##
 
-InstallFunctorOnObjects( Functor_Cokernel );
+InstallFunctorOnObjects( functor_Cokernel );
 
 ##
 ## Kernel( phi ) and KernelEmb( phi )
 ##
 
-InstallFunctorOnObjects( Functor_Kernel );
+InstallFunctorOnObjects( functor_Kernel );
 
 ##
 ## DefectOfExactness( cpx_post_pre )
 ##
 
-InstallFunctorOnObjects( Functor_DefectOfExactness );
+InstallFunctorOnObjects( functor_DefectOfExactness );
 
 ##
 ## Hom( M, N )

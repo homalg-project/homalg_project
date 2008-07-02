@@ -247,6 +247,28 @@ InstallMethod( RingName,
 end );
 
 ##
+InstallMethod( homalgRingStatistics,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return R!.statistics;
+    
+end );
+
+##
+InstallMethod( IncreaseRingStatistics,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, s )
+    
+    R!.statistics.(s) := R!.statistics.(s) + 1;
+    
+end );
+
+##
 InstallOtherMethod( AsList,
         "for external homalg ring elements",
         [ IsHomalgInternalRingRep ],
@@ -302,8 +324,8 @@ HOMALG.ContainerForWeakPointersOnHomalgExternalRings :=
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, r, homalg_ring, table, properties, ar, type, c, el,
-          container, weak_pointers, l, deleted, streams;
+    local nargs, r, statistics, homalg_ring, table, properties, ar, type, c,
+          el, container, weak_pointers, l, deleted, streams;
     
     nargs := Length( arg );
     
@@ -313,7 +335,20 @@ InstallGlobalFunction( CreateHomalgRing,
     
     r := arg[1];
     
-    homalg_ring := rec( ring := r );
+    statistics := rec(
+                      BasisOfRowModule := 0,
+                      BasisOfColumnModule := 0,
+                      BasisOfRowsCoeff := 0,
+                      BasisOfColumnsCoeff := 0,
+                      DecideZeroRows := 0,
+                      DecideZeroColumns := 0,
+                      DecideZeroRowsEffectively := 0,
+                      DecideZeroColumnsEffectively := 0,
+                      SyzygiesGeneratorsOfRows := 0,
+                      SyzygiesGeneratorsOfColumns := 0
+                      );
+    
+    homalg_ring := rec( ring := r, statistics := statistics );
     
     if nargs > 1 and IshomalgTable( arg[nargs] ) then
         table := arg[nargs];

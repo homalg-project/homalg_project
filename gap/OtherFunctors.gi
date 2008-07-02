@@ -268,7 +268,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     
 end );
 
-InstallValue( Functor_Pullback,
+InstallValue( functor_Pullback,
         CreateHomalgFunctor(
                 [ "name", "Pullback" ],
                 [ "natural_transformation", "PullbackPairOfMaps" ],
@@ -278,7 +278,7 @@ InstallValue( Functor_Pullback,
                 )
         );
 
-Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_Pullback!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
@@ -326,7 +326,7 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     
 end );
 
-InstallValue( Functor_Pushout,
+InstallValue( functor_Pushout,
         CreateHomalgFunctor(
                 [ "name", "Pushout" ],
                 [ "natural_transformation", "PushoutPairOfMaps" ],
@@ -336,7 +336,7 @@ InstallValue( Functor_Pushout,
                 )
         );
 
-Functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_Pushout!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
@@ -389,11 +389,11 @@ end );
 ## Pulback( chm_phi_beta1 )
 ##
 
-InstallFunctorOnObjects( Functor_Pullback );
+InstallFunctorOnObjects( functor_Pullback );
 
 ##
 ## Pulback( chm_phi_beta1 )
 ##
 
-InstallFunctorOnObjects( Functor_Pushout );
+InstallFunctorOnObjects( functor_Pushout );
 

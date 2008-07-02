@@ -34,12 +34,12 @@ DeclareGlobalVariable( "Functor_DirectSum" );
 ## Pullback
 DeclareGlobalFunction( "_Functor_Pullback_OnObjects" );
 
-DeclareGlobalVariable( "Functor_Pullback" );
+DeclareGlobalVariable( "functor_Pullback" );
 
 ## Pushout
 DeclareGlobalFunction( "_Functor_Pushout_OnObjects" );
 
-DeclareGlobalVariable( "Functor_Pushout" );
+DeclareGlobalVariable( "functor_Pushout" );
 
 ####################################
 #

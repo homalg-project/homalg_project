@@ -181,6 +181,12 @@ DeclareOperation( "homalgLastWarning",
 DeclareOperation( "homalgNrOfWarnings",
         [ IsHomalgRing ] );
 
+DeclareOperation( "homalgRingStatistics",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "IncreaseRingStatistics",
+        [ IsHomalgRing, IsString ] );
+
 DeclareOperation( "AsLeftModule",
         [ IsHomalgRing ] );
 

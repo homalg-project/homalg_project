@@ -950,6 +950,458 @@ InstallMethod( \=,
 end );
 
 ##
+InstallMethod( IsIdentityMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP;
+    
+    if NrRows( M ) <> NrColumns( M ) then
+        return false;
+    elif NrRows( M ) = 0 then
+        return true;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsIdentityMatrix) then
+        return RP!.IsIdentityMatrix( DecideZero( M ) );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( IsDiagonalMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, diag;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsDiagonalMatrix) then
+        return RP!.IsDiagonalMatrix( DecideZero ( M ) );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    diag := DiagonalEntries( M );
+    
+    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
+    
+end );
+
+##
+InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndependentUnitPositions (GetIndependentUnitPositions)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, pos_list )
+    local R, RP, rest, pos, i, j, k;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetColumnIndependentUnitPositions) then
+        return RP!.GetColumnIndependentUnitPositions( M, pos_list );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    rest := [ 1 .. NrColumns( M ) ];
+    
+    pos := [ ];
+    
+    for i in [ 1 .. NrRows( M ) ] do
+        for k in Reversed( rest ) do
+            if not [ i, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, k ) ) then
+                Add( pos, [ i, k ] );
+                rest := Filtered( rest, a -> IsZero( GetEntryOfHomalgMatrix( M, i, a ) ) );
+                break;
+            fi;
+        od;
+    od;
+    
+    return pos;
+    
+end );
+
+##
+InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUnitPositions (GetIndependentUnitPositions)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, pos_list )
+    local R, RP, rest, pos, j, i, k;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetRowIndependentUnitPositions) then
+        return RP!.GetRowIndependentUnitPositions( M, pos_list );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    rest := [ 1 .. NrRows( M ) ];
+    
+    pos := [ ];
+    
+    for j in [ 1 .. NrColumns( M ) ] do
+        for k in Reversed( rest ) do
+            if not [ j, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, k, j ) ) then
+                Add( pos, [ j, k ] );
+                rest := Filtered( rest, a -> IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) );
+                break;
+            fi;
+        od;
+    od;
+    
+    return pos;
+    
+end );
+
+##
+InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, pos_list )
+    local R, RP, m, n, i, j;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetUnitPosition) then
+        return RP!.GetUnitPosition( M, pos_list );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    for i in [ 1 .. m ] do
+        for j in [ 1 .. n ] do
+            if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
+                return [ i, j ];
+            fi;
+        od;
+    od;
+    
+    return fail;	## the Maple version returns NULL and we return fail
+    
+end );
+
+##
+InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
+        
+  function( M, i, u, j )
+    local R, RP, a;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.DivideRowByUnit) then
+        RP!.DivideRowByUnit( M, i, u, j );
+    else
+	
+        #=====# begin of the core procedure #=====#
+	
+        if j > 0 then
+            ## the two for's avoid creating non-dense lists:
+            for a in [ 1 .. j - 1 ] do
+                SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / u );
+            od;
+            for a in [ j + 1 .. NrColumns( M ) ] do
+                SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / u );
+            od;
+            SetEntryOfHomalgMatrix( M, i, j, One( R ) );
+        else
+            for a in [ 1 .. NrColumns( M ) ] do
+                SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / u );
+            od;
+        fi;
+        
+    fi;
+    
+    ## since all what we did had a side effect on Eval( M ) ignoring
+    ## possible other Eval's, e.g. EvalCompose, we must return
+    ## a new homalg matrix object only containing Eval( M )
+    return HomalgMatrix( Eval( M ), NrRows( M ), NrColumns( M ), R );
+    
+end );
+
+##
+InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
+        
+  function( M, j, u, i )
+    local R, RP, a;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.DivideColumnByUnit) then
+        RP!.DivideColumnByUnit( M, j, u, i );
+    else
+        
+        #=====# begin of the core procedure #=====#
+        
+        if i > 0 then
+            ## the two for's avoid creating non-dense lists:
+            for a in [ 1 .. i - 1 ] do
+                SetEntryOfHomalgMatrix( M, a, j, GetEntryOfHomalgMatrix( M, a, j ) / u );
+            od;
+            for a in [ i + 1 .. NrRows( M ) ] do
+                SetEntryOfHomalgMatrix( M, a, j, GetEntryOfHomalgMatrix( M, a, j ) / u );
+            od;
+            SetEntryOfHomalgMatrix( M, i, j, One( R ) );
+        else
+            for a in [ 1 .. NrRows( M ) ] do
+                SetEntryOfHomalgMatrix( M, a, j, GetEntryOfHomalgMatrix( M, a, j ) / u );
+            od;
+        fi;
+        
+    fi;
+    
+    ## since all what we did had a side effect on Eval( M ) ignoring
+    ## possible other Eval's, e.g. EvalCompose, we must return
+    ## a new homalg matrix object only containing Eval( M )
+    return HomalgMatrix( Eval( M ), NrRows( M ), NrColumns( M ), R );
+    
+end );
+
+##
+InstallMethod( CopyRowToIdentityMatrix,		### defines: CopyRowToIdentityMatrix
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsPosInt, IsList, IsPosInt ],
+        
+  function( M, i, L, j )
+    local R, RP, v, vi, l, r;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CopyRowToIdentityMatrix) then
+        RP!.CopyRowToIdentityMatrix( M, i, L, j );
+    else
+        
+        #=====# begin of the core procedure #=====#
+        
+        if Length( L ) > 0 and IsHomalgMatrix( L[1] ) then
+            v := L[1];
+        fi;
+        
+        if Length( L ) > 1 and IsHomalgMatrix( L[2] ) then
+            vi := L[2];
+        fi;
+        
+        if IsBound( v ) and IsBound( vi ) then
+            ## the two for's avoid creating non-dense lists:
+            for l in [ 1 .. j - 1 ] do
+                r := GetEntryOfHomalgMatrix( M, i, l );
+                if not IsZero( r ) then
+                    SetEntryOfHomalgMatrix( v, j, l, -r );
+                    SetEntryOfHomalgMatrix( vi, j, l, r );
+                fi;
+            od;
+            for l in [ j + 1 .. NrColumns( M ) ] do
+                r := GetEntryOfHomalgMatrix( M, i, l );
+                if not IsZero( r ) then
+                    SetEntryOfHomalgMatrix( v, j, l, -r );
+                    SetEntryOfHomalgMatrix( vi, j, l, r );
+                fi;
+            od;
+        elif IsBound( v ) then
+            ## the two for's avoid creating non-dense lists:
+            for l in [ 1 .. j - 1 ] do
+                r := GetEntryOfHomalgMatrix( M, i, l );
+                SetEntryOfHomalgMatrix( v, j, l, -r );
+            od;
+            for l in [ j + 1 .. NrColumns( M ) ] do
+                r := GetEntryOfHomalgMatrix( M, i, l );
+                SetEntryOfHomalgMatrix( v, j, l, -r );
+            od;
+        elif IsBound( vi ) then
+            ## the two for's avoid creating non-dense lists:
+            for l in [ 1 .. j - 1 ] do
+                r := GetEntryOfHomalgMatrix( M, i, l );
+                SetEntryOfHomalgMatrix( vi, j, l, r );
+            od;
+            for l in [ j + 1 .. NrColumns( M ) ] do
+                r := GetEntryOfHomalgMatrix( M, i, l );
+                SetEntryOfHomalgMatrix( vi, j, l, r );
+            od;
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( CopyColumnToIdentityMatrix,	### defines: CopyColumnToIdentityMatrix
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsPosInt, IsList, IsPosInt ],
+        
+  function( M, j, L, i )
+    local R, RP, u, ui, m, k, r;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CopyColumnToIdentityMatrix) then
+        RP!.CopyColumnToIdentityMatrix( M, j, L, i );
+    else
+        
+        #=====# begin of the core procedure #=====#
+        
+        if Length( L ) > 0 and IsHomalgMatrix( L[1] ) then
+            u := L[1];
+        fi;
+        
+        if Length( L ) > 1 and IsHomalgMatrix( L[2] ) then
+            ui := L[2];
+        fi;
+        
+        if IsBound( u ) and IsBound( ui ) then
+            ## the two for's avoid creating non-dense lists:
+            for k in [ 1 .. i - 1 ] do
+                r := GetEntryOfHomalgMatrix( M, k, j );
+                if not IsZero( r ) then
+                    SetEntryOfHomalgMatrix( u, k, i, -r );
+                    SetEntryOfHomalgMatrix( ui, k, i, r );
+                fi;
+            od;
+            for k in [ i + 1 .. NrRows( M ) ] do
+                r := GetEntryOfHomalgMatrix( M, k, j );
+                if not IsZero( r ) then
+                    SetEntryOfHomalgMatrix( u, k, i, -r );
+                    SetEntryOfHomalgMatrix( ui, k, i, r );
+                fi;
+            od;
+        elif IsBound( u ) then
+            ## the two for's avoid creating non-dense lists:
+            for k in [ 1 .. i - 1 ] do
+                r := GetEntryOfHomalgMatrix( M, k, j );
+                SetEntryOfHomalgMatrix( u, k, i, -r );
+            od;
+            for k in [ i + 1 .. NrRows( M ) ] do
+                r := GetEntryOfHomalgMatrix( M, k, j );
+                SetEntryOfHomalgMatrix( u, k, i, -r );
+            od;
+        elif IsBound( ui ) then
+            ## the two for's avoid creating non-dense lists:
+            for k in [ 1 .. i - 1 ] do
+                r := GetEntryOfHomalgMatrix( M, k, j );
+                SetEntryOfHomalgMatrix( ui, k, i, r );
+            od;
+            for k in [ i + 1 .. NrRows( M ) ] do
+                r := GetEntryOfHomalgMatrix( M, k, j );
+                SetEntryOfHomalgMatrix( ui, k, i, r );
+            od;
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( SetColumnToZero,			### defines: SetColumnToZero
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsPosInt, IsPosInt ],
+        
+  function( M, i, j )
+    local R, RP, zero, k;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.SetColumnToZero) then
+        RP!.SetColumnToZero( M, i, j );
+    else
+        
+        #=====# begin of the core procedure #=====#
+        
+        zero := Zero( R );
+        
+        ## the two for's avoid creating non-dense lists:
+        for k in [ 1 .. i - 1 ] do
+            SetEntryOfHomalgMatrix( M, k, j, zero );
+        od;
+        
+        for k in [ i + 1 .. NrRows( M ) ] do
+            SetEntryOfHomalgMatrix( M, k, j, zero );
+        od;
+        
+    fi;
+    
+    ## since all what we did had a side effect on Eval( M ) ignoring
+    ## possible other Eval's, e.g. EvalCompose, we must return
+    ## a new homalg matrix object only containing Eval( M )
+    return HomalgMatrix( Eval( M ), NrRows( M ), NrColumns( M ), R );
+    
+end );
+
+##
+InstallMethod( GetCleanRowsPositions,		### defines: GetCleanRowsPositions
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, clean_columns )
+    local R, RP, one, clean_rows, m, j, i;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetCleanRowsPositions) then
+        return RP!.GetCleanRowsPositions( M, clean_columns );
+    fi;
+    
+    one := One( R );
+    
+    #=====# begin of the core procedure #=====#
+    
+    clean_rows := [ ];
+    
+    m := NrRows( M );
+    
+    for j in clean_columns do
+        for i in [ 1 .. m ] do
+            if IsOne( GetEntryOfHomalgMatrix( M, i, j ) ) then
+                Add( clean_rows, i );
+                break;
+            fi;
+        od;
+    od;
+    
+    return clean_rows;
+    
+end );
+
+##
 InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt ],
@@ -1094,226 +1546,6 @@ InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
     #=====# begin of the core procedure #=====#
     
     return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), NrColumns( M ) * NrRows( M ), 1, R ); ## delicate
-    
-end );
-
-##
-InstallMethod( IsIdentityMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP;
-    
-    if NrRows( M ) <> NrColumns( M ) then
-        return false;
-    elif NrRows( M ) = 0 then
-        return true;
-    fi;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.IsIdentityMatrix) then
-        return RP!.IsIdentityMatrix( DecideZero( M ) );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
-    
-end );
-
-##
-InstallMethod( IsDiagonalMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    local R, RP, diag;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.IsDiagonalMatrix) then
-        return RP!.IsDiagonalMatrix( DecideZero ( M ) );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    diag := DiagonalEntries( M );
-    
-    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
-    
-end );
-
-##
-InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomogeneousList ],
-        
-  function( M, pos_list )
-    local R, RP, m, n, i, j;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.GetUnitPosition) then
-        return RP!.GetUnitPosition( M, pos_list );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    m := NrRows( M );
-    n := NrColumns( M );
-    
-    for i in [ 1 .. m ] do
-        for j in [ 1 .. n ] do
-            if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
-                return [ i, j ];
-            fi;
-        od;
-    od;
-    
-    return fail;	## the Maple version returns NULL and we return fail
-    
-end );
-
-##
-InstallMethod( GetCleanRowsPositions,		### defines: GetCleanRowsPositions
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomogeneousList ],
-        
-  function( M, clean_columns )
-    local R, RP, one, clean_rows, m, j, i;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.GetCleanRowsPositions) then
-        return RP!.GetCleanRowsPositions( M, clean_columns );
-    fi;
-    
-    one := One( R );
-    
-    #=====# begin of the core procedure #=====#
-    
-    clean_rows := [ ];
-    
-    m := NrRows( M );
-    
-    for j in clean_columns do
-        for i in [ 1 .. m ] do
-            if IsOne( GetEntryOfHomalgMatrix( M, i, j ) ) then
-                Add( clean_rows, i );
-                break;
-            fi;
-        od;
-    od;
-    
-    return clean_rows;
-    
-end );
-
-##
-InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndependentUnitPositions (GetIndependentUnitPositions)
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomogeneousList ],
-        
-  function( M, pos_list )
-    local R, RP, m, n, nn, dep_list, rest, r, pos, i, j, k;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.GetColumnIndependentUnitPositions) then
-        return RP!.GetColumnIndependentUnitPositions( M, pos_list );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    m := NrRows( M );
-    n := NrColumns( M );
-    
-    nn := [ 1 .. n ];
-    
-    dep_list := [ ];
-    
-    rest := nn;
-    
-    r := n;
-    
-    pos := [ ];
-    
-    for i in [ 1 .. m ] do
-        for j in [ 1 .. r ] do
-            k := rest[ r - j + 1 ];
-            if not [ i, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, k ) ) then
-                Add( pos, [ i, k ] );
-                Append( dep_list,
-                        Filtered( nn, a -> not IsZero( GetEntryOfHomalgMatrix( M, i, a ) ) ) );
-                rest := Difference( nn, dep_list );
-                r := Length( rest );
-                break;
-            fi;
-        od;
-    od;
-    
-    return pos;
-    
-end );
-
-##
-InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUnitPositions (GetIndependentUnitPositions)
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomogeneousList ],
-        
-  function( M, pos_list )
-    local R, RP, m, n, mm, dep_list, rest, r, pos, j, i, k;
-    
-    R := HomalgRing( M );
-    
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.GetRowIndependentUnitPositions) then
-        return RP!.GetRowIndependentUnitPositions( M, pos_list );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    m := NrRows( M );
-    n := NrColumns( M );
-    
-    mm := [ 1 .. m ];
-    
-    dep_list := [ ];
-    
-    rest := mm;
-    
-    r := m;
-    
-    pos := [ ];
-    
-    for j in [ 1 .. n ] do
-        for i in [ 1 .. r ] do
-            k := rest[ r - i + 1 ];
-            if not [ j, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, k, j ) ) then
-                Add( pos, [ j, k ] );
-                Append( dep_list,
-                        Filtered( mm, a -> not IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) ) );
-                rest := Difference( mm, dep_list );
-                r := Length( rest );
-                break;
-            fi;
-        od;
-    od;
-    
-    return pos;
     
 end );
 

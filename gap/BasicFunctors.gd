@@ -17,17 +17,17 @@
 ## Cokernel
 DeclareGlobalFunction( "_Functor_Cokernel_OnObjects" );
 
-DeclareGlobalVariable( "Functor_Cokernel" );
+DeclareGlobalVariable( "functor_Cokernel" );
 
 ## Kernel
 DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
 
-DeclareGlobalVariable( "Functor_Kernel" );
+DeclareGlobalVariable( "functor_Kernel" );
 
 ## DefectOfExactness
 DeclareGlobalFunction( "_Functor_DefectOfExactness_OnObjects" );
 
-DeclareGlobalVariable( "Functor_DefectOfExactness" );
+DeclareGlobalVariable( "functor_DefectOfExactness" );
 
 ## Hom
 DeclareGlobalFunction( "_Functor_Hom_OnObjects" );

@@ -52,7 +52,7 @@ InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects,	### defines: AsATwoSeq
     
 end );
 
-InstallValue( Functor_AsATwoSequence,
+InstallValue( functor_AsATwoSequence,
         CreateHomalgFunctor(
                 [ "name", "AsATwoSequence" ],
                 [ "number_of_arguments", 2 ],
@@ -62,7 +62,7 @@ InstallValue( Functor_AsATwoSequence,
                 )
         );
 
-Functor_AsATwoSequence!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AsATwoSequence!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -147,7 +147,7 @@ InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: As
     
 end );
 
-InstallValue( Functor_AsChainMapForPullback,
+InstallValue( functor_AsChainMapForPullback,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPullback" ],
                 [ "number_of_arguments", 2 ],
@@ -157,7 +157,7 @@ InstallValue( Functor_AsChainMapForPullback,
                 )
         );
 
-Functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -190,7 +190,7 @@ InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsC
     
 end );
 
-InstallValue( Functor_AsChainMapForPushout,
+InstallValue( functor_AsChainMapForPushout,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPushout" ],
                 [ "number_of_arguments", 2 ],
@@ -200,7 +200,7 @@ InstallValue( Functor_AsChainMapForPushout,
                 )
         );
 
-Functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
@@ -213,17 +213,17 @@ Functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## AsATwoSequence( phi, psi )
 ##
 
-InstallFunctorOnObjects( Functor_AsATwoSequence );
+InstallFunctorOnObjects( functor_AsATwoSequence );
 
 ##
 ## AsChainMapForPullback( phi, beta1 )
 ##
 
-InstallFunctorOnObjects( Functor_AsChainMapForPullback );
+InstallFunctorOnObjects( functor_AsChainMapForPullback );
 
 ##
 ## AsChainMapForPushout( alpha1, psi )
 ##
 
-InstallFunctorOnObjects( Functor_AsChainMapForPushout );
+InstallFunctorOnObjects( functor_AsChainMapForPushout );
 

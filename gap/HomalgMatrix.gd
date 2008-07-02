@@ -331,6 +331,21 @@ DeclareOperation( "GetRowIndependentUnitPositions",
 DeclareOperation( "GetRowIndependentUnitPositions",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "DivideRowByUnit",
+        [ IsHomalgMatrix, IsInt, IsRingElement, IsInt ] );
+
+DeclareOperation( "DivideColumnByUnit",
+        [ IsHomalgMatrix, IsInt, IsRingElement, IsInt ] );
+
+DeclareOperation( "CopyRowToIdentityMatrix",
+        [ IsHomalgMatrix, IsInt, IsList, IsInt ] );
+
+DeclareOperation( "CopyColumnToIdentityMatrix",
+        [ IsHomalgMatrix, IsInt, IsList, IsInt ] );
+
+DeclareOperation( "SetColumnToZero",
+        [ IsHomalgMatrix, IsInt, IsInt ] );
+
 DeclareOperation( "ConvertRowToMatrix",
         [ IsHomalgMatrix, IsInt, IsInt ] );
 
