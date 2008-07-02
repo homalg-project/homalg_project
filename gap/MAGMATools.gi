@@ -211,5 +211,103 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+               
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   
+                 end,
+               
+               GetUnitPosition :=
+                 function( M, pos_list )
+                   local list_string;
+                   
+                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                   
+                   if list_string = "fail" then
+                       return fail;
+                   else
+                       return StringToIntList( list_string );
+                   fi;
+                   
+                 end,
+               
+               DivideRowByUnit :=
+                 function( M, i, u, j )
+                   local list_string;
+                   
+                   homalgSendBlocking( [ "DivideRowByUnit(~", M, i, u, j, ")" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   
+                 end,
+               
+               DivideColumnByUnit :=
+                 function( M, j, u, i )
+                   local list_string;
+                   
+                   homalgSendBlocking( [ "DivideColumnByUnit(~", M, j, u, i, ")" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
+                   
+                 end,
+               
+               CopyRowToIdentityMatrix :=
+                 function( M, i, L, j )
+                     local l;
+                     
+                     l := Length( L );
+                     
+                     if l > 1 and ForAll( L, IsHomalgMatrix ) then
+                         homalgSendBlocking( [ "CopyRowToIdentityMatrix2(", M, i, ",~", L[1], ",~", L[2], j, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                     elif l > 0 and IsHomalgMatrix( L[1] ) then
+                         homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",~", L[1], j, -1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                     elif l > 1 and IsHomalgMatrix( L[2] ) then
+                         homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",~", L[2], j, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                     fi;
+                     
+                 end,
+               
+               CopyColumnToIdentityMatrix :=
+                 function( M, j, L, i )
+                     local l;
+                     
+                     l := Length( L );
+                     
+                     if l > 1 and ForAll( L, IsHomalgMatrix ) then
+                         homalgSendBlocking( [ "CopyColumnToIdentityMatrix2(", M, j, ",~", L[1], ",~", L[2], i, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                     elif l > 0 and IsHomalgMatrix( L[1] ) then
+                         homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[1], i, -1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                     elif l > 1 and IsHomalgMatrix( L[2] ) then
+                         homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[2], i, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                     fi;
+                     
+                 end,
+               
+               SetColumnToZero :=
+                 function( M, i, j )
+                   local list_string;
+                   
+                   homalgSendBlocking( [ "SetColumnToZero(~", M, i, j, ")" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
+                   
+                 end,
+               
+               GetCleanRowsPositions :=
+                 function( M, clean_columns )
+                   local list_string;
+                   
+                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
+                   
+                   if list_string = "fail" then
+                       return [ ];
+                   else
+                       return StringToIntList( list_string );
+                   fi;
+                   
+                 end,
+               
         )
  );

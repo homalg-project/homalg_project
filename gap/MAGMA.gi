@@ -97,7 +97,12 @@ InstallGlobalFunction( InitializeMAGMATools,
           BasisOfRowsCoeff, BasisOfColumnsCoeff,
           DecideZeroRows, DecideZeroColumns,
           DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns;
+          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns,
+          GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
+          GetUnitPosition, DivideRowByUnit, DivideColumnByUnit,
+          CopyRowToIdentityMatrix, CopyRowToIdentityMatrix2,
+          CopyColumnToIdentityMatrix, CopyColumnToIdentityMatrix2,
+          SetColumnToZero, GetCleanRowsPositions;
     
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix := function(M)\n\
@@ -181,6 +186,131 @@ SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
   end if;\n\
 end function;\n\n";
     
+    
+    GetColumnIndependentUnitPositions := "\n\
+GetColumnIndependentUnitPositions:= function(M, pos_list)\n\
+  rest := [ 1..Ncols(M) ];\n\
+  pos := [ ];\n\
+  for i in [ 1 .. Nrows(M) ] do\n\
+     for r in Reverse(rest) do\n\
+       if [ i, r ] notin pos_list and IsUnit(M[i, r]) then\n\
+         Append( ~pos, [ i, r ] );\n\
+         rest:= [ x: x in rest | IsZero(M[i, x]) ];\n\
+         break;\n\
+       end if;\n\
+    end for;\n\
+  end for;\n\
+  return pos;\n\
+end function;\n\n";
+    
+    GetRowIndependentUnitPositions := "\n\
+GetRowIndependentUnitPositions:= function(M, pos_list)\n\
+  rest := [ 1..Nrows(M) ];\n\
+  pos := [ ];\n\
+  for j in [ 1 .. Ncols(M) ] do\n\
+     for r in Reverse(rest) do\n\
+       if [ j, r ] notin pos_list and IsUnit(M[r, j]) then\n\
+         Append( ~pos, [ j, r ] );\n\
+         rest:= [ x: x in rest | IsZero(M[x, j]) ];\n\
+         break;\n\
+       end if;\n\
+    end for;\n\
+  end for;\n\
+  return pos;\n\
+end function;\n\n";
+    
+    GetUnitPosition := "\n\
+GetUnitPosition:= function(M, pos_list)\n\
+  collist:= [ x : x in [1 .. Ncols(M)] | x notin pos_list ];\n\
+  ok:= exists(l){ [i, j]: i in [1 .. Nrows(M) ], j in collist | IsUnit( M[i, j] ) };\n\
+  return ok select l else \"fail\";\n\
+end function;\n\n";
+    
+    DivideRowByUnit := "\n\
+DivideRowByUnit:= procedure( ~M, i, u, j )\n\
+  R := BaseRing(M);\n\
+  M[i] *:= 1/(R ! u);\n\
+  // to be sure:\n\
+  if j gt 0 then\n\
+    M[i, j]:= R ! 1;\n\
+  end if;\n\
+end procedure;\n\n";
+    
+    DivideColumnByUnit := "\n\
+DivideColumnByUnit:= procedure( ~M, j, u, i )\n\
+  R := BaseRing(M);\n\
+  uinv:= 1/(R ! u);\n\
+  for a in [ 1 .. Nrows(M) ] do\n\
+    M[a, j] *:= uinv;\n\
+  end for;\n\
+  // to be sure:\n\
+  if i gt 0 then\n\
+    M[i, j]:= R ! 1;\n\
+  end if;\n\
+end procedure;\n\n";
+    
+    CopyRowToIdentityMatrix := "\n\
+CopyRowToIdentityMatrix := procedure( M, i, ~I, j, e)\n\
+  I[j]:= M[i];\n\
+  if e eq -1 then I[j] *:= -1; end if;\n\
+  I[j,j]:= 1;\n\
+end procedure;\n\n";
+
+    CopyRowToIdentityMatrix2 := "\n\
+CopyRowToIdentityMatrix2 := procedure( M, i, ~I1, ~I2, j)\n\
+  I1[j]:= -M[i];\n\
+  I1[j,j]:= 1;\n\
+  I2[j]:= M[i];\n\
+  I2[j,j]:= 1;\n\
+end procedure;\n\n";
+
+    CopyColumnToIdentityMatrix := "\n\
+CopyColumnToIdentityMatrix := procedure( M, j, ~I, i , e)\n\
+  rowlist:= [ 1..i-1 ] cat [ i+1 .. Nrows(M)];\n\
+  if e eq 1 then\n\
+    for k in rowlist do\n\
+      I[k,i] := M[k,j];\n\
+    end for;\n\
+  else\n\
+    for k in rowlist do\n\
+      I[k,i] := -M[k,j];\n\
+    end for;\n\
+  end if;\n\
+end procedure;\n\n";
+    
+    CopyColumnToIdentityMatrix2 := "\n\
+CopyColumnToIdentityMatrix2 := procedure( M, j, ~I1, ~I2, i )\n\
+  rowlist:= [ 1..i-1 ] cat [ i+1 .. Nrows(M)];\n\
+  for k in rowlist do\n\
+    x:= M[k,j];\n\
+    I1[k,i] := -x;\n\
+    I2[k,i]:= x;\n\
+  end for;\n\
+end procedure;\n\n";
+    
+    SetColumnToZero := "\n\
+SetColumnToZero:= procedure( ~M, i, j )\n\
+  rowlist:= [ 1..i-1 ] cat [ i+1 .. Nrows(M)];\n\
+  for k in rowlist do\n\
+    M[k,j]:= 0;\n\
+  end for;\n\
+end procedure;\n\n";
+    
+    GetCleanRowsPositions := "\n\
+GetCleanRowsPositions:= function( M, clean_columns )\n\
+  clean_rows := [ ];\n\
+  m := Nrows( M );\n\
+  for j in clean_columns do\n\
+    for i in [ 1 .. m ] do\n\
+      if IsOne(M[i, j]) then\n\
+        Append( ~clean_rows, i );\n\
+        break;\n\
+       end if;\n\
+     end for;\n\
+  end for;\n\
+  return clean_rows;\n\
+end function;\n\n";
+    
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -192,6 +322,17 @@ end function;\n\n";
     homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DivideRowByUnit, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DivideColumnByUnit, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( CopyRowToIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( CopyRowToIdentityMatrix2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( CopyColumnToIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( CopyColumnToIdentityMatrix2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SetColumnToZero, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     
 end );
 
