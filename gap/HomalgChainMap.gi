@@ -314,7 +314,7 @@ InstallMethod( Add,
     
     ConvertToRangeRep( c!.degrees );
     
-    homalgResetFiltersOfChainMap( c );
+    homalgResetFilters( c );
     
     return c;
     
@@ -760,7 +760,11 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( homalgResetFiltersOfChainMap,
+##
+InstallMethod( homalgResetFilters,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
   function( c )
     local property;
     

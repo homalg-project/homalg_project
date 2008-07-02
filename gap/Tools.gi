@@ -1107,6 +1107,26 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
 end );
 
 ##
+InstallMethod( DivideEntryByUnit,		### defines: DivideRowByUnit
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsPosInt, IsPosInt, IsRingElement ],
+        
+  function( M, i, j, u )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.DivideEntryByUnit) then
+        RP!.DivideEntryByUnit( M, i, j, u );
+    else
+        SetEntryOfHomalgMatrix( M, i, j, GetEntryOfHomalgMatrix( M, i, j ) / u );
+    fi;
+    
+end );
+    
+##
 InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
@@ -1127,15 +1147,15 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
         if j > 0 then
             ## the two for's avoid creating non-dense lists:
             for a in [ 1 .. j - 1 ] do
-                SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / u );
+                DivideEntryByUnit( M, i, a, u );
             od;
             for a in [ j + 1 .. NrColumns( M ) ] do
-                SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / u );
+                DivideEntryByUnit( M, i, a, u );
             od;
             SetEntryOfHomalgMatrix( M, i, j, One( R ) );
         else
             for a in [ 1 .. NrColumns( M ) ] do
-                SetEntryOfHomalgMatrix( M, i, a, GetEntryOfHomalgMatrix( M, i, a ) / u );
+                DivideEntryByUnit( M, i, a, u );
             od;
         fi;
         
@@ -1169,15 +1189,15 @@ InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
         if i > 0 then
             ## the two for's avoid creating non-dense lists:
             for a in [ 1 .. i - 1 ] do
-                SetEntryOfHomalgMatrix( M, a, j, GetEntryOfHomalgMatrix( M, a, j ) / u );
+                DivideEntryByUnit( M, a, j, u );
             od;
             for a in [ i + 1 .. NrRows( M ) ] do
-                SetEntryOfHomalgMatrix( M, a, j, GetEntryOfHomalgMatrix( M, a, j ) / u );
+                DivideEntryByUnit( M, a, j, u );
             od;
             SetEntryOfHomalgMatrix( M, i, j, One( R ) );
         else
             for a in [ 1 .. NrRows( M ) ] do
-                SetEntryOfHomalgMatrix( M, a, j, GetEntryOfHomalgMatrix( M, a, j ) / u );
+                DivideEntryByUnit( M, a, j, u );
             od;
         fi;
         
@@ -1602,6 +1622,32 @@ InstallMethod( SUM,
     elif IsBound(RP!.Minus) then
         cas := homalgExternalCASystem( R );
         return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), cas, R ) ;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( PROD,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
+          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r1, r2 )
+    local R, RP, cas;
+    
+    R := HomalgRing( r1 );
+    
+    if not IsIdenticalObj( R, HomalgRing( r2 ) ) then
+        return Error( "the two elements are not in the same ring\n" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Product) then
+        cas := homalgExternalCASystem( R );
+        return HomalgExternalRingElement( RP!.Product( r1,  r2 ), cas, R ) ;
     fi;
     
     TryNextMethod( );

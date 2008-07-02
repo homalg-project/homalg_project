@@ -565,10 +565,10 @@ InstallMethod( Add,
     
     if HasIsSequence( C ) and IsSequence( C ) and
        HasIsMorphism( phi ) and IsMorphism( phi ) then
-        homalgResetFiltersOfComplex( C );
+        homalgResetFilters( C );
         SetIsSequence( C, true );
     else
-        homalgResetFiltersOfComplex( C );
+        homalgResetFilters( C );
     fi;
     
     if Length( degrees ) = 3 then
@@ -636,10 +636,10 @@ InstallMethod( Add,
     
     if HasIsSequence( C ) and IsSequence( C ) and
        HasIsMorphism( phi ) and IsMorphism( phi ) then
-        homalgResetFiltersOfComplex( C );
+        homalgResetFilters( C );
         SetIsSequence( C, true );
     else
-        homalgResetFiltersOfComplex( C );
+        homalgResetFilters( C );
     fi;
     
     if Length( degrees ) = 3 then
@@ -1077,7 +1077,10 @@ end );
 #
 ####################################
 
-InstallGlobalFunction( homalgResetFiltersOfComplex,
+InstallMethod( homalgResetFilters,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
   function( C )
     local property;
     

@@ -547,6 +547,10 @@ InstallGlobalFunction( HomalgExternalRingElement,
     
     nargs := Length( arg );
     
+    if nargs > 0 and IsHomalgExternalRingElementRep( arg[1] ) then
+        return arg[1];
+    fi;
+    
     properties := [ ];
     
     for ar in arg{[ 3 .. nargs ]} do

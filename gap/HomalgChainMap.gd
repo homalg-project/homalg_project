@@ -50,13 +50,14 @@ DeclareProperty( "IsChainMapForPushout",
 #
 ####################################
 
-DeclareGlobalFunction( "homalgResetFiltersOfChainMap" );
-
 # constructor methods:
 
 DeclareGlobalFunction( "HomalgChainMap" );
 
 # basic operations:
+
+DeclareOperation( "homalgResetFilters",
+        [ IsHomalgChainMap ] );
 
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgChainMap ] );	## provided to avoid branching in the code and always returns fail

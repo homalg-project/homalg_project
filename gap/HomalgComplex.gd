@@ -61,8 +61,6 @@ DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsATwoSequen
 #
 ####################################
 
-DeclareGlobalFunction( "homalgResetFiltersOfComplex" );
-
 # constructor methods:
 
 DeclareGlobalFunction( "HomalgComplex" );
@@ -70,6 +68,9 @@ DeclareGlobalFunction( "HomalgComplex" );
 DeclareGlobalFunction( "HomalgCocomplex" );
 
 # basic operations:
+
+DeclareOperation( "homalgResetFilters",
+        [ IsHomalgComplex ] );
 
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgComplex ] );			## provided to avoid branching in the code and always returns fail

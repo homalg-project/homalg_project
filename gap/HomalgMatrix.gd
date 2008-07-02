@@ -331,6 +331,9 @@ DeclareOperation( "GetRowIndependentUnitPositions",
 DeclareOperation( "GetRowIndependentUnitPositions",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "DivideEntryByUnit",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
+
 DeclareOperation( "DivideRowByUnit",
         [ IsHomalgMatrix, IsInt, IsRingElement, IsInt ] );
 
