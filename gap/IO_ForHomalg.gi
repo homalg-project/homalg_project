@@ -57,8 +57,8 @@ InstallValue( HOMALG_IO,
 									## (install a method instead of a homalgTable entry)
                 IsZero					:= "a=0",	## a = 0 ?
                 IsOne					:= "a=1",	## a = 1 ?
-                Minus					:= "a-b",	## substract two ring elements (also needed by SimplerEquivalentMatrix)
-                DivideByUnit				:= "a/u",	## divide the element a by the unit u (needed by SimplerEquivalentMatrix)
+                Minus					:= "a-b",	## substract two ring elements (needed by SimplerEquivalentMatrix in case CopyRow/ColumnToIdentityMatrix are not defined)
+                DivideByUnit				:= "a/u",	## divide the element a by the unit u (needed by SimplerEquivalentMatrix in case DivideEntryByUnit is not defined)
                 
                 ## important ring operations:
                 ## (important for performance since existing fall-back methods cause a lot of traffic):
@@ -105,15 +105,21 @@ InstallValue( HOMALG_IO,
                 IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal (needed by the display method)
                 ZeroRows				:= "0==",	## get the positions of the zero rows
                 ZeroColumns				:= "0||",	## get the positions of the zero columns
-                ConvertRowToMatrix			:= "-%A",	## convert a single row matrix into a matrix with specified number of rows/columns
-                ConvertColumnToMatrix			:= "|%A",	## convert a single column matrix into a matrix with specified number of rows/columns
-                ConvertMatrixToRow			:= "A%-",	## convert a matrix into a single row matrix
-                ConvertMatrixToColumn			:= "A%|",	## convert a matrix into a single column matrix
-                TransposedMatrix			:= "^tr",	## transposed matrix
-                GetUnitPosition				:= "gup",	## get the position of the "first" unit in the matrix (needed by SimplerEquivalentMatrix)
-                GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one (needed by SimplerEquivalentMatrix)
                 GetColumnIndependentUnitPositions	:= "ciu",	## get "column-independent" unit positions (needed by ReducedBasisOfModule)
                 GetRowIndependentUnitPositions		:= "riu",	## get "row-independent" unit positions (needed by ReducedBasisOfModule)
+                TransposedMatrix			:= "^tr",	## transposed matrix
+                GetUnitPosition				:= "gup",	## get the position of the "first" unit in the matrix (needed by SimplerEquivalentMatrix)
+                DivideEntryByUnit			:= "ij/",	## divide an entry of a matrix by a unit (needed by SimplerEquivalentMatrix in case DivideRow/ColumnByUnit are not defined)
+                DivideRowByUnit				:= "-/u",	## divide a row by a unit (needed by SimplerEquivalentMatrix)
+                DivideColumnByUnit			:= "|/u",	## divide a column by a unit (needed by SimplerEquivalentMatrix)
+                CopyRowToIdentityMatrix			:= "->-",	## divide a row by a unit (needed by SimplerEquivalentMatrix)
+                CopyColumnToIdentityMatrix		:= "|>|",	## divide a column by a unit (needed by SimplerEquivalentMatrix)
+                SetColumnToZero				:= "|=0",	## set a column (except a certain row) to zero (needed by SimplerEquivalentMatrix)
+                GetCleanRowsPositions			:= "crp",	## get the positions of the rows with a single one (needed by SimplerEquivalentMatrix)
+                ConvertRowToMatrix			:= "-%A",	## convert a single row matrix into a matrix with specified number of rows/columns (need by the display methods for homomorphisms)
+                ConvertColumnToMatrix			:= "|%A",	## convert a single column matrix into a matrix with specified number of rows/columns (need by the display methods for homomorphisms)
+                ConvertMatrixToRow			:= "A%-",	## convert a matrix into a single row matrix
+                ConvertMatrixToColumn			:= "A%|",	## convert a matrix into a single column matrix
                 
                 ## basic module operations:
                 TriangularBasis				:= "Tri",	## compute a (Tri)angular basis

@@ -361,6 +361,9 @@ InstallGlobalFunction( homalgSendBlocking,
                 elif IsHomalgExternalRingRep( ar ) then
                     R := ar;
                     break;
+                elif IsHomalgExternalRingElementRep( ar ) then
+                    R := HomalgRing( ar );
+                    break;
                 fi;
             od;
         else
