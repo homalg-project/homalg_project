@@ -173,14 +173,14 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
   int m = nrows(M);\n\
   int n = ncols(M);\n\
   \n\
-  list mm;\n\
+  list rest;\n\
   for (int o=1; o<=m; o=o+1)\n\
   {\n\
-    mm[size(mm)+1] = o;\n\
+    rest[size(rest)+1] = o;\n\
   }\n\
-  list dep_list;\n\
-  list rest = mm;\n\
   int r = m;\n\
+  list e;\n\
+  list rest2;\n\
   list pos;\n\
   int i; int k; int a;\n\
   \n\
@@ -189,17 +189,18 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
     for (i=1; i<=r; i=i+1)\n\
     {\n\
       k = rest[r-i+1];\n\
-      if (deg(M[k,j]) == 0)\n\
+      if (deg(M[k,j]) == 0) //IsUnit\n\
       {\n\
+        rest2 = e;\n\
         pos[size(pos)+1] = list(j,k);\n\
-        for (a=1; a<=m; a=a+1)\n\
+        for (a=1; a<=r; a=a+1)\n\
         {\n\
-          if (M[mm[a],j] != 0)\n\
+          if (M[rest[a],j] == 0)\n\
           {\n\
-            dep_list[size(dep_list)+1] = mm[a];\n\
+            rest2[size(rest2)+1] = rest[a];\n\
           }\n\
         }\n\
-        rest = Difference(mm,dep_list);\n\
+        rest = rest2;\n\
         r = size(rest);\n\
         break;\n\
       }\n\
@@ -214,14 +215,14 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
   int m = nrows(M);\n\
   int n = ncols(M);\n\
   \n\
-  list nn;\n\
+  list rest;\n\
   for (int o=1; o<=n; o=o+1)\n\
   {\n\
-    nn[size(nn)+1] = o;\n\
+    rest[size(rest)+1] = o;\n\
   }\n\
-  list dep_list;\n\
-  list rest = nn;\n\
   int r = n;\n\
+  list e;\n\
+  list rest2;\n\
   list pos;\n\
   int j; int k; int a;\n\
   \n\
@@ -230,17 +231,18 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
     for (j=1; j<=r; j=j+1)\n\
     {\n\
       k = rest[r-j+1];\n\
-      if (deg(M[i,k]) == 0)\n\
+      if (deg(M[i,k]) == 0) //IsUnit\n\
       {\n\
+        rest2 = e;\n\
         pos[size(pos)+1] = list(i,k);\n\
-        for (a=1; a<=n; a=a+1)\n\
+        for (a=1; a<=r; a=a+1)\n\
         {\n\
-          if (M[i,nn[a]] != 0)\n\
+          if (M[i,rest[a]] == 0)\n\
           {\n\
-            dep_list[size(dep_list)+1] = nn[a];\n\
+            rest2[size(rest2)+1] = rest[a];\n\
           }\n\
         }\n\
-        rest = Difference(nn,dep_list);\n\
+        rest = rest2;\n\
         r = size(rest);\n\
         break;\n\
       }\n\
@@ -633,7 +635,6 @@ InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, i, j, R )
-    local Mij;
     
     return homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     

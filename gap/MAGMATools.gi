@@ -241,7 +241,6 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                DivideRowByUnit :=
                  function( M, i, u, j )
-                   local list_string;
                    
                    homalgSendBlocking( [ "DivideRowByUnit(~", M, i, u, j, ")" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
                    
@@ -249,7 +248,6 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                DivideColumnByUnit :=
                  function( M, j, u, i )
-                   local list_string;
                    
                    homalgSendBlocking( [ "DivideColumnByUnit(~", M, j, u, i, ")" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
                    
@@ -257,39 +255,38 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                CopyRowToIdentityMatrix :=
                  function( M, i, L, j )
-                     local l;
-                     
-                     l := Length( L );
-                     
-                     if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                         homalgSendBlocking( [ "CopyRowToIdentityMatrix2(", M, i, ",~", L[1], ",~", L[2], j, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
-                     elif l > 0 and IsHomalgMatrix( L[1] ) then
-                         homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",~", L[1], j, -1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
-                     elif l > 1 and IsHomalgMatrix( L[2] ) then
-                         homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",~", L[2], j, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
-                     fi;
-                     
+                   local l;
+                   
+                   l := Length( L );
+                   
+                   if l > 1 and ForAll( L, IsHomalgMatrix ) then
+                       homalgSendBlocking( [ "CopyRowToIdentityMatrix2(", M, i, ",~", L[1], ",~", L[2], j, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   elif l > 0 and IsHomalgMatrix( L[1] ) then
+                       homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",~", L[1], j, -1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   elif l > 1 and IsHomalgMatrix( L[2] ) then
+                       homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",~", L[2], j, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   fi;
+                   
                  end,
                
                CopyColumnToIdentityMatrix :=
                  function( M, j, L, i )
-                     local l;
-                     
-                     l := Length( L );
-                     
-                     if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                         homalgSendBlocking( [ "CopyColumnToIdentityMatrix2(", M, j, ",~", L[1], ",~", L[2], i, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
-                     elif l > 0 and IsHomalgMatrix( L[1] ) then
-                         homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[1], i, -1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
-                     elif l > 1 and IsHomalgMatrix( L[2] ) then
-                         homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[2], i, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
-                     fi;
-                     
-                 end,
+                   local l;
+                   
+                   l := Length( L );
+                   
+                   if l > 1 and ForAll( L, IsHomalgMatrix ) then
+                       homalgSendBlocking( [ "CopyColumnToIdentityMatrix2(", M, j, ",~", L[1], ",~", L[2], i, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   elif l > 0 and IsHomalgMatrix( L[1] ) then
+                       homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[1], i, -1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   elif l > 1 and IsHomalgMatrix( L[2] ) then
+                       homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[2], i, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   fi;
+                   
+               end,
                
                SetColumnToZero :=
                  function( M, i, j )
-                   local list_string;
                    
                    homalgSendBlocking( [ "SetColumnToZero(~", M, i, j, ")" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
                    

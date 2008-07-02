@@ -32,7 +32,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "-(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Minus );
+                   return homalgSendBlocking( [ a, "-(", b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Minus );
                    
                  end,
                
@@ -47,9 +47,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                    fi;
                    if e{[1]} = "-" then
                        #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", e );
-                       return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], "need_output", HOMALG_IO.Pictograms.DivideByUnit);
+                       return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.DivideByUnit );
                    else
-                       return homalgSendBlocking( [ "(",  a, ")/", e ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                       return homalgSendBlocking( [ "(",  a, ")/", e ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.DivideByUnit );
                    fi;
                    
                  end,
@@ -281,6 +281,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    else
                        return StringToIntList( list_string );
                    fi;
+                   
+                 end,
+               
+               DivideEntryByUnit :=
+                 function( M, i, j, u )
+                   
+                   homalgSendBlocking( [ M, "[", j, i, "] =", M, "[", j, i, "]/", u ], "need_command", HOMALG_IO.Pictograms.DivideEntryByUnit );
                    
                  end,
                

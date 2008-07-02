@@ -240,6 +240,48 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
+               DivideEntryByUnit :=
+                 function( M, i, j, u )
+                   
+                   homalgSendBlocking( [ "DivideEntryByUnit(", M, i, j, u, ")" ], "need_command", HOMALG_IO.Pictograms.DivideEntryByUnit );
+                   
+                 end,
+               
+               DivideRowByUnit :=
+                 function( M, i, u, j )
+                   
+                   homalgSendBlocking( [ "DivideRowByUnit(", M, i, u, j, ")" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   
+                 end,
+               
+               DivideColumnByUnit :=
+                 function( M, j, u, i )
+                   
+                   homalgSendBlocking( [ "DivideColumnByUnit(", M, j, u, i, ")" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
+                   
+                 end,
+               
+               CopyRowToIdentityMatrix :=
+                 function( M, i, L, j )
+                   
+                   homalgSendBlocking( [ "CopyRowToIdentityMatrix(", M, i, ",[", L[1], ",", L[2], "],", j, ")" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   
+                 end,
+               
+               CopyColumnToIdentityMatrix :=
+                 function( M, j, L, i )
+                   
+                   homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",[", L[1], ",", L[2], "],", i, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   
+                 end,
+               
+               SetColumnToZero :=
+                 function( M, i, j )
+                   
+                   homalgSendBlocking( [ "SetColumnToZero(", M, i, j, ")" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
+                   
+                 end,
+               
                GetCleanRowsPositions :=
                  function( M, clean_columns )
                    local list_string;

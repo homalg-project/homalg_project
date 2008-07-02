@@ -284,7 +284,7 @@ CopyColumnToIdentityMatrix2 := procedure( M, j, ~I1, ~I2, i )\n\
   for k in rowlist do\n\
     x:= M[k,j];\n\
     I1[k,i] := -x;\n\
-    I2[k,i]:= x;\n\
+    I2[k,i] := x;\n\
   end for;\n\
 end procedure;\n\n";
     
@@ -311,6 +311,7 @@ GetCleanRowsPositions:= function( M, clean_columns )\n\
   return clean_rows;\n\
 end function;\n\n";
     
+    homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
