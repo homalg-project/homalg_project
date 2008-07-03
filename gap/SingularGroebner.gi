@@ -62,27 +62,6 @@ InstallMethod( CreateHomalgTable,
 	       fi;
 	     end,
 
-           Involution :=
-             function( M )
-               local R, I;
-               R := HomalgRing( M );
-               I := HomalgVoidMatrix( NrColumns( M ), NrRows( M ), R );
-               if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
-                 ## in case of a non-commutative ring (right now: in case of a weyl algebra: todo)
-                 homalgSendBlocking( Concatenation(
-                                        [ "map F = ", R, ", " ],
-                                        IndeterminateCoordinatesOfRingOfDerivations( R ),
-                                        Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , a ] ) ),
-                                        [ "; matrix ", I, " = transpose( involution( ", M, ", F ) )" ]
-                                      ), "need_command", HOMALG_IO.Pictograms.Involution );
-               else
-                  ## in case of a commutative ring
-                  homalgSendBlocking( [ "matrix ", I, " = transpose( ", M, " )" ], "need_command", HOMALG_IO.Pictograms.Involution );
-               fi;
-               ResetFilterObj( I, IsVoidMatrix );
-               return I;
-             end,
-             
       );
     
 #todo: insert again, as soon as Singular really computes smith forms

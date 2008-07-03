@@ -549,7 +549,7 @@ InstallMethod( RingOfDerivations,
         
   function( R, indets )
     local var, nr_var, der, nr_der, properties, stream, display_color,
-          PR, ext_obj, S, v;
+          PR, ext_obj, S, v, RP;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -624,6 +624,23 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     for v in der do
         SetName( v, homalgPointer( v ) );
     od;
+    
+    RP := homalgTable( S );
+    
+    RP!.Involution :=
+      function( M )
+        local R, I;
+        R := HomalgRing( M );
+        I := HomalgVoidMatrix( NrColumns( M ), NrRows( M ), R );
+        homalgSendBlocking( Concatenation(
+                [ "map F = ", R, ", " ],
+                IndeterminateCoordinatesOfRingOfDerivations( R ),
+                Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , a ] ) ),
+                [ "; matrix ", I, " = transpose( involution( ", M, ", F ) )" ]
+                ), "need_command", HOMALG_IO.Pictograms.Involution );
+        ResetFilterObj( I, IsVoidMatrix );
+        return I;
+    end;
     
     SetCoefficientsRing( S, CoefficientsRing( R ) );
     SetCharacteristic( S, Characteristic( R ) );
