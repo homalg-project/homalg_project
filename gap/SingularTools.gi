@@ -61,6 +61,20 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Sum :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, "+", b ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Sum );
+                   
+                 end,
+               
+               Product :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Product );
+                   
+                 end,
+               
                CopyMatrix :=
                  function( C )
                    
@@ -204,33 +218,23 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               ZeroRows := #was: ZeroColumns
+               ZeroRows :=
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "matrix Zero_Row[1][", NrRows(C), "];list l;for (int i=", NrRows( C ), ";i>=1;i=i-1) {if (", C, "[i]==Zero_Row || ", C, "[i]==0) {l=insert(l,i);} };string(l)" ] , "need_output", HOMALG_IO.Pictograms.ZeroRows );
+                   list_string := homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
                    
-                   #trying to understand singular's output
-                   if list_string = "empty list" or list_string = "emptylist" then
-                       return StringToIntList( "[]" );
-                   else
-                       return StringToIntList( list_string );
-                   fi;
+                   return StringToIntList( list_string );
                    
                  end,
                
-               ZeroColumns := #was: ZeroRows
+               ZeroColumns :=
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "matrix Zero_Row[1][", NrColumns(C), "];list l;for (int i=", NrColumns( C ), ";i>=1; i=i-1) {if (transpose(", C, ")[i]==Zero_Row || transpose(", C, ")[i]==0) {l=insert(l,i);} };string(l)" ] , "need_output", HOMALG_IO.Pictograms.ZeroColumns );
+                   list_string := homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
                    
-                   #trying to understand singular's output with removed spaces from homalg
-                   if list_string = "empty list" or list_string = "emptylist" then
-                       return StringToIntList( "[]" );
-                   else
-                       return StringToIntList( list_string );
-                   fi;
+                   return StringToIntList( list_string );
                    
                  end,
                
@@ -288,6 +292,59 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( M, i, j, u )
                    
                    homalgSendBlocking( [ M, "[", j, i, "] =", M, "[", j, i, "]/", u ], "need_command", HOMALG_IO.Pictograms.DivideEntryByUnit );
+                   
+                 end,
+               
+               DivideRowByUnit :=
+                 function( M, i, u, j )
+                   
+                   homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", M, "[k,i]=", M, "[k,i]/", u, ";};if(j>0){", M, "[j,i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   
+                 end,
+               
+               DivideColumnByUnit :=
+                 function( M, j, u, i )
+                   
+                   homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", M, "[j,k]=", M, "[j,k]/", u, ";};if(i>0){", M, "[j,i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   
+                 end,
+               
+               CopyRowToIdentityMatrix :=
+                 function( M, i, L, j )
+                   local l;
+                   
+                   l := Length( L );
+                   
+                   if l > 1 and ForAll( L, IsHomalgMatrix ) then
+                       homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", L[1], "[k,j]=-", M, "[k,i];", L[2], "[k,j]=", M, "[k,i];", "};", L[1], "[j,j]=1;", L[2], "[j,j]=1" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   elif l > 0 and IsHomalgMatrix( L[1] ) then
+                       homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", L[1], "[k,j]=-", M, "[k,i];};", L[1], "[j,j]=1;" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   elif l > 1 and IsHomalgMatrix( L[2] ) then
+                       homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", L[2], "[k,j]=", M, "[k,i];", "};", L[2], "[j,j]=1" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                   fi;
+                   
+                 end,
+               
+               CopyColumnToIdentityMatrix :=
+                 function( M, j, L, i )
+                   local l;
+                   
+                   l := Length( L );
+                   
+                   if l > 1 and ForAll( L, IsHomalgMatrix ) then
+                       homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", L[1], "[i,k]=-", M, "[j,k];", L[2], "[i,k]=", M, "[j,k];", "};", L[1], "[i,i]=1;", L[2], "[i,i]=1" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   elif l > 0 and IsHomalgMatrix( L[1] ) then
+                       homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", L[1], "[i,k]=-", M, "[j,k];", L[1], "[i,i]=1;" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   elif l > 1 and IsHomalgMatrix( L[2] ) then
+                       homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", L[2], "[i,k]=", M, "[j,k];", "};", L[2], "[i,i]=1" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                   fi;
+                   
+                 end,
+               
+               SetColumnToZero :=
+                 function( M, i, j )
+                   
+                   homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<i;k=k+1){", M, "[j,k]=0;};for(k=i+1;k<=", NrRows( M ), ";k=k+1){", M, "[j,k]=0;}" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
                    
                  end,
                

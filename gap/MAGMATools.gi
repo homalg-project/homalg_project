@@ -48,6 +48,20 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               Sum :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, "+", b ], "need_output", HOMALG_IO.Pictograms.Sum );
+                   
+                 end,
+               
+               Product :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Product );
+                   
+                 end,
+               
                CopyMatrix :=
                  function( C )
                    
@@ -195,7 +209,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "[i: i in [ 1 .. ", NrRows( C ), " ] | IsZero(", C, "[i] ) ];" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
+                   list_string := homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
                    
                    return StringToIntList( list_string );
                    
@@ -205,7 +219,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                  function( C )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "[i: i in [ 1 .. ", NrColumns( C ), " ] | IsZero( ColumnSubmatrixRange(", C, ",i,i) ) ];" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
+                   list_string := homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
                    
                    return StringToIntList( list_string );
                    
@@ -283,7 +297,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                        homalgSendBlocking( [ "CopyColumnToIdentityMatrix(", M, j, ",~", L[2], i, 1, ")" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
                    fi;
                    
-               end,
+                 end,
                
                SetColumnToZero :=
                  function( M, i, j )

@@ -30,6 +30,7 @@ InstallValue( HOMALG_IO_Singular,
             eoc_quiet := ";",
             break_lists := true,	## a Singular specific
             handle_output := true,	## a Singular specific
+#            original_lines := true,	## a Singular specific
             check_output := true,	## a Singular specific looks for newlines without commas
             setring := SETRING_Singular,## a Singular specific
             define := "=",
@@ -112,10 +113,10 @@ end );
 ##
 InstallGlobalFunction( InitializeSingularTools,
   function( stream )
-    local IsMemberOfList, Difference, GetUnitPosition,
+    local IsMemberOfList, Difference,
           GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
           IsZeroMatrix, IsIdentityMatrix, IsDiagonalMatrix,
-          GetCleanRowsPositions;
+          ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions;
     
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
@@ -130,7 +131,7 @@ proc IsMemberOfList (int i, list l)\n\
     }\n\
   }\n\
   return(0);\n\
-}";
+}\n\n";
     
     Difference := "\n\
 proc Difference (list a, list b)\n\
@@ -146,26 +147,74 @@ proc Difference (list a, list b)\n\
     }\n\
   }\n\
   return(c);\n\
-}";
+}\n\n";
     
-    GetUnitPosition := "\n\
-proc GetUnitPosition (matrix M, list pos_list)\n\
+    IsZeroMatrix := "\n\
+proc IsZeroMatrix (matrix m)\n\
 {\n\
-  int m = nrows(M);\n\
-  int n = ncols(M);\n\
-  \n\
-  for (int j=1; j<=n; j=j+1)\n\
+  matrix z[nrows(m)][ncols(m)];\n\
+  return(m==z);\n\
+}\n\n";
+    
+    IsIdentityMatrix := "\n\
+proc IsIdentityMatrix (matrix m)\n\
+{\n\
+  return(m==unitmat(nrows(m)));\n\
+}\n\n";
+    
+    IsDiagonalMatrix := "\n\
+proc IsDiagonalMatrix (matrix m)\n\
+{\n\
+  int min=nrows(m);\n\
+  if (min>ncols(m))\n\
   {\n\
-    for (int i=1; i<=m; i=i+1)\n\
+    min=ncols(m);\n\
+  }\n\
+  matrix z[nrows(m)][ncols(m)];\n\
+  matrix c = m;\n\
+  for (int i=1; i<=min; i=i+1)\n\
+  {\n\
+    c[i,i]=0;\n\
+  }\n\
+  return(c==z);\n\
+}\n\n";
+    
+    ZeroRows := "\n\
+proc ZeroRows (matrix m)\n\
+{\n\
+  list l;\n\
+  for (int i=1;i<=ncols(m);i=i+1)\n\
+  {\n\
+    if (m[i]==0)\n\
     {\n\
-      if (IsMemberOfList(i,pos_list) == 0 && deg(M[i,j]) == 0)\n\
-      {\n\
-        return(string(j,\",\",i)); // this is not a mistake\n\
-      }\n\
+      l[size(l)+1]=i;\n\
     }\n\
   }\n\
-  return(\"fail\");\n\
-}";
+  if (size(l)==0)\n\
+  {\n\
+    return(\"[]\"));\n\
+  }\n\
+  return(string(l));\n\
+}\n\n";
+    
+    ZeroColumns := "\n\
+proc ZeroColumns (matrix n)\n\
+{\n\
+  matrix m=transpose(n);\n\
+  list l;\n\
+  for (int i=1;i<=ncols(m);i=i+1)\n\
+  {\n\
+    if (m[i]==0)\n\
+    {\n\
+      l[size(l)+1]=i;\n\
+    }\n\
+  }\n\
+  if (size(l)==0)\n\
+  {\n\
+    return(\"[]\"));\n\
+  }\n\
+  return(string(l));\n\
+}\n\n";
     
     GetColumnIndependentUnitPositions := "\n\
 proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
@@ -207,7 +256,7 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
     }\n\
   }\n\
   return(string(pos));\n\
-}";
+}\n\n";
     
     GetRowIndependentUnitPositions := "\n\
 proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
@@ -249,37 +298,31 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
     }\n\
   }\n\
   return(string(pos));\n\
-}";
+}\n\n";
     
-    IsZeroMatrix := "\n\
-proc IsZeroMatrix (matrix m)\n\
+    GetUnitPosition := "\n\
+proc GetUnitPosition (matrix M, list pos_list)\n\
 {\n\
-  matrix z[nrows(m)][ncols(m)];\n\
-  return(m==z);\n\
-}";
-    
-    IsIdentityMatrix := "\n\
-proc IsIdentityMatrix (matrix m)\n\
-{\n\
-  return(m==unitmat(nrows(m)));\n\
-}";
-    
-    IsDiagonalMatrix := "\n\
-proc IsDiagonalMatrix (matrix m)\n\
-{\n\
-  int min=nrows(m);\n\
-  if (min>ncols(m))\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  list rest;\n\
+  for (int o=1; o<=m; o=o+1)\n\
   {\n\
-    min=ncols(m);\n\
+    rest[size(rest)+1] = o;\n\
   }\n\
-  matrix z[nrows(m)][ncols(m)];\n\
-  matrix c = m;\n\
-  for (int i=1; i<=min; i=i+1)\n\
+  rest=Difference(rest,pos_list);\n\
+  for (int j=1; j<=n; j=j+1)\n\
   {\n\
-    c[i,i]=0;\n\
+    for (int i=1; i<=size(rest); i=i+1)\n\
+    {\n\
+      if (deg(M[rest[i],j]) == 0)\n\
+      {\n\
+        return(string(j,\",\",rest[i])); // this is not a mistake\n\
+      }\n\
+    }\n\
   }\n\
-  return(c==z);\n\
-}";
+  return(\"fail\");\n\
+}\n\n";
     
     GetCleanRowsPositions := "\n\
 proc GetCleanRowsPositions (matrix m, list l)\n\
@@ -291,22 +334,25 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
     {\n\
       if (m[l[i],j]==1)\n\
       {\n\
-        rows = insert(rows,j,size(rows));\n\
+        rows[size(rows)+1] = j;\n\
         break;\n\
       }\n\
     }\n\
   }\n\
   return(string(rows));\n\
-}";
+}\n\n";
     
+    homalgSendBlocking( "int i; int j; int k;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsMemberOfList, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( Difference, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsZeroMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     
   end
@@ -481,7 +527,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    var := List( Concatenation( var_of_coeff_ring, var ), a -> HomalgExternalRingElement( a, "Singular", S ) );
+    var := List( Concatenation( var_of_coeff_ring, var ), a -> HomalgExternalRingElement( a, S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -574,7 +620,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    der := List( der , a -> HomalgExternalRingElement( a, "Singular", S ) );
+    der := List( der , a -> HomalgExternalRingElement( a, S ) );
     for v in der do
         SetName( v, homalgPointer( v ) );
     od;

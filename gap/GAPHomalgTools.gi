@@ -49,6 +49,20 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
+               Sum :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, "+", b ], "need_output", HOMALG_IO.Pictograms.Sum );
+                   
+                 end,
+               
+               Product :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Product );
+                   
+                 end,
+               
                CopyMatrix :=
                  function( C )
                    

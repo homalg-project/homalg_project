@@ -93,23 +93,32 @@ end );
 ##
 InstallGlobalFunction( InitializeMAGMATools,
   function( stream )
-    local IsDiagonalMatrix, BasisOfRowModule, BasisOfColumnModule,
-          BasisOfRowsCoeff, BasisOfColumnsCoeff,
-          DecideZeroRows, DecideZeroColumns,
-          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns,
+    local IsDiagonalMatrix, ZeroRows, ZeroColumns,
           GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
           GetUnitPosition, DivideRowByUnit, DivideColumnByUnit,
           CopyRowToIdentityMatrix, CopyRowToIdentityMatrix2,
           CopyColumnToIdentityMatrix, CopyColumnToIdentityMatrix2,
-          SetColumnToZero, GetCleanRowsPositions;
+          SetColumnToZero, GetCleanRowsPositions,
+          BasisOfRowModule, BasisOfColumnModule,
+          BasisOfRowsCoeff, BasisOfColumnsCoeff,
+          DecideZeroRows, DecideZeroColumns,
+          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
+          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns;
     
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix := function(M)\n\
-  n:= Nrows(M);\n\
-  m:= Ncols(M);\n\
-  for i:= 1 to Min(n,m) do M[i,i]:= 0; end for;\n\
+  for i:= 1 to Min(Nrows(M),Ncols(M)) do M[i,i]:= 0; end for;\n\
   return IsZero(M);\n\
+end function;\n\n";
+    
+    ZeroRows := "\n\
+ZeroRows := function(M)\n\
+  return [i: i in [ 1 .. Nrows(M) ] | IsZero(M[i]) ];\n\
+end function;\n\n";
+    
+    ZeroColumns := "\n\
+ZeroColumns := function(M)\n\
+  return [i: i in [ 1 .. Ncols(M) ] | IsZero(ColumnSubmatrixRange(M,i,i)) ];\n\
 end function;\n\n";
     
     BasisOfRowModule := "\n\
@@ -313,16 +322,8 @@ end function;\n\n";
     
     homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -334,6 +335,16 @@ end function;\n\n";
     homalgSendBlocking( CopyColumnToIdentityMatrix2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SetColumnToZero, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     
 end );
 
@@ -487,7 +498,7 @@ InstallMethod( PolynomialRing,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
-    var := List( var, a -> HomalgExternalRingElement( a, "MAGMA", S ) );
+    var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -580,7 +591,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
     
-    return HomalgExternalRingElement( Mrc, "MAGMA", R );
+    return HomalgExternalRingElement( Mrc, R );
     
 end );
 

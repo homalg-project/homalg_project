@@ -266,7 +266,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
     
-    return HomalgExternalRingElement( Mrc, "GAP", R );
+    return HomalgExternalRingElement( Mrc, R );
     
 end );
 
