@@ -179,7 +179,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Compose :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
+                   return homalgSendBlocking( [ B, "*", A ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); ## ;-)
                    
                  end,
                
