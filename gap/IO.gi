@@ -132,10 +132,9 @@ end );
 
 InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
-    local READY, READY_LENGTH, CUT_POS_BEGIN, CUT_POS_END,
-          SEARCH_READY_TWICE, handle_output, gotsomething,
-          l, nr, pos, bytes, len, pos1, pos2, pos3, pos4,
-          CAS, PID, COLOR;
+    local READY, READY_LENGTH, CUT_POS_BEGIN, CUT_POS_END, SEARCH_READY_TWICE,
+          handle_output, original_lines, gotsomething, l, nr, pos, bytes, len,
+          pos1, pos2, pos3, pos4, CAS, PID, COLOR;
     
     READY := s.READY;
     READY_LENGTH := s.READY_LENGTH;
@@ -154,6 +153,12 @@ InstallGlobalFunction( CheckOutputOfCAS,
         handle_output := false;
     fi;
     
+    if IsBound( s.original_lines ) and s.original_lines = true then
+        original_lines := true;
+    else
+        original_lines := false;
+    fi;
+    
     gotsomething := false;
     
     while true do	# will be exited with break or return
@@ -162,9 +167,11 @@ InstallGlobalFunction( CheckOutputOfCAS,
         #Print( "select: nr=", nr, "\n" );
         
         if nr = 0 then
-            if handle_output = true then	## a Singular specific
+            if original_lines then
+                s.LINES := ShallowCopy( s.lines );	## for debugging purposes
+            fi;
+            if handle_output then	## a Singular specific
                 len := Length( s.lines );
-                s.LINES_original := ShallowCopy( s.lines );
                 while len > 0 and s.lines[len] = '\n' do
                     Remove( s.lines );
                     len := len - 1;
@@ -191,8 +198,10 @@ InstallGlobalFunction( CheckOutputOfCAS,
                         #        pos
                 if pos <> fail then
                     s.casready := true;
-                    if handle_output = true then	## a Singular specific
-                        s.lines_original := ShallowCopy( s.lines );
+                    if handle_output then	## a Singular specific
+                        if original_lines then
+                            s.lines_original := ShallowCopy( s.lines );	## for debugging purposes
+                        fi;
                         s.pos := pos;
                         len := Length( s.lines );
                         if s.lines[1] = '\n' then
@@ -205,7 +214,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
                             s.lines := Concatenation( s.lines{ [ 1 .. pos - 1 ] },
                                                s.lines{ [ pos + READY_LENGTH + 1 .. len ] } );
                         fi;
-                  elif SEARCH_READY_TWICE = true then	## a Macaulay2 specific
+                  elif SEARCH_READY_TWICE then	## a Macaulay2 specific
                       pos2 := PositionSublist( s.lines, READY );
                       pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
                       if pos3 = fail then

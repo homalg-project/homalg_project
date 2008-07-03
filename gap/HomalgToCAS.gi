@@ -472,9 +472,9 @@ InstallGlobalFunction( homalgSendBlocking,
         ## inconsistency in the weak pointer list of external objects)
         if IsBound( ring_element ) then
             if not IsBound( type ) then
-                ext_obj := HomalgExternalRingElement( homalg_variable, CAS, R );
+                ext_obj := HomalgExternalRingElement( homalg_variable, R );
             else
-                ext_obj := HomalgExternalRingElement( homalg_variable, CAS, R, type );
+                ext_obj := HomalgExternalRingElement( homalg_variable, R, type );
             fi;
         else
             if not IsBound( type ) then
