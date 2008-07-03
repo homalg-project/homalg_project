@@ -138,7 +138,7 @@ InstallMethod( AdditiveInverseMutable,
     
     if IsBound(RP!.Minus) and IsBound(RP!.Zero) then
         minus_r := RP!.Minus( Zero( R ), r );
-        return HomalgExternalRingElement( minus_r, homalgExternalCASystem( R ), R );
+        return HomalgExternalRingElement( minus_r, R );
     fi;
     
     TryNextMethod( );
@@ -159,7 +159,7 @@ InstallMethod( \/,
     RP := homalgTable( R );
     
     if IsBound(RP!.DivideByUnit) then
-        return HomalgExternalRingElement( RP!.DivideByUnit( a, u ), u!.cas, R );
+        return HomalgExternalRingElement( RP!.DivideByUnit( a, u ), R );
     fi;
     
     Error( "could not find a procedure called DivideByUnit in the homalgTable", RP, "\n" );
@@ -1606,7 +1606,7 @@ InstallMethod( SUM,
           IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
         
   function( r1, r2 )
-    local R, RP, cas;
+    local R, RP;
     
     R := HomalgRing( r1 );
     
@@ -1617,11 +1617,9 @@ InstallMethod( SUM,
     RP := homalgTable( R );
     
     if IsBound(RP!.Sum) then
-        cas := homalgExternalCASystem( R );
-        return HomalgExternalRingElement( RP!.Sum( r1,  r2 ), cas, R ) ;
+        return HomalgExternalRingElement( RP!.Sum( r1,  r2 ), R ) ;
     elif IsBound(RP!.Minus) then
-        cas := homalgExternalCASystem( R );
-        return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), cas, R ) ;
+        return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), R ) ;
     fi;
     
     TryNextMethod( );
@@ -1635,7 +1633,7 @@ InstallMethod( PROD,
           IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
         
   function( r1, r2 )
-    local R, RP, cas;
+    local R, RP;
     
     R := HomalgRing( r1 );
     
@@ -1646,8 +1644,7 @@ InstallMethod( PROD,
     RP := homalgTable( R );
     
     if IsBound(RP!.Product) then
-        cas := homalgExternalCASystem( R );
-        return HomalgExternalRingElement( RP!.Product( r1,  r2 ), cas, R ) ;
+        return HomalgExternalRingElement( RP!.Product( r1,  r2 ), R ) ;
     fi;
     
     TryNextMethod( );

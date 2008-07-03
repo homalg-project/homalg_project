@@ -1150,7 +1150,7 @@ InstallMethod( ElementaryDivisors,
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
-            e := List( e, a -> HomalgExternalRingElement( a, homalgExternalCASystem( R ), R ) );
+            e := List( e, a -> HomalgExternalRingElement( a, R ) );
         fi;
         
         ## since the computer algebra systems have different

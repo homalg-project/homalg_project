@@ -543,7 +543,7 @@ end );
 ##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
-    local nargs, properties, ar, ring, pointer, r;
+    local nargs, properties, ar, cas, ring, pointer, r;
     
     nargs := Length( arg );
     
@@ -553,13 +553,16 @@ InstallGlobalFunction( HomalgExternalRingElement,
     
     properties := [ ];
     
-    for ar in arg{[ 3 .. nargs ]} do
-        if not IsBound( ring ) and IsHomalgExternalRingRep( ar ) then
+    for ar in arg{[ 2 .. nargs ]} do
+        if not IsBound( cas ) and IsString( ar ) then
+            cas := ar;
+        elif not IsBound( ring ) and IsHomalgExternalRingRep( ar ) then
             ring := ar;
+            cas := homalgExternalCASystem( ring );
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsHomalgExternalRingRep, IsFilter } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsString, IsHomalgExternalRingRep, IsFilter } bur recieved: ", ar,"\n" );
         fi;
     od;
     
@@ -571,12 +574,12 @@ InstallGlobalFunction( HomalgExternalRingElement,
             pointer := pointer( ring );
         fi;
         
-        r := rec( pointer := pointer, cas := arg[2], ring := ring );
+        r := rec( pointer := pointer, cas := cas, ring := ring );
         
         ## Objectify:
         Objectify( TheTypeHomalgExternalRingElementWithIOStream, r );
     else
-        r := rec( pointer := pointer, cas := arg[2] );
+        r := rec( pointer := pointer, cas := cas );
         
         ## Objectify:
         Objectify( TheTypeHomalgExternalRingElement, r );
