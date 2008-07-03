@@ -30,6 +30,13 @@ DeclareOperation( "ReduceMatWithEchelonMat", #Reduce the rows of a matrix with a
         [ IsMatrix, IsMatrix ] );
 
 ##
+DeclareOperation( "ReduceMatTransformation",
+        [ IsMatrix, IsMatrix ] );
+
+DeclareOperation( "ReduceMatWithEchelonMatTransformation", #same as above, with transformation matrix.
+        [ IsMatrix, IsMatrix ] );
+
+##
 DeclareOperation( "KernelEchelonMatDestructive", #REF over a ring, returns a record with relations (list: certain columns of relations) as only entry
         [ IsMatrix, IsList ] );
 

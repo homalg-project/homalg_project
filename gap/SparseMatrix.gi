@@ -44,7 +44,7 @@ BindGlobal( "TheTypeSparseMatrixGF2",
 ##  of the matrix. <A>indices</A> must be a list of length <A>nrows</A> containing
 ##  lists of the column indices of the matrix in ascending order.
 ##
-##  <Example>
+##  <Example><![CDATA[
 ##  gap> M := [ [ 0 , 1 ], [ 3, 0 ] ] * One( GF(2) );
 ##  [ [ 0*Z(2), Z(2)^0 ], [ Z(2)^0, 0*Z(2) ] ]
 ##  gap> SM := SparseMatrix( M );
@@ -58,12 +58,14 @@ BindGlobal( "TheTypeSparseMatrixGF2",
 ##  <a 2 x 2 sparse matrix over GF(2)>
 ##  gap> SN = SM;
 ##  true
-##  SN := SparseMatrix( 2, 3, [ [ 2 ], [ 1, 3 ] ], [ [ 1 ], [ 3, 2 ] ] * One( GF(5) ) );
+##  SN := SparseMatrix( 2, 3,
+##                      [ [ 2 ], [ 1, 3 ] ],
+##                      [ [ 1 ], [ 3, 2 ] ] * One( GF(5) ) );
 ##  <a 2 x 3 sparse matrix over GF(5)>
 ##  gap> Display( SN );
 ##   . 1 .
 ##   3 . 2
-##  </Example>
+##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -145,9 +147,9 @@ InstallGlobalFunction( SparseMatrix,
 ##  <Returns>a &GAP; matrix, [], or a list of empty lists</Returns>
 ##  <Description>
 ##  This function converts the sparse matrix <A>sm</A> into a &GAP; matrix.
-##  In case of nrows( sm ) = 0 or ncols( sm ) = 0 the return value is a list
-##  or a list of empty lists, respectively.
-##  <Example>
+##  In case of <C>nrows(sm)=0</C> or <C>ncols(sm)=0</C> the return value is the
+##  empty list or a list of empty lists, respectively.
+##  <Example><![CDATA[
 ##  gap> M := [ [ 0 , 1 ], [ 3, 0 ] ] * One( GF(3) );
 ##  [ [ 0*Z(3), Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ]
 ##  gap> SM := SparseMatrix( M );
@@ -155,8 +157,8 @@ InstallGlobalFunction( SparseMatrix,
 ##  gap> N := ConvertSparseMatrixToMatrix( SM );
 ##  [ [ 0*Z(3), Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ]
 ##  gap> M = N;
-##  true  
-##  </Example>
+##  true
+##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -218,7 +220,7 @@ InstallMethod( CopyMat,
 ##  <#GAPDoc Label="GetEntry">
 ##  <ManSection >
 ##  <Meth Arg="sm, i, j" Name="GetEntry" />
-##  <Returns>the entry <A>sm</A>[<A>i</A>,<A>j</A>] of the sparse matrix <A>sm</A></Returns>
+##  <Returns>the entry <C>sm[i,j]</C> of the sparse matrix <A>sm</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -241,8 +243,9 @@ InstallMethod( GetEntry,
 ##  <Returns><K>true</K> or a ring element</Returns>
 ##  <Description>
 ##  AddEntry adds the element <A>elm</A> to the sparse matrix <A>sm</A> at the
-##  (<A>i</A>,<A>j</A>)-th position. This is a Method with a side effect which
-##  returns true if you tried to add the 0 of the ring or the sum otherwise.
+##  <A>(i,j)</A>-th position. This is a Method with a side effect which
+##  returns true if you tried to add zero or the sum of <C>sm[i,j]</C> and
+##  <A>elm</A> otherwise.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -345,6 +348,15 @@ InstallMethod( FindRing,
   end
 );
 
+##  <#GAPDoc Label="SparseZeroMatrix">
+##  <ManSection >
+##  <Func Arg="nrows[, ring]" Name="SparseZeroMatrix" />
+##  <Returns>a sparse &lt;<A>nrows</A> x <A>nrows</A>&gt; zero matrix over the ring <A>ring</A></Returns>
+##  <Func Arg="nrows, ncols[, ring]" Name="SparseZeroMatrix" />
+##  <Returns>a sparse &lt;<A>nrows</A> x <A>ncols</A>&gt; zero matrix over the ring <A>ring</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( SparseZeroMatrix,
   function( arg )
     local nargs, ring;
@@ -375,6 +387,14 @@ InstallGlobalFunction( SparseZeroMatrix,
   end
 );
 
+##  <#GAPDoc Label="SparseIdentityMatrix">
+##  <ManSection >
+##  <Func Arg="dim[, ring]" Name="SparseIdentityMatrix" />
+##  <Returns>a sparse &lt;<A>dim</A> x <A>dim</A>&gt; identity matrix over the ring <A>ring</A>.
+##  If no ring is specified (one should try to avoid this if possible)
+##  the Rationals are the default ring.</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( SparseIdentityMatrix,
   function( arg )
@@ -398,7 +418,7 @@ InstallGlobalFunction( SparseIdentityMatrix,
             return SparseMatrix( arg[1], arg[1], indices, entries, ring );
         fi;
     else
-        return fail;
+        Error( "wrong number of arguments in SparseIdentityMatrix!" );;
     fi;
     
   end
@@ -416,7 +436,13 @@ InstallMethod( \=,
            A!.entries = B!.entries;
   end
 );
-  
+
+##  <#GAPDoc Label="TransposedSparseMat">
+##  <ManSection >
+##  <Meth Arg="sm" Name="TransposedSparseMat" />
+##  <Returns>the transposed matrix of the sparse matrix <A>sm</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( TransposedSparseMat,
         [ IsSparseMatrix ],
@@ -435,6 +461,12 @@ InstallMethod( TransposedSparseMat,
   end
 );
 
+##  <#GAPDoc Label="CertainRows">
+##  <ManSection >
+##  <Meth Arg="sm, list" Name="CertainRows" />
+##  <Returns>the submatrix <C>sm{[list]}</C> as a sparse matrix</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( CertainRows,
         [ IsSparseMatrix, IsList ],
@@ -442,7 +474,13 @@ InstallMethod( CertainRows,
     return SparseMatrix( Length( L ), M!.ncols, M!.indices{ L }, M!.entries{ L }, M!.ring );
   end
 );
-  
+
+##  <#GAPDoc Label="CertainColumns">
+##  <ManSection >
+##  <Meth Arg="sm, list" Name="CertainColumns" />
+##  <Returns>the submatrix <C>sm{[1..nrows(sm)]}{[list]}</C> as a sparse matrix</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( CertainColumns,
         [ IsSparseMatrix, IsList ],
@@ -466,7 +504,13 @@ InstallMethod( CertainColumns,
     
   end
 );
-  
+
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection >
+##  <Meth Arg="A, B" Name="UnionOfRows" />
+##  <Returns>the row union of the sparse matrices <A>A</A> and <A>B</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfRows,
         [ IsSparseMatrix, IsSparseMatrix ],
@@ -474,7 +518,13 @@ InstallMethod( UnionOfRows,
     return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), Concatenation( A!.entries, B!.entries ), A!.ring );
   end
 );
-  
+
+##  <#GAPDoc Label="UnionOfColumns">
+##  <ManSection >
+##  <Meth Arg="A, B" Name="UnionOfColumns" />
+##  <Returns>the column union of the sparse matrices <A>A</A> and <A>B</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfColumns,
         [ IsSparseMatrix, IsSparseMatrix ],
@@ -483,14 +533,20 @@ InstallMethod( UnionOfColumns,
   end
 );
 
+##  <#GAPDoc Label="SparseDiagMat">
+##  <ManSection >
+##  <Func Arg="list" Name="SparseDiagMat" />
+##  <Returns>the block diagonal matrix composed of the
+##  sparse matrices in <A>list</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
-InstallMethod( SparseDiagMat,
-        [ IsList ],
+InstallGlobalFunction( SparseDiagMat,
   function( e )
     if Length( e ) = 1 then
         return e[1];
     elif Length( e ) > 2 then
-        return SparseDiagMat( SparseDiagMat( e{[1,2]} ), e{[ 3 .. Length( e ) ]} );
+        return SparseDiagMat( Concatenation( [ SparseDiagMat( e{[1,2]} ) ], e{[ 3 .. Length( e ) ]} ) );
     else
         if IsSparseMatrixGF2Rep( e[1] ) then
             return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1].ncols ) );
@@ -553,6 +609,13 @@ InstallMethod( \+,
   end
 );
 
+##  <#GAPDoc Label="nrows">
+##  <ManSection >
+##  <Meth Arg="sm" Name="nrows" />
+##  <Returns>the number of rows of the sparse matrix <A>sm</A>.
+##  This should be preferred to the equivalent <C>sm!.nrows</C>.</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( nrows,
         [ IsSparseMatrix ],
@@ -560,7 +623,14 @@ InstallMethod( nrows,
     return M!.nrows;
   end
 );
-  
+
+##  <#GAPDoc Label="ncols">
+##  <ManSection >
+##  <Meth Arg="sm" Name="ncols" />
+##  <Returns>the number of columns of the sparse matrix <A>sm</A>.
+##  This should be preferred to the equivalent <C>sm!.ncols</C>.</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ncols,
         [ IsSparseMatrix ],
@@ -569,6 +639,13 @@ InstallMethod( ncols,
   end
 );
 
+##  <#GAPDoc Label="indices">
+##  <ManSection >
+##  <Meth Arg="sm" Name="indices" />
+##  <Returns>the indices of the sparse matrix <A>sm</A> as a ListList.
+##  This should be preferred to the equivalent <C>sm!.indices</C>.</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( indices,
         [ IsSparseMatrix ],
@@ -577,6 +654,14 @@ InstallMethod( indices,
   end
 );
   
+##  <#GAPDoc Label="entries">
+##  <ManSection >
+##  <Meth Arg="sm" Name="entries" />
+##  <Returns>the entries of the sparse matrix <A>sm</A> as a ListList of ring elements.
+##  This should be preferred to the equivalent <C>sm!.entries</C> and has the additional
+##  advantage of working for sparse matrices over GF(2) which do not have any entries.</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( entries,
         [ IsSparseMatrix ],
@@ -589,6 +674,13 @@ InstallMethod( entries,
   end
 );
 
+##  <#GAPDoc Label="ring">
+##  <ManSection >
+##  <Meth Arg="sm" Name="ring" />
+##  <Returns>the base ring of the sparse matrix <A>sm</A>.
+##  This should be preferred to the equivalent <C>sm!.ring</C>.</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ring,
         [ IsSparseMatrix ],

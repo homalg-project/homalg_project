@@ -504,26 +504,21 @@ InstallMethod( KernelHermiteMatDestructive,
             if min[2] > 1 then
                 len := heads[column];
                 #Print( "we have a basis vector with a non-unit pivot:  #", len, "!\n" );
+                #FIXME [[2,1],[0,2]] mod 4
+                
                 m := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
-                T.indices[ row_indices[ min[1] ] ] := m.indices;
-                T.entries[ row_indices[ min[1] ] ] := m.entries;
-                m := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
-                indices[ row_indices[ min[1] ] ] := m.indices;
-                entries[ row_indices[ min[1] ] ] := m.entries;
-                # is the row a multiple of a non-unit? THIS DOESNT WORK: i.e. [[2,1],[0,1]] over Z/4Z
-                #if min[2] > 1 then
-                #    Print( "found a hidden kernel relation in basis vector #", Length( vectors.indices ), "!\n" );
-                #    # row is multiple of min[2]
-                #    # therefore row * (char / min[2] ) = 0
-                #    # but is the relations_row * this <> 0 ?
-                #    row := coeffs.entries[ Length( coeffs.entries ) ];
-                #    # you could run another min check, but it's easier to just multiply the row and check afterwards
-                #    m := MultRow( coeffs.indices[ Length( coeffs.indices ) ], row, char / min[2] );
-                #    if m.indices <> [] then
-                #        Add( relations.indices, m.indices );
-                #        Add( relations.entries, m.entries );
-                #    fi;
-                #fi;
+                
+                if m.indices <> [] then
+                    T.indices[ row_indices[ min[1] ] ] := m.indices;
+                    T.entries[ row_indices[ min[1] ] ] := m.entries;
+                    
+                    m := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
+                    indices[ row_indices[ min[1] ] ] := m.indices;
+                    entries[ row_indices[ min[1] ] ] := m.entries;
+                else
+                    list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
+                fi;
+                
             else
                 list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
             fi;

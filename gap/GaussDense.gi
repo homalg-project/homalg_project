@@ -266,14 +266,10 @@ InstallMethod( ReduceMatWithEchelonMat,
           x;
     nrows1 := Length( mat );
     nrows2 := Length( N );
-    if nrows1 = 0 or nrows2 = 0 then
-        return rec( reduced_matrix := mat );
-    fi;
+
     ncols := Length( mat[1] );
     if ncols <> Length( N[1] ) then
-        return fail;
-    elif ncols = 0 then
-        return rec( reduced_matrix := mat );
+        Error( "column dimensions do not match! aborting ReduceMat!" );
     fi;
     
     M := [];
@@ -303,6 +299,76 @@ InstallMethod( ReduceMatWithEchelonMat,
     return rec( reduced_matrix := M );
     
 end );
+
+##
+InstallMethod( ReduceMatTransformation,
+        [ IsMatrix, IsMatrix ],
+  function( mat, N )
+    return ReduceMatWithEchelonMatTransformation( mat, N );
+  end
+);
+
+##
+InstallMethod( ReduceMatWithEchelonMatTransformation,
+        "for general matrices over a ring, second argument must be in REF",
+        [ IsMatrix, IsMatrix ],
+        function( mat, N )
+    local nrows1,
+          ncols,
+          nrows2,
+          M,
+          f,
+          v,
+          vc,
+	  T,
+          zero,
+          i,
+          row2,
+          j,
+          k,
+          row1,
+          x;
+    
+    nrows1 := Length( mat );
+    nrows2 := Length( N );
+    
+    ncols := Length( mat[1] );
+    if ncols <> Length( N[1] ) then
+        Error( "column dimensions do not match! aborting ReduceMatTransformation!" );
+    fi;
+    
+    M := [];
+    f := DefaultFieldOfMatrix( mat );
+    for v in mat do
+        vc := ShallowCopy( v );
+        ConvertToVectorRepNC( vc, f );
+        Add( M, vc );
+    od;
+
+    T := NullMat( nrows1, nrows2, f );
+        
+    zero := Zero( M[1][1] );
+    
+    for i in [1 .. nrows2] do
+        row2 := N[i];
+        j := PositionNot( row2, zero );
+        if j <= ncols then
+            for k in [1 .. nrows1] do
+                row1 := M[k];
+                x := - row1[j];
+                if x <> zero then
+                    AddRowVector( row1, row2, x );
+                    T[k][i] := x;
+                fi;
+            od;
+        fi;
+    od;
+    
+    return rec( reduced_matrix := M, transformation := T);
+    
+  end
+);
+
 
 ##
 InstallGlobalFunction( KernelMat,

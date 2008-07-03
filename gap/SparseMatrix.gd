@@ -48,8 +48,7 @@ DeclareOperation( "UnionOfRows",
 DeclareOperation( "UnionOfColumns",
         [ IsSparseMatrix, IsSparseMatrix ] );
 
-DeclareOperation( "SparseDiagMat",
-        [ IsList ] );
+DeclareGlobalFunction( "SparseDiagMat" );
 
 DeclareOperation( "*", #FIXME: What does SparseMatrix have to be for this to be obsolete?
         [ IsRingElement, IsSparseMatrix ] );
