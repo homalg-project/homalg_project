@@ -405,6 +405,10 @@ InstallGlobalFunction( homalgSendBlocking,
            and IsBound( stream.setring )
            and IsFunction( stream.setring ) then
             stream.setring( R );
+            if IsBound( stream.setinvol )
+               and IsFunction( stream.setinvol ) then
+                stream.setinvol( R );
+            fi;
         fi;
         
         RP := homalgTable( R );
