@@ -106,7 +106,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Involution :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "transpose(", M, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Involution );
+                   return homalgSendBlocking( [ "Involution(", M, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Involution );
                    
                  end,
                
