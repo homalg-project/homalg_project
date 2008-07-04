@@ -28,7 +28,9 @@ DeclareGlobalVariable( "HOMALG_IO_Singular" );
 #
 ####################################
 
-DeclareGlobalFunction( "SETRING_Singular" );
+DeclareGlobalFunction( "_Singular_SetRing" );
+
+DeclareGlobalFunction( "_Singular_SetInvolution" );
 
 DeclareGlobalFunction( "_Singular_multiple_delete" );
 

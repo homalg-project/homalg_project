@@ -18,21 +18,22 @@
 
 InstallValue( HOMALG_IO_Singular,
         rec(
-            cas := "singular",		## normalized name on which the user should have no control
+            cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
             executable := "Singular",
             options := [ "-t", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",
-            CUT_POS_BEGIN := 1,		## these are the most
-            CUT_POS_END := 2,		## delicate values!
+            CUT_POS_BEGIN := 1,			## these are the most
+            CUT_POS_END := 2,			## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
-            break_lists := true,	## a Singular specific
-            handle_output := true,	## a Singular specific
-#            original_lines := true,	## a Singular specific
-            check_output := true,	## a Singular specific looks for newlines without commas
-            setring := SETRING_Singular,## a Singular specific
+            break_lists := true,		## a Singular specific
+            handle_output := true,		## a Singular specific
+#            original_lines := true,		## a Singular specific
+            check_output := true,		## a Singular specific looks for newlines without commas
+            setring := _Singular_SetRing,	## a Singular specific
+            setinvol := _Singular_SetInvolution,## a Singular specific
             define := "=",
             delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _Singular_multiple_delete,
@@ -83,15 +84,30 @@ BindGlobal( "TheTypeHomalgExternalRingInSingular",
 ####################################
 
 ##
-InstallGlobalFunction( SETRING_Singular,
+InstallGlobalFunction( _Singular_SetRing,
   function( R )
     local stream;
     
     stream := homalgStream( R );
     
+    ## since _Singular_SetRing might be called from homalgSendBlocking,
+    ## we first set the new active ring to avoid infinite loops:
     stream.active_ring := R;
     
     homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+end );
+
+##
+InstallGlobalFunction( _Singular_SetInvolution,
+  function( R )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.SetInvolution ) then
+        RP!.SetInvolution( R );
+    fi;
     
 end );
 
@@ -116,7 +132,13 @@ InstallGlobalFunction( InitializeSingularTools,
     local IsMemberOfList, Difference,
           GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
           IsZeroMatrix, IsIdentityMatrix, IsDiagonalMatrix,
-          ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions;
+          ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions,
+          BasisOfRowModule, BasisOfColumnModule,
+          BasisOfRowsCoeff, BasisOfColumnsCoeff,
+          DecideZeroRows, DecideZeroColumns,
+          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
+          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
+          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2;
     
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
@@ -342,7 +364,118 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
   return(string(rows));\n\
 }\n\n";
     
-    homalgSendBlocking( "int i; int j; int k;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    BasisOfRowModule := "\n\
+proc BasisOfRowModule (matrix M)\n\
+{\n\
+  return(std(M));\n\
+}\n\n";
+    
+    BasisOfColumnModule := "\n\
+proc BasisOfColumnModule (matrix M)\n\
+{\n\
+  return(Involution(std(Involution(M))));\n\
+}\n\n";
+    
+    BasisOfRowsCoeff := "\n\
+proc BasisOfRowsCoeff (matrix M)\n\
+{\n\
+  matrix B = std(M);\n\
+  matrix T = lift(M,B); //never use stdlift, also because it might differ from std!!!\n\
+  list l = B,T;\n\
+  return(l)\n\
+}\n\n";
+    
+#    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
+#    ## and for plural to work one would need to define B=transpose(transpose(T)*transpose(M)), which is expensive!!
+#    BasisOfRowsCoeff := "\n\
+#proc BasisOfRowsCoeff (matrix M)\n\
+#{\n\
+#  matrix T;\n\
+#  matrix B = matrix(liftstd(M,T));\n\
+#  list l = transpose(transpose(T)*transpose(M)),T;\n\
+#  return(l)\n\
+#}\n\n";
+    
+    BasisOfColumnsCoeff := "\n\
+proc BasisOfColumnsCoeff (matrix M)\n\
+{\n\
+  list l = BasisOfRowsCoeff(Involution(M));\n\
+  matrix B = l[1];\n\
+  matrix T = l[2];\n\
+  l = Involution(B),Involution(T);\n\
+  return(l);\n\
+}\n\n";
+    
+    DecideZeroRows := "\n\
+proc DecideZeroRows (matrix A, matrix B)\n\
+{\n\
+  return(reduce(A,B));\n\
+}\n\n";
+    
+    DecideZeroColumns := "\n\
+proc DecideZeroColumns (matrix A, matrix B)\n\
+{\n\
+  return(Involution(reduce(Involution(A),Involution(B))));\n\
+}\n\n";
+    
+#todo: read part of the unit matrix in singular help!
+#      it is ignored right now.
+# division(A^t,B^t) returns (TT^t, M^t, U^t) with
+#                A^t*U^t = B^t*TT^t + M^t
+# <=> (ignore U) M^t = A^t - B^t*TT^tr
+# <=>            M   = A   + (-TT) * B
+# <=> (T:=-TT)   M   = A   + T * B
+#M^t=A^t-T^t*B^t
+    
+    DecideZeroRowsEffectively := "\n\
+proc DecideZeroRowsEffectively (matrix A, matrix B)\n\
+{\n\
+  matrix M = reduce(A,B);\n\
+  matrix T = lift(B,M-A);\n\
+  list l = M,T;\n\
+  return(l);\n\
+}\n\n";
+    
+    DecideZeroColumnsEffectively := "\n\
+proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
+{\n\
+  list l = DecideZeroRowsEffectively(Involution(A),Involution(B));\n\
+  matrix B = l[1];\n\
+  matrix T = l[2];\n\
+  l = Involution(B),Involution(T);\n\
+  return(l);\n\
+}\n\n";
+    
+    SyzygiesGeneratorsOfRows := "\n\
+proc SyzygiesGeneratorsOfRows (matrix M)\n\
+{\n\
+  return(syz(M));\n\
+}\n\n";
+    
+    SyzygiesGeneratorsOfRows2 := "\n\
+proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
+{\n\
+  int r = nrows(M1);\n\
+  int c1 = ncols(M1);\n\
+  int c2 = ncols(M2);\n\
+  matrix M[r][c1+c2] = concat(M1,M2);\n\
+  matrix s=syz(M);\n\
+  return(submat(s,1..c1,1..ncols(s)));\n\
+}\n\n";
+    
+    SyzygiesGeneratorsOfColumns := "\n\
+proc SyzygiesGeneratorsOfColumns (matrix M)\n\
+{\n\
+  return(Involution(syz(Involution(M))));\n\
+}\n\n";
+    
+    SyzygiesGeneratorsOfColumns2 := "\n\
+proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
+{\n\
+  return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
+}\n\n";
+    
+    homalgSendBlocking( "int i; int j; int k; list l;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsMemberOfList, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( Difference, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsZeroMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -354,6 +487,19 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
     homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    
     
   end
 );
@@ -367,7 +513,7 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
 ##
 InstallGlobalFunction( RingForHomalgInSingular,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R;
+    local nargs, stream, o, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -405,12 +551,21 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    _Singular_SetRing( R );
+    
     ##prints output in a compatible format
     homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    RP := homalgTable( R );
     
-    stream.active_ring := R;
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    RP!.SetInvolution( R );
     
     return R;
     
@@ -516,14 +671,6 @@ InstallMethod( PolynomialRing,
     else
       ext_obj := homalgSendBlocking( [ c, ",(", var_of_coeff_ring, var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
-    homalgSendBlocking( [ "setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.initialize );
-    
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", R, HOMALG_IO.Pictograms.initialize );
-    
-    ##since variables in Singular are stored inside a ring it is necessary to
-    ##map all variables from the to ring to the new one
-    ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", R, ")" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -532,6 +679,15 @@ InstallMethod( PolynomialRing,
     for v in var do
         SetName( v, homalgPointer( v ) );
     od;
+    
+    _Singular_SetRing( S );
+    
+    ##since variables in Singular are stored inside a ring it is necessary to
+    ##map all variables from the to ring to the new one
+    ##todo: kill old ring to reduce memory?
+    homalgSendBlocking( ["imapall(", homalgPointer( R ), ")" ], "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
+    
+    homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     SetCoefficientsRing( S, r );
     SetCharacteristic( S, c );
@@ -584,9 +740,9 @@ InstallMethod( RingOfDerivations,
     
     properties := [ ];
     
-    homalgSendBlocking( [ "LIB \"nctools.lib\";" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
-    
     stream := homalgStream( R );
+    
+    homalgSendBlocking( [ "LIB \"nctools.lib\";" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsBound( stream.color_display ) then
         display_color := stream.color_display;
@@ -609,38 +765,44 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ##todo: this creates a block ordering with a new "dp"-block
     PR := homalgSendBlocking( [ Characteristic( R ), ",(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, properties, PR, HOMALG_IO.Pictograms.CreateHomalgRing );
-    homalgSendBlocking( [ "setring ", ext_obj ], "need_command", HOMALG_IO.Pictograms.initialize );
-    
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    
-    ##since variables in Singular are stored inside a ring it is necessary to
-    ##map all variables from the to ring to the new one
-    ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", R, ")" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
+    
     for v in der do
         SetName( v, homalgPointer( v ) );
     od;
     
+    _Singular_SetRing( S );
+    
+    ##since variables in Singular are stored inside a ring it is necessary to
+    ##map all variables from the to ring to the new one
+    ##todo: kill old ring to reduce memory?
+    homalgSendBlocking( ["imapall(", homalgPointer( R ), ")" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    SetCoefficientsRing( S, CoefficientsRing( R ) );
+    SetCharacteristic( S, Characteristic( R ) );
+    SetIsCommutative( S, false );
+    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    
     RP := homalgTable( S );
     
-    RP!.Involution :=
-      function( M )
-        local R, I;
-        R := HomalgRing( M );
-        I := HomalgVoidMatrix( NrColumns( M ), NrRows( M ), R );
+    RP!.SetInvolution :=
+      function( R )
         homalgSendBlocking( Concatenation(
-                [ "map F = ", R, ", " ],
+                [ "\nproc Involution (matrix M)\n{\n" ],
+                [ "  map F = ", R, ", " ],
                 IndeterminateCoordinatesOfRingOfDerivations( R ),
                 Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , a ] ) ),
-                [ "; matrix ", I, " = transpose( involution( ", M, ", F ) )" ]
-                ), "need_command", HOMALG_IO.Pictograms.Involution );
-        ResetFilterObj( I, IsVoidMatrix );
-        return I;
+                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
+                ), "need_command", HOMALG_IO.Pictograms.define );
     end;
+    
+    RP!.SetInvolution( S );
     
     RP!.Compose :=
       function( A, B )
@@ -648,12 +810,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
         
     end;
-    
-    SetCoefficientsRing( S, CoefficientsRing( R ) );
-    SetCharacteristic( S, Characteristic( R ) );
-    SetIsCommutative( S, false );
-    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
-    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
     
     return S;
     
