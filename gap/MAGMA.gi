@@ -121,81 +121,6 @@ ZeroColumns := function(M)\n\
   return [i: i in [ 1 .. Ncols(M) ] | IsZero(ColumnSubmatrixRange(M,i,i)) ];\n\
 end function;\n\n";
     
-    BasisOfRowModule := "\n\
-BasisOfRowModule := function(M)\n\
-  S := Rowspace(M);\n\
-  Groebner(S);\n\
-  return BasisMatrix(S);\n\
-end function;\n\n";
-    
-    BasisOfColumnModule := "\n\
-BasisOfColumnModule := function(M)\n\
-  return Transpose(BasisOfRowModule(Transpose(M)));\n\
-end function;\n\n";
-    
-    BasisOfRowsCoeff := "\n\
-BasisOfRowsCoeff:= function(M)\n\
-  B := BasisOfRowModule(M);\n\
-  T := Solution(M, B);\n\
-  return B, T;\n\
-end function;\n\n";
-    
-    BasisOfColumnsCoeff := "\n\
-BasisOfColumnsCoeff:= function(M)\n\
-  B, T := BasisOfRowsCoeff(Transpose(M));\n\
-  return Transpose(B), Transpose(T);\n\
-end function;\n\n";
-    
-    DecideZeroRows := "\n\
-DecideZeroRows:= function(A, B)\n\
-  S := Rowspace(B);\n\
-  F := Generic(S);\n\
-  return Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
-end function;\n\n";
-    
-    DecideZeroColumns := "\n\
-DecideZeroColumns:= function(A, B)\n\
-  return Transpose(DecideZeroRows(Transpose(A),Transpose(B)));\n\
-end function;\n\n";
-    
-    DecideZeroRowsEffectively := "\n\
-DecideZeroRowsEffectively:= function(A, B)\n\
-  S := Rowspace(B);\n\
-  F := Generic(S);\n\
-  M := Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
-  MA := M-A;\n\
-  T:= Matrix(BaseRing(A), [ Coordinates(S, S ! MA[i]): i in [1..Nrows(MA)]] );\n\
-  return M, T;\n\
-end function;\n\n";
-    
-    DecideZeroColumnsEffectively := "\n\
-DecideZeroColumnsEffectively:= function(A, B)\n\
-  M, T := DecideZeroRowsEffectively(Transpose(A),Transpose(B));\n\
-  return Transpose(M), Transpose(T);\n\
-end function;\n\n";
-    
-    SyzygiesGeneratorsOfRows := "\n\
-SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
-  if M2 cmpeq [] then\n\
-    S := Rowspace(M1);\n\
-  else\n\
-    S := Rowspace( VerticalJoin(M1, M2) );\n\
-  end if;\n\
-  SM := SyzygyModule(S);\n\
-  T := BasisMatrix(SM);\n\
-  return ColumnSubmatrix(T, 1, Nrows(M1));\n\
-end function;\n\n";
-    
-    SyzygiesGeneratorsOfColumns := "\n\
-SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
-  if M2 cmpeq [] then\n\
-    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),[]));\n\
-  else\n\
-    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
-  end if;\n\
-end function;\n\n";
-    
-    
     GetColumnIndependentUnitPositions := "\n\
 GetColumnIndependentUnitPositions:= function(M, pos_list)\n\
   rest := [ 1..Ncols(M) ];\n\
@@ -318,6 +243,80 @@ GetCleanRowsPositions:= function( M, clean_columns )\n\
      end for;\n\
   end for;\n\
   return clean_rows;\n\
+end function;\n\n";
+    
+    BasisOfRowModule := "\n\
+BasisOfRowModule := function(M)\n\
+  S := Rowspace(M);\n\
+  Groebner(S);\n\
+  return BasisMatrix(S);\n\
+end function;\n\n";
+    
+    BasisOfColumnModule := "\n\
+BasisOfColumnModule := function(M)\n\
+  return Transpose(BasisOfRowModule(Transpose(M)));\n\
+end function;\n\n";
+    
+    BasisOfRowsCoeff := "\n\
+BasisOfRowsCoeff:= function(M)\n\
+  B := BasisOfRowModule(M);\n\
+  T := Solution(M, B);\n\
+  return B, T;\n\
+end function;\n\n";
+    
+    BasisOfColumnsCoeff := "\n\
+BasisOfColumnsCoeff:= function(M)\n\
+  B, T := BasisOfRowsCoeff(Transpose(M));\n\
+  return Transpose(B), Transpose(T);\n\
+end function;\n\n";
+    
+    DecideZeroRows := "\n\
+DecideZeroRows:= function(A, B)\n\
+  S := Rowspace(B);\n\
+  F := Generic(S);\n\
+  return Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
+end function;\n\n";
+    
+    DecideZeroColumns := "\n\
+DecideZeroColumns:= function(A, B)\n\
+  return Transpose(DecideZeroRows(Transpose(A),Transpose(B)));\n\
+end function;\n\n";
+    
+    DecideZeroRowsEffectively := "\n\
+DecideZeroRowsEffectively:= function(A, B)\n\
+  S := Rowspace(B);\n\
+  F := Generic(S);\n\
+  M := Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
+  MA := M-A;\n\
+  T:= Matrix(BaseRing(A), [ Coordinates(S, S ! MA[i]): i in [1..Nrows(MA)]] );\n\
+  return M, T;\n\
+end function;\n\n";
+    
+    DecideZeroColumnsEffectively := "\n\
+DecideZeroColumnsEffectively:= function(A, B)\n\
+  M, T := DecideZeroRowsEffectively(Transpose(A),Transpose(B));\n\
+  return Transpose(M), Transpose(T);\n\
+end function;\n\n";
+    
+    SyzygiesGeneratorsOfRows := "\n\
+SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
+  if M2 cmpeq [] then\n\
+    S := Rowspace(M1);\n\
+  else\n\
+    S := Rowspace( VerticalJoin(M1, M2) );\n\
+  end if;\n\
+  SM := SyzygyModule(S);\n\
+  T := BasisMatrix(SM);\n\
+  return ColumnSubmatrix(T, 1, Nrows(M1));\n\
+end function;\n\n";
+    
+    SyzygiesGeneratorsOfColumns := "\n\
+SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
+  if M2 cmpeq [] then\n\
+    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),[]));\n\
+  else\n\
+    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
+  end if;\n\
 end function;\n\n";
     
     homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
