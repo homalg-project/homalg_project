@@ -625,7 +625,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v, nr_var;
+    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v, nr_var, RP;
     
     ##compute the new indeterminates for the ring and save them in var
     if IsString( indets ) and indets <> "" then
@@ -693,6 +693,16 @@ InstallMethod( PolynomialRing,
     SetCharacteristic( S, c );
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
+    
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    ## reseting the "Involution" must be after "imapall":
+    RP!.SetInvolution( S );
     
     return S;
     
@@ -802,6 +812,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
     
+    ## reseting the "Involution" must be after "imapall":
     RP!.SetInvolution( S );
     
     RP!.Compose :=
