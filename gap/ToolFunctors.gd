@@ -19,6 +19,11 @@ DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsATwoSequence" );
 
+## Compose
+DeclareGlobalFunction( "_Functor_Compose_OnObjects" );
+
+DeclareGlobalVariable( "functor_Compose" );
+
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
 
@@ -41,6 +46,9 @@ DeclareOperation( "AsATwoSequence",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsATwoSequence",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "Compose",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "AsChainMapForPullback",

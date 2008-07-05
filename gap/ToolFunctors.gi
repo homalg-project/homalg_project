@@ -118,6 +118,85 @@ InstallMethod( AsATwoSequence,
 end );
 
 ##
+## Compose
+##
+
+InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
+  function( cpx_post_pre )
+    local pre, post, phi;
+    
+    if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
+        Error( "expecting a complex containing two morphisms\n" );
+    fi;
+    
+    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
+    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( pre ) then
+        phi := HomalgMap( MatrixOfMap( pre ) * MatrixOfMap( post ), Source( pre ), Range( post ) );
+    else
+        phi := HomalgMap( MatrixOfMap( post ) * MatrixOfMap( pre ), Source( pre ), Range( post ) );
+    fi;
+    
+    if HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
+       HasIsMonomorphism( post ) and IsMonomorphism( post ) then
+        SetIsMonomorphism( phi, true );
+    elif HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
+      HasIsEpimorphism( post ) and IsEpimorphism( post ) then
+        SetIsEpimorphism( phi, true );
+    elif HasIsMorphism( pre ) and IsMorphism( pre ) and
+      HasIsMorphism( post ) and IsMorphism( post ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+
+InstallValue( functor_Compose,
+        CreateHomalgFunctor(
+                [ "name", "Compose" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
+                [ "OnObjects", _Functor_Compose_OnObjects ]
+                )
+        );
+
+functor_Compose!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+## for convenience
+InstallMethod( \*,
+        "for homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
+        
+  function( phi1, phi2 )
+    
+    if not AreComposableMorphisms( phi1, phi2 ) then
+        Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
+    fi;
+    
+    return Compose( AsATwoSequence( phi1, phi2 ) );
+    
+end );
+
+InstallMethod( \*,
+        "for homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
+        
+  function( phi2, phi1 )
+    
+    if not AreComposableMorphisms( phi2, phi1 ) then
+        Error( "the two morphisms are not composable, since the source of the left one and the target of the right one are not \033[01midentical\033[0m\n" );
+    fi;
+    
+    return Compose( AsATwoSequence( phi2, phi1 ) );
+    
+end );
+
+##
 ## AsChainMapForPullback
 ##
 
@@ -214,6 +293,12 @@ functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ##
 
 InstallFunctorOnObjects( functor_AsATwoSequence );
+
+##
+## Compose( phi, psi )
+##
+
+InstallFunctorOnObjects( functor_Compose );
 
 ##
 ## AsChainMapForPullback( phi, beta1 )

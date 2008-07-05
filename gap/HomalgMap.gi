@@ -466,65 +466,10 @@ InstallMethod( \-,
 end );
 
 ##
-InstallMethod( \*,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
-        
-  function( phi1, phi2 )
-    local phi;
-    
-    if not AreComposableMorphisms( phi1, phi2 ) then
-        Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
-    fi;
-    
-    phi := HomalgMap( MatrixOfMap( phi1 ) * MatrixOfMap( phi2 ), Source( phi1 ), Range( phi2 ) );
-    
-    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
-       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
-        SetIsMonomorphism( phi, true );
-    elif HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
-      HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
-        SetIsEpimorphism( phi, true );
-    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( phi, true );
-    fi;
-    
-    return phi;
-    
-end );
+## composition is a bifunctor to profit from the caching mechanisms for functors (cf. ToolFunctors.gi)
+##
 
 ##
-InstallMethod( \*,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
-        
-  function( phi2, phi1 )
-    local phi;
-    
-    if not AreComposableMorphisms( phi2, phi1 ) then
-        Error( "the two morphisms are not composable, since the source of the left one and the target of the right one are not \033[01midentical\033[0m\n" );
-    fi;
-    
-    phi := HomalgMap( MatrixOfMap( phi2 ) * MatrixOfMap( phi1 ), Source( phi1 ), Range( phi2 ) );
-    
-    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
-       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
-        SetIsMonomorphism( phi, true );
-    elif HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
-      HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
-        SetIsEpimorphism( phi, true );
-    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( phi, true );
-    fi;
-    
-    return phi;
-    
-end );
-
 ##
 InstallMethod( POW,
         "for homalg maps",
