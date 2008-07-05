@@ -46,7 +46,7 @@ InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects,	### defines: AsATwoSeq
         SetIsSequence( C, true );
     fi;
     
-    SetIsComplexForDefectOfExactness( C, true );
+    SetIsATwoSequence( C, true );
     
     return C;
     
@@ -70,7 +70,7 @@ InstallMethod( AsATwoSequence,
         "for complexes",
         [ IsComplexOfFinitelyPresentedObjectsRep and
           IsHomalgLeftObjectOrMorphismOfLeftObjects and
-          IsComplexForDefectOfExactness ],
+          IsATwoSequence ],
         
   function( C )
     
@@ -83,7 +83,7 @@ InstallMethod( AsATwoSequence,
         "for complexes",
         [ IsCocomplexOfFinitelyPresentedObjectsRep and
           IsHomalgRightObjectOrMorphismOfRightObjects and
-          IsComplexForDefectOfExactness ],
+          IsATwoSequence ],
         
   function( C )
     
@@ -96,7 +96,7 @@ InstallMethod( AsATwoSequence,
         "for complexes",
         [ IsCocomplexOfFinitelyPresentedObjectsRep and
           IsHomalgLeftObjectOrMorphismOfLeftObjects and
-          IsComplexForDefectOfExactness ],
+          IsATwoSequence ],
         
   function( C )
     
@@ -109,7 +109,7 @@ InstallMethod( AsATwoSequence,
         "for complexes",
         [ IsComplexOfFinitelyPresentedObjectsRep and
           IsHomalgRightObjectOrMorphismOfRightObjects and
-          IsComplexForDefectOfExactness ],
+          IsATwoSequence ],
         
   function( C )
     

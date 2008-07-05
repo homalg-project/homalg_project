@@ -371,7 +371,7 @@ InstallMethod( SubResolution,
         SetIsComplex( res, true );
     fi;
     
-    SetIsComplexForDefectOfExactness( res, true );
+    SetIsATwoSequence( res, true );
     
     return res;
     
@@ -413,7 +413,7 @@ InstallMethod( SubResolution,
         SetIsComplex( res, true );
     fi;
     
-    SetIsComplexForDefectOfExactness( res, true );
+    SetIsATwoSequence( res, true );
     
     return res;
     

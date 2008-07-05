@@ -249,7 +249,7 @@ InstallValue( functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsComplexForDefectOfExactness ] ] ],
+                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
         );

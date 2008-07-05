@@ -23,7 +23,7 @@ InstallMethod( DefectOfExactness,
     local display, display_string, on_less_generators, left, degrees, l,
           morphisms, T, H, i, S;
     
-    if HasIsComplexForDefectOfExactness( C ) and IsComplexForDefectOfExactness( C ) then
+    if HasIsATwoSequence( C ) and IsATwoSequence( C ) then
         TryNextMethod( );
     fi;
     

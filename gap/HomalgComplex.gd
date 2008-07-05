@@ -52,7 +52,7 @@ DeclareProperty( "IsTriangle",
 DeclareProperty( "IsExactTriangle",
         IsHomalgComplex );
 
-DeclareProperty( "IsComplexForDefectOfExactness",		## the output of AsATwoSequence (and only this) is marked as IsComplexForDefectOfExactness in order to distinguish
+DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only this) is marked as IsATwoSequence in order to distinguish
         IsHomalgComplex );					##  between different methods for DefectOfExactness which all apply to complexes
 
 ####################################

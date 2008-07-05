@@ -2050,9 +2050,9 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                     SetIsSequence( Fc, true );
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2082,9 +2082,9 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                     od;
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2128,9 +2128,9 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                     SetIsSequence( Fc, true );
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2160,9 +2160,9 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
                     od;
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2251,9 +2251,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     SetIsSequence( Fc, true );
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2296,9 +2296,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     od;
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2371,9 +2371,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     SetIsSequence( Fc, true );
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2416,9 +2416,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     od;
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2491,9 +2491,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     SetIsSequence( Fc, true );
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2536,9 +2536,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     od;
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2595,9 +2595,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     SetIsSequence( Fc, true );
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 
@@ -2640,9 +2640,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     od;
                 fi;
                 
-                if HasIsComplexForDefectOfExactness( c ) and
-                   IsComplexForDefectOfExactness( c ) then
-                    SetIsComplexForDefectOfExactness( Fc, true );
+                if HasIsATwoSequence( c ) and
+                   IsATwoSequence( c ) then
+                    SetIsATwoSequence( Fc, true );
                     Fc := AsATwoSequence( Fc );
                 fi;
                 

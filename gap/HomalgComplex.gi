@@ -519,6 +519,10 @@ InstallMethod( Add,
   function( C, phi )
     local degrees, l, psi;
     
+    if HasIsATwoSequence( C ) and IsATwoSequence( C ) then
+        Error( "this complex is write-protected since IsATwoSequence = true\n" );
+    fi;
+    
     degrees := ObjectDegreesOfComplex( C );
     
     l := Length( degrees );
