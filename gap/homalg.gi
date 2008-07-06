@@ -21,6 +21,12 @@ DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedObjectRep",
 
 # a new representation for the GAP-category IsHomalgObject
 # which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep:
+DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
+        IsHomalgRingOrFinitelyPresentedObjectRep,
+        [ ] );
+
+# a new representation for the GAP-category IsHomalgObject
+# which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep:
 DeclareRepresentation( "IsFinitelyPresentedObjectRep",
         IsHomalgObject and IsHomalgRingOrFinitelyPresentedObjectRep,
         [ ] );

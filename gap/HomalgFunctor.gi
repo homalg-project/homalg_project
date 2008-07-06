@@ -55,7 +55,7 @@ BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
 ####################################
 
 HOMALG.FunctorOn :=
-  [ IsHomalgRingOrFinitelyPresentedObjectRep,
+  [ IsHomalgRingOrFinitelyPresentedModuleRep,
     IsMapOfFinitelyGeneratedModulesRep,
     [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
     [ IsChainMapOfFinitelyPresentedObjectsRep, IsCochainMapOfFinitelyPresentedObjectsRep ] ];
@@ -719,6 +719,26 @@ InstallMethod( InstallFunctorOnObjects,
                         
                     end );
                     
+                    if IsBound( der_arg ) and der_arg = 1 then
+                        
+                        InstallOtherMethod( functor_operation,
+                                "for homalg modules",
+                                [ filter1_obj ],
+                          function( o )
+                            local R;
+                            
+                            if IsHomalgRing( o ) then
+                                R := o;
+                            else
+                                R := HomalgRing( o );
+                            fi;
+                            
+                            return functor_operation( o, R );
+                            
+                        end );
+                        
+                    fi;
+                    
                 fi;
                 
                 InstallOtherMethod( functor_operation,
@@ -771,7 +791,7 @@ InstallMethod( InstallFunctorOnObjects,
                         InstallOtherMethod( functor_operation,
                                 "for homalg modules",
                                 [ IsInt, filter1_obj, filter2_obj, IsString ],
-                          function( c, o1, o2, s )
+                          function( n, o1, o2, s )
                             local H, C, j;
                             
                             if s <> "a" then
@@ -782,7 +802,7 @@ InstallMethod( InstallFunctorOnObjects,
                             
                             C := HomalgComplex( H );
                             
-                            for j in [ 1 .. c ] do
+                            for j in [ 1 .. n ] do
                                 
                                 H := functor_operation( j, o1, o2 );
                                 
@@ -799,7 +819,7 @@ InstallMethod( InstallFunctorOnObjects,
                         InstallOtherMethod( functor_operation,
                                 "for homalg modules",
                                 [ IsInt, filter1_obj, filter2_obj, IsString ],
-                          function( c, o1, o2, s )
+                          function( n, o1, o2, s )
                             local H, C, j;
                             
                             if s <> "a" then
@@ -810,7 +830,7 @@ InstallMethod( InstallFunctorOnObjects,
                             
                             C := HomalgCocomplex( H );
                             
-                            for j in [ 1 .. c ] do
+                            for j in [ 1 .. n ] do
                                 
                                 H := functor_operation( j, o1, o2 );
                                 
@@ -823,6 +843,22 @@ InstallMethod( InstallFunctorOnObjects,
                         end );
                         
                     fi;
+                    
+                    InstallOtherMethod( functor_operation,
+                            "for homalg modules",
+                            [ filter1_obj, filter2_obj ],
+                      function( o1, o2 )
+                        local n;
+                        
+                        if der_arg = 1 then
+                            n := LengthOfResolution( o1 );
+                        else
+                            n := LengthOfResolution( o2 );
+                        fi;
+                        
+                        return functor_operation( n, o1, o2, "a" );
+                        
+                    end );
                     
                 fi;
                 
@@ -1027,7 +1063,7 @@ InstallMethod( InstallFunctorOnObjects,
                         InstallOtherMethod( functor_operation,
                                 "for homalg modules",
                                 [ IsInt, filter1_obj, filter2_obj, filter3_obj, IsString ],
-                          function( c, o1, o2, o3, s )
+                          function( n, o1, o2, o3, s )
                             local H, C, j;
                             
                             if s <> "a" then
@@ -1038,7 +1074,7 @@ InstallMethod( InstallFunctorOnObjects,
                             
                             C := HomalgComplex( H );
                             
-                            for j in [ 1 .. c ] do
+                            for j in [ 1 .. n ] do
                                 
                                 H := functor_operation( j, o1, o2, o3 );
                                 
@@ -1055,7 +1091,7 @@ InstallMethod( InstallFunctorOnObjects,
                         InstallOtherMethod( functor_operation,
                                 "for homalg modules",
                                 [ IsInt, filter1_obj, filter2_obj, filter3_obj, IsString ],
-                          function( c, o1, o2, o3, s )
+                          function( n, o1, o2, o3, s )
                             local H, C, j;
                             
                             if s <> "a" then
@@ -1066,7 +1102,7 @@ InstallMethod( InstallFunctorOnObjects,
                             
                             C := HomalgCocomplex( H );
                             
-                            for j in [ 1 .. c ] do
+                            for j in [ 1 .. n ] do
                                 
                                 H := functor_operation( j, o1, o2, o3 );
                                 
@@ -3586,6 +3622,21 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                  function( E )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n, E, "t" );
+                    
+                end );
+                
             elif der = "RightDerivedCofunctor" then
                 
                 InstallOtherMethod( functor_operation,
@@ -3685,6 +3736,21 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                  function( E )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n - 1, E, "t" );
+                    
+                end );
+                
             fi;
             
         fi;
@@ -3726,6 +3792,18 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 R := HomalgRing( E );
                 
                 return functor_operation( n, E, R, s );
+                
+            end );
+            
+            InstallOtherMethod( functor_operation,
+                    "for homalg complexes",
+                    [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+              function( E )
+                local R;
+                
+                R := HomalgRing( E );
+                
+                return functor_operation( E, R );
                 
             end );
             
@@ -3832,6 +3910,21 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                  function( E, o )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n, E, o, "t" );
+                    
+                end );
+                
             elif der = "RightDerivedCofunctor" then
                 
                 InstallOtherMethod( functor_operation,
@@ -3928,6 +4021,21 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                     SetIsExactTriangle( T, true );
                     
                     return T;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                  function( E, o )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n - 1, E, o, "t" );
                     
                 end );
                 
@@ -4062,6 +4170,21 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                  function( o, E )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n, o, E, "t" );
+                    
+                end );
+                
             elif der = "RightDerivedCofunctor" then
                 
                 InstallOtherMethod( functor_operation,
@@ -4158,6 +4281,21 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                     SetIsExactTriangle( T, true );
                     
                     return T;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                  function( o, E )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n - 1, o, E, "t" );
                     
                 end );
                 
@@ -4308,6 +4446,21 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                  function( E, o2, o3 )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n, E, o2, o3, "t" );
+                    
+                end );
+                
             elif der = "RightDerivedCofunctor" then
                 
                 InstallOtherMethod( functor_operation,
@@ -4404,6 +4557,21 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                     SetIsExactTriangle( T, true );
                     
                     return T;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                  function( E, o2, o3 )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n - 1, E, o2, o3, "t" );
                     
                 end );
                 
@@ -4538,6 +4706,21 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                  function( o1, E, o3 )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n, o1, E, o3, "t" );
+                    
+                end );
+                
             elif der = "RightDerivedCofunctor" then
                 
                 InstallOtherMethod( functor_operation,
@@ -4634,6 +4817,21 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                     SetIsExactTriangle( T, true );
                     
                     return T;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                  function( o1, E, o3 )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n - 1, o1, E, o3, "t" );
                     
                 end );
                 
@@ -4768,6 +4966,21 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                     
                 end );
                 
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                  function( o1, o2, E )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n, o1, o2, E, "t" );
+                    
+                end );
+                
             elif der = "RightDerivedCofunctor" then
                 
                 InstallOtherMethod( functor_operation,
@@ -4864,6 +5077,21 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                     SetIsExactTriangle( T, true );
                     
                     return T;
+                    
+                end );
+                
+                InstallOtherMethod( functor_operation,
+                        "for homalg complexes",
+                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                  function( o1, o2, E )
+                    local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
+                    
+                    M := LowestDegreeObjectInComplex( E );
+                    N := HighestDegreeObjectInComplex( E );
+                    
+                    n := Maximum( List( [ M, N ], LengthOfResolution ) );
+                    
+                    return functor_operation( n - 1, o1, o2, E, "t" );
                     
                 end );
                 

@@ -15,13 +15,13 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgRing
-# which are subrepresentations of IsHomalgRingOrFinitelyPresentedObjectRep:
+# which are subrepresentations of IsHomalgRingOrFinitelyPresentedModuleRep:
 DeclareRepresentation( "IsHomalgInternalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedObjectRep,
+        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
 DeclareRepresentation( "IsHomalgExternalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedObjectRep,
+        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
 # a new representation for the GAP-category IsHomalgExternalRingElement:

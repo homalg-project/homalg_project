@@ -135,7 +135,8 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         
     od;
     
-    if NrRelations( S ) = 0 then
+    if NrRelations( S ) = 0 and not IsBound( d!.LengthOfResolution ) then
+        d!.LengthOfResolution := j;
         SetIsMonomorphism( d_j, true );
         SetHasFiniteFreeResolution( M, true );
     fi;
@@ -206,6 +207,23 @@ InstallMethod( Resolution,
   function( M )
     
     return Resolution( 0, M );
+    
+end );
+
+InstallMethod( LengthOfResolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local d;
+    
+    d := Resolution( M );
+    
+    if IsBound(d!.LengthOfResolution) then
+        return d!.LengthOfResolution;
+    else
+        return fail;
+    fi;
     
 end );
 

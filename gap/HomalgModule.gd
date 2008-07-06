@@ -17,7 +17,7 @@
 # a new GAP-category:
 
 DeclareCategory( "IsHomalgModule",
-        IsHomalgObject );
+        IsHomalgRingOrModule and IsHomalgObject );
 
 ####################################
 #

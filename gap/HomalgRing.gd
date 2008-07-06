@@ -17,7 +17,7 @@
 # a new GAP-category:
 
 DeclareCategory( "IsHomalgRing",
-        IsHomalgRingOrObject );
+        IsHomalgRingOrModule );
 
 DeclareCategory( "IsHomalgExternalRingElement",
         IsExtAElement

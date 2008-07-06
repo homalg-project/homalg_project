@@ -39,6 +39,9 @@ DeclareOperation( "Resolution",
 DeclareOperation( "Resolution",
         [ IsHomalgModule ] );
 
+DeclareOperation( "LengthOfResolution",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "SyzygiesModuleEmb",
         [ IsInt, IsHomalgModule ] );
 

@@ -15,9 +15,11 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgModule
-# which is a subrepresentation of the representation IsFinitelyPresentedObjectRep:
+# which is a subrepresentation of the representations IsFinitelyPresentedObjectRep and IsHomalgRingOrFinitelyPresentedModuleRep:
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
-        IsHomalgModule and IsFinitelyPresentedObjectRep,
+        IsHomalgModule and
+        IsFinitelyPresentedObjectRep and
+        IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations" ] );
 
 ####################################
