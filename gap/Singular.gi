@@ -361,6 +361,10 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
       }\n\
     }\n\
   }\n\
+  if (size(rows)==0)\n\
+  {\n\
+    return(\"[]\"));\n\
+  }\n\
   return(string(rows));\n\
 }\n\n";
     

@@ -110,28 +110,28 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               CertainRows := #was: CertainColumns
+               CertainRows :=
                  function( M, plist )
                    
                    return homalgSendBlocking( [ "submat(", M, ",1..", NrColumns( M ), ",intvec(", plist, "))" ], [ "matrix" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
                
-               CertainColumns := #was: CertainRows
+               CertainColumns :=
                  function( M, plist )
                    
                    return homalgSendBlocking( [ "submat(", M, ",intvec(", plist, "),1..", NrRows( M ), ")" ], [ "matrix" ], HOMALG_IO.Pictograms.CertainColumns );
                    
                  end,
                
-               UnionOfRows := #was: UnionOfColumns
+               UnionOfRows :=
                  function( A, B )
                    
                    return homalgSendBlocking( [ "concat(", A, B, ")" ], [ "matrix" ], [ "[", NrColumns(A), "][", NrRows(A) + NrRows(B), "]" ], HOMALG_IO.Pictograms.UnionOfRows );
                    
                  end,
                
-               UnionOfColumns := #was UnionOfRows
+               UnionOfColumns :=
                  function( A, B )
                    
                    return homalgSendBlocking( [ A, B ], [ "matrix" ], [ "[", NrColumns(A) + NrColumns(B), "][", NrRows(A), "]" ], HOMALG_IO.Pictograms.UnionOfColumns );
@@ -158,7 +158,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [ A, "*", a ], [ "matrix" ],  HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ A, "*(", a, ")" ], [ "matrix" ],  HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                
@@ -352,27 +352,11 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( M, clean_columns )
                    local list_string;
                    
-                   if clean_columns  = [ ] then
-                       return [ ];
-                   fi;
-                   
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", list (", clean_columns, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
-                   if list_string = "empty list" or list_string = "emptylist" then
-                       return StringToIntList( "[]" );
-                   else
-                       return StringToIntList( list_string );
-                   fi;
+                   return StringToIntList( list_string );
                    
                  end,
-               
-               #ConvertRowToMatrix :=
-               
-               #ConvertColumnToMatrix :=
-               
-               #ConvertMatrixToRow :=
-               
-               #ConvertMatrixToColumn :=
                
         )
  );

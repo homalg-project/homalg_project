@@ -302,11 +302,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
-                   if list_string = "fail" then
-                       return [ ];
-                   else
-                       return StringToIntList( list_string );
-                   fi;
+                   return StringToIntList( list_string );
                    
                  end,
                

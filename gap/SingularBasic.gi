@@ -28,7 +28,7 @@ InstallValue( CommonHomalgTableForSingularBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ N, " = BasisOfRowModule(", M, ")" ], [ "matrix" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ "matrix ", N, " = BasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
                    
                    return N;
                    
@@ -42,7 +42,7 @@ InstallValue( CommonHomalgTableForSingularBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ N, " = BasisOfColumnModule(", M, ")" ], [ "matrix" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   homalgSendBlocking( [ "matrix ", N, " = BasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
                    
                    return N;
                    
@@ -84,7 +84,7 @@ InstallValue( CommonHomalgTableForSingularBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " = DecideZeroRows(", A, B, ")" ], [ "matrix" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ "matrix ", N, " = DecideZeroRows(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
                    return N;
                    
@@ -98,7 +98,7 @@ InstallValue( CommonHomalgTableForSingularBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ N, " = DecideZeroColumns(", A, B, ")" ], [ "matrix" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ "matrix ", N, " = DecideZeroColumns(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
                    return N;
                    
