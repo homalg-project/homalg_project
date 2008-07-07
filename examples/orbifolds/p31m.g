@@ -38,6 +38,7 @@ dim := 2;
 # 2: 153 x 2432 matrix with rank 144 and kernel dimension 9. Time: 0.052 sec.
 # 3: 2432 x 50651 matrix with rank 2286 and kernel dimension 146. Time: 2.612 sec.
 # 4: 50651 x 1133693 matrix with rank 48363 and kernel dimension 2288. Time: 1139.408 sec.
+# 5: 1133693 x 25853535 exceeded memory (-o 15g)
 # Cohomology dimension at degree 0:  GF(2)^(1 x 1)
 # Cohomology dimension at degree 1:  GF(2)^(1 x 1)
 # Cohomology dimension at degree 2:  GF(2)^(1 x 2)
