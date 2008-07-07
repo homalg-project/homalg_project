@@ -105,7 +105,7 @@
     and &Gauss;. By allowing &homalg; to delegate computational tasks to
     &Gauss; this small package extends &homalg;'s  capabilities to
     dense and sparse matrices over fields and rings of the form
-    <M>&ZZ; / &lt; p^n ></M>.<P/>
+    <M>&ZZ; / \langle p^n \rangle</M>.<P/>
     
     For those unfamiliar with the &homalg; project let me explain a
     couple of points. As outlined in the paper "homalg..." by
@@ -209,14 +209,14 @@
     Meth="KernelMat"/>, which terminates after the REF and returns the
     kernel generators.<P/>
     
-    The syzygy computation over <M>&ZZ; / &lt; p^n ></M> was solved by
+    The syzygy computation over <M>&ZZ; / \langle p^n \rangle</M> was solved by
     carefully keeping track of basis vectors with a zero-divising
     head. If, for <M> v = (0,\ldots,0,h,*,\ldots,*), h \neq 0,</M>
     there exists <M>g \neq 0</M> such that <M>g \cdot h = 0</M>, the
     vector <M>g \cdot v</M> is regarded as an additional row vector
     which has to be reduced and can be reduced with. After some more
     work this allowed for the implementation of <Ref
-    Meth="KernelMat"/> for matrices over <M>&ZZ; / &lt; p^n ></M>.<P/>
+    Meth="KernelMat"/> for matrices over <M>&ZZ; / \langle p^n \rangle</M>.<P/>
     
     This concludes the explanation of the so-called basic tasks
     &Gauss; has to handle when called by &homalg; to do matrix
@@ -237,10 +237,10 @@
      <Row>
       <Item>Base Ring:</Item>
       <Item>Field</Item>
-      <Item><M>&ZZ; / &lt; p^n ></M></Item>
+      <Item><M>&ZZ; / \langle p^n \rangle</M></Item>
       <Item>Field</Item>
       <Item>GF(2)</Item>
-      <Item><M>&ZZ; / &lt; p^n ></M></Item>
+      <Item><M>&ZZ; / \langle p^n \rangle</M></Item>
      </Row>
      <HorLine/>
      <HorLine/>
@@ -530,7 +530,7 @@ on the base ring</Item></Row>
 <Row><Item>GaussSparse.gi</Item><Item>Gaussian elimination for sparse
 matrices over fields</Item></Row>
 <Row><Item>HermiteSparse.gi</Item><Item>Hermite elimination for sparse
-matrices over &ZZ;<M>/&lt;p^n></M></Item></Row>
+matrices over <M>&ZZ; / \langle p^n \rangle</M></Item></Row>
 </Table>
 </Appendix>
 
