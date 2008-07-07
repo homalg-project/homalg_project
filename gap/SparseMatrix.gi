@@ -30,7 +30,7 @@ BindGlobal( "TheTypeSparseMatrixGF2",
 
 ##  <#GAPDoc Label="SparseMatrix">
 ##  <ManSection >
-##  <Func Arg="mat[, R]" Name="SparseMatrix" />
+##  <Func Arg="mat[, R]" Name="SparseMatrix" Label="constructor" />
 ##  <Returns>a sparse matrix over the ring <A>R</A></Returns>
 ##  <Func Arg="nrows, ncols, indices" Name="SparseMatrix" />
 ##  <Returns>a sparse matrix over GF(2)</Returns>
