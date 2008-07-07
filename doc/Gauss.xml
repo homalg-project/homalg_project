@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--$Id: manual.xml,  2008/07/01 -->
+<!--$Id: Gauss.xml,  2008/07/01 -->
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
  [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
@@ -16,7 +16,9 @@
 <TitlePage>
   <Title> The &Gauss; Package Manual</Title>
   <Subtitle>Extended Gauss Functionality for &GAP;</Subtitle>
-  <Version>Version 2008.07.01</Version>
+  <Version>
+      Version <#Include SYSTEM "../VERSION">
+  </Version>
   <Author>Simon Goertzen
           <Email>Simon.Goertzen@RWTH-Aachen.De</Email> 
   </Author>

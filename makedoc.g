@@ -4,11 +4,10 @@
 ##  Call this with GAP.
 ##
 
-LoadPackage("GAPDoc");
+LoadPackage( "GAPDoc" );
 
-MakeGAPDocDoc("doc", "Gauss", [], "Gauss");
+MakeGAPDocDoc( "doc", "Gauss", [ "../gap/Sparse.gi", "../gap/SparseMatrix.gi" ], "Gauss" );
 
-GAPDocManualLab("Gauss");
+GAPDocManualLab( "Gauss" );
 
 quit;
-
