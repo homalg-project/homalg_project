@@ -27,7 +27,7 @@
 
 InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
   function( phi )
-    local R, T, p, gen, rel, coker, id, epi, emb;
+    local R, T, p, gen, rel, coker, id, epi, img_emb, emb;
     
     if HasCokernelEpi( phi ) then
         return Range( CokernelEpi( phi ) );
@@ -49,7 +49,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     coker := Presentation( gen, rel );
     
     ## the identity matrix is the matrix of the natural epimorphism
-    ## w.r.t. p-th set of relations of T and the first set of relations of coker:
+    ## w.r.t. the p-th set of relations of T and the first set of relations of coker:
     id := HomalgIdentityMatrix( NrGenerators( gen ), R );
     
     ## the natural epimorphism:
@@ -60,7 +60,14 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## set the attribute CokernelEpi (specific for Cokernel):
     SetCokernelEpi( phi, epi );
     
-    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+    ## abelian category: [HS, Prop. II.9.6]
+    if HasImageSubmoduleEmb( phi ) then
+        img_emb := ImageSubmoduleEmb( phi );
+        SetKernelEmb( epi, img_emb );
+        if not HasCokernelEpi( img_emb ) then
+            SetCokernelEpi( img_emb, epi );
+        fi;
+    elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
         SetKernelEmb( epi, phi );
     fi;
     
@@ -91,12 +98,97 @@ functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
+## ImageSubmodule
+##
+
+InstallGlobalFunction( _Functor_ImageSubmodule_OnObjects,	### defines: ImageSubmodule(Emb)
+  function( phi )
+    local T, p, img, emb, coker_epi;
+    
+    if HasImageSubmoduleEmb( phi ) then
+        return Range( ImageSubmoduleEmb( phi ) );
+    fi;
+    
+    T := Range( phi );
+    
+    ## this is probably obsolete but clarifies our idea:
+    p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects of the following command(s)
+    
+    img := MatrixOfMap( phi ) / T;
+    
+    ## emb is the matrix of the natural embedding
+    ## w.r.t. the first set of relations of img and the p-th set of relations of T
+    emb := MatrixOfGenerators( img, 1 );
+    
+    emb := HomalgMap( emb, [ img, 1 ], [ T, p ] );
+    
+    SetIsMonomorphism( emb, true );
+    
+    ## set the attribute ImageSubmoduleEmb (specific for ImageSubmodule):
+    SetImageSubmoduleEmb( phi, emb );
+    
+    ## abelian category: [HS, Prop. II.9.6]
+    if HasCokernelEpi( phi ) then
+        coker_epi := CokernelEpi( phi );
+        SetCokernelEpi( emb, coker_epi );
+        if not HasKernelEmb( coker_epi ) then
+            SetKernelEmb( coker_epi, emb );
+        fi;
+    fi;
+    
+    ## save the natural embedding in the image (thanks GAP):
+    img!.NaturalEmbedding := emb;
+    
+    return img;
+    
+end );
+
+InstallValue( functor_ImageSubmodule,
+        CreateHomalgFunctor(
+                [ "name", "ImageSubmodule" ],
+                [ "natural_transformation", "ImageSubmoduleEmb" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_ImageSubmodule_OnObjects ]
+                )
+        );
+
+functor_ImageSubmodule!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+InstallMethod( ImageSubmoduleEpi,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+  function( phi )
+    local emb, epi, ker_emb;
+    
+    emb := ImageSubmoduleEmb( phi );
+    
+    epi := PostDivide( phi, emb );
+    
+    SetIsEpimorphism( epi, true );
+    
+    ## abelian category: [HS, Prop. II.9.6]
+    if HasKernelEmb( phi ) then
+        ker_emb := KernelEmb( phi );
+        SetKernelEmb( epi, ker_emb );
+        if not HasCokernelEpi( ker_emb ) then
+            SetCokernelEpi( ker_emb, epi );
+        fi;
+    fi;
+    
+    return epi;
+    
+end );
+
+##
 ## Kernel
 ##
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
   function( psi )
-    local S, p, ker, emb;
+    local S, p, ker, emb, img_epi;
     
     if HasKernelEmb( psi ) then
         return Source( KernelEmb( psi ) );
@@ -105,9 +197,10 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     S := Source( psi );
     
     ## this is probably obsolete but clarifies our idea:
-    p := PositionOfTheDefaultSetOfGenerators( S ); ## avoid future possible side effects of the following command(s)
+    p := PositionOfTheDefaultSetOfGenerators( S );	## avoid future possible side effects of the following command(s)
     
-    ker := SyzygiesGenerators( psi ) / S;
+    ## this following keeps track of the original generators:
+    ker := SyzygiesGenerators( psi ) / S;		## the number of generators of ker might be less than the number of computed syzygies
     
     ## emb is the matrix of the natural embedding
     ## w.r.t. the first set of relations of ker and the p-th set of relations of S
@@ -120,7 +213,14 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     ## set the attribute KernelEmb (specific for Kernel):
     SetKernelEmb( psi, emb );
     
-    if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+    ## abelian category: [HS, Prop. II.9.6]
+    if HasImageSubmoduleEpi( psi ) then
+        img_epi := ImageSubmoduleEpi( psi );
+        SetCokernelEpi( emb, img_epi );
+        if not HasKernelEmb( img_epi ) then
+            SetKernelEmb( img_epi, emb );
+        fi;
+    elif HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
         SetCokernelEpi( emb, psi );
     fi;
     
@@ -216,7 +316,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     M := Range( pre );
     
     ## this is probably obsolete but clarifies our idea:
-    p := PositionOfTheDefaultSetOfGenerators( M );  ## avoid future possible side effects of the following command(s)
+    p := PositionOfTheDefaultSetOfGenerators( M );	## avoid future possible side effects of the following command(s)
     
     gen := GeneratorsOfModule( M );
     
@@ -226,7 +326,8 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     
     coker := Presentation( gen, rel );
     
-    ker := SyzygiesGenerators( post ) / coker;
+    ## this following keeps track of the original generators:
+    ker := SyzygiesGenerators( post ) / coker;		## the number of generators of ker might be less than the number of computed syzygies
     
     ## emb is the matrix of the "natural embedding" (see below)
     ## w.r.t. the first set of relations of ker and the p-th set of relations of M
@@ -618,6 +719,12 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ##
 
 InstallFunctorOnObjects( functor_Cokernel );
+
+##
+## ImageSubmodule( phi ) and ImageSubmoduleEmb( phi )
+##
+
+InstallFunctorOnObjects( functor_ImageSubmodule );
 
 ##
 ## Kernel( phi ) and KernelEmb( phi )

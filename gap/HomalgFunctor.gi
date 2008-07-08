@@ -55,7 +55,7 @@ BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
 ####################################
 
 HOMALG.FunctorOn :=
-  [ IsHomalgRingOrFinitelyPresentedModuleRep,
+  [ IsHomalgRingOrFinitelyPresentedObjectRep,
     IsMapOfFinitelyGeneratedModulesRep,
     [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
     [ IsChainMapOfFinitelyPresentedObjectsRep, IsCochainMapOfFinitelyPresentedObjectsRep ] ];
@@ -5183,7 +5183,11 @@ InstallMethod( RightSatelliteOfCofunctor,
             Error( "the negative ", c, ". right satellite is not defined\n" );
         fi;
         
-        d := Resolution( c - 1, arg[p + 1] );
+        if c - 1 > -1 then
+            d := Resolution( c - 1, arg[p + 1] );
+        else
+            d := Resolution( 0, arg[p + 1] );
+        fi;
         
         if IsHomalgMap( arg[p + 1] ) then
             if c = 0 then
@@ -5334,7 +5338,11 @@ InstallMethod( LeftSatelliteOfFunctor,
             Error( "the negative ", c, ". left satellite is not defined\n" );
         fi;
         
-        d := Resolution( c - 1, arg[p + 1] );
+        if c - 1 > -1 then
+            d := Resolution( c - 1, arg[p + 1] );
+        else
+            d := Resolution( 0, arg[p + 1] );
+        fi;
         
         if IsHomalgMap( arg[p + 1] ) then
             if c = 0 then

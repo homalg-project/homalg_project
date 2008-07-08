@@ -103,3 +103,15 @@ InstallMethod( \/,				### defines: SubfactorModule (incomplete)
     
 end );
 
+## was part of _Functor_Cokernel_OnObjects
+
+    if IsZero( phi ) then
+        coker := Range( phi );
+        epi := TheIdentityMorphism( coker );
+        if not IsBound( coker!.NaturalEmbedding ) then
+            coker!.NaturalEmbedding := epi;
+        fi;
+        SetCokernelEpi( phi, epi );
+        return coker;	## this is crucial for IsIdenticalObj( Ext( 0, M, N ), Hom( M, N ) ) = true (we hope there is no need to set further attributes as below)
+    fi;
+    

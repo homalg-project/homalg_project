@@ -952,14 +952,14 @@ InstallGlobalFunction( HomalgMap,
                 elif IsHomalgRelations( arg[1] ) then
                     nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
                 fi;
-                source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[1] ) );
+                source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
             else
                 if IsHomalgMatrix( arg[1] ) then
                     nr_columns := NrColumns( arg[1] );
                 elif IsHomalgRelations( arg[1] ) then
                     nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
                 fi;
-                source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[1] ) );
+                source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
             fi;
             pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then

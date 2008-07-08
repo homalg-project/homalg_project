@@ -308,25 +308,25 @@ DeclareOperation( "AreComparableMatrices",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "GetUnitPosition",
-        [ IsHomalgMatrix, IsHomogeneousList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "GetUnitPosition",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "GetCleanRowsPositions",
-        [ IsHomalgMatrix, IsHomogeneousList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "GetCleanRowsPositions",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "GetColumnIndependentUnitPositions",
-        [ IsHomalgMatrix, IsHomogeneousList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "GetColumnIndependentUnitPositions",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "GetRowIndependentUnitPositions",
-        [ IsHomalgMatrix, IsHomogeneousList ] );
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "GetRowIndependentUnitPositions",
         [ IsHomalgMatrix ] );

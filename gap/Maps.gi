@@ -20,7 +20,7 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         [ IsInt, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( _q, phi  )
-    local q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, c;
+    local q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, cm;
     
     q := _q;
     
@@ -30,8 +30,8 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     d_S := Resolution( q, S );
     d_T := Resolution( q, T );
     
-    if q < 1 then
-        q := Maximum( List( [ d_S, d_T ], HighestDegreeInComplex ) );
+    if q < 0 then
+        q := Maximum( List( [ S, T ], LengthOfResolution ) );
         d_S := Resolution( q, S );
         d_T := Resolution( q, T );
     fi;
@@ -39,9 +39,9 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
     
     if IsBound( phi!.free_resolutions.(String( index_pair )) ) then
-        c := phi!.free_resolutions.(String( index_pair ));
-        j := HighestDegreeInChainMap( c );
-        phi_j := HighestDegreeMorphismInChainMap( c );
+        cm := phi!.free_resolutions.(String( index_pair ));
+        j := HighestDegreeInChainMap( cm );
+        phi_j := HighestDegreeMorphismInChainMap( cm );
     else
         j := 0;
         
@@ -50,9 +50,9 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         
         phi_j := CompleteImageSquare( d_S_j, phi, d_T_j );
         
-        c := HomalgChainMap( phi_j, d_S, d_T );
+        cm := HomalgChainMap( phi_j, d_S, d_T );
         
-        phi!.free_resolutions.(String( index_pair )) := c;
+        phi!.free_resolutions.(String( index_pair )) := cm;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -66,13 +66,13 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         
         phi_j := CompleteImageSquare( d_S_j, phi_j, d_T_j );
         
-        Add( c, phi_j );
+        Add( cm, phi_j );
         
     od;
     
-    SetIsMorphism( c, true );
+    SetIsMorphism( cm, true );
     
-    return c;
+    return cm;
     
 end );
 
@@ -82,6 +82,6 @@ InstallMethod( Resolution,
         
   function( phi )
     
-    return Resolution( 0, phi );
+    return Resolution( -1, phi );
     
 end );

@@ -19,6 +19,11 @@ DeclareGlobalFunction( "_Functor_Cokernel_OnObjects" );
 
 DeclareGlobalVariable( "functor_Cokernel" );
 
+## ImageSubmodule
+DeclareGlobalFunction( "_Functor_ImageSubmodule_OnObjects" );
+
+DeclareGlobalVariable( "functor_ImageSubmodule" );
+
 ## Kernel
 DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
 
@@ -55,6 +60,12 @@ DeclareAttribute( "CokernelEpi",
 DeclareAttribute( "KernelEmb",
         IsHomalgMap );
 
+DeclareAttribute( "ImageSubmoduleEmb",
+        IsHomalgMap );
+
+DeclareAttribute( "ImageSubmoduleEpi",
+        IsHomalgMap );
+
 ####################################
 #
 # global functions and operations:
@@ -64,6 +75,9 @@ DeclareAttribute( "KernelEmb",
 # basic operations:
 
 DeclareOperation( "Cokernel",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "ImageSubmodule",	## Image is unfortunately declared in the GAP library as a global function :(
         [ IsHomalgMap ] );
 
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)

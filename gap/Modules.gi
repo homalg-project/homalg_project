@@ -22,10 +22,10 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
   function( mat, M )
     local B, N, gen, S;
     
-    # basis of rel
+    # basis of the set of relations of M:
     B := BasisOfModule( M );
     
-    # normal forms of mat with respect to B
+    # normal form of mat with respect to B:
     N := DecideZero( mat, B );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -34,15 +34,20 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
         N := HomalgGeneratorsForRightModule( N );
     fi;
     
-    # get a better basis for N
+    # get a better basis for N (by default, it only throws away the zero generators):
     N := GetRidOfObsoleteGenerators( N );
     
-    gen := N * GeneratorsOfModule( M );
-    
-    # compute the syzygies of N modulo B, i.e. the relations among N modulo B
+    # compute the syzygies of N modulo B, i.e. the relations among N modulo B:
     S := SyzygiesGenerators( N, B );
     
     S := Presentation( N, S );
+    
+    ## this matrix of generators is often enough the identity matrix
+    ## and knowing this will avoids computations:
+    IsIdentityMatrix( MatrixOfGenerators( N ) );
+    
+    ## keep track of the original generators:
+    gen := N * GeneratorsOfModule( M );
     
     return AddANewPresentation( S, gen );
     
@@ -72,7 +77,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     
     R := HomalgRing( M );
     
-    if _q < 1 then
+    if _q < 0 then
         if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
             q := LeftGlobalDimension( M );
         elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
@@ -91,6 +96,8 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         else
             q := infinity;
         fi;
+    elif _q = 0 then
+        q := 1;		## this is the minimum
     else
         q := _q;
     fi;
@@ -142,7 +149,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     fi;
     
     ## fill up with zero morphisms:
-    if _q > 0 then
+    if _q >= 0 then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
@@ -172,7 +179,7 @@ InstallMethod( Resolution,
         
   function( M )
     
-    return Resolution( 0, M );
+    return Resolution( -1, M );
     
 end );
 
@@ -206,7 +213,7 @@ InstallMethod( Resolution,
         
   function( M )
     
-    return Resolution( 0, M );
+    return Resolution( -1, M );
     
 end );
 

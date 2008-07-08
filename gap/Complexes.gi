@@ -302,15 +302,13 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
         
   function( _q, C )
-    local q, degrees, l, M, psi, E, phi, N, dM, dN, j,
+    local q, degrees, M, psi, E, phi, N, dM, dN, j,
           index_pair_psi, index_pair_phi, epsilonN, epsilonM, epsilon,
           dj, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
     
     q := _q;
     
     degrees := ObjectDegreesOfComplex( C );
-    
-    l := Length( degrees );
     
     M := CertainObject( C, degrees[1] );
     psi := CertainMorphism( C, degrees[2] );
@@ -321,8 +319,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     dM := Resolution( q, M );
     dN := Resolution( q, N );
     
-    if q < 1 then
-        q := Maximum( List( [ dM, dN ], HighestDegreeInComplex ) );
+    if q < 0 then
+        q := Maximum( List( [ M, N ], LengthOfResolution ) );
         dM := Resolution( q, M );
         dN := Resolution( q, N );
     fi;
@@ -423,19 +421,149 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
     SetIsAcyclic( dE, true );
-    SetIsSplitShortExactSequence( horse_shoe, true );
     
     return horse_shoe;
     
 end );
 
+## 0 --> N -(phi)-> E -(psi)-> M --> 0
+InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExactSeq)
+        "for homalg complexes",
+        [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+        
+  function( _q, C )
+    local q, degrees, N, phi, E, psi, M, dM, dN, j,
+          index_pair_psi, index_pair_phi, epsilonN, epsilonM, epsilon,
+          dj, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
+    
+    q := _q;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    N := CertainObject( C, degrees[1] );
+    phi := CertainMorphism( C, degrees[1] );
+    E := CertainObject( C, degrees[2] );
+    psi := CertainMorphism( C, degrees[2] );
+    M := CertainObject( C, degrees[3] );
+    
+    dM := Resolution( q, M );
+    dN := Resolution( q, N );
+    
+    if q < 0 then
+        q := Maximum( List( [ M, N ], LengthOfResolution ) );
+        dM := Resolution( q, M );
+        dN := Resolution( q, N );
+    fi;
+    
+    index_pair_psi := PairOfPositionsOfTheDefaultSetOfRelations( psi );
+    index_pair_phi := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    
+    if IsBound( C!.free_resolutions ) and
+       IsBound( C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) ) then
+        
+        horse_shoe := C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] ));
+        
+        d_psi := CertainMorphism( horse_shoe, degrees[2] );
+        d_phi := CertainMorphism( horse_shoe, degrees[3] );
+        
+        j := HighestDegreeInChainMap( d_psi );
+        
+        if j <> HighestDegreeInChainMap( d_phi ) then
+            Error( "the highest degrees of the two chain maps in the horse shoe do not coincide\n" );
+        fi;
+        
+        psi := CertainMorphism( d_psi, j );
+        phi := CertainMorphism( d_phi, j );
+        
+        dE := Source( d_psi );
+        
+        dj := CertainMorphism( dE, j );
+        
+    else
+        
+        j := 0;
+        
+        epsilonM := FreeHullEpi( M );
+        epsilonN := FreeHullEpi( N );
+        
+        epsilonM := PostDivide( epsilonM, psi );
+        epsilonN := PreCompose( epsilonN, phi );
+        
+        epsilon := StackMaps( epsilonN, epsilonM );
+        
+        SetIsEpimorphism( epsilon, true );
+        
+        dj := epsilon;
+        
+        Pj := Source( dj );
+        
+        dE := HomalgComplex( Pj );
+        
+        psi := DirectSumEpis( Pj )[2];
+        phi := DirectSumEmbs( Pj )[1];
+        
+        d_psi := HomalgChainMap( psi, dE, dM );
+        d_phi := HomalgChainMap( phi, dN, dE );
+        
+        horse_shoe := HomalgCocomplex( d_phi, degrees[1] );
+        Add( horse_shoe, d_psi );
+        
+        C!.free_resolutions := rec( );
+        C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) := horse_shoe;
+        
+    fi;
+    
+    while j < q do
+        
+        j := j + 1;
+        
+        mu := KernelEmb( dj );
+        
+        psi := CompleteImageSquare( mu, psi, SyzygiesModuleEmb( j, M ) );
+        phi := CompleteImageSquare( SyzygiesModuleEmb( j, N ), phi, mu );
+        
+        epsilonM := SyzygiesModuleEpi( j, M );
+        epsilonN := SyzygiesModuleEpi( j, N );
+        
+        epsilonM := PostDivide( epsilonM, psi );
+        epsilonN := PreCompose( epsilonN, phi );
+        
+        epsilon_j := StackMaps( epsilonN, epsilonM );
+        
+        Pj := Source( epsilon_j );
+        
+        dj := PreCompose( epsilon_j, mu );
+        
+        if j = 1 then
+            SetCokernelEpi( dj, epsilon );
+        fi;
+        
+        Add( dE, dj );
+        
+        psi := DirectSumEpis( Pj )[2];
+        phi := DirectSumEmbs( Pj )[1];
+        
+        Add( d_psi, psi );
+        Add( d_phi, phi );
+        
+    od;
+    
+    SetIsEpimorphism( d_psi, true );
+    SetIsMonomorphism( d_phi, true );
+    SetIsAcyclic( dE, true );
+    
+    return horse_shoe;
+    
+end );
+
+##
 InstallMethod( Resolution,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedObjectsRep ],
+        [ IsHomalgComplex ],
         
   function( C )
     
-    return Resolution( 0, C );
+    return Resolution( -1, C );
     
 end );
 
