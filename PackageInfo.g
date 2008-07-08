@@ -42,7 +42,7 @@ Date := "07/07/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~simon/gap/Gauss",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/~simon/Gauss",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -166,9 +166,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/gap/Gauss/README.Gauss",
+  "http://wwwb.math.rwth-aachen.de/~simon/Gauss/README.Gauss",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/gap/Gauss/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/~simon/Gauss/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -219,7 +219,7 @@ PackageDoc := rec(
   BookName  := "Gauss",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~simon/gap/Gauss/Gauss.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/~simon/Gauss/Gauss.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
