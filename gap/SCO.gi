@@ -53,48 +53,53 @@ end );
 ## this method creates a simplicial set from an OT by iterating the construction, removing unneccessary simplices (there might be more)
 InstallMethod( SimplicialSet, "constructor",
         [ IsOrbifoldTriangulation, IsInt ],
-  function( ot, n )
-    local a, L, P, dim, x, y, g, S, u;
+        function( ot, n )
+    local a, L, P, dim, x, y, g, S, u, regular, singular, bad, i, p, f;
     L := [];
     P := [];
+    regular := [];
+    singular := [];
+    
     for a in ot!.vertices do
         L[a] := Filtered( ot!.max_simplices, x->a in x );
         P[a] := [];
         P[a][1] := List( L[a], x->[x] );
-        if not IsBound( ot!.isotropy.( a ) ) or Order( ot!.isotropy.( a ) ) = 1 then
-            for dim in [2..n+2] do
-                P[a][dim] := Concatenation( List( P[a][dim-1], x->List( Filtered( L[a], y->y>x[1] ), z->Concatenation( [ z, () ], x ) ) ) );
-            od;
+	if not IsBound( ot!.isotropy.( a ) ) or Order( ot!.isotropy.( a ) ) = 1 then
+            Add( regular, a );
         else
-            for dim in [2..n+2] do
-                P[a][dim] := [];
-                for x in P[a][dim-1] do
-                    for g in Elements( ot!.isotropy.( a ) ) do
-                        for y in L[a] do
-                            if not ( x[1] = y and Order(g) = 1 ) then
-                                Append( P[a][dim], [ Concatenation( [ y, g ], x ) ]);
-                            fi;
-                        od;
-                    od;
-                od;
-            od;
-        fi; 
+            Add( singular, a );
+        fi;
     od;
     
     S := [];
     S[1] := Set( ot!.max_simplices, x->[x] );
     
-    for dim in [2..n+2] do
+    for dim in [ 2 .. n+2 ] do
         u := [];
-        for a in ot!.vertices do
-            u := Union( u, P[a][dim]);
+        for a in regular do
+            P[a][dim] := Concatenation( List( P[a][dim-1], x->List( Filtered( L[a], y->y>x[1] ), z->Concatenation( [ z, () ], x ) ) ) );
+            u := Union( u, P[a][dim] );
         od;
-        S[dim] := Set(u);
+        for a in singular do
+            P[a][dim] := [];
+            for x in P[a][dim-1] do
+                for g in Elements( ot!.isotropy.( a ) ) do
+                    for y in L[a] do
+                        if not ( x[1] = y and Order(g) = 1 ) then
+                            Append( P[a][dim], [ Concatenation( [ y, g ], x ) ]);
+                        fi;
+                    od;
+                od;
+            od;
+            u := Union( u, P[a][dim] );
+        od;
+	S[dim] := Set( u );
     od;
     
     return Objectify( SimplicialSetType, rec( simplicial_set := S ) );
     
-end );
+  end
+);
 
 ##
 InstallMethod( Dimension, "for Simplicial Sets",
@@ -163,7 +168,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                 matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), Length( S[k] ), R ) );
                 for p in [1..Length( S[k] )] do #column iterator
                     for i in [0..k-1] do #row iterator
-                        ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
+                        ind := Position( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             # matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
                             AddEntry( matrices[k-1], ind, p, MinusOne( R )^i );
@@ -187,7 +192,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                 matrices[k-1] := NullMat( Length( S[k-1] ), Length( S[k] ) );
                 for p in [1..Length( S[k] )] do
                     for i in [0..k-1] do
-                        ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
+                        ind := Position( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
                         fi;
