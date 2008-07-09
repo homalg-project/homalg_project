@@ -955,6 +955,28 @@ InstallMethod( SyzygiesGenerators,
 end );
 
 ##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return ReducedSyzygiesGenerators( RelationsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for homalg modules",
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        
+  function( mat, M )
+    
+    return ReducedSyzygiesGenerators( mat, RelationsOfModule( M ) );
+    
+end );
+
+##
 InstallMethod( NonZeroGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],

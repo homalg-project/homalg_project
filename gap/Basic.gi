@@ -556,8 +556,14 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     fi;
     
     if COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule ) then
+        if STORE_SYZYGIES and not IsBound( M!.ReducedBasisOfModule!.SyzygiesGenerators ) then
+            M!.ReducedBasisOfModule!.SyzygiesGenerators := SyzygiesGenerators( M );
+        fi;
         return M!.ReducedBasisOfModule;
     elif not COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS) then
+        if STORE_SYZYGIES and not IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS!.SyzygiesGenerators ) then
+            M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS!.SyzygiesGenerators := SyzygiesGenerators( M );
+        fi;
         return M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS;
     fi;
     

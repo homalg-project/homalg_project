@@ -119,6 +119,12 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgMatrix, IsHomalgRelations ] );
 
+DeclareOperation( "ReducedSyzygiesGenerators",
+        [ IsHomalgRelations ] );
+
+DeclareOperation( "ReducedSyzygiesGenerators",
+        [ IsHomalgMatrix, IsHomalgRelations ] );
+
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgRelations ] );
 

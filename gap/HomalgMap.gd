@@ -99,6 +99,9 @@ DeclareOperation( "UnionOfRelations",
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgMap ] );
 
+DeclareOperation( "ReducedSyzygiesGenerators",
+        [ IsHomalgMap ] );
+
 DeclareOperation( "StackMaps",
         [ IsHomalgMap, IsHomalgMap ] );
 
@@ -106,9 +109,6 @@ DeclareOperation( "AugmentMaps",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "PreCompose",
-        [ IsHomalgMap, IsHomalgMap ] );
-
-DeclareOperation( "PostDivide",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "CompleteImageSquare",

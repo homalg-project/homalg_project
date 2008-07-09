@@ -560,6 +560,64 @@ InstallMethod( SyzygiesGenerators,
 end );
 
 ##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    local syz;
+    
+    syz := SyzygiesGenerators( rel );
+    
+    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( mat, rel )
+    local syz;
+    
+    syz := SyzygiesGenerators( mat, rel );
+    
+    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( rel )
+    local syz;
+    
+    syz := SyzygiesGenerators( rel );
+    
+    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgMatrix,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( mat, rel )
+    local syz;
+    
+    syz := SyzygiesGenerators( mat, rel );
+    
+    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    
+end );
+
+##
 InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
         "for sets of relations of homalg modules",
         [ IsRelationsOfFinitelyPresentedModuleRep ],

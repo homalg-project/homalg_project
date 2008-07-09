@@ -20,13 +20,7 @@
 
 InstallGlobalFunction( _Functor_AsATwoSequence_OnObjects,	### defines: AsATwoSequence
   function( phi, psi )
-    local R, pre, post, C;
-    
-    R := HomalgRing( phi );
-    
-    if not IsIdenticalObj( R, HomalgRing( psi ) ) then
-        Error( "the rings of the two morphisms are not identical\n" );
-    fi;
+    local pre, post, C;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( psi ) then
         pre := phi;
@@ -202,13 +196,7 @@ end );
 
 InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: AsChainMapForPullback
   function( phi, beta1 )
-    local R, S, T, c;
-    
-    R := HomalgRing( phi );
-    
-    if not IsIdenticalObj( R, HomalgRing( beta1 ) ) then
-        Error( "the rings of the two morphisms are not identical\n" );
-    fi;
+    local S, T, c;
     
     S := HomalgComplex( Source( phi ), 0 );
     T := HomalgComplex( beta1 );
@@ -239,19 +227,121 @@ InstallValue( functor_AsChainMapForPullback,
 functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
+#=======================================================================
+# PostDivide
+#
+# M_ is free or beta is injective ( cf. [BR, Subsection 3.1.1] )
+#
+#     M_
+#     |   \
+#  (psi=?)  \ (gamma)
+#     |       \
+#     v         v
+#     N_ -(beta)-> N
+#
+#
+# row convention (left modules): psi := gamma * beta^(-1)	( -> RightDivide )
+# column convention (right modules): psi := beta^(-1) * gamma	( -> LeftDivide )
+#_______________________________________________________________________
+
+##
+## PostDivide
+##
+
+InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
+  function( chm_pb )
+    local gamma, beta, N, psi, M_;
+    
+    gamma := LowestDegreeMorphismInChainMap( chm_pb );
+    beta := LowestDegreeMorphismInComplex( Range( chm_pb ) );
+    
+    N := Range( beta );
+    
+    ## one of the coolest parts of the code (the idea of the natural embedding in action):
+    if HasMonomorphismModuloImage( beta ) then
+        N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
+    else
+        N := RelationsOfModule( N );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_pb ) then
+        
+        psi := RightDivide( MatrixOfMap( gamma ), MatrixOfMap( beta ), N );
+        
+        if psi = fail then
+            Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
+        fi;
+        
+    else
+        
+        psi := LeftDivide( MatrixOfMap( beta ), MatrixOfMap( gamma ), N );
+        
+        if psi = fail then
+            Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
+        fi;
+        
+    fi;
+    
+    M_ := Source( gamma );
+    
+    psi := HomalgMap( psi, M_, Source( beta ) );
+    
+    if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
+       ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
+       HasMonomorphismModuloImage( beta ) then
+        
+        SetIsMorphism( psi, true );
+        
+    fi;
+    
+    return psi;
+    
+end );
+
+InstallValue( functor_PostDivide,
+        CreateHomalgFunctor(
+                [ "name", "PostDivide" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
+                [ "OnObjects", _Functor_PostDivide_OnObjects ]
+                )
+        );
+
+functor_PostDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+## for convenience
+InstallMethod( \/,
+        "for homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( gamma, beta )
+    
+    if not IsIdenticalObj( Range( gamma ), Range( beta ) ) then
+        Error( "the two morphisms don't have have identically the same target module\n" );
+    fi;
+    
+    return PostDivide( AsChainMapForPullback( gamma, beta ) );
+    
+end );
+
+InstallMethod( PostDivide,
+        "for homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( gamma, beta )
+    
+    return PostDivide( AsChainMapForPullback( gamma, beta ) );
+    
+end );
+
 ##
 ## AsChainMapForPushout
 ##
 
 InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsChainMapForPushout
   function( alpha1, psi )
-    local R, S, T, c;
-    
-    R := HomalgRing( psi );
-    
-    if not IsIdenticalObj( R, HomalgRing( alpha1 ) ) then
-        Error( "the rings of the two morphisms are not identical\n" );
-    fi;
+    local S, T, c;
     
     S := HomalgComplex( alpha1 );
     T := HomalgComplex( Range( psi ) );
@@ -305,6 +395,12 @@ InstallFunctorOnObjects( functor_Compose );
 ##
 
 InstallFunctorOnObjects( functor_AsChainMapForPullback );
+
+##
+## gamma / beta = PostDivide( gamma, beta )
+##
+
+InstallFunctorOnObjects( functor_PostDivide );
 
 ##
 ## AsChainMapForPushout( alpha1, psi )

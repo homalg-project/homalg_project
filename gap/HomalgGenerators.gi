@@ -331,6 +331,30 @@ InstallMethod( SyzygiesGenerators,
 end );
 
 ##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( gen, rel )
+    
+    return ReducedSyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( gen, rel )
+    
+    return ReducedSyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    
+end );
+
+##
 InstallMethod( \*,
         "for sets of generators of homalg modules",
         [ IsHomalgMatrix, IsGeneratorsOfFinitelyGeneratedModuleRep ],

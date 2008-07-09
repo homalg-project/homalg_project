@@ -482,7 +482,7 @@ InstallMethod( POW,
         
         id := HomalgIdentityMap( Range( phi ) );
         
-        inv := PostDivide( id, phi );
+        inv := id / phi;
         
         if HasIsIsomorphism( phi ) then
             SetIsIsomorphism( inv, IsIsomorphism( phi ) );
@@ -597,6 +597,17 @@ InstallMethod( SyzygiesGenerators,
   function( phi )
     
     return SyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return ReducedSyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
     
 end );
 
@@ -783,111 +794,6 @@ InstallMethod( PreCompose,
 end );
 
 #=======================================================================
-# PostDivide
-#
-# M_ is free or beta is injective ( cf. [BR, Subsection 3.1.1] )
-#
-#     M_
-#     |   \
-#  (psi=?)  \ (gamma)
-#     |       \
-#     v         v
-#     N_ -(beta)-> N
-#
-#
-# row convention (left modules): psi := gamma * beta^(-1)	( -> RightDivide )
-# column convention (right modules): psi := beta^(-1) * gamma	( -> LeftDivide )
-#_______________________________________________________________________
-
-##
-InstallMethod( PostDivide,			### defines: PostDivide (RightDivide (high-level))
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( gamma, beta )
-    local N, psi, M_;
-    
-    N := Range( beta );
-    
-    if not IsIdenticalObj( N, Range( gamma ) ) then
-        Error( "the two morphisms don't have have identically the same target module\n" );
-    fi;
-    
-    ## one of the coolest parts of the code:
-    if HasMonomorphismModuloImage( beta ) then
-        N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
-    else
-        N := RelationsOfModule( N );
-    fi;
-        
-    psi := RightDivide( MatrixOfMap( gamma ), MatrixOfMap( beta ), N );
-    
-    if psi = fail then
-        Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
-    fi;
-    
-    M_ := Source( gamma );
-    
-    psi := HomalgMap( psi, M_, Source( beta ) );
-    
-    if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
-       ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
-       HasMonomorphismModuloImage( beta ) then
-        
-        SetIsMorphism( psi, true );
-        
-    fi;
-        
-    return psi;
-    
-end );
-
-##
-InstallMethod( PostDivide,			### defines: PostDivide (LeftDivide (high-level))
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( gamma, beta )
-    local N, psi, M_;
-    
-    N := Range( beta );
-    
-    if not IsIdenticalObj( N, Range( gamma ) ) then
-        Error( "the two morphisms don't have have identically the same target module\n" );
-    fi;
-    
-    ## one of the coolest parts of the code:
-    if HasMonomorphismModuloImage( beta ) then
-        N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
-    else
-        N := RelationsOfModule( N );
-    fi;
-        
-    psi := LeftDivide( MatrixOfMap( beta ), MatrixOfMap( gamma ), N );
-    
-    if psi = fail then
-        Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
-    fi;
-    
-    M_ := Source( gamma );
-    
-    psi := HomalgMap( psi, M_, Source( beta ) );
-    
-    if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
-       ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
-       HasMonomorphismModuloImage( beta ) then
-        
-        SetIsMorphism( psi, true );
-        
-    fi;
-    
-    return psi;
-    
-end );
-
-#=======================================================================
 # Complete an image-square
 #
 #  A_ is a free or beta1 is injective ( cf. [BR, Subsection 3.1.2] )
@@ -910,7 +816,7 @@ InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteI
         
   function( alpha1, phi, beta1 )
     
-    return PostDivide( alpha1 * phi, beta1 );
+    return alpha1 * phi / beta1;
     
 end );
 
@@ -923,7 +829,7 @@ InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteI
         
   function( alpha1, phi, beta1 )
     
-    return PostDivide( phi * alpha1, beta1 );
+    return phi * alpha1 / beta1;
     
 end );
 

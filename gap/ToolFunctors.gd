@@ -29,6 +29,11 @@ DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsChainMapForPullback" );
 
+## PostDivide
+DeclareGlobalFunction( "_Functor_PostDivide_OnObjects" );
+
+DeclareGlobalVariable( "functor_PostDivide" );
+
 ## AsChainMapForPushout
 DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );
 
@@ -49,9 +54,15 @@ DeclareOperation( "AsATwoSequence",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "Compose",
-        [ IsHomalgComplex ] );
+        [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsChainMapForPullback",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "/",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "PostDivide",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsChainMapForPushout",

@@ -1733,6 +1733,25 @@ end );
 ##
 InstallMethod( DecideZeroRows,
         "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( L, B )
+    
+    if IsIdenticalObj( L, B ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRows( M, M )", "\033[0m" );
+        
+        return 0 * L;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DecideZeroRows,
+        "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix ],
         
   function( L, B )
@@ -1786,6 +1805,25 @@ InstallMethod( DecideZeroColumns,
     
     if NrRows( L ) <> NrRows( B ) then
         Error( "the number of rows of the two matrices must coincide\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DecideZeroColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( L, B )
+    
+    if IsIdenticalObj( L, B ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumns( M, M )", "\033[0m" );
+        
+        return 0 * L;
+        
     fi;
     
     TryNextMethod( );
@@ -1857,6 +1895,27 @@ end );
 ##
 InstallMethod( DecideZeroRowsEffectively,
         "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    
+    if IsIdenticalObj( A, B ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( M, M, T )", "\033[0m" );
+        
+        SetPreEval( T, HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+        
+        return 0 * A;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DecideZeroRowsEffectively,
+        "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and HasItsLeftInverse, IsVoidMatrix ],
         
   function( A, B, T )
@@ -1892,13 +1951,10 @@ InstallMethod( DecideZeroRowsEffectively,
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsVoidMatrix ],
         
   function( A, B, T )
-    local R;
-    
-    R := HomalgRing( A );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, IsZero(Matrix), T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -1910,13 +1966,10 @@ InstallMethod( DecideZeroRowsEffectively,
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsVoidMatrix ],
         
   function( A, B, T )
-    local R;
-    
-    R := HomalgRing( A );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsZero(Matrix), IsHomalgMatrix, T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NrRows( A ), NrRows( B ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -1939,6 +1992,27 @@ InstallMethod( DecideZeroColumnsEffectively,
     
     if NrRows( A ) <> NrRows( B ) then
         Error( "the number of rows of the two matrices must coincide\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    
+    if IsIdenticalObj( A, B ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( M, M, T )", "\033[0m" );
+        
+        SetPreEval( T, HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+        
+        return 0 * A;
+        
     fi;
     
     TryNextMethod( );
@@ -1983,13 +2057,10 @@ InstallMethod( DecideZeroColumnsEffectively,
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsVoidMatrix ],
         
   function( A, B, T )
-    local R;
-    
-    R := HomalgRing( A );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, IsZero(Matrix), T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -2001,13 +2072,10 @@ InstallMethod( DecideZeroColumnsEffectively,
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsVoidMatrix ],
         
   function( A, B, T )
-    local R;
-    
-    R := HomalgRing( A );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsZero(Matrix), IsHomalgMatrix, T )", "\033[0m" );
     
-    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), R ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, HomalgZeroMatrix( NrColumns( B ), NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return A;
     
@@ -2030,6 +2098,25 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     if NrColumns( M1 ) <> NrColumns( M2 ) then
         Error( "the number of columns of the two matrices must coincide\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    
+    if IsIdenticalObj( M1, M2 ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( M, M )", "\033[0m" );
+        
+        return HomalgIdentityMatrix( NrRows( M1 ), HomalgRing( M1 ) );
+        
     fi;
     
     TryNextMethod( );
@@ -2118,6 +2205,25 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     if NrRows( M1 ) <> NrRows( M2 ) then
         Error( "the number of rows of the two matrices must coincide\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( SyzygiesGeneratorsOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    
+    if IsIdenticalObj( M1, M2 ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( M, M )", "\033[0m" );
+        
+        return HomalgIdentityMatrix( NrColumns( M1 ), HomalgRing( M1 ) );
+        
     fi;
     
     TryNextMethod( );

@@ -104,6 +104,9 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgGenerators, IsHomalgRelations ] );
 
+DeclareOperation( "ReducedSyzygiesGenerators",
+        [ IsHomalgGenerators, IsHomalgRelations ] );
+
 DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgGenerators ] );
 

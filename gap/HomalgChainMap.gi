@@ -290,6 +290,12 @@ InstallMethod( Add,
   function( cm, phi )
     local d, degrees, l;
     
+    if HasIsChainMapForPullback( cm ) and IsChainMapForPullback( cm ) then
+        Error( "this chain map is write-protected since IsChainMapForPullback = true\n" );
+    elif HasIsChainMapForPushout( cm ) and IsChainMapForPushout( cm ) then
+        Error( "this chain map is write-protected since IsChainMapForPushout = true\n" );
+    fi;
+    
     d := DegreeOfMorphism( cm );
     
     degrees := DegreesOfChainMap( cm );

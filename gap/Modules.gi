@@ -38,7 +38,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     N := GetRidOfObsoleteGenerators( N );
     
     # compute the syzygies of N modulo B, i.e. the relations among N modulo B:
-    S := SyzygiesGenerators( N, B );
+    S := SyzygiesGenerators( N, B );	## using ReducedSyzygiesGenerators here causes too many operations (cf. the ex. Triangle.g)
     
     S := Presentation( N, S );
     
@@ -316,7 +316,7 @@ InstallMethod( SyzygiesModuleEpi,
     
     mu := SyzygiesModuleEmb( q, M );
     
-    epi := PostDivide( CertainMorphism( d, q ), mu );
+    epi := CertainMorphism( d, q ) / mu;
     
     SetIsEpimorphism( epi, true );
     

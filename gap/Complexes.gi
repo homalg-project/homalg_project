@@ -356,7 +356,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := FreeHullEpi( M );
         epsilonN := FreeHullEpi( N );
         
-        epsilonM := PostDivide( epsilonM, psi );
+        epsilonM := epsilonM / psi;
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon := StackMaps( epsilonN, epsilonM );
@@ -395,7 +395,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := SyzygiesModuleEpi( j, M );
         epsilonN := SyzygiesModuleEpi( j, N );
         
-        epsilonM := PostDivide( epsilonM, psi );
+        epsilonM := epsilonM / psi;
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon_j := StackMaps( epsilonN, epsilonM );
@@ -486,7 +486,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := FreeHullEpi( M );
         epsilonN := FreeHullEpi( N );
         
-        epsilonM := PostDivide( epsilonM, psi );
+        epsilonM := epsilonM / psi;
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon := StackMaps( epsilonN, epsilonM );
@@ -525,7 +525,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := SyzygiesModuleEpi( j, M );
         epsilonN := SyzygiesModuleEpi( j, N );
         
-        epsilonM := PostDivide( epsilonM, psi );
+        epsilonM := epsilonM / psi;
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon_j := StackMaps( epsilonN, epsilonM );
@@ -608,10 +608,10 @@ InstallMethod( ConnectingHomomorphism,
     iota_Hsn_1 := NaturalEmbedding( Hsn_1 );
     
     snake := iota_Hqn;
-    snake := PostDivide( snake, jn );
+    snake := snake / jn;
     snake := PreCompose( snake, bn );
-    snake := PostDivide( snake, in_1 );
-    snake := PostDivide( snake, iota_Hsn_1 );
+    snake := snake / in_1;
+    snake := snake / iota_Hsn_1;
     
     return snake;
     

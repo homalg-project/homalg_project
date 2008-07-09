@@ -217,6 +217,12 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
+DeclareOperation( "ReducedSyzygiesGenerators",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "ReducedSyzygiesGenerators",
+        [ IsHomalgMatrix, IsHomalgModule ] );
+
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );
 

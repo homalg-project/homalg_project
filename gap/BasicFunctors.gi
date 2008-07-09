@@ -165,7 +165,7 @@ InstallMethod( ImageSubmoduleEpi,
     
     emb := ImageSubmoduleEmb( phi );
     
-    epi := PostDivide( phi, emb );
+    epi := phi / emb;
     
     SetIsEpimorphism( epi, true );
     
@@ -200,7 +200,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     p := PositionOfTheDefaultSetOfGenerators( S );	## avoid future possible side effects of the following command(s)
     
     ## this following keeps track of the original generators:
-    ker := SyzygiesGenerators( psi ) / S;		## the number of generators of ker might be less than the number of computed syzygies
+    ker := ReducedSyzygiesGenerators( psi ) / S;	## the number of generators of ker might be less than the number of computed syzygies
     
     ## emb is the matrix of the natural embedding
     ## w.r.t. the first set of relations of ker and the p-th set of relations of S
@@ -327,7 +327,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     coker := Presentation( gen, rel );
     
     ## this following keeps track of the original generators:
-    ker := SyzygiesGenerators( post ) / coker;		## the number of generators of ker might be less than the number of computed syzygies
+    ker := ReducedSyzygiesGenerators( post ) / coker;	## the number of generators of ker might be less than the number of computed syzygies
     
     ## emb is the matrix of the "natural embedding" (see below)
     ## w.r.t. the first set of relations of ker and the p-th set of relations of M
