@@ -168,7 +168,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                 matrices[k-1] := RP!.ZeroMatrix( HomalgVoidMatrix( Length( S[k-1] ), Length( S[k] ), R ) );
                 for p in [1..Length( S[k] )] do #column iterator
                     for i in [0..k-1] do #row iterator
-                        ind := Position( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
+                        ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             # matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
                             AddEntry( matrices[k-1], ind, p, MinusOne( R )^i );
@@ -192,7 +192,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                 matrices[k-1] := NullMat( Length( S[k-1] ), Length( S[k] ) );
                 for p in [1..Length( S[k] )] do
                     for i in [0..k-1] do
-                        ind := Position( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
+                        ind := PositionSet( S[k-1], BoundaryOperator( i, S[k][p], ot!.mu ) );
                         if not ind = fail then
                             matrices[k-1][ind][p] := matrices[k-1][ind][p] + MinusOne( R )^i;
                         fi;
