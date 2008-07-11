@@ -302,7 +302,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
         
   function( _q, C )
-    local q, degrees, M, psi, E, phi, N, dM, dN, j,
+    local q, degrees, psi, phi, M, E, N, dM, dN, j,
           index_pair_psi, index_pair_phi, epsilonN, epsilonM, epsilon,
           dj, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
     
@@ -310,11 +310,12 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     
     degrees := ObjectDegreesOfComplex( C );
     
-    M := CertainObject( C, degrees[1] );
     psi := CertainMorphism( C, degrees[2] );
-    E := CertainObject( C, degrees[2] );
     phi := CertainMorphism( C, degrees[3] );
-    N := CertainObject( C, degrees[3] );
+    
+    M := Range( psi );
+    E := Source( psi );
+    N := Source( phi );
     
     dM := Resolution( q, M );
     dN := Resolution( q, N );
@@ -421,6 +422,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
     SetIsAcyclic( dE, true );
+    SetIsExactSequence( horse_shoe, true );
     
     return horse_shoe;
     
@@ -432,19 +434,20 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
         
   function( _q, C )
-    local q, degrees, N, phi, E, psi, M, dM, dN, j,
+    local q, degrees, phi, psi, N, E, M, dM, dN, j,
           index_pair_psi, index_pair_phi, epsilonN, epsilonM, epsilon,
-          dj, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
+          dj, Pj, dE, d_phi, d_psi, horse_shoe, mu, epsilon_j;
     
     q := _q;
     
     degrees := ObjectDegreesOfComplex( C );
     
-    N := CertainObject( C, degrees[1] );
     phi := CertainMorphism( C, degrees[1] );
-    E := CertainObject( C, degrees[2] );
     psi := CertainMorphism( C, degrees[2] );
-    M := CertainObject( C, degrees[3] );
+    
+    N := Source( phi );
+    E := Range( phi );
+    M := Range( psi );
     
     dM := Resolution( q, M );
     dN := Resolution( q, N );
@@ -463,8 +466,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         horse_shoe := C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] ));
         
+        d_phi := CertainMorphism( horse_shoe, degrees[1] );
         d_psi := CertainMorphism( horse_shoe, degrees[2] );
-        d_phi := CertainMorphism( horse_shoe, degrees[3] );
         
         j := HighestDegreeInChainMap( d_psi );
         
@@ -551,6 +554,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
     SetIsAcyclic( dE, true );
+    SetIsExactSequence( horse_shoe, true );
     
     return horse_shoe;
     
@@ -614,6 +618,104 @@ InstallMethod( ConnectingHomomorphism,
     snake := snake / iota_Hsn_1;
     
     return snake;
+    
+end );
+
+## [HS. Proof of Lemma. VIII.9.4]
+InstallMethod( DefectOfExactnessSequence,
+        "for homalg maps",
+        [ IsHomalgComplex and IsATwoSequence ],
+        
+  function( cpx_post_pre )
+    local pre, post, Z_F, B_F, B_Z, H, H_F, Z_H, C;
+    
+    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
+    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    
+    ## read: Z -> F
+    Z_F := KernelEmb( post );
+    
+    ## read: B -> F
+    B_F := ImageSubmoduleEmb( pre );
+    
+    ## read: B -> Z
+    B_Z := B_F / Z_F;
+    
+    H := DefectOfExactness( cpx_post_pre );
+    
+    ## read: H -> F
+    H_F := H!.NaturalEmbedding;
+    
+    ## read: Z -> H
+    Z_H := Z_F / H_F;
+    
+    C := HomalgComplex( Z_H );
+    
+    Add( C, B_Z );
+    
+    SetIsShortExactSequence( C, true );
+    
+    return C;
+    
+end );
+
+## for convenience
+InstallMethod( DefectOfExactnessSequence,
+        "for homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi, psi )
+    
+    return DefectOfExactnessSequence( AsATwoSequence( phi, psi ) );
+    
+end );
+
+## [HS. Proof of Lemma. VIII.9.4]
+InstallMethod( DefectOfExactnessCosequence,
+        "for homalg maps",
+        [ IsHomalgComplex and IsATwoSequence ],
+        
+  function( cpx_post_pre )
+    local pre, post, Z_F, B_F, B_Z, H, H_F, Z_H, C;
+    
+    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
+    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    
+    ## read: Z -> F
+    Z_F := KernelEmb( post );
+    
+    ## read: B -> F
+    B_F := ImageSubmoduleEmb( pre );
+    
+    ## read: B -> Z
+    B_Z := B_F / Z_F;
+    
+    H := DefectOfExactness( cpx_post_pre );
+    
+    ## read: H -> F
+    H_F := H!.NaturalEmbedding;
+    
+    ## read: Z -> H
+    Z_H := Z_F / H_F;
+    
+    C := HomalgCocomplex( B_Z );
+    
+    Add( C, Z_H );
+    
+    SetIsShortExactSequence( C, true );
+    
+    return C;
+    
+end );
+
+## for convenience
+InstallMethod( DefectOfExactnessCosequence,
+        "for homalg composable maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi, psi )
+    
+    return DefectOfExactnessCosequence( AsATwoSequence( phi, psi ) );
     
 end );
 

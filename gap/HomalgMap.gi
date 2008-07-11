@@ -105,6 +105,23 @@ InstallImmediateMethod( IsZero,
     
 end );
 
+##
+InstallImmediateMethod( IsSplitEpimorphism,
+        IsMapOfFinitelyGeneratedModulesRep and IsEpimorphism, 0,
+        
+  function( phi )
+    local T;
+    
+    T := Range( phi );
+    
+    if HasIsProjective( T ) and IsProjective( T ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for properties:
@@ -389,7 +406,25 @@ InstallMethod( \*,
     
     a_phi := HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+    if IsUnit( HomalgRing( phi ), a ) then
+        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+            SetIsIsomorphism( a_phi, true );
+        else
+            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
+                SetIsSplitMonomorphism( a_phi, true );
+            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                SetIsMonomorphism( a_phi, true );
+            fi;
+            
+            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
+                SetIsSplitEpimorphism( a_phi, true );
+            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                SetIsEpimorphism( a_phi, true );
+            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+                SetIsMorphism( a_phi, true );
+            fi;
+        fi;
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
         SetIsMorphism( a_phi, true );
     fi;
     
@@ -469,7 +504,6 @@ end );
 ## composition is a bifunctor to profit from the caching mechanisms for functors (cf. ToolFunctors.gi)
 ##
 
-##
 ##
 InstallMethod( POW,
         "for homalg maps",

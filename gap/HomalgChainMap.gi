@@ -432,6 +432,28 @@ InstallMethod( \*,
         Add( psi, a * morphisms[i] );
     od;
     
+    if IsUnit( HomalgRing( phi ), a ) then
+        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+            SetIsIsomorphism( psi, true );
+        else
+            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
+                SetIsSplitMonomorphism( psi, true );
+            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                SetIsMonomorphism( psi, true );
+            fi;
+            
+            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
+                SetIsSplitEpimorphism( psi, true );
+            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                SetIsEpimorphism( psi, true );
+            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+                SetIsMorphism( psi, true );
+            fi;
+        fi;
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( psi, true );
+    fi;
+    
     return psi;
     
 end );
@@ -463,6 +485,11 @@ InstallMethod( \+,
     for i in [ 2 .. Length( morphisms1 ) ] do
         Add( psi, morphisms1[i] + morphisms2[i] );
     od;
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( psi, true );
+    fi;
     
     return psi;
     
@@ -518,6 +545,11 @@ InstallMethod( \-,
         Add( psi, morphisms1[i] - morphisms2[i] );
     od;
     
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( psi, true );
+    fi;
+    
     return psi;
     
 end );
@@ -553,6 +585,20 @@ InstallMethod( \*,
         Add( psi, morphisms1[i] * morphisms2[i] );
     od;
     
+    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
+       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
+        SetIsMonomorphism( psi, true );
+    fi;
+    
+    ## cannot use elif here:
+    if HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
+       HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
+        SetIsEpimorphism( psi, true );
+    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( psi, true );
+    fi;
+    
     return psi;
     
 end );
@@ -587,6 +633,20 @@ InstallMethod( \*,
     for i in [ 2 .. Length( morphisms1 ) ] do
         Add( psi, morphisms2[i] * morphisms1[i] );
     od;
+    
+    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
+       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
+        SetIsMonomorphism( psi, true );
+    fi;
+    
+    ## cannot use elif here:
+    if HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
+       HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
+        SetIsEpimorphism( psi, true );
+    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( psi, true );
+    fi;
     
     return psi;
     

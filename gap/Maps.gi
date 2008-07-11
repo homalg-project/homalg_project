@@ -85,3 +85,84 @@ InstallMethod( Resolution,
     return Resolution( -1, phi );
     
 end );
+
+## [HS. Prop. II.9.6]
+InstallMethod( CokernelSequence,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local nu, epsilon, C;
+    
+    nu := ImageSubmoduleEmb( phi );
+    
+    epsilon := CokernelEpi( phi );
+    
+    C := HomalgComplex( epsilon );
+    
+    Add( C, nu );
+    
+    return C;
+    
+end );
+
+## [HS. Prop. II.9.6]
+InstallMethod( CokernelCosequence,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local nu, epsilon, C;
+    
+    nu := ImageSubmoduleEmb( phi );
+    
+    epsilon := CokernelEpi( phi );
+    
+    C := HomalgCocomplex( nu );
+    
+    Add( C, epsilon );
+    
+    return C;
+    
+end );
+
+## [HS. Prop. II.9.6]
+InstallMethod( KernelSequence,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local mu, eta, C;
+    
+    mu := KernelEmb( phi );
+    
+    eta := ImageSubmoduleEpi( phi );
+    
+    C := HomalgComplex( eta );
+    
+    Add( C, mu );
+    
+    return C;
+    
+end );
+
+## [HS. Prop. II.9.6]
+InstallMethod( KernelCosequence,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local mu, eta, C;
+    
+    mu := KernelEmb( phi );
+    
+    eta := ImageSubmoduleEpi( phi );
+    
+    C := HomalgCocomplex( mu );
+    
+    Add( C, eta );
+    
+    return C;
+    
+end );
+

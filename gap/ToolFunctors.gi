@@ -135,8 +135,11 @@ InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
     if HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
        HasIsMonomorphism( post ) and IsMonomorphism( post ) then
         SetIsMonomorphism( phi, true );
-    elif HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
-      HasIsEpimorphism( post ) and IsEpimorphism( post ) then
+    fi;
+    
+    ## cannot use elif here:
+    if HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
+       HasIsEpimorphism( post ) and IsEpimorphism( post ) then
         SetIsEpimorphism( phi, true );
     elif HasIsMorphism( pre ) and IsMorphism( pre ) and
       HasIsMorphism( post ) and IsMorphism( post ) then

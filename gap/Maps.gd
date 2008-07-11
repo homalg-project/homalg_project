@@ -22,3 +22,15 @@ DeclareOperation( "Resolution",
 DeclareOperation( "Resolution",
         [ IsHomalgMap ] );
 
+DeclareOperation( "CokernelSequence",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "CokernelCosequence",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "KernelSequence",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "KernelCosequence",
+        [ IsHomalgMap ] );
+

@@ -306,8 +306,8 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
   function( cpx_post_pre )
     local pre, post, M, p, gen, rel, coker, ker, emb;
     
-    if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
-        Error( "expecting a complex containing two morphisms\n" );
+    if not IsATwoSequence( cpx_post_pre ) then
+        Error( "expecting a complex containing two morphisms marked as IsATwoSequence\n" );
     fi;
     
     pre := HighestDegreeMorphismInComplex( cpx_post_pre );

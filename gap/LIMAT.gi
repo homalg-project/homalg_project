@@ -1098,6 +1098,32 @@ end );
 ##
 InstallMethod( \*,
         "of two homalg matrices",
+        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsIdentityMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( A, B )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsIdentityMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of two homalg matrices",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( A, B )
@@ -1126,32 +1152,6 @@ InstallMethod( \*,
     else
         return HomalgZeroMatrix( NrRows( A ), NrColumns( B ), HomalgRing( B ) );
     fi;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsIdentityMatrix * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
-        
-  function( A, B )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsIdentityMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
-    
-    return A;
     
 end );
 

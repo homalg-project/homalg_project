@@ -115,3 +115,112 @@ end );
         return coker;	## this is crucial for IsIdenticalObj( Ext( 0, M, N ), Hom( M, N ) ) = true (we hope there is no need to set further attributes as below)
     fi;
     
+## from HomalgComplex
+##
+InstallMethod( ViewObj,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        
+  function( o )
+    local l, degrees;
+    
+    Print( "<An acyclic complex consisting of " );
+    
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
+    
+    if l = 1 then
+        Print( "a single" );
+    else
+        Print( l );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        Print( " module" );
+        if l > 1 then
+            Print( "s" );
+        fi;
+    else
+        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            Print( " complex" );
+        else
+            Print( " cocomplex" );
+        fi;
+        if l > 1 then
+            Print( "es" );
+        fi;
+    fi;
+    
+    Print( " at degree" );
+    
+    if l = 1 then
+        Print( " ", degrees[1] );
+    else
+        Print( "s ", degrees );
+    fi;
+    
+    Print( ">" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        
+  function( o )
+    local l, degrees;
+    
+    Print( "<An acyclic cocomplex consisting of " );
+    
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
+    
+    if l = 1 then
+        Print( "a single" );
+    else
+        Print( l );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        Print( " module" );
+        if l > 1 then
+            Print( "s" );
+        fi;
+    else
+        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            Print( " complex" );
+        else
+            Print( " cocomplex" );
+        fi;
+        if l > 1 then
+            Print( "es" );
+        fi;
+    fi;
+    
+    Print( " at cohomology degree" );
+    
+    if l = 1 then
+        Print( " ", degrees[1] );
+    else
+        Print( "s ", degrees );
+    fi;
+    
+    Print( ">" );
+    
+end );
+

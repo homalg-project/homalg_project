@@ -31,3 +31,15 @@ DeclareOperation( "Resolution",
 DeclareOperation( "ConnectingHomomorphism",
         [ IsHomalgModule, IsHomalgMap, IsHomalgMap, IsHomalgMap, IsHomalgModule ] );
 
+DeclareOperation( "DefectOfExactnessSequence",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "DefectOfExactnessSequence",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "DefectOfExactnessCosequence",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "DefectOfExactnessCosequence",
+        [ IsHomalgMap, IsHomalgMap ] );
+
