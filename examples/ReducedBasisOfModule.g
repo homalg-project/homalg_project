@@ -22,3 +22,5 @@ C := HomalgComplex( pi, 0 );
 Add( C, iota );
 T := TorsionSubmodule( W );
 F := TorsionFreeFactor( W );
+O := HomalgCocomplex( iota, -1 );
+Add( O, pi );

@@ -1,9 +1,9 @@
 Read( "ReducedBasisOfModule.g" );
 
-triangle := RHom( 3, C, T, "t" );
+triangle := RHom( C, T );
 lecs := LongSequence( triangle );
 IsExactSequence( lecs );
-Triangle := LTensorProduct( 4, C, T, "t" );
+Triangle := LTensorProduct( C, T );
 lehs := LongSequence( Triangle );
 IsExactSequence( lehs );
 ByASmallerPresentation( lecs );
