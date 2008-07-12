@@ -31,7 +31,7 @@ if CAS <> "default" then
     HOMALG_RINGS.FieldOfRationalsDefaultCAS := List_of_CAS[ CAS ];
 fi;
 
-Print( "Select Mode:\n 1) Read example from file (default)\n 2) Create your own ring\n:" );
+Print( "\nSelect Mode:\n 1) Read example from file (default)\n 2) Create your own ring\n:" );
 mode := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
 if mode = fail or not mode in [ 1, 2 ] then
     mode := 1;
@@ -73,28 +73,53 @@ elif mode = 2 then
     i := Int( f );
     
     if f = "" or i = fail then
+        if CAS <> "default" then
+            if List_of_CAS[ CAS ] = "GAP" then
+                Print( "\ngap> R := HomalgFieldOfRationals( );\n" );
+            else
+                Print( "\ngap> R := HomalgFieldOfRationalsIn", List_of_CAS[ CAS ], "( );\n" );
+            fi;
+        else
+            Print( "\ngap> R := HomalgFieldOfRationalsInDefaultCAS( );    # (Default = Singular)\n" );
+        fi;
         R := HomalgFieldOfRationalsInDefaultCAS( );
     else
+        if i <> 0 then
+            str := Concatenation( " ", String( AbsInt( i ) ), " " );
+        else
+            str := " ";
+        fi;
+        if CAS <> "default" then
+            if List_of_CAS[ CAS ] = "GAP" then
+                Print( "\ngap> R := HomalgRingOfIntegers(", str, ");\n" );
+            else
+                Print( "\ngap> R := HomalgRingOfIntegersIn", List_of_CAS[ CAS ], "(", str, ");\n" );
+            fi;
+        else
+            Print( "\ngap> R := HomalgRingOfIntegersInDefaultCAS(", str, ");    # (Default = Maple)\n" );
+        fi;
         R := HomalgRingOfIntegersInDefaultCAS( AbsInt( i ) );
     fi;
     
-    Print( "\nR = " );
+    Print( "gap> Display( R );\n" );
     Display( R );
     
     Print( "\nSelect polynomial extension:\n(-) Hit Enter for no polynomial extension (default)\n(-) Otherwise, type in the names of your variables, seperated by commas - i.e. \"x,y,z\"\n:"  );
     variables := Filtered( ReadLine( input ), c->c <> '\n' );
     
     if variables <> "" then
+        Print( "\ngap> S := R * \"", variables, "\";     #alternatively: 'gap> S := PolynomialRing( R, \"", variables, "\" );'\n" );
         S :=  R * variables;
-        Print( "\nS = " );
-	Display( S );
+        Print( "gap> Display( S );\n" );
+        Display( S );
         
-        Print( "\nIt is possible to work over the Weyl Algebra:\n(-) Hit Enter for the commutative case (default)\n(-) Otherwise, type in the names of your differential variables, seperated by commas - i.e. \"Dx,Dy,Dz\" (this has to be the same number as before)\n:" );
+        Print( "\nIt is possible to work over the Weyl Algebra:\n(-) Hit Enter for the commutative case (default)\n(-) Otherwise, type in the names of your differential variables, seperated by commas - i.e. \"Dx,Dy,Dz\" (same number as before!)\n:" );
         diff_variables := Filtered( ReadLine( input ), c->c <> '\n' );
         
         if diff_variables <> "" then
+            Print( "\ngap> T := RingOfDerivations( S, \"", diff_variables, "\" );\n" );
             T := RingOfDerivations( S, diff_variables );
-            Print( "\nT = " );
+            Print( "gap> Display( T );\n" );
 	    Display( T );
         fi;
     fi;
