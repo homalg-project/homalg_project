@@ -422,7 +422,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
     SetIsAcyclic( dE, true );
-    SetIsExactSequence( horse_shoe, true );
+    SetIsShortExactSequence( horse_shoe, true );
     
     return horse_shoe;
     
@@ -554,7 +554,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
     SetIsAcyclic( dE, true );
-    SetIsExactSequence( horse_shoe, true );
+    SetIsShortExactSequence( horse_shoe, true );
     
     return horse_shoe;
     
@@ -627,34 +627,35 @@ InstallMethod( DefectOfExactnessSequence,
         [ IsHomalgComplex and IsATwoSequence ],
         
   function( cpx_post_pre )
-    local pre, post, Z_F, B_F, B_Z, H, H_F, Z_H, C;
+    local pre, post, F_Z, F_B, Z_B, H, F_H, H_Z, C;
     
     pre := HighestDegreeMorphismInComplex( cpx_post_pre );
     post := LowestDegreeMorphismInComplex( cpx_post_pre );
     
-    ## read: Z -> F
-    Z_F := KernelEmb( post );
+    ## read: F <- Z
+    F_Z := KernelEmb( post );
     
-    ## read: B -> F
-    B_F := ImageSubmoduleEmb( pre );
+    ## read: F <- B
+    F_B := ImageSubmoduleEmb( pre );
     
-    ## read: B -> Z
-    B_Z := B_F / Z_F;
+    ## read: Z <- B
+    Z_B := F_B / F_Z;
     
     H := DefectOfExactness( cpx_post_pre );
     
-    ## read: H -> F
-    H_F := H!.NaturalEmbedding;
+    ## read: F <- H
+    F_H := H!.NaturalEmbedding;
     
-    ## read: Z -> H
-    Z_H := Z_F / H_F;
+    ## read: H <- Z
+    H_Z := F_Z / F_H;
     
-    C := HomalgComplex( Z_H );
+    C := HomalgComplex( H_Z );
     
-    Add( C, B_Z );
+    Add( C, Z_B );
     
     SetIsShortExactSequence( C, true );
     
+    ## read: H <- Z <- B, (H := Z/B)
     return C;
     
 end );
@@ -704,6 +705,7 @@ InstallMethod( DefectOfExactnessCosequence,
     
     SetIsShortExactSequence( C, true );
     
+    ## read: B -> Z -> H, (H := Z/B)
     return C;
     
 end );
@@ -716,6 +718,378 @@ InstallMethod( DefectOfExactnessCosequence,
   function( phi, psi )
     
     return DefectOfExactnessCosequence( AsATwoSequence( phi, psi ) );
+    
+end );
+
+## the Cartan-Eilenberg resolution [HS. Lemma VIII.9.4]
+InstallMethod( Resolution,	### defines: Resolution
+        "for homalg complexes",
+        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep ],
+        
+  function( _q, C )
+    local q, degrees, l, obj, d, mor, index_pairs, QFB, FB, CE,
+          HZB, Z, ZB, PZ, relZ, BFZ, BF, i, FZ;
+    
+    if not IsComplex( C ) then
+        Error( "the second argument is not a complex\n" );
+    fi;
+    
+    q := _q;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    l := Length( degrees ) - 1;
+    
+    obj := ObjectsOfComplex( C );
+    
+    if l = 0 then
+        return HomalgComplex( Resolution( q, obj[1] ), degrees[1] );
+    fi;
+    
+    d := List( obj, M -> Resolution( q, M ) );
+    
+    if q < 0 then
+        q := Maximum( List( obj, LengthOfResolution ) );
+        d := List( obj, M -> Resolution( q, M ) );
+    fi;
+    
+    mor := MorphismsOfComplex( C );
+    
+    index_pairs := List( mor, PairOfPositionsOfTheDefaultSetOfRelations );
+    
+    ## F/B = Q <- F <- B (horse shoe)
+    QFB := Resolution( q, CokernelSequence( mor[1] ) );
+    
+    ## F <- B
+    FB := HighestDegreeMorphismInComplex( QFB );
+    
+    ## F
+    CE := HomalgComplex( Range( FB ), degrees[1] );
+    
+    if l > 1 then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+            ## Z/B =: H <- Z <- B
+            HZB := DefectOfExactnessSequence( mor[2], mor[1] );
+            
+            ## Z <- B
+            ZB := HighestDegreeMorphismInComplex( HZB );
+            
+            Z := Range( ZB );
+            
+            ## horse shoe
+            HZB := Resolution( q, HZB );
+            
+            ## Z <- B
+            ZB := HighestDegreeMorphismInComplex( HZB );
+            
+            ## the horse shoe resolution of Z
+            PZ := Range( ZB );
+            
+            ## make this horse shoe resolution of Z the standard one
+            relZ := RelationsOfModule( Z );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
+            fi;
+            SetFreeResolution( relZ, PZ );
+            
+            ## B <- F <- Z (horse shoe)
+            BFZ := Resolution( q, KernelSequence( mor[1] ) );
+            
+            ## B <- F
+            BF := LowestDegreeMorphismInComplex( BFZ );
+            
+            ## F[i] <- F[i+1]
+            Add( CE, BF * FB );
+            
+            ## F <- Z
+            FZ := HighestDegreeMorphismInComplex( BFZ );
+        else
+            ## Z/B =: H <- Z <- B
+            HZB := DefectOfExactnessSequence( mor[1], mor[2] );
+            
+            ## Z <- B
+            ZB := HighestDegreeMorphismInComplex( HZB );
+            
+            Z := Range( ZB );
+            
+            ## horse shoe
+            HZB := Resolution( q, HZB );
+            
+            ## Z <- B
+            ZB := HighestDegreeMorphismInComplex( HZB );
+            
+            ## the horse shoe resolution of Z
+            PZ := Range( ZB );
+            
+            ## make this horse shoe resolution of Z the standard one
+            relZ := RelationsOfModule( Z );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
+            fi;
+            SetFreeResolution( relZ, PZ );
+            
+            ## B <- F <- Z (horse shoe)
+            BFZ := Resolution( q, KernelSequence( mor[1] ) );
+            
+            ## B <- F
+            BF := LowestDegreeMorphismInComplex( BFZ );
+            
+            ## F[i] <- F[i+1]
+            Add( CE, FB * BF );
+            
+            ## F <- Z
+            FZ := HighestDegreeMorphismInComplex( BFZ );
+        fi;
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+        for i in [ 3 .. l ] do
+            ## Z/B =: H <- Z <- B
+            HZB := DefectOfExactnessSequence( mor[i], mor[i-1] );
+            
+            Z := Range( HighestDegreeMorphismInComplex( HZB ) );
+            
+            ## horse shoe
+            HZB := Resolution( q, HZB );
+            
+            ## the horse shoe resolution of Z
+            PZ := Range( HighestDegreeMorphismInComplex( HZB ) );
+            
+            ## make this horse shoe resolution of Z the standard one
+            relZ := RelationsOfModule( Z );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
+            fi;
+            SetFreeResolution( relZ, PZ );
+            
+            ## B <- F <- Z (horse shoe)
+            BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
+            
+            ## B <- F
+            BF := LowestDegreeMorphismInComplex( BFZ );
+            
+            ## F[i] <- F[i+1]
+            Add( CE, BF * ZB * FZ );
+            
+            ## Z <- B
+            ZB := HighestDegreeMorphismInComplex( HZB );
+            
+            ## F <- Z
+            FZ := HighestDegreeMorphismInComplex( BFZ );
+        od;
+    else
+        for i in [ 3 .. l ] do
+            ## Z/B =: H <- Z <- B
+            HZB := DefectOfExactnessSequence( mor[i-1], mor[i] );
+            
+            Z := Range( HighestDegreeMorphismInComplex( HZB ) );
+            
+            ## horse shoe
+            HZB := Resolution( q, HZB );
+            
+            ## the horse shoe resolution of Z
+            PZ := Range( HighestDegreeMorphismInComplex( HZB ) );
+            
+            ## make this horse shoe resolution of Z the standard one
+            relZ := RelationsOfModule( Z );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
+            fi;
+            SetFreeResolution( relZ, PZ );
+            
+            ## B <- F <- Z (horse shoe)
+            BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
+            
+            ## B <- F
+            BF := LowestDegreeMorphismInComplex( BFZ );
+            
+            ## F[i] <- F[i+1]
+            Add( CE, FZ * ZB * BF );
+            
+            ## Z <- B
+            ZB := HighestDegreeMorphismInComplex( HZB );
+            
+            ## F <- Z
+            FZ := HighestDegreeMorphismInComplex( BFZ );
+        od;
+    fi;
+    
+    ## B <- F <- Z
+    BFZ := Resolution( q, KernelSequence( mor[l] ) );
+    
+    BF := LowestDegreeMorphismInComplex( BFZ );
+    
+    if l > 1 then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+            Add( CE, BF * ZB * FZ );
+        else
+            Add( CE, FZ * ZB * BF );
+        fi;
+    else
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+            Add( CE, BF * FB );
+        else
+            Add( CE, FB * BF );
+        fi;
+    fi;
+    
+    if HasIsExactSequence( C ) and IsExactSequence( C ) then
+        SetIsExactSequence( CE, true );
+    elif HasIsAcyclic( C ) and IsAcyclic( C ) then
+        SetIsAcyclic( CE, true );
+    else
+        SetIsComplex( CE, true );
+    fi;
+    
+    ## Cartan-Eilenberg resolution:
+    return CE;
+    
+end );
+
+## the Cartan-Eilenberg resolution [HS. Lemma VIII.9.4]
+InstallMethod( Resolution,	### defines: Resolution
+        "for homalg complexes",
+        [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( _q, C )
+    local q, degrees, l, obj, d, mor, index_pairs, ZFB, FB, CE,
+          i, BZH, Z, PZ, relZ, BZ, ZF, BFQ, BF;
+    
+    if not IsComplex( C ) then
+        Error( "the second argument is not a cocomplex\n" );
+    fi;
+    
+    q := _q;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    l := Length( degrees ) - 1;
+    
+    obj := ObjectsOfComplex( C );
+    
+    if l = 0 then
+        return HomalgCocomplex( Resolution( q, obj[1] ), degrees[1] );
+    fi;
+    
+    d := List( obj, M -> Resolution( q, M ) );
+    
+    if q < 0 then
+        q := Maximum( List( obj, LengthOfResolution ) );
+        d := List( obj, M -> Resolution( q, M ) );
+    fi;
+    
+    mor := MorphismsOfComplex( C );
+    
+    index_pairs := List( mor, PairOfPositionsOfTheDefaultSetOfRelations );
+    
+    ## Z -> F -> B (horse shoe)
+    ZFB := Resolution( q, KernelCosequence( mor[1] ) );
+    
+    ## F -> B
+    FB := HighestDegreeMorphismInComplex( ZFB );
+    
+    ## F
+    CE := HomalgCocomplex( Source( FB ), degrees[1] );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+        for i in [ 2 .. l ] do
+            ## B -> Z -> H := Z/B
+            BZH := DefectOfExactnessCosequence( mor[i-1], mor[i] );
+            
+            ## B -> Z
+            BZ := LowestDegreeMorphismInComplex( BZH );
+            
+            Z := Range( BZ );
+            
+            ## horse shoe
+            BZH := Resolution( q, BZH );
+            
+            ## B -> Z
+            BZ := LowestDegreeMorphismInComplex( BZH );
+            
+            ## the horse shoe resolution of Z
+            PZ := Range( BZ );
+            
+            ## make this horse shoe resolution of Z the standard one
+            relZ := RelationsOfModule( Z );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
+            fi;
+            SetFreeResolution( relZ, PZ );
+            
+            ## Z -> F -> B (horse shoe)
+            ZFB := Resolution( q, KernelCosequence( mor[i] ) );
+            
+            ## Z -> F
+            ZF := LowestDegreeMorphismInComplex( ZFB );
+            
+            ## F[i-1] -> F[i]
+            Add( CE, FB * BZ * ZF );
+            
+            ## F -> B
+            FB := HighestDegreeMorphismInComplex( ZFB );
+        od;
+    else
+        for i in [ 2 .. l ] do
+            ## B -> Z -> H := Z/B
+            BZH := DefectOfExactnessCosequence( mor[i], mor[i-1] );
+            
+            ## B -> Z
+            BZ := LowestDegreeMorphismInComplex( BZH );
+            
+            Z := Range( BZ );
+            
+            ## horse shoe
+            BZH := Resolution( q, BZH );
+            
+            ## B -> Z
+            BZ := LowestDegreeMorphismInComplex( BZH );
+            
+            ## the horse shoe resolution of Z
+            PZ := Range( BZ );
+            
+            ## make this horse shoe resolution of Z the standard one
+            relZ := RelationsOfModule( Z );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
+            fi;
+            SetFreeResolution( relZ, PZ );
+            
+            ## Z -> F -> B (horse shoe)
+            ZFB := Resolution( q, KernelCosequence( mor[i] ) );
+            
+            ## Z -> F
+            ZF := LowestDegreeMorphismInComplex( ZFB );
+            
+            ## F[i-1] -> F[i]
+            Add( CE, ZF * BZ * FB );
+            
+            ## F -> B
+            FB := HighestDegreeMorphismInComplex( ZFB );
+        od;
+    fi;
+    
+    ## B -> F -> Q = F/B
+    BFQ := Resolution( q, CokernelCosequence( mor[l] ) );
+    
+    BF := LowestDegreeMorphismInComplex( BFQ );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+        Add( CE, FB * BF );
+    else
+        Add( CE, BF * FB );
+    fi;
+    
+    if HasIsExactSequence( C ) and IsExactSequence( C ) then
+        SetIsExactSequence( CE, true );
+    elif HasIsAcyclic( C ) and IsAcyclic( C ) then
+        SetIsAcyclic( CE, true );
+    else
+        SetIsComplex( CE, true );
+    fi;
+    
+    ## Cartan-Eilenberg resolution:
+    return CE;
     
 end );
 

@@ -805,6 +805,88 @@ InstallMethod( LongSequence,
 end );
 
 ##
+InstallMethod( PreCompose,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep,
+          IsComplexOfFinitelyPresentedObjectsRep ],
+        
+  function( C1, C2 )
+    local mor2, mor1, deg, C, l, m;
+    
+    mor2 := MorphismsOfComplex( C2 );
+    
+    if mor2 = [ ] then
+        return C1;
+    fi;
+    
+    mor1 := MorphismsOfComplex( C1 );
+    
+    if mor1 = [ ] then
+        return C2;
+    fi;
+    
+    deg := LowestDegreeInComplex( C2 ) + 1;
+    
+    C := HomalgComplex( mor2[1], deg );
+    
+    l := Length( mor2 );
+    
+    for m in mor2{[ 2 .. l - 1 ]} do
+        Add( C, m );
+    od;
+    
+    Add( C, PreCompose( mor1[1], mor2[l] ) );
+    
+    for m in mor1{[ 2 .. Length( mor1 ) ]} do
+        Add( C, m );
+    od;
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( PreCompose,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep,
+          IsCocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( C1, C2 )
+    local mor1, mor2, deg, C, l, m;
+    
+    mor1 := MorphismsOfComplex( C1 );
+    
+    if mor1 = [ ] then
+        return C2;
+    fi;
+    
+    mor2 := MorphismsOfComplex( C2 );
+    
+    if mor2 = [ ] then
+        return C1;
+    fi;
+    
+    deg := LowestDegreeInComplex( C1 );
+    
+    C := HomalgCocomplex( mor1[1], deg );
+    
+    l := Length( mor1 );
+    
+    for m in mor1{[ 2 .. l - 1 ]} do
+        Add( C, m );
+    od;
+    
+    Add( C, PreCompose( mor1[l], mor2[1] ) );
+    
+    for m in mor2{[ 2 .. Length( mor2 ) ]} do
+        Add( C, m );
+    od;
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( OnLessGenerators,
         "for homalg complexes",
         [ IsHomalgComplex ],

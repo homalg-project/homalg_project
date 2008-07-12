@@ -132,6 +132,9 @@ DeclareOperation( "CertainMorphismAsSubcomplex",
 DeclareOperation( "CertainTwoMorphismsAsSubcomplex",
         [ IsHomalgComplex, IsInt ] );
 
+DeclareOperation( "PreCompose",
+        [ IsHomalgComplex, IsHomalgComplex ] );
+
 DeclareOperation( "LongSequence",
         [ IsHomalgComplex ] );
 

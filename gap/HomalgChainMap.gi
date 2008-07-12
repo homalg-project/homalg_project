@@ -565,7 +565,7 @@ InstallMethod( \*,
     
     
     if not AreComposableMorphisms( phi1, phi2 ) then
-        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal" );
+        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal\n" );
     fi;
     
     degree1 := DegreeOfMorphism( phi1 );
@@ -614,7 +614,7 @@ InstallMethod( \*,
     
     
     if not AreComposableMorphisms( phi2, phi1 ) then
-        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal" );
+        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal\n" );
     fi;
     
     degree1 := DegreeOfMorphism( phi1 );
