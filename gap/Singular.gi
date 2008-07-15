@@ -593,6 +593,8 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     
     SetIsFieldForHomalg( R, true );
     
+    SetGlobalDimension( R, 0 );
+    
     return R;
     
 end );
@@ -697,6 +699,7 @@ InstallMethod( PolynomialRing,
     SetCharacteristic( S, c );
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
+    SetGlobalDimension( S, Length( var ) );
     
     RP := homalgTable( S );
     
@@ -802,6 +805,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     SetIsCommutative( S, false );
     SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
     SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    SetGlobalDimension( S, Length( var ) );
     
     RP := homalgTable( S );
     

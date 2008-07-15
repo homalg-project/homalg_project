@@ -163,15 +163,22 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
         R := RingForHomalgInSage( [ command, c, ")" ], IsPrincipalIdealRing );
     fi;
     
-    if IsPrime(c) then
+    SetCharacteristic( R, c );
+    
+    if IsPrime( c ) then
         SetIsFieldForHomalg( R, true );
     else
         SetIsFieldForHomalg( R, false );
         SetIsIntegersForHomalg( R, true );
     fi;
     
-    
-    SetCharacteristic( R, c );
+    if c = 0 then
+        SetGlobalDimension( R, 1 );
+    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
+        SetGlobalDimension( R, 0 );
+    else
+        SetGlobalDimension( R, infinity );
+    fi;
     
     return R;
     
@@ -189,6 +196,8 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSage,
     SetCharacteristic( R, 0 );
     
     SetIsFieldForHomalg( R, true );
+    
+    SetGlobalDimension( R, 0 );
     
     return R;
     

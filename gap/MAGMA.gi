@@ -32,7 +32,7 @@ InstallValue( HOMALG_IO_MAGMA,
             error_stdout := " error",	## a MAGMA specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "delete ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
-            multiple_delete := _MAGMA_multiple_delete,
+#            multiple_delete := _MAGMA_multiple_delete,
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
@@ -429,6 +429,14 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
         SetIsIntegersForHomalg( R, true );
     fi;
     
+    if c = 0 then
+        SetGlobalDimension( R, 1 );
+    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
+        SetGlobalDimension( R, 0 );
+    else
+        SetGlobalDimension( R, infinity );
+    fi;
+    
     return R;
     
 end );
@@ -445,6 +453,8 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
     SetCharacteristic( R, 0 );
     
     SetIsFieldForHomalg( R, true );
+    
+    SetGlobalDimension( R, 0 );
     
     return R;
     
@@ -507,6 +517,7 @@ InstallMethod( PolynomialRing,
     SetCharacteristic( S, c );
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
+    SetGlobalDimension( S, Length( var ) );
     
     return S;
     

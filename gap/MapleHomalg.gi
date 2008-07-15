@@ -557,6 +557,14 @@ InstallGlobalFunction( HomalgRingOfIntegersInMaple,
         SetIsIntegersForHomalg( R, true );
     fi;
     
+    if c = 0 then
+        SetGlobalDimension( R, 1 );
+    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
+        SetGlobalDimension( R, 0 );
+    else
+        SetGlobalDimension( R, infinity );
+    fi;
+    
     return R;
     
 end );
@@ -571,6 +579,8 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
     R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
     
     SetCharacteristic( R, 0 );
+    
+    SetGlobalDimension( R, 0 );
     
     SetIsFieldForHomalg( R, true );
     
@@ -635,6 +645,7 @@ InstallMethod( PolynomialRing,
     SetCharacteristic( S, c );
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
+    SetGlobalDimension( S, Length( var ) );
     
     return S;
     
@@ -706,6 +717,7 @@ InstallMethod( RingOfDerivations,
     SetIsCommutative( S, false );
     SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
     SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    SetGlobalDimension( S, Length( var ) );
     
     return S;
     

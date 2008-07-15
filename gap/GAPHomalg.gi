@@ -170,6 +170,14 @@ InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
         SetIsIntegersForHomalg( R, true );
     fi;
     
+    if c = 0 then
+        SetGlobalDimension( R, 1 );
+    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
+        SetGlobalDimension( R, 0 );
+    else
+        SetGlobalDimension( R, infinity );
+    fi;
+    
     return R;
     
 end );
@@ -186,6 +194,8 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
     SetCharacteristic( R, 0 );
     
     SetIsFieldForHomalg( R, true );
+    
+    SetGlobalDimension( R, 0 );
     
     return R;
     
