@@ -67,6 +67,12 @@ DeclareAttribute( "TheIdentityMorphism",
 DeclareAttribute( "RankOfModule",
         IsHomalgModule );
 
+DeclareAttribute( "DegreeOfTorsionFreeness",
+        IsHomalgModule );
+
+DeclareAttribute( "CodimOfModule",
+        IsHomalgModule );
+
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 

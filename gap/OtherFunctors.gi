@@ -350,6 +350,40 @@ InstallMethod( Pushout,
     
 end );
 
+##
+## AuslanderDual
+##
+
+InstallGlobalFunction( _Functor_AuslanderDual_OnObjects,	### defines: AuslanderDual
+  function( M )
+    local d, rel, DM;
+    
+    d := Resolution( 1, M );
+    
+    rel := MatrixOfMap( CertainMorphism( d, 1 ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        DM := RightPresentation( rel );
+    else
+        DM := LeftPresentation( rel );
+    fi;
+    
+    return DM;
+    
+end );
+
+InstallValue( functor_AuslanderDual,
+        CreateHomalgFunctor(
+                [ "name", "AuslanderDual" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "contravariant" ], [ IsHomalgModule ] ] ],
+                [ "OnObjects", _Functor_AuslanderDual_OnObjects ]
+                )
+        );
+
+functor_AuslanderDual!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
 ####################################
 #
 # methods for operations & attributes:
@@ -386,14 +420,19 @@ InstallMethod( \+,
 end );
 
 ##
-## Pulback( chm_phi_beta1 )
+## Pulback( chm_phi_beta1 ) = Pullback( phi, beta1 )
 ##
 
 InstallFunctorOnObjects( functor_Pullback );
 
 ##
-## Pulback( chm_phi_beta1 )
+## Pushout( chm_alpha1_psi ) = Pushout( alpha1, psi )
 ##
 
 InstallFunctorOnObjects( functor_Pushout );
 
+##
+## AuslanderDual( M )
+##
+
+InstallFunctorOnObjects( functor_AuslanderDual );

@@ -177,3 +177,154 @@ InstallImmediateMethod( IsTorsion,
     
 end );
 
+####################################
+#
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsTorsionFree,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return IsZero( TorsionSubmodule( M ) );
+    
+end );
+
+##
+InstallMethod( IsTorsion,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return IsZero( TorsionFreeFactor( M ) );
+    
+end );
+
+##
+InstallMethod( IsReflexive,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return IsTorsionFree( M ) and IsZero( Ext( 2, AuslanderDual( M ) ) );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, K;
+    
+    R := HomalgRing( M );
+    
+    if HasIsCommutative( R ) and IsCommutative( R ) then
+        K := SyzygiesModule( M );
+        return IsZero( Ext( 1, M, K ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ], 1001,
+        
+  function( M )
+    
+    if not IsReflexive( M ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
+# methods for attributes:
+#
+####################################
+
+##
+InstallMethod( DegreeOfTorsionFreeness,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local DM, R, gdim, k;
+    
+    DM := AuslanderDual( M );
+    
+    if IsTorsionFree( M ) then
+        k := 2;
+    else
+        return 0;
+    fi;
+    
+    if IsReflexive( M ) then
+        k := 3;
+    fi;	## do not return 1 in case the ring has global dimension 0
+    
+    R := HomalgRing( M );
+    
+    if not HasGlobalDimension( R ) then
+        return fail;
+    fi;
+    
+    gdim := GlobalDimension( R );
+    
+    while k <= gdim do
+        if not IsZero( Ext( k, DM ) ) then
+            return k - 1;
+        fi;
+        k := k + 1;
+    od;
+    
+    return gdim;
+    
+end );
+
+##
+InstallMethod( CodimOfModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, gdim, k;
+    
+    if IsTorsion( M ) then
+        k := 1;
+    else
+        return 0;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if not HasGlobalDimension( R ) then
+        return fail;
+    fi;
+    
+    gdim := GlobalDimension( R );
+    
+    while k <= gdim do
+        if not IsZero( Ext( k, M ) ) then
+            return k;
+        fi;
+        k := k + 1;
+    od;
+    
+    return gdim;
+    
+end );
+

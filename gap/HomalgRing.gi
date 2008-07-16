@@ -457,6 +457,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     nargs := Length( arg );
     
     if nargs = 0 or arg[1] = 0 then
+        c := 0;
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
         if LoadPackage( "GaussForHomalg" ) <> true then
@@ -470,6 +471,14 @@ InstallGlobalFunction( HomalgRingOfIntegers,
         fi;
     else
         Error( "the first argument must be an integer\n" );
+    fi;
+    
+    if c = 0 then
+        SetGlobalDimension( R, 1 );
+    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
+        SetGlobalDimension( R, 0 );
+    else
+        SetGlobalDimension( R, infinity );
     fi;
     
     return R;
@@ -486,6 +495,8 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     SetIsFieldForHomalg( R, true );
     
     LoadPackage( "GaussForHomalg" );
+    
+    SetGlobalDimension( R, 0 );
     
     return R;
     

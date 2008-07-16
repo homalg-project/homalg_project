@@ -66,6 +66,9 @@ DeclareAttribute( "ImageSubmoduleEmb",
 DeclareAttribute( "ImageSubmoduleEpi",
         IsHomalgMap );
 
+DeclareAttribute( "NatTrIdToHomHom_R",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:

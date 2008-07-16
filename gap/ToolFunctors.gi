@@ -334,6 +334,10 @@ InstallMethod( PostDivide,
         
   function( gamma, beta )
     
+    if not IsIdenticalObj( Range( gamma ), Range( beta ) ) then
+        Error( "the two morphisms don't have have identically the same target module\n" );
+    fi;
+    
     return PostDivide( AsChainMapForPullback( gamma, beta ) );
     
 end );

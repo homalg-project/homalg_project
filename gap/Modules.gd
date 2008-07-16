@@ -16,6 +16,8 @@
 
 DeclareGlobalFunction( "ParametrizeModule" );
 
+DeclareGlobalFunction( "AsEpimorphicImage" );
+
 # basic operations:
 
 DeclareOperation( "/",
@@ -27,11 +29,17 @@ DeclareOperation( "/",
 DeclareOperation( "/",
         [ IsHomalgRelations, IsHomalgModule ] );
 
+DeclareOperation( "BoundForResolution",
+        [ IsHomalgRelations ] );
+
 DeclareOperation( "Resolution",
         [ IsInt, IsHomalgRelations ] );
 
 DeclareOperation( "Resolution",
         [ IsHomalgRelations ] );
+
+DeclareOperation( "BoundForResolution",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "Resolution",
         [ IsInt, IsHomalgModule ] );

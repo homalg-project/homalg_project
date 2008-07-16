@@ -58,28 +58,6 @@ InstallMethod( IsZero,
     
 end );
 
-##
-InstallMethod( IsTorsionFree,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return IsZero( TorsionSubmodule( M ) );
-    
-end );
-
-##
-InstallMethod( IsTorsion,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return IsZero( TorsionFreeFactor( M ) );
-    
-end );
-
 ####################################
 #
 # methods for attributes:

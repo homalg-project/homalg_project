@@ -64,6 +64,33 @@ InstallMethod( \/,				## needed by _Functor_Kernel_OnObjects since SyzygiesGener
     
 end );
 
+##
+InstallMethod( BoundForResolution,
+        "for homalg relations",
+        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, q;
+    
+    R := HomalgRing( M );
+    
+    if IsBound( M!.MaximumNumberOfResolutionSteps )
+       and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+        q := M!.MaximumNumberOfResolutionSteps;
+    elif IsBound( R!.MaximumNumberOfResolutionSteps )
+      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+        q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG.MaximumNumberOfResolutionSteps;
+    else
+        q := infinity;
+    fi;
+    
+    return q;
+    
+end );
+
 ## ( cf. [BR, Subsection 3.2.1] )
 InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
@@ -78,24 +105,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     R := HomalgRing( M );
     
     if _q < 0 then
-        if IsHomalgRelationsOfLeftModule( M ) and HasLeftGlobalDimension( M ) then
-            q := LeftGlobalDimension( M );
-        elif IsHomalgRelationsOfRightModule( M ) and HasRightGlobalDimension( M ) then
-            q := RightGlobalDimension( M );
-        elif HasGlobalDimension( M ) then
-            q := GlobalDimension( M );
-        elif IsBound( M!.MaximumNumberOfResolutionSteps )
-          and IsInt( M!.MaximumNumberOfResolutionSteps ) then
-            q := M!.MaximumNumberOfResolutionSteps;
-        elif IsBound( R!.MaximumNumberOfResolutionSteps )
-          and IsInt( R!.MaximumNumberOfResolutionSteps ) then
-            q := R!.MaximumNumberOfResolutionSteps;
-        elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
-          and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
-            q := HOMALG.MaximumNumberOfResolutionSteps;
-        else
-            q := infinity;
-        fi;
+        q := BoundForResolution( M );
     elif _q = 0 then
         q := 1;		## this is the minimum
     else
@@ -183,16 +193,65 @@ InstallMethod( Resolution,
     
 end );
 
+InstallMethod( BoundForResolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, q;
+    
+    R := HomalgRing( M );
+    
+    if HasLeftGlobalDimension( M ) then
+        q := LeftGlobalDimension( M );
+    elif HasRightGlobalDimension( M ) then
+        q := RightGlobalDimension( M );
+    elif HasGlobalDimension( M ) then
+        q := GlobalDimension( M );
+    elif IsBound( M!.UpperBoundForProjectiveDimension )
+      and IsInt( M!.UpperBoundForProjectiveDimension ) then
+        q := M!.UpperBoundForProjectiveDimension;
+    elif IsBound( M!.MaximumNumberOfResolutionSteps )
+      and IsInt( M!.MaximumNumberOfResolutionSteps ) then
+        q := M!.MaximumNumberOfResolutionSteps;
+    elif IsBound( R!.MaximumNumberOfResolutionSteps )
+      and IsInt( R!.MaximumNumberOfResolutionSteps ) then
+        q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG.MaximumNumberOfResolutionSteps;
+    else
+        q := infinity;
+    fi;
+    
+    return q;
+    
+end );
+
+##
 InstallMethod( Resolution,
         "for homalg modules",
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
-  function( q, M )
-    local rel, d, d_1;
+  function( _q, M )
+    local rel, q, d, d_1;
     
     rel := RelationsOfModule( M );
     
+    if _q < 0 then
+        rel!.MaximumNumberOfResolutionSteps := BoundForResolution( M );
+        q := _q;
+    elif _q = 0 then
+        q := 1;		## this is the minimum
+    else
+        q := _q;
+    fi;
+    
     d := Resolution( q, rel );
+    
+    if IsBound( d!.LengthOfResolution ) then
+        M!.UpperBoundForProjectiveDimension := d!.LengthOfResolution;
+    fi;
     
     d_1 := CertainMorphism( d, 1 );
     
@@ -486,3 +545,30 @@ InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule	(incomp
     return par;
     
 end );
+
+##
+InstallGlobalFunction( AsEpimorphicImage,
+  function( phi )
+    local nargs, M, rel, TI, T;
+    
+    if not IsMapOfFinitelyGeneratedModulesRep( phi ) then
+        Error( "the first argument must be a map\n" );
+    fi;
+    
+    if not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
+        Error( "the first argument must be an epimorphism\n" );
+    fi;
+    
+    M := Range( phi );
+    
+    rel := RelationsOfModule( M );
+    
+    TI := MatrixOfMap( phi );
+    
+    ## phi^-1 is not necessarily a morphism
+    T := MatrixOfMap( phi^-1 );		## Source( phi ) does not play any role!!!
+    
+    return AddANewPresentation( M, rel * T, T, TI );
+    
+end );
+

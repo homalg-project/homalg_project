@@ -99,6 +99,9 @@ InstallValue( LogicalImplicationsForHomalgRings,
 
 InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings, IsHomalgRing );
 
+##
+InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
+
 ####################################
 #
 # immediate methods for properties:
@@ -106,5 +109,48 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings, IsHomalg
 ####################################
 
 ##
-InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
+InstallImmediateMethod( IsLeftGlobalDimensionFinite,
+        IsHomalgRing and HasLeftGlobalDimension, 0,
+        
+  function( R )
+    
+    return LeftGlobalDimension( R ) < infinity;
+    
+end );
+
+##
+InstallImmediateMethod( IsRightGlobalDimensionFinite,
+        IsHomalgRing and HasRightGlobalDimension, 0,
+        
+  function( R )
+    
+    return RightGlobalDimension( R ) < infinity;
+    
+end );
+
+####################################
+#
+# immediate methods for attributes:
+#
+####################################
+
+##
+InstallImmediateMethod( LeftGlobalDimension,
+        IsHomalgRing and HasGlobalDimension, 0,
+        
+  function( R )
+    
+    return GlobalDimension( R );
+    
+end );
+
+##
+InstallImmediateMethod( RightGlobalDimension,
+        IsHomalgRing and HasGlobalDimension, 0,
+        
+  function( R )
+    
+    return GlobalDimension( R );
+    
+end );
 

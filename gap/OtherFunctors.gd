@@ -41,6 +41,11 @@ DeclareGlobalFunction( "_Functor_Pushout_OnObjects" );
 
 DeclareGlobalVariable( "functor_Pushout" );
 
+## AuslanderDual
+DeclareGlobalFunction( "_Functor_AuslanderDual_OnObjects" );
+
+DeclareGlobalVariable( "functor_AuslanderDual" );
+
 ####################################
 #
 # attributes:
@@ -93,4 +98,7 @@ DeclareOperation( "Pushout",
 
 DeclareOperation( "Pushout",
         [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "AuslanderDual",
+        [ IsHomalgModule ] );
 

@@ -594,6 +594,35 @@ Functor_Hom!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
+InstallMethod( NatTrIdToHomHom_R,
+        "for homalg maps",
+        [ IsFinitelyPresentedModuleRep ],
+  function( M )
+    local HM, iota, HHM, bas, epsilon;
+    
+    HM := Hom( M );
+    
+    iota := MatrixOfGenerators( HM );
+    
+    HHM := Hom( HM );
+    
+    bas := MatrixOfGenerators( HHM );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        epsilon := RightDivide( iota, bas );
+    else
+        epsilon := LeftDivide( iota, bas );
+    fi;
+    
+    epsilon := HomalgMap( epsilon, M, HHM );
+    
+    SetIsMorphism( epsilon, true );
+    
+    return epsilon;
+    
+end );
+
+##
 ## TensorProduct
 ##
 
