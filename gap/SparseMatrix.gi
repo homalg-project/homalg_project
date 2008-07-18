@@ -549,7 +549,7 @@ InstallGlobalFunction( SparseDiagMat,
         return SparseDiagMat( Concatenation( [ SparseDiagMat( e{[1,2]} ) ], e{[ 3 .. Length( e ) ]} ) );
     else
         if IsSparseMatrixGF2Rep( e[1] ) then
-            return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1].ncols ) );
+            return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1]!.ncols ) );
         else
             return SparseMatrix( e[1]!.nrows + e[2]!.nrows, e[1]!.ncols + e[2]!.ncols, Concatenation( e[1]!.indices, e[2]!.indices + e[1]!.ncols ), Concatenation( e[1]!.entries, e[2]!.entries ), e[1]!.ring );
         fi;
