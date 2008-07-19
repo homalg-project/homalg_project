@@ -29,20 +29,23 @@ DeclareCategory( "IsHomalgChainSelfMap",
 #
 ####################################
 
+DeclareProperty( "IsQuasiIsomorphism",
+        IsHomalgChainMap );
+
 DeclareProperty( "IsImageSquare",
-        IsHomalgMorphism );
+        IsHomalgChainMap );
 
 DeclareProperty( "IsKernelSquare",
-        IsHomalgMorphism );
+        IsHomalgChainMap );
 
 DeclareProperty( "IsLambekPairOfSquares",
-        IsHomalgMorphism );
+        IsHomalgChainMap );
 
 DeclareProperty( "IsChainMapForPullback",
-        IsHomalgMorphism );
+        IsHomalgChainMap );
 
 DeclareProperty( "IsChainMapForPushout",
-        IsHomalgMorphism );
+        IsHomalgChainMap );
 
 ####################################
 #

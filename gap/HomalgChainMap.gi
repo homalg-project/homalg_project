@@ -128,6 +128,28 @@ InstallMethod( IsMorphism,
     
 end );
 
+##
+InstallMethod( IsMonomorphism,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    
+    return IsMorphism( cm ) and ForAll( MorphismsOfChainMap( cm ), IsMonomorphism );	## not true for split monomorphisms
+    
+end );
+
+##
+InstallMethod( IsEpimorphism,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    
+    return IsMorphism( cm ) and ForAll( MorphismsOfChainMap( cm ), IsEpimorphism );	## not true for split epimorphisms
+    
+end );
+
 ####################################
 #
 # methods for operations:
@@ -836,7 +858,17 @@ InstallMethod( homalgResetFilters,
     
     if not IsBound( HOMALG.PropertiesOfChainMaps ) then
         HOMALG.PropertiesOfChainMaps :=
-          [ IsZero, IsMorphism, IsImageSquare, IsKernelSquare, IsLambekPairOfSquares ];
+          [ IsZero,
+            IsMorphism,
+            IsSplitMonomorphism,
+            IsMonomorphism,
+            IsSplitEpimorphism,
+            IsEpimorphism,
+            IsIsomorphism,
+            IsQuasiIsomorphism,
+            IsImageSquare,
+            IsKernelSquare,
+            IsLambekPairOfSquares ];
     fi;
     
     for property in HOMALG.PropertiesOfChainMaps do
@@ -1099,8 +1131,15 @@ InstallMethod( Display,
         [ IsChainMapOfFinitelyPresentedObjectsRep ],
         
   function( o )
+    local i;
     
-    Print( "not implemented yet <--", "\n" );
+    for i in DegreesOfChainMap( o ) do
+        Print( "-------------------------\n" );
+        Print( "at homology degree: ", i, "\n" );
+        Display( CertainMorphism( o, i ) );
+    od;
+    
+    Print( "-------------------------\n" );
     
 end );
 
@@ -1110,8 +1149,15 @@ InstallMethod( Display,
         [ IsCochainMapOfFinitelyPresentedObjectsRep ],
         
   function( o )
+    local i;
     
-    Print( "not implemented yet -->", "\n" );
+    for i in DegreesOfChainMap( o ) do
+        Print( "---------------------------\n" );
+        Print( "at cohomology degree: ", i, "\n" );
+        Display( CertainMorphism( o, i ) );
+    od;
+    
+    Print( "-------------------------\n" );
     
 end );
 

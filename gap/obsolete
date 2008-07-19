@@ -224,3 +224,20 @@ InstallMethod( ViewObj,
     
 end );
 
+## from HomalgMatrix
+
+    internal := false;
+    
+    if IsMatrix( M ) then
+        internal := true;
+    elif IsList( M ) and ForAll( M, a -> a = [ ] ) then	## this must remain above the next ifs
+        internal := true;
+    elif IsBound( HOMALG.OtherInternalMatrixTypes ) then
+        for ar in HOMALG.OtherInternalMatrixTypes do
+            internal := internal or ar( M );
+            if internal then
+                break;
+            fi;
+        od;
+    fi;
+    

@@ -25,33 +25,6 @@ DeclareCategory( "IsHomalgSelfMap",
 
 ####################################
 #
-# properties:
-#
-####################################
-
-DeclareProperty( "IsIdentityMorphism",
-        IsHomalgMap );
-
-DeclareProperty( "IsMonomorphism",
-        IsHomalgMap );
-
-DeclareProperty( "IsEpimorphism",
-        IsHomalgMap );
-
-DeclareProperty( "IsSplitMonomorphism",
-        IsHomalgMap );
-
-DeclareProperty( "IsSplitEpimorphism",
-        IsHomalgMap );
-
-DeclareProperty( "IsIsomorphism",
-        IsHomalgMap );
-
-DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
-        IsHomalgMap );
-
-####################################
-#
 # attributes:
 #
 ####################################

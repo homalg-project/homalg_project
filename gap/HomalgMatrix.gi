@@ -905,7 +905,7 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, M, ar, type, matrix, RP, internal;
+    local nargs, R, M, ar, type, matrix, RP;
     
     nargs := Length( arg );
     
@@ -915,7 +915,8 @@ InstallGlobalFunction( HomalgMatrix,
     fi;
     
     if nargs > 1 and arg[1] <> [ ] then
-        if IsHomalgMatrix( arg[1] ) and IsHomalgRing( arg[nargs] ) then
+        if ( IsHomalgMatrix( arg[1] ) and IsHomalgRing( arg[nargs] ) ) and
+           not ( IsHomalgInternalMatrixRep( arg[1] ) and IsHomalgInternalRingRep( arg[nargs] ) ) then
             R := arg[nargs];
             if IsIdenticalObj( HomalgRing( arg[1] ), R ) then
                 M := ShallowCopy( arg[1] );
@@ -923,9 +924,21 @@ InstallGlobalFunction( HomalgMatrix,
                     return M;
                 fi;
             fi;
+            
+            if LoadPackage( "IO_ForHomalg" ) <> true then
+                Error( "the package IO_ForHomalg failed to load\n" );
+            fi;
+            
             return CallFuncList( ConvertHomalgMatrix, arg );
+            
         elif IsString( arg[1] ) then
+            
+            if LoadPackage( "IO_ForHomalg" ) <> true then
+                Error( "the package IO_ForHomalg failed to load\n" );
+            fi;
+            
             return CallFuncList( ConvertHomalgMatrix, arg );
+            
         elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] ) then
             if Length( arg[1] ) > 0 and not IsList( arg[1][1] )
                and not ( nargs > 1 and IsInt( arg[2]) ) and not ( nargs > 2 and IsInt( arg[3] ) ) then ## CAUTION: some CAS only accept a list and not a listlist
@@ -936,7 +949,12 @@ InstallGlobalFunction( HomalgMatrix,
             
             ar := Concatenation( [ M ], arg{[ 2 .. nargs ]} );
             
+            if LoadPackage( "IO_ForHomalg" ) <> true then
+                Error( "the package IO_ForHomalg failed to load\n" );
+            fi;
+            
             return CallFuncList( ConvertHomalgMatrix, ar );
+            
         fi;
     fi;
     
@@ -944,6 +962,10 @@ InstallGlobalFunction( HomalgMatrix,
     
     if not IsHomalgRing( R ) then
         Error( "the last argument must be an IsHomalgRing\n" );
+    fi;
+    
+    if nargs > 1 and arg[1] = [ ] then
+        return HomalgZeroMatrix( 0, 0, R );
     fi;
     
     if IsHomalgInternalRingRep( R ) then
@@ -970,26 +992,17 @@ InstallGlobalFunction( HomalgMatrix,
         if IsBound(RP!.ConvertMatrix) then
             M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
         fi;
+    elif IsHomalgInternalMatrixRep( arg[1] ) and IsHomalgInternalRingRep( R ) then
+        M := Eval( arg[1] );
+        RP := homalgTable( R );
+        if IsBound(RP!.ConvertMatrix) then
+            M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
+        fi;
     else
         M := arg[1];
     fi;
     
-    internal := false;
-    
-    if IsMatrix( M ) then
-        internal := true;
-    elif IsList( M ) and ForAll( M, a -> a = [ ] ) then	## this must remain above the next ifs
-        internal := true;
-    elif IsBound( HOMALG.OtherInternalMatrixTypes ) then
-        for ar in HOMALG.OtherInternalMatrixTypes do
-            internal := internal or ar( M );
-            if internal then
-                break;
-            fi;
-        od;
-    fi;
-    
-    if internal then ## TheTypeHomalgInternalMatrix
+    if IsHomalgInternalRingRep( R ) then ## TheTypeHomalgInternalMatrix
         
         ## Objectify:
         ObjectifyWithAttributes(

@@ -73,6 +73,27 @@ DeclareCategory( "IsContainerForWeakPointers",
 DeclareProperty( "IsMorphism",
         IsHomalgMorphism );
 
+DeclareProperty( "IsIdentityMorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsMonomorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsEpimorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsSplitMonomorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsSplitEpimorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsIsomorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
+        IsHomalgMorphism );
+
 ####################################
 #
 # attributes:

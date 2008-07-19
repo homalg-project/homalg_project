@@ -72,3 +72,40 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMorphisms, IsHo
 
 InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgEndomorphisms, IsHomalgEndomorphism );
 
+####################################
+#
+# immediate methods for properties:
+#
+####################################
+
+##
+InstallImmediateMethod( IsAutomorphism,
+        IsHomalgMorphism, 0,
+        
+  function( phi )
+    
+    if not IsIdenticalObj( Source( phi ), Range( phi ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsIsomorphism,
+        "for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    
+    return IsMonomorphism( phi ) and IsEpimorphism( phi );
+    
+end );
+
