@@ -155,6 +155,39 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
+InstallMethod( CertainGenerators,
+        "for sets of generators of homalg modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule, IsList ],
+        
+  function( gen, list )
+    
+    return CertainRows( MatrixOfGenerators( gen ), list );
+    
+end );
+
+##
+InstallMethod( CertainGenerators,
+        "for sets of generators of homalg modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule, IsList ],
+        
+  function( gen, list )
+    
+    return CertainColumns( MatrixOfGenerators( gen ), list );
+    
+end );
+
+##
+InstallMethod( CertainGenerator,
+        "for sets of generators of homalg modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep, IsPosInt ],
+        
+  function( gen, pos )
+    
+    return CertainGenerators( gen, [ pos ] );
+    
+end );
+
+##
 InstallMethod( NewHomalgGenerators,
         "for sets of generators of homalg modules",
         [ IsHomalgMatrix, IsGeneratorsOfFinitelyGeneratedModuleRep ],

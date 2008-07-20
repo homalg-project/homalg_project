@@ -86,6 +86,12 @@ DeclareOperation( "HasNrGenerators",
 DeclareOperation( "NrGenerators",
         [ IsHomalgGenerators ] );
 
+DeclareOperation( "CertainGenerators",
+        [ IsHomalgGenerators, IsList ] );
+
+DeclareOperation( "CertainGenerator",
+        [ IsHomalgGenerators, IsPosInt ] );
+
 DeclareOperation( "NewHomalgGenerators",
         [ IsHomalgMatrix, IsHomalgGenerators ] );
 
