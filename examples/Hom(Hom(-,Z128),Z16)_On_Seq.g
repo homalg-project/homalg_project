@@ -16,3 +16,5 @@ L := RightPresentation( [ 2^4 ], R );
 triangle := LHomHom( 4, seq, K, L, "t" );
 lehs := LongSequence( triangle );
 ByASmallerPresentation( lehs );
+
+IsComplex( lehs );
