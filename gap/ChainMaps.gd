@@ -17,5 +17,20 @@
 # basic operations:
 
 DeclareOperation( "DefectOfExactness",
+        [ IsHomalgChainMap, IsInt ] );
+
+DeclareOperation( "Homology",
+        [ IsHomalgChainMap, IsInt ] );
+
+DeclareOperation( "Cohomology",
+        [ IsHomalgChainMap, IsInt ] );
+
+DeclareOperation( "DefectOfExactness",
+        [ IsHomalgChainMap ] );
+
+DeclareOperation( "Homology",
+        [ IsHomalgChainMap ] );
+
+DeclareOperation( "Cohomology",
         [ IsHomalgChainMap ] );
 

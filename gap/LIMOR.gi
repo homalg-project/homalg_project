@@ -62,6 +62,18 @@ InstallValue( LogicalImplicationsForHomalgEndomorphisms,
           
           ] );
 
+##
+InstallValue( LogicalImplicationsForHomalgChainMaps,
+        [ 
+          
+          [ IsGradedMorphism,
+            "implies", IsMorphism ],
+          
+          [ IsIsomorphism,
+            "implies", IsQuasiIsomorphism ],
+          
+          ] );
+
 ####################################
 #
 # logical implications methods:
@@ -71,6 +83,8 @@ InstallValue( LogicalImplicationsForHomalgEndomorphisms,
 InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMorphisms, IsHomalgMorphism );
 
 InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgEndomorphisms, IsHomalgEndomorphism );
+
+InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgChainMaps, IsHomalgChainMap );
 
 ####################################
 #
@@ -92,6 +106,24 @@ InstallImmediateMethod( IsAutomorphism,
     
 end );
 
+##
+InstallImmediateMethod( IsGradedMorphism,
+        IsHomalgChainMap, 0,
+        
+  function( phi )
+    local S, T;
+    
+    S := Source( phi );
+    T := Range( phi );
+    
+    if HasIsGradedObject( S ) and HasIsGradedObject( T ) then
+        return IsGradedObject( S ) and IsGradedObject( T );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for properties:
@@ -106,6 +138,28 @@ InstallMethod( IsIsomorphism,
   function( phi )
     
     return IsMonomorphism( phi ) and IsEpimorphism( phi );
+    
+end );
+
+##
+InstallMethod( IsGradedMorphism,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    return IsGradedObject( Source( phi ) ) and IsGradedObject( Range( phi ) );
+    
+end );
+
+##
+InstallMethod( IsQuasiIsomorphism,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( phi )
+    
+    return IsIsomorphism( DefectOfExactness( phi ) );
     
 end );
 

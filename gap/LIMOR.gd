@@ -27,3 +27,5 @@ DeclareGlobalVariable( "LogicalImplicationsForHomalgMorphisms" );
 
 DeclareGlobalVariable( "LogicalImplicationsForHomalgEndomorphisms" );
 
+DeclareGlobalVariable( "LogicalImplicationsForHomalgChainMaps" );
+

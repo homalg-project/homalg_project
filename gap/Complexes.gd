@@ -16,6 +16,15 @@
 
 # basic operations:
 
+DeclareOperation( "DefectOfExactness",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "Homology",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "Cohomology",
+        [ IsHomalgComplex, IsInt ] );
+
 DeclareOperation( "Homology",
         [ IsHomalgComplex ] );
 
@@ -30,6 +39,15 @@ DeclareOperation( "Resolution",
 
 DeclareOperation( "ConnectingHomomorphism",
         [ IsHomalgModule, IsHomalgMap, IsHomalgMap, IsHomalgMap, IsHomalgModule ] );
+
+DeclareOperation( "ConnectingHomomorphism",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "ConnectingHomomorphism",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "ExactTriangle",
+        [ IsHomalgComplex ] );
 
 DeclareOperation( "DefectOfExactnessSequence",
         [ IsHomalgComplex ] );

@@ -17,6 +17,96 @@
 ##
 InstallMethod( DefectOfExactness,
         "for a homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( C, i )
+    local degrees, mor, def;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    if PositionSet( degrees, i ) = fail then
+        Error( "the second argument ", i, " is outside the degree range of the complex\n" );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        return CertainObject( C, i );
+    elif i = degrees[1] then
+        mor := CertainMorphism( C, i + 1 );
+        def := Cokernel( mor );
+    elif i = degrees[Length( degrees )] then
+        mor := CertainMorphism( C, i );
+        def := Kernel( mor );
+    else
+        mor := CertainTwoMorphismsAsSubcomplex( C, i );
+        mor := AsATwoSequence( mor );
+        def := DefectOfExactness( mor );
+    fi;
+    
+    return def;
+    
+end );
+
+##
+InstallMethod( DefectOfExactness,
+        "for a homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( C, i )
+    local degrees, mor, def;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    if PositionSet( degrees, i ) = fail then
+        Error( "the second argument ", i, " is outside the degree range of the complex\n" );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        return CertainObject( C, i );
+    elif i = degrees[1] then
+        mor := CertainMorphism( C, i );
+        def := Kernel( mor );
+    elif i = degrees[Length( degrees )] then
+        mor := CertainMorphism( C, i - 1 );
+        def := Cokernel( mor );
+    else
+        mor := CertainTwoMorphismsAsSubcomplex( C, i );
+        mor := AsATwoSequence( mor );
+        def := DefectOfExactness( mor );
+    fi;
+    
+    return def;
+    
+end );
+
+##
+InstallMethod( Homology,
+        "for a homalg complexes",
+        [ IsHomalgComplex, IsInt ],
+        
+  function( C, i )
+    
+    if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
+        Error( "this is a cocomplex: use \033[1mCohomology\033[0m instead\n" );
+    fi;
+    
+    return DefectOfExactness( C, i );
+    
+end );
+
+##
+InstallMethod( Cohomology,
+        "for a homalg complexes",
+        [ IsHomalgComplex, IsInt ],
+        
+  function( C, i )
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        Error( "this is a complex: use \033[1mHomology\033[0m instead\n" );
+    fi;
+    
+    return DefectOfExactness( C, i );
+    
+end );
+
+##
+InstallMethod( DefectOfExactness,
+        "for a homalg complexes",
         [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
@@ -618,6 +708,170 @@ InstallMethod( ConnectingHomomorphism,
     snake := snake / iota_Hsn_1;
     
     return snake;
+    
+end );
+
+##
+InstallMethod( ConnectingHomomorphism,
+        "for short exact sequences of complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsInt ],
+        
+  function( E, n )
+    local j, i, Cq, C, Cs, Hqn, jn, bn, in_1, Hsn_1;
+    
+    j := LowestDegreeMorphismInComplex( E );
+    i := HighestDegreeMorphismInComplex( E );
+    
+    Cq := Range( j );
+    C := Source( j );
+    Cs := Source( i );
+    
+    Hqn := DefectOfExactness( Cq, n );
+    jn := CertainMorphism( j, n );
+    bn := CertainMorphism( C, n );
+    in_1 := CertainMorphism( i, n - 1 );
+    Hsn_1 := DefectOfExactness( Cs, n - 1 );
+    
+    return ConnectingHomomorphism( Hqn, jn, bn, in_1, Hsn_1 );
+    
+end );
+
+##
+InstallMethod( ConnectingHomomorphism,
+        "for short exact sequences of complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsInt ],
+        
+  function( E, n )
+    local i, j, Cs, C, Cq, Hqn, jn, bn, inp1, Hsnp1;
+    
+    i := LowestDegreeMorphismInComplex( E );
+    j := HighestDegreeMorphismInComplex( E );
+    
+    Cs := Source( i );
+    C := Range( i );
+    Cq := Range( j );
+    
+    Hqn := DefectOfExactness( Cq, n );
+    jn := CertainMorphism( j, n );
+    bn := CertainMorphism( C, n );
+    inp1 := CertainMorphism( i, n + 1 );
+    Hsnp1 := DefectOfExactness( Cs, n + 1 );
+    
+    return ConnectingHomomorphism( Hqn, jn, bn, inp1, Hsnp1 );
+    
+end );
+
+##
+InstallMethod( ConnectingHomomorphism,
+        "for short exact sequences of complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+        
+  function( E )
+    local degrees, l, S, T, con, n;
+    
+    degrees := DegreesOfChainMap( LowestDegreeMorphismInComplex( E ) );
+    
+    l := Length( degrees );
+    
+    if l < 2 then
+        Error( "complex too small\n" );
+    fi;
+    
+    S := DefectOfExactness( LowestDegreeObjectInComplex( E ) );
+    T := DefectOfExactness( HighestDegreeObjectInComplex( E ) );
+    
+    n := degrees[2];
+    
+    con := HomalgChainMap( ConnectingHomomorphism( E, n ), S, T, [ n, -1 ] );
+    
+    for n in degrees{[ 3 .. l ]} do
+        Add( con, ConnectingHomomorphism( E, n ) );
+    od;
+    
+    SetIsGradedMorphism( con, true );
+    
+    return con;
+    
+end );
+
+##
+InstallMethod( ConnectingHomomorphism,
+        "for short exact sequences of complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+        
+  function( E )
+    local degrees, l, S, T, con, n;
+    
+    degrees := DegreesOfChainMap( HighestDegreeMorphismInComplex( E ) );
+    
+    l := Length( degrees );
+    
+    if l < 2 then
+        Error( "cocomplex too small\n" );
+    fi;
+    
+    S := DefectOfExactness( HighestDegreeObjectInComplex( E ) );
+    T := DefectOfExactness( LowestDegreeObjectInComplex( E ) );
+    
+    n := degrees[1];
+    
+    con := HomalgChainMap( ConnectingHomomorphism( E, n ), S, T, [ n, 1 ] );
+    
+    for n in degrees{[ 2 .. l - 1 ]} do
+        Add( con, ConnectingHomomorphism( E, n ) );
+    od;
+    
+    SetIsGradedMorphism( con, true );
+    
+    return con;
+    
+end );
+
+##
+InstallMethod( ExactTriangle,
+        "for short exact sequences of complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+        
+  function( E )
+    local deg, j, i, con, triangle;
+    
+    deg := LowestDegreeInComplex( E ) + 1;
+    
+    j := DefectOfExactness( LowestDegreeMorphismInComplex( E ) );
+    i := DefectOfExactness( HighestDegreeMorphismInComplex( E ) );
+    con := ConnectingHomomorphism( E );
+    
+    triangle := HomalgComplex( j, deg );
+    Add( triangle, i );
+    Add( triangle, con );
+    
+    SetIsExactTriangle( triangle, true );
+    
+    return triangle;
+    
+end );
+
+##
+InstallMethod( ExactTriangle,
+        "for short exact sequences of complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+        
+  function( E )
+    local deg, j, i, con, triangle;
+    
+    deg := LowestDegreeInComplex( E );
+    
+    i := DefectOfExactness( LowestDegreeMorphismInComplex( E ) );
+    j := DefectOfExactness( HighestDegreeMorphismInComplex( E ) );
+    con := ConnectingHomomorphism( E );
+    
+    triangle := HomalgCocomplex( i, deg );
+    Add( triangle, j );
+    Add( triangle, con );
+    
+    SetIsExactTriangle( triangle, true );
+    
+    return triangle;
     
 end );
 

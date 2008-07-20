@@ -714,6 +714,8 @@ InstallMethod( CertainTwoMorphismsAsSubcomplex,
         SetIsSequence( A, true );
     fi;
     
+    SetIsATwoSequence( A, true );
+    
     return A;
     
 end );
@@ -745,6 +747,8 @@ InstallMethod( CertainTwoMorphismsAsSubcomplex,
     elif HasIsSequence( C ) and IsSequence( C ) then
         SetIsSequence( A, true );
     fi;
+    
+    SetIsATwoSequence( A, true );
     
     return A;
     

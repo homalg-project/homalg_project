@@ -29,6 +29,9 @@ DeclareCategory( "IsHomalgChainSelfMap",
 #
 ####################################
 
+DeclareProperty( "IsGradedMorphism",
+        IsHomalgChainMap );
+
 DeclareProperty( "IsQuasiIsomorphism",
         IsHomalgChainMap );
 

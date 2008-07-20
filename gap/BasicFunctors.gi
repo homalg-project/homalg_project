@@ -97,6 +97,27 @@ InstallValue( functor_Cokernel,
 functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
+## install Cokernel for image squares (this should be installed automatically in the future)
+InstallOtherMethod( Cokernel,
+        "for homalg image squares",
+        [ IsHomalgChainMap and IsImageSquare ],
+  function( sq )
+    local d, dS, dT, phi, muS, muT;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    dS := LowestDegreeMorphismInComplex( Source( sq ) );
+    dT := LowestDegreeMorphismInComplex( Range( sq ) );
+    
+    phi := CertainMorphism( sq, d );
+    
+    muS := NaturalEmbedding( Cokernel( dS ) );
+    muT := NaturalEmbedding( Cokernel( dT ) );
+    
+    return CompleteImageSquare( muS, phi, muT );
+    
+end );
+
 ##
 ## ImageSubmodule
 ##
@@ -369,6 +390,27 @@ InstallMethod( DefectOfExactness,
   function( phi, psi )
     
     return DefectOfExactness( AsATwoSequence( phi, psi ) );
+    
+end );
+
+## install DefectOfExactness for Lambek pair of squares (this should be installed automatically in the future)
+InstallOtherMethod( DefectOfExactness,
+        "for homalg lambek pair of squares",
+        [ IsHomalgChainMap and IsLambekPairOfSquares ],
+  function( sq )
+    local d, dS, dT, phi, muS, muT;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    dS := AsATwoSequence( Source( sq ) );
+    dT := AsATwoSequence( Range( sq ) );
+    
+    phi := CertainMorphism( sq, d );
+    
+    muS := NaturalEmbedding( DefectOfExactness( dS ) );
+    muT := NaturalEmbedding( DefectOfExactness( dT ) );
+    
+    return CompleteImageSquare( muS, phi, muT );
     
 end );
 

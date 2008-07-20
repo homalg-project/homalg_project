@@ -316,6 +316,12 @@ InstallMethod( Add,
         Error( "this chain map is write-protected since IsChainMapForPullback = true\n" );
     elif HasIsChainMapForPushout( cm ) and IsChainMapForPushout( cm ) then
         Error( "this chain map is write-protected since IsChainMapForPushout = true\n" );
+    elif HasIsKernelSquare( cm ) and IsKernelSquare( cm ) then
+        Error( "this chain map is write-protected since IsKernelSquare = true\n" );
+    elif HasIsImageSquare( cm ) and IsImageSquare( cm ) then
+        Error( "this chain map is write-protected since IsImageSquare = true\n" );
+    elif HasIsLambekPairOfSquares( cm ) and IsLambekPairOfSquares( cm ) then
+        Error( "this chain map is write-protected since IsLambekPairOfSquares = true\n" );
     fi;
     
     d := DegreeOfMorphism( cm );
@@ -860,6 +866,7 @@ InstallMethod( homalgResetFilters,
         HOMALG.PropertiesOfChainMaps :=
           [ IsZero,
             IsMorphism,
+            IsGradedMorphism,
             IsSplitMonomorphism,
             IsMonomorphism,
             IsSplitEpimorphism,
@@ -1014,15 +1021,16 @@ InstallMethod( ViewObj,
         [ IsHomalgChainMap ],
         
   function( o )
-    local first_attribute, degrees, l;
-    
-    first_attribute := false;
+    local degrees, l;
     
     Print( "<A" );
     
-    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero homalg (co)chain map
-        Print( " non-zero" );
-        first_attribute := true;
+    if HasIsZero( o ) then
+        if IsZero ( o ) then
+            Print( " zero" );
+        else
+            Print( " non-zero" );
+        fi;
     fi;
     
     if HasIsMorphism( o ) then
@@ -1045,6 +1053,10 @@ InstallMethod( ViewObj,
         else
             Print( " \"cochain map\"" );
         fi;
+    fi;
+    
+    if HasIsGradedMorphism( o ) and IsGradedMorphism( o ) then
+        Print( " of graded objects" );
     fi;
     
     if HasDegreeOfMorphism( o ) and DegreeOfMorphism( o ) <> 0 then
@@ -1084,44 +1096,6 @@ InstallMethod( ViewObj,
         Print( " modules at degrees ", degrees, ">" );
         
     fi;
-    
-end );
-
-##
-InstallMethod( ViewObj,
-        "for homalg chain maps",
-        [ IsChainMapOfFinitelyPresentedObjectsRep and IsZero ],
-        
-  function( o )
-    
-    Print( "<A zero " );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( "left" );
-    else
-        Print( "right" );
-    fi;
-    
-    Print( " chain map>" );
-    
-end );
-
-##
-InstallMethod( ViewObj,
-        "for homalg chain maps",
-        [ IsCochainMapOfFinitelyPresentedObjectsRep and IsZero ],
-        
-  function( o )
-    
-    Print( "<A zero " );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( "left" );
-    else
-        Print( "right" );
-    fi;
-    
-    Print( " cochain map>" );
     
 end );
 
