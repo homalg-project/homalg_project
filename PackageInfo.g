@@ -25,18 +25,18 @@ PackageName := "IO_ForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "IO_ForHomalg - internal and external rings for the GAP package homalg",
+Subtitle := "IO_ForHomalg - IO Capabilities for the GAP Package homalg",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.07.04",
+Version := "2008.07.20",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "04/07/2008",
+Date := "20/07/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -313,7 +313,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "IO_ForHomalg - Internal and External Rings for the GAP Package homalg",
+  LongTitle := "IO_ForHomalg - IO Capabilities for the GAP Package homalg",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -329,7 +329,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2008.07.04"], ["IO", ">= 2.3"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2008.07.20"], ["IO", ">= 2.3"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
