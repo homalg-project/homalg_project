@@ -7,7 +7,7 @@ G := Group( (1,2) );
 Isotropy := rec( 1 := G, 2 := G, 3 := G, 7 := G, 8 := G , 9 := G );
 mult := [];
 
-dim := 3
+dim := 3;
 
 #matrix sizes:
 # [ 12, 114, 504, 2289, 11262 ]

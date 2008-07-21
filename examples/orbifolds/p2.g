@@ -31,12 +31,12 @@ dim := 4;
 
 #up to 4 works, cohomology: [0],[1],[2,2,2,0],[1],[2,2,2,2],[1],...
 
-# 1: 16 x 126 matrix with rank 15 and kernel dimension 1.
-# 2: 126 x 420 matrix with rank 108 and kernel dimension 18.
-# 3: 420 x 1590 matrix with rank 308 and kernel dimension 112.
-# 4: 1590 x 7536 matrix with rank 1278 and kernel dimension 312.
-# 5: 7536 x 37506 matrix with rank 6254 and kernel dimension 1282.
-# 6: 37506 x 187500 matrix with rank 31248 and kernel dimension 6258.
+# 1: 16 x 126 matrix with rank 15 and kernel dimension 1. Time: 0.000 sec.
+# 2: 126 x 420 matrix with rank 108 and kernel dimension 18. Time: 0.004 sec.
+# 3: 420 x 1590 matrix with rank 308 and kernel dimension 112. Time: 0.088 sec.
+# 4: 1590 x 7536 matrix with rank 1278 and kernel dimension 312. Time: 0.828 sec.
+# 5: 7536 x 37506 matrix with rank 6254 and kernel dimension 1282. Time: 18.589 sec.
+# 6: 37506 x 187500 matrix with rank 31248 and kernel dimension 6258. Time: 537.134 sec.
 # 7: 187500 x 937500 matrix with rank 156248 and kernel dimension 31252.
 # Cohomology dimension at degree 0:  GF(2)^(1 x 1)
 # Cohomology dimension at degree 1:  GF(2)^(1 x 3)

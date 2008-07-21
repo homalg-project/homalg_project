@@ -130,7 +130,7 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
     Print( "Creating the homology matrices ...\n" );
     M := CreateHomologyMatrix( ot, ss, R );
     if method = 1 then
-        Print( "Starting homology computation ...\n" );
+        Print( "Creating homology matrices and starting homology computation ...\n" );
         H := Homology( ot, ss, R );
     elif method = 2 then
         Print( "Starting rank computation ...\n" );
@@ -157,7 +157,7 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
     Print( "Creating the cohomology matrices ...\n" );
     M := CreateCohomologyMatrix( ot, ss, R );
     if method = 1 then
-        Print( "Starting cohomology computation ...\n" );
+        Print( "Creating cohomology matrix and starting cohomology computation ...\n" );
         H := Cohomology( ot, ss, R );
     elif method = 2 then
         Print( "Starting rank computation ...\n" );

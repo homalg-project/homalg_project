@@ -54,18 +54,6 @@ dim := 3;
 #cohomology over GF(2):
 
 
-#cohomology over Z/4Z:
-
- 
-
 ########## p = 3 ##########
 #cohomology over GF(3):
-
-
-#cohomology over Z/9Z:
-
-
-
-########## p = 5 ##########
-#cohomology over GF(5):
 

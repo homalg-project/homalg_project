@@ -36,10 +36,16 @@ dim := 4;
 #------>>>>  Z/< 3 > + Z/< 3 > + Z/< 3 > ? (wild guess)
 
 #cohomology over GF(3):
-#------>>>>  GF(3)^(1 x 1)
-#------>>>>  GF(3)^(1 x 2)
-#------>>>>  GF(3)^(1 x 3)
-#------>>>>  GF(3)^(1 x 3)
+# 1: 10 x 119 matrix with rank 9 and kernel dimension 1. Time: 0.004 sec.
+# 2: 119 x 916 matrix with rank 108 and kernel dimension 11. Time: 0.068 sec.
+# 3: 916 x 8428 matrix with rank 805 and kernel dimension 111. Time: 6.380 sec.
+# 4: 8428 x 83152 matrix with rank 7620 and kernel dimension 808. Time: 1398.684 sec.
+# 5: 83152 x 840814 matrix with rank 75529 and kernel dimension 7623. Time: 934758.267 sec. (260h, Mem: 3GB)
+# Cohomology dimension at degree 0:  GF(3)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(3)^(1 x 2)
+# Cohomology dimension at degree 2:  GF(3)^(1 x 3)
+# Cohomology dimension at degree 3:  GF(3)^(1 x 3)
+# Cohomology dimension at degree 4:  GF(3)^(1 x 3)
 
 #cohomology over GF(3^2): 
 #------>>>>  Z/9Z^(1 x 1)

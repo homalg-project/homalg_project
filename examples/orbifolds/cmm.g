@@ -35,6 +35,7 @@ dim := 2;
 #---------->>>>  Z/< 2 > ^ 2
 #---------->>>>  Z/< 2 > ^ 5
 #---------->>>>  Z/< 2 > ^ 4
+#---------->>>>  Z/< 2 > ^ 7
 # V4 leads to growing non-periodic cohomologies
 
 #cohomology over GF(2):

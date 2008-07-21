@@ -21,11 +21,26 @@ dim := 3;
 #factor:
 # [ 13, 10.0231, 13.5679, 15.4119 ]
 
+########## p = 0 ##########
+# Z
+# 0
+# Z + Z/6Z
+# 
+#
+
 ########## p = 2 ##########
 #cohomology over GF(2):
-#----------------------------------------------->>>>  GF(2)^(1 x 1)
-#----------------------------------------------->>>>  GF(2)^(1 x 1)
-#----------------------------------------------->>>>  GF(2)^(1 x 2)
+# 1: 10 x 130 matrix with rank 9 and kernel dimension 1. Time: 0.000 sec.
+# 2: 130 x 1303 matrix with rank 120 and kernel dimension 10. Time: 0.004 sec.
+# 3: 1303 x 17679 matrix with rank 1181 and kernel dimension 122. Time: 0.772 se
+# 4: 17679 x 272467 matrix with rank 16496 and kernel dimension 1183. Time: 165.758 sec.
+# 5: 272467 x 4425105 matrix with rank 255969 and kernel dimension 16498. Time: 50295.215 sec. (14 h, 7 GB)
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 2)
+
 
 #cohomology over Z/4Z:
 #------------------------------------->>>>  Z/4Z^(1 x 1)
