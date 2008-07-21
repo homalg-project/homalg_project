@@ -9,13 +9,6 @@
 #############################################################################
 
 ##
-DeclareCategory( "IsOrbifoldTriangulation",
-        IsAttributeStoringRep );
-
-DeclareOperation( "OrbifoldTriangulation",
-        [ IsList, IsRecord, IsList ] );
-
-##
 DeclareCategory( "IsSimplicialSet",
         IsAttributeStoringRep );
 

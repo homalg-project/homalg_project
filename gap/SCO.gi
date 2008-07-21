@@ -8,18 +8,6 @@
 ##
 #############################################################################
 
-## FIXME: Explain definition of OT
-DeclareRepresentation( "IsOrbifoldTriangulationRep",
-        IsOrbifoldTriangulation, [ "vertices", "max_simplices", "isotropy", "mu" ] );
-
-##
-BindGlobal( "TheFamilyOfOrbifoldTriangulations",
-        NewFamily( "TheFamilyOfOrbifoldTriangulations" ) );
-
-##
-BindGlobal( "TheTypeOrbifoldTriangulation",
-        NewType( TheFamilyOfOrbifoldTriangulations, IsOrbifoldTriangulationRep ) );
-
 ##
 DeclareRepresentation( "IsSimplicialSetRep",
         IsSimplicialSet, [ "simplicial_set" ] );
@@ -31,24 +19,6 @@ BindGlobal( "SimplicialSetFamily",
 ##
 BindGlobal( "SimplicialSetType",
         NewType( SimplicialSetFamily, IsSimplicialSetRep ) );
-
-##
-##
-InstallMethod( OrbifoldTriangulation, "constructor",
-        [ IsList, IsRecord, IsList ],
-  function( s , i , m)
-    local v, mm, ind, triangulation;
-    v := Union( s );
-    #create the function mu based on m
-    mm := function( x )
-        for ind in m do
-            if ind{[1..4]} = x then return ind[5]; fi;
-        od;
-        return x->x;
-    end;
-    triangulation := rec( vertices := v, max_simplices := s, isotropy := i, mu := mm );
-    return Objectify( TheTypeOrbifoldTriangulation, triangulation );
-end );
 
 ## this method creates a simplicial set from an OT by iterating the construction, removing unneccessary simplices (there might be more)
 InstallMethod( SimplicialSet, "constructor",

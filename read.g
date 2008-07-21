@@ -8,4 +8,6 @@
 ##
 #############################################################################
 
+ReadPackage( "SCO", "gap/OrbifoldTriangulation.gi" );
+
 ReadPackage( "SCO", "gap/SCO.gi" );

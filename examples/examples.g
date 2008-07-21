@@ -111,6 +111,8 @@ if Length( directory ) > 0 and directory{[Length( directory )]} <> separator the
     directory := Concatenation( directory, separator );
 fi;
 
+info := "";
+
 Read( Concatenation( directory, "examples", separator, "orbifolds", separator, orbifold ) );
 
 Print( Concatenation( "\nSelect dimension (default = ", String( dim ), ")\n:" ) );
@@ -123,7 +125,11 @@ fi;
 
 Print( "Creating the simplicial set ...\n" );
 
-ot := OrbifoldTriangulation( M, Isotropy, mult );
+if info = "" then
+    info := orbifold{ [ 1 .. Length( orbifold ) - 2 ] };
+fi;
+
+ot := OrbifoldTriangulation( M, Isotropy, mult, info );
 ss := SimplicialSet( ot, d );
 
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
