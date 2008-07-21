@@ -123,21 +123,19 @@ if d <= 0 or d = fail then
     d := dim;
 fi;
 
-Print( "Creating the simplicial set ...\n" );
-
 if info = "" then
     info := orbifold{ [ 1 .. Length( orbifold ) - 2 ] };
 fi;
 
 ot := OrbifoldTriangulation( M, Isotropy, mult, info );
-ss := SimplicialSet( ot, d );
+ss := SimplicialSet( ot );
 
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
     Print( "Creating the homology matrices ...\n" );
-    M := CreateHomologyMatrix( ot, ss, R );
+    M := CreateHomologyMatrix( ss, d, R );
     if method = 1 then
-        Print( "Creating homology matrices and starting homology computation ...\n" );
-        H := Homology( ot, ss, R );
+        Print( "Starting homology computation ...\n" );
+        H := Homology( M, R );
     elif method = 2 then
         Print( "Starting rank computation ...\n" );
         L := [];
@@ -161,10 +159,10 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
     fi;
 elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
     Print( "Creating the cohomology matrices ...\n" );
-    M := CreateCohomologyMatrix( ot, ss, R );
+    M := CreateCohomologyMatrix( ss, d, R );
     if method = 1 then
-        Print( "Creating cohomology matrix and starting cohomology computation ...\n" );
-        H := Cohomology( ot, ss, R );
+        Print( "Starting cohomology computation ...\n" );
+        H := Cohomology( M, R );
     elif method = 2 then
         Print( "Starting rank computation ...\n" );
         L := [];

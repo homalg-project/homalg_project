@@ -10,4 +10,8 @@
 
 ReadPackage( "SCO", "gap/OrbifoldTriangulation.gi" );
 
+ReadPackage( "SCO", "gap/SimplicialSet.gi" );
+
+ReadPackage( "SCO", "gap/Matrices.gi" );
+
 ReadPackage( "SCO", "gap/SCO.gi" );

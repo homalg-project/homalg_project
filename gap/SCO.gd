@@ -9,32 +9,11 @@
 #############################################################################
 
 ##
-DeclareCategory( "IsSimplicialSet",
-        IsAttributeStoringRep );
-
-DeclareOperation( "SimplicialSet",
-        [ IsOrbifoldTriangulation, IsInt ] );
-
-DeclareAttribute( "Dimension",
-        IsSimplicialSet );
-
-##
-DeclareOperation( "BoundaryOperator",
-        [ IsInt, IsList, IsFunction ] );
-
-##
-DeclareOperation( "CreateCohomologyMatrix",
-        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomologyMatrix",
-        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
-
-##
 DeclareOperation( "Homology",
-        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
+        [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "Cohomology",
-        [ IsOrbifoldTriangulation, IsSimplicialSet, IsHomalgRing ] );
+        [ IsList, IsHomalgRing ] );
 
 ##
 DeclareOperation( "SCO_Examples",

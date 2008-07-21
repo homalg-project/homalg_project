@@ -118,7 +118,7 @@ InstallMethod( ViewObj,
     if ot!.mu_data <> [] then
         str := Concatenation( str, " and nontrivial mu-maps" );
     fi;
-    Print( "OrbifoldTriangulation ", info, "of dimension ", dim, ".\n", simpl, " on ", vert, " ", str );
+    Print( "OrbifoldTriangulation ", info, "of dimension ", dim, ". ", simpl, " on ", vert, " ", str );
   end
 );
   
