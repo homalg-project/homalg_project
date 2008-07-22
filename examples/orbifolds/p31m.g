@@ -1,7 +1,7 @@
 # p31m
 # http://en.wikipedia.org/wiki/Wallpaper_group#Group_p31m
 
-M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,5], [2,4,5], [3,4,6], [3,5,6], [4,5,7], [4,6,7] ];
+M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,6], [2,5,6], [2,4,7], [2,5,7], [3,4,7], [3,6,7] ];
 
 S3 := Group( (1,2,3), (1,2) );
 
@@ -17,7 +17,23 @@ mult := [
 [ [2], [1,2], [1,2,4], [1,2,3], x -> (1,3,2) ]
 ];
 
-dim := 2;
+dim := 3;
+
+#------------------------- new triangulation: -------------------------------
+# 1: 9 x 105 matrix with rank 8 and kernel dimension 1. Time: 0.000 sec.
+# 2: 105 x 736 matrix with rank 96 and kernel dimension 9. Time: 0.004 sec.
+# 3: 736 x 5963 matrix with rank 638 and kernel dimension 98. Time: 0.196 sec.
+# 4: 5963 x 53053 matrix with rank 5323 and kernel dimension 640. Time: 13.921 sec.
+# 5: 53053 x 497007 matrix with rank 47728 and kernel dimension 5325. Time: 1054.590 sec.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 2)
+
+
+
+#------------------------- old triangulation: --------------------------------
 
 # matrix sizes:
 # [ 9, 153, 2432, 50651, 1133693 ]
@@ -43,13 +59,3 @@ dim := 2;
 # Cohomology dimension at degree 1:  GF(2)^(1 x 1)
 # Cohomology dimension at degree 2:  GF(2)^(1 x 2)
 # Cohomology dimension at degree 3:  GF(2)^(1 x 2)
-
-#cohomology over Z/4Z:
-
-#cohomology over Z/8Z:
-
-#cohomology over GF(3):
-
-#cohomology over Z/9Z:
-
-#cohomology over Z/27Z:
