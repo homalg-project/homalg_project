@@ -26,13 +26,13 @@ Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.07.21",
+Version := "2008.07.22",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "21/07/2008",
+Date := "22/07/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -295,7 +295,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["homology", "cohomology", "orbifold", "grupoid", "simplicial", "triangulation" ]
+Keywords := ["homology", "cohomology", "orbifold", "groupoid", "simplicial", "triangulation" ]
 
 ));
 
