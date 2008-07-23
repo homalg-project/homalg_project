@@ -24,14 +24,16 @@ dim := 3;
 #cohomology over GF(2):
 # 1: 8 x 92 matrix with rank 7 and kernel dimension 1. Time: 0.000 sec.
 # 2: 92 x 512 matrix with rank 81 and kernel dimension 11. Time: 0.004 sec.
-# 3: 512 x 3022 matrix with rank 423 and kernel dimension 89. Time: 0.096 sec.
-# 4: 3022 x 19904 matrix with rank 2587 and kernel dimension 435. Time: 3.488 sec.
-# 5: 19904 x 136420 matrix with rank 17301 and kernel dimension 2603. Time: 136.721 sec.
+# 3: 512 x 3022 matrix with rank 423 and kernel dimension 89. Time: 0.120 sec.
+# 4: 3022 x 19904 matrix with rank 2587 and kernel dimension 435. Time: 3.909 sec.
+# 5: 19904 x 136420 matrix with rank 17301 and kernel dimension 2603. Time: 181.059 sec.
+# 6: 136420 x 947024 matrix with rank 119099 and kernel dimension 17321. Time: 6916.352 sec.
 # Cohomology dimension at degree 0:  GF(2)^(1 x 1)
 # Cohomology dimension at degree 1:  GF(2)^(1 x 4)
 # Cohomology dimension at degree 2:  GF(2)^(1 x 8)
 # Cohomology dimension at degree 3:  GF(2)^(1 x 12)
 # Cohomology dimension at degree 4:  GF(2)^(1 x 16)
+# Cohomology dimension at degree 5:  GF(2)^(1 x 20)
 
 #cohomology over Z/4Z:
 #----------------------------------------------->>>>  Z/4Z^(1 x 1)

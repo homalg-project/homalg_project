@@ -22,18 +22,10 @@ dim := 4;
 #factors:
 # [ 11.9, 7.69748, 9.20087, 9.86616 ]
 
-#cohomology over GF(2) (unneccessary):
-#------>>>>  GF(2)^(1 x 1)
-#------>>>>  0
-#------>>>>  GF(2)^(1 x 1)
-#------>>>>  0
-
 #cohomology over Z:
 #------>>>>  Z^(1 x 1)
 #------>>>>  0
 #------>>>>  Z/< 3 > + Z/< 3 > + Z^(1 x 1)
-#------>>>>  0 ? (wild guess)
-#------>>>>  Z/< 3 > + Z/< 3 > + Z/< 3 > ? (wild guess)
 
 #cohomology over GF(3):
 # 1: 10 x 119 matrix with rank 9 and kernel dimension 1. Time: 0.004 sec.

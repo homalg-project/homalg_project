@@ -24,9 +24,16 @@ dim := 2;
     
 
 #cohomology over GF(2):
-#------->>>>  GF(2)^(1 x 1)
-#------->>>>  GF(2)^(1 x 2)
-#------->>>>  GF(2)^(1 x 3)
+# 1: 10 x 121 matrix with rank 9 and kernel dimension 1. Time: 0.000 sec.
+# 2: 121 x 970 matrix with rank 110 and kernel dimension 11. Time: 0.004 sec.
+# 3: 970 x 9390 matrix with rank 857 and kernel dimension 113. Time: 0.344 sec.
+# 4: 9390 x 97462 matrix with rank 8530 and kernel dimension 860. Time: 31.850 sec.
+# 5: 97462 x 1033536 matrix with rank 88929 and kernel dimension 8533. Time: 3866.933 sec.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 2)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 3)
 
 #cohomology over GF(3): (just for the topology)
 #------->>>>  GF(3)^(1 x 1)

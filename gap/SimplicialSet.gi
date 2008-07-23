@@ -115,7 +115,7 @@ InstallMethod( ViewObj,
     if info <> "" then
         str := Concatenation( "The simplicial set of the orbifold triangulation \"", info, "\"," );
     else
-        str := Concatenation( "A simplicial set" );
+        str := "A simplicial set";
     fi;
     str := Concatenation( str, " computed up to dimension ", String( ss!.dimension ), " with Length vector ", String( List( ss!.simplicial_set, Length ) ) );
     Print( str );

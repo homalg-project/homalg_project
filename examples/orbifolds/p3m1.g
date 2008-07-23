@@ -41,14 +41,14 @@ dim := 3;
 # Cohomology dimension at degree 2:  GF(2)^(1 x 2)
 # Cohomology dimension at degree 3:  GF(2)^(1 x 2)
 # Cohomology dimension at degree 4:  GF(2)^(1 x 2)
-     
-
-#cohomology over Z/4Z:
-
-#cohomology over Z/8Z:
 
 #cohomology over GF(3):
+# 1: 6 x 87 matrix with rank 5 and kernel dimension 1. Time: 0.000 sec.
+# 2: 87 x 794 matrix with rank 82 and kernel dimension 5. Time: 0.032 sec.
+# 3: 794 x 8157 matrix with rank 712 and kernel dimension 82. Time: 24.981 sec.
+# 4: 8157 x 88332 matrix with rank 7442 and kernel dimension 715. Time: 5485.735 sec.
+# Cohomology dimension at degree 0:  GF(3)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(3)^(1 x 0)
+# Cohomology dimension at degree 2:  GF(3)^(1 x 0)
+# Cohomology dimension at degree 3:  GF(3)^(1 x 3)
 
-#cohomology over Z/9Z:
-
-#cohomology over Z/27Z:

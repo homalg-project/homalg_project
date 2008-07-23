@@ -19,18 +19,18 @@ dim := 4;
 #factors:
 # [ 8.6875, 3.92806, 4.25092, 4.85825 ]
 
-#cohomology over GF(2):
-#----------------------------------------------->>>>  GF(2)^(1 x 1)
-#----------------------------------------------->>>>  GF(2)^(1 x 3)
-#----------------------------------------------->>>>  GF(2)^(1 x 4)
-#----------------------------------------------->>>>  GF(2)^(1 x 4)
-
-#cohomology over Z/4Z:
-#----------------------------------------------->>>>  Z/4Z^(1 x 1)
-#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 3)
-#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 4)
-#----------------------------------------------->>>>  Z/4Z/< ZmodnZObj(2,4) >^(1 x 4)
-
+# 1: 15 x 134 matrix with rank 14 and kernel dimension 1. Time: 0.000 sec.
+# 2: 134 x 583 matrix with rank 117 and kernel dimension 17. Time: 0.004 sec.
+# 3: 583 x 2934 matrix with rank 462 and kernel dimension 121. Time: 0.152 sec.
+# 4: 2934 x 17126 matrix with rank 2468 and kernel dimension 466. Time: 3.145 sec.
+# 5: 17126 x 104729 matrix with rank 14654 and kernel dimension 2472. Time: 114.119 sec.
+# 6: 104729 x 658093 matrix with rank 90071 and kernel dimension 14658. Time: 4647.566 sec.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 4)
+# Cohomology dimension at degree 5:  GF(2)^(1 x 4)
 
 # Z
 # 0
