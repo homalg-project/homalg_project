@@ -435,6 +435,8 @@ InstallMethod( KernelHermiteMatDestructive,
           head,
           x,
           m,
+	  mc,
+	  mv,
           rank,
           list,
           row_indices,
@@ -505,19 +507,20 @@ InstallMethod( KernelHermiteMatDestructive,
                 len := heads[column];
                 #Print( "we have a basis vector with a non-unit pivot:  #", len, "!\n" );
                 
-                m := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
+                mv := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
+                mc := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
+		
+                #it is not possible to check only the vector: if it is zero we might need relations
+		#it is not possible to check only the coefficient vector: it might appear to be zero because of L
                 
-                #it is not possible to check the coefficient vector instead because it might appear to be zero because of L
-                
-                if m.indices <> [] then
+                if mv.indices <> [] or mc.indices <> [] then
                     
-                    entries[ row_indices[ min[1] ] ] := m.entries;
-                    indices[ row_indices[ min[1] ] ] := m.indices;
+                    entries[ row_indices[ min[1] ] ] := mv.entries;
+                    indices[ row_indices[ min[1] ] ] := mv.indices;
                     
-                    m := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
-                    T.indices[ row_indices[ min[1] ] ] := m.indices;
-                    T.entries[ row_indices[ min[1] ] ] := m.entries;
-
+                    T.indices[ row_indices[ min[1] ] ] := mc.indices;
+                    T.entries[ row_indices[ min[1] ] ] := mc.entries;
+                    
                 else
                     list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
                 fi;
