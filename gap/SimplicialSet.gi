@@ -78,7 +78,7 @@ InstallMethod( ComputeNextDimension,
         for x in last[a] do
             for g in Elements( ss!.orbifold_triangulation!.isotropy.( a ) ) do
                 for y in conn[a] do
-                    if not ( x[1] = y and Order(g) = 1 ) then
+                    if y > x[1] or ( x[1] = y and Order(g) <> 1 ) then
                         Append( P[a], [ Concatenation( [ y, g ], x ) ]);
                     fi;
                 od;
