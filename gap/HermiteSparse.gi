@@ -504,17 +504,20 @@ InstallMethod( KernelHermiteMatDestructive,
             if min[2] > 1 then
                 len := heads[column];
                 #Print( "we have a basis vector with a non-unit pivot:  #", len, "!\n" );
-                #FIXME [[2,1],[0,2]] mod 4
                 
-                m := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
+                m := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
+                
+                #it is not possible to check the coefficient vector instead because it might appear to be zero because of L
                 
                 if m.indices <> [] then
+                    
+                    entries[ row_indices[ min[1] ] ] := m.entries;
+                    indices[ row_indices[ min[1] ] ] := m.indices;
+                    
+                    m := MultRow( coeffs.indices[len], coeffs.entries[len], char / min[2] );
                     T.indices[ row_indices[ min[1] ] ] := m.indices;
                     T.entries[ row_indices[ min[1] ] ] := m.entries;
-                    
-                    m := MultRow( vectors.indices[len], vectors.entries[len], char / min[2] );
-                    indices[ row_indices[ min[1] ] ] := m.indices;
-                    entries[ row_indices[ min[1] ] ] := m.entries;
+
                 else
                     list_of_rows := Difference( list_of_rows, [ row_indices[ min[1] ] ] );
                 fi;
