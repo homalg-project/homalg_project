@@ -77,3 +77,12 @@ DeclareOperation( "FreeHullEpi",
 DeclareOperation( "SubResolution",
         [ IsInt, IsHomalgModule ] );
 
+DeclareOperation( "Intersect",
+        [ IsHomalgRelations, IsHomalgRelations ] );
+
+DeclareOperation( "Annihilator",
+        [ IsHomalgMatrix, IsHomalgRelations ] );
+
+DeclareOperation( "Annihilator",
+        [ IsHomalgModule ] );
+

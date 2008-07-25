@@ -262,7 +262,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     pair := [ PreCompose( emb, epis[1] ), PreCompose( emb, epis[2] ) ];
     
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
-    SetPullbackPairOfMaps( pb, pair );
+    SetPullbackPairOfMaps( chm_phi_beta1, pair );
     
     return pb;
     
@@ -320,7 +320,7 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     pair := [ PreCompose( embs[1], epi ), PreCompose( embs[2], epi ) ];
     
     ## set the attribute PushoutPairOfMaps (specific for Pushout):
-    SetPushoutPairOfMaps( po, pair );
+    SetPushoutPairOfMaps( chm_alpha1_psi, pair );
     
     return po;
     

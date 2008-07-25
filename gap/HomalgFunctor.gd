@@ -52,6 +52,9 @@ DeclareOperation( "NaturalEmbedding",
 DeclareOperation( "NameOfFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "IsSpecialFunctor",
+        [ IsHomalgFunctor ] );
+
 DeclareOperation( "MultiplicityOfFunctor",
         [ IsHomalgFunctor ] );
 
@@ -125,6 +128,9 @@ DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "InstallFunctorOnMorphisms",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "InstallSpecialFunctorOnMorphisms",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "InstallFunctorOnComplexes",

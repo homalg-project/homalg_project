@@ -572,3 +572,91 @@ InstallGlobalFunction( AsEpimorphicImage,
     
 end );
 
+##
+InstallMethod( Intersect,
+        "for homalg relations",
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( R1, R2 )
+    local pb, r1, r2, im;
+    
+    r1 := HomalgMap( MatrixOfRelations( R1 ) );
+    r2 := HomalgMap( MatrixOfRelations( R2 ), "free", Range( r1 ) );
+    
+    pb := PullbackPairOfMaps( AsChainMapForPullback( r1, r2 ) )[1];
+    
+    im := PreCompose( pb, r1 );
+    
+    im := HomalgRelationsForLeftModule( MatrixOfMap( im ) );
+    
+    return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    
+end );
+
+##
+InstallMethod( Intersect,
+        "for homalg relations",
+        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( R1, R2 )
+    local pb, r1, r2, im;
+    
+    r1 := HomalgMap( MatrixOfRelations( R1 ), "r" );
+    r2 := HomalgMap( MatrixOfRelations( R2 ), "free", Range( r1 ) );
+    
+    pb := PullbackPairOfMaps( AsChainMapForPullback( r1, r2 ) )[1];
+    
+    im := PreCompose( pb, r1 );
+    
+    im := HomalgRelationsForRightModule( MatrixOfMap( im ) );
+    
+    return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    
+end );
+
+##
+InstallMethod( Annihilator,
+        "for homalg relations",
+        [ IsHomalgMatrix, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        
+  function( mat, rel )
+    local syz;
+    
+    syz := List( [ 1 .. NrRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
+    syz := List( syz, r -> ReducedSyzygiesGenerators( r, rel ) );
+    
+    return Iterated( syz, Intersect );
+    
+end );
+
+##
+InstallMethod( Annihilator,
+        "for homalg relations",
+        [ IsHomalgMatrix, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        
+  function( mat, rel )
+    local syz;
+    
+    syz := List( [ 1 .. NrColumns( mat ) ], j -> CertainColumns( mat, [ j ] ) );
+    syz := List( syz, c -> ReducedSyzygiesGenerators( c, rel ) );
+    
+    return Iterated( syz, Intersect );
+    
+end );
+
+##
+InstallMethod( Annihilator,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat, rel;
+    
+    mat := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
+    rel := RelationsOfModule( M );
+    
+    return Annihilator( mat, rel );
+    
+end );

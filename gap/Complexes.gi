@@ -703,7 +703,7 @@ InstallMethod( ConnectingHomomorphism,
     
     snake := iota_Hqn;
     snake := snake / jn;
-    snake := PreCompose( snake, bn );
+    snake := PreCompose( snake, bn );	## the connecting homomorphism is what b[n] induces between certain subquotients of C[n] and C[n-1]
     snake := snake / in_1;
     snake := snake / iota_Hsn_1;
     
@@ -981,7 +981,7 @@ InstallMethod( Resolution,	### defines: Resolution
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( _q, C )
-    local q, degrees, l, obj, d, mor, index_pairs, QFB, FB, CE,
+    local q, degrees, l, def, d, mor, index_pairs, QFB, FB, CE,
           HZB, Z, ZB, PZ, relZ, BFZ, BF, i, FZ;
     
     if not IsComplex( C ) then
@@ -994,17 +994,17 @@ InstallMethod( Resolution,	### defines: Resolution
     
     l := Length( degrees ) - 1;
     
-    obj := ObjectsOfComplex( C );
+    def := ObjectsOfComplex( DefectOfExactness( C ) );
     
     if l = 0 then
-        return HomalgComplex( Resolution( q, obj[1] ), degrees[1] );
+        return HomalgComplex( Resolution( q, def[1] ), degrees[1] );
     fi;
     
-    d := List( obj, M -> Resolution( q, M ) );
+    d := List( def, M -> Resolution( q, M ) );
     
     if q < 0 then
-        q := Maximum( List( obj, LengthOfResolution ) );
-        d := List( obj, M -> Resolution( q, M ) );
+        q := Maximum( List( def, LengthOfResolution ) );
+        d := List( def, M -> Resolution( q, M ) );
     fi;
     
     mor := MorphismsOfComplex( C );
@@ -1195,7 +1195,7 @@ InstallMethod( Resolution,	### defines: Resolution
         SetIsComplex( CE, true );
     fi;
     
-    ## Cartan-Eilenberg resolution:
+    ## the Cartan-Eilenberg resolution:
     return CE;
     
 end );
@@ -1206,7 +1206,7 @@ InstallMethod( Resolution,	### defines: Resolution
         [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( _q, C )
-    local q, degrees, l, obj, d, mor, index_pairs, ZFB, FB, CE,
+    local q, degrees, l, def, d, mor, index_pairs, ZFB, FB, CE,
           i, BZH, Z, PZ, relZ, BZ, ZF, BFQ, BF;
     
     if not IsComplex( C ) then
@@ -1219,17 +1219,17 @@ InstallMethod( Resolution,	### defines: Resolution
     
     l := Length( degrees ) - 1;
     
-    obj := ObjectsOfComplex( C );
+    def := ObjectsOfComplex( DefectOfExactness( C ) );
     
     if l = 0 then
-        return HomalgCocomplex( Resolution( q, obj[1] ), degrees[1] );
+        return HomalgCocomplex( Resolution( q, def[1] ), degrees[1] );
     fi;
     
-    d := List( obj, M -> Resolution( q, M ) );
+    d := List( def, M -> Resolution( q, M ) );
     
     if q < 0 then
-        q := Maximum( List( obj, LengthOfResolution ) );
-        d := List( obj, M -> Resolution( q, M ) );
+        q := Maximum( List( def, LengthOfResolution ) );
+        d := List( def, M -> Resolution( q, M ) );
     fi;
     
     mor := MorphismsOfComplex( C );
@@ -1342,7 +1342,7 @@ InstallMethod( Resolution,	### defines: Resolution
         SetIsComplex( CE, true );
     fi;
     
-    ## Cartan-Eilenberg resolution:
+    ## the Cartan-Eilenberg resolution:
     return CE;
     
 end );

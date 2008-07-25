@@ -106,6 +106,21 @@ InstallMethod( NameOfFunctor,
 end );
 
 ##
+InstallMethod( IsSpecialFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    if IsBound( Functor!.special ) and Functor!.special = true then
+        return true;
+    fi;
+    
+    return false;
+    
+end );
+
+##
 InstallMethod( MultiplicityOfFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -2040,6 +2055,44 @@ InstallMethod( InstallFunctorOnMorphisms,
     
 end );
 
+## for the special functors: Cokernel, Kernel, and DefectOfExactness
+InstallMethod( InstallSpecialFunctorOnMorphisms,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local functor_operation, filter_mor, filter_special;
+    
+    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    
+    if not IsBound( Functor!.1[2] ) or not IsBound( Functor!.1[2][2] ) or not IsList( Functor!.1[2][2] ) then
+        return fail;
+    fi;
+    
+    filter_mor := Functor!.1[2][2][1];
+    filter_special := Functor!.1[2][2][2];
+    
+    InstallOtherMethod( functor_operation,
+            "for homalg special chain maps",
+            [ filter_mor and filter_special ],
+      function( sq )
+        local dS, dT, phi, muS, muT;
+        
+        dS := SourceOfSpecialChainMap( sq );
+        dT := RangeOfSpecialChainMap( sq );
+        
+        phi := CertainMorphismOfSpecialChainMap( sq );
+        
+        muS := NaturalEmbedding( functor_operation( dS ) );
+        muT := NaturalEmbedding( functor_operation( dT ) );
+        
+        return CompleteImageSquare( muS, phi, muT );
+        
+    end );
+    
+end );
+
+##
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
   function( Functor, filter_cpx, complex_or_cocomplex, i )
     local functor_operation, filter0;
@@ -2212,6 +2265,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
     
 end );
 
+##
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter2_obj, filter1_cpx, complex_or_cocomplex, i )
     local functor_operation, filter0;
@@ -2468,6 +2522,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
     
 end );
 
+##
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter1_obj, filter2_cpx, complex_or_cocomplex, i )
     local functor_operation, filter0;
@@ -2797,6 +2852,7 @@ InstallMethod( InstallFunctorOnComplexes,
     
 end );
 
+##
 InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
   function( Functor, filter_chm, source_target, i )
     local functor_operation, filter0;
@@ -2945,6 +3001,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
     
 end );
 
+##
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter2_obj, filter1_chm, source_target, i )
     local functor_operation, filter0;
@@ -3177,6 +3234,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
     
 end );
 
+##
 InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps,
   function( Functor, filter1_obj, filter2_chm, source_target, i )
     local functor_operation, filter0;
@@ -3491,11 +3549,19 @@ InstallMethod( InstallFunctor,
     
     InstallFunctorOnObjects( Functor );
     
-    InstallFunctorOnMorphisms( Functor );
-    
-    InstallFunctorOnComplexes( Functor );
-    
-    InstallFunctorOnChainMaps( Functor );
+    if IsSpecialFunctor( Functor ) then
+        
+        InstallSpecialFunctorOnMorphisms( Functor );
+        
+    else
+        
+        InstallFunctorOnMorphisms( Functor );
+        
+        InstallFunctorOnComplexes( Functor );
+        
+        InstallFunctorOnChainMaps( Functor );
+        
+    fi;
     
 end );
 

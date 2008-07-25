@@ -88,35 +88,15 @@ InstallValue( functor_Cokernel,
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
                 [ "natural_transformation", "CokernelEpi" ],
+                [ "special", true ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep, [ IsHomalgChainMap, IsImageSquare ] ] ] ],
                 [ "OnObjects", _Functor_Cokernel_OnObjects ]
                 )
         );
 
 functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
-## install Cokernel for image squares (this should be installed automatically in the future)
-InstallOtherMethod( Cokernel,
-        "for homalg image squares",
-        [ IsHomalgChainMap and IsImageSquare ],
-  function( sq )
-    local d, dS, dT, phi, muS, muT;
-    
-    d := DegreesOfChainMap( sq )[1];
-    
-    dS := LowestDegreeMorphismInComplex( Source( sq ) );
-    dT := LowestDegreeMorphismInComplex( Range( sq ) );
-    
-    phi := CertainMorphism( sq, d );
-    
-    muS := NaturalEmbedding( Cokernel( dS ) );
-    muT := NaturalEmbedding( Cokernel( dT ) );
-    
-    return CompleteImageSquare( muS, phi, muT );
-    
-end );
 
 ##
 ## ImageSubmodule
@@ -256,68 +236,15 @@ InstallValue( functor_Kernel,
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
                 [ "natural_transformation", "KernelEmb" ],
+                [ "special", true ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep, [ IsHomalgChainMap, IsKernelSquare ] ] ] ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
         );
 
 functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
-## install KernelEmb for kernel squares (this should be installed automatically in the future)
-InstallOtherMethod( KernelEmb,
-        "for homalg kernel squares",
-        [ IsHomalgChainMap and IsKernelSquare ],
-  function( sq )
-    local d, dS, dT, phi, muS, muT, kappa;
-    
-    d := DegreesOfChainMap( sq )[1];
-    
-    dS := LowestDegreeMorphismInComplex( Source( sq ) );
-    dT := LowestDegreeMorphismInComplex( Range( sq ) );
-    
-    phi := CertainMorphism( sq, d );
-    
-    muS := KernelEmb( dS );
-    muT := KernelEmb( dT );
-    
-    kappa := CompleteImageSquare( muS, phi, muT );
-    
-    if IsComplexOfFinitelyPresentedObjectsRep( Source( sq ) ) then
-        muS := HomalgComplex( muS, d + 1 );
-        muT := HomalgComplex( muT, d + 1 );
-        kappa := HomalgChainMap( kappa, muS, muT, d + 1 );
-    else
-        muS := HomalgCocomplex( muS, d - 1 );
-        muT := HomalgCocomplex( muT, d - 1 );
-        kappa := HomalgChainMap( kappa, muS, muT, d - 1 );
-    fi;
-    
-    return kappa;
-    
-end );
-
-## install Kernel for kernel squares (this should be installed automatically in the future)
-InstallOtherMethod( Kernel,
-        "for homalg kernel squares",
-        [ IsHomalgChainMap and IsKernelSquare ],
-  function( sq )
-    local d, dS, dT, phi, muS, muT;
-    
-    d := DegreesOfChainMap( sq )[1];
-    
-    dS := LowestDegreeMorphismInComplex( Source( sq ) );
-    dT := LowestDegreeMorphismInComplex( Range( sq ) );
-    
-    phi := CertainMorphism( sq, d );
-    
-    muS := KernelEmb( dS );
-    muT := KernelEmb( dT );
-    
-    return CompleteImageSquare( muS, phi, muT );
-    
-end );
 
 ##
 ## DefectOfExactness
@@ -370,8 +297,9 @@ end );
 InstallValue( functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
+                [ "special", true ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
+                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence, [ IsHomalgChainMap, IsLambekPairOfSquares ] ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
         );
@@ -390,27 +318,6 @@ InstallMethod( DefectOfExactness,
   function( phi, psi )
     
     return DefectOfExactness( AsATwoSequence( phi, psi ) );
-    
-end );
-
-## install DefectOfExactness for Lambek pair of squares (this should be installed automatically in the future)
-InstallOtherMethod( DefectOfExactness,
-        "for homalg lambek pair of squares",
-        [ IsHomalgChainMap and IsLambekPairOfSquares ],
-  function( sq )
-    local d, dS, dT, phi, muS, muT;
-    
-    d := DegreesOfChainMap( sq )[1];
-    
-    dS := AsATwoSequence( Source( sq ) );
-    dT := AsATwoSequence( Range( sq ) );
-    
-    phi := CertainMorphism( sq, d );
-    
-    muS := NaturalEmbedding( DefectOfExactness( dS ) );
-    muT := NaturalEmbedding( DefectOfExactness( dT ) );
-    
-    return CompleteImageSquare( muS, phi, muT );
     
 end );
 
@@ -789,7 +696,7 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## Cokernel( phi ) and CokernelEpi( phi )
 ##
 
-InstallFunctorOnObjects( functor_Cokernel );
+InstallFunctor( functor_Cokernel );
 
 ##
 ## ImageSubmodule( phi ) and ImageSubmoduleEmb( phi )
@@ -801,13 +708,13 @@ InstallFunctorOnObjects( functor_ImageSubmodule );
 ## Kernel( phi ) and KernelEmb( phi )
 ##
 
-InstallFunctorOnObjects( functor_Kernel );
+InstallFunctor( functor_Kernel );
 
 ##
 ## DefectOfExactness( cpx_post_pre )
 ##
 
-InstallFunctorOnObjects( functor_DefectOfExactness );
+InstallFunctor( functor_DefectOfExactness );
 
 ##
 ## Hom( M, N )

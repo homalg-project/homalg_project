@@ -168,6 +168,114 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( SourceOfSpecialChainMap,
+        "for homalg image square chain maps",
+        [ IsHomalgChainMap and IsImageSquare ],
+        
+  function( sq )
+    
+    return LowestDegreeMorphismInComplex( Source( sq ) );
+    
+end );
+
+##
+InstallMethod( SourceOfSpecialChainMap,
+        "for homalg kernel square chain maps",
+        [ IsHomalgChainMap and IsKernelSquare ],
+        
+  function( sq )
+    
+    return HighestDegreeMorphismInComplex( Source( sq ) );
+    
+end );
+
+##
+InstallMethod( SourceOfSpecialChainMap,
+        "for homalg Lambek pair of squares",
+        [ IsHomalgChainMap and IsLambekPairOfSquares ],
+        
+  function( sq )
+    
+    return AsATwoSequence( Source( sq ) );
+    
+end );
+
+##
+InstallMethod( RangeOfSpecialChainMap,
+        "for homalg image square chain maps",
+        [ IsHomalgChainMap and IsImageSquare ],
+        
+  function( sq )
+    
+    return LowestDegreeMorphismInComplex( Range( sq ) );
+    
+end );
+
+##
+InstallMethod( RangeOfSpecialChainMap,
+        "for homalg kernel square chain maps",
+        [ IsHomalgChainMap and IsKernelSquare ],
+        
+  function( sq )
+    
+    return HighestDegreeMorphismInComplex( Range( sq ) );
+    
+end );
+
+##
+InstallMethod( RangeOfSpecialChainMap,
+        "for homalg Lambek pair of squares",
+        [ IsHomalgChainMap and IsLambekPairOfSquares ],
+        
+  function( sq )
+    
+    return AsATwoSequence( Range( sq ) );
+    
+end );
+
+##
+InstallMethod( CertainMorphismOfSpecialChainMap,
+        "for homalg image square chain maps",
+        [ IsHomalgChainMap and IsImageSquare ],
+        
+  function( sq )
+    local d;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    return CertainMorphism( sq, d );
+    
+end );
+
+##
+InstallMethod( CertainMorphismOfSpecialChainMap,
+        "for homalg kernel square chain maps",
+        [ IsHomalgChainMap and IsKernelSquare ],
+        
+  function( sq )
+    local d;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    return CertainMorphism( sq, d );
+    
+end );
+
+##
+InstallMethod( CertainMorphismOfSpecialChainMap,
+        "for homalg Lambek pair of squares",
+        [ IsHomalgChainMap and IsLambekPairOfSquares ],
+        
+  function( sq )
+    local d;
+    
+    d := DegreesOfChainMap( sq )[1];
+    
+    return CertainMorphism( sq, d );
+    
+end );
+
+##
 InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg maps",
         [ IsHomalgChainMap ],
@@ -1025,6 +1133,10 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
+    if HasDegreeOfMorphism( o ) and DegreeOfMorphism( o ) <> 0 then
+        Print( " degree ", DegreeOfMorphism( o ) );
+    fi;
+    
     if HasIsZero( o ) then
         if IsZero ( o ) then
             Print( " zero" );
@@ -1057,10 +1169,6 @@ InstallMethod( ViewObj,
     
     if HasIsGradedMorphism( o ) and IsGradedMorphism( o ) then
         Print( " of graded objects" );
-    fi;
-    
-    if HasDegreeOfMorphism( o ) and DegreeOfMorphism( o ) <> 0 then
-        Print( " of degree ", DegreeOfMorphism( o ) );
     fi;
     
     Print( " containing " );

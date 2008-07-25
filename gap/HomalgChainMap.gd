@@ -65,6 +65,15 @@ DeclareGlobalFunction( "HomalgChainMap" );
 DeclareOperation( "homalgResetFilters",
         [ IsHomalgChainMap ] );
 
+DeclareOperation( "SourceOfSpecialChainMap",
+        [ IsHomalgChainMap ] );
+
+DeclareOperation( "RangeOfSpecialChainMap",
+        [ IsHomalgChainMap ] );
+
+DeclareOperation( "CertainMorphismOfSpecialChainMap",
+        [ IsHomalgChainMap ] );
+
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgChainMap ] );	## provided to avoid branching in the code and always returns fail
 
