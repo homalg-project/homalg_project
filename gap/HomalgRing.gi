@@ -118,7 +118,7 @@ InstallMethod( MinusOne,
 end );
 
 ##
-InstallMethod( Zero,
+InstallMethod( ZeroMutable,
         "for homalg rings",
         [ IsHomalgExternalRingElementRep ],
         
@@ -129,7 +129,7 @@ InstallMethod( Zero,
 end );
 
 ##
-InstallMethod( One,
+InstallMethod( OneMutable,
         "for homalg rings",
         [ IsHomalgExternalRingElementRep ],
         

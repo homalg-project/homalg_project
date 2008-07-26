@@ -734,7 +734,7 @@ InstallMethod( AugmentMaps,
   function( phi, psi )
     local S, phi_psi, TpT, p;
     
-    S := Range( phi );
+    S := Source( phi );
     
     if not IsIdenticalObj( S, Source( psi ) ) then
         Error( "the two morphisms must have identical source modules\n" );
@@ -773,7 +773,7 @@ InstallMethod( AugmentMaps,
   function( phi, psi )
     local S, phi_psi, TpT, p;
     
-    S := Range( phi );
+    S := Source( phi );
     
     if not IsIdenticalObj( S, Source( psi ) ) then
         Error( "the two morphisms must have identical source modules\n" );

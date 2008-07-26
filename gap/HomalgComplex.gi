@@ -58,8 +58,48 @@ BindGlobal( "TheTypeHomalgCocomplexOfRightObjects",
 ####################################
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,
-        "for homalg maps",
+InstallMethod( homalgResetFilters,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local property;
+    
+    if not IsBound( HOMALG.PropertiesOfComplexes ) then
+        HOMALG.PropertiesOfComplexes :=
+          [ IsZero,
+            IsSequence,
+            IsComplex,
+            IsAcyclic,
+            IsGradedObject,
+            IsExactSequence,
+            IsShortExactSequence,
+            IsTriangle,
+            IsExactTriangle,
+            IsSplitShortExactSequence ];
+    fi;
+    
+    for property in HOMALG.PropertiesOfComplexes do
+        ResetFilterObj( C, property );
+    od;
+    
+    if IsBound( C!.HomologyGradedObject ) then
+        Unbind( C!.HomologyGradedObject );
+    fi;
+    
+    if IsBound( C!.CohomologyGradedObject ) then
+        Unbind( C!.CohomologyGradedObject );
+    fi;
+    
+    if IsBound( C!.free_resolutions ) then
+        Unbind( C!.free_resolutions );
+    fi;
+    
+end );
+
+##
+InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+        "for homalg complexes",
         [ IsHomalgComplex ],
         
   function( M )
@@ -948,51 +988,6 @@ end );
 
 ####################################
 #
-# global functions:
-#
-####################################
-
-InstallMethod( homalgResetFilters,
-        "for homalg complexes",
-        [ IsHomalgComplex ],
-        
-  function( C )
-    local property;
-    
-    if not IsBound( HOMALG.PropertiesOfComplexes ) then
-        HOMALG.PropertiesOfComplexes :=
-          [ IsZero,
-            IsSequence,
-            IsComplex,
-            IsAcyclic,
-            IsGradedObject,
-            IsExactSequence,
-            IsShortExactSequence,
-            IsTriangle,
-            IsExactTriangle,
-            IsSplitShortExactSequence ];
-    fi;
-    
-    for property in HOMALG.PropertiesOfComplexes do
-        ResetFilterObj( C, property );
-    od;
-    
-    if IsBound( C!.HomologyGradedObject ) then
-        Unbind( C!.HomologyGradedObject );
-    fi;
-    
-    if IsBound( C!.CohomologyGradedObject ) then
-        Unbind( C!.CohomologyGradedObject );
-    fi;
-    
-    if IsBound( C!.free_resolutions ) then
-        Unbind( C!.free_resolutions );
-    fi;
-    
-end );
-
-####################################
-#
 # constructor functions and methods:
 #
 ####################################
@@ -1175,9 +1170,9 @@ InstallMethod( ViewObj,
             fi;
         else
             if cpx then
-                Print( " sequence of non-well-definded maps" );
+                Print( " sequence of non-well-definded morphisms" );
             else
-                Print( " cosequence of non-well-definded maps" );
+                Print( " cosequence of non-well-definded morphisms" );
             fi;
         fi;
     else

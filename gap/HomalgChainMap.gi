@@ -168,6 +168,36 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( homalgResetFilters,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    local property;
+    
+    if not IsBound( HOMALG.PropertiesOfChainMaps ) then
+        HOMALG.PropertiesOfChainMaps :=
+          [ IsZero,
+            IsMorphism,
+            IsGradedMorphism,
+            IsSplitMonomorphism,
+            IsMonomorphism,
+            IsSplitEpimorphism,
+            IsEpimorphism,
+            IsIsomorphism,
+            IsQuasiIsomorphism,
+            IsImageSquare,
+            IsKernelSquare,
+            IsLambekPairOfSquares ];
+    fi;
+    
+    for property in HOMALG.PropertiesOfChainMaps do
+        ResetFilterObj( cm, property );
+    od;
+    
+end );
+
+##
 InstallMethod( SourceOfSpecialChainMap,
         "for homalg image square chain maps",
         [ IsHomalgChainMap and IsImageSquare ],
@@ -953,42 +983,6 @@ InstallMethod( CertainMorphismAsLambekPairOfSquares,
     SetIsLambekPairOfSquares( sub, true );
     
     return sub;
-    
-end );
-
-####################################
-#
-# global functions:
-#
-####################################
-
-##
-InstallMethod( homalgResetFilters,
-        "for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( cm )
-    local property;
-    
-    if not IsBound( HOMALG.PropertiesOfChainMaps ) then
-        HOMALG.PropertiesOfChainMaps :=
-          [ IsZero,
-            IsMorphism,
-            IsGradedMorphism,
-            IsSplitMonomorphism,
-            IsMonomorphism,
-            IsSplitEpimorphism,
-            IsEpimorphism,
-            IsIsomorphism,
-            IsQuasiIsomorphism,
-            IsImageSquare,
-            IsKernelSquare,
-            IsLambekPairOfSquares ];
-    fi;
-    
-    for property in HOMALG.PropertiesOfChainMaps do
-        ResetFilterObj( cm, property );
-    od;
     
 end );
 
