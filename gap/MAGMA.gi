@@ -32,7 +32,7 @@ InstallValue( HOMALG_IO_MAGMA,
             error_stdout := " error",	## a MAGMA specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "delete ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
-#            multiple_delete := _MAGMA_multiple_delete,
+            multiple_delete := _MAGMA_multiple_delete,
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
@@ -82,9 +82,27 @@ BindGlobal( "TheTypeHomalgExternalRingInMAGMA",
 ##
 InstallGlobalFunction( _MAGMA_multiple_delete,
   function( var_list, stream )
-    local str;
+    local num, l, i, str;
     
-    str := [ "delete ", var_list ];
+    num := 100;
+    
+    l := Length( var_list );
+    
+    i := 1;
+    
+    if l - i < num then
+        str := [ "delete ", var_list ];
+    else
+        while true do
+            str := [ "delete ", var_list{[ i .. i + num - 1 ]} ];
+            homalgSendBlocking( str, "need_command", stream, "break_lists", HOMALG_IO.Pictograms.multiple_delete );
+            i := i + num;
+            if l - i < num then
+                break;
+            fi;
+        od;
+        str := [ "delete ", var_list{[ i .. l ]} ];
+    fi;
     
     homalgSendBlocking( str, "need_command", stream, "break_lists", HOMALG_IO.Pictograms.multiple_delete );
     
