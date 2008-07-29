@@ -14,3 +14,28 @@ DeclareCategory( "IsOrbifoldTriangulation",
 
 ##
 DeclareGlobalFunction( "OrbifoldTriangulation" );
+
+##
+DeclareOperation( "Vertices",
+        [ IsOrbifoldTriangulation ] );
+
+##
+DeclareOperation( "Simplices",
+        [ IsOrbifoldTriangulation ] );
+
+##
+DeclareOperation( "Isotropy",
+        [ IsOrbifoldTriangulation ] );
+
+##
+DeclareOperation( "Mu",
+        [ IsOrbifoldTriangulation ] );
+
+##
+DeclareOperation( "MuData",
+        [ IsOrbifoldTriangulation ] );
+
+##
+DeclareOperation( "InfoString",
+        [ IsOrbifoldTriangulation ] );
+

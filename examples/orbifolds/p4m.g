@@ -11,10 +11,28 @@ C2 := Group( c2 );
 CD := Group( cd );
 V4 := Group( c1, c2 );
 D8 := Group( c1, cd );
-Isotropy := rec( 1 := D8, 2 := C1, 3 := V4, 5 := CD, 6 := C2, 7 := D8 );
-mult := [];
+iso := rec( 1 := D8, 2 := C1, 3 := V4, 5 := CD, 6 := C2, 7 := D8 );
+mu := [];
 
 dim := 3;
+
+# 1: 6 x 69 matrix with rank 5 and kernel dimension 1. Time: 0.000 sec.
+# 2: 69 x 494 matrix with rank 61 and kernel dimension 8. Time: 0.004 sec.
+# 3: 494 x 3919 matrix with rank 427 and kernel dimension 67. Time: 0.104 sec.
+# 4: 3919 x 32180 matrix with rank 3483 and kernel dimension 436. Time: 6.893 sec.
+# 5: 32180 x 261445 matrix with rank 28685 and kernel dimension 3495. Time: 459.921 sec.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 6)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 9)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 12)
+
+#----------------->>>>  Z/4Z^(1 x 1)
+#----------------->>>>  Z/4Z/< 2 > ^ 3
+#----------------->>>>  Z/4Z/< 2 > ^ 6
+#----------------->>>>  Z/4Z/< 2 > ^ 7 + Z/4Z^(1 x 2)
+
+#---------------------------------------------------------------------------
 
 #matrix sizes:
 # [ 6, 95, 1066, 14357, 207788, 3072567 ]

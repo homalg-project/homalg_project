@@ -9,14 +9,33 @@ G2 := Group( (3,4) );
 C := Group( (1,2)(3,4) );
 V4 := Group( (1,2),(3,4) );
 
-Isotropy := rec( 1 := V4, 2 := G1, 3 := V4, 7 := G2, 9 := C );
+iso := rec( 1 := V4, 2 := G1, 3 := V4, 7 := G2, 9 := C );
 
-mult:=[
+mu:=[
 [ [6], [6,9], [5,6,9], [6,8,9], x -> (1,2)(3,4) ],
 [ [6], [6,9], [6,8,9], [5,6,9], x -> (1,2)(3,4) ]
 ];
 
 dim := 2;
+
+# 1: 12 x 86 matrix with rank 11 and kernel dimension 1. Time: 0.000 sec.
+# 2: 86 x 237 matrix with rank 72 and kernel dimension 14. Time: 0.000 sec.
+# 3: 237 x 575 matrix with rank 160 and kernel dimension 77. Time: 0.012 sec.
+# 4: 575 x 1604 matrix with rank 408 and kernel dimension 167. Time: 0.104 sec.
+# 5: 1604 x 4890 matrix with rank 1187 and kernel dimension 417. Time: 0.780 sec.
+# 6: 4890 x 15627 matrix with rank 3692 and kernel dimension 1198. Time: 8.184 sec.
+# 7: 15627 x 51105 matrix with rank 11922 and kernel dimension 3705. Time: 82.674 sec.
+# 8: 51105 x 168363 matrix with rank 39168 and kernel dimension 11937. Time: 901.792 sec.
+# Cohomology dimension at degree 0:  GF(2)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(2)^(1 x 3)
+# Cohomology dimension at degree 2:  GF(2)^(1 x 5)
+# Cohomology dimension at degree 3:  GF(2)^(1 x 7)
+# Cohomology dimension at degree 4:  GF(2)^(1 x 9)
+# Cohomology dimension at degree 5:  GF(2)^(1 x 11)
+# Cohomology dimension at degree 6:  GF(2)^(1 x 13)
+# Cohomology dimension at degree 7:  GF(2)^(1 x 15)
+
+#---------------------------------------------------------------------------------------------------
 
 #matrix sizes: 
 # [ 12, 124, 709, 4517, 30692, 211056, 1458659 ]

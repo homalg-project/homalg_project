@@ -20,6 +20,20 @@ BindGlobal( "SimplicialSetFamily",
 BindGlobal( "SimplicialSetType",
         NewType( SimplicialSetFamily, IsSimplicialSetRep ) );
 
+##  <#GAPDoc Label="SimplicialSet">
+##  <ManSection>
+##  <Meth Arg="ot" Name="SimplicialSet" Label="constructor"/>
+##  <Returns>the simplicial set based on the orbifold triangulation <A>ot</A>.</Returns>
+##  <Description>
+##  The constructor for simplicial sets. This just sets up the object
+##  without any computations. These can be triggered later explicitly
+##  or by <Ref Meth="SimplicialSet" Label="data access"/>.
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SimplicialSet, "constructor",
         [ IsOrbifoldTriangulation ],
@@ -48,6 +62,21 @@ InstallMethod( SimplicialSet, "constructor",
   end
 );
 
+##  <#GAPDoc Label="SimplicialSet2">
+##  <ManSection>
+##  <Meth Arg="S, i" Name="SimplicialSet" Label="data access"/>
+##  <Returns>The components of dimension <A>i</a> of the simplicial set <A>S</A></Returns>
+##  <Description>
+##  This should be used to access existing data instead of using
+##  <C>S!.simplicial_set[ i + 1 ]</C>, as it has the added side
+##  effect of computing <A>S</A> up to dimension <A>i</A>, thus
+##  always returning the desired result.
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SimplicialSet, "creation and accessment of the simplicial set up to the neccessary index",
         [ IsSimplicialSet, IsInt ],
@@ -59,6 +88,20 @@ InstallMethod( SimplicialSet, "creation and accessment of the simplicial set up 
   end
 );
 
+##  <#GAPDoc Label="ComputeNextDimension">
+##  <ManSection>
+##  <Meth Arg="S" Name="ComputeNextDimension"/>
+##  <Returns><A>S</A></Returns>
+##  <Description>
+##  This computes the component of the next dimension of
+##  the simplicial set <A>S</A>. <A>S</A> is extended
+##  as a side effect.
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ComputeNextDimension,
         [ IsSimplicialSet ],
@@ -78,7 +121,7 @@ InstallMethod( ComputeNextDimension,
         for x in last[a] do
             for g in Elements( ss!.orbifold_triangulation!.isotropy.( a ) ) do
                 for y in conn[a] do
-                    if y > x[1] or ( x[1] = y and Order(g) <> 1 ) then
+                    if y > x[1] or ( x[1] = y and Order( g ) <> 1 ) then #this is the key to reducing simplicial set length
                         Append( P[a], [ Concatenation( [ y, g ], x ) ]);
                     fi;
                 od;
@@ -89,12 +132,27 @@ InstallMethod( ComputeNextDimension,
     od;
     ss!.dimension := ss!.dimension + 1;
     dim := ss!.dimension;
-    ss!.( EvalString( String( dim ) ) ) := Set( u );
-    ss!.simplicial_set[ dim + 1 ] := ss!.( EvalString( String( dim ) ) );
+    ss!.(String( dim )) := Set( u );
+    ss!.simplicial_set[ dim + 1 ] := ss!.(String( dim ));
     return ss;
   end
 );
 
+##  <#GAPDoc Label="Extend">
+##  <ManSection>
+##  <Meth Arg="S, i" Name="Extend"/>
+##  <Returns><A>S</A></Returns>
+##  <Description>
+##  This computes the components of the simplicial set <A>S</A>
+##  up to dimension <A>i</A>. <A>S</A> is extended as a side effect.
+##  This method is equivalent to calling <Ref Meth="ComputeNextDimension"/>
+##  the appropriate number of times.
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( Extend,
         [ IsSimplicialSet, IsInt ],

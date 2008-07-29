@@ -9,15 +9,28 @@ C3 := Group( (1,2,3) );
 
 C2 := Group( (1,2) );
 
-Isotropy := rec( 1 := C3, 5 := S3,
+iso := rec( 1 := C3, 5 := S3,
                  6 := C2, 7 := C2 );
 
-mult := [
+mu := [
 [ [2], [1,2], [1,2,3], [1,2,4], x -> (1,2,3) ],
 [ [2], [1,2], [1,2,4], [1,2,3], x -> (1,3,2) ]
 ];
 
 dim := 3;
+
+# 1: 9 x 72 matrix with rank 8 and kernel dimension 1. Time: 0.000 sec.
+# 2: 72 x 261 matrix with rank 63 and kernel dimension 9. Time: 0.008 sec.
+# 3: 261 x 1033 matrix with rank 197 and kernel dimension 64. Time: 0.440 sec.
+# 4: 1033 x 5037 matrix with rank 834 and kernel dimension 199. Time: 33.354 sec.
+# 5: 5037 x 26911 matrix with rank 4201 and kernel dimension 836. Time: 7623.669 sec.
+# Cohomology dimension at degree 0:  GF(3)^(1 x 1)
+# Cohomology dimension at degree 1:  GF(3)^(1 x 1)
+# Cohomology dimension at degree 2:  GF(3)^(1 x 1)
+# Cohomology dimension at degree 3:  GF(3)^(1 x 2)
+# Cohomology dimension at degree 4:  GF(3)^(1 x 2)
+
+#---------------------------------------------------------------------------------------
 
 #------------------------- new triangulation: -------------------------------
 # 1: 9 x 105 matrix with rank 8 and kernel dimension 1. Time: 0.000 sec.

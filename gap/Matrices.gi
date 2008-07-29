@@ -8,7 +8,20 @@
 ##
 #############################################################################
 
-## this computes the boundary, which is a bit complicated because "mu" has to be taken into account.
+##  <#GAPDoc Label="BoundaryOperator">
+##  <ManSection>
+##  <Func Arg="i, L, mu" Name="BoundaryOperator"/>
+##  <Returns>the <A>i</A>th boundary of <A>L</A>, which has to be an
+##  element of a simplicial set. <A>mu</A> is the <M>\mu</M>-map (as 
+##  a function) that has to be taken into account.</Returns>
+##  <Description>
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th boundary of L with the help of mu",
   function( i, L, mu)
     local n, tau, rho, j, boundary;
@@ -51,9 +64,23 @@ InstallMethod( AddEntry,
     M[r][c] := M[r][c] + e;
     return true;
   end
-);
+);  
 
-## create cohomology matrices (as a list)
+##  <#GAPDoc Label="CreateCohomologyMatrix">
+##  <ManSection>
+##  <Meth Arg="S, d, R" Name="CreateCohomologyMatrix"/>
+##  <Returns>the list of homalg matrices over the homalg ring <A>R</A> up to
+##  dimension <A>d</A>, corresponding to the cohomology matrices induced by
+##  the simplicial set <A>S</A>.</Returns>
+##  <Description>
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+##
 InstallMethod( CreateCohomologyMatrix, "for an internal ring",
         [ IsSimplicialSet, IsInt, IsHomalgInternalRingRep ],
   function( ss, d, R )
@@ -99,8 +126,21 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
 
   end
 );
-
-## homology matrices are the transpose of cohomology matrices
+  
+##  <#GAPDoc Label="CreateHomologyMatrix">
+##  <ManSection>
+##  <Meth Arg="S, d, R" Name="CreateHomologyMatrix"/>
+##  <Returns>the list of homalg matrices over the homalg ring <A>R</A> up to
+##  dimension <A>d</A>, corresponding to the homology matrices induced by
+##  the simplicial set <A>S</A>.</Returns>
+##  <Description>
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( CreateHomologyMatrix, "for any ring",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( s, d, R )

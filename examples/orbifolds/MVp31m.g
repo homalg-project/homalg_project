@@ -1,4 +1,4 @@
-# S1 with C2-Isotropy and a D6-point
+# S1 with C2-iso and a D6-point
 
 #  1
 # 2 3
@@ -6,8 +6,8 @@
 M := [ [1,2], [1,3], [2,3] ];
 C2 := Group( (1,2) );
 D6 := Group( (1,2), (1,2,3) );
-Isotropy := rec( 1 := D6, 2 := C2, 3 := C2 );
-mult := [];
+iso := rec( 1 := D6, 2 := C2, 3 := C2 );
+mu := [];
 dim := 4;
 
 # 1: 3 x 31 matrix with rank 2 and kernel dimension 1. Time: 0.000 sec.

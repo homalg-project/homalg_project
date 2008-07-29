@@ -2,8 +2,8 @@
 
 M := [ [1] ];
 G := Group( (1,2,3,4,5,6) );
-Isotropy := rec( 1 := G );
-mult := [];
+iso := rec( 1 := G );
+mu := [];
 dim := 4;
 
 #1: 1 x 5 matrix with rank 0 and kernel dimension 1.

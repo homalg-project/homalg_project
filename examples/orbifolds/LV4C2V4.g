@@ -1,10 +1,10 @@
-# Line with C2-Isotropy and a V4-point in between
+# Line with C2-iso and a V4-point in between
 
 M := [ [1,2], [2,3] ];
 C2 := Group( (1,2) );
 V4 := Group( (1,2), (3,4) );
-Isotropy := rec( 1 := V4, 2 := C2, 3 := V4 );
-mult := [];
+iso := rec( 1 := V4, 2 := C2, 3 := V4 );
+mu := [];
 dim := 5;
 
 # 1: 2 x 10 matrix with rank 1 and kernel dimension 1. Time: 0.000 sec.

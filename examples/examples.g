@@ -127,7 +127,7 @@ if info = "" then
     info := orbifold{ [ 1 .. Length( orbifold ) - 2 ] };
 fi;
 
-ot := OrbifoldTriangulation( M, Isotropy, mult, info );
+ot := OrbifoldTriangulation( M, iso, mu, info );
 ss := SimplicialSet( ot );
 
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )

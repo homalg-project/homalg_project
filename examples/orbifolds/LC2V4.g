@@ -1,10 +1,10 @@
-# Line with C2-Isotropy and a V4-point
+# Line with C2-iso and a V4-point
 
 M := [ [1,2] ];
 C2 := Group( (1,2) );
 V4 := Group( (1,2), (3,4) );
-Isotropy := rec( 2 := V4, 1 := C2 );
-mult := [];
+iso := rec( 2 := V4, 1 := C2 );
+mu := [];
 dim := 5;
 
 #------------------------------------------>>>>  Z^(1 x 1)

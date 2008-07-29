@@ -1,10 +1,10 @@
-# S1 with C2-Isotropy and a V4-point
+# S1 with C2-iso and a V4-point
 
 M := [ [1,2], [1,3], [2,3] ];
 C2 := Group( (1,2) );
 V4 := Group( (1,2), (3,4) );
-Isotropy := rec( 1 := V4, 2 := C2, 3 := C2 );
-mult := [];
+iso := rec( 1 := V4, 2 := C2, 3 := C2 );
+mu := [];
 dim := 4;
 
 # 1: 3 x 23 matrix with rank 2 and kernel dimension 1. Time: 0.000 sec.

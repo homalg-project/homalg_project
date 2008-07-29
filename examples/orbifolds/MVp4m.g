@@ -1,4 +1,4 @@
-# S1 with C2-Isotropy, one V4-point, two D8-points
+# S1 with C2-iso, one V4-point, two D8-points
 
 #    1
 #   2 3
@@ -15,7 +15,7 @@ CD := Group( cd );
 V4 := Group( c1, c2 );
 D8 := Group( c1, cd );
 
-Isotropy := rec( 1 := V4, 2 := C1, 3 := C2, 4 := D8, 5 := CD, 6 := D8 );
-mult := [];
+iso := rec( 1 := V4, 2 := C1, 3 := C2, 4 := D8, 5 := CD, 6 := D8 );
+mu := [];
 dim := 3;
 

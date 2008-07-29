@@ -2,6 +2,6 @@
 
 M := [ [1] ];
 G := Group( (1,2) );
-Isotropy := rec( 1 := G );
-mult := [];
+iso := rec( 1 := G );
+mu := [];
 dim := 10;

@@ -1,7 +1,7 @@
-# a line L with C2-Isotropy
+# a line L with C2-iso
 
 M := [ [1,2], [2,3] ];
 G := Group( (1,2) );
-Isotropy := rec( 2 := G );
-mult := [];
+iso := rec( 2 := G );
+mu := [];
 dim := 10;

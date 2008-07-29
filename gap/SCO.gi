@@ -8,7 +8,19 @@
 ##
 #############################################################################
 
-## set everything up to work with the homalg Homology method
+##  <#GAPDoc Label="Homology">
+##  <ManSection>
+##  <Meth Arg="L, R" Name="Homology"/>
+##  <Returns>the homology of a list <A>L</A> of homalg matrices over the homalg ring <A>R</A>.
+##  </Returns>
+##  <Description>
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( Homology,
         [ IsList, IsHomalgRing ],
   function( morphisms, R )
@@ -24,8 +36,20 @@ InstallMethod( Homology,
     return Homology( C );
   end
 );
-  
-## set everything up to work with the homalg Cohomology method
+
+##  <#GAPDoc Label="Cohomology">
+##  <ManSection>
+##  <Meth Arg="L, R" Name="Cohomology"/>
+##  <Returns>the cohomology of a list <A>L</A> of homalg matrices over the homalg ring <A>R</A>.
+##  </Returns>
+##  <Description>
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( Cohomology,
         [ IsList, IsHomalgRing ],
   function( morphisms, R )
@@ -42,7 +66,20 @@ InstallMethod( Cohomology,
   end
 );
 
-## an easy way of calling the example script SCO/examples/examples.g
+##  <#GAPDoc Label="SCO_Examples">
+##  <ManSection>
+##  <Meth Arg="" Name="SCO_Examples"/>
+##  <Returns>nothing.</Returns>
+##  <Description>
+##  This is just an easy way to call the script 'examples.g', which is
+##  located in 'gap/pkg/SCO/examples/'.
+##  <Example><![CDATA[
+##  no example yet
+##  ]]></Example>
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( SCO_Examples, "",
         [ ],
   function( )
