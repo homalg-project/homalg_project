@@ -6,7 +6,14 @@
 
 LoadPackage("GAPDoc");
 
-MakeGAPDocDoc("doc", "SCO", [], "SCO");
+#MakeGAPDocDoc("doc", "SCO", [], "SCO");
+
+list := [ "../gap/OrbifoldTriangulation.gi",
+	  "../gap/SimplicialSet.gi",
+	  "../gap/Matrices.gi",
+          "../gap/SCO.gi" ];
+
+MakeGAPDocDoc("doc", "SCO", list, "SCO");
 
 GAPDocManualLab("SCO");
 

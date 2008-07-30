@@ -1,16 +1,16 @@
 <!-- 
 
-  examples.xml            SCO package documentation                  Simon Goertzen
+  usage.xml            SCO package documentation                  Simon Goertzen
                                                                      
 
          Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
 
-This chapter gives examples on the usage of this package.
+This chapter explains the usage of this package.
 
 -->
 
-<Chapter Label="examples">
-<Heading>Examples</Heading>
+<Chapter Label="usage">
+<Heading>Usage</Heading>
 
 Here comes text.<P/>
 

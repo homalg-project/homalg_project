@@ -22,24 +22,34 @@ BindGlobal( "TheTypeOrbifoldTriangulation",
 
 ##  <#GAPDoc Label="OrbifoldTriangulation">
 ##  <ManSection >
-##  <Func Arg="M[, Isotropy, mu, info]" Name="OrbifoldTriangulation" />
-##  <Returns>the Orbifold Triangulation corresponding to <A>M</A></Returns>
+##  <Func Arg="M[, I, mu_data, info]" Name="OrbifoldTriangulation" />
+##  <Returns>OrbifoldTriangulation</Returns>
 ##  <Description>
-##  The constructor for OrbifoldTriangulations. Needs the list of maximal
-##  simplices <A>M</A>, the <A>Isotropy</A> at certain vertices as a record,
-##  and the function <A>mu</A> as a list of lists of length 4. If only one
-##  argument is given, <A>Isotropy</A> and <A>mu</A> are supposed to be trivial.
-##  In case of two arguments, <A>mu</A> is supposed to be trivial. If the last
-##  argument <A>info</A> is a string it is stored in the info component and
-##  does not count towards the number of arguments.
+##  The constructor for OrbifoldTriangulations. Needs the list <A>M</A> of maximal
+##  simplices, the Isotropy at certain vertices as a record <A>I</A>,
+##  and the list <A>mu_data</A> that encodes the function mu. If only one
+##  argument is given, <A>I</A> and <A>mu_data</A> are supposed to be empty.
+##  In case of two arguments, <A>mu_data</A> is supposed to be empty. If the last
+##  argument <A>info</A> is given as a string, it is stored in the info component
+##  of the orbifold triangulation and does not count towards the total number of arguments.
 ##  <Example><![CDATA[
-##  no example yet
+##  gap> M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,4] ];;
+##  gap> S2 := OrbifoldTriangulation( M, "S^2" );
+##  OrbifoldTriangulation "S^2" of dimension 2.
+##  4 simplices on 4 vertices without Isotropy
+##  gap> I := rec( 1 := Group( (1,2) ) );;
+##  gap> mu_data := [
+##  [ [2], [1,2], [1,2,3], [1,2,4], x->x*(1,2) ],
+##  [ [2], [1,2], [1,2,4], [1,2,3], x->x*(1,2) ]
+##  ];;
+##  gap> Teardrop := OrbifoldTriangulation( M, I, mu_data, "Teardrop" );
+##  OrbifoldTriangulation "Teardrop" of dimension 2.
+##  4 simplices on 4 vertices with Isotropy on 1 vertex and nontrivial mu-maps
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-
 InstallGlobalFunction( OrbifoldTriangulation,
   function( arg )
     local nargs, info, vertices, triangulation, mu, ind;
@@ -177,8 +187,11 @@ InstallMethod( Display,
 ##  <#GAPDoc Label="Vertices">
 ##  <ManSection >
 ##  <Meth Arg="ot" Name="Vertices" />
-##  <Returns>the vertices of the orbifold triangulation <A>ot</A>.
-##  This should be preferred to the equivalent <C>ot!.vertices</C>.</Returns>
+##  <Returns>List <A>V</A></Returns>
+##  <Description>
+##  This returns the list of vertices <A>V</A> of the orbifold triangulation <A>ot</A>.
+##  Should be preferred to the equivalent <C>ot!.vertices</C>.
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>  
 ##
@@ -189,8 +202,11 @@ InstallMethod( Vertices,
 ##  <#GAPDoc Label="Simplices">
 ##  <ManSection >
 ##  <Meth Arg="ot" Name="Simplices" />
-##  <Returns>the maximal simplices of the orbifold triangulation <A>ot</A>.
-##  This should be preferred to the equivalent <C>ot!.max_simplices</C>.</Returns>
+##  <Returns>List <A>M</A></Returns>
+##  <Description>
+##  This returns the list of maximal simplices <A>M</A> of the orbifold triangulation <A>ot</A>.
+##  Should be preferred to the equivalent <C>ot!.max_simplices</C>.
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -201,8 +217,11 @@ InstallMethod( Simplices,
 ##  <#GAPDoc Label="Isotropy">
 ##  <ManSection >
 ##  <Meth Arg="ot" Name="Isotropy" />
-##  <Returns>the isotropy record of the orbifold triangulation <A>ot</A>.
-##  This should be preferred to the equivalent <C>ot!.isotropy</C>.</Returns>
+##  <Returns>Record <A>I</A></Returns>
+##  <Description>
+##  This returns the isotropy record <A>I</A> of the orbifold triangulation <A>ot</A>.
+##  Should be preferred to the equivalent <C>ot!.isotropy</C>.
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -213,9 +232,11 @@ InstallMethod( Isotropy,
 ##  <#GAPDoc Label="Mu">
 ##  <ManSection >
 ##  <Meth Arg="ot" Name="Mu" />
-##  <Returns>the function mu of the orbifold triangulation <A>ot</A>.
-##  This should be preferred to the equivalent <C>ot!.mu</C>.
-##  &see; <Ref Meth="MuData"/>.</Returns>
+##  <Returns>Function <A>mu</A></Returns>
+##  <Description>
+##  This returns the function <A>mu</A> of the orbifold triangulation <A>ot</A>.
+##  Should be preferred to the equivalent <C>ot!.mu</C>.
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -226,9 +247,11 @@ InstallMethod( Mu,
 ##  <#GAPDoc Label="MuData">
 ##  <ManSection >
 ##  <Meth Arg="ot" Name="MuData" />
-##  <Returns>the information that makes up the function mu of the orbifold triangulation <A>ot</A>.
-##  This should be preferred to the equivalent <C>ot!.mu_data</C>.
-##  &see; <Ref Meth="Mu"/>.</Returns>
+##  <Returns>List <A>mu_data</A></Returns>
+##  <Description>
+#  This returns the list <A>mu_data</A> that encodes the function mu of the orbifold triangulation <A>ot</A>.
+##  Should be preferred to the equivalent <C>ot!.mu_data</C>.
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -239,8 +262,11 @@ InstallMethod( MuData,
 ##  <#GAPDoc Label="InfoString">
 ##  <ManSection >
 ##  <Meth Arg="ot" Name="InfoString" />
-##  <Returns>the info string of the orbifold triangulation <A>ot</A>.
-##  This should be preferred to the equivalent <C>ot!.info</C>.</Returns>
+##  <Returns>String <A>info</A></Returns>
+##  <Description>
+##  This return the string <A>info</A> of the orbifold triangulation <A>ot</A>.
+##  Should be preferred to the equivalent <C>ot!.info</C>.
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##

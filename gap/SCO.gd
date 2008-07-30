@@ -16,5 +16,4 @@ DeclareOperation( "Cohomology",
         [ IsList, IsHomalgRing ] );
 
 ##
-DeclareOperation( "SCO_Examples",
-        [ ] );
+DeclareGlobalFunction( "SCO_Examples" );

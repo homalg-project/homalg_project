@@ -23,13 +23,18 @@ BindGlobal( "SimplicialSetType",
 ##  <#GAPDoc Label="SimplicialSet">
 ##  <ManSection>
 ##  <Meth Arg="ot" Name="SimplicialSet" Label="constructor"/>
-##  <Returns>the simplicial set based on the orbifold triangulation <A>ot</A>.</Returns>
+##  <Returns>SimplicialSet</Returns>
 ##  <Description>
-##  The constructor for simplicial sets. This just sets up the object
-##  without any computations. These can be triggered later explicitly
-##  or by <Ref Meth="SimplicialSet" Label="data access"/>.
+##  The constructor for simplicial sets based on an orbifold triangulation <A>ot</A>.
+##  This just sets up the object without any computations.
+##  These can be triggered later, either explicitly or by <Ref Meth="SimplicialSet" Label="data access"/>.
 ##  <Example><![CDATA[
-##  no example yet
+##  gap> Teardrop;
+##  OrbifoldTriangulation "Teardrop" of dimension 2.
+##  4 simplices on 4 vertices with Isotropy on 1 vertex and nontrivial mu-maps
+##  gap> S := SimplicialSet( Teardrop );
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 0 with Length vector [ 4 ]
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -65,14 +70,31 @@ InstallMethod( SimplicialSet, "constructor",
 ##  <#GAPDoc Label="SimplicialSet2">
 ##  <ManSection>
 ##  <Meth Arg="S, i" Name="SimplicialSet" Label="data access"/>
-##  <Returns>The components of dimension <A>i</a> of the simplicial set <A>S</A></Returns>
+##  <Returns>List <A>S</A>_<A>i</A></Returns>
 ##  <Description>
-##  This should be used to access existing data instead of using
-##  <C>S!.simplicial_set[ i + 1 ]</C>, as it has the added side
-##  effect of computing <A>S</A> up to dimension <A>i</A>, thus
+##  This returns the components of dimension <A>i</A> of the simplicial set <A>S</A>.
+##  Should be used to access existing data instead of using <C>S!.simplicial_set[ i + 1 ]</C>,
+##  as it has the additional side effect of computing <A>S</A> up to dimension <A>i</A>, thus
 ##  always returning the desired result.
 ##  <Example><![CDATA[
-##  no example yet
+##  gap> S;
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 0 with Length vector [ 4 ]
+##  gap> S!.simplicial_set[1];
+##  [ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
+##  gap> S!.simplicial_set[2];;
+##  List Element: <list>[2] must have an assigned value
+##  not in any function
+##  Entering break read-eval-print loop ...
+##  you can 'quit;' to quit to outer loop, or
+##  you can 'return;' after assigning a value to continue
+##  brk>
+##  gap> SimplicialSet( S, 0 );
+##  [ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
+##  gap> SimplicialSet( S, 1 );;
+##  gap> S;
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 1 with Length vector [ 4, 12 ]
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -97,7 +119,12 @@ InstallMethod( SimplicialSet, "creation and accessment of the simplicial set up 
 ##  the simplicial set <A>S</A>. <A>S</A> is extended
 ##  as a side effect.
 ##  <Example><![CDATA[
-##  no example yet
+##  gap> S;
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 1 with Length vector [ 4, 12 ]
+##  gap> ComputeNextDimension( S );
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 2 with Length vector [ 4, 12, 22 ]
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -148,7 +175,12 @@ InstallMethod( ComputeNextDimension,
 ##  This method is equivalent to calling <Ref Meth="ComputeNextDimension"/>
 ##  the appropriate number of times.
 ##  <Example><![CDATA[
-##  no example yet
+##  gap> S;
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 2 with Length vector [ 4, 12, 22 ]
+##  gap> Extend( S, 5 );
+##  The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
