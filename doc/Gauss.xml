@@ -19,25 +19,21 @@
   <Version>
       Version <#Include SYSTEM "../VERSION">
   </Version>
-  <Author>Simon Goertzen
-          <Email>Simon.Goertzen@RWTH-Aachen.De</Email> 
+  <Author>Simon Goertzen<Br/>
+          <Email>simon.goertzen@rwth-aachen.de</Email>
+          <Homepage>wwwb.math.rwth-aachen.de/&tilde;simon</Homepage>
+	  <Address>
+	  Lehrstuhl B für Mathematik<Br/>
+	  Templergraben 64<Br/>
+	  52062 Aachen<Br/>
+	  (Germany)
+	  </Address>
   </Author>
   <Date>July 2008</Date>
-  <Address>
-  Lehrstuhl B für Mathematik<Br/> Templergraben 
-  64<Br/> 52062 Aachen<Br/> (Germany)
-  </Address>
   <Abstract>This document explains the primary uses of the &Gauss; package.
-            The first introductory chapter answers the question why
-            and how the &GAP; functionality concerning a sparse matrix
-            type and gaussian algorithms was extended.
-            The following chapters are concerned with the workings of
-            the sparse matrix type and sparse Gaussian algorithms.
             Included is a documented list of the most important methods
             and functions needed to work with sparse matrices and the
             algorithms provided by the &Gauss; package.
-            Anyone interested in source code should just check out the files
-            in the <F>gap/pkg/Gauss/gap</F> folder.
   </Abstract>
   <Copyright>&copyright; 2007-2008 by Simon Goertzen
   </Copyright>
@@ -56,6 +52,29 @@
 <TableOfContents/>
 
 <Body>
+
+<Chapter Label="chap:intro"><Heading>Introduction</Heading>
+
+<Section Label="sec:overview">
+<Heading>Overview over this manual</Heading>
+
+Chapter <Ref Chap="chap:intro"/> is concerned with the technical details of
+installing and running this package. Chapter <Ref Chap="chap:EGF"/>
+answers the question why and how the &GAP; functionality concerning a
+sparse matrix type and gaussian algorithms was extended. The following
+chapters are concerned with the workings of the sparse matrix type
+(<Ref Chap="chap:SM"/>) and sparse Gaussian algorithms (<Ref
+Chap="chap:Gauss"/>). Included is a documented list of the most
+important methods and functions needed to work with sparse matrices
+and the algorithms provided by the &Gauss; package. Anyone interested
+in source code should just check out the files in the
+<F>gap/pkg/Gauss/gap</F> folder.
+
+</Section>
+
+<#Include SYSTEM "install.xml"/>
+
+</Chapter>
 
 <Chapter Label="chap:EGF"><Heading>Extending Gauss Functionality</Heading>
 
