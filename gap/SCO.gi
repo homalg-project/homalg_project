@@ -17,8 +17,8 @@
 ##  homalg matrices over the homalg ring <A>R</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]
+##  <The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 0 with Length vector [ 4 ]>
 ##  gap> R := HomalgRingOfIntegers();
 ##  <A homalg internal ring>
 ##  gap> M := CreateHomologyMatrix( S, 4, R );;
@@ -59,8 +59,8 @@ InstallMethod( Homology,
 ##  homalg matrices over the homalg ring <A>R</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]
+##  <The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 0 with Length vector [ 4 ]>
 ##  gap> R := HomalgRingOfIntegers();
 ##  <A homalg internal ring>
 ##  gap> M := CreateCohomologyMatrix( S, 4, R );;

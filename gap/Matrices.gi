@@ -76,12 +76,12 @@ InstallMethod( AddEntry,
 ##  induced by the simplicial set <A>S</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]
+##  <The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 0 with Length vector [ 4 ]>
 ##  gap> M := CreateCohomologyMatrix( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]
+##  <The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -143,12 +143,12 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
 ##  induced by the simplicial set <A>S</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]
+##  <The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 0 with Length vector [ 4 ]>
 ##  gap> M := CreateCohomologyMatrix( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]
+##  <The simplicial set of the orbifold triangulation "Teardrop",
+##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>

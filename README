@@ -1,10 +1,10 @@
-    README file for the `Gauss' GAP4 package
+    README file for the `SCO' GAP4 package
         
 To get the newest version of this GAP 4 package download the archive
 file
-    Gauss-x.x.tar.gz
+    SCO.tar.gz
 and unpack it using 
-    gunzip Gauss-x.x.tar.gz; tar xvf Gauss-x.x.tar
+    gunzip SCO.tar.gz; tar xvf SCO.tar
 
 (Note that if you use a browser like `netscape' for downloading the
 archive file the `gunzip' step above may already be done by the browser,
@@ -12,12 +12,12 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `Gauss'.
+of your GAP 4 installation. It creates a subdirectory called `SCO'.
 
 This completes the installation of the package.
 
 Recompiling the documentation is possible by the command `gap makedoc.g'
-in the Gauss directory. But this should not be necessary.
+in the SCO directory. But this should not be necessary.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.

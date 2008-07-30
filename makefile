@@ -8,7 +8,7 @@ clean:
 	(cd doc ; ./clean)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/SCO.tar.gz --exclude ".svn" --exclude test --exclude "public_html" SCO)
+	(mkdir -p ../tar; cd ..; tar czvf tar/SCO.tar.gz --exclude ".git" --exclude test --exclude "public_html" SCO)
 
 WEBPOS=~/gap/pkg/SCO/public_html
 
@@ -21,4 +21,5 @@ towww: archive
 	cp README ${WEBPOS}/README.SCO
 	cp doc/manual.pdf ${WEBPOS}/SCO.pdf
 	cp ../tar/SCO.tar.gz ${WEBPOS}
+	cp doc/*.html ${WEBPOS}/
 
