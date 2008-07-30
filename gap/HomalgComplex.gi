@@ -102,7 +102,7 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branchin
         "for homalg complexes",
         [ IsHomalgComplex ],
         
-  function( M )
+  function( C )
     
     return fail;
     
@@ -965,6 +965,8 @@ InstallMethod( DecideZero,
     
     List( MorphismsOfComplex( C ), DecideZero );
     
+    IsZero( C );
+    
     return C;
     
 end );
@@ -981,6 +983,8 @@ InstallMethod( ByASmallerPresentation,
     else
         List( MorphismsOfComplex( C ), ByASmallerPresentation );
     fi;
+    
+    IsZero( C );
     
     return C;
     
@@ -1095,7 +1099,7 @@ InstallMethod( ViewObj,
         [ IsHomalgComplex ],
         
   function( o )
-    local cpx, first_attribute, degrees, l;
+    local cpx, first_attribute, degrees, l, oi;
     
     cpx := IsComplexOfFinitelyPresentedObjectsRep( o );
     
@@ -1189,6 +1193,8 @@ InstallMethod( ViewObj,
     
     l := Length( degrees );
     
+    oi := CertainObject( o, degrees[1] );
+    
     if l = 1 then
         
         Print( "a single " );
@@ -1199,10 +1205,10 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        if IsHomalgModule( oi ) then
             Print( " module" );
         else
-            if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
                 Print( " complex" );
             else
                 Print( " cocomplex" );
@@ -1227,10 +1233,10 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+        if IsHomalgModule( oi ) then
             Print( " modules" );
         else
-            if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+            if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
                 Print( " complexes" );
             else
                 Print( " cocomplexes" );
@@ -1257,7 +1263,7 @@ InstallMethod( ViewObj,
         [ IsComplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
         
   function( o )
-    local l, degrees;
+    local degrees, l, oi;
     
     Print( "<A graded homology object consisting of " );
     
@@ -1277,13 +1283,15 @@ InstallMethod( ViewObj,
         Print( " right" );
     fi;
     
-    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+    oi := CertainObject( o, degrees[1] );
+    
+    if IsHomalgModule( oi ) then
         Print( " module" );
         if l > 1 then
             Print( "s" );
         fi;
     else
-        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+        if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
             Print( " complex" );
         else
             Print( " cocomplex" );
@@ -1311,7 +1319,7 @@ InstallMethod( ViewObj,
         [ IsCocomplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
         
   function( o )
-    local l, degrees;
+    local degrees, l, oi;
     
     Print( "<A graded cohomology object consisting of " );
     
@@ -1331,13 +1339,15 @@ InstallMethod( ViewObj,
         Print( " right" );
     fi;
     
-    if IsHomalgModule( CertainObject( o, degrees[1] ) ) then
+    oi := CertainObject( o, degrees[1] );
+    
+    if IsHomalgModule( oi ) then
         Print( " module" );
         if l > 1 then
             Print( "s" );
         fi;
     else
-        if IsComplexOfFinitelyPresentedObjectsRep( CertainObject( o, degrees[1] ) ) then
+        if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
             Print( " complex" );
         else
             Print( " cocomplex" );
@@ -1365,6 +1375,11 @@ InstallMethod( ViewObj,
         [ IsComplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
+    local degrees, l;
+    
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
     
     Print( "<A zero " );
     
@@ -1374,7 +1389,13 @@ InstallMethod( ViewObj,
         Print( "right" );
     fi;
     
-    Print( " complex>" );
+    Print( " complex with degree" );
+    
+    if l > 1 then
+        Print( "s" );
+    fi;
+    
+    Print( " ", degrees, ">" );
     
 end );
 
@@ -1384,6 +1405,11 @@ InstallMethod( ViewObj,
         [ IsCocomplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
+    local degrees, l;
+    
+    degrees := ObjectDegreesOfComplex( o );
+    
+    l := Length( degrees );
     
     Print( "<A zero " );
     
@@ -1393,7 +1419,13 @@ InstallMethod( ViewObj,
         Print( "right" );
     fi;
     
-    Print( " cocomplex>" );
+    Print( " cocomplex with degree" );
+    
+    if l > 1 then
+        Print( "s" );
+    fi;
+    
+    Print( " ", degrees, ">" );
     
 end );
 

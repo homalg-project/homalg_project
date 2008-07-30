@@ -117,7 +117,7 @@ end );
 
 InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
   function( cpx_post_pre )
-    local pre, post, phi;
+    local pre, post, phi, modulo_image_pre;
     
     if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
         Error( "expecting a complex containing two morphisms\n" );
@@ -144,6 +144,18 @@ InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
     elif HasIsMorphism( pre ) and IsMorphism( pre ) and
       HasIsMorphism( post ) and IsMorphism( post ) then
         SetIsMorphism( phi, true );
+    fi;
+    
+    ## the following is crucial for spectral sequences:
+    if HasMonomorphismModuloImage( pre ) then
+        modulo_image_pre := PreCompose( MonomorphismModuloImage( pre ), post );
+        if HasMonomorphismModuloImage( post ) then
+            SetMonomorphismModuloImage( phi, StackMaps( MonomorphismModuloImage( post ),  modulo_image_pre ) );
+        else
+            SetMonomorphismModuloImage( phi, modulo_image_pre );
+        fi;
+    elif HasMonomorphismModuloImage( post ) then
+        SetMonomorphismModuloImage( phi, MonomorphismModuloImage( post ) );
     fi;
     
     return phi;
@@ -260,7 +272,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     
     N := Range( beta );
     
-    ## one of the coolest parts of the code (the idea of the natural embedding in action):
+    ## the most decisive part of the code (the idea of the natural embedding in action):
     if HasMonomorphismModuloImage( beta ) then
         N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
     else

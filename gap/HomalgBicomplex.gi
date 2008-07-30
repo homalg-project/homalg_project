@@ -14,7 +14,7 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgComplex
+# two new representations for the GAP-category IsHomalgBicomplex
 # which are subrepresentations of the representation IsFinitelyPresentedObjectRep:
 DeclareRepresentation( "IsBicomplexOfFinitelyPresentedObjectsRep",
         IsHomalgBicomplex and IsFinitelyPresentedObjectRep,
@@ -109,7 +109,7 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branchin
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],
         
-  function( M )
+  function( B )
     
     return fail;
     
@@ -139,7 +139,11 @@ InstallMethod( ObjectDegreesOfBicomplex,
         ConvertToRangeRep( deg_q );
     fi;
     
-    return [ deg_p, deg_q ];
+    if IsTransposedWRTTheAssociatedComplex( B ) then
+        return [ deg_q, deg_p ];
+    else
+        return [ deg_p, deg_q ];
+    fi;
     
 end );
 
@@ -191,9 +195,9 @@ InstallMethod( CertainObject,
     
     if obj_p = fail then
         return fail;
-    else
-        return CertainObject( obj_p, bidegree[2] );
     fi;
+    
+    return CertainObject( obj_p, bidegree[2] );
     
 end );
 
@@ -207,7 +211,7 @@ InstallMethod( ObjectsOfBicomplex,
     
     bidegrees := ObjectDegreesOfBicomplex( B );
     
-    return List( bidegrees[2], q -> List( bidegrees[1], p -> CertainObject( B, [ p, q ] ) ) );
+    return List( Reversed( bidegrees[2] ), q -> List( bidegrees[1], p -> CertainObject( B, [ p, q ] ) ) );
     
 end );
 
@@ -217,11 +221,11 @@ InstallMethod( LowestBidegreeObjectInBicomplex,
         [ IsHomalgBicomplex ],
         
   function( B )
-    local p_q;
+    local pq;
     
-    p_q := LowestBidegreeInBicomplex( B );
+    pq := LowestBidegreeInBicomplex( B );
     
-    return CertainObject( B, p_q[1], p_q[2] );
+    return CertainObject( B, pq );
     
 end );
 
@@ -231,11 +235,11 @@ InstallMethod( HighestBidegreeObjectInBicomplex,
         [ IsHomalgBicomplex ],
         
   function( B )
-    local p_q;
+    local pq;
     
-    p_q := HighestBidegreeInBicomplex( B );
+    pq := HighestBidegreeInBicomplex( B );
     
-    return CertainObject( B, p_q[1], p_q[2] );
+    return CertainObject( B, pq );
     
 end );
 
@@ -245,7 +249,7 @@ InstallMethod( CertainVerticalMorphism,
         [ IsHomalgBicomplex, IsList ],
         
   function( B, pq )
-    local bidegree, C, obj_p;
+    local bidegree, C, obj_p, mor;
     
     if not ForAll( pq, IsInt ) or not Length( pq ) = 2 then
         Error( "the second argument must be a list of two integers\n" );
@@ -259,9 +263,45 @@ InstallMethod( CertainVerticalMorphism,
     
     if obj_p = fail then
         return fail;
-    else
-        return MinusOne( HomalgRing( B ) )^pq[1] * CertainMorphism( obj_p, bidegree[2] );
     fi;
+    
+    mor := CertainMorphism( obj_p, bidegree[2] );
+    
+    if mor = fail then
+        return fail;
+    fi;
+    
+    if IsEvenInt( pq[1] ) then
+        return mor;
+    else
+        return -mor;
+    fi;
+    
+end );
+
+##
+InstallMethod( CertainVerticalMorphism,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex and IsTransposedWRTTheAssociatedComplex, IsList ],
+        
+  function( B, pq )
+    local bidegree, C, mor_p;
+    
+    if not ForAll( pq, IsInt ) or not Length( pq ) = 2 then
+        Error( "the second argument must be a list of two integers\n" );
+    fi;
+    
+    bidegree := B!.bidegree_getter( pq );
+    
+    C := UnderlyingComplex( B );
+    
+    mor_p := CertainMorphism( C, bidegree[1] );
+    
+    if mor_p = fail then
+        return fail;
+    fi;
+    
+    return CertainMorphism( mor_p, bidegree[2] );
     
 end );
 
@@ -285,8 +325,44 @@ InstallMethod( CertainHorizontalMorphism,
     
     if mor_p = fail then
         return fail;
+    fi;
+    
+    return CertainMorphism( mor_p, bidegree[2] );
+    
+end );
+
+##
+InstallMethod( CertainHorizontalMorphism,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex and IsTransposedWRTTheAssociatedComplex, IsList ],
+        
+  function( B, pq )
+    local bidegree, C, obj_p, mor;
+    
+    if not ForAll( pq, IsInt ) or not Length( pq ) = 2 then
+        Error( "the second argument must be a list of two integers\n" );
+    fi;
+    
+    bidegree := B!.bidegree_getter( pq );
+    
+    C := UnderlyingComplex( B );
+    
+    obj_p := CertainObject( C, bidegree[1] );
+    
+    if obj_p = fail then
+        return fail;
+    fi;
+    
+    mor := CertainMorphism( obj_p, bidegree[2] );
+    
+    if mor = fail then
+        return fail;
+    fi;
+    
+    if IsEvenInt( pq[1] ) then
+        return mor;
     else
-        return CertainMorphism( mor_p, bidegree[2] );
+        return -mor;
     fi;
     
 end );
@@ -521,6 +597,10 @@ InstallMethod( DecideZero,
     
     DecideZero( UnderlyingComplex( B ) );
     
+    IsZero( B );
+    
+    return B;
+    
 end );
 
 ##
@@ -532,6 +612,10 @@ InstallMethod( ByASmallerPresentation,
     
     ByASmallerPresentation( UnderlyingComplex( B ) );
     
+    IsZero( B );
+    
+    return B;
+    
 end );
 
 ####################################
@@ -542,7 +626,7 @@ end );
 
 InstallGlobalFunction( HomalgBicomplex,
   function( arg )
-    local nargs, C, complex, of_complex, left, type, bidegree_getter, B;
+    local nargs, C, transposed, complex, of_complex, left, type, bidegree_getter, B;
     
     nargs := Length( arg );
     
@@ -556,6 +640,12 @@ InstallGlobalFunction( HomalgBicomplex,
         Error( "the first argument is not a complex of complexes\n" );
     fi;
     
+    if nargs > 1 and IsString( arg[nargs] ) and Length( arg[nargs] ) > 0 and LowercaseString( arg[nargs]{[1]} )= "t" then
+        transposed := true;
+    else
+        transposed := false;
+    fi;
+    
     complex := IsComplexOfFinitelyPresentedObjectsRep( C );
     of_complex := IsComplexOfFinitelyPresentedObjectsRep( LowestDegreeObjectInComplex( C ) );
     
@@ -567,28 +657,35 @@ InstallGlobalFunction( HomalgBicomplex,
         else
             type := TheTypeHomalgBicomplexOfRightObjects;
         fi;
-        if of_complex then
-            bidegree_getter := function( pq ) return [ pq[1], pq[2] ]; end;
-        else
-            bidegree_getter := function( pq ) return [ pq[1], -pq[2] ]; end;
-        fi;
     else
         if left then
             type := TheTypeHomalgBicocomplexOfLeftObjects;
         else
             type := TheTypeHomalgBicocomplexOfRightObjects;
         fi;
-        if of_complex then
-            bidegree_getter := function( pq ) return [ pq[1], -pq[2] ]; end;
+    fi;
+    
+    if ( complex and of_complex ) or ( not complex and not of_complex ) then
+        if transposed then
+            bidegree_getter := function( pq ) return [ pq[2], pq[1] ]; end;
         else
             bidegree_getter := function( pq ) return [ pq[1], pq[2] ]; end;
         fi;
+    else
+        if transposed then
+            bidegree_getter := function( pq ) return [ pq[2], -pq[1] ]; end;
+        else
+            bidegree_getter := function( pq ) return [ pq[1], -pq[2] ]; end;
+        fi;
     fi;
     
-    B := rec( complex := C, bidegree_getter := bidegree_getter );
+    B := rec( complex := C,
+              bidegree_getter := bidegree_getter );
     
     ## Objectify
-    Objectify( type, B );
+    ObjectifyWithAttributes(
+            B, type,
+            IsTransposedWRTTheAssociatedComplex, transposed );
     
     if HasIsComplex( C ) then
         SetIsBicomplex( B, IsComplex( C ) );
@@ -597,6 +694,40 @@ InstallGlobalFunction( HomalgBicomplex,
     fi;
     
     return B;
+    
+end );
+
+##
+InstallMethod( TransposedBicomplex,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    local tB, C;
+    
+    if IsBound(B!.TransposedBicomplex) then
+        return B!.TransposedBicomplex;
+    fi;
+    
+    C := UnderlyingComplex( B );
+    
+    tB := HomalgBicomplex( C, "TransposedBicomplex" );
+    
+    B!.TransposedBicomplex := tB;
+    tB!.TransposedBicomplex := B;	## thanks GAP
+    
+    return tB;
+    
+end );
+
+##
+InstallMethod( TransposedBicomplex,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex and IsTransposedWRTTheAssociatedComplex ],
+        
+  function( tB )
+    
+    return tB!.TransposedBicomplex;
     
 end );
 
@@ -612,13 +743,13 @@ InstallMethod( ViewObj,
         [ IsHomalgBicomplex ],
         
   function( o )
-    local cpx, degrees, l;
+    local cpx, degrees, l, opq;
     
     cpx := IsBicomplexOfFinitelyPresentedObjectsRep( o );
     
     Print( "<A" );
     
-    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero homalg (co)complex
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero homalg bi(co)complex
         Print( " non-zero" );
     fi;
     
@@ -658,7 +789,57 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    Print( ">" );
+    Print( " containing " );
+    
+    degrees := ObjectDegreesOfBicomplex( o );
+    
+    l := Length( degrees[1] ) * Length( degrees[2] );
+    
+    opq := CertainObject( o, [ degrees[1][1], degrees[2][1] ] );
+    
+    if l = 1 then
+        
+        Print( "a single " );
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+            Print( "left" );
+        else
+            Print( "right" );
+        fi;
+        
+        if IsHomalgModule( opq ) then
+            Print( " module" );
+        else
+            if IsComplexOfFinitelyPresentedObjectsRep( opq ) then
+                Print( " complex" );
+            else
+                Print( " cocomplex" );
+            fi;
+        fi;
+        
+        Print( " at bidegree ", [ degrees[1][1], degrees[2][1] ], ">" );
+        
+    else
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+            Print( "left" );
+        else
+            Print( "right" );
+        fi;
+        
+        if IsHomalgModule( opq ) then
+            Print( " modules" );
+        else
+            if IsComplexOfFinitelyPresentedObjectsRep( opq ) then
+                Print( " complexes" );
+            else
+                Print( " cocomplexes" );
+            fi;
+        fi;
+        
+        Print( " at bidegrees ", degrees[1], "x", degrees[2], ">" );
+        
+    fi;
     
 end );
 
@@ -668,6 +849,9 @@ InstallMethod( ViewObj,
         [ IsBicomplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
+    local degrees;
+    
+    degrees := ObjectDegreesOfBicomplex( o );
     
     Print( "<A zero " );
     
@@ -677,7 +861,7 @@ InstallMethod( ViewObj,
         Print( "right" );
     fi;
     
-    Print( " bicomplex>" );
+    Print( " bicomplex with bidegrees ", degrees[1], "x", degrees[2], ">" );
     
 end );
 
@@ -687,6 +871,9 @@ InstallMethod( ViewObj,
         [ IsBicocomplexOfFinitelyPresentedObjectsRep and IsZero ],
         
   function( o )
+    local degrees;
+    
+    degrees := ObjectDegreesOfBicomplex( o );
     
     Print( "<A zero " );
     
@@ -696,7 +883,30 @@ InstallMethod( ViewObj,
         Print( "right" );
     fi;
     
-    Print( " bicocomplex>" );
+    Print( " bicocomplex with bidegrees ", degrees[1], "x", degrees[2], ">" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( o )
+    local bidegrees, q, p, Bpq;
+    
+    bidegrees := ObjectDegreesOfBicomplex( o );
+    for q in Reversed( bidegrees[2] ) do
+        for p in bidegrees[1] do
+            Bpq := CertainObject( o, [ p, q ] );
+            if HasIsZero( Bpq ) and IsZero( Bpq ) then
+                Print( " ." );
+            else
+                Print( " *" );
+            fi;
+        od;
+        Print( "\n" );
+    od;
     
 end );
 

@@ -105,6 +105,17 @@ InstallMethod( IsZero,
 end );
 
 ##
+InstallMethod( IsZero,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    
+    return IsZero( UnderlyingComplex( B ) );
+    
+end );
+
+##
 InstallMethod( \=,
         "for two homalg complexes",
         [ IsHomalgComplex, IsHomalgComplex ],

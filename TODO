@@ -1,47 +1,12 @@
-- make the generation of the methods for functors automatic
-
+- if a functor is reapplied to modules in a different context the output
+  should be merged with the earlier output
+- residue class rings
+- make the generation of the methods for multi-functors automatic
+- GAPDoc & test examples
 - ask Max:
   . why does GAP become slow when getting in the range
     of definig 1/2 million variables in Singular?
-  . when does a "returned" function remember its context? Always?
   . display issues ($COLUMNS) of external CAS
   . searching for an alternative path fails
-  . saving objects
-  . test examples?
-  . GAPDoc
-
-- when do immediate methods apply? immediately after objectifying?
-##
-InstallImmediateMethod( ElementaryDivisorsOfLeftModule,
-        IsFinitelyPresentedModuleRep and IsZeroModule and HasLeftActingDomain, 0, ## FIXME: remove HasLeftActingDomain
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
-        return [ ];
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( ElementaryDivisorsOfLeftModule,
-        IsFinitelyPresentedModuleRep and IsFreeModule and HasLeftActingDomain, 0, ## FIXME: remove HasLeftActingDomain
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasIsLeftPrincipalIdealRing( R ) and IsLeftPrincipalIdealRing( R ) then
-        return ListWithIdenticalEntries( NrGenerators( M ), Zero( R ) );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
+  . saving objects - Pickling using the IO package
+  

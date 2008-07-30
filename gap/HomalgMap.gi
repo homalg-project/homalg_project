@@ -514,7 +514,7 @@ InstallMethod( POW,
     
     if pow = -1 then
         
-        id := HomalgIdentityMap( Range( phi ) );
+        id := TheIdentityMorphism( Range( phi ) );
         
         inv := id / phi;
         

@@ -41,6 +41,9 @@ ReadPackage( "homalg", "gap/HomalgChainMap.gd" );
 ## bicomplexes
 ReadPackage( "homalg", "gap/HomalgBicomplex.gd" );
 
+## bigraded objects
+ReadPackage( "homalg", "gap/HomalgBigradedObject.gd" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 

@@ -57,6 +57,9 @@ DeclareGlobalVariable( "Functor_TensorProduct" );
 DeclareAttribute( "CokernelEpi",
         IsHomalgMap );
 
+DeclareAttribute( "CokernelGeneralizedEmb",
+        IsHomalgMap );
+
 DeclareAttribute( "KernelEmb",
         IsHomalgMap );
 

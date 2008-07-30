@@ -31,6 +31,9 @@ DeclareProperty( "IsBicomplex",
 DeclareProperty( "IsBisequence",
         IsHomalgBicomplex );
 
+DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
+        IsHomalgBicomplex );
+
 ####################################
 #
 # global functions and operations:
@@ -40,6 +43,9 @@ DeclareProperty( "IsBisequence",
 # constructor methods:
 
 DeclareGlobalFunction( "HomalgBicomplex" );
+
+DeclareOperation( "TransposedBicomplex",
+        [ IsHomalgBicomplex ] );
 
 # basic operations:
 
