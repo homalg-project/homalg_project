@@ -84,6 +84,12 @@ DeclareOperation( "AugmentMaps",
 DeclareOperation( "PreCompose",
         [ IsHomalgMap, IsHomalgMap ] );
 
+DeclareOperation( "PreInverse",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "PostInverse",
+        [ IsHomalgMap ] );
+
 DeclareOperation( "CompleteImageSquare",
         [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
 

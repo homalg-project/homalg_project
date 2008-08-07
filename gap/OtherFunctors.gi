@@ -26,7 +26,7 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,	### defines: Torsion
         return Source( TorsionSubmoduleEmb( M ) );
     fi;
     
-    par := ParametrizeModule( M );
+    par := ParametrizeModule( M, "ANY" );	## computing a "minimal parametrization" requires RankOfModule which would probably trigger Resolution
     
     emb := KernelEmb( par );
     
@@ -76,6 +76,10 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
     M0 := Range( epi );
     
     SetIsTorsionFree( M0, true );
+    
+    if HasRankOfModule( M ) then
+        SetRankOfModule( M0, RankOfModule( M ) );
+    fi;
     
     return M0;
     

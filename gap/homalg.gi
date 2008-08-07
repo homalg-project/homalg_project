@@ -92,6 +92,7 @@ InstallValue( HOMALG,
 #
 ####################################
 
+##
 InstallGlobalFunction( ContainerForWeakPointers,
   function( arg )
     local nargs, container, component, type;
@@ -115,6 +116,7 @@ InstallGlobalFunction( ContainerForWeakPointers,
     
 end );
 
+##
 InstallGlobalFunction( homalgTotalRuntimes,
   function( arg )
     local r, t;
@@ -143,24 +145,100 @@ InstallGlobalFunction( homalgTotalRuntimes,
     
 end );
 
-# a global function for logical implications:
-
-InstallGlobalFunction( LogicalImplicationsForHomalg,
-  function( property, filter )
-    local propA, propB, propC;
+##
+InstallGlobalFunction( AddLeftRightLogicalImplicationsForHomalg,
+  function( list, properties )
+    local prop, property, left_property, right_property, add;
     
-    if Length( property ) = 3 then
+    for prop in properties do;
         
-        propA := property[1];
-        propB := property[3];
+        if IsList( prop ) and Length( prop ) = 2 and ForAll( prop, IsString ) then
+            
+            property := ValueGlobal( Concatenation( prop[1], prop[2] ) );
+            left_property := ValueGlobal( Concatenation( prop[1], "Left", prop[2] ) );
+            right_property := ValueGlobal( Concatenation( prop[1], "Right", prop[2] ) );
+            
+            add := [
+                    
+                    [ left_property, "and", right_property,
+                      "define", property ],
+                    
+                    [ property,
+                      "implies by definition", left_property ],
+                    
+                    [ property,
+                      "implies by definition", right_property ],
+                    
+                    [ IsCommutative, "and", left_property,
+                      "trivially imply", right_property ],
+                    
+                    [ IsCommutative, "and", right_property,
+                      "trivially imply", left_property ],
+                    
+		    ## we also need these two for their contra positions to get installed
+                    [ IsCommutative, "and", left_property,
+                      "trivially imply", property ],
+                    
+                    [ IsCommutative, "and", right_property,
+                      "trivially imply", property ],
+                    
+                    ];
+            
+        elif IsList( prop ) and Length( prop ) = 3 and ForAll( prop, IsString ) then
+            
+            property := ValueGlobal( Concatenation( prop[1], prop[2] ) );
+            left_property := ValueGlobal( Concatenation( prop[1], "Left", prop[2] ) );
+            right_property := ValueGlobal( Concatenation( prop[1], "Right", prop[2] ) );
+            
+            add := [
+                    
+                    [ IsCommutative, "and", left_property,
+                      "trivally imply", right_property ],
+                    
+                    [ IsCommutative, "and", left_property,
+                      "trivally imply", property ],
+                    
+                    [ IsCommutative, "and", right_property,
+                      "trivally imply", left_property ],
+                    
+                    [ IsCommutative, "and", right_property,
+                      "trivally imply", property ],
+                    
+                    [ IsCommutative, "and", property,
+                      "trivally imply", left_property ],
+                    
+                    [ IsCommutative, "and", property,
+                      "trivally imply", right_property ]
+                    
+                    ];
+            
+        fi;
         
-        InstallTrueMethod( propB, filter and propA );
+        Append( list, add );
+        
+    od;
+    
+end );
+
+## a global function for logical implications:
+InstallGlobalFunction( LogicalImplicationsForOneHomalgObject,
+  function( statement, filter )
+    local len, propA, propB, propC, prop;
+    
+    len := Length( statement );
+    
+    if len = 3 then
+        
+        propA := statement[1];
+        prop := statement[3];
+        
+        InstallTrueMethod( prop, filter and propA );
         
         InstallImmediateMethod( propA,
-                filter and Tester( propB ), 0,
+                filter and Tester( prop ), 0,
                 
-          function( M )
-            if filter( M ) and not propB( M ) then
+          function( o )
+            if not prop( o ) then
                 return false;
             fi;
             
@@ -168,19 +246,19 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
             
         end );
         
-    elif Length( property ) = 5 then
+    elif len = 5 then
         
-        propA := property[1];
-        propB := property[3];
-        propC := property[5];
+        propA := statement[1];
+        propB := statement[3];
+        prop := statement[5];
         
-        InstallTrueMethod( propC, filter and propA and propB );
+        InstallTrueMethod( prop, filter and propA and propB );
         
         InstallImmediateMethod( propA,
-                filter and Tester( propB ) and Tester( propC ), 0,
+                filter and Tester( propB ) and Tester( prop ), 0,
                 
-          function( M )
-            if filter( M ) and propB( M ) and not propC( M ) then
+          function( o )
+            if propB( o ) and not prop( o ) then
                 return false;
             fi;
             
@@ -189,10 +267,55 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
         end );
         
         InstallImmediateMethod( propB,
-                filter and Tester( propA ) and Tester( propC ), 0,
+                filter and Tester( propA ) and Tester( prop ), 0,
                 
-          function( M )
-            if filter( M ) and propA( M ) and not propC( M ) then
+          function( o )
+            if propA( o ) and not prop( o ) then
+                return false;
+            fi;
+            
+            TryNextMethod( );
+            
+        end );
+        
+    elif len = 7 then
+        
+        propA := statement[1];
+        propB := statement[3];
+        propC := statement[5];
+        prop := statement[7];
+        
+        InstallTrueMethod( prop, filter and propA and propB and propC );
+        
+        InstallImmediateMethod( propA,
+                filter and Tester( propB ) and Tester( propC ) and Tester( prop ), 0,
+                
+          function( o )
+            if propB( o ) and propC( o ) and not prop( o ) then
+                return false;
+            fi;
+            
+            TryNextMethod( );
+            
+        end );
+        
+        InstallImmediateMethod( propB,
+                filter and Tester( propA ) and Tester( propC ) and Tester( prop ), 0,
+                
+          function( o )
+            if propA( o ) and propC( o ) and not prop( o ) then
+                return false;
+            fi;
+            
+            TryNextMethod( );
+            
+        end );
+        
+        InstallImmediateMethod( propC,
+                filter and Tester( propA ) and Tester( propB ) and Tester( prop ), 0,
+                
+          function( o )
+            if propA( o ) and propB( o ) and not prop( o ) then
                 return false;
             fi;
             
@@ -204,18 +327,228 @@ InstallGlobalFunction( LogicalImplicationsForHomalg,
     
 end );
 
-InstallGlobalFunction( InstallLogicalImplicationsForHomalg,
-  function( properties, filter )
-    local property;
+## a global function for logical implications:
+InstallGlobalFunction( LogicalImplicationsForTwoHomalgObjects,
+  function( statement, obj_filter, subobj_filter )
+    local len, prop_obj, prop_subobj, prop, subobject_getter, len_obj, len_subobj;
     
-    for property in properties do;
+    len := Length( statement );
+    
+    if len <> 5 then
+        Error( "the first argument must be a list of length 5\n" );
+    fi;
+    
+    prop_obj := statement[1];
+    prop_subobj := statement[3];
+    
+    prop := statement[5];
+    
+    subobject_getter := statement[2];
+    
+    len_obj := Length( prop_obj );
+    len_subobj := Length( prop_subobj );
+    
+    if len_obj = 1 and len_subobj = 1 then
         
-        LogicalImplicationsForHomalg( property, filter );
+        prop_obj := prop_obj[1];
+        prop_subobj := prop_subobj[1];
+        
+        if IsList( prop_subobj ) then
+            len_subobj := Length( prop_subobj );
+        fi;
+        
+        if len_subobj = 3 then
+            
+            InstallImmediateMethod( prop,
+                    obj_filter and prop_obj and IsHomalgLeftObjectOrMorphismOfLeftObjects, 0,
+                    
+              function( o )
+                local subobj;
+                
+                subobj := subobject_getter( o );
+                
+                if Tester( prop_subobj[1] )( subobj ) and prop_subobj[1]( subobj ) then
+                    return true;
+                fi;
+                
+                TryNextMethod( );
+                
+            end );
+            
+            InstallImmediateMethod( prop,
+                    obj_filter and prop_obj and IsHomalgRightObjectOrMorphismOfRightObjects, 0,
+                    
+              function( o )
+                local subobj;
+                
+                subobj := subobject_getter( o );
+                
+                if Tester( prop_subobj[2] )( subobj ) and prop_subobj[2]( subobj ) then
+                    return true;
+                fi;
+                
+                TryNextMethod( );
+                
+            end );
+            
+            InstallImmediateMethod( prop_obj,
+                    obj_filter and Tester( prop ) and IsHomalgLeftObjectOrMorphismOfLeftObjects, 0,
+                    
+              function( o )
+                local subobj;
+                
+                subobj := subobject_getter( o );
+                
+                if Tester( prop_subobj[1] )( subobj ) and prop_subobj[1]( subobj ) and
+                   not prop( o ) then
+                    return false;
+                fi;
+                
+                TryNextMethod( );
+                
+            end );
+            
+            InstallImmediateMethod( prop_obj,
+                    obj_filter and Tester( prop ) and IsHomalgRightObjectOrMorphismOfRightObjects, 0,
+                    
+              function( o )
+                local subobj;
+                
+                subobj := subobject_getter( o );
+                
+                if Tester( prop_subobj[2] )( subobj ) and prop_subobj[2]( subobj ) and
+                   not prop( o ) then
+                    return false;
+                fi;
+                
+                TryNextMethod( );
+                
+            end );
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( InstallLogicalImplicationsForHomalg,
+  function( arg )
+    local nargs, properties, filter, subobj_filter, statement;
+    
+    nargs := Length( arg );
+    
+    if nargs < 2 then
+        Error( "too few arguments\n" );
+    fi;
+    
+    properties := arg[1];
+    filter := arg[2];
+    
+    if nargs = 2 then
+    
+        for statement in properties do;
+            
+            LogicalImplicationsForOneHomalgObject( statement, filter );
+            
+        od;
+        
+    elif nargs = 3 then
+        
+        subobj_filter := arg[3];
+        
+        for statement in properties do;
+            
+            LogicalImplicationsForTwoHomalgObjects( statement, filter, subobj_filter );
+            
+        od;
+        
+    fi;
+    
+end );
+
+## a global function for left/right attributes:
+InstallGlobalFunction( LeftRightAttributesForHomalg,
+  function( attr, filter )
+    local attribute, left_attribute, right_attribute;
+    
+    attribute := ValueGlobal( attr );
+    left_attribute := ValueGlobal( Concatenation( "Left", attr ) );
+    right_attribute := ValueGlobal( Concatenation( "Right", attr ) );
+    
+    InstallImmediateMethod( left_attribute,
+            filter and Tester( attribute ), 0,
+            
+      function( o )
+        
+        return attribute( o );
+        
+    end );
+    
+    InstallImmediateMethod( right_attribute,
+            filter and Tester( attribute ), 0,
+            
+      function( o )
+        
+        return attribute( o );
+        
+    end );
+    
+    InstallImmediateMethod( attribute,
+            filter and Tester( left_attribute ) and Tester( right_attribute ), 0,
+            
+      function( o )
+        local l;
+        
+        l := left_attribute( o );
+        
+        if l = right_attribute( o ) then
+            return l;
+        fi;
+        
+        TryNextMethod( );
+        
+    end );
+    
+    ## extra for homalg rings
+    if filter = IsHomalgRing then
+        
+        InstallImmediateMethod( left_attribute,
+                filter and Tester( right_attribute ) and IsCommutative, 0,
+                
+          function( o )
+            
+            return right_attribute( o );
+            
+        end );
+        
+        InstallImmediateMethod( right_attribute,
+                filter and Tester( left_attribute ) and IsCommutative, 0,
+                
+          function( o )
+            
+            return left_attribute( o );
+            
+        end );
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( InstallLeftRightAttributesForHomalg,
+  function( attributes, filter )
+    local attribute;
+    
+    for attribute in attributes do;
+        
+        LeftRightAttributesForHomalg( attribute, filter );
         
     od;
     
 end );
 
+##
 InstallGlobalFunction( homalgNamesOfComponentsToIntLists,
   function( arg )
     

@@ -2,15 +2,15 @@
 
   install.xml            homalg package documentation           Mohamed Barakat
 
-         Copyright (C) 2007, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
 
 This is the chapter of the documentation describing the installation.
 
 -->
 
 <Chapter Label="install">
-<Heading>Installation of the <Package>homalg</Package>-Package</Heading>
-<Index><Package>homalg</Package></Index>
+<Heading>Installation of the &homalg;-Package</Heading>
+<Index>&homalg;</Index>
 
 To install this  package just extract the package's  archive file to
 the  GAP  <F>pkg</F>  directory.<P/>

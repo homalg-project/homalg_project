@@ -109,7 +109,7 @@ InstallMethod( CokernelGeneralizedEmb,
     
     ## since the cokernel module can very well be predefined as the outcome of a different functor than Cokernel (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
     if not IsIdenticalObj( Range( emb ), Source( phi ) ) then
-        emb := CokernelEpi( phi ) ^ -1;
+        emb := CokernelEpi( phi )^-1;
         SetMonomorphismModuloImage( emb, phi );
     fi;
     

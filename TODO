@@ -2,6 +2,7 @@
   should be merged with the earlier output
 - residue class rings
 - make the generation of the methods for multi-functors automatic
+- lazy evaluation for the functors Kernel and DefectOfHoms
 - GAPDoc & test examples
 - ask Max:
   . why does GAP become slow when getting in the range

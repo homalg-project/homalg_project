@@ -69,14 +69,14 @@ InstallMethod( BoundForResolution,
         "for homalg relations",
         [ IsRelationsOfFinitelyPresentedModuleRep ],
         
-  function( M )
+  function( rel )
     local R, q;
     
-    R := HomalgRing( M );
+    R := HomalgRing( rel );
     
-    if IsBound( M!.MaximumNumberOfResolutionSteps )
-       and IsInt( M!.MaximumNumberOfResolutionSteps ) then
-        q := M!.MaximumNumberOfResolutionSteps;
+    if IsBound( rel!.MaximumNumberOfResolutionSteps )
+       and IsInt( rel!.MaximumNumberOfResolutionSteps ) then
+        q := rel!.MaximumNumberOfResolutionSteps;
     elif IsBound( R!.MaximumNumberOfResolutionSteps )
       and IsInt( R!.MaximumNumberOfResolutionSteps ) then
         q := R!.MaximumNumberOfResolutionSteps;
@@ -96,24 +96,24 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         "for homalg relations",
         [ IsInt, IsRelationsOfFinitelyPresentedModuleRep ],
         
-  function( _q, M )
+  function( _q, rel )
     local R, max, q, B, d, degrees, j, d_j, F_j, id, S, left, i;
     
     ## all options of Maple's homalg are now obsolete:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
     
-    R := HomalgRing( M );
+    R := HomalgRing( rel );
     
     if _q < 0 then
-        q := BoundForResolution( M );
+        q := BoundForResolution( rel );
     elif _q = 0 then
         q := 1;		## this is the minimum
     else
         q := _q;
     fi;
     
-    if HasFreeResolution( M ) then
-        d := FreeResolution( M );
+    if HasFreeResolution( rel ) then
+        d := FreeResolution( rel );
         degrees := ObjectDegreesOfComplex( d );
         j := Length( degrees );
         j := degrees[j];
@@ -122,13 +122,13 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
             d!.LastSyzygies := SyzygiesGenerators( d_j );
         fi;
     else
-        B := ReducedBasisOfModule( M, "COMPUTE_BASIS", "STORE_SYZYGIES" );
+        B := ReducedBasisOfModule( rel, "COMPUTE_BASIS", "STORE_SYZYGIES" );
         j := 1;
         d_j := HomalgMap( B );
         d := HomalgComplex( d_j );
         d!.LastSyzygies := B!.SyzygiesGenerators;
         
-        SetFreeResolution( M, d );
+        SetFreeResolution( rel, d );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -155,7 +155,6 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     if NrRelations( S ) = 0 and not IsBound( d!.LengthOfResolution ) then
         d!.LengthOfResolution := j;
         SetIsMonomorphism( d_j, true );
-        SetHasFiniteFreeResolution( M, true );
     fi;
     
     ## fill up with zero morphisms:
@@ -163,9 +162,9 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
-                d_j := HomalgZeroMap( HomalgZeroLeftModule( R ), F_j );		## always create a new zero module to be able to distinguish them
+                d_j := TheZeroMap( 0 * R, F_j );
             else
-                d_j := HomalgZeroMap( HomalgZeroRightModule( R ), F_j );	## always create a new zero module to be able to distinguish them
+                d_j := TheZeroMap( R * 0, F_j );
             fi;
             
             Add( d, d_j );
@@ -202,16 +201,12 @@ InstallMethod( BoundForResolution,
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( M ) then
-        q := LeftGlobalDimension( M );
-    elif HasRightGlobalDimension( M ) then
-        q := RightGlobalDimension( M );
-    elif HasGlobalDimension( M ) then
-        q := GlobalDimension( M );
-    elif IsBound( M!.UpperBoundForProjectiveDimension )
-      and IsInt( M!.UpperBoundForProjectiveDimension ) then
-        q := M!.UpperBoundForProjectiveDimension;
-    elif IsBound( M!.MaximumNumberOfResolutionSteps )
+    #if HasProjectiveDimension( M ) then
+    #    q := ProjectiveDimension( M );			## +1 ???
+    #elif IsBound( M!.UpperBoundForProjectiveDimension )
+    #  and IsInt( M!.UpperBoundForProjectiveDimension ) then
+    #    q := M!.UpperBoundForProjectiveDimension;	## +1 ???
+    if IsBound( M!.MaximumNumberOfResolutionSteps )
       and IsInt( M!.MaximumNumberOfResolutionSteps ) then
         q := M!.MaximumNumberOfResolutionSteps;
     elif IsBound( R!.MaximumNumberOfResolutionSteps )
@@ -234,7 +229,7 @@ InstallMethod( Resolution,
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
   function( _q, M )
-    local rel, q, d, d_1;
+    local rel, q, d, rank, d_1;
     
     rel := RelationsOfModule( M );
     
@@ -251,6 +246,22 @@ InstallMethod( Resolution,
     
     if IsBound( d!.LengthOfResolution ) then
         M!.UpperBoundForProjectiveDimension := d!.LengthOfResolution;
+    elif IsBound( M!.UpperBoundForProjectiveDimension ) then			## the last map is not a monomorphism:
+        if _q < 0 or M!.UpperBoundForProjectiveDimension <= q then		## but still its kernel is projective
+            d!.LengthOfResolution := Length( MorphismDegreesOfComplex( d ) );
+        fi;
+    fi;
+    
+    if HasIsAcyclic( d ) and IsAcyclic( d ) then
+        SetFiniteFreeResolutionExists( M, true );
+        ResetFilterObj( M, AFiniteFreeResolutin );
+        SetAFiniteFreeResolutin( M, d );
+        rank := Sum( ObjectDegreesOfComplex( d ),
+                     i -> (-1)^i *  NrGenerators( CertainObject( d, i ) ) );
+        SetRankOfModule( M, rank );
+        if HasTorsionFreeFactorEpi( M ) then
+            SetRankOfModule( Range( TorsionFreeFactorEpi( M ) ), rank );
+        fi;
     fi;
     
     d_1 := CertainMorphism( d, 1 );
@@ -305,7 +316,7 @@ InstallMethod( SyzygiesModuleEmb,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         ## this is not really an embedding, but spares us case distinctions at several places (e.g. Left/RightSatelliteOfFunctor)
-	return TheZeroMorphism( M );
+        return TheZeroMorphism( M );
     elif q = 1 then
         return KernelEmb( FreeHullEpi( M ) );
     fi;
@@ -503,40 +514,252 @@ InstallMethod( SubResolution,
     
 end );
 
+#=======================================================================
+# Shorten a given resolution q times if possible
+#
+# I learned it from Alban's thesis
+#
+# see also Alban and Daniel:
+# Constructive Computation of Bases of Free Modules over the Weyl Algebras
+#
+# (see also [Rotman, Lemma 9.40])
+#
+#_______________________________________________________________________
+InstallMethod( ShortenResolution,
+        "for homalg relations",
+        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        
+  function( q, d )
+    local max, min, m, mx, n, d_m, F_m, d_m_1, s_m_1, d_m_2, d_short, l, epi;
+    
+    max := HighestDegreeInComplex( d );
+    min := LowestDegreeInComplex( d );
+    
+    m := max - min;
+    
+    if q = 0 or m < 2 then
+        return d;
+    fi;
+    
+    ## initialize
+    n := q;
+    mx := max;
+    
+    ## first step
+    d_m := CertainMorphism( d, mx );
+    d_m_1 := CertainMorphism( d, mx - 1 );
+    
+    F_m := Source( d_m );
+    
+    s_m_1 := PostInverse( d_m );
+    
+    if s_m_1 = fail then
+        return d;
+    fi;
+    
+    SetIsEpimorphism( s_m_1, true );	## only during the first step
+    
+    d_m := AugmentMaps( d_m_1, s_m_1 );
+    SetIsMonomorphism( d_m, true );	## only during the first step
+    
+    if m > 2 then
+        d_m_2 := CertainMorphism( d, mx - 2 );
+        d_m_1 := StackMaps( d_m_2, TheZeroMap( F_m, Range( d_m_2 ) ) );
+    fi;
+    
+    mx := mx - 1;
+    m := m - 1;
+    n := n - 1;
+    
+    ## iterate:
+    while n <> 0 and m > 1 do
+        
+        d_m := CertainMorphism( d, mx );
+        d_m_1 := CertainMorphism( d, mx - 1 );
+        
+        F_m := Source( d_m );
+        
+        s_m_1 := PostInverse( d_m );
+        
+        if s_m_1 = fail then
+            break;
+        fi;
+        
+        d_m := AugmentMaps( d_m_1, s_m_1 );
+        
+        if m > 2 then
+            d_m_2 := CertainMorphism( d, mx - 2 );
+            d_m_1 := StackMaps( d_m_2, TheZeroMap( F_m, Range( d_m_2 ) ) );
+        fi;
+        
+        mx := mx - 1;
+        m := m - 1;
+        n := n - 1;
+    od;
+    
+    if m > 2 then
+        d_short := HomalgComplex( CertainMorphism( d, min + 1 ), min + 1 );
+        for l in [ 2 .. m - 2 ] do
+            Add( d_short, CertainMorphism( d, min + l ) );
+        od;
+        Add( d_short, d_m_1 );
+        Add( d_short, d_m );
+    elif m = 2 then
+        d_short := HomalgComplex( d_m_1, min + 1 );
+        Add( d_short, d_m );
+    else
+        epi := PreCompose( DirectSumEpis( Range( d_m ) )[1], CokernelEpi( d_m_1 ) );
+        SetCokernelEpi( d_m, epi );
+        d_short := HomalgComplex( d_m, min + 1 );
+    fi;
+    
+    d_short!.LengthOfResolution := m;
+    
+    SetIsAcyclic( d_short, true );
+    
+    return d_short;
+    
+end );
+
 ##
-InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule	(incomplete)
+InstallMethod( ShortenResolution,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        
+  function( d )
+    
+    return ShortenResolution( -1, d );
+    
+end );
+
+##
+InstallMethod( ShortenResolution,
+        "for homalg modules",
+        [ IsInt, IsFinitelyPresentedModuleRep ],
+        
+  function( q, M )
+    local d, l;
+    
+    d := Resolution( M );
+    
+    d := ShortenResolution( q, d );
+    
+    l := Length( MorphismDegreesOfComplex( d ) );
+    
+    if IsBound(M!.UpperBoundForProjectiveDimension) and
+       M!.UpperBoundForProjectiveDimension > l then
+        M!.UpperBoundForProjectiveDimension := l;
+    fi;
+    
+    ResetFilterObj( M, AFiniteFreeResolutin );
+    SetAFiniteFreeResolutin( M, d );
+    
+    RelationsOfModule( M )!.FreeResolution := d;
+    
+    return d;
+    
+end );
+
+##
+InstallMethod( ShortenResolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return ShortenResolution( -1, M );
+    
+end );
+
+##
+InstallMethod( FiniteFreeResolution,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    if HasAFiniteFreeResolutin( M ) then
+        return AFiniteFreeResolutin( M );
+    elif not HasFiniteFreeResolutionExists( M ) or FiniteFreeResolutionExists( M ) then	## in words: either a finite free resolution exists or its existence is not known yet
+        Resolution( M );
+    fi;
+    
+    ## now check again:
+    if HasAFiniteFreeResolutin( M ) then
+        return AFiniteFreeResolutin( M );
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule
   function( arg )
-    local nargs, M, R, mat, par, F;
+    local nargs, ALL, ANY, ar, rel, R, left, mat, par, M, rk, F;
     
     nargs := Length( arg );
     
+    ALL := false;
+    ANY := false;
+    
+    for ar in arg{[ 2 .. nargs ]} do
+        if ar = "ALL" then
+            ALL := true;
+        elif ar = "ANY" then
+            ANY := true;
+        fi;
+    od;
+    
     if IsHomalgModule( arg[1] ) then
-        M := RelationsOfModule( arg[1] );
+        rel := RelationsOfModule( arg[1] );
     elif IsHomalgRelations( arg[1] ) then
-        M := arg[1];
+        rel := arg[1];
+    else
+        Error( "the first argument must be a homalg module or a homalg set of relations\n" );
     fi;
     
-    R := HomalgRing( M );
+    R := HomalgRing( rel );
     
-    mat := MatrixOfRelations( M );
+    left := IsHomalgRelationsOfLeftModule( rel );
     
-    if IsHomalgRelationsOfLeftModule( M ) then
-        
+    mat := MatrixOfRelations( rel );
+    
+    if left then
         par := SyzygiesGeneratorsOfColumns( mat );
-        
-        F := HomalgFreeLeftModule( NrColumns( par ), R );
-        
     else
-        
         par := SyzygiesGeneratorsOfRows( mat );
-        
-        F := HomalgFreeRightModule( NrRows( par ), R );
-        
     fi;
     
     if IsHomalgModule( arg[1] ) then
         
-        par := HomalgMap( par, arg[1], F );
+        M := arg[1];
+        
+        if not ANY then
+            if not HasRankOfModule( M ) then
+                Resolution( M );
+            fi;
+            if HasRankOfModule( M ) then
+                rk := RankOfModule( M );
+                if left then
+                    F := HomalgFreeLeftModule( rk, R );
+                    par := CertainColumns( par, [ 1 .. rk ] );	## a minimal parametrization due to Alban
+                else
+                    F := HomalgFreeRightModule( rk, R );
+                    par := CertainRows( par, [ 1 .. rk ] );	## a minimal parametrization due to Alban
+                fi;
+            fi;
+        fi;
+        
+        if ANY or not HasRankOfModule( M ) then
+            if left then
+                F := HomalgFreeLeftModule( NrColumns( par ), R );
+            else
+                F := HomalgFreeRightModule( NrRows( par ), R );
+            fi;
+        fi;
+        
+        par := HomalgMap( par, M, F );
         
         SetIsMorphism( par, true );
         

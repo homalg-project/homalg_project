@@ -15,6 +15,30 @@
 ####################################
 
 ##
+## TheZeroMap
+##
+
+InstallGlobalFunction( _Functor_TheZeroMap_OnObjects,	### defines: TheZeroMap
+  function( M, N )
+    
+    return HomalgZeroMap( M, N );
+    
+end );
+
+InstallValue( functor_TheZeroMap,
+        CreateHomalgFunctor(
+                [ "name", "TheZeroMap" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "contravariant" ] ] ],
+                [ "2", [ [ "covariant" ] ] ],
+                [ "OnObjects", _Functor_TheZeroMap_OnObjects ]
+                )
+        );
+
+functor_TheZeroMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
 ## AsATwoSequence
 ##
 
@@ -50,8 +74,8 @@ InstallValue( functor_AsATwoSequence,
         CreateHomalgFunctor(
                 [ "name", "AsATwoSequence" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgMap ] ] ],
-                [ "2", [ [ "covariant" ], [ IsHomalgMap ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_AsATwoSequence_OnObjects ]
                 )
         );
@@ -110,6 +134,138 @@ InstallMethod( AsATwoSequence,
     return AsATwoSequence( LowestDegreeMorphismInComplex( C ), HighestDegreeMorphismInComplex( C ) );
     
 end );
+
+##
+## MulMap
+##
+
+InstallGlobalFunction( _Functor_MulMap_OnObjects,	### defines: MulMap
+  function( a, phi )
+    local a_phi;
+    
+    a_phi := HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    
+    if IsUnit( HomalgRing( phi ), a ) then
+        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+            SetIsIsomorphism( a_phi, true );
+        else
+            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
+                SetIsSplitMonomorphism( a_phi, true );
+            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                SetIsMonomorphism( a_phi, true );
+            fi;
+            
+            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
+                SetIsSplitEpimorphism( a_phi, true );
+            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                SetIsEpimorphism( a_phi, true );
+            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+                SetIsMorphism( a_phi, true );
+            fi;
+        fi;
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( a_phi, true );
+    fi;
+    
+    return a_phi;
+    
+end );
+
+InstallValue( functor_MulMap,
+        CreateHomalgFunctor(
+                [ "name", "MulMap" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsRingElement ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_MulMap_OnObjects ]
+                )
+        );
+
+functor_MulMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+## for convenience
+InstallMethod( \*,
+        "of two homalg maps",
+        [ IsRingElement, IsMapOfFinitelyGeneratedModulesRep ], 999, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
+        
+  function( a, phi )
+    
+    return MulMap( a, phi );
+    
+end );
+
+##
+## AddMap
+##
+
+InstallGlobalFunction( _Functor_AddMap_OnObjects,	### defines: AddMap
+  function( phi1, phi2 )
+    local phi;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return Error( "the two maps are not comparable" );
+    fi;
+    
+    phi := HomalgMap( MatrixOfMap( phi1 ) + MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+
+InstallValue( functor_AddMap,
+        CreateHomalgFunctor(
+                [ "name", "+" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_AddMap_OnObjects ]
+                )
+        );
+
+functor_AddMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+## SubMap
+##
+
+InstallGlobalFunction( _Functor_SubMap_OnObjects,	### defines: SubMap
+  function( phi1, phi2 )
+    local phi;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return Error( "the two maps are not comparable" );
+    fi;
+    
+    phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+
+InstallValue( functor_SubMap,
+        CreateHomalgFunctor(
+                [ "name", "-" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_SubMap_OnObjects ]
+                )
+        );
+
+functor_SubMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## Compose
@@ -190,6 +346,7 @@ InstallMethod( \*,
     
 end );
 
+##
 InstallMethod( \*,
         "for homalg composable maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
@@ -233,8 +390,8 @@ InstallValue( functor_AsChainMapForPullback,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPullback" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgMap ] ] ],
-                [ "2", [ [ "covariant" ], [ IsHomalgMap ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_AsChainMapForPullback_OnObjects ]
                 )
         );
@@ -272,7 +429,10 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     
     N := Range( beta );
     
-    ## the most decisive part of the code (the idea of the natural embedding in action):
+    ## thanks Yunis, Yusif and Mariam for playing that other saturday
+    ## so cheerfully and loudly, inspiring me to this idea :-)
+    ## this is the most decisive part of the code
+    ## (the idea of generalized embeddings in action):
     if HasMonomorphismModuloImage( beta ) then
         N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
     else
@@ -382,8 +542,8 @@ InstallValue( functor_AsChainMapForPushout,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPushout" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgMap ] ] ],
-                [ "2", [ [ "covariant" ], [ IsHomalgMap ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_AsChainMapForPushout_OnObjects ]
                 )
         );
@@ -398,13 +558,37 @@ functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
+## TheZeroMap( M, N )
+##
+
+InstallFunctorOnObjects( functor_TheZeroMap );
+
+##
 ## AsATwoSequence( phi, psi )
 ##
 
 InstallFunctorOnObjects( functor_AsATwoSequence );
 
 ##
-## Compose( phi, psi )
+## MulMap( a, phi ) = a * phi
+##
+
+InstallFunctorOnObjects( functor_MulMap );
+
+##
+## phi1 + phi2
+##
+
+InstallFunctorOnObjects( functor_AddMap );
+
+##
+## phi1 - phi2
+##
+
+InstallFunctorOnObjects( functor_SubMap );
+
+##
+## Compose( phi, psi ) = phi * psi
 ##
 
 InstallFunctorOnObjects( functor_Compose );

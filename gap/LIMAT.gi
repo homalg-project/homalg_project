@@ -2250,7 +2250,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
   function( M1, M2 )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfCols(IsIdentityMatrix,IsHomalgMatrix)", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns(IsIdentityMatrix,IsHomalgMatrix)", "\033[0m" );
     
     return M2;
     
@@ -2263,7 +2263,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
   function( M1, M2 )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfCols(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
     
     return SyzygiesGeneratorsOfColumns( M1 );
     
@@ -2289,7 +2289,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
   function( M1, M2 )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfCols(IsZero(Matrix),IsHomalgMatrix)", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns(IsZero(Matrix),IsHomalgMatrix)", "\033[0m" );
     
     return HomalgIdentityMatrix( NrColumns( M1 ), HomalgRing( M1 ) );
     

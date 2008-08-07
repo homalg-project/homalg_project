@@ -1719,7 +1719,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     local properties, num_gen, num_rel, gen_string, rel_string;
@@ -1727,89 +1727,139 @@ InstallMethod( ViewObj,
     properties := "";
     
     if HasIsCyclic( M ) and IsCyclic( M ) then
-        properties := Concatenation( properties, " cyclic" );
+        Append( properties, " cyclic" );
+    fi;
+    
+    if HasIsStablyFree( M ) and IsStablyFree( M ) then
+        Append( properties, " stably free" );
+        if HasIsFree( M ) and not IsFree( M ) then	## the "not"s are obsolete but kept for better readability
+            Append( properties, " non-free" );
+        fi;
+    elif HasIsProjective( M ) and IsProjective( M ) then
+        Append( properties, " projective" );
+        if HasIsStablyFree( M ) and not IsStablyFree( M ) then
+            Append( properties, " non-stably free" );
+        elif HasIsFree( M ) and not IsFree( M ) then
+            Append( properties, " non-free" );
+        fi;
+    elif HasIsReflexive( M ) and IsReflexive( M ) then
+        Append( properties, " reflexive" );
+        if HasIsProjective( M ) and not IsProjective( M ) then
+            Append( properties, " non-projective" );
+        elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
+            Append( properties, " non-stably free" );
+        elif HasIsFree( M ) and not IsFree( M ) then
+            Append( properties, " non-free" );
+        fi;
+    elif HasIsTorsionFree( M ) and IsTorsionFree( M ) then
+        Append( properties, " torsion-free" );
+        if HasIsReflexive( M ) and not IsReflexive( M ) then
+            Append( properties, " non-reflexive" );
+        elif HasIsProjective( M ) and not IsProjective( M ) then
+            Append( properties, " non-projective" );
+        elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
+            Append( properties, " non-stably free" );
+        elif HasIsFree( M ) and not IsFree( M ) then
+            Append( properties, " non-free" );
+        fi;
+    fi;
+    
+    if HasIsTorsion( M ) and IsTorsion( M ) then
+        if HasCodimOfModule( M ) then
+            if HasIsPure( M ) then
+                if IsPure( M ) then
+                    Append( properties, " pure" );
+                else
+                    Append( properties, " non-pure" );
+                fi;
+            fi;
+            Append( properties, " codim " );
+            Append( properties, String( CodimOfModule( M ) ) );
+        elif HasIsZero( M ) and not IsZero( M ) then
+            properties := Concatenation( " non-zero", properties );
+        fi;
+        Append( properties, " torsion" );
+    else
+        if HasIsPure( M ) and not IsPure( M ) then
+            Append( properties, " non-pure" );
+        fi;
+        if HasRankOfModule( M ) then
+            Append( properties, " rank " );
+            Append( properties, String( RankOfModule( M ) ) );
+        elif HasIsZero( M ) and not IsZero( M ) and
+          not ( HasIsPure( M ) and not IsPure( M ) ) then
+            properties := Concatenation( " non-zero", properties );
+        fi;
     fi;
     
     num_gen := NrGenerators( M );
     
-    if num_gen = 1 then
-        gen_string := " generator";
-    else
-        gen_string := " generators";
-    fi;
-    
-    if HasNrRelations( M ) = true then
-        num_rel := NrRelations( M );
-        if num_rel = 0 then
-            num_rel := "";
-            rel_string := "no relations for ";
-        elif num_rel = 1 then
-            rel_string := " relation for ";
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        
+        if num_gen = 1 then
+            gen_string := " generator";
         else
+            gen_string := " generators";
+        fi;
+        
+        if HasNrRelations( M ) = true then
+            num_rel := NrRelations( M );
+            if num_rel = 0 then
+                num_rel := "";
+                rel_string := "no relations for ";
+            elif num_rel = 1 then
+                rel_string := " relation for ";
+            else
+                rel_string := " relations for ";
+            fi;
+        else
+            if RelationsOfModule( M ) = "unknown relations" then
+                num_rel := "unknown";
+            else
+                num_rel := "an unknown number of";
+            fi;
             rel_string := " relations for ";
         fi;
-    else
-        if RelationsOfModule( M ) = "unknown relations" then
-            num_rel := "unknown";
-        else
-            num_rel := "an unknown number of";
-        fi;
-        rel_string := " relations for ";
-    fi;
-    
-    Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
-    
-end );
-
-##
-InstallMethod( ViewObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
-  function( M )
-    local properties, num_gen, num_rel, gen_string, rel_string;
-    
-    properties := "";
-    
-    if HasIsCyclic( M ) and IsCyclic( M ) then
-        properties := Concatenation( properties, " cyclic" );
-    fi;
-    
-    num_gen := NrGenerators( M );
-    
-    if num_gen = 1 then
-        gen_string := " generator and ";
+        Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
+        
     else
-        gen_string := " generators and ";
-    fi;
-    
-    if HasNrRelations( M ) = true then
-        num_rel := NrRelations( M );
-        if num_rel = 0 then
-            num_rel := "";
-            rel_string := "no relations";
-        elif num_rel = 1 then
-            rel_string := " relation";
+        
+        if num_gen = 1 then
+            gen_string := " generator and ";
         else
+            gen_string := " generators and ";
+        fi;
+        
+        if HasNrRelations( M ) = true then
+            num_rel := NrRelations( M );
+            if num_rel = 0 then
+                num_rel := "";
+                rel_string := "no relations";
+            elif num_rel = 1 then
+                rel_string := " relation";
+            else
+                rel_string := " relations";
+            fi;
+        else
+            if RelationsOfModule( M ) = "unknown relations" then
+                num_rel := "unknown";
+            else
+                num_rel := "an unknown number of";
+            fi;
             rel_string := " relations";
         fi;
-    else
-        if RelationsOfModule( M ) = "unknown relations" then
-            num_rel := "unknown";
-        else
-            num_rel := "an unknown number of";
-        fi;
-        rel_string := " relations";
+        
+        Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
+        
     fi;
-    
-    Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
     
 end );
 
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
+        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
         
   function( M )
     local r, rk;

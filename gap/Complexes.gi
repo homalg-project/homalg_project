@@ -197,7 +197,7 @@ InstallMethod( DefectOfExactness,
         else
             S := DefectOfExactness( morphisms[i], morphisms[i + 1] );
         fi;
-        Add( H, HomalgZeroMap( S, T ) );
+        Add( H, TheZeroMap( S, T ) );
         T := S;
         
         if on_less_generators then
@@ -212,7 +212,7 @@ InstallMethod( DefectOfExactness,
     
     if not ( IsBound( C!.SkipHighestDegreeHomology ) and C!.SkipHighestDegreeHomology = true ) then
         S := Kernel( morphisms[l] );
-        Add( H, HomalgZeroMap( S, T ) );
+        Add( H, TheZeroMap( S, T ) );
         
         if on_less_generators then
             OnLessGenerators( S );
@@ -321,7 +321,7 @@ InstallMethod( DefectOfExactness,
         else
             T := DefectOfExactness( morphisms[i + 1], morphisms[i] );
         fi;
-        Add( H, HomalgZeroMap( S, T ) );
+        Add( H, TheZeroMap( S, T ) );
         S := T;
         
         if on_less_generators then
@@ -336,7 +336,7 @@ InstallMethod( DefectOfExactness,
     
     if not ( IsBound( C!.SkipHighestDegreeCohomology ) and C!.SkipHighestDegreeCohomology = true ) then
         T := Cokernel( morphisms[l] );
-        Add( H, HomalgZeroMap( S, T ) );
+        Add( H, TheZeroMap( S, T ) );
         
         if on_less_generators then
             OnLessGenerators( T );

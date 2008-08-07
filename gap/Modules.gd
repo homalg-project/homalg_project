@@ -77,6 +77,21 @@ DeclareOperation( "FreeHullEpi",
 DeclareOperation( "SubResolution",
         [ IsInt, IsHomalgModule ] );
 
+DeclareOperation( "ShortenResolution",
+        [ IsInt, IsHomalgComplex ] );
+
+DeclareOperation( "ShortenResolution",
+        [ IsHomalgComplex ] );
+
+DeclareOperation( "ShortenResolution",
+        [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "ShortenResolution",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "FiniteFreeResolution",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "Intersect",
         [ IsHomalgRelations, IsHomalgRelations ] );
 

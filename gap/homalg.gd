@@ -125,9 +125,17 @@ DeclareGlobalFunction( "ContainerForWeakPointers" );
 
 DeclareGlobalFunction( "homalgTotalRuntimes" );
 
-DeclareGlobalFunction( "LogicalImplicationsForHomalg" );
+DeclareGlobalFunction( "AddLeftRightLogicalImplicationsForHomalg" );
+
+DeclareGlobalFunction( "LogicalImplicationsForOneHomalgObject" );
+
+DeclareGlobalFunction( "LogicalImplicationsForTwoHomalgObjects" );
 
 DeclareGlobalFunction( "InstallLogicalImplicationsForHomalg" );
+
+DeclareGlobalFunction( "LeftRightAttributesForHomalg" );
+
+DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 

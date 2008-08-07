@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+	  [
+	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
+	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY Gauss "<Package>Gauss</Package>">
+	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
+	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
+	  <!ENTITY SCO "<Package>SCO</Package>">
+	  <!ENTITY alexander "<Package>alexander</Package>">
+	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+	  ]
+	  >
 
 <!--
 
@@ -12,33 +27,7 @@
 
 <Book Name="homalg">
 
-<TitlePage>
-    <Title>GAP 4 Package <Package>homalg</Package></Title>
-    <Subtitle>homalg --- A Meta-Package for Homological Algebra</Subtitle>
-    <Version>
-      Version <#Include SYSTEM "../VERSION">
-    </Version>
-    <Author>Mohamed Barakat
-<Address>
-Lehrstuhl B für Mathematik,
-RWTH Aachen,
-Templergraben 64,
-52056 Aachen,
-Germany
-</Address>
-    <Email>mohamed.barakat@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat</Homepage>
-    </Author>
-    <Date>March 2007 </Date>
-
-<Copyright>
-  &copyright; 2007 by Mohamed Barakat<P/>
-
-  This package may be distributed under the terms and conditions of the
-  GNU Public License Version 2.
-</Copyright>
-
-</TitlePage>
+<#Include SYSTEM "title.xml">
 
 <!--  TableOfContents  . . . . . .  generate a table of contents   -->
 <TableOfContents/>
@@ -50,7 +39,7 @@ Germany
 <#Include SYSTEM "examples.xml">
 </Body>
 
-<Bibliography Databases="homalg"/>
+<Bibliography Databases="homalgBib.xml"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

@@ -25,3 +25,5 @@ DeclareGlobalVariable( "LIMOD" );
 
 DeclareGlobalVariable( "LogicalImplicationsForHomalgModules" );
 
+DeclareGlobalVariable( "LogicalImplicationsForHomalgModulesOverSpecialRings" );
+

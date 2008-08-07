@@ -2,13 +2,14 @@ doc: doc/manual.six
 
 doc/manual.six: doc/homalg.xml doc/install.xml \
 		doc/examples.xml doc/intro.xml VERSION
+		(cd doc ; gapL ../bib.g );
 	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".svn" --exclude test --exclude "public_html" homalg)
+	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".git" --exclude test --exclude "public_html" homalg)
 
 WEBPOS=~/gap/pkg/homalg/public_html
 

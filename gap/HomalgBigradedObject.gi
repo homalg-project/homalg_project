@@ -406,14 +406,14 @@ InstallMethod( AsDifferentialObject,
                     source := CertainObject( E, [ p, q ] );
                     target := CertainObject( E, [ p, q ] + bidegree );
                     if ForAny( [ source, target ], IsZero ) then
-                        mor := HomalgZeroMap( source, target );
+                        mor := TheZeroMap( source, target );
                     else
                         emb_source := E!.absolute_embeddings.(String( [ p, q ] ));
                         emb_target := E!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p - i, q + i ] ) );
                         mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p - i, q + i ] ) );
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
-                            mor := HomalgZeroMap( source, target );
+                            mor := TheZeroMap( source, target );
                         else
                             mor := PreCompose( emb_source, mor_h[1] );
                             for l in [ 1 .. r - 1 ] do
@@ -440,7 +440,7 @@ InstallMethod( AsDifferentialObject,
                     if ForAny( [ source, target ], IsZero ) or
                        ForAny( mor_h, IsZero ) or
                        ForAny( mor_v, IsZero ) then
-                        mor := HomalgZeroMap( source, target );
+                        mor := TheZeroMap( source, target );
                     else
                         mor := PreCompose( emb_source, mor_h[1] );
                         for l in [ 1 .. r - 1 ] do

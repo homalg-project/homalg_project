@@ -455,7 +455,7 @@ InstallMethod( MorphismOfTotalComplex,
             elif diff = vertical then
                 Add( augment, CertainVerticalMorphism( B, pq_source ) );
             else
-                Add( augment, HomalgZeroMap( source, CertainObject( B, pq_target ) ) );
+                Add( augment, TheZeroMap( source, CertainObject( B, pq_target ) ) );
             fi;
         od;
         Add( stack, Iterated( augment, AugmentMaps ) );
@@ -496,7 +496,7 @@ InstallMethod( MorphismOfTotalComplex,
             elif diff = vertical then
                 Add( augment, CertainVerticalMorphism( B, pq_source ) );
             else
-                Add( augment, HomalgZeroMap( source, CertainObject( B, pq_target ) ) );
+                Add( augment, TheZeroMap( source, CertainObject( B, pq_target ) ) );
             fi;
         od;
         Add( stack, Iterated( augment, AugmentMaps ) );

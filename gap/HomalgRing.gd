@@ -37,16 +37,46 @@ DeclareCategory( "IsHomalgExternalRingElement",
 
 ## properties listed alphabetically (ignoring left/right):
 
-DeclareProperty( "IsIntegersForHomalg",
-        IsHomalgRing );
-
-DeclareProperty( "IsFiniteQuotientOfTheIntegers",
+DeclareProperty( "ContainsAField",
         IsHomalgRing );
 
 DeclareProperty( "IsRationalsForHomalg",
         IsHomalgRing );
 
 DeclareProperty( "IsFieldForHomalg",
+        IsHomalgRing );
+
+DeclareProperty( "IsDivisionRingForHomalg",
+        IsHomalgRing );
+
+DeclareProperty( "IsIntegersForHomalg",
+        IsHomalgRing );
+
+DeclareProperty( "IsResidueClassRingOfTheIntegers",
+        IsHomalgRing );
+
+DeclareProperty( "IsBezoutRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsIntegrallyClosedDomain",
+        IsHomalgRing );
+
+DeclareProperty( "IsUniqueFactorizationDomain",
+        IsHomalgRing );
+
+DeclareProperty( "IsKaplanskyHermite",
+        IsHomalgRing );
+
+DeclareProperty( "IsDedekindDomain",
+        IsHomalgRing );
+
+DeclareProperty( "IsDiscreteValuationRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsFreePolynomialRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsWeylRing",
         IsHomalgRing );
 
 DeclareProperty( "IsGlobalDimensionFinite",
@@ -58,10 +88,43 @@ DeclareProperty( "IsLeftGlobalDimensionFinite",
 DeclareProperty( "IsRightGlobalDimensionFinite",
         IsHomalgRing );
 
+DeclareProperty( "HasLeftInvariantBasisProperty",
+        IsHomalgRing );
+
+DeclareProperty( "HasRightInvariantBasisProperty",
+        IsHomalgRing );
+
+DeclareProperty( "HasInvariantBasisProperty",
+        IsHomalgRing );
+
+DeclareProperty( "IsLocalRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsSemiLocalRing",
+        IsHomalgRing );
+
 DeclareProperty( "IsIntegralDomain",
         IsHomalgRing );
 
-DeclareProperty( "IsNoetherian", 
+DeclareProperty( "IsHereditary",
+        IsHomalgRing );
+
+DeclareProperty( "IsLeftHereditary",
+        IsHomalgRing );
+
+DeclareProperty( "IsRightHereditary",
+        IsHomalgRing );
+
+DeclareProperty( "IsHermite",
+        IsHomalgRing );
+
+DeclareProperty( "IsLeftHermite",
+        IsHomalgRing );
+
+DeclareProperty( "IsRightHermite",
+        IsHomalgRing );
+
+DeclareProperty( "IsNoetherian",
         IsHomalgRing );
 
 DeclareProperty( "IsLeftNoetherian",
@@ -70,7 +133,7 @@ DeclareProperty( "IsLeftNoetherian",
 DeclareProperty( "IsRightNoetherian",
         IsHomalgRing );
 
-DeclareProperty( "IsOreDomain", 
+DeclareProperty( "IsOreDomain",
         IsHomalgRing );
 
 DeclareProperty( "IsLeftOreDomain",
@@ -91,7 +154,22 @@ DeclareProperty( "IsRightPrincipalIdealRing",
 DeclareProperty( "IsRegular",
         IsHomalgRing );
 
+DeclareProperty( "IsFiniteFreePresentationRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsLeftFiniteFreePresentationRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsRightFiniteFreePresentationRing",
+        IsHomalgRing );
+
 DeclareProperty( "IsSimpleRing",
+        IsHomalgRing );
+
+DeclareProperty( "IsSemiSimpleRing",
+        IsHomalgRing );
+
+DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
         IsHomalgRing );
 
 ####################################
@@ -128,16 +206,32 @@ DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
 DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
         IsHomalgRing );
 
-## minus one:
+##
+DeclareAttribute( "KrullDimension",
+        IsHomalgRing );
+
+##
 DeclareAttribute( "LeftGlobalDimension",
         IsHomalgRing );
 
-## minus one:
+##
 DeclareAttribute( "RightGlobalDimension",
         IsHomalgRing );
 
-## minus one:
+##
 DeclareAttribute( "GlobalDimension",
+        IsHomalgRing );
+
+## [McCRob, 11.1.14]
+DeclareAttribute( "GeneralLinearRank",
+        IsHomalgRing );
+
+## [McCRob, 11.3.10]
+DeclareAttribute( "ElementaryRank",
+        IsHomalgRing );
+
+## [McCRob, 11.3.4]
+DeclareAttribute( "StableRank",
         IsHomalgRing );
 
 ####################################
@@ -151,6 +245,9 @@ DeclareAttribute( "GlobalDimension",
 DeclareOperation( "HomalgRing",
         [ IsHomalgExternalRingElement ] );
 
+DeclareOperation( "PositionOfTheDefaultSetOfRelations",
+        [ IsRingElement ] );
+
 DeclareOperation( "IsUnit",
         [ IsHomalgRing, IsRingElement ] );
 
@@ -158,6 +255,9 @@ DeclareOperation( "IsUnit",
         [ IsHomalgExternalRingElement ] );
 
 DeclareOperation( "RingName",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "DisplayRing",
         [ IsHomalgRing ] );
 
 DeclareOperation( "homalgPointer",
@@ -199,6 +299,12 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgRing, IsInt ] );
 
+DeclareOperation( "SetRingProperties",
+        [ IsHomalgRing, IsInt ] );
+
+DeclareOperation( "SetRingProperties",
+        [ IsHomalgRing, IsHomalgRing, IsList ] );
+
 DeclareOperation( "PolynomialRing",
         [ IsHomalgRing, IsList ] );
 
@@ -225,4 +331,6 @@ DeclareGlobalFunction( "HomalgFieldOfRationals" );
 DeclareGlobalFunction( "HomalgExternalRingElement" );
 
 DeclareGlobalFunction( "StringToElementStringList" );
+
+DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
 

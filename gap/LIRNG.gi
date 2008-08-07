@@ -25,71 +25,205 @@ InstallValue( LIRNG,
 
 ##
 InstallValue( LogicalImplicationsForHomalgRings,
-        [ ## listed alphabetically (ignoring left/right):
+        [ ## from special to general, at least try it:
           
-          ##
-          
-          [ IsIntegersForHomalg,
-            "implies", IsPrincipalIdealRing ],
+          ## IsFieldForHomalg (a field)
+          [ IsFieldForHomalg,
+            "implies", IsCommutative ],			## by definition
           
           [ IsFieldForHomalg,
-            "implies", IsPrincipalIdealRing ],
+            "implies", IsDivisionRingForHomalg ],
+          
+          ## IsDivisionRingForHomalg (a division ring)
+          [ IsDivisionRingForHomalg,
+            "implies", IsLocalRing ],
+          
+          [ IsDivisionRingForHomalg,
+            "implies", IsSimpleRing ],
+          
+          [ IsDivisionRingForHomalg,
+            "implies", ContainsAField ],		## as its center
+          
+          [ IsDivisionRingForHomalg, "and", IsCommutative,
+            "implies", IsFieldForHomalg ],
+          
+          ## IsIntegersForHomalg (the ring of integers)
+          [ IsIntegersForHomalg,
+            "implies", IsCommutative ],
+          
+          [ IsIntegersForHomalg,
+            "implies", IsPrincipalIdealRing ],		## Euclid: even a euclidean ring
+          
+          [ IsIntegersForHomalg,
+            "implies", IsIntegralDomain ],
+          
+          ## IsResidueClassRingOfTheIntegers
+          [ IsResidueClassRingOfTheIntegers,
+            "implies", IsCommutative ],
+          
+          [ IsResidueClassRingOfTheIntegers,
+            "implies", IsPrincipalIdealRing ],		## quotients of PIR are PIR
+          
+          ## IsKaplanskyHermite (each GL(2,R)-orbit of 1x2-rows has an element of the form (d,0), cf. [Lam06, Appendix of I.4, Prop. 4.24])
+          [ IsKaplanskyHermite,
+            "implies", IsCommutative ],			## by definition
+          
+          [ IsKaplanskyHermite,
+            "implies", IsHermite ],			## [Lam06, Theorem I.4.26,(A)]
+          
+          [ IsKaplanskyHermite,
+            "implies", IsBezoutRing ],			## [Lam06, Theorem I.4.26,(A)]
+          
+          ## IsBezoutRing (a commutative ring in which every f.g. ideal is principal (e.g. the ring of entire functions on \C), cf. [Lam06, Example I.4.7,(5)])
+          [ IsBezoutRing,
+            "implies", IsCommutative ],			## by definition
+          
+          [ IsBezoutRing, "and", IsNoetherian,
+            "imply", IsPrincipalIdealRing ],		## trivial
+          
+          [ IsBezoutRing, "and", IsIntegralDomain,
+            "imply", IsKaplanskyHermite ],		## [Lam06, Example I.4.7,(5) and Corollary I.4.28]
+          
+          [ IsBezoutRing, "and", IsLocalRing,
+            "imply", IsKaplanskyHermite ],		## [Lam06, Corollary I.4.28]
+          
+          ## IsDedekindDomain (integrally closed noetherian with Krull dimension at most 1)
+          [ IsDedekindDomain,
+            "implies", IsCommutative ],			## by definition
+          
+          [ IsDedekindDomain,
+            "implies", IsNoetherian ],			## by definition
+          
+          [ IsDedekindDomain,
+            "implies", IsIntegralDomain ],		## by definition
+          
+          [ IsDedekindDomain,
+            "implies", IsIntegrallyClosedDomain ],	## by definition
+          
+          [ IsDedekindDomain,
+            "implies", IsHermite ],			## [Lam06, Example I.4.7,(4)]
+          
+          [ IsDedekindDomain,
+            "implies", IsHereditary ],			## [Lam06, footnote on p. 72]
+          
+          [ IsDedekindDomain, "and", IsUniqueFactorizationDomain,
+            "imply", IsPrincipalIdealRing ],		## ................
+          
+          [ IsDedekindDomain, "and", IsLocalRing,
+            "imply", IsDiscreteValuationRing ],		## [Weibel, Kbook.I.pdf Examples on p. 18]
+          
+          ## IsDiscreteValuationRing (a valuation ring with valuation group = Z, cf. [Hart, Definition and Theorem I.6.2A])
+          [ IsDiscreteValuationRing,
+            "implies", IsCommutative ],			## by definition
+          
+          [ IsDiscreteValuationRing,
+            "implies", IsIntegralDomain ],		## by definition
+          
+          [ IsDiscreteValuationRing,
+            "implies", IsPrincipalIdealRing ],		## [Weibel, Kbook.I.pdf Lemma 2.2]
+          
+          ## Is/Left/Right/Hereditary (every left/right ideal is projective, cf. [Lam06, Definition II.2.1])
+          [ IsHereditary, "and", IsCommutative, "and", IsIntegralDomain,
+            "imply", IsDedekindDomain ],		## [Lam06, footnote on p. 72]
+          
+          ## IsIntegrallyClosedDomain (closed in its field of fractions)
+          [ IsIntegrallyClosedDomain,
+            "implies", IsIntegralDomain ],		## trivial
+          
+          ## IsUniqueFactorizationDomain (unique factorization domain)
+          [ IsUniqueFactorizationDomain,
+            "implies", IsCommutative ],			## by definition
+          
+          [ IsUniqueFactorizationDomain,
+            "implies", IsIntegrallyClosedDomain ],	## easy, wikipedia
+          
+          ## IsCommutative
+          [ IsCommutative,
+            "implies", HasInvariantBasisProperty ],	## [Lam06, p. 26]
+          
+          ## IsLocalRing (a single maximal left/right/ideal)
+          [ IsLocalRing,
+            "implies", IsSemiLocalRing ],		## trivial
+          
+          [ IsLocalRing,
+            "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
+          
+          ## IsSemiLocalRing				## commutative def.: finitely many maximal ideals [Lam06, bottom of p. 20], general def. R/rad R is left or eq. right artinian [Lam06, top of p. 28]
+          [ IsSemiLocalRing,
+            "implies", IsHermite ],			## [Lam06, Example I.4.7,(3)], with the correct notion of semilocal, commutativity is not essential, as Lam noted.
+          
+          ## IsSimpleRing: CAUTION: IsSimple does not imply IsSemiSimple; the Weyl algebra is a counter example
+          
+          ## IsSemiSimpleRing
+          [ IsSemiSimpleRing,
+            "implies", IsHermite ],			## [Lam06, Example I.4.7(1)]
+          
+          ## Is/Left/Right/PrincipalIdealRing
+          [ IsLeftPrincipalIdealRing,
+            "implies", IsLeftNoetherian ],		## trivial
+          
+          [ IsRightPrincipalIdealRing,
+            "implies", IsRightNoetherian ],		## trivial
+          
+          [ IsLeftPrincipalIdealRing, "and", IsIntegralDomain,
+            "imply", IsLeftFiniteFreePresentationRing ],## trivial
+          
+          [ IsRightPrincipalIdealRing, "and", IsIntegralDomain,
+            "imply", IsRightFiniteFreePresentationRing ],## trivial
+          
+          [ IsPrincipalIdealRing, "and", IsCommutative,
+            "imply", IsKaplanskyHermite ],		## [Lam06, Theorem I.4.31]
+          
+          [ IsPrincipalIdealRing, "and", IsCommutative,
+            "imply", IsBezoutRing ],			## trivial
+          
+          [ IsPrincipalIdealRing, "and", IsCommutative, "and", IsIntegralDomain,
+            "imply", IsUniqueFactorizationDomain ],	## trivial
+          
+          [ IsPrincipalIdealRing, "and", IsCommutative, "and", IsIntegralDomain,
+            "imply", IsDedekindDomain ],		## trivial
+          
+          ## Is/Left/Right/Noetherian
+          [ IsLeftNoetherian,
+            "implies", HasLeftInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
+          
+          [ IsRightNoetherian,
+            "implies", HasRightInvariantBasisProperty ],## [Lam06, bottom of p. 26]
+          
+          [ IsLeftNoetherian, "and", IsIntegralDomain,
+            "implies", IsLeftOreDomain ],		## easy ...
+          
+          [ IsRightNoetherian, "and", IsIntegralDomain,
+            "implies", IsRightOreDomain ],		## easy ...
+          
+          ## Is/Left/Right/OreDomain
+          [ IsLeftOreDomain,
+            "implies", IsIntegralDomain ],		## by definition
+          
+          [ IsRightOreDomain,
+            "implies", IsIntegralDomain ],		## by definition
           
           ## Serre's theorem: IsRegular <=> IsGlobalDimensionFinite:
-          
           [ IsRegular,
             "implies", IsGlobalDimensionFinite ],
           
           [ IsGlobalDimensionFinite,
             "implies", IsRegular ],
           
-          ##
-          
-          [ IsIntegralDomain, "and", IsLeftPrincipalIdealRing,
-            "imply", IsGlobalDimensionFinite ],
-          
-          [ IsIntegralDomain, "and", IsRightPrincipalIdealRing,
-            "imply", IsGlobalDimensionFinite ],
-          
-          ##
-          
-          [ IsCommutative, "and", IsRightNoetherian,
-            "imply", IsLeftNoetherian ],
-          
-          [ IsCommutative, "and", IsLeftNoetherian,
-            "imply", IsRightNoetherian ],
-          
-          ##
-          
-          [ IsLeftPrincipalIdealRing,
-            "implies", IsLeftNoetherian ],
-          
-          [ IsRightPrincipalIdealRing,
-            "implies", IsRightNoetherian ],
-          
-          ##
-          
-          [ IsCommutative, "and", IsRightOreDomain,
-            "implies", IsLeftOreDomain ],
-          
-          [ IsCommutative, "and", IsLeftOreDomain,
-            "implies", IsRightOreDomain ],
-          
-          ##
-          
-          [ IsIntegralDomain, "and", IsLeftNoetherian,
-            "implies", IsLeftOreDomain ],
-          
-          [ IsIntegralDomain, "and", IsRightNoetherian,
-            "implies", IsRightOreDomain ],
-          
-          ##
-          
-          [ IsCommutative, "and", IsRightPrincipalIdealRing,
-            "implies", IsLeftPrincipalIdealRing ],
-          
-          [ IsCommutative, "and", IsLeftPrincipalIdealRing,
-            "implies", IsRightPrincipalIdealRing ] ] );
+          ] );
+
+
+AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
+        [
+         [ "Has", "InvariantBasisProperty" ],
+         [ "Is", "Hermite" ],
+         [ "Is", "Hereditary" ],
+         [ "Is", "Noetherian" ],
+         [ "Is", "OreDomain" ],
+         [ "Is", "GlobalDimensionFinite" ],
+         [ "Is", "FiniteFreePresentationRing" ],
+         [ "Is", "PrincipalIdealRing", "<>" ],
+         ] );
 
 ####################################
 #
@@ -135,22 +269,136 @@ end );
 ####################################
 
 ##
+InstallLeftRightAttributesForHomalg(
+        [
+         "GlobalDimension",
+         ], IsHomalgRing );
+
+##
 InstallImmediateMethod( LeftGlobalDimension,
-        IsHomalgRing and HasGlobalDimension, 0,
+        IsHomalgRing and IsLeftPrincipalIdealRing and IsIntegralDomain and HasIsDivisionRingForHomalg, 0,
         
   function( R )
     
-    return GlobalDimension( R );
+    if IsDivisionRingForHomalg( R ) then
+        return 0;
+    else
+        return 1;
+    fi;
     
 end );
 
 ##
 InstallImmediateMethod( RightGlobalDimension,
-        IsHomalgRing and HasGlobalDimension, 0,
+        IsHomalgRing and IsRightPrincipalIdealRing and IsIntegralDomain and HasIsDivisionRingForHomalg, 0,
         
   function( R )
     
-    return GlobalDimension( R );
+    if IsDivisionRingForHomalg( R ) then
+        return 0;
+    else
+        return 1;
+    fi;
+    
+end );
+
+##
+InstallImmediateMethod( LeftGlobalDimension,
+        IsHomalgRing and HasIsLeftGlobalDimensionFinite, 0,
+        
+  function( R )
+    
+    if IsLeftGlobalDimensionFinite( R ) then
+        TryNextMethod( );
+    fi;
+    
+    return infinity;
+    
+end );
+
+##
+InstallImmediateMethod( RightGlobalDimension,
+        IsHomalgRing and HasIsRightGlobalDimensionFinite, 0,
+        
+  function( R )
+    
+    if IsRightGlobalDimensionFinite( R ) then
+        TryNextMethod( );
+    fi;
+    
+    return infinity;
+    
+end );
+
+##
+InstallImmediateMethod( GlobalDimension,
+        IsHomalgRing and IsDedekindDomain and HasIsFieldForHomalg, 0,		## hence by Serre's theorem: IsDedekindDomain implies GlobalDimension <= 1 < infinity implies IsRegular
+        
+  function( R )
+    
+    if IsFieldForHomalg( R ) then
+        return 0;
+    else
+        return 1;
+    fi;
+    
+end );
+
+##
+InstallImmediateMethod( GlobalDimension,
+        IsHomalgRing and IsFieldForHomalg, 1001,
+        
+  function( R )
+    
+    return 0;
+    
+end );
+
+##
+InstallImmediateMethod( GlobalDimension,
+        IsHomalgRing and IsDivisionRingForHomalg, 1001,
+        
+  function( R )
+    
+    return 0;
+    
+end );
+
+##
+InstallImmediateMethod( KrullDimension,
+        IsHomalgRing and IsPrincipalIdealRing and IsIntegralDomain and IsCommutative and HasIsFieldForHomalg, 0,
+        
+  function( R )
+    
+    if not IsFieldForHomalg( R ) then
+        return 1;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( KrullDimension,
+        IsHomalgRing and IsDedekindDomain and HasIsFieldForHomalg, 0,
+        
+  function( R )
+    
+    if not IsFieldForHomalg( R ) then
+        return 1;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( KrullDimension,
+        IsHomalgRing and IsFieldForHomalg, 1001,
+        
+  function( R )
+    
+    return 0;
     
 end );
 

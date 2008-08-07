@@ -43,9 +43,6 @@ DeclareProperty( "IsReducedSetOfRelations",
 DeclareProperty( "IsInjectivePresentation",
         IsHomalgRelations );
 
-DeclareProperty( "HasFiniteFreeResolution",
-        IsHomalgRelations );
-
 ####################################
 #
 # attributes:

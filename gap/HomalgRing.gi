@@ -168,6 +168,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+        "for ring elements",
+        [ IsRingElement ],
+        
+  function( r )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( \=,
         "for homalg external objects",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
@@ -309,6 +320,110 @@ InstallMethod( homalgSetName,
   function( r, name )
     
     SetName( r, name );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "constructor",
+        [ IsHomalgRing and IsFieldForHomalg, IsInt ],
+        
+  function( R, c )
+    
+    SetCharacteristic( R, c );
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "constructor",
+        [ IsHomalgRing and IsResidueClassRingOfTheIntegers, IsInt ],
+        
+  function( R, c )
+    local powers;
+    
+    SetCharacteristic( R, c );
+    
+    if c = 0 then
+        SetIsIntegersForHomalg( R, true );
+        SetContainsAField( R, false );
+	SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
+    elif IsPrime( c ) then
+        SetIsFieldForHomalg( R, true );
+    else
+        SetIsSemiLocalRing( R, true );
+        SetIsIntegralDomain( R, false );
+        powers := List( Collected( FactorsInt( c ) ), a -> a[2] );
+        if Set( powers ) = [ 1 ] then
+            SetIsSemiSimpleRing( R, true );
+        else
+            SetIsRegular( R, false );
+            if Length( powers ) = 1 then
+                SetIsLocalRing( R, true );
+            fi;
+        fi;
+	SetKrullDimension( R, 0 );
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "constructor",
+        [ IsHomalgRing and IsFreePolynomialRing, IsHomalgRing, IsList ],
+        
+  function( S, R, var )
+    local d;
+    
+    d := Length( var );
+    
+    SetCoefficientsRing( S, R );
+    SetCharacteristic( S, Characteristic( R ) );
+    SetIsCommutative( S, true );
+    SetIndeterminatesOfPolynomialRing( S, var );
+    SetGlobalDimension( S, d );
+    SetKrullDimension( S, d + KrullDimension( R ) );
+    SetGeneralLinearRank( S, 1 );	## Quillen-Suslin Theorem (see [McCRob, 11.5.5]
+    if d = 1 then			## [McCRob, 11.5.7]
+        SetElementaryRank( S, 1 );
+    elif d > 2 then
+        SetElementaryRank( S, 2 );
+    fi;
+          
+    SetIsIntegralDomain( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "constructor",
+        [ IsHomalgRing and IsWeylRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, R, der )
+    local r, var, d;
+    
+    r := CoefficientsRing( R );
+    
+    var := IndeterminatesOfPolynomialRing( R );
+    d := Length( var );
+    
+    SetCoefficientsRing( S, r );
+    SetCharacteristic( S, Characteristic( R ) );
+    SetIsCommutative( S, false );
+    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    SetGlobalDimension( S, d );
+    if HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) and Characteristic( S ) = 0 then
+        SetGeneralLinearRank( S, 2 );	## [Stafford78, McCRob, 11.2.15(i)]
+        SetIsSimpleRing( S, true );
+    fi;
+    if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
+        SetIsIntegralDomain( S, true );
+    fi;
     
 end );
 
@@ -465,21 +580,17 @@ InstallGlobalFunction( HomalgRingOfIntegers,
         fi;
         c := arg[1];
         if IsPrime( c ) then
-            R := CreateHomalgRing( GF( c ), IsFiniteQuotientOfTheIntegers );
+            R := CreateHomalgRing( GF( c ) );
         else
-            R := CreateHomalgRing( ZmodnZ( c ), IsFiniteQuotientOfTheIntegers );
+            R := CreateHomalgRing( ZmodnZ( c ) );
         fi;
     else
         Error( "the first argument must be an integer\n" );
     fi;
     
-    if c = 0 then
-        SetGlobalDimension( R, 1 );
-    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
-        SetGlobalDimension( R, 0 );
-    else
-        SetGlobalDimension( R, infinity );
-    fi;
+    SetIsResidueClassRingOfTheIntegers( R, true );
+    
+    SetRingProperties( R, c );
     
     return R;
     
@@ -496,7 +607,7 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     
     LoadPackage( "GaussForHomalg" );
     
-    SetGlobalDimension( R, 0 );
+    SetRingProperties( R, 0 );
     
     return R;
     
@@ -614,6 +725,22 @@ InstallGlobalFunction( StringToElementStringList,
     
 end );
 
+##
+InstallGlobalFunction( _CreateHomalgRingToTestProperties,
+  function( arg )
+    local homalg_ring, type;
+    
+    homalg_ring := rec( );
+    
+    type := TheTypeHomalgInternalRing;
+    
+    ## Objectify:
+    CallFuncList( ObjectifyWithAttributes, Concatenation([ homalg_ring, type ], arg ) );
+    
+    return homalg_ring;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
@@ -648,6 +775,16 @@ InstallMethod( Display,
   function( o )
     
     Print( RingName( o ), "\n" );
+    
+end );
+
+InstallMethod( DisplayRing,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( o )
+    
+    Display( o );
     
 end );
 

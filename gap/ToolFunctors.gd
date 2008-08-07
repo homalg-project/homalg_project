@@ -14,10 +14,30 @@
 #
 ####################################
 
+## TheZeroMap
+DeclareGlobalFunction( "_Functor_TheZeroMap_OnObjects" );
+
+DeclareGlobalVariable( "functor_TheZeroMap" );
+
 ## AsATwoSequence
 DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsATwoSequence" );
+
+## MulMap
+DeclareGlobalFunction( "_Functor_MulMap_OnObjects" );
+
+DeclareGlobalVariable( "functor_MulMap" );
+
+## AddMap
+DeclareGlobalFunction( "_Functor_AddMap_OnObjects" );
+
+DeclareGlobalVariable( "functor_AddMap" );
+
+## SubMap
+DeclareGlobalFunction( "_Functor_SubMap_OnObjects" );
+
+DeclareGlobalVariable( "functor_SubMap" );
 
 ## Compose
 DeclareGlobalFunction( "_Functor_Compose_OnObjects" );
@@ -47,11 +67,23 @@ DeclareGlobalVariable( "functor_AsChainMapForPushout" );
 
 # basic operations:
 
+DeclareOperation( "TheZeroMap",
+        [ IsHomalgModule, IsHomalgModule ] );
+
 DeclareOperation( "AsATwoSequence",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsATwoSequence",
         [ IsHomalgComplex ] );
+
+DeclareOperation( "MulMap",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "AddMap",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "SubMap",
+        [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "Compose",
         [ IsHomalgMap, IsHomalgMap ] );

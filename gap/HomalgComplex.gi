@@ -502,7 +502,7 @@ InstallMethod( Add,
         seq := IsSequence ( C );
     fi;
     
-    Add( C, HomalgZeroMap( M, T ) );
+    Add( C, TheZeroMap( M, T ) );
     
     if IsBound( grd ) then
         SetIsGradedObject( C, grd );
@@ -532,7 +532,7 @@ InstallMethod( Add,
         seq := IsSequence ( C );
     fi;
     
-    Add( C, HomalgZeroMap( S, M ) );
+    Add( C, TheZeroMap( S, M ) );
     
     if IsBound( grd ) then
         SetIsGradedObject( C, grd );

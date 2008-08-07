@@ -374,3 +374,86 @@ InstallImmediateMethod( ElementaryDivisorsOfLeftModule,
     
 end );
 
+## from HomalgMap
+##
+InstallMethod( \*,
+        "of two homalg maps",
+        [ IsRingElement, IsMapOfFinitelyGeneratedModulesRep ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
+        
+  function( a, phi )
+    local a_phi;
+    
+    a_phi := HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    
+    if IsUnit( HomalgRing( phi ), a ) then
+        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+            SetIsIsomorphism( a_phi, true );
+        else
+            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
+                SetIsSplitMonomorphism( a_phi, true );
+            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                SetIsMonomorphism( a_phi, true );
+            fi;
+            
+            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
+                SetIsSplitEpimorphism( a_phi, true );
+            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                SetIsEpimorphism( a_phi, true );
+            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+                SetIsMorphism( a_phi, true );
+            fi;
+        fi;
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( a_phi, true );
+    fi;
+    
+    return a_phi;
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi1, phi2 )
+    local phi;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return Error( "the two maps are not comparable" );
+    fi;
+    
+    phi := HomalgMap( MatrixOfMap( phi1 ) + MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( \-,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi1, phi2 )
+    local phi;
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return Error( "the two maps are not comparable" );
+    fi;
+    
+    phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+

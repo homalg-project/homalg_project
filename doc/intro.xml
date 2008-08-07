@@ -15,7 +15,31 @@ behind the package.
 <Section Label="philosophy">
 <Heading>Philosophy</Heading>
 
-This package is about homological algebra. To be written further.
+The package &homalg; is meant to be the first volume of a continuously
+growing and opensource book about <URL Text="homological
+algebra">http://en.wikipedia.org/wiki/Homological_algebra</URL>. &homalg;
+is an attempt to translate as much as possible of homological algebra,
+as can be found in books like <Cite Key="ce"/>, <Cite Key="ML"/>,
+<Cite Key="HS"/>, <Cite Key="rot"/>, <Cite Key="weihom"/> and
+<Cite Key="GM"/>, into a language that <E>also</E> a computer can
+directly understand. Yes, ``also'': &homalg; should, as the above
+mentioned books, by a great extent be readable by a human being.
+Finding such a language was by no means an easy task (&see;
+<Ref Sect="FirstSteps"/>). For the reasons mentioned below (&see;
+<Ref Sect="WhyGAP4"/>) I have chosen &GAP4; as the language of this
+book project.
+
+
+</Section>
+
+<Section Label="FirstSteps">
+<Heading>First Steps</Heading>
+
+</Section>
+
+<Section Label="WhyGAP4">
+<Heading>Why &GAP4;</Heading>
+
 </Section>
 
 <Section Label="overview">

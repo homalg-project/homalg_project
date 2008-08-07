@@ -34,6 +34,9 @@ DeclareProperty( "IsStablyFree",
 DeclareProperty( "IsProjective",
         IsHomalgModule );
 
+DeclareProperty( "FiniteFreeResolutionExists",
+        IsHomalgModule );
+
 DeclareProperty( "IsReflexive",
         IsHomalgModule );
 
@@ -52,6 +55,12 @@ DeclareProperty( "IsTorsion",
 DeclareProperty( "IsHolonomic",
         IsHomalgModule );
 
+DeclareProperty( "IsPure",
+        IsHomalgModule );
+
+DeclareProperty( "HasConstantRank",
+        IsHomalgModule );
+
 ####################################
 #
 # attributes:
@@ -67,6 +76,9 @@ DeclareAttribute( "TheIdentityMorphism",
 DeclareAttribute( "RankOfModule",
         IsHomalgModule );
 
+DeclareAttribute( "ProjectiveDimension",
+        IsHomalgModule );
+
 DeclareAttribute( "DegreeOfTorsionFreeness",
         IsHomalgModule );
 
@@ -77,6 +89,9 @@ DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
 DeclareAttribute( "Genesis",
+        IsHomalgModule );
+
+DeclareAttribute( "AFiniteFreeResolutin",
         IsHomalgModule );
 
 ####################################

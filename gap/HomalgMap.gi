@@ -396,65 +396,6 @@ InstallMethod( ZeroMutable,
     
 end );
 
-##
-InstallMethod( \*,
-        "of two homalg maps",
-        [ IsRingElement, IsMapOfFinitelyGeneratedModulesRep ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
-        
-  function( a, phi )
-    local a_phi;
-    
-    a_phi := HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
-    
-    if IsUnit( HomalgRing( phi ), a ) then
-        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-            SetIsIsomorphism( a_phi, true );
-        else
-            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
-                SetIsSplitMonomorphism( a_phi, true );
-            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
-                SetIsMonomorphism( a_phi, true );
-            fi;
-            
-            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
-                SetIsSplitEpimorphism( a_phi, true );
-            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-                SetIsEpimorphism( a_phi, true );
-            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-                SetIsMorphism( a_phi, true );
-            fi;
-        fi;
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-        SetIsMorphism( a_phi, true );
-    fi;
-    
-    return a_phi;
-    
-end );
-
-##
-InstallMethod( \+,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi1, phi2 )
-    local phi;
-    
-    if not AreComparableMorphisms( phi1, phi2 ) then
-        return Error( "the two maps are not comparable" );
-    fi;
-    
-    phi := HomalgMap( MatrixOfMap( phi1 ) + MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
-    
-    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( phi, true );
-    fi;
-    
-    return phi;
-    
-end );
-
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "of homalg maps",
@@ -472,29 +413,6 @@ InstallMethod( AdditiveInverseMutable,
         [ IsHomalgMap and IsZero ],
         
   function( phi )
-    
-    return phi;
-    
-end );
-
-##
-InstallMethod( \-,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi1, phi2 )
-    local phi;
-    
-    if not AreComparableMorphisms( phi1, phi2 ) then
-        return Error( "the two maps are not comparable" );
-    fi;
-    
-    phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
-    
-    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( phi, true );
-    fi;
     
     return phi;
     
@@ -824,6 +742,94 @@ InstallMethod( PreCompose,
   function( phi1, phi2 )
     
     return phi2 * phi1;
+    
+end );
+
+##
+InstallMethod( PreInverse,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi )
+    local inv;
+    
+    inv := LeftInverse( MatrixOfMap( phi ) );
+    
+    if HasIsZero( inv ) and IsZero( inv ) then
+        return TheZeroMap( Range( phi ), Source( phi ) );
+    fi;
+    
+    if Eval( inv ) = fail then
+        return fail;
+    fi;
+    
+    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    
+end );
+
+##
+InstallMethod( PreInverse,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi )
+    local inv;
+    
+    inv := RightInverse( MatrixOfMap( phi ) );
+    
+    if HasIsZero( inv ) and IsZero( inv ) then
+        return TheZeroMap( Range( phi ), Source( phi ) );
+    fi;
+    
+    if Eval( inv ) = fail then
+        return fail;
+    fi;
+    
+    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    
+end );
+
+##
+InstallMethod( PostInverse,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi )
+    local inv;
+    
+    inv := RightInverse( MatrixOfMap( phi ) );
+    
+    if HasIsZero( inv ) and IsZero( inv ) then
+        return TheZeroMap( Range( phi ), Source( phi ) );
+    fi;
+    
+    if Eval( inv ) = fail then
+        return fail;
+    fi;
+    
+    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    
+end );
+
+##
+InstallMethod( PostInverse,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi )
+    local inv;
+    
+    inv := LeftInverse( MatrixOfMap( phi ) );
+    
+    if HasIsZero( inv ) and IsZero( inv ) then
+        return TheZeroMap( Range( phi ), Source( phi ) );
+    fi;
+    
+    if Eval( inv ) = fail then
+        return fail;
+    fi;
+    
+    return HomalgMap( inv, Range( phi ), Source( phi ) );
     
 end );
 
@@ -1213,13 +1219,13 @@ InstallMethod( ViewObj,
         if IsMorphism( o ) then
             Print( " homomorphism of" );
         elif HasMonomorphismModuloImage( o ) then
-            Print( " monomorphism (modulo a certain submodule) of" );
+            Print( " generalized embedding of" );
         else
             Print( " non-well-defined map between" );
         fi;
     else
         if HasMonomorphismModuloImage( o ) then
-            Print( " monomorphism (modulo a certain submodule) of" );
+            Print( " generalized embedding of" );
         else
             Print( " \"homomorphism\" of" );
         fi;
