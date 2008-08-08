@@ -220,7 +220,10 @@ InstallMethod( CopyMat,
 ##  <#GAPDoc Label="GetEntry">
 ##  <ManSection >
 ##  <Meth Arg="sm, i, j" Name="GetEntry" />
-##  <Returns>the entry <C>sm[i,j]</C> of the sparse matrix <A>sm</A></Returns>
+##  <Returns>a ring element.</Returns>
+##  <Description>
+##  This returns the entry <C>sm[i,j]</C> of the sparse matrix <A>sm</A>
+##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -236,22 +239,57 @@ InstallMethod( GetEntry,
     fi;
   end
 );
-
-##  <#GAPDoc Label="AddEntry">
+  
+##  <#GAPDoc Label="SetEntry">
 ##  <ManSection >
-##  <Meth Arg="sm, i, j, elm" Name="AddEntry" />
-##  <Returns><K>true</K> or a ring element</Returns>
+##  <Meth Arg="sm, i, j, elm" Name="SetEntry" />
+##  <Returns>nothing.</Returns>
 ##  <Description>
-##  AddEntry adds the element <A>elm</A> to the sparse matrix <A>sm</A> at the
-##  <A>(i,j)</A>-th position. This is a Method with a side effect which
-##  returns true if you tried to add zero or the sum of <C>sm[i,j]</C> and
-##  <A>elm</A> otherwise.
+##  This sets the entry <C>sm[i,j]</C> of the sparse matrix <A>sm</A> to <A>elm</A>.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( AddEntry,
-        [ IsSparseMatrix, IsInt, IsInt, IsObject ],
+InstallMethod( SetEntry,
+        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ],
+  function( M, i, j, e )
+    local ring, pos, res;
+    ring := M!.ring;
+    if not e in ring then
+        Error( "the element has to be in ", ring, "!" );
+    fi;
+    pos := PositionSorted( M!.indices[i], j );
+    if IsBound( M!.indices[i][pos] ) and M!.indices[i][pos] = j then
+        if e = Zero( ring ) then
+            Remove( M!.indices[i], pos );
+            Remove( M!.entries[i], pos );
+        else
+            M!.entries[i][pos] := e;
+        fi;
+    else
+	if e <> Zero( ring ) then
+            Add( M!.indices[i], j, pos );
+            Add( M!.entries[i], e, pos );
+        fi;
+    fi;
+  end
+);
+
+##  <#GAPDoc Label="AddToEntry">
+##  <ManSection >
+##  <Meth Arg="sm, i, j, elm" Name="AddToEntry" />
+##  <Returns><K>true</K> or a ring element</Returns>
+##  <Description>
+##  AddToEntry adds the element <A>elm</A> to the sparse matrix <A>sm</A> at the
+##  <A>(i,j)</A>-th position. This is a Method with a side effect which
+##  returns true if you tried to add zero or the sum of <C>sm[i,j]</C> and
+##  <A>elm</A> otherwise. Please use this method whenever possible.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( AddToEntry,
+        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ],
   function( M, i, j, e )
     local ring, pos, res;
     ring := M!.ring;
@@ -278,7 +316,7 @@ InstallMethod( AddEntry,
     fi;
   end
 );
-  
+
 ###############################
 ## View and Display methods: ##
 ###############################
@@ -726,6 +764,37 @@ InstallMethod( IsSparseDiagonalMatrix,
   end
 );
   
+##
+InstallMethod( SparseKroneckerProduct,
+        [ IsSparseMatrix, IsSparseMatrix ],
+        function( A, B )
+    local indices, entries, i1, i2, rowindex, j1, j2, prod;
+    
+    indices := [];
+    entries := [];
+    
+    for i1 in [ 1 .. A!.nrows ] do
+        for i2 in [ 1 .. B!.nrows ] do
+            rowindex := ( i1 - 1 ) * B!.nrows + i2;
+	    indices[ rowindex ] := [];
+            entries[ rowindex ] := [];
+            for j1 in [ 1 .. Length( A!.indices[i1] ) ] do
+                for j2 in [ 1.. Length( B!.indices[i2] ) ] do
+                    prod := A!.entries[i1][j1] * B!.entries[i2][j2];
+                    if not IsZero( prod ) then
+                        Add( indices[ rowindex ], ( A!.indices[i1][j1] - 1 ) * B!.ncols + B!.indices[i2][j2] );
+                        Add( entries[ rowindex ], prod );
+                    fi;
+                od;
+            od;
+        od;
+    od;
+    
+    return SparseMatrix( A!.nrows * B!.nrows, A!.ncols * B!.ncols, indices, entries, A!.ring );
+    
+  end
+);
+
 ##
 InstallMethod( SparseZeroRows,
         [ IsSparseMatrix ],

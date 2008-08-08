@@ -23,8 +23,11 @@ DeclareOperation( "CopyMat",
 DeclareOperation( "GetEntry",
         [ IsSparseMatrix, IsInt, IsInt ] );
 	
-DeclareOperation( "AddEntry",
-        [ IsSparseMatrix, IsInt, IsInt, IsObject ] );
+DeclareOperation( "SetEntry",
+        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ] );
+
+DeclareOperation( "AddToEntry",
+        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ] );
 
 DeclareOperation( "FindRing",
         [ IsList ] );
@@ -82,6 +85,9 @@ DeclareOperation( "IsSparseIdentityMatrix",
 
 DeclareOperation( "IsSparseDiagonalMatrix",
         [ IsSparseMatrix ] );
+
+DeclareOperation( "SparseKroneckerProduct",
+        [ IsSparseMatrix, IsSparseMatrix ] );
 
 DeclareOperation( "SparseZeroRows",
         [ IsSparseMatrix ] );

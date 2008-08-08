@@ -63,11 +63,32 @@ InstallMethod( GetEntry,
     fi;
   end
 );
-  
 
 ##
-InstallMethod( AddEntry,
-        [ IsSparseMatrixGF2Rep, IsInt, IsInt, IsObject ],
+InstallMethod( SetEntry,
+        [ IsSparseMatrixGF2Rep, IsInt, IsInt, IsRingElement ],
+  function( M, i, j, e )
+    local ring, pos;
+    ring := GF(2);
+    if not e in ring then
+        Error( "the element has to be in ", ring, "!" );
+    fi;
+    pos := PositionSorted( M!.indices[i], j );
+    if IsBound( M!.indices[i][pos] ) and M!.indices[i][pos] = j then
+        if e = Zero( ring ) then
+            Remove( M!.indices[i], pos );
+        fi;
+    else
+        if e <> Zero( ring ) then
+            Add( M!.indices[i], j, pos );
+        fi;
+    fi;
+  end
+);
+
+##
+InstallMethod( AddToEntry,
+        [ IsSparseMatrixGF2Rep, IsInt, IsInt, IsRingElement ],
   function( M, i, j, e )
     local ring, pos;
     ring := GF(2);
@@ -89,10 +110,10 @@ InstallMethod( AddEntry,
 );
 
 ##
-InstallOtherMethod( AddEntry,
+InstallOtherMethod( AddToEntry,
         [ IsSparseMatrixGF2Rep, IsInt, IsInt ],
   function( M, i, j )
-    return AddEntry( M, i, j, One( GF(2) ) );
+    return AddToEntry( M, i, j, One( GF(2) ) );
   end
 );
 
@@ -263,6 +284,32 @@ InstallMethod( IsSparseIdentityMatrix,
   end
 );
   
+
+##
+InstallMethod( SparseKroneckerProduct,
+        [ IsSparseMatrix, IsSparseMatrix ],
+        function( A, B )
+    local indices, i1, i2, rowindex, j1, j2, prod;
+    
+    indices := [];
+    
+    for i1 in [ 1 .. A!.nrows ] do
+        for i2 in [ 1 .. B!.nrows ] do
+            rowindex := ( i1 - 1 ) * B!.nrows + i2;
+            indices[ rowindex ] := [];
+            for j1 in [ 1 .. Length( A!.indices[i1] ) ] do
+                for j2 in [ 1.. Length( B!.indices[i2] ) ] do
+                    Add( indices[ rowindex ], ( A!.indices[i1][j1] - 1 ) * B!.ncols + B!.indices[i2][j2] );
+                od;
+            od;
+        od;
+    od;
+    
+    return SparseMatrix( A!.nrows * B!.nrows, A!.ncols * B!.ncols, indices, A!.ring );
+    
+  end
+);
+
 ##
 InstallOtherMethod( AddRow, #warning: this method does not have a side effect like the other AddRow!
         [ IsList, IsList ],

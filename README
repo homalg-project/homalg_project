@@ -1,16 +1,10 @@
     README file for the `Gauss' GAP4 package
         
-To get the newest version of this GAP 4 package download one of the
-archive files
-    Gauss-x.x.tar.gz
-    Gauss-x.x.zoo
-    Gauss-x.x.tar.bz2
-    Gauss-x.x.zip
+To get the newest version of this GAP 4 package download the archive
+file
+    Gauss.tar.gz
 and unpack it using 
-    gunzip Gauss-x.x.tar.gz; tar xvf Gauss-x.x.tar
-respectively
-    unzoo -x Gauss-x.x.zoo
-and so on.
+    gunzip Gauss.tar.gz; tar xvf Gauss.tar
 
 (Note that if you use a browser like `netscape' for downloading the
 archive file the `gunzip' step above may already be done by the browser,

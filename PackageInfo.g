@@ -26,13 +26,13 @@ Subtitle := "Gauss - Extended Gauss Functionality for GAP",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.07.24",
+Version := "2008.08.08",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "24/07/2008",
+Date := "08/08/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -219,7 +219,7 @@ PackageDoc := rec(
   BookName  := "Gauss",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~simon/Gauss/Gauss.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/goertzen/Gauss/Gauss.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -300,7 +300,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["Gauss", "RREF" ]
+Keywords := ["Gauss", "RREF", "sparse" ]
 
 ));
 

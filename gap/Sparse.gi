@@ -106,8 +106,7 @@ InstallMethod( EchelonMat,
 ##  In either case, the transformation matrix <M>T</M> is calculated
 ##  as the row union of `coeffs' and `relations'.
 ##  <Example><![CDATA[
-##  gap> M := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );
-##  <a 5x3 matrix over GF2>
+##  gap> M := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );;
 ##  gap> EchelonMatTransformation( M );
 ##  rec( heads := [ 1, 2, 3 ],
 ##       vectors := [ <a GF2 vector of length 3>,
@@ -188,7 +187,7 @@ InstallMethod( EchelonMatTransformation,
 ##  gap> Display(M);
 ##   . . . 1 .
 ##   . 1 1 1 1
-##    1 1 1 1 .
+##   1 1 1 1 .
 ##  gap> N := [[1,1,0,0,0],[0,0,1,0,1]] * One( GF(2) );;
 ##  gap> Display(N);
 ##   1 1 . . .

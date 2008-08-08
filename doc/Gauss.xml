@@ -9,6 +9,7 @@
    <!ENTITY homalg "<Package>homalg</Package>">
    <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
    <!ENTITY SCO "<Package>SCO</Package>">
+   <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
  ]>
 
 <Book Name="Gauss">
@@ -21,7 +22,7 @@
   </Version>
   <Author>Simon Goertzen<Br/>
           <Email>simon.goertzen@rwth-aachen.de</Email>
-          <Homepage>wwwb.math.rwth-aachen.de/&tilde;simon</Homepage>
+          <Homepage>http://wwwb.math.rwth-aachen.de/goertzen</Homepage>
 	  <Address>
 	  Lehrstuhl B für Mathematik<Br/>
 	  Templergraben 64<Br/>
@@ -35,17 +36,21 @@
             and functions needed to work with sparse matrices and the
             algorithms provided by the &Gauss; package.
   </Abstract>
-  <Copyright>&copyright; 2007-2008 by Simon Goertzen
+  <Copyright>&copyright; 2007-2008 by Simon Goertzen<P/>
+  This package may be distributed under the terms and conditions of
+  the GNU Public License Version 2.
   </Copyright>
   <Acknowledgements>The &Gauss; package would not have been possible without the helpful contributions by
    <List>
-    <Item>Dr. Max Neunhoeffer, University of St Andrews, and</Item>
-    <Item>Dr. Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.</Item>
+    <Item>Max Neunhöffer, University of St Andrews, and</Item>
+    <Item>Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.</Item>
    </List>
    Many thanks to these two and the Lehrstuhl B für Mathematik in general.
-   Last but not least it should be noted that the &GAP; algorithms for
+   It should be noted that the &GAP; algorithms for
    <C>SemiEchelonForm</C> and other methods formed an important and
-   informative basis for the development of the extended Gaussian algorithms.
+   informative basis for the development of the extended Gaussian
+   algorithms. This manual was created with the help of the &GAPDoc;
+   package by F. Lübeck and M. Neunhöffer <Cite Key="GAPDoc"/>.
   </Acknowledgements>
 </TitlePage>
 
@@ -68,7 +73,7 @@ Chap="chap:Gauss"/>). Included is a documented list of the most
 important methods and functions needed to work with sparse matrices
 and the algorithms provided by the &Gauss; package. Anyone interested
 in source code should just check out the files in the
-<F>gap/pkg/Gauss/gap</F> folder.
+<F>gap/pkg/Gauss/gap</F> folder (&see; Appendix <Ref Label="FileOverview"/>).
 
 </Section>
 
@@ -87,17 +92,18 @@ in source code should just check out the files in the
     reduced row echelon form (RREF) of a matrix, there is no way to
     "Gauss upwards". While this is not neccessary for things like Rank
     or Kernel computations, this was one in a number of missing features
-    important for the development of the &homalg; package by
-    Dr. Barakat (citation).<P/><P/>
+    important for the development of the &GAP; package &homalg; by
+    M. Barakat <Cite Key="homalg"/>.<P/><P/>
     
-    Parallel to this development I worked on &SCO;, a package for
+    Parallel to this development I worked on &SCO; <Cite Key="SCO"/>, a package for
     creating simplicial sets and computing the cohomology of
     orbifolds, based on the paper "Simplicial Cohomology of Orbifolds"
-    by Moerdijk (citation). Very early on it became clear that the
-    cohomology matrices (with entries in &ZZ; or finite quotients of
-    &ZZ;) would grow exponentially in size with the cohomology
-    degree. For example, to compute the cohomology of degree 3 of the
-    orbifold corresponding to the Wallpaper Group <URL Text="p31m">http://en.wikipedia.org/wiki/Wallpaper_group#Group_p31m</URL>
+    by I. Moerdijk and D. A. Pronk <Cite Key="MP_SCO"/>. Very early on
+    it became clear that the cohomology matrices (with entries in &ZZ;
+    or finite quotients of &ZZ;) would grow exponentially in size with
+    the cohomology degree. For example, to compute the cohomology of
+    degree 3 of the orbifold corresponding to the Wallpaper Group <URL
+    Text="p31m">http://en.wikipedia.org/wiki/Wallpaper_group#Group_p31m</URL>
     a 50651 x 1133693 matrix has to be handled.<P/><P/>
     
     It should be quite clear that there was a need for a sparse matrix
@@ -117,21 +123,22 @@ in source code should just check out the files in the
 
  <Section Label="sec:app"><Heading>The applications of the &Gauss; package algorithms</Heading>
     
-    Please visit (url?) to find out more about the &homalg; project
-    and its related packages. Most of the motivation for the
-    algorithms in the &Gauss; package can be found there. If you are
-    interested in this project, you might also want to check out my
-    &GaussForHomalg; (url) package, which, just as &RingsForHomalg; (url)
-    does for external Rings, serves as the connection between &homalg;
-    and &Gauss;. By allowing &homalg; to delegate computational tasks to
-    &Gauss; this small package extends &homalg;'s  capabilities to
+    Please refer to <Cite Key="homalg"/>  to find out more about the
+    &homalg; project and its related packages. Most of the motivation
+    for the algorithms in the &Gauss; package can be found there. If
+    you are interested in this project, you might also want to check
+    out my &GaussForHomalg; <Cite Key="GaussForHomalg"/>  package,
+    which, just as &RingsForHomalg; <Cite Key="RingsForHomalg"/> does
+    for external Rings, serves as the connection between &homalg;
+    and &Gauss;. By allowing &homalg; to delegate computational tasks
+    to &Gauss; this small package extends &homalg;'s  capabilities to
     dense and sparse matrices over fields and rings of the form
     <M>&ZZ; / \langle p^n \rangle</M>.<P/>
     
     For those unfamiliar with the &homalg; project let me explain a
-    couple of points. As outlined in the paper "homalg..." by
-    Dr. Daniel Robertz and Dr. Barakat (cit) homological computations
-    can be reduced to three basic tasks:<P/>
+    couple of points. As outlined in <Cite Key="BR"/> by  Daniel
+    Robertz and M. Barakat homological computations can be reduced to
+    three basic tasks:<P/>
 
     <List>
      <Item>Computing a row basis of a module (<C>BasisOfRowModule</C>).</Item>
@@ -554,6 +561,8 @@ matrices over fields</Item></Row>
 matrices over <M>&ZZ; / \langle p^n \rangle</M></Item></Row>
 </Table>
 </Appendix>
+
+<Bibliography Databases="GaussBib.xml"/>
 
 <TheIndex/>
 
