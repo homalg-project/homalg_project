@@ -8,8 +8,6 @@ nc := NrColumns( imat );
 
 ## a way to copy a matrix internally
 tmat := HomalgMatrix( imat, R );
-IsIdenticalObj( Eval( imat ), Eval( imat ) );
-IsIdenticalObj( Eval( imat ), Eval( tmat ) );
 
 ## a way to change the ring
 S := HomalgFieldOfRationals( );

@@ -14,7 +14,12 @@
 #
 ####################################
 
-# a new GAP-category:
+# two new GAP-categories:
+
+DeclareCategory( "IsInternalMatrixHull",	## this is introduced to allow internal matrices to remain mutable, although Eval is an attribute
+        IsAdditiveElementWithInverse
+        and IsExtLElement
+        and IsAttributeStoringRep ); ## CAUTION: never let such matrix hulls be multiplicative elements!!
 
 DeclareCategory( "IsHomalgMatrix",
         IsAdditiveElementWithInverse
@@ -26,6 +31,9 @@ DeclareCategory( "IsHomalgMatrix",
 # properties:
 #
 ####################################
+
+DeclareProperty( "IsMutableMatrix",
+        IsHomalgMatrix );
 
 DeclareProperty( "IsInitialMatrix",
         IsHomalgMatrix );
@@ -206,6 +214,8 @@ DeclareSynonymAttr( "CompCond",
 
 # constructor methods:
 
+DeclareGlobalFunction( "homalgInternalMatrixHull" );
+
 DeclareGlobalFunction( "HomalgMatrix" );
 
 DeclareGlobalFunction( "HomalgZeroMatrix" );
@@ -242,7 +252,13 @@ DeclareOperation( "SetEntryOfHomalgMatrix",
         [ IsHomalgMatrix, IsInt, IsInt, IsString ] );
 
 DeclareOperation( "SetEntryOfHomalgMatrix",
-        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgExternalRingElement ] );
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
+
+DeclareOperation( "SetEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
+
+DeclareOperation( "AddToEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
 
 DeclareOperation( "CreateHomalgMatrix",
         [ IsString, IsHomalgRing ] );
@@ -387,6 +403,9 @@ DeclareOperation( "DiagMat",
 
 DeclareOperation( "KroneckerMat",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "*",						## this must remain, since an element in IsInternalMatrixHull
+        [ IsInternalMatrixHull, IsInternalMatrixHull ] );	## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "*",				## this must remain, since an element in IsHomalgMatrix
         [ IsHomalgMatrix, IsHomalgMatrix ] );	## is not a priori IsMultiplicativeElement

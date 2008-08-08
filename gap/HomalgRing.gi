@@ -601,11 +601,13 @@ InstallGlobalFunction( HomalgFieldOfRationals,
   function( arg )
     local R;
     
+    if LoadPackage( "GaussForHomalg" ) <> true then
+        Error( "the package GaussForHomalg failed to load\n" );
+    fi;
+    
     R := CreateHomalgRing( Rationals );
     
     SetIsFieldForHomalg( R, true );
-    
-    LoadPackage( "GaussForHomalg" );
     
     SetRingProperties( R, 0 );
     

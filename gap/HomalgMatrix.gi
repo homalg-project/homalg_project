@@ -14,7 +14,11 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgMatrix:
+# three new representations for the GAP-category IsHomalgMatrix:
+DeclareRepresentation( "IshomalgInternalMatrixHullRep",
+        IsInternalMatrixHull,
+        [ ] );
+
 DeclareRepresentation( "IsHomalgInternalMatrixRep",
         IsHomalgMatrix,
         [ ] );
@@ -29,11 +33,18 @@ DeclareRepresentation( "IsHomalgExternalMatrixRep",
 #
 ####################################
 
-# a new family:
+# two new family:
+BindGlobal( "TheFamilyOfInternalMatrixHulls",
+        NewFamily( "TheFamilyOfInternalMatrixHulls" ) );
+
 BindGlobal( "TheFamilyOfHomalgMatrices",
         NewFamily( "TheFamilyOfHomalgMatrices" ) );
 
-# two new types:
+# three new types:
+BindGlobal( "TheTypeInternalMatrixHull",
+        NewType( TheFamilyOfInternalMatrixHulls,
+                IshomalgInternalMatrixHullRep ) );
+
 BindGlobal( "TheTypeHomalgInternalMatrix",
         NewType( TheFamilyOfHomalgMatrices,
                 IsHomalgInternalMatrixRep ) );
@@ -83,7 +94,7 @@ InstallMethod( ShallowCopy,
         fi;
     fi;
     
-    return HomalgMatrix( One( HomalgRing( M ) ) * Eval( M ), NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    return HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );	## HomalgMatrix shallow copies its first argument if it is of type IsMatrix
     
 end );
 
@@ -153,7 +164,29 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
+        
+  function( M, r, c, s, R )
+    
+    Eval( M )!.matrix[r][c] := One( R ) * EvalString( s );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        
+  function( M, r, c, s )
+    
+    Error( "the homalg matrix is write-protected\n" );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString ],
         
   function( M, r, c, s )
     
@@ -164,11 +197,66 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgExternalRingElement ],
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+        
+  function( M, r, c, a, R )
+    
+    Eval( M )!.matrix[r][c] := One( R ) * a;
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ],
+        
+  function( M, r, c, a )
+    
+    Error( "the homalg matrix is write-protected\n" );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement ],
+        
+  function( M, r, c, a )
+    
+    SetEntryOfHomalgMatrix( M, r, c, a, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElement ],
         
   function( M, r, c, s )
     
     SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ],
+        
+  function( M, r, c, a )
+    
+    Error( "the homalg matrix is write-protected\n" );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement ],
+        
+  function( M, r, c, a )
+    
+    SetEntryOfHomalgMatrix( M, r, c, a + GetEntryOfHomalgMatrix( M, r, c ) );
     
 end );
 
@@ -241,7 +329,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return String( Eval( M )[r][c] );
+    return String( GetEntryOfHomalgMatrix( M, r, c ) );
     
 end );
 
@@ -263,7 +351,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
         
   function( M, r, c, R )
     
-    return Eval( M )[r][c];
+    return Eval( M )!.matrix[r][c];
     
 end );
 
@@ -297,7 +385,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
   function( M, R )
     local s, m;
     
-    s := Eval( M );
+    s := Eval( M )!.matrix;
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
@@ -337,7 +425,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
   function( M, R )
     local s, m;
     
-    s := Eval ( M );
+    s := Eval ( M )!.matrix;
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
@@ -381,7 +469,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     c := NrColumns( M );
     z := Zero( R );
     
-    s := Eval( M );
+    s := Eval( M )!.matrix;
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
@@ -464,6 +552,17 @@ InstallMethod( AreComparableMatrices,
         return IsIdenticalObj( HomalgRing( M1 ), HomalgRing( M2 ) )
                and NrColumns( M1 ) = NrColumns( M2 ) and NrRows( M1 ) = NrRows( M2 );
     fi;
+    
+end );
+
+##
+InstallMethod( \=,
+        "for internal matrix hulls",
+        [ IsInternalMatrixHull, IsInternalMatrixHull ],
+        
+  function( M1, M2 )
+    
+    return M1!.matrix = M2!.matrix;
     
 end );
 
@@ -675,7 +774,18 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "for internal matrix hulls",
+        [ IsRingElement, IsInternalMatrixHull ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
+        
+  function( a, A )
+    
+    return homalgInternalMatrixHull( a * A!.matrix );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
         [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24
         
   function( a, A )
@@ -696,7 +806,18 @@ end );
 
 ##
 InstallMethod( \+,
-        "of two homalg matrices",
+        "for pairs of internal matrix hulls",
+        [ IsInternalMatrixHull, IsInternalMatrixHull ],
+        
+  function( A, B )
+    
+    return homalgInternalMatrixHull( A!.matrix + B!.matrix );
+    
+end );
+
+##
+InstallMethod( \+,
+        "for pairs of homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -717,7 +838,18 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "of homalg matrices",
+        "for internal matrix hulls",
+        [ IsInternalMatrixHull ],
+        
+  function( A )
+    
+    return homalgInternalMatrixHull( -A!.matrix );
+    
+end );
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( A )
@@ -737,7 +869,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "of homalg matrices",
+        "for homalg matrices",
         [ IsHomalgMatrix and IsZero ],
         
   function( A )
@@ -748,7 +880,18 @@ end );
 
 ##
 InstallMethod( \-,
-        "of two homalg matrices",
+        "for pairs of internal matrix hulls",
+        [ IsInternalMatrixHull, IsInternalMatrixHull ],
+        
+  function( A, B )
+    
+    return homalgInternalMatrixHull( A!.matrix - B!.matrix );
+    
+end );
+
+##
+InstallMethod( \-,
+        "for pairs of of homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -769,7 +912,18 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "for pairs of internal matrix hulls",
+        [ IsInternalMatrixHull, IsInternalMatrixHull ],
+        
+  function( A, B )
+    
+    return homalgInternalMatrixHull( A!.matrix * B!.matrix );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for pairs of homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -903,9 +1057,17 @@ end );
 ####################################
 
 ##
+InstallGlobalFunction( homalgInternalMatrixHull,
+  function( M )
+    
+    return Objectify( TheTypeInternalMatrixHull, rec( matrix := M ) );
+    
+end );
+
+##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, M, ar, type, matrix, RP;
+    local nargs, R, M, ar, type, matrix, RP, nr_rows, nr_columns;
     
     nargs := Length( arg );
     
@@ -987,32 +1149,40 @@ InstallGlobalFunction( HomalgMatrix,
     fi;
     
     if IsList( arg[1] ) and Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
-        M := List( arg[1], a -> [a] ); ## NormalizeInput
+        M := List( arg[1], a -> [a] );	## NormalizeInput
         RP := homalgTable( R );
         if IsBound(RP!.ConvertMatrix) then
             M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
         fi;
     elif IsHomalgInternalMatrixRep( arg[1] ) and IsHomalgInternalRingRep( R ) then
         M := Eval( arg[1] );
+        if IsInternalMatrixHull( M ) then
+            M := M!.matrix;
+        fi;
         RP := homalgTable( R );
         if IsBound(RP!.ConvertMatrix) then
             M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
         fi;
+    elif IsInternalMatrixHull( arg[1] ) then
+        M := arg[1]!.matrix;
     else
-        M := arg[1];
+        M := ShallowCopy( arg[1] );	## by this we are sure that possible changes to a mutable internal matrix arg[1] does not destroy the logic of homalg
     fi;
     
     if IsHomalgInternalRingRep( R ) then ## TheTypeHomalgInternalMatrix
         
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, TheTypeHomalgInternalMatrix,
-                Eval, M );
-        
         if IsMatrix( M ) then
-            SetNrRows( matrix, Length( M ) );
-            SetNrColumns( matrix, Length( M[1] ) );
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, TheTypeHomalgInternalMatrix,
+                    NrRows, Length( M ),
+                    NrColumns, Length( M[1] ),
+                    Eval, homalgInternalMatrixHull( M ) );
         elif IsList( M ) then
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, TheTypeHomalgInternalMatrix,
+                    Eval, homalgInternalMatrixHull( M ) );
             if M = [ ] then
                 SetNrRows( matrix, 0 );
                 SetNrColumns( matrix, 0 );
@@ -1020,21 +1190,48 @@ InstallGlobalFunction( HomalgMatrix,
                 SetNrRows( matrix, Length( M ) );
                 SetNrColumns( matrix, 0 );
             fi;
+        else
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, TheTypeHomalgInternalMatrix,
+                    Eval, M );
+            ## don't know how to get the number of rows/columns
         fi;
         
     else ## TheTypeHomalgExternalMatrix
         
-        ## Objectify:
-        ObjectifyWithAttributes(
-                matrix, TheTypeHomalgExternalMatrix,
-                Eval, M );
-        
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-            SetNrRows( matrix, arg[2] );
+            nr_rows := true;
+        else
+            nr_rows := false;
         fi;
         
         if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
-            SetNrColumns( matrix, arg[3] );
+            nr_columns := true;
+        else
+            nr_columns := false;
+        fi;
+        
+        if nr_rows and nr_columns then
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, TheTypeHomalgExternalMatrix,
+                    NrRows, arg[2],
+                    NrColumns, arg[3],
+                    Eval, M );
+        else
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    matrix, TheTypeHomalgExternalMatrix,
+                    Eval, M );
+            
+            if nr_rows then
+                SetNrRows( matrix, arg[2] );
+            fi;
+            
+            if nr_columns then
+                SetNrColumns( matrix, arg[3] );
+            fi;
         fi;
         
     fi;
@@ -1045,8 +1242,8 @@ end );
   
 ##
 InstallGlobalFunction( HomalgZeroMatrix,
-  function( arg )		## the zero matrix
-    local R, type, matrix;
+  function( arg )				## the zero matrix
+    local R, type, matrix, nr_rows, nr_columns;
     
     R := arg[Length( arg )];
     
@@ -1062,17 +1259,38 @@ InstallGlobalFunction( HomalgZeroMatrix,
     
     matrix := rec( ring := R );
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            matrix, type,
-            IsZero, true );
-    
     if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
-        SetNrRows( matrix, arg[1] );
+        nr_rows := true;
+    else
+        nr_rows := false;
     fi;
     
     if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-        SetNrColumns( matrix, arg[2] );
+        nr_columns := true;
+    else
+        nr_columns := false;
+    fi;
+    
+    if nr_rows and nr_columns then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                NrRows, arg[1],
+                NrColumns, arg[2],
+                IsZero, true );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsZero, true );
+        
+        if nr_rows then
+            SetNrRows( matrix, arg[1] );
+        fi;
+        
+        if nr_columns then
+            SetNrColumns( matrix, arg[2] );
+        fi;
     fi;
     
     return matrix;
@@ -1098,14 +1316,18 @@ InstallGlobalFunction( HomalgIdentityMatrix,
     
     matrix := rec( ring := R );
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            matrix, type,
-            IsIdentityMatrix, true );
-    
     if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
-        SetNrRows( matrix, arg[1] );
-        SetNrColumns( matrix, arg[1] );
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                NrRows, arg[1],
+                NrColumns, arg[1],
+                IsIdentityMatrix, true );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsIdentityMatrix, true );
     fi;
     
     return matrix;
@@ -1114,8 +1336,8 @@ end );
 
 ##
 InstallGlobalFunction( HomalgInitialMatrix,
-  function( arg )	        ## an initial matrix having the flag IsInitialMatrix
-    local R, type, matrix;	## and filled with zeros BUT NOT marked as an IsZero
+  function( arg )	        		## an initial matrix having the flag IsInitialMatrix
+    local R, type, matrix, nr_rows, nr_columns;	## and filled with zeros BUT NOT marked as an IsZero
     
     R := arg[Length( arg )];
     
@@ -1131,17 +1353,40 @@ InstallGlobalFunction( HomalgInitialMatrix,
     
     matrix := rec( ring := R );
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            matrix, type,
-            IsInitialMatrix, true );
-    
     if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
-        SetNrRows( matrix, arg[1] );
+        nr_rows := true;
+    else
+        nr_rows := false;
     fi;
     
     if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-        SetNrColumns( matrix, arg[2] );
+        nr_columns := true;
+    else
+        nr_columns := false;
+    fi;
+    
+    if nr_rows and nr_columns then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                NrRows, arg[1],
+                NrColumns, arg[2],
+                IsInitialMatrix, true,
+                IsMutableMatrix, true );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsInitialMatrix, true,
+                IsMutableMatrix, true );
+        
+        if nr_rows then
+            SetNrRows( matrix, arg[1] );
+        fi;
+        
+        if nr_columns then
+            SetNrColumns( matrix, arg[2] );
+        fi;
     fi;
     
     return matrix;
@@ -1167,14 +1412,20 @@ InstallGlobalFunction( HomalgInitialIdentityMatrix,
     
     matrix := rec( ring := R );
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            matrix, type,
-            IsInitialIdentityMatrix, true );
-    
     if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
-        SetNrRows( matrix, arg[1] );
-        SetNrColumns( matrix, arg[1] );
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                NrRows, arg[1],
+                NrColumns, arg[1],
+                IsInitialIdentityMatrix, true,
+                IsMutableMatrix, true );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsInitialIdentityMatrix, true,
+                IsMutableMatrix, true );
     fi;
     
     return matrix;
@@ -1184,7 +1435,7 @@ end );
 ## 
 InstallGlobalFunction( HomalgVoidMatrix,
   function( arg )	## a void matrix filled with nothing having the flag IsVoidMatrix
-    local R, type, matrix;
+    local R, type, matrix, nr_rows, nr_columns;
     
     R := arg[Length( arg )];
     
@@ -1200,17 +1451,38 @@ InstallGlobalFunction( HomalgVoidMatrix,
     
     matrix := rec( ring := R );
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            matrix, type,
-            IsVoidMatrix, true );
-    
     if Length( arg ) > 1 and arg[1] in NonnegativeIntegers then
-        SetNrRows( matrix, arg[1] );
+        nr_rows := true;
+    else
+        nr_rows := false;
     fi;
     
     if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
-        SetNrColumns( matrix, arg[2] );
+        nr_columns := true;
+    else
+        nr_columns := false;
+    fi;
+    
+    if nr_rows and nr_columns then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                NrRows, arg[1],
+                NrColumns, arg[2],
+                IsVoidMatrix, true );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                matrix, type,
+                IsVoidMatrix, true );
+        
+        if nr_rows then
+            SetNrRows( matrix, arg[1] );
+        fi;
+        
+        if nr_columns then
+            SetNrColumns( matrix, arg[2] );
+        fi;
     fi;
     
     return matrix;
@@ -1298,6 +1570,17 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
+
+##
+InstallMethod( ViewObj,
+        "for interal matrix hulls",
+        [ IsInternalMatrixHull ],
+        
+  function( o )
+    
+    Print( "<A hull for an internal matrix>" );
+    
+end );
 
 ##
 InstallMethod( ViewObj,
@@ -1520,6 +1803,17 @@ InstallMethod( ViewObj,
     fi;
     
     Print( "zero matrix>" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for internal matrix hulls",
+        [ IsInternalMatrixHull ],
+        
+  function( o )
+    
+    Display( o!.matrix );
     
 end );
 

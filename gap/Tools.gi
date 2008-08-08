@@ -204,7 +204,7 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         [ IsHomalgMatrix and IsInitialMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
-    local R, RP, z;
+    local R, RP, z, zz;
     
     R := HomalgRing( C );
     
@@ -225,12 +225,14 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
     
     ResetFilterObj( C, IsInitialMatrix );
     
-    return ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) );
+    zz := ListWithIdenticalEntries( NrColumns( C ), z );
+    
+    return homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ],  i -> ShallowCopy( zz ) ) );
     
 end );
 
 ##
-InstallMethod( Eval,				### defines: an initial matrix filled with zeros
+InstallMethod( Eval,				### defines: an initial quadratic matrix filled with ones on the diagonal and zeros otherwise
         "for homalg matrices",
         [ IsHomalgMatrix and IsInitialIdentityMatrix and HasNrRows and HasNrColumns ],
         
@@ -262,7 +264,7 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
     id := List( [ 1 .. NrRows( C ) ],
                 function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
     
-    return id;
+    return homalgInternalMatrixHull( id );
     
 end );
 
@@ -290,7 +292,7 @@ InstallMethod( Eval,				### defines: Involution
     
     #=====# begin of the core procedure #=====#
     
-    return TransposedMat( Eval( M ) );
+    return homalgInternalMatrixHull( TransposedMat( Eval( M )!.matrix ) );
     
 end );
 
@@ -321,7 +323,7 @@ InstallMethod( Eval,				### defines: CertainRows
     
     #=====# begin of the core procedure #=====#
     
-    return Eval( M ){ plist };
+    return homalgInternalMatrixHull( Eval( M )!.matrix{ plist } );
     
 end );
 
@@ -352,7 +354,7 @@ InstallMethod( Eval,				### defines: CertainColumns
     
     #=====# begin of the core procedure #=====#
     
-    return Eval( M ){ [ 1 .. NrRows( M ) ] }{plist};
+    return homalgInternalMatrixHull( Eval( M )!.matrix{[ 1 .. NrRows( M ) ]}{plist} );
     
 end );
 
@@ -383,11 +385,11 @@ InstallMethod( Eval,				### defines: UnionOfRows
     
     #=====# begin of the core procedure #=====#
     
-    U := ShallowCopy( Eval( A ) );
+    U := ShallowCopy( Eval( A )!.matrix );
     
-    U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B );
+    U{ [ NrRows( A ) + 1 .. NrRows( A ) + NrRows( B ) ] } := Eval( B )!.matrix;
     
-    return U;
+    return homalgInternalMatrixHull( U );
     
 end );
 
@@ -418,11 +420,11 @@ InstallMethod( Eval,				### defines: UnionOfColumns
     
     #=====# begin of the core procedure #=====#
     
-    U := List( ShallowCopy( Eval( A ) ), ShallowCopy );
+    U := List( Eval( A )!.matrix, ShallowCopy );
     
-    U{ [ 1 .. NrRows( A ) ] }{ [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] } := Eval( B );
+    U{ [ 1 .. NrRows( A ) ] }{ [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] } := Eval( B )!.matrix;
     
-    return U;
+    return homalgInternalMatrixHull( U );
     
 end );
 
@@ -461,12 +463,12 @@ InstallMethod( Eval,				### defines: DiagMat
     n := 0;
     
     for mat in e do
-        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] } := Eval( mat );
+        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] } := Eval( mat )!.matrix;
         m := m + NrRows( mat );
         n := n + NrColumns( mat );
     od;
     
-    return diag;
+    return homalgInternalMatrixHull( diag );
     
 end );
 
@@ -499,7 +501,7 @@ InstallMethod( Eval,				### defines: KroneckerMat
     
     #=====# begin of the core procedure #=====#
     
-    return KroneckerProduct( Eval( A ), Eval( B ) ); ## this was easy :)
+    return homalgInternalMatrixHull( KroneckerProduct( Eval( A )!.matrix, Eval( B )!.matrix ) ); ## this was easy :)
     
 end );
 
@@ -721,7 +723,7 @@ InstallMethod( Eval,				### defines: IdentityMap
     id := List( [ 1 .. NrRows( C ) ],
                 function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
     
-    return id;
+    return homalgInternalMatrixHull( id );
     
 end );
 
@@ -753,7 +755,9 @@ InstallMethod( Eval,				### defines: ZeroMap
     
     #=====# begin of the core procedure #=====#
     
-    return ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) );
+    ## copying the rows saves memory;
+    ## we assume that the entries are never modified!!!
+    return homalgInternalMatrixHull( ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) ) );
     
 end );
 
@@ -779,7 +783,7 @@ InstallMethod( NrRows,				### defines: NrRows
     
     #=====# begin of the core procedure #=====#
     
-    return Length( Eval( C ) );
+    return Length( Eval( C )!.matrix );
     
 end );
 
@@ -805,7 +809,7 @@ InstallMethod( NrColumns,			### defines: NrColumns
     
     #=====# begin of the core procedure #=====#
     
-    return Length( Eval( C )[ 1 ] );
+    return Length( Eval( C )!.matrix[ 1 ] );
     
 end );
 

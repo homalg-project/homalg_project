@@ -38,18 +38,18 @@ InstallMethod( CreateHomalgTable,
                    
                    if nargs > 2 then
                        ## compute N, U, and V:
-                       N := SmithIntMatLLLTrans( Eval( M ) );
+                       N := SmithIntMatLLLTrans( Eval( M )!.matrix );
                    elif nargs > 1 then
                        ## compute N and U:
-                       N := SmithIntMatLLLTrans( Eval( M ) );
+                       N := SmithIntMatLLLTrans( Eval( M )!.matrix );
                    else
                        ## compute N only:
-                       N := SmithIntMatLLL( Eval( M ) );
+                       N := SmithIntMatLLL( Eval( M )!.matrix );
                    fi;
                    
                    # assign U:
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
-                       SetEval( arg[2], N[2] );
+                       SetEval( arg[2], homalgInternalMatrixHull( N[2] ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
@@ -58,7 +58,7 @@ InstallMethod( CreateHomalgTable,
                    
                    # assign V:
                    if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
-                       SetEval( arg[3], N[3] );
+                       SetEval( arg[3], homalgInternalMatrixHull( N[3] ) );
                        ResetFilterObj( arg[3], IsVoidMatrix );
                        SetNrRows( arg[3], NrColumns( M ) );
                        SetNrColumns( arg[3], NrColumns( M ) );
@@ -85,7 +85,7 @@ InstallMethod( CreateHomalgTable,
                    
                    M := arg[1];
                    
-                   e := ElementaryDivisorsMat( Eval( M ) );
+                   e := ElementaryDivisorsMat( Eval( M )!.matrix );
                    
                    z := ListWithIdenticalEntries( NrColumns( M ), 0 );
                    
@@ -110,17 +110,17 @@ InstallMethod( CreateHomalgTable,
                    
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        ## compute N and U:
-                       N := HermiteIntMatLLLTrans( Eval( M ) );
+                       N := HermiteIntMatLLLTrans( Eval( M )!.matrix );
                        
                        # assign U:
-                       SetEval( arg[2], N[2] );
+                       SetEval( arg[2], homalgInternalMatrixHull( N[2] ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    else
                        ## compute N only:
-                       N := HermiteIntMatLLL( Eval( M ) );
+                       N := HermiteIntMatLLL( Eval( M )!.matrix );
                    fi;
                    
                    if nargs > 1 then

@@ -457,3 +457,43 @@ InstallMethod( \-,
     
 end );
 
+## from change log
+- the attribute Eval of an internal homalg matrix is now not directly
+  a gap matrix (i.e. IsMatrix) but a hull of it:
+  this allows changing their entries!!!
+  for this the following was added:
+  . a GAP-category IsInternalMatrixHull
+  . a simple constructor called homalgInternalMatrixHull
+  . a method for \=
+  . a method for scalar multiplication \*
+  . a method for addition \+
+  . a method for AdditiveInverseMutable
+  . a method for substraction \-
+  . a method for composition \*
+  . a simple view method
+  . a display method that simply displays the contained matrix
+- adapted the code to use Eval( M )!.matrix instead of Eval( M )
+  and to return homalgInternalMatrixHull( IsMatrix )
+- added the matrix "property" IsMutableMatrix which is only set to true for
+  IsInitialMatrix and IsInitialIdentityMatrix (otherwise not set)
+  (programmers should reset it when they finished changing the matrix)
+- declared and installed SetEntryOfHomalgMatrix for internal matrices
+  together with methods that issue the following error if the property
+  IsMutableMatrix is not set (to true):
+  Error( "the homalg matrix is write-protected\n" );
+- declared and installed AddToEntryOfHomalgMatrix together with a method
+  that issues the "write-protected"-error if the matrix is not set
+  IsMutableMatrix (to true)
+- GetEntryOfHomalgMatrixAsString is now based on GetEntryOfHomalgMatrix
+- if the input of HomalgMatrix is an IsMatrix a shallow copy of it is made
+- HomalgMatrix now additionally accepts a hull of an internal matrix as its
+  first argument
+- fixed loading GaussForHomalg in HomalgFieldOfRationals
+- fixed evaluating internal initial (zero) matrices
+- use ObjectifyWithAttributes more consequently in
+  . HomalgMatrix
+  . HomalgZeroMatrix
+  . HomalgIdentityMatrix
+  . HomalgInitialMatrix
+  . HomalgInitialIdentityMatrix
+  . HomalgVoidMatrix
