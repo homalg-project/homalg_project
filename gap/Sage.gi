@@ -163,22 +163,9 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
         R := RingForHomalgInSage( [ command, c, ")" ], IsPrincipalIdealRing );
     fi;
     
-    SetCharacteristic( R, c );
+    SetIsResidueClassRingOfTheIntegers( R, true );
     
-    if IsPrime( c ) then
-        SetIsFieldForHomalg( R, true );
-    else
-        SetIsFieldForHomalg( R, false );
-        SetIsIntegersForHomalg( R, true );
-    fi;
-    
-    if c = 0 then
-        SetGlobalDimension( R, 1 );
-    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
-        SetGlobalDimension( R, 0 );
-    else
-        SetGlobalDimension( R, infinity );
-    fi;
+    SetRingProperties( R, c );
     
     return R;
     
@@ -193,11 +180,9 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSage,
     
     R := CallFuncList( RingForHomalgInSage, ar );
     
-    SetCharacteristic( R, 0 );
-    
     SetIsFieldForHomalg( R, true );
     
-    SetGlobalDimension( R, 0 );
+    SetRingProperties( R, 0 );
     
     return R;
     
@@ -430,3 +415,20 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     return M;
     
 end );
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+InstallMethod( DisplayRing,
+        "for homalg rings in Sage",
+        [ IsHomalgExternalRingInSageRep ], 1,
+        
+  function( o )
+    
+    homalgDisplay( o );
+    
+end );
+

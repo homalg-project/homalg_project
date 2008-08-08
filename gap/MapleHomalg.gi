@@ -548,22 +548,9 @@ InstallGlobalFunction( HomalgRingOfIntegersInMaple,
         R := RingForHomalgInMapleUsingPIR( R );
     fi;
     
-    SetCharacteristic( R, c );
+    SetIsResidueClassRingOfTheIntegers( R, true );
     
-    if IsPrime( c ) then
-        SetIsFieldForHomalg( R, true );
-    else
-        SetIsFieldForHomalg( R, false );
-        SetIsIntegersForHomalg( R, true );
-    fi;
-    
-    if c = 0 then
-        SetGlobalDimension( R, 1 );
-    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
-        SetGlobalDimension( R, 0 );
-    else
-        SetGlobalDimension( R, infinity );
-    fi;
+    SetRingProperties( R, c );
     
     return R;
     
@@ -578,11 +565,9 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
     
     R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
     
-    SetCharacteristic( R, 0 );
-    
-    SetGlobalDimension( R, 0 );
-    
     SetIsFieldForHomalg( R, true );
+    
+    SetRingProperties( R, 0 );
     
     return R;
     
@@ -943,6 +928,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( Display,
         "for homalg matrices in Maple",
         [ IsHomalgExternalMatrixRep ], 1,
@@ -960,3 +946,15 @@ InstallMethod( Display,
     fi;
     
 end );
+
+##
+InstallMethod( DisplayRing,
+        "for homalg rings in Maple",
+        [ IsHomalgExternalRingInMapleRep ], 1,
+        
+  function( o )
+    
+    homalgDisplay( [ o, "[1]" ] );
+    
+end );
+

@@ -589,11 +589,9 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     
     R := CallFuncList( RingForHomalgInSingular, ar );
     
-    SetCharacteristic( R, 0 );
-    
     SetIsFieldForHomalg( R, true );
     
-    SetGlobalDimension( R, 0 );
+    SetRingProperties( R, 0 );
     
     return R;
     
@@ -604,8 +602,8 @@ InstallGlobalFunction( HomalgFieldOfPrimeOrderInSingular,
   function( p )
     local ar, R;
     
-    if not IsPrime(p) then
-      Error("given number ist not prime");
+    if not IsPrime( p ) then
+      Error("given number ist not prime\n");
     fi;
     
     ##It seems that Singular does not know fields.
@@ -617,9 +615,9 @@ InstallGlobalFunction( HomalgFieldOfPrimeOrderInSingular,
     
     R := CallFuncList( RingForHomalgInSingular, ar );
     
-    SetCharacteristic( R, p );
-    
     SetIsFieldForHomalg( R, true );
+    
+    SetRingProperties( R, p );
     
     return R;
     
@@ -695,11 +693,9 @@ InstallMethod( PolynomialRing,
     
     homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
-    SetCoefficientsRing( S, r );
-    SetCharacteristic( S, c );
-    SetIsCommutative( S, true );
-    SetIndeterminatesOfPolynomialRing( S, var );
-    SetGlobalDimension( S, Length( var ) );
+    SetIsFreePolynomialRing( S, true );
+    
+    SetRingProperties( S, r, var );
     
     RP := homalgTable( S );
     
@@ -800,12 +796,9 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
-    SetCoefficientsRing( S, CoefficientsRing( R ) );
-    SetCharacteristic( S, Characteristic( R ) );
-    SetIsCommutative( S, false );
-    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
-    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
-    SetGlobalDimension( S, Length( var ) );
+    SetIsWeylRing( S, true );
+    
+    SetRingProperties( S, R, der );
     
     RP := homalgTable( S );
     
@@ -870,7 +863,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ M, "[", c, r, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 
@@ -1031,6 +1024,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( Display,
         "for homalg matrices in Singular",
         [ IsHomalgExternalMatrixRep ], 1,
@@ -1049,13 +1043,14 @@ InstallMethod( Display,
     
 end );
 
-InstallMethod( Display,
+##
+InstallMethod( DisplayRing,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep ], 1,
         
   function( o )
     
-    Print( homalgSendBlocking( [ "print(", o, ")" ], "need_display", HOMALG_IO.Pictograms.Display ) );
+    homalgDisplay( [ "print(", o, ")" ] );
     
 end );
 

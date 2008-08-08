@@ -161,22 +161,9 @@ InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
         R := RingForHomalgInExternalGAP( [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing );
     fi;
     
-    SetCharacteristic( R, c );
+    SetIsResidueClassRingOfTheIntegers( R, true );
     
-    if IsPrime( c ) then
-        SetIsFieldForHomalg( R, true );
-    else
-        SetIsFieldForHomalg( R, false );
-        SetIsIntegersForHomalg( R, true );
-    fi;
-    
-    if c = 0 then
-        SetGlobalDimension( R, 1 );
-    elif Set( List( Collected( FactorsInt( c ) ), a -> a[2] ) ) = [ 1 ] then
-        SetGlobalDimension( R, 0 );
-    else
-        SetGlobalDimension( R, infinity );
-    fi;
+    SetRingProperties( R, c );
     
     return R;
     
@@ -191,11 +178,9 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
     
     R := CallFuncList( RingForHomalgInExternalGAP, ar );
     
-    SetCharacteristic( R, 0 );
-    
     SetIsFieldForHomalg( R, true );
     
-    SetGlobalDimension( R, 0 );
+    SetRingProperties( R, 0 );
     
     return R;
     
@@ -208,7 +193,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, s, R, " ) " ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, ",", s, ",", R, " ) " ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
