@@ -71,6 +71,37 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgComplexes, IsHo
 ####################################
 
 ##
+InstallImmediateMethod( IsZero,
+        IsHomalgComplex, 0,
+        
+  function( C )
+    
+    if ForAny( ObjectsOfComplex( C ), o -> HasIsZero( o ) and not IsZero( o ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgBicomplex, 0,
+        
+  function( C )
+    local B;
+    
+    B := UnderlyingComplex( C );
+    
+    if HasIsZero( B ) then
+        return IsZero( B );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsShortExactSequence,
         IsHomalgComplex and IsExactSequence, 0,
         
@@ -116,8 +147,33 @@ InstallMethod( IsZero,
 end );
 
 ##
+InstallMethod( IsZero,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    local Epq;
+    
+    Epq := ObjectsOfBigradedObject( Er );
+    
+    return ForAll( Epq, a -> ForAll( a, IsZero ) );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequence ],
+        
+  function( E )
+    
+    return ForAll( SheetsOfSpectralSequence( E ), IsZero );
+    
+end );
+
+##
 InstallMethod( \=,
-        "for two homalg complexes",
+        "for pairs of homalg complexes",
         [ IsHomalgComplex, IsHomalgComplex ],
         
   function( C1, C2 )
@@ -150,6 +206,17 @@ InstallMethod( \=,
     morphisms2 := MorphismsOfComplex( C2 );
     
     return ForAll( [ 1 .. Length( morphisms1 ) ], i -> morphisms1[i] = morphisms2[i] );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for pairs of homalg bicomplexes",
+        [ IsHomalgBicomplex, IsHomalgBicomplex ],
+        
+  function( C1, C2 )
+    
+    return UnderlyingComplex( C1 ) = UnderlyingComplex( C2 );
     
 end );
 

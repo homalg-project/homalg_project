@@ -43,51 +43,6 @@ BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
 
 ####################################
 #
-# methods for properties:
-#
-####################################
-
-##
-InstallMethod( IsZero,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
-    
-end );
-
-####################################
-#
-# methods for attributes:
-#
-####################################
-
-##
-InstallMethod( TheZeroMorphism,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return HomalgZeroMap( M, 0*M );	## never set its Kernel to M, since a possibly existing NaturalEmbedding in M will be overwritten!
-    
-end );
-
-##
-InstallMethod( TheIdentityMorphism,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    
-    return HomalgIdentityMap( M );
-    
-end );
-
-####################################
-#
 # methods for operations:
 #
 ####################################
@@ -861,7 +816,7 @@ InstallMethod( DecideZero,
     
     red := DecideZero( gen );
     
-    if MatrixOfGenerators( gen ) = MatrixOfGenerators( red ) then
+    if IsIdenticalObj( gen, red ) then
         return gen;
     fi;
     

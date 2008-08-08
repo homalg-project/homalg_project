@@ -36,6 +36,18 @@ DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "TotalComplex",
+        IsHomalgBicomplex );
+
+DeclareAttribute( "SpectralSequence",
+        IsHomalgBicomplex );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
@@ -93,7 +105,4 @@ DeclareOperation( "ObjectOfTotalComplex",
 
 DeclareOperation( "MorphismOfTotalComplex",
         [ IsHomalgBicomplex, IsInt ] );
-
-DeclareOperation( "TotalComplex",
-        [ IsHomalgBicomplex ] );
 

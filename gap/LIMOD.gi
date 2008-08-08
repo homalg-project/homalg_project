@@ -552,6 +552,17 @@ end );
 ####################################
 
 ##
+InstallMethod( IsZero,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
+    
+end );
+
+##
 InstallMethod( IsTorsionFree,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -772,6 +783,28 @@ end );
 # methods for attributes:
 #
 ####################################
+
+##
+InstallMethod( TheZeroMorphism,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return HomalgZeroMap( M, 0*M );	## never set its Kernel to M, since a possibly existing NaturalEmbedding in M will be overwritten!
+    
+end );
+
+##
+InstallMethod( TheIdentityMorphism,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return HomalgIdentityMap( M );
+    
+end );
 
 ##
 InstallMethod( RankOfModule,

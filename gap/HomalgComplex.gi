@@ -931,19 +931,6 @@ InstallMethod( PreCompose,
 end );
 
 ##
-InstallMethod( OnLessGenerators,
-        "for homalg complexes",
-        [ IsHomalgComplex ],
-        
-  function( C )
-    
-    List( ObjectsOfComplex( C ), OnLessGenerators );
-    
-    return C;
-    
-end );
-
-##
 InstallMethod( BasisOfModule,
         "for homalg complexes",
         [ IsHomalgComplex ],
@@ -963,9 +950,26 @@ InstallMethod( DecideZero,
         
   function( C )
     
-    List( MorphismsOfComplex( C ), DecideZero );
+    List( ObjectsOfComplex( C ), DecideZero );
+    
+    if Length( ObjectDegreesOfComplex( C ) ) > 1 then
+        List( MorphismsOfComplex( C ), DecideZero );
+    fi;
     
     IsZero( C );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    List( ObjectsOfComplex( C ), OnLessGenerators );
     
     return C;
     
@@ -978,10 +982,10 @@ InstallMethod( ByASmallerPresentation,
         
   function( C )
     
-    if Length( ObjectDegreesOfComplex( C ) ) = 1 then
-        List( ObjectsOfComplex( C ), ByASmallerPresentation );
-    else
-        List( MorphismsOfComplex( C ), ByASmallerPresentation );
+    List( ObjectsOfComplex( C ), ByASmallerPresentation );
+    
+    if Length( ObjectDegreesOfComplex( C ) ) > 1 then
+        List( MorphismsOfComplex( C ), DecideZero );
     fi;
     
     IsZero( C );

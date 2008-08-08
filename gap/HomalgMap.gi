@@ -49,170 +49,6 @@ BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
 
 ####################################
 #
-# immediate methods for properties:
-#
-####################################
-
-##
-InstallImmediateMethod( IsZero,
-        IsHomalgMap, 0,
-        
-  function( phi )
-    
-    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) or
-       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsZero,
-        IsMapOfFinitelyGeneratedModulesRep, 0,
-        
-  function( phi )
-    
-    if HasIsZero( MatrixOfMap( phi ) ) and IsZero( MatrixOfMap( phi ) ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsZero,
-        IsMapOfFinitelyGeneratedModulesRep, 0,
-        
-  function( phi )
-    local index_pair, matrix;
-    
-    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
-    
-    if IsBound( phi!.reduced_matrices.( String( index_pair ) ) ) then
-        
-        matrix := phi!.reduced_matrices.( String( index_pair ) );
-        
-        if HasIsZero( matrix ) then
-            return IsZero( matrix );
-        fi;
-        
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsSplitEpimorphism,
-        IsMapOfFinitelyGeneratedModulesRep and IsEpimorphism, 0,
-        
-  function( phi )
-    local T;
-    
-    T := Range( phi );
-    
-    if HasIsProjective( T ) and IsProjective( T ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-####################################
-#
-# methods for properties:
-#
-####################################
-
-##
-InstallMethod( IsMorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi )
-    local mat;
-    
-    mat := MatrixOfRelations( Source( phi ) ) * MatrixOfMap( phi );
-    
-    return IsZero( DecideZero( mat , RelationsOfModule( Range( phi ) ) ) );
-    
-end );
-
-##
-InstallMethod( IsMorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi )
-    local mat;
-    
-    mat := MatrixOfMap( phi ) * MatrixOfRelations( Source( phi ) );
-    
-    return IsZero( DecideZero( mat , RelationsOfModule( Range( phi ) ) ) );
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsZero( DecideZero( phi ) );
-    
-end );
-
-##
-InstallMethod( IsEpimorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsMorphism( phi ) and IsZero( Cokernel( phi ) );
-    
-end );
-
-##
-InstallMethod( IsMonomorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsMorphism( phi ) and IsZero( Kernel( phi ) );
-    
-end );
-
-##
-InstallMethod( IsIsomorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsEpimorphism( phi ) and IsMonomorphism( phi );
-    
-end );
-
-##
-InstallMethod( IsAutomorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsHomalgSelfMap( phi ) and IsIsomorphism( phi );
-    
-end );
-
-####################################
-#
 # methods for operations:
 #
 ####################################
@@ -449,20 +285,6 @@ InstallMethod( POW,
 end );
 
 ##
-InstallMethod( OnLessGenerators,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    OnLessGenerators( Source( phi ) );
-    OnLessGenerators( Range( phi ) );
-    
-    return phi;
-    
-end );
-
-##
 InstallMethod( BasisOfModule,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
@@ -483,7 +305,7 @@ InstallMethod( DecideZero,
         
   function( phi, rel )
     
-    return DecideZero( MatrixOfMap( phi ) , rel );
+    return DecideZero( MatrixOfMap( phi ), rel );
     
 end );
 
@@ -509,9 +331,23 @@ InstallMethod( DecideZero,
         reduced := matrix;
     fi;
     
-    phi!.reduced_matrices.( String( index_pair ) ) := reduced;
+    phi!.reduced_matrices.(String( index_pair )) := reduced;
     
     return reduced;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    OnLessGenerators( Source( phi ) );
+    OnLessGenerators( Range( phi ) );
+    
+    return phi;
     
 end );
 

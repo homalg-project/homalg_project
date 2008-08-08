@@ -53,6 +53,79 @@ BindGlobal( "TheTypeHomalgBicocomplexOfRightObjects",
 
 ####################################
 #
+# methods for attributes:
+#
+####################################
+
+##
+InstallMethod( TotalComplex,
+        "for homalg bicomplexes",
+        [ IsBicomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( B )
+    local pq_lowest, pq_highest, n_lowest, n_highest, tot, n;
+    
+    pq_lowest := LowestBidegreeInBicomplex( B );
+    pq_highest := HighestBidegreeInBicomplex( B );
+    
+    n_lowest := pq_lowest[1] + pq_lowest[2];
+    n_highest := pq_highest[1] + pq_highest[2];
+    
+    tot := HomalgComplex( CertainObject( B, pq_lowest ), n_lowest );
+    
+    for n in [ n_lowest + 1 .. n_highest ] do
+        Add( tot, MorphismOfTotalComplex( B, n ) );
+    od;
+    
+    if HasIsBicomplex( B ) then
+        SetIsComplex( tot, IsBicomplex( B ) );
+    fi;
+    
+    return tot;
+    
+end );
+
+##
+InstallMethod( TotalComplex,
+        "for homalg bicomplexes",
+        [ IsBicocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( B )
+    local pq_lowest, pq_highest, n_lowest, n_highest, tot, n;
+    
+    pq_lowest := LowestBidegreeInBicomplex( B );
+    pq_highest := HighestBidegreeInBicomplex( B );
+    
+    n_lowest := pq_lowest[1] + pq_lowest[2];
+    n_highest := pq_highest[1] + pq_highest[2];
+    
+    tot := HomalgCocomplex( CertainObject( B, pq_lowest ), n_lowest );
+    
+    for n in [ n_lowest .. n_highest - 1 ] do
+        Add( tot, MorphismOfTotalComplex( B, n ) );
+    od;
+    
+    if HasIsBicomplex( B ) then
+        SetIsComplex( tot, IsBicomplex( B ) );
+    fi;
+    
+    return tot;
+    
+end );
+
+##
+InstallMethod( SpectralSequence,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    
+    return HomalgSpectralSequence( B );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -98,8 +171,12 @@ InstallMethod( homalgResetFilters,
         ResetFilterObj( B, property );
     od;
     
-    if IsBound( B!.TotalComplex ) then
-        Unbind( B!.TotalComplex );
+    if HasTotalComplex( B ) then
+        ResetFilterObj( B, TotalComplex );
+    fi;
+    
+    if HasSpectralSequence( B ) then
+        ResetFilterObj( B, SpectralSequence );
     fi;
     
 end );
@@ -148,34 +225,6 @@ InstallMethod( ObjectDegreesOfBicomplex,
 end );
 
 ##
-InstallMethod( LowestBidegreeInBicomplex,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    local bidegrees;
-    
-    bidegrees := ObjectDegreesOfBicomplex( B );
-    
-    return [ bidegrees[1][1], bidegrees[2][1] ];
-    
-end );
-
-##
-InstallMethod( HighestBidegreeInBicomplex,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    local bidegrees;
-    
-    bidegrees := ObjectDegreesOfBicomplex( B );
-    
-    return [ bidegrees[1][Length( bidegrees[1] )], bidegrees[2][Length( bidegrees[2] )] ];
-    
-end );
-
-##
 InstallMethod( CertainObject,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex, IsList ],
@@ -212,6 +261,34 @@ InstallMethod( ObjectsOfBicomplex,
     bidegrees := ObjectDegreesOfBicomplex( B );
     
     return List( Reversed( bidegrees[2] ), q -> List( bidegrees[1], p -> CertainObject( B, [ p, q ] ) ) );
+    
+end );
+
+##
+InstallMethod( LowestBidegreeInBicomplex,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    local bidegrees;
+    
+    bidegrees := ObjectDegreesOfBicomplex( B );
+    
+    return [ bidegrees[1][1], bidegrees[2][1] ];
+    
+end );
+
+##
+InstallMethod( HighestBidegreeInBicomplex,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    local bidegrees;
+    
+    bidegrees := ObjectDegreesOfBicomplex( B );
+    
+    return [ bidegrees[1][Length( bidegrees[1] )], bidegrees[2][Length( bidegrees[2] )] ];
     
 end );
 
@@ -507,75 +584,6 @@ InstallMethod( MorphismOfTotalComplex,
 end );
 
 ##
-InstallMethod( TotalComplex,
-        "for homalg bicomplexes",
-        [ IsBicomplexOfFinitelyPresentedObjectsRep ],
-        
-  function( B )
-    local pq_lowest, pq_highest, n_lowest, n_highest, tot, n;
-    
-    pq_lowest := LowestBidegreeInBicomplex( B );
-    pq_highest := HighestBidegreeInBicomplex( B );
-    
-    n_lowest := pq_lowest[1] + pq_lowest[2];
-    n_highest := pq_highest[1] + pq_highest[2];
-    
-    tot := HomalgComplex( CertainObject( B, pq_lowest ), n_lowest );
-    
-    for n in [ n_lowest + 1 .. n_highest ] do
-        Add( tot, MorphismOfTotalComplex( B, n ) );
-    od;
-    
-    if HasIsBicomplex( B ) then
-        SetIsComplex( tot, IsBicomplex( B ) );
-    fi;
-    
-    return tot;
-    
-end );
-
-##
-InstallMethod( TotalComplex,
-        "for homalg bicomplexes",
-        [ IsBicocomplexOfFinitelyPresentedObjectsRep ],
-        
-  function( B )
-    local pq_lowest, pq_highest, n_lowest, n_highest, tot, n;
-    
-    pq_lowest := LowestBidegreeInBicomplex( B );
-    pq_highest := HighestBidegreeInBicomplex( B );
-    
-    n_lowest := pq_lowest[1] + pq_lowest[2];
-    n_highest := pq_highest[1] + pq_highest[2];
-    
-    tot := HomalgCocomplex( CertainObject( B, pq_lowest ), n_lowest );
-    
-    for n in [ n_lowest .. n_highest - 1 ] do
-        Add( tot, MorphismOfTotalComplex( B, n ) );
-    od;
-    
-    if HasIsBicomplex( B ) then
-        SetIsComplex( tot, IsBicomplex( B ) );
-    fi;
-    
-    return tot;
-    
-end );
-
-##
-InstallMethod( OnLessGenerators,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    
-    OnLessGenerators( UnderlyingComplex( B ) );
-    
-    return B;
-    
-end );
-
-##
 InstallMethod( BasisOfModule,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],
@@ -598,6 +606,19 @@ InstallMethod( DecideZero,
     DecideZero( UnderlyingComplex( B ) );
     
     IsZero( B );
+    
+    return B;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    
+    OnLessGenerators( UnderlyingComplex( B ) );
     
     return B;
     

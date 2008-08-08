@@ -44,6 +44,9 @@ ReadPackage( "homalg", "gap/HomalgBicomplex.gd" );
 ## bigraded objects
 ReadPackage( "homalg", "gap/HomalgBigradedObject.gd" );
 
+## spectral sequences
+ReadPackage( "homalg", "gap/HomalgSpectralSequence.gd" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 

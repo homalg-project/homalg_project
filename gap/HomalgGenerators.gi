@@ -255,10 +255,16 @@ InstallMethod( DecideZero,
         [ IsGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( gen )
-    local gen_new;
+    local gen_old, gen_new;
     
-    if not IsBound( gen!.DecideZero ) then
-        gen!.DecideZero := DecideZero( MatrixOfGenerators( gen ), RelationsOfHullModule( gen ) );
+    if not IsBound( gen!.DecideZero ) then	## IsReduced is not set, otherwise the method below would apply
+        gen_old := MatrixOfGenerators( gen );
+        gen_new := DecideZero( gen_old, RelationsOfHullModule( gen ) );
+        if gen_new = gen_old then
+            SetIsReduced( gen, true );
+            return gen;
+        fi;
+        gen!.DecideZero := gen_new;
         SetIsReduced( gen, false );
     fi;
     

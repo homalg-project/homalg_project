@@ -59,6 +59,47 @@ BindGlobal( "TheTypeHigherHomalgBigradedObjectAssociatedToABicomplexOfRightObjec
 
 ####################################
 #
+# immediate methods for properties:
+#
+####################################
+
+##
+InstallImmediateMethod( IsStableSheet,
+        IsHomalgBigradedObject, 0,
+        
+  function( Er )
+    
+    if IsBound( Er!.stable ) then
+        return Position( Flat( Er!.stable ), '*' ) = fail;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsStableSheet,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    
+    if IsBound( Er!.stable ) then
+        return Position( Flat( Er!.stable ), '*' ) = fail;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -68,16 +109,17 @@ InstallMethod( homalgResetFilters,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     local property;
     
     if not IsBound( HOMALG.PropertiesOfBigradedObjectes ) then
         HOMALG.PropertiesOfBigradedObjectes :=
-          [ IsZero ];
+          [ IsZero,
+            IsStableSheet ];
     fi;
     
     for property in HOMALG.PropertiesOfBigradedObjectes do
-        ResetFilterObj( E, property );
+        ResetFilterObj( Er, property );
     od;
     
 end );
@@ -87,7 +129,7 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branchin
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     
     return fail;
     
@@ -98,37 +140,9 @@ InstallMethod( ObjectDegreesOfBigradedObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     
-    return E!.bidegrees;
-    
-end );
-
-##
-InstallMethod( LowestBidegreeInBigradedObject,
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( E )
-    local bidegrees;
-    
-    bidegrees := ObjectDegreesOfBigradedObject( E );
-    
-    return [ bidegrees[1][1], bidegrees[2][1] ];
-    
-end );
-
-##
-InstallMethod( HighestBidegreeInBigradedObject,
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( E )
-    local bidegrees;
-    
-    bidegrees := ObjectDegreesOfBigradedObject( E );
-    
-    return [ bidegrees[1][Length( bidegrees[1] )], bidegrees[2][Length( bidegrees[2] )] ];
+    return Er!.bidegrees;
     
 end );
 
@@ -137,18 +151,18 @@ InstallMethod( CertainObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject, IsList ],
         
-  function( E, pq )
+  function( Er, pq )
     local Epq;
     
     if not ForAll( pq, IsInt ) or not Length( pq ) = 2 then
         Error( "the second argument must be a list of two integers\n" );
     fi;
     
-    if not IsBound(E!.(String( pq ))) then
+    if not IsBound(Er!.(String( pq ))) then
         return fail;
     fi;
     
-    Epq := E!.(String( pq ));
+    Epq := Er!.(String( pq ));
     
     if IsHomalgMorphism( Epq ) then
         return Source( Epq );
@@ -163,12 +177,40 @@ InstallMethod( ObjectsOfBigradedObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     local bidegrees;
     
-    bidegrees := ObjectDegreesOfBigradedObject( E );
+    bidegrees := ObjectDegreesOfBigradedObject( Er );
     
-    return List( Reversed( bidegrees[2] ), q -> List( bidegrees[1], p -> CertainObject( E, [ p, q ] ) ) );
+    return List( Reversed( bidegrees[2] ), q -> List( bidegrees[1], p -> CertainObject( Er, [ p, q ] ) ) );
+    
+end );
+
+##
+InstallMethod( LowestBidegreeInBigradedObject,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    local bidegrees;
+    
+    bidegrees := ObjectDegreesOfBigradedObject( Er );
+    
+    return [ bidegrees[1][1], bidegrees[2][1] ];
+    
+end );
+
+##
+InstallMethod( HighestBidegreeInBigradedObject,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    local bidegrees;
+    
+    bidegrees := ObjectDegreesOfBigradedObject( Er );
+    
+    return [ bidegrees[1][Length( bidegrees[1] )], bidegrees[2][Length( bidegrees[2] )] ];
     
 end );
 
@@ -177,12 +219,12 @@ InstallMethod( LowestBidegreeObjectInBigradedObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     local pq;
     
-    pq := LowestBidegreeInBigradedObject( E );
+    pq := LowestBidegreeInBigradedObject( Er );
     
-    return CertainObject( E, pq );
+    return CertainObject( Er, pq );
     
 end );
 
@@ -191,12 +233,12 @@ InstallMethod( HighestBidegreeObjectInBigradedObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     local pq;
     
-    pq := HighestBidegreeInBigradedObject( E );
+    pq := HighestBidegreeInBigradedObject( Er );
     
-    return CertainObject( E, pq );
+    return CertainObject( Er, pq );
     
 end );
 
@@ -205,9 +247,9 @@ InstallMethod( HomalgRing,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     
-    return HomalgRing( LowestBidegreeObjectInBigradedObject( E ) );
+    return HomalgRing( LowestBidegreeObjectInBigradedObject( Er ) );
     
 end );
 
@@ -216,18 +258,18 @@ InstallMethod( CertainMorphism,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject, IsList ],
         
-  function( E, pq )
+  function( Er, pq )
     local Epq;
     
     if not ForAll( pq, IsInt ) or not Length( pq ) = 2 then
         Error( "the second argument must be a list of two integers\n" );
     fi;
     
-    if not IsBound(E!.(String( pq ))) then
+    if not IsBound(Er!.(String( pq ))) then
         return fail;
     fi;
     
-    Epq := E!.(String( pq ));
+    Epq := Er!.(String( pq ));
     
     if not IsHomalgMorphism( Epq ) then
         return fail;
@@ -242,9 +284,9 @@ InstallMethod( LevelOfBigradedObject,
         "for homalg bigraded objects stemming from an exact couple",
         [ IsBigradedObjectOfFinitelyPresentedObjectsRep and IsHomalgBigradedObjectAssociatedToAFilteredComplex ],
         
-  function( E )
+  function( Er )
     
-    return E!.level;
+    return Er!.level;
     
 end );
 
@@ -253,9 +295,9 @@ InstallMethod( BidegreeOfDifferential,
         "for homalg bigraded objects stemming from a bicomplex",
         [ IsBigradedObjectOfFinitelyPresentedObjectsRep and IsEndowedWithDifferential ],
         
-  function( E )
+  function( Er )
     
-    return E!.BidegreeOfDifferential;
+    return Er!.BidegreeOfDifferential;
     
 end );
 
@@ -264,24 +306,13 @@ InstallMethod( UnderlyingBicomplex,
         "for homalg bigraded objects stemming from a bicomplex",
         [ IsHomalgBigradedObjectAssociatedToABicomplex and IsBigradedObjectOfFinitelyPresentedObjectsRep ],
         
-  function( E )
+  function( Er )
     
-    if IsBound(E!.bicomplex) then
-        return E!.bicomplex;
+    if IsBound(Er!.bicomplex) then
+        return Er!.bicomplex;
     fi;
     
     Error( "it seems that the bigraded object does not stem from a bicomplex\n" );
-    
-end );
-
-##
-InstallMethod( OnLessGenerators,
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( E )
-    
-    
     
 end );
 
@@ -290,9 +321,12 @@ InstallMethod( BasisOfModule,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     
-        
+    List( ObjectsOfBigradedObject( Er ), BasisOfModule );
+    
+    return Er;
+    
 end );
 
 ##
@@ -300,9 +334,24 @@ InstallMethod( DecideZero,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     
+    List( ObjectsOfBigradedObject( Er ), DecideZero );
     
+    return Er;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    
+    List( ObjectsOfBigradedObject( Er ), OnLessGenerators );
+    
+    return Er;
     
 end );
 
@@ -311,9 +360,11 @@ InstallMethod( ByASmallerPresentation,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
-  function( E )
+  function( Er )
     
+    List( ObjectsOfBigradedObject( Er ), ByASmallerPresentation );
     
+    return Er;
     
 end );
 
@@ -329,32 +380,30 @@ InstallMethod( HomalgBigradedObject,
         [ IsHomalgBicomplex ],
         
   function( B )
-    local bidegrees, E, p, q, left, type;
+    local bidegrees, Er, p, q, type;
     
     bidegrees := ObjectDegreesOfBicomplex( B );
     
-    E := rec( bidegrees := bidegrees,
+    Er := rec( bidegrees := bidegrees,
               level := 0,
               bicomplex := B );
     
     for p in bidegrees[1] do
         for q in bidegrees[2] do
-            E.(String( [ p, q ] )) := CertainObject( B, [ p, q ] );
+            Er.(String( [ p, q ] )) := CertainObject( B, [ p, q ] );
         od;
     od;
     
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( E.(String( [ p, q ] )) );
-    
-    if left then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( Er.(String( [ p, q ] )) ) then
         type := TheTypeZerothHomalgBigradedObjectAssociatedToABicomplexOfLeftObjects;
     else
         type := TheTypeZerothHomalgBigradedObjectAssociatedToABicomplexOfRightObjects;
     fi;
     
     ## Objectify
-    Objectify( type, E );
+    Objectify( type, Er );
     
-    return E;
+    return Er;
     
 end );
 
@@ -363,15 +412,15 @@ InstallMethod( AsDifferentialObject,
         "for homalg bigraded objects stemming from a bicomplex",
         [ IsHomalgBigradedObjectAssociatedToABicomplex and IsBigradedObjectOfFinitelyPresentedObjectsRep ],
         
-  function( E )
+  function( Er )
     local bidegrees, B, r, cpx, bidegree, lp, lq, q_degrees, p_degrees, p, q,
           source, target, emb_source, emb_target, mor_h, mor_v, mor, l;
     
-    bidegrees := ObjectDegreesOfBigradedObject( E );
+    bidegrees := ObjectDegreesOfBigradedObject( Er );
     
-    B := UnderlyingBicomplex( E );
+    B := UnderlyingBicomplex( Er );
     
-    r := LevelOfBigradedObject( E );
+    r := LevelOfBigradedObject( Er );
     
     cpx := IsBicomplexOfFinitelyPresentedObjectsRep( B );
     
@@ -381,7 +430,7 @@ InstallMethod( AsDifferentialObject,
         bidegree := [ r, 1 - r ];
     fi;
     
-    E!.BidegreeOfDifferential := bidegree;
+    Er!.BidegreeOfDifferential := bidegree;
     
     if r = 0 then
         lq := Length( bidegrees[2] );
@@ -392,7 +441,7 @@ InstallMethod( AsDifferentialObject,
         fi;
         for p in bidegrees[1] do
             for q in q_degrees do
-                E!.(String( [ p, q ] )) := CertainVerticalMorphism( B, [ p, q ] );
+                Er!.(String( [ p, q ] )) := CertainVerticalMorphism( B, [ p, q ] );
             od;
         od;
     else
@@ -403,13 +452,13 @@ InstallMethod( AsDifferentialObject,
             q_degrees := bidegrees[2]{[ 1 .. lq - ( r - 1 ) ]};
             for p in p_degrees do
                 for q in q_degrees do
-                    source := CertainObject( E, [ p, q ] );
-                    target := CertainObject( E, [ p, q ] + bidegree );
+                    source := CertainObject( Er, [ p, q ] );
+                    target := CertainObject( Er, [ p, q ] + bidegree );
                     if ForAny( [ source, target ], IsZero ) then
                         mor := TheZeroMap( source, target );
                     else
-                        emb_source := E!.absolute_embeddings.(String( [ p, q ] ));
-                        emb_target := E!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                        emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
+                        emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p - i, q + i ] ) );
                         mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p - i, q + i ] ) );
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
@@ -423,7 +472,7 @@ InstallMethod( AsDifferentialObject,
                             mor := mor / emb_target;
                         fi;
                     fi;
-                    E!.(String( [ p, q ] )) := mor;
+                    Er!.(String( [ p, q ] )) := mor;
                 od;
             od;
         else
@@ -431,10 +480,10 @@ InstallMethod( AsDifferentialObject,
             q_degrees := bidegrees[2]{[ r .. lq ]};
             for p in p_degrees do
                 for q in q_degrees do
-                    source := CertainObject( E, [ p, q ] );
-                    target := CertainObject( E, [ p, q ] + bidegree );
-                    emb_source := E!.absolute_embeddings.(String( [ p, q ] ));
-                    emb_target := E!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                    source := CertainObject( Er, [ p, q ] );
+                    target := CertainObject( Er, [ p, q ] + bidegree );
+                    emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
+                    emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                     mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p + i, q - i ] ) );
                     mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p + i, q - i ] ) );
                     if ForAny( [ source, target ], IsZero ) or
@@ -449,15 +498,15 @@ InstallMethod( AsDifferentialObject,
                         od;
                         mor := mor / emb_target;
                     fi;
-                    E!.(String( [ p, q ] )) := mor;
+                    Er!.(String( [ p, q ] )) := mor;
                 od;
             od;
         fi;
     fi;
     
-    SetIsEndowedWithDifferential( E, true );
+    SetIsEndowedWithDifferential( Er, true );
     
-    return E;
+    return Er;
     
 end );
 
@@ -466,15 +515,15 @@ InstallMethod( DefectOfExactness,
         "for homalg bigraded objects stemming from a bicomplex",
         [ IsBigradedObjectOfFinitelyPresentedObjectsRep and IsEndowedWithDifferential ],
         
-  function( E )
+  function( Er )
     local left, bidegree, r, degree, cpx, bidegrees, B, p, q, pp, qq, H, i, j,
           Epq, post, pre, def, emb, emb_old, absolute_embeddings, type;
     
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( E );
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( Er );
     
-    bidegree := BidegreeOfDifferential( E );
+    bidegree := BidegreeOfDifferential( Er );
     
-    r := LevelOfBigradedObject( E );
+    r := LevelOfBigradedObject( Er );
     
     degree := Sum( bidegree );
     
@@ -487,9 +536,9 @@ InstallMethod( DefectOfExactness,
         cpx := fail;
     fi;
     
-    bidegrees := ObjectDegreesOfBigradedObject( E );
+    bidegrees := ObjectDegreesOfBigradedObject( Er );
     
-    B := UnderlyingBicomplex( E );
+    B := UnderlyingBicomplex( Er );
     
     p := bidegrees[1];
     q := bidegrees[2];
@@ -505,9 +554,9 @@ InstallMethod( DefectOfExactness,
     
     for i in [ 1 .. pp ] do
         for j in [ 1 .. qq ] do
-            Epq := CertainObject( E, [ p[i], q[j] ] );
-            post := CertainMorphism( E, [ p[i], q[j] ] );
-            pre := CertainMorphism( E, [ p[i], q[j] ] - bidegree );
+            Epq := CertainObject( Er, [ p[i], q[j] ] );
+            post := CertainMorphism( Er, [ p[i], q[j] ] );
+            pre := CertainMorphism( Er, [ p[i], q[j] ] - bidegree );
             if IsHomalgMorphism( post ) and not IsZero( Epq ) then
                 if IsHomalgMorphism( pre ) then
                     if left then
@@ -536,7 +585,7 @@ InstallMethod( DefectOfExactness,
                     H.stable[qq-j+1][i] := '*';
                 fi;
             else
-                def := CertainObject( E, [ p[i], q[j] ] );
+                def := CertainObject( Er, [ p[i], q[j] ] );
                 emb := TheIdentityMorphism( def );
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
                 if IsZero( def ) then
@@ -550,7 +599,7 @@ InstallMethod( DefectOfExactness,
         od;
     od;
     
-    if IsHomalgBigradedObjectAssociatedToAFilteredComplex( E ) then
+    if IsHomalgBigradedObjectAssociatedToAFilteredComplex( Er ) then
         
         absolute_embeddings := rec( );
         
@@ -561,7 +610,7 @@ InstallMethod( DefectOfExactness,
             ## build an absolute embedding table using the previous one
             for i in [ 1 .. pp ] do
                 for j in [ 1 .. qq ] do
-                    emb_old := E!.absolute_embeddings.(String( [ p[i], q[j] ] ));
+                    emb_old := Er!.absolute_embeddings.(String( [ p[i], q[j] ] ));
                     if H.stable[qq-j+1][i] = '*' then;	## not yet stable
                         emb := H.embeddings.(String( [ p[i], q[j] ] ));
                         absolute_embeddings.(String( [ p[i], q[j] ] )) := PreCompose( emb, emb_old );
@@ -703,25 +752,6 @@ InstallMethod( ViewObj,
     fi;
     
     Print( " bigraded object>" );
-    
-end );
-
-##
-InstallMethod( ViewObj,
-        "for homalg bigraded objects",
-        [ IsBicocomplexOfFinitelyPresentedObjectsRep and IsZero ],
-        
-  function( o )
-    
-    Print( "<A zero " );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( "left" );
-    else
-        Print( "right" );
-    fi;
-    
-    Print( " bicocomplex>" );
     
 end );
 

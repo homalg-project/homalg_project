@@ -39,6 +39,9 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToABicomplex",
 DeclareProperty( "IsEndowedWithDifferential",
         IsHomalgBigradedObject );
 
+DeclareProperty( "IsStableSheet",
+        IsHomalgBigradedObject );
+
 ####################################
 #
 # global functions and operations:
@@ -49,9 +52,6 @@ DeclareProperty( "IsEndowedWithDifferential",
 
 DeclareOperation( "HomalgBigradedObject",
         [ IsHomalgBicomplex ] );
-
-DeclareOperation( "HomalgBigradedObject",
-        [ IsHomalgBicomplex, IsInt ] );
 
 DeclareOperation( "AsDifferentialObject",
         [ IsHomalgBigradedObject ] );
