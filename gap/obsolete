@@ -497,3 +497,45 @@ end );
   . HomalgInitialMatrix
   . HomalgInitialIdentityMatrix
   . HomalgVoidMatrix
+## from HomalgMatrix.gi/gd
+
+DeclareOperation( "AddToEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
+
+DeclareOperation( "AddToEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString ] );
+
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
+        
+  function( M, r, c, s, R )
+    
+    AddToEntryOfHomalgMatrix( M, r, c, One( R ) * EvalString( s ), R );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        
+  function( M, r, c, s )
+    
+    Error( "the homalg matrix is write-protected\n" );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString ],
+        
+  function( M, r, c, s )
+    
+    AddToEntryOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
+    
+end );
+

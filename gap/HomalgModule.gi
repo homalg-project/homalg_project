@@ -772,7 +772,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, bas, mat, diag, rk;
+    local rel, bas, mat, R, diag, rk;
     
     rel := RelationsOfModule( M );
     
@@ -786,12 +786,14 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
     
     if not HasRankOfModule( M ) then
        mat := MatrixOfRelations( rel );
-       if HasIsDiagonalMatrix( mat ) and IsDiagonalMatrix( mat ) then
+       R := HomalgRing( M );
+       if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) and
+          HasIsDiagonalMatrix( mat ) and IsDiagonalMatrix( mat ) then
            diag := DiagonalEntries( mat );
            rk := Length( Filtered( diag, IsZero ) ) + NrGenerators( M ) - Length( diag );
            SetRankOfModule( M, rk );
        elif HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
-           rk := NrGenerators( M ) - NrRelations( M );
+           rk := NrGenerators( M ) - NrRelations( M );	## the euler characteristic
            SetRankOfModule( M, rk );
        fi;
     fi;
@@ -1032,7 +1034,7 @@ end );
 ##
 InstallMethod( OnLessGenerators,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     local R, rel_old, rel, U, UI;
@@ -1094,7 +1096,7 @@ end );
 ##
 InstallMethod( ElementaryDivisors,
         "for homalg modules",
-	[ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     local rel, b, R, RP, e;
@@ -1103,7 +1105,7 @@ InstallMethod( ElementaryDivisors,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.ElementaryDivisors) and HasRankOfModule( M ) then
+    if IsBound( RP!.ElementaryDivisors ) and HasRankOfModule( M ) then
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
@@ -1145,6 +1147,65 @@ InstallMethod( ElementaryDivisors,
     R := HomalgRing( M );
     
     return ListWithIdenticalEntries( NrGenerators( M ), Zero( R ) );
+    
+end );
+
+##
+InstallMethod( SetUpperBoundForProjectiveDimension,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInfinity ],
+        
+  function( M, ub_pd )
+    
+    ## do nothing
+    
+end );
+
+##
+InstallMethod( SetUpperBoundForProjectiveDimension,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, ub_pd )
+    local left, R, ub, min;
+    
+    if not HasProjectiveDimension( M ) then	## otherwise don't do anything
+        if ub_pd < 0 then
+            ## decrease the upper bound by |up_bd| *relative* to the left/right global dimension of the ring:
+            left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+            R := HomalgRing( M );
+            if left and HasLeftGlobalDimension( R ) and IsInt( LeftGlobalDimension( R ) ) then
+                ub := LeftGlobalDimension( R ) + ub_pd;			## recall, ub_pd < 0
+                if ub < 0 then
+                    SetProjectiveDimension( M, 0 );
+                else
+                    SetUpperBoundForProjectiveDimension( M, ub );	## ub >= 0
+                fi;
+            elif not left and HasRightGlobalDimension( R ) and IsInt( RightGlobalDimension( R ) ) then
+                ub := RightGlobalDimension( R ) + ub_pd;		## recall, ub_pd < 0
+                if ub < 0 then
+                    SetProjectiveDimension( M, 0 );
+                else
+                    SetUpperBoundForProjectiveDimension( M, ub );	## ub >= 0
+                fi;
+            fi;
+        else
+            ## set the upper bound to up_bd:
+            if IsBound( M!.UpperBoundForProjectiveDimension ) then
+                min := Minimum( M!.UpperBoundForProjectiveDimension, ub_pd );
+            else
+                min := ub_pd;
+            fi;
+            
+            M!.UpperBoundForProjectiveDimension := min;
+            
+            if min = 0 then
+                SetProjectiveDimension( M, 0 );
+            elif min = 1 and HasIsProjective( M ) and not IsProjective( M ) then
+                SetProjectiveDimension( M, 1 );
+            fi;
+        fi;
+    fi;
     
 end );
 
@@ -1193,6 +1254,10 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+        
+        if HasLeftGlobalDimension( R ) then
+            SetUpperBoundForProjectiveDimension( M, LeftGlobalDimension( R ) );
+        fi;
     fi;
     
 #    SetParent( gens, M );
@@ -1243,6 +1308,10 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+        
+        if HasLeftGlobalDimension( R ) then
+            SetUpperBoundForProjectiveDimension( M, LeftGlobalDimension( R ) );
+        fi;
     fi;
     
 #    SetParent( gens, M );
@@ -1291,6 +1360,10 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgRightModuleFinitelyPresented,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+        
+        if HasRightGlobalDimension( R ) then
+            SetUpperBoundForProjectiveDimension( M, RightGlobalDimension( R ) );
+        fi;
     fi;
     
 #    SetParent( gens, M );
@@ -1341,6 +1414,10 @@ InstallMethod( Presentation,
                 M, TheTypeHomalgRightModuleFinitelyPresented,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+        
+        if HasRightGlobalDimension( R ) then
+            SetUpperBoundForProjectiveDimension( M, RightGlobalDimension( R ) );
+        fi;
     fi;
     
 #    SetParent( gens, M );
@@ -1360,12 +1437,12 @@ InstallMethod( LeftPresentation,
     
     is_zero_module := false;
     
-    if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
+    if Length( rel ) = 0 then	## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForLeftModule( [ ], R );
         is_zero_module := true;
-    elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
+    elif IsList( rel[1] ) and ForAll( rel[1], IsRingElement ) then
         gens := CreateSetsOfGeneratorsForLeftModule(
-                        HomalgIdentityMatrix( Length( rel[1] ), R ), rel );  ## FIXME: Length( rel[1] )
+                        HomalgIdentityMatrix( Length( rel[1] ), R ), rel );
     else ## only one generator
         gens := CreateSetsOfGeneratorsForLeftModule(
                         HomalgIdentityMatrix( 1, R ), rel );
@@ -1390,6 +1467,10 @@ InstallMethod( LeftPresentation,
                 M, TheTypeHomalgLeftModuleFinitelyPresented,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+        
+        if HasLeftGlobalDimension( R ) then
+            SetUpperBoundForProjectiveDimension( M, LeftGlobalDimension( R ) );
+        fi;
     fi;
     
 #    SetParent( gens, M );
@@ -1425,6 +1506,11 @@ InstallMethod( LeftPresentation,
             M, TheTypeHomalgLeftModuleFinitelyPresented,
             LeftActingDomain, R,
             GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+    
+    if HasLeftGlobalDimension( R ) then
+        SetUpperBoundForProjectiveDimension( M, LeftGlobalDimension( R ) );
+    fi;
     
 #    SetParent( gens, M );
 #    SetParent( rels, M );
@@ -1465,12 +1551,12 @@ InstallMethod( RightPresentation,
     
     is_zero_module := false;
     
-    if Length( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
+    if Length( rel ) = 0 then	## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForRightModule( [ ], R );
         is_zero_module := true;
-    elif IsList( rel[1] ) then ## FIXME: to be replaced with something to distinguish lists of rings elements from elements that are theirself lists
+    elif IsList( rel[1] ) and ForAll( rel[1], IsRingElement ) then
         gens := CreateSetsOfGeneratorsForRightModule(
-                        HomalgIdentityMatrix( Length( rel ), R ), rel ); ## FIXME: Length( rel )
+                        HomalgIdentityMatrix( Length( rel ), R ), rel );
     else ## only one generator
         gens := CreateSetsOfGeneratorsForRightModule(
                         HomalgIdentityMatrix( 1, R ), rel );
@@ -1495,6 +1581,10 @@ InstallMethod( RightPresentation,
                 M, TheTypeHomalgRightModuleFinitelyPresented,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+        
+        if HasRightGlobalDimension( R ) then
+            SetUpperBoundForProjectiveDimension( M, RightGlobalDimension( R ) );
+        fi;
     fi;
     
 #    SetParent( gens, M );
@@ -1530,6 +1620,11 @@ InstallMethod( RightPresentation,
             M, TheTypeHomalgRightModuleFinitelyPresented,
             RightActingDomain, R,
             GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
+    
+        
+    if HasRightGlobalDimension( R ) then
+        SetUpperBoundForProjectiveDimension( M, RightGlobalDimension( R ) );
+    fi;
     
 #    SetParent( gens, M );
 #    SetParent( rels, M );
@@ -1677,7 +1772,7 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local properties, num_gen, num_rel, gen_string, rel_string;
+    local properties, nz, num_gen, num_rel, gen_string, rel_string;
     
     properties := "";
     
@@ -1689,33 +1784,43 @@ InstallMethod( ViewObj,
         Append( properties, " stably free" );
         if HasIsFree( M ) and not IsFree( M ) then	## the "not"s are obsolete but kept for better readability
             Append( properties, " non-free" );
+            nz := true;
         fi;
     elif HasIsProjective( M ) and IsProjective( M ) then
         Append( properties, " projective" );
         if HasIsStablyFree( M ) and not IsStablyFree( M ) then
             Append( properties, " non-stably free" );
+            nz := true;
         elif HasIsFree( M ) and not IsFree( M ) then
             Append( properties, " non-free" );
+            nz := true;
         fi;
     elif HasIsReflexive( M ) and IsReflexive( M ) then
         Append( properties, " reflexive" );
         if HasIsProjective( M ) and not IsProjective( M ) then
             Append( properties, " non-projective" );
+            nz := true;
         elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
             Append( properties, " non-stably free" );
+            nz := true;
         elif HasIsFree( M ) and not IsFree( M ) then
             Append( properties, " non-free" );
+            nz := true;
         fi;
     elif HasIsTorsionFree( M ) and IsTorsionFree( M ) then
         Append( properties, " torsion-free" );
         if HasIsReflexive( M ) and not IsReflexive( M ) then
             Append( properties, " non-reflexive" );
+            nz := true;
         elif HasIsProjective( M ) and not IsProjective( M ) then
             Append( properties, " non-projective" );
+            nz := true;
         elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
             Append( properties, " non-stably free" );
+            nz := true;
         elif HasIsFree( M ) and not IsFree( M ) then
             Append( properties, " non-free" );
+            nz := true;
         fi;
     fi;
     
@@ -1742,7 +1847,8 @@ InstallMethod( ViewObj,
             Append( properties, " rank " );
             Append( properties, String( RankOfModule( M ) ) );
         elif HasIsZero( M ) and not IsZero( M ) and
-          not ( HasIsPure( M ) and not IsPure( M ) ) then
+          not ( HasIsPure( M ) and not IsPure( M ) ) and
+          not ( IsBound( nz ) and nz = true ) then
             properties := Concatenation( " non-zero", properties );
         fi;
     fi;
@@ -2063,8 +2169,8 @@ InstallMethod( Display,
     
     rel := MatrixOfRelations( M );
     
-    if not ( HasElementaryDivisors( M ) and HasRankOfModule( M ) ) ## this should have no side effect on M
-       and not IsDiagonalMatrix( rel ) then
+    if not HasElementaryDivisors( M ) and
+       not IsDiagonalMatrix( rel ) then
         TryNextMethod( );
     fi;
     
@@ -2076,15 +2182,19 @@ InstallMethod( Display,
     
     if HasElementaryDivisors( M ) then
         diag := ElementaryDivisors( M );
+        rk := Length( Filtered( diag, IsZero ) );
     else
         diag := DiagonalEntries( rel );
         rk := Length( Filtered( diag, IsZero ) ) + NrGenerators( M ) - Length( diag );
+    fi;
+    
+    ## rk is the rank if R is a domain
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) and not HasRankOfModule( M ) then
         SetRankOfModule( M, rk );
     fi;
     
     diag := Filtered( diag, x -> not IsOne( x ) and not IsZero( x ) );
-    
-    rk := RankOfModule( M );
     
     if IsHomalgExternalRingRep( R ) then
         get_string := Name;

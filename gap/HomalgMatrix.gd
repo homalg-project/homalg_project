@@ -258,6 +258,9 @@ DeclareOperation( "SetEntryOfHomalgMatrix",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
 
 DeclareOperation( "AddToEntryOfHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
+
+DeclareOperation( "AddToEntryOfHomalgMatrix",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
 
 DeclareOperation( "CreateHomalgMatrix",

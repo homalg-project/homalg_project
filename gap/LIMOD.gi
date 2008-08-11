@@ -502,6 +502,21 @@ InstallImmediateMethod( RankOfModule,
 end );
 
 ##
+InstallImmediateMethod( DegreeOfTorsionFreeness,
+        IsFinitelyPresentedModuleRep and HasIsTorsionFree, 0,
+        
+  function( M )
+    local R;
+    
+    if not IsTorsionFree( M ) then
+        return 0;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( CodimOfModule,
         IsFinitelyPresentedModuleRep and IsTorsionFree, 0,
         
@@ -829,7 +844,7 @@ InstallMethod( DegreeOfTorsionFreeness,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local DM, R, gdim, k;
+    local DM, k, R, left, gdim, bound;
     
     DM := AuslanderDual( M );
     
@@ -845,20 +860,38 @@ InstallMethod( DegreeOfTorsionFreeness,
     
     R := HomalgRing( M );
     
-    if not HasGlobalDimension( R ) then
-        return fail;
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    if left then
+        if not HasLeftGlobalDimension( R ) then
+            TryNextMethod( );
+        fi;
+        gdim := LeftGlobalDimension( R );
+    else
+        if not HasRightGlobalDimension( R ) then
+            TryNextMethod( );
+        fi;
+        gdim := RightGlobalDimension( R );
     fi;
     
-    gdim := GlobalDimension( R );
+    if gdim = infinity then
+        bound := BoundForResolution( M );
+    else
+        bound := gdim;
+    fi;
     
-    while k <= gdim do
+    while k <= bound do
         if not IsZero( Ext( k, DM ) ) then
             return k - 1;
         fi;
         k := k + 1;
     od;
     
-    return gdim;
+    if gdim < infinity then
+        return gdim;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -868,7 +901,7 @@ InstallMethod( CodimOfModule,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, gdim, k;
+    local k, R, left, gdim, bound;
     
     if IsTorsion( M ) then
         k := 1;
@@ -878,20 +911,38 @@ InstallMethod( CodimOfModule,
     
     R := HomalgRing( M );
     
-    if not HasGlobalDimension( R ) then
-        return fail;
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    if left then
+        if not HasLeftGlobalDimension( R ) then
+            TryNextMethod( );
+        fi;
+        gdim := LeftGlobalDimension( R );
+    else
+        if not HasRightGlobalDimension( R ) then
+            TryNextMethod( );
+        fi;
+        gdim := RightGlobalDimension( R );
     fi;
     
-    gdim := GlobalDimension( R );
+    if gdim = infinity then
+        bound := BoundForResolution( M );
+    else
+        bound := gdim;
+    fi;
     
-    while k <= gdim do
+    while k <= bound do
         if not IsZero( Ext( k, M ) ) then
             return k;
         fi;
         k := k + 1;
     od;
     
-    return gdim;
+    if gdim < infinity then
+        return gdim;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -920,8 +971,8 @@ InstallMethod( ProjectiveDimension,
     pd := Length( MorphismDegreesOfComplex( d ) );
     
     if pd < ld then
-        ResetFilterObj( M, AFiniteFreeResolutin );
-        SetAFiniteFreeResolutin( M, d );
+        ResetFilterObj( M, AFiniteFreeResolution );
+        SetAFiniteFreeResolution( M, d );
     fi;
     
     ## Serre's 1955 remark:

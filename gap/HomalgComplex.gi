@@ -1519,7 +1519,7 @@ InstallMethod( Display,
         Display( CertainObject( o, i ) );
     od;
     
-    Print( "-------------------------\n" );
+    Print( "---------------------------\n" );
     
 end );
 

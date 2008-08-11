@@ -254,8 +254,8 @@ InstallMethod( Resolution,
     
     if HasIsAcyclic( d ) and IsAcyclic( d ) then
         SetFiniteFreeResolutionExists( M, true );
-        ResetFilterObj( M, AFiniteFreeResolutin );
-        SetAFiniteFreeResolutin( M, d );
+        ResetFilterObj( M, AFiniteFreeResolution );
+        SetAFiniteFreeResolution( M, d );
         rank := Sum( ObjectDegreesOfComplex( d ),
                      i -> (-1)^i *  NrGenerators( CertainObject( d, i ) ) );
         SetRankOfModule( M, rank );
@@ -651,8 +651,8 @@ InstallMethod( ShortenResolution,
         M!.UpperBoundForProjectiveDimension := l;
     fi;
     
-    ResetFilterObj( M, AFiniteFreeResolutin );
-    SetAFiniteFreeResolutin( M, d );
+    ResetFilterObj( M, AFiniteFreeResolution );
+    SetAFiniteFreeResolution( M, d );
     
     RelationsOfModule( M )!.FreeResolution := d;
     
@@ -678,15 +678,15 @@ InstallMethod( FiniteFreeResolution,
         
   function( M )
     
-    if HasAFiniteFreeResolutin( M ) then
-        return AFiniteFreeResolutin( M );
+    if HasAFiniteFreeResolution( M ) then
+        return AFiniteFreeResolution( M );
     elif not HasFiniteFreeResolutionExists( M ) or FiniteFreeResolutionExists( M ) then	## in words: either a finite free resolution exists or its existence is not known yet
         Resolution( M );
     fi;
     
     ## now check again:
-    if HasAFiniteFreeResolutin( M ) then
-        return AFiniteFreeResolutin( M );
+    if HasAFiniteFreeResolution( M ) then
+        return AFiniteFreeResolution( M );
     fi;
     
     return fail;

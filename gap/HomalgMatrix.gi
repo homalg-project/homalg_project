@@ -66,6 +66,17 @@ BindGlobal( "TheTypeHomalgExternalMatrix",
 ##-----------------------------------------------------------------------------
 
 ##
+InstallMethod( Rank,
+        "for homalg matrices",
+        [ IsInternalMatrixHull ],
+        
+  function( M )
+    
+    return Rank( M!.matrix );
+    
+end );
+
+##
 InstallMethod( HomalgRing,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -168,7 +179,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, s, R )
     
-    Eval( M )!.matrix[r][c] := One( R ) * EvalString( s );
+    SetEntryOfHomalgMatrix( M, r, c, One( R ) * EvalString( s ), R );
     
 end );
 
@@ -239,6 +250,17 @@ InstallMethod( SetEntryOfHomalgMatrix,
 end );
 
 ##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElement, IsHomalgExternalRingRep ],
+        
+  function( M, r, c, s, R )
+    
+    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), R );
+    
+end );
+
+##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ],
@@ -252,11 +274,22 @@ end );
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ],
+        
+  function( M, r, c, a, R )
+    
+    SetEntryOfHomalgMatrix( M, r, c, a + GetEntryOfHomalgMatrix( M, r, c, R ), R );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg matrices",
         [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement ],
         
   function( M, r, c, a )
     
-    SetEntryOfHomalgMatrix( M, r, c, a + GetEntryOfHomalgMatrix( M, r, c ) );
+    AddToEntryOfHomalgMatrix( M, r, c, a, HomalgRing( M ) );
     
 end );
 

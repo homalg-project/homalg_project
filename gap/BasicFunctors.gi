@@ -208,7 +208,7 @@ end );
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
   function( psi )
-    local S, p, ker, emb, img_epi;
+    local S, p, ker, emb, img_epi, T, coker, im;
     
     if HasKernelEmb( psi ) then
         return Source( KernelEmb( psi ) );
@@ -246,6 +246,39 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     ## save the natural embedding in the kernel (thanks GAP):
     ker!.NaturalEmbedding := emb;
+    
+    ## figure out an upper bound for the projective dimension of ker:
+    if not HasProjectiveDimension( ker ) and HasIsProjective( S ) and IsProjective( S ) then
+        T := Range( psi );
+        if HasIsProjective( T ) and IsProjective( T ) then	## typical for M^* which is a K_2(D(M)) (up to projective equivalence)
+            SetUpperBoundForProjectiveDimension( ker, -2 );	## since ker = K_2( coker )
+            if HasCokernelEpi( psi ) then
+                coker := Range( CokernelEpi( psi ) );		## S & T projective, then pd( ker ) = pd( coker ) - 2
+                if HasProjectiveDimension( coker ) then
+                    SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( coker ) - 2 ) );
+                elif IsBound( coker!.UpperBoundForProjectiveDimension ) then
+                    SetUpperBoundForProjectiveDimension( ker, coker!.UpperBoundForProjectiveDimension - 2 );
+                fi;
+            elif HasImageSubmoduleEmb( psi ) then
+                im := Source( ImageSubmoduleEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
+                if HasProjectiveDimension( im ) then
+                    SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( im ) - 1 ) );
+                elif IsBound( im!.UpperBoundForProjectiveDimension ) then
+                    SetUpperBoundForProjectiveDimension( ker, im!.UpperBoundForProjectiveDimension - 1 );
+                fi;
+            fi;
+        else
+            SetUpperBoundForProjectiveDimension( ker, -1 );	## since ker = K_1( im )
+            if HasImageSubmoduleEmb( psi ) then
+                im := Source( ImageSubmoduleEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
+                if HasProjectiveDimension( im ) then
+                    SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( im ) - 1 ) );
+                elif IsBound( im!.UpperBoundForProjectiveDimension ) then
+                    SetUpperBoundForProjectiveDimension( ker, im!.UpperBoundForProjectiveDimension - 1 );
+                fi;
+            fi;
+        fi;
+    fi;
     
     return ker;
     

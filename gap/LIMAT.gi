@@ -456,9 +456,123 @@ end );
 
 ####################################
 #
-# methods for operations:
+# methods for attributes:
 #
 ####################################
+
+#-----------------------------------
+# RowRankOfMatrix
+#-----------------------------------
+
+##
+InstallMethod( RowRankOfMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local RP, B;
+    
+    RP := homalgTable( HomalgRing( M ) );
+    
+    if IsBound( RP!.TriangularBasisOfRows ) then
+        
+        B := RP!.TriangularBasisOfRows( M );
+        
+        if HasRowRankOfMatrix( B ) then
+            return RowRankOfMatrix( B );
+        fi;
+    else
+        
+        BasisOfRowModule( M );
+        
+        if HasRowRankOfMatrix( M ) then
+            return RowRankOfMatrix( M );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RowRankOfMatrix,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if IsFieldForHomalg( R ) then
+        return Rank( Eval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+#-----------------------------------
+# ColumnRankOfMatrix
+#-----------------------------------
+
+##
+InstallMethod( ColumnRankOfMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local RP, B, N;
+    
+    RP := homalgTable( HomalgRing( M ) );
+    
+    if IsBound( RP!.TriangularBasisOfColumns ) then
+        
+        B := RP!.TriangularBasisOfColumns( M );
+        
+        if HasColumnRankOfMatrix( B ) then
+            return ColumnRankOfMatrix( B );
+        fi;
+        
+    elif IsBound( RP!.TriangularBasisOfRows ) then
+        
+        N := Involution( M );
+        
+        B := RP!.TriangularBasisOfRows( N );
+        
+        if HasRowRankOfMatrix( B ) then
+            return RowRankOfMatrix( B );
+        fi;
+    else
+        
+        BasisOfColumnModule( M );
+        
+        if HasColumnRankOfMatrix( M ) then
+            return ColumnRankOfMatrix( M );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( ColumnRankOfMatrix,
+        "for homalg matrices",
+        [ IsHomalgInternalMatrixRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if IsFieldForHomalg( R ) then
+        return Rank( Eval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 #-----------------------------------
 # ZeroColumns
@@ -476,6 +590,12 @@ InstallMethod( ZeroColumns,
     return ZeroRows( EvalInvolution( M ) );
     
 end );
+
+####################################
+#
+# methods for operations:
+#
+####################################
 
 #-----------------------------------
 # \=

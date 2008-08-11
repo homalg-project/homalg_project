@@ -173,10 +173,12 @@ InstallMethod( homalgResetFilters,
     
     if HasTotalComplex( B ) then
         ResetFilterObj( B, TotalComplex );
+        Unbind( B!.TotalComplex );
     fi;
     
     if HasSpectralSequence( B ) then
         ResetFilterObj( B, SpectralSequence );
+        Unbind( B!.SpectralSequence );
     fi;
     
 end );

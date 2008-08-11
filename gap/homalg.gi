@@ -81,6 +81,8 @@ InstallValue( HOMALG,
             
             color_display := false,
             
+            PreferDenseMatrices := false,
+            
             MaximumNumberOfResolutionSteps := 1001,
             
            )

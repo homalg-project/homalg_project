@@ -91,7 +91,7 @@ DeclareAttribute( "ElementaryDivisors",
 DeclareAttribute( "Genesis",
         IsHomalgModule );
 
-DeclareAttribute( "AFiniteFreeResolutin",
+DeclareAttribute( "AFiniteFreeResolution",
         IsHomalgModule );
 
 ####################################
@@ -249,6 +249,12 @@ DeclareOperation( "NonZeroGenerators",
 
 DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgModule ] );
+
+DeclareOperation( "SetUpperBoundForProjectiveDimension",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "SetUpperBoundForProjectiveDimension",
+        [ IsHomalgModule, IsInfinity ] );
 
 ####################################
 #
