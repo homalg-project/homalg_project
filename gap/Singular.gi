@@ -845,7 +845,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ M, "[", c, r, "]=", M, "[", c, r, "]+", a ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", c, r, "]=", a, "+", M, "[", c, r, "]" ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
     
 end );
 

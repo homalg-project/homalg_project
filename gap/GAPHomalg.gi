@@ -100,11 +100,8 @@ InstallMethod( RowRankOfMatrix,
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
-    local R;
     
-    R := HomalgRing( M );
-    
-    if IsHomalgExternalRingInGAPRep( R ) then
+    if IsHomalgExternalRingInGAPRep( HomalgRing( M ) ) then
         return Int( homalgSendBlocking( [ "RowRankOfMatrix(", M, ")" ], "need_output" ) );
     fi;
     
@@ -141,6 +138,10 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     fi;
     
     homalgSendBlocking( "LoadPackage(\"IO_ForHomalg\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if IsBound( HOMALG.PreferDenseMatrices ) then
+        homalgSendBlocking( [ "HOMALG.PreferDenseMatrices := ", HOMALG.PreferDenseMatrices ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    fi;
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
