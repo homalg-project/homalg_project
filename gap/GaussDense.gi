@@ -381,9 +381,14 @@ InstallGlobalFunction( KernelMat,
     if IsSparseMatrix( arg[1] ) then
         return CallFuncList( KernelMatSparse, arg );
     fi;
-        
+    
     copymat := [];
     f := DefaultFieldOfMatrix( arg[1] );
+    
+    if f = fail then
+       Error( "No KernelMat for dense matrices over non-fields!" );
+    fi;
+    
     for v in arg[1] do
         vc := ShallowCopy(v);
         ConvertToVectorRepNC(vc,f);
