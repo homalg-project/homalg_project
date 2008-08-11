@@ -740,11 +740,22 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for external matrices in Maple",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", r, c, "]:=", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for external matrices in Maple",
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMapleRep ],
+        
+  function( M, r, c, a, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "]:=", M, "[", r, c, "]+", a ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
     
 end );
 

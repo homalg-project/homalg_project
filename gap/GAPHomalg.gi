@@ -189,11 +189,22 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for external matrices in GAP",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, ",", s, ",", R, " ) " ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, ",", s, ",", R, " )" ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for external matrices in GAP",
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInGAPRep ],
+        
+  function( M, r, c, a, R )
+    
+    homalgSendBlocking( [ "AddToEntryOfHomalgMatrix( ", M, r, c, a, R, " )" ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
     
 end );
 

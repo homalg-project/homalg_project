@@ -598,7 +598,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
 end );
 
 ##
-InstallGlobalFunction( HomalgFieldOfPrimeOrderInSingular,
+InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( p )
     local ar, R;
     
@@ -830,11 +830,22 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for external matrices in Singular",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", c, r, "] = ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", c, r, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for external matrices in Singular",
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, r, c, a, R )
+    
+    homalgSendBlocking( [ M, "[", c, r, "]=", M, "[", c, r, "]+", a ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
     
 end );
 
@@ -993,7 +1004,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( filename, r, c, R )
-    local mode, command, M;
+    local mode, fs, str, command, M;
     
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
@@ -1001,13 +1012,39 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
         mode := R!.LoadAs; #not yet supported
     fi;
     
+    #read the file with GAP and parse it for better Singular reading:
+    fs := IO_File( filename, "r" );
+    if fs = fail then
+        Error( "unable to open the file ", filename, " for reading\n" );
+    fi;
+    str := IO_ReadUntilEOF( fs );
+    if str = fail then
+        Error( "unable to read lines from the file ", filename, "\n" );
+    fi;
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename, "\n" );
+    fi;
+    
+    str := Filtered( str, c -> not c in " []" );
+    
+    fs := IO_File( filename, "w" );
+    if fs = fail then
+        Error( "unable to open the file ", filename, " for writing\n" );
+    fi;
+    if IO_WriteFlush( fs, str ) = fail then
+        Error( "unable to write in the file ", filename, "\n" );
+    fi;
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename, "\n" );
+    fi;
+    
+    
     M := HomalgVoidMatrix( R );
     
     if mode = "ListList" then
         
         command := [ "string s=read(\"r: ", filename, "\");",
-                     "string w=\"\";for(int i=1;i<=size(s);i=i+1){if(s[i]<>\"[\" && s[i]<>\"]\"){w=w+s[i];};};",
-                     "execute( \"matrix ", M, "[", r, "][", c, "] = \" + w + \";\" );",
+                     "execute( \"matrix ", M, "[", r, "][", c, "] = \" + s + \";\" );",
                      M, " = transpose(", M, ")" ];#remark: matrices are saved transposed in singular
         
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );

@@ -88,9 +88,11 @@ InstallMethod( CreateHomalgTable,
                
           );
     
-    for component in NamesOfComponents( RP_BestBasis ) do
-        RP.(component) := RP_BestBasis.(component);
-    od;
+    if homalgSendBlocking( [ "IsBound(homalgTable(", ext_ring_obj, ")!.BestBasis)" ], "need_output", HOMALG_IO.Pictograms.initialize ) = "true" then
+        for component in NamesOfComponents( RP_BestBasis ) do
+            RP.(component) := RP_BestBasis.(component);
+        od;
+    fi;
     
     for component in NamesOfComponents( RP_Basic ) do
         RP.(component) := RP_Basic.(component);

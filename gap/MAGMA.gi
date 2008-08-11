@@ -529,11 +529,22 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "] := ", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", r, c, "]:=", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    
+end );
+
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for external matrices in MAGMA",
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMAGMARep ],
+        
+  function( M, r, c, a, R )
+    
+    homalgSendBlocking( [ M, "[", r, c, "]:=", M, "[", r, c, "]+", a ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
     
 end );
 

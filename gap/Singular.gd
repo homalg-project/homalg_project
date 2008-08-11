@@ -42,7 +42,7 @@ DeclareGlobalFunction( "RingForHomalgInSingular" );
 
 DeclareGlobalFunction( "HomalgFieldOfRationalsInSingular" );
 
-DeclareGlobalFunction( "HomalgFieldOfPrimeOrderInSingular" );
+DeclareGlobalFunction( "HomalgRingOfIntegersInSingular" );
 
 # basic operations:
 
