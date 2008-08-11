@@ -8,6 +8,52 @@
 ##
 #############################################################################
 
+##
+InstallMethod( MyEval, "to circumvent the Eval(M)!.matrix problem",
+        [ IsHomalgInternalMatrixRep ],
+  function( M )
+    local m;
+    m := Eval( M );
+    if IsSparseMatrix( m ) then
+        return m;
+    fi;
+    return m!.matrix;
+  end
+);
+
+##
+InstallMethod( SetMyEval, "to circumvent the Eval(M)!.matrix problem",
+        [ IsHomalgInternalMatrixRep, IsSparseMatrix ],
+  function( M, m )
+    SetEval( M, m );
+  end
+);
+
+##
+InstallMethod( SetMyEval, "to circumvent the Eval(M)!.matrix problem",
+        [ IsHomalgInternalMatrixRep, IsList ],
+  function( M, m )
+    SetEval( M, homalgInternalMatrixHull( m ) );
+  end
+);
+
+##
+InstallMethod( nrows, "for dense GAP matrices",
+        [ IsList ],
+  function( M )
+    return Length( M );
+  end
+);
+
+##
+InstallMethod( UnionOfRows, "for dense GAP matrices",
+        [ IsList, IsList ],
+  function( M, N )
+    return Concatenation( M, N );
+  end
+);
+		
+
 ####################################
 #
 # global variables:
@@ -23,49 +69,35 @@ InstallValue( CommonHomalgTableForGaussBasic,
     #this uses ReduceMat from the Gauss Package to reduce A with B
     DecideZeroRows :=
     function( A, B )
-      local R, M;
+      local R;
       R := HomalgRing( A );
-      M := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
-      SetEval( M, ReduceMat( Eval( A ), Eval ( B ) ).reduced_matrix );
-      ResetFilterObj( M, IsVoidMatrix );
-      return M;
+      return HomalgMatrix( ReduceMat( MyEval( A ), MyEval( B ) ).reduced_matrix, NrRows( A ), NrColumns( A ), R );
     end,
       
     #this uses ReduceMatTransformation from the Gauss Package to reduce A with B to M and return T such that M = A + T * B
     DecideZeroRowsEffectively :=
     function( A, B, T )
-      local R, M, RMT;
+      local R, RMT;
       R := HomalgRing( A );
-      M := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
-      RMT := ReduceMatTransformation( Eval( A ), Eval( B ) );
-      SetEval( M, RMT.reduced_matrix );
-      SetEval( T, RMT.transformation );
-      ResetFilterObj( M, IsVoidMatrix );
+      RMT := ReduceMatTransformation( MyEval( A ), MyEval( B ) );
+      SetMyEval( T, RMT.transformation );
       ResetFilterObj( T, IsVoidMatrix );
-      return M;
+      return HomalgMatrix( RMT.reduced_matrix, NrRows( A ), NrColumns( A ), R );
     end,
-        
+    
     #this uses KernelMat from the Gauss Package to compute Syzygies
     SyzygiesGeneratorsOfRows :=
     function( arg )
-      local M, R, syz, N;
+      local M, R, syz;
       M := arg[1];
       R := HomalgRing( M );
       if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-          syz := KernelMat( Eval( UnionOfRows( M, arg[2] ) ), [1..NrRows( M )] ).relations;
+          syz := KernelMat( MyEval( UnionOfRows( M, arg[2] ) ), [1..NrRows( M )] ).relations;
       else
-          syz := KernelMat( Eval( M ) ).relations;
+          syz := KernelMat( MyEval( M ) ).relations;
       fi;
-      N := HomalgVoidMatrix( nrows( syz ), NrRows( M ), R );
-      SetEval( N, syz );
-      ResetFilterObj( N, IsVoidMatrix );
-      return N;
+      return HomalgMatrix( syz, nrows( syz ), NrRows( M ), R );
     end,
     
-    #this just calls TriangularBasisOfRows, which computes the RREF using EchelonMat from the Gauss Package
-    BasisOfRowModule :=
-    function( M )
-      return TriangularBasisOfRows( M );
-    end,
   )
 );

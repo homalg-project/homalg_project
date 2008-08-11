@@ -21,7 +21,11 @@ InstallMethod( CreateHomalgTable,
   function( R )
     local RP, RP_default, RP_specific, component;
     
-    RP := ShallowCopy( CommonHomalgTableForGaussTools );
+    if IsBound( HOMALG.PreferDenseMatrices ) and HOMALG.PreferDenseMatrices = true then
+        RP := rec( );
+    else
+        RP := ShallowCopy( CommonHomalgTableForGaussTools );
+    fi;
     
     RP_default := ShallowCopy( CommonHomalgTableForGaussBasic );
     
@@ -40,17 +44,17 @@ InstallMethod( CreateHomalgTable,
                    
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then
                        ## compute N and U:
-                       result := EchelonMatTransformation( Eval( M ) );
+                       result := EchelonMatTransformation( MyEval( M ) );
                        N := result.vectors;
                        ## assign U:
-                       SetEval( arg[2], UnionOfRows( result.coeffs, result.relations ) );
+                       SetMyEval( arg[2], UnionOfRows( result.coeffs, result.relations ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );
                        SetIsInvertibleMatrix( arg[2], true );
                    else
                        ## compute N only:
-                       N := EchelonMat( Eval( M ) ).vectors;
+                       N := EchelonMat( MyEval( M ) ).vectors;
                    fi;
                    
                    if N = [ ] then
@@ -93,8 +97,10 @@ end );
 InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
   function( M, i, j, R )
-    if IsSparseMatrix( Eval( M ) ) then
-        return GetEntry( Eval( M ), i, j ); #calls GetEntry for sparse matrices
+    local m;
+    m := Eval( M );
+    if IsSparseMatrix( m ) then
+        return GetEntry( m, i, j ); #calls GetEntry for sparse matrices
     fi;
     TryNextMethod();
   end
@@ -104,8 +110,10 @@ InstallMethod( GetEntryOfHomalgMatrix,
 InstallMethod( SetEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
   function( M, i, j, e, R )
-    if IsSparseMatrix( Eval( M ) ) then
-        SetEntry( Eval( M ), i, j, e ); #calls SetEntry for sparse matrices
+    local m;
+    m := Eval( M );
+    if IsSparseMatrix( m ) then
+        SetEntry( m, i, j, e ); #calls SetEntry for sparse matrices
     else
         TryNextMethod();
     fi;
@@ -116,8 +124,10 @@ InstallMethod( SetEntryOfHomalgMatrix,
 InstallMethod( AddToEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
   function( M, i, j, e, R )
-    if IsSparseMatrix( Eval( M ) ) then
-        AddToEntry( Eval( M ), i, j, e ); #calls AddToEntry for sparse matrices
+    local m;
+    m := Eval( M );
+    if IsSparseMatrix( m ) then
+        AddToEntry( m, i, j, e ); #calls AddToEntry for sparse matrices
     else
         TryNextMethod();
     fi;

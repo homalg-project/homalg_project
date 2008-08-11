@@ -8,6 +8,21 @@
 ##
 #############################################################################
 
+DeclareOperation( "MyEval",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "SetMyEval",
+        [ IsHomalgMatrix, IsSparseMatrix ] );
+
+DeclareOperation( "SetMyEval",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "nrows",
+        [ IsList ] );
+	
+DeclareOperation( "UnionOfRows",
+        [ IsList, IsList ] );
+
 ####################################
 #
 # global variables:
