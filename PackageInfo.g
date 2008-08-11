@@ -26,13 +26,13 @@ Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.07.30",
+Version := "2008.08.11",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "30/07/2008",
+Date := "11/08/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "30/07/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~simon/SCO",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/goertzen/SCO/SCO",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -122,7 +122,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen",
     PostalAddress := Concatenation( [
                        "Simon Goertzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -166,9 +166,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/SCO/README.SCO",
+  "http://wwwb.math.rwth-aachen.de/goertzen/SCO/README.SCO",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/SCO/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/goertzen/SCO/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -219,7 +219,7 @@ PackageDoc := rec(
   BookName  := "SCO",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~simon/SCO/SCO.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/goertzen/SCO/SCO.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -244,9 +244,9 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["homalg", ">= 2008.07.28"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["homalg", ">= 2008.08.06"]],
   # without these the package will issue a warning while loading
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [["GaussForHomalg", ">= 2008.08.11"]],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information

@@ -17,7 +17,3 @@ DeclareOperation( "CreateCohomologyMatrix",
 
 DeclareOperation( "CreateHomologyMatrix",
         [ IsSimplicialSet, IsInt, IsHomalgRing ] );
-
-##
-DeclareOperation( "AddEntry",
-        [ IsMatrix, IsInt, IsInt, IsObject ] );

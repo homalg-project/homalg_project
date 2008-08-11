@@ -57,15 +57,6 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
   end
 );
 
-##
-InstallMethod( AddEntry,
-        [ IsMatrix and IsMutable, IsInt, IsInt, IsObject ],
-  function( M, r, c, e )
-    M[r][c] := M[r][c] + e;
-    return true;
-  end
-);  
-
 ##  <#GAPDoc Label="CreateCohomologyMatrix">
 ##  <ManSection>
 ##  <Meth Arg="S, d, R" Name="CreateCohomologyMatrix"/>
@@ -90,46 +81,29 @@ InstallMethod( AddEntry,
 InstallMethod( CreateCohomologyMatrix, "for an internal ring",
         [ IsSimplicialSet, IsInt, IsHomalgInternalRingRep ],
   function( ss, d, R )
-    local S, x, matrices, RP, k, m, p, i, ind, pos, res;
+    local S, x, matrices, k, p, i, ind, pos, res;
     
     S := x -> SimplicialSet( ss, x );
     matrices := [];
-    RP := homalgTable( R );
     
     for k in [ 1 .. d + 1 ] do
         if Length( S(k) ) = 0 then
-            m := Eval( HomalgZeroMatrix( Length( S(k-1) ), 1, R ) );
-            if IsMatrix( m ) then
-                m := MutableCopyMat( m );
-            fi;
-            matrices[k] := m;
+            matrices[k] := HomalgInitialMatrix( Length( S(k-1) ), 1, R );
         else
-            m := Eval( HomalgZeroMatrix( Length( S(k-1) ), Length( S(k) ), R ) );
-            if IsMatrix( m ) then
-                m := MutableCopyMat( m );
-            fi;
-            matrices[k] := m;
+            matrices[k] := HomalgInitialMatrix( Length( S(k-1) ), Length( S(k) ), R );
             for p in [ 1 .. Length( S(k) ) ] do #column iterator
                 for i in [ 0 .. k ] do #row iterator
                     ind := PositionSet( S(k-1), BoundaryOperator( i, S(k)[p], ss!.orbifold_triangulation!.mu ) );
                     if not ind = fail then
-                        AddEntry( matrices[k], ind, p, MinusOne( R )^i );
+                        AddToEntryOfHomalgMatrix( matrices[k], ind, p, MinusOne( R )^i );
                     fi;
                 od;
             od;
         fi;
+	ResetFilterObj( matrices[k], IsInitialMatrix );
+	ResetFilterObj( matrices[k], IsMutableMatrix );
     od;
     
-    # wrap the matrices into HomalgMatrices
-    return List( matrices,
-      function( m )
-        local s;
-        s := HomalgVoidMatrix( R );
-        SetEval( s, m );
-        ResetFilterObj( s, IsVoidMatrix);
-        return s;
-      end );
-
   end
 );
   
