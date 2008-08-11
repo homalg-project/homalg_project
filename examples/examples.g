@@ -135,7 +135,7 @@ ss := SimplicialSet( ot );
 
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
     Print( "Creating the boundary matrices ...\n" );
-    M := CreateBoundaryMatrix( ss, d, R );
+    M := CreateBoundaryMatrices( ss, d, R );
     if method = 1 then
         Print( "Starting homology computation ...\n" );
         H := Homology( M, R );
@@ -143,11 +143,10 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
         Print( "Starting rank computation ...\n" );
         L := [];
         for i in [ 1 .. Length( M ) ] do
-            M[i] := Eval( M[i] );
-            L[i] :=[ nrows(  M[i] ), ncols( M[i] ) ];
+            L[i] :=[ NrRows(  M[i] ), NrColumns( M[i] ) ];
             Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
 	    t := Runtimes().user_time;
-	    L[i][3] := Rank( M[i] );
+	    L[i][3] := RowRankOfMatrix( M[i] );
 	    d := Runtimes().user_time - t;
 	    L[i][4] := L[i][2] - L[i][3];
             Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ". Time: ", TimeToString( d ), "\n" );
@@ -157,12 +156,12 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
             H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
         od;
         for i in [ 1 .. Length( H ) ] do
-            Print( "# Homology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
+            Print( "# Homology dimension at degree ", i - 1, ":  ", RingName( R ), "^(1 x ", H[i], ")\n" );
         od;
     fi;
 elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
     Print( "Creating the coboundary matrices ...\n" );
-    M := CreateCoboundaryMatrix( ss, d, R );
+    M := CreateCoboundaryMatrices( ss, d, R );
     if method = 1 then
         Print( "Starting cohomology computation ...\n" );
         H := Cohomology( M, R );
@@ -170,11 +169,10 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
         Print( "Starting rank computation ...\n" );
         L := [];
         for i in [ 1 .. Length( M ) ] do
-            M[i] := Eval( M[i] );
-            L[i] :=[ nrows(  M[i] ), ncols( M[i] ) ];
+            L[i] :=[ NrRows(  M[i] ), NrColumns( M[i] ) ];
             Print( "# ", i, ": ", L[i][1], " x ", L[i][2], " matrix " );
             t := Runtimes().user_time;
-            L[i][3] := Rank( M[i] );
+            L[i][3] := RowRankOfMatrix( M[i] );
             d := Runtimes().user_time - t;
             L[i][4] := L[i][1] - L[i][3];
             Print( "with rank ", L[i][3], " and kernel dimension ", L[i][4], ". Time: ", TimeToString( d ), "\n" );
@@ -184,7 +182,7 @@ elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
             H[i] := L[i][4] - L[i-1][3]; #dim ker - dim im
         od;
         for i in [ 1 .. Length( H ) ] do
-            Print( "# Cohomology dimension at degree ", i - 1, ":  ", R!.ring, "^(1 x ", H[i], ")\n" );
+            Print( "# Cohomology dimension at degree ", i - 1, ":  ", RingName( R ), "^(1 x ", H[i], ")\n" );
         od;
     fi;
 fi;

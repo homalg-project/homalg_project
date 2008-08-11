@@ -57,9 +57,9 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
   end
 );
 
-##  <#GAPDoc Label="CreateCoboundaryMatrix">
+##  <#GAPDoc Label="CreateCoboundaryMatrices">
 ##  <ManSection>
-##  <Meth Arg="S, d, R" Name="CreateCoboundaryMatrix"/>
+##  <Meth Arg="S, d, R" Name="CreateCoboundaryMatrices"/>
 ##  <Returns>List <A>M</A></Returns>
 ##  <Description>
 ##  This returns the list <A>M</A> of homalg matrices over the homalg ring
@@ -69,7 +69,7 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 0 with Length vector [ 4 ]>
-##  gap> M := CreateCoboundaryMatrix( S, 4, HomalgRingOfIntegers() );;
+##  gap> M := CreateCoboundaryMatrices( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
@@ -78,7 +78,7 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( CreateCoboundaryMatrix, "for internal and external rings",
+InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( ss, d, R )
     local S, x, matrices, one, minusone, k, p, i, ind, pos, res;
@@ -116,9 +116,9 @@ InstallMethod( CreateCoboundaryMatrix, "for internal and external rings",
   end
 );
   
-##  <#GAPDoc Label="CreateBoundaryMatrix">
+##  <#GAPDoc Label="CreateBoundaryMatrices">
 ##  <ManSection>
-##  <Meth Arg="S, d, R" Name="CreateBoundaryMatrix"/>
+##  <Meth Arg="S, d, R" Name="CreateBoundaryMatrices"/>
 ##  <Returns>List <A>M</A></Returns>
 ##  <Description>
 ##  This returns the list <A>M</A> of homalg matrices over the homalg ring
@@ -128,7 +128,7 @@ InstallMethod( CreateCoboundaryMatrix, "for internal and external rings",
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 0 with Length vector [ 4 ]>
-##  gap> M := CreateBoundaryMatrix( S, 4, HomalgRingOfIntegers() );;
+##  gap> M := CreateBoundaryMatrices( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
@@ -137,10 +137,10 @@ InstallMethod( CreateCoboundaryMatrix, "for internal and external rings",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( CreateBoundaryMatrix, "for internal and external rings",
+InstallMethod( CreateBoundaryMatrices, "for internal and external rings",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( s, d, R )
-    return List( CreateCoboundaryMatrix( s, d, R ), Involution );
+    return List( CreateCoboundaryMatrices( s, d, R ), Involution );
   end
 );
 
