@@ -57,19 +57,19 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
   end
 );
 
-##  <#GAPDoc Label="CreateCohomologyMatrix">
+##  <#GAPDoc Label="CreateCoboundaryMatrix">
 ##  <ManSection>
-##  <Meth Arg="S, d, R" Name="CreateCohomologyMatrix"/>
+##  <Meth Arg="S, d, R" Name="CreateCoboundaryMatrix"/>
 ##  <Returns>List <A>M</A></Returns>
 ##  <Description>
 ##  This returns the list <A>M</A> of homalg matrices over the homalg ring
-##  <A>R</A> up to dimension <A>d</A>, corresponding to the cohomology matrices
+##  <A>R</A> up to dimension <A>d</A>, corresponding to the coboundary matrices
 ##  induced by the simplicial set <A>S</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 0 with Length vector [ 4 ]>
-##  gap> M := CreateCohomologyMatrix( S, 4, HomalgRingOfIntegers() );;
+##  gap> M := CreateCoboundaryMatrix( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
@@ -78,7 +78,7 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( CreateCohomologyMatrix, "for internal and external rings",
+InstallMethod( CreateCoboundaryMatrix, "for internal and external rings",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( ss, d, R )
     local S, x, matrices, one, minusone, k, p, i, ind, pos, res;
@@ -116,19 +116,19 @@ InstallMethod( CreateCohomologyMatrix, "for internal and external rings",
   end
 );
   
-##  <#GAPDoc Label="CreateHomologyMatrix">
+##  <#GAPDoc Label="CreateBoundaryMatrix">
 ##  <ManSection>
-##  <Meth Arg="S, d, R" Name="CreateHomologyMatrix"/>
+##  <Meth Arg="S, d, R" Name="CreateBoundaryMatrix"/>
 ##  <Returns>List <A>M</A></Returns>
 ##  <Description>
 ##  This returns the list <A>M</A> of homalg matrices over the homalg ring
-##  <A>R</A> up to dimension <A>d</A>, corresponding to the homology matrices
+##  <A>R</A> up to dimension <A>d</A>, corresponding to the boundary matrices
 ##  induced by the simplicial set <A>S</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 0 with Length vector [ 4 ]>
-##  gap> M := CreateCohomologyMatrix( S, 4, HomalgRingOfIntegers() );;
+##  gap> M := CreateBoundaryMatrix( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
 ##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
@@ -137,24 +137,10 @@ InstallMethod( CreateCohomologyMatrix, "for internal and external rings",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( CreateHomologyMatrix, "for internal and external rings",
+InstallMethod( CreateBoundaryMatrix, "for internal and external rings",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( s, d, R )
-    return List( CreateCohomologyMatrix( s, d, R ), Involution );
+    return List( CreateCoboundaryMatrix( s, d, R ), Involution );
   end
 );
-
-## create the matrices interally, then push them via file transfer
-#InstallMethod( CreateCohomologyMatrix, "for an external ring",
-#        [ IsSimplicialSet, IsInt, IsHomalgExternalRingRep ],
-#  function( s, d, R )
-#    local internal_ring;
-#    internal_ring := HomalgRingOfIntegers();
-#    return List( CreateCohomologyMatrix( s, d, internal_ring ),
-#      function(m)
-#        SetExtractHomalgMatrixToFile( m, true );
-#        return HomalgMatrix( m, R );
-#      end );
-#  end
-#);
 

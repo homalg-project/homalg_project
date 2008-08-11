@@ -134,8 +134,8 @@ ot := OrbifoldTriangulation( M, iso, mu, info );
 ss := SimplicialSet( ot );
 
 if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
-    Print( "Creating the homology matrices ...\n" );
-    M := CreateHomologyMatrix( ss, d, R );
+    Print( "Creating the boundary matrices ...\n" );
+    M := CreateBoundaryMatrix( ss, d, R );
     if method = 1 then
         Print( "Starting homology computation ...\n" );
         H := Homology( M, R );
@@ -161,8 +161,8 @@ if mode = 2 then #homology: ker( M[i] ) / im( M[i+1] )
         od;
     fi;
 elif mode = 1 then #cohomology:  ker( M[i+1] ) / im( M[i] )
-    Print( "Creating the cohomology matrices ...\n" );
-    M := CreateCohomologyMatrix( ss, d, R );
+    Print( "Creating the coboundary matrices ...\n" );
+    M := CreateCoboundaryMatrix( ss, d, R );
     if method = 1 then
         Print( "Starting cohomology computation ...\n" );
         H := Cohomology( M, R );

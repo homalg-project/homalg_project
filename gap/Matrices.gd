@@ -12,8 +12,8 @@
 DeclareGlobalFunction( "BoundaryOperator" );
 
 ##
-DeclareOperation( "CreateCohomologyMatrix",
+DeclareOperation( "CreateCoboundaryMatrix",
         [ IsSimplicialSet, IsInt, IsHomalgRing ] );
 
-DeclareOperation( "CreateHomologyMatrix",
+DeclareOperation( "CreateBoundaryMatrix",
         [ IsSimplicialSet, IsInt, IsHomalgRing ] );
