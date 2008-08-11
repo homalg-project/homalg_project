@@ -63,6 +63,7 @@ Print( Concatenation( "\nSelect Computer Algebra System:\n",
         " 3) Sage\n",
         " 4) MAGMA\n",
         " 5) Maple\n",
+	" 6) Singular\n",
 	":" ) );
 
 CAS := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
@@ -74,7 +75,7 @@ if n = fail then
     n := 0;
 fi;
 
-if CAS = fail or not CAS in [ 1 .. 5 ] then
+if CAS = fail or not CAS in [ 1 .. 6 ] then
     CAS := 1;
 fi;
 
@@ -92,6 +93,8 @@ else
         R := HomalgRingOfIntegersInMAGMA( n );
     elif CAS = 5 then
         R := HomalgRingOfIntegersInMaple( n );
+    elif CAS = 6 then
+        R := HomalgRingOfIntegersInSingular( n );
     fi;
 fi;
 

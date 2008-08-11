@@ -78,13 +78,16 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( CreateCohomologyMatrix, "for an internal ring",
-        [ IsSimplicialSet, IsInt, IsHomalgInternalRingRep ],
+InstallMethod( CreateCohomologyMatrix, "for internal and external rings",
+        [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( ss, d, R )
-    local S, x, matrices, k, p, i, ind, pos, res;
+    local S, x, matrices, one, minusone, k, p, i, ind, pos, res;
     
     S := x -> SimplicialSet( ss, x );
     matrices := [];
+    
+    one := One( R );
+    minusone := MinusOne( R );
     
     for k in [ 1 .. d + 1 ] do
         if Length( S(k) ) = 0 then
@@ -95,7 +98,11 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
                 for i in [ 0 .. k ] do #row iterator
                     ind := PositionSet( S(k-1), BoundaryOperator( i, S(k)[p], ss!.orbifold_triangulation!.mu ) );
                     if not ind = fail then
-                        AddToEntryOfHomalgMatrix( matrices[k], ind, p, MinusOne( R )^i );
+                        if IsEvenInt( i ) then
+                            AddToEntryOfHomalgMatrix( matrices[k], ind, p, one );
+                        else
+                            AddToEntryOfHomalgMatrix( matrices[k], ind, p, minusone );
+                        fi;
                     fi;
                 od;
             od;
@@ -103,7 +110,9 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
 	ResetFilterObj( matrices[k], IsInitialMatrix );
 	ResetFilterObj( matrices[k], IsMutableMatrix );
     od;
-    
+
+    return matrices;
+        
   end
 );
   
@@ -128,7 +137,7 @@ InstallMethod( CreateCohomologyMatrix, "for an internal ring",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( CreateHomologyMatrix, "for any ring",
+InstallMethod( CreateHomologyMatrix, "for internal and external rings",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
   function( s, d, R )
     return List( CreateCohomologyMatrix( s, d, R ), Involution );
@@ -136,16 +145,16 @@ InstallMethod( CreateHomologyMatrix, "for any ring",
 );
 
 ## create the matrices interally, then push them via file transfer
-InstallMethod( CreateCohomologyMatrix, "for an external ring",
-        [ IsSimplicialSet, IsInt, IsHomalgExternalRingRep ],
-  function( s, d, R )
-    local internal_ring;
-    internal_ring := HomalgRingOfIntegers();
-    return List( CreateCohomologyMatrix( s, d, internal_ring ),
-      function(m)
-        SetExtractHomalgMatrixToFile( m, true );
-        return HomalgMatrix( m, R );
-      end );
-  end
-);
+#InstallMethod( CreateCohomologyMatrix, "for an external ring",
+#        [ IsSimplicialSet, IsInt, IsHomalgExternalRingRep ],
+#  function( s, d, R )
+#    local internal_ring;
+#    internal_ring := HomalgRingOfIntegers();
+#    return List( CreateCohomologyMatrix( s, d, internal_ring ),
+#      function(m)
+#        SetExtractHomalgMatrixToFile( m, true );
+#        return HomalgMatrix( m, R );
+#      end );
+#  end
+#);
 
