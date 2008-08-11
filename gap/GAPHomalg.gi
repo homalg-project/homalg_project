@@ -90,6 +90,30 @@ end );
 
 ####################################
 #
+# methods for attributes:
+#
+####################################
+
+## this is a service for SCO:
+InstallMethod( RowRankOfMatrix,
+        "for homalg matrices",
+        [ IsHomalgExternalMatrixRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgExternalRingInGAPRep( R ) then
+        return Int( homalgSendBlocking( [ "RowRankOfMatrix(", M, ")" ], "need_output" ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
