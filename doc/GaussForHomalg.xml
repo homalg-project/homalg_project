@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+ [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+   <!ENTITY Gauss "<Package>Gauss</Package>">
+   <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY homalg "<Package>homalg</Package>">
+   <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+   <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+ ]>
 
 <!--
 
@@ -13,48 +21,22 @@
 
 <Book Name="GaussForHomalg">
 
-<TitlePage>
-    <Title>GAP 4 Package <Package>GaussForHomalg</Package></Title>
-    <Subtitle>GaussForHomalg --- Gauss Functionality for homalg</Subtitle>
-    <Version>
-      Version <#Include SYSTEM "../VERSION">
-    </Version>
-    <Author>Simon Goertzen
-<Address>
-Lehrstuhl B für Mathematik,
-RWTH Aachen,
-Templergraben 64,
-52056 Aachen,
-Germany
-</Address>
-    <Email>simon.goertzen@rwth-aachen.de</Email>
-    <Homepage>http://www.math.rwth-aachen.de/&tilde;simon</Homepage>
-    </Author>
-    <Date>May 2008 </Date>
+<#Include SYSTEM "title.xml">
 
-<Copyright>
-  &copyright; 2008 by Simon Goertzen<P/>
-
-  This package may be distributed under the terms and conditions of the
-  GNU Public License Version 2.
-</Copyright>
-
-</TitlePage>
-
-<!--  TableOfContents  . . . . . .  generate a table of contents   -->
 <TableOfContents/>
 
-<!--  The only chapter of the book  --> 
 <Body>
+
 <#Include SYSTEM "intro.xml">
-<#Include SYSTEM "install.xml">
-<#Include SYSTEM "examples.xml">
+<#Include SYSTEM "usage.xml">
+<#Include SYSTEM "methods.xml">
+
 </Body>
 
-<Bibliography Databases="GaussForHomalg"/>
+<#Include SYSTEM "appendix.xml">
 
-<!--  And finally an index as well   -->
+<Bibliography Databases="GaussForHomalgBib.xml"/>
+
 <TheIndex/>
 
 </Book>
-

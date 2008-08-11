@@ -26,13 +26,13 @@ Subtitle := "GaussForHomalg - Gauss Functionality for homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.06.30",
+Version := "2008.08.11",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "30/06/2008",
+Date := "11/08/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "30/06/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~simon/gap/GaussForHomalg",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/goertzen/GaussForHomalg/GaussForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -122,7 +122,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen",
     PostalAddress := Concatenation( [
                        "Simon Goertzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -166,9 +166,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/gap/GaussForHomalg/README.GaussForHomalg",
+  "http://wwwb.math.rwth-aachen.de/goertzen/GaussForHomalg/README.GaussForHomalg",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/gap/GaussForHomalg/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/goertzen/gap/GaussForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -218,8 +218,8 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "GaussForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-    "http://wwwb.math.rwth-aachen.de/~simon/gap/GaussForHomalg/GaussForHomalgDoc.tar.gz",
+  Archive :=
+    "http://wwwb.math.rwth-aachen.de/goertzen/GaussForHomalg/GaussForHomalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -244,7 +244,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["Gauss", ">=2008.07.24"],["homalg", ">=2008.07.20"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["Gauss", ">=2008.08.08"],["homalg", ">=2008.08.10"]],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [ ],
   # needed external conditions (programs, operating system, ...)  provide 

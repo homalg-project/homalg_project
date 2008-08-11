@@ -20,7 +20,6 @@ if IsBound( HOMALG.OtherInternalMatrixTypes ) then
 else
     HOMALG.OtherInternalMatrixTypes := [ IsSparseMatrix ];
 fi;
-
 ##
 
 InstallValue( CommonHomalgTableForGaussTools,
@@ -102,11 +101,10 @@ InstallValue( CommonHomalgTableForGaussTools,
                    
                  end,
                
-               # FIXME: not yet implemented    
                KroneckerMat :=
                  function( A, B )
                    
-                   return SparseMatrix( KroneckerProduct( ConvertSparseMatrixToMatrix( Eval( A ) ), ConvertSparseMatrixToMatrix( Eval( B ) ) ) );
+                   return SparseKroneckerProduct( Eval( A ), Eval( B ) );
                    
                  end,
                
@@ -158,69 +156,13 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return SparseZeroRows( Eval( C ) );
                    
                  end,
-               
-               # FIXME: not yet implemented (see below)    
+
                ZeroColumns :=
                  function( C )
 
                    return SparseZeroColumns( Eval( C ) );
                    
                  end,
-               
-               XConvertRowToMatrix :=
-                 function( M, r, c )
-                   
-                   return true;
-                   
-                 end,
-               
-               XConvertColumnToMatrix :=
-                 function( M, r, c )
-                   
-                   return true;
-                   
-                 end,
-               
-               XConvertMatrixToRow :=
-                 function( M )
-                   
-                   return true;
-                   
-                 end,
-               
-               XConvertMatrixToColumn :=
-                 function( M )
-                   
-                   return true;
-                   
-                 end,
-               
-               XGetUnitPosition :=
-                 function( M, pos_list )
 
-                       return true;
-                 end,
-                 
-               XGetCleanRowsPositions :=
-                 function( M, clean_columns )
-
-                       return true;
-                   
-                 end,
-                 
-               XGetColumnIndependentUnitPositions :=
-                 function( M, pos_list )
-                   
-                   return true;
-                   
-                 end,
-                 
-               XGetRowIndependentUnitPositions :=
-                 function( M, pos_list )
-                   
-                   return true;
-                   
-                 end,
-                 
         )
  );

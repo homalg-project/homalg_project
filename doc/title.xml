@@ -1,0 +1,52 @@
+<!-- 
+
+  title.xml            GaussForHomalg package documentation                  Simon Goertzen
+                                                                     
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the title page.
+
+-->
+
+<TitlePage>
+    <Title>The &GaussForHomalg; Package Manual</Title>
+    <Subtitle>&Gauss; Functionality for &homalg;</Subtitle>
+    <Version>
+      Version <#Include SYSTEM "../VERSION">
+    </Version>
+    <Author>Simon Goertzen<Br/>
+<Address>
+Lehrstuhl B für Mathematik<Br/>
+RWTH Aachen<Br/>
+Templergraben 64<Br/>
+52062 Aachen<Br/>
+(Germany)<Br/>
+</Address>
+    <Email>simon.goertzen@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen</Homepage>
+    </Author>
+    <Date>July 2008 </Date>
+
+<Copyright>
+  &copyright; 2007-2008 by Simon Goertzen<P/>
+  This package may be distributed under the terms and conditions of
+  the GNU Public License Version 2.
+</Copyright>
+  <Abstract>This document explains the primary uses of the &GaussForHomalg;
+            package. Included in this manual is a documented list of
+            the most important methods and functions you will
+            need.
+  </Abstract>
+
+  <Acknowledgements>Many thanks to Mohamed Barakat
+  and the Lehrstuhl B für Mathematik at RWTH Aachen University in
+  general for their support. It should be noted that &GaussForHomalg;
+  is dependant on the &GAP; &homalg; package by M. Barakat <Cite
+  Key="homalg"/>, as well as the &Gauss; package by myself <Cite
+  Key="Gauss"/>. This should be clear as &GaussForHomalg; presents a
+  link between these two packages. This manual was created with the help of the &GAPDoc;
+  package by M. Neunhöffer and F. Lübeck <Cite Key="GAPDoc"/>.
+  </Acknowledgements>
+
+</TitlePage>

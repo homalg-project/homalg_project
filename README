@@ -1,16 +1,10 @@
-    README file for the `GaussForHomalg' GAP4 package
+    Readme file for the `GaussForHomalg' GAP4 package
         
-To get the newest version of this GAP 4 package download one of the
-archive files
-    GaussForHomalg-x.x.tar.gz
-    GaussForHomalg-x.x.zoo
-    GaussForHomalg-x.x.tar.bz2
-    GaussForHomalg-x.x.zip
+To get the newest version of this GAP 4 package download the archive
+file
+    GaussForHomalg.tar.gz
 and unpack it using 
-    gunzip GaussForHomalg-x.x.tar.gz; tar xvf GaussForHomalg-x.x.tar
-respectively
-    unzoo -x GaussForHomalg-x.x.zoo
-and so on.
+    gunzip GaussForHomalg.tar.gz; tar xvf GaussForHomalg.tar
 
 (Note that if you use a browser like `netscape' for downloading the
 archive file the `gunzip' step above may already be done by the browser,

@@ -13,26 +13,20 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="philosophy">
-<Heading>Philosophy</Heading>
-
-This package is about how to implement rings for the GAP package homalg. To be written further.
-</Section>
-
 <Section Label="overview">
 <Heading>Overview over this manual</Heading>
 
-Chapter <Ref Chap="install"/> describes the installation of this package.
-
-<E>More text on other chapters to be written.</E><P/>
-
-Finally, Chapter <Ref Chap="examples"/>
-shows instructive examples for the usage of this package.
-
-The main reference for the Maple implementation is <Cite Key="BR"/>.
+Chapter <Ref Chap="intro"/> is concerned with the technical details of
+installing and running this package. Chapter <Ref Chap="usage"/>
+explains how &GaussForHomalg; works and what you need to know to
+extend &homalg; with your own rings. Also included in this manual is a
+documented list of the most important methods and functions for this
+linking process. Anyone interested in source code should just check
+out the files in the <F>gap/pkg/GaussForHomalg/gap</F> folder (&see;
+Appendix <Ref Label="FileOverview"/>).
 
 </Section>
 
-<!-- ############################################################ -->
+<#Include SYSTEM "install.xml"/>
 
 </Chapter>

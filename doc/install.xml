@@ -9,23 +9,18 @@ This is the chapter of the documentation describing the installation.
 
 -->
 
-<Chapter Label="install">
-<Heading>Installation of the <Package>GaussForHomalg</Package>-Package</Heading>
-<Index><Package>GaussForHomalg</Package></Index>
+<Section Label="install">
+<Heading>Installation of the &GaussForHomalg;-Package</Heading>
+<Index>&GaussForHomalg;</Index>
 
 To install this  package just extract the package's  archive file to
-the  GAP  <F>pkg</F>  directory.<P/>
+the  GAP  <F>pkg</F>  directory. By default the &GaussForHomalg; package is not
+automatically loaded by &GAP; when it is installed. You must load the
+package with <C>LoadPackage("GaussForHomalg");</C> before its functions become
+available. Please, send me an e-mail if you have any questions, remarks,
+suggestions, etc. concerning &GaussForHomalg;. Also, I would like to hear
+about applications of this package.<Br/>
 
-By default the <Package>GaussForHomalg</Package> package is not automatically
-loaded by &GAP; when it is installed. You must load the package with
-<C>LoadPackage("GaussForHomalg");</C> before its functions become available.<P/>
+Simon Goertzen<Br/>
 
-Please, send us an e-mail if you have any questions, remarks,
-suggestions, etc. concerning this package. Also, I would like to hear
-about applications of this package.<P/>
-
-Simon Görtzen<P/>
-
-<!-- ############################################################ -->
-
-</Chapter>
+</Section>

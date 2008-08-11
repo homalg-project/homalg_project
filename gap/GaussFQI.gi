@@ -18,7 +18,7 @@ InstallMethod( CreateHomalgTable,
         "for Z / p^n * Z",
         [ IsRing and IsFinite ],
         
-  function( ext_ring_obj )
+  function( R )
     local RP, RP_default, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForGaussTools );
@@ -97,5 +97,29 @@ InstallMethod( GetEntryOfHomalgMatrix,
         return GetEntry( Eval( M ), i, j ); #calls GetEntry for sparse matrices
     fi;
     TryNextMethod();
+  end
+);
+  
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+  function( M, i, j, e, R )
+    if IsSparseMatrix( Eval( M ) ) then
+        SetEntry( Eval( M ), i, j, e ); #calls SetEntry for sparse matrices
+    else
+        TryNextMethod();
+    fi;
+  end
+);
+  
+##
+InstallMethod( AddToEntryOfHomalgMatrix,
+        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+  function( M, i, j, e, R )
+    if IsSparseMatrix( Eval( M ) ) then
+        AddToEntry( Eval( M ), i, j, e ); #calls AddToEntry for sparse matrices
+    else
+        TryNextMethod();
+    fi;
   end
 );
