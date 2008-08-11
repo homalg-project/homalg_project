@@ -265,6 +265,8 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     MM := LoadDataOfHomalgMatrixFromFile( filename, r, c, RR ); # matrix in target ring
     
+    ResetFilterObj( MM, IsVoidMatrix );
+    
     if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
         Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
     fi;

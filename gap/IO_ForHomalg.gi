@@ -75,6 +75,7 @@ InstallValue( HOMALG_IO,
                 SaveDataOfHomalgMatrixToFile		:= "A>>",	## save a matrix to file
                 GetEntryOfHomalgMatrix			:= "<ij",	## get a matrix entry as a string
                 SetEntryOfHomalgMatrix			:= ">ij",	## set a matrix entry from a string
+                AddToEntryOfHomalgMatrix		:= "+ij",	## add to a matrix entry from a string
                 GetListOfHomalgMatrixAsString		:= "\"A\"",	## get a list of the matrix entries as a string
                 GetListListOfHomalgMatrixAsString	:= "\"A\"",	## get a listlist of the matrix entries as a string
                 GetSparseListOfHomalgMatrixAsString	:= ".A.",	## get a "sparse" list of the matrix entries as a string
