@@ -26,13 +26,13 @@ Subtitle := "Gauss - Extended Gauss Functionality for GAP",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.08.08",
+Version := "2008.08.11",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "08/08/2008",
+Date := "11/08/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "08/08/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~simon/Gauss",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/goertzen/Gauss",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -122,7 +122,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen",
     PostalAddress := Concatenation( [
                        "Simon Goertzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -166,9 +166,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/Gauss/README.Gauss",
+  "http://wwwb.math.rwth-aachen.de/goertzen/Gauss/README.Gauss",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~simon/Gauss/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/goertzen/Gauss/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 

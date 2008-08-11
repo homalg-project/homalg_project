@@ -647,6 +647,15 @@ InstallMethod( \+,
   end
 );
 
+##
+InstallMethod( \-,
+        [ IsSparseMatrix, IsSparseMatrix ],
+  function( A, B )
+    return A + ( - One( B!.ring ) ) * B;
+  end
+);
+  
+
 ##  <#GAPDoc Label="nrows">
 ##  <ManSection >
 ##  <Meth Arg="sm" Name="nrows" />

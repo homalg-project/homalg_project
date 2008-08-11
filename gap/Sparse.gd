@@ -23,11 +23,5 @@ DeclareOperation( "ReduceMatTransformation",
 
 DeclareGlobalFunction( "KernelMatSparse" );
 
-#DeclareOperation( "Rank",
-#        [ IsSparseMatrix ] );
-#
-#DeclareOperation( "Rank", #Rank with a known upper boundary
-#        [ IsSparseMatrix, IsInt ] );
-
 DeclareGlobalFunction( "RankOfIndicesListList" );
 

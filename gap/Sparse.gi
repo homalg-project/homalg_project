@@ -390,7 +390,7 @@ InstallGlobalFunction( KernelMatSparse,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallOtherMethod( Rank,
+InstallMethod( Rank,
         "method for sparse matrices",
         [ IsSparseMatrix ],
   function( mat )

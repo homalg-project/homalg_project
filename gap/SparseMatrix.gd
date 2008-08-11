@@ -53,19 +53,22 @@ DeclareOperation( "UnionOfColumns",
 
 DeclareGlobalFunction( "SparseDiagMat" );
 
-DeclareOperation( "*", #FIXME: What does SparseMatrix have to be for this to be obsolete?
+DeclareOperation( "*",
         [ IsRingElement, IsSparseMatrix ] );
 
 DeclareOperation( "*",
         [ IsSparseMatrix, IsSparseMatrix ] );
 
-DeclareOperation( "+", #see above
+DeclareOperation( "+",
         [ IsSparseMatrix, IsSparseMatrix ] );
 
-DeclareOperation( "nrows", #FIXME: NrRows led to a weird error? Maybe conflict with NrRows-attribute in homalg?
+DeclareOperation( "-",
+        [ IsSparseMatrix, IsSparseMatrix ] );
+
+DeclareOperation( "nrows",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "ncols", #see above
+DeclareOperation( "ncols",
         [ IsSparseMatrix ] );
 
 DeclareOperation( "indices",
