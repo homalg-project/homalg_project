@@ -1,101 +1,177 @@
-#temporary
-DeclareOperation( "UCT_Homology",
-        [ IsHomalgComplex, IsHomalgModule ] );
-
-InstallMethod( UCT_Homology,
-        [ IsHomalgComplex and IsGradedObject, IsHomalgModule ],
-  function( H, G )
-    local uct;
-    
-    uct := Tor( 1, Shift( H, -1 ), G ) + H * G;
-    
-    return ByASmallerPresentation( uct );
-    
-  end
-);
-
-DeclareOperation( "UCT_Cohomology",
-        [ IsHomalgComplex, IsHomalgModule ] );
-
-InstallMethod( UCT_Cohomology,
-        [ IsHomalgComplex and IsGradedObject, IsHomalgModule ],
-  function( H, G )
-    local uct;
-    
-    uct := Hom( H, G ) + Ext( 1, Shift( H, -1 ), G );
-    
-    return ByASmallerPresentation( uct );
-    
-  end
-);
-
 LoadPackage( "SCO" );
 
 input := InputTextUser();
 
 Print( "@@@@@@@@ SCO @@@@@@@@\n\n" );
 
-Print( "Select Orbifold (default=\"C2\")\n:" );
+if LoadPackage( "RingsForHomalg" ) = true then
+    
+    Print( "\nSelect base ring:\n 1) Integers (default)\n 2) Rationals\n 3) Z/nZ\n:" );
+    base := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
+    if base = fail or not base in [ 1, 2, 3 ] then
+        base := 1;
+    fi;
+    
+    if base = 1 then
+        n := 0;
+    fi;
+    
+    if base = 3 then
+        Print( "\nPlease type in the value of 'n' (default = 2)\n:" );
+        n := Int( Filtered( ReadLine( input ), c -> c <> '\n' ) );
+        if n = fail or n <= 0 then
+            n := 2;
+        fi;
+        if not IsPrime( n ) then
+            base := 4;
+        fi;
+    fi;
+    
+    Names_of_CAS := [ "GAP", "External GAP", "Sage", "MAGMA", "Maple", "Singular" ];
+    List_of_CAS := [ "", "ExternalGAP", "Sage", "MAGMA", "Maple", "Singular" ];
+    
+    if base = 1 then #Z
+        sublist := [ 1, 2, 3, 4, 5 ];
+    else
+        
+        if base = 2 then #Q
+            sublist := [ 4, 5, 6 ];
+        elif base = 3 then #Z/pZ
+            sublist := [ 4, 5, 6 ];
+        elif base = 4 then  #Z/nZ
+            sublist := [ 5 ];
+        fi;
+        
+        if LoadPackage( "GaussForHomalg" ) = true then
+            sublist := Concatenation( [ 1, 2 ], sublist );
+        else
+            Print( "\nYou do not have the GaussForHomalg package installed. Try it for extended GAP functionality.\n" );
+        fi;
+        
+    fi;
+    
+    Print( "\nSelect Computer Algebra System:\n" );
+    for i in [ 1 .. Length( sublist ) ] do
+        str := Names_of_CAS[sublist[i]];
+        Print( " ", i, ") ", str );
+        if i = 1 then
+            Print( " (default)" );
+        fi;
+        Print( "\n" );
+    od;
+    Print( ":" );
+    
+    CAS := Int( Filtered( ReadLine( input ), c -> c <> '\n' ) );
+    
+    if CAS = fail or not CAS in [ 1 .. Length( sublist ) ] then
+        CAS := 1;
+    fi;
+    
+    CAS := sublist[ CAS ];
+    
+    if CAS in [ 1, 2 ] then
+        if base = 1 then
+            Print( "\nAll computations will be done with GAP dense matrices.\n" );
+        fi;
+        if base in [ 2, 3 ] then
+            Print( "\nYou have the choice to work with sparse or dense matrices:\n" );
+            Print( " 1) sparse (default)\n 2) dense\n:" );
+            matrix := Int( Filtered( ReadLine( input ), c -> c <> '\n' ) );
+            if matrix = 2 then
+                HOMALG.PreferDenseMatrices := true;
+            fi;
+        fi;
+        if base = 4 then
+            Print( "\nAll computations will be done with Gauss sparse matrices.\n" );
+        fi;
+    fi;
+    
+    if base = 2 then
+        HOMALG_RINGS.FieldOfRationalsDefaultCAS := List_of_CAS[ CAS ];
+        R := HomalgFieldOfRationalsInDefaultCAS( );
+    else
+        HOMALG_RINGS.RingOfIntegersDefaultCAS := List_of_CAS[ CAS ];
+        R := HomalgRingOfIntegersInDefaultCAS( n );
+    fi;
+    
+else
+    
+    Print( "\nYou do not have the RingsForHomalg package installed, therefore you can only work with GAP.\n" );
+    
+    if LoadPackage( "GaussForHomalg" ) = true then
+        
+        Print( "\nSelect base ring:\n 1) Integers (default)\n 2) Rationals\n 3) Z/nZ\n:" );
+        base := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
+        if base = fail or not base in [ 1, 2, 3 ] then
+            base := 1;
+        fi;
+        
+        if base = 3 then
+            Print( "\nPlease type in the value of 'n' (default = 2)\n:" );
+            n := Int( Filtered( ReadLine( input ), c -> c <> '\n' ) );
+            if n = fail or not n in Integers then
+                n := 2;
+            elif not IsPrime( n ) then
+                base := 4;
+            fi;
+        fi;
+        
+        if base = 1 then
+            Print( "\nAll computations will be done with GAP dense matrices.\n" );
+            R := HomalgRingOfIntegers( );
+        fi;
+        if base in [ 2, 3 ] then
+            Print( "\nYou have the choice to work with sparse or dense matrices:\n" );
+            Print( " 1) sparse (default)\n 2) dense\n:" );
+            matrix := Int( Filtered( ReadLine( input ), c -> c <> '\n' ) );
+            if matrix = 2 then
+                HOMALG.PreferDenseMatrices := true;
+            fi;
+        fi;
+        
+        if base = 2 then
+            R := HomalgFieldOfRationals( );
+        elif base = 3 then
+            R := HomalgRingOfIntegers( n );
+        fi;
+        
+        if base = 4 then
+            Print( "\nAll computations will be done with Gauss sparse matrices.\n" );
+            R := HomalgRingOfIntegers( n );
+        fi;
+        
+    else
+        
+        Print( "\nYou do not have the GaussForHomalg package installed, therefore you can only work over the Integers.\n" );
+        
+        R := HomalgRingOfIntegers( );
+        
+    fi;
+    
+fi;
+
+HOMALG.PreferDenseMatrices := false;
+
+if IsIntegralDomain( R ) then
+    
+    Print( "\nSelect Method:\n 1) Full syzygy computation (default)\n 2) matrix creation and rank computation only\n:" );
+    method := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
+    
+    if method = fail or not method in [ 1, 2 ] then
+        method := 1;
+    fi;
+    
+else
+    method := 1;
+fi;
+
+Print( "\nSelect orbifold (default=\"C2\")\n:" );
 orbifold := Filtered( ReadLine( input ), c->c<>'\n' );
 if orbifold = "" then
     orbifold := "C2.g";
 fi;
 if orbifold{[Length( orbifold ) - 1, Length( orbifold )]} <> ".g" then
     Append( orbifold, ".g" );
-fi;
-
-Print( "\nSelect Mode:\n 1) Cohomology (default)\n 2) Homology\n:" );
-mode := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
-if mode = fail or not mode in [ 1, 2 ] then
-    mode := 1;
-fi;
-
-Print( "\nSelect Method:\n 1) Full syzygy computation (default)\n 2) matrix creation and rank computation only\n:" );
-method := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
-
-if method = fail or not method in [ 1, 2 ] then
-    method := 1;
-fi;
-
-Print( Concatenation( "\nSelect Computer Algebra System:\n",
-        " 1) Internal GAP (default)\n",
-        " 2) External GAP\n",
-        " 3) Sage\n",
-        " 4) MAGMA\n",
-        " 5) Maple\n",
-	" 6) Singular\n",
-	":" ) );
-
-CAS := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
-
-Print( "\nSelect Z/nZ (default: n=0)\n:" );
-n := Int( Filtered( ReadLine( input ), c -> c<>'\n' ) );
-
-if n = fail then
-    n := 0;
-fi;
-
-if CAS = fail or not CAS in [ 1 .. 6 ] then
-    CAS := 1;
-fi;
-
-LoadPackage( "homalg" );
-
-if CAS = 1 then
-    R := HomalgRingOfIntegers( n );
-else
-    LoadPackage( "RingsForHomalg" );
-    if CAS = 2 then
-        R := HomalgRingOfIntegersInExternalGAP( n );
-    elif CAS = 3 then
-        R := HomalgRingOfIntegersInSage( n );
-    elif CAS = 4 then
-        R := HomalgRingOfIntegersInMAGMA( n );
-    elif CAS = 5 then
-        R := HomalgRingOfIntegersInMaple( n );
-    elif CAS = 6 then
-        R := HomalgRingOfIntegersInSingular( n );
-    fi;
 fi;
 
 if IsBound( PackageInfo( "SCO" )[1] ) and IsBound( PackageInfo( "SCO" )[1].InstallationPath ) then
@@ -118,16 +194,22 @@ info := "";
 
 Read( Concatenation( directory, "examples", separator, "orbifolds", separator, orbifold ) );
 
+if info = "" then
+    info := orbifold{ [ 1 .. Length( orbifold ) - 2 ] };
+fi;
+
+Print( "\nSelect mode:\n 1) Cohomology (default)\n 2) Homology\n:" );
+mode := Int( Filtered( ReadLine( input ), c->c <> '\n' ) );
+if mode = fail or not mode in [ 1, 2 ] then
+    mode := 1;
+fi;
+
 Print( Concatenation( "\nSelect dimension (default = ", String( dim ), ")\n:" ) );
 
 d := Int( Filtered( ReadLine( input ), c -> c<>'\n' ) );
 
 if d <= 0 or d = fail then
     d := dim;
-fi;
-
-if info = "" then
-    info := orbifold{ [ 1 .. Length( orbifold ) - 2 ] };
 fi;
 
 ot := OrbifoldTriangulation( M, iso, mu, info );
