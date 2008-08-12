@@ -39,6 +39,13 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                  
+	       RowRankOfMatrixOverDomain :=
+	         function( M )
+                     
+                     return homalgSendBlocking( [ "Rank(", M, ")" ], "need_output" );
+                     
+	         end,
+               
                ## Must be defined if other functions are not defined
                
                TriangularBasisOfRows :=
@@ -78,7 +85,7 @@ InstallMethod( CreateHomalgTable,
                    return N;
                    
                  end
-               
+                 
           );
     
     for component in NamesOfComponents( RP_BestBasis ) do
