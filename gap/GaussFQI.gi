@@ -65,9 +65,11 @@ InstallMethod( CreateHomalgTable,
                    
                    SetNrColumns( H, NrColumns( M ) );
 		   
-                   if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+                   #if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
 		     SetRowRankOfMatrix( H, NrRows( H ) );
-	           fi;
+	           #fi;
+		   
+		   SetZeroRows( H, [] );
 		   
                    SetIsUpperTriangularMatrix( H, true );
                    

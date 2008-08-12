@@ -17,7 +17,7 @@ towww: archive
 	echo '<mixer>' >>${WEBPOS}.version
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
-#	cp PackageInfo.g ${WEBPOS}
+	cp PackageInfo.g ${WEBPOS}
 	cp README ${WEBPOS}/README.GaussForHomalg
 	cp doc/manual.pdf ${WEBPOS}/GaussForHomalg.pdf
 	cp ../tar/GaussForHomalg.tar.gz ${WEBPOS}
