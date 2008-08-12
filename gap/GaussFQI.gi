@@ -31,7 +31,7 @@ InstallMethod( CreateHomalgTable,
     
     RP_specific := rec( 
                ## Must be defined if other functions are not defined
-                   
+               
                TriangularBasisOfRows := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
                  function( arg )
                    local M, R, nargs, result, N, H;
@@ -64,19 +64,21 @@ InstallMethod( CreateHomalgTable,
                    fi;
                    
                    SetNrColumns( H, NrColumns( M ) );
-                   SetRowRankOfMatrix( H, NrRows( H ) );
-                   SetRowRankOfMatrix( M, NrRows( H ) );
 		   
-                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
-                       SetIsDiagonalMatrix( H, true );   
-                   else
-                       SetIsUpperTriangularMatrix( H, true );
-                   fi;
+                   if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+		     SetRowRankOfMatrix( H, NrRows( H ) );
+	           fi;
+		   
+                   SetIsUpperTriangularMatrix( H, true );
                    
                    return H;
                    
-                 end
+                 end,
                  
+		 RowRankOfMatrixOverDomain :=
+		   function( M )
+		     return Rank( MyEval( M ) );
+                   end
           );
                  
     for component in NamesOfComponents( RP_default ) do
