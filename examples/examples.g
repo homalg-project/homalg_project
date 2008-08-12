@@ -1,6 +1,8 @@
 LoadPackage( "SCO" );
 
-input := InputTextUser();
+if not IsBound(input) then
+    input := InputTextUser();
+fi;
 
 Print( "@@@@@@@@ SCO @@@@@@@@\n\n" );
 
