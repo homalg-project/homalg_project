@@ -46,6 +46,13 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                  
+               RowRankOfMatrixOverDomain :=
+	         function( M )
+                     
+                     return homalgSendBlocking( [ "RowRankOfMatrix(", M, ")" ], "need_output" );
+                     
+	         end,
+               
                ## Must be defined if other functions are not defined
                
                TriangularBasisOfRows :=
@@ -85,7 +92,7 @@ InstallMethod( CreateHomalgTable,
                    return N;
                    
                  end
-               
+		 
           );
     
     if homalgSendBlocking( [ "IsBound(homalgTable(", ext_ring_obj, ")!.BestBasis)" ], "need_output", HOMALG_IO.Pictograms.initialize ) = "true" then

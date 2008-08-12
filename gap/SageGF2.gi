@@ -28,7 +28,13 @@ InstallMethod( CreateHomalgTable,
     
     RP_specific :=
           rec(
-               ## Must be defined if other functions are not defined
+
+	       RowRankOfMatrix :=
+	         function( M )
+		   return homalgSendBlocking( [ M, ".rank()" ], "need_output" );
+	         end,
+	      
+	       ## Must be defined if other functions are not defined
                
                TriangularBasisOfRows :=
                  function( arg )
@@ -85,8 +91,8 @@ InstallMethod( CreateHomalgTable,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                    
-               MinusOne := HomalgExternalRingElement( "1", "Sage", IsOne ) ## CAUTION: only over GF(2)
-               
+               MinusOne := HomalgExternalRingElement( "1", "Sage", IsOne ), ## CAUTION: only over GF(2)
+
           );
     
     for component in NamesOfComponents( RP_BestBasis ) do
