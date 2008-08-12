@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  GaussFQI.gi              GaussForHomalg package        Simon Goertzen
+##  GaussRationals.gi           GaussForHomalg package        Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Homalg Table for Z / p^n * Z in GAP with the Gauss package
+##  Homalg Table for Q in GAP with the Gauss package
 ##
 #############################################################################
 
@@ -15,8 +15,8 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for Z / p^n * Z",
-        [ IsRing and IsFinite ],
+        "for Q",
+        [ IsRationals ],
         
   function( R )
     local RP, RP_default, RP_specific, component;
@@ -75,7 +75,7 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                  
-		 RowRankOfMatrixOverDomain :=
+		 RowRankOfMatrix :=
 		   function( M )
 		     return Rank( MyEval( M ) );
                    end
