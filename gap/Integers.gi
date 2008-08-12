@@ -76,16 +76,23 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               RowRankOfMatrix :=
+                 function( M )
+                   
+                   return Rank( Eval( M )!.matrix );
+                   
+                 end,
+               
                ElementaryDivisors :=
                  function( arg )
-                   local M;    
+                   local M;
                    
                    M := arg[1];
                    
                    return ElementaryDivisorsMat( Eval( M )!.matrix );
                    
                  end,
-                   
+               
                ## Must be defined if other functions are not defined
                    
                TriangularBasisOfRows :=
@@ -119,11 +126,7 @@ InstallMethod( CreateHomalgTable,
                    SetNrColumns( H, NrColumns( M ) );
                    SetRowRankOfMatrix( H, N.rank );
                    
-                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
-                       SetIsDiagonalMatrix( H, true );   
-                   else
-                       SetIsUpperTriangularMatrix( H, true );
-                   fi;
+                   SetIsUpperTriangularMatrix( H, true );
                    
                    return H;
                    

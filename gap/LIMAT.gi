@@ -474,13 +474,18 @@ InstallMethod( RowRankOfMatrix,
     
     RP := homalgTable( HomalgRing( M ) );
     
-    if IsBound( RP!.TriangularBasisOfRows ) then
+    if IsBound( RP!.RowRankOfMatrix ) then
+        
+        return RP!.RowRankOfMatrix( M );
+        
+    elif IsBound( RP!.TriangularBasisOfRows ) then
         
         B := RP!.TriangularBasisOfRows( M );
         
         if HasRowRankOfMatrix( B ) then
             return RowRankOfMatrix( B );
         fi;
+	
     else
         
         BasisOfRowModule( M );
@@ -488,24 +493,7 @@ InstallMethod( RowRankOfMatrix,
         if HasRowRankOfMatrix( M ) then
             return RowRankOfMatrix( M );
         fi;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( RowRankOfMatrix,
-        "for homalg matrices",
-        [ IsHomalgInternalMatrixRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsFieldForHomalg( R ) then
-        return Rank( Eval( M ) );
+	
     fi;
     
     TryNextMethod( );
@@ -526,7 +514,15 @@ InstallMethod( ColumnRankOfMatrix,
     
     RP := homalgTable( HomalgRing( M ) );
     
-    if IsBound( RP!.TriangularBasisOfColumns ) then
+    if IsBound( RP!.ColumnRankOfMatrix ) then
+        
+        return RP!.ColumnRankOfMatrix( M );
+        
+    elif IsBound( RP!.RowRankOfMatrix ) then
+        
+        return RP!.RowRankOfMatrix( Involution( M ) );	## in most cases Involution is obsolete
+        
+    elif IsBound( RP!.TriangularBasisOfColumns ) then
         
         B := RP!.TriangularBasisOfColumns( M );
         
@@ -543,6 +539,7 @@ InstallMethod( ColumnRankOfMatrix,
         if HasRowRankOfMatrix( B ) then
             return RowRankOfMatrix( B );
         fi;
+	
     else
         
         BasisOfColumnModule( M );
@@ -550,24 +547,6 @@ InstallMethod( ColumnRankOfMatrix,
         if HasColumnRankOfMatrix( M ) then
             return ColumnRankOfMatrix( M );
         fi;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( ColumnRankOfMatrix,
-        "for homalg matrices",
-        [ IsHomalgInternalMatrixRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if IsFieldForHomalg( R ) then
-        return Rank( Eval( M ) );
     fi;
     
     TryNextMethod( );

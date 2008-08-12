@@ -36,6 +36,9 @@ InstallValue( LogicalImplicationsForHomalgRings,
           
           ## IsDivisionRingForHomalg (a division ring)
           [ IsDivisionRingForHomalg,
+            "implies", IsIntegralDomain ],
+          
+          [ IsDivisionRingForHomalg,
             "implies", IsLocalRing ],
           
           [ IsDivisionRingForHomalg,

@@ -329,8 +329,19 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing and IsFieldForHomalg, IsInt ],
         
   function( R, c )
+    local RP;
+    
+    RP := homalgTable( R );
     
     SetCharacteristic( R, c );
+    
+    if IsBound( RP!.RowRankOfMatrixOverDomain ) then
+        RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
+    fi;
+    
+    if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
+        RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
+    fi;
     
     SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
     
@@ -342,14 +353,16 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing and IsResidueClassRingOfTheIntegers, IsInt ],
         
   function( R, c )
-    local powers;
+    local RP, powers;
+    
+    RP := homalgTable( R );
     
     SetCharacteristic( R, c );
     
     if c = 0 then
         SetIsIntegersForHomalg( R, true );
         SetContainsAField( R, false );
-	SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
+        SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
     elif IsPrime( c ) then
         SetIsFieldForHomalg( R, true );
     else
@@ -364,7 +377,17 @@ InstallMethod( SetRingProperties,
                 SetIsLocalRing( R, true );
             fi;
         fi;
-	SetKrullDimension( R, 0 );
+        SetKrullDimension( R, 0 );
+    fi;
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        if IsBound( RP!.RowRankOfMatrixOverDomain ) then
+            RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
+        fi;
+        
+        if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
+            RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
+        fi;
     fi;
     
     SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
@@ -541,13 +564,13 @@ InstallGlobalFunction( CreateHomalgRing,
         weak_pointers := container!.weak_pointers;
         
         l := container!.counter;
-	
+        
         deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
         
         container!.deleted := deleted;
         
-	l := l + 1;
-	
+        l := l + 1;
+        
         container!.counter := l;
         
         SetElmWPObj( weak_pointers, l, homalg_ring );
@@ -557,7 +580,7 @@ InstallGlobalFunction( CreateHomalgRing,
         if not homalgExternalCASystemPID( homalg_ring ) in List( streams, s -> s.pid ) then
             Add( streams, homalgStream( homalg_ring ) );
         fi;
-	
+        
     fi;
     
     return homalg_ring;
