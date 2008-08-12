@@ -58,11 +58,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
-                       SetIsDiagonalMatrix( N, true );
-                   else
-                       SetIsUpperTriangularMatrix( N, true );
-                   fi;
+                   SetIsUpperTriangularMatrix( N, true );
                    
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        # assign U:

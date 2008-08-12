@@ -45,13 +45,13 @@ InstallMethod( CreateHomalgTable,
                    return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", HOMALG_IO.Pictograms.ElementaryDivisors );
                    
                  end,
-                 
+               
                RowRankOfMatrixOverDomain :=
-	         function( M )
+                 function( M )
                      
-                     return homalgSendBlocking( [ "RowRankOfMatrix(", M, ")" ], "need_output" );
+                     return Int( homalgSendBlocking( [ "RowRankOfMatrix(", M, ")" ], "need_output" ) );
                      
-	         end,
+                 end,
                
                ## Must be defined if other functions are not defined
                
@@ -67,11 +67,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
-                       SetIsDiagonalMatrix( N, true );
-                   else
-                       SetIsUpperTriangularMatrix( N, true );
-                   fi;
+                   SetIsUpperTriangularMatrix( N, true );
                    
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        # assign U:
@@ -92,7 +88,7 @@ InstallMethod( CreateHomalgTable,
                    return N;
                    
                  end
-		 
+               
           );
     
     if homalgSendBlocking( [ "IsBound(homalgTable(", ext_ring_obj, ")!.BestBasis)" ], "need_output", HOMALG_IO.Pictograms.initialize ) = "true" then

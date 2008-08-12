@@ -56,18 +56,20 @@ InstallMethod( CreateHomalgTable,
                    local M;
                    
                    M:=arg[1];
-
+                   
                    return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output" );
                    
                  end,
                  
 	       RowRankOfMatrix :=
 	         function( M )
-		   return homalgSendBlocking( [ M, ".rank()" ], "need_output" );
+                   
+                   return Int( homalgSendBlocking( [ M, ".rank()" ], "need_output" ) );
+                   
 		 end,
-
-	       ## Must be defined if other functions are not defined
-                 
+               
+               ## Must be defined if other functions are not defined
+               
                TriangularBasisOfRows :=
                  function( arg )
                    local M, R, nargs, N, U, rank_of_N;
@@ -80,11 +82,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if HasIsDiagonalMatrix( M ) and IsDiagonalMatrix( M ) then
-                       SetIsDiagonalMatrix( N, true );
-                   else
-                       SetIsUpperTriangularMatrix( N, true );
-                   fi;
+                   SetIsUpperTriangularMatrix( N, true );
                    
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        # assign U:
