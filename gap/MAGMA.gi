@@ -432,6 +432,10 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
         Error( "the first argument must be an integer\n" );
     fi;
     
+    if not ( IsZero( c ) or IsPrime( c ) ) then
+        Error( "the ring Z/nZ, n nonprime, is not yet fully supported in MAGMA!\n" );
+    fi;
+    
     if IsBound( stream ) then
         R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing, stream );
     else

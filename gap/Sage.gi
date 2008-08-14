@@ -131,7 +131,7 @@ end );
 
 InstallGlobalFunction( HomalgRingOfIntegersInSage,
   function( arg )
-    local nargs, stream, c, R, command;
+    local nargs, stream, c, properties, R, command;
     
     nargs := Length( arg );
     
@@ -151,16 +151,23 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
         Error( "the first argument must be an integer\n" );
     fi;
     
-    if IsPrime(c) then
+    if not ( IsZero( c ) or IsPrime( c ) ) then
+        Error( "there is no support for Z/nZ, n nonprime, in Sage!\n" );
+    fi;
+    
+    properties := [ IsPrincipalIdealRing ];
+      
+    if IsPrime( c ) then
         command := "GF(";
+        Add( properties, IsFieldForHomalg );
     else
         command := "IntegerModRing(";
     fi;
     
     if IsBound( stream ) then
-        R := RingForHomalgInSage( [ command, c, ")" ], IsPrincipalIdealRing, stream );
+        R := RingForHomalgInSage( [ command, c, ")" ], properties, stream );
     else
-        R := RingForHomalgInSage( [ command, c, ")" ], IsPrincipalIdealRing );
+        R := RingForHomalgInSage( [ command, c, ")" ], properties );
     fi;
     
     SetIsResidueClassRingOfTheIntegers( R, true );
@@ -176,7 +183,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSage,
   function( arg )
     local ar, R;
     
-    ar := Concatenation( [ "QQ" ], [ IsPrincipalIdealRing ], arg );
+    ar := Concatenation( [ "QQ" ], [ IsPrincipalIdealRing, IsFieldForHomalg ], arg );
     
     R := CallFuncList( RingForHomalgInSage, ar );
     

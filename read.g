@@ -46,7 +46,7 @@ ReadPackage( "RingsForHomalg", "gap/SageBestBasis.gi" );
 ReadPackage( "RingsForHomalg", "gap/SageTools.gi" );
 
 ReadPackage( "RingsForHomalg", "gap/SageIntegers.gi" );
-ReadPackage( "RingsForHomalg", "gap/SageGF2.gi" );
+ReadPackage( "RingsForHomalg", "gap/SageFields.gi" );
 
 ## MAGMA
 ReadPackage( "RingsForHomalg", "gap/MAGMABasic.gi" );

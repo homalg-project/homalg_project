@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MAGMA_PIR.gd              RingsForHomalg package         Mohamed Barakat
+##  SageFields.gd              RingsForHomalg package            Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations for commutative principal ideal rings in MAGMA.
+##  Implementations for GF(p) and Q in Sage.
 ##
 #############################################################################
 
@@ -15,16 +15,31 @@
 ####################################
 
 InstallMethod( CreateHomalgTable,
-        "for the ring of integers in MAGMA",
-        [ IsHomalgExternalRingObjectInMAGMARep
-          and IsPrincipalIdealRing ],
+        "for GF(p) and Q in Sage",
+        [ IsHomalgExternalRingObjectInSageRep
+          and IsFieldForHomalg ],
         
   function( ext_ring_obj )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, command, RP_specific, component;
     
-    RP := ShallowCopy( CommonHomalgTableForMAGMATools );
+    InitializeSageTools( ext_ring_obj );
+    RP := ShallowCopy( CommonHomalgTableForSageTools );
     
-    RP_BestBasis := ShallowCopy( CommonHomalgTableForMAGMABestBasis );
+    command := Concatenation(           
+            
+            "def TriangularBasisOfRows_NU(M):\n",
+            "  MId = block_matrix([M,identity_matrix(M.base_ring(),M.nrows())],1,2)\n",
+            "  MId.echelonize()\n",
+            "  N = MId.matrix_from_columns(range( M.ncols() ))\n",
+            "  U = MId.matrix_from_columns(range( M.ncols(), M.ncols() + M.nrows()))\n",
+            "  return N, U\n\n",
+                 
+            "def TriangularBasisOfRows_N_only(M):\n",
+            "  return M.echelon_form()\n\n"
+            
+            );
+    
+    homalgSendBlocking( [ command ], "need_command", ext_ring_obj, HOMALG_IO.Pictograms.define ); ## the last procedures to initialize
     
     RP_specific :=
           rec(
@@ -32,17 +47,10 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               ElementaryDivisors :=
-                 function( M )
-                   
-                   return homalgSendBlocking( [ "ElementaryDivisors(", M, ")" ], "need_output", HOMALG_IO.Pictograms.ElementaryDivisors );
-                   
-                 end,
-               
-               RowRankOfMatrixOverDomain :=
+               RowRankOfMatrix :=
                  function( M )
                      
-                     return Int( homalgSendBlocking( [ "Rank(", M, ")" ], "need_output" ) );
+                     return Int( homalgSendBlocking( [  M, ".rank()" ], "need_output" ) );
                      
                  end,
                
@@ -70,10 +78,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := StringToInt( homalgSendBlocking( [ N, U, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
+                       rank_of_N := StringToInt( homalgSendBlocking( [ N, U, "=TriangularBasisOfRows_NU(", M, "); ", N, ".rank()" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
                    else
                        ## compute N only:
-                       rank_of_N := StringToInt( homalgSendBlocking( [ N, " := EchelonForm(", M, "); Rank(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
+                       rank_of_N := StringToInt( homalgSendBlocking( [ N, "=TriangularBasisOfRows_N_only(", M, "); ", N, ".rank()" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
                    fi;
                    
                    SetRowRankOfMatrix( N, rank_of_N );
@@ -83,10 +91,6 @@ InstallMethod( CreateHomalgTable,
                  end
                
           );
-    
-    for component in NamesOfComponents( RP_BestBasis ) do
-        RP.(component) := RP_BestBasis.(component);
-    od;
     
     for component in NamesOfComponents( RP_specific ) do
         RP.(component) := RP_specific.(component);
