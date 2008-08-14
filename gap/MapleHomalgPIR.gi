@@ -72,7 +72,7 @@ InstallMethod( CreateHomalgTable,
                        homalgSendBlocking( [ N, " := ", R, "[-1][TriangularBasis](", M, R, "[1])" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
                    fi;
                    
-                   SetIsUpperTriangularMatrix( N, true );
+                   SetIsUpperStairCaseMatrix( N, true );
                    
                    return N;
                    
