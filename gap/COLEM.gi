@@ -361,6 +361,24 @@ InstallImmediateMethod( IsRightInvertibleMatrix,
 end );
 
 ##
+InstallImmediateMethod( IsRightInvertibleMatrix,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfColumns( M );
+    
+    if ( HasIsRightInvertibleMatrix( e[1] ) and IsRightInvertibleMatrix( e[1] ) ) or
+       ( HasIsRightInvertibleMatrix( e[2] ) and IsRightInvertibleMatrix( e[2] ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsLeftInvertibleMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
@@ -389,13 +407,31 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsFullRowRankMatrix,
+InstallImmediateMethod( IsLeftInvertibleMatrix,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfRows( M );
+    
+    if ( HasIsLeftInvertibleMatrix( e[1] ) and IsLeftInvertibleMatrix( e[1] ) ) or
+       ( HasIsLeftInvertibleMatrix( e[2] ) and IsLeftInvertibleMatrix( e[2] ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftRegularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
     
-    if HasIsFullRowRankMatrix( PreEval( M ) ) then
-        return IsFullRowRankMatrix( PreEval( M ) );
+    if HasIsLeftRegularMatrix( PreEval( M ) ) then
+        return IsLeftRegularMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -403,13 +439,13 @@ InstallImmediateMethod( IsFullRowRankMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsFullRowRankMatrix,
+InstallImmediateMethod( IsLeftRegularMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
     
-    if HasIsFullColumnRankMatrix( EvalInvolution( M ) ) then
-        return IsFullColumnRankMatrix( EvalInvolution( M ) );
+    if HasIsRightRegularMatrix( EvalInvolution( M ) ) then
+        return IsRightRegularMatrix( EvalInvolution( M ) );
     fi;
     
     TryNextMethod( );
@@ -417,13 +453,13 @@ InstallImmediateMethod( IsFullRowRankMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsFullColumnRankMatrix,
+InstallImmediateMethod( IsRightRegularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
     
-    if HasIsFullColumnRankMatrix( PreEval( M ) ) then
-        return IsFullColumnRankMatrix( PreEval( M ) );
+    if HasIsRightRegularMatrix( PreEval( M ) ) then
+        return IsRightRegularMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -431,13 +467,13 @@ InstallImmediateMethod( IsFullColumnRankMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsFullColumnRankMatrix,
+InstallImmediateMethod( IsRightRegularMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
     
-    if HasIsFullRowRankMatrix( EvalInvolution( M ) ) then
-        return IsFullRowRankMatrix( EvalInvolution( M ) );
+    if HasIsLeftRegularMatrix( EvalInvolution( M ) ) then
+        return IsLeftRegularMatrix( EvalInvolution( M ) );
     fi;
     
     TryNextMethod( );
@@ -532,6 +568,100 @@ InstallImmediateMethod( IsLowerTriangularMatrix,
     
     if HasIsLowerTriangularMatrix( PreEval( M ) ) then
         return IsLowerTriangularMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperStairCaseMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsLowerStairCaseMatrix( EvalInvolution( M ) ) then
+        return IsLowerStairCaseMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperStairCaseMatrix,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainRows( M );
+    
+    if HasIsUpperStairCaseMatrix( C[1] ) and IsUpperStairCaseMatrix( C[1] )
+       and ( C[2] = NrRows( C[1] ) + [ - Length( C[2] ) .. 0 ]
+             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsUpperStairCaseMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsUpperStairCaseMatrix( PreEval( M ) ) then
+        return IsUpperStairCaseMatrix( PreEval( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerStairCaseMatrix,
+        IsHomalgMatrix and HasEvalInvolution, 0,
+        
+  function( M )
+    
+    if HasIsUpperStairCaseMatrix( EvalInvolution( M ) ) then
+        return IsUpperStairCaseMatrix( EvalInvolution( M ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerStairCaseMatrix,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local C;
+    
+    C := EvalCertainColumns( M );
+    
+    if HasIsLowerStairCaseMatrix( C[1] ) and IsLowerStairCaseMatrix( C[1] )
+       and ( C[2] = NrColumns( C[1] ) + [ - Length( C[2] ) .. 0 ]
+             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLowerStairCaseMatrix,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    
+    if HasIsLowerStairCaseMatrix( PreEval( M ) ) then
+        return IsLowerStairCaseMatrix( PreEval( M ) );
     fi;
     
     TryNextMethod( );
@@ -680,11 +810,11 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and HasIsFullRowRankMatrix and HasNrRows, 0,
+        IsHomalgMatrix and HasIsLeftRegularMatrix and HasNrRows, 0,
         
   function( M )
     
-    if IsFullRowRankMatrix( M ) then
+    if IsLeftRegularMatrix( M ) then
         return NrRows( M );
     fi;
     
@@ -804,11 +934,11 @@ end );
 
 ##
 InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and HasIsFullColumnRankMatrix and HasNrColumns, 0,
+        IsHomalgMatrix and HasIsRightRegularMatrix and HasNrColumns, 0,
         
   function( M )
     
-    if IsFullColumnRankMatrix( M ) then
+    if IsRightRegularMatrix( M ) then
         return NrColumns( M );
     fi;
     

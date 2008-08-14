@@ -57,10 +57,10 @@ InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsPermutationMatri
 InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
 
 ## a split injective morphism (of free modules) is injective
-InstallTrueMethod( IsFullRowRankMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
+InstallTrueMethod( IsLeftRegularMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
 
 ##
-InstallTrueMethod( IsFullColumnRankMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
+InstallTrueMethod( IsRightRegularMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
 
 ## an isomorphism is split injective
 InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
@@ -82,6 +82,12 @@ InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsStrictUpperTria
 
 ##
 InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsStrictLowerTriangularMatrix );
+
+##
+InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsUpperStairCaseMatrix );
+
+##
+InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsLowerStairCaseMatrix );
 
 ##
 InstallTrueMethod( IsTriangularMatrix, IsHomalgMatrix and IsUpperTriangularMatrix );
@@ -138,6 +144,26 @@ InstallImmediateMethod( IsIdentityMatrix,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasZeroRows and HasNrRows, 0,
+        
+  function( M )
+    
+    return Length( ZeroRows( M ) ) = NrRows( M );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasZeroColumns and HasNrColumns, 0,
+        
+  function( M )
+    
+    return Length( ZeroColumns( M ) ) = NrColumns( M );
     
 end );
 
@@ -204,7 +230,7 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsUpperTriangularMatrix,
+InstallImmediateMethod( IsUpperStairCaseMatrix,
         IsHomalgMatrix and HasNrRows, 0,
         
   function( M )
@@ -218,7 +244,7 @@ InstallImmediateMethod( IsUpperTriangularMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsLowerTriangularMatrix,
+InstallImmediateMethod( IsLowerStairCaseMatrix,
         IsHomalgMatrix and HasNrColumns, 0,
         
   function( M )
@@ -1578,14 +1604,21 @@ end );
 
 ##
 InstallMethod( RowRankOfMatrix,			 	## FIXME: make an extra InstallImmediateMethod when NonZeroRows( M ) is set
-        [ IsHomalgMatrix and IsTriangularMatrix ],
+        [ IsHomalgMatrix and IsUpperStairCaseMatrix ],
         
   function( M )
+    local R;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowRankOfMatrix( IsTriangularMatrix )", "\033[0m" );
+    R := HomalgRing( M );
+    
+    if not ( HasIsIntegralDomain( R ) and IsIntegralDomain( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowRankOfMatrix( IsTriangularMatrix over domain )", "\033[0m" );
     
     return Length( NonZeroRows( M ) );
-        
+    
 end );
 
 #-----------------------------------
@@ -1594,14 +1627,21 @@ end );
 
 ##
 InstallMethod( ColumnRankOfMatrix,			## FIXME: make an extra InstallImmediateMethod when NonZeroColumns( M ) is set
-        [ IsHomalgMatrix and IsTriangularMatrix ],
+        [ IsHomalgMatrix and IsLowerStairCaseMatrix ],
         
   function( M )
+    local R;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnRankOfMatrix( IsTriangularMatrix )", "\033[0m" );
+    R := HomalgRing( M );
+    
+    if not ( HasIsIntegralDomain( R ) and IsIntegralDomain( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnRankOfMatrix( IsTriangularMatrix over domain )", "\033[0m" );
     
     return Length( NonZeroColumns( M ) );
-        
+    
 end );
 
 #-----------------------------------
@@ -2225,11 +2265,14 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsFullRowRankMatrix ],
+        [ IsHomalgMatrix and IsLeftRegularMatrix ],
         
   function( M )
+    local R;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( IsFullRowRankMatrix )", "\033[0m" );
+    R := HomalgRing( M );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( IsLeftRegularMatrix )", "\033[0m" );
     
     return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
     
@@ -2332,11 +2375,14 @@ end );
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsFullColumnRankMatrix ],
+        [ IsHomalgMatrix and IsRightRegularMatrix ],
         
   function( M )
+    local R;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( IsFullColumnRankMatrix )", "\033[0m" );
+    R := HomalgRing( M );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( IsRightRegularMatrix )", "\033[0m" );
     
     return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
     

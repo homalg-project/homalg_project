@@ -56,10 +56,10 @@ DeclareProperty( "IsPermutationMatrix",
 DeclareProperty( "IsSubidentityMatrix",
         IsHomalgMatrix );
 
-DeclareProperty( "IsFullRowRankMatrix",
+DeclareProperty( "IsLeftRegularMatrix",
         IsHomalgMatrix );
 
-DeclareProperty( "IsFullColumnRankMatrix",
+DeclareProperty( "IsRightRegularMatrix",
         IsHomalgMatrix );
 
 DeclareProperty( "IsInvertibleMatrix",
@@ -87,6 +87,12 @@ DeclareProperty( "IsStrictUpperTriangularMatrix",
         IsHomalgMatrix );
 
 DeclareProperty( "IsStrictLowerTriangularMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsUpperStairCaseMatrix",
+        IsHomalgMatrix );
+
+DeclareProperty( "IsLowerStairCaseMatrix",
         IsHomalgMatrix );
 
 DeclareProperty( "IsTriangularMatrix",

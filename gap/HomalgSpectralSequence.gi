@@ -402,7 +402,7 @@ InstallMethod( OnLessGenerators,
         
   function( E )
     
-    
+    return OnLessGenerators( HighestLevelSheetInSpectralSequence( E ) );
     
 end );
 
@@ -413,7 +413,8 @@ InstallMethod( BasisOfModule,
         
   function( E )
     
-        
+    return BasisOfModule( HighestLevelSheetInSpectralSequence( E ) );
+    
 end );
 
 ##
@@ -423,7 +424,7 @@ InstallMethod( DecideZero,
         
   function( E )
     
-    
+    return DecideZero( HighestLevelSheetInSpectralSequence( E ) );
     
 end );
 
@@ -434,7 +435,13 @@ InstallMethod( ByASmallerPresentation,
         
   function( E )
     
+    ByASmallerPresentation( HighestLevelSheetInSpectralSequence( E ) );
     
+    if IsBound( E!.FirstSpectralSequence ) then
+        ByASmallerPresentation( E!.FirstSpectralSequence );
+    fi;
+    
+    return E;
     
 end );
 
@@ -447,9 +454,9 @@ end );
 ##
 InstallMethod( HomalgSpectralSequence,
         "for homalg bicomplexes",
-        [ IsHomalgBicomplex, IsInt ],
+        [ IsInt, IsHomalgBicomplex, IsInt ],
         
-  function( B, r )
+  function( a, B, r )				## a could, for example, be the level where E_r becomes intrinsic
     local bidegrees, E, Ei, type, rr, i;
     
     bidegrees := ObjectDegreesOfBicomplex( B );
@@ -486,6 +493,10 @@ InstallMethod( HomalgSpectralSequence,
             break;
         fi;
         AsDifferentialObject( Ei );
+        if i = a then
+            ## generalized embeddings into this sheet are computed
+            Ei!.SpecialSheet := true;
+        fi;
         Ei := DefectOfExactness( Ei );
         i := i + 1;
         Add( E.levels, i );
@@ -506,12 +517,39 @@ end );
 ##
 InstallMethod( HomalgSpectralSequence,
         "for homalg bicomplexes",
+        [ IsHomalgBicomplex, IsInt ],
+        
+  function( B, r )
+    
+    return HomalgSpectralSequence( -1, B, r );
+    
+end );
+
+##
+InstallMethod( HomalgSpectralSequence,
+        "for homalg bicomplexes",
+        [ IsInt, IsHomalgBicomplex ],
+        
+  function( a, B )
+    local E;
+    
+    E := HomalgSpectralSequence( a, B, -1 );
+    
+    SetSpectralSequence( B, E );
+    
+    return E;
+    
+end );
+
+##
+InstallMethod( HomalgSpectralSequence,
+        "for homalg bicomplexes",
         [ IsHomalgBicomplex ],
         
   function( B )
     local E;
     
-    E := HomalgSpectralSequence( B, -1 );
+    E := HomalgSpectralSequence( -1, B, -1 );
     
     SetSpectralSequence( B, E );
     

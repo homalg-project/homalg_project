@@ -273,7 +273,7 @@ functor_SubMap!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
   function( cpx_post_pre )
-    local pre, post, phi, modulo_image_pre;
+    local pre, post, S, T, phi, modulo_image_pre;
     
     if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
         Error( "expecting a complex containing two morphisms\n" );
@@ -282,19 +282,28 @@ InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
     pre := HighestDegreeMorphismInComplex( cpx_post_pre );
     post := LowestDegreeMorphismInComplex( cpx_post_pre );
     
+    S := Source( pre );
+    T := Range( post );
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( pre ) then
-        phi := HomalgMap( MatrixOfMap( pre ) * MatrixOfMap( post ), Source( pre ), Range( post ) );
+        phi := HomalgMap( MatrixOfMap( pre ) * MatrixOfMap( post ), S, T );
     else
-        phi := HomalgMap( MatrixOfMap( post ) * MatrixOfMap( pre ), Source( pre ), Range( post ) );
+        phi := HomalgMap( MatrixOfMap( post ) * MatrixOfMap( pre ), S, T );
     fi;
     
-    if HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
+    if HasIsSplitMonomorphism( pre ) and IsSplitMonomorphism( pre ) and
+       HasIsSplitMonomorphism( post ) and IsSplitMonomorphism( post ) then
+        SetIsSplitMonomorphism( phi, true );
+    elif HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
        HasIsMonomorphism( post ) and IsMonomorphism( post ) then
         SetIsMonomorphism( phi, true );
     fi;
     
     ## cannot use elif here:
-    if HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
+    if HasIsSplitEpimorphism( pre ) and IsSplitEpimorphism( pre ) and
+       HasIsSplitEpimorphism( post ) and IsSplitEpimorphism( post ) then
+        SetIsSplitEpimorphism( phi, true );
+    elif HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
        HasIsEpimorphism( post ) and IsEpimorphism( post ) then
         SetIsEpimorphism( phi, true );
     elif HasIsMorphism( pre ) and IsMorphism( pre ) and
@@ -435,6 +444,11 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     ## (the idea of generalized embeddings in action):
     if HasMonomorphismModuloImage( beta ) then
         N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
+        if HasMonomorphismModuloImage( gamma ) then
+            N := UnionOfRelations( N, MatrixOfMap( MonomorphismModuloImage( gamma ) ) );
+        fi;
+    elif HasMonomorphismModuloImage( gamma ) then
+        N := UnionOfRelations( MonomorphismModuloImage( gamma ) );
     else
         N := RelationsOfModule( N );
     fi;
@@ -461,9 +475,10 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     
     psi := HomalgMap( psi, M_, Source( beta ) );
     
-    if ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
-       ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
-       HasMonomorphismModuloImage( beta ) then
+    if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
+       ( ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
+         ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
+         HasMonomorphismModuloImage( beta ) ) then
         
         SetIsMorphism( psi, true );
         

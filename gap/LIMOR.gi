@@ -30,6 +30,9 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           [ IsMonomorphism,
             "implies", IsMorphism ],
           
+          [ IsMonomorphism,
+            "implies", IsGeneralizedEmbedding ],
+          
           [ IsEpimorphism,
             "implies", IsMorphism ],
           
@@ -94,7 +97,7 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgChainMaps, IsHo
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgMap, 0,
+        IsHomalgMorphism, 0,
         
   function( phi )
     
@@ -257,6 +260,35 @@ InstallMethod( IsMonomorphism,
   function( phi )
     
     return IsMorphism( phi ) and IsZero( Kernel( phi ) );
+    
+end );
+
+##
+InstallMethod( IsGeneralizedEmbedding,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsMonomorphism( phi );	## this is just the fall back method
+    
+end );
+
+##
+InstallMethod( IsGeneralizedEmbedding,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMonomorphismModuloImage ],
+        
+  function( phi )
+    local mat, S, T;
+    
+    mat := MatrixOfMap( phi );
+    
+    S := Source( phi );
+    
+    T := Presentation( UnionOfRelations( MonomorphismModuloImage( phi ) ) );
+    
+    return IsMonomorphism( HomalgMap( mat, S, T ) );
     
 end );
 

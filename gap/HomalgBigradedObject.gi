@@ -69,8 +69,8 @@ InstallImmediateMethod( IsStableSheet,
         
   function( Er )
     
-    if IsBound( Er!.stable ) then
-        return Position( Flat( Er!.stable ), '*' ) = fail;
+    if IsBound( Er!.stability_table ) then
+        return Position( Flat( Er!.stability_table ), '*' ) = fail;
     fi;
     
     TryNextMethod( );
@@ -90,8 +90,8 @@ InstallMethod( IsStableSheet,
         
   function( Er )
     
-    if IsBound( Er!.stable ) then
-        return Position( Flat( Er!.stable ), '*' ) = fail;
+    if IsBound( Er!.stability_table ) then
+        return Position( Flat( Er!.stability_table ), '*' ) = fail;
     fi;
     
     TryNextMethod( );
@@ -323,7 +323,7 @@ InstallMethod( BasisOfModule,
         
   function( Er )
     
-    List( ObjectsOfBigradedObject( Er ), BasisOfModule );
+    List( Flat( ObjectsOfBigradedObject( Er ) ), BasisOfModule );
     
     return Er;
     
@@ -336,7 +336,7 @@ InstallMethod( DecideZero,
         
   function( Er )
     
-    List( ObjectsOfBigradedObject( Er ), DecideZero );
+    List( Flat( ObjectsOfBigradedObject( Er ) ), DecideZero );
     
     return Er;
     
@@ -349,7 +349,7 @@ InstallMethod( OnLessGenerators,
         
   function( Er )
     
-    List( ObjectsOfBigradedObject( Er ), OnLessGenerators );
+    List( Flat( ObjectsOfBigradedObject( Er ) ), OnLessGenerators );
     
     return Er;
     
@@ -362,7 +362,7 @@ InstallMethod( ByASmallerPresentation,
         
   function( Er )
     
-    List( ObjectsOfBigradedObject( Er ), ByASmallerPresentation );
+    List( Flat( ObjectsOfBigradedObject( Er ) ), ByASmallerPresentation );
     
     return Er;
     
@@ -454,9 +454,7 @@ InstallMethod( AsDifferentialObject,
                 for q in q_degrees do
                     source := CertainObject( Er, [ p, q ] );
                     target := CertainObject( Er, [ p, q ] + bidegree );
-                    if ForAny( [ source, target ], IsZero ) then
-                        mor := TheZeroMap( source, target );
-                    else
+                    if not ForAny( [ source, target ], IsZero ) then
                         emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
                         emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p - i, q + i ] ) );
@@ -471,8 +469,8 @@ InstallMethod( AsDifferentialObject,
                             od;
                             mor := mor / emb_target;
                         fi;
+                        Er!.(String( [ p, q ] )) := mor;
                     fi;
-                    Er!.(String( [ p, q ] )) := mor;
                 od;
             od;
         else
@@ -517,7 +515,8 @@ InstallMethod( DefectOfExactness,
         
   function( Er )
     local left, bidegree, r, degree, cpx, bidegrees, B, p, q, pp, qq, H, i, j,
-          Epq, post, pre, def, emb, emb_old, absolute_embeddings, type;
+          Epq, post, pre, def, emb, emb_old, relative_embeddings,
+          absolute_embeddings, type;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( Er );
     
@@ -550,7 +549,7 @@ InstallMethod( DefectOfExactness,
               level := r + 1,
               bicomplex := B,
               embeddings := rec( ),
-              stable := List( [ 1 .. qq ], a -> ListWithIdenticalEntries( pp, '.' ) ) );
+              stability_table := List( [ 1 .. qq ], a -> ListWithIdenticalEntries( pp, '.' ) ) );
     
     for i in [ 1 .. pp ] do
         for j in [ 1 .. qq ] do
@@ -569,31 +568,34 @@ InstallMethod( DefectOfExactness,
                     def := Kernel( post );
                     emb := KernelEmb( post );
                 fi;
-                H.embeddings.(String( [ p[i], q[j] ] )) := emb;
                 if IsZero( def ) then
-                    H.stable[qq-j+1][i] := '.';
+                    H.stability_table[qq-j+1][i] := '.';
+                    SetIsZero( emb, true );
                 else
-                    H.stable[qq-j+1][i] := '*';
+                    H.stability_table[qq-j+1][i] := '*';
                 fi;
+                H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             elif IsHomalgMorphism( pre ) and not ( HasIsZero( Epq ) and IsZero( Epq ) ) then
                 def := Cokernel( pre );
                 emb := CokernelGeneralizedEmb( pre );
-                H.embeddings.(String( [ p[i], q[j] ] )) := emb;
                 if IsZero( def ) then
-                    H.stable[qq-j+1][i] := '.';
+                    H.stability_table[qq-j+1][i] := '.';
+                    SetIsZero( emb, true );
                 else
-                    H.stable[qq-j+1][i] := '*';
+                    H.stability_table[qq-j+1][i] := '*';
                 fi;
+                H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             else
                 def := CertainObject( Er, [ p[i], q[j] ] );
                 emb := TheIdentityMorphism( def );
-                H.embeddings.(String( [ p[i], q[j] ] )) := emb;
                 if IsZero( def ) then
-                    H.stable[qq-j+1][i] := '.';
+                    H.stability_table[qq-j+1][i] := '.';
+                    SetIsZero( emb, true );
                 else
                     ## although nonzero Epq became stable
-                    H.stable[qq-j+1][i] := 's';
+                    H.stability_table[qq-j+1][i] := 's';
                 fi;
+                H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             fi;
             H.(String( [ p[i], q[j] ] )) := def;
         od;
@@ -601,27 +603,49 @@ InstallMethod( DefectOfExactness,
     
     if IsHomalgBigradedObjectAssociatedToAFilteredComplex( Er ) then
         
-        absolute_embeddings := rec( );
+        if IsBound( Er!.SpecialSheet ) and Er!.SpecialSheet = true  then
+            H.relative_embeddings := H.embeddings;
+            H.relative_embeddings.target_level := r;
+        elif IsBound( Er!.relative_embeddings ) then
+            ## build an absolute embedding table using the previous one
+            relative_embeddings := rec( target_level := Er!.relative_embeddings.target_level );
+            
+            for i in [ 1 .. pp ] do
+                for j in [ 1 .. qq ] do
+                    emb_old := Er!.relative_embeddings.(String( [ p[i], q[j] ] ));
+                    if Er!.stability_table[qq-j+1][i] = '*' then;	## not yet stable
+                        emb := H.embeddings.(String( [ p[i], q[j] ] ));
+                        relative_embeddings.(String( [ p[i], q[j] ] )) := PreCompose( emb, emb_old );
+                    else						## already stable
+                        relative_embeddings.(String( [ p[i], q[j] ] )) := emb_old;
+                    fi;
+                od;
+            od;
+            
+            H.relative_embeddings := relative_embeddings;
+        fi;
         
         ## the embeddings until the 0-th sheet
         if r = 0 then
-            absolute_embeddings := H.embeddings;
-        else
+            H.absolute_embeddings := H.embeddings;
+        elif IsBound( Er!.absolute_embeddings ) then
             ## build an absolute embedding table using the previous one
+            absolute_embeddings := rec( );
+            
             for i in [ 1 .. pp ] do
                 for j in [ 1 .. qq ] do
                     emb_old := Er!.absolute_embeddings.(String( [ p[i], q[j] ] ));
-                    if H.stable[qq-j+1][i] = '*' then;	## not yet stable
+                    if Er!.stability_table[qq-j+1][i] = '*' then;	## not yet stable
                         emb := H.embeddings.(String( [ p[i], q[j] ] ));
                         absolute_embeddings.(String( [ p[i], q[j] ] )) := PreCompose( emb, emb_old );
-                    else				## already stable
+                    else						## already stable
                         absolute_embeddings.(String( [ p[i], q[j] ] )) := emb_old;
                     fi;
                 od;
             od;
+            
+            H.absolute_embeddings := absolute_embeddings;
         fi;
-        
-        H.absolute_embeddings := absolute_embeddings;
         
         ## find more stable spots:
         cpx := IsBicomplexOfFinitelyPresentedObjectsRep( B );
@@ -634,10 +658,10 @@ InstallMethod( DefectOfExactness,
     
         for i in [ 1 .. pp ] do
             for j in [ 1 .. qq ] do
-                if not ( i + bidegree[1] in [ 1 .. pp ] and j + bidegree[2] in [ 1 .. qq ] and H.stable[qq-(j + bidegree[2])+1][i + bidegree[1]] <> '.' ) and
-                   not ( i - bidegree[1] in [ 1 .. pp ] and j - bidegree[2] in [ 1 .. qq ] and H.stable[qq-(j - bidegree[2])+1][i - bidegree[1]] <> '.' ) and
-                   H.stable[qq-j+1][i] = '*' then
-                    H.stable[qq-j+1][i] := 's';
+                if not ( i + bidegree[1] in [ 1 .. pp ] and j + bidegree[2] in [ 1 .. qq ] and H.stability_table[qq-(j + bidegree[2])+1][i + bidegree[1]] <> '.' ) and
+                   not ( i - bidegree[1] in [ 1 .. pp ] and j - bidegree[2] in [ 1 .. qq ] and H.stability_table[qq-(j - bidegree[2])+1][i - bidegree[1]] <> '.' ) and
+                   H.stability_table[qq-j+1][i] = '*' then
+                    H.stability_table[qq-j+1][i] := 's';
                 fi;
             od;
         od;
@@ -767,8 +791,8 @@ InstallMethod( Display,
         Print( "Level ", o!.level,":\n\n" );
     fi;
     
-    if IsBound( o!.stable ) then
-        for s in o!.stable do
+    if IsBound( o!.stability_table ) then
+        for s in o!.stability_table do
             for c in s do
                 Print( " ", [ c ] );
             od;

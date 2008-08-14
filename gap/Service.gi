@@ -98,25 +98,15 @@ InstallMethod( TriangularBasisOfRows,
         
         B := RP!.TriangularBasisOfRows( M );
         
-        if HasRowRankOfMatrix( B ) then
-            SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
-        fi;
-        
-        ColoredInfoForService( t, "TriangularBasisOfRows", RowRankOfMatrix( B ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows", Length( NonZeroRows( B ) ) );
         
         return B;
         
     elif IsBound(RP!.TriangularBasisOfColumns) then
         
-        B := RP!.TriangularBasisOfColumns( Involution( M ) );
+        B := Involution( RP!.TriangularBasisOfColumns( Involution( M ) ) );
         
-        if HasColumnRankOfMatrix( B ) then
-            SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
-        fi;
-        
-        B := Involution( B );
-        
-        ColoredInfoForService( t, "TriangularBasisOfRows", RowRankOfMatrix( B ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows", Length( NonZeroRows( B ) ) );
         
         return B;
         
@@ -146,11 +136,7 @@ InstallMethod( TriangularBasisOfRows,
         
         B := RP!.TriangularBasisOfRows( M, T );
         
-        if HasRowRankOfMatrix( B ) then
-            SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
-        fi;
-        
-        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", RowRankOfMatrix( B ) );
+        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", Length( NonZeroRows( B ) ) );
         
         return B;
         
@@ -158,17 +144,11 @@ InstallMethod( TriangularBasisOfRows,
         
         TI := HomalgVoidMatrix( R );
         
-        B := RP!.TriangularBasisOfColumns( Involution( M ), TI );
+        B := Involution( RP!.TriangularBasisOfColumns( Involution( M ), TI ) );
         
-        if HasColumnRankOfMatrix( B ) then
-            SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
-        fi;
-        
-        B := Involution( B );
+        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", Length( NonZeroRows( B ) ) );
         
         SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
-        
-        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", RowRankOfMatrix( B ) );
         
         return B;
         
@@ -198,23 +178,15 @@ InstallMethod( TriangularBasisOfColumns,
         
         B := RP!.TriangularBasisOfColumns( M );
         
-        if HasColumnRankOfMatrix( B ) then
-            SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
-        fi;
-        
-        ColoredInfoForService( t, "TriangularBasisOfColumns", ColumnRankOfMatrix( B ) );
+        ColoredInfoForService( t, "TriangularBasisOfColumns", Length( NonZeroColumns( B ) ) );
         
         return B;
         
     fi;
     
-    B := TriangularBasisOfRows( Involution( M ) );
+    B := Involution( TriangularBasisOfRows( Involution( M ) ) );
     
-    if HasRowRankOfMatrix( B ) then
-        SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
-    fi;
-    
-    return Involution( B );
+    return B;
     
 end );
 
@@ -238,11 +210,7 @@ InstallMethod( TriangularBasisOfColumns,
         
         B := RP!.TriangularBasisOfColumns( M, T );
         
-        if HasColumnRankOfMatrix( B ) then
-            SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
-        fi;
-        
-        ColoredInfoForService( t, "TriangularBasisOfColumns (M,T)", ColumnRankOfMatrix( B ) );
+        ColoredInfoForService( t, "TriangularBasisOfColumns (M,T)", Length( NonZeroColumns( B ) ) );
         
         return B;
         
@@ -250,15 +218,11 @@ InstallMethod( TriangularBasisOfColumns,
     
     TI := HomalgVoidMatrix( R );
     
-    B := TriangularBasisOfRows( Involution( M ), TI );
+    B := Involution( TriangularBasisOfRows( Involution( M ), TI ) );
     
     SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
     
-    if HasRowRankOfMatrix( B ) then
-        SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
-    fi;
-    
-    return Involution( B );
+    return B;
     
 end );
 
@@ -270,7 +234,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, B, rank;
+    local R, RP, t, B, nz;
     
     R := HomalgRing( M );
     
@@ -320,16 +284,12 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     B := TriangularBasisOfRows( M );
     
-    rank := RowRankOfMatrix( B );
+    nz := Length( NonZeroRows( B ) );
     
-    SetRowRankOfMatrix( M, rank );
-    
-    if rank = 0 then
+    if nz = 0 then
         B := HomalgZeroMatrix( 0, NrColumns( B ), R );
     else
-        B := CertainRows( B, [ 1 .. rank ] );
-        
-        SetIsFullRowRankMatrix( B, true );
+        B := CertainRows( B, [ 1 .. nz ] );
     fi;
     
     SetIsBasisOfRowsMatrix( B, true );
@@ -348,7 +308,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, B, rank;
+    local R, RP, t, B, nz;
     
     R := HomalgRing( M );
     
@@ -398,16 +358,12 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     B := TriangularBasisOfColumns( M );
     
-    rank := ColumnRankOfMatrix( B );
+    nz := Length( NonZeroColumns( B ) );
     
-    SetColumnRankOfMatrix( M, rank );
-    
-    if rank = 0 then
+    if nz = 0 then
         B := HomalgZeroMatrix( NrRows( B ), 0, R );
     else
-        B := CertainColumns( B, [ 1 .. rank ] );
-        
-        SetIsFullColumnRankMatrix( B, true );
+        B := CertainColumns( B, [ 1 .. nz ] );
     fi;
     
     SetIsBasisOfColumnsMatrix( B, true );
@@ -560,7 +516,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, B, rank;
+    local R, RP, t, C, B, nz;
     
     if IsBound(M!.SyzygiesGeneratorsOfRows) then
         return M!.SyzygiesGeneratorsOfRows;
@@ -580,7 +536,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsFullRowRankMatrix( M, true );
+            SetIsLeftRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -600,7 +556,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsFullRowRankMatrix( M, true );
+            SetIsLeftRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -622,13 +578,13 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     B := TriangularBasisOfRows( M, C );
     
-    rank := RowRankOfMatrix( B );
+    nz := Length( NonZeroRows( B ) );
     
-    C := CertainRows( C, [ rank + 1 .. NrRows( C ) ] );
+    C := CertainRows( C, [ nz + 1 .. NrRows( C ) ] );
     
     if IsZero( C ) then
         
-        SetIsFullRowRankMatrix( M, true );
+        SetIsLeftRegularMatrix( M, true );
         
         C := HomalgZeroMatrix( 0, NrRows( M ), R );
         
@@ -650,7 +606,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP, t, M, C, rank;
+    local R, RP, t, M, C, nz;
     
     R := HomalgRing( M1 );
     
@@ -702,9 +658,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     M := TriangularBasisOfRows( M, C );
     
-    rank := RowRankOfMatrix( M );
+    nz := Length( NonZeroRows( M ) );
     
-    C := CertainColumns( CertainRows( C, [ rank + 1 .. NrRows( C ) ] ), [ 1 .. NrRows( M1 ) ] );
+    C := CertainColumns( CertainRows( C, [ nz + 1 .. NrRows( C ) ] ), [ 1 .. NrRows( M1 ) ] );
     
     if IsZero( C ) then
         
@@ -726,7 +682,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, B, rank;
+    local R, RP, t, C, B, nz;
     
     if IsBound(M!.SyzygiesGeneratorsOfColumns) then
         return M!.SyzygiesGeneratorsOfColumns;
@@ -746,7 +702,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsFullColumnRankMatrix( M, true );
+            SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -766,7 +722,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsFullColumnRankMatrix( M, true );
+            SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -788,13 +744,13 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     B := TriangularBasisOfColumns( M, C );
     
-    rank := ColumnRankOfMatrix( B );
+    nz := Length( NonZeroColumns( B ) );
     
-    C := CertainColumns( C, [ rank + 1 .. NrColumns( C ) ] );
+    C := CertainColumns( C, [ nz + 1 .. NrColumns( C ) ] );
     
     if IsZero( C ) then
         
-        SetIsFullColumnRankMatrix( M, true );
+        SetIsRightRegularMatrix( M, true );
         
         C := HomalgZeroMatrix( NrColumns( M ), 0, R );
         
@@ -816,7 +772,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP, t, M, C, rank;
+    local R, RP, t, M, C, nz;
     
     R := HomalgRing( M1 );
     
@@ -868,9 +824,9 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     M := TriangularBasisOfColumns( M, C );
     
-    rank := ColumnRankOfMatrix( M );
+    nz := Length( NonZeroColumns( M ) );
     
-    C := CertainRows( CertainColumns( C, [ rank + 1 .. NrColumns( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
+    C := CertainRows( CertainColumns( C, [ nz + 1 .. NrColumns( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
     
     if IsZero( C ) then
         
@@ -894,7 +850,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, t, TI, B, TT, rank;
+    local R, RP, t, TI, B, TT, nz;
     
     R := HomalgRing( M );
     
@@ -946,22 +902,16 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     B := TriangularBasisOfRows( M, TT );
     
-    rank := RowRankOfMatrix( B );
+    nz := Length( NonZeroRows( B ) );
     
-    SetRowRankOfMatrix( M, rank );
-    
-    if rank = 0 then
-        B := HomalgZeroMatrix( 0, NrColumns( B ), R);
+    if nz = 0 then
+        B := HomalgZeroMatrix( 0, NrColumns( B ), R );
     else
-        B := CertainRows( B, [ 1 .. rank ] );
-        
-        SetRowRankOfMatrix( B, rank );
-        
-        SetIsFullRowRankMatrix( B, true );
+        B := CertainRows( B, [ 1 .. nz ] );
     fi;
     
     ## B = T * M;
-    SetPreEval( T, CertainRows( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, CertainRows( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
     
@@ -977,7 +927,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, t, TI, B, TT, rank;
+    local R, RP, t, TI, B, TT, nz;
     
     R := HomalgRing( M );
     
@@ -1029,22 +979,16 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     B := TriangularBasisOfColumns( M, TT );
     
-    rank := ColumnRankOfMatrix( B );
+    nz := Length( NonZeroColumns( B ) );
     
-    SetColumnRankOfMatrix( M, rank );
-    
-    if rank = 0 then
-        B := HomalgZeroMatrix( NrRows( B ), 0, R);
+    if nz = 0 then
+        B := HomalgZeroMatrix( NrRows( B ), 0, R );
     else
-        B := CertainColumns( B, [ 1 .. rank ] );
-        
-        SetColumnRankOfMatrix( B, rank );
-        
-        SetIsFullColumnRankMatrix( B, true );
+        B := CertainColumns( B, [ 1 .. nz ] );
     fi;
     
     ## B = M * T;
-    SetPreEval( T, CertainColumns( TT, [ 1 .. rank ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, CertainColumns( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
     

@@ -69,7 +69,7 @@ InstallMethod( CreateHomalgTable,
                    
                    SetNrRows( S, NrRows( M ) );
                    SetNrColumns( S, NrColumns( M ) );
-                   SetRowRankOfMatrix( S, N.rank );
+                   SetZeroRows( S, [ N.rank + 1 .. NrRows( S ) ] );
                    SetIsDiagonalMatrix( S, true );
                    
                    return S;
@@ -124,9 +124,9 @@ InstallMethod( CreateHomalgTable,
                    
                    SetNrRows( H, NrRows( M ) );
                    SetNrColumns( H, NrColumns( M ) );
-                   SetRowRankOfMatrix( H, N.rank );
+                   SetZeroRows( H, [ N.rank + 1 .. NrRows( H ) ] );
                    
-                   SetIsUpperTriangularMatrix( H, true );
+                   SetIsUpperStairCaseMatrix( H, true );
                    
                    return H;
                    

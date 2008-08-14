@@ -106,6 +106,17 @@ InstallMethod( NameOfFunctor,
 end );
 
 ##
+InstallMethod( OperationOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return ValueGlobal( NameOfFunctor( Functor ) );
+    
+end );
+
+##
 InstallMethod( IsSpecialFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -238,7 +249,9 @@ InstallMethod( FunctorObj,
   function( Functor, arguments_of_functor )
     local container, weak_pointers, a, deleted, functor_name, p,
           context_of_arguments, i, arg_old, l, obj, arg_all, genesis,
+          Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
+          functor_orig_operation, m_orig, arg_orig,
           functor_pre_operation, m_pre, functor_post_operation, m_post,
           arg_pre, arg_post;
     
@@ -300,19 +313,41 @@ InstallMethod( FunctorObj,
     
     if HasGenesis( Functor ) then
         genesis := Genesis( Functor );
-        if genesis[1] = "ComposeFunctors" then
+        if genesis[1] = "ApplyFunctor" then
+            Functor_orig := genesis[2];
+            arg_pos := genesis[3];
+            Functor_arg := genesis[4];
+        elif genesis[1] = "ComposeFunctors" then
             Functor_post := genesis[2][1];
             Functor_pre := genesis[2][2];
             post_arg_pos := genesis[3];
         fi;
     fi;
     
-    if IsBound( Functor_post ) then
+    if IsBound( Functor_orig ) then
+        ## the functor is specialized: Functor := Functor_orig( ..., Functor_arg, ... )
+        
+        functor_orig_operation := OperationOfFunctor( Functor_orig );
+        
+        m_orig := MultiplicityOfFunctor( Functor_orig );
+        
+        if IsBound( Functor_orig!.0 ) then
+            arg_orig := arguments_of_functor{[ 1 .. arg_pos ]};
+        else
+            arg_orig := arguments_of_functor{[ 1 .. arg_pos - 1 ]};
+        fi;
+        
+        Add( arg_orig, Functor_arg );
+        Append( arg_orig, arguments_of_functor{[ arg_pos + 1 .. m_orig ]} );
+        
+        obj := CallFuncList( functor_orig_operation, arg_orig );
+        
+    elif IsBound( Functor_post ) then
         ## the functor is composed: Functor := Functor_post @ Functor_pre
         
-        functor_pre_operation := ValueGlobal( NameOfFunctor( Functor_pre ) );
+        functor_pre_operation := OperationOfFunctor( Functor_pre );
         
-        functor_post_operation := ValueGlobal( NameOfFunctor( Functor_post ) );
+        functor_post_operation := OperationOfFunctor( Functor_post );
         
         m_pre := MultiplicityOfFunctor( Functor_pre );
         
@@ -369,7 +404,9 @@ InstallMethod( FunctorMap,
           number_of_arguments, pos0, arg_positions, S, T, pos,
           arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
           arg_source, arg_target, F_source, F_target, genesis,
+          Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
+          functor_orig_operation, m_orig, arg_orig,
           functor_pre_operation, m_pre, functor_post_operation, m_post,
           arg_pre, arg_post, emb_source, emb_target, arg_phi, hull_phi, mor;
     
@@ -460,19 +497,41 @@ InstallMethod( FunctorMap,
     
     if HasGenesis( Functor ) then
         genesis := Genesis( Functor );
-        if genesis[1] = "ComposeFunctors" then
+        if genesis[1] = "ApplyFunctor" then
+            Functor_orig := genesis[2];
+            arg_pos := genesis[3];
+            Functor_arg := genesis[4];
+        elif genesis[1] = "ComposeFunctors" then
             Functor_post := genesis[2][1];
             Functor_pre := genesis[2][2];
             post_arg_pos := genesis[3];
         fi;
     fi;
     
-    if IsBound( Functor_post ) then
+    if IsBound( Functor_orig ) then
+        ## the functor is specialized: Functor := Functor_orig( ..., Functor_arg, ... )
+        
+        functor_orig_operation := OperationOfFunctor( Functor_orig );
+        
+        m_orig := MultiplicityOfFunctor( Functor_orig );
+        
+        if IsBound( Functor_orig!.0 ) then
+            arg_orig := arg_all{[ 1 .. arg_pos ]};
+        else
+            arg_orig := arg_all{[ 1 .. arg_pos - 1 ]};
+        fi;
+        
+        Add( arg_orig, Functor_arg );
+        Append( arg_orig, arg_all{[ arg_pos + 1 .. m_orig ]} );
+        
+        mor := CallFuncList( functor_orig_operation, arg_orig );
+        
+    elif IsBound( Functor_post ) then
         ## the functor is composed: Functor := Functor_post @ Functor_pre
         
-        functor_pre_operation := ValueGlobal( NameOfFunctor( Functor_pre ) );
+        functor_pre_operation := OperationOfFunctor( Functor_pre );
         
-        functor_post_operation := ValueGlobal( NameOfFunctor( Functor_post ) );
+        functor_post_operation := OperationOfFunctor( Functor_post );
         
         m_pre := MultiplicityOfFunctor( Functor_pre );
         
@@ -552,8 +611,8 @@ InstallMethod( InstallFunctorOnObjects,
         fi;
     fi;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
-        
+    functor_operation := OperationOfFunctor( Functor );
+    
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
     if number_of_arguments = 1 then
@@ -1233,8 +1292,8 @@ InstallMethod( InstallFunctorOnMorphisms,
         fi;
     fi;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
-        
+    functor_operation := OperationOfFunctor( Functor );
+    
     number_of_arguments := MultiplicityOfFunctor( Functor );
     
     if number_of_arguments = 1 then
@@ -2063,7 +2122,7 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
   function( Functor )
     local functor_operation, filter_mor, filter_special;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if not IsBound( Functor!.1[2] ) or not IsBound( Functor!.1[2][2] ) or not IsList( Functor!.1[2][2] ) then
         return fail;
@@ -2097,7 +2156,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnComplexes,
   function( Functor, filter_cpx, complex_or_cocomplex, i )
     local functor_operation, filter0;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -2270,7 +2329,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
   function( Functor, filter2_obj, filter1_cpx, complex_or_cocomplex, i )
     local functor_operation, filter0;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -2527,7 +2586,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
   function( Functor, filter1_obj, filter2_cpx, complex_or_cocomplex, i )
     local functor_operation, filter0;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -2857,7 +2916,7 @@ InstallGlobalFunction( HelperToInstallUnivariateFunctorOnChainMaps,
   function( Functor, filter_chm, source_target, i )
     local functor_operation, filter0;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -3006,7 +3065,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
   function( Functor, filter2_obj, filter1_chm, source_target, i )
     local functor_operation, filter0;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -3239,7 +3298,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
   function( Functor, filter1_obj, filter2_chm, source_target, i )
     local functor_operation, filter0;
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -3575,9 +3634,9 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
     
     der := genesis[1];
     
-    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    original_operation := OperationOfFunctor( genesis[2] );
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -3835,9 +3894,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
     
     der := genesis[1];
     
-    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    original_operation := OperationOfFunctor( genesis[2] );
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -4123,9 +4182,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
     
     der := genesis[1];
     
-    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    original_operation := OperationOfFunctor( genesis[2] );
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -4383,9 +4442,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
     
     der := genesis[1];
     
-    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    original_operation := OperationOfFunctor( genesis[2] );
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -4659,9 +4718,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
     
     der := genesis[1];
     
-    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    original_operation := OperationOfFunctor( genesis[2] );
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -4919,9 +4978,9 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
     
     der := genesis[1];
     
-    original_operation := ValueGlobal( NameOfFunctor( genesis[2] ) );
+    original_operation := OperationOfFunctor( genesis[2] );
     
-    functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+    functor_operation := OperationOfFunctor( Functor );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -5198,6 +5257,251 @@ InstallMethod( InstallDeltaFunctor,
     
 end );
 
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+##
+InstallGlobalFunction( CreateHomalgFunctor,
+  function( arg )
+    local ar, functor, type;
+    
+    functor := rec( );
+    
+    for ar in arg do
+        if not IsString( ar ) and IsList( ar ) and Length( ar ) = 2 and IsString( ar[1] ) then
+            functor.( ar[1] ) := ar[2];
+        fi;
+    od;
+    
+    type := TheTypeHomalgFunctor;
+    
+    ## Objectify:
+    Objectify( type, functor );
+    
+    return functor;
+    
+end );
+
+##
+InstallMethod( ApplyFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+        
+  function( Functor, p, o, name )
+    local m, functor_name, functor_operation, functor_data, data, i, Fp, fname;
+    
+    m := MultiplicityOfFunctor( Functor );
+    
+    if p < 1 then
+        Error( "the second argument must be a positive integer\n" );
+    elif p > m then
+        Error( "the second argument exceeded the multiplicity of the functor\n" );
+    fi;
+    
+    functor_name := NameOfFunctor( Functor );
+    
+    functor_operation := ValueGlobal( functor_name );
+    
+    if m = 1 then
+        return functor_operation( o );
+    fi;
+    
+    functor_data := List( [ 1 .. m ], i -> StructuralCopy( Functor!.(i) ) );
+    
+    if IsBound( Functor!.0 ) then
+        data := [ [ "0", Functor!.0 ] ];
+    else
+        data := [ ];
+    fi;
+    
+    for i in [ 1 .. m ] do
+        if i < p then
+            Add( data, [ String(i), functor_data[i] ] );
+        elif i > p then
+            Add( data, [ String(i - 1), functor_data[i] ] );
+        fi;
+    od;
+    
+    data := Concatenation(
+                    [ [ "name", name ], [ "number_of_arguments", m - 1 ] ],
+                    data );
+    
+    Fp := CallFuncList( CreateHomalgFunctor, data );
+    
+    SetGenesis( Fp, [ "ApplyFunctor", Functor, p, o ] );
+    
+    if m > 1 then
+        Fp!.ContainerForWeakPointersOnComputedBasicObjects :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+        Fp!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    fi;
+    
+    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    
+    InstallFunctor( Fp );
+    
+    fname := Concatenation( [ "Functor_", name ] );
+    
+    if IsBoundGlobal( fname ) then
+        Info( InfoWarning, 1, "unable to save the specialized functor under the default name ", fname, " since it is reserved" );
+    else
+        DeclareGlobalVariable( fname );
+        InstallValue( ValueGlobal( fname ), Fp );
+    fi;
+    
+    return Fp;
+    
+end );
+
+##
+InstallMethod( ComposeFunctors,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep, IsString ],
+        
+  function( Functor_post, p, Functor_pre, name )
+    local m_post, m_pre, data_post, data_pre, m, data, i, d, property, fname,
+          GF;
+    
+    if p < 1 then
+        Error( "the second argument must be a positive integer\n" );
+    fi;
+    
+    if IsBound( Functor_post!.0 ) or IsBound(  Functor_pre!.0 ) then
+        Error( "ComposeFunctors does not support functors with a zero-th argument yet\n" );
+    fi;
+    
+    m_post := MultiplicityOfFunctor( Functor_post );
+    m_pre := MultiplicityOfFunctor( Functor_pre );
+    
+    data_post := List( [ 1 .. m_post ], i -> StructuralCopy( Functor_post!.(i) ) );
+    data_pre := List( [ 1 .. m_pre ], i -> StructuralCopy( Functor_pre!.(i) ) );
+    
+    m := m_post + m_pre - 1;
+    
+    data := [ ];
+    
+    for i in [ 1 .. m ] do
+        if i < p then
+            Add( data, [ String(i), data_post[i] ] );
+        elif i > p + m_pre - 1 then
+            Add( data, [ String(i), data_post[i - m_pre + 1] ] );
+        else
+            d := [ ];
+            if IsCovariantFunctor( Functor_post, p ) = true and
+               IsCovariantFunctor( Functor_pre, i - p + 1 ) = true then
+                property := "covariant";
+            elif IsCovariantFunctor( Functor_post, p ) = true and
+              IsCovariantFunctor( Functor_pre, i - p + 1 ) = false then
+                property := "contravariant";
+            elif IsCovariantFunctor( Functor_post, p ) = false and
+              IsCovariantFunctor( Functor_pre, i - p + 1 ) = true then
+                property := "contravariant";
+            elif IsCovariantFunctor( Functor_post, p ) = false and
+              IsCovariantFunctor( Functor_pre, i - p + 1 ) = false then
+                property := "covariant";
+            fi;
+            if IsBound( property ) then
+                Add( d, property );
+            fi;
+            if IsAdditiveFunctor( Functor_post, p ) and
+               IsAdditiveFunctor( Functor_pre, i - p + 1 ) then
+                Add( d, "additive" );
+            fi;
+            if IsDistinguishedArgumentOfFunctor( Functor_post, p ) and
+               IsDistinguishedArgumentOfFunctor( Functor_pre, i - p + 1 ) then
+                Add( d, "distinguished" );
+            fi;
+            Add( data, [ String(i), [ d, data_pre[i - p + 1][2] ] ] );
+        fi;
+    od;
+    
+    data := Concatenation(
+                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    data );
+    
+    GF := CallFuncList( CreateHomalgFunctor, data );
+    
+    SetGenesis( GF, [ "ComposeFunctors", [ Functor_post, Functor_pre ], p ] );
+    
+    if m > 1 then
+        GF!.ContainerForWeakPointersOnComputedBasicObjects :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+        GF!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    fi;
+    
+    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    
+    InstallFunctor( GF );
+    
+    fname := Concatenation( [ "Functor_", name ] );
+    
+    if IsBoundGlobal( fname ) then
+        Info( InfoWarning, 1, "unable to save the composed functor under the default name ", fname, " since it is reserved" );
+    else
+        DeclareGlobalVariable( fname );
+        InstallValue( ValueGlobal( fname ), GF );
+    fi;
+    
+    return GF;
+    
+end );
+
+##
+InstallMethod( ComposeFunctors,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep ],
+        
+  function( Functor_post, p, Functor_pre )
+    local name;
+    
+    if p = 1 then
+        name := Concatenation( NameOfFunctor( Functor_post ), NameOfFunctor( Functor_pre ) );
+    else
+        name := Concatenation( NameOfFunctor( Functor_post ), String( p ), NameOfFunctor( Functor_pre ) );
+    fi;
+    
+    return ComposeFunctors( Functor_post, p, Functor_pre, name );
+    
+end );
+
+##
+InstallMethod( ComposeFunctors,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsString ],
+        
+  function( Functor_post, Functor_pre, name )
+    
+    return ComposeFunctors( Functor_post, 1, Functor_pre, name );
+    
+end );
+
+##
+InstallMethod( ComposeFunctors,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep ],
+        
+  function( Functor_post, Functor_pre )
+    
+    return ComposeFunctors( Functor_post, 1, Functor_pre );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep ],
+        
+  function( Functor_post, Functor_pre )
+    
+    return ComposeFunctors( Functor_post, Functor_pre );
+    
+end );
+
 ##
 InstallMethod( RightSatelliteOfCofunctor,
         "for homalg functors",
@@ -5370,7 +5674,7 @@ InstallMethod( LeftSatelliteOfFunctor,
       function( arg )
         local functor_operation, c, mu, ar, F_mu, sat;
         
-        functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+        functor_operation := OperationOfFunctor( Functor );
         
         c := arg[1];
         
@@ -5396,7 +5700,7 @@ InstallMethod( LeftSatelliteOfFunctor,
       function( arg )
         local functor_operation, c, d, d_c_1, mu, ar;
         
-        functor_operation := ValueGlobal( NameOfFunctor( Functor ) );
+        functor_operation := OperationOfFunctor( Functor );
         
         c := arg[1];
         
@@ -5785,179 +6089,6 @@ InstallMethod( LeftDerivedFunctor,
     return LeftDerivedFunctor( Functor, p, name );
     
 end );
-
-##
-InstallMethod( ComposeFunctors,
-        "for homalg functors",
-        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep, IsString ],
-        
-  function( Functor_post, p, Functor_pre, name )
-    local m_post, m_pre, data_post, data_pre, m, data, i, d, property, fname,
-          GF;
-    
-    if p < 1 then
-        Error( "the second argument must be a positive integer\n" );
-    fi;
-    
-    if IsBound( Functor_post!.0 ) or IsBound(  Functor_pre!.0 ) then
-        Error( "ComposeFunctors does not support functors with a zero-th argument yet\n" );
-    fi;
-    
-    m_post := MultiplicityOfFunctor( Functor_post );
-    m_pre := MultiplicityOfFunctor( Functor_pre );
-    
-    data_post := List( [ 1 .. m_post ], i -> [ String( i ), StructuralCopy( Functor_post!.(i) ) ] );
-    data_pre := List( [ 1 .. m_pre ], i -> [ String( i ), StructuralCopy( Functor_pre!.(i) ) ] );
-    
-    m := m_post + m_pre - 1;
-    
-    data := [ ];
-    
-    for i in [ 1 .. m ] do
-        if i < p then
-            Add( data, [ String(i), data_post[i][2] ] );
-        elif i > p + m_pre - 1 then
-            Add( data, [ String(i), data_post[i - m_pre + 1][2] ] );
-        else
-            d := [ ];
-            if IsCovariantFunctor( Functor_post, p ) = true and
-               IsCovariantFunctor( Functor_pre, i - p + 1 ) = true then
-                property := "covariant";
-            elif IsCovariantFunctor( Functor_post, p ) = true and
-              IsCovariantFunctor( Functor_pre, i - p + 1 ) = false then
-                property := "contravariant";
-            elif IsCovariantFunctor( Functor_post, p ) = false and
-              IsCovariantFunctor( Functor_pre, i - p + 1 ) = true then
-                property := "contravariant";
-            elif IsCovariantFunctor( Functor_post, p ) = false and
-              IsCovariantFunctor( Functor_pre, i - p + 1 ) = false then
-                property := "covariant";
-            fi;
-            if IsBound( property ) then
-                Add( d, property );
-            fi;
-            if IsAdditiveFunctor( Functor_post, p ) and
-               IsAdditiveFunctor( Functor_pre, i - p + 1 ) then
-                Add( d, "additive" );
-            fi;
-            if IsDistinguishedArgumentOfFunctor( Functor_post, p ) and
-               IsDistinguishedArgumentOfFunctor( Functor_pre, i - p + 1 ) then
-                Add( d, "distinguished" );
-            fi;
-            Add( data, [ String(i), [ d, data_pre[i - p + 1][2][2] ] ] );
-        fi;
-    od;
-    
-    data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m ] ],
-                    data );
-    
-    GF := CallFuncList( CreateHomalgFunctor, data );
-    
-    SetGenesis( GF, [ "ComposeFunctors", [ Functor_post, Functor_pre ], p ] );
-    
-    if m > 1 then
-        GF!.ContainerForWeakPointersOnComputedBasicObjects :=
-          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-        GF!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-    fi;
-    
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
-    
-    InstallFunctor( GF );
-    
-    fname := Concatenation( [ "Functor_", name ] );
-    
-    if IsBoundGlobal( fname ) then
-        Info( InfoWarning, 1, "unable to save the composed functor under the default name ", fname, " since it is reserved" );
-    else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), GF );
-    fi;
-    
-    return GF;
-    
-end );
-
-##
-InstallMethod( ComposeFunctors,
-        "for homalg functors",
-        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep ],
-        
-  function( Functor_post, p, Functor_pre )
-    local name;
-    
-    if p = 1 then
-        name := Concatenation( NameOfFunctor( Functor_post ), NameOfFunctor( Functor_pre ) );
-    else
-        name := Concatenation( NameOfFunctor( Functor_post ), String( p ), NameOfFunctor( Functor_pre ) );
-    fi;
-    
-    return ComposeFunctors( Functor_post, p, Functor_pre, name );
-    
-end );
-
-##
-InstallMethod( ComposeFunctors,
-        "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsString ],
-        
-  function( Functor_post, Functor_pre, name )
-    
-    return ComposeFunctors( Functor_post, 1, Functor_pre, name );
-    
-end );
-
-##
-InstallMethod( ComposeFunctors,
-        "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep ],
-        
-  function( Functor_post, Functor_pre )
-    
-    return ComposeFunctors( Functor_post, 1, Functor_pre );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep ],
-        
-  function( Functor_post, Functor_pre )
-    
-    return ComposeFunctors( Functor_post, Functor_pre );
-    
-end );
-
-####################################
-#
-# constructor functions and methods:
-#
-####################################
-
-InstallGlobalFunction( CreateHomalgFunctor,
-  function( arg )
-    local ar, functor, type;
-    
-    functor := rec( );
-    
-    for ar in arg do
-        if not IsString( ar ) and IsList( ar ) and Length( ar ) = 2 and IsString( ar[1] ) then
-            functor.( ar[1] ) := ar[2];
-        fi;
-    od;
-    
-    type := TheTypeHomalgFunctor;
-    
-    ## Objectify:
-    Objectify( type, functor );
-    
-    return functor;
-    
-end );
-
 
 ####################################
 #

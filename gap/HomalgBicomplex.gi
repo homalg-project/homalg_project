@@ -88,6 +88,17 @@ end );
 ##
 InstallMethod( TotalComplex,
         "for homalg bicomplexes",
+        [ IsBicomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
+        
+  function( B )
+    
+    return TotalComplex( TransposedBicomplex( B ) );
+    
+end );
+
+##
+InstallMethod( TotalComplex,
+        "for homalg bicomplexes",
         [ IsBicocomplexOfFinitelyPresentedObjectsRep ],
         
   function( B )
@@ -110,6 +121,17 @@ InstallMethod( TotalComplex,
     fi;
     
     return tot;
+    
+end );
+
+##
+InstallMethod( TotalComplex,
+        "for homalg bicomplexes",
+        [ IsBicocomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
+        
+  function( B )
+    
+    return TotalComplex( TransposedBicomplex( B ) );
     
 end );
 
@@ -480,37 +502,14 @@ InstallMethod( BiDegreesOfObjectOfTotalComplex,
 end );
 
 ##
-InstallMethod( ObjectOfTotalComplex,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex, IsInt ],
-        
-  function( B, n )
-    local bidegrees, tot_n, pq;
-    
-    bidegrees := BiDegreesOfObjectOfTotalComplex( B, n );
-    
-    if bidegrees = [ ] then
-        return fail;
-    fi;
-    
-    tot_n := [ ];
-    
-    for pq in bidegrees do
-        Add( tot_n, CertainObject( B, pq ) );
-    od;
-    
-    return Sum( tot_n );
-    
-end );
-
-##
 InstallMethod( MorphismOfTotalComplex,
         "for homalg bicomplexes",
         [ IsBicomplexOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( B, n )
     local bidegrees_source, bidegrees_target, stack, horizontal, vertical,
-          pq_source, pq_target, diff, augment, source;
+          pq_source, pq_target, diff, augment, source, S, T, l,
+          embeddings, emb_summand, summand, i;
     
     bidegrees_source := BiDegreesOfObjectOfTotalComplex( B, n );
     bidegrees_target := BiDegreesOfObjectOfTotalComplex( B, n - 1 );
@@ -540,7 +539,58 @@ InstallMethod( MorphismOfTotalComplex,
         Add( stack, Iterated( augment, AugmentMaps ) );
     od;
     
-    return Iterated( stack, StackMaps );
+    stack := Iterated( stack, StackMaps );
+    
+    S := Source( stack );
+    T := Range( stack );
+    
+    if not IsBound( S!.EmbeddingsInObjectOfTotalComplex ) then
+        l := Length( bidegrees_source );
+        if l > 1 then
+            embeddings := rec( );
+            if l = 2 then
+                embeddings.(String(bidegrees_source[1])) := DirectSumEmbs( S )[1];
+                embeddings.(String(bidegrees_source[2])) := DirectSumEmbs( S )[2];
+            else
+                emb_summand := TheIdentityMorphism( S );
+                summand := S;
+                embeddings.(String(bidegrees_source[l])) := DirectSumEmbs( summand )[2];
+                for i in [ 1 .. l - 2 ] do
+                    emb_summand := PreCompose( DirectSumEmbs( summand )[1], emb_summand );
+                    summand := Genesis( summand )!.arguments_of_functor[1];
+                    embeddings.(String(bidegrees_source[l - i])) := PreCompose( DirectSumEmbs( summand )[2], emb_summand );
+                od;
+                embeddings.(String(bidegrees_source[1])) := PreCompose( DirectSumEmbs( summand )[1], emb_summand );
+            fi;
+            
+            S!.EmbeddingsInObjectOfTotalComplex := embeddings;
+        fi;
+    fi;
+    
+    if not IsBound( T!.EmbeddingsInObjectOfTotalComplex ) then
+        l := Length( bidegrees_target );
+        if l > 1 then
+            embeddings := rec( );
+            if l = 2 then
+                embeddings.(String(bidegrees_target[1])) := DirectSumEmbs( T )[1];
+                embeddings.(String(bidegrees_target[2])) := DirectSumEmbs( T )[2];
+            else
+                emb_summand := TheIdentityMorphism( T );
+                summand := T;
+                embeddings.(String(bidegrees_target[l])) := DirectSumEmbs( summand )[2];
+                for i in [ 1 .. l - 2 ] do
+                    emb_summand := PreCompose( DirectSumEmbs( summand )[1], emb_summand );
+                    summand := Genesis( summand )!.arguments_of_functor[1];
+                    embeddings.(String(bidegrees_target[l - i])) := PreCompose( DirectSumEmbs( summand )[2], emb_summand );
+                od;
+                embeddings.(String(bidegrees_target[1])) := PreCompose( DirectSumEmbs( summand )[1], emb_summand );
+            fi;
+            
+            T!.EmbeddingsInObjectOfTotalComplex := embeddings;
+        fi;
+    fi;
+    
+    return stack;
     
 end );
 

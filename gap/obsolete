@@ -539,3 +539,62 @@ InstallMethod( AddToEntryOfHomalgMatrix,
     
 end );
 
+## from HomalgBicomplex.gi
+
+##
+DeclareOperation( "ObjectOfTotalComplex",
+        [ IsHomalgBicomplex, IsInt ] );
+
+##
+InstallMethod( ObjectOfTotalComplex,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex, IsInt ],
+        
+  function( B, n )
+    local bidegrees, tot_n, pq, sum, l, summand, embeddings, i, emb_summand;
+    
+    bidegrees := BiDegreesOfObjectOfTotalComplex( B, n );
+    
+    if bidegrees = [ ] then
+        return fail;
+    fi;
+    
+    tot_n := [ ];
+    
+    for pq in bidegrees do
+        Add( tot_n, CertainObject( B, pq ) );
+    od;
+    
+    sum := Sum( tot_n );
+    
+    l := Length( tot_n );
+    
+    if l > 1 then
+        summand := sum;
+        embeddings := rec( );
+        embeddings.(String(bidegrees[l])) := DirectSumEmbs( summand )[2];
+        for i in [ 1 .. l - 1 ] do
+            emb_summand := DirectSumEmbs( summand )[2];
+            summand := Genesis( summand )!.arguments_of_functor[1];
+            embeddings.(String(bidegrees[l - i])) := PreCompose( DirectSumEmbs( summand )[2], emb_summand );
+        od;
+        sum!.EmbeddingsInObjectOfTotalComplex := embeddings;
+    fi;
+    
+    return sum;
+    
+end );
+
+## from SpectralSequences.gi
+
+        if i >= 0 then
+            gen_embI := I_E2!.absolute_embeddings.(String([ i, 0 ]));
+            if tot_embs <> fail then
+                gen_embI := PreCompose( gen_embI, tot_embs.(String([ i, 0 ])) );
+            fi;
+        fi;
+# ...        
+            if i >= 0 then
+                tmp := gen_emb2 / gen_embI;
+            fi;
+            

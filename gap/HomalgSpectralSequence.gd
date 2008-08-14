@@ -38,11 +38,26 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToABicomplex",
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "GeneralizedEmbeddingsInTotalDefects",
+        IsHomalgSpectralSequence );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
 
 # constructor methods:
+
+DeclareOperation( "HomalgSpectralSequence",
+        [ IsInt, IsHomalgBicomplex, IsInt ] );
+
+DeclareOperation( "HomalgSpectralSequence",
+        [ IsInt, IsHomalgBicomplex ] );
 
 DeclareOperation( "HomalgSpectralSequence",
         [ IsHomalgBicomplex, IsInt ] );
@@ -120,4 +135,10 @@ DeclareOperation( "CertainMorphism",
 
 DeclareOperation( "UnderlyingBicomplex",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ] );
+
+DeclareOperation( "GeneralizedEmbeddingsInStableSecondSheetOfI_E",
+        [ IsHomalgSpectralSequence, IsInt ] );
+
+DeclareOperation( "GeneralizedEmbeddingsInStableSecondSheetOfI_E",
+        [ IsHomalgSpectralSequence ] );
 

@@ -474,10 +474,18 @@ InstallMethod( Add,
         Error( "there is no module in the source complex with index ", l, "\n" );
     fi;
     
-    if CertainObject( Source( cm ), l ) <> Source( phi ) then
-        Error( "the ", l, ". module of the source complex in the chain map and the source of the new morphism are not the same object\n" );
-    elif CertainObject( Range( cm ), l + d ) <> Range( phi ) then
-        Error( "the ", l, ". module of the target complex in the chain map and the target of the new morphism are not the same object\n" );
+    if IsHomalgModule( Source( phi ) ) then
+        if not IsIdenticalObj( CertainObject( Source( cm ), l ), Source( phi ) ) then
+            Error( "the ", l, ". module of the source complex in the chain map and the source of the new map are not identical\n" );
+        elif not IsIdenticalObj( CertainObject( Range( cm ), l + d ), Range( phi ) ) then
+            Error( "the ", l, ". module of the target complex in the chain map and the target of the new map are not identical\n" );
+        fi;
+    else
+        if CertainObject( Source( cm ), l ) <> Source( phi ) then
+            Error( "the ", l, ". object of the source complex in the chain map and the source of the new morphism are not the same\n" );
+        elif CertainObject( Range( cm ), l + d ) <> Range( phi ) then
+            Error( "the ", l, ". object of the target complex in the chain map and the target of the new morphism are not the same\n" );
+        fi;
     fi;
     
     Add( degrees, l );
@@ -489,6 +497,26 @@ InstallMethod( Add,
     homalgResetFilters( cm );
     
     return cm;
+    
+end );
+
+##
+InstallMethod( Add,
+        "for homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgMatrix ],
+        
+  function( cm, mat )
+    local i, degree, S, T, phi;
+    
+    i := HighestDegreeInChainMap( cm ) + 1;
+    degree := DegreeOfMorphism( cm );
+    
+    S := Source( cm );
+    T := Range( cm );
+    
+    phi := HomalgMap( mat, CertainObject( S, i ), CertainObject( T, i + degree ) );
+    
+    Add( cm, phi );
     
 end );
 
@@ -999,17 +1027,16 @@ InstallGlobalFunction( HomalgChainMap,
     
     nargs := Length( arg );
     
-    if nargs = 0 then
-        Error( "empty input\n" );
+    if nargs < 2 then
+        Error( "too few arguments\n" );
     fi;
     
-    if nargs > 0 and IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+    if IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[1] );
-    else
-        Error( "the first argument must be a morphism" );
+        morphism := arg[1];
+    elif nargs = 1 then
+        Error( "if a single argument is given it must be a homalg morphism\n" );
     fi;
-    
-    morphism := arg[1];
     
     if nargs > 1 and IsHomalgComplex( arg[2] ) then
         if not IsBound( left ) then
@@ -1037,6 +1064,14 @@ InstallGlobalFunction( HomalgChainMap,
     else
         degrees := [ ObjectDegreesOfComplex( source )[1] ];
         degree := 0;
+    fi;
+    
+    if not IsBound( morphism ) then
+        if IsHomalgMatrix( arg[1] ) then
+            morphism := HomalgMap( arg[1], CertainObject( source, degrees[1] ), CertainObject( target, degrees[1] + degree ) );
+        else
+            Error( "the first argument must be a homalg matrix or a morphism\n" );
+        fi;
     fi;
     
     if IsHomalgMap( morphism ) then

@@ -53,7 +53,7 @@ InstallImmediateMethod( IsInjectivePresentation,
     
     mat := MatrixOfRelations( rel );
     
-    if HasIsFullRowRankMatrix( mat ) and IsFullRowRankMatrix( mat ) then
+    if HasIsLeftRegularMatrix( mat ) and IsLeftRegularMatrix( mat ) then
         return true;
     fi;
     
@@ -70,7 +70,7 @@ InstallImmediateMethod( IsInjectivePresentation,
     
     mat := MatrixOfRelations( rel );
     
-    if HasIsFullColumnRankMatrix( mat ) and IsFullColumnRankMatrix( mat ) then
+    if HasIsRightRegularMatrix( mat ) and IsRightRegularMatrix( mat ) then
         return true;
     fi;
     
@@ -334,7 +334,7 @@ InstallMethod( BasisOfModule,
         if bas = mat and IsReducedModuloRingRelations( mat ) then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas; ## CAUTION: be very careful here!!!
-            if HasIsFullRowRankMatrix( bas ) and IsFullRowRankMatrix( bas ) then
+            if HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas ) then
                 SetIsInjectivePresentation( rel, true );
             fi;
             return rel;
@@ -369,7 +369,7 @@ InstallMethod( BasisOfModule,
         if bas = mat and IsReducedModuloRingRelations( mat ) then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas; ## CAUTION: be very careful here!!!
-            if HasIsFullColumnRankMatrix( bas ) and IsFullColumnRankMatrix( bas ) then
+            if HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas ) then
                 SetIsInjectivePresentation( rel, true );
             fi;
             return rel;

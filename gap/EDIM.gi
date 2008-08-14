@@ -139,7 +139,7 @@ InstallMethod( CreateHomalgTable,
                    SetNrRows( H, NrRows( M ) );
                    SetNrColumns( H, NrColumns( M ) );
                    
-                   SetIsUpperTriangularMatrix( H, true );
+                   SetIsUpperStairCaseMatrix( H, true );
                    
                    return H;
                    

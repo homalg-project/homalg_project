@@ -1199,7 +1199,12 @@ InstallGlobalFunction( HomalgMatrix,
     elif IsInternalMatrixHull( arg[1] ) then
         M := arg[1]!.matrix;
     else
-        M := ShallowCopy( arg[1] );	## by this we are sure that possible changes to a mutable internal matrix arg[1] does not destroy the logic of homalg
+        RP := homalgTable( R );
+        if IsMatrix( arg[1] ) and IsBound(RP!.ConvertMatrix) then
+            M := RP!.ConvertMatrix( One( R ) * arg[1], R!.ring );
+        else
+            M := ShallowCopy( arg[1] );	## by this we are sure that possible changes to a mutable internal matrix arg[1] does not destroy the logic of homalg
+        fi;
     fi;
     
     if IsHomalgInternalRingRep( R ) then ## TheTypeHomalgInternalMatrix
@@ -1647,8 +1652,12 @@ InstallMethod( ViewObj,
     if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
         if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
             Print( " diagonal" );
+        elif HasIsUpperStairCaseMatrix( o ) and IsUpperStairCaseMatrix( o ) then
+            Print( " upper staircase" );
         elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
             Print( " strict upper triangular" );
+        elif HasIsLowerStairCaseMatrix( o ) and IsLowerStairCaseMatrix( o ) then
+            Print( " lower staircase" );
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
             Print( " strict lower triangular" );
         elif HasIsUpperTriangularMatrix( o ) and IsUpperTriangularMatrix( o ) and not ( HasNrRows( o ) and NrRows( o ) = 1 ) then
@@ -1680,14 +1689,14 @@ InstallMethod( ViewObj,
         else
             if HasIsRightInvertibleMatrix( o ) and IsRightInvertibleMatrix( o ) then
                 Print( " right invertible" );
-            elif HasIsFullRowRankMatrix( o ) and IsFullRowRankMatrix( o ) then
-                Print( " full row rank" );
+            elif HasIsLeftRegularMatrix( o ) and IsLeftRegularMatrix( o ) then
+                Print( " left regular" );
             fi;
             
             if HasIsLeftInvertibleMatrix( o ) and IsLeftInvertibleMatrix( o ) then
                 Print( " left invertible" );
-            elif HasIsFullColumnRankMatrix( o ) and IsFullColumnRankMatrix( o ) then
-                Print( " full column rank" );
+            elif HasIsRightRegularMatrix( o ) and IsRightRegularMatrix( o ) then
+                Print( " right regular" );
             fi;
         fi;
     fi;

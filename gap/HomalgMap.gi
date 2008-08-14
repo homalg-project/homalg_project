@@ -65,6 +65,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( DegreeOfMorphism,
+        "for homalg maps",
+        [ IsHomalgMap ],
+        
+  function( phi )
+    
+    return 0;
+    
+end );
+
+##
 InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
@@ -908,7 +919,7 @@ InstallGlobalFunction( HomalgMap,
         option := arg[1][1];
         
         if Length( option ) > 3 and LowercaseString( option{[1..4]} ) = "zero" then
-            ## the zero morphism:
+            ## the zero map:
             
             matrix := HomalgZeroMatrix( nr_rows, nr_columns, R );
             
@@ -932,7 +943,7 @@ InstallGlobalFunction( HomalgMap,
             fi;
             
         elif Length( option ) > 7 and  LowercaseString( option{[1..8]} ) = "identity" then
-            ## the identity morphism:
+            ## the identity map:
             
             if nr_rows <> nr_columns then
                 Error( "for a matrix of a morphism to be the identity matrix the number of generators of the source and target module must coincide\n" );
@@ -1047,7 +1058,7 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero morphism of homalg modules
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
         Print( " non-zero" );
     fi;
     
@@ -1055,7 +1066,11 @@ InstallMethod( ViewObj,
         if IsMorphism( o ) then
             Print( " homomorphism of" );
         elif HasMonomorphismModuloImage( o ) then
-            Print( " generalized embedding of" );
+            if HasIsGeneralizedEmbedding( o ) and IsGeneralizedEmbedding( o ) then
+                Print( " generalized embedding of" );
+            else
+                Print( " \"generalized embedding\" of" );
+            fi;
         else
             Print( " non-well-defined map between" );
         fi;
@@ -1199,7 +1214,7 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero morphism of homalg modules
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
         Print( " non-zero" );
     elif not ( HasIsMorphism( o ) and not IsMorphism( o ) ) then
         Print( "n" );

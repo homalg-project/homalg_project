@@ -20,30 +20,40 @@ InstallMethod( DefectOfExactness,
         [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, i )
-    local degrees, S, T, sq, def;
+    local degree, degrees, S, source_degrees, T, target_degrees, sq, def;
+    
+    degree := DegreeOfMorphism( cm );
     
     degrees := DegreesOfChainMap( cm );
     
     S := Source( cm );
+    
+    source_degrees := ObjectDegreesOfComplex( S );
+    
     T := Range( cm );
+    
+    target_degrees := ObjectDegreesOfComplex( T );
     
     if PositionSet( degrees, i ) = fail then
         Error( "the second argument ", i, " is outside the degree range of the chain map\n" );
     elif HasIsGradedObject( S ) and IsGradedObject( S ) and
       HasIsGradedObject( T ) and IsGradedObject( T ) then
         return CertainMorphism( cm, i );
-    elif i = degrees[1] then
+    elif i = degrees[1] and i = source_degrees[1] and i + degree = target_degrees[1] then
         sq := CertainMorphismAsImageSquare( cm, i );
         def := Cokernel( sq );
-    elif i = degrees[Length( degrees )] then
+    elif i = degrees[Length( degrees )] and i = source_degrees[Length( source_degrees )] and i + degree = target_degrees[Length( target_degrees )] then
         sq := CertainMorphismAsKernelSquare( cm, i );
         def := Kernel( sq );
-    else
+    elif i <> source_degrees[1] and i + degree <> target_degrees[1] and
+      i <> source_degrees[Length( source_degrees )] and i + degree <> target_degrees[Length( target_degrees )] then
         sq := CertainMorphismAsLambekPairOfSquares( cm, i );
         def := DefectOfExactness( sq );
+    else
+        Error( "the ", i, ". morphism of the chain map is neither at one of the ends nor in the middle of both source and target complexes\n" );
     fi;
     
-    return def;
+    return def;		## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
     
 end );
 
@@ -53,30 +63,40 @@ InstallMethod( DefectOfExactness,
         [ IsCochainMapOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, i )
-    local degrees, S, T, sq, def;
+    local degree, degrees, S, source_degrees, T, target_degrees, sq, def;
+    
+    degree := DegreeOfMorphism( cm );
     
     degrees := DegreesOfChainMap( cm );
     
     S := Source( cm );
+    
+    source_degrees := ObjectDegreesOfComplex( S );
+    
     T := Range( cm );
+    
+    target_degrees := ObjectDegreesOfComplex( T );
     
     if PositionSet( degrees, i ) = fail then
         Error( "the second argument ", i, " is outside the degree range of the chain map\n" );
     elif HasIsGradedObject( S ) and IsGradedObject( S ) and
       HasIsGradedObject( T ) and IsGradedObject( T ) then
         return CertainMorphism( cm, i );
-    elif i = degrees[1] then
+    elif i = degrees[1] and i = source_degrees[1] and i + degree = target_degrees[1] then
         sq := CertainMorphismAsKernelSquare( cm, i );
         def := Kernel( sq );
-    elif i = degrees[Length( degrees )] then
+    elif i = degrees[Length( degrees )] and i = source_degrees[Length( source_degrees )] and i + degree = target_degrees[Length( target_degrees )] then
         sq := CertainMorphismAsImageSquare( cm, i );
         def := Cokernel( sq );
-    else
+    elif i <> source_degrees[1] and i + degree <> target_degrees[1] and
+      i <> source_degrees[Length( source_degrees )] and i + degree <> target_degrees[Length( target_degrees )] then
         sq := CertainMorphismAsLambekPairOfSquares( cm, i );
         def := DefectOfExactness( sq );
+    else
+        Error( "the ", i, ". morphism of the chain map is neither at one of the ends nor in the middle of both source and target complexes\n" );
     fi;
     
-    return def;
+    return def;		## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
     
 end );
 

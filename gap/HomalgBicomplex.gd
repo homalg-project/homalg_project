@@ -100,9 +100,6 @@ DeclareOperation( "CertainHorizontalMorphism",
 DeclareOperation( "BiDegreesOfObjectOfTotalComplex",
         [ IsHomalgBicomplex, IsInt ] );
 
-DeclareOperation( "ObjectOfTotalComplex",
-        [ IsHomalgBicomplex, IsInt ] );
-
 DeclareOperation( "MorphismOfTotalComplex",
         [ IsHomalgBicomplex, IsInt ] );
 

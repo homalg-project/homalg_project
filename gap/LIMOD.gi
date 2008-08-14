@@ -459,6 +459,40 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule and HasLeftActingDomain, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) = CodimOfModule( M ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsPure,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule and HasRightActingDomain, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) = CodimOfModule( M ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsPure,
         IsFinitelyPresentedModuleRep and HasIsTorsion and HasIsTorsionFree, 0,
         
   function( M )
