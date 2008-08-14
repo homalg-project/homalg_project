@@ -23,7 +23,7 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                
                 BestBasis :=
                   function( arg )
-                     local M, R, nargs, S, U, V, rank_of_S, RP;
+                     local M, R, RP, nargs, S, U, V;
                      
                      M := arg[1];
                      
@@ -62,20 +62,15 @@ InstallValue( CommonHomalgTableForSingularBestBasis,
                         
                         ## compute S, U and (if nargs > 2) V with S = U*M*V as side effect
                         ## but these Matrices are only exported and have to be set
-                        ## and return the rank
                         homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
-                        rank_of_S := StringToInt( homalgSendBlocking( [ "l[2]" ], R, "need_output") );
                         homalgSendBlocking( [ "matrix ",S,"=l[1]" ], "need_command");
                         homalgSendBlocking( [ "matrix ",U,"=l[3]" ], "need_command");
                         homalgSendBlocking( [ "matrix ",V,"=l[4]" ], "need_command");
                      else
                         ## compute S only - same as above
                         homalgSendBlocking( [ "list l=smith(", M,")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
-                        rank_of_S := StringToInt( homalgSendBlocking( [ "l[2]" ], "need_output") );
                         homalgSendBlocking( [ "matrix ",S,"=l[1]" ], "need_command");
                      fi;
-                     
-                     SetRowRankOfMatrix( S, rank_of_S );
                      
                      return S;
                      

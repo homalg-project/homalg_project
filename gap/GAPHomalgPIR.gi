@@ -57,7 +57,7 @@ InstallMethod( CreateHomalgTable,
                
                TriangularBasisOfRows :=
                  function( arg )
-                   local M, R, nargs, N, U, rank_of_N;
+                   local M, R, nargs, N, U;
                    
                    M := arg[1];
                    
@@ -67,8 +67,6 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   SetIsUpperTriangularMatrix( N, true );
-                   
                    if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
                        # assign U:
                        U := arg[2];
@@ -77,13 +75,13 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       rank_of_N := StringToInt( homalgSendBlocking( [ U, " := HomalgVoidMatrix(", R, ");; ", N, " := TriangularBasisOfRows(", M, U, ");; RowRankOfMatrix(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasisC ) );
+                       homalgSendBlocking( [ U, ":=HomalgVoidMatrix(", R, ");;", N, ":=TriangularBasisOfRows(", M, U, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasisC );
                    else
                        ## compute N only:
-                       rank_of_N := StringToInt( homalgSendBlocking( [ N, " := TriangularBasisOfRows(", M, ");; RowRankOfMatrix(", N, ")" ], "need_output", HOMALG_IO.Pictograms.TriangularBasis ) );
+                       homalgSendBlocking( [ N, ":=TriangularBasisOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
                    fi;
                    
-                   SetRowRankOfMatrix( N, rank_of_N );
+                   SetIsUpperTriangularMatrix( N, true );
                    
                    return N;
                    

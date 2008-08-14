@@ -53,7 +53,7 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                
                BestBasis :=
                  function( arg )
-                   local M, R, nargs, S, U, V, rank_of_S;
+                   local M, R, nargs, S, U, V;
                    
                    M := arg[1];
                    
@@ -86,13 +86,11 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       rank_of_S := StringToInt( homalgSendBlocking( [ S, U, V, "= BestBasis_SUV(", M, "); ", S, ".rank()" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
+                       homalgSendBlocking( [ S, U, V, "= BestBasis_SUV(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
                    else
                        ## compute S only:
-                       rank_of_S := StringToInt( homalgSendBlocking( [ S, " = BestBasis_S_only(", M, "); ", S, ".rank()" ], "need_output", HOMALG_IO.Pictograms.BestBasis ) );
+                       homalgSendBlocking( [ S, " = BestBasis_S_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
                    fi;
-                   
-                   SetRowRankOfMatrix( S, rank_of_S );
                    
                    return S;
                    

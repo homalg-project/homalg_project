@@ -139,7 +139,7 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Görtzen",
+    LastName      := "Goertzen",
     FirstNames    := "Simon",
     IsAuthor      := true,
     IsMaintainer  := true,
