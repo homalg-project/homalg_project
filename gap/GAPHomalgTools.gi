@@ -212,7 +212,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    list_string := homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroRows );
                    
-                   return StringToIntList( list_string );
+                   return EvalString( list_string );
                    
                  end,
                
@@ -222,7 +222,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    list_string := homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns );
                    
-                   return StringToIntList( list_string );
+                   return EvalString( list_string );
                    
                  end,
                
@@ -249,7 +249,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    if list_string = "fail" then
                        return fail;
                    else
-                       return StringToIntList( list_string );
+                       return EvalString( list_string );
                    fi;
                    
                  end,
@@ -302,7 +302,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, clean_columns, ")" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
-                   return StringToIntList( list_string );
+                   return EvalString( list_string );
                    
                  end,
                
