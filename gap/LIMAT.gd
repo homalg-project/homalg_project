@@ -17,3 +17,13 @@ SetInfoLevel( InfoLIMAT, 1 );
 # a central place for configurations:
 DeclareGlobalVariable( "LIMAT" );
 
+####################################
+#
+# global variables:
+#
+####################################
+
+DeclareGlobalVariable( "LogicalImplicationsForHomalgMatrices" );
+
+DeclareGlobalVariable( "LogicalImplicationsForHomalgMatricesOverSpecialRings" );
+

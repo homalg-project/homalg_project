@@ -14,7 +14,7 @@ S := HomalgFieldOfRationals( );
 
 Read( "convert_test.g" );
 
-b;
+b := true;
 
 ## GAP <-> External GAP
 

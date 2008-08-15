@@ -598,3 +598,89 @@ end );
                 tmp := gen_emb2 / gen_embI;
             fi;
             
+## from LIMAT.gi
+
+##
+InstallTrueMethod( IsReducedModuloRingRelations, IsHomalgMatrix and IsZero );
+
+##
+InstallTrueMethod( IsZero, IsHomalgMatrix and IsEmptyMatrix );
+
+##
+InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsIdentityMatrix );
+
+##
+InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsSubidentityMatrix and IsInvertibleMatrix );
+
+##
+InstallTrueMethod( IsInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
+
+##
+InstallTrueMethod( IsSubidentityMatrix, IsHomalgMatrix and IsPermutationMatrix );
+
+##
+InstallTrueMethod( IsSubidentityMatrix, IsHomalgMatrix and IsEmptyMatrix );
+
+##
+InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
+
+##
+InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
+
+## a split injective morphism (of free modules) is injective
+InstallTrueMethod( IsLeftRegularMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
+
+##
+InstallTrueMethod( IsRightRegularMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
+
+## an isomorphism is split injective
+InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
+
+## an isomorphism is split surjective
+InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
+
+## a split surjective and split injective morphism (of free modules) is an isomorphism
+InstallTrueMethod( IsInvertibleMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix and IsRightInvertibleMatrix );
+
+##
+InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsDiagonalMatrix );
+
+##
+InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsDiagonalMatrix );
+
+##
+InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsStrictUpperTriangularMatrix );
+
+##
+InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsStrictLowerTriangularMatrix );
+
+##
+InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsUpperStairCaseMatrix );
+
+##
+InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsLowerStairCaseMatrix );
+
+##
+InstallTrueMethod( IsTriangularMatrix, IsHomalgMatrix and IsUpperTriangularMatrix );
+
+##
+InstallTrueMethod( IsTriangularMatrix, IsHomalgMatrix and IsLowerTriangularMatrix );
+
+##
+InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsUpperTriangularMatrix and IsLowerTriangularMatrix );
+
+##
+InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsZero );
+
+##
+InstallTrueMethod( IsStrictUpperTriangularMatrix, IsHomalgMatrix and IsZero );
+
+##
+InstallTrueMethod( IsStrictLowerTriangularMatrix, IsHomalgMatrix and IsZero );
+
+##
+InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsIdentityMatrix );
+
+##
+InstallTrueMethod( IsZero, IsHomalgMatrix and IsStrictUpperTriangularMatrix and IsStrictLowerTriangularMatrix );
+

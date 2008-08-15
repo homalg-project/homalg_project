@@ -23,95 +23,120 @@ InstallValue( LIMAT,
             color := "\033[4;30;46m" )
         );
 
+##
+InstallValue( LogicalImplicationsForHomalgMatrices,
+        [ ## logical implications for matrices
+          
+          [ IsEmptyMatrix,
+            "implies", IsZero ],
+          
+          [ IsEmptyMatrix,
+            "implies", IsSubidentityMatrix ],
+          
+          [ IsZero,
+            "implies", IsReducedModuloRingRelations ],
+          
+          ## follows from the rest, but this gives a direct way
+          [ IsZero,
+            "implies", IsDiagonalMatrix ],
+          
+          [ IsZero,
+            "implies", IsUpperStairCaseMatrix ],
+          
+          [ IsZero,
+            "implies", IsLowerStairCaseMatrix ],
+          
+          [ IsZero,
+            "implies", IsStrictUpperTriangularMatrix ],
+          
+          [ IsZero,
+            "implies", IsStrictLowerTriangularMatrix ],
+          
+          [ IsIdentityMatrix,
+            "implies", IsPermutationMatrix ],
+          
+          ## follows from the rest, but this gives a direct way
+          [ IsIdentityMatrix,
+            "implies", IsDiagonalMatrix ],
+          
+          [ IsIdentityMatrix,
+            "implies", IsUpperStairCaseMatrix ],
+          
+          [ IsIdentityMatrix,
+            "implies", IsLowerStairCaseMatrix ],
+          
+          [ IsSubidentityMatrix, "and", IsInvertibleMatrix,
+            "imply", IsPermutationMatrix ],
+          
+          [ IsPermutationMatrix,
+            "implies", IsInvertibleMatrix ],
+          
+          [ IsPermutationMatrix,
+            "implies", IsSubidentityMatrix ],
+          
+          ## a split injective morphism (of free modules) is injective
+          [ IsRightInvertibleMatrix,
+            "implies", IsLeftRegularMatrix ],
+          
+          [ IsLeftInvertibleMatrix,
+            "implies", IsRightRegularMatrix ],
+          
+          ## an isomorphism is split injective
+          [ IsInvertibleMatrix,
+            "implies", IsRightInvertibleMatrix ],
+          
+          ## an isomorphism is split surjective
+          [ IsInvertibleMatrix,
+            "implies", IsLeftInvertibleMatrix ],
+          
+          ## a split surjective and split injective morphism (of free modules) is an isomorphism
+          [ IsLeftInvertibleMatrix, "and", IsRightInvertibleMatrix,
+            "imply", IsInvertibleMatrix ],
+          
+          [ IsDiagonalMatrix,
+            "implies", IsUpperTriangularMatrix ],
+          
+          [ IsDiagonalMatrix,
+            "implies", IsLowerTriangularMatrix ],
+          
+          [ IsStrictUpperTriangularMatrix,
+            "implies", IsUpperTriangularMatrix ],
+          
+          [ IsStrictLowerTriangularMatrix,
+            "implies", IsLowerTriangularMatrix ],
+          
+          [ IsUpperStairCaseMatrix,
+            "implies", IsUpperTriangularMatrix ],
+          
+          [ IsLowerStairCaseMatrix,
+            "implies", IsLowerTriangularMatrix ],
+          
+          [ IsUpperTriangularMatrix,
+            "implies", IsTriangularMatrix ],
+          
+          [ IsLowerTriangularMatrix,
+            "implies", IsTriangularMatrix ],
+          
+          [ IsUpperTriangularMatrix, "and", IsLowerTriangularMatrix,
+            "imply", IsDiagonalMatrix ],
+          
+          ] );
+
+##
+InstallValue( LogicalImplicationsForHomalgMatricesOverSpecialRings,
+        [ ## logical implications for matrices over special rings
+          
+          ] );
+
 ####################################
 #
 # logical implications methods:
 #
 ####################################
 
-##
-InstallTrueMethod( IsReducedModuloRingRelations, IsHomalgMatrix and IsZero );
+InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMatrices, IsHomalgMatrix );
 
-##
-InstallTrueMethod( IsZero, IsHomalgMatrix and IsEmptyMatrix );
-
-##
-InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsIdentityMatrix );
-
-##
-InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsSubidentityMatrix and IsInvertibleMatrix );
-
-##
-InstallTrueMethod( IsInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
-
-##
-InstallTrueMethod( IsSubidentityMatrix, IsHomalgMatrix and IsPermutationMatrix );
-
-##
-InstallTrueMethod( IsSubidentityMatrix, IsHomalgMatrix and IsEmptyMatrix );
-
-##
-InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
-
-##
-InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
-
-## a split injective morphism (of free modules) is injective
-InstallTrueMethod( IsLeftRegularMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
-
-##
-InstallTrueMethod( IsRightRegularMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
-
-## an isomorphism is split injective
-InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
-
-## an isomorphism is split surjective
-InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
-
-## a split surjective and split injective morphism (of free modules) is an isomorphism
-InstallTrueMethod( IsInvertibleMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix and IsRightInvertibleMatrix );
-
-##
-InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsDiagonalMatrix );
-
-##
-InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsDiagonalMatrix );
-
-##
-InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsStrictUpperTriangularMatrix );
-
-##
-InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsStrictLowerTriangularMatrix );
-
-##
-InstallTrueMethod( IsUpperTriangularMatrix, IsHomalgMatrix and IsUpperStairCaseMatrix );
-
-##
-InstallTrueMethod( IsLowerTriangularMatrix, IsHomalgMatrix and IsLowerStairCaseMatrix );
-
-##
-InstallTrueMethod( IsTriangularMatrix, IsHomalgMatrix and IsUpperTriangularMatrix );
-
-##
-InstallTrueMethod( IsTriangularMatrix, IsHomalgMatrix and IsLowerTriangularMatrix );
-
-##
-InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsUpperTriangularMatrix and IsLowerTriangularMatrix );
-
-##
-InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsZero );
-
-##
-InstallTrueMethod( IsStrictUpperTriangularMatrix, IsHomalgMatrix and IsZero );
-
-##
-InstallTrueMethod( IsStrictLowerTriangularMatrix, IsHomalgMatrix and IsZero );
-
-##
-InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsIdentityMatrix );
-
-##
-InstallTrueMethod( IsZero, IsHomalgMatrix and IsStrictUpperTriangularMatrix and IsStrictLowerTriangularMatrix );
+InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMatricesOverSpecialRings, IsHomalgMatrix, IsHomalgRing );
 
 ####################################
 #
