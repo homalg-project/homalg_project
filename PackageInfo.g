@@ -275,12 +275,14 @@ AvailabilityTest := function()
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
-  "-----------------------------------------------------------------------------------------------\n",
+  "----------------------------------------------------------------\n",
   "Loading  SCO ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
-  "Type ?SCO: for help contents, ?SCO:n to read chapter n, ?SCO:term to search for a certain term.\n",
-  "-----------------------------------------------------------------------------------------------\n" ),
+  "Type ?SCO:     for help contents,\n",
+  "     ?SCO:n    to read chapter n,\n",
+  "     ?SCO:term to search for a certain term.\n",
+  "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
