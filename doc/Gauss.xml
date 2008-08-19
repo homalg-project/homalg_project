@@ -30,7 +30,7 @@
 	  (Germany)
 	  </Address>
   </Author>
-  <Date>July 2008</Date>
+  <Date>August 2008</Date>
   <Abstract>This document explains the primary uses of the &Gauss; package.
             Included is a documented list of the most important methods
             and functions needed to work with sparse matrices and the
@@ -470,7 +470,8 @@ in source code should just check out the files in the
      <#Include Label="ConvertSparseMatrixToMatrix">
      <#Include Label="CopyMat">
      <#Include Label="GetEntry">
-     <#Include Label="AddEntry">
+     <#Include Label="SetEntry">
+     <#Include Label="AddToEntry">
      <#Include Label="SparseZeroMatrix">
      <#Include Label="SparseIdentityMatrix">
      <#Include Label="TransposedSparseMat">
