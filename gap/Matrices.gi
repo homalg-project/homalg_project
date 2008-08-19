@@ -59,12 +59,13 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
 
 ##  <#GAPDoc Label="CreateCoboundaryMatrices">
 ##  <ManSection>
-##  <Meth Arg="S, d, R" Name="CreateCoboundaryMatrices"/>
+##  <Meth Arg="S[, d], R" Name="CreateCoboundaryMatrices"/>
 ##  <Returns>List <A>M</A></Returns>
 ##  <Description>
 ##  This returns the list <A>M</A> of homalg matrices over the homalg ring
 ##  <A>R</A> up to dimension <A>d</A>, corresponding to the coboundary matrices
-##  induced by the simplicial set <A>S</A>.
+##  induced by the simplicial set <A>S</A>. If <A>d</A> is not given, the
+##  current dimension of <A>S</A> is used.
 ##  <Example><![CDATA[
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
@@ -116,6 +117,13 @@ InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
   end
 );
   
+InstallMethod( CreateCoboundaryMatrices,
+        [ IsSimplicialSet, IsHomalgRing ],
+  function( ss, R )
+    return CreateCoboundaryMatrices( ss, ss!.dimension - 1, R );
+  end
+);
+
 ##  <#GAPDoc Label="CreateBoundaryMatrices">
 ##  <ManSection>
 ##  <Meth Arg="S, d, R" Name="CreateBoundaryMatrices"/>
@@ -123,7 +131,8 @@ InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
 ##  <Description>
 ##  This returns the list <A>M</A> of homalg matrices over the homalg ring
 ##  <A>R</A> up to dimension <A>d</A>, corresponding to the boundary matrices
-##  induced by the simplicial set <A>S</A>.
+##  induced by the simplicial set <A>S</A>. If <A>d</A> is not given, the
+##  current dimension of <A>S</A> is used.
 ##  <Example><![CDATA[
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
@@ -139,8 +148,47 @@ InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
 ##
 InstallMethod( CreateBoundaryMatrices, "for internal and external rings",
         [ IsSimplicialSet, IsInt, IsHomalgRing ],
-  function( s, d, R )
-    return List( CreateCoboundaryMatrices( s, d, R ), Involution );
+  function( ss, d, R )
+    local S, x, matrices, one, minusone, k, p, i, ind, pos, res;
+    
+    S := x -> SimplicialSet( ss, x );
+    matrices := [];
+    
+    one := One( R );
+    minusone := MinusOne( R );
+    
+    for k in [ 1 .. d + 1 ] do
+        if Length( S(k) ) = 0 then
+            matrices[k] := HomalgInitialMatrix( 1, Length( S(k-1) ), R );
+        else
+            matrices[k] := HomalgInitialMatrix( Length( S(k) ), Length( S(k-1) ), R );
+            for p in [ 1 .. Length( S(k) ) ] do #column iterator
+                for i in [ 0 .. k ] do #row iterator
+                    ind := PositionSet( S(k-1), BoundaryOperator( i, S(k)[p], ss!.orbifold_triangulation!.mu ) );
+                    if not ind = fail then
+                        if IsEvenInt( i ) then
+                            AddToEntryOfHomalgMatrix( matrices[k], p, ind, one );
+                        else
+                            AddToEntryOfHomalgMatrix( matrices[k], p, ind, minusone );
+                        fi;
+                    fi;
+                od;
+            od;
+        fi;
+        ResetFilterObj( matrices[k], IsInitialMatrix );
+        ResetFilterObj( matrices[k], IsMutableMatrix );
+    od;
+    
+    return matrices;
+    
+  end
+);
+
+
+InstallMethod( CreateBoundaryMatrices,
+        [ IsSimplicialSet, IsHomalgRing ],
+  function( ss, R )
+    return CreateBoundaryMatrices( ss, ss!.dimension - 1, R );
   end
 );
 

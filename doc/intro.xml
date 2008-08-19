@@ -23,7 +23,7 @@ Chap="usage"/> explains how to use &SCO; to compute simplicial
 my diploma thesis and the corresponding paper (work in
 progress). After this chapter you will find some simple examples on
 using &SCO; with (finite) groups, manifolds, or some easy orbifolds in
-<Ref Chap="examples"/>. Also included in this manual is a documented
+chapter <Ref Chap="examples"/>. Also included in this manual is a documented
 list of the most important methods and functions you will need to work
 with &SCO;'s data types OrbifoldTriangulation and SimplicialSet and to
 create the matrices needed for computations. Anyone interested in

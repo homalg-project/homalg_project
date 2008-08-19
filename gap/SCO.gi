@@ -10,11 +10,11 @@
 
 ##  <#GAPDoc Label="Homology">
 ##  <ManSection>
-##  <Meth Arg="M, R" Name="Homology"/>
-##  <Returns>HomalgComplex</Returns>
+##  <Meth Arg="M[, R]" Name="Homology"/>
+##  <Returns>a &homalg; complex</Returns>
 ##  <Description>
 ##  This returns the homology complex of a list <A>M</A> of
-##  homalg matrices over the homalg ring <A>R</A>.
+##  &homalg; matrices over the &homalg; ring <A>R</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
@@ -50,13 +50,23 @@ InstallMethod( Homology,
   end
 );
 
+InstallMethod( Homology,
+        [ IsList ],
+  function( morphisms )
+    if Length( morphisms ) > 0 and IsHomalgMatrix( morphisms[1] ) then
+        return Homology( morphisms, HomalgRing( morphisms[1] ) );
+    fi;
+    TryNextMethod();
+  end
+);
+
 ##  <#GAPDoc Label="Cohomology">
 ##  <ManSection>
-##  <Meth Arg="M, R" Name="Cohomology"/>
-##  <Returns>HomalgComplex</Returns>
+##  <Meth Arg="M[, R]" Name="Cohomology"/>
+##  <Returns>a &homalg; complex</Returns>
 ##  <Description>
 ##  This returns the cohomology complex of a list <A>M</A> of
-##  homalg matrices over the homalg ring <A>R</A>.
+##  &homalg; matrices over the &homalg; ring <A>R</A>.
 ##  <Example><![CDATA[
 ##  gap> S;
 ##  <The simplicial set of the orbifold triangulation "Teardrop",
@@ -91,6 +101,16 @@ InstallMethod( Cohomology,
     return Cohomology( C );
   end
 );
+  
+InstallMethod( Cohomology,
+        [ IsList ],
+  function( morphisms )
+    if Length( morphisms ) > 0 and IsHomalgMatrix( morphisms[1] ) then
+        return Cohomology( morphisms, HomalgRing( morphisms[1] ) );
+    fi;
+    TryNextMethod();
+  end
+);
 
 ##  <#GAPDoc Label="SCO_Examples">
 ##  <ManSection>
@@ -103,44 +123,47 @@ InstallMethod( Cohomology,
 ##  gap> SCO_Examples();
 ##  @@@@@@@@ SCO @@@@@@@@
 ##  
-##  Select Orbifold (default="C2")
-##  :Torus
-##  
-##  Select Mode:
-##   1) Cohomology (default)
-##   2) Homology
+##  Select base ring:
+##   1) Integers (default)
+##   2) Rationals
+##   3) Z/nZ
 ##  :1
+##  
+##  Select Computer Algebra System:
+##   1) GAP (default)
+##   2) External GAP
+##   3) MAGMA
+##   4) Maple
+##   5) Sage
+##  :3
+##  ---------------------------------------------------------------
+##  Magma V2.14-14    Tue Aug 19 2008 08:36:19 on evariste [Seed = 1054613462]
+##  Type ? for help.  Type <Ctrl>-D to quit.
+##  ----------------------------------------------------------------
+##  
 ##  
 ##  Select Method:
 ##   1) Full syzygy computation (default)
 ##   2) matrix creation and rank computation only
 ##  :1
 ##  
-##  Select Computer Algebra System:
-##   1) Internal GAP (default)
-##   2) External GAP
-##   3) Sage
-##   4) MAGMA
-##   5) Maple
-##  :4
-##   
-##  Select Z/nZ (default: n=0)
-##  :0
-##  ----------------------------------------------------------------
-##  Magma V2.14-14    Wed Jul 30 2008 11:57:23 on emmy     [Seed = 586830190]
-##  Type ? for help.  Type <Ctrl>-D to quit.
-##  ----------------------------------------------------------------
-##  
+##  Select orbifold (default="C2")
+##  :Torus
+##    
+##  Select mode:
+##   1) Cohomology (default)
+##   2) Homology
+##  :1
 ##  
 ##  Select dimension (default = 4)
 ##  :4
-##  Creating the cohomology matrices ...
+##  Creating the coboundary matrices ...
 ##  Starting cohomology computation ...
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
 ##  ----------------------------------------------->>>>  Z^(1 x 2)
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
 ##  ----------------------------------------------->>>>  0
-##  ----------------------------------------------->>>>  0
+##  ----------------------------------------------->>>>  0    
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>

@@ -26,13 +26,13 @@ Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.08.12",
+Version := "2008.08.19",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "12/08/2008",
+Date := "19/08/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -215,7 +215,7 @@ PackageInfoURL :=
 ##  
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
-  # use same as in GAP            
+  # use same as in GAP 
   BookName  := "SCO",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
@@ -231,7 +231,7 @@ PackageDoc := rec(
   LongTitle := "SCO - Simplicial Cohomology of Orbifolds",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
-  Autoload  := false
+  Autoload  := true
 ),
 
 
@@ -244,7 +244,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["homalg", ">= 2008.08.12"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["homalg", ">= 2008.08.17"]],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [],
   # needed external conditions (programs, operating system, ...)  provide 
@@ -275,12 +275,12 @@ AvailabilityTest := function()
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
+  "-----------------------------------------------------------------------------------------------\n",
   "Loading  SCO ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
-  "For help, type: ?SCO package \n",
-  "----------------------------------------------------------------\n" ),
+  "Type ?SCO: for help contents, ?SCO:n to read chapter n, ?SCO:term to search for a certain term.\n",
+  "-----------------------------------------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 

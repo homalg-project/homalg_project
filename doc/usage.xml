@@ -9,9 +9,65 @@ This chapter explains the usage of this package.
 
 -->
 
-<Chapter Label="usage">
-<Heading>Usage</Heading>
+<Chapter Label="usage"><Heading>Usage</Heading>
 
-Under construction...<P/>
+There are different ways to use &SCO;. Please note that for the actual
+computations the &homalg; package is required, and you will need both
+the &RingsForHomalg; and the &GaussForHomalg; package to make use of
+the full computational capabilities. For your information,
+&RingsForHomalg; offers support for external computer algebra systems
+and the rings they support, while &GaussForHomalg; extends &GAP;
+functionality with regards to sparse matrices and computations over
+fields and <M>&ZZ; / \langle p^n \rangle</M>. <P/>
+
+<Section Label="script"><Heading>The Examples Script</Heading>
+
+Regardless of the extend of your installation, you will always be able
+to call the example script <F>SCO/examples/examples.g</F>. This script
+is not only callable in-&GAP; by <Ref Meth="SCO_Examples"/>, but also
+automatically checks which packages you have installed and provides
+you with the available options.
+
+The example script is designed to take you through the ring creation
+process and then load one of the files of your choice located in the
+<F>SCO/examples/orbifolds/</F> directory. In there you will find a lot
+of test files with small 0- or 1-dimensional orbifolds, but also the
+complete triangulations of the 17 orbifolds corresponding to the
+2-dimensional wallpaper groups (these should be exactly the
+uncapitalized files, ranging from <F>p1.g</F> to
+<F>p6m.g</F>). Computing the cohomology of these orbifolds was
+an important part of my diploma thesis <Cite Key="Goe"/> and I have
+also created a separate document <Cite Key="WGC"/> to present my
+results.<P/>
+
+Please note that the variables <C>M</C>, <C>iso</C>, and <C>mu</C>
+in the orbifold files have to keep their name for the example script
+to work correctly. Refer to chapter <Ref Label="examples"/> for
+concrete examples.
+
+</Section>
+
+<Section Label="manual"><Heading>Working Manually</Heading>
+
+Once you are familiar with the example script and want to try out your
+own triangulations, it is best to create your own <F>.g</F> file in
+the <F>SCO/examples/orbifolds/</F> directory, then call the script
+again. If for any reason you do not want to create a file or work with
+the script, you can always do every step by hand. Check <Ref
+Label="ch:MandF"/> if you need to know more about specific methods and
+functions. The basic steps are:<P/>
+
+<List>
+ <Item>Define a list of maximum simplices</Item>
+ <Item>If applicable, define an isotropy record</Item>
+ <Item>If applicable, define a list encoding the <M>\mu</M>-map</Item>
+ <Item>From the above data, create an orbifold triangulation</Item>
+ <Item>Define the simplicial set of the orbifold triangulation</Item>
+ <Item>Create a &homalg; ring <C>R</C></Item>
+ <Item>Create boundary or coboundary matrices over <C>R</C></Item>
+ <Item>Calculate their homology or cohomology</Item>
+</List>
+
+</Section>
 
 </Chapter>

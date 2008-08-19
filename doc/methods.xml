@@ -36,9 +36,9 @@ triangulations</Heading>
 computation</Heading>
 
 <#Include Label="BoundaryOperator">
-<#Include Label="CreateHomologyMatrix">
+<#Include Label="CreateBoundaryMatrices">
 <#Include Label="Homology">
-<#Include Label="CreateCohomologyMatrix">
+<#Include Label="CreateCoboundaryMatrices">
 <#Include Label="Cohomology">
 <#Include Label="SCO_Examples">
 

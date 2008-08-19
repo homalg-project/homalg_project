@@ -4,7 +4,7 @@ if not IsBound(input) then
     input := InputTextUser();
 fi;
 
-Print( "@@@@@@@@ SCO @@@@@@@@\n\n" );
+Print( "@@@@@@@@ SCO @@@@@@@@\n" );
 
 if LoadPackage( "RingsForHomalg" ) = true then
     
@@ -29,19 +29,19 @@ if LoadPackage( "RingsForHomalg" ) = true then
         fi;
     fi;
     
-    Names_of_CAS := [ "GAP", "External GAP", "Sage", "MAGMA", "Maple", "Singular" ];
-    List_of_CAS := [ "", "ExternalGAP", "Sage", "MAGMA", "Maple", "Singular" ];
+    Names_of_CAS := [ "GAP", "External GAP", "MAGMA", "Maple", "Sage", "Singular" ];
+    List_of_CAS := [ "", "ExternalGAP", "MAGMA", "Maple", "Sage", "Singular" ];
     
     if base = 1 then #Z
         sublist := [ 1, 2, 3, 4, 5 ];
     else
         
         if base = 2 then #Q
-            sublist := [ 4, 5, 6 ];
+            sublist := [ 3, 4, 5, 6 ];
         elif base = 3 then #Z/pZ
-            sublist := [ 4, 5, 6 ];
+            sublist := [ 3, 4, 5, 6 ];
         elif base = 4 then  #Z/nZ
-            sublist := [ 5 ];
+            sublist := [ 4 ];
         fi;
         
         if LoadPackage( "GaussForHomalg" ) = true then

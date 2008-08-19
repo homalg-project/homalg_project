@@ -15,5 +15,14 @@ DeclareGlobalFunction( "BoundaryOperator" );
 DeclareOperation( "CreateCoboundaryMatrices",
         [ IsSimplicialSet, IsInt, IsHomalgRing ] );
 
+##
+DeclareOperation( "CreateCoboundaryMatrices",
+        [ IsSimplicialSet, IsHomalgRing ] );
+
+##
 DeclareOperation( "CreateBoundaryMatrices",
         [ IsSimplicialSet, IsInt, IsHomalgRing ] );
+
+##
+DeclareOperation( "CreateBoundaryMatrices",
+        [ IsSimplicialSet, IsHomalgRing ] );
