@@ -15,10 +15,13 @@ This is the appendix.
 <Caption><E>The &GaussForHomalg; package files.</E></Caption>
 <Row><Item>Filename</Item><Item>Content</Item></Row>
 <HorLine/>
+<Row><Item>GaussForHomalg.gi</Item><Item>Methods for matrix entry manipulation</Item></Row>
 <Row><Item>GaussTools.gi</Item><Item>Tools for matrix operations</Item></Row>
 <Row><Item>GaussBasic.gi</Item><Item>The "Basic" Operations (&see;
 <Cite Key="homalg"/>)</Item></Row>
 <Row><Item>GaussFQI.gi</Item><Item>&homalg; Table for finite quotients
 of &ZZ;: <M>&ZZ; / \langle p^n \rangle</M></Item></Row>
+<Row><Item>GaussRationals.gi</Item><Item>&homalg; Table for the
+Rationals &QQ;</Item></Row>
 </Table>
 </Appendix>

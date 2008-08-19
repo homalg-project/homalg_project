@@ -14,6 +14,17 @@
 #
 ####################################
 
+##  <#GAPDoc Label="GetEntryOfHomalgMatrix">
+##  <ManSection>
+##  <Meth Arg="M, r, c, R" Name="GetEntryOfHomalgMatrix"/>
+##  <Returns><A>M</A>[<A>r</A>,<A>c</A>]</Returns>
+##  <Description>
+##  If the Eval attribute of the homalg matrix <A>M</A> over the &homalg;
+##  ring <A>R</A> is sparse, this calls the corresponding &Gauss;
+##  command <C>GetEntry</C>.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
@@ -27,6 +38,17 @@ InstallMethod( GetEntryOfHomalgMatrix,
   end
 );
   
+##  <#GAPDoc Label="SetEntryOfHomalgMatrix">
+##  <ManSection>
+##  <Meth Arg="M, r, c, e, R" Name="SetEntryOfHomalgMatrix"/>
+##  <Returns>nothing</Returns>
+##  <Description>
+##  If the Eval attribute of the homalg matrix <A>M</A> over the &homalg;
+##  ring <A>R</A> is sparse, this calls the corresponding &Gauss;
+##  command <C>GetEntry</C>, to achieve <C><A>M</A>[<A>r</A>,<A>c</A>]:=<A>e</A></C>.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
@@ -40,7 +62,19 @@ InstallMethod( SetEntryOfHomalgMatrix,
     fi;
   end
 );
-  
+
+##  <#GAPDoc Label="AddToEntryOfHomalgMatrix">
+##  <ManSection>
+##  <Meth Arg="M, r, c, e, R" Name="AddToEntryOfHomalgMatrix"/>
+##  <Returns>nothing</Returns>
+##  <Description>
+##  If the Eval attribute of the homalg matrix <A>M</A> over the &homalg;
+##  ring <A>R</A> is sparse, this calls the corresponding &Gauss;
+##  command <C>AddToEntry</C>, to achieve <C><A>M</A>[<A>r</A>,<A>c</A>] 
+##  := <A>M</A>[<A>r</A>,<A>c</A>] + <A>e</A></C>.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],

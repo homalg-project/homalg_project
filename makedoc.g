@@ -6,7 +6,7 @@
 
 LoadPackage("GAPDoc");
 
-MakeGAPDocDoc("doc", "GaussForHomalg", [], "GaussForHomalg");
+MakeGAPDocDoc("doc", "GaussForHomalg", [ "../gap/GaussForHomalg.gi", "../gap/GaussTools.gi", "../gap/GaussBasic.gi", "../gap/GaussFQI.gi" ], "GaussForHomalg");
 
 GAPDocManualLab("GaussForHomalg");
 

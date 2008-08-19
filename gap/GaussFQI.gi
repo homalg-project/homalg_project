@@ -14,6 +14,21 @@
 #
 ####################################
 
+##  <#GAPDoc Label="CreateHomalgTable">
+##  <ManSection>
+##  <Func Arg="R" Name="CreateHomalgTable"/>
+##  <Returns>a &homalg; table</Returns>
+##  <Description>
+##  This returns the &homalg; table of what will become the
+##  &homalg; ring <A>R</A> (at this point <A>R</A> is just a &homalg;
+##  object with some properties for the method selection of <C>CreateHomalgTable</C>).
+##  This method includes the needed functions stored in the global
+##  variables <C>CommonHomalgTableForGaussTools</C> and
+##  <C>CommonHomalgTableForGaussBasic</C>, and can add some more
+##  to the record that will become the &homalg; table.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 InstallMethod( CreateHomalgTable,
         "for Z / p^n * Z",
         [ IsRing and IsFinite ],
@@ -32,6 +47,21 @@ InstallMethod( CreateHomalgTable,
     RP_specific := rec( 
                ## Must be defined if other functions are not defined
                
+##  <#GAPDoc Label="TriangularBasisOfRows">
+##  <ManSection>
+##  <Func Arg="M, [U]" Name="TriangularBasisOfRows"/>
+##  <Returns>a &homalg; matrix <A>N</A></Returns>
+##  <Description>
+##  If one argument is given, this returns the triangular basis
+##  (reduced row echelon form) of the &homalg; matrix <A>M</A>,
+##  again as a &homalg; matrix.
+##  In case of two arguments, still only the triangular basis of <A>M</A> is
+##  returned, but the transformation matrix is stored in the void
+##  &homalg; matrix <A>U</A> as a side effect.
+##  The matrices satisfy <M>N = U * M</M>.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
                TriangularBasisOfRows := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
                  function( arg )
                    local M, R, nargs, result, N, H;
@@ -65,9 +95,9 @@ InstallMethod( CreateHomalgTable,
                    
                    SetNrColumns( H, NrColumns( M ) );
 		   
-                   #if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-		     SetRowRankOfMatrix( H, NrRows( H ) );
-	           #fi;
+                   if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+                       SetRowRankOfMatrix( H, NrRows( H ) );
+	           fi;
 		   
 		   SetZeroRows( H, [] );
 		   
@@ -76,7 +106,7 @@ InstallMethod( CreateHomalgTable,
                    return H;
                    
                  end,
-                 
+
 		 RowRankOfMatrixOverDomain :=
 		   function( M )
 		     return Rank( MyEval( M ) );

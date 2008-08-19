@@ -244,7 +244,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["Gauss", ">=2008.08.08"],["homalg", ">=2008.08.11"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["Gauss", ">=2008.08.11"],["homalg", ">=2008.08.17"]],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [ ],
   # needed external conditions (programs, operating system, ...)  provide 
@@ -279,9 +279,11 @@ BannerString := Concatenation(
   "Loading  GaussForHomalg ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
-  "For help, type: ?GaussForHomalg package \n",
+  "Type ?GaussForHomalg:     for help contents,\n",
+  "     ?GaussForHomalg:n    to read chapter n,\n",
+  "     ?GaussForHomalg:term to search for a certain term.\n",
   "----------------------------------------------------------------\n" ),
-
+                
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 
@@ -295,7 +297,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["GaussForHomalg", "homalg", "RREF" ]
+Keywords := ["GaussForHomalg", "homalg", "Gauss" ]
 
 ));
 

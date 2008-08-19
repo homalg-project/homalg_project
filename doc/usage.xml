@@ -12,6 +12,66 @@ This chapter explains the usage of this package.
 <Chapter Label="usage">
 <Heading>Usage</Heading>
 
-Work in progress.<P/>
+If you are just interested in using the &Gauss; package with &homalg;,
+you do not need to know much about &GaussForHomalg;, as it will work
+in the background, telling &homalg; which functions to call.<P/>
+
+However, you might be interested in writing your own
+<Package>XyzForHomalg</Package>, enabling &homalg; to assist you with
+your computations. For this purpose, I will provide an overview of the
+&GaussForHomalg; code. Please note that &Gauss; is a &GAP; package,
+therefore this is not a reference guide for the package
+&RingsForHomalg;, which utilizes the IO-stream functionality of &IO_ForHomalg;
+to send commands to external computer algebra systems. If you wish to
+tie an external system to &homalg;, &RingsForHomalg; is the better
+reference package.<P/>
+
+The file for all low-level operations is <F>GaussTools.gi</F>. Like
+all "Tools" files it  just includes one global variable
+<C>CommonHomalgTableForGaussTools</C>, which is a record of functions
+with &homalg; matrices as arguments. The return values of the
+&GaussForHomalg; tools are documented in <Ref Label="methods"/> and
+have to be the same for each tools table.<P/>
+
+In this particular case, the file also includes the following
+code:<P/>
+
+<Listing>if IsBound( HOMALG.OtherInternalMatrixTypes ) then
+    Add( HOMALG.OtherInternalMatrixTypes, IsSparseMatrix );
+else
+    HOMALG.OtherInternalMatrixTypes := [ IsSparseMatrix ];
+fi;</Listing>
+
+This is a specialty to explain to &homalg; that &Gauss; introduces a
+new matrix type in &GAP;. Usually, there should not be a need for this.<P/>
+
+The next "general" file is <F>GaussBasic.gi</F>. This includes the
+basic functions based on <Cite Key="BR"/>, again stored in the global
+record <C>CommonHomalgTableForGaussBasic</C>. Preceding this record
+are some small methods to make sure &GaussForHomalg; works with sparse
+as well as with dense matrices - just like above, these should not be
+neccessary in general.<P/>
+
+In <F>GaussForHomalg.gi</F> the methods for matrix entry manipulation
+are installed.<P/>
+
+Finally, we come to the most important files, making sense of the
+basic functions and tools defined above. Depending on the
+functionality (especially concerning function names) of the system you
+will need different files for different rings. In this case,
+functionality for <M>&ZZ; / n &ZZ;</M> is stored in <F>GaussFQI.gi</F>
+(Finite Quotients of the Integers), while the Rationals have their own
+file, <F>GaussRationals.gi</F>. Note that both files include only one
+method, <C>CreateHomalgTable</C>, using method selection to create the
+correct table. Depending on the properties of the ring, the basic
+functions are loaded and some more "specific" functions can be
+defined, in this case for example the function
+<Ref Func="TriangularBasisOfRows"/>, both in a one- and a two-argument
+version. The tools should be universal enough to be loaded for every
+possible ring. If it is neccessary to overwrite a tool, this is the
+place to do it. An example for this could be <Ref Func="Involution"/>,
+which is generally just a matrix transposition, but could be
+overwritten to be a true involution when creating the &homalg; table
+for noncommutative rings.
 
 </Chapter>

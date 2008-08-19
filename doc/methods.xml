@@ -9,14 +9,52 @@ This chapter documents the methods and functions of this package.
 
 -->
 
-<Chapter Label="ch:MandF"><Heading>&GaussForHomalg; methods and
+<Chapter Label="methods"><Heading>&GaussForHomalg; methods and
 functions</Heading>
 
-<Section><Heading>Methods and functions</Heading>
-
-Work in progress.
-
+<Section><Heading><F>The Tools</F></Heading>
+Please note that there are more tool functions you can define,
+&GaussForHomalg; just provides homalg with a sufficient subset. This
+varies with the type and complexity of the rings you want to
+define. On the other hand, <Ref Func="ConvertMatrix"/> is a function
+specifically designed for &GaussForHomalg;.
+<!-- GaussTools.gi -->
+<#Include Label="ZeroMatrix">
+<#Include Label="IdentityMatrix">
+<#Include Label="CopyMatrix">
+<#Include Label="ConvertMatrix">
+<#Include Label="Involution">
+<#Include Label="CertainRows">
+<#Include Label="CertainColumns">
+<#Include Label="UnionOfRows">
+<#Include Label="UnionOfColumns">
+<#Include Label="DiagMat">
+<#Include Label="KroneckerMat">
+<#Include Label="Compose">
+<#Include Label="NrRows">
+<#Include Label="NrColumns">
+<#Include Label="IsZeroMatrix">
+<#Include Label="IsDiagonalMatrix">
+<#Include Label="ZeroRows">
+<#Include Label="ZeroColumns">
 </Section>
 
+<Section><Heading><F>The Basic Functions and table creation</F></Heading>
+<!-- GaussBasic.gi -->
+<#Include Label="DecideZeroRows">
+<#Include Label="DecideZeroRowsEffectively">
+<#Include Label="SyzygiesGeneratorsOfRows">
+<!-- GaussFQI.gi -->
+<#Include Label="TriangularBasisOfRows">
+<#Include Label="CreateHomalgTable">
+</Section>
+
+<Section><Heading><F>Matrix entry manipulation</F></Heading>
+This is just support for the sparse matrix data type.
+<!-- GaussForHomalg.gi -->
+<#Include Label="GetEntryOfHomalgMatrix">
+<#Include Label="SetEntryOfHomalgMatrix">
+<#Include Label="AddToEntryOfHomalgMatrix">
+</Section>
 
 </Chapter>

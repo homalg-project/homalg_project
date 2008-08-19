@@ -8,6 +8,7 @@
    <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
    <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
    <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+   <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
  ]>
 
 <!--
