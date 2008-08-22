@@ -427,9 +427,9 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         d_psi := CertainMorphism( horse_shoe, degrees[2] );
         d_phi := CertainMorphism( horse_shoe, degrees[3] );
         
-        j := HighestDegreeInChainMap( d_psi );
+        j := HighestDegree( d_psi );
         
-        if j <> HighestDegreeInChainMap( d_phi ) then
+        if j <> HighestDegree( d_phi ) then
             Error( "the highest degrees of the two chain maps in the horse shoe do not coincide\n" );
         fi;
         
@@ -452,6 +452,9 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         epsilon := StackMaps( epsilonN, epsilonM );
         
+        ## check assertion
+        Assert( 2, IsEpimorphism( epsilon ) );
+        
         SetIsEpimorphism( epsilon, true );
         
         dj := epsilon;
@@ -460,8 +463,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dE := HomalgComplex( Pj );
         
-        psi := DirectSumEpis( Pj )[2];
-        phi := DirectSumEmbs( Pj )[1];
+        psi := EpiOnRightSummand( Pj );
+        phi := MonoOfLeftSummand( Pj );
         
         d_psi := HomalgChainMap( psi, dE, dM );
         d_phi := HomalgChainMap( phi, dN, dE );
@@ -501,13 +504,17 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         Add( dE, dj );
         
-        psi := DirectSumEpis( Pj )[2];
-        phi := DirectSumEmbs( Pj )[1];
+        psi := EpiOnRightSummand( Pj );
+        phi := MonoOfLeftSummand( Pj );
         
         Add( d_psi, psi );
         Add( d_phi, phi );
         
     od;
+    
+    ## check assertions
+    Assert( 2, IsMorphism( d_psi ) );
+    Assert( 2, IsMorphism( d_phi ) );
     
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
@@ -559,9 +566,9 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         d_phi := CertainMorphism( horse_shoe, degrees[1] );
         d_psi := CertainMorphism( horse_shoe, degrees[2] );
         
-        j := HighestDegreeInChainMap( d_psi );
+        j := HighestDegree( d_psi );
         
-        if j <> HighestDegreeInChainMap( d_phi ) then
+        if j <> HighestDegree( d_phi ) then
             Error( "the highest degrees of the two chain maps in the horse shoe do not coincide\n" );
         fi;
         
@@ -584,6 +591,9 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         epsilon := StackMaps( epsilonN, epsilonM );
         
+        ## check assertion
+        Assert( 2, IsEpimorphism( epsilon ) );
+        
         SetIsEpimorphism( epsilon, true );
         
         dj := epsilon;
@@ -592,8 +602,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dE := HomalgComplex( Pj );
         
-        psi := DirectSumEpis( Pj )[2];
-        phi := DirectSumEmbs( Pj )[1];
+        psi := EpiOnRightSummand( Pj );
+        phi := MonoOfLeftSummand( Pj );
         
         d_psi := HomalgChainMap( psi, dE, dM );
         d_phi := HomalgChainMap( phi, dN, dE );
@@ -633,13 +643,17 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         Add( dE, dj );
         
-        psi := DirectSumEpis( Pj )[2];
-        phi := DirectSumEmbs( Pj )[1];
+        psi := EpiOnRightSummand( Pj );
+        phi := MonoOfLeftSummand( Pj );
         
         Add( d_psi, psi );
         Add( d_phi, phi );
         
     od;
+    
+    ## check assertion
+    Assert( 2, IsMorphism( d_psi ) );
+    Assert( 2, IsMorphism( d_phi ) );
     
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
@@ -698,8 +712,8 @@ InstallMethod( ConnectingHomomorphism,
   function( Hqn, jn, bn, in_1, Hsn_1 )
     local iota_Hqn, iota_Hsn_1, snake;
     
-    iota_Hqn := NaturalEmbedding( Hqn );
-    iota_Hsn_1 := NaturalEmbedding( Hsn_1 );
+    iota_Hqn := NaturalGeneralizedEmbedding( Hqn );
+    iota_Hsn_1 := NaturalGeneralizedEmbedding( Hsn_1 );
     
     snake := iota_Hqn;
     snake := snake / jn;
@@ -719,8 +733,8 @@ InstallMethod( ConnectingHomomorphism,
   function( E, n )
     local j, i, Cq, C, Cs, Hqn, jn, bn, in_1, Hsn_1;
     
-    j := LowestDegreeMorphismInComplex( E );
-    i := HighestDegreeMorphismInComplex( E );
+    j := LowestDegreeMorphism( E );
+    i := HighestDegreeMorphism( E );
     
     Cq := Range( j );
     C := Source( j );
@@ -744,8 +758,8 @@ InstallMethod( ConnectingHomomorphism,
   function( E, n )
     local i, j, Cs, C, Cq, Hqn, jn, bn, inp1, Hsnp1;
     
-    i := LowestDegreeMorphismInComplex( E );
-    j := HighestDegreeMorphismInComplex( E );
+    i := LowestDegreeMorphism( E );
+    j := HighestDegreeMorphism( E );
     
     Cs := Source( i );
     C := Range( i );
@@ -769,7 +783,7 @@ InstallMethod( ConnectingHomomorphism,
   function( E )
     local degrees, l, S, T, con, n;
     
-    degrees := DegreesOfChainMap( LowestDegreeMorphismInComplex( E ) );
+    degrees := DegreesOfChainMap( LowestDegreeMorphism( E ) );
     
     l := Length( degrees );
     
@@ -777,8 +791,8 @@ InstallMethod( ConnectingHomomorphism,
         Error( "complex too small\n" );
     fi;
     
-    S := DefectOfExactness( LowestDegreeObjectInComplex( E ) );
-    T := DefectOfExactness( HighestDegreeObjectInComplex( E ) );
+    S := DefectOfExactness( LowestDegreeObject( E ) );
+    T := DefectOfExactness( HighestDegreeObject( E ) );
     
     n := degrees[2];
     
@@ -802,7 +816,7 @@ InstallMethod( ConnectingHomomorphism,
   function( E )
     local degrees, l, S, T, con, n;
     
-    degrees := DegreesOfChainMap( HighestDegreeMorphismInComplex( E ) );
+    degrees := DegreesOfChainMap( HighestDegreeMorphism( E ) );
     
     l := Length( degrees );
     
@@ -810,8 +824,8 @@ InstallMethod( ConnectingHomomorphism,
         Error( "cocomplex too small\n" );
     fi;
     
-    S := DefectOfExactness( HighestDegreeObjectInComplex( E ) );
-    T := DefectOfExactness( LowestDegreeObjectInComplex( E ) );
+    S := DefectOfExactness( HighestDegreeObject( E ) );
+    T := DefectOfExactness( LowestDegreeObject( E ) );
     
     n := degrees[1];
     
@@ -835,10 +849,10 @@ InstallMethod( ExactTriangle,
   function( E )
     local deg, j, i, con, triangle;
     
-    deg := LowestDegreeInComplex( E ) + 1;
+    deg := LowestDegree( E ) + 1;
     
-    j := DefectOfExactness( LowestDegreeMorphismInComplex( E ) );
-    i := DefectOfExactness( HighestDegreeMorphismInComplex( E ) );
+    j := DefectOfExactness( LowestDegreeMorphism( E ) );
+    i := DefectOfExactness( HighestDegreeMorphism( E ) );
     con := ConnectingHomomorphism( E );
     
     triangle := HomalgComplex( j, deg );
@@ -859,10 +873,10 @@ InstallMethod( ExactTriangle,
   function( E )
     local deg, j, i, con, triangle;
     
-    deg := LowestDegreeInComplex( E );
+    deg := LowestDegree( E );
     
-    i := DefectOfExactness( LowestDegreeMorphismInComplex( E ) );
-    j := DefectOfExactness( HighestDegreeMorphismInComplex( E ) );
+    i := DefectOfExactness( LowestDegreeMorphism( E ) );
+    j := DefectOfExactness( HighestDegreeMorphism( E ) );
     con := ConnectingHomomorphism( E );
     
     triangle := HomalgCocomplex( i, deg );
@@ -883,8 +897,8 @@ InstallMethod( DefectOfExactnessSequence,
   function( cpx_post_pre )
     local pre, post, F_Z, F_B, Z_B, H, F_H, H_Z, C;
     
-    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
-    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    pre := HighestDegreeMorphism( cpx_post_pre );
+    post := LowestDegreeMorphism( cpx_post_pre );
     
     ## read: F <- Z
     F_Z := KernelEmb( post );
@@ -898,7 +912,7 @@ InstallMethod( DefectOfExactnessSequence,
     H := DefectOfExactness( cpx_post_pre );
     
     ## read: F <- H
-    F_H := H!.NaturalEmbedding;
+    F_H := NaturalGeneralizedEmbedding( H );
     
     ## read: H <- Z
     H_Z := F_Z / F_H;
@@ -933,8 +947,8 @@ InstallMethod( DefectOfExactnessCosequence,
   function( cpx_post_pre )
     local pre, post, Z_F, B_F, B_Z, H, H_F, Z_H, C;
     
-    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
-    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    pre := HighestDegreeMorphism( cpx_post_pre );
+    post := LowestDegreeMorphism( cpx_post_pre );
     
     ## read: Z -> F
     Z_F := KernelEmb( post );
@@ -948,7 +962,7 @@ InstallMethod( DefectOfExactnessCosequence,
     H := DefectOfExactness( cpx_post_pre );
     
     ## read: H -> F
-    H_F := H!.NaturalEmbedding;
+    H_F := NaturalGeneralizedEmbedding( H );
     
     ## read: Z -> H
     Z_H := Z_F / H_F;
@@ -1015,7 +1029,7 @@ InstallMethod( Resolution,	### defines: Resolution
     QFB := Resolution( q, CokernelSequence( mor[1] ) );
     
     ## F <- B
-    FB := HighestDegreeMorphismInComplex( QFB );
+    FB := HighestDegreeMorphism( QFB );
     
     ## F
     CE := HomalgComplex( Range( FB ), degrees[1] );
@@ -1026,7 +1040,7 @@ InstallMethod( Resolution,	### defines: Resolution
             HZB := DefectOfExactnessSequence( mor[2], mor[1] );
             
             ## Z <- B
-            ZB := HighestDegreeMorphismInComplex( HZB );
+            ZB := HighestDegreeMorphism( HZB );
             
             Z := Range( ZB );
             
@@ -1034,7 +1048,7 @@ InstallMethod( Resolution,	### defines: Resolution
             HZB := Resolution( q, HZB );
             
             ## Z <- B
-            ZB := HighestDegreeMorphismInComplex( HZB );
+            ZB := HighestDegreeMorphism( HZB );
             
             ## the horse shoe resolution of Z
             PZ := Range( ZB );
@@ -1050,19 +1064,19 @@ InstallMethod( Resolution,	### defines: Resolution
             BFZ := Resolution( q, KernelSequence( mor[1] ) );
             
             ## B <- F
-            BF := LowestDegreeMorphismInComplex( BFZ );
+            BF := LowestDegreeMorphism( BFZ );
             
             ## F[i] <- F[i+1]
             Add( CE, BF * FB );
             
             ## F <- Z
-            FZ := HighestDegreeMorphismInComplex( BFZ );
+            FZ := HighestDegreeMorphism( BFZ );
         else
             ## Z/B =: H <- Z <- B
             HZB := DefectOfExactnessSequence( mor[1], mor[2] );
             
             ## Z <- B
-            ZB := HighestDegreeMorphismInComplex( HZB );
+            ZB := HighestDegreeMorphism( HZB );
             
             Z := Range( ZB );
             
@@ -1070,7 +1084,7 @@ InstallMethod( Resolution,	### defines: Resolution
             HZB := Resolution( q, HZB );
             
             ## Z <- B
-            ZB := HighestDegreeMorphismInComplex( HZB );
+            ZB := HighestDegreeMorphism( HZB );
             
             ## the horse shoe resolution of Z
             PZ := Range( ZB );
@@ -1086,13 +1100,13 @@ InstallMethod( Resolution,	### defines: Resolution
             BFZ := Resolution( q, KernelSequence( mor[1] ) );
             
             ## B <- F
-            BF := LowestDegreeMorphismInComplex( BFZ );
+            BF := LowestDegreeMorphism( BFZ );
             
             ## F[i] <- F[i+1]
             Add( CE, FB * BF );
             
             ## F <- Z
-            FZ := HighestDegreeMorphismInComplex( BFZ );
+            FZ := HighestDegreeMorphism( BFZ );
         fi;
     fi;
     
@@ -1101,13 +1115,13 @@ InstallMethod( Resolution,	### defines: Resolution
             ## Z/B =: H <- Z <- B
             HZB := DefectOfExactnessSequence( mor[i], mor[i-1] );
             
-            Z := Range( HighestDegreeMorphismInComplex( HZB ) );
+            Z := Range( HighestDegreeMorphism( HZB ) );
             
             ## horse shoe
             HZB := Resolution( q, HZB );
             
             ## the horse shoe resolution of Z
-            PZ := Range( HighestDegreeMorphismInComplex( HZB ) );
+            PZ := Range( HighestDegreeMorphism( HZB ) );
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
@@ -1120,29 +1134,29 @@ InstallMethod( Resolution,	### defines: Resolution
             BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
             
             ## B <- F
-            BF := LowestDegreeMorphismInComplex( BFZ );
+            BF := LowestDegreeMorphism( BFZ );
             
             ## F[i] <- F[i+1]
             Add( CE, BF * ZB * FZ );
             
             ## Z <- B
-            ZB := HighestDegreeMorphismInComplex( HZB );
+            ZB := HighestDegreeMorphism( HZB );
             
             ## F <- Z
-            FZ := HighestDegreeMorphismInComplex( BFZ );
+            FZ := HighestDegreeMorphism( BFZ );
         od;
     else
         for i in [ 3 .. l ] do
             ## Z/B =: H <- Z <- B
             HZB := DefectOfExactnessSequence( mor[i-1], mor[i] );
             
-            Z := Range( HighestDegreeMorphismInComplex( HZB ) );
+            Z := Range( HighestDegreeMorphism( HZB ) );
             
             ## horse shoe
             HZB := Resolution( q, HZB );
             
             ## the horse shoe resolution of Z
-            PZ := Range( HighestDegreeMorphismInComplex( HZB ) );
+            PZ := Range( HighestDegreeMorphism( HZB ) );
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
@@ -1155,23 +1169,23 @@ InstallMethod( Resolution,	### defines: Resolution
             BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
             
             ## B <- F
-            BF := LowestDegreeMorphismInComplex( BFZ );
+            BF := LowestDegreeMorphism( BFZ );
             
             ## F[i] <- F[i+1]
             Add( CE, FZ * ZB * BF );
             
             ## Z <- B
-            ZB := HighestDegreeMorphismInComplex( HZB );
+            ZB := HighestDegreeMorphism( HZB );
             
             ## F <- Z
-            FZ := HighestDegreeMorphismInComplex( BFZ );
+            FZ := HighestDegreeMorphism( BFZ );
         od;
     fi;
     
     ## B <- F <- Z
     BFZ := Resolution( q, KernelSequence( mor[l] ) );
     
-    BF := LowestDegreeMorphismInComplex( BFZ );
+    BF := LowestDegreeMorphism( BFZ );
     
     if l > 1 then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
@@ -1240,7 +1254,7 @@ InstallMethod( Resolution,	### defines: Resolution
     ZFB := Resolution( q, KernelCosequence( mor[1] ) );
     
     ## F -> B
-    FB := HighestDegreeMorphismInComplex( ZFB );
+    FB := HighestDegreeMorphism( ZFB );
     
     ## F
     CE := HomalgCocomplex( Source( FB ), degrees[1] );
@@ -1251,7 +1265,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BZH := DefectOfExactnessCosequence( mor[i-1], mor[i] );
             
             ## B -> Z
-            BZ := LowestDegreeMorphismInComplex( BZH );
+            BZ := LowestDegreeMorphism( BZH );
             
             Z := Range( BZ );
             
@@ -1259,7 +1273,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BZH := Resolution( q, BZH );
             
             ## B -> Z
-            BZ := LowestDegreeMorphismInComplex( BZH );
+            BZ := LowestDegreeMorphism( BZH );
             
             ## the horse shoe resolution of Z
             PZ := Range( BZ );
@@ -1275,13 +1289,13 @@ InstallMethod( Resolution,	### defines: Resolution
             ZFB := Resolution( q, KernelCosequence( mor[i] ) );
             
             ## Z -> F
-            ZF := LowestDegreeMorphismInComplex( ZFB );
+            ZF := LowestDegreeMorphism( ZFB );
             
             ## F[i-1] -> F[i]
             Add( CE, FB * BZ * ZF );
             
             ## F -> B
-            FB := HighestDegreeMorphismInComplex( ZFB );
+            FB := HighestDegreeMorphism( ZFB );
         od;
     else
         for i in [ 2 .. l ] do
@@ -1289,7 +1303,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BZH := DefectOfExactnessCosequence( mor[i], mor[i-1] );
             
             ## B -> Z
-            BZ := LowestDegreeMorphismInComplex( BZH );
+            BZ := LowestDegreeMorphism( BZH );
             
             Z := Range( BZ );
             
@@ -1297,7 +1311,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BZH := Resolution( q, BZH );
             
             ## B -> Z
-            BZ := LowestDegreeMorphismInComplex( BZH );
+            BZ := LowestDegreeMorphism( BZH );
             
             ## the horse shoe resolution of Z
             PZ := Range( BZ );
@@ -1313,20 +1327,20 @@ InstallMethod( Resolution,	### defines: Resolution
             ZFB := Resolution( q, KernelCosequence( mor[i] ) );
             
             ## Z -> F
-            ZF := LowestDegreeMorphismInComplex( ZFB );
+            ZF := LowestDegreeMorphism( ZFB );
             
             ## F[i-1] -> F[i]
             Add( CE, ZF * BZ * FB );
             
             ## F -> B
-            FB := HighestDegreeMorphismInComplex( ZFB );
+            FB := HighestDegreeMorphism( ZFB );
         od;
     fi;
     
     ## B -> F -> Q = F/B
     BFQ := Resolution( q, CokernelCosequence( mor[l] ) );
     
-    BF := LowestDegreeMorphismInComplex( BFQ );
+    BF := LowestDegreeMorphism( BFQ );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
         Add( CE, FB * BF );

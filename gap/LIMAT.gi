@@ -970,7 +970,7 @@ end );
 ##
 InstallMethod( KroneckerMat,
         "of homalg matrices",
-        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higer the "KroneckerMat( IsIdentityMatrix, IsHomalgMatrix )", why?
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higher than the "KroneckerMat( IsIdentityMatrix, IsHomalgMatrix )", why?
         
   function( A, B )
     local R;
@@ -2067,7 +2067,7 @@ InstallMethod( DecideZeroRowsEffectively,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( M, M, T )", "\033[0m" );
         
-        SetPreEval( T, HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+        SetPreEval( T, -HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
         
         return 0 * A;
         
@@ -2173,7 +2173,7 @@ InstallMethod( DecideZeroColumnsEffectively,
         
         Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( M, M, T )", "\033[0m" );
         
-        SetPreEval( T, HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
+        SetPreEval( T, -HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) ) ); ResetFilterObj( T, IsVoidMatrix );
         
         return 0 * A;
         

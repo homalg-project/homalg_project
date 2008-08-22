@@ -469,6 +469,7 @@ InstallMethod( AsDifferentialObject,
                             od;
                             mor := mor / emb_target;
                         fi;
+                        SetIsMorphism( mor, true );
                         Er!.(String( [ p, q ] )) := mor;
                     fi;
                 od;
@@ -494,6 +495,7 @@ InstallMethod( AsDifferentialObject,
                             mor := mor / mor_v[l];
                             mor := PreCompose( mor, mor_h[l + 1] );
                         od;
+                        SetIsMorphism( mor, true );
                         mor := mor / emb_target;
                     fi;
                     Er!.(String( [ p, q ] )) := mor;
@@ -563,7 +565,7 @@ InstallMethod( DefectOfExactness,
                     else
                         def := DefectOfExactness( post, pre );
                     fi;
-                    emb := NaturalEmbedding( def );
+                    emb := NaturalGeneralizedEmbedding( def );
                 else
                     def := Kernel( post );
                     emb := KernelEmb( post );
@@ -577,7 +579,7 @@ InstallMethod( DefectOfExactness,
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             elif IsHomalgMorphism( pre ) and not ( HasIsZero( Epq ) and IsZero( Epq ) ) then
                 def := Cokernel( pre );
-                emb := CokernelGeneralizedEmb( pre );
+                emb := CokernelNaturalGeneralizedEmbedding( pre );
                 if IsZero( def ) then
                     H.stability_table[qq-j+1][i] := '.';
                     SetIsZero( emb, true );

@@ -309,9 +309,9 @@ InstallMethod( IsAcyclic,
     fi;
     
     if IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        return IsZero( Kernel( HighestDegreeMorphismInComplex( C ) ) );
+        return IsZero( Kernel( HighestDegreeMorphism( C ) ) );
     else
-        return IsZero( Cokernel( HighestDegreeMorphismInComplex( C ) ) );
+        return IsZero( Cokernel( HighestDegreeMorphism( C ) ) );
     fi;
     
 end );
@@ -348,9 +348,9 @@ InstallMethod( IsExactSequence,
     fi;
     
     if IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        return ForAll( [ Kernel( HighestDegreeMorphismInComplex( C ) ), Cokernel( LowestDegreeMorphismInComplex( C ) ) ], IsZero );
+        return ForAll( [ Kernel( HighestDegreeMorphism( C ) ), Cokernel( LowestDegreeMorphism( C ) ) ], IsZero );
     else
-        return ForAll( [ Cokernel( HighestDegreeMorphismInComplex( C ) ), Kernel( LowestDegreeMorphismInComplex( C ) ) ], IsZero );
+        return ForAll( [ Cokernel( HighestDegreeMorphism( C ) ), Kernel( LowestDegreeMorphism( C ) ) ], IsZero );
     fi;
     
 end );

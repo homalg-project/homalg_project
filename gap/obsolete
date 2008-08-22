@@ -108,8 +108,8 @@ end );
     if IsZero( phi ) then
         coker := Range( phi );
         epi := TheIdentityMorphism( coker );
-        if not IsBound( coker!.NaturalEmbedding ) then
-            coker!.NaturalEmbedding := epi;
+        if not IsBound( coker!.NaturalGeneralizedEmbedding ) then
+            coker!.NaturalGeneralizedEmbedding := epi;
         fi;
         SetCokernelEpi( phi, epi );
         return coker;	## this is crucial for IsIdenticalObj( Ext( 0, M, N ), Hom( M, N ) ) = true (we hope there is no need to set further attributes as below)
@@ -252,13 +252,13 @@ InstallOtherMethod( Cokernel,
     
     d := DegreesOfChainMap( sq )[1];
     
-    dS := LowestDegreeMorphismInComplex( Source( sq ) );
-    dT := LowestDegreeMorphismInComplex( Range( sq ) );
+    dS := LowestDegreeMorphism( Source( sq ) );
+    dT := LowestDegreeMorphism( Range( sq ) );
     
     phi := CertainMorphism( sq, d );
     
-    muS := NaturalEmbedding( Cokernel( dS ) );
-    muT := NaturalEmbedding( Cokernel( dT ) );
+    muS := NaturalGeneralizedEmbedding( Cokernel( dS ) );
+    muT := NaturalGeneralizedEmbedding( Cokernel( dT ) );
     
     return CompleteImageSquare( muS, phi, muT );
     
@@ -273,13 +273,13 @@ InstallOtherMethod( Kernel,
     
     d := DegreesOfChainMap( sq )[1];
     
-    dS := LowestDegreeMorphismInComplex( Source( sq ) );
-    dT := LowestDegreeMorphismInComplex( Range( sq ) );
+    dS := LowestDegreeMorphism( Source( sq ) );
+    dT := LowestDegreeMorphism( Range( sq ) );
     
     phi := CertainMorphism( sq, d );
     
-    muS := NaturalEmbedding( Kernel( dS ) );
-    muT := NaturalEmbedding( Kernel( dT ) );
+    muS := NaturalGeneralizedEmbedding( Kernel( dS ) );
+    muT := NaturalGeneralizedEmbedding( Kernel( dT ) );
     
     return CompleteImageSquare( muS, phi, muT );
     
@@ -299,8 +299,8 @@ InstallOtherMethod( DefectOfExactness,
     
     phi := CertainMorphism( sq, d );
     
-    muS := NaturalEmbedding( DefectOfExactness( dS ) );
-    muT := NaturalEmbedding( DefectOfExactness( dT ) );
+    muS := NaturalGeneralizedEmbedding( DefectOfExactness( dS ) );
+    muT := NaturalGeneralizedEmbedding( DefectOfExactness( dT ) );
     
     return CompleteImageSquare( muS, phi, muT );
     
@@ -315,8 +315,8 @@ InstallOtherMethod( KernelEmb,
     
     d := DegreesOfChainMap( sq )[1];
     
-    dS := LowestDegreeMorphismInComplex( Source( sq ) );
-    dT := LowestDegreeMorphismInComplex( Range( sq ) );
+    dS := LowestDegreeMorphism( Source( sq ) );
+    dT := LowestDegreeMorphism( Range( sq ) );
     
     phi := CertainMorphism( sq, d );
     
@@ -553,7 +553,7 @@ InstallMethod( ObjectOfTotalComplex,
   function( B, n )
     local bidegrees, tot_n, pq, sum, l, summand, embeddings, i, emb_summand;
     
-    bidegrees := BiDegreesOfObjectOfTotalComplex( B, n );
+    bidegrees := BidegreesOfObjectOfTotalComplex( B, n );
     
     if bidegrees = [ ] then
         return fail;
@@ -585,19 +585,6 @@ InstallMethod( ObjectOfTotalComplex,
     
 end );
 
-## from SpectralSequences.gi
-
-        if i >= 0 then
-            gen_embI := I_E2!.absolute_embeddings.(String([ i, 0 ]));
-            if tot_embs <> fail then
-                gen_embI := PreCompose( gen_embI, tot_embs.(String([ i, 0 ])) );
-            fi;
-        fi;
-# ...        
-            if i >= 0 then
-                tmp := gen_emb2 / gen_embI;
-            fi;
-            
 ## from LIMAT.gi
 
 ##
@@ -683,4 +670,399 @@ InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsIdentityMatrix );
 
 ##
 InstallTrueMethod( IsZero, IsHomalgMatrix and IsStrictUpperTriangularMatrix and IsStrictLowerTriangularMatrix );
+
+## from HomalgMap.gi
+
+##
+InstallMethod( StackMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi, psi )
+    local T, phi_psi, SpS, p;
+    
+    T := Range( phi );
+    
+    if not IsIdenticalObj( T, Range( psi ) ) then
+        Error( "the two morphisms must have identical target modules\n" );
+    fi;
+    
+    phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    SpS := Source( phi ) + Source( psi );
+    
+    ## get the position of the set of relations immediately after creating SpS;
+    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
+    
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( StackMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi, psi )
+    local T, phi_psi, SpS, p;
+    
+    T := Range( phi );
+    
+    if not IsIdenticalObj( T, Range( psi ) ) then
+        Error( "the two morphisms must have identical target modules\n" );
+    fi;
+    
+    phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    SpS := Source( phi ) + Source( psi );
+    
+    ## get the position of the set of relations immediately after creating SpS;
+    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
+    
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( AugmentMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi, psi )
+    local S, phi_psi, TpT, p;
+    
+    S := Source( phi );
+    
+    if not IsIdenticalObj( S, Source( psi ) ) then
+        Error( "the two morphisms must have identical source modules\n" );
+    fi;
+    
+    phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    TpT := Range( phi ) + Range( psi );
+    
+    ## get the position of the set of relations immediately after creating TpT;
+    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
+    
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( AugmentMaps,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( phi, psi )
+    local S, phi_psi, TpT, p;
+    
+    S := Source( phi );
+    
+    if not IsIdenticalObj( S, Source( psi ) ) then
+        Error( "the two morphisms must have identical source modules\n" );
+    fi;
+    
+    phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    
+    TpT := Range( phi ) + Range( psi );
+    
+    ## get the position of the set of relations immediately after creating TpT;
+    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
+    
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+## from HomalgBicomplex.gi
+
+            morphism_aids := rec( );	## this allows us to view the split monos (for q = 0) as generalized embeddings in the (first) filtration of the double complex (see GrothendieckSpectralSequence)
+                morphism_aids.(String(bidegrees_source[2])) := MonoOfLeftSummand( S );
+                morphism_aids.(String(bidegrees_source[l])) := MonoOfLeftSummand( S );
+            S!.MorphismAidMapsInObjectOfTotalComplex := morphism_aids;
+            morphism_aids := rec( );	## this allows us to view the split monos (for q = 0) as generalized embeddings in the (first) filtration of the double complex (see GrothendieckSpectralSequence)
+                morphism_aids.(String(bidegrees_target[2])) := MonoOfLeftSummand( T );
+                morphism_aids.(String(bidegrees_target[l])) := MonoOfLeftSummand( T );
+            T!.MorphismAidMapsInObjectOfTotalComplex := morphism_aids;
+
+## from SpectralSequences.gi
+
+            ## stack all morphism aid maps together
+            if HasMorphismAidMap( gen_emb2 ) then
+                if IsHomalgMap( monomorphism_aid_map ) then
+                    monomorphism_aid_map := StackMaps( monomorphism_aid_map, MorphismAidMap( gen_emb2 ) );
+                else
+                    monomorphism_aid_map := MorphismAidMap( gen_emb2 );
+                fi;
+            fi;
+           
+        ## store the monomorphism_aid_map in all the generalized embeddings
+        ## of the second spectral sequence
+        if IsHomalgMap( monomorphism_aid_map ) then
+            for pq in bidegrees do
+                
+                q := pq[1];		## we flip p and q of the bicomplex since we take
+                p := pq[2];		## the second spectral sequence as our reference
+                
+                gen_emb2 := grothendieck2.(String([ p, q ]));
+                
+                RemoveMorphismAidMap( gen_emb2 );
+                
+                SetMorphismAidMap( gen_emb2, monomorphism_aid_map );
+                
+            od;
+        fi;
+        
+##
+InstallMethod( GrothendieckSpectralSequence,
+        "for homalg maps",
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep ],
+        
+  function( Functor_F, Functor_G, M )
+    local F, G, P, GP, CE, FCE, BC, Tot, H, I_E, tBC, II_E, I_E2, II_E2,
+          II_E_infinity, grothendieck, grothendieck1, grothendieck2,
+          n, ToTn, bidegrees, l, pq, p, q, tot_embs, gen_emb0,
+          gen_emb1, gen_emb2, gen_emb, monomorphism_aid_map, gen_map;
+    
+    F := OperationOfFunctor( Functor_F );
+    G := OperationOfFunctor( Functor_G );
+    
+    ## a projective resolution of M
+    ## (which is an injective resolution in the opposite category)
+    P := Resolution( M );
+    
+    ## apply the inner functor G to the resolution P of M
+    GP := G( P );
+    
+    ## compute the Cartan-Eilenberg resolution of P
+    CE := Resolution( GP );
+    
+    ## apply the outer functor F to the Cartan-Eilenberg resolution
+    FCE := F( CE );
+    
+    ## the associated bicomplex
+    BC := HomalgBicomplex( FCE );
+    
+    ## the associated total complex
+    Tot := TotalComplex( BC );
+    
+    ## the (co)homology graded object of the total complex:
+    H := DefectOfExactness( Tot );
+    
+    ## test for zero defects in H:
+    IsZero( H );
+    
+    ## the spectral sequence associated to BC,
+    ## also called the first spectral sequence of the bicomplex BC;
+    ## its limit sheet is the second sheet,
+    ## where it also becomes intrinsic (in the abelian category)
+    I_E := HomalgSpectralSequence( BC );
+    
+    ## the transposed bicomplex associated to FCE
+    tBC := TransposedBicomplex( BC );
+    
+    ## the spectral sequence associated to tBC,
+    ## also called the second spectral sequence of the bicomplex BC;
+    ## it becomes intrinsic at the second level R^(-p) F R^q G => L_(p+q) FG
+    II_E := HomalgSpectralSequence( 2, tBC );
+    
+    ## the limit sheet of the first spectral sequence
+    I_E2 := CertainSheet( I_E, 2 );
+    
+    ## the intrinsic sheet of the second spectral sequence
+    II_E2 := CertainSheet( II_E, 2 );
+    
+    ## the limit sheet of the second spectral sequence
+    II_E_infinity := HighestLevelSheetInSpectralSequence( II_E );
+    
+    grothendieck := rec( );
+    grothendieck1 := rec( );
+    grothendieck2 := rec( );
+    
+    for n in Filtered( ObjectDegreesOfComplex( Tot ), j -> j >= 0 ) do	## the (co)homologies vanish in negative total degrees
+        
+        ToTn := CertainObject( Tot, n );
+        
+        if IsBound( ToTn!.EmbeddingsInObjectOfTotalComplex ) then
+            tot_embs := ToTn!.EmbeddingsInObjectOfTotalComplex;
+        else
+            tot_embs := fail;	## happens at the ends of the total complex
+        fi;
+        
+        gen_emb0 := NaturalGeneralizedEmbedding( CertainObject( H, n ) );
+        
+        ## for the first spectral sequence I_E
+        gen_emb1 := I_E2!.absolute_embeddings.(String([ n, 0 ]));
+        
+        if tot_embs <> fail then
+            gen_emb1 := PreCompose( gen_emb1, tot_embs.(String([ n, 0 ])) );
+        fi;
+        
+        ## this is the isomorphism I_E^{n,0} = H^n( Tot( BC ) )
+        gen_emb1 := gen_emb1 / gen_emb0;
+        
+        ## check assertion
+        Assert( 1, IsIsomorphism( gen_emb1 ) );
+        
+        SetIsIsomorphism( gen_emb1, true );
+        
+        grothendieck1.(String([ n, 0 ])) := gen_emb1;
+        
+        ## for the second spectral sequence II_E
+        bidegrees := BidegreesOfObjectOfTotalComplex( BC, n );
+        
+        l := Length( bidegrees );
+        
+        monomorphism_aid_map := 0;
+        
+        for pq in bidegrees do
+            
+            q := pq[1];		## we flip p and q of the bicomplex since we take
+            p := pq[2];		## the second spectral sequence as our reference
+            
+            gen_emb2 := II_E_infinity!.absolute_embeddings.(String([ p, q ]));
+            
+            if tot_embs <> fail then
+                gen_emb2 := PreCompose( gen_emb2, tot_embs.(String([ q, p ])) );	## note the flip [ q, p ]
+            fi;
+            
+            ## this is the generalized embedding of II_E^{p,q} into H^{p+q}( Tot( BC ) )
+            gen_emb2 := gen_emb2 / gen_emb0;
+            
+            SetIsGeneralizedMonomorphism( gen_emb2, true );
+            
+            ## at least the highest is a monomorphism
+            IsMonomorphism( gen_emb2 );
+            
+            grothendieck2.(String([ p, q ])) := gen_emb2;
+            
+        od;
+        
+        monomorphism_aid_map := 0;
+        
+        for pq in Reversed( bidegrees ) do		## note the "Reversed"
+            
+            q := pq[1];		## we flip p and q of the bicomplex since we take
+            p := pq[2];		## the second spectral sequence as our reference
+            
+            gen_emb := grothendieck2.(String([ p, q ])) / grothendieck1.(String([ n, 0 ]));
+            
+            ## start to make the gen_emb's the generalized embeddings
+            ## of the filtration induced by the second spectral sequence
+            gen_map := HomalgMap( MatrixOfMap( gen_emb ), "free", Range( gen_emb ) );
+            
+            if IsHomalgMap( monomorphism_aid_map ) then
+                SetMorphismAidMap( gen_emb, monomorphism_aid_map );
+                monomorphism_aid_map := StackMaps( monomorphism_aid_map, gen_map );
+            else
+                monomorphism_aid_map := gen_map;
+            fi;
+            
+            ## IsIsomorphism would first checks IsEpimorphism and if false
+            ## it would simply return false without cheching IsMonomorphism
+            IsEpimorphism( gen_emb );
+            IsMonomorphism( gen_emb );
+            
+            ## at least the lowest one is a generalized isomrphism
+            IsGeneralizedIsomorphism( gen_emb );
+            
+            ## check assertion
+            Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
+            
+            SetIsGeneralizedMonomorphism( gen_emb, true );
+            
+            grothendieck.(String([ p, q ])) := gen_emb;
+            
+        od;
+        
+        ## the lowest one is a generalized isomorphism
+        p := bidegrees[1][2];
+        q := bidegrees[1][1];
+        
+        ## check assertion
+        Assert( 1, IsGeneralizedIsomorphism( grothendieck.(String([ p, q ])) ) );
+        
+        SetIsGeneralizedIsomorphism( grothendieck.(String([ p, q ])), true );
+        
+        ## the higest one is a monomorphism
+        p := bidegrees[l][2];
+        q := bidegrees[l][1];
+        
+        ## check assertion
+        Assert( 1, IsMonomorphism( grothendieck.(String([ p, q ])) ) );
+        
+        SetIsMonomorphism( grothendieck.(String([ p, q ])), true );
+        
+    od;
+    
+    ## first enrich I_E
+    SetGeneralizedEmbeddingsInTotalObjects( I_E, grothendieck1 );
+    
+    ## now its time to enrich II_E
+    SetGeneralizedEmbeddingsInTotalObjects( II_E, grothendieck2 );
+    
+    ## even with
+    II_E!.FirstSpectralSequence := I_E;
+    
+    ## and finally
+    II_E!.GeneralizedEmbeddingsInStableSecondSheetOfFirstSpectralSequence := grothendieck;
+    
+    return II_E;
+    
+end );
 

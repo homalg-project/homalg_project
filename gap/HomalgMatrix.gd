@@ -314,6 +314,9 @@ DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
 DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "EntriesOfHomalgMatrix",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "homalgPointer",
         [ IsHomalgMatrix ] );
 
@@ -418,6 +421,9 @@ DeclareOperation( "*",						## this must remain, since an element in IsInternalM
 
 DeclareOperation( "*",				## this must remain, since an element in IsHomalgMatrix
         [ IsHomalgMatrix, IsHomalgMatrix ] );	## is not a priori IsMultiplicativeElement
+
+DeclareOperation( "POW",			## this must remain, since an element in IsHomalgMatrix
+        [ IsHomalgMatrix, IsInt ] );		## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "DiagonalEntries",
         [ IsHomalgMatrix ] );

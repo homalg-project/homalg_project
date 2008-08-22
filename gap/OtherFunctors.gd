@@ -58,10 +58,16 @@ DeclareAttribute( "TorsionFreeFactorEpi",
 DeclareAttribute( "TorsionSubmoduleEmb",
         IsHomalgMap );
 
-DeclareAttribute( "DirectSumEmbs",
+DeclareAttribute( "MonoOfLeftSummand",
         IsHomalgMap );
 
-DeclareAttribute( "DirectSumEpis",
+DeclareAttribute( "MonoOfRightSummand",
+        IsHomalgMap );
+
+DeclareAttribute( "EpiOnLeftSummand",
+        IsHomalgMap );
+
+DeclareAttribute( "EpiOnRightSummand",
         IsHomalgMap );
 
 DeclareAttribute( "PullbackPairOfMaps",

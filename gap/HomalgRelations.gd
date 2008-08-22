@@ -19,8 +19,8 @@
 DeclareCategory( "IsHomalgRelations",
         IsAttributeStoringRep );
 
-## CAUTION: in the code we use the the following the following two categories
-##          are the only ones for sets of relations!!!!
+## CAUTION: in the code the following two categories are the only ones for sets of generators,
+##          i.e. IsHomalgRelations and not IsHomalgRelationsOfLeftModule => IsHomalgRelationsOfRightModule
 
 DeclareCategory( "IsHomalgRelationsOfLeftModule",
         IsHomalgRelations );

@@ -65,6 +65,35 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( homalgResetFilters,
+        "for homalg chain maps",
+        [ IsHomalgMap ],
+        
+  function( cm )
+    local property;
+    
+    if not IsBound( HOMALG.PropertiesOfChainMaps ) then
+        HOMALG.PropertiesOfChainMaps :=
+          [ IsZero,
+            IsMorphism,
+            IsGeneralizedMorphism,
+            IsSplitMonomorphism,
+            IsMonomorphism,
+            IsGeneralizedMonomorphism,
+            IsSplitEpimorphism,
+            IsEpimorphism,
+            IsGeneralizedEpimorphism,
+            IsIsomorphism,
+            IsGeneralizedIsomorphism ];
+    fi;
+    
+    for property in HOMALG.PropertiesOfChainMaps do
+        ResetFilterObj( cm, property );
+    od;
+    
+end );
+
+##
 InstallMethod( DegreeOfMorphism,
         "for homalg maps",
         [ IsHomalgMap ],
@@ -102,6 +131,18 @@ InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
     else
         return [ pos_t, pos_s ];
     fi;
+    
+end );
+
+##
+InstallMethod( RemoveMorphismAidMap,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    ResetFilterObj( phi, MorphismAidMap );
+    Unbind( phi!.MorphismAidMap );
     
 end );
 
@@ -223,12 +264,17 @@ InstallMethod( \=,
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi1, phi2 )
+    local phi;
     
     if not AreComparableMorphisms( phi1, phi2 ) then
         return false;
     fi;
     
-    return MatrixOfMap( phi1 ) = MatrixOfMap( phi2 ); ## FIXME: compare any already evaluated matrices
+    ## don't use phi1 - phi2 since FunctorObj will then cause an infinite loop
+    phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
+    
+    ## this takes care of the relations of the target module
+    return IsZero( phi );
     
 end );
 
@@ -407,164 +453,6 @@ InstallMethod( ReducedSyzygiesGenerators,
   function( phi )
     
     return ReducedSyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
-    
-end );
-
-##
-InstallMethod( StackMaps,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi, psi )
-    local T, phi_psi, SpS, p;
-    
-    T := Range( phi );
-    
-    if not IsIdenticalObj( T, Range( psi ) ) then
-        Error( "the two morphisms must have identical target modules\n" );
-    fi;
-    
-    phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
-    
-    SpS := Source( phi ) + Source( psi );
-    
-    ## get the position of the set of relations immediately after creating SpS;
-    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
-    
-    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
-    
-    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
-        SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
-    fi;
-    
-    return phi_psi;
-    
-end );
-
-##
-InstallMethod( StackMaps,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi, psi )
-    local T, phi_psi, SpS, p;
-    
-    T := Range( phi );
-    
-    if not IsIdenticalObj( T, Range( psi ) ) then
-        Error( "the two morphisms must have identical target modules\n" );
-    fi;
-    
-    phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
-    
-    SpS := Source( phi ) + Source( psi );
-    
-    ## get the position of the set of relations immediately after creating SpS;
-    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
-    
-    T := Range( phi );
-    
-    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
-    
-    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
-        SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
-    fi;
-    
-    return phi_psi;
-    
-end );
-
-##
-InstallMethod( AugmentMaps,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi, psi )
-    local S, phi_psi, TpT, p;
-    
-    S := Source( phi );
-    
-    if not IsIdenticalObj( S, Source( psi ) ) then
-        Error( "the two morphisms must have identical source modules\n" );
-    fi;
-    
-    phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
-    
-    TpT := Range( phi ) + Range( psi );
-    
-    ## get the position of the set of relations immediately after creating TpT;
-    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
-    
-    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
-    
-    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
-        SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
-    fi;
-    
-    return phi_psi;
-    
-end );
-
-##
-InstallMethod( AugmentMaps,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi, psi )
-    local S, phi_psi, TpT, p;
-    
-    S := Source( phi );
-    
-    if not IsIdenticalObj( S, Source( psi ) ) then
-        Error( "the two morphisms must have identical source modules\n" );
-    fi;
-    
-    phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
-    
-    TpT := Range( phi ) + Range( psi );
-    
-    ## get the position of the set of relations immediately after creating TpT;
-    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
-    
-    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
-    
-    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
-        SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
-    fi;
-    
-    return phi_psi;
     
 end );
 
@@ -1065,18 +953,42 @@ InstallMethod( ViewObj,
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
             Print( " homomorphism of" );
-        elif HasMonomorphismModuloImage( o ) then
-            if HasIsGeneralizedEmbedding( o ) and IsGeneralizedEmbedding( o ) then
-                Print( " generalized embedding of" );
+        elif HasMorphismAidMap( o ) then	## otherwise the notion of generalized morphism is meaningless
+            if HasIsGeneralizedMorphism( o ) then
+                if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
+                    Print( " generalized isomorphism of" );
+                elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
+                    Print( " generalized embedding of" );
+                elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
+                    Print( " generalized epimorphism of" );
+                elif IsGeneralizedMorphism( o ) then
+                    Print( " generalized homomorphism of" );
+                else
+                    Print( " non-well defined (generalized) map of" );
+                fi;
             else
-                Print( " \"generalized embedding\" of" );
+                Print( " \"generalized homomorphism\" of" );
             fi;
         else
             Print( " non-well-defined map between" );
         fi;
     else
-        if HasMonomorphismModuloImage( o ) then
-            Print( " generalized embedding of" );
+        if HasMorphismAidMap( o ) then	## otherwise the notion of generalized morphism is meaningless
+            if HasIsGeneralizedMorphism( o ) then
+                if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
+                    Print( " generalized isomorphism of" );
+                elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
+                    Print( " generalized embedding of" );
+                elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
+                    Print( " generalized epimorphism of" );
+                elif IsGeneralizedMorphism( o ) then
+                    Print( " generalized homomorphism of" );
+                else
+                    Print( " non-well defined (generalized) map of" );
+                fi;
+            else
+                Print( " \"generalized homomorphism\" of" );
+            fi;
         else
             Print( " \"homomorphism\" of" );
         fi;

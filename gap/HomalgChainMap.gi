@@ -179,12 +179,16 @@ InstallMethod( homalgResetFilters,
         HOMALG.PropertiesOfChainMaps :=
           [ IsZero,
             IsMorphism,
+            IsGeneralizedMorphism,
             IsGradedMorphism,
             IsSplitMonomorphism,
             IsMonomorphism,
+            IsGeneralizedMonomorphism,
             IsSplitEpimorphism,
             IsEpimorphism,
+            IsGeneralizedEpimorphism,
             IsIsomorphism,
+            IsGeneralizedIsomorphism,
             IsQuasiIsomorphism,
             IsImageSquare,
             IsKernelSquare,
@@ -204,7 +208,7 @@ InstallMethod( SourceOfSpecialChainMap,
         
   function( sq )
     
-    return LowestDegreeMorphismInComplex( Source( sq ) );
+    return LowestDegreeMorphism( Source( sq ) );
     
 end );
 
@@ -215,7 +219,7 @@ InstallMethod( SourceOfSpecialChainMap,
         
   function( sq )
     
-    return HighestDegreeMorphismInComplex( Source( sq ) );
+    return HighestDegreeMorphism( Source( sq ) );
     
 end );
 
@@ -237,7 +241,7 @@ InstallMethod( RangeOfSpecialChainMap,
         
   function( sq )
     
-    return LowestDegreeMorphismInComplex( Range( sq ) );
+    return LowestDegreeMorphism( Range( sq ) );
     
 end );
 
@@ -248,7 +252,7 @@ InstallMethod( RangeOfSpecialChainMap,
         
   function( sq )
     
-    return HighestDegreeMorphismInComplex( Range( sq ) );
+    return HighestDegreeMorphism( Range( sq ) );
     
 end );
 
@@ -379,7 +383,7 @@ InstallMethod( MorphismsOfChainMap,
 end );
 
 ##
-InstallMethod( LowestDegreeInChainMap,
+InstallMethod( LowestDegree,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
         
@@ -390,7 +394,7 @@ InstallMethod( LowestDegreeInChainMap,
 end );
 
 ##
-InstallMethod( HighestDegreeInChainMap,
+InstallMethod( HighestDegree,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
         
@@ -404,24 +408,24 @@ InstallMethod( HighestDegreeInChainMap,
 end );
 
 ##
-InstallMethod( LowestDegreeMorphismInChainMap,
+InstallMethod( LowestDegreeMorphism,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( cm )
     
-    return CertainMorphism( cm, LowestDegreeInChainMap( cm ) );
+    return CertainMorphism( cm, LowestDegree( cm ) );
     
 end );
 
 ##
-InstallMethod( HighestDegreeMorphismInChainMap,
+InstallMethod( HighestDegreeMorphism,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( cm )
     
-    return CertainMorphism( cm, HighestDegreeInChainMap( cm ) );
+    return CertainMorphism( cm, HighestDegree( cm ) );
     
 end );
 
@@ -508,7 +512,7 @@ InstallMethod( Add,
   function( cm, mat )
     local i, degree, S, T, phi;
     
-    i := HighestDegreeInChainMap( cm ) + 1;
+    i := HighestDegree( cm ) + 1;
     degree := DegreeOfMorphism( cm );
     
     S := Source( cm );
@@ -1180,6 +1184,20 @@ InstallMethod( ViewObj,
                 Print( " chain map" );
             else
                 Print( " cochain map" );
+            fi;
+        else
+            if IsChainMapOfFinitelyPresentedObjectsRep( o ) then
+                Print( " non-chain map" );
+            else
+                Print( " non-cochain map" );
+            fi;
+        fi;
+    elif HasIsGeneralizedMorphism( o ) then
+        if IsGeneralizedMorphism( o ) then
+            if IsChainMapOfFinitelyPresentedObjectsRep( o ) then
+                Print( " generalized chain map" );
+            else
+                Print( " generalized cochain map" );
             fi;
         else
             if IsChainMapOfFinitelyPresentedObjectsRep( o ) then

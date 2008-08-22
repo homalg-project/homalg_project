@@ -230,7 +230,7 @@ InstallMethod( ObjectsOfComplex,
 end );
 
 ##
-InstallMethod( LowestDegreeInComplex,
+InstallMethod( LowestDegree,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -241,7 +241,7 @@ InstallMethod( LowestDegreeInComplex,
 end );
 
 ##
-InstallMethod( HighestDegreeInComplex,
+InstallMethod( HighestDegree,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -255,18 +255,18 @@ InstallMethod( HighestDegreeInComplex,
 end );
 
 ##
-InstallMethod( LowestDegreeObjectInComplex,
+InstallMethod( LowestDegreeObject,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
     
-    return CertainObject( C, LowestDegreeInComplex( C ) );
+    return CertainObject( C, LowestDegree( C ) );
     
 end );
 
 ##
-InstallMethod( HighestDegreeObjectInComplex,
+InstallMethod( HighestDegreeObject,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -275,12 +275,12 @@ InstallMethod( HighestDegreeObjectInComplex,
     
     degrees := ObjectDegreesOfComplex( C );
     
-    return CertainObject( C, HighestDegreeInComplex( C ) );
+    return CertainObject( C, HighestDegree( C ) );
     
 end );
 
 ##
-InstallMethod( LowestDegreeMorphismInComplex,
+InstallMethod( LowestDegreeMorphism,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -294,7 +294,7 @@ InstallMethod( LowestDegreeMorphismInComplex,
 end );
 
 ##
-InstallMethod( HighestDegreeMorphismInComplex,
+InstallMethod( HighestDegreeMorphism,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -314,7 +314,7 @@ InstallMethod( HomalgRing,
         
   function( C )
     
-    return HomalgRing( LowestDegreeObjectInComplex( C ) );
+    return HomalgRing( LowestDegreeObject( C ) );
     
 end );
 
@@ -401,7 +401,7 @@ InstallMethod( Add,
     fi;
     
     if Length( degrees ) = 3 then
-        psi := LowestDegreeMorphismInComplex( C );
+        psi := LowestDegreeMorphism( C );
         if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) and
            ( ( HasKernelEmb( psi ) and IsIdenticalObj( KernelEmb( psi ), phi ) ) or
              ( HasCokernelEpi( phi ) and IsIdenticalObj( CokernelEpi( phi ), psi ) ) ) then
@@ -472,7 +472,7 @@ InstallMethod( Add,
     fi;
     
     if Length( degrees ) = 3 then
-        psi := LowestDegreeMorphismInComplex( C );
+        psi := LowestDegreeMorphism( C );
         if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) and
            ( ( HasCokernelEpi( psi ) and IsIdenticalObj( CokernelEpi( psi ), phi ) ) or
              ( HasKernelEmb( phi ) and IsIdenticalObj( KernelEmb( phi ), psi ) ) ) then
@@ -492,7 +492,7 @@ InstallMethod( Add,
   function( C, M )
     local T, grd, cpx, seq;
     
-    T := HighestDegreeObjectInComplex( C );
+    T := HighestDegreeObject( C );
     
     if HasIsGradedObject( C ) then
         grd := IsGradedObject( C );
@@ -522,7 +522,7 @@ InstallMethod( Add,
   function( C, M )
     local S, grd, cpx, seq;
     
-    S := HighestDegreeObjectInComplex( C );
+    S := HighestDegreeObject( C );
     
     if HasIsGradedObject( C ) then
         grd := IsGradedObject( C );
@@ -552,7 +552,7 @@ InstallMethod( Add,
   function( C, mat )
     local T;
     
-    T := HighestDegreeObjectInComplex( C );
+    T := HighestDegreeObject( C );
     
     Add( C, HomalgMap( mat, "free", T ) );
     
@@ -566,7 +566,7 @@ InstallMethod( Add,
   function( C, mat )
     local S;
     
-    S := HighestDegreeObjectInComplex( C );
+    S := HighestDegreeObject( C );
     
     Add( C, HomalgMap( mat, S, "free" ) );
     
@@ -580,9 +580,9 @@ InstallMethod( Shift,
   function( C, s )
     local d, Cd, Cs, m;
     
-    d := LowestDegreeInComplex( C );
+    d := LowestDegree( C );
     
-    Cd := LowestDegreeObjectInComplex( C );
+    Cd := LowestDegreeObject( C );
     
     if IsComplexOfFinitelyPresentedObjectsRep( C ) then
         Cs := HomalgComplex( Cd, d - s );
@@ -622,17 +622,17 @@ InstallMethod( \+,
         Error( "first and second argument must either be both complexes or both cocomplexes\n" );
     fi;
     
-    d1 := LowestDegreeInComplex( C1 );
-    d2 := LowestDegreeInComplex( C2 );
+    d1 := LowestDegree( C1 );
+    d2 := LowestDegree( C2 );
     
     d := Minimum( d1, d2 );
     
     if d1 < d2 then
-        Cd := LowestDegreeObjectInComplex( C1 );
+        Cd := LowestDegreeObject( C1 );
     elif d2 < d1 then
-        Cd := LowestDegreeObjectInComplex( C2 );
+        Cd := LowestDegreeObject( C2 );
     else
-        Cd := LowestDegreeObjectInComplex( C1 ) + LowestDegreeObjectInComplex( C2 );
+        Cd := LowestDegreeObject( C1 ) + LowestDegreeObject( C2 );
     fi;
     
     if cpx then
@@ -644,7 +644,7 @@ InstallMethod( \+,
     d1 := ObjectDegreesOfComplex( C1 );
     d2 := ObjectDegreesOfComplex( C2 );
     
-    for i in [ d + 1 .. Maximum( List( [ C1, C2 ], HighestDegreeInComplex ) ) ] do
+    for i in [ d + 1 .. Maximum( List( [ C1, C2 ], HighestDegree ) ) ] do
         if not i in d2 then
             Cd := CertainObject( C1, i );
         elif not i in d1 then
@@ -869,7 +869,7 @@ InstallMethod( PreCompose,
         return C2;
     fi;
     
-    deg := LowestDegreeInComplex( C2 ) + 1;
+    deg := LowestDegree( C2 ) + 1;
     
     C := HomalgComplex( mor2[1], deg );
     
@@ -910,7 +910,7 @@ InstallMethod( PreCompose,
         return C1;
     fi;
     
-    deg := LowestDegreeInComplex( C1 );
+    deg := LowestDegree( C1 );
     
     C := HomalgCocomplex( mor1[1], deg );
     

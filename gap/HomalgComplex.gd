@@ -93,22 +93,22 @@ DeclareOperation( "MorphismsOfComplex",
 DeclareOperation( "ObjectsOfComplex",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "LowestDegreeInComplex",
+DeclareOperation( "LowestDegree",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "HighestDegreeInComplex",
+DeclareOperation( "HighestDegree",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "LowestDegreeObjectInComplex",
+DeclareOperation( "LowestDegreeObject",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "HighestDegreeObjectInComplex",
+DeclareOperation( "HighestDegreeObject",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "LowestDegreeMorphismInComplex",
+DeclareOperation( "LowestDegreeMorphism",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "HighestDegreeMorphismInComplex",
+DeclareOperation( "HighestDegreeMorphism",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "SupportOfComplex",

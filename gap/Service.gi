@@ -236,6 +236,10 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
   function( M )
     local R, RP, t, B, nz;
     
+    if IsBound(M!.BasisOfRowModule) then
+        return M!.BasisOfRowModule;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -258,6 +262,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         IncreaseRingStatistics( R, "BasisOfRowModule" );
         
+        M!.BasisOfRowModule := B;
+	
         return B;
         
     elif IsBound(RP!.BasisOfColumnModule) then
@@ -275,6 +281,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
         
         IncreaseRingStatistics( R, "BasisOfColumnModule" );
+        
+        M!.BasisOfRowModule := B;
         
         return B;
         
@@ -298,6 +306,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     IncreaseRingStatistics( R, "BasisOfRowModule" );
     
+    M!.BasisOfRowModule := B;
+    
     return B;
     
 end );
@@ -309,6 +319,10 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
   function( M )
     local R, RP, t, B, nz;
+    
+    if IsBound(M!.BasisOfColumnModule) then
+        return M!.BasisOfColumnModule;
+    fi;
     
     R := HomalgRing( M );
     
@@ -332,6 +346,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         IncreaseRingStatistics( R, "BasisOfColumnModule" );
         
+        M!.BasisOfColumnModule := B;
+        
         return B;
         
     elif IsBound(RP!.BasisOfRowModule) then
@@ -349,6 +365,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
         
         IncreaseRingStatistics( R, "BasisOfRowModule" );
+        
+        M!.BasisOfColumnModule := B;
         
         return B;
         
@@ -371,6 +389,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
     
     IncreaseRingStatistics( R, "BasisOfColumnModule" );
+    
+    M!.BasisOfColumnModule := B;
     
     return B;
     
@@ -1004,7 +1024,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( A, B, T )
-    local R, RP, t, TI, l, m, n, id, zz, M, TT;
+    local R, RP, t, TI, l, m, n, id, zz, M, TT, MM;
     
     R := HomalgRing( B );
     
@@ -1066,7 +1086,10 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
     ## M = A + T * B;
-    SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    ## check assertion
+    Assert( 4, M = A + T * B );
     
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
@@ -1144,7 +1167,10 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
     ## M = A + B * T;
-    SetPreEval( T, -TT ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    ## check assertion
+    Assert( 4, M = A + B * T );
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
     

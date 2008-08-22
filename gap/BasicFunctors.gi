@@ -75,10 +75,11 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( id, [ coker, 1 ], [ T, p ] );
-    SetMonomorphismModuloImage( emb, phi );
+    SetMorphismAidMap( emb, phi );
+    SetIsGeneralizedIsomorphism( emb, true );
     
     ## save the natural embedding in the cokernel (thanks GAP):
-    coker!.NaturalEmbedding := emb;
+    coker!.NaturalGeneralizedEmbedding := emb;
     
     return coker;
     
@@ -99,18 +100,20 @@ functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-InstallMethod( CokernelGeneralizedEmb,
+InstallMethod( CokernelNaturalGeneralizedEmbedding,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
+        
   function( phi )
     local emb;
     
-    emb := NaturalEmbedding( Cokernel( phi ) );
+    emb := NaturalGeneralizedEmbedding( Cokernel( phi ) );
     
     ## since the cokernel module can very well be predefined as the outcome of a different functor than Cokernel (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
     if not IsIdenticalObj( Range( emb ), Source( phi ) ) then
         emb := CokernelEpi( phi )^-1;
-        SetMonomorphismModuloImage( emb, phi );
+        SetMorphismAidMap( emb, phi );
+        SetIsGeneralizedIsomorphism( emb, true );
     fi;
     
     return emb;
@@ -157,7 +160,7 @@ InstallGlobalFunction( _Functor_ImageSubmodule_OnObjects,	### defines: ImageSubm
     fi;
     
     ## save the natural embedding in the image (thanks GAP):
-    img!.NaturalEmbedding := emb;
+    img!.NaturalGeneralizedEmbedding := emb;
     
     return img;
     
@@ -180,6 +183,7 @@ functor_ImageSubmodule!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 InstallMethod( ImageSubmoduleEpi,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
+        
   function( phi )
     local emb, epi, ker_emb;
     
@@ -245,7 +249,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     fi;
     
     ## save the natural embedding in the kernel (thanks GAP):
-    ker!.NaturalEmbedding := emb;
+    ker!.NaturalGeneralizedEmbedding := emb;
     
     ## figure out an upper bound for the projective dimension of ker:
     if not HasProjectiveDimension( ker ) and HasIsProjective( S ) and IsProjective( S ) then
@@ -310,8 +314,8 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
         Error( "expecting a complex containing two morphisms marked as IsATwoSequence\n" );
     fi;
     
-    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
-    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    pre := HighestDegreeMorphism( cpx_post_pre );
+    post := LowestDegreeMorphism( cpx_post_pre );
     
     M := Range( pre );
     
@@ -337,10 +341,11 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( emb, [ ker, 1 ], [ M, p ] );
-    SetMonomorphismModuloImage( emb, pre );
+    SetMorphismAidMap( emb, pre );
+    SetIsGeneralizedMonomorphism( emb, true );
     
     ## save the natural embedding in the defect (thanks GAP):
-    ker!.NaturalEmbedding := emb;
+    ker!.NaturalGeneralizedEmbedding := emb;
     
     return ker;
     
@@ -516,6 +521,8 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
     
     alpha := HomalgMap( alpha, HP0N, HP1N );
     
+    SetIsMorphism( alpha, true );
+    
     hom := Kernel( alpha );
     
     #=====# end of the core procedure #=====#
@@ -598,6 +605,7 @@ Functor_Hom!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 InstallMethod( NatTrIdToHomHom_R,
         "for homalg maps",
         [ IsFinitelyPresentedModuleRep ],
+        
   function( M )
     local HM, iota, HHM, bas, epsilon;
     
@@ -620,6 +628,66 @@ InstallMethod( NatTrIdToHomHom_R,
     SetIsMorphism( epsilon, true );
     
     return epsilon;
+    
+end );
+
+##
+InstallMethod( LeftDualizingFunctor,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, name )
+    
+    return ApplyFunctor( Functor_Hom, 2, 1 * R, name );
+    
+end );
+
+##
+InstallMethod( LeftDualizingFunctor,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    if not IsBound( R!.Functor_R_Hom ) then
+        if IsBound( R!.creation_number ) then
+            R!.Functor_R_Hom := LeftDualizingFunctor( R, Concatenation( "R", String( R!.creation_number ), "_Hom" ) );
+        else
+            Error( "the homalg ring doesn't have a creation number\n" );
+        fi;
+    fi;
+    
+    return R!.Functor_R_Hom;
+    
+end );
+
+##
+InstallMethod( RightDualizingFunctor,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, name )
+    
+    return ApplyFunctor( Functor_Hom, 2, R * 1, name );
+    
+end );
+
+##
+InstallMethod( RightDualizingFunctor,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    if not IsBound( R!.Functor_Hom_R ) then
+        if IsBound( R!.creation_number ) then
+            R!.Functor_Hom_R := RightDualizingFunctor( R, Concatenation( "Hom_R", String( R!.creation_number ) ) );
+        else
+            Error( "the homalg ring doesn't have a creation number\n" );
+        fi;
+    fi;
+    
+    return R!.Functor_Hom_R;
     
 end );
 

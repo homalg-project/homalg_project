@@ -73,7 +73,16 @@ DeclareCategory( "IsContainerForWeakPointers",
 DeclareProperty( "IsMorphism",
         IsHomalgMorphism );
 
-DeclareProperty( "IsGeneralizedEmbedding",
+DeclareProperty( "IsGeneralizedMorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsGeneralizedEpimorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsGeneralizedMonomorphism",
+        IsHomalgMorphism );
+
+DeclareProperty( "IsGeneralizedIsomorphism",
         IsHomalgMorphism );
 
 DeclareProperty( "IsIdentityMorphism",

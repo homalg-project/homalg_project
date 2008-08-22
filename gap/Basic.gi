@@ -261,9 +261,15 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     CA := HomalgVoidMatrix( R );
     IA := BasisOfRowsCoeff( A, CA );
     
+    ## check assertion
+    Assert( 3, CA * A = IA );
+    
     ## NF = B + CB * IA
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroRowsEffectively( B, IA, CB );
+    
+    ## check assertion
+    Assert( 3, NF = B + CB * IA );
     
     ## NF <> 0
     if not IsZero( NF ) then
@@ -296,9 +302,15 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     CA := HomalgVoidMatrix( R );
     IA := BasisOfColumnsCoeff( A, CA );
     
+    ## check assertion
+    Assert( 3, A * CA = IA );
+    
     ## NF = B + IA * CB
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroColumnsEffectively( B, IA, CB );
+    
+    ## check assertion
+    Assert( 3, NF = B + IA * CB );
     
     ## NF <> 0
     if not IsZero( NF ) then
@@ -335,9 +347,15 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     CA := HomalgVoidMatrix( R );
     IAL := BasisOfRowsCoeff( AL, CA );
     
+    ## check assertion
+    Assert( 3, CA * AL = IAL );
+    
     ## NF = B + CB * IAL
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroRowsEffectively( B, IAL, CB );
+    
+    ## check assertion
+    Assert( 3, NF = B + CB * IAL );
     
     ## NF <> 0
     if not IsZero( NF ) then
@@ -375,9 +393,15 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     CA := HomalgVoidMatrix( R );
     IAL := BasisOfColumnsCoeff( AL, CA );
     
+    ## check assertion
+    Assert( 3, AL * CA = IAL );
+    
     ## NF = B + IAL * CB
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroColumnsEffectively( B, IAL, CB );
+    
+    ## check assertion
+    Assert( 3, NF = B + IAL * CB );
     
     ## NF <> 0
     if not IsZero( NF ) then

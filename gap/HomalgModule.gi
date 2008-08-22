@@ -518,6 +518,57 @@ InstallMethod( TransitionMatrix,
 end );
 
 ##
+InstallMethod( LockModuleOnCertainPresentation,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, p )
+    
+    ## first save the current setting
+    M!.LockModuleOnCertainPresentation := M!.PositionOfTheDefaultSetOfRelations;
+    
+    SetPositionOfTheDefaultSetOfRelations( M, p );
+    
+end );
+
+##
+InstallMethod( LockModuleOnCertainPresentation,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    LockModuleOnCertainPresentation( M, M!.PositionOfTheDefaultSetOfRelations );
+    
+end );
+
+##
+InstallMethod( UnlockModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    ## first restore the saved settings
+    if IsBound( M!.LockModuleOnCertainPresentation ) then
+        SetPositionOfTheDefaultSetOfRelations( M, M!.LockModuleOnCertainPresentation );
+        Unbind( M!.LockModuleOnCertainPresentation );
+    fi;
+    
+end );
+
+##
+InstallMethod( IsLockedModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return IsBound( M!.LockModuleOnCertainPresentation );
+    
+end );
+
+##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep, IsGeneratorsOfFinitelyGeneratedModuleRep ],
@@ -583,7 +634,11 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+    if IsLockedModule( M ) then
+        M!.LockModuleOnCertainPresentation := l+1;
+    else
+        SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+    fi;
     
     if NrGenerators( gen ) = 0 then
         SetIsZero( M, true );
@@ -608,19 +663,32 @@ InstallMethod( AddANewPresentation,
     
     rels := SetsOfRelations( M );
     
-    lpos := rels!.ListOfPositionsOfKnownSetsOfRelations;
+    ## we reverse since we want to check the recent sets of relations first
+    lpos := Reversed( rels!.ListOfPositionsOfKnownSetsOfRelations );
     
     ## don't add an old set of relations, but let it be the default set of relations instead:
     for d in lpos do
         if IsIdenticalObj( rel, rels!.(d) ) then
-            SetPositionOfTheDefaultSetOfRelations( M, d );
+            
+            if IsLockedModule( M ) then
+                M!.LockModuleOnCertainPresentation := d;
+            else
+                SetPositionOfTheDefaultSetOfRelations( M, d );
+            fi;
+            
             return M;
         fi;
     od;
     
     for d in lpos do
         if MatrixOfRelations( rel ) = MatrixOfRelations( rels!.(d) ) then
-            SetPositionOfTheDefaultSetOfRelations( M, d );
+            
+            if IsLockedModule( M ) then
+                M!.LockModuleOnCertainPresentation := d;
+            else
+                SetPositionOfTheDefaultSetOfRelations( M, d );
+            fi;
+            
             return M;
         fi;
     od;
@@ -675,7 +743,11 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+    if IsLockedModule( M ) then
+        M!.LockModuleOnCertainPresentation := l+1;
+    else
+        SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+    fi;
     
     if HasNrRelations( rel ) = true and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
@@ -752,7 +824,11 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+    if IsLockedModule( M ) then
+        M!.LockModuleOnCertainPresentation := l+1;
+    else
+        SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+    fi;
     
     if NrGenerators( gen ) = 0 then
         SetIsZero( M, true );
@@ -1772,7 +1848,7 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local properties, nz, num_gen, num_rel, gen_string, rel_string;
+    local properties, nz, num_gen, num_rel, gen_string, rel_string, locked;
     
     properties := "";
     
@@ -1884,7 +1960,13 @@ InstallMethod( ViewObj,
             rel_string := " relations for ";
         fi;
         
-        Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, ">" );
+        if IsLockedModule( M ) then
+            locked := " (locked)";
+        else
+            locked := "";
+        fi;
+        
+        Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, locked, ">" );
         
     else
         
@@ -1913,7 +1995,13 @@ InstallMethod( ViewObj,
             rel_string := " relations";
         fi;
         
-        Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, ">" );
+        if IsLockedModule( M ) then
+            locked := " (locked)";
+        else
+            locked := "";
+        fi;
+        
+        Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, locked, ">" );
         
     fi;
     

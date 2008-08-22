@@ -583,6 +583,14 @@ InstallGlobalFunction( CreateHomalgRing,
         
     fi;
     
+    if IsBound( HOMALG.RingCounter ) then
+        HOMALG.RingCounter := HOMALG.RingCounter + 1;
+    else
+        HOMALG.RingCounter := 1;
+    fi;
+    
+    homalg_ring!.creation_number := HOMALG.RingCounter;
+    
     return homalg_ring;
     
 end );

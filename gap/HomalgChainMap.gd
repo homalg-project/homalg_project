@@ -95,16 +95,16 @@ DeclareOperation( "MorphismsOfChainMap",
 DeclareOperation( "CertainModuleOfChainMap",
         [ IsHomalgChainMap, IsInt ] );
 
-DeclareOperation( "LowestDegreeInChainMap",
+DeclareOperation( "LowestDegree",
         [ IsHomalgChainMap ] );
 
-DeclareOperation( "HighestDegreeInChainMap",
+DeclareOperation( "HighestDegree",
         [ IsHomalgChainMap ] );
 
-DeclareOperation( "LowestDegreeMorphismInChainMap",
+DeclareOperation( "LowestDegreeMorphism",
         [ IsHomalgChainMap ] );
 
-DeclareOperation( "HighestDegreeMorphismInChainMap",
+DeclareOperation( "HighestDegreeMorphism",
         [ IsHomalgChainMap ] );
 
 DeclareOperation( "SupportOfChainMap",

@@ -197,6 +197,22 @@ InstallImmediateMethod( IsTorsion,
 end );
 
 ##
+InstallImmediateMethod( IsTorsion,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule, 0,
+        
+  function( M )
+    
+    if CodimOfModule( M ) > 0 then
+        return true;
+    elif HasIsZero( M ) and not IsZero( M ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsTorsionFree,
         IsFinitelyPresentedModuleRep and HasTorsionSubmoduleEmb and HasIsZero, 0,
         
@@ -248,6 +264,30 @@ InstallImmediateMethod( IsTorsionFree,
     fi;			## the true case is taken care of elsewhere
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsionFree,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule, 0,
+        
+  function( M )
+    
+    if CodimOfModule( M ) > 0 then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsionFree,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule and IsPure, 0,
+        
+  function( M )
+    
+    return CodimOfModule( M ) = 0;
     
 end );
 
@@ -840,7 +880,7 @@ InstallMethod( TheZeroMorphism,
         
   function( M )
     
-    return HomalgZeroMap( M, 0*M );	## never set its Kernel to M, since a possibly existing NaturalEmbedding in M will be overwritten!
+    return HomalgZeroMap( M, 0*M );	## never set its Kernel to M, since a possibly existing NaturalGeneralizedEmbedding in M will be overwritten!
     
 end );
 
@@ -869,6 +909,17 @@ InstallMethod( RankOfModule,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Rank,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return RankOfModule( M );
     
 end );
 
@@ -1014,7 +1065,7 @@ InstallMethod( ProjectiveDimension,
     ## "projective" and "stably free" are equivalent
     ## (so now we check stably freeness)
     if pd = 1 then
-        s := PostInverse( LowestDegreeMorphismInComplex( d ) );
+        s := PostInverse( LowestDegreeMorphism( d ) );
         if s <> fail then
             pd := 0;
         fi;

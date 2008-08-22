@@ -44,6 +44,16 @@ DeclareGlobalFunction( "_Functor_Compose_OnObjects" );
 
 DeclareGlobalVariable( "functor_Compose" );
 
+## StackMaps
+DeclareGlobalFunction( "_Functor_StackMaps_OnObjects" );
+
+DeclareGlobalVariable( "functor_StackMaps" );
+
+## AugmentMaps
+DeclareGlobalFunction( "_Functor_AugmentMaps_OnObjects" );
+
+DeclareGlobalVariable( "functor_AugmentMaps" );
+
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
 
@@ -86,6 +96,12 @@ DeclareOperation( "SubMap",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "Compose",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "StackMaps",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "AugmentMaps",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsChainMapForPullback",

@@ -40,8 +40,8 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     
     if IsBound( phi!.free_resolutions.(String( index_pair )) ) then
         cm := phi!.free_resolutions.(String( index_pair ));
-        j := HighestDegreeInChainMap( cm );
-        phi_j := HighestDegreeMorphismInChainMap( cm );
+        j := HighestDegree( cm );
+        phi_j := HighestDegreeMorphism( cm );
     else
         j := 0;
         

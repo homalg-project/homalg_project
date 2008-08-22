@@ -396,6 +396,21 @@ InstallMethod( UnderlyingBicomplex,
 end );
 
 ##
+InstallMethod( AssociatedFirstSpectralSequence,
+        "for homalg spectral sequences stemming from a bicomplex",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex and IsSpectralSequenceOfFinitelyPresentedObjectsRep ],
+        
+  function( E )
+    
+    if not IsBound(E!.FirstSpectralSequence) then
+        return fail;
+    fi;
+    
+    return E!.FirstSpectralSequence;
+    
+end );
+
+##
 InstallMethod( OnLessGenerators,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],
@@ -683,12 +698,26 @@ end );
 ##
 InstallMethod( Display,
         "for homalg spectral sequences",
-        [ IsSpectralSequenceOfFinitelyPresentedObjectsRep ],
+        [ IsHomalgSpectralSequence ],
         
   function( o )
-    local Ers, Er;
+    local I_E, Ers, Er;
+    
+    if IsBound( o!.FirstSpectralSequence ) then
+        Print( "The associated first spectral sequence of the bicomplex\n\n" );
+        Display( o!.FirstSpectralSequence );
+        Print( "\nNow the second spectral sequence of the bicomplex\n\n" );
+    fi;
     
     Ers := SheetsOfSpectralSequence( o );
+    
+    Print( "a " );
+    
+    if IsSpectralCosequenceOfFinitelyPresentedObjectsRep( o ) then
+        Print( "co" );
+    fi;
+    
+    Print( "homological spectral sequence at bidegrees:\n", ObjectDegreesOfSpectralSequence( o ), "\n---------\n" );
     
     Display( Ers[1] );
     

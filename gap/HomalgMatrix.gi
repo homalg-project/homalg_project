@@ -528,6 +528,20 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
+InstallMethod( EntriesOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local cols;
+    
+    cols := [ 1 .. NrColumns( M ) ];
+    
+    return Flat( List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> GetEntryOfHomalgMatrix( M, r, c ) ) ) );
+    
+end );
+
+##
 InstallMethod( GetUnitPosition,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -815,6 +829,42 @@ InstallMethod( \*,
     return homalgInternalMatrixHull( a * A!.matrix );
     
 end );
+
+##
+InstallMethod( POW,
+        "for homalg maps",
+        [ IsHomalgMatrix, IsInt ],
+        
+  function( A, pow )
+    local R;
+    
+    if NrRows( A ) <> NrColumns( A ) then
+        Error( "the matrix is not quadratic\n" );
+    fi;
+    
+    R := HomalgRing( A );
+    
+    if pow < 0 then
+        
+        Error( "not implemented yet\n" );
+        
+    elif pow = 0 then
+        
+        return HomalgIdentityMatrix( NrRows( A ), R );
+        
+    elif pow = 1 then
+        
+        return A;
+        
+    else
+        
+        return Iterated( ListWithIdenticalEntries( pow, A ), \* );
+        
+    fi;
+    
+end );
+
+
 
 ##
 InstallMethod( \*,
@@ -1653,7 +1703,11 @@ InstallMethod( ViewObj,
         if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
             Print( " diagonal" );
         elif HasIsUpperStairCaseMatrix( o ) and IsUpperStairCaseMatrix( o ) then
-            Print( " upper staircase" );
+            if not first_attribute then
+                Print( "n upper staircase" );
+            else
+                Print( " upper staircase" );
+            fi;
         elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
             Print( " strict upper triangular" );
         elif HasIsLowerStairCaseMatrix( o ) and IsLowerStairCaseMatrix( o ) then

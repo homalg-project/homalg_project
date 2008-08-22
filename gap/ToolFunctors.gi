@@ -92,7 +92,7 @@ InstallMethod( AsATwoSequence,
         
   function( C )
     
-    return AsATwoSequence( HighestDegreeMorphismInComplex( C ), LowestDegreeMorphismInComplex( C ) );
+    return AsATwoSequence( HighestDegreeMorphism( C ), LowestDegreeMorphism( C ) );
     
 end );
 
@@ -105,7 +105,7 @@ InstallMethod( AsATwoSequence,
         
   function( C )
     
-    return AsATwoSequence( HighestDegreeMorphismInComplex( C ), LowestDegreeMorphismInComplex( C ) );
+    return AsATwoSequence( HighestDegreeMorphism( C ), LowestDegreeMorphism( C ) );
     
 end );
 
@@ -118,7 +118,7 @@ InstallMethod( AsATwoSequence,
         
   function( C )
     
-    return AsATwoSequence( LowestDegreeMorphismInComplex( C ), HighestDegreeMorphismInComplex( C ) );
+    return AsATwoSequence( LowestDegreeMorphism( C ), HighestDegreeMorphism( C ) );
     
 end );
 
@@ -131,7 +131,7 @@ InstallMethod( AsATwoSequence,
         
   function( C )
     
-    return AsATwoSequence( LowestDegreeMorphismInComplex( C ), HighestDegreeMorphismInComplex( C ) );
+    return AsATwoSequence( LowestDegreeMorphism( C ), HighestDegreeMorphism( C ) );
     
 end );
 
@@ -273,14 +273,14 @@ functor_SubMap!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
   function( cpx_post_pre )
-    local pre, post, S, T, phi, modulo_image_pre;
+    local pre, post, S, T, phi, morphism_aid_pre;
     
     if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
         Error( "expecting a complex containing two morphisms\n" );
     fi;
     
-    pre := HighestDegreeMorphismInComplex( cpx_post_pre );
-    post := LowestDegreeMorphismInComplex( cpx_post_pre );
+    pre := HighestDegreeMorphism( cpx_post_pre );
+    post := LowestDegreeMorphism( cpx_post_pre );
     
     S := Source( pre );
     T := Range( post );
@@ -312,15 +312,48 @@ InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
     fi;
     
     ## the following is crucial for spectral sequences:
-    if HasMonomorphismModuloImage( pre ) then
-        modulo_image_pre := PreCompose( MonomorphismModuloImage( pre ), post );
-        if HasMonomorphismModuloImage( post ) then
-            SetMonomorphismModuloImage( phi, StackMaps( MonomorphismModuloImage( post ),  modulo_image_pre ) );
+    if HasMorphismAidMap( pre ) then
+        
+        morphism_aid_pre := PreCompose( MorphismAidMap( pre ), post );
+        
+        if HasMorphismAidMap( post ) then
+            SetMorphismAidMap( phi, StackMaps( MorphismAidMap( post ),  morphism_aid_pre ) );
         else
-            SetMonomorphismModuloImage( phi, modulo_image_pre );
+            SetMorphismAidMap( phi, morphism_aid_pre );
         fi;
-    elif HasMonomorphismModuloImage( post ) then
-        SetMonomorphismModuloImage( phi, MonomorphismModuloImage( post ) );
+        
+        if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
+           HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
+            SetIsGeneralizedMonomorphism( phi, true );
+        fi;
+        
+        ## cannot use elif here:
+        if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
+           HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
+            SetIsGeneralizedEpimorphism( phi, true );
+        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
+          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
+            SetIsGeneralizedMorphism( phi, true );
+        fi;
+        
+    elif HasMorphismAidMap( post ) then
+        
+        SetMorphismAidMap( phi, MorphismAidMap( post ) );
+        
+        if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
+           HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
+            SetIsGeneralizedMonomorphism( phi, true );
+        fi;
+        
+        ## cannot use elif here:
+        if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
+           HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
+            SetIsGeneralizedEpimorphism( phi, true );
+        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
+          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
+            SetIsGeneralizedMorphism( phi, true );
+        fi;
+        
     fi;
     
     return phi;
@@ -372,6 +405,116 @@ InstallMethod( \*,
 end );
 
 ##
+## StackMaps
+##
+
+InstallGlobalFunction( _Functor_StackMaps_OnObjects,	### defines: StackMaps
+  function( phi, psi )
+    local T, phi_psi, SpS, p;
+    
+    T := Range( phi );
+    
+    if not IsIdenticalObj( T, Range( psi ) ) then
+        Error( "the two morphisms must have identical target modules\n" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    else
+        phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    fi;
+    
+    SpS := Source( phi ) + Source( psi );
+    
+    ## get the position of the set of relations immediately after creating SpS;
+    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
+    
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+InstallValue( functor_StackMaps,
+        CreateHomalgFunctor(
+                [ "name", "StackMaps" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_StackMaps_OnObjects ]
+                )
+        );
+
+functor_StackMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+## AugmentMaps
+##
+
+InstallGlobalFunction( _Functor_AugmentMaps_OnObjects,	### defines: AugmentMaps
+  function( phi, psi )
+    local S, phi_psi, TpT, p;
+    
+    S := Source( phi );
+    
+    if not IsIdenticalObj( S, Source( psi ) ) then
+        Error( "the two morphisms must have identical source modules\n" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    else
+        phi_psi := UnionOfRows( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+    fi;
+    
+    TpT := Range( phi ) + Range( psi );
+    
+    ## get the position of the set of relations immediately after creating TpT;
+    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    
+    phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
+    
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+InstallValue( functor_AugmentMaps,
+        CreateHomalgFunctor(
+                [ "name", "AugmentMaps" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_AugmentMaps_OnObjects ]
+                )
+        );
+
+functor_AugmentMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
 ## AsChainMapForPullback
 ##
 
@@ -387,6 +530,9 @@ InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: As
     if HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( beta1 ) and IsMorphism( beta1 ) then
         SetIsMorphism( c, true );
+    elif HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) and
+      HasIsGeneralizedMorphism( beta1 ) and IsGeneralizedMorphism( beta1 ) then
+        SetIsGeneralizedMorphism( c, true );
     fi;
     
     SetIsChainMapForPullback( c, true );
@@ -433,8 +579,8 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
   function( chm_pb )
     local gamma, beta, N, psi, M_;
     
-    gamma := LowestDegreeMorphismInChainMap( chm_pb );
-    beta := LowestDegreeMorphismInComplex( Range( chm_pb ) );
+    gamma := LowestDegreeMorphism( chm_pb );
+    beta := LowestDegreeMorphism( Range( chm_pb ) );
     
     N := Range( beta );
     
@@ -442,13 +588,13 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     ## so cheerfully and loudly, inspiring me to this idea :-)
     ## this is the most decisive part of the code
     ## (the idea of generalized embeddings in action):
-    if HasMonomorphismModuloImage( beta ) then
-        N := UnionOfRelations( MonomorphismModuloImage( beta ) );	## this replaces [BR, Footnote 13]
-        if HasMonomorphismModuloImage( gamma ) then
-            N := UnionOfRelations( N, MatrixOfMap( MonomorphismModuloImage( gamma ) ) );
+    if HasMorphismAidMap( beta ) then
+        N := UnionOfRelations( MorphismAidMap( beta ) );	## this replaces [BR, Footnote 13]
+        if HasMorphismAidMap( gamma ) then
+            N := UnionOfRelations( N, MatrixOfMap( MorphismAidMap( gamma ) ) );
         fi;
-    elif HasMonomorphismModuloImage( gamma ) then
-        N := UnionOfRelations( MonomorphismModuloImage( gamma ) );
+    elif HasMorphismAidMap( gamma ) then
+        N := UnionOfRelations( MorphismAidMap( gamma ) );
     else
         N := RelationsOfModule( N );
     fi;
@@ -478,9 +624,18 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
        ( ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
          ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
-         HasMonomorphismModuloImage( beta ) ) then
+         ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then	## "generalizes" [BR, Subsection 3.1.1,(2)]
+        
+        Assert( 2, IsMorphism( psi ) );
         
         SetIsMorphism( psi, true );
+        
+    elif HasMorphismAidMap( gamma ) then
+        
+        #### we cannot activate the following lines, since MorphismAidMap( gamma ) / beta fails in general (cf. the example Grothendieck.g)
+        #### instead one should activate them where they make sense (cf. SpectralSequences.gi)
+        ## SetMorphismAidMap( psi, MorphismAidMap( gamma ) / beta );
+        ## SetIsGeneralizedMorphism( psi, true );
         
     fi;
     
@@ -545,6 +700,9 @@ InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsC
     if HasIsMorphism( psi ) and IsMorphism( psi ) and
        HasIsMorphism( alpha1 ) and IsMorphism( alpha1 ) then
         SetIsMorphism( c, true );
+    elif HasIsGeneralizedMorphism( psi ) and IsGeneralizedMorphism( psi ) and
+      HasIsGeneralizedMorphism( alpha1 ) and IsGeneralizedMorphism( alpha1 ) then
+        SetIsGeneralizedMorphism( c, true );
     fi;
     
     SetIsChainMapForPushout( c, true );
@@ -607,6 +765,18 @@ InstallFunctorOnObjects( functor_SubMap );
 ##
 
 InstallFunctorOnObjects( functor_Compose );
+
+##
+## StackMaps( phi, psi )
+##
+
+InstallFunctorOnObjects( functor_StackMaps );
+
+##
+## AugmentMaps( phi, psi )
+##
+
+InstallFunctorOnObjects( functor_AugmentMaps );
 
 ##
 ## AsChainMapForPullback( phi, beta1 )

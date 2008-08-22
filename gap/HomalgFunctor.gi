@@ -67,16 +67,16 @@ HOMALG.FunctorOn :=
 ####################################
 
 ##
-InstallMethod( NaturalEmbedding,
+InstallMethod( NaturalGeneralizedEmbedding,
         "for homalg modules being values of functors on objects",
         [ IsFinitelyPresentedModuleRep ],
         
   function( FM )
     
-    if IsBound(FM!.NaturalEmbedding) then
-        return FM!.NaturalEmbedding;
+    if IsBound(FM!.NaturalGeneralizedEmbedding) then
+        return FM!.NaturalGeneralizedEmbedding;
     else
-        Error( "the module does not have a component \"NaturalEmbedding\"; either the module is not the result of a functor or the functor is not properly implemented (cf. arXiv:math/0701146)\n" );
+        Error( "the module does not have a component \"NaturalGeneralizedEmbedding\"; either the module is not the result of a functor or the functor is not properly implemented (cf. arXiv:math/0701146)\n" );
     fi;
     
 end );
@@ -549,8 +549,8 @@ InstallMethod( FunctorMap,
         
     else
         
-        emb_source := NaturalEmbedding( F_source );
-        emb_target := NaturalEmbedding( F_target );
+        emb_source := NaturalGeneralizedEmbedding( F_source );
+        emb_target := NaturalGeneralizedEmbedding( F_target );
         
         if IsBound( Functor!.OnMorphisms ) then
             arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
@@ -559,6 +559,9 @@ InstallMethod( FunctorMap,
             if IsHomalgMatrix( hull_phi ) then
                 hull_phi :=
                   HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
+                
+                ## otherwise the result mor cannot be automatically marked IsMorphism
+                SetIsMorphism( hull_phi, true );
             fi;
         else
             hull_phi := phi;
@@ -602,6 +605,7 @@ InstallMethod( InstallFunctorOnObjects,
     local genesis, der_arg, functor_operation, number_of_arguments,
           natural_transformation,
           natural_transformation1, natural_transformation2,
+          natural_transformation3, natural_transformation4,
           filter_obj, filter0, filter1_obj, filter2_obj, filter3_obj;
     
     if HasGenesis( Functor ) then
@@ -702,6 +706,40 @@ InstallMethod( InstallFunctorOnObjects,
                         functor_operation( o );			## this sets the attribute named "natural_transformation"
                         
                         return natural_transformation2( o );	## not an infinite loop because of the side effect of the above line
+                        
+                    end );
+                    
+                fi;
+                
+                if IsBound( Functor!.natural_transformation3 ) then
+                    
+                    natural_transformation3 := ValueGlobal( Functor!.natural_transformation3 );
+                    
+                    InstallOtherMethod( natural_transformation3,
+                            "for homalg modules",
+                            [ filter_obj ],
+                      function( o )
+                        
+                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        
+                        return natural_transformation3( o );	## not an infinite loop because of the side effect of the above line
+                        
+                    end );
+                    
+                fi;
+                
+                if IsBound( Functor!.natural_transformation4 ) then
+                    
+                    natural_transformation4 := ValueGlobal( Functor!.natural_transformation4 );
+                    
+                    InstallOtherMethod( natural_transformation4,
+                            "for homalg modules",
+                            [ filter_obj ],
+                      function( o )
+                        
+                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        
+                        return natural_transformation4( o );	## not an infinite loop because of the side effect of the above line
                         
                     end );
                     
@@ -2142,8 +2180,8 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
         
         phi := CertainMorphismOfSpecialChainMap( sq );
         
-        muS := NaturalEmbedding( functor_operation( dS ) );
-        muT := NaturalEmbedding( functor_operation( dT ) );
+        muS := NaturalGeneralizedEmbedding( functor_operation( dS ) );
+        muT := NaturalGeneralizedEmbedding( functor_operation( dT ) );
         
         return CompleteImageSquare( muS, phi, muT );
         
@@ -3660,13 +3698,13 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -3695,8 +3733,8 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n, M, "a" );
                     HN := functor_operation( n, N, "a" );
@@ -3729,8 +3767,8 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n, psi, "a" );
                     Hphi := functor_operation( n, phi, "a" );
@@ -3753,8 +3791,8 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                   function( E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -3774,13 +3812,13 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n + 1, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -3809,8 +3847,8 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n + 1, M, "a" );
                     HN := functor_operation( n + 1, N, "a" );
@@ -3843,8 +3881,8 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n + 1, psi, "a" );
                     Hphi := functor_operation( n + 1, phi, "a" );
@@ -3867,8 +3905,8 @@ InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
                   function( E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -3948,13 +3986,13 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -3983,8 +4021,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n, M, o, "a" );
                     HN := functor_operation( n, N, o, "a" );
@@ -4017,8 +4055,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n, psi, o, "a" );
                     Hphi := functor_operation( n, phi, o, "a" );
@@ -4041,8 +4079,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                   function( E, o )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4062,13 +4100,13 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n + 1, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4097,8 +4135,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n + 1, M, o, "a" );
                     HN := functor_operation( n + 1, N, o, "a" );
@@ -4131,8 +4169,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n + 1, psi, o, "a" );
                     Hphi := functor_operation( n + 1, phi, o, "a" );
@@ -4155,8 +4193,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                   function( E, o )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4208,13 +4246,13 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4243,8 +4281,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n, o, M, "a" );
                     HN := functor_operation( n, o, N, "a" );
@@ -4277,8 +4315,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n, o, psi, "a" );
                     Hphi := functor_operation( n, o, phi, "a" );
@@ -4301,8 +4339,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                   function( o, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4322,13 +4360,13 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n + 1, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4357,8 +4395,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n + 1, o, M, "a" );
                     HN := functor_operation( n + 1, o, N, "a" );
@@ -4391,8 +4429,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n + 1, o, psi, "a" );
                     Hphi := functor_operation( n + 1, o, phi, "a" );
@@ -4415,8 +4453,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                   function( o, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4484,13 +4522,13 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4519,8 +4557,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n, M, o2, o3, "a" );
                     HN := functor_operation( n, N, o2, o3, "a" );
@@ -4553,8 +4591,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n, psi, o2, o3, "a" );
                     Hphi := functor_operation( n, phi, o2, o3, "a" );
@@ -4577,8 +4615,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                   function( E, o2, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4598,13 +4636,13 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n + 1, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4633,8 +4671,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n + 1, M, o2, o3, "a" );
                     HN := functor_operation( n + 1, N, o2, o3, "a" );
@@ -4667,8 +4705,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n + 1, psi, o2, o3, "a" );
                     Hphi := functor_operation( n + 1, phi, o2, o3, "a" );
@@ -4691,8 +4729,8 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                   function( E, o2, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4744,13 +4782,13 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4779,8 +4817,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n, o1, M, o3, "a" );
                     HN := functor_operation( n, o1, N, o3, "a" );
@@ -4813,8 +4851,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n, o1, psi, o3, "a" );
                     Hphi := functor_operation( n, o1, phi, o3, "a" );
@@ -4837,8 +4875,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                   function( o1, E, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -4858,13 +4896,13 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n + 1, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -4893,8 +4931,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n + 1, o1, M, o3, "a" );
                     HN := functor_operation( n + 1, o1, N, o3, "a" );
@@ -4927,8 +4965,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n + 1, o1, psi, o3, "a" );
                     Hphi := functor_operation( n + 1, o1, phi, o3, "a" );
@@ -4951,8 +4989,8 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                   function( o1, E, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -5004,13 +5042,13 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -5039,8 +5077,8 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n, o1, o2, M, "a" );
                     HN := functor_operation( n, o1, o2, N, "a" );
@@ -5073,8 +5111,8 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n, o1, o2, psi, "a" );
                     Hphi := functor_operation( n, o1, o2, phi, "a" );
@@ -5097,8 +5135,8 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                   function( o1, o2, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     
@@ -5118,13 +5156,13 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     horse_shoe := Resolution( n + 1, E );
                     
-                    d_psi := LowestDegreeMorphismInComplex( horse_shoe );
-                    d_phi := HighestDegreeMorphismInComplex( horse_shoe );
+                    d_psi := LowestDegreeMorphism( horse_shoe );
+                    d_phi := HighestDegreeMorphism( horse_shoe );
                     
                     dE := Source( d_psi );
                     
@@ -5153,8 +5191,8 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     HM := functor_operation( n + 1, o1, o2, M, "a" );
                     HN := functor_operation( n + 1, o1, o2, N, "a" );
@@ -5187,8 +5225,8 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                         TryNextMethod( );
                     fi;
                     
-                    psi := LowestDegreeMorphismInComplex( E );
-                    phi := HighestDegreeMorphismInComplex( E );
+                    psi := LowestDegreeMorphism( E );
+                    phi := HighestDegreeMorphism( E );
                     
                     Hpsi := functor_operation( n + 1, o1, o2, psi, "a" );
                     Hphi := functor_operation( n + 1, o1, o2, phi, "a" );
@@ -5211,8 +5249,8 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                   function( o1, o2, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
-                    M := LowestDegreeObjectInComplex( E );
-                    N := HighestDegreeObjectInComplex( E );
+                    M := LowestDegreeObject( E );
+                    N := HighestDegreeObject( E );
                     
                     n := Maximum( List( [ M, N ], LengthOfResolution ) );
                     

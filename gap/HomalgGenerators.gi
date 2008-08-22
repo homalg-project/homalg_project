@@ -436,6 +436,7 @@ end );
 #
 ####################################
 
+##
 InstallGlobalFunction( HomalgGeneratorsForLeftModule,
   function( arg )
     local nargs, ar, R, generators, relations_of_hullmodule, gen;
@@ -499,6 +500,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
     
 end );
 
+##
 InstallGlobalFunction( HomalgGeneratorsForRightModule,
   function( arg )
     local nargs, ar, R, generators, relations_of_hullmodule, gen;

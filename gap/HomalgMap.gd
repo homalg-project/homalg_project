@@ -29,7 +29,7 @@ DeclareCategory( "IsHomalgSelfMap",
 #
 ####################################
 
-DeclareAttribute( "MonomorphismModuloImage",
+DeclareAttribute( "MorphismAidMap",
         IsHomalgMap );
 
 ####################################
@@ -48,10 +48,16 @@ DeclareGlobalFunction( "HomalgIdentityMap" );
 
 # basic operations:
 
+DeclareOperation( "homalgResetFilters",
+        [ IsHomalgMap ] );
+
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgMap ] );	## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "RemoveMorphismAidMap",
         [ IsHomalgMap ] );
 
 DeclareOperation( "MatrixOfMap",
@@ -74,12 +80,6 @@ DeclareOperation( "SyzygiesGenerators",
 
 DeclareOperation( "ReducedSyzygiesGenerators",
         [ IsHomalgMap ] );
-
-DeclareOperation( "StackMaps",
-        [ IsHomalgMap, IsHomalgMap ] );
-
-DeclareOperation( "AugmentMaps",
-        [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "PreCompose",
         [ IsHomalgMap, IsHomalgMap ] );

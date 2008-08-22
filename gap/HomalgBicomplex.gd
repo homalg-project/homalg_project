@@ -97,7 +97,7 @@ DeclareOperation( "CertainVerticalMorphism",
 DeclareOperation( "CertainHorizontalMorphism",
         [ IsHomalgBicomplex, IsList ] );
 
-DeclareOperation( "BiDegreesOfObjectOfTotalComplex",
+DeclareOperation( "BidegreesOfObjectOfTotalComplex",
         [ IsHomalgBicomplex, IsInt ] );
 
 DeclareOperation( "MorphismOfTotalComplex",

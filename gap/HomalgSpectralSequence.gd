@@ -42,7 +42,7 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToABicomplex",
 #
 ####################################
 
-DeclareAttribute( "GeneralizedEmbeddingsInTotalDefects",
+DeclareAttribute( "GeneralizedEmbeddingsInTotalObjects",
         IsHomalgSpectralSequence );
 
 ####################################
@@ -136,9 +136,12 @@ DeclareOperation( "CertainMorphism",
 DeclareOperation( "UnderlyingBicomplex",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ] );
 
-DeclareOperation( "GeneralizedEmbeddingsInStableSecondSheetOfI_E",
+DeclareOperation( "AssociatedFirstSpectralSequence",
+        [ IsHomalgSpectralSequence ] );
+
+DeclareOperation( "FiltrationOfObjectInStableSecondSheetOfI_E",
         [ IsHomalgSpectralSequence, IsInt ] );
 
-DeclareOperation( "GeneralizedEmbeddingsInStableSecondSheetOfI_E",
+DeclareOperation( "FiltrationOfObjectInStableSecondSheetOfI_E",
         [ IsHomalgSpectralSequence ] );
 

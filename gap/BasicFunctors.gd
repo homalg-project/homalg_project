@@ -57,7 +57,7 @@ DeclareGlobalVariable( "Functor_TensorProduct" );
 DeclareAttribute( "CokernelEpi",
         IsHomalgMap );
 
-DeclareAttribute( "CokernelGeneralizedEmb",
+DeclareAttribute( "CokernelNaturalGeneralizedEmbedding",
         IsHomalgMap );
 
 DeclareAttribute( "KernelEmb",
@@ -96,6 +96,18 @@ DeclareOperation( "DefectOfExactness",
 
 DeclareOperation( "Hom",
         [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "LeftDualizingFunctor",
+        [ IsHomalgRing, IsString ] );
+
+DeclareOperation( "LeftDualizingFunctor",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "RightDualizingFunctor",
+        [ IsHomalgRing, IsString ] );
+
+DeclareOperation( "RightDualizingFunctor",
+        [ IsHomalgRing ] );
 
 DeclareOperation( "TensorProduct",
         [ IsHomalgModule, IsHomalgModule ] );

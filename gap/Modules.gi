@@ -532,8 +532,8 @@ InstallMethod( ShortenResolution,
   function( q, d )
     local max, min, m, mx, n, d_m, F_m, d_m_1, s_m_1, d_m_2, d_short, l, epi;
     
-    max := HighestDegreeInComplex( d );
-    min := LowestDegreeInComplex( d );
+    max := HighestDegree( d );
+    min := LowestDegree( d );
     
     m := max - min;
     
@@ -608,7 +608,7 @@ InstallMethod( ShortenResolution,
         d_short := HomalgComplex( d_m_1, min + 1 );
         Add( d_short, d_m );
     else
-        epi := PreCompose( DirectSumEpis( Range( d_m ) )[1], CokernelEpi( d_m_1 ) );
+        epi := PreCompose( EpiOnLeftSummand( Range( d_m ) ), CokernelEpi( d_m_1 ) );
         SetCokernelEpi( d_m, epi );
         d_short := HomalgComplex( d_m, min + 1 );
     fi;
@@ -771,10 +771,24 @@ end );
 
 ##
 InstallGlobalFunction( AsEpimorphicImage,
-  function( phi )
-    local nargs, M, rel, TI, T;
+  function( arg )
+    local nargs, phi, M, rel, TI, T;
     
-    if not IsMapOfFinitelyGeneratedModulesRep( phi ) then
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        Error( "too few arguments\n" );
+    fi;
+    
+    phi := arg[1];
+    
+    if IsHomalgMatrix( phi ) then
+        if nargs > 1 and IsHomalgModule( arg[2] ) then
+            phi := HomalgMap( phi, "free", arg[2] );
+        else
+            Error( "if the first argument is a homalg matrix then the second argument must be a homalg module\n" );
+        fi;
+    elif not IsMapOfFinitelyGeneratedModulesRep( phi ) then
         Error( "the first argument must be a map\n" );
     fi;
     

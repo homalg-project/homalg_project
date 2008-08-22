@@ -146,6 +146,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
         piN := UnionOfColumns( zeroMN, idN );
     fi;
     
+    SetIsMorphism( sum, true );
     sum := Cokernel( sum );
     
     iotaM := HomalgMap( iotaM, M, sum );
@@ -163,9 +164,16 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     SetKernelEmb( piM, iotaN );
     SetKernelEmb( piN, iotaM );
     
-    ## set the attributes DirectSumEmbs and DirectSumEpis (specific for DirectSum):
-    SetDirectSumEmbs( sum, [ iotaM, iotaN ] );
-    SetDirectSumEpis( sum, [ piM, piN ] );
+    ## set the four attributes (specific for DirectSum):
+    SetMonoOfLeftSummand( sum, iotaM );
+    SetMonoOfRightSummand( sum, iotaN );
+    SetEpiOnLeftSummand( sum, piM );
+    SetEpiOnRightSummand( sum, piN );
+    
+    if ( HasIsZero( M ) and not IsZero( M ) ) or
+       ( HasIsZero( N ) and not IsZero( N ) ) then
+        SetIsZero( sum, false );
+    fi;
     
     return sum;
     
@@ -222,8 +230,10 @@ end );
 InstallValue( Functor_DirectSum,
         CreateHomalgFunctor(
                 [ "name", "DirectSum" ],
-                [ "natural_transformation1", "DirectSumEpis" ],
-                [ "natural_transformation2", "DirectSumEmbs" ],
+                [ "natural_transformation1", "EpiOnLeftSummand" ],
+                [ "natural_transformation2", "EpiOnRightSummand" ],
+                [ "natural_transformation3", "MonoOfLeftSummand" ],
+                [ "natural_transformation4", "MonoOfRightSummand" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ] ] ],
                 [ "2", [ [ "covariant" ] ] ],
@@ -250,10 +260,10 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOfMaps)
   function( chm_phi_beta1 )
-    local phi, beta1, phi_beta1, ApB_, emb, pb, epis, pair;
+    local phi, beta1, phi_beta1, ApB_, emb, pb, S, pair;
     
-    phi := LowestDegreeMorphismInChainMap( chm_phi_beta1 );
-    beta1 := LowestDegreeMorphismInComplex( Range( chm_phi_beta1 ) );
+    phi := LowestDegreeMorphism( chm_phi_beta1 );
+    beta1 := LowestDegreeMorphism( Range( chm_phi_beta1 ) );
     
     phi_beta1 := StackMaps( phi, -beta1 );
     
@@ -261,9 +271,9 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     
     pb := Source( emb );
     
-    epis := DirectSumEpis( Source( phi_beta1 ) );
+    S := Source( phi_beta1 );
     
-    pair := [ PreCompose( emb, epis[1] ), PreCompose( emb, epis[2] ) ];
+    pair := [ PreCompose( emb, EpiOnLeftSummand( S ) ), PreCompose( emb, EpiOnRightSummand( S ) ) ];
     
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
     SetPullbackPairOfMaps( chm_phi_beta1, pair );
@@ -308,10 +318,10 @@ end );
 
 InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMaps)
   function( chm_alpha1_psi )
-    local psi, alpha1, alpha1_psi, epi, po, embs, pair;
+    local psi, alpha1, alpha1_psi, epi, po, T, pair;
     
-    psi := HighestDegreeMorphismInChainMap( chm_alpha1_psi );
-    alpha1 := HighestDegreeMorphismInComplex( Source( chm_alpha1_psi ) );
+    psi := HighestDegreeMorphism( chm_alpha1_psi );
+    alpha1 := HighestDegreeMorphism( Source( chm_alpha1_psi ) );
     
     alpha1_psi := AugmentMaps( alpha1, psi );
     
@@ -319,9 +329,9 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     
     po := Range( epi );
     
-    embs := DirectSumEmbs( Range( alpha1_psi ) );
+    T := Range( alpha1_psi );
     
-    pair := [ PreCompose( embs[1], epi ), PreCompose( embs[2], epi ) ];
+    pair := [ PreCompose( MonoOfLeftSummand( T ), epi ), PreCompose( MonoOfRightSummand( T ), epi ) ];
     
     ## set the attribute PushoutPairOfMaps (specific for Pushout):
     SetPushoutPairOfMaps( chm_alpha1_psi, pair );

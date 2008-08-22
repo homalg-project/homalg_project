@@ -27,17 +27,32 @@ InstallValue( LIMOR,
 InstallValue( LogicalImplicationsForHomalgMorphisms,
         [ 
           
+          [ IsMorphism,
+            "implies", IsGeneralizedMorphism ],
+          
           [ IsMonomorphism,
             "implies", IsMorphism ],
           
           [ IsMonomorphism,
-            "implies", IsGeneralizedEmbedding ],
+            "implies", IsGeneralizedMonomorphism ],
+          
+          [ IsGeneralizedMonomorphism,
+            "implies", IsGeneralizedMorphism ],
           
           [ IsEpimorphism,
             "implies", IsMorphism ],
           
+          [ IsEpimorphism,
+            "implies", IsGeneralizedEpimorphism ],
+          
+          [ IsGeneralizedEpimorphism,
+            "implies", IsGeneralizedMorphism ],
+          
           [ IsAutomorphism,
             "implies", IsIsomorphism ],
+          
+          [ IsIsomorphism,
+            "implies", IsGeneralizedIsomorphism ],
           
           [ IsIsomorphism,
             "implies", IsSplitMonomorphism ],
@@ -53,6 +68,18 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           
           [ IsEpimorphism, "and", IsMonomorphism,
             "imply", IsIsomorphism ],
+          
+          [ IsGeneralizedIsomorphism,
+            "implies", IsGeneralizedMonomorphism ],
+          
+          [ IsGeneralizedIsomorphism,
+            "implies", IsGeneralizedEpimorphism ],
+          
+          [ IsGeneralizedEpimorphism, "and", IsGeneralizedMonomorphism,
+            "imply", IsGeneralizedIsomorphism ],
+          
+          [ IsIdentityMorphism,
+            "implies", IsAutomorphism ],
           
           ] );
 
@@ -203,6 +230,17 @@ end );
 ####################################
 
 ##
+InstallMethod( IsZero,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsZero( DecideZero( phi ) );
+    
+end );
+
+##
 InstallMethod( IsMorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
@@ -231,13 +269,31 @@ InstallMethod( IsMorphism,
 end );
 
 ##
-InstallMethod( IsZero,
+InstallMethod( IsGeneralizedMorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    return IsZero( DecideZero( phi ) );
+    return IsMorphism( phi );		## this is just the fall back method
+    
+end );
+
+##
+InstallMethod( IsGeneralizedMorphism,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        
+  function( phi )
+    local mat, S, T;
+    
+    mat := MatrixOfMap( phi );
+    
+    S := Source( phi );
+    
+    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
+    
+    return IsMorphism( HomalgMap( mat, S, T ) );
     
 end );
 
@@ -253,6 +309,39 @@ InstallMethod( IsEpimorphism,
 end );
 
 ##
+InstallMethod( IsGeneralizedEpimorphism,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return IsEpimorphism( phi );	## this is just the fall back method
+    
+end );
+
+##
+InstallMethod( IsGeneralizedEpimorphism,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        
+  function( phi )
+    local mat, S, T, mu;
+    
+    mat := MatrixOfMap( phi );
+    
+    S := Source( phi );
+    
+    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
+    
+    mu := HomalgMap( mat, S, T );
+    
+    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
+    
+    return IsEpimorphism( mu );
+    
+end );
+
+##
 InstallMethod( IsMonomorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
@@ -264,7 +353,7 @@ InstallMethod( IsMonomorphism,
 end );
 
 ##
-InstallMethod( IsGeneralizedEmbedding,
+InstallMethod( IsGeneralizedMonomorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
@@ -275,31 +364,70 @@ InstallMethod( IsGeneralizedEmbedding,
 end );
 
 ##
-InstallMethod( IsGeneralizedEmbedding,
+InstallMethod( IsGeneralizedMonomorphism,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMonomorphismModuloImage ],
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
         
   function( phi )
-    local mat, S, T;
+    local mat, S, T, mu;
     
     mat := MatrixOfMap( phi );
     
     S := Source( phi );
     
-    T := Presentation( UnionOfRelations( MonomorphismModuloImage( phi ) ) );
+    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
     
-    return IsMonomorphism( HomalgMap( mat, S, T ) );
+    mu := HomalgMap( mat, S, T );
+    
+    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
+    
+    return IsMonomorphism( mu );
     
 end );
 
 ##
 InstallMethod( IsIsomorphism,
+        "for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    
+    return IsEpimorphism( phi ) and IsMonomorphism( phi );
+    
+end );
+
+##
+InstallMethod( IsGeneralizedIsomorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    return IsEpimorphism( phi ) and IsMonomorphism( phi );
+    return IsIsomorphism( phi );	## this is just the fall back method
+    
+end );
+
+##
+InstallMethod( IsGeneralizedIsomorphism,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        
+  function( phi )
+    local mat, S, T, mu;
+    
+    mat := MatrixOfMap( phi );
+    
+    S := Source( phi );
+    
+    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
+    
+    mu := HomalgMap( mat, S, T );
+    
+    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
+    
+    SetIsGeneralizedMonomorphism( phi, IsMonomorphism( mu ) );
+    
+    return IsIsomorphism( mu );
     
 end );
 
@@ -311,17 +439,6 @@ InstallMethod( IsAutomorphism,
   function( phi )
     
     return IsHomalgSelfMap( phi ) and IsIsomorphism( phi );
-    
-end );
-
-##
-InstallMethod( IsIsomorphism,
-        "for homalg morphisms",
-        [ IsHomalgMorphism ],
-        
-  function( phi )
-    
-    return IsMonomorphism( phi ) and IsEpimorphism( phi );
     
 end );
 

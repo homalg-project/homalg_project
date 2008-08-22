@@ -14,13 +14,13 @@
 #
 ####################################
 
-# A new GAP-category:
+# three new GAP-categories:
 
 DeclareCategory( "IsHomalgGenerators",
         IsAttributeStoringRep );
 
-## CAUTION: in the code we use the the following the following two categories
-##          are the only ones for sets of generators!!!!
+## CAUTION: in the code the following two categories are the only ones for sets of generators,
+##          i.e. IsHomalgGenerators and not IsHomalgGeneratorsOfLeftModule => IsHomalgGeneratorsOfRightModule
 
 DeclareCategory( "IsHomalgGeneratorsOfLeftModule",
         IsHomalgGenerators );

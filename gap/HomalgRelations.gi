@@ -748,6 +748,7 @@ end );
 #
 ####################################
 
+##
 InstallGlobalFunction( HomalgRelationsForLeftModule,
   function( arg )
     local relations;
@@ -765,6 +766,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
     
 end );
 
+##
 InstallGlobalFunction( HomalgRelationsForRightModule,
   function( arg )
     local relations;

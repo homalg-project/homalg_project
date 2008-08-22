@@ -88,7 +88,7 @@ DeclareOperation( "LeftDerivedFunctor",
 
 # basic operations:
 
-DeclareOperation( "NaturalEmbedding",
+DeclareOperation( "NaturalGeneralizedEmbedding",
         [ IsHomalgModule ] );
 
 DeclareOperation( "NameOfFunctor",
