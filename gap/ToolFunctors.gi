@@ -630,12 +630,12 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
         
         SetIsMorphism( psi, true );
         
-    elif HasMorphismAidMap( gamma ) then
+    elif HasMorphismAidMap( gamma ) and not HasMorphismAidMap( beta ) then
         
         #### we cannot activate the following lines, since MorphismAidMap( gamma ) / beta fails in general (cf. the example Grothendieck.g)
         #### instead one should activate them where they make sense (cf. SpectralSequences.gi)
-        ## SetMorphismAidMap( psi, MorphismAidMap( gamma ) / beta );
-        ## SetIsGeneralizedMorphism( psi, true );
+        #SetMorphismAidMap( psi, MorphismAidMap( gamma ) / beta );
+        #SetIsGeneralizedMorphism( psi, true );
         
     fi;
     

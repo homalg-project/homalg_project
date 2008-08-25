@@ -296,11 +296,8 @@ InstallMethod( IsomorphismOfFiltration,
         ## the epimorphism from the free hull P_0 (of M_p) onto M_p
         d0 := FreeHullEpi( Mp );
         
-        ## we won't need the morphism aid map of gen_emb
-        ## so we remove it to spare computations
-        ## (this also avoids an error that occurs in CompleteImageSquare below
-        ##  this pops up during the execution of A3_Purity.g)
-        RemoveMorphismAidMap( gen_emb );
+        ## make a copy without the morphism aid map
+        gen_emb := RemoveMorphismAidMap( gen_emb );
         
         ## eta0: P_0 -> F_p( M )
         ## the first lift of the identity map of M_p to a map between P_0 and F_p( M )
@@ -370,8 +367,8 @@ InstallMethod( IsomorphismOfFiltration,
         ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p+1}( M ) > 0
         gen_iso := CokernelNaturalGeneralizedEmbedding( emb );
         
-        ## since we don't the morphism aid map it is safe to remove it
-        RemoveMorphismAidMap( gen_iso );
+        ## make a copy without the morphism aid map
+        gen_iso := RemoveMorphismAidMap( gen_iso );
         
         ## the isomorphism between Cokernel( K_1 -> P_0 + F_{p+1}( M ) ) and F_p( M ),
         ## where the former is, by contruction, equipped with a presentation

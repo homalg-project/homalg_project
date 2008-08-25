@@ -135,14 +135,81 @@ InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
 end );
 
 ##
+InstallMethod( OnAFreeSource,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    return HomalgMap( MatrixOfMap( phi ), "free", Range( phi ) );
+    
+end );
+
+##
 InstallMethod( RemoveMorphismAidMap,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    ResetFilterObj( phi, MorphismAidMap );
-    Unbind( phi!.MorphismAidMap );
+    return HomalgMap( MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    
+end );
+
+##
+InstallMethod( GeneralizedMap,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
+        
+  function( phi, morphism_aid_map )
+    local morphism_aid_map1, psi;
+    
+    if not IsHomalgMap( morphism_aid_map ) then
+        return phi;
+    fi;
+    
+    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
+        Error( "the targets of the two morphisms must coincide\n" );
+    fi;
+    
+    ## we don't need the source of the morphism aid map
+    morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
+    
+    ## prepare a copy of phi
+    psi := HomalgMap( MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    
+    SetMorphismAidMap( psi, morphism_aid_map1 );
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( AddToMorphismAidMap,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
+        
+  function( phi, morphism_aid_map )
+    local morphism_aid_map1, morphism_aid_map0;
+    
+    if not IsHomalgMap( morphism_aid_map ) then
+        return phi;
+    fi;
+    
+    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
+        Error( "the targets of the two morphisms must coincide\n" );
+    fi;
+    
+    ## we don't need the source of the new morphism aid map
+    morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
+    
+    if HasMorphismAidMap( phi ) then
+        ## we don't need the source of the old morphism aid map
+        morphism_aid_map0 := OnAFreeSource( MorphismAidMap( phi ) );
+        morphism_aid_map1 := StackMaps( morphism_aid_map0, morphism_aid_map1 );
+    fi;
+    
+    return GeneralizedMap( phi, morphism_aid_map1 );
     
 end );
 
@@ -268,6 +335,18 @@ InstallMethod( \=,
     
     if not AreComparableMorphisms( phi1, phi2 ) then
         return false;
+    fi;
+    
+    if HasMorphismAidMap( phi1 ) then
+        if not HasMorphismAidMap( phi2 ) or
+           MorphismAidMap( phi1 ) <> MorphismAidMap( phi2 ) then
+            return false;
+        fi;
+    elif HasMorphismAidMap( phi2 ) then
+        if not HasMorphismAidMap( phi1 ) or
+           MorphismAidMap( phi1 ) <> MorphismAidMap( phi2 ) then
+            return false;
+        fi;
     fi;
     
     ## don't use phi1 - phi2 since FunctorObj will then cause an infinite loop

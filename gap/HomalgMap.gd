@@ -57,8 +57,17 @@ DeclareOperation( "PositionOfTheDefaultSetOfRelations",
 DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
         [ IsHomalgMap ] );
 
+DeclareOperation( "OnAFreeSource",
+        [ IsHomalgMap ] );
+
 DeclareOperation( "RemoveMorphismAidMap",
         [ IsHomalgMap ] );
+
+DeclareOperation( "GeneralizedMap",
+        [ IsHomalgMap, IsObject ] );
+
+DeclareOperation( "AddToMorphismAidMap",
+        [ IsHomalgMap, IsObject ] );
 
 DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap, IsPosInt, IsPosInt ] );

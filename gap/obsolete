@@ -1066,3 +1066,60 @@ InstallMethod( GrothendieckSpectralSequence,
     
 end );
 
+## from HomalgMap.gd/gi
+
+DeclareOperation( "RemoveMorphismAidMap",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "ReplaceMorphismAidMap",
+        [ IsHomalgMap, IsObject ] );
+
+##
+InstallMethod( RemoveMorphismAidMap,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    ResetFilterObj( phi, MorphismAidMap );
+    Unbind( phi!.MorphismAidMap );
+    
+end );
+
+## never use this operation unless you know what you are doing
+## (together with the caching of the functors PostDivide and Compose
+##  it could lead to wrong results)
+InstallMethod( ReplaceMorphismAidMap,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
+        
+  function( phi, morphism_aid_map )
+    local morphism_aid_map1;
+    
+    if IsHomalgMap( morphism_aid_map ) then
+        
+        if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
+            Error( "the targets of the two morphisms must coincide\n" );
+        fi;
+	
+        ## we don't need the source of the morphism aid map
+        morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
+        
+        ## first clean up
+        RemoveMorphismAidMap( phi );
+        
+        ## a generalized embedding may now become
+	## only a generalized homomorphism
+        homalgResetFilters( phi );
+        
+        SetMorphismAidMap( phi, morphism_aid_map1 );
+        
+    fi;
+    
+end );
+
+## from HomalgFiltration.gi
+
+        ## (this also avoids an error that occurs in CompleteImageSquare below
+        ##  this pops up during the execution of A3_Purity.g)
+        RemoveMorphismAidMap( gen_emb );

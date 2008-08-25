@@ -721,6 +721,11 @@ InstallMethod( ConnectingHomomorphism,
     snake := snake / in_1;
     snake := snake / iota_Hsn_1;
     
+    ## check assertion
+    Assert( 1, IsMorphism( snake ) );
+    
+    SetIsMorphism( snake, true );
+    
     return snake;
     
 end );

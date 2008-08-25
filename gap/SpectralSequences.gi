@@ -10,14 +10,14 @@
 
 ##
 InstallMethod( GrothendieckSpectralSequence,
-        "for homalg maps",
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep ],
         
   function( Functor_F, Functor_G, M )
     local F, G, P, GP, CE, FCE, BC, Tot, I_E, tBC, II_E, I_E2, II_E2,
           II_E_infinity, grothendieck, grothendieck1, grothendieck2,
-          co, n, ToTn, bidegrees, l, pq, p, q, tot_embs, gen_emb0,
-          gen_emb1, gen_emb2, gen_emb, monomorphism_aid_map, gen_map;
+          co, n, Totn, bidegrees, l, pq, p, q, tot_embs, monomorphism_aid_map1,
+          gen_emb1, gen_emb2, I_En, gen_emb, monomorphism_aid_map, gen_map;
     
     F := OperationOfFunctor( Functor_F );
     G := OperationOfFunctor( Functor_G );
@@ -76,15 +76,14 @@ InstallMethod( GrothendieckSpectralSequence,
     
     for n in Filtered( ObjectDegreesOfComplex( Tot ), j -> j >= 0 ) do	## the (co)homologies vanish in negative total degrees
         
-        ToTn := CertainObject( Tot, n );
+        Totn := CertainObject( Tot, n );
         
-        if IsBound( ToTn!.EmbeddingsInObjectOfTotalComplex ) then
-            tot_embs := ToTn!.EmbeddingsInObjectOfTotalComplex;
+        ## the embeddings from BC^{p,q} -> Tot^n
+        if IsBound( Totn!.EmbeddingsInObjectOfTotalComplex ) then
+            tot_embs := Totn!.EmbeddingsInObjectOfTotalComplex;
         else
             tot_embs := fail;	## happens at the ends of the total complex
         fi;
-        
-        monomorphism_aid_map := CertainMorphism( Tot, n + co );
         
         ## for the first spectral sequence I_E
         gen_emb1 := I_E2!.absolute_embeddings.(String([ n, 0 ]));
@@ -93,12 +92,15 @@ InstallMethod( GrothendieckSpectralSequence,
             gen_emb1 := PreCompose( gen_emb1, tot_embs.(String([ n, 0 ])) );
         fi;
         
-        if IsHomalgMap( monomorphism_aid_map ) then
-            if HasMorphismAidMap( gen_emb1 ) then
-                gen_emb1!.MorphismAidMap := StackMaps( MorphismAidMap( gen_emb1 ), monomorphism_aid_map );
-            else
-                SetMorphismAidMap( gen_emb1, monomorphism_aid_map );
-            fi;
+        ## CertainMorphism( Tot, n + co ) is the minimum of what
+        ## gen_emb1 needs to master the lifts below
+        gen_emb1 := AddToMorphismAidMap( gen_emb1, CertainMorphism( Tot, n + co ) );
+        
+        ## store the morphism aid map
+        if HasMorphismAidMap( gen_emb1 ) then
+            monomorphism_aid_map1 := MorphismAidMap( gen_emb1 );
+        else
+            monomorphism_aid_map1 := 0;
         fi;
         
         ## check assertion
@@ -112,8 +114,6 @@ InstallMethod( GrothendieckSpectralSequence,
         bidegrees := BidegreesOfObjectOfTotalComplex( BC, n );
         
         l := Length( bidegrees );
-        
-        monomorphism_aid_map := 0;
         
         for pq in bidegrees do
             
@@ -135,25 +135,60 @@ InstallMethod( GrothendieckSpectralSequence,
             
         od;
         
+        ## this is necessary for handling not only homological
+        ## but also cohomological spectral sequences
+        if IsSpectralSequenceOfFinitelyPresentedObjectsRep( II_E ) then
+            bidegrees := Reversed( bidegrees );			## note the "Reversed"
+        fi;
+        
+        ## prepare a copy of gen_emb1 without the morphism aid map
+        ## (will be added below)
+        I_En := Source( gen_emb1 );
+        
+        gen_emb1 := HomalgMap( MatrixOfMap( gen_emb1 ), I_En, Totn );
+        
         monomorphism_aid_map := 0;
         
         ## contruct the generalized embeddings filtering
         ## I_E^{n,0} = H^n( Tot( BC ) ) by II_E^{p,q}
-        for pq in Reversed( bidegrees ) do		## note the "Reversed"
+        for pq in bidegrees do
             
             q := pq[1];		## we flip p and q of the bicomplex since we take
             p := pq[2];		## the second spectral sequence as our reference
             
-            gen_emb := grothendieck2.(String([ p, q ])) / grothendieck1.(String([ n, 0 ]));
+            gen_emb2 := grothendieck2.(String([ p, q ]));
+            
+            ## prepare gen_emb1 to master the coming lift
+            gen_emb1 := AddToMorphismAidMap( gen_emb1, monomorphism_aid_map1 );		## this works without side effects
+            
+            ## check assertion
+            Assert( 1, IsGeneralizedMorphism( gen_emb1 ) );
+            
+            SetIsGeneralizedMorphism( gen_emb1, true );
+            
+            ## gen_emb1 now has enough aid
+            ## to lift gen_emb2 (literal and unliteral)
+            gen_emb := gen_emb2 / gen_emb1;
+            
+            ## this last line is one of the highlights in the code,
+            ## where generalized embeddings play a decisive role
+            ## (see the functors PostDivide and Compose)
+            
+            ## prepare for the next step
+            monomorphism_aid_map1 := gen_emb2;
             
             ## start to make the gen_emb's the generalized embeddings
             ## of the filtration induced by the second spectral sequence
-            gen_map := HomalgMap( MatrixOfMap( gen_emb ), "free", Range( gen_emb ) );
+            gen_map := OnAFreeSource( gen_emb );
             
             if IsHomalgMap( monomorphism_aid_map ) then
+                ## add monomorphism_aid_map from the previous set
                 SetMorphismAidMap( gen_emb, monomorphism_aid_map );
+                
+                ## for the next step
                 monomorphism_aid_map := StackMaps( monomorphism_aid_map, gen_map );
             else
+                ## the initial step
                 monomorphism_aid_map := gen_map;
             fi;
             
@@ -175,8 +210,8 @@ InstallMethod( GrothendieckSpectralSequence,
         od;
         
         ## the lowest one is a generalized isomorphism
-        p := bidegrees[1][2];
-        q := bidegrees[1][1];
+        p := bidegrees[l][2];
+        q := bidegrees[l][1];
         
         ## check assertion
         Assert( 1, IsGeneralizedIsomorphism( grothendieck.(String([ p, q ])) ) );
@@ -184,8 +219,8 @@ InstallMethod( GrothendieckSpectralSequence,
         SetIsGeneralizedIsomorphism( grothendieck.(String([ p, q ])), true );
         
         ## the higest one is a monomorphism
-        p := bidegrees[l][2];
-        q := bidegrees[l][1];
+        p := bidegrees[1][2];
+        q := bidegrees[1][1];
         
         ## check assertion
         Assert( 1, IsMonomorphism( grothendieck.(String([ p, q ])) ) );

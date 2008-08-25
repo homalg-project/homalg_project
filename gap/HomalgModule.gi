@@ -654,7 +654,7 @@ InstallMethod( AddANewPresentation,
         [ IsFinitelyPresentedModuleRep, IsRelationsOfFinitelyPresentedModuleRep ],
         
   function( M, rel )
-    local rels, lpos, d, gens, l, id, tr, itr;
+    local rels, rev_lpos, d, gens, l, id, tr, itr;
     
     if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgRelationsOfLeftModule( rel ) )
        and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRelationsOfRightModule( rel ) ) then
@@ -664,10 +664,10 @@ InstallMethod( AddANewPresentation,
     rels := SetsOfRelations( M );
     
     ## we reverse since we want to check the recent sets of relations first
-    lpos := Reversed( rels!.ListOfPositionsOfKnownSetsOfRelations );
+    rev_lpos := Reversed( rels!.ListOfPositionsOfKnownSetsOfRelations );
     
     ## don't add an old set of relations, but let it be the default set of relations instead:
-    for d in lpos do
+    for d in rev_lpos do
         if IsIdenticalObj( rel, rels!.(d) ) then
             
             if IsLockedModule( M ) then
@@ -680,7 +680,7 @@ InstallMethod( AddANewPresentation,
         fi;
     od;
     
-    for d in lpos do
+    for d in rev_lpos do
         if MatrixOfRelations( rel ) = MatrixOfRelations( rels!.(d) ) then
             
             if IsLockedModule( M ) then
@@ -709,7 +709,7 @@ InstallMethod( AddANewPresentation,
     rels!.(l+1) := rel;
     
     ## adjust the list of positions:
-    lpos[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
+    rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
     id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
     
@@ -1848,7 +1848,14 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local properties, nz, num_gen, num_rel, gen_string, rel_string, locked;
+    local num_gen, properties, nz, num_rel, gen_string, rel_string, locked;
+    
+    num_gen := NrGenerators( M );
+    
+    if num_gen = 1 then
+        SetIsCyclic( M, true );
+        num_gen := "a cyclic";
+    fi;
     
     properties := "";
     
@@ -1931,14 +1938,12 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    num_gen := NrGenerators( M );
-    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         
-        if num_gen = 1 then
-            gen_string := " generator";
-        else
+        if IsInt( num_gen ) then
             gen_string := " generators";
+        else
+            gen_string := " generator";
         fi;
         
         if HasNrRelations( M ) = true then
@@ -1970,10 +1975,10 @@ InstallMethod( ViewObj,
         
     else
         
-        if num_gen = 1 then
-            gen_string := " generator and ";
+        if IsInt( num_gen ) then
+            gen_string := " generators satisfying ";
         else
-            gen_string := " generators and ";
+            gen_string := " generator satisfying ";
         fi;
         
         if HasNrRelations( M ) = true then

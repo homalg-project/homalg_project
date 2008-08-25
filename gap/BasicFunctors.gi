@@ -55,6 +55,8 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## the natural epimorphism:
     epi := HomalgMap( id, [ T, p ], [ coker, 1 ] );
     
+    ## we cannot check this assertion, since
+    ## checking it would cause an infinite loop
     SetIsEpimorphism( epi, true );
     
     ## set the attribute CokernelEpi (specific for Cokernel):
@@ -76,6 +78,9 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( id, [ coker, 1 ], [ T, p ] );
     SetMorphismAidMap( emb, phi );
+    
+    ## we cannot check this assertion, since
+    ## checking it would cause an infinite loop
     SetIsGeneralizedIsomorphism( emb, true );
     
     ## save the natural embedding in the cokernel (thanks GAP):
@@ -113,6 +118,10 @@ InstallMethod( CokernelNaturalGeneralizedEmbedding,
     if not IsIdenticalObj( Range( emb ), Source( phi ) ) then
         emb := CokernelEpi( phi )^-1;
         SetMorphismAidMap( emb, phi );
+        
+        ## check assertion
+        Assert( 4, IsGeneralizedIsomorphism( emb ) );
+        
         SetIsGeneralizedIsomorphism( emb, true );
     fi;
     
@@ -145,6 +154,9 @@ InstallGlobalFunction( _Functor_ImageSubmodule_OnObjects,	### defines: ImageSubm
     
     emb := HomalgMap( emb, [ img, 1 ], [ T, p ] );
     
+    ## check assertion
+    Assert( 4, IsMonomorphism( emb ) );
+        
     SetIsMonomorphism( emb, true );
     
     ## set the attribute ImageSubmoduleEmb (specific for ImageSubmodule):
@@ -191,6 +203,9 @@ InstallMethod( ImageSubmoduleEpi,
     
     epi := phi / emb;
     
+    ## check assertion
+    Assert( 4, IsEpimorphism( epi ) );
+    
     SetIsEpimorphism( epi, true );
     
     ## abelian category: [HS, Prop. II.9.6]
@@ -232,6 +247,8 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     emb := HomalgMap( emb, [ ker, 1 ], [ S, p ] );
     
+    ## we cannot check this assertion, since
+    ## checking it would cause an infinite loop
     SetIsMonomorphism( emb, true );
     
     ## set the attribute KernelEmb (specific for Kernel):
@@ -342,6 +359,10 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( emb, [ ker, 1 ], [ M, p ] );
     SetMorphismAidMap( emb, pre );
+    
+    ## check assertion
+    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+    
     SetIsGeneralizedMonomorphism( emb, true );
     
     ## save the natural embedding in the defect (thanks GAP):

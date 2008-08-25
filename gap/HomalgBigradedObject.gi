@@ -414,7 +414,7 @@ InstallMethod( AsDifferentialObject,
         
   function( Er )
     local bidegrees, B, r, cpx, bidegree, lp, lq, q_degrees, p_degrees, p, q,
-          source, target, emb_source, emb_target, mor_h, mor_v, mor, l;
+          source, target, emb_source, emb_target, mor_h, mor_v, aid_v, mor, l;
     
     bidegrees := ObjectDegreesOfBigradedObject( Er );
     
@@ -463,12 +463,16 @@ InstallMethod( AsDifferentialObject,
                             mor := TheZeroMap( source, target );
                         else
                             mor := PreCompose( emb_source, mor_h[1] );
-                            for l in [ 1 .. r - 1 ] do
-                                mor := mor / mor_v[l];
-                                mor := PreCompose( mor, mor_h[l + 1] );
-                            od;
+                            if r > 1 then
+                                aid_v := List( [ 1 .. r - 1 ], i -> MorphismAidMap( Er!.absolute_embeddings.(String( [ p - i, q + i - 1 ] )) ) );
+                                for l in [ 1 .. r - 1 ] do
+                                    mor := mor / GeneralizedMap( mor_v[l], aid_v[l] );
+                                    mor := PreCompose( mor, mor_h[l + 1] );
+                                od;
+                            fi;
                             mor := mor / emb_target;
                         fi;
+                        Assert( 1, IsMorphism( mor ) );
                         SetIsMorphism( mor, true );
                         Er!.(String( [ p, q ] )) := mor;
                     fi;
@@ -481,24 +485,28 @@ InstallMethod( AsDifferentialObject,
                 for q in q_degrees do
                     source := CertainObject( Er, [ p, q ] );
                     target := CertainObject( Er, [ p, q ] + bidegree );
-                    emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
-                    emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
-                    mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p + i, q - i ] ) );
-                    mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p + i, q - i ] ) );
-                    if ForAny( [ source, target ], IsZero ) or
-                       ForAny( mor_h, IsZero ) or
-                       ForAny( mor_v, IsZero ) then
-                        mor := TheZeroMap( source, target );
-                    else
-                        mor := PreCompose( emb_source, mor_h[1] );
-                        for l in [ 1 .. r - 1 ] do
-                            mor := mor / mor_v[l];
-                            mor := PreCompose( mor, mor_h[l + 1] );
-                        od;
+                    if not ForAny( [ source, target ], IsZero ) then
+                        emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
+                        emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                        mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p + i, q - i ] ) );
+                        mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p + i, q - i ] ) );
+                        if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
+                            mor := TheZeroMap( source, target );
+                        else
+                            mor := PreCompose( emb_source, mor_h[1] );
+                            if r > 1 then
+                                aid_v := List( [ 1 .. r - 1 ], i -> MorphismAidMap( Er!.absolute_embeddings.(String( [ p + i, q - i + 1 ] )) ) );
+                                for l in [ 1 .. r - 1 ] do
+                                    mor := mor / GeneralizedMap( mor_v[l], aid_v[l] );
+                                    mor := PreCompose( mor, mor_h[l + 1] );
+                                od;
+                            fi;
+                            mor := mor / emb_target;
+                        fi;
+                        Assert( 1, IsMorphism( mor ) );
                         SetIsMorphism( mor, true );
-                        mor := mor / emb_target;
+                        Er!.(String( [ p, q ] )) := mor;
                     fi;
-                    Er!.(String( [ p, q ] )) := mor;
                 od;
             od;
         fi;
