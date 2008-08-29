@@ -203,7 +203,7 @@ end );
 ##
 InstallMethod( IsomorphismOfFiltration,
         "for filtrations of homalg modules",
-        [ IsFiltrationOfFinitelyPresentedModuleRep and IsDescendingFiltration ],
+        [ IsFiltrationOfFinitelyPresentedModuleRep ],
         
   function( filt )
     local M, R, degrees, l, nr_rels, nr_gens, Ids, iotas, etas, alphas, i, p,
@@ -220,6 +220,10 @@ InstallMethod( IsomorphismOfFiltration,
     R := HomalgRing( M );
     
     degrees := DegreesOfFiltration( filt );
+    
+    if IsAscendingFiltration( filt ) then
+        degrees := Reversed( degrees );
+    fi;
     
     l := Length( degrees );
     
@@ -314,7 +318,7 @@ InstallMethod( IsomorphismOfFiltration,
         ## the 1-cocycle of the extension 0 -> F_{p+1} -> F_p -> M_p -> 0
         eta := CompleteImageSquare( d1, eta0, iota );
         
-        Assert( 1, IsMorphism( eta ), "the map is not a morphism\n" );
+        Assert( 1, IsMorphism( eta ) );
         
         SetIsMorphism( eta, true );
         
@@ -375,7 +379,7 @@ InstallMethod( IsomorphismOfFiltration,
         ## adapted to the filtration F_p( M ) > F_{p+1}( M ) > 0
         alpha := PreCompose( gen_iso, epi );
         
-        Assert( 1, IsIsomorphism( alpha ), "the map is not an isomorphism\n" );
+        Assert( 1, IsIsomorphism( alpha ) );
         
         SetIsIsomorphism( alpha, true );
         
@@ -414,27 +418,47 @@ InstallMethod( IsomorphismOfFiltration,
     
     transition := Iterated( transition, compose );
     
-    ## the following is wrong
-    #transition := MatrixOfFiltration( filt );
+    ## the following (commented out) line to compute the filtration-adapted
+    ## transition matrix is in general not enough (hence wrong):
+    ## transition := MatrixOfFiltration( filt );
     
     rows := [ ];
     
-    for i in [ 1 .. l ] do
-        cols := [ ];
-        for j in [ 1 .. l ] do
-            if j < i then
-                ## zeros
-                Add( cols, HomalgZeroMatrix( nr_rows[i], nr_cols[j], R ) );
-            elif j = i then
-                ## the diagonal block
-                Add( cols, MatrixOfMap( SyzygiesModuleEmb( CertainObject( filt, degrees[i] ) ) ) );
-            else
-                ## the pieces of the 1-cocycle
-                Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );
-            fi;
+    if IsHomalgFiltrationOfLeftModule( filt ) then
+        for i in [ 1 .. l ] do
+            cols := [ ];
+            for j in [ 1 .. l ] do
+                if j < i then
+                    ## zeros
+                    Add( cols, HomalgZeroMatrix( nr_rows[i], nr_cols[j], R ) );
+                elif j = i then
+                    ## the diagonal block
+                    Add( cols, MatrixOfMap( SyzygiesModuleEmb( CertainObject( filt, degrees[i] ) ) ) );
+                else
+                    ## the pieces of the 1-cocycle
+                    Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );
+                fi;
+            od;
+            Add( rows, Iterated( cols, augment ) );
         od;
-        Add( rows, Iterated( cols, augment ) );
-    od;
+    else
+        for i in [ 1 .. l ] do
+            cols := [ ];
+            for j in [ 1 .. l ] do
+                if j < i then
+                    ## zeros
+                    Add( cols, HomalgZeroMatrix( nr_rows[j], nr_cols[i], R ) );		## we make the distinction between left and right modules for this line (i and j are flipped here)
+                elif j = i then
+                    ## the diagonal block
+                    Add( cols, MatrixOfMap( SyzygiesModuleEmb( CertainObject( filt, degrees[i] ) ) ) );
+                else
+                    ## the pieces of the 1-cocycle
+                    Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );
+                fi;
+            od;
+            Add( rows, Iterated( cols, augment ) );
+        od;
+    fi;
     
     triangular := Iterated( rows, stack );
     
@@ -445,7 +469,7 @@ InstallMethod( IsomorphismOfFiltration,
     ## the isomorphism between the filtered module and the underlying module
     triangular := HomalgMap( transition, triangular, M );
     
-    Assert( 1, IsIsomorphism( triangular ), "the map is not an isomorphism\n" );
+    Assert( 1, IsIsomorphism( triangular ) );
     
     SetIsIsomorphism( triangular, true );
     
@@ -590,6 +614,10 @@ InstallMethod( ViewObj,
         Print( "purity " );
     fi;
     
+    if IsAscendingFiltration( o ) then
+        degrees := Reversed( degrees );
+    fi;
+    
     if plural then
         Print( "filtration with degrees ", degrees, " and graded parts:\n" );
     else
@@ -597,7 +625,7 @@ InstallMethod( ViewObj,
     fi;
     
     for p in degrees do
-        Print( "\t" );
+        Print( " ", p, ":\t" );
         ViewObj( CertainObject( o, p ) );
         Print( "\n" );
     od;
@@ -616,6 +644,10 @@ InstallMethod( Display,
     local degrees, l, d;
     
     degrees := DegreesOfFiltration( o );
+    
+    if IsAscendingFiltration( o ) then
+        degrees := Reversed( degrees );
+    fi;
     
     l := Length( degrees );
     

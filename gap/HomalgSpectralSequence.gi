@@ -383,7 +383,7 @@ end );
 ##
 InstallMethod( UnderlyingBicomplex,
         "for homalg spectral sequences stemming from a bicomplex",
-        [ IsHomalgSpectralSequenceAssociatedToABicomplex and IsSpectralSequenceOfFinitelyPresentedObjectsRep ],
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
   function( E )
     
@@ -398,7 +398,7 @@ end );
 ##
 InstallMethod( AssociatedFirstSpectralSequence,
         "for homalg spectral sequences stemming from a bicomplex",
-        [ IsHomalgSpectralSequenceAssociatedToABicomplex and IsSpectralSequenceOfFinitelyPresentedObjectsRep ],
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
   function( E )
     
@@ -704,9 +704,9 @@ InstallMethod( Display,
     local I_E, Ers, Er;
     
     if IsBound( o!.FirstSpectralSequence ) then
-        Print( "The associated first spectral sequence of the bicomplex\n\n" );
+        Print( "The associated first spectral sequence of the bicomplex:\n\n" );
         Display( o!.FirstSpectralSequence );
-        Print( "\nNow the second spectral sequence of the bicomplex\n\n" );
+        Print( "\nNow the second spectral sequence of the bicomplex:\n\n" );
     fi;
     
     Ers := SheetsOfSpectralSequence( o );
@@ -717,7 +717,7 @@ InstallMethod( Display,
         Print( "co" );
     fi;
     
-    Print( "homological spectral sequence at bidegrees:\n", ObjectDegreesOfSpectralSequence( o ), "\n---------\n" );
+    Print( "homological spectral sequence at bidegrees\n", ObjectDegreesOfSpectralSequence( o ), "\n---------\n" );
     
     Display( Ers[1] );
     

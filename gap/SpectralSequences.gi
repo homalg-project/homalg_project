@@ -248,10 +248,10 @@ end );
 ##
 InstallMethod( FiltrationOfObjectInStableSecondSheetOfI_E,
         "for Grothendieck spectral sequences",
-        [ IsSpectralSequenceOfFinitelyPresentedObjectsRep, IsInt ],
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsInt ],
         
-  function( II_E, p )
-    local gen_embs, BC, bidegrees, degrees, gen_embs_p, gen_emb, pq;
+  function( II_E, n )
+    local gen_embs, BC, bidegrees, degrees, gen_embs_n, gen_emb, pq;
     
     if IsBound( II_E!.GeneralizedEmbeddingsInStableSecondSheetOfFirstSpectralSequence ) then
         
@@ -259,20 +259,24 @@ InstallMethod( FiltrationOfObjectInStableSecondSheetOfI_E,
         
         BC := UnderlyingBicomplex( II_E );
         
-        bidegrees := Reversed( BidegreesOfObjectOfTotalComplex( BC, p ) );
+        bidegrees := Reversed( BidegreesOfObjectOfTotalComplex( BC, n ) );
         
         degrees := List( bidegrees, a -> AbsInt( a[1] ) );
         
-        gen_embs_p := rec( degrees := degrees,
+        gen_embs_n := rec( degrees := degrees,
                            bidegrees := bidegrees );
         
         for pq in bidegrees do
             if IsBound( gen_embs!.(String( pq )) ) then
-                gen_embs_p.(String( AbsInt( pq[1] ))) := gen_embs!.(String( pq ));
+                gen_embs_n.(String( AbsInt( pq[1] ))) := gen_embs!.(String( pq ));
             fi;
         od;
         
-        return HomalgDescendingFiltration( gen_embs_p, IsFiltration, true );
+        if IsSpectralSequenceOfFinitelyPresentedObjectsRep( II_E ) then
+            return HomalgDescendingFiltration( gen_embs_n, IsFiltration, true );
+        else
+            return HomalgAscendingFiltration( gen_embs_n, IsFiltration, true );
+        fi;
         
     fi;
     
@@ -283,7 +287,7 @@ end );
 ##
 InstallMethod( FiltrationOfObjectInStableSecondSheetOfI_E,
         "for Grothendieck spectral sequences",
-        [ IsSpectralSequenceOfFinitelyPresentedObjectsRep ],
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
   function( II_E )
     

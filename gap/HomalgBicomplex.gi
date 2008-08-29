@@ -88,17 +88,6 @@ end );
 ##
 InstallMethod( TotalComplex,
         "for homalg bicomplexes",
-        [ IsBicomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
-        
-  function( B )
-    
-    return TotalComplex( TransposedBicomplex( B ) );
-    
-end );
-
-##
-InstallMethod( TotalComplex,
-        "for homalg bicomplexes",
         [ IsBicocomplexOfFinitelyPresentedObjectsRep ],
         
   function( B )
@@ -121,17 +110,6 @@ InstallMethod( TotalComplex,
     fi;
     
     return tot;
-    
-end );
-
-##
-InstallMethod( TotalComplex,
-        "for homalg bicomplexes",
-        [ IsBicocomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
-        
-  function( B )
-    
-    return TotalComplex( TransposedBicomplex( B ) );
     
 end );
 
@@ -240,7 +218,8 @@ InstallMethod( ObjectDegreesOfBicomplex,
         ConvertToRangeRep( deg_q );
     fi;
     
-    if IsTransposedWRTTheAssociatedComplex( B ) then
+    if HasIsTransposedWRTTheAssociatedComplex( B ) and
+       IsTransposedWRTTheAssociatedComplex( B ) then
         return [ deg_q, deg_p ];
     else
         return [ deg_p, deg_q ];
@@ -460,7 +439,7 @@ InstallMethod( CertainHorizontalMorphism,
         return fail;
     fi;
     
-    if IsEvenInt( pq[1] ) then
+    if IsEvenInt( pq[2] ) then		## yes pq[2], not pq[1]
         return mor;
     else
         return -mor;
@@ -509,7 +488,7 @@ InstallMethod( MorphismOfTotalComplex,
   function( B, n )
     local bidegrees_source, bidegrees_target, horizontal, vertical, stack,
           pq_source, pq_target, diff, augment, source, S, T, l,
-          embeddings, emb_summand, summand, i;
+          embeddings, emb_summand, summand, projections, prj_summand, i;
     
     bidegrees_source := Reversed( BidegreesOfObjectOfTotalComplex( B, n ) );		## this has the effect, that [ n, 0 ] comes last
     
@@ -595,6 +574,54 @@ InstallMethod( MorphismOfTotalComplex,
             fi;
             
             T!.EmbeddingsInObjectOfTotalComplex := embeddings;
+        fi;
+    fi;
+    
+    ## contruct the total projections for the summands of the source of the total morphism
+    if not IsBound( S!.ProjectionsOfObjectOfTotalComplex ) then
+        l := Length( bidegrees_source );
+        if l > 1 then
+            projections := rec( );
+            if l = 2 then
+                projections.(String(bidegrees_source[2])) := EpiOnRightSummand( S );
+                projections.(String(bidegrees_source[1])) := EpiOnLeftSummand( S );
+            else
+                prj_summand := TheIdentityMorphism( S );
+                summand := S;
+                projections.(String(bidegrees_source[l])) := EpiOnRightSummand( summand );
+                for i in [ 1 .. l - 2 ] do
+                    prj_summand := PreCompose( prj_summand, EpiOnLeftSummand( summand ) );
+                    summand := Genesis( summand )!.arguments_of_functor[1];
+                    projections.(String(bidegrees_source[l - i])) := PreCompose( prj_summand, EpiOnRightSummand( summand ) );
+                od;
+                projections.(String(bidegrees_source[1])) := PreCompose( prj_summand, EpiOnLeftSummand( summand ) );
+            fi;
+            
+            S!.ProjectionsOfObjectOfTotalComplex := projections;
+        fi;
+    fi;
+    
+    ## contruct the total projections for the summands of the target of the total morphism
+    if not IsBound( T!.ProjectionsOfObjectOfTotalComplex ) then
+        l := Length( bidegrees_target );
+        if l > 1 then
+            projections := rec( );
+            if l = 2 then
+                projections.(String(bidegrees_target[2])) := EpiOnRightSummand( T );
+                projections.(String(bidegrees_target[1])) := EpiOnLeftSummand( T );
+            else
+                prj_summand := TheIdentityMorphism( T );
+                summand := T;
+                projections.(String(bidegrees_target[l])) := EpiOnRightSummand( summand );
+                for i in [ 1 .. l - 2 ] do
+                    prj_summand := PreCompose( prj_summand, EpiOnLeftSummand( summand ) );
+                    summand := Genesis( summand )!.arguments_of_functor[1];
+                    projections.(String(bidegrees_target[l - i])) := PreCompose( prj_summand, EpiOnRightSummand( summand ) );
+                od;
+                projections.(String(bidegrees_target[1])) := PreCompose( prj_summand, EpiOnLeftSummand( summand ) );
+            fi;
+            
+            T!.ProjectionsOfObjectOfTotalComplex := projections;
         fi;
     fi;
     

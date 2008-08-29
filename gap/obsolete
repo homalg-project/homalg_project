@@ -1123,3 +1123,28 @@ end );
         ## (this also avoids an error that occurs in CompleteImageSquare below
         ##  this pops up during the execution of A3_Purity.g)
         RemoveMorphismAidMap( gen_emb );
+
+## from HomalgBicomplex.gi
+
+##
+InstallMethod( TotalComplex,
+        "for homalg bicomplexes",
+        [ IsBicomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
+        
+  function( B )
+    
+    return TotalComplex( TransposedBicomplex( B ) );
+    
+end );
+
+##
+InstallMethod( TotalComplex,
+        "for homalg bicomplexes",
+        [ IsBicocomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
+        
+  function( B )
+    
+    return TotalComplex( TransposedBicomplex( B ) );
+    
+end );
+
