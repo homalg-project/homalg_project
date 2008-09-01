@@ -1,14 +1,14 @@
 LoadPackage( "RingsForHomalg" );
 
 Qt := HomalgFieldOfRationalsInDefaultCAS( ) * "t";
-W := RingOfDerivations( Qt, "D" );
+A1 := RingOfDerivations( Qt, "D" );
 
 M := HomalgMatrix( "[ \
 D,   0,   t, 0, \
 0, D-t, t*D, 0  \
-]", 2, 4, W );
+]", 2, 4, A1 );
 
 M := HomalgMap( M );
 
 C := Cokernel( M );
-hC := Hom( C, W );
+hC := Hom( C );

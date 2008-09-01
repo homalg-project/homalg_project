@@ -27,7 +27,7 @@ dd := Hom( d );
 ## FIXME: make the following line obsolete
 SetIsShortExactSequence( dd, true );
 
-t := ExactTriangle (dd );
+t := ExactTriangle ( dd );
 
 lecs := LongSequence( t );
 
