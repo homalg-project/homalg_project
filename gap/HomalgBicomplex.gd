@@ -85,6 +85,15 @@ DeclareOperation( "LowestBidegreeInBicomplex",
 DeclareOperation( "HighestBidegreeInBicomplex",
         [ IsHomalgBicomplex ] );
 
+DeclareOperation( "LowestTotalObjectDegreeInBicomplex",
+        [ IsHomalgBicomplex ] );
+
+DeclareOperation( "HighestTotalObjectDegreeInBicomplex",
+        [ IsHomalgBicomplex ] );
+
+DeclareOperation( "TotalObjectDegreesOfBicomplex",
+        [ IsHomalgBicomplex ] );
+
 DeclareOperation( "LowestBidegreeObjectInBicomplex",
         [ IsHomalgBicomplex ] );
 
@@ -97,8 +106,14 @@ DeclareOperation( "CertainVerticalMorphism",
 DeclareOperation( "CertainHorizontalMorphism",
         [ IsHomalgBicomplex, IsList ] );
 
+DeclareOperation( "BidegreesOfBicomplex",
+        [ IsHomalgBicomplex, IsInt ] );
+
 DeclareOperation( "BidegreesOfObjectOfTotalComplex",
         [ IsHomalgBicomplex, IsInt ] );
+
+DeclareOperation( "MorphismOfTotalComplex",
+        [ IsHomalgBicomplex, IsList, IsList ] );
 
 DeclareOperation( "MorphismOfTotalComplex",
         [ IsHomalgBicomplex, IsInt ] );

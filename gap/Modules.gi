@@ -608,7 +608,7 @@ InstallMethod( ShortenResolution,
         d_short := HomalgComplex( d_m_1, min + 1 );
         Add( d_short, d_m );
     else
-        epi := PreCompose( EpiOnLeftSummand( Range( d_m ) ), CokernelEpi( d_m_1 ) );
+        epi := PreCompose( EpiOnLeftFactor( Range( d_m ) ), CokernelEpi( d_m_1 ) );
         SetCokernelEpi( d_m, epi );
         d_short := HomalgComplex( d_m, min + 1 );
     fi;
@@ -897,3 +897,100 @@ InstallMethod( Annihilator,
     return Annihilator( mat, rel );
     
 end );
+
+##
+InstallMethod( EmbeddingsInCoproductObject,
+        "for homalg modules",
+        [ IsHomalgModule, IsList ],
+        
+  function( coproduct, degrees )
+    local l, embeddings, emb_summand, summand, i;
+    
+    if ( IsBound( coproduct!.EmbeddingsInCoproductObject ) and
+         IsBound( coproduct!.EmbeddingsInCoproductObject.degrees ) and
+         coproduct!.EmbeddingsInCoproductObject.degrees = degrees ) then
+        
+        return coproduct!.EmbeddingsInCoproductObject;
+        
+    fi;
+    
+    l := Length( degrees );
+    
+    if l < 2 then
+        return fail;
+    fi;
+    
+    embeddings := rec( );
+    
+    ## contruct the total embeddings of summands into their coproduct
+    if l = 2 then
+        embeddings.(String(degrees[1])) := MonoOfRightSummand( coproduct );
+        embeddings.(String(degrees[2])) := MonoOfLeftSummand( coproduct );
+    else
+        emb_summand := TheIdentityMorphism( coproduct );
+        summand := coproduct;
+        embeddings.(String(degrees[1])) := MonoOfRightSummand( summand );
+        
+        for i in [ 2 .. l - 1 ] do
+            emb_summand := PreCompose( MonoOfLeftSummand( summand ), emb_summand );
+            summand := Genesis( summand )!.arguments_of_functor[1];
+            embeddings.(String(degrees[i])) := PreCompose( MonoOfRightSummand( summand ), emb_summand );
+        od;
+        
+        embeddings.(String(degrees[l])) := PreCompose( MonoOfLeftSummand( summand ), emb_summand );
+    fi;
+    
+    coproduct!.EmbeddingsInCoproductObject := embeddings;
+    
+    return embeddings;
+    
+end );
+
+##
+InstallMethod( ProjectionsFromProductObject,
+        "for homalg modules",
+        [ IsHomalgModule, IsList ],
+        
+  function( product, degrees )
+    local l, projections, prj_factor, factor, i;
+    
+    if ( IsBound( product!.ProjectionsFromProductObject ) and
+         IsBound( product!.ProjectionsFromProductObject.degrees ) and
+         product!.ProjectionsFromProductObject.degrees = degrees ) then
+        
+        return product!.ProjectionsFromProductObject;
+        
+    fi;
+    
+    l := Length( degrees );
+    
+    if l < 2 then
+        return fail;
+    fi;
+    
+    projections := rec( );
+    
+    ## contruct the total projections from the product onto the factors
+    if l = 2 then
+        projections.(String(degrees[1])) := EpiOnRightFactor( product );
+        projections.(String(degrees[2])) := EpiOnLeftFactor( product );
+    else
+        prj_factor := TheIdentityMorphism( product );
+        factor := product;
+        projections.(String(degrees[1])) := EpiOnRightFactor( factor );
+        
+        for i in [ 2 .. l - 1 ] do
+            prj_factor := PreCompose( prj_factor, EpiOnLeftFactor( factor ) );
+            factor := Genesis( factor )!.arguments_of_functor[1];
+            projections.(String(degrees[i])) := PreCompose( prj_factor, EpiOnRightFactor( factor ) );
+        od;
+        
+        projections.(String(degrees[l])) := PreCompose( prj_factor, EpiOnLeftFactor( factor ) );
+    fi;
+    
+    product!.ProjectionsFromProductObject := projections;
+    
+    return projections;
+    
+end );
+

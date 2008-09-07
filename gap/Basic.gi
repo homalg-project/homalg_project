@@ -337,11 +337,16 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( B, A, L )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, AL, CA, IAL, CB, NF, a;
+    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, a;
     
     R := HomalgRing( B );
     
-    AL := UnionOfRows( A, MatrixOfRelations( BasisOfModule( L ) ) );
+    BL := BasisOfModule( L );
+    
+    ## first reduce A modulo L
+    ZA := DecideZero( A, BL );
+    
+    AL := UnionOfRows( ZA, MatrixOfRelations( BL ) );
     
     ## CA * AL = IAL
     CA := HomalgVoidMatrix( R );
@@ -350,12 +355,15 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     ## check assertion
     Assert( 3, CA * AL = IAL );
     
+    ## also reduce B modulo L
+    ZB := DecideZero( B, BL );
+    
     ## NF = B + CB * IAL
     CB := HomalgVoidMatrix( R );
-    NF := DecideZeroRowsEffectively( B, IAL, CB );
+    NF := DecideZeroRowsEffectively( ZB, IAL, CB );
     
     ## check assertion
-    Assert( 3, NF = B + CB * IAL );
+    Assert( 3, NF = ZB + CB * IAL );
     
     ## NF <> 0
     if not IsZero( NF ) then
@@ -383,11 +391,16 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( A, B, L )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, AL, CA, IAL, CB, NF, a;
+    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, a;
     
     R := HomalgRing( B );
     
-    AL := UnionOfColumns( A, MatrixOfRelations( BasisOfModule( L ) ) );
+    BL := BasisOfModule( L );
+    
+    ## first reduce A modulo L
+    ZA := DecideZero( A, BL );
+    
+    AL := UnionOfColumns( ZA, MatrixOfRelations( BL ) );
     
     ## AL * CA = IAL
     CA := HomalgVoidMatrix( R );
@@ -396,12 +409,15 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     ## check assertion
     Assert( 3, AL * CA = IAL );
     
+    ## also reduce B modulo L
+    ZB := DecideZero( B, BL );
+    
     ## NF = B + IAL * CB
     CB := HomalgVoidMatrix( R );
-    NF := DecideZeroColumnsEffectively( B, IAL, CB );
+    NF := DecideZeroColumnsEffectively( ZB, IAL, CB );
     
     ## check assertion
-    Assert( 3, NF = B + IAL * CB );
+    Assert( 3, NF = ZB + IAL * CB );
     
     ## NF <> 0
     if not IsZero( NF ) then
@@ -808,7 +824,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         fi;
         
         M := MM;
-	
+        
         m := NrRows( M );
         n := NrColumns( M );
         

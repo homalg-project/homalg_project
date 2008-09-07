@@ -1,15 +1,21 @@
 Read( "homalg.g" );
 
-SetAssertionLevel( 4 );
+W := ByASmallerPresentation( M );
 
-M := Hom( R, ByASmallerPresentation( M ) );
+## compute a free resolution of W
+P := Resolution( W );
+## apply the inner functor G := Hom(-,R) to the resolution
+GP := Hom( P );
+## tensor with P again
+FGP := GP * P;
+## the bicomplex associated to FGP
+BC := HomalgBicomplex( FGP );
+## the second spectral sequence together with
+## the collapsed first spectral sequence
+II_E := SecondSpectralSequenceWithFiltrationOfTotalDefects( BC );
 
-N := ByASmallerPresentation( Hom( R, M ) );
+filt := FiltrationBySpectralSequence( II_E );
 
-ApplyFunctor( Functor_TensorProduct, 2, N, "TensorN" );
-
-II_E := GrothendieckSpectralSequence( Functor_TensorN, RightDualizingFunctor( R ), M );
-
-filt := FiltrationOfObjectInStableSecondSheetOfI_E( II_E );
+ByASmallerPresentation( filt );
 
 m := IsomorphismOfFiltration( filt );

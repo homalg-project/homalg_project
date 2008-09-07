@@ -130,6 +130,17 @@ InstallMethod( ObjectsOfFiltration,
 end );
 
 ##
+InstallMethod( MorphismsOfFiltration,
+        "for filtrations of homalg modules",
+        [ IsFiltrationOfFinitelyPresentedModuleRep ],
+        
+  function( filt )
+    
+    return List( DegreesOfFiltration( filt ), p -> CertainMorphism( filt, p ) );
+    
+end );
+
+##
 InstallMethod( LowestDegreeMorphism,
         "for filtrations of homalg modules",
         [ IsFiltrationOfFinitelyPresentedModuleRep ],
@@ -221,9 +232,7 @@ InstallMethod( IsomorphismOfFiltration,
     
     degrees := DegreesOfFiltration( filt );
     
-    if IsAscendingFiltration( filt ) then
-        degrees := Reversed( degrees );
-    fi;
+    degrees := Reversed( degrees );		## we have to start with the highest (sub)factor
     
     l := Length( degrees );
     
@@ -263,7 +272,7 @@ InstallMethod( IsomorphismOfFiltration,
         
         ## pi: F_p( M ) -> M_p
         ## the epimorphism F_p( M ) onto M_p
-        pi  := gen_emb^-1;
+        pi  := gen_emb ^ -1;
         
         ## the p-th graded part M_p
         Mp := Range( pi );
@@ -335,8 +344,8 @@ InstallMethod( IsomorphismOfFiltration,
         
         ## P_0 + F_{p+1}( M ) -> P_0
         ## the projection on the first/second summand in the direct sum P_0 + F_{p+1}( M )
-        pr_P0 := EpiOnLeftSummand( Range( emb ) );
-        pr_Fp1 := EpiOnRightSummand( Range( emb ) );
+        pr_P0 := EpiOnLeftFactor( Range( emb ) );
+        pr_Fp1 := EpiOnRightFactor( Range( emb ) );
         pr_Mp := PreCompose( pr_P0, d0 );
         
         ## the cokernel of (the embedding) K_1 -> P_0 + F_{p+1}( M ) is
@@ -477,6 +486,94 @@ InstallMethod( IsomorphismOfFiltration,
     
 end );
 
+##
+InstallMethod( BasisOfModule,
+        "for homalg filtrations",
+        [ IsHomalgFiltration ],
+        
+  function( filt )
+    
+    List( ObjectsOfFiltration( filt ), BasisOfModule );
+    
+    BasisOfModule( UnderlyingModule( filt ) );
+    
+    return filt;
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg filtrations",
+        [ IsHomalgFiltration ],
+        
+  function( filt )
+    
+    List( MorphismsOfFiltration( filt ), DecideZero );
+    
+    return filt;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg filtrations",
+        [ IsHomalgFiltration ],
+        
+  function( filt )
+    
+    List( ObjectsOfFiltration( filt ), OnLessGenerators );
+    
+    OnLessGenerators( UnderlyingModule( filt ) );
+    
+    return filt;
+    
+end );
+
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg filtrations",
+        [ IsHomalgFiltration ],
+        
+  function( filt )
+    
+    List( ObjectsOfFiltration( filt ), ByASmallerPresentation );
+    
+    ByASmallerPresentation( UnderlyingModule( filt ) );
+    
+    DecideZero( filt );
+    
+    return filt;
+    
+end );
+
+##
+InstallMethod( UnlockModule,
+        "for homalg filtrations",
+        [ IsHomalgFiltration ],
+        
+  function( filt )
+    
+    UnlockModule( UnderlyingModule( filt ) );
+    
+    return filt;
+    
+end );
+
+##
+InstallMethod( UnlockFiltration,
+        "for homalg filtrations",
+        [ IsHomalgFiltration ],
+        
+  function( filt )
+    
+    UnlockModule( filt );
+    
+    Perform( ObjectsOfFiltration( filt ), UnlockModule );
+    
+    return filt;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -484,39 +581,128 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( HomalgDescendingFiltration,
+InstallGlobalFunction( HomalgFiltration,
   function( arg )
-    local nargs, filtration, degrees, i, left, type, properties, ar;
+    local nargs, descending, pre_filtration, degrees, l, filtration, i,
+          gen_emb, monomorphism_aid, gen_map, left, type, properties, ar;
     
     nargs := Length( arg );
     
     if nargs = 0 then
-        Error( "Empty arguments" );
+        Error( "empty arguments\n" );
     fi;
     
-    filtration := arg[1];
+    if arg[nargs] = "descending" then
+        descending := true;
+    elif arg[nargs] = "ascending" then
+        descending := false;
+    else
+        Error( "the last argument must be either \"descending\" or \"ascending\"\n" );
+    fi;
     
-    if IsRecord( filtration ) and not IsBound( filtration!.degrees ) and IsList( filtration!.degrees ) and not IsEmpty( filtration!.degrees ) then
+    pre_filtration := arg[1];
+    
+    if IsRecord( pre_filtration ) and not IsBound( pre_filtration!.degrees ) and IsList( pre_filtration!.degrees ) and not IsEmpty( pre_filtration!.degrees ) then
         Error( "the first argument must be a record containing, as a component, a non-empty list of degrees\n" );
     fi;
     
-    degrees := filtration!.degrees;
+    degrees := pre_filtration!.degrees;
+    
+    ConvertToRangeRep( degrees );
+    
+    l := Length( degrees );
+    
+    ## construct the filtration out of the pre_filtration
+    filtration := rec( );
+    
+    filtration.degrees := degrees;
+    
+    if IsBound( pre_filtration.bidegrees ) then
+        filtration.bidegrees := pre_filtration.bidegrees;
+    fi;
     
     i := String( degrees[1] );
     
-    if not IsBound( filtration!.(i) ) then
+    if not IsBound( pre_filtration!.(String( i )) ) then
         Error( "cannot find a morphism at degree ", i, "\n" );
     fi;
     
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( filtration!.(i) );
+    gen_emb := pre_filtration!.(String( i ));
     
-    if left then
-        type := TheTypeHomalgDescendingFiltrationOfLeftModule;
+    if  l = 1 then
+        
+        ## check assertion
+        Assert( 1, IsIsomorphism( gen_emb ) );
+        
+        SetIsIsomorphism( gen_emb, true );
+        
     else
-        type := TheTypeHomalgDescendingFiltrationOfRightModule;
+        
+        ## the bottom map must be a monomorphism
+        Assert( 1, IsMonomorphism( gen_emb ) );
+        
+        SetIsMonomorphism( gen_emb, true );
+        
     fi;
     
-    properties := arg{[ 2 .. nargs ]};
+    filtration.(String( i )) := gen_emb;
+    
+    monomorphism_aid := gen_emb;
+    
+    for i in degrees{[ 2 .. l - 1 ]} do
+        
+        gen_map := pre_filtration!.(String( i ));
+        
+        gen_emb := GeneralizedMap( gen_map, monomorphism_aid );
+        
+        ## check assertion
+        Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
+        
+        SetIsGeneralizedMonomorphism( gen_emb, true );
+        
+        filtration.(String( i )) := gen_emb;
+        
+        ## prepare the next step
+        monomorphism_aid := StackMaps( monomorphism_aid, gen_map );
+        
+    od;
+    
+    if l > 1 then
+        
+        ## the last step
+        i := degrees[l];
+        
+        gen_map := pre_filtration!.(String( i ));
+        
+        gen_emb := GeneralizedMap( gen_map, monomorphism_aid );
+        
+        ## the upper one but be a generalized isomorphism
+        Assert( 1, IsGeneralizedIsomorphism( gen_emb ) );
+        
+        SetIsGeneralizedIsomorphism( gen_emb, true );
+        
+        filtration.(String( i )) := gen_emb;
+        
+    fi;
+    
+    ## finalize
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( gen_emb );
+    
+    if left then
+        if descending then
+            type := TheTypeHomalgDescendingFiltrationOfLeftModule;
+        else
+            type := TheTypeHomalgAscendingFiltrationOfLeftModule;
+        fi;
+    else
+        if descending then
+            type := TheTypeHomalgDescendingFiltrationOfRightModule;
+        else
+            type := TheTypeHomalgAscendingFiltrationOfRightModule;
+        fi;
+    fi;
+    
+    properties := arg{[ 2 .. nargs - 1 ]};
     
     ar := Concatenation( [ filtration, type ], properties );
     
@@ -528,46 +714,18 @@ InstallGlobalFunction( HomalgDescendingFiltration,
 end );
 
 ##
+InstallGlobalFunction( HomalgDescendingFiltration,
+  function( arg )
+    
+    return CallFuncList( HomalgFiltration, Concatenation( arg, [ "descending" ] ) );
+    
+end );
+
+##
 InstallGlobalFunction( HomalgAscendingFiltration,
   function( arg )
-    local nargs, filtration, degrees, i, left, type, properties, ar;
     
-    nargs := Length( arg );
-    
-    if nargs = 0 then
-        Error( "Empty arguments" );
-    fi;
-    
-    filtration := arg[1];
-    
-    if IsRecord( filtration ) and not IsBound( filtration!.degrees ) and IsList( filtration!.degrees ) and not IsEmpty( filtration!.degrees ) then
-        Error( "the first argument must be a record containing, as a component, a non-empty list of degrees\n" );
-    fi;
-    
-    degrees := filtration!.degrees;
-    
-    i := String( degrees[1] );
-    
-    if not IsBound( filtration!.(i) ) then
-        Error( "cannot find a morphism at degree ", i, "\n" );
-    fi;
-    
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( filtration!.(i) );
-    
-    if left then
-        type := TheTypeHomalgAscendingFiltrationOfLeftModule;
-    else
-        type := TheTypeHomalgAscendingFiltrationOfRightModule;
-    fi;
-    
-    properties := arg{[ 2 .. nargs ]};
-    
-    ar := Concatenation( [ filtration, type ], properties );
-    
-    ## Objectify:
-    CallFuncList( ObjectifyWithAttributes, ar );
-    
-    return filtration;
+    return CallFuncList( HomalgFiltration, Concatenation( arg, [ "ascending" ] ) );
     
 end );
 
@@ -582,11 +740,13 @@ InstallMethod( ViewObj,
         [ IsFiltrationOfFinitelyPresentedModuleRep ],
         
   function( o )
-    local degrees, plural, purity, the, p;
+    local degrees, l, plural, purity, the, p, s;
     
     degrees := DegreesOfFiltration( o );
     
-    plural := Length( degrees ) > 1;
+    l := Length( degrees );
+    
+    plural := l > 1;
     
     purity := HasIsPurityFiltration( o ) and IsPurityFiltration( o );
     
@@ -614,8 +774,8 @@ InstallMethod( ViewObj,
         Print( "purity " );
     fi;
     
-    if IsAscendingFiltration( o ) then
-        degrees := Reversed( degrees );
+    if IsDescendingFiltration( o ) then
+        degrees := Reversed( degrees );		## we want to start with the highest (sub)factor
     fi;
     
     if plural then
@@ -624,8 +784,14 @@ InstallMethod( ViewObj,
         Print( "trivial filtration with degree ", degrees, " and graded part:\n" );
     fi;
     
+    if IsAscendingFiltration( o ) then
+        degrees := Reversed( degrees );		## we want to start with the highest (sub)factor
+    fi;
+    
     for p in degrees do
-        Print( " ", p, ":\t" );
+        s := ListWithIdenticalEntries( 4 - Length( String( p ) ), ' ' );
+        ConvertToStringRep( s );
+        Print( s, p, ":\t" );
         ViewObj( CertainObject( o, p ) );
         Print( "\n" );
     od;
@@ -645,9 +811,7 @@ InstallMethod( Display,
     
     degrees := DegreesOfFiltration( o );
     
-    if IsAscendingFiltration( o ) then
-        degrees := Reversed( degrees );
-    fi;
+    degrees := Reversed( degrees );		## we want to start with the highest (sub)factor
     
     l := Length( degrees );
     

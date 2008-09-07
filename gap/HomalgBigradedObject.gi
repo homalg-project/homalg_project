@@ -414,10 +414,12 @@ InstallMethod( AsDifferentialObject,
         
   function( Er )
     local bidegrees, B, r, cpx, bidegree, lp, lq, q_degrees, p_degrees, p, q,
-          source, target, emb_source, emb_target, mor_h, mor_v, aid_v, mor, l;
+          source, target, mor_h, mor_v, emb_source, emb_target,
+          bidegrees_target, mor, bidegrees_source, aid, k;
     
     bidegrees := ObjectDegreesOfBigradedObject( Er );
     
+    ## the associated bicomplex
     B := UnderlyingBicomplex( Er );
     
     r := LevelOfBigradedObject( Er );
@@ -455,20 +457,26 @@ InstallMethod( AsDifferentialObject,
                     source := CertainObject( Er, [ p, q ] );
                     target := CertainObject( Er, [ p, q ] + bidegree );
                     if not ForAny( [ source, target ], IsZero ) then
-                        emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
-                        emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p - i, q + i ] ) );
                         mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p - i, q + i ] ) );
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
                             mor := TheZeroMap( source, target );
                         else
-                            mor := PreCompose( emb_source, mor_h[1] );
-                            if r > 1 then
-                                aid_v := List( [ 1 .. r - 1 ], i -> MorphismAidMap( Er!.absolute_embeddings.(String( [ p - i, q + i - 1 ] )) ) );
-                                for l in [ 1 .. r - 1 ] do
-                                    mor := mor / GeneralizedMap( mor_v[l], aid_v[l] );
-                                    mor := PreCompose( mor, mor_h[l + 1] );
-                                od;
+                            emb_source := RemoveMorphismAidMap( Er!.absolute_embeddings.(String( [ p, q ] )) );
+                            emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                            if r = 1 then
+                                mor := PreCompose( emb_source, mor_h[1] );
+                            elif r > 1 then
+                                bidegrees_target := List( [ 1 .. r - 1 ], i -> [ p - i, q + i - 1 ] );
+                                mor := PreCompose( emb_source, MorphismOfTotalComplex( B, [ [ p, q ] ], bidegrees_target ) );
+                                mor_v := MorphismOfTotalComplex( B, [ [ p - r + 1, q + r - 1 ] ], bidegrees_target );
+                                if r > 2 then
+                                    bidegrees_source := List( [ 1 .. r - 2 ], i -> [ p - i, q + i ] );
+                                    aid := MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
+                                    mor_v := GeneralizedMap( mor_v, aid );
+                                fi;
+                                mor := - mor / mor_v;
+                                mor := PreCompose( mor, mor_h[r] );
                             fi;
                             mor := mor / emb_target;
                         fi;
@@ -486,20 +494,26 @@ InstallMethod( AsDifferentialObject,
                     source := CertainObject( Er, [ p, q ] );
                     target := CertainObject( Er, [ p, q ] + bidegree );
                     if not ForAny( [ source, target ], IsZero ) then
-                        emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
-                        emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p + i, q - i ] ) );
                         mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p + i, q - i ] ) );
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
                             mor := TheZeroMap( source, target );
                         else
-                            mor := PreCompose( emb_source, mor_h[1] );
-                            if r > 1 then
-                                aid_v := List( [ 1 .. r - 1 ], i -> MorphismAidMap( Er!.absolute_embeddings.(String( [ p + i, q - i + 1 ] )) ) );
-                                for l in [ 1 .. r - 1 ] do
-                                    mor := mor / GeneralizedMap( mor_v[l], aid_v[l] );
-                                    mor := PreCompose( mor, mor_h[l + 1] );
-                                od;
+                            emb_source := RemoveMorphismAidMap( Er!.absolute_embeddings.(String( [ p, q ] )) );
+                            emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                            if r = 1 then
+                                mor := PreCompose( emb_source, mor_h[1] );
+                            elif r > 1 then
+                                bidegrees_target := List( [ 1 .. r - 1 ], i -> [ p + i, q - i + 1 ] );
+                                mor := PreCompose( emb_source, MorphismOfTotalComplex( B, [ [ p, q ] ], bidegrees_target ) );
+                                mor_v := MorphismOfTotalComplex( B, [ [ p + r - 1, q - r + 1 ] ], bidegrees_target );
+                                if r > 2 then
+                                    bidegrees_source := List( [ 1 .. r - 2 ], i -> [ p + i, q - i ] );
+                                    aid := MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
+                                    mor_v := GeneralizedMap( mor_v, aid );
+                                fi;
+                                mor := - mor / mor_v;
+                                mor := PreCompose( mor, mor_h[r] );
                             fi;
                             mor := mor / emb_target;
                         fi;
@@ -525,7 +539,7 @@ InstallMethod( DefectOfExactness,
         
   function( Er )
     local left, bidegree, r, degree, cpx, bidegrees, B, p, q, pp, qq, H, i, j,
-          Epq, post, pre, def, emb, emb_old, relative_embeddings,
+          Epq, post, pre, def, emb, emb_new, relative_embeddings,
           absolute_embeddings, type;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( Er );
@@ -622,13 +636,18 @@ InstallMethod( DefectOfExactness,
             
             for i in [ 1 .. pp ] do
                 for j in [ 1 .. qq ] do
-                    emb_old := Er!.relative_embeddings.(String( [ p[i], q[j] ] ));
+                    emb := Er!.relative_embeddings.(String( [ p[i], q[j] ] ));
                     if Er!.stability_table[qq-j+1][i] = '*' then;	## not yet stable
-                        emb := H.embeddings.(String( [ p[i], q[j] ] ));
-                        relative_embeddings.(String( [ p[i], q[j] ] )) := PreCompose( emb, emb_old );
-                    else						## already stable
-                        relative_embeddings.(String( [ p[i], q[j] ] )) := emb_old;
+                        emb_new := H.embeddings.(String( [ p[i], q[j] ] ));
+                        emb := PreCompose( emb_new, emb );
                     fi;
+                    
+                    ## check assertion
+                    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+                    
+                    SetIsGeneralizedMonomorphism( emb, true );
+                    
+                    relative_embeddings.(String( [ p[i], q[j] ] )) := emb;
                 od;
             od;
             
@@ -644,13 +663,18 @@ InstallMethod( DefectOfExactness,
             
             for i in [ 1 .. pp ] do
                 for j in [ 1 .. qq ] do
-                    emb_old := Er!.absolute_embeddings.(String( [ p[i], q[j] ] ));
+                    emb := Er!.absolute_embeddings.(String( [ p[i], q[j] ] ));
                     if Er!.stability_table[qq-j+1][i] = '*' then;	## not yet stable
-                        emb := H.embeddings.(String( [ p[i], q[j] ] ));
-                        absolute_embeddings.(String( [ p[i], q[j] ] )) := PreCompose( emb, emb_old );
-                    else						## already stable
-                        absolute_embeddings.(String( [ p[i], q[j] ] )) := emb_old;
+                        emb_new := H.embeddings.(String( [ p[i], q[j] ] ));
+                        emb := PreCompose( emb_new, emb );
                     fi;
+                    
+                    ## check assertion
+                    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+                    
+                    SetIsGeneralizedMonomorphism( emb, true );
+                    
+                    absolute_embeddings.(String( [ p[i], q[j] ] )) := emb;
                 od;
             od;
             

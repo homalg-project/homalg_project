@@ -157,6 +157,10 @@ DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnComplexe
 
 DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateFunctorOnComplexes" );
 
+DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnMorphismsAndSecondArgumentOnComplexes" );
+
+DeclareGlobalFunction( "HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOnComplexes" );
+
 DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnChainMaps" );
 
 DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps" );

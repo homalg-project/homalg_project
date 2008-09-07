@@ -57,6 +57,8 @@ DeclareProperty( "IsPurityFiltration",
 
 # constructor methods:
 
+DeclareGlobalFunction( "HomalgFiltration" );
+
 DeclareGlobalFunction( "HomalgDescendingFiltration" );
 
 DeclareGlobalFunction( "HomalgAscendingFiltration" );
@@ -84,6 +86,9 @@ DeclareOperation( "ObjectsOfFiltration",
 DeclareOperation( "HomalgRing",
         [ IsHomalgFiltration ] );
 
+DeclareOperation( "MorphismsOfFiltration",
+        [ IsHomalgFiltration ] );
+
 DeclareOperation( "LowestDegreeMorphism",
         [ IsHomalgFiltration ] );
 
@@ -100,5 +105,23 @@ DeclareOperation( "MatrixOfFiltration",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "IsomorphismOfFiltration",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "BasisOfModule",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "DecideZero",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "OnLessGenerators",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "ByASmallerPresentation",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "UnlockModule",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "UnlockFiltration",
         [ IsHomalgFiltration ] );
 

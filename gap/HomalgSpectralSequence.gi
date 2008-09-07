@@ -281,6 +281,78 @@ InstallMethod( HighestBidegreeInSpectralSequence,
 end );
 
 ##
+InstallMethod( LowestTotalDegreeInSpectralSequence,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequence ],
+        
+  function( B )
+    local pq_lowest;
+    
+    pq_lowest := LowestBidegreeInSpectralSequence( B );
+    
+    return pq_lowest[1] + pq_lowest[2];
+    
+end );
+
+##
+InstallMethod( HighestTotalDegreeInSpectralSequence,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequence ],
+        
+  function( B )
+    local pq_highest;
+    
+    pq_highest := HighestBidegreeInSpectralSequence( B );
+    
+    return pq_highest[1] + pq_highest[2];
+    
+end );
+
+##
+InstallMethod( TotalDegreesOfSpectralSequence,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequence ],
+        
+  function( B )
+    
+    return [ LowestTotalDegreeInSpectralSequence( B ) .. HighestTotalDegreeInSpectralSequence( B ) ];
+    
+end );
+
+##
+InstallMethod( BidegreesOfSpectralSequence,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequence, IsInt ],
+        
+  function( E, n )
+    local bidegrees, n_lowest, n_highest, bidegrees_n, p, q;
+    
+    bidegrees := ObjectDegreesOfSpectralSequence( E );
+    
+    n_lowest := LowestTotalDegreeInSpectralSequence( E );
+    n_highest := HighestTotalDegreeInSpectralSequence( E );
+    
+    bidegrees_n := [ ];
+    
+    if n < n_lowest or n > n_highest then
+        return bidegrees_n;
+    fi;
+    
+    if n - n_lowest < n_highest - n then
+        for p in bidegrees[1][1] + [ 0 .. n - n_lowest ] do
+            Add( bidegrees_n, [ p, n - p ] );
+        od;
+    else
+        for q in bidegrees[2][Length( bidegrees[2] )] - [ 0 .. n_highest - n ] do
+            Add( bidegrees_n, [ n - q, q ] );
+        od;
+    fi;
+    
+    return bidegrees_n;
+    
+end );
+
+##
 InstallMethod( LowestBidegreeObjectInSpectralSequence,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence, IsInt ],
@@ -392,6 +464,17 @@ InstallMethod( UnderlyingBicomplex,
     fi;
     
     Error( "it seems that the spectral sequence does not stem from a bicomplex\n" );
+    
+end );
+
+##
+InstallMethod( AssociatedFilteredComplex,
+        "for homalg spectral sequences stemming from a bicomplex",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
+        
+  function( E )
+    
+    return TotalComplex( UnderlyingBicomplex( E ) );
     
 end );
 

@@ -572,3 +572,64 @@ InstallGlobalFunction( homalgNamesOfComponentsToIntLists,
                        ),
                   b -> b <> fail );
 end );
+
+##
+InstallGlobalFunction( homalgMode,
+  function( arg )
+    local nargs, mode;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
+        mode := "default";
+    elif IsString( arg[1] ) then	## now we know, the string is not empty
+        if LowercaseString( arg[1]{[1]} ) = "a" then
+            mode := "all";
+        elif LowercaseString( arg[1]{[1]} ) = "b" then
+            mode := "basic";
+        elif LowercaseString( arg[1]{[1]} ) = "d" then
+            mode := "debug";
+        elif LowercaseString( arg[1]{[1]} ) = "f" then
+            mode := "file";
+        elif LowercaseString( arg[1]{[1]} ) = "p" then
+            mode := "picto";
+        else
+            mode := "";
+        fi;
+    else
+        Error( "the first argument must be a string\n" );
+    fi;
+    
+    if mode = "default" then
+        HOMALG.color_display := false;
+        SetInfoLevel( InfoCOLEM, 1 );
+        SetInfoLevel( InfoLIMAT, 1 );
+        SetInfoLevel( InfoHomalgBasicOperations, 1 );
+    elif mode = "all" then
+        HOMALG.color_display := true;
+        SetInfoLevel( InfoCOLEM, 2 );
+        SetInfoLevel( InfoLIMAT, 2 );
+        SetInfoLevel( InfoHomalgBasicOperations, 4 );
+    elif mode = "basic" then
+        HOMALG.color_display := true;
+        SetInfoLevel( InfoCOLEM, 2 );
+        SetInfoLevel( InfoLIMAT, 2 );
+        SetInfoLevel( InfoHomalgBasicOperations, 3 );
+    elif mode = "debug" then
+        HOMALG.color_display := true;
+        SetInfoLevel( InfoCOLEM, 2 );
+        SetInfoLevel( InfoLIMAT, 2 );
+        SetInfoLevel( InfoHomalgBasicOperations, 4 );
+    elif mode = "file" then
+        HOMALG.color_display := true;
+        SetInfoLevel( InfoCOLEM, 2 );
+        SetInfoLevel( InfoLIMAT, 2 );
+        SetInfoLevel( InfoHomalgBasicOperations, 1 );
+    elif mode = "picto" then
+        HOMALG.color_display := true;
+        SetInfoLevel( InfoCOLEM, 2 );
+        SetInfoLevel( InfoLIMAT, 2 );
+        SetInfoLevel( InfoHomalgBasicOperations, 1 );
+    fi;
+    
+end );

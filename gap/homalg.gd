@@ -151,6 +151,8 @@ DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 
+DeclareGlobalFunction( "homalgMode" );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

@@ -101,3 +101,9 @@ DeclareOperation( "Annihilator",
 DeclareOperation( "Annihilator",
         [ IsHomalgModule ] );
 
+DeclareOperation( "EmbeddingsInCoproductObject",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "ProjectionsFromProductObject",
+        [ IsHomalgModule, IsList ] );
+

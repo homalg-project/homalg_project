@@ -463,7 +463,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dE := HomalgComplex( Pj );
         
-        psi := EpiOnRightSummand( Pj );
+        psi := EpiOnRightFactor( Pj );
         phi := MonoOfLeftSummand( Pj );
         
         d_psi := HomalgChainMap( psi, dE, dM );
@@ -504,7 +504,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         Add( dE, dj );
         
-        psi := EpiOnRightSummand( Pj );
+        psi := EpiOnRightFactor( Pj );
         phi := MonoOfLeftSummand( Pj );
         
         Add( d_psi, psi );
@@ -602,7 +602,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dE := HomalgComplex( Pj );
         
-        psi := EpiOnRightSummand( Pj );
+        psi := EpiOnRightFactor( Pj );
         phi := MonoOfLeftSummand( Pj );
         
         d_psi := HomalgChainMap( psi, dE, dM );
@@ -643,7 +643,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         Add( dE, dj );
         
-        psi := EpiOnRightSummand( Pj );
+        psi := EpiOnRightFactor( Pj );
         phi := MonoOfLeftSummand( Pj );
         
         Add( d_psi, psi );

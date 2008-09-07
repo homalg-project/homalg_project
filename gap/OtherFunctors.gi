@@ -167,8 +167,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     ## set the four attributes (specific for DirectSum):
     SetMonoOfLeftSummand( sum, iotaM );
     SetMonoOfRightSummand( sum, iotaN );
-    SetEpiOnLeftSummand( sum, piM );
-    SetEpiOnRightSummand( sum, piN );
+    SetEpiOnLeftFactor( sum, piM );
+    SetEpiOnRightFactor( sum, piN );
     
     if ( HasIsZero( M ) and not IsZero( M ) ) or
        ( HasIsZero( N ) and not IsZero( N ) ) then
@@ -230,8 +230,8 @@ end );
 InstallValue( Functor_DirectSum,
         CreateHomalgFunctor(
                 [ "name", "DirectSum" ],
-                [ "natural_transformation1", "EpiOnLeftSummand" ],
-                [ "natural_transformation2", "EpiOnRightSummand" ],
+                [ "natural_transformation1", "EpiOnLeftFactor" ],
+                [ "natural_transformation2", "EpiOnRightFactor" ],
                 [ "natural_transformation3", "MonoOfLeftSummand" ],
                 [ "natural_transformation4", "MonoOfRightSummand" ],
                 [ "number_of_arguments", 2 ],
@@ -273,7 +273,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     
     S := Source( phi_beta1 );
     
-    pair := [ PreCompose( emb, EpiOnLeftSummand( S ) ), PreCompose( emb, EpiOnRightSummand( S ) ) ];
+    pair := [ PreCompose( emb, EpiOnLeftFactor( S ) ), PreCompose( emb, EpiOnRightFactor( S ) ) ];
     
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
     SetPullbackPairOfMaps( chm_phi_beta1, pair );

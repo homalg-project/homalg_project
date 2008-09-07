@@ -46,17 +46,6 @@ DeclareGlobalFunction( "HomalgZeroMap" );
 
 DeclareGlobalFunction( "HomalgIdentityMap" );
 
-# basic operations:
-
-DeclareOperation( "homalgResetFilters",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgMap ] );	## provided to avoid branching in the code and always returns fail
-
-DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
-        [ IsHomalgMap ] );
-
 DeclareOperation( "OnAFreeSource",
         [ IsHomalgMap ] );
 
@@ -68,6 +57,17 @@ DeclareOperation( "GeneralizedMap",
 
 DeclareOperation( "AddToMorphismAidMap",
         [ IsHomalgMap, IsObject ] );
+
+# basic operations:
+
+DeclareOperation( "homalgResetFilters",
+        [ IsHomalgMap ] );
+
+DeclareOperation( "PositionOfTheDefaultSetOfRelations",
+        [ IsHomalgMap ] );	## provided to avoid branching in the code and always returns fail
+
+DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
+        [ IsHomalgMap ] );
 
 DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap, IsPosInt, IsPosInt ] );

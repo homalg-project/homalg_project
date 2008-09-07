@@ -718,7 +718,7 @@ end );
 
 InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorProduct (object part)
   function( M, N )
-    local R, s, t, l0, _l0, matM, matN, idM, idN, MN,
+    local R, rl, s, t, l0, _l0, matM, matN, idM, idN, MN,
           gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
@@ -727,9 +727,18 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
     
-    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) ) and
-       not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
-        Error( "the two modules must either be both left or both right modules\n" );
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+            rl := [ true, true ];
+        else
+            rl := [ true, false ];
+        fi;
+    else
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+            rl := [ false, true ];
+        else
+            rl := [ false, false ];
+        fi;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -740,13 +749,18 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
     matM := MatrixOfRelations( M );
     matN := MatrixOfRelations( N );
     
+    if rl = [ true, true ] or rl = [ false, false ] then
+        matM := Involution( matM );	## the first module follows the second
+    fi;
+    
     idM := HomalgIdentityMatrix( l0, R );
     idN := HomalgIdentityMatrix( _l0, R );
     
     matM := KroneckerMat( matM, idN );
     matN := KroneckerMat( idM, matN );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+    ## the result has the parity of the second module
+    if rl[2] then
         MN := UnionOfRows( matM, matN );
         MN := HomalgMap( MN );
     else
@@ -754,22 +768,32 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
         MN := HomalgMap( MN, "r" );
     fi;
     
-    MN := Cokernel( MN );
-    
-    #=====# end of the core procedure #=====#
-    
-    return MN;
+    return Cokernel( MN );
     
 end );
 
 InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorProduct (morphism part)
   function( M_or_mor, N_or_mor )
-    local phi, L, R, idL;
+    local R, rl, phi, L, idL;
     
     R := HomalgRing( M_or_mor );
     
     if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
         Error( "the module and the morphism are not defined over identically the same ring\n" );
+    fi;
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M_or_mor ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( N_or_mor ) then
+            rl := [ true, true ];
+        else
+            rl := [ true, false ];
+        fi;
+    else
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( N_or_mor ) then
+            rl := [ false, true ];
+        else
+            rl := [ false, false ];
+        fi;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -780,25 +804,21 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
         phi := M_or_mor;
         L := N_or_mor;
         
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
-           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
-            Error( "the morphism and the module must either be both left or both right\n" );
-        fi;
-        
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return KroneckerMat( MatrixOfMap( phi ), idL );
+        if rl = [ true, true ] or rl = [ false, false ] then
+            phi := Involution( MatrixOfMap( phi ) );	## the first module follows the second
+        else
+            phi := MatrixOfMap( phi );
+        fi;
+        
+        return KroneckerMat( phi, idL );
         
     elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
       and IsFinitelyPresentedModuleRep( M_or_mor ) then
         
         phi := N_or_mor;
         L := M_or_mor;
-        
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
-           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
-            Error( "the morphism and the module must either be both left or both right\n" );
-        fi;
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
@@ -884,6 +904,17 @@ end );
 InstallOtherMethod( \*,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep, IsHomalgRingOrObjectOrMorphism ],
+        
+  function( M, N )
+    
+    return TensorProduct( M, N );
+    
+end );
+
+## for convenience
+InstallOtherMethod( \*,
+        "for homalg modules",
+        [ IsHomalgComplex, IsHomalgComplex ],
         
   function( M, N )
     

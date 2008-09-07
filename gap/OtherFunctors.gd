@@ -64,10 +64,10 @@ DeclareAttribute( "MonoOfLeftSummand",
 DeclareAttribute( "MonoOfRightSummand",
         IsHomalgMap );
 
-DeclareAttribute( "EpiOnLeftSummand",
+DeclareAttribute( "EpiOnLeftFactor",
         IsHomalgMap );
 
-DeclareAttribute( "EpiOnRightSummand",
+DeclareAttribute( "EpiOnRightFactor",
         IsHomalgMap );
 
 DeclareAttribute( "PullbackPairOfMaps",

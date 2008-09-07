@@ -32,17 +32,14 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToABicomplex",
 
 ####################################
 #
-# properties:
-#
-####################################
-
-####################################
-#
 # attributes:
 #
 ####################################
 
 DeclareAttribute( "GeneralizedEmbeddingsInTotalObjects",
+        IsHomalgSpectralSequence );
+
+DeclareAttribute( "GeneralizedEmbeddingsInTotalDefects",
         IsHomalgSpectralSequence );
 
 ####################################
@@ -115,6 +112,18 @@ DeclareOperation( "LowestBidegreeInSpectralSequence",
 DeclareOperation( "HighestBidegreeInSpectralSequence",
         [ IsHomalgSpectralSequence ] );
 
+DeclareOperation( "LowestTotalDegreeInSpectralSequence",
+        [ IsHomalgSpectralSequence ] );
+
+DeclareOperation( "HighestTotalDegreeInSpectralSequence",
+        [ IsHomalgSpectralSequence ] );
+
+DeclareOperation( "TotalDegreesOfSpectralSequence",
+        [ IsHomalgSpectralSequence ] );
+
+DeclareOperation( "BidegreesOfSpectralSequence",
+        [ IsHomalgSpectralSequence, IsInt ] );
+
 DeclareOperation( "LowestBidegreeObjectInSpectralSequence",
         [ IsHomalgSpectralSequence, IsInt ] );
 
@@ -136,12 +145,9 @@ DeclareOperation( "CertainMorphism",
 DeclareOperation( "UnderlyingBicomplex",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ] );
 
-DeclareOperation( "AssociatedFirstSpectralSequence",
+DeclareOperation( "AssociatedFilteredComplex",
         [ IsHomalgSpectralSequence ] );
 
-DeclareOperation( "FiltrationOfObjectInStableSecondSheetOfI_E",
-        [ IsHomalgSpectralSequence, IsInt ] );
-
-DeclareOperation( "FiltrationOfObjectInStableSecondSheetOfI_E",
+DeclareOperation( "AssociatedFirstSpectralSequence",
         [ IsHomalgSpectralSequence ] );
 

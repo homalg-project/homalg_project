@@ -1124,27 +1124,136 @@ end );
         ##  this pops up during the execution of A3_Purity.g)
         RemoveMorphismAidMap( gen_emb );
 
-## from HomalgBicomplex.gi
+## from SpectralSequence.gi
 
-##
-InstallMethod( TotalComplex,
-        "for homalg bicomplexes",
-        [ IsBicomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
+        ## this is necessary for handling not only homological
+        ## but also cohomological spectral sequences
+        if IsSpectralSequenceOfFinitelyPresentedObjectsRep( II_E ) then
+            bidegrees := Reversed( bidegrees );			## note the "Reversed"
+        fi;
         
-  function( B )
-    
-    return TotalComplex( TransposedBicomplex( B ) );
-    
-end );
+## from HomalgBigradedObject.gi
 
-##
-InstallMethod( TotalComplex,
-        "for homalg bicomplexes",
-        [ IsBicocomplexOfFinitelyPresentedObjectsRep and IsTransposedWRTTheAssociatedComplex ],
-        
-  function( B )
-    
-    return TotalComplex( TransposedBicomplex( B ) );
-    
-end );
-
+          Tot, n, Tot_s, Tot_t, bidegrees_s, bidegrees_t,
+          tot_embs, tot_prjs;
+        if cpx then
+            p_degrees := bidegrees[1]{[ r + 1 .. lp ]};
+            q_degrees := bidegrees[2]{[ 1 .. lq - ( r - 1 ) ]};
+            for p in p_degrees do
+                for q in q_degrees do
+                    source := CertainObject( Er, [ p, q ] );
+                    target := CertainObject( Er, [ p, q ] + bidegree );
+                    if not ForAny( [ source, target ], IsZero ) then
+                        mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p - i, q + i ] ) );
+                        mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p - i, q + i ] ) );
+                        if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
+                            mor := TheZeroMap( source, target );
+                        else
+                            emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
+                            emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                            if r > 1 then
+                                ## the associated total complex
+                                Tot := TotalComplex( B );
+                                
+                                n := p + q;
+                                
+                                ## the n-th total object
+                                Tot_s := CertainObject( Tot, n );
+                                
+                                ## the (n-1)-st total object
+                                Tot_t := CertainObject( Tot, n - 1 );
+                                
+                                ## the bidegrees of total degree n
+                                bidegrees_s := BidegreesOfObjectOfTotalComplex( B, n );
+                                
+                                ## the bidegrees of total degree n - 1
+                                bidegrees_t := BidegreesOfObjectOfTotalComplex( B, n - 1 );
+                                
+                                ## the embeddings from B_{p,q} -> Tot_n
+                                tot_embs := EmbeddingsInCoproductObject( Tot_s, bidegrees_s );
+                                
+                                ## the projections from Tot_n -> B_{p,q}
+                                tot_prjs := ProjectionsFromProductObject( Tot_t, bidegrees_t );
+                                
+                                if tot_embs <> fail then
+                                    emb_source := PreCompose( emb_source, tot_embs.(String([ p, q ])) );
+                                fi;
+                                
+                                mor := PreCompose( emb_source, MorphismOfTotalComplex( B, n ) );
+                                
+                                if tot_prjs <> fail then
+                                    mor := PreCompose( mor, tot_prjs.(String([ p, q ] + bidegree )) );
+                                fi;
+                                
+                            else
+                                mor := PreCompose( emb_source, mor_h[1] );
+                            fi;
+                            mor := mor / emb_target;
+                        fi;
+                        Assert( 1, IsMorphism( mor ) );
+                        SetIsMorphism( mor, true );
+                        Er!.(String( [ p, q ] )) := mor;
+                    fi;
+                od;
+            od;
+        else
+            p_degrees := bidegrees[1]{[ 1 .. lp - r ]};
+            q_degrees := bidegrees[2]{[ r .. lq ]};
+            for p in p_degrees do
+                for q in q_degrees do
+                    source := CertainObject( Er, [ p, q ] );
+                    target := CertainObject( Er, [ p, q ] + bidegree );
+                    if not ForAny( [ source, target ], IsZero ) then
+                        mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p + i, q - i ] ) );
+                        mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p + i, q - i ] ) );
+                        if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
+                            mor := TheZeroMap( source, target );
+                        else
+                            emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
+                            emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
+                            if r > 1 then
+                                ## the associated total complex
+                                Tot := TotalComplex( B );
+                                
+                                n := p + q;
+                                
+                                ## the n-th total object
+                                Tot_s := CertainObject( Tot, n );
+                                
+                                ## the (n+1)-st total object
+                                Tot_t := CertainObject( Tot, n + 1 );
+                                
+                                ## the bidegrees of total degree n
+                                bidegrees_s := BidegreesOfObjectOfTotalComplex( B, n );
+                                
+                                ## the bidegrees of total degree n + 1
+                                bidegrees_t := BidegreesOfObjectOfTotalComplex( B, n + 1 );
+                                
+                                ## the embeddings from B^{p,q} -> Tot^n
+                                tot_embs := EmbeddingsInCoproductObject( Tot_s, bidegrees_s );
+                                
+                                ## the projections from Tot^n -> B^{p,q}
+                                tot_prjs := ProjectionsFromProductObject( Tot_t, bidegrees_t );
+                                
+                                if tot_embs <> fail then
+                                    emb_source := PreCompose( emb_source, tot_embs.(String([ p, q ])) );
+                                fi;
+                                
+                                mor := PreCompose( emb_source, MorphismOfTotalComplex( B, n ) );
+                                
+                                if tot_prjs <> fail then
+                                    mor := PreCompose( mor, tot_prjs.(String([ p, q ] + bidegree )) );
+                                fi;
+                                
+                            else
+                                mor := PreCompose( emb_source, mor_h[1] );
+                            fi;
+                            mor := mor / emb_target;
+                        fi;
+                        Assert( 1, IsMorphism( mor ) );
+                        SetIsMorphism( mor, true );
+                        Er!.(String( [ p, q ] )) := mor;
+                    fi;
+                od;
+            od;
+        fi;

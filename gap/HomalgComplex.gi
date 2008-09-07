@@ -1264,68 +1264,24 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
+        [ IsHomalgComplex and IsGradedObject ],
         
   function( o )
     local degrees, l, oi;
     
-    Print( "<A graded homology object consisting of " );
+    Print( "<A" );
     
-    degrees := ObjectDegreesOfComplex( o );
-    
-    l := Length( degrees );
-    
-    if l = 1 then
-        Print( "a single" );
-    else
-        Print( l );
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero homology object
+        Print( " non-zero" );
     fi;
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
+    Print( " graded " );
+    
+    if IsCocomplexOfFinitelyPresentedObjectsRep( o ) then
+        Print( "co" );
     fi;
     
-    oi := CertainObject( o, degrees[1] );
-    
-    if IsHomalgModule( oi ) then
-        Print( " module" );
-        if l > 1 then
-            Print( "s" );
-        fi;
-    else
-        if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
-            Print( " complex" );
-        else
-            Print( " cocomplex" );
-        fi;
-        if l > 1 then
-            Print( "es" );
-        fi;
-    fi;
-    
-    Print( " at degree" );
-    
-    if l = 1 then
-        Print( " ", degrees[1] );
-    else
-        Print( "s ", degrees );
-    fi;
-    
-    Print( ">" );
-    
-end );
-
-##
-InstallMethod( ViewObj,
-        "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedObjectsRep and IsGradedObject ],
-        
-  function( o )
-    local degrees, l, oi;
-    
-    Print( "<A graded cohomology object consisting of " );
+    Print( "homology object consisting of " );
     
     degrees := ObjectDegreesOfComplex( o );
     

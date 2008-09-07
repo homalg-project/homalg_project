@@ -2845,6 +2845,139 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
 end );
 
 ##
+InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnMorphismsAndSecondArgumentOnComplexes,
+  function( Functor, filter_mor, filter_cpx )
+    local functor_operation, filter0;
+    
+    functor_operation := OperationOfFunctor( Functor );
+    
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+        
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
+        
+        if IsAdditiveFunctor( Functor, 1 ) = true then
+            
+        fi;
+        
+    else
+        
+        if IsAdditiveFunctor( Functor, 1 ) = true then
+            
+            InstallOtherMethod( functor_operation,
+                    "for homalg complexes",
+                    [ filter_mor, filter_cpx ],
+              function( m, c )
+                local degrees, l, objects, Fc_source, Fc_target, Fc, o;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                objects := ObjectsOfComplex( c );
+                
+                Fc_source := functor_operation( Source( m ), c );
+                Fc_target := functor_operation( Range( m ), c );
+                
+                Fc := HomalgChainMap( functor_operation( m, objects[1] ), Fc_source, Fc_target );
+                
+                for o in objects{[ 2 .. l ]} do
+                    Add( Fc, functor_operation( m, o ) );
+                od;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedMorphism( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsMorphism( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallGlobalFunction( HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOnComplexes,
+  function( Functor, filter1_cpx, filter2_cpx )
+    local functor_operation, filter0;
+    
+    functor_operation := OperationOfFunctor( Functor );
+    
+    if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
+        
+        if Length( Functor!.0 ) = 1 then
+            filter0 := Functor!.0[1];
+        else
+            filter0 := IsList;
+        fi;
+        
+        if IsAdditiveFunctor( Functor, 1 ) = true then
+            
+        fi;
+        
+    else
+        
+        if IsAdditiveFunctor( Functor, 1 ) = true then
+            
+            InstallOtherMethod( functor_operation,
+                    "for homalg complexes",
+                    [ filter1_cpx, filter2_cpx ],
+              function( c, C )
+                local degrees, l, morphisms, Fc, m;
+                
+                degrees := ObjectDegreesOfComplex( c );
+                
+                l := Length( degrees );
+                
+                morphisms := MorphismsOfComplex( c );
+                
+                if l = 1 then
+                    if IsComplexOfFinitelyPresentedObjectsRep( c ) then
+                        Fc := HomalgComplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                    else
+                        Fc := HomalgCocomplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                    fi;
+                else
+                    morphisms := MorphismsOfComplex( c );
+                    if IsComplexOfFinitelyPresentedObjectsRep( c ) then
+                        Fc := HomalgComplex( functor_operation( morphisms[1], C ), degrees[2] );
+                    else
+                        Fc := HomalgCocomplex( functor_operation( morphisms[1], C ), degrees[1] );
+                    fi;
+                    for m in morphisms{[ 2 .. l - 1 ]} do
+                        Add( Fc, functor_operation( m, C ) );
+                    od;
+                fi;
+                
+                if HasIsGradedObject( c ) and IsGradedObject( c ) then;
+                    SetIsGradedObject( Fc, true );
+                elif HasIsSplitShortExactSequence( c ) and IsSplitShortExactSequence( c ) then
+                    SetIsSplitShortExactSequence( Fc, true );
+                elif HasIsComplex( c ) and IsComplex( c ) then
+                    SetIsComplex( Fc, true );
+                elif HasIsSequence( c ) and IsSequence ( c ) then
+                    SetIsSequence( Fc, true );
+                fi;
+                
+                return Fc;
+                
+            end );
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
 InstallMethod( InstallFunctorOnComplexes,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -2938,6 +3071,9 @@ InstallMethod( InstallFunctorOnComplexes,
                 CallFuncList( ar[i][3], cocomplex );
                 
             od;
+            
+            HelperToInstallFirstArgumentOfBivariateFunctorOnMorphismsAndSecondArgumentOnComplexes( Functor, IsHomalgMorphism, IsHomalgComplex );
+            HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOnComplexes( Functor, IsHomalgComplex, IsHomalgComplex );
             
         else
             
