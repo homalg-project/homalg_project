@@ -1,15 +1,19 @@
 Read( "ReducedBasisOfModule.g" );
 
-SetAssertionLevel( 4 );
+## compute a free resolution of W
+P := Resolution( W );
+## apply the inner functor G := Hom(-,R) to the resolution
+GP := Hom( P );
+## tensor with P again
+FGP := GP * P;
+## the bicomplex associated to FGP
+BC := HomalgBicomplex( FGP );
+## the second spectral sequence together with
+## the collapsed first spectral sequence
+II_E := SecondSpectralSequenceWithFiltrationOfTotalDefects( BC );
 
-#W := Hom( Qxyz, W );
+filt := FiltrationBySpectralSequence( II_E );
 
-V := Hom( Qxyz, W );
-
-ApplyFunctor( Functor_TensorProduct, 2, V, "TensorV" );
-
-II_E := GrothendieckSpectralSequence( Functor_TensorV, LeftDualizingFunctor( Qxyz ), W );
-
-filt := FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence( II_E );
+ByASmallerPresentation( filt );
 
 m := IsomorphismOfFiltration( filt );

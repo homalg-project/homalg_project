@@ -25,7 +25,7 @@ T := TorsionSubmodule( M );
 
 iota := TorsionSubmoduleEmb( M );
 
-alpha := StackMaps( GeneralizedEmbedding( T ), GeneralizedEmbedding( F ) );
+alpha := StackMaps( NaturalGeneralizedEmbedding( T ), NaturalGeneralizedEmbedding( F ) );
 
 #AsEpimorphicImage( alpha );
 

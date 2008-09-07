@@ -1,6 +1,6 @@
-LoadPackage( "homalg" );
+LoadPackage( "RingsForHomalg" );
 
-R := HomalgRingOfIntegers( 2^8 );
+R := HomalgRingOfIntegersInDefaultCAS( 2^8 );
 
 M := LeftPresentation( [ 2^5 ], R );
 _M := LeftPresentation( [ 2^3 ], R );

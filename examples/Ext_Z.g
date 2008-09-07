@@ -1,6 +1,6 @@
-LoadPackage( "homalg" );
+LoadPackage( "RingsForHomalg" );
 ## Define the ring of integers:
-R := HomalgRingOfIntegers( );
+R := HomalgRingOfIntegersInDefaultCAS( );
 #Display( R );
 m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], R );
 #Display( m );

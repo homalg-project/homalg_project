@@ -8,4 +8,4 @@ ByASmallerPresentation( II_E );
 
 ByASmallerPresentation( ii_E );
 
-filt := FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence( II_E );
+filt := FiltrationBySpectralSequence( II_E );

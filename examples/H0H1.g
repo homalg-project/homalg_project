@@ -1,6 +1,6 @@
-LoadPackage( "homalg" );
+LoadPackage( "RingsForHomalg" );
 
-ZZ := HomalgRingOfIntegers( );
+ZZ := HomalgRingOfIntegersInDefaultCAS( );
 
 ## the line
 deltaL := HomalgMap( [[1,-1]], ZZ );

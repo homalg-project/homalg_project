@@ -2,11 +2,14 @@ Read( "ReducedBasisOfModule.g" );
 
 V := Hom( Qxyz, W );
 
-ApplyFunctor( Functor_TensorProduct, 2, V, "TensorV" );
+ApplyFunctor( Functor_Hom, 2, V, "HomV" );
 
-II_E := GrothendieckSpectralSequence( Functor_TensorV, LeftDualizingFunctor( Qxyz ), W );
+II_E := GrothendieckSpectralSequence( Functor_HomV, LeftDualizingFunctor( Qxyz ), W );
 
-filt := FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence( II_E );
+filt := FiltrationBySpectralSequence( II_E );
 
 L := UnderlyingModule( filt );
 
+ByASmallerPresentation( filt );
+
+m := IsomorphismOfFiltration( filt );

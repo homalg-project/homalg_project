@@ -4,4 +4,4 @@ II_E := GrothendieckSpectralSequence( RightDualizingFunctor( A1 ), LeftDualizing
 
 ByASmallerPresentation( II_E );
 
-filt := FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence( II_E );
+filt := FiltrationBySpectralSequence( II_E );
