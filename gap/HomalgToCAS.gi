@@ -523,7 +523,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     ConvertToStringRep( L );
     
-    if ( IsBound( HOMALG_IO.CAS_commands_file ) and HOMALG_IO.CAS_commands_file = true )
+    if ( IsBound( HOMALG_IO.save_CAS_commands_to_file ) and HOMALG_IO.save_CAS_commands_to_file = true )
        or IsBound( stream.CAS_commands_file ) then
         if not IsBound( stream.CAS_commands_file ) then
             stream.CAS_commands_file := Concatenation( "commands_file_of_", CAS, "_with_PID_", String( PID ) );

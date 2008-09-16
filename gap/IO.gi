@@ -389,7 +389,13 @@ InstallGlobalFunction( LaunchCAS,
             Print( s.color_display );
         fi;
         if s.cas = "maple" then
-            Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );
+            #Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );
+	    Print( "\
+    |\\^/|     Launching Maple\n\
+._|\\|   |/|_. Copyright (c) Maplesoft, a division of Waterloo Maple Inc.\n\
+ \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
+ <____ ____>  Waterloo Maple Inc.\n\
+      |       " );
         else
             Print( s.lines );
         fi;

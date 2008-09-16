@@ -23,3 +23,5 @@ DeclareGlobalVariable( "HOMALG_IO" );
 ####################################
 
 DeclareGlobalFunction( "FigureOutAnAlternativeDirectoryForTemporaryFiles" );
+
+DeclareGlobalFunction( "homalgIOMode" );

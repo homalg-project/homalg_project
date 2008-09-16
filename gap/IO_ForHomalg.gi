@@ -29,7 +29,7 @@ InstallValue( HOMALG_IO,
             ListOfAlternativeDirectoryForTemporaryFiles := [ "/dev/shm/", "/var/tmp/", "/tmp/" ],
             FileNameCounter := 1,
             PID := IO_getpid(),
-            CAS_commands_file := false,
+            save_CAS_commands_to_file := false,
             Pictograms := rec(
                 
                 ## colors:
@@ -185,5 +185,69 @@ InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
     od;
     
     return fail;
+    
+end );
+
+##
+InstallGlobalFunction( homalgIOMode,
+  function( arg )
+    local nargs, mode, stream;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
+        mode := "default";
+    elif IsString( arg[1] ) then	## now we know, the string is not empty
+        if LowercaseString( arg[1]{[1]} ) = "a" then
+            mode := "all";
+        elif LowercaseString( arg[1]{[1]} ) = "b" then
+            mode := "basic";
+        elif LowercaseString( arg[1]{[1]} ) = "d" then
+            mode := "debug";
+        elif LowercaseString( arg[1]{[1]} ) = "f" then
+            mode := "file";
+        elif LowercaseString( arg[1]{[1]} ) = "p" then
+            mode := "picto";
+        else
+            mode := "";
+        fi;
+    else
+        Error( "the first argument must be a string\n" );
+    fi;
+    
+    if mode = "default" then
+        HOMALG_IO.show_banners := true;
+        HOMALG_IO.InformAboutCASystemsWithoutActiveRings := true;
+        HOMALG_IO.SaveHomalgMaximumBackStream := false;
+        HOMALG_IO.color_display := false;
+        HOMALG_IO.DoNotDeleteTemporaryFiles := false;
+        HOMALG_IO.save_CAS_commands_to_file := false;
+        SetInfoLevel( InfoIO_ForHomalg, 1 );
+    elif mode = "all" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        HOMALG_IO.save_CAS_commands_to_file := true;
+        SetInfoLevel( InfoIO_ForHomalg, 8 );
+    elif mode = "basic" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        SetInfoLevel( InfoIO_ForHomalg, 4 );
+    elif mode = "debug" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        SetInfoLevel( InfoIO_ForHomalg, 8 );
+    elif mode = "file" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        HOMALG_IO.save_CAS_commands_to_file := true;
+        SetInfoLevel( InfoIO_ForHomalg, 4 );
+    elif mode = "picto" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        HOMALG_IO.DirectoryForTemporaryFiles := "/dev/shm/";
+        SetInfoLevel( InfoIO_ForHomalg, 4 );
+    fi;
+    
+    CallFuncList( homalgMode, arg );
     
 end );
