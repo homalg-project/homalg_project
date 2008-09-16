@@ -288,12 +288,23 @@ InstallMethod( FunctorObj,
                 arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
                 if l = Length( arg_old[1] ) then
                     if ForAny( arguments_of_functor, IsHomalgModule ) then
-                        if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) and
-                           ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
-                            return obj;
+                        if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) then
+                            if ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
+                                return obj;
+                            elif ForAll( [ 1 .. l - p ],
+                                    function( j )
+                                      if arg_old[2][j] = context_of_arguments[j] then
+                                          return true;
+                                      else
+                                          return IsIdenticalObj(
+                                                         GeneratorsOfModule( arg_old[1][j+p], arg_old[2][j] ),
+                                                         GeneratorsOfModule( arguments_of_functor[j+p], context_of_arguments[j] ) );
+                                      fi;
+                                    end ) then
+                                return obj;
+                            fi;
                         fi;
-                    elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) and
-                      ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
+                    elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) then	## no modules
                         ## this "elif" is extremely important:
                         ## To apply a certain functor (e.g. derived ones) to an object
                         ## we might need to apply another functor to a morphism A. This

@@ -258,6 +258,32 @@ InstallMethod( RingName,
 end );
 
 ##
+InstallMethod( RingName,
+        "for homalg rings",
+        [ IsHomalgRing and HasRingRelations ],
+        
+  function( R )
+    local ring_rel, name;
+    
+    ring_rel := RingRelations( R );
+    ring_rel := MatrixOfRelations( ring_rel );
+    ring_rel := EntriesOfHomalgMatrix( ring_rel );
+    
+    if ring_rel = [ ] then
+        TryNextMethod( );
+    elif IsHomalgExternalRingRep( R ) then
+        ring_rel := Flat( List( ring_rel, a -> Flat( [ " ", Name( a ) ] ) ) );
+    else
+        ring_rel := Flat( List( ring_rel, a -> Flat( [ " ", String( a ) ] ) ) );
+    fi;
+    
+    name := RingName( R!.CoveringRing );
+    
+    return Flat( [ name, "/(", ring_rel, " )" ] );
+    
+end );
+
+##
 InstallMethod( homalgRingStatistics,
         "for homalg rings",
         [ IsHomalgRing ],
@@ -621,6 +647,12 @@ InstallMethod( \/,
     
     SetRingRelations( S, rel );
     
+    if HasRingRelations( R ) then
+        S!.CoveringRing := R!.CoveringRing;
+    else
+        S!.CoveringRing := R;
+    fi;
+    
     return S;
     
 end );
@@ -879,9 +911,6 @@ InstallMethod( ViewObj,
   function( o )
     
     Print( Name( o ) );	## this sets the attribute Name and the view method is never triggered again (as long as Name is set)
-    
-    #Print( "<A homalg external ring element for the CAS " );
-    #Print( homalgExternalCASystem( o ), ">" );
     
 end );
 
