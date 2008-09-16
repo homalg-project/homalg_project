@@ -32,7 +32,6 @@ InstallValue( HOMALG_IO_Maple,
             eoc_verbose := ";",
             eoc_quiet := ":",
             error_stdout := "Error, ",	## a Maple specific
-            show_banner := false,	## delete this line whenever there is a way to display the banner while keeping the crucial option -q
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _Maple_multiple_delete,
@@ -225,6 +224,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         o := 1;
     fi;
     
+    homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
     if IsString( arg[1] ) then
         var := arg[1];
     else
@@ -269,7 +270,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream );
+    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -315,7 +316,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream );
+    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -363,7 +364,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream );
+    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -596,15 +597,6 @@ InstallMethod( PolynomialRing,
     if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
         S := RingForHomalgInMapleUsingPIR( Flat( [ "[", Flat( var ), ",", String( c ), "]" ] ), R );
     else
-        if c > 0 then
-            if IsPrime( c ) then
-                homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"char\",", c, ")" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
-            else
-                Error( "the coefficients ring Z/", c, "Z is not directly supported by Involutive yet\n" );
-            fi;
-        elif HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"rational\",false)" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
-        fi;
         if HasIndeterminatesOfPolynomialRing( R ) then
             r := CoefficientsRing( R );
             var_of_coeff_ring := IndeterminatesOfPolynomialRing( R );
@@ -618,6 +610,15 @@ InstallMethod( PolynomialRing,
             var := Concatenation( var_of_coeff_ring, var );
         fi;
         S := RingForHomalgInMapleUsingInvolutive( var, R );
+        if c > 0 then
+            if IsPrime( c ) then
+                homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"char\",", c, ")" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+            else
+                Error( "the coefficients ring Z/", c, "Z is not directly supported by Involutive yet\n" );
+            fi;
+        elif HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+            homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"rational\",false)" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+        fi;
     fi;
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
