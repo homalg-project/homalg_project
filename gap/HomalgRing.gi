@@ -535,6 +535,7 @@ InstallGlobalFunction( CreateHomalgRing,
         SetIsIntegersForHomalg( homalg_ring, true );
     fi;
     
+    ## distinguished ring elements like 0, 1, sometimes also -1:
     for c in NamesOfComponents( table ) do
         if IsHomalgExternalRingElementRep( table!.( c ) ) then
             el := table!.( c );
@@ -591,7 +592,36 @@ InstallGlobalFunction( CreateHomalgRing,
     
     homalg_ring!.creation_number := HOMALG.RingCounter;
     
+    ## e.g. needed to construct residue class rings
+    homalg_ring!.ConstructorArguments := arg;
+    
     return homalg_ring;
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg rings",
+        [ IsHomalgRing, IsHomalgRelations ],
+        
+  function( R, ring_rel )
+    local S, mat, rel;
+    
+    S := CallFuncList( CreateHomalgRing, R!.ConstructorArguments );
+    
+    mat := MatrixOfRelations( ring_rel );
+    
+    mat := HomalgMatrix( mat, S );
+    
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
+        rel := HomalgRelationsForLeftModule( mat );
+    else
+        rel := HomalgRelationsForRightModule( mat );
+    fi;
+    
+    SetRingRelations( S, rel );
+    
+    return S;
     
 end );
 

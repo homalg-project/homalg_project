@@ -623,6 +623,23 @@ end );
 
 ####################################
 #
+# methods properties:
+#
+####################################
+    
+##
+InstallMethod( IsEmptyMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return NrRows( M ) = 0 or NrColumns( M ) = 0;
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################

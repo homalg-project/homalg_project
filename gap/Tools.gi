@@ -833,6 +833,28 @@ end );
 ##
 InstallMethod( IsUnit,
         "for homalg ring elements",
+        [ IsHomalgRing, IsRingElement ],
+        
+  function( R, r )
+    local RP;
+    
+    if HasIsZero( r ) and IsZero( r ) then
+        return false;
+    elif HasIsOne( r ) and IsOne( r ) then
+        return true;
+    fi;
+    
+    if Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) <> fail then
+        return true;
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( IsUnit,
+        "for homalg ring elements",
         [ IsHomalgRing, IsRingElement and IsHomalgExternalRingElement ],
         
   function( R, r )
@@ -846,7 +868,7 @@ InstallMethod( IsUnit,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.IsUnit) then
+    if IsBound(RP!.IsUnit) and not HasRingRelations( R ) then
         return RP!.IsUnit( R, r );
     fi;
     

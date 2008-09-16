@@ -726,9 +726,9 @@ InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule
     mat := MatrixOfRelations( rel );
     
     if left then
-        par := SyzygiesGeneratorsOfColumns( mat );
+        par := SyzygiesOfColumns( mat );
     else
-        par := SyzygiesGeneratorsOfRows( mat );
+        par := SyzygiesOfRows( mat );
     fi;
     
     if IsHomalgModule( arg[1] ) then

@@ -331,7 +331,7 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfRows( mat );
         
-        if bas = mat and IsReducedModuloRingRelations( mat ) then
+        if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas; ## CAUTION: be very careful here!!!
             if HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas ) then
@@ -366,7 +366,7 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfColumns( mat );
         
-        if bas = mat and IsReducedModuloRingRelations( mat ) then
+        if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas; ## CAUTION: be very careful here!!!
             if HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas ) then
@@ -520,7 +520,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( rel )
     
-    return HomalgRelationsForLeftModule( SyzygiesGeneratorsOfRows( MatrixOfRelations( rel ) ) );
+    return HomalgRelationsForLeftModule( SyzygiesOfRows( MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -532,7 +532,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( mat, rel )
     
-    return HomalgRelationsForLeftModule( SyzygiesGeneratorsOfRows( mat, MatrixOfRelations( rel ) ) );
+    return HomalgRelationsForLeftModule( SyzygiesOfRows( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -543,7 +543,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( rel )
     
-    return HomalgRelationsForRightModule( SyzygiesGeneratorsOfColumns( MatrixOfRelations( rel ) ) );
+    return HomalgRelationsForRightModule( SyzygiesOfColumns( MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -555,7 +555,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( mat, rel )
     
-    return HomalgRelationsForRightModule( SyzygiesGeneratorsOfColumns( mat, MatrixOfRelations( rel ) ) );
+    return HomalgRelationsForRightModule( SyzygiesOfColumns( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
