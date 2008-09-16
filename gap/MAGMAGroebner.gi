@@ -50,7 +50,7 @@ InstallMethod( CreateHomalgTable,
                             List( IndeterminatesOfPolynomialRing( R ), String ) 
                           );
                   return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]" ] ) );
-	       elif IsFieldForHomalg( R ) then
+	       elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
 	         if Characteristic( R ) = 0 then
 	           return "Q";
 	         else

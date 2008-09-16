@@ -487,7 +487,7 @@ InstallMethod( PolynomialRing,
     
     properties := [ IsCommutative ];
     
-    if Length( var ) = 1 and IsFieldForHomalg( R ) then
+    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
         Add( properties, IsPrincipalIdealRing );
     fi;
     
