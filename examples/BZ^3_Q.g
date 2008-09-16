@@ -11,13 +11,6 @@ zz := HomalgMatrix( "[ x - 1, y - 1, a - 1 ]", 3, 1, ZZ3 );
 
 ZZ := LeftPresentation( zz );
 
-ext := rec( );
+ext := Ext( 5, ZZ, ZZ, "a" );
 
-ext.0 := Ext( 0, ZZ, ZZ );
-ext.1 := Ext( 1, ZZ, ZZ );
-ext.2 := Ext( 2, ZZ, ZZ );
-ext.3 := Ext( 3, ZZ, ZZ );
-ext.4 := Ext( 4, ZZ, ZZ );
-ext.5 := Ext( 5, ZZ, ZZ );
-ext.6 := Ext( 6, ZZ, ZZ );
-
+ByASmallerPresentation( ext );
