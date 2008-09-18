@@ -520,11 +520,9 @@ InstallMethod( PolynomialRing,
         SetName( v, homalgPointer( v ) );
     od;
     
-    SetCoefficientsRing( S, r );
-    SetCharacteristic( S, c );
-    SetIsCommutative( S, true );
-    SetIndeterminatesOfPolynomialRing( S, var );
-    SetGlobalDimension( S, Length( var ) );
+    SetIsFreePolynomialRing( S, true );
+    
+    SetRingProperties( S, r, var );
     
     return S;
     
