@@ -267,12 +267,30 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, ring_rel, rel;
+    local R, ring_rel, rel, S;
     
     R := HomalgRing( M1 );
     
     if not HasRingRelations( R ) or NrColumns( M1 ) = 0 then
-        return SyzygiesGeneratorsOfRows( M1, M2 );
+        
+        S := SyzygiesGeneratorsOfRows( M1, M2 );
+        
+        ## since SyzygiesGeneratorsOfRows of M1 modulo M2
+        ## first computes the syzygies matrix of the stack of M1 and M2,
+        ## and then keeps only those columns S corresponding to M1,
+        ## zero rows can potentially exist in S (and we like to remove them);
+        ## if the ring specific SyzygiesGeneratorsOfRows gets rid
+        ## of the zero rows automatically, it should then set the
+        ## attribute ZeroRows of its result to [ ] in order for the
+        ## next line to be handled by immediate methods without
+        ## further computations
+        
+        S := CertainRows( S, NonZeroRows( S ) );
+        
+        SetZeroRows( S, [ ] );
+        
+        return S;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -287,7 +305,20 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
     
     rel := DiagMat( ListWithIdenticalEntries( NrColumns( M1 ), rel ) );
     
-    return SyzygiesGeneratorsOfRows( M1, UnionOfRows( M2, rel ) );
+    S := SyzygiesGeneratorsOfRows( M1, UnionOfRows( M2, rel ) );
+    
+    ## see the above comment
+    S := CertainRows( S, NonZeroRows( S ) );
+    
+    SetZeroRows( S, [ ] );
+    
+    if IsZero( S ) then
+        
+        SetIsLeftRegularMatrix( M1, true );
+        
+    fi;
+    
+    return S;
     
 end );
 
@@ -297,12 +328,30 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, ring_rel, rel;
+    local R, ring_rel, rel, S;
     
     R := HomalgRing( M1 );
     
     if not HasRingRelations( R ) or NrRows( M1 ) = 0 then
-        return SyzygiesGeneratorsOfColumns( M1, M2 );
+        
+        S := SyzygiesGeneratorsOfColumns( M1, M2 );
+        
+        ## since SyzygiesGeneratorsOfColumns of M1 modulo M2
+        ## first computes the syzygies matrix of the augmentation of M1 and M2,
+        ## and then keeps only those rows S corresponding to M1,
+        ## zero columns can potentially exist in S (and we like to remove them);
+        ## if the ring specific SyzygiesGeneratorsOfColumns gets rid
+        ## of the zero columns automatically, it should then set the
+        ## attribute ZeroColumns of its result to [ ] in order for the
+        ## next line to be handled by immediate methods without
+        ## further computations
+        
+        S := CertainColumns( S, NonZeroColumns( S ) );
+        
+        SetZeroColumns( S, [ ] );
+        
+        return S;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -317,7 +366,20 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M1 ), rel ) );
     
-    return SyzygiesGeneratorsOfColumns( M1, UnionOfColumns( M2, rel ) );
+    S := SyzygiesGeneratorsOfColumns( M1, UnionOfColumns( M2, rel ) );
+    
+    ## see the above comment
+    S := CertainColumns( S, NonZeroColumns( S ) );
+    
+    SetZeroColumns( S, [ ] );
+    
+    if IsZero( S ) then
+        
+        SetIsRightRegularMatrix( M1, true );
+        
+    fi;
+    
+    return S;
     
 end );
 

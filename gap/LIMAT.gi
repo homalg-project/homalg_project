@@ -721,6 +721,8 @@ InstallMethod( CertainRows,
     
     if NrRows( M ) = 0 or plist = [ 1 .. NrRows( M ) ] then
         return M;
+    elif plist = [ ] then
+        return HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
     fi;
     
     TryNextMethod( );
@@ -744,6 +746,8 @@ InstallMethod( CertainColumns,
     
     if NrColumns( M ) = 0 or plist = [ 1 .. NrColumns( M ) ] then
         return M;
+    elif plist = [ ] then
+        return HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
     fi;
     
     TryNextMethod( );
