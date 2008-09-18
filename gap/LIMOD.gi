@@ -685,6 +685,66 @@ InstallMethod( IsReflexive,
 end );
 
 ##
+InstallMethod( IsReflexive,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 then
+        return IsTorsionFree( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsReflexive,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 then
+        return IsTorsionFree( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, proj;
+    
+    R := HomalgRing( M );
+    
+    if FiniteFreeResolution( M ) = fail then
+        TryNextMethod( );
+    fi;
+    
+    proj := ProjectiveDimension( M ) = 0;
+    
+    if proj then
+        M!.UpperBoundForProjectiveDimension := 0;
+    fi;
+    
+    return proj;
+    
+end );
+
+##
 InstallMethod( IsProjective,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -716,7 +776,13 @@ InstallMethod( IsProjective,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local proj;
+    local R, proj;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsFiniteFreePresentationRing( R ) and IsFiniteFreePresentationRing( R ) ) then
+        TryNextMethod( );
+    fi;
     
     if FiniteFreeResolution( M ) = fail then
         TryNextMethod( );
@@ -729,6 +795,78 @@ InstallMethod( IsProjective,
     fi;
     
     return proj;
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) < infinity then
+        return DegreeOfTorsionFreeness( M ) = LeftGlobalDimension( R );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) < infinity then
+        return DegreeOfTorsionFreeness( M ) = RightGlobalDimension( R );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 2 then
+        return IsReflexive( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 2 then
+        return IsReflexive( M );
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -789,11 +927,15 @@ InstallMethod( IsFree,
         par := ParametrizeModule( M );		## this returns a minimal parametrization of M (minimal = cokernel is torsion); I learned this from Alban Quadrat
         if IsMonomorphism( par ) then
             img := MatrixOfMap( par );
+            ## Plesken: a good notion of basis (involutive/groebner/...)
+            ## should respect principal ideals and hence,
+            ## due to the uniqueness of the basis,
+            ## can be used to decide if an ideal is principal or not
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-                img := BasisOfRowModule( img );
-                free := NrRows( img ) <= 1;	## Plesken: a good notion of basis (involutive/groebner/...) should keep and hence prove a principal (left/right) ideal principal
+                img := BasisOfRows( img );
+                free := NrRows( img ) <= 1;
             else
-                img := BasisOfColumnModule( img );
+                img := BasisOfColumns( img );
                 free := NrColumns( img ) <= 1;
             fi;
             if free then
@@ -852,15 +994,17 @@ InstallMethod( IsFree,
         return IsFree( M );
     fi;
     
-    ## FIXME: sometimes the immediate methods are not triggered and do not set IsFree
-    if HasIsCommutative( R ) and IsCommutative( R ) and RankOfModule( M ) = 1 then
-        return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
-    elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfModule( M ) then
-        return true;			## [McCRob, Theorem 11.1.14]
-    elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfModule( M ) then
-        return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-    elif HasStableRank( R ) and StableRank( R ) <= RankOfModule( M ) then
-        return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+    if IsStablyFree( M ) then
+        ## FIXME: sometimes the immediate methods are not triggered and do not set IsFree
+        if HasIsCommutative( R ) and IsCommutative( R ) and RankOfModule( M ) = 1 then
+            return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
+        elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfModule( M ) then
+            return true;			## [McCRob, Theorem 11.1.14]
+        elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfModule( M ) then
+            return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+        elif HasStableRank( R ) and StableRank( R ) <= RankOfModule( M ) then
+            return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+        fi;
     fi;
     
     TryNextMethod( );

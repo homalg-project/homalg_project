@@ -277,7 +277,7 @@ InstallMethod( RingName,
         ring_rel := Flat( List( ring_rel, a -> Flat( [ " ", String( a ) ] ) ) );
     fi;
     
-    name := RingName( R!.CoveringRing );
+    name := RingName( AmbientRing( R ) );
     
     return Flat( [ name, "/(", ring_rel, " )" ] );
     
@@ -434,8 +434,12 @@ InstallMethod( SetRingProperties,
     SetCharacteristic( S, Characteristic( R ) );
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
-    SetGlobalDimension( S, d );
-    SetKrullDimension( S, d + KrullDimension( R ) );
+    if HasGlobalDimension( R ) then
+        SetGlobalDimension( S, d + GlobalDimension( R ) );
+    fi;
+    if HasKrullDimension( R ) then
+        SetKrullDimension( S, d + KrullDimension( R ) );
+    fi;
     SetGeneralLinearRank( S, 1 );	## Quillen-Suslin Theorem (see [McCRob, 11.5.5]
     if d = 1 then			## [McCRob, 11.5.7]
         SetElementaryRank( S, 1 );
@@ -444,6 +448,8 @@ InstallMethod( SetRingProperties,
     fi;
           
     SetIsIntegralDomain( S, true );
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
 end );
 
@@ -465,7 +471,9 @@ InstallMethod( SetRingProperties,
     SetIsCommutative( S, false );
     SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
     SetIndeterminateDerivationsOfRingOfDerivations( S, der );
-    SetGlobalDimension( S, d );
+    if HasGlobalDimension( r ) then
+        SetGlobalDimension( S, d + GlobalDimension( r ) );
+    fi;
     if HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) and Characteristic( S ) = 0 then
         SetGeneralLinearRank( S, 2 );	## [Stafford78, McCRob, 11.2.15(i)]
         SetIsSimpleRing( S, true );
@@ -473,6 +481,8 @@ InstallMethod( SetRingProperties,
     if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
         SetIsIntegralDomain( S, true );
     fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
 end );
 
@@ -648,9 +658,9 @@ InstallMethod( \/,
     SetRingRelations( S, rel );
     
     if HasRingRelations( R ) then
-        S!.CoveringRing := R!.CoveringRing;
+        SetAmbientRing( S, AmbientRing( R ) );
     else
-        S!.CoveringRing := R;
+        SetAmbientRing( S, R );
     fi;
     
     return S;

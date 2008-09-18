@@ -115,6 +115,9 @@ InstallValue( LogicalImplicationsForHomalgRings,
           [ IsDedekindDomain, "and", IsLocalRing,
             "imply", IsDiscreteValuationRing ],		## [Weibel, Kbook.I.pdf Examples on p. 18]
           
+          [ IsDedekindDomain, "and", IsFiniteFreePresentationRing,
+            "imply", IsPrincipalIdealRing ],		## the Steinitz theory
+          
           ## IsDiscreteValuationRing (a valuation ring with valuation group = Z, cf. [Hart, Definition and Theorem I.6.2A])
           [ IsDiscreteValuationRing,
             "implies", IsCommutative ],			## by definition
@@ -213,6 +216,19 @@ InstallValue( LogicalImplicationsForHomalgRings,
           [ IsGlobalDimensionFinite,
             "implies", IsRegular ],
           
+          ## IsFreePolynomialRing
+          [ IsFreePolynomialRing,
+            "implies", IsNoetherian ],
+          
+          [ IsFreePolynomialRing,
+            "implies", IsUniqueFactorizationDomain ],
+          
+          [ IsFreePolynomialRing,
+            "implies", IsFiniteFreePresentationRing ],	## Hilbert Syzygies Theorem
+          
+          [ IsFreePolynomialRing,
+            "implies", IsHermite ],			## Quillen-Suslin theorem: IsFreePolynomialRing => IsHermite
+          
           ] );
 
 
@@ -262,6 +278,90 @@ InstallImmediateMethod( IsRightGlobalDimensionFinite,
   function( R )
     
     return RightGlobalDimension( R ) < infinity;
+    
+end );
+
+##
+InstallImmediateMethod( IsResidueClassRingOfTheIntegers,
+        IsHomalgRing and HasAmbientRing, 0,
+        
+  function( R )
+    
+    if HasIsResidueClassRingOfTheIntegers( AmbientRing( R ) ) and IsResidueClassRingOfTheIntegers( AmbientRing( R ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsCommutative,
+        IsHomalgRing and HasAmbientRing, 0,
+        
+  function( R )
+    
+    if HasIsCommutative( AmbientRing( R ) ) and IsCommutative( AmbientRing( R ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftPrincipalIdealRing,
+        IsHomalgRing and HasAmbientRing, 0,
+        
+  function( R )
+    
+    if HasIsLeftPrincipalIdealRing( AmbientRing( R ) ) and IsLeftPrincipalIdealRing( AmbientRing( R ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightPrincipalIdealRing,
+        IsHomalgRing and HasAmbientRing, 0,
+        
+  function( R )
+    
+    if HasIsRightPrincipalIdealRing( AmbientRing( R ) ) and IsRightPrincipalIdealRing( AmbientRing( R ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftNoetherian,
+        IsHomalgRing and HasAmbientRing, 0,
+        
+  function( R )
+    
+    if HasIsLeftNoetherian( AmbientRing( R ) ) and IsLeftNoetherian( AmbientRing( R ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightNoetherian,
+        IsHomalgRing and HasAmbientRing, 0,
+        
+  function( R )
+    
+    if HasIsRightNoetherian( AmbientRing( R ) ) and IsRightNoetherian( AmbientRing( R ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 

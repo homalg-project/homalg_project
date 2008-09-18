@@ -207,6 +207,10 @@ DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
         IsHomalgRing );
 
 ##
+DeclareAttribute( "AmbientRing",
+        IsHomalgRing );
+
+##
 DeclareAttribute( "KrullDimension",
         IsHomalgRing );
 
