@@ -320,12 +320,13 @@ end function;\n\n";
 SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
   if M2 cmpeq [] then\n\
     S := Rowspace(M1);\n\
+    SM := SyzygyModule(S);\n\
   else\n\
     S := Rowspace( VerticalJoin(M1, M2) );\n\
+    SM := SyzygyModule(S);\n\
+    SM := Rowspace( ColumnSubmatrix( BasisMatrix(SM), 1, Nrows(M1) ) );\n\
   end if;\n\
-  SM := SyzygyModule(S);\n\
-  T := BasisMatrix(SM);\n\
-  return ColumnSubmatrix(T, 1, Nrows(M1));\n\
+  return Matrix( BaseRing(M1), Degree(SM), &cat [Eltseq(x) : x in MinimalBasis(SM)] );\n\
 end function;\n\n";
     
     SyzygiesGeneratorsOfColumns := "\n\
