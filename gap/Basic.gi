@@ -284,6 +284,7 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
         ## attribute ZeroRows of its result to [ ] in order for the
         ## next line to be handled by immediate methods without
         ## further computations
+        ## (BUT: be cautious with ring relations that only GAP can see)
         
         S := CertainRows( S, NonZeroRows( S ) );
         
@@ -345,6 +346,7 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
         ## attribute ZeroColumns of its result to [ ] in order for the
         ## next line to be handled by immediate methods without
         ## further computations
+        ## (BUT: be cautious with ring relations that only GAP can see)
         
         S := CertainColumns( S, NonZeroColumns( S ) );
         
@@ -1027,14 +1029,16 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         
         M := MM;
         
+        SetIsMutableMatrix( M, true );
+        
         m := NrRows( M );
         n := NrColumns( M );
         
         if compute_U then
-            U := HomalgIdentityMatrix( m, R );
+            U := HomalgInitialIdentityMatrix( m, R );
         fi;
         if compute_UI then
-            UI := HomalgIdentityMatrix( m, R );
+            UI := HomalgInitialIdentityMatrix( m, R );
         fi;
         
         if compute_V then
@@ -1079,6 +1083,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 ## divide the i-th row by the unit M[i][j]
                 
                 r := GetEntryOfHomalgMatrix( M, i, j ); 
+                
                 if not IsOne( r ) then
                     
                     M := DivideRowByUnit( M, i, r, j );
@@ -1106,14 +1111,19 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 CopyRowToIdentityMatrix( M, i, [ v, vi ], j );
                 
                 if compute_V then
+                    ResetFilterObj( v, IsMutableMatrix );
                     V := V * v;
                 fi;
                 
                 if compute_VI then
+                    ResetFilterObj( vi, IsMutableMatrix );
                     VI := vi * VI;
                 fi;
                 
+                ## caution: M will now have two attributes EvalCompose and Eval
                 M := M * v;
+                
+                SetIsMutableMatrix( M, true );
                 
                 ## cleanup the j-th column
                 
@@ -1134,10 +1144,14 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 fi;
                 
                 if compute_U then
+                    ResetFilterObj( u, IsMutableMatrix );
+                    ResetFilterObj( U, IsMutableMatrix );
                     U := u * U;
                 fi;
                 
                 if compute_UI then
+                    ResetFilterObj( ui, IsMutableMatrix );
+                    ResetFilterObj( UI, IsMutableMatrix );
                     UI := UI * ui;
                 fi;
                 
@@ -1149,6 +1163,19 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 if pos = fail then
                     break;
                 fi;
+                
+                SetIsMutableMatrix( M, true );
+                
+                if compute_U then
+                    U := ShallowCopy( U );
+                    SetIsMutableMatrix( U, true );
+                fi;
+                
+                if compute_UI then
+                    UI := ShallowCopy( UI );
+                    SetIsMutableMatrix( UI, true );
+                fi;
+                
             od;
             
             clean_rows := GetCleanRowsPositions( M, clean_columns );

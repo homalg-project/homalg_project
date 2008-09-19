@@ -1150,6 +1150,8 @@ InstallMethod( DivideEntryByUnit,		### defines: DivideRowByUnit
         SetEntryOfHomalgMatrix( M, i, j, GetEntryOfHomalgMatrix( M, i, j ) / u );
     fi;
     
+    ## caution: we deliberately do not return a new hull for Eval( M )
+    
 end );
     
 ##
@@ -1188,7 +1190,7 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
     fi;
     
     ## since all what we did had a side effect on Eval( M ) ignoring
-    ## possible other Eval's, e.g. EvalCompose, we must return
+    ## possible other Eval's, e.g. EvalCompose, we want to return
     ## a new homalg matrix object only containing Eval( M )
     return HomalgMatrix( Eval( M ), NrRows( M ), NrColumns( M ), R );
     
@@ -1230,7 +1232,7 @@ InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
     fi;
     
     ## since all what we did had a side effect on Eval( M ) ignoring
-    ## possible other Eval's, e.g. EvalCompose, we must return
+    ## possible other Eval's, e.g. EvalCompose, we want to return
     ## a new homalg matrix object only containing Eval( M )
     return HomalgMatrix( Eval( M ), NrRows( M ), NrColumns( M ), R );
     
@@ -1404,7 +1406,7 @@ InstallMethod( SetColumnToZero,			### defines: SetColumnToZero
     fi;
     
     ## since all what we did had a side effect on Eval( M ) ignoring
-    ## possible other Eval's, e.g. EvalCompose, we must return
+    ## possible other Eval's, e.g. EvalCompose, we want to return
     ## a new homalg matrix object only containing Eval( M )
     return HomalgMatrix( Eval( M ), NrRows( M ), NrColumns( M ), R );
     

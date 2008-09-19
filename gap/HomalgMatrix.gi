@@ -124,6 +124,7 @@ InstallMethod( ShallowCopy,
         return RP!.CopyMatrix( M );
     fi;
     
+    ## we have no other choice
     return M;
     
 end );
@@ -135,7 +136,9 @@ InstallMethod( ShallowCopy,
         
   function( M )
     
-    return HomalgIdentityMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    ## do not use HomalgIdentityMatrix since
+    ## we might want to alter the result
+    return HomalgInitialIdentityMatrix( NrRows( M ), HomalgRing( M ) );
     
 end );
 
@@ -146,7 +149,9 @@ InstallMethod( ShallowCopy,
         
   function( M )
     
-    return HomalgZeroMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    ## do not use HomalgZeroMatrix since
+    ## we might want to alter the result
+    return HomalgInitialMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
     
 end );
 
