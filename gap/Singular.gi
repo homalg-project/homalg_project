@@ -463,8 +463,9 @@ proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
   int c1 = ncols(M1);\n\
   int c2 = ncols(M2);\n\
   matrix M[r][c1+c2] = concat(M1,M2);\n\
-  matrix s=syz(M);\n\
-  return(submat(s,1..c1,1..ncols(s)));\n\
+  matrix s = syz(M);\n\
+  s = submat(s,1..c1,1..ncols(s));\n\
+  return(std(s));\n\
 }\n\n";
     
     SyzygiesGeneratorsOfColumns := "\n\
