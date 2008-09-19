@@ -270,7 +270,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -316,15 +316,13 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsString( arg[1] ) then
         var := arg[1];
     else
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
-    
-    Print( var );
     
     ar := [ [ var, ",", "copy(`LocalInvolutiveBasisfree/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingInvolutive, IsCommutative, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
@@ -364,15 +362,13 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
         o := 1;
     fi;
     
-    homalgSendBlocking( "libname:=\"/home/markus/maple/lib10\",libname:with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsString( arg[1] ) then
         var := arg[1];
     else
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
-    
-    Print( var );
     
     ar := [ [ var, ",", "copy(`LocalInvolutiveBasisfreeGINV/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingInvolutive, IsCommutative, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
