@@ -687,7 +687,7 @@ InstallMethod( RingOfDerivations,
     ar := Concatenation( "[ [ ", ar, " ], [ ], [ " );
     ar := Concatenation( ar, JoinStringsWithSeparator( List( [ 1 .. nr_var ], i -> Concatenation( "weyl(", der[i], ",", Name( var[i] ), ")" ) ) ), " ] ]" );
     
-    S := RingForHomalgInMapleUsingJanetOre( ar );
+    S := RingForHomalgInMapleUsingJanetOre( ar, stream );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     for v in der do
