@@ -888,7 +888,7 @@ InstallMethod( PurityFiltration,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, F, G, II_E, filt, I_E, iso;
+    local R, F, G, II_E, filt, non_zero_p, l, I_E, iso;
     
     R := HomalgRing( M );
     
@@ -907,6 +907,19 @@ InstallMethod( PurityFiltration,
     ByASmallerPresentation( filt );
     
     Perform( DegreesOfFiltration( filt ), function( p ) local L; L := CertainObject( filt, p ); if not IsZero( L ) then SetCodimOfModule( L, -p ); SetIsPure( L, true ); fi; end );
+    
+    non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
+    
+    l := Length( non_zero_p );
+    
+    if l > 0 then
+        SetCodimOfModule( M, -non_zero_p[l] );
+        if l = 1 then
+            SetIsPure( M, true );
+        else
+            SetIsPure( M, false );
+        fi;
+    fi;
     
     SetIsPurityFiltration( filt, true );
     

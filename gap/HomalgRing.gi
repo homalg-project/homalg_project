@@ -626,6 +626,10 @@ InstallGlobalFunction( CreateHomalgRing,
         HOMALG.RingCounter := 1;
     fi;
     
+    if IsBound( HOMALG.ByASmallerPresentation ) and HOMALG.ByASmallerPresentation = true then
+        homalg_ring!.ByASmallerPresentation := true;
+    fi;
+    
     homalg_ring!.creation_number := HOMALG.RingCounter;
     
     ## e.g. needed to construct residue class rings

@@ -1011,6 +1011,23 @@ InstallMethod( IsFree,
     
 end );
 
+##
+InstallMethod( IsPure,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    PurityFiltration( M );
+    
+    if HasIsPure( M ) then
+        return IsPure( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for attributes:

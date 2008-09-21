@@ -33,6 +33,9 @@ DeclareOperation( "homalgPointer",
 DeclareOperation( "homalgPointer",
         [ IsString ] );
 
+DeclareOperation( "homalgPointer",
+        [ IsBool ] );
+
 DeclareOperation( "homalgExternalCASystem",
         [ IshomalgExternalObject ] );
 

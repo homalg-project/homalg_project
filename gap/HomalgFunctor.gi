@@ -253,7 +253,7 @@ InstallMethod( FunctorObj,
           Functor_post, Functor_pre, post_arg_pos,
           functor_orig_operation, m_orig, arg_orig,
           functor_pre_operation, m_pre, functor_post_operation, m_post,
-          arg_pre, arg_post;
+          arg_pre, arg_post, R;
     
     if IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
         
@@ -378,6 +378,13 @@ InstallMethod( FunctorObj,
         
         obj := CallFuncList( Functor!.OnObjects, arguments_of_functor );
         
+    fi;
+    
+    if IsHomalgModule( obj ) then
+        R := HomalgRing( obj );
+        if IsBound( R!.ByASmallerPresentation ) then
+            ByASmallerPresentation( obj );
+        fi;
     fi;
     
     #=====# end of the core procedure #=====#

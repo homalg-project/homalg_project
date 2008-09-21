@@ -94,6 +94,9 @@ DeclareAttribute( "Genesis",
 DeclareAttribute( "AFiniteFreeResolution",
         IsHomalgModule );
 
+DeclareAttribute( "PurityFiltration",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:
@@ -267,9 +270,6 @@ DeclareOperation( "SetUpperBoundForProjectiveDimension",
 
 DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgModule, IsInfinity ] );
-
-DeclareOperation( "PurityFiltration",
-        [ IsHomalgModule ] );
 
 ####################################
 #

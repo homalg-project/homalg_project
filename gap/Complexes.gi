@@ -1044,7 +1044,7 @@ InstallMethod( Resolution,	### defines: Resolution
     
     CE!.NaturalEpis := natural_epis;
     
-    natural_epis.(String([ 0, 0 ])) := CokernelEpi( LowestDegreeMorphism( Range( FB ) ) );
+    natural_epis.(String( [ 0, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( FB ) ) );
     
     if l > 1 then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
@@ -1079,7 +1079,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BF := LowestDegreeMorphism( BFZ );
             
             ## enrich CE with the natrual epi
-            natural_epis.(String([ 1, 0 ])) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
+            natural_epis.(String( [ 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
             
             ## F[i] <- F[i+1]
             Add( CE, BF * FB );
@@ -1118,7 +1118,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BF := LowestDegreeMorphism( BFZ );
             
             ## enrich CE with the natrual epi
-            natural_epis.(String([ 1, 0 ])) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
+            natural_epis.(String( [ 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
             
             ## F[i] <- F[i+1]
             Add( CE, FB * BF );
@@ -1155,7 +1155,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BF := LowestDegreeMorphism( BFZ );
             
             ## enrich CE with the natrual epi
-            natural_epis.(String([ i - 1, 0 ])) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
+            natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
             
             ## F[i] <- F[i+1]
             Add( CE, BF * ZB * FZ );
@@ -1193,7 +1193,7 @@ InstallMethod( Resolution,	### defines: Resolution
             BF := LowestDegreeMorphism( BFZ );
             
             ## enrich CE with the natrual epi
-            natural_epis.(String([ i - 1, 0 ])) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
+            natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
             
             ## F[i] <- F[i+1]
             Add( CE, FZ * ZB * BF );
@@ -1212,7 +1212,7 @@ InstallMethod( Resolution,	### defines: Resolution
     BF := LowestDegreeMorphism( BFZ );
     
     ## enrich CE with the natrual epi
-    natural_epis.(String([ i, 0 ])) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
+    natural_epis.(String( [ l, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( BF ) ) );
     
     if l > 1 then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
@@ -1291,7 +1291,7 @@ InstallMethod( Resolution,	### defines: Resolution
     
     CE!.NaturalEpis := natural_epis;
     
-    natural_epis.(String([ 0, 0 ])) := CokernelEpi( LowestDegreeMorphism( Source( FB ) ) );
+    natural_epis.(String( [ 0, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( FB ) ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
         for i in [ 2 .. l ] do
@@ -1326,7 +1326,7 @@ InstallMethod( Resolution,	### defines: Resolution
             ZF := LowestDegreeMorphism( ZFB );
             
             ## enrich CE with the natrual epi
-            natural_epis.(String([ i - 1, 0 ])) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
+            natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
             
             ## F[i-1] -> F[i]
             Add( CE, FB * BZ * ZF );
@@ -1367,7 +1367,7 @@ InstallMethod( Resolution,	### defines: Resolution
             ZF := LowestDegreeMorphism( ZFB );
             
             ## enrich CE with the natrual epi
-            natural_epis.(String([ i - 1, 0 ])) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
+            natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
             
             ## F[i-1] -> F[i]
             Add( CE, ZF * BZ * FB );
@@ -1383,7 +1383,7 @@ InstallMethod( Resolution,	### defines: Resolution
     BF := LowestDegreeMorphism( BFQ );
     
     ## enrich CE with the natrual epi
-    natural_epis.(String([ i, 0 ])) := CokernelEpi( LowestDegreeMorphism( Range( BF ) ) );
+    natural_epis.(String( [ l, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( BF ) ) );
             
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
         Add( CE, FB * BF );

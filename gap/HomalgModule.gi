@@ -1919,10 +1919,16 @@ InstallMethod( ViewObj,
             Append( properties, " codim " );
             Append( properties, String( CodimOfModule( M ) ) );
         else
-            Append( properties, " torsion" );
-            if HasIsZero( M ) and not IsZero( M ) then
+            if HasIsPure( M ) then
+                if IsPure( M ) then
+                    Append( properties, " pure" );
+                else
+                    Append( properties, " non-pure" );
+                fi;
+            elif HasIsZero( M ) and not IsZero( M ) then
                 properties := Concatenation( " non-zero", properties );
             fi;
+            Append( properties, " torsion" );
         fi;
     else
         if HasIsPure( M ) and not IsPure( M ) then

@@ -217,11 +217,11 @@ InstallMethod( IsomorphismOfFiltration,
         [ IsFiltrationOfFinitelyPresentedModuleRep ],
         
   function( filt )
-    local M, R, degrees, l, nr_rels, nr_gens, Ids, iotas, etas, alphas, i, p,
-          gen_emb, mor_aid, j, pi, Mp, Id_p, iota, d1, d0, eta0, epi, eta, emb,
-          pr_P0, pr_Fp1, pr_Mp, Fp_adapted, q, gen_iso, alpha, compose,
-          diagmat, transition, nr_rows, nr_cols, stack, augment, presentation,
-          rows, cols, triangular;
+    local M, R, ByASmallerPresentation, degrees, l, nr_rels, nr_gens, Ids,
+          iotas, etas, alphas, i, p, gen_emb, mor_aid, j, pi, Mp, Id_p, iota,
+          d1, d0, eta0, epi, eta, emb, pr_P0, pr_Fp1, pr_Mp, Fp_adapted, q,
+          gen_iso, alpha, compose, diagmat, transition, nr_rows, nr_cols,
+          stack, augment, presentation, rows, cols, triangular;
     
     M := UnderlyingModule( filt );
     
@@ -229,6 +229,15 @@ InstallMethod( IsomorphismOfFiltration,
     LockModuleOnCertainPresentation( M );
         
     R := HomalgRing( M );
+    
+    ## deactivate an automatic ByASmallerPresentation,
+    ## since this will destroy the following algorithm
+    if IsBound( R!.ByASmallerPresentation ) then
+        ByASmallerPresentation := true;
+        Unbind( R!.ByASmallerPresentation );
+    else
+        ByASmallerPresentation := false;
+    fi;
     
     degrees := DegreesOfFiltration( filt );
     
@@ -485,6 +494,13 @@ InstallMethod( IsomorphismOfFiltration,
     Assert( 1, IsIsomorphism( triangular ) );
     
     SetIsIsomorphism( triangular, true );
+    
+    ## now it is safe to reactivate an automatic
+    ## ByASmallerPresentation again
+    ## (in case it was deactivated)
+    if ByASmallerPresentation then
+        R!.ByASmallerPresentation := true;
+    fi;
     
     return triangular;
     
