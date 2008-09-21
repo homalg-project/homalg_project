@@ -478,6 +478,10 @@ InstallMethod( IsomorphismOfFiltration,
     ## the isomorphism between the filtered module and the underlying module
     triangular := HomalgMap( transition, triangular, M );
     
+    if IsBound( filt!.Isomorphism ) then
+        triangular := PreCompose( triangular, filt!.Isomorphism );
+    fi;
+    
     Assert( 1, IsIsomorphism( triangular ) );
     
     SetIsIsomorphism( triangular, true );

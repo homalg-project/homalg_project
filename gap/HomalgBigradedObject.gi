@@ -538,8 +538,9 @@ InstallMethod( DefectOfExactness,
         [ IsBigradedObjectOfFinitelyPresentedObjectsRep and IsEndowedWithDifferential ],
         
   function( Er )
-    local left, bidegree, r, degree, cpx, bidegrees, B, p, q, pp, qq, H, i, j,
-          Epq, post, pre, def, emb, emb_new, relative_embeddings,
+    local left, bidegree, r, degree, cpx, bidegrees, B, C, compute_nat_trafos,
+          natural_transformations, outer_functor_on_natural_epis, p, q, pp, qq,
+          H, i, j, Epq, post, pre, def, nat, emb, emb_new, relative_embeddings,
           absolute_embeddings, type;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( Er );
@@ -575,6 +576,16 @@ InstallMethod( DefectOfExactness,
               embeddings := rec( ),
               stability_table := List( [ 1 .. qq ], a -> ListWithIdenticalEntries( pp, '.' ) ) );
     
+    if r = 0 and not IsTransposedWRTTheAssociatedComplex( B )
+       and IsBound( B!.OuterFunctorOnNaturalEpis ) then
+        compute_nat_trafos := true;
+        natural_transformations := rec( );
+        H.NaturalTransformations := natural_transformations;
+        outer_functor_on_natural_epis := B!.OuterFunctorOnNaturalEpis;
+    else
+        compute_nat_trafos := false;
+    fi;
+    
     for i in [ 1 .. pp ] do
         for j in [ 1 .. qq ] do
             Epq := CertainObject( Er, [ p[i], q[j] ] );
@@ -591,6 +602,14 @@ InstallMethod( DefectOfExactness,
                 else
                     def := Kernel( post );
                     emb := KernelEmb( post );
+                    ## construct the natural monomorphism/equivalence
+                    ## F(G(P_p)) -> R^0(F)(G(P_p))
+                    if compute_nat_trafos and q[j] = 0 then
+                        nat := outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) / emb;
+			Assert( 1, IsMonomorphism( nat ) );
+			SetIsMonomorphism( nat, true );
+			natural_transformations.(String([ p[i], 0 ])) := nat;
+                    fi;
                 fi;
                 if IsZero( def ) then
                     H.stability_table[qq-j+1][i] := '.';
@@ -602,6 +621,14 @@ InstallMethod( DefectOfExactness,
             elif IsHomalgMorphism( pre ) and not ( HasIsZero( Epq ) and IsZero( Epq ) ) then
                 def := Cokernel( pre );
                 emb := CokernelNaturalGeneralizedEmbedding( pre );
+                    ## construct the natural epimorphism/equivalence
+                    ## L_0(F)(G(P_p)) -> F(G(P_p))
+                    if compute_nat_trafos and q[j] = 0 then
+                        nat := PreCompose( RemoveMorphismAidMap( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
+			Assert( 1, IsEpimorphism( nat ) );
+			SetIsEpimorphism( nat, true );
+			natural_transformations.(String([ p[i], 0 ])) := nat;
+                    fi;
                 if IsZero( def ) then
                     H.stability_table[qq-j+1][i] := '.';
                     SetIsZero( emb, true );

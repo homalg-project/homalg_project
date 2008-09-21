@@ -619,7 +619,9 @@ InstallMethod( GrothendieckSpectralSequence,
         [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep, IsList ],
         
   function( Functor_F, Functor_G, M, p_range )
-    local F, G, P, GP, CE, FCE, BC;
+    local F, G, P, GP, CE, FCE, BC, p_degrees, natural_epis, F_natural_epis,
+          p, II_E, I_E, I_E1, natural_transformations, FGP, HFGP, I_E2,
+          gen_embs, Hgen_embs, nat_trafos;
     
     F := OperationOfFunctor( Functor_F );
     G := OperationOfFunctor( Functor_G );
@@ -640,7 +642,87 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the associated bicomplex
     BC := HomalgBicomplex( FCE );
     
-    return SecondSpectralSequenceWithFiltration( BC, p_range );
+    ## the p-degrees
+    p_degrees := ObjectDegreesOfBicomplex( BC )[1];
+    
+    ## enrich the bicomplex with F(natural epis)
+    natural_epis := CE!.NaturalEpis;
+    
+    F_natural_epis := rec( );
+    
+    for p in p_degrees do
+        F_natural_epis.(String( [ p, 0 ] )) := F( natural_epis.(String( [ p, 0 ] )) );
+    od;
+    
+    BC!.OuterFunctorOnNaturalEpis := F_natural_epis;
+    
+    ## the second spectral sequence
+    II_E := SecondSpectralSequenceWithFiltration( BC, p_range );
+    
+    ## extract the associated first spectral sequence
+    I_E := AssociatedFirstSpectralSequence( II_E );
+    
+    ## the first sheet of the first spectral sequence
+    I_E1 := CertainSheet( I_E, 1 );
+    
+    ## extract the natural transformations
+    ## 0 -> F(G(P_p)) -> R^0(F)(G(P_p)) (F contravariant)
+    ## L_0(F)(G(P_p)) -> F(G(P_p)) -> 0 (F covariant)
+    ## out of the first sheet of the first spectral sequence
+    natural_transformations := I_E1!.NaturalTransformations;
+    
+    ## in case F is contravariant and left exact
+    ## or F is covariant and right exact, then
+    ## F( G( P ) ) is the zero-th row of first sheet
+    ## of the collapsed first spectral sequence
+    FGP := F( GP );
+    
+    ## HFGP = H( (FG)( P ) )
+    ## = L_*(FG)(M) (FG covariant)
+    ## = R^*(FG)(M) (FG contravariant)
+    HFGP := DefectOfExactness( FGP );
+    
+    ## the second sheet of the first spectral sequence
+    I_E2 := CertainSheet( I_E, 2 );
+    
+    ## 1) extract the natural embeddings out of the zero-th row
+    ## of the second sheet of the first spectral sequence
+    ## 2) extract the natural embeddings out of H( (FG)( P ) )
+    gen_embs := rec( );
+    Hgen_embs := rec( );
+    
+    for p in p_degrees do
+        gen_embs.(String( [ p, 0 ] ) ) := NaturalGeneralizedEmbedding( CertainObject( I_E2, [ p, 0 ] ) );
+        Hgen_embs.(String( [ p, 0 ] ) ) := NaturalGeneralizedEmbedding( CertainObject( HFGP, p ) );
+    od;
+    
+    ## the natural transformations between the zero-th row
+    ## of the second sheet of the first spectral sequence
+    ## and H( (FG)( P ) )
+    
+    nat_trafos := rec( );
+    
+    p_degrees := List( p_degrees, p -> String( [ p, 0 ]) );
+    
+    if IsCovariantFunctor( Functor_F ) then
+        for p in p_degrees do
+            nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);
+            Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
+            SetIsMonomorphism( nat_trafos.(p), true );
+        od;
+    else
+        for p in p_degrees do
+            nat_trafos.(p) := gen_embs.(p) / natural_transformations.(p) / Hgen_embs.(p);
+            Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
+            SetIsMonomorphism( nat_trafos.(p), true );
+        od;
+    fi;
+    
+    ## enrich I_E
+    I_E!.NaturalTransformations := nat_trafos;
+    I_E!.NaturalGeneralizedEmbeddings := Hgen_embs;
+    
+    return II_E;
     
 end );
     
@@ -760,7 +842,7 @@ end );
 
 ##
 InstallMethod( FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence,
-        "for Grothendieck spectral sequences",
+        "for spectral sequences",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
   function( II_E )
@@ -806,18 +888,19 @@ InstallMethod( PurityFiltration,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, Functor_R_Hom, Functor_Hom_R, II_E, filt;
+    local R, F, G, II_E, filt, I_E, iso;
     
     R := HomalgRing( M );
     
-    Functor_R_Hom := LeftDualizingFunctor( R );		# Hom(-,R) for left modules
-    Functor_Hom_R := RightDualizingFunctor( R );	# Hom(-,R) for right modules
-    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        II_E := GrothendieckSpectralSequence( Functor_Hom_R, Functor_R_Hom, M, [ 0 ] );
+        F := RightDualizingFunctor( R );	# Hom(-,R) for right modules
+        G := LeftDualizingFunctor( R );		# Hom(-,R) for left modules
     else
-        II_E := GrothendieckSpectralSequence( Functor_R_Hom, Functor_Hom_R, M, [ 0 ] );
+        F := LeftDualizingFunctor( R );		# Hom(-,R) for left modules
+        G := RightDualizingFunctor( R );	# Hom(-,R) for right modules
     fi;
+    
+    II_E := GrothendieckSpectralSequence( F, G, M, [ 0 ] );
     
     filt := FiltrationBySpectralSequence( II_E );
     
@@ -826,6 +909,33 @@ InstallMethod( PurityFiltration,
     Perform( DegreesOfFiltration( filt ), function( p ) local L; L := CertainObject( filt, p ); if not IsZero( L ) then SetCodimOfModule( L, -p ); SetIsPure( L, true ); fi; end );
     
     SetIsPurityFiltration( filt, true );
+    
+    ## construct the isomorphism
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FG( M ) -> M:
+    
+    ## the associated first spectral sequence
+    I_E := AssociatedFirstSpectralSequence( II_E );
+    
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M )
+    iso := I_E!.NaturalTransformations.(String( [ 0, 0 ] ));
+    
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) )
+    iso := PreCompose( iso, I_E!.NaturalGeneralizedEmbeddings.(String( [ 0, 0 ])) );
+    
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M )
+    iso := iso / NatTrIdToHomHom_R( FreeHullModule( M ) );
+    
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M ) -> M
+    ## finally giving the isomorphism
+    ## L_0( (R^0 F) G )( M ) -> M
+    iso := PreCompose( iso, FreeHullEpi( M ) );
+    
+    Assert( 1, IsIsomorphism( iso ) );
+    
+    SetIsIsomorphism( iso, true );
+    
+    ## enrich the filtration
+    filt!.Isomorphism := iso;
     
     return filt;
     
