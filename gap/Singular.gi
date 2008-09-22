@@ -828,13 +828,39 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
 end );
 
+##
+#InstallMethod( SetRingProperties,
+#        "constructor",
+#        [ IsHomalgRing and IsLocalRing, IsHomalgRing ],
+#        
+#  function( S, R )
+#    local RP;
+#    
+#    RP := homalgTable( R );
+#    
+#    SetCoefficientsRing( S, R );
+#    SetCharacteristic( S, Characteristic( R ) );
+#    SetIsCommutative( S, true );
+#    if HasGlobalDimension( R ) then
+#        SetGlobalDimension( S, GlobalDimension( R ) );
+#    fi;
+#    if HasKrullDimension( R ) then
+#        SetKrullDimension( S, KrullDimension( R ) );
+#    fi;
+#          
+#    SetIsIntegralDomain( S, true );
+#    
+#    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+#    
+#end );
+
 InstallMethod( LocalisePolynomialRingAtZero,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep ],
         
   function( R )
     local var, properties, stream, display_color,
-          PR, ext_obj, S, v, RP, c, r;
+          PR, ext_obj, S, v, RP, c;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -843,9 +869,9 @@ InstallMethod( LocalisePolynomialRingAtZero,
       Error( "base ring is not a polynomial ring" );
     fi;
     
-    properties := [ IsCommutative ];
+    properties := [ IsCommutative, IsLocalRing ];
     
-    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+    if Length( var ) <= 1 then
         Add( properties, IsPrincipalIdealRing );
     fi;
     
@@ -858,24 +884,20 @@ InstallMethod( LocalisePolynomialRingAtZero,
     fi;
     
     ##create the new ring
-    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, properties, TheTypeHomalgExternalRingObjectInSingular, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    r := CoefficientsRing( R );
-    
-    SetRingProperties( S, r, var );
+    #SetRingProperties( S, R );
     
     _Singular_SetRing( S );
     
     ##since variables in Singular are stored inside a ring it is necessary to
     ##map all variables from the to ring to the new one
     ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", homalgPointer( R ), ")" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "imapall(", homalgPointer( R ), ")" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    
-    SetRingProperties( S, R );
     
     RP := homalgTable( S );
     

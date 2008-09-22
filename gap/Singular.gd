@@ -47,5 +47,6 @@ DeclareGlobalFunction( "HomalgRingOfIntegersInSingular" );
 DeclareOperation ( "LocalisePolynomialRingAtZero",
         [ IsHomalgRing ] );
 
+#DeclareOperation( "SetRingProperties",
+#        [ IsHomalgRing and IsLocalRing, IsHomalgRing ] );
 # basic operations:
-
