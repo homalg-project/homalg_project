@@ -260,7 +260,7 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
     for (i=1; i<=r; i=i+1)\n\
     {\n\
       k = rest[r-i+1];\n\
-      if (deg(M[k,j]) == 0) //IsUnit\n\
+      if (deg(leadmonom(M[k,j])) == 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
         pos[size(pos)+1] = list(j,k);\n\
@@ -302,7 +302,7 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
     for (j=1; j<=r; j=j+1)\n\
     {\n\
       k = rest[r-j+1];\n\
-      if (deg(M[i,k]) == 0) //IsUnit\n\
+      if (deg(leadmonom(M[i,k])) == 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
         pos[size(pos)+1] = list(i,k);\n\
@@ -337,7 +337,7 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
   {\n\
     for (int i=1; i<=size(rest); i=i+1)\n\
     {\n\
-      if (deg(M[rest[i],j]) == 0)\n\
+      if (deg(leadmonom(M[rest[i],j])) == 0)//IsUnit\n\
       {\n\
         return(string(j,\",\",rest[i])); // this is not a mistake\n\
       }\n\
