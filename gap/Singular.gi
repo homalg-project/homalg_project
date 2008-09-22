@@ -828,6 +828,69 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
 end );
 
+InstallMethod( LocalisePolynomialRingAtZero,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep ],
+        
+  function( R )
+    local var, properties, stream, display_color,
+          PR, ext_obj, S, v, RP, c, r;
+
+    #check whether base ring is polynomial and then extract needed data
+    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
+      var := IndeterminatesOfPolynomialRing( R );
+    else
+      Error( "base ring is not a polynomial ring" );
+    fi;
+    
+    properties := [ IsCommutative ];
+    
+    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        Add( properties, IsPrincipalIdealRing );
+    fi;
+    
+    stream := homalgStream( R );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    ##create the new ring
+    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    r := CoefficientsRing( R );
+    
+    SetRingProperties( S, r, var );
+    
+    _Singular_SetRing( S );
+    
+    ##since variables in Singular are stored inside a ring it is necessary to
+    ##map all variables from the to ring to the new one
+    ##todo: kill old ring to reduce memory?
+    homalgSendBlocking( ["imapall(", homalgPointer( R ), ")" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    SetRingProperties( S, R );
+    
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    ## reseting the "Involution" must be after "imapall":
+    RP!.SetInvolution( S );
+    
+    return S;
+    
+end );
+
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for external matrices in Singular",

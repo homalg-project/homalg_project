@@ -44,5 +44,8 @@ DeclareGlobalFunction( "HomalgFieldOfRationalsInSingular" );
 
 DeclareGlobalFunction( "HomalgRingOfIntegersInSingular" );
 
+DeclareOperation ( "LocalisePolynomialRingAtZero",
+        [ IsHomalgRing ] );
+
 # basic operations:
 
