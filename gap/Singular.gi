@@ -888,8 +888,6 @@ InstallMethod( LocalisePolynomialRingAtZero,
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    #SetRingProperties( S, R );
-    
     _Singular_SetRing( S );
     
     ##since variables in Singular are stored inside a ring it is necessary to
@@ -906,7 +904,6 @@ InstallMethod( LocalisePolynomialRingAtZero,
         homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
     end;
     
-    ## reseting the "Involution" must be after "imapall":
     RP!.SetInvolution( S );
     
     return S;
