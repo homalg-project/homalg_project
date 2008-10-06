@@ -854,7 +854,7 @@ end );
 #    
 #end );
 
-InstallMethod( LocalizeePolynomialRingAtZero,
+InstallMethod( LocalizePolynomialRingAtZero,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep ],
         
