@@ -404,7 +404,7 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
     ## also called the first spectral sequence of the bicomplex BC;
     ## its limit sheet is the second sheet,
     ## where it also becomes intrinsic (in the abelian category)
-    I_E := HomalgSpectralSequence( BC );
+    I_E := HomalgSpectralSequence( BC, 2 );	## enforce computation till the second sheet, even if things collapse earlier
     
     ## the limit sheet of the first spectral sequence
     I_E_infinity := HighestLevelSheetInSpectralSequence( I_E );
@@ -559,7 +559,7 @@ InstallMethod( SecondSpectralSequenceWithFiltrationOfTotalDefects,
     ## also called the first spectral sequence of the bicomplex BC;
     ## it becomes intrinsic at the second level (w.r.t. some original data)
     ## which is often its limit sheet
-    I_E := HomalgSpectralSequence( BC );
+    I_E := HomalgSpectralSequence( BC, 2 );	## enforce computation till the second sheet, even if things collapse earlier
     
     ## finally enrich the second spectral sequence with the first
     II_E!.FirstSpectralSequence := I_E;
@@ -645,7 +645,7 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the p-degrees
     p_degrees := ObjectDegreesOfBicomplex( BC )[1];
     
-    ## enrich the bicomplex with F(natural epis)
+    ## the natural epimorphisms CE -> GP -> 0
     natural_epis := CE!.NaturalEpis;
     
     F_natural_epis := rec( );
@@ -654,6 +654,9 @@ InstallMethod( GrothendieckSpectralSequence,
         F_natural_epis.(String( [ p, 0 ] )) := F( natural_epis.(String( [ p, 0 ] )) );
     od;
     
+    ## enrich the bicomplex with F(natural epis)
+    ## (by this, the next command will compute
+    ##  certain natural transformations needed below)
     BC!.OuterFunctorOnNaturalEpis := F_natural_epis;
     
     ## the second spectral sequence
@@ -688,11 +691,10 @@ InstallMethod( GrothendieckSpectralSequence,
     ## 1) extract the natural embeddings out of the zero-th row
     ## of the second sheet of the first spectral sequence
     ## 2) extract the natural embeddings out of H( (FG)( P ) )
-    gen_embs := rec( );
+    gen_embs := I_E2!.embeddings;
     Hgen_embs := rec( );
     
     for p in p_degrees do
-        gen_embs.(String( [ p, 0 ] ) ) := NaturalGeneralizedEmbedding( CertainObject( I_E2, [ p, 0 ] ) );
         Hgen_embs.(String( [ p, 0 ] ) ) := NaturalGeneralizedEmbedding( CertainObject( HFGP, p ) );
     od;
     
@@ -706,13 +708,21 @@ InstallMethod( GrothendieckSpectralSequence,
     
     if IsCovariantFunctor( Functor_F ) then
         for p in p_degrees do
-            nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);
+            if IsBound( natural_transformations.(p) ) then
+                nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);
+            else
+                nat_trafos.(p) := TheZeroMap( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
+            fi;
             Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
             SetIsMonomorphism( nat_trafos.(p), true );
         od;
     else
         for p in p_degrees do
-            nat_trafos.(p) := gen_embs.(p) / natural_transformations.(p) / Hgen_embs.(p);
+            if IsBound( natural_transformations.(p) ) then
+                nat_trafos.(p) := ( gen_embs.(p) / natural_transformations.(p) ) / Hgen_embs.(p);
+            else
+                nat_trafos.(p) := TheZeroMap( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
+            fi;
             Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
             SetIsMonomorphism( nat_trafos.(p), true );
         od;
@@ -857,17 +867,22 @@ InstallMethod( FiltrationBySpectralSequence,
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsInt ],
         
   function( E, n )
-    local BC;
+    local BC, filt;
     
     BC := UnderlyingBicomplex( E );
     
     if HasGeneralizedEmbeddingsInTotalDefects( E ) then
-        return FiltrationOfTotalDefectOfSpectralSequence( E, n );
+        filt := FiltrationOfTotalDefectOfSpectralSequence( E, n );
     elif IsTransposedWRTTheAssociatedComplex( BC ) then
-        return FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence( E, n );
+        filt := FiltrationOfObjectInCollapsedSheetOfFirstSpectralSequence( E, n );
+    else
+        return fail;
     fi;
     
-    return fail;
+    ## enrich the filtration
+    filt!.SecondSpectralSequence := E;
+    
+    return filt;
     
 end );
 

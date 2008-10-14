@@ -24,10 +24,12 @@ InstallMethod( DefectOfExactness,
     
     degrees := ObjectDegreesOfComplex( C );
     
+    ## never use the following:
+    #elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+    #    return CertainObject( C, i );
+    
     if PositionSet( degrees, i ) = fail then
         Error( "the second argument ", i, " is outside the degree range of the complex\n" );
-    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
-        return CertainObject( C, i );
     elif i = degrees[1] then
         mor := CertainMorphism( C, i + 1 );
         def := Cokernel( mor );
@@ -54,10 +56,12 @@ InstallMethod( DefectOfExactness,
     
     degrees := ObjectDegreesOfComplex( C );
     
+    ## never use the following:
+    #elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+    #    return CertainObject( C, i );
+    
     if PositionSet( degrees, i ) = fail then
         Error( "the second argument ", i, " is outside the degree range of the complex\n" );
-    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
-        return CertainObject( C, i );
     elif i = degrees[1] then
         mor := CertainMorphism( C, i );
         def := Kernel( mor );
@@ -135,9 +139,11 @@ InstallMethod( DefectOfExactness,
         on_less_generators := false;
     fi;
         
-    if IsGradedObject( C ) then
-        H := C;
-    elif IsBound(C!.HomologyGradedObject) then
+    ## never use the following:
+    #if IsGradedObject( C ) then
+    #    H := C;
+    
+    if IsBound(C!.HomologyGradedObject) then
         H := C!.HomologyGradedObject;
     fi;
     
@@ -259,9 +265,11 @@ InstallMethod( DefectOfExactness,
         display_string := "";
     fi;
     
-    if IsGradedObject( C ) then
-        H := C;
-    elif IsBound(C!.CohomologyGradedObject) then
+    ## never use the following:
+    #if IsGradedObject( C ) then
+    #    H := C;
+    
+    if IsBound(C!.CohomologyGradedObject) then
         H := C!.CohomologyGradedObject;
     fi;
     

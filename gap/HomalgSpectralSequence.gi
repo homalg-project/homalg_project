@@ -325,9 +325,12 @@ InstallMethod( BidegreesOfSpectralSequence,
         [ IsHomalgSpectralSequence, IsInt ],
         
   function( E, n )
-    local bidegrees, n_lowest, n_highest, bidegrees_n, p, q;
+    local bidegrees, lq, max, n_lowest, n_highest, bidegrees_n, p, q;
     
     bidegrees := ObjectDegreesOfSpectralSequence( E );
+    
+    lq := Length( bidegrees[2] );
+    max := Minimum( Length( bidegrees[1] ),  lq ) - 1;
     
     n_lowest := LowestTotalDegreeInSpectralSequence( E );
     n_highest := HighestTotalDegreeInSpectralSequence( E );
@@ -338,12 +341,12 @@ InstallMethod( BidegreesOfSpectralSequence,
         return bidegrees_n;
     fi;
     
-    if n - n_lowest < n_highest - n then
-        for p in bidegrees[1][1] + [ 0 .. n - n_lowest ] do
+    if n - n_lowest < lq then
+        for p in bidegrees[1][1] + [ 0 .. Minimum( n - n_lowest, max ) ] do
             Add( bidegrees_n, [ p, n - p ] );
         od;
     else
-        for q in bidegrees[2][Length( bidegrees[2] )] - [ 0 .. n_highest - n ] do
+        for q in bidegrees[2][lq] - [ 0 .. Minimum( n_highest - n, max ) ] do
             Add( bidegrees_n, [ n - q, q ] );
         od;
     fi;
@@ -586,7 +589,7 @@ InstallMethod( HomalgSpectralSequence,
     
     while rr <> 0 do
         if r <  0 and
-           ( IsZero( Ei ) or
+           ( ( IsZero( Ei ) and i > 0 ) or
              ( ( HasIsStableSheet( Ei ) or IsBound( Ei!.stable ) ) and IsStableSheet( Ei ) ) ) then
             break;
         fi;

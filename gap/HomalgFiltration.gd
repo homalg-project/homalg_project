@@ -125,3 +125,6 @@ DeclareOperation( "UnlockModule",
 DeclareOperation( "UnlockFiltration",
         [ IsHomalgFiltration ] );
 
+DeclareOperation( "AssociatedSecondSpectralSequence",
+        [ IsHomalgFiltration ] );
+

@@ -512,9 +512,12 @@ InstallMethod( BidegreesOfBicomplex,
         [ IsHomalgBicomplex, IsInt ],
         
   function( B, n )
-    local bidegrees, n_lowest, n_highest, tot_n, p, q;
+    local bidegrees, lq, max, n_lowest, n_highest, tot_n, p, q;
     
     bidegrees := ObjectDegreesOfBicomplex( B );
+    
+    lq := Length( bidegrees[2] );
+    max := Minimum( Length( bidegrees[1] ),  lq ) - 1;
     
     n_lowest := LowestTotalObjectDegreeInBicomplex( B );
     n_highest := HighestTotalObjectDegreeInBicomplex( B );
@@ -525,12 +528,12 @@ InstallMethod( BidegreesOfBicomplex,
         return tot_n;
     fi;
     
-    if n - n_lowest < n_highest - n then
-        for p in bidegrees[1][1] + [ 0 .. n - n_lowest ] do
+    if n - n_lowest < lq then
+        for p in bidegrees[1][1] + [ 0 .. Minimum( n - n_lowest, max ) ] do
             Add( tot_n, [ p, n - p ] );
         od;
     else
-        for q in bidegrees[2][Length( bidegrees[2] )] - [ 0 .. n_highest - n ] do
+        for q in bidegrees[2][lq] - [ 0 .. Minimum( n_highest - n, max ) ] do
             Add( tot_n, [ n - q, q ] );
         od;
     fi;

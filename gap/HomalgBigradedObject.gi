@@ -541,7 +541,7 @@ InstallMethod( DefectOfExactness,
     local left, bidegree, r, degree, cpx, bidegrees, B, C, compute_nat_trafos,
           natural_transformations, outer_functor_on_natural_epis, p, q, pp, qq,
           H, i, j, Epq, post, pre, def, nat, emb, emb_new, relative_embeddings,
-          absolute_embeddings, type;
+          absolute_embeddings, type, max;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( Er );
     
@@ -606,9 +606,9 @@ InstallMethod( DefectOfExactness,
                     ## F(G(P_p)) -> R^0(F)(G(P_p))
                     if compute_nat_trafos and q[j] = 0 then
                         nat := outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) / emb;
-			Assert( 1, IsMonomorphism( nat ) );
-			SetIsMonomorphism( nat, true );
-			natural_transformations.(String([ p[i], 0 ])) := nat;
+                        Assert( 1, IsMonomorphism( nat ) );
+                        SetIsMonomorphism( nat, true );
+                        natural_transformations.(String([ p[i], 0 ])) := nat;
                     fi;
                 fi;
                 if IsZero( def ) then
@@ -625,9 +625,9 @@ InstallMethod( DefectOfExactness,
                     ## L_0(F)(G(P_p)) -> F(G(P_p))
                     if compute_nat_trafos and q[j] = 0 then
                         nat := PreCompose( RemoveMorphismAidMap( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
-			Assert( 1, IsEpimorphism( nat ) );
-			SetIsEpimorphism( nat, true );
-			natural_transformations.(String([ p[i], 0 ])) := nat;
+                        Assert( 1, IsEpimorphism( nat ) );
+                        SetIsEpimorphism( nat, true );
+                        natural_transformations.(String([ p[i], 0 ])) := nat;
                     fi;
                 if IsZero( def ) then
                     H.stability_table[qq-j+1][i] := '.';
@@ -643,8 +643,7 @@ InstallMethod( DefectOfExactness,
                     H.stability_table[qq-j+1][i] := '.';
                     SetIsZero( emb, true );
                 else
-                    ## although nonzero Epq became stable
-                    H.stability_table[qq-j+1][i] := 's';
+                    H.stability_table[qq-j+1][i] := '*';
                 fi;
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             fi;
@@ -708,21 +707,26 @@ InstallMethod( DefectOfExactness,
             H.absolute_embeddings := absolute_embeddings;
         fi;
         
-        ## find more stable spots:
+        ## find stable spots:
         cpx := IsBicomplexOfFinitelyPresentedObjectsRep( B );
         
         if cpx then
-            bidegree := [ -(r + 1), (r + 1) - 1 ];
+            bidegree := r -> [ -r, r - 1 ];
         else
-            bidegree := [ (r + 1), 1 - (r + 1) ];
+            bidegree := r -> [ r, 1 - r ];
         fi;
-    
+        
+        max := Minimum( pp, qq );
+        
         for i in [ 1 .. pp ] do
             for j in [ 1 .. qq ] do
-                if not ( i + bidegree[1] in [ 1 .. pp ] and j + bidegree[2] in [ 1 .. qq ] and H.stability_table[qq-(j + bidegree[2])+1][i + bidegree[1]] <> '.' ) and
-                   not ( i - bidegree[1] in [ 1 .. pp ] and j - bidegree[2] in [ 1 .. qq ] and H.stability_table[qq-(j - bidegree[2])+1][i - bidegree[1]] <> '.' ) and
-                   H.stability_table[qq-j+1][i] = '*' then
-                    H.stability_table[qq-j+1][i] := 's';
+                if H.stability_table[qq-j+1][i] = '*' then
+                    if ForAll( [ r + 1 .. max ],
+                               a -> not ( i + bidegree(a)[1] in [ 1 .. pp ] and j + bidegree(a)[2] in [ 1 .. qq ] and H.stability_table[qq-(j + bidegree(a)[2])+1][i + bidegree(a)[1]] <> '.' ) and
+                               not ( i - bidegree(a)[1] in [ 1 .. pp ] and j - bidegree(a)[2] in [ 1 .. qq ] and H.stability_table[qq-(j - bidegree(a)[2])+1][i - bidegree(a)[1]] <> '.' ) ) then
+                        
+                        H.stability_table[qq-j+1][i] := 's';
+                    fi;
                 fi;
             od;
         od;
