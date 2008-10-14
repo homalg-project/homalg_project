@@ -720,13 +720,13 @@ InstallMethod( RingOfDerivations,
   function( R, indets )
     local var, nr_var, der, nr_der, properties, stream, display_color,
           PR, ext_obj, S, v, RP;
-
+    
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
-      var := IndeterminatesOfPolynomialRing( R );
-      nr_var := Length( var );
+        var := IndeterminatesOfPolynomialRing( R );
+        nr_var := Length( var );
     else
-      Error( "base ring is not a polynomial ring" );
+        Error( "base ring is not a polynomial ring" );
     fi;
     
     ##compute the new indeterminates (the derivatives) for the ring and save them in der
@@ -740,16 +740,16 @@ InstallMethod( RingOfDerivations,
     
     nr_der := Length( der );
     
-    if not(nr_var=nr_der) then
-      Error( "number of indeterminates in base ring does not equal the number of given derivations" );
+    if nr_var <> nr_der then
+        Error( "number of indeterminates in base ring does not equal the number of given derivations\n" );
     fi;
     
-    if Intersection2( der , var ) <> [ ] then
-      Error( "the following indeterminates are already elements of the base ring: ", Intersection2( der , var ), "\n" );
+    if Intersection2( der, var ) <> [ ] then
+        Error( "the following indeterminate(s) are already elements of the base ring: ", Intersection2( der, var ), "\n" );
     fi;
     
     if not ForAll( var, HasName ) then
-      Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
+        Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
     fi;
     
     properties := [ ];
