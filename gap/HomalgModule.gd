@@ -97,6 +97,9 @@ DeclareAttribute( "AFiniteFreeResolution",
 DeclareAttribute( "PurityFiltration",
         IsHomalgModule );
 
+DeclareAttribute( "CodegreeOfPurity",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:

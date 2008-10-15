@@ -326,6 +326,16 @@ InstallImmediateMethod( IsReflexive,
 end );
 
 ##
+InstallImmediateMethod( IsReflexive,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasCodegreeOfPurity, 0,
+        
+  function( M )
+    
+    return CodegreeOfPurity( M ) = 0;
+    
+end );
+
+##
 InstallImmediateMethod( IsProjective,
         IsFinitelyPresentedModuleRep and IsTorsionFree and HasLeftActingDomain, 0,
         
@@ -634,6 +644,44 @@ InstallImmediateMethod( CodimOfModule,
     
 end );
 
+##
+InstallImmediateMethod( CodegreeOfPurity,
+        IsFinitelyPresentedModuleRep and IsZero, 0,
+        
+  function( M )
+    
+    return 0;
+    
+end );
+
+##
+InstallImmediateMethod( CodegreeOfPurity,
+        IsFinitelyPresentedModuleRep and HasIsPure, 0,
+        
+  function( M )
+    
+    if not IsPure( M ) then
+        return infinity;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( CodegreeOfPurity,
+        IsFinitelyPresentedModuleRep and HasIsReflexive, 0,
+        
+  function( M )
+    
+    if IsReflexive( M ) then
+        return 0;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for properties:
@@ -681,6 +729,17 @@ InstallMethod( IsReflexive,
   function( M )
     
     return IsTorsionFree( M ) and IsZero( Ext( 2, AuslanderDual( M ) ) );
+    
+end );
+
+##
+InstallMethod( IsReflexive,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasCodegreeOfPurity ],
+        
+  function( M )
+    
+    return IsTorsionFree( M ) and CodegreeOfPurity( M ) = 0;
     
 end );
 
@@ -1233,6 +1292,53 @@ InstallMethod( ProjectiveDimension,
     fi;
     
     return pd;
+    
+end );
+
+##
+InstallMethod( CodegreeOfPurity,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    PurityFiltration( M );
+    
+    if HasCodegreeOfPurity( M ) then
+        return CodegreeOfPurity( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CodegreeOfPurity,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ], 1001,
+        
+  function( M )
+    
+    if IsReflexive( M ) then
+        return 0;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CodegreeOfPurity,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ], 1001,
+        
+  function( M )
+    
+    if not IsTorsionFree( M ) then
+        return infinity;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 

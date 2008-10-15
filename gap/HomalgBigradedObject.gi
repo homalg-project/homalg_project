@@ -413,8 +413,8 @@ InstallMethod( AsDifferentialObject,
         [ IsHomalgBigradedObjectAssociatedToABicomplex and IsBigradedObjectOfFinitelyPresentedObjectsRep ],
         
   function( Er )
-    local bidegrees, B, r, cpx, bidegree, lp, lq, q_degrees, p_degrees, p, q,
-          source, target, mor_h, mor_v, emb_source, emb_target,
+    local bidegrees, B, r, cpx, bidegree, lp, lq, q_degrees, p_degrees, d, max,
+          p, q, i, j, source, target, mor_h, mor_v, emb_source, emb_target,
           bidegrees_target, mor, bidegrees_source, aid, k;
     
     bidegrees := ObjectDegreesOfBigradedObject( Er );
@@ -434,21 +434,51 @@ InstallMethod( AsDifferentialObject,
     
     Er!.BidegreeOfDifferential := bidegree;
     
+    lp := Length( bidegrees[1] );
+    lq := Length( bidegrees[2] );
+    
     if r = 0 then
-        lq := Length( bidegrees[2] );
         if cpx then
             q_degrees := bidegrees[2]{[ 2 .. lq ]};
+            d := r -> [ -r, r - 1 ];
         else
             q_degrees := bidegrees[2]{[ 1 .. lq - 1 ]};
+            d := r -> [ r, 1 - r ];
         fi;
+        
         for p in bidegrees[1] do
             for q in q_degrees do
                 Er!.(String( [ p, q ] )) := CertainVerticalMorphism( B, [ p, q ] );
             od;
         od;
+        
+        max := Minimum( lp, lq );
+        
+        p := bidegrees[1];
+        q := bidegrees[2];
+        
+        ## create the stability table for the zeroth sheet
+        Er!.stability_table := List( [ 1 .. lq ], a -> ListWithIdenticalEntries( lp, '.' ) );
+        for i in [ 1 .. lp ] do
+            for j in [ 1 .. lq ] do
+                if not IsZero( CertainObject( Er, [ p[i], q[j] ] ) ) then
+                    Er!.stability_table[lq-j+1][i] := '*';
+                fi;
+            od;
+        od;
+        for i in [ 1 .. lp ] do
+            for j in [ 1 .. lq ] do
+                if Er!.stability_table[lq-j+1][i] = '*' then
+                    if ForAll( [ r .. max ],
+                               a -> not ( i + d(a)[1] in [ 1 .. lp ] and j + d(a)[2] in [ 1 .. lq ] and Er!.stability_table[lq-(j + d(a)[2])+1][i + d(a)[1]] <> '.' ) and
+                               not ( i - d(a)[1] in [ 1 .. lp ] and j - d(a)[2] in [ 1 .. lq ] and Er!.stability_table[lq-(j - d(a)[2])+1][i - d(a)[1]] <> '.' ) ) then
+                        
+                        Er!.stability_table[lq-j+1][i] := 's';
+                    fi;
+                fi;
+            od;
+        od;
     else
-        lp := Length( bidegrees[1] );
-        lq := Length( bidegrees[2] );
         if cpx then
             p_degrees := bidegrees[1]{[ r + 1 .. lp ]};
             q_degrees := bidegrees[2]{[ 1 .. lq - ( r - 1 ) ]};
@@ -539,9 +569,9 @@ InstallMethod( DefectOfExactness,
         
   function( Er )
     local left, bidegree, r, degree, cpx, bidegrees, B, C, compute_nat_trafos,
-          natural_transformations, outer_functor_on_natural_epis, p, q, pp, qq,
+          natural_transformations, outer_functor_on_natural_epis, p, q, lp, lq,
           H, i, j, Epq, post, pre, def, nat, emb, emb_new, relative_embeddings,
-          absolute_embeddings, type, max;
+          absolute_embeddings, type, d, max;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( Er );
     
@@ -551,30 +581,24 @@ InstallMethod( DefectOfExactness,
     
     degree := Sum( bidegree );
     
-    ## FIXME:
-    if degree = -1 then
-        cpx := true;
-    elif degree = 1 then
-        cpx := false;
-    else
-        cpx := fail;
-    fi;
-    
     bidegrees := ObjectDegreesOfBigradedObject( Er );
     
+    ## the associated bicomplex
     B := UnderlyingBicomplex( Er );
+    
+    cpx := IsBicomplexOfFinitelyPresentedObjectsRep( B );
     
     p := bidegrees[1];
     q := bidegrees[2];
     
-    pp := Length( p );
-    qq := Length( q );
+    lp := Length( p );
+    lq := Length( q );
     
     H := rec( bidegrees := bidegrees,
               level := r + 1,
               bicomplex := B,
               embeddings := rec( ),
-              stability_table := List( [ 1 .. qq ], a -> ListWithIdenticalEntries( pp, '.' ) ) );
+              stability_table := List( [ 1 .. lq ], a -> ListWithIdenticalEntries( lp, '.' ) ) );
     
     if r = 0 and not IsTransposedWRTTheAssociatedComplex( B )
        and IsBound( B!.OuterFunctorOnNaturalEpis ) then
@@ -586,8 +610,8 @@ InstallMethod( DefectOfExactness,
         compute_nat_trafos := false;
     fi;
     
-    for i in [ 1 .. pp ] do
-        for j in [ 1 .. qq ] do
+    for i in [ 1 .. lp ] do
+        for j in [ 1 .. lq ] do
             Epq := CertainObject( Er, [ p[i], q[j] ] );
             post := CertainMorphism( Er, [ p[i], q[j] ] );
             pre := CertainMorphism( Er, [ p[i], q[j] ] - bidegree );
@@ -612,10 +636,10 @@ InstallMethod( DefectOfExactness,
                     fi;
                 fi;
                 if IsZero( def ) then
-                    H.stability_table[qq-j+1][i] := '.';
+                    H.stability_table[lq-j+1][i] := '.';
                     SetIsZero( emb, true );
                 else
-                    H.stability_table[qq-j+1][i] := '*';
+                    H.stability_table[lq-j+1][i] := '*';
                 fi;
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             elif IsHomalgMorphism( pre ) and not ( HasIsZero( Epq ) and IsZero( Epq ) ) then
@@ -630,20 +654,20 @@ InstallMethod( DefectOfExactness,
                         natural_transformations.(String([ p[i], 0 ])) := nat;
                     fi;
                 if IsZero( def ) then
-                    H.stability_table[qq-j+1][i] := '.';
+                    H.stability_table[lq-j+1][i] := '.';
                     SetIsZero( emb, true );
                 else
-                    H.stability_table[qq-j+1][i] := '*';
+                    H.stability_table[lq-j+1][i] := '*';
                 fi;
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             else
                 def := CertainObject( Er, [ p[i], q[j] ] );
                 emb := TheIdentityMorphism( def );
                 if IsZero( def ) then
-                    H.stability_table[qq-j+1][i] := '.';
+                    H.stability_table[lq-j+1][i] := '.';
                     SetIsZero( emb, true );
                 else
-                    H.stability_table[qq-j+1][i] := '*';
+                    H.stability_table[lq-j+1][i] := '*';
                 fi;
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             fi;
@@ -660,10 +684,10 @@ InstallMethod( DefectOfExactness,
             ## build an absolute embedding table using the previous one
             relative_embeddings := rec( target_level := Er!.relative_embeddings.target_level );
             
-            for i in [ 1 .. pp ] do
-                for j in [ 1 .. qq ] do
+            for i in [ 1 .. lp ] do
+                for j in [ 1 .. lq ] do
                     emb := Er!.relative_embeddings.(String( [ p[i], q[j] ] ));
-                    if Er!.stability_table[qq-j+1][i] = '*' then;	## not yet stable
+                    if Er!.stability_table[lq-j+1][i] = '*' then;	## not yet stable
                         emb_new := H.embeddings.(String( [ p[i], q[j] ] ));
                         emb := PreCompose( emb_new, emb );
                     fi;
@@ -687,10 +711,10 @@ InstallMethod( DefectOfExactness,
             ## build an absolute embedding table using the previous one
             absolute_embeddings := rec( );
             
-            for i in [ 1 .. pp ] do
-                for j in [ 1 .. qq ] do
+            for i in [ 1 .. lp ] do
+                for j in [ 1 .. lq ] do
                     emb := Er!.absolute_embeddings.(String( [ p[i], q[j] ] ));
-                    if Er!.stability_table[qq-j+1][i] = '*' then;	## not yet stable
+                    if Er!.stability_table[lq-j+1][i] = '*' then;	## not yet stable
                         emb_new := H.embeddings.(String( [ p[i], q[j] ] ));
                         emb := PreCompose( emb_new, emb );
                     fi;
@@ -708,24 +732,22 @@ InstallMethod( DefectOfExactness,
         fi;
         
         ## find stable spots:
-        cpx := IsBicomplexOfFinitelyPresentedObjectsRep( B );
-        
         if cpx then
-            bidegree := r -> [ -r, r - 1 ];
+            d := r -> [ -r, r - 1 ];
         else
-            bidegree := r -> [ r, 1 - r ];
+            d := r -> [ r, 1 - r ];
         fi;
         
-        max := Minimum( pp, qq );
+        max := Minimum( lp, lq );
         
-        for i in [ 1 .. pp ] do
-            for j in [ 1 .. qq ] do
-                if H.stability_table[qq-j+1][i] = '*' then
+        for i in [ 1 .. lp ] do
+            for j in [ 1 .. lq ] do
+                if H.stability_table[lq-j+1][i] = '*' then
                     if ForAll( [ r + 1 .. max ],
-                               a -> not ( i + bidegree(a)[1] in [ 1 .. pp ] and j + bidegree(a)[2] in [ 1 .. qq ] and H.stability_table[qq-(j + bidegree(a)[2])+1][i + bidegree(a)[1]] <> '.' ) and
-                               not ( i - bidegree(a)[1] in [ 1 .. pp ] and j - bidegree(a)[2] in [ 1 .. qq ] and H.stability_table[qq-(j - bidegree(a)[2])+1][i - bidegree(a)[1]] <> '.' ) ) then
+                               a -> not ( i + d(a)[1] in [ 1 .. lp ] and j + d(a)[2] in [ 1 .. lq ] and H.stability_table[lq-(j + d(a)[2])+1][i + d(a)[1]] <> '.' ) and
+                               not ( i - d(a)[1] in [ 1 .. lp ] and j - d(a)[2] in [ 1 .. lq ] and H.stability_table[lq-(j - d(a)[2])+1][i - d(a)[1]] <> '.' ) ) then
                         
-                        H.stability_table[qq-j+1][i] := 's';
+                        H.stability_table[lq-j+1][i] := 's';
                     fi;
                 fi;
             od;

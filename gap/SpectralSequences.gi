@@ -903,7 +903,7 @@ InstallMethod( PurityFiltration,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, F, G, II_E, filt, non_zero_p, l, I_E, iso;
+    local R, F, G, II_E, filt, non_zero_p, l, p, I_E, iso;
     
     R := HomalgRing( M );
     
@@ -921,18 +921,36 @@ InstallMethod( PurityFiltration,
     
     ByASmallerPresentation( filt );
     
-    Perform( DegreesOfFiltration( filt ), function( p ) local L; L := CertainObject( filt, p ); if not IsZero( L ) then SetCodimOfModule( L, -p ); SetIsPure( L, true ); fi; end );
+    Perform( DegreesOfFiltration( filt ),
+        function( p )
+            local L;
+            L := CertainObject( filt, p );
+            if not IsZero( L ) then
+                SetCodimOfModule( L, -p );
+                SetIsPure( L, true );
+                SetCodegreeOfPurity( L, LevelOfStability( II_E, [ p, -p ], 2 ) - 2 );
+            fi;
+        end );
+    
+    if HasTorsionFreeFactorEpi( M ) and CertainObject( II_E, [ 0, 0 ] ) <> fail then
+        SetCodegreeOfPurity( TorsionFreeFactor( M ), LevelOfStability( II_E, [ 0, 0 ], 2 ) - 2 );
+    fi;
     
     non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
     
     l := Length( non_zero_p );
     
     if l > 0 then
-        SetCodimOfModule( M, -non_zero_p[l] );
+        p := non_zero_p[l];
+        
+        SetCodimOfModule( M, -p );
+        
         if l = 1 then
             SetIsPure( M, true );
+            SetCodegreeOfPurity( M, LevelOfStability( II_E, [ p, -p ], 2 ) - 2 );
         else
             SetIsPure( M, false );
+            SetCodegreeOfPurity( M, infinity );
         fi;
     fi;
     

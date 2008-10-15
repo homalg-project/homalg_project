@@ -754,6 +754,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
     local relations;
     
     if IsHomalgMatrix( arg[1] ) then
+        ResetFilterObj( arg[1], IsMutableMatrix );
         relations := rec( relations := arg[1] );
     else
         relations := rec( relations := CallFuncList( HomalgMatrix, arg ) );
@@ -772,6 +773,7 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
     local relations;
     
     if IsHomalgMatrix( arg[1] ) then
+        ResetFilterObj( arg[1], IsMutableMatrix );
         relations := rec( relations := arg[1] );
     else
         relations := rec( relations := CallFuncList( HomalgMatrix, arg ) );

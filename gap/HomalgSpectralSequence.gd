@@ -151,3 +151,9 @@ DeclareOperation( "AssociatedFilteredComplex",
 DeclareOperation( "AssociatedFirstSpectralSequence",
         [ IsHomalgSpectralSequence ] );
 
+DeclareOperation( "LevelOfStability",
+        [ IsHomalgSpectralSequence, IsList, IsInt ] );
+
+DeclareOperation( "LevelOfStability",
+        [ IsHomalgSpectralSequence, IsList ] );
+

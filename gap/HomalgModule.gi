@@ -1602,6 +1602,8 @@ InstallMethod( LeftPresentation,
         
   function( mat )
     
+    ResetFilterObj( mat, IsMutableMatrix );
+    
     return Presentation( HomalgRelationsForLeftModule( mat ) );
     
 end );
@@ -1715,6 +1717,8 @@ InstallMethod( RightPresentation,
         [ IsHomalgMatrix ],
         
   function( mat )
+    
+    ResetFilterObj( mat, IsMutableMatrix );
     
     return Presentation( HomalgRelationsForRightModule( mat ) );
     
@@ -1891,19 +1895,24 @@ InstallMethod( ViewObj,
             nz := true;
         fi;
     elif HasIsTorsionFree( M ) and IsTorsionFree( M ) then
-        Append( properties, " torsion-free" );
-        if HasIsReflexive( M ) and not IsReflexive( M ) then
-            Append( properties, " non-reflexive" );
+        if HasCodegreeOfPurity( M ) then
+            Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure torsion-free" ) );
             nz := true;
-        elif HasIsProjective( M ) and not IsProjective( M ) then
-            Append( properties, " non-projective" );
-            nz := true;
-        elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
-            Append( properties, " non-stably free" );
-            nz := true;
-        elif HasIsFree( M ) and not IsFree( M ) then
-            Append( properties, " non-free" );
-            nz := true;
+        else
+            Append( properties, " torsion-free" );
+            if HasIsReflexive( M ) and not IsReflexive( M ) then
+                Append( properties, " non-reflexive" );
+                nz := true;
+            elif HasIsProjective( M ) and not IsProjective( M ) then
+                Append( properties, " non-projective" );
+                nz := true;
+            elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
+                Append( properties, " non-stably free" );
+                nz := true;
+            elif HasIsFree( M ) and not IsFree( M ) then
+                Append( properties, " non-free" );
+                nz := true;
+            fi;
         fi;
     fi;
     
@@ -1911,7 +1920,16 @@ InstallMethod( ViewObj,
         if HasCodimOfModule( M ) then
             if HasIsPure( M ) then
                 if IsPure( M ) then
-                    Append( properties, " pure" );
+                    if HasCodegreeOfPurity( M ) then
+                        if CodegreeOfPurity( M ) = 0 then
+                            Append( properties, " reflexively " );
+                        else
+                            Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                        fi;
+                    else
+                        Append( properties, " " );
+                    fi;
+                    Append( properties, "pure" );
                 else
                     Append( properties, " non-pure" );
                 fi;
@@ -1921,7 +1939,16 @@ InstallMethod( ViewObj,
         else
             if HasIsPure( M ) then
                 if IsPure( M ) then
-                    Append( properties, " pure" );
+                    if HasCodegreeOfPurity( M ) then
+                        if CodegreeOfPurity( M ) = 0 then
+                            Append( properties, " reflexively " );
+                        else
+                            Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                        fi;
+                    else
+                        Append( properties, " " );
+                    fi;
+                    Append( properties, "pure" );
                 else
                     Append( properties, " non-pure" );
                 fi;

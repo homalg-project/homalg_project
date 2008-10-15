@@ -60,7 +60,7 @@ Functor_TorsionSubmodule!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: TorsionFreeFactor(Epi)
   function( M )
-    local emb, epi, M0;
+    local emb, epi, M0, N0;
     
     if HasTorsionFreeFactorEpi( M ) then
         return Range( TorsionFreeFactorEpi( M ) );
@@ -77,8 +77,16 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
     
     SetIsTorsionFree( M0, true );
     
+    ## set things already known for M
     if HasRankOfModule( M ) then
         SetRankOfModule( M0, RankOfModule( M ) );
+    fi;
+    
+    if HasPurityFiltration( M ) then
+        N0 := CertainObject( PurityFiltration( M ), 0 );
+        if HasCodegreeOfPurity( N0 ) then
+            SetCodegreeOfPurity( M0, CodegreeOfPurity( N0 ) );
+        fi;
     fi;
     
     return M0;

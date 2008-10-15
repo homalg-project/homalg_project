@@ -497,6 +497,50 @@ InstallMethod( AssociatedFirstSpectralSequence,
 end );
 
 ##
+InstallMethod( LevelOfStability,
+        "for homalg spectral sequences stemming from a bicomplex",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList, IsInt ],
+        
+  function( E, pq, a )
+    local bidegrees, p, q, i, j, lq, r, Er;
+    
+    if CertainObject( E, pq ) = fail then
+        return fail;
+    fi;
+    
+    bidegrees := ObjectDegreesOfSpectralSequence( E );
+    
+    p := bidegrees[1];
+    q := bidegrees[2];
+    
+    i := Position( p, pq[1] );
+    j := Position( q, pq[2] );
+    
+    lq := Length( q );
+    
+    for r in LevelsOfSpectralSequence( E ) do
+        Er := CertainSheet( E, r );
+        if IsBound( Er!.stability_table ) and Er!.stability_table[lq-j+1][i] in [ '.', 's' ] then
+            return Maximum( r, a );
+        fi;
+    od;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( LevelOfStability,
+        "for homalg spectral sequences stemming from a bicomplex",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList ],
+        
+  function( E, pq )
+    
+    return LevelOfStability( E, pq, LevelsOfSpectralSequence( E )[1] );
+    
+end );
+
+##
 InstallMethod( OnLessGenerators,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],

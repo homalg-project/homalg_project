@@ -292,7 +292,7 @@ InstallImmediateMethod( IsDiagonalMatrix,
     e := EvalDiagMat( M );
     
     if ForAll( e, HasIsDiagonalMatrix ) then
-        return ForAll( List( e, HasIsDiagonalMatrix ), a -> a = true );
+        return ForAll( List( e, IsDiagonalMatrix ), a -> a = true );
     fi;
     
     TryNextMethod( );

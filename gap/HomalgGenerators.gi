@@ -451,6 +451,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
     od;
     
     if IsHomalgMatrix( arg[1] ) then
+        ResetFilterObj( arg[1], IsMutableMatrix );
         generators := arg[1];
     elif IsBound( R ) then
         generators := HomalgMatrix( arg[1], R );
@@ -515,6 +516,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
     od;
     
     if IsHomalgMatrix( arg[1] ) then
+        ResetFilterObj( arg[1], IsMutableMatrix );
         generators := arg[1];
     elif IsBound( R ) then
         generators := HomalgMatrix( arg[1], R );
