@@ -9,3 +9,9 @@ ByASmallerPresentation( II_E );
 ByASmallerPresentation( ii_E );
 
 filt := FiltrationBySpectralSequence( II_E );
+
+filtN := FiltrationBySpectralSequence( ii_E );
+
+m := IsomorphismOfFiltration( filt );
+
+n := IsomorphismOfFiltration( filtN );

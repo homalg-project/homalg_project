@@ -24,5 +24,5 @@ DeclareGlobalVariable( "HOMALG_EXAMPLES" );
 #
 ####################################
 
-DeclareGlobalFunction( "Homalg_Examples" );
+DeclareGlobalFunction( "ExamplesForHomalg" );
 

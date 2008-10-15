@@ -5,3 +5,6 @@ II_E := GrothendieckSpectralSequence( RightDualizingFunctor( A1 ), LeftDualizing
 ByASmallerPresentation( II_E );
 
 filt := FiltrationBySpectralSequence( II_E );
+
+m := IsomorphismOfFiltration( filt );
+

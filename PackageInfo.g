@@ -29,13 +29,13 @@ Subtitle := "ExamplesForHomalg - Examples for the GAP Package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.09.16",
+Version := "2008.10.14",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "16/09/2008",
+Date := "14/10/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -279,7 +279,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.1"], ["homalg", ">= 2008.09.16"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.1"], ["homalg", ">= 2008.10.14"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -319,7 +319,8 @@ BannerString := Concatenation(
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
-  "For help, type: ?ExamplesForHomalg package \n",
+  "Type: ?ExamplesForHomalg:	# for help contents\n",
+  "      ExamplesForHomalg();	# for the guiding script\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 

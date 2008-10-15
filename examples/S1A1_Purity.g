@@ -1,4 +1,4 @@
-Read( "Viktor.g" );
+Read( "Mixed.g" );
 
 filt := PurityFiltration( V );
 

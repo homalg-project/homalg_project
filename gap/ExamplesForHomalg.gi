@@ -31,7 +31,7 @@ InstallValue( HOMALG_EXAMPLES,
 ####################################
 
 ## an easy way of calling the example script ExamplesForHomalg/examples/examples.g
-InstallGlobalFunction( Homalg_Examples,
+InstallGlobalFunction( ExamplesForHomalg,
   function( arg )
     local directory, separator;
     

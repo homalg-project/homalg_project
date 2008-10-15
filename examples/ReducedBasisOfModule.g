@@ -3,16 +3,30 @@ LoadPackage( "RingsForHomalg" );
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 wmat := HomalgMatrix( "[ \
-x*z, z*y, z^2, 0, 0, y, \
-0, 0, 0, z^2*y-z^2, z^3, x*z, \
-0, 0, 0, z*y^2-z*y, z^2*y, x*y, \
-0, 0, 0, x*z*y-x*z, x*z^2, x^2, \
-x^2*z, x*z*y, x*z^2, 0, 0, x*y, \
--x*y, -y^2, -z*y, x^2*y-y-x^2+1, x^2*z-z, 0, \
-x^2*y-x^2, x*y^2-x*y, x*z*y-x*z, -y^3+2*y^2-y, -z*y^2+z*y, 0, \
-0, 0, 0, z*y-z, z^2, x^3-y^2 \
-]", 8, 6, Qxyz );
+x*y,  y*z,    z,        0,         0,    \
+x^3*z,x^2*z^2,0,        x*z^2,     -z^2, \
+x^4,  x^3*z,  0,        x^2*z,     -x*z, \
+0,    0,      x*y,      -y^2,      x^2-1,\
+0,    0,      x^2*z,    -x*y*z,    y*z,  \
+0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \
+]", 6, 5, Qxyz );
 W := LeftPresentation( wmat );
+
+## the module is isomorphic to LeftPresentation of the multiple extension:
+## x,z,1,0, 0, 0,0, 0,    0,  0, 
+## 0,0,y,-z,0, 0,0, 0,    0,  0, 
+## 0,0,x,0, -z,1,0, 0,    0,  0, 
+## 0,0,0,x, -y,0,1, 0,    0,  0, 
+## 0,0,0,0, 0, y,-z,0,    0,  0, 
+## 0,0,0,0, 0, x,0, -z,   0,  -1,
+## 0,0,0,0, 0, 0,x, -y,   -1, 0, 
+## 0,0,0,0, 0, 0,-y,x^2-1,0,  0, 
+## 0,0,0,0, 0, 0,0, 0,    z,  0, 
+## 0,0,0,0, 0, 0,0, 0,    y-1,0, 
+## 0,0,0,0, 0, 0,0, 0,    0,  z, 
+## 0,0,0,0, 0, 0,0, 0,    0,  y, 
+## 0,0,0,0, 0, 0,0, 0,    0,  x
+
 BasisOfModule( W );
 syz:=SyzygiesGenerators( W );
 Y := Hom( Qxyz, W );
@@ -24,3 +38,4 @@ T := TorsionSubmodule( W );
 F := TorsionFreeFactor( W );
 O := HomalgCocomplex( iota, -1 );
 Add( O, pi );
+

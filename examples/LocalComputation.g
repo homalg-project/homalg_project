@@ -1,9 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
-homalgIOMode("all");
-
 S := HomalgFieldOfRationalsInSingular() * "a,b,c,d,e,f";
-R0 := LocalizeePolynomialRingAtZero( S );
+R0 := LocalizePolynomialRingAtZero( S );
 
 R1:=RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV("[a,b,c,d,e,f]");
 
