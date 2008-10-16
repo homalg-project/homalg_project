@@ -928,12 +928,12 @@ InstallMethod( PurityFiltration,
             if not IsZero( L ) then
                 SetCodimOfModule( L, -p );
                 SetIsPure( L, true );
-                SetCodegreeOfPurity( L, LevelOfStability( II_E, [ p, -p ], 2 ) - 2 );
+                SetCodegreeOfPurity( L, StaircaseOfStability( II_E, [ p, -p ], 2 ) );
             fi;
         end );
     
     if HasTorsionFreeFactorEpi( M ) and CertainObject( II_E, [ 0, 0 ] ) <> fail then
-        SetCodegreeOfPurity( TorsionFreeFactor( M ), LevelOfStability( II_E, [ 0, 0 ], 2 ) - 2 );
+        SetCodegreeOfPurity( TorsionFreeFactor( M ), StaircaseOfStability( II_E, [ 0, 0 ], 2 ) );
     fi;
     
     non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
@@ -947,7 +947,7 @@ InstallMethod( PurityFiltration,
         
         if l = 1 then
             SetIsPure( M, true );
-            SetCodegreeOfPurity( M, LevelOfStability( II_E, [ p, -p ], 2 ) - 2 );
+            SetCodegreeOfPurity( M, StaircaseOfStability( II_E, [ p, -p ], 2 ) );
         else
             SetIsPure( M, false );
             SetCodegreeOfPurity( M, infinity );
@@ -979,6 +979,9 @@ InstallMethod( PurityFiltration,
     Assert( 1, IsIsomorphism( iso ) );
     
     SetIsIsomorphism( iso, true );
+    
+    ## transfer the known properties/attributes in both directions
+    UpdateModulesByMap( iso );
     
     ## enrich the filtration
     filt!.Isomorphism := iso;

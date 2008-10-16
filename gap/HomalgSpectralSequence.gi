@@ -498,7 +498,7 @@ end );
 
 ##
 InstallMethod( LevelOfStability,
-        "for homalg spectral sequences stemming from a bicomplex",
+        "for homalg spectral sequences",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList, IsInt ],
         
   function( E, pq, a )
@@ -531,12 +531,72 @@ end );
 
 ##
 InstallMethod( LevelOfStability,
-        "for homalg spectral sequences stemming from a bicomplex",
+        "for homalg spectral sequences",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList ],
         
   function( E, pq )
     
     return LevelOfStability( E, pq, LevelsOfSpectralSequence( E )[1] );
+    
+end );
+
+##
+InstallMethod( StaircaseOfStability,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList, IsInt ],
+        
+  function( E, pq, a )
+    local l, bidegrees, p, q, r, Er, st, c;
+    
+    l := LevelOfStability( E, pq, a ) - a;
+    
+    ## the trivial cases:
+    if l = 0 then
+        return [ 0 ];
+    elif l = 1 then
+        return [ 1 ];
+    elif l = fail then
+        return fail;
+    fi;
+    
+    bidegrees := ObjectDegreesOfSpectralSequence( E );
+    
+    p := pq[1];
+    q := pq[2];
+    
+    st := [ ];
+    c := 1;
+    
+    for r in Filtered( LevelsOfSpectralSequence( E ), i -> i >= a + 1 and i <= a + l ) do
+        Er := CertainSheet( E, r );
+        if IsBound( Er!.embeddings ) then
+            if IsEpimorphism( Er!.embeddings.(String( [ p, q ] )) ) then
+                c := c + 1;
+            else
+                Add( st, c );
+                c := 1;
+            fi;
+        else
+            return fail;
+        fi;
+    od;
+    
+    if st = [ ] then
+        return fail;
+    else
+        return st;
+    fi;
+    
+end );
+
+##
+InstallMethod( StaircaseOfStability,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList ],
+        
+  function( E, pq )
+    
+    return StaircaseOfStability( E, pq, LevelsOfSpectralSequence( E )[1] );
     
 end );
 

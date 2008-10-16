@@ -73,6 +73,21 @@ DeclareAttribute( "TheZeroMorphism",
 DeclareAttribute( "TheIdentityMorphism",
         IsHomalgModule );
 
+DeclareAttribute( "Genesis",
+        IsHomalgModule );
+
+DeclareAttribute( "AFiniteFreeResolution",
+        IsHomalgModule );
+
+## intrinsic attributes:
+##
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+## should all be added by hand to LIMOD.intrinsic_attributes
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+DeclareAttribute( "ElementaryDivisors",
+        IsHomalgModule );
+
 DeclareAttribute( "RankOfModule",
         IsHomalgModule );
 
@@ -83,15 +98,6 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
         IsHomalgModule );
 
 DeclareAttribute( "CodimOfModule",
-        IsHomalgModule );
-
-DeclareAttribute( "ElementaryDivisors",
-        IsHomalgModule );
-
-DeclareAttribute( "Genesis",
-        IsHomalgModule );
-
-DeclareAttribute( "AFiniteFreeResolution",
         IsHomalgModule );
 
 DeclareAttribute( "PurityFiltration",

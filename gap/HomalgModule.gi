@@ -1896,7 +1896,11 @@ InstallMethod( ViewObj,
         fi;
     elif HasIsTorsionFree( M ) and IsTorsionFree( M ) then
         if HasCodegreeOfPurity( M ) then
-            Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure torsion-free" ) );
+            if CodegreeOfPurity( M ) = [ 1 ] then
+                Append( properties, Concatenation( " codegree-", String( 1 ), "-pure torsion-free" ) );
+            else
+                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure torsion-free" ) );
+            fi;
             nz := true;
         else
             Append( properties, " torsion-free" );
@@ -1921,8 +1925,10 @@ InstallMethod( ViewObj,
             if HasIsPure( M ) then
                 if IsPure( M ) then
                     if HasCodegreeOfPurity( M ) then
-                        if CodegreeOfPurity( M ) = 0 then
+                        if CodegreeOfPurity( M ) = [ 0 ] then
                             Append( properties, " reflexively " );
+                        elif CodegreeOfPurity( M ) = [ 1 ] then
+                            Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
                         else
                             Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
                         fi;
@@ -1940,8 +1946,10 @@ InstallMethod( ViewObj,
             if HasIsPure( M ) then
                 if IsPure( M ) then
                     if HasCodegreeOfPurity( M ) then
-                        if CodegreeOfPurity( M ) = 0 then
+                        if CodegreeOfPurity( M ) = [ 0 ] then
                             Append( properties, " reflexively " );
+                        elif CodegreeOfPurity( M ) = [ 1 ] then
+                            Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
                         else
                             Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
                         fi;

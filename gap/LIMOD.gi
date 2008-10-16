@@ -20,7 +20,16 @@
 
 InstallValue( LIMOD,
         rec(
-            color := "\033[4;30;46m" )
+            color := "\033[4;30;46m",
+            intrinsic_attributes :=
+            [ "ElementaryDivisors",
+              "RankOfModule",
+              "ProjectiveDimension",
+              "DegreeOfTorsionFreeness",
+              "CodimOfModule",
+              "PurityFiltration",
+              "CodegreeOfPurity" ]
+            )
         );
 
 ##

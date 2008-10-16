@@ -102,3 +102,6 @@ DeclareOperation( "PostInverse",
 DeclareOperation( "CompleteImageSquare",
         [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
 
+DeclareOperation( "UpdateModulesByMap",
+        [ IsHomalgMap ] );
+

@@ -157,3 +157,9 @@ DeclareOperation( "LevelOfStability",
 DeclareOperation( "LevelOfStability",
         [ IsHomalgSpectralSequence, IsList ] );
 
+DeclareOperation( "StaircaseOfStability",
+        [ IsHomalgSpectralSequence, IsList, IsInt ] );
+
+DeclareOperation( "StaircaseOfStability",
+        [ IsHomalgSpectralSequence, IsList ] );
+

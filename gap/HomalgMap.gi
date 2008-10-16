@@ -1013,6 +1013,57 @@ InstallMethod( AddToMorphismAidMap,
     
 end );
 
+##
+InstallMethod( UpdateModulesByMap,
+        "for homalg maps",
+        [ IsHomalgMap and IsIsomorphism ],
+        
+  function( phi )
+    local S, T, propertiesS, propertiesT, attributesS, attributesT, p, a;
+    
+    S := Source( phi );
+    T := Range( phi );
+    
+    propertiesS := KnownPropertiesOfObject( S );
+    propertiesT := KnownPropertiesOfObject( T );
+    
+    attributesS := Intersection2( KnownAttributesOfObject( S ), LIMOD.intrinsic_attributes );
+    attributesT := Intersection2( KnownAttributesOfObject( T ), LIMOD.intrinsic_attributes );
+    
+    ## for properties:
+    for p in propertiesS do	## also check if properties already set for both modules coincide
+        Setter( ValueGlobal( p ) )( T, ValueGlobal( p )( S ) );
+    od;
+    
+    ## now backwards
+    for p in Difference( propertiesT, propertiesS ) do
+        Setter( ValueGlobal( p ) )( S, ValueGlobal( p )( T ) );
+    od;
+    
+    ## for attributes:
+    for a in Difference( attributesS, attributesT ) do
+        Setter( ValueGlobal( a ) )( T, ValueGlobal( a )( S ) );
+    od;
+    
+    ## now backwards
+    for a in Difference( attributesT, attributesS ) do
+        Setter( ValueGlobal( a ) )( S, ValueGlobal( a )( T ) );
+    od;
+    
+    ## also check if properties already set for both modules coincide
+    
+    ## by now, more attributes than the union might be konwn
+    attributesS := Intersection2( KnownAttributesOfObject( S ), LIMOD.intrinsic_attributes );
+    attributesT := Intersection2( KnownAttributesOfObject( T ), LIMOD.intrinsic_attributes );
+    
+    for a in Intersection2( attributesS, attributesT ) do
+        if ValueGlobal( a )( S ) <> ValueGlobal( a )( T ) then
+            Error( "the attribute ", a, " has different values for source and target modules\n" );
+        fi;
+    od;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
