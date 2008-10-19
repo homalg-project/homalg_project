@@ -119,6 +119,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( ViewObj,
         "for homalg external rings",
         [ IsHomalgExternalRingRep ],
@@ -135,8 +136,9 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( Display,
-        "for homalg matrices",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( o )
@@ -165,3 +167,28 @@ InstallMethod( Display,
     Print( display_color, ring, "\033[0m\n" );
     
 end );
+
+##
+InstallMethod( Display,
+        "for homalg external rings",
+        [ IsHomalgExternalRingRep and HasRingRelations ],
+        
+  function( o )
+    local RP, ring, stream, cas, display_color;
+    
+    RP := homalgTable( o );
+    
+    ring := RingName( o );
+    
+    stream := homalgStream( o );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    Print( display_color, ring, "\033[0m\n" );
+    
+end );
+

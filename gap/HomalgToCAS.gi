@@ -468,8 +468,8 @@ InstallGlobalFunction( homalgSendBlocking,
         MakeImmutable( homalg_variable );
         
         ## now that we have just increased the variable counter
-        ## and created the new variable we we need to
-        ## quickly create the enveloping external object
+        ## and created the new variable we need to
+        ## immediately create the enveloping external object
         ## and insert it in the weak pointer list using _SetElmWPObj_ForHomalg,
         ## before we start executing commands in the external CAS,
         ## that might cause an error (this would then lead to an
