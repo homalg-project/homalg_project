@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Relations.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Relations">
+<Heading>Relations</Heading>
+
+<Section Label="Relations:Constructors">
+<Heading>Relations: Constructors</Heading>
+
+</Section>
+
+<Section Label="Relations:Properties">
+<Heading>Relations: Properties</Heading>
+
+</Section>
+
+<Section Label="Relations:Attributes">
+<Heading>Relations: Attributes</Heading>
+
+</Section>
+
+<Section Label="Relations:LIMOD">
+<Heading>&LIMOD;: Logical Implications for Relations</Heading>
+
+</Section>
+
+<Section Label="Relations:Operations">
+<Heading>Relations: Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

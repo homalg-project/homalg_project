@@ -1,0 +1,39 @@
+<!-- 
+
+  Functors.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Functors">
+<Heading>Functors</Heading>
+
+<Section Label="Functors:Constructors">
+<Heading>Constructors</Heading>
+
+</Section>
+
+<Section Label="Functors:Basic">
+<Heading>Basic Functors</Heading>
+
+</Section>
+
+<Section Label="Functors:Tool">
+<Heading>Tool Functors</Heading>
+
+</Section>
+
+<Section Label="Functors:Other">
+<Heading>Other Functors</Heading>
+
+</Section>
+
+<Section Label="Functors:Operations">
+<Heading>Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

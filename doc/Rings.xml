@@ -1,0 +1,39 @@
+<!-- 
+
+  Rings.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Rings">
+<Heading>Rings</Heading>
+
+<Section Label="Rings:Constructors">
+<Heading>Constructors</Heading>
+
+</Section>
+
+<Section Label="Rings:Properties">
+<Heading>Properties</Heading>
+
+</Section>
+
+<Section Label="Rings:Attributes">
+<Heading>Attributes</Heading>
+
+</Section>
+
+<Section Label="Rings:LIRNG">
+<Heading>The Subpackage &LIRNG;</Heading>
+
+</Section>
+
+<Section Label="Rings:Operations">
+<Heading>Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

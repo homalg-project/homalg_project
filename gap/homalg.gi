@@ -633,3 +633,24 @@ InstallGlobalFunction( homalgMode,
     fi;
     
 end );
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( ExamplesForHomalg,
+        [  ], 0,
+        
+  function( )
+    
+    if LoadPackage( "ExamplesForHomalg" ) = true then
+        ExamplesForHomalg( );
+    else
+        return fail;
+    fi;
+    
+end );
+

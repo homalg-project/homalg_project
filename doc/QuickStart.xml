@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  QuickStart.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="QuickStart">
+<Heading>Quick Start</Heading>
+
+<Section Label="QuickStart:LoadPackage(ExamplesForHomalg)">
+<Heading>LoadPackage( "&ExamplesForHomalg;" );</Heading>
+
+<Subsection Label="QuickStart:ExamplesForHomalg()">
+  <Heading>ExamplesForHomalg();</Heading>
+
+</Subsection>
+
+<Subsection Label="QuickStart:Example">
+  <Heading>Your First Example</Heading>
+
+</Subsection>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

@@ -189,5 +189,8 @@ DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "homalgLaTeX",
-        [ IsObject ] ); 
+        [ IsObject ] );
+
+DeclareOperation( "ExamplesForHomalg",
+        [ ] );
 

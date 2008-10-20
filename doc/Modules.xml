@@ -1,0 +1,39 @@
+<!-- 
+
+  Modules.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Modules">
+<Heading>Modules</Heading>
+
+<Section Label="Modules:Constructors">
+<Heading>Constructors</Heading>
+
+</Section>
+
+<Section Label="Modules:Properties">
+<Heading>Properties</Heading>
+
+</Section>
+
+<Section Label="Modules:Attributes">
+<Heading>Attributes</Heading>
+
+</Section>
+
+<Section Label="Modules:LIMOD">
+<Heading>The Subpackage &LIMOD;</Heading>
+
+</Section>
+
+<Section Label="Modules:Operations">
+<Heading>Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

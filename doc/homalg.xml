@@ -5,6 +5,12 @@
 	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
 	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
+	  <!ENTITY COLEM "<Package>COLEM</Package>">
+	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
+	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
+	  <!ENTITY LICPX "<Package>LICPX</Package>">
 	  <!ENTITY Gauss "<Package>Gauss</Package>">
 	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
 	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
@@ -36,6 +42,14 @@
 <Body>
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
+<#Include SYSTEM "Rings.xml">
+<#Include SYSTEM "Matrices.xml">
+<#Include SYSTEM "Modules.xml">
+<#Include SYSTEM "Maps.xml">
+<#Include SYSTEM "Complexes.xml">
+<#Include SYSTEM "ChainMaps.xml">
+<#Include SYSTEM "SpectralSequences.xml">
+<#Include SYSTEM "Functors.xml">
 <#Include SYSTEM "examples.xml">
 </Body>
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Generators.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Generators">
+<Heading>Generators</Heading>
+
+<Section Label="Generators:Constructors">
+<Heading>Generators: Constructors</Heading>
+
+</Section>
+
+<Section Label="Generators:Properties">
+<Heading>Generators: Properties</Heading>
+
+</Section>
+
+<Section Label="Generators:Attributes">
+<Heading>Generators: Attributes</Heading>
+
+</Section>
+
+<Section Label="Generators:LIMOD">
+<Heading>&LIMOD;: Logical Implications for Generators</Heading>
+
+</Section>
+
+<Section Label="Generators:Operations">
+<Heading>Generators: Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

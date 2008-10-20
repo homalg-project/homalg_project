@@ -1,0 +1,43 @@
+<!-- 
+
+  title.xml             homalg package documentation           Mohamed Barakat
+
+         Copyright (C) 2007, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the chapter of the documentation describing the installation.
+
+-->
+
+<TitlePage>
+    <Title>The &homalg; Package Manual</Title>
+    <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
+    <Version>
+      Version <#Include SYSTEM "../VERSION">
+    </Version>
+    <Author>Mohamed Barakat
+<Address>
+Lehrstuhl B für Mathematik,
+RWTH Aachen,
+Templergraben 64,
+52056 Aachen,
+Germany
+</Address>
+    <Email>mohamed.barakat@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+    </Author>
+    <Date>August 2008</Date>
+
+<Copyright>
+  &copyright; 2007-2008 by Mohamed Barakat<P/>
+
+  This package may be distributed under the terms and conditions of the
+  GNU Public License Version 2.
+</Copyright>
+
+<Acknowledgements>
+  This manual was created using the GAPDoc package of Max Neuhöffer
+  and Frank Lübeck.
+</Acknowledgements>
+
+</TitlePage>
+

@@ -1,10 +1,6 @@
 LoadPackage( "homalg" );
 
-R := HomalgRingOfIntegers( );
-
-rel := HomalgRelationsForLeftModule( [ 2^8 ], R );
-
-R := R / rel;
+R := HomalgRingOfIntegers( ) / 2^8;
 
 M := LeftPresentation( [ 2^5 ], R );
 _M := LeftPresentation( [ 2^3 ], R );

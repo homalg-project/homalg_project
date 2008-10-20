@@ -1,0 +1,34 @@
+<!-- 
+
+  ChainMaps.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="ChainMaps">
+<Heading>Chain Maps</Heading>
+
+<Section Label="ChainMaps:Constructors">
+<Heading>Constructors</Heading>
+
+</Section>
+
+<Section Label="ChainMaps:Properties">
+<Heading>Properties</Heading>
+
+</Section>
+
+<Section Label="ChainMaps:Attributes">
+<Heading>Attributes</Heading>
+
+</Section>
+
+<Section Label="ChainMaps:Operations">
+<Heading>Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

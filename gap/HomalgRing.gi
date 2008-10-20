@@ -263,18 +263,20 @@ InstallMethod( RingName,
         [ IsHomalgRing and HasRingRelations ],
         
   function( R )
-    local ring_rel, name;
+    local ring_rel, l, name;
     
     ring_rel := RingRelations( R );
     ring_rel := MatrixOfRelations( ring_rel );
     ring_rel := EntriesOfHomalgMatrix( ring_rel );
     
+    l := Length( ring_rel );
+    
     if ring_rel = [ ] then
         TryNextMethod( );
     elif IsHomalgExternalRingRep( R ) then
-        ring_rel := Flat( List( ring_rel, a -> Flat( [ " ", Name( a ) ] ) ) );
+        ring_rel := Concatenation( Flat( List( ring_rel{[ 1 .. l - 1 ]}, a -> Concatenation( " ", Name( a ), "," ) ) ), Concatenation( " ", Name( ring_rel[l] ) ) );
     else
-        ring_rel := Flat( List( ring_rel, a -> Flat( [ " ", String( a ) ] ) ) );
+        ring_rel := Concatenation( Flat( List( ring_rel{[ 1 .. l - 1 ]}, a -> Concatenation( " ", String( a ), "," ) ) ), Concatenation( " ", String( ring_rel[l] ) ) );
     fi;
     
     name := RingName( AmbientRing( R ) );
@@ -352,77 +354,6 @@ end );
 ##
 InstallMethod( SetRingProperties,
         "constructor",
-        [ IsHomalgRing and IsFieldForHomalg, IsInt ],
-        
-  function( R, c )
-    local RP;
-    
-    RP := homalgTable( R );
-    
-    SetCharacteristic( R, c );
-    
-    if IsBound( RP!.RowRankOfMatrixOverDomain ) then
-        RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
-    fi;
-    
-    if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
-        RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
-    fi;
-    
-    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
-    
-end );
-
-##
-InstallMethod( SetRingProperties,
-        "constructor",
-        [ IsHomalgRing and IsResidueClassRingOfTheIntegers, IsInt ],
-        
-  function( R, c )
-    local RP, powers;
-    
-    RP := homalgTable( R );
-    
-    SetCharacteristic( R, c );
-    
-    if c = 0 then
-        SetIsIntegersForHomalg( R, true );
-        SetContainsAField( R, false );
-        SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
-    elif IsPrime( c ) then
-        SetIsFieldForHomalg( R, true );
-    else
-        SetIsSemiLocalRing( R, true );
-        SetIsIntegralDomain( R, false );
-        powers := List( Collected( FactorsInt( c ) ), a -> a[2] );
-        if Set( powers ) = [ 1 ] then
-            SetIsSemiSimpleRing( R, true );
-        else
-            SetIsRegular( R, false );
-            if Length( powers ) = 1 then
-                SetIsLocalRing( R, true );
-            fi;
-        fi;
-        SetKrullDimension( R, 0 );
-    fi;
-    
-    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-        if IsBound( RP!.RowRankOfMatrixOverDomain ) then
-            RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
-        fi;
-        
-        if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
-            RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
-        fi;
-    fi;
-    
-    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
-    
-end );
-
-##
-InstallMethod( SetRingProperties,
-        "constructor",
         [ IsHomalgRing and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
   function( S, R, var )
@@ -431,7 +362,9 @@ InstallMethod( SetRingProperties,
     d := Length( var );
     
     SetCoefficientsRing( S, R );
-    SetCharacteristic( S, Characteristic( R ) );
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        SetCharacteristic( S, Characteristic( R ) );
+    fi;
     SetIsCommutative( S, true );
     SetIndeterminatesOfPolynomialRing( S, var );
     if HasGlobalDimension( R ) then
@@ -483,6 +416,78 @@ InstallMethod( SetRingProperties,
     fi;
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "constructor",
+        [ IsHomalgRing and IsResidueClassRingOfTheIntegers, IsInt ],
+        
+  function( R, c )
+    local RP, powers;
+    
+    RP := homalgTable( R );
+    
+    SetCharacteristic( R, c );
+    
+    if c = 0 then
+        SetIsIntegersForHomalg( R, true );
+        SetContainsAField( R, false );
+        SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
+    elif IsPrime( c ) then
+        SetIsFieldForHomalg( R, true );
+        SetRingProperties( R, c );
+    else
+        SetIsSemiLocalRing( R, true );
+        SetIsIntegralDomain( R, false );
+        powers := List( Collected( FactorsInt( c ) ), a -> a[2] );
+        if Set( powers ) = [ 1 ] then
+            SetIsSemiSimpleRing( R, true );
+        else
+            SetIsRegular( R, false );
+            if Length( powers ) = 1 then
+                SetIsLocalRing( R, true );
+            fi;
+        fi;
+        SetKrullDimension( R, 0 );
+    fi;
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        if IsBound( RP!.RowRankOfMatrixOverDomain ) then
+            RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
+        fi;
+        
+        if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
+            RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
+        fi;
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "constructor",
+        [ IsHomalgRing and IsFieldForHomalg, IsInt ],
+        
+  function( R, c )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    SetCharacteristic( R, c );
+    
+    if IsBound( RP!.RowRankOfMatrixOverDomain ) then
+        RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
+    fi;
+    
+    if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
+        RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
     
 end );
 
@@ -559,17 +564,8 @@ InstallGlobalFunction( CreateHomalgRing,
         od;
     fi;
     
-    if IsRing( r ) then
-        SetCharacteristic( homalg_ring, Characteristic( r ) );
-    fi;
-    
-    if HasIsField( r ) then
-        SetIsFieldForHomalg( homalg_ring, IsField( r ) );
-    fi;
-    
-    if IsIntegers( r ) then
-        SetIsIntegersForHomalg( homalg_ring, true );
-    fi;
+    ## do not invoke SetRingProperties here, since I might be
+    ## the first step of creating a residue class ring!
     
     ## distinguished ring elements like 0, 1, sometimes also -1:
     for c in NamesOfComponents( table ) do
@@ -639,42 +635,33 @@ InstallGlobalFunction( CreateHomalgRing,
     
 end );
 
-##
-InstallMethod( \/,
-        "for homalg rings",
-        [ IsHomalgRing, IsHomalgRelations ],
-        
-  function( R, ring_rel )
-    local S, mat, rel;
-    
-    S := CallFuncList( CreateHomalgRing, R!.ConstructorArguments );
-    
-    mat := MatrixOfRelations( ring_rel );
-    
-    mat := HomalgMatrix( mat, S );
-    
-    if IsHomalgRelationsOfLeftModule( ring_rel ) then
-        rel := HomalgRelationsForLeftModule( mat );
-    else
-        rel := HomalgRelationsForRightModule( mat );
-    fi;
-    
-    SetRingRelations( S, rel );
-    
-    if HasRingRelations( R ) then
-        SetAmbientRing( S, AmbientRing( R ) );
-    else
-        SetAmbientRing( S, R );
-    fi;
-    
-    return S;
-    
-end );
-
+##  <#GAPDoc Label="HomalgRingOfIntegers">
+##  <ManSection>
+##    <Func Arg="" Name="HomalgRingOfIntegers"/>
+##    <Returns>the ring of integers <M>&ZZ;</M> for &homalg;</Returns>
+##    <Func Arg="c" Name="HomalgRingOfIntegers" Label="constructor for the integers and its residue class rings"/>
+##    <Returns>the ring of integers modulo <A>c</A> for &homalg;</Returns>
+##    <Description>
+##      The no-argument form returns the ring of integers for &homalg;.<P/>
+##      The one-argument form accepts an integer <A>c</A> and returns
+##      the ring <M>&ZZ; / c </M> for &homalg;:
+##      <List>
+##        <Item><A>c</A><M>=0</M> defaults to <M>&ZZ;</M></Item>
+##        <Item>if <A>c</A> is a prime power then the package &GaussForHomalg; is loaded (if it fails to load an error is issued)</Item>
+##        <Item>otherwise, the residue class ring constructor <C>/</C> is invoked</Item>
+##      </List>
+##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.<P/>
+##      If for some reason you don't want to use the &GaussForHomalg; package (maybe because you didn't install it), then
+##      use<P/>
+##      <C>HomalgRingOfIntegers</C>() <C>/</C> <A>c</A>;<P/>
+##      but note that the computations will then be considerably slower.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgRingOfIntegers,
   function( arg )
-    local nargs, R, c;
+    local nargs, R, c, rel;
     
     nargs := Length( arg );
     
@@ -682,14 +669,20 @@ InstallGlobalFunction( HomalgRingOfIntegers,
         c := 0;
         R := CreateHomalgRing( Integers );
     elif IsInt( arg[1] ) then
-        if LoadPackage( "GaussForHomalg" ) <> true then
-            Error( "the package GaussForHomalg failed to load\n" );
-        fi;
         c := arg[1];
-        if IsPrime( c ) then
-            R := CreateHomalgRing( GF( c ) );
+        if Length( Collected( FactorsInt( c ) ) ) = 1 then
+            if LoadPackage( "GaussForHomalg" ) <> true then
+                Error( "the package GaussForHomalg failed to load\n" );
+            fi;
+            if IsPrime( c ) then
+                R := CreateHomalgRing( GF( c ) );
+            else
+                R := CreateHomalgRing( ZmodnZ( c ) );
+            fi;
         else
-            R := CreateHomalgRing( ZmodnZ( c ) );
+            R := HomalgRingOfIntegers( );
+            rel := HomalgRelationsForLeftModule( [ c ], R );
+            return R / rel;
         fi;
     else
         Error( "the first argument must be an integer\n" );
@@ -703,6 +696,16 @@ InstallGlobalFunction( HomalgRingOfIntegers,
     
 end );
 
+##  <#GAPDoc Label="HomalgFieldOfRationals">
+##  <ManSection>
+##    <Func Arg="" Name="HomalgFieldOfRationals" Label="constructor for the field of rationals"/>
+##    <Returns>the field of rationals <M>&QQ;</M> for &homalg;</Returns>
+##    <Description>
+##      The package &GaussForHomalg; is loaded and the field of rationals is returned. If &GaussForHomalg; fails to load an error is issued.<P/>
+##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgFieldOfRationals,
   function( arg )
@@ -719,6 +722,133 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     SetRingProperties( R, 0 );
     
     return R;
+    
+end );
+
+##  <#GAPDoc Label="ResidueClassRing">
+##  <ManSection>
+##    <Oper Arg="R, ring_rel" Name="/" Label="homalg constructor for residue class rings"/>
+##    <Returns>the residue class ring <A>R</A><M>/</M><A>ring_rel</A></Returns>
+##    <Description>
+##      This is the constructor for residue class rings in &homalg;.
+##      <A>ring_rel</A> might be:
+##      <List>
+##        <Item>a set of left resp. right relations on one generator</Item>
+##        <Item>a list of ring elements of <A>R</A></Item>
+##        <Item>a ring element of <A>R</A></Item>
+##      </List>
+##      In the first case the relations should generate the ideal of relations
+##      as left resp. right ideal generators. If <A>ring_rel</A> is not a set
+##      of relations, a left set of relations is constructed.<P/>
+##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> Display( ZZ );
+##  Z
+##  gap> Z256 := ZZ / 2^8;
+##  <A homalg internal ring>
+##  gap> Display( Z256 );
+##  Z/( 256 )
+##  gap> Z2 := Z256 / 6;
+##  <A homalg internal ring>
+##  gap> Display( Z2 );
+##  Z/( 2 )
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( \/,
+        "for homalg rings",
+        [ IsHomalgRing, IsHomalgRelations ],
+        
+  function( R, ring_rel )
+    local S, mat, rel, left, rel_old, mat_old, left_old, c;
+    
+    S := CallFuncList( CreateHomalgRing, R!.ConstructorArguments );
+    
+    mat := MatrixOfRelations( ring_rel );
+    
+    mat := HomalgMatrix( mat, S );
+    
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
+        rel := HomalgRelationsForLeftModule( mat );
+        left := true;
+    else
+        rel := HomalgRelationsForRightModule( mat );
+        left := false;
+    fi;
+    
+    ## merge the new relations with the relations of the ambient ring
+    if HasRingRelations( R ) then
+        SetAmbientRing( S, AmbientRing( R ) );
+        rel_old := RingRelations( R );
+        mat_old := MatrixOfRelations( rel_old );
+        mat_old := HomalgMatrix( mat_old, S );
+        if IsHomalgRelationsOfLeftModule( rel_old ) then
+            rel_old := HomalgRelationsForLeftModule( mat_old );
+            left_old := true;
+        else
+            rel_old := HomalgRelationsForRightModule( mat_old );
+            left_old := false;
+        fi;
+        if left <> left_old then
+            Error( "the relations of the ambient ring and the given relations must both be either left or right relations\n" );
+        fi;
+        rel := BasisOfModule( UnionOfRelations( rel_old, rel ) );
+    else
+        SetAmbientRing( S, R );
+    fi;
+    
+    SetRingRelations( S, rel );
+    
+    ## residue class rings of the integers
+    if HasIsResidueClassRingOfTheIntegers( R ) and
+       IsResidueClassRingOfTheIntegers( R ) then
+        SetIsResidueClassRingOfTheIntegers( S, true );
+        c := RingRelations( S );
+        c := MatrixOfRelations( c );
+        c := EntriesOfHomalgMatrix( c );
+        if Length( c ) = 1 then
+            c := c[1];
+            if IsHomalgExternalRingElementRep( c ) and
+               IsInt( homalgPointer( c ) ) then
+                c := homalgPointer( c );
+            fi;
+        fi;
+        if IsInt( c ) then
+            SetRingProperties( S, c );
+        fi;
+    fi;
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg rings",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, ring_rel )
+    
+    if not ForAll( ring_rel, IsRingElement ) then
+        TryNextMethod( );
+    fi;
+    
+    return R / HomalgRelationsForLeftModule( HomalgMatrix( ring_rel, R ) );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg rings",
+        [ IsHomalgRing, IsRingElement ],
+        
+  function( R, ring_rel )
+    
+    return R / [ ring_rel ];
     
 end );
 

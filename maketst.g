@@ -11,7 +11,7 @@ list := [ "../gap/HomalgRing.gi",
           "../gap/HomalgMatrix.gi",
           "../gap/HomalgModule.gi" ];
 
-MakeGAPDocDoc( "doc", "homalg", list, "homalg" );
+TestManualExamples( "doc", "homalg.xml", list );
 
 GAPDocManualLab("homalg");
 

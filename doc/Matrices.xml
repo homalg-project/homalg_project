@@ -1,0 +1,44 @@
+<!-- 
+
+  Matrices.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Matrices">
+<Heading>Matrices</Heading>
+
+<Section Label="Matrices:Constructors">
+<Heading>Constructors</Heading>
+
+</Section>
+
+<Section Label="Matrices:Properties">
+<Heading>Properties</Heading>
+
+</Section>
+
+<Section Label="Matrices:Attributes">
+<Heading>Attributes</Heading>
+
+</Section>
+
+<Section Label="Matrices:LIMAT">
+<Heading>The Subpackage &LIMAT;</Heading>
+
+</Section>
+
+<Section Label="Matrices:COLEM">
+<Heading>The Subpackage &COLEM; and Lazy Evaluation</Heading>
+
+</Section>
+
+<Section Label="Matrices:Operations">
+<Heading>Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

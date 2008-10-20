@@ -26,13 +26,13 @@ Subtitle := "homalg - a meta package for homological algebra",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.10.15",
+Version := "2008.10.17",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "15/10/2008",
+Date := "17/10/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -284,7 +284,10 @@ BannerString := Concatenation(
 #        " (", ~.Persons[2].WWWHome, ")\n",
 #  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
 #        " (", ~.Persons[3].WWWHome, ")\n",
-  "For help, type: ?homalg package \n",
+  "Type:\n",
+  "  ?homalg:                   ## for the contents of the manual\n",
+  "  ?homalg:x                  ## for chapter/section/topic x\n",
+  "  ExamplesForHomalg();       ## for a guide to create a ring\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 

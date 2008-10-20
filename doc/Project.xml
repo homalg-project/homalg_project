@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Project.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="homalg Project">
+<Heading>The &homalg; Project</Heading>
+
+<Section Label="ExmaplesForHomalg">
+<Heading>The Package &ExamplesForHomalg;</Heading>
+
+</Section>
+
+<Section Label="alexander">
+<Heading>The Package &alexander;</Heading>
+
+</Section>
+
+<Section Label="GaussForHomalg">
+<Heading>The Package &GaussForHomalg;</Heading>
+
+</Section>
+
+<Section Label="IO_ForHomalg">
+<Heading>The Package &IO_ForHomalg;</Heading>
+
+</Section>
+
+<Section Label="RingsForHomalg">
+<Heading>The Package &RingsForHomalg;</Heading>
+
+</Section>
+
+<Section Label="SCO">
+<Heading>The Package &SCO;</Heading>
+
+</Section>
+
+<Section Label="LessGenerators">
+<Heading>The Package &LessGenerators;</Heading>
+
+</Section>
+
+<Section Label="Yoneda">
+<Heading>The Package &Yoneda;</Heading>
+
+</Section>
+
+<Section Label="...">
+<Heading>The Package ...</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
+
