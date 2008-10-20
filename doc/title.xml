@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   title.xml             homalg package documentation           Mohamed Barakat
@@ -7,9 +9,8 @@
 This is the chapter of the documentation describing the installation.
 
 -->
-
 <TitlePage>
-    <Title>The &homalg; Package Manual</Title>
+    <Title>&homalg;</Title>
     <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
     <Version>
       Version <#Include SYSTEM "../VERSION">
@@ -23,19 +24,72 @@ Templergraben 64,
 Germany
 </Address>
     <Email>mohamed.barakat@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+    <Homepage>wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
     </Author>
-    <Date>August 2008</Date>
+    <Date>October 2008</Date>
 
 <Copyright>
-  &copyright; 2007-2008 by Mohamed Barakat<P/>
+  &copyright; 2007-2008 by Mohamed Barakat <P/>
 
   This package may be distributed under the terms and conditions of the
   GNU Public License Version 2.
 </Copyright>
 
 <Acknowledgements>
-  This manual was created using the GAPDoc package of Max Neuhöffer
+  <Alt Not="Text"><URL Text="Max Neunhöffer">
+  www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
+  <Alt Only="Text">Max Neunhöffer</Alt> not only taught me how object
+  oriented programming works in &GAP4;, but also to what extent it is
+  unique as a programming language for complex mathematical problems
+  (&see; <Ref Sect="WhyGAP4"/>). The slides (in German) to his talk in
+  our seminar on 30.10.2006 can be found on
+  <URL Text="his homepage">
+  www-groups.mcs.st-and.ac.uk/~neunhoef/Publications/talks.html</URL>. <P/>
+
+  He, <Alt Not="Text"><URL Text="Frank Lübeck">
+  www.math.rwth-aachen.de/~Frank.Luebeck/</URL></Alt><Alt Only="Text">Frank Lübeck</Alt>, and
+  <Alt Not="Text"><URL Text="Thomas Breuer">
+  www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Alt>
+  <Alt Only="Text">Thomas Breuer</Alt> patiently answered trillions of
+  specific questions I was too lazy to look up in the
+  excellent <URL Text="GAP4 programming tutorial">
+  www.gap-system.org/Doc/manuals.html</URL>. Without their continuous
+  help and advise, not only this package, but the whole &homalg;
+  project would have remained on my todo list. <P/>
+ 
+  A lot of ideas that make up this package and the whole &homalg;
+  project came out of intensive discussions with Daniel Robertz during
+  our early collaboration, where we developed our philosophy for a
+  meta package for homological algebra and implemented it in
+  &Maple;. <P/>
+  
+  In the fall of 2007 I began collaborating with Simon Görtzen to
+  further pursue and extend these ideas preparing the transition to
+  &GAP4;. With his help &homalg; became an extendable multi-package
+  project. <P/>
+  
+  My gratitude to all with whom I worked together to develop extension
+  packages and those who developed their own packages within the
+  &homalg; project (&see; <Ref Sect="homalg Project"/>). Without their
+  contributions the package &homalg; would have remained a core
+  without a body:
+  
+  <List>
+    <Item>Barbara Bremer</Item>
+    <Item><URL Text="Thomas Breuer">www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Item>
+    <Item><URL Text="Anna Fabiańska">wwwb.math.rwth-aachen.de/Mitarbeiter/fabianska.html</URL></Item>
+    <Item><URL Text="Simon Görtzen">wwwb.math.rwth-aachen.de/goertzen/</URL></Item>
+    <Item><URL Text="Markus Kirschmer">www.math.rwth-aachen.de/~Markus.Kirschmer/</URL></Item>
+    <Item><URL Text="Markus Lange-Hegermann">wwwb.math.rwth-aachen.de/~markus/</URL></Item>
+    <Item><URL Text="Frank Lübeck">www.math.rwth-aachen.de/~Frank.Luebeck/</URL></Item>
+    <Item><URL Text="Max Neunhöffer">www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Item>
+    <Item><URL Text="Daniel Robertz">wwwb.math.rwth-aachen.de/~daniel/</URL></Item>
+  </List>
+  
+  Last but not least, thanks to Miriam, Josef, Jonas, and Irene for
+  the endless love and support. <P/>
+  
+  This manual was created using the GAPDoc package of Max Neunhöffer
   and Frank Lübeck.
 </Acknowledgements>
 

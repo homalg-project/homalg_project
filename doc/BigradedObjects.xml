@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   BigradedObjects.xml            homalg package documentation            Mohamed Barakat
@@ -10,22 +12,22 @@
 <Heading>Bigraded Objects</Heading>
 
 <Section Label="BigradedObjects:Constructors">
-<Heading>Constructors</Heading>
+<Heading>Bigraded Objects: Constructors</Heading>
 
 </Section>
 
 <Section Label="BigradedObjects:Properties">
-<Heading>Properties</Heading>
+<Heading>Bigraded Objects: Properties</Heading>
 
 </Section>
 
 <Section Label="BigradedObjects:Attributes">
-<Heading>Attributes</Heading>
+<Heading>Bigraded Objects: Attributes</Heading>
 
 </Section>
 
 <Section Label="BigradedObjects:Operations">
-<Heading>Operations and Functions</Heading>
+<Heading>Bigraded Objects: Operations and Functions</Heading>
 
 </Section>
 

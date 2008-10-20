@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   Matrices.xml            homalg package documentation            Mohamed Barakat
@@ -10,32 +12,32 @@
 <Heading>Matrices</Heading>
 
 <Section Label="Matrices:Constructors">
-<Heading>Constructors</Heading>
+<Heading>Matrices: Constructors</Heading>
 
 </Section>
 
 <Section Label="Matrices:Properties">
-<Heading>Properties</Heading>
+<Heading>Matrices: Properties</Heading>
 
 </Section>
 
 <Section Label="Matrices:Attributes">
-<Heading>Attributes</Heading>
+<Heading>Matrices: Attributes</Heading>
 
 </Section>
 
 <Section Label="Matrices:LIMAT">
-<Heading>The Subpackage &LIMAT;</Heading>
+<Heading>&LIMAT;: Logical Implications for Matrices</Heading>
 
 </Section>
 
 <Section Label="Matrices:COLEM">
-<Heading>The Subpackage &COLEM; and Lazy Evaluation</Heading>
+<Heading>&COLEM;: Clever Operations for Lazy Evaluated Matrices</Heading>
 
 </Section>
 
 <Section Label="Matrices:Operations">
-<Heading>Operations and Functions</Heading>
+<Heading>Matrices: Operations and Functions</Heading>
 
 </Section>
 

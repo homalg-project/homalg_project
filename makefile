@@ -1,7 +1,11 @@
+all: doc test
+
 doc: doc/manual.six
 
-doc/manual.six: doc/homalg.xml doc/title.xml \
+doc/manual.six: makedoc.g maketst.g \
+		doc/homalg.xml doc/title.xml \
 		doc/intro.xml doc/install.xml \
+		doc/homalg.bib gap/*.gd gap/*.gi \
 		doc/Rings.xml doc/Matrices.xml \
 		doc/Relations.xml doc/Generators.xml \
 		doc/Modules.xml doc/Maps.xml \
@@ -10,13 +14,12 @@ doc/manual.six: doc/homalg.xml doc/title.xml \
 		doc/SpectralSequences.xml doc/Functors.xml \
 		doc/examples.xml doc/Project.xml \
 		doc/appendix.xml VERSION
-		(cd doc ; gapL ../bin/bib.g );
 	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
-tst:	doc
+test:	doc
 	gapL maketst.g
 
 archive: doc

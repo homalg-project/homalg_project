@@ -4,6 +4,7 @@
 	  [
 	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
 	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
+	  <!ENTITY Maple '<Package>Maple</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
@@ -11,6 +12,8 @@
 	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
 	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
 	  <!ENTITY LICPX "<Package>LICPX</Package>">
+	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
+	  <!ENTITY alexander "<Package>alexander</Package>">
 	  <!ENTITY Gauss "<Package>Gauss</Package>">
 	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
 	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
@@ -18,7 +21,6 @@
 	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
 	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
 	  <!ENTITY SCO "<Package>SCO</Package>">
-	  <!ENTITY alexander "<Package>alexander</Package>">
 	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
 	  ]
 	  >
@@ -38,20 +40,31 @@
 <!--  TableOfContents  . . . . . .  generate a table of contents   -->
 <TableOfContents/>
 
-<!--  The only chapter of the book  --> 
+<!--  chapters of the book  --> 
 <Body>
+
+<Index>&homalg;</Index>
+
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
+<#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "Rings.xml">
 <#Include SYSTEM "Matrices.xml">
+<#Include SYSTEM "Relations.xml">
+<#Include SYSTEM "Generators.xml">
 <#Include SYSTEM "Modules.xml">
 <#Include SYSTEM "Maps.xml">
 <#Include SYSTEM "Complexes.xml">
 <#Include SYSTEM "ChainMaps.xml">
+<#Include SYSTEM "Bicomplexes.xml">
+<#Include SYSTEM "BigradedObjects.xml">
 <#Include SYSTEM "SpectralSequences.xml">
 <#Include SYSTEM "Functors.xml">
 <#Include SYSTEM "examples.xml">
+<#Include SYSTEM "Project.xml">
 </Body>
+
+<#Include SYSTEM "appendix.xml">
 
 <Bibliography Databases="homalgBib.xml"/>
 

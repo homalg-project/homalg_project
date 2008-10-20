@@ -999,7 +999,7 @@ InstallMethod( NonZeroGenerators,
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterPresentation) (incomplete)
+InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterPresentation)
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         

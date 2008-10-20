@@ -25,13 +25,15 @@ ReadPackage( "homalg", "gap/HomalgRelations.gd" );
 ReadPackage( "homalg", "gap/SetsOfRelations.gd" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gd" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gd" );
-ReadPackage( "homalg", "gap/HomalgFiltration.gd" );
 
 ## modules
 ReadPackage( "homalg", "gap/HomalgModule.gd" );
 
 ## morphisms
 ReadPackage( "homalg", "gap/HomalgMap.gd" );
+
+## filtrations
+ReadPackage( "homalg", "gap/HomalgFiltration.gd" );
 
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gd" );

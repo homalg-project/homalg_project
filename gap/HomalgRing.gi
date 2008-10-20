@@ -637,12 +637,12 @@ end );
 
 ##  <#GAPDoc Label="HomalgRingOfIntegers">
 ##  <ManSection>
-##    <Func Arg="" Name="HomalgRingOfIntegers"/>
+##    <Func Arg="" Name="HomalgRingOfIntegers" Label="constructor for the integers"/>
 ##    <Returns>the ring of integers <M>&ZZ;</M> for &homalg;</Returns>
-##    <Func Arg="c" Name="HomalgRingOfIntegers" Label="constructor for the integers and its residue class rings"/>
+##    <Func Arg="c" Name="HomalgRingOfIntegers" Label="constructor for the residue class rings of the integers"/>
 ##    <Returns>the ring of integers modulo <A>c</A> for &homalg;</Returns>
 ##    <Description>
-##      The no-argument form returns the ring of integers for &homalg;.<P/>
+##      The no-argument form returns the ring of integers for &homalg;. <P/>
 ##      The one-argument form accepts an integer <A>c</A> and returns
 ##      the ring <M>&ZZ; / c </M> for &homalg;:
 ##      <List>
@@ -650,10 +650,9 @@ end );
 ##        <Item>if <A>c</A> is a prime power then the package &GaussForHomalg; is loaded (if it fails to load an error is issued)</Item>
 ##        <Item>otherwise, the residue class ring constructor <C>/</C> is invoked</Item>
 ##      </List>
-##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.<P/>
-##      If for some reason you don't want to use the &GaussForHomalg; package (maybe because you didn't install it), then
-##      use<P/>
-##      <C>HomalgRingOfIntegers</C>() <C>/</C> <A>c</A>;<P/>
+##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties. <P/>
+##      If for some reason you don't want to use the &GaussForHomalg; package (maybe because you didn't install it), then use<P/>
+##      <C>HomalgRingOfIntegers</C>() <C>/</C> <A>c</A>; <P/>
 ##      but note that the computations will then be considerably slower.
 ##    </Description>
 ##  </ManSection>
@@ -701,7 +700,7 @@ end );
 ##    <Func Arg="" Name="HomalgFieldOfRationals" Label="constructor for the field of rationals"/>
 ##    <Returns>the field of rationals <M>&QQ;</M> for &homalg;</Returns>
 ##    <Description>
-##      The package &GaussForHomalg; is loaded and the field of rationals is returned. If &GaussForHomalg; fails to load an error is issued.<P/>
+##      The package &GaussForHomalg; is loaded and the field of rationals is returned. If &GaussForHomalg; fails to load an error is issued. <P/>
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
 ##    </Description>
 ##  </ManSection>
@@ -727,7 +726,7 @@ end );
 
 ##  <#GAPDoc Label="ResidueClassRing">
 ##  <ManSection>
-##    <Oper Arg="R, ring_rel" Name="/" Label="homalg constructor for residue class rings"/>
+##    <Oper Arg="R, ring_rel" Name="/" Label="constructor for residue class rings"/>
 ##    <Returns>the residue class ring <A>R</A><M>/</M><A>ring_rel</A></Returns>
 ##    <Description>
 ##      This is the constructor for residue class rings in &homalg;.
@@ -739,7 +738,7 @@ end );
 ##      </List>
 ##      In the first case the relations should generate the ideal of relations
 ##      as left resp. right ideal generators. If <A>ring_rel</A> is not a set
-##      of relations, a left set of relations is constructed.<P/>
+##      of relations, a left set of relations is constructed. <P/>
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );

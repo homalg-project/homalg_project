@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   Rings.xml            homalg package documentation            Mohamed Barakat
@@ -10,27 +12,135 @@
 <Heading>Rings</Heading>
 
 <Section Label="Rings:Constructors">
-<Heading>Constructors</Heading>
+
+<Heading>Rings: Constructors</Heading>
+
+This section describes how to construct rings for use with &homalg;,
+which exploit the &GAP4;-built-in abilities to perform the necessary
+ring operations. By this we also mean necessary matrix operations over
+such rings. For the purposes of &homalg; only the ring of integers is
+properly supported in &GAP4;. The &GAP4; extension packages &Gauss;
+and &GaussForHomalg; extend these built-in abilities to operations
+with sparse matrices over the ring <M>&ZZ; / p^n</M> for <M>p</M>
+prime and <M>n</M> positive.<P/>
+
+If a ring <M>R</M> is supported in &homalg; any of its residue class
+rings <M>R/I</M> is supported as well, provided the ideal <M>I</M> of
+relations admits a finite set of generators as a left resp. right
+ideal (&see; <Ref Oper="/"
+Label="constructor for residue class rings" Style="Number"/>).
+This is immediate for commutative noetherian rings.
+
+<#Include Label="HomalgRingOfIntegers">
+<#Include Label="HomalgFieldOfRationals">
+<#Include Label="ResidueClassRing">
 
 </Section>
 
 <Section Label="Rings:Properties">
-<Heading>Properties</Heading>
+<Heading>Rings: Properties</Heading>
+
+The following properties are declared for &homalg; rings. Note that
+(apart from so-called true and immediate methods (&see;
+<Ref Sect="Rings:LIRNG"/>)) there are no methods installed for ring
+properties. This means that if the value of the ring
+property <C>Prop</C> is not set for a &homalg; ring <A>R</A>, then
+<P/>
+
+<C>Prop</C>( <A>R</A> ); <P/>
+
+will cause an error. One can use the usual &GAP4; mechanism to check if
+the value of the property is set or not <P/>
+
+<C>HasProp</C>( <A>R</A> ); <P/>
+
+If you discover that a specific property <C>Prop</C> missing for a
+certain &homalg; ring <A>R</A> you can add using the usual &GAP4;
+mechanism <P/>
+
+<C>SetProp</C>( <A>R</A>, true ); <P/>
+
+or <P/>
+
+<C>SetProp</C>( <A>R</A>, false ); <P/>
+
+Be very cautious with setting "missing" properties to &homalg;
+objects: If the value you set is mathematically wrong &homalg; might
+very well draw wrong conclusions and might return wrong results.
+
+<#Include Label="ContainsAField">
+<#Include Label="IsRationalsForHomalg">
+<#Include Label="IsFieldForHomalg">
+<#Include Label="IsDivisionRingForHomalg">
+<#Include Label="IsIntegersForHomalg">
+<#Include Label="IsResidueClassRingOfTheIntegers">
+<#Include Label="IsBezoutRing">
+<#Include Label="IsIntegrallyClosedDomain">
+<#Include Label="IsUniqueFactorizationDomain">
+<#Include Label="IsKaplanskyHermite">
+<#Include Label="IsDedekindDomain">
+<#Include Label="IsDiscreteValuationRing">
+<#Include Label="IsFreePolynomialRing">
+<#Include Label="IsWeylRing">
+<#Include Label="IsGlobalDimensionFinite">
+<#Include Label="IsLeftGlobalDimensionFinite">
+<#Include Label="IsRightGlobalDimensionFinite">
+<#Include Label="HasInvariantBasisProperty">
+<#Include Label="HasLeftInvariantBasisProperty">
+<#Include Label="HasRightInvariantBasisProperty">
+<#Include Label="IsLocalRing">
+<#Include Label="IsSemiLocalRing">
+<#Include Label="IsIntegralDomain">
+<#Include Label="IsHereditary">
+<#Include Label="IsLeftHereditary">
+<#Include Label="IsRightHereditary">
+<#Include Label="IsHermite">
+<#Include Label="IsLeftHermite">
+<#Include Label="IsRightHermite">
+<#Include Label="IsNoetherian">
+<#Include Label="IsLeftNoetherian">
+<#Include Label="IsRightNoetherian">
+<#Include Label="IsOreDomain">
+<#Include Label="IsLeftOreDomain">
+<#Include Label="IsRightOreDomain">
+<#Include Label="IsPrincipalIdealRing">
+<#Include Label="IsLeftPrincipalIdealRing">
+<#Include Label="IsRightPrincipalIdealRing">
+<#Include Label="IsRegular">
+<#Include Label="IsFiniteFreePresentationRing">
+<#Include Label="IsLeftFiniteFreePresentationRing">
+<#Include Label="IsRightFiniteFreePresentationRing">
+<#Include Label="IsSimpleRing">
+<#Include Label="IsSemiSimpleRing">
+<#Include Label="BasisAlgorithmRespectsPrincipalIdeals">
 
 </Section>
 
 <Section Label="Rings:Attributes">
-<Heading>Attributes</Heading>
+<Heading>Rings: Attributes</Heading>
+
+<#Include Label="homalgTable">
+<#Include Label="RingRelations">
+<#Include Label="Zero">
+<#Include Label="One">
+<#Include Label="MinusOne">
+<#Include Label="IndeterminateCoordinatesOfRingOfDerivations">
+<#Include Label="IndeterminateDerivationsOfRingOfDerivations">
+<#Include Label="AmbientRing">
+<#Include Label="KrullDimension">
+<#Include Label="LeftGlobalDimension">
+<#Include Label="RightGlobalDimension">
+<#Include Label="GlobalDimension">
 
 </Section>
 
 <Section Label="Rings:LIRNG">
-<Heading>The Subpackage &LIRNG;</Heading>
+<Heading>&LIRNG;: Logical Implications for Rings</Heading>
 
 </Section>
 
 <Section Label="Rings:Operations">
-<Heading>Operations and Functions</Heading>
+<Heading>Rings: Operations and Functions</Heading>
 
 </Section>
 

@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   intro.xml            homalg package documentation            Mohamed Barakat
@@ -14,37 +16,40 @@ behind the package.
 
 <Section Label="philosophy">
 <Heading>Philosophy</Heading>
-<Index>&homalg;</Index>
 
 The package &homalg; is meant to be the first volume of a continuously
-growing opensource book about <URL Text="homological
-algebra">http://en.wikipedia.org/wiki/Homological_algebra</URL>. &homalg;
-is an attempt to translate as much as possible of homological algebra,
-as can be found in books like <Cite Key="ce"/>, <Cite Key="ML"/>,
-<Cite Key="HS"/>, <Cite Key="rot"/>, <Cite Key="weihom"/> and <Cite
-Key="GM"/>, into a language that <E>also</E> a computer can directly
-understand. Yes, ``also'': &homalg; should, as the above mentioned
-books, by a great extent be readable by a human being.  Finding such a
-language was by no means an easy task (&see; <Ref
-Sect="FirstSteps"/>). For the reasons mentioned below (&see; <Ref
-Sect="WhyGAP4"/>) I have chosen &GAP4; as the language of this book
+growing opensource book about
+<URL Text="homological algebra">
+http://en.wikipedia.org/wiki/Homological_algebra</URL>. &homalg; is an
+attempt to translate as much as possible of homological algebra, as
+can be found in books like <Cite Key="ce"/>, <Cite Key="ML"/>,
+<Cite Key="HS"/>, <Cite Key="rot"/>, <Cite Key="weihom"/> and
+<Cite Key="GM"/>, into a language that <E>also</E> a computer can
+directly understand. And like these books, &homalg; should, to a great
+extent, be readable by a mathematician, even without programming
+knowledge. For the reasons mentioned below (&see;
+<Ref Sect="WhyGAP4"/>) I have chosen &GAP4; as the language of this
 project.
-
-
-</Section>
-
-<Section Label="FirstSteps">
-<Heading>First Steps</Heading>
 
 </Section>
 
 <Section Label="WhyGAP4">
 <Heading>Why &GAP4;</Heading>
 
+&GAP4; is an object oriented programming language that suits the needs
+of mathematical programming more than any other language designed by
+computer scientists. This was primarily achieved by the advanced
+<URL Text="method selection">
+http://www.gap-system.org/Manuals/doc/htm/prg/CHAP002.htm</URL>
+techniques that very much resembles the mathematical way of thinking.
+
+&GAP4; was developed by mathematicians who needed to handle complex
+mathematical structures carrying properties and attributes.
+
 </Section>
 
 <Section Label="overview">
-<Heading>Overview over this manual</Heading>
+<Heading>This manual</Heading>
 
 Chapter <Ref Chap="install"/> describes the installation of this package.
 

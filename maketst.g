@@ -7,9 +7,15 @@
 LoadPackage( "homalg" );
 LoadPackage( "GAPDoc" );
 
-list := [ "../gap/HomalgRing.gi",
-          "../gap/HomalgMatrix.gi",
-          "../gap/HomalgModule.gi" ];
+list := [
+         "../gap/HomalgRing.gd",
+         "../gap/HomalgRing.gi",
+         "../gap/LIRNG.gi",
+         "../gap/HomalgMatrix.gd",
+         "../gap/HomalgMatrix.gi",
+         "../gap/HomalgModule.gd",
+         "../gap/HomalgModule.gi"
+         ];
 
 TestManualExamples( "doc", "homalg.xml", list );
 
