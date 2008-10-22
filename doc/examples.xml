@@ -80,7 +80,7 @@ gap> R := HomalgRingOfIntegers();
 <A homalg internal ring>
 ]]></Example>
 
-We are almost there. Lets create some coboundary matrices and compute
+We are almost there. Let us create some coboundary matrices and compute
 their cohomology:
 
 <Example><![CDATA[

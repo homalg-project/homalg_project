@@ -24,7 +24,7 @@ Templergraben 64<Br/>
 (Germany)<Br/>
 </Address>
     <Email>simon.goertzen@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
     </Author>
     <Date>August 2008 </Date>
 
@@ -47,7 +47,7 @@ Templergraben 64<Br/>
   Key="MP_SCO"/>. Many thanks to these two, as well as Mohamed Barakat
   and the Lehrstuhl B für Mathematik at RWTH Aachen University in
   general. It should be noted that &SCO; in its current functionality
-  is dependant on the &GAP; package &homalg; by M. Barakat <Cite
+  is dependent on the &GAP; package &homalg; by M. Barakat <Cite
   Key="homalg"/>, as it relies on &homalg; to do the actual
   computations. This manual was created with the help of the &GAPDoc;
   package by M. Neunhöffer and F. Lübeck.
