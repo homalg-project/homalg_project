@@ -12,7 +12,7 @@ This chapter documents the methods and functions of this package.
 <Chapter Label="methods"><Heading>&GaussForHomalg; methods and
 functions</Heading>
 
-<Section><Heading><F>The Tools</F></Heading>
+<Section><Heading>The Tools</Heading>
 Please note that there are more tool functions you can define,
 &GaussForHomalg; just provides homalg with a sufficient subset. This
 varies with the type and complexity of the rings you want to
@@ -39,7 +39,7 @@ specifically designed for &GaussForHomalg;.
 <#Include Label="ZeroColumns">
 </Section>
 
-<Section><Heading><F>The Basic Functions and table creation</F></Heading>
+<Section><Heading>The Basic Functions and &homalg; table creation</Heading>
 <!-- GaussBasic.gi -->
 <#Include Label="DecideZeroRows">
 <#Include Label="DecideZeroRowsEffectively">
@@ -49,7 +49,7 @@ specifically designed for &GaussForHomalg;.
 <#Include Label="CreateHomalgTable">
 </Section>
 
-<Section><Heading><F>Matrix entry manipulation</F></Heading>
+<Section><Heading>Matrix entry manipulation</Heading>
 This is just support for the sparse matrix data type.
 <!-- GaussForHomalg.gi -->
 <#Include Label="GetEntryOfHomalgMatrix">

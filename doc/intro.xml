@@ -22,7 +22,7 @@ explains how &GaussForHomalg; works and what you need to know to
 extend &homalg; with your own rings. Also included in this manual is a
 documented list of the most important methods and functions for this
 linking process. Anyone interested in source code should just check
-out the files in the <F>gap/pkg/GaussForHomalg/gap</F> folder (&see;
+out the files in the <F>gap/pkg/GaussForHomalg/gap/</F> folder (&see;
 Appendix <Ref Label="FileOverview"/>).
 
 </Section>
