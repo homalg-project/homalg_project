@@ -22,7 +22,7 @@
   </Version>
   <Author>Simon Goertzen<Br/>
           <Email>simon.goertzen@rwth-aachen.de</Email>
-          <Homepage>http://wwwb.math.rwth-aachen.de/goertzen</Homepage>
+          <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
 	  <Address>
 	  Lehrstuhl B für Mathematik<Br/>
 	  Templergraben 64<Br/>
@@ -73,7 +73,7 @@ Chap="chap:Gauss"/>). Included is a documented list of the most
 important methods and functions needed to work with sparse matrices
 and the algorithms provided by the &Gauss; package. Anyone interested
 in source code should just check out the files in the
-<F>gap/pkg/Gauss/gap</F> folder (&see; Appendix <Ref Label="FileOverview"/>).
+<F>gap/pkg/Gauss/gap/</F> folder (&see; Appendix <Ref Label="FileOverview"/>).
 
 </Section>
 
@@ -95,16 +95,15 @@ in source code should just check out the files in the
     important for the development of the &GAP; package &homalg; by
     M. Barakat <Cite Key="homalg"/>.<P/><P/>
     
-    Parallel to this development I worked on &SCO; <Cite Key="SCO"/>, a package for
-    creating simplicial sets and computing the cohomology of
-    orbifolds, based on the paper "Simplicial Cohomology of Orbifolds"
-    by I. Moerdijk and D. A. Pronk <Cite Key="MP_SCO"/>. Very early on
-    it became clear that the cohomology matrices (with entries in &ZZ;
-    or finite quotients of &ZZ;) would grow exponentially in size with
-    the cohomology degree. For example, to compute the cohomology of
-    degree 3 of the orbifold corresponding to the Wallpaper Group <URL
-    Text="p31m">http://en.wikipedia.org/wiki/Wallpaper_group#Group_p31m</URL>
-    a 50651 x 1133693 matrix has to be handled.<P/><P/>
+    Parallel to this development I worked on &SCO; <Cite Key="SCO"/>,
+    a package for creating simplicial sets and computing the
+    cohomology of orbifolds, based on the paper "Simplicial Cohomology
+    of Orbifolds" by I. Moerdijk and D. A. Pronk <Cite
+    Key="MP_SCO"/>. Very early on it became clear that the cohomology
+    matrices (with entries in &ZZ; or finite quotients of &ZZ;) would
+    grow exponentially in size with the cohomology degree. At one
+    point in time, for example, a 50651 x 1133693 matrix had to be
+    handled.<P/><P/>
     
     It should be quite clear that there was a need for a sparse matrix
     data type and corresponding Gaussian algorithms. After an
@@ -115,8 +114,8 @@ in source code should just check out the files in the
     size.<P/><P/>
     
     I am proud to tell you that, thanks to optimizing the algorithms
-    for matrices over GF(2), it is now possible to compute the
-    GF(2)-Rank of the mentioned matrix in less than 20 minutes with a
+    for matrices over GF(2), it was possible to compute the GF(2)-Rank
+    of the matrix mentioned above in less than 20 minutes with a
     memory usage of about 3 GB.
     
  </Section>

@@ -280,12 +280,14 @@ end,
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation(
-  "-----------------------------------------------------------------------------------------------------\n",
+  "----------------------------------------------------------------\n",
   "Loading  Gauss ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
-  "Type ?Gauss: for help contents, ?Gauss:n to read chapter n, ?Gauss:term to search for a certain term.\n",
-  "-----------------------------------------------------------------------------------------------------\n" ),
+  "Type ?Gauss:     for help contents,\n",
+  "     ?Gauss:n    to read chapter n,\n",
+  "     ?Gauss:term to search for a certain term.\n",
+  "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
