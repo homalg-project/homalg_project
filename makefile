@@ -23,17 +23,20 @@ test:	doc
 	gapL maketst.g
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".git" --exclude "public_html" homalg)
+	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".git" --exclude "public_html" --exclude tst/plesken --exclude talks homalg)
 
 WEBPOS=~/gap/pkg/homalg/public_html
+WEBPOS_FINAL=~/Sites/homalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
 	echo '<mixer>' >>${WEBPOS}.version
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
-#	cp PackageInfo.g ${WEBPOS}
+	cp PackageInfo.g ${WEBPOS}
 	cp README ${WEBPOS}/README.homalg
 	cp doc/manual.pdf ${WEBPOS}/homalg.pdf
-	cp ../tar/homalg.tar.gz ${WEBPOS}
+	cp doc/*.{css,html} ${WEBPOS}
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+#	cp ../tar/homalg.tar.gz ${WEBPOS}
 

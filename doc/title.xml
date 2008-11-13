@@ -15,7 +15,7 @@ This is the chapter of the documentation describing the installation.
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
-    <Author>Mohamed Barakat
+    <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
 <Address>
 Lehrstuhl B für Mathematik, <Br/>
 RWTH Aachen, <Br/>
@@ -40,7 +40,7 @@ Germany
   Neunhöffer">http://www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
   <Alt Only="Text">Max Neunhöffer</Alt> not only taught me the
   philosophy of object-oriented programming in &GAP4;, but also to
-  what extent is this philosophy still unique among programming
+  what extent this philosophy is still unique among programming
   languages (&see; <Ref Sect="WhyGAP4" Text="Why GAP4?"/>). The slides
   (in German) to his talk in our seminar on 30.10.2006 can be found on
   <URL Text="his
@@ -52,13 +52,13 @@ Germany
   <Alt Not="Text"><URL Text="Thomas
   Breuer">http://www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Alt>
   <Alt Only="Text">Thomas Breuer</Alt> patiently answered trillions of
-  specific questions, also those where I was too lazy to look up in the
+  specific questions, even those I was too lazy to look up in the
   excellent <Alt Only="HTML"><Ref Chap="about" Text="programming
   tutorial" BookName="Prg Tutorial"/></Alt><Alt Not="HTML">
-  <E>programming tutorial</E></Alt>.
+  programming tutorial</Alt>.
   
-  Without their continuous and tireless help and advise, not only this
-  package, but the whole <Alt Only="Text">&homalg; project</Alt>
+  Without their continuous and tireless help and advice, not only this
+  package but the <Alt Only="Text">&homalg; project</Alt> as a whole
   <Alt Not="Text"><URL Text="homalg
   project">http://wwwb.math.rwth-aachen.de/homalg/</URL></Alt> would
   have remained on my todo list. <P/>
@@ -70,7 +70,9 @@ Germany
   <Alt Not="Text"><URL Text="Daniel
   Robertz">http://wwwb.math.rwth-aachen.de/~daniel/</URL></Alt> during
   our early collaboration, where we developed our philosophy of a meta
-  package for homological algebra and implemented it in &Maple;. <P/>
+  package for homological algebra and <Alt Only="Text">implemented</Alt>
+  <Alt Not="Text"><URL Text="implemented">http://wwwb.math.rwth-aachen.de/homalg/maple/</URL></Alt>
+  it in &Maple;. <P/>
   
   In the fall of 2007 I began collaborating
   with <Alt Only="Text">Simon Görtzen</Alt>
@@ -82,12 +84,12 @@ Germany
   his help &homalg; became an extendable multi-package project. <P/>
   
   Max Neunhöffer convinced me to use his wonderful &IO; package to
-  start communicating with external computer algebra systems. I needed
-  this badly to remedy the yet missing support for important rings in
-  &GAP;. Max provided the first piece of code to access
-  &Singular;. This was the starting point of the package
-  &IO_ForHomalg;, which was further abstracted by Simon and myself
-  enabling &homalg; to communicate with virtually any external
+  start communicating with external computer algebra systems. This was
+  crucial to remedy the yet missing support for important rings in
+  &GAP;. Max provided the first piece of code to access the computer
+  algebra system &Singular;. This was the starting point of the
+  package &IO_ForHomalg;, which was further abstracted by Simon and
+  myself enabling &homalg; to communicate with virtually any external
   (computer algebra) system. <P/>
   
   The support for &Sage; was added by Simon, and the support for
@@ -95,15 +97,14 @@ Germany
   <Alt Only="Text">Markus Lange-Hegermann</Alt>
   <Alt Not="Text"><URL Text="Markus
   Lange-Hegermann">http://wwwb.math.rwth-aachen.de/~markus/</URL></Alt>
-  and continued by him and by Simon, while
+  and continued by him and Simon, while
   <Alt Only="Text">Markus Kirschmer</Alt>
   <Alt Not="Text"><URL Text="Markus
   Kirschmer">http://www.math.rwth-aachen.de/~Markus.Kirschmer/</URL></Alt>
-  contributed the complete support for &MAGMA; (only using a fraction
-  of his detailed knowledge about its internals). This formed the
+  contributed the complete support for &MAGMA;. This formed the
   beginning of the &RingsForHomalg; package. <P/>
   
-  My nightmares about how to handle the garbage collection in the
+  My concerns about how to handle the garbage collection in the
   external computer algebra systems were evaporated with the idea of
   Thomas Breuer using the so-called <Alt Only="Text">weak
   pointers</Alt><Alt Not="Text"><URL Text="weak
@@ -147,11 +148,12 @@ Germany
   extremely broad and deep knowledge. Thank you for being such a
   magnificent person. <P/>
   
+  This manual was created using the GAPDoc package of Max Neunhöffer
+  and Frank Lübeck.
+
   Last but not least, thanks to Miriam, Josef, Jonas, and Irene for
   the endless love and support. <P/>
   
-  This manual was created using the GAPDoc package of Max Neunhöffer
-  and Frank Lübeck.
 </Acknowledgements>
 
 </TitlePage>

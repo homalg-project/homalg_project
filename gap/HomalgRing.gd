@@ -643,7 +643,7 @@ DeclareAttribute( "MinusOne",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateCoordinatesOfRingOfDerivations"/>
 ##    <Returns>a list of elements of the &homalg; ring <A>R</A></Returns>
-##    <Description>This is the list of indeterminate coordinates of the &homalg; Weyl ring <A>R</A>.</Description>
+##    <Description>The list of indeterminate coordinates of the &homalg; Weyl ring <A>R</A>.</Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
@@ -653,7 +653,7 @@ DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateDerivationsOfRingOfDerivations"/>
 ##    <Returns>a list of elements of the &homalg; ring <A>R</A></Returns>
-##    <Description>This is the list of indeterminate derivations of the &homalg; Weyl ring <A>R</A>.</Description>
+##    <Description>The list of indeterminate derivations of the &homalg; Weyl ring <A>R</A>.</Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
@@ -677,7 +677,7 @@ DeclareAttribute( "AmbientRing",
 ##    <Attr Arg="R" Name="KrullDimension"/>
 ##    <Returns>a non-negative integer</Returns>
 ##    <Description>
-##      This is the Krull dimension of the &homalg; ring <A>R</A>.
+##      The Krull dimension of the &homalg; ring <A>R</A>.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -689,7 +689,7 @@ DeclareAttribute( "KrullDimension",
 ##    <Attr Arg="R" Name="LeftGlobalDimension"/>
 ##    <Returns>a non-negative integer</Returns>
 ##    <Description>
-##      This is the left global dimension of the &homalg; ring <A>R</A>.
+##      The left global dimension of the &homalg; ring <A>R</A>.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -701,7 +701,7 @@ DeclareAttribute( "LeftGlobalDimension",
 ##    <Attr Arg="R" Name="RightGlobalDimension"/>
 ##    <Returns>a non-negative integer</Returns>
 ##    <Description>
-##      This is the right global dimension of the &homalg; ring <A>R</A>.
+##      The right global dimension of the &homalg; ring <A>R</A>.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -713,7 +713,7 @@ DeclareAttribute( "RightGlobalDimension",
 ##    <Attr Arg="R" Name="GlobalDimension"/>
 ##    <Returns>a non-negative integer</Returns>
 ##    <Description>
-##      This is the global dimension of the &homalg; ring <A>R</A>.
+##      The global dimension of the &homalg; ring <A>R</A>.
 ##      The global dimension is defined, only if the left and right
 ##      global dimensions coincide.
 ##   </Description>

@@ -19,10 +19,46 @@
 <Section Label="Matrices:Properties">
 <Heading>Matrices: Properties</Heading>
 
+<#Include Label="IsMutableMatrix">
+<#Include Label="IsInitialMatrix">
+<#Include Label="IsInitialIdentityMatrix">
+<#Include Label="IsVoidMatrix">
+<#Include Label="IsReducedModuloRingRelations">
+<#Include Label="IsIdentityMatrix">
+<#Include Label="IsPermutationMatrix">
+<#Include Label="IsSubidentityMatrix">
+<#Include Label="IsLeftRegularMatrix">
+<#Include Label="IsRightRegularMatrix">
+<#Include Label="IsInvertibleMatrix">
+<#Include Label="IsLeftInvertibleMatrix">
+<#Include Label="IsRightInvertibleMatrix">
+<#Include Label="IsEmptyMatrix">
+<#Include Label="IsDiagonalMatrix">
+<#Include Label="IsUpperTriangularMatrix">
+<#Include Label="IsLowerTriangularMatrix">
+<#Include Label="IsStrictUpperTriangularMatrix">
+<#Include Label="IsStrictLowerTriangularMatrix">
+<#Include Label="IsUpperStairCaseMatrix">
+<#Include Label="IsLowerStairCaseMatrix">
+<#Include Label="IsTriangularMatrix">
+<#Include Label="IsBasisOfRowsMatrix">
+<#Include Label="IsBasisOfColumnsMatrix">
+
 </Section>
 
 <Section Label="Matrices:Attributes">
 <Heading>Matrices: Attributes</Heading>
+
+<#Include Label="NrRows">
+<#Include Label="NrColumns">
+<#Include Label="RowRankOfMatrix">
+<#Include Label="ColumnRankOfMatrix">
+<#Include Label="ZeroRows">
+<#Include Label="ZeroColumns">
+<#Include Label="NonZeroRows">
+<#Include Label="NonZeroColumns">
+<#Include Label="PositionOfFirstNonZeroEntryPerRow">
+<#Include Label="PositionOfFirstNonZeroEntryPerColumn">
 
 </Section>
 

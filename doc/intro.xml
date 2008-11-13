@@ -24,20 +24,20 @@ The package &homalg; is meant to be the first part of a continuously
 growing <Alt Only="Text">open source</Alt>
 <Alt Not="Text"><URL Text="open
 source">http://www.opensource.org/</URL></Alt> multi volume book about
-<Alt Only="Text">homological</Alt>
-<Alt Not="Text"> <URL Text="homological">http://en.wikipedia.org/wiki/Homological_algebra</URL></Alt>
-and <Alt Only="Text">homotopical algebra</Alt>
-<Alt Not="Text"> <URL Text="homotopical
-algebra">http://en.wikipedia.org/wiki/Homotopical_algebra</URL></Alt>. &homalg;
-is an attempt to translate as much as possible of homological algebra,
-as can be found in books like <Cite Key="ce"/>, <Cite Key="ML"/>,
-<Cite Key="HS"/>, <Cite Key="rot"/>, <Cite Key="weihom"/>, and
-<Cite Key="GM"/>, into a language that <E>also</E> a computer can
-directly understand. And still, like these books, &homalg; should, to
-a great extent, be readable by a mathematician, even without
-programming knowledge. For the reasons mentioned below (&see;
-<Ref Sect="WhyGAP4" Text="Why GAP4?"/>) I have chosen &GAP4; as the
-language of &homalg;.
+<Alt Only="Text">homological</Alt><Alt Not="Text">
+<URL Text="homological">http://en.wikipedia.org/wiki/Homological_algebra</URL></Alt>
+and <Alt Only="Text">homotopical
+algebra</Alt><Alt Not="Text"><URL Text="homotopical
+algebra">http://en.wikipedia.org/wiki/Homotopical_algebra</URL></Alt>.
+&homalg; is an attempt to translate as much as possible of homological
+algebra, as can be found in books like <Cite Key="ce"/>,
+<Cite Key="ML"/>, <Cite Key="HS"/>, <Cite Key="rot"/>,
+<Cite Key="weihom"/>, and <Cite Key="GM"/>, into a language that a
+computer can directly understand. But just like the aforementioned
+books, &homalg; should, to a great extent, be readable by a
+mathematician, even without deep programming knowledge. For the
+reasons mentioned below (&see; <Ref Sect="WhyGAP4" Text="Why GAP4?"/>)
+I have chosen &GAP4; as the language of &homalg;.
 
 </Subsection>
 
@@ -63,21 +63,7 @@ Beside these so-called constructors &homalg;
 provides <Alt Only="HTML"><Ref Text="operations"
 Sect="Operations and Methods" BookName="Prg Tutorial"/></Alt>
 <Alt Not="HTML"><E>operations</E></Alt> to perform computations with
-these objects. Using the philosophy of &GAP4;, one or
-more <Alt Only="HTML"><Ref Text="methods" Sect="Operations and
-Methods" BookName="Prg Tutorial"/></Alt> <Alt Not="HTML">methods</Alt>
-are
-<Alt Only="HTML"><Ref Text="installed" Sect="Method Installation"
-BookName="Prg Tutorial"/></Alt>
-<Alt Not="HTML"><E>installed</E></Alt> for each operation, depending
-on <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
-BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>properties</E></Alt>
-and <Alt Only="HTML"><Ref Text="attributes" Sect="attributes"
-BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>attributes</E></Alt> of
-these objects. These properties and attributes can themselves be
-computed by methods installed for this purpose. This manual lists and
-describes most of the existing constructors and operations for the
-above objects. The list of operations includes:
+these objects. The list of operations includes:
 <List>
   <Item>resolution of modules</Item>
   <Item>computation of subfactor modules</Item>
@@ -98,6 +84,20 @@ above objects. The list of operations includes:
     of torsion-freeness, and codegree of purity of a module</Item>
 </List>
 
+Using the philosophy of &GAP4;, one or
+more <Alt Only="HTML"><Ref Text="methods" Sect="Operations and
+Methods" BookName="Prg Tutorial"/></Alt> <Alt Not="HTML">methods</Alt>
+are
+<Alt Only="HTML"><Ref Text="installed" Sect="Method Installation"
+BookName="Prg Tutorial"/></Alt>
+<Alt Not="HTML"><E>installed</E></Alt> for each operation, depending
+on <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
+BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>properties</E></Alt>
+and <Alt Only="HTML"><Ref Text="attributes" Sect="attributes"
+BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>attributes</E></Alt> of
+these objects. These properties and attributes can themselves be
+computed by methods installed for this purpose.
+
 </Subsection>
 
 <Subsection Label="homalg-delegates">
@@ -107,7 +107,7 @@ The package &homalg; delegates all matrix operations either internally
 to &GAP; or externally to another computer algebra system: For a
 matrix to be internal or external depends solely on whether the ring
 over which it is defined is internal or external. &homalg; accesses
-external matrices via pointers. A pointer of an external matrix is
+external matrices via pointers. The pointer of an external matrix is
 simply its name in the external system. &homalg; chooses these
 names. <P/>
 
@@ -144,7 +144,7 @@ course also valid for the column convention. <P/>
 Note that the solution space of the one-sided finite dimensional
 system <M>YA=0</M> (resp. <M>AY=0</M>) over a left (resp. right)
 noetherian ring <M>R</M> is a finitely generated left
-(resp. right) <M>R</M>-module, even if the <M>R</M> is not
+(resp. right) <M>R</M>-module, even if <M>R</M> is not
 commutative. The solution space of the linear system <M>X_1 A_1 + A_2
 X_2 + A_3 X_3 A_4=0</M> is in general not an <M>R</M>-module, and
 worse, in general not finitely generated over the center
@@ -172,10 +172,10 @@ algebra system which hosts the ring and the matrices. The &GAP;
 internal ring of integers is the only ring which &homalg; endows with
 a <C>homalgTable</C>. Other packages like &GaussForHomalg; and
 &RingsForHomalg; provide dictionaries for further rings. While
-&GaussForHomalg; defines further internal rings and matrices, the
-package &RingsForHomalg; enables defining external rings and matrices
-in a wide range of (external) computer algebra systems (&Singular;,
-&Sage;, &MAGMA;, &Maple;) by providing appropriate dictionaries. <P/>
+&GaussForHomalg; defines internal rings and matrices, the package
+&RingsForHomalg; enables defining external rings and matrices in a
+wide range of (external) computer algebra systems (&Singular;, &Sage;,
+&MAGMA;, &Maple;) by providing appropriate dictionaries. <P/>
 
 Since these dictionaries are all what is needed to handle matrix
 operations, &homalg; does not distinguish between handling internal
@@ -277,7 +277,8 @@ hand other packages can be built upon or extend the &homalg; package
 in different ways:
 <List>
   <Item>add constructors (sheaves, schemes, simplicial sets, ...)</Item>
-  <Item>add methods for basic operation (Yoneda products, Massey products, ...)</Item>
+  <Item>add methods for basic operation (Yoneda products, Massey
+    products, Steenrod operations, ...)</Item>
   <Item>add methods to compute sheaf cohomology, local cohomology,
     Hochschild (co)homology, cyclic (co)homology...</Item>
   <Item>provide algorithms for holonomic <M>D</M>-modules based on the
@@ -302,14 +303,16 @@ authors and contributers of all packages in the project.
 <Heading>Frequently asked questions</Heading>
 
 <List>
-  <Item><B>Q</B>: Does this mean that &homalg; is able to compute
-    spectral sequences without ever seeing the matrices involved in
-    the computation?<Br/><Br/> A: Yes.</Item>
+  <Item><B>Q</B>: Does outsourcing the matrices mean that &homalg; is
+    able to compute spectral sequences, for example, without ever
+    seeing the matrices involved in the computation?<Br/><Br/> A:
+    Yes.</Item>
   <Item><B>Q</B>: Can &homalg; profit from the implementation of
     homological constructions like <C>Hom</C>, <C>Ext</C>, ... in
     &Singular;?<Br/><Br/> A: No. This is for a lot of reasons
     incompatible with the <Alt Only="HTML"><Ref Text="idea and design" Label="intro"/></Alt>
-    <Alt Not="HTML">idea and design</Alt> of &homalg;.</Item>
+    <Alt Not="HTML">idea and design (&see; <Ref Label="intro"/>)</Alt>
+    of &homalg;.</Item>
   <Item><B>Q</B>: Are the external systems involved in the higher
     algorithms?<Br/><Br/> A: No. They host all the matrices and do all
     matrix operations delegated to them without knowing what for. The
@@ -383,8 +386,10 @@ implementation?</Quoted>
 I had the pleasure of being one of his students. <P/>
 
 The detailed copyright for &GAP; can found on the &GAP; homepage under
-<Alt Only="Text">Start > Download > Copyright</Alt><Alt Not="Text">
+<Alt Only="Text">Start > Download > Copyright</Alt><Alt Only="HTML">
 <URL Text="Start > Download >
+Copyright">http://www.gap-system.org/Download/copyright.html#free</URL></Alt><Alt Only="LaTeX">
+<URL Text="Start -- Download --
 Copyright">http://www.gap-system.org/Download/copyright.html#free</URL></Alt>.
 
 </Subsection>
@@ -406,7 +411,7 @@ would favor, for
 example, <Alt Only="Text">&Singular;</Alt><Alt Not="Text">
 <URL Text="Singular">http://www.singular.uni-kl.de/</URL></Alt> (with
 its subsystem &Plural;) over &GAP4;. Point <Ref Sect="GAP-IO"/>
-indicates how this drawback was overcome in way, that even gave the
+indicates how this drawback was overcome in a way, that even gave the
 lead back to &GAP4;. <P/>
 
 One of my future plans for the &homalg; project is to address moduli
@@ -580,8 +585,11 @@ the external system. &homalg; follows a different strategy: The only
 external objects &homalg; needs (beside rings) are non-empty
 matrices. And being zero or not is basically the only thing &homalg;
 wants to know about a matrix after knowing its dimension. I myself was
-stunned by this insight, which culminated in what I call <E>the
-principle of least communication</E>. <P/>
+stunned by this insight, which culminated
+in <Alt Only="HTML"><Ref Text="the principle of least communication"
+Label="least-communication"/></Alt><Alt Not="HTML"><E>the principle of
+least communication</E> (&see;
+<Ref Label="least-communication"/>)</Alt>. <P/>
 
 In particular, &Sage; can make use of all of &homalg;, but for in
 order to make full use, &Sage; needs to understand the internals of
@@ -602,8 +610,8 @@ package, while Chapter <Ref Chap="QuickStart"/> provides a short quick
 guide to build you own examples. There the separate package
 &ExamplesForHomalg; is introduced and used. The remaining chapters are
 each devoted to one of the &homalg; objects (&see;
-<Ref Label="homalg-provides"/>) with its properties, attributes, and
-operations.
+<Ref Label="homalg-provides"/>) with its constructors, properties,
+attributes, and operations.
 
 <!--
 Finally, Chapter <Ref Chap="examples"/> shows some instructive

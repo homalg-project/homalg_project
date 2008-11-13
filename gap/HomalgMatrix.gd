@@ -32,75 +32,291 @@ DeclareCategory( "IsHomalgMatrix",
 #
 ####################################
 
+##  <#GAPDoc Label="IsMutableMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsMutableMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsMutableMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsInitialMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsInitialMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsInitialMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsInitialIdentityMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsInitialIdentityMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsInitialIdentityMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsVoidMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsVoidMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsVoidMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsReducedModuloRingRelations">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsReducedModuloRingRelations"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsIdentityMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsIdentityMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsIdentityMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsPermutationMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsPermutationMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsPermutationMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsSubidentityMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsSubidentityMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsSubidentityMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsLeftRegularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsLeftRegularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsLeftRegularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsRightRegularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsRightRegularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsRightRegularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsInvertibleMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsInvertibleMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsInvertibleMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsLeftInvertibleMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsLeftInvertibleMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsLeftInvertibleMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsRightInvertibleMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsRightInvertibleMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsRightInvertibleMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsEmptyMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsEmptyMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsEmptyMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsDiagonalMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsDiagonalMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsDiagonalMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsUpperTriangularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsUpperTriangularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsUpperTriangularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsLowerTriangularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsLowerTriangularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsLowerTriangularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsStrictUpperTriangularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsStrictUpperTriangularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsStrictUpperTriangularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsStrictLowerTriangularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsStrictLowerTriangularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsStrictLowerTriangularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsUpperStairCaseMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsUpperStairCaseMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsUpperStairCaseMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsLowerStairCaseMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsLowerStairCaseMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsLowerStairCaseMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsTriangularMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsTriangularMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsTriangularMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsBasisOfRowsMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsBasisOfRowsMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsBasisOfRowsMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsBasisOfColumnsMatrix">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsBasisOfColumnsMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsBasisOfColumnsMatrix",
         IsHomalgMatrix );
 
@@ -164,53 +380,130 @@ DeclareAttribute( "ItsRightInverse",
 DeclareAttribute( "EvalInverse",
         IsHomalgMatrix );
 
-DeclareAttribute( "EvalGetSide",
-        IsHomalgMatrix );
-
 DeclareAttribute( "PreEval",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="NrRows">
+##  <ManSection>
+##    <Attr Arg="M" Name="NrRows"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The number of rows of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "NrRows",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="NrColumns">
+##  <ManSection>
+##    <Attr Arg="M" Name="NrColumns"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The number of columns of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "NrColumns",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="RowRankOfMatrix">
+##  <ManSection>
+##    <Attr Arg="M" Name="RowRankOfMatrix"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The row rank of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "RowRankOfMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="ColumnRankOfMatrix">
+##  <ManSection>
+##    <Attr Arg="M" Name="ColumnRankOfMatrix"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The column rank of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ColumnRankOfMatrix",
         IsHomalgMatrix );
 
-DeclareAttribute( "CompatibilityConditions",
-        IsHomalgMatrix );
-
+##  <#GAPDoc Label="ZeroRows">
+##  <ManSection>
+##    <Attr Arg="M" Name="ZeroRows"/>
+##    <Returns>a (possibly empty) list of positive integers</Returns>
+##    <Description>
+##      The list of zero rows of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ZeroRows",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="ZeroColumns">
+##  <ManSection>
+##    <Attr Arg="M" Name="ZeroColumns"/>
+##    <Returns>a (possibly empty) list of positive integers</Returns>
+##    <Description>
+##      The list of zero columns of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ZeroColumns",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="NonZeroRows">
+##  <ManSection>
+##    <Attr Arg="M" Name="NonZeroRows"/>
+##    <Returns>a (possibly empty) list of positive integers</Returns>
+##    <Description>
+##      The list of nonzero rows of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "NonZeroRows",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="NonZeroColumns">
+##  <ManSection>
+##    <Attr Arg="M" Name="NonZeroColumns"/>
+##    <Returns>a (possibly empty) list of positive integers</Returns>
+##    <Description>
+##      The list of nonzero columns of the matrix <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "NonZeroColumns",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="PositionOfFirstNonZeroEntryPerRow">
+##  <ManSection>
+##    <Attr Arg="M" Name="PositionOfFirstNonZeroEntryPerRow"/>
+##    <Returns>a list of nonnegative integers</Returns>
+##    <Description>
+##      The list of positions of the first nonzero entry per row of the
+##      matrix <A>M</A>, else zero.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "PositionOfFirstNonZeroEntryPerRow",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="PositionOfFirstNonZeroEntryPerColumn">
+##  <ManSection>
+##    <Attr Arg="M" Name="PositionOfFirstNonZeroEntryPerColumn"/>
+##    <Returns>a list of nonnegative integers</Returns>
+##    <Description>
+##      The list of positions of the first nonzero entry per column of the
+##      matrix <A>M</A>, else zero.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
         IsHomalgMatrix );
-
-####################################
-#
-# synonyms:
-#
-####################################
-
-DeclareSynonymAttr( "CompCond",
-        CompatibilityConditions );
 
 ####################################
 #
@@ -445,4 +738,14 @@ DeclareSynonym( "Leftinverse",
 
 DeclareSynonym( "Rightinverse",
         RightInverse );
+
+##  <#GAPDoc Label="">
+##  <ManSection>
+##    <Attr Arg="M" Name=""/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 

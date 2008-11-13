@@ -27,7 +27,7 @@ prime and <M>n</M> positive.<P/>
 If a ring <M>R</M> is supported in &homalg; any of its residue class
 rings <M>R/I</M> is supported as well, provided the ideal <M>I</M> of
 relations admits a finite set of generators as a left resp. right
-ideal (&see; <Ref Oper="/"
+ideal (&see; <Ref Oper="\/"
 Label="constructor for residue class rings" Style="Number"/>).
 This is immediate for commutative noetherian rings.
 
@@ -55,7 +55,7 @@ the value of the property is set or not <P/>
 <C>HasProp</C>( <A>R</A> ); <P/>
 
 If you discover that a specific property <C>Prop</C> missing for a
-certain &homalg; ring <A>R</A> you can add using the usual &GAP4;
+certain &homalg; ring <A>R</A> you can it add using the usual &GAP4;
 mechanism <P/>
 
 <C>SetProp</C>( <A>R</A>, true ); <P/>
@@ -65,8 +65,8 @@ or <P/>
 <C>SetProp</C>( <A>R</A>, false ); <P/>
 
 Be very cautious with setting "missing" properties to &homalg;
-objects: If the value you set is mathematically wrong &homalg; might
-very well draw wrong conclusions and might return wrong results.
+objects: If the value you set is mathematically wrong &homalg; will
+probably draw wrong conclusions and might return wrong results.
 
 <#Include Label="ContainsAField">
 <#Include Label="IsRationalsForHomalg">

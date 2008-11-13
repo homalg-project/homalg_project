@@ -726,8 +726,8 @@ end );
 
 ##  <#GAPDoc Label="ResidueClassRing">
 ##  <ManSection>
-##    <Oper Arg="R, ring_rel" Name="/" Label="constructor for residue class rings"/>
-##    <Returns>the residue class ring <A>R</A><M>/</M><A>ring_rel</A></Returns>
+##    <Oper Arg="R, ring_rel" Name="\/" Label="constructor for residue class rings"/>
+##    <Returns>the residue class ring <A>R</A> <M>/</M> <A>ring_rel</A></Returns>
 ##    <Description>
 ##      This is the constructor for residue class rings in &homalg;.
 ##      <A>ring_rel</A> might be:
