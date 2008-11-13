@@ -17,16 +17,16 @@ This is the chapter of the documentation describing the installation.
     </Version>
     <Author>Mohamed Barakat
 <Address>
-Lehrstuhl B für Mathematik,
-RWTH Aachen,
-Templergraben 64,
-52056 Aachen,
+Lehrstuhl B für Mathematik, <Br/>
+RWTH Aachen, <Br/>
+Templergraben 64, <Br/>
+52056 Aachen, <Br/>
 Germany
 </Address>
-    <Email>mohamed.barakat@rwth-aachen.de</Email>
-    <Homepage>wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
-    </Author>
-    <Date>October 2008</Date>
+<Email>mohamed.barakat@rwth-aachen.de</Email>
+<Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+</Author>
+<Date>October 2008</Date>
 
 <Copyright>
   &copyright; 2007-2008 by Mohamed Barakat <P/>
@@ -36,55 +36,116 @@ Germany
 </Copyright>
 
 <Acknowledgements>
-  <Alt Not="Text"><URL Text="Max Neunhöffer">
-  www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
-  <Alt Only="Text">Max Neunhöffer</Alt> not only taught me how object
-  oriented programming works in &GAP4;, but also to what extent it is
-  unique as a programming language for complex mathematical problems
-  (&see; <Ref Sect="WhyGAP4"/>). The slides (in German) to his talk in
-  our seminar on 30.10.2006 can be found on
-  <URL Text="his homepage">
-  www-groups.mcs.st-and.ac.uk/~neunhoef/Publications/talks.html</URL>. <P/>
+  <Alt Not="Text"><URL Text="Max
+  Neunhöffer">http://www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
+  <Alt Only="Text">Max Neunhöffer</Alt> not only taught me the
+  philosophy of object-oriented programming in &GAP4;, but also to
+  what extent is this philosophy still unique among programming
+  languages (&see; <Ref Sect="WhyGAP4" Text="Why GAP4?"/>). The slides
+  (in German) to his talk in our seminar on 30.10.2006 can be found on
+  <URL Text="his
+  homepage">http://www-groups.mcs.st-and.ac.uk/~neunhoef/Publications/talks.html</URL>. <P/>
 
-  He, <Alt Not="Text"><URL Text="Frank Lübeck">
-  www.math.rwth-aachen.de/~Frank.Luebeck/</URL></Alt><Alt Only="Text">Frank Lübeck</Alt>, and
-  <Alt Not="Text"><URL Text="Thomas Breuer">
-  www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Alt>
+  He, <Alt Not="Text"><URL Text="Frank
+  Lübeck">http://www.math.rwth-aachen.de/~Frank.Luebeck/</URL></Alt><Alt Only="Text">Frank
+  Lübeck</Alt>, and
+  <Alt Not="Text"><URL Text="Thomas
+  Breuer">http://www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Alt>
   <Alt Only="Text">Thomas Breuer</Alt> patiently answered trillions of
-  specific questions I was too lazy to look up in the
-  excellent <URL Text="GAP4 programming tutorial">
-  www.gap-system.org/Doc/manuals.html</URL>. Without their continuous
-  help and advise, not only this package, but the whole &homalg;
-  project would have remained on my todo list. <P/>
- 
-  A lot of ideas that make up this package and the whole &homalg;
-  project came out of intensive discussions with Daniel Robertz during
-  our early collaboration, where we developed our philosophy for a
-  meta package for homological algebra and implemented it in
-  &Maple;. <P/>
+  specific questions, also those where I was too lazy to look up in the
+  excellent <Alt Only="HTML"><Ref Chap="about" Text="programming
+  tutorial" BookName="Prg Tutorial"/></Alt><Alt Not="HTML">
+  <E>programming tutorial</E></Alt>.
   
-  In the fall of 2007 I began collaborating with Simon Görtzen to
-  further pursue and extend these ideas preparing the transition to
-  &GAP4;. With his help &homalg; became an extendable multi-package
-  project. <P/>
+  Without their continuous and tireless help and advise, not only this
+  package, but the whole <Alt Only="Text">&homalg; project</Alt>
+  <Alt Not="Text"><URL Text="homalg
+  project">http://wwwb.math.rwth-aachen.de/homalg/</URL></Alt> would
+  have remained on my todo list. <P/>
+ 
+  A lot of <Alt Only="HTML"><Ref Text="ideas" Label="intro"/></Alt>
+  <Alt Not="HTML">ideas</Alt> that make up this package and the whole
+  &homalg; project came out of intensive discussions
+  with <Alt Only="Text">Daniel Robertz</Alt>
+  <Alt Not="Text"><URL Text="Daniel
+  Robertz">http://wwwb.math.rwth-aachen.de/~daniel/</URL></Alt> during
+  our early collaboration, where we developed our philosophy of a meta
+  package for homological algebra and implemented it in &Maple;. <P/>
+  
+  In the fall of 2007 I began collaborating
+  with <Alt Only="Text">Simon Görtzen</Alt>
+  <Alt Not="Text"><URL Text="Simon
+  Görtzen">http://wwwb.math.rwth-aachen.de/goertzen/</URL></Alt> to
+  further pursue and extend these <Alt Only="HTML"><Ref Text="ideas"
+  Label="homalg-dict"/></Alt>
+  <Alt Not="HTML">ideas</Alt> preparing the transition to &GAP4;. With
+  his help &homalg; became an extendable multi-package project. <P/>
+  
+  Max Neunhöffer convinced me to use his wonderful &IO; package to
+  start communicating with external computer algebra systems. I needed
+  this badly to remedy the yet missing support for important rings in
+  &GAP;. Max provided the first piece of code to access
+  &Singular;. This was the starting point of the package
+  &IO_ForHomalg;, which was further abstracted by Simon and myself
+  enabling &homalg; to communicate with virtually any external
+  (computer algebra) system. <P/>
+  
+  The support for &Sage; was added by Simon, and the support for
+  &Singular; was initiated by
+  <Alt Only="Text">Markus Lange-Hegermann</Alt>
+  <Alt Not="Text"><URL Text="Markus
+  Lange-Hegermann">http://wwwb.math.rwth-aachen.de/~markus/</URL></Alt>
+  and continued by him and by Simon, while
+  <Alt Only="Text">Markus Kirschmer</Alt>
+  <Alt Not="Text"><URL Text="Markus
+  Kirschmer">http://www.math.rwth-aachen.de/~Markus.Kirschmer/</URL></Alt>
+  contributed the complete support for &MAGMA; (only using a fraction
+  of his detailed knowledge about its internals). This formed the
+  beginning of the &RingsForHomalg; package. <P/>
+  
+  My nightmares about how to handle the garbage collection in the
+  external computer algebra systems were evaporated with the idea of
+  Thomas Breuer using the so-called <Alt Only="Text">weak
+  pointers</Alt><Alt Not="Text"><URL Text="weak
+  pointers">http://www.gap-system.org/Manuals/doc/htm/ext/CHAP007.htm</URL></Alt>
+  in &GAP4; to keep track of all the external objects that became
+  obsolete for &homalg;. This idea took shape in a discussion with him
+  and Frank Lübeck and finally found its way into the package
+  &IO_ForHomalg;. <P/>
   
   My gratitude to all with whom I worked together to develop extension
   packages and those who developed their own packages within the
-  &homalg; project (&see; <Ref Sect="homalg Project"/>). Without their
+  &homalg; project (&see; <Ref Sect="homalg-Project"/>). Without their
   contributions the package &homalg; would have remained a core
   without a body:
   
   <List>
     <Item>Barbara Bremer</Item>
-    <Item><URL Text="Thomas Breuer">www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Item>
-    <Item><URL Text="Anna Fabiańska">wwwb.math.rwth-aachen.de/Mitarbeiter/fabianska.html</URL></Item>
-    <Item><URL Text="Simon Görtzen">wwwb.math.rwth-aachen.de/goertzen/</URL></Item>
-    <Item><URL Text="Markus Kirschmer">www.math.rwth-aachen.de/~Markus.Kirschmer/</URL></Item>
-    <Item><URL Text="Markus Lange-Hegermann">wwwb.math.rwth-aachen.de/~markus/</URL></Item>
-    <Item><URL Text="Frank Lübeck">www.math.rwth-aachen.de/~Frank.Luebeck/</URL></Item>
-    <Item><URL Text="Max Neunhöffer">www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Item>
-    <Item><URL Text="Daniel Robertz">wwwb.math.rwth-aachen.de/~daniel/</URL></Item>
+    <Item><URL Text="Thomas Breuer">http://www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Item>
+    <Item>Anna Fabiańska</Item>
+    <!--
+    <Item><URL Text="Anna Fabiańska">http://wwwb.math.rwth-aachen.de/~fabianska/</URL></Item>
+    -->
+    <Item><URL Text="Simon Görtzen">http://wwwb.math.rwth-aachen.de/goertzen/</URL></Item>
+    <Item><URL Text="Markus Kirschmer">http://www.math.rwth-aachen.de/~Markus.Kirschmer/</URL></Item>
+    <Item><URL Text="Markus Lange-Hegermann">http://wwwb.math.rwth-aachen.de/~markus/</URL></Item>
+    <Item><URL Text="Frank Lübeck">http://www.math.rwth-aachen.de/~Frank.Luebeck/</URL></Item>
+    <Item><URL Text="Max Neunhöffer">http://www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Item>
+    <Item><URL Text="Daniel Robertz">http://wwwb.math.rwth-aachen.de/~daniel/</URL></Item>
   </List>
+  
+  I would also like to thank <Alt Only="Text">Alban Quadrat</Alt>
+  <Alt Not="Text"><URL Text="Alban
+  Quadrat">http://www-sop.inria.fr/members/Alban.Quadrat/</URL></Alt>
+  for supporting the &homalg; project and for all the wonderful
+  discussions we had. At several places in the code I was happy to add
+  the comment: <Q>I learned this from Alban</Q>.
+  
+  <Par></Par>
+  
+  My teacher Wilhelm Plesken remains an inexhaustible source of
+  extremely broad and deep knowledge. Thank you for being such a
+  magnificent person. <P/>
   
   Last but not least, thanks to Miriam, Josef, Jonas, and Irene for
   the endless love and support. <P/>

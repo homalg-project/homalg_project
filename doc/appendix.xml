@@ -11,6 +11,11 @@
 <Appendix Label="FileOverview">
 <Heading>Overview of the &homalg; Package Source Code</Heading>
 
+The &homalg; package reached more than 30.000 lines of &GAP4; code
+(excluding the documentation) before the first release was made. To
+keep this amount of code tracebale, the package was split in several
+files.
+
 <Section Label="ModuleInternals">
 
 <Heading>Rings, Matrices, Relations, and Generators</Heading>
@@ -18,26 +23,26 @@
 <Table Align="l|l">
 <Caption><E>The &homalg; package files</E></Caption>
 
-<Row><Item>Filename .gd/.gi</Item><Item>Content</Item></Row>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
 
 <Row>
-  <Item>homalg</Item>
+  <Item><F>homalg</F></Item>
   <Item>definitions of the basic &GAP4; categories</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>homalgExternalObject</Item>
+  <Item><F>homalgExternalObject</F></Item>
   <Item>pointers on external objects</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>homalgTable</Item>
+  <Item><F>homalgTable</F></Item>
   <Item>dictionaries between &homalg;</Item>
 </Row>
 <Row>
@@ -46,36 +51,36 @@
 </Row>
 
 <Row>
-  <Item>HomalgRing</Item>
+  <Item><F>HomalgRing</F></Item>
   <Item>internal and external rings</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>Matrices</Item>
+  <Item><F>Matrices</F></Item>
   <Item>internal and external matrices</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgRelations</Item>
+  <Item><F>HomalgRelations</F></Item>
   <Item>a set of relations</Item>
 </Row>
 
 <Row>
-  <Item>SetsOfRelations</Item>
+  <Item><F>SetsOfRelations</F></Item>
   <Item>several sets of relations</Item>
 </Row>
 
 <Row>
-  <Item>HomalgGenerators</Item>
+  <Item><F>HomalgGenerators</F></Item>
   <Item>a set of generators</Item>
 </Row>
 
 <Row>
-  <Item>SetsOfGenerators</Item>
+  <Item><F>SetsOfGenerators</F></Item>
   <Item>several sets of generators</Item>
 </Row>
 
@@ -90,12 +95,12 @@
 <Table Align="l|l">
 <Caption><E>The &homalg; package files (continued)</E></Caption>
 
-<Row><Item>Filename .gd/.gi</Item><Item>Content</Item></Row>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
 
 <Row>
-  <Item>HomalgModule</Item>
+  <Item><F>HomalgModule</F></Item>
   <Item>modules allowing several presentations</Item>
 </Row>
 
@@ -107,7 +112,7 @@
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgMap</Item>
+  <Item><F>HomalgMap</F></Item>
   <Item>maps allowing several presentations</Item>
 </Row>
 
@@ -119,21 +124,21 @@
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgFiltration</Item>
+  <Item><F>HomalgFiltration</F></Item>
   <Item>filtration of a module</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgComplex</Item>
+  <Item><F>HomalgComplex</F></Item>
   <Item>(co)complexes of modules or of (co)complexes</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgChainMap</Item>
+  <Item><F>HomalgChainMap</F></Item>
   <Item>chain maps of (co)complexes</Item>
 </Row>
 
@@ -145,21 +150,21 @@
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgBicomplex</Item>
+  <Item><F>HomalgBicomplex</F></Item>
   <Item>bicomplexes of modules or of (co)complexes</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgBigradedObject</Item>
+  <Item><F>HomalgBigradedObject</F></Item>
   <Item>(differential) bigraded modules</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgSpectralSequence</Item>
+  <Item><F>HomalgSpectralSequence</F></Item>
   <Item>homological and cohomological</Item>
 </Row>
 
@@ -171,7 +176,7 @@
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>HomalgFunctor</Item>
+  <Item><F>HomalgFunctor</F></Item>
   <Item>constructors of (multi) functors of</Item>
 </Row>
 
@@ -218,12 +223,12 @@ In the following CAS or CASystem mean computer algebra systems.
 <Table Align="l|l">
 <Caption><E>The &homalg; package files (continued)</E></Caption>
 
-<Row><Item>Filename .gd/.gi</Item><Item>Content</Item></Row>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
 
 <Row>
-  <Item>Tools</Item>
+  <Item><F>Tools</F></Item>
   <Item>the elementary matrix operations that can be</Item>
 </Row>
 
@@ -240,7 +245,7 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>Service</Item>
+  <Item><F>Service</F></Item>
   <Item>the three operations: basis,</Item>
 </Row>
 
@@ -262,7 +267,7 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>Basic</Item>
+  <Item><F>Basic</F></Item>
   <Item>higher level operations for matrices</Item>
 </Row>
 
@@ -281,12 +286,12 @@ In the following CAS or CASystem mean computer algebra systems.
 
 <Table Align="l|l">
 <Caption><E>The &homalg; package files (continued)</E></Caption>
-<Row><Item>Filename .gd/.gi</Item><Item>Content</Item></Row>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
 
 <Row>
-  <Item>Modules</Item>
+  <Item><F>Modules</F></Item>
   <Item>subfactors, resolutions, syzygy modules,</Item>
 </Row>
 
@@ -298,14 +303,14 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>Maps</Item>
+  <Item><F>Maps</F></Item>
   <Item>resolutions, (co)kernel sequences</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>Complexes</Item>
+  <Item><F>Complexes</F></Item>
   <Item>(co)homology, horse shoe lemma, connecting</Item>
 </Row>
 
@@ -317,14 +322,14 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>ChainMaps</Item>
+  <Item><F>ChainMaps</F></Item>
   <Item>(co)homology</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>SpectralSequences</Item>
+  <Item><F>SpectralSequences</F></Item>
   <Item>spectral sequences of bicomplexes,</Item>
 </Row>
 
@@ -341,7 +346,7 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>ToolFunctors</Item>
+  <Item><F>ToolFunctors</F></Item>
   <Item>composition, addition, substraction,</Item>
 </Row>
 
@@ -351,7 +356,7 @@ In the following CAS or CASystem mean computer algebra systems.
 </Row>
 
 <Row>
-  <Item>BasicFunctors</Item>
+  <Item><F>BasicFunctors</F></Item>
   <Item>cokernel, image, kernel, tensor product, Hom,</Item>
 </Row>
 
@@ -361,7 +366,7 @@ In the following CAS or CASystem mean computer algebra systems.
 </Row>
 
 <Row>
-  <Item>OtherFunctors</Item>
+  <Item><F>OtherFunctors</F></Item>
   <Item>torsion submodule, torsion free factor,</Item>
 </Row>
 
@@ -380,47 +385,47 @@ In the following CAS or CASystem mean computer algebra systems.
 
 <Table Align="l|l">
 <Caption><E>The &homalg; package files (continued)</E></Caption>
-<Row><Item>Filename .gd/.gi</Item><Item>Content</Item></Row>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
 
 <Row>
-  <Item>LIRNG</Item>
+  <Item><F>LIRNG</F></Item>
   <Item>logical implications for rings</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>LIMAT</Item>
+  <Item><F>LIMAT</F></Item>
   <Item>logical implications for matrices</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>COLEM</Item>
+  <Item><F>COLEM</F></Item>
   <Item>clever operations for lazy evaluated matrices</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>LIMOD</Item>
+  <Item><F>LIMOD</F></Item>
   <Item>logical implications for modules</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>LIMOR</Item>
+  <Item><F>LIMOR</F></Item>
   <Item>logical implications for morphisms</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item>LIMAT</Item>
+  <Item><F>LIMAT</F></Item>
   <Item>logical implications for complexes</Item>
 </Row>
 
@@ -448,7 +453,7 @@ and group rings do not statisfy the minimum requirements of
 <HorLine/>
 
 <Row>
-  <Item>Integers</Item>
+  <Item><F>Integers</F></Item>
   <Item>the homalgTable for the ring of integers</Item>
 </Row>
 

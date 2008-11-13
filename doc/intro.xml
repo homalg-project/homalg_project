@@ -14,54 +14,607 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="philosophy">
+<Section Label="homalg-vs-homalg">
+<Heading>What is the role of the &homalg; package in the &homalg; project?</Heading>
+
+<Subsection Label="philosophy">
 <Heading>Philosophy</Heading>
 
-The package &homalg; is meant to be the first volume of a continuously
-growing opensource book about
-<URL Text="homological algebra">
-http://en.wikipedia.org/wiki/Homological_algebra</URL>. &homalg; is an
-attempt to translate as much as possible of homological algebra, as
-can be found in books like <Cite Key="ce"/>, <Cite Key="ML"/>,
-<Cite Key="HS"/>, <Cite Key="rot"/>, <Cite Key="weihom"/> and
+The package &homalg; is meant to be the first part of a continuously
+growing <Alt Only="Text">open source</Alt>
+<Alt Not="Text"><URL Text="open
+source">http://www.opensource.org/</URL></Alt> multi volume book about
+<Alt Only="Text">homological</Alt>
+<Alt Not="Text"> <URL Text="homological">http://en.wikipedia.org/wiki/Homological_algebra</URL></Alt>
+and <Alt Only="Text">homotopical algebra</Alt>
+<Alt Not="Text"> <URL Text="homotopical
+algebra">http://en.wikipedia.org/wiki/Homotopical_algebra</URL></Alt>. &homalg;
+is an attempt to translate as much as possible of homological algebra,
+as can be found in books like <Cite Key="ce"/>, <Cite Key="ML"/>,
+<Cite Key="HS"/>, <Cite Key="rot"/>, <Cite Key="weihom"/>, and
 <Cite Key="GM"/>, into a language that <E>also</E> a computer can
-directly understand. And like these books, &homalg; should, to a great
-extent, be readable by a mathematician, even without programming
-knowledge. For the reasons mentioned below (&see;
-<Ref Sect="WhyGAP4"/>) I have chosen &GAP4; as the language of this
-project.
+directly understand. And still, like these books, &homalg; should, to
+a great extent, be readable by a mathematician, even without
+programming knowledge. For the reasons mentioned below (&see;
+<Ref Sect="WhyGAP4" Text="Why GAP4?"/>) I have chosen &GAP4; as the
+language of &homalg;.
+
+</Subsection>
+
+<Subsection Label="homalg-provides">
+<Heading>&homalg; provides ...</Heading>
+
+The package &homalg; is the foundational part of the project. It
+provides procedures to construct basic objects in homological algebra:
+<List>
+  <Item>rings</Item>
+  <Item>matrices</Item>
+  <Item>modules (generators, relations)</Item>
+  <Item>maps</Item>
+  <Item>filtrations</Item>
+  <Item>complexes (of modules and of complexes)</Item>
+  <Item>chain maps</Item>
+  <Item>bicomplexes</Item>
+  <Item>bigraded (differential) objects</Item>
+  <Item>spectral sequences</Item>
+  <Item>functors</Item>
+</List>
+Beside these so-called constructors &homalg;
+provides <Alt Only="HTML"><Ref Text="operations"
+Sect="Operations and Methods" BookName="Prg Tutorial"/></Alt>
+<Alt Not="HTML"><E>operations</E></Alt> to perform computations with
+these objects. Using the philosophy of &GAP4;, one or
+more <Alt Only="HTML"><Ref Text="methods" Sect="Operations and
+Methods" BookName="Prg Tutorial"/></Alt> <Alt Not="HTML">methods</Alt>
+are
+<Alt Only="HTML"><Ref Text="installed" Sect="Method Installation"
+BookName="Prg Tutorial"/></Alt>
+<Alt Not="HTML"><E>installed</E></Alt> for each operation, depending
+on <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
+BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>properties</E></Alt>
+and <Alt Only="HTML"><Ref Text="attributes" Sect="attributes"
+BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>attributes</E></Alt> of
+these objects. These properties and attributes can themselves be
+computed by methods installed for this purpose. This manual lists and
+describes most of the existing constructors and operations for the
+above objects. The list of operations includes:
+<List>
+  <Item>resolution of modules</Item>
+  <Item>computation of subfactor modules</Item>
+  <Item>applying functors (like <C>Ext</C>, <C>Tor</C>, ...) to modules,
+    maps, complexes and chain maps</Item>
+  <Item>derivation and composition of functors</Item>
+  <Item>horse shoe resolution of short exact sequences of
+    modules</Item>
+  <Item>connecting homomorphisms and long exact sequences</Item>
+  <Item>Cartan-Eilenberg resolution of complexes</Item>
+  <Item>hyper (co)homology</Item>
+  <Item>spectral sequences of bicomplexes</Item>
+  <Item>the Grothendieck spectral sequences associated to two
+    composable functors</Item>
+  <Item>test if a module is torsion-free, reflexive, projective,
+    stably free, free, pure</Item>
+  <Item>determine the rank, codimension, projective dimension, degree
+    of torsion-freeness, and codegree of purity of a module</Item>
+</List>
+
+</Subsection>
+
+<Subsection Label="homalg-delegates">
+<Heading>&homalg; delegates ...</Heading>
+
+The package &homalg; delegates all matrix operations either internally
+to &GAP; or externally to another computer algebra system: For a
+matrix to be internal or external depends solely on whether the ring
+over which it is defined is internal or external. &homalg; accesses
+external matrices via pointers. A pointer of an external matrix is
+simply its name in the external system. &homalg; chooses these
+names. <P/>
+
+The matrix operations are divided into two classes called "Tool" and
+"Basic". The "Tool" operations include addition, subtraction,
+multiplication, extracting certain rows or columns, stacking, and
+augmenting matrices. The "Basic" operations include the two basic
+operations in linear algebra needed to solve an inhomogeneous linear
+system <M>XA=B</M> with coefficients in a not necessarily commutative
+ring <M>R</M>:
+<List>
+  <Item>Effectively reducing <M>B</M> modulo <M>A</M>,
+    i.e. effectively deciding if a row (or a set of rows) <M>B</M>
+    lies in the <M>R</M>-span of the rows of the
+    matrix <M>A</M>.</Item>
+  <Item>Computing an <M>R</M>-generating set of row syzygies
+    (=<M>R</M>-relations among the rows) of <M>A</M>, i.e. computing
+    an <M>R</M>-generating set of the left kernel of <M>A</M>. This
+    generating set is then given as the rows of a matrix <M>Y</M>
+    and <M>YA=0</M>.</Item>
+</List>
+The first operation is nothing but deciding the solvability of the
+inhomogeneous system <M>XA=B</M> and if solvable to compute a
+particular solution <M>X</M>, while the second is to compute an
+<M>R</M>-generating set for the homogeneous solution space, i.e. the
+solution space of the homogeneous system <M>YA=0</M>. The above is of
+course also valid for the column convention. <P/>
+
+</Subsection>
+
+<Subsection Label="homalg-limitation">
+<Heading>Principal limitation</Heading>
+
+Note that the solution space of the one-sided finite dimensional
+system <M>YA=0</M> (resp. <M>AY=0</M>) over a left (resp. right)
+noetherian ring <M>R</M> is a finitely generated left
+(resp. right) <M>R</M>-module, even if the <M>R</M> is not
+commutative. The solution space of the linear system <M>X_1 A_1 + A_2
+X_2 + A_3 X_3 A_4=0</M> is in general not an <M>R</M>-module, and
+worse, in general not finitely generated over the center
+of <M>R</M>. &homalg; can only handle homological problems that lead
+to <E>one sided</E> <E>finite dimensional</E> homogeneous or
+inhomogeneous systems over the underlying ring <M>R</M>. Such problems
+are called problems of <E>finite type</E> over <M>R</M>. Typically,
+the computation of <C>Hom</C><M>(M,N)</M> of two (even) finitely
+generated modules over a <E>non</E>commutative ring <M>R</M> is
+generally <E>not</E> of finite type over <M>R</M>, unless at least one
+of the two modules is an <M>R</M>-bimodule. Also note that over a
+commutative ring any linear system can be easily brought to a
+one-sided form. For more details see <Cite Key="BR"/>. <P/>
+
+</Subsection>
+
+<Subsection Label="homalg-dict">
+<Heading>&homalg;'s dictionaries (technical)</Heading>
+
+&homalg; uses the so-called <C>homalgTable</C>, which is stored in the
+ring, to know how to delegate the necessary matrix operations.
+I.e. the <C>homalgTable</C> serves as a small dictionary that enables
+&homalg; to speak (as much as needed of) the language of the computer
+algebra system which hosts the ring and the matrices. The &GAP;
+internal ring of integers is the only ring which &homalg; endows with
+a <C>homalgTable</C>. Other packages like &GaussForHomalg; and
+&RingsForHomalg; provide dictionaries for further rings. While
+&GaussForHomalg; defines further internal rings and matrices, the
+package &RingsForHomalg; enables defining external rings and matrices
+in a wide range of (external) computer algebra systems (&Singular;,
+&Sage;, &MAGMA;, &Maple;) by providing appropriate dictionaries. <P/>
+
+Since these dictionaries are all what is needed to handle matrix
+operations, &homalg; does not distinguish between handling internal
+and handling external matrices. Even the physical communication with
+the external systems is not at all a concern of &homalg;. This is the
+job of the package &IO_ForHomalg;, which is based on the powerful &IO;
+package of Max Neunhöffer. Furthermore, for all structures beyond
+matrices (from relations, generators, and modules, to functors and
+spectral sequences) &homalg; no longer distinguishes between internal
+and external. <P/>
+
+</Subsection>
+
+<Subsection Label="outsource">
+<Heading>The advantages of the outsourcing concept</Heading>
+
+Linking different systems to achieve one task is a highly attractive
+idea, especially if it helps to avoid reinventing wheels over and over
+again. This was essential for &homalg;, since &Singular; and &MAGMA;
+provide the fastest and most advanced Gröbner basis algorithms, while
+&GAP4; is by far the most convenient programming language to realize
+complex mathematical structures (&see; <Ref Sect="WhyGAP4" Text="Why
+GAP4?"/>). Second, the implementation of the homological constructions
+is automatically universal, since it is independent of where the
+matrices reside and how the several matrix operations are realized. In
+particular, &homalg; will always be able to use the system with the
+fastest Gröbner basis implementation. In this respect is &homalg; and
+all packages that build upon it future proof.
+
+</Subsection>
+
+<Subsection Label="also-special">
+<Heading>Does this mean that &homalg; has only algorithms for the generic case?</Heading>
+
+No, on the contrary. There are a lot of specialized algorithms
+installed in &homalg;. These algorithms are based on properties and
+attributes that -- thanks to &GAP4; -- &homalg; objects can carry
+(&see; <Ref Label="Objectify"/>): Not only can &homalg; take the
+special nature of the underlying ring into account, it also deals with
+modules, complexes, ... depending on their special properties. Still,
+these special algorithms, like all algorithms in &homalg;, are
+independent of the computer algebra system which hosts the matrices
+and which will perform the several matrix operations.
+
+</Subsection>
+
+<Subsection Label="least-communication">
+<Heading>The principle of least communication (technical)</Heading>
+
+Linking different systems can also be highly problematic. The
+following two points are often among the major sources of
+difficulties:
+<List>
+  <Item>Different systems use different languages:<Br/> It takes a
+    huge amount of time and effort to teach systems the dialects of
+    each others. These dialects are also rarely fixed forever, and
+    might very well be subject to slight modifications. So the larger
+    the dictionary, the more difficult is its maintenance.</Item>
+  <Item>Data has to be transferred from one system to another:<Br/>
+    Even if there is a unified data format, transferring data between
+    systems can lead to performance losses, especially when a big
+    amount of data has to be transferred.</Item>
+</List>
+
+Solving these two difficulties is an important part of &homalg;'s
+design: Homological computations had to be split in two parts. The
+matrices should reside in the system providing the fastest matrix
+operations, while the highly complex structures with their properties,
+attributes, and all their logical dependencies should live in &GAP4;.
+Moreover, each sort of data should <E>not</E> be transferred outside its
+system. The remaining communication between the different systems
+should also get along with a tiny dictionary. It would also be
+desirable if only one system, favorably &GAP4; as it manages and
+delegates all computations, also manages the whole data flow, while
+the other systems do not even recognize that they are part of a
+bidirectional communication. <P/>
+
+Fortunately, in the case of homological computations such a split can
+be easily found: <Br/> The matrices with all their operations can be
+put in one system, while the higher structures (modules, maps,
+complexes, functors, spectral sequences, ...) and their algorithms can
+be put into another. <P/>
+
+Obviously the existence of such a clear cut is to a great
+extent due to the special nature of homological computations.
+
+</Subsection>
+
+<Subsection Label="build">
+<Heading>Building upon the &homalg; package</Heading>
+
+As mentioned above, the package &homalg; should only be the first and
+foundational part of the &homalg; project. On the one hand it is
+designed independently of the details of the different matrix
+operations, which other packages are meant to provide. Typically,
+these packages (like &RingsForHomalg;) heavily rely on existing well
+tested and optimized systems like &Singular; or &MAGMA;. On the other
+hand other packages can be built upon or extend the &homalg; package
+in different ways:
+<List>
+  <Item>add constructors (sheaves, schemes, simplicial sets, ...)</Item>
+  <Item>add methods for basic operation (Yoneda products, Massey products, ...)</Item>
+  <Item>add methods to compute sheaf cohomology, local cohomology,
+    Hochschild (co)homology, cyclic (co)homology...</Item>
+  <Item>provide algorithms for holonomic <M>D</M>-modules based on the
+    restriction algorithm: localization, computing tensor
+    products, <C>Hom</C>, <C>Ext</C>, de Rham cohomology, ...</Item>
+  <Item>support change of rings, Lyndon/Hochschild-Serre spectral
+    sequence, base change spectral sequences, ...</Item>
+  <Item>support perturbation techniques, Serre and Eilenberg-Moore
+    spectral sequence of simplicial spaces of infinite type,
+    ...</Item>
+  <Item>...</Item>
+</List>
+
+The project will remain open and contributions are highly welcome. The
+different packages will be attributed to their respective authors. The
+whole project will be attributed to the "&homalg; team", i.e. the
+authors and contributers of all packages in the project.
+
+</Subsection>
+
+<Subsection Label="FAQ">
+<Heading>Frequently asked questions</Heading>
+
+<List>
+  <Item><B>Q</B>: Does this mean that &homalg; is able to compute
+    spectral sequences without ever seeing the matrices involved in
+    the computation?<Br/><Br/> A: Yes.</Item>
+  <Item><B>Q</B>: Can &homalg; profit from the implementation of
+    homological constructions like <C>Hom</C>, <C>Ext</C>, ... in
+    &Singular;?<Br/><Br/> A: No. This is for a lot of reasons
+    incompatible with the <Alt Only="HTML"><Ref Text="idea and design" Label="intro"/></Alt>
+    <Alt Not="HTML">idea and design</Alt> of &homalg;.</Item>
+  <Item><B>Q</B>: Are the external systems involved in the higher
+    algorithms?<Br/><Br/> A: No. They host all the matrices and do all
+    matrix operations delegated to them without knowing what for. The
+    meaning of the matrices and their logical interrelation is only
+    known to &GAP4;.</Item>
+  <Item><B>Q</B>: Do packages building upon &homalg; need to know
+  anything about the communication with the external
+  systems?<Br/><Br/> A: No.</Item>
+</List>
+
+</Subsection>
+
+</Section>
+
+<Section Label="WhyNotMaple">
+<Heading>Why was &homalg; discontinued in <Alt Only="Text">&Maple;</Alt><Alt Not="Text"><URL Text="Maple">http://www.maplesoft.com/</URL></Alt>?</Heading>
+
+The original implementation of &homalg; in &Maple; by Daniel Robertz
+and myself hit several walls. The speed of the Gröbner basis routines
+in &Maple; was the smallest issue. The rising complexity of data
+structures for high level algorithms (bicomplexes, functors, spectral
+sequences, ...) became the main problem. We very much felt the need
+for an object-oriented programming language, a language that allows
+defining complicated mathematical objects carrying properties and
+attributes and even containing other objects as subobjects. <P/>
+
+As we were pushed to look for an alternative to &Maple;, our wish list
+grew even further. Section <Ref Sect="WhyGAP4"/> is a summary of this
+wish list.
 
 </Section>
 
 <Section Label="WhyGAP4">
-<Heading>Why &GAP4;</Heading>
+<Heading>Why <Alt Only="Text">&GAP4;</Alt><Alt Not="Text"><URL Text="GAP4">http://www.gap-system.org/</URL></Alt>?</Heading>
 
-&GAP4; is an object oriented programming language that suits the needs
-of mathematical programming more than any other language designed by
-computer scientists. This was primarily achieved by the advanced
-<URL Text="method selection">
-http://www.gap-system.org/Manuals/doc/htm/prg/CHAP002.htm</URL>
-techniques that very much resembles the mathematical way of thinking.
+<Subsection Label="OpenGAP">
+<Heading>&GAP; is free software</Heading>
 
-&GAP4; was developed by mathematicians who needed to handle complex
-mathematical structures carrying properties and attributes.
+In 1993 J. Neubüser <Alt Only="Text">addressed</Alt>
+<Alt Not="Text"><URL Text="addressed">http://www.gap-system.org/Doc/Talks/cgt.ps</URL></Alt>
+the necessity of free software in mathematics: <P/>
+
+<Quoted>You can read Sylow's Theorem and its proof in Huppert's book
+in the library without even buying the book and then you can use
+Sylow's Theorem for the rest of your life free of charge, but - and
+for understandable reasons of getting funds for the maintenance, the
+necessity of which I have pointed out [...] - for many computer
+algebra systems license fees have to be paid regularly for the total
+time of their use. In order to protect what you pay for, you do not
+get the source, but only an executable, i.e. a black box. You can
+press buttons and you get answers in the same way as you get the
+bright pictures from your television set but you cannot control how
+they were made in either case.
+
+<Br/>
+
+With this situation two of the most basic rules of conduct in
+mathematics are violated. In mathematics information is passed on free
+of charge and everything is laid open for checking. Not applying these
+rules to computer algebra systems that are made for mathematical
+research [...] means moving in a most undesirable direction. Most
+important: Can we expect somebody to believe a result of a program
+that he is not allowed to see? [...] And even: If O'Nan and Scott
+would have to pay a license fee for using an implementation of their
+ideas about primitive groups, should not they in turn be entitled to
+charge a license fee for using their ideas in the
+implementation?</Quoted>
+
+<Par></Par>
+
+I had the pleasure of being one of his students. <P/>
+
+The detailed copyright for &GAP; can found on the &GAP; homepage under
+<Alt Only="Text">Start > Download > Copyright</Alt><Alt Not="Text">
+<URL Text="Start > Download >
+Copyright">http://www.gap-system.org/Download/copyright.html#free</URL></Alt>.
+
+</Subsection>
+
+<Subsection Label="ExpertGAP">
+<Heading>&GAP; has an area of expertise</Heading>
+
+Not only does &GAP; have the potential of natively supporting a wide
+range of mathematical structures, but finite groups and their
+representation theory are already an area of expertise. So there are
+at least some areas where one does not need to start from
+scratch. <P/>
+
+But one could argue that rings are more central for homological
+algebra than finite groups, and that &GAP4;, as for the time when the
+&homalg; project was shaping, does not seriously support important
+rings in a manner that enables homological computations. This drawback
+would favor, for
+example, <Alt Only="Text">&Singular;</Alt><Alt Not="Text">
+<URL Text="Singular">http://www.singular.uni-kl.de/</URL></Alt> (with
+its subsystem &Plural;) over &GAP4;. Point <Ref Sect="GAP-IO"/>
+indicates how this drawback was overcome in way, that even gave the
+lead back to &GAP4;. <P/>
+
+One of my future plans for the &homalg; project is to address moduli
+problems in algebraic geometry (favorably via orbifold stacks), where
+discrete groups (and especially finite groups) play a central role. As
+of the time of writing these lines, discrete groups, finite groups,
+and orbifolds are already in the focus of part of the project: The
+package &SCO; by Simon Görtzen (&see; <Ref Text="The homalg Project" Sect="homalg-Project"/>) to
+compute the cohomology of orbifolds is part of the currently available
+&homalg; project. <P/>
+
+For the remaining points the choice of &GAP4; as the programming
+language for developing &homalg; was unavoidable.
+
+</Subsection>
+
+<Subsection Label="GAP-IO">
+<Heading>&GAP4; can communicate</Heading>
+
+With the excellent
+&IO; <Alt Not="Text"><URL Text="package">http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/io.html</URL></Alt>
+<Alt Only="Text">package</Alt> of Max Neunhöffer &GAP4; is able to
+communicate in an extremely efficient way with the outer world via
+bidirectional streams. This allows &homalg; to delegate things that
+cannot be done in &GAP; to an external system such as &Singular;,
+&Sage;, &MAGMA;, or &Maple;.
+
+</Subsection>
+
+<Subsection Label="Objectify">
+<Heading>&GAP4; is a <E>mathematical</E> object-oriented programming language</Heading>
+
+The object-oriented programming philosophy of &GAP4; was developed by
+mathematicians who wanted to handle complex
+mathematical <Alt Only="HTML"><Ref Text="objects"
+Sect="Creating New Objects" BookName="Prg Tutorial"/></Alt>
+<Alt Not="HTML">objects</Alt>
+carrying <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
+BookName="Tutorial"/></Alt>
+<Alt Not="HTML"><E>properties</E></Alt>
+and <Alt Only="HTML"><Ref Text="attributes" Sect="attributes"
+BookName="Tutorial"/></Alt><Alt Not="HTML"><E>attributes</E></Alt>, as
+often encountered in algebra and geometry. &GAP4; was thus designed to
+address the needs of <E>mathematical</E> object-oriented programming
+more than any other language designed by computer scientists. This was
+primarily achieved by the advanced <Alt Only="HTML"><Ref Text="method
+selection" Sect="method selection" BookName="Prg Tutorial"/>
+</Alt> <Alt Not="HTML"><E>method selection</E></Alt> techniques that
+very much resemble the mathematical way of thinking. <P/>
+
+Unlike the common object-oriented programming languages, methods in
+&GAP4; are not bound to objects but
+to <Alt Only="HTML"><Ref Text="operations"
+Sect="Operations and Methods"
+BookName="Prg Tutorial"/></Alt><Alt Not="HTML">operations</Alt>.
+
+In particular one can also install methods that depend on two or more
+arguments. The index of a subgroup is an easy example of an operation
+illustrating this. While it would be sufficient to bind a method for
+computing the order of a group to the object representing the group,
+it is not clear what to do with the index, since its definition
+involves two objects: a group <M>G</M> and a subgroup <M>U</M>. Note
+that the index of <M>U</M> in a subgroup of <M>G</M>
+containing <M>U</M> might also be of interest. Things become even more
+complicated when the arguments of the operation are unrelated
+objects. Moreover, binding methods to operations makes it possible for
+the programming language to support the installation of one or more
+methods for the same operation, depending on already known properties
+or attributes of the involved objects. <P/>
+
+Moreover &GAP4; supports so-called
+<Alt Only="HTML"><Ref Text="immediate and true methods"
+Sect="Immediate and True Methods"
+BookName="Tutorial"/></Alt><Alt Not="HTML"><E>immediate and true
+methods</E></Alt>. This considerably simplifies teaching theorems to
+the computer. For example it takes one line of code to teach &GAP4;
+that a reflexive left module over a ring with left global dimension
+less or equal to two is projective. These logical implications are
+installed globally and &GAP4; immediately uses them as soon as the
+respective assumptions are fulfilled. This mechanism enables &GAP4; to
+draw arbitrary long lines of conclusions. The more one knows about the
+objects involved in the computation the more specialized efficient
+algorithms can be utilized, while other computations can be completely
+avoided. &homalg; is equipped with plenty of logical implications for
+rings, matrices, modules, morphisms, and complexes. <P/>
+
+When all these features become relevant to what you want to do, there
+is hardly an alternative to &GAP4;.
+
+</Subsection>
+
+<Subsection Label="BigGAP">
+<Heading>&GAP4; packages are easily extendible</Heading>
+
+Being able to install several methods for a single operation (&see;
+<Ref Label="Objectify"/>) has the additional advantage of making
+&GAP4; packages easily extendible. If you have an algorithm that, in a
+special case, performs better than existing algorithms you can install
+it as a method which gets triggered when the special case occurs. You
+don't need to break existing code to insert an additional <C>elif</C>
+section contributing to an increasing unreadability of the code. Even
+better, you don't even need to know <E>anything</E> about the code of
+other existing methods. In addition to that, you can add (maybe
+missing) properties and attributes (along with methods to compute
+them) to existing objects.
+
+</Subsection>
+
+</Section>
+
+<Section Label="WhyNotSage">
+<Heading>Why not <Alt Only="Text">&Sage;</Alt><Alt Not="Text"><URL Text="Sage">http://www.sagemath.org/</URL></Alt>?</Heading>
+
+Although the &python;-based &Sage; fulfills most of the above
+requirements, it was primarily the points expressed in
+<Ref Sect="Objectify"/> that finally favored &GAP4; over &Sage;: The
+object-orientedness of &python;, although very modern, does not cover
+my needs for the &homalg; package. At this place I would like to
+thank <Alt Only="Text">William Stein</Alt>
+<Alt Not="Text"><URL Text="William
+Stein">http://modular.math.washington.edu/</URL></Alt> for the helpful
+discussion about &Sage; during the early stage of developing &homalg;,
+and to Max Neunhöffer who explained me the advantages of the
+object-oriented programming in &GAP4;.
+
+</Section>
+
+<Section Label="Sage">
+<Heading>How does &homalg; compare to &Sage;?</Heading>
+
+In what follows &homalg; often refers to the whole &homalg;
+project. <P/>
+
+<Subsection Label="homalg-Sage-objectives">
+<Heading>They differ in objectives and scale</Heading>
+
+First of all, &Sage; is a huge project, that, among other things, is
+intended to replace commercial, general purpose computer algebra
+systems like &Maple; and &Mathematica;. So while &Sage; targets (a
+growing number of) different fields of computer algebra, &homalg; only
+focuses on homological, and hopefully in the near future also
+homotopical techniques (applicable to some of these different
+fields). The two projects simply follow different goals and are
+different in scale.
+
+</Subsection>
+
+<Subsection Label="homalg-Sage-language">
+<Heading>They differ in the programming language</Heading>
+
+&Sage; is based on &python; and the &C;-extension &cython; while
+&homalg; is based on &GAP4;. Quoting from an email response William
+Stein sent me on the 25. of February, 2008: <Q>Sage *is* Python + a
+library</Q>. Although I seriously considered developing &homalg; as
+part of &Sage;, for the reason mentioned in <Ref Sect="Objectify"/> I
+finally decided to use &GAP4; as the programming language.
+
+</Subsection>
+
+<Subsection Label="homalg-Sage-communicate">
+<Heading>They differ in the way they communicate with the outer world</Heading>
+
+Both &Sage; and &homalg; rely for many things on external computer
+algebra systems. But although one can simply invoke a &GAP; shell or a
+&Singular; shell from within &Sage;, &Sage; normally runs the external
+computer algebra systems in the background and tries to understand the
+internals of the objects residing in them. An object in the external
+computer algebra system is wrapped by an object in &Sage; and
+supporting this external object involves understanding its details in
+the external system. &homalg; follows a different strategy: The only
+external objects &homalg; needs (beside rings) are non-empty
+matrices. And being zero or not is basically the only thing &homalg;
+wants to know about a matrix after knowing its dimension. I myself was
+stunned by this insight, which culminated in what I call <E>the
+principle of least communication</E>. <P/>
+
+In particular, &Sage; can make use of all of &homalg;, but for in
+order to make full use, &Sage; needs to understand the internals of
+the &homalg; objects. On the contrary, &homalg; can only make limited
+use of &Sage; (or of virtually any computer algebra system that
+supports rings in a sufficient way), but without the need to delve
+into the inner life of the &Sage; objects. <P/>
+
+</Subsection>
 
 </Section>
 
 <Section Label="overview">
 <Heading>This manual</Heading>
 
-Chapter <Ref Chap="install"/> describes the installation of this package.
+Chapter <Ref Chap="install"/> describes the installation of this
+package, while Chapter <Ref Chap="QuickStart"/> provides a short quick
+guide to build you own examples. There the separate package
+&ExamplesForHomalg; is introduced and used. The remaining chapters are
+each devoted to one of the &homalg; objects (&see;
+<Ref Label="homalg-provides"/>) with its properties, attributes, and
+operations.
 
-<E>More text on other chapters to be written.</E><P/>
-
-Finally, Chapter <Ref Chap="examples"/>
-shows instructive examples for the usage of this package.
-
-The main reference for the Maple implementation is <Cite Key="BR"/>.
+<!--
+Finally, Chapter <Ref Chap="examples"/> shows some instructive
+examples for the usage of this package.
+-->
 
 </Section>
 
 <!-- ############################################################ -->
 
 </Chapter>
+
+<!--  LocalWords:  outsourcing
+ -->

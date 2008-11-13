@@ -8,51 +8,56 @@
 
 -->
 
-<Chapter Label="homalg Project">
+<Chapter Label="homalg-Project">
 <Heading>The &homalg; Project</Heading>
 
+<Section Label="homalg">
+<Heading>The package &homalg;</Heading>
+
+</Section>
+
 <Section Label="ExmaplesForHomalg">
-<Heading>The Package &ExamplesForHomalg;</Heading>
+<Heading>The package &ExamplesForHomalg;</Heading>
 
 </Section>
 
 <Section Label="alexander">
-<Heading>The Package &alexander;</Heading>
+<Heading>The package &alexander;</Heading>
 
 </Section>
 
 <Section Label="GaussForHomalg">
-<Heading>The Package &GaussForHomalg;</Heading>
+<Heading>The package &GaussForHomalg;</Heading>
 
 </Section>
 
 <Section Label="IO_ForHomalg">
-<Heading>The Package &IO_ForHomalg;</Heading>
+<Heading>The package &IO_ForHomalg;</Heading>
 
 </Section>
 
 <Section Label="RingsForHomalg">
-<Heading>The Package &RingsForHomalg;</Heading>
+<Heading>The package &RingsForHomalg;</Heading>
 
 </Section>
 
 <Section Label="SCO">
-<Heading>The Package &SCO;</Heading>
+<Heading>The package &SCO;</Heading>
 
 </Section>
 
 <Section Label="LessGenerators">
-<Heading>The Package &LessGenerators;</Heading>
+<Heading>The package &LessGenerators;</Heading>
 
 </Section>
 
 <Section Label="Yoneda">
-<Heading>The Package &Yoneda;</Heading>
+<Heading>The package &Yoneda;</Heading>
 
 </Section>
 
 <Section Label="...">
-<Heading>The Package ...</Heading>
+<Heading>The package ...</Heading>
 
 </Section>
 

@@ -5,6 +5,15 @@
 	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
 	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
 	  <!ENTITY Maple '<Package>Maple</Package>'>
+	  <!ENTITY Mathematica '<Package>Mathematica</Package>'>
+	  <!ENTITY Singular '<Package>Singular</Package>'>
+	  <!ENTITY Plural '<Package>Plural</Package>'>
+	  <!ENTITY Sage '<Package>Sage</Package>'>
+	  <!ENTITY python '<Package>python</Package>'>
+	  <!ENTITY cython '<Package>cython</Package>'>
+	  <!ENTITY C '<Package>C</Package>'>
+	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
+	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
