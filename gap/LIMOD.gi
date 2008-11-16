@@ -340,7 +340,7 @@ InstallImmediateMethod( IsReflexive,
         
   function( M )
     
-    return CodegreeOfPurity( M ) = 0;
+    return CodegreeOfPurity( M ) = [ 0 ];
     
 end );
 
@@ -659,7 +659,7 @@ InstallImmediateMethod( CodegreeOfPurity,
         
   function( M )
     
-    return 0;
+    return [ 0 ];
     
 end );
 
@@ -684,7 +684,7 @@ InstallImmediateMethod( CodegreeOfPurity,
   function( M )
     
     if IsReflexive( M ) then
-        return 0;
+        return [ 0 ];
     fi;
     
     TryNextMethod( );
@@ -748,7 +748,7 @@ InstallMethod( IsReflexive,
         
   function( M )
     
-    return IsTorsionFree( M ) and CodegreeOfPurity( M ) = 0;
+    return IsTorsionFree( M ) and CodegreeOfPurity( M ) = [ 0 ];
     
 end );
 
@@ -1329,7 +1329,7 @@ InstallMethod( CodegreeOfPurity,
   function( M )
     
     if IsReflexive( M ) then
-        return 0;
+        return [ 0 ];
     fi;
     
     TryNextMethod( );
@@ -1343,7 +1343,7 @@ InstallMethod( CodegreeOfPurity,
         
   function( M )
     
-    if not IsTorsionFree( M ) then
+    if not IsTorsionFree( M ) and not IsTorsion( M ) then
         return infinity;
     fi;
     
