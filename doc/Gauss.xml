@@ -20,7 +20,7 @@
   <Version>
       Version <#Include SYSTEM "../VERSION">
   </Version>
-  <Author>Simon Goertzen<Br/>
+  <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
           <Email>simon.goertzen@rwth-aachen.de</Email>
           <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
 	  <Address>

@@ -48,6 +48,7 @@ towww: archive
 	cp README ${WEBPOS}/README.Gauss
 	cp doc/manual.pdf ${WEBPOS}/Gauss.pdf
 	cp ../tar/Gauss.tar.gz ${WEBPOS}
+	cp doc/*.html ${WEBPOS}
 
 ##
 ##  This program is free software; you can redistribute it and/or modify
