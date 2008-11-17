@@ -74,7 +74,7 @@ elif mode = 2 then
     
     if f = "" or i = fail then
         if CAS <> "default" then
-            if List_of_CAS[ CAS ] = "GAP" then
+            if List_of_CAS[ CAS ] = "" then
                 Print( "\ngap> R := HomalgFieldOfRationals( );\n" );
             else
                 Print( "\ngap> R := HomalgFieldOfRationalsIn", List_of_CAS[ CAS ], "( );\n" );
@@ -90,7 +90,7 @@ elif mode = 2 then
             str := " ";
         fi;
         if CAS <> "default" then
-            if List_of_CAS[ CAS ] = "GAP" then
+            if List_of_CAS[ CAS ] = "" then
                 Print( "\ngap> R := HomalgRingOfIntegers(", str, ");\n" );
             else
                 Print( "\ngap> R := HomalgRingOfIntegersIn", List_of_CAS[ CAS ], "(", str, ");\n" );

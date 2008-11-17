@@ -157,7 +157,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "markus.lange.hegermann@rwth-aachen.de",
-    WWWHome       := "",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -319,8 +319,9 @@ BannerString := Concatenation(
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
-  "Type: ?ExamplesForHomalg:	# for help contents\n",
-  "      ExamplesForHomalg();	# for the guiding script\n",
+  "  ?ExmaplesForHomalg:        ## for contents of the manual\n",
+  "  ?ExmaplesForHomalg:x       ## for chapter/section/topic x\n",
+  "  ExamplesForHomalg();       ## for guidance\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
