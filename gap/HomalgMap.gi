@@ -482,89 +482,195 @@ end );
 
 ##
 InstallMethod( PreInverse,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local inv;
     
-    inv := LeftInverse( MatrixOfMap( phi ) );
-    
-    if HasIsZero( inv ) and IsZero( inv ) then
-        return TheZeroMap( Range( phi ), Source( phi ) );
-    fi;
-    
-    if Eval( inv ) = fail then
-        return fail;
-    fi;
-    
-    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    return fail;
     
 end );
 
 ##
 InstallMethod( PreInverse,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local R, S, T, M, p, Ib, Ic, b, c, P, d, Id, PI, B, A, L, sigma;
+    
+    R := HomalgRing( phi );
+    
+    if not( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    S := Source( phi );
+    T := Range( phi );
+    
+    M := MatrixOfRelations( ReducedBasisOfModule( S ) );
+    
+    p := MatrixOfMap( phi );
+    
+    #=====# begin of the core procedure #=====#
+    
+    Ib := MatrixOfMap( TheIdentityMorphism( S ) );
+    Ic := MatrixOfMap( TheIdentityMorphism( T ) );
+    
+    b := NrRows( Ib );
+    c := NrRows( Ic );
+    
+    P := ReducedBasisOfModule( T );
+    
+    d := NrRelations( P );
+    Id := HomalgIdentityMatrix( d, R );
+    
+    P := MatrixOfRelations( P );
+    
+    PI := Involution( P );
+    
+    B := EntriesOfHomalgMatrix( Ic );
+    
+    B := Concatenation( ListWithIdenticalEntries( b * d, Zero( R ) ), B );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        B := HomalgMatrix( B, 1, b * d + c * c, R );
+        A := UnionOfColumns( KroneckerMat( PI, Ib ), KroneckerMat( Ic, p ) );
+        L := DiagMat( [ KroneckerMat( Id, M ), KroneckerMat( Ic, P ) ] );
+        sigma := RightDivide( B, A, L );
+    else
+        B := HomalgMatrix( B, b * d + c * c, 1, R );
+        A := UnionOfRows( KroneckerMat( Ib, PI ), KroneckerMat( p, Ic ) );
+        L := DiagMat( [ KroneckerMat( M, Id ), KroneckerMat( P, Ic ) ] );
+        sigma := LeftDivide( A, B, L );
+    fi;
+    
+    if IsBool( sigma ) then
+        return false;
+    fi;
+    
+    ## we already have every thing to build the (matrix of the) split sigma
+    
+    sigma := EntriesOfHomalgMatrix( sigma );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        sigma := HomalgMatrix( sigma, c, b, R );
+    else
+        sigma := HomalgMatrix( sigma, b, c, R );
+    fi;
+    
+    sigma := HomalgMap( sigma, T, S );
+    
+    
+    Assert( 1, IsMonomorphism( sigma ) );
+    SetIsMonomorphism( sigma, true );
+    
+    DecideZero( sigma );
+    
+    return sigma;
+    
+end );
+
+##
+InstallMethod( PreInverse,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local inv;
     
-    inv := RightInverse( MatrixOfMap( phi ) );
+    if not IsEpimorphism( phi ) then
+        return false;
+    elif IsIsomorphism( phi ) then
+	return phi ^ -1;
+    fi;
     
+    DecideZero( phi );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        inv := LeftInverse( MatrixOfMap( phi ) );
+    else
+        inv := RightInverse( MatrixOfMap( phi ) );
+    fi;
+    
+    ## this must come before any Eval:
     if HasIsZero( inv ) and IsZero( inv ) then
         return TheZeroMap( Range( phi ), Source( phi ) );
     fi;
     
-    if Eval( inv ) = fail then
-        return fail;
+    if IsBool( Eval( inv ) ) then
+        return false;
     fi;
     
-    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    inv := HomalgMap( inv, Range( phi ), Source( phi ) );
+    
+    if IsMorphism( inv ) then
+        
+        Assert( 1, IsMonomorphism( inv ) );
+        SetIsMonomorphism( inv, true );
+        
+        DecideZero( inv );
+        return inv;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
 ##
 InstallMethod( PostInverse,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local inv;
     
-    inv := RightInverse( MatrixOfMap( phi ) );
-    
-    if HasIsZero( inv ) and IsZero( inv ) then
-        return TheZeroMap( Range( phi ), Source( phi ) );
-    fi;
-    
-    if Eval( inv ) = fail then
-        return fail;
-    fi;
-    
-    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    return fail;
     
 end );
 
 ##
 InstallMethod( PostInverse,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local inv;
     
-    inv := LeftInverse( MatrixOfMap( phi ) );
+    if not IsMonomorphism( phi ) then
+        return false;
+    elif IsIsomorphism( phi ) then
+	return phi ^ -1;
+    fi;
     
+    DecideZero( phi );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        inv := RightInverse( MatrixOfMap( phi ) );
+    else
+        inv := LeftInverse( MatrixOfMap( phi ) );
+    fi;
+    
+    ## this must come before any Eval:
     if HasIsZero( inv ) and IsZero( inv ) then
         return TheZeroMap( Range( phi ), Source( phi ) );
     fi;
     
-    if Eval( inv ) = fail then
-        return fail;
+    if IsBool( Eval( inv ) ) then
+        return false;
     fi;
     
-    return HomalgMap( inv, Range( phi ), Source( phi ) );
+    inv := HomalgMap( inv, Range( phi ), Source( phi ) );
+    
+    if IsMorphism( inv ) then
+        
+        Assert( 1, IsEpimorphism( inv ) );
+        SetIsEpimorphism( inv, true );
+        
+        DecideZero( inv );
+        return inv;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 

@@ -1295,7 +1295,7 @@ InstallMethod( ProjectiveDimension,
     ## (so now we check stably freeness)
     if pd = 1 then
         s := PostInverse( LowestDegreeMorphism( d ) );
-        if s <> fail then
+        if not IsBool( s ) then
             pd := 0;
         fi;
     fi;

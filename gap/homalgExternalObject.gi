@@ -97,7 +97,7 @@ InstallMethod( homalgPointer,
         
   function( o )
     
-    Error( "expected an external object but got fail\n" );
+    Error( "expected an external object but got ", o, "\n" );
     
 end );
 

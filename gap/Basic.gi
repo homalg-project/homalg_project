@@ -474,7 +474,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     ## NF <> 0
     if not IsZero( NF ) then
         #Error( "The second argument is not a right factor of the first, i.e. the rows of the second argument are not a generating set!\n" );
-        return fail;
+        return false;
     fi;
     
     ## CD = -CB * CA => CD * A = B
@@ -515,7 +515,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     ## NF <> 0
     if not IsZero( NF ) then
         #Error( "The first argument is not a left factor of the second, i.e. the columns of the first argument are not a generating set!\n" );
-        return fail;
+        return false;
     fi;
     
     ## CD = CA * -CB => A * CD = B
@@ -567,13 +567,24 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     
     ## NF <> 0
     if not IsZero( NF ) then
-        return fail;
+        return false;
     fi;
     
     a := NrRows( A );
     
     ## CD = -CB * CA => CD * A = B
     return -CB * CertainColumns( CA, [ 1 .. a ] );	## -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    
+end );
+
+##
+InstallMethod( RightDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( B, A, L )
+    
+    return RightDivide( B, A, HomalgRelationsForLeftModule( L ) );
     
 end );
 
@@ -621,13 +632,24 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     
     ## NF <> 0
     if not IsZero( NF ) then
-        return fail;
+        return false;
     fi;
     
     a := NrColumns( A );
     
     ## CD = CA * -CB => A * CD = B
     return CertainRows( CA, [ 1 .. a ] ) * -CB;		## CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
+    
+end );
+
+##
+InstallMethod( LeftDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B, L )
+    
+    return LeftDivide( A, B, HomalgRelationsForRightModule( L ) );
     
 end );
 
@@ -653,8 +675,8 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     
     left_inv := RightDivide( Id, RI );		## ( cf. [BR, Subsection 3.1.3] )
     
-    if left_inv = fail then
-        return fail;
+    if IsBool( left_inv ) then
+        return false;
     fi;
     
     ## CAUTION: for the following SetXXX RightDivide is assumed not to be lazy evaluated!!!
@@ -687,8 +709,8 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     
     right_inv := LeftDivide( LI, Id );		## ( cf. [BR, Subsection 3.1.3] )
     
-    if right_inv = fail then
-        return fail;
+    if IsBool( right_inv ) then
+        return false;
     fi;
     
     ## CAUTION: for the following SetXXX LeftDivide is assumed not to be lazy evaluated!!!
@@ -760,7 +782,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
 end );
 
 ##
-InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule) (incomplete)
+InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule)
   function( arg )
     local nargs, M, COMPUTE_BASIS, STORE_SYZYGIES, ar, S, unit_pos;
     

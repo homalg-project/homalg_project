@@ -844,11 +844,11 @@ InstallMethod( IsUnit,
         return true;
     fi;
     
-    if Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) <> fail then
-        return true;
+    if IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) ) then
+        return false;
     fi;
     
-    return false;
+    return true;
     
 end );
 
@@ -872,11 +872,11 @@ InstallMethod( IsUnit,
         return RP!.IsUnit( R, r );
     fi;
     
-    if Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) <> fail then
-        return true;
+    if IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) ) then
+        return false;
     fi;
     
-    return false;
+    return true;
     
 end );
 

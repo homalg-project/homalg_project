@@ -603,7 +603,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
         
         psi := RightDivide( MatrixOfMap( gamma ), MatrixOfMap( beta ), N );
         
-        if psi = fail then
+        if IsBool( psi ) then
             Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
         fi;
         
@@ -611,7 +611,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
         
         psi := LeftDivide( MatrixOfMap( beta ), MatrixOfMap( gamma ), N );
         
-        if psi = fail then
+        if IsBool( psi ) then
             Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
         fi;
         

@@ -553,7 +553,7 @@ InstallMethod( ShortenResolution,
     
     s_m_1 := PostInverse( d_m );
     
-    if s_m_1 = fail then
+    if IsBool( s_m_1 ) then
         return d;
     fi;
     
@@ -581,7 +581,7 @@ InstallMethod( ShortenResolution,
         
         s_m_1 := PostInverse( d_m );
         
-        if s_m_1 = fail then
+        if IsBool( s_m_1 ) then
             break;
         fi;
         
