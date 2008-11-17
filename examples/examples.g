@@ -1,6 +1,11 @@
-## examples.g ##
+## Examples.g ##
 
 LoadPackage( "RingsForHomalg" );
+
+old_RingOfIntegers := HOMALG_RINGS.RingOfIntegersDefaultCAS;
+HOMALG_RINGS.RingOfIntegersDefaultCAS := "Maple";
+old_FieldOfRationals := HOMALG_RINGS.FieldOfRationalsDefaultCAS;
+HOMALG_RINGS.FieldOfRationalsDefaultCAS := "Singular";
 
 input := InputTextUser();
 
@@ -72,17 +77,20 @@ elif mode = 2 then
     f := Filtered( ReadLine( input ), c->c <> '\n' );
     i := Int( f );
     
+    Print( "\n" );
+    
     if f = "" or i = fail then
         if CAS <> "default" then
             if List_of_CAS[ CAS ] = "" then
-                Print( "\ngap> R := HomalgFieldOfRationals( );\n" );
+                Print( "\033[01mgap> R := HomalgFieldOfRationals( );\033[0m" );
             else
-                Print( "\ngap> R := HomalgFieldOfRationalsIn", List_of_CAS[ CAS ], "( );\n" );
+                Print( "\033[01mgap> R := HomalgFieldOfRationalsIn", List_of_CAS[ CAS ], "( );\033[0m" );
             fi;
         else
-            Print( "\ngap> R := HomalgFieldOfRationalsInDefaultCAS( );    # (Default = Singular)\n" );
+            Print( "\033[01mgap> R := HomalgFieldOfRationalsInDefaultCAS( );\033[0m    # (Default = Singular)" );
         fi;
-        R := HomalgFieldOfRationalsInDefaultCAS( );
+        Print( "\n" );
+	R := HomalgFieldOfRationalsInDefaultCAS( );
     else
         if i <> 0 then
             str := Concatenation( " ", String( AbsInt( i ) ), " " );
@@ -91,35 +99,39 @@ elif mode = 2 then
         fi;
         if CAS <> "default" then
             if List_of_CAS[ CAS ] = "" then
-                Print( "\ngap> R := HomalgRingOfIntegers(", str, ");\n" );
+                Print( "\033[01mgap> R := HomalgRingOfIntegers(", str, ");\033[0m" );
             else
-                Print( "\ngap> R := HomalgRingOfIntegersIn", List_of_CAS[ CAS ], "(", str, ");\n" );
+                Print( "\033[01mgap> R := HomalgRingOfIntegersIn", List_of_CAS[ CAS ], "(", str, ");\033[0m" );
             fi;
         else
-            Print( "\ngap> R := HomalgRingOfIntegersInDefaultCAS(", str, ");    # (Default = Maple)\n" );
+            Print( "\033[01mgap> R := HomalgRingOfIntegersInDefaultCAS(", str, ");\033[0m    # (Default = Maple)" );
         fi;
+	Print( "\n" );
         R := HomalgRingOfIntegersInDefaultCAS( AbsInt( i ) );
     fi;
     
-    Print( "gap> Display( R );\n" );
+    HOMALG_RINGS.RingOfIntegersDefaultCAS := old_RingOfIntegers;
+    HOMALG_RINGS.FieldOfRationalsDefaultCAS := old_FieldOfRationals;
+    
+    Print( "\033[01mgap> Display( R );\033[m\n" );
     Display( R );
     
     Print( "\nSelect polynomial extension:\n(-) Hit Enter for no polynomial extension (default)\n(-) Otherwise, type in the names of your variables, seperated by commas - i.e. \"x,y,z\"\n:"  );
     variables := Filtered( ReadLine( input ), c->c <> '\n' );
     
     if variables <> "" then
-        Print( "\ngap> S := R * \"", variables, "\";     #alternatively: 'gap> S := PolynomialRing( R, \"", variables, "\" );'\n" );
+        Print( "\n\033[01mgap> S := R * \"", variables, "\";\033[m     #alternatively: 'gap> S := PolynomialRing( R, \"", variables, "\" );'\n" );
         S :=  R * variables;
-        Print( "gap> Display( S );\n" );
+        Print( "\033[01mgap> Display( S );\033[m\n" );
         Display( S );
         
         Print( "\nIt is possible to work over the Weyl Algebra:\n(-) Hit Enter for the commutative case (default)\n(-) Otherwise, type in the names of your differential variables, seperated by commas - i.e. \"Dx,Dy,Dz\" (same number as before!)\n:" );
         diff_variables := Filtered( ReadLine( input ), c->c <> '\n' );
         
         if diff_variables <> "" then
-            Print( "\ngap> T := RingOfDerivations( S, \"", diff_variables, "\" );\n" );
+            Print( "\n\033[01mgap> T := RingOfDerivations( S, \"", diff_variables, "\" );\033[m\n" );
             T := RingOfDerivations( S, diff_variables );
-            Print( "gap> Display( T );\n" );
+            Print( "\033[01mgap> Display( T );\033[m\n" );
 	    Display( T );
         fi;
     fi;
