@@ -561,11 +561,13 @@ InstallMethod( PreInverse,
     
     sigma := HomalgMap( sigma, T, S );
     
-    
     Assert( 1, IsMonomorphism( sigma ) );
     SetIsMonomorphism( sigma, true );
     
     DecideZero( sigma );
+    
+    SetIsSplitEpimorphism( phi, true );
+    SetIsSplitMonomorphism( sigma, true );
     
     return sigma;
     
@@ -577,40 +579,44 @@ InstallMethod( PreInverse,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local inv;
+    local sigma;
     
     if not IsEpimorphism( phi ) then
         return false;
     elif IsIsomorphism( phi ) then
-	return phi ^ -1;
+        return phi ^ -1;
     fi;
     
     DecideZero( phi );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
-        inv := LeftInverse( MatrixOfMap( phi ) );
+        sigma := LeftInverse( MatrixOfMap( phi ) );
     else
-        inv := RightInverse( MatrixOfMap( phi ) );
+        sigma := RightInverse( MatrixOfMap( phi ) );
     fi;
     
     ## this must come before any Eval:
-    if HasIsZero( inv ) and IsZero( inv ) then
+    if HasIsZero( sigma ) and IsZero( sigma ) then
         return TheZeroMap( Range( phi ), Source( phi ) );
     fi;
     
-    if IsBool( Eval( inv ) ) then
+    if IsBool( Eval( sigma ) ) then
         return false;
     fi;
     
-    inv := HomalgMap( inv, Range( phi ), Source( phi ) );
+    sigma := HomalgMap( sigma, Range( phi ), Source( phi ) );
     
-    if IsMorphism( inv ) then
+    if IsMorphism( sigma ) then
         
-        Assert( 1, IsMonomorphism( inv ) );
-        SetIsMonomorphism( inv, true );
+        Assert( 1, IsMonomorphism( sigma ) );
+        SetIsMonomorphism( sigma, true );
         
-        DecideZero( inv );
-        return inv;
+        DecideZero( sigma );
+        
+        SetIsSplitEpimorphism( phi, true );
+        SetIsSplitMonomorphism( sigma, true );
+        
+        return sigma;
     fi;
     
     TryNextMethod( );
@@ -639,7 +645,7 @@ InstallMethod( PostInverse,
     if not IsMonomorphism( phi ) then
         return false;
     elif IsIsomorphism( phi ) then
-	return phi ^ -1;
+        return phi ^ -1;
     fi;
     
     DecideZero( phi );
@@ -667,6 +673,10 @@ InstallMethod( PostInverse,
         SetIsEpimorphism( inv, true );
         
         DecideZero( inv );
+        
+        SetIsSplitMonomorphism( phi, true );
+        SetIsSplitEpimorphism( inv, true );
+        
         return inv;
     fi;
     

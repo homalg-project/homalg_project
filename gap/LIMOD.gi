@@ -282,7 +282,7 @@ InstallImmediateMethod( IsTorsionFree,
         
   function( M )
     
-    if CodimOfModule( M ) > 0 then
+    if IsPosInt( CodimOfModule( M ) ) then
         return false;
     fi;
     
@@ -296,7 +296,7 @@ InstallImmediateMethod( IsTorsionFree,
         
   function( M )
     
-    return CodimOfModule( M ) = 0;
+    return CodimOfModule( M ) in [ 0, infinity ];
     
 end );
 
@@ -610,12 +610,26 @@ InstallImmediateMethod( DegreeOfTorsionFreeness,
 end );
 
 ##
-InstallImmediateMethod( CodimOfModule,
-        IsFinitelyPresentedModuleRep and IsTorsionFree, 0,
+InstallImmediateMethod( DegreeOfTorsionFreeness,
+        IsFinitelyPresentedModuleRep and IsProjective, 0,
         
   function( M )
     
-    return 0;
+    return infinity;
+    
+end );
+
+##
+InstallImmediateMethod( CodimOfModule,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasIsZero, 0,
+        
+  function( M )
+    
+    if not IsZero( M ) then
+        return 0;
+    else
+        return infinity;
+    fi;
     
 end );
 
@@ -650,6 +664,16 @@ InstallImmediateMethod( CodimOfModule,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( CodimOfModule,
+        IsFinitelyPresentedModuleRep and IsZero, 10001,
+        
+  function( M )
+    
+    return infinity;
     
 end );
 
@@ -877,7 +901,7 @@ InstallMethod( IsProjective,
     R := HomalgRing( M );
     
     if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) < infinity then
-        return DegreeOfTorsionFreeness( M ) = LeftGlobalDimension( R );
+        return DegreeOfTorsionFreeness( M ) = infinity;
     fi;
     
     TryNextMethod( );
@@ -895,7 +919,7 @@ InstallMethod( IsProjective,
     R := HomalgRing( M );
     
     if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) < infinity then
-        return DegreeOfTorsionFreeness( M ) = RightGlobalDimension( R );
+        return DegreeOfTorsionFreeness( M ) = infinity;
     fi;
     
     TryNextMethod( );
@@ -1202,7 +1226,7 @@ InstallMethod( DegreeOfTorsionFreeness,
     od;
     
     if gdim < infinity then
-        return gdim;
+        return infinity;
     fi;
     
     TryNextMethod( );
@@ -1217,7 +1241,9 @@ InstallMethod( CodimOfModule,
   function( M )
     local k, R, left, gdim, bound;
     
-    if IsTorsion( M ) then
+    if IsZero( M ) then
+        return infinity;
+    elif IsTorsion( M ) then
         k := 1;
     else
         return 0;
