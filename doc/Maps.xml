@@ -11,6 +11,16 @@
 <Chapter Label="Maps">
 <Heading>Maps</Heading>
 
+<Section Label="Maps:Category">
+
+<Heading>Maps: Category and Representations</Heading>
+
+<#Include Label="IsHomalgMap">
+<#Include Label="IsHomalgSelfMap">
+<#Include Label="IsMapOfFinitelyGeneratedModulesRep">
+
+</Section>
+
 <Section Label="Maps:Constructors">
 <Heading>Maps: Constructors</Heading>
 
@@ -19,10 +29,25 @@
 <Section Label="Maps:Properties">
 <Heading>Maps: Properties</Heading>
 
+<#Include Label="IsMorphism:map">
+<#Include Label="IsGeneralizedMorphism:map">
+<#Include Label="IsGeneralizedEpimorphism:map">
+<#Include Label="IsGeneralizedMonomorphism:map">
+<#Include Label="IsGeneralizedIsomorphism:map">
+<#Include Label="IsIdentityMorphism:map">
+<#Include Label="IsMonomorphism:map">
+<#Include Label="IsEpimorphism:map">
+<#Include Label="IsSplitMonomorphism:map">
+<#Include Label="IsSplitEpimorphism:map">
+<#Include Label="IsIsomorphism:map">
+<#Include Label="IsAutomorphism:map">
+
 </Section>
 
 <Section Label="Maps:Attributes">
 <Heading>Maps: Attributes</Heading>
+
+<#Include Label="MorphismAidMap:map">
 
 </Section>
 

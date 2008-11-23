@@ -16,6 +16,15 @@
 
 # A new GAP-category:
 
+##  <#GAPDoc Label="IsHomalgFiltration">
+##  <ManSection>
+##    <Filt Type="Category" Arg="filt" Name="IsHomalgFiltration"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; filtrations.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgFiltration",
         IsAttributeStoringRep );
 

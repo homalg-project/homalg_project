@@ -16,12 +16,161 @@
 
 # two new categories:
 
+##  <#GAPDoc Label="IsHomalgMap">
+##  <ManSection>
+##    <Filt Type="Category" Arg="phi" Name="IsHomalgMap"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; maps. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgMorphism</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgMap",
         IsHomalgMorphism );
 
+##  <#GAPDoc Label="IsHomalgSelfMap">
+##  <ManSection>
+##    <Filt Type="Category" Arg="phi" Name="IsHomalgSelfMap"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; self-maps. <Br/><Br/>
+##      (It is a subcategory of the &GAP; categories
+##       <C>IsHomalgMap</C> and <C>IsHomalgEndomorphism</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgSelfMap",
         IsHomalgMap and
         IsHomalgEndomorphism );
+
+####################################
+#
+# properties:
+#
+####################################
+
+## all properties are declared in homalg.gd for the bigger category IsHomalgMorphism
+
+##  <#GAPDoc Label="IsMorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsMorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>phi</A> is a well-defined map, i.e. independent of all involved presentations.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsGeneralizedMorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsGeneralizedMorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>phi</A> is a generalized morphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsGeneralizedEpimorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsGeneralizedEpimorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>phi</A> is a generalized epimorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsGeneralizedMonomorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsGeneralizedMonomorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>phi</A> is a generalized monomorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsGeneralizedIsomorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsGeneralizedIsomorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>phi</A> is a generalized isomorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsIdentityMorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsIdentityMorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is the identity morphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsMonomorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsMonomorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is a monomorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsEpimorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsEpimorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is an epimorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsSplitMonomorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsSplitMonomorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is a split monomorphism. <Br/>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsSplitEpimorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsSplitEpimorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is a split epimorphism. <Br/>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsIsomorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsIsomorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is an isomorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsAutomorphism:map">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsAutomorphism" Label="for maps"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is an automorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -29,6 +178,16 @@ DeclareCategory( "IsHomalgSelfMap",
 #
 ####################################
 
+##  <#GAPDoc Label="MorphismAidMap:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="MorphismAidMap" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The morphism aid map of a true generalized map. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "MorphismAidMap",
         IsHomalgMap );
 

@@ -16,6 +16,16 @@
 
 # a new GAP-category:
 
+##  <#GAPDoc Label="IsHomalgBicomplex">
+##  <ManSection>
+##    <Filt Type="Category" Arg="BC" Name="IsHomalgBicomplex"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; bi(co)complexes. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgObject</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgBicomplex",
         IsHomalgObject );
 
@@ -25,12 +35,40 @@ DeclareCategory( "IsHomalgBicomplex",
 #
 ####################################
 
-DeclareProperty( "IsBicomplex",
-        IsHomalgBicomplex );
-
+##  <#GAPDoc Label="IsBisequence">
+##  <ManSection>
+##    <Prop Arg="BC" Name="IsBisequence"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if all maps in <A>BC</A> are well-defined.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsBisequence",
         IsHomalgBicomplex );
 
+##  <#GAPDoc Label="IsBicomplex">
+##  <ManSection>
+##    <Prop Arg="BC" Name="IsBicomplex"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>BC</A> is bicomplex.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsBicomplex",
+        IsHomalgBicomplex );
+
+##  <#GAPDoc Label="IsTransposedWRTTheAssociatedComplex">
+##  <ManSection>
+##    <Prop Arg="BC" Name="IsTransposedWRTTheAssociatedComplex"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>BC</A> is transposed with respect to the associated complex of complexes. <Br/>
+##      (no method installed).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
         IsHomalgBicomplex );
 
@@ -40,9 +78,27 @@ DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
 #
 ####################################
 
+##  <#GAPDoc Label="TotalComplex">
+##  <ManSection>
+##    <Attr Arg="BC" Name="TotalComplex"/>
+##    <Returns>a &homalg; (co)complex</Returns>
+##    <Description>
+##      The associated total complex.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "TotalComplex",
         IsHomalgBicomplex );
 
+##  <#GAPDoc Label="SpectralSequence">
+##  <ManSection>
+##    <Attr Arg="BC" Name="SpectralSequence"/>
+##    <Returns>a &homalg; (co)homological spectral sequence</Returns>
+##    <Description>
+##      The associated spectral sequence.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "SpectralSequence",
         IsHomalgBicomplex );
 

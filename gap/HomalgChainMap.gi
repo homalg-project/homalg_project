@@ -15,11 +15,32 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgChainMap
-# which are subrepresentations of the representation IsMorphismOfFinitelyGeneratedModulesRep:
+##  <#GAPDoc Label="IsChainMapOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="c" Name="IsChainMapOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of chain maps of finitley generated &homalg; modules. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation <Br/>
+##      <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
         IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [  ] );
 
+##  <#GAPDoc Label="IsCochainMapOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="c" Name="IsCochainMapOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of cochain maps of finitley generated &homalg; modules. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation <Br/>
+##      <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsCochainMapOfFinitelyPresentedObjectsRep",
         IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [  ] );

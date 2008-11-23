@@ -16,9 +16,28 @@
 
 # a new GAP-category:
 
+##  <#GAPDoc Label="IsHomalgRing">
+##  <ManSection>
+##    <Filt Type="Category" Arg="R" Name="IsHomalgRing"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; rings. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgRingOrModule</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgRing",
         IsHomalgRingOrModule );
 
+##  <#GAPDoc Label="IsHomalgExternalRingElement">
+##  <ManSection>
+##    <Filt Type="Category" Arg="r" Name="IsHomalgExternalRingElement"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of elements of external &homalg; rings.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgExternalRingElement",
         IsExtAElement
         and IsExtLElement
@@ -604,8 +623,8 @@ DeclareAttribute( "homalgTable",
 ##    <Description>
 ##      In case <A>R</A> was constructed as a residue class ring <M>S/I</M>, and only in this case,
 ##      the generators of the ideal of relations <M>I</M> are returned as a
-##      set of &homalg; relations on one generator. It assumed that the ring is commutative, or that
-##      specified <C>Involution</C> in the <C>homalgTable</C> fixed the ideal <M>I</M>.
+##      set of &homalg; relations on one generator. It assumed that either <A>R</A> is commutative,
+##      or that the specified <C>Involution</C> in the <C>homalgTable</C> of <A>R</A> fixes the ideal <M>I</M>.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -677,7 +696,7 @@ DeclareAttribute( "AmbientRing",
 ##    <Attr Arg="R" Name="KrullDimension"/>
 ##    <Returns>a non-negative integer</Returns>
 ##    <Description>
-##      The Krull dimension of the &homalg; ring <A>R</A>.
+##      The Krull dimension of the commutative &homalg; ring <A>R</A>.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -722,15 +741,39 @@ DeclareAttribute( "RightGlobalDimension",
 DeclareAttribute( "GlobalDimension",
         IsHomalgRing );
 
-## [McCRob, 11.1.14]
+##  <#GAPDoc Label="GeneralLinearRank">
+##  <ManSection>
+##    <Attr Arg="R" Name="GeneralLinearRank"/>
+##    <Returns>a non-negative integer</Returns>
+##    <Description>
+##      The general linear rank of the &homalg; ring <A>R</A> (<Cite Key="McCRob"/>, 11.1.14).
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "GeneralLinearRank",
         IsHomalgRing );
 
-## [McCRob, 11.3.10]
+##  <#GAPDoc Label="ElementaryRank">
+##  <ManSection>
+##    <Attr Arg="R" Name="ElementaryRank"/>
+##    <Returns>a non-negative integer</Returns>
+##    <Description>
+##      The elementary rank of the &homalg; ring <A>R</A> (<Cite Key="McCRob"/>, 11.3.10).
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ElementaryRank",
         IsHomalgRing );
 
-## [McCRob, 11.3.4]
+##  <#GAPDoc Label="StableRank">
+##  <ManSection>
+##    <Attr Arg="R" Name="StableRank"/>
+##    <Returns>a non-negative integer</Returns>
+##    <Description>
+##      The stable rank of the &homalg; ring <A>R</A> (<Cite Key="McCRob"/>, 11.3.4).
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "StableRank",
         IsHomalgRing );
 

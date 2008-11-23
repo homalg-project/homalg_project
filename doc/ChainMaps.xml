@@ -11,6 +11,18 @@
 <Chapter Label="ChainMaps">
 <Heading>Chain Maps</Heading>
 
+<Section Label="ChainMaps:Category">
+
+<Heading>ChainMaps: Category and Representations</Heading>
+
+<#Include Label="IsHomalgChainMap">
+<#Include Label="IsHomalgChainSelfMap">
+
+<#Include Label="IsChainMapOfFinitelyPresentedObjectsRep">
+<#Include Label="IsCochainMapOfFinitelyPresentedObjectsRep">
+
+</Section>
+
 <Section Label="ChainMaps:Constructors">
 <Heading>Chain Maps: Constructors</Heading>
 
@@ -18,6 +30,21 @@
 
 <Section Label="ChainMaps:Properties">
 <Heading>Chain Maps: Properties</Heading>
+
+<#Include Label="IsMorphism:chainmap">
+<#Include Label="IsGeneralizedMorphism:chainmap">
+<#Include Label="IsGeneralizedEpimorphism:chainmap">
+<#Include Label="IsGeneralizedMonomorphism:chainmap">
+<#Include Label="IsGeneralizedIsomorphism:chainmap">
+<#Include Label="IsIdentityMorphism:chainmap">
+<#Include Label="IsMonomorphism:chainmap">
+<#Include Label="IsEpimorphism:chainmap">
+<#Include Label="IsSplitMonomorphism:chainmap">
+<#Include Label="IsSplitEpimorphism:chainmap">
+<#Include Label="IsIsomorphism:chainmap">
+<#Include Label="IsAutomorphism:chainmap">
+<#Include Label="IsGradedMorphism">
+<#Include Label="IsQuasiIsomorphism">
 
 </Section>
 

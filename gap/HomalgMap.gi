@@ -15,7 +15,17 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgMap
-# which is a subrepresentation of the representation IsMorphismOfFinitelyGeneratedModulesRep:
+##  <#GAPDoc Label="IsMapOfFinitelyGeneratedModulesRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="phi" Name="IsMapOfFinitelyGeneratedModulesRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of maps between finitley generated &homalg; modules. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation <Br/>
+##      <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsMapOfFinitelyGeneratedModulesRep",
         IsHomalgMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [ "source", "target", "matrices", "index_pairs_of_presentations" ] );

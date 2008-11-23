@@ -16,6 +16,16 @@
 
 # a new GAP-category:
 
+##  <#GAPDoc Label="IsHomalgComplex">
+##  <ManSection>
+##    <Filt Type="Category" Arg="C" Name="IsHomalgComplex"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; (co)complexes. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgObject</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareCategory( "IsHomalgComplex",
         IsHomalgObject );
 
@@ -25,30 +35,112 @@ DeclareCategory( "IsHomalgComplex",
 #
 ####################################
 
+##  <#GAPDoc Label="IsSequence">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsSequence"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if all maps in <A>C</A> are well-defined.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsSequence",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsComplex">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsComplex"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if <A>C</A> is complex.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsComplex",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsAcyclic">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsAcyclic"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at degree <M>0</M>. <Br/><Br/>
+##      CAUTION: The name of this property will probably change in the future.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsAcyclic",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsGradedObject">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsGradedObject"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is a graded object, i.e. if all maps between the objects in <A>C</A> vanish.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsGradedObject",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsExactSequence">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsExactSequence"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is exact.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsExactSequence",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsShortExactSequence">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsShortExactSequence"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is a short exact sequence.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsSplitShortExactSequence">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsSplitShortExactSequence"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is a split short exact sequence.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsSplitShortExactSequence",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsTriangle">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsTriangle"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Set to true if the &homalg; complex <A>C</A> is a triangle.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsTriangle",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="IsExactTriangle">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsExactTriangle"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is an exact triangle.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsExactTriangle",
         IsHomalgComplex );
 

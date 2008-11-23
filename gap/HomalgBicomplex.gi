@@ -15,11 +15,32 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgBicomplex
-# which are subrepresentations of the representation IsFinitelyPresentedObjectRep:
+##  <#GAPDoc Label="IsBicomplexOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="BC" Name="IsBicomplexOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of bicomplexes of finitley generated &homalg; objects. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsBicomplexOfFinitelyPresentedObjectsRep",
         IsHomalgBicomplex and IsFinitelyPresentedObjectRep,
         [  ] );
 
+##  <#GAPDoc Label="IsBicocomplexOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="BC" Name="IsBicocomplexOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of bicocomplexes of finitley generated &homalg; objects. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsBicocomplexOfFinitelyPresentedObjectsRep",
         IsHomalgBicomplex and IsFinitelyPresentedObjectRep,
         [  ] );

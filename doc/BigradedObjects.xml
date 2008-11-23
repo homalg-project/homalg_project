@@ -11,6 +11,19 @@
 <Chapter Label="BigradedObjects">
 <Heading>Bigraded Objects</Heading>
 
+<Section Label="BigradedObjects:Category">
+
+<Heading>BigradedObjects: Category and Representations</Heading>
+
+<#Include Label="IsHomalgBigradedObject">
+<#Include Label="IsHomalgBigradedObjectAssociatedToAnExactCouple">
+<#Include Label="IsHomalgBigradedObjectAssociatedToAFilteredComplex">
+<#Include Label="IsHomalgBigradedObjectAssociatedToABicomplex">
+
+<#Include Label="IsBigradedObjectOfFinitelyPresentedObjectsRep">
+
+</Section>
+
 <Section Label="BigradedObjects:Constructors">
 <Heading>Bigraded Objects: Constructors</Heading>
 
@@ -19,12 +32,17 @@
 <Section Label="BigradedObjects:Properties">
 <Heading>Bigraded Objects: Properties</Heading>
 
+<#Include Label="IsEndowedWithDifferential">
+<#Include Label="IsStableSheet">
+
 </Section>
 
+<!--
 <Section Label="BigradedObjects:Attributes">
 <Heading>Bigraded Objects: Attributes</Heading>
 
 </Section>
+-->
 
 <Section Label="BigradedObjects:Operations">
 <Heading>Bigraded Objects: Operations and Functions</Heading>

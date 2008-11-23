@@ -11,6 +11,21 @@
 <Chapter Label="Rings">
 <Heading>Rings</Heading>
 
+<Section Label="Rings:Category">
+
+<Heading>Rings: Category and Representations</Heading>
+
+<#Include Label="IsHomalgRing">
+
+<#Include Label="IsHomalgExternalRingElement">
+
+<#Include Label="IsHomalgInternalRingRep">
+<#Include Label="IsHomalgExternalRingRep">
+
+<#Include Label="IsHomalgExternalRingElementRep">
+
+</Section>
+
 <Section Label="Rings:Constructors">
 
 <Heading>Rings: Constructors</Heading>
@@ -54,7 +69,7 @@ the value of the property is set or not <P/>
 
 <C>HasProp</C>( <A>R</A> ); <P/>
 
-If you discover that a specific property <C>Prop</C> missing for a
+If you discover that a specific property <C>Prop</C> is missing for a
 certain &homalg; ring <A>R</A> you can it add using the usual &GAP4;
 mechanism <P/>
 
@@ -131,6 +146,9 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="LeftGlobalDimension">
 <#Include Label="RightGlobalDimension">
 <#Include Label="GlobalDimension">
+<#Include Label="GeneralLinearRank">
+<#Include Label="ElementaryRank">
+<#Include Label="StableRank">
 
 </Section>
 

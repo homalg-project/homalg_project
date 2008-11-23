@@ -11,18 +11,37 @@
 <Chapter Label="SpectralSequences">
 <Heading>Spectral Sequences</Heading>
 
+<Section Label="SpectralSequences:Category">
+
+<Heading>SpectralSequences: Category and Representations</Heading>
+
+<#Include Label="IsHomalgSpectralSequence">
+<#Include Label="IsHomalgSpectralSequenceAssociatedToAnExactCouple">
+<#Include Label="IsHomalgSpectralSequenceAssociatedToAFilteredComplex">
+<#Include Label="IsHomalgSpectralSequenceAssociatedToABicomplex">
+
+<#Include Label="IsSpectralSequenceOfFinitelyPresentedObjectsRep">
+<#Include Label="IsSpectralCosequenceOfFinitelyPresentedObjectsRep">
+
+</Section>
+
 <Section Label="SpectralSequences:Constructors">
 <Heading>Spectral Sequences: Constructors</Heading>
 
 </Section>
 
+<!--
 <Section Label="SpectralSequences:Properties">
 <Heading>Spectral Sequences: Properties</Heading>
 
 </Section>
+-->
 
 <Section Label="SpectralSequences:Attributes">
 <Heading>Spectral Sequences: Attributes</Heading>
+
+<#Include Label="GeneralizedEmbeddingsInTotalObjects">
+<#Include Label="GeneralizedEmbeddingsInTotalDefects">
 
 </Section>
 

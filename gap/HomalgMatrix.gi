@@ -19,10 +19,28 @@ DeclareRepresentation( "IshomalgInternalMatrixHullRep",
         IsInternalMatrixHull,
         [ ] );
 
+##  <#GAPDoc Label="IsHomalgInternalMatrixRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="A" Name="IsHomalgInternalMatrixRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The internal representation of &homalg; matrices.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsHomalgInternalMatrixRep",
         IsHomalgMatrix,
         [ ] );
 
+##  <#GAPDoc Label="IsHomalgExternalMatrixRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="A" Name="IsHomalgExternalMatrixRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The external representation of &homalg; matrices.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsHomalgExternalMatrixRep",
         IsHomalgMatrix,
         [ ] );

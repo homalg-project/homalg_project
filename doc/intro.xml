@@ -271,8 +271,8 @@ As mentioned above, the package &homalg; should only be the first and
 foundational part of the &homalg; project. On the one hand it is
 designed independently of the details of the different matrix
 operations, which other packages are meant to provide. Typically,
-these packages (like &RingsForHomalg;) heavily rely on existing well
-tested and optimized systems like &Singular; or &MAGMA;. On the other
+these packages (like &RingsForHomalg;) heavily rely on existing, well
+tested, and optimized systems like &Singular; or &MAGMA;. On the other
 hand other packages can be built upon or extend the &homalg; package
 in different ways:
 <List>
@@ -318,9 +318,13 @@ authors and contributers of all packages in the project.
     matrix operations delegated to them without knowing what for. The
     meaning of the matrices and their logical interrelation is only
     known to &GAP4;.</Item>
-  <Item><B>Q</B>: Do packages building upon &homalg; need to know
-  anything about the communication with the external
-  systems?<Br/><Br/> A: No.</Item>
+  <Item><B>Q</B>: Do developers of packages building upon &homalg;
+    need to know anything about the communication with the external
+    systems?<Br/><Br/> A: No, unless they want to use more features of
+    the external systems than those reflected by &homalg;. For this
+    purpose, developers can use the unified communication interface
+    provideb by &IO_ForHomalg;. This is the interface used by
+    &homalg;.</Item>
 </List>
 
 </Subsection>
@@ -349,7 +353,7 @@ wish list.
 <Heading>Why <Alt Only="Text">&GAP4;</Alt><Alt Not="Text"><URL Text="GAP4">http://www.gap-system.org/</URL></Alt>?</Heading>
 
 <Subsection Label="OpenGAP">
-<Heading>&GAP; is free software</Heading>
+<Heading>&GAP; is free and open software</Heading>
 
 In 1993 J. Neubüser <Alt Only="Text">addressed</Alt>
 <Alt Not="Text"><URL Text="addressed">http://www.gap-system.org/Doc/Talks/cgt.ps</URL></Alt>

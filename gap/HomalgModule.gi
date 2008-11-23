@@ -15,7 +15,17 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgModule
-# which is a subrepresentation of the representations IsFinitelyPresentedObjectRep and IsHomalgRingOrFinitelyPresentedModuleRep:
+##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of finitley generated &homalg; modules. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representations <Br/>
+##      <C>IsFinitelyPresentedObjectRep</C> and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsHomalgModule and
         IsFinitelyPresentedObjectRep and

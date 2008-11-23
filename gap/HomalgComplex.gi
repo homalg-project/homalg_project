@@ -15,11 +15,32 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgComplex
-# which are subrepresentations of the representation IsFinitelyPresentedObjectRep:
+##  <#GAPDoc Label="IsComplexOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="C" Name="IsComplexOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of complexes of finitley generated &homalg; modules. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsComplexOfFinitelyPresentedObjectsRep",
         IsHomalgComplex and IsFinitelyPresentedObjectRep,
         [  ] );
 
+##  <#GAPDoc Label="IsCocomplexOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="C" Name="IsCocomplexOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of cocomplexes of finitley generated &homalg; modules. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsCocomplexOfFinitelyPresentedObjectsRep",
         IsHomalgComplex and IsFinitelyPresentedObjectRep,
         [  ] );

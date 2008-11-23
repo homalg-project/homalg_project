@@ -11,6 +11,16 @@
 <Chapter Label="Modules">
 <Heading>Modules</Heading>
 
+<Section Label="Modules:Category">
+
+<Heading>Modules: Category and Representations</Heading>
+
+<#Include Label="IsHomalgModule">
+
+<#Include Label="IsFinitelyPresentedModuleRep">
+
+</Section>
+
 <Section Label="Modules:Constructors">
 <Heading>Modules: Constructors</Heading>
 
@@ -19,10 +29,31 @@
 <Section Label="Modules:Properties">
 <Heading>Modules: Properties</Heading>
 
+<#Include Label="IsFree">
+<#Include Label="IsStablyFree">
+<#Include Label="IsProjective">
+<#Include Label="FiniteFreeResolutionExists">
+<#Include Label="IsReflexive">
+<#Include Label="IsTorsionFree">
+<#Include Label="IsArtinian">
+<#Include Label="IsCyclic">
+<#Include Label="IsTorsion">
+<#Include Label="IsHolonomic">
+<#Include Label="IsPure">
+<#Include Label="HasConstantRank">
+
 </Section>
 
 <Section Label="Modules:Attributes">
 <Heading>Modules: Attributes</Heading>
+
+<#Include Label="ElementaryDivisors">
+<#Include Label="RankOfModule">
+<#Include Label="ProjectiveDimension">
+<#Include Label="DegreeOfTorsionFreeness">
+<#Include Label="CodimOfModule">
+<#Include Label="PurityFiltration">
+<#Include Label="CodegreeOfPurity">
 
 </Section>
 

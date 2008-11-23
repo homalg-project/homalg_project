@@ -11,6 +11,17 @@
 <Chapter Label="Complexes">
 <Heading>Complexes</Heading>
 
+<Section Label="Complexes:Category">
+
+<Heading>Complexes: Category and Representations</Heading>
+
+<#Include Label="IsHomalgComplex">
+
+<#Include Label="IsComplexOfFinitelyPresentedObjectsRep">
+<#Include Label="IsCocomplexOfFinitelyPresentedObjectsRep">
+
+</Section>
+
 <Section Label="Complexes:Constructors">
 <Heading>Complexes: Constructors</Heading>
 
@@ -19,12 +30,24 @@
 <Section Label="Complexes:Properties">
 <Heading>Complexes: Properties</Heading>
 
+<#Include Label="IsSequence">
+<#Include Label="IsComplex">
+<#Include Label="IsAcyclic">
+<#Include Label="IsGradedObject">
+<#Include Label="IsExactSequence">
+<#Include Label="IsShortExactSequence">
+<#Include Label="IsSplitShortExactSequence">
+<#Include Label="IsTriangle">
+<#Include Label="IsExactTriangle">
+
 </Section>
 
+<!--
 <Section Label="Complexes:Attributes">
 <Heading>Complexes: Attributes</Heading>
 
 </Section>
+-->
 
 <Section Label="Complexes:LICPX">
 <Heading>&LICPX;: Logical Implications for Complexes</Heading>

@@ -15,7 +15,17 @@
 ####################################
 
 # a new representations for the GAP-category IsHomalgBigradedObject
-# which are subrepresentations of the representation IsFinitelyPresentedObjectRep:
+##  <#GAPDoc Label="IsBigradedObjectOfFinitelyPresentedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="Er" Name="IsBigradedObjectOfFinitelyPresentedObjectsRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of bigraded objects of finitley generated &homalg; objects. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsBigradedObjectOfFinitelyPresentedObjectsRep",
         IsHomalgBigradedObject and IsFinitelyPresentedObjectRep,
         [  ] );

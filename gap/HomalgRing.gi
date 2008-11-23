@@ -16,14 +16,45 @@
 
 # two new representations for the GAP-category IsHomalgRing
 # which are subrepresentations of IsHomalgRingOrFinitelyPresentedModuleRep:
+##  <#GAPDoc Label="IsHomalgInternalRingRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="R" Name="IsHomalgInternalRingRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The internal representation of &homalg; rings. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation <Br/>
+##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsHomalgInternalRingRep",
         IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
+##  <#GAPDoc Label="IsHomalgExternalRingRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="R" Name="IsHomalgExternalRingRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The external representation of &homalg; rings. <Br/><Br/>
+##      (It is a subrepresentation of the &GAP; representation <Br/>
+##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareRepresentation( "IsHomalgExternalRingRep",
         IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
+##  <#GAPDoc Label="IsHomalgExternalRingElementRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="r" Name="IsHomalgExternalRingElementRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The representation of elements of external &homalg; rings.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 # a new representation for the GAP-category IsHomalgExternalRingElement:
 DeclareRepresentation( "IsHomalgExternalRingElementRep",
         IshomalgExternalObjectRep and IsHomalgExternalRingElement,
@@ -353,7 +384,7 @@ end );
 
 ##
 InstallMethod( SetRingProperties,
-        "constructor",
+        "for homalg rings",
         [ IsHomalgRing and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
   function( S, R, var )
@@ -388,7 +419,7 @@ end );
 
 ##
 InstallMethod( SetRingProperties,
-        "constructor",
+        "for homalg rings",
         [ IsHomalgRing and IsWeylRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( S, R, der )
@@ -421,7 +452,7 @@ end );
 
 ##
 InstallMethod( SetRingProperties,
-        "constructor",
+        "for homalg rings",
         [ IsHomalgRing and IsResidueClassRingOfTheIntegers, IsInt ],
         
   function( R, c )
@@ -469,7 +500,7 @@ end );
 
 ##
 InstallMethod( SetRingProperties,
-        "constructor",
+        "for homalg rings",
         [ IsHomalgRing and IsFieldForHomalg, IsInt ],
         
   function( R, c )
@@ -646,9 +677,10 @@ end );
 ##      The one-argument form accepts an integer <A>c</A> and returns
 ##      the ring <M>&ZZ; / c </M> for &homalg;:
 ##      <List>
-##        <Item><A>c</A><M>=0</M> defaults to <M>&ZZ;</M></Item>
+##        <Item><A>c</A><M> = 0</M> defaults to <M>&ZZ;</M></Item>
 ##        <Item>if <A>c</A> is a prime power then the package &GaussForHomalg; is loaded (if it fails to load an error is issued)</Item>
-##        <Item>otherwise, the residue class ring constructor <C>/</C> is invoked</Item>
+##        <Item>otherwise, the residue class ring constructor <C>/</C>
+##          (&see; <Ref Oper="\/" Label="constructor for residue class rings" Style="Number"/>) is invoked</Item>
 ##      </List>
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties. <P/>
 ##      If for some reason you don't want to use the &GaussForHomalg; package (maybe because you didn't install it), then use<P/>
