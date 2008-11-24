@@ -110,12 +110,20 @@ InstallMethod( CokernelNaturalGeneralizedEmbedding,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local emb;
+    local coker, emb;
     
-    emb := NaturalGeneralizedEmbedding( Cokernel( phi ) );
+    coker := Cokernel( phi );
     
-    ## since the cokernel module can very well be predefined as the outcome of a different functor than Cokernel (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
-    if not IsIdenticalObj( Range( emb ), Source( phi ) ) then
+    ## sometimes a module is automatically assigned to a map as its Cokernel:
+    ## this happens when M is resolved with F_0 --(d_0) --> M --> 0, then M is automatically assigned as the cokernel of d_0,
+    ## and the component coker!.NaturalGeneralizedEmbedding is not set
+    if IsBound( coker!.NaturalGeneralizedEmbedding ) then
+        emb := NaturalGeneralizedEmbedding( coker );
+    fi;
+    
+    ## since the cokernel module can very well be predefined as the outcome of a different functor than Cokernel
+    ## (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
+    if not IsBound( emb ) or not IsIdenticalObj( Range( emb ), Source( phi ) ) then
         emb := CokernelEpi( phi )^-1;
         SetMorphismAidMap( emb, phi );
         
