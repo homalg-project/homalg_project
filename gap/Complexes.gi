@@ -526,7 +526,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
-    SetIsAcyclic( dE, true );
+    SetIsRightAcyclic( dE, true );
     SetIsShortExactSequence( horse_shoe, true );
     
     return horse_shoe;
@@ -665,7 +665,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
-    SetIsAcyclic( dE, true );
+    SetIsRightAcyclic( dE, true );
     SetIsShortExactSequence( horse_shoe, true );
     
     return horse_shoe;
@@ -1238,6 +1238,10 @@ InstallMethod( Resolution,	### defines: Resolution
     
     if HasIsExactSequence( C ) and IsExactSequence( C ) then
         SetIsExactSequence( CE, true );
+    elif HasIsRightAcyclic( C ) and IsRightAcyclic( C ) then
+        SetIsRightAcyclic( CE, true );
+    elif HasIsLeftAcyclic( C ) and IsLeftAcyclic( C ) then
+        SetIsLeftAcyclic( CE, true );
     elif HasIsAcyclic( C ) and IsAcyclic( C ) then
         SetIsAcyclic( CE, true );
     else
@@ -1401,6 +1405,10 @@ InstallMethod( Resolution,	### defines: Resolution
     
     if HasIsExactSequence( C ) and IsExactSequence( C ) then
         SetIsExactSequence( CE, true );
+    elif HasIsRightAcyclic( C ) and IsRightAcyclic( C ) then
+        SetIsRightAcyclic( CE, true );
+    elif HasIsLeftAcyclic( C ) and IsLeftAcyclic( C ) then
+        SetIsLeftAcyclic( CE, true );
     elif HasIsAcyclic( C ) and IsAcyclic( C ) then
         SetIsAcyclic( CE, true );
     else

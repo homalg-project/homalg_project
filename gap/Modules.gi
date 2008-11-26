@@ -173,9 +173,9 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     fi;
     
     if NrRelations( S ) = 0 then
-        SetIsAcyclic( d, true );
+        SetIsRightAcyclic( d, true );
     else
-        SetIsComplex( d, true );
+        SetIsAcyclic( d, true );
     fi;
     
     return d;
@@ -252,7 +252,7 @@ InstallMethod( Resolution,
         fi;
     fi;
     
-    if HasIsAcyclic( d ) and IsAcyclic( d ) then
+    if HasIsRightAcyclic( d ) and IsRightAcyclic( d ) then
         SetFiniteFreeResolutionExists( M, true );
         ResetFilterObj( M, AFiniteFreeResolution );
         SetAFiniteFreeResolution( M, d );
@@ -277,6 +277,7 @@ InstallMethod( Resolution,
     
 end );
 
+##
 InstallMethod( Resolution,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -287,6 +288,7 @@ InstallMethod( Resolution,
     
 end );
 
+##
 InstallMethod( LengthOfResolution,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -445,9 +447,9 @@ InstallMethod( SubResolution,
         dq1 := CertainMorphism( d, 1 );
         res := AsATwoSequence( dq1, TheZeroMorphism( FreeHullModule( M ) ) );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
-            SetIsAcyclic( res, true );
+            SetIsRightAcyclic( res, true );
         else
-            SetIsComplex( res, true );
+            SetIsAcyclic( res, true );
         fi;
         return res;
     fi;
@@ -461,9 +463,9 @@ InstallMethod( SubResolution,
     res := Shift( res, -q );
     
     if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
-        SetIsAcyclic( res, true );
+        SetIsRightAcyclic( res, true );
     else
-        SetIsComplex( res, true );
+        SetIsAcyclic( res, true );
     fi;
     
     SetIsATwoSequence( res, true );
@@ -487,9 +489,9 @@ InstallMethod( SubResolution,
         dq1 := CertainMorphism( d, 1 );
         res := AsATwoSequence( TheZeroMorphism( FreeHullModule( M ) ), dq1 );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
-            SetIsAcyclic( res, true );
+            SetIsRightAcyclic( res, true );
         else
-            SetIsComplex( res, true );
+            SetIsAcyclic( res, true );
         fi;
         return res;
     fi;
@@ -503,9 +505,9 @@ InstallMethod( SubResolution,
     res := Shift( res, -q );
     
     if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
-        SetIsAcyclic( res, true );
+        SetIsRightAcyclic( res, true );
     else
-        SetIsComplex( res, true );
+        SetIsAcyclic( res, true );
     fi;
     
     SetIsATwoSequence( res, true );
@@ -527,7 +529,7 @@ end );
 #_______________________________________________________________________
 InstallMethod( ShortenResolution,
         "for homalg relations",
-        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsRightAcyclic ],
         
   function( q, d )
     local max, min, m, mx, n, d_m, F_m, d_m_1, s_m_1, d_m_2, d_short, l, epi;
@@ -615,7 +617,7 @@ InstallMethod( ShortenResolution,
     
     d_short!.LengthOfResolution := m;
     
-    SetIsAcyclic( d_short, true );
+    SetIsRightAcyclic( d_short, true );
     
     return d_short;
     
@@ -624,7 +626,7 @@ end );
 ##
 InstallMethod( ShortenResolution,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedObjectsRep and IsAcyclic ],
+        [ IsComplexOfFinitelyPresentedObjectsRep and IsRightAcyclic ],
         
   function( d )
     

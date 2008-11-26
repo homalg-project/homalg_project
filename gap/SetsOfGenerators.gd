@@ -45,7 +45,7 @@ KeyDependentOperation( "TransitionMap", IsSetsOfGenerators, IsList, ReturnTrue )
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "CreateSetsOfGeneratorsForLeftModule" );
 

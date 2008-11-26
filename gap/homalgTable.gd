@@ -36,7 +36,7 @@ DeclareCategory( "IshomalgTable",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareOperation( "CreateHomalgTable",
         [ IsObject ] );

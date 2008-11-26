@@ -217,7 +217,7 @@ DeclareProperty( "IsChainMapForPushout",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgChainMap" );
 

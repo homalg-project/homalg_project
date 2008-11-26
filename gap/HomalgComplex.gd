@@ -64,12 +64,35 @@ DeclareProperty( "IsComplex",
 ##    <Prop Arg="C" Name="IsAcyclic"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at degree <M>0</M>. <Br/><Br/>
-##      CAUTION: The name of this property will probably change in the future.
+##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at its boundaries.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "IsAcyclic",
+        IsHomalgComplex );
+
+##  <#GAPDoc Label="IsRightAcyclic">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsRightAcyclic"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at its left boundary.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsRightAcyclic",
+        IsHomalgComplex );
+
+##  <#GAPDoc Label="IsLeftAcyclic">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsLeftAcyclic"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at its right boundary.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsLeftAcyclic",
         IsHomalgComplex );
 
 ##  <#GAPDoc Label="IsGradedObject">
@@ -153,7 +176,7 @@ DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only th
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgComplex" );
 

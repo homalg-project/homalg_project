@@ -92,6 +92,8 @@ InstallMethod( homalgResetFilters,
             IsSequence,
             IsComplex,
             IsAcyclic,
+            IsRightAcyclic,
+            IsLeftAcyclic,
             IsGradedObject,
             IsExactSequence,
             IsShortExactSequence,
@@ -1094,7 +1096,11 @@ InstallGlobalFunction( HomalgComplex,
     
     if object then
         if degrees = [ 0 ] then
-            SetIsAcyclic( C, true );
+            SetIsRightAcyclic( C, true );
+            if HasIsZero( obj_or_mor ) then
+                SetIsLeftAcyclic( C, IsZero( obj_or_mor ) );
+                SetIsZero( C, IsZero( obj_or_mor ) );
+            fi;
         fi;
         SetIsGradedObject( C, true );
     elif HasIsMorphism( arg[1] ) and IsMorphism( arg[1] ) then
@@ -1137,16 +1143,7 @@ InstallMethod( ViewObj,
         first_attribute := true;
     fi;
     
-    if HasIsAcyclic( o ) and IsAcyclic( o ) then
-        if not first_attribute then
-            Print( "n" );
-        fi;
-        if cpx then
-            Print( " acyclic complex" );
-        else
-            Print( " acyclic cocomplex" );
-        fi;
-    elif HasIsExactTriangle( o ) and IsExactTriangle( o ) then
+    if HasIsExactTriangle( o ) and IsExactTriangle( o ) then
         if not first_attribute then
             Print( "n" );
         fi;
@@ -1175,6 +1172,27 @@ InstallMethod( ViewObj,
             Print( " exact sequence" );
         else
             Print( " exact cosequence" );
+        fi;
+    elif HasIsRightAcyclic( o ) and IsRightAcyclic( o ) then
+        if cpx then
+            Print( " right acyclic complex" );
+        else
+            Print( " right acyclic cocomplex" );
+        fi;
+    elif HasIsLeftAcyclic( o ) and IsLeftAcyclic( o ) then
+        if cpx then
+            Print( " left acyclic complex" );
+        else
+            Print( " left acyclic cocomplex" );
+        fi;
+    elif HasIsAcyclic( o ) and IsAcyclic( o ) then
+        if not first_attribute then
+            Print( "n" );
+        fi;
+        if cpx then
+            Print( " acyclic complex" );
+        else
+            Print( " acyclic cocomplex" );
         fi;
     elif HasIsComplex( o ) then
         if IsComplex( o ) then

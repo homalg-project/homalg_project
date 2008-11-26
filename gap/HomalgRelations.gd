@@ -58,7 +58,7 @@ DeclareAttribute( "FreeResolution",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgRelationsForLeftModule" );
 DeclareGlobalFunction( "HomalgRelationsForRightModule" );

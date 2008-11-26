@@ -111,7 +111,7 @@ DeclareProperty( "IsStableSheet",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareOperation( "HomalgBigradedObject",
         [ IsHomalgBicomplex ] );

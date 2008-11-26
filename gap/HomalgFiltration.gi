@@ -771,6 +771,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( ViewObj,
         "for homalg filtration",
         [ IsFiltrationOfFinitelyPresentedModuleRep ],
@@ -838,6 +839,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( Display,
         "for homalg filtration",
         [ IsFiltrationOfFinitelyPresentedModuleRep ],

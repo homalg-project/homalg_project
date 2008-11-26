@@ -109,7 +109,7 @@ DeclareAttribute( "GeneralizedEmbeddingsInTotalDefects",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareOperation( "HomalgSpectralSequence",
         [ IsInt, IsHomalgBicomplex, IsInt ] );

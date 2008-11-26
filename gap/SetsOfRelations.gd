@@ -45,7 +45,7 @@ KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "CreateSetsOfRelationsForLeftModule" );
 

@@ -33,6 +33,8 @@
 <#Include Label="IsSequence">
 <#Include Label="IsComplex">
 <#Include Label="IsAcyclic">
+<#Include Label="IsRightAcyclic">
+<#Include Label="IsLeftAcyclic">
 <#Include Label="IsGradedObject">
 <#Include Label="IsExactSequence">
 <#Include Label="IsShortExactSequence">

@@ -108,7 +108,7 @@ DeclareAttribute( "SpectralSequence",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgBicomplex" );
 

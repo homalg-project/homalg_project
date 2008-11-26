@@ -55,7 +55,7 @@ DeclareAttribute( "ProcedureToReadjustGenerators",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgGeneratorsForLeftModule" );
 DeclareGlobalFunction( "HomalgGeneratorsForRightModule" );

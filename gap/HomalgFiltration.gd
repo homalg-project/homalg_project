@@ -64,7 +64,7 @@ DeclareProperty( "IsPurityFiltration",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgFiltration" );
 

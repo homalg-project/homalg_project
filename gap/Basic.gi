@@ -797,7 +797,7 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
         Error( "the first argument must be a module or a set of relations\n" );
     fi;
     
-    ## M is a set of relations of a module
+    ## M is a set of relations (of a module)
     M := arg[1];
     
     COMPUTE_BASIS := false;

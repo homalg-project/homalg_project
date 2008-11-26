@@ -54,7 +54,7 @@ DeclareOperation( "homalgLastWarning",
 DeclareOperation( "homalgNrOfWarnings",
         [ IshomalgExternalObject ] );
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "homalgExternalObject" );
 

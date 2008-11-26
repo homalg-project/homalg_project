@@ -197,7 +197,7 @@ DeclareAttribute( "MorphismAidMap",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "HomalgMap" );
 

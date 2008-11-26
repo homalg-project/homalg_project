@@ -12,6 +12,7 @@ This is the chapter of the documentation describing the installation.
 <TitlePage>
     <Title>&homalg;</Title>
     <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
+    <TitleComment>(this manual is still under construction)</TitleComment>
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>

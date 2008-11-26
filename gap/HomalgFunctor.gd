@@ -40,7 +40,7 @@ DeclareAttribute( "Genesis",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "CreateHomalgFunctor" );
 

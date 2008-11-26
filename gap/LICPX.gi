@@ -30,8 +30,20 @@ InstallValue( LogicalImplicationsForHomalgComplexes,
           [ IsZero,
             "implies", IsGradedObject ],
           
+          [ IsZero,
+            "implies", IsExactSequence ],
+          
           [ IsGradedObject,
             "implies", IsComplex ],
+          
+          [ IsLeftAcyclic,
+            "implies", IsAcyclic ],
+          
+          [ IsRightAcyclic,
+            "implies", IsAcyclic ],
+          
+          [ IsLeftAcyclic, "and", IsRightAcyclic,
+            "imply", IsExactSequence ],
           
           [ IsAcyclic,
             "implies", IsComplex ],
@@ -40,7 +52,10 @@ InstallValue( LogicalImplicationsForHomalgComplexes,
             "implies", IsSequence ],
           
           [ IsExactSequence,
-            "implies", IsComplex ],
+            "implies", IsLeftAcyclic ],
+          
+          [ IsExactSequence,
+            "implies", IsRightAcyclic ],
           
           [ IsShortExactSequence,
             "implies", IsExactSequence ],
@@ -281,9 +296,9 @@ InstallMethod( IsAcyclic,
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees, l, b;
+    local degrees;
     
-    if ObjectDegreesOfComplex( C )[1] <> 0 then
+    if not IsComplex( C ) then
         return false;
     fi;
     
@@ -291,21 +306,32 @@ InstallMethod( IsAcyclic,
     
     degrees := degrees{[ 1 .. Length( degrees ) - 1 ]};
     
-    if not IsComplex( C ) then
+    if degrees = [ ] then
+        return true;
+    fi;
+    
+    if ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
+       or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
+        return ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ) ) );
+    else
+        return ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ) ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( IsRightAcyclic,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    if not IsAcyclic( C ) then
         return false;
     fi;
     
-    if degrees = [ ] then
+    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single module
         return true;
-    elif ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
-      or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ) ) );
-    else
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ) ) );
-    fi;
-    
-    if not b then
-        return b;
     fi;
     
     if IsComplexOfFinitelyPresentedObjectsRep( C ) then
@@ -317,41 +343,37 @@ InstallMethod( IsAcyclic,
 end );
 
 ##
+InstallMethod( IsLeftAcyclic,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local degrees;
+    
+    if not IsAcyclic( C ) then
+        return false;
+    fi;
+    
+    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single module
+        return IsZero( LowestDegreeObject( C ) );
+    fi;
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        return IsZero( Cokernel( LowestDegreeMorphism( C ) ) );
+    else
+        return IsZero( Kernel( LowestDegreeMorphism( C ) ) );
+    fi;
+    
+end );
+
+##
 InstallMethod( IsExactSequence,
         "for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees, b;
     
-    if not IsComplex( C ) then
-        return false;
-    fi;
-    
-    degrees := MorphismDegreesOfComplex( C );
-    
-    if degrees = [ ] then
-        return true;
-    fi;
-    
-    degrees := degrees{[ 1 .. Length( degrees ) - 1 ]};
-    
-    if ( IsComplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) )
-      or ( IsCocomplexOfFinitelyPresentedObjectsRep( C ) and IsHomalgRightObjectOrMorphismOfRightObjects( C ) ) then
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i + 1 ), CertainMorphism( C, i ) ) ) );
-    else
-        b := ForAll( degrees, i -> IsZero( DefectOfExactness( CertainMorphism( C, i ), CertainMorphism( C, i + 1 ) ) ) );
-    fi;
-    
-    if not b then
-        return b;
-    fi;
-    
-    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        return ForAll( [ Kernel( HighestDegreeMorphism( C ) ), Cokernel( LowestDegreeMorphism( C ) ) ], IsZero );
-    else
-        return ForAll( [ Cokernel( HighestDegreeMorphism( C ) ), Kernel( LowestDegreeMorphism( C ) ) ], IsZero );
-    fi;
+    return IsLeftAcyclic( C ) and IsRightAcyclic( C );
     
 end );
 
