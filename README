@@ -14,7 +14,16 @@ extension.)
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `Gauss'.
 
-This completes the installation of the package.
+The Gauss package utilizes some C-code by Max Neunhoeffer that has to
+be compiled before you can load Gauss. To compile the code, first run
+
+    ./configure
+
+If the package is not installed in the gap/pkg/Gauss directory you
+will need to provide the correct directory. This will create a
+makefile. Complete the installation of the package by running
+
+    make
 
 Recompiling the documentation is possible by the command `gap makedoc.g'
 in the Gauss directory. But this should not be necessary.

@@ -7,7 +7,7 @@ CC=cc
 
 GAPINCL=-I$(GAPPATH)/src -I$(GAPPATH)/bin/@GAPARCH@
 
-all: bindir clean doc
+all: default clean doc
 
 default: bindir bin/@GAPARCH@/gauss.so
 
@@ -29,13 +29,13 @@ static:
 doc: doc/manual.six
 
 doc/manual.six: doc/Gauss.xml VERSION
-	        gapL makedoc.g
+	        gap makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".git" --exclude test --exclude "public_html" --exclude "bin/git-push" --exclude "bin/git-pull-max" Gauss)
+	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude "makefile" --exclude ".git" --exclude test --exclude "public_html" --exclude "bin/git-push" --exclude "bin/git-pull-max" Gauss)
 
 WEBPOS=~/gap/pkg/Gauss/public_html
 

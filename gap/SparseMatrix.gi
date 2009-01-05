@@ -336,7 +336,11 @@ InstallMethod( Display,
   function( M )
     local str, ws, i, last, j;
     if M!.nrows = 0 or M!.ncols = 0 or Characteristic( M!.ring ) = 0 then
+        if Characteristic( M!.ring ) = 0 then
+            Print ( "--- no Display method, use ConvertSparseMatrixToMatrix ---\n" );
+        fi;
         ViewObj( M );
+	Print( "\n" );
     else
         str := "";
         ws := ListWithIdenticalEntries( Length( String( Int( - One( M!.ring ) ) ) ), ' ' );
