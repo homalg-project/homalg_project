@@ -243,7 +243,7 @@ InstallMethod( ReduceMat,
 ##  gap> Display(M);
 ##   . . . 1 .
 ##   . 1 1 1 1
-##    1 1 1 1 .
+##   1 1 1 1 .
 ##  gap> N := [[1,1,0,0,0],[0,0,1,0,1]] * One( GF(2) );;
 ##  gap> Display(N);
 ##   1 1 . . .
