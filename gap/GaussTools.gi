@@ -81,22 +81,36 @@ InstallValue( CommonHomalgTableForGaussTools,
                  function( C )
                    return CopyMat( Eval( C ) );
                  end,
-##  <#GAPDoc Label="ConvertMatrix">
+##  <#GAPDoc Label="ImportMatrix">
 ##  <ManSection>
-##  <Func Arg="M, R" Name="ConvertMatrix"/>
+##  <Func Arg="M, R" Name="ImportMatrix"/>
 ##  <Returns>a sparse matrix</Returns>
 ##  <Description>
-##  This returns the sparse version of the matrix stored in the
-##  <C>Eval</C> attribute of the &homalg; matrix <A>M</A> over the
-##  ring <A>R</A>. It prevents &homalg; from calling sparse matrix
+##  This returns the sparse version of the &homalg; matrix <A>M</A>
+##  over the ring <A>R</A>. It prevents &homalg; from calling sparse matrix
 ##  algorithms on dense &GAP; matrices. Note that this is not a
 ##  "standard" tool but neccessary because of the new data type.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-               ConvertMatrix :=
+               ImportMatrix :=
                  function( M, R )
                    return SparseMatrix( M, R );
+                 end,
+##  <#GAPDoc Label="ExportMatrix">
+##  <ManSection>
+##  <Func Arg="M" Name="ExportMatrix"/>
+##  <Returns>a dense matrix</Returns>
+##  <Description>
+##  This returns the dense version of the matrix <A>M</A>.
+##  Note that this is not a "standard" tool but neccessary
+##  because of the new data type.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+               ExportMatrix :=
+                 function( M )
+                   return ConvertSparseMatrixToMatrix( M );
                  end,
 ##  <#GAPDoc Label="Involution">
 ##  <ManSection>
