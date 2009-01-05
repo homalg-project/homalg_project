@@ -25,8 +25,8 @@ makefile. Complete the installation of the package by running
 
     make
 
-Recompiling the documentation is possible by the command `gap makedoc.g'
-in the Gauss directory. But this should not be necessary.
+Recompiling the documentation is possible by the command `make doc'
+in the Gauss directory, but this should not be necessary.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.
