@@ -305,9 +305,7 @@ DecideZeroRowsEffectively:= function(A, B)\n\
   S := Rowspace(B);\n\
   F := Generic(S);\n\
   M := Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
-  MA := M-A;\n\
-  T:= Matrix(BaseRing(A), [ Coordinates(S, S ! MA[i]): i in [1..Nrows(MA)]] );\n\
-  return M, T;\n\
+  return M, Solution( B, M-A );\n\
 end function;\n\n";
     
     DecideZeroColumnsEffectively := "\n\
@@ -552,7 +550,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for homalg matrices in MAGMA",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
         
@@ -566,7 +564,7 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for a list of an external matrix in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
   function( S, r, c, R )
@@ -580,7 +578,7 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrix,
+InstallMethod( CreateHomalgSparseMatrixFromString,
         "for a sparse list of an external matrix in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         

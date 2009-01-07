@@ -96,6 +96,8 @@ InstallGlobalFunction( _Singular_SetRing,
     
     homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    ## never use imapall here
+    
 end );
 
 ##
@@ -137,8 +139,12 @@ InstallGlobalFunction( InitializeSingularTools,
           BasisOfRowsCoeff, BasisOfColumnsCoeff,
           DecideZeroRows, DecideZeroColumns,
           DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
+          SyzForHomalg,
           SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
-          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2;
+          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
+          DegreesOfEntries, NonTrivialDegreePerRow, NonTrivialDegreePerColumn,
+          NonTrivialDegreePerRowWithColWeights,
+          NonTrivialDegreePerColumnWithRowWeights;
     
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
@@ -450,10 +456,18 @@ proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
   return(l);\n\
 }\n\n";
     
+    SyzForHomalg := "\n\
+proc SyzForHomalg (matrix M)\n\
+{\n\
+  list l = nres(M,2);\n\
+  return(matrix(l[2]));\n\
+  // return(syz(M));\n\
+}\n\n";
+    
     SyzygiesGeneratorsOfRows := "\n\
 proc SyzygiesGeneratorsOfRows (matrix M)\n\
 {\n\
-  return(syz(M));\n\
+  return(SyzForHomalg(M));\n\
 }\n\n";
     
     SyzygiesGeneratorsOfRows2 := "\n\
@@ -463,7 +477,7 @@ proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
   int c1 = ncols(M1);\n\
   int c2 = ncols(M2);\n\
   matrix M[r][c1+c2] = concat(M1,M2);\n\
-  matrix s = syz(M);\n\
+  matrix s = SyzForHomalg(M);\n\
   s = submat(s,1..c1,1..ncols(s));\n\
   return(std(s));\n\
 }\n\n";
@@ -471,13 +485,57 @@ proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
     SyzygiesGeneratorsOfColumns := "\n\
 proc SyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
-  return(Involution(syz(Involution(M))));\n\
+  return(Involution(SyzForHomalg(Involution(M))));\n\
 }\n\n";
     
     SyzygiesGeneratorsOfColumns2 := "\n\
 proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
 {\n\
   return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
+}\n\n";
+    
+    DegreesOfEntries := "\n\
+proc DegreesOfEntries (matrix M)\n\
+{\n\
+  intmat m[ncols(M)][nrows(M)];\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j=j+1)\n\
+    {\n\
+      m[i,j] = deg(M[j,i]);\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    NonTrivialDegreePerRow := "\n\
+proc NonTrivialDegreePerRow (matrix M)\n\
+{\n\
+  intmat m[2][ncols(M)];\n\
+  int d = deg(0);\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j=j+1)\n\
+    {\n\
+      if ( deg(M[j,i]) > d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    NonTrivialDegreePerColumn := "\n\
+proc NonTrivialDegreePerColumn (matrix M)\n\
+{\n\
+  intmat m[2][nrows(M)];\n\
+  int d = deg(0);\n\
+  for (int j=1; j<=nrows(M); j=j+1)\n\
+  {\n\
+    for (int i=1; i<=ncols(M); i=i+1)\n\
+    {\n\
+      if ( deg(M[j,i]) > d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
+    }\n\
+  }\n\
+  return(m);\n\
 }\n\n";
     
     homalgSendBlocking( "int i; int j; int k; list l;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
@@ -500,11 +558,14 @@ proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
     homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzForHomalg, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
-    
+    homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
     
   end
 );
@@ -634,7 +695,7 @@ InstallMethod( PolynomialRing,
     
     ##compute the new indeterminates for the ring and save them in var
     if IsString( indets ) and indets <> "" then
-        var := SplitString( indets, "," ); 
+        var := SplitString( indets, "," );
     elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
         var := indets;
     else
@@ -670,16 +731,14 @@ InstallMethod( PolynomialRing,
       var_of_coeff_ring := [];
     fi;
 
+    var := Concatenation( var_of_coeff_ring, var );
+    
     ##create the new ring
-    if var_of_coeff_ring = [] then
-      ext_obj := homalgSendBlocking( [ c, ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
-    else
-      ext_obj := homalgSendBlocking( [ c, ",(", var_of_coeff_ring, var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
-    fi;
+    ext_obj := homalgSendBlocking( [ c, ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    var := List( Concatenation( var_of_coeff_ring, var ), a -> HomalgExternalRingElement( a, S ) );
+    var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
     for v in var do
         SetName( v, homalgPointer( v ) );
@@ -687,16 +746,13 @@ InstallMethod( PolynomialRing,
     
     _Singular_SetRing( S );
     
-    ##since variables in Singular are stored inside a ring it is necessary to
-    ##map all variables from the to ring to the new one
-    ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", homalgPointer( R ), ")" ], "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
-    
     homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     SetIsFreePolynomialRing( S, true );
     
     SetRingProperties( S, r, var );
+    
+    SetSyzygiesAlgorithmReturnsMinimalSyzygies( S, true );
     
     RP := homalgTable( S );
     
@@ -705,7 +761,6 @@ InstallMethod( PolynomialRing,
         homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
     end;
     
-    ## reseting the "Involution" must be after "imapall":
     RP!.SetInvolution( S );
     
     return S;
@@ -729,9 +784,9 @@ InstallMethod( RingOfDerivations,
         Error( "base ring is not a polynomial ring" );
     fi;
     
-    ##compute the new indeterminates (the derivatives) for the ring and save them in der
+    ##get the new indeterminates (the derivatives) for the ring and save them in der
     if IsString( indets ) and indets <> "" then
-        der := SplitString( indets, "," ); 
+        der := SplitString( indets, "," );
     elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
         der := indets;
     else
@@ -764,15 +819,21 @@ InstallMethod( RingOfDerivations,
         display_color := "";
     fi;
     
-    Print( "----------------------------------------------------------------\n" );
     
-    ## leave the below indentation untouched!
-    Print( display_color, "\
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
                      SINGULAR::PLURAL\n\
 The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
      by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 ----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     ##create the new ring in 2 steps: expand polynomial ring with derivatives and then
     ##add the Weyl-structure
@@ -789,11 +850,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     od;
     
     _Singular_SetRing( S );
-    
-    ##since variables in Singular are stored inside a ring it is necessary to
-    ##map all variables from the to ring to the new one
-    ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( ["imapall(", homalgPointer( R ), ")" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
@@ -814,13 +870,127 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
     
-    ## reseting the "Involution" must be after "imapall":
     RP!.SetInvolution( S );
     
     RP!.Compose :=
       function( A, B )
         
         return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
+        
+    end;
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( ExteriorRing,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( R, indets )
+    local var, nr_var, anti, nr_anti, properties, stream, display_color,
+          PR, ext_obj, S, v, RP;
+    
+    #check whether base ring is polynomial and then extract needed data
+    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
+        var := IndeterminatesOfPolynomialRing( R );
+        nr_var := Length( var );
+    else
+        Error( "base ring is not a polynomial ring" );
+    fi;
+    
+    ##get the new indeterminates (the anti commuting variables) for the ring and save them in anti
+    if IsString( indets ) and indets <> "" then
+        anti := SplitString( indets, "," );
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        anti := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    nr_anti := Length( anti );
+    
+    if nr_var <> nr_anti then
+        Error( "number of indeterminates in base ring does not equal the number of anti commuting variables\n" );
+    fi;
+    
+    if Intersection2( anti, var ) <> [ ] then
+        Error( "the following indeterminate(s) are already elements of the base ring: ", Intersection2( anti, var ), "\n" );
+    fi;
+    
+    if not ForAll( var, HasName ) then
+        Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
+    fi;
+    
+    properties := [ ];
+    
+    stream := homalgStream( R );
+    
+    homalgSendBlocking( [ "LIB \"nctools.lib\";" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+    else
+        display_color := "";
+    fi;
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+                     SINGULAR::PLURAL\n\
+The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
+     by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
+FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
+    
+    ##create the new ring in 2 steps: create a polynomial ring with anti commuting variables and then
+    ##add the exterior structure
+    PR := homalgSendBlocking( [ Characteristic( R ), ",(", anti, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "Exterior();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, properties, PR, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
+    
+    for v in anti do
+        SetName( v, homalgPointer( v ) );
+    od;
+    
+    _Singular_SetRing( S );
+    
+    homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    SetIsExteriorRing( S, true );
+    
+    SetRingProperties( S, R, anti );
+    
+    SetSyzygiesAlgorithmReturnsMinimalSyzygies( S, true );
+    
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( Concatenation(
+                [ "\nproc Involution (matrix M)\n{\n" ],
+                [ "  map F = ", R ],
+                Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ a ] ) ),
+                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
+                ), "need_command", HOMALG_IO.Pictograms.define );
+    end;
+    
+    RP!.SetInvolution( S );
+    
+    RP!.Compose :=
+      function( A, B )
+        
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # see RingOfDerivations
         
     end;
     
@@ -890,11 +1060,6 @@ InstallMethod( LocalizePolynomialRingAtZero,
     
     _Singular_SetRing( S );
     
-    ##since variables in Singular are stored inside a ring it is necessary to
-    ##map all variables from the to ring to the new one
-    ##todo: kill old ring to reduce memory?
-    homalgSendBlocking( [ "imapall(", homalgPointer( R ), ")" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    
     homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     RP := homalgTable( S );
@@ -933,7 +1098,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         

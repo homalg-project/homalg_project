@@ -408,6 +408,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
         o := 1;
     fi;
     
+    homalgSendBlocking( "with(Janet)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
     if IsString( arg[1] ) then
         var := arg[1];
     else
@@ -454,6 +456,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
         o := 1;
     fi;
     
+    homalgSendBlocking( "with(JanetOre)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
     ar := [ [ arg[1], ",", "copy(`JanetOre/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingJanetOre, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
     if nargs > 1 then
@@ -491,6 +495,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     else
         o := 1;
     fi;
+    
+    homalgSendBlocking( "with(OreModules)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     ar := [ [ arg[1], ",", "copy(`OreModules/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingOreModules, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
@@ -757,7 +763,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for homalg matrices in Maple",
         [ IsString, IsHomalgExternalRingInMapleRep ],
         
@@ -771,7 +777,7 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for homalg matrices in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
@@ -785,7 +791,7 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrix,
+InstallMethod( CreateHomalgSparseMatrixFromString,
         "for a list of an external matrix in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         

@@ -31,36 +31,41 @@ InstallMethod( CreateHomalgTable,
     RP_specific := 
       rec(
            RingName :=
-	     function ( R )#todo: more cases than Weylalgebra and Polynomials Ring
-	       local var,der;
-	       
-	       if HasName( R ) then 
-	         return Name( R );
-	       fi;
-	       
-	       if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
-                 var := JoinStringsWithSeparator( 
-                           List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) 
+             function ( R )#todo: more cases than Weylalgebra and Polynomials Ring
+               local var,der;
+               
+               if HasName( R ) then
+                 return Name( R );
+               fi;
+               
+               if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
+                 var := JoinStringsWithSeparator(
+                           List( IndeterminateCoordinatesOfRingOfDerivations( R ), String )
                           );
-                 der := JoinStringsWithSeparator( 
-                            List( IndeterminateDerivationsOfRingOfDerivations( R ), String ) 
+                 der := JoinStringsWithSeparator(
+                            List( IndeterminateDerivationsOfRingOfDerivations( R ), String )
                           );
-	         return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]<", der, ">" ] ) );
-	       elif HasIndeterminatesOfPolynomialRing( R ) then
-                  var := JoinStringsWithSeparator( 
-                            List( IndeterminatesOfPolynomialRing( R ), String ) 
+                 return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]<", der, ">" ] ) );
+               elif HasIndeterminatesOfExteriorRing( R ) then
+                  var := JoinStringsWithSeparator(
+                            List( IndeterminatesOfExteriorRing( R ), String )
+                          );
+                  return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "{", var, "}" ] ) );
+               elif HasIndeterminatesOfPolynomialRing( R ) then
+                  var := JoinStringsWithSeparator(
+                            List( IndeterminatesOfPolynomialRing( R ), String )
                           );
                   return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]" ] ) );
-	       elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
-	         if Characteristic( R ) = 0 then
-	           return "Q";
-	         else
-	           return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
-	         fi;
-	       else
-	         return "some Ring";
-	       fi;
-	     end,
+               elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+                 if Characteristic( R ) = 0 then
+                   return "Q";
+                 else
+                   return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
+                 fi;
+               else
+                 return "some Ring";
+               fi;
+             end,
 
       );
     

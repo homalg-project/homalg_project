@@ -274,7 +274,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for a listlist of an external matrix in Sage",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
@@ -288,7 +288,7 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for a list of an external matrix in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
@@ -301,7 +301,7 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrix,
+InstallMethod( CreateHomalgSparseMatrixFromString,
         "for a sparse list of an external matrix in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
