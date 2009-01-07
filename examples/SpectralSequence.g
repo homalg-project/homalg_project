@@ -7,7 +7,7 @@ GP := Hom( P );
 ## compute the Cartan-Eilenberg resolution of the resulting cocomplex
 CE := Resolution( GP );
 ## the bicocomplex associated to the Cartan-Eilenberg resolution
-bc := HomalgBicomplex( CE );
+#bc := HomalgBicomplex( CE );
 ## the total complex of bc
 #tot := TotalComplex( bc );
 ## apply the outer functor F := Hom(-,R) to the Cartan-Eilenberg resolution

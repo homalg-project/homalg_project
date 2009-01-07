@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  ExamplesForHomalg.xml          ExamplesForHomalg package documentation            Mohamed Barakat
+                                                                                     Simon Goertzen
+                                                                             Markus Lange-Hegermann
+
+  Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+<TitlePage>
+  <Title>GAP 4 Package <Package>ExamplesForHomalg</Package></Title>
+  <Subtitle>ExamplesForHomalg --- Examples for the GAP Package homalg</Subtitle>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>mohamed.barakat@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat</Homepage>
+  </Author>
+  <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>simon.goertzen@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen</Homepage>
+  </Author>
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>markus.lange.hegermann@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
+  </Author>
+  <Date>October 2008</Date>
+  
+  <Copyright>
+    &copyright; 2008 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+</TitlePage>

@@ -1,24 +1,36 @@
+all: doc test
+
 doc: doc/manual.six
 
-doc/manual.six: doc/ExamplesForHomalg.xml doc/install.xml \
-		doc/examples.xml doc/intro.xml VERSION
+doc/manual.six: makedoc.g maketest.g \
+		doc/ExamplesForHomalg.xml doc/title.xml \
+		doc/intro.xml doc/install.xml \
+		doc/ExamplesForHomalg.bib gap/*.gd gap/*.gi \
+		doc/examples.xml examples/*.g \
+		VERSION
 	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
+test:	doc
+	gapL maketest.g
+
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".svn" --exclude test --exclude "public_html" ExamplesForHomalg)
+	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".git" --exclude "public_html" --exclude talks ExamplesForHomalg)
 
 WEBPOS=~/gap/pkg/ExamplesForHomalg/public_html
+WEBPOS_FINAL=~/Sites/ExamplesForHomalg
 
 towww: archive
-	echo '<?xml version="1.0" encoding="ISO-8859-1"?>' >${WEBPOS}.version
+	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
 	echo '<mixer>' >>${WEBPOS}.version
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
-#	cp PackageInfo.g ${WEBPOS}
+	cp PackageInfo.g ${WEBPOS}
 	cp README ${WEBPOS}/README.ExamplesForHomalg
 	cp doc/manual.pdf ${WEBPOS}/ExamplesForHomalg.pdf
-	cp ../tar/ExamplesForHomalg.tar.gz ${WEBPOS}
+	cp doc/*.{css,html} ${WEBPOS}
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+#	cp ../tar/ExamplesForHomalg.tar.gz ${WEBPOS}
 

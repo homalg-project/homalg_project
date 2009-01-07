@@ -4,12 +4,12 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "Sheaves" );
+LoadPackage( "ExamplesForHomalg" );
+
+HOMALG_IO.show_banners := false;
+
 LoadPackage( "GAPDoc" );
-
-SetGapDocLaTeXOptions( "utf8" );
-
-bib := ParseBibFiles( "doc/ExamplesForHomalg.bib" );
-WriteBibXMLextFile( "doc/ExamplesForHomalgBib.xml", bib );
 
 list := [
          "../gap/ExamplesForHomalg.gd",
@@ -21,7 +21,7 @@ list := [
          "../examples/DE-Code.g",
          ];
 
-MakeGAPDocDoc( "doc", "ExamplesForHomalg", list, "ExamplesForHomalg" );
+TestManualExamples( "doc", "ExamplesForHomalg.xml", list );
 
 GAPDocManualLab("ExamplesForHomalg");
 

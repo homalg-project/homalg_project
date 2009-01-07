@@ -7,7 +7,7 @@ GP := Hom( P );
 ## compute the Cartan-Eilenberg resolution of the resulting cocomplex
 CE := Resolution( GP );
 ## the bicocomplex associated to the Cartan-Eilenberg resolution
-bc := HomalgBicomplex( CE );
+#bc := HomalgBicomplex( CE );
 ## the total complex of bc
 #tot := TotalComplex( bc );
 ## apply the outer functor F := Hom(-,R) to the Cartan-Eilenberg resolution
@@ -46,3 +46,7 @@ II_E2 := DefectOfExactness( II_E1 );
 AsDifferentialObject( II_E2 );
 ## the third spectral sheet without differential
 II_E3 := DefectOfExactness( II_E2 );
+## the associated third spectral sheet with differential (works with side effect)
+AsDifferentialObject( II_E3 );
+## the fourth spectral sheet without differential
+II_E4 := DefectOfExactness( II_E3 );
