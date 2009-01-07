@@ -59,6 +59,7 @@ InstallValue( HOMALG_IO,
                 IsOne					:= "a=1",	## a = 1 ?
                 Minus					:= "a-b",	## substract two ring elements (needed by SimplerEquivalentMatrix in case CopyRow/ColumnToIdentityMatrix are not defined)
                 DivideByUnit				:= "a/u",	## divide the element a by the unit u (needed by SimplerEquivalentMatrix in case DivideEntryByUnit is not defined)
+                DegreeMultivariatePolynomial		:= "deg",	## degree of the polynomial
                 
                 ## important ring operations:
                 ## (important for performance since existing fall-back methods cause a lot of traffic):

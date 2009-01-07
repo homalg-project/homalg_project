@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  HomalgExternalMatrix.gd   IO_ForHomalg package           Mohamed Barakat
+##                                                            Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

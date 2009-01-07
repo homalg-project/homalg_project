@@ -1,6 +1,7 @@
 #############################################################################
 ##
 ##  HomalgExternalMatrix.gi   IO_ForHomalg package           Mohamed Barakat
+##                                                            Simon Goertzen
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -98,17 +99,6 @@ end );
 ####################################
 
 ##
-InstallMethod( CreateHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgInternalMatrixRep, IsHomalgExternalRingRep ],
-        
-  function( M, R )
-    
-    return CreateHomalgMatrix( String( Eval( M ) ), R );
-    
-end );
-
-##
 InstallGlobalFunction( ConvertHomalgMatrix,
   function( arg )
     local nargs, M, o, R, r, c;
@@ -142,9 +132,9 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         fi;
         
         if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-            return CreateHomalgSparseMatrix( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
+            return CreateHomalgSparseMatrixFromString( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
         else
-            return CreateHomalgMatrix( M, R );
+            return CreateHomalgMatrixFromString( M, R );
         fi;
         
     elif nargs = 4 and IsHomalgRing( arg[4] ) then
@@ -176,9 +166,9 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         fi;
         
         if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-            return CreateHomalgSparseMatrix( M, r, c, R );
+            return CreateHomalgSparseMatrixFromString( M, r, c, R );
         else
-            return CreateHomalgMatrix( M, r, c, R );
+            return CreateHomalgMatrixFromString( M, r, c, R );
         fi;
         
     fi;

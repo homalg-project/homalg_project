@@ -18,7 +18,8 @@
 InstallGlobalFunction( homalgFlush,
   function( arg )
     local nargs, verbose, stream, container, weak_pointers, l, pids, R, p, i,
-          deleted, var, streams;
+          var, active_ring_creation_number, ring_creation_numbers, deleted,
+          streams;
     
     ## the internal garbage collector:
     GASMAN( "collect" );
@@ -46,7 +47,7 @@ InstallGlobalFunction( homalgFlush,
             R := ElmWPObj( weak_pointers, i );
             if R <> fail then
                 p := homalgExternalCASystemPID( R );
-                if not p in pids then
+                if not p in pids or IsBound( homalgStream( R )!.active_ring ) then
                     Add( pids, p );
                     if verbose then
                         homalgFlush( R );
@@ -97,8 +98,10 @@ InstallGlobalFunction( homalgFlush,
         
         if IsRecord( arg[1] ) then
             stream := arg[1];
+            R := stream;
         else
-            stream := homalgStream( arg[1] );
+            R := arg[1];
+            stream := homalgStream( R );
         fi;
         
         container := stream.homalgExternalObjectsPointingToVariables;
@@ -107,22 +110,55 @@ InstallGlobalFunction( homalgFlush,
         
         l := container!.counter;
         
-        deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        ## exclude already deleted external objects:
+        var := Difference( [ 1 .. l ], container!.deleted );
         
-        var := Difference( deleted, container!.deleted );
+        if IsBound( stream.active_ring ) then
+            
+            ## set the argument to be the active ring
+            if IsHomalgExternalRingRep( R ) and
+               not IsIdenticalObj( R, stream.active_ring ) then
+                homalgSendBlocking( "\"we've just reseted the ring for garbage collection\"", "need_command", R, HOMALG_IO.Pictograms.initialize );
+            fi;
+            
+            active_ring_creation_number := stream.active_ring!.creation_number;
+            
+            ring_creation_numbers := container!.ring_creation_numbers;
+            
+            ## this is important for computer algebra systems like Singular,
+            ## which have the "feature" that a variable is stored in the ring which was active
+            ## when the variable was assigned...
+            ## one can often map all existing variables to the active ring,
+            ## but this results in various disasters:
+            ## non-zero entries of a matrix over a ring S (e.g. polynomial ring)
+            ## often become zero when the matrix is mapped to another ring (e.g. exterior ring),
+            ## and of course remain zero when the matrix is mapped back to the original ring.
+            
+            var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) and IsBound( ring_creation_numbers[i] ) and ring_creation_numbers[i] = active_ring_creation_number );
+            
+            ## free the entries corresponding to external objects about to be deleted
+            Perform( var, function( i ) Unbind( ring_creation_numbers[i] ); end );
+            
+        else
+            
+            var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) );
+            
+        fi;
+        
+        deleted := Union2( container!.deleted, var );
         
         l := Length( var );
         
         if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
             
-            stream.multiple_delete( List( var, v -> Concatenation( HOMALG_IO.variable_name, String( v ) ) ), stream );
+            stream.multiple_delete( List( var, v -> Concatenation( HOMALG_IO.variable_name, String( v ) ) ), R );
             
             container!.deleted := deleted;
             
         elif IsBound( stream.delete ) and l > 0 then
             
             for p in var do
-                stream.delete( Concatenation( HOMALG_IO.variable_name, String( p ) ), stream );
+                stream.delete( Concatenation( HOMALG_IO.variable_name, String( p ) ), R );
             od;
             
             container!.deleted := deleted;
@@ -147,7 +183,8 @@ end );
 ##
 InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush for performance reasons
   function( stream, ext_obj )
-    local container, weak_pointers, l, deleted, var, p;
+    local container, weak_pointers, l, var, active_ring_creation_number,
+          ring_creation_numbers, deleted, p;
     
     container := stream.homalgExternalObjectsPointingToVariables;
     
@@ -155,7 +192,39 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     l := container!.counter;
     
-    deleted := Filtered( [ 1 .. l ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+    ## exclude already deleted external objects:
+    var := Difference( [ 1 .. l ], container!.deleted );
+    
+    if IsBound( stream.active_ring ) then
+        
+        active_ring_creation_number := stream.active_ring!.creation_number;
+        
+        ring_creation_numbers := container!.ring_creation_numbers;
+        
+        ## this is important for computer algebra systems like Singular,
+        ## which have the "feature" that a variable is stored in the ring which was active
+        ## when the variable was assigned...
+        ## one can often map all existing variables to the active ring,
+        ## but this results in various disasters:
+        ## non-zero entries of a matrix over a ring S (e.g. polynomial ring)
+        ## often become zero when the matrix is mapped to another ring (e.g. exterior ring),
+        ## and of course remain zero when the matrix is mapped back to the original ring S.
+        
+        var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) and IsBound( ring_creation_numbers[i] ) and ring_creation_numbers[i] = active_ring_creation_number );
+        
+        ## free the entries corresponding to external objects about to be deleted
+        Perform( var, function( i ) Unbind( ring_creation_numbers[i] ); end );
+        
+        ## set the active ring for the new external object
+        ring_creation_numbers[l + 1] := active_ring_creation_number;
+        
+    else
+        
+        var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        
+    fi;
+    
+    deleted := Union2( container!.deleted, var );
     
     l := l + 1;
     
@@ -166,8 +235,6 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     fi;
     
     SetElmWPObj( weak_pointers, l, ext_obj );
-    
-    var := Difference( deleted, container!.deleted );
     
     l := Length( var );
     
@@ -267,7 +334,7 @@ InstallGlobalFunction( homalgSendBlocking,
   function( arg )
     local L, nargs, io_info_level, info_level, properties,
           need_command, need_display, need_output, ar, pictogram, ring_element,
-	  option, break_lists, R, ext_obj, stream, type, prefix, suffix, e,
+          option, break_lists, R, ext_obj, stream, type, prefix, suffix, e,
 	  RP, CAS, PID, homalg_variable, l, eoc, enter, fs, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then

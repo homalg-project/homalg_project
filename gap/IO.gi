@@ -381,15 +381,14 @@ InstallGlobalFunction( LaunchCAS,
     
     SendBlockingToCAS( s, "\n" );
     
-    if ( IsBound( s.show_banner ) and s.show_banner = true ) or
-       ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
          and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then
         Print( "----------------------------------------------------------------\n" );
         if IsBound( s.color_display ) then
             Print( s.color_display );
         fi;
         if s.cas = "maple" then
-            #Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );
+            #Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );	## this line is commented since we must start Maple using the -q option, which unfortunately also suppresses the Maple banner
 	    Print( "\
     |\\^/|     Launching Maple\n\
 ._|\\|   |/|_. Copyright (c) Maplesoft, a division of Waterloo Maple Inc.\n\
