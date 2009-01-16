@@ -1099,13 +1099,13 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices",
+        "for homalg matrices in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
-  function( M, r, c, R )
+  function( s, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ M ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ s ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
     
     if not ( r = 1 and c = 1 ) then
         homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix ); #added by Simon
@@ -1131,9 +1131,9 @@ InstallMethod( GetEntryOfHomalgMatrix,
         "for external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
-  function( M, i, j, R )
+  function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", j, i, "]" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
     
 end );
 

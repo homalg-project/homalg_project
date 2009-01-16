@@ -103,7 +103,7 @@ InstallValue( CommonHomalgTableForSageTools,
                  function( M, plist )
                    
                    plist := plist - 1;
-                   return homalgSendBlocking( [ M, ".matrix_from_rows(", plist, ")"], HOMALG_IO.Pictograms.CertainRows );
+                   return homalgSendBlocking( [ M, ".matrix_from_rows(", plist, ")" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
                
