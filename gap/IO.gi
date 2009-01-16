@@ -214,37 +214,38 @@ InstallGlobalFunction( CheckOutputOfCAS,
                             s.lines := Concatenation( s.lines{ [ 1 .. pos - 1 ] },
                                                s.lines{ [ pos + READY_LENGTH + 1 .. len ] } );
                         fi;
-                  elif SEARCH_READY_TWICE then	## a Macaulay2 specific
-                      pos2 := PositionSublist( s.lines, READY );
-                      pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
-                      if pos3 = fail then
-                          gotsomething := false;
-                      else
-                          #Print("s.lines", s.lines);
-                          pos1 := PositionSublist( s.lines, "\n\n" );
-                          if pos1 = fail then
-                              pos1 := 1;
-                          fi;
-                          pos3 := PositionSublist( s.lines, "\no", pos1 );
-                          if pos3 <> fail then
-                              pos4 := PositionSublist( s.lines, "=", pos3 + 1 );
-                              if pos4 <> fail then
-                                  s.lines := Concatenation( s.lines{ [ 1 .. pos3 ] },
-                                             s.lines{ [ pos4 + 2 .. Length( s.lines ) ] } );
-                              else
-                                  s.lines := Concatenation( s.lines{ [ 1 .. pos3 ] },
-                                             s.lines{ [ pos3 + 2 .. Length( s.lines ) ] } );
-                              fi;
-                              pos3 := PositionSublist( s.lines, "\no", pos3 + 1 );
-                              if pos3 <> fail then
-                                  s.lines := s.lines{ [ pos1 + 2 .. pos3 - 1 ] };
-                              else
-                                  s.lines := s.lines{ [ pos1 + 2 .. pos2 - 2 ] };
-                              fi;
-                          else
-                              s.lines := s.lines{ [ pos1 + 4 .. pos2 - 2 ] };
-                          fi;
-                      fi;
+                    elif SEARCH_READY_TWICE then	## a Macaulay2 specific
+                        pos2 := PositionSublist( s.lines, READY );
+                        pos3 := PositionSublist( s.lines, READY, pos2 + 1 );
+                        if pos3 = fail then
+                            gotsomething := false;
+                        else
+                            ## Print("s.lines", s.lines);	## die Feuerwehr
+                            pos1 := PositionSublist( s.lines, "\n\n" );
+                            if pos1 = fail then
+                                pos1 := 1;
+                            fi;
+                            pos3 := PositionSublist( s.lines, "\no", pos1 );
+                            if pos3 <> fail then
+                                pos4 := PositionSublist( s.lines, "=", pos3 + 1 );
+                                if pos4 <> fail then
+                                    s.lines := Concatenation( s.lines{ [ 1 .. pos3 ] },
+                                                       s.lines{ [ pos4 + 2 .. Length( s.lines ) ] } );
+                                    pos2 := pos2 - ( pos4 + 2 - pos3 );
+                                else
+                                    s.lines := Concatenation( s.lines{ [ 1 .. pos3 ] },
+                                                       s.lines{ [ pos3 + 2 .. Length( s.lines ) ] } );
+                                    pos2 := pos2 - 2;
+                                fi;
+                                s.lines := s.lines{ [ pos1 + 2 .. pos2 - 2 ] };
+                                pos3 := PositionSublist( s.lines, "\n\no" );
+                                if pos3 <> fail then
+                                    s.lines := s.lines{ [ 1 .. pos3 - 1 ] };
+                                fi;
+                            else
+                                s.lines := s.lines{ [ pos1 + 4 .. pos2 - 2 ] };
+                            fi;
+                        fi;
                     else
                         s.lines := s.lines{ [ CUT_POS_BEGIN .. Length( s.lines ) - READY_LENGTH - CUT_POS_END ] };
                     fi;
@@ -395,6 +396,9 @@ InstallGlobalFunction( LaunchCAS,
  \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
  <____ ____>  Waterloo Maple Inc.\n\
       |       " );
+        elif s.cas = "macaulay2" then
+            Remove( s.errors, Length( s.errors ) );
+            Print( s.errors );
         else
             Print( s.lines );
         fi;
