@@ -151,14 +151,14 @@ InstallGlobalFunction( homalgFlush,
         
         if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
             
-            stream.multiple_delete( List( var, v -> Concatenation( HOMALG_IO.variable_name, String( v ) ) ), R );
+            stream.multiple_delete( List( var, v -> Concatenation( stream.variable_name, String( v ) ) ), R );
             
             container!.deleted := deleted;
             
         elif IsBound( stream.delete ) and l > 0 then
             
             for p in var do
-                stream.delete( Concatenation( HOMALG_IO.variable_name, String( p ) ), R );
+                stream.delete( Concatenation( stream.variable_name, String( p ) ), R );
             od;
             
             container!.deleted := deleted;
@@ -230,8 +230,8 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     container!.counter := l;
     
-    if not Concatenation( HOMALG_IO.variable_name, String( l ) ) = homalgPointer( ext_obj ) then
-        Error( "\033[01m\033[5;31;47mexpecting an external object with pointer = ", Concatenation( HOMALG_IO.variable_name, String( l ) ), " but recieved one with pointer = ", homalgPointer( ext_obj ), "\033[0m" );
+    if not Concatenation( stream.variable_name, String( l ) ) = homalgPointer( ext_obj ) then
+        Error( "\033[01m\033[5;31;47mexpecting an external object with pointer = ", Concatenation( stream.variable_name, String( l ) ), " but recieved one with pointer = ", homalgPointer( ext_obj ), "\033[0m" );
     fi;
     
     SetElmWPObj( weak_pointers, l, ext_obj );
@@ -240,14 +240,14 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
         
-        stream.multiple_delete( List( var, v -> Concatenation( HOMALG_IO.variable_name, String( v ) ) ), stream );
+        stream.multiple_delete( List( var, v -> Concatenation( stream.variable_name, String( v ) ) ), stream );
         
         container!.deleted := deleted;
         
     elif IsBound( stream.delete ) and l > 0 then
         
         for p in var do
-            stream.delete( Concatenation( HOMALG_IO.variable_name, String( p ) ), stream );
+            stream.delete( Concatenation( stream.variable_name, String( p ) ), stream );
         od;
         
         container!.deleted := deleted;
@@ -302,7 +302,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          CAS := homalgExternalCASystem( L[a] );
                                          stream := homalgStream( L[a] );
                                          stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;	## never interchange this line with the next one
-                                         t := Concatenation( HOMALG_IO.variable_name, String( stream.HomalgExternalVariableCounter ) );
+                                         t := Concatenation( stream.variable_name, String( stream.HomalgExternalVariableCounter ) );
                                          MakeImmutable( t );
                                          SetEval( L[a], homalgExternalObject( t, CAS, stream ) ); ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
                                          _SetElmWPObj_ForHomalg( stream, Eval( L[a] ) );
@@ -531,7 +531,7 @@ InstallGlobalFunction( homalgSendBlocking,
     if not IsBound( option ) then
         
         stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;	## never interchange this line with the next one
-        homalg_variable := Concatenation( HOMALG_IO.variable_name, String( stream.HomalgExternalVariableCounter ) );
+        homalg_variable := Concatenation( stream.variable_name, String( stream.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
         
         ## now that we have just increased the variable counter
