@@ -921,6 +921,7 @@ InstallMethod( PurityFiltration,
     
     ByASmallerPresentation( filt );
     
+    ## set different porperties and attributes of the pure parts
     Perform( DegreesOfFiltration( filt ),
         function( p )
             local L;
@@ -932,14 +933,23 @@ InstallMethod( PurityFiltration,
             fi;
         end );
     
+    ## set the codegree of purity for the torsion free factor (in case it is already computed)
     if HasTorsionFreeFactorEpi( M ) and CertainObject( II_E, [ 0, 0 ] ) <> fail then
         SetCodegreeOfPurity( TorsionFreeFactor( M ), StaircaseOfStability( II_E, [ 0, 0 ], 2 ) );
+    fi;
+    
+    ## the rank of the 0-th part is the rank of the module M
+    if HasRankOfModule( M ) and RankOfModule( M ) > 0 then
+        SetRankOfModule( CertainObject( filt, 0 ), RankOfModule( M ) );
+    elif HasRankOfModule( CertainObject( filt, 0 ) ) then
+        SetRankOfModule( M, RankOfModule( CertainObject( filt, 0 ) ) );
     fi;
     
     non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
     
     l := Length( non_zero_p );
     
+    ## if only one graded part is non-trivial, the module M is pure
     if l > 0 then
         p := non_zero_p[l];
         

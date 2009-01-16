@@ -2865,9 +2865,11 @@ end );
 ##
 InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnMorphismsAndSecondArgumentOnComplexes,
   function( Functor, filter_mor, filter_cpx )
-    local functor_operation, filter0;
+    local functor_operation, covariant1, filter0;
     
     functor_operation := OperationOfFunctor( Functor );
+    
+    covariant1 := IsCovariantFunctor( Functor, 1 );
     
     if IsBound( Functor!.0 ) and IsList( Functor!.0 ) then
         
@@ -2878,7 +2880,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnMorphisms
         fi;
         
         if IsAdditiveFunctor( Functor, 1 ) = true then
-            
+            ## FIXME: add code
         fi;
         
     else
@@ -2897,8 +2899,13 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnMorphisms
                 
                 objects := ObjectsOfComplex( c );
                 
-                Fc_source := functor_operation( Source( m ), c );
-                Fc_target := functor_operation( Range( m ), c );
+                if covariant1 = true then
+                    Fc_source := functor_operation( Source( m ), c );
+                    Fc_target := functor_operation( Range( m ), c );
+                else
+                    Fc_target := functor_operation( Source( m ), c );
+                    Fc_source := functor_operation( Range( m ), c );
+                fi;
                 
                 Fc := HomalgChainMap( functor_operation( m, objects[1] ), Fc_source, Fc_target );
                 
@@ -2925,7 +2932,9 @@ end );
 ##
 InstallGlobalFunction( HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOnComplexes,
   function( Functor, filter1_cpx, filter2_cpx )
-    local functor_operation, filter0;
+    local functor_operation, covariant1, filter0;
+    
+    covariant1 := IsCovariantFunctor( Functor, 1 );
     
     functor_operation := OperationOfFunctor( Functor );
     
@@ -2938,7 +2947,7 @@ InstallGlobalFunction( HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOn
         fi;
         
         if IsAdditiveFunctor( Functor, 1 ) = true then
-            
+            ## FIXME: add code
         fi;
         
     else
@@ -2959,16 +2968,32 @@ InstallGlobalFunction( HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOn
                 
                 if l = 1 then
                     if IsComplexOfFinitelyPresentedObjectsRep( c ) then
-                        Fc := HomalgComplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                        if covariant1 = true then
+                            Fc := HomalgComplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                        else
+                            Fc := HomalgCocomplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                        fi;
                     else
-                        Fc := HomalgCocomplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                        if covariant1 = true then
+                            Fc := HomalgCocomplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                        else
+                            Fc := HomalgComplex( functor_operation( CertainObject( c, degrees[1] ), C ), degrees[1] );
+                        fi;
                     fi;
                 else
                     morphisms := MorphismsOfComplex( c );
                     if IsComplexOfFinitelyPresentedObjectsRep( c ) then
-                        Fc := HomalgComplex( functor_operation( morphisms[1], C ), degrees[2] );
+                        if covariant1 then
+                            Fc := HomalgComplex( functor_operation( morphisms[1], C ), degrees[2] );
+                        else
+                            Fc := HomalgCocomplex( functor_operation( morphisms[1], C ), degrees[1] );
+                        fi;
                     else
-                        Fc := HomalgCocomplex( functor_operation( morphisms[1], C ), degrees[1] );
+                        if covariant1 then
+                            Fc := HomalgCocomplex( functor_operation( morphisms[1], C ), degrees[1] );
+                        else
+                            Fc := HomalgComplex( functor_operation( morphisms[1], C ), degrees[2] );
+                        fi;
                     fi;
                     for m in morphisms{[ 2 .. l - 1 ]} do
                         Add( Fc, functor_operation( m, C ) );

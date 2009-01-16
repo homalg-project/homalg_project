@@ -6,36 +6,32 @@
 
          Copyright (C) 2007, Lehrstuhl B für Mathematik, RWTH-Aachen
 
-This is the chapter of the documentation describing the installation.
-
 -->
 <TitlePage>
-    <Title>&homalg;</Title>
-    <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
-    <TitleComment>(this manual is still under construction)</TitleComment>
-    <Version>
-      Version <#Include SYSTEM "../VERSION">
-    </Version>
-    <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
-<Address>
-Lehrstuhl B für Mathematik, <Br/>
-RWTH Aachen, <Br/>
-Templergraben 64, <Br/>
-52056 Aachen, <Br/>
-Germany
-</Address>
-<Email>mohamed.barakat@rwth-aachen.de</Email>
-<Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
-</Author>
-<Date>October 2008</Date>
-
-<Copyright>
-  &copyright; 2007-2008 by Mohamed Barakat <P/>
-
-  This package may be distributed under the terms and conditions of the
-  GNU Public License Version 2.
-</Copyright>
-
+  <Title>&homalg;</Title>
+  <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
+  <TitleComment>(this manual is still under construction)</TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik, <Br/>
+      RWTH Aachen, <Br/>
+      Templergraben 64, <Br/>
+      52056 Aachen, <Br/>
+      Germany
+    </Address>
+    <Email>mohamed.barakat@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Date>October 2008</Date>
+  
+  <Copyright>
+    &copyright; 2007-2008 by Mohamed Barakat <P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
 <Acknowledgements>
   <Alt Not="Text"><URL Text="Max
   Neunhöffer">http://www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
@@ -54,8 +50,8 @@ Germany
   Breuer">http://www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Alt>
   <Alt Only="Text">Thomas Breuer</Alt> patiently answered trillions of
   specific questions, even those I was too lazy to look up in the
-  excellent <Alt Only="HTML"><Ref Chap="about" Text="programming
-  tutorial" BookName="Prg Tutorial"/></Alt><Alt Not="HTML">
+  excellent <Alt Only="HTML"><Ref Chap="about" Text="programming tutorial"
+  BookName="Prg Tutorial"/></Alt><Alt Not="HTML">
   programming tutorial</Alt>.
   
   Without their continuous and tireless help and advice, not only this
@@ -158,4 +154,3 @@ Germany
 </Acknowledgements>
 
 </TitlePage>
-

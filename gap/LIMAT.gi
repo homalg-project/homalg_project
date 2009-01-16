@@ -2487,6 +2487,40 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
 end );
 
 #-----------------------------------
+# SyzygiesOfRows
+#-----------------------------------
+
+##
+InstallMethod( SyzygiesOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
+        
+  function( M1, M2 )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesOfRows(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
+    
+    return SyzygiesOfRows( M1 );
+    
+end );
+
+#-----------------------------------
+# SyzygiesOfColumns
+#-----------------------------------
+
+##
+InstallMethod( SyzygiesOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
+        
+  function( M1, M2 )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesOfColumns(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
+    
+    return SyzygiesOfColumns( M1 );
+    
+end );
+
+#-----------------------------------
 # GetUnitPosition
 #-----------------------------------
 

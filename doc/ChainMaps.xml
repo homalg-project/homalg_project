@@ -51,6 +51,9 @@
 <Section Label="ChainMaps:Attributes">
 <Heading>Chain Maps: Attributes</Heading>
 
+<#Include Label="Source:chainmap">
+<#Include Label="Range:chainmap">
+
 </Section>
 
 <Section Label="ChainMaps:Operations">

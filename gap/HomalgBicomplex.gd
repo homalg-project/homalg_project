@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgBicomplex",
         IsHomalgObject );
 
@@ -44,6 +45,7 @@ DeclareCategory( "IsHomalgBicomplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsBisequence",
         IsHomalgBicomplex );
 
@@ -56,6 +58,7 @@ DeclareProperty( "IsBisequence",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsBicomplex",
         IsHomalgBicomplex );
 
@@ -69,6 +72,7 @@ DeclareProperty( "IsBicomplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
         IsHomalgBicomplex );
 
@@ -87,6 +91,7 @@ DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "TotalComplex",
         IsHomalgBicomplex );
 
@@ -99,6 +104,7 @@ DeclareAttribute( "TotalComplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "SpectralSequence",
         IsHomalgBicomplex );
 

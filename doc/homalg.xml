@@ -29,6 +29,7 @@
 	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
 	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
 	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
+	  <!ENTITY Sheaves "<Package>Sheaves</Package>">
 	  <!ENTITY SCO "<Package>SCO</Package>">
 	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
 	  ]

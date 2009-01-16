@@ -27,6 +27,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgModule",
         IsHomalgRingOrModule and IsHomalgObject );
 
@@ -45,6 +46,7 @@ DeclareCategory( "IsHomalgModule",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsFree",
         IsHomalgModule );
 
@@ -57,6 +59,7 @@ DeclareProperty( "IsFree",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsStablyFree",
         IsHomalgModule );
 
@@ -69,6 +72,7 @@ DeclareProperty( "IsStablyFree",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsProjective",
         IsHomalgModule );
 
@@ -82,6 +86,7 @@ DeclareProperty( "IsProjective",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "FiniteFreeResolutionExists",
         IsHomalgModule );
 
@@ -94,6 +99,7 @@ DeclareProperty( "FiniteFreeResolutionExists",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsReflexive",
         IsHomalgModule );
 
@@ -106,6 +112,7 @@ DeclareProperty( "IsReflexive",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsTorsionFree",
         IsHomalgModule );
 
@@ -119,6 +126,7 @@ DeclareProperty( "IsTorsionFree",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsArtinian",
         IsHomalgModule );
 
@@ -132,6 +140,7 @@ DeclareProperty( "IsArtinian",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsCyclic",
         IsHomalgModule );
 
@@ -144,6 +153,7 @@ DeclareProperty( "IsCyclic",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsTorsion",
         IsHomalgModule );
 
@@ -156,6 +166,7 @@ DeclareProperty( "IsTorsion",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsHolonomic",
         IsHomalgModule );
 
@@ -168,6 +179,7 @@ DeclareProperty( "IsHolonomic",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsPure",
         IsHomalgModule );
 
@@ -181,6 +193,7 @@ DeclareProperty( "IsPure",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "HasConstantRank",
         IsHomalgModule );
 
@@ -218,6 +231,7 @@ DeclareAttribute( "AFiniteFreeResolution",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
@@ -230,6 +244,7 @@ DeclareAttribute( "ElementaryDivisors",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "RankOfModule",
         IsHomalgModule );
 
@@ -242,6 +257,7 @@ DeclareAttribute( "RankOfModule",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ProjectiveDimension",
         IsHomalgModule );
 
@@ -255,6 +271,7 @@ DeclareAttribute( "ProjectiveDimension",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "DegreeOfTorsionFreeness",
         IsHomalgModule );
 
@@ -268,6 +285,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "CodimOfModule",
         IsHomalgModule );
 
@@ -280,6 +298,7 @@ DeclareAttribute( "CodimOfModule",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "PurityFiltration",
         IsHomalgModule );
 
@@ -292,7 +311,34 @@ DeclareAttribute( "PurityFiltration",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "CodegreeOfPurity",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="BettiDiagram:module">
+##  <ManSection>
+##    <Attr Arg="M" Name="BettiDiagram" Label="for modules"/>
+##    <Returns>a &homalg; diagram</Returns>
+##    <Description>
+##      The Betti diagram of the &homalg; graded module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "BettiDiagram",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="CastelnuovoMumfordRegularity">
+##  <ManSection>
+##    <Attr Arg="M" Name="CastelnuovoMumfordRegularity"/>
+##    <Returns>a non-negative integer</Returns>
+##    <Description>
+##      The Castelnuovo-Mumford regularity of the &homalg; graded module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CastelnuovoMumfordRegularity",
         IsHomalgModule );
 
 ####################################
@@ -301,7 +347,13 @@ DeclareAttribute( "CodegreeOfPurity",
 #
 ####################################
 
-# constructor methods:
+# constructors:
+
+DeclareOperation( "AsLeftModule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "AsRightModule",
+        [ IsHomalgRing ] );
 
 DeclareOperation( "Presentation",
         [ IsHomalgRelations ] );
@@ -339,6 +391,59 @@ DeclareOperation( "HomalgZeroLeftModule",
 DeclareOperation( "HomalgZeroRightModule",
         [ IsHomalgRing ] );
 
+DeclareOperation( "*",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsInt ] );
+
+DeclareOperation( "LeftPresentationWithWeights",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "LeftPresentationWithWeights",
+        [ IsHomalgMatrix, IsInt ] );
+
+DeclareOperation( "LeftPresentationWithWeights",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightPresentationWithWeights",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "RightPresentationWithWeights",
+        [ IsHomalgMatrix, IsInt ] );
+
+DeclareOperation( "RightPresentationWithWeights",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "HomalgFreeLeftModuleWithWeights",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "HomalgFreeLeftModuleWithWeights",
+        [ IsInt, IsHomalgRing, IsInt ] );
+
+DeclareOperation( "HomalgFreeLeftModuleWithWeights",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "HomalgFreeRightModuleWithWeights",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "HomalgFreeRightModuleWithWeights",
+        [ IsInt, IsHomalgRing, IsInt ] );
+
+DeclareOperation( "HomalgFreeRightModuleWithWeights",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "POW",
+        [ IsHomalgRing, IsInt ] );
+
+DeclareOperation( "*",
+        [ IsHomalgModule, IsHomalgRing ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgModule ] );
+
+# global functions:
+
 DeclareGlobalFunction( "GetGenerators" );
 
 # basic operations:
@@ -368,6 +473,12 @@ DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule ] );
 
 DeclareOperation( "RelationsOfModule",
+        [ IsHomalgModule, IsPosInt ] );
+
+DeclareOperation( "DegreesOfGenerators",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "DegreesOfGenerators",
         [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "RelationsOfHullModule",
@@ -487,12 +598,3 @@ DeclareSynonym( "EulerCharacteristicOfModule",
 DeclareSynonym( "BetterPresentation",
         GetRidOfObsoleteGenerators );
 
-##  <#GAPDoc Label="">
-##  <ManSection>
-##    <Prop Arg="M" Name=""/>
-##    <Returns>true or false</Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is xxxx.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>

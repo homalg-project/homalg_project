@@ -190,11 +190,54 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for external homalg ring elements",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return R;
+    
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for external homalg ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
         
   function( r )
     
     return r!.ring;
+    
+end );
+
+##
+InstallMethod( Indeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminatesOfPolynomialRing ],
+        
+  function( R )
+    
+    return IndeterminatesOfPolynomialRing( R );
+    
+end );
+
+##
+InstallMethod( Indeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminatesOfExteriorRing ],
+        
+  function( R )
+    
+    return IndeterminatesOfExteriorRing( R );
+    
+end );
+
+InstallMethod( Indeterminate,
+        "for homalg rings",
+        [ IsHomalgRing, IsPosInt ],
+        
+  function( R, i )
+    
+    return Indeterminates( R )[i];
     
 end );
 
@@ -350,28 +393,6 @@ InstallOtherMethod( AsList,
 end );
 
 ##
-InstallMethod( AsLeftModule,
-        "for homalg rings",
-        [ IsHomalgRing ],
-        
-  function( R )
-    
-    return R!.AsLeftModule;
-    
-end );
-
-##
-InstallMethod( AsRightModule,
-        "for homalg rings",
-        [ IsHomalgRing ],
-        
-  function( R )
-    
-    return R!.AsRightModule;
-    
-end );
-
-##
 InstallMethod( homalgSetName,
         "for homalg rings",
         [ IsHomalgExternalRingElementRep, IsString ],
@@ -393,25 +414,34 @@ InstallMethod( SetRingProperties,
     d := Length( var );
     
     SetCoefficientsRing( S, R );
+    
     if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
         SetCharacteristic( S, Characteristic( R ) );
     fi;
+    
     SetIsCommutative( S, true );
+    
     SetIndeterminatesOfPolynomialRing( S, var );
+    
     if HasGlobalDimension( R ) then
         SetGlobalDimension( S, d + GlobalDimension( R ) );
     fi;
+    
     if HasKrullDimension( R ) then
         SetKrullDimension( S, d + KrullDimension( R ) );
     fi;
+    
     SetGeneralLinearRank( S, 1 );	## Quillen-Suslin Theorem (see [McCRob, 11.5.5]
+    
     if d = 1 then			## [McCRob, 11.5.7]
         SetElementaryRank( S, 1 );
     elif d > 2 then
         SetElementaryRank( S, 2 );
     fi;
-          
+    
     SetIsIntegralDomain( S, true );
+    
+    SetDegreesOfIndeterminates( S, ListWithIdenticalEntries( Length( var ), 1 ) );
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
@@ -428,23 +458,61 @@ InstallMethod( SetRingProperties,
     r := CoefficientsRing( R );
     
     var := IndeterminatesOfPolynomialRing( R );
+    
     d := Length( var );
     
     SetCoefficientsRing( S, r );
+    
     SetCharacteristic( S, Characteristic( R ) );
+    
     SetIsCommutative( S, false );
+    
     SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    
     SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    
     if HasGlobalDimension( r ) then
         SetGlobalDimension( S, d + GlobalDimension( r ) );
     fi;
+    
     if HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) and Characteristic( S ) = 0 then
         SetGeneralLinearRank( S, 2 );	## [Stafford78, McCRob, 11.2.15(i)]
         SetIsSimpleRing( S, true );
     fi;
+    
     if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
         SetIsIntegralDomain( S, true );
     fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
+        [ IsHomalgRing and IsExteriorRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, R, anti )
+    local r, d;
+    
+    r := CoefficientsRing( R );
+    
+    d := Length( anti );
+    
+    SetCoefficientsRing( S, r );
+    
+    SetCharacteristic( S, Characteristic( R ) );
+    
+    SetIsCommutative( S, d = 0 );
+    
+    SetIsAnticommutative( S, true );
+    
+    SetIsIntegralDomain( S, d = 0 );
+    
+    SetIndeterminatesOfExteriorRing( S, anti );
+    
+    SetDegreesOfIndeterminates( S, ListWithIdenticalEntries( Length( anti ), -1 ) );
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
@@ -801,7 +869,7 @@ InstallMethod( \/,
     
     mat := MatrixOfRelations( ring_rel );
     
-    mat := HomalgMatrix( mat, S );
+    mat := mat * S;
     
     if IsHomalgRelationsOfLeftModule( ring_rel ) then
         rel := HomalgRelationsForLeftModule( mat );
@@ -816,7 +884,7 @@ InstallMethod( \/,
         SetAmbientRing( S, AmbientRing( R ) );
         rel_old := RingRelations( R );
         mat_old := MatrixOfRelations( rel_old );
-        mat_old := HomalgMatrix( mat_old, S );
+        mat_old := mat_old * S;
         if IsHomalgRelationsOfLeftModule( rel_old ) then
             rel_old := HomalgRelationsForLeftModule( mat_old );
             left_old := true;
@@ -885,50 +953,84 @@ end );
 
 ##
 InstallMethod( \*,
-        "constructor",
-        [ IsInt, IsHomalgRing ],
-        
-  function( rank, R )
-    
-    if rank = 0 then
-        return R!.ZeroLeftModule;
-    elif rank = 1 then
-        return AsLeftModule( R );
-    elif rank > 1 then
-        return HomalgFreeLeftModule( rank, R );
-    fi;
-    
-    Error( "virtual modules are not supported (yet)\n" );
-    
-end );
-
-##
-InstallMethod( \*,
-        "constructor",
-        [ IsHomalgRing, IsInt ],
-        
-  function( R, rank )
-    
-    if rank = 0 then
-        return R!.ZeroRightModule;
-    elif rank = 1 then
-        return AsRightModule( R );
-    elif rank > 1 then
-        return HomalgFreeRightModule( rank, R );
-    fi;
-    
-    Error( "virtual modules are not supported (yet)\n" );
-    
-end );
-
-##
-InstallMethod( \*,
         "for homalg rings",
         [ IsHomalgExternalRingRep, IsString ],
         
   function( R, indets )
     
     return PolynomialRing( R, SplitString( indets, "," ) );
+    
+end );
+
+##
+InstallMethod( AssociatedRingOfDerivations,
+        "for homalg rings",
+        [ IsHomalgRing and IsCommutative, IsList ],
+        
+  function( S, der )
+    local A;
+    
+    if IsBound(S!.RingOfDerivations) then
+        return S!.RingOfDerivations;
+    fi;
+    
+    A := RingOfDerivations( S, der );
+    
+    S!.RingOfDerivations := A;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( AssociatedRingOfDerivations,
+        "for homalg rings",
+        [ IsHomalgRing and IsCommutative ],
+        
+  function( S )
+    
+    if IsBound(S!.RingOfDerivations) then
+        return S!.RingOfDerivations;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( KoszulDualRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, anti )
+    local A;
+    
+    if IsBound(S!.KoszulDualRing) then
+        return S!.KoszulDualRing;
+    fi;
+    
+    A := ExteriorRing( S, anti );
+    
+    ## thanks GAP4
+    A!.KoszulDualRing := S;
+    S!.KoszulDualRing := A;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( KoszulDualRing,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( S )
+    
+    if IsBound(S!.KoszulDualRing) then
+        return S!.KoszulDualRing;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -954,7 +1056,7 @@ InstallGlobalFunction( HomalgExternalRingElement,
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsString, IsHomalgExternalRingRep, IsFilter } bur recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsString, IsHomalgExternalRingRep, IsFilter } bur recieved: ", ar, "\n" );
         fi;
     od;
     

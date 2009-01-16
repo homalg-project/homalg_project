@@ -25,6 +25,14 @@
 <Section Label="Matrices:Constructors">
 <Heading>Matrices: Constructors</Heading>
 
+<#Include Label="HomalgMatrix">
+<#Include Label="HomalgZeroMatrix">
+<#Include Label="HomalgIdentityMatrix">
+<#Include Label="HomalgInitialMatrix">
+<#Include Label="HomalgInitialIdentityMatrix">
+<#Include Label="HomalgDiagonalMatrix">
+<#Include Label="\*:MatrixBaseChange">
+
 </Section>
 
 <Section Label="Matrices:Properties">
@@ -72,6 +80,7 @@
 <#Include Label="NonZeroColumns">
 <#Include Label="PositionOfFirstNonZeroEntryPerRow">
 <#Include Label="PositionOfFirstNonZeroEntryPerColumn">
+<#Include Label="DegreesOfEntries">
 
 </Section>
 
@@ -87,6 +96,8 @@
 
 <Section Label="Matrices:Operations">
 <Heading>Matrices: Operations and Functions</Heading>
+
+<#Include Label="HomalgRing:matrix">
 
 </Section>
 

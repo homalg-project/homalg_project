@@ -103,7 +103,8 @@ InstallGlobalFunction( ContainerForWeakPointers,
     
     container := rec( weak_pointers := WeakPointerObj( [ ] ),
                       counter := 0,
-                      deleted := [ ] );
+                      deleted := [ ],
+                      ring_creation_numbers := [ ] );
     
     for component in arg{[ 2 .. nargs ]} do
         container.( component[1] ) := component[2];
@@ -546,6 +547,17 @@ InstallGlobalFunction( InstallLeftRightAttributesForHomalg,
         
         LeftRightAttributesForHomalg( attribute, filter );
         
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( AddToAhomalgTable,
+  function( RP, RP_addon )
+    local component;
+    
+    for component in NamesOfComponents( RP_addon ) do
+        RP.(component) := RP_addon.(component);
     od;
     
 end );

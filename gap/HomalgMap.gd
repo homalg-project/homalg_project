@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgMap",
         IsHomalgMorphism );
 
@@ -40,6 +41,7 @@ DeclareCategory( "IsHomalgMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgSelfMap",
         IsHomalgMap and
         IsHomalgEndomorphism );
@@ -51,6 +53,26 @@ DeclareCategory( "IsHomalgSelfMap",
 ####################################
 
 ## all properties are declared in homalg.gd for the bigger category IsHomalgMorphism
+
+##  <#GAPDoc Label="Source:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="Source" Label="for maps"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      The source of the &homalg; map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="Range:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="Range" Label="for maps"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      The target (range) of the &homalg; map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="IsMorphism:map">
 ##  <ManSection>
@@ -178,6 +200,28 @@ DeclareCategory( "IsHomalgSelfMap",
 #
 ####################################
 
+##  <#GAPDoc Label="DegreeOfMorphism:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="DegreeOfMorphism" Label="for maps"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      The degree of the morphism <A>phi</A> of graded modules. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="DegreeOfMorphism:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="DegreeOfMorphism" Label="for maps"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      The degree of the morphism <A>phi</A> of graded modules. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="MorphismAidMap:map">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="MorphismAidMap" Label="for maps"/>
@@ -188,6 +232,7 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "MorphismAidMap",
         IsHomalgMap );
 

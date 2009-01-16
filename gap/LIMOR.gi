@@ -78,6 +78,12 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           [ IsGeneralizedEpimorphism, "and", IsGeneralizedMonomorphism,
             "imply", IsGeneralizedIsomorphism ],
           
+          [ IsGeneralizedEpimorphism, "and", IsMorphism,
+            "imply", IsEpimorphism ],
+          
+          [ IsGeneralizedMonomorphism, "and", IsMorphism,
+            "imply", IsMonomorphism ],
+          
           [ IsIdentityMorphism,
             "implies", IsAutomorphism ],
           

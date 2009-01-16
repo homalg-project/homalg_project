@@ -162,7 +162,27 @@ InstallMethod( \/,
         return HomalgExternalRingElement( RP!.DivideByUnit( a, u ), R );
     fi;
     
-    Error( "could not find a procedure called DivideByUnit in the homalgTable", RP, "\n" );
+    Error( "could not find a procedure called DivideByUnit in the homalgTable\n" );
+    
+end );
+
+##
+InstallMethod( DegreeMultivariatePolynomial,
+        "for homalg rings elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R, RP, minus_r;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.DegreeMultivariatePolynomial) then
+        return RP!.DegreeMultivariatePolynomial( r, R );
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -216,7 +236,7 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external initial matrix", RP, "\n" );
+        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external initial matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -249,7 +269,7 @@ InstallMethod( Eval,				### defines: an initial quadratic matrix filled with one
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external initial identity matrix", RP, "\n" );
+        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external initial identity matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -287,7 +307,7 @@ InstallMethod( Eval,				### defines: Involution
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called Involution in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called Involution in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -318,7 +338,7 @@ InstallMethod( Eval,				### defines: CertainRows
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainRows in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called CertainRows in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -349,7 +369,7 @@ InstallMethod( Eval,				### defines: CertainColumns
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainColumns in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called CertainColumns in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -380,7 +400,7 @@ InstallMethod( Eval,				### defines: UnionOfRows
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfRows in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called UnionOfRows in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -415,7 +435,7 @@ InstallMethod( Eval,				### defines: UnionOfColumns
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfColumns in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called UnionOfColumns in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -447,7 +467,7 @@ InstallMethod( Eval,				### defines: DiagMat
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called DiagMat in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called DiagMat in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     z := Zero( R );
@@ -496,7 +516,7 @@ InstallMethod( Eval,				### defines: KroneckerMat
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called KroneckerMat in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called KroneckerMat in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -536,7 +556,7 @@ InstallMethod( Eval,				### defines: MulMat
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called MulMat in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called MulMat in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -583,7 +603,7 @@ InstallMethod( Eval,				### defines: AddMat
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called AddMat in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called AddMat in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -630,7 +650,7 @@ InstallMethod( Eval,				### defines: SubMat
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called SubMat in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called SubMat in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -677,7 +697,7 @@ InstallMethod( Eval,				### defines: Compose
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called Compose in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called Compose in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -710,7 +730,7 @@ InstallMethod( Eval,				### defines: IdentityMap
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external identity matrix", RP, "\n" );
+        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external identity matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -748,7 +768,7 @@ InstallMethod( Eval,				### defines: ZeroMap
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external zero matrix", RP, "\n" );
+        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external zero matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -778,7 +798,7 @@ InstallMethod( NrRows,				### defines: NrRows
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrRows in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called NrRows in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -804,7 +824,7 @@ InstallMethod( NrColumns,			### defines: NrColumns
     fi;
     
     if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrColumns in the homalgTable to apply on a an external matrix", RP, "\n" );
+        Error( "could not find a procedure called NrColumns in the homalgTable to apply on a an external matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1169,9 +1189,9 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
     if IsBound(RP!.DivideRowByUnit) then
         RP!.DivideRowByUnit( M, i, u, j );
     else
-	
+        
         #=====# begin of the core procedure #=====#
-	
+        
         if j > 0 then
             ## the two for's avoid creating non-dense lists:
             for a in [ 1 .. j - 1 ] do
@@ -1477,13 +1497,13 @@ InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
     #=====# begin of the core procedure #=====#
     
     ## to use
-    ## CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), c, r, R )
+    ## CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), c, r, R )
     ## we would need a transpose afterwards,
     ## which differs from Involution in general:
     
     l := List( [ 1 .. c ],  j -> CertainColumns( M, [ (j-1) * r + 1 .. j * r ] ) );
     l := List( l, GetListOfHomalgMatrixAsString );
-    l := List( l, a -> CreateHomalgMatrix( a, r, 1, R ) );
+    l := List( l, a -> CreateHomalgMatrixFromString( a, r, 1, R ) );
     
     mat := HomalgZeroMatrix( r, 0, R );
     
@@ -1522,7 +1542,7 @@ InstallMethod( ConvertColumnToMatrix,		### defines: ConvertColumnToMatrix
     
     #=====# begin of the core procedure #=====#
     
-    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), r, c, R ); ## delicate
+    return CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), r, c, R ); ## delicate
     
 end );
 
@@ -1552,13 +1572,13 @@ InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
     r := NrRows( M );
     c := NrColumns( M );
     
-    ## CreateHomalgMatrix( GetListOfHomalgMatrixAsString( "Transpose"( M ) ), 1, r * c, R )
+    ## CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( "Transpose"( M ) ), 1, r * c, R )
     ## would require a Transpose operation,
     ## which differs from Involution in general:
     
     l := List( [ 1 .. c ],  j -> CertainColumns( M, [ j ] ) );
     l := List( l, GetListOfHomalgMatrixAsString );
-    l := List( l, a -> CreateHomalgMatrix( a, 1, r, R ) );
+    l := List( l, a -> CreateHomalgMatrixFromString( a, 1, r, R ) );
     
     mat := HomalgZeroMatrix( 1, 0, R );
     
@@ -1593,7 +1613,7 @@ InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
     
     #=====# begin of the core procedure #=====#
     
-    return CreateHomalgMatrix( GetListOfHomalgMatrixAsString( M ), NrColumns( M ) * NrRows( M ), 1, R ); ## delicate
+    return CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), NrColumns( M ) * NrRows( M ), 1, R ); ## delicate
     
 end );
 
@@ -1618,6 +1638,180 @@ InstallMethod( Eval,
     #=====# begin of the core procedure #=====#
     
     return Eval( e );
+    
+end );
+
+##
+InstallMethod( DegreesOfEntries,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, e, c;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), ListWithIdenticalEntries( NrColumns( C ), -1 ) );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.DegreesOfEntries) then
+        return RP!.DegreesOfEntries( C );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    e := EntriesOfHomalgMatrix( C );
+    
+    e := List( e, DegreeMultivariatePolynomial );
+    
+    c := NrColumns( C );
+    
+    return List( [ 1 .. NrRows( C ) ], r -> e{[ ( r - 1 ) * c + 1 .. r * c ]} );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, e, deg0;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), -1 );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.NonTrivialDegreePerRow) then
+        return RP!.NonTrivialDegreePerRow( C )[1];
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    e := DegreesOfEntries( C );
+    
+    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    
+    return List( e, row -> First( row, a -> a > deg0 ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, e, deg0;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), -1 );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.NonTrivialDegreePerColumn) then
+        return RP!.NonTrivialDegreePerColumn( C )[1];
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    e := DegreesOfEntries( C );
+    
+    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    
+    return List( TransposedMat( e ), column -> First( column, a -> a > deg0 ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( C, col_weights )
+    local R, RP, w, e, deg0;
+    
+    if Length( col_weights ) <> NrColumns( C ) then
+        Error( "the number of entries in the list of weights does not match the number of columns of the matrix\n" );
+    fi;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), -1 );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    w := Set( col_weights );
+    
+    if IsBound(RP!.NonTrivialDegreePerRow) then
+        if Length( w ) = 1 then
+            return RP!.NonTrivialDegreePerRow( C )[1] + w[1];
+        else
+            e := RP!.NonTrivialDegreePerRow( C );
+            return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_weights[e[2][i]] );
+        fi;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    e := DegreesOfEntries( C );
+    
+    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    
+    return List( e, function( r ) local c; c := PositionProperty( r, a -> a > deg0 ); return r[c] + col_weights[c]; end );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( C, row_weights )
+    local R, RP, w, e, deg0;
+    
+    if Length( row_weights ) <> NrRows( C ) then
+        Error( "the number of entries in the list of weights does not match the number of rows of the matrix\n" );
+    fi;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), -1 );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    w := Set( row_weights );
+    
+    if IsBound(RP!.NonTrivialDegreePerColumn) then
+        if Length( w ) = 1 then
+            return RP!.NonTrivialDegreePerColumn( C )[1] + w[1];
+        else
+            e := RP!.NonTrivialDegreePerColumn( C );
+            return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_weights[e[2][j]] );
+        fi;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    e := DegreesOfEntries( C );
+    
+    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    
+    return List( TransposedMat( e ), function( c ) local r; r := PositionProperty( c, a -> a > deg0 ); return c[r] + row_weights[r]; end );
     
 end );
 

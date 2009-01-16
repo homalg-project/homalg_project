@@ -106,6 +106,11 @@ InstallMethod( homalgResetFilters,
         ResetFilterObj( C, property );
     od;
     
+    if HasBettiDiagram( C ) then
+        ResetFilterObj( C, BettiDiagram );
+        Unbind( C!.BettiDiagram );
+    fi;
+    
     if IsBound( C!.HomologyGradedObject ) then
         Unbind( C!.HomologyGradedObject );
     fi;
@@ -415,7 +420,11 @@ InstallMethod( Add,
     
     ConvertToRangeRep( degrees );
     
-    if HasIsSequence( C ) and IsSequence( C ) and
+    if HasIsGradedObject( C ) and IsGradedObject( C ) and
+       HasIsMorphism( phi ) and IsMorphism( phi ) then
+        homalgResetFilters( C );
+        SetIsComplex( C, true );
+    elif HasIsSequence( C ) and IsSequence( C ) and
        HasIsMorphism( phi ) and IsMorphism( phi ) then
         homalgResetFilters( C );
         SetIsSequence( C, true );
@@ -452,11 +461,11 @@ InstallMethod( Add,
         
         if IsHomalgMap( phi ) then
             if not IsIdenticalObj( CertainObject( C, degrees[1] ), Source( phi ) ) then
-                Error( "the unique object in the complex and the source of the new map are not identical\n" );
+                Error( "the unique object in the cocomplex and the source of the new map are not identical\n" );
             fi;
         else
             if CertainObject( C, degrees[1] ) <> Source( phi ) then
-                Error( "the unique object in the complex and the source of the new chain map are not equal\n" );
+                Error( "the unique object in the cocomplex and the source of the new chain map are not equal\n" );
             fi;
         fi;
         
@@ -470,11 +479,11 @@ InstallMethod( Add,
         
         if IsHomalgMap( phi ) then
             if not IsIdenticalObj( Range( CertainMorphism( C, l ) ), Source( phi ) ) then
-                Error( "the target of the ", l, ". map in the complex (i.e. the highest one) and the source of the new one are not identical\n" );
+                Error( "the target of the ", l, ". map in the cocomplex (i.e. the highest one) and the source of the new one are not identical\n" );
             fi;
         else
             if Range( CertainMorphism( C, l ) ) <>  Source( phi ) then
-                Error( "the target of the ", l, ". chain map in the complex (i.e. the highest one) and the source of the new one are not equal\n" );
+                Error( "the target of the ", l, ". chain map in the cocomplex (i.e. the highest one) and the source of the new one are not equal\n" );
             fi;
         fi;
         
@@ -486,7 +495,11 @@ InstallMethod( Add,
     
     ConvertToRangeRep( degrees );
     
-    if HasIsSequence( C ) and IsSequence( C ) and
+    if HasIsGradedObject( C ) and IsGradedObject( C ) and
+       HasIsMorphism( phi ) and IsMorphism( phi ) then
+        homalgResetFilters( C );
+        SetIsComplex( C, true );
+    elif HasIsSequence( C ) and IsSequence( C ) and
        HasIsMorphism( phi ) and IsMorphism( phi ) then
         homalgResetFilters( C );
         SetIsSequence( C, true );
@@ -502,6 +515,72 @@ InstallMethod( Add,
             SetIsShortExactSequence( C, true );
         fi;
     fi;
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( Add,
+        "for homalg complexes",
+        [ IsMorphismOfFinitelyGeneratedModulesRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( phi, C )
+    local degrees, l, psi;
+    
+    degrees := ObjectDegreesOfComplex( C );
+    
+    l := Length( degrees );
+    
+    if l = 1 then
+        
+        if IsHomalgMap( phi ) then
+            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
+                Error( "the unique object in the cocomplex and the range of the new map are not identical\n" );
+            fi;
+        else
+            if CertainObject( C, degrees[1] ) <> Range( phi ) then
+                Error( "the unique object in the cocomplex and the range of the new chain map are not equal\n" );
+            fi;
+        fi;
+        
+        C!.degrees := Concatenation( [ degrees[1] - 1 ], degrees );
+        
+        C!.(String( degrees[1] - 1 )) := phi;
+        
+    else
+        
+        l := degrees[1];
+        
+        if IsHomalgMap( phi ) then
+            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
+                Error( "the source of the ", l, ". map in the cocomplex (i.e. the lowest one) and the target of the new one are not identical\n" );
+            fi;
+        else
+            if Source( CertainMorphism( C, l ) ) <>  Range( phi ) then
+                Error( "the source of the ", l, ". chain map in the cocomplex (i.e. the lowest one) and the target of the new one are not equal\n" );
+            fi;
+        fi;
+        
+        C!.degrees := Concatenation( [ l - 1 ], degrees );
+        
+        C!.(String( l - 1 )) := phi;
+        
+    fi;
+    
+    degrees := C!.degrees;
+    
+    ConvertToRangeRep( degrees );
+    
+    if HasIsSequence( C ) and IsSequence( C ) and
+       HasIsMorphism( phi ) and IsMorphism( phi ) then
+        homalgResetFilters( C );
+        SetIsSequence( C, true );
+    else
+        homalgResetFilters( C );
+    fi;
+    
+    ## FIXME: insert a SetIsShortExactSequence statement, analogous to the above Add method
     
     return C;
     
@@ -998,6 +1077,14 @@ InstallMethod( OnLessGenerators,
     
 end );
 
+##  <#GAPDoc Label="ByASmallerPresentation:complex">
+##  <ManSection>
+##    <Meth Arg="C" Name="ByASmallerPresentation" Label="for complexes"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/>
+##    and <Ref Meth="ByASmallerPresentation" Label="for maps"/>.
+##      <Listing Type="Code"><![CDATA[
 ##
 InstallMethod( ByASmallerPresentation,
         "for homalg complexes",
@@ -1016,6 +1103,76 @@ InstallMethod( ByASmallerPresentation,
     return C;
     
 end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>C</A> and returns it.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  <A homalg internal 3 by 4 matrix>
+##  gap> phi := HomalgMap( mat, M, N );
+##  <A "homomorphism" of left modules>
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> C := HomalgComplex( phi );
+##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> Display( C );
+##  -------------------------
+##  at homology degree: 0
+##  [ [  2,  3,  4,  5 ],
+##    [  6,  7,  8,  9 ] ]
+##  Cokernel of the map
+##  
+##  Z^(1x2) --> Z^(1x4),
+##  
+##  currently represented by the above matrix
+##  ------------^------------
+##  [ [  0,  3,  6,  9 ],
+##    [  0,  2,  4,  6 ],
+##    [  0,  3,  6,  9 ] ]
+##  
+##  the map is currently represented by the above 3 x 4 matrix
+##  ------------^------------
+##  at homology degree: 1
+##  [ [  2,  3,  4 ],
+##    [  5,  6,  7 ] ]
+##  Cokernel of the map
+##  
+##  Z^(1x2) --> Z^(1x3),
+##  
+##  currently represented by the above matrix
+##  -------------------------
+##  ]]></Example>
+##      An now:
+##      <Example><![CDATA[
+##  gap> ByASmallerPresentation( C );
+##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> Display( C );
+##  -------------------------
+##  at homology degree: 0
+##  Z/< 4 > + Z^(1 x 2)
+##  ------------^------------
+##  [ [  0,  0,  0 ],
+##    [  2,  0,  0 ] ]
+##  
+##  the map is currently represented by the above 2 x 3 matrix
+##  ------------^------------
+##  at homology degree: 1
+##  Z/< 3 > + Z^(1 x 1)
+##  -------------------------
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -1023,6 +1180,53 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgComplex">
+##  <ManSection>
+##    <Func Arg="M[, d]" Name="HomalgComplex" Label="constructor for complexes given a module"/>
+##    <Func Arg="phi[, d]" Name="HomalgComplex" Label="constructor for complexes given a map"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##      The first syntax creates a &homalg; complex (i.e. chain complex) with the single module <A>M</A> at
+##      (homological) degree <A>d</A>. The second syntax creates a &homalg; complex with the single morphism <A>phi</A>,
+##      its source placed at (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>).
+##      If <A>d</A> is not provided it defaults to zero in all cases.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  <A homalg internal 3 by 4 matrix>
+##  gap> phi := HomalgMap( mat, M, N );
+##  <A "homomorphism" of left modules>
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  ]]></Example>
+##  The first possibility:
+##      <Example><![CDATA[
+##  <A homomorphism of left modules>
+##  gap> C := HomalgComplex( N );
+##  <A non-zero graded homology object consisting of a single left module at degree 0>
+##  gap> Add( C, phi );
+##  gap> C;
+##  <A complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  ]]></Example>
+##  The second possibility:
+##      <Example><![CDATA[
+##  gap> C := HomalgComplex( phi );
+##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgComplex,
   function( arg )
     local nargs, C, complex, degrees, object, obj_or_mor, left, type;
@@ -1058,7 +1262,7 @@ InstallGlobalFunction( HomalgComplex,
             obj_or_mor := arg[1];
         fi;
         C.degrees := degrees;
-        left := IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[1] );
+        left := IsHomalgLeftObjectOrMorphismOfLeftObjects( obj_or_mor );
     elif IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
         object := false;
         obj_or_mor := arg[1];
@@ -1073,7 +1277,7 @@ InstallGlobalFunction( HomalgComplex,
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( obj_or_mor );
     
-    C.( String( degrees[1] ) ) := arg[1];
+    C.( String( degrees[1] ) ) := obj_or_mor;
     
     if complex then
         if left then
@@ -1095,22 +1299,81 @@ InstallGlobalFunction( HomalgComplex,
     Objectify( type, C );
     
     if object then
-        if degrees = [ 0 ] then
-            SetIsRightAcyclic( C, true );
-            if HasIsZero( obj_or_mor ) then
-                SetIsLeftAcyclic( C, IsZero( obj_or_mor ) );
-                SetIsZero( C, IsZero( obj_or_mor ) );
-            fi;
+        SetIsRightAcyclic( C, true );
+        if HasIsZero( obj_or_mor ) then
+            SetIsLeftAcyclic( C, IsZero( obj_or_mor ) );
+            SetIsZero( C, IsZero( obj_or_mor ) );
         fi;
         SetIsGradedObject( C, true );
-    elif HasIsMorphism( arg[1] ) and IsMorphism( arg[1] ) then
-        SetIsComplex( C, true );
+    elif HasIsIsomorphism( obj_or_mor ) and IsIsomorphism( obj_or_mor ) then
+        SetIsExactSequence( C, true );
+    elif HasIsEpimorphism( obj_or_mor ) and IsEpimorphism( obj_or_mor ) then
+        if complex then
+            SetIsLeftAcyclic( C, true );
+        else
+            SetIsRightAcyclic( C, true );
+        fi;
+    elif HasIsMonomorphism( obj_or_mor ) and IsMonomorphism( obj_or_mor ) then
+        if complex then
+            SetIsRightAcyclic( C, true );
+        else
+            SetIsLeftAcyclic( C, true );
+        fi;
+    elif HasIsMorphism( obj_or_mor ) and IsMorphism( obj_or_mor ) then
+        SetIsAcyclic( C, true );
     fi;
     
     return C;
     
 end );
 
+##  <#GAPDoc Label="HomalgCocomplex">
+##  <ManSection>
+##    <Func Arg="M[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a module"/>
+##    <Func Arg="phi[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a map"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##      The first syntax creates a &homalg; cocomplex (i.e. cochain complex) with the single module <A>M</A> at
+##      (cohomological) degree <A>d</A>. The second syntax creates a &homalg; cocomplex with the single morphism <A>phi</A>,
+##      its source placed at (cohomological) degree <A>d</A> (and its target at <A>d</A><M>+1</M>).
+##      If <A>d</A> is not provided it defaults to zero in all cases.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := RightPresentation( Involution( M ) );
+##  <A non-zero right module on 3 generators satisfying 2 relations>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := RightPresentation( Involution( N ) );
+##  <A non-zero right module on 4 generators satisfying 2 relations>
+##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  <A homalg internal 3 by 4 matrix>
+##  gap> phi := HomalgMap( Involution( mat ), M, N );
+##  <A "homomorphism" of right modules>
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of right modules>
+##  ]]></Example>
+##  The first possibility:
+##      <Example><![CDATA[
+##  <A homomorphism of right modules>
+##  gap> C := HomalgComplex( N );
+##  <A non-zero graded homology object consisting of a single right module at degree 0>
+##  gap> Add( C, phi );
+##  gap> C;
+##  <A complex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  ]]></Example>
+##  The second possibility:
+##      <Example><![CDATA[
+##  gap> C := HomalgComplex( phi );
+##  <A non-zero acyclic complex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgCocomplex,
   function( arg )
     

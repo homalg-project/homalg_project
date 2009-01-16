@@ -25,6 +25,9 @@
 <Section Label="Complexes:Constructors">
 <Heading>Complexes: Constructors</Heading>
 
+<#Include Label="HomalgComplex">
+<#Include Label="HomalgCocomplex">
+
 </Section>
 
 <Section Label="Complexes:Properties">
@@ -44,12 +47,12 @@
 
 </Section>
 
-<!--
 <Section Label="Complexes:Attributes">
 <Heading>Complexes: Attributes</Heading>
 
+<#Include Label="BettiDiagram:complex">
+
 </Section>
--->
 
 <Section Label="Complexes:LICPX">
 <Heading>&LICPX;: Logical Implications for Complexes</Heading>
@@ -58,6 +61,8 @@
 
 <Section Label="Complexes:Operations">
 <Heading>Complexes: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:complex">
 
 </Section>
 

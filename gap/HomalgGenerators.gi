@@ -45,6 +45,21 @@ BindGlobal( "TheTypeHomalgGeneratorsOfRightModule",
 ####################################
 
 ##
+InstallMethod( DegreesOfGenerators,
+        "for sets of generators of homalg modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep ],
+        
+  function( gen )
+    
+    if IsBound(gen!.DegreesOfGenerators) then
+        return gen!.DegreesOfGenerators;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( MatrixOfGenerators,
         "for sets of generators of homalg modules",
         [ IsGeneratorsOfFinitelyGeneratedModuleRep ],
@@ -245,6 +260,10 @@ InstallMethod( UnionOfRelations,
         SetProcedureToNormalizeGenerators( gen_new, ProcedureToNormalizeGenerators( gen ) );
     fi;
     
+    if IsList( DegreesOfGenerators( gen ) ) then
+        gen_new!.DegreesOfGenerators := DegreesOfGenerators( gen );
+    fi;
+    
     return gen_new;
     
 end );
@@ -269,6 +288,10 @@ InstallMethod( DecideZero,
     fi;
     
     gen_new := NewHomalgGenerators( gen!.DecideZero, gen );
+    
+    if IsList( DegreesOfGenerators( gen ) ) then
+        gen_new!.DegreesOfGenerators := DegreesOfGenerators( gen );
+    fi;
     
     SetIsReduced( gen_new, true );
     
@@ -305,11 +328,11 @@ end );
 
 ##
 InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterBasis)
-        "for sets of relations of homalg modules",
+        "for sets of generators of homalg modules",
         [ IsGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( _gen )
-    local R, RP, gen;
+    local R, RP, gen, nonzero;
     
     R := HomalgRing( _gen );
     
@@ -327,7 +350,9 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
             gen := MatrixOfGenerators( gen );
         fi;
         
-        gen := CertainRows( gen, NonZeroRows( gen ) );
+        nonzero := NonZeroRows( gen );
+        
+        gen := CertainRows( gen, nonzero );
         
     else
         
@@ -337,11 +362,19 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
             gen := MatrixOfGenerators( gen );
         fi;
         
-        gen := CertainColumns( gen, NonZeroColumns( gen ) );
+        nonzero := NonZeroColumns( gen );
+        
+        gen := CertainColumns( gen, nonzero );
         
     fi;
     
-    return NewHomalgGenerators( gen, _gen );
+    gen := NewHomalgGenerators( gen, _gen );
+    
+    if IsList( DegreesOfGenerators( _gen ) ) then
+        gen!.DegreesOfGenerators := DegreesOfGenerators( _gen ){nonzero};
+    fi;
+    
+    return gen;
     
 end );
 
@@ -404,10 +437,26 @@ InstallMethod( \*,
     generators := MatrixOfGenerators( gen );
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
-        return NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
+        generators := NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
+        if IsList( DegreesOfGenerators( gen ) ) then
+            if DegreesOfGenerators( gen ) = [ ] then
+                generators!.DegreesOfGenerators := ListWithIdenticalEntries( NrRows( TI ), -1 );
+            else
+                generators!.DegreesOfGenerators := NonTrivialDegreePerRow( TI, DegreesOfGenerators( gen ) );
+            fi;
+        fi;
     else
-        return NewHomalgGenerators( generators * TI, gen ); ## the hull relations remain unchanged :)
+        generators := NewHomalgGenerators( generators * TI, gen ); ## the hull relations remain unchanged :)
+        if IsList( DegreesOfGenerators( gen ) ) then
+            if DegreesOfGenerators( gen ) = [ ] then
+                generators!.DegreesOfGenerators := ListWithIdenticalEntries( NrColumns( TI ), -1 );
+            else
+                generators!.DegreesOfGenerators := NonTrivialDegreePerColumn( TI, DegreesOfGenerators( gen ) );
+            fi;
+        fi;
     fi;
+    
+    return generators;
     
 end );
 

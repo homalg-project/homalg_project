@@ -57,6 +57,25 @@ BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgRing:module">
+##  <ManSection>
+##    <Oper Arg="M" Name="HomalgRing" Label="for modules"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The &homalg; ring of the &homalg; module <A>M</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> M := ZZ * 4;
+##  <A free right module of rank 4 on free generators>
+##  gap> R := HomalgRing( M );
+##  <A homalg internal ring>
+##  gap> IsIdenticalObj( R, ZZ );
+##  true
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
@@ -239,6 +258,44 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
     
 end );
 
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return DegreesOfGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    
+    return DegreesOfGenerators( GeneratorsOfModule( M, pos ) );
+    
+end );
+
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsZero ],
+        
+  function( M )
+    
+    if NrGenerators( M ) > 0 then
+        TryNextMethod( );
+    fi;
+    
+    return [ ];
+    
+end );
+
+##
 InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -607,6 +664,10 @@ InstallMethod( AddANewPresentation,
     ## define the (l+1)st set of relations:
     if IsBound( rels!.(d) ) then
         rels!.(l+1) := rels!.(d);
+        ## add the list of degrees of generators to the new set of relations
+        if IsList( DegreesOfGenerators( gen ) ) then
+            rels!.(l+1)!.DegreesOfGenerators := DegreesOfGenerators( gen );
+        fi;
     fi;
     
     ## adjust the list of positions:
@@ -718,6 +779,11 @@ InstallMethod( AddANewPresentation,
     ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
     
+    ## add the list of degrees of generators to the new set of relations
+    if IsList( DegreesOfGenerators( gens!.(l+1) ) ) then
+        rels!.(l+1)!.DegreesOfGenerators := DegreesOfGenerators( gens!.(l+1) );
+    fi;
+    
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
@@ -797,6 +863,11 @@ InstallMethod( AddANewPresentation,
     
     ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
+    
+    ## add the list of degrees of generators to the new set of relations
+    if IsList( DegreesOfGenerators( gens!.(l+1) ) ) then
+        rels!.(l+1)!.DegreesOfGenerators := DegreesOfGenerators( gens!.(l+1) );
+    fi;
     
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
@@ -1100,8 +1171,8 @@ InstallMethod( OnLessGenerators,
     
     rel_old := MatrixOfRelations( M );
     
-    V := HomalgMatrix( R );
-    VI := HomalgMatrix( R );
+    V := HomalgVoidMatrix( R );
+    VI := HomalgVoidMatrix( R );
     
     rel := SimplerEquivalentMatrix( rel_old, V, VI, "", "" );
     
@@ -1129,8 +1200,8 @@ InstallMethod( OnLessGenerators,
     
     rel_old := MatrixOfRelations( M );
     
-    U := HomalgMatrix( R );
-    UI := HomalgMatrix( R );
+    U := HomalgVoidMatrix( R );
+    UI := HomalgVoidMatrix( R );
     
     rel := SimplerEquivalentMatrix( rel_old, U, UI, "", "", "" );
     
@@ -1146,6 +1217,35 @@ InstallMethod( OnLessGenerators,
     
 end );
 
+##  <#GAPDoc Label="ByASmallerPresentation:module">
+##  <ManSection>
+##    <Meth Arg="M" Name="ByASmallerPresentation" Label="for modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      Use different strategies to reduce the presentation of the given &homalg; module <A>M</A>.
+##      This method performs side effects on its argument <A>M</A> and returns it.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> Display( M );
+##  [ [  2,  3,  4 ],
+##    [  5,  6,  7 ] ]
+##  Cokernel of the map
+##  
+##  Z^(1x2) --> Z^(1x3),
+##  
+##  currently represented by the above matrix
+##  gap> ByASmallerPresentation( M );
+##  <A non-zero left module presented by 1 relation for 2 generators>
+##  gap> Display( last );
+##  Z/< 3 > + Z^(1 x 1)
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ByASmallerPresentation,
         "for homalg modules",
@@ -1300,6 +1400,28 @@ end );
 # constructor functions and methods:
 #
 ####################################
+
+##
+InstallMethod( AsLeftModule,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return R!.AsLeftModule;
+    
+end );
+
+##
+InstallMethod( AsRightModule,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return R!.AsRightModule;
+    
+end );
 
 ##
 InstallMethod( Presentation,
@@ -1605,6 +1727,35 @@ InstallMethod( LeftPresentation,
     
 end );
 
+##  <#GAPDoc Label="LeftPresentation">
+##  <ManSection>
+##    <Oper Arg="mat" Name="LeftPresentation" Label="constructor for left modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      This constructor returns the finitely presented left module with relations given by the
+##      rows of the &homalg; matrix <A>mat</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> Display( M );
+##  [ [  2,  3,  4 ],
+##    [  5,  6,  7 ] ]
+##  Cokernel of the map
+##  
+##  Z^(1x2) --> Z^(1x3),
+##  
+##  currently represented by the above matrix
+##  gap> ByASmallerPresentation( M );
+##  <A non-zero left module presented by 1 relation for 2 generators>
+##  gap> Display( last );
+##  Z/< 3 > + Z^(1 x 1)
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( LeftPresentation,
         "constructor",
@@ -1612,20 +1763,7 @@ InstallMethod( LeftPresentation,
         
   function( mat )
     
-    ResetFilterObj( mat, IsMutableMatrix );
-    
     return Presentation( HomalgRelationsForLeftModule( mat ) );
-    
-end );
-
-##
-InstallOtherMethod( LeftPresentation,		## FIXME: should be removed!!!
-        "constructor",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
-        
-  function( rel )
-    
-    return Presentation( rel );
     
 end );
 
@@ -1721,6 +1859,27 @@ InstallMethod( RightPresentation,
     
 end );
 
+##  <#GAPDoc Label="RightPresentation">
+##  <ManSection>
+##    <Oper Arg="mat" Name="RightPresentation" Label="constructor for right modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      This constructor returns the finitely presented right module with relations given by the
+##      columns of the &homalg; matrix <A>mat</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := RightPresentation( M );
+##  <A right module on 2 generators satisfying 3 relations>
+##  gap> ByASmallerPresentation( M );
+##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  gap> Display( last );
+##  Z/< 3 >
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( RightPresentation,
         "constructor",
@@ -1728,23 +1887,30 @@ InstallMethod( RightPresentation,
         
   function( mat )
     
-    ResetFilterObj( mat, IsMutableMatrix );
-    
     return Presentation( HomalgRelationsForRightModule( mat ) );
     
 end );
 
-##
-InstallOtherMethod( RightPresentation,		## FIXME: should be removed!!!
-        "constructor",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
-        
-  function( rel )
-    
-    return Presentation( rel );
-    
-end );
-
+##  <#GAPDoc Label="HomalgFreeLeftModule">
+##  <ManSection>
+##    <Oper Arg="r, R" Name="HomalgFreeLeftModule" Label="constructor for free left modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      This constructor returns a free left module of rank <A>r</A> over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> F := HomalgFreeLeftModule( 1, ZZ );
+##  <A free left module of rank 1 on a free generator>
+##  gap> 1 * ZZ;
+##  <The free left module of rank 1 on a free generator>
+##  gap> F := HomalgFreeLeftModule( 2, ZZ );
+##  <A free left module of rank 2 on free generators>
+##  gap> 2 * ZZ;
+##  <A free left module of rank 2 on free generators>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgFreeLeftModule,
         "constructor",
@@ -1756,6 +1922,26 @@ InstallMethod( HomalgFreeLeftModule,
     
 end );
 
+##  <#GAPDoc Label="HomalgFreeRightModule">
+##  <ManSection>
+##    <Oper Arg="r, R" Name="HomalgFreeRightModule" Label="constructor for free right modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      This constructor returns a free right module of rank <A>r</A> over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> F := HomalgFreeRightModule( 1, ZZ );
+##  <A free right module of rank 1 on a free generator>
+##  gap> ZZ * 1;
+##  <The free right module of rank 1 on a free generator>
+##  gap> F := HomalgFreeRightModule( 2, ZZ );
+##  <A free right module of rank 2 on free generators>
+##  gap> ZZ * 2;
+##  <A free right module of rank 2 on free generators>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgFreeRightModule,
         "constructor",
@@ -1767,6 +1953,22 @@ InstallMethod( HomalgFreeRightModule,
     
 end );
 
+##  <#GAPDoc Label="HomalgZeroLeftModule">
+##  <ManSection>
+##    <Oper Arg="r, R" Name="HomalgZeroLeftModule" Label="constructor for zero left modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      This constructor returns a zero left module of rank <A>r</A> over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> F := HomalgZeroLeftModule( ZZ );
+##  <A zero left module>
+##  gap> 0 * ZZ;
+##  <The zero left module>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgZeroLeftModule,
         "constructor",
@@ -1778,6 +1980,22 @@ InstallMethod( HomalgZeroLeftModule,
     
 end );
 
+##  <#GAPDoc Label="HomalgZeroRightModule">
+##  <ManSection>
+##    <Oper Arg="r, R" Name="HomalgZeroRightModule" Label="constructor for zero right modules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      This constructor returns a zero right module of rank <A>r</A> over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> F := HomalgZeroRightModule( ZZ );
+##  <A zero right module>
+##  gap> ZZ * 0;
+##  <The zero right module>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgZeroRightModule,
         "constructor",
@@ -1786,6 +2004,282 @@ InstallMethod( HomalgZeroRightModule,
   function( R )
     
     return HomalgFreeRightModule( 0, R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "constructor",
+        [ IsInt, IsHomalgRing ],
+        
+  function( rank, R )
+    
+    if rank = 0 then
+        return R!.ZeroLeftModule;
+    elif rank = 1 then
+        return AsLeftModule( R );
+    elif rank > 1 then
+        return HomalgFreeLeftModule( rank, R );
+    fi;
+    
+    Error( "virtual modules are not supported (yet)\n" );
+    
+end );
+
+##
+InstallMethod( \*,
+        "constructor",
+        [ IsHomalgRing, IsInt ],
+        
+  function( R, rank )
+    
+    if rank = 0 then
+        return R!.ZeroRightModule;
+    elif rank = 1 then
+        return AsRightModule( R );
+    elif rank > 1 then
+        return HomalgFreeRightModule( rank, R );
+    fi;
+    
+    Error( "virtual modules are not supported (yet)\n" );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithWeights,
+        "constructor",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( mat, weights )
+    local M;
+    
+    if Length( weights ) <> NrColumns( mat ) then
+        Error( "the number of weights must coincide with the number of columns\n" );
+    fi;
+    
+    M := LeftPresentation( mat );
+    
+    GeneratorsOfModule( M )!.DegreesOfGenerators := weights;
+    RelationsOfModule( M )!.DegreesOfGenerators := weights;
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithWeights,
+        "constructor",
+        [ IsHomalgMatrix, IsInt ],
+        
+  function( mat, weight )
+    
+    return LeftPresentationWithWeights( mat, ListWithIdenticalEntries( NrColumns( mat ), weight ) );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithWeights,
+        "constructor",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    
+    return LeftPresentationWithWeights( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 ) );
+    
+end );
+
+##
+InstallMethod( RightPresentationWithWeights,
+        "constructor",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( mat, weights )
+    local M;
+    
+    if Length( weights ) <> NrRows( mat ) then
+        Error( "the number of weights must coincide with the number of rows\n" );
+    fi;
+    
+    M := RightPresentation( mat );
+    
+    GeneratorsOfModule( M )!.DegreesOfGenerators := weights;
+    RelationsOfModule( M )!.DegreesOfGenerators := weights;
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( RightPresentationWithWeights,
+        "constructor",
+        [ IsHomalgMatrix, IsInt ],
+        
+  function( mat, weight )
+    
+    return RightPresentationWithWeights( mat, ListWithIdenticalEntries( NrRows( mat ), weight ) );
+    
+end );
+
+##
+InstallMethod( RightPresentationWithWeights,
+        "constructor",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    
+    return RightPresentationWithWeights( mat, ListWithIdenticalEntries( NrRows( mat ), 0 ) );
+    
+end );
+
+##
+InstallMethod( HomalgFreeLeftModuleWithWeights,
+        "constructor",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, weights )
+    
+    return LeftPresentationWithWeights( HomalgZeroMatrix( 0, Length( weights ), R ), weights );
+    
+end );
+
+##
+InstallMethod( HomalgFreeLeftModuleWithWeights,
+        "constructor",
+        [ IsInt, IsHomalgRing, IsInt ],
+        
+  function( rank, R, weight )
+    
+    return HomalgFreeLeftModuleWithWeights( R, ListWithIdenticalEntries( rank, weight ) );
+    
+end );
+
+##
+InstallMethod( HomalgFreeLeftModuleWithWeights,
+        "constructor",
+        [ IsInt, IsHomalgRing ],
+        
+  function( rank, R )
+    
+    return HomalgFreeLeftModuleWithWeights( rank, R, 0 );
+    
+end );
+
+##
+InstallMethod( HomalgFreeRightModuleWithWeights,
+        "constructor",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, weights )
+    
+    return RightPresentationWithWeights( HomalgZeroMatrix( Length( weights ), 0, R ), weights );
+    
+end );
+
+##
+InstallMethod( HomalgFreeRightModuleWithWeights,
+        "constructor",
+        [ IsInt, IsHomalgRing, IsInt ],
+        
+  function( rank, R, weight )
+    
+    return HomalgFreeRightModuleWithWeights( R, ListWithIdenticalEntries( rank, weight ) );
+    
+end );
+
+##
+InstallMethod( HomalgFreeRightModuleWithWeights,
+        "constructor",
+        [ IsInt, IsHomalgRing ],
+        
+  function( rank, R )
+    
+    return HomalgFreeRightModuleWithWeights( rank, R, 0 );
+    
+end );
+
+##
+InstallMethod( POW,
+        "constructor",
+        [ IsHomalgRing, IsInt ],
+        
+  function( R, twist )
+    
+    return HomalgFreeLeftModuleWithWeights( 1, R, -twist );
+    
+end );
+
+##  <#GAPDoc Label="\*:ModuleBaseChange">
+##  <ManSection>
+##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring"/>
+##    <Oper Arg="R, M" Name="\*" Label="transfer a module over a different ring (left)"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      Transfers the <M>S</M>-module <A>M</A> over the &homalg; ring <A>R</A>. This works only in three cases:
+##      <Enum>
+##        <Item><M>S</M> is a subring of <A>R</A>.</Item>
+##        <Item><A>R</A> is a residue class ring of <M>S</M> constructed using <C>/</C>
+##        (&see; <Ref Oper="\/" Label="constructor for residue class rings" Style="Number"/>).</Item>
+##        <Item><A>R</A> is a subring of <M>S</M> and the entries of the current matrix of <M>S</M>-relations of <A>M</A>
+##          lie in <A>R</A>.</Item>
+##      </Enum>
+##      CAUTION: So it not suited for general base change.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> Z4 := ZZ / [ 4 ];;
+##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
+##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A left module presented by 3 relations for 3 generators>
+##  gap> N := Z4 * M;
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> Display( M );
+##  Z/< 2 > + Z/< 3 > + Z/< 4 >
+##  gap> Display( N );
+##  Z/( 4 )/< 2 > + Z/( 4 )^(1 x 1)
+##  gap> M;
+##  <A pure torsion left module presented by 3 relations for 3 generators>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( \*,
+        "for homalg modules",
+        [ IsHomalgModule, IsHomalgRing ], 10001,
+        
+  function( M, R )
+    local N;
+    
+    if IsIdenticalObj( HomalgRing( M ), R ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        if IsList( DegreesOfGenerators( M ) ) then
+            N := LeftPresentationWithWeights( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
+        else
+            N := LeftPresentation( MatrixOfRelations( M ) * R );
+        fi;
+    else
+        if IsList( DegreesOfGenerators( M ) ) then
+            N := RightPresentationWithWeights( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
+        else
+            N := RightPresentation( MatrixOfRelations( M ) * R );
+        fi;
+    fi;
+    
+    return N * R;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg modules",
+        [ IsHomalgRing, IsHomalgModule ], 10001,
+        
+  function( R, M )
+    
+    return  M * R;
     
 end );
 
@@ -1907,9 +2401,12 @@ InstallMethod( ViewObj,
     elif HasIsTorsionFree( M ) and IsTorsionFree( M ) then
         if HasCodegreeOfPurity( M ) then
             if CodegreeOfPurity( M ) = [ 1 ] then
-                Append( properties, Concatenation( " codegree-", String( 1 ), "-pure torsion-free" ) );
+                Append( properties, Concatenation( " codegree-", String( 1 ), "-pure" ) );
             else
-                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure torsion-free" ) );
+                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure" ) );
+            fi;
+            if not ( HasRankOfModule( M ) and RankOfModule( M ) > 0 ) then
+                Print( " torsion-free" );
             fi;
             nz := true;
         else
@@ -1987,6 +2484,10 @@ InstallMethod( ViewObj,
           not ( IsBound( nz ) and nz = true ) then
             properties := Concatenation( " non-zero", properties );
         fi;
+    fi;
+    
+    if IsList( DegreesOfGenerators( M ) ) then
+        Append( properties, " graded" );
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -2078,6 +2579,10 @@ InstallMethod( ViewObj,
     fi;
     
     Print( " free " );
+    
+    if IsList( DegreesOfGenerators( M ) ) then
+        Print( "graded " );
+    fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         Print( "left " );
@@ -2181,7 +2686,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     local R, l, D;
@@ -2198,55 +2703,33 @@ InstallMethod( Display,
         D := "R";
     fi;
     
+    Display( MatrixOfRelations( M ) );
+    
+    if IsList( DegreesOfGenerators( M ) ) then
+        Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n\n" );
+    fi;
+    
+    Print( "Cokernel of the map\n\n" );
+    
     if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
-        Print( "Cokernel of the map:\n", D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            Print( D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
+        else
+            Print( D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
+        fi;
     else
-        Print( "Cokernel of the map:\n", D, "^(1x", NrRelations( M ), ") --> ", D, "^(1x", NrGenerators( M ), ")," );
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            Print( D, "^(1x", NrRelations( M ), ") --> ", D, "^(1x", NrGenerators( M ), ")," );
+        else
+            Print( D, "^(", NrRelations( M ), "x1) --> ", D, "^(", NrGenerators( M ), "x1)," );
+        fi;
     fi;
     
     if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
         Print( " ( for ", D, " := ", R, "\033[0m )" );
     fi;
     
-    Print( " with matrix\n\n" );
-    
-    Display( MatrixOfRelations( M ) );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( M )
-    local R, l, D;
-    
-    R := HomalgRing( M );
-    
-    R := RingName( R );
-    
-    l := 10;
-    
-    if Length( R ) < l then
-        D := R;
-    else
-        D := "R";
-    fi;
-    
-    if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
-        Print( "Cokernel of the map:\n", D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
-    else
-        Print( "Cokernel of the map:\n", D, "^(", NrRelations( M ), "x1) --> ", D, "^(", NrGenerators( M ), "x1)," );
-    fi;
-    
-    if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
-        Print( " ( for ", D, " := ", R, "\033[0m )" );
-    fi;
-    
-    Print( " with matrix\n\n" );
-    
-    Display( MatrixOfRelations( M ) );
+    Print( "\n\ncurrently represented by the above matrix\n" );
     
 end );
 
@@ -2300,8 +2783,16 @@ InstallMethod( Display,
         fi;
         display := Concatenation( display );
         display := Concatenation( display );
-        Print( name, "/< ", display{ [ 1 .. Length( display ) - 2 ] }, " >\n" );
+        Print( name, "/< ", display{ [ 1 .. Length( display ) - 2 ] }, " >" );
+        
+        if IsList( DegreesOfGenerators( M ) ) then
+            Print( "\t (graded, generator degree: ", DegreesOfGenerators( M )[1], ")" );
+        fi;
+    else
+        Print( "something went wrong!" );
     fi;
+    
+    Print( "\n" );
     
 end );
 
@@ -2371,20 +2862,26 @@ InstallMethod( Display,
     if rk <> 0 then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects ( M ) then
             if color then
-                Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)\n" );
+                Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)" );
             else
-                Print( display, name, "^(1 x", " ", rk, ")\n" );
+                Print( display, name, "^(1 x", " ", rk, ")" );
             fi;
         else
             if color then
-                Print( display, name, "^(\033[01m", rk, "\033[0m x 1)\n" );
+                Print( display, name, "^(\033[01m", rk, "\033[0m x 1)" );
             else
-                Print( display, name, "^(", rk, " x 1)\n" );
+                Print( display, name, "^(", rk, " x 1)" );
             fi;
         fi;
     else
-        Print( display{ [ 1 .. Length( display ) - 2 ] }, "\n" );
+        Print( display{ [ 1 .. Length( display ) - 2 ] } );
     fi;
+    
+    if IsList( DegreesOfGenerators( M ) ) then
+        Print( "\t (graded, generators degrees: ", DegreesOfGenerators( M ), ")" );
+    fi;
+    
+    Print( "\n" );
     
 end );
 

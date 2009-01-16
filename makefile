@@ -2,7 +2,7 @@ all: doc test
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g maketst.g \
+doc/manual.six: makedoc.g maketest.g \
 		doc/homalg.xml doc/title.xml \
 		doc/intro.xml doc/install.xml \
 		doc/homalg.bib gap/*.gd gap/*.gi \
@@ -20,10 +20,10 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL maketst.g
+	gapL maketest.g
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".git" --exclude "public_html" --exclude tst/plesken --exclude talks homalg)
+	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "tst/plesken" homalg/doc/*.* homalg/gap/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} homalg/tst)
 
 WEBPOS=~/gap/pkg/homalg/public_html
 WEBPOS_FINAL=~/Sites/homalg

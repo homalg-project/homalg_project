@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgChainMap",
         IsHomalgMorphism );
 
@@ -40,6 +41,7 @@ DeclareCategory( "IsHomalgChainMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgChainSelfMap",
         IsHomalgChainMap and
         IsHomalgEndomorphism );
@@ -51,6 +53,26 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ####################################
 
 ## further properties are declared in homalg.gd for the bigger category IsHomalgMorphism
+
+##  <#GAPDoc Label="Source:chainmap">
+##  <ManSection>
+##    <Attr Arg="c" Name="Source" Label="for chain maps"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##      The source of the &homalg; chain map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="Range:chainmap">
+##  <ManSection>
+##    <Attr Arg="c" Name="Range" Label="for chain maps"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##      The target (range) of the &homalg; chain map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="IsMorphism:chainmap">
 ##  <ManSection>
@@ -181,6 +203,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsGradedMorphism",
         IsHomalgChainMap );
 
@@ -193,6 +216,7 @@ DeclareProperty( "IsGradedMorphism",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsQuasiIsomorphism",
         IsHomalgChainMap );
 

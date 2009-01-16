@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgRing",
         IsHomalgRingOrModule );
 
@@ -38,6 +39,7 @@ DeclareCategory( "IsHomalgRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgExternalRingElement",
         IsExtAElement
         and IsExtLElement
@@ -65,6 +67,7 @@ DeclareCategory( "IsHomalgExternalRingElement",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "ContainsAField",
         IsHomalgRing );
 
@@ -77,6 +80,7 @@ DeclareProperty( "ContainsAField",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRationalsForHomalg",
         IsHomalgRing );
 
@@ -89,6 +93,7 @@ DeclareProperty( "IsRationalsForHomalg",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsFieldForHomalg",
         IsHomalgRing );
 
@@ -101,6 +106,7 @@ DeclareProperty( "IsFieldForHomalg",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsDivisionRingForHomalg",
         IsHomalgRing );
 
@@ -113,6 +119,7 @@ DeclareProperty( "IsDivisionRingForHomalg",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsIntegersForHomalg",
         IsHomalgRing );
 
@@ -125,6 +132,7 @@ DeclareProperty( "IsIntegersForHomalg",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsResidueClassRingOfTheIntegers",
         IsHomalgRing );
 
@@ -137,6 +145,7 @@ DeclareProperty( "IsResidueClassRingOfTheIntegers",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsBezoutRing",
         IsHomalgRing );
 
@@ -149,6 +158,7 @@ DeclareProperty( "IsBezoutRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsIntegrallyClosedDomain",
         IsHomalgRing );
 
@@ -161,6 +171,7 @@ DeclareProperty( "IsIntegrallyClosedDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsUniqueFactorizationDomain",
         IsHomalgRing );
 
@@ -173,6 +184,7 @@ DeclareProperty( "IsUniqueFactorizationDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsKaplanskyHermite",
         IsHomalgRing );
 
@@ -185,6 +197,7 @@ DeclareProperty( "IsKaplanskyHermite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsDedekindDomain",
         IsHomalgRing );
 
@@ -197,6 +210,7 @@ DeclareProperty( "IsDedekindDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsDiscreteValuationRing",
         IsHomalgRing );
 
@@ -209,6 +223,7 @@ DeclareProperty( "IsDiscreteValuationRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsFreePolynomialRing",
         IsHomalgRing );
 
@@ -221,7 +236,21 @@ DeclareProperty( "IsFreePolynomialRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsWeylRing",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IsExteriorRing">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsExteriroRing"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsExteriorRing",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="IsGlobalDimensionFinite">
@@ -233,6 +262,7 @@ DeclareProperty( "IsWeylRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsGlobalDimensionFinite",
         IsHomalgRing );
 
@@ -245,6 +275,7 @@ DeclareProperty( "IsGlobalDimensionFinite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftGlobalDimensionFinite",
         IsHomalgRing );
 
@@ -257,6 +288,7 @@ DeclareProperty( "IsLeftGlobalDimensionFinite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightGlobalDimensionFinite",
         IsHomalgRing );
 
@@ -269,6 +301,7 @@ DeclareProperty( "IsRightGlobalDimensionFinite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "HasInvariantBasisProperty",
         IsHomalgRing );
 
@@ -281,6 +314,7 @@ DeclareProperty( "HasInvariantBasisProperty",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "HasLeftInvariantBasisProperty",
         IsHomalgRing );
 
@@ -293,6 +327,7 @@ DeclareProperty( "HasLeftInvariantBasisProperty",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "HasRightInvariantBasisProperty",
         IsHomalgRing );
 
@@ -305,6 +340,7 @@ DeclareProperty( "HasRightInvariantBasisProperty",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLocalRing",
         IsHomalgRing );
 
@@ -317,6 +353,7 @@ DeclareProperty( "IsLocalRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsSemiLocalRing",
         IsHomalgRing );
 
@@ -329,6 +366,7 @@ DeclareProperty( "IsSemiLocalRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsIntegralDomain",
         IsHomalgRing );
 
@@ -341,6 +379,7 @@ DeclareProperty( "IsIntegralDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsHereditary",
         IsHomalgRing );
 
@@ -353,6 +392,7 @@ DeclareProperty( "IsHereditary",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftHereditary",
         IsHomalgRing );
 
@@ -365,6 +405,7 @@ DeclareProperty( "IsLeftHereditary",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightHereditary",
         IsHomalgRing );
 
@@ -377,6 +418,7 @@ DeclareProperty( "IsRightHereditary",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsHermite",
         IsHomalgRing );
 
@@ -389,6 +431,7 @@ DeclareProperty( "IsHermite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftHermite",
         IsHomalgRing );
 
@@ -401,6 +444,7 @@ DeclareProperty( "IsLeftHermite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightHermite",
         IsHomalgRing );
 
@@ -413,6 +457,7 @@ DeclareProperty( "IsRightHermite",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsNoetherian",
         IsHomalgRing );
 
@@ -425,6 +470,7 @@ DeclareProperty( "IsNoetherian",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftNoetherian",
         IsHomalgRing );
 
@@ -437,6 +483,7 @@ DeclareProperty( "IsLeftNoetherian",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightNoetherian",
         IsHomalgRing );
 
@@ -449,6 +496,7 @@ DeclareProperty( "IsRightNoetherian",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsOreDomain",
         IsHomalgRing );
 
@@ -461,6 +509,7 @@ DeclareProperty( "IsOreDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftOreDomain",
         IsHomalgRing );
 
@@ -473,6 +522,7 @@ DeclareProperty( "IsLeftOreDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightOreDomain",
         IsHomalgRing );
 
@@ -485,6 +535,7 @@ DeclareProperty( "IsRightOreDomain",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsPrincipalIdealRing",
         IsHomalgRing );
 
@@ -497,6 +548,7 @@ DeclareProperty( "IsPrincipalIdealRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftPrincipalIdealRing",
         IsHomalgRing );
 
@@ -509,6 +561,7 @@ DeclareProperty( "IsLeftPrincipalIdealRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightPrincipalIdealRing",
         IsHomalgRing );
 
@@ -521,6 +574,7 @@ DeclareProperty( "IsRightPrincipalIdealRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRegular",
         IsHomalgRing );
 
@@ -533,6 +587,7 @@ DeclareProperty( "IsRegular",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsFiniteFreePresentationRing",
         IsHomalgRing );
 
@@ -545,6 +600,7 @@ DeclareProperty( "IsFiniteFreePresentationRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftFiniteFreePresentationRing",
         IsHomalgRing );
 
@@ -557,6 +613,7 @@ DeclareProperty( "IsLeftFiniteFreePresentationRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightFiniteFreePresentationRing",
         IsHomalgRing );
 
@@ -569,6 +626,7 @@ DeclareProperty( "IsRightFiniteFreePresentationRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsSimpleRing",
         IsHomalgRing );
 
@@ -581,6 +639,7 @@ DeclareProperty( "IsSimpleRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsSemiSimpleRing",
         IsHomalgRing );
 
@@ -593,7 +652,21 @@ DeclareProperty( "IsSemiSimpleRing",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
+##  <ManSection>
+##    <Prop Arg="R" Name="SyzygiesAlgorithmReturnsMinimalSyzygies"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "SyzygiesAlgorithmReturnsMinimalSyzygies",
         IsHomalgRing );
 
 ####################################
@@ -613,6 +686,7 @@ DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "homalgTable",
         IsHomalgRing, "mutable" );
 
@@ -628,6 +702,7 @@ DeclareAttribute( "homalgTable",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "RingRelations",
         IsHomalgRing );
 
@@ -637,6 +712,7 @@ DeclareAttribute( "RingRelations",
 ##    <Returns>the zero of the &homalg; ring <A>R</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "Zero",
         IsHomalgRing );
 
@@ -646,6 +722,7 @@ DeclareAttribute( "Zero",
 ##    <Returns>the one of the &homalg; ring <A>R</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "One",
         IsHomalgRing );
 
@@ -655,27 +732,60 @@ DeclareAttribute( "One",
 ##    <Returns>the minus one of the &homalg; ring <A>R</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "MinusOne",
         IsHomalgRing );
+
+##  <#GAPDoc Label="IndeterminatesOfPolynomialRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="IndeterminatesOfPolynomialRing"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>The list of indeterminates of the &homalg; polynomial ring <A>R</A>.</Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="IndeterminateCoordinatesOfRingOfDerivations">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateCoordinatesOfRingOfDerivations"/>
-##    <Returns>a list of elements of the &homalg; ring <A>R</A></Returns>
+##    <Returns>a list of &homalg; ring elements</Returns>
 ##    <Description>The list of indeterminate coordinates of the &homalg; Weyl ring <A>R</A>.</Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="IndeterminateDerivationsOfRingOfDerivations">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateDerivationsOfRingOfDerivations"/>
-##    <Returns>a list of elements of the &homalg; ring <A>R</A></Returns>
+##    <Returns>a list of &homalg; ring elements</Returns>
 ##    <Description>The list of indeterminate derivations of the &homalg; Weyl ring <A>R</A>.</Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IndeterminatesOfExteriorRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="IndeterminatesOfExteriorRing"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>The list of the indeterminates of the &homalg; exterior ring <A>R</A>.</Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IndeterminatesOfExteriorRing",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="DegreesOfIndeterminates">
+##  <ManSection>
+##    <Attr Arg="R" Name="DegreesOfIndeterminates"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>The list of degrees of the indeterminates of the &homalg; ring <A>R</A>.</Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+DeclareAttribute( "DegreesOfIndeterminates",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="AmbientRing">
@@ -688,6 +798,7 @@ DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "AmbientRing",
         IsHomalgRing );
 
@@ -700,6 +811,7 @@ DeclareAttribute( "AmbientRing",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "KrullDimension",
         IsHomalgRing );
 
@@ -712,6 +824,7 @@ DeclareAttribute( "KrullDimension",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "LeftGlobalDimension",
         IsHomalgRing );
 
@@ -724,6 +837,7 @@ DeclareAttribute( "LeftGlobalDimension",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "RightGlobalDimension",
         IsHomalgRing );
 
@@ -738,6 +852,7 @@ DeclareAttribute( "RightGlobalDimension",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "GlobalDimension",
         IsHomalgRing );
 
@@ -750,6 +865,7 @@ DeclareAttribute( "GlobalDimension",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "GeneralLinearRank",
         IsHomalgRing );
 
@@ -762,6 +878,7 @@ DeclareAttribute( "GeneralLinearRank",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ElementaryRank",
         IsHomalgRing );
 
@@ -774,6 +891,7 @@ DeclareAttribute( "ElementaryRank",
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "StableRank",
         IsHomalgRing );
 
@@ -788,6 +906,15 @@ DeclareAttribute( "StableRank",
 DeclareOperation( "HomalgRing",
         [ IsHomalgExternalRingElement ] );
 
+DeclareOperation( "HomalgRing",	## returns itself
+        [ IsHomalgRing ] );
+
+DeclareOperation( "Indeterminate",
+        [ IsHomalgRing, IsPosInt ] );
+
+DeclareOperation( "Indeterminates",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsRingElement ] );
 
@@ -796,6 +923,9 @@ DeclareOperation( "IsUnit",
 
 DeclareOperation( "IsUnit",
         [ IsHomalgExternalRingElement ] );
+
+DeclareOperation( "DegreeMultivariatePolynomial",
+        [ IsRingElement ] );
 
 DeclareOperation( "RingName",
         [ IsHomalgRing ] );
@@ -830,32 +960,11 @@ DeclareOperation( "homalgRingStatistics",
 DeclareOperation( "IncreaseRingStatistics",
         [ IsHomalgRing, IsString ] );
 
-DeclareOperation( "AsLeftModule",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "AsRightModule",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "*",
-        [ IsInt, IsHomalgRing ] );
-
-DeclareOperation( "*",
-        [ IsHomalgRing, IsInt ] );
-
 DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsInt ] );
 
 DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsHomalgRing, IsList ] );
-
-DeclareOperation( "PolynomialRing",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "RingOfDerivations",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "*",
-        [ IsHomalgRing, IsString ] );
 
 DeclareOperation( "homalgSetName",
         [ IsHomalgExternalRingElement, IsString ] );
@@ -863,7 +972,7 @@ DeclareOperation( "homalgSetName",
 DeclareOperation( "homalgSetName",
         [ IsHomalgExternalRingElement, IsString, IsHomalgRing ] );
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "CreateHomalgRing" );
 
@@ -876,6 +985,30 @@ DeclareGlobalFunction( "HomalgExternalRingElement" );
 DeclareGlobalFunction( "StringToElementStringList" );
 
 DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
+
+DeclareOperation( "PolynomialRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsString ] );
+
+DeclareOperation( "RingOfDerivations",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "AssociatedRingOfDerivations",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "AssociatedRingOfDerivations",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "ExteriorRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "KoszulDualRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "KoszulDualRing",
+        [ IsHomalgRing ] );
 
 DeclareOperation( "/",
         [ IsHomalgRing, IsList ] );

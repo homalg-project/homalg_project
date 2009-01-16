@@ -4,17 +4,17 @@ b := true;
 nr := NrRows( imat );
 nc := NrColumns( imat );
 
-## GAP -> GAP
-
-## a way to copy a matrix internally
-tmat := HomalgMatrix( imat, R );
-
 ## a way to change the ring
 S := HomalgFieldOfRationals( );
 
 Read( "convert_test.g" );
 
-b := true;
+## GAP -> GAP
+
+## a way to change the ring
+S := HomalgRingOfIntegers( ) / [ 32001 ];
+
+Read( "convert_test.g" );
 
 ## GAP <-> External GAP
 

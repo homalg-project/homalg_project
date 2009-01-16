@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgBigradedObject",
         IsHomalgObject );
 
@@ -41,6 +42,7 @@ DeclareCategory( "IsHomalgBigradedObject",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgBigradedObjectAssociatedToAnExactCouple",
         IsHomalgBigradedObject );
 
@@ -56,6 +58,7 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToAnExactCouple",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgBigradedObjectAssociatedToAFilteredComplex",
         IsHomalgBigradedObject );
 
@@ -70,6 +73,7 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToAFilteredComplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgBigradedObjectAssociatedToABicomplex",
         IsHomalgBigradedObjectAssociatedToAFilteredComplex );
 
@@ -89,6 +93,7 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToABicomplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsEndowedWithDifferential",
         IsHomalgBigradedObject );
 
@@ -102,6 +107,7 @@ DeclareProperty( "IsEndowedWithDifferential",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsStableSheet",
         IsHomalgBigradedObject );
 

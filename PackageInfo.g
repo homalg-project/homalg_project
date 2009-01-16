@@ -26,13 +26,13 @@ Subtitle := "homalg - a meta package for homological algebra",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.10.25",
+Version := "2008.10.26",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "25/10/2008",
+Date := "26/10/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "25/10/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/homalg",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/homalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -219,7 +219,7 @@ PackageDoc := rec(
   BookName  := "homalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/homalg/homalgdoc.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/~barakat/gap/homalg/homalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -228,7 +228,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "homalg - An Abstract Package for Homological Algebra",
+  LongTitle := "homalg - A Meta-Package for Homological Algebra",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false

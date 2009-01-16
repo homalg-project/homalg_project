@@ -85,6 +85,21 @@ end );
 ####################################
 
 ##
+InstallMethod( DegreesOfGenerators,
+        "for sets of relations of homalg modules",
+        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( rel )
+    
+    if IsBound(rel!.DegreesOfGenerators) then
+        return rel!.DegreesOfGenerators;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( MatrixOfRelations,
         "for sets of relations of homalg modules",
         [ IsRelationsOfFinitelyPresentedModuleRep ],
@@ -223,8 +238,16 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
           IsList ],
         
   function( rel, plist )
+    local sub_rel;
     
-    return HomalgRelationsForLeftModule( CertainRows( MatrixOfRelations( rel ), plist ) );
+    sub_rel := CertainRows( MatrixOfRelations( rel ), plist );
+    
+    ## take care of gradings
+    if IsList( DegreesOfGenerators( rel ) ) then
+        sub_rel!.DegreesOfGenerators := DegreesOfGenerators( rel );
+    fi;
+    
+    return HomalgRelationsForLeftModule( sub_rel );
     
 end );
 
@@ -235,8 +258,16 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
           IsList ],
         
   function( rel, plist )
+    local sub_rel;
     
-    return HomalgRelationsForRightModule( CertainColumns( MatrixOfRelations( rel ), plist ) );
+    sub_rel := CertainColumns( MatrixOfRelations( rel ), plist );
+    
+    ## take care of gradings
+    if IsList( DegreesOfGenerators( rel ) ) then
+        sub_rel!.DegreesOfGenerators := DegreesOfGenerators( rel );
+    fi;
+    
+    return HomalgRelationsForRightModule( sub_rel );
     
 end );
 
@@ -251,7 +282,14 @@ InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
     
     rel := UnionOfRows( mat1, MatrixOfRelations( rel2 ) );
     
-    return HomalgRelationsForLeftModule( rel );
+    rel := HomalgRelationsForLeftModule( rel );
+    
+    ## take care of gradings
+    if IsList( DegreesOfGenerators( rel2 ) ) then
+        rel!.DegreesOfGenerators := DegreesOfGenerators( rel2 );
+    fi;
+    
+    return rel;
     
 end );
 
@@ -290,7 +328,14 @@ InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
     
     rel := UnionOfColumns( mat1, MatrixOfRelations( rel2 ) );
     
-    return HomalgRelationsForRightModule( rel );
+    rel := HomalgRelationsForRightModule( rel );
+    
+    ## take care of gradings
+    if IsList( DegreesOfGenerators( rel2 ) ) then
+        rel!.DegreesOfGenerators := DegreesOfGenerators( rel2 );
+    fi;
+    
+    return rel;
     
 end );
 
@@ -333,7 +378,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.relations := bas; ## CAUTION: be very careful here!!!
+            rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas ) then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -368,7 +413,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.relations := bas; ## CAUTION: be very careful here!!!
+            rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas ) then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -569,7 +614,7 @@ InstallMethod( ReducedSyzygiesGenerators,
     
     syz := SyzygiesGenerators( rel );
     
-    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
     
 end );
 
@@ -584,7 +629,7 @@ InstallMethod( ReducedSyzygiesGenerators,
     
     syz := SyzygiesGenerators( mat, rel );
     
-    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
     
 end );
 
@@ -598,7 +643,7 @@ InstallMethod( ReducedSyzygiesGenerators,
     
     syz := SyzygiesGenerators( rel );
     
-    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
     
 end );
 
@@ -613,7 +658,7 @@ InstallMethod( ReducedSyzygiesGenerators,
     
     syz := SyzygiesGenerators( mat, rel );
     
-    return ReducedBasisOfModule( syz );	## or ReducedBasisOfModule( syz, "COMPUTE_BASIS" ); ??
+    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
     
 end );
 

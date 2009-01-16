@@ -1257,3 +1257,92 @@ end );
                 od;
             od;
         fi;
+
+## from HomalgModule.gd
+
+##  <#GAPDoc Label="IsHomalgGradedModule">
+##  <ManSection>
+##    <Filt Type="Category" Arg="M" Name="IsHomalgGradedModule"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; graded modules. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgModule</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareCategory( "IsHomalgGradedModule",
+        IsHomalgModule );
+
+## from HomalgModule.gi
+BindGlobal( "TheTypeHomalgLeftGradedModuleFinitelyPresented",
+        NewType( TheFamilyOfHomalgModules,
+                IsFinitelyPresentedModuleRep and IsHomalgGradedModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
+
+BindGlobal( "TheTypeHomalgRightGradedModuleFinitelyPresented",
+        NewType( TheFamilyOfHomalgModules,
+                IsFinitelyPresentedModuleRep and IsHomalgGradedModule and IsHomalgRightObjectOrMorphismOfRightObjects ) );
+
+## from doc/Modules.xml
+<#Include Label="IsHomalgGradedModule">
+
+## from changes.log
+- Resolution (of modules) now does not compute a step ahead
+  (unless a trivial next syzygy is expected)
+
+## from Singular.gi
+    NonTrivialDegreePerRowWithColWeights := "\n\
+proc NonTrivialDegreePerRowWithColWeights (matrix M, list col_weights)\n\
+{\n\
+  intmat m[1][ncols(M)];\n\
+  int d = deg(0);\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    if ( deg(M[1,i]) <> d ) { m[1,i] = deg(M[1,i])+col_weights[1]; } else { m[1,i] = -10^9; } // FIXME??\n\
+    for (int j=2; j<=nrows(M); j=j+1)\n\
+    {\n\
+      if ( deg(M[j,i]) <> d && deg(M[j,i])+col_weights[j] > m[1,i] ) { m[1,i] = deg(M[j,i])+col_weights[j]; }\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    NonTrivialDegreePerColumnWithRowWeights := "\n\
+proc NonTrivialDegreePerColumnWithRowWeights (matrix M, list row_weights)\n\
+{\n\
+  intmat m[1][nrows(M)];\n\
+  int d = deg(0);\n\
+  for (int j=1; j<=nrows(M); j=j+1)\n\
+  {\n\
+    if ( deg(M[j,1]) <> d ) { m[1,j] = deg(M[j,1])+row_weights[1]; } else { m[1,j] = -10^9; } // FIXME?? \n\
+    for (int i=2; i<=ncols(M); i=i+1)\n\
+    {\n\
+      if ( deg(M[j,i]) <> d && deg(M[j,i])+row_weights[i] > m[1,j] ) { m[1,j] = deg(M[j,i])+row_weights[i]; }\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    homalgSendBlocking( NonTrivialDegreePerRowWithColWeights, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerColumnWithRowWeights, "need_command", stream, HOMALG_IO.Pictograms.define );
+
+## from SingularTools.gi
+               NonTrivialDegreePerRowWithColWeights :=
+                 function( M, col_weights )
+                   local list_string;
+                   
+                   list_string := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColWeights(", M, ", list (", col_weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   return StringToIntList( list_string );
+                   
+                 end,
+               
+               NonTrivialDegreePerColumnWithRowWeights :=
+                 function( M, row_weights )
+                   local list_string;
+                   
+                   list_string := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowWeights(", M, ", list (", row_weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   return StringToIntList( list_string );
+                   
+                 end,
+               

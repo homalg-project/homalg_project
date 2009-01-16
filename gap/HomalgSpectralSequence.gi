@@ -457,6 +457,8 @@ InstallMethod( CertainMorphism,
   function( E, pq, r )
     local Er;
     
+    Er := CertainSheet( E, r );
+    
     if Er = fail then
         return fail;
     fi;

@@ -413,8 +413,9 @@ end );
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
   function( M, N )
-    local R, s, t, l0, l1, _l0, matM, matN, HP0N, HP1N, r, c, idN, alpha, hom,
-          gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
+    local R, dM, dN, s, t, matM, matN, P1, l0, l1, _l0, HP0N, HP1N,
+          degM, degN, degP1, degHP0N, degHP1N, r, c, idN, alpha, hom, gen,
+          proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
     
@@ -427,18 +428,26 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
+    dM := Resolution( 1, M );
+    dN := Resolution( 1, N );
+    
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
     
     #=====# begin of the core procedure #=====#
     
+    matM := CertainMorphism( dM, 1 );
+    matN := CertainMorphism( dN, 1 );
+    
+    P1 := Source( matM );
+    
     l0 := NrGenerators( M );
-    l1 := NrRelations( M );
+    l1 := NrGenerators( P1 );
     
     _l0 := NrGenerators( N );
     
-    matM := MatrixOfRelations( M );
-    matN := MatrixOfRelations( N );
+    matM := MatrixOfMap( matM );
+    matN := MatrixOfMap( matN );
     
     if l0 = 0 then
         HP0N := HomalgZeroMatrix( 0, 0, R );
@@ -450,6 +459,29 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         HP1N := HomalgZeroMatrix( 0, 0, R );
     else
         HP1N := DiagMat( ListWithIdenticalEntries( l1, Involution( matN ) ) );
+    fi;
+    
+    ## take care of graded modules
+    if IsList( DegreesOfGenerators( M ) ) and
+       IsList( DegreesOfGenerators( N ) ) and
+       IsList( DegreesOfGenerators( P1 ) ) then
+        degM := DegreesOfGenerators( M );
+        degN := DegreesOfGenerators( N );
+        degP1 := DegreesOfGenerators( P1 );
+        if degM = [ ] then
+            degHP0N := [ ];
+        elif degN = [ ] then
+            degHP0N := [ ];
+        else
+            degHP0N := Concatenation( List( degM, m -> -m + degN ) );
+        fi;
+        if degP1 = [ ] then
+            degHP1N := [ ];
+        elif degN = [ ] then
+            degHP1N := [ ];
+        else
+            degHP1N := Concatenation( List( degP1, m -> -m + degN ) );
+        fi;
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -495,8 +527,16 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             return MatrixOfMap( mor );
         end;
         
-        HP0N := RightPresentation( HP0N );
-        HP1N := RightPresentation( HP1N );
+        if IsBound( degHP0N ) then
+            HP0N := RightPresentationWithWeights( HP0N, degHP0N );
+        else
+            HP0N := RightPresentation( HP0N );
+        fi;
+        if IsBound( degHP1N ) then
+            HP1N := RightPresentationWithWeights( HP1N, degHP1N );
+        else
+            HP1N := RightPresentation( HP1N );
+        fi;
     else
         r := _l0;
         c := l0;
@@ -540,8 +580,16 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
             return MatrixOfMap( mor );
         end;
         
-        HP0N := LeftPresentation( HP0N );
-        HP1N := LeftPresentation( HP1N );
+        if IsBound( degHP0N ) then
+            HP0N := LeftPresentationWithWeights( HP0N, degHP0N );
+        else
+            HP0N := LeftPresentation( HP0N );
+        fi;
+        if IsBound( degHP1N ) then
+            HP1N := LeftPresentationWithWeights( HP1N, degHP1N );
+        else
+            HP1N := LeftPresentation( HP1N );
+        fi;
     fi;
     
     idN := HomalgIdentityMatrix( _l0, R );
@@ -726,8 +774,8 @@ end );
 
 InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorProduct (object part)
   function( M, N )
-    local R, rl, s, t, l0, _l0, matM, matN, idM, idN, MN,
-          gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
+    local R, rl, dM, dN, l0, _l0, matM, matN, idM, idN, degM, degN, degMN, MN,
+          F, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
     
@@ -749,13 +797,16 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
         fi;
     fi;
     
+    dM := Resolution( 1, M );
+    dN := Resolution( 1, N );
+    
     #=====# begin of the core procedure #=====#
     
     l0 := NrGenerators( M );
     _l0 := NrGenerators( N );
     
-    matM := MatrixOfRelations( M );
-    matN := MatrixOfRelations( N );
+    matM := MatrixOfMap( CertainMorphism( dM, 1 ) );
+    matN := MatrixOfMap( CertainMorphism( dN, 1 ) );
     
     if rl = [ true, true ] or rl = [ false, false ] then
         matM := Involution( matM );	## the first module follows the second
@@ -767,14 +818,38 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
     matM := KroneckerMat( matM, idN );
     matN := KroneckerMat( idM, matN );
     
+    ## take care of graded modules
+    if IsList( DegreesOfGenerators( M ) ) and
+       IsList( DegreesOfGenerators( N ) ) then
+        degM := DegreesOfGenerators( M );
+        degN := DegreesOfGenerators( N );
+        if degM = [ ] then
+            degMN := degN;
+        elif degN = [ ] then
+            degMN := degM;
+        else
+            degMN := Concatenation( List( degM, m -> m + degN ) );
+        fi;
+    fi;
+    
     ## the result has the parity of the second module
     if rl[2] then
         MN := UnionOfRows( matM, matN );
-        MN := HomalgMap( MN );
+        if IsBound( degMN ) then
+            F := HomalgFreeLeftModuleWithWeights( R, degMN );
+        else
+            F := HomalgFreeLeftModule( NrGenerators( M ) * NrGenerators( N ), R );
+        fi;
     else
         MN := UnionOfColumns( matM, matN );
-        MN := HomalgMap( MN, "r" );
+        if IsBound( degMN ) then
+            F := HomalgFreeRightModuleWithWeights( R, degMN );
+        else
+            F := HomalgFreeRightModule( NrGenerators( M ) * NrGenerators( N ), R );
+        fi;
     fi;
+    
+    MN := HomalgMap( MN, "free", F );
     
     return Cokernel( MN );
     

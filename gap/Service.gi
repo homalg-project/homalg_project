@@ -560,6 +560,10 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
+        else
+            
+            SetNrColumns( C, NrRows( M ) );
+            
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
@@ -579,6 +583,10 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             SetIsLeftRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            
+        else
+            
+            SetNrColumns( C, NrRows( M ) );
             
         fi;
         
@@ -644,6 +652,10 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
             
             C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
             
+        else
+            
+            SetNrColumns( C, NrRows( M1 ) );
+            
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
@@ -659,6 +671,10 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
         if IsZero( C ) then
             
             C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        else
+            
+            SetNrColumns( C, NrRows( M1 ) );
             
         fi;
         
@@ -726,6 +742,10 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
+        else
+            
+            SetNrRows( C, NrColumns( M ) );
+            
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
@@ -745,6 +765,10 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
             SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        else
+            
+            SetNrRows( C, NrColumns( M ) );
             
         fi;
         
@@ -810,6 +834,10 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
             
             C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
             
+        else
+            
+            SetNrRows( C, NrColumns( M1 ) );
+            
         fi;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
@@ -825,6 +853,10 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
         if IsZero( C ) then
             
             C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+            
+        else
+            
+            SetNrRows( C, NrColumns( M1 ) );
             
         fi;
         

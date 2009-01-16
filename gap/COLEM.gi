@@ -1610,7 +1610,7 @@ InstallMethod( \+,
     
     R := HomalgRing( A );
     
-    if EvalMulMat( A )[1] = MinusOne( R ) then
+    if IsZero( EvalMulMat( A )[1] + One( R ) ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-A + B", "\033[0m" );
         
@@ -1632,7 +1632,7 @@ InstallMethod( \+,
     
     R := HomalgRing( B );
     
-    if EvalMulMat( B )[1] = MinusOne( R ) then
+    if IsZero( EvalMulMat( B )[1] + One( R ) ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "A + (-B)", "\033[0m" );
         
@@ -1688,7 +1688,7 @@ InstallMethod( AdditiveInverseMutable,
     
     R := HomalgRing( A );
     
-    if EvalMulMat( A )[1] = MinusOne( R ) then
+    if IsZero( EvalMulMat( A )[1] + One( R ) ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-(-IsHomalgMatrix)", "\033[0m" );
         

@@ -4,12 +4,8 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "homalg" );
 LoadPackage( "GAPDoc" );
-
-SetGapDocLaTeXOptions( "utf8" );
-
-bib := ParseBibFiles( "doc/homalg.bib" );
-WriteBibXMLextFile( "doc/homalgBib.xml", bib );
 
 list := [
          "../gap/HomalgDiagram.gd",
@@ -39,7 +35,7 @@ list := [
          "../gap/HomalgFunctor.gi"
          ];
 
-MakeGAPDocDoc( "doc", "homalg", list, "homalg" );
+TestManualExamples( "doc", "homalg.xml", list );
 
 GAPDocManualLab("homalg");
 

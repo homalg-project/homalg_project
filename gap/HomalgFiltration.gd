@@ -25,6 +25,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgFiltration",
         IsAttributeStoringRep );
 

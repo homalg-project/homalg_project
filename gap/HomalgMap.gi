@@ -63,6 +63,25 @@ BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgRing:map">
+##  <ManSection>
+##    <Oper Arg="phi" Name="HomalgRing" Label="for maps"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The &homalg; ring of the &homalg; map <A>phi</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> phi := HomalgIdentityMap( 2 * ZZ );
+##  <The identity morphism of a left module>
+##  gap> R := HomalgRing( phi );
+##  <A homalg internal ring>
+##  gap> IsIdenticalObj( R, ZZ );
+##  true
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgRing,
         "for homalg maps",
@@ -418,7 +437,13 @@ InstallMethod( OnLessGenerators,
     
 end );
 
-##
+##  <#GAPDoc Label="ByASmallerPresentation:map">
+##  <ManSection>
+##    <Meth Arg="phi" Name="ByASmallerPresentation" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/>.
+##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
@@ -432,6 +457,51 @@ InstallMethod( ByASmallerPresentation,
     return phi;
     
 end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>phi</A> and returns it.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  <A homalg internal 3 by 4 matrix>
+##  gap> phi := HomalgMap( mat, M, N );
+##  <A "homomorphism" of left modules>
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> Display( phi );
+##  [ [  0,  3,  6,  9 ],
+##    [  0,  2,  4,  6 ],
+##    [  0,  3,  6,  9 ] ]
+##  
+##  the map is currently represented by the above 3 x 4 matrix
+##  gap> ByASmallerPresentation( phi );
+##  <A homomorphism of left modules>
+##  gap> Display( phi );
+##  [ [  0,  0,  0 ],
+##    [  2,  0,  0 ] ]
+##  
+##  the map is currently represented by the above 2 x 3 matrix
+##  gap> M;
+##  <A non-zero left module presented by 1 relation for 2 generators>
+##  gap> Display( M );
+##  Z/< 3 > + Z^(1 x 1)
+##  gap> N;
+##  <A non-zero left module presented by 1 relation for 3 generators>
+##  gap> Display( N );
+##  Z/< 4 > + Z^(1 x 2)
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
 InstallMethod( UnionOfRelations,
@@ -450,8 +520,19 @@ InstallMethod( SyzygiesGenerators,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local syz;
     
-    return SyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
+    syz := SyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
+    
+    if NrRelations( syz ) = 0 then
+        SetIsMonomorphism( phi, true );
+    fi;
+    
+    if IsList( DegreesOfGenerators( Source( phi ) ) ) then
+        syz!.DegreesOfGenerators := DegreesOfGenerators( Source( phi ) );
+    fi;
+    
+    return syz;
     
 end );
 
@@ -461,8 +542,19 @@ InstallMethod( ReducedSyzygiesGenerators,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local syz;
     
-    return ReducedSyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
+    syz := ReducedSyzygiesGenerators( MatrixOfMap( phi ), Range( phi ) );
+    
+    if NrRelations( syz ) = 0 then
+        SetIsMonomorphism( phi, true );
+    fi;
+    
+    if IsList( DegreesOfGenerators( Source( phi ) ) ) then
+        syz!.DegreesOfGenerators := DegreesOfGenerators( Source( phi ) );
+    fi;
+    
+    return syz;
     
 end );
 
@@ -740,12 +832,126 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgMap">
+##  <ManSection>
+##    <Func Arg="mat, M, N" Name="HomalgMap" Label="constructor for maps"/>
+##    <Func Arg="mat[, string]" Name="HomalgMap" Label="constructor for maps between free modules"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      This constructor returns a map (homomorphism) of finitely presented modules. It is represented by the
+##      &homalg; matrix <A>mat</A> relative to the current set of generators of the source &homalg; module <A>M</A>
+##      and target module <A>N</A>. Unless the source module is free <E>and</E> given on free generators the returned
+##      map will cautiously be indicated using parenthesis: <Q>homomorphism</Q>. To verify if the result is indeed a
+##      well defined map use <Ref Prop="IsMorphism" Label="for maps"/>. If the presentations of the source or/and
+##      target module are altered after the map was constructed, a new adapted representation matrix of the map is
+##      automatically computed whenever needed. For this the internal transition matrices of the modules are used.
+##      If source and target are identical objects, and only then, the map is created as a selfmap (endomorphism).
+##      &homalg; uses the associative convention for maps. This means that maps of left modules are applied from right,
+##      whereas maps of right modules from the left.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  <A homalg internal 3 by 4 matrix>
+##  gap> phi := HomalgMap( mat, M, N );
+##  <A "homomorphism" of left modules>
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> Display( phi );
+##  [ [  0,  3,  6,  9 ],
+##    [  0,  2,  4,  6 ],
+##    [  0,  3,  6,  9 ] ]
+##  
+##  the map is currently represented by the above 3 x 4 matrix
+##  gap> ByASmallerPresentation( M );
+##  <A non-zero left module presented by 1 relation for 2 generators>
+##  gap> Display( last );
+##  Z/< 3 > + Z^(1 x 1)
+##  gap> Display( phi );
+##  [ [   0,   8,  16,  24 ],
+##    [   0,   3,   6,   9 ] ]
+##  
+##  the map is currently represented by the above 2 x 4 matrix
+##  gap> ByASmallerPresentation( N );
+##  <A non-zero left module presented by 1 relation for 3 generators>
+##  gap> Display( N );
+##  Z/< 4 > + Z^(1 x 2)
+##  gap> Display( phi );
+##  [ [  -16,    0,    0 ],
+##    [   -6,    0,    0 ] ]
+##  
+##  the map is currently represented by the above 2 x 3 matrix
+##  gap> ByASmallerPresentation( phi );
+##  <A homomorphism of left modules>
+##  gap> Display( phi );
+##  [ [  0,  0,  0 ],
+##    [  2,  0,  0 ] ]
+##  
+##  the map is currently represented by the above 2 x 3 matrix
+##  ]]></Example>
+##  To construct a map with source being a not yet specified free module
+##      <Example><![CDATA[
+##  gap> N;
+##  <A rank 2 left module presented by 1 relation for 3 generators>
+##  gap> SetPositionOfTheDefaultSetOfGenerators( N, 1 );
+##  gap> N;
+##  <A rank 2 left module presented by 2 relations for 4 generators>
+##  gap> psi := HomalgMap( mat, "free", N );
+##  <A homomorphism of left modules>
+##  gap> Source( psi );
+##  <A free left module of rank 3 on free generators>
+##  ]]></Example>
+##  To construct a map between not yet specified free left modules
+##      <Example><![CDATA[
+##  gap> chi := HomalgMap( mat );	## or chi := HomalgMap( mat, "l" );
+##  <A homomorphism of left modules>
+##  gap> Source( chi );
+##  <A free left module of rank 3 on free generators>
+##  gap> Range( chi );
+##  <A free left module of rank 4 on free generators>
+##  ]]></Example>
+##  To construct a map between not yet specified free right modules
+##      <Example><![CDATA[
+##  gap> kappa := HomalgMap( mat, "r" );
+##  <A homomorphism of right modules>
+##  gap> Source( kappa );
+##  <A free right module of rank 4 on free generators>
+##  gap> Range( kappa );
+##  <A free right module of rank 3 on free generators>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgMap,
   function( arg )
     local nargs, source, pos_s, target, pos_t, R, type, matrix, left, matrices, reduced_matrices,
-          nr_rows, nr_columns, index_pair, morphism, option;
+          mat, degrees_t, degrees_s, nr_rows, nr_columns, index_pair, morphism, option;
     
     nargs := Length( arg );
+    
+    if IsHomalgRelations( arg[1] ) then
+        mat := MatrixOfRelations( arg[1] );
+        
+        ## take care of the degrees of generators of source and target module
+        if IsList( DegreesOfGenerators( arg[1] ) ) then
+            degrees_t := DegreesOfGenerators( arg[1] );
+            if IsHomalgRelationsOfLeftModule( arg[1] ) then
+                degrees_s := NonTrivialDegreePerRow( mat, degrees_t );
+            else
+                degrees_s := NonTrivialDegreePerColumn( mat, degrees_t );
+            fi;
+        fi;
+    fi;
     
     if nargs > 1 then
         if IsHomalgModule( arg[2] ) then
@@ -753,20 +959,23 @@ InstallGlobalFunction( HomalgMap,
             pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif arg[2] = "free" and nargs > 2 and IsHomalgModule( arg[3] )
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
+            if IsHomalgMatrix( arg[1] ) then
+                mat := arg[1];
+            fi;
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[3] ) then
-                if IsHomalgMatrix( arg[1] ) then
-                    nr_rows := NrRows( arg[1] );
-                elif IsHomalgRelations( arg[1] ) then
-                    nr_rows := NrRows( MatrixOfRelations( arg[1] ) );
+                if IsBound( degrees_s )  then
+                    source := HomalgFreeLeftModuleWithWeights( HomalgRing( arg[3] ), degrees_s );
+                else
+                    nr_rows := NrRows( mat );
+                    source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
                 fi;
-                source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
             else
-                if IsHomalgMatrix( arg[1] ) then
-                    nr_columns := NrColumns( arg[1] );
-                elif IsHomalgRelations( arg[1] ) then
-                    nr_columns := NrColumns( MatrixOfRelations( arg[1] ) );
+                if IsBound( degrees_s )  then
+                    source := HomalgFreeRightModuleWithWeights( HomalgRing( arg[3] ), degrees_s );
+                else
+                    nr_columns := NrColumns( mat );
+                    source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
                 fi;
-                source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
             fi;
             pos_s := PositionOfTheDefaultSetOfRelations( source );
         elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then
@@ -804,12 +1013,22 @@ InstallGlobalFunction( HomalgMap,
         fi;
         
         if left then
-            source := HomalgFreeLeftModule( NrRows( matrix ), R );
-            target := HomalgFreeLeftModule( NrColumns( matrix ), R );
+            if IsBound( degrees_s ) then
+                source := HomalgFreeLeftModuleWithWeights( R, degrees_s );
+                target := HomalgFreeLeftModuleWithWeights( R, degrees_t );
+            else
+                source := HomalgFreeLeftModule( NrRows( matrix ), R );
+                target := HomalgFreeLeftModule( NrColumns( matrix ), R );
+            fi;
             type := TheTypeHomalgMapOfLeftModules;
         else
-            source := HomalgFreeRightModule( NrColumns( matrix ), R );
-            target := HomalgFreeRightModule( NrRows( matrix ), R );
+            if IsBound( degrees_s ) then
+                source := HomalgFreeRightModuleWithWeights( R, degrees_s );
+                target := HomalgFreeRightModuleWithWeights( R, degrees_t );
+            else
+                source := HomalgFreeRightModule( NrColumns( matrix ), R );
+                target := HomalgFreeRightModule( NrRows( matrix ), R );
+            fi;
             type := TheTypeHomalgMapOfRightModules;
         fi;
         
@@ -831,6 +1050,18 @@ InstallGlobalFunction( HomalgMap,
         
         if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
             SetIsMorphism( morphism, true );
+        fi;
+        
+        if IsBound( degrees_s ) then
+            SetDegreeOfMorphism( morphism, 0 );
+        fi;
+        
+        if HasIsZero( source ) and IsZero( source ) then
+            SetIsGeneralizedMonomorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+        fi;
+        
+        if HasIsZero( target ) and IsZero( target ) then
+            SetIsGeneralizedEpimorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
         fi;
         
         return morphism;
@@ -1040,10 +1271,45 @@ InstallGlobalFunction( HomalgMap,
         SetIsMorphism( morphism, true );
     fi;
     
+    if IsBound( degrees_s ) then
+        SetDegreeOfMorphism( morphism, 0 );
+    fi;
+    
+    if HasIsZero( source ) and IsZero( source ) then
+        SetIsGeneralizedMonomorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+    fi;
+    
+    if HasIsZero( target ) and IsZero( target ) then
+        SetIsGeneralizedEpimorphism( morphism, true );	## we don't know yet if IsMorhphism( morphism ) = true
+    fi;
+    
     return morphism;
     
 end );
   
+##  <#GAPDoc Label="HomalgZeroMap">
+##  <ManSection>
+##    <Func Arg="M, N" Name="HomalgZeroMap" Label="constructor for zero maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The constructor returns the zero map between the source &homalg; module <A>M</A>
+##      and the target &homalg; module <A>N</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> HomalgZeroMap( M, N );
+##  <The zero morphism of left modules>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgZeroMap,
   function( arg )
@@ -1052,6 +1318,24 @@ InstallGlobalFunction( HomalgZeroMap,
     
 end );
 
+##  <#GAPDoc Label="HomalgIdentityMap">
+##  <ManSection>
+##    <Func Arg="M, N" Name="HomalgIdentityMap" Label="constructor for identity maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The constructor returns the identity map of the &homalg; module <A>M</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> HomalgIdentityMap( M );
+##  <The identity morphism of a left module>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgIdentityMap,
   function( arg )
@@ -1548,8 +1832,19 @@ InstallMethod( Display,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( o )
+    local T, mat;
     
-    Display( MatrixOfMap( o ) );
+    T := Range( o );
+    
+    mat := MatrixOfMap( o );
+    
+    Display( mat );
+    
+    if IsList( DegreesOfGenerators( T ) ) then
+        Print( "\n(target generators degrees: ", DegreesOfGenerators( T ), ")\n" );
+    fi;
+    
+    Print( "\nthe map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );
     
 end );
 

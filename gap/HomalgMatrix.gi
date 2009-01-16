@@ -28,6 +28,7 @@ DeclareRepresentation( "IshomalgInternalMatrixHullRep",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsHomalgInternalMatrixRep",
         IsHomalgMatrix,
         [ ] );
@@ -41,6 +42,7 @@ DeclareRepresentation( "IsHomalgInternalMatrixRep",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsHomalgExternalMatrixRep",
         IsHomalgMatrix,
         [ ] );
@@ -94,6 +96,25 @@ InstallMethod( Rank,
     
 end );
 
+##  <#GAPDoc Label="HomalgRing:matrix">
+##  <ManSection>
+##    <Oper Arg="mat" Name="HomalgRing" Label="for matrices"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The &homalg; ring of the &homalg; matrix <A>mat</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
+##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  gap> R := HomalgRing( d );
+##  <A homalg internal ring>
+##  gap> IsIdenticalObj( R, ZZ );
+##  true
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgRing,
         "for homalg matrices",
@@ -102,6 +123,26 @@ InstallMethod( HomalgRing,
   function( M )
     
     return M!.ring;
+    
+end );
+
+##
+InstallMethod( BlindlyCopyMatrixProperties,	## under construction
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( S, T )
+    
+    ## if the new ring only interprets the 1x1 submatrices as elements
+    ## then it is safe to at least copy the following attributes
+    
+    if HasNrRows( S ) then
+        SetNrRows( T, NrRows( S ) );
+    fi;
+    
+    if HasNrColumns( S ) then
+        SetNrColumns( T, NrColumns( S ) );
+    fi;
     
 end );
 
@@ -116,11 +157,20 @@ InstallMethod( ShallowCopy,
     R := HomalgRing( M );
     RP := homalgTable( R );
     
-    if IsBound(RP!.CopyMatrix) then
-        MM := RP!.CopyMatrix( M );
+    if IsBound(RP!.ShallowCopy) then
+        MM := RP!.ShallowCopy( M );
+        
         if not IsIdenticalObj( M, MM ) then
+            
+            BlindlyCopyMatrixProperties( M, MM );
+            
             return MM;
+            
         fi;
+    fi;
+    
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
     fi;
     
     return HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );	## HomalgMatrix shallow copies its first argument if it is of type IsMatrix
@@ -133,13 +183,17 @@ InstallMethod( ShallowCopy,
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
-    local R, RP;
+    local R, RP, MM;
     
     R := HomalgRing( M );
     RP := homalgTable( R );
     
-    if IsBound(RP!.CopyMatrix) then
-        return RP!.CopyMatrix( M );
+    if IsBound(RP!.ShallowCopy) then
+        MM := RP!.ShallowCopy( M );
+        
+        BlindlyCopyMatrixProperties( M, MM );
+        
+        return MM;
     fi;
     
     ## we have no other choice
@@ -235,6 +289,10 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, a, R )
     
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
+    
     Eval( M )!.matrix[r][c] := One( R ) * a;
     
 end );
@@ -317,68 +375,6 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
-        "for homalg matrices",
-        [ IsString, IsHomalgInternalRingRep ],
-        
-  function( S, R )
-    local s;
-    
-    s := ShallowCopy( S );
-    
-    RemoveCharacters( s, "\\\n\" " );
-    
-    return HomalgMatrix( EvalString( s ), R );
-    
-end );
-
-##
-InstallMethod( CreateHomalgMatrix,
-        "for homalg matrices",
-        [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
-        
-  function( S, r, c, R )
-    local s;
-    
-    s := ShallowCopy( S );
-    
-    RemoveCharacters( s, "\\\n\" " );
-    
-    s := EvalString( s );
-    
-    if IsMatrix( s ) then
-        return HomalgMatrix( s, r, c, R );
-    elif IsHomogeneousList( s ) then
-        return HomalgMatrix( ListToListList( s, r, c ), R );
-    else
-        Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}\n" );
-    fi;
-    
-end );
-
-##
-InstallMethod( CreateHomalgSparseMatrix,
-        "for homalg matrices",
-        [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
-        
-  function( S, r, c, R )
-    local s, M, e;
-    
-    s := ShallowCopy( S );
-    
-    RemoveCharacters( s, "\\\n\" " );
-    
-    M := List( [ 1 .. r ], a -> List( [ 1 .. c ], b -> Zero( R ) ) );
-    
-    for e in EvalString( s ) do
-        M[e[1]][e[2]] := e[3];
-    od;
-    
-    return HomalgMatrix( M, r, c, R );
-    
-end );
-
-##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for homalg matrices",
         [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
@@ -406,6 +402,10 @@ InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
         
   function( M, r, c, R )
+    
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
     
     return Eval( M )!.matrix[r][c];
     
@@ -440,6 +440,10 @@ InstallMethod( GetListOfHomalgMatrixAsString,
         
   function( M, R )
     local s, m;
+    
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
     
     s := Eval( M )!.matrix;
     
@@ -481,7 +485,11 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
   function( M, R )
     local s, m;
     
-    s := Eval ( M )!.matrix;
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
+    
+    s := Eval( M )!.matrix;
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
@@ -520,6 +528,10 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         
   function( M, R )
     local r, c, z, s, m;
+    
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
     
     r := NrRows( M );
     c := NrColumns( M );
@@ -1171,35 +1183,152 @@ InstallGlobalFunction( homalgInternalMatrixHull,
 end );
 
 ##
+InstallMethod( CreateHomalgMatrixFromString,
+        "for homalg matrices",
+        [ IsString, IsHomalgInternalRingRep ],
+        
+  function( S, R )
+    local s;
+    
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "\\\n\" " );
+    
+    return HomalgMatrix( EvalString( s ), R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromString,
+        "for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( S, r, c, R )
+    local s;
+    
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "\\\n\" " );
+    
+    s := EvalString( s );
+    
+    if IsMatrix( s ) then
+        return HomalgMatrix( s, r, c, R );
+    elif IsHomogeneousList( s ) then
+        return HomalgMatrix( ListToListList( s, r, c ), R );
+    else
+        Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}\n" );
+    fi;
+    
+end );
+
+##
+InstallMethod( CreateHomalgSparseMatrixFromString,
+        "for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( S, r, c, R )
+    local s, M, e;
+    
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "\\\n\" " );
+    
+    M := List( [ 1 .. r ], a -> List( [ 1 .. c ], b -> Zero( R ) ) );
+    
+    for e in EvalString( s ) do
+        M[e[1]][e[2]] := e[3];
+    od;
+    
+    return HomalgMatrix( M, r, c, R );
+    
+end );
+
+##  <#GAPDoc Label="HomalgMatrix">
+##  <ManSection>
+##    <Func Arg="llist, R" Name="HomalgMatrix" Label="constructor for matrices using a listlist"/>
+##    <Func Arg="list, m, n, R" Name="HomalgMatrix" Label="constructor for matrices using a list"/>
+##    <Func Arg="str_llist, R" Name="HomalgMatrix" Label="constructor for matrices using a string of a listlist"/>
+##    <Func Arg="str_list, m, n, R" Name="HomalgMatrix" Label="constructor for matrices using a string of a list"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      An immutable evaluated <A>m</A> <M>x</M> <A>n</A> &homalg; matrix over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> m := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Example>
+##      It is nevertheless recommended to use the following form to create &homalg; matrices. This
+##      form can also be used to define external matrices. Since whitespaces
+##      (&see; <Ref Label="Whitespaces" BookName="Ref"/>) are ignored,
+##      they can be used as optical delimiters:
+##      <Example><![CDATA[
+##  gap> m := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Example>
+##      One can split the input string over several lines using the backslash character '\' to end each line
+##      <Log><![CDATA[
+##  gap> m := HomalgMatrix( "[ \
+##  1, 2, 3, \
+##  4, 5, 6  \
+##  ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> Display( m );
+##  [ [  1,  2,  3 ],
+##    [  4,  5,  6 ] ]
+##  ]]></Log>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, M, ar, type, matrix, RP, nr_rows, nr_columns;
+    local nargs, R, RP, M, ar, type, matrix, nr_rows, nr_columns;
     
     nargs := Length( arg );
     
-    ## "copy" the matrix:
-    if nargs = 1 and IsHomalgMatrix( arg[1] ) then
-        return HomalgMatrix( arg[1], HomalgRing( arg[1] ) );
-    fi;
-    
     if nargs > 1 and arg[1] <> [ ] then
-        if ( IsHomalgMatrix( arg[1] ) and IsHomalgRing( arg[nargs] ) ) and
-           not ( IsHomalgInternalMatrixRep( arg[1] ) and IsHomalgInternalRingRep( arg[nargs] ) ) then
-            R := arg[nargs];
-            if IsIdenticalObj( HomalgRing( arg[1] ), R ) then
-                M := ShallowCopy( arg[1] );
-                if not IsIdenticalObj( M, arg[1] ) then
-                    return M;
-                fi;
+        
+        if IsString( arg[1] ) then
+            
+            if IsHomalgInternalRingRep( arg[nargs] ) then
+                return CallFuncList( CreateHomalgMatrixFromString, arg );
             fi;
-            
-            if LoadPackage( "IO_ForHomalg" ) <> true then
-                Error( "the package IO_ForHomalg failed to load\n" );
-            fi;
-            
-            return CallFuncList( ConvertHomalgMatrix, arg );
-            
-        elif IsString( arg[1] ) then
             
             if LoadPackage( "IO_ForHomalg" ) <> true then
                 Error( "the package IO_ForHomalg failed to load\n" );
@@ -1232,7 +1361,9 @@ InstallGlobalFunction( HomalgMatrix,
         Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
-    if nargs > 1 and arg[1] = [ ] then
+    M := arg[1];
+    
+    if nargs > 1 and M = [ ] then
         return HomalgZeroMatrix( 0, 0, R );
     fi;
     
@@ -1254,29 +1385,39 @@ InstallGlobalFunction( HomalgMatrix,
         
     fi;
     
-    if IsList( arg[1] ) and Length( arg[1] ) > 0 and not IsList( arg[1][1] ) then
-        M := List( arg[1], a -> [a] );	## NormalizeInput
-        RP := homalgTable( R );
-        if IsBound(RP!.ConvertMatrix) then
-            M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
+    if IsList( M ) and Length( M ) > 0 and not IsList( M[1] ) then
+        if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+            M := ListToListList( M, arg[2], Length( M ) / arg[2] );
+        else
+            M := List( M, a -> [a] );	## NormalizeInput
         fi;
-    elif IsHomalgInternalMatrixRep( arg[1] ) and IsHomalgInternalRingRep( R ) then
-        M := Eval( arg[1] );
+        
+        RP := homalgTable( R );
+        if IsBound(RP!.ImportMatrix) then
+            M := RP!.ImportMatrix( One( R ) * M, R!.ring );
+        fi;
+    elif IsHomalgInternalMatrixRep( M ) and IsHomalgInternalRingRep( R ) then
+        RP := homalgTable( HomalgRing( M ) );
+        M := Eval( M );
+        if IsBound(RP!.ExportMatrix) then
+            M := RP!.ExportMatrix( M );
+        fi;
         if IsInternalMatrixHull( M ) then
             M := M!.matrix;
         fi;
+        M := One( R ) * M;
         RP := homalgTable( R );
-        if IsBound(RP!.ConvertMatrix) then
-            M := RP!.ConvertMatrix( One( R ) * M, R!.ring );
+        if IsBound(RP!.ImportMatrix) then
+            M := RP!.ImportMatrix( M, R!.ring );
         fi;
-    elif IsInternalMatrixHull( arg[1] ) then
-        M := arg[1]!.matrix;
+    elif IsInternalMatrixHull( M ) then
+        M := M!.matrix;
     else
         RP := homalgTable( R );
-        if IsMatrix( arg[1] ) and IsBound(RP!.ConvertMatrix) then
-            M := RP!.ConvertMatrix( One( R ) * arg[1], R!.ring );
+        if IsMatrix( M ) and IsBound(RP!.ImportMatrix) then
+            M := RP!.ImportMatrix( One( R ) * M, R!.ring );
         else
-            M := ShallowCopy( arg[1] );	## by this we are sure that possible changes to a mutable internal matrix arg[1] does not destroy the logic of homalg
+            M := ShallowCopy( M );	## by this we are sure that possible changes to a mutable internal matrix arg[1] does not destroy the logic of homalg
         fi;
     fi;
     
@@ -1351,6 +1492,32 @@ InstallGlobalFunction( HomalgMatrix,
     
 end );
   
+##  <#GAPDoc Label="HomalgZeroMatrix">
+##  <ManSection>
+##    <Func Arg="m, n, R" Name="HomalgZeroMatrix" Label="constructor for zero matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      An immutable unevaluated <A>m</A> <M>x</M> <A>n</A> &homalg; zero matrix over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> z := HomalgZeroMatrix( 2, 3, ZZ );
+##  <An unevaluated homalg internal 2 by 3 zero matrix>
+##  gap> HasIsZero( z );
+##  true
+##  gap> IsZero( z );
+##  true
+##  gap> z;
+##  <An unevaluated homalg internal 2 by 3 zero matrix>
+##  gap> Display( z );
+##  [ [  0,  0,  0 ],
+##    [  0,  0,  0 ] ]
+##  gap> z;
+##  <A homalg internal 2 by 3 zero matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgZeroMatrix,
   function( arg )				## the zero matrix
@@ -1408,6 +1575,31 @@ InstallGlobalFunction( HomalgZeroMatrix,
     
 end );
 
+##  <#GAPDoc Label="HomalgIdentityMatrix">
+##  <ManSection>
+##    <Func Arg="m, R" Name="HomalgIdentityMatrix" Label="constructor for identity matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      An immutable unevaluated <A>m</A> <M>x</M> <A>m</A> &homalg; identity matrix over the &homalg; ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> id := HomalgIdentityMatrix( 3, ZZ );
+##  <An unevaluated homalg internal 3 by 3 identity matrix>
+##  gap> IsIdentityMatrix( id );
+##  true
+##  gap> id;
+##  <An unevaluated homalg internal 3 by 3 identity matrix>
+##  gap> Display( id );
+##  [ [  1,  0,  0 ],
+##    [  0,  1,  0 ],
+##    [  0,  0,  1 ] ]
+##  gap> id;
+##  <A homalg internal 3 by 3 identity matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgIdentityMatrix,
   function( arg )		## the identity matrix
@@ -1445,6 +1637,46 @@ InstallGlobalFunction( HomalgIdentityMatrix,
     
 end );
 
+##  <#GAPDoc Label="HomalgInitialMatrix">
+##  <ManSection>
+##    <Func Arg="m, n, R" Name="HomalgInitialMatrix" Label="constructor for initial matrices filled with zeros"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A mutable unevaluated initial <A>m</A> <M>x</M> <A>n</A> &homalg; matrix filled with zeros
+##      over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define a matrix
+##      by assigning its nonzero entries. Avoid asking about properties or attributes of the matrix until
+##      you finish filling , since already computed values of properties and attributes will be cached
+##      and not recomputed unless the values are explicitly reset (&see; <Ref Func="ResetFilterObj"
+##      BookName="Prg Tutorial" Style="Number"/>);
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> z := HomalgInitialMatrix( 2, 3, ZZ );
+##  <An initial homalg internal 2 by 3 matrix>
+##  gap> HasIsZero( z );
+##  false
+##  gap> IsZero( z );
+##  true
+##  gap> z;
+##  <A homalg internal 2 by 3 zero matrix>
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
+##  <An initial homalg internal 2 by 3 matrix>
+##  gap> SetEntryOfHomalgMatrix( n, 1, 1, "1" );
+##  gap> SetEntryOfHomalgMatrix( n, 2, 3, "1" );
+##  gap> ResetFilterObj( n, IsMutableMatrix );
+##  gap> Display( n );
+##  [ [  1,  0,  0 ],
+##    [  0,  0,  1 ] ]
+##  gap> IsZero( n );
+##  false
+##  gap> n;
+##  <A non-zero homalg internal 2 by 3 matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgInitialMatrix,
   function( arg )	        		## an initial matrix having the flag IsInitialMatrix
@@ -1504,6 +1736,47 @@ InstallGlobalFunction( HomalgInitialMatrix,
     
 end );
 
+##  <#GAPDoc Label="HomalgInitialIdentityMatrix">
+##  <ManSection>
+##    <Func Arg="m, R" Name="HomalgInitialIdentityMatrix" Label="constructor for initial quadratic matrices with ones on the diagonal"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A mutable unevaluated initial <A>m</A> <M>x</M> <A>m</A> &homalg; quadratic matrix with ones
+##      on the diagonal over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define
+##      an elementary matrix by assigning its off-diagonal nonzero entries. Avoid asking about properties or
+##      attributes of the matrix until you finish filling it, since already computed values of properties and
+##      attributes will be cached and not recomputed unless the values are explicitly reset
+##      (&see; <Ref Func="ResetFilterObj"  BookName="Prg Tutorial" Style="Number"/>);
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> id := HomalgInitialIdentityMatrix( 3, ZZ );
+##  <An initial identity homalg internal 3 by 3 matrix>
+##  gap> HasIsIdentityMatrix( id );
+##  false
+##  gap> IsIdentityMatrix( id );
+##  true
+##  gap> id;
+##  <A homalg internal 3 by 3 identity matrix>
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
+##  <An initial identity homalg internal 3 by 3 matrix>
+##  gap> SetEntryOfHomalgMatrix( e, 1, 2, "1" );
+##  gap> SetEntryOfHomalgMatrix( e, 2, 1, "-1" );
+##  gap> ResetFilterObj( e, IsMutableMatrix );
+##  gap> Display( e );
+##  [ [   1,   1,   0 ],
+##    [  -1,   1,   0 ],
+##    [   0,   0,   1 ] ]
+##  gap> IsIdentityMatrix( e );
+##  false
+##  gap> e;
+##  <A homalg internal 3 by 3 matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgInitialIdentityMatrix,
   function( arg )		## an square initial matrix having the flag IsInitialIdentityMatrix
@@ -1600,6 +1873,28 @@ InstallGlobalFunction( HomalgVoidMatrix,
     
 end );
 
+##  <#GAPDoc Label="HomalgDiagonalMatrix">
+##  <ManSection>
+##    <Func Arg="diag, R" Name="HomalgDiagonalMatrix" Label="constructor for diagonal matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      An immutable unevaluated diagonal &homalg; matrix over the &homalg; ring <A>R</A>. The diagonal
+##      consists of the entries of the list <A>diag</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> d := HomalgDiagonalMatrix( [ 1, 2, 3 ], ZZ );
+##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  gap> Display( d );
+##  [ [  1,  0,  0 ],
+##    [  0,  2,  0 ],
+##    [  0,  0,  3 ] ]
+##  gap> d;
+##  <A diagonal homalg internal 3 by 3 matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgDiagonalMatrix,
   function( arg )		## the diagonal matrix
@@ -1676,6 +1971,128 @@ InstallGlobalFunction( ListToListList,
     
 end );
 
+##  <#GAPDoc Label="\*:MatrixBaseChange">
+##  <ManSection>
+##    <Oper Arg="mat, R" Name="\*" Label="copy a matrix over a different ring"/>
+##    <Oper Arg="R, mat" Name="\*"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      An immutable evaluated &homalg; matrix over the &homalg; ring <A>R</A> having the
+##      same entries as the matrix <A>mat</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> Z4 := ZZ / [ 4 ];
+##  <A homalg internal ring>
+##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
+##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  gap> d2 := d * Z4; ## or d2 := Z4 * d;
+##  <A homalg internal 3 by 3 matrix>
+##  gap> Display( d2 );
+##  [ [  2,  0,  0 ],
+##    [  0,  3,  0 ],
+##    [  0,  0,  4 ] ]
+##  gap> d;
+##  <A diagonal homalg internal 3 by 3 matrix>
+##  gap> ZeroRows( d );
+##  [  ]
+##  gap> ZeroRows( d2 );
+##  [ 3 ]
+##  gap> d;
+##  <A non-zero diagonal homalg internal 3 by 3 matrix>
+##  gap> d2;
+##  <A non-zero homalg internal 3 by 3 matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( m, R )
+    local RP, mat;
+    
+    RP := homalgTable( R );
+    
+    if IsIdenticalObj( HomalgRing( m ), R ) then	## make a copy over the same ring
+        
+        mat := ShallowCopy( m );
+        
+        if not IsIdenticalObj( m, mat ) then
+            return mat;
+        fi;
+        
+    elif IsHomalgExternalRingRep( HomalgRing( m ) ) and IsHomalgExternalRingRep( R ) and
+      IsIdenticalObj( homalgStream( HomalgRing( m ) ), homalgStream( R ) ) and
+      IsBound( RP!.CopyMatrix ) then	## make a "copy" over a different ring
+        
+        Eval( m );	## enforce evaluation
+        
+        mat := RP!.CopyMatrix( m, R );
+        
+        BlindlyCopyMatrixProperties( m, mat );
+        
+        return mat;
+        
+    fi;
+    
+    if LoadPackage( "IO_ForHomalg" ) <> true then
+        Error( "the package IO_ForHomalg failed to load\n" );
+    fi;
+    
+    mat := ConvertHomalgMatrix( m, R );
+    
+    BlindlyCopyMatrixProperties( m, mat );
+    
+    return mat;
+    
+end );
+
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsHomalgInternalMatrixRep, IsHomalgRing and IsHomalgInternalRingRep ],
+        
+  function( m, R )
+    
+    return HomalgMatrix( m, R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero, IsHomalgRing ],
+        
+  function( m, R )
+    
+    return HomalgZeroMatrix( NrRows( m ), NrColumns( m ), R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgRing ],
+        
+  function( m, R )
+    
+    return HomalgIdentityMatrix( NrRows( m ), R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgRing, IsHomalgMatrix ],
+        
+  function( R, M )
+    
+    return M * R;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
@@ -1699,7 +2116,7 @@ InstallMethod( ViewObj,
         [ IsHomalgMatrix ],
         
   function( o )
-    local first_attribute;
+    local first_attribute, not_row_or_column_matrix;
     
     first_attribute := true;
     
@@ -1722,10 +2139,12 @@ InstallMethod( ViewObj,
         first_attribute := true;
     fi;
     
+    not_row_or_column_matrix := not ( ( HasNrRows( o ) and NrRows( o ) = 1 ) or ( HasNrColumns( o ) and NrColumns( o ) = 1 ) );
+    
     if not ( HasNrRows( o ) and NrRows( o ) = 1 and HasNrColumns( o ) and NrColumns( o ) = 1 ) then
         if HasIsDiagonalMatrix( o ) and IsDiagonalMatrix( o ) then
             Print( " diagonal" );
-        elif HasIsUpperStairCaseMatrix( o ) and IsUpperStairCaseMatrix( o ) then
+        elif HasIsUpperStairCaseMatrix( o ) and IsUpperStairCaseMatrix( o ) and not_row_or_column_matrix then
             if not first_attribute then
                 Print( "n upper staircase" );
             else
@@ -1733,7 +2152,7 @@ InstallMethod( ViewObj,
             fi;
         elif HasIsStrictUpperTriangularMatrix( o ) and IsStrictUpperTriangularMatrix( o ) then
             Print( " strict upper triangular" );
-        elif HasIsLowerStairCaseMatrix( o ) and IsLowerStairCaseMatrix( o ) then
+        elif HasIsLowerStairCaseMatrix( o ) and IsLowerStairCaseMatrix( o ) and not_row_or_column_matrix then
             Print( " lower staircase" );
         elif HasIsStrictLowerTriangularMatrix( o ) and IsStrictLowerTriangularMatrix( o ) then
             Print( " strict lower triangular" );
@@ -1745,7 +2164,7 @@ InstallMethod( ViewObj,
             fi;
         elif HasIsLowerTriangularMatrix( o ) and IsLowerTriangularMatrix( o ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
             Print( " lower triangular" );
-        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) and not ( HasNrRows( o ) and NrRows( o ) = 1 ) and not ( HasNrColumns( o ) and NrColumns( o ) = 1 ) then
+        elif HasIsTriangularMatrix( o ) and IsTriangularMatrix( o ) and not_row_or_column_matrix then
             Print( " triangular" );
         elif not first_attribute then
             first_attribute := fail;

@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgSpectralSequence",
         IsHomalgObject );
 
@@ -41,6 +42,7 @@ DeclareCategory( "IsHomalgSpectralSequence",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgSpectralSequenceAssociatedToAnExactCouple",
         IsHomalgSpectralSequence );
 
@@ -56,6 +58,7 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToAnExactCouple",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgSpectralSequenceAssociatedToAFilteredComplex",
         IsHomalgSpectralSequence );
 
@@ -70,6 +73,7 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToAFilteredComplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgSpectralSequenceAssociatedToABicomplex",
         IsHomalgSpectralSequenceAssociatedToAFilteredComplex );
 
@@ -88,6 +92,7 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToABicomplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "GeneralizedEmbeddingsInTotalObjects",
         IsHomalgSpectralSequence );
 
@@ -100,6 +105,7 @@ DeclareAttribute( "GeneralizedEmbeddingsInTotalObjects",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "GeneralizedEmbeddingsInTotalDefects",
         IsHomalgSpectralSequence );
 

@@ -53,6 +53,9 @@ ReadPackage( "homalg", "gap/HomalgSpectralSequence.gi" );
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
 
+## diagrams
+ReadPackage( "homalg", "gap/HomalgDiagram.gi" );
+
 ## tools/service/basic
 ReadPackage( "homalg", "gap/Tools.gi" );
 ReadPackage( "homalg", "gap/Service.gi" );

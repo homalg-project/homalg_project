@@ -784,7 +784,7 @@ end );
 ##
 InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule)
   function( arg )
-    local nargs, M, COMPUTE_BASIS, STORE_SYZYGIES, ar, S, unit_pos;
+    local nargs, M, COMPUTE_BASIS, ar, S, unit_pos;
     
     nargs := Length( arg );
     
@@ -801,32 +801,20 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     M := arg[1];
     
     COMPUTE_BASIS := false;
-    STORE_SYZYGIES := false;
     
     for ar in arg{[ 2 .. nargs ]} do
         if ar = "COMPUTE_BASIS" then
             COMPUTE_BASIS := true;
-        elif ar = "STORE_SYZYGIES" then
-            STORE_SYZYGIES := true;
         fi;
     od;
     
     if NrRelations( M ) = 0 then
-        if STORE_SYZYGIES then
-            M!.SyzygiesGenerators := SyzygiesGenerators( M );
-        fi;
         return M;
     fi;
     
     if COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule ) then
-        if STORE_SYZYGIES and not IsBound( M!.ReducedBasisOfModule!.SyzygiesGenerators ) then
-            M!.ReducedBasisOfModule!.SyzygiesGenerators := SyzygiesGenerators( M );
-        fi;
         return M!.ReducedBasisOfModule;
     elif not COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS) then
-        if STORE_SYZYGIES and not IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS!.SyzygiesGenerators ) then
-            M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS!.SyzygiesGenerators := SyzygiesGenerators( M );
-        fi;
         return M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS;
     fi;
     
@@ -842,22 +830,27 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     ## iterate the syzygy trick
     while true do
         S := SyzygiesGenerators( M );
+        
         unit_pos := GetIndependentUnitPositions( S );
         unit_pos := List( unit_pos, a -> a[2] );	## due to the convention followed in GetRow/ColumnIndependentUnitPositions we are always interested in a[2]
+        
         if NrRelations( S ) = 0 or unit_pos = [ ] then
             break;
         fi;
+        
         M := CertainRelations( M, Filtered( [ 1 .. NrRelations( M ) ], j -> not j in unit_pos ) );
     od;
     
     if COMPUTE_BASIS then
         arg[1]!.ReducedBasisOfModule := M;
+        M!.ReducedBasisOfModule := M;	## thanks GAP4
     else
         arg[1]!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M;
+        M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M;	## thanks GAP4
     fi;
     
-    if STORE_SYZYGIES then
-        M!.SyzygiesGenerators := S;
+    if IsList( DegreesOfGenerators( arg[1] ) ) then
+        M!.DegreesOfGenerators := DegreesOfGenerators( arg[1] );
     fi;
     
     return M;

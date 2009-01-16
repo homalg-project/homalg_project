@@ -112,7 +112,7 @@ Functor_TorsionFreeFactor!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
   function( M, N )
-    local R, matM, matN, sum, idM, idN, zeroMN, zeroNM,
+    local R, matM, matN, sum, idM, idN, degMN, F, zeroMN, zeroNM,
           iotaM, iotaN, piM, piN;
     
     R := HomalgRing( M );
@@ -136,8 +136,18 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     idM := HomalgIdentityMatrix( NrGenerators( M ), R );
     idN := HomalgIdentityMatrix( NrGenerators( N ), R );
     
+    ## take care of graded modules
+    if IsList( DegreesOfGenerators( M ) ) and
+       IsList( DegreesOfGenerators( N ) ) then
+        degMN := Concatenation( DegreesOfGenerators( M ), DegreesOfGenerators( N ) );
+    fi;
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        sum := HomalgMap( sum );
+        if IsBound( degMN ) then
+            F := HomalgFreeLeftModuleWithWeights( R, degMN );
+        else
+            F := HomalgFreeLeftModule( NrGenerators( M ) + NrGenerators( N ), R );
+        fi;
         zeroMN := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         iotaM := UnionOfColumns( idM, zeroMN );
@@ -145,7 +155,11 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
         piM := UnionOfRows( idM, zeroNM );
         piN := UnionOfRows( zeroMN, idN );
     else
-        sum := HomalgMap( sum, "r" );
+        if IsBound( degMN ) then
+            F := HomalgFreeRightModuleWithWeights( R, degMN );
+        else
+            F := HomalgFreeRightModule( NrGenerators( M ) + NrGenerators( N ), R );
+        fi;
         zeroMN := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         iotaM := UnionOfRows( idM, zeroMN );
@@ -154,7 +168,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
         piN := UnionOfColumns( zeroMN, idN );
     fi;
     
-    SetIsMorphism( sum, true );
+    sum := HomalgMap( sum, "free", F );
+    
     sum := Cokernel( sum );
     
     iotaM := HomalgMap( iotaM, M, sum );

@@ -24,6 +24,14 @@
 <Section Label="Modules:Constructors">
 <Heading>Modules: Constructors</Heading>
 
+<#Include Label="LeftPresentation">
+<#Include Label="RightPresentation">
+<#Include Label="HomalgFreeLeftModule">
+<#Include Label="HomalgFreeRightModule">
+<#Include Label="HomalgZeroLeftModule">
+<#Include Label="HomalgZeroRightModule">
+<#Include Label="\*:ModuleBaseChange">
+
 </Section>
 
 <Section Label="Modules:Properties">
@@ -54,6 +62,8 @@
 <#Include Label="CodimOfModule">
 <#Include Label="PurityFiltration">
 <#Include Label="CodegreeOfPurity">
+<#Include Label="BettiDiagram:module">
+<#Include Label="CastelnuovoMumfordRegularity">
 
 </Section>
 
@@ -64,6 +74,9 @@
 
 <Section Label="Modules:Operations">
 <Heading>Modules: Operations and Functions</Heading>
+
+<#Include Label="HomalgRing:module">
+<#Include Label="ByASmallerPresentation:module">
 
 </Section>
 

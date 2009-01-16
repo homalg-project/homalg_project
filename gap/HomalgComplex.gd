@@ -26,6 +26,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgComplex",
         IsHomalgObject );
 
@@ -44,6 +45,7 @@ DeclareCategory( "IsHomalgComplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsSequence",
         IsHomalgComplex );
 
@@ -56,6 +58,7 @@ DeclareProperty( "IsSequence",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsComplex",
         IsHomalgComplex );
 
@@ -68,6 +71,7 @@ DeclareProperty( "IsComplex",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsAcyclic",
         IsHomalgComplex );
 
@@ -80,6 +84,7 @@ DeclareProperty( "IsAcyclic",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightAcyclic",
         IsHomalgComplex );
 
@@ -92,6 +97,7 @@ DeclareProperty( "IsRightAcyclic",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftAcyclic",
         IsHomalgComplex );
 
@@ -104,6 +110,7 @@ DeclareProperty( "IsLeftAcyclic",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsGradedObject",
         IsHomalgComplex );
 
@@ -116,6 +123,7 @@ DeclareProperty( "IsGradedObject",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsExactSequence",
         IsHomalgComplex );
 
@@ -128,6 +136,7 @@ DeclareProperty( "IsExactSequence",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
         IsHomalgComplex );
 
@@ -140,6 +149,7 @@ DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsSplitShortExactSequence",
         IsHomalgComplex );
 
@@ -152,6 +162,7 @@ DeclareProperty( "IsSplitShortExactSequence",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsTriangle",
         IsHomalgComplex );
 
@@ -164,11 +175,31 @@ DeclareProperty( "IsTriangle",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsExactTriangle",
         IsHomalgComplex );
 
 DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only this) is marked as IsATwoSequence in order to distinguish
         IsHomalgComplex );			##  between different methods for DefectOfExactness which all apply to complexes
+
+####################################
+#
+# attributes:
+#
+####################################
+
+##  <#GAPDoc Label="BettiDiagram:complex">
+##  <ManSection>
+##    <Attr Arg="C" Name="BettiDiagram" Label="for complexes"/>
+##    <Returns>a &homalg; diagram</Returns>
+##    <Description>
+##      The Betti diagram of the &homalg; complex <A>C</A> of graded modules.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "BettiDiagram",
+        IsHomalgComplex );
 
 ####################################
 #
@@ -231,6 +262,9 @@ DeclareOperation( "SupportOfComplex",
 
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMorphism ] );
+
+DeclareOperation( "Add",
+        [ IsHomalgMorphism, IsHomalgComplex ] );
 
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgModule ] );

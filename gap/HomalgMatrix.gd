@@ -30,6 +30,7 @@ DeclareCategory( "IsInternalMatrixHull",	## this is introduced to allow internal
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgMatrix",
         IsAdditiveElementWithInverse
         and IsExtLElement
@@ -50,6 +51,7 @@ DeclareCategory( "IsHomalgMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsMutableMatrix",
         IsHomalgMatrix );
 
@@ -62,6 +64,7 @@ DeclareProperty( "IsMutableMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsInitialMatrix",
         IsHomalgMatrix );
 
@@ -74,6 +77,7 @@ DeclareProperty( "IsInitialMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsInitialIdentityMatrix",
         IsHomalgMatrix );
 
@@ -86,6 +90,7 @@ DeclareProperty( "IsInitialIdentityMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsVoidMatrix",
         IsHomalgMatrix );
 
@@ -98,6 +103,7 @@ DeclareProperty( "IsVoidMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 
@@ -110,6 +116,7 @@ DeclareProperty( "IsReducedModuloRingRelations",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsIdentityMatrix",
         IsHomalgMatrix );
 
@@ -122,6 +129,7 @@ DeclareProperty( "IsIdentityMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsPermutationMatrix",
         IsHomalgMatrix );
 
@@ -134,6 +142,7 @@ DeclareProperty( "IsPermutationMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsSubidentityMatrix",
         IsHomalgMatrix );
 
@@ -146,6 +155,7 @@ DeclareProperty( "IsSubidentityMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftRegularMatrix",
         IsHomalgMatrix );
 
@@ -158,6 +168,7 @@ DeclareProperty( "IsLeftRegularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightRegularMatrix",
         IsHomalgMatrix );
 
@@ -170,6 +181,7 @@ DeclareProperty( "IsRightRegularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsInvertibleMatrix",
         IsHomalgMatrix );
 
@@ -182,6 +194,7 @@ DeclareProperty( "IsInvertibleMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLeftInvertibleMatrix",
         IsHomalgMatrix );
 
@@ -194,6 +207,7 @@ DeclareProperty( "IsLeftInvertibleMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsRightInvertibleMatrix",
         IsHomalgMatrix );
 
@@ -206,6 +220,7 @@ DeclareProperty( "IsRightInvertibleMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsEmptyMatrix",
         IsHomalgMatrix );
 
@@ -218,6 +233,7 @@ DeclareProperty( "IsEmptyMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsDiagonalMatrix",
         IsHomalgMatrix );
 
@@ -230,6 +246,7 @@ DeclareProperty( "IsDiagonalMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsUpperTriangularMatrix",
         IsHomalgMatrix );
 
@@ -242,6 +259,7 @@ DeclareProperty( "IsUpperTriangularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLowerTriangularMatrix",
         IsHomalgMatrix );
 
@@ -254,6 +272,7 @@ DeclareProperty( "IsLowerTriangularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsStrictUpperTriangularMatrix",
         IsHomalgMatrix );
 
@@ -266,6 +285,7 @@ DeclareProperty( "IsStrictUpperTriangularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsStrictLowerTriangularMatrix",
         IsHomalgMatrix );
 
@@ -278,6 +298,7 @@ DeclareProperty( "IsStrictLowerTriangularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsUpperStairCaseMatrix",
         IsHomalgMatrix );
 
@@ -290,6 +311,7 @@ DeclareProperty( "IsUpperStairCaseMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsLowerStairCaseMatrix",
         IsHomalgMatrix );
 
@@ -302,6 +324,7 @@ DeclareProperty( "IsLowerStairCaseMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsTriangularMatrix",
         IsHomalgMatrix );
 
@@ -314,6 +337,7 @@ DeclareProperty( "IsTriangularMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsBasisOfRowsMatrix",
         IsHomalgMatrix );
 
@@ -326,6 +350,7 @@ DeclareProperty( "IsBasisOfRowsMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareProperty( "IsBasisOfColumnsMatrix",
         IsHomalgMatrix );
 
@@ -401,6 +426,7 @@ DeclareAttribute( "PreEval",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "NrRows",
         IsHomalgMatrix );
 
@@ -413,6 +439,7 @@ DeclareAttribute( "NrRows",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "NrColumns",
         IsHomalgMatrix );
 
@@ -425,6 +452,7 @@ DeclareAttribute( "NrColumns",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "RowRankOfMatrix",
         IsHomalgMatrix );
 
@@ -437,6 +465,7 @@ DeclareAttribute( "RowRankOfMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ColumnRankOfMatrix",
         IsHomalgMatrix );
 
@@ -449,6 +478,7 @@ DeclareAttribute( "ColumnRankOfMatrix",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ZeroRows",
         IsHomalgMatrix );
 
@@ -461,6 +491,7 @@ DeclareAttribute( "ZeroRows",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ZeroColumns",
         IsHomalgMatrix );
 
@@ -473,6 +504,7 @@ DeclareAttribute( "ZeroColumns",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "NonZeroRows",
         IsHomalgMatrix );
 
@@ -485,6 +517,7 @@ DeclareAttribute( "NonZeroRows",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "NonZeroColumns",
         IsHomalgMatrix );
 
@@ -498,6 +531,7 @@ DeclareAttribute( "NonZeroColumns",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "PositionOfFirstNonZeroEntryPerRow",
         IsHomalgMatrix );
 
@@ -511,7 +545,21 @@ DeclareAttribute( "PositionOfFirstNonZeroEntryPerRow",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="DegreesOfEntries">
+##  <ManSection>
+##    <Attr Arg="A" Name="DegreesOfEntries"/>
+##    <Returns>a matrix of integers</Returns>
+##    <Description>
+##      The matrix of degrees of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreesOfEntries",
         IsHomalgMatrix );
 
 ####################################
@@ -520,7 +568,7 @@ DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
 #
 ####################################
 
-# constructor methods:
+# constructors:
 
 DeclareGlobalFunction( "homalgInternalMatrixHull" );
 
@@ -542,10 +590,60 @@ DeclareGlobalFunction( "ConvertHomalgMatrix" );
 
 DeclareGlobalFunction( "ListToListList" );
 
+DeclareOperation( "CreateHomalgMatrixFromString",
+        [ IsString, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgMatrixFromString",
+        [ IsString, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgSparseMatrixFromString",
+        [ IsString, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "*",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgMatrix ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "BlindlyCopyMatrixProperties",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+##  <#GAPDoc Label="NonTrivialDegreePerRow">
+##  <ManSection>
+##    <Oper Arg="A, col_weights" Name="NonTrivialDegreePerRow"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      The list of non-trivial degrees per row of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "NonTrivialDegreePerRow",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "NonTrivialDegreePerRow",
+        [ IsHomalgMatrix, IsList ] );
+
+##  <#GAPDoc Label="NonTrivialDegreePerColumn">
+##  <ManSection>
+##    <Oper Arg="A, row_weights" Name="NonTrivialDegreePerColumn"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      The list of non-trivial degrees per column of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "NonTrivialDegreePerColumn",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "NonTrivialDegreePerColumn",
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "SetExtractHomalgMatrixAsSparse",
         [ IsHomalgMatrix, IsBool ] );
@@ -570,21 +668,6 @@ DeclareOperation( "AddToEntryOfHomalgMatrix",
 
 DeclareOperation( "AddToEntryOfHomalgMatrix",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
-
-DeclareOperation( "CreateHomalgMatrix",
-        [ IsString, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgMatrix",
-        [ IsString, IsInt, IsInt, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgMatrix",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgSparseMatrix",
-        [ IsString, IsInt, IsInt, IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgSparseMatrix",
-        [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "GetEntryOfHomalgMatrixAsString",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
