@@ -739,9 +739,9 @@ end );
 ##    <Func Arg="" Name="HomalgRingOfIntegers" Label="constructor for the integers"/>
 ##    <Returns>the ring of integers <M>&ZZ;</M> for &homalg;</Returns>
 ##    <Func Arg="c" Name="HomalgRingOfIntegers" Label="constructor for the residue class rings of the integers"/>
-##    <Returns>the ring of integers modulo <A>c</A> for &homalg;</Returns>
+##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      The no-argument form returns the ring of integers for &homalg;. <P/>
+##      The no-argument form returns the ring of integers <M>&ZZ;</M> for &homalg;. <P/>
 ##      The one-argument form accepts an integer <A>c</A> and returns
 ##      the ring <M>&ZZ; / c </M> for &homalg;:
 ##      <List>
@@ -752,7 +752,7 @@ end );
 ##      </List>
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties. <P/>
 ##      If for some reason you don't want to use the &GaussForHomalg; package (maybe because you didn't install it), then use<P/>
-##      <C>HomalgRingOfIntegers</C>() <C>/</C> <A>c</A>; <P/>
+##      <C>HomalgRingOfIntegers</C>( ) <C>/</C> <A>c</A>; <P/>
 ##      but note that the computations will then be considerably slower.
 ##    </Description>
 ##  </ManSection>
@@ -798,9 +798,10 @@ end );
 ##  <#GAPDoc Label="HomalgFieldOfRationals">
 ##  <ManSection>
 ##    <Func Arg="" Name="HomalgFieldOfRationals" Label="constructor for the field of rationals"/>
-##    <Returns>the field of rationals <M>&QQ;</M> for &homalg;</Returns>
+##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      The package &GaussForHomalg; is loaded and the field of rationals is returned. If &GaussForHomalg; fails to load an error is issued. <P/>
+##      The package &GaussForHomalg; is loaded and the field of rationals <M>&QQ;</M> is returned.
+##      If &GaussForHomalg; fails to load an error is issued. <P/>
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
 ##    </Description>
 ##  </ManSection>
@@ -827,10 +828,10 @@ end );
 ##  <#GAPDoc Label="ResidueClassRing">
 ##  <ManSection>
 ##    <Oper Arg="R, ring_rel" Name="\/" Label="constructor for residue class rings"/>
-##    <Returns>the residue class ring <A>R</A> <M>/</M> <A>ring_rel</A></Returns>
+##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      This is the constructor for residue class rings in &homalg;.
-##      <A>ring_rel</A> might be:
+##      This is the &homalg; constructor for residue class rings <A>R</A> <M>/</M> <A>ring_rel</A>, where
+##      <A>R</A> is a &homalg; ring and <A>ring_rel</A> might be:
 ##      <List>
 ##        <Item>a set of left resp. right relations on one generator</Item>
 ##        <Item>a list of ring elements of <A>R</A></Item>

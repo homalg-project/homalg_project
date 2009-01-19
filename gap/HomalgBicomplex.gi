@@ -171,6 +171,15 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="UnderlyingComplex">
+##  <ManSection>
+##    <Func Arg="BC" Name="UnderlyingComplex"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##    The (co)complex of (co)complexes underlying the (co)homological bicomplex <A>BC</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( UnderlyingComplex,
         "for homalg bicomplexes",
@@ -711,6 +720,49 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgBicomplex">
+##  <ManSection>
+##    <Func Arg="C" Name="HomalgBicomplex" Label="constructor for bicomplexes given a complex of complexes"/>
+##    <Returns>a &homalg; bicomplex</Returns>
+##    <Description>
+##    This constructor creates a &homalg; bicomplex (homological bicomplex) given a complex of (co)complexes <A>C</A>
+##    (&see; <Ref Func="HomalgComplex" Label="constructor for complexes given a chain map"/>),
+##    resp. creates a bicocomplex (cohomological bicomplex) given a cocomplex of (co)complexes <A>C</A>
+##    (&see; <Ref Func="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>).
+##    Using the usual sign-trick a complex of complexes gives rise to a bicomplex and vice versa.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> d := Resolution( M );
+##  <A non-zero right acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> dd := Hom( d );
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  gap> C := Resolution( dd );
+##  <An acyclic cocomplex containing a single morphism of right complexes at degrees [ 0 .. 1 ]>
+##  gap> CC := Hom( C );
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  gap> BC := HomalgBicomplex( CC );
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( BC );
+##   * *
+##   * *
+##  gap> UU := UnderlyingComplex( BC );
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  gap> IsIdenticalObj( UU, CC );
+##  true
+##  gap> tBC := TransposedBicomplex( BC );
+##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( tBC );
+##   * *
+##   * *
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgBicomplex,
   function( arg )
     local nargs, C, transposed, complex, of_complex, left, type, bidegree_getter, B;

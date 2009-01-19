@@ -2226,6 +2226,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> Z4 := ZZ / [ 4 ];;
+##  gap> Display( Z4 );
+##  Z/( 4 )
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
 ##  gap> M := LeftPresentation( M );

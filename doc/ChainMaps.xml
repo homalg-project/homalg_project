@@ -13,7 +13,7 @@
 
 <Section Label="ChainMaps:Category">
 
-<Heading>ChainMaps: Category and Representations</Heading>
+<Heading>ChainMaps: Categories and Representations</Heading>
 
 <#Include Label="IsHomalgChainMap">
 <#Include Label="IsHomalgChainSelfMap">
@@ -25,6 +25,8 @@
 
 <Section Label="ChainMaps:Constructors">
 <Heading>Chain Maps: Constructors</Heading>
+
+<#Include Label="HomalgChainMap">
 
 </Section>
 
@@ -58,6 +60,8 @@
 
 <Section Label="ChainMaps:Operations">
 <Heading>Chain Maps: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:chainmap">
 
 </Section>
 

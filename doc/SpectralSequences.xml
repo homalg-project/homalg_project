@@ -13,7 +13,7 @@
 
 <Section Label="SpectralSequences:Category">
 
-<Heading>SpectralSequences: Category and Representations</Heading>
+<Heading>SpectralSequences: Categorie and Representations</Heading>
 
 <#Include Label="IsHomalgSpectralSequence">
 <#Include Label="IsHomalgSpectralSequenceAssociatedToAnExactCouple">

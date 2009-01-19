@@ -25,6 +25,8 @@
 <Section Label="Bicomplexes:Constructors">
 <Heading>Bicomplexes: Constructors</Heading>
 
+<#Include Label="HomalgBicomplex">
+
 </Section>
 
 <Section Label="Bicomplexes:Properties">
@@ -46,6 +48,8 @@
 
 <Section Label="Bicomplexes:Operations">
 <Heading>Bicomplexes: Operations and Functions</Heading>
+
+<#Include Label="UnderlyingComplex">
 
 </Section>
 

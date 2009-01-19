@@ -62,6 +62,7 @@
 <Section Label="Complexes:Operations">
 <Heading>Complexes: Operations and Functions</Heading>
 
+<#Include Label="Add:complex">
 <#Include Label="ByASmallerPresentation:complex">
 
 </Section>

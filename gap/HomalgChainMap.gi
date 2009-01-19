@@ -832,21 +832,33 @@ InstallMethod( DecideZero,
     
 end );
 
+##  <#GAPDoc Label="ByASmallerPresentation:chainmap">
+##  <ManSection>
+##    <Meth Arg="cm" Name="ByASmallerPresentation" Label="for chain maps"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##    See <Ref Meth="ByASmallerPresentation" Label="for complexes"/> on complexes.
+##      <Listing Type="Code"><![CDATA[
 ##
 InstallMethod( ByASmallerPresentation,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
         
-  function( phi )
+  function( cm )
     
-    ByASmallerPresentation( Source( phi ) );
-    ByASmallerPresentation( Range( phi ) );
+    ByASmallerPresentation( Source( cm ) );
+    ByASmallerPresentation( Range( cm ) );
     
-    List( MorphismsOfChainMap( phi ), DecideZero );
+    List( MorphismsOfChainMap( cm ), DecideZero );
     
-    return phi;
+    return cm;
     
 end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>cm</A> and returns it.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
 InstallMethod( CertainMorphismAsKernelSquare,
@@ -962,6 +974,63 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgChainMap">
+##  <ManSection>
+##    <Func Arg="phi[, C][, D][, d]" Name="HomalgChainMap" Label="constructor for chain maps given a map"/>
+##    <Returns>a &homalg; chain map</Returns>
+##    <Description>
+##      The constructor creates a (co)chain map given a source (co)chain complex <A>C</A>, a target (co)chain complex
+##      <A>D</A> (&see; <Ref Sect="Modules:Constructors"/>), and a map <A>phi</A>
+##      (&see; <Ref Sect="Maps:Constructors"/>)at (co)homological degree <A>d</A>. The returned (co)chain map will
+##      cautiously be indicated using parenthesis: <Q>chain map</Q>. To verify if the result is indeed a (co)chain map use
+##      <Ref Prop="IsMorphism" Label="for chain maps"/>. If source and target are identical objects, and only then,
+##      the (co)chain map is created as a (co)chain selfmap.
+##      <Br/><Br/>
+##      The following examples shows a chain map that induces the zero map on homology, but is itself <E>not</E> zero
+##      in the derived category:
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := 1 * ZZ;
+##  <The free left module of rank 1 on a free generator>
+##  gap> Display( M );
+##  Z^(1 x 1)
+##  gap> N := HomalgMatrix( "[3]", 1, 1, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
+##  gap> Display( N );
+##  Z/< 3 >
+##  gap> a := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, M );
+##  <An endomorphism of a left module>
+##  gap> c := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, N );
+##  <A homomorphism of left modules>
+##  gap> b := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, M );
+##  <An endomorphism of a left module>
+##  gap> d := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, N );
+##  <A homomorphism of left modules>
+##  gap> C1 := HomalgComplex( a );
+##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> C2 := HomalgComplex( c );
+##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> cm := HomalgChainMap( d, C1, C2 );
+##  <A "chain map" containing a single left morphism at degree 0>
+##  gap> Add( cm, b );
+##  gap> IsMorphism( cm );
+##  true
+##  gap> cm;
+##  <A chain map containing 2 morphisms of left modules at degrees [ 0 .. 1 ]>
+##  gap> hcm := DefectOfExactness( cm );
+##  <A chain map of graded objects containing 2 morphisms of left modules at degrees [ 0 .. 1 ]>
+##  gap> IsZero( hcm );
+##  true
+##  gap> IsZero( Source( hcm ) );
+##  false
+##  gap> IsZero( Range( hcm ) );
+##  false
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgChainMap,
   function( arg )
     local nargs, morphism, left, source, target, degrees, degree,

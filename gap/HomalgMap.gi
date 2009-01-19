@@ -442,7 +442,7 @@ end );
 ##    <Meth Arg="phi" Name="ByASmallerPresentation" Label="for maps"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
-##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/>.
+##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
 ##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg maps",
@@ -840,9 +840,10 @@ end );
 ##    <Description>
 ##      This constructor returns a map (homomorphism) of finitely presented modules. It is represented by the
 ##      &homalg; matrix <A>mat</A> relative to the current set of generators of the source &homalg; module <A>M</A>
-##      and target module <A>N</A>. Unless the source module is free <E>and</E> given on free generators the returned
-##      map will cautiously be indicated using parenthesis: <Q>homomorphism</Q>. To verify if the result is indeed a
-##      well defined map use <Ref Prop="IsMorphism" Label="for maps"/>. If the presentations of the source or/and
+##      and target module <A>N</A> (&see; <Ref Sect="Modules:Constructors"/>). Unless the source module is free
+##      <E>and</E> given on free generators the returned map will cautiously be indicated using
+##      parenthesis: <Q>homomorphism</Q>. To verify if the result is indeed a well defined map use
+##      <Ref Prop="IsMorphism" Label="for maps"/>. If the presentations of the source or/and
 ##      target module are altered after the map was constructed, a new adapted representation matrix of the map is
 ##      automatically computed whenever needed. For this the internal transition matrices of the modules are used.
 ##      If source and target are identical objects, and only then, the map is created as a selfmap (endomorphism).

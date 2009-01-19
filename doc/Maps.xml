@@ -13,7 +13,7 @@
 
 <Section Label="Maps:Category">
 
-<Heading>Maps: Category and Representations</Heading>
+<Heading>Maps: Categories and Representations</Heading>
 
 <#Include Label="IsHomalgMap">
 <#Include Label="IsHomalgSelfMap">

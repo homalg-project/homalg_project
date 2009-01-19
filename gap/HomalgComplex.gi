@@ -364,6 +364,71 @@ InstallMethod( SupportOfComplex,
     
 end );
 
+##  <#GAPDoc Label="Add:complex">
+##  <ManSection>
+##    <Oper Arg="C, phi" Name="Add" Label="to complexes given a map"/>
+##    <Oper Arg="C, mat" Name="Add" Label="to complexes given a matrix"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##    In the first syntax the map <A>phi</A> is added to the (co)chain complex <A>C</A>
+##    (&see; <Ref Sect="Complexes:Constructors"/>) as the new <E>highest</E> degree
+##    morphism and the altered argument <A>C</A> is returned. In case <A>C</A> is a chain complex, the highest degree
+##    module in <A>C</A> and the target of <A>phi</A> must be <E>identical</E>. In case <A>C</A> is a <E>co</E>chain
+##    complex, the highest degree module in <A>C</A> and the source of <A>phi</A>  must be <E>identical</E>. <P/>
+##    In the second syntax the matrix <A>mat</A> is interpreted as the matrix of the new <E>highest</E> degree morphism
+##    <M>psi</M>, created according to the following rules:
+##    In case <A>C</A> is a chain complex, the highest degree left (resp. right) module <M>C_d</M> in <A>C</A>
+##    is declared as the target of <M>psi</M>, while its source is taken to be a free left (resp. right) module of rank
+##    equal to <C>NrRows</C>(<A>mat</A>) (resp. <C>NrColumns</C>(<A>mat</A>)). For this <C>NrColumns</C>(<A>mat</A>)
+##    (resp. <C>NrRows</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C_d</M>).
+##    In case <A>C</A> is a <E>co</E>chain complex, the highest degree left (resp. right) module <M>C^d</M> in <A>C</A>
+##    is declared as the source of <M>psi</M>, while its target is taken to be a free left (resp. right) module of rank
+##    equal to <C>NrColumns</C>(<A>mat</A>) (resp. <C>NrRows</C>(<A>mat</A>)). For this <C>NrRows</C>(<A>mat</A>)
+##    (resp. <C>Columns</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C^d</M>).
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> mat := HomalgMatrix( "[ 0, 1,   0, 0 ]", 2, 2, ZZ );
+##  <A homalg internal 2 by 2 matrix>
+##  gap> phi := HomalgMap( mat );
+##  <A homomorphism of left modules>
+##  gap> C := HomalgComplex( phi );
+##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> Add( C, mat );
+##  gap> C;
+##  <A sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
+##  gap> Display( C );
+##  -------------------------
+##  at homology degree: 0
+##  Z^(1 x 2)
+##  ------------^------------
+##  [ [  0,  1 ],
+##    [  0,  0 ] ]
+##  
+##  the map is currently represented by the above 2 x 2 matrix
+##  ------------^------------
+##  at homology degree: 1
+##  Z^(1 x 2)
+##  ------------^------------
+##  [ [  0,  1 ],
+##    [  0,  0 ] ]
+##  
+##  the map is currently represented by the above 2 x 2 matrix
+##  ------------^------------
+##  at homology degree: 2
+##  Z^(1 x 2)
+##  -------------------------
+##  gap> IsComplex( C );
+##  true
+##  gap> IsAcyclic( C );
+##  true
+##  gap> IsExactSequence( C );
+##  false
+##  gap> C;
+##  <A non-zero acyclic complex containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( Add,
         "for homalg complexes",
@@ -1082,8 +1147,7 @@ end );
 ##    <Meth Arg="C" Name="ByASmallerPresentation" Label="for complexes"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/>
-##    and <Ref Meth="ByASmallerPresentation" Label="for maps"/>.
+##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
 ##      <Listing Type="Code"><![CDATA[
 ##
 InstallMethod( ByASmallerPresentation,
@@ -1152,7 +1216,7 @@ end );
 ##  currently represented by the above matrix
 ##  -------------------------
 ##  ]]></Example>
-##      An now:
+##      And now:
 ##      <Example><![CDATA[
 ##  gap> ByASmallerPresentation( C );
 ##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
@@ -1184,12 +1248,22 @@ end );
 ##  <ManSection>
 ##    <Func Arg="M[, d]" Name="HomalgComplex" Label="constructor for complexes given a module"/>
 ##    <Func Arg="phi[, d]" Name="HomalgComplex" Label="constructor for complexes given a map"/>
+##    <Func Arg="C[, d]" Name="HomalgComplex" Label="constructor for complexes given a complex"/>
+##    <Func Arg="cm[, d]" Name="HomalgComplex" Label="constructor for complexes given a chain map"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##      The first syntax creates a &homalg; complex (i.e. chain complex) with the single module <A>M</A> at
-##      (homological) degree <A>d</A>. The second syntax creates a &homalg; complex with the single morphism <A>phi</A>,
-##      its source placed at (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>).
-##      If <A>d</A> is not provided it defaults to zero in all cases.
+##      The first syntax creates a &homalg; complex (i.e. chain complex) with the single module <A>M</A>
+##      (&see; <Ref Sect="Modules:Constructors"/>) at (homological) degree <A>d</A>. <P/>
+##      The second syntax creates a &homalg; complex with the single map <A>phi</A>
+##      (&see; <Ref Func="HomalgMap" Label="constructor for maps"/>), its source placed at
+##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
+##      The third syntax creates a &homalg; complex (i.e. chain complex) with the single (co)complex <A>C</A>
+##      at (homological) degree <A>d</A>. <P/>
+##      The fourth syntax creates a &homalg; complex with the single (co)chain map <A>cm</A>
+##      (&see; <Ref Func="HomalgChainMap" Label="constructor for chain maps given a map"/>), its source placed at
+##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
+##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
+##      To add a map (resp. (co)chain map) to a complex use <Ref Oper="Add" Label="to complexes given a map"/>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
@@ -1331,12 +1405,22 @@ end );
 ##  <ManSection>
 ##    <Func Arg="M[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a module"/>
 ##    <Func Arg="phi[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a map"/>
+##    <Func Arg="C[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a complex"/>
+##    <Func Arg="cm[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
 ##      The first syntax creates a &homalg; cocomplex (i.e. cochain complex) with the single module <A>M</A> at
-##      (cohomological) degree <A>d</A>. The second syntax creates a &homalg; cocomplex with the single morphism <A>phi</A>,
-##      its source placed at (cohomological) degree <A>d</A> (and its target at <A>d</A><M>+1</M>).
-##      If <A>d</A> is not provided it defaults to zero in all cases.
+##      (cohomological) degree <A>d</A>. <P/>
+##      The second syntax creates a &homalg; cocomplex with the single map <A>phi</A>
+##      (&see; <Ref Func="HomalgMap" Label="constructor for maps"/>), its source placed at (cohomological)
+##      degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
+##      The third syntax creates a &homalg; cocomplex (i.e. cochain complex) with the single cocomplex <A>C</A> at
+##      (cohomological) degree <A>d</A>. <P/>
+##      The fourth syntax creates a &homalg; cocomplex with the single (co)chain map <A>cm</A>
+##      (&see; <Ref Func="HomalgChainMap" Label="constructor for chain maps given a map"/>), its source placed at
+##      (cohomological) degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
+##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
+##      To add a map (resp. (co)chain map) to a cocomplex use <Ref Oper="Add" Label="to complexes given a map"/>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
@@ -1359,16 +1443,16 @@ end );
 ##  The first possibility:
 ##      <Example><![CDATA[
 ##  <A homomorphism of right modules>
-##  gap> C := HomalgComplex( N );
-##  <A non-zero graded homology object consisting of a single right module at degree 0>
+##  gap> C := HomalgCocomplex( M );
+##  <A non-zero graded cohomology object consisting of a single right module at degree 0>
 ##  gap> Add( C, phi );
 ##  gap> C;
-##  <A complex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  <A cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
 ##  ]]></Example>
 ##  The second possibility:
 ##      <Example><![CDATA[
-##  gap> C := HomalgComplex( phi );
-##  <A non-zero acyclic complex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  gap> C := HomalgCocomplex( phi );
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>

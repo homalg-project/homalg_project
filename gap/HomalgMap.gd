@@ -54,26 +54,6 @@ DeclareCategory( "IsHomalgSelfMap",
 
 ## all properties are declared in homalg.gd for the bigger category IsHomalgMorphism
 
-##  <#GAPDoc Label="Source:map">
-##  <ManSection>
-##    <Attr Arg="phi" Name="Source" Label="for maps"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      The source of the &homalg; map <A>phi</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
-##  <#GAPDoc Label="Range:map">
-##  <ManSection>
-##    <Attr Arg="phi" Name="Range" Label="for maps"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      The target (range) of the &homalg; map <A>phi</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
 ##  <#GAPDoc Label="IsMorphism:map">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsMorphism" Label="for maps"/>
@@ -199,6 +179,28 @@ DeclareCategory( "IsHomalgSelfMap",
 # attributes:
 #
 ####################################
+
+## some attributes are already declared in homalg.gd for the bigger category IsHomalgMorphism
+
+##  <#GAPDoc Label="Source:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="Source" Label="for maps"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      The source of the &homalg; map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="Range:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="Range" Label="for maps"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      The target (range) of the &homalg; map <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="DegreeOfMorphism:map">
 ##  <ManSection>

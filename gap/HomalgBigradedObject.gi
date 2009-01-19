@@ -384,6 +384,40 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgBigradedObject">
+##  <ManSection>
+##    <Oper Arg="BC" Name="HomalgBigradedObject" Label="constructor for bigraded objects given a bicomplex"/>
+##    <Returns>a &homalg; bigraded object</Returns>
+##    <Description>
+##    This constructor creates a homological (resp. cohomological) &homalg; bigraded object given a homological
+##    (resp. cohomological) bicomplex <A>BC</A>
+##    (&see; <Ref Func="HomalgBicomplex" Label="constructor for bicomplexes given a complex of complexes"/>).
+##    This is nothing but the level zero sheet (without differential) of the spectral sequence associated to
+##    the bicomplex <A>BC</A>. So it is the double array of &homalg; objects (i.e. modules or complexes) in <A>BC</A>
+##    forgetting the morphisms.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> d := Resolution( M );;
+##  gap> dd := Hom( d );;
+##  gap> C := Resolution( dd );;
+##  gap> CC := Hom( C );
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  gap> BC := HomalgBicomplex( CC );
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> E0 := HomalgBigradedObject( BC );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( E0 );
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgBigradedObject,
         "for homalg bicomplexes",
@@ -417,6 +451,94 @@ InstallMethod( HomalgBigradedObject,
     
 end );
 
+##  <#GAPDoc Label="AsDifferentialObject:bicomplex">
+##  <ManSection>
+##    <Meth Arg="Er" Name="AsDifferentialObject" Label="for homalg bigraded objects stemming from a bicomplex"/>
+##    <Returns>a &homalg; bigraded object</Returns>
+##    <Description>
+##    Add the induced bidegree <M>( -r, r - 1 )</M> (resp. <M>( r, -r + 1 )</M>) differential to the level <A>r</A>
+##    homological (resp. cohomological) bigraded object stemming from a homological (resp. cohomological) bicomplex.
+##    This method performs side effects on its argument <A>Er</A> and returns it.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> d := Resolution( M );;
+##  gap> dd := Hom( d );;
+##  gap> C := Resolution( dd );;
+##  gap> CC := Hom( C );
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  gap> BC := HomalgBicomplex( CC );
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  ]]></Example>
+##    Now we construct the spectral sequence associated to the bicomplex <M>BC</M>, also called the <E>first</E>
+##    spectral sequence:
+##      <Example><![CDATA[
+##  gap> I_E0 := HomalgBigradedObject( BC );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E0 );
+##  Level 0:
+##  
+##   * *
+##   * *
+##  gap> AsDifferentialObject( I_E0 );
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> I_E0;
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> AsDifferentialObject( I_E0 );
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> I_E1 := DefectOfExactness( I_E0 );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E1 );
+##  Level 1:
+##  
+##   * *
+##   . .
+##  gap> AsDifferentialObject( I_E1 );
+##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> I_E2 := DefectOfExactness( I_E1 );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E2 );
+##  Level 2:
+##  
+##   s .
+##   . .
+##  ]]></Example>
+##    The <E>second</E> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to
+##    the transposed bicomplex:
+##      <Example><![CDATA[
+##  gap> tBC := TransposedBicomplex( BC );
+##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E0 := HomalgBigradedObject( tBC );
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E0 );
+##  Level 0:
+##  
+##   * *
+##   * *
+##  gap> AsDifferentialObject( II_E0 );
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E1 := DefectOfExactness( II_E0 );
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E1 );
+##  Level 1:
+##  
+##   * *
+##   . s
+##  gap> AsDifferentialObject( II_E1 );
+##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E2 := DefectOfExactness( II_E1 );
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E2 );
+##  Level 2:
+##  
+##   s .
+##   . s
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( AsDifferentialObject,
         "for homalg bigraded objects stemming from a bicomplex",

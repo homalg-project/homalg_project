@@ -13,7 +13,7 @@
 
 <Section Label="BigradedObjects:Category">
 
-<Heading>BigradedObjects: Category and Representations</Heading>
+<Heading>BigradedObjects: Categories and Representations</Heading>
 
 <#Include Label="IsHomalgBigradedObject">
 <#Include Label="IsHomalgBigradedObjectAssociatedToAnExactCouple">
@@ -26,6 +26,9 @@
 
 <Section Label="BigradedObjects:Constructors">
 <Heading>Bigraded Objects: Constructors</Heading>
+
+<#Include Label="HomalgBigradedObject">
+<#Include Label="AsDifferentialObject:bicomplex">
 
 </Section>
 
