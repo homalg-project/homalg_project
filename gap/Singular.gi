@@ -143,8 +143,8 @@ InstallGlobalFunction( InitializeSingularTools,
           SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
           SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
           DegreesOfEntries, NonTrivialDegreePerRow, NonTrivialDegreePerColumn,
-          NonTrivialDegreePerRowWithColWeights,
-          NonTrivialDegreePerColumnWithRowWeights;
+          NonTrivialDegreePerRowWithColPosition,
+          NonTrivialDegreePerColumnWithRowPosition;
     
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
@@ -511,6 +511,23 @@ proc DegreesOfEntries (matrix M)\n\
     NonTrivialDegreePerRow := "\n\
 proc NonTrivialDegreePerRow (matrix M)\n\
 {\n\
+  int b = 1;\n\
+  intmat m[1][ncols(M)];\n\
+  int d = deg(0);\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j=j+1)\n\
+    {\n\
+      if ( deg(M[j,i]) > d ) { m[1,i] = deg(M[j,i]); break; }\n\
+    }\n\
+    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
+  }\n\
+  if ( b ) { return(m[1,1]); } else { return(m); }\n\
+}\n\n";
+    
+    NonTrivialDegreePerRowWithColPosition := "\n\
+proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
+{\n\
   intmat m[2][ncols(M)];\n\
   int d = deg(0);\n\
   for (int i=1; i<=ncols(M); i=i+1)\n\
@@ -525,6 +542,23 @@ proc NonTrivialDegreePerRow (matrix M)\n\
     
     NonTrivialDegreePerColumn := "\n\
 proc NonTrivialDegreePerColumn (matrix M)\n\
+{\n\
+  int b = 1;\n\
+  intmat m[1][nrows(M)];\n\
+  int d = deg(0);\n\
+  for (int j=1; j<=nrows(M); j=j+1)\n\
+  {\n\
+    for (int i=1; i<=ncols(M); i=i+1)\n\
+    {\n\
+      if ( deg(M[j,i]) > d ) { m[1,j] = deg(M[j,i]); break; }\n\
+    }\n\
+    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
+  }\n\
+  if ( b ) { return(m[1,1]); } else { return(m); }\n\
+}\n\n";
+    
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
+proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
   int d = deg(0);\n\
@@ -565,7 +599,9 @@ proc NonTrivialDegreePerColumn (matrix M)\n\
     homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     
   end
 );
