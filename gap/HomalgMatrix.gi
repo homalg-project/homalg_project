@@ -15,6 +15,8 @@
 ####################################
 
 # three new representations for the GAP-category IsHomalgMatrix:
+
+##
 DeclareRepresentation( "IshomalgInternalMatrixHullRep",
         IsInternalMatrixHull,
         [ ] );
@@ -24,7 +26,8 @@ DeclareRepresentation( "IshomalgInternalMatrixHullRep",
 ##    <Filt Type="Representation" Arg="A" Name="IsHomalgInternalMatrixRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The internal representation of &homalg; matrices.
+##      The internal representation of &homalg; matrices. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -38,7 +41,8 @@ DeclareRepresentation( "IsHomalgInternalMatrixRep",
 ##    <Filt Type="Representation" Arg="A" Name="IsHomalgExternalMatrixRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The external representation of &homalg; matrices.
+##      The external representation of &homalg; matrices. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

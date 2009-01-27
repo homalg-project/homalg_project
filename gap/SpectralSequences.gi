@@ -404,7 +404,7 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
     ## also called the first spectral sequence of the bicomplex BC;
     ## its limit sheet is the second sheet,
     ## where it also becomes intrinsic (in the abelian category)
-    I_E := HomalgSpectralSequence( BC, 2 );	## enforce computation till the second sheet, even if things collapse earlier
+    I_E := HomalgSpectralSequence( 2, BC );	## enforce computation till the second sheet, even if things stabilize earlier
     
     ## the limit sheet of the first spectral sequence
     I_E_infinity := HighestLevelSheetInSpectralSequence( I_E );
@@ -416,7 +416,7 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
     ## also called the second spectral sequence of the bicomplex BC;
     ## it becomes intrinsic at the second level (w.r.t. some original data)
     ## (e.g. R^{-p} F R^q G => L_{p+q} FG)
-    II_E := HomalgSpectralSequence( 2, tBC );
+    II_E := HomalgSpectralSequence( tBC, 2 );	## the second sheet is the intrinsic sheet of the second spectral sequence
     
     ## the intrinsic sheet of the second spectral sequence
     #II_E2 := CertainSheet( II_E, 2 );
@@ -549,7 +549,7 @@ InstallMethod( SecondSpectralSequenceWithFiltrationOfTotalDefects,
     ## also called the second spectral sequence of the bicomplex BC;
     ## it becomes intrinsic at the second level (w.r.t. some original data)
     ## (e.g. R^{-p} F R^q G => L_{p+q} FG)
-    II_E := HomalgSpectralSequence( 2, tBC );
+    II_E := HomalgSpectralSequence( tBC, 2 );	## the second sheet is the intrinsic sheet of the second spectral sequence
     
     ## filter the total defects with the stable objects
     ## of the second spectral sequence
@@ -559,7 +559,7 @@ InstallMethod( SecondSpectralSequenceWithFiltrationOfTotalDefects,
     ## also called the first spectral sequence of the bicomplex BC;
     ## it becomes intrinsic at the second level (w.r.t. some original data)
     ## which is often its limit sheet
-    I_E := HomalgSpectralSequence( BC, 2 );	## enforce computation till the second sheet, even if things collapse earlier
+    I_E := HomalgSpectralSequence( 2, BC );	## enforce computation till the second sheet, even if things stabilize earlier
     
     ## finally enrich the second spectral sequence with the first
     II_E!.FirstSpectralSequence := I_E;

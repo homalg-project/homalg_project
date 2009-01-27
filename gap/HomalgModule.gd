@@ -82,7 +82,7 @@ DeclareProperty( "IsProjective",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> allows a finite free resolution. <Br/>
-##     (no method installed)
+##      (no method installed)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -122,7 +122,7 @@ DeclareProperty( "IsTorsionFree",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is artinian. <Br/>
-##     (no method installed)
+##      (no method installed)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -136,7 +136,7 @@ DeclareProperty( "IsArtinian",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is cyclic. <Br/>
-##     (no method installed)
+##      (no method installed)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -189,7 +189,7 @@ DeclareProperty( "IsPure",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> has constant rank. <Br/>
-##     (no method installed)
+##      (no method installed)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -397,40 +397,40 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgRing, IsInt ] );
 
-DeclareOperation( "LeftPresentationWithWeights",
+DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "LeftPresentationWithWeights",
+DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix, IsInt ] );
 
-DeclareOperation( "LeftPresentationWithWeights",
+DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "RightPresentationWithWeights",
+DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "RightPresentationWithWeights",
+DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix, IsInt ] );
 
-DeclareOperation( "RightPresentationWithWeights",
+DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgFreeLeftModuleWithWeights",
+DeclareOperation( "HomalgFreeLeftModuleWithDegrees",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "HomalgFreeLeftModuleWithWeights",
+DeclareOperation( "HomalgFreeLeftModuleWithDegrees",
         [ IsInt, IsHomalgRing, IsInt ] );
 
-DeclareOperation( "HomalgFreeLeftModuleWithWeights",
+DeclareOperation( "HomalgFreeLeftModuleWithDegrees",
         [ IsInt, IsHomalgRing ] );
 
-DeclareOperation( "HomalgFreeRightModuleWithWeights",
+DeclareOperation( "HomalgFreeRightModuleWithDegrees",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "HomalgFreeRightModuleWithWeights",
+DeclareOperation( "HomalgFreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing, IsInt ] );
 
-DeclareOperation( "HomalgFreeRightModuleWithWeights",
+DeclareOperation( "HomalgFreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing ] );
 
 DeclareOperation( "POW",

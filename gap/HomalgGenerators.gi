@@ -8,6 +8,22 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="Generators:intro">
+##  To present a left/right module it suffices to take a matrix <A>rel</A> and interpret its rows/columns
+##  as relations among <M>n</M> <E>abstract</E> generators, where <M>n</M> is the number of columns/rows
+##  of <A>rel</A>. Only that these abstract generators are useless when it comes to specific modules like
+##  modules of homomorphisms, where one expects the generators to be maps between modules. For this
+##  reason a presentation of a module in &homalg; is not merely a matrix of relations, but together with
+##  a set of generators.
+##  <P/>
+##  In &homalg; a set of generators of a left/right module is given by a matrix <A>gen</A> with rows/columns
+##  being interpreted as the generators.
+##  <P/>
+##  The data structure of a module in &homalg; is designed to contain not only one but several sets of generators
+##  (together with their sets of relations). The different sets of generators are linked with so-called
+##  transition matrices (&see; Chapter <Ref Chap="Modules"/>).
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,6 +31,18 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgGenerators:
+
+##  <#GAPDoc Label="IsGeneratorsOfFinitelyGeneratedModuleRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="rel" Name="IsGeneratorsOfFinitelyGeneratedModuleRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of a finite set of generators of a finitely generated &homalg; module. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgGenerators"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsGeneratorsOfFinitelyGeneratedModuleRep",
         IsHomalgGenerators,
         [ "generators", "relations_of_hullmodule" ] );

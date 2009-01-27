@@ -15,17 +15,19 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgComplex
+
 ##  <#GAPDoc Label="IsComplexOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="C" Name="IsComplexOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of complexes of finitley generated &homalg; modules. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of complexes of finitley generated &homalg; modules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgComplex"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsComplexOfFinitelyPresentedObjectsRep",
         IsHomalgComplex and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -35,12 +37,13 @@ DeclareRepresentation( "IsComplexOfFinitelyPresentedObjectsRep",
 ##    <Filt Type="Representation" Arg="C" Name="IsCocomplexOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of cocomplexes of finitley generated &homalg; modules. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of cocomplexes of finitley generated &homalg; modules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgComplex"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsCocomplexOfFinitelyPresentedObjectsRep",
         IsHomalgComplex and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -1149,7 +1152,6 @@ end );
 ##    <Description>
 ##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
 ##      <Listing Type="Code"><![CDATA[
-##
 InstallMethod( ByASmallerPresentation,
         "for homalg complexes",
         [ IsHomalgComplex ],
@@ -1252,14 +1254,14 @@ end );
 ##    <Func Arg="cm[, d]" Name="HomalgComplex" Label="constructor for complexes given a chain map"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##      The first syntax creates a &homalg; complex (i.e. chain complex) with the single module <A>M</A>
+##      The first syntax creates a complex (i.e. chain complex) with the single &homalg; module <A>M</A>
 ##      (&see; <Ref Sect="Modules:Constructors"/>) at (homological) degree <A>d</A>. <P/>
-##      The second syntax creates a &homalg; complex with the single map <A>phi</A>
+##      The second syntax creates a complex with the single &homalg; map <A>phi</A>
 ##      (&see; <Ref Func="HomalgMap" Label="constructor for maps"/>), its source placed at
 ##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
-##      The third syntax creates a &homalg; complex (i.e. chain complex) with the single (co)complex <A>C</A>
+##      The third syntax creates a complex (i.e. chain complex) with the single &homalg; (co)complex <A>C</A>
 ##      at (homological) degree <A>d</A>. <P/>
-##      The fourth syntax creates a &homalg; complex with the single (co)chain map <A>cm</A>
+##      The fourth syntax creates a complex with the single &homalg; (co)chain map <A>cm</A>
 ##      (&see; <Ref Func="HomalgChainMap" Label="constructor for chain maps given a map"/>), its source placed at
 ##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
@@ -1409,14 +1411,14 @@ end );
 ##    <Func Arg="cm[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##      The first syntax creates a &homalg; cocomplex (i.e. cochain complex) with the single module <A>M</A> at
+##      The first syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; module <A>M</A> at
 ##      (cohomological) degree <A>d</A>. <P/>
-##      The second syntax creates a &homalg; cocomplex with the single map <A>phi</A>
+##      The second syntax creates a cocomplex with the single &homalg; map <A>phi</A>
 ##      (&see; <Ref Func="HomalgMap" Label="constructor for maps"/>), its source placed at (cohomological)
 ##      degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
-##      The third syntax creates a &homalg; cocomplex (i.e. cochain complex) with the single cocomplex <A>C</A> at
+##      The third syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; cocomplex <A>C</A> at
 ##      (cohomological) degree <A>d</A>. <P/>
-##      The fourth syntax creates a &homalg; cocomplex with the single (co)chain map <A>cm</A>
+##      The fourth syntax creates a cocomplex with the single &homalg; (co)chain map <A>cm</A>
 ##      (&see; <Ref Func="HomalgChainMap" Label="constructor for chain maps given a map"/>), its source placed at
 ##      (cohomological) degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>

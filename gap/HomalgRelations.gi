@@ -8,6 +8,17 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="Relations:intro">
+##  A finite presentation of a module is given by a finite set of generators and a finite set of relations
+##  among these generators. In &homalg; a set of relations of a left/right module is given by a matrix <A>rel</A>,
+##  the rows/columns of which are interpreted as relations among <M>n</M> generators, <M>n</M> being the number
+##  of columns/rows of the matrix <A>rel</A>.
+##  <P/>
+##  The data structure of a module in &homalg; is designed to contain not only one but several sets of relations
+##  (together with corresponding sets of generators). The different sets of relations are linked with so-called
+##  transition matrices (&see; Chapter <Ref Chap="Modules"/>).
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,6 +26,18 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgRelations:
+
+##  <#GAPDoc Label="IsRelationsOfFinitelyPresentedModuleRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="rel" Name="IsRelationsOfFinitelyPresentedModuleRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of a finite set of relations of a finitely presented &homalg; module. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRelations"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsRelationsOfFinitelyPresentedModuleRep",
         IsHomalgRelations,
         [ "relations" ] );

@@ -1690,7 +1690,7 @@ InstallMethod( NonTrivialDegreePerRow,
     RP := homalgTable( R );
     
     if IsBound(RP!.NonTrivialDegreePerRow) then
-        return RP!.NonTrivialDegreePerRow( C )[1];
+        return RP!.NonTrivialDegreePerRow( C );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1720,7 +1720,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     RP := homalgTable( R );
     
     if IsBound(RP!.NonTrivialDegreePerColumn) then
-        return RP!.NonTrivialDegreePerColumn( C )[1];
+        return RP!.NonTrivialDegreePerColumn( C );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1757,9 +1757,9 @@ InstallMethod( NonTrivialDegreePerRow,
     
     if IsBound(RP!.NonTrivialDegreePerRow) then
         if Length( w ) = 1 then
-            return RP!.NonTrivialDegreePerRow( C )[1] + w[1];
+            return RP!.NonTrivialDegreePerRow( C ) + w[1];
         else
-            e := RP!.NonTrivialDegreePerRow( C );
+            e := RP!.NonTrivialDegreePerRowWithColPosition( C );
             return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_weights[e[2][i]] );
         fi;
     fi;
@@ -1798,9 +1798,9 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     if IsBound(RP!.NonTrivialDegreePerColumn) then
         if Length( w ) = 1 then
-            return RP!.NonTrivialDegreePerColumn( C )[1] + w[1];
+            return RP!.NonTrivialDegreePerColumn( C ) + w[1];
         else
-            e := RP!.NonTrivialDegreePerColumn( C );
+            e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
             return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_weights[e[2][j]] );
         fi;
     fi;

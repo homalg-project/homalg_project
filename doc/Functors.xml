@@ -13,17 +13,57 @@
 
 <Section Label="Functors:Category">
 
+<#Include Label="Functors:intro">
+
 <Heading>Functors: Category and Representations</Heading>
+
+<#Include Label="IsHomalgFunctor">
+
+<#Include Label="IsHomalgFunctorRep">
 
 </Section>
 
 <Section Label="Functors:Constructors">
 <Heading>Functors: Constructors</Heading>
 
+<#Include Label="CreateHomalgFunctor">
+<#Include Label="InsertObjectInMultiFunctor">
+<#Include Label="RightSatelliteOfCofunctor">
+<#Include Label="LeftSatelliteOfFunctor">
+<#Include Label="RightDerivedCofunctor">
+<#Include Label="LeftDerivedFunctor">
+<#Include Label="ComposeFunctors">
+
+</Section>
+
+<Section Label="Functors:Attributes">
+<Heading>Functors: Attributes</Heading>
+
+<#Include Label="Genesis:functor">
+
 </Section>
 
 <Section Label="Functors:Basic">
 <Heading>Basic Functors</Heading>
+
+<#Include Label="functor_Cokernel">
+<#Include Label="Cokernel">
+<#Include Label="functor_ImageSubmodule">
+<#Include Label="ImageSubmodule">
+<#Include Label="functor_Kernel">
+<#Include Label="Kernel">
+<#Include Label="functor_DefectOfExactness">
+<#Include Label="DefectOfExactness">
+<#Include Label="Functor_Hom">
+<#Include Label="Hom">
+<#Include Label="Functor_TensorProduct">
+<#Include Label="TensorProduct">
+<#Include Label="Functor_Ext">
+<#Include Label="Functor_Tor">
+<#Include Label="Functor_RHom">
+<#Include Label="Functor_LTensorProduct">
+<#Include Label="Functor_HomHom">
+<#Include Label="Functor_LHomHom">
 
 </Section>
 
@@ -39,6 +79,10 @@
 
 <Section Label="Functors:Operations">
 <Heading>Functors: Operations and Functions</Heading>
+
+<#Include Label="NameOfFunctor">
+<#Include Label="InstallFunctor">
+<#Include Label="InstallDeltaFunctor">
 
 </Section>
 

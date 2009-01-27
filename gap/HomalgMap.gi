@@ -8,6 +8,19 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="Maps:intro">
+##    A &homalg; map is a data structures for maps (module homomorphisms) between finitely generated modules.
+##    Each map in &homalg; knows its source (&see; <Ref Attr="Source" Label="for maps"/>) and its target
+##    (&see; <Ref Attr="Range" Label="for maps"/>). A map is represented by a &homalg; matrix relative to the
+##    current set of generators of the source resp. target &homalg; module. As with modules
+##    (&see; Chapter <Ref Chap="Modules"/>), maps in &homalg; are realized in an intrinsic manner:
+##    If the presentations of the source or/and target module are altered after the map was constructed,
+##    a new adapted representation matrix of the map is automatically computed whenever needed.
+##    For this the internal transition matrices of the modules are used. &homalg; uses the so-called
+##    <E>associative</E> convention for maps. This means that maps of left modules are applied
+##    from the right, whereas maps of right modules from the left.
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,17 +28,19 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgMap
+
 ##  <#GAPDoc Label="IsMapOfFinitelyGeneratedModulesRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="phi" Name="IsMapOfFinitelyGeneratedModulesRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of maps between finitley generated &homalg; modules. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##      The &GAP; representation of maps between finitley generated &homalg; modules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsMapOfFinitelyGeneratedModulesRep",
         IsHomalgMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [ "source", "target", "matrices", "index_pairs_of_presentations" ] );
@@ -469,7 +484,7 @@ end );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  gap> mat := HomalgMatrix( "[ 1, 0, -2, -4,   0, 1, 4, 7,   1, 0, -2, -4 ]", 3, 4, ZZ );;
 ##  <A homalg internal 3 by 4 matrix>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -478,16 +493,16 @@ end );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> Display( phi );
-##  [ [  0,  3,  6,  9 ],
-##    [  0,  2,  4,  6 ],
-##    [  0,  3,  6,  9 ] ]
+##  [ [   1,   0,  -2,  -4 ],
+##    [   0,   1,   4,   7 ],
+##    [   1,   0,  -2,  -4 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> ByASmallerPresentation( phi );
 ##  <A homomorphism of left modules>
 ##  gap> Display( phi );
-##  [ [  0,  0,  0 ],
-##    [  2,  0,  0 ] ]
+##  [ [   0,   0,   0 ],
+##    [   1,  -1,  -2 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
 ##  gap> M;
@@ -847,8 +862,8 @@ end );
 ##      target module are altered after the map was constructed, a new adapted representation matrix of the map is
 ##      automatically computed whenever needed. For this the internal transition matrices of the modules are used.
 ##      If source and target are identical objects, and only then, the map is created as a selfmap (endomorphism).
-##      &homalg; uses the associative convention for maps. This means that maps of left modules are applied from right,
-##      whereas maps of right modules from the left.
+##      &homalg; uses the so-called <E>associative</E> convention for maps. This means that maps of left modules are
+##      applied from the right, whereas maps of right modules from the left.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
@@ -859,7 +874,7 @@ end );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[  0, 3, 6, 9,   0, 2, 4, 6,   0, 3, 6, 9 ]", 3, 4, ZZ );
+##  gap> mat := HomalgMatrix( "[ 1, 0, -2, -4,   0, 1, 4, 7,   1, 0, -2, -4 ]", 3, 4, ZZ );;
 ##  <A homalg internal 3 by 4 matrix>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -868,9 +883,9 @@ end );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> Display( phi );
-##  [ [  0,  3,  6,  9 ],
-##    [  0,  2,  4,  6 ],
-##    [  0,  3,  6,  9 ] ]
+##  [ [   1,   0,  -2,  -4 ],
+##    [   0,   1,   4,   7 ],
+##    [   1,   0,  -2,  -4 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> ByASmallerPresentation( M );
@@ -878,8 +893,8 @@ end );
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> Display( phi );
-##  [ [   0,   8,  16,  24 ],
-##    [   0,   3,   6,   9 ] ]
+##  [ [   2,   1,   0,  -1 ],
+##    [   1,   0,  -2,  -4 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 4 matrix
 ##  gap> ByASmallerPresentation( N );
@@ -887,15 +902,15 @@ end );
 ##  gap> Display( N );
 ##  Z/< 4 > + Z^(1 x 2)
 ##  gap> Display( phi );
-##  [ [  -16,    0,    0 ],
-##    [   -6,    0,    0 ] ]
+##  [ [  -8,   0,   0 ],
+##    [  -3,  -1,  -2 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
 ##  gap> ByASmallerPresentation( phi );
 ##  <A homomorphism of left modules>
 ##  gap> Display( phi );
-##  [ [  0,  0,  0 ],
-##    [  2,  0,  0 ] ]
+##  [ [   0,   0,   0 ],
+##    [   1,  -1,  -2 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
 ##  ]]></Example>
@@ -965,14 +980,14 @@ InstallGlobalFunction( HomalgMap,
             fi;
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[3] ) then
                 if IsBound( degrees_s )  then
-                    source := HomalgFreeLeftModuleWithWeights( HomalgRing( arg[3] ), degrees_s );
+                    source := HomalgFreeLeftModuleWithDegrees( HomalgRing( arg[3] ), degrees_s );
                 else
                     nr_rows := NrRows( mat );
                     source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
                 fi;
             else
                 if IsBound( degrees_s )  then
-                    source := HomalgFreeRightModuleWithWeights( HomalgRing( arg[3] ), degrees_s );
+                    source := HomalgFreeRightModuleWithDegrees( HomalgRing( arg[3] ), degrees_s );
                 else
                     nr_columns := NrColumns( mat );
                     source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
@@ -1015,8 +1030,8 @@ InstallGlobalFunction( HomalgMap,
         
         if left then
             if IsBound( degrees_s ) then
-                source := HomalgFreeLeftModuleWithWeights( R, degrees_s );
-                target := HomalgFreeLeftModuleWithWeights( R, degrees_t );
+                source := HomalgFreeLeftModuleWithDegrees( R, degrees_s );
+                target := HomalgFreeLeftModuleWithDegrees( R, degrees_t );
             else
                 source := HomalgFreeLeftModule( NrRows( matrix ), R );
                 target := HomalgFreeLeftModule( NrColumns( matrix ), R );
@@ -1024,8 +1039,8 @@ InstallGlobalFunction( HomalgMap,
             type := TheTypeHomalgMapOfLeftModules;
         else
             if IsBound( degrees_s ) then
-                source := HomalgFreeRightModuleWithWeights( R, degrees_s );
-                target := HomalgFreeRightModuleWithWeights( R, degrees_t );
+                source := HomalgFreeRightModuleWithDegrees( R, degrees_s );
+                target := HomalgFreeRightModuleWithDegrees( R, degrees_t );
             else
                 source := HomalgFreeRightModule( NrColumns( matrix ), R );
                 target := HomalgFreeRightModule( NrRows( matrix ), R );

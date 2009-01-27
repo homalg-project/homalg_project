@@ -15,17 +15,19 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgChainMap
+
 ##  <#GAPDoc Label="IsChainMapOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="c" Name="IsChainMapOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of chain maps of finitley generated &homalg; modules. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##      The &GAP; representation of chain maps of finitley generated &homalg; modules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
         IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [  ] );
@@ -35,12 +37,13 @@ DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
 ##    <Filt Type="Representation" Arg="c" Name="IsCochainMapOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of cochain maps of finitley generated &homalg; modules. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##      The &GAP; representation of cochain maps of finitley generated &homalg; modules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsCochainMapOfFinitelyPresentedObjectsRep",
         IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
         [  ] );
@@ -839,7 +842,6 @@ end );
 ##    <Description>
 ##    See <Ref Meth="ByASmallerPresentation" Label="for complexes"/> on complexes.
 ##      <Listing Type="Code"><![CDATA[
-##
 InstallMethod( ByASmallerPresentation,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
@@ -979,13 +981,13 @@ end );
 ##    <Func Arg="phi[, C][, D][, d]" Name="HomalgChainMap" Label="constructor for chain maps given a map"/>
 ##    <Returns>a &homalg; chain map</Returns>
 ##    <Description>
-##      The constructor creates a (co)chain map given a source (co)chain complex <A>C</A>, a target (co)chain complex
-##      <A>D</A> (&see; <Ref Sect="Modules:Constructors"/>), and a map <A>phi</A>
-##      (&see; <Ref Sect="Maps:Constructors"/>)at (co)homological degree <A>d</A>. The returned (co)chain map will
-##      cautiously be indicated using parenthesis: <Q>chain map</Q>. To verify if the result is indeed a (co)chain map use
-##      <Ref Prop="IsMorphism" Label="for chain maps"/>. If source and target are identical objects, and only then,
-##      the (co)chain map is created as a (co)chain selfmap.
-##      <Br/><Br/>
+##      The constructor creates a (co)chain map given a source &homalg; (co)chain complex <A>C</A>,
+##      a target &homalg; (co)chain complex <A>D</A> (&see; <Ref Sect="Modules:Constructors"/>), and a
+##      &homalg; map <A>phi</A> (&see; <Ref Sect="Maps:Constructors"/>)at (co)homological degree <A>d</A>.
+##      The returned (co)chain map will cautiously be indicated using parenthesis: <Q>chain map</Q>.
+##      To verify if the result is indeed a (co)chain map use <Ref Prop="IsMorphism" Label="for chain maps"/>.
+##      If source and target are identical objects, and only then, the (co)chain map is created as a (co)chain selfmap.
+##      <P/>
 ##      The following examples shows a chain map that induces the zero map on homology, but is itself <E>not</E> zero
 ##      in the derived category:
 ##      <Example><![CDATA[

@@ -16,15 +16,47 @@
 
 # three new GAP-categories:
 
+##  <#GAPDoc Label="IsHomalgGenerators">
+##  <ManSection>
+##    <Filt Type="Category" Arg="rel" Name="IsHomalgGenerators"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; generators.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgGenerators",
         IsAttributeStoringRep );
 
 ## CAUTION: in the code the following two categories are the only ones for sets of generators,
 ##          i.e. IsHomalgGenerators and not IsHomalgGeneratorsOfLeftModule => IsHomalgGeneratorsOfRightModule
 
+##  <#GAPDoc Label="IsHomalgGeneratorsOfLeftModule">
+##  <ManSection>
+##    <Filt Type="Category" Arg="rel" Name="IsHomalgGeneratorsOfLeftModule"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; generators of a left module. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgGenerators</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgGeneratorsOfLeftModule",
         IsHomalgGenerators );
 
+##  <#GAPDoc Label="IsHomalgGeneratorsOfRightModule">
+##  <ManSection>
+##    <Filt Type="Category" Arg="rel" Name="IsHomalgGeneratorsOfRightModule"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of &homalg; generators of a right module. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgGenerators</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareCategory( "IsHomalgGeneratorsOfRightModule",
         IsHomalgGenerators );
 
@@ -34,6 +66,17 @@ DeclareCategory( "IsHomalgGeneratorsOfRightModule",
 #
 ####################################
 
+##  <#GAPDoc Label="IsReduced">
+##  <ManSection>
+##    <Prop Arg="gen" Name="IsReduced"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; set of generators <A>gen</A> is marked reduced. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareProperty( "IsReduced",
         IsHomalgGenerators );
 
@@ -43,9 +86,27 @@ DeclareProperty( "IsReduced",
 #
 ####################################
 
+##  <#GAPDoc Label="ProcedureToNormalizeGenerators">
+##  <ManSection>
+##    <Attr Arg="gen" Name="ProcedureToNormalizeGenerators"/>
+##    <Returns>a function</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "ProcedureToNormalizeGenerators",
         IsHomalgGenerators );
 
+##  <#GAPDoc Label="ProcedureToReadjustGenerators">
+##  <ManSection>
+##    <Attr Arg="gen" Name="ProcedureToReadjustGenerators"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      A function that takes the rows/columns of <A>gen</A> and returns an object (e.g. a matrix) that
+##      can be interpreted as a generator (this is important for modules of homomorphisms).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "ProcedureToReadjustGenerators",
         IsHomalgGenerators );
 

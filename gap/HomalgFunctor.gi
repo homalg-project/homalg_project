@@ -8,6 +8,49 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="Functors:intro">
+##    Functors and their natural transformations form the heart of the &homalg; package. Usually, a functor is realized
+##    in computer algebra systems as a procedure which can be applied to a certain type of objects. In <Cite Key="BR"/>
+##    it was explained how to implement a functor of abelian categories -- by itself -- as an object which can be
+##    further manipulated (composed, derived, ...).
+##    So in addition to the constructor <Ref Oper="CreateHomalgFunctor" Label="constructor for functors"/>
+##    which is used to create functors from scratch, &homalg; provides further easy-to-use constructors
+##    to create new functors out of existing ones:
+##    <List>
+##      <Item><Ref Oper="InsertObjectInMultiFunctor" Label="constructor for functors given a multi-functor and an object"/></Item>
+##      <Item><Ref Oper="RightSatelliteOfCofunctor" Label="constructor of the right satellite of a contravariant functor"/></Item>
+##      <Item><Ref Oper="LeftSatelliteOfFunctor" Label="constructor of the left satellite of a covariant functor"/></Item>
+##      <Item><Ref Oper="RightDerivedCofunctor" Label="constructor of the right derived functor of a contravariant functor"/></Item>
+##      <Item><Ref Oper="LeftDerivedFunctor" Label="constructor of the left derived functor of a covariant functor"/></Item>
+##      <Item><Ref Oper="ComposeFunctors" Label="constructor for functors given two functors"/></Item>
+##    </List>
+##    In &homalg; each functor is implemented as a &GAP4; object.
+##    <P/>
+##    So-called installers (&see; <Ref Oper="InstallFunctor"/> and <Ref Oper="InstallDeltaFunctor"/>)
+##    take such a functor object and create operations in order to apply the functor on objects, morphisms,
+##    complexes (of objects or again of complexes), and chain maps. The installer <Ref Oper="InstallDeltaFunctor"/>
+##    creates additional operations for <M>\delta</M>-functors in order to compute connecting homomorphisms,
+##    exact triangles, and associated long exact sequences by starting with a short exact sequence.
+##    <P/>
+##    In &homalg; special emphasis is laid on the action of functors on <E>morphisms</E>, as an essential part of the
+##    very definition of a functor. This is for no obvious reason often neglected in computer algebra systems.
+##    Starting from a functor where the action on morphisms is also defined, all the above constructors
+##    again create functors with actions both on objects and on morphisms (and hence on chain complexes and chain maps).
+##    <P/>
+##    It turned out that in a variety of situations a caching mechanism for functors is not only extremely
+##    useful (e.g. to avoid repeated expensive computations) but also an absolute necessity for the coherence of data.
+##    Functors in &homalg; are therefore endowed with a caching mechanism.
+##    <P/>
+##    If <M>R</M> is a &homalg; ring in which the component <M>R</M>!.<C>ByASmallerPresentation</C> is set to true
+##    <Br/><Br/>
+##    <C>R!.ByASmallerPresentation := true</C>;
+##    <Br/><Br/>
+##    any functor which returns an object over <M>R</M> will first apply
+##    <Ref Oper="ByASmallerPresentation" Label="for modules"/> to its result before returning it. <P/>
+##    One of the highlights in &homalg; is the computation of Grothendieck's spectral sequences connecting
+##    the composition of the derivations of two functors with the derived functor of their composite.
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,11 +58,25 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgFunctor:
+
+##  <#GAPDoc Label="IsHomalgFunctorRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="E" Name="IsHomalgFunctorRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of &homalg; (multi-)functors. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgFunctor"/>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsHomalgFunctorRep",
         IsHomalgFunctor,
         [ ] );
 
 # a new subrepresentation of the representation IsContainerForWeakPointersRep:
+
+##
 DeclareRepresentation( "IsContainerForWeakPointersOnComputedValuesOfFunctorRep",
         IsContainerForWeakPointersRep,
         [ "weak_pointers", "counter", "deleted" ] );
@@ -81,6 +138,21 @@ InstallMethod( NaturalGeneralizedEmbedding,
     
 end );
 
+##  <#GAPDoc Label="NameOfFunctor">
+##  <ManSection>
+##    <Oper Arg="F" Name="NameOfFunctor"/>
+##    <Returns>a string</Returns>
+##    <Description>
+##      The name of the &homalg; functor <A>F</A>.
+##      <Example><![CDATA[
+##  gap> NameOfFunctor( Functor_Ext );
+##  "Ext"
+##  gap> Display( Functor_Ext );
+##  Ext
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( NameOfFunctor,
         "for homalg functors",
@@ -324,7 +396,7 @@ InstallMethod( FunctorObj,
     
     if HasGenesis( Functor ) then
         genesis := Genesis( Functor );
-        if genesis[1] = "ApplyFunctor" then
+        if genesis[1] = "InsertObjectInMultiFunctor" then
             Functor_orig := genesis[2];
             arg_pos := genesis[3];
             Functor_arg := genesis[4];
@@ -515,7 +587,7 @@ InstallMethod( FunctorMap,
     
     if HasGenesis( Functor ) then
         genesis := Genesis( Functor );
-        if genesis[1] = "ApplyFunctor" then
+        if genesis[1] = "InsertObjectInMultiFunctor" then
             Functor_orig := genesis[2];
             arg_pos := genesis[3];
             Functor_arg := genesis[4];
@@ -578,7 +650,7 @@ InstallMethod( FunctorMap,
                 hull_phi :=
                   HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
                 
-                ## otherwise the result mor cannot be automatically marked IsMorphism
+                ## otherwise the result mor cannot automatically be marked IsMorphism
                 SetIsMorphism( hull_phi, true );
             fi;
         else
@@ -586,6 +658,17 @@ InstallMethod( FunctorMap,
         fi;
         
         mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
+        
+        ## CAUTION: this is experimental!!!
+        if HasIsGeneralizedMonomorphism( emb_source ) and IsGeneralizedMonomorphism( emb_source ) and
+           HasIsGeneralizedMonomorphism( emb_target ) and IsGeneralizedMonomorphism( emb_target ) and
+           HasIsMorphism( phi ) and IsMorphism( phi ) then
+            
+            ## check assertion
+            Assert( 1, IsMorphism( mor ) );
+            
+            SetIsMorphism( mor, true );
+        fi;
         
     fi;
     
@@ -3816,7 +3899,17 @@ InstallMethod( InstallFunctorOnChainMaps,
     
 end );
 
-##
+##  <#GAPDoc Label="InstallFunctor">
+##  <ManSection>
+##    <Oper Arg="F" Name="InstallFunctor"/>
+##    <Description>
+##      Install several methods for &GAP; operations that get declared under the name of the &homalg; (multi-)functor
+##      <A>F</A> (&see; <Ref Oper="NameOfFunctor"/>). These methods are used to apply the functor to objects, morphisms,
+##      (co)complexes of objects, and (co)chain maps. The objects in the (co)complexes might again be (co)complexes.
+##      <P/>
+##      (For purely technical reasons the multiplicity of the functor might at most be three.
+##       This restriction should disappear in future versions.)
+##      <Listing Type="Code"><![CDATA[
 InstallMethod( InstallFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -3840,6 +3933,11 @@ InstallMethod( InstallFunctor,
     fi;
     
 end );
+##  ]]></Listing>
+##      The method does not return anything.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
 InstallGlobalFunction( HelperToInstallUnivariateDeltaFunctor,
@@ -5445,7 +5543,18 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
     
 end );
 
-##
+##  <#GAPDoc Label="InstallDeltaFunctor">
+##  <ManSection>
+##    <Oper Arg="F" Name="InstallDeltaFunctor"/>
+##    <Description>
+##      In case <A>F</A> is a <M>\delta</M>-functor in the sense of Grothendieck the procedure installs several
+##      operations under the name of the &homalg; (multi-)functor <A>F</A> (&see; <Ref Oper="NameOfFunctor"/>)
+##      allowing one to compute connecting homomorphisms, exact triangles, and associated long exact sequences.
+##      The input of these operations is a short exact sequence.
+##      <P/>
+##      (For purely technical reasons the multiplicity of the functor might at most be three.
+##       This restriction should disappear in future versions.)
+##      <Listing Type="Code"><![CDATA[
 InstallMethod( InstallDeltaFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -5473,6 +5582,11 @@ InstallMethod( InstallDeltaFunctor,
     fi;
     
 end );
+##  ]]></Listing>
+##      The method does not return anything.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -5480,6 +5594,21 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="CreateHomalgFunctor">
+##  <ManSection>
+##    <Func Arg="list1, list2, ..." Name="CreateHomalgFunctor" Label="constructor for functors"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      This constructor is used to create functors for &homalg; from scratch. <A>listN</A> is of the form
+##      <A>listN = [ stringN, valueN ]</A>. <A>stringN</A> will be the name of a component of the created functor and
+##      <A>valueN</A> will be its value. This constructor is listed here for the sake of completeness.
+##      Its documentation is rather better placed in a &homalg; programmers guide. The remaining constructors
+##      create new functors out of existing ones and are probably more interesting for end users.
+##      <P/>
+##      The constructor does <E>not</E> invoke <Ref Oper="InstallFunctor"/>. This has to be done manually!
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallGlobalFunction( CreateHomalgFunctor,
   function( arg )
@@ -5498,12 +5627,42 @@ InstallGlobalFunction( CreateHomalgFunctor,
     ## Objectify:
     Objectify( type, functor );
     
+    SetGenesis( functor, Concatenation( [ "CreateHomalgFunctor" ], arg ) );
+    
     return functor;
     
 end );
 
+##  <#GAPDoc Label="InsertObjectInMultiFunctor">
+##  <ManSection>
+##    <Oper Arg="F, p, obj, H" Name="InsertObjectInMultiFunctor" Label="constructor for functors given a multi-functor and an object"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      Given a &homalg; multi-functor <A>F</A> with multiplicity <M>m</M> and a string <A>H</A> return the functor
+##      <C>Functor_</C><A>H</A> <M>:=</M> <A>F</A><M>(...,</M><A>obj</A><M>,...)</M>, where <A>obj</A> is inserted at
+##      the <A>p</A>-th position. Of course <A>obj</A> must be an object (e.g. ring, module, ...) that can be inserted
+##      at this particular position. The string <A>H</A> becomes the name of the returned functor
+##      (&see; <Ref Oper="NameOfFunctor"/>). The variable <C>Functor_</C><A>H</A> will automatically be assigned if free,
+##      otherwise a warning is issued.
+##      <P/>
+##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
+##      under the name <A>H</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ * 1;
+##  <The free right module of rank 1 on a free generator>
+##  gap> InsertObjectInMultiFunctor( Functor_Hom, 2, ZZ * 1, "Hom_ZZ" );
+##  <The functor Hom_ZZ>
+##  gap> Functor_Hom_ZZ;	## got automatically defined
+##  <The functor Hom_ZZ>
+##  gap> Hom_ZZ;		## got automatically defined
+##  <Operation "Hom_ZZ">
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
-InstallMethod( ApplyFunctor,
+InstallMethod( InsertObjectInMultiFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
         
@@ -5548,7 +5707,8 @@ InstallMethod( ApplyFunctor,
     
     Fp := CallFuncList( CreateHomalgFunctor, data );
     
-    SetGenesis( Fp, [ "ApplyFunctor", Functor, p, o ] );
+    ResetFilterObj( Fp, Genesis );
+    SetGenesis( Fp, [ "InsertObjectInMultiFunctor", Functor, p, o ] );
     
     if m > 1 then
         Fp!.ContainerForWeakPointersOnComputedBasicObjects :=
@@ -5574,6 +5734,40 @@ InstallMethod( ApplyFunctor,
     
 end );
 
+##  <#GAPDoc Label="ComposeFunctors">
+##  <ManSection>
+##    <Oper Arg="F[, p], G[, H]" Name="ComposeFunctors" Label="constructor for functors given two functors"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      Given two &homalg; (multi-)functors <A>F</A> and <A>G</A> and a string <A>H</A> return the composed functor
+##      <C>Functor_</C><A>H</A> <M>:=</M> <A>F</A><M>(...,</M><A>G</A><M>(...),...)</M>, where <A>G</A> is inserted at
+##      the <A>p</A>-th position. Of course <A>G</A> must be a functor that can be inserted
+##      at this particular position. The string <A>H</A> becomes the name of the returned functor
+##      (&see; <Ref Oper="NameOfFunctor"/>). The variable <C>Functor_</C><A>H</A> will automatically be assigned if free,
+##      otherwise a warning is issued.
+##      <P/>
+##      If <A>p</A> is not specified it is assumed <M>1</M>. If the string <A>H</A> is not specified the names
+##      of <A>F</A> and <A>G</A> are concatenated in this order (&see; <Ref Oper="NameOfFunctor"/>).
+##      <P/>
+##      <A>F</A> * <A>G</A> is a shortcut for <C>ComposeFunctors</C>(<A>F</A>,1,<A>G</A>).
+##      <P/>
+##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
+##      under the name <A>H</A>.
+##      <P/>
+##      <#Include Label="ComposeFunctors:example">
+##      <P/>
+##      Check this:
+##      <Example><![CDATA[
+##  gap> Functor_Hom * Functor_TensorProduct;
+##  <The functor HomTensorProduct>
+##  gap> Functor_HomTensorProduct;	## got automatically defined
+##  <The functor HomTensorProduct>
+##  gap> HomTensorProduct;		## got automatically defined
+##  <Operation "HomTensorProduct">
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ComposeFunctors,
         "for homalg functors",
@@ -5642,6 +5836,7 @@ InstallMethod( ComposeFunctors,
     
     GF := CallFuncList( CreateHomalgFunctor, data );
     
+    ResetFilterObj( GF, Genesis );
     SetGenesis( GF, [ "ComposeFunctors", [ Functor_post, Functor_pre ], p ] );
     
     if m > 1 then
@@ -5719,6 +5914,26 @@ InstallMethod( \*,
     
 end );
 
+##  <#GAPDoc Label="RightSatelliteOfCofunctor">
+##  <ManSection>
+##    <Oper Arg="F[, p][, H]" Name="RightSatelliteOfCofunctor" Label="constructor of the right satellite of a contravariant functor"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      Given a &homalg; (multi-)functor <A>F</A> and a string <A>H</A> return the right satellite of
+##      <A>F</A> with respect to its <A>p</A>-th argument. <A>F</A> is assumed contravariant in its <A>p</A>-th argument.
+##      The string <A>H</A> becomes the name of the returned functor (&see; <Ref Oper="NameOfFunctor"/>).
+##      The variable <C>Functor_</C><A>H</A> will automatically be assigned if free, otherwise a warning is issued.
+##      <P/>
+##      If <A>p</A> is not specified it is assumed <M>1</M>. If the string <A>H</A> is not specified the
+##      letter 'S' is added to the left of the name of <A>F</A> (&see; <Ref Oper="NameOfFunctor"/>).
+##      <P/>
+##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
+##      under the name <A>H</A>.
+##      <P/>
+##      <#Include Label="RightSatelliteOfCofunctor:example">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( RightSatelliteOfCofunctor,
         "for homalg functors",
@@ -5828,6 +6043,7 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     SF := CallFuncList( CreateHomalgFunctor, data );
     
+    ResetFilterObj( SF, Genesis );
     SetGenesis( SF, [ "RightSatelliteOfCofunctor", Functor, p ] );
     
     if m > 1 then
@@ -5870,6 +6086,48 @@ InstallMethod( RightSatelliteOfCofunctor,
     
 end );
 
+##
+InstallMethod( RightSatelliteOfCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString ],
+        
+  function( Functor, name )
+    
+    return RightSatelliteOfCofunctor( Functor, 1, name );
+    
+end );
+
+##
+InstallMethod( RightSatelliteOfCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return RightSatelliteOfCofunctor( Functor, 1 );
+    
+end );
+
+##  <#GAPDoc Label="LeftSatelliteOfFunctor">
+##  <ManSection>
+##    <Oper Arg="F[, p][, H]" Name="LeftSatelliteOfFunctor" Label="constructor of the left satellite of a covariant functor"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      Given a &homalg; (multi-)functor <A>F</A> and a string <A>H</A> return the left satellite of
+##      <A>F</A> with respect to its <A>p</A>-th argument. <A>F</A> is assumed covariant in its <A>p</A>-th argument.
+##      The string <A>H</A> becomes the name of the returned functor (&see; <Ref Oper="NameOfFunctor"/>).
+##      The variable <C>Functor_</C><A>H</A> will automatically be assigned if free, otherwise a warning is issued.
+##      <P/>
+##      If <A>p</A> is not specified it is assumed <M>1</M>. If the string <A>H</A> is not specified
+##      the string <Q>S_</Q> is added to the left of the name of <A>F</A> (&see; <Ref Oper="NameOfFunctor"/>).
+##      <P/>
+##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
+##      under the name <A>H</A>.
+##      <P/>
+##      <#Include Label="LeftSatelliteOfFunctor:example">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( LeftSatelliteOfFunctor,
         "for homalg functors",
@@ -5983,6 +6241,7 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     SF := CallFuncList( CreateHomalgFunctor, data );
     
+    ResetFilterObj( SF, Genesis );
     SetGenesis( SF, [ "LeftSatelliteOfFunctor", Functor, p ] );
     
     if m > 1 then
@@ -6025,6 +6284,48 @@ InstallMethod( LeftSatelliteOfFunctor,
     
 end );
 
+##
+InstallMethod( LeftSatelliteOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString ],
+        
+  function( Functor, name )
+    
+    return LeftSatelliteOfFunctor( Functor, 1, name );
+    
+end );
+
+##
+InstallMethod( LeftSatelliteOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return LeftSatelliteOfFunctor( Functor, 1 );
+    
+end );
+
+##  <#GAPDoc Label="RightDerivedCofunctor">
+##  <ManSection>
+##    <Oper Arg="F[, p][, H]" Name="RightDerivedCofunctor" Label="constructor of the right derived functor of a contravariant functor"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      Given a &homalg; (multi-)functor <A>F</A> and a string <A>H</A> return the right derived functor of
+##      <A>F</A> with respect to its <A>p</A>-th argument. <A>F</A> is assumed contravariant in its <A>p</A>-th argument.
+##      The string <A>H</A> becomes the name of the returned functor (&see; <Ref Oper="NameOfFunctor"/>).
+##      The variable <C>Functor_</C><A>H</A> will automatically be assigned if free, otherwise a warning is issued.
+##      <P/>
+##      If <A>p</A> is not specified it is assumed <M>1</M>. If the string <A>H</A> is not specified
+##      the letter 'R' is added to the left of the name of <A>F</A> (&see; <Ref Oper="NameOfFunctor"/>).
+##      <P/>
+##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> and <Ref Oper="InstallDeltaFunctor"/>
+##      which install several necessary operations under the name <A>H</A>.
+##      <P/>
+##      <#Include Label="RightDerivedCofunctor:example">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( RightDerivedCofunctor,
         "for homalg functors",
@@ -6122,6 +6423,7 @@ InstallMethod( RightDerivedCofunctor,
     
     RF := CallFuncList( CreateHomalgFunctor, data );
     
+    ResetFilterObj( RF, Genesis );
     SetGenesis( RF, [ "RightDerivedCofunctor", Functor, p ] );
     
     if m > 1 then
@@ -6166,6 +6468,50 @@ InstallMethod( RightDerivedCofunctor,
     
 end );
 
+##
+InstallMethod( RightDerivedCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString ],
+        
+  function( Functor, name )
+    
+    return RightDerivedCofunctor( Functor, 1, name );
+    
+end );
+
+##
+InstallMethod( RightDerivedCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return RightDerivedCofunctor( Functor, 1 );
+    
+end );
+
+##  <#GAPDoc Label="LeftDerivedFunctor">
+##  <ManSection>
+##    <Oper Arg="F[, p][, H]" Name="LeftDerivedFunctor" Label="constructor of the left derived functor of a covariant functor"/>
+##    <Returns>a &homalg; functor</Returns>
+##    <Description>
+##      Given a &homalg; (multi-)functor <A>F</A> and a string <A>H</A> return the left derived functor of
+##      <A>F</A> with respect to its <A>p</A>-th argument. <A>F</A> is assumed covariant in its <A>p</A>-th argument.
+##      The string <A>H</A> becomes the name of the returned functor (&see; <Ref Oper="NameOfFunctor"/>).
+##      The variable <C>Functor_</C><A>H</A> will automatically be assigned if free, otherwise a warning is issued.
+##      <P/>
+##      If <A>p</A> is not specified it is assumed <M>1</M>. If the string <A>H</A> is not specified
+##      the letter <Q>S_</Q> is added to the left of the name of <A>F</A> (&see; <Ref Oper="NameOfFunctor"/>).
+##      <P/>
+##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> and <Ref Oper="InstallDeltaFunctor"/>
+##      which install several necessary operations under the name <A>H</A>.
+##      <P/>
+##      <#Include Label="LeftDerivedFunctor:example">
+##      <P/>
+##      <#Include Label="LeftDerivedFunctor:example2">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( LeftDerivedFunctor,
         "for homalg functors",
@@ -6263,6 +6609,7 @@ InstallMethod( LeftDerivedFunctor,
     
     LF := CallFuncList( CreateHomalgFunctor, data );
     
+    ResetFilterObj( LF, Genesis );
     SetGenesis( LF, [ "LeftDerivedFunctor", Functor, p ] );
     
     if m > 1 then
@@ -6304,6 +6651,28 @@ InstallMethod( LeftDerivedFunctor,
     name := Concatenation( "L", name );
     
     return LeftDerivedFunctor( Functor, p, name );
+    
+end );
+
+##
+InstallMethod( LeftDerivedFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString ],
+        
+  function( Functor, name )
+    
+    return LeftDerivedFunctor( Functor, 1, name );
+    
+end );
+
+##
+InstallMethod( LeftDerivedFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return LeftDerivedFunctor( Functor, 1 );
     
 end );
 

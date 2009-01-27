@@ -919,7 +919,7 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the spectral sequence associated to tBC,
     ## also called the second spectral sequence of the bicomplex BC;
     ## it becomes intrinsic at the second level R^(-p) F R^q G => L_(p+q) FG
-    II_E := HomalgSpectralSequence( 2, tBC );
+    II_E := HomalgSpectralSequence( tBC, 2 );
     
     ## the limit sheet of the first spectral sequence
     I_E2 := CertainSheet( I_E, 2 );
@@ -1346,3 +1346,18 @@ proc NonTrivialDegreePerColumnWithRowWeights (matrix M, list row_weights)\n\
                    
                  end,
                
+## from HomalgRelations.gd
+##  <#GAPDoc Label="IsReducedSetOfRelations">
+##  <ManSection>
+##    <Prop Arg="rel" Name="IsReducedSetOfRelations"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; set of relations <A>rel</A> is marked reduced. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsReducedSetOfRelations",
+        IsHomalgRelations );
+

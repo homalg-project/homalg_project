@@ -8,6 +8,15 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="Bicomplexes:intro">
+##    Each bicomplex in &homalg; has an underlying complex of complexes. The bicomplex structure is simply
+##    the addition of the known sign trick which induces the obvious equivalence between the category of bicomplexes
+##    and the category of complexes with complexes as objects and chain maps as morphisms.
+##    The majority of filtered complexes in algebra and geometry (unlike topology) arise as the total complex
+##    of a bicomplex. Hence, most spectral sequences in algebra are spectral sequences of bicomplexes.
+##    Indeed, bicomplexes in &homalg; are mainly used as an input for the spectral sequence machinery.
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,17 +24,19 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgBicomplex
+
 ##  <#GAPDoc Label="IsBicomplexOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="BC" Name="IsBicomplexOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of bicomplexes of finitley generated &homalg; objects. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of bicomplexes (homological bicomplexes) of finitley generated &homalg; objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgBicomplex"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsBicomplexOfFinitelyPresentedObjectsRep",
         IsHomalgBicomplex and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -35,12 +46,13 @@ DeclareRepresentation( "IsBicomplexOfFinitelyPresentedObjectsRep",
 ##    <Filt Type="Representation" Arg="BC" Name="IsBicocomplexOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of bicocomplexes of finitley generated &homalg; objects. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of bicocomplexes (cohomological bicomplexes) of finitley generated &homalg; objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgBicomplex"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsBicocomplexOfFinitelyPresentedObjectsRep",
         IsHomalgBicomplex and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -699,7 +711,13 @@ InstallMethod( OnLessGenerators,
     
 end );
 
-##
+##  <#GAPDoc Label="ByASmallerPresentation:bicomplex">
+##  <ManSection>
+##    <Meth Arg="B" Name="ByASmallerPresentation" Label="for bicomplexes"/>
+##    <Returns>a &homalg; bicomplex</Returns>
+##    <Description>
+##    See <Ref Meth="ByASmallerPresentation" Label="for complexes"/> on complexes.
+##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],
@@ -713,6 +731,11 @@ InstallMethod( ByASmallerPresentation,
     return B;
     
 end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>B</A> and returns it.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -725,9 +748,9 @@ end );
 ##    <Func Arg="C" Name="HomalgBicomplex" Label="constructor for bicomplexes given a complex of complexes"/>
 ##    <Returns>a &homalg; bicomplex</Returns>
 ##    <Description>
-##    This constructor creates a &homalg; bicomplex (homological bicomplex) given a complex of (co)complexes <A>C</A>
+##    This constructor creates a bicomplex (homological bicomplex) given a &homalg; complex of (co)complexes <A>C</A>
 ##    (&see; <Ref Func="HomalgComplex" Label="constructor for complexes given a chain map"/>),
-##    resp. creates a bicocomplex (cohomological bicomplex) given a cocomplex of (co)complexes <A>C</A>
+##    resp. creates a bicocomplex (cohomological bicomplex) given a &homalg; cocomplex of (co)complexes <A>C</A>
 ##    (&see; <Ref Func="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>).
 ##    Using the usual sign-trick a complex of complexes gives rise to a bicomplex and vice versa.
 ##      <Example><![CDATA[

@@ -8,6 +8,14 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="SpectralSequences:intro">
+##    Spectral sequences are regarded as the computational sledgehammer in homological algebra. Quoting the last lines
+##    of Rotman's book <Cite Key="rot"/>: <P/>
+##    <Quoted>The reader should now be convinced that virtually every purely homological result may be proved with
+##      spectral sequences. Even though <Q>elementary</Q> proofs may exist for many of these results, spectral sequences
+##      offer a systematic approach in place of sporadic success.</Quoted>
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,17 +23,19 @@
 ####################################
 
 # two new representations for the GAP-category IsHomalgSpectralSequence
+
 ##  <#GAPDoc Label="IsSpectralSequenceOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="E" Name="IsSpectralSequenceOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of homological spectral sequences of finitley generated &homalg; objects. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of homological spectral sequences of finitley generated &homalg; objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSpectralSequence"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsSpectralSequenceOfFinitelyPresentedObjectsRep",
         IsHomalgSpectralSequence and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -35,12 +45,13 @@ DeclareRepresentation( "IsSpectralSequenceOfFinitelyPresentedObjectsRep",
 ##    <Filt Type="Representation" Arg="E" Name="IsSpectralCosequenceOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of cohomological spectral sequences of finitley generated &homalg; objects. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of cohomological spectral sequences of finitley generated &homalg; objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSpectralSequence"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsSpectralCosequenceOfFinitelyPresentedObjectsRep",
         IsHomalgSpectralSequence and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -656,7 +667,13 @@ InstallMethod( DecideZero,
     
 end );
 
-##
+##  <#GAPDoc Label="ByASmallerPresentation:spectralsequence">
+##  <ManSection>
+##    <Meth Arg="E" Name="ByASmallerPresentation" Label="for spectral sequences"/>
+##    <Returns>a &homalg; bigraded object</Returns>
+##    <Description>
+##    See <Ref Meth="ByASmallerPresentation" Label="for bigraded objects"/> on bigraded object.
+##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],
@@ -672,6 +689,11 @@ InstallMethod( ByASmallerPresentation,
     return E;
     
 end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>E</A> and returns it.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -679,12 +701,115 @@ end );
 #
 ####################################
 
+##  <#GAPDoc Label="HomalgSpectralSequence">
+##  <ManSection>
+##    <Oper Arg="r, B, a" Name="HomalgSpectralSequence" Label="constructor for spectral sequences given a bicomplex"/>
+##    <Oper Arg="r, B" Name="HomalgSpectralSequence" Label="constructor for spectral sequences without a special sheet given a bicomplex"/>
+##    <Oper Arg="B, a" Name="HomalgSpectralSequence" Label="constructor for spectral sequences without bound given a bicomplex"/>
+##    <Oper Arg="B" Name="HomalgSpectralSequence" Label="constructor for spectral sequences without bound and without a special sheet given a bicomplex"/>
+##    <Returns>a &homalg; spectral sequence</Returns>
+##    <Description>
+##    The first syntax is the main constructor. It creates the homological (resp. cohomological) spectral sequence
+##    associated to the homological (resp. cohomological) bicomplex <A>B</A> starting at level <M>0</M> and ending
+##    at level <A>r</A><M>\geq 0</M> (regardless if the spectral sequence stabilizes earlier). The generalized embeddings
+##    into the objects of 0-th sheet are always computed for each higher sheet <M>Er</M> and stored as
+##    a record under the component <M>Er</M>!.absolute_embeddings. If <A>a</A> is greater than <M>0</M> the generalized
+##    embeddings into the objects of the <A>a</A>-th sheet also get computed for each higher sheet <M>Er</M> and stored
+##    as a record under the component <M>Er</M>!.relative_embeddings. The level <A>a</A> at which the spectral sequence
+##    becomes intrinsic is a natural candidate for <A>a</A>. The <A>a</A>-th sheet is called the <E>special</E> sheet.
+##    <P/>
+##    If <A>r</A><M>=-1</M> it computes all the sheets of the spectral sequence until the sequence stabilizes,
+##    i.e. until all higher arrows become zero.
+##    <P/>
+##    If <A>a</A><M>=-1</M> no special sheet is specified.
+##    <P/>
+##    In the second syntax <A>a</A> is set to <M>-1</M>.
+##    <P/>
+##    In the third syntax <A>r</A> is set to <M>-1</M>.
+##    <P/>
+##    In the fourth syntax both <A>r</A> and <A>a</A> are set to <M>-1</M>.
+##    <P/>
+##    The following example demonstrates the computation of a <M>Tor-Ext</M> spectral sequence:
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> dM := Resolution( M );
+##  <A non-zero right acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> CC := Hom( dM, dM );
+##  <A non-zero acyclic cocomplex containing a single morphism of right complexes at degrees [ 0 .. 1 ]>
+##  gap> B := HomalgBicomplex( CC );
+##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  ]]></Example>
+##    Now we construct the spectral sequence associated to the bicomplex <M>B</M>, also called the <E>first</E>
+##    spectral sequence:
+##      <Example><![CDATA[
+##  gap> I_E := HomalgSpectralSequence( 2, B );
+##  <A stable cohomological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of right modules at bidegrees
+##  [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E );
+##  a cohomological spectral sequence at bidegrees
+##  [ [ 0 .. 1 ], [ -1 .. 0 ] ]
+##  ---------
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 1:
+##  
+##   * *
+##   . .
+##  ---------
+##  Level 2:
+##  
+##   s s
+##   . .
+##  ]]></Example>
+##    Legend:
+##    <List>
+##      <Item>A star <A>*</A> stands for a nonzero module.</Item>
+##      <Item>A dot <A>.</A> stands for a zero module.</Item>
+##      <Item>The letter <A>s</A> stands for a nonzero module that became stable.</Item>
+##    </List>
+##    <P/>
+##    The <E>second</E> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to
+##    the transposed bicomplex:
+##      <Example><![CDATA[
+##  gap> tB := TransposedBicomplex( B );
+##  <A non-zero bicocomplex containing right modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E := HomalgSpectralSequence( tB, 2 );
+##  <A stable cohomological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of right modules at bidegrees
+##  [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E );
+##  a cohomological spectral sequence at bidegrees
+##  [ [ -1 .. 0 ], [ 0 .. 1 ] ]
+##  ---------
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 1:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 2:
+##  
+##   s s
+##   . s
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( HomalgSpectralSequence,
         "for homalg bicomplexes",
         [ IsInt, IsHomalgBicomplex, IsInt ],
         
-  function( a, B, r )				## a could, for example, be the level where E_r becomes intrinsic
+  function( r, B, a )				## a could, for example, be the level where E_r becomes intrinsic
     local bidegrees, E, Ei, type, rr, i;
     
     bidegrees := ObjectDegreesOfBicomplex( B );
@@ -745,23 +870,23 @@ end );
 ##
 InstallMethod( HomalgSpectralSequence,
         "for homalg bicomplexes",
-        [ IsHomalgBicomplex, IsInt ],
+        [ IsInt, IsHomalgBicomplex ],
         
-  function( B, r )
+  function( r, B )
     
-    return HomalgSpectralSequence( -1, B, r );
+    return HomalgSpectralSequence( r, B, -1 );
     
 end );
 
 ##
 InstallMethod( HomalgSpectralSequence,
         "for homalg bicomplexes",
-        [ IsInt, IsHomalgBicomplex ],
+        [ IsHomalgBicomplex, IsInt ],
         
-  function( a, B )
+  function( B, a )
     local E;
     
-    E := HomalgSpectralSequence( a, B, -1 );
+    E := HomalgSpectralSequence( -1, B, a );
     
     SetSpectralSequence( B, E );
     

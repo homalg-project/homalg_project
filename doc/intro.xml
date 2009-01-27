@@ -241,26 +241,22 @@ difficulties:
 </List>
 
 Solving these two difficulties is an important part of &homalg;'s
-design: Homological computations had to be split in two parts. The
-matrices should reside in the system providing the fastest matrix
-operations, while the highly complex structures with their properties,
-attributes, and all their logical dependencies should live in &GAP4;.
-Moreover, each sort of data should <E>not</E> be transferred outside its
-system. The remaining communication between the different systems
-should also get along with a tiny dictionary. It would also be
-desirable if only one system, favorably &GAP4; as it manages and
-delegates all computations, also manages the whole data flow, while
-the other systems do not even recognize that they are part of a
-bidirectional communication. <P/>
+design. &homalg; splits homological computations into two parts. The
+matrices reside in a system which provides fast matrix operations
+(addition, multiplication, bases and normal form computations), while
+the higher structures (modules, maps, complexes, chain maps, spectral
+sequences, functors, ...) with their properties, attributes, and
+algorithms live in &GAP4;, as the system where one can easily create
+such complex structures and handle all their logical dependencies.
+With this split there is no need to transfer each sort of data outside
+of its system. The remaining communication between &GAP4; and the
+system hosting the matrices gets along with a tiny dictionary.
+Moreover, &GAP4;, as it manages and delegates all computations, also
+manages the whole data flow, while the other system does not even
+recognize that it is part of a bidirectional communication. <P/>
 
-Fortunately, in the case of homological computations such a split can
-be easily found: <Br/> The matrices with all their operations can be
-put in one system, while the higher structures (modules, maps,
-complexes, functors, spectral sequences, ...) and their algorithms can
-be put into another. <P/>
-
-Obviously the existence of such a clear cut is to a great
-extent due to the special nature of homological computations.
+The existence of such a clear cut is certainly to some extent due to
+the special nature of homological computations.
 
 </Subsection>
 

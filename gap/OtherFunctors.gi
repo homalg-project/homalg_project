@@ -144,7 +144,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         if IsBound( degMN ) then
-            F := HomalgFreeLeftModuleWithWeights( R, degMN );
+            F := HomalgFreeLeftModuleWithDegrees( R, degMN );
         else
             F := HomalgFreeLeftModule( NrGenerators( M ) + NrGenerators( N ), R );
         fi;
@@ -156,7 +156,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
         piN := UnionOfRows( zeroMN, idN );
     else
         if IsBound( degMN ) then
-            F := HomalgFreeRightModuleWithWeights( R, degMN );
+            F := HomalgFreeRightModuleWithDegrees( R, degMN );
         else
             F := HomalgFreeRightModule( NrGenerators( M ) + NrGenerators( N ), R );
         fi;

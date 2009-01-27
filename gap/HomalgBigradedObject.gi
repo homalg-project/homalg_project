@@ -8,6 +8,10 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="BigradedObjects:intro">
+##    Bigraded objects in &homalg; provide a data structure for the sheets (or pages) of spectral sequences.
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,17 +19,19 @@
 ####################################
 
 # a new representations for the GAP-category IsHomalgBigradedObject
+
 ##  <#GAPDoc Label="IsBigradedObjectOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="Er" Name="IsBigradedObjectOfFinitelyPresentedObjectsRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of bigraded objects of finitley generated &homalg; objects. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      The &GAP; representation of bigraded objects of finitley generated &homalg; objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgBigradedObject"/>,
+##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsBigradedObjectOfFinitelyPresentedObjectsRep",
         IsHomalgBigradedObject and IsFinitelyPresentedObjectRep,
         [  ] );
@@ -365,7 +371,13 @@ InstallMethod( OnLessGenerators,
     
 end );
 
-##
+##  <#GAPDoc Label="ByASmallerPresentation:bigradedobject">
+##  <ManSection>
+##    <Meth Arg="Er" Name="ByASmallerPresentation" Label="for bigraded objects"/>
+##    <Returns>a &homalg; bigraded object</Returns>
+##    <Description>
+##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
+##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
@@ -377,6 +389,11 @@ InstallMethod( ByASmallerPresentation,
     return Er;
     
 end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>Er</A> and returns it.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -386,14 +403,14 @@ end );
 
 ##  <#GAPDoc Label="HomalgBigradedObject">
 ##  <ManSection>
-##    <Oper Arg="BC" Name="HomalgBigradedObject" Label="constructor for bigraded objects given a bicomplex"/>
+##    <Oper Arg="B" Name="HomalgBigradedObject" Label="constructor for bigraded objects given a bicomplex"/>
 ##    <Returns>a &homalg; bigraded object</Returns>
 ##    <Description>
-##    This constructor creates a homological (resp. cohomological) &homalg; bigraded object given a homological
-##    (resp. cohomological) bicomplex <A>BC</A>
+##    This constructor creates a homological (resp. cohomological) bigraded object given a homological
+##    (resp. cohomological) &homalg; bicomplex <A>B</A>
 ##    (&see; <Ref Func="HomalgBicomplex" Label="constructor for bicomplexes given a complex of complexes"/>).
 ##    This is nothing but the level zero sheet (without differential) of the spectral sequence associated to
-##    the bicomplex <A>BC</A>. So it is the double array of &homalg; objects (i.e. modules or complexes) in <A>BC</A>
+##    the bicomplex <A>B</A>. So it is the double array of &homalg; objects (i.e. modules or complexes) in <A>B</A>
 ##    forgetting the morphisms.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
@@ -405,9 +422,9 @@ end );
 ##  gap> C := Resolution( dd );;
 ##  gap> CC := Hom( C );
 ##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
-##  gap> BC := HomalgBicomplex( CC );
+##  gap> B := HomalgBicomplex( CC );
 ##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> E0 := HomalgBigradedObject( BC );
+##  gap> E0 := HomalgBigradedObject( B );
 ##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> Display( E0 );
 ##  Level 0:
@@ -458,84 +475,8 @@ end );
 ##    <Description>
 ##    Add the induced bidegree <M>( -r, r - 1 )</M> (resp. <M>( r, -r + 1 )</M>) differential to the level <A>r</A>
 ##    homological (resp. cohomological) bigraded object stemming from a homological (resp. cohomological) bicomplex.
-##    This method performs side effects on its argument <A>Er</A> and returns it.
-##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
-##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
-##  gap> d := Resolution( M );;
-##  gap> dd := Hom( d );;
-##  gap> C := Resolution( dd );;
-##  gap> CC := Hom( C );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
-##  gap> BC := HomalgBicomplex( CC );
-##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  ]]></Example>
-##    Now we construct the spectral sequence associated to the bicomplex <M>BC</M>, also called the <E>first</E>
-##    spectral sequence:
-##      <Example><![CDATA[
-##  gap> I_E0 := HomalgBigradedObject( BC );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> Display( I_E0 );
-##  Level 0:
-##  
-##   * *
-##   * *
-##  gap> AsDifferentialObject( I_E0 );
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> I_E0;
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> AsDifferentialObject( I_E0 );
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> I_E1 := DefectOfExactness( I_E0 );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> Display( I_E1 );
-##  Level 1:
-##  
-##   * *
-##   . .
-##  gap> AsDifferentialObject( I_E1 );
-##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> I_E2 := DefectOfExactness( I_E1 );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
-##  gap> Display( I_E2 );
-##  Level 2:
-##  
-##   s .
-##   . .
-##  ]]></Example>
-##    The <E>second</E> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to
-##    the transposed bicomplex:
-##      <Example><![CDATA[
-##  gap> tBC := TransposedBicomplex( BC );
-##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
-##  gap> II_E0 := HomalgBigradedObject( tBC );
-##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
-##  gap> Display( II_E0 );
-##  Level 0:
-##  
-##   * *
-##   * *
-##  gap> AsDifferentialObject( II_E0 );
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
-##  gap> II_E1 := DefectOfExactness( II_E0 );
-##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
-##  gap> Display( II_E1 );
-##  Level 1:
-##  
-##   * *
-##   . s
-##  gap> AsDifferentialObject( II_E1 );
-##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
-##  gap> II_E2 := DefectOfExactness( II_E1 );
-##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
-##  gap> Display( II_E2 );
-##  Level 2:
-##  
-##   s .
-##   . s
-##  ]]></Example>
+##    This method performs side effects on its argument <A>Er</A> and returns it. <P/>
+##    For an example see <Ref Meth="DefectOfExactness" Label="for homalg differential bigraded objects"/> below.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -694,9 +635,116 @@ InstallMethod( AsDifferentialObject,
     
 end );
 
+##  <#GAPDoc Label="DefectOfExactness:bigradedobject">
+##  <ManSection>
+##    <Meth Arg="Er" Name="DefectOfExactness" Label="for homalg differential bigraded objects"/>
+##    <Returns>a &homalg; bigraded object</Returns>
+##    <Description>
+##    Homological:
+##    Compute the homology of a level <A>r</A> <E>differential</E> homological bigraded object, that is the <A>r</A>-th
+##    sheet of a homological spectral sequence endowed with a bidegree <M>( -r, r - 1 )</M> differential.
+##    The result is a level <A>r</A><M>+1</M> homological bigraded object <E>without</E> its differential.
+##    <P/>
+##    Cohomological:
+##    Compute the cohomology of a level <A>r</A> <E>differential</E> cohomological bigraded object, that is the <A>r</A>-th
+##    sheet of a cohomological spectral sequence endowed with a bidegree <M>( r, -r + 1 )</M> differential.
+##    The result is a level <A>r</A><M>+1</M> cohomological bigraded object <E>without</E> its differential.
+##    <P/>
+##    The differential of the resulting level <A>r</A><M>+1</M> object can a posteriori be computed using
+##    <Ref Meth="AsDifferentialObject" Label="for homalg bigraded objects stemming from a bicomplex"/>.
+##    The objects in the result are subquotients of the objects in <A>Er</A>. An object in <A>Er</A> (at
+##    a spot <M>(p,q)</M>) is called <E>stable</E> if no passage to a true subquotient occurs at any higher level.
+##    Of course, a zero object (at a spot <M>(p,q)</M>) is always stable.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> d := Resolution( M );;
+##  gap> dd := Hom( d );;
+##  gap> C := Resolution( dd );;
+##  gap> CC := Hom( C );
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  gap> B := HomalgBicomplex( CC );
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  ]]></Example>
+##    Now we construct the spectral sequence associated to the bicomplex <M>B</M>, also called the <E>first</E>
+##    spectral sequence:
+##      <Example><![CDATA[
+##  gap> I_E0 := HomalgBigradedObject( B );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E0 );
+##  Level 0:
+##  
+##   * *
+##   * *
+##  gap> AsDifferentialObject( I_E0 );
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> I_E0;
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> AsDifferentialObject( I_E0 );
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> I_E1 := DefectOfExactness( I_E0 );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E1 );
+##  Level 1:
+##  
+##   * *
+##   . .
+##  gap> AsDifferentialObject( I_E1 );
+##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> I_E2 := DefectOfExactness( I_E1 );
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> Display( I_E2 );
+##  Level 2:
+##  
+##   s .
+##   . .
+##  ]]></Example>
+##    Legend:
+##    <List>
+##      <Item>A star <A>*</A> stands for a nonzero module.</Item>
+##      <Item>A dot <A>.</A> stands for a zero module.</Item>
+##      <Item>The letter <A>s</A> stands for a nonzero module that became stable.</Item>
+##    </List>
+##    <P/>
+##    The <E>second</E> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to
+##    the transposed bicomplex:
+##      <Example><![CDATA[
+##  gap> tB := TransposedBicomplex( B );
+##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E0 := HomalgBigradedObject( tB );
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E0 );
+##  Level 0:
+##  
+##   * *
+##   * *
+##  gap> AsDifferentialObject( II_E0 );
+##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E1 := DefectOfExactness( II_E0 );
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E1 );
+##  Level 1:
+##  
+##   * *
+##   . s
+##  gap> AsDifferentialObject( II_E1 );
+##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> II_E2 := DefectOfExactness( II_E1 );
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E2 );
+##  Level 2:
+##  
+##   s .
+##   . s
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( DefectOfExactness,
-        "for homalg bigraded objects stemming from a bicomplex",
+        "for homalg differential bigraded objects stemming from a bicomplex",
         [ IsBigradedObjectOfFinitelyPresentedObjectsRep and IsEndowedWithDifferential ],
         
   function( Er )
@@ -809,6 +857,8 @@ InstallMethod( DefectOfExactness,
     
     if IsHomalgBigradedObjectAssociatedToAFilteredComplex( Er ) then
         
+        ## construct the generalized embeddings into the objects of the special sheet Ea
+        ## and store them under the component "relative_embeddings"
         if IsBound( Er!.SpecialSheet ) and Er!.SpecialSheet = true  then
             H.relative_embeddings := H.embeddings;
             H.relative_embeddings.target_level := r;
@@ -836,7 +886,8 @@ InstallMethod( DefectOfExactness,
             H.relative_embeddings := relative_embeddings;
         fi;
         
-        ## the embeddings until the 0-th sheet
+        ## construct the generalized embeddings into the objects of the 0-th sheet E0
+        ## and store them under the component "absolute_embeddings"
         if r = 0 then
             H.absolute_embeddings := H.embeddings;
         elif IsBound( Er!.absolute_embeddings ) then

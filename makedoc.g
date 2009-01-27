@@ -19,6 +19,10 @@ list := [
          "../gap/LIRNG.gi",
          "../gap/HomalgMatrix.gd",
          "../gap/HomalgMatrix.gi",
+         "../gap/HomalgRelations.gd",
+         "../gap/HomalgRelations.gi",
+         "../gap/HomalgGenerators.gd",
+         "../gap/HomalgGenerators.gi",
          "../gap/HomalgModule.gd",
          "../gap/HomalgModule.gi",
          "../gap/HomalgMap.gd",
@@ -36,7 +40,9 @@ list := [
          "../gap/HomalgSpectralSequence.gd",
          "../gap/HomalgSpectralSequence.gi",
          "../gap/HomalgFunctor.gd",
-         "../gap/HomalgFunctor.gi"
+         "../gap/HomalgFunctor.gi",
+         "../gap/BasicFunctors.gd",
+         "../gap/BasicFunctors.gi"
          ];
 
 MakeGAPDocDoc( "doc", "homalg", list, "homalg" );

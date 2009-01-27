@@ -11,6 +11,8 @@
 <Chapter Label="Maps">
 <Heading>Maps</Heading>
 
+<#Include Label="Maps:intro">
+
 <Section Label="Maps:Category">
 
 <Heading>Maps: Categories and Representations</Heading>

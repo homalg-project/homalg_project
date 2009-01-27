@@ -11,6 +11,8 @@
 <Chapter Label="SpectralSequences">
 <Heading>Spectral Sequences</Heading>
 
+<#Include Label="SpectralSequences:intro">
+
 <Section Label="SpectralSequences:Category">
 
 <Heading>SpectralSequences: Categorie and Representations</Heading>
@@ -27,6 +29,8 @@
 
 <Section Label="SpectralSequences:Constructors">
 <Heading>Spectral Sequences: Constructors</Heading>
+
+<#Include Label="HomalgSpectralSequence">
 
 </Section>
 
@@ -47,6 +51,8 @@
 
 <Section Label="SpectralSequences:Operations">
 <Heading>Spectral Sequences: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:spectralsequence">
 
 </Section>
 

@@ -10,7 +10,11 @@
 <TitlePage>
   <Title>&homalg;</Title>
   <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
-  <TitleComment>(this manual is still under construction)</TitleComment>
+  <TitleComment>(<E>this manual is still under construction</E>) <Br/><Br/>
+    This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
+      <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg/chap0.html</URL> <Br/><Br/>
+    An <B>offline</B> version should be included in the documentation subfolder of the package.
+  </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -50,9 +54,10 @@
   Breuer">http://www.math.rwth-aachen.de/~Thomas.Breuer/</URL></Alt>
   <Alt Only="Text">Thomas Breuer</Alt> patiently answered trillions of
   specific questions, even those I was too lazy to look up in the
-  excellent <Alt Only="HTML"><Ref Chap="about" Text="programming tutorial"
-  BookName="Prg Tutorial"/></Alt><Alt Not="HTML">
-  programming tutorial</Alt>.
+  excellent <Alt Only="HTML"><Ref Chap="about" Text="programming
+  tutorial" BookName="Prg Tutorial"/></Alt><Alt Only="Text">
+  programming tutorial</Alt><Alt Only="LaTeX"><URL Text="programming
+  tutorial">http://www.gap-system.org/Manuals/doc/htm/prg/chapters.htm</URL></Alt>.
   
   Without their continuous and tireless help and advice, not only this
   package but the <Alt Only="Text">&homalg; project</Alt> as a whole
@@ -104,12 +109,13 @@
   My concerns about how to handle the garbage collection in the
   external computer algebra systems were evaporated with the idea of
   Thomas Breuer using the so-called <Alt Only="Text">weak
-  pointers</Alt><Alt Not="Text"><URL Text="weak
+  pointers</Alt><Alt Only="LaTeX"><URL Text="weak
   pointers">http://www.gap-system.org/Manuals/doc/htm/ext/CHAP007.htm</URL></Alt>
-  in &GAP4; to keep track of all the external objects that became
-  obsolete for &homalg;. This idea took shape in a discussion with him
-  and Frank Lübeck and finally found its way into the package
-  &IO_ForHomalg;. <P/>
+  <Alt Only="HTML"><Ref Chap="weak pointers" Text="weak pointers"
+  BookName="Extending"/></Alt> in &GAP4; to keep track of all the
+  external objects that became obsolete for &homalg;. This idea took
+  shape in a discussion with him and Frank Lübeck and finally found
+  its way into the package &IO_ForHomalg;. <P/>
   
   My gratitude to all with whom I worked together to develop extension
   packages and those who developed their own packages within the

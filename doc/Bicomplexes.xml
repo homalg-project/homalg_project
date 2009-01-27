@@ -11,6 +11,8 @@
 <Chapter Label="Bicomplexes">
 <Heading>Bicomplexes</Heading>
 
+<#Include Label="Bicomplexes:intro">
+
 <Section Label="Bicomplexes:Category">
 
 <Heading>Bicomplexes: Category and Representations</Heading>
@@ -50,6 +52,7 @@
 <Heading>Bicomplexes: Operations and Functions</Heading>
 
 <#Include Label="UnderlyingComplex">
+<#Include Label="ByASmallerPresentation:bicomplex">
 
 </Section>
 

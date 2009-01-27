@@ -8,6 +8,28 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="Modules:intro">
+##  A &homalg; module is a data structure for a finitely presented module. A presentation is given by
+##  a set of generators and a set of relations among these generators. The data structure for modules in &homalg;
+##  has two novel features:
+##  <List>
+##    <Item> The data structure allows several presentations linked with so-called transition matrices.
+##       One of the presentations is marked as the default presentation, which is usually the last added one.
+##       A new presentation can always be added provided it is linked to the default presentation by a transition matrix.
+##       If needed, the user can reset the default presentation by choosing one of the other presentations saved
+##       in the data structure of the &homalg; module. Effectively, a module is then given by <Q>all</Q> its presentations
+##       (as <Q>coordinates</Q>) together with isomorphisms between them (as <Q>coordinate changes</Q>).
+##       Being able to <Q>change coordinates</Q> makes the realization of a module in &homalg; <E>intrinsic</E>
+##       (or <Q>coordinate free</Q>). </Item>
+##    <Item> To present a left/right module it suffices to take a matrix <A>M</A> and interpret its rows/columns
+##       as relations among <M>n</M> <E>abstract</E> generators, where <M>n</M> is the number of columns/rows
+##       of <A>M</A>. Only that these abstract generators are useless when it comes to specific modules like
+##       modules of homomorphisms, where one expects the generators to be maps between modules. For this
+##       reason a presentation of a module in &homalg; is not merely a matrix of relations, but together with
+##       a set of generators. </Item>
+##  </List>
+##  <#/GAPDoc>
+
 ####################################
 #
 # representations:
@@ -15,17 +37,20 @@
 ####################################
 
 # a new representation for the GAP-category IsHomalgModule
+
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of finitley generated &homalg; modules. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representations <Br/>
+##      The &GAP; representation of finitley generated &homalg; modules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
+##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsFinitelyPresentedObjectRep</C> and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsHomalgModule and
         IsFinitelyPresentedObjectRep and
@@ -1242,11 +1267,19 @@ end );
 ##  <A non-zero left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
+##  gap> SetsOfGenerators( M );
+##  <A set containing 3 sets of generators of a homalg module>
+##  gap> SetsOfRelations( M );
+##  <A set containing 3 sets of relations of a homalg module>
+##  gap> M;
+##  <A rank 1 left module presented by 1 relation for 2 generators>
+##  gap> SetPositionOfTheDefaultSetOfRelations( M, 1 );
+##  gap> M;
+##  <A rank 1 left module presented by 2 relations for 3 generators>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
 InstallMethod( ByASmallerPresentation,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -2046,7 +2079,7 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( LeftPresentationWithWeights,
+InstallMethod( LeftPresentationWithDegrees,
         "constructor",
         [ IsHomalgMatrix, IsList ],
         
@@ -2067,29 +2100,29 @@ InstallMethod( LeftPresentationWithWeights,
 end );
 
 ##
-InstallMethod( LeftPresentationWithWeights,
+InstallMethod( LeftPresentationWithDegrees,
         "constructor",
         [ IsHomalgMatrix, IsInt ],
         
   function( mat, weight )
     
-    return LeftPresentationWithWeights( mat, ListWithIdenticalEntries( NrColumns( mat ), weight ) );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), weight ) );
     
 end );
 
 ##
-InstallMethod( LeftPresentationWithWeights,
+InstallMethod( LeftPresentationWithDegrees,
         "constructor",
         [ IsHomalgMatrix ],
         
   function( mat )
     
-    return LeftPresentationWithWeights( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 ) );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 ) );
     
 end );
 
 ##
-InstallMethod( RightPresentationWithWeights,
+InstallMethod( RightPresentationWithDegrees,
         "constructor",
         [ IsHomalgMatrix, IsList ],
         
@@ -2110,90 +2143,90 @@ InstallMethod( RightPresentationWithWeights,
 end );
 
 ##
-InstallMethod( RightPresentationWithWeights,
+InstallMethod( RightPresentationWithDegrees,
         "constructor",
         [ IsHomalgMatrix, IsInt ],
         
   function( mat, weight )
     
-    return RightPresentationWithWeights( mat, ListWithIdenticalEntries( NrRows( mat ), weight ) );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), weight ) );
     
 end );
 
 ##
-InstallMethod( RightPresentationWithWeights,
+InstallMethod( RightPresentationWithDegrees,
         "constructor",
         [ IsHomalgMatrix ],
         
   function( mat )
     
-    return RightPresentationWithWeights( mat, ListWithIdenticalEntries( NrRows( mat ), 0 ) );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), 0 ) );
     
 end );
 
 ##
-InstallMethod( HomalgFreeLeftModuleWithWeights,
+InstallMethod( HomalgFreeLeftModuleWithDegrees,
         "constructor",
         [ IsHomalgRing, IsList ],
         
   function( R, weights )
     
-    return LeftPresentationWithWeights( HomalgZeroMatrix( 0, Length( weights ), R ), weights );
+    return LeftPresentationWithDegrees( HomalgZeroMatrix( 0, Length( weights ), R ), weights );
     
 end );
 
 ##
-InstallMethod( HomalgFreeLeftModuleWithWeights,
+InstallMethod( HomalgFreeLeftModuleWithDegrees,
         "constructor",
         [ IsInt, IsHomalgRing, IsInt ],
         
   function( rank, R, weight )
     
-    return HomalgFreeLeftModuleWithWeights( R, ListWithIdenticalEntries( rank, weight ) );
+    return HomalgFreeLeftModuleWithDegrees( R, ListWithIdenticalEntries( rank, weight ) );
     
 end );
 
 ##
-InstallMethod( HomalgFreeLeftModuleWithWeights,
+InstallMethod( HomalgFreeLeftModuleWithDegrees,
         "constructor",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
     
-    return HomalgFreeLeftModuleWithWeights( rank, R, 0 );
+    return HomalgFreeLeftModuleWithDegrees( rank, R, 0 );
     
 end );
 
 ##
-InstallMethod( HomalgFreeRightModuleWithWeights,
+InstallMethod( HomalgFreeRightModuleWithDegrees,
         "constructor",
         [ IsHomalgRing, IsList ],
         
   function( R, weights )
     
-    return RightPresentationWithWeights( HomalgZeroMatrix( Length( weights ), 0, R ), weights );
+    return RightPresentationWithDegrees( HomalgZeroMatrix( Length( weights ), 0, R ), weights );
     
 end );
 
 ##
-InstallMethod( HomalgFreeRightModuleWithWeights,
+InstallMethod( HomalgFreeRightModuleWithDegrees,
         "constructor",
         [ IsInt, IsHomalgRing, IsInt ],
         
   function( rank, R, weight )
     
-    return HomalgFreeRightModuleWithWeights( R, ListWithIdenticalEntries( rank, weight ) );
+    return HomalgFreeRightModuleWithDegrees( R, ListWithIdenticalEntries( rank, weight ) );
     
 end );
 
 ##
-InstallMethod( HomalgFreeRightModuleWithWeights,
+InstallMethod( HomalgFreeRightModuleWithDegrees,
         "constructor",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
     
-    return HomalgFreeRightModuleWithWeights( rank, R, 0 );
+    return HomalgFreeRightModuleWithDegrees( rank, R, 0 );
     
 end );
 
@@ -2204,7 +2237,7 @@ InstallMethod( POW,
         
   function( R, twist )
     
-    return HomalgFreeLeftModuleWithWeights( 1, R, -twist );
+    return HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
     
 end );
 
@@ -2258,13 +2291,13 @@ InstallMethod( \*,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         if IsList( DegreesOfGenerators( M ) ) then
-            N := LeftPresentationWithWeights( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
+            N := LeftPresentationWithDegrees( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
         else
             N := LeftPresentation( MatrixOfRelations( M ) * R );
         fi;
     else
         if IsList( DegreesOfGenerators( M ) ) then
-            N := RightPresentationWithWeights( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
+            N := RightPresentationWithDegrees( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
         else
             N := RightPresentation( MatrixOfRelations( M ) * R );
         fi;

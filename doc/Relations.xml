@@ -11,6 +11,20 @@
 <Chapter Label="Relations">
 <Heading>Relations</Heading>
 
+<#Include Label="Relations:intro">
+
+<Section Label="Relations:Category">
+
+<Heading>Relations: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgRelations">
+<#Include Label="IsHomalgRelationsOfLeftModule">
+<#Include Label="IsHomalgRelationsOfRightModule">
+
+<#Include Label="IsRelationsOfFinitelyPresentedModuleRep">
+
+</Section>
+
 <Section Label="Relations:Constructors">
 <Heading>Relations: Constructors</Heading>
 
@@ -19,15 +33,15 @@
 <Section Label="Relations:Properties">
 <Heading>Relations: Properties</Heading>
 
+<#Include Label="CanBeUsedToDecideZeroEffectively">
+<#Include Label="IsInjectivePresentation">
+
 </Section>
 
 <Section Label="Relations:Attributes">
 <Heading>Relations: Attributes</Heading>
 
-</Section>
-
-<Section Label="Relations:LIMOD">
-<Heading>&LIMOD;: Logical Implications for Relations</Heading>
+<#Include Label="FreeResolution">
 
 </Section>
 

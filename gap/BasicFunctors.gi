@@ -25,6 +25,7 @@
 ## Cokernel
 ##
 
+##
 InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
   function( phi )
     local R, T, p, gen, rel, coker, id, epi, img_emb, emb;
@@ -90,16 +91,22 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     
 end );
 
+##  <#GAPDoc Label="Functor_Cokernel:code">
+##      <Listing Type="Code"><![CDATA[
 InstallValue( functor_Cokernel,
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
                 [ "natural_transformation", "CokernelEpi" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep, [ IsHomalgChainMap, IsImageSquare ] ] ] ],
+                [ "1", [ [ "covariant" ],
+                        [ IsMapOfFinitelyGeneratedModulesRep,
+                          [ IsHomalgChainMap, IsImageSquare ] ] ] ],
                 [ "OnObjects", _Functor_Cokernel_OnObjects ]
                 )
         );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -186,15 +193,20 @@ InstallGlobalFunction( _Functor_ImageSubmodule_OnObjects,	### defines: ImageSubm
     
 end );
 
+##  <#GAPDoc Label="Functor_ImageSubmodule:code">
+##      <Listing Type="Code"><![CDATA[
 InstallValue( functor_ImageSubmodule,
         CreateHomalgFunctor(
                 [ "name", "ImageSubmodule" ],
                 [ "natural_transformation", "ImageSubmoduleEmb" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ],
+                        [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_ImageSubmodule_OnObjects ]
                 )
         );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 functor_ImageSubmodule!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -313,16 +325,22 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
 end );
 
+##  <#GAPDoc Label="Functor_Kernel:code">
+##      <Listing Type="Code"><![CDATA[
 InstallValue( functor_Kernel,
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
                 [ "natural_transformation", "KernelEmb" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep, [ IsHomalgChainMap, IsKernelSquare ] ] ] ],
+                [ "1", [ [ "covariant" ],
+                        [ IsMapOfFinitelyGeneratedModulesRep,
+                          [ IsHomalgChainMap, IsKernelSquare ] ] ] ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
         );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -380,15 +398,21 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     
 end );
 
+##  <#GAPDoc Label="Functor_DefectOfExactness:code">
+##      <Listing Type="Code"><![CDATA[
 InstallValue( functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence, [ IsHomalgChainMap, IsLambekPairOfSquares ] ] ] ],
+                [ "1", [ [ "covariant" ],
+                        [ IsHomalgComplex and IsATwoSequence,
+                          [ IsHomalgChainMap, IsLambekPairOfSquares ] ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
         );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -528,12 +552,12 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         end;
         
         if IsBound( degHP0N ) then
-            HP0N := RightPresentationWithWeights( HP0N, degHP0N );
+            HP0N := RightPresentationWithDegrees( HP0N, degHP0N );
         else
             HP0N := RightPresentation( HP0N );
         fi;
         if IsBound( degHP1N ) then
-            HP1N := RightPresentationWithWeights( HP1N, degHP1N );
+            HP1N := RightPresentationWithDegrees( HP1N, degHP1N );
         else
             HP1N := RightPresentation( HP1N );
         fi;
@@ -581,12 +605,12 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         end;
         
         if IsBound( degHP0N ) then
-            HP0N := LeftPresentationWithWeights( HP0N, degHP0N );
+            HP0N := LeftPresentationWithDegrees( HP0N, degHP0N );
         else
             HP0N := LeftPresentation( HP0N );
         fi;
         if IsBound( degHP1N ) then
-            HP1N := LeftPresentationWithWeights( HP1N, degHP1N );
+            HP1N := LeftPresentationWithDegrees( HP1N, degHP1N );
         else
             HP1N := LeftPresentation( HP1N );
         fi;
@@ -661,6 +685,8 @@ InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part
     
 end );
 
+##  <#GAPDoc Label="Functor_Hom:code">
+##      <Listing Type="Code"><![CDATA[
 InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
@@ -671,6 +697,8 @@ InstallValue( Functor_Hom,
                 [ "OnMorphisms", _Functor_Hom_OnMorphisms ]
                 )
         );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 Functor_Hom!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -715,7 +743,7 @@ InstallMethod( LeftDualizingFunctor,
         
   function( R, name )
     
-    return ApplyFunctor( Functor_Hom, 2, 1 * R, name );
+    return InsertObjectInMultiFunctor( Functor_Hom, 2, 1 * R, name );
     
 end );
 
@@ -745,7 +773,7 @@ InstallMethod( RightDualizingFunctor,
         
   function( R, name )
     
-    return ApplyFunctor( Functor_Hom, 2, R * 1, name );
+    return InsertObjectInMultiFunctor( Functor_Hom, 2, R * 1, name );
     
 end );
 
@@ -836,14 +864,14 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
     if rl[2] then
         MN := UnionOfRows( matM, matN );
         if IsBound( degMN ) then
-            F := HomalgFreeLeftModuleWithWeights( R, degMN );
+            F := HomalgFreeLeftModuleWithDegrees( R, degMN );
         else
             F := HomalgFreeLeftModule( NrGenerators( M ) * NrGenerators( N ), R );
         fi;
     else
         MN := UnionOfColumns( matM, matN );
         if IsBound( degMN ) then
-            F := HomalgFreeRightModuleWithWeights( R, degMN );
+            F := HomalgFreeRightModuleWithDegrees( R, degMN );
         else
             F := HomalgFreeRightModule( NrGenerators( M ) * NrGenerators( N ), R );
         fi;
@@ -913,6 +941,8 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
     
 end );
 
+##  <#GAPDoc Label="Functor_TensorProduct:code">
+##      <Listing Type="Code"><![CDATA[
 InstallValue( Functor_TensorProduct,
         CreateHomalgFunctor(
                 [ "name", "TensorProduct" ],
@@ -923,6 +953,8 @@ InstallValue( Functor_TensorProduct,
                 [ "OnMorphisms", _Functor_TensorProduct_OnMorphisms ]
                 )
         );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
@@ -940,36 +972,571 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## Cokernel( phi ) and CokernelEpi( phi )
 ##
 
+##  <#GAPDoc Label="functor_Cokernel">
+##  <ManSection>
+##    <Var Name="functor_Cokernel"/>
+##    <Description>
+##      The functor that associates to a map its cokernel.
+##      <#Include Label="Functor_Cokernel:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Cokernel">
+##  <ManSection>
+##    <Oper Arg="phi" Name="Cokernel"/>
+##    <Description>
+##      The following example also makes use of the natural transformation <C>CokernelEpi</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> coker := Cokernel( phi );
+##  <A left module presented by 5 relations for 4 generators>
+##  gap> ByASmallerPresentation( coker );
+##  <A left module presented by 1 relation for 2 generators>
+##  gap> Display( coker );
+##  Z/< 8 > + Z^(1 x 1)
+##  gap> nu := CokernelEpi( phi );
+##  <An epimorphism of left modules>
+##  gap> Display( nu );
+##  [ [  -5,   0 ],
+##    [  -6,   1 ],
+##    [   1,  -2 ],
+##    [   0,   1 ] ]
+##  
+##  the map is currently represented by the above 4 x 2 matrix
+##  gap> DefectOfExactness( phi, nu );
+##  <A zero left module>
+##  gap> ByASmallerPresentation( nu );
+##  <An epimorphism of left modules>
+##  gap> Display( nu );
+##  [ [   2,   0 ],
+##    [   1,  -2 ],
+##    [   0,   1 ] ]
+##  
+##  the map is currently represented by the above 3 x 2 matrix
+##  gap> PreInverse( nu );
+##  false
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallFunctor( functor_Cokernel );
 
 ##
 ## ImageSubmodule( phi ) and ImageSubmoduleEmb( phi )
 ##
 
+##  <#GAPDoc Label="functor_ImageSubmodule">
+##  <ManSection>
+##    <Var Name="functor_ImageSubmodule"/>
+##    <Description>
+##      The functor that associates to a map its image.
+##      <#Include Label="Functor_ImageSubmodule:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="ImageSubmodule">
+##  <ManSection>
+##    <Oper Arg="phi" Name="ImageSubmodule"/>
+##    <Description>
+##      The following example also makes use of the natural transformations <C>ImageSubmoduleEpi</C>
+##      and <C>ImageSubmoduleEmb</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> im := ImageSubmodule( phi );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> ByASmallerPresentation( im );
+##  <A free left module of rank 1 on a free generator>
+##  gap> pi := ImageSubmoduleEpi( phi );
+##  <A split epimorphism of left modules>
+##  gap> epsilon := ImageSubmoduleEmb( phi );
+##  <A monomorphism of left modules>
+##  gap> phi = pi * epsilon;
+##  true
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallFunctorOnObjects( functor_ImageSubmodule );
 
 ##
 ## Kernel( phi ) and KernelEmb( phi )
 ##
 
+##  <#GAPDoc Label="functor_Kernel">
+##  <ManSection>
+##    <Var Name="functor_Kernel"/>
+##    <Description>
+##      The functor that associates to a map its kernel.
+##      <#Include Label="Functor_Kernel:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Kernel">
+##  <ManSection>
+##    <Oper Arg="phi" Name="Kernel"/>
+##    <Description>
+##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> ker := Kernel( phi );
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
+##  gap> Display( ker );
+##  Z/< -3 >
+##  gap> ByASmallerPresentation( last );
+##  <A cyclic pure torsion left module presented by 1 relation for a cyclic generator>
+##  gap> Display( ker );
+##  Z/< 3 >
+##  gap> iota := KernelEmb( phi );
+##  <A monomorphism of left modules>
+##  gap> Display( iota );
+##  [ [  0,  2,  4 ] ]
+##  
+##  the map is currently represented by the above 1 x 3 matrix
+##  gap> DefectOfExactness( iota, phi );
+##  <A zero left module>
+##  gap> ByASmallerPresentation( iota );
+##  <A monomorphism of left modules>
+##  gap> Display( iota );
+##  [ [  2,  0 ] ]
+##  
+##  the map is currently represented by the above 1 x 2 matrix
+##  gap> PostInverse( iota );
+##  false
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallFunctor( functor_Kernel );
 
 ##
 ## DefectOfExactness( cpx_post_pre )
 ##
 
+##  <#GAPDoc Label="functor_DefectOfExactness">
+##  <ManSection>
+##    <Var Name="functor_DefectOfExactness"/>
+##    <Description>
+##      The functor that associates to a pair of composable maps with a zero compositum the defect of exactness,
+##      i.e. the kernel of the outer map modulo the image of the inner map.
+##      <#Include Label="Functor_DefectOfExactness:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="DefectOfExactness">
+##  <ManSection>
+##    <Oper Arg="phi, psi" Name="DefectOfExactness"/>
+##    <Description>
+##      We follow the associative convention for applying maps.
+##      For left modules <A>phi</A> is applied first and from the right.
+##      For right modules <A>psi</A> is applied first and from the left.
+##      <P/>
+##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ 1, 3, 3, 3,   0, 3, 10, 17,   1, 3, 3, 3,  0, 0, 0, 0 ]", 4, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> iota := KernelEmb( phi );
+##  <A monomorphism of left modules>
+##  gap> DefectOfExactness( iota, phi );
+##  <A zero left module>
+##  gap> hom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );
+##  <A homomorphism of right modules>
+##  gap> hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );
+##  <A homomorphism of right modules>
+##  gap> DefectOfExactness( hom_iota, hom_phi );
+##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  gap> ByASmallerPresentation( last );
+##  <A cyclic pure torsion right module on a cyclic generator satisfying 1 relation>
+##  gap> Display( last );
+##  Z/< 2 >
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallFunctor( functor_DefectOfExactness );
 
 ##
 ## Hom( M, N )
 ##
 
+##  <#GAPDoc Label="Functor_Hom">
+##  <ManSection>
+##    <Var Name="Functor_Hom"/>
+##    <Description>
+##      The bifunctor <C>Hom</C>.
+##      <#Include Label="Functor_Hom:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Hom">
+##  <ManSection>
+##    <Oper Arg="o1,o2" Name="Hom"/>
+##    <Description>
+##      <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
+##      or a chain map.
+##      <P/>
+##      Each generator of a module of homomorphisms is displayed as a matrix of appropriate dimensions.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> psi := Hom( phi, M );
+##  <A homomorphism of right modules>
+##  gap> ByASmallerPresentation( psi );
+##  <A homomorphism of right modules>
+##  gap> Display( psi );
+##  [ [   1,   1,   0,   1 ],
+##    [   2,   2,   0,   0 ],
+##    [   0,   0,   6,  10 ] ]
+##  
+##  the map is currently represented by the above 3 x 4 matrix
+##  gap> homNM := Source( psi );
+##  <A non-zero right module on 4 generators satisfying 2 relations>
+##  gap> IsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work
+##  true
+##  gap> homMM := Range( psi );
+##  <A non-zero right module on 3 generators satisfying 2 relations>
+##  gap> IsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work
+##  true
+##  gap> Display( homNM );
+##  Z/< 3 > + Z/< 3 > + Z^(2 x 1)
+##  gap> Display( homMM );
+##  Z/< 3 > + Z/< 3 > + Z^(1 x 1)
+##  gap> IsMonomorphism( psi );
+##  false
+##  gap> IsEpimorphism( psi );
+##  false
+##  gap> GeneratorsOfModule( homNM );
+##  <A set of 4 generators of a homalg right module>
+##  gap> Display( last );
+##  [ [  0,  1,  2 ],
+##    [  0,  1,  2 ],
+##    [  0,  1,  2 ],
+##    [  0,  0,  0 ] ]
+##  
+##  [ [  0,  1,  2 ],
+##    [  0,  0,  0 ],
+##    [  0,  0,  0 ],
+##    [  0,  2,  4 ] ]
+##  
+##  [ [   0,   0,  -3 ],
+##    [   0,   0,   7 ],
+##    [   0,   0,  -5 ],
+##    [   0,   0,   1 ] ]
+##  
+##  [ [   0,   1,  -3 ],
+##    [   0,   0,  12 ],
+##    [   0,   0,  -9 ],
+##    [   0,   2,   6 ] ]
+##  
+##  gap> GeneratorsOfModule( homMM );
+##  <A set of 3 generators of a homalg right module>
+##  gap> Display( last );
+##  [ [  0,  0,  0 ],
+##    [  0,  1,  2 ],
+##    [  0,  0,  0 ] ]
+##  
+##  [ [  0,  2,  4 ],
+##    [  0,  0,  0 ],
+##    [  0,  2,  4 ] ]
+##  
+##  [ [   0,   1,   3 ],
+##    [   0,   0,  -2 ],
+##    [   0,   1,   3 ] ]
+##  
+##  ]]></Example>
+##      Now we compute a certain natural filtration on <C>Hom</C><M>(M,M)</M>:
+##      <Example><![CDATA[
+##  gap> dM := Resolution( M );
+##  <A non-zero right acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> hMM := Hom( dM, dM );
+##  <A non-zero acyclic cocomplex containing a single morphism of right complexes at degrees [ 0 .. 1 ]>
+##  gap> BMM := HomalgBicomplex( hMM );
+##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> II_E := SecondSpectralSequenceWithFiltration( BMM );
+##  <A stable cohomological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of right modules at bidegrees
+##  [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E );
+##  The associated first spectral sequence of the bicomplex:
+##  
+##  a cohomological spectral sequence at bidegrees
+##  [ [ 0 .. 1 ], [ -1 .. 0 ] ]
+##  ---------
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 1:
+##  
+##   * *
+##   . .
+##  ---------
+##  Level 2:
+##  
+##   s s
+##   . .
+##  
+##  Now the second spectral sequence of the bicomplex:
+##  
+##  a cohomological spectral sequence at bidegrees
+##  [ [ -1 .. 0 ], [ 0 .. 1 ] ]
+##  ---------
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 1:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 2:
+##  
+##   s s
+##   . s
+##  gap> filt := FiltrationBySpectralSequence( II_E );
+##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+##    -1:	<A non-zero cyclic right module on a cyclic generator satisfying 1 relation>
+##     0:	<A non-zero right module on 3 generators satisfying 2 relations>
+##  of
+##  <A non-zero right module on 4 generators satisfying 3 relations>>
+##  gap> ByASmallerPresentation( filt );
+##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+##    -1:	<A cyclic pure codim 1 right module on a cyclic generator satisfying 1 relation>
+##     0:	<A non-zero right module on 2 generators satisfying 1 relation>
+##  of
+##  <A non-zero right module on 3 generators satisfying 2 relations>>
+##  gap> Display( filt );
+##  Degree -1:
+##  
+##  Z/< 3 >
+##  ----------
+##  Degree 0:
+##  
+##  Z/< 3 > + Z^(1 x 1)
+##  gap> Display( homMM );
+##  Z/< 3 > + Z/< 3 > + Z^(1 x 1)
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallFunctor( Functor_Hom );
 
 ##
 ## TensorProduct( M, N )	( M * N )
 ##
 
+##  <#GAPDoc Label="Functor_TensorProduct">
+##  <ManSection>
+##    <Var Name="Functor_TensorProduct"/>
+##    <Description>
+##      The tensor product bifunctor.
+##      <#Include Label="Functor_TensorProduct:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="TensorProduct">
+##  <ManSection>
+##    <Oper Arg="o1,o2" Name="TensorProduct"/>
+##    <Oper Arg="o1,o2" Name="\*" Label="TensorProduct"/>
+##    <Description>
+##      <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
+##      or a chain map.
+##      <P/>
+##      The symbol <C>*</C> is a shorthand for several operations associated with the functor <C>Functor_TensorProduct</C>
+##      installed under the name <C>TensorProduct</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-zero left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> L := Hom( ZZ, M );
+##  <A non-zero right module on 3 generators satisfying 2 relations>
+##  gap> ByASmallerPresentation( L );
+##  <A non-zero right module on 2 generators satisfying 1 relation>
+##  gap> Display( L );
+##  Z/< 3 > + Z^(1 x 1)
+##  gap> L;	## the display method found out further information about the module L
+##  <A rank 1 right module on 2 generators satisfying 1 relation>
+##  gap> psi := phi * L;
+##  <A homomorphism of right modules>
+##  gap> ByASmallerPresentation( psi );
+##  <A homomorphism of right modules>
+##  gap> Display( psi );
+##  [ [   0,   0,   1,   1 ],
+##    [   0,   0,   8,   1 ],
+##    [   0,   0,   0,  -2 ],
+##    [   0,   0,   0,   2 ] ]
+##  
+##  the map is currently represented by the above 4 x 4 matrix
+##  
+##  gap> ML := Source( psi );
+##  <A right module on 4 generators satisfying 3 relations>
+##  gap> IsIdenticalObj( ML, M * L );	## the caching at work
+##  true
+##  gap> NL := Range( psi );
+##  <A right module on 4 generators satisfying 2 relations>
+##  gap> IsIdenticalObj( NL, N * L );	## the caching at work
+##  true
+##  gap> Display( ML );
+##  Z/< 3 > + Z/< 3 > + Z/< 3 > + Z^(1 x 1)
+##  gap> Display( NL );
+##  Z/< 3 > + Z/< 12 > + Z^(2 x 1)
+##  ]]></Example>
+##      Now we compute a certain natural filtration on the tensor product <M>M</M><C>*</C><M>L</M>:
+##      <Example><![CDATA[
+##  gap> P := Resolution( M );
+##  <A non-zero right acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  gap> GP := Hom( P );
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  gap> CE := Resolution( GP );
+##  <An acyclic cocomplex containing a single morphism of right complexes at degrees [ 0 .. 1 ]>
+##  gap> FCE := Hom( CE, L );
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  gap> BC := HomalgBicomplex( FCE );
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  gap> II_E := SecondSpectralSequenceWithFiltration( BC );
+##  <A stable homological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of left modules at bidegrees
+##  [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  gap> Display( II_E );
+##  The associated first spectral sequence of the bicomplex:
+##  
+##  a homological spectral sequence at bidegrees
+##  [ [ 0 .. 1 ], [ -1 .. 0 ] ]
+##  ---------
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 1:
+##  
+##   * *
+##   . .
+##  ---------
+##  Level 2:
+##  
+##   s s
+##   . .
+##  
+##  Now the second spectral sequence of the bicomplex:
+##  
+##  a homological spectral sequence at bidegrees
+##  [ [ -1 .. 0 ], [ 0 .. 1 ] ]
+##  ---------
+##  Level 0:
+##  
+##   * *
+##   * *
+##  ---------
+##  Level 1:
+##  
+##   * *
+##   . s
+##  ---------
+##  Level 2:
+##  
+##   s s
+##   . s
+##  gap> filt := FiltrationBySpectralSequence( II_E );
+##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
+##     0:	<A non-zero left module presented by 1 relation for 2 generators>
+##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
+##  of
+##  <A non-zero left module presented by 7 relations for 6 generators>>
+##  gap> ByASmallerPresentation( filt );
+##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
+##     0:	<A non-zero left module presented by 1 relation for 2 generators>
+##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
+##  of
+##  <A non-zero left module presented by 3 relations for 4 generators>>
+##  gap> Display( filt );
+##  Degree 0:
+##  
+##  Z/< 3 > + Z^(1 x 1)
+##  ----------
+##  Degree -1:
+##  
+##  Z/< 3 > + Z/< 3 >
+##  gap> Display( ML );
+##  Z/< 3 > + Z/< 3 > + Z/< 3 > + Z^(1 x 1)
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallFunctor( Functor_TensorProduct );
 
 ## for convenience
@@ -1009,35 +1576,149 @@ end );
 ## Ext( c, M, N )
 ##
 
-RightSatelliteOfCofunctor( Functor_Hom, 1, "Ext" );
+##  <#GAPDoc Label="Functor_Ext">
+##  <ManSection>
+##    <Var Name="Functor_Ext"/>
+##    <Description>
+##      The bifunctor <C>Ext</C>.
+##      <P/>
+##      <#Include Label="Functor_Ext:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Functor_Ext:code">
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_Ext</C>
+##    and all the different operations <C>Ext</C> in &homalg;.
+##      <Listing Type="Code"><![CDATA[
+RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
+##  ]]></Listing>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="RightSatelliteOfCofunctor:example">
+##    <#Include Label="Functor_Ext:code">
+##  <#/GAPDoc>
 
 ##
 ## Tor( c, M, N )
 ##
 
-LeftSatelliteOfFunctor( Functor_TensorProduct, 1, "Tor" );
+##  <#GAPDoc Label="Functor_Tor">
+##  <ManSection>
+##    <Var Name="Functor_Tor"/>
+##    <Description>
+##      The bifunctor <C>Tor</C>.
+##      <P/>
+##      <#Include Label="Functor_Tor:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Functor_Tor:code">
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_Tor</C>
+##    and all the different operations <C>Tor</C> in &homalg;.
+##      <Listing Type="Code"><![CDATA[
+LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
+##  ]]></Listing>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="LeftSatelliteOfFunctor:example">
+##    <#Include Label="Functor_Tor:code">
+##  <#/GAPDoc>
 
 ##
 ## RHom( c, M, N )
 ##
 
-RightDerivedCofunctor( Functor_Hom, 1 );
+##  <#GAPDoc Label="Functor_RHom">
+##  <ManSection>
+##    <Var Name="Functor_RHom"/>
+##    <Description>
+##      The bifunctor <C>RHom</C>.
+##      <P/>
+##      <#Include Label="Functor_RHom:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Functor_RHom:code">
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_RHom</C>
+##    and all the different operations <C>RHom</C> in &homalg;.
+##      <Listing Type="Code"><![CDATA[
+RightDerivedCofunctor( Functor_Hom );
+##  ]]></Listing>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="RightDerivedCofunctor:example">
+##    <#Include Label="Functor_RHom:code">
+##  <#/GAPDoc>
 
 ##
 ## LTensorProduct( c, M, N )
 ##
 
-LeftDerivedFunctor( Functor_TensorProduct, 1 );
+##  <#GAPDoc Label="Functor_LTensorProduct">
+##  <ManSection>
+##    <Var Name="Functor_LTensorProduct"/>
+##    <Description>
+##      The bifunctor <C>LTensorProduct</C>.
+##      <P/>
+##      <#Include Label="Functor_LTensorProduct:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Functor_LTensorProduct:code">
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_LTensorProduct</C>
+##    and all the different operations <C>LTensorProduct</C> in &homalg;.
+##      <Listing Type="Code"><![CDATA[
+LeftDerivedFunctor( Functor_TensorProduct );
+##  ]]></Listing>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="LeftDerivedFunctor:example">
+##    <#Include Label="Functor_LTensorProduct:code">
+##  <#/GAPDoc>
 
 ##
 ## HomHom( M, K, N ) = Hom( Hom( M, K ), N )
 ##
 
+##  <#GAPDoc Label="Functor_HomHom">
+##  <ManSection>
+##    <Var Name="Functor_HomHom"/>
+##    <Description>
+##      The bifunctor <C>HomHom</C>.
+##      <P/>
+##      <#Include Label="Functor_HomHom:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Functor_HomHom:code">
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_HomHom</C>
+##    and all the different operations <C>HomHom</C> in &homalg;.
+##      <Listing Type="Code"><![CDATA[
 Functor_Hom * Functor_Hom;
+##  ]]></Listing>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="ComposeFunctors:example">
+##    <#Include Label="Functor_HomHom:code">
+##  <#/GAPDoc>
 
 ##
 ## LHomHom( M, K, N ) = L(Hom( Hom( -, K ), N ))( M )
 ##
 
-LeftDerivedFunctor( Functor_HomHom, 1 );
+##  <#GAPDoc Label="Functor_LHomHom">
+##  <ManSection>
+##    <Var Name="Functor_LHomHom"/>
+##    <Description>
+##      The bifunctor <C>LHomHom</C>.
+##      <P/>
+##      <#Include Label="Functor_LHomHom:code">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="Functor_LHomHom:code">
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_LHomHom</C>
+##    and all the different operations <C>LHomHom</C> in &homalg;.
+##      <Listing Type="Code"><![CDATA[
+LeftDerivedFunctor( Functor_HomHom );
+##  ]]></Listing>
+##  <#/GAPDoc>
+##  <#GAPDoc Label="LeftDerivedFunctor:example2">
+##    <#Include Label="Functor_LHomHom:code">
+##  <#/GAPDoc>
 

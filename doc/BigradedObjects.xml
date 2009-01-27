@@ -11,6 +11,8 @@
 <Chapter Label="BigradedObjects">
 <Heading>Bigraded Objects</Heading>
 
+<#Include Label="BigradedObjects:intro">
+
 <Section Label="BigradedObjects:Category">
 
 <Heading>BigradedObjects: Categories and Representations</Heading>
@@ -29,6 +31,7 @@
 
 <#Include Label="HomalgBigradedObject">
 <#Include Label="AsDifferentialObject:bicomplex">
+<#Include Label="DefectOfExactness:bigradedobject">
 
 </Section>
 
@@ -49,6 +52,8 @@
 
 <Section Label="BigradedObjects:Operations">
 <Heading>Bigraded Objects: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:bigradedobject">
 
 </Section>
 
