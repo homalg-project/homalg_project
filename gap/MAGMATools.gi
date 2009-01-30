@@ -100,14 +100,14 @@ InstallValue( CommonHomalgTableForMAGMATools,
                CertainRows :=
                  function( M, plist )
                    
-                   return homalgSendBlocking( [ "Matrix(", M, "[", plist, "])" ], HOMALG_IO.Pictograms.CertainRows );
+                   return homalgSendBlocking( [ "Matrix(", M, "[ \\", plist, "])" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
                
                CertainColumns :=
                  function( M, plist )
                    
-                   return homalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[",plist, "]))" ], HOMALG_IO.Pictograms.CertainColumns );
+                   return homalgSendBlocking( [ "Transpose(Matrix(Transpose(", M, ")[ \\",plist, "]))" ], HOMALG_IO.Pictograms.CertainColumns );
                    
                  end,
                
