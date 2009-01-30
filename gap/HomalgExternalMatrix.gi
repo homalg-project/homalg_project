@@ -101,11 +101,21 @@ end );
 ##
 InstallGlobalFunction( ConvertHomalgMatrix,
   function( arg )
-    local nargs, M, o, R, r, c;
+    local nargs, R, stream, flatten, M, o, r, c;
     
     nargs := Length( arg );
     
     if nargs = 2 and IsHomalgRing( arg[2] ) then
+        
+        R := arg[2];
+        
+        stream := homalgStream( R );
+        
+        if IsBound( stream.nolistlist ) and stream.nolistlist = true then
+            flatten := true;
+        else
+            flatten := false;
+        fi;
         
         if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
             M := arg[1];
@@ -113,12 +123,15 @@ InstallGlobalFunction( ConvertHomalgMatrix,
             M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
         elif IsList( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
             M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], homalgPointer ) ), "]" );
+        elif IsMatrix( arg[1] ) and flatten then
+            M := arg[1];
+            r := Length( M );
+            c := Length( M[1] );
+            return ConvertHomalgMatrix( Flat( M ), r, c, R );
         else
             M := String( arg[1] );
         fi;
         
-        R := arg[2];
-	
         if IsHomalgMatrix( M ) then
             
             if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
@@ -139,19 +152,31 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         
     elif nargs = 4 and IsHomalgRing( arg[4] ) then
         
+        R := arg[4];
+        
+        stream := homalgStream( R );
+        
+        if IsBound( stream.nolistlist ) and stream.nolistlist = true then
+            flatten := true;
+        else
+            flatten := false;
+        fi;
+        
+        r := arg[2];
+        c := arg[3];
+        
         if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
             M := arg[1];
         elif IsMatrix( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
             M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
         elif IsList( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
             M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], homalgPointer ) ), "]" );
+        elif IsMatrix( arg[1] ) and flatten then
+            M := arg[1];
+            return ConvertHomalgMatrix( Flat( M ), r, c, R );
         else
             M := String( arg[1] );
         fi;
-        
-        r := arg[2];
-        c := arg[3];
-        R := arg[4];
         
         if IsHomalgMatrix( M ) then
             
