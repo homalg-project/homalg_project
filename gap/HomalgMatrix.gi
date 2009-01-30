@@ -1343,7 +1343,7 @@ InstallGlobalFunction( HomalgMatrix,
         elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] ) then
             if Length( arg[1] ) > 0 and not IsList( arg[1][1] )
                and not ( nargs > 1 and IsInt( arg[2]) ) and not ( nargs > 2 and IsInt( arg[3] ) ) then ## CAUTION: some CAS only accept a list and not a listlist
-                M := List( arg[1], a -> [a] );
+                M := List( arg[1], a -> [ a ] );
             else
                 M := arg[1];
             fi;
@@ -1393,7 +1393,7 @@ InstallGlobalFunction( HomalgMatrix,
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             M := ListToListList( M, arg[2], Length( M ) / arg[2] );
         else
-            M := List( M, a -> [a] );	## NormalizeInput
+            M := List( M, a -> [ a ] );	## NormalizeInput
         fi;
         
         RP := homalgTable( R );

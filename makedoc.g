@@ -42,7 +42,9 @@ list := [
          "../gap/HomalgFunctor.gd",
          "../gap/HomalgFunctor.gi",
          "../gap/BasicFunctors.gd",
-         "../gap/BasicFunctors.gi"
+         "../gap/BasicFunctors.gi",
+         "../tst/RHom_Z.g",
+         "../tst/LTensorProduct_Z.g"
          ];
 
 MakeGAPDocDoc( "doc", "homalg", list, "homalg" );

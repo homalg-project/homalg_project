@@ -13,7 +13,8 @@ doc/manual.six: makedoc.g maketest.g \
 		doc/Bicomplexes.xml doc/BigradedObjects.xml \
 		doc/SpectralSequences.xml doc/Functors.xml \
 		doc/examples.xml doc/Project.xml \
-		doc/appendix.xml VERSION
+		doc/appendix.xml VERSION \
+		tst/*.g
 	        gapL makedoc.g
 
 clean:

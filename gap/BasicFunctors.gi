@@ -981,6 +981,7 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="Cokernel">
 ##  <ManSection>
 ##    <Oper Arg="phi" Name="Cokernel"/>
@@ -1047,6 +1048,7 @@ InstallFunctor( functor_Cokernel );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="ImageSubmodule">
 ##  <ManSection>
 ##    <Oper Arg="phi" Name="ImageSubmodule"/>
@@ -1097,6 +1099,7 @@ InstallFunctorOnObjects( functor_ImageSubmodule );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="Kernel">
 ##  <ManSection>
 ##    <Oper Arg="phi" Name="Kernel"/>
@@ -1121,7 +1124,7 @@ InstallFunctorOnObjects( functor_ImageSubmodule );
 ##  gap> Display( ker );
 ##  Z/< -3 >
 ##  gap> ByASmallerPresentation( last );
-##  <A cyclic pure torsion left module presented by 1 relation for a cyclic generator>
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
 ##  gap> Display( ker );
 ##  Z/< 3 >
 ##  gap> iota := KernelEmb( phi );
@@ -1161,6 +1164,7 @@ InstallFunctor( functor_Kernel );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="DefectOfExactness">
 ##  <ManSection>
 ##    <Oper Arg="phi, psi" Name="DefectOfExactness"/>
@@ -1195,7 +1199,7 @@ InstallFunctor( functor_Kernel );
 ##  gap> DefectOfExactness( hom_iota, hom_phi );
 ##  <A cyclic right module on a cyclic generator satisfying 1 relation>
 ##  gap> ByASmallerPresentation( last );
-##  <A cyclic pure torsion right module on a cyclic generator satisfying 1 relation>
+##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> Display( last );
 ##  Z/< 2 >
 ##  ]]></Example>
@@ -1218,6 +1222,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="Hom">
 ##  <ManSection>
 ##    <Oper Arg="o1,o2" Name="Hom"/>
@@ -1266,6 +1271,21 @@ InstallFunctor( functor_DefectOfExactness );
 ##  false
 ##  gap> IsEpimorphism( psi );
 ##  false
+##  gap> GeneratorsOfModule( homMM );
+##  <A set of 3 generators of a homalg right module>
+##  gap> Display( last );
+##  [ [  0,  0,  0 ],
+##    [  0,  1,  2 ],
+##    [  0,  0,  0 ] ]
+##  
+##  [ [  0,  2,  4 ],
+##    [  0,  0,  0 ],
+##    [  0,  2,  4 ] ]
+##  
+##  [ [   0,   1,   3 ],
+##    [   0,   0,  -2 ],
+##    [   0,   1,   3 ] ]
+##  
 ##  gap> GeneratorsOfModule( homNM );
 ##  <A set of 4 generators of a homalg right module>
 ##  gap> Display( last );
@@ -1289,20 +1309,29 @@ InstallFunctor( functor_DefectOfExactness );
 ##    [   0,   0,  -9 ],
 ##    [   0,   2,   6 ] ]
 ##  
-##  gap> GeneratorsOfModule( homMM );
-##  <A set of 3 generators of a homalg right module>
+##  ]]></Example>
+##      If for example the source <M>N</M> gets a new presentation, you will see the effect on the generators:
+##      <Example><![CDATA[
+##  gap> ByASmallerPresentation( N );
+##  <A non-zero left module presented by 1 relation for 3 generators>
+##  gap> GeneratorsOfModule( homNM );
+##  <A set of 4 generators of a homalg right module>
 ##  gap> Display( last );
-##  [ [  0,  0,  0 ],
+##  [ [  0,  3,  6 ],
 ##    [  0,  1,  2 ],
 ##    [  0,  0,  0 ] ]
 ##  
-##  [ [  0,  2,  4 ],
-##    [  0,  0,  0 ],
-##    [  0,  2,  4 ] ]
+##  [ [   0,   9,  18 ],
+##    [   0,   0,   0 ],
+##    [   0,   2,   4 ] ]
 ##  
-##  [ [   0,   1,   3 ],
-##    [   0,   0,  -2 ],
-##    [   0,   1,   3 ] ]
+##  [ [   0,   0,   0 ],
+##    [   0,   0,  -5 ],
+##    [   0,   0,   1 ] ]
+##  
+##  [ [   0,   9,  18 ],
+##    [   0,   0,  -9 ],
+##    [   0,   2,   6 ] ]
 ##  
 ##  ]]></Example>
 ##      Now we compute a certain natural filtration on <C>Hom</C><M>(M,M)</M>:
@@ -1364,7 +1393,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##  <A non-zero right module on 4 generators satisfying 3 relations>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    -1:	<A cyclic pure codim 1 right module on a cyclic generator satisfying 1 relation>
+##    -1:	<A cyclic codim 1 right module on a cyclic generator satisfying 1 relation>
 ##     0:	<A non-zero right module on 2 generators satisfying 1 relation>
 ##  of
 ##  <A non-zero right module on 3 generators satisfying 2 relations>>
@@ -1398,6 +1427,7 @@ InstallFunctor( Functor_Hom );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="TensorProduct">
 ##  <ManSection>
 ##    <Oper Arg="o1,o2" Name="TensorProduct"/>
@@ -1597,6 +1627,54 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##    <#Include Label="Functor_Ext:code">
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="Ext">
+##  <ManSection>
+##    <Oper Arg="[c,]o1,o2[,str]" Name="Ext"/>
+##    <Description>
+##      Compute the <A>c</A>-th extension object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
+##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
+##      or a chain map. If <A>str</A>=<Q>a</Q> then the (cohomologically) graded object
+##      <M>Ext^i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A> is computed.
+##      If neither <A>c</A> nor <A>str</A> is specified then the cohomologically graded object
+##      <M>Ext^i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
+##      where <M>d</M> is the length of the internally computed free resolution of <A>o1</A>.
+##      <P/>
+##      Each generator of a module of extensions is displayed as a matrix of appropriate dimensions.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := TorsionSubmodule( M );
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  gap> iota := TorsionSubmoduleEmb( M );
+##  <A monomorphism of left modules>
+##  gap> psi := Ext( 1, iota, N );
+##  <A homomorphism of right modules>
+##  gap> ByASmallerPresentation( psi );
+##  <A homomorphism of right modules>
+##  gap> Display( psi );
+##  [ [  2 ] ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  gap> extNN := Range( psi );
+##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  gap> IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work
+##  true
+##  gap> extMN := Source( psi );
+##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  gap> IsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work
+##  true
+##  gap> Display( extNN );
+##  Z/< 3 >
+##  gap> Display( extMN );
+##  Z/< 3 >
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+
 ##
 ## Tor( c, M, N )
 ##
@@ -1621,6 +1699,52 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  <#GAPDoc Label="LeftSatelliteOfFunctor:example">
 ##    <#Include Label="Functor_Tor:code">
 ##  <#/GAPDoc>
+
+##  <#GAPDoc Label="Tor">
+##  <ManSection>
+##    <Oper Arg="[c,]o1,o2[,str]" Name="Tor"/>
+##    <Description>
+##      Compute the <A>c</A>-th torsion object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
+##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
+##      or a chain map. If <A>str</A>=<Q>a</Q> then the (cohomologically) graded object
+##      <M>Tor_i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A> is computed.
+##      If neither <A>c</A> nor <A>str</A> is specified then the cohomologically graded object
+##      <M>Tor_i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
+##      where <M>d</M> is the length of the internally computed free resolution of <A>o1</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-zero left module presented by 2 relations for 3 generators>
+##  gap> N := TorsionSubmodule( M );
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  gap> iota := TorsionSubmoduleEmb( M );
+##  <A monomorphism of left modules>
+##  gap> psi := Tor( 1, iota, N );
+##  <A homomorphism of left modules>
+##  gap> ByASmallerPresentation( psi );
+##  <A homomorphism of left modules>
+##  gap> Display( psi );
+##  [ [  1 ] ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  gap> torNN := Source( psi );
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  gap> IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work
+##  true
+##  gap> torMN := Range( psi );
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  gap> IsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work
+##  true
+##  gap> Display( torNN );
+##  Z/< 3 >
+##  gap> Display( torMN );
+##  Z/< 3 >
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 
 ##
 ## RHom( c, M, N )
@@ -1647,6 +1771,32 @@ RightDerivedCofunctor( Functor_Hom );
 ##    <#Include Label="Functor_RHom:code">
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="RHom">
+##  <ManSection>
+##    <Oper Arg="[c,]o1,o2[,str]" Name="RHom"/>
+##    <Description>
+##      Compute the <A>c</A>-th extension object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
+##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
+##      or a chain map. The string <A>str</A> may take different values:
+##      <List>
+##        <Item>If <A>str</A>=<Q>a</Q> then <M>R^i Hom(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A>
+##          is computed.</Item>
+##        <Item>If <A>str</A>=<Q>c</Q> then the <A>c</A>-th connecting homomorphism with respect to
+##          the short exact sequence <A>o1</A> is computed.</Item>
+##        <Item>If <A>str</A>=<Q>t</Q> then the exact triangle upto cohomological degree <A>c</A> with respect to
+##          the short exact sequence <A>o1</A> is computed.</Item>
+##      </List>
+##      If neither <A>c</A> nor <A>str</A> is specified then the cohomologically graded object
+##      <M>R^i Hom(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
+##      where <M>d</M> is the length of the internally computed free resolution of <A>o1</A>.
+##      <P/>
+##      Each generator of a module of derived homomorphisms is displayed as a matrix of appropriate dimensions.
+##      <#Include Label="RHom_Z">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+
 ##
 ## LTensorProduct( c, M, N )
 ##
@@ -1672,6 +1822,31 @@ LeftDerivedFunctor( Functor_TensorProduct );
 ##    <#Include Label="Functor_LTensorProduct:code">
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="LTensorProduct">
+##  <ManSection>
+##    <Oper Arg="[c,]o1,o2[,str]" Name="LTensorProduct"/>
+##    <Description>
+##      Compute the <A>c</A>-th torsion object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
+##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
+##      or a chain map. The string <A>str</A> may take different values:
+##      <List>
+##        <Item>If <A>str</A>=<Q>a</Q> then <M>L_i TensorProduct(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A>
+##          is computed.</Item>
+##        <Item>If <A>str</A>=<Q>c</Q> then the <A>c</A>-th connecting homomorphism with respect to
+##          the short exact sequence <A>o1</A> is computed.</Item>
+##        <Item>If <A>str</A>=<Q>t</Q> then the exact triangle upto cohomological degree <A>c</A> with respect to
+##          the short exact sequence <A>o1</A> is computed.</Item>
+##      </List>
+##      If neither <A>c</A> nor <A>str</A> is specified then the cohomologically graded object
+##      <M>L_i TensorProduct(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
+##      where <M>d</M> is the length of the internally computed free resolution of <A>o1</A>.
+##      <P/>
+##      Each generator of a module of derived homomorphisms is displayed as a matrix of appropriate dimensions.
+##      <#Include Label="LTensorProduct_Z">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 ##
 ## HomHom( M, K, N ) = Hom( Hom( M, K ), N )
 ##

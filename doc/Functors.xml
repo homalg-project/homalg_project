@@ -48,21 +48,36 @@
 
 <#Include Label="functor_Cokernel">
 <#Include Label="Cokernel">
+
 <#Include Label="functor_ImageSubmodule">
 <#Include Label="ImageSubmodule">
+
 <#Include Label="functor_Kernel">
 <#Include Label="Kernel">
+
 <#Include Label="functor_DefectOfExactness">
 <#Include Label="DefectOfExactness">
+
 <#Include Label="Functor_Hom">
 <#Include Label="Hom">
+
 <#Include Label="Functor_TensorProduct">
 <#Include Label="TensorProduct">
+
 <#Include Label="Functor_Ext">
+<#Include Label="Ext">
+
 <#Include Label="Functor_Tor">
+<#Include Label="Tor">
+
 <#Include Label="Functor_RHom">
+<#Include Label="RHom">
+
 <#Include Label="Functor_LTensorProduct">
+<#Include Label="LTensorProduct">
+
 <#Include Label="Functor_HomHom">
+
 <#Include Label="Functor_LHomHom">
 
 </Section>

@@ -2272,7 +2272,7 @@ end );
 ##  gap> Display( N );
 ##  Z/( 4 )/< 2 > + Z/( 4 )^(1 x 1)
 ##  gap> M;
-##  <A pure torsion left module presented by 3 relations for 3 generators>
+##  <A torsion left module presented by 3 relations for 3 generators>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2391,7 +2391,12 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local num_gen, properties, nz, num_rel, gen_string, rel_string, locked;
+    local R, left_module, num_gen, properties, nz, num_rel,
+          gen_string, rel_string, locked;
+    
+    R := HomalgRing( M );
+    
+    left_module := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
     
     num_gen := NrGenerators( M );
     
@@ -2466,18 +2471,22 @@ InstallMethod( ViewObj,
         if HasCodimOfModule( M ) then
             if HasIsPure( M ) then
                 if IsPure( M ) then
-                    if HasCodegreeOfPurity( M ) then
-                        if CodegreeOfPurity( M ) = [ 0 ] then
-                            Append( properties, " reflexively " );
-                        elif CodegreeOfPurity( M ) = [ 1 ] then
-                            Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
+                    ## only display the purity information if the global dimension of the ring is > 1:
+                    if not ( left_module and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) and
+                       not ( not left_module and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) then
+                        if HasCodegreeOfPurity( M ) then
+                            if CodegreeOfPurity( M ) = [ 0 ] then
+                                Append( properties, " reflexively " );
+                            elif CodegreeOfPurity( M ) = [ 1 ] then
+                                Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
+                            else
+                                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                            fi;
                         else
-                            Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                            Append( properties, " " );
                         fi;
-                    else
-                        Append( properties, " " );
+                        Append( properties, "pure" );
                     fi;
-                    Append( properties, "pure" );
                 else
                     Append( properties, " non-pure" );
                 fi;
@@ -2487,18 +2496,22 @@ InstallMethod( ViewObj,
         else
             if HasIsPure( M ) then
                 if IsPure( M ) then
-                    if HasCodegreeOfPurity( M ) then
-                        if CodegreeOfPurity( M ) = [ 0 ] then
-                            Append( properties, " reflexively " );
-                        elif CodegreeOfPurity( M ) = [ 1 ] then
-                            Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
+                    ## only display the purity information if the global dimension of the ring is > 1:
+                    if not ( left_module and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) and
+                       not ( not left_module and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) then
+                        if HasCodegreeOfPurity( M ) then
+                            if CodegreeOfPurity( M ) = [ 0 ] then
+                                Append( properties, " reflexively " );
+                            elif CodegreeOfPurity( M ) = [ 1 ] then
+                                Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
+                            else
+                                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                            fi;
                         else
-                            Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                            Append( properties, " " );
                         fi;
-                    else
-                        Append( properties, " " );
+                        Append( properties, "pure" );
                     fi;
-                    Append( properties, "pure" );
                 else
                     Append( properties, " non-pure" );
                 fi;
@@ -2525,7 +2538,7 @@ InstallMethod( ViewObj,
         Append( properties, " graded" );
     fi;
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+    if left_module then
         
         if IsInt( num_gen ) then
             gen_string := " generators";
