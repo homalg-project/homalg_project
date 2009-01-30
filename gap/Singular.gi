@@ -28,6 +28,7 @@ InstallValue( HOMALG_IO_Singular,
             CUT_POS_END := 2,			## delicate values!
             eoc_verbose := ";",
             eoc_quiet := ";",
+            nolistlist := true,			## a Singular specific
             break_lists := true,		## a Singular specific
             handle_output := true,		## a Singular specific
 #            original_lines := true,		## a Singular specific
@@ -635,7 +636,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
         stream := LaunchCAS( HOMALG_IO_Singular );
         
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"finvar.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;

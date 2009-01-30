@@ -510,9 +510,9 @@ InstallMethod( PolynomialRing,
     fi;
     
     if Length( var ) = 1 and HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "PolynomialRing(", r, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, Length( var ), ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "PolynomialRing(", r, Length( var ), ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
