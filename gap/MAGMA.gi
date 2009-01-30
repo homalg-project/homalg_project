@@ -116,7 +116,7 @@ InstallGlobalFunction( InitializeMAGMATools,
           GetUnitPosition, DivideRowByUnit, DivideColumnByUnit,
           CopyRowToIdentityMatrix, CopyRowToIdentityMatrix2,
           CopyColumnToIdentityMatrix, CopyColumnToIdentityMatrix2,
-          SetColumnToZero, GetCleanRowsPositions,
+          SetColumnToZero, GetCleanRowsPositions, MyRowspace,
           BasisOfRowModule, BasisOfColumnModule,
           BasisOfRowsCoeff, BasisOfColumnsCoeff,
           DecideZeroRows, DecideZeroColumns,
@@ -263,9 +263,12 @@ GetCleanRowsPositions:= function( M, clean_columns )\n\
   return clean_rows;\n\
 end function;\n\n";
     
+    MyRowspace := "\n\
+MyRowspace := func< M | Rowspace(RMatrixSpace( BaseRing(M), Nrows(M), Ncols(M)) ! M) >;\n\n";
+    
     BasisOfRowModule := "\n\
 BasisOfRowModule := function(M)\n\
-  S := Rowspace(M);\n\
+  S := MyRowspace(M);\n\
   Groebner(S);\n\
   return BasisMatrix(S);\n\
 end function;\n\n";
@@ -290,7 +293,7 @@ end function;\n\n";
     
     DecideZeroRows := "\n\
 DecideZeroRows:= function(A, B)\n\
-  S := Rowspace(B);\n\
+  S := MyRowspace(B);\n\
   F := Generic(S);\n\
   return Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
 end function;\n\n";
@@ -302,7 +305,7 @@ end function;\n\n";
     
     DecideZeroRowsEffectively := "\n\
 DecideZeroRowsEffectively:= function(A, B)\n\
-  S := Rowspace(B);\n\
+  S := MyRowspace(B);\n\
   F := Generic(S);\n\
   M := Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
   return M, Solution( B, M-A );\n\
@@ -317,12 +320,12 @@ end function;\n\n";
     SyzygiesGeneratorsOfRows := "\n\
 SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
   if M2 cmpeq [] then\n\
-    S := Rowspace(M1);\n\
+    S := MyRowspace(M1);\n\
     SM := SyzygyModule(S);\n\
   else\n\
-    S := Rowspace( VerticalJoin(M1, M2) );\n\
+    S := MyRowspace( VerticalJoin(M1, M2) );\n\
     SM := SyzygyModule(S);\n\
-    SM := Rowspace( ColumnSubmatrix( BasisMatrix(SM), 1, Nrows(M1) ) );\n\
+    SM := MyRowspace( ColumnSubmatrix( BasisMatrix(SM), 1, Nrows(M1) ) );\n\
   end if;\n\
   return Matrix( BaseRing(M1), Degree(SM), &cat [Eltseq(x) : x in MinimalBasis(SM)] );\n\
 end function;\n\n";
@@ -335,7 +338,7 @@ SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
     return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
   end if;\n\
 end function;\n\n";
-    
+
     homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -351,6 +354,7 @@ end function;\n\n";
     homalgSendBlocking( CopyColumnToIdentityMatrix2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SetColumnToZero, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( MyRowspace, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
