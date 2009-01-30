@@ -32,13 +32,13 @@ Subtitle := "RingsForHomalg - Internal and External Rings for the GAP Package ho
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.09.20",
+Version := "2009.01.16",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "20/09/2008",
+Date := "16/01/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -48,7 +48,7 @@ Date := "20/09/2008",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg",
+ArchiveURL := "http://homalg.math.rwth-aachen.de//RingsForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -176,7 +176,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "markus.lange.hegermann@rwth-aachen.de",
-    WWWHome       := "",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
@@ -253,9 +253,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/README.RingsForHomalg",
+  "http://homalg.math.rwth-aachen.de/RingsForHomalg/README.RingsForHomalg",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/RingsForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -306,7 +306,7 @@ PackageDoc := rec(
   BookName  := "RingsForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/RingsForHomalg/RingsForHomalgDoc.tar.gz",
+    "http://homalg.math.rwth-aachen.de/RingsForHomalg/RingsForHomalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -331,7 +331,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["IO_ForHomalg", ">= 2008.09.15"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["IO_ForHomalg", ">= 2008.10.26"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

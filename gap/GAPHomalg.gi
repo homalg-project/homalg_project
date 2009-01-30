@@ -213,7 +213,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for a listlist of an external matrix in GAP",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
@@ -228,20 +228,20 @@ InstallMethod( CreateHomalgMatrix,
 end );
 
 ##
-InstallMethod( CreateHomalgMatrix,
+InstallMethod( CreateHomalgMatrixFromString,
         "for a list of an external matrix in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrix( \"", S, "\", ", r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrixFromString( \"", S, "\", ", r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrix,
+InstallMethod( CreateHomalgSparseMatrixFromString,
         "for a sparse list of an external matrix in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
@@ -249,7 +249,7 @@ InstallMethod( CreateHomalgSparseMatrix,
     
     s := homalgSendBlocking( [ "\"", S, "\"" ], R, HOMALG_IO.Pictograms.sparse );
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrix( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrixFromString( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     

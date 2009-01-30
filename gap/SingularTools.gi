@@ -7,7 +7,6 @@
 ##
 ##  Implementations for the rings provided by Singular.
 ##
-##
 #############################################################################
 
 ####################################
@@ -20,15 +19,15 @@ InstallValue( CommonHomalgTableForSingularTools,
         
         rec(
                Zero := HomalgExternalRingElement( "0", "Singular", IsZero ),
-                   
+               
                One := HomalgExternalRingElement( "1", "Singular", IsOne ),
-                   
+               
                MinusOne := HomalgExternalRingElement( "-1", "Singular" ),
-                    
+               
                IsZero := r -> homalgSendBlocking( [ r, "==0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
-                      
+               
                IsOne := r -> homalgSendBlocking( [ r, "==1" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "1",
-                       
+               
                Minus :=
                  function( a, b )
                    
@@ -39,7 +38,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                DivideByUnit :=
                  function( a, u )
                    local e;
-		   
+                   
                    if IsHomalgExternalRingElement( u ) then
                        e := homalgPointer( u );
                    else
@@ -61,6 +60,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               DegreeMultivariatePolynomial :=
+                 function( r, R )
+                   
+                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                 end,
+               
                Sum :=
                  function( a, b )
                    
@@ -75,10 +81,17 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               CopyMatrix :=
+               ShallowCopy :=
                  function( C )
                    
                    return HomalgMatrix( homalgSendBlocking( [ C ], [ "matrix" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   
+                 end,
+               
+               CopyMatrix :=
+                 function( C, R )
+                   
+                   return HomalgMatrix( homalgSendBlocking( [ "fetch(", HomalgRing( C ), C, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
                    
                  end,
                
@@ -355,6 +368,74 @@ InstallValue( CommonHomalgTableForSingularTools,
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", list (", clean_columns, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    return StringToIntList( list_string );
+                   
+                 end,
+               
+               DegreesOfEntries :=
+                 function( M )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                     
+                     L :=  StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
+               NonTrivialDegreePerRow :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   if Length( L ) = 1 then
+                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                   fi;
+                   
+                   return L;
+                   
+                 end,
+               
+               NonTrivialDegreePerRowWithColPosition :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrRows( M ) );
+                   
+                 end,
+               
+               NonTrivialDegreePerColumn :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   if Length( L ) = 1 then
+                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                   fi;
+                   
+                   return L;
+                   
+                 end,
+               
+               NonTrivialDegreePerColumnWithRowPosition :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrColumns( M ) );
                    
                  end,
                

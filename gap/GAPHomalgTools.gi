@@ -63,10 +63,17 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
-               CopyMatrix :=
+               ShallowCopy :=
                  function( C )
                    
                    return HomalgMatrix( homalgSendBlocking( [ "ShallowCopy(", C, ")" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   
+                 end,
+               
+               CopyMatrix :=
+                 function( C, R )
+                   
+                   return HomalgMatrix( homalgSendBlocking( [ "HomalgMatrix(", C, R, ")" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
                    
                  end,
                

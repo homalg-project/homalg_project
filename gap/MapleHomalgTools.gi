@@ -51,15 +51,36 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                
                IsUnit :=
                  function( R, r )
-		   
+                   
                    return homalgSendBlocking( [ "evalb( `homalg/InverseElement`(", r, R, ") <> FAIL )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "true";
                    
                  end,
                
-               CopyMatrix :=
+               DegreeMultivariatePolynomial :=
+                 function( r, R )
+                   local deg;
+                   
+                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ); ## FIXME: does not respect weights
+                   
+                   if deg <> fail then
+                       return deg;
+                   fi;
+                   
+                   return -1;
+                   
+                 end,
+               
+               ShallowCopy :=
                  function( C )
                    
                    return HomalgMatrix( homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   
+                 end,
+               
+               CopyMatrix :=
+                 function( C, R )
+                   
+                   return HomalgMatrix( homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
                    
                  end,
                

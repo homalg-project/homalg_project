@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  MAGMAGroebner.gd       RingsForHomalg package           Markus Kirschmer
+##  Macaulay2Groebner.gd   RingsForHomalg package             Daniel Robertz
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
