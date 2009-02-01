@@ -45,6 +45,9 @@ InstallValue( HOMALG_IO,
                 multiple_delete				:= "XXX",	## delete serveral variables
                 garbage_collector			:= "grb",	## trigger the garbage collector
                 
+                ## create lists:
+                CreateList				:= "lst",	## define a list
+                
                 ## create rings:
                 CreateHomalgRing			:= "R:=",	## define a ring
                 variables				:= "var",	## get the names of the "variables" defining the ring
