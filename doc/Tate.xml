@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Tate.xml               Sheaves package documentation            Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+-->
+
+<Chapter Label="Tate">
+<Heading>The Tate Resolution</Heading>
+
+<Section Label="Tate:Operations">
+<Heading>The Tate Resolution: Operations and Functions</Heading>
+
+<#Include Label="TateResolution">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

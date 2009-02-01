@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  install.xml            Sheaves package documentation           Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+This is the chapter of the documentation describing the installation.
+
+-->
+
+<Chapter Label="install">
+<Heading>Installation of the &Sheaves; Package</Heading>
+
+To install this package just extract the package's archive file to the
+&GAP; <F>pkg</F> directory.<P/>
+
+By default the &Sheaves; package is not automatically loaded by &GAP;
+when it is installed. You must load the package with <Br/><Br/>
+<C>LoadPackage("Sheaves");</C> <Br/><Br/>
+before its functions become available.<P/>
+
+Please, send me an e-mail if you have any questions, remarks,
+suggestions, etc. concerning this package. Also, I would be pleased to
+hear about applications of this package. <Br/><Br/><Br/>
+
+Mohamed Barakat
+
+<!-- ############################################################ -->
+
+</Chapter>

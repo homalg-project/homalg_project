@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  examples.xml            Sheaves package documentation          Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+This chapter gives examples for the usage of this package.
+
+-->
+
+<Chapter Label="examples">
+<Heading>Examples</Heading>
+
+Here comes text.<P/>
+
+<!-- ############################################################ -->
+
+</Chapter>

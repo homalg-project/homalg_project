@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml             Sheaves package documentation            Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Cite Key="homalg.new"/>
+
+</Chapter>
+

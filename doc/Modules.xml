@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Modules.xml            Sheaves package documentation            Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+-->
+
+<Chapter Label="GradedModules">
+<Heading>Graded Modules</Heading>
+
+<Section Label="GradedModules:Operations">
+<Heading>Graded Modules: Operations and Functions</Heading>
+
+<#Include Label="MonomialMatrix">
+<#Include Label="MonomialMap">
+<#Include Label="SubmoduleGeneratedByHomogeneousPart">
+<#Include Label="BasisOfHomogeneousPart">
+<#Include Label="RepresentationOfRingElement">
+<#Include Label="RepresentationMatrixOfKoszulId">
+<#Include Label="RepresentationMapOfKoszulId">
+<#Include Label="KoszulRightAdjoint">
+
+</Section>
+<!-- ############################################################ -->
+
+</Chapter>
