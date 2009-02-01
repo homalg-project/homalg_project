@@ -5,7 +5,7 @@
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> mat := HomalgMatrix( "[ x*y*z, x*y^2, x^2*z, x^2*y, x^3 ]", 1, 5, Qxyz );
 ##  <A homalg external 1 by 5 matrix>
-##  gap> M := RightPresentationWithWeights( mat );
+##  gap> M := RightPresentationWithDegrees( mat );
 ##  <A cyclic graded right module on a cyclic generator satisfying 5 relations>
 ##  gap> Mr := Resolution( M );
 ##  <A right acyclic complex containing 3 morphisms of right modules at degrees [ 0 .. 3 ]>
@@ -29,7 +29,7 @@ Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 mat := HomalgMatrix( "[ x*y*z, x*y^2, x^2*z, x^2*y, x^3 ]", 1, 5, Qxyz );
 
-M := RightPresentationWithWeights( mat );
+M := RightPresentationWithDegrees( mat );
 
 Mr := Resolution( M );
 

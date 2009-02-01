@@ -7,7 +7,7 @@
 ##  Q[x0,x1,x2]
 ##  gap> mat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );
 ##  <A homalg external 1 by 2 matrix>
-##  gap> M := RightPresentationWithWeights( mat );
+##  gap> M := RightPresentationWithDegrees( mat );
 ##  <A cyclic graded right module on a cyclic generator satisfying 2 relations>
 ##  gap> d := Resolution( M );
 ##  <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
@@ -41,7 +41,7 @@ S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
 
 mat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );
 
-M := RightPresentationWithWeights( mat );
+M := RightPresentationWithDegrees( mat );
 
 d := Resolution( M );
 

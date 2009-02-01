@@ -29,7 +29,7 @@ x,z,z,y, x,  \
 0,0,0,x, -y  \
 ]", 4, 5, Qxyz );
 
-M := LeftPresentationWithWeights( mmat );
+M := LeftPresentationWithDegrees( mmat );
 
 TM := TateResolution( M, -5, 5 );
 
@@ -42,7 +42,7 @@ x,z,z,0, x,  \
 0,0,0,x, -y  \
 ]", 4, 5, Qxyz );
 
-N := LeftPresentationWithWeights( nmat );
+N := LeftPresentationWithDegrees( nmat );
 
 TN := TateResolution( N, -5, 5 );
 
@@ -55,7 +55,7 @@ x,z,0,0, \
 0,0,y,-x \
 ]", 4, 4, Qxyz );
 
-L := LeftPresentationWithWeights( lmat );
+L := LeftPresentationWithDegrees( lmat );
 
 TL := TateResolution( L, -5, 5 );
 
