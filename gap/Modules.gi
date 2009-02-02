@@ -223,14 +223,15 @@ end );
 ##  ]]></Example>
 ##      <Log><![CDATA[
 ##  gap> Display( M );
-##  x^3,y^2,z,
-##  z,  0,  0 
+##  z,  0,    0,  
+##  0,  y^2*z,z^2,
+##  x^3,y^2,  z   
 ##  
 ##  (graded, generators degrees: [ -1, 0, 1 ])
 ##  
 ##  Cokernel of the map
 ##  
-##  Q[x,y,z]^(1x2) --> Q[x,y,z]^(1x3),
+##  Q[x,y,z]^(1x3) --> Q[x,y,z]^(1x3),
 ##  
 ##  currently represented by the above matrix
 ##  gap> Display( N );
@@ -396,6 +397,20 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     
 end );
 
+##
+InstallMethod( RepresentationMatrixOfKoszulId,
+        "for homalg modules",
+        [ IsInt, IsFinitelyPresentedModuleRep ],
+        
+  function( d, M )
+    local A;
+    
+    A := KoszulDualRing( HomalgRing( M ) );
+    
+    return RepresentationMatrixOfKoszulId( d, M, A );
+    
+end );
+
 ##  <#GAPDoc Label="RepresentationMapOfKoszulId">
 ##  <ManSection>
 ##    <Oper Arg="d, M" Name="RepresentationMapOfKoszulId"/>
@@ -428,20 +443,6 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( RepresentationMatrixOfKoszulId,
-        "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
-        
-  function( d, M )
-    local A;
-    
-    A := KoszulDualRing( HomalgRing( M ) );
-    
-    return RepresentationMatrixOfKoszulId( d, M, A );
-    
-end );
-
 ##
 InstallMethod( RepresentationMapOfKoszulId,
         "for homalg modules",

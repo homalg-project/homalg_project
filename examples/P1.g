@@ -10,7 +10,7 @@ k := HomalgMatrix( Indeterminates( S ), Length( Indeterminates( S ) ), 1, S );
 k := LeftPresentationWithDegrees( k );
 
 ## the sheaf supported on a point
-p := HomalgMatrix( Indeterminates( S ){[ 1 .. Length( Indeterminates( S ) ) ]}, 1, Length( Indeterminates( S ) ) - 1, S );
+p := HomalgMatrix( Indeterminates( S ){[ 1 .. Length( Indeterminates( S ) ) - 1 ]}, 1, Length( Indeterminates( S ) ) - 1, S );
 
 p := RightPresentationWithDegrees( p );
 

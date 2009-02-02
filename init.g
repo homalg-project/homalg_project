@@ -20,3 +20,6 @@ ReadPackage( "Sheaves", "gap/Tate.gd" );
 ##
 ReadPackage( "Sheaves", "gap/SingularTools.gd" );
 
+##
+ReadPackage( "Sheaves", "gap/MAGMATools.gd" );
+
