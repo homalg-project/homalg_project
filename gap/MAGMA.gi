@@ -264,7 +264,13 @@ GetCleanRowsPositions:= function( M, clean_columns )\n\
 end function;\n\n";
     
     MyRowspace := "\n\
-MyRowspace := func< M | Rowspace(RMatrixSpace( BaseRing(M), Nrows(M), Ncols(M)) ! M) >;\n\n";
+MyRowspace := function(M)\n\
+  if Type(M) eq AlgMatElt then\n\
+    return Rowspace(RMatrixSpace( BaseRing(M), Nrows(M), Ncols(M)) ! M);\n\
+  else\n\
+    return Rowspace(M);\n\
+  end if;\n\
+end function;\n\n";
     
     BasisOfRowModule := "\n\
 BasisOfRowModule := function(M)\n\
