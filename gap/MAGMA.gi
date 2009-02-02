@@ -121,8 +121,10 @@ InstallGlobalFunction( InitializeMAGMATools,
           BasisOfRowsCoeff, BasisOfColumnsCoeff,
           DecideZeroRows, DecideZeroColumns,
           DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns;
-    
+          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns,
+          NonTrivialDegreePerRow, NonTrivialDegreePerRowWithColPosition,
+          NonTrivialDegreePerColumn, NonTrivialDegreePerColumnWithRowPosition;
+
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix := function(M)\n\
   for i:= 1 to Min(Nrows(M),Ncols(M)) do M[i,i]:= 0; end for;\n\
@@ -345,6 +347,57 @@ SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
   end if;\n\
 end function;\n\n";
 
+    NonTrivialDegreePerRow := "\n\
+NonTrivialDegreePerRow := function(M)\n\
+  X:= [ Degree(m[Depth(m)]) where m:= M[i] : i in [1..Nrows(M)] ];\n\
+  if exists{ x : x in X | x ne X[1] } then\n\
+    return X;\n\
+  else\n\
+    return X[1];\n\
+  end if;\n\
+end function;\n\n";
+
+    NonTrivialDegreePerRowWithColPosition := "\n\
+NonTrivialDegreePerRowWithColPosition := function(M)\n\
+  X:= [];\n\
+  Y:= [];\n\
+  for i in [1..Nrows(M)] do\n\
+    d:= Depth(M[i]);\n\
+    Append(~X, Degree(M[i,d]));\n\
+    Append(~Y, d);\n\
+  end for;\n\
+  return X cat Y;\n\
+end function;\n\n";
+
+    NonTrivialDegreePerColumn := "\n\
+NonTrivialDegreePerColumn := function(M)\n\
+  X:= [];\n\
+  m:= Nrows(M);\n\
+  for j in [1..Ncols(M)] do\n\
+    ok:= exists(i){i: i in [1..m] | not IsZero(M[i,j]) };\n\
+    Append(~X, Degree(M[i,j]));\n\
+  end for;\n\
+  if exists{ x : x in X | x ne X[1] } then\n\
+    return X;\n\
+  else\n\
+    return X[1];\n\
+  end if;\n\
+end function;\n\n";
+
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
+NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
+  X:= [];\n\
+  Y:= [];\n\
+  m:= Nrows(M);\n\
+  for j in [1..Ncols(M)] do\n\
+    ok:= exists(i){i: i in [1..m] | not IsZero(M[i,j]) };\n\
+    Append(~X, Degree(M[i,j]));\n\
+    Append(~Y, i);\n\
+  end for;\n\
+  return X cat Y;\n\
+end function;\n\n";
+
+
     homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -371,6 +424,10 @@ end function;\n\n";
     homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     
 end );
 
@@ -532,6 +589,84 @@ InstallMethod( PolynomialRing,
     SetIsFreePolynomialRing( S, true );
     
     SetRingProperties( S, r, var );
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( ExteriorRing,
+        "for homalg rings in MAGMA",
+        [ IsHomalgExternalRingInMAGMARep, IsList ],
+        
+  function( R, indets )
+    local var, nr_var, anti, nr_anti, properties, stream, r,
+          ext_obj, S, v, RP;
+    
+    #check whether base ring is polynomial and then extract needed data
+    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
+        var := IndeterminatesOfPolynomialRing( R );
+        nr_var := Length( var );
+    else
+        Error( "base ring is not a polynomial ring" );
+    fi;
+    
+    ##get the new indeterminates (the anti commuting variables) for the ring and save them in anti
+    if IsString( indets ) and indets <> "" then
+        anti := SplitString( indets, "," );
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        anti := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    nr_anti := Length( anti );
+    
+    if nr_var <> nr_anti then
+        Error( "number of indeterminates in base ring does not equal the number of anti commuting variables\n" );
+    fi;
+    
+    if Intersection2( anti, var ) <> [ ] then
+        Error( "the following indeterminate(s) are already elements of the base ring: ", Intersection2( anti, var ), "\n" );
+    fi;
+    
+    if not ForAll( var, HasName ) then
+        Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
+    fi;
+    
+    properties := [ ];
+    
+    stream := homalgStream( R );
+    
+    r := CoefficientsRing( R );
+    
+    ext_obj := homalgSendBlocking( [ "ExteriorAlgebra(", r, Length( anti ), ")" ], [ ], [ "<", anti, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
+    
+    anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
+    
+    for v in anti do
+        SetName( v, homalgPointer( v ) );
+    od;
+    
+    SetIsExteriorRing( S, true );
+    
+    SetRingProperties( S, R, anti );
+    
+    RP := homalgTable( S );
+    
+#    RP!.SetInvolution :=
+#      function( R )
+#        homalgSendBlocking( Concatenation(
+#                [ "\nproc Involution (matrix M)\n{\n" ],
+#                [ "  map F = ", R ],
+#                Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ a ] ) ),
+#                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
+#                ), "need_command", HOMALG_IO.Pictograms.define );
+#    end;
+#    
+#    RP!.SetInvolution( S );
     
     return S;
     
