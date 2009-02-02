@@ -18,7 +18,7 @@ Dy, \
 Dz  \
 ]", 3, 1, A3 );
 M := DiagMat( [ M1, M2, M3 ] );
-M := HomalgMatrix( M );	## copy M before setting entries
+M := ShallowCopy( M );	## copy M before setting entries
 SetIsMutableMatrix( M, true );
 SetEntryOfHomalgMatrix( M, 1, 2, "1" );
 SetEntryOfHomalgMatrix( M, 2, 3, "1" );
