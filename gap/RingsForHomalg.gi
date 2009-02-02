@@ -16,11 +16,66 @@
 
 # a central place for configuration variables:
 
+##
 InstallValue( HOMALG_RINGS,
         rec(
             RingOfIntegersDefaultCAS := "Maple",
             FieldOfRationalsDefaultCAS := "Singular",
            )
+);
+
+##
+InstallValue( CommonHomalgTableForRings,
+        rec(
+            RingName :=
+              function( R )
+                local var,der;
+                
+                if HasName( R ) then
+                    return Name( R );
+                fi;
+                
+                ## the Weyl-Algebra:
+                if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and
+                   HasIndeterminateDerivationsOfRingOfDerivations( R ) then
+                    
+                    var := JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) );
+                    der := JoinStringsWithSeparator( List( IndeterminateDerivationsOfRingOfDerivations( R ), String ) );
+                    
+                    return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]<", der, ">" ] ) );
+                    
+                ## the exterior algebra:
+                elif HasIndeterminatesOfExteriorRing( R ) then
+                    
+                    var := JoinStringsWithSeparator( List( IndeterminatesOfExteriorRing( R ), String ) );
+                    
+                    return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "{", var, "}" ] ) );
+                    
+                ## the (free) polynomial ring:
+                elif HasIndeterminatesOfPolynomialRing( R ) then
+                    
+                    var := JoinStringsWithSeparator( List( IndeterminatesOfPolynomialRing( R ), String ) );
+                    
+                    return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]" ] ) );
+                    
+                ## certain fields:
+                elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+                    
+                    if Characteristic( R ) = 0 then
+                       return "Q";
+                   else
+                       return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
+                   fi;
+                   
+               else
+                   
+                   return "some Ring";
+                   
+               fi;
+               
+           end,
+         
+         )
 );
 
 ####################################

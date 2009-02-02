@@ -641,7 +641,7 @@ end );
 
 ##
 InstallMethod( RingOfDerivations,
-        "for homalg rings in Singular",
+        "for homalg rings in Maple",
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )

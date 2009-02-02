@@ -19,49 +19,21 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInMAGMARep ],
         
   function( ext_ring_obj )
-    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
+    local RP, RP_General, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMAGMATools );
+    
+    RP_General := ShallowCopy( CommonHomalgTableForRings );
     
     RP_Basic := ShallowCopy( CommonHomalgTableForMAGMABasic );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMAGMABestBasis );
     
-    RP_specific := 
-      rec(
-           RingName :=
-	     function ( R )#todo: more cases than Weylalgebra and Polynomials Ring
-	       local var,der;
-	       
-	       if HasName( R ) then 
-	         return Name( R );
-	       fi;
-	       
-	       if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and HasIndeterminateDerivationsOfRingOfDerivations( R ) then
-                 var := JoinStringsWithSeparator( 
-                           List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) 
-                          );
-                 der := JoinStringsWithSeparator( 
-                            List( IndeterminateDerivationsOfRingOfDerivations( R ), String ) 
-                          );
-	         return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]<", der, ">" ] ) );
-	       elif HasIndeterminatesOfPolynomialRing( R ) then
-                  var := JoinStringsWithSeparator( 
-                            List( IndeterminatesOfPolynomialRing( R ), String ) 
-                          );
-                  return String( Concatenation( [ RingName( CoefficientsRing( R ) ), "[", var, "]" ] ) );
-	       elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
-	         if Characteristic( R ) = 0 then
-	           return "Q";
-	         else
-	           return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
-	         fi;
-	       else
-	         return "some Ring";
-	       fi;
-	     end,
-
-      );
+    RP_specific := rec( );
+    
+    for component in NamesOfComponents( RP_General ) do
+        RP.(component) := RP_General.(component);
+    od;
     
     for component in NamesOfComponents( RP_Basic ) do
         RP.(component) := RP_Basic.(component);
