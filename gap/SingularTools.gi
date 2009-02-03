@@ -67,6 +67,23 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               WeightedDegreeMultivariatePolynomial :=
+                 function( r, weights, R )
+                   
+                   return Int( homalgSendBlocking( [ "deg( ", r, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                 end,
+               
+               MultiWeightedDegreeMultivariatePolynomial :=
+                 function( r, weights, R )
+                   local externally_stored_weights;
+                   
+                   externally_stored_weights := ExternallyStoredWeightsOfIndeterminates( R );
+                   
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                 end,
+               
                Sum :=
                  function( a, b )
                    
@@ -383,11 +400,39 @@ InstallValue( CommonHomalgTableForSingularTools,
                      
                  end,
                
+               WeightedDegreesOfEntries :=
+                 function( M, weights )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                     
+                     L :=  StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
                NonTrivialDegreePerRow :=
                  function( M )
                    local L;
                    
                    L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   if Length( L ) = 1 then
+                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                   fi;
+                   
+                   return L;
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerRow :=
+                 function( M, weights )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRow(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
                    
                    L := StringToIntList( L );
                    
@@ -411,6 +456,18 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               NonTrivialWeightedDegreePerRowWithColPosition :=
+                 function( M, weights )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrRows( M ) );
+                   
+                 end,
+               
                NonTrivialDegreePerColumn :=
                  function( M )
                    local L;
@@ -427,11 +484,39 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               NonTrivialWeightedDegreePerColumn :=
+                 function( M, weights )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumn(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   if Length( L ) = 1 then
+                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                   fi;
+                   
+                   return L;
+                   
+                 end,
+               
                NonTrivialDegreePerColumnWithRowPosition :=
                  function( M )
                    local L;
                    
                    L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrColumns( M ) );
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerColumnWithRowPosition :=
+                 function( M, weights )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumnWithRowPosition(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
                    
                    L := StringToIntList( L );
                    

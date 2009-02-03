@@ -132,7 +132,7 @@ end );
 ##
 InstallGlobalFunction( InitializeSingularTools,
   function( stream )
-    local IsMemberOfList, Difference,
+    local IsMemberOfList, Difference, CreateListListOfIntegers,
           GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
           IsZeroMatrix, IsIdentityMatrix, IsDiagonalMatrix,
           ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions,
@@ -143,9 +143,19 @@ InstallGlobalFunction( InitializeSingularTools,
           SyzForHomalg,
           SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
           SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
-          DegreesOfEntries, NonTrivialDegreePerRow, NonTrivialDegreePerColumn,
+          MultiDeg,
+          DegreesOfEntries, WeightedDegreesOfEntries,
+          MultiWeightedDegreesOfEntries,
+          NonTrivialDegreePerRow, NonTrivialWeightedDegreePerRow,
+          NonTrivialMultiWeightedDegreePerRow,
           NonTrivialDegreePerRowWithColPosition,
-          NonTrivialDegreePerColumnWithRowPosition;
+          NonTrivialWeightedDegreePerRowWithColPosition,
+          NonTrivialMultiWeightedDegreePerRowWithColPosition,
+          NonTrivialDegreePerColumn, NonTrivialWeightedDegreePerColumn,
+          NonTrivialMultiWeightedDegreePerColumn,
+          NonTrivialDegreePerColumnWithRowPosition,
+          NonTrivialWeightedDegreePerColumnWithRowPosition,
+          NonTrivialMultiWeightedDegreePerColumnWithRowPosition;
     
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
@@ -176,6 +186,17 @@ proc Difference (list a, list b)\n\
     }\n\
   }\n\
   return(c);\n\
+}\n\n";
+    
+    CreateListListOfIntegers := "\n\
+proc CreateListListOfIntegers (degrees,m,n)\n\
+{\n\
+  list l;\n\
+  for (int i=1; i<=m; i=i+1)\n\
+  {\n\
+    l[i]=intvec(degrees[(i-1)*n+1..i*n]);\n\
+  }\n\
+  return(l);\n\
 }\n\n";
     
     IsZeroMatrix := "\n\
@@ -387,15 +408,6 @@ proc BasisOfColumnModule (matrix M)\n\
   return(Involution(std(Involution(M))));\n\
 }\n\n";
     
-    BasisOfRowsCoeff := "\n\
-proc BasisOfRowsCoeff (matrix M)\n\
-{\n\
-  matrix B = std(M);\n\
-  matrix T = lift(M,B); //never use stdlift, also because it might differ from std!!!\n\
-  list l = B,T;\n\
-  return(l)\n\
-}\n\n";
-    
 #    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
 #    ## and for plural to work one would need to define B=transpose(transpose(T)*transpose(M)), which is expensive!!
 #    BasisOfRowsCoeff := "\n\
@@ -406,6 +418,15 @@ proc BasisOfRowsCoeff (matrix M)\n\
 #  list l = transpose(transpose(T)*transpose(M)),T;\n\
 #  return(l)\n\
 #}\n\n";
+    
+    BasisOfRowsCoeff := "\n\
+proc BasisOfRowsCoeff (matrix M)\n\
+{\n\
+  matrix B = std(M);\n\
+  matrix T = lift(M,B); //never use stdlift, also because it might differ from std!!!\n\
+  list l = B,T;\n\
+  return(l)\n\
+}\n\n";
     
     BasisOfColumnsCoeff := "\n\
 proc BasisOfColumnsCoeff (matrix M)\n\
@@ -495,6 +516,18 @@ proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
   return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
 }\n\n";
     
+    MultiDeg := "\n\
+proc MultiDeg (pol,weights)\n\
+{\n\
+  int mul=size(weights);\n\
+  intmat m[1][mul];\n\
+  for (int i=1; i<=mul; i=i+1)\n\
+  {\n\
+    m[1,i]=deg(pol,weights[i]);\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
     DegreesOfEntries := "\n\
 proc DegreesOfEntries (matrix M)\n\
 {\n\
@@ -504,6 +537,20 @@ proc DegreesOfEntries (matrix M)\n\
     for (int j=1; j<=nrows(M); j=j+1)\n\
     {\n\
       m[i,j] = deg(M[j,i]);\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    WeightedDegreesOfEntries := "\n\
+proc WeightedDegreesOfEntries (matrix M, weights)\n\
+{\n\
+  intmat m[ncols(M)][nrows(M)];\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j=j+1)\n\
+    {\n\
+      m[i,j] = deg(M[j,i],weights);\n\
     }\n\
   }\n\
   return(m);\n\
@@ -519,7 +566,24 @@ proc NonTrivialDegreePerRow (matrix M)\n\
   {\n\
     for (int j=1; j<=nrows(M); j=j+1)\n\
     {\n\
-      if ( deg(M[j,i]) > d ) { m[1,i] = deg(M[j,i]); break; }\n\
+      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); break; }\n\
+    }\n\
+    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
+  }\n\
+  if ( b ) { return(m[1,1]); } else { return(m); }\n\
+}\n\n";
+    
+    NonTrivialWeightedDegreePerRow := "\n\
+proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
+{\n\
+  int b = 1;\n\
+  intmat m[1][ncols(M)];\n\
+  int d = deg(0,weights);\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j=j+1)\n\
+    {\n\
+      if ( deg(M[j,i],weights) <> d ) { m[1,i] = deg(M[j,i],weights); break; }\n\
     }\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
@@ -535,7 +599,22 @@ proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
   {\n\
     for (int j=1; j<=nrows(M); j=j+1)\n\
     {\n\
-      if ( deg(M[j,i]) > d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
+      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
+proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
+{\n\
+  intmat m[2][ncols(M)];\n\
+  int d = deg(0,weights);\n\
+  for (int i=1; i<=ncols(M); i=i+1)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j=j+1)\n\
+    {\n\
+      if ( deg(M[j,i],weights) <> d ) { m[1,i] = deg(M[j,i],weights); m[2,i] = j; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -551,7 +630,24 @@ proc NonTrivialDegreePerColumn (matrix M)\n\
   {\n\
     for (int i=1; i<=ncols(M); i=i+1)\n\
     {\n\
-      if ( deg(M[j,i]) > d ) { m[1,j] = deg(M[j,i]); break; }\n\
+      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); break; }\n\
+    }\n\
+    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
+  }\n\
+  if ( b ) { return(m[1,1]); } else { return(m); }\n\
+}\n\n";
+    
+    NonTrivialWeightedDegreePerColumn := "\n\
+proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
+{\n\
+  int b = 1;\n\
+  intmat m[1][nrows(M)];\n\
+  int d = deg(0,weights);\n\
+  for (int j=1; j<=nrows(M); j=j+1)\n\
+  {\n\
+    for (int i=1; i<=ncols(M); i=i+1)\n\
+    {\n\
+      if ( deg(M[j,i],weights) <> d ) { m[1,j] = deg(M[j,i],weights); break; }\n\
     }\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
@@ -567,7 +663,22 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
   {\n\
     for (int i=1; i<=ncols(M); i=i+1)\n\
     {\n\
-      if ( deg(M[j,i]) > d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
+      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
+    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
+proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
+{\n\
+  intmat m[2][nrows(M)];\n\
+  int d = deg(0,weights);\n\
+  for (int j=1; j<=nrows(M); j=j+1)\n\
+  {\n\
+    for (int i=1; i<=ncols(M); i=i+1)\n\
+    {\n\
+      if ( deg(M[j,i],weights) <> d ) { m[1,j] = deg(M[j,i],weights); m[2,j] = i; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -576,6 +687,7 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
     homalgSendBlocking( "int i; int j; int k; list l;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( IsMemberOfList, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( Difference, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( CreateListListOfIntegers, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsZeroMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -598,11 +710,17 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
     homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( MultiDeg, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( WeightedDegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialWeightedDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( NonTrivialDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialWeightedDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialWeightedDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( NonTrivialDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( NonTrivialWeightedDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     
   end
 );
@@ -1171,6 +1289,31 @@ InstallMethod( GetEntryOfHomalgMatrix,
   function( M, r, c, R )
     
     return homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    
+end );
+
+##
+InstallMethod( ExternallyStoredWeightsOfIndeterminates,
+        "for external matrices in Singular",
+        [ IsHomalgExternalRingInSingularRep and HasWeightsOfIndeterminates ],
+        
+  function( R )
+    local degrees, n, m, ext_obj;
+    
+    degrees := WeightsOfIndeterminates( R );
+    
+    n := Length( degrees );
+    
+    if n > 0 and IsList( degrees[1] ) then
+        m := Length( degrees[1] );
+        degrees := Flat( TransposedMat( degrees ) );
+    else
+        m := 1;
+    fi;
+    
+    ext_obj := homalgSendBlocking( [ "CreateListListOfIntegers(intvec(", degrees, "),", m, n, ")"  ], [ "list" ], R, "break_lists", HOMALG_IO.Pictograms.CreateList );
+    
+    return HomalgMatrix( ext_obj, m, n, R );
     
 end );
 
