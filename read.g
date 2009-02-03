@@ -15,6 +15,9 @@ ReadPackage( "Sheaves", "gap/Sheaves.gi" );
 ReadPackage( "Sheaves", "gap/Modules.gi" );
 
 ##
+ReadPackage( "Sheaves", "gap/Relative.gi" );
+
+##
 ReadPackage( "Sheaves", "gap/Tate.gi" );
 
 ##

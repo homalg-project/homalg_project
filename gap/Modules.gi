@@ -449,19 +449,19 @@ InstallMethod( RepresentationMapOfKoszulId,
         [ IsInt, IsFinitelyPresentedModuleRep, IsHomalgRing and IsExteriorRing ],
         
   function( d, M, A )
-    local tate, F_source, F_target;
+    local rep, F_source, F_target;
     
-    tate := RepresentationMatrixOfKoszulId( d, M, A );
+    rep := RepresentationMatrixOfKoszulId( d, M, A );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        F_source := HomalgFreeLeftModuleWithDegrees( NrRows( tate ), A, -d );
-        F_target := HomalgFreeLeftModuleWithDegrees( NrColumns( tate ), A, -d - 1 );
+        F_source := HomalgFreeLeftModuleWithDegrees( NrRows( rep ), A, -d );
+        F_target := HomalgFreeLeftModuleWithDegrees( NrColumns( rep ), A, -d - 1 );
     else
-        F_source := HomalgFreeRightModuleWithDegrees( NrColumns( tate ), A, -d );
-        F_target := HomalgFreeRightModuleWithDegrees( NrRows( tate ), A, -d - 1 );
+        F_source := HomalgFreeRightModuleWithDegrees( NrColumns( rep ), A, -d );
+        F_target := HomalgFreeRightModuleWithDegrees( NrRows( rep ), A, -d - 1 );
     fi;
     
-    return HomalgMap( tate, F_source, F_target );
+    return HomalgMap( rep, F_source, F_target );
     
 end );
 

@@ -15,6 +15,9 @@ ReadPackage( "Sheaves", "gap/Sheaves.gd" );
 ReadPackage( "Sheaves", "gap/Modules.gd" );
 
 ##
+ReadPackage( "Sheaves", "gap/Relative.gd" );
+
+##
 ReadPackage( "Sheaves", "gap/Tate.gd" );
 
 ##
