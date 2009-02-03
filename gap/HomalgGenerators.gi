@@ -20,8 +20,8 @@
 ##  being interpreted as the generators.
 ##  <P/>
 ##  The data structure of a module in &homalg; is designed to contain not only one but several sets of generators
-##  (together with their sets of relations). The different sets of generators are linked with so-called
-##  transition matrices (&see; Chapter <Ref Chap="Modules"/>).
+##  (together with their sets of relations (&see; Chapter <Ref Chap="Relations"/>)).
+##  The different sets of generators are linked with so-called transition matrices (&see; Chapter <Ref Chap="Modules"/>).
 ##  <#/GAPDoc>
 
 ####################################

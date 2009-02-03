@@ -437,7 +437,7 @@ end );
 
 InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
   function( M, N )
-    local R, dM, dN, s, t, matM, matN, P1, l0, l1, _l0, HP0N, HP1N,
+    local R, s, t, matM, matN, P1, l0, l1, _l0, HP0N, HP1N,
           degM, degN, degP1, degHP0N, degHP1N, r, c, idN, alpha, hom, gen,
           proc_to_readjust_generators, proc_to_normalize_generators, p;
     
@@ -452,16 +452,13 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
         Error( "the two modules must either be both left or both right modules\n" );
     fi;
     
-    dM := Resolution( 1, M );
-    dN := Resolution( 1, N );
-    
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
     
     #=====# begin of the core procedure #=====#
     
-    matM := CertainMorphism( dM, 1 );
-    matN := CertainMorphism( dN, 1 );
+    matM := PresentationMap( M );
+    matN := PresentationMap( N );
     
     P1 := Source( matM );
     
@@ -802,7 +799,7 @@ end );
 
 InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorProduct (object part)
   function( M, N )
-    local R, rl, dM, dN, l0, _l0, matM, matN, idM, idN, degM, degN, degMN, MN,
+    local R, rl, l0, _l0, matM, matN, idM, idN, degM, degN, degMN, MN,
           F, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
@@ -825,16 +822,13 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
         fi;
     fi;
     
-    dM := Resolution( 1, M );
-    dN := Resolution( 1, N );
-    
     #=====# begin of the core procedure #=====#
     
     l0 := NrGenerators( M );
     _l0 := NrGenerators( N );
     
-    matM := MatrixOfMap( CertainMorphism( dM, 1 ) );
-    matN := MatrixOfMap( CertainMorphism( dN, 1 ) );
+    matM := MatrixOfMap( PresentationMap( M ) );
+    matN := MatrixOfMap( PresentationMap( N ) );
     
     if rl = [ true, true ] or rl = [ false, false ] then
         matM := Involution( matM );	## the first module follows the second

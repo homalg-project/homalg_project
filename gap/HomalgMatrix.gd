@@ -237,6 +237,19 @@ DeclareProperty( "IsEmptyMatrix",
 DeclareProperty( "IsDiagonalMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsScalarMatrix">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsScalarlMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsScalarMatrix",
+        IsHomalgMatrix );
+
 ##  <#GAPDoc Label="IsUpperTriangularMatrix">
 ##  <ManSection>
 ##    <Prop Arg="A" Name="IsUpperTriangularMatrix"/>
@@ -586,6 +599,8 @@ DeclareGlobalFunction( "HomalgVoidMatrix" );
 
 DeclareGlobalFunction( "HomalgDiagonalMatrix" );
 
+DeclareGlobalFunction( "HomalgScalarMatrix" );
+
 DeclareGlobalFunction( "ConvertHomalgMatrix" );
 
 DeclareGlobalFunction( "ListToListList" );
@@ -615,7 +630,7 @@ DeclareOperation( "BlindlyCopyMatrixProperties",
 
 ##  <#GAPDoc Label="NonTrivialDegreePerRow">
 ##  <ManSection>
-##    <Oper Arg="A, col_weights" Name="NonTrivialDegreePerRow"/>
+##    <Oper Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>
 ##    <Returns>a list of integers</Returns>
 ##    <Description>
 ##      The list of non-trivial degrees per row of the matrix <A>A</A>.
@@ -631,7 +646,7 @@ DeclareOperation( "NonTrivialDegreePerRow",
 
 ##  <#GAPDoc Label="NonTrivialDegreePerColumn">
 ##  <ManSection>
-##    <Oper Arg="A, row_weights" Name="NonTrivialDegreePerColumn"/>
+##    <Oper Arg="A[, row_degrees]" Name="NonTrivialDegreePerColumn"/>
 ##    <Returns>a list of integers</Returns>
 ##    <Description>
 ##      The list of non-trivial degrees per column of the matrix <A>A</A>.

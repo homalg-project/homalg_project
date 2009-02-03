@@ -172,14 +172,28 @@ InstallMethod( DegreeMultivariatePolynomial,
         [ IsHomalgExternalRingElementRep ],
         
   function( r )
-    local R, RP, minus_r;
+    local R, RP, weights, minus_r;
     
     R := HomalgRing( r );
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.DegreeMultivariatePolynomial) then
+    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+        
+        weights := WeightsOfIndeterminates( R );
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.MultiWeightedDegreeMultivariatePolynomial) then
+                return RP!.MultiWeightedDegreeMultivariatePolynomial( r, weights, R );
+            fi;
+        elif IsBound(RP!.WeightedDegreeMultivariatePolynomial) then
+            return RP!.WeightedDegreeMultivariatePolynomial( r, weights, R );
+        fi;
+        
+    elif IsBound(RP!.DegreeMultivariatePolynomial) then
+        
         return RP!.DegreeMultivariatePolynomial( r, R );
+        
     fi;
     
     TryNextMethod( );
@@ -1647,7 +1661,7 @@ InstallMethod( DegreesOfEntries,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, e, c;
+    local R, RP, weights, e, c;
     
     if IsZero( C ) then
         return ListWithIdenticalEntries( NrRows( C ), ListWithIdenticalEntries( NrColumns( C ), -1 ) );
@@ -1657,7 +1671,19 @@ InstallMethod( DegreesOfEntries,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.DegreesOfEntries) then
+    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+        
+        weights := WeightsOfIndeterminates( R );
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
+                return RP!.MultiWeightedDegreesOfEntries( C, weights );
+            fi;
+        elif IsBound(RP!.WeightedDegreesOfEntries) then
+            return RP!.WeightedDegreesOfEntries( C, weights );
+        fi;
+        
+    elif IsBound(RP!.DegreesOfEntries) then
         return RP!.DegreesOfEntries( C );
     fi;
     
@@ -1679,7 +1705,7 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, e, deg0;
+    local R, RP, weights, e, deg0;
     
     if IsZero( C ) then
         return ListWithIdenticalEntries( NrRows( C ), -1 );
@@ -1689,8 +1715,22 @@ InstallMethod( NonTrivialDegreePerRow,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NonTrivialDegreePerRow) then
+    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+        
+        weights := WeightsOfIndeterminates( R );
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
+                return RP!.NonTrivialMultiWeightedDegreePerRow( C, weights );
+            fi;
+        elif IsBound(RP!.NonTrivialWeightedDegreePerRow) then
+            return RP!.NonTrivialWeightedDegreePerRow( C, weights );
+        fi;
+        
+    elif IsBound(RP!.NonTrivialDegreePerRow) then
+        
         return RP!.NonTrivialDegreePerRow( C );
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1699,7 +1739,74 @@ InstallMethod( NonTrivialDegreePerRow,
     
     deg0 := DegreeMultivariatePolynomial( Zero( R ) );
     
-    return List( e, row -> First( row, a -> a > deg0 ) );
+    return List( e, row -> First( row, a -> not a = deg0 ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( C, col_degrees )
+    local R, RP, w, weights, e, deg0;
+    
+    if Length( col_degrees ) <> NrColumns( C ) then
+        Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
+    fi;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), -1 );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    w := Set( col_degrees );
+    
+    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+        
+        weights := WeightsOfIndeterminates( R );
+        
+        if Length( w ) = 1 then
+            if IsList( weights[1] ) then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
+                    return RP!.NonTrivialMultiWeightedDegreePerRow( C, weights ) + w[1];
+                fi;
+            elif IsBound(RP!.NonTrivialWeightedDegreePerRow) then
+                return RP!.NonTrivialWeightedDegreePerRow( C, weights ) + w[1];
+            fi;
+        else
+            if IsList( weights[1] ) then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition) then
+                    e := RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition( C, weights );
+                    return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_degrees[e[2][i]] );
+                fi;
+            elif IsBound(RP!.NonTrivialWeightedDegreePerRowWithColPosition) then
+                e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
+                return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_degrees[e[2][i]] );
+            fi;
+        fi;
+        
+    elif IsBound(RP!.NonTrivialDegreePerRow) then
+        
+        if Length( w ) = 1 then
+            return RP!.NonTrivialDegreePerRow( C ) + w[1];
+        else
+            e := RP!.NonTrivialDegreePerRowWithColPosition( C );
+            return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_degrees[e[2][i]] );
+        fi;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    e := DegreesOfEntries( C );
+    
+    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    
+    return List( e, function( r ) local c; c := PositionProperty( r, a -> not a = deg0 ); return r[c] + col_degrees[c]; end );
     
 end );
 
@@ -1709,7 +1816,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, e, deg0;
+    local R, RP, weights, e, deg0;
     
     if IsZero( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), -1 );
@@ -1719,49 +1826,22 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NonTrivialDegreePerColumn) then
-        return RP!.NonTrivialDegreePerColumn( C );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    e := DegreesOfEntries( C );
-    
-    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
-    
-    return List( TransposedMat( e ), column -> First( column, a -> a > deg0 ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsList ],
+    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
-  function( C, col_weights )
-    local R, RP, w, e, deg0;
-    
-    if Length( col_weights ) <> NrColumns( C ) then
-        Error( "the number of entries in the list of weights does not match the number of columns of the matrix\n" );
-    fi;
-    
-    if IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), -1 );
-    fi;
-    
-    R := HomalgRing( C );
-    
-    RP := homalgTable( R );
-    
-    w := Set( col_weights );
-    
-    if IsBound(RP!.NonTrivialDegreePerRow) then
-        if Length( w ) = 1 then
-            return RP!.NonTrivialDegreePerRow( C ) + w[1];
-        else
-            e := RP!.NonTrivialDegreePerRowWithColPosition( C );
-            return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_weights[e[2][i]] );
+        weights := WeightsOfIndeterminates( R );
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
+                return RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights );
+            fi;
+        elif IsBound(RP!.NonTrivialWeightedDegreePerColumn) then
+            return RP!.NonTrivialWeightedDegreePerColumn( C, weights );
         fi;
+        
+    elif IsBound(RP!.NonTrivialDegreePerColumn) then
+        
+        return RP!.NonTrivialDegreePerColumn( C );
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1770,7 +1850,7 @@ InstallMethod( NonTrivialDegreePerRow,
     
     deg0 := DegreeMultivariatePolynomial( Zero( R ) );
     
-    return List( e, function( r ) local c; c := PositionProperty( r, a -> a > deg0 ); return r[c] + col_weights[c]; end );
+    return List( TransposedMat( e ), column -> First( column, a -> not a = deg0 ) );
     
 end );
 
@@ -1779,11 +1859,11 @@ InstallMethod( NonTrivialDegreePerColumn,
         "for homalg matrices",
         [ IsHomalgMatrix, IsList ],
         
-  function( C, row_weights )
-    local R, RP, w, e, deg0;
+  function( C, row_degrees )
+    local R, RP, w, weights, e, deg0;
     
-    if Length( row_weights ) <> NrRows( C ) then
-        Error( "the number of entries in the list of weights does not match the number of rows of the matrix\n" );
+    if Length( row_degrees ) <> NrRows( C ) then
+        Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
     fi;
     
     if IsZero( C ) then
@@ -1794,15 +1874,41 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     RP := homalgTable( R );
     
-    w := Set( row_weights );
+    w := Set( row_degrees );
     
-    if IsBound(RP!.NonTrivialDegreePerColumn) then
+    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+        
+        weights := WeightsOfIndeterminates( R );
+        
+        if Length( w ) = 1 then
+            if IsList( weights[1] ) then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
+                    return RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights ) + w[1];
+                fi;
+            elif IsBound(RP!.NonTrivialWeightedDegreePerColumn) then
+                return RP!.NonTrivialWeightedDegreePerColumn( C, weights ) + w[1];
+            fi;
+        else
+            if IsList( weights[1] ) then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition) then
+                    e := RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition( C, weights );
+                    return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_degrees[e[2][j]] );
+                fi;
+            elif IsBound(RP!.NonTrivialWeightedDegreePerColumnWithRowPosition) then
+                e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
+                return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_degrees[e[2][j]] );
+            fi;
+        fi;
+        
+    elif IsBound(RP!.NonTrivialDegreePerColumn) then
+        
         if Length( w ) = 1 then
             return RP!.NonTrivialDegreePerColumn( C ) + w[1];
         else
             e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
-            return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_weights[e[2][j]] );
+            return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_degrees[e[2][j]] );
         fi;
+        
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1811,7 +1917,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     deg0 := DegreeMultivariatePolynomial( Zero( R ) );
     
-    return List( TransposedMat( e ), function( c ) local r; r := PositionProperty( c, a -> a > deg0 ); return c[r] + row_weights[r]; end );
+    return List( TransposedMat( e ), function( c ) local r; r := PositionProperty( c, a -> not a = deg0 ); return c[r] + row_degrees[r]; end );
     
 end );
 

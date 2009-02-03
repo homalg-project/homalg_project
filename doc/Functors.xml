@@ -11,9 +11,9 @@
 <Chapter Label="Functors">
 <Heading>Functors</Heading>
 
-<Section Label="Functors:Category">
-
 <#Include Label="Functors:intro">
+
+<Section Label="Functors:Category">
 
 <Heading>Functors: Category and Representations</Heading>
 

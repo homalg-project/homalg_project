@@ -777,15 +777,26 @@ DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
 DeclareAttribute( "IndeterminatesOfExteriorRing",
         IsHomalgRing );
 
-##  <#GAPDoc Label="DegreesOfIndeterminates">
+##  <#GAPDoc Label="WeightsOfIndeterminates">
 ##  <ManSection>
-##    <Attr Arg="R" Name="DegreesOfIndeterminates"/>
-##    <Returns>a list of integers</Returns>
+##    <Attr Arg="R" Name="WeightsOfIndeterminates"/>
+##    <Returns>a list or listlist of integers</Returns>
 ##    <Description>The list of degrees of the indeterminates of the &homalg; ring <A>R</A>.</Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-DeclareAttribute( "DegreesOfIndeterminates",
+DeclareAttribute( "WeightsOfIndeterminates",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="ExternallyStoredWeightsOfIndeterminates">
+##  <ManSection>
+##    <Attr Arg="R" Name="ExternallyStoredWeightsOfIndeterminates"/>
+##    <Returns>an external &homalg; matrix</Returns>
+##    <Description>An external &homalg; matrix where the list (or listlist) of degrees of the indeterminates of the &homalg; ring <A>R</A> is stored.</Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+DeclareAttribute( "ExternallyStoredWeightsOfIndeterminates",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="AmbientRing">

@@ -43,6 +43,7 @@ list := [
          "../gap/HomalgFunctor.gi",
          "../gap/BasicFunctors.gd",
          "../gap/BasicFunctors.gi",
+         "../gap/Modules.gi",
          "../tst/RHom_Z.g",
          "../tst/LTensorProduct_Z.g"
          ];

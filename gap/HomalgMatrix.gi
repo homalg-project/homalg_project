@@ -1914,9 +1914,9 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
         R := arg[nargs];
     fi;
     
-    if IsRingElement( arg[1] ) or IsHomalgExternalRingElement( arg[1] ) then
+    if IsRingElement( arg[1] ) then
         diag := [ arg[1] ];
-    elif ForAll( arg[1], IsRingElement ) or ForAll( arg[1], IsHomalgExternalRingElement ) then
+    elif ForAll( arg[1], IsRingElement ) then
         diag := arg[1];
     fi;
     
@@ -1959,6 +1959,75 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
     return M;
     
 end );
+
+##  <#GAPDoc Label="HomalgScalarMatrix">
+##  <ManSection>
+##    <Func Arg="r, n, R" Name="HomalgScalarMatrix" Label="constructor for scalar matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      An immutable unevaluated <A>n</A>x<A>n</A> scalar &homalg; matrix over the &homalg; ring <A>R</A> with
+##      the ring element <A>r</A> as diagonal scalar.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> d := HomalgScalarMatrix( 2, 3, ZZ );
+##  <An unevaluated scalar homalg internal 3 by 3 matrix>
+##  gap> Display( d );
+##  [ [  2,  0,  0 ],
+##    [  0,  2,  0 ],
+##    [  0,  0,  2 ] ]
+##  gap> d;
+##  <A scalar homalg internal 3 by 3 matrix>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( HomalgScalarMatrix,
+  function( arg )		## the scalar matrix
+    local nargs, r, n, R, diag, d, M;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        Error( "no arguments provided\n" );
+    fi;
+    
+    if IsRingElement( arg[1] ) then
+        r := arg[1];
+    else
+        Error( "the first argument must be a ring element\n" );
+    fi;
+    
+    if IsInt( arg[2] ) and arg[2] >= 0 then
+        n := arg[2];
+    else
+        Error( "the second argument must be a non-negative integer\n" );
+    fi;
+    
+    if IsHomalgRing( arg[nargs] ) then
+        R := arg[nargs];
+    fi;
+    
+    diag := ListWithIdenticalEntries( n, r );
+    
+    if not IsBound( R ) then
+        if IsHomalgExternalRingElement( r ) then
+            R := HomalgRing( diag[1] );
+        else
+            Error( "no homalg ring provided\n" );
+        fi;
+    fi;
+    
+    M := HomalgDiagonalMatrix( diag, R );
+    
+    SetIsScalarMatrix( M, true );
+    
+    return M;
+    
+end );
+
+
 
 ##
 InstallGlobalFunction( ListToListList,

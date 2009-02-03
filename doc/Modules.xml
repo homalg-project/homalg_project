@@ -79,6 +79,7 @@
 
 <#Include Label="HomalgRing:module">
 <#Include Label="ByASmallerPresentation:module">
+<#Include Label="SubmoduleOfIdealMultiples">
 
 </Section>
 

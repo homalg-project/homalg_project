@@ -505,3 +505,32 @@ InstallImmediateMethod( KrullDimension,
     
 end );
 
+
+####################################
+#
+# methods for attributes:
+#
+####################################
+
+##
+InstallMethod( WeightsOfIndeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and IsFreePolynomialRing ],
+        
+  function( S )
+    
+    return ListWithIdenticalEntries( Length( IndeterminatesOfPolynomialRing( S ) ), 1 );
+    
+end );
+
+##
+InstallMethod( WeightsOfIndeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and IsExteriorRing ],
+        
+  function( E )
+    
+    return ListWithIdenticalEntries( Length( IndeterminatesOfExteriorRing( E ) ), 1 );
+    
+end );
+

@@ -393,11 +393,11 @@ end );
 
 InstallGlobalFunction( _Functor_AuslanderDual_OnObjects,	### defines: AuslanderDual
   function( M )
-    local d, rel, DM;
+    local rel, DM;
     
-    d := Resolution( 1, M );
+    rel := PresentationMap( M );
     
-    rel := MatrixOfMap( CertainMorphism( d, 1 ) );
+    rel := MatrixOfMap( rel );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         DM := RightPresentation( rel );

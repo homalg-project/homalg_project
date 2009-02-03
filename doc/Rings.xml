@@ -142,7 +142,8 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IndeterminatesOfPolynomialRing">
 <#Include Label="IndeterminateCoordinatesOfRingOfDerivations">
 <#Include Label="IndeterminateDerivationsOfRingOfDerivations">
-<#Include Label="DegreesOfIndeterminates">
+<#Include Label="WeightsOfIndeterminates">
+<#Include Label="ExternallyStoredWeightsOfIndeterminates">
 <#Include Label="AmbientRing">
 <#Include Label="KrullDimension">
 <#Include Label="LeftGlobalDimension">

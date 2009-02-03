@@ -55,6 +55,7 @@
 <#Include Label="IsRightInvertibleMatrix">
 <#Include Label="IsEmptyMatrix">
 <#Include Label="IsDiagonalMatrix">
+<#Include Label="IsScalarMatrix">
 <#Include Label="IsUpperTriangularMatrix">
 <#Include Label="IsLowerTriangularMatrix">
 <#Include Label="IsStrictUpperTriangularMatrix">

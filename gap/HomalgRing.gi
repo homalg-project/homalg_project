@@ -441,8 +441,6 @@ InstallMethod( SetRingProperties,
     
     SetIsIntegralDomain( S, true );
     
-    SetDegreesOfIndeterminates( S, ListWithIdenticalEntries( Length( var ), 1 ) );
-    
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
 end );
@@ -511,8 +509,6 @@ InstallMethod( SetRingProperties,
     SetIsIntegralDomain( S, d = 0 );
     
     SetIndeterminatesOfExteriorRing( S, anti );
-    
-    SetDegreesOfIndeterminates( S, ListWithIdenticalEntries( Length( anti ), -1 ) );
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     

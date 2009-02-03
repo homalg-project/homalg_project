@@ -2241,6 +2241,17 @@ InstallMethod( POW,
     
 end );
 
+##
+InstallMethod( POW,
+        "constructor",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, twist )
+    
+    return HomalgFreeLeftModuleWithDegrees( R, -twist );
+    
+end );
+
 ##  <#GAPDoc Label="\*:ModuleBaseChange">
 ##  <ManSection>
 ##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring"/>

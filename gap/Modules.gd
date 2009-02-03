@@ -50,6 +50,9 @@ DeclareOperation( "Resolution",
 DeclareOperation( "LengthOfResolution",
         [ IsHomalgModule ] );
 
+DeclareOperation( "PresentationMap",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "SyzygiesModuleEmb",
         [ IsInt, IsHomalgModule ] );
 
@@ -106,4 +109,7 @@ DeclareOperation( "EmbeddingsInCoproductObject",
 
 DeclareOperation( "ProjectionsFromProductObject",
         [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "SubmoduleOfIdealMultiples",
+        [ IsList, IsHomalgModule ] );
 

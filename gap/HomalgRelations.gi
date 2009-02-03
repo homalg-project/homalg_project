@@ -15,8 +15,8 @@
 ##  of columns/rows of the matrix <A>rel</A>.
 ##  <P/>
 ##  The data structure of a module in &homalg; is designed to contain not only one but several sets of relations
-##  (together with corresponding sets of generators). The different sets of relations are linked with so-called
-##  transition matrices (&see; Chapter <Ref Chap="Modules"/>).
+##  (together with corresponding sets of generators (&see; Chapter <Ref Chap="Generators"/>)).
+##  The different sets of relations are linked with so-called transition matrices (&see; Chapter <Ref Chap="Modules"/>).
 ##  <#/GAPDoc>
 
 ####################################

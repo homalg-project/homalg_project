@@ -55,8 +55,10 @@ InstallValue( LogicalImplicationsForHomalgMatrices,
           [ IsIdentityMatrix,
             "implies", IsPermutationMatrix ],
           
-          ## follows from the rest, but this gives a direct way
           [ IsIdentityMatrix,
+            "implies", IsScalarMatrix ],
+          
+          [ IsScalarMatrix,
             "implies", IsDiagonalMatrix ],
           
           [ IsIdentityMatrix,
