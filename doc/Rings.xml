@@ -142,8 +142,11 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IndeterminatesOfPolynomialRing">
 <#Include Label="IndeterminateCoordinatesOfRingOfDerivations">
 <#Include Label="IndeterminateDerivationsOfRingOfDerivations">
+<#Include Label="IndeterminateAntiCommutingVariablesOfExteriorRing">
+<#Include Label="IndeterminatesOfExteriorRing">
 <#Include Label="WeightsOfIndeterminates">
 <#Include Label="ExternallyStoredWeightsOfIndeterminates">
+<#Include Label="CoefficientsRing">
 <#Include Label="AmbientRing">
 <#Include Label="KrullDimension">
 <#Include Label="LeftGlobalDimension">

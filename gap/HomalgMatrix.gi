@@ -2009,17 +2009,21 @@ InstallGlobalFunction( HomalgScalarMatrix,
         R := arg[nargs];
     fi;
     
-    diag := ListWithIdenticalEntries( n, r );
-    
     if not IsBound( R ) then
         if IsHomalgExternalRingElement( r ) then
-            R := HomalgRing( diag[1] );
+            R := HomalgRing( r );
         else
             Error( "no homalg ring provided\n" );
         fi;
     fi;
     
-    M := HomalgDiagonalMatrix( diag, R );
+    if n = 0 then
+        return HomalgZeroMatrix( 0, 0, R );
+    fi;
+    
+    diag := ListWithIdenticalEntries( n, HomalgMatrix( [ r ], 1, 1, R ) ); ## a listlist would screw Singular
+    
+    M := DiagMat( diag );
     
     SetIsScalarMatrix( M, true );
     

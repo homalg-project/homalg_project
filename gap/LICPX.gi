@@ -411,15 +411,17 @@ InstallMethod( BettiDiagram,
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees, min, C_degrees, l, ll, CM, r, beta, ar;
+    local cocomplex, degrees, min, C_degrees, l, ll, CM, r, beta, ar;
     
-    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        if not IsList( DegreesOfGenerators( LowestDegreeObject( C ) ) ) then
-            Error( "the lowest module was not created as a graded module\n" );
-        fi;
-    else
+    cocomplex := IsCocomplexOfFinitelyPresentedObjectsRep( C );
+    
+    if cocomplex then
         if not IsList( DegreesOfGenerators( HighestDegreeObject( C ) ) ) then
             Error( "the highest module was not created as a graded module\n" );
+        fi;
+    else
+        if not IsList( DegreesOfGenerators( LowestDegreeObject( C ) ) ) then
+            Error( "the lowest module was not created as a graded module\n" );
         fi;
     fi;
     
@@ -427,7 +429,7 @@ InstallMethod( BettiDiagram,
     degrees := List( ObjectsOfComplex( C ), DegreesOfGenerators );
     
     ## take care of cocomplexes
-    if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
+    if cocomplex then
         degrees := Reversed( degrees );
     fi;
     
@@ -458,7 +460,7 @@ InstallMethod( BettiDiagram,
     r := [ min .. CM ];
     
     ## take care of cocomplexes
-    if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
+    if cocomplex then
         r := Reversed( r );
         l := Reversed( l );
     fi;
@@ -467,7 +469,7 @@ InstallMethod( BettiDiagram,
     beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> a = i + ( j - 1 ) ) ) ) );
     
     ## take care of cocomplexes
-    if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
+    if cocomplex then
         if ll <> [ ] then
             r := [ min .. CM ] + C_degrees[Length( C_degrees )];
             ConvertToRangeRep( r );
@@ -487,7 +489,7 @@ InstallMethod( BettiDiagram,
     fi;
     
     ## take care of cocomplexes
-    if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
+    if cocomplex then
         Append( ar, [ "reverse" ] );	## read the row range upside down
     fi;
     

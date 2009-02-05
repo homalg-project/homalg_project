@@ -275,6 +275,12 @@ DeclareOperation( "Add",
 DeclareOperation( "Shift",
         [ IsHomalgComplex, IsInt ] );
 
+DeclareOperation( "Reflect",
+        [ IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "Reflect",
+        [ IsHomalgComplex ] );
+
 DeclareOperation( "CertainMorphismAsSubcomplex",
         [ IsHomalgComplex, IsInt ] );
 

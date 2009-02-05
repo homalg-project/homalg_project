@@ -766,11 +766,22 @@ DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
 DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IndeterminateAntiCommutingVariablesOfExteriorRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="IndeterminateAntiCommutingVariablesOfExteriorRing"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>The list of anti-commuting indeterminates of the &homalg; exterior ring <A>R</A>.</Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IndeterminateAntiCommutingVariablesOfExteriorRing",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IndeterminatesOfExteriorRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminatesOfExteriorRing"/>
 ##    <Returns>a list of &homalg; ring elements</Returns>
-##    <Description>The list of the indeterminates of the &homalg; exterior ring <A>R</A>.</Description>
+##    <Description>The list of all indeterminates (commuting and anti-commuting) of the &homalg; exterior ring <A>R</A>.</Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -797,6 +808,33 @@ DeclareAttribute( "WeightsOfIndeterminates",
 ##  <#/GAPDoc>
 
 DeclareAttribute( "ExternallyStoredWeightsOfIndeterminates",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="CoefficientsRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="CoefficientsRing"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The ring of coefficients of the &homalg; ring <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CoefficientsRing",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="BaseRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="BaseRing"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      In case <A>R</A> was constructed as a polynomial or exterior ring over a base ring <M>T</M>,
+##      and only in this case, the &homalg; ring <M>T</M> is returned.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "BaseRing",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="AmbientRing">
@@ -1013,7 +1051,13 @@ DeclareOperation( "AssociatedRingOfDerivations",
         [ IsHomalgRing ] );
 
 DeclareOperation( "ExteriorRing",
+        [ IsHomalgRing, IsHomalgRing, IsList ] );
+
+DeclareOperation( "ExteriorRing",
         [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "KoszulDualRing",
+        [ IsHomalgRing, IsHomalgRing, IsList ] );
 
 DeclareOperation( "KoszulDualRing",
         [ IsHomalgRing, IsList ] );

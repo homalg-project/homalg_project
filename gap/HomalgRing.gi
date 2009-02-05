@@ -492,7 +492,7 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing and IsExteriorRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( S, R, anti )
-    local r, d;
+    local r, d, comm, T;
     
     r := CoefficientsRing( R );
     
@@ -508,7 +508,18 @@ InstallMethod( SetRingProperties,
     
     SetIsIntegralDomain( S, d = 0 );
     
-    SetIndeterminatesOfExteriorRing( S, anti );
+    comm := [ ];
+    
+    if HasBaseRing( R ) then
+        T := BaseRing( R );
+        if HasIndeterminatesOfPolynomialRing( T ) then
+            comm := IndeterminatesOfPolynomialRing( T );
+        fi;
+    fi;
+    
+    SetIndeterminateAntiCommutingVariablesOfExteriorRing( S, anti );
+    
+    SetIndeterminatesOfExteriorRing( S, Concatenation( comm, anti ) );
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
@@ -659,6 +670,16 @@ InstallGlobalFunction( CreateHomalgRing,
         od;
     fi;
     
+    if IsBound( HOMALG.RingCounter ) then
+        HOMALG.RingCounter := HOMALG.RingCounter + 1;
+    else
+        HOMALG.RingCounter := 1;
+    fi;
+    
+    ## this has to be done before we call
+    ## HomalgExternalRingElement below
+    homalg_ring!.creation_number := HOMALG.RingCounter;
+    
     ## do not invoke SetRingProperties here, since I might be
     ## the first step of creating a residue class ring!
     
@@ -711,17 +732,9 @@ InstallGlobalFunction( CreateHomalgRing,
         
     fi;
     
-    if IsBound( HOMALG.RingCounter ) then
-        HOMALG.RingCounter := HOMALG.RingCounter + 1;
-    else
-        HOMALG.RingCounter := 1;
-    fi;
-    
     if IsBound( HOMALG.ByASmallerPresentation ) and HOMALG.ByASmallerPresentation = true then
         homalg_ring!.ByASmallerPresentation := true;
     fi;
-    
-    homalg_ring!.creation_number := HOMALG.RingCounter;
     
     ## e.g. needed to construct residue class rings
     homalg_ring!.ConstructorArguments := arg;
@@ -991,6 +1004,21 @@ InstallMethod( AssociatedRingOfDerivations,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( ExteriorRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsFreePolynomialRing, IsList ],
+        
+  function( S, anti )
+    
+    if HasBaseRing( S ) then
+        return ExteriorRing( S, BaseRing( S ), anti );
+    else
+        return ExteriorRing( S, CoefficientsRing( S ), anti );
+    fi;
     
 end );
 

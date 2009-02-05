@@ -40,14 +40,14 @@
 ##    [  1,  1 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 1
 ##  Z/< 2 > + Z/< 8 >
 ##  ------------^------------
 ##  [ [  0,  6 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 2
 ##  Z/< 4 >
 ##  -------------------------
@@ -66,14 +66,14 @@
 ##    [  1,  1 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 1
 ##  Z/< 2 > + Z/< 4 >
 ##  ------------^------------
 ##  [ [  0,  2 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 2
 ##  Z/< 4 >
 ##  ------------^------------
@@ -81,7 +81,7 @@
 ##    [  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 1 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 3
 ##  Z/< 2 > + Z/< 2 >
 ##  ------------^------------
@@ -89,14 +89,14 @@
 ##    [  0,  1 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 4
 ##  Z/< 2 > + Z/< 4 >
 ##  ------------^------------
 ##  [ [  1,  3 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 5
 ##  Z/< 4 >
 ##  -------------------------

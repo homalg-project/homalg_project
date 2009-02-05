@@ -408,7 +408,7 @@ end );
 ##    [  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 1
 ##  Z^(1 x 2)
 ##  ------------^------------
@@ -416,7 +416,7 @@ end );
 ##    [  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 2
 ##  Z^(1 x 2)
 ##  -------------------------
@@ -748,7 +748,7 @@ InstallMethod( Shift,
         [ IsHomalgComplex, IsInt ],
         
   function( C, s )
-    local d, Cd, Cs, m;
+    local d, Cd, Cs;
     
     d := LowestDegree( C );
     
@@ -760,9 +760,7 @@ InstallMethod( Shift,
         Cs := HomalgCocomplex( Cd, d - s );
     fi;
     
-    for m in MorphismsOfComplex( C ) do
-        Add( Cs, m );
-    od;
+    Perform ( MorphismsOfComplex( C ), function( m ) Add( Cs, m ); end );
     
     if HasIsGradedObject( C ) and IsGradedObject( C ) then
         SetIsGradedObject( Cs, true );
@@ -773,6 +771,49 @@ InstallMethod( Shift,
     fi;
     
     return Cs;
+    
+end );
+
+##
+InstallMethod( Reflect,
+        "for homalg complexes",
+        [ IsHomalgComplex, IsInt ],
+        
+  function( C, s )
+    local d, Cd, Cs;
+    
+    d := HighestDegree( C );
+    
+    Cd := HighestDegreeObject( C );
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        Cs := HomalgCocomplex( Cd, - d - s );
+    else
+        Cs := HomalgComplex( Cd, - d - s );
+    fi;
+    
+    Perform ( Reversed( MorphismsOfComplex( C ) ), function( m ) Add( Cs, m ); end );
+    
+    if HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( Cs, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( Cs, true );
+    elif HasIsSequence( C ) and IsSequence( C ) then
+        SetIsSequence( Cs, true );
+    fi;
+    
+    return Cs;
+    
+end );
+
+##
+InstallMethod( Reflect,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    return Reflect( C, 0 );
     
 end );
 
@@ -1207,7 +1248,7 @@ end );
 ##    [  0,  3,  6,  9 ] ]
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 1
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
@@ -1231,7 +1272,7 @@ end );
 ##    [  2,  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
-##  ------------^------------
+##  -------------------------
 ##  at homology degree: 1
 ##  Z/< 3 > + Z^(1 x 1)
 ##  -------------------------
@@ -1794,7 +1835,7 @@ InstallMethod( Display,
     for i in degrees{[ 2 .. Length( degrees ) ]} do
         Print( "------------^------------\n" );
         Display( CertainMorphism( o, i ) );
-        Print( "------------^------------\n" );
+        Print( "-------------------------\n" );
         Print( "at homology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
     od;
@@ -1820,7 +1861,7 @@ InstallMethod( Display,
     for i in degrees{[ 1 .. l - 1 ]} do
         Print( "at cohomology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
-        Print( "------------v------------\n" );
+        Print( "-------------------------\n" );
         Display( CertainMorphism( o, i ) );
         Print( "------------v------------\n" );
     od;
