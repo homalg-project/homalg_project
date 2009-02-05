@@ -8,7 +8,7 @@ doc/manual.six: makedoc.g maketest.g \
 		doc/Sheaves.bib gap/*.gd gap/*.gi \
 		doc/Modules.xml doc/Tate.xml \
 		doc/examples.xml doc/appendix.xml \
-		VERSION
+		VERSION PackageInfo.g
 	        gapL makedoc.g
 
 clean:
@@ -18,7 +18,7 @@ test:	doc
 	gapL maketest.g
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" Sheaves/doc/*.* Sheaves/gap/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
+	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" Sheaves/doc/*.* Sheaves/gap/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Sheaves/examples/*.g)
 
 WEBPOS=~/gap/pkg/Sheaves/public_html
 WEBPOS_FINAL=~/Sites/Sheaves

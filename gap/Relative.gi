@@ -52,7 +52,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     degrees0 := DegreesOfGenerators( Source( m0 ) );
     
-    pos0 := Filtered( [ 1 .. Length( degrees0 ) ], p -> degrees0[p][2] = 0 );
+    pos0 := Filtered( [ 1 .. Length( degrees0 ) ], p -> degrees0[p] = 0 );
     
     m0 := certain_relations( MatrixOfMap( m0 ), pos0 );
     
@@ -65,7 +65,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     degrees1 := DegreesOfGenerators( Source( m1 ) );
     
-    pos1 := Filtered( [ 1 .. Length( degrees1 ) ], p -> degrees1[p][2] = 1 );
+    pos1 := Filtered( [ 1 .. Length( degrees1 ) ], p -> degrees1[p] = 1 );
     
     m1 := certain_relations( MatrixOfMap( m1 ), pos1 );
     
@@ -134,7 +134,7 @@ InstallMethod( DegreeZeroSubcomplex,
     
     degrees := List( objects, DegreesOfGenerators );
     
-    degrees0 := List( degrees, degs -> Filtered( degs, d -> d[2] = 0 ) );
+    degrees0 := List( degrees, degs -> Filtered( degs, d -> d = 0 ) );
     
     objects := List( degrees0, degs -> presentation( Length( degs ), R ) );
     
@@ -145,7 +145,7 @@ InstallMethod( DegreeZeroSubcomplex,
     
     morphisms := List( morphisms, a -> R * a );
     
-    ranges0 := List( degrees, degs -> Filtered( [ 1 .. Length( degs ) ], p -> degs[p][2] = 0 ) );
+    ranges0 := List( degrees, degs -> Filtered( [ 1 .. Length( degs ) ], p -> degs[p] = 0 ) );
     
     m := Length( morphisms );
     
