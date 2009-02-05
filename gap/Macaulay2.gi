@@ -89,8 +89,6 @@ InstallGlobalFunction( _Macaulay2_SetRing,
     
     homalgSendBlocking( [ "use ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
     
-    ## never use imapall here
-    
 end );
 
 ##
@@ -115,7 +113,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMacaulay2,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, stream, o, ar, ext_obj, R;
     
     nargs := Length( arg );
     
@@ -144,7 +142,11 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
+    
+    _Macaulay2_SetRing( R );
+    
+    return R;
     
 end );
 
@@ -214,68 +216,34 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMacaulay2Rep, IsList ],
         
   function( R, indets )
-    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v, nr_var, RP;
+    local ar, r, var, properties, ext_obj, S, RP;
     
-    ##compute the new indeterminates for the ring and save them in var
-    if IsString( indets ) and indets <> "" then
-        var := SplitString( indets, "," );
-    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
-        var := indets;
-    else
-        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
-    fi;
+    ar := _PrepareInputForPolynomialRing( R, indets );
     
-    nr_var := Length( var );
+    r := ar[1];
+    var := ar[2];
+    properties := ar[3];
     
-    c := Characteristic( R );
-    
-    properties := [ IsCommutative ];
-    
-    ##K[x] is a principal ideal ring for a field K
-    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
-        Add( properties, IsPrincipalIdealRing );
-    fi;
-    
-    ##r is set to the ring of coefficients
-    ##further a check is done, whether the old indeterminates (if exist) and the new
-    ##one are disjoint
-    if HasIndeterminatesOfPolynomialRing( R ) then
-        r := CoefficientsRing( R );
-        var_of_coeff_ring := IndeterminatesOfPolynomialRing( R );
-        if not ForAll( var_of_coeff_ring, HasName ) then
-            Error( "the indeterminates of coefficients ring must all have a name (use SetName)\n" );
-        fi;
-        var_of_coeff_ring := List( var_of_coeff_ring, Name );
-        if Intersection2( var_of_coeff_ring, var ) <> [ ] then
-            Error( "the following indeterminates are already elements of the coefficients ring: ", Intersection2( var_of_coeff_ring, var ), "\n" );
-        fi;
-    else
-      r := R;
-      var_of_coeff_ring := [];
-    fi;
-
-    var := Concatenation( var_of_coeff_ring, var );
-    
-    ##create the new ring
-    ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ## create the new ring
+    ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, properties,  HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
-    for v in var do
-        SetName( v, homalgPointer( v ) );
-    od;
-    
-    _Macaulay2_SetRing( S );
+    Perform( var, function( v ) SetName( v, homalgPointer( v ) ); end );
     
     SetIsFreePolynomialRing( S, true );
+    
+    if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        SetBaseRing( S, R );
+    fi;
     
     SetRingProperties( S, r, var );
     
     SetSyzygiesAlgorithmReturnsMinimalSyzygies( S, true );
     
-    RP := homalgTable( S );
+    _Macaulay2_SetRing( R );
     
     return S;
     

@@ -308,7 +308,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                        list := pos_list;
                    fi;
                    
-                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, ", list (", list, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetUnitPosition );
+                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
                    
                    if list_string = "fail" then
                        return fail;
@@ -382,7 +382,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( M, clean_columns )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", list (", clean_columns, "))" ], "need_output", "break_lists", HOMALG_IO.Pictograms.GetCleanRowsPositions );
+                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", list (", clean_columns, "))" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    return StringToIntList( list_string );
                    
