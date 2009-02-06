@@ -267,6 +267,9 @@ end function;\n\n";
     
     MyRowspace := "\n\
 MyRowspace := function(M)\n\
+  if Type(BaseRing(M)) eq AlgExt then\n\
+    return sub< Module(BaseRing(M), Ncols(M)) | RowSequence(M) >;\n\
+  end if;\n\
   if Type(M) eq AlgMatElt then\n\
     return Rowspace(RMatrixSpace( BaseRing(M), Nrows(M), Ncols(M)) ! M);\n\
   else\n\

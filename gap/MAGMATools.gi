@@ -75,6 +75,14 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    return HomalgMatrix( homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
                    
                  end,
+
+               CopyMatrix :=
+                 function( C, R )
+
+                   return HomalgMatrix( homalgSendBlocking( [ "Matrix(", R, C, ")" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
+
+                 end,
+
                
                ZeroMatrix :=
                  function( C )
