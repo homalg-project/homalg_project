@@ -22,64 +22,9 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
         [ IsHomalgExternalRingRep and IsFreePolynomialRing ],
         
   function( globalR )
-    local globalRP, RP, RP_General, RP_Basic, RP_BestBasis, RP_specific, component;
+    local globalRP, RP, RP_General, RP_Basic, RP_specific, component;
     
     globalRP := homalgTable( globalR );
-    
-    RP := rec (
-                  Zero := globalRP!.Zero,
-                  
-                  One := globalRP!.One,
-                  
-                  MinusOne := globalRP!.MinusOne,
-
-                  IsZero := function(a)
-                    return IsZero(NumeratorOfLocalElement(a));
-                  end,
-
-                  IsOne := function(a)
-                    return IsZero(NumeratorOfLocalElement(a)-DenominatorOfLocalElement(a));
-                  end,
-
-                  Minus := function(a,b)
-                    return HomalgLocalRingElement(
-                      NumeratorOfLocalElement(a)*DenominatorOfLocalElement(b)-NumeratorOfLocalElement(b)*DenominatorOfLocalElement(a),
-                      DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
-                      HomalgRing(a));
-                  end,
-
-                  DivideByUnit :=function( a, u )
-                    return HomalgLocalRingElement(
-                      NumeratorOfLocalElement(a),
-                      DenominatorOfLocalElement(a)*u,
-                      HomalgRing(a));
-                  end,
-
-                  #IsUnit CAS-dependent
-
-                  Sum := function(a,b)
-                    return HomalgLocalRingElement(
-                      NumeratorOfLocalElement(a)*DenominatorOfLocalElement(b)+NumeratorOfLocalElement(b)*DenominatorOfLocalElement(a),
-                      DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
-                      HomalgRing(a));
-                  end,
-
-                  Product := function(a,b)
-                    return HomalgLocalRingElement(
-                      NumeratorOfLocalElement(a)*NumeratorOfLocalElement(b),
-                      DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
-                      HomalgRing(a));
-                  end
-                  
-                  
-                  
-               );
-    
-    Objectify( TheTypeHomalgTable, RP );
-    
-    return RP;
-    
-    ## rest
     
     RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
     
@@ -87,7 +32,13 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
     
     RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
     
-    RP_specific := rec( );
+    RP_specific := rec (
+                        Zero := globalRP!.Zero,
+                        
+                        One := globalRP!.One,
+                        
+                        MinusOne := globalRP!.MinusOne,
+                        );
     
     for component in NamesOfComponents( RP_General ) do
         RP.(component) := RP_General.(component);
@@ -100,6 +51,10 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
     for component in NamesOfComponents( RP_specific ) do
         RP.(component) := RP_specific.(component);
     od;
+    
+    Objectify( TheTypeHomalgTable, RP );
+    
+    return RP;
     
 end );
 

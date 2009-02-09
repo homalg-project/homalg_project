@@ -20,6 +20,8 @@
 
 <#Include Label="IsHomalgLocalRingElementRep">
 
+<#Include Label="IsHomalgLocalMatrixRep">
+
 </Section>
 
 <Section Label="LocalizeRing:Operations">

@@ -30,7 +30,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ "matrix ", N, " = BasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   #
                    
                    return N;
                    
@@ -44,7 +44,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ "matrix ", N, " = BasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
+                   #
                    
                    return N;
                    
@@ -58,7 +58,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ "l=BasisOfRowsCoeff(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   #
                    
                    return N;
                    
@@ -72,7 +72,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ "l=BasisOfColumnsCoeff(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   #
                    
                    return N;
                    
@@ -86,7 +86,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "matrix ", N, " = DecideZeroRows(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   #
                    
                    return N;
                    
@@ -100,7 +100,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "matrix ", N, " = DecideZeroColumns(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   #
                    
                    return N;
                    
@@ -114,7 +114,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "l=DecideZeroRowsEffectively(", A, B, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   #
                    
                    return N;
                    
@@ -128,7 +128,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "l=DecideZeroColumnsEffectively(", A, B, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   #
                    
                    return N;
                    
@@ -148,11 +148,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        M2 := arg[2];
                        
-                       homalgSendBlocking( [ "matrix ", N, " = SyzygiesGeneratorsOfRows2(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                       #
                        
                    else
                        
-                       homalgSendBlocking( [ "matrix ", N, " = SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                       #
                        
                    fi;
                    
@@ -174,11 +174,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        M2 := arg[2];
                        
-                       homalgSendBlocking( [ "matrix ", N, " = SyzygiesGeneratorsOfColumns2(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                       #
                        
                    else
                        
-                       homalgSendBlocking( [ "matrix ", N, " = SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                       #
                        
                    fi;
                    

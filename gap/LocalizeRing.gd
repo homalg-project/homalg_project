@@ -28,16 +28,25 @@ DeclareOperation( "LocalizeAt",
 
 DeclareGlobalFunction( "HomalgLocalRingElement" );
 
+DeclareOperation( "BlindlyCopyMatrixPropertiesToLocalMatrix",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 # basic operations:
 
 DeclareOperation( "AssociatedGlobalRing",
         [ IsHomalgRing ] );
 
 DeclareOperation( "AssociatedGlobalRing",
-        [ IsHomalgNonBuiltInRingElement ] );
+        [ IsHomalgRingElement ] );
 
 DeclareOperation( "NumeratorOfLocalElement",
-        [ IsHomalgNonBuiltInRingElement ] );
+        [ IsHomalgRingElement ] );
 
 DeclareOperation( "DenominatorOfLocalElement",
-        [ IsHomalgNonBuiltInRingElement ] );
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "HomalgLocalMatrix",
+        [ IsHomalgMatrix, IsRingElement, IsHomalgRing ] );
+
+DeclareOperation( "HomalgLocalMatrix",
+        [ IsHomalgMatrix, IsHomalgRing ] );

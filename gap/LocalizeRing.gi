@@ -35,28 +35,42 @@ DeclareRepresentation( "IsHomalgLocalRingRep",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The representation of elements of external &homalg; rings. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgNonBuiltInRingElement"/>.)
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingElement"/>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsHomalgLocalRingElementRep",
-        IsHomalgNonBuiltInRingElement,
+        IsHomalgRingElement,
         [ "pointer" ] );
 
-## a new type:
+##  <#GAPDoc Label="IsHomalgLocalMatrixRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="A" Name="IsHomalgLocalMatrixRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The representation of &homalg; matrices with entries in a &homalg; local ring. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareRepresentation( "IsHomalgLocalMatrixRep",
+        IsHomalgMatrix,
+        [ ] );
+
+## three new types:
 BindGlobal( "TheTypeHomalgLocalRing",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgLocalRingRep ) );
 
-## a new family:
-BindGlobal( "TheFamilyOfHomalgLocalRingElements",
-        NewFamily( "TheFamilyOfHomalgLocalRingElements" ) );
-
-## a new type:
 BindGlobal( "TheTypeHomalgLocalRingElement",
-        NewType( TheFamilyOfHomalgLocalRingElements,
+        NewType( TheFamilyOfHomalgRingElements,
                 IsHomalgLocalRingElementRep ) );
+
+BindGlobal( "TheTypeHomalgLocalMatrix",
+        NewType( TheFamilyOfHomalgMatrices,
+                IsHomalgLocalMatrixRep ) );
 
 ####################################
 #
@@ -130,6 +144,31 @@ InstallMethod( Name,
 
 end );
 
+##
+InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgLocalMatrixRep ],
+        
+  function( S, T )
+    
+    if HasNrRows( S ) then
+        SetNrRows( T, NrRows( S ) );
+    fi;
+    
+    if HasNrColumns( S ) then
+        SetNrColumns( T, NrColumns( S ) );
+    fi;
+    
+    if HasIsZero( S ) then
+        SetIsZero( T, IsZero( S ) );
+    fi;
+    
+    if HasIsIdentityMatrix( S ) then
+        SetIsIdentityMatrix( T, IsIdentityMatrix( S ) );
+    fi;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -140,7 +179,7 @@ end );
 InstallMethod( LocalizeAt,
         "constructor for localized rings",
         [ IsHomalgExternalRingRep and IsFreePolynomialRing ],
-	
+        
   function( globalR )
     local RP, localR;
     
@@ -220,6 +259,47 @@ InstallGlobalFunction( HomalgLocalRingElement,
     fi;
     
     return r;
+    
+end );
+
+##
+InstallMethod( HomalgLocalMatrix,
+        "constructor for localized rings",
+        [ IsHomalgMatrix, IsRingElement, IsHomalgLocalRingRep ],
+        
+  function( A, r, R )
+    local G, type, matrix;
+    
+    G := HomalgRing( A );
+    
+    if IsHomalgRingElement( r ) and not IsIdenticalObj( HomalgRing( r ), G ) then
+        Error( "the ring of the element and the ring of the matrix are not identical\n" );
+    fi;
+    
+    if not IsIdenticalObj( G, AssociatedGlobalRing( R ) ) then
+        Error( "the ring the matrix and the global ring of the specified local ring are not identical\n" );
+    fi;
+    
+    matrix := rec( ring := R );
+    
+    ObjectifyWithAttributes(
+            matrix, TheTypeHomalgLocalMatrix,
+            Eval, [ r, A ] );
+    
+    BlindlyCopyMatrixPropertiesToLocalMatrix( A, matrix );
+    
+    return matrix;
+    
+end );
+
+##
+InstallMethod( HomalgLocalMatrix,
+        "constructor for localized rings",
+        [ IsHomalgMatrix, IsHomalgLocalRingRep ],
+        
+  function( A, R )
+    
+    return HomalgLocalMatrix( A, One( AssociatedGlobalRing( R ) ), R );
     
 end );
 
