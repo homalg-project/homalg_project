@@ -1095,8 +1095,7 @@ InstallMethod( LocalizePolynomialRingAtZero,
         [ IsHomalgExternalRingInSingularRep ],
         
   function( R )
-    local var, properties, stream, display_color,
-          PR, ext_obj, S, v, RP, c;
+    local var, properties, stream, ext_obj, S, v, RP, c;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -1112,12 +1111,6 @@ InstallMethod( LocalizePolynomialRingAtZero,
     fi;
     
     stream := homalgStream( R );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
     
     ## create the new ring
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, properties, TheTypeHomalgExternalRingObjectInSingular, HOMALG_IO.Pictograms.CreateHomalgRing );

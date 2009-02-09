@@ -22,7 +22,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                
                One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.One ), "GAP", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "MinusOne(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "GAP" ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "MinusOne(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "GAP", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ "IsZero(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                

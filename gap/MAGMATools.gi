@@ -21,7 +21,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.One ), "MAGMA", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "MAGMA" ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "MAGMA", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ "IsZero(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                

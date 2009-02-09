@@ -66,7 +66,7 @@ InstallValue( CommonHomalgTableForSageTools,
                
                One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".one_element()" ], "need_output", HOMALG_IO.Pictograms.One ), "Sage", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one_element()" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "Sage" ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one_element()" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "Sage", IsMinusOne ),
                
                Equal :=
                  function( A, B )

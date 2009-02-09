@@ -22,7 +22,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                
                One := HomalgExternalRingElement( R -> homalgPointer( homalgSendBlocking( [ R, "#1" ], HOMALG_IO.Pictograms.One ) ), "Macaulay2", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgPointer( homalgSendBlocking( [ "-", R, "#1" ], HOMALG_IO.Pictograms.MinusOne ) ), "Macaulay2" ),
+               MinusOne := HomalgExternalRingElement( R -> homalgPointer( homalgSendBlocking( [ "-", R, "#1" ], HOMALG_IO.Pictograms.MinusOne ) ), "Macaulay2", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ "zero(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
                

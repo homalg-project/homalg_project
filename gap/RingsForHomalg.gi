@@ -89,18 +89,18 @@ InstallValue( CommonHomalgTableForRings,
                 elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
                     
                     if Characteristic( R ) = 0 then
-                       return "Q";
-                   else
-                       return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
-                   fi;
-                   
-               else
-                   
-                   return "some Ring";
-                   
-               fi;
-               
-           end,
+                        return "Q";
+                    else
+                        return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
+                    fi;
+                    
+                else
+                    
+                    return "some Ring";
+                    
+                fi;
+                
+            end,
          
          )
 );

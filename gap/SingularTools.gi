@@ -22,7 +22,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                One := HomalgExternalRingElement( "1", "Singular", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( "-1", "Singular" ),
+               MinusOne := HomalgExternalRingElement( "-1", "Singular", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ r, "==0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
                
@@ -39,7 +39,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( a, u )
                    local e;
                    
-                   if IsHomalgExternalRingElement( u ) then
+                   if IsHomalgExternalRingElementRep( u ) then
                        e := homalgPointer( u );
                    else
                        e := u;

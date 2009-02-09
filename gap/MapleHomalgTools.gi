@@ -23,7 +23,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                
                One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "convert( ", R, "[-1][One], symbol )" ], "need_output", HOMALG_IO.Pictograms.One ), "Maple", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "convert( ", R, "[-1][Minus](", Zero( R ), One( R ), R, "[1]), symbol )" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "Maple" ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "convert( ", R, "[-1][Minus](", Zero( R ), One( R ), R, "[1]), symbol )" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "Maple", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  Zero( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                
