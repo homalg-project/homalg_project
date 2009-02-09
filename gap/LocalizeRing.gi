@@ -119,6 +119,17 @@ InstallMethod( DenominatorOfLocalElement,
     
 end );
 
+##
+InstallMethod( Name,
+        "for homalg external ring elements",
+        [ IsHomalgLocalRingElementRep ],
+
+  function( o )
+    
+    return Flat( [ Name( NumeratorOfLocalElement( o ) ), "/",  Name( DenominatorOfLocalElement( o ) ) ] );
+
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -161,7 +172,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
     if IsHomalgLocalRingElementRep( numer ) then
         
         ## otherwise simply return it
-        return el;
+        return numer;
         
     elif IsHomalgExternalRingElementRep( numer ) and nargs = 2 then
         

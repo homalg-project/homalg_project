@@ -27,9 +27,52 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
     globalRP := homalgTable( globalR );
     
     RP := rec (
-               Zero := globalRP!.Zero,
-               One := globalRP!.One,
-               MinusOne := globalRP!.MinusOne,
+                  Zero := globalRP!.Zero,
+                  
+                  One := globalRP!.One,
+                  
+                  MinusOne := globalRP!.MinusOne,
+
+                  IsZero := function(a)
+                    return IsZero(NumeratorOfLocalElement(a));
+                  end,
+
+                  IsOne := function(a)
+                    return IsZero(NumeratorOfLocalElement(a)-DenominatorOfLocalElement(a));
+                  end,
+
+                  Minus := function(a,b)
+                    return HomalgLocalRingElement(
+                      NumeratorOfLocalElement(a)*DenominatorOfLocalElement(b)-NumeratorOfLocalElement(b)*DenominatorOfLocalElement(a),
+                      DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
+                      HomalgRing(a));
+                  end,
+
+                  DivideByUnit :=function( a, u )
+                    return HomalgLocalRingElement(
+                      NumeratorOfLocalElement(a),
+                      DenominatorOfLocalElement(a)*u,
+                      HomalgRing(a));
+                  end,
+
+                  #IsUnit CAS-dependent
+
+                  Sum := function(a,b)
+                    return HomalgLocalRingElement(
+                      NumeratorOfLocalElement(a)*DenominatorOfLocalElement(b)+NumeratorOfLocalElement(b)*DenominatorOfLocalElement(a),
+                      DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
+                      HomalgRing(a));
+                  end,
+
+                  Product := function(a,b)
+                    return HomalgLocalRingElement(
+                      NumeratorOfLocalElement(a)*NumeratorOfLocalElement(b),
+                      DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
+                      HomalgRing(a));
+                  end
+                  
+                  
+                  
                );
     
     Objectify( TheTypeHomalgTable, RP );
