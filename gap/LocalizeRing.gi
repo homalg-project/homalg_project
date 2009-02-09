@@ -35,7 +35,7 @@ DeclareRepresentation( "IsHomalgLocalRingRep",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The representation of elements of external &homalg; rings. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingElement"/>.)
+##      (It is a representation of the &GAP; category <C>IsHomalgRingElement</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -50,7 +50,7 @@ DeclareRepresentation( "IsHomalgLocalRingElementRep",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The representation of &homalg; matrices with entries in a &homalg; local ring. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)
+##      (It is a representation of the &GAP; category <C>IsHomalgMatrix</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

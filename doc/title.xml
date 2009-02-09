@@ -19,9 +19,9 @@
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Universität des Saarlandes, <Br/>
-      66041 Saarbrücken, <Br/>
-      Building E2 4, <Br/>
+      Universität des Saarlandes,
+      66041 Saarbrücken,
+      Building E2 4,
       Germany
     </Address>
     <Email>barakat@math.uni-sb.de</Email>
@@ -29,10 +29,10 @@
   </Author>
   <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik, <Br/>
-      RWTH Aachen, <Br/>
-      Templergraben 64, <Br/>
-      52056 Aachen, <Br/>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
       Germany
     </Address>
     <Email>markus.lange.hegermann@rwth-aachen.de</Email>

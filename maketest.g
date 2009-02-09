@@ -5,6 +5,7 @@
 ##
 
 LoadPackage( "LocalizeRingForHomalg" );
+LoadPackage( "RingsForHomalg" );
 
 HOMALG_IO.show_banners := false;
 
