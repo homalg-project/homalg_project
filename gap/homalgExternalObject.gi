@@ -86,7 +86,7 @@ InstallMethod( homalgPointer,
         
   function( o )
     
-    Error( "expected an external object but got a string\n" );
+    Error( "expected an external object but received a string\n" );
     
 end );
 
@@ -97,7 +97,7 @@ InstallMethod( homalgPointer,
         
   function( o )
     
-    Error( "expected an external object but got ", o, "\n" );
+    Error( "expected an external object\n" );
     
 end );
 
@@ -239,7 +239,7 @@ InstallGlobalFunction( homalgExternalObject,
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsRecord, IsType, IsFilter } bur recieved: ", ar, "\n" );
+            Error( "this argument (now assigned to ar) should be in { IsRecord, IsType, IsFilter }\n" );
         fi;
     od;
     

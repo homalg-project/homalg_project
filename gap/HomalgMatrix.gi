@@ -153,6 +153,30 @@ end );
 ##
 InstallMethod( ShallowCopy,
         "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, MM;
+    
+    R := HomalgRing( M );
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ShallowCopy) then
+        MM := RP!.ShallowCopy( M );
+        
+        BlindlyCopyMatrixProperties( M, MM );
+        
+        return MM;
+    fi;
+    
+    ## we have no other choice
+    return M;
+    
+end );
+
+##
+InstallMethod( ShallowCopy,
+        "for homalg matrices",
         [ IsHomalgInternalMatrixRep ],
         
   function( M )
@@ -178,30 +202,6 @@ InstallMethod( ShallowCopy,
     fi;
     
     return HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );	## HomalgMatrix shallow copies its first argument if it is of type IsMatrix
-    
-end );
-
-##
-InstallMethod( ShallowCopy,
-        "for homalg matrices",
-        [ IsHomalgExternalMatrixRep ],
-        
-  function( M )
-    local R, RP, MM;
-    
-    R := HomalgRing( M );
-    RP := homalgTable( R );
-    
-    if IsBound(RP!.ShallowCopy) then
-        MM := RP!.ShallowCopy( M );
-        
-        BlindlyCopyMatrixProperties( M, MM );
-        
-        return MM;
-    fi;
-    
-    ## we have no other choice
-    return M;
     
 end );
 
@@ -326,7 +326,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElement ],
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep ],
         
   function( M, r, c, s )
     
@@ -337,7 +337,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElement, IsHomalgExternalRingRep ],
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
         
   function( M, r, c, s, R )
     
@@ -1920,7 +1920,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
         diag := arg[1];
     fi;
     
-    if not IsBound( R ) and IsBound( diag ) and diag <> [ ] and IsHomalgExternalRingElement( diag[1] ) then
+    if not IsBound( R ) and IsBound( diag ) and diag <> [ ] and IsHomalgRingElement( diag[1] ) then
         R := HomalgRing( diag[1] );
     fi;
     
@@ -2010,7 +2010,7 @@ InstallGlobalFunction( HomalgScalarMatrix,
     fi;
     
     if not IsBound( R ) then
-        if IsHomalgExternalRingElement( r ) then
+        if IsHomalgRingElement( r ) then
             R := HomalgRing( r );
         else
             Error( "no homalg ring provided\n" );
@@ -2282,7 +2282,7 @@ InstallMethod( ViewObj,
     
     if IsHomalgInternalMatrixRep( o ) then
         Print( "internal " );
-    else
+    elif IsHomalgExternalMatrixRep( o ) then
         Print( "external " );
     fi;
     

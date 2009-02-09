@@ -16,6 +16,7 @@
 
 # two new representations for the GAP-category IsHomalgRing
 # which are subrepresentations of IsHomalgRingOrFinitelyPresentedModuleRep:
+
 ##  <#GAPDoc Label="IsHomalgInternalRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgInternalRingRep"/>
@@ -27,6 +28,7 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsHomalgInternalRingRep",
         IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
@@ -42,6 +44,7 @@ DeclareRepresentation( "IsHomalgInternalRingRep",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareRepresentation( "IsHomalgExternalRingRep",
         IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
@@ -51,14 +54,15 @@ DeclareRepresentation( "IsHomalgExternalRingRep",
 ##    <Filt Type="Representation" Arg="r" Name="IsHomalgExternalRingElementRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The representation of elements of external &homalg; rings.
+##      The representation of elements of external &homalg; rings. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingElement"/>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-# a new representation for the GAP-category IsHomalgExternalRingElement:
+##
 DeclareRepresentation( "IsHomalgExternalRingElementRep",
-        IshomalgExternalObjectRep and IsHomalgExternalRingElement,
-        [ "object", "cas" ] );
+        IshomalgExternalObjectRep and IsHomalgRingElement,
+        [ "pointer", "cas" ] );
 
 # a new subrepresentation of the representation IsContainerForWeakPointersRep:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalRingsRep",
@@ -84,20 +88,17 @@ BindGlobal( "TheTypeHomalgExternalRing",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingRep ) );
 
-# two new families:
-BindGlobal( "TheFamilyOfHomalgExternalRingElements",
-        NewFamily( "TheFamilyOfHomalgExternalRingElements" ) );
-
-BindGlobal( "TheFamilyOfHomalgExternalRingElementsWithIOStream",
-        NewFamily( "TheFamilyOfHomalgExternalRingElementsWithIOStream" ) );
+# a new family:
+BindGlobal( "TheFamilyOfHomalgRingElements",
+        NewFamily( "TheFamilyOfHomalgRingElements" ) );
 
 # two new types:
 BindGlobal( "TheTypeHomalgExternalRingElement",
-        NewType( TheFamilyOfHomalgExternalRingElements,
+        NewType( TheFamilyOfHomalgRingElements,
                 IsHomalgExternalRingElementRep ) );
 
 BindGlobal( "TheTypeHomalgExternalRingElementWithIOStream",
-        NewType( TheFamilyOfHomalgExternalRingElementsWithIOStream,
+        NewType( TheFamilyOfHomalgRingElements,
                 IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ) );
 
 # a new family:
@@ -151,7 +152,7 @@ end );
 ##
 InstallMethod( ZeroMutable,
         "for homalg rings",
-        [ IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     
@@ -162,11 +163,22 @@ end );
 ##
 InstallMethod( OneMutable,
         "for homalg rings",
-        [ IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     
     return One( HomalgRing( r ) );
+    
+end );
+
+##
+InstallMethod( MinusOneMutable,
+        "for homalg rings",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return MinusOne( HomalgRing( r ) );
     
 end );
 
@@ -195,6 +207,17 @@ InstallMethod( HomalgRing,
   function( R )
     
     return R;
+    
+end );
+
+##
+InstallMethod( HomalgRing,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return fail;
     
 end );
 
@@ -395,7 +418,7 @@ end );
 ##
 InstallMethod( homalgSetName,
         "for homalg rings",
-        [ IsHomalgExternalRingElementRep, IsString ],
+        [ IsHomalgRingElement, IsString ],
         
   function( r, name )
     
@@ -609,8 +632,9 @@ HOMALG.ContainerForWeakPointersOnHomalgExternalRings :=
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, r, statistics, homalg_ring, table, properties, ar, type, c,
-          el, container, weak_pointers, l, deleted, streams;
+    local nargs, r, statistics, homalg_ring, table, properties,
+          ar, type, ring_element_constructor, c, el,
+          container, weak_pointers, l, deleted, streams;
     
     nargs := Length( arg );
     
@@ -648,11 +672,13 @@ InstallGlobalFunction( CreateHomalgRing,
             Add( properties, ar );
         elif not IsBound( type ) and IsType( ar ) then
             type := ar;
+        elif not IsBound( ring_element_constructor ) and IsFunction( ar ) then
+            ring_element_constructor := ar;
         fi;
     od;
     
     if not IsBound( type ) then
-        if IsSemiringWithOneAndZero( arg[1] ) then
+        if IsSemiringWithOneAndZero( r ) then
             type := TheTypeHomalgInternalRing;
         else
             type := TheTypeHomalgExternalRing;
@@ -676,23 +702,33 @@ InstallGlobalFunction( CreateHomalgRing,
         HOMALG.RingCounter := 1;
     fi;
     
+    if IsHomalgExternalRingRep( homalg_ring ) then
+        if not IsBound( ring_element_constructor ) then
+            ring_element_constructor := HomalgExternalRingElement;
+        fi;
+    fi;
+    
     ## this has to be done before we call
-    ## HomalgExternalRingElement below
+    ## ring_element_constructor below
     homalg_ring!.creation_number := HOMALG.RingCounter;
     
     ## do not invoke SetRingProperties here, since I might be
     ## the first step of creating a residue class ring!
     
-    ## distinguished ring elements like 0, 1, sometimes also -1:
-    for c in NamesOfComponents( table ) do
-        if IsHomalgExternalRingElementRep( table!.( c ) ) then
-            el := table!.( c );
-            properties := KnownTruePropertiesOfObject( el );
-            ar := [ homalgPointer( el ), homalgExternalCASystem( el ), homalg_ring ];
-            Append( ar, List( properties, ValueGlobal ) );
-            table!.( c ) := CallFuncList( HomalgExternalRingElement, ar );
-        fi;
-    od;
+    ## add distinguished ring elements like 0 and 1
+    ## (sometimes also -1) to the homalg table:
+    if IsBound( ring_element_constructor ) then
+        
+        for c in NamesOfComponents( table ) do
+            if IsRingElement( table!.( c ) ) then
+                table!.( c ) := ring_element_constructor( table!.( c ), homalg_ring );
+            fi;
+        od;
+        
+        ## set the attribute
+        SetRingElementConstructor( homalg_ring,ring_element_constructor );
+        
+    fi;
     
     homalg_ring!.AsLeftModule := HomalgFreeLeftModule( 1, homalg_ring );
     homalg_ring!.AsRightModule := HomalgFreeRightModule( 1, homalg_ring );
@@ -1062,12 +1098,32 @@ end );
 ##
 InstallGlobalFunction( HomalgExternalRingElement,
   function( arg )
-    local nargs, properties, ar, cas, ring, pointer, r;
+    local nargs, el, pointer, ring, cas, ar, properties, r;
     
     nargs := Length( arg );
     
-    if nargs > 0 and IsHomalgExternalRingElementRep( arg[1] ) then
-        return arg[1];
+    if nargs = 0 then
+        Error( "empty input\n" );
+    fi;
+    
+    if IsHomalgExternalRingElementRep( arg[1] ) then
+        
+        el := arg[1];
+        pointer := homalgPointer( el );
+        
+        ## rebuild an external ring element if a ring is provided as a second argument
+        if nargs > 1 and IsHomalgRing( arg[2] ) then
+            ring := arg[2];
+            cas := homalgExternalCASystem( ring );
+            ar := [ pointer, cas, ring ];
+            properties := KnownTruePropertiesOfObject( el );
+            Append( ar, List( properties, ValueGlobal ) );
+            return CallFuncList( HomalgExternalRingElement, ar );
+        fi;
+        
+        ## otherwise simply return it
+        return el;
+        
     fi;
     
     properties := [ ];
@@ -1081,7 +1137,7 @@ InstallGlobalFunction( HomalgExternalRingElement,
         elif IsFilter( ar ) then
             Add( properties, ar );
         else
-            Error( "this argument should be in { IsString, IsHomalgExternalRingRep, IsFilter } bur recieved: ", ar, "\n" );
+            Error( "this argument (now assigned to ar) should be in { IsString, IsHomalgExternalRingRep, IsFilter }\n" );
         fi;
     od;
     
@@ -1144,6 +1200,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( ViewObj,
         "for homalg rings",
         [ IsHomalgInternalRingRep ],
@@ -1154,6 +1211,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( ViewObj,
         "for homalg rings",
         [ IsHomalgExternalRingRep ],
@@ -1165,6 +1223,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( Display,
         "for homalg rings",
         [ IsHomalgRing ],
@@ -1175,6 +1234,7 @@ InstallMethod( Display,
     
 end );
 
+##
 InstallMethod( DisplayRing,
         "for homalg rings",
         [ IsHomalgRing ],
@@ -1185,6 +1245,7 @@ InstallMethod( DisplayRing,
     
 end );
 
+##
 InstallMethod( Name,
         "for homalg external ring elements",
         [ IsHomalgExternalRingElementRep ],
@@ -1206,9 +1267,10 @@ InstallMethod( Name,
     
 end );
 
+##
 InstallMethod( ViewObj,
-        "for homalg external ring elements",
-        [ IsHomalgExternalRingElementRep ],
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
         
   function( o )
     
@@ -1216,6 +1278,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( ViewObj,
         "for containers of weak pointers on homalg external rings",
         [ IsContainerForWeakPointersOnHomalgExternalRingsRep ],
@@ -1229,6 +1292,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( Display,
         "for containers of weak pointers on homalg external rings",
         [ IsContainerForWeakPointersOnHomalgExternalRingsRep ],

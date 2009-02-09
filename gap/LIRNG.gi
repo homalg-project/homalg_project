@@ -534,3 +534,61 @@ InstallMethod( WeightsOfIndeterminates,
     
 end );
 
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( \+,
+        "of two homalg ring element",
+        [ IsHomalgRingElement and IsOne, IsHomalgRingElement and IsMinusOne ], 1001,
+        
+  function( r, s )
+    
+    if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
+        Error( "the two ring are not defined over identically the same ring\n" );
+    fi;
+    
+    return Zero( r );
+    
+end );
+
+##
+InstallMethod( \+,
+        "of two homalg ring element",
+        [ IsHomalgRingElement and IsMinusOne, IsHomalgRingElement and IsOne ], 1001,
+        
+  function( r, s )
+    
+    if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
+        Error( "the two ring are not defined over identically the same ring\n" );
+    fi;
+    
+    return Zero( r );
+    
+end );
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "for homalg rings elements",
+        [ IsHomalgRingElement and IsOne ],
+        
+  function( r )
+    
+    return MinusOneMutable( r );
+    
+end );
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "for homalg rings elements",
+        [ IsHomalgRingElement and IsMinusOne ],
+        
+  function( r )
+    
+    return One( r );
+    
+end );
+

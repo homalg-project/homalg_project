@@ -14,7 +14,7 @@
 #
 ####################################
 
-# a new GAP-category:
+# two new GAP-category:
 
 ##  <#GAPDoc Label="IsHomalgRing">
 ##  <ManSection>
@@ -30,17 +30,17 @@
 DeclareCategory( "IsHomalgRing",
         IsHomalgRingOrModule );
 
-##  <#GAPDoc Label="IsHomalgExternalRingElement">
+##  <#GAPDoc Label="IsHomalgRingElement">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="r" Name="IsHomalgExternalRingElement"/>
+##    <Filt Type="Category" Arg="r" Name="IsHomalgRingElement"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of elements of external &homalg; rings.
+##      The &GAP; category of elements of &homalg; rings which are not GAP4 built-in.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareCategory( "IsHomalgExternalRingElement",
+DeclareCategory( "IsHomalgRingElement",
         IsExtAElement
         and IsExtLElement
         and IsExtRElement
@@ -669,6 +669,19 @@ DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
 DeclareProperty( "SyzygiesAlgorithmReturnsMinimalSyzygies",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IsMinusOne">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsMinusOne"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>r</A> is a &homalg; ring element.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsMinusOne",
+        IsHomalgRingElement );
+
 ####################################
 #
 # attributes:
@@ -678,17 +691,30 @@ DeclareProperty( "SyzygiesAlgorithmReturnsMinimalSyzygies",
 ##  <#GAPDoc Label="homalgTable">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="homalgTable"/>
-##    <Returns>the &homalg; translation table of the &homalg; ring <A>R</A></Returns>
+##    <Returns>a &homalg; table</Returns>
 ##    <Description>
-##      The &homalg; table is a &homalg; <Alt Only="LaTeX"><M>\leftrightarrow</M></Alt><Alt Not="LaTeX">&lt;--&gt;</Alt> ring dictionary,
-##      i.e. the translator between &homalg; and the (specific implementation of the) ring. <P/>
+##      The &homalg; table of <A>R</A> is a ring dictionary, i.e. the translator between &homalg;
+##      and the (specific implementation of the) ring. <P/>
 ##      Every &homalg; ring has a &homalg; table.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "homalgTable",
-        IsHomalgRing, "mutable" );
+        IsHomalgRing );
+
+##  <#GAPDoc Label="RingElementConstructor">
+##  <ManSection>
+##    <Attr Arg="R" Name="RingElementConstructor"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      The constructor of ring elements in the &homalg; ring <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RingElementConstructor",
+        IsHomalgRing );
 
 ##  <#GAPDoc Label="RingRelations">
 ##  <ManSection>
@@ -735,6 +761,9 @@ DeclareAttribute( "One",
 ##
 DeclareAttribute( "MinusOne",
         IsHomalgRing );
+
+DeclareOperation( "MinusOneMutable",
+        [ IsHomalgRingElement ] );
 
 ##  <#GAPDoc Label="IndeterminatesOfPolynomialRing">
 ##  <ManSection>
@@ -953,7 +982,7 @@ DeclareAttribute( "StableRank",
 # basic operations:
 
 DeclareOperation( "HomalgRing",
-        [ IsHomalgExternalRingElement ] );
+        [ IsHomalgRingElement ] );
 
 DeclareOperation( "HomalgRing",	## returns itself
         [ IsHomalgRing ] );
@@ -971,7 +1000,7 @@ DeclareOperation( "IsUnit",
         [ IsHomalgRing, IsRingElement ] );
 
 DeclareOperation( "IsUnit",
-        [ IsHomalgExternalRingElement ] );
+        [ IsHomalgRingElement ] );
 
 DeclareOperation( "DegreeMultivariatePolynomial",
         [ IsRingElement ] );
@@ -1016,10 +1045,10 @@ DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsHomalgRing, IsList ] );
 
 DeclareOperation( "homalgSetName",
-        [ IsHomalgExternalRingElement, IsString ] );
+        [ IsHomalgRingElement, IsString ] );
 
 DeclareOperation( "homalgSetName",
-        [ IsHomalgExternalRingElement, IsString, IsHomalgRing ] );
+        [ IsHomalgRingElement, IsString, IsHomalgRing ] );
 
 # constructors:
 

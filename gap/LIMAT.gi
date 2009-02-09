@@ -1052,11 +1052,14 @@ end );
 ##
 InstallMethod( \*,
         "of homalg matrices",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsHomalgMatrix ], 10001,
+        [ IsHomalgRingElement, IsHomalgMatrix ], 10001,
         
   function( a, A )
+    local R;
     
-    if not IsIdenticalObj( HomalgRing( a ), HomalgRing( A ) ) then
+    R := HomalgRing( a );
+    
+    if R <> fail and not IsIdenticalObj( R, HomalgRing( A ) ) then
         Error( "the ring element and the matrix are not defined over identically the same ring\n" );
     fi;
     

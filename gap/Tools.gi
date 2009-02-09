@@ -21,7 +21,7 @@
 ##
 InstallMethod( Zero,
         "for homalg rings",
-        [ IsHomalgExternalRingRep ],
+        [ IsHomalgRing ],
         
   function( R )
     local RP;
@@ -43,7 +43,7 @@ end );
 ##
 InstallMethod( One,
         "for homalg rings",
-        [ IsHomalgExternalRingRep ],
+        [ IsHomalgRing ],
         
   function( R )
     local RP;
@@ -65,7 +65,7 @@ end );
 ##
 InstallMethod( MinusOne,
         "for homalg rings",
-        [ IsHomalgExternalRingRep ],
+        [ IsHomalgRing ],
         
   function( R )
     local RP;
@@ -87,12 +87,16 @@ end );
 ##
 InstallMethod( IsZero,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     local R, RP;
     
     R := HomalgRing( r );
+    
+    if R = fail then
+        TryNextMethod( );
+    fi;
     
     RP := homalgTable( R );
     
@@ -107,12 +111,16 @@ end );
 ##
 InstallMethod( IsOne,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     local R, RP;
     
     R := HomalgRing( r );
+    
+    if R = fail then
+        TryNextMethod( );
+    fi;
     
     RP := homalgTable( R );
     
@@ -127,18 +135,24 @@ end );
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "for homalg rings elements",
-        [ IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     local R, RP, minus_r;
     
     R := HomalgRing( r );
     
+    if R = fail then
+        TryNextMethod( );
+    elif not HasRingElementConstructor( R ) then
+        Error( "no ring element constructor found in the ring\n" );
+    fi;
+    
     RP := homalgTable( R );
     
-    if IsBound(RP!.Minus) and IsBound(RP!.Zero) then
+    if IsBound(RP!.Minus) and IsBound(RP!.Zero) and IsBound(R!.ring_element_constructor) then
         minus_r := RP!.Minus( Zero( R ), r );
-        return HomalgExternalRingElement( minus_r, R );
+        return RingElementConstructor( R )( minus_r, R );
     fi;
     
     TryNextMethod( );
@@ -148,18 +162,23 @@ end );
 ##
 InstallMethod( \/,
         "for external homalg ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( a, u )
     local R, RP;
     
     R := HomalgRing( a );
     
+    if R = fail then
+        TryNextMethod( );
+    elif not HasRingElementConstructor( R ) then
+        Error( "no ring element constructor found in the ring\n" );
+    fi;
+    
     RP := homalgTable( R );
     
     if IsBound(RP!.DivideByUnit) then
-        return HomalgExternalRingElement( RP!.DivideByUnit( a, u ), R );
+        return RingElementConstructor( R )( RP!.DivideByUnit( a, u ), R );
     fi;
     
     Error( "could not find a procedure called DivideByUnit in the homalgTable\n" );
@@ -169,12 +188,16 @@ end );
 ##
 InstallMethod( DegreeMultivariatePolynomial,
         "for homalg rings elements",
-        [ IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     local R, RP, weights, minus_r;
     
     R := HomalgRing( r );
+    
+    if R = fail then
+        TryNextMethod( );
+    fi;
     
     RP := homalgTable( R );
     
@@ -249,8 +272,8 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
         return RP!.ZeroMatrix( C );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external initial matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate a non-internal initial matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -282,8 +305,8 @@ InstallMethod( Eval,				### defines: an initial quadratic matrix filled with one
         return RP!.IdentityMatrix( C );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external initial identity matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate a non-internal initial identity matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -320,8 +343,8 @@ InstallMethod( Eval,				### defines: Involution
         return RP!.Involution( M );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called Involution in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called Involution in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -351,8 +374,8 @@ InstallMethod( Eval,				### defines: CertainRows
         return RP!.CertainRows( M, plist );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainRows in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called CertainRows in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -382,8 +405,8 @@ InstallMethod( Eval,				### defines: CertainColumns
         return RP!.CertainColumns( M, plist );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainColumns in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called CertainColumns in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -413,8 +436,8 @@ InstallMethod( Eval,				### defines: UnionOfRows
         return RP!.UnionOfRows( A, B );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfRows in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called UnionOfRows in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -448,8 +471,8 @@ InstallMethod( Eval,				### defines: UnionOfColumns
         return RP!.UnionOfColumns( A, B );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfColumns in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called UnionOfColumns in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -480,8 +503,8 @@ InstallMethod( Eval,				### defines: DiagMat
         return RP!.DiagMat( e );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called DiagMat in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called DiagMat in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     z := Zero( R );
@@ -529,8 +552,8 @@ InstallMethod( Eval,				### defines: KroneckerMat
         return RP!.KroneckerMat( A, B );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called KroneckerMat in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called KroneckerMat in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -569,8 +592,8 @@ InstallMethod( Eval,				### defines: MulMat
         
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called MulMat in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called MulMat in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -616,8 +639,8 @@ InstallMethod( Eval,				### defines: AddMat
         
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called AddMat in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called AddMat in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -663,8 +686,8 @@ InstallMethod( Eval,				### defines: SubMat
         
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called SubMat in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called SubMat in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -710,8 +733,8 @@ InstallMethod( Eval,				### defines: Compose
         
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called Compose in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called Compose in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -743,8 +766,8 @@ InstallMethod( Eval,				### defines: IdentityMap
         return RP!.IdentityMatrix( C );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate an external identity matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate a non-internal identity matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -781,8 +804,8 @@ InstallMethod( Eval,				### defines: ZeroMap
         return RP!.ZeroMatrix( C );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate an external zero matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate a non-internal zero matrix\n" );
     fi;
     
     z := Zero( HomalgRing( C ) );
@@ -811,8 +834,8 @@ InstallMethod( NrRows,				### defines: NrRows
         return RP!.NrRows( C );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrRows in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called NrRows in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -837,8 +860,8 @@ InstallMethod( NrColumns,			### defines: NrColumns
         return RP!.NrColumns( C );
     fi;
     
-    if IsHomalgExternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrColumns in the homalgTable to apply on a an external matrix\n" );
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called NrColumns in the homalgTable to apply on a non-internal matrix\n" );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -889,7 +912,7 @@ end );
 ##
 InstallMethod( IsUnit,
         "for homalg ring elements",
-        [ IsHomalgRing, IsRingElement and IsHomalgExternalRingElement ],
+        [ IsHomalgRing, IsHomalgRingElement ],
         
   function( R, r )
     local RP;
@@ -917,7 +940,7 @@ end );
 ##
 InstallMethod( IsUnit,
         "for homalg ring elements",
-        [ IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement ],
         
   function( r )
     
@@ -980,8 +1003,8 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable matrices",
-        [ IsHomalgExternalMatrixRep and IsReducedModuloRingRelations,
-          IsHomalgExternalMatrixRep and IsReducedModuloRingRelations ],
+        [ IsHomalgMatrix and IsReducedModuloRingRelations,
+          IsHomalgMatrix and IsReducedModuloRingRelations ],
         
   function( M1, M2 )
     local R, RP;
@@ -1930,13 +1953,18 @@ end );
 ##
 InstallMethod( SUM,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r1, r2 )
     local R, RP;
     
     R := HomalgRing( r1 );
+    
+    if R = fail then
+        TryNextMethod( );
+    elif not HasRingElementConstructor( R ) then
+        Error( "no ring element constructor found in the ring\n" );
+    fi;
     
     if not IsIdenticalObj( R, HomalgRing( r2 ) ) then
         return Error( "the two elements are not in the same ring\n" );
@@ -1945,9 +1973,9 @@ InstallMethod( SUM,
     RP := homalgTable( R );
     
     if IsBound(RP!.Sum) then
-        return HomalgExternalRingElement( RP!.Sum( r1,  r2 ), R ) ;
+        return RingElementConstructor( R )( RP!.Sum( r1,  r2 ), R ) ;
     elif IsBound(RP!.Minus) then
-        return HomalgExternalRingElement( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), R ) ;
+        return RingElementConstructor( R )( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), R ) ;
     fi;
     
     TryNextMethod( );
@@ -1957,13 +1985,18 @@ end );
 ##
 InstallMethod( PROD,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r1, r2 )
     local R, RP;
     
     R := HomalgRing( r1 );
+    
+    if R = fail then
+        TryNextMethod( );
+    elif not HasRingElementConstructor( R ) then
+        Error( "no ring element constructor found in the ring\n" );
+    fi;
     
     if not IsIdenticalObj( R, HomalgRing( r2 ) ) then
         return Error( "the two elements are not in the same ring\n" );
@@ -1972,7 +2005,7 @@ InstallMethod( PROD,
     RP := homalgTable( R );
     
     if IsBound(RP!.Product) then
-        return HomalgExternalRingElement( RP!.Product( r1,  r2 ), R ) ;
+        return RingElementConstructor( R )( RP!.Product( r1,  r2 ), R ) ;
     fi;
     
     TryNextMethod( );

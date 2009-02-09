@@ -533,7 +533,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
     elif IsBound( R ) then
         generators := HomalgMatrix( arg[1], R );
     else
-        Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
+        Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing\n" );
     fi;
     
     if not IsBound( R ) then
@@ -558,7 +558,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
                 relations_of_hullmodule := HomalgRelationsForLeftModule( ar, R );
                 break;
             else
-                Error( "if more than two arguments are provided and the second argument is neither of type IsHomalgRelations nor of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
+                Error( "if more than two arguments are provided and the second argument is neither of type IsHomalgRelations nor of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing\n" );
             fi;
         fi;
     od;
@@ -598,7 +598,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
     elif IsBound( R ) then
         generators := HomalgMatrix( arg[1], R );
     else
-        Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
+        Error( "if the first argument isn't of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing\n" );
     fi;
     
     if not IsBound( R ) then
@@ -623,7 +623,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
                 relations_of_hullmodule := HomalgRelationsForRightModule( ar, R );
                 break;
             else
-                Error( "if more than two arguments are provided and the second argument is neither of type IsHomalgRelations nor of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing; but recieved: ", arg[nargs], "\n" );
+                Error( "if more than two arguments are provided and the second argument is neither of type IsHomalgRelations nor of type IsHomalgMatrix, then the last argument must be of type IsHomalgRing\n" );
             fi;
         fi;
     od;

@@ -17,7 +17,7 @@
 
 <#Include Label="IsHomalgRing">
 
-<#Include Label="IsHomalgExternalRingElement">
+<#Include Label="IsHomalgRingElement">
 
 <#Include Label="IsHomalgInternalRingRep">
 <#Include Label="IsHomalgExternalRingRep">
@@ -128,6 +128,8 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsSimpleRing">
 <#Include Label="IsSemiSimpleRing">
 <#Include Label="BasisAlgorithmRespectsPrincipalIdeals">
+<#Include Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
+<#Include Label="IsMinusOne">
 
 </Section>
 
@@ -135,6 +137,7 @@ probably draw wrong conclusions and might return wrong results.
 <Heading>Rings: Attributes</Heading>
 
 <#Include Label="homalgTable">
+<#Include Label="RingElementConstructor">
 <#Include Label="RingRelations">
 <#Include Label="Zero">
 <#Include Label="One">

@@ -18,13 +18,12 @@
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik, <Br/>
-      RWTH Aachen, <Br/>
-      Templergraben 64, <Br/>
-      52056 Aachen, <Br/>
+      Universität des Saarlandes, <Br/>
+      66041 Saarbrücken, <Br/>
+      Building E2 4, <Br/>
       Germany
     </Address>
-    <Email>mohamed.barakat@rwth-aachen.de</Email>
+    <Email>barakat@math.uni-sb.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
   <Date>October 2008</Date>
