@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  LocalizeRing.xml     LocalizeRingForHomalg package documentation             Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2009, Mohamed Barakat, Universität des Saarlandes
+                      Markus Lange-Hegermann, RWTH-Aachen University
+-->
+
+<Chapter Label="LocalizeRing">
+<Heading>Localize rings</Heading>
+
+<Section Label="Rings:Category">
+
+<Heading>Category and Representations</Heading>
+
+<#Include Label="IsHomalgLocalRingRep">
+
+<#Include Label="IsHomalgLocalRingElementRep">
+
+</Section>
+
+<Section Label="LocalizeRing:Operations">
+<Heading>Operations and Functions</Heading>
+
+</Section>
+<!-- ############################################################ -->
+
+</Chapter>

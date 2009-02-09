@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  appendix.xml         LocalizeRingForHomalg package documentation             Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2009, Mohamed Barakat, Universität des Saarlandes
+                      Markus Lange-Hegermann, RWTH-Aachen University
+-->
+
+<Appendix Label="FileOverview">
+<Heading>Overview of the &LocalizeRingForHomalg; Package Source Code</Heading>
+
+</Appendix>

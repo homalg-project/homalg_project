@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml            LocalizeRingForHomalg package documentation             Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2009, Mohamed Barakat, Universität des Saarlandes
+                      Markus Lange-Hegermann, RWTH-Aachen University
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Cite Key="homalg.new"/>
+
+</Chapter>
+
