@@ -112,6 +112,17 @@ InstallMethod( AssociatedGlobalRing,
 end );
 
 ##
+InstallMethod( AssociatedGlobalRing,
+        "for homalg local matrix elements",
+        [ IsHomalgLocalMatrixRep ],
+        
+  function( A )
+    
+    return AssociatedGlobalRing( HomalgRing(A) );
+    
+end );
+
+##
 InstallMethod( NumeratorOfLocalElement,
         "for homalg local ring elements",
         [ IsHomalgLocalRingElementRep ],

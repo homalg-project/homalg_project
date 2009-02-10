@@ -39,6 +39,9 @@ DeclareOperation( "AssociatedGlobalRing",
 DeclareOperation( "AssociatedGlobalRing",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "AssociatedGlobalRing",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "NumeratorOfLocalElement",
         [ IsHomalgRingElement ] );
 
