@@ -334,30 +334,19 @@ InstallMethod( ViewObj,
 end );
 
 ##
-InstallMethod( Name,
-        "for homalg rings",
+InstallMethod( Display,
+        "for homalg local ring elements",
         [ IsHomalgLocalRingElementRep ],
         
   function( r )
     
-    return  Flat( [ Name(NumeratorOfLocalElement(r)), "/", Name(DenominatorOfLocalElement(r)) ] );
+    Print( Flat( [ Name(r), "\n" ] ) );
     
 end );
 
 ##
 InstallMethod( Display,
-        "for homalg rings",
-        [ IsHomalgLocalRingElementRep ],
-        
-  function( r )
-    
-    Print (Flat( [ Name(r), "\n" ] ) );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for homalg rings",
+        "for homalg matrices over a homalg local ring",
         [ IsHomalgLocalMatrixRep ],
         
   function( A )
