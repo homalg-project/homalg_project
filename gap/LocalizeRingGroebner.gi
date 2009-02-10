@@ -34,9 +34,9 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
     
     RP_specific := rec (
                         Zero := globalRP!.Zero,
-                        
+
                         One := globalRP!.One,
-                        
+
                         MinusOne := globalRP!.MinusOne,
                         );
     

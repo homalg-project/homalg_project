@@ -65,7 +65,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                                   DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
                                   HomalgRing(a));
                  end,
-               
+                        
                CopyMatrix :=
                  function( C )
                    
@@ -74,20 +74,17 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                ZeroMatrix :=
                  function( C )
-                   
-                   
+
                  end,
                
                IdentityMatrix :=
                  function( C )
                    
-                   
                  end,
                
                AreEqualMatrices :=
                  function( A, B )
-                   
-                   
+                   return homalgTable(A)!.IsZeroMatrix(A-B);
                  end,
                
                Involution :=
@@ -134,26 +131,35 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                MulMat :=
                  function( a, A )
-                   
-                   
+                   return HomalgLocalMatrix(
+                                  NumeratorOfLocalElement(a)*Eval(A)[2],
+                                  DenominatorOfLocalElement(a)*Eval(A)[1],
+                                  HomalgRing(A));
+
                  end,
                
                AddMat :=
                  function( A, B )
-                   
-                   
+                   return HomalgLocalMatrix(
+                                  Eval(B)[1]*Eval(A)[2]+Eval(A)[1]*Eval(B)[2],
+                                  Eval(A)[1]*Eval(B)[1],
+                                  HomalgRing(A));
                  end,
                
                SubMat :=
                  function( A, B )
-                   
-                   
+                   return HomalgLocalMatrix(
+                                  Eval(B)[1]*Eval(A)[2]-Eval(A)[1]*Eval(B)[2],
+                                  Eval(A)[1]*Eval(B)[1],
+                                  HomalgRing(A));
                  end,
                
                Compose :=
                  function( A, B )
-                   
-                   
+                   return HomalgLocalMatrix(
+                                  Eval(A)[2]*Eval(B)[2],
+                                  Eval(A)[1]*Eval(B)[1],
+                                  HomalgRing(A));
                  end,
                
                NrRows :=
@@ -170,8 +176,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                IsZeroMatrix :=
                  function( M )
-                   
-                   
+                   return homalgTable(AssociatedGlobalRing(M))!.IsZeroMatrix(Eval(M)[2]);
                  end,
                
                IsIdentityMatrix :=
@@ -246,6 +251,5 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    
                  end,
-               
     )
  );
