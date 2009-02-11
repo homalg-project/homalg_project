@@ -102,7 +102,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                      
                      B2 := UnionOfColumns( B2 , GeneratorsOfMaximalLeftIdeal( R ) * A2 );
                      
-                     B2 := BasisOfColumnsModule( B2 );
+                     B2 := BasisOfColumnModule( B2 );
                      
                      A2 := HomalgLocalMatrix (DecideZeroColumns( A2 , B2 ) , R );
                      
