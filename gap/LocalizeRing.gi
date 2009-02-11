@@ -206,11 +206,11 @@ InstallMethod( LocalizeAt,
     
     n_gens := Length( ideal_gens );
     
-    gens := HomalgLocalMatrix( HomalgMatrix( ideal_gens, n_gens, 1, globalR ), localR );
+    gens := HomalgMatrix( ideal_gens, n_gens, 1, globalR );
     
     SetGeneratorsOfMaximalLeftIdeal( localR, gens );
     
-    gens := HomalgLocalMatrix( HomalgMatrix( ideal_gens, 1, n_gens, globalR ), localR );
+    gens := HomalgMatrix( ideal_gens, 1, n_gens, globalR );
     
     SetGeneratorsOfMaximalRightIdeal( localR, gens );
     
