@@ -78,7 +78,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( C );
                    
-                   return [ One( R ), HomalgMatrix( homalgTable( R )!.ZeroMatrix( Eval( C )[2] ), R ) ];
+                   return [ 
+                     One( R ),
+                     HomalgMatrix( homalgTable( R )!.ZeroMatrix( Eval( C )[2] ), R )
+                   ];
                    
                  end,
                
@@ -88,9 +91,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( C );
                    
-                   return HomalgLocalMatrix(
+                   return [
+                     One( R ),
                      HomalgMatrix( homalgTable( R )!.IdentityMatrix(Eval(C)[2]), R ),
-                     HomalgRing(C));
+                   ];
                  end,
                
                AreEqualMatrices :=
@@ -104,10 +108,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( M );
                    
-                   return HomalgLocalMatrix(
-                     HomalgMatrix( homalgTable( R )!.Involution(Eval(M)[2]), R ),
+                   return [
                      Eval(M)[2],
-                     HomalgRing(M));
+                     homalgTable( R )!.Involution(Eval(M)[2])
+                   ];
                  end,
                
                CertainRows :=
@@ -116,10 +120,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( M );
                    
-                   return HomalgLocalMatrix(
-                     HomalgMatrix( homalgTable( R )!.CertainRows(Eval(M)[2],plist), R ),
-                     Eval(M)[2],
-                     HomalgRing(M));
+                   return [
+                     Eval(M)[1],
+                     HomalgMatrix( homalgTable( R )!.CertainRows(Eval(M)[2],plist), R )
+                   ];
                  end,
                
                CertainColumns :=
@@ -128,10 +132,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( M );
                    
-                   return HomalgLocalMatrix(
-                     HomalgMatrix( homalgTable( R )!.CertainRows(Eval(M)[2],plist), R ),
-                     Eval(M)[2],
-                     HomalgRing(M));
+                   return [
+                     Eval(M)[1],
+                     HomalgMatrix( homalgTable( R )!.CertainRows(Eval(M)[2],plist), R )
+                   ];
                  end,
                
                UnionOfRows :=
@@ -140,10 +144,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( A );
                    
-                   return HomalgLocalMatrix(
-                                  HomalgMatrix( homalgTable( R )!.UnionOfRows(Eval(B)[1]*Eval(A)[2],Eval(A)[1]*Eval(B)[2]), R ),
-                                  Eval(A)[1]*Eval(B)[1],
-                                  HomalgRing(A));
+                   return [
+                     Eval(A)[1]*Eval(B)[1],
+                     HomalgMatrix( homalgTable( R )!.UnionOfRows(Eval(B)[1]*Eval(A)[2],Eval(A)[1]*Eval(B)[2]), R )
+                   ];
                  end,
                
                UnionOfColumns :=
@@ -152,10 +156,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( A );
                    
-                   return HomalgLocalMatrix(
-                                  HomalgMatrix( homalgTable( R )!.UnionOfColumns(Eval(B)[1]*Eval(A)[2],Eval(A)[1]*Eval(B)[2]), R ),
-                                  Eval(A)[1]*Eval(B)[1],
-                                  HomalgRing(A));
+                   return [
+                     Eval(A)[1]*Eval(B)[1],
+                     HomalgMatrix( homalgTable( R )!.UnionOfColumns(Eval(B)[1]*Eval(A)[2],Eval(A)[1]*Eval(B)[2]), R )
+                   ];
                  end,
                
                DiagMat :=
@@ -170,43 +174,43 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    R := AssociatedGlobalRing( A );
                    
-                   return HomalgLocalMatrix(
-                                  HomalgMatrix( homalgTable( R )!.KroneckerMat(Eval(A)[2],Eval(B)[2]), R ),
-                                  Eval(A)[1]*Eval(B)[1],
-                                  HomalgRing(A));
+                   return [
+                     Eval(A)[1]*Eval(B)[1],
+                     HomalgMatrix( homalgTable( R )!.KroneckerMat(Eval(A)[2],Eval(B)[2]), R )
+                   ];
                  end,
                
                MulMat :=
                  function( a, A )
-                   return HomalgLocalMatrix(
-                                  NumeratorOfLocalElement(a)*Eval(A)[2],
-                                  DenominatorOfLocalElement(a)*Eval(A)[1],
-                                  HomalgRing(A));
+                   return [
+                     DenominatorOfLocalElement(a)*Eval(A)[1],
+                     NumeratorOfLocalElement(a)*Eval(A)[2]
+                     ];
 
                  end,
                
                AddMat :=
                  function( A, B )
-                   return HomalgLocalMatrix(
-                                  Eval(B)[1]*Eval(A)[2]+Eval(A)[1]*Eval(B)[2],
-                                  Eval(A)[1]*Eval(B)[1],
-                                  HomalgRing(A));
+                   return [
+                     Eval(A)[1]*Eval(B)[1],
+                     Eval(B)[1]*Eval(A)[2]+Eval(A)[1]*Eval(B)[2]
+                   ];
                  end,
                
                SubMat :=
                  function( A, B )
-                   return HomalgLocalMatrix(
-                                  Eval(B)[1]*Eval(A)[2]-Eval(A)[1]*Eval(B)[2],
-                                  Eval(A)[1]*Eval(B)[1],
-                                  HomalgRing(A));
+                   return [
+                     Eval(A)[1]*Eval(B)[1],
+                     Eval(B)[1]*Eval(A)[2]-Eval(A)[1]*Eval(B)[2]
+                   ];
                  end,
                
                Compose :=
                  function( A, B )
-                   return HomalgLocalMatrix(
-                                  Eval(A)[2]*Eval(B)[2],
-                                  Eval(A)[1]*Eval(B)[1],
-                                  HomalgRing(A));
+                   return [
+                     Eval(A)[1]*Eval(B)[1],
+                     Eval(A)[2]*Eval(B)[2]
+                   ];
                  end,
                
                NrRows :=
