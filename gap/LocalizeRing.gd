@@ -12,6 +12,38 @@
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+##  <#GAPDoc Label="GeneratorsOfMaximalLeftIdeal">
+##  <ManSection>
+##    <Attr Arg="R" Name="GeneratorsOfMaximalLeftIdeal"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The &homalg; matrix is a 1-column matrix containing the generators of the maximal ideal considered as a left ideal.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "GeneratorsOfMaximalLeftIdeal",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="GeneratorsOfMaximalRightIdeal">
+##  <ManSection>
+##    <Attr Arg="R" Name="GeneratorsOfMaximalRightIdeal"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The &homalg; matrix is a 1-column matrix containing the generators of the maximal ideal considered as a right ideal.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "GeneratorsOfMaximalRightIdeal",
+        IsHomalgRing );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
@@ -22,6 +54,9 @@ DeclareOperation( "CreateHomalgTableForLocalizedRings",
         [ IsHomalgRing ] );
 
 DeclareGlobalFunction( "CreateHomalgLocalizedRing" );
+
+DeclareOperation( "LocalizeAt",
+        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "LocalizeAt",
         [ IsHomalgRing ] );

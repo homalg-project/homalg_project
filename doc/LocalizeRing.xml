@@ -24,6 +24,14 @@
 
 </Section>
 
+<Section Label="Rings:Attributes">
+<Heading>Rings: Attributes</Heading>
+
+<#Include Label="GeneratorsOfMaximalLeftIdeal">
+<#Include Label="GeneratorsOfMaximalRightIdeal">
+
+</Section>
+
 <Section Label="LocalizeRing:Operations">
 <Heading>Operations and Functions</Heading>
 

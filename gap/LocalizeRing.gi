@@ -189,10 +189,10 @@ end );
 ##
 InstallMethod( LocalizeAt,
         "constructor for localized rings",
-        [ IsHomalgExternalRingRep and IsFreePolynomialRing ],
+        [ IsHomalgExternalRingRep and IsFreePolynomialRing, IsList ],
         
-  function( globalR )
-    local RP, localR;
+  function( globalR, ideal_gens )
+    local RP, localR, n_gens, gens;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForLocalizedRings( globalR );
@@ -204,7 +204,28 @@ InstallMethod( LocalizeAt,
     
     SetIsLocalRing( localR, true );
     
+    n_gens := Length( ideal_gens );
+    
+    gens := HomalgLocalMatrix( HomalgMatrix( ideal_gens, n_gens, 1, globalR ), localR );
+    
+    SetGeneratorsOfMaximalLeftIdeal( localR, gens );
+    
+    gens := HomalgLocalMatrix( HomalgMatrix( ideal_gens, 1, n_gens, globalR ), localR );
+    
+    SetGeneratorsOfMaximalRightIdeal( localR, gens );
+    
     return localR;
+    
+end );
+
+##
+InstallMethod( LocalizeAt,
+        "constructor for localized rings",
+        [ IsHomalgExternalRingRep and IsFreePolynomialRing ],
+        
+  function( globalR )
+    
+    return LocalizeAt( globalR, IndeterminatesOfPolynomialRing( globalR ) );
     
 end );
 
@@ -352,6 +373,6 @@ InstallMethod( Display,
   function( A )
     
     Display(Eval(A)[2]);
-    Print( Flat( [ "/", Name(Eval(A)[1]), "\n" ] ) );
+    Print( Flat( [ "/ ", Name(Eval(A)[1]), "\n" ] ) );
     
 end );
