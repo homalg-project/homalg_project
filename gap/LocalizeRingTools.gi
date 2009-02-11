@@ -66,11 +66,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                                   HomalgRing(a));
                  end,
                
-#                CopyMatrix :=
-#                  function( C )
-#                    
-#                    
-#                  end,
+               ShallowCopy := C -> List( Eval( C ), ShallowCopy ),
                
                ZeroMatrix :=
                  function( C )
@@ -80,9 +76,8 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    return [ 
                      One( R ),
-                     HomalgMatrix( homalgTable( R )!.ZeroMatrix( Eval( C )[2] ), R )
+                     HomalgZeroMatrix( NrRows( C ), NrColumns( C ), R )
                    ];
-                   
                  end,
                
                IdentityMatrix :=
@@ -93,72 +88,80 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    return [
                      One( R ),
-                     HomalgMatrix( homalgTable( R )!.IdentityMatrix(Eval(C)[2]), R ),
+                     HomalgIdentityMatrix( NrRows( C ), R ),
                    ];
                  end,
                
                AreEqualMatrices :=
                  function( A, B )
-                   return homalgTable(A)!.IsZeroMatrix(A-B);
+                   local a, b;
+                   
+                   a := Eval( A );
+                   b := Eval( B );
+                   
+                   return IsZero( b[1] * a[2] - a[1] * b[2] );
+                   
                  end,
                
                Involution :=
                  function( M )
-                   local R;
+                   local m;
                    
-                   R := AssociatedGlobalRing( M );
+                   m := Eval( M );
                    
                    return [
-                     Eval(M)[2],
-                     homalgTable( R )!.Involution(Eval(M)[2])
+                     m[1],
+                     Involution( m[2] )
                    ];
                  end,
                
                CertainRows :=
                  function( M, plist )
-                   local R;
+                   local m;
                    
-                   R := AssociatedGlobalRing( M );
+                   m := Eval( M );
                    
                    return [
-                     Eval(M)[1],
-                     HomalgMatrix( homalgTable( R )!.CertainRows(Eval(M)[2],plist), R )
+                     m[1],
+                     CertainRows( m[2], plist )
                    ];
                  end,
                
                CertainColumns :=
                  function( M, plist )
-                   local R;
+                   local m;
                    
-                   R := AssociatedGlobalRing( M );
+                   m := Eval( M );
                    
                    return [
-                     Eval(M)[1],
-                     HomalgMatrix( homalgTable( R )!.CertainRows(Eval(M)[2],plist), R )
+                     m[1],
+                     CertainColumns( m[2], plist )
                    ];
                  end,
                
                UnionOfRows :=
                  function( A, B )
-                   local R;
+                   local a, b;
                    
-                   R := AssociatedGlobalRing( A );
+                   a := Eval( A );
+                   b := Eval( B );
                    
                    return [
-                     Eval(A)[1]*Eval(B)[1],
-                     HomalgMatrix( homalgTable( R )!.UnionOfRows(Eval(B)[1]*Eval(A)[2],Eval(A)[1]*Eval(B)[2]), R )
+                     a[1] * b[1],
+                     UnionOfRows( b[1] * a[2], a[1] * b[2] )
                    ];
                  end,
                
                UnionOfColumns :=
                  function( A, B )
-                   local R;
+                   local a, b;
                    
-                   R := AssociatedGlobalRing( A );
+                   a := Eval( A );
+                   b := Eval( B );
                    
                    return [
-                     Eval(A)[1]*Eval(B)[1],
-                     HomalgMatrix( homalgTable( R )!.UnionOfColumns(Eval(B)[1]*Eval(A)[2],Eval(A)[1]*Eval(B)[2]), R )
+                     a[1] * b[1],
+                     UnionOfColumns( b[1] * a[2], a[1] * b[2] )
                    ];
                  end,
                
@@ -170,84 +173,85 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                KroneckerMat :=
                  function( A, B )
-                   local R;
+                   local a, b;
                    
-                   R := AssociatedGlobalRing( A );
+                   a := Eval( A );
+                   b := Eval( B );
                    
                    return [
-                     Eval(A)[1]*Eval(B)[1],
-                     HomalgMatrix( homalgTable( R )!.KroneckerMat(Eval(A)[2],Eval(B)[2]), R )
+                     a[1] * b[1],
+                     KroneckerMat( a[2], b[2] )
                    ];
                  end,
                
                MulMat :=
                  function( a, A )
+                   local e;
+                   
+                   e := Eval( A );
+                   
                    return [
-                     DenominatorOfLocalElement(a)*Eval(A)[1],
-                     NumeratorOfLocalElement(a)*Eval(A)[2]
+                     DenominatorOfLocalElement(a) * e[1],
+                     NumeratorOfLocalElement(a) * e[2]
                      ];
-
                  end,
                
                AddMat :=
                  function( A, B )
+                   local a, b;
+                   
+                   a := Eval( A );
+                   b := Eval( B );
+                   
                    return [
-                     Eval(A)[1]*Eval(B)[1],
-                     Eval(B)[1]*Eval(A)[2]+Eval(A)[1]*Eval(B)[2]
+                     a[1] * b[1],
+                     b[1] * a[2] + a[1] * b[2]
                    ];
                  end,
                
                SubMat :=
                  function( A, B )
+                   local a, b;
+                   
+                   a := Eval( A );
+                   b := Eval( B );
+                   
                    return [
-                     Eval(A)[1]*Eval(B)[1],
-                     Eval(B)[1]*Eval(A)[2]-Eval(A)[1]*Eval(B)[2]
+                     a[1] * b[1],
+                     b[1] * a[2] - a[1] * b[2]
                    ];
                  end,
                
                Compose :=
                  function( A, B )
+                   local a, b;
+                   
+                   a := Eval( A );
+                   b := Eval( B );
+                   
                    return [
-                     Eval(A)[1]*Eval(B)[1],
-                     Eval(A)[2]*Eval(B)[2]
+                     a[1] * b[1],
+                     a[2] * b[2]
                    ];
                  end,
                
-               NrRows :=
-                 function( C )
-                   return homalgTable(AssociatedGlobalRing(C))!.NrRows(Eval(C)[2]);
-                 end,
+               NrRows := C -> NrRows( Eval( C )[2] ),
                
-               NrColumns :=
-                 function( C )
-                   return homalgTable(AssociatedGlobalRing(C))!.NrColumns(Eval(C)[2]);
-                 end,
+               NrColumns := C -> NrColumns( Eval( C )[2] ),
                
-               IsZeroMatrix :=
-                 function( M )
-                   return homalgTable(AssociatedGlobalRing(M))!.IsZeroMatrix(Eval(M)[2]);
-                 end,
-
+               IsZeroMatrix := M -> IsZero( Eval( M )[2] ),
+               
 #  -> fallback
 #               IsIdentityMatrix :=
 #                 function( M )
-#                   return homalgTable(AssociatedGlobalRing(M))!.IsIdentityMatrix(Eval(M)[2]) and IsOne(Eval(M)[1]);
+#                   
 #                 end,
                
-               IsDiagonalMatrix :=
-                 function( M )
-                   return homalgTable(AssociatedGlobalRing(M))!.IsDiagonalMatrix(Eval(M)[2]);
-                 end,
+               IsDiagonalMatrix := M -> IsDiagonalMatrix( Eval( M )[2] ),
                
-               ZeroRows :=
-                 function( C )
-                   return homalgTable(AssociatedGlobalRing(C))!.ZeroRows(Eval(C)[2]);
-                 end,
+               ZeroRows := C -> ZeroRows( Eval( C )[2] ),
                
-               ZeroColumns :=
-                 function( C )
-                   return homalgTable(AssociatedGlobalRing(C))!.ZeroColumns(Eval(C)[2]);
-                 end,
+               ZeroColumns := C -> ZeroColumns( Eval( C )[2] ),
                
 #               GetColumnIndependentUnitPositions :=
 #                 function( M, pos_list )

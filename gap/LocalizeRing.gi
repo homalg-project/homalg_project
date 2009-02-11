@@ -200,6 +200,8 @@ InstallMethod( LocalizeAt,
     ## create the local ring
     localR := CreateHomalgRing( globalR, TheTypeHomalgLocalRing, HomalgLocalRingElement, RP );
     
+    localR!.description := "local";
+    
     SetTypeOfHomalgMatrix( localR, TheTypeHomalgLocalMatrix );
     
     SetIsLocalRing( localR, true );
