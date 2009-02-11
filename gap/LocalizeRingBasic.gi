@@ -24,69 +24,53 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                BasisOfRowModule :=
                  function( M )
-                   local R, N;
-                   
-                   R := HomalgRing( M );
-                   
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
-                   
-                   #
-                   
-                   return N;
+
+                   return HomalgLocalMatrix( Eval(M)[2] , AssociatedGlobalRing(M) );
                    
                  end,
                
                BasisOfColumnModule :=
                  function( M )
-                   local R, N;
                    
-                   R := HomalgRing( M );
-                   
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
-                   
-                   #
-                   
-                   return N;
+                   return HomalgLocalMatrix( Eval(M)[2] , AssociatedGlobalRing(M) );
                    
                  end,
                
                BasisOfRowsCoeff :=
                  function( M, T )
-                   local R, N;
+
+                   T := homalgTable(HomalgRing( M ))!.IdentityMatrix( M );
                    
-                   R := HomalgRing( M );
-                   
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
-                   
-                   #
-                   
-                   return N;
+                   return M;
                    
                  end,
                
                BasisOfColumnsCoeff :=
                  function( M, T )
-                   local R, N;
                    
-                   R := HomalgRing( M );
+                   T := homalgTable(HomalgRing( M ))!.IdentityMatrix( M );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
-                   
-                   #
-                   
-                   return N;
+                   return M;
                    
                  end,
                
                DecideZeroRows :=
                  function( A, B )
-                   local R, N;
+                   local R, N, i, A2, B2;
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( 0, NrColumns( A ), R );
                    
-                   #
+                   for i from 1 to NrRows( A ) do
+                     
+                     B2 := UnionOfRows( CertainRows( A, [i]), B );
+                     
+                     A2 := CertainRows( A, [1]);
+                     
+                     B2 := CertainRows( A, [2..NrRows(B2)]);
+                     
+                   od;
                    
                    return N;
                    
@@ -136,53 +120,61 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                SyzygiesGeneratorsOfRows :=
                  function( arg )
-                   local M, R, N, M2;
+                   local M, R, N, M2, M3;
                    
                    M := arg[1];
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), R );
-                   
                    if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
                        
                        M2 := arg[2];
                        
-                       #
+                       M3 := UnionOfRows( M, M2 );
+                       
+                       M := CertainRows( M3, [1..NrRows(M)] );
+                       
+                       M2 := CertainRows( M3, [NrRows(M)+1..NrRows(M3)] );
+                       
+                       N := SyzygiesGeneratorsOfRows( Eval(M)[2], Eval(M2)[2] );
                        
                    else
                        
-                       #
+                       N := SyzygiesGeneratorsOfRows( Eval(M)[2] );
                        
                    fi;
                    
-                   return N;
+                   return HomalgLocalMatrix( N, R );
                    
                  end,
                
                SyzygiesGeneratorsOfColumns :=
                  function( arg )
-                   local M, R, N, M2;
+                   local M, R, N, M2, M3;
                    
                    M := arg[1];
                    
                    R := HomalgRing( M );
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", R );
-                   
                    if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
                        
                        M2 := arg[2];
                        
-                       #
+                       M3 := UnionOfColumns( M, M2 );
+                       
+                       M := CertainColumns( M3, [1..NrColumns(M)] );
+                       
+                       M2 := CertainColumns( M3, [NrColumns(M)+1..NrColumns(M3)] );
+                       
+                       N := SyzygiesGeneratorsOfColumns( Eval(M)[2], Eval(M2)[2] );
                        
                    else
                        
-                       #
+                       N := SyzygiesGeneratorsOfColumns( Eval(M)[2] );
                        
                    fi;
                    
-                   return N;
+                   return HomalgLocalMatrix( N, R );
                    
                  end,
                
