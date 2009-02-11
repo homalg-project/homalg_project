@@ -25,14 +25,14 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                BasisOfRowModule :=
                  function( M )
 
-                   return HomalgLocalMatrix( Eval(M)[2] , AssociatedGlobalRing(M) );
+                   return HomalgLocalMatrix( Eval(M)[2] , HomalgRing(M) );
                    
                  end,
                
                BasisOfColumnModule :=
                  function( M )
                    
-                   return HomalgLocalMatrix( Eval(M)[2] , AssociatedGlobalRing(M) );
+                   return HomalgLocalMatrix( Eval(M)[2] , HomalgRing(M) );
                    
                  end,
                
