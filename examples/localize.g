@@ -18,3 +18,5 @@ R0 := LocalizeAt( R );
 lmat := HomalgLocalMatrix( wmat, R0 );
 
 a := MinusOne(R0);
+
+M:=LeftPresentation(lmat);
