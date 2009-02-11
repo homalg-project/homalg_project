@@ -116,13 +116,43 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroRowsEffectively :=
                  function( A, B, T )
-                   local R, N;
+                   local R, GlobalR, N, ClearDenomMatrix, A2, B2, S, u, TT;
                    
                    R := HomalgRing( A );
                    
+                   GlobalR := AssociatedGlobalRing( R );
+                   
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   #
+                   TT := HomalgVoidMatrix( 0, NrColumns( A ), R );
+                   
+                   for i in [1 .. NrRows( A )] do
+                     
+                     ClearDenomMatrix := Eval( UnionOfRows( CertainRows( A, [i]), B ) )[2];
+                     
+                     A2 := CertainRows( ClearDenomMatrix, [1]);
+                     
+                     B2 := CertainRows( ClearDenomMatrix, [ 2 .. NrRows( ClearDenomMatrix ) ]);
+                     
+                     B2 := UnionOfRows ( B2 , GeneratorsOfMaximalRightIdeal( R ) * A2 );
+                     
+                     B2 := BasisOfRowModule( B2 );
+                     
+                     S := HomalgVoidMatrix( 1 , NrRows( B2 ) , GlobalR );
+                     
+                     A2 := HomalgLocalMatrix (DecideZeroRowsEffectively( A2 , B2 , S ) , R);
+                     
+                     u := 1 + CertainColumns( S, [ NrRows(B)+1 .. NrRows(S) ] ) * GeneratorsOfMaximalRightIdeal( R );
+                     
+                     S := HomalgLocalMatrix( CertainColumns( S, [ 1..NrRows(B) ] ), u , R );
+                     
+                     TT := UnionOfRows( TT, S );
+                     
+                     N := UnionOfRows( N , A2 );
+                     
+                   od;
+                   
+                   T := TT;
                    
                    return N;
                    
@@ -130,15 +160,45 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
-                   local R, N;
+                   local R, GlobalR, N, ClearDenomMatrix, A2, B2, S, u, TT;
                    
                    R := HomalgRing( A );
                    
+                   GlobalR := AssociatedGlobalRing( R );
+                   
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   #
+                   TT := HomalgVoidMatrix( NrRows( A ) , 0 , R );
+                   
+                   for i in [1 .. NrColumns( A )] do
+                     
+                     ClearDenomMatrix := Eval( UnionOfColumns( CertainColumns( A, [i] ), B ) )[2];
+                     
+                     A2 := CertainColumns( ClearDenomMatrix, [1]);
+                     
+                     B2 := CertainColumns( ClearDenomMatrix, [ 2 .. NrColumns( ClearDenomMatrix ) ]);
+                     
+                     B2 := UnionOfColumns ( B2 , A2 * GeneratorsOfMaximalLeftIdeal( R ) );
+                     
+                     B2 := BasisOfColumnModule( B2 );
+                     
+                     S := HomalgVoidMatrix( NrColumns( B2 ) , 1 , GlobalR );
+                     
+                     A2 := HomalgLocalMatrix (DecideZeroColumnsEffectively( A2 , B2 , S ) , R);
+                     
+                     u := 1 + GeneratorsOfMaximalLeftIdeal( R ) * CertainRows( S, [ NrColumns(B)+1 .. NrColumns(S) ] );
+                     
+                     S := HomalgLocalMatrix( CertainRows( S, [ 1..NrColumns(B) ] ), u , R );
+                     
+                     TT := UnionOfColumns( TT, S );
+                     
+                     N := UnionOfColumns( N , A2 );
+                     
+                   od;
                    
                    return N;
+                   
+                   T := TT;
                    
                  end,
                
