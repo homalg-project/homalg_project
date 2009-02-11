@@ -1070,20 +1070,20 @@ end );
 ##
 InstallMethod( \*,
         "of homalg matrices with ring elements",
-        [ IsRingElement and IsZero, IsHomalgMatrix ],
+        [ IsRingElement and IsZero, IsHomalgMatrix ], 10001,
         
   function( a, A )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero * IsHomalgMatrix", "\033[0m" );
     
-    return 0 * A;
+    return HomalgZeroMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
     
 end );
 
 ##
 InstallMethod( \*,
         "of homalg matrices with ring elements",
-        [ IsRingElement and IsOne, IsHomalgMatrix ],
+        [ IsRingElement and IsOne, IsHomalgMatrix ], 10001,
         
   function( a, A )
     
@@ -1096,7 +1096,7 @@ end );
 ##
 InstallMethod( \*,
         "of homalg matrices",
-        [ IsRingElement, IsHomalgMatrix and IsZero ],
+        [ IsRingElement, IsHomalgMatrix and IsZero ], 10001,
         
   function( a, A )
     

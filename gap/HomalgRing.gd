@@ -716,6 +716,19 @@ DeclareAttribute( "homalgTable",
 DeclareAttribute( "RingElementConstructor",
         IsHomalgRing );
 
+##  <#GAPDoc Label="TypeOfHomalgMatrix">
+##  <ManSection>
+##    <Attr Arg="R" Name="TypeOfHomalgMatrix"/>
+##    <Returns>a type</Returns>
+##    <Description>
+##      The &GAP4;-type of &homalg; matrices over the &homalg; ring <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "TypeOfHomalgMatrix",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="RingRelations">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="RingRelations"/>

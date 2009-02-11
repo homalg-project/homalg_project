@@ -189,17 +189,6 @@ end );
 ####################################
 
 ##
-InstallMethod( homalgStream,
-        "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( o )
-    
-    return homalgStream( HomalgRing( o ) );
-    
-end );
-
-##
 InstallMethod( HomalgRing,
         "for external homalg ring elements",
         [ IsHomalgRing ],
@@ -218,17 +207,6 @@ InstallMethod( HomalgRing,
   function( r )
     
     return fail;
-    
-end );
-
-##
-InstallMethod( HomalgRing,
-        "for external homalg ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( r )
-    
-    return r!.ring;
     
 end );
 
@@ -278,17 +256,9 @@ end );
 ##
 InstallMethod( \=,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r1, r2 )
-    local R, RP;
-    
-    if not IsIdenticalObj( homalgStream( r1 ), homalgStream( r2 ) ) then
-        return false;
-    elif homalgPointer( r1 ) = homalgPointer( r2 ) then
-        return true;
-    fi;
     
     return IsZero( r1 - r2 );
     
@@ -702,12 +672,6 @@ InstallGlobalFunction( CreateHomalgRing,
         HOMALG.RingCounter := 1;
     fi;
     
-    if IsHomalgExternalRingRep( homalg_ring ) then
-        if not IsBound( ring_element_constructor ) then
-            ring_element_constructor := HomalgExternalRingElement;
-        fi;
-    fi;
-    
     ## this has to be done before we call
     ## ring_element_constructor below
     homalg_ring!.creation_number := HOMALG.RingCounter;
@@ -726,7 +690,7 @@ InstallGlobalFunction( CreateHomalgRing,
         od;
         
         ## set the attribute
-        SetRingElementConstructor( homalg_ring,ring_element_constructor );
+        SetRingElementConstructor( homalg_ring, ring_element_constructor );
         
     fi;
     

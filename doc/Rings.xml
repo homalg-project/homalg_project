@@ -138,6 +138,7 @@ probably draw wrong conclusions and might return wrong results.
 
 <#Include Label="homalgTable">
 <#Include Label="RingElementConstructor">
+<#Include Label="TypeOfHomalgMatrix">
 <#Include Label="RingRelations">
 <#Include Label="Zero">
 <#Include Label="One">
