@@ -66,11 +66,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                                   HomalgRing(a));
                  end,
                
-               CopyMatrix :=
-                 function( C )
-                   
-                   
-                 end,
+#                CopyMatrix :=
+#                  function( C )
+#                    
+#                    
+#                  end,
                
                ZeroMatrix :=
                  function( C )
@@ -162,11 +162,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-               DiagMat :=
-                 function( e )
-                   
-                   
-                 end,
+#                DiagMat :=
+#                  function( e )
+#                    
+#                    
+#                  end,
                
                KroneckerMat :=
                  function( A, B )
@@ -249,53 +249,52 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    return homalgTable(AssociatedGlobalRing(C))!.ZeroColumns(Eval(C)[2]);
                  end,
                
-               GetColumnIndependentUnitPositions :=
-                 function( M, pos_list )
-                   
-                   
-                 end,
+#               GetColumnIndependentUnitPositions :=
+#                 function( M, pos_list )
+#                   
+#                 end,
                
-               GetRowIndependentUnitPositions :=
-                 function( M, pos_list )
-                   
-                   
-                 end,
+#               GetRowIndependentUnitPositions :=
+#                  function( M, pos_list )
+#                    
+#                    
+#                  end,
                
-               GetUnitPosition :=
-                 function( M, pos_list )
-                   
-                   
-                 end,
+#                GetUnitPosition :=
+#                  function( M, pos_list )
+#                    
+#                    
+#                  end,
                
-               DivideEntryByUnit :=
-                 function( M, i, j, u )
-                   
-                   
-                 end,
+#                DivideEntryByUnit :=
+#                  function( M, i, j, u )
+#                    
+#                    
+#                  end,
                
          
-               CopyRowToIdentityMatrix :=
-                 function( M, i, L, j )
-                   
-                   
-                 end,
+#                CopyRowToIdentityMatrix :=
+#                  function( M, i, L, j )
+#                    
+#                    
+#                  end,
                
-               CopyColumnToIdentityMatrix :=
-                 function( M, j, L, i )
-                   
-                   
-                 end,
+#                CopyColumnToIdentityMatrix :=
+#                  function( M, j, L, i )
+#                    
+#                    
+#                  end,
                
-               SetColumnToZero :=
-                 function( M, i, j )
-                   
-                   
-                 end,
+#                SetColumnToZero :=
+#                  function( M, i, j )
+#                    
+#                    
+#                  end,
                
-               GetCleanRowsPositions :=
-                 function( M, clean_columns )
-                   
-                   
-                 end,
+#                GetCleanRowsPositions :=
+#                  function( M, clean_columns )
+#                    
+#                    
+#                  end,
     )
  );
