@@ -62,7 +62,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( 0, NrColumns( A ), R );
                    
-                   for i from 1 to NrRows( A ) do
+                   for i in [1..NrRows( A )] do
                      
                      ClearDenomMatrix := Eval( UnionOfRows( CertainRows( A, [i]), B ) )[2];
                      
@@ -92,7 +92,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgVoidMatrix( NrRows( A ), 0, R );
                    
-                   for i from 1 to NrColumns( A ) do
+                   for i in [1..NrColumns( A )] do
                      
                      ClearDenomMatrix := Eval( UnionOfColumns( CertainColumns( A, [i]), B ) )[2];
                      
