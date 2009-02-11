@@ -101,7 +101,7 @@ end );
 ##
 InstallGlobalFunction( ConvertHomalgMatrix,
   function( arg )
-    local nargs, R, stream, flatten, M, o, r, c;
+    local nargs, R, flatten, stream, M, o, r, c;
     
     nargs := Length( arg );
     
@@ -109,12 +109,16 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         
         R := arg[2];
         
-        stream := homalgStream( R );
+        flatten := false;
         
-        if IsBound( stream.nolistlist ) and stream.nolistlist = true then
-            flatten := true;
-        else
-            flatten := false;
+        if IsHomalgExternalRingRep( R ) then
+            
+            stream := homalgStream( R );
+            
+            if IsBound( stream.nolistlist ) and stream.nolistlist = true then
+                flatten := true;
+            fi;
+            
         fi;
         
         if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
@@ -154,12 +158,16 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         
         R := arg[4];
         
-        stream := homalgStream( R );
+        flatten := false;
         
-        if IsBound( stream.nolistlist ) and stream.nolistlist = true then
-            flatten := true;
-        else
-            flatten := false;
+        if IsHomalgExternalRingRep( R ) then
+            
+            stream := homalgStream( R );
+            
+            if IsBound( stream.nolistlist ) and stream.nolistlist = true then
+                flatten := true;
+            fi;
+            
         fi;
         
         r := arg[2];

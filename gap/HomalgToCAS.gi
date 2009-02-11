@@ -118,7 +118,7 @@ InstallGlobalFunction( homalgFlush,
             ## set the argument to be the active ring
             if IsHomalgExternalRingRep( R ) and
                not IsIdenticalObj( R, stream.active_ring ) then
-                homalgSendBlocking( "\"we've just reseted the ring for garbage collection\"", "need_command", R, HOMALG_IO.Pictograms.initialize );
+                homalgSendBlocking( "\"we've just reset the ring for garbage collection\"", "need_command", R, HOMALG_IO.Pictograms.initialize );
             fi;
             
             active_ring_creation_number := stream.active_ring!.creation_number;

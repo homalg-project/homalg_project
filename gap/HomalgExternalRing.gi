@@ -59,6 +59,17 @@ InstallMethod( homalgStream,
 end );
 
 ##
+InstallMethod( homalgStream,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( o )
+    
+    return homalgStream( HomalgRing( o ) );
+    
+end );
+
+##
 InstallMethod( homalgExternalCASystemPID,
         "for homalg rings",
         [ IsHomalgExternalRingRep ],
@@ -92,8 +103,19 @@ InstallMethod( homalgNrOfWarnings,
 end );
 
 ##
+InstallMethod( HomalgRing,
+        "for external homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    
+    return r!.ring;
+    
+end );
+
+##
 InstallMethod( homalgSetName,
-        "for homalg ring elements",
+        "for external homalg ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString ],
         
   function( r, name )
@@ -104,12 +126,30 @@ end );
 
 ##
 InstallMethod( homalgSetName,
-        "for homalg ring elements",
+        "for external homalg ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingRep ],
         
   function( r, name, R )
     
     SetName( r, homalgSendBlocking( [ r ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg external objects",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
+          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        
+  function( r1, r2 )
+    
+    if not IsIdenticalObj( homalgStream( r1 ), homalgStream( r2 ) ) then
+        return false;
+    elif homalgPointer( r1 ) = homalgPointer( r2 ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
