@@ -73,14 +73,14 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                ShallowCopy :=
                  function( C )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   return homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                
                CopyMatrix :=
                  function( C, R )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
+                   return homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                

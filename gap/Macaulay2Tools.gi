@@ -66,14 +66,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                ShallowCopy :=
                  function( C )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   return homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                
                CopyMatrix :=
                  function( C, R )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ "substitute(", C, HomalgRing( C ), ")" ], R, HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
+                   return homalgSendBlocking( [ "substitute(", C, HomalgRing( C ), ")" ], R, HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                

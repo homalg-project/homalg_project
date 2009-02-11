@@ -101,14 +101,14 @@ InstallValue( CommonHomalgTableForSingularTools,
                ShallowCopy :=
                  function( C )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ C ], [ "matrix" ], HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), HomalgRing( C ) );
+                   return homalgSendBlocking( [ C ], [ "matrix" ], HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                
                CopyMatrix :=
                  function( C, R )
                    
-                   return HomalgMatrix( homalgSendBlocking( [ "fetch(", HomalgRing( C ), C, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.CopyMatrix ), NrRows( C ), NrColumns( C ), R );
+                   return homalgSendBlocking( [ "fetch(", HomalgRing( C ), C, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                

@@ -772,7 +772,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular, HomalgExternalRingElement );
     
     _Singular_SetRing( R );
     
@@ -857,7 +857,7 @@ InstallMethod( PolynomialRing,
     ## create the new ring
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular, HomalgExternalRingElement );
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
@@ -933,7 +933,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular, HomalgExternalRingElement );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1017,7 +1017,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", Concatenation( comm, anti ), "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     ext_obj := homalgSendBlocking( [ "SuperCommutative(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular, HomalgExternalRingElement );
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1115,7 +1115,7 @@ InstallMethod( LocalizePolynomialRingAtZero,
     ## create the new ring
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, properties, TheTypeHomalgExternalRingObjectInSingular, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular, HomalgExternalRingElement );
     
     _Singular_SetRing( S );
     

@@ -472,7 +472,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
+    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA, HomalgExternalRingElement );
     
 end );
 
@@ -581,7 +581,7 @@ InstallMethod( PolynomialRing,
         ext_obj := homalgSendBlocking( [ "PolynomialRing(", r, Length( var ), ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA, HomalgExternalRingElement );
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
@@ -645,7 +645,7 @@ InstallMethod( ExteriorRing,
     
     ext_obj := homalgSendBlocking( [ "ExteriorAlgebra(", r, Length( anti ), ")" ], [ ], [ "<", anti, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
+    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMAGMA, HomalgExternalRingElement );
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     

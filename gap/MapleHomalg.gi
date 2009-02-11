@@ -194,7 +194,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, IsPrincipalIdealRing );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, IsPrincipalIdealRing, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -240,7 +240,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -286,7 +286,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -332,7 +332,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -378,7 +378,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -424,7 +424,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -466,7 +466,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -506,7 +506,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple );
+    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, HomalgExternalRingElement );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
