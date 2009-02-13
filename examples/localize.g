@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+SetAssertionLevel( 4 );
+
 R := HomalgFieldOfRationalsInDefaultCAS() * "x,y,z";
 
 wmat := HomalgMatrix( "[ \
@@ -13,10 +15,18 @@ x^4,  x^3*z,  0,        x^2*z,     -x*z, \
 
 LoadPackage( "LocalizeRingForHomalg" );
 
-R0 := LocalizeAt( R );
+m := [ HomalgRingElement("x",R) , HomalgRingElement("y",R) , HomalgRingElement("z",R) ];
+
+R0 := LocalizeAt( R , m );
 
 lmat := HomalgLocalMatrix( wmat, R0 );
 
-a := MinusOne(R0);
+a := HomalgRingElement(HomalgRingElement("x+1",R),One(R),R0);
 
-M:=LeftPresentation(lmat);
+lmat2:=a*lmat;
+
+T := HomalgVoidMatrix(R0);
+
+M := LeftPresentation(lmat);
+
+Red := DecideZeroRowsEffectively(lmat,lmat2,T);
