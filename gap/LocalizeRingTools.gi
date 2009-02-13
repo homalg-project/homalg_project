@@ -168,11 +168,27 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-#                DiagMat :=
-#                  function( e )
-#                    
-#                    
-#                  end,
+                 DiagMat :=
+                   function( e )
+                     local R, u, l, A;
+                     
+                     R := HomalgRing( e[1] );
+                     
+                     u := One( AssociatedGlobalRing (R ) );
+                     
+                     l := [];
+                     
+                     for A in e do
+                     
+                       u := u * Eval(A)[1];
+                       
+                       Add( l , Eval(A)[2] );
+                       
+                     od;
+                     
+                     return [ u , DiagMat( l ) ];
+                     
+                   end,
                
                KroneckerMat :=
                  function( A, B )
