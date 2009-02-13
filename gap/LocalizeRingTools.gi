@@ -37,15 +37,18 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                DivideByUnit :=
                  function( a, u )
                    return HomalgLocalRingElement(
-                                  NumeratorOfLocalElement(a),
-                                  DenominatorOfLocalElement(a)*u,
+                                  NumeratorOfLocalElement(a)*DenominatorOfLocalElement(u),
+                                  DenominatorOfLocalElement(a)*NumeratorOfLocalElement(u),
                                   HomalgRing(a));
                  end,
                
-               IsUnit := #FIXME: just for polynomial rings(?)
+               IsUnit :=
                  function( R, u )
+                 local globalR;
                    
-                   #IsUnit CAS-dependent
+                   globalR := AssociatedGlobalRing( R );
+                   
+                   return IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u) , 1 , 1 , globalR ) , GeneratorsOfMaximalLeftIdeal( R ) ) );
                    
                  end,
                
@@ -165,11 +168,27 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-#                DiagMat :=
-#                  function( e )
-#                    
-#                    
-#                  end,
+                 DiagMat :=
+                   function( e )
+                     local R, u, l, A;
+                     
+                     R := HomalgRing( e[1] );
+                     
+                     u := One( AssociatedGlobalRing (R ) );
+                     
+                     l := [];
+                     
+                     for A in e do
+                     
+                       u := u * Eval(A)[1];
+                       
+                       Add( l , Eval(A)[2] );
+                       
+                     od;
+                     
+                     return [ u , DiagMat( l ) ];
+                     
+                   end,
                
                KroneckerMat :=
                  function( A, B )
