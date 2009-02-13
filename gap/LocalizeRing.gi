@@ -187,8 +187,10 @@ end );
         
      function( M, r, c, s, R )
    
-     local N, globalR, M2;
-    
+     local m, N, globalR, M2;
+       
+       m := Eval( M );
+       
        globalR := AssociatedGlobalRing( R );
       
        N := HomalgInitialMatrix( NrRows( M ) , NrColumns( M ) , globalR );
@@ -197,12 +199,16 @@ end );
       
        N := HomalgLocalMatrix( N , DenominatorOfLocalElement( s ) , R );
     
-       M2 := Eval( M )[2];
+       M2 := m[2];
+       
+       SetEntryOfHomalgMatrix( M2 , r , c , Zero( globalR ) );
     
-       M := HomalgLocalMatrix( SetEntryOfHomalgMatrix( M2 , r , c , Zero( globalR ) ) , Eval( M )[1] , R );
+       e := Eval( HomalgLocalMatrix( M2 , m[1] , R ) + N );
       
-       M := M + N;
+       SetIsMutableMatrix( e[2], true );
       
+       M!.Eval := e;
+    
    end );
 
 ##
@@ -213,7 +219,7 @@ end );
         
     function( M, r, c, s, R )
     
-    local N, globalR;
+    local N, globalR, e;
   
       globalR := AssociatedGlobalRing( R );
      
@@ -222,9 +228,13 @@ end );
       SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) );
      
       N := HomalgLocalMatrix( N , DenominatorOfLocalElement( s ) , R );
-    
-      M := M + N;
-    
+      
+      e := Eval( M + N );
+      
+      SetIsMutableMatrix( e[2], true );
+      
+      M!.Eval := e;
+      
   end );
 
 ##
