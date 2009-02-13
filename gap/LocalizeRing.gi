@@ -407,6 +407,24 @@ InstallMethod( HomalgLocalMatrix,
     
 end );
 
+##
+InstallMethod( SetIsMutableMatrix,
+        "for homalg local rings",
+        [ IsHomalgLocalMatrixRep, IsBool ],
+        
+  function( A, b )
+    
+    if b = true then 
+      SetFilterObj( A , IsMutableMatrix );
+    else
+      ResetFilterObj( A , IsMutableMatrix );
+    fi;
+    
+    SetIsMutableMatrix( Eval( A )[2], b );
+    
+end );
+
+
 ####################################
 #
 # View, Print, and Display methods:
