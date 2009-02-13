@@ -19,7 +19,7 @@
 ##
 InstallMethod( CreateHomalgTableForLocalizedRings,
         "for polynomial homalg rings with Groebner basis computations",
-        [ IsHomalgExternalRingRep and IsFreePolynomialRing ],
+        [ IsHomalgRing and IsFreePolynomialRing ],
         
   function( globalR )
     local globalRP, RP, RP_General, RP_Basic, RP_specific, component;

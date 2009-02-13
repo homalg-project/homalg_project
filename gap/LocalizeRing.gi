@@ -34,7 +34,7 @@ DeclareRepresentation( "IsHomalgLocalRingRep",
 ##    <Filt Type="Representation" Arg="r" Name="IsHomalgLocalRingElementRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The representation of elements of external &homalg; rings. <P/>
+##      The representation of elements of local &homalg; rings. <P/>
 ##      (It is a representation of the &GAP; category <C>IsHomalgRingElement</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -146,7 +146,7 @@ end );
 
 ##
 InstallMethod( Name,
-        "for homalg external ring elements",
+        "for homalg local ring elements",
         [ IsHomalgLocalRingElementRep ],
 
   function( o )
@@ -189,7 +189,7 @@ end );
 ##
 InstallMethod( LocalizeAt,
         "constructor for localized rings",
-        [ IsHomalgExternalRingRep and IsFreePolynomialRing, IsList ],
+        [ IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( globalR, ideal_gens )
     local RP, localR, n_gens, gens;
@@ -222,7 +222,7 @@ end );
 ##
 InstallMethod( LocalizeAt,
         "constructor for localized rings",
-        [ IsHomalgExternalRingRep and IsFreePolynomialRing ],
+        [ IsHomalgRing and IsFreePolynomialRing ],
         
   function( globalR )
     
@@ -248,12 +248,12 @@ InstallGlobalFunction( HomalgLocalRingElement,
         ## otherwise simply return it
         return numer;
         
-    elif IsHomalgExternalRingElementRep( numer ) and nargs = 2 then
+    elif nargs = 2 then
         
-        ## rebuild an external ring element if a ring is provided as a second argument
+        ## rebuild a local ring element if a ring is provided as a second argument
         if IsHomalgRing( arg[2] ) then
             ring := arg[2];
-            ar := [ numer, ring ];
+            ar := [ numer, ring, "avoid infinite loops" ];
             properties := KnownTruePropertiesOfObject( numer );
             Append( ar, List( properties, ValueGlobal ) );
             return CallFuncList( HomalgLocalRingElement, ar );
