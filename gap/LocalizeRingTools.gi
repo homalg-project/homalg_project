@@ -37,8 +37,8 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                DivideByUnit :=
                  function( a, u )
                    return HomalgLocalRingElement(
-                                  NumeratorOfLocalElement(a),
-                                  DenominatorOfLocalElement(a)*u,
+                                  NumeratorOfLocalElement(a)*DenominatorOfLocalElement(u),
+                                  DenominatorOfLocalElement(a)*NumeratorOfLocalElement(u),
                                   HomalgRing(a));
                  end,
                
