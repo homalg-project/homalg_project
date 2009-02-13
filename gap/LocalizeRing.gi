@@ -187,17 +187,19 @@ end );
         
      function( M, r, c, s, R )
    
-     local N, globalR;
+     local N, globalR, M2;
     
        globalR := AssociatedGlobalRing( R );
       
        N := HomalgInitialMatrix( NrRows( M ) , NrColumns( M ) , globalR );
       
-       N := SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) , globalR );
+       SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) );
       
        N := HomalgLocalMatrix( N , DenominatorOfLocalElement( s ) , R );
     
-       M := HomalgLocalMatrix( SetEntryOfHomalgMatrix( Eval( M )[2] , r , c , Zero( globalR ) , globalR ) , Eval( M )[1] , R );
+       M2 := Eval( M )[2];
+    
+       M := HomalgLocalMatrix( SetEntryOfHomalgMatrix( M2 , r , c , Zero( globalR ) ) , Eval( M )[1] , R );
       
        M := M + N;
       
@@ -217,7 +219,7 @@ end );
      
       N := HomalgInitialMatrix( NrRows( M ) , NrColumns( M ) , globalR );
      
-      N := SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) , globalR );
+      SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) );
      
       N := HomalgLocalMatrix( N , DenominatorOfLocalElement( s ) , R );
     
@@ -305,7 +307,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
     nargs := Length( arg );
     
     if nargs = 0 then
-        Error( "empty input\n" );
+         Error( "empty input\n" );
     fi;
     
     numer := arg[1];
