@@ -39,18 +39,18 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                BasisOfRowsCoeff :=
                  function( M, T )
 
-                   T := homalgTable(HomalgRing( M ))!.IdentityMatrix( M );
+                   T := Eval(M)[1] * HomalgIdentityMatrix( M );
                    
-                   return M;
+                   return HomalgLocalMatrix( Eval(M)[2] , HomalgRing(M) );
                    
                  end,
                
                BasisOfColumnsCoeff :=
                  function( M, T )
                    
-                   T := homalgTable(HomalgRing( M ))!.IdentityMatrix( M );
+                   T := Eval(M)[1] * HomalgIdentityMatrix( M );
                    
-                   return M;
+                   return HomalgLocalMatrix( Eval(M)[2] , HomalgRing(M) );
                    
                  end,
                
