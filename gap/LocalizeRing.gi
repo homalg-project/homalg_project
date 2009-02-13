@@ -198,11 +198,10 @@ InstallMethod( LocalizeAt,
     RP := CreateHomalgTableForLocalizedRings( globalR );
     
     ## create the local ring
-    localR := CreateHomalgRing( globalR, TheTypeHomalgLocalRing, HomalgLocalRingElement, RP );
+    localR := CreateHomalgRing( globalR, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
     
+    ## for the view method: <A homalg local matrix>
     localR!.description := "local";
-    
-    SetTypeOfHomalgMatrix( localR, TheTypeHomalgLocalMatrix );
     
     SetIsLocalRing( localR, true );
     
