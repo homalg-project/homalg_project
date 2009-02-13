@@ -414,7 +414,7 @@ InstallMethod( SetIsMutableMatrix,
         
   function( A, b )
     
-    if b = true then 
+    if b = true then
       SetFilterObj( A , IsMutableMatrix );
     else
       ResetFilterObj( A , IsMutableMatrix );
