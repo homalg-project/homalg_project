@@ -254,8 +254,11 @@ InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgLocalMatrixRep, IsInt, IsInt, IsHomalgLocalRingRep ],
         
   function( M, r, c, R )
+    local m;
     
-    return HomalgLocalRingElement( GetEntryOfHomalgMatrix( Eval( M )[2] , r , c , AssociatedGlobalRing( R ) ), Eval( M )[1] , R );
+    m :=Eval(M);
+    
+    return HomalgLocalRingElement( GetEntryOfHomalgMatrix( m[2] , r , c , AssociatedGlobalRing( R ) ), m[1] , R );
     
 end );
 
