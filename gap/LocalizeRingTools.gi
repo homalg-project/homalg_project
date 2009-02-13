@@ -42,10 +42,13 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                                   HomalgRing(a));
                  end,
                
-               IsUnit := #FIXME: just for polynomial rings(?)
+               IsUnit :=
                  function( R, u )
+                 local globalR;
                    
-                   #IsUnit CAS-dependent
+                   globalR := AssociatedGlobalRing( R );
+                   
+                   return IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u) , 1 , 1 , globalR ) , GeneratorsOfMaximalLeftIdeal( R ) ) );
                    
                  end,
                
