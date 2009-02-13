@@ -146,7 +146,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                      
                      S := HomalgVoidMatrix( 1 , NrRows(B2) , GlobalR );
                      
-                     A2 := HomalgLocalMatrix (DecideZeroRowsEffectively( A2 , B2 , S ) , R);
+                     A2 := HomalgLocalMatrix( DecideZeroRowsEffectively( A2 , B2 , S ) , R);
                      
                      S := S * SS;
                      
