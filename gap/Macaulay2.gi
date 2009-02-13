@@ -142,7 +142,7 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
     _Macaulay2_SetRing( R );
     
@@ -227,7 +227,7 @@ InstallMethod( PolynomialRing,
     ## create the new ring
     ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, properties,  HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2, HomalgExternalRingElement );
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     

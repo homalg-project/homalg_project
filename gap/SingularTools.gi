@@ -78,7 +78,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( r, weights, R )
                    local externally_stored_weights;
                    
-                   externally_stored_weights := ExternallyStoredWeightsOfIndeterminates( R );
+                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
                    
                    return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
                    
@@ -87,7 +87,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Sum :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "+", b ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Sum );
+                   return homalgSendBlocking( [ a, "+(", b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Sum );
                    
                  end,
                

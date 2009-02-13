@@ -130,7 +130,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    return CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInGAP, HomalgExternalRingElement );
+    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInGAP );
     
 end );
 

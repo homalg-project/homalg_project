@@ -167,7 +167,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R;
+    local nargs, stream, o, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -194,9 +194,25 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, IsPrincipalIdealRing, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, IsPrincipalIdealRing );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
+    
+    RP!.Product :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        
+      end;
     
     return R;
     
@@ -205,7 +221,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R;
+    local nargs, stream, o, var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -240,9 +256,25 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
+    
+    RP!.Product :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        
+      end;
     
     return R;
     
@@ -251,7 +283,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R;
+    local nargs, stream, o, var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -286,9 +318,25 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
+    
+    RP!.Product :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        
+      end;
     
     return R;
     
@@ -297,7 +345,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R;
+    local nargs, stream, o, var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -332,9 +380,25 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
+    
+    RP!.Product :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        
+      end;
     
     return R;
     
@@ -343,7 +407,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R;
+    local nargs, stream, o, var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -378,9 +442,25 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
+    
+    RP!.Product :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        
+      end;
     
     return R;
     
@@ -424,7 +504,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
@@ -437,7 +517,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R;
+    local nargs, stream, o, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -466,9 +546,18 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
     
     return R;
     
@@ -477,7 +566,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R;
+    local nargs, stream, o, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -506,9 +595,18 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     ext_obj := CallFuncList( homalgSendBlocking, ar );
     
-    R := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInMaple, HomalgExternalRingElement );
+    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    RP := homalgTable( R );
+    
+    RP!.Sum :=
+      function( a, b )
+        
+        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        
+      end;
     
     return R;
     
@@ -625,15 +723,15 @@ InstallMethod( PolynomialRing,
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
-    for v in var do
-        SetName( v, homalgPointer( v ) );
-    od;
+    Perform( var, function( v ) SetName( v, homalgPointer( v ) ); end );
     
-    SetCoefficientsRing( S, r );
-    SetCharacteristic( S, c );
-    SetIsCommutative( S, true );
-    SetIndeterminatesOfPolynomialRing( S, var );
-    SetGlobalDimension( S, Length( var ) );
+    SetIsFreePolynomialRing( S, true );
+    
+    if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        SetBaseRing( S, R );
+    fi;
+    
+    SetRingProperties( S, r, var );
     
     return S;
     
@@ -696,16 +794,14 @@ InstallMethod( RingOfDerivations,
     S := RingForHomalgInMapleUsingJanetOre( ar, stream );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
-    for v in der do
-        SetName( v, homalgPointer( v ) );
-    od;
     
-    SetCoefficientsRing( S, CoefficientsRing( R ) );
-    SetCharacteristic( S, Characteristic( R ) );
-    SetIsCommutative( S, false );
-    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
-    SetIndeterminateDerivationsOfRingOfDerivations( S, der );
-    SetGlobalDimension( S, Length( var ) );
+    Perform( der, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    SetIsWeylRing( S, true );
+    
+    SetBaseRing( S, R );
+    
+    SetRingProperties( S, R, der );
     
     return S;
     
