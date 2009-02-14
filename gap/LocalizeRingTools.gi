@@ -48,25 +48,25 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    globalR := AssociatedGlobalRing( R );
                    
-                   return not IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u), 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
+                   return not IsZero( DecideZeroRows( HomalgMatrix ( [ NumeratorOfLocalElement( u ) ], 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
                    
                  end,
                
                Sum :=
                  function( a, b )
                    return HomalgLocalRingElement(
-                                  NumeratorOfLocalElement(a)*DenominatorOfLocalElement(b)
-                                  +NumeratorOfLocalElement(b)*DenominatorOfLocalElement(a),
-                                  DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
-                                  HomalgRing(a));
+                                  NumeratorOfLocalElement( a ) * DenominatorOfLocalElement( b )
+                                  +NumeratorOfLocalElement( b ) * DenominatorOfLocalElement( a ),
+                                  DenominatorOfLocalElement( a ) * DenominatorOfLocalElement( b ),
+                                  HomalgRing( a ) );
                  end,
                
                Product :=
                  function( a, b )
                    return HomalgLocalRingElement(
-                                  NumeratorOfLocalElement(a)*NumeratorOfLocalElement(b),
-                                  DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
-                                  HomalgRing(a));
+                                  NumeratorOfLocalElement( a ) * NumeratorOfLocalElement( b ),
+                                  DenominatorOfLocalElement( a ) * DenominatorOfLocalElement( b ),
+                                  HomalgRing( a ) );
                  end,
                
                ShallowCopy := C -> List( Eval( C ), ShallowCopy ),
