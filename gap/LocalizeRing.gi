@@ -181,65 +181,66 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
 end );
 
 ##
-   InstallMethod( SetEntryOfHomalgMatrix,
-           "for local matrices",
-           [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg local matrices",
+        [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
-     function( M, r, c, s, R )
-   
-     local m, N, globalR, M2;
-       
-       m := Eval( M );
-       
-       globalR := AssociatedGlobalRing( R );
-      
-       N := HomalgInitialMatrix( NrRows( M ) , NrColumns( M ) , globalR );
-      
-       SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) );
-      
-       N := HomalgLocalMatrix( N , DenominatorOfLocalElement( s ) , R );
+  function( M, r, c, s, R )
+    local m, N, globalR, M2, e;
     
-       M2 := m[2];
-       
-       SetEntryOfHomalgMatrix( M2 , r , c , Zero( globalR ) );
+    m := Eval( M );
     
-       e := Eval( HomalgLocalMatrix( M2 , m[1] , R ) + N );
-      
-       SetIsMutableMatrix( e[2], true );
-      
-       M!.Eval := e;
+    globalR := AssociatedGlobalRing( R );
     
-   end );
+    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
+    
+    SetEntryOfHomalgMatrix( N, r, c, NumeratorOfLocalElement( s ) );
+    
+    ResetFilterObj( N, IsInitialMatrix );
+    
+    N := HomalgLocalMatrix( N, DenominatorOfLocalElement( s ), R );
+    
+    M2 := m[2];
+    
+    SetEntryOfHomalgMatrix( M2, r, c, Zero( globalR ) );
+    
+    e := Eval( HomalgLocalMatrix( M2, m[1], R ) + N );
+    
+    SetIsMutableMatrix( e[2], true );
+    
+    M!.Eval := e;
+    
+end );
 
 ##
-  InstallMethod( AddToEntryOfHomalgMatrix,
-          "for local matrices",
-#          [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
-          [ IsHomalgLocalMatrixRep , IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
+InstallMethod( AddToEntryOfHomalgMatrix,
+        "for homalg local matrices",
+        [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
-    function( M, r, c, s, R )
+  function( M, r, c, s, R )
+    local globalR, N, e;
     
-    local N, globalR, e;
-  
-      globalR := AssociatedGlobalRing( R );
-     
-      N := HomalgInitialMatrix( NrRows( M ) , NrColumns( M ) , globalR );
-     
-      SetEntryOfHomalgMatrix( N , r , c , NumeratorOfLocalElement( s ) );
-     
-      N := HomalgLocalMatrix( N , DenominatorOfLocalElement( s ) , R );
-      
-      e := Eval( M + N );
-      
-      SetIsMutableMatrix( e[2], true );
-      
-      M!.Eval := e;
-      
-  end );
+    globalR := AssociatedGlobalRing( R );
+    
+    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
+    
+    SetEntryOfHomalgMatrix( N, r, c, NumeratorOfLocalElement( s ) );
+    
+    ResetFilterObj( N, IsInitialIdentityMatrix );
+    
+    N := HomalgLocalMatrix( N, DenominatorOfLocalElement( s ), R );
+    
+    e := Eval( M + N );
+    
+    SetIsMutableMatrix( e[2], true );
+    
+    M!.Eval := e;
+    
+end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for local matrices",
+        "for homalg local matrices",
         [ IsHomalgLocalMatrixRep, IsInt, IsInt, IsHomalgLocalRingRep ],
         
   function( M, r, c, R )
@@ -250,7 +251,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for local matrices",
+        "for homalg local matrices",
         [ IsHomalgLocalMatrixRep, IsInt, IsInt, IsHomalgLocalRingRep ],
         
   function( M, r, c, R )
@@ -270,7 +271,7 @@ end );
 
 ##
 InstallMethod( LocalizeAt,
-        "constructor for localized rings",
+        "constructor for homalg localized rings",
         [ IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( globalR, ideal_gens )
@@ -303,7 +304,7 @@ end );
 
 ##
 InstallMethod( LocalizeAt,
-        "constructor for localized rings",
+        "constructor for homalg localized rings",
         [ IsHomalgRing and IsFreePolynomialRing ],
         
   function( globalR )
@@ -332,12 +333,12 @@ InstallGlobalFunction( HomalgLocalRingElement,
         
     elif nargs = 2 then
         
-        ## rebuild a local ring element if a ring is provided as a second argument
+        ## extract the properties of the global ring element
         if IsHomalgRing( arg[2] ) then
             ring := arg[2];
-            ar := [ numer, ring, "avoid infinite loops" ];
+            ar := [ numer, ring ];
             properties := KnownTruePropertiesOfObject( numer );
-            Append( ar, List( properties, ValueGlobal ) );
+            Append( ar, List( properties, ValueGlobal ) );	## at least an empty list is inserted; avoids infinite loops
             return CallFuncList( HomalgLocalRingElement, ar );
         fi;
         
@@ -381,7 +382,7 @@ end );
 
 ##
 InstallMethod( HomalgLocalMatrix,
-        "constructor for localized rings",
+        "constructor for matrices over localized rings",
         [ IsHomalgMatrix, IsRingElement, IsHomalgLocalRingRep ],
         
   function( A, r, R )
@@ -411,7 +412,7 @@ end );
 
 ##
 InstallMethod( HomalgLocalMatrix,
-        "constructor for localized rings",
+        "constructor for matrices over localized rings",
         [ IsHomalgMatrix, IsHomalgLocalRingRep ],
         
   function( A, R )
@@ -422,7 +423,7 @@ end );
 
 ##
 InstallMethod( SetIsMutableMatrix,
-        "for homalg local rings",
+        "for homalg local matrices",
         [ IsHomalgLocalMatrixRep, IsBool ],
         
   function( A, b )

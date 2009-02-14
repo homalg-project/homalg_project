@@ -21,25 +21,25 @@
 InstallValue( CommonHomalgTableForLocalizedRingsTools,
 
     rec(
-               IsZero := a -> IsZero(NumeratorOfLocalElement(a)),
+               IsZero := a -> IsZero( NumeratorOfLocalElement( a ) ),
                
-               IsOne := a -> IsZero(NumeratorOfLocalElement(a)-DenominatorOfLocalElement(a)),
+               IsOne := a -> IsZero( NumeratorOfLocalElement( a ) - DenominatorOfLocalElement( a ) ),
                
                Minus :=
                  function( a, b )
                    return HomalgLocalRingElement(
-                                  NumeratorOfLocalElement(a)*DenominatorOfLocalElement(b)
-                                  -NumeratorOfLocalElement(b)*DenominatorOfLocalElement(a),
-                                  DenominatorOfLocalElement(a)*DenominatorOfLocalElement(b),
-                                  HomalgRing(a));
+                                  NumeratorOfLocalElement( a ) * DenominatorOfLocalElement( b )
+                                  -NumeratorOfLocalElement( b ) * DenominatorOfLocalElement( a ),
+                                  DenominatorOfLocalElement( a ) * DenominatorOfLocalElement( b ),
+                                  HomalgRing( a ) );
                  end,
                
                DivideByUnit :=
                  function( a, u )
                    return HomalgLocalRingElement(
-                                  NumeratorOfLocalElement(a)*DenominatorOfLocalElement(u),
-                                  DenominatorOfLocalElement(a)*NumeratorOfLocalElement(u),
-                                  HomalgRing(a));
+                                  NumeratorOfLocalElement( a ) * DenominatorOfLocalElement( u ),
+                                  DenominatorOfLocalElement( a ) * NumeratorOfLocalElement( u ),
+                                  HomalgRing( a ) );
                  end,
                
                IsUnit :=
@@ -48,7 +48,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    globalR := AssociatedGlobalRing( R );
                    
-                   return IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u) , 1 , 1 , globalR ) , GeneratorsOfMaximalLeftIdeal( R ) ) );
+                   return IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u), 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
                    
                  end,
                
@@ -168,27 +168,29 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-                 DiagMat :=
-                   function( e )
-                     local R, u, l, A;
-                     
-                     R := HomalgRing( e[1] );
-                     
-                     u := One( AssociatedGlobalRing (R ) );
-                     
-                     l := [];
-                     
-                     for A in e do
-                     
-                       u := u * Eval(A)[1];
+               DiagMat :=
+                 function( e )
+                   local R, u, l, A, a;
+                   
+                   R := HomalgRing( e[1] );
+                   
+                   u := One( AssociatedGlobalRing (R ) );
+                   
+                   l := [];
+                   
+                   for A in e do
                        
-                       Add( l , Eval(A)[2] );
+                       a := Eval( A );
                        
-                     od;
-                     
-                     return [ u , DiagMat( l ) ];
-                     
-                   end,
+                       u := u * a[1];
+                       
+                       Add( l, a[2] );
+                       
+                   od;
+                   
+                   return [ u, DiagMat( l ) ];
+                   
+                 end,
                
                KroneckerMat :=
                  function( A, B )
