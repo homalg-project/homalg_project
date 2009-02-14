@@ -48,7 +48,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    globalR := AssociatedGlobalRing( R );
                    
-                   return IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u), 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
+                   return not IsZero( DecideZeroRows( HomalgMatrix ( NumeratorOfLocalElement(u), 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
                    
                  end,
                
