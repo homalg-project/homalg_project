@@ -180,7 +180,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                    od;
                    
-                   SetEvalUnionOfRows( T, EvalUnionOfRows( TT ) );
+                   if HasEvalUnionOfRows( TT ) then
+                       SetEvalUnionOfRows( T, EvalUnionOfRows( TT ) );
+                   else
+                       SetEval( T, Eval( TT ) );
+                   fi;
                    
                    return N;
                    
@@ -238,7 +242,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                    od;
                    
-                   SetEvalUnionOfColumns( T, EvalUnionOfColumns( TT ) );
+                   if HasEvalUnionOfColumns( TT ) then
+                       SetEvalUnionOfColumns( T, EvalUnionOfColumns( TT ) );
+                   else
+                       SetEval( T, Eval( TT ) );
+                   fi;
                    
                    return N;
                    
