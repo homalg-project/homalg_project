@@ -10,13 +10,21 @@
 ##
 #############################################################################
 
+## general stuff
 ReadPackage( "IO_ForHomalg", "gap/IO_ForHomalg.gd" );
 
+## pointers on external objects
+ReadPackage( "IO_ForHomalg", "gap/homalgExternalObject.gd" );
+
+## wrappers to some functionality of the IO package of Max
 ReadPackage( "IO_ForHomalg", "gap/IO.gd" );
 
-ReadPackage( "IO_ForHomalg", "gap/HomalgToCAS.gd" );
-
+## external rings
 ReadPackage( "IO_ForHomalg", "gap/HomalgExternalRing.gd" );
 
+## external matrices
 ReadPackage( "IO_ForHomalg", "gap/HomalgExternalMatrix.gd" );
+
+## homalgSendBlocking
+ReadPackage( "IO_ForHomalg", "gap/HomalgToCAS.gd" );
 

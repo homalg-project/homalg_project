@@ -15,6 +15,23 @@
 #
 ####################################
 
+# basic operations:
+
+DeclareOperation( "homalgPointer",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "homalgExternalCASystem",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "homalgExternalCASystemVersion",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "homalgStream",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "homalgExternalCASystemPID",
+        [ IsHomalgMatrix ] );
+
 # constructor methods:
 
 ## ConvertHomalgMatrix have been declared in homalg since it is called there

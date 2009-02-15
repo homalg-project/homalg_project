@@ -337,7 +337,7 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, io_info_level, info_level, properties,
           need_command, need_display, need_output, ar, pictogram, ring_element,
           option, break_lists, R, ext_obj, stream, type, prefix, suffix, e,
-	  RP, CAS, PID, homalg_variable, l, eoc, enter, fs, max, display_color;
+          RP, CAS, PID, homalg_variable, l, eoc, enter, fs, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -563,7 +563,9 @@ InstallGlobalFunction( homalgSendBlocking,
             od;
         fi;
         
-        _SetElmWPObj_ForHomalg( stream, ext_obj );	## this relies on the feature, that homalgExternalObjects are now assigned homalg_variables strictly sequentially!!!
+        ## the following line relies on the feature, that homalgExternalObjects
+        ## are now assigned homalg_variables strictly sequentially!!!
+        _SetElmWPObj_ForHomalg( stream, ext_obj );
         
         if IsBound( prefix ) then
             if IsBound( suffix ) then

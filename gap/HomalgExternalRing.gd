@@ -8,4 +8,35 @@
 ##
 #############################################################################
 
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# basic operations:
+
+DeclareOperation( "homalgExternalCASystem",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "homalgExternalCASystemVersion",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "homalgStream",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "homalgExternalCASystemPID",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "homalgLastWarning",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "homalgNrOfWarnings",
+        [ IsHomalgRing ] );
+
+# constructors:
+
+DeclareGlobalFunction( "CreateHomalgExternalRing" );
+
+DeclareGlobalFunction( "HomalgExternalRingElement" );
 

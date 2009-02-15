@@ -9,6 +9,12 @@
 ##
 #############################################################################
 
+####################################
+#
+# methods for operations:
+#
+####################################
+
 ##
 InstallMethod( homalgPointer,
         "for homalg matrices",
@@ -89,6 +95,61 @@ InstallMethod( homalgExternalCASystemPID,
     else
         return homalgExternalCASystemPID( Eval( M ) );
     fi;
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep ],
+        
+  function( M, r, c, s )
+    
+    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
+        
+  function( M, r, c, s, R )
+    
+    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), R );
+    
+end );
+
+## MatrixBaseChange to an external ring
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgExternalRingRep, IsHomalgMatrix ],
+        
+  function( R, m )
+    local RP, mat;
+    
+    RP := homalgTable( R );
+    
+    if not IsIdenticalObj( HomalgRing( m ), R ) and
+       IsHomalgExternalRingRep( HomalgRing( m ) ) and
+       IsIdenticalObj( homalgStream( HomalgRing( m ) ), homalgStream( R ) ) and
+       IsBound( RP!.CopyMatrix ) then	## make a "copy" over a different ring
+        
+        Eval( m );	## enforce evaluation
+        
+        mat := HomalgMatrix( R );
+        
+        ## this is quicker and safer than calling the
+        ## constructor HomalgMatrix with all arguments
+        SetEval( mat, RP!.CopyMatrix( m, R ) );
+        
+        BlindlyCopyMatrixProperties( m, mat );
+        
+        return mat;
+        
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -271,7 +332,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
             directory := FigureOutAnAlternativeDirectoryForTemporaryFiles( file );
             if directory <> fail then
                 filename := Concatenation( directory, file );
-		fs := IO_File( filename, "w" );
+                fs := IO_File( filename, "w" );
             else
                 Error( "unable to (find alternative directories to) open the file ", filename, " for writing\n" );
             fi;
