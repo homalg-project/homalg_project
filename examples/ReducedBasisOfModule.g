@@ -28,7 +28,7 @@ W := LeftPresentation( wmat );
 ## 0,0,0,0, 0, 0,0, 0,    0,  x
 
 BasisOfModule( W );
-syz:=SyzygiesGenerators( W );
+syz := SyzygiesGenerators( W );
 Y := Hom( Qxyz, W );
 iota := TorsionSubmoduleEmb( W );
 pi := TorsionFreeFactorEpi( W );

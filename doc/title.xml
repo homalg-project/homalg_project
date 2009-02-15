@@ -15,13 +15,12 @@
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik,
-      RWTH Aachen,
-      Templergraben 64,
-      52056 Aachen,
+      Universität des Saarlandes,
+      66041 Saarbrücken,
+      Building E2 4,
       Germany
     </Address>
-    <Email>mohamed.barakat@rwth-aachen.de</Email>
+    <Email>barakat@math.uni-sb.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat</Homepage>
   </Author>
   <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
