@@ -224,7 +224,9 @@ InstallMethod( homalgCreateDisplayString,
     
     if SpectralSequenceConvention then
         ar := column_range[1];
-        max := Maximum( MaximumList( List( [ ar - ( nr_rows - 1 ) .. ar - 1 ], a -> Length( String( a ) ) ) ), max );
+        if nr_rows > 1 then
+            max := Maximum( MaximumList( List( [ ar - ( nr_rows - 1 ) .. ar - 1 ], a -> Length( String( a ) ) ) ), max );
+        fi;
     fi;
     
     if IsBound( twist ) then

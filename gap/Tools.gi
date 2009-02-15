@@ -86,7 +86,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg external objects",
+        "for homalg ring elements",
         [ IsHomalgRingElement ],
         
   function( r )
@@ -102,15 +102,15 @@ InstallMethod( IsZero,
     
     if IsBound(RP!.IsZero) then
         return RP!.IsZero( r );
-    else
-        return homalgPointer( r ) = homalgPointer( Zero( R ) ); ## FIXME
     fi;
+    
+    TryNextMethod( );
     
 end );
 
 ##
 InstallMethod( IsOne,
-        "for homalg external objects",
+        "for homalg ring elements",
         [ IsHomalgRingElement ],
         
   function( r )
@@ -126,9 +126,9 @@ InstallMethod( IsOne,
     
     if IsBound(RP!.IsOne) then
         return RP!.IsOne( r );
-    else
-        return homalgPointer( r ) = homalgPointer( One( R ) ); ## FIXME
     fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -138,7 +138,7 @@ InstallMethod( AdditiveInverseMutable,
         [ IsHomalgRingElement ],
         
   function( r )
-    local R, RP, minus_r;
+    local R, RP;
     
     R := HomalgRing( r );
     
@@ -150,10 +150,13 @@ InstallMethod( AdditiveInverseMutable,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.Minus) and IsBound(RP!.Zero) and IsBound(R!.ring_element_constructor) then
-        minus_r := RP!.Minus( Zero( R ), r );
-        return RingElementConstructor( R )( minus_r, R );
+    if IsBound(RP!.Minus) and IsBound(RP!.Zero) and HasRingElementConstructor( R ) then
+        return RingElementConstructor( R )( RP!.Minus( Zero( R ), r ), R );
     fi;
+    
+    ## never fall back to:
+    ## return Zero( r ) - r;
+    ## this will cause an infinite loop with a method for \- in LIRNG.gi
     
     TryNextMethod( );
     
@@ -161,7 +164,7 @@ end );
 
 ##
 InstallMethod( \/,
-        "for external homalg ring elements",
+        "for homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( a, u )
@@ -1952,7 +1955,7 @@ end );
 
 ##
 InstallMethod( SUM,
-        "for homalg external objects",
+        "for homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r1, r2 )
@@ -1984,7 +1987,7 @@ end );
 
 ##
 InstallMethod( PROD,
-        "for homalg external objects",
+        "for homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( r1, r2 )

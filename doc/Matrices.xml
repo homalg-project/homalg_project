@@ -18,7 +18,6 @@
 <#Include Label="IsHomalgMatrix">
 
 <#Include Label="IsHomalgInternalMatrixRep">
-<#Include Label="IsHomalgExternalMatrixRep">
 
 </Section>
 

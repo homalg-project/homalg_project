@@ -541,15 +541,85 @@ end );
 ####################################
 
 ##
-InstallMethod( \+,
-        "of two homalg ring element",
-        [ IsHomalgRingElement and IsOne, IsHomalgRingElement and IsMinusOne ], 1001,
+InstallMethod( \*,	## check if both elements reside in the same ring
+        "for two homalg ring element",
+        [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
   function( r, s )
     
     if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
         Error( "the two ring are not defined over identically the same ring\n" );
     fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "of homalg matrices with ring elements",
+        [ IsHomalgRingElement and IsZero, IsHomalgRingElement ], 1001,
+        
+  function( z, r )
+    
+    return z;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of homalg matrices",
+        [ IsHomalgRingElement, IsHomalgRingElement and IsZero ], 1001,
+        
+  function( r, z )
+    
+    return z;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of homalg matrices with ring elements",
+        [ IsHomalgRingElement and IsOne, IsHomalgRingElement ], 1001,
+        
+  function( o, r )
+    
+    return r;
+    
+end );
+
+##
+InstallMethod( \*,
+        "of homalg matrices",
+        [ IsHomalgRingElement, IsHomalgRingElement and IsOne ], 1001,
+        
+  function( r, o )
+    
+    return r;
+    
+end );
+
+##
+InstallMethod( \+,	## check if both elements reside in the same ring
+        "for two homalg ring element",
+        [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
+        
+  function( r, s )
+    
+    if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
+        Error( "the two ring are not defined over identically the same ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \+,
+        "for two homalg ring element",
+        [ IsHomalgRingElement and IsOne, IsHomalgRingElement and IsMinusOne ], 1001,
+        
+  function( r, s )
     
     return Zero( r );
     
@@ -557,8 +627,41 @@ end );
 
 ##
 InstallMethod( \+,
-        "of two homalg ring element",
+        "for two homalg ring element",
         [ IsHomalgRingElement and IsMinusOne, IsHomalgRingElement and IsOne ], 1001,
+        
+  function( r, s )
+    
+    return Zero( r );
+    
+end );
+
+##
+InstallMethod( \+,
+        "for two homalg ring element",
+        [ IsHomalgRingElement, IsHomalgRingElement and IsZero ], 1001,
+        
+  function( r, z )
+    
+    return r;
+    
+end );
+
+##
+InstallMethod( \+,
+        "for two homalg ring element",
+        [ IsHomalgRingElement and IsZero, IsHomalgRingElement ], 1001,
+        
+  function( z, r )
+    
+    return r;
+    
+end );
+
+##
+InstallMethod( \-,	## check if both elements reside in the same ring
+        "for two homalg ring element",
+        [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
   function( r, s )
     
@@ -566,13 +669,52 @@ InstallMethod( \+,
         Error( "the two ring are not defined over identically the same ring\n" );
     fi;
     
-    return Zero( r );
+    TryNextMethod( );
     
 end );
 
+##
+InstallMethod( \-,
+        "for two homalg ring element",
+        [ IsHomalgRingElement, IsHomalgRingElement ], 1001,
+        
+  function( r, s )
+    
+    if IsIdenticalObj( r, s ) then
+        return Zero( r );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \-,
+        "for two homalg ring element",
+        [ IsHomalgRingElement, IsHomalgRingElement and IsZero ], 1001,
+        
+  function( r, z )
+    
+    return r;
+    
+end );
+
+##
+InstallMethod( \-,
+        "for two homalg ring element",
+        [ IsHomalgRingElement and IsZero, IsHomalgRingElement ], 1001,
+        
+  function( z, r )
+    
+    return -r;
+    
+end );
+
+## a method for -Zero( R ) -> Zero( R ) is somehow installed
+
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "for homalg rings elements",
+        "for homalg ring elements",
         [ IsHomalgRingElement and IsOne ],
         
   function( r )
@@ -583,7 +725,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "for homalg rings elements",
+        "for homalg ring elements",
         [ IsHomalgRingElement and IsMinusOne ],
         
   function( r )
@@ -591,4 +733,3 @@ InstallMethod( AdditiveInverseMutable,
     return One( r );
     
 end );
-

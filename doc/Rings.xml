@@ -20,9 +20,6 @@
 <#Include Label="IsHomalgRingElement">
 
 <#Include Label="IsHomalgInternalRingRep">
-<#Include Label="IsHomalgExternalRingRep">
-
-<#Include Label="IsHomalgExternalRingElementRep">
 
 </Section>
 
@@ -149,7 +146,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IndeterminateAntiCommutingVariablesOfExteriorRing">
 <#Include Label="IndeterminatesOfExteriorRing">
 <#Include Label="WeightsOfIndeterminates">
-<#Include Label="ExternallyStoredWeightsOfIndeterminates">
+<#Include Label="MatrixOfWeightsOfIndeterminates">
 <#Include Label="CoefficientsRing">
 <#Include Label="AmbientRing">
 <#Include Label="KrullDimension">

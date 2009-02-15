@@ -6710,7 +6710,7 @@ InstallMethod( Display,
 end );
 
 InstallMethod( ViewObj,
-        "for containers of weak pointers on homalg external rings",
+        "for containers of weak pointers on the computed values of a functor",
         [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
         
   function( o )
@@ -6723,7 +6723,7 @@ InstallMethod( ViewObj,
 end );
 
 InstallMethod( Display,
-        "for containers of weak pointers on homalg external rings",
+        "for containers of weak pointers on the computed values of a functor",
         [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
         
   function( o )

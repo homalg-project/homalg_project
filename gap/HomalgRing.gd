@@ -48,7 +48,7 @@ DeclareCategory( "IsHomalgRingElement",
         and IsMultiplicativeElementWithInverse
         and IsAssociativeElement
         and IsAdditivelyCommutativeElement
-        and IshomalgExternalObject );
+        and IsAttributeStoringRep );
 
 ####################################
 #
@@ -782,7 +782,9 @@ DeclareOperation( "MinusOneMutable",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminatesOfPolynomialRing"/>
 ##    <Returns>a list of &homalg; ring elements</Returns>
-##    <Description>The list of indeterminates of the &homalg; polynomial ring <A>R</A>.</Description>
+##    <Description>
+##      The list of indeterminates of the &homalg; polynomial ring <A>R</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 
@@ -790,7 +792,9 @@ DeclareOperation( "MinusOneMutable",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateCoordinatesOfRingOfDerivations"/>
 ##    <Returns>a list of &homalg; ring elements</Returns>
-##    <Description>The list of indeterminate coordinates of the &homalg; Weyl ring <A>R</A>.</Description>
+##    <Description>
+##      The list of indeterminate coordinates of the &homalg; Weyl ring <A>R</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -801,7 +805,9 @@ DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateDerivationsOfRingOfDerivations"/>
 ##    <Returns>a list of &homalg; ring elements</Returns>
-##    <Description>The list of indeterminate derivations of the &homalg; Weyl ring <A>R</A>.</Description>
+##    <Description>
+##      The list of indeterminate derivations of the &homalg; Weyl ring <A>R</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -812,7 +818,9 @@ DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateAntiCommutingVariablesOfExteriorRing"/>
 ##    <Returns>a list of &homalg; ring elements</Returns>
-##    <Description>The list of anti-commuting indeterminates of the &homalg; exterior ring <A>R</A>.</Description>
+##    <Description>
+##      The list of anti-commuting indeterminates of the &homalg; exterior ring <A>R</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -823,7 +831,9 @@ DeclareAttribute( "IndeterminateAntiCommutingVariablesOfExteriorRing",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminatesOfExteriorRing"/>
 ##    <Returns>a list of &homalg; ring elements</Returns>
-##    <Description>The list of all indeterminates (commuting and anti-commuting) of the &homalg; exterior ring <A>R</A>.</Description>
+##    <Description>
+##      The list of all indeterminates (commuting and anti-commuting) of the &homalg; exterior ring <A>R</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -834,22 +844,27 @@ DeclareAttribute( "IndeterminatesOfExteriorRing",
 ##  <ManSection>
 ##    <Attr Arg="R" Name="WeightsOfIndeterminates"/>
 ##    <Returns>a list or listlist of integers</Returns>
-##    <Description>The list of degrees of the indeterminates of the &homalg; ring <A>R</A>.</Description>
+##    <Description>
+##      The list of degrees of the indeterminates of the &homalg; ring <A>R</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-
+##
 DeclareAttribute( "WeightsOfIndeterminates",
         IsHomalgRing );
 
-##  <#GAPDoc Label="ExternallyStoredWeightsOfIndeterminates">
+##  <#GAPDoc Label="MatrixOfWeightsOfIndeterminates">
 ##  <ManSection>
-##    <Attr Arg="R" Name="ExternallyStoredWeightsOfIndeterminates"/>
-##    <Returns>an external &homalg; matrix</Returns>
-##    <Description>An external &homalg; matrix where the list (or listlist) of degrees of the indeterminates of the &homalg; ring <A>R</A> is stored.</Description>
+##    <Attr Arg="R" Name="MatrixOfWeightsOfIndeterminates"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A &homalg; matrix where the list (or listlist) of degrees of the indeterminates
+##      of the &homalg; ring <A>R</A> is stored.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-
-DeclareAttribute( "ExternallyStoredWeightsOfIndeterminates",
+##
+DeclareAttribute( "MatrixOfWeightsOfIndeterminates",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="CoefficientsRing">
@@ -1027,24 +1042,6 @@ DeclareOperation( "DisplayRing",
 DeclareOperation( "homalgPointer",
         [ IsHomalgRing ] );
 
-DeclareOperation( "homalgExternalCASystem",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "homalgExternalCASystemVersion",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "homalgStream",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "homalgExternalCASystemPID",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "homalgLastWarning",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "homalgNrOfWarnings",
-        [ IsHomalgRing ] );
-
 DeclareOperation( "homalgRingStatistics",
         [ IsHomalgRing ] );
 
@@ -1071,7 +1068,7 @@ DeclareGlobalFunction( "HomalgRingOfIntegers" );
 
 DeclareGlobalFunction( "HomalgFieldOfRationals" );
 
-DeclareGlobalFunction( "HomalgExternalRingElement" );
+DeclareGlobalFunction( "HomalgRingElement" );
 
 DeclareGlobalFunction( "StringToElementStringList" );
 

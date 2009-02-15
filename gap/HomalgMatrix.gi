@@ -14,12 +14,14 @@
 #
 ####################################
 
-# three new representations for the GAP-category IsHomalgMatrix:
+# a new representations for the GAP-category IsInternalMatrixHull:
 
 ##
 DeclareRepresentation( "IshomalgInternalMatrixHullRep",
         IsInternalMatrixHull,
         [ ] );
+
+# a new representations for the GAP-category IsHomalgMatrix:
 
 ##  <#GAPDoc Label="IsHomalgInternalMatrixRep">
 ##  <ManSection>
@@ -36,21 +38,6 @@ DeclareRepresentation( "IsHomalgInternalMatrixRep",
         IsHomalgMatrix,
         [ ] );
 
-##  <#GAPDoc Label="IsHomalgExternalMatrixRep">
-##  <ManSection>
-##    <Filt Type="Representation" Arg="A" Name="IsHomalgExternalMatrixRep"/>
-##    <Returns>true or false</Returns>
-##    <Description>
-##      The external representation of &homalg; matrices. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsHomalgExternalMatrixRep",
-        IsHomalgMatrix,
-        [ ] );
-
 ####################################
 #
 # families and types:
@@ -64,7 +51,7 @@ BindGlobal( "TheFamilyOfInternalMatrixHulls",
 BindGlobal( "TheFamilyOfHomalgMatrices",
         NewFamily( "TheFamilyOfHomalgMatrices" ) );
 
-# three new types:
+# two new types:
 BindGlobal( "TheTypeInternalMatrixHull",
         NewType( TheFamilyOfInternalMatrixHulls,
                 IshomalgInternalMatrixHullRep ) );
@@ -72,10 +59,6 @@ BindGlobal( "TheTypeInternalMatrixHull",
 BindGlobal( "TheTypeHomalgInternalMatrix",
         NewType( TheFamilyOfHomalgMatrices,
                 IsHomalgInternalMatrixRep ) );
-
-BindGlobal( "TheTypeHomalgExternalMatrix",
-        NewType( TheFamilyOfHomalgMatrices,
-                IsHomalgExternalMatrixRep ) );
 
 ####################################
 #
@@ -330,28 +313,6 @@ InstallMethod( SetEntryOfHomalgMatrix,
   function( M, r, c, a )
     
     SetEntryOfHomalgMatrix( M, r, c, a, HomalgRing( M ) );
-    
-end );
-
-##
-InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep ],
-        
-  function( M, r, c, s )
-    
-    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), HomalgRing( M ) );
-    
-end );
-
-##
-InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
-        
-  function( M, r, c, s, R )
-    
-    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), R );
     
 end );
 
@@ -913,8 +874,6 @@ InstallMethod( POW,
     
 end );
 
-
-
 ##
 InstallMethod( \*,
         "for homalg matrices",
@@ -1182,6 +1141,32 @@ InstallMethod( DiagonalEntries,
     
 end );
 
+##
+InstallMethod( SetIsMutableMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsBool ],
+        
+  function( M, b )
+    
+    if b = true then;
+        SetFilterObj( M, IsMutableMatrix );
+    else
+        ResetFilterObj( M, IsMutableMatrix );
+    fi;
+    
+end );
+
+##
+InstallMethod( HasIsMutableMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return IsMutableMatrix( M );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -1350,10 +1335,14 @@ InstallGlobalFunction( HomalgMatrix,
             
             return CallFuncList( ConvertHomalgMatrix, arg );
             
-        elif IsHomalgExternalRingRep( arg[nargs] ) and IsList( arg[1] ) then
-            if Length( arg[1] ) > 0 and not IsList( arg[1][1] )
-               and not ( nargs > 1 and IsInt( arg[2]) ) and not ( nargs > 2 and IsInt( arg[3] ) ) then ## CAUTION: some CAS only accept a list and not a listlist
-                M := List( arg[1], a -> [ a ] );
+        elif not IsHomalgInternalRingRep( arg[nargs] ) and		## the ring arg[nargs] is not internal,
+          ( ( IsList( arg[1] ) and ForAll( arg[1], IsRingElement ) ) or	## while arg[1] is either a list of ring elements,
+            IsMatrix( arg[1] ) ) then					## or a matrix of ring elements
+            
+            if Length( arg[1] ) > 0 and not IsList( arg[1][1] ) and
+               not ( nargs > 1 and IsInt( arg[2] ) ) and
+               not ( nargs > 2 and IsInt( arg[3] ) ) then	## CAUTION: some CAS only accept a list and not a listlist
+                M := List( arg[1], a -> [ a ] );	## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
             else
                 M := arg[1];
             fi;
@@ -1386,7 +1375,7 @@ InstallGlobalFunction( HomalgMatrix,
     elif IsHomalgInternalRingRep( R ) then
         type := TheTypeHomalgInternalMatrix;
     else
-        type := TheTypeHomalgExternalMatrix;
+        Error( "the homalg ring must contain the type of the matrices as the attribute TypeOfHomalgMatrix\n" );
     fi;
     
     matrix := rec( ring := R );
@@ -1401,7 +1390,8 @@ InstallGlobalFunction( HomalgMatrix,
         
     fi;
     
-    if IsList( M ) and Length( M ) > 0 and not IsList( M[1] ) then
+    if IsList( M ) and Length( M ) > 0 and not IsList( M[1] ) and
+       ForAll( M, IsRingElement ) then
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             M := ListToListList( M, arg[2], Length( M ) / arg[2] );
         else
@@ -1550,7 +1540,7 @@ InstallGlobalFunction( HomalgZeroMatrix,
     elif IsHomalgInternalRingRep( R ) then
         type := TheTypeHomalgInternalMatrix;
     else
-        type := TheTypeHomalgExternalMatrix;
+        Error( "the homalg ring must contain the type of the matrices as the attribute TypeOfHomalgMatrix\n" );
     fi;
     
     matrix := rec( ring := R );
@@ -1634,7 +1624,7 @@ InstallGlobalFunction( HomalgIdentityMatrix,
     elif IsHomalgInternalRingRep( R ) then
         type := TheTypeHomalgInternalMatrix;
     else
-        type := TheTypeHomalgExternalMatrix;
+        Error( "the homalg ring must contain the type of the matrices as the attribute TypeOfHomalgMatrix\n" );
     fi;
     
     matrix := rec( ring := R );
@@ -1713,7 +1703,7 @@ InstallGlobalFunction( HomalgInitialMatrix,
     elif IsHomalgInternalRingRep( R ) then
         type := TheTypeHomalgInternalMatrix;
     else
-        type := TheTypeHomalgExternalMatrix;
+        Error( "the homalg ring must contain the type of the matrices as the attribute TypeOfHomalgMatrix\n" );
     fi;
     
     matrix := rec( ring := R );
@@ -1736,14 +1726,12 @@ InstallGlobalFunction( HomalgInitialMatrix,
                 matrix, type,
                 NrRows, arg[1],
                 NrColumns, arg[2],
-                IsInitialMatrix, true,
-                IsMutableMatrix, true );
+                IsInitialMatrix, true );
     else
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                IsInitialMatrix, true,
-                IsMutableMatrix, true );
+                IsInitialMatrix, true );
         
         if nr_rows then
             SetNrRows( matrix, arg[1] );
@@ -1753,6 +1741,8 @@ InstallGlobalFunction( HomalgInitialMatrix,
             SetNrColumns( matrix, arg[2] );
         fi;
     fi;
+    
+    SetIsMutableMatrix( matrix, true );
     
     return matrix;
     
@@ -1815,7 +1805,7 @@ InstallGlobalFunction( HomalgInitialIdentityMatrix,
     elif IsHomalgInternalRingRep( R ) then
         type := TheTypeHomalgInternalMatrix;
     else
-        type := TheTypeHomalgExternalMatrix;
+        Error( "the homalg ring must contain the type of the matrices as the attribute TypeOfHomalgMatrix\n" );
     fi;
     
     matrix := rec( ring := R );
@@ -1826,15 +1816,15 @@ InstallGlobalFunction( HomalgInitialIdentityMatrix,
                 matrix, type,
                 NrRows, arg[1],
                 NrColumns, arg[1],
-                IsInitialIdentityMatrix, true,
-                IsMutableMatrix, true );
+                IsInitialIdentityMatrix, true );
     else
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                IsInitialIdentityMatrix, true,
-                IsMutableMatrix, true );
+                IsInitialIdentityMatrix, true );
     fi;
+    
+    SetIsMutableMatrix( matrix, true );
     
     return matrix;
     
@@ -1856,7 +1846,7 @@ InstallGlobalFunction( HomalgVoidMatrix,
     elif IsHomalgInternalRingRep( R ) then
         type := TheTypeHomalgInternalMatrix;
     else
-        type := TheTypeHomalgExternalMatrix;
+        Error( "the homalg ring must contain the type of the matrices as the attribute TypeOfHomalgMatrix\n" );
     fi;
     
     matrix := rec( ring := R );
@@ -2055,8 +2045,8 @@ end );
 
 ##  <#GAPDoc Label="\*:MatrixBaseChange">
 ##  <ManSection>
-##    <Oper Arg="mat, R" Name="\*" Label="copy a matrix over a different ring"/>
-##    <Oper Arg="R, mat" Name="\*"/>
+##    <Oper Arg="R, mat" Name="\*" Label="copy a matrix over a different ring"/>
+##    <Oper Arg="mat, R" Name="\*"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      An immutable evaluated &homalg; matrix over the &homalg; ring <A>R</A> having the
@@ -2068,7 +2058,7 @@ end );
 ##  <A homalg internal ring>
 ##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
-##  gap> d2 := d * Z4; ## or d2 := Z4 * d;
+##  gap> d2 := Z4 * d ; ## or d2 := d * Z4;
 ##  <A homalg internal 3 by 3 matrix>
 ##  gap> Display( d2 );
 ##  [ [  2,  0,  0 ],
@@ -2091,9 +2081,9 @@ end );
 ##
 InstallMethod( \*,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgRing ],
+        [ IsHomalgRing, IsHomalgMatrix ],
         
-  function( m, R )
+  function( R, m )
     local RP, mat;
     
     RP := homalgTable( R );
@@ -2105,22 +2095,6 @@ InstallMethod( \*,
         if not IsIdenticalObj( m, mat ) then
             return mat;
         fi;
-        
-    elif IsHomalgExternalRingRep( HomalgRing( m ) ) and IsHomalgExternalRingRep( R ) and
-      IsIdenticalObj( homalgStream( HomalgRing( m ) ), homalgStream( R ) ) and
-      IsBound( RP!.CopyMatrix ) then	## make a "copy" over a different ring
-        
-        Eval( m );	## enforce evaluation
-        
-        mat := HomalgMatrix( R );
-        
-        ## this is quicker and safer than calling the
-        ## constructor HomalgMatrix with all arguments
-        SetEval( mat, RP!.CopyMatrix( m, R ) );
-        
-        BlindlyCopyMatrixProperties( m, mat );
-        
-        return mat;
         
     fi;
     
@@ -2136,11 +2110,12 @@ InstallMethod( \*,
     
 end );
 
+##
 InstallMethod( \*,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsHomalgInternalMatrixRep, IsHomalgRing and IsHomalgInternalRingRep ],
+        [ IsHomalgInternalRingRep, IsHomalgInternalMatrixRep ],
         
-  function( m, R )
+  function( R, m )
     
     return HomalgMatrix( m, R );
     
@@ -2149,9 +2124,9 @@ end );
 ##
 InstallMethod( \*,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsZero, IsHomalgRing ],
+        [ IsHomalgRing, IsHomalgMatrix and IsZero ], 10001,
         
-  function( m, R )
+  function( R, m )
     
     return HomalgZeroMatrix( NrRows( m ), NrColumns( m ), R );
     
@@ -2160,9 +2135,9 @@ end );
 ##
 InstallMethod( \*,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgRing ],
+        [ IsHomalgRing, IsHomalgMatrix and IsIdentityMatrix ], 10001,
         
-  function( m, R )
+  function( R, m )
     
     return HomalgIdentityMatrix( NrRows( m ), R );
     
@@ -2171,11 +2146,11 @@ end );
 ##
 InstallMethod( \*,
         "for homalg matrices",
-        [ IsHomalgRing, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgRing ],
         
-  function( R, M )
+  function( M, R )
     
-    return M * R;
+    return R * M;
     
 end );
 
@@ -2310,8 +2285,6 @@ InstallMethod( ViewObj,
         Print( R!.description, " " );
     elif IsHomalgInternalMatrixRep( o ) then
         Print( "internal " );
-    elif IsHomalgExternalMatrixRep( o ) then
-        Print( "external " );
     fi;
     
     if HasNrRows( o ) then
@@ -2354,8 +2327,6 @@ InstallMethod( ViewObj,
         Print( R!.description, " " );
     elif IsHomalgInternalMatrixRep( o ) then
         Print( "internal " );
-    else
-        Print( "external " );
     fi;
     
     if HasNrRows( o ) then
@@ -2398,8 +2369,6 @@ InstallMethod( ViewObj,
         Print( R!.description, " " );
     elif IsHomalgInternalMatrixRep( o ) then
         Print( "internal " );
-    else
-        Print( "external " );
     fi;
     
     if HasNrRows( o ) then
@@ -2442,8 +2411,6 @@ InstallMethod( ViewObj,
         Print( R!.description, " " );
     elif IsHomalgInternalMatrixRep( o ) then
         Print( "internal " );
-    else
-        Print( "external " );
     fi;
     
     if HasNrRows( o ) then

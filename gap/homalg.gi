@@ -178,7 +178,7 @@ InstallGlobalFunction( AddLeftRightLogicalImplicationsForHomalg,
                     [ IsCommutative, "and", right_property,
                       "trivially imply", left_property ],
                     
-		    ## we also need these two for their contra positions to get installed
+                    ## we also need these two for their contra positions to get installed
                     [ IsCommutative, "and", left_property,
                       "trivially imply", property ],
                     

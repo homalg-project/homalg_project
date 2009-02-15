@@ -1328,7 +1328,7 @@ InstallMethod( ElementaryDivisors,
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
-            e := List( e, a -> HomalgExternalRingElement( a, R ) );
+            e := List( e, a -> HomalgRingElement( a, R ) );
         fi;
         
         ## since the computer algebra systems have different
@@ -2822,10 +2822,10 @@ InstallMethod( Display,
     
     elements := Filtered( elements, x -> not IsZero( x ) );
     
-    if IsHomalgExternalRingRep( R ) then
-        get_string := Name;
-    else
+    if IsHomalgInternalRingRep( R ) then
         get_string := String;
+    else
+        get_string := Name;
     fi;
     
     if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
@@ -2892,10 +2892,10 @@ InstallMethod( Display,
     
     diag := Filtered( diag, x -> not IsOne( x ) and not IsZero( x ) );
     
-    if IsHomalgExternalRingRep( R ) then
-        get_string := Name;
-    else
+    if IsHomalgInternalRingRep( R ) then
         get_string := String;
+    else
+        get_string := Name;
     fi;
     
     if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then

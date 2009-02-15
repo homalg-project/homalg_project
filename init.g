@@ -10,9 +10,6 @@
 
 ReadPackage( "homalg", "gap/homalg.gd" );
 
-## pointers on external objects
-ReadPackage( "homalg", "gap/homalgExternalObject.gd" );
-
 ## rings
 ReadPackage( "homalg", "gap/homalgTable.gd" );
 ReadPackage( "homalg", "gap/HomalgRing.gd" );

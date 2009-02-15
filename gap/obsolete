@@ -1361,3 +1361,28 @@ proc NonTrivialDegreePerColumnWithRowWeights (matrix M, list row_weights)\n\
 DeclareProperty( "IsReducedSetOfRelations",
         IsHomalgRelations );
 
+## from HomalgRing.gi
+
+##
+InstallMethod( ViewObj,
+        "for homalg external rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( o )
+    
+    Print( "<A homalg external ring residing in the CAS " );
+    Print( homalgExternalCASystem( o ), ">" );
+    
+end );
+
+## from Tools.gi
+
+## --> IsZero
+
+    else
+        return homalgPointer( r ) = homalgPointer( Zero( R ) ); ## FIXME
+
+## --> IsOne
+
+    else
+        return homalgPointer( r ) = homalgPointer( One( R ) ); ## FIXME

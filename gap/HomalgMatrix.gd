@@ -44,7 +44,7 @@ DeclareCategory( "IsHomalgMatrix",
 
 ##  <#GAPDoc Label="IsMutableMatrix">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsMutableMatrix"/>
+##    <Filt Arg="A" Name="IsMutableMatrix"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
@@ -52,8 +52,14 @@ DeclareCategory( "IsHomalgMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsMutableMatrix",
+DeclareFilter( "IsMutableMatrix",
         IsHomalgMatrix );
+
+DeclareOperation( "SetIsMutableMatrix",
+        [ IsHomalgMatrix, IsBool ] );
+
+DeclareOperation( "HasIsMutableMatrix",
+        [ IsHomalgMatrix ] );
 
 ##  <#GAPDoc Label="IsInitialMatrix">
 ##  <ManSection>
@@ -615,10 +621,10 @@ DeclareOperation( "CreateHomalgSparseMatrixFromString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 
 DeclareOperation( "*",
-        [ IsHomalgMatrix, IsHomalgRing ] );
+        [ IsHomalgRing, IsHomalgMatrix ] );
 
 DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgMatrix ] );
+        [ IsHomalgMatrix, IsHomalgRing ] );
 
 # basic operations:
 
@@ -715,21 +721,6 @@ DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "EntriesOfHomalgMatrix",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "homalgPointer",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "homalgExternalCASystem",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "homalgExternalCASystemVersion",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "homalgStream",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "homalgExternalCASystemPID",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "AreComparableMatrices",
