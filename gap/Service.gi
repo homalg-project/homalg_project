@@ -234,7 +234,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, B, nz;
+    local R, RP, t, nr, MI, B, nz;
     
     if IsBound(M!.BasisOfRowModule) then
         return M!.BasisOfRowModule;
@@ -246,7 +246,9 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "BasisOfRowModule", NrRows( M ), " x ", NrColumns( M ) );
+    nr := NrColumns( M );
+    
+    ColoredInfoForService( "busy", "BasisOfRowModule", NrRows( M ), " x ", nr );
     
     if IsBound(RP!.BasisOfRowModule) then
         
@@ -256,6 +258,8 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
             SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
         
+        SetNrColumns( B, nr );
+        
         SetIsBasisOfRowsMatrix( B, true );
         
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
@@ -263,16 +267,24 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         IncreaseRingStatistics( R, "BasisOfRowModule" );
         
         M!.BasisOfRowModule := B;
-	
+        
         return B;
         
     elif IsBound(RP!.BasisOfColumnModule) then
         
-        B := RP!.BasisOfColumnModule( Involution( M ) );
+        MI := Involution( M );
+        
+        B := RP!.BasisOfColumnModule( MI );
         
         if HasColumnRankOfMatrix( B ) then
             SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
+        
+        SetNrRows( B, nr );
+        
+        SetIsBasisOfColumnsMatrix( B, true );
+        
+        MI!.BasisOfColumnModule := B;
         
         B := Involution( B );
         
@@ -318,7 +330,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, B, nz;
+    local R, RP, t, nr, MI, B, nz;
     
     if IsBound(M!.BasisOfColumnModule) then
         return M!.BasisOfColumnModule;
@@ -330,7 +342,9 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "BasisOfColumnModule", NrRows( M ), " x ", NrColumns( M ) );
+    nr := NrRows( M );
+    
+    ColoredInfoForService( "busy", "BasisOfColumnModule", nr, " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfColumnModule) then
         
@@ -339,6 +353,8 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         if HasColumnRankOfMatrix( B ) then
             SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
+        
+        SetNrRows( B, nr );
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -352,11 +368,19 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
     elif IsBound(RP!.BasisOfRowModule) then
         
-        B := RP!.BasisOfRowModule( Involution( M ) );
+        MI := Involution( M );
+        
+        B := RP!.BasisOfRowModule( MI );
         
         if HasRowRankOfMatrix( B ) then
             SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
+        
+        SetNrColumns( B, nr );
+        
+        SetIsBasisOfRowsMatrix( B, true );
+        
+        MI!.BasisOfRowModule := B;
         
         B := Involution( B );
         
@@ -410,11 +434,16 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "DecideZeroRows", "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
+    l := NrRows( A );
+    m := NrColumns( A );
+    
+    ColoredInfoForService( "busy", "DecideZeroRows", "( ", l, " + ", NrRows( B ), " ) x ", m );
     
     if IsBound(RP!.DecideZeroRows) then
         
         C := RP!.DecideZeroRows( A, B );
+        
+        SetNrRows( C, l ); SetNrColumns( C, m );
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
@@ -424,7 +453,11 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
     elif IsBound(RP!.DecideZeroColumns) then
         
-        C := Involution( RP!.DecideZeroColumns( Involution( A ), Involution( B ) ) );
+        C := RP!.DecideZeroColumns( Involution( A ), Involution( B ) );
+        
+        SetNrRows( C, m ); SetNrColumns( C, l );
+        
+        C := Involution( C );
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
@@ -435,9 +468,6 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    l := NrRows( A );
-    m := NrColumns( A );
     
     n := NrRows( B );
     
@@ -477,11 +507,16 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "DecideZeroColumns", NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )" );
+    l := NrColumns( A );
+    m := NrRows( A );
+    
+    ColoredInfoForService( "busy", "DecideZeroColumns", m, " x ( ", l, " + ", NrColumns( B ), " )" );
     
     if IsBound(RP!.DecideZeroColumns) then
         
         C := RP!.DecideZeroColumns( A, B );
+        
+        SetNrRows( C, m ); SetNrColumns( C, l );
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
@@ -491,7 +526,11 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
     elif IsBound(RP!.DecideZeroRows) then
         
-        C := Involution( RP!.DecideZeroRows( Involution( A ), Involution( B ) ) );
+        C := RP!.DecideZeroRows( Involution( A ), Involution( B ) );
+        
+        SetNrRows( C, l ); SetNrColumns( C, m );
+        
+        C := Involution( C );
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
@@ -502,9 +541,6 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    l := NrColumns( A );
-    m := NrRows( A );
     
     n := NrColumns( B );
     
@@ -902,7 +938,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, t, TI, B, TT, nz;
+    local R, RP, t, nr, TI, MI, B, TT, nz;
     
     R := HomalgRing( M );
     
@@ -910,19 +946,31 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", NrColumns( M ) );
+    nr := NrColumns( M );
+    
+    ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", nr );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
         
-        B := RP!.BasisOfRowsCoeff( M, T );
+        B := RP!.BasisOfRowsCoeff( M, T ); ResetFilterObj( T, IsVoidMatrix );
         
         if HasRowRankOfMatrix( B ) then
             SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
         
-        ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
+        SetNrColumns( B, nr );
+        
+        SetIsBasisOfRowsMatrix( B, true );
+        
+        ColoredInfoForService( t, "BasisOfRowsCoeff", nr );
         
         IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
+        
+        M!.BasisOfRowModule := B;
+        
+        nr := NrRows( B );
+        
+        SetNrRows( T, nr );
         
         return B;
         
@@ -930,19 +978,37 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         TI := HomalgVoidMatrix( R );
         
-        B := RP!.BasisOfColumnsCoeff( Involution( M ), TI );
+        MI := Involution( M );
+        
+        B := RP!.BasisOfColumnsCoeff( MI, TI ); ResetFilterObj( TI, IsVoidMatrix );
         
         if HasColumnRankOfMatrix( B ) then
             SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
         
+        SetNrRows( B, nr );
+        
+        SetIsBasisOfColumnsMatrix( B, true );
+        
+        MI!.BasisOfColumnModule := B;
+        
         B := Involution( B );
+        
+        SetIsBasisOfRowsMatrix( B, true );
+        
+        ColoredInfoForService( t, "BasisOfRowsCoeff", nr );
+        
+        IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
+        
+        M!.BasisOfRowModule := B;
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
-        ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
+        nr := NrRows( B );
         
-        IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
+        SetNrRows( T, nr );
+        
+        SetNrColumns( TI, nr );
         
         return B;
         
@@ -979,7 +1045,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
-    local R, RP, t, TI, B, TT, nz;
+    local R, RP, t, nr, TI, MI, B, TT, nz;
     
     R := HomalgRing( M );
     
@@ -987,19 +1053,31 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", NrRows( M ), " x ", NrColumns( M ) );
+    nr := NrRows( M );
+    
+    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", nr, " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
         
-        B := RP!.BasisOfColumnsCoeff( M, T );
+        B := RP!.BasisOfColumnsCoeff( M, T ); ResetFilterObj( T, IsVoidMatrix );
         
         if HasColumnRankOfMatrix( B ) then
             SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
         
-        ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
+        SetNrRows( B, nr );
+        
+        SetIsBasisOfColumnsMatrix( B, true );
+        
+        ColoredInfoForService( t, "BasisOfColumnsCoeff", nr );
         
         IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
+        
+        M!.BasisOfColumnModule := B;
+        
+        nr := NrColumns( B );
+        
+        SetNrColumns( T, nr );
         
         return B;
         
@@ -1007,19 +1085,37 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         TI := HomalgVoidMatrix( R );
         
-        B := RP!.BasisOfRowsCoeff( Involution( M ), TI );
+        MI := Involution( M );
+        
+        B := RP!.BasisOfRowsCoeff( MI, TI ); ResetFilterObj( TI, IsVoidMatrix );
         
         if HasRowRankOfMatrix( B ) then
             SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
         
+        SetNrColumns( B, nr );
+        
+        SetIsBasisOfRowsMatrix( B, true );
+        
+        MI!.BasisOfRowModule := B;
+        
         B := Involution( B );
+        
+        SetIsBasisOfColumnsMatrix( B, true );
+        
+        ColoredInfoForService( t, "BasisOfColumnsCoeff", nr );
+        
+        IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
+        
+        M!.BasisOfColumnModule := B;
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
-        ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
+        nr := NrColumns( B );
         
-        IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
+        SetNrColumns( T, nr );
+        
+        SetNrRows( TI, nr );
         
         return B;
         
@@ -1058,6 +1154,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
   function( A, B, T )
     local R, RP, t, TI, l, m, n, id, zz, M, TT, MM;
     
+    SetNrRows( T, NrRows( A ) );
+    SetNrColumns( T, NrRows( B ) );
+    
     R := HomalgRing( B );
     
     RP := homalgTable( R );
@@ -1068,7 +1167,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     if IsBound(RP!.DecideZeroRowsEffectively) then
         
-        M := RP!.DecideZeroRowsEffectively( A, B, T );
+        M := RP!.DecideZeroRowsEffectively( A, B, T ); ResetFilterObj( T, IsVoidMatrix );
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -1082,7 +1181,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         M := Involution( RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI ) );
         
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -1139,6 +1238,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
   function( A, B, T )
     local R, RP, t, TI, l, m, n, id, zz, M, TT;
     
+    SetNrColumns( T, NrColumns( A ) );
+    SetNrRows( T, NrColumns( B ) );
+    
     R := HomalgRing( B );
     
     RP := homalgTable( R );
@@ -1149,7 +1251,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     if IsBound(RP!.DecideZeroColumnsEffectively) then
         
-        M := RP!.DecideZeroColumnsEffectively( A, B, T );
+        M := RP!.DecideZeroColumnsEffectively( A, B, T ); ResetFilterObj( T, IsVoidMatrix );
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
@@ -1163,7 +1265,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         M := Involution( RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI ) );
         
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
