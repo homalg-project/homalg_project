@@ -306,10 +306,12 @@ InstallImmediateMethod( IsDiagonalMatrix,
         IsHomalgMatrix and HasEvalUnionOfRows, 0,
         
   function( M )
-    local A, B;
+    local e, A, B;
     
-    A := EvalUnionOfRows( M )[1];
-    B := EvalUnionOfRows( M )[2];
+    e := EvalUnionOfRows( M );
+    
+    A := e[1];
+    B := e[2];
     
     if HasIsDiagonalMatrix( A ) and IsDiagonalMatrix( A )
        and HasIsZero( B ) and IsZero( B ) then
@@ -325,10 +327,12 @@ InstallImmediateMethod( IsDiagonalMatrix,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
-    local A, B;
+    local e, A, B;
     
-    A := EvalUnionOfColumns( M )[1];
-    B := EvalUnionOfColumns( M )[2];
+    e := EvalUnionOfColumns( M );
+    
+    A := e[1];
+    B := e[2];
     
     if HasIsDiagonalMatrix( A ) and IsDiagonalMatrix( A )
        and HasIsZero( B ) and IsZero( B ) then
@@ -410,9 +414,12 @@ InstallImmediateMethod( ZeroRows,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasZeroColumns( EvalInvolution( M ) ) then
-        return ZeroColumns( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasZeroColumns( MI ) then
+        return ZeroColumns( MI );
     fi;
     
     TryNextMethod( );
@@ -444,9 +451,12 @@ InstallImmediateMethod( ZeroColumns,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasZeroRows( EvalInvolution( M ) ) then
-        return ZeroRows( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasZeroRows( MI ) then
+        return ZeroRows( MI );
     fi;
     
     TryNextMethod( );
@@ -538,7 +548,7 @@ InstallMethod( RowRankOfMatrix,
         if HasRowRankOfMatrix( B ) then
             return RowRankOfMatrix( B );
         fi;
-	
+        
     else
         
         BasisOfRowModule( M );
@@ -546,7 +556,7 @@ InstallMethod( RowRankOfMatrix,
         if HasRowRankOfMatrix( M ) then
             return RowRankOfMatrix( M );
         fi;
-	
+        
     fi;
     
     TryNextMethod( );
@@ -592,7 +602,7 @@ InstallMethod( ColumnRankOfMatrix,
         if HasRowRankOfMatrix( B ) then
             return RowRankOfMatrix( B );
         fi;
-	
+        
     else
         
         BasisOfColumnModule( M );
@@ -805,7 +815,7 @@ InstallMethod( UnionOfRows,
     
 end );
 
-##
+## without this method the above two methods will be called in the wrong context!!!
 InstallMethod( UnionOfRows,
         "of two homalg matrices",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
@@ -867,7 +877,7 @@ InstallMethod( UnionOfColumns,
     
 end );
 
-##
+## without this method the above two methods will be called in the wrong context!!!
 InstallMethod( UnionOfColumns,
         "of two homalg matrices",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
