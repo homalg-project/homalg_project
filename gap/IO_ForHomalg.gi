@@ -28,6 +28,7 @@ InstallValue( HOMALG_IO,
             DoNotDeleteTemporaryFiles := false,
             ListOfAlternativeDirectoryForTemporaryFiles := [ "/dev/shm/", "/var/tmp/", "/tmp/" ],
             FileNameCounter := 1,
+            DeletePeriod := 500,
             PID := IO_getpid(),
             save_CAS_commands_to_file := false,
             Pictograms := rec(
@@ -57,7 +58,7 @@ InstallValue( HOMALG_IO,
                 
                 ## mandatory ring operations:
                 homalgSetName				:= "\"a\"",	## get the name of an element (important if the CAS pretty-prints ring elements, we need names that can be used as input!)
-									## (install a method instead of a homalgTable entry)
+                							## (install a method instead of a homalgTable entry)
                 IsZero					:= "a=0",	## a = 0 ?
                 IsOne					:= "a=1",	## a = 1 ?
                 Minus					:= "a-b",	## substract two ring elements (needed by SimplerEquivalentMatrix in case CopyRow/ColumnToIdentityMatrix are not defined)
@@ -182,7 +183,7 @@ InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
         fs := IO_File( filename, "w" );
         
         if fs <> fail then
-	    IO_Close( fs );
+            IO_Close( fs );
             return directory;
         fi;
         

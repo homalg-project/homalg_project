@@ -23,7 +23,7 @@ InstallGlobalFunction( TerminateCAS,
     nargs := Length( arg );
     
     if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
-	
+        
         container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
         
         weak_pointers := container!.weak_pointers;
@@ -372,6 +372,11 @@ InstallGlobalFunction( LaunchCAS,
         s.color_display := s.display_color;
     fi;
     
+    if IsBound( HOMALG_IO.DeletePeriod ) and
+       ( IsPosInt( HOMALG_IO.DeletePeriod ) or IsBool( HOMALG_IO.DeletePeriod ) ) then
+        s.DeletePeriod := HOMALG_IO.DeletePeriod;
+    fi;
+    
     s.HomalgExternalCallCounter := 0;
     s.HomalgExternalVariableCounter := 0;
     s.HomalgExternalCommandCounter := 0;
@@ -392,7 +397,7 @@ InstallGlobalFunction( LaunchCAS,
         fi;
         if s.cas = "maple" then
             #Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );	## this line is commented since we must start Maple using the -q option, which unfortunately also suppresses the Maple banner
-	    Print( "\
+            Print( "\
     |\\^/|     Launching Maple\n\
 ._|\\|   |/|_. Copyright (c) Maplesoft, a division of Waterloo Maple Inc.\n\
  \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\

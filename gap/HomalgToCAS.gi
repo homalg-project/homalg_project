@@ -183,14 +183,24 @@ end );
 ##
 InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush for performance reasons
   function( stream, ext_obj )
-    local container, weak_pointers, l, var, active_ring_creation_number,
-          ring_creation_numbers, deleted, p;
+    local container, weak_pointers, l, DeletePeriod, var,
+          active_ring_creation_number, ring_creation_numbers, deleted;
     
     container := stream.homalgExternalObjectsPointingToVariables;
     
     weak_pointers := container!.weak_pointers;
     
     l := container!.counter;
+    
+    if IsBound( stream.DeletePeriod ) then
+        if IsBool( stream.DeletePeriod ) then
+            DeletePeriod := stream.DeletePeriod;
+        else
+            DeletePeriod := l mod stream.DeletePeriod = 0;
+        fi;
+    else
+        DeletePeriod := true;
+    fi;
     
     ## exclude already deleted external objects:
     var := Difference( [ 1 .. l ], container!.deleted );
@@ -201,30 +211,36 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
         
         ring_creation_numbers := container!.ring_creation_numbers;
         
-        ## this is important for computer algebra systems like Singular,
-        ## which have the "feature" that a variable is stored in the ring which was active
-        ## when the variable was assigned...
-        ## one can often map all existing variables to the active ring,
-        ## but this results in various disasters:
-        ## non-zero entries of a matrix over a ring S (e.g. polynomial ring)
-        ## often become zero when the matrix is mapped to another ring (e.g. exterior ring),
-        ## and of course remain zero when the matrix is mapped back to the original ring S.
-        
-        var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) and IsBound( ring_creation_numbers[i] ) and ring_creation_numbers[i] = active_ring_creation_number );
-        
-        ## free the entries corresponding to external objects about to be deleted
-        Perform( var, function( i ) Unbind( ring_creation_numbers[i] ); end );
-        
         ## set the active ring for the new external object
         ring_creation_numbers[l + 1] := active_ring_creation_number;
         
+        if DeletePeriod then
+            
+            ## this is important for computer algebra systems like Singular,
+            ## which have the "feature" that a variable is stored in the ring which was active
+            ## when the variable was assigned...
+            ## one can often map all existing variables to the active ring,
+            ## but this results in various disasters:
+            ## non-zero entries of a matrix over a ring S (e.g. polynomial ring)
+            ## often become zero when the matrix is mapped to another ring (e.g. exterior ring),
+            ## and of course remain zero when the matrix is mapped back to the original ring S.
+            
+            var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) and IsBound( ring_creation_numbers[i] ) and ring_creation_numbers[i] = active_ring_creation_number );
+            
+            ## free the entries corresponding to external objects about to be deleted
+            Perform( var, function( i ) Unbind( ring_creation_numbers[i] ); end );
+            
+        fi;
+        
     else
         
-        var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        if DeletePeriod then
+            
+            var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) );
+            
+        fi;
         
     fi;
-    
-    deleted := Union2( container!.deleted, var );
     
     l := l + 1;
     
@@ -236,25 +252,29 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
     
     SetElmWPObj( weak_pointers, l, ext_obj );
     
-    l := Length( var );
-    
-    if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
+    if DeletePeriod then
         
-        stream.multiple_delete( List( var, v -> Concatenation( stream.variable_name, String( v ) ) ), stream );
+        l := Length( var );
         
-        container!.deleted := deleted;
+        deleted := Union2( container!.deleted, var );
         
-    elif IsBound( stream.delete ) and l > 0 then
+        if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
+            
+            stream.multiple_delete( List( var, v -> Concatenation( stream.variable_name, String( v ) ) ), stream );
+            
+            container!.deleted := deleted;
+            
+        elif IsBound( stream.delete ) and l > 0 then
+            
+            Perform( var, function( p ) stream.delete( Concatenation( stream.variable_name, String( p ) ), stream ); end );
+            
+            container!.deleted := deleted;
+            
+        fi;
         
-        for p in var do
-            stream.delete( Concatenation( stream.variable_name, String( p ) ), stream );
-        od;
-        
-        container!.deleted := deleted;
+        ## never ever call the internal or the external garbage collector in this procedure
         
     fi;
-    
-    ## never ever call the internal or the external garbage collector in this procedure
     
 end );
 
