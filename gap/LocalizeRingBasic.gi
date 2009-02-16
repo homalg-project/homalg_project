@@ -176,7 +176,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        TT := UnionOfRows( TT, S );
                        
+                       A2 := HomalgRingElement( One( GlobalR ) , u , R ) * A2;
+                       
                        N := UnionOfRows( N, A2 );
+                       
+                       Assert( 5, IsZero(S*B+HomalgLocalMatrix(CertainColumns(ClearDenomMatrix,[1]),R)-A2) );
                        
                    od;
                    
@@ -238,7 +242,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        TT := UnionOfColumns( TT, S );
                        
+                       A2 := HomalgRingElement( One( GlobalR ) , u , R ) * A2;
+                       
                        N := UnionOfColumns( N, A2 );
+                       
+                       Assert( 5, IsZero(B*S+HomalgLocalMatrix(CertainColumns(ClearDenomMatrix,[1]),R)-A2) );
                        
                    od;
                    
