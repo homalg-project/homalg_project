@@ -37,9 +37,12 @@ InstallImmediateMethod( IsEmptyMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsEmptyMatrix( PreEval( M ) ) then
-        return IsEmptyMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsEmptyMatrix( e ) then
+        return IsEmptyMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -51,9 +54,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsZero( PreEval( M ) ) then
-        return IsZero( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsZero( e ) then
+        return IsZero( e );
     fi;
     
     TryNextMethod( );
@@ -65,9 +71,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsZero( EvalInvolution( M ) ) then
-        return IsZero( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsZero( MI ) then
+        return IsZero( MI );
     fi;
     
     TryNextMethod( );
@@ -79,9 +88,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalLeftInverse, 0,
         
   function( M )
+    local MI;
     
-    if HasIsZero( EvalLeftInverse( M ) ) then
-        return IsZero( EvalLeftInverse( M ) );
+    MI := EvalLeftInverse( M );
+    
+    if HasIsZero( MI ) then
+        return IsZero( MI );
     fi;
     
     TryNextMethod( );
@@ -93,9 +105,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalRightInverse, 0,
         
   function( M )
+    local MI;
     
-    if HasIsZero( EvalRightInverse( M ) ) then
-        return IsZero( EvalRightInverse( M ) );
+    MI := EvalRightInverse( M );
+    
+    if HasIsZero( MI ) then
+        return IsZero( MI );
     fi;
     
     TryNextMethod( );
@@ -107,9 +122,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalInverse, 0,
         
   function( M )
+    local MI;
     
-    if HasIsZero( EvalInverse( M ) ) then
-        return IsZero( EvalInverse( M ) );
+    MI := EvalInverse( M );
+    
+    if HasIsZero( MI ) then
+        return IsZero( MI );
     fi;
     
     TryNextMethod( );
@@ -121,8 +139,11 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
+    local e;
     
-    if HasIsZero( EvalCertainRows( M )[1] ) and IsZero( EvalCertainRows( M )[1] ) then
+    e := EvalCertainRows( M )[1];
+    
+    if HasIsZero( e ) and IsZero( e ) then
         return true;
     fi;
     
@@ -135,8 +156,11 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalCertainColumns, 0,
         
   function( M )
+    local e;
     
-    if HasIsZero( EvalCertainColumns( M )[1] ) and IsZero( EvalCertainColumns( M )[1] ) then
+    e := EvalCertainColumns( M )[1];
+    
+    if HasIsZero( e ) and IsZero( e ) then
         return true;
     fi;
     
@@ -149,9 +173,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalUnionOfRows, 0,
         
   function( M )
+    local e;
     
-    if HasIsZero( EvalUnionOfRows( M )[1] ) and IsZero( EvalUnionOfRows( M )[1] )
-       and HasIsZero( EvalUnionOfRows( M )[2] ) and IsZero( EvalUnionOfRows( M )[2] ) then
+    e := EvalUnionOfRows( M );
+    
+    if HasIsZero( e[1] ) and IsZero( e[1] ) and
+       HasIsZero( e[2] ) and IsZero( e[2] ) then
         return true;
     fi;
     
@@ -164,9 +191,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
+    local e;
     
-    if HasIsZero( EvalUnionOfColumns( M )[1] ) and IsZero( EvalUnionOfColumns( M )[1] )
-       and HasIsZero( EvalUnionOfColumns( M )[2] ) and IsZero( EvalUnionOfColumns( M )[2] ) then
+    e := EvalUnionOfColumns( M );
+    
+    if HasIsZero( e[1] ) and IsZero( e[1] ) and
+       HasIsZero( e[2] ) and IsZero( e[2] ) then
         return true;
     fi;
     
@@ -192,9 +222,12 @@ InstallImmediateMethod( IsIdentityMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsIdentityMatrix( PreEval( M ) ) then
-        return IsIdentityMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsIdentityMatrix( e ) then
+        return IsIdentityMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -216,9 +249,12 @@ InstallImmediateMethod( IsPermutationMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsPermutationMatrix( PreEval( M ) ) then
-        return IsPermutationMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsPermutationMatrix( e ) then
+        return IsPermutationMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -230,9 +266,12 @@ InstallImmediateMethod( IsSubidentityMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsSubidentityMatrix( PreEval( M ) ) then
-        return IsSubidentityMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsSubidentityMatrix( e ) then
+        return IsSubidentityMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -246,8 +285,10 @@ InstallImmediateMethod( IsSubidentityMatrix,
   function( M )
     local mat, plist, pos, pos_non_zero;
     
-    mat := EvalCertainRows( M )[1];
-    plist := EvalCertainRows( M )[2];
+    mat := EvalCertainRows( M );
+    
+    plist := mat[2];
+    mat := mat[1];
     
     if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
         
@@ -292,8 +333,10 @@ InstallImmediateMethod( IsSubidentityMatrix,
   function( M )
     local mat, plist, pos, plist_non_zero;
     
-    mat := EvalCertainColumns( M )[1];
-    plist := EvalCertainColumns( M )[2];
+    mat := EvalCertainColumns( M );
+    
+    plist := mat[2];
+    mat := mat[1];
     
     if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
         
@@ -337,9 +380,12 @@ InstallImmediateMethod( IsRightInvertibleMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsRightInvertibleMatrix( PreEval( M ) ) then
-        return IsRightInvertibleMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsRightInvertibleMatrix( e ) then
+        return IsRightInvertibleMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -351,9 +397,12 @@ InstallImmediateMethod( IsRightInvertibleMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsLeftInvertibleMatrix( EvalInvolution( M ) ) then
-        return IsLeftInvertibleMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsLeftInvertibleMatrix( MI ) then
+        return IsLeftInvertibleMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -383,9 +432,12 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsLeftInvertibleMatrix( PreEval( M ) ) then
-        return IsLeftInvertibleMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsLeftInvertibleMatrix( e ) then
+        return IsLeftInvertibleMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -397,9 +449,12 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsRightInvertibleMatrix( EvalInvolution( M ) ) then
-        return IsRightInvertibleMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsRightInvertibleMatrix( MI ) then
+        return IsRightInvertibleMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -429,9 +484,12 @@ InstallImmediateMethod( IsLeftRegularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsLeftRegularMatrix( PreEval( M ) ) then
-        return IsLeftRegularMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsLeftRegularMatrix( e ) then
+        return IsLeftRegularMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -443,9 +501,12 @@ InstallImmediateMethod( IsLeftRegularMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsRightRegularMatrix( EvalInvolution( M ) ) then
-        return IsRightRegularMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsRightRegularMatrix( MI ) then
+        return IsRightRegularMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -457,9 +518,12 @@ InstallImmediateMethod( IsRightRegularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsRightRegularMatrix( PreEval( M ) ) then
-        return IsRightRegularMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsRightRegularMatrix( e ) then
+        return IsRightRegularMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -471,9 +535,12 @@ InstallImmediateMethod( IsRightRegularMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsLeftRegularMatrix( EvalInvolution( M ) ) then
-        return IsLeftRegularMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsLeftRegularMatrix( MI ) then
+        return IsLeftRegularMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -485,9 +552,12 @@ InstallImmediateMethod( IsUpperTriangularMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsLowerTriangularMatrix( EvalInvolution( M ) ) then
-        return IsLowerTriangularMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsLowerTriangularMatrix( MI ) then
+        return IsLowerTriangularMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -499,13 +569,15 @@ InstallImmediateMethod( IsUpperTriangularMatrix,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
-    local C;
+    local C, plist;
     
     C := EvalCertainRows( M );
     
-    if HasIsUpperTriangularMatrix( C[1] ) and IsUpperTriangularMatrix( C[1] )
-       and ( C[2] = NrRows( C[1] ) + [ - Length( C[2] ) .. 0 ]
-             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+    plist := C[2];
+    C := C[1];
+    
+    if HasIsUpperTriangularMatrix( C ) and IsUpperTriangularMatrix( C ) and
+       ( plist = NrRows( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -518,9 +590,12 @@ InstallImmediateMethod( IsUpperTriangularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsUpperTriangularMatrix( PreEval( M ) ) then
-        return IsUpperTriangularMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsUpperTriangularMatrix( e ) then
+        return IsUpperTriangularMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -532,9 +607,12 @@ InstallImmediateMethod( IsLowerTriangularMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsUpperTriangularMatrix( EvalInvolution( M ) ) then
-        return IsUpperTriangularMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsUpperTriangularMatrix( MI ) then
+        return IsUpperTriangularMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -546,13 +624,15 @@ InstallImmediateMethod( IsLowerTriangularMatrix,
         IsHomalgMatrix and HasEvalCertainColumns, 0,
         
   function( M )
-    local C;
+    local C, plist;
     
     C := EvalCertainColumns( M );
     
-    if HasIsLowerTriangularMatrix( C[1] ) and IsLowerTriangularMatrix( C[1] )
-       and ( C[2] = NrColumns( C[1] ) + [ - Length( C[2] ) .. 0 ]
-             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+    plist := C[2];
+    C := C[1];
+    
+    if HasIsLowerTriangularMatrix( C ) and IsLowerTriangularMatrix( C ) and
+       ( plist = NrColumns( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -565,9 +645,12 @@ InstallImmediateMethod( IsLowerTriangularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsLowerTriangularMatrix( PreEval( M ) ) then
-        return IsLowerTriangularMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsLowerTriangularMatrix( e ) then
+        return IsLowerTriangularMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -579,9 +662,12 @@ InstallImmediateMethod( IsUpperStairCaseMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsLowerStairCaseMatrix( EvalInvolution( M ) ) then
-        return IsLowerStairCaseMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsLowerStairCaseMatrix( MI ) then
+        return IsLowerStairCaseMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -593,13 +679,15 @@ InstallImmediateMethod( IsUpperStairCaseMatrix,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
-    local C;
+    local C, plist;
     
     C := EvalCertainRows( M );
     
-    if HasIsUpperStairCaseMatrix( C[1] ) and IsUpperStairCaseMatrix( C[1] )
-       and ( C[2] = NrRows( C[1] ) + [ - Length( C[2] ) .. 0 ]
-             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+    plist := C[2];
+    C := C[1];
+    
+    if HasIsUpperStairCaseMatrix( C ) and IsUpperStairCaseMatrix( C ) and
+       ( plist = NrRows( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -612,9 +700,12 @@ InstallImmediateMethod( IsUpperStairCaseMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsUpperStairCaseMatrix( PreEval( M ) ) then
-        return IsUpperStairCaseMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsUpperStairCaseMatrix( e ) then
+        return IsUpperStairCaseMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -626,9 +717,12 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasIsUpperStairCaseMatrix( EvalInvolution( M ) ) then
-        return IsUpperStairCaseMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasIsUpperStairCaseMatrix( MI ) then
+        return IsUpperStairCaseMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -640,13 +734,15 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
         IsHomalgMatrix and HasEvalCertainColumns, 0,
         
   function( M )
-    local C;
+    local C, plist;
     
     C := EvalCertainColumns( M );
     
-    if HasIsLowerStairCaseMatrix( C[1] ) and IsLowerStairCaseMatrix( C[1] )
-       and ( C[2] = NrColumns( C[1] ) + [ - Length( C[2] ) .. 0 ]
-             or C[2] = [ 1 .. Length( C[2] ) ] ) then
+    plist := C[2];
+    C := C[1];
+    
+    if HasIsLowerStairCaseMatrix( C ) and IsLowerStairCaseMatrix( C ) and
+       ( plist = NrColumns( C ) + [ -Length( plist ) .. 0 ] or plist = [ 1 .. Length( plist ) ] ) then
         return true;
     fi;
     
@@ -659,9 +755,12 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsLowerStairCaseMatrix( PreEval( M ) ) then
-        return IsLowerStairCaseMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsLowerStairCaseMatrix( e ) then
+        return IsLowerStairCaseMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -677,8 +776,8 @@ InstallImmediateMethod( IsDiagonalMatrix,
     
     C := EvalCertainRows( M );
     
-    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] )
-       and C[2] = [ 1 .. Length( C[2] ) ] then
+    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] ) and
+       C[2] = [ 1 .. Length( C[2] ) ] then
         return true;
     fi;
     
@@ -695,8 +794,8 @@ InstallImmediateMethod( IsDiagonalMatrix,
     
     C := EvalCertainColumns( M );
     
-    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] )
-       and C[2] = [ 1 .. Length( C[2] ) ] then
+    if HasIsDiagonalMatrix( C[1] ) and IsDiagonalMatrix( C[1] ) and
+       C[2] = [ 1 .. Length( C[2] ) ] then
         return true;
     fi;
     
@@ -709,9 +808,12 @@ InstallImmediateMethod( IsDiagonalMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsDiagonalMatrix( PreEval( M ) ) then
-        return IsDiagonalMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsDiagonalMatrix( e ) then
+        return IsDiagonalMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -723,9 +825,12 @@ InstallImmediateMethod( IsStrictUpperTriangularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsStrictUpperTriangularMatrix( PreEval( M ) ) then
-        return IsStrictUpperTriangularMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsStrictUpperTriangularMatrix( e ) then
+        return IsStrictUpperTriangularMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -737,9 +842,12 @@ InstallImmediateMethod( IsStrictLowerTriangularMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasIsStrictLowerTriangularMatrix( PreEval( M ) ) then
-        return IsStrictLowerTriangularMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasIsStrictLowerTriangularMatrix( e ) then
+        return IsStrictLowerTriangularMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -757,9 +865,12 @@ InstallImmediateMethod( NrRows,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasNrRows( PreEval( M ) ) then
-        return NrRows( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasNrRows( e ) then
+        return NrRows( e );
     fi;
     
     TryNextMethod( );
@@ -771,9 +882,12 @@ InstallImmediateMethod( NrColumns,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasNrColumns( PreEval( M ) ) then
-        return NrColumns( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasNrColumns( e ) then
+        return NrColumns( e );
     fi;
     
     TryNextMethod( );
@@ -785,9 +899,12 @@ InstallImmediateMethod( RowRankOfMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasRowRankOfMatrix( PreEval( M ) ) then
-        return RowRankOfMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasRowRankOfMatrix( e ) then
+        return RowRankOfMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -799,9 +916,12 @@ InstallImmediateMethod( RowRankOfMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasColumnRankOfMatrix( EvalInvolution( M ) ) then
-        return ColumnRankOfMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasColumnRankOfMatrix( MI ) then
+        return ColumnRankOfMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -824,7 +944,7 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and EvalUnionOfColumns, 0,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
     local e;
@@ -845,7 +965,7 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and EvalUnionOfRows, 0,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
         
   function( M )
     local e;
@@ -872,7 +992,7 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and EvalDiagMat, 0,
+        IsHomalgMatrix and HasEvalDiagMat, 0,
         
   function( M )
     local e;
@@ -909,9 +1029,12 @@ InstallImmediateMethod( ColumnRankOfMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasColumnRankOfMatrix( PreEval( M ) ) then
-        return ColumnRankOfMatrix( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasColumnRankOfMatrix( e ) then
+        return ColumnRankOfMatrix( e );
     fi;
     
     TryNextMethod( );
@@ -923,9 +1046,12 @@ InstallImmediateMethod( ColumnRankOfMatrix,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
+    local MI;
     
-    if HasRowRankOfMatrix( EvalInvolution( M ) ) then
-        return RowRankOfMatrix( EvalInvolution( M ) );
+    MI := EvalInvolution( M );
+    
+    if HasRowRankOfMatrix( MI ) then
+        return RowRankOfMatrix( MI );
     fi;
     
     TryNextMethod( );
@@ -948,7 +1074,7 @@ end );
 
 ##
 InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and EvalUnionOfRows, 0,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
         
   function( M )
     local e;
@@ -969,7 +1095,7 @@ end );
 
 ##
 InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and EvalUnionOfColumns, 0,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
     local e;
@@ -996,7 +1122,7 @@ end );
 
 ##
 InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and EvalDiagMat, 0,
+        IsHomalgMatrix and HasEvalDiagMat, 0,
         
   function( M )
     local e;
@@ -1033,9 +1159,12 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
+    local e;
     
-    if HasPositionOfFirstNonZeroEntryPerRow( PreEval( M ) ) then
-        return PositionOfFirstNonZeroEntryPerRow( PreEval( M ) );
+    e := PreEval( M );
+    
+    if HasPositionOfFirstNonZeroEntryPerRow( e ) then
+        return PositionOfFirstNonZeroEntryPerRow( e );
     fi;
     
     TryNextMethod( );
@@ -1047,15 +1176,17 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         IsHomalgMatrix and HasEvalCertainRows, 0,
         
   function( M )
-    local mat, pos;
+    local e, mat, pos;
     
-    mat := EvalCertainRows( M )[1];
+    e := EvalCertainRows( M );
+    
+    mat := e[1];
     
     if HasPositionOfFirstNonZeroEntryPerRow( mat ) then
         
         pos := PositionOfFirstNonZeroEntryPerRow( mat );
         
-        return pos{ EvalCertainRows( M )[2] };
+        return pos{ e[2] };
         
     fi;
     
@@ -1068,16 +1199,18 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
         IsHomalgMatrix and HasEvalCertainColumns and HasNrRows, 0,
         
   function( M )
-    local mat, pos, plist;
+    local e, mat, plist, pos;
     
-    mat := EvalCertainColumns( M )[1];
+    e := EvalCertainColumns( M );
+    
+    mat := e[1];
     
     if HasPositionOfFirstNonZeroEntryPerRow( mat ) then
         
         pos := PositionOfFirstNonZeroEntryPerRow( mat );
         
-        plist := EvalCertainColumns( M )[2];
-        
+        plist := e[2];
+    
         return List( [ 1 .. NrRows( M ) ], function( i ) if pos[i] in plist then return Position( plist, pos[i] ); else return 0; fi; end );
         
     fi;
@@ -1189,16 +1322,15 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalCertainRows, IsList ],
         
   function( M, plist )
-    local A, plistA;
+    local A;
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainRows of a bigger matrix
         
         Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( CertainRows )", "\033[0m" );
         
-        A := EvalCertainRows( M )[1];
-        plistA := EvalCertainRows( M )[2];
+        A := EvalCertainRows( M );
         
-        return CertainRows( A, plistA{plist} );
+        return CertainRows( A[1], A[2]{plist} );
         
     fi;
     
@@ -1216,8 +1348,10 @@ InstallMethod( CertainRows,
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainRows of a bigger matrix
         
-        A := EvalCertainColumns( M )[1];
-        plistA := EvalCertainColumns( M )[2];
+        A := EvalCertainColumns( M );
+        
+        plistA := A[2];
+        A := A[1];
         
         if Length( plist ) * NrColumns( A ) < Length( plistA ) * NrRows( A ) then
             
@@ -1239,18 +1373,22 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
         
   function( M, plist )
-    local A, B, rowsA, rowsB, plistA, plistB;
+    local e, A, B, a, rowsA, rowsB, plistA, plistB;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfRows )", "\033[0m" );
     
-    A := EvalUnionOfRows( M )[1];
-    B := EvalUnionOfRows( M )[2];
+    e := EvalUnionOfRows( M );
     
-    rowsA := [ 1 .. NrRows( A ) ];
+    A := e[1];
+    B := e[2];
+    
+    a := NrRows( A );
+    
+    rowsA := [ 1 .. a ];
     rowsB := [ 1 .. NrRows( B ) ];
     
     plistA := Filtered( plist, x -> x in rowsA );		## CAUTION: don't use Intersection(2)
-    plistB := Filtered( plist - NrRows( A ), x -> x in rowsB );	## CAUTION: don't use Intersection(2)
+    plistB := Filtered( plist - a, x -> x in rowsB );		## CAUTION: don't use Intersection(2)
     
     return UnionOfRows( CertainRows( A, plistA ), CertainRows( B, plistB ) );
     
@@ -1262,14 +1400,13 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
         
   function( M, plist )
-    local A, B;
+    local AB;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfColumns )", "\033[0m" );
     
-    A := EvalUnionOfColumns( M )[1];
-    B := EvalUnionOfColumns( M )[2];
+    AB := EvalUnionOfColumns( M );
     
-    return UnionOfColumns( CertainRows( A, plist ), CertainRows( B, plist ) );
+    return UnionOfColumns( CertainRows( AB[1], plist ), CertainRows( AB[2], plist ) );
     
 end );
 
@@ -1279,15 +1416,15 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix and HasEvalCompose, IsList ],
         
   function( M, plist )
-    local A, B;
+    local  AB;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( Compose )", "\033[0m" );
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
-        A := EvalCompose( M )[1];
-        B := EvalCompose( M )[2];
         
-        return CertainRows( A, plist ) * B;
+        AB := EvalCompose( M );
+        
+        return CertainRows( AB[1], plist ) * AB[2];
     fi;
     
     TryNextMethod( );
@@ -1317,16 +1454,15 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix and HasEvalCertainColumns, IsList ],
         
   function( M, plist )
-    local A, plistA;
+    local A;
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
         
         Info( InfoCOLEM, 4, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( CertainColumns )", "\033[0m" );
-    
-        A := EvalCertainColumns( M )[1];
-        plistA := EvalCertainColumns( M )[2];
         
-        return CertainColumns( A, plistA{plist} );
+        A := EvalCertainColumns( M );
+        
+        return CertainColumns( A[1], A[2]{plist} );
         
     fi;
     
@@ -1344,8 +1480,11 @@ InstallMethod( CertainColumns,
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
         
-        A := EvalCertainRows( M )[1];
-        plistA := EvalCertainRows( M )[2];
+        
+        A := EvalCertainRows( M );
+        
+        plistA := A[2];
+        A := A[1];
         
         if Length( plist ) * NrRows( A ) < Length( plistA ) * NrColumns( A ) then
             
@@ -1367,18 +1506,22 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
         
   function( M, plist )
-    local A, B, columnsA, columnsB, plistA, plistB;
+    local e, A, B, a, columnsA, columnsB, plistA, plistB;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( UnionOfColumns )", "\033[0m" );
     
-    A := EvalUnionOfColumns( M )[1];
-    B := EvalUnionOfColumns( M )[2];
+    e := EvalUnionOfColumns( M );
     
-    columnsA := [ 1 .. NrColumns( A ) ];
+    A := e[1];
+    B := e[2];
+    
+    a := NrColumns( A );
+    
+    columnsA := [ 1 .. a ];
     columnsB := [ 1 .. NrColumns( B ) ];
     
     plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
-    plistB := Filtered( plist - NrColumns( A ), x -> x in columnsB );	## CAUTION: don't use Intersection(2)
+    plistB := Filtered( plist - a, x -> x in columnsB );		## CAUTION: don't use Intersection(2)
     
     return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
     
@@ -1390,14 +1533,13 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
         
   function( M, plist )
-    local A, B;
+    local AB;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( UnionOfRows )", "\033[0m" );
     
-    A := EvalUnionOfRows( M )[1];
-    B := EvalUnionOfRows( M )[2];
+    AB := EvalUnionOfRows( M );
     
-    return UnionOfRows( CertainColumns( A, plist ), CertainColumns( B, plist ) );
+    return UnionOfRows( CertainColumns( AB[1], plist ), CertainColumns( AB[2], plist ) );
     
 end );
 
@@ -1407,15 +1549,14 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix and HasEvalCompose, IsList ],
         
   function( M, plist )
-    local A, B;
+    local AB;
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( Compose )", "\033[0m" );
         
-        A := EvalCompose( M )[1];
-        B := EvalCompose( M )[2];
+        AB := EvalCompose( M );
         
-        return A * CertainColumns( B, plist );
+        return AB[1] * CertainColumns( AB[2], plist );
     fi;
     
     TryNextMethod( );
@@ -1574,25 +1715,28 @@ InstallMethod( \+,
         [ IsHomalgMatrix and HasEvalCompose, IsHomalgMatrix and HasEvalCompose ],
         
   function( A, B )
-    local C;
+    local AA, BB, C;
     
-    C := EvalCompose( A )[1];
+    AA := EvalCompose( A );
+    BB := EvalCompose( B );
     
-    if IsIdenticalObj( C , EvalCompose( B )[1] ) then
+    C := AA[1];
+    
+    if IsIdenticalObj( C , BB[1] ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "C * E + C * F", "\033[0m" );
         
-        return C * ( EvalCompose( A )[2] + EvalCompose( B )[2] );
+        return C * ( AA[2] + BB[2] );
         
     fi;
     
-    C := EvalCompose( A )[2];
+    C := AA[2];
     
-    if IsIdenticalObj( C , EvalCompose( B )[2] ) then
+    if IsIdenticalObj( C , BB[2] ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "E * C + F * C", "\033[0m" );
         
-        return ( EvalCompose( A )[1] + EvalCompose( B )[1] ) * C;
+        return ( AA[1] + BB[1] ) * C;
         
     fi;
     
@@ -1606,15 +1750,17 @@ InstallMethod( \+,
         [ IsHomalgMatrix and HasEvalMulMat, IsHomalgMatrix ],
         
   function( A, B )
-    local R;
+    local R, AA;
     
     R := HomalgRing( A );
     
-    if IsZero( EvalMulMat( A )[1] + One( R ) ) then
+    AA := EvalMulMat( A );
+    
+    if IsZero( AA[1] + One( R ) ) then	## don't use IsMinusOne (it is declared for IsHomalgRingElement & not IsRingElement)
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-A + B", "\033[0m" );
         
-        return B - EvalMulMat( A )[2];
+        return B - AA[2];
         
     fi;
     
@@ -1628,15 +1774,17 @@ InstallMethod( \+,
         [ IsHomalgMatrix, IsHomalgMatrix and HasEvalMulMat ],
         
   function( A, B )
-    local R;
+    local R, BB;
     
     R := HomalgRing( B );
     
-    if IsZero( EvalMulMat( B )[1] + One( R ) ) then
+    BB := EvalMulMat( B );
+    
+    if IsZero( BB[1] + One( R ) ) then	## don't use IsMinusOne (it is declared for IsHomalgRingElement & not IsRingElement)
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "A + (-B)", "\033[0m" );
         
-        return A - EvalMulMat( B )[2];
+        return A - BB[2];
         
     fi;
     
@@ -1684,15 +1832,17 @@ InstallMethod( AdditiveInverseMutable,
         [ IsHomalgMatrix and HasEvalMulMat ],
         
   function( A )
-    local R;
+    local R, AA;
     
     R := HomalgRing( A );
     
-    if IsZero( EvalMulMat( A )[1] + One( R ) ) then
+    AA := EvalMulMat( A );
+    
+    if IsZero( AA[1] + One( R ) ) then	## don't use IsMinusOne (it is declared for IsHomalgRingElement & not IsRingElement)
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-(-IsHomalgMatrix)", "\033[0m" );
         
-        return EvalMulMat( A )[2];
+        return AA[2];
     fi;
     
     TryNextMethod( );
@@ -1735,25 +1885,28 @@ InstallMethod( \-,
         [ IsHomalgMatrix and HasEvalCompose, IsHomalgMatrix and HasEvalCompose ],
         
   function( A, B )
-    local C;
+    local AA, BB, C;
     
-    C := EvalCompose( A )[1];
+    AA := EvalCompose( A );
+    BB := EvalCompose( B );
     
-    if IsIdenticalObj( C , EvalCompose( B )[1] ) then
+    C := AA[1];
+    
+    if IsIdenticalObj( C , BB[1] ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "C * E - C * F", "\033[0m" );
         
-        return C * ( EvalCompose( A )[2] - EvalCompose( B )[2] );
+        return C * ( AA[2] - BB[2] );
         
     fi;
     
-    C := EvalCompose( A )[2];
+    C := AA[2];
     
-    if IsIdenticalObj( C , EvalCompose( B )[2] ) then
+    if IsIdenticalObj( C , BB[2] ) then
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "E * C - F * C", "\033[0m" );
         
-        return ( EvalCompose( A )[1] - EvalCompose( B )[1] ) * C;
+        return ( AA[1] - BB[1] ) * C;
         
     fi;
     
@@ -1797,14 +1950,13 @@ InstallMethod( \*,
         [ IsHomalgMatrix and HasEvalUnionOfRows, IsHomalgMatrix ],
         
   function( A, B )
-    local A1, A2;
+    local AA;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfRows * IsHomalgMatrix", "\033[0m" );
     
-    A1 := EvalUnionOfRows( A )[1];
-    A2 := EvalUnionOfRows( A )[2];
+    AA := EvalUnionOfRows( A );
     
-    return UnionOfRows( A1 * B, A2* B );
+    return UnionOfRows( AA[1] * B, AA[2] * B );
     
 end );
 
@@ -1814,14 +1966,13 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( A, B )
-    local B1, B2;
+    local BB;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfColumns", "\033[0m" );
     
-    B1 := EvalUnionOfColumns( B )[1];
-    B2 := EvalUnionOfColumns( B )[2];
+    BB := EvalUnionOfColumns( B );
     
-    return UnionOfColumns( A * B1, A * B2 );
+    return UnionOfColumns( A * BB[1], A * BB[2] );
     
 end );
 
@@ -1831,17 +1982,18 @@ InstallMethod( \*,
         [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ],
         
   function( A, B )
-    local A1, A2, B1, B2;
+    local AA, a1, B1, B2;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "UnionOfColumns * IsHomalgMatrix", "\033[0m" );
     
-    A1 := EvalUnionOfColumns( A )[1];
-    A2 := EvalUnionOfColumns( A )[2];
+    AA := EvalUnionOfColumns( A );
     
-    B1 := CertainRows( B, [ 1 .. NrColumns( A1 ) ] );
-    B2 := CertainRows( B, [ NrColumns( A1 ) + 1 .. NrRows( B ) ] );
+    a1 := NrColumns( AA[1] );
     
-    return A1 * B1 +  A2 * B2;
+    B1 := CertainRows( B, [ 1 .. a1 ] );
+    B2 := CertainRows( B, [ a1 + 1 .. NrRows( B ) ] );
+    
+    return AA[1] * B1 +  AA[2] * B2;
     
 end );
 
@@ -1851,17 +2003,18 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( A, B )
-    local B1, B2, A1, A2;
+    local BB, b1, A1, A2;
     
     Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * UnionOfRows", "\033[0m" );
     
-    B1 := EvalUnionOfRows( B )[1];
-    B2 := EvalUnionOfRows( B )[2];
+    BB := EvalUnionOfRows( B );
     
-    A1 := CertainColumns( A, [ 1 .. NrRows( B1 ) ] );
-    A2 := CertainColumns( A, [ NrRows( B1 ) + 1 .. NrColumns( A ) ] );
+    b1 := NrRows( BB[1] );
     
-    return A1 * B1 + A2 * B2;
+    A1 := CertainColumns( A, [ 1 .. b1 ] );
+    A2 := CertainColumns( A, [ b1 + 1 .. NrColumns( A ) ] );
+    
+    return A1 * BB[1] + A2 * BB[2];
     
 end );
 
@@ -2011,15 +2164,17 @@ InstallMethod( \*,
         [ IsHomalgMatrix and HasEvalCompose, IsHomalgMatrix ],
         
   function( A, B )
-    local LI;
+    local AA, LI;
     
-    LI := EvalCompose( A )[2];
+    AA := EvalCompose( A );
+    
+    LI := AA[2];
     
     if HasEvalLeftInverse( LI ) then	## give it a chance
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "( IsHomalgMatrix * LeftInverse ) * IsHomalgMatrix", "\033[0m" );
         
-        return EvalCompose( A )[1] * ( LI * B ); 
+        return AA[1] * ( LI * B );
         
     fi;
     
@@ -2033,15 +2188,17 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix and HasEvalCompose ],
         
   function( A, B )
-    local RI;
+    local BB, RI;
     
-    RI := EvalCompose( B )[1];
+    BB := EvalCompose( B );
+    
+    RI := BB[1];
     
     if HasEvalRightInverse( RI ) then	## give it a chance
         
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsHomalgMatrix * ( RightInverse * IsHomalgMatrix )", "\033[0m" );
         
-        return ( A * RI ) * EvalCompose( B )[2]; 
+        return ( A * RI ) * BB[2];
         
     fi;
     
