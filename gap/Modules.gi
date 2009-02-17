@@ -202,8 +202,17 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     fi;
     
     if IsBound( S ) and NrRelations( S ) = 0 then
+        
+        ## check assertion
+        Assert( 4, IsRightAcyclic( d ) );
+        
         SetIsRightAcyclic( d, true );
+        
     else
+        
+        ## check assertion
+        Assert( 4, IsAcyclic( d ) );
+        
         SetIsAcyclic( d, true );
     fi;
     

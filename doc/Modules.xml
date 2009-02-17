@@ -14,7 +14,6 @@
 <#Include Label="Modules:intro">
 
 <Section Label="Modules:Category">
-
 <Heading>Modules: Category and Representations</Heading>
 
 <#Include Label="IsHomalgModule">

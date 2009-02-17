@@ -12,7 +12,6 @@
 <Heading>Complexes</Heading>
 
 <Section Label="Complexes:Category">
-
 <Heading>Complexes: Category and Representations</Heading>
 
 <#Include Label="IsHomalgComplex">

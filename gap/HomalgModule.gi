@@ -1025,20 +1025,6 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( DecideZeroEffectively,
-        "for homalg modules",
-        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
-        
-  function( mat, M )
-    local rel;
-    
-    rel := RelationsOfModule( M );
-    
-    return DecideZeroEffectively( mat, rel );
-    
-end );
-
-##
 InstallMethod( UnionOfRelations,
         "for homalg modules",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],

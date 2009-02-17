@@ -14,7 +14,6 @@
 <#Include Label="Bicomplexes:intro">
 
 <Section Label="Bicomplexes:Category">
-
 <Heading>Bicomplexes: Category and Representations</Heading>
 
 <#Include Label="IsHomalgBicomplex">

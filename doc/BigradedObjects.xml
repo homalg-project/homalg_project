@@ -14,7 +14,6 @@
 <#Include Label="BigradedObjects:intro">
 
 <Section Label="BigradedObjects:Category">
-
 <Heading>BigradedObjects: Categories and Representations</Heading>
 
 <#Include Label="IsHomalgBigradedObject">

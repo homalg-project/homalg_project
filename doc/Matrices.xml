@@ -12,7 +12,6 @@
 <Heading>Matrices</Heading>
 
 <Section Label="Matrices:Category">
-
 <Heading>Matrices: Category and Representations</Heading>
 
 <#Include Label="IsHomalgMatrix">

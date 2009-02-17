@@ -453,7 +453,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, CA, IA, CB, NF;
+    local R, CA, IA, CB, NF, X;
     
     R := HomalgRing( B );
     
@@ -461,24 +461,26 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     CA := HomalgVoidMatrix( R );
     IA := BasisOfRows( A, CA );
     
-    ## check assertion
-    Assert( 3, CA * A = IA );
-    
     ## NF = B + CB * IA
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroRowsEffectively( B, IA, CB );
     
-    ## check assertion
-    Assert( 3, NF = B + CB * IA );
-    
     ## NF <> 0
     if not IsZero( NF ) then
-        #Error( "The second argument is not a right factor of the first, i.e. the rows of the second argument are not a generating set!\n" );
+        ## A is not a right factor of B, i.e.
+        ## the rows of A are not a generating set
         return false;
     fi;
     
     ## CD = -CB * CA => CD * A = B
-    return -CB * CA;				## -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    X := -CB * CA;
+    
+    ## check assertion
+    Assert( 3, X * A = B );
+    
+    return X;
+    
+    ## technical: -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
     
 end );
 
@@ -494,7 +496,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, CA, IA, CB, NF;
+    local R, CA, IA, CB, NF, X;
     
     R := HomalgRing( B );
     
@@ -502,24 +504,26 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     CA := HomalgVoidMatrix( R );
     IA := BasisOfColumns( A, CA );
     
-    ## check assertion
-    Assert( 3, A * CA = IA );
-    
     ## NF = B + IA * CB
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroColumnsEffectively( B, IA, CB );
     
-    ## check assertion
-    Assert( 3, NF = B + IA * CB );
-    
     ## NF <> 0
     if not IsZero( NF ) then
-        #Error( "The first argument is not a left factor of the second, i.e. the columns of the first argument are not a generating set!\n" );
+        ## A is not a left factor of B, i.e.
+        ## the columns of A are not a generating set
         return false;
     fi;
     
     ## CD = CA * -CB => A * CD = B
-    return CA * -CB;				## CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
+    X := CA * -CB;
+    
+    ## check assertion
+    Assert( 3, A * X = B );
+    
+    return X;
+    
+    ## technical: CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
     
 end );
 
@@ -537,7 +541,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( B, A, L )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, a;
+    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
     
     R := HomalgRing( B );
     
@@ -552,28 +556,27 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     CA := HomalgVoidMatrix( R );
     IAL := BasisOfRows( AL, CA );
     
-    ## check assertion
-    Assert( 3, CA * AL = IAL );
-    
     ## also reduce B modulo L
     ZB := DecideZero( B, BL );
     
-    ## NF = B + CB * IAL
+    ## NF = ZB + CB * IAL
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroRowsEffectively( ZB, IAL, CB );
-    
-    ## check assertion
-    Assert( 3, NF = ZB + CB * IAL );
     
     ## NF <> 0
     if not IsZero( NF ) then
         return false;
     fi;
     
-    a := NrRows( A );
-    
     ## CD = -CB * CA => CD * A = B
-    return -CB * CertainColumns( CA, [ 1 .. a ] );	## -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    X := -CB * CertainColumns( CA, [ 1 .. NrRows( A ) ] );
+    
+    ## check assertion
+    Assert( 3, IsZero( DecideZero( X * A - B, L ) ) );
+    
+    return X;
+    
+    ## technical: -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
     
 end );
 
@@ -602,7 +605,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( A, B, L )				## CAUTION: Do not use lazy evaluation here!!!
-    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, a;
+    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
     
     R := HomalgRing( B );
     
@@ -617,28 +620,27 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     CA := HomalgVoidMatrix( R );
     IAL := BasisOfColumns( AL, CA );
     
-    ## check assertion
-    Assert( 3, AL * CA = IAL );
-    
     ## also reduce B modulo L
     ZB := DecideZero( B, BL );
     
-    ## NF = B + IAL * CB
+    ## NF = ZB + IAL * CB
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroColumnsEffectively( ZB, IAL, CB );
-    
-    ## check assertion
-    Assert( 3, NF = ZB + IAL * CB );
     
     ## NF <> 0
     if not IsZero( NF ) then
         return false;
     fi;
     
-    a := NrColumns( A );
-    
     ## CD = CA * -CB => A * CD = B
-    return CertainRows( CA, [ 1 .. a ] ) * -CB;		## CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
+    X := CertainRows( CA, [ 1 .. NrColumns( A ) ] ) * -CB;
+    
+    ## check assertion
+    Assert( 3, IsZero( DecideZero( A * X - B, L ) ) );
+    
+    return X;
+    
+    ## technical: CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
     
 end );
 

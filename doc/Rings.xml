@@ -12,7 +12,6 @@
 <Heading>Rings</Heading>
 
 <Section Label="Rings:Category">
-
 <Heading>Rings: Category and Representations</Heading>
 
 <#Include Label="IsHomalgRing">
@@ -24,7 +23,6 @@
 </Section>
 
 <Section Label="Rings:Constructors">
-
 <Heading>Rings: Constructors</Heading>
 
 This section describes how to construct rings for use with &homalg;,

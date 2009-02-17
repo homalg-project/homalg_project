@@ -14,7 +14,6 @@
 <#Include Label="SpectralSequences:intro">
 
 <Section Label="SpectralSequences:Category">
-
 <Heading>SpectralSequences: Categorie and Representations</Heading>
 
 <#Include Label="IsHomalgSpectralSequence">

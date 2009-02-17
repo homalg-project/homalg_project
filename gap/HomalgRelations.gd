@@ -173,9 +173,6 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "BasisCoeff",
         [ IsHomalgRelations ] );
 
-DeclareOperation( "DecideZeroEffectively",
-        [ IsHomalgMatrix, IsHomalgRelations ] );
-
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgRelations ] );
 
@@ -211,9 +208,6 @@ DeclareOperation( "*",
 
 DeclareSynonym ( "Reduce",
         DecideZero );
-
-DeclareSynonym ( "ReduceCoeff",
-        DecideZeroEffectively );
 
 DeclareSynonym ( "BetterBasis",
         GetRidOfObsoleteRelations );

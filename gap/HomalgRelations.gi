@@ -558,30 +558,6 @@ InstallMethod( BasisCoeff,
 end );
 
 ##
-InstallMethod( DecideZeroEffectively,
-        "modulo a set of relations of a homalg module",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
-        
-  function( mat, rel )
-    
-    return DecideZeroRowsEffectively( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
-    
-end );
-
-##
-InstallMethod( DecideZeroEffectively,
-        "modulo a set of relations of a homalg module",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
-        
-  function( mat, rel )
-    
-    return DecideZeroColumnsEffectively( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
-    
-end );
-
-##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],

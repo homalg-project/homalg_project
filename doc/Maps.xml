@@ -14,7 +14,6 @@
 <#Include Label="Maps:intro">
 
 <Section Label="Maps:Category">
-
 <Heading>Maps: Categories and Representations</Heading>
 
 <#Include Label="IsHomalgMap">

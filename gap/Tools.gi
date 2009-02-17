@@ -132,6 +132,17 @@ InstallMethod( IsOne,
     
 end );
 
+##
+InstallMethod( IsMinusOne,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return IsZero( r + One( r ) );
+    
+end );
+
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
         "for homalg rings elements",

@@ -972,6 +972,9 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         SetNrRows( T, nr );
         
+        ## check assertion
+        Assert( 4, B = T * M );
+        
         return B;
         
     elif IsBound(RP!.BasisOfColumnsCoeff) then
@@ -1010,6 +1013,9 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         SetNrColumns( TI, nr );
         
+        ## check assertion
+        Assert( 4, B = T * M );
+        
         return B;
         
     fi;
@@ -1034,6 +1040,9 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
     
     IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
+    
+    ## check assertion
+    Assert( 4, B = T * M );
     
     return B;
     
@@ -1079,6 +1088,9 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         SetNrColumns( T, nr );
         
+        ## check assertion
+        Assert( 4, B = M * T );
+        
         return B;
         
     elif IsBound(RP!.BasisOfRowsCoeff) then
@@ -1117,6 +1129,9 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         SetNrRows( TI, nr );
         
+        ## check assertion
+        Assert( 4, B = M * T );
+        
         return B;
         
     fi;
@@ -1135,12 +1150,14 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         B := CertainColumns( B, [ 1 .. nz ] );
     fi;
     
-    ## B = M * T;
     SetPreEval( T, CertainColumns( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
     
     IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
+    
+    ## check assertion
+    Assert( 4, B = M * T );
     
     return B;
     
@@ -1173,6 +1190,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
+        ## check assertion
+        Assert( 4, M = A + T * B );
+        
         return M;
         
     elif IsBound(RP!.DecideZeroColumnsEffectively) then
@@ -1186,6 +1206,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
+        
+        ## check assertion
+        Assert( 4, M = A + T * B );
         
         return M;
         
@@ -1216,15 +1239,14 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
-    ## M = A + T * B;
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
-    
-    ## check assertion
-    Assert( 4, M = A + T * B );
     
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
     IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
+    
+    ## check assertion
+    Assert( 4, M = A + T * B );
     
     return M;
     
@@ -1257,6 +1279,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
+        ## check assertion
+        Assert( 4, M = A + B * T );
+        
         return M;
         
     elif IsBound(RP!.DecideZeroRowsEffectively) then
@@ -1270,6 +1295,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
+        
+        ## check assertion
+        Assert( 4, M = A + B * T );
         
         return M;
         
@@ -1300,15 +1328,14 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
-    ## M = A + B * T;
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
-    
-    ## check assertion
-    Assert( 4, M = A + B * T );
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
     
     IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
+    
+    ## check assertion
+    Assert( 4, M = A + B * T );
     
     return M;
     

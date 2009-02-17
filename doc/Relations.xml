@@ -14,7 +14,6 @@
 <#Include Label="Relations:intro">
 
 <Section Label="Relations:Category">
-
 <Heading>Relations: Categories and Representations</Heading>
 
 <#Include Label="IsHomalgRelations">
