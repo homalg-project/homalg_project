@@ -450,13 +450,13 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
-                Error( "the unique object in the complex and the target of the new map are not identical\n" );
-            fi;
-        else
+        if IsHomalgChainMap( phi ) then
             if CertainObject( C, degrees[1] ) <> Range( phi ) then
                 Error( "the unique object in the complex and the target of the new chain map are not equal\n" );
+            fi;
+        else
+            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
+                Error( "the unique object in the complex and the target of the new map are not identical\n" );
             fi;
         fi;
         
@@ -470,13 +470,13 @@ InstallMethod( Add,
         
         l := degrees[l];
         
-        if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
-                Error( "the source of the ", l, ". map in the complex (i.e. the highest one) and the target of the new one are not identical\n" );
-            fi;
-        else
+        if IsHomalgChainMap( phi ) then
             if Source( CertainMorphism( C, l ) ) <> Range( phi ) then
                 Error( "the source of the ", l, ". chain map in the complex (i.e. the highest one) and the target of the new one are not equal\n" );
+            fi;
+        else
+            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
+                Error( "the source of the ", l, ". map in the complex (i.e. the highest one) and the target of the new one are not identical\n" );
             fi;
         fi;
         
@@ -527,13 +527,13 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Source( phi ) ) then
-                Error( "the unique object in the cocomplex and the source of the new map are not identical\n" );
-            fi;
-        else
+        if IsHomalgChainMap( phi ) then
             if CertainObject( C, degrees[1] ) <> Source( phi ) then
                 Error( "the unique object in the cocomplex and the source of the new chain map are not equal\n" );
+            fi;
+        else
+            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Source( phi ) ) then
+                Error( "the unique object in the cocomplex and the source of the new map are not identical\n" );
             fi;
         fi;
         
@@ -545,13 +545,13 @@ InstallMethod( Add,
         
         l := degrees[l - 1];
         
-        if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( Range( CertainMorphism( C, l ) ), Source( phi ) ) then
-                Error( "the target of the ", l, ". map in the cocomplex (i.e. the highest one) and the source of the new one are not identical\n" );
-            fi;
-        else
+        if IsHomalgChainMap( phi ) then
             if Range( CertainMorphism( C, l ) ) <>  Source( phi ) then
                 Error( "the target of the ", l, ". chain map in the cocomplex (i.e. the highest one) and the source of the new one are not equal\n" );
+            fi;
+        else
+            if not IsIdenticalObj( Range( CertainMorphism( C, l ) ), Source( phi ) ) then
+                Error( "the target of the ", l, ". map in the cocomplex (i.e. the highest one) and the source of the new one are not identical\n" );
             fi;
         fi;
         
@@ -602,13 +602,13 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
-                Error( "the unique object in the cocomplex and the range of the new map are not identical\n" );
-            fi;
-        else
+        if IsHomalgChainMap( phi ) then
             if CertainObject( C, degrees[1] ) <> Range( phi ) then
                 Error( "the unique object in the cocomplex and the range of the new chain map are not equal\n" );
+            fi;
+        else
+            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
+                Error( "the unique object in the cocomplex and the range of the new map are not identical\n" );
             fi;
         fi;
         
@@ -620,13 +620,13 @@ InstallMethod( Add,
         
         l := degrees[1];
         
-        if IsHomalgMap( phi ) then
-            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
-                Error( "the source of the ", l, ". map in the cocomplex (i.e. the lowest one) and the target of the new one are not identical\n" );
-            fi;
-        else
+        if IsHomalgChainMap( phi ) then
             if Source( CertainMorphism( C, l ) ) <>  Range( phi ) then
                 Error( "the source of the ", l, ". chain map in the cocomplex (i.e. the lowest one) and the target of the new one are not equal\n" );
+            fi;
+        else
+            if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
+                Error( "the source of the ", l, ". map in the cocomplex (i.e. the lowest one) and the target of the new one are not identical\n" );
             fi;
         fi;
         

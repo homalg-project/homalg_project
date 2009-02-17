@@ -1087,17 +1087,17 @@ InstallGlobalFunction( HomalgChainMap,
         fi;
     fi;
     
-    if IsHomalgMap( morphism ) then
-        if not IsIdenticalObj( Source( morphism ), CertainObject( source, degrees[1] ) ) then
-            Error( "the map and the source complex do not match\n" );
-        elif not IsIdenticalObj( Range( morphism ), CertainObject( target, degrees[1] + degree ) ) then
-            Error( "the map and the target complex do not match\n" );
-        fi;
-    else
+    if IsHomalgChainMap( morphism ) then
         if Source( morphism ) <> CertainObject( source, degrees[1] ) then
             Error( "the chain map and the source complex do not match\n" );
         elif Range( morphism ) <> CertainObject( target, degrees[1] ) then
             Error( "the chain map and the target complex do not match\n" );
+        fi;
+    else
+        if not IsIdenticalObj( Source( morphism ), CertainObject( source, degrees[1] ) ) then
+            Error( "the map and the source complex do not match\n" );
+        elif not IsIdenticalObj( Range( morphism ), CertainObject( target, degrees[1] + degree ) ) then
+            Error( "the map and the target complex do not match\n" );
         fi;
     fi;
     
