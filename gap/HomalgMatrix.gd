@@ -16,10 +16,12 @@
 
 # two new GAP-categories:
 
-DeclareCategory( "IsInternalMatrixHull",	## this is introduced to allow internal matrices to remain mutable, although Eval is an attribute
+## this is introduced to allow internal matrices
+## to remain mutable, although Eval is an attribute
+DeclareCategory( "IsInternalMatrixHull",
         IsAdditiveElementWithInverse
         and IsExtLElement
-        and IsAttributeStoringRep ); ## CAUTION: never let such matrix hulls be multiplicative elements!!
+        and IsComponentObjectRep ); ## CAUTION: never let such matrix hulls be multiplicative elements!!
 
 ##  <#GAPDoc Label="IsHomalgMatrix">
 ##  <ManSection>

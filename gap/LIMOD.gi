@@ -34,7 +34,7 @@ InstallValue( LIMOD,
 
 ##
 InstallValue( LogicalImplicationsForHomalgModules,
-        [ ## IsTorsionFreeModule:
+        [ ## IsTorsionFree:
           
           [ IsZero,
             "implies", IsFree ],
@@ -60,7 +60,7 @@ InstallValue( LogicalImplicationsForHomalgModules,
           [ IsTorsionFree,
             "implies", IsPure ],
           
-          ## IsTorsionModule:
+          ## IsTorsion:
           
           [ IsZero,
             "implies", IsHolonomic ],
@@ -71,7 +71,7 @@ InstallValue( LogicalImplicationsForHomalgModules,
           [ IsHolonomic,
             "implies", IsArtinian ],
           
-          ## IsCyclicModule:
+          ## IsCyclic:
           
           [ IsZero,
             "implies", IsCyclic ],

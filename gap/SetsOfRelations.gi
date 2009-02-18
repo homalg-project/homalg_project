@@ -17,7 +17,7 @@
 # a new representation for the GAP-category IsSetsOfRelations:
 DeclareRepresentation( "IsSetsOfRelationsRep",
         IsSetsOfRelations,
-        [ ] );
+        [ "ListOfPositionsOfKnownSetsOfRelations" ] );
 
 ####################################
 #
@@ -116,11 +116,15 @@ InstallMethod( ViewObj,
     
     l := Length( o!.ListOfPositionsOfKnownSetsOfRelations );
     
+    Print( "<A set containing " );
+    
     if l = 1 then
-        Print( "<A set containing a single set of relations of a homalg module>" );
+        Print( "a single set " );
     else
-        Print( "<A set containing ", l, " sets of relations of a homalg module>" );
+        Print( l, " sets " );
     fi;
+    
+    Print( "of relations of a homalg module>" );
     
 end );
 

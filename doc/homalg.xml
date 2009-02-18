@@ -50,7 +50,7 @@
 <!--  TableOfContents  . . . . . .  generate a table of contents   -->
 <TableOfContents/>
 
-<!--  chapters of the book  --> 
+<!--  chapters of the book  -->
 <Body>
 
 <Index>&homalg;</Index>

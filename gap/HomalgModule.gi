@@ -55,7 +55,9 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsHomalgModule and
         IsFinitelyPresentedObjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
-        [ "SetsOfGenerators", "SetsOfRelations" ] );
+        [ "SetsOfGenerators", "SetsOfRelations",
+          "TransitionMatrices",
+          "PositionOfTheDefaultSetOfRelations" ] );
 
 ####################################
 #
@@ -68,11 +70,11 @@ BindGlobal( "TheFamilyOfHomalgModules",
         NewFamily( "TheFamilyOfHomalgModules" ) );
 
 # two new types:
-BindGlobal( "TheTypeHomalgLeftModuleFinitelyPresented",
+BindGlobal( "TheTypeHomalgLeftFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgRightModuleFinitelyPresented",
+BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
@@ -1472,13 +1474,13 @@ InstallMethod( Presentation,
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, TheTypeHomalgLeftModuleFinitelyPresented,
+                M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZero, true );
     else
         ObjectifyWithAttributes(
-                M, TheTypeHomalgLeftModuleFinitelyPresented,
+                M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
         
@@ -1526,13 +1528,13 @@ InstallMethod( Presentation,
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, TheTypeHomalgLeftModuleFinitelyPresented,
+                M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZero, true );
     else
         ObjectifyWithAttributes(
-                M, TheTypeHomalgLeftModuleFinitelyPresented,
+                M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
         
@@ -1578,13 +1580,13 @@ InstallMethod( Presentation,
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, TheTypeHomalgRightModuleFinitelyPresented,
+                M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZero, true );
     else
         ObjectifyWithAttributes(
-                M, TheTypeHomalgRightModuleFinitelyPresented,
+                M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
         
@@ -1632,13 +1634,13 @@ InstallMethod( Presentation,
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, TheTypeHomalgRightModuleFinitelyPresented,
+                M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZero, true );
     else
         ObjectifyWithAttributes(
-                M, TheTypeHomalgRightModuleFinitelyPresented,
+                M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
         
@@ -1685,13 +1687,13 @@ InstallMethod( LeftPresentation,
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, TheTypeHomalgLeftModuleFinitelyPresented,
+                M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZero, true );
     else
         ObjectifyWithAttributes(
-                M, TheTypeHomalgLeftModuleFinitelyPresented,
+                M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
                 GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
         
@@ -1730,7 +1732,7 @@ InstallMethod( LeftPresentation,
     
     ## Objectify:
     ObjectifyWithAttributes(
-            M, TheTypeHomalgLeftModuleFinitelyPresented,
+            M, TheTypeHomalgLeftFinitelyPresentedModule,
             LeftActingDomain, R,
             GeneratorsOfLeftOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     
@@ -1817,13 +1819,13 @@ InstallMethod( RightPresentation,
     ## Objectify:
     if is_zero_module then
         ObjectifyWithAttributes(
-                M, TheTypeHomalgRightModuleFinitelyPresented,
+                M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1,
                 IsZero, true );
     else
         ObjectifyWithAttributes(
-                M, TheTypeHomalgRightModuleFinitelyPresented,
+                M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
                 GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
         
@@ -1862,7 +1864,7 @@ InstallMethod( RightPresentation,
     
     ## Objectify:
     ObjectifyWithAttributes(
-            M, TheTypeHomalgRightModuleFinitelyPresented,
+            M, TheTypeHomalgRightFinitelyPresentedModule,
             RightActingDomain, R,
             GeneratorsOfRightOperatorAdditiveGroup, M!.SetsOfGenerators!.1 );
     

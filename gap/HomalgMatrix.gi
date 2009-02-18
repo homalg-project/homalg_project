@@ -194,7 +194,7 @@ InstallMethod( ShallowCopy,
         TryNextMethod( );
     fi;
     
-    return HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );	## HomalgMatrix shallow copies its first argument if it is of type IsMatrix
+    return HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );
     
 end );
 
@@ -1395,7 +1395,7 @@ InstallGlobalFunction( HomalgMatrix,
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             M := ListToListList( M, arg[2], Length( M ) / arg[2] );
         else
-            M := List( M, a -> [ a ] );	## NormalizeInput
+            M := List( M, a -> [ a ] );	## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
         fi;
         
         RP := homalgTable( R );

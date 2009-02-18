@@ -1274,11 +1274,11 @@ DeclareCategory( "IsHomalgGradedModule",
         IsHomalgModule );
 
 ## from HomalgModule.gi
-BindGlobal( "TheTypeHomalgLeftGradedModuleFinitelyPresented",
+BindGlobal( "TheTypeHomalgLeftGradedFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgGradedModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
-BindGlobal( "TheTypeHomalgRightGradedModuleFinitelyPresented",
+BindGlobal( "TheTypeHomalgRightGradedFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgGradedModule and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
@@ -1437,4 +1437,14 @@ InstallMethod( DecideZeroEffectively,
     return DecideZeroEffectively( mat, rel );
     
 end );
+
+## from SetsOfRelations.gd
+
+####################################
+#
+# function-operation-Attribute triples
+#
+####################################
+
+KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
 

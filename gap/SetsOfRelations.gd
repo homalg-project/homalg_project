@@ -17,27 +17,7 @@
 # A new GAP-category:
 
 DeclareCategory( "IsSetsOfRelations",
-        IsAttributeStoringRep );
-
-####################################
-#
-# properties:
-#
-####################################
-
-####################################
-#
-# attributes:
-#
-####################################
-
-####################################
-#
-# function-operation-Attribute triples
-#
-####################################
-
-KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
+        IsComponentObjectRep );
 
 ####################################
 #

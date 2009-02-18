@@ -17,19 +17,7 @@
 # A new GAP-category:
 
 DeclareCategory( "IsSetsOfGenerators",
-        IsAttributeStoringRep );
-
-####################################
-#
-# properties:
-#
-####################################
-
-####################################
-#
-# attributes:
-#
-####################################
+        IsComponentObjectRep );
 
 ####################################
 #

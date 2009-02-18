@@ -17,7 +17,7 @@
 # a new representation for the GAP-category IsSetsOfGenerators:
 DeclareRepresentation( "IsSetsOfGeneratorsRep",
         IsSetsOfGenerators,
-        [ ] );
+        [ "ListOfPositionsOfKnownSetsOfGenerators" ] );
 
 ####################################
 #
@@ -118,11 +118,15 @@ InstallMethod( ViewObj,
     
     l := Length( o!.ListOfPositionsOfKnownSetsOfGenerators );
     
+    Print( "<A set containing " );
+    
     if l = 1 then
-        Print( "<A set containing a single set of generators of a homalg module>" );
+        Print( "a single set " );
     else
-        Print( "<A set containing ", l, " sets of generators of a homalg module>" );
+        Print( l, " sets " );
     fi;
+    
+    Print( "of generators of a homalg module>" );
     
 end );
 
