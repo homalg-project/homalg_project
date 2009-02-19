@@ -68,80 +68,133 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                  end,
                
-#                DecideZeroRows :=
-#                  function( A, B )
-#                    local R, N, i, ClearDenomMatrix, A2, B2;
-#                    
-#                    R := HomalgRing( A );
-#                    
-#                    N := HomalgVoidMatrix( 0, NrColumns( A ), R );
-#                    
-#                    for i in [ 1 .. NrRows( A ) ] do
-#                        
-#                        ClearDenomMatrix := Eval( UnionOfRows( CertainRows( A, [ i ] ), B ) )[2];
-#                        
-#                        A2 := CertainRows( ClearDenomMatrix, [ 1 ] );
-#                        
-#                        B2 := CertainRows( ClearDenomMatrix, [ 2 .. NrRows( ClearDenomMatrix ) ] );
-#                        
-#                        B2 := UnionOfRows( B2, GeneratorsOfMaximalLeftIdeal( R ) * A2 );
-#                        
-#                        B2 := BasisOfRowModule( B2 );
-#                        
-#                        A2 := HomalgLocalMatrix( DecideZeroRows( A2, B2 ), R );
-#                        
-#                        N := UnionOfRows( N, A2 );
-#                        
-#                    od;
-#                    
-#                    return N;
-#                    
-#                  end,
+               DecideZeroRows :=
+                 function( A, B )
+                   local R, T, m, gens, n, GlobalR, one, N, denA, i, A1, B1, A2, B2, S, u, SS;
+                   
+                   R := HomalgRing( A );
+                   
+                   T := HomalgVoidMatrix( R );
+                   
+                   m := NrRows( B );
+                   
+                   gens := GeneratorsOfMaximalLeftIdeal( R );
+                   
+                   n := NrRows( gens );
+                   
+                   GlobalR := AssociatedGlobalRing( R );
+                   
+                   one := One( GlobalR );
+                   
+                   N := HomalgZeroMatrix( 0, NrColumns( A ), R );
+                   
+                   TT := HomalgZeroMatrix( 0, m, R );
+                   
+                   denA := Eval( A )[1];
+                   
+                   for i in [ 1 .. NrRows( A ) ] do
+                   
+                       A1 := CertainRows( Eval( A )[2] , [ i ] );
+                       
+                       B1 := Eval( B )[2];
+                       
+                       B2 := UnionOfRows( B1, gens * A1 );
+                       
+                       SS := HomalgVoidMatrix( GlobalR );
+                       
+                       B2 := BasisOfRowsCoeff( B2, SS );
+                       
+                       S := HomalgVoidMatrix( 1, NrRows( B2 ), GlobalR );
+                       
+                       A2 := HomalgLocalMatrix( DecideZeroRowsEffectively( A1, B2, S ), R );
+                       
+                       if not IsZero( A2 ) then
+                        
+                         S := S * SS;
+                        
+                         u := CertainColumns( S, [ m + 1 .. n + m ] ) * gens;
+                        
+                         IsZero( u );
+                        
+                         u := one + GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+                       
+                         A2 := HomalgRingElement( One( GlobalR ) , u , R ) * A2;
+                         
+                       fi;
+                       
+                       N := UnionOfRows( N, A2 );
+                       
+                   od;
+                   
+                   N := HomalgRingElement( One( GlobalR ) , denA , R ) * N;
+                   
+                   return N;
+                   
+                 end,
                
-                DecideZeroRows :=
-                  function( A, B )
+               DecideZeroColumns :=
+                 function( A, B )
+                   local R, m, gens, n, GlobalR, one, N, denA, i, A1, B1, A2, B2, S, u, SS;
+                   
+                   R := HomalgRing( A );
+                   
+                   T := HomalgVoidMatrix( R );
+                   
+                   m := NrColumns( B );
+                   
+                   gens := GeneratorsOfMaximalRightIdeal( R );
+                   
+                   n := NrColumns( gens );
+                   
+                   GlobalR := AssociatedGlobalRing( R );
+                   
+                   one := One( GlobalR );
+                   
+                   N := HomalgZeroMatrix( NrRows( A ), 0, R );
+                   
+                   TT := HomalgZeroMatrix( m, 0, R );
                   
-                    return DecideZeroRowsEffectively( A , B , HomalgVoidMatrix( HomalgRing( A ) ) );
+                   denA := Eval( A )[1];
+                   
+                   for i in [ 1 .. NrColumns( A ) ] do
+                   
+                       A1 := CertainColumns( Eval( A )[2] , [ i ] );
+                       
+                       B1 := Eval( B )[2];
+                       
+                       B2 := UnionOfColumns( B1, A1 * gens );
+                       
+                       SS := HomalgVoidMatrix( GlobalR );
+                       
+                       B2 := BasisOfColumnsCoeff( B2, SS );
+                       
+                       S := HomalgVoidMatrix( NrColumns( B2 ), 1, GlobalR );
+                       
+                       A2 := HomalgLocalMatrix( DecideZeroColumnsEffectively( A1, B2, S ), R );
+                       
+                       if not IsZero( A2 ) then
+                       
+                         S := SS * S;
+                      
+                         u := gens * CertainRows( S, [ m + 1 .. n + m ] );
+                       
+                         IsZero( u );
+                       
+                         u := one + GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+                       
+                         A2 := HomalgRingElement( One( GlobalR ) , u , R ) * A2;
+                       
+                       fi;
+                       
+                       N := UnionOfColumns( N, A2 );
+                       
+                   od;
                   
-                  end,
-               
-                DecideZeroColumns :=
-                  function( A, B )
-                  
-                    return DecideZeroColumnsEffectively( A , B , HomalgVoidMatrix( HomalgRing( A ) ) );
-                  
-                  end,
-               
-               
-#                DecideZeroColumns :=
-#                  function( A, B )
-#                    local R, N, i, ClearDenomMatrix, A2, B2;
-#                    
-#                    R := HomalgRing( A );
-#                    
-#                    N := HomalgVoidMatrix( NrRows( A ), 0, R );
-#                    
-#                    for i in [ 1 .. NrColumns( A ) ] do
-#                        
-#                        ClearDenomMatrix := Eval( UnionOfColumns( CertainColumns( A, [ i ] ), B ) )[2];
-#                        
-#                        A2 := CertainColumns( ClearDenomMatrix, [ 1 ] );
-#                        
-#                        B2 := CertainColumns( ClearDenomMatrix, [ 2 .. NrColumns( ClearDenomMatrix ) ] );
-#                        
-#                        B2 := UnionOfColumns( B2, A2 * GeneratorsOfMaximalRightIdeal( R ) );
-#                        
-#                        B2 := BasisOfColumnModule( B2 );
-#                        
-#                        A2 := HomalgLocalMatrix( DecideZeroColumns( A2, B2 ), R );
-#                        
-#                        N := UnionOfColumns( N, A2 );
-#                        
-#                    od;
-#                    
-#                    return N;
-#                    
-#                  end,
+                   N := HomalgRingElement( One( GlobalR ) , denA , R ) * N;
+                   
+                   return N;
+                   
+                 end,
                
                DecideZeroRowsEffectively :=
                  function( A, B, T )
@@ -199,21 +252,21 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        N := UnionOfRows( N, A2 );
                        
-                       Assert( 4, S*HomalgLocalMatrix(B1,R)+HomalgLocalMatrix(A1,R) = A2 );
+                       Assert( 5, S*HomalgLocalMatrix(B1,R)+HomalgLocalMatrix(A1,R) = A2 );
                        
                    od;
                    
+                   TT := HomalgRingElement( denB , denA , R ) * TT;
+                   
                    if HasEvalUnionOfRows( TT ) then
                        SetEvalUnionOfRows( T, EvalUnionOfRows( TT ) );
+                   elif HasEvalMulMat( TT ) then
+                       SetEvalMulMat( T, EvalMulMat( TT ) );
                    else
                        SetEval( T, Eval( TT ) );
                    fi;
                    
                    N := HomalgRingElement( One( GlobalR ) , denA , R ) * N;
-                   
-                   T := HomalgRingElement( denB , denA , R ) * T;
-                   
-                   Assert( 4, N = A + T * B );
                    
                    return N;
                    
@@ -225,11 +278,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    R := HomalgRing( A );
                    
-                   n := NrColumns( B );
+                   m := NrColumns( B );
                    
                    gens := GeneratorsOfMaximalRightIdeal( R );
                    
-                   m := NrColumns( gens );
+                   n := NrColumns( gens );
                    
                    GlobalR := AssociatedGlobalRing( R );
                    
@@ -237,7 +290,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    N := HomalgZeroMatrix( NrRows( A ), 0, R );
                    
-                   TT := HomalgZeroMatrix( n, 0, R );
+                   TT := HomalgZeroMatrix( m, 0, R );
                   
                    denA := Eval( A )[1];
                   
@@ -261,13 +314,13 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        S := SS * S;
                       
-                       u := gens * CertainRows( S, [ n + 1 .. n + m ] );
+                       u := gens * CertainRows( S, [ m + 1 .. n + m ] );
                        
                        IsZero( u );
                        
                        u := one + GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
                        
-                       S := HomalgLocalMatrix( CertainRows( S, [ 1 .. n ] ), u, R );
+                       S := HomalgLocalMatrix( CertainRows( S, [ 1 .. m ] ), u, R );
                        
                        TT := UnionOfColumns( TT, S );
                        
@@ -275,22 +328,22 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        N := UnionOfColumns( N, A2 );
                        
-                       Assert( 4, HomalgLocalMatrix(B1,R)*S+HomalgLocalMatrix(A1,R) = A2 );
+                       Assert( 5 , HomalgLocalMatrix(B1,R)*S+HomalgLocalMatrix(A1,R) = A2 );
                        
                    od;
                    
+                   TT := HomalgRingElement( denB , denA , R ) * TT;
+                   
                    if HasEvalUnionOfColumns( TT ) then
                        SetEvalUnionOfColumns( T, EvalUnionOfColumns( TT ) );
+                   elif HasEvalMulMat( TT ) then
+                       SetEvalMulMat( T, EvalMulMat( TT ) );
                    else
                        SetEval( T, Eval( TT ) );
                    fi;
                   
                    N := HomalgRingElement( One( GlobalR ) , denA , R ) * N;
                   
-                   T := HomalgRingElement( denB , denA , R ) * T;
-                   
-                   Assert( 4, N = A + B * T );
-                   
                    return N;
                    
                  end,
