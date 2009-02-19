@@ -79,7 +79,7 @@ Germany
 <!--  TableOfContents  . . . . . .  generate a table of contents   -->
 <TableOfContents/>
 
-<!--  The only chapter of the book  --> 
+<!--  The only chapter of the book  -->
 <Body>
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">

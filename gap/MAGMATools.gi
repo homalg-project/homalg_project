@@ -69,6 +69,25 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               Gcd :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ "GreatestCommonDivisor(", a, b, ")" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
+                   
+                 end,
+               
+               CancelGcd :=
+                 function( a, b )
+                   local a_g, b_g;
+                   
+                   homalgSendBlocking( [ "g:=GreatestCommonDivisor(", a, b, ")" ], "need_command", HOMALG_IO.Pictograms.Gcd );
+                   a_g := homalgSendBlocking( [ "(", a, ") div g" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "(", b, ") div g" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
+                   
+                   return [ a_g, b_g ];
+                   
+                 end,
+               
                ShallowCopy :=
                  function( C )
                    
