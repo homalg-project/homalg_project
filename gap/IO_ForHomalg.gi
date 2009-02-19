@@ -73,6 +73,9 @@ InstallValue( HOMALG_IO,
                 Sum					:= "a+b",	## add two ring elements
                 Product					:= "a*b",	## multiply two ring elements
                 
+                Gcd					:= "gcd",	## the (greatest) common divisor
+                CancelGcd				:= "ccd",	## cancel the (greatest) common divisor
+                
                 ## create matrices:
                 HomalgMatrix				:= "A:=",	## define a matrix
                 CopyMatrix				:= "A>A",	## copy a matrix
@@ -156,8 +159,16 @@ InstallValue( HOMALG_IO,
 
 ##
 InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
-  function( file )
-    local list, separator, directory, filename, fs;
+  function( arg )
+    local nargs, file, list, separator, pos_sep, l, directory, filename, fs;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        Error( "empty input" );
+    fi;
+    
+    file := arg[1];
     
     if IsBound( HOMALG_IO.ListOfAlternativeDirectoryForTemporaryFiles ) then
         list := HOMALG_IO.ListOfAlternativeDirectoryForTemporaryFiles;
@@ -167,15 +178,23 @@ InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
     
     ## figure out the directory separtor:
     if IsBound( GAPInfo.UserHome ) then
-        separator := GAPInfo.UserHome{[1]};
+        separator := GAPInfo.UserHome[1];
     else
-        separator := "/";
+        separator := '/';
+    fi;
+    
+    if nargs > 1 then
+        pos_sep := PositionProperty( Reversed( file ), c -> c = separator );
+        if pos_sep <> fail then
+            l := Length( file );
+            file := file{[ l - pos_sep + 2 .. l ]};
+        fi;
     fi;
     
     for directory in list do
         
-        if directory{[Length(directory)]} <> separator then
-            filename := Concatenation( directory, separator, file );
+        if directory[Length( directory )] <> separator then
+            filename := Concatenation( directory, [ separator ], file );
         else
             filename := Concatenation( directory, file );
         fi;
@@ -184,7 +203,11 @@ InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
         
         if fs <> fail then
             IO_Close( fs );
-            return directory;
+            if nargs > 1 and arg[2] = "with_filename" then
+                return filename;
+            else
+                return directory;
+            fi;
         fi;
         
     od;
