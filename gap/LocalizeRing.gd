@@ -77,11 +77,17 @@ DeclareOperation( "AssociatedGlobalRing",
 DeclareOperation( "AssociatedGlobalRing",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "NumeratorOfLocalElement",
+DeclareOperation( "Numerator",
         [ IsHomalgRingElement ] );
 
-DeclareOperation( "DenominatorOfLocalElement",
+DeclareOperation( "Denominator",
         [ IsHomalgRingElement ] );
+
+DeclareOperation( "Numerator",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "Denominator",
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "HomalgLocalMatrix",
         [ IsHomalgMatrix, IsRingElement, IsHomalgRing ] );
