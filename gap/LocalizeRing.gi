@@ -288,11 +288,13 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
 end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement, IsHomalgRingElement ],
+        "for pairs of global ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
   function( a, b )
-  local R, RP, result;
+    local R, za, zb, z, RP, result;
     
     R := HomalgRing( a );
     
@@ -302,92 +304,136 @@ InstallMethod( Cancel,
         Error( "no ring element constructor found in the ring\n" );
     fi;
     
-    RP := homalgTable( R );
+    za := IsZero( a );
+    zb := IsZero( b );
     
-    if IsZero( a ) then
-    
-      return [ Zero( R ) , One( R ) ];
-    
-    elif IsZero( b ) then
-    
-      return [ One( R ) , Zero( R ) ];
-    
-    elif IsBound(RP!.CancelGcd) then
-    
-      result := RP!.CancelGcd( a , b );
-      
-      Assert( 4 , result[1] * b = result[2] * a );
-      
-      return result;
-      
-    else #fallback: no cancelation
-    
-      return [ a , b ];
-    
+    if za and zb then
+        
+        z := Zero( R );
+        
+        return [ z, z ];
+        
+    elif za then
+        
+        return [ Zero( R ), One( R ) ];
+        
+    elif zb then
+        
+        return [ One( R ), Zero( R ) ];
+        
     fi;
     
-  end
-);
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CancelGcd) then
+        
+        result := RP!.CancelGcd( a, b );
+        
+        Assert( 4, result[1] * b = result[2] * a );
+        
+        return result;
+        
+    else	#fallback: no cancelation
+        
+        return [ a, b ];
+        
+    fi;
+    
+end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement and IsOne, IsHomalgRingElement and not IsZero ],
+        "for pairs of global ring elements",
+        [ IsRingElement and IsMinusOne, IsRingElement ],
+        
   function( a, b )
     
-    return [ a , b ];
+    return [ One( b ), -b ];
     
-  end
-);
+end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement and not IsZero , IsHomalgRingElement and IsOne ],
+        "for pairs of global ring elements",
+        [ IsRingElement, IsRingElement and IsMinusOne ],
+        
   function( a, b )
     
-    return [ a , b ];
+    return [ -a, One( a ) ];
     
-  end
-);
+end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement and IsMinusOne, IsHomalgRingElement and not IsZero ],
+        "for pairs of global ring elements",
+        [ IsRingElement and IsMinusOne, IsRingElement and IsMinusOne ],
+        
+  function( a, b )
+    local o;
+    
+    o := One( a );
+    
+    return [ o, o ];
+    
+end );
+
+##
+InstallMethod( Cancel,
+        "for pairs of global ring elements",
+        [ IsRingElement and IsOne, IsRingElement ],
+        
   function( a, b )
     
-    return [ One(a) , MinusOne(a) * b ];
+    return [ One( a ), b ];
     
-  end
-);
+end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement and not IsZero , IsHomalgRingElement and IsMinusOne ],
+        "for pairs of global ring elements",
+        [ IsRingElement, IsRingElement and IsOne ],
+        
   function( a, b )
     
-    return [ MinusOne(a) * a , One(a) ];
+    return [ a, One( b ) ];
     
-  end
-);
+end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement and IsZero, IsHomalgRingElement ],
+        "for pairs of global ring elements",
+        [ IsRingElement and IsZero, IsRingElement ],
+        
   function( a, b )
     
-    return [ Zero(a) , One(a) ];
+    return [ Zero( a ), One( a ) ];
     
-  end
-);
+end );
 
+##
 InstallMethod( Cancel,
-  "for pairs of global ring elements",
-  [ IsHomalgRingElement , IsHomalgRingElement and IsZero],
+        "for pairs of global ring elements",
+        [ IsRingElement, IsRingElement and IsZero ],
+        
   function( a, b )
     
-    return [ One(a) , Zero(a) ];
+    return [ One( b ), Zero( b ) ];
     
-  end
-);
+end );
+
+##
+InstallMethod( Cancel,
+        "for pairs of global ring elements",
+        [ IsRingElement and IsZero, IsRingElement and IsZero ],
+        
+  function( a, b )
+    local z;
+    
+    z := Zero( a );
+    
+    return [ z, z ];
+    
+end );
 
 ####################################
 #
@@ -488,7 +534,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
         denom := One( numer );
     fi;
     
-    c := Cancel( numer , denom );
+    c := Cancel( numer, denom );
     numer := c[1];
     denom := c[2];
     

@@ -28,7 +28,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                Minus :=
                  function( a, b )
                  local c;
-                   c := Cancel( Denominator( a ) , Denominator( b ) );
+                   c := Cancel( Denominator( a ), Denominator( b ) );
                    return HomalgLocalRingElement(
                                   Numerator( a ) * c[2]
                                   -Numerator( b ) * c[1],
@@ -58,7 +58,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                Sum :=
                  function( a, b )
                  local c;
-                   c := Cancel( Denominator( a ) , Denominator( b ) );
+                   c := Cancel( Denominator( a ), Denominator( b ) );
                    return HomalgLocalRingElement(
                                   Numerator( a ) * c[2]
                                   +Numerator( b ) * c[1],
@@ -154,7 +154,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    a := Eval( A );
                    b := Eval( B );
-                   c := Cancel( a[2] , b[2] );
+                   c := Cancel( a[2], b[2] );
                    
                    return [
                      UnionOfRows( c[2] * a[1], c[1] * b[1] ),
@@ -168,10 +168,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    a := Eval( A );
                    b := Eval( B );
-                   c := Cancel( a[2] , b[2] );
+                   c := Cancel( a[2], b[2] );
                    
                    return [
-                     UnionOfColumns( b[2] * a[1], c[1] * b[1] ),
+                     UnionOfColumns( c[2] * a[1], c[1] * b[1] ),
                      c[1] * b[2]
                    ];
                  end,
@@ -190,7 +190,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                        
                        a := Eval( A );
                        
-                       c := Cancel( u , a[2] );
+                       c := Cancel( u, a[2] );
                        
                        u := u * c[2];
                        
@@ -220,7 +220,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    local e, c;
                    
                    e := Eval( A );
-                   c := Cancel( Numerator( a ) , Denominator( a ) * e[2] );
+                   c := Cancel( Numerator( a ), Denominator( a ) * e[2] );
                    
                    return [
                       c[1] * e[1],
@@ -234,7 +234,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    a := Eval( A );
                    b := Eval( B );
-                   c := Cancel( a[2] , b[2] );
+                   c := Cancel( a[2], b[2] );
                    
                    return [
                      c[2] * a[1] + c[1] * b[1],
@@ -248,7 +248,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    a := Eval( A );
                    b := Eval( B );
-                   c := Cancel( a[2] , b[2] );
+                   c := Cancel( a[2], b[2] );
                    
                    return [
                      c[2] * a[1] - c[1] * b[1],

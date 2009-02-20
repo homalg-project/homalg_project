@@ -94,6 +94,6 @@ DeclareOperation( "HomalgLocalMatrix",
 
 DeclareOperation( "HomalgLocalMatrix",
         [ IsHomalgMatrix, IsHomalgRing ] );
-        
+
 DeclareOperation( "Cancel",
-[ IsHomalgRingElement, IsHomalgRingElement ] );
+        [ IsRingElement, IsRingElement ] );
