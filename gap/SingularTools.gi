@@ -101,7 +101,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Gcd :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], "return_ring_element", HOMALG_IO.Pictograms.Gcd );
+                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Gcd );
                    
                  end,
                
@@ -109,9 +109,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( a, b )
                    local g, a_g, b_g;
                    
-                   g := Gcd( a , b );
-                   a_g := homalgSendBlocking( [ "(", a, ") / (", g, ")" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "(", b, ") / (", g, ")" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
+                   g := homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Gcd );
+                   a_g := homalgSendBlocking( [ "(", a, ") / (", g, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "(", b, ") / (", g, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
                    
                    return [ a_g, b_g ];
                    
