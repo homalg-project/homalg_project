@@ -294,7 +294,7 @@ InstallMethod( Cancel,
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( a, b )
-    local R, za, zb, z, RP, result;
+    local R, za, zb, z, ma, mb, o, RP, result;
     
     R := HomalgRing( a );
     
@@ -320,6 +320,35 @@ InstallMethod( Cancel,
     elif zb then
         
         return [ One( R ), Zero( R ) ];
+        
+    fi;
+    
+    if IsOne( a ) then
+        
+        return [ One( R ), b ];
+        
+    elif IsOne( b ) then
+        
+        return [ a, One( R ) ];
+        
+    fi;
+    
+    ma := IsMinusOne( a );
+    mb := IsMinusOne( b );
+    
+    if ma and mb then
+        
+        o := One( R );
+        
+        return [ o, o ];
+        
+    elif ma then
+        
+        return [ One( R ), -b ];
+        
+    elif mb then
+        
+        return [ -a, One( R ) ];
         
     fi;
     
