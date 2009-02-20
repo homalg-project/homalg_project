@@ -331,7 +331,7 @@ InstallMethod( Cancel,
 
 InstallMethod( Cancel,
   "for pairs of global ring elements",
-  [ IsHomalgRingElement and IsOne, IsHomalgRingElement ],
+  [ IsHomalgRingElement and IsOne, IsHomalgRingElement and not IsZero ],
   function( a, b )
     
     return [ a , b ];
@@ -341,10 +341,30 @@ InstallMethod( Cancel,
 
 InstallMethod( Cancel,
   "for pairs of global ring elements",
-  [ IsHomalgRingElement , IsHomalgRingElement and IsOne ],
+  [ IsHomalgRingElement and not IsZero , IsHomalgRingElement and IsOne ],
   function( a, b )
     
     return [ a , b ];
+    
+  end
+);
+
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement and IsMinusOne, IsHomalgRingElement and not IsZero ],
+  function( a, b )
+    
+    return [ One(a) , MinusOne(a) * b ];
+    
+  end
+);
+
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement and not IsZero , IsHomalgRingElement and IsMinusOne ],
+  function( a, b )
+    
+    return [ MinusOne(a) * a , One(a) ];
     
   end
 );
