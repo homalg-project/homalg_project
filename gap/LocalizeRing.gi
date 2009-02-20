@@ -442,7 +442,7 @@ end );
 ##
 InstallGlobalFunction( HomalgLocalRingElement,
   function( arg )
-    local nargs, numer, ring, ar, properties, denom, r;
+    local nargs, numer, ring, ar, properties, denom, c, r;
     
     nargs := Length( arg );
     
@@ -464,7 +464,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
             ring := arg[2];
             ar := [ numer, ring ];
             properties := KnownTruePropertiesOfObject( numer );
-            Append( ar, List( properties, ValueGlobal ) );	## at least an empty list is inserted; avoids infinite loops
+            Append( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
             return CallFuncList( HomalgLocalRingElement, ar );
         fi;
         
@@ -487,6 +487,10 @@ InstallGlobalFunction( HomalgLocalRingElement,
     if not IsBound( denom ) then
         denom := One( numer );
     fi;
+    
+    c := Cancel( numer , denom );
+    numer := c[1];
+    denom := c[2];
     
     if IsBound( ring ) then
         
