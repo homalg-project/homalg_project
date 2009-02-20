@@ -70,7 +70,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroRows :=
                  function( A, B )
-                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, numB, i, A1, B1, A2, B2, S, u, SS, bb;
+                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, numB, i, A1, B1, A2, B2, S, u, SS;
                    
                    R := HomalgRing( A );
                    
@@ -119,7 +119,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                            
                            u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
                            
-                           IsZero( u ); bb := IsHomalgRingElement( u ) and IsMinusOne( u ); ## assign to avoid a syntax error
+                           IsZero( u );
                            
                            u := one + u;
                            
@@ -139,7 +139,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroColumns :=
                  function( A, B )
-                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, numB, i, A1, B1, A2, B2, S, u, SS, bb;
+                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, numB, i, A1, B1, A2, B2, S, u, SS;
                    
                    R := HomalgRing( A );
                    
@@ -188,7 +188,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                            
                            u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
                            
-                           IsZero( u ); bb := IsHomalgRingElement( u ) and IsMinusOne( u ); ## assign to avoid a syntax error
+                           IsZero( u );
                            
                            u := one + u;
                            
@@ -208,7 +208,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroRowsEffectively :=
                  function( A, B, T )
-                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, u, SS, bb;
+                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, u, SS;
                    
                    R := HomalgRing( A );
                    
@@ -258,7 +258,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
                        
-                       IsZero( u ); bb := IsHomalgRingElement( u ) and IsMinusOne( u ); ## assign to avoid a syntax error
+                       IsZero( u );
                        
                        u := one + u;
                        
@@ -292,7 +292,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
-                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, u, SS, bb;
+                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, u, SS;
                    
                    R := HomalgRing( A );
                    
@@ -342,7 +342,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
                        
-                       IsZero( u ); bb := IsHomalgRingElement( u ) and IsMinusOne( u ); ## assign to avoid a syntax error
+                       IsZero( u );
                        
                        u := one + u;
                        
