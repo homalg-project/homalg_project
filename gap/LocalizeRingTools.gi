@@ -178,27 +178,35 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                DiagMat :=
                  function( e )
-                   local R, u, l, A, a, c;
+                   local R, u, NumerList, A, a, c;
                    
                    R := HomalgRing( e[1] );
                    
                    u := One( AssociatedGlobalRing ( R ) );
                    
-                   l := [ ];
+                   NumerList := [ ];
                    
                    for A in e do
                        
                        a := Eval( A );
                        
+                       #u/a[2]=c[1]/c[2] <=> u*c[2]=a[2]*c[1]
+                       #NumerList/u and a[1]/a[2]
+                       #     --->
+                       #(c[2]*NumerList)/(c[2]*u) and 
+                       #(c[1]*a[1])/(c[1]*a[2]) = (c[1]*a[1])/(c[2]*u)
+                       
                        c := Cancel( u, a[2] );
                        
                        u := u * c[2];
                        
-                       Add( l, a[1] );
+                       NumerList := c[2] * NumerList;
+                       
+                       Add( NumerList , c[1] * a[1] );
                        
                    od;
                    
-                   return [ DiagMat( l ), u ];
+                   return [ DiagMat( NumerList ), u ];
                    
                  end,
                
