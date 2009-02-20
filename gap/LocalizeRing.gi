@@ -288,6 +288,39 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
 end );
 
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement, IsHomalgRingElement ],
+  function( a, b )
+  local R, RP, result;
+    
+    R := HomalgRing( a );
+    
+    if R = fail then
+        TryNextMethod( );
+    elif not HasRingElementConstructor( R ) then
+        Error( "no ring element constructor found in the ring\n" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CancelGcd) then
+      
+      result := RP!.CancelGcd( a , b );
+      
+      Assert( 4 , result[1] * b = result[2] * a );
+      
+      return result;
+      
+    else #fallback: no cancelation
+    
+      return [ a , b ];
+    
+    fi;
+    
+  end
+);
+
 ####################################
 #
 # constructor functions and methods:
