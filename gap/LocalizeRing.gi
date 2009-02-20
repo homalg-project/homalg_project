@@ -304,8 +304,16 @@ InstallMethod( Cancel,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.CancelGcd) then
-      
+    if IsZero( a ) then
+    
+      return [ Zero( R ) , One( R ) ];
+    
+    elif IsZero( b ) then
+    
+      return [ One( R ) , Zero( R ) ];
+    
+    elif IsBound(RP!.CancelGcd) then
+    
       result := RP!.CancelGcd( a , b );
       
       Assert( 4 , result[1] * b = result[2] * a );
@@ -317,6 +325,46 @@ InstallMethod( Cancel,
       return [ a , b ];
     
     fi;
+    
+  end
+);
+
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement and IsOne, IsHomalgRingElement ],
+  function( a, b )
+    
+    return [ a , b ];
+    
+  end
+);
+
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement , IsHomalgRingElement and IsOne ],
+  function( a, b )
+    
+    return [ a , b ];
+    
+  end
+);
+
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement and IsZero, IsHomalgRingElement ],
+  function( a, b )
+    
+    return [ Zero(a) , One(a) ];
+    
+  end
+);
+
+InstallMethod( Cancel,
+  "for pairs of global ring elements",
+  [ IsHomalgRingElement , IsHomalgRingElement and IsZero],
+  function( a, b )
+    
+    return [ One(a) , Zero(a) ];
     
   end
 );
