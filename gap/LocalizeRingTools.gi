@@ -27,13 +27,16 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                Minus :=
                  function( a, b )
+                 local c;
+                   c := Cancel( Denominator( a ) , Denominator( b ) );
                    return HomalgLocalRingElement(
-                                  Numerator( a ) * Denominator( b )
-                                  -Numerator( b ) * Denominator( a ),
-                                  Denominator( a ) * Denominator( b ),
+                                  Numerator( a ) * c[2]
+                                  -Numerator( b ) * c[1],
+                                  Denominator( a ) * c[2],
                                   HomalgRing( a ) );
                  end,
                
+               #HomalgLocalRingElement will cancel here
                DivideByUnit :=
                  function( a, u )
                    return HomalgLocalRingElement(
@@ -54,13 +57,16 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                Sum :=
                  function( a, b )
+                 local c;
+                   c := Cancel( Denominator( a ) , Denominator( b ) );
                    return HomalgLocalRingElement(
-                                  Numerator( a ) * Denominator( b )
-                                  +Numerator( b ) * Denominator( a ),
-                                  Denominator( a ) * Denominator( b ),
+                                  Numerator( a ) * c[2]
+                                  +Numerator( b ) * c[1],
+                                  Denominator( a ) * c[2],
                                   HomalgRing( a ) );
                  end,
                
+               #HomalgLocalRingElement will cancel here
                Product :=
                  function( a, b )
                    return HomalgLocalRingElement(
@@ -144,33 +150,35 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                UnionOfRows :=
                  function( A, B )
-                   local a, b;
+                   local a, b, c;
                    
                    a := Eval( A );
                    b := Eval( B );
+                   c := Cancel( a[2] , b[2] );
                    
                    return [
-                     UnionOfRows( b[2] * a[1], a[2] * b[1] ),
-                     a[2] * b[2]
+                     UnionOfRows( c[2] * a[1], c[1] * b[1] ),
+                     c[1] * b[2]
                    ];
                  end,
                
                UnionOfColumns :=
                  function( A, B )
-                   local a, b;
+                   local a, b, c;
                    
                    a := Eval( A );
                    b := Eval( B );
+                   c := Cancel( a[2] , b[2] );
                    
                    return [
-                     UnionOfColumns( b[2] * a[1], a[2] * b[1] ),
-                     a[2] * b[2]
+                     UnionOfColumns( b[2] * a[1], c[1] * b[1] ),
+                     c[1] * b[2]
                    ];
                  end,
                
                DiagMat :=
                  function( e )
-                   local R, u, l, A, a;
+                   local R, u, l, A, a, c;
                    
                    R := HomalgRing( e[1] );
                    
@@ -182,7 +190,9 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                        
                        a := Eval( A );
                        
-                       u := u * a[2];
+                       c := Cancel( u , a[2] );
+                       
+                       u := u * c[2];
                        
                        Add( l, a[1] );
                        
@@ -207,39 +217,42 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                MulMat :=
                  function( a, A )
-                   local e;
+                   local e, c;
                    
                    e := Eval( A );
+                   c := Cancel( Numerator( a ) , Denominator( a ) * e[2] );
                    
                    return [
-                     Numerator( a ) * e[1],
-                     Denominator( a ) * e[2]
+                      c[1] * e[1],
+                      c[2]
                      ];
                  end,
                
                AddMat :=
                  function( A, B )
-                   local a, b;
+                   local a, b, c;
                    
                    a := Eval( A );
                    b := Eval( B );
+                   c := Cancel( a[2] , b[2] );
                    
                    return [
-                     b[2] * a[1] + a[2] * b[1],
-                     a[2] * b[2]
+                     c[2] * a[1] + c[1] * b[1],
+                     c[1] * b[2]
                    ];
                  end,
                
                SubMat :=
                  function( A, B )
-                   local a, b;
+                   local a, b, c;
                    
                    a := Eval( A );
                    b := Eval( B );
+                   c := Cancel( a[2] , b[2] );
                    
                    return [
-                     b[2] * a[1] - a[2] * b[1],
-                     a[2] * b[2]
+                     c[2] * a[1] - c[1] * b[1],
+                     c[1] * b[2]
                    ];
                  end,
                
