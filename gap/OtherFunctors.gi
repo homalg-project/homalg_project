@@ -193,9 +193,70 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     SetEpiOnLeftFactor( sum, piM );
     SetEpiOnRightFactor( sum, piN );
     
-    if ( HasIsZero( M ) and not IsZero( M ) ) or
-       ( HasIsZero( N ) and not IsZero( N ) ) then
-        SetIsZero( sum, false );
+    ## properties of the direct sum module
+    
+    ## IsZero
+    if HasIsZero( M ) and HasIsZero( N ) then
+        if IsZero( M ) and IsZero( N ) then
+            SetIsZero( sum, true );
+        else	## the contra position is also true: trivial since we do not allow virtual modules
+            SetIsZero( sum, false );
+        fi;
+    fi;
+    
+    ## IsPure
+    if HasIsPure( M ) and HasIsPure( N ) then
+        if IsPure( M ) and IsPure( N ) then
+            if HasCodimOfModule( M ) and HasCodimOfModule( N ) then
+                if CodimOfModule( M ) = CodimOfModule( N ) or
+                   IsZero( M ) or IsZero( N ) then
+                    SetIsPure( sum, true );
+                else
+                    SetIsPure( sum, false );
+                fi;
+            fi;
+        else
+            SetIsPure( sum, false );
+        fi;
+    fi;
+    
+    ## IsArtinian
+    if HasIsArtinian( M ) and HasIsArtinian( N ) then
+        if IsArtinian( M ) and IsArtinian( N ) then
+            SetIsArtinian( sum, true );
+        else	## the contra position is also true: trivial
+            SetIsArtinian( sum, false );
+        fi;
+    fi;
+    
+    ## IsReflexive
+    if HasIsReflexive( M ) and HasIsReflexive( N ) then
+        if IsReflexive( M ) and IsReflexive( N ) then
+            SetIsReflexive( sum, true );
+        fi;
+    fi;
+    
+    ## IsProjective
+    if HasIsProjective( M ) and HasIsProjective( N ) then
+        if IsProjective( M ) and IsProjective( N ) then
+            SetIsProjective( sum, true );
+        else	## the contra position is also true: a projective module is a direct summand of a free
+            SetIsProjective( sum, false );
+        fi;
+    fi;
+    
+    ## IsFree
+    if HasIsFree( M ) and HasIsFree( N ) then
+        if IsFree( M ) and IsFree( N ) then
+            SetIsFree( sum, true );
+        fi;
+    fi;
+    
+    ## attributes of the direct sum module
+    
+    ## CodimOfModule
+    if HasCodimOfModule( M ) and HasCodimOfModule( N ) then
+        SetCodimOfModule( sum, Minimum( CodimOfModule( M ), CodimOfModule( N ) ) );
     fi;
     
     return sum;
