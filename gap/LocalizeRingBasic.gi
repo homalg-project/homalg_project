@@ -70,7 +70,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroRows :=
                  function( A, B )
-                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, numB, i, A1, B1, A2, B2, S, u, SS;
+                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2;
                    
                    R := HomalgRing( A );
                    
@@ -93,37 +93,21 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    numA := a[1];
                    denA := a[2];
                    
-                   numB := Numerator( B );
+                   B1 := Numerator( B );
                    
                    for i in [ 1 .. NrRows( A ) ] do
                    
                        A1 := CertainRows( numA, [ i ] );
                        
-                       B1 := numB;
-                       
                        B2 := UnionOfRows( B1, gens * A1 );
                        
-                       SS := HomalgVoidMatrix( GlobalR );
+                       B2 := BasisOfRows( B2 );
                        
-                       B2 := BasisOfRowsCoeff( B2, SS );
-                       
-                       S := HomalgVoidMatrix( 1, NrRows( B2 ), GlobalR );
-                       
-                       A2 := HomalgLocalMatrix( DecideZeroRowsEffectively( A1, B2, S ), R );
+                       A2 := HomalgLocalMatrix( DecideZeroRows( A1, B2 ), R );
                        
                        if not IsZero( A2 ) then
                            
-                           S := S * SS;
-                           
-                           u := CertainColumns( S, [ m + 1 .. n + m ] ) * gens;
-                           
-                           u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
-                           
-                           IsZero( u );
-                           
-                           u := one + u;
-                           
-                           A2 := HomalgRingElement( One( GlobalR ), u, R ) * A2;
+                         A2 := HomalgLocalMatrix( DecideZeroRows( A1, B1 ), R );
                            
                        fi;
                        
@@ -139,7 +123,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroColumns :=
                  function( A, B )
-                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, numB, i, A1, B1, A2, B2, S, u, SS;
+                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2;
                    
                    R := HomalgRing( A );
                    
@@ -162,37 +146,21 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    numA := a[1];
                    denA := a[2];
                    
-                   numB := Numerator( B );
+                   B1 := Numerator( B );
                    
                    for i in [ 1 .. NrColumns( A ) ] do
                    
                        A1 := CertainColumns( numA, [ i ] );
                        
-                       B1 := numB;
-                       
                        B2 := UnionOfColumns( B1, A1 * gens );
                        
-                       SS := HomalgVoidMatrix( GlobalR );
+                       B2 := BasisOfColumns( B2 );
                        
-                       B2 := BasisOfColumnsCoeff( B2, SS );
-                       
-                       S := HomalgVoidMatrix( NrColumns( B2 ), 1, GlobalR );
-                       
-                       A2 := HomalgLocalMatrix( DecideZeroColumnsEffectively( A1, B2, S ), R );
+                       A2 := HomalgLocalMatrix( DecideZeroColumns( A1, B2 ), R );
                        
                        if not IsZero( A2 ) then
                            
-                           S := SS * S;
-                           
-                           u := gens * CertainRows( S, [ m + 1 .. n + m ] );
-                           
-                           u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
-                           
-                           IsZero( u );
-                           
-                           u := one + u;
-                           
-                           A2 := HomalgRingElement( One( GlobalR ), u, R ) * A2;
+                         A2 := HomalgLocalMatrix( DecideZeroColumns( A1, B1 ), R );
                            
                        fi;
                        
@@ -227,7 +195,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    TT := HomalgZeroMatrix( 0, m, R );
                    
                    a := Eval( A );
-                   
+
                    numA := a[1];
                    denA := a[2];
                    
@@ -248,25 +216,37 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        B2 := BasisOfRowsCoeff( B2, SS );
                        
-                       S := HomalgVoidMatrix( 1, NrRows( B2 ), GlobalR );
+                       S := HomalgVoidMatrix( GlobalR );
                        
                        A2 := HomalgLocalMatrix( DecideZeroRowsEffectively( A1, B2, S ), R );
                        
-                       S := S * SS;
+                       if IsZero( A2) then
                        
-                       u := CertainColumns( S, [ m + 1 .. n + m ] ) * gens;
+                         S := S * SS;
+                         
+                         u := CertainColumns( S, [ m + 1 .. n + m ] ) * gens;
+                         
+                         u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+                         
+                         IsZero( u );
+                         
+                         u := one + u;
+                         
+                         S := HomalgLocalMatrix( CertainColumns( S, [ 1 .. m ] ), u, R );
+                         
+                         A2 := HomalgRingElement( one , u , R ) * A2;
                        
-                       u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+                       else
                        
-                       IsZero( u );
+                         S := HomalgVoidMatrix( GlobalR );
+                         
+                         A2 := HomalgLocalMatrix( DecideZeroRowsEffectively( A1 , B1 , S ) , one , R );
+                         
+                         S := HomalgLocalMatrix( S , one , R );
                        
-                       u := one + u;
-                       
-                       S := HomalgLocalMatrix( CertainColumns( S, [ 1 .. m ] ), u, R );
+                       fi;
                        
                        TT := UnionOfRows( TT, S );
-                       
-                       A2 := HomalgRingElement( One( GlobalR ), u, R ) * A2;
                        
                        N := UnionOfRows( N, A2 );
                        
@@ -284,7 +264,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        SetEval( T, Eval( TT ) );
                    fi;
                    
-                   N := HomalgRingElement( One( GlobalR ), denA, R ) * N;
+                   N := HomalgRingElement( one , denA , R ) * N;
                    
                    return N;
                    
@@ -332,25 +312,37 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        B2 := BasisOfColumnsCoeff( B2, SS );
                        
-                       S := HomalgVoidMatrix( NrColumns( B2 ), 1, GlobalR );
+                       S := HomalgVoidMatrix( GlobalR );
                        
                        A2 := HomalgLocalMatrix( DecideZeroColumnsEffectively( A1, B2, S ), R );
                        
-                       S := SS * S;
-                      
-                       u := gens * CertainRows( S, [ m + 1 .. n + m ] );
+                       if IsZero( A2 ) then
                        
-                       u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+                         S := SS * S;
+                        
+                         u := gens * CertainRows( S, [ m + 1 .. n + m ] );
+                         
+                         u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+                         
+                         IsZero( u );
+                         
+                         u := one + u;
+                         
+                         S := HomalgLocalMatrix( CertainRows( S, [ 1 .. m ] ), u, R );
+                         
+                         A2 := HomalgRingElement( one, u, R ) * A2;
                        
-                       IsZero( u );
+                       else
                        
-                       u := one + u;
+                         S := HomalgVoidMatrix( GlobalR );
+                         
+                         A2 := HomalgLocalMatrix( DecideZeroColumnsEffectively( A1 , B1 , S ) , one , R );
+                         
+                         S := HomalgLocalMatrix( S , one , R );
                        
-                       S := HomalgLocalMatrix( CertainRows( S, [ 1 .. m ] ), u, R );
+                       fi;
                        
                        TT := UnionOfColumns( TT, S );
-                       
-                       A2 := HomalgRingElement( One( GlobalR ), u, R ) * A2;
                        
                        N := UnionOfColumns( N, A2 );
                        
@@ -368,7 +360,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        SetEval( T, Eval( TT ) );
                    fi;
                   
-                   N := HomalgRingElement( One( GlobalR ), denA, R ) * N;
+                   N := HomalgRingElement( one , denA , R ) * N;
                   
                    return N;
                    
