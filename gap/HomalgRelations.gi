@@ -69,7 +69,7 @@ BindGlobal( "TheTypeHomalgRelationsOfRightModule",
 
 ##
 InstallImmediateMethod( IsInjectivePresentation,
-        IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule, 0,
+        IsHomalgRelationsOfLeftModule, 0,
         
   function( rel )
     local mat;
@@ -86,7 +86,7 @@ end );
 
 ##
 InstallImmediateMethod( IsInjectivePresentation,
-        IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule, 0,
+        IsHomalgRelationsOfRightModule, 0,
         
   function( rel )
     local mat;
@@ -110,7 +110,7 @@ end );
 ##
 InstallMethod( DegreesOfGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( rel )
     
@@ -125,7 +125,7 @@ end );
 ##
 InstallMethod( MatrixOfRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( rel )
     
@@ -136,7 +136,7 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable matrices",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( rel1, rel2 )
     
@@ -147,7 +147,7 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable matrices",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( rel1, rel2 )
     
@@ -158,7 +158,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( rel )
     
@@ -169,7 +169,7 @@ end );
 ##
 InstallMethod( HasNrGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -180,7 +180,7 @@ end );
 ##
 InstallMethod( HasNrGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -191,7 +191,7 @@ end );
 ##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -202,7 +202,7 @@ end );
 ##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -213,7 +213,7 @@ end );
 ##
 InstallMethod( HasNrRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -224,7 +224,7 @@ end );
 ##
 InstallMethod( HasNrRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -235,7 +235,7 @@ end );
 ##
 InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -246,7 +246,7 @@ end );
 ##
 InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -257,8 +257,7 @@ end );
 ##
 InstallMethod( CertainRelations,		### defines: CertainRelations
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsList ],
+        [ IsHomalgRelationsOfLeftModule, IsList ],
         
   function( rel, plist )
     local sub_rel;
@@ -277,8 +276,7 @@ end );
 ##
 InstallMethod( CertainRelations,		### defines: CertainRelations
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsList ],
+        [ IsHomalgRelationsOfRightModule, IsList ],
         
   function( rel, plist )
     local sub_rel;
@@ -297,8 +295,7 @@ end );
 ##
 InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( mat1, rel2 )
     local rel;
@@ -319,8 +316,7 @@ end );
 ##
 InstallMethod( UnionOfRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsHomalgMatrix ],
+        [ IsHomalgRelationsOfLeftModule, IsHomalgMatrix ],
         
   function( rel1, mat2 )
     
@@ -331,8 +327,7 @@ end );
 ##
 InstallMethod( UnionOfRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( rel1, rel2 )
     
@@ -343,8 +338,7 @@ end );
 ##
 InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( mat1, rel2 )
     local rel;
@@ -365,8 +359,7 @@ end );
 ##
 InstallMethod( UnionOfRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsHomalgMatrix ],
+        [ IsHomalgRelationsOfRightModule, IsHomalgMatrix ],
         
   function( rel1, mat2 )
     
@@ -377,8 +370,7 @@ end );
 ##
 InstallMethod( UnionOfRelations,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( rel1, rel2 )
     
@@ -389,7 +381,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     local mat, bas;
@@ -424,7 +416,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     local mat, bas;
@@ -470,32 +462,22 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgRelations ],
         
   function( mat, rel )
     
-    return DecideZeroRows( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        return DecideZeroRows( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+    else
+        return DecideZeroColumns( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+    fi;
     
 end );
 
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
-        
-  function( mat, rel )
-    
-    return DecideZeroColumns( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
-    
-end );
-
-##
-InstallMethod( DecideZero,
-        "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( rel_, rel )
     
@@ -506,8 +488,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( rel_, rel )
     
@@ -518,7 +499,7 @@ end );
 ##
 InstallMethod( BasisCoeff,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     local bas;
@@ -539,7 +520,7 @@ end );
 ##
 InstallMethod( BasisCoeff,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     local bas;
@@ -560,7 +541,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -571,8 +552,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( mat, rel )
     
@@ -583,7 +563,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -594,8 +574,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( mat, rel )
     
@@ -606,7 +585,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     local syz;
@@ -620,8 +599,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( mat, rel )
     local syz;
@@ -635,7 +613,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     local syz;
@@ -649,8 +627,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( mat, rel )
     local syz;
@@ -664,7 +641,7 @@ end );
 ##
 InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( M )
     local R, RP, id, gen;
@@ -692,7 +669,7 @@ end );
 ##
 InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( _M )
     local R, RP, M;
@@ -726,8 +703,7 @@ end );
 ##
 InstallMethod( GetIndependentUnitPositions,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsHomogeneousList ],
+        [ IsHomalgRelationsOfLeftModule, IsHomogeneousList ],
         
   function( rel, pos_list )
     
@@ -738,7 +714,7 @@ end );
 ##
 InstallMethod( GetIndependentUnitPositions,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
@@ -749,8 +725,7 @@ end );
 ##
 InstallMethod( GetIndependentUnitPositions,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsHomogeneousList ],
+        [ IsHomalgRelationsOfRightModule, IsHomogeneousList ],
         
   function( rel, pos_list )
     
@@ -761,7 +736,7 @@ end );
 ##
 InstallMethod( GetIndependentUnitPositions,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
@@ -771,7 +746,7 @@ end );
 
 InstallMethod( \*,
         "for sets of relations of homalg modules",
-        [ IsRelationsOfFinitelyPresentedModuleRep, IsHomalgMatrix ],
+        [ IsHomalgRelations, IsHomalgMatrix ],
         
   function( rel, mat )
     local relations;
@@ -838,7 +813,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( o )
     local m, n;
@@ -882,7 +857,7 @@ end );
 
 InstallMethod( Display,
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( o )
     local m, n;

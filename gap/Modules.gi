@@ -67,7 +67,7 @@ end );
 ##
 InstallMethod( BoundForResolution,
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( rel )
     local R, q;
@@ -94,7 +94,7 @@ end );
 ## ( cf. [BR, Subsection 3.2.1] )
 InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
-        [ IsInt, IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsInt, IsHomalgRelations ],
         
   function( _q, rel )
     local R, SYZYGIES_ALREADY_MINIMAL, q, B, d, degrees, j, d_j, F_j, id, S,
@@ -222,7 +222,7 @@ end );
 
 InstallMethod( Resolution,
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep ],
+        [ IsHomalgRelations ],
         
   function( M )
     
@@ -863,8 +863,7 @@ end );
 ##
 InstallMethod( Intersect,
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( R1, R2 )
     local pb, r1, r2, im;
@@ -885,8 +884,7 @@ end );
 ##
 InstallMethod( Intersect,
         "for homalg relations",
-        [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule,
-          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( R1, R2 )
     local pb, r1, r2, im;
@@ -907,28 +905,18 @@ end );
 ##
 InstallMethod( Annihilator,
         "for homalg relations",
-        [ IsHomalgMatrix, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgRelations ],
         
   function( mat, rel )
     local syz;
     
-    syz := List( [ 1 .. NrRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        syz := List( [ 1 .. NrRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
+    else
+        syz := List( [ 1 .. NrColumns( mat ) ], j -> CertainColumns( mat, [ j ] ) );
+    fi;
+    
     syz := List( syz, r -> ReducedSyzygiesGenerators( r, rel ) );
-    
-    return Iterated( syz, Intersect );
-    
-end );
-
-##
-InstallMethod( Annihilator,
-        "for homalg relations",
-        [ IsHomalgMatrix, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
-        
-  function( mat, rel )
-    local syz;
-    
-    syz := List( [ 1 .. NrColumns( mat ) ], j -> CertainColumns( mat, [ j ] ) );
-    syz := List( syz, c -> ReducedSyzygiesGenerators( c, rel ) );
     
     return Iterated( syz, Intersect );
     
