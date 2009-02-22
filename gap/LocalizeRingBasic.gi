@@ -188,7 +188,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroRowsEffectively :=
                  function( A, B, T )
-                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S1, u, SS, A3;
+                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, S1, u, SS, A3;
                    
                    R := HomalgRing( A );
                    
@@ -288,7 +288,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
-                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S1, u, SS, A3;
+                   local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, S1, u, SS, A3;
                    
                    R := HomalgRing( A );
                    
