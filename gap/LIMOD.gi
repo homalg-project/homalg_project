@@ -162,39 +162,6 @@ InstallImmediateMethod( IsArtinian,
     
 end );
 
-## strictly less relations than generators => not IsTorsion
-InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedModuleRep, 0,
-        
-  function( M )
-    local l, b, i, rel;
-    
-    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
-    
-    b := false;
-    
-    for i in [ 1.. Length( l ) ] do;
-        
-        rel := SetsOfRelations( M )!.(i);
-        
-        if not IsString( rel ) then
-            if HasNrGenerators( rel ) and HasNrRelations( rel ) and
-               NrGenerators( rel ) > NrRelations( rel ) then
-                b := true;
-                break;
-            fi;
-        fi;
-        
-    od;
-    
-    if b then
-        return false;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
 ## a presentation must be on a single generator
 InstallImmediateMethod( IsCyclic,
         IsFinitelyPresentedModuleRep, 0,
@@ -245,6 +212,39 @@ InstallImmediateMethod( IsCyclic,
            HasIsRightArtinian( R ) and not IsRightArtinian( R ) then
             return true;
         fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+## strictly less relations than generators => not IsTorsion
+InstallImmediateMethod( IsTorsion,
+        IsFinitelyPresentedModuleRep, 0,
+        
+  function( M )
+    local l, b, i, rel;
+    
+    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
+    
+    b := false;
+    
+    for i in [ 1.. Length( l ) ] do;
+        
+        rel := SetsOfRelations( M )!.(i);
+        
+        if not IsString( rel ) then
+            if HasNrGenerators( rel ) and HasNrRelations( rel ) and
+               NrGenerators( rel ) > NrRelations( rel ) then
+                b := true;
+                break;
+            fi;
+        fi;
+        
+    od;
+    
+    if b then
+        return false;
     fi;
     
     TryNextMethod( );
