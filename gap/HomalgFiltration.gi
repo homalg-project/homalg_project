@@ -130,6 +130,28 @@ InstallMethod( ObjectsOfFiltration,
 end );
 
 ##
+InstallMethod( LowestDegreeObject,
+        "for filtrations of homalg modules",
+        [ IsFiltrationOfFinitelyPresentedModuleRep ],
+        
+  function( filt )
+    
+    return CertainObject( filt, LowestDegree( filt ) );
+    
+end );
+
+##
+InstallMethod( HighestDegreeObject,
+        "for filtrations of homalg modules",
+        [ IsFiltrationOfFinitelyPresentedModuleRep ],
+        
+  function( filt )
+    
+    return CertainObject( filt, HighestDegree( filt ) );
+    
+end );
+
+##
 InstallMethod( MorphismsOfFiltration,
         "for filtrations of homalg modules",
         [ IsFiltrationOfFinitelyPresentedModuleRep ],

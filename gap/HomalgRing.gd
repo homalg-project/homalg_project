@@ -487,6 +487,45 @@ DeclareProperty( "IsLeftNoetherian",
 DeclareProperty( "IsRightNoetherian",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IsArtinian">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsArtinian"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsArtinian",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IsLeftArtinian">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsLeftArtinian"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsLeftArtinian",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IsRightArtinian">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsRightArtinian"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsRightArtinian",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IsOreDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsOreDomain"/>

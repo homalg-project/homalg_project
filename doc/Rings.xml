@@ -110,6 +110,9 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsNoetherian">
 <#Include Label="IsLeftNoetherian">
 <#Include Label="IsRightNoetherian">
+<#Include Label="IsArtinian">
+<#Include Label="IsLeftArtinian">
+<#Include Label="IsRightArtinian">
 <#Include Label="IsOreDomain">
 <#Include Label="IsLeftOreDomain">
 <#Include Label="IsRightOreDomain">

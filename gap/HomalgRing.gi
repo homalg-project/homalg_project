@@ -354,6 +354,11 @@ InstallMethod( SetRingProperties,
     
     SetIndeterminatesOfPolynomialRing( S, var );
     
+    if d > 0 then
+        SetIsLeftArtinian( S, false );
+        SetIsRightArtinian( S, false );
+    fi;
+    
     if HasGlobalDimension( R ) then
         SetGlobalDimension( S, d + GlobalDimension( R ) );
     fi;
@@ -400,13 +405,21 @@ InstallMethod( SetRingProperties,
     
     SetIndeterminateDerivationsOfRingOfDerivations( S, der );
     
+    if d > 0 then
+        SetIsLeftArtinian( S, false );
+        SetIsRightArtinian( S, false );
+    fi;
+    
+    SetIsLeftNoetherian( S, true );
+    SetIsRightNoetherian( S, true );
+    
     if HasGlobalDimension( r ) then
         SetGlobalDimension( S, d + GlobalDimension( r ) );
     fi;
     
     if HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) and Characteristic( S ) = 0 then
-        SetGeneralLinearRank( S, 2 );	## [Stafford78, McCRob, 11.2.15(i)]
-        SetIsSimpleRing( S, true );
+        SetGeneralLinearRank( S, 2 );	## [Stafford78], [McCRob, 11.2.15(i)]
+        SetIsSimpleRing( S, true );	## [Coutinho, Thm 2.2.1]
     fi;
     
     if HasIsIntegralDomain( r ) and IsIntegralDomain( r ) then
@@ -471,6 +484,7 @@ InstallMethod( SetRingProperties,
     if c = 0 then
         SetIsIntegersForHomalg( R, true );
         SetContainsAField( R, false );
+        SetIsArtinian( R, false );
         SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
     elif IsPrime( c ) then
         SetIsFieldForHomalg( R, true );

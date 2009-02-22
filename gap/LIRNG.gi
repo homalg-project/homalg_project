@@ -39,6 +39,12 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "implies", IsIntegralDomain ],
           
           [ IsDivisionRingForHomalg,
+            "implies", IsLeftArtinian ],
+          
+          [ IsDivisionRingForHomalg,
+            "implies", IsRightArtinian ],
+          
+          [ IsDivisionRingForHomalg,
             "implies", IsLocalRing ],
           
           [ IsDivisionRingForHomalg,
@@ -237,10 +243,11 @@ AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
          [ "Has", "InvariantBasisProperty" ],
          [ "Is", "Hermite" ],
          [ "Is", "Hereditary" ],
-         [ "Is", "Noetherian" ],
          [ "Is", "OreDomain" ],
          [ "Is", "GlobalDimensionFinite" ],
          [ "Is", "FiniteFreePresentationRing" ],
+         [ "Is", "Noetherian", "<>" ],
+         [ "Is", "Artinian", "<>" ],
          [ "Is", "PrincipalIdealRing", "<>" ],
          ] );
 
@@ -467,7 +474,7 @@ InstallImmediateMethod( GlobalDimension,
     
 end );
 
-##
+## FIXME: this should be obsolete by the next method
 InstallImmediateMethod( KrullDimension,
         IsHomalgRing and IsPrincipalIdealRing and IsIntegralDomain and IsCommutative and HasIsFieldForHomalg, 0,
         

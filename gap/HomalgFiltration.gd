@@ -93,6 +93,12 @@ DeclareOperation( "CertainObject",
 DeclareOperation( "ObjectsOfFiltration",
         [ IsHomalgFiltration ] );
 
+DeclareOperation( "LowestDegreeObject",
+        [ IsHomalgFiltration ] );
+
+DeclareOperation( "HighestDegreeObject",
+        [ IsHomalgFiltration ] );
+
 DeclareOperation( "HomalgRing",
         [ IsHomalgFiltration ] );
 

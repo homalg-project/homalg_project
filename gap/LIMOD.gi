@@ -65,11 +65,17 @@ InstallValue( LogicalImplicationsForHomalgModules,
           [ IsZero,
             "implies", IsHolonomic ],
           
-          [ IsHolonomic,
-            "implies", IsTorsion ],
+          ## [ IsHolonomic,
+          ##  "implies", IsTorsion ],	false for fields
           
-          [ IsHolonomic,
+          ## [ IsHolonomic,
+          ##  "implies", IsArtinian ],	there is no clear definition of holonomic
+          
+          [ IsZero,
             "implies", IsArtinian ],
+          
+          [ IsZero,
+            "implies", IsTorsion ],
           
           ## IsCyclic:
           
@@ -113,6 +119,48 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgModulesOverSpec
 # immediate methods for properties:
 #
 ####################################
+
+##
+InstallImmediateMethod( IsArtinian,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule and HasLeftActingDomain, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasLeftGlobalDimension( R ) and
+       ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
+        
+        return CodimOfModule( M ) = LeftGlobalDimension( R );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsArtinian,
+        IsFinitelyPresentedModuleRep and HasCodimOfModule and HasRightActingDomain, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasRightGlobalDimension( R ) and
+       ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
+        
+        return CodimOfModule( M ) = RightGlobalDimension( R );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ## strictly less relations than generators => not IsTorsion
 InstallImmediateMethod( IsTorsion,
@@ -169,6 +217,35 @@ InstallImmediateMethod( IsCyclic,
         fi;
         
     od;
+    
+    TryNextMethod( );
+    
+end );
+
+## [Coutinho, A Primer of Algebraic D-modules, Thm. 10.25, p. 90]
+InstallImmediateMethod( IsCyclic,
+        IsFinitelyPresentedModuleRep and IsArtinian, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsSimpleRing( R ) and IsSimpleRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        if HasIsLeftNoetherian( R ) and IsLeftNoetherian( R ) and
+           HasIsLeftArtinian( R ) and not IsLeftArtinian( R ) then
+            return true;
+        fi;
+    else
+        if HasIsRightNoetherian( R ) and IsRightNoetherian( R ) and
+           HasIsRightArtinian( R ) and not IsRightArtinian( R ) then
+            return true;
+        fi;
+    fi;
     
     TryNextMethod( );
     
@@ -731,6 +808,31 @@ InstallMethod( IsZero,
     return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
     
 end );
+
+##
+InstallMethod( IsArtinian,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasGlobalDimension( R ) and
+       ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
+        
+        return CodimOfModule( M ) = GlobalDimension( R );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+RedispatchOnCondition( IsCyclic, true, [ IsFinitelyPresentedModuleRep ], [ IsArtinian ], 0 );
 
 ##
 InstallMethod( IsTorsionFree,

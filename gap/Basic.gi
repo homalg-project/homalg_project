@@ -576,7 +576,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     
     return X;
     
-    ## technical: -CB * CA = (-CB) * CA and COLEM should take over since CB := -matrix
+    ## technical: -CB * CA := (-CB) * CA and COLEM should take over since CB := -matrix
     
 end );
 
@@ -640,7 +640,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     
     return X;
     
-    ## technical: CA * -CB = CA * (-CB) and COLEM should take over since CB := -matrix
+    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since CB := -matrix
     
 end );
 
