@@ -48,6 +48,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     anti := Filtered( anti, v -> not Name( v ) in param );
     
     ## End(E,M_0):
+    
     m0 := PresentationMap( M );
     
     degrees0 := DegreesOfGenerators( Source( m0 ) );
@@ -59,6 +60,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     EM0 := presentation( A * m0, DegreesOfGenerators( M ) );
     
     ## End(E,M_1):
+    
     M1 := SubmoduleOfIdealMultiples( vars, M );
     
     m1 := PresentationMap( M1 );

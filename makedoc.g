@@ -12,13 +12,15 @@ bib := ParseBibFiles( "doc/Sheaves.bib" );
 WriteBibXMLextFile( "doc/SheavesBib.xml", bib );
 
 list := [
+         "../gap/Sheaves.gd",
+         "../gap/Sheaves.gi",
          "../gap/Modules.gd",
          "../gap/Modules.gi",
          "../gap/Tate.gd",
          "../gap/Tate.gi"
          ];
 
-MakeGAPDocDoc( "doc", "Sheaves", list, "Sheaves" );
+MakeGAPDocDoc( "doc", "SheavesForHomalg", list, "SheavesForHomalg" );
 
 GAPDocManualLab("Sheaves");
 

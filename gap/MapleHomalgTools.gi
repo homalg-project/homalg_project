@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  MAGMATools.gi               Sheaves package              Mohamed Barakat
+##  MapleHomalgTools.gi         Sheaves package              Mohamed Barakat
 ##
 ##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
 ##
-##  Implementations for the rings provided by MAGMA.
+##  Implementations for the rings provided by the Maple implementation of homalg.
 ##
 #############################################################################
 
@@ -14,19 +14,18 @@
 #
 ####################################
 
-InstallValue( SheavesHomalgTableForMAGMATools,
+InstallValue( SheavesHomalgTableForMapleHomalgTools,
         
         rec(
                MonomialMatrix :=
                  function( i, R )
                    
-                   return homalgSendBlocking( [ "Matrix(1,IndexedSetToSequence(MonomialsOfDegree(", R, i, ")))" ], HOMALG_IO.Pictograms.MonomialMatrix );
+                   return homalgSendBlocking( [ "`homalg/MonomialMatrix`(", i, R, ")" ], HOMALG_IO.Pictograms.MonomialMatrix );
                    
                  end,
-               
                
         )
  );
 
-## enrich the global homalg table for MAGMA:
-AddToAhomalgTable( CommonHomalgTableForMAGMATools, SheavesHomalgTableForMAGMATools );
+## enrich the global homalg table for MapleHomalg:
+AddToAhomalgTable( CommonHomalgTableForMapleHomalgTools, SheavesHomalgTableForMapleHomalgTools );

@@ -26,3 +26,9 @@ ReadPackage( "Sheaves", "gap/SingularTools.gd" );
 ##
 ReadPackage( "Sheaves", "gap/MAGMATools.gd" );
 
+##
+ReadPackage( "Sheaves", "gap/MapleHomalgTools.gd" );
+
+##
+ReadPackage( "Sheaves", "gap/LISHV.gd" );
+

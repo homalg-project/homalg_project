@@ -26,3 +26,9 @@ ReadPackage( "Sheaves", "gap/SingularTools.gi" );
 ##
 ReadPackage( "Sheaves", "gap/MAGMATools.gi" );
 
+##
+ReadPackage( "Sheaves", "gap/MapleHomalgTools.gi" );
+
+##
+ReadPackage( "Sheaves", "gap/LISHV.gi" );
+

@@ -3,10 +3,10 @@ all: doc test
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		doc/Sheaves.xml doc/title.xml \
+		doc/SheavesForHomalg.xml doc/title.xml \
 		doc/intro.xml doc/install.xml \
 		doc/Sheaves.bib gap/*.gd gap/*.gi \
-		doc/Modules.xml doc/Tate.xml \
+		doc/Sheaves.xml doc/Modules.xml doc/Tate.xml \
 		doc/examples.xml doc/appendix.xml \
 		VERSION PackageInfo.g
 	        gapL makedoc.g
