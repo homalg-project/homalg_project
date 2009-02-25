@@ -377,7 +377,7 @@ NonTrivialDegreePerColumn := function(M)\n\
   X:= [];\n\
   m:= Nrows(M);\n\
   for j in [1..Ncols(M)] do\n\
-    ok:= exists(i){i: i in [1..m] | not IsZero(M[i,j]) };\n\
+    i:= rep{ i: i in [1..m] | not IsZero(M[i,j]) };\n\
     Append(~X, Degree(M[i,j]));\n\
   end for;\n\
   if exists{ x : x in X | x ne X[1] } then\n\
@@ -393,7 +393,7 @@ NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
   Y:= [];\n\
   m:= Nrows(M);\n\
   for j in [1..Ncols(M)] do\n\
-    ok:= exists(i){i: i in [1..m] | not IsZero(M[i,j]) };\n\
+    i:= rep{ i: i in [1..m] | not IsZero(M[i,j]) };\n\
     Append(~X, Degree(M[i,j]));\n\
     Append(~Y, i);\n\
   end for;\n\
