@@ -116,9 +116,9 @@ DeclareProperty( "IsReflexive",
 DeclareProperty( "IsTorsionFree",
         IsHomalgModule );
 
-##  <#GAPDoc Label="IsArtinian">
+##  <#GAPDoc Label="IsArtinian:module">
 ##  <ManSection>
-##    <Prop Arg="M" Name="IsArtinian"/>
+##    <Prop Arg="M" Name="IsArtinian" Label="for modules"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is artinian. <Br/>

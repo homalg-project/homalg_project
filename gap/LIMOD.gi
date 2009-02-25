@@ -800,7 +800,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -811,7 +811,7 @@ end );
 
 ##
 InstallMethod( IsArtinian,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -836,7 +836,7 @@ RedispatchOnCondition( IsCyclic, true, [ IsFinitelyPresentedModuleRep ], [ IsArt
 
 ##
 InstallMethod( IsTorsionFree,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -847,7 +847,7 @@ end );
 
 ##
 InstallMethod( IsTorsion,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -858,7 +858,7 @@ end );
 
 ##
 InstallMethod( IsReflexive,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -869,7 +869,7 @@ end );
 
 ##
 InstallMethod( IsReflexive,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasCodegreeOfPurity ],
         
   function( M )
@@ -880,7 +880,7 @@ end );
 
 ##
 InstallMethod( IsReflexive,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
         
   function( M )
@@ -898,7 +898,7 @@ end );
 
 ##
 InstallMethod( IsReflexive,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
         
   function( M )
@@ -916,7 +916,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -940,7 +940,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -966,7 +966,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -994,7 +994,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
         
   function( M )
@@ -1012,7 +1012,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
         
   function( M )
@@ -1030,7 +1030,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
         
   function( M )
@@ -1048,7 +1048,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
         
   function( M )
@@ -1066,7 +1066,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
@@ -1081,7 +1081,7 @@ end );
 
 ##
 InstallMethod( IsStablyFree,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1099,7 +1099,7 @@ end );
 
 ##
 InstallMethod( IsFree,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1148,7 +1148,7 @@ end );
 
 ##
 InstallMethod( IsFree,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 501,
         
   function( M )
@@ -1167,7 +1167,7 @@ end );
 
 ##
 InstallMethod( IsFree,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
@@ -1207,7 +1207,7 @@ end );
 
 ##
 InstallMethod( IsPure,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1230,7 +1230,7 @@ end );
 
 ##
 InstallMethod( TheZeroMorphism,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1241,7 +1241,7 @@ end );
 
 ##
 InstallMethod( TheIdentityMorphism,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1252,7 +1252,7 @@ end );
 
 ##
 InstallMethod( RankOfModule,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1269,7 +1269,7 @@ end );
 
 ##
 InstallMethod( Rank,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1280,7 +1280,7 @@ end );
 
 ##
 InstallMethod( DegreeOfTorsionFreeness,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1337,7 +1337,7 @@ end );
 
 ##
 InstallMethod( CodimOfModule,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1390,7 +1390,7 @@ end );
 
 ##
 InstallMethod( ProjectiveDimension,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1434,7 +1434,7 @@ end );
 
 ##
 InstallMethod( CodegreeOfPurity,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1451,7 +1451,7 @@ end );
 
 ##
 InstallMethod( CodegreeOfPurity,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
@@ -1466,7 +1466,7 @@ end );
 
 ##
 InstallMethod( CodegreeOfPurity,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 1001,
         
   function( M )
@@ -1481,7 +1481,7 @@ end );
 
 ##
 InstallMethod( CastelnuovoMumfordRegularity,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -1497,7 +1497,7 @@ end );
 
 ##
 InstallMethod( BettiDiagram,
-        "for homalg modules",
+        "LIMOD: for homalg modules",
         [ IsHomalgModule ],
         
   function( M )

@@ -271,7 +271,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: an initial matrix filled with zeros
-        "for homalg matrices",
+        "for homalg matrices (IsInitialMatrix)",
         [ IsHomalgMatrix and IsInitialMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
@@ -304,7 +304,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: an initial quadratic matrix filled with ones on the diagonal and zeros otherwise
-        "for homalg matrices",
+        "for homalg matrices (IsInitialIdentityMatrix)",
         [ IsHomalgMatrix and IsInitialIdentityMatrix and HasNrRows and HasNrColumns ],
         
   function( C )
@@ -341,7 +341,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: Involution
-        "for homalg matrices",
+        "for homalg matrices (HasEvalInvolution)",
         [ IsHomalgMatrix and HasEvalInvolution ],
         
   function( C )
@@ -369,7 +369,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: CertainRows
-        "for homalg matrices",
+        "for homalg matrices (HasEvalCertainRows)",
         [ IsHomalgMatrix and HasEvalCertainRows ],
         
   function( C )
@@ -400,7 +400,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: CertainColumns
-        "for homalg matrices",
+        "for homalg matrices (HasEvalCertainColumns)",
         [ IsHomalgMatrix and HasEvalCertainColumns ],
         
   function( C )
@@ -431,7 +431,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: UnionOfRows
-        "for homalg matrices",
+        "for homalg matrices (HasEvalUnionOfRows)",
         [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( C )
@@ -466,7 +466,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: UnionOfColumns
-        "for homalg matrices",
+        "for homalg matrices (HasEvalUnionOfColumns)",
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( C )
@@ -501,7 +501,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: DiagMat
-        "for homalg matrices",
+        "for homalg matrices (HasEvalDiagMat)",
         [ IsHomalgMatrix and HasEvalDiagMat ],
         
   function( C )
@@ -545,7 +545,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: KroneckerMat
-        "for homalg matrices",
+        "for homalg matrices (HasEvalKroneckerMat)",
         [ IsHomalgMatrix and HasEvalKroneckerMat ],
         
   function( C )
@@ -578,7 +578,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: MulMat
-        "for homalg matrices",
+        "for homalg matrices (HasEvalMulMat)",
         [ IsHomalgMatrix and HasEvalMulMat ],
         
   function( C )
@@ -625,7 +625,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: AddMat
-        "for homalg matrices",
+        "for homalg matrices (HasEvalAddMat)",
         [ IsHomalgMatrix and HasEvalAddMat ],
         
   function( C )
@@ -672,7 +672,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: SubMat
-        "for homalg matrices",
+        "for homalg matrices (HasEvalSubMat)",
         [ IsHomalgMatrix and HasEvalSubMat ],
         
   function( C )
@@ -719,7 +719,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: Compose
-        "for homalg matrices",
+        "for homalg matrices (HasEvalCompose)",
         [ IsHomalgMatrix and HasEvalCompose ],
         
   function( C )
@@ -766,7 +766,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: IdentityMap
-        "for homalg matrices",
+        "for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows and HasNrColumns ], 10,
         
   function( C )
@@ -800,7 +800,7 @@ end );
 
 ##
 InstallMethod( Eval,				### defines: ZeroMap
-        "for homalg matrices",
+        "for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 20,
         
   function( C )
@@ -1670,7 +1670,7 @@ end );
 
 ##
 InstallMethod( Eval,
-        "for homalg matrices",
+        "for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix and HasPreEval ],
         
   function( C )

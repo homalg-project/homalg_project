@@ -138,7 +138,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -152,7 +152,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg bicomplexes",
+        "LICPX: for homalg bicomplexes",
         [ IsHomalgBicomplex ],
         
   function( B )
@@ -163,7 +163,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg bigraded objects",
+        "LICPX: for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
         
   function( Er )
@@ -177,7 +177,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "for homalg spectral sequences",
+        "LICPX: for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],
         
   function( E )
@@ -188,7 +188,7 @@ end );
 
 ##
 InstallMethod( \=,
-        "for pairs of homalg complexes",
+        "LICPX: for pairs of homalg complexes",
         [ IsHomalgComplex, IsHomalgComplex ],
         
   function( C1, C2 )
@@ -226,7 +226,7 @@ end );
 
 ##
 InstallMethod( \=,
-        "for pairs of homalg bicomplexes",
+        "LICPX: for pairs of homalg bicomplexes",
         [ IsHomalgBicomplex, IsHomalgBicomplex ],
         
   function( C1, C2 )
@@ -237,7 +237,7 @@ end );
 
 ##
 InstallMethod( IsGradedObject,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -251,7 +251,7 @@ end );
 
 ##
 InstallMethod( IsSequence,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -265,7 +265,7 @@ end );
 
 ##
 InstallMethod( IsComplex,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -292,7 +292,7 @@ end );
 
 ##
 InstallMethod( IsAcyclic,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -321,7 +321,7 @@ end );
 
 ##
 InstallMethod( IsRightAcyclic,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -344,7 +344,7 @@ end );
 
 ##
 InstallMethod( IsLeftAcyclic,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -368,7 +368,7 @@ end );
 
 ##
 InstallMethod( IsExactSequence,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -379,7 +379,7 @@ end );
 
 ##
 InstallMethod( IsShortExactSequence,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )
@@ -407,7 +407,7 @@ end );
 
 ##
 InstallMethod( BettiDiagram,
-        "for homalg complexes",
+        "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
   function( C )

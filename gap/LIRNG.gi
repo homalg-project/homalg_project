@@ -521,7 +521,7 @@ end );
 
 ##
 InstallMethod( WeightsOfIndeterminates,
-        "for homalg rings",
+        "LIRNG: for homalg rings",
         [ IsHomalgRing and IsFreePolynomialRing ],
         
   function( S )
@@ -532,7 +532,7 @@ end );
 
 ##
 InstallMethod( WeightsOfIndeterminates,
-        "for homalg rings",
+        "LIRNG: for homalg rings",
         [ IsHomalgRing and IsExteriorRing ],
         
   function( E )
@@ -549,7 +549,7 @@ end );
 
 ##
 InstallMethod( \*,	## check if both elements reside in the same ring
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
   function( r, s )
@@ -608,7 +608,7 @@ end );
 
 ##
 InstallMethod( \+,	## check if both elements reside in the same ring
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
   function( r, s )
@@ -623,7 +623,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement and IsOne, IsHomalgRingElement and IsMinusOne ], 1001,
         
   function( r, s )
@@ -634,7 +634,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement and IsMinusOne, IsHomalgRingElement and IsOne ], 1001,
         
   function( r, s )
@@ -645,7 +645,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement and IsZero ], 1001,
         
   function( r, z )
@@ -656,7 +656,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement and IsZero, IsHomalgRingElement ], 1001,
         
   function( z, r )
@@ -667,7 +667,7 @@ end );
 
 ##
 InstallMethod( \-,	## check if both elements reside in the same ring
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 10001,
         
   function( r, s )
@@ -682,7 +682,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement ], 1001,
         
   function( r, s )
@@ -697,7 +697,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement, IsHomalgRingElement and IsZero ], 1001,
         
   function( r, z )
@@ -708,7 +708,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "for two homalg ring element",
+        "LIRNG: for two homalg ring element",
         [ IsHomalgRingElement and IsZero, IsHomalgRingElement ], 1001,
         
   function( z, r )
@@ -721,7 +721,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "for homalg ring elements",
+        "LIRNG: for homalg ring elements",
         [ IsHomalgRingElement and IsOne ],
         
   function( r )
@@ -732,7 +732,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "for homalg ring elements",
+        "LIRNG: for homalg ring elements",
         [ IsHomalgRingElement and IsMinusOne ],
         
   function( r )

@@ -489,7 +489,7 @@ DeclareProperty( "IsRightNoetherian",
 
 ##  <#GAPDoc Label="IsArtinian">
 ##  <ManSection>
-##    <Prop Arg="R" Name="IsArtinian"/>
+##    <Prop Arg="R" Name="IsArtinian" Label="for rings"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.

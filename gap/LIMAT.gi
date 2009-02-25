@@ -529,7 +529,7 @@ end );
 
 ##
 InstallMethod( RowRankOfMatrix,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
@@ -569,7 +569,7 @@ end );
 
 ##
 InstallMethod( ColumnRankOfMatrix,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
@@ -622,7 +622,7 @@ end );
 
 ##
 InstallMethod( ZeroColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (HasEvalInvolution)",
         [ IsHomalgMatrix and HasEvalInvolution ],
         
   function( M )
@@ -641,7 +641,7 @@ end );
     
 ##
 InstallMethod( IsEmptyMatrix,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
@@ -662,7 +662,7 @@ end );
 
 ##
 InstallMethod( \=,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix and IsZero ],
         
   function( M1, M2 )
@@ -675,7 +675,7 @@ end );
 
 ##
 InstallMethod( \=,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M1, M2 )
@@ -692,7 +692,7 @@ end );
 
 ##
 InstallMethod( Involution,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -705,7 +705,7 @@ end );
 
 ##
 InstallMethod( Involution,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -722,7 +722,7 @@ end );
 
 ##
 InstallMethod( CertainRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input and trivial cases)",
         [ IsHomalgMatrix, IsList ], 10001,
         
   function( M, plist )
@@ -747,7 +747,7 @@ end );
 
 ##
 InstallMethod( CertainColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input and trivial cases)",
         [ IsHomalgMatrix, IsList ], 10001,
         
   function( M, plist )
@@ -772,7 +772,7 @@ end );
 
 ##
 InstallMethod( UnionOfRows,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -791,7 +791,7 @@ end );
 
 ##
 InstallMethod( UnionOfRows,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
@@ -804,7 +804,7 @@ end );
 
 ##
 InstallMethod( UnionOfRows,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -817,7 +817,7 @@ end );
 
 ## without this method the above two methods will be called in the wrong context!!!
 InstallMethod( UnionOfRows,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
@@ -834,7 +834,7 @@ end );
 
 ##
 InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -853,7 +853,7 @@ end );
 
 ##
 InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -866,7 +866,7 @@ end );
 
 ##
 InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
@@ -879,7 +879,7 @@ end );
 
 ## without this method the above two methods will be called in the wrong context!!!
 InstallMethod( UnionOfColumns,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
@@ -896,7 +896,7 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomogeneousList ], 10001,
         
   function( l )
@@ -926,7 +926,7 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomogeneousList ], 2,
         
   function( l )
@@ -948,7 +948,7 @@ end );
 
 ##
 InstallMethod( DiagMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomogeneousList ], 2,
         
   function( l )
@@ -974,7 +974,7 @@ end );
 
 ##
 InstallMethod( KroneckerMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -989,7 +989,7 @@ end );
 
 ##
 InstallMethod( KroneckerMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -1002,7 +1002,7 @@ end );
 
 ##
 InstallMethod( KroneckerMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 1001,	## FIXME: this must be ranked higher than the "KroneckerMat( IsIdentityMatrix, IsHomalgMatrix )", why?
         
   function( A, B )
@@ -1018,7 +1018,7 @@ end );
 
 ##
 InstallMethod( KroneckerMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
         
   function( A, B )
@@ -1041,7 +1041,7 @@ end );
 
 ##
 InstallMethod( KroneckerMat,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( A, B )
@@ -1061,7 +1061,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgRingElement, IsHomalgMatrix ], 10001,
         
   function( a, A )
@@ -1079,7 +1079,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of homalg matrices with ring elements",
+        "LIMAT: for homalg matrices with ring elements",
         [ IsRingElement and IsZero, IsHomalgMatrix ], 10001,
         
   function( a, A )
@@ -1092,7 +1092,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of homalg matrices with ring elements",
+        "LIMAT: for homalg matrices with ring elements",
         [ IsRingElement and IsOne, IsHomalgMatrix ], 10001,
         
   function( a, A )
@@ -1105,7 +1105,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsRingElement, IsHomalgMatrix and IsZero ], 10001,
         
   function( a, A )
@@ -1122,7 +1122,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -1145,7 +1145,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( A, B )
@@ -1158,7 +1158,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( A, B )
@@ -1175,7 +1175,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "of homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( A )
@@ -1192,7 +1192,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -1215,7 +1215,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ], 1000,
         
   function( A, B )
@@ -1234,7 +1234,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( A, B )
@@ -1247,7 +1247,7 @@ end );
 
 ##
 InstallMethod( \-,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( A, B )
@@ -1264,7 +1264,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -1283,7 +1283,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -1296,7 +1296,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
         
   function( A, B )
@@ -1309,7 +1309,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( A, B )
@@ -1326,7 +1326,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "of two homalg matrices",
+        "LIMAT: for two homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( A, B )
@@ -1347,7 +1347,7 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( B, A )
@@ -1362,7 +1362,7 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
         
   function( B, A )
@@ -1375,7 +1375,7 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( B, A )
@@ -1388,7 +1388,7 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ], 10001,
         
   function( B, A, L )
@@ -1407,7 +1407,7 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( B, A, L )
@@ -1420,7 +1420,7 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( B, A, L )
@@ -1437,7 +1437,7 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B )
@@ -1452,7 +1452,7 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
   function( A, B )
@@ -1465,7 +1465,7 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( A, B )
@@ -1478,7 +1478,7 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ], 10001,
         
   function( A, B, L )
@@ -1497,7 +1497,7 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( A, B, L )
@@ -1510,7 +1510,7 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsHomalgRelationsOfRightModule ],
         
   function( A, B, L )
@@ -1527,7 +1527,7 @@ end );
 
 ##
 InstallMethod( LeftInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix ], 10001,
         
   function( M )
@@ -1542,7 +1542,7 @@ end );
 
 ##
 InstallMethod( LeftInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -1555,7 +1555,7 @@ end );
 
 ##
 InstallMethod( LeftInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsSubidentityMatrix)",
         [ IsHomalgMatrix and IsSubidentityMatrix ],
         
   function( M )
@@ -1573,7 +1573,7 @@ end );
 
 ##
 InstallMethod( LeftInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -1596,7 +1596,7 @@ end );
 
 ##
 InstallMethod( RightInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix ], 10001,
         
   function( M )
@@ -1611,7 +1611,7 @@ end );
 
 ##
 InstallMethod( RightInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -1624,7 +1624,7 @@ end );
 
 ##
 InstallMethod( RightInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsSubidentityMatrix)",
         [ IsHomalgMatrix and IsSubidentityMatrix ],
         
   function( M )
@@ -1642,7 +1642,7 @@ end );
 
 ##
 InstallMethod( RightInverse,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -1665,6 +1665,7 @@ end );
 
 ##
 InstallMethod( RowRankOfMatrix,			 	## FIXME: make an extra InstallImmediateMethod when NonZeroRows( M ) is set
+        "LIMAT: for homalg matrices (IsUpperStairCaseMatrix)",
         [ IsHomalgMatrix and IsUpperStairCaseMatrix ],
         
   function( M )
@@ -1688,6 +1689,7 @@ end );
 
 ##
 InstallMethod( ColumnRankOfMatrix,			## FIXME: make an extra InstallImmediateMethod when NonZeroColumns( M ) is set
+        "LIMAT: for homalg matrices (IsLowerStairCaseMatrix)",
         [ IsHomalgMatrix and IsLowerStairCaseMatrix ],
         
   function( M )
@@ -1711,7 +1713,7 @@ end );
 
 ##
 InstallMethod( BasisOfRowModule,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsBasisOfRowsMatrix)",
         [ IsHomalgMatrix and IsBasisOfRowsMatrix ],
         
   function( M )
@@ -1724,7 +1726,7 @@ end );
 
 ##
 InstallMethod( BasisOfRowModule,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -1737,7 +1739,7 @@ end );
 
 ##
 InstallMethod( BasisOfRowModule,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -1754,7 +1756,7 @@ end );
 
 ##
 InstallMethod( BasisOfColumnModule,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsBasisOfColumnsMatrix)",
         [ IsHomalgMatrix and IsBasisOfColumnsMatrix ],
         
   function( M )
@@ -1767,7 +1769,7 @@ end );
 
 ##
 InstallMethod( BasisOfColumnModule,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix ],
         
   function( M )
@@ -1780,7 +1782,7 @@ end );
 
 ##
 InstallMethod( BasisOfColumnModule,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -1797,7 +1799,7 @@ end );
 
 ##
 InstallMethod( BasisOfRowsCoeff,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsBasisOfRowsMatrix)",
         [ IsHomalgMatrix and IsBasisOfRowsMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
@@ -1815,7 +1817,7 @@ end );
 
 ##
 InstallMethod( BasisOfRowsCoeff,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
@@ -1833,7 +1835,7 @@ end );
 
 ##
 InstallMethod( BasisOfRowsCoeff,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
@@ -1855,7 +1857,7 @@ end );
 
 ##
 InstallMethod( BasisOfColumnsCoeff,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsBasisOfColumnsMatrix)",
         [ IsHomalgMatrix and IsBasisOfColumnsMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
@@ -1873,7 +1875,7 @@ end );
 
 ##
 InstallMethod( BasisOfColumnsCoeff,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
@@ -1891,7 +1893,7 @@ end );
 
 ##
 InstallMethod( BasisOfColumnsCoeff,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix and IsVoidMatrix ],
         
   function( M, T )
@@ -1913,7 +1915,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( L, B )
@@ -1932,7 +1934,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( L, B )
@@ -1951,7 +1953,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsLeftInvertibleMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix ],
         
   function( L, B )
@@ -1964,7 +1966,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( L, B )
@@ -1977,7 +1979,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( L, B )
@@ -1994,7 +1996,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( L, B )
@@ -2013,7 +2015,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( L, B )
@@ -2032,7 +2034,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsRightInvertibleMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsRightInvertibleMatrix ],
         
   function( L, B )
@@ -2045,7 +2047,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( L, B )
@@ -2058,7 +2060,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( L, B )
@@ -2075,7 +2077,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ], 10001,
         
   function( A, B, T )
@@ -2094,7 +2096,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2115,7 +2117,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (HasItsLeftInverse)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasItsLeftInverse, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2131,7 +2133,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2147,7 +2149,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2162,7 +2164,7 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2181,7 +2183,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ], 10001,
         
   function( A, B, T )
@@ -2200,7 +2202,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2221,7 +2223,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (HasItsRightInverse)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasItsRightInverse, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2237,7 +2239,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2253,7 +2255,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2268,7 +2270,7 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsVoidMatrix ],
         
   function( A, B, T )
@@ -2287,7 +2289,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( M1, M2 )
@@ -2306,7 +2308,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -2325,7 +2327,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsLeftRegularMatrix)",
         [ IsHomalgMatrix and IsLeftRegularMatrix ],
         
   function( M )
@@ -2341,7 +2343,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -2354,7 +2356,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( M1, M2 )
@@ -2367,7 +2369,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -2380,7 +2382,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -2397,7 +2399,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( M1, M2 )
@@ -2416,7 +2418,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -2435,7 +2437,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsRightRegularMatrix)",
         [ IsHomalgMatrix and IsRightRegularMatrix ],
         
   function( M )
@@ -2451,7 +2453,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -2464,7 +2466,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( M1, M2 )
@@ -2477,7 +2479,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -2490,7 +2492,7 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -2507,7 +2509,7 @@ end );
 
 ##
 InstallMethod( SyzygiesOfRows,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( M1, M2 )
@@ -2524,7 +2526,7 @@ end );
 
 ##
 InstallMethod( SyzygiesOfColumns,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
         
   function( M1, M2 )
@@ -2541,7 +2543,7 @@ end );
 
 ##
 InstallMethod( GetUnitPosition,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( M )
@@ -2558,7 +2560,7 @@ end );
 
 ##
 InstallMethod( GetColumnIndependentUnitPositions,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsList ],
         
   function( M, pos_list )
@@ -2575,7 +2577,7 @@ end );
 
 ##
 InstallMethod( GetRowIndependentUnitPositions,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero, IsList ],
         
   function( M, pos_list )
@@ -2592,7 +2594,7 @@ end );
 
 ##
 InstallMethod( GetCleanRowsPositions,
-        "for homalg matrices",
+        "LIMAT: for homalg matrices (IsEmpty list)",
         [ IsHomalgMatrix, IsList and IsEmpty ],
         
   function( M, pos_list )

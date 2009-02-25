@@ -44,7 +44,7 @@
 <#Include Label="FiniteFreeResolutionExists">
 <#Include Label="IsReflexive">
 <#Include Label="IsTorsionFree">
-<#Include Label="IsArtinian">
+<#Include Label="IsArtinian:module">
 <#Include Label="IsCyclic">
 <#Include Label="IsTorsion">
 <#Include Label="IsHolonomic">
