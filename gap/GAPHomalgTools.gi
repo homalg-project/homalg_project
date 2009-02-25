@@ -63,6 +63,25 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
+               CancelGcd :=
+                 function( a, b )
+                   local R, a_g, b_g;
+                   
+                   R := HomalgRing( a );
+                   
+                   ## Cancel is declared in the package LocalizeRingForHomalg, so we cannot call it directly
+                   ## unless LocalizeRingForHomalg has been loaded in external GAP
+                   homalgSendBlocking( [ "ccd := homalgTable(", R, ")!.CancelGcd(", a, b, ")" ], "need_command", HOMALG_IO.Pictograms.CancelGcd );
+                   a_g := homalgSendBlocking( [ "ccd[1]" ], "need_output", R, HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "ccd[2]" ], "need_output", R, HOMALG_IO.Pictograms.CancelGcd );
+                   
+                   a_g := HomalgExternalRingElement( a_g, R );
+                   b_g := HomalgExternalRingElement( b_g, R );
+                   
+                   return [ a_g, b_g ];
+                   
+                 end,
+               
                ShallowCopy :=
                  function( C )
                    
