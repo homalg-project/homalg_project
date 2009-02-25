@@ -93,6 +93,23 @@ InstallMethod( CreateHomalgTable,
                    
                  end,
                
+               Gcd :=
+                 function( a, b )
+                   
+                   return GcdInt( a, b );
+                   
+                 end,
+               
+               CancelGcd :=
+                 function( a, b )
+                   local gcd;
+                   
+                   gcd := GcdInt( a, b );
+                   
+                   return [ a / gcd, b / gcd ];
+                   
+                 end,
+               
                ## Must be defined if other functions are not defined
                    
                TriangularBasisOfRows :=
