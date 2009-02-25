@@ -473,7 +473,7 @@ end );
 ##
 InstallMethod( LocalizeAt,
         "constructor for homalg localized rings",
-        [ IsHomalgRing and IsFreePolynomialRing, IsList ],
+        [ IsHomalgRing and IsCommutative, IsList ],
         
   function( globalR, ideal_gens )
     local RP, localR, n_gens, gens;
