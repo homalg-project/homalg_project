@@ -202,8 +202,10 @@ InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush fo
         DeletePeriod := true;
     fi;
     
-    ## exclude already deleted external objects:
-    var := Difference( [ 1 .. l ], container!.deleted );
+    if DeletePeriod then
+        ## exclude already deleted external objects:
+        var := Difference( [ 1 .. l ], container!.deleted );
+    fi;
     
     if IsBound( stream.active_ring ) then
         
@@ -285,9 +287,11 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     
     nargs := Length( arg );
     
-    if nargs = 0 or not IsList( arg[1] ) then
-        Error( "the first argument must be a list\n" );
-    fi;
+    ## Do not waste time with syntax checks;
+    ## this is not a procedure for end users.
+    #if nargs = 0 or not IsList( arg[1] ) then
+    #    Error( "the first argument must be a list\n" );
+    #fi;
     
     L := arg[1];
     
