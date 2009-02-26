@@ -1040,6 +1040,46 @@ InstallMethod( RingOfDerivations,
 end );
 
 ##
+InstallMethod( ExteriorRing,
+        "for homalg rings in Maple",
+        [ IsHomalgExternalRingInMapleRep, IsHomalgExternalRingInMapleRep, IsList ],
+        
+  function( R, T, indets )
+    local ar, var, anti, comm, stream, S;
+    
+    ar := _PrepareInputForExteriorRing( R, T, indets );
+    
+    var := ar[1];
+    anti := ar[2];
+    comm := ar[3];
+    
+    stream := homalgStream( R );
+    
+    ar := JoinStringsWithSeparator( Concatenation( comm, anti ) );
+    ar := Concatenation( "[ [ ", ar, " ], [ ], [ " );
+    ar := Concatenation( ar, Concatenation( "exterior(", JoinStringsWithSeparator( anti ), ")" ), " ] ]" );
+    
+    S := RingForHomalgInMapleUsingJanetOre( ar, stream );
+    
+    anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( anti, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    comm := List( comm , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( comm, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    SetIsExteriorRing( S, true );
+    
+    SetBaseRing( S, T );
+    
+    SetRingProperties( S, R, anti );
+    
+    return S;
+    
+end );
+
+##
 InstallGlobalFunction( MapleHomalgOptions,
   function( arg )
     local nargs, R, s, ar;

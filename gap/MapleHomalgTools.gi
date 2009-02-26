@@ -70,6 +70,28 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               WeightedDegreeMultivariatePolynomial :=
+                 function( r, weights, R )
+                   local deg, var;
+                   
+                   if Set( weights ) <> [ 0, 1 ] then	## there is not direct way to compute the weighted degree in Maple
+                       TryNextMethod( );
+                   fi;
+                   
+                   var := Indeterminates( R );
+                   
+                   var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
+                   
+                   deg := Int( homalgSendBlocking( [ "degree(", r, var, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                   if deg <> fail then
+                       return deg;
+                   fi;
+                   
+                   return -1;
+                   
+                 end,
+               
                ShallowCopy :=
                  function( C )
                    

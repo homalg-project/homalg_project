@@ -1109,8 +1109,6 @@ InstallMethod( LocalizePolynomialRingAtZero,
         Add( properties, IsPrincipalIdealRing );
     fi;
     
-    stream := homalgStream( R );
-    
     ## create the new ring
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, properties, TheTypeHomalgExternalRingObjectInSingular, HOMALG_IO.Pictograms.CreateHomalgRing );
     
