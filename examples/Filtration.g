@@ -2,7 +2,7 @@ Read( "ReducedBasisOfModule.g" );
 
 V := Hom( Qxyz, W );
 
-ApplyFunctor( Functor_Hom, 2, V, "HomV" );
+InsertObjectInMultiFunctor( Functor_Hom, 2, V, "HomV" );
 
 II_E := GrothendieckSpectralSequence( Functor_HomV, LeftDualizingFunctor( Qxyz ), W );
 

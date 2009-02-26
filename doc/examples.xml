@@ -14,7 +14,6 @@ This chapter gives examples for the usage of this package.
 <Heading>Examples</Heading>
 
 <Section Label="BettiDiagram">
-
 <Heading>Betti Diagrams</Heading>
 
 <#Include Label="Schenk-3.2">

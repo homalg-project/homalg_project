@@ -1,6 +1,6 @@
 Read( "ReducedBasisOfModule.g" );
 
-ApplyFunctor( Functor_TensorProduct, 2, W, "TensorW" );
+InsertObjectInMultiFunctor( Functor_TensorProduct, 2, W, "TensorW" );
 
 II_E := GrothendieckSpectralSequence( Functor_TensorW, LeftDualizingFunctor( Qxyz ), W );
 
