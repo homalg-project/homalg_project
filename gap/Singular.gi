@@ -905,15 +905,14 @@ InstallMethod( RingOfDerivations,
     
     stream := homalgStream( R );
     
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
-    
-    
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -991,14 +990,14 @@ InstallMethod( ExteriorRing,
     
     stream := homalgStream( R );
     
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
-    
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
         
         Print( "----------------------------------------------------------------\n" );
         

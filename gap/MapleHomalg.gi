@@ -167,7 +167,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -181,9 +182,39 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
+    fi;
+    
+    homalgSendBlocking( "with(PIR)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := homalgSendBlocking("\`PIR/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     PIR - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2004-2006)\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
     fi;
     
     ar := [ [ arg[1], ",", "copy(`PIR/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingPIR, IsCommutative, IsPrincipalIdealRing, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
@@ -221,7 +252,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -235,12 +267,40 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     Involutive - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -283,7 +343,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -297,12 +358,42 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     Involutive - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
+     The support for local rings was contributed by\n\
+     Markus Lange-Hegermann\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -345,7 +436,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -359,12 +451,42 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     Involutive - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
+     The support for local rings was contributed by\n\
+     Markus Lange-Hegermann\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -407,7 +529,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          var, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -421,12 +544,42 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     Involutive - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
+     The support for local rings was contributed by\n\
+     Markus Lange-Hegermann\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -469,7 +622,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
   function( arg )
-    local nargs, stream, o, var, ar, ext_obj, R;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          var, ar, ext_obj, R;
     
     nargs := Length( arg );
     
@@ -483,12 +637,40 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(Janet)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`Janet/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     Janet - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     if IsString( arg[1] ) then
         var := arg[1];
@@ -517,7 +699,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -531,12 +714,40 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(JanetOre)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`JanetOre/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     JanetOre - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2003-2009) Daniel Robertz\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     ar := [ [ arg[1], ",", "copy(`JanetOre/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingJanetOre, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
@@ -566,7 +777,8 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, stream, o, display_color, homalg_version, package_version,
+          ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -580,12 +792,39 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     if not IsBound( stream ) then
         stream := LaunchCAS( HOMALG_IO_Maple );
+        if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
+            stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
+        fi;
+        homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
     
     homalgSendBlocking( "with(OreModules)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
+        package_version := EvalString( homalgSendBlocking("\`OreModules/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        
+        Print( "----------------------------------------------------------------\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+     OreModules - Maple package loaded (version: ", package_version, ")\n\
+     F. Chyzak, A. Quadrat, D. Robertz\033[0m\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+----------------------------------------------------------------\n\n" );
+        
+    fi;
     
     ar := [ [ arg[1], ",", "copy(`OreModules/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingOreModules, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
@@ -743,8 +982,7 @@ InstallMethod( RingOfDerivations,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local var, nr_var, der, nr_der, properties, stream, display_color,
-          ar, S, v;
+    local var, nr_var, der, nr_der, properties, stream, ar, S, v;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -780,12 +1018,6 @@ InstallMethod( RingOfDerivations,
     properties := [ ];
     
     stream := homalgStream( R );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
     
     ar := JoinStringsWithSeparator( Concatenation( der, List( var, Name ) ) );
     ar := Concatenation( "[ [ ", ar, " ], [ ], [ " );
