@@ -20,19 +20,21 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
         [ IsFinitelyPresentedModuleRep, IsHomalgRing and IsExteriorRing ],
         
   function( M, A )
-    local left, presentation, certain_relations, union, S, vars, anti, param,
-          m0, degrees0, pos0, EM0, M1, m1, degrees1, pos1, EM1, n, map;
+    local presentation, certain_relations, union, S, vars, anti, param,
+          m0, degrees0, pos0, AM0, M1, m1, degrees1, pos1, AM1, n, map;
     
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
-    
-    if left then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        
         presentation := LeftPresentationWithDegrees;
         certain_relations := CertainRows;
         union := UnionOfColumns;
+        
     else
+        
         presentation := RightPresentationWithDegrees;
         certain_relations := CertainColumns;
-	union := UnionOfRows;
+        union := UnionOfRows;
+        
     fi;
     
     S := HomalgRing( M );
@@ -47,7 +49,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     anti := Filtered( anti, v -> not Name( v ) in param );
     
-    ## End(E,M_0):
+    ## End(A,M_0):
     
     m0 := PresentationMap( M );
     
@@ -57,9 +59,9 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     m0 := certain_relations( MatrixOfMap( m0 ), pos0 );
     
-    EM0 := presentation( A * m0, DegreesOfGenerators( M ) );
+    AM0 := presentation( A * m0, -DegreesOfGenerators( M ) );
     
-    ## End(E,M_1):
+    ## End(A,M_1):
     
     M1 := SubmoduleOfIdealMultiples( vars, M );
     
@@ -71,7 +73,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     m1 := certain_relations( MatrixOfMap( m1 ), pos1 );
     
-    EM1 := presentation( A * m1, DegreesOfGenerators( M1 ) );
+    AM1 := presentation( A * m1, -DegreesOfGenerators( M1 ) );
     
     ## End(E,M_0) -> End(E,M_1):
     
@@ -81,7 +83,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     map := Iterated( map, union );
     
-    map := HomalgMap( map, EM0, EM1 );
+    map := HomalgMap( map, AM0, AM1 );
     
     ## check assertion
     Assert( 1, IsMorphism( map ) );
@@ -112,20 +114,22 @@ InstallMethod( DegreeZeroSubcomplex,
         [ IsComplexOfFinitelyPresentedObjectsRep, IsHomalgRing ],
         
   function( T, R )
-    local left, presentation, certain_relations, certain_generators,
+    local presentation, certain_relations, certain_generators,
           lowest, highest, objects, degrees, degrees0, morphisms, m, ranges0,
           Rpi, mor;
     
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( T );
-    
-    if left then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( T ) then
+        
         presentation := HomalgFreeLeftModule;
         certain_relations := CertainRows;
         certain_generators := CertainColumns;
+        
     else
+        
         presentation := HomalgFreeRightModule;
         certain_relations := CertainColumns;
         certain_generators := CertainRows;
+        
     fi;
     
     lowest := LowestDegree( T );

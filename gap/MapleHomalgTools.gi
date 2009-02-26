@@ -18,9 +18,9 @@ InstallValue( SheavesHomalgTableForMapleHomalgTools,
         
         rec(
                MonomialMatrix :=
-                 function( i, R )
+                 function( i, vars, R )
                    
-                   return homalgSendBlocking( [ "`homalg/MonomialMatrix`(", i, R, ")" ], HOMALG_IO.Pictograms.MonomialMatrix );
+                   return homalgSendBlocking( [ "`homalg/MonomialMatrix`(", i, vars, R, ")" ], HOMALG_IO.Pictograms.MonomialMatrix );
                    
                  end,
                

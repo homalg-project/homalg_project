@@ -18,12 +18,11 @@ InstallValue( SheavesHomalgTableForMAGMATools,
         
         rec(
                MonomialMatrix :=
-                 function( i, R )
+                 function( i, vars, R )
                    
-                   return homalgSendBlocking( [ "Matrix(1,IndexedSetToSequence(MonomialsOfDegree(", R, i, ")))" ], HOMALG_IO.Pictograms.MonomialMatrix );
+                   return homalgSendBlocking( [ "Matrix(1,MonomialsOfDegree(", R, i, ",{", R, ".i : i in [ 1 .. Rank(", R, ")]} diff {", vars, "}))" ], "break_lists", HOMALG_IO.Pictograms.MonomialMatrix );
                    
                  end,
-               
                
         )
  );

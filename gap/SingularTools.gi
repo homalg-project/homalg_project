@@ -18,9 +18,9 @@ InstallValue( SheavesHomalgTableForSingularTools,
         
         rec(
                MonomialMatrix :=
-                 function( i, R )
+                 function( i, vars, R )
                    
-                   return homalgSendBlocking( [ "matrix(maxideal(", i, "))" ], [ "matrix" ], R, HOMALG_IO.Pictograms.MonomialMatrix );
+                   return homalgSendBlocking( [ "matrix(ideal(", vars, ")^", i, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.MonomialMatrix );
                    
                  end,
                

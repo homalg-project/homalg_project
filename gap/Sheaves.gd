@@ -28,13 +28,13 @@ DeclareCategory( "IsSetOfUnderlyingModules",
 ##    <Description>
 ##      The &GAP; category of &homalg; sheaves of rings. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; category
-##      <C>IsHomalgRingOrModule</C>.)
+##      <C>IsHomalgRingOrObject</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareCategory( "IsHomalgSheafOfRings",
-        IsHomalgRingOrModule );
+        IsHomalgRingOrObject );
 
 ##  <#GAPDoc Label="IsHomalgSheaf">
 ##  <ManSection>
@@ -43,13 +43,13 @@ DeclareCategory( "IsHomalgSheafOfRings",
 ##    <Description>
 ##      The &GAP; category of &homalg; sheaves. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; categories
-##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgObject</C>.)
+##      <C>IsHomalgRingOrObject</C> and <C>IsHomalgObject</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareCategory( "IsHomalgSheaf",
-        IsHomalgRingOrModule and IsHomalgObject );
+        IsHomalgRingOrObject and IsHomalgObject );
 
 ##  <#GAPDoc Label="IsHomalgSheafMap">
 ##  <ManSection>

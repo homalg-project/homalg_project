@@ -47,17 +47,27 @@ InstallMethod( MonomialMatrix,
         [ IsInt, IsHomalgRing ],
         
   function( d, R )
-    local RP, mon;
+    local RP, vars, weights, mon;
     
     RP := homalgTable( R );
     
-    if Set( WeightsOfIndeterminates( R ) ) = [ 1 ] and
-       d < 0 then
+    if d < 0 then	## we only accept weights 1 or 0
         return HomalgZeroMatrix( 0, 1, R );
     fi;
     
+    vars := Indeterminates( R );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    if not Set( weights ) = [ 1 ] then
+        
+        ## the variables of weight 1
+        vars := vars{Filtered( [ 1 .. Length( weights ) ], p -> weights[p] = 1 )};
+        
+    fi;
+    
     if IsBound(RP!.MonomialMatrix) then
-        mon := RP!.MonomialMatrix( d, R );	## the external object
+        mon := RP!.MonomialMatrix( d, vars, R );	## the external object
         mon := HomalgMatrix( mon, R );
         SetNrColumns( mon, 1 );
         if d = 0 then
@@ -286,9 +296,7 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPart,
     
     M_geq_d := HomalgMap( M_geq_d, "free", M );
     
-    M_geq_d := ImageSubmodule( M_geq_d );
-    
-    return M_geq_d;
+    return ImageSubmodule( M_geq_d );
     
 end );
 
@@ -378,12 +386,26 @@ InstallMethod( RepresentationMatrixOfKoszulId,
         [ IsInt, IsFinitelyPresentedModuleRep, IsHomalgRing and IsExteriorRing ],
         
   function( d, M, A )
-    local vars, dual, reps;
+    local S, vars, dual, weights, pos, reps;
     
-    vars := Indeterminates( HomalgRing( M ) );
+    S := HomalgRing( M );
+    
+    vars := Indeterminates( S );
     dual := Indeterminates( A );
     
-    ## this whole computation is over R = HomalgRing( M )
+    weights := WeightsOfIndeterminates( S );
+    
+    if not Set( weights ) = [ 1 ] then
+        
+        pos := Filtered( [ 1 .. Length( weights ) ], p -> weights[p] = 1 );
+        
+        ## the variables of weight 1
+        vars := vars{pos};
+        dual := dual{pos};
+        
+    fi;
+    
+    ## this whole computation is over S = HomalgRing( M )
     reps := List( vars, v -> RepresentationOfRingElement( v, M, d ) );
     
     ## convert the matrices with constant coefficients
@@ -449,19 +471,58 @@ InstallMethod( RepresentationMapOfKoszulId,
         [ IsInt, IsFinitelyPresentedModuleRep, IsHomalgRing and IsExteriorRing ],
         
   function( d, M, A )
-    local rep, F_source, F_target;
+    local left, rep, weights, presentation, certain_relations, M_d, M_dp1,
+          m_d, m_dp1, degrees_d, degrees_dp1, pos_d, pos_dp1, AM_d, AM_dp1;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
     
     rep := RepresentationMatrixOfKoszulId( d, M, A );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        F_source := HomalgFreeLeftModuleWithDegrees( NrRows( rep ), A, -d );
-        F_target := HomalgFreeLeftModuleWithDegrees( NrColumns( rep ), A, -d - 1 );
+    ## now determine the source and target modules
+    
+    weights := WeightsOfIndeterminates( HomalgRing( M ) );
+    
+    if Set( weights ) = [ 1 ] then
+        
+        if left then
+            AM_d := HomalgFreeLeftModuleWithDegrees( NrRows( rep ), A, -d );
+            AM_dp1 := HomalgFreeLeftModuleWithDegrees( NrColumns( rep ), A, -d - 1 );
+        else
+            AM_d := HomalgFreeRightModuleWithDegrees( NrColumns( rep ), A, -d );
+            AM_dp1 := HomalgFreeRightModuleWithDegrees( NrRows( rep ), A, -d - 1 );
+        fi;
+        
     else
-        F_source := HomalgFreeRightModuleWithDegrees( NrColumns( rep ), A, -d );
-        F_target := HomalgFreeRightModuleWithDegrees( NrRows( rep ), A, -d - 1 );
+        
+        if left then
+            presentation := LeftPresentationWithDegrees;
+            certain_relations := CertainRows;
+        else
+            presentation := RightPresentationWithDegrees;
+            certain_relations := CertainColumns;
+        fi;
+        
+        M_d := SubmoduleGeneratedByHomogeneousPart( d, M );
+        M_dp1 := SubmoduleGeneratedByHomogeneousPart( d + 1, M );
+        
+        m_d := PresentationMap( M_d );
+        m_dp1 := PresentationMap( M_dp1 );
+        
+        degrees_d := DegreesOfGenerators( Source( m_d ) );
+        degrees_dp1 := DegreesOfGenerators( Source( m_dp1 ) );
+        
+        pos_d := Filtered( [ 1 .. Length( degrees_d ) ], p -> degrees_d[p] = d );
+        pos_dp1 := Filtered( [ 1 .. Length( degrees_dp1 ) ], p -> degrees_dp1[p] = d + 1 );
+        
+        AM_d := certain_relations( MatrixOfMap( m_d ), pos_d );
+        AM_dp1 := certain_relations( MatrixOfMap( m_dp1 ), pos_dp1 );
+        
+        AM_d := presentation( A * AM_d, -DegreesOfGenerators( M_d ) );
+        AM_dp1 := presentation( A * AM_dp1, -DegreesOfGenerators( M_dp1 ) );
+        
     fi;
     
-    return HomalgMap( rep, F_source, F_target );
+    return HomalgMap( rep, AM_d, AM_dp1 );
     
 end );
 
