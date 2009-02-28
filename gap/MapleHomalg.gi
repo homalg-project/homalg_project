@@ -919,7 +919,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local var, c, r, var_of_coeff_ring, S, v;
+    local var, c, r, stream, show_banner, var_of_coeff_ring, S, v;
     
     if IsString( indets ) and indets <> "" then
         var := SplitString( indets, "," ); 
@@ -934,7 +934,17 @@ InstallMethod( PolynomialRing,
     r := R;
     
     if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        stream := homalgStream( R );
+        if IsBound( stream.show_banner ) then
+            show_banner := stream.show_banner;
+        fi;
+        stream.show_banner := false;
         S := RingForHomalgInMapleUsingPIR( Flat( [ "[", Flat( var ), ",", String( c ), "]" ] ), R );
+        if IsBound( show_banner ) then
+            stream.show_banner := show_banner;
+        else
+            Unbind( stream.show_banner );
+        fi;
     else
         if HasIndeterminatesOfPolynomialRing( R ) then
             r := CoefficientsRing( R );

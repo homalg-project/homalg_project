@@ -132,7 +132,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( A );
                    
-                   return homalgSendBlocking( [ "`homalg/AreEqualMatrices`(", A, B, R, ")" ] , HOMALG_IO.Pictograms.AreEqualMatrices, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "linalg[iszero](`homalg/SubMat`(", A, B, R, "))" ] , HOMALG_IO.Pictograms.AreEqualMatrices, "need_output" ) = "true";
                    
                  end,
                
@@ -274,7 +274,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "`homalg/IsZeroMatrix`(", M, R, ")" ], HOMALG_IO.Pictograms.IsZeroMatrix, "need_output" ) = "true";
+                   return homalgSendBlocking( [ "linalg[iszero](`homalg/ReduceRingElements`(", M, R, "))" ], HOMALG_IO.Pictograms.IsZeroMatrix, "need_output" ) = "true";
                    
                  end,
                
