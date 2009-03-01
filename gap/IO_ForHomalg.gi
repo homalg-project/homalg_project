@@ -79,8 +79,8 @@ InstallValue( HOMALG_IO,
                 ## create matrices:
                 HomalgMatrix				:= "A:=",	## define a matrix
                 CopyMatrix				:= "A>A",	## copy a matrix
-                LoadDataOfHomalgMatrixFromFile 		:= "A<<",	## load a matrix from file
-                SaveDataOfHomalgMatrixToFile		:= "A>>",	## save a matrix to file
+                LoadHomalgMatrixFromFile 		:= "A<<",	## load a matrix from file
+                SaveHomalgMatrixToFile		:= "A>>",	## save a matrix to file
                 GetEntryOfHomalgMatrix			:= "<ij",	## get a matrix entry as a string
                 SetEntryOfHomalgMatrix			:= ">ij",	## set a matrix entry from a string
                 AddToEntryOfHomalgMatrix		:= "+ij",	## add to a matrix entry from a string

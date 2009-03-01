@@ -40,18 +40,18 @@ DeclareOperation( "ConvertHomalgMatrixViaFile",
         [ IsHomalgMatrix, IsHomalgRing ]
         );
 
-DeclareOperation( "SaveDataOfHomalgMatrixToFile",
+DeclareOperation( "SaveHomalgMatrixToFile",
         [ IsString, IsHomalgMatrix, IsHomalgRing ]
         );
 
-DeclareOperation( "SaveDataOfHomalgMatrixToFile",
+DeclareOperation( "SaveHomalgMatrixToFile",
         [ IsString, IsHomalgMatrix ]
         );
 
-DeclareOperation( "LoadDataOfHomalgMatrixFromFile",
+DeclareOperation( "LoadHomalgMatrixFromFile",
         [ IsString, IsHomalgRing ]
         );
 
-DeclareOperation( "LoadDataOfHomalgMatrixFromFile",
+DeclareOperation( "LoadHomalgMatrixFromFile",
         [ IsString, IsInt, IsInt, IsHomalgRing ]
         );

@@ -345,9 +345,11 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         Error( "unable to close the file ", filename, "\n" );
     fi;
     
-    SaveDataOfHomalgMatrixToFile( filename, M );
+    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
     
-    MM := LoadDataOfHomalgMatrixFromFile( filename, r, c, RR ); # matrix in target ring
+    SaveHomalgMatrixToFile( filename, M );
+    
+    MM := LoadHomalgMatrixFromFile( filename, r, c, RR ); # matrix in target ring
     
     ResetFilterObj( MM, IsVoidMatrix );
     
@@ -360,18 +362,41 @@ InstallMethod( ConvertHomalgMatrixViaFile,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixToFile,
+InstallMethod( SaveHomalgMatrixToFile,
         "for two arguments instead of three",
         [ IsString, IsHomalgMatrix ],
         
   function( filename, M )
+    local fs;
     
-    return SaveDataOfHomalgMatrixToFile( filename, M, HomalgRing( M ) );
+    fs := IO_File( filename, "r" );
+    
+    if fs <> fail then
+        if IO_Close( fs ) = fail then
+            Error( "unable to close the file ", filename, "\n" );
+        fi;
+        Error( "the file ", filename, " already exists, please delete it first and then type return; to continue\n" );
+        return SaveHomalgMatrixToFile( filename, M );
+    fi;
+    
+    fs := IO_File( filename, "w" );
+    
+    if fs = fail then
+        Error( "unable to open the file ", filename, " for writing\n" );
+    fi;
+    
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename, "\n" );
+    fi;
+    
+    Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+    
+    return SaveHomalgMatrixToFile( filename, M, HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixToFile,
+InstallMethod( SaveHomalgMatrixToFile,
         "for an internal homalg matrix",
         [ IsString, IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
@@ -407,7 +432,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
 end );
 
 ##
-InstallMethod( LoadDataOfHomalgMatrixFromFile,
+InstallMethod( LoadHomalgMatrixFromFile,
         "for an internal homalg ring",
         [ IsString, IsHomalgInternalRingRep ],
         
@@ -450,13 +475,15 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
 end );
 
 ##
-InstallMethod( LoadDataOfHomalgMatrixFromFile,
+InstallMethod( LoadHomalgMatrixFromFile,
         "for an internal homalg ring",
         [ IsString, IsInt, IsInt, IsHomalgRing ], 0, ## lowest rank method
         
   function( filename, r, c, R )
     
-    return LoadDataOfHomalgMatrixFromFile( filename, R );
+    return LoadHomalgMatrixFromFile( filename, R );
+    
+    ## do not set NrRows and NrColumns for safety reasons
     
 end );
 

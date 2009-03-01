@@ -427,7 +427,7 @@ InstallGlobalFunction( homalgSendBlocking,
             elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
                 need_output := true;
             else
-                Error( "option must be one of {\"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
+                Error( "option must be one of { \"need_command\", \"need_display\", \"need_output\", \"return_ring_element\" }, but received: ", ar, "\n" );
             fi;
             option := ar;
         elif not IsBound( type ) and IsType( ar ) then
