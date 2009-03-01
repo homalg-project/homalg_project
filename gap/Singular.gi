@@ -1293,7 +1293,7 @@ end );
 
 ##
 
-InstallMethod( SaveDataOfHomalgMatrixToFile,
+InstallMethod( SaveHomalgMatrixToFile,
         "for external matrices in Singular",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSingularRep ],
         
@@ -1318,7 +1318,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
           "write(\"w: ", filename,"\",s);"
         ];
 
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
 
     fi;
     
@@ -1328,7 +1328,7 @@ end );
 
 
 ##
-InstallMethod( LoadDataOfHomalgMatrixFromFile,
+InstallMethod( LoadHomalgMatrixFromFile,
         "for external rings in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
@@ -1379,13 +1379,16 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                      "execute( \"matrix ", M, "[", r, "][", c, "] = \" + s + \";\" );",
                      M, " = transpose(", M, ")" ];#remark: matrices are saved transposed in singular
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
         
     fi;
     
     if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
         Exec( Concatenation( "/bin/rm -f \"", fname, "\"" ) );
     fi;
+    
+    SetNrRows( M, r );
+    SetNrColumns( M, c );
     
     return M;
     

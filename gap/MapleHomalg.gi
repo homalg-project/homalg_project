@@ -1245,7 +1245,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixToFile,
+InstallMethod( SaveHomalgMatrixToFile,
         "for external matrices in Maple",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMapleRep ],
         
@@ -1264,7 +1264,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
 		     "fflush( _fs ): ",
                      "fclose( _fs )" ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
         
     fi;
     
@@ -1273,7 +1273,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
 end );
 
 ##
-InstallMethod( LoadDataOfHomalgMatrixFromFile,
+InstallMethod( LoadHomalgMatrixFromFile,
         "for external rings in Maple",
         [ IsString, IsHomalgExternalRingInMapleRep ],
         
@@ -1295,7 +1295,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                      "fclose( _fs ): ",
                      M, ":=", R, "[-1][matrix](parse( _str ))" ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
         
     fi;
     

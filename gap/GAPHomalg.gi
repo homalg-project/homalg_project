@@ -341,7 +341,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixToFile,
+InstallMethod( SaveHomalgMatrixToFile,
         "for external matrices in GAP",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInGAPRep ],
         
@@ -355,9 +355,9 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
     fi;
     
     if mode = "ListList" then
-        command := [ "SaveDataOfHomalgMatrixToFile( \"", filename, "\", ", M, " )" ];
+        command := [ "SaveHomalgMatrixToFile( \"", filename, "\", ", M, " )" ];
                 
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
                 
     fi;
     
@@ -366,7 +366,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
 end );
 
 ##
-InstallMethod( LoadDataOfHomalgMatrixFromFile,
+InstallMethod( LoadHomalgMatrixFromFile,
         "for external rings in GAP",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
@@ -383,9 +383,9 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
     
     if mode = "ListList" then
         
-        command := [ M, " := LoadDataOfHomalgMatrixFromFile( \"", filename, "\", ", R, " )" ];
+        command := [ M, " := LoadHomalgMatrixFromFile( \"", filename, "\", ", R, " )" ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
         
     fi;
     

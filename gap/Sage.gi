@@ -377,7 +377,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( SaveDataOfHomalgMatrixToFile,
+InstallMethod( SaveHomalgMatrixToFile,
         "for external matrices in Sage",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSageRep ],
         
@@ -395,7 +395,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
                      "_fs.write(str( [", M, "[x].list() for x in range(", NrRows( M ), ")] )); ",
                      "_fs.close()" ];
                 
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveDataOfHomalgMatrixToFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
                 
     fi;
     
@@ -404,7 +404,7 @@ InstallMethod( SaveDataOfHomalgMatrixToFile,
 end );
 
 ##
-InstallMethod( LoadDataOfHomalgMatrixFromFile,
+InstallMethod( LoadHomalgMatrixFromFile,
         "for external rings in Sage",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
@@ -426,7 +426,7 @@ InstallMethod( LoadDataOfHomalgMatrixFromFile,
                      "_fs.close(); ",
                      M, "= matrix(", R, ",eval(_str))" ];
         
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadDataOfHomalgMatrixFromFile );
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
         
     fi;
     
