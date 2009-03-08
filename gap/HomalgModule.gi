@@ -1294,7 +1294,10 @@ InstallMethod( ByASmallerPresentation,
         fi;
     od;
     
-    DecideZero( M );
+    if not ( IsBound( HOMALG.ByASmallerPresentationDoesNotDecideZero ) and
+             HOMALG.ByASmallerPresentationDoesNotDecideZero = true ) then
+        DecideZero( M );
+    fi;
     
     return M;
     

@@ -83,6 +83,8 @@ InstallValue( HOMALG,
             
             PreferDenseMatrices := false,
             
+            ByASmallerPresentationDoesNotDecideZero := false,
+            
             MaximumNumberOfResolutionSteps := 1001,
             
            )
