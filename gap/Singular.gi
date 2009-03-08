@@ -143,7 +143,7 @@ InstallGlobalFunction( InitializeSingularTools,
           SyzForHomalg,
           SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
           SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
-          MultiDeg,
+          Deg, MultiDeg,
           DegreesOfEntries, WeightedDegreesOfEntries,
           MultiWeightedDegreesOfEntries,
           NonTrivialDegreePerRow, NonTrivialWeightedDegreePerRow,
@@ -516,6 +516,26 @@ proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
   return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
 }\n\n";
     
+    Deg := "\n\
+ring r;\n\
+if ( deg(0,(1,1,1)) > 0 )  // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
+{ proc Deg (pol,weights)\n\
+  {\n\
+    if ( pol == 0 )\n\
+    {\n\
+      return(deg(0));\n\
+    }\n\
+    return(deg(pol,weights));\n\
+  }\n\
+}\n\
+else\n\
+{ proc Deg (pol,weights)\n\
+  {\n\
+    return(deg(pol,weights));\n\
+  }\n\
+}\n\
+kill r;\n\n";
+    
     MultiDeg := "\n\
 proc MultiDeg (pol,weights)\n\
 {\n\
@@ -523,7 +543,7 @@ proc MultiDeg (pol,weights)\n\
   intmat m[1][mul];\n\
   for (int i=1; i<=mul; i=i+1)\n\
   {\n\
-    m[1,i]=deg(pol,weights[i]);\n\
+    m[1,i]=Deg(pol,weights[i]);\n\
   }\n\
   return(m);\n\
 }\n\n";
@@ -550,7 +570,7 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
   {\n\
     for (int j=1; j<=nrows(M); j=j+1)\n\
     {\n\
-      m[i,j] = deg(M[j,i],weights);\n\
+      m[i,j] = Deg(M[j,i],weights);\n\
     }\n\
   }\n\
   return(m);\n\
@@ -578,12 +598,12 @@ proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
 {\n\
   int b = 1;\n\
   intmat m[1][ncols(M)];\n\
-  int d = deg(0,weights);\n\
+  int d = Deg(0,weights);\n\
   for (int i=1; i<=ncols(M); i=i+1)\n\
   {\n\
     for (int j=1; j<=nrows(M); j=j+1)\n\
     {\n\
-      if ( deg(M[j,i],weights) <> d ) { m[1,i] = deg(M[j,i],weights); break; }\n\
+      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
     }\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
@@ -609,12 +629,12 @@ proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
 proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
-  int d = deg(0,weights);\n\
+  int d = Deg(0,weights);\n\
   for (int i=1; i<=ncols(M); i=i+1)\n\
   {\n\
     for (int j=1; j<=nrows(M); j=j+1)\n\
     {\n\
-      if ( deg(M[j,i],weights) <> d ) { m[1,i] = deg(M[j,i],weights); m[2,i] = j; break; }\n\
+      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -642,12 +662,12 @@ proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
 {\n\
   int b = 1;\n\
   intmat m[1][nrows(M)];\n\
-  int d = deg(0,weights);\n\
+  int d = Deg(0,weights);\n\
   for (int j=1; j<=nrows(M); j=j+1)\n\
   {\n\
     for (int i=1; i<=ncols(M); i=i+1)\n\
     {\n\
-      if ( deg(M[j,i],weights) <> d ) { m[1,j] = deg(M[j,i],weights); break; }\n\
+      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
     }\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
@@ -673,12 +693,12 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
 proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
-  int d = deg(0,weights);\n\
+  int d = Deg(0,weights);\n\
   for (int j=1; j<=nrows(M); j=j+1)\n\
   {\n\
     for (int i=1; i<=ncols(M); i=i+1)\n\
     {\n\
-      if ( deg(M[j,i],weights) <> d ) { m[1,j] = deg(M[j,i],weights); m[2,j] = i; break; }\n\
+      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -710,6 +730,7 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( Deg, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( MultiDeg, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( WeightedDegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
