@@ -520,13 +520,35 @@ InstallMethod( AssociatedFirstSpectralSequence,
         "for homalg spectral sequences stemming from a bicomplex",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
-  function( E )
+  function( II_E )
+    local BC, I_E;
     
-    if not IsBound(E!.FirstSpectralSequence) then
-        return fail;
+    if not IsBound(II_E!.FirstSpectralSequence) then
+        BC := UnderlyingBicomplex( II_E );
+        
+        if not IsTransposedWRTTheAssociatedComplex( BC ) then
+            return fail;	## this doesn't seem like the second spectral sequence
+        fi;
+        
+        BC := TransposedBicomplex( BC );
+        
+        ## the first spectral sequence associated to BC,
+        ## also called the first spectral sequence of the bicomplex BC;
+        ## it becomes intrinsic at the second level (w.r.t. some original data)
+        ## which is often its limit sheet
+        I_E := HomalgSpectralSequence( BC );
+        
+        ## enforce computation till the second sheet, even if things stabilize earlier
+        if HighestLevelInSpectralSequence( I_E ) < 2 then
+            I_E := HomalgSpectralSequence( 2, BC );	## FIXME: find a way to avoid recomputing things
+        fi;
+        
+        ## finally enrich the second spectral sequence with the first
+        II_E!.FirstSpectralSequence := I_E;
+        
     fi;
     
-    return E!.FirstSpectralSequence;
+    return II_E!.FirstSpectralSequence;
     
 end );
 

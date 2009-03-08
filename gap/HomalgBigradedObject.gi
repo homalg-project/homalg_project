@@ -812,7 +812,7 @@ InstallMethod( DefectOfExactness,
                         nat := outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) / emb;
                         Assert( 1, IsMonomorphism( nat ) );
                         SetIsMonomorphism( nat, true );
-                        natural_transformations.(String([ p[i], 0 ])) := nat;
+                        natural_transformations.(String( [ p[i], 0 ] )) := nat;
                     fi;
                 fi;
                 if IsZero( def ) then
@@ -831,7 +831,7 @@ InstallMethod( DefectOfExactness,
                         nat := PreCompose( RemoveMorphismAidMap( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
                         Assert( 1, IsEpimorphism( nat ) );
                         SetIsEpimorphism( nat, true );
-                        natural_transformations.(String([ p[i], 0 ])) := nat;
+                        natural_transformations.(String( [ p[i], 0 ] )) := nat;
                     fi;
                 if IsZero( def ) then
                     H.stability_table[lq-j+1][i] := '.';

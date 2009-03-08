@@ -57,11 +57,11 @@ InstallMethod( AddTotalEmbeddingsToCollapsedFirstSpectralSequence,
         tot_embs := EmbeddingsInCoproductObject( Totn, bidegrees );
         
         ## get the absolute embeddings
-        gen_emb := I_E_infinity!.absolute_embeddings.(String([ n, 0 ]));
+        gen_emb := I_E_infinity!.absolute_embeddings.(String( [ n, 0 ] ));
         
         ## create the total embeddings
         if tot_embs <> fail then
-            gen_emb := PreCompose( gen_emb, tot_embs.(String([ n, 0 ])) );
+            gen_emb := PreCompose( gen_emb, tot_embs.(String( [ n, 0 ] )) );
         fi;
         
         ## CertainMorphism( Tot, n + co ) is the minimum of what
@@ -73,7 +73,7 @@ InstallMethod( AddTotalEmbeddingsToCollapsedFirstSpectralSequence,
         
         SetIsGeneralizedMonomorphism( gen_emb, true );
         
-        embeddings.(String([ n, 0 ])) := gen_emb;
+        embeddings.(String( [ n, 0 ] )) := gen_emb;
         
     od;
     
@@ -138,11 +138,11 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
             fi;
             
             ## get the absolute embeddings
-            gen_emb := E_infinity!.absolute_embeddings.(String([ p, q ]));
+            gen_emb := E_infinity!.absolute_embeddings.(String( [ p, q ] ));
             
             ## create the total embeddings
             if tot_embs <> fail then
-                gen_emb := PreCompose( gen_emb, tot_embs.(String([ pp, qq ])) );
+                gen_emb := PreCompose( gen_emb, tot_embs.(String( [ pp, qq ] )) );
             fi;
             
             ## check assertion
@@ -150,7 +150,7 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
             
             SetIsGeneralizedMonomorphism( gen_emb, true );
             
-            embeddings.(String([ p, q ])) := gen_emb;
+            embeddings.(String( [ p, q ] )) := gen_emb;
             
         od;
         
@@ -228,17 +228,17 @@ InstallMethod( AddSpectralFiltrationOfTotalDefects,
                 q := qq;
             fi;
             
-            gen_emb := embeddings.(String([ p, q ]));
+            gen_emb := embeddings.(String( [ p, q ] ));
             
             if tot_prjs <> fail then
-                gen_prj := PreCompose( Hgen_emb, tot_prjs.(String([ pp, qq ])) );
+                gen_prj := PreCompose( Hgen_emb, tot_prjs.(String( [ pp, qq ] )) );
             else
                 gen_prj := Hgen_emb;
             fi;
             
             gen_embH := gen_emb / gen_prj;
             
-            filtration.(String([ p, q ])) := gen_embH;
+            filtration.(String( [ p, q ] )) := gen_embH;
             
         od;
         
@@ -328,18 +328,18 @@ InstallMethod( AddSpectralFiltrationOfTotalDefects,
                 q := qq;
             fi;
             
-            gen_emb := embeddings.(String([ p, q ]));
+            gen_emb := embeddings.(String( [ p, q ] ));
             
             ## prepare gen_emb0 to master the coming lift
             gen_emb0 := AddToMorphismAidMap( gen_emb0, monomorphism_aid_map );
             
             gen_embH := gen_emb / gen_emb0;
             
-            filtration.(String([ p, q ])) := gen_embH;
+            filtration.(String( [ p, q ] )) := gen_embH;
             
             ## prepare the next step
             if tot_embs <> fail then
-                monomorphism_aid_map := tot_embs.(String([ pp, qq ]));
+                monomorphism_aid_map := tot_embs.(String( [ pp, qq ] ));
             fi;
             
         od;
@@ -359,13 +359,11 @@ InstallMethod( AddSpectralFiltrationOfTotalDefects,
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
   function( E )
-    local bidegrees, l, p_range;
+    local BC, p_range;
     
-    bidegrees := ObjectDegreesOfSpectralSequence( E );
+    BC := UnderlyingBicomplex( E );
     
-    l := Length( bidegrees[1] );
-    
-    p_range := [ bidegrees[1][1] + bidegrees[2][1] .. bidegrees[1][l] + bidegrees[2][l] ];
+    p_range := TotalObjectDegreesOfBicomplex( BC );
     
     return AddSpectralFiltrationOfTotalDefects( E, p_range );
     
@@ -376,8 +374,8 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
         "for homalg bicomplexes",
         [ IsBicomplexOfFinitelyPresentedObjectsRep, IsList ],
         
-  function( _BC, _p_range )
-    local BC, p_range, Tot, I_E, I_E_infinity, tBC, II_E, II_E2,
+  function( _BC, p_range )
+    local BC, Tot, I_E, I_E_infinity, tBC, II_E, II_E2,
           embeddings1, embeddings2, embeddings, n, Totn, bidegrees,
           tot_embs, gen_emb1, Hn, monomorphism_aid_map1, pq, p, q,
           gen_emb2, gen_emb;
@@ -386,13 +384,6 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
         BC := TransposedBicomplex( _BC );
     else
         BC := _BC;
-    fi;
-    
-    if _p_range = [ ] then
-        ## the (co)homologies vanish in negative total degrees
-        p_range := Filtered( TotalObjectDegreesOfBicomplex( BC ), p -> p >= 0 );
-    else
-        p_range := _p_range;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -442,7 +433,7 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
         tot_embs := EmbeddingsInCoproductObject( Totn, bidegrees );
         
         ## for the first spectral sequence I_E
-        gen_emb1 := embeddings1.(String([ n, 0 ]));
+        gen_emb1 := embeddings1.(String( [ n, 0 ] ));
         
         ## store the morphism aid map
         if HasMorphismAidMap( gen_emb1 ) then
@@ -462,7 +453,7 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
             q := pq[1];		## we flip p and q of the bicomplex since we take
             p := pq[2];		## the second spectral sequence as our reference
             
-            gen_emb2 := embeddings2.(String([ p, q ]));
+            gen_emb2 := embeddings2.(String( [ p, q ] ));
             
             ## prepare gen_emb1 to master the coming lift
             gen_emb1 := AddToMorphismAidMap( gen_emb1, monomorphism_aid_map1 );		## this works without side effects
@@ -480,11 +471,11 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
             ## where generalized embeddings play a decisive role
             ## (see the functors PostDivide and Compose)
             
-            embeddings.(String([ p, q ])) := gen_emb;
+            embeddings.(String( [ p, q ] )) := gen_emb;
             
             ## prepare the next step
             if tot_embs <> fail then
-                monomorphism_aid_map1 := tot_embs.(String([ q, p ]));	## note the flip [ q, p ]
+                monomorphism_aid_map1 := tot_embs.(String( [ q, p ] ));	## note the flip [ q, p ]
             fi;
             
         od;
@@ -509,8 +500,7 @@ InstallMethod( SecondSpectralSequenceWithCollapsedFirstSpectralSequence,
   function( BC )
     local p_range;
     
-    ## the (co)homologies vanish in negative total degrees
-    p_range := Filtered( TotalObjectDegreesOfBicomplex( BC ), p -> p >= 0 );
+    p_range := ObjectDegreesOfBicomplex( BC )[1];
     
     return SecondSpectralSequenceWithCollapsedFirstSpectralSequence( BC, p_range );
     
@@ -521,20 +511,13 @@ InstallMethod( SecondSpectralSequenceWithFiltrationOfTotalDefects,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex, IsList ],
         
-  function( _BC, _p_range )
-    local BC, p_range, Tot, tBC, II_E, I_E;
+  function( _BC, p_range )
+    local BC, Tot, tBC, II_E;
     
     if IsTransposedWRTTheAssociatedComplex( _BC ) then
         BC := TransposedBicomplex( _BC );
     else
         BC := _BC;
-    fi;
-    
-    if _p_range = [ ] then
-        ## the (co)homologies vanish in negative total degrees
-        p_range := Filtered( TotalObjectDegreesOfBicomplex( BC ), p -> p >= 0 );
-    else
-        p_range := _p_range;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -555,14 +538,7 @@ InstallMethod( SecondSpectralSequenceWithFiltrationOfTotalDefects,
     ## of the second spectral sequence
     AddSpectralFiltrationOfTotalDefects( II_E, p_range );
     
-    ## the first spectral sequence associated to BC,
-    ## also called the first spectral sequence of the bicomplex BC;
-    ## it becomes intrinsic at the second level (w.r.t. some original data)
-    ## which is often its limit sheet
-    I_E := HomalgSpectralSequence( 2, BC );	## enforce computation till the second sheet, even if things stabilize earlier
-    
-    ## finally enrich the second spectral sequence with the first
-    II_E!.FirstSpectralSequence := I_E;
+    AssociatedFirstSpectralSequence( II_E );
     
     return II_E;
     
@@ -576,8 +552,7 @@ InstallMethod( SecondSpectralSequenceWithFiltrationOfTotalDefects,
   function( BC )
     local p_range;
     
-    ## the (co)homologies vanish in negative total degrees
-    p_range := Filtered( TotalObjectDegreesOfBicomplex( BC ), p -> p >= 0 );
+    p_range := TotalObjectDegreesOfBicomplex( BC );
     
     return SecondSpectralSequenceWithFiltrationOfTotalDefects( BC, p_range );
     
@@ -606,8 +581,11 @@ InstallMethod( SecondSpectralSequenceWithFiltration,
   function( BC )
     local p_range;
     
-    ## the (co)homologies vanish in negative total degrees
-    p_range := Filtered( TotalObjectDegreesOfBicomplex( BC ), p -> p >= 0 );
+    if IsBicomplexOfFinitelyPresentedObjectsRep( BC ) then
+        p_range := ObjectDegreesOfBicomplex( BC )[1];
+    else
+        p_range := TotalObjectDegreesOfBicomplex( BC );
+    fi;
     
     return SecondSpectralSequenceWithFiltration( BC, p_range );
     
@@ -618,9 +596,10 @@ InstallMethod( GrothendieckSpectralSequence,
         "for homalg functors",
         [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep, IsList ],
         
-  function( Functor_F, Functor_G, M, p_range )
-    local F, G, P, GP, CE, FCE, BC, p_degrees, natural_epis, F_natural_epis,
-          p, II_E, I_E, I_E1, natural_transformations, FGP, HFGP, I_E2,
+  function( Functor_F, Functor_G, M, _p_range )
+    local F, G, P, GP, CE, FCE, BC, p_degrees, p_range,
+          natural_epis, F_natural_epis, p, II_E,
+          I_E, I_E1, natural_transformations, FGP, HFGP, I_E2,
           gen_embs, Hgen_embs, nat_trafos;
     
     F := OperationOfFunctor( Functor_F );
@@ -645,6 +624,13 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the p-degrees
     p_degrees := ObjectDegreesOfBicomplex( BC )[1];
     
+    ## set the p_range
+    if _p_range = [ ] then
+        p_range := p_degrees;
+    else
+        p_range := _p_range;
+    fi;
+    
     ## the natural epimorphisms CE -> GP -> 0
     natural_epis := CE!.NaturalEpis;
     
@@ -662,17 +648,8 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the second spectral sequence
     II_E := SecondSpectralSequenceWithFiltration( BC, p_range );
     
-    ## extract the associated first spectral sequence
-    I_E := AssociatedFirstSpectralSequence( II_E );
-    
-    ## the first sheet of the first spectral sequence
-    I_E1 := CertainSheet( I_E, 1 );
-    
-    ## extract the natural transformations
-    ## 0 -> F(G(P_p)) -> R^0(F)(G(P_p)) (F contravariant)
-    ## L_0(F)(G(P_p)) -> F(G(P_p)) -> 0 (F covariant)
-    ## out of the first sheet of the first spectral sequence
-    natural_transformations := I_E1!.NaturalTransformations;
+    ## astonishingly, the remaining code only causes
+    ## very few extra computations (if any)
     
     ## in case F is contravariant and left exact
     ## or F is covariant and right exact, then
@@ -684,6 +661,18 @@ InstallMethod( GrothendieckSpectralSequence,
     ## = L_*(FG)(M) (FG covariant)
     ## = R^*(FG)(M) (FG contravariant)
     HFGP := DefectOfExactness( FGP );
+    
+    ## extract the associated first spectral sequence
+    I_E := AssociatedFirstSpectralSequence( II_E );
+    
+    ## the first sheet of the first spectral sequence
+    I_E1 := CertainSheet( I_E, 1 );
+    
+    ## extract the natural transformations
+    ## 0 -> F(G(P_p)) -> R^0(F)(G(P_p)) (F contravariant)
+    ## L_0(F)(G(P_p)) -> F(G(P_p)) -> 0 (F covariant)
+    ## out of the first sheet of the first spectral sequence
+    natural_transformations := I_E1!.NaturalTransformations;
     
     ## the second sheet of the first spectral sequence
     I_E2 := CertainSheet( I_E, 2 );
