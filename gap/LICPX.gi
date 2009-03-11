@@ -130,6 +130,20 @@ InstallImmediateMethod( IsShortExactSequence,
     
 end );
 
+##
+InstallImmediateMethod( IsBicomplex,
+        IsHomalgBicomplex, 0,
+        
+  function( B )
+    
+    if HasIsComplex( UnderlyingComplex( B ) ) then
+        return IsComplex( UnderlyingComplex( B ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for properties:
@@ -232,6 +246,17 @@ InstallMethod( \=,
   function( C1, C2 )
     
     return UnderlyingComplex( C1 ) = UnderlyingComplex( C2 );
+    
+end );
+
+##
+InstallMethod( IsBicomplex,
+        "LICPX: for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    
+    return IsComplex( UnderlyingComplex( B ) );
     
 end );
 

@@ -1371,7 +1371,7 @@ InstallMethod( OnAFreeSource,
     
 end );
 
-##
+## works without side effects
 InstallMethod( RemoveMorphismAidMap,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
@@ -1382,7 +1382,7 @@ InstallMethod( RemoveMorphismAidMap,
     
 end );
 
-##
+## works without side effects
 InstallMethod( GeneralizedMap,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
@@ -1410,7 +1410,7 @@ InstallMethod( GeneralizedMap,
     
 end );
 
-##
+## works without side effects
 InstallMethod( AddToMorphismAidMap,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],

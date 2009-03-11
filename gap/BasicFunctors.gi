@@ -1539,7 +1539,7 @@ InstallFunctor( Functor_Hom );
 ##     0:	<A non-zero left module presented by 1 relation for 2 generators>
 ##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
 ##  of
-##  <A non-zero left module presented by 7 relations for 6 generators>>
+##  <A non-zero left module presented by 10 relations for 6 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:	<A non-zero left module presented by 1 relation for 2 generators>

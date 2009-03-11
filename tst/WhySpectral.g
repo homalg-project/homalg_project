@@ -11,44 +11,46 @@ zz := HomalgZeroMap( T, T );
 zf := HomalgZeroMap( T, F );
 fz := HomalgZeroMap( F, T );
 
-C0 := HomalgComplex( zz, -1 );
-Add( C0, fz );
-Add( C0, lambda );
+C_2 := HomalgComplex( zz, 1 );
+Add( C_2, fz );
+Add( C_2, lambda );
 
-C1 := HomalgComplex( fz, -1 );
+C_1 := HomalgComplex( fz, 1 );
 
-Add( C1, lambda );
-Add( C1, zf );
+Add( C_1, -lambda );
+Add( C_1, zf );
 
-C2 := HomalgComplex( lambda, -1 );
+C_0 := HomalgComplex( lambda, 1 );
 
-Add( C2, zf );
-Add( C2, zz );
+Add( C_0, zf );
+Add( C_0, zz );
 
-c1 := HomalgChainMap( zz, C1, C0 );
+c_1 := HomalgChainMap( zz, C_1, C_2 );
 
-Add( c1, fz );
-Add( c1, id );
-Add( c1, zf );
+Add( c_1, fz );
+Add( c_1, id );
+Add( c_1, zf );
 
-c2 := HomalgChainMap( fz, C2, C1 );
+c_0 := HomalgChainMap( fz, C_0, C_1 );
 
-Add( c2, id );
-Add( c2, zf );
-Add( c2, zz );
+Add( c_0, id );
+Add( c_0, zf );
+Add( c_0, zz );
 
-C := HomalgComplex( c1 );
+C := HomalgComplex( c_1, -1 );
 
-Add( C, c2 );
+Add( C, c_0 );
+
+Assert( 0, IsComplex( C ) );
 
 BC := HomalgBicomplex( C );
 
-tot := TotalComplex( BC );
+tBC := TransposedBicomplex( BC );
 
-## the second spectral sequence together with
-## the collapsed first spectral sequence
-I_E := HomalgSpectralSequence( BC, 1 );
-AddSpectralFiltrationOfTotalDefects( I_E, [ 0 ] );
+Tot := TotalComplex( BC );
+
+## converges after 1 step
+I_E := SpectralSequenceWithFiltrationOfCollapsedTransposedSpectralSequence( BC, [ 0 ] );
 
 filt := FiltrationBySpectralSequence( I_E, 0 );
 
