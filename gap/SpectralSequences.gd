@@ -85,21 +85,3 @@ DeclareOperation( "GrothendieckSpectralSequence",
 DeclareOperation( "GrothendieckSpectralSequence",
         [ IsHomalgFunctor, IsHomalgFunctor, IsHomalgModule ] );
 
-DeclareOperation( "FiltrationOfTotalDefect",
-        [ IsHomalgSpectralSequence, IsInt ] );
-
-DeclareOperation( "FiltrationOfTotalDefect",
-        [ IsHomalgSpectralSequence ] );
-
-DeclareOperation( "FiltrationOfObjectInCollapsedSheetOfTransposedSpectralSequence",
-        [ IsHomalgSpectralSequence, IsInt ] );
-
-DeclareOperation( "FiltrationOfObjectInCollapsedSheetOfTransposedSpectralSequence",
-        [ IsHomalgSpectralSequence ] );
-
-DeclareOperation( "FiltrationBySpectralSequence",
-        [ IsHomalgSpectralSequence, IsInt ] );
-
-DeclareOperation( "FiltrationBySpectralSequence",
-        [ IsHomalgSpectralSequence ] );
-
