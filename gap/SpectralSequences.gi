@@ -687,15 +687,13 @@ InstallMethod( SecondSpectralSequenceWithFiltration,
 end );
 
 ##
-InstallMethod( GrothendieckSpectralSequence,
+InstallMethod( GrothendieckBicomplex,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep, IsList ],
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep ],
         
-  function( Functor_F, Functor_G, M, _p_range )
-    local F, G, P, GP, CE, FCE, BC, p_degrees, p_range,
-          natural_epis, F_natural_epis, p, II_E,
-          I_E, I_E1, natural_transformations, FGP, HFGP, I_E2,
-          gen_embs, Hgen_embs, nat_trafos;
+  function( Functor_F, Functor_G, M )
+    local F, G, P, GP, CE, FCE, BC, p_degrees, FGP, HFGP, Hgen_embs, p,
+          natural_epis, F_natural_epis;
     
     F := OperationOfFunctor( Functor_F );
     G := OperationOfFunctor( Functor_G );
@@ -719,47 +717,6 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the p-degrees
     p_degrees := ObjectDegreesOfBicomplex( BC )[1];
     
-    ## set the p_range
-    if _p_range = [ ] then
-        p_range := p_degrees;
-    else
-        p_range := _p_range;
-    fi;
-    
-    ## the natural epimorphisms CE -> GP -> 0
-    natural_epis := CE!.NaturalEpis;
-    
-    F_natural_epis := rec( );
-    
-    for p in p_degrees do
-        F_natural_epis.(String( [ p, 0 ] )) := F( natural_epis.(String( [ p, 0 ] )) );
-    od;
-    
-    ## enrich the bicomplex with F(natural epis)
-    ## (by this, the next command will compute
-    ##  certain natural transformations needed below)
-    BC!.OuterFunctorOnNaturalEpis := F_natural_epis;
-    
-    ## the spectral sequence II_E associated to the transposed of BC,
-    ## also called the second spectral sequence of the bicomplex BC;
-    ## it becomes intrinsic at the second level (w.r.t. some original data)
-    ## (e.g. R^{-p} F R^q G => L_{p+q} FG)
-    ## 
-    ## ... together with the filtration II_E induces
-    ## on the objects of the collapsed first spectral sequence
-    ## (or, equivalently, on the defects of the associated total complex)
-    ## 
-    ## the first 2 means:
-    ## compute the first spectral sequence till the second sheet, even if things stabilize earlier
-    ## the second 2 means:
-    ## the second sheet of the second spectral sequence is, in general, the first intrinsic sheet
-    II_E := SecondSpectralSequenceWithFiltration( BC, 2, 2, p_range );
-    
-    ## astonishingly, the remaining code only causes
-    ## hardly causes extra computations, if any;
-    ## probably because of the cashing mechanisms
-    ## (this was observed with Purity.g)
-    
     ## in case F is contravariant and left exact
     ## or F is covariant and right exact, then
     ## F( G( P ) ) is the zero-th row of first sheet
@@ -771,8 +728,62 @@ InstallMethod( GrothendieckSpectralSequence,
     ## = R^*(FG)(M) (FG contravariant)
     HFGP := DefectOfExactness( FGP );
     
+    ## extract the natural embeddings out of H( (FG)( P ) )
+    Hgen_embs := rec( );
+    
+    for p in p_degrees do
+        Hgen_embs.(String( [ p, 0 ] ) ) := NaturalGeneralizedEmbedding( CertainObject( HFGP, p ) );
+    od;
+    
+    ## enrich the bicomplex with the natural embeddings
+    ## of H( (FG)( P ) ) into (FG)( P )
+    BC!.GeneralizedEmbeddingsOfHigherDerivedFunctorsOfTheComposition := Hgen_embs;
+    
+    ## the natural epimorphisms CE -> GP -> 0
+    natural_epis := CE!.NaturalEpis;
+    
+    F_natural_epis := rec( );
+    
+    for p in p_degrees do
+        F_natural_epis.(String( [ p, 0 ] )) := F( natural_epis.(String( [ p, 0 ] )) );
+    od;
+    
+    ## enrich the bicomplex with F(natural epis)
+    ## (by this, SecondSpectralSequenceWithFiltration applied to BC
+    ##  will compute certain natural transformations needed later)
+    BC!.OuterFunctorOnNaturalEpis := F_natural_epis;
+    
+    return BC;
+    
+end );
+
+##
+InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsHomalgFunctorRep ],
+        
+  function( II_E, Functor_F )
+    local BC, Hgen_embs, I_E, I_E1, natural_transformations,
+          I_E2, gen_embs, p_degrees, nat_trafos, p;
+    
+    ## the (enriched) Grothendieck bicomplex
+    BC := TransposedBicomplex( UnderlyingBicomplex( II_E ) );
+    
+    if IsTransposedWRTTheAssociatedComplex( BC ) then
+        Error( "this doesn't seem like a second spectral sequence; it is probably a first spectral sequence\n" );
+    fi;
+    
+    ## the natural embeddings of H( (FG)( P ) ) into (FG)( P )
+    Hgen_embs := BC!.GeneralizedEmbeddingsOfHigherDerivedFunctorsOfTheComposition;
+    
     ## extract the associated first spectral sequence
     I_E := AssociatedFirstSpectralSequence( II_E );
+    
+    ## exit if I_E is already enriched
+    if IsBound( I_E!.NaturalTransformations ) and
+       IsBound( I_E!.NaturalGeneralizedEmbeddings ) then
+        return;
+    fi;
     
     ## the first sheet of the first spectral sequence
     I_E1 := CertainSheet( I_E, 1 );
@@ -786,23 +797,20 @@ InstallMethod( GrothendieckSpectralSequence,
     ## the second sheet of the first spectral sequence
     I_E2 := CertainSheet( I_E, 2 );
     
-    ## 1) extract the natural embeddings out of the zero-th row
+    ## extract the natural embeddings out of the zero-th row
     ## of the second sheet of the first spectral sequence
-    ## 2) extract the natural embeddings out of H( (FG)( P ) )
     gen_embs := I_E2!.embeddings;
-    Hgen_embs := rec( );
     
-    for p in p_degrees do
-        Hgen_embs.(String( [ p, 0 ] ) ) := NaturalGeneralizedEmbedding( CertainObject( HFGP, p ) );
-    od;
+    ## the p-degrees
+    p_degrees := ObjectDegreesOfBicomplex( BC )[1];
+    
+    p_degrees := List( p_degrees, p -> String( [ p, 0 ]) );
     
     ## the natural transformations between the zero-th row
     ## of the second sheet of the first spectral sequence
     ## and H( (FG)( P ) )
     
     nat_trafos := rec( );
-    
-    p_degrees := List( p_degrees, p -> String( [ p, 0 ]) );
     
     if IsCovariantFunctor( Functor_F ) then
         for p in p_degrees do
@@ -829,6 +837,54 @@ InstallMethod( GrothendieckSpectralSequence,
     ## enrich I_E
     I_E!.NaturalTransformations := nat_trafos;
     I_E!.NaturalGeneralizedEmbeddings := Hgen_embs;
+    
+end );
+
+##
+InstallMethod( GrothendieckSpectralSequence,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep, IsList ],
+        
+  function( Functor_F, Functor_G, M, _p_range )
+    local BC, p_range, II_E;
+    
+    ## the (enriched) Grothendieck bicomplex
+    BC := GrothendieckBicomplex( Functor_F, Functor_G, M );
+    
+    ## set the p_range
+    if _p_range = [ ] then
+        p_range := ObjectDegreesOfBicomplex( BC )[1];
+    else
+        p_range := _p_range;
+    fi;
+    
+    ## the spectral sequence II_E associated to the transposed of BC,
+    ## also called the second spectral sequence of the bicomplex BC;
+    ## it becomes intrinsic at the second level (w.r.t. some original data)
+    ## (e.g. R^{-p} F R^q G => L_{p+q} FG)
+    ## 
+    ## ... together with the filtration II_E induces
+    ## on the objects of the collapsed first spectral sequence
+    ## (or, equivalently, on the defects of the associated total complex)
+    ##
+    ## ... and since the Grothendieck bicomplex BC is enriched
+    ## with F(natural epis) the next command will also compute
+    ## certain natural transformations needed below
+    ## 
+    ## the first 2 means:
+    ## compute the first spectral sequence till the second sheet,
+    ## even if things stabilize earlier
+    ## 
+    ## the second 2 means:
+    ## the second sheet of the second spectral sequence is,
+    ## in general, the first intrinsic sheet
+    II_E := SecondSpectralSequenceWithFiltration( BC, 2, 2, p_range );
+    
+    ## astonishingly, EnrichAssociatedFirstGrothendieckSpectralSequence
+    ## hardly causes extra computations;
+    ## this is probably due to the caching mechanisms
+    ## (this was observed with Purity.g)
+    EnrichAssociatedFirstGrothendieckSpectralSequence( II_E, Functor_F );	## only the parity of Functor_F is needed
     
     return II_E;
     
