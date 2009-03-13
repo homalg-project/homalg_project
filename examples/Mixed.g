@@ -10,7 +10,7 @@ homalgSendBlocking( "matrix @M[4][4]", "need_command", rp, HOMALG_IO.Pictograms.
 homalgSendBlocking( "@M[1,3] = Sn", "need_command", rp, HOMALG_IO.Pictograms.initialize );
 homalgSendBlocking( "@M[2,4] = 1", "need_command", rp, HOMALG_IO.Pictograms.initialize );
 ext_obj := homalgSendBlocking( "nc_algebra(1,@M)", [ "def" ], TheTypeHomalgExternalRingObjectInSingular, rp, HOMALG_IO.Pictograms.CreateHomalgRing );
-S := CreateHomalgRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
 _Singular_SetRing( S );
 
 RP := homalgTable( S );
