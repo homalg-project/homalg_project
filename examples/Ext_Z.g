@@ -2,11 +2,11 @@ LoadPackage( "RingsForHomalg" );
 ## Define the ring of integers:
 R := HomalgRingOfIntegersInDefaultCAS( );
 #Display( R );
-m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], R );
+m := HomalgMatrix( "[ 8, 0,    0, 2 ]", 2, 2, R );
 #Display( m );
 M := LeftPresentation( m );
 #Display( M );
-a := HomalgMatrix( [ [ 2, 0 ] ], R );
+a := HomalgMatrix( "[ 2, 0 ]", 1, 2, R );
 alpha := HomalgMap( a, "free", M );
 pi := CokernelEpi( alpha );
 #Display( pi );
