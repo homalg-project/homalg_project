@@ -16,19 +16,22 @@
 
 # basic operations:
 
-DeclareOperation( "AddTotalEmbeddingsToCollapsedSpectralSequence",
+DeclareOperation( "AddTotalEmbeddingsToCollapsedToZeroSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsList ] );
 
 DeclareOperation( "AddTotalEmbeddingsToSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsList ] );
 
-DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedTransposedSpectralSequence",
+DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsInt, IsList ] );
 
-DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedTransposedSpectralSequence",
+DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence",
+        [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsList ] );
+
+DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsInt ] );
 
-DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedTransposedSpectralSequence",
+DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex ] );
 
 DeclareOperation( "AddSpectralFiltrationOfTotalDefects",
@@ -37,16 +40,16 @@ DeclareOperation( "AddSpectralFiltrationOfTotalDefects",
 DeclareOperation( "AddSpectralFiltrationOfTotalDefects",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex ] );
 
-DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedTransposedSpectralSequence",
+DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgBicomplex, IsInt, IsInt, IsList ] );
 
-DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedTransposedSpectralSequence",
+DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgBicomplex, IsList ] );
 
-DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedTransposedSpectralSequence",
+DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgBicomplex, IsInt, IsInt ] );
 
-DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedTransposedSpectralSequence",
+DeclareOperation( "SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgBicomplex ] );
 
 DeclareOperation( "SpectralSequenceWithFiltrationOfTotalDefects",

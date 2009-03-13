@@ -346,15 +346,8 @@ InstallMethod( IsGeneralizedMorphism,
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
         
   function( phi )
-    local mat, S, T;
     
-    mat := MatrixOfMap( phi );
-    
-    S := Source( phi );
-    
-    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
-    
-    return IsMorphism( HomalgMap( mat, S, T ) );
+    return IsMorphism( AssociatedMap( phi ) );
     
 end );
 
@@ -386,15 +379,9 @@ InstallMethod( IsGeneralizedEpimorphism,
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
         
   function( phi )
-    local mat, S, T, mu;
+    local mu;
     
-    mat := MatrixOfMap( phi );
-    
-    S := Source( phi );
-    
-    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
-    
-    mu := HomalgMap( mat, S, T );
+    mu := AssociatedMap( phi );
     
     SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
     
@@ -441,15 +428,9 @@ InstallMethod( IsGeneralizedMonomorphism,
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
         
   function( phi )
-    local mat, S, T, mu;
+    local mu;
     
-    mat := MatrixOfMap( phi );
-    
-    S := Source( phi );
-    
-    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
-    
-    mu := HomalgMap( mat, S, T );
+    mu := AssociatedMap( phi );
     
     SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
     
@@ -496,15 +477,9 @@ InstallMethod( IsGeneralizedIsomorphism,
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
         
   function( phi )
-    local mat, S, T, mu;
+    local mu;
     
-    mat := MatrixOfMap( phi );
-    
-    S := Source( phi );
-    
-    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
-    
-    mu := HomalgMap( mat, S, T );
+    mu := AssociatedMap( phi );
     
     SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
     

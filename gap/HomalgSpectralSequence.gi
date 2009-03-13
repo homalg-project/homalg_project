@@ -523,7 +523,7 @@ InstallMethod( AssociatedFirstSpectralSequence,
   function( II_E )
     local BC, I_E;
     
-    if not IsBound(II_E!.FirstSpectralSequence) then
+    if not IsBound(II_E!.TransposedSpectralSequence) then
         BC := UnderlyingBicomplex( II_E );
         
         if not IsTransposedWRTTheAssociatedComplex( BC ) then
@@ -544,11 +544,11 @@ InstallMethod( AssociatedFirstSpectralSequence,
         fi;
         
         ## finally enrich the second spectral sequence with the first
-        II_E!.FirstSpectralSequence := I_E;
+        II_E!.TransposedSpectralSequence := I_E;
         
     fi;
     
-    return II_E!.FirstSpectralSequence;
+    return II_E!.TransposedSpectralSequence;
     
 end );
 
@@ -704,8 +704,8 @@ InstallMethod( ByASmallerPresentation,
     
     ByASmallerPresentation( HighestLevelSheetInSpectralSequence( E ) );
     
-    if IsBound( E!.FirstSpectralSequence ) then
-        ByASmallerPresentation( E!.FirstSpectralSequence );
+    if IsBound( E!.TransposedSpectralSequence ) then
+        ByASmallerPresentation( E!.TransposedSpectralSequence );
     fi;
     
     return E;
@@ -1063,10 +1063,10 @@ InstallMethod( Display,
   function( o )
     local I_E, Ers, Er;
     
-    if IsBound( o!.FirstSpectralSequence ) then
-        Print( "The associated first spectral sequence of the bicomplex:\n\n" );
-        Display( o!.FirstSpectralSequence );
-        Print( "\nNow the second spectral sequence of the bicomplex:\n\n" );
+    if IsBound( o!.TransposedSpectralSequence ) then
+        Print( "The associated transposed spectral sequence:\n\n" );
+        Display( o!.TransposedSpectralSequence );
+        Print( "\nNow the spectral sequence of the bicomplex:\n\n" );
     fi;
     
     Ers := SheetsOfSpectralSequence( o );

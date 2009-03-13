@@ -666,6 +666,10 @@ InstallGlobalFunction( HomalgFiltration,
     
     degrees := pre_filtration!.degrees;
     
+    if degrees = [ ] then
+        Error( "out of range\n" );
+    fi;
+    
     ConvertToRangeRep( degrees );
     
     l := Length( degrees );

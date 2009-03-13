@@ -5,7 +5,8 @@ ZZ := HomalgRingOfIntegers( );
 F := 1 * ZZ;
 T := 0 * ZZ;
 
-lambda := HomalgMap( "[ 2 ]", F, F );
+lambda := HomalgMatrix( "[ 2 ]", 1, 1, ZZ );
+lambda := HomalgMap( lambda, F, F );
 id := HomalgIdentityMap( F, F );
 zz := HomalgZeroMap( T, T );
 zf := HomalgZeroMap( T, F );
@@ -50,7 +51,7 @@ tBC := TransposedBicomplex( BC );
 Tot := TotalComplex( BC );
 
 ## converges after 1 step
-I_E := SpectralSequenceWithFiltrationOfCollapsedTransposedSpectralSequence( BC, [ 0 ] );
+I_E := SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence( BC );
 
 filt := FiltrationBySpectralSequence( I_E, 0 );
 

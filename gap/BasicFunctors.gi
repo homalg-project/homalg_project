@@ -1340,7 +1340,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##  <A stable cohomological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of right modules at bidegrees
 ##  [ -1 .. 0 ]x[ 0 .. 1 ]>
 ##  gap> Display( II_E );
-##  The associated first spectral sequence of the bicomplex:
+##  The associated transposed spectral sequence:
 ##  
 ##  a cohomological spectral sequence at bidegrees
 ##  [ [ 0 .. 1 ], [ -1 .. 0 ] ]
@@ -1360,7 +1360,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##   s s
 ##   . .
 ##  
-##  Now the second spectral sequence of the bicomplex:
+##  Now the spectral sequence of the bicomplex:
 ##  
 ##  a cohomological spectral sequence at bidegrees
 ##  [ [ -1 .. 0 ], [ 0 .. 1 ] ]
@@ -1495,7 +1495,7 @@ InstallFunctor( Functor_Hom );
 ##  <A stable homological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of left modules at bidegrees
 ##  [ -1 .. 0 ]x[ 0 .. 1 ]>
 ##  gap> Display( II_E );
-##  The associated first spectral sequence of the bicomplex:
+##  The associated transposed spectral sequence:
 ##  
 ##  a homological spectral sequence at bidegrees
 ##  [ [ 0 .. 1 ], [ -1 .. 0 ] ]
@@ -1515,7 +1515,7 @@ InstallFunctor( Functor_Hom );
 ##   s s
 ##   . .
 ##  
-##  Now the second spectral sequence of the bicomplex:
+##  Now the spectral sequence of the bicomplex:
 ##  
 ##  a homological spectral sequence at bidegrees
 ##  [ [ -1 .. 0 ], [ 0 .. 1 ] ]

@@ -1440,6 +1440,28 @@ InstallMethod( AddToMorphismAidMap,
 end );
 
 ##
+InstallMethod( AssociatedMap,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local mat, S, T;
+    
+    if not HasMorphismAidMap( phi ) then
+        return phi;
+    fi;
+    
+    mat := MatrixOfMap( phi );
+    
+    S := Source( phi );
+    
+    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
+    
+    return HomalgMap( mat, S, T );
+    
+end );
+
+##
 InstallMethod( UpdateModulesByMap,
         "for homalg maps",
         [ IsHomalgMap and IsIsomorphism ],
@@ -1856,7 +1878,7 @@ InstallMethod( Display,
     
     Display( mat );
     
-    if IsList( DegreesOfGenerators( T ) ) then
+    if IsList( DegreesOfGenerators( T ) ) and not DegreesOfGenerators( T ) = [ ] then
         Print( "\n(target generators degrees: ", DegreesOfGenerators( T ), ")\n" );
     fi;
     

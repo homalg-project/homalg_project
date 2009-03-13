@@ -600,6 +600,8 @@ InstallGlobalFunction( CreateHomalgRing,
         type := type[1];
     elif IsSemiringWithOneAndZero( r ) then
         type := TheTypeHomalgInternalRing;
+    else
+        Error( "the types of the ring and matrices were not specified\n" );
     fi;
     
     ## Objectify:

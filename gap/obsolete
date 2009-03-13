@@ -1448,3 +1448,171 @@ end );
 
 KeyDependentOperation( "TransitionMap", IsSetsOfRelations, IsList, ReturnTrue );
 
+## from SpectralSequences.gd/gi
+
+DeclareOperation( "AddSpectralFiltrationOfTotalDefectsUsingProjections",
+        [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsList ] );
+
+DeclareOperation( "AddSpectralFiltrationOfTotalDefectsUsingProjections",
+        [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex ] );
+
+DeclareOperation( "SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections",
+        [ IsHomalgBicomplex, IsInt, IsList ] );
+
+DeclareOperation( "SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections",
+        [ IsHomalgBicomplex, IsList ] );
+
+DeclareOperation( "SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections",
+        [ IsHomalgBicomplex, IsInt ] );
+
+DeclareOperation( "SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections",
+        [ IsHomalgBicomplex ] );
+
+##
+InstallMethod( AddSpectralFiltrationOfTotalDefectsUsingProjections,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList ],
+        
+  function( E, p_range )
+    local E_infinity, embeddings, BC, Tot, filtration, n, Totn, Hn, Hgen_emb,
+          bidegrees, tot_prjs, pq, pp, qq, p, q, gen_emb, gen_prj, gen_embH;
+    
+    ## the limit sheet of the spectral sequence
+    E_infinity := HighestLevelSheetInSpectralSequence( E );
+    
+    ## get the absolute embeddings
+    embeddings := E_infinity!.absolute_embeddings;
+    
+    ## the associated bicomplex
+    BC := UnderlyingBicomplex( E );
+    
+    ## the associated total complex
+    Tot := TotalComplex( BC );
+    
+    filtration := rec( );
+    
+    for n in p_range do
+        
+        ## the n-th total object
+        Totn := CertainObject( Tot, n );
+        
+        ## the n-th total (co)homology
+        Hn := DefectOfExactness( Tot, n );
+        
+        ## the n-th generalized embedding
+        Hgen_emb := NaturalGeneralizedEmbedding( Hn );
+        
+        ## the bidegrees of total degree n
+        bidegrees := BidegreesOfObjectOfTotalComplex( BC, n );
+        
+        ## the projections from Tot^n -> BC^{p,q}
+        tot_prjs := ProjectionsFromProductObject( Totn, bidegrees );
+        
+        for pq in bidegrees do
+            
+            pp := pq[1];
+            qq := pq[2];
+            
+            if IsTransposedWRTTheAssociatedComplex( BC ) then
+                p := qq;
+                q := pp;
+            else
+                p := pp;
+                q := qq;
+            fi;
+            
+            gen_emb := embeddings.(String( [ p, q ] ));
+            
+            if tot_prjs <> fail then
+                gen_prj := PreCompose( Hgen_emb, tot_prjs.(String( [ pp, qq ] )) );
+            else
+                gen_prj := Hgen_emb;
+            fi;
+            
+            gen_embH := gen_emb / gen_prj;
+            
+            filtration.(String( [ p, q ] )) := gen_embH;
+            
+        od;
+        
+    od;
+    
+    ## enrich E
+    SetGeneralizedEmbeddingsInTotalDefects( E, filtration );
+    
+    return E;
+    
+end );
+
+##
+InstallMethod( AddSpectralFiltrationOfTotalDefectsUsingProjections,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
+        
+  function( E )
+    local BC, p_range;
+    
+    BC := UnderlyingBicomplex( E );
+    
+    p_range := TotalObjectDegreesOfBicomplex( BC );
+    
+    return AddSpectralFiltrationOfTotalDefectsUsingProjections( E, p_range );
+    
+end );
+
+##
+InstallMethod( SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex, IsInt, IsList ],
+        
+  function( BC, a, p_range )
+    local E;
+    
+    #=====# begin of the core procedure #=====#
+    
+    E := HomalgSpectralSequence( BC, a );
+    
+    ## filter the total defects with the stable objects
+    ## of the second spectral sequence
+    AddSpectralFiltrationOfTotalDefectsUsingProjections( E, p_range );
+    
+    return E;
+    
+end );
+
+##
+InstallMethod( SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex, IsList ],
+        
+  function( BC, p_range )
+    
+    return SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections( BC, -1, p_range );
+    
+end );
+
+##
+InstallMethod( SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex, IsInt ],
+        
+  function( BC, a )
+    local p_range;
+    
+    p_range := TotalObjectDegreesOfBicomplex( BC );
+    
+    return SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections( BC, a, p_range );
+    
+end );
+
+##
+InstallMethod( SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( BC )
+    
+    return SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections( BC, -1 );
+    
+end );
+
