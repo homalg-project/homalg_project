@@ -15,7 +15,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL maketest.g
+	gapL -x 125 maketest.g
 
 archive: doc
 	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" Sheaves/doc/*.* Sheaves/gap/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Sheaves/examples/*.g)
