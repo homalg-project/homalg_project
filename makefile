@@ -21,7 +21,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL maketest.g
+	gapL -x 125 maketest.g
 
 archive: doc
 	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "tst/plesken" homalg/doc/*.* homalg/gap/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} homalg/tst)
