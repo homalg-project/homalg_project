@@ -22,6 +22,9 @@ DeclareOperation( "AddTotalEmbeddingsToCollapsedToZeroSpectralSequence",
 DeclareOperation( "AddTotalEmbeddingsToSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsList ] );
 
+DeclareOperation( "AddSpectralFiltrationOfObjects",
+        [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsList, IsRecord ] );
+
 DeclareOperation( "AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToAFilteredComplex, IsInt, IsList ] );
 

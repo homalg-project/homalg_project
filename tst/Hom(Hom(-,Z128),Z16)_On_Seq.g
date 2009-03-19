@@ -18,3 +18,5 @@ lehs := LongSequence( triangle );
 ByASmallerPresentation( lehs );
 
 IsExactSequence( lehs );
+
+Assert( 0, IsLeftAcyclic( lehs ) );
