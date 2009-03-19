@@ -94,7 +94,7 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
         
   function( E, p_range )
     local E_infinity, BC, Tot, embeddings, n, Totn, bidegrees, tot_embs,
-          pq, pp, qq, p, q, gen_emb;
+          monomorphism_aid_map, pq, pp, qq, p, q, gen_emb;
     
     ## the limit sheet of the spectral sequence
     E_infinity := HighestLevelSheetInSpectralSequence( E );
@@ -126,6 +126,19 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
         ## the embeddings from BC^{p,q} -> Tot^n
         tot_embs := EmbeddingsInCoproductObject( Totn, bidegrees );
         
+        ## initialize the monomorphism aid map
+        monomorphism_aid_map := 0;
+        
+        ## in case E is a cohomological spectral sequences
+        if IsSpectralCosequenceOfFinitelyPresentedObjectsRep( E ) then
+            bidegrees := Reversed( bidegrees );
+        fi;
+        
+        ## in case E is a second spectral sequence
+        if IsTransposedWRTTheAssociatedComplex( BC ) then
+            bidegrees := Reversed( bidegrees );
+        fi;
+        
         ## for the n-th bidegrees
         for pq in bidegrees do
             
@@ -148,12 +161,27 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
                 gen_emb := PreCompose( gen_emb, tot_embs.(String( [ pp, qq ] )) );
             fi;
             
+            ## elevate the generalized embedding to the correct height
+            ## (i.e. to the correct subfactor of the total complex)
+            gen_emb := AddToMorphismAidMap( gen_emb, monomorphism_aid_map );
+            
             ## check assertion
             Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
             
             SetIsGeneralizedMonomorphism( gen_emb, true );
             
             embeddings.(String( [ p, q ] )) := gen_emb;
+            
+            ## prepare the next step
+            if tot_embs <> fail then
+                if IsHomalgMorphism( monomorphism_aid_map ) then
+                    ## for this next line we need to run through
+                    ## the bidegrees in the correct order
+                    monomorphism_aid_map := StackMaps( tot_embs.(String( [ pp, qq ] )), monomorphism_aid_map );
+                else
+                    monomorphism_aid_map := tot_embs.(String( [ pp, qq ] ));
+                fi;
+            fi;
             
         od;
         
@@ -167,12 +195,73 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
 end );
 
 ##
+InstallMethod( AddSpectralFiltrationOfObjects,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList, IsRecord ],
+        
+  function( E, p_range, embeddings1 )
+    local embeddings, BC, filtration, n,
+          bidegrees, gen_emb1, pq, p, q, gen_emb2;
+    
+    ## add the embeddings in the objects of the total complex
+    AddTotalEmbeddingsToSpectralSequence( E, p_range );
+    
+    ## get them
+    embeddings := GeneralizedEmbeddingsInTotalObjects( E );
+    
+    ## the underlying bicomplex
+    BC := UnderlyingBicomplex( E );
+    
+    ## initialize an empty record to save the resulting filtration
+    filtration := rec( );
+    
+    for n in p_range do
+        
+        ## the bidegrees of total degree n
+        bidegrees := BidegreesOfObjectOfTotalComplex( BC, n );
+        
+        ## the generalized embedding we want to lift with,
+        ## i.e. of the object we want to filter
+        gen_emb1 := embeddings1.(String( n ));
+        
+        ## construct the generalized embeddings filtering
+        ## tE^{n,0} = H^n( Tot( BC ) ) by E^{p,q}
+        for pq in bidegrees do
+            
+            if IsTransposedWRTTheAssociatedComplex( BC ) then
+                p := pq[2];
+                q := pq[1];
+            else
+                p := pq[1];
+                q := pq[2];
+            fi;
+            
+            ## the generalized embedding we want to lift,
+            ## i.e. of an object appearing in the filtration
+            gen_emb2 := embeddings.(String( [ p, q ] ));
+            
+            ## [Ba, Cor. 3.3]: gen_emb1 lifts gen_emb2
+            filtration.(String( [ p, q ] )) := gen_emb2 / gen_emb1;
+            
+            ## this last line is one of the highlights in the code,
+            ## where generalized embeddings play a decisive role
+            ## (see the functors PostDivide and Compose)
+            
+        od;
+        
+    od;
+    
+    return filtration;
+    
+end );
+
+##
 InstallMethod( AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsInt, IsList ],
         
   function( E, r, p_range )
-    local BC, tBC, tE, tE_infinity, emb1, embeddings1, filtration;
+    local BC, tBC, tE, tE_infinity, emb1, embeddings1, n, filtration;
     
     ## the underlying bicomplex
     BC := UnderlyingBicomplex( E );
@@ -411,114 +500,6 @@ InstallMethod( SpectralSequenceWithFiltrationOfTotalDefects,
 end );
 
 ##
-InstallMethod( AddSpectralFiltrationOfObjects,
-        "for homalg spectral sequences",
-        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsList, IsRecord ],
-        
-  function( E, p_range, embeddings1 )
-    local embeddings, BC, Tot, filtration, n, Totn, bidegrees,
-          tot_embs, gen_emb1, monomorphism_aid_map1,
-          pq, pp, qq, p, q, gen_emb2, gen_emb;
-    
-    ## add the embeddings in the objects of the total complex
-    AddTotalEmbeddingsToSpectralSequence( E, p_range );
-    
-    ## get them
-    embeddings := GeneralizedEmbeddingsInTotalObjects( E );
-    
-    ## the underlying bicomplex
-    BC := UnderlyingBicomplex( E );
-    
-    ## the associated total complex
-    Tot := TotalComplex( BC );
-    
-    ## initialize an empty record to save the resulting filtration
-    filtration := rec( );
-    
-    for n in p_range do
-        
-        ## the n-th total object
-        Totn := CertainObject( Tot, n );
-        
-        ## the bidegrees of total degree n
-        bidegrees := BidegreesOfObjectOfTotalComplex( BC, n );
-        
-        ## the embeddings from BC^{p,q} -> Tot^n
-        tot_embs := EmbeddingsInCoproductObject( Totn, bidegrees );
-        
-        ## for the collapsed (to its p-axes) spectral sequence tE
-        gen_emb1 := embeddings1.(String( n ));
-        
-        ## store the morphism aid map
-        if HasMorphismAidMap( gen_emb1 ) then
-            monomorphism_aid_map1 := MorphismAidMap( gen_emb1 );
-        else
-            monomorphism_aid_map1 := 0;
-        fi;
-        
-        ## prepare a copy of gen_emb1 without the morphism aid map
-        ## (will be added below)
-        gen_emb1 := RemoveMorphismAidMap( gen_emb1 );
-        
-        ## in case E is a cohomological spectral sequences
-        if IsSpectralCosequenceOfFinitelyPresentedObjectsRep( E ) then
-            bidegrees := Reversed( bidegrees );
-        fi;
-        
-        ## in case E is a second spectral sequence
-        if IsTransposedWRTTheAssociatedComplex( BC ) then
-            bidegrees := Reversed( bidegrees );
-        fi;
-        
-        ## construct the generalized embeddings filtering
-        ## tE^{n,0} = H^n( Tot( BC ) ) by E^{p,q}
-        for pq in bidegrees do
-            
-            pp := pq[1];
-            qq := pq[2];
-            
-            if IsTransposedWRTTheAssociatedComplex( BC ) then
-                p := qq;
-                q := pp;
-            else
-                p := pp;
-                q := qq;
-            fi;
-            
-            gen_emb2 := embeddings.(String( [ p, q ] ));
-            
-            ## prepare gen_emb1 to master the coming lift
-            gen_emb1 := AddToMorphismAidMap( gen_emb1, monomorphism_aid_map1 );
-            
-            ## check assertion
-            Assert( 1, IsGeneralizedMorphism( gen_emb1 ) );
-            
-            SetIsGeneralizedMorphism( gen_emb1, true );
-            
-            ## gen_emb1 now has enough aid to lift gen_emb2
-            ## (literal and unliteral)
-            gen_emb := gen_emb2 / gen_emb1;
-            
-            ## this last line is one of the highlights in the code,
-            ## where generalized embeddings play a decisive role
-            ## (see the functors PostDivide and Compose)
-            
-            filtration.(String( [ p, q ] )) := gen_emb;
-            
-            ## prepare the next step
-            if tot_embs <> fail then
-                monomorphism_aid_map1 := tot_embs.(String( [ pp, qq ] ));
-            fi;
-            
-        od;
-        
-    od;
-    
-    return filtration;
-    
-end );
-
-##
 InstallMethod( SecondSpectralSequenceWithFiltration,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex, IsInt, IsInt, IsList ],
@@ -558,9 +539,12 @@ InstallMethod( SecondSpectralSequenceWithFiltration,
         [ IsHomalgBicomplex, IsInt, IsInt ],
         
   function( BC, r, a )
-    local p_range;
+    local q_degrees, p_range;
     
-    if IsBicomplexOfFinitelyPresentedObjectsRep( BC ) then
+    q_degrees := ObjectDegreesOfBicomplex( BC )[2];
+    
+    if ( IsBicomplexOfFinitelyPresentedObjectsRep( BC ) and q_degrees[Length( q_degrees )] = 0 ) or
+       ( IsBicocomplexOfFinitelyPresentedObjectsRep( BC ) and q_degrees[1] = 0 ) then
         p_range := ObjectDegreesOfBicomplex( BC )[1];
     else
         p_range := TotalObjectDegreesOfBicomplex( BC );
