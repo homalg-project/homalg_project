@@ -314,10 +314,10 @@ InstallGlobalFunction( _Functor_Compose_OnObjects,	### defines: Compose
     ## the following is crucial for spectral sequences:
     if HasMorphismAidMap( pre ) then
         
-        morphism_aid_pre := PreCompose( MorphismAidMap( pre ), post );
+        morphism_aid_pre := PreCompose( MorphismAidMap( pre ), RemoveMorphismAidMap( post ) );
         
         if HasMorphismAidMap( post ) then
-            SetMorphismAidMap( phi, StackMaps( MorphismAidMap( post ),  morphism_aid_pre ) );
+            SetMorphismAidMap( phi, StackMaps( MorphismAidMap( post ), morphism_aid_pre ) );
         else
             SetMorphismAidMap( phi, morphism_aid_pre );
         fi;
@@ -589,7 +589,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     ## this is the most decisive part of the code
     ## (the idea of generalized embeddings in action):
     if HasMorphismAidMap( beta ) then
-        N := UnionOfRelations( MorphismAidMap( beta ) );	## this replaces [BR, Footnote 13]
+        N := UnionOfRelations( MorphismAidMap( beta ) );	## this replaces [BR08, Footnote 13]
         if HasMorphismAidMap( gamma ) then
             N := UnionOfRelations( N, MatrixOfMap( MorphismAidMap( gamma ) ) );
         fi;
