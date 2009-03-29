@@ -61,6 +61,25 @@ DeclareProperty( "IsPurityFiltration",
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+##  <#GAPDoc Label="SpectralSequence:filt">
+##  <ManSection>
+##    <Attr Arg="BC" Name="SpectralSequence" Label="for filtrations"/>
+##    <Returns>a &homalg; (co)homological spectral sequence</Returns>
+##    <Description>
+##      The spectral sequence used to construct the filtration (if any).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "SpectralSequence",
+        IsHomalgFiltration );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################

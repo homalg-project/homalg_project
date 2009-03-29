@@ -617,21 +617,6 @@ InstallMethod( UnlockFiltration,
     
 end );
 
-##
-InstallMethod( AssociatedSecondSpectralSequence,
-        "for homalg filtrations",
-        [ IsHomalgFiltration ],
-        
-  function( filt )
-    
-    if IsBound(filt!.SecondSpectralSequence) then
-        return filt!.SecondSpectralSequence;
-    fi;
-    
-    return fail;
-    
-end );
-
 ####################################
 #
 # constructor functions and methods:

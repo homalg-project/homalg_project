@@ -43,7 +43,7 @@
 <Heading>Bicomplexes: Attributes</Heading>
 
 <#Include Label="TotalComplex">
-<#Include Label="SpectralSequence">
+<#Include Label="SpectralSequence:bicomplex">
 
 </Section>
 

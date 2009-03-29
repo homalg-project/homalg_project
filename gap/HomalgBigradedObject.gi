@@ -565,7 +565,7 @@ InstallMethod( AsDifferentialObject,
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
                             mor := TheZeroMap( source, target );
                         else
-                            emb_source := RemoveMorphismAidMap( Er!.absolute_embeddings.(String( [ p, q ] )) );
+                            emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
                             emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                             if r = 1 then
                                 mor := PreCompose( emb_source, mor_h[1] );
@@ -602,7 +602,7 @@ InstallMethod( AsDifferentialObject,
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
                             mor := TheZeroMap( source, target );
                         else
-                            emb_source := RemoveMorphismAidMap( Er!.absolute_embeddings.(String( [ p, q ] )) );
+                            emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
                             emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
                             if r = 1 then
                                 mor := PreCompose( emb_source, mor_h[1] );

@@ -95,9 +95,9 @@ DeclareProperty( "IsTransposedWRTTheAssociatedComplex",
 DeclareAttribute( "TotalComplex",
         IsHomalgBicomplex );
 
-##  <#GAPDoc Label="SpectralSequence">
+##  <#GAPDoc Label="SpectralSequence:bicomplex">
 ##  <ManSection>
-##    <Attr Arg="BC" Name="SpectralSequence"/>
+##    <Attr Arg="BC" Name="SpectralSequence" Label="for bicomplexes"/>
 ##    <Returns>a &homalg; (co)homological spectral sequence</Returns>
 ##    <Description>
 ##      The associated spectral sequence.

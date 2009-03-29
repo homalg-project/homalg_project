@@ -135,8 +135,8 @@ InstallMethod( FiltrationBySpectralSequence,
         return fail;
     fi;
     
-    ## enrich the filtration
-    filt!.SecondSpectralSequence := E;
+    ## enrich the filtration with the spectral sequence used to construct it
+    SetSpectralSequence( filt, E );
     
     return filt;
     
