@@ -873,7 +873,7 @@ InstallMethod( \/,
         TryNextMethod( );
     fi;
     
-    return R / HomalgRelationsForLeftModule( HomalgMatrix( ring_rel, R ) );
+    return R / HomalgRelationsForLeftModule( HomalgMatrix( ring_rel, Length( ring_rel ), 1, R ) );
     
 end );
 
@@ -1008,6 +1008,28 @@ InstallGlobalFunction( HomalgRingElement,
     return CallFuncList( constructor, arg );
     
 end );
+
+##
+InstallMethod( \/,
+        "for homalg ring elements",
+        [ IsRingElement, IsHomalgRing ],
+        
+  function( r, R )
+    local s;
+    
+    if IsHomalgRingElement( r ) then
+        if IsIdenticalObj( HomalgRing( r ), R ) then
+            return r;
+        fi;
+        s := Name( r );
+    else
+        s := String( r );
+    fi;
+    
+    return HomalgRingElement( s, R );
+    
+end );
+
 ##
 InstallGlobalFunction( StringToElementStringList,
   function( arg )

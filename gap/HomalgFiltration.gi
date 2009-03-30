@@ -240,9 +240,9 @@ InstallMethod( IsomorphismOfFiltration,
         
   function( filt )
     local M, R, ByASmallerPresentation, degrees, l, nr_rels, nr_gens, Ids,
-          iotas, etas, alphas, i, p, gen_emb, mor_aid, j, pi, Mp, Id_p, iota,
-          d1, d0, eta0, epi, eta, emb, pr_P0, pr_Fp1, pr_Mp, Fp_adapted, q,
-          gen_iso, alpha, compose, diagmat, transition, nr_rows, nr_cols,
+          etas, alphas, i, p, gen_emb, iotas, mor_aid, pi, Mp, Id_p, iota,
+          d1, d0, eta0, epi, eta, emb, pr_P0, pr_Fp_1, pr_Mp, Fp_adapted, j,
+          q, gen_iso, alpha, compose, diagmat, transition, nr_rows, nr_cols,
           stack, augment, presentation, rows, cols, triangular;
     
     M := UnderlyingModule( filt );
@@ -270,7 +270,6 @@ InstallMethod( IsomorphismOfFiltration,
     nr_rels := [ ];
     nr_gens := [ ];
     Ids := rec( );
-    iotas := rec( );
     etas := rec( );
     alphas := rec( );
     
@@ -286,20 +285,27 @@ InstallMethod( IsomorphismOfFiltration,
         ## M_p -> F_p( M )
         ## the generalized isomorphism of the p-th graded part M_p
         ## onto the submodule  F_p( M )
-        for j in [ 1 .. i - 1 ] do
+        if IsBound( iota ) then
+            
+            if IsBound( iotas ) then
+                iotas := PreCompose( iota, iotas );
+            else
+                iotas := iota;
+            fi;
             
             if HasMorphismAidMap( gen_emb ) then
-                mor_aid := MorphismAidMap( gen_emb ) / iotas.(String( degrees[j] ));
+                mor_aid := MorphismAidMap( gen_emb ) / iotas;
             else
                 mor_aid := 0;
             fi;
             
-            gen_emb := gen_emb / iotas.(String( degrees[j] ));
+            gen_emb := gen_emb / iotas;
             
             if IsHomalgMap( mor_aid ) then
                 SetMorphismAidMap( gen_emb, mor_aid );
             fi;
-        od;
+            
+        fi;
         
         ## pi: F_p( M ) -> M_p
         ## the epimorphism F_p( M ) onto M_p
@@ -311,15 +317,12 @@ InstallMethod( IsomorphismOfFiltration,
         ## fix the current presentation for M_p
         LockModuleOnCertainPresentation( Mp );
         
-        ## iota: F_{p+1}( M ) -> F_p( M )
-        ## the embedding iota_p of F_{p+1}( M ) into F_p( M )
+        ## iota: F_{p-1}( M ) -> F_p( M )
+        ## the embedding iota_p of F_{p-1}( M ) into F_p( M )
         iota := KernelEmb( pi );
         
-        ## fix the current presentation for F_{p+1}( M )
+        ## fix the current presentation for F_{p-1}( M )
         LockModuleOnCertainPresentation( Source( iota ) );
-        
-        ## store the successive embeddings
-        iotas.(String( p )) := iota;
         
         ## d1: K_1 -> P_0
         ## the embedding of the first syzygies module K_1 = K_1( M_p )
@@ -347,15 +350,15 @@ InstallMethod( IsomorphismOfFiltration,
         ## the first lift of the identity map of M_p to a map between P_0 and F_p( M )
         eta0 := PreCompose( d0, gen_emb );
         
-        ## epi: P_0 + F_{p+1}( M ) -> F_p( M )
-        ## the epimorphism from the direct sum P_0 + F_{p+1}( M ) onto F_p( M )
+        ## epi: P_0 + F_{p-1}( M ) -> F_p( M )
+        ## the epimorphism from the direct sum P_0 + F_{p-1}( M ) onto F_p( M )
         epi := StackMaps( -eta0, iota );
         
         LockModuleOnCertainPresentation( Source( epi ) );
         LockModuleOnCertainPresentation( Range( epi ) );
         
-        ## eta: K_1 -> F_{p+1}( M )
-        ## the 1-cocycle of the extension 0 -> F_{p+1} -> F_p -> M_p -> 0
+        ## eta: K_1 -> F_{p-1}( M )
+        ## the 1-cocycle of the extension 0 -> F_{p-1} -> F_p -> M_p -> 0
         eta := CompleteImageSquare( d1, eta0, iota );
         
         Assert( 1, IsMorphism( eta ) );
@@ -367,56 +370,62 @@ InstallMethod( IsomorphismOfFiltration,
             etas.(String( [ p, degrees{[i + 1 .. l]} ] )) := eta;
         fi;
         
-        ## K_1 -> P_0 + F_{p+1}( M )
-        ## the cokernel of (the embedding) K_1 -> P_0 + F_{p+1}( M ) is
+        ## K_1 -> P_0 + F_{p-1}( M )
+        ## the cokernel of (the embedding) K_1 -> P_0 + F_{p-1}( M ) is
         ## 1) isomorphic to F_p( M )
-        ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p+1}( M ) > 0
+        ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
         emb := AugmentMaps( d1, eta );
         
-        ## P_0 + F_{p+1}( M ) -> P_0
-        ## the projection on the first/second summand in the direct sum P_0 + F_{p+1}( M )
+        ## P_0 + F_{p-1}( M ) -> P_0,
+        ## the projection on the first summand in the direct sum P_0 + F_{p-1}( M )
         pr_P0 := EpiOnLeftFactor( Range( emb ) );
-        pr_Fp1 := EpiOnRightFactor( Range( emb ) );
+        
+        ## P_0 + F_{p-1}( M ) -> M_p,
+        ## the composition P_0 + F_{p-1}( M ) -> F_{p-1}( M ) -> M_p
         pr_Mp := PreCompose( pr_P0, d0 );
         
-        ## the cokernel of (the embedding) K_1 -> P_0 + F_{p+1}( M ) is
+        ## P_0 + F_{p-1}( M ) -> F_{p-1}( M ),
+        ## the projection on the second summand in the direct sum P_0 + F_{p-1}( M )
+        pr_Fp_1 := EpiOnRightFactor( Range( emb ) );
+        
+        ## the cokernel of (the embedding) K_1 -> P_0 + F_{p-1}( M ) is
         ## 1) isomorphic to F_p( M )
-        ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p+1}( M ) > 0
+        ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
         Fp_adapted := Cokernel( emb );
         
         ## lock the module on this presentation
         LockModuleOnCertainPresentation( Fp_adapted );
         
-        for j in [ 2 .. i ] do
+        for j in [ 1 .. i - 1 ] do
             
-            q := degrees[j - 1];
+            q := degrees[j];
             
             ## rewrite eta
             eta := etas.(String( [ q, degrees{[ i .. l ]} ] )) / epi;
             
-            ## the 1-cocycle between M_{p-1} and M_p
+            ## the "generalized 1-cocycle" block between M_q and M_p
             etas.(String([ q, p ])) := PreCompose( eta, pr_Mp );
             
             ## prepare the next step
             if i < l then
-                etas.(String([ q, degrees{[ i + 1 .. l ]} ])) := PreCompose( eta, pr_Fp1 );
+                etas.(String([ q, degrees{[ i + 1 .. l ]} ])) := PreCompose( eta, pr_Fp_1 );
             fi;
             
         od;
         
-        ## Cokernel( K_1 -> P_0 + F_{p+1}( M ) ) -> P_0 + F_{p+1}( M )
-        ## the generalized isomorphism from the cokernel of K_1 -> P_0 + F_{p+1}( M )
-        ## into the direct sum P_0 + F_{p+1}( M ), where the former, by construction,
+        ## Cokernel( K_1 -> P_0 + F_{p-1}( M ) ) -> P_0 + F_{p-1}( M )
+        ## the generalized isomorphism from the cokernel of K_1 -> P_0 + F_{p-1}( M )
+        ## into the direct sum P_0 + F_{p-1}( M ), where the former, by construction,
         ## 1) is isomorphic to F_p( M ) and
-        ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p+1}( M ) > 0
+        ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
         gen_iso := CokernelNaturalGeneralizedEmbedding( emb );
         
         ## make a copy without the morphism aid map
         gen_iso := RemoveMorphismAidMap( gen_iso );
         
-        ## the isomorphism between Cokernel( K_1 -> P_0 + F_{p+1}( M ) ) and F_p( M ),
+        ## the isomorphism between Cokernel( K_1 -> P_0 + F_{p-1}( M ) ) and F_p( M ),
         ## where the former is, by contruction, equipped with a presentation
-        ## adapted to the filtration F_p( M ) > F_{p+1}( M ) > 0
+        ## adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
         alpha := PreCompose( gen_iso, epi );
         
         Assert( 1, IsIsomorphism( alpha ) );
@@ -473,7 +482,7 @@ InstallMethod( IsomorphismOfFiltration,
                     Add( cols, HomalgZeroMatrix( nr_rows[i], nr_cols[j], R ) );
                 elif j = i then
                     ## the diagonal block
-                    Add( cols, MatrixOfMap( SyzygiesModuleEmb( CertainObject( filt, degrees[i] ) ) ) );
+                    Add( cols, MatrixOfMap( PresentationMap( CertainObject( filt, degrees[i] ) ) ) );
                 else
                     ## the pieces of the 1-cocycle
                     Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );
@@ -490,7 +499,7 @@ InstallMethod( IsomorphismOfFiltration,
                     Add( cols, HomalgZeroMatrix( nr_rows[j], nr_cols[i], R ) );		## we make the distinction between left and right modules for this line (i and j are flipped here)
                 elif j = i then
                     ## the diagonal block
-                    Add( cols, MatrixOfMap( SyzygiesModuleEmb( CertainObject( filt, degrees[i] ) ) ) );
+                    Add( cols, MatrixOfMap( PresentationMap( CertainObject( filt, degrees[i] ) ) ) );
                 else
                     ## the pieces of the 1-cocycle
                     Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );

@@ -626,7 +626,7 @@ InstallMethod( StaircaseOfStability,
     for r in Filtered( LevelsOfSpectralSequence( E ), i -> i >= a + 1 and i <= a + l ) do
         Er := CertainSheet( E, r );
         if IsBound( Er!.embeddings ) then
-            if IsEpimorphism( Er!.embeddings.(String( [ p, q ] )) ) then
+            if IsIsomorphism( Er!.embeddings.(String( [ p, q ] )) ) then
                 c := c + 1;
             else
                 Add( st, c );

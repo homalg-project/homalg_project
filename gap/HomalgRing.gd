@@ -1109,6 +1109,9 @@ DeclareGlobalFunction( "HomalgFieldOfRationals" );
 
 DeclareGlobalFunction( "HomalgRingElement" );
 
+DeclareOperation( "/",
+        [ IsRingElement, IsHomalgRing ] );
+
 DeclareGlobalFunction( "StringToElementStringList" );
 
 DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
