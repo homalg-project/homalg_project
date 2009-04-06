@@ -13,7 +13,8 @@ WriteBibXMLextFile( "doc/LocalizeRingForHomalgBib.xml", bib );
 
 list := [
          "../gap/LocalizeRing.gd",
-         "../gap/LocalizeRing.gi"
+         "../gap/LocalizeRing.gi",
+         "../examples/Hom\(Hom\(-\,Z128\)\,Z16\)_On_Seq.g"
          ];
 
 MakeGAPDocDoc( "doc", "LocalizeRingForHomalg", list, "LocalizeRingForHomalg" );

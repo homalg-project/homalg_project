@@ -11,8 +11,16 @@ This chapter gives examples for the usage of this package.
 -->
 
 <Chapter Label="examples">
-<Heading>Examples</Heading>
+  
+  <Heading>Examples</Heading>
+  
+  
+  
+  
+  <#Include Label="HomHomZ128">
+  
+  
 
-<!-- ############################################################ -->
+  <!-- ############################################################ -->
 
 </Chapter>
