@@ -19,6 +19,12 @@ list := [
          "../examples/Schenck-8.3.3.g",
          "../examples/DE-2.2.g",
          "../examples/DE-Code.g",
+         "../examples/ExtExt.g",
+         "../examples/Purity.g",
+         "../examples/A3_Purity.g",
+         "../examples/CodegreeOfPurity.g",
+         "../examples/torext.g",
+         "../examples/TorExt.g",
          ];
 
 MakeGAPDocDoc( "doc", "ExamplesForHomalg", list, "ExamplesForHomalg" );

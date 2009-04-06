@@ -13,12 +13,24 @@ This chapter gives examples for the usage of this package.
 <Chapter Label="examples">
 <Heading>Examples</Heading>
 
+<Section Label="SpectralFiltrations">
+<Heading>Spectral Filtrations</Heading>
+
+<#Include Label="ExtExt">
+<#Include Label="Purity">
+<#Include Label="A3_Purity">
+<#Include Label="CodegreeOfPurity">
+<#Include Label="TorExt-Grothendieck">
+<#Include Label="TorExt">
+
+</Section>
+
 <Section Label="BettiDiagram">
 <Heading>Betti Diagrams</Heading>
 
-<#Include Label="Schenk-3.2">
-<#Include Label="Schenk-8.3">
-<#Include Label="Schenk-8.3.3">
+<#Include Label="Schenck-3.2">
+<#Include Label="Schenck-8.3">
+<#Include Label="Schenck-8.3.3">
 <#Include Label="DE-2.2">
 <#Include Label="DE-Code">
 

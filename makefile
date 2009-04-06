@@ -14,7 +14,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL -x 125 maketest.g
+	gapL -x 80 maketest.g
 
 archive: doc
 	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" ExamplesForHomalg/doc/*.* ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)

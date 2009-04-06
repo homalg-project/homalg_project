@@ -10,9 +10,11 @@
 ##  gap> M := RightPresentationWithDegrees( mat );
 ##  <A cyclic graded right module on a cyclic generator satisfying 2 relations>
 ##  gap> d := Resolution( M );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
+##  <A right acyclic complex containing 2 morphisms of right modules at degrees
+##  [ 0 .. 2 ]>
 ##  gap> betti := BettiDiagram( d );
-##  <A Betti diagram of <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  <A Betti diagram of <A right acyclic complex containing
+##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( betti );
 ##   total:  1 2 1
 ##  --------------
@@ -24,9 +26,11 @@
 ##  gap> m := SubmoduleGeneratedByHomogeneousPart( 2, M );
 ##  <A graded right module on 4 generators satisfying 8 relations>
 ##  gap> d2 := Resolution( m );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
+##  <A right acyclic complex containing 2 morphisms of right modules at degrees
+##  [ 0 .. 2 ]>
 ##  gap> betti2 := BettiDiagram( d2 );
-##  <A Betti diagram of <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  <A Betti diagram of <A right acyclic complex containing
+##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( betti2 );
 ##       2:  4 8 4
 ##  --------------

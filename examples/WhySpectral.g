@@ -1,11 +1,11 @@
 LoadPackage( "RingsForHomalg" );
 
-ZZ := HomalgRingOfIntegersInDefaultCAS( );
+kx := HomalgFieldOfRationalsInDefaultCAS( ) * "x";
 
-F := 1 * ZZ;
-T := 0 * ZZ;
+F := 1 * kx;
+T := 0 * kx;
 
-lambda := HomalgMatrix( "[ 2 ]", 1, 1, ZZ );
+lambda := HomalgMatrix( "[ x - 1 ]", 1, 1, kx );
 lambda := HomalgMap( lambda, F, F );
 id := HomalgIdentityMap( F, F );
 zz := HomalgZeroMap( T, T );
@@ -29,12 +29,12 @@ Add( C_0, zz );
 c_1 := HomalgChainMap( zz, C_1, C_2 );
 
 Add( c_1, fz );
-Add( c_1, id );
+Add( c_1, -id );
 Add( c_1, zf );
 
 c_0 := HomalgChainMap( fz, C_0, C_1 );
 
-Add( c_0, id );
+Add( c_0, -id );
 Add( c_0, zf );
 Add( c_0, zz );
 
@@ -51,7 +51,7 @@ tBC := TransposedBicomplex( BC );
 Tot := TotalComplex( BC );
 
 ## converges after 1 step
-I_E := SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence( BC, [ 0 ] );
+I_E := SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectralSequence( BC );
 
 filt := FiltrationBySpectralSequence( I_E, 0 );
 

@@ -1,23 +1,25 @@
-##  <#GAPDoc Label="TorExt-Grothendieck">
-##  <Subsection Label="TorExt-Grothendieck">
-##  <Heading>TorExt-Grothendieck</Heading>
+##  <#GAPDoc Label="ExtExt">
+##  <Subsection Label="ExtExt">
+##  <Heading>ExtExt</Heading>
 ##  <Example><![CDATA[
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> wmat := HomalgMatrix( "[ x*y,y*z,z,0,0,  x^3*z,x^2*z^2,0,x*z^2,-z^2, x^4,x^3*z,0,x^2*z,-x*z, 0,0,x*y,-y^2,x^2-1, 0,0,x^2*z,-x*y*z,y*z, 0,0,x^2*y-x^2,-x*y^2+x*y,y^2-y ]", 6, 5, Qxyz );
 ##  <A homalg external 6 by 5 matrix>
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 6 relations for 5 generators>
-##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct, 2, W, "TensorW" );
-##  <The functor TensorW>
+##  gap> Y := Hom( Qxyz, W );
+##  <A right module on 5 generators satisfying 6 relations>
+##  gap> F := InsertObjectInMultiFunctor( Functor_Hom, 2, Y, "TensorY" );
+##  <The functor TensorY>
 ##  gap> G := LeftDualizingFunctor( Qxyz );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, W );
-##  <A stable cohomological spectral sequence with sheets at levels
+##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x
 ##  [ 0 .. 3 ]>
 ##  gap> Display( II_E );
 ##  The associated transposed spectral sequence:
 ##  
-##  a cohomological spectral sequence at bidegrees
+##  a homological spectral sequence at bidegrees
 ##  [ [ 0 .. 3 ], [ -3 .. 0 ] ]
 ##  ---------
 ##  Level 0:
@@ -43,7 +45,7 @@
 ##  
 ##  Now the spectral sequence of the bicomplex:
 ##  
-##  a cohomological spectral sequence at bidegrees
+##  a homological spectral sequence at bidegrees
 ##  [ [ -3 .. 0 ], [ 0 .. 3 ] ]
 ##  ---------
 ##  Level 0:
@@ -70,9 +72,9 @@
 ##  Level 3:
 ##  
 ##   * s s s
-##   . s s s
+##   * s s s
 ##   . . s *
-##   . . . s
+##   . . . *
 ##  ---------
 ##  Level 4:
 ##  
@@ -81,23 +83,21 @@
 ##   . . s s
 ##   . . . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E, 0 );
-##  <A descending filtration with degrees [ -3 .. 0 ] and graded parts:
-##    -3:	<A non-zero cyclic left module presented by 
-##  3 relations for a cyclic generator>
-##    -2:	<A non-zero left module presented by 17 relations for 6 generators>
-##    -1:	<A non-zero left module presented by 19 relations for 9 generators>
-##     0:	<A non-zero left module presented by 13 relations for 10 generators>
+##  <An ascending filtration with degrees [ -3 .. 0 ] and graded parts:
+##     0:	<A non-zero left module presented by 33 relations for 23 generators>
+##    -1:	<A non-zero left module presented by 37 relations for 22 generators>
+##    -2:	<A non-zero left module presented by 20 relations for 8 generators>
+##    -3:	<A non-zero left module presented by 29 relations for 4 generators>
 ##  of
-##  <A left module presented by 66 relations for 41 generators>>
+##  <A non-zero left module presented by 111 relations for 37 generators>>
 ##  gap> ByASmallerPresentation( filt );
-##  <A descending filtration with degrees [ -3 .. 0 ] and graded parts:
-##    -3:	<A non-zero cyclic left module presented by 
-##  3 relations for a cyclic generator>
-##    -2:	<A non-zero left module presented by 12 relations for 4 generators>
-##    -1:	<A non-zero left module presented by 18 relations for 8 generators>
-##     0:	<A non-zero left module presented by 11 relations for 10 generators>
+##  <An ascending filtration with degrees [ -3 .. 0 ] and graded parts:
+##     0:	<A non-zero left module presented by 25 relations for 16 generators>
+##    -1:	<A non-zero left module presented by 30 relations for 14 generators>
+##    -2:	<A non-zero left module presented by 18 relations for 7 generators>
+##    -3:	<A non-zero left module presented by 12 relations for 4 generators>
 ##  of
-##  <A left module presented by 21 relations for 12 generators>>
+##  <A non-zero left module presented by 48 relations for 20 generators>>
 ##  gap> m := IsomorphismOfFiltration( filt );
 ##  <An isomorphism of left modules>
 ##  ]]></Example>
@@ -106,9 +106,9 @@
 
 Read( "ReducedBasisOfModule.g" );
 
-InsertObjectInMultiFunctor( Functor_TensorProduct, 2, W, "TensorW" );
+InsertObjectInMultiFunctor( Functor_Hom, 2, Y, "TensorY" );
 
-II_E := GrothendieckSpectralSequence( Functor_TensorW, LeftDualizingFunctor( Qxyz ), W );
+II_E := GrothendieckSpectralSequence( Functor_TensorY, LeftDualizingFunctor( Qxyz ), W );
 
 filt := FiltrationBySpectralSequence( II_E );
 

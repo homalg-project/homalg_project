@@ -1,6 +1,6 @@
-##  <#GAPDoc Label="Schenk-3.2">
-##  <Subsection Label="Schenk-3.2">
-##  <Heading>Schenk-3.2</Heading>
+##  <#GAPDoc Label="Schenck-3.2">
+##  <Subsection Label="Schenck-3.2">
+##  <Heading>Schenck-3.2</Heading>
 ##  <Example><![CDATA[
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> mmat := HomalgMatrix( "[ x, x^3 + y^3 + z^3 ]", 1, 2, Qxyz );
@@ -8,9 +8,11 @@
 ##  gap> M := RightPresentationWithDegrees( mmat );
 ##  <A cyclic graded right module on a cyclic generator satisfying 2 relations>
 ##  gap> Mr := Resolution( M );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
+##  <A right acyclic complex containing 2 morphisms of right modules at degrees
+##  [ 0 .. 2 ]>
 ##  gap> bettiM := BettiDiagram( Mr );
-##  <A Betti diagram of <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  <A Betti diagram of <A right acyclic complex containing
+##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( bettiM );
 ##   total:  1 2 1
 ##  --------------
@@ -25,9 +27,11 @@
 ##  gap> N := RightPresentationWithDegrees( nmat );
 ##  <A cyclic graded right module on a cyclic generator satisfying 3 relations>
 ##  gap> Nr := Resolution( N );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
+##  <A right acyclic complex containing 2 morphisms of right modules at degrees
+##  [ 0 .. 2 ]>
 ##  gap> bettiN := BettiDiagram( Nr );
-##  <A Betti diagram of <A right acyclic complex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  <A Betti diagram of <A right acyclic complex containing
+##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( bettiN );           
 ##   total:  1 3 2
 ##  --------------
