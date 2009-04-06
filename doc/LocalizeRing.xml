@@ -10,32 +10,84 @@
 -->
 
 <Chapter Label="LocalizeRing">
-<Heading>Localize rings</Heading>
+  
+  <Heading>Localize rings</Heading>
+  
+  The package &LocalizeRingForHomalg; defines the classes of local(ized) rings, local ring elements and local matrices. A &homalg; local ring element contains two &homalg; ring elements numerator and denominator. A &homalg; local matrix contains a global &homalg; matrix as a numerator and a ring element as a denominator.
+  
+  <Section Label="Rings:Category">
 
-<Section Label="Rings:Category">
+    <Heading>Category and Representations</Heading>
+    
+    <#Include Label="IsHomalgLocalRingRep">
+    
+    <#Include Label="IsHomalgLocalRingElementRep">
+    
+    <#Include Label="IsHomalgLocalMatrixRep">
+  
+  </Section>
 
-<Heading>Category and Representations</Heading>
+  <Section Label="Rings:Category">
 
-<#Include Label="IsHomalgLocalRingRep">
-
-<#Include Label="IsHomalgLocalRingElementRep">
-
-<#Include Label="IsHomalgLocalMatrixRep">
-
-</Section>
-
-<Section Label="Rings:Attributes">
-<Heading>Rings: Attributes</Heading>
-
-<#Include Label="GeneratorsOfMaximalLeftIdeal">
-<#Include Label="GeneratorsOfMaximalRightIdeal">
-
-</Section>
-
-<Section Label="LocalizeRing:Operations">
-<Heading>Operations and Functions</Heading>
-
-</Section>
-<!-- ############################################################ -->
+    <Heading>Category and Representations</Heading>
+    
+    <#Include Label="IsHomalgLocalRingRep">
+    
+    <#Include Label="IsHomalgLocalRingElementRep">
+    
+    <#Include Label="IsHomalgLocalMatrixRep">
+  
+  </Section>
+  
+  <Section Label="Rings:Attributes">
+    <Heading>Rings: Attributes</Heading>
+    
+    <#Include Label="GeneratorsOfMaximalLeftIdeal">
+    <#Include Label="GeneratorsOfMaximalRightIdeal">
+  
+  </Section>
+  
+  <Section Label="LocalizeRing:Operations">
+  
+    <Heading>Operations and Functions</Heading>
+      
+    <#Include Label="HomalgRing:localringelement">
+      
+    <#Include Label="AssociatedGlobalRing:ring">
+    
+    <#Include Label="AssociatedGlobalRing:element">
+    
+    <#Include Label="AssociatedGlobalRing:matrix">
+    
+    <#Include Label="Numerator:element">
+    
+    <#Include Label="Numerator:matrix">
+    
+    <#Include Label="Denominator:element">
+    
+    <#Include Label="Denominator:matrix">
+    
+    <#Include Label="Name:localmatrix">
+    
+    <#Include Label="SetEntryOfHomalgMatrix:localmatrix">
+    
+    <#Include Label="AddToEntryOfHomalgMatrix:localmatrix">
+    
+    <#Include Label="GetEntryOfHomalgMatrixAsString:localmatrix">
+    
+    <#Include Label="GetEntryOfHomalgMatrix:localmatrix">
+    
+    <#Include Label="Cancel">
+      
+    <#Include Label="LocalizeAt">
+      
+    <#Include Label="LocalizeAt:poly">
+      
+    <#Include Label="HomalgLocalRingElement">
+      
+    <#Include Label="HomalgLocalMatrix">
+  
+  </Section>
+  <!-- ############################################################ -->
 
 </Chapter>

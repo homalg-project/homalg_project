@@ -14,9 +14,21 @@ behind the package.
 -->
 
 <Chapter Label="intro">
-<Heading>Introduction</Heading>
+  <Heading>Introduction</Heading>
 
-<Cite Key="homalg.new"/>
+  <Section Label="role">
+    <Heading>What is the role of the &LocalizeRingForHomalg; package in the &homalg; project?</Heading>
+
+    The &homalg; project <Cite Key="homalg.new"/> aims at providing a general and abstract framework for homological computations. This Package enables homalg to extend commutative rings to their localizations at maximal ideals.
+
+  </Section>
+
+  <Section Label="math">
+    <Heading>The Math behind this package</Heading>
+
+    The math behind this package is a simple trick in allowing global computation to be done instead of local computations. So no new algorithms are implemented. Details can be found in the paper <Cite Key="BL"/>.
+
+  </Section>
 
 </Chapter>
 
