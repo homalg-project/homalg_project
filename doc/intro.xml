@@ -103,13 +103,36 @@ computed by methods installed for this purpose.
 <Subsection Label="homalg-delegates">
 <Heading>&homalg; delegates ...</Heading>
 
-The package &homalg; delegates all matrix operations either internally
-to &GAP; or externally to another computer algebra system: For a
-matrix to be internal or external depends solely on whether the ring
-over which it is defined is internal or external. &homalg; accesses
-external matrices via pointers. The pointer of an external matrix is
-simply its name in the external system. &homalg; chooses these
-names. <P/>
+The package &homalg; <E>delegates</E> <E>all</E> matrix operations as
+it treats matrices and their rings as <E>black boxes</E>. &homalg;
+comes with a single predefined class of rings and a single predefined
+class of matrices over these rings -- the so-called internal matrices
+(&see; <Ref Label="IsHomalgInternalMatrixRep"/>) over so-called
+internal rings (&see; <Ref Label="IsHomalgInternalRingRep"/>). An
+internal matrix (resp. ring) is simply a wrapper containing a
+&GAP;-builtin matrix (resp. ring). &homalg; allows other packages to
+define further classes or extend existing classes of rings and
+matrices <E>togehter</E> with their operations. For example:
+<List>
+  <Item>The package &GaussForHomalg; extends the class of internal
+  matrices enabling it to wrap sparse matrices provided by the
+  package &Gauss;. &GaussForHomalg; delegates the essential part of
+  the matrix creation and all matrix operations to &Gauss;.</Item>
+  <Item>The package &IO_ForHomalg; defines the classes of so-called
+  external rings and matrices and the package &RingsForHomalg;
+  delegates the essential part of the matrix creation and all matrix
+  operations to external computer algebra systems like &Singular;,
+  &Sage;, &Maple;, &MAGMA;, ... . The package &homalg; accesses
+  external matrices via pointers. The pointer of an external matrix is
+  simply its name in the external system. &IO_ForHomalg; chooses these
+  names.</Item>
+  <Item>The package &LocalizeRingForHomalg; defines the classes of
+  local(ized) rings and local matrices. A &homalg; local matrix
+  contains a &homalg; matrix as a numerator and an element of the
+  global ring as a denominator.</Item>
+</List>
+  
+<P/>
 
 The matrix operations are divided into two classes called "Tool" and
 "Basic". The "Tool" operations include addition, subtraction,

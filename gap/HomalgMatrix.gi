@@ -613,6 +613,25 @@ InstallMethod( AreComparableMatrices,
 end );
 
 ##
+InstallMethod( IsZero,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    ## first reduce modulo possible ring relations
+    ## and mark M as IsReducedModuloRingRelations,
+    ## then hand it over to a more specialized method
+    
+    return IsZero( DecideZero( M ) );
+    
+    ## since DecideZero calls IsZero,
+    ## the attribute IsReducedModuloRingRelations is used
+    ## in DecideZero to avoid infinite loops
+    
+end );
+
+##
 InstallMethod( \=,
         "for internal matrix hulls",
         [ IsInternalMatrixHull, IsInternalMatrixHull ],

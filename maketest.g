@@ -40,8 +40,9 @@ list := [
          "../gap/BasicFunctors.gd",
          "../gap/BasicFunctors.gi",
          "../gap/Modules.gi",
+         "../gap/Tools.gi",
          "../tst/RHom_Z.g",
-         "../tst/LTensorProduct_Z.g"
+         "../tst/LTensorProduct_Z.g",
          ];
 
 TestManualExamples( "doc", "homalg.xml", list );

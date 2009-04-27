@@ -43,6 +43,7 @@
 <#Include Label="IsVoidMatrix">
 -->
 <#Include Label="IsReducedModuloRingRelations">
+<#Include Label="IsZero:matrix">
 <#Include Label="IsIdentityMatrix">
 <#Include Label="IsPermutationMatrix">
 <#Include Label="IsSubidentityMatrix">
@@ -90,6 +91,33 @@
 
 <Section Label="Matrices:COLEM">
 <Heading>&COLEM;: Clever Operations for Lazy Evaluated Matrices</Heading>
+
+</Section>
+
+<Section Label="Matrices:Tools">
+<Heading>Matrices: Tool-Operations</Heading>
+
+<#Include Label="IsZero:matrix_method">
+<#Include Label="Eval:IsInitialMatrix">
+<#Include Label="Eval:IsInitialIdentityMatrix">
+<#Include Label="Eval:HasEvalInvolution">
+<#Include Label="Eval:HasEvalCertainRows">
+<#Include Label="Eval:HasEvalCertainColumns">
+<#Include Label="Eval:HasEvalUnionOfRows">
+<#Include Label="Eval:HasEvalUnionOfColumns">
+<#Include Label="Eval:HasEvalDiagMat">
+<#Include Label="Eval:HasEvalKroneckerMat">
+<#Include Label="Eval:HasEvalMulMat">
+<#Include Label="Eval:HasEvalAddMat">
+<#Include Label="Eval:HasEvalSubMat">
+<#Include Label="Eval:HasEvalCompose">
+<#Include Label="Eval:IsIdentityMatrix">
+<#Include Label="Eval:IsZeroMatrix">
+<#Include Label="NrRows:meth">
+<#Include Label="NrColumns:meth">
+<#Include Label="ZeroRows:meth">
+<#Include Label="ZeroColumns:meth">
+<#Include Label="EQ:matrix_method">
 
 </Section>
 

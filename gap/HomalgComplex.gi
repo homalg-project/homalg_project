@@ -395,7 +395,8 @@ end );
 ##  gap> phi := HomalgMap( mat );
 ##  <A homomorphism of left modules>
 ##  gap> C := HomalgComplex( phi );
-##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left modules at de\
+##  grees [ 0 .. 1 ]>
 ##  gap> Add( C, mat );
 ##  gap> C;
 ##  <A sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
@@ -427,7 +428,8 @@ end );
 ##  gap> IsExactSequence( C );
 ##  false
 ##  gap> C;
-##  <A non-zero acyclic complex containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
+##  <A non-zero acyclic complex containing 2 morphisms of left modules at degrees
+##  [ 0 .. 2 ]>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -1231,7 +1233,8 @@ end );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> C := HomalgComplex( phi );
-##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left modules at de\
+##  grees [ 0 .. 1 ]>
 ##  gap> Display( C );
 ##  -------------------------
 ##  at homology degree: 0
@@ -1262,7 +1265,8 @@ end );
 ##      And now:
 ##      <Example><![CDATA[
 ##  gap> ByASmallerPresentation( C );
-##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left modules at de\
+##  grees [ 0 .. 1 ]>
 ##  gap> Display( C );
 ##  -------------------------
 ##  at homology degree: 0
@@ -1330,7 +1334,8 @@ end );
 ##      <Example><![CDATA[
 ##  <A homomorphism of left modules>
 ##  gap> C := HomalgComplex( N );
-##  <A non-zero graded homology object consisting of a single left module at degree 0>
+##  <A non-zero graded homology object consisting of a single left module at degre\
+##  e 0>
 ##  gap> Add( C, phi );
 ##  gap> C;
 ##  <A complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
@@ -1338,7 +1343,8 @@ end );
 ##  The second possibility:
 ##      <Example><![CDATA[
 ##  gap> C := HomalgComplex( phi );
-##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left modules at de\
+##  grees [ 0 .. 1 ]>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -1487,15 +1493,18 @@ end );
 ##      <Example><![CDATA[
 ##  <A homomorphism of right modules>
 ##  gap> C := HomalgCocomplex( M );
-##  <A non-zero graded cohomology object consisting of a single right module at degree 0>
+##  <A non-zero graded cohomology object consisting of a single right module at de\
+##  gree 0>
 ##  gap> Add( C, phi );
 ##  gap> C;
-##  <A cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  <A cocomplex containing a single morphism of right modules at degrees
+##  [ 0 .. 1 ]>
 ##  ]]></Example>
 ##  The second possibility:
 ##      <Example><![CDATA[
 ##  gap> C := HomalgCocomplex( phi );
-##  <A non-zero acyclic cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at\
+##   degrees [ 0 .. 1 ]>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>

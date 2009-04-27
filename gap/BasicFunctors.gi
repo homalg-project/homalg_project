@@ -1331,14 +1331,18 @@ InstallFunctor( functor_DefectOfExactness );
 ##      Now we compute a certain natural filtration on <C>Hom</C><M>(M,M)</M>:
 ##      <Example><![CDATA[
 ##  gap> dM := Resolution( M );
-##  <A non-zero right acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero right acyclic complex containing a single morphism of left modules\
+##   at degrees [ 0 .. 1 ]>
 ##  gap> hMM := Hom( dM, dM );
-##  <A non-zero acyclic cocomplex containing a single morphism of right complexes at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic cocomplex containing a single morphism of right complexes \
+##  at degrees [ 0 .. 1 ]>
 ##  gap> BMM := HomalgBicomplex( hMM );
-##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> II_E := SecondSpectralSequenceWithFiltration( BMM );
-##  <A stable cohomological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of right modules at bidegrees
-##  [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A stable cohomological spectral sequence with sheets at levels 
+##  [ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> Display( II_E );
 ##  The associated transposed spectral sequence:
 ##  
@@ -1381,13 +1385,15 @@ InstallFunctor( functor_DefectOfExactness );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    -1:	<A non-zero cyclic right module on a cyclic generator satisfying 1 relation>
+##    -1:	<A non-zero cyclic right module on a cyclic generator satisfying 
+##  1 relation>
 ##     0:	<A non-zero right module on 3 generators satisfying 2 relations>
 ##  of
 ##  <A non-zero right module on 4 generators satisfying 3 relations>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    -1:	<A cyclic codim 1 right module on a cyclic generator satisfying 1 relation>
+##    -1:	<A cyclic codim 1 right module on a cyclic generator satisfying 
+##  1 relation>
 ##     0:	<A non-zero right module on 2 generators satisfying 1 relation>
 ##  of
 ##  <A non-zero right module on 3 generators satisfying 2 relations>>
@@ -1482,18 +1488,24 @@ InstallFunctor( Functor_Hom );
 ##      Now we compute a certain natural filtration on the tensor product <M>M</M><C>*</C><M>L</M>:
 ##      <Example><![CDATA[
 ##  gap> P := Resolution( M );
-##  <A non-zero right acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero right acyclic complex containing a single morphism of left modules\
+##   at degrees [ 0 .. 1 ]>
 ##  gap> GP := Hom( P );
-##  <A non-zero acyclic cocomplex containing a single morphism of right modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at\
+##   degrees [ 0 .. 1 ]>
 ##  gap> CE := Resolution( GP );
-##  <An acyclic cocomplex containing a single morphism of right complexes at degrees [ 0 .. 1 ]>
+##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
+##  es [ 0 .. 1 ]>
 ##  gap> FCE := Hom( CE, L );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+##  t degrees [ 0 .. 1 ]>
 ##  gap> BC := HomalgBicomplex( FCE );
-##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> II_E := SecondSpectralSequenceWithFiltration( BC );
-##  <A stable homological spectral sequence with sheets at levels [ 0 .. 2 ] each consisting of left modules at bidegrees
-##  [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A stable homological spectral sequence with sheets at levels 
+##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> Display( II_E );
 ##  The associated transposed spectral sequence:
 ##  

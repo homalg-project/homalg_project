@@ -1010,9 +1010,11 @@ end );
 ##  gap> d := HomalgMap( HomalgMatrix( "[1]", 1, 1, ZZ ), M, N );
 ##  <A homomorphism of left modules>
 ##  gap> C1 := HomalgComplex( a );
-##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left modules at de\
+##  grees [ 0 .. 1 ]>
 ##  gap> C2 := HomalgComplex( c );
-##  <A non-zero acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left modules at de\
+##  grees [ 0 .. 1 ]>
 ##  gap> cm := HomalgChainMap( d, C1, C2 );
 ##  <A "chain map" containing a single left morphism at degree 0>
 ##  gap> Add( cm, b );
@@ -1021,7 +1023,8 @@ end );
 ##  gap> cm;
 ##  <A chain map containing 2 morphisms of left modules at degrees [ 0 .. 1 ]>
 ##  gap> hcm := DefectOfExactness( cm );
-##  <A chain map of graded objects containing 2 morphisms of left modules at degrees [ 0 .. 1 ]>
+##  <A chain map of graded objects containing
+##  2 morphisms of left modules at degrees [ 0 .. 1 ]>
 ##  gap> IsZero( hcm );
 ##  true
 ##  gap> IsZero( Source( hcm ) );

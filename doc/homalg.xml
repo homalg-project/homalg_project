@@ -31,6 +31,7 @@
 	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
 	  <!ENTITY Sheaves "<Package>Sheaves</Package>">
 	  <!ENTITY SCO "<Package>SCO</Package>">
+	  <!ENTITY LocalizeRingForHomalg "<Package>LocalizeRingForHomalg</Package>">
 	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
 	  ]
 	  >

@@ -115,6 +115,18 @@ DeclareProperty( "IsVoidMatrix",
 DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsZero:matrix">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsZero" Label="for matrices"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##      (&see; <Ref Meth="IsZero" Label="a method for matrices"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+
 ##  <#GAPDoc Label="IsIdentityMatrix">
 ##  <ManSection>
 ##    <Prop Arg="A" Name="IsIdentityMatrix"/>
@@ -444,6 +456,7 @@ DeclareAttribute( "PreEval",
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The number of rows of the matrix <A>A</A>.
+##      (&see; <Ref Meth="NrRows" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -457,6 +470,7 @@ DeclareAttribute( "NrRows",
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The number of columns of the matrix <A>A</A>.
+##      (&see; <Ref Meth="NrColumns" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -496,6 +510,7 @@ DeclareAttribute( "ColumnRankOfMatrix",
 ##    <Returns>a (possibly empty) list of positive integers</Returns>
 ##    <Description>
 ##      The list of zero rows of the matrix <A>A</A>.
+##      (&see; <Ref Meth="ZeroRows" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -509,6 +524,7 @@ DeclareAttribute( "ZeroRows",
 ##    <Returns>a (possibly empty) list of positive integers</Returns>
 ##    <Description>
 ##      The list of zero columns of the matrix <A>A</A>.
+##      (&see; <Ref Meth="ZeroColumns" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

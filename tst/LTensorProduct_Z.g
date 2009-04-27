@@ -27,10 +27,12 @@
 ##  gap> Display( N );
 ##  Z/< 4 >
 ##  gap> C := HomalgComplex( pi );
-##  <A left acyclic complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>
+##  <A left acyclic complex containing a single morphism of left modules at degree\
+##  s [ 0 .. 1 ]>
 ##  gap> Add( C, iota );
 ##  gap> ByASmallerPresentation( C );
-##  <A non-zero short exact sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
+##  <A non-zero short exact sequence containing
+##  2 morphisms of left modules at degrees [ 0 .. 2 ]>
 ##  gap> Display( C );
 ##  -------------------------
 ##  at homology degree: 0
@@ -52,9 +54,11 @@
 ##  Z/< 4 >
 ##  -------------------------
 ##  gap> T := LTensorProduct( C, N );
-##  <An exact triangle containing 3 morphisms of left complexes at degrees [ 1, 2, 3, 1 ]>
+##  <An exact triangle containing 3 morphisms of left complexes at degrees
+##  [ 1, 2, 3, 1 ]>
 ##  gap> ByASmallerPresentation( T );
-##  <A non-zero exact triangle containing 3 morphisms of left complexes at degrees [ 1, 2, 3, 1 ]>
+##  <A non-zero exact triangle containing
+##  3 morphisms of left complexes at degrees [ 1, 2, 3, 1 ]>
 ##  gap> L := LongSequence( T );
 ##  <A sequence containing 5 morphisms of left modules at degrees [ 0 .. 5 ]>
 ##  gap> Display( L );
@@ -103,7 +107,8 @@
 ##  gap> IsExactSequence( L );
 ##  true
 ##  gap> L;
-##  <An exact sequence containing 5 morphisms of left modules at degrees [ 0 .. 5 ]>
+##  <An exact sequence containing 5 morphisms of left modules at degrees
+##  [ 0 .. 5 ]>
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

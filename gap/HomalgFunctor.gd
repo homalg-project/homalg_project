@@ -57,8 +57,10 @@ DeclareCategory( "IsHomalgFunctor",
 ##  <The functor Hom>
 ##  gap> Genesis( Functor_Hom );
 ##  [ "CreateHomalgFunctor", [ "name", "Hom" ], [ "number_of_arguments", 2 ],
-##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ], [ "2", [ [ "covariant", "left exact" ] ] ],
-##    [ "OnObjects", function( M, N ) ... end ], [ "OnMorphisms", function( M_or_mor, N_or_mor ) ... end ] ]
+##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
+##    [ "2", [ [ "covariant", "left exact" ] ] ],
+##    [ "OnObjects", function( M, N ) ... end ],
+##    [ "OnMorphisms", function( M_or_mor, N_or_mor ) ... end ] ]
 ##  ]]></Example></Item>
 ##        <Item> <C>InsertObjectInMultiFunctor</C>:
 ##      <Example><![CDATA[
@@ -70,7 +72,8 @@ DeclareCategory( "IsHomalgFunctor",
 ##  gap> ZZ_Hom;		## got automatically defined
 ##  <Operation "ZZ_Hom">
 ##  gap> Genesis( Functor_ZZ_Hom );
-##  [ "InsertObjectInMultiFunctor", <The functor Hom>, 2, <The free left module of rank 1 on a free generator> ]
+##  [ "InsertObjectInMultiFunctor", <The functor Hom>, 2,
+##    <The free left module of rank 1 on a free generator> ]
 ##  gap> 1 * ZZ;
 ##  <The free left module of rank 1 on a free generator>
 ##  ]]></Example></Item>

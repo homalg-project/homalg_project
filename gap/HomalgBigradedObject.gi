@@ -421,11 +421,14 @@ end );
 ##  gap> dd := Hom( d );;
 ##  gap> C := Resolution( dd );;
 ##  gap> CC := Hom( C );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+##  t degrees [ 0 .. 1 ]>
 ##  gap> B := HomalgBicomplex( CC );
-##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> E0 := HomalgBigradedObject( B );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> Display( E0 );
 ##  Level 0:
 ##  
@@ -664,37 +667,46 @@ end );
 ##  gap> dd := Hom( d );;
 ##  gap> C := Resolution( dd );;
 ##  gap> CC := Hom( C );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes at degrees [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+##  t degrees [ 0 .. 1 ]>
 ##  gap> B := HomalgBicomplex( CC );
-##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  ]]></Example>
 ##    Now we construct the spectral sequence associated to the bicomplex <M>B</M>, also called the <E>first</E>
 ##    spectral sequence:
 ##      <Example><![CDATA[
 ##  gap> I_E0 := HomalgBigradedObject( B );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> Display( I_E0 );
 ##  Level 0:
 ##  
 ##   * *
 ##   * *
 ##  gap> AsDifferentialObject( I_E0 );
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object with a differential of bidegree
+##  [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> I_E0;
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object with a differential of bidegree
+##  [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> AsDifferentialObject( I_E0 );
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object with a differential of bidegree
+##  [ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> I_E1 := DefectOfExactness( I_E0 );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> Display( I_E1 );
 ##  Level 1:
 ##  
 ##   * *
 ##   . .
 ##  gap> AsDifferentialObject( I_E1 );
-##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object with a differential of bidegree
+##  [ -1, 0 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> I_E2 := DefectOfExactness( I_E1 );
-##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> Display( I_E2 );
 ##  Level 2:
 ##  
@@ -712,27 +724,33 @@ end );
 ##    the transposed bicomplex:
 ##      <Example><![CDATA[
 ##  gap> tB := TransposedBicomplex( B );
-##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> II_E0 := HomalgBigradedObject( tB );
-##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> Display( II_E0 );
 ##  Level 0:
 ##  
 ##   * *
 ##   * *
 ##  gap> AsDifferentialObject( II_E0 );
-##  <A bigraded object with a differential of bidegree [ 0, -1 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A bigraded object with a differential of bidegree
+##  [ 0, -1 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
 ##  gap> II_E1 := DefectOfExactness( II_E0 );
-##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> Display( II_E1 );
 ##  Level 1:
 ##  
 ##   * *
 ##   . s
 ##  gap> AsDifferentialObject( II_E1 );
-##  <A bigraded object with a differential of bidegree [ -1, 0 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A bigraded object with a differential of bidegree
+##  [ -1, 0 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
 ##  gap> II_E2 := DefectOfExactness( II_E1 );
-##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> Display( II_E2 );
 ##  Level 2:
 ##  
