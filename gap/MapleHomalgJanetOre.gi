@@ -20,9 +20,11 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInMapleUsingJanetOreRep ],
 
   function( ext_ring_obj )
-    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_General, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
+    
+    RP_General := ShallowCopy( CommonHomalgTableForRings );
     
     RP_Basic := ShallowCopy( CommonHomalgTableForMapleHomalgBasic );
     
@@ -37,6 +39,10 @@ InstallMethod( CreateHomalgTable,
                RingName := R -> Concatenation( "K<", homalgSendBlocking( [ "op(", R, "[1][1])" ], HOMALG_IO.Pictograms.variables, "need_output" ), "|", homalgSendBlocking( [ "op(", R, "[1][3])" ], HOMALG_IO.Pictograms.variables, "need_output" ), ">" ),
                
           );
+    
+    for component in NamesOfComponents( RP_General ) do
+        RP.(component) := RP_General.(component);
+    od;
     
     for component in NamesOfComponents( RP_Basic ) do
         RP.(component) := RP_Basic.(component);
