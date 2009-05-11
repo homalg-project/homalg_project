@@ -130,7 +130,7 @@ DeclareOperation( "LowestDegreeMorphism",
 DeclareOperation( "HighestDegreeMorphism",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "UnderlyingModule",
+DeclareOperation( "UnderlyingObject",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "MatrixOfFiltration",

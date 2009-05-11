@@ -18,7 +18,9 @@
 
 <#Include Label="IsHomalgModule">
 
+<#Include Label="IsFinitelyGeneratedModuleRep">
 <#Include Label="IsFinitelyPresentedModuleRep">
+<#Include Label="IsFinitelyPresentedSubmoduleRep">
 
 </Section>
 
@@ -32,6 +34,9 @@
 <#Include Label="HomalgZeroLeftModule">
 <#Include Label="HomalgZeroRightModule">
 <#Include Label="\*:ModuleBaseChange">
+<#Include Label="Subobject">
+<#Include Label="LeftSubmodule">
+<#Include Label="RightSubmodule">
 
 </Section>
 
@@ -65,7 +70,7 @@
 <#Include Label="CodegreeOfPurity">
 <#Include Label="BettiDiagram:module">
 <#Include Label="CastelnuovoMumfordRegularity">
-
+<#Include Label="EmbeddingInSuperObject">
 </Section>
 
 <Section Label="Modules:LIMOD">
@@ -79,6 +84,8 @@
 <#Include Label="HomalgRing:module">
 <#Include Label="ByASmallerPresentation:module">
 <#Include Label="SubmoduleOfIdealMultiples">
+<#Include Label="UnderlyingObject:submodule">
+<#Include Label="SuperObject">
 
 </Section>
 

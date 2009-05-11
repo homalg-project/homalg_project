@@ -318,10 +318,10 @@ InstallMethod( FunctorObj,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsList ],
         
-  function( Functor, arguments_of_functor )
-    local container, weak_pointers, a, deleted, functor_name, p,
-          context_of_arguments, i, arg_old, l, obj, arg_all, genesis,
-          Functor_orig, arg_pos, Functor_arg,
+  function( Functor, args_of_functor )
+    local container, weak_pointers, a, deleted, arguments_of_functor,
+          functor_name, p, context_of_arguments, i, arg_old, l, obj, arg_all,
+          genesis, Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
           functor_orig_operation, m_orig, arg_orig,
           functor_pre_operation, m_pre, functor_post_operation, m_post,
@@ -340,6 +340,17 @@ InstallMethod( FunctorObj,
         container!.deleted := deleted;
         
     fi;
+    
+    ## convert subobjects into objects
+    arguments_of_functor :=
+      List( args_of_functor,
+            function( a )
+              if IsFinitelyPresentedSubobjectRep( a ) then
+                  return UnderlyingObject( a );
+              else
+                  return a;
+              fi;
+            end );
     
     #=====# begin of the core procedure #=====#
     

@@ -267,6 +267,9 @@ DeclareOperation( "AddToMorphismAidMap",
 DeclareOperation( "AssociatedMap",
         [ IsHomalgMap ] );
 
+DeclareOperation( "Subobject",
+        [ IsHomalgMap ] );
+
 # basic operations:
 
 DeclareOperation( "homalgResetFilters",

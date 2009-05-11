@@ -1616,3 +1616,50 @@ InstallMethod( SpectralSequenceWithFiltrationOfTotalDefectsUsingProjections,
     
 end );
 
+## from HomalgModule.gi
+##
+InstallMethod( PrintObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( M )
+    
+    Print( "LeftPresentation( " );
+    if HasIsZero( M ) and IsZero( M ) then
+        Print( "[ ], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
+    else
+        Print( GeneratorsOfModule( M ), ", " );
+        if RelationsOfModule( M ) = "unknown relations" then
+            Print( "[ ], " ); ## empty relations
+        else
+            Print( RelationsOfModule( M ), ", " );
+        fi;
+        Print( LeftActingDomain( M ), " " );
+    fi;
+    Print( ")" );
+    
+end );
+
+##
+InstallMethod( PrintObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( M )
+    
+    Print( "RightPresentation( " );
+    if HasIsZero( M ) and IsZero( M ) then
+        Print( "[ ], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
+    else
+        Print( GeneratorsOfModule( M ), ", " );
+        if RelationsOfModule( M ) = "unknown relations" then
+            Print( "[ ], " ); ## empty relations
+        else
+            Print( RelationsOfModule( M ), ", " );
+        fi;
+        Print( RightActingDomain( M ), " " );
+    fi;
+    Print( ")" );
+    
+end );
+

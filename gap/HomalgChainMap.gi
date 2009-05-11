@@ -251,7 +251,7 @@ InstallMethod( CertainMorphismOfSpecialChainMap,
 end );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,
+InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
         "for homalg maps",
         [ IsHomalgChainMap ],
         

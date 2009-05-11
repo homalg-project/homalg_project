@@ -196,7 +196,7 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( UnderlyingModule,
+InstallMethod( UnderlyingObject,
         "for filtration of homalg modules",
         [ IsFiltrationOfFinitelyPresentedModuleRep ],
         
@@ -245,7 +245,7 @@ InstallMethod( IsomorphismOfFiltration,
           q, gen_iso, alpha, compose, diagmat, transition, nr_rows, nr_cols,
           stack, augment, presentation, rows, cols, triangular;
     
-    M := UnderlyingModule( filt );
+    M := UnderlyingObject( filt );
     
     ## fix the current presentation for M
     LockModuleOnCertainPresentation( M );
@@ -547,7 +547,7 @@ InstallMethod( BasisOfModule,
     
     List( ObjectsOfFiltration( filt ), BasisOfModule );
     
-    BasisOfModule( UnderlyingModule( filt ) );
+    BasisOfModule( UnderlyingObject( filt ) );
     
     return filt;
     
@@ -575,7 +575,7 @@ InstallMethod( OnLessGenerators,
     
     List( ObjectsOfFiltration( filt ), OnLessGenerators );
     
-    OnLessGenerators( UnderlyingModule( filt ) );
+    OnLessGenerators( UnderlyingObject( filt ) );
     
     return filt;
     
@@ -590,7 +590,7 @@ InstallMethod( ByASmallerPresentation,
     
     List( ObjectsOfFiltration( filt ), ByASmallerPresentation );
     
-    ByASmallerPresentation( UnderlyingModule( filt ) );
+    ByASmallerPresentation( UnderlyingObject( filt ) );
     
     DecideZero( filt );
     
@@ -605,7 +605,7 @@ InstallMethod( UnlockModule,
         
   function( filt )
     
-    UnlockModule( UnderlyingModule( filt ) );
+    UnlockModule( UnderlyingObject( filt ) );
     
     return filt;
     
@@ -854,7 +854,7 @@ InstallMethod( ViewObj,
     od;
     
     Print( "of\n" );
-    ViewObj( UnderlyingModule( o ) );
+    ViewObj( UnderlyingObject( o ) );
     Print( ">" );
     
 end );

@@ -341,6 +341,19 @@ DeclareAttribute( "BettiDiagram",
 DeclareAttribute( "CastelnuovoMumfordRegularity",
         IsHomalgModule );
 
+##  <#GAPDoc Label="EmbeddingInSuperObject">
+##  <ManSection>
+##    <Attr Arg="M" Name="EmbeddingInSuperObject"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the embedding of <A>M</A> in <M>L</M> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "EmbeddingInSuperObject",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:
@@ -444,6 +457,15 @@ DeclareOperation( "*",
 
 DeclareOperation( "*",
         [ IsHomalgRing, IsHomalgModule ] );
+
+DeclareOperation( "Subobject",
+        [ IsHomalgMatrix, IsHomalgModule ] );
+
+DeclareOperation( "LeftSubmodule",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightSubmodule",
+        [ IsHomalgMatrix ] );
 
 # global functions:
 
@@ -579,6 +601,15 @@ DeclareOperation( "SetUpperBoundForProjectiveDimension",
 
 DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgModule, IsInfinity ] );
+
+DeclareOperation( "SuperObject",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "UnderlyingObject",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "IsSubset",
+        [ IsHomalgModule, IsHomalgModule ] );
 
 ####################################
 #

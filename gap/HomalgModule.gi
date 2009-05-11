@@ -36,28 +36,63 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsHomalgModule
+# new representations for the GAP-category IsHomalgModule
+
+##  <#GAPDoc Label="IsFinitelyGeneratedModuleRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="M" Name="IsFinitelyGeneratedModuleRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of finitley presented &homalg; modules. <P/>
+##      It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareRepresentation( "IsFinitelyGeneratedModuleRep",
+        IsHomalgModule,
+        [ ] );
 
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of finitley generated &homalg; modules. <P/>
+##      The &GAP; representation of finitley presented &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
 ##       which is a subrepresentation of the &GAP; representations
-##      <C>IsFinitelyPresentedObjectRep</C> and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsFinitelyGeneratedModuleRep</C>,
+##      <C>IsFinitelyPresentedObjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
-        IsHomalgModule and
+        IsFinitelyGeneratedModuleRep and
         IsFinitelyPresentedObjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
           "TransitionMatrices",
           "PositionOfTheDefaultSetOfRelations" ] );
+
+##  <#GAPDoc Label="IsFinitelyPresentedSubmoduleRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedSubmoduleRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of finitley generated &homalg; submodules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
+##      <C>IsFinitelyGeneratedModuleRep</C>,
+##      <C>IsFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
+        IsFinitelyGeneratedModuleRep and
+        IsFinitelyPresentedSubobjectRep and
+        IsHomalgRingOrFinitelyPresentedModuleRep,
+        [ "map_having_subobject_as_its_image" ] );
 
 ####################################
 #
@@ -65,11 +100,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 #
 ####################################
 
-# a new family:
+# two new family:
 BindGlobal( "TheFamilyOfHomalgModules",
         NewFamily( "TheFamilyOfHomalgModules" ) );
 
-# two new types:
+BindGlobal( "TheFamilyOfHomalgSubmodules",
+        NewFamily( "TheFamilyOfHomalgSubmodules" ) );
+
+# four new types:
 BindGlobal( "TheTypeHomalgLeftFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
@@ -77,6 +115,14 @@ BindGlobal( "TheTypeHomalgLeftFinitelyPresentedModule",
 BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
+
+BindGlobal( "TheTypeHomalgLeftFinitelyGeneratedSubmodule",
+        NewType( TheFamilyOfHomalgSubmodules,
+                IsFinitelyPresentedSubmoduleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
+
+BindGlobal( "TheTypeHomalgRightFinitelyGeneratedSubmodule",
+        NewType( TheFamilyOfHomalgSubmodules,
+                IsFinitelyPresentedSubmoduleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
 #
@@ -106,7 +152,7 @@ BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     
@@ -117,7 +163,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     
@@ -171,6 +217,17 @@ end );
 
 ##
 InstallMethod( SetsOfGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return SetsOfGenerators( UnderlyingObject( M ) );
+    
+end );
+
+##
+InstallMethod( SetsOfGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -186,6 +243,17 @@ end );
 
 ##
 InstallMethod( SetsOfRelations,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return SetsOfRelations( UnderlyingObject( M ) );
+    
+end );
+
+##
+InstallMethod( SetsOfRelations,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -196,6 +264,17 @@ InstallMethod( SetsOfRelations,
     fi;
     
     return fail;
+    
+end );
+
+##
+InstallMethod( PositionOfTheDefaultSetOfRelations,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return PositionOfTheDefaultSetOfRelations( UnderlyingObject( M ) );
     
 end );
 
@@ -228,7 +307,7 @@ end );
 ##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
@@ -243,7 +322,7 @@ end );
 ##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     
@@ -258,7 +337,7 @@ end );
 ##
 InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
@@ -273,7 +352,7 @@ end );
 ##
 InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     
@@ -288,7 +367,7 @@ end );
 ##
 InstallMethod( DegreesOfGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
@@ -299,7 +378,7 @@ end );
 ##
 InstallMethod( DegreesOfGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     
@@ -310,7 +389,7 @@ end );
 ##
 InstallMethod( DegreesOfGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZero ],
+        [ IsHomalgModule and IsZero ],
         
   function( M )
     
@@ -360,6 +439,20 @@ end );
 
 ##
 InstallMethod( MatrixOfGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+  function( M )
+    
+    if HasEmbeddingInSuperObject( M ) then
+        return MatrixOfMap( EmbeddingInSuperObject( M ) );
+    fi;
+    
+    return M!.map_having_subobject_as_its_image;
+    
+end );
+
+##
+InstallMethod( MatrixOfGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
   function( M )
@@ -371,7 +464,7 @@ end );
 ##
 InstallMethod( MatrixOfGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
   function( M, pos )
     local gen;
     
@@ -416,11 +509,45 @@ end );
 
 ##
 InstallMethod( HasNrGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+  function( M )
+    local gen_mat;
+    
+    gen_mat := MatrixOfGenerators( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        return HasNrRows( gen_mat );
+    else
+        return HasNrColumns( gen_mat );
+    fi;
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
   function( M )
     
     return HasNrGenerators( GeneratorsOfModule( M ) );
+    
+end );
+
+##
+InstallMethod( NrGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+  function( M )
+    local gen_mat;
+    
+    gen_mat := MatrixOfGenerators( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        return NrRows( gen_mat );
+    else
+        return NrColumns( gen_mat );
+    fi;
     
 end );
 
@@ -470,6 +597,13 @@ end );
 
 ##
 InstallMethod( HasNrRelations,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  HasEmbeddingInSuperObject );
+
+##
+InstallMethod( HasNrRelations,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -489,7 +623,7 @@ end );
 ##
 InstallMethod( NrRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     local rel;
@@ -507,7 +641,7 @@ end );
 ##
 InstallMethod( HasNrRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     local rel;
@@ -525,7 +659,7 @@ end );
 ##
 InstallMethod( NrRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     local rel;
@@ -619,7 +753,7 @@ InstallMethod( LockModuleOnCertainPresentation,
   function( M, p )
     
     ## first save the current setting
-    M!.LockModuleOnCertainPresentation := M!.PositionOfTheDefaultSetOfRelations;
+    M!.LockModuleOnCertainPresentation := PositionOfTheDefaultSetOfRelations( M );
     
     SetPositionOfTheDefaultSetOfRelations( M, p );
     
@@ -632,7 +766,7 @@ InstallMethod( LockModuleOnCertainPresentation,
         
   function( M )
     
-    LockModuleOnCertainPresentation( M, M!.PositionOfTheDefaultSetOfRelations );
+    LockModuleOnCertainPresentation( M, PositionOfTheDefaultSetOfRelations( M ) );
     
 end );
 
@@ -654,7 +788,7 @@ end );
 ##
 InstallMethod( IsLockedModule,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
@@ -665,7 +799,7 @@ end );
 ##
 InstallMethod( AddANewPresentation,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsGeneratorsOfFinitelyGeneratedModuleRep ],
+        [ IsHomalgModule, IsGeneratorsOfFinitelyGeneratedModuleRep ],
         
   function( M, gen )
     local rels, gens, d, l, id, tr, itr;
@@ -1268,6 +1402,7 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 InstallMethod( ByASmallerPresentation,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -1298,6 +1433,24 @@ InstallMethod( ByASmallerPresentation,
              HOMALG.ByASmallerPresentationDoesNotDecideZero = true ) then
         DecideZero( M );
     fi;
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    local emb;
+    
+    emb := EmbeddingInSuperObject( M );
+    
+    ByASmallerPresentation( Source( emb ) );
+    
+    DecideZero( emb );
     
     return M;
     
@@ -1419,6 +1572,152 @@ InstallMethod( SetUpperBoundForProjectiveDimension,
     
 end );
 
+##  <#GAPDoc Label="UnderlyingObject:submodule">
+##  <ManSection>
+##    <Oper Arg="M" Name="SuperObject" Label="for submodules"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the module underlying the submodule <M>M</M> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UnderlyingObject,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return Source( EmbeddingInSuperObject( M ) );
+    
+end );
+
+##  <#GAPDoc Label="SuperObject">
+##  <ManSection>
+##    <Oper Arg="M" Name="SuperObject"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the super module <M>L</M> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( SuperObject,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return Range( EmbeddingInSuperObject( M ) );
+    
+end );
+
+##
+InstallOtherMethod( \*,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( J, K )
+    local super, left, R, genJ, genK;
+    
+    super := SuperObject( J );
+    
+    if not IsIdenticalObj( super, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( J );
+    
+    R := HomalgRing( J );
+    
+    if ( left and not IsIdenticalObj( super, 1 * R ) ) or
+       ( not left and not IsIdenticalObj( super, R * 1 ) ) then
+        
+        Error( "can only multiply ideals in a common ring\n" );
+        
+    fi;
+    
+    genJ := MatrixOfGenerators( J );
+    genK := MatrixOfGenerators( K );
+    
+    return Subobject( KroneckerMat( genJ, genK ), super );
+    
+end );
+
+##
+InstallOtherMethod( POW,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsInt ],
+        
+  function( J, pow )
+    local R;
+    
+    R := HomalgRing( J );
+    
+    if pow < 0 then
+        
+        Error( "negative powers are not defined\n" );
+        
+    elif pow = 0 then
+        
+        return Subobject( HomalgIdentityMatrix( 1, R ), SuperObject( J ) );
+        
+    elif pow = 1 then
+        
+        return J;
+        
+    else
+        
+        return Iterated( ListWithIdenticalEntries( pow, J ), \* );
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( IsSubset,
+        "for homalg submodules",
+        [ IsHomalgModule, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( J, K )
+    local M, genJ, genK, rel, div;
+    
+    M := SuperObject( J );
+    
+    if not IsFinitelyPresentedSubmoduleRep( K ) then
+        return IsIdenticalObj( M, K );
+    fi;
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    genJ := MatrixOfGenerators( J );
+    genK := MatrixOfGenerators( K );
+    
+    rel := RelationsOfModule( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then;
+        div := RightDivide( genJ, genK, rel );
+    else
+        div := LeftDivide( genK, genJ, rel );
+    fi;
+    
+    return not IsBool( div );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( J, K )
+    
+    return IsSubset( J, K ) and IsSubset( K, J );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -1457,8 +1756,6 @@ InstallMethod( Presentation,
     
     R := HomalgRing( rel );
     
-    is_zero_module := false;
-    
     if NrGenerators( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForLeftModule( [ ], R );
         is_zero_module := true;
@@ -1475,7 +1772,7 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    if is_zero_module then
+    if IsBound( is_zero_module ) then
         ObjectifyWithAttributes(
                 M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
@@ -1513,8 +1810,6 @@ InstallMethod( Presentation,
     
     R := HomalgRing( rel );
     
-    is_zero_module := false;
-    
     gens := CreateSetsOfGeneratorsForLeftModule( gen );
     
     if NrGenerators( rel ) = 0 then
@@ -1529,7 +1824,7 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    if is_zero_module then
+    if IsBound( is_zero_module ) then
         ObjectifyWithAttributes(
                 M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
@@ -1563,8 +1858,6 @@ InstallMethod( Presentation,
     
     R := HomalgRing( rel );
     
-    is_zero_module := false;
-    
     if NrGenerators( rel ) = 0 then ## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForRightModule( [ ], R );
         is_zero_module := true;
@@ -1581,7 +1874,7 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    if is_zero_module then
+    if IsBound( is_zero_module ) then
         ObjectifyWithAttributes(
                 M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
@@ -1619,8 +1912,6 @@ InstallMethod( Presentation,
     
     R := HomalgRing( rel );
     
-    is_zero_module := false;
-    
     gens := CreateSetsOfGeneratorsForRightModule( gen );
     
     if NrGenerators( rel ) = 0 then
@@ -1635,7 +1926,7 @@ InstallMethod( Presentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    if is_zero_module then
+    if IsBound( is_zero_module ) then
         ObjectifyWithAttributes(
                 M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
@@ -1667,8 +1958,6 @@ InstallMethod( LeftPresentation,
   function( rel, R )
     local gens, rels, M, is_zero_module;
     
-    is_zero_module := false;
-    
     if Length( rel ) = 0 then	## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForLeftModule( [ ], R );
         is_zero_module := true;
@@ -1688,7 +1977,7 @@ InstallMethod( LeftPresentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    if is_zero_module then
+    if IsBound( is_zero_module ) then
         ObjectifyWithAttributes(
                 M, TheTypeHomalgLeftFinitelyPresentedModule,
                 LeftActingDomain, R,
@@ -1799,8 +2088,6 @@ InstallMethod( RightPresentation,
   function( rel, R )
     local gens, rels, M, is_zero_module;
     
-    is_zero_module := false;
-    
     if Length( rel ) = 0 then	## since one doesn't specify generators here giving no relations defines the zero module
         gens := CreateSetsOfGeneratorsForRightModule( [ ], R );
         is_zero_module := true;
@@ -1820,7 +2107,7 @@ InstallMethod( RightPresentation,
               PositionOfTheDefaultSetOfRelations := 1 );
     
     ## Objectify:
-    if is_zero_module then
+    if IsBound( is_zero_module ) then
         ObjectifyWithAttributes(
                 M, TheTypeHomalgRightFinitelyPresentedModule,
                 RightActingDomain, R,
@@ -2243,6 +2530,17 @@ InstallMethod( POW,
     
 end );
 
+##
+InstallMethod( \*,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsHomalgRing ], 10001,
+        
+  function( M, R )
+    
+    return Subobject( R * M!.map_having_subobject_as_its_image );
+    
+end );
+
 ##  <#GAPDoc Label="\*:ModuleBaseChange">
 ##  <ManSection>
 ##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring"/>
@@ -2282,7 +2580,7 @@ end );
 ##
 InstallMethod( \*,
         "for homalg modules",
-        [ IsHomalgModule, IsHomalgRing ], 10001,
+        [ IsFinitelyPresentedModuleRep, IsHomalgRing ], 10001,
         
   function( M, R )
     local N;
@@ -2381,6 +2679,147 @@ InstallGlobalFunction( GetGenerators,
     
 end );
 
+##  <#GAPDoc Label="Subobject">
+##  <ManSection>
+##    <Oper Arg="mat,M" Name="Subobject" Label="constructor for submodules"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated left/right submodule of the &homalg; module <A>M</A> with generators given by the
+##      rows/columns of the &homalg; matrix <A>mat</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+##
+InstallMethod( Subobject,
+        "constructor",
+        [ IsHomalgMap ],
+        
+  function( gen_map )
+    local R, N;
+    
+    R := HomalgRing( gen_map );
+    
+    N := rec( map_having_subobject_as_its_image := gen_map );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( gen_map ) then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                N, TheTypeHomalgLeftFinitelyGeneratedSubmodule,
+                LeftActingDomain, R );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                N, TheTypeHomalgRightFinitelyGeneratedSubmodule,
+                RightActingDomain, R );
+    fi;
+    
+    return N;
+    
+end );
+
+##
+InstallMethod( Subobject,
+        "constructor",
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        
+  function( gen, M )
+    local gen_map;
+    
+    if not IsIdenticalObj( HomalgRing( gen ), HomalgRing( M ) ) then
+        Error( "the matrix and the module are not defined over identically the same ring\n" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        if NrColumns( gen ) <> NrGenerators( M ) then
+            Error( "the first argument is matrix with ", NrColumns( MatrixOfGenerators( gen ) )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+        fi;
+    else
+        if NrRows( gen ) <> NrGenerators( M ) then
+            Error( "the first argument is matrix with ", NrRows( MatrixOfGenerators( gen ) )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+        fi;
+    fi;
+    
+    gen_map := HomalgMap( gen, "free", M  );
+    
+    return Subobject( gen_map );
+    
+end );
+
+##  <#GAPDoc Label="LeftSubmodule">
+##  <ManSection>
+##    <Oper Arg="mat" Name="LeftSubmodule" Label="constructor for left submodules"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated left submodule with generators given by the
+##      rows of the &homalg; matrix <A>mat</A>.
+##      <Listing Type="Code"><![CDATA[
+InstallMethod( LeftSubmodule,
+        "constructor",
+        [ IsHomalgMatrix ],
+        
+  function( gen )
+    local R;
+    
+    R := HomalgRing( gen );
+    
+    return Subobject( gen, 1 * R );
+    
+end );
+##  ]]></Listing>
+##      <Example><![CDATA[
+##  gap> Z4 := HomalgRingOfIntegers( ) / 4;;
+##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
+##  <A homalg internal 1 by 1 matrix>
+##  gap> J := LeftSubmodule( J );
+##  <A principal (left) ideal given by a cyclic generator>
+##  gap> IsFree( J );
+##  false
+##  gap> J;
+##  <A principal reflexive non-projective (left) ideal given by a cyclic generator\
+##  >
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="RightSubmodule">
+##  <ManSection>
+##    <Oper Arg="mat" Name="RightSubmodule" Label="constructor for right submodules"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated right submodule with generators given by the
+##      columns of the &homalg; matrix <A>mat</A>.
+##      <Listing Type="Code"><![CDATA[
+InstallMethod( RightSubmodule,
+        "constructor",
+        [ IsHomalgMatrix ],
+        
+  function( gen )
+    local R;
+    
+    R := HomalgRing( gen );
+    
+    return Subobject( gen, R * 1 );
+    
+end );
+##  ]]></Listing>
+##      <Example><![CDATA[
+##  gap> Z4 := HomalgRingOfIntegers( ) / 4;;
+##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
+##  <A homalg internal 1 by 1 matrix>
+##  gap> J := RightSubmodule( J );
+##  <A principal (right) ideal given by a cyclic generator>
+##  gap> IsFree( J );
+##  false
+##  gap> J;
+##  <A principal reflexive non-projective (right) ideal given by a cyclic generato\
+##  r>
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ####################################
 #
 # View, Print, and Display methods:
@@ -2390,11 +2829,28 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
-  function( M )
-    local R, left_module, num_gen, properties, nz, num_rel,
+  function( o )
+    local is_submodule, M, R, left_module, num_gen, properties, nz, num_rel,
           gen_string, rel_string, locked;
+    
+    is_submodule := IsFinitelyPresentedSubmoduleRep( o );
+    
+    if is_submodule then
+        M := UnderlyingObject( o );
+        if HasIsFree( M ) and IsFree( M ) then
+            SetIsFree( o, true );
+            ViewObj( o );
+            return;
+        elif HasIsZero( M ) and IsZero( M ) then
+            SetIsZero( o, true );
+            ViewObj( o );
+            return;
+        fi;
+    else
+        M := o;
+    fi;
     
     R := HomalgRing( M );
     
@@ -2410,7 +2866,11 @@ InstallMethod( ViewObj,
     properties := "";
     
     if HasIsCyclic( M ) and IsCyclic( M ) then
-        Append( properties, " cyclic" );
+        if is_submodule then
+            Append( properties, " principal" );
+        else
+            Append( properties, " cyclic" );
+        fi;
     fi;
     
     if HasIsStablyFree( M ) and IsStablyFree( M ) then
@@ -2537,7 +2997,7 @@ InstallMethod( ViewObj,
     fi;
     
     if IsList( DegreesOfGenerators( M ) ) then
-        Append( properties, " graded" );
+        properties := Concatenation( " graded", properties );
     fi;
     
     if left_module then
@@ -2548,67 +3008,103 @@ InstallMethod( ViewObj,
             gen_string := " generator";
         fi;
         
-        if HasNrRelations( M ) = true then
-            num_rel := NrRelations( M );
-            if num_rel = 0 then
-                num_rel := "";
-                rel_string := "no relations for ";
-            elif num_rel = 1 then
-                rel_string := " relation for ";
+        if not is_submodule then
+            if HasNrRelations( o ) = true then
+                num_rel := NrRelations( o );
+                if num_rel = 0 then
+                    num_rel := "";
+                    rel_string := "no relations for ";
+                elif num_rel = 1 then
+                    rel_string := " relation for ";
+                else
+                    rel_string := " relations for ";
+                fi;
             else
+                if RelationsOfModule( o ) = "unknown relations" then
+                    num_rel := "unknown";
+                else
+                    num_rel := "an unknown number of";
+                fi;
                 rel_string := " relations for ";
             fi;
-        else
-            if RelationsOfModule( M ) = "unknown relations" then
-                num_rel := "unknown";
-            else
-                num_rel := "an unknown number of";
-            fi;
-            rel_string := " relations for ";
         fi;
         
-        if IsLockedModule( M ) then
+        if IsLockedModule( o ) then
             locked := " (locked)";
         else
             locked := "";
         fi;
         
-        Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, locked, ">" );
+        if is_submodule then
+            if IsIdenticalObj( SuperObject( o ), 1 * R ) then
+                if HasIsCommutative( R ) and IsCommutative( R ) then
+                    Print( "<A", properties, " (left) ideal given by ", num_gen, gen_string, locked, ">" );
+                else
+                    Print( "<A", properties, " left ideal given by ", num_gen, gen_string, locked, ">" );
+                fi;
+            else
+                Print( "<A", properties, " left submodule given by ", num_gen, gen_string, locked, ">" );
+            fi;
+        else
+            Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, locked, ">" );
+        fi;
         
     else
         
-        if IsInt( num_gen ) then
-            gen_string := " generators satisfying ";
+        if is_submodule then
+            if IsInt( num_gen ) then
+                gen_string := " generators";
+            else
+                gen_string := " generator";
+            fi;
         else
-            gen_string := " generator satisfying ";
+            if IsInt( num_gen ) then
+                gen_string := " generators satisfying ";
+            else
+                gen_string := " generator satisfying ";
+            fi;
         fi;
         
-        if HasNrRelations( M ) = true then
-            num_rel := NrRelations( M );
-            if num_rel = 0 then
-                num_rel := "";
-                rel_string := "no relations";
-            elif num_rel = 1 then
-                rel_string := " relation";
+        if not is_submodule then
+            if HasNrRelations( o ) = true then
+                num_rel := NrRelations( o );
+                if num_rel = 0 then
+                    num_rel := "";
+                    rel_string := "no relations";
+                elif num_rel = 1 then
+                    rel_string := " relation";
+                else
+                    rel_string := " relations";
+                fi;
             else
+                if RelationsOfModule( o ) = "unknown relations" then
+                    num_rel := "unknown";
+                else
+                    num_rel := "an unknown number of";
+                fi;
                 rel_string := " relations";
             fi;
-        else
-            if RelationsOfModule( M ) = "unknown relations" then
-                num_rel := "unknown";
-            else
-                num_rel := "an unknown number of";
-            fi;
-            rel_string := " relations";
         fi;
         
-        if IsLockedModule( M ) then
+        if IsLockedModule( o ) then
             locked := " (locked)";
         else
             locked := "";
         fi;
         
-        Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, locked, ">" );
+        if is_submodule then
+            if IsIdenticalObj( SuperObject( o ), R * 1 ) then
+                if HasIsCommutative( R ) and IsCommutative( R ) then
+                    Print( "<A", properties, " (right) ideal given by ", num_gen, gen_string, locked, ">" );
+                else
+                    Print( "<A", properties, " right ideal given by ", num_gen, gen_string, locked, ">" );
+                fi;
+            else
+                Print( "<A", properties, " right submodule given by ", num_gen, gen_string, locked, ">" );
+            fi;
+        else
+            Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, locked, ">" );
+        fi;
         
     fi;
     
@@ -2616,31 +3112,49 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
         
-  function( M )
-    local r, rk;
+  function( J )
+    local M, left, R, r, rk;
     
-    if IsBound( M!.distinguished ) then
-        Print( "<The" );
-    else
-        Print( "<A" );
-    fi;
+    M := UnderlyingObject( J );
     
-    Print( " free " );
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    R := HomalgRing( M );
+    
+    Print( "<A " );
     
     if IsList( DegreesOfGenerators( M ) ) then
         Print( "graded " );
     fi;
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        Print( "left " );
+    if left then
+        if IsIdenticalObj( SuperObject( J ), 1 * R ) then
+            Print( "principal " );
+            if HasIsCommutative( R ) and IsCommutative( R ) then
+                Print( "(left) " );
+            else
+                Print( "left " );
+            fi;
+            Print( "ideal" );
+        else
+            Print( "free left sumboule" );
+        fi;
     else
-        Print( "right " );
+        if IsIdenticalObj( SuperObject( J ), R * 1 ) then
+            Print( "principal " );
+            if HasIsCommutative( R ) and IsCommutative( R ) then
+                Print( "(right) " );
+            else
+                Print( "right " );
+            fi;
+            Print( "ideal" );
+        else
+            Print( "free right sumboule" );
+        fi;
     fi;
-    
-    Print( "module" );
     
     r := NrGenerators( M );
     
@@ -2655,6 +3169,90 @@ InstallMethod( ViewObj,
             fi;
         else ## => r > 1
             Print( r, " non-free generators" );
+        fi;
+    fi;
+    
+    Print( ">" );
+    
+end );
+    
+##
+InstallMethod( ViewObj,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
+        
+  function( M )
+    local r, rk;
+    
+    if IsBound( M!.distinguished ) then
+        Print( "<The" );
+    else
+        Print( "<A" );
+    fi;
+    
+    if IsList( DegreesOfGenerators( M ) ) then
+        Print( " graded" );
+    fi;
+    
+    Print( " free" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        Print( " left" );
+    else
+        Print( " right" );
+    fi;
+    
+    Print( " module" );
+    
+    r := NrGenerators( M );
+    
+    if HasRankOfModule( M ) then
+        rk := RankOfModule( M );
+        Print( " of rank ", rk, " on " );
+        if r = rk then
+            if r = 1 then
+                Print( "a free generator" );
+            else
+                Print( "free generators" );
+            fi;
+        else ## => r > 1
+            Print( r, " non-free generators" );
+        fi;
+    fi;
+    
+    Print( ">" );
+    
+end );
+    
+##
+InstallMethod( ViewObj,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
+        
+  function( J )
+    local M, left, R, r, rk;
+    
+    M := UnderlyingObject( J );
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    R := HomalgRing( M );
+    
+    Print( "<The zero " );
+    
+    if left then
+        Print( "(left) " );
+        if IsIdenticalObj( SuperObject( J ), 1 * R ) then
+            Print( "ideal" );
+        else
+            Print( "sumboule" );
+        fi;
+    else
+        Print( "(right) " );
+        if IsIdenticalObj( SuperObject( J ), R * 1 ) then
+            Print( "ideal" );
+        else
+            Print( "sumboule" );
         fi;
     fi;
     
@@ -2688,48 +3286,68 @@ InstallMethod( ViewObj,
 end );
     
 ##
-InstallMethod( PrintObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+InstallMethod( Display,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
         
   function( M )
+    local R, gen, l;
     
-    Print( "LeftPresentation( " );
-    if HasIsZero( M ) and IsZero( M ) then
-        Print( "[ ], ", LeftActingDomain( M ) ); ## no generators, empty relations, ring
-    else
-        Print( GeneratorsOfModule( M ), ", " );
-        if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[ ], " ); ## empty relations
+    R := HomalgRing( M );
+    
+    gen := MatrixOfGenerators( M );
+    
+    Print( "A " );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        l := NrRows( gen );
+        if IsIdenticalObj( SuperObject( M ), 1 * R ) then
+            if HasIsCommutative( R ) and IsCommutative( R ) then
+                Print( "(left)" );
+            else
+                Print( "left" );
+            fi;
+            Print( " ideal generated by the " );
+            if l = 1 then
+                Print( "entry" );
+            else
+                Print( l, " entries" );
+            fi;
         else
-            Print( RelationsOfModule( M ), ", " );
+            Print( "left submodule generated by the " );
+            if l = 1 then
+                Print( "row" );
+            else
+                Print( l, " rows" );
+            fi;
         fi;
-        Print( LeftActingDomain( M ), " " );
-    fi;
-    Print( ")" );
-    
-end );
-
-##
-InstallMethod( PrintObj,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( M )
-    
-    Print( "RightPresentation( " );
-    if HasIsZero( M ) and IsZero( M ) then
-        Print( "[ ], ", RightActingDomain( M ) ); ## no generators, empty relations, ring
+        Print( " of the following matrix:\n" );
     else
-        Print( GeneratorsOfModule( M ), ", " );
-        if RelationsOfModule( M ) = "unknown relations" then
-            Print( "[ ], " ); ## empty relations
+        l := NrColumns( gen );
+        if IsIdenticalObj( SuperObject( M ), R * 1 ) then
+            if HasIsCommutative( R ) and IsCommutative( R ) then
+                Print( "(right)" );
+            else
+                Print( "right" );
+            fi;
+            Print( " ideal generated by the " );
+            if l = 1 then
+                Print( "entry" );
+            else
+                Print( l, " entries" );
+            fi;
         else
-            Print( RelationsOfModule( M ), ", " );
+            Print( "right submodule generated by the " );
+            if l = 1 then
+                Print( "column" );
+            else
+                Print( l, " columns" );
+            fi;
         fi;
-        Print( RightActingDomain( M ), " " );
+        Print( " of the following matrix:\n" );
     fi;
-    Print( ")" );
+    
+    Display( gen );
     
 end );
 
@@ -2938,7 +3556,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
+        [ IsHomalgModule and IsZero ], 2001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
         
   function( M )
     
