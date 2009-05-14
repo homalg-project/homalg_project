@@ -103,13 +103,16 @@ InstallGlobalFunction( SendForkingToCAS,
         IO_exit( 0 );
     fi;
     
-    return true;
+    return pid;
     
 end );
 
 InstallGlobalFunction( SendToCAS,
   function( s, command )
-    local cmd;
+    # Note that it is the responsibility of the caller of this
+    # function to call IO_WaitPID on the resulting pid eventually,
+    # if the result is an integer rather than fail!
+    local cmd,pid;
     
     if command[ Length( command ) ] <> '\n' then
         Add( command, '\n' );
@@ -119,15 +122,17 @@ InstallGlobalFunction( SendToCAS,
         IO_Write( s.stdin,command );
         IO_Write( s.stdin, "\"", s.READY, "\"", s.eoc_verbose, "\n" );
         IO_Flush( s.stdin );
+        pid := fail;
     else
         cmd := Concatenation( command, "\"", s.READY, "\"", s.eoc_verbose, "\n" );
-        SendForkingToCAS( s.stdin, cmd );
+        pid := SendForkingToCAS( s.stdin, cmd );
     fi;
     
     s.lines := "";
     s.errors := "";
     s.casready := false;
     
+    return pid;
 end );
 
 InstallGlobalFunction( CheckOutputOfCAS,
@@ -186,6 +191,8 @@ InstallGlobalFunction( CheckOutputOfCAS,
         fi;
         #Print( "select: l=", l, "\n" );
         
+        if nr = fail then continue; fi;  # probably an interupted system call...
+
         if l[1] <> fail then	# something on stdout
             pos := Length( s.lines );
             bytes := IO_read( l[1], s.lines, pos, s.BUFSIZE );
@@ -301,13 +308,14 @@ end );
 
 InstallGlobalFunction( SendBlockingToCAS,
   function( s, command )
-    local l, nr;
+    local l, nr, pid;
     
-    SendToCAS( s, command );
+    pid := SendToCAS( s, command );
     repeat
         l := [ IO_GetFD( s.stdout ), IO_GetFD( s.stderr ) ];
         nr := IO_select( l, [], [], fail, fail );   # wait for input ready!
     until CheckOutputOfCAS( s ) = true;
+    if pid <> fail then IO_WaitPid(pid,true); fi;
     
 end );
 
