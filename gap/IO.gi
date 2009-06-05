@@ -353,8 +353,11 @@ InstallGlobalFunction( LaunchCAS,
     
     for e in executables do
         
-        s := IO_Popen3( Filename( DirectoriesSystemPrograms( ), e ),
-                     HOMALG_IO_CAS.options );
+        s := Filename( DirectoriesSystemPrograms( ), e );
+        
+        if s <> fail then
+            s := IO_Popen3( s, HOMALG_IO_CAS.options );
+        fi;
         
         if s <> fail then
             break;
