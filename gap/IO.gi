@@ -67,20 +67,32 @@ InstallGlobalFunction( TerminateCAS,
         
     elif nargs > 0 then
         
-        if IsRecord( arg[1] ) and IsBound( arg[1].lines ) and IsBound( arg[1].pid ) then
+        if IsRecord( arg[1] ) and IsBound( arg[1].lines ) then
+            
             s := arg[1];
+            
+            if IsBound( s.TerminateCAS ) and IsFunction( s.TerminateCAS ) then
+                s.TerminateCAS( s );
+            else
+                IO_Close( s.stdin );
+                IO_Close( s.stdout );
+                IO_Close( s.stderr );
+                s.stdin := fail;
+                s.stdout := fail;
+                s.stderr := fail;
+            fi;
+            
+            if IsBound( arg[1].pid ) then
+                Print( "terminated the external CAS ", s.name, " with pid ", s.pid, "\n" );
+            else
+                Print( "terminated the external CAS ", s.name, "\n" );
+            fi;
+            
         else
-            s := homalgStream( arg[1] );
+            
+            TerminateCAS( homalgStream( arg[1] ) );
+            
         fi;
-        
-        IO_Close( s.stdin );
-        IO_Close( s.stdout );
-        IO_Close( s.stderr );
-        s.stdin := fail;
-        s.stdout := fail;
-        s.stderr := fail;
-        
-        Print( "terminated the external CAS ", s.name, " with pid ", s.pid, "\n" );
         
     fi;
     
@@ -327,50 +339,64 @@ InstallGlobalFunction( LaunchCAS,
     
     HOMALG_IO_CAS := arg[1];
     
-    executables := [ ];
-    
-    if nargs > 1 and IsStringRep( arg[2] ) then
-        Add( executables, arg[2] );
-    fi;
-    
-    if IsBound( HOMALG_IO_CAS.executable ) then
-        Add( executables, HOMALG_IO_CAS.executable );
-    fi;
-    
-    e := 1;
-    while true do
-        if IsBound( HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) ) then
-            Add( executables, HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) );
-            e := e + 1;
-        else
-            break;
-        fi;
-    od;
-    
-    if executables = [ ] then
-        Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
-    fi;
-    
-    for e in executables do
+    if IsBound( arg[1].LaunchCAS ) then
         
-        s := Filename( DirectoriesSystemPrograms( ), e );
+        s := arg[1].LaunchCAS( arg );
         
-        if s <> fail then
-            s := IO_Popen3( s, HOMALG_IO_CAS.options );
+        if s = fail then
+            Error( "the alternative launcher returned fail\n" );
         fi;
         
-        if s <> fail then
-            break;
+    else
+        
+        executables := [ ];
+        
+        if nargs > 1 and IsStringRep( arg[2] ) then
+            Add( executables, arg[2] );
         fi;
         
-    od;
-    
-    if s = fail then
-        Error( "found no ",  HOMALG_IO_CAS.executable, " executable in PATH while searching the following list:\n", executables, "\n" );
+        if IsBound( HOMALG_IO_CAS.executable ) then
+            Add( executables, HOMALG_IO_CAS.executable );
+        fi;
+        
+        e := 1;
+        while true do
+            if IsBound( HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) ) then
+                Add( executables, HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) );
+                e := e + 1;
+            else
+                break;
+            fi;
+        od;
+        
+        if executables = [ ] then
+            Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
+        fi;
+        
+        for e in executables do
+            
+            s := Filename( DirectoriesSystemPrograms( ), e );
+            
+            if s <> fail then
+                s := IO_Popen3( s, HOMALG_IO_CAS.options );
+            fi;
+            
+            if s <> fail then
+                break;
+            fi;
+            
+        od;
+        
+        if s = fail then
+            Error( "found no ",  HOMALG_IO_CAS.executable, " executable in PATH while searching the following list:\n", executables, "\n" );
+        fi;
+        
+        s.stdout!.rbufsize := false;   # switch off buffering
+        s.stderr!.rbufsize := false;   # switch off buffering
+        
+        s.SendBlockingToCAS := SendBlockingToCAS;
+        
     fi;
-    
-    s.stdout!.rbufsize := false;   # switch off buffering
-    s.stderr!.rbufsize := false;   # switch off buffering
     
     s.variable_name := HOMALG_IO.variable_name;
     
@@ -398,7 +424,7 @@ InstallGlobalFunction( LaunchCAS,
     s.homalgExternalObjectsPointingToVariables :=
       ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalObjects );
     
-    SendBlockingToCAS( s, "\n" );
+    s.SendBlockingToCAS( s, "\n" );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
          and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then

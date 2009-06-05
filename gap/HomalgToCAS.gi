@@ -652,7 +652,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     
-    SendBlockingToCAS( stream, L );
+    stream.SendBlockingToCAS( stream, L );
     
     if stream.errors <> "" then
         if IsBound( stream.only_warning ) and PositionSublist( stream.errors, stream.only_warning ) <> fail then
