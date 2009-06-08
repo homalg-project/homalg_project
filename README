@@ -1,15 +1,15 @@
-    README file for the `IO_ForHomalg' GAP4 package
+    README file for the `HomalgToCAS' GAP4 package
         
 To get the newest version of this GAP 4 package download one of the
 archive files
-    IO_ForHomalg-x.x.tar.gz
-    IO_ForHomalg-x.x.zoo
-    IO_ForHomalg-x.x.tar.bz2
-    IO_ForHomalg-x.x.zip
+    HomalgToCAS-x.x.tar.gz
+    HomalgToCAS-x.x.zoo
+    HomalgToCAS-x.x.tar.bz2
+    HomalgToCAS-x.x.zip
 and unpack it using 
-    gunzip IO_ForHomalg-x.x.tar.gz; tar xvf IO_ForHomalg-x.x.tar
+    gunzip HomalgToCAS-x.x.tar.gz; tar xvf HomalgToCAS-x.x.tar
 respectively
-    unzoo -x IO_ForHomalg-x.x.zoo
+    unzoo -x HomalgToCAS-x.x.zoo
 and so on.
 
 (Note that if you use a browser like `netscape' for downloading the
@@ -18,12 +18,12 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `IO_ForHomalg'.
+of your GAP 4 installation. It creates a subdirectory called `HomalgToCAS'.
 
 This completes the installation of the package.
 
 Recompiling the documentation is possible by the command `gap makedoc.g'
-in the IO_ForHomalg directory. But this should not be necessary.
+in the HomalgToCAS directory. But this should not be necessary.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.

@@ -10,8 +10,8 @@
 
 
 # our info class:
-DeclareInfoClass( "InfoIO_ForHomalg" );
-SetInfoLevel( InfoIO_ForHomalg, 1 );
+DeclareInfoClass( "InfoHomalgToCAS" );
+SetInfoLevel( InfoHomalgToCAS, 1 );
 
 # a central place for configurations:
 DeclareGlobalVariable( "HOMALG_IO" );

@@ -367,7 +367,7 @@ InstallGlobalFunction( homalgSendBlocking,
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
     fi;
     
-    Info( InfoIO_ForHomalg, 10, "homalgSendBlocking <-- ", arg );
+    Info( InfoHomalgToCAS, 10, "homalgSendBlocking <-- ", arg );
     
     if not IsList( arg[1] ) then
         Error( "the first argument must be a list\n" );
@@ -379,7 +379,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     nargs := Length( arg );
     
-    io_info_level := InfoLevel( InfoIO_ForHomalg );
+    io_info_level := InfoLevel( InfoHomalgToCAS );
     info_level := 7;
     
     properties := [];
@@ -643,11 +643,11 @@ InstallGlobalFunction( homalgSendBlocking,
     fi;
     
     if io_info_level >= 7 then
-        Info( InfoIO_ForHomalg, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+        Info( InfoHomalgToCAS, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
     elif io_info_level >= 4 then
-        Info( InfoIO_ForHomalg, 4, pictogram, " ", stream.prompt, "..." );
+        Info( InfoHomalgToCAS, 4, pictogram, " ", stream.prompt, "..." );
     elif io_info_level >= 3 then
-        Info( InfoIO_ForHomalg, 3, pictogram );
+        Info( InfoHomalgToCAS, 3, pictogram );
     fi;
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
@@ -708,9 +708,9 @@ InstallGlobalFunction( homalgSendBlocking,
             RemoveCharacters( L, "\n" );
         fi;
         RemoveCharacters( L, "\\ " );
-        Info( InfoIO_ForHomalg, 5, "/------------------" );
-        Info( InfoIO_ForHomalg, 5, stream.output_prompt, "\"", L, "\"" );
-        Info( InfoIO_ForHomalg, 5, "\\==================" );
+        Info( InfoHomalgToCAS, 5, "/------------------" );
+        Info( InfoHomalgToCAS, 5, stream.output_prompt, "\"", L, "\"" );
+        Info( InfoHomalgToCAS, 5, "\\==================" );
         if IsBound( stream.check_output ) and stream.check_output = true
            and '\n' in L and not ',' in L then
             Error( "\033[01m", "the output received from the external CAS ", CAS, " (running with PID ", PID, ") contains an ENTER = '\\n' but no COMMA = ',' ... this is most probably a mistake!!!", "\033[0m\n" );

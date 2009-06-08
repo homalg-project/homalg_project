@@ -250,30 +250,30 @@ InstallGlobalFunction( homalgIOMode,
         HOMALG_IO.color_display := false;
         HOMALG_IO.DoNotDeleteTemporaryFiles := false;
         HOMALG_IO.save_CAS_commands_to_file := false;
-        SetInfoLevel( InfoIO_ForHomalg, 1 );
+        SetInfoLevel( InfoHomalgToCAS, 1 );
     elif mode = "all" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         HOMALG_IO.save_CAS_commands_to_file := true;
-        SetInfoLevel( InfoIO_ForHomalg, 8 );
+        SetInfoLevel( InfoHomalgToCAS, 8 );
     elif mode = "basic" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
-        SetInfoLevel( InfoIO_ForHomalg, 4 );
+        SetInfoLevel( InfoHomalgToCAS, 4 );
     elif mode = "debug" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
-        SetInfoLevel( InfoIO_ForHomalg, 8 );
+        SetInfoLevel( InfoHomalgToCAS, 8 );
     elif mode = "file" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         HOMALG_IO.save_CAS_commands_to_file := true;
-        SetInfoLevel( InfoIO_ForHomalg, 4 );
+        SetInfoLevel( InfoHomalgToCAS, 4 );
     elif mode = "picto" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         HOMALG_IO.DirectoryForTemporaryFiles := "/dev/shm/";
-        SetInfoLevel( InfoIO_ForHomalg, 4 );
+        SetInfoLevel( InfoHomalgToCAS, 4 );
     fi;
     
     CallFuncList( homalgMode, arg );

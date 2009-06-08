@@ -4,7 +4,7 @@
 
 <!--
 
-  IO_ForHomalg.xml          IO_ForHomalg package documentation            Mohamed Barakat
+  HomalgToCAS.xml          HomalgToCAS package documentation            Mohamed Barakat
                                                                             Thomas Breuer
                                                                            Simon Goertzen
                                                                             Frank Luebeck
@@ -15,11 +15,11 @@
 
 -->
 
-<Book Name="IO_ForHomalg">
+<Book Name="HomalgToCAS">
 
 <TitlePage>
-    <Title>GAP 4 Package <Package>IO_ForHomalg</Package></Title>
-    <Subtitle>IO_ForHomalg --- Use the IO Package for homalg</Subtitle>
+    <Title>GAP 4 Package <Package>HomalgToCAS</Package></Title>
+    <Subtitle>HomalgToCAS --- Use the IO Package for homalg</Subtitle>
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
@@ -77,7 +77,7 @@ Germany
 <#Include SYSTEM "examples.xml">
 </Body>
 
-<Bibliography Databases="IO_ForHomalg"/>
+<Bibliography Databases="HomalgToCAS"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

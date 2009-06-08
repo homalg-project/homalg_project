@@ -6,9 +6,9 @@
 
 LoadPackage("GAPDoc");
 
-MakeGAPDocDoc("doc", "IO_ForHomalg", [], "IO_ForHomalg");
+MakeGAPDocDoc("doc", "HomalgToCAS", [], "HomalgToCAS");
 
-GAPDocManualLab("IO_ForHomalg");
+GAPDocManualLab("HomalgToCAS");
 
 quit;
 

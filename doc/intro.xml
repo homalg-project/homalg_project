@@ -1,6 +1,6 @@
 <!-- 
 
-  intro.xml             IO_ForHomalg package documentation         Mohamed Barakat
+  intro.xml             HomalgToCAS package documentation          Mohamed Barakat
                                                                     Simon Goertzen
 
          Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
@@ -16,7 +16,7 @@ behind the package.
 <Section Label="philosophy">
 <Heading>Philosophy</Heading>
 
-This package is about how to implement rings for the GAP package homalg. To be written further.
+To be written.
 </Section>
 
 <Section Label="overview">

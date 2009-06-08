@@ -1,30 +1,28 @@
 #############################################################################
 ##
-##  init.g                    IO_ForHomalg package           Mohamed Barakat
+##  init.g                    HomalgToCAS package            Mohamed Barakat
+##                                                             Thomas Breuer
 ##                                                            Simon Goertzen
-##                                                           Max Neunhoeffer
+##                                                              Frank Lübeck
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Reading the declaration part of the IO_ForHomalg package.
+##  Reading the declaration part of the HomalgToCAS package.
 ##
 #############################################################################
 
 ## general stuff
-ReadPackage( "IO_ForHomalg", "gap/IO_ForHomalg.gd" );
+ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gd" );
 
 ## pointers on external objects
-ReadPackage( "IO_ForHomalg", "gap/homalgExternalObject.gd" );
-
-## wrappers to some functionality of the IO package of Max
-ReadPackage( "IO_ForHomalg", "gap/IO.gd" );
+ReadPackage( "HomalgToCAS", "gap/homalgExternalObject.gd" );
 
 ## external rings
-ReadPackage( "IO_ForHomalg", "gap/HomalgExternalRing.gd" );
+ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gd" );
 
 ## external matrices
-ReadPackage( "IO_ForHomalg", "gap/HomalgExternalMatrix.gd" );
+ReadPackage( "HomalgToCAS", "gap/HomalgExternalMatrix.gd" );
 
 ## homalgSendBlocking
-ReadPackage( "IO_ForHomalg", "gap/HomalgToCAS.gd" );
+ReadPackage( "HomalgToCAS", "gap/homalgSendBlocking.gd" );
 

@@ -1,9 +1,9 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `IO_ForHomalg'             Mohamed Barakat
+##  PackageInfo.g for the package `HomalgToCAS'              Mohamed Barakat
+##                                                             Thomas Breuer
 ##                                                            Simon Goertzen
-##                                                           Max Neunhoeffer
-##                                                            Daniel Robertz
+##                                                              Frank Lübeck
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
@@ -21,11 +21,11 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "IO_ForHomalg",
+PackageName := "HomalgToCAS",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "IO_ForHomalg - IO Capabilities for the homalg Project",
+Subtitle := "HomalgToCAS - A window to the outer world",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -46,7 +46,7 @@ Date := "05/06/2009",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://homalg.math.rwth-aachen.de/IO_ForHomalg",
+ArchiveURL := "http://homalg.math.rwth-aachen.de/HomalgToCAS",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -185,27 +185,10 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Neunhöffer",
-    FirstNames    := "Max",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    Email         := "neunhoef@mcs.st-and.ac.uk",
-    WWWHome       := "http://www-groups.mcs.st-and.ac.uk/~neunhoef/",
-    PostalAddress := Concatenation( [
-                       "Max Neunhöffer\n",
-                       "School of Mathematics and Statistics \n",
-                       "Mathematical Institute \n",
-                       "North Haugh\n",
-                       "St Andrews, Fife KY16 9SS \n",
-                       "Scotland, UK" ] ),
-    Place         := "St Andrews",
-    Institution   := "St Andrews University"
-  ),
-  rec(
     LastName      := "Robertz",
     FirstNames    := "Daniel",
     IsAuthor      := true,
-    IsMaintainer  := false,
+    IsMaintainer  := true,
     Email         := "daniel@momo.math.rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel/",
     PostalAddress := Concatenation( [
@@ -251,9 +234,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://homalg.math.rwth-aachen.de/IO_ForHomalg/README.IO_ForHomalg",
+  "http://homalg.math.rwth-aachen.de/HomalgToCAS/README.HomalgToCAS",
 PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/IO_ForHomalg/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/HomalgToCAS/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -301,10 +284,10 @@ PackageInfoURL :=
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "IO_ForHomalg",
+  BookName  := "HomalgToCAS",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/IO_ForHomalg/IO_ForHomalg.tar.gz",
+    "http://wwwb.math.rwth-aachen.de/~barakat/gap/HomalgToCAS/HomalgToCAS.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -313,7 +296,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "IO_ForHomalg - IO Capabilities for the GAP homalg Project",
+  LongTitle := "HomalgToCAS - A window to the outer world",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -329,7 +312,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["IO", ">= 2.3"], ["homalg", ">= 2009.02.13"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2009.02.13"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -362,7 +345,7 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  IO_ForHomalg ", ~.Version, "\n",
+  "Loading  HomalgToCAS ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
@@ -373,9 +356,7 @@ BannerString := Concatenation(
         " (", ~.Persons[4].WWWHome, ")\n",
   "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
         " (", ~.Persons[5].WWWHome, ")\n",
-  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
-        " (", ~.Persons[6].WWWHome, ")\n",
-  "For help, type: ?IO_ForHomalg package \n",
+  "For help, type: ?HomalgToCAS package \n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
@@ -391,7 +372,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := [ "IO", "streams" ]
+Keywords := [ "homalgSendBlocking", "homalgExternalObject", "HomalgExternalRing", "HomalgExternalRingElement", "HomalgExternalMatrix" ]
 
 ));
 
