@@ -14,14 +14,14 @@
 #
 ####################################
 
-# a new representations for the GAP-category IsInternalMatrixHull:
+# a new representation for the GAP-category IsInternalMatrixHull:
 
 ##
 DeclareRepresentation( "IshomalgInternalMatrixHullRep",
         IsInternalMatrixHull,
         [ ] );
 
-# a new representations for the GAP-category IsHomalgMatrix:
+# a new representation for the GAP-category IsHomalgMatrix:
 
 ##  <#GAPDoc Label="IsHomalgInternalMatrixRep">
 ##  <ManSection>
@@ -1320,16 +1320,16 @@ end );
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      One can split the input string over several lines using the backslash character '\' to end each line
-##      <Log><![CDATA[
+##      <Example><![CDATA[
 ##  gap> m := HomalgMatrix( "[ \
-##  1, 2, 3, \
-##  4, 5, 6  \
-##  ]", 2, 3, ZZ );
+##  > 1, 2, 3, \
+##  > 4, 5, 6  \
+##  > ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
-##  ]]></Log>
+##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

@@ -484,7 +484,11 @@ end );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -2, -4,   0, 1, 4, 7,   1, 0, -2, -4 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -2, -4, \
+##  > 0, 1,  4,  7, \
+##  > 1, 0, -2, -4  \
+##  > ]", 3, 4, ZZ );;
 ##  <A homalg internal 3 by 4 matrix>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -874,7 +878,11 @@ end );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -2, -4,   0, 1, 4, 7,   1, 0, -2, -4 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -2, -4, \
+##  > 0, 1,  4,  7, \
+##  > 1, 0, -2, -4  \
+##  > ]", 3, 4, ZZ );;
 ##  <A homalg internal 3 by 4 matrix>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>

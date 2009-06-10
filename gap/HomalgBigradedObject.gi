@@ -18,7 +18,7 @@
 #
 ####################################
 
-# a new representations for the GAP-category IsHomalgBigradedObject
+# a new representation for the GAP-category IsHomalgBigradedObject
 
 ##  <#GAPDoc Label="IsBigradedObjectOfFinitelyPresentedObjectsRep">
 ##  <ManSection>

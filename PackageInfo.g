@@ -303,7 +303,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["homological", "ext", "tor"]
+Keywords := ["homological", "filtration", "bicomplex", "spectral sequence", "Grothendieck", "functor", "ext", "tor"]
 
 ));
 

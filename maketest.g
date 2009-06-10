@@ -43,6 +43,10 @@ list := [
          "../gap/Tools.gi",
          "../tst/RHom_Z.g",
          "../tst/LTensorProduct_Z.g",
+         "../tst/ExtExt.g",
+         "../tst/Purity.g",
+         "../tst/torext.g",
+         "../tst/TorExt.g",
          ];
 
 TestManualExamples( "doc", "homalg.xml", list );

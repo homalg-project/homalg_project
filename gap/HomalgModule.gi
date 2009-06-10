@@ -1373,7 +1373,10 @@ end );
 ##      This method performs side effects on its argument <A>M</A> and returns it.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> M := HomalgMatrix( "[ \
+##  > 2, 3, 4, \
+##  > 5, 6, 7  \
+##  > ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-zero left module presented by 2 relations for 3 generators>
@@ -2049,7 +2052,10 @@ end );
 ##      rows of the &homalg; matrix <A>mat</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> M := HomalgMatrix( "[ \
+##  > 2, 3, 4, \
+##  > 5, 6, 7  \
+##  > ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-zero left module presented by 2 relations for 3 generators>
@@ -2179,7 +2185,10 @@ end );
 ##      columns of the &homalg; matrix <A>mat</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  gap> M := HomalgMatrix( "[ \
+##  > 2, 3, 4, \
+##  > 5, 6, 7  \
+##  > ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := RightPresentation( M );
 ##  <A right module on 2 generators satisfying 3 relations>

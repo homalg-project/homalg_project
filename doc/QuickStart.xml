@@ -4,12 +4,40 @@
 
   QuickStart.xml            homalg package documentation            Mohamed Barakat
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen
 
 -->
 
 <Chapter Label="QuickStart">
 <Heading>Quick Start</Heading>
+
+This chapter should give you a quick guide to create your first example in &homalg;.
+
+<Section Label="Why ZZ">
+<Heading>Why are all examples in this manual over &ZZ; or <M>&ZZ;/m&ZZ;</M>?</Heading>
+
+As the reader might notice, all examples in this manual will be either
+over &ZZ; or over one of its residue class rings
+<M>&ZZ;/m&ZZ;</M>. There are two reasons for this. The first reason is
+that &GAP; does not natively support rings other than &ZZ; in a
+<E>sufficient</E> way. We say that a computer algebra system
+<Q>sufficiently supports</Q> a ring <M>R</M>, if it contains
+procedures to effectively solve one-sided inhomogeneous linear systems
+<M>XA=B</M> and <M>AX=B</M> with coefficients over <M>R</M>.
+
+<P/>
+
+The second and more important reason is to underline the fact the all
+effective homological constructions has only as much to do with the
+Gröbnerbasis algorithm as they do with the Hermite algorithm for the
+ring &ZZ;; they are both used to effectively solve inhomogeneous
+linear systems over the respective ring. And &homalg; is designed to
+use rings and matrices over these rings together with all their
+operations as a black box. In other words: Because &homalg; works
+for <M>&ZZ;</M>, it works by its design for all other computable rings
+(see also <Ref Sect="black box" Text="The black box concept"/>).
+
+</Section>
 
 <Section Label="QuickStart:LoadPackage(ExamplesForHomalg)">
 <Heading>LoadPackage( "&ExamplesForHomalg;" );</Heading>

@@ -989,7 +989,11 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -3, -6, \
+##  > 0, 1,  6, 11, \
+##  > 1, 0, -3, -6  \
+##  > ]", 3, 4, ZZ );;
 ##  gap> phi := HomalgMap( mat, M, N );;
 ##  gap> IsMorphism( phi );
 ##  true
@@ -1057,7 +1061,11 @@ InstallFunctor( functor_Cokernel );
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -3, -6, \
+##  > 0, 1,  6, 11, \
+##  > 1, 0, -3, -6  \
+##  > ]", 3, 4, ZZ );;
 ##  gap> phi := HomalgMap( mat, M, N );;
 ##  gap> IsMorphism( phi );
 ##  true
@@ -1107,7 +1115,11 @@ InstallFunctorOnObjects( functor_ImageSubmodule );
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -3, -6, \
+##  > 0, 1,  6, 11, \
+##  > 1, 0, -3, -6  \
+##  > ]", 3, 4, ZZ );;
 ##  gap> phi := HomalgMap( mat, M, N );;
 ##  gap> IsMorphism( phi );
 ##  true
@@ -1176,7 +1188,12 @@ InstallFunctor( functor_Kernel );
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 3, 3, 3,   0, 3, 10, 17,   1, 3, 3, 3,  0, 0, 0, 0 ]", 4, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 3,  3,  3, \
+##  > 0, 3, 10, 17, \
+##  > 1, 3,  3,  3, \
+##  > 0, 0,  0,  0  \
+##  > ]", 4, 4, ZZ );;
 ##  gap> phi := HomalgMap( mat, M, N );;
 ##  gap> IsMorphism( phi );
 ##  true
@@ -1233,7 +1250,11 @@ InstallFunctor( functor_DefectOfExactness );
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -3, -6, \
+##  > 0, 1,  6, 11, \
+##  > 1, 0, -3, -6  \
+##  > ]", 3, 4, ZZ );;
 ##  gap> phi := HomalgMap( mat, M, N );;
 ##  gap> IsMorphism( phi );
 ##  true
@@ -1446,7 +1467,11 @@ InstallFunctor( Functor_Hom );
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
 ##  <A non-zero left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ 1, 0, -3, -6,   0, 1, 6, 11,   1, 0, -3, -6 ]", 3, 4, ZZ );;
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -3, -6, \
+##  > 0, 1,  6, 11, \
+##  > 1, 0, -3, -6  \
+##  > ]", 3, 4, ZZ );;
 ##  gap> phi := HomalgMap( mat, M, N );;
 ##  gap> IsMorphism( phi );
 ##  true

@@ -3,18 +3,9 @@ all: doc test
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		doc/homalg.xml doc/title.xml \
-		doc/intro.xml doc/install.xml \
-		doc/homalg.bib gap/*.gd gap/*.gi \
-		doc/Rings.xml doc/Matrices.xml \
-		doc/Relations.xml doc/Generators.xml \
-		doc/Modules.xml doc/Maps.xml \
-		doc/Complexes.xml doc/ChainMaps.xml \
-		doc/Bicomplexes.xml doc/BigradedObjects.xml \
-		doc/SpectralSequences.xml doc/Functors.xml \
-		doc/examples.xml doc/Project.xml \
-		doc/appendix.xml PackageInfo.g VERSION \
-		tst/*.g
+		PackageInfo.g VERSION \
+		doc/homalg.bib doc/*.xml \
+		gap/*.gd gap/*.gi tst/*.g
 	        gapL makedoc.g
 
 clean:

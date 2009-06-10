@@ -101,12 +101,12 @@ files.
 
 <Row>
   <Item><F>HomalgModule</F></Item>
-  <Item>modules allowing several presentations</Item>
+  <Item>modules and submodules allowing several</Item>
 </Row>
 
 <Row>
   <Item></Item>
-  <Item>with their transition matrices</Item>
+  <Item>presentations linked with transition matrices</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
@@ -208,6 +208,13 @@ files.
 <Row>
   <Item></Item>
   <Item>and composition of functors</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgDiagram</F></Item>
+  <Item>Betti diagrams</Item>
 </Row>
 
 </Table>
@@ -330,17 +337,32 @@ In the following CAS or CASystem mean computer algebra systems.
 
 <Row>
   <Item><F>SpectralSequences</F></Item>
-  <Item>spectral sequences of bicomplexes,</Item>
+  <Item>Grothendieck bicomplexes associated to two</Item>
 </Row>
 
 <Row>
   <Item></Item>
-  <Item>induced filtration of total defects,</Item>
+  <Item>composable functors, spectral sequences</Item>
 </Row>
 
 <Row>
   <Item></Item>
-  <Item>the Grothendieck spectral sequence</Item>
+  <Item>of bicomplexes, Grothendieck spectral sequences</Item>
+</Row>
+
+<Row>
+  <Item><F>Filtrations</F></Item>
+  <Item>spectral filtrations, i.e. filtrations induced</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>by spectral sequences of bicomplexes,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>purity filtration</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
