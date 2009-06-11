@@ -32,7 +32,8 @@ InstallValue( HOMALG_IO_Macaulay2,
             setinvol := _Macaulay2_SetInvolution,## a Macaulay2 specific
             define := "=",
             prompt := "\033[01mM2>\033[0m ",
-            output_prompt := "\033[1;30;43m<M2\033[0m "
+            output_prompt := "\033[1;30;43m<M2\033[0m ",
+            banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
            )
 );
             

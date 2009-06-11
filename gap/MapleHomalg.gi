@@ -39,6 +39,13 @@ InstallValue( HOMALG_IO_Maple,
             prompt := "\033[01mmaple>\033[0m ",
             output_prompt := "\033[1;34;47m<maple\033[0m ",
             display_color := "\033[0;34m",
+            #banner :=  function( s ) Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } ); end,	## this line is commented since we must start Maple using the -q option, which unfortunately also suppresses the Maple banner
+            banner := "\
+    |\\^/|     Launching Maple\n\
+._|\\|   |/|_. Copyright (c) Maplesoft, a division of Waterloo Maple Inc.\n\
+ \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
+ <____ ____>  Waterloo Maple Inc.\n\
+      |       ",
            )
 );
 
