@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  IO_ForHomalg.gd           IO_ForHomalg package           Mohamed Barakat
+##  HomalgToCAS.gd           HomalgToCAS package           Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for IO_ForHomalg.
+##  Declaration stuff for HomalgToCAS.
 ##
 #############################################################################
 

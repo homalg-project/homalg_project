@@ -5,7 +5,7 @@
 ##                                                            Simon Goertzen
 ##                                                              Frank Lübeck
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Reading the declaration part of the HomalgToCAS package.
 ##
@@ -26,3 +26,5 @@ ReadPackage( "HomalgToCAS", "gap/HomalgExternalMatrix.gd" );
 ## homalgSendBlocking
 ReadPackage( "HomalgToCAS", "gap/homalgSendBlocking.gd" );
 
+## IO
+ReadPackage( "HomalgToCAS", "gap/IO.gd" );

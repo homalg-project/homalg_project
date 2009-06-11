@@ -4,9 +4,8 @@
 ##                                                             Thomas Breuer
 ##                                                            Simon Goertzen
 ##                                                              Frank Lübeck
-##                                                           
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Reading the implementation part of the HomalgToCAS package.
 ##
@@ -18,9 +17,6 @@ ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gi" );
 ## pointers on external objects
 ReadPackage( "HomalgToCAS", "gap/homalgExternalObject.gi" );
 
-## wrappers to some functionality of the IO package of Max
-ReadPackage( "HomalgToCAS", "gap/IO.gi" );
-
 ## external rings
 ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gi" );
 
@@ -30,3 +26,5 @@ ReadPackage( "HomalgToCAS", "gap/HomalgExternalMatrix.gi" );
 ## homalgSendBlocking
 ReadPackage( "HomalgToCAS", "gap/homalgSendBlocking.gi" );
 
+## IO
+ReadPackage( "HomalgToCAS", "gap/IO.gi" );

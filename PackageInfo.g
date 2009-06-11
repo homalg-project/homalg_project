@@ -30,13 +30,13 @@ Subtitle := "HomalgToCAS - A window to the outer world",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.06.05",
+Version := "2009.06.08",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "05/06/2009",
+Date := "08/06/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -184,22 +184,6 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
-  rec(
-    LastName      := "Robertz",
-    FirstNames    := "Daniel",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "daniel@momo.math.rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel/",
-    PostalAddress := Concatenation( [
-                       "Daniel Robertz\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
-  ),
 # provide such a record for each author and/or maintainer ...
   
 ],
@@ -312,7 +296,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2009.02.13"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["IO", ">= 2.3"], ["homalg", ">= 2009.02.13"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -354,8 +338,6 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
   "For help, type: ?HomalgToCAS package \n",
   "----------------------------------------------------------------\n" ),
 
@@ -372,7 +354,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := [ "homalgSendBlocking", "homalgExternalObject", "HomalgExternalRing", "HomalgExternalRingElement", "HomalgExternalMatrix" ]
+Keywords := [ "homalgExternalObject", "CreateHomalgExternalRing", "HomalgExternalRingElement", "IsHomalgExternalMatrixRep", "LaunchCAS", "TerminateCAS", "homalgSendBlocking" ]
 
 ));
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgExternalRing.gi     IO_ForHomalg package           Mohamed Barakat
+##  HomalgExternalRing.gi     HomalgToCAS package            Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -325,7 +325,7 @@ InstallGlobalFunction( HomalgExternalRingElement,
         ## homalgSendBlocking using the option "return_ring_element"
         ## will eventually lead to an error: r1 and r2 will have
         ## the SAME pointer homalg_variable_XXX, and if r1 gets
-        ## deleted by the GAP garbage collector, IO_ForHomalg will
+        ## deleted by the GAP garbage collector, HomalgToCAS will
         ## delete the pointer in the external CAS (this is because
         ## r1 is registered in the weak pointer list of external
         ## objects associated to the stream of the ring), and

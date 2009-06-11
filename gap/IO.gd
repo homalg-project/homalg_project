@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  IO.gd                     IO_ForHomalg package           Max Neunhoeffer
+##  IO.gi                     HomalgToCAS package            Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff to use the GAP4 I/O package.
+##  Declaration stuff to launch and terminate external CASystems.
 ##
 #############################################################################
 
@@ -16,13 +16,7 @@
 
 DeclareGlobalFunction( "TerminateCAS" );
 
-DeclareGlobalFunction( "SendForkingToCAS" );
-
-DeclareGlobalFunction( "SendToCAS" );
-
-DeclareGlobalFunction( "CheckOutputOfCAS" );
-
-DeclareGlobalFunction( "SendBlockingToCAS" );
-
 DeclareGlobalFunction( "LaunchCAS" );
+
+DeclareGlobalFunction( "LaunchCAS_IO_ForHomalg" );
 
