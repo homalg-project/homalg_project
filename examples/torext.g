@@ -1,9 +1,17 @@
 ##  <#GAPDoc Label="TorExt-Grothendieck">
 ##  <Subsection Label="TorExt-Grothendieck">
 ##  <Heading>TorExt-Grothendieck</Heading>
+##  This is Example B.5 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> wmat := HomalgMatrix( "[ x*y,y*z,z,0,0,  x^3*z,x^2*z^2,0,x*z^2,-z^2, x^4,x^3*z,0,x^2*z,-x*z, 0,0,x*y,-y^2,x^2-1, 0,0,x^2*z,-x*y*z,y*z, 0,0,x^2*y-x^2,-x*y^2+x*y,y^2-y ]", 6, 5, Qxyz );
+##  gap> wmat := HomalgMatrix( "[ \
+##  > x*y,  y*z,    z,        0,         0,    \
+##  > x^3*z,x^2*z^2,0,        x*z^2,     -z^2, \
+##  > x^4,  x^3*z,  0,        x^2*z,     -x*z, \
+##  > 0,    0,      x*y,      -y^2,      x^2-1,\
+##  > 0,    0,      x^2*z,    -x*y*z,    y*z,  \
+##  > 0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \
+##  > ]", 6, 5, Qxyz );
 ##  <A homalg external 6 by 5 matrix>
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 6 relations for 5 generators>

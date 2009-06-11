@@ -1,13 +1,22 @@
 ##  <#GAPDoc Label="CodegreeOfPurity">
 ##  <Subsection Label="CodegreeOfPurity">
 ##  <Heading>CodegreeOfPurity</Heading>
+##  This is Example B.7 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> vmat := HomalgMatrix( "[ 0,0,x,-z, x*z,z^2,y,0, x^2,x*z,0,y ]", 3, 4, Qxyz );
+##  gap> vmat := HomalgMatrix( "[ \
+##  > 0,  0,  x,-z, \
+##  > x*z,z^2,y,0,  \
+##  > x^2,x*z,0,y   \
+##  > ]", 3, 4, Qxyz );
 ##  <A homalg external 3 by 4 matrix>
 ##  gap> V := LeftPresentation( vmat );
 ##  <A non-zero left module presented by 3 relations for 4 generators>
-##  gap> wmat := HomalgMatrix( "[ 0,0,x,-y, x*y,y*z,z,0, x^2,x*z,0,z ]", 3, 4, Qxyz );
+##  gap> wmat := HomalgMatrix( "[ \
+##  > 0,  0,  x,-y, \
+##  > x*y,y*z,z,0,  \
+##  > x^2,x*z,0,z   \
+##  > ]", 3, 4, Qxyz );
 ##  <A homalg external 3 by 4 matrix>
 ##  gap> W := LeftPresentation( wmat );
 ##  <A non-zero left module presented by 3 relations for 4 generators>

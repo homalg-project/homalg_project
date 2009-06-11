@@ -1,10 +1,20 @@
 ##  <#GAPDoc Label="A3_Purity">
 ##  <Subsection Label="A3_Purity">
 ##  <Heading>A3_Purity</Heading>
+##  This is Example B.4 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> A3 := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );;
-##  gap> nmat := HomalgMatrix( "[ 3*Dy*Dz-Dz^2+Dx+3*Dy-Dz,3*Dy*Dz-Dz^2, Dx*Dz+Dz^2+Dz,Dx*Dz+Dz^2, Dx*Dy,0, Dz^2-Dx+Dz,3*Dx*Dy+Dz^2, Dx^2,0, -Dz^2+Dx-Dz,3*Dx^2-Dz^2, Dz^3-Dx*Dz+Dz^2,Dz^3, 2*x*Dz^2-2*x*Dx+2*x*Dz+3*Dx+3*Dz+3,2*x*Dz^2+3*Dx+3*Dz ]", 8, 2, A3 );
+##  gap> nmat := HomalgMatrix( "[ \
+##  > 3*Dy*Dz-Dz^2+Dx+3*Dy-Dz,           3*Dy*Dz-Dz^2,     \
+##  > Dx*Dz+Dz^2+Dz,                     Dx*Dz+Dz^2,       \
+##  > Dx*Dy,                             0,                \
+##  > Dz^2-Dx+Dz,                        3*Dx*Dy+Dz^2,     \
+##  > Dx^2,                              0,                \
+##  > -Dz^2+Dx-Dz,                       3*Dx^2-Dz^2,      \
+##  > Dz^3-Dx*Dz+Dz^2,                   Dz^3,             \
+##  > 2*x*Dz^2-2*x*Dx+2*x*Dz+3*Dx+3*Dz+3,2*x*Dz^2+3*Dx+3*Dz\
+##  > ]", 8, 2, A3 );
 ##  <A homalg external 8 by 2 matrix>
 ##  gap> N := LeftPresentation( nmat );
 ##  <A left module presented by 8 relations for 2 generators>

@@ -11,7 +11,7 @@
 -->
 <TitlePage>
   <Title>GAP 4 Package <Package>ExamplesForHomalg</Package></Title>
-  <Subtitle>ExamplesForHomalg --- Examples for the GAP Package homalg</Subtitle>
+  <Subtitle>ExamplesForHomalg --- Examples for the GAP package homalg</Subtitle>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -45,10 +45,10 @@
     <Email>markus.lange.hegermann@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
   </Author>
-  <Date>October 2008</Date>
+  <Date>May 2009</Date>
   
   <Copyright>
-    &copyright; 2008 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
+    &copyright; 2008-2009 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.

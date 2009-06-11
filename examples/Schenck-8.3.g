@@ -1,12 +1,13 @@
 ##  <#GAPDoc Label="Schenck-8.3">
 ##  <Subsection Label="Schenck-8.3">
 ##  <Heading>Schenck-8.3</Heading>
+##  This is an example from Section 8.3 in <Cite Key="Sch"/>.
 ##  <Example><![CDATA[
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";;
 ##  gap> jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, R );
 ##  <A homalg external 1 by 5 matrix>
 ##  gap> J := RightPresentationWithDegrees( jmat );
-##  <A cyclic graded right module on a cyclic generator satisfying 5 relations>
+##  <A graded cyclic right module on a cyclic generator satisfying 5 relations>
 ##  gap> Jr := Resolution( J );
 ##  <A right acyclic complex containing 3 morphisms of right modules at degrees
 ##  [ 0 .. 3 ]>

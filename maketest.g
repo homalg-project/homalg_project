@@ -4,8 +4,9 @@
 ##  Call this with GAP.
 ##
 
-LoadPackage( "Sheaves" );
 LoadPackage( "ExamplesForHomalg" );
+
+LoadPackage( "IO_ForHomalg" );
 
 HOMALG_IO.show_banners := false;
 
@@ -17,8 +18,6 @@ list := [
          "../examples/Schenck-3.2.g",
          "../examples/Schenck-8.3.g",
          "../examples/Schenck-8.3.3.g",
-         "../examples/DE-2.2.g",
-         "../examples/DE-Code.g",
          "../examples/ExtExt.g",
          "../examples/Purity.g",
          "../examples/A3_Purity.g",

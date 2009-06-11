@@ -19,9 +19,9 @@ This chapter gives examples for the usage of this package.
 <#Include Label="ExtExt">
 <#Include Label="Purity">
 <#Include Label="A3_Purity">
-<#Include Label="CodegreeOfPurity">
 <#Include Label="TorExt-Grothendieck">
 <#Include Label="TorExt">
+<#Include Label="CodegreeOfPurity">
 
 </Section>
 
@@ -31,8 +31,6 @@ This chapter gives examples for the usage of this package.
 <#Include Label="Schenck-3.2">
 <#Include Label="Schenck-8.3">
 <#Include Label="Schenck-8.3.3">
-<#Include Label="DE-2.2">
-<#Include Label="DE-Code">
 
 </Section>
 
