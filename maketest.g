@@ -4,19 +4,18 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "IO_ForHomalg" );
+
+HOMALG_IO.show_banners := false;
+
 LoadPackage( "GAPDoc" );
-
-SetGapDocLaTeXOptions( "utf8" );
-
-bib := ParseBibFiles( "doc/IO_ForHomalg.bib" );
-WriteBibXMLextFile( "doc/IO_ForHomalgBib.xml", bib );
 
 list := [
          "../gap/IO_ForHomalg.gd",
          "../gap/IO_ForHomalg.gi",
          ];
 
-MakeGAPDocDoc( "doc", "IO_ForHomalg", list, "IO_ForHomalg" );
+TestManualExamples( "doc", "IO_ForHomalg.xml", list );
 
 GAPDocManualLab("IO_ForHomalg");
 

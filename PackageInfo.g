@@ -1,7 +1,7 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `IO_ForHomalg'             Mohamed Barakat
-##                                                            Simon Goertzen
+##  PackageInfo.g for the package `IO_ForHomalg'              Thomas Bächler
+##                                                           Mohamed Barakat
 ##                                                           Max Neunhoeffer
 ##                                                            Daniel Robertz
 ##
@@ -30,13 +30,13 @@ Subtitle := "IO_ForHomalg - IO Capabilities for the homalg Project",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.06.05",
+Version := "2009.06.08",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "05/06/2009",
+Date := "08/06/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -120,6 +120,22 @@ ArchiveFormats := ".tar.gz",
 ##     )
 ##  
 Persons := [
+  rec(
+    LastName      := "Bächler",
+    FirstNames    := "Thomas",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "thomas@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
+    PostalAddress := Concatenation( [
+                       "Thomas Bächler\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
   rec( 
     LastName      := "Barakat",
     FirstNames    := "Mohamed",
@@ -130,54 +146,6 @@ Persons := [
     PostalAddress := Concatenation( [
                        "Mohamed Barakat\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
-  ),
-  rec(
-    LastName      := "Breuer",
-    FirstNames    := "Thomas",
-    IsAuthor      := false,
-    IsMaintainer  := false,
-    Email         := "sam@math.rwth-aachen.de",
-    WWWHome       := "http://www.math.rwth-aachen.de/~Thomas.Breuer/",
-    PostalAddress := Concatenation( [
-                       "Thomas Breuer\n",
-                       "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
-  ),
-  rec(
-    LastName      := "Görtzen",
-    FirstNames    := "Simon",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "simon.goertzen@rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon/",
-    PostalAddress := Concatenation( [
-                       "Simon Görtzen\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
-                       "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
-  ),
-  rec(
-    LastName      := "Lübeck",
-    FirstNames    := "Frank",
-    IsAuthor      := false,
-    IsMaintainer  := false,
-    Email         := "frank.luebeck@@math.rwth-aachen.de",
-    WWWHome       := "http://www.math.rwth-aachen.de/~Frank.Luebeck/",
-    PostalAddress := Concatenation( [
-                       "Frank Lübeck\n",
-                       "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
                        "Germany" ] ),
@@ -329,7 +297,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["IO", ">= 2.3"], ["homalg", ">= 2009.02.13"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["IO", ">= 2.3"], ["HomalgToCAS", ">= 2009.06.08"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -371,10 +339,6 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
-  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
-        " (", ~.Persons[6].WWWHome, ")\n",
   "For help, type: ?IO_ForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 

@@ -1,103 +1,23 @@
 #############################################################################
 ##
-##  IO.gi                     IO_ForHomalg package           Max Neunhoeffer
+##  IO.gi                     IO_ForHomalg package            Thomas Bächler
 ##                                                           Mohamed Barakat
+##                                                           Max Neunhoeffer
+##                                                            Daniel Robertz
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff to use the GAP4 I/O package.
+##  Implementation stuff to use the GAP4 I/O package of Max Neunhoeffer.
 ##
 #############################################################################
 
 ####################################
 #
-# constructor functions:
+# install global functions:
 #
 ####################################
 
 ##
-InstallGlobalFunction( TerminateCAS,
-  function( arg )
-    local nargs, container, weak_pointers, l, pids, i, streams, s;
-    
-    nargs := Length( arg );
-    
-    if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
-        
-        container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
-        
-        weak_pointers := container!.weak_pointers;
-        
-        l := container!.counter;
-        
-        pids := [ ];
-        
-        for i in [ 1 .. l ] do
-            if IsBoundElmWPObj( weak_pointers, i ) then
-                Add( pids, homalgExternalCASystemPID( weak_pointers[i] ) );
-            fi;
-        od;
-        
-        pids := DuplicateFreeList( pids );
-        
-        streams := container!.streams;
-        
-        l := Length( streams );
-        
-        for i in [ 1 .. l ] do
-            if not streams[i].pid in pids then
-                TerminateCAS( streams[i] );
-                Unbind( streams[i] );
-            fi;
-        od;
-        
-        ## don't replace the following by DuplicateFreeList since
-        ## it runs into a "no method found"-error when comparing subobjects:
-        pids := [ ];
-        l := [ ];
-        
-        for s in streams do
-            if not s.pid in pids then
-                Add( l, s );
-                Add( pids, s.pid );
-            fi;
-        od;
-        
-        container!.streams := l;
-        
-    elif nargs > 0 then
-        
-        if IsRecord( arg[1] ) and IsBound( arg[1].lines ) then
-            
-            s := arg[1];
-            
-            if IsBound( s.TerminateCAS ) and IsFunction( s.TerminateCAS ) then
-                s.TerminateCAS( s );
-            else
-                IO_Close( s.stdin );
-                IO_Close( s.stdout );
-                IO_Close( s.stderr );
-                s.stdin := fail;
-                s.stdout := fail;
-                s.stderr := fail;
-            fi;
-            
-            if IsBound( arg[1].pid ) then
-                Print( "terminated the external CAS ", s.name, " with pid ", s.pid, "\n" );
-            else
-                Print( "terminated the external CAS ", s.name, "\n" );
-            fi;
-            
-        else
-            
-            TerminateCAS( homalgStream( arg[1] ) );
-            
-        fi;
-        
-    fi;
-    
-end );
-
 InstallGlobalFunction( SendForkingToCAS,
   function ( f, st )
     local  pid, len;
@@ -119,6 +39,7 @@ InstallGlobalFunction( SendForkingToCAS,
     
 end );
 
+##
 InstallGlobalFunction( SendToCAS,
   function( s, command )
     # Note that it is the responsibility of the caller of this
@@ -147,6 +68,7 @@ InstallGlobalFunction( SendToCAS,
     return pid;
 end );
 
+##
 InstallGlobalFunction( CheckOutputOfCAS,
   function( s )
     local READY, READY_LENGTH, CUT_POS_BEGIN, CUT_POS_END, SEARCH_READY_TWICE,
@@ -318,6 +240,7 @@ InstallGlobalFunction( CheckOutputOfCAS,
     
 end );
 
+##
 InstallGlobalFunction( SendBlockingToCAS,
   function( s, command )
     local l, nr, pid;
@@ -331,7 +254,8 @@ InstallGlobalFunction( SendBlockingToCAS,
     
 end );
 
-InstallGlobalFunction( LaunchCAS,
+##
+InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
   function( arg )
     local nargs, HOMALG_IO_CAS, executables, e, s;
     
@@ -339,115 +263,62 @@ InstallGlobalFunction( LaunchCAS,
     
     HOMALG_IO_CAS := arg[1];
     
-    if IsBound( arg[1].LaunchCAS ) then
-        
-        s := arg[1].LaunchCAS( arg );
-        
-        if s = fail then
-            Error( "the alternative launcher returned fail\n" );
-        fi;
-        
-    else
-        
-        executables := [ ];
-        
-        if nargs > 1 and IsStringRep( arg[2] ) then
-            Add( executables, arg[2] );
-        fi;
-        
-        if IsBound( HOMALG_IO_CAS.executable ) then
-            Add( executables, HOMALG_IO_CAS.executable );
-        fi;
-        
-        e := 1;
-        while true do
-            if IsBound( HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) ) then
-                Add( executables, HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) );
-                e := e + 1;
-            else
-                break;
-            fi;
-        od;
-        
-        if executables = [ ] then
-            Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
-        fi;
-        
-        for e in executables do
-            
-            s := Filename( DirectoriesSystemPrograms( ), e );
-            
-            if s <> fail then
-                s := IO_Popen3( s, HOMALG_IO_CAS.options );
-            fi;
-            
-            if s <> fail then
-                break;
-            fi;
-            
-        od;
-        
-        if s = fail then
-            Error( "found no ",  HOMALG_IO_CAS.executable, " executable in PATH while searching the following list:\n", executables, "\n" );
-        fi;
-        
-        s.stdout!.rbufsize := false;   # switch off buffering
-        s.stderr!.rbufsize := false;   # switch off buffering
-        
-        s.SendBlockingToCAS := SendBlockingToCAS;
-        
+    executables := [ ];
+    
+    if nargs > 1 and IsStringRep( arg[2] ) then
+        Add( executables, arg[2] );
     fi;
     
-    s.variable_name := HOMALG_IO.variable_name;
+    if IsBound( HOMALG_IO_CAS.executable ) then
+        Add( executables, HOMALG_IO_CAS.executable );
+    fi;
     
-    for e in NamesOfComponents( HOMALG_IO_CAS ) do
-        s.( e ) := HOMALG_IO_CAS.( e );
+    e := 1;
+    while true do
+        if IsBound( HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) ) then
+            Add( executables, HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) );
+            e := e + 1;
+        else
+            break;
+        fi;
     od;
     
-    if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true
-       and IsBound( s.display_color ) then
-        s.color_display := s.display_color;
+    if executables = [ ] then
+        Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
     fi;
     
-    if IsBound( HOMALG_IO.DeletePeriod ) and
-       ( IsPosInt( HOMALG_IO.DeletePeriod ) or IsBool( HOMALG_IO.DeletePeriod ) ) then
-        s.DeletePeriod := HOMALG_IO.DeletePeriod;
-    fi;
-    
-    s.HomalgExternalCallCounter := 0;
-    s.HomalgExternalVariableCounter := 0;
-    s.HomalgExternalCommandCounter := 0;
-    s.HomalgExternalOutputCounter := 0;
-    s.HomalgBackStreamMaximumLength := 0;
-    s.HomalgExternalWarningsCounter := 0;
-    
-    s.homalgExternalObjectsPointingToVariables :=
-      ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalObjects );
-    
-    s.SendBlockingToCAS( s, "\n" );
-    
-    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then
-        Print( "----------------------------------------------------------------\n" );
-        if IsBound( s.color_display ) then
-            Print( s.color_display );
+    for e in executables do
+        
+        s := Filename( DirectoriesSystemPrograms( ), e );
+        
+        if s <> fail then
+            s := IO_Popen3( s, HOMALG_IO_CAS.options );
         fi;
-        if s.cas = "maple" then
-            #Print( s.lines{ [ 1 .. Length( s.lines ) - 36 ] } );	## this line is commented since we must start Maple using the -q option, which unfortunately also suppresses the Maple banner
-            Print( "\
-    |\\^/|     Launching Maple\n\
-._|\\|   |/|_. Copyright (c) Maplesoft, a division of Waterloo Maple Inc.\n\
- \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
- <____ ____>  Waterloo Maple Inc.\n\
-      |       " );
-        elif s.cas = "macaulay2" then
-            Remove( s.errors, Length( s.errors ) );
-            Print( s.errors );
-        else
-            Print( s.lines );
+        
+        if s <> fail then
+            break;
         fi;
-        Print( "\033[0m\n----------------------------------------------------------------\n\n" );
+        
+    od;
+    
+    if s = fail then
+        Error( "found no ",  HOMALG_IO_CAS.executable, " executable in PATH while searching the following list:\n", executables, "\n" );
     fi;
+    
+    s.stdout!.rbufsize := false;   # switch off buffering
+    s.stderr!.rbufsize := false;   # switch off buffering
+    
+    s.SendBlockingToCAS := SendBlockingToCAS;
+    
+    s.TerminateCAS :=
+      function( s )
+        IO_Close( s.stdin );
+        IO_Close( s.stdout );
+        IO_Close( s.stderr );
+        s.stdin := fail;
+        s.stdout := fail;
+        s.stderr := fail;
+    end;
     
     return s;
     
