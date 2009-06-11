@@ -1,4 +1,4 @@
-Read( "homalg.g" );
+Read( "../examples/homalg.g" );
 LoadPackage( "RingsForHomalg" );
 b := true;
 nr := NrRows( imat );

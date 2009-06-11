@@ -41,12 +41,12 @@ list := [
          "../gap/BasicFunctors.gi",
          "../gap/Modules.gi",
          "../gap/Tools.gi",
-         "../tst/RHom_Z.g",
-         "../tst/LTensorProduct_Z.g",
-         "../tst/ExtExt.g",
-         "../tst/Purity.g",
-         "../tst/torext.g",
-         "../tst/TorExt.g",
+         "../examples/RHom_Z.g",
+         "../examples/LTensorProduct_Z.g",
+         "../examples/ExtExt.g",
+         "../examples/Purity.g",
+         "../examples/torext.g",
+         "../examples/TorExt.g",
          ];
 
 TestManualExamples( "doc", "homalg.xml", list );

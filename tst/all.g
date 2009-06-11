@@ -1,4 +1,4 @@
-Read( "homalg.g" );
+Read( "../examples/homalg.g" );
 Read( "gap_ZZ.g" );
 OnLessGenerators( W );
 B := BasisOfModule( W );
