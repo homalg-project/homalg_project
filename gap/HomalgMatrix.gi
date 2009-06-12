@@ -1348,8 +1348,8 @@ InstallGlobalFunction( HomalgMatrix,
                 return CallFuncList( CreateHomalgMatrixFromString, arg );
             fi;
             
-            if LoadPackage( "IO_ForHomalg" ) <> true then
-                Error( "the package IO_ForHomalg failed to load\n" );
+            if LoadPackage( "HomalgToCAS" ) <> true then
+                Error( "the package HomalgToCAS failed to load\n" );
             fi;
             
             return CallFuncList( ConvertHomalgMatrix, arg );
@@ -1368,8 +1368,8 @@ InstallGlobalFunction( HomalgMatrix,
             
             ar := Concatenation( [ M ], arg{[ 2 .. nargs ]} );
             
-            if LoadPackage( "IO_ForHomalg" ) <> true then
-                Error( "the package IO_ForHomalg failed to load\n" );
+            if LoadPackage( "HomalgToCAS" ) <> true then
+                Error( "the package HomalgToCAS failed to load\n" );
             fi;
             
             return CallFuncList( ConvertHomalgMatrix, ar );
@@ -2117,8 +2117,8 @@ InstallMethod( \*,
         
     fi;
     
-    if LoadPackage( "IO_ForHomalg" ) <> true then
-        Error( "the package IO_ForHomalg failed to load\n" );
+    if LoadPackage( "HomalgToCAS" ) <> true then
+        Error( "the package HomalgToCAS failed to load\n" );
     fi;
     
     mat := ConvertHomalgMatrix( m, R );
