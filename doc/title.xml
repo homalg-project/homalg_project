@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  title.xml                 IO_ForHomalg package documentation             Thomas Bächler
+                                                                          Mohamed Barakat
+                                                                          Max Neunhoeffer
+                                                                           Daniel Robertz
+
+  Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<TitlePage>
+  <Title>&IO_ForHomalg;</Title>
+  <Subtitle>Input/Output capabilities for &homalg;</Subtitle>
+  <TitleComment>(<E>this manual is still under construction</E>) <Br/><Br/>
+    This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/IO_ForHomalg/chap0.html</URL> <Br/><Br/>
+    An <B>offline</B> version should be included in the documentation subfolder of the package.
+  </TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Thomas Bächler
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>thomas@momo.math.rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+  </Author>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Universität des Saarlandes, <Br/>
+      66041 Saarbrücken, <Br/>
+      Building E2 4, <Br/>
+      Germany
+    </Address>
+    <Email>barakat@math.uni-sb.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Author>Max Neunhöffer
+    <Address>
+      St Andrews University,
+      School of Mathematics and Statistics,
+      Mathematical Institute,
+      North Haugh,
+      St Andrews, Fife KY16 9SS,
+      Scotland, UK
+    </Address>
+    <Email>daniel@momo.math.rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+  </Author>
+  <Author>Daniel Robertz
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>daniel@momo.math.rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+  </Author>
+  <Date>June 2009</Date>
+  
+  <Copyright>
+    &copyright; 2007-2009 by Thomas Bächler, Mohamed Barakat, Max Neunhöffer, and Daniel Robertz.<P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+</TitlePage>
