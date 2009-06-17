@@ -14,7 +14,7 @@ clean:
 test:	doc
 	gapL -x 80 maketest.g
 
-archive: doc
+archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/RingsForHomalg.tar.gz --exclude ".DS_Store" RingsForHomalg/doc/*.* RingsForHomalg/gap/*.{gi,gd} RingsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
 WEBPOS=~/gap/pkg/RingsForHomalg/public_html
@@ -29,6 +29,6 @@ towww: archive
 	cp README ${WEBPOS}/README.RingsForHomalg
 	cp doc/manual.pdf ${WEBPOS}/RingsForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 	cp ../tar/RingsForHomalg.tar.gz ${WEBPOS}
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 
