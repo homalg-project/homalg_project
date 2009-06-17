@@ -12,7 +12,7 @@
   <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>) <Br/><Br/>
     This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
-      <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg/chap0.html</URL> <Br/><Br/>
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg/chap0.html</URL> <Br/><Br/>
     An <B>offline</B> version should be included in the documentation subfolder of the package.
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
@@ -26,7 +26,7 @@
     <Email>barakat@math.uni-sb.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
-  <Date>May 2009</Date>
+  <Date>June 2009</Date>
   
   <Copyright>
     &copyright; 2007-2009 by Mohamed Barakat <P/>
@@ -36,8 +36,7 @@
   </Copyright>
   
 <Acknowledgements>
-  <Alt Not="Text"><URL Text="Max
-  Neunhöffer">http://www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
+  <Alt Not="Text"><URL Text="Max Neunhöffer">http://www-groups.mcs.st-and.ac.uk/~neunhoef/</URL></Alt>
   <Alt Only="Text">Max Neunhöffer</Alt> not only taught me the
   philosophy of object-oriented programming in &GAP4;, but also to
   what extent this philosophy is still unique among programming

@@ -376,7 +376,7 @@ authors and contributers of all packages in the project.
     systems?<Br/><Br/> A: No, unless they want to use more features of
     the external systems than those reflected by &homalg;. For this
     purpose, developers can use the unified communication interface
-    provideb by &IO_ForHomalg;. This is the interface used by
+    provideb by &HomalgToCAS;. This is the interface used by
     &homalg;.</Item>
 </List>
 

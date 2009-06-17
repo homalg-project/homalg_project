@@ -25,6 +25,7 @@
 	  <!ENTITY alexander "<Package>alexander</Package>">
 	  <!ENTITY Gauss "<Package>Gauss</Package>">
 	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+	  <!ENTITY HomalgToCAS "<Package>HomalgToCAS</Package>">
 	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
 	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
 	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
@@ -40,7 +41,7 @@
 
   homalg.xml          homalg package documentation              Mohamed Barakat
 
-  Copyright (C) 2007, Lehrstuhl B für Mathematik, RWTH-Aachen University
+  Copyright (C) 2007-2009, Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH-Aachen University
 
 -->
 

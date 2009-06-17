@@ -14,8 +14,8 @@ clean:
 test:	doc
 	gapL -x 80 maketest.g
 
-archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "tst/plesken" homalg/doc/*.* homalg/gap/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} homalg/tst)
+archive: test
+	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "tst/plesken" homalg/doc/*.* homalg/gap/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,tst} homalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/homalg/public_html
 WEBPOS_FINAL=~/Sites/homalg
@@ -29,6 +29,6 @@ towww: archive
 	cp README ${WEBPOS}/README.homalg
 	cp doc/manual.pdf ${WEBPOS}/homalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
+	cp ../tar/homalg.tar.gz ${WEBPOS}
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-#	cp ../tar/homalg.tar.gz ${WEBPOS}
 
