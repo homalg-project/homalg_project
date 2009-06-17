@@ -14,7 +14,7 @@ clean:
 test:	doc
 	gapL -x 80 maketest.g
 
-archive: doc
+archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/HomalgToCAS.tar.gz --exclude ".DS_Store" HomalgToCAS/doc/*.* HomalgToCAS/gap/*.{gi,gd} HomalgToCAS/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
 WEBPOS=~/gap/pkg/HomalgToCAS/public_html
@@ -29,6 +29,6 @@ towww: archive
 	cp README ${WEBPOS}/README.HomalgToCAS
 	cp doc/manual.pdf ${WEBPOS}/HomalgToCAS.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 	cp ../tar/HomalgToCAS.tar.gz ${WEBPOS}
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 

@@ -1,9 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
-  intro.xml             HomalgToCAS package documentation          Mohamed Barakat
-                                                                    Simon Goertzen
+  intro.xml                HomalgToCAS package documentation              Mohamed Barakat
+                                                                            Thomas Breuer
+                                                                           Simon Goertzen
+                                                                            Frank Luebeck
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+  Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
 
 This chapter gives a short introduction and explains the philosophy
 behind the package.
@@ -13,26 +17,7 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="philosophy">
-<Heading>Philosophy</Heading>
-
-To be written.
-</Section>
-
-<Section Label="overview">
-<Heading>Overview over this manual</Heading>
-
-Chapter <Ref Chap="install"/> describes the installation of this package.
-
-<E>More text on other chapters to be written.</E><P/>
-
-Finally, Chapter <Ref Chap="examples"/>
-shows instructive examples for the usage of this package.
-
-The main reference for the Maple implementation is <Cite Key="BR"/>.
-
-</Section>
-
-<!-- ############################################################ -->
+<Cite Key="homalg-project"/>
 
 </Chapter>
+

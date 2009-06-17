@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  title.xml                HomalgToCAS package documentation              Mohamed Barakat
+                                                                            Thomas Breuer
+                                                                           Simon Goertzen
+                                                                            Frank Luebeck
+
+  Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<TitlePage>
+  <Title>&HomalgToCAS;</Title>
+  <Subtitle>A window to the outer world</Subtitle>
+  <TitleComment>(<E>this manual is still under construction</E>) <Br/><Br/>
+    This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/HomalgToCAS/chap0.html</URL> <Br/><Br/>
+    An <B>offline</B> version should be included in the documentation subfolder of the package.
+  </TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Universität des Saarlandes, <Br/>
+      66041 Saarbrücken, <Br/>
+      Building E2 4, <Br/>
+      Germany
+    </Address>
+    <Email>barakat@math.uni-sb.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik<Br/>
+      Templergraben 64<Br/>
+      52062 Aachen<Br/>
+      Germany
+    </Address>
+    <Email>simon.goertzen@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
+  </Author>
+  <Date>June 2009</Date>
+  
+  <Copyright>
+    &copyright; 2007-2009 by Mohamed Barakat, Thomas Breuer, Simon Görtzen, and Frank Lübeck.<P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+  <Acknowledgements>
+    We are very much indebted to Max Neunhöffer who provided the first
+    piece of code around which the package &IO_ForHomalg; was built. The
+    package &HomalgToCAS; provides a further abstraction layer preparing
+    the communication.
+  </Acknowledgements>
+  
+</TitlePage>
