@@ -16,7 +16,7 @@ clean:
 test:	doc
 	gapL -x 80 maketest.g
 
-archive: doc
+archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" ExamplesForHomalg/doc/*.* ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/ExamplesForHomalg/public_html
@@ -31,6 +31,6 @@ towww: archive
 	cp README ${WEBPOS}/README.ExamplesForHomalg
 	cp doc/manual.pdf ${WEBPOS}/ExamplesForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
+	cp ../tar/ExamplesForHomalg.tar.gz ${WEBPOS}
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-#	cp ../tar/ExamplesForHomalg.tar.gz ${WEBPOS}
 
