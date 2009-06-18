@@ -17,7 +17,6 @@ list := [
 
 TestManualExamples( "doc", "HomalgToCAS.xml", list );
 
-GAPDocManualLab("HomalgToCAS");
+GAPDocManualLab( "HomalgToCAS" );
 
 quit;
-

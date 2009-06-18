@@ -684,18 +684,20 @@ InstallGlobalFunction( homalgSendBlocking,
         else
             display_color := "";
         fi;
-        if stream.cas = "maple" then
-            L := stream.lines{ [ 1 .. Length( stream.lines ) - 36 ] };
+        if IsBound( stream.trim_display ) and
+           IsFunction( stream.trim_display ) then
+            L := stream.trim_display( stream.lines );
         else
             L := stream.lines;
         fi;
         
         return Concatenation( display_color, L, "\033[0m\n" );
         
-    elif stream.cas = "maple" then
+    elif IsBound( stream.normalized_white_space ) and
+      IsFunction( stream.normalized_white_space ) then
         
         ## unless meant for display, normalize the white spaces caused by Maple
-        L := NormalizedWhitespace( stream.lines );
+        L := stream.normalized_white_space( stream.lines );
         
     else
         

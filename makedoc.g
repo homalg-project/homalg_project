@@ -18,7 +18,6 @@ list := [
 
 MakeGAPDocDoc( "doc", "HomalgToCAS", list, "HomalgToCAS" );
 
-GAPDocManualLab("HomalgToCAS");
+GAPDocManualLab( "HomalgToCAS" );
 
 quit;
-
