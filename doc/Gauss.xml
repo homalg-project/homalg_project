@@ -169,11 +169,11 @@ in source code should just check out the files in the
      <Row>
       <Item><Alt Not="LaTeX">Id</Alt>
             <Alt Only="LaTeX"><![CDATA[
-                    \begin{array}{ccc}
+                    $\begin{array}{ccc}
                     1&\\
                     &\ddots&\\
                     &&1\\
-                    \end{array}
+                    \end{array}$
             ]]></Alt></Item>
       <Item>A</Item>
      </Row>
@@ -208,11 +208,11 @@ in source code should just check out the files in the
       <Item>A</Item>
       <Item><Alt Not="LaTeX">Id</Alt>
             <Alt Only="LaTeX"><![CDATA[
-                    \begin{array}{ccc}
+                    $\begin{array}{ccc}
                     1&\\
                     &\ddots&\\
                     &&1\\
-                    \end{array}
+                    \end{array}$
             ]]></Alt></Item>
      </Row>
      <HorLine/>
@@ -434,7 +434,8 @@ in source code should just check out the files in the
     
     Although now the number of rows is equal to the Length of both
     `indices' and `entries', it is still stored in the sparse
-    matrix. Here is the full data structure (&see; <Ref Func="SparseMatrix"/>):
+    matrix. Here is the full data structure (&see;
+    <Ref Func="SparseMatrix" Label="constructor using gap matrices"/>):
     
     <Listing Type="from SparseMatrix.gi">
     DeclareRepresentation( "IsSparseMatrixRep",
@@ -445,7 +446,7 @@ in source code should just check out the files in the
     This is especially important for zero matrices, as there is no way
     to determine the base ring from the sparse matrix structure. For
     further information on sparse matrix construction and converting,
-    refer to <Ref Func="SparseMatrix"/>.
+    refer to <Ref Func="SparseMatrix" Label="constructor using gap matrices"/>.
     
  <Subsection Label="sub:gf2"><Heading>A special case: GF(2)</Heading>
 

@@ -34,9 +34,8 @@
 ##   1 1 1 1 .
 ##  gap> EchelonMat(M);
 ##  rec( heads := [ 1, 2, 0, 3, 0 ],
-##       vectors := [ <a GF2 vector of length 5>,
-##                    <a GF2 vector of length 5>,
-##                    <a GF2 vector of length 5> ] )
+##    vectors := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
+##        <a GF2 vector of length 5> ] )
 ##  gap> Display( last.vectors );
 ##   1 . . . 1
 ##   . 1 1 . 1
@@ -44,8 +43,8 @@
 ##  gap> SM := SparseMatrix( M );
 ##  <a 3 x 5 sparse matrix over GF(2)>
 ##  gap> EchelonMat( SM );
-##  rec( heads := [ 1, 2, 0, 3, 0 ],
-##       vectors := <a 3 x 5 sparse matrix over GF(2)> )
+##  rec( heads := [ 1, 2, 0, 3, 0 ], vectors := <a 3 x 5 sparse matrix over GF(
+##      2)> )
 ##  gap> Display(last.vectors);
 ##   1 . . . 1
 ##   . 1 1 . 1
@@ -58,7 +57,7 @@
 ##   . 4 4
 ##  gap> EchelonMat( SM );
 ##  rec( heads := [ 1, 2, 3 ],
-##       vectors := <a 3 x 3 sparse matrix over (Integers mod 8)> )
+##    vectors := <a 3 x 3 sparse matrix over (Integers mod 8)> )
 ##  gap> Display( last.vectors );
 ##   1 . 1
 ##   . 4 .
@@ -109,14 +108,11 @@ InstallMethod( EchelonMat,
 ##  gap> M := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );;
 ##  gap> EchelonMatTransformation( M );
 ##  rec( heads := [ 1, 2, 3 ],
-##       vectors := [ <a GF2 vector of length 3>,
-##                    <a GF2 vector of length 3>,
-##                    <a GF2 vector of length 3> ],
-##       coeffs := [ <a GF2 vector of length 5>,
-##                   <a GF2 vector of length 5>,
-##                   <a GF2 vector of length 5> ],
-##       relations := [ <a GF2 vector of length 5>,
-##                      <a GF2 vector of length 5> ] )
+##    vectors := [ <a GF2 vector of length 3>, <a GF2 vector of length 3>,
+##        <a GF2 vector of length 3> ],
+##    coeffs := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
+##        <a GF2 vector of length 5> ],
+##    relations := [ <a GF2 vector of length 5>, <a GF2 vector of length 5> ] )
 ##  gap> Display(last.vectors);
 ##   1 . .
 ##   . 1 .
@@ -137,10 +133,9 @@ InstallMethod( EchelonMat,
 ##  gap> SM := SparseMatrix( M );
 ##  <a 5 x 3 sparse matrix over GF(2)>
 ##  gap> EchelonMatTransformation( SM );
-##  rec( heads := [ 1, 2, 3 ],
-##       vectors := <a 3 x 3 sparse matrix over GF(2)>,
-##       coeffs := <a 3 x 5 sparse matrix over GF(2)>,
-##       relations := <a 2 x 5 sparse matrix over GF(2)> )
+##  rec( heads := [ 1, 2, 3 ], vectors := <a 3 x 3 sparse matrix over GF(2)>,
+##    coeffs := <a 3 x 5 sparse matrix over GF(2)>,
+##    relations := <a 2 x 5 sparse matrix over GF(2)> )
 ##  gap> Display(last.vectors);
 ##   1 . .
 ##   . 1 .
@@ -193,9 +188,9 @@ InstallMethod( EchelonMatTransformation,
 ##   1 1 . . .
 ##   . . 1 . 1
 ##  gap> ReduceMat(M,N);
-##  rec( reduced_matrix := [ <a GF2 vector of length 5>,
-##                           <a GF2 vector of length 5>,
-##                           <a GF2 vector of length 5> ] )
+##  rec(
+##    reduced_matrix := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
+##        <a GF2 vector of length 5> ] )
 ##  gap> Display(last.reduced_matrix);
 ##   . . . 1 .
 ##   . 1 . 1 .
@@ -249,12 +244,11 @@ InstallMethod( ReduceMat,
 ##   1 1 . . .
 ##   . . 1 . 1
 ##  gap> ReduceMatTransformation(M,N);
-## rec( reduced_matrix := [ <a GF2 vector of length 5>,
-##                          <a GF2 vector of length 5>,
-##                          <a GF2 vector of length 5> ],
-##      transformation := [ <a GF2 vector of length 2>,
-##                          <a GF2 vector of length 2>,
-##                          <a GF2 vector of length 2> ] )
+##  rec(
+##    reduced_matrix := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
+##        <a GF2 vector of length 5> ],
+##    transformation := [ <a GF2 vector of length 2>, <a GF2 vector of length 2>,
+##        <a GF2 vector of length 2> ] )
 ##  gap> Display(last.reduced_matrix);
 ##   . . . 1 .
 ##   . 1 . 1 .
@@ -272,7 +266,7 @@ InstallMethod( ReduceMat,
 ##  <a 2 x 5 sparse matrix over GF(2)>
 ##  gap> ReduceMatTransformation(SM,SN);
 ##  rec( reduced_matrix := <a 3 x 5 sparse matrix over GF(2)>,
-##       transformation := <a 3 x 2 sparse matrix over GF(2)> )
+##    transformation := <a 3 x 2 sparse matrix over GF(2)> )
 ##  gap> Display(last.reduced_matrix);
 ##   . . . 1 .
 ##   . 1 . 1 .
@@ -359,8 +353,8 @@ InstallGlobalFunction( KernelMatSparse,
 ##  the fact that Rank(<A>sm</A>) &lt;= <A>boundary</A>, thus
 ##  possibly terminating earlier.
 ##  <Example><![CDATA[
-##  gap> M := SparseDiagMat( ListWithIdenticalEntries( 10,\
-##             SparseMatrix( [[1,1],[1,1]] * One( GF(5) ) ) ) );
+##  gap> M := SparseDiagMat( ListWithIdenticalEntries( 10,
+##  >         SparseMatrix( [[1,1],[1,1]] * One( GF(5) ) ) ) );
 ##  <a 20 x 20 sparse matrix over GF(5)>
 ##  gap> Display(M);
 ##   1 1 . . . . . . . . . . . . . . . . . .

@@ -4,19 +4,15 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "Gauss" );
 LoadPackage( "GAPDoc" );
-
-SetGapDocLaTeXOptions( "utf8" );
-
-#bib := ParseBibFiles( "doc/Gauss.bib" );
-#WriteBibXMLextFile( "doc/GaussBib.xml", bib );
 
 list := [
          "../gap/Sparse.gi",
          "../gap/SparseMatrix.gi"
          ];
 
-MakeGAPDocDoc( "doc", "Gauss", list, "Gauss" );
+TestManualExamples( "doc", "Gauss.xml", list );
 
 GAPDocManualLab( "Gauss" );
 

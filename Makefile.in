@@ -18,7 +18,7 @@ bindir:
 
 bin/@GAPARCH@/gauss.so: src/gauss.c
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@
-	$(GAPPATH)/bin/@GAPARCH@/gac -p "-g" -P "-g" -d -o bin/@GAPARCH@/gauss.so src/gauss.c
+	$(GAPPATH)/bin/@GAPARCH@/gac -p "-g" -d -o bin/@GAPARCH@/gauss.so src/gauss.c
 
 # make a statically linked GAP including the io module
 static:
@@ -28,27 +28,35 @@ static:
 
 doc: doc/manual.six
 
-doc/manual.six: doc/Gauss.xml VERSION
-	        gap makedoc.g
+doc/manual.six: makedoc.g maketest.g \
+		PackageInfo.g VERSION \
+		doc/*.xml \
+		gap/*.gd gap/*.gi
+	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
-archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude "makefile" --exclude ".git" --exclude test --exclude "public_html" --exclude "bin/git-push" --exclude "bin/git-pull-max" Gauss)
+test:	doc
+	gapL -x 80 maketest.g
+
+archive: test
+	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" Gauss/doc/*.* Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile.in,configure,makedoc.g,maketest.g})
 
 WEBPOS=~/gap/pkg/Gauss/public_html
+WEBPOS_FINAL=~/Sites/homalg
 
 towww: archive
-	echo '<?xml version="1.0" encoding="ISO-8859-1"?>' >${WEBPOS}.version
+	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
 	echo '<mixer>' >>${WEBPOS}.version
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
 	cp PackageInfo.g ${WEBPOS}
 	cp README ${WEBPOS}/README.Gauss
 	cp doc/manual.pdf ${WEBPOS}/Gauss.pdf
+	cp doc/*.{css,html} ${WEBPOS}
 	cp ../tar/Gauss.tar.gz ${WEBPOS}
-	cp doc/*.html ${WEBPOS}
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 
 ##
 ##  This program is free software; you can redistribute it and/or modify

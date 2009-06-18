@@ -30,11 +30,11 @@ BindGlobal( "TheTypeSparseMatrixGF2",
 
 ##  <#GAPDoc Label="SparseMatrix">
 ##  <ManSection >
-##  <Func Arg="mat[, R]" Name="SparseMatrix" Label="constructor" />
+##  <Func Arg="mat[, R]" Name="SparseMatrix" Label="constructor using gap matrices" />
 ##  <Returns>a sparse matrix over the ring <A>R</A></Returns>
-##  <Func Arg="nrows, ncols, indices" Name="SparseMatrix" />
+##  <Func Arg="nrows, ncols, indices" Name="SparseMatrix" Label="constructor using indices" />
 ##  <Returns>a sparse matrix over GF(2)</Returns>
-##  <Func Arg="nrows, ncols, indices, entries[, R]" Name="SparseMatrix" />
+##  <Func Arg="nrows, ncols, indices, entries[, R]" Name="SparseMatrix" Label="constructor using indices and entries" />
 ##  <Returns>a sparse matrix over the ring <A>R</A></Returns>
 ##  <Description>
 ##  The sparse matrix constructor.
@@ -58,9 +58,9 @@ BindGlobal( "TheTypeSparseMatrixGF2",
 ##  <a 2 x 2 sparse matrix over GF(2)>
 ##  gap> SN = SM;
 ##  true
-##  SN := SparseMatrix( 2, 3,
-##                      [ [ 2 ], [ 1, 3 ] ],
-##                      [ [ 1 ], [ 3, 2 ] ] * One( GF(5) ) );
+##  gap> SN := SparseMatrix( 2, 3,
+##  >                   [ [ 2 ], [ 1, 3 ] ],
+##  >                   [ [ 1 ], [ 3, 2 ] ] * One( GF(5) ) );
 ##  <a 2 x 3 sparse matrix over GF(5)>
 ##  gap> Display( SN );
 ##   . 1 .
@@ -392,9 +392,9 @@ InstallMethod( FindRing,
 
 ##  <#GAPDoc Label="SparseZeroMatrix">
 ##  <ManSection >
-##  <Func Arg="nrows[, ring]" Name="SparseZeroMatrix" />
+##  <Func Arg="nrows[, ring]" Name="SparseZeroMatrix" Label="constructor using number of rows" />
 ##  <Returns>a sparse &lt;<A>nrows</A> x <A>nrows</A>&gt; zero matrix over the ring <A>ring</A></Returns>
-##  <Func Arg="nrows, ncols[, ring]" Name="SparseZeroMatrix" />
+##  <Func Arg="nrows, ncols[, ring]" Name="SparseZeroMatrix" Label="constructor using number of rows and columns"/>
 ##  <Returns>a sparse &lt;<A>nrows</A> x <A>ncols</A>&gt; zero matrix over the ring <A>ring</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
