@@ -18,7 +18,7 @@ archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" GaussForHomalg/doc/*.* GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
 WEBPOS=~/gap/pkg/GaussForHomalg/public_html
-WEBPOS_FINAL=~/Sites/GaussForHomalg
+#WEBPOS_FINAL=~/Sites/GaussForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
@@ -30,5 +30,5 @@ towww: archive
 	cp doc/manual.pdf ${WEBPOS}/GaussForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
 	cp ../tar/GaussForHomalg.tar.gz ${WEBPOS}
-	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+	#cp ${WEBPOS}/* ${WEBPOS_FINAL}
 

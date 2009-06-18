@@ -244,7 +244,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["Gauss", ">=2009.01.05"],["homalg", ">=2008.10.26"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"],["Gauss", ">=2009.01.12"],["homalg", ">=2009.06.18"]],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [ ],
   # needed external conditions (programs, operating system, ...)  provide 
