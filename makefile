@@ -3,21 +3,18 @@ all: doc test
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		doc/SheavesForHomalg.xml doc/title.xml \
-		doc/intro.xml doc/install.xml \
-		doc/Sheaves.bib gap/*.gd gap/*.gi \
-		doc/Sheaves.xml doc/Modules.xml doc/Tate.xml \
-		doc/examples.xml doc/appendix.xml \
-		VERSION PackageInfo.g
+		PackageInfo.g VERSION \
+		doc/Sheaves.bib doc/*.xml \
+		gap/*.gd gap/*.gi
 	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL -x 125 maketest.g
+	gapL -x 80 maketest.g
 
-archive: doc
+archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" Sheaves/doc/*.* Sheaves/gap/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Sheaves/examples/*.g)
 
 WEBPOS=~/gap/pkg/Sheaves/public_html

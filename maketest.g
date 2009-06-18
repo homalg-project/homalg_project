@@ -6,6 +6,8 @@
 
 LoadPackage( "Sheaves" );
 
+LoadPackage( "IO_ForHomalg" );
+
 HOMALG_IO.show_banners := false;
 
 LoadPackage( "GAPDoc" );
@@ -16,7 +18,9 @@ list := [
          "../gap/Modules.gd",
          "../gap/Modules.gi",
          "../gap/Tate.gd",
-         "../gap/Tate.gi"
+         "../gap/Tate.gi",
+         "../examples/DE-2.2.g",
+         "../examples/DE-Code.g",
          ];
 
 TestManualExamples( "doc", "SheavesForHomalg.xml", list );

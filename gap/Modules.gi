@@ -97,7 +97,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> m := MonomialMap( 1, M );
 ##  <A homomorphism of left modules>
 ##  ]]></Example>
@@ -171,7 +171,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> m := BasisOfHomogeneousPart( 1, M );
 ##  <An unevaluated homalg external 7 by 3 matrix>
 ##  ]]></Example>
@@ -227,7 +227,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> N := SubmoduleGeneratedByHomogeneousPart( 1, M );
 ##  <A graded left module presented by 11 relations for 7 generators>
 ##  ]]></Example>
@@ -317,7 +317,7 @@ end );
 ##  x
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationOfRingElement( x, M, 0 );
 ##  <An unevaluated homalg external 3 by 7 matrix>
 ##  ]]></Example>
@@ -367,7 +367,7 @@ end );
 ##  gap> A := KoszulDualRing( S, "a,b,c" );;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMatrixOfKoszulId( 0, M );
 ##  <An unevaluated homalg external 3 by 7 matrix>
 ##  ]]></Example>
@@ -448,7 +448,7 @@ end );
 ##  gap> A := KoszulDualRing( S, "a,b,c" );;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMapOfKoszulId( 0, M );
 ##  <A homomorphism of left modules>
 ##  ]]></Example>
@@ -556,31 +556,35 @@ end );
 ##  gap> A := KoszulDualRing( S, "a,b,c" );;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A non-zero graded left module presented by 2 relations for 3 generators>
+##  <A graded non-zero left module presented by 2 relations for 3 generators>
 ##  gap> CastelnuovoMumfordRegularity( M );
 ##  1
 ##  gap> R := KoszulRightAdjoint( M, -5, 5 );
 ##  <A cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
 ##  gap> R := KoszulRightAdjoint( M, 1, 5 );
-##  <An acyclic cocomplex containing 4 morphisms of left modules at degrees [ 1 .. 5 ]>
+##  <An acyclic cocomplex containing 4 morphisms of left modules at degrees 
+##  [ 1 .. 5 ]>
 ##  gap> R := KoszulRightAdjoint( M, 0, 5 );
 ##  <A cocomplex containing 5 morphisms of left modules at degrees [ 0 .. 5 ]>
 ##  gap> R := KoszulRightAdjoint( M, -5, 5 );
 ##  <A cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
 ##  gap> H := Cohomology( R );
-##  <A graded cohomology object consisting of 11 left modules at degrees [ -5 .. 5 ]>
+##  <A graded cohomology object consisting of 11 left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> ByASmallerPresentation( H );
-##  <A non-zero graded cohomology object consisting of 11 left modules at degrees [ -5 .. 5 ]>
+##  <A non-zero graded cohomology object consisting of 11 left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> Cohomology( R, -2 );
 ##  <A zero left module>
 ##  gap> Cohomology( R, -3 );
 ##  <A zero left module>
 ##  gap> Cohomology( R, -1 );
-##  <A non-zero cyclic graded left module presented by 2 relations for a cyclic generator>
+##  <A graded non-zero cyclic left module presented by
+##  2 relations for a cyclic generator>
 ##  gap> Cohomology( R, 0 );
-##  <A cyclic graded left module presented by 3 relations for a cyclic generator>
+##  <A graded cyclic left module presented by 3 relations for a cyclic generator>
 ##  gap> Cohomology( R, 1 );
-##  <A cyclic graded left module presented by 2 relations for a cyclic generator>
+##  <A graded cyclic left module presented by 2 relations for a cyclic generator>
 ##  gap> Cohomology( R, 2 );
 ##  <A zero left module>
 ##  gap> Cohomology( R, 3 );

@@ -17,7 +17,9 @@ list := [
          "../gap/Modules.gd",
          "../gap/Modules.gi",
          "../gap/Tate.gd",
-         "../gap/Tate.gi"
+         "../gap/Tate.gi",
+         "../examples/DE-2.2.g",
+         "../examples/DE-Code.g",
          ];
 
 MakeGAPDocDoc( "doc", "SheavesForHomalg", list, "SheavesForHomalg" );

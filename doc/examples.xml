@@ -13,7 +13,13 @@ This chapter gives examples for the usage of this package.
 <Chapter Label="examples">
 <Heading>Examples</Heading>
 
-Here comes text.<P/>
+<Section Label="BettiDiagram">
+<Heading>Betti Diagrams</Heading>
+
+<#Include Label="DE-2.2">
+<#Include Label="DE-Code">
+
+</Section>
 
 <!-- ############################################################ -->
 

@@ -38,11 +38,13 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  First we start with the structure sheaf with its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> O := S^0;
-##  <A free graded left module of rank 1 on a free generator>
+##  <A graded free left module of rank 1 on a free generator>
 ##  gap> T := TateResolution( O, -5, 5 );
-##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
+##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> betti := BettiDiagram( T );
-##  <A Betti diagram of <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>>
+##  <A Betti diagram of <An acyclic cocomplex containing 
+##  10 morphisms of left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti );
 ##  total:  35 20 10  4  1  1  4 10 20 35 56  ?  ?  ?
 ##  ---------|--|--|--|--|--|--|--|--|--|--|--|--|--|
@@ -63,16 +65,18 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  gap> k := HomalgMatrix( Indeterminates( S ), Length( Indeterminates( S ) ), 1, S );
 ##  <A homalg external 4 by 1 matrix>
 ##  gap> k := LeftPresentationWithDegrees( k );
-##  <A cyclic graded left module presented by 4 relations for a cyclic generator>
+##  <A graded cyclic left module presented by 4 relations for a cyclic generator>
 ##  ]]></Example>
 ##  Another way of constructing the structure sheaf:
 ##      <Example><![CDATA[
 ##  gap> U0 := SyzygiesModule( 1, k );
 ##  <A graded left module presented by 6 relations for 4 generators>
 ##  gap> T0 := TateResolution( U0, -5, 5 );
-##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
+##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> betti0 := BettiDiagram( T0 );
-##  <A Betti diagram of <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>>
+##  <A Betti diagram of <An acyclic cocomplex containing 
+##  10 morphisms of left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti0 );
 ##  total:  35 20 10  4  1  1  4 10 20 35 56  ?  ?  ?
 ##  ---------|--|--|--|--|--|--|--|--|--|--|--|--|--|
@@ -88,22 +92,27 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The cotangent bundle:
 ##      <Example><![CDATA[
 ##  gap> cotangent := SyzygiesModule( 2, k );
-##  <A non-zero graded left module presented by 4 relations for 6 generators>
+##  <A graded non-zero left module presented by 4 relations for 6 generators>
 ##  gap> IsFree( cotangent );
 ##  false
+##  gap> Rank( cotangent );
+##  3
 ##  gap> cotangent;
-##  <A reflexive non-projective rank 3 graded left module presented by 4 relations for 6 generators>
+##  <A graded reflexive non-projective rank 3 left module presented by 
+##  4 relations for 6 generators>
 ##  gap> ProjectiveDimension( cotangent );
 ##  2
 ##  ]]></Example>
 ##  the cotangent bundle shifted by <M>1</M> with its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> U1 := cotangent * S^1;
-##  <A non-zero graded left module presented by 4 relations for 6 generators>
+##  <A graded non-zero left module presented by 4 relations for 6 generators>
 ##  gap> T1 := TateResolution( U1, -5, 5 );
-##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
+##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> betti1 := BettiDiagram( T1 );
-##  <A Betti diagram of <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>>
+##  <A Betti diagram of <An acyclic cocomplex containing 
+##  10 morphisms of left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti1 );
 ##  total:  120  70  36  15   4   1   6  20  45  84 140   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -119,11 +128,13 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The second power <M>U^2</M> of the shifted cotangent bundle <M>U=U^1</M> and its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> U2 := SyzygiesModule( 3, k ) * S^2;
-##  <A non-zero graded left module presented by 1 relation for 4 generators>
+##  <A graded non-zero left module presented by 1 relation for 4 generators>
 ##  gap> T2 := TateResolution( U2, -5, 5 );
-##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
+##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> betti2 := BettiDiagram( T2 );
-##  <A Betti diagram of <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>>
+##  <A Betti diagram of <An acyclic cocomplex containing 
+##  10 morphisms of left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti2 );
 ##  total:  140  84  45  20   6   1   4  15  36  70 120   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -139,13 +150,15 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The third power <M>U^3</M> of the shifted cotangent bundle <M>U=U^1</M> and its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> U3 := SyzygiesModule( 4, k ) * S^3;
-##  <A free graded left module of rank 1 on a free generator>
+##  <A graded free left module of rank 1 on a free generator>
 ##  Display( U3 );
 ##  Q[x0,x1,x2,x3]^(1 x 1)	(graded, generators degrees: [ 1 ])
 ##  gap> T3 := TateResolution( U3, -5, 5 );
-##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>
+##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> betti3 := BettiDiagram( T3 );
-##  <A Betti diagram of <An acyclic cocomplex containing 10 morphisms of left modules at degrees [ -5 .. 5 ]>>
+##  <A Betti diagram of <An acyclic cocomplex containing 
+##  10 morphisms of left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti3 );
 ##  total:   56  35  20  10   4   1   1   4  10  20  35   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -161,11 +174,13 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  Another way to construct <M>U^2=U^(3-1)</M>:
 ##      <Example><![CDATA[
 ##  gap> u2 := Hom( U1, S^(-1) );
-##  <A non-zero graded right module on 4 generators satisfying 1 relation>
+##  <A graded non-zero right module on 4 generators satisfying 1 relation>
 ##  gap> t2 := TateResolution( u2, -5, 5 );
-##  <An acyclic cocomplex containing 10 morphisms of right modules at degrees [ -5 .. 5 ]>
+##  <An acyclic cocomplex containing 10 morphisms of right modules at degrees 
+##  [ -5 .. 5 ]>
 ##  gap> BettiDiagram( t2 );
-##  <A Betti diagram of <An acyclic cocomplex containing 10 morphisms of right modules at degrees [ -5 .. 5 ]>>
+##  <A Betti diagram of <An acyclic cocomplex containing 
+##  10 morphisms of right modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( last );
 ##  total:  140  84  45  20   6   1   4  15  36  70 120   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
