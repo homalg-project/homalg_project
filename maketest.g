@@ -17,7 +17,6 @@ list := [
 
 TestManualExamples( "doc", "IO_ForHomalg.xml", list );
 
-GAPDocManualLab("IO_ForHomalg");
+GAPDocManualLab( "IO_ForHomalg" );
 
 quit;
-

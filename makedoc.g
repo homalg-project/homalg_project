@@ -18,7 +18,6 @@ list := [
 
 MakeGAPDocDoc( "doc", "IO_ForHomalg", list, "IO_ForHomalg" );
 
-GAPDocManualLab("IO_ForHomalg");
+GAPDocManualLab( "IO_ForHomalg" );
 
 quit;
-
