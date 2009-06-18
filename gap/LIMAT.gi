@@ -533,6 +533,27 @@ InstallMethod( RowRankOfMatrix,
         [ IsHomalgMatrix ],
         
   function( M )
+    local R, B;
+    
+    R := HomalgRing( M );
+    
+    if HasIsDivisionRingForHomalg( R ) and
+       IsDivisionRingForHomalg( R ) then
+        
+        return Length( NonZeroRows( BasisOfRows( M ) ) );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RowRankOfMatrix,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
     local RP, B;
     
     RP := homalgTable( HomalgRing( M ) );
@@ -566,6 +587,27 @@ end );
 #-----------------------------------
 # ColumnRankOfMatrix
 #-----------------------------------
+
+##
+InstallMethod( ColumnRankOfMatrix,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, B;
+    
+    R := HomalgRing( M );
+    
+    if HasIsDivisionRingForHomalg( R ) and
+       IsDivisionRingForHomalg( R ) then
+        
+        return Length( NonZeroColumns( BasisOfColumns( M ) ) );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( ColumnRankOfMatrix,
