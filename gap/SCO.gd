@@ -9,6 +9,14 @@
 #############################################################################
 
 ##
+DeclareOperation( "ComplexOfSimplicialSet",
+        [ IsSimplicialSet, IsInt, IsHomalgRing ] );
+
+##
+DeclareOperation( "CocomplexOfSimplicialSet",
+        [ IsSimplicialSet, IsInt, IsHomalgRing ] );
+
+##
 DeclareOperation( "Homology",
         [ IsList, IsHomalgRing ] );
 

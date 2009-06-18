@@ -8,6 +8,42 @@
 ##
 #############################################################################
 
+##
+InstallMethod( ComplexOfSimplicialSet,
+        [ IsSimplicialSet, IsInt, IsHomalgRing ],
+  function( S, n, R )
+    local morphisms, C, m;
+    morphisms := CreateBoundaryMatrices( S, n, R );
+    C := HomalgComplex( HomalgMap( morphisms[1] ), 1 );
+    for m in morphisms{[ 2 .. Length( morphisms ) ]} do
+        Add( C, m );
+    od;
+    C!.SkipHighestDegreeHomology := true;
+    C!.HomologyOnLessGenerators := true;
+    C!.DisplayHomology := true;
+    C!.StringBeforeDisplay := "----------------------------------------------->>>>  ";
+    return C;
+  end
+);
+
+##
+InstallMethod( CocomplexOfSimplicialSet,
+        [ IsSimplicialSet, IsInt, IsHomalgRing ],
+  function( S, n, R )
+    local morphisms, C, m;
+    morphisms := CreateCoboundaryMatrices( S, n, R );
+    C := HomalgCocomplex( HomalgMap( morphisms[1] ), 0 );
+    for m in morphisms{[ 2 .. Length( morphisms ) ]} do
+        Add( C, m );
+    od;
+    C!.SkipHighestDegreeCohomology := true;
+    C!.CohomologyOnLessGenerators := true;
+    C!.DisplayCohomology := true;
+    C!.StringBeforeDisplay := "----------------------------------------------->>>>  ";
+    return C;
+  end
+);
+
 ##  <#GAPDoc Label="Homology">
 ##  <ManSection>
 ##  <Meth Arg="M[, R]" Name="Homology"/>

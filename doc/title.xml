@@ -15,7 +15,7 @@ This is the title page.
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
-    <Author>Simon Goertzen<Br/>
+    <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
 <Address>
 Lehrstuhl B für Mathematik<Br/>
 RWTH Aachen<Br/>
