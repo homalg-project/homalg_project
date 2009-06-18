@@ -32,6 +32,8 @@ InstallValue( HOMALG_IO_Maple,
             eoc_verbose := ";",
             eoc_quiet := ":",
             error_stdout := "Error, ",	## a Maple specific
+            normalized_white_space := NormalizedWhitespace,	## a Maple specific
+            trim_display := function( str ) return str{ [ 1 .. Length( str ) - 36 ] }; end,	## a Maple specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _Maple_multiple_delete,

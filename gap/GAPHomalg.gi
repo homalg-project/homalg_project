@@ -116,7 +116,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
         o := 1;
     fi;
     
-    homalgSendBlocking( "LoadPackage(\"IO_ForHomalg\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "LoadPackage(\"HomalgToCAS\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if IsBound( HOMALG.PreferDenseMatrices ) then
         homalgSendBlocking( [ "HOMALG.PreferDenseMatrices := ", HOMALG.PreferDenseMatrices ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
