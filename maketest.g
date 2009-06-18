@@ -4,9 +4,8 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "SCO" );
 LoadPackage( "GAPDoc" );
-
-SetGapDocLaTeXOptions( "utf8" );
 
 list := [
          "../gap/OrbifoldTriangulation.gi",
@@ -15,7 +14,7 @@ list := [
          "../gap/SCO.gi"
          ];
 
-MakeGAPDocDoc( "doc", "SCO", list, "SCO" );
+TestManualExamples( "doc", "SCO.xml", list );
 
 GAPDocManualLab( "SCO" );
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
  [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
@@ -20,7 +20,7 @@
   SCO.xml          SCO package documentation                              Simon Goertzen
                                                                           
 
-  Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
+  Copyright (C) 2007-2008, Lehrstuhl B fÃ¼r Mathematik, RWTH-Aachen University
 
 -->
 

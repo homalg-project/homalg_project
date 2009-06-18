@@ -3,7 +3,7 @@
   title.xml            SCO package documentation                  Simon Goertzen
                                                                      
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2008, Lehrstuhl B fÃ¼r Mathematik, RWTH-Aachen
 
 This is the title page.
 
@@ -17,7 +17,7 @@ This is the title page.
     </Version>
     <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
 <Address>
-Lehrstuhl B für Mathematik<Br/>
+Lehrstuhl B fÃ¼r Mathematik<Br/>
 RWTH Aachen<Br/>
 Templergraben 64<Br/>
 52062 Aachen<Br/>
@@ -45,12 +45,12 @@ Templergraben 64<Br/>
   without the theoretical work by I. Moerdijk and D. A. Pronk
   concerning  simplicial cohomology of orbifolds <Cite
   Key="MP_SCO"/>. Many thanks to these two, as well as Mohamed Barakat
-  and the Lehrstuhl B für Mathematik at RWTH Aachen University in
+  and the Lehrstuhl B fÃ¼r Mathematik at RWTH Aachen University in
   general. It should be noted that &SCO; in its current functionality
   is dependent on the &GAP; package &homalg; by M. Barakat <Cite
   Key="homalg"/>, as it relies on &homalg; to do the actual
   computations. This manual was created with the help of the &GAPDoc;
-  package by M. Neunhöffer and F. Lübeck.
+  package by M. NeunhÃ¶ffer and F. LÃ¼beck.
   </Acknowledgements>
 
 </TitlePage>

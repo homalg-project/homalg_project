@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   examples.xml            SCO package documentation                  Simon Goertzen
                                                                      
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2008, Lehrstuhl B fÃ¼r Mathematik, RWTH-Aachen
 
 This chapter gives examples on the usage of this package.
 
@@ -52,8 +54,8 @@ This results in the following list of maximum simplices:
 
 <Example>
 gap> M := [ [1,2,4], [1,2,7], [1,3,6], [1,3,8], [1,4,6], [1,7,8],
-[2,3,5], [2,3,9], [2,4,5], [2,7,9], [3,5,6], [3,8,9],
-[4,5,7], [4,6,9], [4,7,9], [5,6,8], [5,7,8], [6,8,9] ];;
+> [2,3,5], [2,3,9], [2,4,5], [2,7,9], [3,5,6], [3,8,9],
+> [4,5,7], [4,6,9], [4,7,9], [5,6,8], [5,7,8], [6,8,9] ];;
 </Example>
 
 As there is no isotropy and therefore no <M>\mu</M>-map, we can
@@ -61,11 +63,11 @@ continue with the orbifold triangulation and simplicial set:
 
 <Example><![CDATA[
 gap> ot := OrbifoldTriangulation( M, "Klein Bottle" );
-<OrbifoldTriangulation "Klein Bottle" of dimension 2.
-18 simplices on 9 vertices without Isotropy>
+<OrbifoldTriangulation "Klein Bottle" of dimension 2. 18 simplices on 9 vertic\
+es without Isotropy>
 gap> ss := SimplicialSet( ot );
-<The simplicial set of the orbifold triangulation "Klein Bottle",
-computed up to dimension 0 with Length vector [ 18 ]>
+<The simplicial set of the orbifold triangulation "Klein Bottle", computed up \
+to dimension 0 with Length vector [ 18 ]>
 ]]></Example>
 
 Now we will need a &homalg; ring. As this is a small example we can
@@ -91,7 +93,8 @@ gap> C := Cohomology( c, R );
 ----------------------------------------------->>>>  Z/< 2 >
 ----------------------------------------------->>>>  0
 ----------------------------------------------->>>>  0
-<A graded cohomology object consisting of 5 left modules at degrees [0.. 4 ]>
+<A graded cohomology object consisting of 5 left modules at degrees
+[ 0 .. 4 ]>
 ]]></Example>
 
 This is the cohomology of the Klein Bottle.
@@ -109,11 +112,11 @@ gap> M := [ [1] ];;
 gap> V4 := Group( (1,2), (3,4) );;
 gap> iso := rec( 1 := V4 );;
 gap> ot := OrbifoldTriangulation( M, iso, "V4" );
-<OrbifoldTriangulation "V4" of dimension 0.
-1 simplex on 1 vertex with Isotropy on 1 vertex>
+<OrbifoldTriangulation "V4" of dimension 0. 1 simplex on 1 vertex with Isotrop\
+y on 1 vertex>
 gap> ss := SimplicialSet( ot );
-<The simplicial set of the orbifold triangulation "V4",
-computed up to dimension 0 with Length vector [ 1 ]>
+<The simplicial set of the orbifold triangulation "V4", computed up to dimensi\
+on 0 with Length vector [ 1 ]>
 gap> R := HomalgRingOfIntegers();
 <A homalg internal ring>
 gap> c := CreateCoboundaryMatrices( ss, 4, R );;
@@ -122,8 +125,10 @@ gap> C := Cohomology( c, R );
 ----------------------------------------------->>>>  0
 ----------------------------------------------->>>>  Z/< 2 > + Z/< 2 >
 ----------------------------------------------->>>>  Z/< 2 >
------------------------------------------------>>>>  Z/< 2 > + Z/< 2 > + Z/< 2 >
-<A graded cohomology object consisting of 5 left modules at degrees [0 .. 4 ]>
+----------------------------------------------->>>>  Z/< 2 > + Z/< 2 > + Z/< 2\
+ >
+<A graded cohomology object consisting of 5 left modules at degrees
+[ 0 .. 4 ]>
 ]]></Example>
 
 This is the <M>V_4</M> group cohomology up to degree 4.
@@ -168,15 +173,15 @@ The triangulation looks like this, with the gluing being at [1,3].
 gap> M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,5], [2,4,5], [3,4,5] ];;
 gap> iso := rec( 1 := Group( (1,2) ) );;
 gap> mu := [
-             [ [3], [1,3], [1,2,3], [1,3,4], x -> (1,2) ],
-             [ [3], [1,3], [1,3,4], [1,2,3], x -> (1,2) ]
-           ];;
+>            [ [3], [1,3], [1,2,3], [1,3,4], x -> (1,2) ],
+>            [ [3], [1,3], [1,3,4], [1,2,3], x -> (1,2) ]
+>          ];;
 gap> ot := OrbifoldTriangulation( M, iso, mu, "Teardrop" );
-<OrbifoldTriangulation "Teardrop" of dimension 2.
-6 simplices on 5 vertices with Isotropy on 1 vertex and nontrivial mu-maps>
+<OrbifoldTriangulation "Teardrop" of dimension 2. 6 simplices on 5 vertices wi\
+th Isotropy on 1 vertex and nontrivial mu-maps>
 gap> ss := SimplicialSet( ot );
-<The simplicial set of the orbifold triangulation "Teardrop",
-computed up to dimension 0 with Length vector [ 6 ]>
+<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 6 ]>
 gap> R := HomalgRingOfIntegers();
 <A homalg internal ring>
 gap> c := CreateCoboundaryMatrices( ss, 6, R );;
@@ -188,7 +193,8 @@ gap> C := Cohomology( c, R );
 ----------------------------------------------->>>>  Z/< 2 >
 ----------------------------------------------->>>>  0
 ----------------------------------------------->>>>  Z/< 2 >
-<A graded cohomology object consisting of 7 left modules at degrees [0 .. 6 ]>
+<A graded cohomology object consisting of 7 left modules at degrees
+[ 0 .. 6 ]>
 ]]></Example>
 
 This is the Teardrop cohomology.

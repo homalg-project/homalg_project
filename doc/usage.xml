@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   usage.xml            SCO package documentation                  Simon Goertzen
                                                                      
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2008, Lehrstuhl B fÃ¼r Mathematik, RWTH-Aachen
 
 This chapter explains the usage of this package.
 
@@ -40,7 +42,7 @@ an important part of my diploma thesis <Cite Key="Goe"/> and I have
 also created a separate document <Cite Key="WGC"/> to present my
 results.<P/>
 
-Please note that the variables <C>M</C>, <C>iso</C>, and <C>mu</C>
+Please note that the variables <A>M</A>, <A>iso</A>, and <A>mu</A>
 in the orbifold files have to keep their name for the example script
 to work correctly. Refer to chapter <Ref Label="examples"/> for
 concrete examples.
@@ -63,8 +65,8 @@ functions. The basic steps are:<P/>
  <Item>If applicable, define a list encoding the <M>\mu</M>-map</Item>
  <Item>From the above data, create an orbifold triangulation</Item>
  <Item>Define the simplicial set of the orbifold triangulation</Item>
- <Item>Create a &homalg; ring <C>R</C></Item>
- <Item>Create boundary or coboundary matrices over <C>R</C></Item>
+ <Item>Create a &homalg; ring <M>R</M></Item>
+ <Item>Create boundary or coboundary matrices over <M>R</M></Item>
  <Item>Calculate their homology or cohomology</Item>
 </List>
 

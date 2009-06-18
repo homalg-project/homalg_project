@@ -30,11 +30,11 @@ BindGlobal( "SimplicialSetType",
 ##  These can be triggered later, either explicitly or by <Ref Meth="SimplicialSet" Label="data access"/>.
 ##  <Example><![CDATA[
 ##  gap> Teardrop;
-##  <OrbifoldTriangulation "Teardrop" of dimension 2.
-##  4 simplices on 4 vertices with Isotropy on 1 vertex and nontrivial mu-maps>
+##  <OrbifoldTriangulation "Teardrop" of dimension 2. 4 simplices on 4 vertices wi\
+##  th Isotropy on 1 vertex and nontrivial mu-maps>
 ##  gap> S := SimplicialSet( Teardrop );
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 0 with Length vector [ 4 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -77,9 +77,9 @@ InstallMethod( SimplicialSet, "constructor",
 ##  as it has the additional side effect of computing <A>S</A> up to dimension <A>i</A>, thus
 ##  always returning the desired result.
 ##  <Example><![CDATA[
-##  gap> S;
-##  The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]
+##  gap> S := SimplicialSet( Teardrop );
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 0 with Length vector [ 4 ]>
 ##  gap> S!.simplicial_set[1];
 ##  [ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
 ##  gap> S!.simplicial_set[2];;
@@ -88,13 +88,13 @@ InstallMethod( SimplicialSet, "constructor",
 ##  Entering break read-eval-print loop ...
 ##  you can 'quit;' to quit to outer loop, or
 ##  you can 'return;' after assigning a value to continue
-##  brk>
+##  brk> 
 ##  gap> SimplicialSet( S, 0 );
 ##  [ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
 ##  gap> SimplicialSet( S, 1 );;
 ##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 1 with Length vector [ 4, 12 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 1 with Length vector [ 4, 12 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -120,11 +120,11 @@ InstallMethod( SimplicialSet, "creation and accessment of the simplicial set up 
 ##  as a side effect.
 ##  <Example><![CDATA[
 ##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 1 with Length vector [ 4, 12 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 1 with Length vector [ 4, 12 ]>
 ##  gap> ComputeNextDimension( S );
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 2 with Length vector [ 4, 12, 22 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 2 with Length vector [ 4, 12, 22 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -176,11 +176,11 @@ InstallMethod( ComputeNextDimension,
 ##  the appropriate number of times.
 ##  <Example><![CDATA[
 ##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 2 with Length vector [ 4, 12, 22 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 2 with Length vector [ 4, 12, 22 ]>
 ##  gap> Extend( S, 5 );
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>

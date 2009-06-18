@@ -67,13 +67,13 @@ InstallGlobalFunction( BoundaryOperator, "Arguments: i, L, mu. Calculate i-th bo
 ##  induced by the simplicial set <A>S</A>. If <A>d</A> is not given, the
 ##  current dimension of <A>S</A> is used.
 ##  <Example><![CDATA[
-##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]>
+##  gap> S := SimplicialSet( Teardrop );
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 0 with Length vector [ 4 ]>
 ##  gap> M := CreateCoboundaryMatrices( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -134,13 +134,13 @@ InstallMethod( CreateCoboundaryMatrices,
 ##  induced by the simplicial set <A>S</A>. If <A>d</A> is not given, the
 ##  current dimension of <A>S</A> is used.
 ##  <Example><![CDATA[
-##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]>
+##  gap> S := SimplicialSet( Teardrop );
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 0 with Length vector [ 4 ]>
 ##  gap> M := CreateBoundaryMatrices( S, 4, HomalgRingOfIntegers() );;
 ##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>

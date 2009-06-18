@@ -35,16 +35,16 @@ BindGlobal( "TheTypeOrbifoldTriangulation",
 ##  <Example><![CDATA[
 ##  gap> M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,4] ];;
 ##  gap> S2 := OrbifoldTriangulation( M, "S^2" );
-##  <OrbifoldTriangulation "S^2" of dimension 2.
-##  4 simplices on 4 vertices without Isotropy>
+##  <OrbifoldTriangulation "S^2" of dimension 2. 4 simplices on 4 vertices without\
+##   Isotropy>
 ##  gap> I := rec( 1 := Group( (1,2) ) );;
 ##  gap> mu_data := [
-##  [ [2], [1,2], [1,2,3], [1,2,4], x->x*(1,2) ],
-##  [ [2], [1,2], [1,2,4], [1,2,3], x->x*(1,2) ]
-##  ];;
+##  > [ [2], [1,2], [1,2,3], [1,2,4], x->x*(1,2) ],
+##  > [ [2], [1,2], [1,2,4], [1,2,3], x->x*(1,2) ]
+##  > ];;
 ##  gap> Teardrop := OrbifoldTriangulation( M, I, mu_data, "Teardrop" );
-##  <OrbifoldTriangulation "Teardrop" of dimension 2.
-##  4 simplices on 4 vertices with Isotropy on 1 vertex and nontrivial mu-maps>
+##  <OrbifoldTriangulation "Teardrop" of dimension 2. 4 simplices on 4 vertices wi\
+##  th Isotropy on 1 vertex and nontrivial mu-maps>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>

@@ -52,12 +52,12 @@ InstallMethod( CocomplexOfSimplicialSet,
 ##  This returns the homology complex of a list <A>M</A> of
 ##  &homalg; matrices over the &homalg; ring <A>R</A>.
 ##  <Example><![CDATA[
-##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]>
+##  gap> S := SimplicialSet( Teardrop );
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 0 with Length vector [ 4 ]>
 ##  gap> R := HomalgRingOfIntegers();
 ##  <A homalg internal ring>
-##  gap> M := CreateHomologyMatrix( S, 4, R );;
+##  gap> M := CreateBoundaryMatrices( S, 4, R );;
 ##  gap> Homology( M, R );
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
 ##  ----------------------------------------------->>>>  0
@@ -104,19 +104,20 @@ InstallMethod( Homology,
 ##  This returns the cohomology complex of a list <A>M</A> of
 ##  &homalg; matrices over the &homalg; ring <A>R</A>.
 ##  <Example><![CDATA[
-##  gap> S;
-##  <The simplicial set of the orbifold triangulation "Teardrop",
-##  computed up to dimension 0 with Length vector [ 4 ]>
+##  gap> S := SimplicialSet( Teardrop );
+##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+##  imension 0 with Length vector [ 4 ]>
 ##  gap> R := HomalgRingOfIntegers();
 ##  <A homalg internal ring>
-##  gap> M := CreateCohomologyMatrix( S, 4, R );;
+##  gap> M := CreateCoboundaryMatrices( S, 4, R );;
 ##  gap> Cohomology( M, R );
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
 ##  ----------------------------------------------->>>>  0
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
 ##  ----------------------------------------------->>>>  0
 ##  ----------------------------------------------->>>>  Z/< 2 >
-##  <A graded cohomology object consisting of 5 left modules at degrees [ 0 .. 4 ]>
+##  <A graded cohomology object consisting of 5 left modules at degrees
+##  [ 0 .. 4 ]>
 ##  ]]></Example>
 ##  </Description>
 ##  </ManSection>
@@ -155,7 +156,7 @@ InstallMethod( Cohomology,
 ##  <Description>
 ##  This is just an easy way to call the script <F>examples.g</F>, which is
 ##  located in <F>gap/pkg/SCO/examples/</F>.
-##  <Example><![CDATA[
+##  <Log><![CDATA[
 ##  gap> SCO_Examples();
 ##  @@@@@@@@ SCO @@@@@@@@
 ##  
@@ -200,7 +201,7 @@ InstallMethod( Cohomology,
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
 ##  ----------------------------------------------->>>>  0
 ##  ----------------------------------------------->>>>  0    
-##  ]]></Example>
+##  ]]></Log>
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
