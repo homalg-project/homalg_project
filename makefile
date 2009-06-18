@@ -1,25 +1,34 @@
+all: doc test
+
 doc: doc/manual.six
 
-doc/manual.six: doc/GaussForHomalg.xml doc/install.xml \
-		doc/intro.xml VERSION
+doc/manual.six: makedoc.g maketest.g \
+		PackageInfo.g VERSION \
+		doc/*.xml \
+		gap/*.gd gap/*.gi
 	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
-archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".git" --exclude test --exclude "public_html" GaussForHomalg)
+test:	doc
+	gapL -x 80 maketest.g
+
+archive: test
+	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" GaussForHomalg/doc/*.* GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
 WEBPOS=~/gap/pkg/GaussForHomalg/public_html
+WEBPOS_FINAL=~/Sites/GaussForHomalg
 
 towww: archive
-	echo '<?xml version="1.0" encoding="ISO-8859-1"?>' >${WEBPOS}.version
+	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
 	echo '<mixer>' >>${WEBPOS}.version
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
 	cp PackageInfo.g ${WEBPOS}
 	cp README ${WEBPOS}/README.GaussForHomalg
 	cp doc/manual.pdf ${WEBPOS}/GaussForHomalg.pdf
+	cp doc/*.{css,html} ${WEBPOS}
 	cp ../tar/GaussForHomalg.tar.gz ${WEBPOS}
-	cp doc/*.html ${WEBPOS}/
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 

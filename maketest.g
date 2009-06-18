@@ -4,12 +4,8 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "GaussForHomalg" );
 LoadPackage( "GAPDoc" );
-
-SetGapDocLaTeXOptions( "utf8" );
-
-#bib := ParseBibFiles( "doc/Gauss.bib" );
-#WriteBibXMLextFile( "doc/GaussBib.xml", bib );
 
 list := [
          "../gap/GaussForHomalg.gi",
@@ -18,7 +14,7 @@ list := [
          "../gap/GaussFQI.gi"
          ];
 
-MakeGAPDocDoc( "doc", "GaussForHomalg", list, "GaussForHomalg" );
+TestManualExamples( "doc", "GaussForHomalg.xml", list );
 
 GAPDocManualLab( "GaussForHomalg" );
 

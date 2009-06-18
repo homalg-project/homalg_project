@@ -86,7 +86,7 @@ InstallValue( CommonHomalgTableForGaussTools,
 ##  <Func Arg="M, R" Name="ImportMatrix"/>
 ##  <Returns>a sparse matrix</Returns>
 ##  <Description>
-##  This returns the sparse version of the &homalg; matrix <A>M</A>
+##  This returns the sparse version of the &GAP; matrix <A>M</A>
 ##  over the ring <A>R</A>. It prevents &homalg; from calling sparse matrix
 ##  algorithms on dense &GAP; matrices. Note that this is not a
 ##  "standard" tool but neccessary because of the new data type.

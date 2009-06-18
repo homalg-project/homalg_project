@@ -17,18 +17,25 @@
   </author>  
   <title>homalg project</title>
   <year>2003-2008</year>
-  <note><URL>http://wwwb.math.rwth-aachen.de/homalg</URL></note>
+  <note><URL>http://homalg.math.rwth-aachen.de/</URL></note>
 </manual></entry>
 <entry id="BR"><article>
   <author>
     <name><first>Mohamed</first><last>Barakat</last></name>
     <name><first>Daniel</first><last>Robertz</last></name>
   </author>  
-  <title><C>homalg -- A meta-package for homological
-      algebra</C></title>
-  <note>accepted for publication in Journal of Algebra and its Applications.
-      <URL Link="http://arxiv.org/abs/math.AC/0701146">arXiv:math.AC/0701146</URL> and
-      <URL>http://wwwb.math.rwth-aachen.de/homalg</URL></note>
+  <title>homalg -- <C>A</C> <C>M</C>eta-<C>P</C>ackage for <C>H</C>omological
+      <C>A</C>lgebra</title>
+  <journal>J. Algebra Appl.</journal>
+  <year>2008</year>
+  <volume>7</volume>
+  <number>3</number>
+  <pages>299--317</pages>
+  <note><URL Link="http://arxiv.org/abs/math.AC/0701146">arXiv:math.AC/0701146</URL></note>
+  <issn>0219-4988</issn>
+  <mrnumber>MR2431811</mrnumber>
+  <mrclass>16E30 (16-04)</mrclass>
+  <other type="fjournal">Journal of Algebra and its Applications</other>
   <other type="eprint">arXiv:math.AC/0701146</other>
 </article></entry>
 <entry id="MP_SCO"><article>
@@ -53,11 +60,12 @@
   <author>
     <name><first>Mohamed</first><last>Barakat</last></name>
     <name><first>Simon</first><last>Görtzen</last></name>
+    <name><first>Markus</first><last>Kirschmer</last></name>
     <name><first>Markus</first><last>Lange-Hegermann</last></name>
   </author>  
   <title>GAP Package RingsForHomalg</title>
   <year>2007-2008</year>
-  <note><URL>http://wwwb.math.rwth-aachen.de/homalg</URL></note>
+  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg</URL></note>
 </manual></entry>
 <entry id="SCO"><manual>
   <author>

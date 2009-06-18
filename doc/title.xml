@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 
   title.xml            GaussForHomalg package documentation                  Simon Goertzen
                                                                      
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2008, Lehrstuhl B fÃ¼r Mathematik, RWTH-Aachen
 
 This is the title page.
 
@@ -17,7 +19,7 @@ This is the title page.
     </Version>
     <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
 <Address>
-Lehrstuhl B für Mathematik<Br/>
+Lehrstuhl B fÃ¼r Mathematik<Br/>
 RWTH Aachen<Br/>
 Templergraben 64<Br/>
 52062 Aachen<Br/>
@@ -40,13 +42,13 @@ Templergraben 64<Br/>
   </Abstract>
 
   <Acknowledgements>Many thanks to Mohamed Barakat
-  and the Lehrstuhl B für Mathematik at RWTH Aachen University in
+  and the Lehrstuhl B fÃ¼r Mathematik at RWTH Aachen University in
   general for their support. It should be noted that &GaussForHomalg;
   is dependant on the &GAP; &homalg; package by M. Barakat <Cite
   Key="homalg"/>, as well as the &Gauss; package by myself <Cite
   Key="Gauss"/>. This should be clear as &GaussForHomalg; presents a
   link between these two packages. This manual was created with the help of the &GAPDoc;
-  package by M. Neunhöffer and F. Lübeck <Cite Key="GAPDoc"/>.
+  package by M. NeunhÃ¶ffer and F. LÃ¼beck <Cite Key="GAPDoc"/>.
   </Acknowledgements>
 
 </TitlePage>
