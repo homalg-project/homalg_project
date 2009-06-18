@@ -295,7 +295,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -386,7 +386,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocal,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -479,7 +479,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfree,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -572,7 +572,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutiveLocalBasisfreeGINV,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -665,7 +665,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`Janet/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`Janet/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -742,7 +742,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`JanetOre/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`JanetOre/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         
@@ -820,7 +820,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
         fi;
         
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
-        package_version := EvalString( homalgSendBlocking("\`OreModules/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ) );
+        package_version := homalgSendBlocking("\`OreModules/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "----------------------------------------------------------------\n" );
         

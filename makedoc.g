@@ -18,7 +18,6 @@ list := [
 
 MakeGAPDocDoc( "doc", "RingsForHomalg", list, "RingsForHomalg" );
 
-GAPDocManualLab("RingsForHomalg");
+GAPDocManualLab( "RingsForHomalg" );
 
 quit;
-

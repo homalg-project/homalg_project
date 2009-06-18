@@ -17,7 +17,6 @@ list := [
 
 TestManualExamples( "doc", "RingsForHomalg.xml", list );
 
-GAPDocManualLab("RingsForHomalg");
+GAPDocManualLab( "RingsForHomalg" );
 
 quit;
-
