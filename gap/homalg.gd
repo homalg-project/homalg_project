@@ -196,3 +196,6 @@ DeclareOperation( "homalgLaTeX",
 DeclareOperation( "ExamplesForHomalg",
         [ ] );
 
+DeclareOperation( "ExamplesForHomalg",
+        [ IsInt ] );
+

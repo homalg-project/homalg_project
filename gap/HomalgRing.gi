@@ -346,7 +346,7 @@ InstallMethod( SetRingProperties,
     
     SetCoefficientsRing( S, R );
     
-    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+    if HasCharacteristic( R ) then
         SetCharacteristic( S, Characteristic( R ) );
     fi;
     

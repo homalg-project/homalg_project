@@ -672,3 +672,17 @@ InstallMethod( ExamplesForHomalg,
     
 end );
 
+##
+InstallMethod( ExamplesForHomalg,
+        [ IsInt ], 0,
+        
+  function( d )
+    
+    if LoadPackage( "ExamplesForHomalg" ) = true then
+        ExamplesForHomalg( d );
+    else
+        return fail;
+    fi;
+    
+end );
+
