@@ -36,7 +36,7 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> homalgSendBlocking( [ "K[op(", R, "[1])]" ], "need_output" )
+               RingName := function( R ) local r; if HasCoefficientsRing( R ) then r := RingName( CoefficientsRing( R ) ); else r := "k"; fi; return homalgSendBlocking( [ r, "[op(", R, "[1])]" ], "need_output" ); end,
                
           );
     

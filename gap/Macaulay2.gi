@@ -177,7 +177,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMacaulay2,
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
-        Error( "the ring Z/nZ, n nonprime, is not yet fully supported in Macaulay2!\n" );
+        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Macaulay2!\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
     if IsBound( stream ) then

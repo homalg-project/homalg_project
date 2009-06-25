@@ -36,7 +36,7 @@ InstallMethod( CreateHomalgTable,
                ## (homalg functions check if these functions are defined or not)
                ## (homalgTable gives no default value)
                
-               RingName := R -> Concatenation( "K<", homalgSendBlocking( [ "op(", R, "[1][1])" ], HOMALG_IO.Pictograms.variables, "need_output" ), "|", homalgSendBlocking( [ "op(", R, "[1][3])" ], HOMALG_IO.Pictograms.variables, "need_output" ), ">" ),
+               RingName := function( R ) local r; if HasCoefficientsRing( R ) then r := RingName( CoefficientsRing( R ) ); else r := "k"; fi; return Concatenation( r, "<", homalgSendBlocking( [ "op(", R, "[1][1])" ], HOMALG_IO.Pictograms.variables, "need_output" ), "|", homalgSendBlocking( [ "op(", R, "[1][3])" ], HOMALG_IO.Pictograms.variables, "need_output" ), ">" ); end,
                
           );
     

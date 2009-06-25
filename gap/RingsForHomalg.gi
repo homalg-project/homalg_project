@@ -154,7 +154,7 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
     local var, nr_var, properties, r, var_of_base_ring;
     
     if HasRingRelations( R ) then
-        Error( "polynomial rings over homalg residue class rings are not supported yet\n" );
+        Error( "polynomial rings over homalg residue class rings are not supported yet\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
     ## get the new indeterminates for the ring and save them in var

@@ -502,7 +502,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
-        Error( "the ring Z/nZ, n nonprime, is not yet fully supported in MAGMA!\n" );
+        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for MAGMA!\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
     if IsBound( stream ) then
