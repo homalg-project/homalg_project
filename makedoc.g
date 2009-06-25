@@ -27,7 +27,6 @@ list := [
 
 MakeGAPDocDoc( "doc", "ExamplesForHomalg", list, "ExamplesForHomalg" );
 
-GAPDocManualLab("ExamplesForHomalg");
+GAPDocManualLab( "ExamplesForHomalg" );
 
 quit;
-

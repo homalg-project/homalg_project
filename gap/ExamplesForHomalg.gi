@@ -20,7 +20,7 @@
 
 InstallValue( HOMALG_EXAMPLES,
         rec(
-            
+            OwnRingOrReadFile := 1
             )
 );
 
@@ -32,9 +32,9 @@ InstallValue( HOMALG_EXAMPLES,
 
 ## an easy way of calling the example script ExamplesForHomalg/examples/examples.g
 InstallMethod( ExamplesForHomalg,
-        [ ],
+        [ IsInt ],
         
-  function( )
+  function( d )
     local directory, separator;
     
     if IsBound( PackageInfo("ExamplesForHomalg")[1] ) and
@@ -54,6 +54,23 @@ InstallMethod( ExamplesForHomalg,
         directory := Concatenation( directory, separator );
     fi;
     
+    HOMALG_EXAMPLES.OwnRingOrReadFile := d;
+    
     Read( Concatenation( directory, "examples", separator, "examples.g" ) );
+    
+end );
+
+##
+InstallMethod( ExamplesForHomalg,
+        [ ],
+        
+  function( )
+    
+    if IsBound( HOMALG_EXAMPLES.OwnRingOrReadFile ) and
+       IsPosInt( HOMALG_EXAMPLES.OwnRingOrReadFile ) then
+        ExamplesForHomalg( HOMALG_EXAMPLES.OwnRingOrReadFile );
+    else
+        ExamplesForHomalg( 1 );
+    fi;
     
 end );
