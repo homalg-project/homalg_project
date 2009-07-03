@@ -1682,7 +1682,7 @@ InstallMethod( IsSubset,
         "for homalg submodules",
         [ IsHomalgModule, IsFinitelyPresentedSubmoduleRep ],
         
-  function( J, K )
+  function( K, J )	## GAP-standard: is J a subset of K
     local M, genJ, genK, rel, div;
     
     M := SuperObject( J );
