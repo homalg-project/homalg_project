@@ -238,6 +238,20 @@ DeclareCategory( "IsHomalgSelfMap",
 DeclareAttribute( "MorphismAidMap",
         IsHomalgMap );
 
+##  <#GAPDoc Label="ImageSubmodule">
+##  <ManSection>
+##    <Attr Arg="phi" Name="ImageSubmodule" Label="for maps"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated image of the &homalg; map <A>phi</A>
+##      as a submodule of the &homalg; module <C>Range</C>(<A>phi</A>) with generators given by <A>phi</A>
+##      applied to the generators of its source module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "ImageSubmodule",
+        IsHomalgMap );
+
 ####################################
 #
 # global functions and operations:

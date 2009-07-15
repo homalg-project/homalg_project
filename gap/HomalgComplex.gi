@@ -1244,6 +1244,7 @@ end );
 ##  at homology degree: 0
 ##  [ [  2,  3,  4,  5 ],
 ##    [  6,  7,  8,  9 ] ]
+##  
 ##  Cokernel of the map
 ##  
 ##  Z^(1x2) --> Z^(1x4),
@@ -1259,6 +1260,7 @@ end );
 ##  at homology degree: 1
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
+##  
 ##  Cokernel of the map
 ##  
 ##  Z^(1x2) --> Z^(1x3),

@@ -35,6 +35,7 @@
 <#Include Label="HomalgZeroRightModule">
 <#Include Label="\*:ModuleBaseChange">
 <#Include Label="Subobject">
+<#Include Label="Subobject:map">
 <#Include Label="LeftSubmodule">
 <#Include Label="RightSubmodule">
 

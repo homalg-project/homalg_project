@@ -1350,6 +1350,17 @@ InstallMethod( TheIdentityMorphism,
 end );
 
 ##
+InstallMethod( FullSubmodule,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return Subobject( HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) ), M );
+    
+end );
+
+##
 InstallMethod( RankOfModule,
         "LIMOD: for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
@@ -1743,7 +1754,7 @@ InstallMethod( EmbeddingInSuperObject,
         
   function( M )
     
-    return ImageSubmoduleEmb( M!.map_having_subobject_as_its_image );
+    return ImageModuleEmb( M!.map_having_subobject_as_its_image );
     
 end );
 

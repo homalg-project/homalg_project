@@ -215,6 +215,9 @@ DeclareAttribute( "Genesis",
 DeclareAttribute( "AFiniteFreeResolution",
         IsHomalgModule );
 
+DeclareAttribute( "FullSubmodule",
+        IsHomalgModule );
+
 ## intrinsic attributes:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

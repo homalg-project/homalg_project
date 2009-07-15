@@ -19,10 +19,10 @@ DeclareGlobalFunction( "_Functor_Cokernel_OnObjects" );
 
 DeclareGlobalVariable( "functor_Cokernel" );
 
-## ImageSubmodule
-DeclareGlobalFunction( "_Functor_ImageSubmodule_OnObjects" );
+## ImageModule
+DeclareGlobalFunction( "_Functor_ImageModule_OnObjects" );
 
-DeclareGlobalVariable( "functor_ImageSubmodule" );
+DeclareGlobalVariable( "functor_ImageModule" );
 
 ## Kernel
 DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
@@ -63,10 +63,10 @@ DeclareAttribute( "CokernelNaturalGeneralizedEmbedding",
 DeclareAttribute( "KernelEmb",
         IsHomalgMap );
 
-DeclareAttribute( "ImageSubmoduleEmb",
+DeclareAttribute( "ImageModuleEmb",
         IsHomalgMap );
 
-DeclareAttribute( "ImageSubmoduleEpi",
+DeclareAttribute( "ImageModuleEpi",
         IsHomalgMap );
 
 DeclareAttribute( "NatTrIdToHomHom_R",
@@ -83,7 +83,7 @@ DeclareAttribute( "NatTrIdToHomHom_R",
 DeclareOperation( "Cokernel",
         [ IsHomalgMap ] );
 
-DeclareOperation( "ImageSubmodule",	## Image is unfortunately declared in the GAP library as a global function :(
+DeclareOperation( "ImageModule",	## Image is unfortunately declared in the GAP library as a global function :(
         [ IsHomalgMap ] );
 
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)

@@ -1383,6 +1383,7 @@ end );
 ##  gap> Display( M );
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
+##  
 ##  Cokernel of the map
 ##  
 ##  Z^(1x2) --> Z^(1x3),
@@ -1718,6 +1719,32 @@ InstallMethod( \=,
   function( J, K )
     
     return IsSubset( J, K ) and IsSubset( K, J );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsHomalgRing ],
+        
+  function( J, R )
+    
+    if not IsIdenticalObj( HomalgRing( J ), R ) then
+        Error( "the given ring and the ring of the submodule are not identical\n" );
+    fi;
+    
+    return IsSubset( J, FullSubmodule( SuperObject( J ) ) );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for homalg submodules",
+        [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( R, J )
+    
+    return J = R;
     
 end );
 
@@ -2062,6 +2089,7 @@ end );
 ##  gap> Display( M );
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
+##  
 ##  Cokernel of the map
 ##  
 ##  Z^(1x2) --> Z^(1x3),
@@ -2688,6 +2716,22 @@ InstallGlobalFunction( GetGenerators,
     
 end );
 
+##  <#GAPDoc Label="Subobject:map">
+##  <ManSection>
+##    <Oper Arg="phi" Name="Subobject" Label="constructor for submodules using maps"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      A synonym of <Ref Attr="ImageSubmodule" Label="for maps"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( Subobject,
+        "constructor",
+        [ IsHomalgMap ],
+	
+  ImageSubmodule );
+
 ##  <#GAPDoc Label="Subobject">
 ##  <ManSection>
 ##    <Oper Arg="mat,M" Name="Subobject" Label="constructor for submodules"/>
@@ -2698,35 +2742,6 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-##
-InstallMethod( Subobject,
-        "constructor",
-        [ IsHomalgMap ],
-        
-  function( gen_map )
-    local R, N;
-    
-    R := HomalgRing( gen_map );
-    
-    N := rec( map_having_subobject_as_its_image := gen_map );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( gen_map ) then
-        ## Objectify:
-        ObjectifyWithAttributes(
-                N, TheTypeHomalgLeftFinitelyGeneratedSubmodule,
-                LeftActingDomain, R );
-    else
-        ## Objectify:
-        ObjectifyWithAttributes(
-                N, TheTypeHomalgRightFinitelyGeneratedSubmodule,
-                RightActingDomain, R );
-    fi;
-    
-    return N;
-    
-end );
-
 ##
 InstallMethod( Subobject,
         "constructor",
@@ -2741,17 +2756,17 @@ InstallMethod( Subobject,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         if NrColumns( gen ) <> NrGenerators( M ) then
-            Error( "the first argument is matrix with ", NrColumns( MatrixOfGenerators( gen ) )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+            Error( "the first argument is matrix with ", NrColumns( gen )," columns while the second argument is a module on ", NrGenerators( M ), " generators\n" );
         fi;
     else
         if NrRows( gen ) <> NrGenerators( M ) then
-            Error( "the first argument is matrix with ", NrRows( MatrixOfGenerators( gen ) )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
+            Error( "the first argument is matrix with ", NrRows( gen )," rows while the second argument is a module on ", NrGenerators( M ), " generators\n" );
         fi;
     fi;
     
     gen_map := HomalgMap( gen, "free", M  );
     
-    return Subobject( gen_map );
+    return ImageSubmodule( gen_map );
     
 end );
 
@@ -2772,7 +2787,7 @@ InstallMethod( LeftSubmodule,
     
     R := HomalgRing( gen );
     
-    return Subobject( gen, 1 * R );
+    return Subobject( gen, NrColumns( gen ) * R );
     
 end );
 ##  ]]></Listing>
@@ -2809,7 +2824,7 @@ InstallMethod( RightSubmodule,
     
     R := HomalgRing( gen );
     
-    return Subobject( gen, R * 1 );
+    return Subobject( gen, R * NrRows( gen ) );
     
 end );
 ##  ]]></Listing>
@@ -3306,7 +3321,9 @@ InstallMethod( Display,
     
     gen := MatrixOfGenerators( M );
     
-    Print( "A " );
+    Display( gen );
+    
+    Print( "\nA " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         l := NrRows( gen );
@@ -3330,7 +3347,7 @@ InstallMethod( Display,
                 Print( l, " rows" );
             fi;
         fi;
-        Print( " of the following matrix:\n" );
+        Print( " of the above matrix\n" );
     else
         l := NrColumns( gen );
         if IsIdenticalObj( SuperObject( M ), R * 1 ) then
@@ -3353,10 +3370,8 @@ InstallMethod( Display,
                 Print( l, " columns" );
             fi;
         fi;
-        Print( " of the following matrix:\n" );
+        Print( " of the above matrix\n" );
     fi;
-    
-    Display( gen );
     
 end );
 
@@ -3386,7 +3401,7 @@ InstallMethod( Display,
         Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n\n" );
     fi;
     
-    Print( "Cokernel of the map\n\n" );
+    Print( "\nCokernel of the map\n\n" );
     
     if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then

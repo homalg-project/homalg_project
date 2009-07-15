@@ -75,6 +75,7 @@
 ##  gap> Display( last );
 ##  [ [   0,   2,   0 ],
 ##    [   0,   0,  12 ] ]
+##  
 ##  Cokernel of the map
 ##  
 ##  Z^(1x2) --> Z^(1x3),

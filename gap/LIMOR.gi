@@ -522,3 +522,37 @@ InstallMethod( IsQuasiIsomorphism,
     
 end );
 
+####################################
+#
+# methods for attributes:
+#
+####################################
+
+##
+InstallMethod( ImageSubmodule,
+        "constructor",
+        [ IsHomalgMap ],
+        
+  function( gen_map )
+    local R, N;
+    
+    R := HomalgRing( gen_map );
+    
+    N := rec( map_having_subobject_as_its_image := gen_map );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( gen_map ) then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                N, TheTypeHomalgLeftFinitelyGeneratedSubmodule,
+                LeftActingDomain, R );
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                N, TheTypeHomalgRightFinitelyGeneratedSubmodule,
+                RightActingDomain, R );
+    fi;
+    
+    return N;
+    
+end );
+

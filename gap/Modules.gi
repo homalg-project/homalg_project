@@ -65,6 +65,44 @@ InstallMethod( \/,				## needed by _Functor_Kernel_OnObjects since SyzygiesGener
 end );
 
 ##
+InstallMethod( \/,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    local M, embK, embJ, phi;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    embK := EmbeddingInSuperObject( K );
+    embJ := EmbeddingInSuperObject( J );
+    
+    phi := PreCompose( embK, CokernelEpi( embJ ) );
+    
+    return ImageModule( phi );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg submodules",
+        [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( R, J )
+    
+    if not IsIdenticalObj( HomalgRing( J ), R ) then
+        Error( "the given ring and the ring of the submodule are not identical\n" );
+    fi;
+    
+    return FullSubmodule( SuperObject( J ) ) / J;
+    
+end );
+
+##
 InstallMethod( BoundForResolution,
         "for homalg relations",
         [ IsHomalgRelations ],
@@ -903,6 +941,71 @@ InstallMethod( Intersect,
 end );
 
 ##
+InstallMethod( Intersect,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    local M, embK, embJ, int;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    embK := MatrixOfMap( EmbeddingInSuperObject( K ) );
+    embJ := MatrixOfMap( EmbeddingInSuperObject( J ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
+        embK := HomalgRelationsForLeftModule( embK );
+        embJ := HomalgRelationsForLeftModule( embJ );
+    else
+        embK := HomalgRelationsForRightModule( embK );
+        embJ := HomalgRelationsForRightModule( embJ );
+    fi;
+    
+    int := Intersect( embK, embJ );
+    int := MatrixOfRelations( int );
+    
+    return Subobject( int, M );
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    local M, embK, embJ, int;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    embK := MatrixOfMap( EmbeddingInSuperObject( K ) );
+    embJ := MatrixOfMap( EmbeddingInSuperObject( J ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
+        embK := HomalgRelationsForLeftModule( embK );
+        embJ := HomalgRelationsForLeftModule( embJ );
+    else
+        embK := HomalgRelationsForRightModule( embK );
+        embJ := HomalgRelationsForRightModule( embJ );
+    fi;
+    
+    int := UnionOfRelations( embK, embJ );
+    int := ReducedBasisOfModule( int, "COMPUTE_BASIS" );
+    int := MatrixOfRelations( int );
+    
+    return Subobject( int, M );
+    
+end );
+
+##
 InstallMethod( Annihilator,
         "for homalg relations",
         [ IsHomalgMatrix, IsHomalgRelations ],
@@ -918,7 +1021,15 @@ InstallMethod( Annihilator,
     
     syz := List( syz, r -> ReducedSyzygiesGenerators( r, rel ) );
     
-    return Iterated( syz, Intersect );
+    syz := Iterated( syz, Intersect );
+    
+    syz := MatrixOfRelations( syz );
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        return LeftSubmodule( syz );
+    else
+        return RightSubmodule( syz );
+    fi;
     
 end );
 
@@ -1070,7 +1181,7 @@ InstallMethod( SubmoduleOfIdealMultiples,
     
     scalar := HomalgMap( scalar, "free", M );
     
-    return ImageSubmodule( scalar );
+    return ImageModule( scalar );
     
 end );
 

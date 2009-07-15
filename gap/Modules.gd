@@ -29,6 +29,12 @@ DeclareOperation( "/",
 DeclareOperation( "/",
         [ IsHomalgRelations, IsHomalgModule ] );
 
+DeclareOperation( "/",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "/",
+        [ IsHomalgRing, IsHomalgModule ] );
+
 DeclareOperation( "BoundForResolution",
         [ IsHomalgRelations ] );
 
@@ -97,6 +103,9 @@ DeclareOperation( "FiniteFreeResolution",
 
 DeclareOperation( "Intersect",
         [ IsHomalgRelations, IsHomalgRelations ] );
+
+DeclareOperation( "Intersect",
+        [ IsHomalgModule, IsHomalgModule ] );
 
 DeclareOperation( "Annihilator",
         [ IsHomalgMatrix, IsHomalgRelations ] );

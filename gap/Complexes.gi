@@ -917,7 +917,7 @@ InstallMethod( DefectOfExactnessSequence,
     F_Z := KernelEmb( post );
     
     ## read: F <- B
-    F_B := ImageSubmoduleEmb( pre );
+    F_B := ImageModuleEmb( pre );
     
     ## read: Z <- B
     Z_B := F_B / F_Z;
@@ -967,7 +967,7 @@ InstallMethod( DefectOfExactnessCosequence,
     Z_F := KernelEmb( post );
     
     ## read: B -> F
-    B_F := ImageSubmoduleEmb( pre );
+    B_F := ImageModuleEmb( pre );
     
     ## read: B -> Z
     B_Z := B_F / Z_F;

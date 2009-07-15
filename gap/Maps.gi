@@ -94,7 +94,7 @@ InstallMethod( CokernelSequence,
   function( phi )
     local nu, epsilon, C;
     
-    nu := ImageSubmoduleEmb( phi );
+    nu := ImageModuleEmb( phi );
     
     epsilon := CokernelEpi( phi );
     
@@ -114,7 +114,7 @@ InstallMethod( CokernelCosequence,
   function( phi )
     local nu, epsilon, C;
     
-    nu := ImageSubmoduleEmb( phi );
+    nu := ImageModuleEmb( phi );
     
     epsilon := CokernelEpi( phi );
     
@@ -136,7 +136,7 @@ InstallMethod( KernelSequence,
     
     mu := KernelEmb( phi );
     
-    eta := ImageSubmoduleEpi( phi );
+    eta := ImageModuleEpi( phi );
     
     C := HomalgComplex( eta );
     
@@ -156,7 +156,7 @@ InstallMethod( KernelCosequence,
     
     mu := KernelEmb( phi );
     
-    eta := ImageSubmoduleEpi( phi );
+    eta := ImageModuleEpi( phi );
     
     C := HomalgCocomplex( mu );
     
