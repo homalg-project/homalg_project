@@ -56,6 +56,7 @@
 <#Include Label="Range:map">
 <#Include Label="DegreeOfMorphism:map">
 <#Include Label="ImageSubmodule">
+<#Include Label="KernelSubmodule">
 <#Include Label="MorphismAidMap:map">
 
 </Section>

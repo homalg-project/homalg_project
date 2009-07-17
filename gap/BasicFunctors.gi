@@ -171,7 +171,7 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     
     ## check assertion
     Assert( 4, IsMonomorphism( emb ) );
-        
+    
     SetIsMonomorphism( emb, true );
     
     ## set the attribute ImageModuleEmb (specific for ImageModule):
@@ -247,7 +247,7 @@ end );
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
   function( psi )
-    local S, p, ker, emb, img_epi, T, coker, im;
+    local S, p, ker_submodule, emb, ker, img_epi, T, coker, im;
     
     if HasKernelEmb( psi ) then
         return Source( KernelEmb( psi ) );
@@ -255,21 +255,13 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     S := Source( psi );
     
-    ## this is probably obsolete but clarifies our idea:
-    p := PositionOfTheDefaultSetOfGenerators( S );	## avoid future possible side effects of the following command(s)
+    ## the following keeps track of the original generators:
+    ker_submodule := KernelSubmodule( psi );
     
-    ## this following keeps track of the original generators:
-    ker := ReducedSyzygiesGenerators( psi ) / S;	## the number of generators of ker might be less than the number of computed syzygies
+    emb := EmbeddingInSuperObject( ker_submodule );
     
-    ## emb is the matrix of the natural embedding
-    ## w.r.t. the first set of relations of ker and the p-th set of relations of S
-    emb := MatrixOfGenerators( ker, 1 );
-    
-    emb := HomalgMap( emb, [ ker, 1 ], [ S, p ] );
-    
-    ## we cannot check this assertion, since
-    ## checking it would cause an infinite loop
-    SetIsMonomorphism( emb, true );
+    ## the number of generators of ker might be less than the number of computed syzygies ker_gen
+    ker := Source( emb );
     
     ## set the attribute KernelEmb (specific for Kernel):
     SetKernelEmb( psi, emb );

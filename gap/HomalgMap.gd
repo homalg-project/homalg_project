@@ -224,20 +224,6 @@ DeclareCategory( "IsHomalgSelfMap",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="MorphismAidMap:map">
-##  <ManSection>
-##    <Attr Arg="phi" Name="MorphismAidMap" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
-##    <Description>
-##      The morphism aid map of a true generalized map. <Br/>
-##      (no method installed)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "MorphismAidMap",
-        IsHomalgMap );
-
 ##  <#GAPDoc Label="ImageSubmodule">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="ImageSubmodule" Label="for maps"/>
@@ -250,6 +236,34 @@ DeclareAttribute( "MorphismAidMap",
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "ImageSubmodule",
+        IsHomalgMap );
+
+##  <#GAPDoc Label="KernelSubmodule">
+##  <ManSection>
+##    <Attr Arg="phi" Name="KernelSubmodule" Label="for maps"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated kernel of the &homalg; map <A>phi</A>
+##      as a submodule of the &homalg; module <C>Source</C>(<A>phi</A>) with generators given by
+##      the syzygies of <A>phi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "KernelSubmodule",
+        IsHomalgMap );
+
+##  <#GAPDoc Label="MorphismAidMap:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="MorphismAidMap" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The morphism aid map of a true generalized map. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MorphismAidMap",
         IsHomalgMap );
 
 ####################################

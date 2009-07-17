@@ -530,17 +530,17 @@ end );
 
 ##
 InstallMethod( ImageSubmodule,
-        "constructor",
+        "LIMOR: submodule constructor",
         [ IsHomalgMap ],
         
-  function( gen_map )
+  function( phi )
     local R, N;
     
-    R := HomalgRing( gen_map );
+    R := HomalgRing( phi );
     
-    N := rec( map_having_subobject_as_its_image := gen_map );
+    N := rec( map_having_subobject_as_its_image := phi );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( gen_map ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         ## Objectify:
         ObjectifyWithAttributes(
                 N, TheTypeHomalgLeftFinitelyGeneratedSubmodule,
@@ -553,6 +553,22 @@ InstallMethod( ImageSubmodule,
     fi;
     
     return N;
+    
+end );
+
+##
+InstallMethod( KernelSubmodule,
+        "LIMOR: for homalg maps",
+        [ IsHomalgMap ],
+        
+  function( psi )
+    local ker_gen;
+    
+    ker_gen := ReducedSyzygiesGenerators( psi );
+    
+    ker_gen := MatrixOfRelations( ker_gen );
+    
+    return Subobject( ker_gen, Source( psi ) );
     
 end );
 
