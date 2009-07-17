@@ -296,7 +296,7 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPart,
     
     M_geq_d := HomalgMap( M_geq_d, "free", M );
     
-    return ImageSubmodule( M_geq_d );
+    return ImageModule( M_geq_d );
     
 end );
 
