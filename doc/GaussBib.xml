@@ -15,8 +15,24 @@
     <name><first>Mohamed</first><last>Barakat</last></name>
     <name><first>Daniel</first><last>Robertz</last></name>
   </author>  
-  <title>homalg project</title>
+  <title>The homalg package -- Maple</title>
   <year>2003-2008</year>
+  <note><URL>http://homalg.math.rwth-aachen.de/maple/</URL></note>
+</manual></entry>
+<entry id="homalg-package"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+  </author>  
+  <title>The homalg package -- GAP4</title>
+  <year>2007-2009</year>
+  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</URL></note>
+</manual></entry>
+<entry id="homalg-project"><manual>
+  <author>
+    <name><first>The</first><last>homalg team</last></name>
+  </author>  
+  <title>The homalg project</title>
+  <year>2003-2009</year>
   <note><URL>http://homalg.math.rwth-aachen.de/</URL></note>
 </manual></entry>
 <entry id="BR"><article>

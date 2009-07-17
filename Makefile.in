@@ -41,7 +41,7 @@ test:	doc
 	gapL -x 80 maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" Gauss/doc/*.* Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile.in,configure,makedoc.g,maketest.g})
+	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" Gauss/doc/*.* Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile.in,configure,makedoc.g,maketest.g} Gauss/src/gauss.c)
 
 WEBPOS=~/gap/pkg/Gauss/public_html
 #WEBPOS_FINAL=~/Sites/Gauss

@@ -93,7 +93,7 @@ in source code should just check out the files in the
     "Gauss upwards". While this is not neccessary for things like Rank
     or Kernel computations, this was one in a number of missing features
     important for the development of the &GAP; package &homalg; by
-    M. Barakat <Cite Key="homalg"/>.<P/><P/>
+    M. Barakat <Cite Key="homalg-package"/>.<P/><P/>
     
     Parallel to this development I worked on &SCO; <Cite Key="SCO"/>,
     a package for creating simplicial sets and computing the
@@ -122,7 +122,7 @@ in source code should just check out the files in the
 
  <Section Label="sec:app"><Heading>The applications of the &Gauss; package algorithms</Heading>
     
-    Please refer to <Cite Key="homalg"/>  to find out more about the
+    Please refer to <Cite Key="homalg-project"/>  to find out more about the
     &homalg; project and its related packages. Most of the motivation
     for the algorithms in the &Gauss; package can be found there. If
     you are interested in this project, you might also want to check
@@ -135,9 +135,9 @@ in source code should just check out the files in the
     <M>&ZZ; / \langle p^n \rangle</M>.<P/>
     
     For those unfamiliar with the &homalg; project let me explain a
-    couple of points. As outlined in <Cite Key="BR"/> by  Daniel
-    Robertz and M. Barakat homological computations can be reduced to
-    three basic tasks:<P/>
+    couple of points. As outlined in <Cite Key="BR"/> by D. Robertz
+    and M. Barakat homological computations can be reduced to three
+    basic tasks:<P/>
 
     <List>
      <Item>Computing a row basis of a module (<C>BasisOfRowModule</C>).</Item>
