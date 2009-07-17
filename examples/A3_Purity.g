@@ -100,6 +100,7 @@
 ##  0, 0,   Dz,    
 ##  0, 0,   Dy,    
 ##  0, 0,   Dx     
+##  
 ##  Cokernel of the map
 ##  
 ##  R^(1x6) --> R^(1x3), ( for R := Q[x,y,z]<Dx,Dy,Dz> )

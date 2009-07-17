@@ -14,7 +14,7 @@ M := HomalgMatrix( "[ \
 
 M := HomalgMap( M, "free", "free" );
 
-M := ImageSubmodule( M );
+M := ImageModule( M );
 
 e := FreeHullEpi( M );
 
