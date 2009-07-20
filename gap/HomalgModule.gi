@@ -44,13 +44,16 @@
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; modules. <P/>
-##      It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>.
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
+##       which is a subrepresentation of the &GAP; representations
+##      <C>IsFinitelyGeneratedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsFinitelyGeneratedModuleRep",
-        IsHomalgModule,
+        IsHomalgModule and
+        IsFinitelyGeneratedObjectRep,
         [ ] );
 
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
@@ -2954,7 +2957,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsTorsion( M ) and IsTorsion( M ) then
-        if HasCodimOfModule( M ) then
+        if HasCodim( M ) then
             if HasIsPure( M ) then
                 if IsPure( M ) then
                     ## only display the purity information if the global dimension of the ring is > 1:
@@ -2978,7 +2981,7 @@ InstallMethod( ViewObj,
                 fi;
             fi;
             Append( properties, " codim " );
-            Append( properties, String( CodimOfModule( M ) ) );
+            Append( properties, String( Codim( M ) ) );
         else
             if HasIsPure( M ) then
                 if IsPure( M ) then
@@ -3137,7 +3140,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
+        [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
     local M, left, R, r, rk;
@@ -3203,7 +3206,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
+        [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
     local r, rk;
@@ -3218,12 +3221,12 @@ InstallMethod( ViewObj,
         Print( " graded" );
     fi;
     
-    Print( " free" );
+    Print( " free " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        Print( " left" );
+        Print( "left" );
     else
-        Print( " right" );
+        Print( "right" );
     fi;
     
     Print( " module" );
@@ -3251,7 +3254,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsLeft/RightModule it is good to set the ranks high
+        [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
     local M, left, R, r, rk;
@@ -3287,7 +3290,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
+        [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
   function( M )
     
@@ -3580,7 +3583,7 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsHomalgModule and IsZero ], 2001, ## since we don't use the filter IsLeft/RightModule we need to set the ranks high
+        [ IsHomalgModule and IsZero ], 2001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
   function( M )
     

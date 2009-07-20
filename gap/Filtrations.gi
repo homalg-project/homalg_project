@@ -183,7 +183,7 @@ InstallMethod( PurityFiltration,
             local L;
             L := CertainObject( filt, p );
             if not IsZero( L ) then
-                SetCodimOfModule( L, -p );
+                SetCodim( L, -p );
                 SetIsPure( L, true );
                 SetCodegreeOfPurity( L, StaircaseOfStability( II_E, [ p, -p ], 2 ) );
             fi;
@@ -209,7 +209,7 @@ InstallMethod( PurityFiltration,
     if l > 0 then
         p := non_zero_p[l];
         
-        SetCodimOfModule( M, -p );
+        SetCodim( M, -p );
         
         if l = 1 then
             SetIsPure( M, true );

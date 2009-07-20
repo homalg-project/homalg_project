@@ -278,9 +278,9 @@ DeclareAttribute( "ProjectiveDimension",
 DeclareAttribute( "DegreeOfTorsionFreeness",
         IsHomalgModule );
 
-##  <#GAPDoc Label="CodimOfModule">
+##  <#GAPDoc Label="Codim">
 ##  <ManSection>
-##    <Attr Arg="M" Name="CodimOfModule"/>
+##    <Attr Arg="M" Name="Codim"/>
 ##    <Returns>a nonnegative integer of infinity</Returns>
 ##    <Description>
 ##      The codimension of the &homalg; module <A>M</A>.
@@ -289,7 +289,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "CodimOfModule",
+DeclareAttribute( "Codim",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="PurityFiltration">

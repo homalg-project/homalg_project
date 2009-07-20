@@ -207,8 +207,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     ## IsPure
     if HasIsPure( M ) and HasIsPure( N ) then
         if IsPure( M ) and IsPure( N ) then
-            if HasCodimOfModule( M ) and HasCodimOfModule( N ) then
-                if CodimOfModule( M ) = CodimOfModule( N ) or
+            if HasCodim( M ) and HasCodim( N ) then
+                if Codim( M ) = Codim( N ) or
                    IsZero( M ) or IsZero( N ) then
                     SetIsPure( sum, true );
                 else
@@ -254,9 +254,9 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     
     ## attributes of the direct sum module
     
-    ## CodimOfModule
-    if HasCodimOfModule( M ) and HasCodimOfModule( N ) then
-        SetCodimOfModule( sum, Minimum( CodimOfModule( M ), CodimOfModule( N ) ) );
+    ## Codim
+    if HasCodim( M ) and HasCodim( N ) then
+        SetCodim( sum, Minimum( Codim( M ), Codim( N ) ) );
     fi;
     
     return sum;

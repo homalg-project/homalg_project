@@ -1663,12 +1663,16 @@ InstallMethod( ViewObj,
         
         if IsHomalgModule( oi ) then
             Print( " module" );
-        else
+        elif IsHomalgComplex( oi ) then
             if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
                 Print( " complex" );
             else
                 Print( " cocomplex" );
             fi;
+        elif IsBound( oi!.string ) then
+            Print( " ", oi!.string );
+        else
+            Print( " object" );
         fi;
         
         Print( " at degree ", degrees[1], ">" );
@@ -1691,12 +1695,18 @@ InstallMethod( ViewObj,
         
         if IsHomalgModule( oi ) then
             Print( " modules" );
-        else
+        elif IsHomalgComplex( oi ) then
             if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
                 Print( " complexes" );
             else
                 Print( " cocomplexes" );
             fi;
+        elif IsBound( oi!.string_plural ) then
+            Print( " ", oi!.string_plural );
+        elif IsBound( oi!.string ) then
+            Print( " ", oi!.string, "s" );
+        else
+            Print( " objects" );
         fi;
         
         if HasIsExactTriangle( o ) and IsExactTriangle( o ) then
@@ -1758,7 +1768,7 @@ InstallMethod( ViewObj,
         if l > 1 then
             Print( "s" );
         fi;
-    else
+    elif IsHomalgComplex( oi ) then
         if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
             Print( " complex" );
         else
@@ -1767,6 +1777,10 @@ InstallMethod( ViewObj,
         if l > 1 then
             Print( "es" );
         fi;
+    elif IsBound( oi!.string ) then
+        Print( " ", oi!.string );
+    else
+        Print( " object" );
     fi;
     
     Print( " at degree" );
