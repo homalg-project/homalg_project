@@ -47,7 +47,7 @@
 
 <#Include Label="StructureSheafOfProj">
 <#Include Label="RankOfSheaf">
-<#Include Label="CodimOfSheaf">
+<#Include Label="Codim">
 <#Include Label="CodegreeOfPurity">
 <#Include Label="CastelnuovoMumfordRegularity">
 

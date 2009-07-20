@@ -23,9 +23,11 @@ InstallValue( LISHV,
             color := "\033[4;30;46m",
             intrinsic_attributes :=
             [ "RankOfSheaf",
-              "CodimOfSheaf",
+              "Codim",
+              "DegreeOfTorsionFreeness",
               "PurityFiltration",
-              "CodegreeOfPurity" ]
+              "CodegreeOfPurity",
+              "CastelnuovoMumfordRegularity" ]
             )
         );
 
@@ -82,11 +84,11 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgSheaves, IsHoma
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgSheaf and HasCodimOfSheaf, 0,
+        IsHomalgSheaf and HasCodim, 0,
         
   function( E )
     
-    return CodimOfSheaf( E ) = infinity;
+    return Codim( E ) = infinity;
     
 end );
 
@@ -107,11 +109,106 @@ InstallImmediateMethod( IsTorsion,
     
 end );
 
+##
+InstallImmediateMethod( IsTorsion,
+        IsHomalgSheaf and HasRankOfSheaf, 0,
+        
+  function( M )
+    
+    return RankOfSheaf( M ) = 0;
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsion,
+        IsHomalgSheaf and HasTorsionFreeFactorEpi and HasIsZero, 0,
+        
+  function( M )
+    local F;
+    
+    F := Range( TorsionFreeFactorEpi( M ) );
+    
+    if not IsZero( M ) and HasIsZero( F ) then
+        if IsZero( F ) then
+            return true;
+        else
+            return false;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsion,
+        IsHomalgSheaf and HasCodim, 0,
+        
+  function( M )
+    
+    if Codim( M ) > 0 then
+        return true;
+    elif HasIsZero( M ) and not IsZero( M ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsionFree,
+        IsHomalgSheaf and HasTorsionSubmoduleEmb and HasIsZero, 0,
+        
+  function( M )
+    local T;
+    
+    T := Source( TorsionSubmoduleEmb( M ) );
+    
+    if not IsZero( M ) and HasIsZero( T ) then
+        if IsZero( T ) then
+            return true;
+        else
+            return false;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsReflexive,
+        IsHomalgSheaf and IsTorsionFree and HasCodegreeOfPurity, 0,
+        
+  function( M )
+    
+    return CodegreeOfPurity( M ) = [ 0 ];
+    
+end );
+
 ####################################
 #
 # immediate methods for attributes:
 #
 ####################################
+
+##
+InstallImmediateMethod( RankOfSheaf,
+        IsHomalgSheaf, 0,
+        
+  function( E )
+    local M;
+    
+    M := UnderlyingModule( E );
+    
+    if HasRankOfModule( M ) then
+        return RankOfModule( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ####################################
 #
@@ -222,7 +319,7 @@ InstallMethod( Rank,
 end );
 
 ##
-InstallMethod( CodimOfSheaf,
+InstallMethod( Codim,
         "for sheaves",
         [ IsHomalgSheaf ],
         
@@ -231,7 +328,7 @@ InstallMethod( CodimOfSheaf,
     
     M := UnderlyingModule( E );
     
-    codim := CodimOfModule( M );
+    codim := Codim( M );
     
     if codim > DimensionOfAmbientSpace( E ) then
        return infinity;

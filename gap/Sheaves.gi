@@ -18,14 +18,14 @@
 ##      The &GAP; representation of &homalg; sheaves of rings. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheafOfRings"/>,
 ##       which is a subrepresentation of the &GAP; representation
-##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsSheafOfRingsRep",
         IsHomalgSheafOfRings and
-        IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgRingOrFinitelyPresentedObjectRep,
         [ "graded_ring" ] );
 
 # a new representation for the GAP-category IsSetOfUnderlyingModules:
@@ -40,7 +40,7 @@ DeclareRepresentation( "IsSetOfUnderlyingModulesRep",
 ##    <Filt Type="Representation" Arg="M" Name="IsCoherentSheafRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; representation of coherent &homalg; sheaves. <P/>
+##      The &GAP; representation of coherent sheaves. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheaf"/>,
 ##       which is a subrepresentation of the &GAP; representation
 ##      <C>IsFinitelyPresentedObjectRep</C>.)
@@ -53,6 +53,24 @@ DeclareRepresentation( "IsCoherentSheafRep",
         IsFinitelyPresentedObjectRep,
         [ "UnderlyingModules",
           "PositionOfTheDefaultUnderlyingModule" ] );
+
+##  <#GAPDoc Label="IsCoherentSubsheafRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="M" Name="IsCoherentSubsheafRep"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; representation of coherent sheaves. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheaf"/>,
+##       which is a subrepresentation of the &GAP; representation
+##      <C>IsFinitelyPresentedSubobjectRep</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareRepresentation( "IsCoherentSubsheafRep",
+        IsHomalgSheaf and
+        IsFinitelyPresentedSubobjectRep,
+        [ "map_having_subobject_as_its_image" ] );
 
 ####################################
 #
@@ -293,7 +311,8 @@ InstallMethod( HomalgSheaf,
     
     E := rec(
              SetOfUnderlyingModules := CreateSetOfUnderlyingModulesOfSheaf( M ),
-             PositionOfTheDefaultUnderlyingModule := 1
+             PositionOfTheDefaultUnderlyingModule := 1,
+             string := "sheaf", string_plural := "sheaves"
              );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -548,13 +567,184 @@ InstallMethod( ViewObj,
         [ IsCoherentSheafRep ],
         
   function( E )
-    local O, S, weights;
+    local O, S, weights, is_subobject, M, R, left_sheaf, properties, nz;
     
     O := StructureSheafOfAmbientSpace( E );
     
     S := HomalgRing( O );
     
-    Print( "<A coherent sheaf of modules" );
+    is_subobject := IsFinitelyPresentedSubobjectRep( E );
+    
+    if is_subobject then
+        M := UnderlyingObject( E );
+        if HasIsFree( M ) and IsFree( M ) then
+            SetIsFree( E, true );
+            ViewObj( E );
+            return;
+        elif HasIsZero( M ) and IsZero( M ) then
+            SetIsZero( E, true );
+            ViewObj( E );
+            return;
+        fi;
+    else
+        M := E;
+    fi;
+    
+    left_sheaf := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    properties := "";
+    
+    if HasIsStablyFree( M ) and IsStablyFree( M ) then
+        Append( properties, " stably free" );
+        if HasIsFree( M ) and not IsFree( M ) then	## the "not"s are obsolete but kept for better readability
+            Append( properties, " non-free" );
+            nz := true;
+        fi;
+    elif HasIsDirectSumOfLineBundles( M ) and IsDirectSumOfLineBundles( M ) then
+        if HasRankOfSheaf( M ) and RankOfSheaf( M ) = 1 then
+            Append( properties, " invertible" );
+        else
+            Append( properties, " direct sum of line bundles" );
+        fi;
+        if HasIsFree( M ) and not IsFree( M ) then	## the "not"s are obsolete but kept for better readability
+            Append( properties, " non-free" );
+            nz := true;
+        fi;
+    elif HasIsLocallyFree( M ) and IsLocallyFree( M ) then
+        Append( properties, " locally free" );
+        if HasIsFree( M ) and not IsFree( M ) then
+            Append( properties, " non-free" );
+            nz := true;
+        fi;
+    elif HasIsReflexive( M ) and IsReflexive( M ) then
+        Append( properties, " reflexive" );
+        if HasIsLocallyFree( M ) and not IsLocallyFree( M ) then
+            Append( properties, " non-locally free" );
+            nz := true;
+        elif HasIsStablyFree( M ) and not IsStablyFree( M ) then
+            Append( properties, " non-stably free" );
+            nz := true;
+        elif HasIsFree( M ) and not IsFree( M ) then
+            Append( properties, " non-free" );
+            nz := true;
+        fi;
+    elif HasIsTorsionFree( M ) and IsTorsionFree( M ) then
+        if HasCodegreeOfPurity( M ) then
+            if CodegreeOfPurity( M ) = [ 1 ] then
+                Append( properties, Concatenation( " codegree-", String( 1 ), "-pure" ) );
+            else
+                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure" ) );
+            fi;
+            if not ( HasRankOfSheaf( M ) and RankOfSheaf( M ) > 0 ) then
+                Print( " torsion-free" );
+            fi;
+            nz := true;
+        else
+            Append( properties, " torsion-free" );
+            if HasIsReflexive( M ) and not IsReflexive( M ) then
+                Append( properties, " non-reflexive" );
+                nz := true;
+            elif HasIsLocallyFree( M ) and not IsLocallyFree( M ) then
+                Append( properties, " non-projective" );
+                nz := true;
+            elif HasIsFree( M ) and not IsFree( M ) then
+                Append( properties, " non-free" );
+                nz := true;
+            fi;
+        fi;
+    fi;
+    
+    if HasIsTorsion( M ) and IsTorsion( M ) then
+        if HasCodim( M ) then
+            if HasIsPure( M ) then
+                if IsPure( M ) then
+                    ## only display the purity information if the ambient space has dimension > 1:
+                    if not Dimension( O ) <= 1 then
+                        if HasCodegreeOfPurity( M ) then
+                            if CodegreeOfPurity( M ) = [ 0 ] then
+                                Append( properties, " reflexively " );
+                            elif CodegreeOfPurity( M ) = [ 1 ] then
+                                Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
+                            else
+                                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                            fi;
+                        else
+                            Append( properties, " " );
+                        fi;
+                        Append( properties, "pure" );
+                    fi;
+                else
+                    Append( properties, " non-pure" );
+                fi;
+            fi;
+            Append( properties, " codim " );
+            Append( properties, String( Codim( M ) ) );
+        else
+            if HasIsPure( M ) then
+                if IsPure( M ) then
+                    ## only display the purity information if the global dimension of the ring is > 1:
+                    if not ( left_sheaf and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) and
+                       not ( not left_sheaf and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) then
+                        if HasCodegreeOfPurity( M ) then
+                            if CodegreeOfPurity( M ) = [ 0 ] then
+                                Append( properties, " reflexively " );
+                            elif CodegreeOfPurity( M ) = [ 1 ] then
+                                Append( properties, Concatenation( " codegree-", String( 1 ), "-" ) );
+                            else
+                                Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-" ) );
+                            fi;
+                        else
+                            Append( properties, " " );
+                        fi;
+                        Append( properties, "pure" );
+                    fi;
+                else
+                    Append( properties, " non-pure" );
+                fi;
+            elif HasIsZero( M ) and not IsZero( M ) then
+                properties := Concatenation( " non-zero", properties );
+            fi;
+            Append( properties, " torsion" );
+        fi;
+    else
+        if HasIsPure( M ) and not IsPure( M ) then
+            Append( properties, " non-pure" );
+        fi;
+        if HasRankOfSheaf( M ) then
+            Append( properties, " rank " );
+            Append( properties, String( RankOfSheaf( M ) ) );
+        elif HasIsZero( M ) and not IsZero( M ) and
+          not ( HasIsPure( M ) and not IsPure( M ) ) and
+          not ( IsBound( nz ) and nz = true ) then
+            properties := Concatenation( " non-zero", properties );
+        fi;
+    fi;
+    
+    if left_sheaf then
+        
+        if is_subobject then
+            if IsIdenticalObj( SuperObject( E ), 1 * S ) then
+                Print( "<A", properties, " coherent sheaf of (left) ideals" );
+            else
+                Print( "<A", properties, " coherent subsheaf of (left) modules" );
+            fi;
+        else
+            Print( "<A", properties, " coherent sheaf of (left) modules" );
+        fi;
+        
+    else
+        
+        if is_subobject then
+            if IsIdenticalObj( SuperObject( E ), S * 1 ) then
+                Print( "<A", properties, " coherent sheaf of (right) ideals" );
+            else
+                Print( "<A", properties, " coherent subsheaf of (right) modules" );
+            fi;
+        else
+            Print( "<A", properties, " coherent sheaf of (right) modules" );
+        fi;
+        
+    fi;
     
     if S <> fail then
         
@@ -584,6 +774,66 @@ InstallMethod( ViewObj,
     
 end );
 
+##
+InstallMethod( ViewObj,
+        "for free sheaves",
+        [ IsCoherentSheafRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
+        
+  function( M )
+    local r, rk;
+    
+    if IsBound( M!.distinguished ) then
+        Print( "<The" );
+    else
+        Print( "<A" );
+    fi;
+    
+    Print( " free sheaf of " );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        Print( "left" );
+    else
+        Print( "right" );
+    fi;
+    
+    Print( " modules" );
+    
+    r := NrGenerators( M );
+    
+    if HasRankOfSheaf( M ) then
+        rk := RankOfSheaf( M );
+        Print( " of rank ", rk );
+    fi;
+    
+    Print( ">" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for zero sheaves",
+        [ IsCoherentSheafRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
+        
+  function( M )
+    
+    if IsBound( M!.distinguished ) then
+        Print( "<The" );
+    else
+        Print( "<A" );
+    fi;
+    
+    Print( " zero sheaf of " );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        Print( "left" );
+    else
+        Print( "right" );
+    fi;
+    
+    Print( " modules>" );
+    
+end );
+    
 ##
 InstallMethod( homalgProjString,
         "for sheaves of rings",

@@ -26,7 +26,7 @@ DeclareCategory( "IsSetOfUnderlyingModules",
 ##    <Filt Type="Category" Arg="O" Name="IsHomalgSheafOfRings"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; sheaves of rings. <Br/><Br/>
+##      The &GAP; category of sheaves of rings. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; category
 ##      <C>IsHomalgRingOrObject</C>.)
 ##    </Description>
@@ -41,7 +41,7 @@ DeclareCategory( "IsHomalgSheafOfRings",
 ##    <Filt Type="Category" Arg="E" Name="IsHomalgSheaf"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; sheaves. <Br/><Br/>
+##      The &GAP; category of sheaves. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; categories
 ##      <C>IsHomalgRingOrObject</C> and <C>IsHomalgObject</C>.)
 ##    </Description>
@@ -56,7 +56,7 @@ DeclareCategory( "IsHomalgSheaf",
 ##    <Filt Type="Category" Arg="phi" Name="IsHomalgSheafMap"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; sheaf maps. <Br/><Br/>
+##      The &GAP; category of sheaf maps. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgMorphism</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -70,7 +70,7 @@ DeclareCategory( "IsHomalgSheafMap",
 ##    <Filt Type="Category" Arg="phi" Name="IsHomalgSheafSelfMap"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; sheaf self-maps. <Br/><Br/>
+##      The &GAP; category of sheaf self-maps. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; categories
 ##       <C>IsHomalgSheafMap</C> and <C>IsHomalgEndomorphism</C>.)
 ##    </Description>
@@ -239,6 +239,12 @@ DeclareProperty( "HasConstantRank",
 DeclareAttribute( "StructureSheafOfProj",
         IsHomalgRing );
 
+## intrinsic attributes:
+##
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+## should all be added by hand to LISHV.intrinsic_attributes
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ##  <#GAPDoc Label="RankOfSheaf">
 ##  <ManSection>
 ##    <Attr Arg="E" Name="RankOfSheaf"/>
@@ -252,9 +258,23 @@ DeclareAttribute( "StructureSheafOfProj",
 DeclareAttribute( "RankOfSheaf",
         IsHomalgSheaf );
 
-##  <#GAPDoc Label="CodimOfSheaf">
+##  <#GAPDoc Label="DegreeOfTorsionFreeness">
 ##  <ManSection>
-##    <Attr Arg="E" Name="CodimOfSheaf"/>
+##    <Attr Arg="E" Name="DegreeOfTorsionFreeness"/>
+##    <Returns>a nonnegative integer of infinity</Returns>
+##    <Description>
+##      Auslander's degree of torsion-freeness of the sheaf <A>E</A>.
+##      It is set to infinity only for <A>E</A><M>=0</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreeOfTorsionFreeness",
+        IsHomalgSheaf );
+
+##  <#GAPDoc Label="Codim">
+##  <ManSection>
+##    <Attr Arg="E" Name="Codim"/>
 ##    <Returns>a nonnegative integer of infinity</Returns>
 ##    <Description>
 ##      The codimension of the sheaf <A>E</A>.
@@ -263,7 +283,20 @@ DeclareAttribute( "RankOfSheaf",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "CodimOfSheaf",
+DeclareAttribute( "Codim",
+        IsHomalgSheaf );
+
+##  <#GAPDoc Label="PurityFiltration">
+##  <ManSection>
+##    <Attr Arg="E" Name="PurityFiltration"/>
+##    <Returns>a &homalg; filtration</Returns>
+##    <Description>
+##      The purity filtration of the sheaf <A>E</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PurityFiltration",
         IsHomalgSheaf );
 
 ##  <#GAPDoc Label="CodegreeOfPurity">
