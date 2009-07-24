@@ -59,8 +59,8 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
-<#Include SYSTEM "Sheaves.xml">
 <#Include SYSTEM "Modules.xml">
+<#Include SYSTEM "Sheaves.xml">
 <#Include SYSTEM "Tate.xml">
 </Body>
 

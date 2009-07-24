@@ -16,8 +16,8 @@
 
 <#Include Label="MonomialMatrix">
 <#Include Label="MonomialMap">
-<#Include Label="SubmoduleGeneratedByHomogeneousPart">
 <#Include Label="BasisOfHomogeneousPart">
+<#Include Label="SubmoduleGeneratedByHomogeneousPart">
 <#Include Label="RepresentationOfRingElement">
 <#Include Label="RepresentationMatrixOfKoszulId">
 <#Include Label="RepresentationMapOfKoszulId">

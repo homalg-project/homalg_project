@@ -38,7 +38,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  First we start with the structure sheaf with its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> O := S^0;
-##  <A graded free left module of rank 1 on a free generator>
+##  <The graded free left module of rank 1 on a free generator>
 ##  gap> T := TateResolution( O, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
