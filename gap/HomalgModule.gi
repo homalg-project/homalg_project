@@ -310,21 +310,6 @@ end );
 ##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
-        [ IsHomalgModule ],
-        
-  function( M )
-    
-    if IsBound(SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ))) then
-        return SetsOfGenerators(M)!.(PositionOfTheDefaultSetOfGenerators( M ));
-    fi;
-    
-    return fail;
-    
-end );
-
-##
-InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
-        "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
@@ -338,17 +323,13 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
 end );
 
 ##
-InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
+InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
         [ IsHomalgModule ],
         
   function( M )
     
-    if IsBound(SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ))) then;
-        return SetsOfRelations(M)!.(PositionOfTheDefaultSetOfRelations( M ));
-    fi;
-    
-    return fail;
+    return GeneratorsOfModule( M, PositionOfTheDefaultSetOfGenerators( M ) );
     
 end );
 
@@ -368,13 +349,13 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
 end );
 
 ##
-InstallMethod( DegreesOfGenerators,
+InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsHomalgModule ],
         
   function( M )
     
-    return DegreesOfGenerators( GeneratorsOfModule( M ) );
+    return RelationsOfModule( M, PositionOfTheDefaultSetOfRelations( M ) );
     
 end );
 
@@ -386,6 +367,17 @@ InstallMethod( DegreesOfGenerators,
   function( M, pos )
     
     return DegreesOfGenerators( GeneratorsOfModule( M, pos ) );
+    
+end );
+
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return DegreesOfGenerators( GeneratorsOfModule( M ) );
     
 end );
 
@@ -441,7 +433,7 @@ InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
 end );
 
 ##
-InstallMethod( MatrixOfGenerators,
+InstallMethod( MatrixOfSubobjectGenerators,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
   function( M )
@@ -457,7 +449,7 @@ end );
 ##
 InstallMethod( MatrixOfGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
   function( M )
     
     return MatrixOfGenerators( GeneratorsOfModule( M ) );
@@ -517,7 +509,7 @@ InstallMethod( HasNrGenerators,
   function( M )
     local gen_mat;
     
-    gen_mat := MatrixOfGenerators( M );
+    gen_mat := MatrixOfSubobjectGenerators( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         return HasNrRows( gen_mat );
@@ -544,7 +536,7 @@ InstallMethod( NrGenerators,
   function( M )
     local gen_mat;
     
-    gen_mat := MatrixOfGenerators( M );
+    gen_mat := MatrixOfSubobjectGenerators( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         return NrRows( gen_mat );
@@ -1637,15 +1629,17 @@ InstallOtherMethod( \*,
     
     R := HomalgRing( J );
     
-    if ( left and not IsIdenticalObj( super, 1 * R ) ) or
-       ( not left and not IsIdenticalObj( super, R * 1 ) ) then
+    if ( ( left and not IsIdenticalObj( super, 1 * R ) ) or
+         ( not left and not IsIdenticalObj( super, R * 1 ) ) ) and
+       ( ( left and not IsIdenticalObj( super, ( 1 * R )^0 ) ) or
+         ( not left and not IsIdenticalObj( super, ( R * 1 )^0 ) ) ) then
         
         Error( "can only multiply ideals in a common ring\n" );
         
     fi;
     
-    genJ := MatrixOfGenerators( J );
-    genK := MatrixOfGenerators( K );
+    genJ := MatrixOfSubobjectGenerators( J );
+    genK := MatrixOfSubobjectGenerators( K );
     
     return Subobject( KroneckerMat( genJ, genK ), super );
     
@@ -1699,8 +1693,8 @@ InstallMethod( IsSubset,
         Error( "the super objects must coincide\n" );
     fi;
     
-    genJ := MatrixOfGenerators( J );
-    genK := MatrixOfGenerators( K );
+    genJ := MatrixOfSubobjectGenerators( J );
+    genK := MatrixOfSubobjectGenerators( K );
     
     rel := RelationsOfModule( M );
     
@@ -2554,8 +2548,21 @@ InstallMethod( POW,
         [ IsHomalgRing, IsInt ],
         
   function( R, twist )
+    local On;
     
-    return HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
+    if not IsBound( R!.left_twists ) then
+        R!.left_twists := rec( );
+    fi;
+    
+    On := HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
+    
+    On!.distinguished := true;
+    
+    if not IsBound( R!.left_twists.(String( twist )) ) then
+        R!.left_twists.(String( twist )) := On;
+    fi;
+    
+    return R!.left_twists.(String( twist ));
     
 end );
 
@@ -2567,6 +2574,42 @@ InstallMethod( POW,
   function( R, twist )
     
     return HomalgFreeLeftModuleWithDegrees( R, -twist );
+    
+end );
+
+##
+InstallMethod( POW,
+        "constructor",
+        [ IsFinitelyPresentedModuleRep, IsInt ],
+        
+  function( M, twist )
+    local R, On;
+    
+    R := HomalgRing( M );
+    
+    if IsIdenticalObj( M, 1 * R ) then
+        
+        return R^twist;
+        
+    elif IsIdenticalObj( M, R * 1 ) then
+        
+        if not IsBound( R!.right_twists ) then
+            R!.right_twists := rec( );
+        fi;
+        
+        On := HomalgFreeRightModuleWithDegrees( 1, R, -twist );
+        
+        On!.distinguished := true;
+        
+        if not IsBound( R!.right_twists.(String( twist )) ) then
+            R!.right_twists.(String( twist )) := On;
+        fi;
+        
+        return R!.right_twists.(String( twist ));
+        
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -2732,7 +2775,7 @@ end );
 InstallMethod( Subobject,
         "constructor",
         [ IsHomalgMap ],
-	
+        
   ImageSubmodule );
 
 ##  <#GAPDoc Label="Subobject">
@@ -2846,6 +2889,9 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
+## create a globally defined ring of integers
+HOMALG.ZZ := HomalgRingOfIntegers( );
 
 ####################################
 #
@@ -3063,7 +3109,8 @@ InstallMethod( ViewObj,
         fi;
         
         if is_submodule then
-            if IsIdenticalObj( SuperObject( o ), 1 * R ) then
+            if IsIdenticalObj( SuperObject( o ), 1 * R ) or
+               IsIdenticalObj( SuperObject( o ), ( 1 * R )^0 ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
                     Print( "<A", properties, " (left) ideal given by ", num_gen, gen_string, locked, ">" );
                 else
@@ -3120,7 +3167,8 @@ InstallMethod( ViewObj,
         fi;
         
         if is_submodule then
-            if IsIdenticalObj( SuperObject( o ), R * 1 ) then
+            if IsIdenticalObj( SuperObject( o ), R * 1 ) or
+               IsIdenticalObj( SuperObject( o ), ( R * 1 )^0 ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
                     Print( "<A", properties, " (right) ideal given by ", num_gen, gen_string, locked, ">" );
                 else
@@ -3209,7 +3257,7 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
-    local r, rk;
+    local r, rk, d;
     
     if IsBound( M!.distinguished ) then
         Print( "<The" );
@@ -3235,7 +3283,16 @@ InstallMethod( ViewObj,
     
     if HasRankOfModule( M ) then
         rk := RankOfModule( M );
-        Print( " of rank ", rk, " on " );
+        Print( " of rank ", rk );
+        
+        if IsBound( M!.distinguished ) then
+            d := DegreesOfGenerators( M );
+            if IsList( d ) and Length( d ) = 1 and d[1] <> 0 then
+                Print( " shifted by ", -d[1] );
+            fi;
+        fi;
+        
+        Print( " on " );
         if r = rk then
             if r = 1 then
                 Print( "a free generator" );
@@ -3322,15 +3379,20 @@ InstallMethod( Display,
     
     R := HomalgRing( M );
     
-    gen := MatrixOfGenerators( M );
+    gen := MatrixOfSubobjectGenerators( M );
     
     Display( gen );
+    
+    if IsList( DegreesOfGenerators( M ) ) then
+        Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
+    fi;
     
     Print( "\nA " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         l := NrRows( gen );
-        if IsIdenticalObj( SuperObject( M ), 1 * R ) then
+        if IsIdenticalObj( SuperObject( M ), 1 * R ) or
+           IsIdenticalObj( SuperObject( M ), ( 1 * R )^0 ) then
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Print( "(left)" );
             else
@@ -3353,7 +3415,8 @@ InstallMethod( Display,
         Print( " of the above matrix\n" );
     else
         l := NrColumns( gen );
-        if IsIdenticalObj( SuperObject( M ), R * 1 ) then
+        if IsIdenticalObj( SuperObject( M ), R * 1 ) or
+           IsIdenticalObj( SuperObject( M ), ( R * 1 )^0 ) then
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Print( "(right)" );
             else
@@ -3401,7 +3464,7 @@ InstallMethod( Display,
     Display( MatrixOfRelations( M ) );
     
     if IsList( DegreesOfGenerators( M ) ) then
-        Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n\n" );
+        Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
     fi;
     
     Print( "\nCokernel of the map\n\n" );

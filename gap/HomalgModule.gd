@@ -455,6 +455,9 @@ DeclareOperation( "POW",
 DeclareOperation( "POW",
         [ IsHomalgRing, IsList ] );
 
+DeclareOperation( "POW",
+        [ IsHomalgModule, IsInt ] );
+
 DeclareOperation( "*",
         [ IsHomalgModule, IsHomalgRing ] );
 
@@ -492,16 +495,16 @@ DeclareOperation( "SetPositionOfTheDefaultSetOfRelations",
         [ IsHomalgModule, IsInt ] );
 
 DeclareOperation( "GeneratorsOfModule",
-        [ IsHomalgModule ] );
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "GeneratorsOfModule",
-        [ IsHomalgModule, IsPosInt ] );
-
-DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule ] );
 
 DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule, IsPosInt ] );
+
+DeclareOperation( "RelationsOfModule",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "DegreesOfGenerators",
         [ IsHomalgModule ] );
@@ -514,6 +517,9 @@ DeclareOperation( "RelationsOfHullModule",
 
 DeclareOperation( "RelationsOfHullModule",
         [ IsHomalgModule, IsPosInt ] );
+
+DeclareOperation( "MatrixOfSubobjectGenerators",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "MatrixOfGenerators",
         [ IsHomalgModule ] );
