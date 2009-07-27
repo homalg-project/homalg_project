@@ -18,7 +18,7 @@ files.
 
 <Section Label="ModuleInternals">
 
-<Heading>Rings, Matrices, Relations, and Generators</Heading>
+<Heading>Rings, Ring Maps, Matrices, Relations, and Generators</Heading>
 
 <Table Align="l|l">
 <Caption><E>The &homalg; package files</E></Caption>
@@ -53,6 +53,13 @@ files.
 <Row>
   <Item><F>HomalgRing</F></Item>
   <Item>internal and external rings</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgRingMap</F></Item>
+  <Item>ring maps</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>

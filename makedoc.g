@@ -16,6 +16,8 @@ list := [
          "../gap/HomalgDiagram.gi",
          "../gap/HomalgRing.gd",
          "../gap/HomalgRing.gi",
+         "../gap/HomalgRingMap.gd",
+         "../gap/HomalgRingMap.gi",
          "../gap/LIRNG.gi",
          "../gap/HomalgMatrix.gd",
          "../gap/HomalgMatrix.gi",

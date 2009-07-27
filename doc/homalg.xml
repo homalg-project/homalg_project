@@ -16,6 +16,7 @@
 	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
 	  <!ENTITY COLEM "<Package>COLEM</Package>">
 	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
@@ -61,6 +62,7 @@
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "Rings.xml">
+<#Include SYSTEM "RingMaps.xml">
 <#Include SYSTEM "Matrices.xml">
 <#Include SYSTEM "Relations.xml">
 <#Include SYSTEM "Generators.xml">

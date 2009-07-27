@@ -1094,9 +1094,9 @@ InstallFunctorOnObjects( functor_ImageModule );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="Kernel">
+##  <#GAPDoc Label="Kernel:map">
 ##  <ManSection>
-##    <Oper Arg="phi" Name="Kernel"/>
+##    <Oper Arg="phi" Name="Kernel" Label="for maps"/>
 ##    <Description>
 ##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
 ##      <Example><![CDATA[

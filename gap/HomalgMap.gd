@@ -213,17 +213,6 @@ DeclareCategory( "IsHomalgSelfMap",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="DegreeOfMorphism:map">
-##  <ManSection>
-##    <Attr Arg="phi" Name="DegreeOfMorphism" Label="for maps"/>
-##    <Returns>an integer</Returns>
-##    <Description>
-##      The degree of the morphism <A>phi</A> of graded modules. <Br/>
-##      (no method installed)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
 ##  <#GAPDoc Label="ImageSubmodule">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="ImageSubmodule" Label="for maps"/>
@@ -235,10 +224,11 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "ImageSubmodule",
         IsHomalgMap );
 
-##  <#GAPDoc Label="KernelSubmodule">
+##  <#GAPDoc Label="KernelSubmodule:map">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="KernelSubmodule" Label="for maps"/>
 ##    <Returns>a &homalg; submodule</Returns>
@@ -249,6 +239,7 @@ DeclareAttribute( "ImageSubmodule",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 DeclareAttribute( "KernelSubmodule",
         IsHomalgMap );
 

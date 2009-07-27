@@ -54,21 +54,87 @@ DeclareGlobalVariable( "Functor_TensorProduct" );
 #
 ####################################
 
+##  <#GAPDoc Label="CokernelEpi">
+##  <ManSection>
+##    <Attr Arg="phi" Name="CokernelEpi" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The natural epimorphism from the <C>Range</C><M>(</M><A>phi</A><M>)</M>
+##      onto the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "CokernelEpi",
         IsHomalgMap );
 
+##  <#GAPDoc Label="CokernelNaturalGeneralizedEmbedding">
+##  <ManSection>
+##    <Attr Arg="phi" Name="CokernelNaturalGeneralizedEmbedding" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The natural generalized embedding from the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M>
+##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "CokernelNaturalGeneralizedEmbedding",
         IsHomalgMap );
 
+##  <#GAPDoc Label="KernelEmb:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="KernelEmb" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The natural embedding of the <C>Kernel</C><M>(</M><A>phi</A><M>)</M>
+##      into the <C>Source</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Kernel" Label="for maps"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "KernelEmb",
         IsHomalgMap );
 
+##  <#GAPDoc Label="ImageModuleEmb">
+##  <ManSection>
+##    <Attr Arg="phi" Name="ImageModuleEmb" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The natural embedding of the <C>ImageModule</C><M>(</M><A>phi</A><M>)</M>
+##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageModule"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "ImageModuleEmb",
         IsHomalgMap );
 
+##  <#GAPDoc Label="ImageModuleEpi">
+##  <ManSection>
+##    <Attr Arg="phi" Name="ImageModuleEpi" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The natural epimorphism from the <C>Source</C><M>(</M><A>phi</A><M>)</M>
+##      onto the <C>ImageModule</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageModule"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "ImageModuleEpi",
         IsHomalgMap );
 
+##  <#GAPDoc Label="NatTrIdToHomHom_R">
+##  <ManSection>
+##    <Attr Arg="M" Name="NatTrIdToHomHom_R" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The natural evaluation map from the &homalg; module <A>M</A>
+##      to its double dual <C>HomHom</C><M>(</M><A>M</A><M>)</M> (cf. <Ref Oper="Functor_HomHom"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "NatTrIdToHomHom_R",
         IsHomalgModule );
 

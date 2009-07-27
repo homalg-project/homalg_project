@@ -13,6 +13,7 @@ ReadPackage( "homalg", "gap/homalg.gi" );
 ## rings
 ReadPackage( "homalg", "gap/homalgTable.gi" );
 ReadPackage( "homalg", "gap/HomalgRing.gi" );
+ReadPackage( "homalg", "gap/HomalgRingMap.gi" );
 
 ## matrices
 ReadPackage( "homalg", "gap/HomalgMatrix.gi" );
@@ -77,6 +78,7 @@ ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
 ## LogicForHomalg subpackages
 ReadPackage( "homalg", "gap/LIRNG.gi" );
+ReadPackage( "homalg", "gap/LIMAP.gi" );
 ReadPackage( "homalg", "gap/LIMAT.gi" );
 ReadPackage( "homalg", "gap/COLEM.gi" );
 ReadPackage( "homalg", "gap/LIMOD.gi" );

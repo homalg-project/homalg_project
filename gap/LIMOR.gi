@@ -2,7 +2,7 @@
 ##
 ##  LIMOR.gi                    LIMOR subpackage             Mohamed Barakat
 ##
-##         LIMOR = Logical Implications for homalg MODules
+##         LIMOR = Logical Implications for homalg MORphisms
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

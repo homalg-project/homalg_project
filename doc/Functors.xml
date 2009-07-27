@@ -52,7 +52,7 @@
 <#Include Label="ImageModule">
 
 <#Include Label="functor_Kernel">
-<#Include Label="Kernel">
+<#Include Label="Kernel:map">
 
 <#Include Label="functor_DefectOfExactness">
 <#Include Label="DefectOfExactness">

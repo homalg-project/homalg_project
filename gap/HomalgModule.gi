@@ -1568,9 +1568,9 @@ InstallMethod( SetUpperBoundForProjectiveDimension,
     
 end );
 
-##  <#GAPDoc Label="UnderlyingObject:submodule">
+##  <#GAPDoc Label="UnderlyingObject">
 ##  <ManSection>
-##    <Oper Arg="M" Name="SuperObject" Label="for submodules"/>
+##    <Oper Arg="M" Name="UnderlyingObject" Label="for submodules"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the module underlying the submodule <M>M</M> is returned.
@@ -1590,7 +1590,7 @@ end );
 
 ##  <#GAPDoc Label="SuperObject">
 ##  <ManSection>
-##    <Oper Arg="M" Name="SuperObject"/>
+##    <Oper Arg="M" Name="SuperObject" Label="for submodules"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the super module <M>L</M> is returned.

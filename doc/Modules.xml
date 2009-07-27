@@ -72,6 +72,7 @@
 <#Include Label="BettiDiagram:module">
 <#Include Label="CastelnuovoMumfordRegularity">
 <#Include Label="EmbeddingInSuperObject">
+<#Include Label="NatTrIdToHomHom_R">
 </Section>
 
 <Section Label="Modules:LIMOD">
@@ -85,7 +86,7 @@
 <#Include Label="HomalgRing:module">
 <#Include Label="ByASmallerPresentation:module">
 <#Include Label="SubmoduleOfIdealMultiples">
-<#Include Label="UnderlyingObject:submodule">
+<#Include Label="UnderlyingObject">
 <#Include Label="SuperObject">
 
 </Section>

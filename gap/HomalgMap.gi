@@ -1526,59 +1526,60 @@ end );
 #
 ####################################
 
+##
 InstallMethod( ViewObj,
         "for homalg maps",
         [ IsHomalgMap ],
         
   function( o )
     
-    Print( "<A" );
+    Print( "<A " );
     
     if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
-        Print( " non-zero" );
+        Print( "non-zero " );
     fi;
     
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
-            Print( " homomorphism of" );
+            Print( "homomorphism of" );
         elif HasMorphismAidMap( o ) then	## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphism( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
-                    Print( " generalized isomorphism of" );
+                    Print( "generalized isomorphism of" );
                 elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
-                    Print( " generalized embedding of" );
+                    Print( "generalized embedding of" );
                 elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
-                    Print( " generalized epimorphism of" );
+                    Print( "generalized epimorphism of" );
                 elif IsGeneralizedMorphism( o ) then
-                    Print( " generalized homomorphism of" );
+                    Print( "generalized homomorphism of" );
                 else
-                    Print( " non-well defined (generalized) map of" );
+                    Print( "non-well defined (generalized) map of" );
                 fi;
             else
-                Print( " \"generalized homomorphism\" of" );
+                Print( "\"generalized homomorphism\" of" );
             fi;
         else
-            Print( " non-well-defined map between" );
+            Print( "non-well-defined map between" );
         fi;
     else
         if HasMorphismAidMap( o ) then	## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphism( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
-                    Print( " generalized isomorphism of" );
+                    Print( "generalized isomorphism of" );
                 elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
-                    Print( " generalized embedding of" );
+                    Print( "generalized embedding of" );
                 elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
-                    Print( " generalized epimorphism of" );
+                    Print( "generalized epimorphism of" );
                 elif IsGeneralizedMorphism( o ) then
-                    Print( " generalized homomorphism of" );
+                    Print( "generalized homomorphism of" );
                 else
-                    Print( " non-well defined (generalized) map of" );
+                    Print( "non-well defined (generalized) map of" );
                 fi;
             else
-                Print( " \"generalized homomorphism\" of" );
+                Print( "\"generalized homomorphism\" of" );
             fi;
         else
-            Print( " \"homomorphism\" of" );
+            Print( "\"homomorphism\" of" );
         fi;
     fi;
     
@@ -1873,6 +1874,7 @@ InstallMethod( ViewObj,
     
 end );    
 
+##
 InstallMethod( Display,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
