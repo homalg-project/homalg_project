@@ -14,21 +14,6 @@
 #
 ####################################
 
-##  <#GAPDoc Label="IsFinitelyGeneratedObjectRep">
-##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsFinitelyGeneratedObjectRep"/>
-##    <Returns>true or false</Returns>
-##    <Description>
-##      The &GAP; representation of finitley generated &homalg; objects. <P/>
-##      It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsFinitelyGeneratedObjectRep",
-        IsHomalgObject,
-        [ ] );
-
 ##  <#GAPDoc Label="IsHomalgRingOrFinitelyPresentedObjectRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsHomalgRingOrFinitelyPresentedObjectRep"/>

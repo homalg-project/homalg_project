@@ -38,22 +38,19 @@
 
 # new representations for the GAP-category IsHomalgModule
 
-##  <#GAPDoc Label="IsFinitelyGeneratedModuleRep">
+##  <#GAPDoc Label="IsFinitelyPresentedModuleOrSubmoduleRep">
 ##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsFinitelyGeneratedModuleRep"/>
+##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleOrSubmoduleRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; modules. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
-##       which is a subrepresentation of the &GAP; representations
-##      <C>IsFinitelyGeneratedObjectRep</C>.)
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareRepresentation( "IsFinitelyGeneratedModuleRep",
-        IsHomalgModule and
-        IsFinitelyGeneratedObjectRep,
+DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
+        IsHomalgModule,
         [ ] );
 
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
@@ -64,14 +61,14 @@ DeclareRepresentation( "IsFinitelyGeneratedModuleRep",
 ##      The &GAP; representation of finitley presented &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
 ##       which is a subrepresentation of the &GAP; representations
-##      <C>IsFinitelyGeneratedModuleRep</C>,
+##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
 ##      <C>IsFinitelyPresentedObjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
-        IsFinitelyGeneratedModuleRep and
+        IsFinitelyPresentedModuleOrSubmoduleRep and
         IsFinitelyPresentedObjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
@@ -85,14 +82,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 ##    <Description>
 ##      The &GAP; representation of finitley generated &homalg; submodules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
-##      <C>IsFinitelyGeneratedModuleRep</C>,
+##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
 ##      <C>IsFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
-        IsFinitelyGeneratedModuleRep and
+        IsFinitelyPresentedModuleOrSubmoduleRep and
         IsFinitelyPresentedSubobjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "map_having_subobject_as_its_image" ] );

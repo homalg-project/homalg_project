@@ -18,7 +18,7 @@
 
 <#Include Label="IsHomalgModule">
 
-<#Include Label="IsFinitelyGeneratedModuleRep">
+<#Include Label="IsFinitelyPresentedModuleOrSubmoduleRep">
 <#Include Label="IsFinitelyPresentedModuleRep">
 <#Include Label="IsFinitelyPresentedSubmoduleRep">
 

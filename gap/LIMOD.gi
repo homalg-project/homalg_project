@@ -164,7 +164,7 @@ end );
 
 ## a presentation must be on a single generator
 InstallImmediateMethod( IsCyclic,
-        IsFinitelyGeneratedModuleRep, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep, 0,
         
   function( M )
     local l, b, i, rel;
@@ -191,7 +191,7 @@ end );
 
 ## [Coutinho, A Primer of Algebraic D-modules, Thm. 10.25, p. 90]
 InstallImmediateMethod( IsCyclic,
-        IsFinitelyGeneratedModuleRep and IsArtinian, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsArtinian, 0,
         
   function( M )
     local R;
@@ -220,7 +220,7 @@ end );
 
 ## strictly less relations than generators => not IsTorsion
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyGeneratedModuleRep, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep, 0,
         
   function( M )
     local l, b, i, rel;
@@ -253,7 +253,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyGeneratedModuleRep and HasRankOfModule, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasRankOfModule, 0,
         
   function( M )
     
@@ -263,7 +263,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyGeneratedModuleRep and HasTorsionFreeFactorEpi and HasIsZero, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasTorsionFreeFactorEpi and HasIsZero, 0,
         
   function( M )
     local F;
@@ -284,7 +284,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyGeneratedModuleRep and HasCodim, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim, 0,
         
   function( M )
     
@@ -300,7 +300,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyGeneratedModuleRep and HasTorsionSubmoduleEmb and HasIsZero, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasTorsionSubmoduleEmb and HasIsZero, 0,
         
   function( M )
     local T;
@@ -321,7 +321,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyGeneratedModuleRep and HasIsProjective and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -338,7 +338,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyGeneratedModuleRep and HasIsProjective and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -355,7 +355,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyGeneratedModuleRep and HasCodim, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim, 0,
         
   function( M )
     
@@ -369,7 +369,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyGeneratedModuleRep and HasCodim and IsPure, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim and IsPure, 0,
         
   function( M )
     
@@ -379,7 +379,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyGeneratedModuleRep and HasIsProjective and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -396,7 +396,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyGeneratedModuleRep and HasIsProjective and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -413,7 +413,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyGeneratedModuleRep and IsTorsionFree and HasCodegreeOfPurity, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasCodegreeOfPurity, 0,
         
   function( M )
     
@@ -423,7 +423,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyGeneratedModuleRep and IsTorsionFree and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -440,7 +440,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyGeneratedModuleRep and IsTorsionFree and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -457,7 +457,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyGeneratedModuleRep and IsReflexive and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsReflexive and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -474,7 +474,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyGeneratedModuleRep and IsReflexive and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsReflexive and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -491,7 +491,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyGeneratedModuleRep and HasProjectiveDimension, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasProjectiveDimension, 0,
         
   function( M )
     
@@ -501,7 +501,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyGeneratedModuleRep, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep, 0,
         
   function( M )
     
@@ -515,7 +515,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyGeneratedModuleRep and IsStablyFree and HasRankOfModule and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsStablyFree and HasRankOfModule and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -538,7 +538,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyGeneratedModuleRep and IsStablyFree and HasRankOfModule and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsStablyFree and HasRankOfModule and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -561,7 +561,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyGeneratedModuleRep and IsTorsion and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -578,7 +578,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyGeneratedModuleRep and IsTorsion and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -595,7 +595,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyGeneratedModuleRep and HasCodim and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -612,7 +612,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyGeneratedModuleRep and HasCodim and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -629,7 +629,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyGeneratedModuleRep and HasIsTorsion and HasIsTorsionFree, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsTorsion and HasIsTorsionFree, 0,
         
   function( M )
     
@@ -649,7 +649,7 @@ end );
 
 ##
 InstallImmediateMethod( RankOfModule,
-        IsFinitelyGeneratedModuleRep and IsFree, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsFree, 0,
         
   function( M )
     
@@ -663,7 +663,7 @@ end );
 
 ##
 InstallImmediateMethod( RankOfModule,
-        IsFinitelyGeneratedModuleRep and IsTorsion, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion, 0,
         
   function( M )
     
@@ -673,7 +673,7 @@ end );
 
 ##
 InstallImmediateMethod( DegreeOfTorsionFreeness,
-        IsFinitelyGeneratedModuleRep and HasIsTorsionFree, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsTorsionFree, 0,
         
   function( M )
     local R;
@@ -688,7 +688,7 @@ end );
 
 ##
 InstallImmediateMethod( DegreeOfTorsionFreeness,
-        IsFinitelyGeneratedModuleRep and IsProjective, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsProjective, 0,
         
   function( M )
     
@@ -698,7 +698,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyGeneratedModuleRep and IsTorsionFree and HasIsZero, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasIsZero, 0,
         
   function( M )
     
@@ -712,7 +712,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyGeneratedModuleRep and IsTorsion and HasIsZero and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasIsZero and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -729,7 +729,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyGeneratedModuleRep and IsTorsion and HasIsZero and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasIsZero and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -746,7 +746,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyGeneratedModuleRep and IsZero, 10001,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsZero, 10001,
         
   function( M )
     
@@ -756,7 +756,7 @@ end );
 
 ##
 InstallImmediateMethod( CodegreeOfPurity,
-        IsFinitelyGeneratedModuleRep and IsZero, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and IsZero, 0,
         
   function( M )
     
@@ -766,7 +766,7 @@ end );
 
 ##
 InstallImmediateMethod( CodegreeOfPurity,
-        IsFinitelyGeneratedModuleRep and HasIsPure, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsPure, 0,
         
   function( M )
     
@@ -780,7 +780,7 @@ end );
 
 ##
 InstallImmediateMethod( CodegreeOfPurity,
-        IsFinitelyGeneratedModuleRep and HasIsReflexive, 0,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsReflexive, 0,
         
   function( M )
     
