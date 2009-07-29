@@ -59,9 +59,11 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
+<#Include SYSTEM "RingMaps.xml">
 <#Include SYSTEM "Modules.xml">
-<#Include SYSTEM "Sheaves.xml">
 <#Include SYSTEM "Tate.xml">
+<#Include SYSTEM "Sheaves.xml">
+<#Include SYSTEM "Tools.xml">
 </Body>
 
 <#Include SYSTEM "appendix.xml">

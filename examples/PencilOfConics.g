@@ -1,5 +1,3 @@
-## http://www.math.uiuc.edu/Macaulay2/doc/Macaulay2-1.1/share/doc/Macaulay2/Macaulay2Doc/html/___Tutorial_co_sp__Canonical_sp__Embeddings_spof_sp__Plane_sp__Curves_spand_sp__Gonality.html
-
 LoadPackage( "Sheaves" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";

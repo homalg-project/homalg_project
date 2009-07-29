@@ -116,6 +116,7 @@ BindGlobal( "TheTypeHomalgRightCoherentSheaf",
 ####################################
 
 HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
+HOMALG_IO.Pictograms.Eliminate := "eli";	## eliminate variables
 
 ####################################
 #

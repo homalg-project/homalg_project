@@ -77,7 +77,7 @@ InstallMethod( MonomialMatrix,
     fi;
     
     if IsHomalgExternalRingRep( R ) then
-        Error( "could not find a procedure called MonomialMatrix in the homalgTable to apply on a an external ring\n" );
+        Error( "could not find a procedure called MonomialMatrix in the homalgTable of the external ring\n" );
     fi;
     
     #=====# begin of the core procedure #=====#

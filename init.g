@@ -9,7 +9,7 @@
 #############################################################################
 
 ##
-ReadPackage( "Sheaves", "gap/Sheaves.gd" );
+ReadPackage( "Sheaves", "gap/RingMaps.gd" );
 
 ##
 ReadPackage( "Sheaves", "gap/Modules.gd" );
@@ -19,6 +19,12 @@ ReadPackage( "Sheaves", "gap/Relative.gd" );
 
 ##
 ReadPackage( "Sheaves", "gap/Tate.gd" );
+
+##
+ReadPackage( "Sheaves", "gap/Sheaves.gd" );
+
+##
+ReadPackage( "Sheaves", "gap/Tools.gd" );
 
 ##
 ReadPackage( "Sheaves", "gap/SingularTools.gd" );
