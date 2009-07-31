@@ -103,6 +103,17 @@ InstallMethod( \/,
 end );
 
 ##
+InstallMethod( \/,
+        "for homalg submodules",
+        [ IsHomalgRing, IsFinitelyPresentedModuleRep and HasUnderlyingSubobject ],
+        
+  function( R, M )
+    
+    return R / UnderlyingSubobject( M );
+    
+end );
+
+##
 InstallMethod( BoundForResolution,
         "for homalg relations",
         [ IsHomalgRelations ],

@@ -1663,3 +1663,96 @@ InstallMethod( PrintObj,
     
 end );
 
+## from HomalgModule.gd
+
+##  <#GAPDoc Label="ResidueClassRing">
+##  <ManSection>
+##    <Attr Arg="J" Name="ResidueClassRing" Label="for ideals"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The residue class ring <M>R/</M><A>J</A>, where <A>J</A> is an ideal in the &homalg; ring <M>R</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ResidueClassRing",
+        IsHomalgModule );
+
+## from LIMOD.gi
+
+##
+InstallMethod( ResidueClassRing,
+        "for homalg submodules",
+        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
+        
+  function( rel_ideal )
+    local R, S, mat, left, rel, rel_old, mat_old, left_old, c;
+    
+    R := HomalgRing( rel_ideal );
+    
+    S := CallFuncList( CreateHomalgRing, R!.ConstructorArguments );
+    
+    mat := MatrixOfGenerators( rel_ideal );
+    
+    mat := mat * S;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( rel_ideal );
+    
+    if left then
+        rel := HomalgRelationsForLeftModule( mat );
+    else
+        rel := HomalgRelationsForRightModule( mat );
+    fi;
+    
+    ## merge the new relations with the relations of the ambient ring
+    if HasRingRelations( R ) then
+        SetAmbientRing( S, AmbientRing( R ) );
+        rel_old := RingRelations( R );
+        mat_old := MatrixOfRelations( rel_old );
+        mat_old := mat_old * S;
+        left_old := IsHomalgRelationsOfLeftModule( rel_old );
+        if left_old then
+            rel_old := HomalgRelationsForLeftModule( mat_old );
+        else
+            rel_old := HomalgRelationsForRightModule( mat_old );
+        fi;
+        if left <> left_old then
+            Error( "the relations of the ambient ring and the given relations must both be either left or right relations\n" );
+        fi;
+        rel := BasisOfModule( UnionOfRelations( rel_old, rel ) );
+    else
+        SetAmbientRing( S, R );
+    fi;
+    
+    SetRingRelations( S, rel );
+    
+    ## residue class rings of the integers
+    if HasIsResidueClassRingOfTheIntegers( R ) and
+       IsResidueClassRingOfTheIntegers( R ) then
+        SetIsResidueClassRingOfTheIntegers( S, true );
+        c := RingRelations( S );
+        c := MatrixOfRelations( c );
+        c := EntriesOfHomalgMatrix( c );
+        if Length( c ) = 1 then
+            c := c[1];
+            if IsHomalgRingElement( c ) and
+               IsInt( homalgPointer( c ) ) then
+                c := homalgPointer( c );
+            fi;
+        fi;
+        if IsInt( c ) then
+            SetRingProperties( S, c );
+        fi;
+    fi;
+    
+    SetIdealOfRelations( S, rel_ideal );
+    
+    return S;
+    
+end );
+
+## from change.log
+
+- declared the attribute ResidueClassRing and
+  installed it for submodules as the primary constructor
+  method for residue class rings

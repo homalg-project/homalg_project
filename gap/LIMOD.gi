@@ -28,7 +28,9 @@ InstallValue( LIMOD,
               "DegreeOfTorsionFreeness",
               "Codim",
               "PurityFiltration",
-              "CodegreeOfPurity" ]
+              "CodegreeOfPurity",
+              "BettiDiagram",
+              "CastelnuovoMumfordRegularity" ]
             )
         );
 

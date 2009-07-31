@@ -150,7 +150,7 @@ end );
 
 InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(Emb)
   function( phi )
-    local T, p, img, emb, coker_epi;
+    local T, p, img, emb, coker_epi, img_submodule;
     
     if HasImageModuleEmb( phi ) then
         return Source( ImageModuleEmb( phi ) );
@@ -161,6 +161,7 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects of the following command(s)
     
+    ## the image module
     img := MatrixOfMap( phi ) / T;
     
     ## emb is the matrix of the natural embedding
@@ -175,6 +176,9 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     SetIsMonomorphism( emb, true );
     
     ## set the attribute ImageModuleEmb (specific for ImageModule):
+    ## (since ImageModuleEmb is listed below as a natural transformation
+    ##  for the functor ImageModule, a method will be automatically installed
+    ##  by InstallFunctor to fetch it by first invoking the main operation ImageModule)
     SetImageModuleEmb( phi, emb );
     
     ## abelian category: [HS, Prop. II.9.6]
@@ -185,6 +189,12 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
             SetKernelEmb( coker_epi, emb );
         fi;
     fi;
+    
+    ## at last define the image submodule
+    img_submodule := ImageSubmodule( phi );
+    
+    SetUnderlyingSubobject( img, img_submodule );
+    SetEmbeddingInSuperObject( img_submodule, emb );
     
     ## save the natural embedding in the image (thanks GAP):
     img!.NaturalGeneralizedEmbedding := emb;

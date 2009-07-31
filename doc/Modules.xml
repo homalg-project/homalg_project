@@ -62,7 +62,17 @@
 <Section Label="Modules:Attributes">
 <Heading>Modules: Attributes</Heading>
 
+<#Include Label="TheZeroMorphism">
+<#Include Label="TheIdentityMorphism">
+<#Include Label="FullSubmodule">
+<#Include Label="EmbeddingInSuperObject">
+<#Include Label="UnderlyingSubobject">
+<#Include Label="NatTrIdToHomHom_R">
 <#Include Label="ElementaryDivisors">
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the module  -->
+
 <#Include Label="RankOfModule">
 <#Include Label="ProjectiveDimension">
 <#Include Label="DegreeOfTorsionFreeness">
@@ -71,8 +81,7 @@
 <#Include Label="CodegreeOfPurity">
 <#Include Label="BettiDiagram:module">
 <#Include Label="CastelnuovoMumfordRegularity">
-<#Include Label="EmbeddingInSuperObject">
-<#Include Label="NatTrIdToHomHom_R">
+
 </Section>
 
 <Section Label="Modules:LIMOD">

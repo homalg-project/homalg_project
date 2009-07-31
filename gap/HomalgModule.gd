@@ -203,9 +203,29 @@ DeclareProperty( "HasConstantRank",
 #
 ####################################
 
+##  <#GAPDoc Label="TheZeroMorphism">
+##  <ManSection>
+##    <Attr Arg="M" Name="TheZeroMorphism"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The zero endomorphism of the &homalg; module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "TheZeroMorphism",
         IsHomalgModule );
 
+##  <#GAPDoc Label="TheIdentityMorphism">
+##  <ManSection>
+##    <Attr Arg="M" Name="TheIdentityMorphism"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The identity automorphism of the &homalg; module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "TheIdentityMorphism",
         IsHomalgModule );
 
@@ -215,10 +235,49 @@ DeclareAttribute( "Genesis",
 DeclareAttribute( "AFiniteFreeResolution",
         IsHomalgModule );
 
+##  <#GAPDoc Label="FullSubmodule">
+##  <ManSection>
+##    <Attr Arg="M" Name="FullSubmodule"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      The &homalg; module <A>M</A> as a submodule of itself.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "FullSubmodule",
         IsHomalgModule );
 
-## intrinsic attributes:
+##  <#GAPDoc Label="EmbeddingInSuperObject">
+##  <ManSection>
+##    <Attr Arg="M" Name="EmbeddingInSuperObject"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the embedding of <A>M</A> in <M>L</M> is returned. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "EmbeddingInSuperObject",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="UnderlyingSubobject">
+##  <ManSection>
+##    <Attr Arg="M" Name="UnderlyingSubobject"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      In case <A>M</A> was defined as the underlying object of a submodule <M>L</M> then <M>L</M> is returned. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "UnderlyingSubobject",
+        IsHomalgModule );
+
+##
+## the attributes below are intrinsic:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ## should all be added by hand to LIMOD.intrinsic_attributes
@@ -342,19 +401,6 @@ DeclareAttribute( "BettiDiagram",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "CastelnuovoMumfordRegularity",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="EmbeddingInSuperObject">
-##  <ManSection>
-##    <Attr Arg="M" Name="EmbeddingInSuperObject"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the embedding of <A>M</A> in <M>L</M> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "EmbeddingInSuperObject",
         IsHomalgModule );
 
 ####################################
