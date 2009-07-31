@@ -35,23 +35,23 @@
 ##  2 morphisms of left modules at degrees [ 0 .. 2 ]>
 ##  gap> Display( C );
 ##  -------------------------
-##  at homology degree: 0
-##  Z/< 2 > + Z/< 2 >
-##  ------------^------------
+##  at homology degree: 2
+##  Z/< 4 >
+##  -------------------------
+##  [ [  0,  6 ] ]
+##  
+##  the map is currently represented by the above 1 x 2 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Z/< 2 > + Z/< 8 >
+##  -------------------------
 ##  [ [  0,  1 ],
 ##    [  1,  1 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  -------------------------
-##  at homology degree: 1
-##  Z/< 2 > + Z/< 8 >
-##  ------------^------------
-##  [ [  0,  6 ] ]
-##  
-##  the map is currently represented by the above 1 x 2 matrix
-##  -------------------------
-##  at homology degree: 2
-##  Z/< 4 >
+##  ------------v------------
+##  at homology degree: 0
+##  Z/< 2 > + Z/< 2 >
 ##  -------------------------
 ##  gap> T := LTensorProduct( C, N );
 ##  <An exact triangle containing 3 morphisms of left complexes at degrees
@@ -63,46 +63,46 @@
 ##  <A sequence containing 5 morphisms of left modules at degrees [ 0 .. 5 ]>
 ##  gap> Display( L );
 ##  -------------------------
-##  at homology degree: 0
-##  Z/< 2 > + Z/< 2 >
-##  ------------^------------
-##  [ [  0,  1 ],
-##    [  1,  1 ] ]
-##  
-##  the map is currently represented by the above 2 x 2 matrix
+##  at homology degree: 5
+##  Z/< 4 >
 ##  -------------------------
-##  at homology degree: 1
-##  Z/< 2 > + Z/< 4 >
-##  ------------^------------
-##  [ [  0,  2 ] ]
+##  [ [  1,  3 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
+##  ------------v------------
+##  at homology degree: 4
+##  Z/< 2 > + Z/< 4 >
 ##  -------------------------
-##  at homology degree: 2
-##  Z/< 4 >
-##  ------------^------------
-##  [ [  2 ],
-##    [  0 ] ]
-##  
-##  the map is currently represented by the above 2 x 1 matrix
-##  -------------------------
-##  at homology degree: 3
-##  Z/< 2 > + Z/< 2 >
-##  ------------^------------
 ##  [ [  0,  1 ],
 ##    [  0,  1 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
+##  ------------v------------
+##  at homology degree: 3
+##  Z/< 2 > + Z/< 2 >
 ##  -------------------------
-##  at homology degree: 4
-##  Z/< 2 > + Z/< 4 >
-##  ------------^------------
-##  [ [  1,  3 ] ]
+##  [ [  2 ],
+##    [  0 ] ]
+##  
+##  the map is currently represented by the above 2 x 1 matrix
+##  ------------v------------
+##  at homology degree: 2
+##  Z/< 4 >
+##  -------------------------
+##  [ [  0,  2 ] ]
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Z/< 2 > + Z/< 4 >
 ##  -------------------------
-##  at homology degree: 5
-##  Z/< 4 >
+##  [ [  0,  1 ],
+##    [  1,  1 ] ]
+##  
+##  the map is currently represented by the above 2 x 2 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  Z/< 2 > + Z/< 2 >
 ##  -------------------------
 ##  gap> IsExactSequence( L );
 ##  true

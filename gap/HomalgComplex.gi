@@ -402,23 +402,23 @@ end );
 ##  <A sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
 ##  gap> Display( C );
 ##  -------------------------
-##  at homology degree: 0
+##  at homology degree: 2
 ##  Z^(1 x 2)
-##  ------------^------------
+##  -------------------------
 ##  [ [  0,  1 ],
 ##    [  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  -------------------------
+##  ------------v------------
 ##  at homology degree: 1
 ##  Z^(1 x 2)
-##  ------------^------------
+##  -------------------------
 ##  [ [  0,  1 ],
 ##    [  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 2 matrix
-##  -------------------------
-##  at homology degree: 2
+##  ------------v------------
+##  at homology degree: 0
 ##  Z^(1 x 2)
 ##  -------------------------
 ##  gap> IsComplex( C );
@@ -1241,22 +1241,6 @@ end );
 ##  grees [ 0 .. 1 ]>
 ##  gap> Display( C );
 ##  -------------------------
-##  at homology degree: 0
-##  [ [  2,  3,  4,  5 ],
-##    [  6,  7,  8,  9 ] ]
-##  
-##  Cokernel of the map
-##  
-##  Z^(1x2) --> Z^(1x4),
-##  
-##  currently represented by the above matrix
-##  ------------^------------
-##  [ [  0,  3,  6,  9 ],
-##    [  0,  2,  4,  6 ],
-##    [  0,  3,  6,  9 ] ]
-##  
-##  the map is currently represented by the above 3 x 4 matrix
-##  -------------------------
 ##  at homology degree: 1
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
@@ -1264,6 +1248,22 @@ end );
 ##  Cokernel of the map
 ##  
 ##  Z^(1x2) --> Z^(1x3),
+##  
+##  currently represented by the above matrix
+##  -------------------------
+##  [ [  0,  3,  6,  9 ],
+##    [  0,  2,  4,  6 ],
+##    [  0,  3,  6,  9 ] ]
+##  
+##  the map is currently represented by the above 3 x 4 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  [ [  2,  3,  4,  5 ],
+##    [  6,  7,  8,  9 ] ]
+##  
+##  Cokernel of the map
+##  
+##  Z^(1x2) --> Z^(1x4),
 ##  
 ##  currently represented by the above matrix
 ##  -------------------------
@@ -1275,16 +1275,16 @@ end );
 ##  grees [ 0 .. 1 ]>
 ##  gap> Display( C );
 ##  -------------------------
-##  at homology degree: 0
-##  Z/< 4 > + Z^(1 x 2)
-##  ------------^------------
+##  at homology degree: 1
+##  Z/< 3 > + Z^(1 x 1)
+##  -------------------------
 ##  [ [  0,  0,  0 ],
 ##    [  2,  0,  0 ] ]
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
-##  -------------------------
-##  at homology degree: 1
-##  Z/< 3 > + Z^(1 x 1)
+##  ------------v------------
+##  at homology degree: 0
+##  Z/< 4 > + Z^(1 x 2)
 ##  -------------------------
 ##  ]]></Example>
 ##    </Description>
@@ -1861,18 +1861,20 @@ InstallMethod( Display,
         [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( o )
-    local i, degrees;
+    local degrees, l, i;
     
     degrees := ObjectDegreesOfComplex( o );
     
-    Print( "-------------------------\n" );
-    Print( "at homology degree: ", degrees[1], "\n" );
-    Display( CertainObject( o, degrees[1] ) );
+    l := Length( degrees );
     
-    for i in degrees{[ 2 .. Length( degrees ) ]} do
-        Print( "------------^------------\n" );
-        Display( CertainMorphism( o, i ) );
+    Print( "-------------------------\n" );
+    Print( "at homology degree: ", degrees[l], "\n" );
+    Display( CertainObject( o, degrees[l] ) );
+    
+    for i in Reversed( degrees{[ 1 .. l - 1 ]} ) do
         Print( "-------------------------\n" );
+        Display( CertainMorphism( o, i + 1 ) );
+        Print( "------------v------------\n" );
         Print( "at homology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
     od;
@@ -1887,24 +1889,22 @@ InstallMethod( Display,
         [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( o )
-    local i, degrees, l;
+    local degrees, i;
     
     degrees := ObjectDegreesOfComplex( o );
     
-    l := Length( degrees );
-    
     Print( "-------------------------\n" );
     
-    for i in degrees{[ 1 .. l - 1 ]} do
+    for i in Reversed( degrees{[ 2 .. Length( degrees ) ]} ) do
         Print( "at cohomology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
+        Print( "------------^------------\n" );
+        Display( CertainMorphism( o, i - 1 ) );
         Print( "-------------------------\n" );
-        Display( CertainMorphism( o, i ) );
-        Print( "------------v------------\n" );
     od;
     
-    Print( "at cohomology degree: ", degrees[l], "\n" );
-    Display( CertainObject( o, degrees[l] ) );
+    Print( "at cohomology degree: ", degrees[1], "\n" );
+    Display( CertainObject( o, degrees[1] ) );
     Print( "-------------------------\n" );
     
 end );
@@ -1917,7 +1917,7 @@ InstallMethod( Display,
   function( o )
     local i;
     
-    for i in ObjectDegreesOfComplex( o ) do
+    for i in Reversed( ObjectDegreesOfComplex( o ) ) do
         Print( "-------------------------\n" );
         Print( "at homology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );
@@ -1935,7 +1935,7 @@ InstallMethod( Display,
   function( o )
     local i;
     
-    for i in ObjectDegreesOfComplex( o ) do
+    for i in Reversed( ObjectDegreesOfComplex( o ) ) do
         Print( "---------------------------\n" );
         Print( "at cohomology degree: ", i, "\n" );
         Display( CertainObject( o, i ) );

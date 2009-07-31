@@ -5,7 +5,7 @@ doc: doc/manual.six
 doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g VERSION \
 		doc/homalg.bib doc/*.xml \
-		gap/*.gd gap/*.gi tst/*.g
+		gap/*.gd gap/*.gi tst/*.g examples/*.g
 	        gapL makedoc.g
 
 clean:
