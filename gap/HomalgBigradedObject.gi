@@ -842,7 +842,7 @@ InstallMethod( DefectOfExactness,
                 H.embeddings.(String( [ p[i], q[j] ] )) := emb;
             elif IsHomalgMorphism( pre ) and not ( HasIsZero( Epq ) and IsZero( Epq ) ) then
                 def := Cokernel( pre );
-                emb := CokernelNaturalGeneralizedEmbedding( pre );
+                emb := CokernelNaturalGeneralizedIsomorphism( pre );
                     ## construct the natural epimorphism/equivalence
                     ## L_0(F)(G(P_p)) -> F(G(P_p))
                     if compute_nat_trafos and q[j] = 0 then

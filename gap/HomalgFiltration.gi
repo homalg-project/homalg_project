@@ -418,7 +418,7 @@ InstallMethod( IsomorphismOfFiltration,
         ## into the direct sum P_0 + F_{p-1}( M ), where the former, by construction,
         ## 1) is isomorphic to F_p( M ) and
         ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
-        gen_iso := CokernelNaturalGeneralizedEmbedding( emb );
+        gen_iso := CokernelNaturalGeneralizedIsomorphism( emb );
         
         ## make a copy without the morphism aid map
         gen_iso := RemoveMorphismAidMap( gen_iso );

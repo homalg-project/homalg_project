@@ -156,17 +156,6 @@ end );
 ##
 InstallMethod( HasNrGenerators,
         "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfLeftModule ],
-        
-  function( gen )
-    
-    return HasNrRows( MatrixOfGenerators( gen ) );
-    
-end );
-
-##
-InstallMethod( HasNrGenerators,
-        "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfRightModule ],
         
   function( gen )
@@ -176,13 +165,13 @@ InstallMethod( HasNrGenerators,
 end );
 
 ##
-InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( HasNrGenerators,
         "for sets of generators of homalg modules",
         [ IsHomalgGeneratorsOfLeftModule ],
         
   function( gen )
     
-    return NrRows( MatrixOfGenerators( gen ) );
+    return HasNrRows( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -198,13 +187,13 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
-InstallMethod( CertainGenerators,
+InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of generators of homalg modules",
-        [ IsHomalgGeneratorsOfLeftModule, IsList ],
+        [ IsHomalgGeneratorsOfLeftModule ],
         
-  function( gen, list )
+  function( gen )
     
-    return CertainRows( MatrixOfGenerators( gen ), list );
+    return NrRows( MatrixOfGenerators( gen ) );
     
 end );
 
@@ -216,6 +205,17 @@ InstallMethod( CertainGenerators,
   function( gen, list )
     
     return CertainColumns( MatrixOfGenerators( gen ), list );
+    
+end );
+
+##
+InstallMethod( CertainGenerators,
+        "for sets of generators of homalg modules",
+        [ IsHomalgGeneratorsOfLeftModule, IsList ],
+        
+  function( gen, list )
+    
+    return CertainRows( MatrixOfGenerators( gen ), list );
     
 end );
 
@@ -409,7 +409,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgGeneratorsOfLeftModule, IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgGeneratorsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( gen, rel )
     
@@ -420,7 +420,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgGeneratorsOfRightModule, IsHomalgRelationsOfRightModule ],
+        [ IsHomalgGeneratorsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( gen, rel )
     
@@ -431,7 +431,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgGeneratorsOfLeftModule, IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgGeneratorsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( gen, rel )
     
@@ -442,7 +442,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgGeneratorsOfRightModule, IsHomalgRelationsOfRightModule ],
+        [ IsHomalgGeneratorsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( gen, rel )
     

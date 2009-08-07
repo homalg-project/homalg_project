@@ -69,14 +69,14 @@ BindGlobal( "TheTypeHomalgRelationsOfRightModule",
 
 ##
 InstallImmediateMethod( IsInjectivePresentation,
-        IsHomalgRelationsOfLeftModule, 0,
+        IsHomalgRelationsOfRightModule, 0,
         
   function( rel )
     local mat;
     
     mat := MatrixOfRelations( rel );
     
-    if HasIsLeftRegularMatrix( mat ) and IsLeftRegularMatrix( mat ) then
+    if HasIsRightRegularMatrix( mat ) and IsRightRegularMatrix( mat ) then
         return true;
     fi;
     
@@ -86,14 +86,14 @@ end );
 
 ##
 InstallImmediateMethod( IsInjectivePresentation,
-        IsHomalgRelationsOfRightModule, 0,
+        IsHomalgRelationsOfLeftModule, 0,
         
   function( rel )
     local mat;
     
     mat := MatrixOfRelations( rel );
     
-    if HasIsRightRegularMatrix( mat ) and IsRightRegularMatrix( mat ) then
+    if HasIsLeftRegularMatrix( mat ) and IsLeftRegularMatrix( mat ) then
         return true;
     fi;
     
@@ -135,8 +135,8 @@ end );
 
 ##
 InstallMethod( \=,
-        "for homalg comparable matrices",
-        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
+        "for homalg relations",
+        [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( rel1, rel2 )
     
@@ -146,8 +146,8 @@ end );
 
 ##
 InstallMethod( \=,
-        "for homalg comparable matrices",
-        [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
+        "for homalg relations",
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
   function( rel1, rel2 )
     
@@ -169,33 +169,22 @@ end );
 ##
 InstallMethod( HasNrGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
-    return HasNrColumns( MatrixOfRelations( rel ) );
+    return HasNrRows( MatrixOfRelations( rel ) );
     
 end );
 
 ##
 InstallMethod( HasNrGenerators,
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfRightModule ],
-        
-  function( rel )
-    
-    return HasNrRows( MatrixOfRelations( rel ) );
-    
-end );
-
-##
-InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
-        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
-    return NrColumns( MatrixOfRelations( rel ) );
+    return HasNrColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -211,13 +200,13 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
-InstallMethod( HasNrRelations,
+InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
-    return HasNrRows( MatrixOfRelations( rel ) );
+    return NrColumns( MatrixOfRelations( rel ) );
     
 end );
 
@@ -233,13 +222,13 @@ InstallMethod( HasNrRelations,
 end );
 
 ##
-InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
+InstallMethod( HasNrRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
-    return NrRows( MatrixOfRelations( rel ) );
+    return HasNrRows( MatrixOfRelations( rel ) );
     
 end );
 
@@ -255,21 +244,13 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
 end );
 
 ##
-InstallMethod( CertainRelations,		### defines: CertainRelations
+InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule, IsList ],
+        [ IsHomalgRelationsOfLeftModule ],
         
-  function( rel, plist )
-    local sub_rel;
+  function( rel )
     
-    sub_rel := CertainRows( MatrixOfRelations( rel ), plist );
-    
-    ## take care of gradings
-    if IsList( DegreesOfGenerators( rel ) ) then
-        sub_rel!.DegreesOfGenerators := DegreesOfGenerators( rel );
-    fi;
-    
-    return HomalgRelationsForLeftModule( sub_rel );
+    return NrRows( MatrixOfRelations( rel ) );
     
 end );
 
@@ -293,45 +274,21 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
 end );
 
 ##
-InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
+InstallMethod( CertainRelations,		### defines: CertainRelations
         "for sets of relations of homalg modules",
-        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule, IsList ],
         
-  function( mat1, rel2 )
-    local rel;
+  function( rel, plist )
+    local sub_rel;
     
-    rel := UnionOfRows( mat1, MatrixOfRelations( rel2 ) );
-    
-    rel := HomalgRelationsForLeftModule( rel );
+    sub_rel := CertainRows( MatrixOfRelations( rel ), plist );
     
     ## take care of gradings
-    if IsList( DegreesOfGenerators( rel2 ) ) then
-        rel!.DegreesOfGenerators := DegreesOfGenerators( rel2 );
+    if IsList( DegreesOfGenerators( rel ) ) then
+        sub_rel!.DegreesOfGenerators := DegreesOfGenerators( rel );
     fi;
     
-    return rel;
-    
-end );
-
-##
-InstallMethod( UnionOfRelations,
-        "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule, IsHomalgMatrix ],
-        
-  function( rel1, mat2 )
-    
-    return UnionOfRelations( mat2, rel1 );
-    
-end );
-
-##
-InstallMethod( UnionOfRelations,
-        "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
-        
-  function( rel1, rel2 )
-    
-    return UnionOfRelations( MatrixOfRelations( rel1 ), rel2 );
+    return HomalgRelationsForLeftModule( sub_rel );
     
 end );
 
@@ -379,38 +336,46 @@ InstallMethod( UnionOfRelations,
 end );
 
 ##
-InstallMethod( BasisOfModule,
+InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
-  function( rel )
-    local mat, bas;
+  function( mat1, rel2 )
+    local rel;
     
-    if not IsBound( rel!.BasisOfModule ) then
-        mat := MatrixOfRelations( rel );
-        
-        bas := BasisOfRows( mat );
-        
-        if bas = mat then
-            SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
-            if HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas ) then
-                SetIsInjectivePresentation( rel, true );
-            fi;
-            return rel;
-        else
-            rel!.BasisOfModule := bas;
-            SetCanBeUsedToDecideZeroEffectively( rel, false );
-        fi;
-    else
-        bas := rel!.BasisOfModule;
+    rel := UnionOfRows( mat1, MatrixOfRelations( rel2 ) );
+    
+    rel := HomalgRelationsForLeftModule( rel );
+    
+    ## take care of gradings
+    if IsList( DegreesOfGenerators( rel2 ) ) then
+        rel!.DegreesOfGenerators := DegreesOfGenerators( rel2 );
     fi;
     
-    bas := HomalgRelationsForLeftModule( bas );
+    return rel;
     
-    SetCanBeUsedToDecideZeroEffectively( bas, true );
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule, IsHomalgMatrix ],
+        
+  function( rel1, mat2 )
     
-    return bas;
+    return UnionOfRelations( mat2, rel1 );
+    
+end );
+
+##
+InstallMethod( UnionOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
+        
+  function( rel1, rel2 )
+    
+    return UnionOfRelations( MatrixOfRelations( rel1 ), rel2 );
+    
 end );
 
 ##
@@ -451,6 +416,41 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    local mat, bas;
+    
+    if not IsBound( rel!.BasisOfModule ) then
+        mat := MatrixOfRelations( rel );
+        
+        bas := BasisOfRows( mat );
+        
+        if bas = mat then
+            SetCanBeUsedToDecideZeroEffectively( rel, true );
+            rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            if HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas ) then
+                SetIsInjectivePresentation( rel, true );
+            fi;
+            return rel;
+        else
+            rel!.BasisOfModule := bas;
+            SetCanBeUsedToDecideZeroEffectively( rel, false );
+        fi;
+    else
+        bas := rel!.BasisOfModule;
+    fi;
+    
+    bas := HomalgRelationsForLeftModule( bas );
+    
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
+    
+    return bas;
+end );
+
+##
+InstallMethod( BasisOfModule,
+        "for sets of relations of homalg modules",
         [ IsHomalgRelations and CanBeUsedToDecideZeroEffectively ],
         
   function( rel )
@@ -477,17 +477,6 @@ end );
 ##
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
-        
-  function( rel_, rel )
-    
-    return HomalgRelationsForLeftModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
-    
-end );
-
-##
-InstallMethod( DecideZero,
-        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
   function( rel_, rel )
@@ -497,23 +486,13 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( BasisCoeff,
+InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
         
-  function( rel )
-    local bas;
+  function( rel_, rel )
     
-    if not IsBound( rel!.BasisOfModule ) then
-        rel!.BasisOfModule := BasisOfRowsCoeff( MatrixOfRelations( rel ) );
-        SetCanBeUsedToDecideZeroEffectively( rel, false );
-    fi;
-    
-    bas := HomalgRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
-    
-    SetCanBeUsedToDecideZeroEffectively( bas, true );
-        
-    return bas;
+    return HomalgRelationsForLeftModule( DecideZero( MatrixOfRelations( rel_ ), rel ) );
     
 end );
 
@@ -539,24 +518,23 @@ InstallMethod( BasisCoeff,
 end );
 
 ##
-InstallMethod( SyzygiesGenerators,
+InstallMethod( BasisCoeff,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
+    local bas;
     
-    return HomalgRelationsForLeftModule( SyzygiesOfRows( MatrixOfRelations( rel ) ) );
+    if not IsBound( rel!.BasisOfModule ) then
+        rel!.BasisOfModule := BasisOfRowsCoeff( MatrixOfRelations( rel ) );
+        SetCanBeUsedToDecideZeroEffectively( rel, false );
+    fi;
     
-end );
-
-##
-InstallMethod( SyzygiesGenerators,
-        "for sets of relations of homalg modules",
-        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
-        
-  function( mat, rel )
+    bas := HomalgRelationsForLeftModule( rel!.BasisOfModule, HomalgRing( rel ) );
     
-    return HomalgRelationsForLeftModule( SyzygiesOfRows( mat, MatrixOfRelations( rel ) ) );
+    SetCanBeUsedToDecideZeroEffectively( bas, true );
+    
+    return bas;
     
 end );
 
@@ -583,30 +561,24 @@ InstallMethod( SyzygiesGenerators,
 end );
 
 ##
-InstallMethod( ReducedSyzygiesGenerators,
+InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
-    local syz;
     
-    syz := SyzygiesGenerators( rel );
-    
-    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    return HomalgRelationsForLeftModule( SyzygiesOfRows( MatrixOfRelations( rel ) ) );
     
 end );
 
 ##
-InstallMethod( ReducedSyzygiesGenerators,
+InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( mat, rel )
-    local syz;
     
-    syz := SyzygiesGenerators( mat, rel );
-    
-    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    return HomalgRelationsForLeftModule( SyzygiesOfRows( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -628,6 +600,34 @@ end );
 InstallMethod( ReducedSyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
+        
+  function( mat, rel )
+    local syz;
+    
+    syz := SyzygiesGenerators( mat, rel );
+    
+    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    local syz;
+    
+    syz := SyzygiesGenerators( rel );
+    
+    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( mat, rel )
     local syz;
@@ -703,28 +703,6 @@ end );
 ##
 InstallMethod( GetIndependentUnitPositions,
         "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule, IsHomogeneousList ],
-        
-  function( rel, pos_list )
-    
-    return GetColumnIndependentUnitPositions( MatrixOfRelations( rel ), pos_list );
-    
-end );
-
-##
-InstallMethod( GetIndependentUnitPositions,
-        "for sets of relations of homalg modules",
-        [ IsHomalgRelationsOfLeftModule ],
-        
-  function( rel )
-    
-    return GetColumnIndependentUnitPositions( MatrixOfRelations( rel ) );
-    
-end );
-
-##
-InstallMethod( GetIndependentUnitPositions,
-        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule, IsHomogeneousList ],
         
   function( rel, pos_list )
@@ -741,6 +719,28 @@ InstallMethod( GetIndependentUnitPositions,
   function( rel )
     
     return GetRowIndependentUnitPositions( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( GetIndependentUnitPositions,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule, IsHomogeneousList ],
+        
+  function( rel, pos_list )
+    
+    return GetColumnIndependentUnitPositions( MatrixOfRelations( rel ), pos_list );
+    
+end );
+
+##
+InstallMethod( GetIndependentUnitPositions,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule ],
+        
+  function( rel )
+    
+    return GetColumnIndependentUnitPositions( MatrixOfRelations( rel ) );
     
 end );
 

@@ -70,7 +70,7 @@ InstallMethod( \/,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, embK, embJ, phi;
+    local M, embK, embJ, phi, im, emb;
     
     M := SuperObject( J );
     
@@ -78,12 +78,24 @@ InstallMethod( \/,
         Error( "the super objects must coincide\n" );
     fi;
     
-    embK := EmbeddingInSuperObject( K );
-    embJ := EmbeddingInSuperObject( J );
+    embK := MapHavingSubobjectAsItsImage( K );
+    embJ := MapHavingSubobjectAsItsImage( J );
     
     phi := PreCompose( embK, CokernelEpi( embJ ) );
     
-    return ImageModule( phi );
+    im := ImageModule( phi );
+    
+    emb := PreCompose( NaturalGeneralizedEmbedding( im ), CokernelNaturalGeneralizedIsomorphism( embJ ) );
+    
+    ## check assertion
+    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+    
+    SetIsGeneralizedMonomorphism( emb, true );
+    
+    ## reset the NaturalGeneralizedEmbedding
+    im!.NaturalGeneralizedEmbedding := emb;
+    
+    return im;
     
 end );
 

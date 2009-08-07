@@ -152,17 +152,6 @@ BindGlobal( "TheTypeHomalgRightFinitelyGeneratedSubmodule",
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( M )
-    
-    return LeftActingDomain( M );
-    
-end );
-
-##
-InstallMethod( HomalgRing,
-        "for homalg modules",
         [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
@@ -172,13 +161,13 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallOtherMethod( Zero,
+InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     
-    return HomalgRing( M )!.ZeroLeftModule;
+    return LeftActingDomain( M );
     
 end );
 
@@ -194,13 +183,13 @@ InstallOtherMethod( Zero,
 end );
 
 ##
-InstallOtherMethod( One,
+InstallOtherMethod( Zero,
         "for homalg modules",
-        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking
         
   function( M )
     
-    return HomalgRing( M )!.AsLeftModule;
+    return HomalgRing( M )!.ZeroLeftModule;
     
 end );
 
@@ -212,6 +201,17 @@ InstallOtherMethod( One,
   function( M )
     
     return HomalgRing( M )!.AsRightModule;
+    
+end );
+
+##
+InstallOtherMethod( One,
+        "for homalg modules",
+        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( M )
+    
+    return HomalgRing( M )!.AsLeftModule;
     
 end );
 
@@ -430,16 +430,26 @@ InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
 end );
 
 ##
-InstallMethod( MatrixOfSubobjectGenerators,
+InstallMethod( MapHavingSubobjectAsItsImage,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
   function( M )
     
     if HasEmbeddingInSuperObject( M ) then
-        return MatrixOfMap( EmbeddingInSuperObject( M ) );
+        return EmbeddingInSuperObject( M );
     fi;
     
     return M!.map_having_subobject_as_its_image;
+    
+end );
+
+##
+InstallMethod( MatrixOfSubobjectGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+  function( M )
+    
+    return MatrixOfMap( MapHavingSubobjectAsItsImage( M ) );
     
 end );
 
@@ -584,6 +594,67 @@ InstallMethod( NrGenerators,
     fi;
     
     return fail;
+    
+end );
+
+##
+InstallGlobalFunction( GetGenerators,
+  function( arg )
+    local nargs, M, pos, g, gen, mat, proc, l;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
+        
+        M := arg[1];
+        
+        if nargs > 2 and IsPosInt( arg[3] ) then
+            pos := arg[3];
+        else
+            pos := PositionOfTheDefaultSetOfGenerators( M );
+        fi;
+        
+        gen := GeneratorsOfModule( M, pos );
+        
+    elif nargs > 0 and IsGeneratorsOfFinitelyGeneratedModuleRep( arg[1] ) then
+        
+        gen := arg[1];
+        
+    else
+        
+        Error( "the first argument must be a homalg module or a set of generators of a homalg module\n" );
+        
+    fi;
+    
+    g := [ 1 .. NrGenerators( gen ) ];
+    
+    if nargs > 1 then
+        if IsPosInt( arg[2] ) then
+            g := [ arg[2] ];
+        elif IsHomogeneousList( arg[2] ) and ForAll( arg[2], IsPosInt ) then
+            g := arg[2];
+        fi;
+    fi;
+    
+    mat := MatrixOfGenerators( gen );
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) then
+        g := List( g, a -> CertainRows( mat, [ a ] ) );
+    else
+        g := List( g, a -> CertainColumns( mat, [ a ] ) );
+    fi;
+    
+    if HasProcedureToReadjustGenerators( gen ) then
+        proc := ProcedureToReadjustGenerators( gen );
+        l := Length( proc );
+        g := List( g, a -> CallFuncList( proc[1], Concatenation( [ a ], proc{[ 2 .. l ]} ) ) );
+    fi;
+    
+    if nargs > 1 and IsPosInt( arg[2] ) then
+        return g[1];
+    fi;
+    
+    return g;
     
 end );
 
@@ -1299,34 +1370,6 @@ end );
 # Compute a smaller presentation allowing the transformation of the generators
 # (i.e. allowing column/row operations for left/right relation matrices)
 #_______________________________________________________________________
-InstallMethod( OnLessGenerators,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( M )
-    local R, rel_old, rel, V, VI;
-    
-    R := HomalgRing( M );
-    
-    rel_old := MatrixOfRelations( M );
-    
-    V := HomalgVoidMatrix( R );
-    VI := HomalgVoidMatrix( R );
-    
-    rel := SimplerEquivalentMatrix( rel_old, V, VI, "", "" );
-    
-    if rel_old = rel then
-        return GetRidOfObsoleteGenerators( M );
-    fi;
-    
-    rel := HomalgRelationsForLeftModule( rel );
-    
-    AddANewPresentation( M, rel, V, VI );
-    
-    return GetRidOfObsoleteGenerators( M );
-    
-end );
-
 ##
 InstallMethod( OnLessGenerators,
         "for homalg modules",
@@ -1351,6 +1394,35 @@ InstallMethod( OnLessGenerators,
     rel := HomalgRelationsForRightModule( rel );
     
     AddANewPresentation( M, rel, U, UI );
+    
+    return GetRidOfObsoleteGenerators( M );
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( M )
+    local R, rel_old, rel, V, VI;
+    
+    R := HomalgRing( M );
+    
+    rel_old := MatrixOfRelations( M );
+    
+    V := HomalgVoidMatrix( R );
+    VI := HomalgVoidMatrix( R );
+    
+    rel := SimplerEquivalentMatrix( rel_old, V, VI, "", "" );
+    
+    if rel_old = rel then
+        return GetRidOfObsoleteGenerators( M );
+    fi;
+    
+    rel := HomalgRelationsForLeftModule( rel );
+    
+    AddANewPresentation( M, rel, V, VI );
     
     return GetRidOfObsoleteGenerators( M );
     
@@ -1604,7 +1676,7 @@ InstallMethod( SuperObject,
         
   function( M )
     
-    return Range( EmbeddingInSuperObject( M ) );
+    return Range( MapHavingSubobjectAsItsImage( M ) );
     
 end );
 
@@ -2617,7 +2689,7 @@ InstallMethod( \*,
         
   function( M, R )
     
-    return Subobject( R * M!.map_having_subobject_as_its_image );
+    return ImageModule( R * M!.map_having_subobject_as_its_image );
     
 end );
 
@@ -2698,67 +2770,6 @@ InstallMethod( \*,
     
 end );
 
-##
-InstallGlobalFunction( GetGenerators,
-  function( arg )
-    local nargs, M, pos, g, gen, mat, proc, l;
-    
-    nargs := Length( arg );
-    
-    if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
-        
-        M := arg[1];
-        
-        if nargs > 2 and IsPosInt( arg[3] ) then
-            pos := arg[3];
-        else
-            pos := PositionOfTheDefaultSetOfGenerators( M );
-        fi;
-        
-        gen := GeneratorsOfModule( M, pos );
-        
-    elif nargs > 0 and IsGeneratorsOfFinitelyGeneratedModuleRep( arg[1] ) then
-        
-        gen := arg[1];
-        
-    else
-        
-        Error( "the first argument must be a homalg module or a set of generators of a homalg module\n" );
-        
-    fi;
-    
-    g := [ 1 .. NrGenerators( gen ) ];
-    
-    if nargs > 1 then
-        if IsPosInt( arg[2] ) then
-            g := [ arg[2] ];
-        elif IsHomogeneousList( arg[2] ) and ForAll( arg[2], IsPosInt ) then
-            g := arg[2];
-        fi;
-    fi;
-    
-    mat := MatrixOfGenerators( gen );
-    
-    if IsHomalgGeneratorsOfLeftModule( gen ) then
-        g := List( g, a -> CertainRows( mat, [ a ] ) );
-    else
-        g := List( g, a -> CertainColumns( mat, [ a ] ) );
-    fi;
-    
-    if HasProcedureToReadjustGenerators( gen ) then
-        proc := ProcedureToReadjustGenerators( gen );
-        l := Length( proc );
-        g := List( g, a -> CallFuncList( proc[1], Concatenation( [ a ], proc{[ 2 .. l ]} ) ) );
-    fi;
-    
-    if nargs > 1 and IsPosInt( arg[2] ) then
-        return g[1];
-    fi;
-    
-    return g;
-    
-end );
-
 ##  <#GAPDoc Label="Subobject:map">
 ##  <ManSection>
 ##    <Oper Arg="phi" Name="Subobject" Label="constructor for submodules using maps"/>
@@ -2810,6 +2821,39 @@ InstallMethod( Subobject,
     gen_map := HomalgMap( gen, "free", M  );
     
     return ImageSubmodule( gen_map );
+    
+end );
+
+##
+InstallMethod( Subobject,	## in case the methods below do not apply
+        "constructor",
+        [ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
+        
+  function( rel, M )
+    
+    Error( "the set of relations and the module should either be both left or both right\n" );
+    
+end );
+
+##
+InstallMethod( Subobject,
+        "constructor",
+        [ IsHomalgRelations and IsHomalgRelationsOfRightModule, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( rel, M )
+    
+    return Subobject( MatrixOfRelations( rel ), M );
+    
+end );
+
+##
+InstallMethod( Subobject,
+        "constructor",
+        [ IsHomalgRelations and IsHomalgRelationsOfLeftModule, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( rel, M )
+    
+    return Subobject( MatrixOfRelations( rel ), M );
     
 end );
 

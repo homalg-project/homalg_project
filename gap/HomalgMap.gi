@@ -269,10 +269,10 @@ end );
 ##
 InstallMethod( AreComposableMorphisms,
         "for homalg maps",
-        [ IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
-  function( phi1, phi2 )
+  function( phi2, phi1 )
     
     return IsIdenticalObj( Range( phi1 ), Source( phi2 ) );
     
@@ -281,10 +281,10 @@ end );
 ##
 InstallMethod( AreComposableMorphisms,
         "for homalg maps",
-        [ IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
-  function( phi2, phi1 )
+  function( phi1, phi2 )
     
     return IsIdenticalObj( Range( phi1 ), Source( phi2 ) );
     
@@ -580,24 +580,24 @@ end );
 ##
 InstallMethod( PreCompose,
         "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi1, phi2 )
-    
-    return phi1 * phi2;
-    
-end );
-
-##
-InstallMethod( PreCompose,
-        "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( phi1, phi2 )
     
     return phi2 * phi1;
+    
+end );
+
+##
+InstallMethod( PreCompose,
+        "of two homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( phi1, phi2 )
+    
+    return phi1 * phi2;
     
 end );
 
@@ -822,19 +822,6 @@ end );
 ##
 InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( alpha1, phi, beta1 )
-    
-    return alpha1 * phi / beta1;
-    
-end );
-
-##
-InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
-        "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
@@ -842,6 +829,19 @@ InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteI
   function( alpha1, phi, beta1 )
     
     return phi * alpha1 / beta1;
+    
+end );
+
+##
+InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( alpha1, phi, beta1 )
+    
+    return alpha1 * phi / beta1;
     
 end );
 

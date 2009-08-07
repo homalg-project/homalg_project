@@ -68,18 +68,18 @@ DeclareGlobalVariable( "Functor_TensorProduct" );
 DeclareAttribute( "CokernelEpi",
         IsHomalgMap );
 
-##  <#GAPDoc Label="CokernelNaturalGeneralizedEmbedding">
+##  <#GAPDoc Label="CokernelNaturalGeneralizedIsomorphism">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="CokernelNaturalGeneralizedEmbedding" Label="for maps"/>
+##    <Attr Arg="phi" Name="CokernelNaturalGeneralizedIsomorphism" Label="for maps"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
-##      The natural generalized embedding from the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M>
-##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
+##      The natural generalized isomorphism from the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M>
+##      onto the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "CokernelNaturalGeneralizedEmbedding",
+DeclareAttribute( "CokernelNaturalGeneralizedIsomorphism",
         IsHomalgMap );
 
 ##  <#GAPDoc Label="KernelEmb:map">

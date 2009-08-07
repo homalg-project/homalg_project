@@ -562,13 +562,8 @@ InstallMethod( KernelSubmodule,
         [ IsHomalgMap ],
         
   function( psi )
-    local ker_gen;
     
-    ker_gen := ReducedSyzygiesGenerators( psi );
-    
-    ker_gen := MatrixOfRelations( ker_gen );
-    
-    return Subobject( ker_gen, Source( psi ) );
+    return Subobject( ReducedSyzygiesGenerators( psi ), Source( psi ) );
     
 end );
 

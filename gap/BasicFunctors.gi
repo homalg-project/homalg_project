@@ -28,7 +28,7 @@
 ##
 InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
   function( phi )
-    local R, T, p, gen, rel, coker, id, epi, img_emb, emb;
+    local R, T, p, rel, gen, coker, id, epi, img_emb, emb;
     
     if HasCokernelEpi( phi ) then
         return Range( CokernelEpi( phi ) );
@@ -41,9 +41,9 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     ## this is probably obsolete but clarifies our idea:
     p := PositionOfTheDefaultSetOfGenerators( T );  ## avoid future possible side effects of the following command(s)
     
-    gen := GeneratorsOfModule( T );
-    
     rel := UnionOfRelations( phi );
+    
+    gen := GeneratorsOfModule( T );
     
     gen := UnionOfRelations( gen, rel * MatrixOfGenerators( gen ) );
     
@@ -62,6 +62,8 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     
     ## set the attribute CokernelEpi (specific for Cokernel):
     SetCokernelEpi( phi, epi );
+    
+    #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]
     if HasImageModuleEmb( phi ) then
@@ -112,7 +114,7 @@ functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-InstallMethod( CokernelNaturalGeneralizedEmbedding,
+InstallMethod( CokernelNaturalGeneralizedIsomorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
@@ -122,7 +124,7 @@ InstallMethod( CokernelNaturalGeneralizedEmbedding,
     coker := Cokernel( phi );
     
     ## sometimes a module is automatically assigned to a map as its Cokernel:
-    ## this happens when M is resolved with F_0 --(d_0) --> M --> 0, then M is automatically assigned as the cokernel of d_0,
+    ## this happens when M is resolved with F_0 --(d_0)--> M --> 0, then M is automatically assigned as the cokernel of d_0,
     ## and the component coker!.NaturalGeneralizedEmbedding is not set
     if IsBound( coker!.NaturalGeneralizedEmbedding ) then
         emb := NaturalGeneralizedEmbedding( coker );
@@ -130,7 +132,8 @@ InstallMethod( CokernelNaturalGeneralizedEmbedding,
     
     ## since the cokernel module can very well be predefined as the outcome of a different functor than Cokernel
     ## (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
-    if not IsBound( emb ) or not IsIdenticalObj( Range( emb ), Source( phi ) ) then
+    if not ( IsBound( emb ) and IsIdenticalObj( Range( emb ), Source( phi ) ) ) then
+        
         emb := CokernelEpi( phi )^-1;
         SetMorphismAidMap( emb, phi );
         
@@ -180,6 +183,8 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     ##  for the functor ImageModule, a method will be automatically installed
     ##  by InstallFunctor to fetch it by first invoking the main operation ImageModule)
     SetImageModuleEmb( phi, emb );
+    
+    #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]
     if HasCokernelEpi( phi ) then
@@ -257,7 +262,7 @@ end );
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
   function( psi )
-    local S, p, ker_submodule, emb, ker, img_epi, T, coker, im;
+    local S, ker_submodule, ker, emb, img_epi, T, coker, im;
     
     if HasKernelEmb( psi ) then
         return Source( KernelEmb( psi ) );
@@ -265,16 +270,20 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     S := Source( psi );
     
-    ## the following keeps track of the original generators:
+    ## this involves computing relative syzygies:
     ker_submodule := KernelSubmodule( psi );
     
-    emb := EmbeddingInSuperObject( ker_submodule );
+    ## this involves a second syzygies computation:
+    ## (the number of generators of ker might be less than the number of generators of ker_submodule)
+    ker := UnderlyingObject( ker_submodule );
     
-    ## the number of generators of ker might be less than the number of computed syzygies ker_gen
-    ker := Source( emb );
+    ## the natural embedding of ker in Source( psi ):
+    emb := EmbeddingInSuperObject( ker_submodule );
     
     ## set the attribute KernelEmb (specific for Kernel):
     SetKernelEmb( psi, emb );
+    
+    #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]
     if HasImageModuleEpi( psi ) then
@@ -353,7 +362,7 @@ functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: DefectOfExactness (DefectOfHoms)
   function( cpx_post_pre )
-    local pre, post, M, p, gen, rel, coker, ker, emb;
+    local pre, post;
     
     if not IsATwoSequence( cpx_post_pre ) then
         Error( "expecting a complex containing two morphisms marked as IsATwoSequence\n" );
@@ -362,41 +371,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     pre := HighestDegreeMorphism( cpx_post_pre );
     post := LowestDegreeMorphism( cpx_post_pre );
     
-    M := Range( pre );
-    
-    ## this is probably obsolete but clarifies our idea:
-    p := PositionOfTheDefaultSetOfGenerators( M );	## avoid future possible side effects of the following command(s)
-    
-    gen := GeneratorsOfModule( M );
-    
-    rel := UnionOfRelations( pre );
-    
-    gen := UnionOfRelations( gen, rel * MatrixOfGenerators( gen ) );
-    
-    coker := Presentation( gen, rel );
-    
-    ## this following keeps track of the original generators:
-    ker := ReducedSyzygiesGenerators( post ) / coker;	## the number of generators of ker might be less than the number of computed syzygies
-    
-    ## emb is the matrix of the "natural embedding" (see below)
-    ## w.r.t. the first set of relations of ker and the p-th set of relations of M
-    emb := MatrixOfGenerators( ker, 1 );
-    
-    ## this is in general NOT a morphism,
-    ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
-    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
-    emb := HomalgMap( emb, [ ker, 1 ], [ M, p ] );
-    SetMorphismAidMap( emb, pre );
-    
-    ## check assertion
-    Assert( 4, IsGeneralizedMonomorphism( emb ) );
-    
-    SetIsGeneralizedMonomorphism( emb, true );
-    
-    ## save the natural embedding in the defect (thanks GAP):
-    ker!.NaturalGeneralizedEmbedding := emb;
-    
-    return ker;
+    return KernelSubmodule( post ) / ImageSubmodule( pre );
     
 end );
 

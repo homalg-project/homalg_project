@@ -121,8 +121,7 @@ DeclareProperty( "IsTorsionFree",
 ##    <Prop Arg="M" Name="IsArtinian" Label="for modules"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      Check if the &homalg; module <A>M</A> is artinian. <Br/>
-##      (no method installed)
+##      Check if the &homalg; module <A>M</A> is artinian.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -251,10 +250,9 @@ DeclareAttribute( "FullSubmodule",
 ##  <#GAPDoc Label="EmbeddingInSuperObject">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="EmbeddingInSuperObject"/>
-##    <Returns>a &homalg; module</Returns>
+##    <Returns>a &homalg; map</Returns>
 ##    <Description>
-##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the embedding of <A>M</A> in <M>L</M> is returned. <Br/>
-##      (no method installed)
+##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the embedding of <A>M</A> in <M>L</M> is returned.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -267,7 +265,7 @@ DeclareAttribute( "EmbeddingInSuperObject",
 ##    <Attr Arg="M" Name="UnderlyingSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
-##      In case <A>M</A> was defined as the underlying object of a submodule <M>L</M> then <M>L</M> is returned. <Br/>
+##      In case <A>M</A> was defined as the module underlying a submodule <M>L</M> then <M>L</M> is returned. <Br/>
 ##      (no method installed)
 ##    </Description>
 ##  </ManSection>
@@ -513,6 +511,9 @@ DeclareOperation( "*",
 DeclareOperation( "Subobject",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
+DeclareOperation( "Subobject",
+        [ IsHomalgRelations, IsHomalgModule ] );
+
 DeclareOperation( "LeftSubmodule",
         [ IsHomalgMatrix ] );
 
@@ -563,6 +564,9 @@ DeclareOperation( "RelationsOfHullModule",
 
 DeclareOperation( "RelationsOfHullModule",
         [ IsHomalgModule, IsPosInt ] );
+
+DeclareOperation( "MapHavingSubobjectAsItsImage",
+        [ IsHomalgModule ] );
 
 DeclareOperation( "MatrixOfSubobjectGenerators",
         [ IsHomalgModule ] );
