@@ -112,19 +112,19 @@ internal rings (&see; <Ref Label="IsHomalgInternalRingRep"/>). An
 internal matrix (resp. ring) is simply a wrapper containing a
 &GAP;-builtin matrix (resp. ring). &homalg; allows other packages to
 define further classes or extend existing classes of rings and
-matrices <E>togehter</E> with their operations. For example:
+matrices <E>together</E> with their operations. For example:
 <List>
   <Item>The package &GaussForHomalg; extends the class of internal
   matrices enabling it to wrap sparse matrices provided by the
   package &Gauss;. &GaussForHomalg; delegates the essential part of
   the matrix creation and all matrix operations to &Gauss;.</Item>
-  <Item>The package &IO_ForHomalg; defines the classes of so-called
+  <Item>The package &HomalgToCAS; defines the classes of so-called
   external rings and matrices and the package &RingsForHomalg;
   delegates the essential part of the matrix creation and all matrix
   operations to external computer algebra systems like &Singular;,
   &Sage;, &Maple;, &MAGMA;, ... . The package &homalg; accesses
   external matrices via pointers. The pointer of an external matrix is
-  simply its name in the external system. &IO_ForHomalg; chooses these
+  simply its name in the external system. &HomalgToCAS; chooses these
   names.</Item>
   <Item>The package &LocalizeRingForHomalg; defines the classes of
   local(ized) rings and local matrices. A &homalg; local matrix

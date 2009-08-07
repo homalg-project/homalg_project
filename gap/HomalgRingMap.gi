@@ -9,7 +9,7 @@
 #############################################################################
 
 ##  <#GAPDoc Label="RingMaps:intro">
-##  A &homalg; ring map is a data structure for a maps between finitely generated rings. &homalg; more or less provides the basic
+##  A &homalg; ring map is a data structure for maps between finitely generated rings. &homalg; more or less provides the basic
 ##  declarations and installs the generic methods for ring maps, but it is up to other high level packages to install methods
 ##  applicable to specific rings. For example, the package &Sheaves; provides methods for ring maps of (finitely generated) affine rings.
 ##  <#/GAPDoc>
