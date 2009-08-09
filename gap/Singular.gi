@@ -1001,7 +1001,7 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, display_color, ext_obj, S, RP;
+    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
@@ -1035,7 +1035,16 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## create the new ring in 2 steps: create a polynomial ring with anti commuting and commuting variables and then
     ## add the exterior structure
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", Concatenation( comm, anti ), "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
-    ext_obj := homalgSendBlocking( [ "SuperCommutative(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    if homalgSendBlocking( "defined(SuperCommutative)", "need_output", ext_obj ) = "1" then
+        constructor := "SuperCommutative";
+    elif homalgSendBlocking( "defined(superCommutative)", "need_output", ext_obj ) = "1" then
+        constructor := "superCommutative";
+    else
+        Error( "no Singular constructor found for exterior algebras\n" );
+    fi;
+    
+    ext_obj := homalgSendBlocking( [ constructor, "(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
