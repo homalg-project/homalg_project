@@ -134,8 +134,7 @@ DeclareProperty( "IsArtinian",
 ##    <Prop Arg="M" Name="IsCyclic"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      Check if the &homalg; module <A>M</A> is cyclic. <Br/>
-##      (no method installed)
+##      Check if the &homalg; module <A>M</A> is cyclic.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -194,6 +193,20 @@ DeclareProperty( "IsPure",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "HasConstantRank",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="ConstructedAsAnIdeal">
+##  <ManSection>
+##    <Prop Arg="J" Name="ConstructedAsAnIdeal"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; submodule <A>J</A> was constructed as an ideal. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "ConstructedAsAnIdeal",
         IsHomalgModule );
 
 ####################################
@@ -510,6 +523,9 @@ DeclareOperation( "*",
 
 DeclareOperation( "Subobject",
         [ IsHomalgMatrix, IsHomalgModule ] );
+
+DeclareOperation( "Subobject",
+        [ IsList, IsHomalgModule ] );
 
 DeclareOperation( "Subobject",
         [ IsHomalgRelations, IsHomalgModule ] );

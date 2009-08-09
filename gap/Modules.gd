@@ -119,6 +119,3 @@ DeclareOperation( "EmbeddingsInCoproductObject",
 DeclareOperation( "ProjectionsFromProductObject",
         [ IsHomalgModule, IsList ] );
 
-DeclareOperation( "SubmoduleOfIdealMultiples",
-        [ IsList, IsHomalgModule ] );
-

@@ -21,6 +21,19 @@
 InstallValue( LIMOD,
         rec(
             color := "\033[4;30;46m",
+            intrinsic_properties :=
+            [ "IsZero",
+              "IsFree",
+              "IsStablyFree",
+              "IsProjective",
+              "IsReflexive",
+              "IsTorsionFree",
+              "IsArtinian",
+              "IsCyclic",
+              "IsTorsion",
+              "IsHolonomic",
+              "IsPure",
+              "HasConstantRank" ],
             intrinsic_attributes :=
             [ "ElementaryDivisors",
               "RankOfModule",
@@ -116,6 +129,18 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgModules, IsHoma
 
 InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgModulesOverSpecialRings, IsHomalgModule, IsHomalgRing );
 
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIMOD.intrinsic_properties, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIMOD.intrinsic_attributes, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
 ####################################
 #
 # immediate methods for properties:
@@ -166,33 +191,6 @@ end );
 
 ## a presentation must be on a single generator
 InstallImmediateMethod( IsCyclic,
-        IsFinitelyPresentedSubmoduleRep and HasEmbeddingInSuperObject, 0,
-        
-  function( M )
-    local l, b, i, rel;
-    
-    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
-    
-    b := false;
-    
-    for i in [ 1.. Length( l ) ] do;
-        
-        rel := SetsOfRelations( M )!.(i);
-        
-        if not IsString( rel ) then
-            if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 then
-                return true;
-            fi;
-        fi;
-        
-    od;
-    
-    TryNextMethod( );
-    
-end );
-
-## a presentation must be on a single generator
-InstallImmediateMethod( IsCyclic,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
@@ -220,7 +218,7 @@ end );
 
 ## [Coutinho, A Primer of Algebraic D-modules, Thm. 10.25, p. 90]
 InstallImmediateMethod( IsCyclic,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsArtinian, 0,
+        IsFinitelyPresentedModuleRep and IsArtinian, 0,
         
   function( M )
     local R;
@@ -249,39 +247,6 @@ end );
 
 ## strictly less relations than generators => not IsTorsion
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedSubmoduleRep and HasEmbeddingInSuperObject, 0,
-        
-  function( M )
-    local l, b, i, rel;
-    
-    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
-    
-    b := false;
-    
-    for i in [ 1.. Length( l ) ] do;
-        
-        rel := SetsOfRelations( M )!.(i);
-        
-        if not IsString( rel ) then
-            if HasNrGenerators( rel ) and HasNrRelations( rel ) and
-               NrGenerators( rel ) > NrRelations( rel ) then
-                b := true;
-                break;
-            fi;
-        fi;
-        
-    od;
-    
-    if b then
-        return false;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-## strictly less relations than generators => not IsTorsion
-InstallImmediateMethod( IsTorsion,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
@@ -315,7 +280,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasRankOfModule, 0,
+        IsFinitelyPresentedModuleRep and HasRankOfModule, 0,
         
   function( M )
     
@@ -325,7 +290,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasTorsionFreeFactorEpi and HasIsZero, 0,
+        IsFinitelyPresentedModuleRep and HasTorsionFreeFactorEpi and HasIsZero, 0,
         
   function( M )
     local F;
@@ -346,7 +311,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim, 0,
+        IsFinitelyPresentedModuleRep and HasCodim, 0,
         
   function( M )
     
@@ -362,7 +327,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasTorsionSubmoduleEmb and HasIsZero, 0,
+        IsFinitelyPresentedModuleRep and HasTorsionSubmoduleEmb and HasIsZero, 0,
         
   function( M )
     local T;
@@ -383,7 +348,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasIsProjective and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -400,7 +365,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasIsProjective and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -417,7 +382,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim, 0,
+        IsFinitelyPresentedModuleRep and HasCodim, 0,
         
   function( M )
     
@@ -431,7 +396,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim and IsPure, 0,
+        IsFinitelyPresentedModuleRep and HasCodim and IsPure, 0,
         
   function( M )
     
@@ -441,7 +406,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasIsProjective and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -458,7 +423,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsProjective and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasIsProjective and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -475,7 +440,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasCodegreeOfPurity, 0,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasCodegreeOfPurity, 0,
         
   function( M )
     
@@ -485,7 +450,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -502,7 +467,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -519,7 +484,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsReflexive and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsReflexive and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -536,7 +501,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsReflexive and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsReflexive and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -553,7 +518,7 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasProjectiveDimension, 0,
+        IsFinitelyPresentedModuleRep and HasProjectiveDimension, 0,
         
   function( M )
     
@@ -563,7 +528,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep, 0,
+        IsFinitelyPresentedModuleRep, 0,
         
   function( M )
     
@@ -577,7 +542,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsStablyFree and HasRankOfModule and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfModule and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -600,7 +565,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsStablyFree and HasRankOfModule and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfModule and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -623,7 +588,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -640,7 +605,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -657,7 +622,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasCodim and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -674,7 +639,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasCodim and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasCodim and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -691,7 +656,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsTorsion and HasIsTorsionFree, 0,
+        IsFinitelyPresentedModuleRep and HasIsTorsion and HasIsTorsionFree, 0,
         
   function( M )
     
@@ -711,7 +676,7 @@ end );
 
 ##
 InstallImmediateMethod( RankOfModule,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsFree, 0,
+        IsFinitelyPresentedModuleRep and IsFree, 0,
         
   function( M )
     
@@ -725,7 +690,7 @@ end );
 
 ##
 InstallImmediateMethod( RankOfModule,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion, 0,
         
   function( M )
     
@@ -735,7 +700,7 @@ end );
 
 ##
 InstallImmediateMethod( DegreeOfTorsionFreeness,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsTorsionFree, 0,
+        IsFinitelyPresentedModuleRep and HasIsTorsionFree, 0,
         
   function( M )
     local R;
@@ -750,7 +715,7 @@ end );
 
 ##
 InstallImmediateMethod( DegreeOfTorsionFreeness,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsProjective, 0,
+        IsFinitelyPresentedModuleRep and IsProjective, 0,
         
   function( M )
     
@@ -760,7 +725,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsionFree and HasIsZero, 0,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasIsZero, 0,
         
   function( M )
     
@@ -774,7 +739,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasIsZero and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -791,7 +756,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsTorsion and HasIsZero and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -808,7 +773,7 @@ end );
 
 ##
 InstallImmediateMethod( Codim,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsZero, 10001,
+        IsFinitelyPresentedModuleRep and IsZero, 10001,
         
   function( M )
     
@@ -818,7 +783,7 @@ end );
 
 ##
 InstallImmediateMethod( CodegreeOfPurity,
-        IsFinitelyPresentedModuleOrSubmoduleRep and IsZero, 0,
+        IsFinitelyPresentedModuleRep and IsZero, 0,
         
   function( M )
     
@@ -828,7 +793,7 @@ end );
 
 ##
 InstallImmediateMethod( CodegreeOfPurity,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsPure, 0,
+        IsFinitelyPresentedModuleRep and HasIsPure, 0,
         
   function( M )
     
@@ -842,7 +807,7 @@ end );
 
 ##
 InstallImmediateMethod( CodegreeOfPurity,
-        IsFinitelyPresentedModuleOrSubmoduleRep and HasIsReflexive, 0,
+        IsFinitelyPresentedModuleRep and HasIsReflexive, 0,
         
   function( M )
     
@@ -862,34 +827,12 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsZero( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( IsZero,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
     return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
-    
-end );
-
-##
-InstallMethod( IsArtinian,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsArtinian( UnderlyingObject( M ) );
     
 end );
 
@@ -903,9 +846,10 @@ InstallMethod( IsArtinian,
     
     R := HomalgRing( M );
     
-    if HasGlobalDimension( R ) and
-       ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
-         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
+    if HasGlobalDimension( R ) and	## FIXME: declare an appropriate property for such rings
+       ( ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) or
+         ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) ) then
         
         return Codim( M ) >= GlobalDimension( R );
         
@@ -917,28 +861,23 @@ end );
 
 ##
 InstallMethod( IsCyclic,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return IsCyclic( UnderlyingObject( M ) );
+    ByASmallerPresentation( M );
+    
+    if HasIsCyclic( M ) then
+        return IsCyclic( M );
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
 ##
 RedispatchOnCondition( IsCyclic, true, [ IsFinitelyPresentedModuleRep ], [ IsArtinian ], 0 );
-
-##
-InstallMethod( IsTorsion,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsTorsion( UnderlyingObject( M ) );
-    
-end );
 
 ##
 InstallMethod( IsTorsion,
@@ -948,17 +887,6 @@ InstallMethod( IsTorsion,
   function( M )
     
     return IsZero( TorsionFreeFactor( M ) );
-    
-end );
-
-##
-InstallMethod( IsTorsionFree,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsTorsionFree( UnderlyingObject( M ) );
     
 end );
 
@@ -1010,17 +938,6 @@ InstallMethod( IsReflexive,
     fi;
     
     TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsReflexive,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsReflexive( UnderlyingObject( M ) );
     
 end );
 
@@ -1194,17 +1111,6 @@ end );
 
 ##
 InstallMethod( IsProjective,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsProjective( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( IsProjective,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ], 1001,
         
@@ -1215,17 +1121,6 @@ InstallMethod( IsProjective,
     fi;
     
     TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsStablyFree,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsStablyFree( UnderlyingObject( M ) );
     
 end );
 
@@ -1248,17 +1143,6 @@ InstallMethod( IsStablyFree,
     ## for a module with a finite free resolution (FFR)
     ## "projective" and "stably free" are equivalent
     return IsProjective( M );
-    
-end );
-
-##
-InstallMethod( IsFree,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsFree( UnderlyingObject( M ) );
     
 end );
 
@@ -1357,17 +1241,6 @@ end );
 
 ##
 InstallMethod( IsPure,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return IsPure( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( IsPure,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1424,17 +1297,6 @@ end );
 
 ##
 InstallMethod( RankOfModule,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return RankOfModule( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( RankOfModule,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1469,17 +1331,6 @@ InstallMethod( Rank,
   function( M )
     
     return RankOfModule( M );
-    
-end );
-
-##
-InstallMethod( DegreeOfTorsionFreeness,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return DegreeOfTorsionFreeness( UnderlyingObject( M ) );
     
 end );
 
@@ -1542,17 +1393,6 @@ end );
 
 ##
 InstallMethod( Codim,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return Codim( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( Codim,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1606,17 +1446,6 @@ end );
 
 ##
 InstallMethod( ProjectiveDimension,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return ProjectiveDimension( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( ProjectiveDimension,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1656,17 +1485,6 @@ InstallMethod( ProjectiveDimension,
     fi;
     
     return pd;
-    
-end );
-
-##
-InstallMethod( CodegreeOfPurity,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return CodegreeOfPurity( UnderlyingObject( M ) );
     
 end );
 
@@ -1719,17 +1537,6 @@ end );
 
 ##
 InstallMethod( CastelnuovoMumfordRegularity,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return CastelnuovoMumfordRegularity( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( CastelnuovoMumfordRegularity,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1741,17 +1548,6 @@ InstallMethod( CastelnuovoMumfordRegularity,
     degrees := RowDegreesOfBettiDiagram( betti );
     
     return degrees[Length(degrees)];
-    
-end );
-
-##
-InstallMethod( BettiDiagram,
-        "LIMOD: for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return BettiDiagram( UnderlyingObject( M ) );
     
 end );
 

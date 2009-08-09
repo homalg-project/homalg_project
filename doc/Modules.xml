@@ -34,8 +34,9 @@
 <#Include Label="HomalgZeroLeftModule">
 <#Include Label="HomalgZeroRightModule">
 <#Include Label="\*:ModuleBaseChange">
-<#Include Label="Subobject">
 <#Include Label="Subobject:map">
+<#Include Label="Subobject:matrix">
+<#Include Label="Subobject:list">
 <#Include Label="LeftSubmodule">
 <#Include Label="RightSubmodule">
 
@@ -56,6 +57,7 @@
 <#Include Label="IsHolonomic">
 <#Include Label="IsPure">
 <#Include Label="HasConstantRank">
+<#Include Label="ConstructedAsAnIdeal">
 
 </Section>
 

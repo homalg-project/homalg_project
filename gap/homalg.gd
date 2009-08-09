@@ -149,6 +149,10 @@ DeclareGlobalFunction( "LeftRightAttributesForHomalg" );
 
 DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
 
+DeclareGlobalFunction( "LogicalImplicationsForHomalgSubobjects" );
+
+DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgSubobjects" );
+
 DeclareGlobalFunction( "AddToAhomalgTable" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );

@@ -591,6 +591,45 @@ InstallGlobalFunction( InstallLeftRightAttributesForHomalg,
     
 end );
 
+## a global function for logical implications of subobjects:
+InstallGlobalFunction( LogicalImplicationsForHomalgSubobjects,
+  function( prop_attr, filter_subobject, test_underlying_object, fetch_underlying_object )
+    
+    InstallImmediateMethod( prop_attr,
+            filter_subobject and test_underlying_object, 0,
+            
+      function( o )
+        if Tester( prop_attr )( fetch_underlying_object( o ) ) then
+            return prop_attr( fetch_underlying_object( o ) );
+        fi;
+        
+        TryNextMethod( );
+        
+      end );
+    
+    InstallMethod( prop_attr,
+        "LIMOD: for homalg submodules",
+        [ filter_subobject ],
+        
+      function( o )
+        
+        return prop_attr( fetch_underlying_object( o ) );
+        
+      end );
+    
+end );
+
+## a global function for logical implications of subobjects:
+InstallGlobalFunction( InstallLogicalImplicationsForHomalgSubobjects,
+  function( properties_attributes, filter_subobject, test_underlying_object, fetch_underlying_object )
+    local s;
+    
+    for s in properties_attributes do
+        LogicalImplicationsForHomalgSubobjects( s, filter_subobject, test_underlying_object, fetch_underlying_object );
+    od;
+    
+end );
+
 ##
 InstallGlobalFunction( AddToAhomalgTable,
   function( RP, RP_addon )

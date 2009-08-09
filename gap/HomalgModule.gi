@@ -1891,7 +1891,7 @@ InstallMethod( Presentation,
     return M;
     
 end );
-  
+
 ##
 InstallMethod( Presentation,
         "constructor",
@@ -1943,7 +1943,7 @@ InstallMethod( Presentation,
     return M;
     
 end );
-  
+
 ##
 InstallMethod( Presentation,
         "constructor",
@@ -1993,7 +1993,7 @@ InstallMethod( Presentation,
     return M;
     
 end );
-  
+
 ##
 InstallMethod( Presentation,
         "constructor",
@@ -2045,7 +2045,7 @@ InstallMethod( Presentation,
     return M;
     
 end );
-  
+
 ##
 InstallMethod( LeftPresentation,
         "constructor",
@@ -2096,7 +2096,7 @@ InstallMethod( LeftPresentation,
     return M;
     
 end );
-  
+
 ##
 InstallMethod( LeftPresentation,
         "constructor",
@@ -2230,7 +2230,7 @@ InstallMethod( RightPresentation,
     return M;
     
 end );
-  
+
 ##
 InstallMethod( RightPresentation,
         "constructor",
@@ -2786,9 +2786,9 @@ InstallMethod( Subobject,
         
   ImageSubmodule );
 
-##  <#GAPDoc Label="Subobject">
+##  <#GAPDoc Label="Subobject:matrix">
 ##  <ManSection>
-##    <Oper Arg="mat,M" Name="Subobject" Label="constructor for submodules"/>
+##    <Oper Arg="mat,M" Name="Subobject" Label="constructor for submodules using matrices"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated left/right submodule of the &homalg; module <A>M</A> with generators given by the
@@ -2821,6 +2821,50 @@ InstallMethod( Subobject,
     gen_map := HomalgMap( gen, "free", M  );
     
     return ImageSubmodule( gen_map );
+    
+end );
+
+##  <#GAPDoc Label="Subobject:list">
+##  <ManSection>
+##    <Oper Arg="gens,M" Name="Subobject" Label="constructor for submodules using a list of ring elements"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated left/right submodule of the &homalg; cyclic left/right module <A>M</A>
+##      with generators given by the entries of the list <A>gens</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( Subobject,
+        "constructor",
+        [ IsList, IsFinitelyPresentedModuleRep ],
+        
+  function( gens, M )
+    local l, R, mat;
+    
+    if NrGenerators( M ) <> 1 then
+        Error( "the given module is either not cyclic or not presented on a cyclic generator\n" );
+    fi;
+    
+    l := Length( gens );
+    
+    if l = 0 then
+        return FullSubmodule( M );
+    fi;
+    
+    if not ForAll( gens, IsRingElement ) then
+        Error( "all entries of the list must be ring elements\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        mat := HomalgMatrix( gens, l, 1, R );
+    else
+        mat := HomalgMatrix( gens, 1, l, R );
+    fi;
+    
+    return Subobject( mat, M );
     
 end );
 
@@ -2951,7 +2995,7 @@ InstallMethod( ViewObj,
     
     is_submodule := IsFinitelyPresentedSubmoduleRep( o );
     
-    if is_submodule then
+    if is_submodule and HasEmbeddingInSuperObject( o ) then
         M := UnderlyingObject( o );
         if HasIsFree( M ) and IsFree( M ) then
             SetIsFree( o, true );
@@ -3110,8 +3154,14 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    if IsList( DegreesOfGenerators( M ) ) then
-        properties := Concatenation( " graded", properties );
+    if is_submodule then
+        if IsList( DegreesOfGenerators( SuperObject( o ) ) ) then
+            properties := Concatenation( " graded", properties );
+        fi;
+    else
+        if IsList( DegreesOfGenerators( M ) ) then
+            properties := Concatenation( " graded", properties );
+        fi;
     fi;
     
     if left_module then
@@ -3150,8 +3200,7 @@ InstallMethod( ViewObj,
         fi;
         
         if is_submodule then
-            if IsIdenticalObj( SuperObject( o ), 1 * R ) or
-               IsIdenticalObj( SuperObject( o ), ( 1 * R )^0 ) then
+            if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
                     Print( "<A", properties, " (left) ideal given by ", num_gen, gen_string, locked, ">" );
                 else
@@ -3208,8 +3257,7 @@ InstallMethod( ViewObj,
         fi;
         
         if is_submodule then
-            if IsIdenticalObj( SuperObject( o ), R * 1 ) or
-               IsIdenticalObj( SuperObject( o ), ( R * 1 )^0 ) then
+            if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
                     Print( "<A", properties, " (right) ideal given by ", num_gen, gen_string, locked, ">" );
                 else
@@ -3247,7 +3295,7 @@ InstallMethod( ViewObj,
     fi;
     
     if left then
-        if IsIdenticalObj( SuperObject( J ), 1 * R ) then
+        if ConstructedAsAnIdeal( J ) then
             Print( "principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Print( "(left) " );
@@ -3259,7 +3307,7 @@ InstallMethod( ViewObj,
             Print( "free left sumboule" );
         fi;
     else
-        if IsIdenticalObj( SuperObject( J ), R * 1 ) then
+        if ConstructedAsAnIdeal( J ) then
             Print( "principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Print( "(right) " );
@@ -3291,7 +3339,7 @@ InstallMethod( ViewObj,
     Print( ">" );
     
 end );
-    
+
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
@@ -3348,7 +3396,7 @@ InstallMethod( ViewObj,
     Print( ">" );
     
 end );
-    
+
 ##
 InstallMethod( ViewObj,
         "for homalg submodules",
@@ -3367,24 +3415,20 @@ InstallMethod( ViewObj,
     
     if left then
         Print( "(left) " );
-        if IsIdenticalObj( SuperObject( J ), 1 * R ) then
-            Print( "ideal" );
-        else
-            Print( "sumboule" );
-        fi;
     else
         Print( "(right) " );
-        if IsIdenticalObj( SuperObject( J ), R * 1 ) then
-            Print( "ideal" );
-        else
-            Print( "sumboule" );
-        fi;
+    fi;
+    
+    if ConstructedAsAnIdeal( J ) then
+        Print( "ideal" );
+    else
+        Print( "sumboule" );
     fi;
     
     Print( ">" );
     
 end );
-    
+
 ##
 InstallMethod( ViewObj,
         "for homalg modules",
@@ -3409,7 +3453,7 @@ InstallMethod( ViewObj,
     Print( " module>" );
     
 end );
-    
+
 ##
 InstallMethod( Display,
         "for homalg submodules",
@@ -3424,16 +3468,17 @@ InstallMethod( Display,
     
     Display( gen );
     
-    if IsList( DegreesOfGenerators( M ) ) then
-        Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
+    if IsList( DegreesOfGenerators( SuperObject( M ) ) ) then
+        if IsList( DegreesOfGenerators( M ) ) then
+            Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
+        fi;
     fi;
     
     Print( "\nA " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         l := NrRows( gen );
-        if IsIdenticalObj( SuperObject( M ), 1 * R ) or
-           IsIdenticalObj( SuperObject( M ), ( 1 * R )^0 ) then
+        if ConstructedAsAnIdeal( M ) then
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Print( "(left)" );
             else
@@ -3456,8 +3501,7 @@ InstallMethod( Display,
         Print( " of the above matrix\n" );
     else
         l := NrColumns( gen );
-        if IsIdenticalObj( SuperObject( M ), R * 1 ) or
-           IsIdenticalObj( SuperObject( M ), ( R * 1 )^0 ) then
+        if ConstructedAsAnIdeal( M ) then
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Print( "(right)" );
             else
