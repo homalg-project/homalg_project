@@ -507,13 +507,16 @@ DeclareOperation( "HomalgFreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing ] );
 
 DeclareOperation( "POW",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "POW",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "POW",
         [ IsHomalgRing, IsInt ] );
 
 DeclareOperation( "POW",
         [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "POW",
-        [ IsHomalgModule, IsInt ] );
 
 DeclareOperation( "*",
         [ IsHomalgModule, IsHomalgRing ] );

@@ -1844,7 +1844,7 @@ end );
 
 ##
 InstallMethod( Presentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( rel )
@@ -1894,7 +1894,7 @@ end );
 
 ##
 InstallMethod( Presentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( gen, rel )
@@ -1946,7 +1946,7 @@ end );
 
 ##
 InstallMethod( Presentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( rel )
@@ -1996,7 +1996,7 @@ end );
 
 ##
 InstallMethod( Presentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( gen, rel )
@@ -2048,7 +2048,7 @@ end );
 
 ##
 InstallMethod( LeftPresentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsList, IsHomalgRing ],
         
   function( rel, R )
@@ -2099,7 +2099,7 @@ end );
 
 ##
 InstallMethod( LeftPresentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsList, IsList, IsHomalgRing ],
         
   function( gen, rel, R )
@@ -2171,7 +2171,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( LeftPresentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsHomalgMatrix ],
         
   function( mat )
@@ -2182,7 +2182,7 @@ end );
 
 ##
 InstallMethod( RightPresentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsList, IsHomalgRing ],
         
   function( rel, R )
@@ -2233,7 +2233,7 @@ end );
 
 ##
 InstallMethod( RightPresentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsList, IsList, IsHomalgRing ],
         
   function( gen, rel, R )
@@ -2296,7 +2296,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( RightPresentation,
-        "constructor",
+        "constructor for homalg modules",
         [ IsHomalgMatrix ],
         
   function( mat )
@@ -2327,7 +2327,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( HomalgFreeLeftModule,
-        "constructor",
+        "constructor for homalg free modules",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
@@ -2358,7 +2358,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( HomalgFreeRightModule,
-        "constructor",
+        "constructor for homalg free modules",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
@@ -2385,7 +2385,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( HomalgZeroLeftModule,
-        "constructor",
+        "constructor for homalg zero modules",
         [ IsHomalgRing ],
         
   function( R )
@@ -2412,7 +2412,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( HomalgZeroRightModule,
-        "constructor",
+        "constructor for homalg zero modules",
         [ IsHomalgRing ],
         
   function( R )
@@ -2423,7 +2423,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "constructor",
+        "constructor for homalg free modules",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
@@ -2442,7 +2442,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "constructor",
+        "constructor for homalg free modules",
         [ IsHomalgRing, IsInt ],
         
   function( R, rank )
@@ -2461,7 +2461,7 @@ end );
 
 ##
 InstallMethod( LeftPresentationWithDegrees,
-        "constructor",
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsList ],
         
   function( mat, weights )
@@ -2482,7 +2482,7 @@ end );
 
 ##
 InstallMethod( LeftPresentationWithDegrees,
-        "constructor",
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsInt ],
         
   function( mat, weight )
@@ -2493,7 +2493,7 @@ end );
 
 ##
 InstallMethod( LeftPresentationWithDegrees,
-        "constructor",
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix ],
         
   function( mat )
@@ -2504,7 +2504,7 @@ end );
 
 ##
 InstallMethod( RightPresentationWithDegrees,
-        "constructor",
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsList ],
         
   function( mat, weights )
@@ -2525,7 +2525,7 @@ end );
 
 ##
 InstallMethod( RightPresentationWithDegrees,
-        "constructor",
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsInt ],
         
   function( mat, weight )
@@ -2536,7 +2536,7 @@ end );
 
 ##
 InstallMethod( RightPresentationWithDegrees,
-        "constructor",
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix ],
         
   function( mat )
@@ -2547,7 +2547,7 @@ end );
 
 ##
 InstallMethod( HomalgFreeLeftModuleWithDegrees,
-        "constructor",
+        "constructor for homalg graded free modules",
         [ IsHomalgRing, IsList ],
         
   function( R, weights )
@@ -2558,7 +2558,7 @@ end );
 
 ##
 InstallMethod( HomalgFreeLeftModuleWithDegrees,
-        "constructor",
+        "constructor for homalg graded free modules",
         [ IsInt, IsHomalgRing, IsInt ],
         
   function( rank, R, weight )
@@ -2569,7 +2569,7 @@ end );
 
 ##
 InstallMethod( HomalgFreeLeftModuleWithDegrees,
-        "constructor",
+        "constructor for homalg graded free modules",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
@@ -2580,7 +2580,7 @@ end );
 
 ##
 InstallMethod( HomalgFreeRightModuleWithDegrees,
-        "constructor",
+        "constructor for homalg graded free modules",
         [ IsHomalgRing, IsList ],
         
   function( R, weights )
@@ -2591,7 +2591,7 @@ end );
 
 ##
 InstallMethod( HomalgFreeRightModuleWithDegrees,
-        "constructor",
+        "constructor for homalg graded free modules",
         [ IsInt, IsHomalgRing, IsInt ],
         
   function( rank, R, weight )
@@ -2602,7 +2602,7 @@ end );
 
 ##
 InstallMethod( HomalgFreeRightModuleWithDegrees,
-        "constructor",
+        "constructor for homalg graded free modules",
         [ IsInt, IsHomalgRing ],
         
   function( rank, R )
@@ -2613,42 +2613,7 @@ end );
 
 ##
 InstallMethod( POW,
-        "constructor",
-        [ IsHomalgRing, IsInt ],
-        
-  function( R, twist )
-    local On;
-    
-    if not IsBound( R!.left_twists ) then
-        R!.left_twists := rec( );
-    fi;
-    
-    On := HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
-    
-    On!.distinguished := true;
-    
-    if not IsBound( R!.left_twists.(String( twist )) ) then
-        R!.left_twists.(String( twist )) := On;
-    fi;
-    
-    return R!.left_twists.(String( twist ));
-    
-end );
-
-##
-InstallMethod( POW,
-        "constructor",
-        [ IsHomalgRing, IsList ],
-        
-  function( R, twist )
-    
-    return HomalgFreeLeftModuleWithDegrees( R, -twist );
-    
-end );
-
-##
-InstallMethod( POW,
-        "constructor",
+        "constructor for homalg graded free modules of rank 1",
         [ IsFinitelyPresentedModuleRep, IsInt ],
         
   function( M, twist )
@@ -2658,7 +2623,19 @@ InstallMethod( POW,
     
     if IsIdenticalObj( M, 1 * R ) then
         
-        return R^twist;
+        if not IsBound( R!.left_twists ) then
+            R!.left_twists := rec( );
+        fi;
+        
+        On := HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
+        
+        On!.distinguished := true;
+        
+        if not IsBound( R!.left_twists.(String( twist )) ) then
+            R!.left_twists.(String( twist )) := On;
+        fi;
+        
+        return R!.left_twists.(String( twist ));
         
     elif IsIdenticalObj( M, R * 1 ) then
         
@@ -2679,6 +2656,52 @@ InstallMethod( POW,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( POW,
+        "constructor for homalg graded free modules",
+        [ IsFinitelyPresentedModuleRep, IsList ],
+        
+  function( M, twist )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if IsIdenticalObj( M, 1 * R ) then
+        
+        return HomalgFreeLeftModuleWithDegrees( R, -twist );
+        
+    elif IsIdenticalObj( M, R * 1 ) then
+        
+        return HomalgFreeRightModuleWithDegrees( R, -twist );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( POW,
+        "constructor for homalg graded free modules of rank 1",
+        [ IsHomalgRing, IsInt ],
+        
+  function( R, twist )
+    
+    return ( 1 * R )^twist;
+    
+end );
+
+##
+InstallMethod( POW,
+        "constructor for homalg graded free modules",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, twist )
+    
+    return ( 1 * R )^twist;
     
 end );
 
@@ -2781,7 +2804,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( Subobject,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgMap ],
         
   ImageSubmodule );
@@ -2798,7 +2821,7 @@ InstallMethod( Subobject,
 ##  <#/GAPDoc>
 ##
 InstallMethod( Subobject,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( gen, M )
@@ -2836,7 +2859,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( Subobject,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsList, IsFinitelyPresentedModuleRep ],
         
   function( gens, M )
@@ -2870,7 +2893,7 @@ end );
 
 ##
 InstallMethod( Subobject,	## in case the methods below do not apply
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgRelations, IsFinitelyPresentedModuleRep ],
         
   function( rel, M )
@@ -2881,7 +2904,7 @@ end );
 
 ##
 InstallMethod( Subobject,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgRelations and IsHomalgRelationsOfRightModule, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( rel, M )
@@ -2892,7 +2915,7 @@ end );
 
 ##
 InstallMethod( Subobject,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgRelations and IsHomalgRelationsOfLeftModule, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( rel, M )
@@ -2910,7 +2933,7 @@ end );
 ##      rows of the &homalg; matrix <A>mat</A>.
 ##      <Listing Type="Code"><![CDATA[
 InstallMethod( LeftSubmodule,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgMatrix ],
         
   function( gen )
@@ -2947,7 +2970,7 @@ end );
 ##      columns of the &homalg; matrix <A>mat</A>.
 ##      <Listing Type="Code"><![CDATA[
 InstallMethod( RightSubmodule,
-        "constructor",
+        "constructor for homalg submodules",
         [ IsHomalgMatrix ],
         
   function( gen )

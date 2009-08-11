@@ -142,18 +142,28 @@ InstallMethod( CoordinateRingOfGraph,
     S := Source( phi );
     T := Range( phi );
     
-    if HasIndeterminatesOfPolynomialRing( S ) and
-       HasIndeterminatesOfPolynomialRing( T ) then
+    if HasIndeterminatesOfPolynomialRing( S ) then
         indetsS := IndeterminatesOfPolynomialRing( S );
-        indetsT := IndeterminatesOfPolynomialRing( T );
-    else
-        TryNextMethod( );
+        r := CoefficientsRing( S );
+    elif HasAmbientRing( S ) and HasIndeterminatesOfPolynomialRing( AmbientRing( S ) ) then
+        indetsS := IndeterminatesOfPolynomialRing( AmbientRing( S ) );
+        r := CoefficientsRing( AmbientRing( S ) );
     fi;
     
-    r := CoefficientsRing( S );
+    if HasIndeterminatesOfPolynomialRing( T ) then
+        indetsT := IndeterminatesOfPolynomialRing( T );
+        if not IsIdenticalObj( r, CoefficientsRing( T ) ) then
+            Error( "different coefficient rings are not supported yet\n" );
+        fi;
+    elif HasAmbientRing( T ) and HasIndeterminatesOfPolynomialRing( AmbientRing( T ) ) then
+        indetsT := IndeterminatesOfPolynomialRing( AmbientRing( T ) );
+        if not IsIdenticalObj( r, CoefficientsRing( AmbientRing( T ) ) ) then
+            Error( "different coefficient rings are not supported yet\n" );
+        fi;
+    fi;
     
-    if not IsIdenticalObj( r, CoefficientsRing( T ) ) then
-        Error( "different coefficient rings are not supported yet\n" );
+    if not ( IsBound( indetsS ) and IsBound( indetsT ) ) then
+        TryNextMethod( );
     fi;
     
     ST := List( indetsS, Name );
