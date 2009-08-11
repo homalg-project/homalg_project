@@ -127,7 +127,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                CopyMatrix :=
                  function( C, R )
                    
-                   return homalgSendBlocking( [ "fetch(", HomalgRing( C ), C, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.CopyMatrix );
+                   return homalgSendBlocking( [ "imap(", HomalgRing( C ), C, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                
