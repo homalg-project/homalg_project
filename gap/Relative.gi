@@ -21,7 +21,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
         
   function( M, A )
     local presentation, certain_relations, union, S, vars, anti, param,
-          m0, degrees0, pos0, AM0, M1, m1, degrees1, pos1, AM1, n, map;
+          m0, degrees0, pos0, AM0, max, M1, m1, degrees1, pos1, AM1, n, map;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         
@@ -63,7 +63,15 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     ## End(A,M_1):
     
-    M1 := SubmoduleOfIdealMultiples( vars, M );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        max := Subobject( vars, ( 1 * S )^0 );
+    else
+        max := Subobject( vars, ( S * 1 )^0 );
+    fi;
+    
+    M1 := max * M;
+    
+    M1 := UnderlyingObject( M1 );
     
     m1 := PresentationMap( M1 );
     
