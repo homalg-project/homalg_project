@@ -33,7 +33,7 @@ icurves1 := Iterated( [ ipoint1^2, ipoint2^2, ipoint3^2 ], Intersect );
 
 Icurves1 := MatrixOfGenerators( icurves1 );
 
-rand := R * HomalgMatrix( RandomMat( NrColumns( Icurves1 ), 1 ), HOMALG.ZZ );
+F1 := Icurves1 * RandomMatrix( ( R * 1 )^(-6), icurves1 );
 
 can0 := FullSubmodule( R0 );
 
@@ -62,8 +62,14 @@ S := CoefficientsRing( R ) * "x0,x1,x2,x3,x4,x5,x6";
 
 images1 := EntriesOfHomalgMatrix( MatrixOfGenerators( can1 ) );
 
-phi1 := RingMap( images1, S, R );
+T1 := R / EntriesOfHomalgMatrix( F1 );
 
-SetDegreeOfMorphism( phi1, 0 );
+f1 := RingMap( images1, S, T1 );
 
-Can1 := S / KernelSubmodule( phi1 );
+SetDegreeOfMorphism( f1, 0 );
+
+IC1 := KernelSubmodule( f1 );
+
+OC1 := S / IC1;
+
+betti1 := BettiDiagram( Resolution( OC1 ) );

@@ -22,6 +22,15 @@ DeclareOperation( "MonomialMatrix",
 DeclareOperation( "MonomialMap",
         [ IsInt, IsHomalgModule ] );
 
+DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModules",
+        [ IsList, IsList, IsHomalgRing ] );
+
+DeclareOperation( "RandomMatrixBetweenGradedFreeRightModules",
+        [ IsList, IsList, IsHomalgRing ] );
+
+DeclareOperation( "RandomMatrix",
+        [ IsHomalgModule, IsHomalgModule ] );
+
 DeclareOperation( "SubmoduleGeneratedByHomogeneousPart",
         [ IsInt, IsHomalgModule ] );
 

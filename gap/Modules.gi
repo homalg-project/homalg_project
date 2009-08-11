@@ -159,6 +159,191 @@ InstallMethod( MonomialMap,
     
 end );
 
+##  <#GAPDoc Label="RandomMatrixBetweenGradedFreeLeftModules">
+##  <ManSection>
+##    <Oper Arg="weightsS,weightsT,R" Name="RandomMatrixBetweenGradedFreeLeftModules"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A random <M>r \times c </M>-matrix between the graded free <E>left</E> modules
+##      <M><A>R</A>^{(-<A>weightsS</A>)} \to <A>R</A>^{(-<A>weightsT</A>)}</M>,
+##      where <M>r = </M><C>Length</C><M>(</M><A>weightsS</A><M>)</M> and
+##      <M>c = </M><C>Length</C><M>(</M><A>weightsT</A><M>)</M>.
+##      <Example><![CDATA[
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
+##  gap> rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], R );
+##  <A homalg external 3 by 2 matrix>
+##  ]]></Example>
+##      <Log><![CDATA[
+##  gap> Display( rand );
+##  a-2*b+2*c,                                                2,                 
+##  a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
+##  2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
+##  ]]></Log>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
+        "for homalg rings",
+        [ IsList, IsList, IsHomalgRing ],
+        
+  function( weightsS, weightsT, R )
+    local RP, r, c, rand, i, j, mon;
+    
+    RP := homalgTable( R );
+    
+    r := Length( weightsS );
+    c := Length( weightsT );
+    
+    if weightsT = [ ] then
+        return HomalgZeroMatrix( 0, c, R );
+    elif weightsS = [ ] then
+        return HomalgZeroMatrix( r, 0, R );
+    fi;
+    
+    if IsBound(RP!.RandomMatrix) then
+        rand := RP!.RandomMatrix( R, weightsT, weightsS );	## the external object
+        rand := HomalgMatrix( rand, R );
+        SetNrRows( rand, r );
+        SetNrColumns( rand, c );
+        return rand;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    rand := [ 1 .. r * c ];
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            mon := MonomialMatrix( weightsS[i] - weightsT[j], R );
+            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG.ZZ ) ) * mon;
+            mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
+            rand[ ( i - 1 ) * c + j ] := mon;
+        od;
+    od;
+    
+    return HomalgMatrix( rand, r, c, R );
+    
+end );
+
+##  <#GAPDoc Label="RandomMatrixBetweenGradedFreeRightModules">
+##  <ManSection>
+##    <Oper Arg="weightsT,weightsS,R" Name="RandomMatrixBetweenGradedFreeRightModules"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A random <M>r \times c </M>-matrix between the graded free <E>right</E> modules
+##      <M><A>R</A>^{(-<A>weightsS</A>)} \to <A>R</A>^{(-<A>weightsT</A>)}</M>,
+##      where <M>r = </M><C>Length</C><M>(</M><A>weightsT</A><M>)</M> and
+##      <M>c = </M><C>Length</C><M>(</M><A>weightsS</A><M>)</M>.
+##      <Example><![CDATA[
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
+##  gap> rand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], R );
+##  <A homalg external 2 by 3 matrix>
+##  ]]></Example>
+##      <Log><![CDATA[
+##  gap> Display( rand );
+##  a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
+##  -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
+##  ]]></Log>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
+        "for homalg rings",
+        [ IsList, IsList, IsHomalgRing ],
+        
+  function( weightsT, weightsS, R )
+    local RP, r, c, rand, i, j, mon;
+    
+    RP := homalgTable( R );
+    
+    r := Length( weightsT );
+    c := Length( weightsS );
+    
+    if weightsT = [ ] then
+        return HomalgZeroMatrix( 0, c, R );
+    elif weightsS = [ ] then
+        return HomalgZeroMatrix( r, 0, R );
+    fi;
+    
+    if IsBound(RP!.RandomMatrix) then
+        rand := RP!.RandomMatrix( R, weightsT, weightsS );	## the external object
+        rand := HomalgMatrix( rand, R );
+        SetNrRows( rand, r );
+        SetNrColumns( rand, c );
+        return rand;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    rand := [ 1 .. r * c ];
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            mon := MonomialMatrix( weightsS[j] - weightsT[i], R );
+            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG.ZZ ) ) * mon;
+            mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
+            rand[ ( i - 1 ) * c + j ] := mon;
+        od;
+    od;
+    
+    return HomalgMatrix( rand, r, c, R );
+    
+end );
+
+##  <#GAPDoc Label="RandomMatrix">
+##  <ManSection>
+##    <Oper Arg="S,T" Name="RandomMatrix"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A random matrix between the graded source module <A>S</A> and the graded target module <A>T</A>.
+##      <Example><![CDATA[
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
+##  gap> rand := RandomMatrix( ( R * 1 )^[ 1, 2 ], ( R * 1 )^[ 2, 3, 4 ] );
+##  <A homalg external 3 by 2 matrix>
+##  ]]></Example>
+##      <Log><![CDATA[
+##  -3*a-b,                                                  -1,                   
+##  -a^2+a*b+2*b^2-2*a*c+2*b*c+c^2,                          -a+c,                 
+##  -2*a^3+5*a^2*b-3*b^3+3*a*b*c+3*b^2*c+2*a*c^2+2*b*c^2+c^3,-3*b^2-2*a*c-2*b*c+c^2
+##  ]]></Log>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( RandomMatrix,
+        "for homalg rings",
+        [ IsHomalgModule, IsHomalgModule ],
+        
+  function( S, T )
+    local left, degreesS, degreesT, R;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( S );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( T ) <> left then
+        Error( "both modules must either be left or either be right modules" );
+    fi;
+    
+    degreesS := DegreesOfGenerators( S );
+    degreesT := DegreesOfGenerators( T );
+    
+    if not IsList( degreesS ) then
+        Error( "the source module is not graded\n" );
+    elif not IsList( degreesT ) then
+        Error( "the target module is not graded\n" );
+    fi;
+    
+    R := HomalgRing( S );
+    
+    if left then
+        return RandomMatrixBetweenGradedFreeLeftModules( degreesS, degreesT, R );
+    else
+        return RandomMatrixBetweenGradedFreeRightModules( degreesT, degreesS, R );
+    fi;
+    
+end );
+
 ##  <#GAPDoc Label="BasisOfHomogeneousPart">
 ##  <ManSection>
 ##    <Oper Arg="d, M" Name="BasisOfHomogeneousPart"/>

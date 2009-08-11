@@ -16,6 +16,9 @@
 
 <#Include Label="MonomialMatrix">
 <#Include Label="MonomialMap">
+<#Include Label="RandomMatrixBetweenGradedFreeLeftModules">
+<#Include Label="RandomMatrixBetweenGradedFreeRightModules">
+<#Include Label="RandomMatrix">
 <#Include Label="BasisOfHomogeneousPart">
 <#Include Label="SubmoduleGeneratedByHomogeneousPart">
 <#Include Label="RepresentationOfRingElement">
