@@ -158,22 +158,12 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         [ IsInt, IsHomalgRelations ],
         
   function( _q, rel )
-    local R, SYZYGIES_ALREADY_MINIMAL, q, B, d, degrees, j, d_j, F_j, id, S,
-          left, i;
+    local R, q, d, degrees, j, d_j, F_j, S, left, i;
     
     ## all options of Maple's homalg are now obsolete:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
     
     R := HomalgRing( rel );
-    
-    ## do we need to find a "minimal" set of syzygies?
-    if IsList( DegreesOfGenerators( rel ) ) and
-       HasSyzygiesAlgorithmReturnsMinimalSyzygies( R ) and
-       SyzygiesAlgorithmReturnsMinimalSyzygies( R ) then
-        SYZYGIES_ALREADY_MINIMAL := true;
-    else
-        SYZYGIES_ALREADY_MINIMAL := false;
-    fi;
     
     if _q < 0 then
         q := BoundForResolution( rel );
@@ -190,9 +180,9 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         j := degrees[j];
         d_j := CertainMorphism( d, j );
     else
-        B := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );	## "COMPUTE_BASIS" saves computations
+        d_j := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );	## "COMPUTE_BASIS" saves computations
         j := 1;
-        d_j := HomalgMap( B );
+        d_j := HomalgMap( d_j );
         d := HomalgComplex( d_j );
         
         SetFreeResolution( rel, d );
@@ -205,7 +195,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     ## the main loop to compute iterated "minimal" syzygies
     while j < q do
         
-        S := SyzygiesGenerators( d_j );
+        S := ReducedSyzygiesGenerators( d_j );
         
         if NrRelations( S ) = 0 then
             break;
@@ -218,19 +208,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
             S!.DegreesOfGenerators := DegreesOfGenerators( F_j );
         fi;
         
-        ## minimize the set of syzygies
-        if SYZYGIES_ALREADY_MINIMAL then
-            B := S;
-            if IsHomalgRelationsOfLeftModule( B ) then
-                SetZeroRows( MatrixOfRelations( B ), [ ] );
-            else
-                SetZeroColumns( MatrixOfRelations( B ), [ ] );
-            fi;
-        else
-            B := ReducedBasisOfModule( S );	## "COMPUTE_BASIS" causes obsolete computations, at least in general
-        fi;
-        
-        d_j := HomalgMap( B, "free", F_j );
+        d_j := HomalgMap( S, "free", F_j );
         
         Add( d, d_j );
         
@@ -240,7 +218,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     
     if NrGenerators( Source( d_j ) ) = 1 and
        HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-        S := SyzygiesGenerators( d_j );	## this will be handled by internal logical
+        S := SyzygiesGenerators( d_j );	## this will be handled by internal logic
     fi;
     
     if IsBound( S ) and NrRelations( S ) = 0 and not IsBound( d!.LengthOfResolution ) then

@@ -1836,6 +1836,92 @@ InstallMethod( BasisOfColumnModule,
 end );
 
 #-----------------------------------
+# ReducedBasisOfRowModule
+#-----------------------------------
+
+##
+InstallMethod( ReducedBasisOfRowModule,
+        "LIMAT: for homalg matrices (IsReducedBasisOfRowsMatrix)",
+        [ IsHomalgMatrix and IsReducedBasisOfRowsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfRowModule( IsReducedBasisOfRowsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedBasisOfRowModule,
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
+        [ IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfRowModule( IsIdentityMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedBasisOfRowModule,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfRowModule( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+#-----------------------------------
+# ReducedBasisOfColumnModule
+#-----------------------------------
+
+##
+InstallMethod( ReducedBasisOfColumnModule,
+        "LIMAT: for homalg matrices (IsReducedBasisOfColumnsMatrix)",
+        [ IsHomalgMatrix and IsReducedBasisOfColumnsMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfColumnModule( IsReducedBasisOfColumnsMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedBasisOfColumnModule,
+        "LIMAT: for homalg matrices (IsIdentityMatrix)",
+        [ IsHomalgMatrix and IsIdentityMatrix ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfColumnModule( IsIdentityMatrix )", "\033[0m" );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( ReducedBasisOfColumnModule,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedBasisOfColumnModule( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
+    
+end );
+
+#-----------------------------------
 # BasisOfRowsCoeff
 #-----------------------------------
 
@@ -2546,6 +2632,72 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
 end );
 
 #-----------------------------------
+# ReducedSyzygiesGeneratorsOfRows
+#-----------------------------------
+
+##
+InstallMethod( ReducedSyzygiesGeneratorsOfRows,
+        "LIMAT: for homalg matrices (IsLeftRegularMatrix)",
+        [ IsHomalgMatrix and IsLeftRegularMatrix ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfRows( IsLeftRegularMatrix )", "\033[0m" );
+    
+    return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGeneratorsOfRows,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfRows( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+#-----------------------------------
+# ReducedSyzygiesGeneratorsOfColumns
+#-----------------------------------
+
+##
+InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
+        "LIMAT: for homalg matrices (IsRightRegularMatrix)",
+        [ IsHomalgMatrix and IsRightRegularMatrix ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfColumns( IsRightRegularMatrix )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfColumns( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+#-----------------------------------
 # SyzygiesOfRows
 #-----------------------------------
 
@@ -2576,6 +2728,40 @@ InstallMethod( SyzygiesOfColumns,
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesOfColumns(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
     
     return SyzygiesOfColumns( M1 );
+    
+end );
+
+#-----------------------------------
+# ReducedSyzygiesOfRows
+#-----------------------------------
+
+##
+InstallMethod( ReducedSyzygiesOfRows,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
+        
+  function( M1, M2 )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesOfRows(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
+    
+    return ReducedSyzygiesOfRows( M1 );
+    
+end );
+
+#-----------------------------------
+# ReducedSyzygiesOfColumns
+#-----------------------------------
+
+##
+InstallMethod( ReducedSyzygiesOfColumns,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
+        
+  function( M1, M2 )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesOfColumns(IsHomalgMatrix,IsZero(Matrix))", "\033[0m" );
+    
+    return ReducedSyzygiesOfColumns( M1 );
     
 end );
 

@@ -695,19 +695,6 @@ DeclareProperty( "IsSemiSimpleRing",
 DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
         IsHomalgRing );
 
-##  <#GAPDoc Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
-##  <ManSection>
-##    <Prop Arg="R" Name="SyzygiesAlgorithmReturnsMinimalSyzygies"/>
-##    <Returns>true or false</Returns>
-##    <Description>
-##      <A>R</A> is a ring for &homalg;.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "SyzygiesAlgorithmReturnsMinimalSyzygies",
-        IsHomalgRing );
-
 ##  <#GAPDoc Label="IsMinusOne">
 ##  <ManSection>
 ##    <Prop Arg="r" Name="IsMinusOne"/>
@@ -1085,6 +1072,9 @@ DeclareOperation( "homalgRingStatistics",
         [ IsHomalgRing ] );
 
 DeclareOperation( "IncreaseRingStatistics",
+        [ IsHomalgRing, IsString ] );
+
+DeclareOperation( "DecreaseRingStatistics",
         [ IsHomalgRing, IsString ] );
 
 DeclareOperation( "SetRingProperties",

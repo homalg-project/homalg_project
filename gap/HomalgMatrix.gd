@@ -387,6 +387,32 @@ DeclareProperty( "IsBasisOfRowsMatrix",
 DeclareProperty( "IsBasisOfColumnsMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsReducedBasisOfRowsMatrix">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsReducedBasisOfRowsMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsReducedBasisOfRowsMatrix",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="IsReducedBasisOfColumnsMatrix">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsReducedBasisOfColumnsMatrix"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsReducedBasisOfColumnsMatrix",
+        IsHomalgMatrix );
+
 ####################################
 #
 # attributes:
@@ -649,6 +675,12 @@ DeclareOperation( "*",
 DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "GetRidOfObsoleteRows",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetRidOfObsoleteColumns",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "BlindlyCopyMatrixProperties",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
@@ -835,12 +867,6 @@ DeclareOperation( "POW",			## this must remain, since an element in IsHomalgMatr
         [ IsHomalgMatrix, IsInt ] );		## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "DiagonalEntries",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "BasisOfRowModule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "BasisOfColumnModule",
         [ IsHomalgMatrix ] );
 
 ####################################

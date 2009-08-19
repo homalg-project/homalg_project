@@ -64,6 +64,8 @@
 <#Include Label="IsTriangularMatrix">
 <#Include Label="IsBasisOfRowsMatrix">
 <#Include Label="IsBasisOfColumnsMatrix">
+<#Include Label="IsReducedBasisOfRowsMatrix">
+<#Include Label="IsReducedBasisOfColumnsMatrix">
 
 </Section>
 

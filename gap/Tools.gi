@@ -1287,6 +1287,70 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
     
 end );
 
+##
+InstallMethod( GetRidOfObsoleteRows,			### defines: GetRidOfObsoleteRows (BetterBasis)
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, M;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetRidOfObsoleteRows) then
+        M := HomalgMatrix( RP!.GetRidOfObsoleteRows( DecideZero( C ) ), R );
+        if HasNrColumns( C ) then
+            SetNrColumns( M, NrColumns( C ) );
+        fi;
+        SetZeroRows( M, [ ] );
+        return M;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ## get rid of the rows containing the ring relations
+    M := CertainRows( C, NonZeroRows( C ) );
+    
+    SetZeroRows( M, [ ] );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( GetRidOfObsoleteColumns,			### defines: GetRidOfObsoleteColumns (BetterBasis)
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, M;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetRidOfObsoleteColumns) then
+        M := HomalgMatrix( RP!.GetRidOfObsoleteColumns( DecideZero( C ) ), R );
+        if HasNrRows( C ) then
+            SetNrRows( M, NrRows( C ) );
+        fi;
+        SetZeroColumns( M, [ ] );
+        return M;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ## get rid of the columns containing the ring relations
+    M := CertainColumns( C, NonZeroColumns( C ) );
+    
+    SetZeroColumns( M, [ ] );
+    
+    return M;
+    
+end );
+
 ##  <#GAPDoc Label="EQ:matrix_method">
 ##  <ManSection>
 ##    <Meth Arg="A,B" Name="=" Label="a method for matrices"/>
@@ -1836,7 +1900,7 @@ InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
     
     if IsBound(RP!.ConvertRowToMatrix) then
         ext_obj := RP!.ConvertRowToMatrix( M, r, c );
-        return HomalgMatrix( ext_obj, R );
+        return HomalgMatrix( ext_obj, r, c, R );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1882,7 +1946,7 @@ InstallMethod( ConvertColumnToMatrix,		### defines: ConvertColumnToMatrix
     
     if IsBound(RP!.ConvertColumnToMatrix) then
         ext_obj := RP!.ConvertColumnToMatrix( M, r, c );
-        return HomalgMatrix( ext_obj, R );
+        return HomalgMatrix( ext_obj, r, c, R );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1909,7 +1973,7 @@ InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
     
     if IsBound(RP!.ConvertMatrixToRow) then
         ext_obj := RP!.ConvertMatrixToRow( M );
-        return HomalgMatrix( ext_obj, R );
+        return HomalgMatrix( ext_obj, 1, NrRows( M ) * NrColumns( M ), R );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1953,7 +2017,7 @@ InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
     
     if IsBound(RP!.ConvertMatrixToColumn) then
         ext_obj := RP!.ConvertMatrixToColumn( M );
-        return HomalgMatrix( ext_obj, R );
+        return HomalgMatrix( ext_obj, NrColumns( M ) * NrRows( M ), 1, R );
     fi;
     
     #=====# begin of the core procedure #=====#

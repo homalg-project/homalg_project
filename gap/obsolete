@@ -1804,3 +1804,43 @@ end );
     
     return ker;
     
+## from GetRidOfObsoleteGenerators for modules
+
+        if HasIsUpperTriangularMatrix( rel ) then
+            if IsUpperTriangularMatrix( rel ) then
+                upper := true;
+            else
+                upper := false;
+            fi;
+        else
+            upper := fail;
+        fi;
+        
+        if HasIsLowerTriangularMatrix( rel ) then
+            if IsLowerTriangularMatrix( rel ) then
+                lower := true;
+            else
+                lower := false;
+            fi;
+        else
+            lower := fail;
+        fi;
+        
+## from HomalgRing.gd        
+        
+##  <#GAPDoc Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
+##  <ManSection>
+##    <Prop Arg="R" Name="SyzygiesAlgorithmReturnsMinimalSyzygies"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "SyzygiesAlgorithmReturnsMinimalSyzygies",
+        IsHomalgRing );
+
+## from Rings.xml
+
+<#Include Label="SyzygiesAlgorithmReturnsMinimalSyzygies">

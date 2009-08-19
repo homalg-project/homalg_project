@@ -588,11 +588,8 @@ InstallMethod( ReducedSyzygiesGenerators,
         [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
-    local syz;
     
-    syz := SyzygiesGenerators( rel );
-    
-    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    return HomalgRelationsForRightModule( ReducedSyzygiesOfColumns( MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -602,11 +599,8 @@ InstallMethod( ReducedSyzygiesGenerators,
         [ IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( mat, rel )
-    local syz;
     
-    syz := SyzygiesGenerators( mat, rel );
-    
-    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    return HomalgRelationsForRightModule( ReducedSyzygiesOfColumns( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -616,11 +610,8 @@ InstallMethod( ReducedSyzygiesGenerators,
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
-    local syz;
     
-    syz := SyzygiesGenerators( rel );
-    
-    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    return HomalgRelationsForLeftModule( ReducedSyzygiesOfRows( MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -630,11 +621,8 @@ InstallMethod( ReducedSyzygiesGenerators,
         [ IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
   function( mat, rel )
-    local syz;
     
-    syz := SyzygiesGenerators( mat, rel );
-    
-    return ReducedBasisOfModule( syz );	## better than ReducedBasisOfModule( syz, "COMPUTE_BASIS" );
+    return HomalgRelationsForLeftModule( ReducedSyzygiesOfRows( mat, MatrixOfRelations( rel ) ) );
     
 end );
 
@@ -669,34 +657,22 @@ end );
 ##
 InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
         "for sets of relations of homalg modules",
-        [ IsHomalgRelations ],
+        [ IsHomalgRelationsOfRightModule ],
         
-  function( _M )
-    local R, RP, M;
+  function( M )
     
-    R := HomalgRing( _M );
+    return HomalgRelationsForRightModule( GetRidOfObsoleteColumns( MatrixOfRelations( M ) ) );
     
-    RP := homalgTable( R );
-    
-    #=====# begin of the core procedure #=====#
-    
-    if IsHomalgRelationsOfLeftModule( _M ) then
-        if IsBound(RP!.SimplifyBasisOfRows) then
-            M := RP!.SimplifyBasisOfRows( _M );
-        else
-            M := MatrixOfRelations( _M );
-        fi;
+end );
+
+##
+InstallMethod( GetRidOfObsoleteRelations,	### defines: GetRidOfObsoleteRelations (BetterBasis)
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule ],
         
-        return HomalgRelationsForLeftModule( CertainRows( M, NonZeroRows( M ) ) );
-    else
-        if IsBound(RP!.SimplifyBasisOfColumns) then
-            M := RP!.SimplifyBasisOfColumns( _M );
-        else
-            M := MatrixOfRelations( _M );
-        fi;
-        
-        return HomalgRelationsForRightModule( CertainColumns( M, NonZeroColumns( M ) ) );
-    fi;
+  function( M )
+    
+    return HomalgRelationsForLeftModule( GetRidOfObsoleteRows( MatrixOfRelations( M ) ) );
     
 end );
 

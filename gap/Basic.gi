@@ -28,14 +28,14 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
         return BasisOfRowModule( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfLeftModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfRightModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
@@ -60,14 +60,14 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
         return BasisOfColumnModule( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfRightModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
@@ -92,14 +92,14 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
         return BasisOfRowsCoeff( M, T );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfLeftModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfRightModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
@@ -130,14 +130,14 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
         return BasisOfColumnsCoeff( M, T );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfRightModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
@@ -180,7 +180,7 @@ InstallMethod( DecideZero,
         return M;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
@@ -207,7 +207,7 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, ring_rel, rel;
+    local R, ring_rel, rel, S;
     
     R := HomalgRing( M );
     
@@ -215,19 +215,39 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
         return SyzygiesGeneratorsOfRows( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfLeftModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfRightModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
     
-    return SyzygiesGeneratorsOfRows( M, rel );
+    S := SyzygiesGeneratorsOfRows( M, rel );
+    
+    ## since SyzygiesGeneratorsOfRows of M modulo rel
+    ## first computes the syzygies matrix of the stack of M and rel,
+    ## and then keeps only those columns S corresponding to M,
+    ## zero rows can potentially exist in S (and we like to remove them);
+    ## if the ring specific SyzygiesGeneratorsOfRows gets rid
+    ## of the zero rows automatically, it should then set the
+    ## attribute ZeroRows of its result to [ ] in order for the
+    ## next line to be handled by immediate methods without
+    ## further computations
+    
+    S := GetRidOfObsoleteRows( S );
+    
+    if IsZero( S ) then
+        
+        SetIsLeftRegularMatrix( M, true );
+        
+    fi;
+    
+    return S;
     
 end );
 
@@ -237,7 +257,7 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, ring_rel, rel;
+    local R, ring_rel, rel, S;
     
     R := HomalgRing( M );
     
@@ -245,19 +265,39 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
         return SyzygiesGeneratorsOfColumns( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfRightModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
     
-    return SyzygiesGeneratorsOfColumns( M, rel );
+    S := SyzygiesGeneratorsOfColumns( M, rel );
+    
+    ## since SyzygiesGeneratorsOfColumns of M modulo rel
+    ## first computes the syzygies matrix of the augmentation of M and rel,
+    ## and then keeps only those rows S corresponding to M,
+    ## zero columns can potentially exist in S (and we like to remove them);
+    ## if the ring specific SyzygiesGeneratorsOfColumns gets rid
+    ## of the zero columns automatically, it should then set the
+    ## attribute ZeroColumns of its result to [ ] in order for the
+    ## next line to be handled by immediate methods without
+    ## further computations
+    
+    S := GetRidOfObsoleteColumns( S );
+    
+    if IsZero( S ) then
+        
+        SetIsRightRegularMatrix( M, true );
+        
+    fi;
+    
+    return S;
     
 end );
 
@@ -268,6 +308,9 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
         
   function( M1, M2 )
     local R, ring_rel, rel, S;
+    
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
     
     R := HomalgRing( M1 );
     
@@ -286,22 +329,26 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
         ## further computations
         ## (BUT: be cautious with ring relations that only GAP can see)
         
-        S := CertainRows( S, NonZeroRows( S ) );
+        S := GetRidOfObsoleteRows( S );
         
-        SetZeroRows( S, [ ] );
+        if IsZero( S ) then
+            
+            SetIsLeftRegularMatrix( M1, true );
+            
+        fi;
         
         return S;
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfLeftModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfRightModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrColumns( M1 ), rel ) );
@@ -309,9 +356,7 @@ InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators
     S := SyzygiesGeneratorsOfRows( M1, UnionOfRows( M2, rel ) );
     
     ## see the above comment
-    S := CertainRows( S, NonZeroRows( S ) );
-    
-    SetZeroRows( S, [ ] );
+    S := GetRidOfObsoleteRows( S );
     
     if IsZero( S ) then
         
@@ -331,6 +376,9 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
   function( M1, M2 )
     local R, ring_rel, rel, S;
     
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
+    
     R := HomalgRing( M1 );
     
     if not HasRingRelations( R ) or NrRows( M1 ) = 0 then
@@ -348,22 +396,26 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
         ## further computations
         ## (BUT: be cautious with ring relations that only GAP can see)
         
-        S := CertainColumns( S, NonZeroColumns( S ) );
+        S := GetRidOfObsoleteColumns( S );
         
-        SetZeroColumns( S, [ ] );
+        if IsZero( S ) then
+            
+            SetIsRightRegularMatrix( M1, true );
+            
+        fi;
         
         return S;
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## in case of residue class rings:
     
     ring_rel := RingRelations( R );
     
-    if IsHomalgRelationsOfRightModule( ring_rel ) then
-        rel := MatrixOfRelations( ring_rel );
-    else
-        rel := Involution( MatrixOfRelations( ring_rel ) );
+    rel := MatrixOfRelations( ring_rel );
+    
+    if IsHomalgRelationsOfLeftModule( ring_rel ) then
+        rel := Involution( rel );
     fi;
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M1 ), rel ) );
@@ -371,9 +423,7 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
     S := SyzygiesGeneratorsOfColumns( M1, UnionOfColumns( M2, rel ) );
     
     ## see the above comment
-    S := CertainColumns( S, NonZeroColumns( S ) );
-    
-    SetZeroColumns( S, [ ] );
+    S := GetRidOfObsoleteColumns( S );
     
     if IsZero( S ) then
         
@@ -382,6 +432,72 @@ InstallMethod( SyzygiesOfColumns,		### defines: SyzygiesOfColumns (SyzygiesGener
     fi;
     
     return S;
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    if not HasRingRelations( HomalgRing( M ) ) or NrColumns( M ) = 0 then
+        return ReducedSyzygiesGeneratorsOfRows( M );
+    fi;
+    
+    ## in case of residue class rings:
+    
+    ## a priori computing a basis of the syzygies matrix causes obsolete computations, at least in general
+    return ReducedBasisOfRowModule( SyzygiesOfRows( M ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    if not HasRingRelations( HomalgRing( M ) ) or NrRows( M ) = 0 then
+        return ReducedSyzygiesGeneratorsOfColumns( M );
+    fi;
+    
+    ## in case of residue class rings:
+    
+    ## a priori computing a basis of the syzygies matrix causes obsolete computations, at least in general
+    return ReducedBasisOfColumnModule( SyzygiesOfColumns( M ) );;
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
+    
+    ## a priori computing a basis of the syzygies matrix causes obsolete computations, at least in general
+    return ReducedBasisOfRowModule( SyzygiesOfRows( M1, M2 ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
+    
+    ## a priori computing a basis of the syzygies matrix causes obsolete computations, at least in general
+    return ReducedBasisOfColumnModule( SyzygiesOfColumns( M1, M2 ) );
     
 end );
 
@@ -786,7 +902,7 @@ end );
 ##
 InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule)
   function( arg )
-    local nargs, M, COMPUTE_BASIS, ar, S, unit_pos;
+    local nargs, M, COMPUTE_BASIS, ar, R;
     
     nargs := Length( arg );
     
@@ -824,24 +940,23 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
         M := BasisOfModule( M );
     fi;
     
-    ## get rid of the rows containing the ring relations
-    if HasRingRelations( HomalgRing( M ) ) then
-        M := GetRidOfObsoleteRelations( M );
-    fi;
+    R := HomalgRing( M );
     
-    ## iterate the syzygy trick
-    while true do
-        S := SyzygiesGenerators( M );
-        
-        unit_pos := GetIndependentUnitPositions( S );
-        unit_pos := List( unit_pos, a -> a[2] );	## due to the convention followed in GetRow/ColumnIndependentUnitPositions we are always interested in a[2]
-        
-        if NrRelations( S ) = 0 or unit_pos = [ ] then
-            break;
+    if IsHomalgRelationsOfLeftModule( M ) then
+        M := MatrixOfRelations( M );
+        if HasRingRelations( R ) then
+            M := GetRidOfObsoleteRows( M );
         fi;
-        
-        M := CertainRelations( M, Filtered( [ 1 .. NrRelations( M ) ], j -> not j in unit_pos ) );
-    od;
+        M := ReducedBasisOfRowModule( M );
+        M := HomalgRelationsForLeftModule( M );
+    else
+        M := MatrixOfRelations( M );
+        if HasRingRelations( R ) then
+            M := GetRidOfObsoleteColumns( M );
+        fi;
+        M := ReducedBasisOfColumnModule( M );
+        M := HomalgRelationsForRightModule( M );
+    fi;
     
     if COMPUTE_BASIS then
         arg[1]!.ReducedBasisOfModule := M;

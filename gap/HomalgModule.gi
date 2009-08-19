@@ -1295,11 +1295,11 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local bl, rel, diagonal, upper, lower, id, T, TI;
+    local bl, rel, diagonal, id, T, TI;
     
     bl := NonZeroGenerators( M );
     
-    if Length( bl ) <> NrGenerators( M ) then
+    if Length( bl ) < NrGenerators( M ) then
         
         rel := MatrixOfRelations( M );
         
@@ -1311,26 +1311,6 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
             fi;
         else
             diagonal := fail;
-        fi;
-        
-        if HasIsUpperTriangularMatrix( rel ) then
-            if IsUpperTriangularMatrix( rel ) then
-                upper := true;
-            else
-                upper := false;
-            fi;
-        else
-            upper := fail;
-        fi;
-        
-        if HasIsLowerTriangularMatrix( rel ) then
-            if IsLowerTriangularMatrix( rel ) then
-                lower := true;
-            else
-                lower := false;
-            fi;
-        else
-            lower := fail;
         fi;
         
         id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );

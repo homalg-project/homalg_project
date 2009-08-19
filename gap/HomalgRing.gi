@@ -317,6 +317,17 @@ InstallMethod( IncreaseRingStatistics,
 end );
 
 ##
+InstallMethod( DecreaseRingStatistics,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, s )
+    
+    R!.statistics.(s) := R!.statistics.(s) - 1;
+    
+end );
+
+##
 InstallOtherMethod( AsList,
         "for homalg internal rings",
         [ IsHomalgInternalRingRep ],
@@ -572,7 +583,11 @@ InstallGlobalFunction( CreateHomalgRing,
                       DecideZeroRowsEffectively := 0,
                       DecideZeroColumnsEffectively := 0,
                       SyzygiesGeneratorsOfRows := 0,
-                      SyzygiesGeneratorsOfColumns := 0
+                      SyzygiesGeneratorsOfColumns := 0,
+                      ReducedBasisOfRowModule := 0,
+                      ReducedBasisOfColumnModule := 0,
+                      ReducedSyzygiesGeneratorsOfRows := 0,
+                      ReducedSyzygiesGeneratorsOfColumns := 0
                       );
     
     homalg_ring := rec( ring := r, statistics := statistics );

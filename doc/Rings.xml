@@ -126,7 +126,6 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsSimpleRing">
 <#Include Label="IsSemiSimpleRing">
 <#Include Label="BasisAlgorithmRespectsPrincipalIdeals">
-<#Include Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
 <#Include Label="IsMinusOne">
 
 </Section>
