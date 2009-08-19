@@ -242,8 +242,6 @@ InstallMethod( PolynomialRing,
     
     SetRingProperties( S, r, var );
     
-    SetSyzygiesAlgorithmReturnsMinimalSyzygies( S, true );
-    
     _Macaulay2_SetRing( R );
     
     return S;

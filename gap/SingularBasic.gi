@@ -184,5 +184,61 @@ InstallValue( CommonHomalgTableForSingularBasic,
                    
                  end,
                
+               XReducedBasisOfRowModule :=
+                 function( M )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
+                   
+                   homalgSendBlocking( [ "matrix ", N, " = ReducedBasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+                   
+                   return N;
+                   
+                 end,
+               
+               XReducedBasisOfColumnModule :=
+                 function( M )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
+                   
+                   homalgSendBlocking( [ "matrix ", N, " = ReducedBasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+                   
+                   return N;
+                   
+                 end,
+               
+               ReducedSyzygiesGeneratorsOfRows :=
+                 function( M )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), R );
+                   
+                   homalgSendBlocking( [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
+               ReducedSyzygiesGeneratorsOfColumns :=
+                 function( M )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", R );
+                   
+                   homalgSendBlocking( [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
         )
  );

@@ -137,12 +137,15 @@ InstallGlobalFunction( InitializeSingularTools,
           IsZeroMatrix, IsIdentityMatrix, IsDiagonalMatrix,
           ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions,
           BasisOfRowModule, BasisOfColumnModule,
+          ReducedBasisOfRowModule, ReducedBasisOfColumnModule,
           BasisOfRowsCoeff, BasisOfColumnsCoeff,
           DecideZeroRows, DecideZeroColumns,
           DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
           SyzForHomalg,
           SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
           SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
+          ReducedSyzForHomalg,
+          ReducedSyzygiesGeneratorsOfRows, ReducedSyzygiesGeneratorsOfColumns,
           Deg, MultiDeg,
           DegreesOfEntries, WeightedDegreesOfEntries,
           MultiWeightedDegreesOfEntries,
@@ -408,6 +411,24 @@ proc BasisOfColumnModule (matrix M)\n\
   return(Involution(std(Involution(M))));\n\
 }\n\n";
     
+    ReducedBasisOfRowModule := "\n\
+proc ReducedBasisOfRowModule (matrix M)\n\
+{\n\
+  matrix l = matrix(mres(M,1)[1]);\n\
+  matrix k = matrix(mres(l,1)[1]);\n\
+  if (l == k)\n\
+  {\n\
+    return(k);\n\
+  }\n\
+  return(ReducedBasisOfRowModule(k));\n\
+}\n\n";
+    
+    ReducedBasisOfColumnModule := "\n\
+proc ReducedBasisOfColumnModule (matrix M)\n\
+{\n\
+  return(Involution(ReducedBasisOfRowModule(Involution(M))));\n\
+}\n\n";
+    
 #    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
 #    ## and for plural to work one would need to define B=transpose(transpose(T)*transpose(M)), which is expensive!!
 #    BasisOfRowsCoeff := "\n\
@@ -481,9 +502,7 @@ proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
     SyzForHomalg := "\n\
 proc SyzForHomalg (matrix M)\n\
 {\n\
-  list l = nres(M,2);\n\
-  return(matrix(l[2]));\n\
-  // return(syz(M));\n\
+  return(syz(M));\n\
 }\n\n";
     
     SyzygiesGeneratorsOfRows := "\n\
@@ -514,6 +533,24 @@ proc SyzygiesGeneratorsOfColumns (matrix M)\n\
 proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
 {\n\
   return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
+}\n\n";
+    
+    ReducedSyzForHomalg := "\n\
+proc ReducedSyzForHomalg (matrix M)\n\
+{\n\
+  return(matrix(nres(M,2)[2]));\n\
+}\n\n";
+    
+    ReducedSyzygiesGeneratorsOfRows := "\n\
+proc ReducedSyzygiesGeneratorsOfRows (matrix M)\n\
+{\n\
+  return(ReducedSyzForHomalg(M));\n\
+}\n\n";
+    
+    ReducedSyzygiesGeneratorsOfColumns := "\n\
+proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
+{\n\
+  return(Involution(ReducedSyzForHomalg(Involution(M))));\n\
 }\n\n";
     
     Deg := "\n\
@@ -719,6 +756,8 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ReducedBasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ReducedBasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -730,6 +769,9 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ReducedSyzForHomalg, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ReducedSyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( ReducedSyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( Deg, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( MultiDeg, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -892,8 +934,6 @@ InstallMethod( PolynomialRing,
     
     SetRingProperties( S, r, var );
     
-    SetSyzygiesAlgorithmReturnsMinimalSyzygies( S, true );
-    
     _Singular_SetRing( S );
     
     homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
@@ -991,6 +1031,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         
     end;
     
+    ## there seems to exists a bug in Plural that occurs with mres(M,1)[1];
+    Unbind( RP!.ReducedBasisOfRowModule );
+    Unbind( RP!.ReducedBasisOfColumnModule );
+    
     return S;
     
 end );
@@ -1061,8 +1105,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     SetBaseRing( S, T );
     
     SetRingProperties( S, R, anti );
-    
-    SetSyzygiesAlgorithmReturnsMinimalSyzygies( S, true );
     
     _Singular_SetRing( S );
     
