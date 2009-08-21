@@ -336,3 +336,6 @@ DeclareOperation( "CompleteImageSquare",
 DeclareOperation( "UpdateModulesByMap",
         [ IsHomalgMap ] );
 
+DeclareOperation( "AnIsomorphism",
+        [ IsHomalgModule ] );
+

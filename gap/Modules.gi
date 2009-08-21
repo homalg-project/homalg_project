@@ -70,7 +70,7 @@ InstallMethod( \/,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, embK, embJ, phi, im, emb;
+    local M, embK, embJ, phi, im, iso, def, emb;
     
     M := SuperObject( J );
     
@@ -85,17 +85,29 @@ InstallMethod( \/,
     
     im := ImageModule( phi );
     
-    emb := PreCompose( NaturalGeneralizedEmbedding( im ), CokernelNaturalGeneralizedIsomorphism( embJ ) );
+    ## recall that im was created as a submodule of
+    ## Cokernel( embJ ) which in turn is a factor module of M,
+    ## but since we need to view im as a subfactor of M
+    ## we will construct an isomorphism iso onto im
+    iso := AnIsomorphism( im );
+    
+    ## and call its source def (for defect)
+    def := Source( iso );
+    
+    ## then: the following compositions give the
+    ## desired generalized embedding of def into M
+    emb := PreCompose( iso, NaturalGeneralizedEmbedding( im ) );
+    
+    emb := PreCompose( emb, CokernelNaturalGeneralizedIsomorphism( embJ ) );
     
     ## check assertion
     Assert( 4, IsGeneralizedMonomorphism( emb ) );
     
     SetIsGeneralizedMonomorphism( emb, true );
     
-    ## reset the NaturalGeneralizedEmbedding
-    im!.NaturalGeneralizedEmbedding := emb;
+    def!.NaturalGeneralizedEmbedding := emb;
     
-    return im;
+    return def;
     
 end );
 

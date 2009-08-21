@@ -1520,6 +1520,30 @@ InstallMethod( UpdateModulesByMap,
     
 end );
 
+##
+InstallMethod( AnIsomorphism,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local N, iso;
+    
+    N := Presentation( GeneratorsOfModule( M ), RelationsOfModule( M ) );
+    
+    ## define the obvious isomorphism between N an M
+    iso := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
+    
+    iso := HomalgMap( iso, N, M );
+    
+    SetIsIsomorphism( iso, true );
+    
+    ## copy the known properties and attributes of im to def
+    UpdateModulesByMap( iso );
+    
+    return iso;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
