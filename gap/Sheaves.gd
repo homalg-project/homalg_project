@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
 ##
-##  Declaration stuff for Sheaves.
+##  Declaration stuff for sheaves.
 ##
 #############################################################################
 
@@ -19,7 +19,7 @@
 DeclareCategory( "IsSetOfUnderlyingModules",
         IsComponentObjectRep );
 
-# three new GAP-categories:
+# four new GAP-categories:
 
 ##  <#GAPDoc Label="IsHomalgSheafOfRings">
 ##  <ManSection>
@@ -261,7 +261,7 @@ DeclareAttribute( "RankOfSheaf",
 ##  <#GAPDoc Label="DegreeOfTorsionFreeness">
 ##  <ManSection>
 ##    <Attr Arg="E" Name="DegreeOfTorsionFreeness"/>
-##    <Returns>a nonnegative integer of infinity</Returns>
+##    <Returns>a nonnegative integer or infinity</Returns>
 ##    <Description>
 ##      Auslander's degree of torsion-freeness of the sheaf <A>E</A>.
 ##      It is set to infinity only for <A>E</A><M>=0</M>.
@@ -275,7 +275,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##  <#GAPDoc Label="Codim">
 ##  <ManSection>
 ##    <Attr Arg="E" Name="Codim"/>
-##    <Returns>a nonnegative integer of infinity</Returns>
+##    <Returns>a nonnegative integer or infinity</Returns>
 ##    <Description>
 ##      The codimension of the sheaf <A>E</A>.
 ##      It is set to infinity only for <A>E</A><M>=0</M>.
@@ -391,9 +391,6 @@ DeclareOperation( "DimensionOfAmbientSpace",
 
 DeclareOperation( "HomalgRing",
         [ IsHomalgSheafOfRings ] );
-
-DeclareOperation( "StructureSheaf",
-        [ IsHomalgSheaf ] );
 
 DeclareOperation( "PositionOfTheDefaultUnderlyingModule",
         [ IsHomalgSheaf ] );

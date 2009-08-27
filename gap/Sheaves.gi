@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
 ##
-##  Implementation stuff for Sheaves.
+##  Implementation stuff for sheaves.
 ##
 #############################################################################
 
@@ -262,8 +262,8 @@ end );
 
 ##
 InstallMethod( StructureSheafOfProj,
-        "for sheaves",
-        [ IsHomalgRing and IsFreePolynomialRing ],
+        "constructor for sheaves",
+        [ IsHomalgRing and ContainsAField ],
         
   function( S )
     local O;
@@ -271,9 +271,12 @@ InstallMethod( StructureSheafOfProj,
     O := rec( graded_ring := S );
     
     ObjectifyWithAttributes(
-            O, TheTypeSheafOfRings,
-            Dimension, Length( Indeterminates( S ) ) - 1
+            O, TheTypeSheafOfRings
             );
+    
+    if HasKrullDimension( S ) then
+       SetDimension( O, KrullDimension( S ) - 1 );
+    fi;
     
     return O;
     
@@ -512,7 +515,7 @@ InstallMethod( ViewObj,
     
     if S <> fail then
         
-        if IsFreePolynomialRing( S ) then
+        if HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
             
             Print( "<The structure sheaf of some ", Dimension( O ), "-dimensional " );
             
@@ -749,7 +752,7 @@ InstallMethod( ViewObj,
     
     if S <> fail then
         
-        if IsFreePolynomialRing( S ) then
+        if HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
             
             Print( " on some ", Dimension( O ), "-dimensional " );
             
@@ -875,7 +878,7 @@ InstallMethod( Display,
     
     if S <> fail then
         
-        if IsFreePolynomialRing( S ) then
+        if HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
             
             Print( homalgProjString( S ) );
             
