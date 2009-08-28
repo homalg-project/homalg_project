@@ -771,6 +771,21 @@ DeclareAttribute( "TypeOfHomalgMatrix",
 DeclareAttribute( "RingRelations",
         IsHomalgRing );
 
+##  <#GAPDoc Label="DefiningIdeal">
+##  <ManSection>
+##    <Attr Arg="R" Name="DefiningIdeal"/>
+##    <Returns>a set of &homalg; relations on one generator</Returns>
+##    <Description>
+##      In case <A>R</A> was constructed as a residue class ring <M>S/J</M>, and only in this case,
+##      the ideal <M>J</M>. It assumed that either <A>R</A> is commutative, or that the specified
+##      <C>Involution</C> in the <C>homalgTable</C> of <A>R</A> fixes the ideal <M>I</M>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DefiningIdeal",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="Zero">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="Zero"/>

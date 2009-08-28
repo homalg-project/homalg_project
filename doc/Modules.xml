@@ -68,6 +68,8 @@
 <#Include Label="TheIdentityMorphism">
 <#Include Label="FullSubmodule">
 <#Include Label="EmbeddingInSuperObject">
+<#Include Label="FactorObject">
+<#Include Label="ResidueClassRing">
 <#Include Label="UnderlyingSubobject">
 <#Include Label="NatTrIdToHomHom_R">
 <#Include Label="ElementaryDivisors">

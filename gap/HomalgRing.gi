@@ -365,6 +365,10 @@ InstallMethod( SetRingProperties,
     
     SetIndeterminatesOfPolynomialRing( S, var );
     
+    if HasContainsAField( R ) and ContainsAField( R ) then
+        SetContainsAField( S, true );
+    fi;
+    
     if d > 0 then
         SetIsLeftArtinian( S, false );
         SetIsRightArtinian( S, false );
@@ -776,7 +780,7 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     
 end );
 
-##  <#GAPDoc Label="ResidueClassRing">
+##  <#GAPDoc Label="ResidueClassRingConstructor">
 ##  <ManSection>
 ##    <Oper Arg="R, ring_rel" Name="\/" Label="constructor for residue class rings"/>
 ##    <Returns>a &homalg; ring</Returns>

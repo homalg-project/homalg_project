@@ -262,15 +262,41 @@ DeclareAttribute( "FullSubmodule",
 
 ##  <#GAPDoc Label="EmbeddingInSuperObject">
 ##  <ManSection>
-##    <Attr Arg="M" Name="EmbeddingInSuperObject"/>
+##    <Attr Arg="N" Name="EmbeddingInSuperObject"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
-##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the embedding of <A>M</A> in <M>L</M> is returned.
+##      In case <A>N</A> was defined as a submodule of some module <M>L</M> the embedding of <A>N</A> in <M>L</M> is returned.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "EmbeddingInSuperObject",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="FactorObject">
+##  <ManSection>
+##    <Attr Arg="N" Name="FactorObject"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      In case <A>N</A> was defined as a submodule of some module <M>L</M> the factor module <M>L/</M><A>N</A> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "FactorObject",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="ResidueClassRing">
+##  <ManSection>
+##    <Attr Arg="J" Name="ResidueClassRing"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      In case <A>J</A> was defined as a (left/right) ideal of the ring <M>R</M> the residue class ring <M>R/</M><A>J</A> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ResidueClassRing",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="UnderlyingSubobject">

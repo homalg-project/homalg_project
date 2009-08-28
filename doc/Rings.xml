@@ -43,7 +43,7 @@ This is immediate for commutative noetherian rings.
 
 <#Include Label="HomalgRingOfIntegers">
 <#Include Label="HomalgFieldOfRationals">
-<#Include Label="ResidueClassRing">
+<#Include Label="ResidueClassRingConstructor">
 
 </Section>
 
@@ -137,6 +137,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="RingElementConstructor">
 <#Include Label="TypeOfHomalgMatrix">
 <#Include Label="RingRelations">
+<#Include Label="DefiningIdeal">
 <#Include Label="Zero">
 <#Include Label="One">
 <#Include Label="MinusOne">

@@ -1616,3 +1616,46 @@ InstallMethod( EmbeddingInSuperObject,
     
 end );
 
+##
+InstallMethod( FactorObject,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    
+    return FullSubmodule( SuperObject( N ) ) / N;
+    
+end );
+
+##
+InstallMethod( ResidueClassRing,
+        "for homalg ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( J )
+    local A, ring_rel, R;
+    
+    A := HomalgRing( J );
+    
+    Assert( 1, not J = A );
+    
+    ring_rel := MatrixOfGenerators( J );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
+        ring_rel := HomalgRelationsForLeftModule( ring_rel );
+    else
+        ring_rel := HomalgRelationsForRightModule( ring_rel );
+    fi;
+    
+    R := A / ring_rel;
+    
+    if HasContainsAField( A ) and ContainsAField( A ) then
+        SetContainsAField( R, true );
+    fi;
+    
+    SetDefiningIdeal( R, J );
+    
+    return R;
+    
+end );
+

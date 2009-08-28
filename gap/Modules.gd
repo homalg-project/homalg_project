@@ -107,6 +107,9 @@ DeclareOperation( "Intersect",
 DeclareOperation( "Intersect",
         [ IsHomalgModule, IsHomalgModule ] );
 
+DeclareOperation( "IntersectWithMultiplicity",
+        [ IsList, IsList ] );
+
 DeclareOperation( "Annihilator",
         [ IsHomalgMatrix, IsHomalgRelations ] );
 

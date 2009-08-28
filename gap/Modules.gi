@@ -43,7 +43,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     S := Presentation( N, S );
     
     ## this matrix of generators is often enough the identity matrix
-    ## and knowing this will avoids computations:
+    ## and knowing this will avoid computations:
     IsIdentityMatrix( MatrixOfGenerators( N ) );
     
     ## keep track of the original generators:
@@ -114,7 +114,40 @@ end );
 ##
 InstallMethod( \/,
         "for homalg submodules",
-        [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep ],
+        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M, N )	## M must be either the super object of N or 1 * R or R * 1
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not IsIdenticalObj( HomalgRing( N ), R ) then
+        Error( "the ring of the module and the ring of the submodule are not identical\n" );
+    fi;
+    
+    if not ( IsIdenticalObj( M, SuperObject( N ) ) or IsIdenticalObj( M, 1 * R ) or IsIdenticalObj( M, R * 1 ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return FactorObject( N );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep and HasUnderlyingSubobject ],
+        
+  function( M, N )	## M must be either the super object of N or 1 * R or R * 1
+    
+    return M / UnderlyingSubobject( N );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg submodules",
+        [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
   function( R, J )
     
@@ -122,18 +155,18 @@ InstallMethod( \/,
         Error( "the given ring and the ring of the submodule are not identical\n" );
     fi;
     
-    return FullSubmodule( SuperObject( J ) ) / J;
+    return ResidueClassRing( J );
     
 end );
 
 ##
 InstallMethod( \/,
-        "for homalg submodules",
+        "for homalg modules",
         [ IsHomalgRing, IsFinitelyPresentedModuleRep and HasUnderlyingSubobject ],
         
-  function( R, M )
+  function( R, N )
     
-    return R / UnderlyingSubobject( M );
+    return R / UnderlyingSubobject( N );
     
 end );
 
@@ -368,8 +401,19 @@ end );
 
 ##
 InstallMethod( Resolution,
+        "for homalg submodules",
+        [ IsInt, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( q, N )
+    
+    return Resolution( q, UnderlyingObject( N ) );
+    
+end );
+
+##
+InstallMethod( Resolution,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
         
   function( M )
     
@@ -380,7 +424,7 @@ end );
 ##
 InstallMethod( LengthOfResolution,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
         
   function( M )
     local d;
@@ -398,7 +442,7 @@ end );
 ##
 InstallMethod( PresentationMap,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
         
   function( M )
     local d;
@@ -982,6 +1026,56 @@ InstallMethod( Intersect,
     int := MatrixOfRelations( int );
     
     return Subobject( int, M );
+    
+end );
+
+##  <#GAPDoc Label="IntersectWithMultiplicity">
+##  <ManSection>
+##    <Oper Arg="ideals, mults" Name="IntersectWithMultiplicity"/>
+##    <Returns>a &homalg; left or right ideal</Returns>
+##    <Description>
+##      Intersect the ideals in the list <A>ideals</A> after raising them to the corresponding power specified in the list of
+##      multiplicities <A>mults</A>.
+##      <Example><![CDATA[
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( IntersectWithMultiplicity,
+        "for homalg ideals",
+        [ IsList, IsList ],
+        
+  function( ideals, mults )
+    local s, left, intersection;
+    
+    if not ForAll( ideals, p -> IsFinitelyPresentedSubmoduleRep( p ) and HasConstructedAsAnIdeal( p ) and ConstructedAsAnIdeal( p ) ) then
+        Error( "the first argument is not a list of ideals\n" );
+    fi;
+    
+    ## the number of ideals
+    s := Length( ideals );
+    
+    if s = 0 then
+        Error( "the list of ideals is empty\n" );
+    fi;
+    
+    if s <> Length( mults ) then
+        Error( "the length of the list of ideals and the length of the list of their multiplicities must coincide\n" );
+    fi;
+    
+    ## decide if we are dealing with left or right ideals
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( ideals[1] );
+    
+    if not ForAll( ideals, a -> IsHomalgLeftObjectOrMorphismOfLeftObjects( a ) = left ) then
+        Error( "all ideals must be provided either by left or by right ideals\n" );
+    fi;
+    
+    intersection := Iterated( List( [ 1 .. s ], i -> ideals[i]^mults[i] ), Intersect );
+    
+    intersection!.Genesis := [ IntersectWithMultiplicity, ideals, mults ];
+    
+    return intersection;
     
 end );
 
