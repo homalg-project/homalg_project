@@ -25,6 +25,7 @@
 <#Include Label="RepresentationMatrixOfKoszulId">
 <#Include Label="RepresentationMapOfKoszulId">
 <#Include Label="KoszulRightAdjoint">
+<#Include Label="HomogeneousPartOverCoefficientsRing">
 
 </Section>
 <!-- ############################################################ -->

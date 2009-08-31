@@ -58,3 +58,6 @@ DeclareOperation( "KoszulRightAdjoint",
 DeclareOperation( "KoszulRightAdjoint",
         [ IsHomalgRingOrObject, IsInt, IsInt ] );
 
+DeclareOperation( "HomogeneousPartOverCoefficientsRing",
+        [ IsInt, IsHomalgModule ] );
+

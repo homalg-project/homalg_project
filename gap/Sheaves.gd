@@ -410,6 +410,9 @@ DeclareOperation( "UnderlyingModule",
 DeclareOperation( "homalgProjString",
         [ IsHomalgRing ] );
 
+DeclareOperation( "GlobalSections",
+        [ IsHomalgSheaf ] );
+
 ####################################
 #
 # synonyms:

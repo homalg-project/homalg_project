@@ -185,7 +185,7 @@ end );
 
 ##
 InstallMethod( PositionOfTheDefaultUnderlyingModule,
-        "for homalg modules",
+        "for sheaves",
         [ IsHomalgSheaf ],
         
   function( E )
@@ -200,7 +200,7 @@ end );
 
 ##
 InstallMethod( SetPositionOfTheDefaultUnderlyingModule,
-        "for homalg modules",
+        "for sheaves",
         [ IsHomalgSheaf, IsPosInt ],
         
   function( E, pos )
@@ -211,7 +211,7 @@ end );
 
 ##
 InstallMethod( SetOfUnderlyingModules,
-        "for homalg modules",
+        "for sheaves",
         [ IsHomalgSheaf ],
         
   function( E )
@@ -226,22 +226,7 @@ end );
 
 ##
 InstallMethod( UnderlyingModule,
-        "for homalg modules",
-        [ IsHomalgSheaf ],
-        
-  function( E )
-    
-    if IsBound(SetOfUnderlyingModules(E)!.(PositionOfTheDefaultUnderlyingModule( E ))) then;
-        return SetOfUnderlyingModules(E)!.(PositionOfTheDefaultUnderlyingModule( E ));
-    fi;
-    
-    return fail;
-    
-end );
-
-##
-InstallMethod( UnderlyingModule,
-        "for homalg modules",
+        "for sheaves",
         [ IsHomalgSheaf, IsPosInt ],
         
   function( E, pos )
@@ -251,6 +236,51 @@ InstallMethod( UnderlyingModule,
     fi;
     
     return fail;
+    
+end );
+
+##
+InstallMethod( UnderlyingModule,
+        "for sheaves",
+        [ IsHomalgSheaf ],
+        
+  function( E )
+    
+    return UnderlyingModule( E, PositionOfTheDefaultUnderlyingModule( E ) );
+    
+end );
+
+##
+InstallMethod( GlobalSections,
+        "for sheaves",
+        [ IsHomalgSheaf ],
+        
+  function( E )
+    local M, p, Gamma;
+    
+    M := UnderlyingModule( E );
+    
+    p := PositionOfTheDefaultSetOfGenerators( M );
+    
+    ## the caching
+    if IsBound( E!.GlobalSections ) then
+        Gamma := E!.GlobalSections;
+        if IsIdenticalObj( M, Gamma[1] ) and p = Gamma[2] then
+            return Gamma[3];
+        fi;
+    fi;
+    
+    Assert( 1, 0 >= CastelnuovoMumfordRegularity( M ) );
+    
+    Gamma := HomogeneousPartOverCoefficientsRing( 0, M );
+    
+    ## save the global sections with context
+    E!.GlobalSections := [ M, p, Gamma ];
+    
+    ## and save the sheaf in the global sections module (thanks GAP)
+    Gamma!.GlobalSectionsOfTheSheaf := E;
+    
+    return Gamma;
     
 end );
 
