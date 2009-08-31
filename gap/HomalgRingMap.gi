@@ -271,11 +271,11 @@ InstallMethod( Display,
         
   function( o )
     
-    Display( Source( o ) );
-    Print( "  |\n  |\n" );
-    ViewObj( o!.images );
-    Print( "\n  |\n  V\n" );
     Display( Range( o ) );
+    Print( "  ^\n  |\n" );
+    ViewObj( o!.images );
+    Print( "\n  |\n  |\n" );
+    Display( Source( o ) );
     
 end );
 

@@ -45,7 +45,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     
     gen := GeneratorsOfModule( T );
     
-    gen := UnionOfRelations( gen, rel * MatrixOfGenerators( gen ) );
+    gen := UnionOfRelations( gen, rel * gen );
     
     coker := Presentation( gen, rel );
     

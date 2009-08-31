@@ -254,6 +254,10 @@ InstallMethod( NewHomalgGenerators,
         SetProcedureToNormalizeGenerators( gen_new, ProcedureToNormalizeGenerators( gen ) );
     fi;
     
+    if IsBound( gen!.ring ) then
+        gen_new!.ring := gen!.ring;
+    fi;
+    
     return gen_new;
     
 end );
@@ -290,6 +294,10 @@ InstallMethod( UnionOfRelations,
     
     if IsList( DegreesOfGenerators( gen ) ) then
         gen_new!.DegreesOfGenerators := DegreesOfGenerators( gen );
+    fi;
+    
+    if IsBound( gen!.ring ) then
+        gen_new!.ring := gen!.ring;
     fi;
     
     return gen_new;
@@ -455,10 +463,20 @@ InstallMethod( \*,
         "for sets of generators of homalg modules",
         [ IsHomalgMatrix, IsHomalgGenerators ],
         
-  function( TI, gen )
-    local generators;
+  function( _TI, gen )
+    local TI, generators, R;
+    
+    TI := _TI;
     
     generators := MatrixOfGenerators( gen );
+    
+    R := HomalgRing( generators );
+    
+    if not IsIdenticalObj( R, HomalgRing( TI ) ) then
+        if IsBound( gen!.ring ) and IsIdenticalObj( gen!.ring, HomalgRing( TI ) ) then
+            TI := TI * R;
+        fi;
+    fi;
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
         generators := NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
@@ -500,6 +518,40 @@ InstallMethod( \*,
     gen := MatrixOfGenerators( gen1 ) * gen2;
     
     return gen;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for sets of generators of homalg modules",
+        [ IsHomalgRelations, IsHomalgGenerators ],
+        
+  function( rel, gen )
+    local rel_mat, gen_mat, R;
+    
+    rel_mat := MatrixOfRelations( rel );
+    
+    gen_mat := MatrixOfGenerators( gen );
+    
+    R := HomalgRing( gen_mat );
+    
+    if not IsIdenticalObj( R, HomalgRing( rel_mat ) ) then
+        if IsBound( gen!.ring ) and IsIdenticalObj( gen!.ring, HomalgRing( rel_mat ) ) then
+            rel_mat := rel_mat * R;
+        fi;
+    fi;
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        if IsHomalgGeneratorsOfRightModule( gen ) then
+            Error( "the set of generators and the set of relations must either be both left or both right\n" );
+        fi;
+        return HomalgRelationsForLeftModule( rel_mat * gen_mat );
+    else
+        if IsHomalgGeneratorsOfLeftModule( gen ) then
+            Error( "the set of generators and the set of relations must either be both left or both right\n" );
+        fi;
+        return HomalgRelationsForRightModule( gen_mat * rel_mat );
+    fi;
     
 end );
 
@@ -686,10 +738,14 @@ InstallMethod( Display,
     if g = 0 then
         Print( "an empty set of generators\n" );
     else
+        Display( MatrixOfGenerators( o ) );
+        
+        Print( "\na set " );
+        
         if g = 1 then
-            Print( "a set consisting of a single generator given by (the" );
+            Print( "consisting of a single generator given by (the" );
         else
-            Print( "a set of ", g, " generators given by the" );
+            Print( "of ", g, " generators given by the" );
         fi;
         
         if IsHomalgGeneratorsOfLeftModule( o ) then
@@ -704,9 +760,7 @@ InstallMethod( Display,
             Print( "s of" );
         fi;
         
-        Print( " the matrix\n\n" );
-        
-        Display( MatrixOfGenerators( o ) );
+        Print( " the above matrix\n" );
     fi;
     
 end );

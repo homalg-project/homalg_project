@@ -136,7 +136,7 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 ##  <#GAPDoc Label="Source:ringmap">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="Source" Label="for ring maps"/>
-##    <Returns>a &homalg; module</Returns>
+##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
 ##      The source of the &homalg; ring map <A>phi</A>.
 ##    </Description>
@@ -149,7 +149,7 @@ DeclareAttribute( "Source",
 ##  <#GAPDoc Label="Range:ringmap">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="Range" Label="for ring maps"/>
-##    <Returns>a &homalg; module</Returns>
+##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
 ##      The target (range) of the &homalg; ring map <A>phi</A>.
 ##    </Description>
@@ -213,6 +213,12 @@ DeclareAttribute( "KernelSubmodule",
 ##
 DeclareAttribute( "KernelEmb",
         IsHomalgRingMap );
+
+## intrinsic attributes:
+##
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+## should all be added by hand to LIMAP.intrinsic_attributes
+## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ####################################
 #

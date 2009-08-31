@@ -720,6 +720,7 @@ InstallMethod( GetIndependentUnitPositions,
     
 end );
 
+##
 InstallMethod( \*,
         "for sets of relations of homalg modules",
         [ IsHomalgRelations, IsHomalgMatrix ],

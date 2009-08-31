@@ -186,3 +186,6 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgGenerators, IsHomalgGenerators ] );
 
+DeclareOperation( "*",
+        [ IsHomalgRelations, IsHomalgGenerators ] );
+

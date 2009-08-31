@@ -1651,6 +1651,9 @@ InstallMethod( ResidueClassRing,
     
     if HasContainsAField( A ) and ContainsAField( A ) then
         SetContainsAField( R, true );
+        if HasCoefficientsRing( A ) then
+            SetCoefficientsRing( R, CoefficientsRing( A ) );
+        fi;
     fi;
     
     SetDefiningIdeal( R, J );
