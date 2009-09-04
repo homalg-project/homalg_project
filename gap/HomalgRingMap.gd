@@ -233,3 +233,6 @@ DeclareOperation( "RingMap",
 
 # basic operations:
 
+DeclareOperation( "ImagesOfRingMap",
+        [ IsHomalgRingMap ] );
+

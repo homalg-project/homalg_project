@@ -58,6 +58,7 @@
 <#Include Label="IsPure">
 <#Include Label="HasConstantRank">
 <#Include Label="ConstructedAsAnIdeal">
+<#Include Label="IsPrimeIdeal">
 
 </Section>
 
@@ -72,11 +73,12 @@
 <#Include Label="ResidueClassRing">
 <#Include Label="UnderlyingSubobject">
 <#Include Label="NatTrIdToHomHom_R">
-<#Include Label="ElementaryDivisors">
+<#Include Label="PrimaryDecomposition">
 
 <!-- the following attributes are intrinsic in the sense that
-     they can safely be attached to any copy of the module  -->
+     they can safely be attached to any copy of the module -->
 
+<#Include Label="ElementaryDivisors">
 <#Include Label="RankOfModule">
 <#Include Label="ProjectiveDimension">
 <#Include Label="DegreeOfTorsionFreeness">

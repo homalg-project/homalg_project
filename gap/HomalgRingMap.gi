@@ -56,6 +56,17 @@ BindGlobal( "TheTypeHomalgRingSelfMap",
 #
 ####################################
 
+##
+InstallMethod( ImagesOfRingMap,
+        "for homalg ring maps",
+        [ IsHomalgRingMap ],
+        
+  function( phi )
+    
+    return phi!.images;
+    
+end );
+
 ##  <#GAPDoc Label="Kernel:ringmap">
 ##  <ManSection>
 ##    <Meth Arg="phi" Name="Kernel" Label="for ring maps"/>
@@ -273,7 +284,7 @@ InstallMethod( Display,
     
     Display( Range( o ) );
     Print( "  ^\n  |\n" );
-    ViewObj( o!.images );
+    ViewObj( ImagesOfRingMap( o ) );
     Print( "\n  |\n  |\n" );
     Display( Source( o ) );
     

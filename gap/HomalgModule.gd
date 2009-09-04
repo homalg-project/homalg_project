@@ -209,6 +209,20 @@ DeclareProperty( "HasConstantRank",
 DeclareProperty( "ConstructedAsAnIdeal",
         IsHomalgModule );
 
+##  <#GAPDoc Label="IsPrimeIdeal">
+##  <ManSection>
+##    <Prop Arg="J" Name="IsPrimeIdeal"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      Check if the &homalg; submodule <A>J</A> is a prime ideal. The ring has to be commutative. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsPrimeIdeal",
+        IsHomalgModule );
+
 ####################################
 #
 # attributes:
@@ -311,6 +325,20 @@ DeclareAttribute( "ResidueClassRing",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "UnderlyingSubobject",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="PrimaryDecomposition">
+##  <ManSection>
+##    <Attr Arg="J" Name="PrimaryDecomposition"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      The primary decomposition of the ideal <A>J</A>. The ring has to be commutative.. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PrimaryDecomposition",
         IsHomalgModule );
 
 ##
