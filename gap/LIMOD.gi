@@ -676,6 +676,65 @@ end );
 
 ##
 InstallImmediateMethod( RankOfModule,
+        IsFinitelyPresentedModuleRep and HasRightActingDomain, 0,
+        
+  function( M )
+    local m;
+    
+    if HasNrGenerators( M ) and HasNrRelations( M ) = true then	## NrRelations is not an attribute and HasNrRelations might return fail!
+        
+        m := MatrixOfRelations( M );
+        
+        if HasIsRightRegularMatrix( m ) and IsRightRegularMatrix( m ) then
+            return NrRows( m ) - NrColumns( m );
+        fi;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RankOfModule,
+        IsFinitelyPresentedModuleRep and HasLeftActingDomain, 0,
+        
+  function( M )
+    local m;
+    
+    if HasNrGenerators( M ) and HasNrRelations( M ) = true then	## NrRelations is not an attribute and HasNrRelations might return fail!
+        
+        m := MatrixOfRelations( M );
+        
+        if HasIsLeftRegularMatrix( m ) and IsLeftRegularMatrix( m ) then
+            return NrColumns( m ) - NrRows( m );
+        fi;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RankOfModule,
+        IsFinitelyPresentedModuleRep and HasPurityFiltration, 0,
+        
+  function( M )
+    local M0;
+    
+    M0 := CertainObject( PurityFiltration( M ), 0 );
+    
+    if HasRankOfModule( M0 ) then
+        return RankOfModule( M0 );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RankOfModule,
         IsFinitelyPresentedModuleRep and IsFree, 0,
         
   function( M )

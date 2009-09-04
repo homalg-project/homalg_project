@@ -1219,11 +1219,11 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 0, 3, 6, 9, \
 ##  > 0, 2, 4, 6, \
@@ -1322,11 +1322,11 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 0, 3, 6, 9, \
 ##  > 0, 2, 4, 6, \
@@ -1485,11 +1485,11 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := RightPresentation( Involution( M ) );
-##  <A non-zero right module on 3 generators satisfying 2 relations>
+##  <A non-torsion right module on 3 generators satisfying 2 relations>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := RightPresentation( Involution( N ) );
-##  <A non-zero right module on 4 generators satisfying 2 relations>
+##  <A non-torsion right module on 4 generators satisfying 2 relations>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 0, 3, 6, 9, \
 ##  > 0, 2, 4, 6, \

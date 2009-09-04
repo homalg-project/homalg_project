@@ -257,6 +257,40 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
 end );
 
 ##
+InstallImmediateMethod( IsRightRegularMatrix,
+        IsHomalgMatrix and HasNrColumns and HasIsZero, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if NrColumns( M ) = 1 and not IsZero( M ) and HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftRegularMatrix,
+        IsHomalgMatrix and HasNrRows and HasIsZero, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if NrRows( M ) = 1 and not IsZero( M ) and HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsUpperStairCaseMatrix,
         IsHomalgMatrix and HasNrRows, 0,
         
@@ -689,6 +723,28 @@ InstallMethod( IsEmptyMatrix,
   function( M )
     
     return NrRows( M ) = 0 or NrColumns( M ) = 0;
+    
+end );
+
+##
+InstallMethod( IsRightRegularMatrix,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return NrColumns( SyzygiesGeneratorsOfColumns( M ) ) = 0;
+    
+end );
+
+##
+InstallMethod( IsLeftRegularMatrix,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return NrRows( SyzygiesGeneratorsOfRows( M ) ) = 0;
     
 end );
 

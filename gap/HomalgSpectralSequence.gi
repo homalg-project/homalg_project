@@ -756,7 +756,7 @@ end );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> dM := Resolution( M );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>

@@ -15,7 +15,7 @@
 ##  gap> M := LeftPresentation( imat );
 ##  <A left module presented by 5 relations for 4 generators>
 ##  gap> N := Hom( ZZ, M );
-##  <A non-zero right module on 4 generators satisfying 3 relations>
+##  <A non-torsion right module on 4 generators satisfying 3 relations>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom, 2, N, "TensorN" );
 ##  <The functor TensorN>
 ##  gap> G := LeftDualizingFunctor( ZZ );;

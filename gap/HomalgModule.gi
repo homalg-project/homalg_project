@@ -100,12 +100,9 @@ DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
 #
 ####################################
 
-# two new family:
+# a new family:
 BindGlobal( "TheFamilyOfHomalgModules",
         NewFamily( "TheFamilyOfHomalgModules" ) );
-
-BindGlobal( "TheFamilyOfHomalgSubmodules",
-        NewFamily( "TheFamilyOfHomalgSubmodules" ) );
 
 # four new types:
 BindGlobal( "TheTypeHomalgLeftFinitelyPresentedModule",
@@ -117,11 +114,11 @@ BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
                 IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 BindGlobal( "TheTypeHomalgLeftFinitelyGeneratedSubmodule",
-        NewType( TheFamilyOfHomalgSubmodules,
+        NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedSubmoduleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
 BindGlobal( "TheTypeHomalgRightFinitelyGeneratedSubmodule",
-        NewType( TheFamilyOfHomalgSubmodules,
+        NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedSubmoduleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
@@ -1049,7 +1046,7 @@ InstallMethod( AddANewPresentation,
         SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     fi;
     
-    if HasNrRelations( rel ) = true and NrRelations( rel ) = 0 then
+    if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
     fi;
     
@@ -1139,7 +1136,7 @@ InstallMethod( AddANewPresentation,
         SetIsZero( M, true );
     fi;
     
-    if HasNrRelations( rel ) = true and NrRelations( rel ) = 0 then
+    if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
     fi;
     
@@ -1423,7 +1420,7 @@ end );
 ##  > ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> Display( M );
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
@@ -1434,7 +1431,7 @@ end );
 ##  
 ##  currently represented by the above matrix
 ##  gap> ByASmallerPresentation( M );
-##  <A non-zero left module presented by 1 relation for 2 generators>
+##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> SetsOfGenerators( M );
@@ -2131,7 +2128,7 @@ end );
 ##  > ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> Display( M );
 ##  [ [  2,  3,  4 ],
 ##    [  5,  6,  7 ] ]
@@ -2142,7 +2139,7 @@ end );
 ##  
 ##  currently represented by the above matrix
 ##  gap> ByASmallerPresentation( M );
-##  <A non-zero left module presented by 1 relation for 2 generators>
+##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  ]]></Example>
@@ -2721,7 +2718,7 @@ end );
 ##  gap> M := LeftPresentation( M );
 ##  <A left module presented by 3 relations for 3 generators>
 ##  gap> N := Z4 * M;
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A rank 1 left module presented by 2 relations for 3 generators>
 ##  gap> Display( M );
 ##  Z/< 2 > + Z/< 3 > + Z/< 4 >
 ##  gap> Display( N );
@@ -3114,8 +3111,18 @@ InstallMethod( ViewObj,
                     Append( properties, " non-pure" );
                 fi;
             fi;
-            Append( properties, " codim " );
-            Append( properties, String( Codim( M ) ) );
+            
+            ## only display the codimension if the global dimension of the ring is > 1:
+            if ( ( left_module and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) or
+                 ( not left_module and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) )
+               and ( HasIsZero( M ) and not IsZero( M ) )	## we actually no that IsZero( M ) = false (but anyway)
+               and not ( IsBound( nz ) and nz = true ) then
+                properties := Concatenation( " non-zero", properties );
+                Append( properties, " torsion" );
+            else
+                Append( properties, " codim " );
+                Append( properties, String( Codim( M ) ) );
+            fi;
         else
             if HasIsPure( M ) then
                 if IsPure( M ) then
@@ -3150,6 +3157,8 @@ InstallMethod( ViewObj,
         if HasRankOfModule( M ) then
             Append( properties, " rank " );
             Append( properties, String( RankOfModule( M ) ) );
+        elif HasIsTorsion( M ) and not IsTorsion( M ) and not HasIsPure( M ) then
+            Append( properties, " non-torsion" );
         elif HasIsZero( M ) and not IsZero( M ) and
           not ( HasIsPure( M ) and not IsPure( M ) ) and
           not ( IsBound( nz ) and nz = true ) then
@@ -3283,7 +3292,7 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    local M, left, R, r, rk;
+    local M, left, R, r, rk, l;
     
     M := UnderlyingObject( J );
     
@@ -3336,6 +3345,26 @@ InstallMethod( ViewObj,
             fi;
         else ## => r > 1
             Print( r, " non-free generators" );
+            if HasNrRelations( M ) = true then
+                l := NrRelations( M );
+                Print( " satisfying " );
+                if l = 1 then
+                    Print( "a single relation" );
+                else
+                    Print( l, " relations" );
+                fi;
+            fi;
+        fi;
+    else
+        Print( " on ", r, " generators"  );
+        if HasNrRelations( M ) = true then
+            l := NrRelations( M );
+            Print( " satisfying " );
+            if l = 1 then
+                Print( "a single relation" );
+            else
+                Print( l, " relations" );
+            fi;
         fi;
     fi;
     
@@ -3349,7 +3378,7 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
-    local r, rk, d;
+    local r, rk, d, l;
     
     if IsBound( M!.distinguished ) then
         Print( "<The" );
@@ -3393,6 +3422,26 @@ InstallMethod( ViewObj,
             fi;
         else ## => r > 1
             Print( r, " non-free generators" );
+            if HasNrRelations( M ) = true then
+                l := NrRelations( M );
+                Print( " satisfying " );
+                if l = 1 then
+                    Print( "a single relation" );
+                else
+                    Print( l, " relations" );
+                fi;
+            fi;
+        fi;
+    else
+        Print( " on ", r, " generators"  );
+        if HasNrRelations( M ) = true then
+            l := NrRelations( M );
+            Print( " satisfying " );
+            if l = 1 then
+                Print( "a single relation" );
+            else
+                Print( l, " relations" );
+            fi;
         fi;
     fi;
     

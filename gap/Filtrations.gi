@@ -159,7 +159,7 @@ InstallMethod( PurityFiltration,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, F, G, II_E, filt, non_zero_p, l, p, I_E, iso;
+    local R, F, G, II_E, filt, M0, non_zero_p, l, p, I_E, iso;
     
     R := HomalgRing( M );
     
@@ -194,11 +194,13 @@ InstallMethod( PurityFiltration,
         SetCodegreeOfPurity( TorsionFreeFactor( M ), StaircaseOfStability( II_E, [ 0, 0 ], 2 ) );
     fi;
     
-    ## the rank of the 0-th part is the rank of the module M
+    M0 := CertainObject( filt, 0 );
+    
+    ## the rank of the 0-th part M0 is the rank of the module M
     if HasRankOfModule( M ) and RankOfModule( M ) > 0 then
-        SetRankOfModule( CertainObject( filt, 0 ), RankOfModule( M ) );
-    elif HasRankOfModule( CertainObject( filt, 0 ) ) then
-        SetRankOfModule( M, RankOfModule( CertainObject( filt, 0 ) ) );
+        SetRankOfModule( M0, RankOfModule( M ) );
+    elif HasRankOfModule( M0 ) then
+        SetRankOfModule( M, RankOfModule( M0 ) );
     fi;
     
     non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );

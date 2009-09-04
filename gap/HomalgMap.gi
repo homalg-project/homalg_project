@@ -479,11 +479,11 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -2, -4, \
 ##  > 0, 1,  4,  7, \
@@ -510,11 +510,11 @@ end );
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
 ##  gap> M;
-##  <A non-zero left module presented by 1 relation for 2 generators>
+##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  gap> Display( M );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> N;
-##  <A non-zero left module presented by 1 relation for 3 generators>
+##  <A non-torsion left module presented by 1 relation for 3 generators>
 ##  gap> Display( N );
 ##  Z/< 4 > + Z^(1 x 2)
 ##  ]]></Example>
@@ -873,11 +873,11 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -2, -4, \
 ##  > 0, 1,  4,  7, \
@@ -897,7 +897,7 @@ end );
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> ByASmallerPresentation( M );
-##  <A non-zero left module presented by 1 relation for 2 generators>
+##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> Display( phi );
@@ -906,7 +906,7 @@ end );
 ##  
 ##  the map is currently represented by the above 2 x 4 matrix
 ##  gap> ByASmallerPresentation( N );
-##  <A non-zero left module presented by 1 relation for 3 generators>
+##  <A non-torsion left module presented by 1 relation for 3 generators>
 ##  gap> Display( N );
 ##  Z/< 4 > + Z^(1 x 2)
 ##  gap> Display( phi );
@@ -1072,7 +1072,7 @@ InstallGlobalFunction( HomalgMap,
                 Source, source,
                 Range, target );
         
-        if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
+        if ( HasNrRelations( source ) = true and NrRelations( source ) = 0 ) then
             SetIsMorphism( morphism, true );
         fi;
         
@@ -1291,7 +1291,7 @@ InstallGlobalFunction( HomalgMap,
         
     fi;
     
-    if ( HasNrRelations( source ) and NrRelations( source ) = 0 ) then
+    if ( HasNrRelations( source ) = true and NrRelations( source ) = 0 ) then
         SetIsMorphism( morphism, true );
     fi;
     
@@ -1323,11 +1323,11 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
 ##  <A homalg internal 2 by 4 matrix>
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> HomalgZeroMap( M, N );
 ##  <The zero morphism of left modules>
 ##  ]]></Example>
@@ -1353,7 +1353,7 @@ end );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A homalg internal 2 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> HomalgIdentityMap( M );
 ##  <The identity morphism of a left module>
 ##  ]]></Example>

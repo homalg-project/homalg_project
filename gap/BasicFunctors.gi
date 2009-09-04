@@ -962,10 +962,10 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -3, -6, \
 ##  > 0, 1,  6, 11, \
@@ -1034,10 +1034,10 @@ InstallFunctor( functor_Cokernel );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -3, -6, \
 ##  > 0, 1,  6, 11, \
@@ -1049,7 +1049,7 @@ InstallFunctor( functor_Cokernel );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> im := ImageModule( phi );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> ByASmallerPresentation( im );
 ##  <A free left module of rank 1 on a free generator>
 ##  gap> pi := ImageModuleEpi( phi );
@@ -1088,10 +1088,10 @@ InstallFunctorOnObjects( functor_ImageModule );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -3, -6, \
 ##  > 0, 1,  6, 11, \
@@ -1103,7 +1103,7 @@ InstallFunctorOnObjects( functor_ImageModule );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> ker := Kernel( phi );
-##  <A cyclic left module presented by 1 relation for a cyclic generator>
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
 ##  gap> Display( ker );
 ##  Z/< -3 >
 ##  gap> ByASmallerPresentation( last );
@@ -1161,10 +1161,10 @@ InstallFunctor( functor_Kernel );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 3,  3,  3, \
 ##  > 0, 3, 10, 17, \
@@ -1185,7 +1185,7 @@ InstallFunctor( functor_Kernel );
 ##  gap> hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );
 ##  <A homomorphism of right modules>
 ##  gap> DefectOfExactness( hom_iota, hom_phi );
-##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> ByASmallerPresentation( last );
 ##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> Display( last );
@@ -1223,10 +1223,10 @@ InstallFunctor( functor_DefectOfExactness );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -3, -6, \
 ##  > 0, 1,  6, 11, \
@@ -1248,11 +1248,11 @@ InstallFunctor( functor_DefectOfExactness );
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> homNM := Source( psi );
-##  <A non-zero right module on 4 generators satisfying 2 relations>
+##  <A non-torsion right module on 4 generators satisfying 2 relations>
 ##  gap> IsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work
 ##  true
 ##  gap> homMM := Range( psi );
-##  <A non-zero right module on 3 generators satisfying 2 relations>
+##  <A non-torsion right module on 3 generators satisfying 2 relations>
 ##  gap> IsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work
 ##  true
 ##  gap> Display( homNM );
@@ -1305,7 +1305,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##      If for example the source <M>N</M> gets a new presentation, you will see the effect on the generators:
 ##      <Example><![CDATA[
 ##  gap> ByASmallerPresentation( N );
-##  <A non-zero left module presented by 1 relation for 3 generators>
+##  <A non-torsion left module presented by 1 relation for 3 generators>
 ##  gap> GeneratorsOfModule( homNM );
 ##  <A set of 4 generators of a homalg right module>
 ##  gap> Display( last );
@@ -1383,18 +1383,20 @@ InstallFunctor( functor_DefectOfExactness );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    -1:	<A non-zero cyclic right module on a cyclic generator satisfying 
+##    
+##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 
 ##  1 relation>
-##     0:	<A non-zero right module on 3 generators satisfying 2 relations>
+##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
-##  <A non-zero right module on 4 generators satisfying 3 relations>>
+##  <A non-torsion right module on 4 generators satisfying 3 relations>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    -1:	<A cyclic codim 1 right module on a cyclic generator satisfying 
+##    
+##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 
 ##  1 relation>
-##     0:	<A non-zero right module on 2 generators satisfying 1 relation>
+##     0:	<A rank 1 right module on 2 generators satisfying 1 relation>
 ##  of
-##  <A non-zero right module on 3 generators satisfying 2 relations>>
+##  <A non-torsion right module on 3 generators satisfying 2 relations>>
 ##  gap> Display( filt );
 ##  Degree -1:
 ##  
@@ -1440,10 +1442,10 @@ InstallFunctor( Functor_Hom );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A non-zero left module presented by 2 relations for 4 generators>
+##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -3, -6, \
 ##  > 0, 1,  6, 11, \
@@ -1455,9 +1457,9 @@ InstallFunctor( Functor_Hom );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> L := Hom( ZZ, M );
-##  <A non-zero right module on 3 generators satisfying 2 relations>
+##  <A non-torsion right module on 3 generators satisfying 2 relations>
 ##  gap> ByASmallerPresentation( L );
-##  <A non-zero right module on 2 generators satisfying 1 relation>
+##  <A non-torsion right module on 2 generators satisfying 1 relation>
 ##  gap> Display( L );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> L;	## the display method found out further information about the module L
@@ -1556,7 +1558,7 @@ InstallFunctor( Functor_Hom );
 ##  <A non-zero left module presented by 10 relations for 6 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A non-zero left module presented by 1 relation for 2 generators>
+##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
 ##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
 ##  of
 ##  <A non-zero left module presented by 3 relations for 4 generators>>
@@ -1652,7 +1654,7 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := TorsionSubmodule( M );
 ##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
 ##  gap> iota := TorsionSubmoduleEmb( M );
@@ -1723,7 +1725,7 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
-##  <A non-zero left module presented by 2 relations for 3 generators>
+##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := TorsionSubmodule( M );
 ##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
 ##  gap> iota := TorsionSubmoduleEmb( M );
