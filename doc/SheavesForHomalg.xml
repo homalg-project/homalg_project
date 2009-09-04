@@ -16,12 +16,16 @@
 	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
 	  <!ENTITY COLEM "<Package>COLEM</Package>">
 	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
 	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
 	  <!ENTITY LICPX "<Package>LICPX</Package>">
+	  <!ENTITY LILIN "<Package>LILIN</Package>">
 	  <!ENTITY LISHV "<Package>LISHV</Package>">
+	  <!ENTITY LISCM "<Package>LISCM</Package>">
+	  <!ENTITY LIMOS "<Package>LIMOS</Package>">
 	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
 	  <!ENTITY alexander "<Package>alexander</Package>">
 	  <!ENTITY Gauss "<Package>Gauss</Package>">
@@ -62,7 +66,11 @@
 <#Include SYSTEM "RingMaps.xml">
 <#Include SYSTEM "Modules.xml">
 <#Include SYSTEM "Tate.xml">
+<#Include SYSTEM "LinearSystems.xml">
 <#Include SYSTEM "Sheaves.xml">
+<#Include SYSTEM "Schemes.xml">
+<#Include SYSTEM "MorphismsOfSchemes.xml">
+<#Include SYSTEM "Curves.xml">
 <#Include SYSTEM "Tools.xml">
 </Body>
 

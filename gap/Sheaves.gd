@@ -239,6 +239,32 @@ DeclareProperty( "HasConstantRank",
 DeclareAttribute( "StructureSheafOfProj",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IdealSheaf:sheaf">
+##  <ManSection>
+##    <Attr Arg="O" Name="IdealSheaf" Label="for structure sheaves"/>
+##    <Returns>a sheaf</Returns>
+##    <Description>
+##      The sheaf of ideals <M>Proj(J)</M> of the &homalg; graded ideal <A>J</A>, where <A>O</A><M>=Proj(S/J)</M>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IdealSheaf",
+        IsHomalgSheafOfRings );
+
+##  <#GAPDoc Label="AsModuleOverStructureSheafOfAmbientSpace">
+##  <ManSection>
+##    <Attr Arg="O" Name="AsModuleOverStructureSheafOfAmbientSpace"/>
+##    <Returns>a sheaf</Returns>
+##    <Description>
+##      The sheaf of modules <A>O</A> regarded as a sheaf of modules over the structure sheaf of the ambient space.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AsModuleOverStructureSheafOfAmbientSpace",
+        IsHomalgSheafOfRings );
+
 ## intrinsic attributes:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -411,6 +437,9 @@ DeclareOperation( "homalgProjString",
         [ IsHomalgRing ] );
 
 DeclareOperation( "GlobalSections",
+        [ IsHomalgSheaf ] );
+
+DeclareOperation( "InducedMorphismToProjectiveSpace",
         [ IsHomalgSheaf ] );
 
 ####################################

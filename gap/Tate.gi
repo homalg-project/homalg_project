@@ -92,7 +92,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The cotangent bundle:
 ##      <Example><![CDATA[
 ##  gap> cotangent := SyzygiesModule( 2, k );
-##  <A graded non-zero left module presented by 4 relations for 6 generators>
+##  <A graded non-torsion left module presented by 4 relations for 6 generators>
 ##  gap> IsFree( cotangent );
 ##  false
 ##  gap> Rank( cotangent );
@@ -106,7 +106,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  the cotangent bundle shifted by <M>1</M> with its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> U1 := cotangent * S^1;
-##  <A graded non-zero left module presented by 4 relations for 6 generators>
+##  <A graded non-torsion left module presented by 4 relations for 6 generators>
 ##  gap> T1 := TateResolution( U1, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
@@ -128,7 +128,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The second power <M>U^2</M> of the shifted cotangent bundle <M>U=U^1</M> and its Tate resolution:
 ##      <Example><![CDATA[
 ##  gap> U2 := SyzygiesModule( 3, k ) * S^2;
-##  <A graded non-zero left module presented by 1 relation for 4 generators>
+##  <A graded rank 3 left module presented by 1 relation for 4 generators>
 ##  gap> T2 := TateResolution( U2, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
@@ -174,7 +174,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  Another way to construct <M>U^2=U^(3-1)</M>:
 ##      <Example><![CDATA[
 ##  gap> u2 := Hom( U1, S^(-1) );
-##  <A graded non-zero right module on 4 generators satisfying 1 relation>
+##  <A graded rank 3 right module on 4 generators satisfying 1 relation>
 ##  gap> t2 := TateResolution( u2, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of right modules at degrees 
 ##  [ -5 .. 5 ]>

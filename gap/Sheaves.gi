@@ -284,6 +284,22 @@ InstallMethod( GlobalSections,
     
 end );
 
+##
+InstallMethod( InducedMorphismToProjectiveSpace,
+        "for sheaves",
+        [ IsHomalgSheaf ],
+        
+  function( E )
+    local Gamma, D;
+    
+    Gamma := GlobalSections( E );
+    
+    D := AsLinearSystem( Gamma );
+    
+    return InducedMorphismToProjectiveSpace( D );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -296,13 +312,19 @@ InstallMethod( StructureSheafOfProj,
         [ IsHomalgRing and ContainsAField ],
         
   function( S )
-    local O;
+    local O, J;
     
     O := rec( graded_ring := S );
     
     ObjectifyWithAttributes(
             O, TheTypeSheafOfRings
             );
+    
+    if HasDefiningIdeal( S ) then
+        J := DefiningIdeal( S );
+        SetIdealSheaf( O, HomalgSheaf( J ) );
+        SetAsModuleOverStructureSheafOfAmbientSpace( O, HomalgSheaf( FactorObject( J ) ) );
+    fi;
     
     if HasKrullDimension( S ) then
        SetDimension( O, KrullDimension( S ) - 1 );

@@ -46,6 +46,12 @@
 <Heading>Sheaves: Attributes</Heading>
 
 <#Include Label="StructureSheafOfProj">
+<#Include Label="IdealSheaf:sheaf">
+<#Include Label="AsModuleOverStructureSheafOfAmbientSpace">
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the sheaf -->
+
 <#Include Label="RankOfSheaf">
 <#Include Label="Codim">
 <#Include Label="CodegreeOfPurity">

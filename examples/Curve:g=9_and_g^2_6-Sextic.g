@@ -16,37 +16,38 @@ p := List( p, q -> Subobject( HomalgMatrix( q, 1, 2, R ), O( 0 ) ) );
 ## and multiplicities
 r := [ 2 ];
 
-curve := Iterated( List( [ 1 .. s ], i -> p[i]^r[i] ), Intersect );
-
-Curve := MatrixOfGenerators( curve );
-
-## a random plane curve of degree d with s ordinary singularities and genus g
+## and degree
 d := 6;
 
-g := Binomial( d - 1, 2 ) - Iterated( List( [ 1 .. s ], i -> Binomial( r[i], 2 ) ), SUM );
+## a random plane curve of degree d with s ordinary singularities
+C := RandomProjectivePlaneCurve( d, p, r );
 
-F := Curve * RandomMatrix( O( -d ), curve );
+## the genus g of the curve
+g := Genus( C );
 
-## adjunction: L( d - 3; (r[1]-1) * p[1], ..., (r[s]-1) * p[s] );
-can := Iterated( List( [ 1 .. s ], i -> p[i]^( r[i] - 1 ) ), Intersect );
+## the canonical sheaf of C as a sheaf on the ambient projective plane
+omega := CanonicalSheafOnAmbientSpace( C );
 
-can := SubmoduleGeneratedByHomogeneousPart( d - 3, can );
+## the induced morphism in the projective space P^{g-1}
+f := InducedMorphismToProjectiveSpace( omega );
 
-## S: Proj( S ) = P^{g-1}
-vars := JoinStringsWithSeparator( List( [ 0 .. g - 1 ], i -> Concatenation( "x", String( i ) ) ) );
+## the image of P2
+imP2 := ImageScheme( f );
 
-S := CoefficientsRing( R ) * vars;
+## the module underlying the structure sheaf O_P2, as a module over
+## the homogeneous coordinate ring of ambient projective space P^{g-1}
+imOP2 := UnderlyingModule( imP2 );
 
-images := EntriesOfHomalgMatrix( MatrixOfGenerators( can ) );
+## its Betti diagram
+bettiP2 := BettiDiagram( Resolution( Int( g / 2 ) - 1, imOP2 ) );
 
-T := R / EntriesOfHomalgMatrix( F );
+## the canonical model of C
+imC := ImageScheme( f, C );
 
-f := RingMap( images, S, T );
+## the module underlying the structure sheaf O_C, as a module over
+## the homogeneous coordinate ring of ambient projective space P^{g-1}
+imOC := UnderlyingModule( imC );
 
-SetDegreeOfMorphism( f, 0 );
+## its Betti diagram
+bettiC := BettiDiagram( Resolution( 2, imOC ) );
 
-IC := KernelSubmodule( f );
-
-OC := S * 1 / IC;
-
-betti := BettiDiagram( Resolution( 2, OC ) );

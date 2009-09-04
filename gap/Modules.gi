@@ -97,7 +97,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := MonomialMap( 1, M );
 ##  <A homomorphism of left modules>
 ##  ]]></Example>
@@ -356,7 +356,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := BasisOfHomogeneousPart( 1, M );
 ##  <An unevaluated homalg external 7 by 3 matrix>
 ##  ]]></Example>
@@ -412,7 +412,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> n := SubmoduleGeneratedByHomogeneousPart( 1, M );
 ##  <A graded left submodule given by 7 generators>
 ##  ]]></Example>
@@ -524,7 +524,7 @@ end );
 ##  x
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationOfRingElement( x, M, 0 );
 ##  <An unevaluated homalg external 3 by 7 matrix>
 ##  ]]></Example>
@@ -574,7 +574,7 @@ end );
 ##  gap> A := KoszulDualRing( S, "a,b,c" );;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMatrixOfKoszulId( 0, M );
 ##  <An unevaluated homalg external 3 by 7 matrix>
 ##  ]]></Example>
@@ -655,7 +655,7 @@ end );
 ##  gap> A := KoszulDualRing( S, "a,b,c" );;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMapOfKoszulId( 0, M );
 ##  <A homomorphism of left modules>
 ##  ]]></Example>
@@ -766,7 +766,7 @@ end );
 ##  gap> A := KoszulDualRing( S, "a,b,c" );;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-zero left module presented by 2 relations for 3 generators>
+##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> CastelnuovoMumfordRegularity( M );
 ##  1
 ##  gap> R := KoszulRightAdjoint( M, -5, 5 );
