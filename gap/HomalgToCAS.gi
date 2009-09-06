@@ -132,9 +132,11 @@ InstallValue( HOMALG_IO,
                 
                 ## basic module operations:
                 TriangularBasis				:= "Tri",	## compute a (Tri)angular basis
-                BasisOfModule				:= "Bas",	## compute a "(Bas)is" of a given set of module elements
+                BasisOfModule				:= "bas",	## compute a "(bas)is" of a given set of module elements
+                ReducedBasisOfModule			:= "Bas",	## compute a reduced "(Bas)is" of a given set of module elements
                 DecideZero				:= "dc0",	## (d)e(c)ide the ideal/submodule membership problem, i.e. if an element is (0) modulo the ideal/submodule
-                SyzygiesGenerators			:= "Syz",	## compute a generating set of (Syz)ygies
+                SyzygiesGenerators			:= "syz",	## compute a generating set of (syz)ygies
+                ReducedSyzygiesGenerators		:= "Syz",	## compute a generating set of reduced (Syz)ygies
                 TriangularBasisC			:= "TRI",	## compute a (TRI)angular basis together with the matrix of coefficients
                 BasisCoeff				:= "BAS",	## compute a "(BAS)is" of a given set of module elements together with the matrix of coefficients
                 DecideZeroEffectively			:= "DC0",	## (D)e(C)ide the ideal/submodule membership problem, i.e. write an element effectively as (0) modulo the ideal/submodule
