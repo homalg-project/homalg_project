@@ -200,52 +200,30 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSageRep, IsList ],
         
   function( R, indets )
-    local var, c, properties, r, var_of_coeff_ring, ext_obj, S, v;
+    local ar, r, var, properties, ext_obj, S;
     
-    if IsString( indets ) and indets <> "" then
-        var := SplitString( indets, "," ); 
-    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
-        var := indets;
-    else
-        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
-    fi;
+    ar := _PrepareInputForPolynomialRing( R, indets );
     
-    c := Characteristic( R );
+    r := ar[1];
+    var := ar[2];
+    properties := ar[3];
     
-    properties := [ IsCommutative ];
-    
-    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
-        Add( properties, IsPrincipalIdealRing );
-    fi;
-    
-    r := R;
-    
-    if HasIndeterminatesOfPolynomialRing( R ) then
-        r := CoefficientsRing( R );
-        var_of_coeff_ring := IndeterminatesOfPolynomialRing( R );
-        if not ForAll( var_of_coeff_ring, HasName ) then
-            Error( "the indeterminates of coefficients ring must all have a name (use SetName)\n" );
-        fi;
-        var_of_coeff_ring := List( var_of_coeff_ring, Name );
-        if Intersection2( var_of_coeff_ring, var ) <> [ ] then
-            Error( "the following indeterminates are already elements of the coefficients ring: ", Intersection2( var_of_coeff_ring, var ), "\n" );
-        fi;
-        var := Concatenation( var_of_coeff_ring, var );
-    fi;
-    
+    ## create the new ring
     ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSage );
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
-    for v in var do
-        SetName( v, homalgPointer( v ) );
-    od;
+    Perform( var, function( v ) SetName( v, homalgPointer( v ) ); end );
     
-    SetCoefficientsRing( S, r );
-    SetCharacteristic( S, c );
-    SetIndeterminatesOfPolynomialRing( S, var );
+    SetIsFreePolynomialRing( S, true );
+    
+    if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        SetBaseRing( S, R );
+    fi;
+    
+    SetRingProperties( S, r, var );
     
     return S;
     

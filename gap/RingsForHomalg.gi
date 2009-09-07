@@ -168,7 +168,7 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
     
     nr_var := Length( var );
     
-    properties := [ ];
+    properties := [ IsCommutative ];
     
     ## K[x] is a principal ideal ring for a field K
     if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
