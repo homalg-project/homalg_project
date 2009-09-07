@@ -1,8 +1,8 @@
 LoadPackage( "Sheaves" );
 
-S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2,x3";
+S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";
 
-A := KoszulDualRing( S, "e0,e1,e2,e3" );
+A := KoszulDualRing( S, "e0..e3" );
 
 ## [EFS, Example 7.1]:
 ## Let C be an elliptic quartic curve in P3 , and consider C as a sheaf on P3

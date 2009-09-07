@@ -1,8 +1,8 @@
 LoadPackage( "Sheaves" );
 
-S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2,x3,x4";
+S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x4";
 
-A := KoszulDualRing( S, "e0,e1,e2,e3,e4" );
+A := KoszulDualRing( S, "e0..e4" );
 
 ## [EFS, Example 7.3]:
 ## A famous Beilinson monad was discovered by Horrocks and Mumford [HM]:

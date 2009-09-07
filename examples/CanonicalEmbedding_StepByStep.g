@@ -16,7 +16,7 @@ p := List( p, q -> Subobject( HomalgMatrix( q, 1, 2, R ), O( 0 ) ) );
 ## and multiplicities
 r := [ 2, 2, 2 ];
 
-curve := Iterated( List( [ 1 .. s ], i -> p[i]^r[i] ), Intersect );
+curve := IntersectWithMultiplicity( p, r );
 
 Curve := MatrixOfGenerators( curve );
 
@@ -28,14 +28,12 @@ g := Binomial( d - 1, 2 ) - Iterated( List( [ 1 .. s ], i -> Binomial( r[i], 2 )
 F := Curve * RandomMatrix( O( -d ), curve );
 
 ## adjunction: L( d - 3; (r[1]-1) * p[1], ..., (r[s]-1) * p[s] );
-can := Iterated( List( [ 1 .. s ], i -> p[i]^( r[i] - 1 ) ), Intersect );
+can := IntersectWithMultiplicity( p, r - 1 );
 
 can := SubmoduleGeneratedByHomogeneousPart( d - 3, can );
 
 ## S: Proj( S ) = P^{g-1}
-vars := JoinStringsWithSeparator( List( [ 0 .. g - 1 ], i -> Concatenation( "x", String( i ) ) ) );
-
-S := CoefficientsRing( R ) * vars;
+S := CoefficientsRing( R ) * [ "x", [ 0 .. g -1 ] ];
 
 images := EntriesOfHomalgMatrix( MatrixOfGenerators( can ) );
 
@@ -62,6 +60,4 @@ can3 := Intersect( line + p[1]^2, p[3] );
 can3 := SubmoduleGeneratedByHomogeneousPart( 3, can3 );
 
 ## A: the Koszul dual ring
-anti := JoinStringsWithSeparator( List( [ 0 .. g - 1 ], i -> Concatenation( "e", String( i ) ) ) );
-
-A := KoszulDualRing( S, anti );
+A := KoszulDualRing( S, [ "e", [ 0 .. g - 1 ] ] );

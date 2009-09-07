@@ -1,8 +1,8 @@
 LoadPackage( "Sheaves" );
 
-S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2,x3";
+S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";
 
-A := KoszulDualRing( S, "e0,e1,e2,e3" );
+A := KoszulDualRing( S, "e0..e3" );
 
 ## the residue class field (i.e. S modulo the maximal homogeneous ideal)
 k := HomalgMatrix( Indeterminates( S ), Length( Indeterminates( S ) ), 1, S );

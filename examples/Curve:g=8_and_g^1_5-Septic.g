@@ -16,11 +16,7 @@ p := List( p, q -> Subobject( HomalgMatrix( q, 1, 2, R ), O( 0 ) ) );
 ## and multiplicities
 r := [ 2, 2, 2, 2, 2, 2, 2 ];
 
-curve := Iterated( List( [ 1 .. s ], i -> p[i]^r[i] ), Intersect );
-
-Curve := MatrixOfGenerators( curve );
-
-## a random plane curve of degree d with s ordinary singularities and genus g
+## and degree
 d := 7;
 
 ## a random plane curve of degree d with s ordinary singularities
