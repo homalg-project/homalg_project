@@ -101,11 +101,13 @@ DeclareOperation( "ShortenResolution",
 DeclareOperation( "FiniteFreeResolution",
         [ IsHomalgModule ] );
 
-DeclareOperation( "Intersect",
+DeclareOperation( "Intersect2",
         [ IsHomalgRelations, IsHomalgRelations ] );
 
-DeclareOperation( "Intersect",
+DeclareOperation( "Intersect2",
         [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareGlobalFunction( "Intersect" );
 
 DeclareOperation( "IntersectWithMultiplicity",
         [ IsList, IsList ] );

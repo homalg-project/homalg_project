@@ -956,28 +956,7 @@ InstallGlobalFunction( AsEpimorphicImage,
 end );
 
 ##
-InstallMethod( Intersect,
-        "for homalg relations",
-        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
-        
-  function( R1, R2 )
-    local pb, r1, r2, im;
-    
-    r1 := HomalgMap( MatrixOfRelations( R1 ) );
-    r2 := HomalgMap( MatrixOfRelations( R2 ), "free", Range( r1 ) );
-    
-    pb := PullbackPairOfMaps( AsChainMapForPullback( r1, r2 ) )[1];
-    
-    im := PreCompose( pb, r1 );
-    
-    im := HomalgRelationsForLeftModule( MatrixOfMap( im ) );
-    
-    return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
-    
-end );
-
-##
-InstallMethod( Intersect,
+InstallMethod( Intersect2,
         "for homalg relations",
         [ IsHomalgRelationsOfRightModule, IsHomalgRelationsOfRightModule ],
         
@@ -998,7 +977,28 @@ InstallMethod( Intersect,
 end );
 
 ##
-InstallMethod( Intersect,
+InstallMethod( Intersect2,
+        "for homalg relations",
+        [ IsHomalgRelationsOfLeftModule, IsHomalgRelationsOfLeftModule ],
+        
+  function( R1, R2 )
+    local pb, r1, r2, im;
+    
+    r1 := HomalgMap( MatrixOfRelations( R1 ) );
+    r2 := HomalgMap( MatrixOfRelations( R2 ), "free", Range( r1 ) );
+    
+    pb := PullbackPairOfMaps( AsChainMapForPullback( r1, r2 ) )[1];
+    
+    im := PreCompose( pb, r1 );
+    
+    im := HomalgRelationsForLeftModule( MatrixOfMap( im ) );
+    
+    return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    
+end );
+
+##
+InstallMethod( Intersect2,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
@@ -1022,10 +1022,29 @@ InstallMethod( Intersect,
         embJ := HomalgRelationsForRightModule( embJ );
     fi;
     
-    int := Intersect( embK, embJ );
+    int := Intersect2( embK, embJ );
     int := MatrixOfRelations( int );
     
     return Subobject( int, M );
+    
+end );
+
+##
+InstallGlobalFunction( Intersect,
+  function( arg )
+    local nargs;
+    
+    nargs := Length( arg );
+    
+    if nargs = 1 and IsFinitelyPresentedSubmoduleRep( arg[1] ) then
+        return arg[1];
+    elif nargs = 1 and IsList( arg[1] ) and arg[1] <> [ ] and ForAll( arg[1], IsFinitelyPresentedSubmoduleRep ) then
+        return Iterated( arg[1], Intersect2 );
+    elif nargs > 1 and ForAll( arg, IsFinitelyPresentedSubmoduleRep ) then
+        return Iterated( arg, Intersect2 );
+    fi;
+    
+    Error( "wrong input\n" );
     
 end );
 
@@ -1128,7 +1147,7 @@ InstallMethod( Annihilator,
     
     syz := List( syz, r -> ReducedSyzygiesGenerators( r, rel ) );
     
-    syz := Iterated( syz, Intersect );
+    syz := Iterated( syz, Intersect2 );
     
     syz := MatrixOfRelations( syz );
     

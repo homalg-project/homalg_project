@@ -1121,19 +1121,19 @@ DeclareGlobalFunction( "StringToElementStringList" );
 
 DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
 
+DeclareOperation( "ParseListOfIndeterminates",
+        [ IsList ] );
+
 DeclareOperation( "PolynomialRing",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "*",
-        [ IsHomalgRing, IsString ] );
+        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "RingOfDerivations",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "AssociatedRingOfDerivations",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "AssociatedRingOfDerivations",
+DeclareOperation( "RingOfDerivations",
         [ IsHomalgRing ] );
 
 DeclareOperation( "ExteriorRing",

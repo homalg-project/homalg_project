@@ -915,27 +915,116 @@ InstallMethod( \/,
 end );
 
 ##
-InstallMethod( \*,
-        "for homalg rings",
-        [ IsHomalgRing, IsString ],
+InstallMethod( ParseListOfIndeterminates,
+        "for lists",
+        [ IsList ],
         
-  function( R, indets )
+  function( _indets )
+    local err, l, indets, i, v, p1, p2, c;
     
-    return PolynomialRing( R, SplitString( indets, "," ) );
+    err := function( ) Error( "a list of variable strings or range strings is expected\n" ); end;
+    
+    if not ForAll( _indets, e -> IsStringRep( e ) or ( IsList( e ) and ForAll( e, IsInt ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    l := Length( _indets );
+    
+    indets := [ ];
+    
+    for i in [ 1 .. l ] do
+        v := _indets[i];
+        if Position( v, ',' ) <> fail then
+            err( );
+        elif ForAll( v, IsInt ) then
+            ## do nothing
+        elif Position( v, '.' ) = fail then
+            if i < l and ForAll( _indets[ i + 1 ], IsInt ) then
+                Append( indets, List( _indets[ i + 1 ], i -> Concatenation( v, String( i ) ) ) );
+            else
+                Add( indets, v );
+            fi;
+        elif PositionSublist( v, ".." ) = fail then
+            err( );
+        else
+            v := SplitString( v, "." );
+            v := Filtered( v, s -> not IsEmpty( s ) );
+            if Length( v ) <> 2 then
+                err( );
+            fi;
+            p1 := PositionProperty( v[1], c -> Position( "0123456789", c ) <> fail );
+            p2 := PositionProperty( v[2], c -> Position( "0123456789", c ) <> fail );
+            if p1 = fail or p2 = fail or p1 = 1 then
+                err( );
+            fi;
+            c := v[1]{[ 1 .. p1 - 1 ]};
+            if p1 = p2 and c <> v[2]{[ 1 .. p2 - 1 ]} then
+                err( );
+            fi;
+            p1 := EvalString( v[1]{[ p1 .. Length( v[1] ) ]} );
+            p2 := EvalString( v[2]{[ p2 .. Length( v[2] ) ]} );
+            Append( indets, List( [ p1 .. p2 ], i -> Concatenation( c, String( i ) ) ) );
+        fi;
+    od;
+    
+    return indets;
     
 end );
 
 ##
-InstallMethod( AssociatedRingOfDerivations,
+InstallMethod( \*,
         "for homalg rings",
-        [ IsHomalgRing and IsCommutative, IsList ],
+        [ IsHomalgRing, IsList ], 1001,	## a high rank is necessary to overwrite the default behaviour of applying R to each list element
         
-  function( S, der )
-    local A;
+  function( R, indets )
     
-    if IsBound(S!.RingOfDerivations) then
-        return S!.RingOfDerivations;
+    return PolynomialRing( R, ParseListOfIndeterminates( indets ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ], 1001, ## for this method to be triggered first it has to have at least the same rank as the above method
+        
+  function( R, indets )
+    
+    return R * SplitString( indets, "," );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg rings",
+        [ IsHomalgRing and IsFreePolynomialRing and HasCoefficientsRing,
+          IsHomalgRing and IsFreePolynomialRing and HasCoefficientsRing ],
+        
+  function( R1, R2 )
+    local r, var2;
+    
+    r := CoefficientsRing( R1 );
+    
+    if not IsIdenticalObj( r, CoefficientsRing( R2 ) ) then
+        TryNextMethod( );
     fi;
+    
+    var2 := IndeterminatesOfPolynomialRing( R2 );
+    var2 := List( var2, Name );
+    var2 := JoinStringsWithSeparator( var2 );
+    
+    return PolynomialRing( R1, var2 );
+    
+end );
+
+##
+InstallMethod( RingOfDerivations,
+        "for homalg rings",
+        [ IsHomalgRing and IsCommutative, IsString ], 1001,
+        
+  function( S, _der )
+    local der, A;
+    
+    der := ParseListOfIndeterminates( SplitString( _der, "," ) );
     
     A := RingOfDerivations( S, der );
     
@@ -946,7 +1035,7 @@ InstallMethod( AssociatedRingOfDerivations,
 end );
 
 ##
-InstallMethod( AssociatedRingOfDerivations,
+InstallMethod( RingOfDerivations,
         "for homalg rings",
         [ IsHomalgRing and IsCommutative ],
         
@@ -965,7 +1054,14 @@ InstallMethod( ExteriorRing,
         "for homalg rings",
         [ IsHomalgRing and IsFreePolynomialRing, IsList ],
         
-  function( S, anti )
+  function( S, _anti )
+    local anti;
+    
+    if IsString( _anti ) then
+        return ExteriorRing( S, SplitString( _anti, "," ) );
+    else
+        anti := ParseListOfIndeterminates( _anti );
+    fi;
     
     if HasBaseRing( S ) then
         return ExteriorRing( S, BaseRing( S ), anti );
