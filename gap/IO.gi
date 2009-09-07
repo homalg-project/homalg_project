@@ -120,13 +120,15 @@ InstallGlobalFunction( LaunchCAS,
         
     fi;
     
-    s.variable_name := HOMALG_IO.variable_name;
-    
     for e in NamesOfComponents( HOMALG_IO_CAS ) do
         if not IsBound( s.( e ) ) then
             s.( e ) := HOMALG_IO_CAS.( e );
         fi;
     od;
+    
+    if not IsBound( s.variable_name ) then
+        s.variable_name := HOMALG_IO.variable_name;
+    fi;
     
     if IsBound( HOMALG_IO.color_display ) and HOMALG_IO.color_display = true
        and IsBound( s.display_color ) then

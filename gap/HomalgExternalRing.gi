@@ -404,13 +404,27 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A homalg external ring residing in the CAS " );
+    Print( "<A homalg external ring" );
     
-    if IsBound( homalgStream( o ).color_display ) then
-        Print( "\033[1m" );
+    if not ( IsBound( HOMALG_IO.suppress_CAS ) and HOMALG_IO.suppress_CAS = true ) then
+        
+        Print( " residing in the CAS " );
+        
+        if IsBound( homalgStream( o ).color_display ) then
+            Print( "\033[1m" );
+        fi;
+        
+        Print( homalgExternalCASystem( o ) );
+        
+        if not ( IsBound( HOMALG_IO.suppress_PID ) and HOMALG_IO.suppress_PID = true ) then
+            
+            Print( "\033[0m running with pid ", homalgExternalCASystemPID( o ) );
+            
+        fi;
+        
     fi;
     
-    Print( homalgExternalCASystem( o ), "\033[0m running with pid ", homalgExternalCASystemPID( o ), ">" );
+    Print( ">" );
     
 end );
 

@@ -31,6 +31,8 @@ InstallValue( HOMALG_IO,
             DeletePeriod := 500,
             PID := IO_getpid(),
             save_CAS_commands_to_file := false,
+            suppress_CAS := false,
+            suppress_PID := false,
             Pictograms := rec(
                 
                 ## colors:
