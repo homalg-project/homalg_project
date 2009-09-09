@@ -361,7 +361,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                DivideColumnByUnit :=
                  function( M, j, u, i )
                    
-                   homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", M, "[j,k]=", M, "[j,k]/", u, ";};if(i>0){", M, "[j,i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", M, "[j,k]=", M, "[j,k]/", u, ";};if(i>0){", M, "[j,i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
                    
                  end,
                

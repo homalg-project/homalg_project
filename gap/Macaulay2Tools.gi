@@ -120,7 +120,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M, plist )
                    
 		   plist := plist - 1;
-                   return homalgSendBlocking( [ M, "^{", plist, "}" ], "break_lists", HOMALG_IO.Pictograms.CertainColumns );
+                   return homalgSendBlocking( [ M, "_{", plist, "}" ], "break_lists", HOMALG_IO.Pictograms.CertainColumns );
                    
                  end,
                
@@ -140,18 +140,15 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                
                DiagMat :=
                  function( e )
-                   local f;
                    
-                   f := Concatenation( [ "DiagMat([" ], e, [ "])" ] );
-                   
-                   return homalgSendBlocking( f, HOMALG_IO.Pictograms.DiagMat );
+                   return homalgSendBlocking( [ "fold((i,j)->i ++ j", e, ")", HOMALG_IO.Pictograms.DiagMat );
                    
                  end,
                
                KroneckerMat :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "KroneckerMat(", A, B, ")" ], HOMALG_IO.Pictograms.KroneckerMat );
+                   return homalgSendBlocking( [ A, "**", B ], HOMALG_IO.Pictograms.KroneckerMat );
                    
                  end,
                
@@ -186,28 +183,28 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                NrRows :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NrRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
+                   return StringToInt( homalgSendBlocking( [ "numgens(target(", C, "))" ], "need_output", HOMALG_IO.Pictograms.NrRows ) );
                    
                  end,
                
                NrColumns :=
                  function( C )
                    
-                   return StringToInt( homalgSendBlocking( [ "NrColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   return StringToInt( homalgSendBlocking( [ "numgens(source(", C, "))" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
                    
                  end,
                
                IsZeroMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsZero(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
+                   return homalgSendBlocking( [ "zero(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
                    
                  end,
                
                IsIdentityMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsIdentityMatrix(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsIdentityMatrix(", M, ")" ], "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
                    
                  end,
                
@@ -269,21 +266,29 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                DivideEntryByUnit :=
                  function( M, i, j, u )
                    
-                   homalgSendBlocking( [ "DivideEntryByUnit(", M, i, j, u, ")" ], "need_command", HOMALG_IO.Pictograms.DivideEntryByUnit );
+                   homalgSendBlocking( [ "M = M_{0..(j-2)} | map(target M, (ring M)^1, apply(toList(1..(numgens target M)), entries M_(j-1), (k,l)->if k == i then {l // ", u, "} else {l})) | M_{j..(numgens source M)-1}" ], "need_command", HOMALG_IO.Pictograms.DivideEntryByUnit );
                    
                  end,
                
                DivideRowByUnit :=
                  function( M, i, u, j )
                    
-                   homalgSendBlocking( [ "DivideRowByUnit(", M, i, u, j, ")" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
-                   
+                   if j > 0 then
+		       homalgSendBlocking( [ "M = M^{0..(i-2)} || map((ring M)^1, source M, {apply(toList(1..(numgens source M)), flatten entries M^{i-1}, (k,l)->if k == j-1 then 1_(ring M) else l // ", u, ")}) || M^{i..(numgens target M)-1}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   else
+                       homalgSendBlocking( [ "M = M^{0..(i-2)} || map((ring M)^1, source M, apply(entries M^{i-1}, k->apply(k, l->l // ", u, "))) || M^{i..(numgens target M)-1}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   fi;
+		                      
                  end,
                
                DivideColumnByUnit :=
                  function( M, j, u, i )
                    
-                   homalgSendBlocking( [ "DivideColumnByUnit(", M, j, u, i, ")" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
+                   if i > 0 then
+                       homalgSendBlocking( [ "M = M_{0..(j-2)} | map(target M, (ring M)^1, apply(toList(1..(numgens target M)), entries M_(j-1), (k,l)->if k == i then {1_(ring M)} else {l // ", u, "})) | M_{j..(numgens source M)-1}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
+		   else
+                       homalgSendBlocking( [ "M = M_{0..(j-2)} | map(target M, (ring M)^1, apply(entries M_(j-1), k->{k // ", u, "})) | M_{j..(numgens source M)-1}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
+		   fi;
                    
                  end,
                
@@ -304,7 +309,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                SetColumnToZero :=
                  function( M, i, j )
                    
-                   homalgSendBlocking( [ "SetColumnToZero(", M, i, j, ")" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
+                   homalgSendBlocking( [ "M = M_{0..(j-2)} | map(target M, (ring M)^1, apply(toList(1..(numgens target M)), entries M_(j-1), (k,l)->if k == i then {l} else {0})) | M_{j..(numgens source M)-1}" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
                    
                  end,
                
@@ -320,29 +325,41 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                
                ConvertRowToMatrix :=
                  function( M, r, c )
-                   
-                   return homalgSendBlocking( [ "ConvertRowToMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
+                   local R;
+		   
+		   R := HomalgRing( M );
+		   
+                   return homalgSendBlocking( [ "reshape(", R, "^", r, R, "^", c, M, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
                    
                  end,
                
                ConvertColumnToMatrix :=
                  function( M, r, c )
+                   local R;
+		   
+		   R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "ConvertColumnToMatrix(", M, r, c, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
+                   return homalgSendBlocking( [ "reshape(", R, "^", r, R, "^", c, M, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
                    
                  end,
                
                ConvertMatrixToRow :=
                  function( M )
+                   local R;
+		   
+		   R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "ConvertMatrixToRow(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
+                   return homalgSendBlocking( [ "reshape(", R, "^1,", R, "^(numgens(source(", M, "))*numgens(target(", M, ")))", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
                    
                  end,
                
                ConvertMatrixToColumn :=
                  function( M )
+                   local R;
+		   
+		   R := HomalgRing( M );
                    
-                   return homalgSendBlocking( [ "ConvertMatrixToColumn(", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
+                   return homalgSendBlocking( [ "reshape(", R, "^(numgens(source(", M, "))*numgens(target(", M, "))),", R, "^1,", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
                    
                  end,
                
