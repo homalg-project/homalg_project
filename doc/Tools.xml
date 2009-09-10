@@ -15,6 +15,7 @@
 <Heading>Tools: Operations and Functions</Heading>
 
 <#Include Label="Eliminate">
+<#Include Label="Diff">
 
 </Section>
 

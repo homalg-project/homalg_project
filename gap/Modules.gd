@@ -16,8 +16,20 @@
 
 # basic operations:
 
+DeclareOperation( "ListOfDegreesOfMultiGradedRing",
+        [ IsInt, IsHomalgRing, IsList ] );
+
+DeclareOperation( "MonomialMatrix",
+        [ IsInt, IsHomalgRing, IsList ] );
+
 DeclareOperation( "MonomialMatrix",
         [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "MonomialMatrix",
+        [ IsList, IsHomalgRing, IsList ] );
+
+DeclareOperation( "MonomialMatrix",
+        [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "MonomialMap",
         [ IsInt, IsHomalgModule ] );

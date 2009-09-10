@@ -19,3 +19,6 @@
 DeclareOperation( "Eliminate",
         [ IsList, IsList ] );
 
+DeclareOperation( "Diff",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+

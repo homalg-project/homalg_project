@@ -14,6 +14,83 @@
 #
 ####################################
 
+##
+InstallMethod( ListOfDegreesOfMultiGradedRing,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?
+        
+  function( l, R, weights )
+    local indets, n, B, j, w, wlist, i, k;
+    
+    if l < 1 then
+        Error( "the first argument must be a positiv integer\n" );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if not Length( weights ) = Length( indets ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
+    
+    if IsList( weights[1] ) and Length( weights[1] ) = l then
+        return List( [ 1 .. l ], i -> List( weights, w -> w[i] ) );
+    fi;
+    
+    ## the rest handles the (improbable?) case of successive extensions
+    ## without multiple weights
+    
+    if l = 1 then
+        return [ weights ];
+    fi;
+    
+    n := Length( weights );
+    
+    if not HasBaseRing( R ) then
+        Error( "no 1. base ring found\n" );
+    fi;
+    
+    B := BaseRing( R );
+    j := Length( Indeterminates( B ) );
+    
+    w := Concatenation(
+                 ListWithIdenticalEntries( j, 0 ),
+                 ListWithIdenticalEntries( n - j, 1 )
+                 );
+    
+    wlist := [ ListN( w, weights, \* ) ];
+    
+    for i in [ 2 .. l - 1 ] do
+        
+        if not HasBaseRing( B ) then
+            Error( "no ", i, ". base ring found\n" );
+        fi;
+        
+        B := BaseRing( B );
+        k := Length( Indeterminates( B ) );
+        
+        w := Concatenation(
+                     ListWithIdenticalEntries( k, 0 ),
+                     ListWithIdenticalEntries( j - k, 1 ),
+                     ListWithIdenticalEntries( n - j, 0 )
+                     );
+        
+        Add( wlist, ListN( w, weights, \* ) );
+        
+        j := k;
+        
+    od;
+    
+    w := Concatenation(
+                 ListWithIdenticalEntries( j, 1 ),
+                 ListWithIdenticalEntries( n - j, 0 )
+                 );
+    
+    Add( wlist, ListN( w, weights, \* ) );
+    
+    return wlist;
+    
+end );
+
 ##  <#GAPDoc Label="MonomialMatrix">
 ##  <ManSection>
 ##    <Oper Arg="d, R" Name="MonomialMatrix"/>
@@ -44,10 +121,10 @@
 ##
 InstallMethod( MonomialMatrix,
         "for homalg rings",
-        [ IsInt, IsHomalgRing ],
+        [ IsInt, IsHomalgRing, IsList ],
         
-  function( d, R )
-    local RP, vars, weights, mon;
+  function( d, R, weights )
+    local RP, vars, mon;
     
     RP := homalgTable( R );
     
@@ -57,7 +134,9 @@ InstallMethod( MonomialMatrix,
     
     vars := Indeterminates( R );
     
-    weights := WeightsOfIndeterminates( R );
+    if not Length( weights ) = Length( Indeterminates( R ) ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
     
     if not Set( weights ) = [ 1 ] then
         
@@ -83,6 +162,50 @@ InstallMethod( MonomialMatrix,
     #=====# begin of the core procedure #=====#
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( MonomialMatrix,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing ],
+        
+  function( d, R )
+    
+    return MonomialMatrix( d, R, WeightsOfIndeterminates( R ) );
+    
+end );
+
+##
+InstallMethod( MonomialMatrix,
+        "for homalg rings",
+        [ IsList, IsHomalgRing, IsList ],
+        
+  function( d, R, weights )
+    local l, mon, w;
+    
+    if not Length( weights ) = Length( Indeterminates( R ) ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
+    
+    l := Length( d );
+    
+    w := ListOfDegreesOfMultiGradedRing( l, R, weights );
+    
+    mon := List( [ 1 .. l ] , i -> MonomialMatrix( d[ l - i + 1 ], R, w[i] ) );
+    
+    return Iterated( mon, KroneckerMat );
+    
+end );
+
+##
+InstallMethod( MonomialMatrix,
+        "for homalg rings",
+        [ IsList, IsHomalgRing ],
+        
+  function( d, R )
+    
+    return MonomialMatrix( d, R, WeightsOfIndeterminates( R ) );
     
 end );
 
@@ -203,9 +326,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
     
     if IsBound(RP!.RandomMatrix) then
         rand := RP!.RandomMatrix( R, weightsT, weightsS );	## the external object
-        rand := HomalgMatrix( rand, R );
-        SetNrRows( rand, r );
-        SetNrColumns( rand, c );
+        rand := HomalgMatrix( rand, r, c, R );
         return rand;
     fi;
     
@@ -269,9 +390,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
     
     if IsBound(RP!.RandomMatrix) then
         rand := RP!.RandomMatrix( R, weightsT, weightsS );	## the external object
-        rand := HomalgMatrix( rand, R );
-        SetNrRows( rand, r );
-        SetNrColumns( rand, c );
+        rand := HomalgMatrix( rand, r, c, R );
         return rand;
     fi;
     

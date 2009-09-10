@@ -26,13 +26,13 @@ Subtitle := "A &homalg; based Package for Sheaf Algorithms",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.09.05",
+Version := "2009.09.06",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "05/09/2009",
+Date := "06/09/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -260,7 +260,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["RingsForHomalg", ">= 2009.08.11"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["RingsForHomalg", ">= 2009.09.06"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
