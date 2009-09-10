@@ -211,6 +211,13 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
+               Determinant :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "Determinant( ", C, " )" ], "need_output", HOMALG_IO.Pictograms.Determinant );
+                   
+                 end,
+               
                IsZeroMatrix :=
                  function( M )
                    

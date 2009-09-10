@@ -246,6 +246,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Determinant :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "det(", C, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Determinant );
+                   
+                 end,
+               
                IsZeroMatrix :=
                  function( M )
                    
