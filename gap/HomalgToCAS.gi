@@ -108,6 +108,7 @@ InstallValue( HOMALG_IO,
                 Compose					:= "A*B",	## multiply two matrices
                 NrRows					:= "#==",	## number of rows
                 NrColumns				:= "#||",	## number of columns
+                Determinant				:= "det",	## determinant of a matrix over a (commutative) ring
                 
                 ## important matrix operations:
                 ## (important for performance since existing fall-back methods cause a lot of traffic):
