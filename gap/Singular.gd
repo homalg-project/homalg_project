@@ -22,6 +22,8 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Singular" );
 
+DeclareGlobalVariable( "SingularTools" );
+
 ####################################
 #
 # global functions and operations:

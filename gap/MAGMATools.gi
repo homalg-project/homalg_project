@@ -228,7 +228,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                IsIdentityMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsOne(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsOne(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
                    
                  end,
                

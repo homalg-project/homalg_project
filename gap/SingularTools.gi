@@ -256,14 +256,14 @@ InstallValue( CommonHomalgTableForSingularTools,
                IsIdentityMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsIdentityMatrix(", M, ")" ], "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "1";
+                   return homalgSendBlocking( [ "IsIdentityMatrix(", M, ")" ], "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "1";
                    
                  end,
                
                IsDiagonalMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsDiagonalMatrix(", M, ")" ], "need_output", HOMALG_IO.Pictograms.IsZeroMatrix ) = "1";
+                   return homalgSendBlocking( [ "IsDiagonalMatrix(", M, ")" ], "need_output", HOMALG_IO.Pictograms.IsDiagonalMatrix ) = "1";
                    
                  end,
                

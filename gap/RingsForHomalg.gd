@@ -25,15 +25,17 @@ DeclareGlobalVariable( "CommonHomalgTableForRings" );
 #
 ####################################
 
-# constructor methods:
-
-DeclareGlobalFunction( "HomalgRingOfIntegersInDefaultCAS" );
-
-DeclareGlobalFunction( "HomalgFieldOfRationalsInDefaultCAS" );
+DeclareGlobalFunction( "InitializeMacros" );
 
 DeclareGlobalFunction( "_PrepareInputForPolynomialRing" );
 
 DeclareGlobalFunction( "_PrepareInputForRingOfDerivations" );
 
 DeclareGlobalFunction( "_PrepareInputForExteriorRing" );
+
+# constructor methods:
+
+DeclareGlobalFunction( "HomalgRingOfIntegersInDefaultCAS" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationalsInDefaultCAS" );
 

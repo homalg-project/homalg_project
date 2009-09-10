@@ -80,7 +80,7 @@ BindGlobal( "TheTypeHomalgExternalRingInSingular",
 
 ####################################
 #
-# global functions:
+# global functions and variables:
 #
 ####################################
 
@@ -129,37 +129,9 @@ InstallGlobalFunction( _Singular_multiple_delete,
     
 end );
 
-##
-InstallGlobalFunction( InitializeSingularTools,
-  function( stream )
-    local IsMemberOfList, Difference, CreateListListOfIntegers,
-          GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
-          IsZeroMatrix, IsIdentityMatrix, IsDiagonalMatrix,
-          ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions,
-          BasisOfRowModule, BasisOfColumnModule,
-          ReducedBasisOfRowModule, ReducedBasisOfColumnModule,
-          BasisOfRowsCoeff, BasisOfColumnsCoeff,
-          DecideZeroRows, DecideZeroColumns,
-          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzForHomalg,
-          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
-          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
-          ReducedSyzForHomalg,
-          ReducedSyzygiesGeneratorsOfRows, ReducedSyzygiesGeneratorsOfColumns,
-          Deg, MultiDeg,
-          DegreesOfEntries, WeightedDegreesOfEntries,
-          MultiWeightedDegreesOfEntries,
-          NonTrivialDegreePerRow, NonTrivialWeightedDegreePerRow,
-          NonTrivialMultiWeightedDegreePerRow,
-          NonTrivialDegreePerRowWithColPosition,
-          NonTrivialWeightedDegreePerRowWithColPosition,
-          NonTrivialMultiWeightedDegreePerRowWithColPosition,
-          NonTrivialDegreePerColumn, NonTrivialWeightedDegreePerColumn,
-          NonTrivialMultiWeightedDegreePerColumn,
-          NonTrivialDegreePerColumnWithRowPosition,
-          NonTrivialWeightedDegreePerColumnWithRowPosition,
-          NonTrivialMultiWeightedDegreePerColumnWithRowPosition;
-    
+InstallValue( SingularTools,
+        rec(
+            
     IsMemberOfList := "\n\
 proc IsMemberOfList (int i, list l)\n\
 {\n\
@@ -173,7 +145,7 @@ proc IsMemberOfList (int i, list l)\n\
     }\n\
   }\n\
   return(0);\n\
-}\n\n";
+}\n\n",
     
     Difference := "\n\
 proc Difference (list a, list b)\n\
@@ -189,7 +161,7 @@ proc Difference (list a, list b)\n\
     }\n\
   }\n\
   return(c);\n\
-}\n\n";
+}\n\n",
     
     CreateListListOfIntegers := "\n\
 proc CreateListListOfIntegers (degrees,m,n)\n\
@@ -200,20 +172,20 @@ proc CreateListListOfIntegers (degrees,m,n)\n\
     l[i]=intvec(degrees[(i-1)*n+1..i*n]);\n\
   }\n\
   return(l);\n\
-}\n\n";
+}\n\n",
     
     IsZeroMatrix := "\n\
 proc IsZeroMatrix (matrix m)\n\
 {\n\
   matrix z[nrows(m)][ncols(m)];\n\
   return(m==z);\n\
-}\n\n";
+}\n\n",
     
     IsIdentityMatrix := "\n\
 proc IsIdentityMatrix (matrix m)\n\
 {\n\
   return(m==unitmat(nrows(m)));\n\
-}\n\n";
+}\n\n",
     
     IsDiagonalMatrix := "\n\
 proc IsDiagonalMatrix (matrix m)\n\
@@ -230,7 +202,7 @@ proc IsDiagonalMatrix (matrix m)\n\
     c[i,i]=0;\n\
   }\n\
   return(c==z);\n\
-}\n\n";
+}\n\n",
     
     ZeroRows := "\n\
 proc ZeroRows (matrix m)\n\
@@ -248,7 +220,7 @@ proc ZeroRows (matrix m)\n\
     return(\"[]\"));\n\
   }\n\
   return(string(l));\n\
-}\n\n";
+}\n\n",
     
     ZeroColumns := "\n\
 proc ZeroColumns (matrix n)\n\
@@ -267,7 +239,7 @@ proc ZeroColumns (matrix n)\n\
     return(\"[]\"));\n\
   }\n\
   return(string(l));\n\
-}\n\n";
+}\n\n",
     
     GetColumnIndependentUnitPositions := "\n\
 proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
@@ -309,7 +281,7 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
     }\n\
   }\n\
   return(string(pos));\n\
-}\n\n";
+}\n\n",
     
     GetRowIndependentUnitPositions := "\n\
 proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
@@ -351,7 +323,7 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
     }\n\
   }\n\
   return(string(pos));\n\
-}\n\n";
+}\n\n",
     
     GetUnitPosition := "\n\
 proc GetUnitPosition (matrix M, list pos_list)\n\
@@ -375,7 +347,7 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
     }\n\
   }\n\
   return(\"fail\");\n\
-}\n\n";
+}\n\n",
     
     GetCleanRowsPositions := "\n\
 proc GetCleanRowsPositions (matrix m, list l)\n\
@@ -397,19 +369,19 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
     return(\"[]\"));\n\
   }\n\
   return(string(rows));\n\
-}\n\n";
+}\n\n",
     
     BasisOfRowModule := "\n\
 proc BasisOfRowModule (matrix M)\n\
 {\n\
   return(std(M));\n\
-}\n\n";
+}\n\n",
     
     BasisOfColumnModule := "\n\
 proc BasisOfColumnModule (matrix M)\n\
 {\n\
   return(Involution(std(Involution(M))));\n\
-}\n\n";
+}\n\n",
     
     ReducedBasisOfRowModule := "\n\
 proc ReducedBasisOfRowModule (matrix M)\n\
@@ -421,13 +393,13 @@ proc ReducedBasisOfRowModule (matrix M)\n\
     return(k);\n\
   }\n\
   return(ReducedBasisOfRowModule(k));\n\
-}\n\n";
+}\n\n",
     
     ReducedBasisOfColumnModule := "\n\
 proc ReducedBasisOfColumnModule (matrix M)\n\
 {\n\
   return(Involution(ReducedBasisOfRowModule(Involution(M))));\n\
-}\n\n";
+}\n\n",
     
 #    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
 #    ## and for plural to work one would need to define B=transpose(transpose(T)*transpose(M)), which is expensive!!
@@ -438,7 +410,7 @@ proc ReducedBasisOfColumnModule (matrix M)\n\
 #  matrix B = matrix(liftstd(M,T));\n\
 #  list l = transpose(transpose(T)*transpose(M)),T;\n\
 #  return(l)\n\
-#}\n\n";
+#}\n\n",
     
     BasisOfRowsCoeff := "\n\
 proc BasisOfRowsCoeff (matrix M)\n\
@@ -447,7 +419,7 @@ proc BasisOfRowsCoeff (matrix M)\n\
   matrix T = lift(M,B); //never use stdlift, also because it might differ from std!!!\n\
   list l = B,T;\n\
   return(l)\n\
-}\n\n";
+}\n\n",
     
     BasisOfColumnsCoeff := "\n\
 proc BasisOfColumnsCoeff (matrix M)\n\
@@ -457,19 +429,19 @@ proc BasisOfColumnsCoeff (matrix M)\n\
   matrix T = l[2];\n\
   l = Involution(B),Involution(T);\n\
   return(l);\n\
-}\n\n";
+}\n\n",
     
     DecideZeroRows := "\n\
 proc DecideZeroRows (matrix A, matrix B)\n\
 {\n\
   return(reduce(A,B));\n\
-}\n\n";
+}\n\n",
     
     DecideZeroColumns := "\n\
 proc DecideZeroColumns (matrix A, matrix B)\n\
 {\n\
   return(Involution(reduce(Involution(A),Involution(B))));\n\
-}\n\n";
+}\n\n",
     
 #todo: read part of the unit matrix in singular help!
 #      it is ignored right now.
@@ -487,7 +459,7 @@ proc DecideZeroRowsEffectively (matrix A, matrix B)\n\
   matrix T = lift(B,M-A);\n\
   list l = M,T;\n\
   return(l);\n\
-}\n\n";
+}\n\n",
     
     DecideZeroColumnsEffectively := "\n\
 proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
@@ -497,19 +469,19 @@ proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
   matrix T = l[2];\n\
   l = Involution(B),Involution(T);\n\
   return(l);\n\
-}\n\n";
+}\n\n",
     
     SyzForHomalg := "\n\
 proc SyzForHomalg (matrix M)\n\
 {\n\
   return(syz(M));\n\
-}\n\n";
+}\n\n",
     
     SyzygiesGeneratorsOfRows := "\n\
 proc SyzygiesGeneratorsOfRows (matrix M)\n\
 {\n\
   return(SyzForHomalg(M));\n\
-}\n\n";
+}\n\n",
     
     SyzygiesGeneratorsOfRows2 := "\n\
 proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
@@ -521,37 +493,37 @@ proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
   matrix s = SyzForHomalg(M);\n\
   s = submat(s,1..c1,1..ncols(s));\n\
   return(std(s));\n\
-}\n\n";
+}\n\n",
     
     SyzygiesGeneratorsOfColumns := "\n\
 proc SyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
   return(Involution(SyzForHomalg(Involution(M))));\n\
-}\n\n";
+}\n\n",
     
     SyzygiesGeneratorsOfColumns2 := "\n\
 proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
 {\n\
   return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
-}\n\n";
+}\n\n",
     
     ReducedSyzForHomalg := "\n\
 proc ReducedSyzForHomalg (matrix M)\n\
 {\n\
   return(matrix(nres(M,2)[2]));\n\
-}\n\n";
+}\n\n",
     
     ReducedSyzygiesGeneratorsOfRows := "\n\
 proc ReducedSyzygiesGeneratorsOfRows (matrix M)\n\
 {\n\
   return(ReducedSyzForHomalg(M));\n\
-}\n\n";
+}\n\n",
     
     ReducedSyzygiesGeneratorsOfColumns := "\n\
 proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
   return(Involution(ReducedSyzForHomalg(Involution(M))));\n\
-}\n\n";
+}\n\n",
     
     Deg := "\n\
 ring r;\n\
@@ -571,7 +543,7 @@ else\n\
     return(deg(pol,weights));\n\
   }\n\
 }\n\
-kill r;\n\n";
+kill r;\n\n",
     
     MultiDeg := "\n\
 proc MultiDeg (pol,weights)\n\
@@ -583,7 +555,7 @@ proc MultiDeg (pol,weights)\n\
     m[1,i]=Deg(pol,weights[i]);\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
     
     DegreesOfEntries := "\n\
 proc DegreesOfEntries (matrix M)\n\
@@ -597,7 +569,7 @@ proc DegreesOfEntries (matrix M)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
     
     WeightedDegreesOfEntries := "\n\
 proc WeightedDegreesOfEntries (matrix M, weights)\n\
@@ -611,7 +583,7 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
     
     NonTrivialDegreePerRow := "\n\
 proc NonTrivialDegreePerRow (matrix M)\n\
@@ -628,7 +600,7 @@ proc NonTrivialDegreePerRow (matrix M)\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
+}\n\n",
     
     NonTrivialWeightedDegreePerRow := "\n\
 proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
@@ -645,7 +617,7 @@ proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
+}\n\n",
     
     NonTrivialDegreePerRowWithColPosition := "\n\
 proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
@@ -660,7 +632,7 @@ proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
     
     NonTrivialWeightedDegreePerRowWithColPosition := "\n\
 proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
@@ -675,7 +647,7 @@ proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
     
     NonTrivialDegreePerColumn := "\n\
 proc NonTrivialDegreePerColumn (matrix M)\n\
@@ -692,7 +664,7 @@ proc NonTrivialDegreePerColumn (matrix M)\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
+}\n\n",
     
     NonTrivialWeightedDegreePerColumn := "\n\
 proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
@@ -709,7 +681,7 @@ proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
+}\n\n",
     
     NonTrivialDegreePerColumnWithRowPosition := "\n\
 proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
@@ -724,7 +696,7 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
     
     NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
 proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
@@ -739,54 +711,19 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
+}\n\n",
+    )
+);
+
+##
+InstallGlobalFunction( InitializeSingularTools,
+    function( stream )
     
     homalgSendBlocking( "int i; int j; int k; list l;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    homalgSendBlocking( IsMemberOfList, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( Difference, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( CreateListListOfIntegers, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( IsZeroMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( IsIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ReducedBasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ReducedBasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzForHomalg, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ReducedSyzForHomalg, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ReducedSyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ReducedSyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( Deg, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( MultiDeg, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( WeightedDegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialWeightedDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialWeightedDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialWeightedDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialWeightedDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
     
-  end
-);
+    InitializeMacros( SingularTools, stream );
+    
+end );
 
 ####################################
 #
@@ -1102,7 +1039,9 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     SetIsExteriorRing( S, true );
     
-    SetBaseRing( S, T );
+    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
+        SetBaseRing( S, T );
+    fi;
     
     SetRingProperties( S, R, anti );
     
