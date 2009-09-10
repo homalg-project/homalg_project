@@ -2,8 +2,6 @@ LoadPackage( "Sheaves" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";
 
-O := n -> (R * 1)^n;
-
 ## p[1] := (0:0:1), p[2] := (0:1:0), p[3] := (1:0:0), p[4] := (0:1:1), p[5] := (1:0:1), p[6] := (1:1:0), p[7] := (0:1:-1)
 p := [ "[ a, b ]", "[ a, c ]", "[ b, c ]", "[ a, b - c ]", "[ a - c, b ]", "[ a - b, c ]", "[ a, b + c ]" ];
 
@@ -11,7 +9,7 @@ p := [ "[ a, b ]", "[ a, c ]", "[ b, c ]", "[ a, b - c ]", "[ a - c, b ]", "[ a 
 s := Length( p );
 
 ## with defining ideals
-p := List( p, q -> Subobject( HomalgMatrix( q, 1, 2, R ), O( 0 ) ) );
+p := List( p, q -> GradedRightSubmodule( q, R ) );
 
 ## and multiplicities
 r := [ 2, 2, 2, 2, 2, 2, 2 ];

@@ -186,7 +186,7 @@ InstallMethod( ViewObj,
         elif dim = 2 then
             Append( prop_attr, " surface" );
         else
-            Append( prop_attr,  Concatenation( " ", String( d ), "-fold" ) );
+            Append( prop_attr,  Concatenation( " ", String( dim ), "-fold" ) );
         fi;
     else
         Append( prop_attr, " scheme" );

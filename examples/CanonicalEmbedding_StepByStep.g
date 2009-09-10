@@ -11,7 +11,7 @@ p := [ "[ a, b ]", "[ a, c ]", "[ b, c ]" ];
 s := Length( p );
 
 ## with defining ideals
-p := List( p, q -> Subobject( HomalgMatrix( q, 1, 2, R ), O( 0 ) ) );
+p := List( p, q -> GradedRightSubmodule( q, R ) );
 
 ## and multiplicities
 r := [ 2, 2, 2 ];
