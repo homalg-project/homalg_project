@@ -534,17 +534,14 @@ InstallMethod( ImageSubmodule,
         [ IsHomalgMap ],
         
   function( phi )
-    local R, T, ideal, N;
-    
-    R := HomalgRing( phi );
+    local T, R, ideal, N;
     
     T := Range( phi );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( T ) then
-        ideal := IsIdenticalObj( T, 1 * R ) or IsIdenticalObj( T, ( 1 * R )^0 );
-    else
-        ideal := IsIdenticalObj( T, R * 1 ) or IsIdenticalObj( T, ( R * 1 )^0 );
-    fi;
+    R := HomalgRing( T );
+    
+    ideal := IsBound( T!.distinguished ) and T!.distinguished = true and
+             IsBound( T!.not_twisted ) and T!.not_twisted = true;
     
     N := rec( map_having_subobject_as_its_image := phi );
     

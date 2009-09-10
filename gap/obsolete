@@ -1844,3 +1844,10 @@ DeclareProperty( "SyzygiesAlgorithmReturnsMinimalSyzygies",
 ## from Rings.xml
 
 <#Include Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
+
+## from HomalgModule.gd
+
+DeclareOperation( "NumberOfKnownPresentations",
+        [ IsHomalgModule ] );
+
+

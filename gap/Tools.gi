@@ -215,7 +215,7 @@ InstallMethod( DegreeMultivariatePolynomial,
     
     RP := homalgTable( R );
     
-    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
         weights := WeightsOfIndeterminates( R );
         
@@ -2066,7 +2066,7 @@ InstallMethod( DegreesOfEntries,
     
     RP := homalgTable( R );
     
-    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
         weights := WeightsOfIndeterminates( R );
         
@@ -2110,7 +2110,7 @@ InstallMethod( NonTrivialDegreePerRow,
     
     RP := homalgTable( R );
     
-    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
         weights := WeightsOfIndeterminates( R );
         
@@ -2160,7 +2160,7 @@ InstallMethod( NonTrivialDegreePerRow,
     
     w := Set( col_degrees );
     
-    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
         weights := WeightsOfIndeterminates( R );
         
@@ -2221,7 +2221,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     RP := homalgTable( R );
     
-    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
         weights := WeightsOfIndeterminates( R );
         
@@ -2271,7 +2271,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     w := Set( row_degrees );
     
-    if HasWeightsOfIndeterminates( R ) and Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
         weights := WeightsOfIndeterminates( R );
         

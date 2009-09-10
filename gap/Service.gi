@@ -84,6 +84,20 @@ end );
 #
 ####################################
 
+################################################################
+##
+## CAUTION: !!!
+##
+## the following procedures never take ring relations into
+## account; the user should call the following higher level
+## procedures instead:
+## . BasisOfRows/Columns
+## . DecideZero
+## . SyzygiesOfRows/Columns
+## . ReducedSyzygiesOfRows/Columns
+##
+################################################################
+
 ##
 InstallMethod( TriangularBasisOfRows,
         "for homalg matrices",
@@ -606,7 +620,11 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -630,7 +648,11 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -664,7 +686,11 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     if IsZero( C ) then
         
-        SetIsLeftRegularMatrix( M, true );
+        ## the procedure we are in now is the one of the ambient ring
+        ## which does not take ring relations into account
+        if not HasRingRelations( R ) then
+            SetIsLeftRegularMatrix( M, true );
+        fi;
         
         C := HomalgZeroMatrix( 0, NrRows( M ), R );
         
@@ -792,7 +818,11 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -816,7 +846,11 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -850,7 +884,11 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     if IsZero( C ) then
         
-        SetIsRightRegularMatrix( M, true );
+        ## the procedure we are in now is the one of the ambient ring
+        ## which does not take ring relations into account
+        if not HasRingRelations( R ) then
+            SetIsRightRegularMatrix( M, true );
+        fi;
         
         C := HomalgZeroMatrix( NrColumns( M ), 0, R );
         
@@ -1188,7 +1226,11 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -1212,7 +1254,11 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -1276,7 +1322,11 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -1300,7 +1350,11 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             

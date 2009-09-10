@@ -1470,6 +1470,28 @@ InstallMethod( AssociatedMap,
 end );
 
 ##
+InstallMethod( \*,
+        "for homalg maps",
+        [ IsHomalgRing, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( R, phi )
+    
+    return HomalgMap( R * MatrixOfMap( phi ), R * Source( phi ), R * Range( phi ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsHomalgRing ],
+        
+  function( phi, R )
+    
+    return R * phi;
+    
+end );
+
+##
 InstallMethod( UpdateModulesByMap,
         "for homalg maps",
         [ IsHomalgMap and IsIsomorphism ],

@@ -176,6 +176,34 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasIsRightRegularMatrix and HasIsEmptyMatrix, 0,
+        
+  function( M )
+    
+    if not IsEmptyMatrix( M ) and IsRightRegularMatrix( M ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasIsLeftRegularMatrix and HasIsEmptyMatrix, 0,
+        
+  function( M )
+    
+    if not IsEmptyMatrix( M ) and IsLeftRegularMatrix( M ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasZeroRows and HasNrRows, 0,
         
   function( M )

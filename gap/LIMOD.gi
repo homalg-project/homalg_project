@@ -194,17 +194,15 @@ InstallImmediateMethod( IsCyclic,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
-    local l, b, i, rel;
+    local l, p, rel;
     
-    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
+    l := ListOfPositionsOfKnownSetsOfRelations( M );
     
-    b := false;
-    
-    for i in [ 1.. Length( l ) ] do;
+    for p in l do;
         
-        rel := SetsOfRelations( M )!.(i);
+        rel := SetsOfRelations( M )!.(p);
         
-        if not IsString( rel ) then
+        if IsHomalgRelations( rel ) then
             if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 then
                 return true;
             fi;
@@ -250,29 +248,22 @@ InstallImmediateMethod( IsTorsion,
         IsFinitelyPresentedModuleRep, 0,
         
   function( M )
-    local l, b, i, rel;
+    local l, p, rel;
     
-    l := SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
+    l := ListOfPositionsOfKnownSetsOfRelations( M );
     
-    b := false;
-    
-    for i in [ 1.. Length( l ) ] do;
+    for p in l do;
         
-        rel := SetsOfRelations( M )!.(i);
+        rel := SetsOfRelations( M )!.(p);
         
-        if not IsString( rel ) then
+        if IsHomalgRelations( rel ) then
             if HasNrGenerators( rel ) and HasNrRelations( rel ) and
                NrGenerators( rel ) > NrRelations( rel ) then
-                b := true;
-                break;
+                return false;
             fi;
         fi;
         
     od;
-    
-    if b then
-        return false;
-    fi;
     
     TryNextMethod( );
     
@@ -1366,6 +1357,37 @@ InstallMethod( RankOfModule,
     if HasRankOfModule( M ) then
         return RankOfModule( M );
     fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RankOfModule,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local l, p, m;
+    
+    l := ListOfPositionsOfKnownSetsOfRelations( M );
+    
+    for p in l do
+        
+        m := MatrixOfRelations( M, p );
+        
+        if IsHomalgMatrix( m ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                if IsLeftRegularMatrix( m ) then
+                    return NrColumns( m ) - NrRows( m );
+                fi;
+            else
+                if IsRightRegularMatrix( m ) then
+                    return NrRows( m ) - NrColumns( m );
+                fi;
+            fi;
+        fi;
+    od;
     
     TryNextMethod( );
     

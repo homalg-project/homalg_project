@@ -384,17 +384,19 @@ InstallMethod( BasisOfModule,
         [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
-    local mat, bas;
+    local mat, bas, inj;
     
     if not IsBound( rel!.BasisOfModule ) then
         mat := MatrixOfRelations( rel );
         
         bas := BasisOfColumns( mat );
         
+        inj := HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas );
+        
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
-            if HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas ) then
+            if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
             return rel;
@@ -404,9 +406,14 @@ InstallMethod( BasisOfModule,
         fi;
     else
         bas := rel!.BasisOfModule;
+        inj := HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas );
     fi;
     
     bas := HomalgRelationsForRightModule( bas );
+    
+    if inj then
+        SetIsInjectivePresentation( bas, true );
+    fi;
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
     
@@ -419,17 +426,19 @@ InstallMethod( BasisOfModule,
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
-    local mat, bas;
+    local mat, bas, inj;
     
     if not IsBound( rel!.BasisOfModule ) then
         mat := MatrixOfRelations( rel );
         
         bas := BasisOfRows( mat );
         
+        inj := HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas );
+        
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
             rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
-            if HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas ) then
+            if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
             return rel;
@@ -439,9 +448,14 @@ InstallMethod( BasisOfModule,
         fi;
     else
         bas := rel!.BasisOfModule;
+        inj := HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas );
     fi;
     
     bas := HomalgRelationsForLeftModule( bas );
+    
+    if inj then
+        SetIsInjectivePresentation( bas, true );
+    fi;
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
     

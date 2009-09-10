@@ -286,6 +286,15 @@ DeclareOperation( "AddToMorphismAidMap",
 DeclareOperation( "AssociatedMap",
         [ IsHomalgMap ] );
 
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgMap ] );
+
+DeclareOperation( "*",
+        [ IsHomalgMap, IsHomalgRing ] );
+
+DeclareOperation( "AnIsomorphism",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "Subobject",
         [ IsHomalgMap ] );
 
@@ -335,7 +344,4 @@ DeclareOperation( "CompleteImageSquare",
 
 DeclareOperation( "UpdateModulesByMap",
         [ IsHomalgMap ] );
-
-DeclareOperation( "AnIsomorphism",
-        [ IsHomalgModule ] );
 

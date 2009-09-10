@@ -42,7 +42,7 @@ InstallMethod( BasisOfRows,			### defines: BasisOfRows (BasisOfModule (high-leve
     
     Mrel := UnionOfRows( M, rel );
     
-    return BasisOfRowModule( Mrel );
+    return GetRidOfObsoleteRows( BasisOfRowModule( Mrel ) );
     
 end );
 
@@ -74,7 +74,7 @@ InstallMethod( BasisOfColumns,			### defines: BasisOfColumns (BasisOfModule (hig
     
     Mrel := UnionOfColumns( M, rel );
     
-    return BasisOfColumnModule( Mrel );
+    return GetRidOfObsoleteColumns( BasisOfColumnModule( Mrel ) );
     
 end );
 
@@ -907,8 +907,12 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     nargs := Length( arg );
     
     if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
-        return CallFuncList( ReducedBasisOfModule,
-                       Concatenation( [ RelationsOfModule( arg[1] ) ], arg{[2..nargs]} ) );
+        M := CallFuncList( ReducedBasisOfModule,
+                     Concatenation( [ RelationsOfModule( arg[1] ) ], arg{[2..nargs]} ) );
+        if HasIsInjectivePresentation( M ) and IsInjectivePresentation( M ) then
+            RankOfModule( arg[1] );	## will be figured out by an immediate method in LIMOD
+        fi;
+        return M;
     fi;
     
     if not ( nargs > 0 and IsRelationsOfFinitelyPresentedModuleRep( arg[1] ) ) then

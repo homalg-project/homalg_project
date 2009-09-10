@@ -2065,7 +2065,7 @@ end );
 ##  <#GAPDoc Label="\*:MatrixBaseChange">
 ##  <ManSection>
 ##    <Oper Arg="R, mat" Name="\*" Label="copy a matrix over a different ring"/>
-##    <Oper Arg="mat, R" Name="\*"/>
+##    <Oper Arg="mat, R" Name="\*" Label="copy a matrix over a different ring (right)"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      An immutable evaluated &homalg; matrix over the &homalg; ring <A>R</A> having the

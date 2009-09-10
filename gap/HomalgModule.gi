@@ -265,6 +265,17 @@ InstallMethod( SetsOfRelations,
 end );
 
 ##
+InstallMethod( ListOfPositionsOfKnownSetsOfRelations,
+        "for homalg submodules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return SetsOfRelations( M )!.ListOfPositionsOfKnownSetsOfRelations;
+    
+end );
+
+##
 InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
@@ -483,8 +494,15 @@ InstallMethod( MatrixOfRelations,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
+    local rel;
     
-    return MatrixOfRelations( RelationsOfModule( M ) );
+    rel := RelationsOfModule( M );
+    
+    if IsHomalgRelations( rel ) then
+        return MatrixOfRelations( rel );
+    fi;
+    
+    return fail;
     
 end );
 
@@ -1663,25 +1681,14 @@ InstallOtherMethod( \*,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( J, K )
-    local super, left, R, genJ, genK;
+    local super, genJ, genK;
     
     super := SuperObject( J );
     
     if not IsIdenticalObj( super, SuperObject( K ) ) then
         Error( "the super objects must coincide\n" );
-    fi;
-    
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( J );
-    
-    R := HomalgRing( J );
-    
-    if ( ( left and not IsIdenticalObj( super, 1 * R ) ) or
-         ( not left and not IsIdenticalObj( super, R * 1 ) ) ) and
-       ( ( left and not IsIdenticalObj( super, ( 1 * R )^0 ) ) or
-         ( not left and not IsIdenticalObj( super, ( R * 1 )^0 ) ) ) then
-        
+    elif not ( ConstructedAsAnIdeal( J ) and ConstructedAsAnIdeal( K ) ) then
         Error( "can only multiply ideals in a common ring\n" );
-        
     fi;
     
     genJ := MatrixOfSubobjectGenerators( J );
@@ -2604,12 +2611,18 @@ InstallMethod( POW,
             R!.left_twists := rec( );
         fi;
         
-        On := HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
-        
-        On!.distinguished := true;
-        
         if not IsBound( R!.left_twists.(String( twist )) ) then
+            
+            On := HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
+            
+            On!.distinguished := true;
+            
+            if twist = 0 then
+                On!.not_twisted := true;
+            fi;
+            
             R!.left_twists.(String( twist )) := On;
+            
         fi;
         
         return R!.left_twists.(String( twist ));
@@ -2620,12 +2633,18 @@ InstallMethod( POW,
             R!.right_twists := rec( );
         fi;
         
-        On := HomalgFreeRightModuleWithDegrees( 1, R, -twist );
-        
-        On!.distinguished := true;
-        
         if not IsBound( R!.right_twists.(String( twist )) ) then
+            
+            On := HomalgFreeRightModuleWithDegrees( 1, R, -twist );
+            
+            On!.distinguished := true;
+            
+            if twist = 0 then
+                On!.not_twisted := true;
+            fi;
+            
             R!.right_twists.(String( twist )) := On;
+            
         fi;
         
         return R!.right_twists.(String( twist ));
@@ -2642,17 +2661,53 @@ InstallMethod( POW,
         [ IsFinitelyPresentedModuleRep, IsList ],
         
   function( M, twist )
-    local R;
+    local R, On;
     
     R := HomalgRing( M );
     
     if IsIdenticalObj( M, 1 * R ) then
         
-        return HomalgFreeLeftModuleWithDegrees( R, -twist );
+        if not IsBound( R!.left_twists ) then
+            R!.left_twists := rec( );
+        fi;
+        
+        if not IsBound( R!.left_twists.(String( twist )) ) then
+            
+            On := HomalgFreeLeftModuleWithDegrees( R, -twist );
+            
+            On!.distinguished := true;
+            
+            if Set( Flat( twist ) ) = [ 0 ] then
+                On!.not_twisted := true;
+            fi;
+            
+            R!.left_twists.(String( twist )) := On;
+            
+        fi;
+        
+        return R!.left_twists.(String( twist ));
         
     elif IsIdenticalObj( M, R * 1 ) then
         
-        return HomalgFreeRightModuleWithDegrees( R, -twist );
+        if not IsBound( R!.right_twists ) then
+            R!.right_twists := rec( );
+        fi;
+        
+        if not IsBound( R!.right_twists.(String( twist )) ) then
+            
+            On := HomalgFreeRightModuleWithDegrees( R, -twist );
+            
+            On!.distinguished := true;
+            
+            if Set( Flat( twist ) ) = [ 0 ] then
+                On!.not_twisted := true;
+            fi;
+            
+            R!.right_twists.(String( twist )) := On;
+            
+        fi;
+        
+        return R!.right_twists.(String( twist ));
         
     fi;
     
@@ -2685,18 +2740,18 @@ end );
 ##
 InstallMethod( \*,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsHomalgRing ], 10001,
+        [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep ], 10001,
         
-  function( M, R )
+  function( R, M )
     
-    return ImageModule( R * M!.map_having_subobject_as_its_image );
+    return ImageSubmodule( R * MapHavingSubobjectAsItsImage( M ) );
     
 end );
 
 ##  <#GAPDoc Label="\*:ModuleBaseChange">
 ##  <ManSection>
-##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring"/>
-##    <Oper Arg="R, M" Name="\*" Label="transfer a module over a different ring (left)"/>
+##    <Oper Arg="R, M" Name="\*" Label="transfer a module over a different ring"/>
+##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring (right)"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      Transfers the <M>S</M>-module <A>M</A> over the &homalg; ring <A>R</A>. This works only in three cases:
@@ -2710,21 +2765,25 @@ end );
 ##      CAUTION: So it not suited for general base change.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> Z4 := ZZ / [ 4 ];;
+##  gap> Z4 := ZZ / 4;;
 ##  gap> Display( Z4 );
 ##  Z/( 4 )
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
 ##  gap> M := LeftPresentation( M );
 ##  <A left module presented by 3 relations for 3 generators>
-##  gap> N := Z4 * M;
-##  <A rank 1 left module presented by 2 relations for 3 generators>
 ##  gap> Display( M );
 ##  Z/< 2 > + Z/< 3 > + Z/< 4 >
-##  gap> Display( N );
-##  Z/( 4 )/< 2 > + Z/( 4 )^(1 x 1)
 ##  gap> M;
 ##  <A torsion left module presented by 3 relations for 3 generators>
+##  gap> N := Z4 * M; ## or N := M * Z4;
+##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  gap> ByASmallerPresentation( N );
+##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  gap> Display( N );
+##  Z/( 4 )/< 2 > + Z/( 4 )^(1 x 1)
+##  gap> N;
+##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2732,41 +2791,87 @@ end );
 ##
 InstallMethod( \*,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRing ], 10001,
+        [ IsHomalgRing, IsFinitelyPresentedModuleRep ], 10001,
         
-  function( M, R )
-    local N;
+  function( R, M )
+    local mat, degrees, graded, left, distinguished, ow1, N;
     
     if IsIdenticalObj( HomalgRing( M ), R ) then
         TryNextMethod( );
     fi;
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if IsList( DegreesOfGenerators( M ) ) then
-            N := LeftPresentationWithDegrees( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
-        else
-            N := LeftPresentation( MatrixOfRelations( M ) * R );
-        fi;
-    else
-        if IsList( DegreesOfGenerators( M ) ) then
-            N := RightPresentationWithDegrees( MatrixOfRelations( M ) * R, DegreesOfGenerators( M ) );
-        else
-            N := RightPresentation( MatrixOfRelations( M ) * R );
+    mat := MatrixOfRelations( M );
+    degrees := DegreesOfGenerators( M );
+    
+    graded := IsList( degrees ) and degrees <> [ ];
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    distinguished := IsBound( M!.distinguished ) and M!.distinguished = true;
+    
+    if not distinguished then
+        mat := R * mat;
+        if HasRingRelations( R ) then
+            if left then
+                mat := GetRidOfObsoleteRows( mat );
+            else
+                mat := GetRidOfObsoleteColumns( mat );
+            fi;
         fi;
     fi;
     
-    return N * R;
+    if graded then
+        
+        WeightsOfIndeterminates( R );	## this eventually sets R!.WeightsCompatibleWithBaseRing
+        
+        if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), HomalgRing( M ) ) and
+           IsBound( R!.WeightsCompatibleWithBaseRing ) and R!.WeightsCompatibleWithBaseRing = true then
+            if ForAll( degrees, IsInt ) then
+                degrees := List( degrees, d -> [ d, 0 ] );
+            else
+                degrees := List( degrees, d -> Concatenation( d, [ 0 ] ) );
+            fi;
+        fi;
+        
+        if left then
+            if distinguished then
+                N := ( 1 * R )^degrees;
+            else
+                N := LeftPresentationWithDegrees( mat, degrees );
+            fi;
+        else
+            if distinguished then
+                N := ( R * 1 )^degrees;
+            else
+                N := RightPresentationWithDegrees( mat, degrees );
+            fi;
+        fi;
+    else
+        if left then
+            if distinguished then
+                N := 1 * R;
+            else
+                N := LeftPresentation( mat );
+            fi;
+        else
+            if distinguished then
+                N := R * 1;
+            else
+                N := RightPresentation( mat );
+            fi;
+        fi;
+    fi;
+    
+    return N;
     
 end );
 
 ##
 InstallMethod( \*,
         "for homalg modules",
-        [ IsHomalgRing, IsHomalgModule ], 10001,
+        [ IsHomalgModule, IsHomalgRing ], 10001,
         
-  function( R, M )
+  function( M, R )
     
-    return  M * R;
+    return  R * M;
     
 end );
 
@@ -3406,7 +3511,8 @@ InstallMethod( ViewObj,
         rk := RankOfModule( M );
         Print( " of rank ", rk );
         
-        if IsBound( M!.distinguished ) then
+        if IsBound( M!.distinguished ) and M!.distinguished = true and
+           not ( IsBound( M!.not_twisted ) and M!.not_twisted = true ) then
             d := DegreesOfGenerators( M );
             if IsList( d ) and Length( d ) = 1 and d[1] <> 0 then
                 Print( " shifted by ", -d[1] );

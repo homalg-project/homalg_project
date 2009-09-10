@@ -573,10 +573,10 @@ DeclareOperation( "POW",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "*",
-        [ IsHomalgModule, IsHomalgRing ] );
+        [ IsHomalgRing, IsHomalgModule ] );
 
 DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgModule ] );
+        [ IsHomalgModule, IsHomalgRing ] );
 
 DeclareOperation( "Subobject",
         [ IsHomalgMatrix, IsHomalgModule ] );
@@ -605,7 +605,7 @@ DeclareOperation( "SetsOfGenerators",
 DeclareOperation( "SetsOfRelations",
         [ IsHomalgModule ] );
 
-DeclareOperation( "NumberOfKnownPresentations",
+DeclareOperation( "ListOfPositionsOfKnownSetsOfRelations",
         [ IsHomalgModule ] );
 
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
