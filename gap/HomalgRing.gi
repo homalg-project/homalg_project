@@ -927,6 +927,10 @@ InstallMethod( ParseListOfIndeterminates,
     
     err := function( ) Error( "a list of variable strings or range strings is expected\n" ); end;
     
+    if ForAll( _indets, IsRingElement and HasName ) then
+        return ParseListOfIndeterminates( List( _indets, Name ) );
+    fi;
+    
     if not ForAll( _indets, e -> IsStringRep( e ) or ( IsList( e ) and ForAll( e, IsInt ) ) ) then
         TryNextMethod( );
     fi;

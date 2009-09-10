@@ -202,6 +202,56 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( DecideZero,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, subs )
+    local rel, red;
+    
+    if NrColumns( subs ) = 1 then
+        rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), subs ) );
+        red := DecideZeroRows( M, rel );
+    elif NrRows( subs ) = 1 then
+        rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), subs ) );
+        red := DecideZeroColumns( M, rel );
+    else
+        Error( "either the number of columns or the number of rows of the matrix of relations must be 1\n" );
+    fi;
+    
+    return DecideZero( red );
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, subs )
+    local R, rel;
+    
+    R := HomalgRing( M );
+    
+    rel := List( subs,
+                 function( r )
+                   if IsString( r ) then
+                       return HomalgRingElement( r, R );
+                   elif IsRingElement( r ) then
+                       return r;
+                   else
+                       Error( r, " is neither a string nor a ring element\n" );
+                   fi;
+                 end );
+    
+    ## we prefer (to reduce the) rows
+    rel := HomalgMatrix( rel, Length( rel ), 1, R );
+    
+    return DecideZero( M, rel );
+    
+end );
+
+##
 InstallMethod( SyzygiesOfRows,			### defines: SyzygiesOfRows (SyzygiesGenerators (high-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],

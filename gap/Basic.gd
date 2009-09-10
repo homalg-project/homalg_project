@@ -31,6 +31,12 @@ DeclareOperation( "BasisOfColumns",
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "DecideZero",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "DecideZero",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "SyzygiesOfRows",
         [ IsHomalgMatrix ] );
 

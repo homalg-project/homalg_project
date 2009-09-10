@@ -1239,6 +1239,17 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( DecideZero,
+        "for homalg modules",
+        [ IsHomalgMatrix, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( mat, N )
+    
+    return DecideZero( mat, MatrixOfGenerators( N ) );
+    
+end );
+
+##
 InstallMethod( UnionOfRelations,
         "for homalg modules",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
@@ -2600,10 +2611,26 @@ InstallMethod( POW,
         "constructor for homalg graded free modules of rank 1",
         [ IsFinitelyPresentedModuleRep, IsInt ],
         
-  function( M, twist )
-    local R, On;
+  function( M, twist )		## M must be either 1 * R or R * 1
+    local R, On, weights, w1, t;
     
     R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    if weights = [ ] then
+        Error( "an empty list of weights of indeterminates\n" );
+    fi;
+    
+    w1 := weights[1];
+    
+    if IsInt( w1 ) then
+        t := [ twist ];
+    elif IsList( w1 ) then
+        t := [ ListWithIdenticalEntries( Length( w1 ), twist ) ];
+    else
+        Error( "invalid first weight\n" );
+    fi;
     
     if IsIdenticalObj( M, 1 * R ) then
         
@@ -2611,9 +2638,9 @@ InstallMethod( POW,
             R!.left_twists := rec( );
         fi;
         
-        if not IsBound( R!.left_twists.(String( twist )) ) then
+        if not IsBound( R!.left_twists.(String( t )) ) then
             
-            On := HomalgFreeLeftModuleWithDegrees( 1, R, -twist );
+            On := HomalgFreeLeftModuleWithDegrees( R, -t );
             
             On!.distinguished := true;
             
@@ -2621,11 +2648,11 @@ InstallMethod( POW,
                 On!.not_twisted := true;
             fi;
             
-            R!.left_twists.(String( twist )) := On;
+            R!.left_twists.(String( t )) := On;
             
         fi;
         
-        return R!.left_twists.(String( twist ));
+        return R!.left_twists.(String( t ));
         
     elif IsIdenticalObj( M, R * 1 ) then
         
@@ -2633,9 +2660,9 @@ InstallMethod( POW,
             R!.right_twists := rec( );
         fi;
         
-        if not IsBound( R!.right_twists.(String( twist )) ) then
+        if not IsBound( R!.right_twists.(String( t )) ) then
             
-            On := HomalgFreeRightModuleWithDegrees( 1, R, -twist );
+            On := HomalgFreeRightModuleWithDegrees( R, -t );
             
             On!.distinguished := true;
             
@@ -2643,11 +2670,11 @@ InstallMethod( POW,
                 On!.not_twisted := true;
             fi;
             
-            R!.right_twists.(String( twist )) := On;
+            R!.right_twists.(String( t )) := On;
             
         fi;
         
-        return R!.right_twists.(String( twist ));
+        return R!.right_twists.(String( t ));
         
     fi;
     
@@ -3043,6 +3070,80 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+InstallMethod( LeftSubmodule,
+        "constructor for homalg graded submodules",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return FullSubmodule( 1 * R );
+    
+end );
+
+##
+InstallMethod( LeftSubmodule,
+        "constructor for homalg ideals",
+        [ IsList ],
+        
+  function( gen )
+    local R;
+    
+    if gen = [ ] then
+        Error( "an empty list of ring elements\n" );
+    elif not ForAll( gen, IsRingElement ) then
+        Error( "a list of ring elements is expected\n" );
+    fi;
+    
+    R := HomalgRing( gen[1] );
+    
+    return LeftSubmodule( HomalgMatrix( gen, Length( gen ), 1, R ) );
+    
+end );
+
+##
+InstallMethod( LeftSubmodule,
+        "constructor for homalg ideals",
+        [ IsList, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    if gen = [ ] then
+        return FullSubmodule( 1 * R );
+    fi;
+    
+    Gen := List( gen,
+                 function( r )
+                   if IsString( r ) then
+                       return HomalgRingElement( r, R );
+                   elif IsRingElement( r ) then
+                       return r;
+                   else
+                       Error( r, " is neither a string nor a ring element\n" );
+                   fi;
+                 end );
+    
+    return LeftSubmodule( HomalgMatrix( Gen, Length( Gen ), 1, R ) );
+    
+end );
+
+##
+InstallMethod( LeftSubmodule,
+        "constructor for homalg ideals",
+        [ IsString, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    Gen := ShallowCopy( gen );
+    
+    RemoveCharacters( Gen, "[]" );
+    
+    return LeftSubmodule( SplitString( Gen, "," ), R );
+    
+end );
+
 ##  <#GAPDoc Label="RightSubmodule">
 ##  <ManSection>
 ##    <Oper Arg="mat" Name="RightSubmodule" Label="constructor for right submodules"/>
@@ -3079,6 +3180,344 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
+##
+InstallMethod( RightSubmodule,
+        "constructor for homalg graded submodules",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return FullSubmodule( R * 1 );
+    
+end );
+
+##
+InstallMethod( RightSubmodule,
+        "constructor for homalg ideals",
+        [ IsList ],
+        
+  function( gen )
+    local R;
+    
+    if gen = [ ] then
+        Error( "an empty list of ring elements\n" );
+    elif not ForAll( gen, IsRingElement ) then
+        Error( "a list of ring elements is expected\n" );
+    fi;
+    
+    R := HomalgRing( gen[1] );
+    
+    return RightSubmodule( HomalgMatrix( gen, 1, Length( gen ), R ) );
+    
+end );
+
+##
+InstallMethod( RightSubmodule,
+        "constructor for homalg ideals",
+        [ IsList, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    if gen = [ ] then
+        return FullSubmodule( R * 1 );
+    fi;
+    
+    Gen := List( gen,
+                 function( r )
+                   if IsString( r ) then
+                       return HomalgRingElement( r, R );
+                   elif IsRingElement( r ) then
+                       return r;
+                   else
+                       Error( r, " is neither a string nor a ring element\n" );
+                   fi;
+                 end );
+    
+    return RightSubmodule( HomalgMatrix( Gen, 1, Length( Gen ), R ) );
+    
+end );
+
+##
+InstallMethod( RightSubmodule,
+        "constructor for homalg ideals",
+        [ IsString, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    Gen := ShallowCopy( gen );
+    
+    RemoveCharacters( Gen, "[]" );
+    
+    return RightSubmodule( SplitString( Gen, "," ), R );
+    
+end );
+
+##
+InstallMethod( GradedLeftSubmodule,
+        "constructor for homalg graded submodules",
+        [ IsHomalgMatrix ],
+        
+  function( gen )
+    local R;
+    
+    R := HomalgRing( gen );
+    
+    return Subobject( gen, ( NrColumns( gen ) * R )^0 );
+    
+end );
+
+##
+InstallMethod( GradedLeftSubmodule,
+        "constructor for homalg graded submodules",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return GradedLeftSubmodule( HomalgIdentityMatrix( 1, R ) );
+    
+end );
+
+##
+InstallMethod( GradedLeftSubmodule,
+        "constructor for homalg ideals",
+        [ IsList ],
+        
+  function( gen )
+    local R;
+    
+    if gen = [ ] then
+        Error( "an empty list of ring elements\n" );
+    elif not ForAll( gen, IsRingElement ) then
+        Error( "a list of ring elements is expected\n" );
+    fi;
+    
+    R := HomalgRing( gen[1] );
+    
+    return GradedLeftSubmodule( HomalgMatrix( gen, Length( gen ), 1, R ) );
+    
+end );
+
+##
+InstallMethod( GradedLeftSubmodule,
+        "constructor for homalg ideals",
+        [ IsList, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    if gen = [ ] then
+        return GradedLeftSubmodule( R );
+    fi;
+    
+    Gen := List( gen,
+                 function( r )
+                   if IsString( r ) then
+                       return HomalgRingElement( r, R );
+                   elif IsRingElement( r ) then
+                       return r;
+                   else
+                       Error( r, " is neither a string nor a ring element\n" );
+                   fi;
+                 end );
+    
+    return GradedLeftSubmodule( HomalgMatrix( Gen, Length( Gen ), 1, R ) );
+    
+end );
+
+##
+InstallMethod( GradedLeftSubmodule,
+        "constructor for homalg ideals",
+        [ IsString, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    Gen := ShallowCopy( gen );
+    
+    RemoveCharacters( Gen, "[]" );
+    
+    return GradedLeftSubmodule( SplitString( Gen, "," ), R );
+    
+end );
+
+##
+InstallMethod( GradedRightSubmodule,
+        "constructor for homalg graded submodules",
+        [ IsHomalgMatrix ],
+        
+  function( gen )
+    local R;
+    
+    R := HomalgRing( gen );
+    
+    return Subobject( gen, ( R * NrRows( gen ) )^0 );
+    
+end );
+
+##
+InstallMethod( GradedRightSubmodule,
+        "constructor for homalg graded submodules",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return GradedRightSubmodule( HomalgIdentityMatrix( 1, R ) );
+    
+end );
+
+##
+InstallMethod( GradedRightSubmodule,
+        "constructor for homalg ideals",
+        [ IsList ],
+        
+  function( gen )
+    local R;
+    
+    if gen = [ ] then
+        Error( "an empty list of ring elements\n" );
+    elif not ForAll( gen, IsRingElement ) then
+        Error( "a list of ring elements is expected\n" );
+    fi;
+    
+    R := HomalgRing( gen[1] );
+    
+    return GradedRightSubmodule( HomalgMatrix( gen, 1, Length( gen ), R ) );
+    
+end );
+
+##
+InstallMethod( GradedRightSubmodule,
+        "constructor for homalg ideals",
+        [ IsList, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    if gen = [ ] then
+        return GradedRightSubmodule( R );
+    fi;
+    
+    Gen := List( gen,
+                 function( r )
+                   if IsString( r ) then
+                       return HomalgRingElement( r, R );
+                   elif IsRingElement( r ) then
+                       return r;
+                   else
+                       Error( r, " is neither a string nor a ring element\n" );
+                   fi;
+                 end );
+    
+    return GradedRightSubmodule( HomalgMatrix( Gen, 1, Length( Gen ), R ) );
+    
+end );
+
+##
+InstallMethod( GradedRightSubmodule,
+        "constructor for homalg ideals",
+        [ IsString, IsHomalgRing ],
+        
+  function( gen, R )
+    local Gen;
+    
+    Gen := ShallowCopy( gen );
+    
+    RemoveCharacters( Gen, "[]" );
+    
+    return GradedRightSubmodule( SplitString( Gen, "," ), R );
+    
+end );
+
+##
+InstallMethod( LeftIdealOfMinors,
+        "constructor for homalg ideals",
+        [ IsInt, IsHomalgMatrix ],
+        
+  function( d, M )
+    
+    return LeftSubmodule( Minors( d, M ) );
+    
+end );
+
+##
+InstallMethod( LeftIdealOfMaximalMinors,
+        "constructor for homalg ideals",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return LeftSubmodule( MaximalMinors( M ) );
+    
+end );
+
+##
+InstallMethod( RightIdealOfMinors,
+        "constructor for homalg ideals",
+        [ IsInt, IsHomalgMatrix ],
+        
+  function( d, M )
+    
+    return RightSubmodule( Minors( d, M ) );
+    
+end );
+
+##
+InstallMethod( RightIdealOfMaximalMinors,
+        "constructor for homalg ideals",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return RightSubmodule( MaximalMinors( M ) );
+    
+end );
+
+##
+InstallMethod( GradedLeftIdealOfMinors,
+        "constructor for homalg ideals",
+        [ IsInt, IsHomalgMatrix ],
+        
+  function( d, M )
+    
+    return GradedLeftSubmodule( Minors( d, M ) );
+    
+end );
+
+##
+InstallMethod( GradedLeftIdealOfMaximalMinors,
+        "constructor for homalg ideals",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GradedLeftSubmodule( MaximalMinors( M ) );
+    
+end );
+
+##
+InstallMethod( GradedRightIdealOfMinors,
+        "constructor for homalg ideals",
+        [ IsInt, IsHomalgMatrix ],
+        
+  function( d, M )
+    
+    return GradedRightSubmodule( Minors( d, M ) );
+    
+end );
+
+##
+InstallMethod( GradedRightIdealOfMaximalMinors,
+        "constructor for homalg ideals",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GradedRightSubmodule( MaximalMinors( M ) );
+    
+end );
 
 ## create a globally defined ring of integers
 HOMALG.ZZ := HomalgRingOfIntegers( );

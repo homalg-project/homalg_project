@@ -117,6 +117,7 @@
 <#Include Label="Eval:IsZeroMatrix">
 <#Include Label="NrRows:meth">
 <#Include Label="NrColumns:meth">
+<#Include Label="Determinant:meth">
 <#Include Label="ZeroRows:meth">
 <#Include Label="ZeroColumns:meth">
 <#Include Label="EQ:matrix_method">

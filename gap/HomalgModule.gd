@@ -590,7 +590,73 @@ DeclareOperation( "Subobject",
 DeclareOperation( "LeftSubmodule",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "LeftSubmodule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "LeftSubmodule",
+        [ IsList ] );
+
+DeclareOperation( "LeftSubmodule",
+        [ IsList, IsHomalgRing ] );
+
 DeclareOperation( "RightSubmodule",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightSubmodule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "RightSubmodule",
+        [ IsList ] );
+
+DeclareOperation( "RightSubmodule",
+        [ IsList, IsHomalgRing ] );
+
+DeclareOperation( "GradedLeftSubmodule",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GradedLeftSubmodule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "GradedLeftSubmodule",
+        [ IsList ] );
+
+DeclareOperation( "GradedLeftSubmodule",
+        [ IsList, IsHomalgRing ] );
+
+DeclareOperation( "GradedRightSubmodule",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GradedRightSubmodule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "GradedRightSubmodule",
+        [ IsList ] );
+
+DeclareOperation( "GradedRightSubmodule",
+        [ IsList, IsHomalgRing ] );
+
+DeclareOperation( "LeftIdealOfMinors",
+        [ IsInt, IsHomalgMatrix ] );
+
+DeclareOperation( "LeftIdealOfMaximalMinors",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightIdealOfMinors",
+        [ IsInt, IsHomalgMatrix ] );
+
+DeclareOperation( "RightIdealOfMaximalMinors",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GradedLeftIdealOfMinors",
+        [ IsInt, IsHomalgMatrix ] );
+
+DeclareOperation( "GradedLeftIdealOfMaximalMinors",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GradedRightIdealOfMinors",
+        [ IsInt, IsHomalgMatrix ] );
+
+DeclareOperation( "GradedRightIdealOfMaximalMinors",
         [ IsHomalgMatrix ] );
 
 # global functions:

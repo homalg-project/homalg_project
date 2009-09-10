@@ -1133,6 +1133,44 @@ InstallMethod( NrColumns,			### defines: NrColumns
     
 end );
 
+##  <#GAPDoc Label="Determinant:meth">
+##  <ManSection>
+##    <Meth Arg="A" Name="Determinant" Label="for matrices"/>
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      Return the determinant of <A>A</A>. <Br/>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Determinant</C> is bound then
+##      <M>RP</M>!.<C>Determinant</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( Determinant,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Determinant) then
+        return RingElementConstructor( R )( RP!.Determinant( C ), R );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called Determinant in the homalgTable to apply on a non-internal matrix\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    return Determinant( Eval( C )!.matrix );
+    
+end );
+
 ####################################
 #
 # methods for operations (you probably want to replace for an external CAS):

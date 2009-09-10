@@ -670,6 +670,9 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgMatrix, IsHomalgRing ] );
 
+DeclareOperation( "RingMap",
+        [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
@@ -867,6 +870,12 @@ DeclareOperation( "POW",			## this must remain, since an element in IsHomalgMatr
         [ IsHomalgMatrix, IsInt ] );		## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "DiagonalEntries",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "Minors",
+        [ IsInt, IsHomalgMatrix ] );
+
+DeclareOperation( "MaximalMinors",
         [ IsHomalgMatrix ] );
 
 ####################################

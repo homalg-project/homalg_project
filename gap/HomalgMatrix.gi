@@ -1161,6 +1161,50 @@ InstallMethod( DiagonalEntries,
 end );
 
 ##
+InstallMethod( Minors,
+        "of homalg matrices",
+        [ IsInt, IsHomalgMatrix ],
+        
+  function( d, M )
+    local R, r, c, l;
+    
+    R := HomalgRing( M );
+    
+    if d = 0 then
+        return [ HomalgIdentityMatrix( 1, R ) ];
+    elif d < 0 then
+        Error( "the dimension of minors must be non-negative\n" );
+    fi;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    if d > r then
+        Error( "the dimension of minors must less or equal to the number of rows\n" );
+    elif d > c then
+        Error( "the dimension of minors must less or equal to the number of columns\n" );
+    fi;
+    
+    l := Cartesian( Combinations( [ 1 .. r ], d ), Combinations( [ 1 .. c ], d ) );
+    
+    l := List( l, rc -> Determinant( CertainColumns( CertainRows( M, rc[1] ), rc[2] ) ) );
+    
+    return l;
+    
+end );
+
+##
+InstallMethod( MaximalMinors,
+        "of homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return Minors( Minimum( NrRows( M ), NrColumns( M ) ), M );
+    
+end );
+
+##
 InstallMethod( SetIsMutableMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsBool ],
@@ -2170,6 +2214,17 @@ InstallMethod( \*,
   function( M, R )
     
     return R * M;
+    
+end );
+
+##
+InstallMethod( RingMap,
+        "for homalg rings",
+        [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ],
+        
+  function( images, S, T )
+    
+    return RingMap( EntriesOfHomalgMatrix( images ), S, T );
     
 end );
 
