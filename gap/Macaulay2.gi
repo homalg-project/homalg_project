@@ -23,13 +23,15 @@ InstallValue( HOMALG_IO_Macaulay2,
             BUFSIZE := 1024,
             READY := "!$%&/(",
             SEARCH_READY_TWICE := true,	## a Macaulay2 specific
-            variable_name := "o",	## a Macaulay2 specific ;-): o2 = 5 -> o1 = 5 : a = 7 -> o2 = 7 : o2 -> o3 = 5
+            #variable_name := "o",	## a Macaulay2 specific ;-): o2 = 5 -> o1 = 5 : a = 7 -> o2 = 7 : o2 -> o3 = 5  # definition of macros spoils numbering!
+            variable_name := "oo",
             CUT_POS_BEGIN := -1,	## these values are
             CUT_POS_END := -1,		## not important for Macaulay2
             eoc_verbose := "",
             eoc_quiet := ";",
             setring := _Macaulay2_SetRing,	## a Macaulay2 specific
             setinvol := _Macaulay2_SetInvolution,## a Macaulay2 specific
+            only_warning := "--warning",	## a Macaulay2 specific
             define := "=",
             prompt := "\033[01mM2>\033[0m ",
             output_prompt := "\033[1;30;43m<M2\033[0m ",
@@ -115,29 +117,15 @@ InstallGlobalFunction( InitializeMacaulay2Tools,
           BasisOfRowsCoeff, BasisOfColumnsCoeff,
           DecideZeroRows, DecideZeroColumns,
           DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzForHomalg,
           SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
-          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2,
-          Deg, MultiDeg,
-          DegreesOfEntries, WeightedDegreesOfEntries,
-          MultiWeightedDegreesOfEntries,
-          NonTrivialDegreePerRow, NonTrivialWeightedDegreePerRow,
-          NonTrivialMultiWeightedDegreePerRow,
-          NonTrivialDegreePerRowWithColPosition,
-          NonTrivialWeightedDegreePerRowWithColPosition,
-          NonTrivialMultiWeightedDegreePerRowWithColPosition,
-          NonTrivialDegreePerColumn, NonTrivialWeightedDegreePerColumn,
-          NonTrivialMultiWeightedDegreePerColumn,
-          NonTrivialDegreePerColumnWithRowPosition,
-          NonTrivialWeightedDegreePerColumnWithRowPosition,
-          NonTrivialMultiWeightedDegreePerColumnWithRowPosition;
+          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2;
     
     IsIdentityMatrix := "\n\
 IsIdentityMatrix = M -> (\n\
   local r, R;\n\
   r = (numgens target M)-1;\n\
   R = ring M;\n\
-  all(toList(0..numgens(source(M))-1), i->toList(set((entries M_i)_{0..i-1, i+1..r})) == {0_R} and entries (M^{i})_{i} == {{1_R}})
+  all(toList(0..numgens(source(M))-1), i->toList(set((entries M_i)_{0..i-1, i+1..r})) == {0_R} and entries (M^{i})_{i} == {{1_R}})\n\
 );\n\n";
     
     IsDiagonalMatrix := "\n\
@@ -145,57 +133,57 @@ IsDiagonalMatrix = M -> (\n\
   local r, R;\n\
   r = (numgens target M)-1;\n\
   R = ring M;\n\
-  all(toList(0..numgens(source(M))-1), i->toList(set((entries M_i)_{0..i-1, i+1..r})) == {0_R})
+  all(toList(0..numgens(source(M))-1), i->toList(set((entries M_i)_{0..i-1, i+1..r})) == {0_R})\n\
 );\n\n";
     
     ZeroRows := "\n\
 ZeroRows = M -> (\n\
   local R;\n\
   R = ring M;\n\
-  concatenate between(\",\", apply(\n\
+  concatenate({\"[\"} | between(\",\", apply(\n\
     select(toList(1..(numgens target M)), i->toList(set(flatten entries M^{i-1})) == {0_R}),\n\
-      toString))\n\
+      toString)) | {\"]\"})\n\
 );\n\n";
     
     ZeroColumns := "\n\
 ZeroColumns = M -> (\n\
   local R;\n\
   R = ring M;\n\
-  concatenate between(\",\", apply(\n\
+  concatenate({\"[\"} | between(\",\", apply(\n\
     select(toList(1..(numgens source M)), i->toList(set(entries M_(i-1))) == {0_R}),\n\
-      toString))\n\
+      toString)) | {\"]\"})\n\
 );\n\n";
     
     GetColumnIndependentUnitPositions := "\n\
 GetColumnIndependentUnitPositions = (M, l) -> (\n\
   local p,r,rest;\n\
   rest = reverse toList(0..(numgens source M)-1);\n\
-  concatenate between(\",\", apply(\n\
+  concatenate({\"[\"} | between(\",\",\n\
     for j in toList(0..(numgens target M)-1) list (\n\
       r = flatten entries M^{j};\n\
-      p = for i in rest list ( if not isUnit(r#i) then continue; rest = select(rest, k->r#k == 0); break {j+1, i+1} );\n\
+      p = for i in rest list ( if not isUnit(r#i) then continue; rest = select(rest, k->zero(r#k)); break {concatenate({\"[\", toString(j+1), \",\", toString(i+1), \"]\"})});\n\
       if p == {} then continue;\n\
-      p\n\
-    ), toString))\n\
+      p#0\n\
+    )) | {\"]\"})\n\
 );\n\n";
     
     GetRowIndependentUnitPositions := "\n\
 GetRowIndependentUnitPositions = (M, l) -> (\n\
   local c,p,rest;\n\
   rest = reverse toList(0..(numgens target M)-1);\n\
-  concatenate between(\",\", apply(\n\
+  concatenate({\"[\"} | between(\",\",\n\
     for j in toList(0..(numgens source M)-1) list (\n\
       c = entries M_j;\n\
-      p = for i in rest list ( if not isUnit(c#i) then continue; rest = select(rest, k->c#k == 0); break {i+1, j+1} );\n\
+      p = for i in rest list ( if not isUnit(c#i) then continue; rest = select(rest, k->zero(c#k)); break {concatenate({\"[\", toString(j+1), \",\", toString(i+1), \"]\"})});\n\
       if p == {} then continue;\n\
-      p\n\
-    ), toString))\n\
+      p#0\n\
+    )) | {\"]\"})\n\
 );\n\n";
     
     GetUnitPosition := "\n\
-GetUnitPosition = (M, pos_list) -> (\n\
+GetUnitPosition = (M, l) -> (\n\
   local i,p,rest;\n\
-  rest = toList(1..(numgens source M)) - set(pos_list);\n\
+  rest = toList(1..(numgens source M)) - set(l);\n\
   i = 0;\n\
   for r in entries(M) list (\n\
     i = i+1;\n\
@@ -211,311 +199,92 @@ GetCleanRowsPositions = (M, l) -> (\n\
   local R;\n\
   R = ring M;\n\
   concatenate between(\",\", apply(\n\
-    for i in toList(0..(numgens target M)-1) list ( if not any(flatten entries M^{i}, k->k == 1_R) then continue; i+1 ),\n\
+    for i in toList(0..(numgens target M)-1) list ( if not any((flatten entries M^{i})_l, k->k == 1_R) then continue; i+1 ),\n\
       toString))\n\
 );\n\n";
     
     BasisOfRowModule := "\n\
-BasisOfRowModule = M -> entries gens gb image matrix transpose M;\n\n";
+BasisOfRowModule = M -> (\n\
+  local G,R;\n\
+  R = ring M;\n\
+  G = gens gb image matrix transpose M;\n\
+  transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
+);\n\n";
+    # forget degrees!
     
     BasisOfColumnModule := "\n\
-BasisOfColumnModule = M -> entries gens gb image matrix M;\n\n";
-    
-#    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
-#    ## and for plural to work one would need to define B=transpose(transpose(T)*transpose(M)), which is expensive!!
-#    BasisOfRowsCoeff := "\n\
-#proc BasisOfRowsCoeff (matrix M)\n\
-#{\n\
-#  matrix T;\n\
-#  matrix B = matrix(liftstd(M,T));\n\
-#  list l = transpose(transpose(T)*transpose(M)),T;\n\
-#  return(l)\n\
-#}\n\n";
+BasisOfColumnModule = M -> (\n\
+  local G,R;\n\
+  R = ring M;\n\
+  G = gens gb image matrix M;\n\
+  map(R^(numgens target G), R^(numgens source G), G)\n\
+);\n\n";
+    # forget degrees!
     
     BasisOfRowsCoeff := "\n\
-proc BasisOfRowsCoeff (matrix M)\n\
-{\n\
-  matrix B = std(M);\n\
-  matrix T = lift(M,B); //never use stdlift, also because it might differ from std!!!\n\
-  list l = B,T;\n\
-  return(l)\n\
-}\n\n";
+BasisOfRowsCoeff = M -> (\n\
+  local G,R,T;\n\
+  R = ring M;\n\
+  G = gb(image matrix transpose M, ChangeMatrix=>true);\n\
+  T = getChangeMatrix G;\n\
+  (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
+   transpose map(R^(numgens target T), R^(numgens source T), T))\n\
+);\n\n";
+    # forget degrees!
     
     BasisOfColumnsCoeff := "\n\
-proc BasisOfColumnsCoeff (matrix M)\n\
-{\n\
-  list l = BasisOfRowsCoeff(Involution(M));\n\
-  matrix B = l[1];\n\
-  matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
-  return(l);\n\
-}\n\n";
+BasisOfColumnsCoeff = M -> (\n\
+  local G,T;\n\
+  G = gb(image matrix M, ChangeMatrix=>true);\n\
+  T = getChangeMatrix G;\n\
+  (map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
+   map(R^(numgens target T), R^(numgens source T), T))\n\
+);\n\n";
+    # forget degrees!
     
     DecideZeroRows := "\n\
-proc DecideZeroRows (matrix A, matrix B)\n\
-{\n\
-  return(reduce(A,B));\n\
-}\n\n";
+DecideZeroRows = (A, B) -> (\n\
+  Involution(remainder(matrix Involution(A), matrix Involution(B)))\n\
+);\n\n";
     
     DecideZeroColumns := "\n\
-proc DecideZeroColumns (matrix A, matrix B)\n\
-{\n\
-  return(Involution(reduce(Involution(A),Involution(B))));\n\
-}\n\n";
-    
-#todo: read part of the unit matrix in singular help!
-#      it is ignored right now.
-# division(A^t,B^t) returns (TT^t, M^t, U^t) with
-#                A^t*U^t = B^t*TT^t + M^t
-# <=> (ignore U) M^t = A^t - B^t*TT^tr
-# <=>            M   = A   + (-TT) * B
-# <=> (T:=-TT)   M   = A   + T * B
-#M^t=A^t-T^t*B^t
+DecideZeroColumns = (A, B) -> (\n\
+  remainder(matrix A, matrix B)\n\
+);\n\n";
     
     DecideZeroRowsEffectively := "\n\
-proc DecideZeroRowsEffectively (matrix A, matrix B)\n\
-{\n\
-  matrix M = reduce(A,B);\n\
-  matrix T = lift(B,M-A);\n\
-  list l = M,T;\n\
-  return(l);\n\
-}\n\n";
+DecideZeroRowsEffectively = (A, B) -> ( local q,r;\n\
+  (q, r) = quotientRemainder(matrix Involution(A), matrix Involution(B));\n\
+  (Involution(r), -Involution(q))\n\
+);\n\n";
     
     DecideZeroColumnsEffectively := "\n\
-proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
-{\n\
-  list l = DecideZeroRowsEffectively(Involution(A),Involution(B));\n\
-  matrix B = l[1];\n\
-  matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
-  return(l);\n\
-}\n\n";
-    
-    SyzForHomalg := "\n\
-proc SyzForHomalg (matrix M)\n\
-{\n\
-  list l = nres(M,2);\n\
-  return(matrix(l[2]));\n\
-  // return(syz(M));\n\
-}\n\n";
+DecideZeroColumnsEffectively = (A, B) -> ( local q,r;\n\
+  (q, r) = quotientRemainder(matrix A, matrix B);\n\
+  (r, -q)\n\
+);\n\n";
     
     SyzygiesGeneratorsOfRows := "\n\
-proc SyzygiesGeneratorsOfRows (matrix M)\n\
-{\n\
-  return(SyzForHomalg(M));\n\
-}\n\n";
+SyzygiesGeneratorsOfRows = M -> Involution(SyzygiesGeneratorsOfColumns(Involution(M)));\n\n";
     
     SyzygiesGeneratorsOfRows2 := "\n\
-proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
-{\n\
-  int r = nrows(M1);\n\
-  int c1 = ncols(M1);\n\
-  int c2 = ncols(M2);\n\
-  matrix M[r][c1+c2] = concat(M1,M2);\n\
-  matrix s = SyzForHomalg(M);\n\
-  s = submat(s,1..c1,1..ncols(s));\n\
-  return(std(s));\n\
-}\n\n";
+SyzygiesGeneratorsOfRows2 = (M, N) -> Involution(SyzygiesGeneratorsOfColumns2(Involution(M), Involution(N)));\n\n";
     
     SyzygiesGeneratorsOfColumns := "\n\
-proc SyzygiesGeneratorsOfColumns (matrix M)\n\
-{\n\
-  return(Involution(SyzForHomalg(Involution(M))));\n\
-}\n\n";
+SyzygiesGeneratorsOfColumns = M -> (\n\
+  local R,S;\n\
+  R = ring M;\n\
+  S = syz M;\n\
+  map(R^(numgens target S), R^(numgens source S), S)\n\
+);\n\n";
     
     SyzygiesGeneratorsOfColumns2 := "\n\
-proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
-{\n\
-  return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
-}\n\n";
-    
-    Deg := "\n\
-ring r;\n\
-if ( deg(0,(1,1,1)) > 0 )  // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
-{ proc Deg (pol,weights)\n\
-  {\n\
-    if ( pol == 0 )\n\
-    {\n\
-      return(deg(0));\n\
-    }\n\
-    return(deg(pol,weights));\n\
-  }\n\
-}\n\
-else\n\
-{ proc Deg (pol,weights)\n\
-  {\n\
-    return(deg(pol,weights));\n\
-  }\n\
-}\n\
-kill r;\n\n";
-    
-    MultiDeg := "\n\
-proc MultiDeg (pol,weights)\n\
-{\n\
-  int mul=size(weights);\n\
-  intmat m[1][mul];\n\
-  for (int i=1; i<=mul; i=i+1)\n\
-  {\n\
-    m[1,i]=Deg(pol,weights[i]);\n\
-  }\n\
-  return(m);\n\
-}\n\n";
-    
-    DegreesOfEntries := "\n\
-proc DegreesOfEntries (matrix M)\n\
-{\n\
-  intmat m[ncols(M)][nrows(M)];\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
-    {\n\
-      m[i,j] = deg(M[j,i]);\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n";
-    
-    WeightedDegreesOfEntries := "\n\
-proc WeightedDegreesOfEntries (matrix M, weights)\n\
-{\n\
-  intmat m[ncols(M)][nrows(M)];\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
-    {\n\
-      m[i,j] = Deg(M[j,i],weights);\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n";
-    
-    NonTrivialDegreePerRow := "\n\
-proc NonTrivialDegreePerRow (matrix M)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][ncols(M)];\n\
-  int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); break; }\n\
-    }\n\
-    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-    
-    NonTrivialWeightedDegreePerRow := "\n\
-proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][ncols(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
-    }\n\
-    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-    
-    NonTrivialDegreePerRowWithColPosition := "\n\
-proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
-{\n\
-  intmat m[2][ncols(M)];\n\
-  int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n";
-    
-    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
-proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
-{\n\
-  intmat m[2][ncols(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n";
-    
-    NonTrivialDegreePerColumn := "\n\
-proc NonTrivialDegreePerColumn (matrix M)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][nrows(M)];\n\
-  int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); break; }\n\
-    }\n\
-    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-    
-    NonTrivialWeightedDegreePerColumn := "\n\
-proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][nrows(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
-    }\n\
-    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-    
-    NonTrivialDegreePerColumnWithRowPosition := "\n\
-proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
-{\n\
-  intmat m[2][nrows(M)];\n\
-  int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n";
-    
-    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
-proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
-{\n\
-  intmat m[2][nrows(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n";
+SyzygiesGeneratorsOfColumns2 = (M, N) -> (\n\
+  local K,R;\n\
+  R = ring M;\n\
+  K = gens kernel map(cokernel N, source M, M);\n\
+  map(R^(numgens target K), R^(numgens source K), K)\n\
+);\n\n";
     
     homalgSendBlocking( IsIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
@@ -527,29 +296,16 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
     homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( SyzForHomalg, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( Deg, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( MultiDeg, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( DegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( WeightedDegreesOfEntries, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialWeightedDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialWeightedDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialWeightedDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-#    homalgSendBlocking( NonTrivialWeightedDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
     
   end
 );
@@ -563,7 +319,7 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 ##
 InstallGlobalFunction( RingForHomalgInMacaulay2,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R;
+    local nargs, stream, o, ar, ext_obj, R, RP;
     
     nargs := Length( arg );
     
@@ -595,6 +351,15 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
     _Macaulay2_SetRing( R );
+    
+    RP := homalgTable( R );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nInvolution = transpose;\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    RP!.SetInvolution( R );
     
     return R;
     
@@ -675,7 +440,7 @@ InstallMethod( PolynomialRing,
     properties := ar[3];
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, properties,  HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, properties, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
@@ -694,6 +459,118 @@ InstallMethod( PolynomialRing,
     _Macaulay2_SetRing( R );
     
     return S;
+    
+end );
+
+##
+InstallMethod( RingOfDerivations,
+        "for homalg rings in Macaulay2",
+        [ IsHomalgExternalRingInMacaulay2Rep, IsList ],
+        
+  function( R, indets )
+    local ar, var, der, stream, display_color, ext_obj, S, RP,
+      BasisOfRowModule, BasisOfRowsCoeff;
+    
+    ar := _PrepareInputForRingOfDerivations( R, indets );
+    
+    var := ar[1];
+    der := ar[2];
+    
+    stream := homalgStream( R );
+    
+    homalgSendBlocking( "needs \"Dmodules.m2\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    ## create the new ring
+    ext_obj := homalgSendBlocking( Concatenation( [ R, "[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
+    
+    der := List( der, a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( der, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    SetIsWeylRing( S, true );
+    
+    SetBaseRing( S, R );
+    
+    SetRingProperties( S, R, der );
+    
+    _Macaulay2_SetRing( S );
+    
+    RP := homalgTable( S );
+    
+    #RP!.SetInvolution :=
+    #  function( R )
+    #    homalgSendBlocking( [ "\nInvolution = M -> transpose Dtransposition M;\n\n" ], "need_command", R, HOMALG_IO.Pictograms.define );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( [ "\nInvolution = M -> ( local R,T; R = ring M; T = Dtransposition M; transpose map(R^(numgens target T), R^(numgens source T), T) )\n\n" ], "need_command", R, HOMALG_IO.Pictograms.define );
+    # forget degrees!
+    end;
+    
+    BasisOfRowModule := "\n\
+BasisOfRowModule = M -> (\n\
+  local G,R;\n\
+  R = ring M;\n\
+  if isCommutative(R) then (\n\
+    G = gens gb image matrix transpose M;\n\
+    transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
+  )\n\
+  else (\n\
+    G = gens gb image matrix transpose Dtransposition M;\n\
+    L := leadTerm G;\n\
+    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
+    map(R^(numgens source G), R^(numgens target G),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose Dtransposition G,\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j))\n\
+  )\n\
+);\n\n";
+    
+    BasisOfRowsCoeff := "\n\
+BasisOfRowsCoeff = M -> (\n\
+  local G,R,T;\n\
+  R = ring M;\n\
+  if isCommutative(R) then (\n\
+    G = gb(image matrix transpose M, ChangeMatrix=>true);\n\
+    T = getChangeMatrix G;\n\
+    (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
+     transpose map(R^(numgens target T), R^(numgens source T), T))\n\
+  )\n\
+  else (\n\
+    G = gb(image matrix transpose Dtransposition M, ChangeMatrix=>true);\n\
+    T = getChangeMatrix G;\n\
+    L := leadTerm gens G;\n\
+    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
+    (map(R^(numgens source L), R^(numgens target L),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose Dtransposition gens G,\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)),\n\
+     map(R^(numgens source T), R^(numgens target T),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose Dtransposition T,\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)))\n\
+  )\n\
+);\n\n";
+    
+    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
+    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
+    
+    RP!.SetInvolution( S );
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
+        "for external matrices in Macaulay2",
+        [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  function( M, r, c, s, R )
+    
+    homalgSendBlocking( [ M, " = ", M, "_{0..(", c, "-2)} | map(target ", M, ", ", R, "^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", c, "-1), (k,l)->if k == ", r, " then {", s, "} else {l})) | ", M, "_{", c, "..(numgens source ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
     
 end );
 
@@ -733,3 +610,13 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
 end );
 
+##
+InstallMethod( homalgSetName,
+        "for homalg ring elements",
+        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  function( r, name, R )
+    
+    SetName( r, homalgSendBlocking( [ "toString(", r, ")" ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
+    
+end );
