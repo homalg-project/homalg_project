@@ -1159,7 +1159,7 @@ InstallMethod( AddANewPresentation,
     fi;
     
     return M;
-
+    
 end );
 
 ##
@@ -1440,7 +1440,16 @@ InstallMethod( OnLessGenerators,
         [ IsFinitelyPresentedSubmoduleRep ],
         
   function( N )
-    local phi, T;
+    local M, phi, T;
+    
+    M := SuperObject( N );
+    
+    if not ( HasNrRelations( M ) and NrRelations( M ) = 0 ) then
+        OnLessGenerators( UnderlyingObject( N ) );
+        return N;
+    fi;
+    
+    ## the super object M is free and currently presented on free generators
     
     phi := MapHavingSubobjectAsItsImage( N );
     

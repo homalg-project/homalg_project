@@ -37,16 +37,16 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     # get a better basis for N (by default, it only throws away the zero generators):
     N := GetRidOfObsoleteGenerators( N );
     
+    # this matrix of generators is often enough the identity matrix
+    # and knowing this will avoid computations:
+    IsIdentityMatrix( MatrixOfGenerators( N ) );
+    
     # compute the syzygies of N modulo B, i.e. the relations among N modulo B:
     S := SyzygiesGenerators( N, B );	## using ReducedSyzygiesGenerators here causes too many operations (cf. the ex. Triangle.g)
     
     S := Presentation( N, S );
     
-    ## this matrix of generators is often enough the identity matrix
-    ## and knowing this will avoid computations:
-    IsIdentityMatrix( MatrixOfGenerators( N ) );
-    
-    ## keep track of the original generators:
+    # keep track of the original generators:
     gen := N * GeneratorsOfModule( M );
     
     return AddANewPresentation( S, gen );
