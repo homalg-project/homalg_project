@@ -213,6 +213,12 @@ DeclareGlobalFunction( "HomalgComplex" );
 
 DeclareGlobalFunction( "HomalgCocomplex" );
 
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgComplex ] );
+
+DeclareOperation( "*",
+        [ IsHomalgComplex, IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "homalgResetFilters",

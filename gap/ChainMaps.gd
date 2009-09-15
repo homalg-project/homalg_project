@@ -34,3 +34,12 @@ DeclareOperation( "Homology",
 DeclareOperation( "Cohomology",
         [ IsHomalgChainMap ] );
 
+DeclareOperation( "CompleteChainMap",
+        [ IsHomalgChainMap, IsInt ] );
+
+DeclareOperation( "CompleteChainMap",
+        [ IsHomalgChainMap ] );
+
+DeclareOperation( "Cokernel",
+        [ IsHomalgChainMap ] );
+

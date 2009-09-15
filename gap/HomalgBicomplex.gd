@@ -121,6 +121,12 @@ DeclareGlobalFunction( "HomalgBicomplex" );
 DeclareOperation( "TransposedBicomplex",
         [ IsHomalgBicomplex ] );
 
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgBicomplex ] );
+
+DeclareOperation( "*",
+        [ IsHomalgBicomplex, IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "UnderlyingComplex",

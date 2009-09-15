@@ -16,8 +16,6 @@
 
 DeclareGlobalFunction( "ParametrizeModule" );
 
-DeclareGlobalFunction( "AsEpimorphicImage" );
-
 # basic operations:
 
 DeclareOperation( "/",
@@ -101,6 +99,9 @@ DeclareOperation( "ShortenResolution",
 DeclareOperation( "FiniteFreeResolution",
         [ IsHomalgModule ] );
 
+DeclareOperation( "AsEpimorphicImage",
+        [ IsHomalgMap ] );
+
 DeclareOperation( "Intersect2",
         [ IsHomalgRelations, IsHomalgRelations ] );
 
@@ -123,4 +124,16 @@ DeclareOperation( "EmbeddingsInCoproductObject",
 
 DeclareOperation( "ProjectionsFromProductObject",
         [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "SubmoduleQuotient",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "-",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "Saturate",
+        [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "Saturate",
+        [ IsHomalgModule ] );
 

@@ -2281,23 +2281,47 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
     filter_mor := Functor!.1[2][2][1];
     filter_special := Functor!.1[2][2][2];
     
-    InstallOtherMethod( functor_operation,
-            "for homalg special chain maps",
-            [ filter_mor and filter_special ],
-      function( sq )
-        local dS, dT, phi, muS, muT;
+    if IsIdenticalObj( Functor, functor_Cokernel ) then
         
-        dS := SourceOfSpecialChainMap( sq );
-        dT := RangeOfSpecialChainMap( sq );
+        InstallOtherMethod( functor_operation,
+                "for homalg special chain maps",
+                [ filter_mor and filter_special ],
+                function( sq )
+            local dS, dT, phi, muS, muT;
+            
+            dS := SourceOfSpecialChainMap( sq );
+            dT := RangeOfSpecialChainMap( sq );
+            
+            phi := CertainMorphismOfSpecialChainMap( sq );
+            
+            muS := CokernelNaturalGeneralizedIsomorphism( dS );
+            muT := CokernelNaturalGeneralizedIsomorphism( dT );
+            
+            return CompleteImageSquare( muS, phi, muT );
+            
+        end );
         
-        phi := CertainMorphismOfSpecialChainMap( sq );
+    else
         
-        muS := NaturalGeneralizedEmbedding( functor_operation( dS ) );
-        muT := NaturalGeneralizedEmbedding( functor_operation( dT ) );
+        InstallOtherMethod( functor_operation,
+                "for homalg special chain maps",
+                [ filter_mor and filter_special ],
+                function( sq )
+            local dS, dT, phi, muS, muT;
+            
+            dS := SourceOfSpecialChainMap( sq );
+            dT := RangeOfSpecialChainMap( sq );
+            
+            phi := CertainMorphismOfSpecialChainMap( sq );
+            
+            muS := NaturalGeneralizedEmbedding( functor_operation( dS ) );
+            muT := NaturalGeneralizedEmbedding( functor_operation( dT ) );
+            
+            return CompleteImageSquare( muS, phi, muT );
+            
+        end );
         
-        return CompleteImageSquare( muS, phi, muT );
-        
-    end );
+    fi;
     
 end );
 

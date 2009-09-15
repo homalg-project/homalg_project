@@ -955,7 +955,13 @@ InstallMethod( CertainTwoMorphismsAsSubcomplex,
     
     A := HomalgComplex( m, i );
     
-    Add( A, CertainMorphism( C, i + 1 ) );
+    m := CertainMorphism( C, i + 1 );
+    
+    if m = fail then
+        return fail;
+    fi;
+    
+    Add( A, m );
     
     if HasIsZero( C ) and IsZero( C ) then
         SetIsZero( A, true );
@@ -989,7 +995,13 @@ InstallMethod( CertainTwoMorphismsAsSubcomplex,
     
     A := HomalgCocomplex( m, i - 1 );
     
-    Add( A, CertainMorphism( C, i ) );
+    m := CertainMorphism( C, i );
+    
+    if m = fail then
+        return fail;
+    fi;
+    
+    Add( A, m );
     
     if HasIsZero( C ) and IsZero( C ) then
         SetIsZero( A, true );
@@ -1528,6 +1540,44 @@ InstallGlobalFunction( HomalgCocomplex,
   function( arg )
     
     return CallFuncList( HomalgComplex, Concatenation( arg, [ "cocomplex" ] ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg complexes",
+        [ IsHomalgRing, IsHomalgComplex ],
+        
+  function( R, C )
+    local l, o, RC, m;
+    
+    l := LowestDegree( C );
+    o := LowestDegreeObject( C );
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        RC := HomalgComplex( R * o, l );
+        for m in MorphismsOfComplex( C ) do
+            Add( RC, HomalgMap( R * MatrixOfMap( m ), R * Source( m ), HighestDegreeObject( RC ) ) );
+        od;
+    else
+        RC := HomalgCocomplex( R * o, l );
+        for m in MorphismsOfComplex( C ) do
+            Add( RC, HomalgMap( R * MatrixOfMap( m ), HighestDegreeObject( RC ), R * Range( m ) ) );
+        od;
+    fi;
+    
+    return RC;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg complexes",
+        [ IsHomalgComplex, IsHomalgRing ],
+        
+  function( C, R )
+    
+    return R * C;
     
 end );
 

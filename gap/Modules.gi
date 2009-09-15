@@ -70,7 +70,7 @@ InstallMethod( \/,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, embK, embJ, phi, im, iso, def, emb;
+    local M, mapK, mapJ, phi, im, iso, def, emb;
     
     M := SuperObject( J );
     
@@ -78,15 +78,15 @@ InstallMethod( \/,
         Error( "the super objects must coincide\n" );
     fi;
     
-    embK := MapHavingSubobjectAsItsImage( K );
-    embJ := MapHavingSubobjectAsItsImage( J );
+    mapK := MapHavingSubobjectAsItsImage( K );
+    mapJ := MapHavingSubobjectAsItsImage( J );
     
-    phi := PreCompose( embK, CokernelEpi( embJ ) );
+    phi := PreCompose( mapK, CokernelEpi( mapJ ) );
     
     im := ImageModule( phi );
     
     ## recall that im was created as a submodule of
-    ## Cokernel( embJ ) which in turn is a factor module of M,
+    ## Cokernel( mapJ ) which in turn is a factor module of M,
     ## but since we need to view im as a subfactor of M
     ## we will construct an isomorphism iso onto im
     iso := AnIsomorphism( im );
@@ -98,7 +98,7 @@ InstallMethod( \/,
     ## desired generalized embedding of def into M
     emb := PreCompose( iso, NaturalGeneralizedEmbedding( im ) );
     
-    emb := PreCompose( emb, CokernelNaturalGeneralizedIsomorphism( embJ ) );
+    emb := PreCompose( emb, CokernelNaturalGeneralizedIsomorphism( mapJ ) );
     
     ## check assertion
     Assert( 4, IsGeneralizedMonomorphism( emb ) );
@@ -916,27 +916,12 @@ InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule
 end );
 
 ##
-InstallGlobalFunction( AsEpimorphicImage,
-  function( arg )
-    local nargs, phi, M, rel, TI, T;
-    
-    nargs := Length( arg );
-    
-    if nargs = 0 then
-        Error( "too few arguments\n" );
-    fi;
-    
-    phi := arg[1];
-    
-    if IsHomalgMatrix( phi ) then
-        if nargs > 1 and IsHomalgModule( arg[2] ) then
-            phi := HomalgMap( phi, "free", arg[2] );
-        else
-            Error( "if the first argument is a homalg matrix then the second argument must be a homalg module\n" );
-        fi;
-    elif not IsMapOfFinitelyGeneratedModulesRep( phi ) then
-        Error( "the first argument must be a map\n" );
-    fi;
+InstallMethod( AsEpimorphicImage,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local M, rel, TI, T;
     
     if not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
         Error( "the first argument must be an epimorphism\n" );
@@ -1003,7 +988,7 @@ InstallMethod( Intersect2,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, embK, embJ, int;
+    local M, mapK, mapJ, int;
     
     M := SuperObject( J );
     
@@ -1011,18 +996,18 @@ InstallMethod( Intersect2,
         Error( "the super objects must coincide\n" );
     fi;
     
-    embK := MatrixOfMap( EmbeddingInSuperObject( K ) );
-    embJ := MatrixOfMap( EmbeddingInSuperObject( J ) );
+    mapK := MatrixOfMap( MapHavingSubobjectAsItsImage( K ) );
+    mapJ := MatrixOfMap( MapHavingSubobjectAsItsImage( J ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        embK := HomalgRelationsForLeftModule( embK );
-        embJ := HomalgRelationsForLeftModule( embJ );
+        mapK := HomalgRelationsForLeftModule( mapK );
+        mapJ := HomalgRelationsForLeftModule( mapJ );
     else
-        embK := HomalgRelationsForRightModule( embK );
-        embJ := HomalgRelationsForRightModule( embJ );
+        mapK := HomalgRelationsForRightModule( mapK );
+        mapJ := HomalgRelationsForRightModule( mapJ );
     fi;
     
-    int := Intersect2( embK, embJ );
+    int := Intersect2( mapK, mapJ );
     int := MatrixOfRelations( int );
     
     return Subobject( int, M );
@@ -1104,7 +1089,7 @@ InstallMethod( \+,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, embK, embJ, int;
+    local M, mapK, mapJ, sum;
     
     M := SuperObject( J );
     
@@ -1112,22 +1097,16 @@ InstallMethod( \+,
         Error( "the super objects must coincide\n" );
     fi;
     
-    embK := MatrixOfMap( EmbeddingInSuperObject( K ) );
-    embJ := MatrixOfMap( EmbeddingInSuperObject( J ) );
+    mapK := MatrixOfMap( MapHavingSubobjectAsItsImage( K ) );
+    mapJ := MatrixOfMap( MapHavingSubobjectAsItsImage( J ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        embK := HomalgRelationsForLeftModule( embK );
-        embJ := HomalgRelationsForLeftModule( embJ );
+        sum := UnionOfRows( mapK, mapJ );
     else
-        embK := HomalgRelationsForRightModule( embK );
-        embJ := HomalgRelationsForRightModule( embJ );
+        sum := UnionOfColumns( mapK, mapJ );
     fi;
     
-    int := UnionOfRelations( embK, embJ );
-    int := ReducedBasisOfModule( int, "COMPUTE_BASIS" );
-    int := MatrixOfRelations( int );
-    
-    return Subobject( int, M );
+    return Subobject( sum, M );
     
 end );
 
@@ -1305,6 +1284,138 @@ InstallOtherMethod( \*,
     scalar := HomalgMap( scalar, "free", M );
     
     return ImageSubmodule( scalar );
+    
+end );
+
+##  <#GAPDoc Label="SubmoduleQuotient">
+##  <ManSection>
+##    <Oper Arg="K, J" Name="SubmoduleQuotient" Label="the submodule quotient"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      Compute the submodule quotient ideal <A>K</A><M>:</M><A>J</A> of the submodules <A>K</A> and <A>J</A>
+##      of a common <M>R</M>-module <M>M</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallOtherMethod( SubmoduleQuotient,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    local M, R, degrees, graded, MK, gen_iso_K, coker_epi_K, mapJ;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    graded := IsList( degrees ) and degrees <> [ ];
+    
+    MK := M / K;
+    
+    ## the generalized isomorphism M/K -> M
+    gen_iso_K := NaturalGeneralizedEmbedding( MK );
+    
+    Assert( 1, IsGeneralizedIsomorphism( gen_iso_K ) );
+    
+    ## the natural epimorphism M -> M/K
+    coker_epi_K := gen_iso_K ^ -1;
+    
+    Assert( 1, IsEpimorphism( coker_epi_K ) );
+    
+    mapJ := PreCompose( MapHavingSubobjectAsItsImage( J ), coker_epi_K );
+    
+    mapJ := MatrixOfMap( mapJ );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        if graded then
+            R := ( 1 * R )^0;
+        else
+            R := 1 * R;
+        fi;
+        
+        mapJ := List( [ 1 .. NrRows( mapJ ) ], i -> CertainRows( mapJ, [ i ] ) );
+    else
+        if graded then
+            R := ( R * 1 )^0;
+        else
+            R := R * 1;
+        fi;
+        
+        mapJ := List( [ 1 .. NrColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
+    fi;
+    
+    mapJ := List( mapJ, g -> HomalgMap( g, R, MK ) );
+    
+    mapJ := List( mapJ, KernelSubmodule );
+    
+    return Intersect( mapJ );
+    
+end );
+
+##
+InstallOtherMethod( \-,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    
+    return SubmoduleQuotient( K, J );
+    
+end );
+
+##
+InstallOtherMethod( Saturate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    local quotient_last, quotient;
+    
+    quotient_last := SubmoduleQuotient( K, J );
+    
+    quotient := SubmoduleQuotient( quotient_last, J );
+    
+    while not IsSubset( quotient_last, quotient ) do
+        quotient_last := quotient;
+        quotient := SubmoduleQuotient( quotient_last, J );
+    od;
+    
+    return quotient_last;
+    
+end );
+
+##
+InstallOtherMethod( Saturate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K )
+    local degrees, max;
+    
+    degrees := DegreesOfGenerators( K );
+    
+    if not ( IsList( degrees ) and degrees <> [ ] ) then
+        TryNextMethod( );
+    elif not ( HasConstructedAsAnIdeal( K ) and ConstructedAsAnIdeal( K ) ) then
+        TryNextMethod( );
+    fi;
+    
+    max := Indeterminates( HomalgRing( K ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( K ) then
+        max := GradedLeftSubmodule( max );
+    else
+        max := GradedRightSubmodule( max );
+    fi;
+    
+    return Saturate( K, max );
     
 end );
 

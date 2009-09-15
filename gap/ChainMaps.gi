@@ -210,3 +210,192 @@ InstallMethod( Cohomology,
     
 end );
 
+##
+InstallMethod( CompleteChainMap,
+        "for a homalg chain maps",
+        [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
+        
+  function( cm, d )
+    local l, image_square;
+    
+    if not IsHomalgMap( LowestDegreeMorphism( cm ) ) then
+        TryNextMethod( );
+    fi;
+    
+    l := HighestDegree( cm );
+    
+    while true and l < d do
+        
+        image_square := CertainMorphismAsImageSquare( cm, l );
+        
+        if image_square = fail then
+            break;
+        fi;
+        
+        Add( cm, CompleteImageSquare( image_square ) );
+        
+        ## prepare for the next step
+        l := l + 1;
+        
+    od;
+    
+    return cm;
+    
+end );
+
+##
+InstallMethod( CompleteChainMap,
+        "for a homalg chain maps",
+        [ IsChainMapOfFinitelyPresentedObjectsRep ],
+        
+  function( cm )
+    local d;
+    
+    d := HighestDegree( Source( cm ) );
+    
+    return CompleteChainMap( cm, d );
+    
+end );
+
+##
+InstallMethod( Cokernel,
+        "for a homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    local T, l, cm_l, coker, cm_lp1, phi, alpha, beta;
+    
+    if not IsHomalgMap( LowestDegreeMorphism( cm ) ) then
+        TryNextMethod( );
+    fi;
+    
+    T := Range( cm );
+    
+    l := LowestDegree( cm );
+    
+    cm_l := CertainMorphism( cm, l );
+    
+    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+        
+        coker := HomalgComplex( Cokernel( cm_l ), l );
+        
+        while true do
+            cm_lp1 := CertainMorphism( cm, l + 1 );
+            if cm_lp1 = fail then
+                break;
+            fi;
+            phi := CertainMorphism( T, l + 1 );
+            alpha := CokernelNaturalGeneralizedIsomorphism( cm_lp1 );
+            beta := CokernelNaturalGeneralizedIsomorphism( cm_l );
+            Add( coker, CompleteImageSquare( alpha, phi, beta ) );
+            ## prepare for the next step
+            cm_l := cm_lp1;
+            l := l + 1;
+        od;
+        
+    else
+        coker := HomalgCocomplex( Cokernel( cm_l ), l );
+        
+        while true do
+            cm_lp1 := CertainMorphism( cm, l + 1 );
+            if cm_lp1 = fail then
+                break;
+            fi;
+            phi := CertainMorphism( T, l );
+            alpha := CokernelNaturalGeneralizedIsomorphism( cm_l );
+            beta := CokernelNaturalGeneralizedIsomorphism( cm_lp1 );
+            Add( coker, CompleteImageSquare( alpha, phi, beta ) );
+            ## prepare for the next step
+            cm_l := cm_lp1;
+            l := l + 1;
+        od;
+        
+    fi;
+    
+    if HasIsGradedMorphism( cm ) and IsGradedMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsGradedObject( coker ) );
+        
+        SetIsGradedObject( coker, true );
+    elif HasIsMorphism( cm ) and IsMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsComplex( coker ) );
+        
+        SetIsComplex( coker, true );
+    fi;
+    
+    return coker;
+    
+end );
+
+##
+InstallMethod( Kernel,
+        "for a homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    local S, l, cm_l, ker, cm_lp1, phi, alpha, beta;
+    
+    if not IsHomalgMap( LowestDegreeMorphism( cm ) ) then
+        TryNextMethod( );
+    fi;
+    
+    S := Source( cm );
+    
+    l := LowestDegree( cm );
+    
+    cm_l := CertainMorphism( cm, l );
+    
+    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+        
+        ker := HomalgComplex( Kernel( cm_l ), l );
+        
+        while true do
+            cm_lp1 := CertainMorphism( cm, l + 1 );
+            if cm_lp1 = fail then
+                break;
+            fi;
+            phi := CertainMorphism( S, l + 1 );
+            alpha := KernelEmb( cm_lp1 );
+            beta := KernelEmb( cm_l );
+            Add( ker, CompleteImageSquare( alpha, phi, beta ) );
+            ## prepare for the next step
+            cm_l := cm_lp1;
+            l := l + 1;
+        od;
+        
+    else
+        ker := HomalgCocomplex( Kernel( cm_l ), l );
+        
+        while true do
+            cm_lp1 := CertainMorphism( cm, l + 1 );
+            if cm_lp1 = fail then
+                break;
+            fi;
+            phi := CertainMorphism( S, l );
+            alpha := KernelEmb( cm_l );
+            beta := KernelEmb( cm_lp1 );
+            Add( ker, CompleteImageSquare( alpha, phi, beta ) );
+            ## prepare for the next step
+            cm_l := cm_lp1;
+            l := l + 1;
+        od;
+        
+    fi;
+    
+    if HasIsGradedMorphism( cm ) and IsGradedMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsGradedObject( ker ) );
+        
+        SetIsGradedObject( ker, true );
+    elif HasIsMorphism( cm ) and IsMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsComplex( ker ) );
+        
+        SetIsComplex( ker, true );
+    fi;
+    
+    return ker;
+    
+end );
+

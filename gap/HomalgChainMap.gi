@@ -877,6 +877,10 @@ InstallMethod( CertainMorphismAsKernelSquare,
     S := CertainMorphismAsSubcomplex( Source( cm ), i );
     T := CertainMorphismAsSubcomplex( Range( cm ), i );
     
+    if phi = fail or S = fail or T = fail then
+        return fail;
+    fi;
+    
     sub := HomalgChainMap( phi, S, T, [ i, degree ] );
     
     if HasIsMorphism( cm ) and IsMorphism( cm ) then
@@ -903,6 +907,10 @@ InstallMethod( CertainMorphismAsImageSquare,
     
     S := CertainMorphismAsSubcomplex( Source( cm ), i + 1 );
     T := CertainMorphismAsSubcomplex( Range( cm ), i + 1 );
+    
+    if phi = fail or S = fail or T = fail then
+        return fail;
+    fi;
     
     sub := HomalgChainMap( phi, S, T, [ i, degree ] );
     
@@ -931,6 +939,10 @@ InstallMethod( CertainMorphismAsImageSquare,
     S := CertainMorphismAsSubcomplex( Source( cm ), i - 1 );
     T := CertainMorphismAsSubcomplex( Range( cm ), i - 1 );
     
+    if phi = fail or S = fail or T = fail then
+        return fail;
+    fi;
+    
     sub := HomalgChainMap( phi, S, T, [ i, degree ] );
     
     if HasIsMorphism( cm ) and IsMorphism( cm ) then
@@ -958,6 +970,10 @@ InstallMethod( CertainMorphismAsLambekPairOfSquares,
     S := CertainTwoMorphismsAsSubcomplex( Source( cm ), i );
     T := CertainTwoMorphismsAsSubcomplex( Range( cm ), i );
     
+    if phi = fail or S = fail or T = fail then
+        return fail;
+    fi;
+    
     sub := HomalgChainMap( phi, S, T, [ i, degree ] );
     
     if HasIsMorphism( cm ) and IsMorphism( cm ) then
@@ -967,6 +983,22 @@ InstallMethod( CertainMorphismAsLambekPairOfSquares,
     SetIsLambekPairOfSquares( sub, true );
     
     return sub;
+    
+end );
+
+##
+InstallMethod( CompleteImageSquare,
+        "for homalg chain maps",
+        [ IsHomalgChainMap and IsImageSquare ],
+        
+  function( cm )
+    local alpha, phi, beta;
+    
+    alpha := LowestDegreeMorphism( Source( cm ) );
+    phi := LowestDegreeMorphism( cm );
+    beta := LowestDegreeMorphism( Range( cm ) );
+    
+    return CompleteImageSquare( alpha, phi, beta );
     
 end );
 
@@ -1274,7 +1306,7 @@ InstallMethod( Display,
   function( o )
     local i;
     
-    for i in DegreesOfChainMap( o ) do
+    for i in Reversed( DegreesOfChainMap( o ) ) do
         Print( "-------------------------\n" );
         Print( "at homology degree: ", i, "\n" );
         Display( CertainMorphism( o, i ) );
@@ -1292,7 +1324,7 @@ InstallMethod( Display,
   function( o )
     local i;
     
-    for i in DegreesOfChainMap( o ) do
+    for i in Reversed( DegreesOfChainMap( o ) ) do
         Print( "---------------------------\n" );
         Print( "at cohomology degree: ", i, "\n" );
         Display( CertainMorphism( o, i ) );

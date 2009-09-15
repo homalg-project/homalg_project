@@ -900,6 +900,28 @@ InstallMethod( TransposedBicomplex,
     
 end );
 
+##
+InstallMethod( \*,
+        "for homalg bicomplexes",
+        [ IsHomalgRing, IsHomalgBicomplex ],
+        
+  function( R, B )
+    
+    return HomalgBicomplex( R * UnderlyingComplex( B ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex, IsHomalgRing ],
+        
+  function( B, R )
+    
+    return R * B;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

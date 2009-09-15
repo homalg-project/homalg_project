@@ -232,7 +232,7 @@ InstallMethod( homalgCreateDisplayString,
     if IsBound( twist ) then
         twist_range := column_range - ( nr_rows - 1 );
         max := Maximum( MaximumList( List( twist_range, a -> Length( String( a ) ) ) ), max );
-        if twist = row_range[nr_rows] then
+        #if twist = row_range[nr_rows] then ## I think it is safe to leave this line commented
             chi := List( [ 1 .. nr_cols - twist ], j -> Sum( List( [ 0 .. nr_rows - 1 ], i -> (-1)^i * betti[nr_rows-i][i+j] ) ) );
             
             ## save it
@@ -245,7 +245,7 @@ InstallMethod( homalgCreateDisplayString,
             fi;
             
             max := Maximum( MaximumList( List( chi, a -> Length( String( a ) ) ) ), max );
-        fi;
+        #fi;
     fi;
     
     ## finally add a space

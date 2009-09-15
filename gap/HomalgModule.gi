@@ -1434,6 +1434,41 @@ InstallMethod( OnLessGenerators,
     
 end );
 
+##
+InstallMethod( OnLessGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    local phi, T;
+    
+    phi := MapHavingSubobjectAsItsImage( N );
+    
+    T := Range( phi );
+    
+    phi := MatrixOfMap( phi );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+        phi := ReducedBasisOfRowModule( phi );
+    else
+        phi := ReducedBasisOfColumnModule( phi );
+    fi;
+    
+    phi := HomalgMap( phi, "free", T );
+    
+    if HasEmbeddingInSuperObject( N ) then
+        phi := ImageModuleEmb( phi );
+        phi := phi / EmbeddingInSuperObject( N );
+        AsEpimorphicImage( phi );
+    else
+        ## psssssss, noone saw that ;-)
+        N!.map_having_subobject_as_its_image := phi;
+    fi;
+    
+    return N;
+    
+end );
+
 ##  <#GAPDoc Label="ByASmallerPresentation:module">
 ##  <ManSection>
 ##    <Meth Arg="M" Name="ByASmallerPresentation" Label="for modules"/>
@@ -1745,7 +1780,7 @@ InstallMethod( IsSubset,
         [ IsHomalgModule, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )	## GAP-standard: is J a subset of K
-    local M, genJ, genK, rel, div;
+    local M, mapJ, mapK, rel, div;
     
     M := SuperObject( J );
     
@@ -1757,15 +1792,15 @@ InstallMethod( IsSubset,
         Error( "the super objects must coincide\n" );
     fi;
     
-    genJ := MatrixOfSubobjectGenerators( J );
-    genK := MatrixOfSubobjectGenerators( K );
+    mapJ := MatrixOfMap( MapHavingSubobjectAsItsImage( J ) );
+    mapK := MatrixOfMap( MapHavingSubobjectAsItsImage( K ) );
     
     rel := RelationsOfModule( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then;
-        div := RightDivide( genJ, genK, rel );
+        div := RightDivide( mapJ, mapK, rel );
     else
-        div := LeftDivide( genK, genJ, rel );
+        div := LeftDivide( mapK, mapJ, rel );
     fi;
     
     return not IsBool( div );
@@ -2860,13 +2895,21 @@ InstallMethod( \*,
         
         if left then
             if distinguished then
-                N := ( 1 * R )^degrees;
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := 0 * R;
+                else
+                    N := ( 1 * R )^degrees;
+                fi;
             else
                 N := LeftPresentationWithDegrees( mat, degrees );
             fi;
         else
             if distinguished then
-                N := ( R * 1 )^degrees;
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := R * 0;
+                else
+                    N := ( R * 1 )^degrees;
+                fi;
             else
                 N := RightPresentationWithDegrees( mat, degrees );
             fi;
@@ -2874,13 +2917,21 @@ InstallMethod( \*,
     else
         if left then
             if distinguished then
-                N := 1 * R;
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := 0 * R;
+                else
+                    N := 1 * R;
+                fi;
             else
                 N := LeftPresentation( mat );
             fi;
         else
             if distinguished then
-                N := R * 1;
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := R * 0;
+                else
+                    N := R * 1;
+                fi;
             else
                 N := RightPresentation( mat );
             fi;

@@ -100,9 +100,10 @@
 
 <#Include Label="HomalgRing:module">
 <#Include Label="ByASmallerPresentation:module">
-<#Include Label="SubmoduleOfIdealMultiples">
 <#Include Label="UnderlyingObject">
 <#Include Label="SuperObject">
+<#Include Label="SubmoduleOfIdealMultiples">
+<#Include Label="SubmoduleQuotient">
 
 </Section>
 

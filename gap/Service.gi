@@ -1072,7 +1072,7 @@ InstallMethod( ReducedBasisOfRowModule,
     
     ## iterate the syzygy trick
     while true do
-        S := SyzygiesGeneratorsOfRows( B );
+        S := SyzygiesOfRows( B );
         
         unit_pos := GetColumnIndependentUnitPositions( S );
         unit_pos := List( unit_pos, a -> a[2] );
@@ -1176,7 +1176,7 @@ InstallMethod( ReducedBasisOfColumnModule,
     
     ## iterate the syzygy trick
     while true do
-        S := SyzygiesGeneratorsOfColumns( B );
+        S := SyzygiesOfColumns( B );
         
         unit_pos := GetRowIndependentUnitPositions( S );
         unit_pos := List( unit_pos, a -> a[2] );
