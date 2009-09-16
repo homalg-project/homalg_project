@@ -41,7 +41,7 @@ InstallValue( CommonHomalgTableForRings,
                     r := "(some ring)";
                 fi;
                 
-                ## the Weyl-Algebra:
+                ## the Weyl algebra:
                 if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and
                    HasIndeterminateDerivationsOfRingOfDerivations( R ) then
                     

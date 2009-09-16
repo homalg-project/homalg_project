@@ -48,7 +48,22 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    return homalgSendBlocking( [ "isUnit(", u, ")" ], "need_output", HOMALG_IO.Pictograms.IsUnit, R ) = "true";
                    
                  end,
+	       
+               DegreeMultivariatePolynomial :=
+                 function( r, R )
+                   
+                   return Int( homalgSendBlocking( [ "if zero ", r, " then -1 else sum degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                 end,
                
+               WeightedDegreeMultivariatePolynomial :=
+                 function( r, weights, R )
+	           
+		   # degree(x, 0) = -1 in Macaulay2
+                   return Int( homalgSendBlocking( [ "sum apply(toList(0..(numgens ", R, ")-1), i->{", weights, "}#i * degree(", R, "_i, leadTerm ", r, "))" ], "break_lists", "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                 end,
+	       
                Sum :=
                  function( a, b )
                    

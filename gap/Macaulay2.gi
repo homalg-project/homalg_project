@@ -580,9 +580,11 @@ InstallMethod( CreateHomalgMatrixFromString,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( s, r, c, R )
-    local ext_obj;
+    local ext_obj, S;
     
-    ext_obj := homalgSendBlocking( [ "map(", R, "^", r, R, "^", c, ",", s, ")" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    S := ShallowCopy( s );
+    RemoveCharacters(S, "[]");
+    ext_obj := homalgSendBlocking( [ "map(", R, "^", r, R, "^", c, ", pack(", c, ", ", Flat(['{', S, '}']), "))" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
