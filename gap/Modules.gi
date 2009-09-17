@@ -561,7 +561,8 @@ end );
 ##  ]]></Log>
 ##      <Example><![CDATA[
 ##  gap> N := UnderlyingObject( n );
-##  <A graded left module presented by 11 relations for 7 generators>
+##  <A graded left module presented by an unknown number of relations for
+##  7 generators>
 ##  ]]></Example>
 ##      <Log><![CDATA[
 ##  gap> Display( N );

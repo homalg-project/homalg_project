@@ -70,7 +70,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  Another way of constructing the structure sheaf:
 ##      <Example><![CDATA[
 ##  gap> U0 := SyzygiesModule( 1, k );
-##  <A graded left module presented by 6 relations for 4 generators>
+##  <A graded left module presented by an unknown number of relations for
+##  4 generators>
 ##  gap> T0 := TateResolution( U0, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
@@ -92,7 +93,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The cotangent bundle:
 ##      <Example><![CDATA[
 ##  gap> cotangent := SyzygiesModule( 2, k );
-##  <A graded non-torsion left module presented by 4 relations for 6 generators>
+##  <A graded left module presented by an unknown number of relations for
+##  6 generators>
 ##  gap> IsFree( cotangent );
 ##  false
 ##  gap> Rank( cotangent );
@@ -174,7 +176,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  Another way to construct <M>U^2=U^(3-1)</M>:
 ##      <Example><![CDATA[
 ##  gap> u2 := Hom( U1, S^(-1) );
-##  <A graded rank 3 right module on 4 generators satisfying 1 relation>
+##  <A graded right module on
+##  4 generators satisfying an unknown number of relations>
 ##  gap> t2 := TateResolution( u2, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of right modules at degrees 
 ##  [ -5 .. 5 ]>

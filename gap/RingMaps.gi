@@ -46,7 +46,11 @@ InstallMethod( KernelSubmodule,
     
     rel := S * rel;
     
-    S := 1 * S;
+    if IsBound( phi!.left ) and phi!.left = false then
+        S := S * 1;
+    else
+        S := 1 * S;	## the default
+    fi;
     
     if HasDegreeOfMorphism( phi ) then
         S := S^0;
