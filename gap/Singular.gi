@@ -486,13 +486,7 @@ proc SyzygiesGeneratorsOfRows (matrix M)\n\
     SyzygiesGeneratorsOfRows2 := "\n\
 proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
 {\n\
-  int r = nrows(M1);\n\
-  int c1 = ncols(M1);\n\
-  int c2 = ncols(M2);\n\
-  matrix M[r][c1+c2] = concat(M1,M2);\n\
-  matrix s = SyzForHomalg(M);\n\
-  s = submat(s,1..c1,1..ncols(s));\n\
-  return(std(s));\n\
+  return(std(modulo(M1, M2)));\n\
 }\n\n",
     
     SyzygiesGeneratorsOfColumns := "\n\
