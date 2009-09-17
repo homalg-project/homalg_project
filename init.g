@@ -44,6 +44,7 @@ ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gd" );
 ReadPackage( "RingsForHomalg", "gap/Macaulay2Basic.gd" );
 ReadPackage( "RingsForHomalg", "gap/Macaulay2Tools.gd" );
 
+ReadPackage( "RingsForHomalg", "gap/Macaulay2_PIR.gd" );
 ReadPackage( "RingsForHomalg", "gap/Macaulay2Groebner.gd" );
 
 ## Sage

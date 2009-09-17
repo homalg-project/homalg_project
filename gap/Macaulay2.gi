@@ -622,3 +622,72 @@ InstallMethod( homalgSetName,
     SetName( r, homalgSendBlocking( [ "toString(", r, ")" ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
     
 end );
+
+####################################
+#
+# transfer methods:
+#
+####################################
+
+##
+InstallMethod( SaveHomalgMatrixToFile,
+        "for external matrices in Macaulay2",
+        [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  function( filename, M, R )
+    local mode, command;
+    
+    if not IsBound( M!.SaveAs ) then
+        mode := "ListList";
+    else
+        mode := M!.SaveAs; #not yet supported
+    fi;
+    
+    if mode = "ListList" then
+
+        command := [
+	  "homalgsavefile = \"", filename, "\" << \"\";",
+	  "homalgsavefile << concatenate({\"[[\"} | between(\"],[\", apply(entries ", M, ", i->( local s; s = toString(i); substring(s, 1, length(s)-2) ))) | {\"]]\"});",
+          "homalgsavefile << close;"
+        ];
+
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
+
+    fi;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadHomalgMatrixFromFile,
+        "for external rings in Macaulay2",
+        [ IsString, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  function( filename, r, c, R )
+    local mode, command, M;
+    
+    if not IsBound( R!.LoadAs ) then
+        mode := "ListList";
+    else
+        mode := R!.LoadAs; #not yet supported
+    fi;
+    
+    M := HomalgVoidMatrix( R );
+    
+    if mode = "ListList" then
+        
+        command := [ M, "=map(", R, "^", r, R, "^", c,
+	             ", toList(apply(",
+		     "value replace(\"[\\\\]\", \"\", get \"", filename, "\"), toList)));" ];
+        
+        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
+        
+    fi;
+    
+    SetNrRows( M, r );
+    SetNrColumns( M, c );
+    
+    return M;
+    
+end );
