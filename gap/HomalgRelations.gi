@@ -40,7 +40,7 @@
 ##
 DeclareRepresentation( "IsRelationsOfFinitelyPresentedModuleRep",
         IsHomalgRelations,
-        [ "relations" ] );
+        [ ] );
 
 ####################################
 #
@@ -69,7 +69,7 @@ BindGlobal( "TheTypeHomalgRelationsOfRightModule",
 
 ##
 InstallImmediateMethod( IsInjectivePresentation,
-        IsHomalgRelationsOfRightModule, 0,
+        IsHomalgRelationsOfRightModule and HasEvaluatedMatrixOfRelations, 0,
         
   function( rel )
     local mat;
@@ -86,7 +86,7 @@ end );
 
 ##
 InstallImmediateMethod( IsInjectivePresentation,
-        IsHomalgRelationsOfLeftModule, 0,
+        IsHomalgRelationsOfLeftModule and HasEvaluatedMatrixOfRelations, 0,
         
   function( rel )
     local mat;
@@ -123,13 +123,32 @@ InstallMethod( DegreesOfGenerators,
 end );
 
 ##
+InstallMethod( EvaluatedMatrixOfRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelations and HasEvalMatrixOfRelations ],
+        
+  function( rel )
+    local func_arg;
+    
+    func_arg := EvalMatrixOfRelations( rel );
+    
+    ResetFilterObj( rel, EvalMatrixOfRelations );
+    
+    ## delete the component which was left over by GAP
+    Unbind( rel!.EvalMatrixOfRelations );
+    
+    return CallFuncList( func_arg[1], func_arg[2] );
+    
+end );
+
+##
 InstallMethod( MatrixOfRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgRelations ],
         
   function( rel )
     
-    return rel!.relations;
+    return EvaluatedMatrixOfRelations( rel );
     
 end );
 
@@ -167,6 +186,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( HomalgRing,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelations and HasEvalMatrixOfRelations ],
+        
+  function( rel )
+    
+    return HomalgRing( EvalMatrixOfRelations( rel )[2][1] );
+    
+end );
+
+##
 InstallMethod( HasNrGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
@@ -180,11 +210,63 @@ end );
 ##
 InstallMethod( HasNrGenerators,
         "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfRightModule and HasEvalMatrixOfRelations ],
+        
+  function( rel )
+    local func_arg, ar;
+    
+    func_arg := EvalMatrixOfRelations( rel );
+    
+    if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfColumns ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return HasNrColumns( ar[1] );
+        fi;
+    elif IsIdenticalObj( func_arg[1], POW ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return HasNrRows( ar[1] );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
     
     return HasNrColumns( MatrixOfRelations( rel ) );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule and HasEvalMatrixOfRelations ],
+        
+  function( rel )
+    local func_arg, ar;
+    
+    func_arg := EvalMatrixOfRelations( rel );
+    
+    if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfRows ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return HasNrRows( ar[1] );
+        fi;
+    elif IsIdenticalObj( func_arg[1], POW ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return HasNrColumns( ar[2] );
+        fi;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -200,6 +282,32 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
+InstallMethod( NrGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfRightModule and HasEvalMatrixOfRelations ],
+        
+  function( rel )
+    local func_arg, ar;
+    
+    func_arg := EvalMatrixOfRelations( rel );
+    
+    if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfColumns ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return NrColumns( ar[1] );
+        fi;
+    elif IsIdenticalObj( func_arg[1], POW ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return NrRows( ar[1] );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
@@ -211,13 +319,43 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
+InstallMethod( NrGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelationsOfLeftModule and HasEvalMatrixOfRelations ],
+        
+  function( rel )
+    local func_arg, ar;
+    
+    func_arg := EvalMatrixOfRelations( rel );
+    
+    if IsIdenticalObj( func_arg[1], SyzygiesGeneratorsOfRows ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return NrRows( ar[1] );
+        fi;
+    elif IsIdenticalObj( func_arg[1], POW ) then
+        ar := func_arg[2];
+        if IsList( ar ) and Length( ar ) = 2 then
+            return NrColumns( ar[2] );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( HasNrRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
     
-    return HasNrColumns( MatrixOfRelations( rel ) );
+    if HasEvaluatedMatrixOfRelations( rel ) then
+        return HasNrColumns( MatrixOfRelations( rel ) );
+    fi;
+    
+    return false;
     
 end );
 
@@ -228,7 +366,11 @@ InstallMethod( HasNrRelations,
         
   function( rel )
     
-    return HasNrRows( MatrixOfRelations( rel ) );
+    if HasEvaluatedMatrixOfRelations( rel ) then
+        return HasNrRows( MatrixOfRelations( rel ) );
+    fi;
+    
+    return false;
     
 end );
 
@@ -395,7 +537,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -437,7 +579,7 @@ InstallMethod( BasisOfModule,
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
-            rel!.relations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
+            rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
             fi;
@@ -735,7 +877,7 @@ InstallMethod( GetIndependentUnitPositions,
 end );
 
 ##
-InstallMethod( \*,
+InstallMethod( POW,
         "for sets of relations of homalg modules",
         [ IsHomalgRelations, IsHomalgMatrix ],
         
@@ -745,9 +887,24 @@ InstallMethod( \*,
     relations := MatrixOfRelations( rel );
     
     if IsHomalgRelationsOfLeftModule( rel ) then
-        return HomalgRelationsForLeftModule( relations * mat );
+        return relations * mat;
     else
-        return HomalgRelationsForRightModule( mat * relations );
+        return mat * relations;
+    fi;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelations, IsHomalgMatrix ],
+        
+  function( rel, mat )
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        return HomalgRelationsForLeftModule( POW, [ rel, mat ] );
+    else
+        return HomalgRelationsForRightModule( POW, [ mat, rel ] );
     fi;
     
 end );
@@ -761,17 +918,28 @@ end );
 ##
 InstallGlobalFunction( HomalgRelationsForLeftModule,
   function( arg )
-    local relations;
+    local relations, mat;
+    
+    relations := rec( );
     
     if IsHomalgMatrix( arg[1] ) then
-        ResetFilterObj( arg[1], IsMutableMatrix );
-        relations := rec( relations := arg[1] );
+        mat := arg[1];
+        ResetFilterObj( mat, IsMutableMatrix );
+    elif IsFunction( arg[1] ) then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                relations, TheTypeHomalgRelationsOfLeftModule,
+                EvalMatrixOfRelations, arg );
+        
+        return relations;
     else
-        relations := rec( relations := CallFuncList( HomalgMatrix, arg ) );
+        mat := CallFuncList( HomalgMatrix, arg );
     fi;
     
     ## Objectify:
-    Objectify( TheTypeHomalgRelationsOfLeftModule, relations );
+    ObjectifyWithAttributes(
+            relations, TheTypeHomalgRelationsOfLeftModule,
+            EvaluatedMatrixOfRelations, mat );
     
     return relations;
     
@@ -780,17 +948,28 @@ end );
 ##
 InstallGlobalFunction( HomalgRelationsForRightModule,
   function( arg )
-    local relations;
+    local relations, mat;
+    
+    relations := rec( );
     
     if IsHomalgMatrix( arg[1] ) then
-        ResetFilterObj( arg[1], IsMutableMatrix );
-        relations := rec( relations := arg[1] );
+        mat := arg[1];
+        ResetFilterObj( mat, IsMutableMatrix );
+    elif IsFunction( arg[1] ) then
+        ## Objectify:
+        ObjectifyWithAttributes(
+                relations, TheTypeHomalgRelationsOfRightModule,
+                EvalMatrixOfRelations, arg );
+        
+        return relations;
     else
-        relations := rec( relations := CallFuncList( HomalgMatrix, arg ) );
+        mat := CallFuncList( HomalgMatrix, arg );
     fi;
     
     ## Objectify:
-    Objectify( TheTypeHomalgRelationsOfRightModule, relations );
+    ObjectifyWithAttributes(
+            relations, TheTypeHomalgRelationsOfRightModule,
+            EvaluatedMatrixOfRelations, mat );
     
     return relations;
     

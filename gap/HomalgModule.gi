@@ -491,7 +491,7 @@ end );
 ##
 InstallMethod( MatrixOfRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     local rel;
@@ -499,7 +499,7 @@ InstallMethod( MatrixOfRelations,
     rel := RelationsOfModule( M );
     
     if IsHomalgRelations( rel ) then
-        return MatrixOfRelations( rel );
+        return EvaluatedMatrixOfRelations( rel );
     fi;
     
     return fail;
@@ -509,7 +509,7 @@ end );
 ##
 InstallMethod( MatrixOfRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     local rel;
@@ -526,25 +526,8 @@ end );
 
 ##
 InstallMethod( HasNrGenerators,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-  function( M )
-    local gen_mat;
-    
-    gen_mat := MatrixOfSubobjectGenerators( M );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return HasNrRows( gen_mat );
-    else
-        return HasNrColumns( gen_mat );
-    fi;
-    
-end );
-
-##
-InstallMethod( HasNrGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
   function( M )
     
     return HasNrGenerators( GeneratorsOfModule( M ) );
@@ -553,25 +536,8 @@ end );
 
 ##
 InstallMethod( NrGenerators,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-  function( M )
-    local gen_mat;
-    
-    gen_mat := MatrixOfSubobjectGenerators( M );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return NrRows( gen_mat );
-    else
-        return NrColumns( gen_mat );
-    fi;
-    
-end );
-
-##
-InstallMethod( NrGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
   function( M )
     
     return NrGenerators( GeneratorsOfModule( M ) );
@@ -581,7 +547,7 @@ end );
 ##
 InstallMethod( HasNrGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
   function( M, pos )
     local gen;
     
@@ -598,7 +564,7 @@ end );
 ##
 InstallMethod( NrGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
   function( M, pos )
     local gen;
     
@@ -613,13 +579,35 @@ InstallMethod( NrGenerators,
 end );
 
 ##
+InstallMethod( CertainGenerators,
+        "for homalg modules",
+        [ IsHomalgModule, IsList ],
+        
+  function( M, list )
+    
+    return CertainGenerators( GeneratorsOfModule( M ), list );
+    
+end );
+
+##
+InstallMethod( CertainGenerator,
+        "for homalg modules",
+        [ IsHomalgModule, IsPosInt ],
+        
+  function( M, pos )
+    
+    return CertainGenerator( GeneratorsOfModule( M ), pos );
+    
+end );
+
+##
 InstallGlobalFunction( GetGenerators,
   function( arg )
     local nargs, M, pos, g, gen, mat, proc, l;
     
     nargs := Length( arg );
     
-    if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
+    if nargs > 0 and IsFinitelyPresentedModuleOrSubmoduleRep( arg[1] ) then
         
         M := arg[1];
         
@@ -637,7 +625,7 @@ InstallGlobalFunction( GetGenerators,
         
     else
         
-        Error( "the first argument must be a homalg module or a set of generators of a homalg module\n" );
+        Error( "the first argument must be a homalg module or submodule or a set of generators of a homalg module\n" );
         
     fi;
     
@@ -675,15 +663,8 @@ end );
 
 ##
 InstallMethod( HasNrRelations,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  HasEmbeddingInSuperObject );
-
-##
-InstallMethod( HasNrRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     local rel;
@@ -1466,9 +1447,16 @@ InstallMethod( OnLessGenerators,
     phi := HomalgMap( phi, "free", T );
     
     if HasEmbeddingInSuperObject( N ) then
+        
         phi := ImageModuleEmb( phi );
         phi := phi / EmbeddingInSuperObject( N );
+        
+        Assert( 2, IsEpimorphism( phi ) );
+        
+        SetIsEpimorphism( phi, true );
+        
         AsEpimorphicImage( phi );
+        
     else
         ## psssssss, noone saw that ;-)
         N!.map_having_subobject_as_its_image := phi;
@@ -1801,8 +1789,8 @@ InstallMethod( IsSubset,
         Error( "the super objects must coincide\n" );
     fi;
     
-    mapJ := MatrixOfMap( MapHavingSubobjectAsItsImage( J ) );
-    mapK := MatrixOfMap( MapHavingSubobjectAsItsImage( K ) );
+    mapJ := MatrixOfSubobjectGenerators( J );
+    mapK := MatrixOfSubobjectGenerators( K );
     
     rel := RelationsOfModule( M );
     
@@ -2815,7 +2803,7 @@ InstallMethod( \*,
         
   function( R, M )
     
-    return ImageSubmodule( R * MapHavingSubobjectAsItsImage( M ) );
+    return ImageSubmodule( R * OnAFreeSource( MapHavingSubobjectAsItsImage( M ) ) );
     
 end );
 
@@ -3576,6 +3564,17 @@ InstallMethod( GradedRightIdealOfMaximalMinors,
   function( M )
     
     return GradedRightSubmodule( MaximalMinors( M ) );
+    
+end );
+
+##
+InstallMethod( RingMap,
+        "for homalg rings",
+        [ IsHomalgModule, IsHomalgRing, IsHomalgRing ],
+        
+  function( M, S, T )
+    
+    return RingMap( GeneratorsOfModule( M ), S, T );
     
 end );
 

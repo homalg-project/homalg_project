@@ -27,6 +27,9 @@ InstallValue( LIMOR,
 InstallValue( LogicalImplicationsForHomalgMorphisms,
         [ 
           
+          [ IsZero,
+            "implies", IsMorphism ],
+          
           [ IsMorphism,
             "implies", IsGeneralizedMorphism ],
           
@@ -134,6 +137,21 @@ InstallImmediateMethod( IsZero,
         
   function( phi )
     
+    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) and	## to place "or" here we need to know that phi is a morphism;
+       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then	## see the method below
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMorphism and IsMorphism, 0,
+        
+  function( phi )
+    
     if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) or
        ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then
         return true;
@@ -190,6 +208,29 @@ InstallImmediateMethod( IsSplitEpimorphism,
     T := Range( phi );
     
     if HasIsProjective( T ) and IsProjective( T ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+## this immediate method together with the above ture-method
+## IsZero => IsMorphism
+## are essential to avoid infinite loops that
+## Assert( 4, IsMonomorphism( emb ) );
+## in _Functor_ImageModule_OnObjects may cause
+##
+InstallImmediateMethod( IsSplitMonomorphism,
+        IsMapOfFinitelyGeneratedModulesRep and IsMorphism, 0,
+        
+  function( phi )
+    local S;
+    
+    S := Source( phi );
+    
+    if HasIsZero( S ) and IsZero( S ) then
         return true;
     fi;
     

@@ -99,6 +99,14 @@ DeclareProperty( "IsInjectivePresentation",
 #
 ####################################
 
+##
+DeclareAttribute( "EvalMatrixOfRelations",
+        IsHomalgRelations );
+
+##
+DeclareAttribute( "EvaluatedMatrixOfRelations",
+        IsHomalgRelations );
+
 ##  <#GAPDoc Label="FreeResolution">
 ##  <ManSection>
 ##    <Attr Arg="rel" Name="FreeResolution"/>
@@ -121,6 +129,7 @@ DeclareAttribute( "FreeResolution",
 # constructors:
 
 DeclareGlobalFunction( "HomalgRelationsForLeftModule" );
+
 DeclareGlobalFunction( "HomalgRelationsForRightModule" );
 
 DeclareOperation( "/",
@@ -196,6 +205,9 @@ DeclareOperation( "GetIndependentUnitPositions",
 
 DeclareOperation( "GetIndependentUnitPositions",
         [ IsHomalgRelations ] );
+
+DeclareOperation( "POW",
+        [ IsHomalgRelations, IsHomalgMatrix ] );
 
 DeclareOperation( "*",
         [ IsHomalgRelations, IsHomalgMatrix ] );

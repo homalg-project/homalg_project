@@ -422,6 +422,9 @@ DeclareProperty( "IsReducedBasisOfColumnsMatrix",
 DeclareAttribute( "Eval",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalMatrixOperation",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalInvolution",
         IsHomalgMatrix );
 

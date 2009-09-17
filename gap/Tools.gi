@@ -386,6 +386,25 @@ InstallMethod( Eval,				### defines: an initial quadratic matrix filled with one
     
 end );
 
+##
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalMatrixOperation)",
+        [ IsHomalgMatrix and HasEvalMatrixOperation ],
+        
+  function( C )
+    local func_arg;
+    
+    func_arg := EvalMatrixOperation( C );
+    
+    ResetFilterObj( C, EvalMatrixOperation );
+    
+    ## delete the component which was left over by GAP
+    Unbind( C!.EvalMatrixOperation );
+    
+    return CallFuncList( func_arg[1], func_arg[2] );
+    
+end );
+
 ##  <#GAPDoc Label="Eval:HasEvalInvolution">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with Involution"/>

@@ -2224,6 +2224,10 @@ InstallMethod( RingMap,
         
   function( images, S, T )
     
+    if not ( NrRows( images ) = 1 or NrColumns( images ) = 1 ) then
+        Error( "the matrix must either has one row or one column\n" );
+    fi;
+    
     return RingMap( EntriesOfHomalgMatrix( images ), S, T );
     
 end );

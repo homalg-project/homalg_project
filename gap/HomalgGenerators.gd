@@ -119,7 +119,11 @@ DeclareAttribute( "ProcedureToReadjustGenerators",
 # constructors:
 
 DeclareGlobalFunction( "HomalgGeneratorsForLeftModule" );
+
 DeclareGlobalFunction( "HomalgGeneratorsForRightModule" );
+
+DeclareOperation( "RingMap",
+        [ IsHomalgGenerators, IsHomalgRing, IsHomalgRing ] );
 
 # basic operations:
 

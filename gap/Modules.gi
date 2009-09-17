@@ -923,7 +923,8 @@ InstallMethod( AsEpimorphicImage,
   function( phi )
     local M, rel, TI, T;
     
-    if not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
+    if not ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) and
+       not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
         Error( "the first argument must be an epimorphism\n" );
     fi;
     
@@ -933,8 +934,10 @@ InstallMethod( AsEpimorphicImage,
     
     TI := MatrixOfMap( phi );
     
+    T := HomalgMatrix( NrColumns( TI ), NrRows( TI ), HomalgRing( TI ) );
+    
     ## phi^-1 is not necessarily a morphism
-    T := MatrixOfMap( phi^-1 );		## Source( phi ) does not play any role!!!
+    SetEvalMatrixOperation( T, [ a -> MatrixOfMap( a^-1 ), [ phi ] ] );		## Source( phi ) does not play any role!!!
     
     return AddANewPresentation( M, rel * T, T, TI );
     
@@ -957,7 +960,13 @@ InstallMethod( Intersect2,
     
     im := HomalgRelationsForRightModule( MatrixOfMap( im ) );
     
-    return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    if IsBound( HOMALG.Intersect_uses_ReducedBasisOfModule ) and
+       HOMALG.Intersect_uses_ReducedBasisOfModule = true then
+        
+        return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    fi;
+    
+    return im;
     
 end );
 
@@ -978,7 +987,13 @@ InstallMethod( Intersect2,
     
     im := HomalgRelationsForLeftModule( MatrixOfMap( im ) );
     
-    return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    if IsBound( HOMALG.Intersect_uses_ReducedBasisOfModule ) and
+       HOMALG.Intersect_uses_ReducedBasisOfModule = true then
+        
+        return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
+    fi;
+    
+    return im;
     
 end );
 
@@ -996,8 +1011,8 @@ InstallMethod( Intersect2,
         Error( "the super objects must coincide\n" );
     fi;
     
-    mapK := MatrixOfMap( MapHavingSubobjectAsItsImage( K ) );
-    mapJ := MatrixOfMap( MapHavingSubobjectAsItsImage( J ) );
+    mapK := MatrixOfSubobjectGenerators( K );
+    mapJ := MatrixOfSubobjectGenerators( J );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         mapK := HomalgRelationsForLeftModule( mapK );
@@ -1097,8 +1112,8 @@ InstallMethod( \+,
         Error( "the super objects must coincide\n" );
     fi;
     
-    mapK := MatrixOfMap( MapHavingSubobjectAsItsImage( K ) );
-    mapJ := MatrixOfMap( MapHavingSubobjectAsItsImage( J ) );
+    mapK := MatrixOfSubobjectGenerators( K );
+    mapJ := MatrixOfSubobjectGenerators( J );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         sum := UnionOfRows( mapK, mapJ );
@@ -1353,9 +1368,17 @@ InstallOtherMethod( SubmoduleQuotient,
     
     mapJ := List( mapJ, g -> HomalgMap( g, R, MK ) );
     
-    mapJ := List( mapJ, KernelSubmodule );
+    if IsBound( HOMALG.SubQuotient_uses_Intersect ) and
+       HOMALG.SubQuotient_uses_Intersect = true then
+        
+        mapJ := List( mapJ, KernelSubmodule );
+        
+        return Intersect( mapJ );
+    fi;
     
-    return Intersect( mapJ );
+    mapJ := Iterated( mapJ, AugmentMaps );
+    
+    return KernelSubmodule( mapJ );
     
 end );
 

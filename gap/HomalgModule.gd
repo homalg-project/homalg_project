@@ -659,6 +659,9 @@ DeclareOperation( "GradedRightIdealOfMinors",
 DeclareOperation( "GradedRightIdealOfMaximalMinors",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "RingMap",
+        [ IsHomalgModule, IsHomalgRing, IsHomalgRing ] );
+
 # global functions:
 
 DeclareGlobalFunction( "GetGenerators" );
@@ -736,6 +739,12 @@ DeclareOperation( "NrGenerators",
 
 DeclareOperation( "HasNrRelations",
         [ IsHomalgModule ] );
+
+DeclareOperation( "CertainGenerators",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "CertainGenerator",
+        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "NrRelations",
         [ IsHomalgModule ] );

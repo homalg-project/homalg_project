@@ -149,7 +149,7 @@ InstallMethod( MatrixOfRelations,
         
   function( gen )
     
-    return MatrixOfRelations( RelationsOfHullModule( gen ) );
+    return EvaluatedMatrixOfRelations( RelationsOfHullModule( gen ) );
     
 end );
 
@@ -421,7 +421,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( gen, rel )
     
-    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    return HomalgRelationsForRightModule( SyzygiesGeneratorsOfColumns, [ MatrixOfGenerators( gen ), MatrixOfRelations( rel ) ] );
     
 end );
 
@@ -432,7 +432,7 @@ InstallMethod( SyzygiesGenerators,
         
   function( gen, rel )
     
-    return SyzygiesGenerators( MatrixOfGenerators( gen ), rel );
+    return HomalgRelationsForLeftModule( SyzygiesGeneratorsOfRows, [ MatrixOfGenerators( gen ), MatrixOfRelations( rel ) ] );
     
 end );
 
@@ -688,6 +688,36 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
     Objectify( TheTypeHomalgGeneratorsOfRightModule, gen );
     
     return gen;
+    
+end );
+
+##
+InstallMethod( RingMap,
+        "for homalg rings",
+        [ IsHomalgGenerators, IsHomalgRing, IsHomalgRing ],
+        
+  function( images, S, T )
+    local R, psi, degrees;
+    
+    if IsIdenticalObj( HomalgRing( images ), T ) then
+        psi := RingMap( MatrixOfGenerators( images ), S, T );
+    else
+        psi := RingMap( T * MatrixOfGenerators( images ), S, T );
+    fi;
+    
+    if IsHomalgGeneratorsOfLeftModule( images ) then
+        psi!.left := true;
+    else
+        psi!.left := false;
+    fi;
+    
+    degrees := DegreesOfGenerators( images );
+    
+    if IsList( degrees ) and degrees <> [ ] then
+        SetDegreeOfMorphism( psi, 0 );
+    fi;
+    
+    return psi;
     
 end );
 
