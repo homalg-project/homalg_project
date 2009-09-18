@@ -16,6 +16,8 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Macaulay2" );
 
+DeclareGlobalVariable( "Macaulay2Tools" );
+
 ####################################
 #
 # global functions and operations:

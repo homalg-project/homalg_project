@@ -29,10 +29,12 @@ InstallValue( HOMALG_IO_Macaulay2,
             CUT_POS_END := -1,		## not important for Macaulay2
             eoc_verbose := "",
             eoc_quiet := ";",
+            #break_lists := true,		## a Macaulay2 specific
             setring := _Macaulay2_SetRing,	## a Macaulay2 specific
             setinvol := _Macaulay2_SetInvolution,## a Macaulay2 specific
             only_warning := "--warning",	## a Macaulay2 specific
             define := "=",
+            garbage_collector := function( stream ) homalgSendBlocking( [ "collectGarbage()" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
             prompt := "\033[01mM2>\033[0m ",
             output_prompt := "\033[1;30;43m<M2\033[0m ",
             banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
@@ -108,25 +110,16 @@ InstallGlobalFunction( _Macaulay2_SetInvolution,
 end );
 
 ##
-InstallGlobalFunction( InitializeMacaulay2Tools,
-  function( stream )
-    local GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
-          IsIdentityMatrix, IsDiagonalMatrix,
-          ZeroRows, ZeroColumns, GetUnitPosition, GetCleanRowsPositions,
-          BasisOfRowModule, BasisOfColumnModule,
-          BasisOfRowsCoeff, BasisOfColumnsCoeff,
-          DecideZeroRows, DecideZeroColumns,
-          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfRows2,
-          SyzygiesGeneratorsOfColumns, SyzygiesGeneratorsOfColumns2;
-    
+InstallValue( Macaulay2Tools,
+        rec(
+            
     IsIdentityMatrix := "\n\
 IsIdentityMatrix = M -> (\n\
   local r, R;\n\
   r = (numgens target M)-1;\n\
   R = ring M;\n\
   all(toList(0..numgens(source(M))-1), i->toList(set((entries M_i)_{0..i-1, i+1..r})) == {0_R} and entries (M^{i})_{i} == {{1_R}})\n\
-);\n\n";
+);\n\n",
     
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix = M -> (\n\
@@ -134,7 +127,7 @@ IsDiagonalMatrix = M -> (\n\
   r = (numgens target M)-1;\n\
   R = ring M;\n\
   all(toList(0..numgens(source(M))-1), i->toList(set((entries M_i)_{0..i-1, i+1..r})) == {0_R})\n\
-);\n\n";
+);\n\n",
     
     ZeroRows := "\n\
 ZeroRows = M -> (\n\
@@ -143,7 +136,7 @@ ZeroRows = M -> (\n\
   concatenate({\"[\"} | between(\",\", apply(\n\
     select(toList(1..(numgens target M)), i->toList(set(flatten entries M^{i-1})) == {0_R}),\n\
       toString)) | {\"]\"})\n\
-);\n\n";
+);\n\n",
     
     ZeroColumns := "\n\
 ZeroColumns = M -> (\n\
@@ -152,7 +145,7 @@ ZeroColumns = M -> (\n\
   concatenate({\"[\"} | between(\",\", apply(\n\
     select(toList(1..(numgens source M)), i->toList(set(entries M_(i-1))) == {0_R}),\n\
       toString)) | {\"]\"})\n\
-);\n\n";
+);\n\n",
     
     GetColumnIndependentUnitPositions := "\n\
 GetColumnIndependentUnitPositions = (M, l) -> (\n\
@@ -165,7 +158,7 @@ GetColumnIndependentUnitPositions = (M, l) -> (\n\
       if p == {} then continue;\n\
       p#0\n\
     )) | {\"]\"})\n\
-);\n\n";
+);\n\n",
     
     GetRowIndependentUnitPositions := "\n\
 GetRowIndependentUnitPositions = (M, l) -> (\n\
@@ -178,7 +171,7 @@ GetRowIndependentUnitPositions = (M, l) -> (\n\
       if p == {} then continue;\n\
       p#0\n\
     )) | {\"]\"})\n\
-);\n\n";
+);\n\n",
     
     GetUnitPosition := "\n\
 GetUnitPosition = (M, l) -> (\n\
@@ -192,7 +185,7 @@ GetUnitPosition = (M, l) -> (\n\
     return concatenate between(\",\", apply(p, toString))\n\
   );\n\
   \"fail\"\n\
-);\n\n";
+);\n\n",
     
     GetCleanRowsPositions := "\n\
 GetCleanRowsPositions = (M, l) -> (\n\
@@ -201,7 +194,7 @@ GetCleanRowsPositions = (M, l) -> (\n\
   concatenate between(\",\", apply(\n\
     for i in toList(0..(numgens target M)-1) list ( if not any((flatten entries M^{i})_l, k->k == 1_R) then continue; i+1 ),\n\
       toString))\n\
-);\n\n";
+);\n\n",
     
     BasisOfRowModule := "\n\
 BasisOfRowModule = M -> (\n\
@@ -209,7 +202,7 @@ BasisOfRowModule = M -> (\n\
   R = ring M;\n\
   G = gens gb image matrix transpose M;\n\
   transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
-);\n\n";
+);\n\n",
     # forget degrees!
     
     BasisOfColumnModule := "\n\
@@ -218,7 +211,7 @@ BasisOfColumnModule = M -> (\n\
   R = ring M;\n\
   G = gens gb image matrix M;\n\
   map(R^(numgens target G), R^(numgens source G), G)\n\
-);\n\n";
+);\n\n",
     # forget degrees!
     
     BasisOfRowsCoeff := "\n\
@@ -229,7 +222,7 @@ BasisOfRowsCoeff = M -> (\n\
   T = getChangeMatrix G;\n\
   (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
    transpose map(R^(numgens target T), R^(numgens source T), T))\n\
-);\n\n";
+);\n\n",
     # forget degrees!
     
     BasisOfColumnsCoeff := "\n\
@@ -239,36 +232,36 @@ BasisOfColumnsCoeff = M -> (\n\
   T = getChangeMatrix G;\n\
   (map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
    map(R^(numgens target T), R^(numgens source T), T))\n\
-);\n\n";
+);\n\n",
     # forget degrees!
     
     DecideZeroRows := "\n\
 DecideZeroRows = (A, B) -> (\n\
   Involution(remainder(matrix Involution(A), matrix Involution(B)))\n\
-);\n\n";
+);\n\n",
     
     DecideZeroColumns := "\n\
 DecideZeroColumns = (A, B) -> (\n\
   remainder(matrix A, matrix B)\n\
-);\n\n";
+);\n\n",
     
     DecideZeroRowsEffectively := "\n\
 DecideZeroRowsEffectively = (A, B) -> ( local q,r;\n\
   (q, r) = quotientRemainder(matrix Involution(A), matrix Involution(B));\n\
   (Involution(r), -Involution(q))\n\
-);\n\n";
+);\n\n",
     
     DecideZeroColumnsEffectively := "\n\
 DecideZeroColumnsEffectively = (A, B) -> ( local q,r;\n\
   (q, r) = quotientRemainder(matrix A, matrix B);\n\
   (r, -q)\n\
-);\n\n";
+);\n\n",
     
     SyzygiesGeneratorsOfRows := "\n\
-SyzygiesGeneratorsOfRows = M -> Involution(SyzygiesGeneratorsOfColumns(Involution(M)));\n\n";
+SyzygiesGeneratorsOfRows = M -> Involution(SyzygiesGeneratorsOfColumns(Involution(M)));\n\n",
     
     SyzygiesGeneratorsOfRows2 := "\n\
-SyzygiesGeneratorsOfRows2 = (M, N) -> Involution(SyzygiesGeneratorsOfColumns2(Involution(M), Involution(N)));\n\n";
+SyzygiesGeneratorsOfRows2 = (M, N) -> Involution(SyzygiesGeneratorsOfColumns2(Involution(M), Involution(N)));\n\n",
     
     SyzygiesGeneratorsOfColumns := "\n\
 SyzygiesGeneratorsOfColumns = M -> (\n\
@@ -276,7 +269,7 @@ SyzygiesGeneratorsOfColumns = M -> (\n\
   R = ring M;\n\
   S = syz M;\n\
   map(R^(numgens target S), R^(numgens source S), S)\n\
-);\n\n";
+);\n\n",
     
     SyzygiesGeneratorsOfColumns2 := "\n\
 SyzygiesGeneratorsOfColumns2 = (M, N) -> (\n\
@@ -284,31 +277,28 @@ SyzygiesGeneratorsOfColumns2 = (M, N) -> (\n\
   R = ring M;\n\
   K = gens kernel map(cokernel N, source M, M);\n\
   map(R^(numgens target K), R^(numgens source K), K)\n\
-);\n\n";
+);\n\n",
     
-    homalgSendBlocking( IsIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfColumns2, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfRows2, "need_command", stream, HOMALG_IO.Pictograms.define );
+    Deg := "\n\
+Deg = (r,weights,R) -> (\n\
+  sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
+);\n\n",
     
-  end
+    MultiDeg := "\n\
+MultiDeg = (r,weights,R) -> (\n\
+  concatenate between( \",\", apply(apply(0..#weights-1,i->Deg(r,weights#i,R)),toString))\n\
+);\n\n",
+    
+    )
 );
+
+##
+InstallGlobalFunction( InitializeMacaulay2Tools,
+  function( stream )
+    
+    InitializeMacros( Macaulay2Tools, stream );
+    
+end );
 
 ####################################
 #
@@ -620,6 +610,31 @@ InstallMethod( homalgSetName,
   function( r, name, R )
     
     SetName( r, homalgSendBlocking( [ "toString(", r, ")" ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) );
+    
+end );
+
+##
+InstallMethod( MatrixOfWeightsOfIndeterminates,
+        "for external matrices in Macaulay2",
+        [ IsHomalgExternalRingInMacaulay2Rep and HasWeightsOfIndeterminates ],
+        
+  function( R )
+    local degrees, n, m, ext_obj;
+    
+    degrees := WeightsOfIndeterminates( R );
+    
+    n := Length( degrees );
+    
+    if n > 0 and IsList( degrees[1] ) then
+        m := Length( degrees[1] );
+        degrees := Flat( TransposedMat( degrees ) );
+    else
+        m := 1;
+    fi;
+    
+    ext_obj := homalgSendBlocking( [ "pack(", n, ",{", degrees, "})"  ], "break_lists", R, HOMALG_IO.Pictograms.CreateList );
+    
+    return HomalgMatrix( ext_obj, m, n, R );
     
 end );
 

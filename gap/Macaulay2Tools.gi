@@ -64,6 +64,16 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
 	       
+               MultiWeightedDegreeMultivariatePolynomial :=
+                 function( r, weights, R )
+                   local externally_stored_weights;
+                   
+                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
+                   
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   
+                 end,
+               
                Sum :=
                  function( a, b )
                    
@@ -88,7 +98,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                CopyMatrix :=
                  function( C, R )
                    
-                   return homalgSendBlocking( [ "substitute(", C, HomalgRing( C ), ")" ], R, HOMALG_IO.Pictograms.CopyMatrix );
+                   return homalgSendBlocking( [ "substitute(", C, R, ")" ], R, HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                
@@ -215,6 +225,13 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( C )
                    
                    return StringToInt( homalgSendBlocking( [ "numgens(source(", C, "))" ], "need_output", HOMALG_IO.Pictograms.NrColumns ) );
+                   
+                 end,
+               
+               Determinant :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "det(", C, ")" ], "return_ring_element", HOMALG_IO.Pictograms.Determinant );
                    
                  end,
                

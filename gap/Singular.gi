@@ -706,6 +706,7 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
   }\n\
   return(m);\n\
 }\n\n",
+    
     )
 );
 
