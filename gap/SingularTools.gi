@@ -63,7 +63,7 @@ InstallValue( SheavesHomalgTableForSingularTools,
                Diff :=
                  function( D, N )
                    
-                   return homalgSendBlocking( [ "Diff(", D, N, ")" ], [ "matrix" ], HomalgRing( D ), HOMALG_IO.Pictograms.Eliminate );
+                   return homalgSendBlocking( [ "Diff(", D, N, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Eliminate );
                    
                  end,
                

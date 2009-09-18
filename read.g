@@ -42,6 +42,9 @@ ReadPackage( "Sheaves", "gap/Tools.gi" );
 ReadPackage( "Sheaves", "gap/SingularTools.gi" );
 
 ##
+ReadPackage( "Sheaves", "gap/Macaulay2Tools.gi" );
+
+##
 ReadPackage( "Sheaves", "gap/MAGMATools.gi" );
 
 ##
