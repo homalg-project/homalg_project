@@ -52,15 +52,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                DegreeMultivariatePolynomial :=
                  function( r, R )
                    
-                   return Int( homalgSendBlocking( [ "if zero ", r, " then -1 else sum degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return Int( homalgSendBlocking( [ "DegreeForHomalg(", r, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
                    
                  end,
                
                WeightedDegreeMultivariatePolynomial :=
                  function( r, weights, R )
 	           
-		   # degree(x, 0) = -1 in Macaulay2
-                   return Int( homalgSendBlocking( [ "sum apply(toList(0..(numgens ", R, ")-1), i->{", weights, "}#i * degree(", R, "_i, leadTerm ", r, "))" ], "break_lists", "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return Int( homalgSendBlocking( [ "Deg(r, {", weights, "}, R)" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
                    
                  end,
 	       
@@ -143,10 +142,10 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                    plist := plist - 1;
 		   
-                   return homalgSendBlocking( [ M, "^{", plist, "}" ], "break_lists", HOMALG_IO.Pictograms.CertainRows );
+                   return homalgSendBlocking( [ M, "^{", plist, "}" ], HOMALG_IO.Pictograms.CertainRows );
 		   
 		   # operator '^' forgets grading!
-                   #return homalgSendBlocking( [ "map(", R, "^(-(degrees target ", M, ")_{", plist, "}), source ", M, ", ", M, "^{", plist, "})" ], "break_lists", HOMALG_IO.Pictograms.CertainRows );
+                   #return homalgSendBlocking( [ "map(", R, "^(-(degrees target ", M, ")_{", plist, "}), source ", M, ", ", M, "^{", plist, "})" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
                
@@ -154,7 +153,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M, plist )
                    
 		   plist := plist - 1;
-                   return homalgSendBlocking( [ M, "_{", plist, "}" ], "break_lists", HOMALG_IO.Pictograms.CertainColumns );
+                   return homalgSendBlocking( [ M, "_{", plist, "}" ], HOMALG_IO.Pictograms.CertainColumns );
                    
                  end,
                
@@ -175,7 +174,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                DiagMat :=
                  function( e )
 		   
-                   return homalgSendBlocking( [ "fold((i,j)->i ++ j, {", e, "})" ], "break_lists", HomalgRing( e[1] ), HOMALG_IO.Pictograms.DiagMat );
+                   return homalgSendBlocking( [ "fold((i,j)->i ++ j, {", e, "})" ], HomalgRing( e[1] ), HOMALG_IO.Pictograms.DiagMat );
                    
                  end,
                
@@ -279,14 +278,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                GetColumnIndependentUnitPositions :=
                  function( M, pos_list )
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", M, ", {", pos_list, "})" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
                  end,
                
                GetRowIndependentUnitPositions :=
                  function( M, pos_list )
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", M, ", {", pos_list, "})" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
                    
                  end,
                
@@ -294,7 +293,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M, pos_list )
                    local list_string;
                    
-                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, pos_list, ")" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                   list_string := homalgSendBlocking( [ "GetUnitPosition(", M, ", {", pos_list, "})" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
                    
                    if list_string = "fail" then
                        return fail;
@@ -379,7 +378,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    local clist, list_string;
                    
 		   clist := clean_columns - 1;
-                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", {", clist, "})" ], "break_lists", "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
+                   list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", {", clist, "})" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    return StringToIntList( list_string );
                    
@@ -422,6 +421,98 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
 		   R := HomalgRing( M );
                    
                    return homalgSendBlocking( [ "reshape(", R, "^(numgens(source(", M, "))*numgens(target(", M, "))),", R, "^1,", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
+                   
+                 end,
+	       
+               DegreesOfEntries :=
+                 function( M )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                     
+                     L := StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
+               WeightedDegreesOfEntries :=
+                 function( M, weights )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                     
+                     L := StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
+               NonTrivialDegreePerRow :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   return StringToIntList( L );
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerRow :=
+                 function( M, weights )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRow(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   return StringToIntList( L );
+                   
+                 end,
+               
+               NonTrivialDegreePerRowWithColPosition :=
+                 function( M )
+                   
+                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
+		   
+                 end,
+               
+               NonTrivialWeightedDegreePerRowWithColPosition :=
+                 function( M, weights )
+                   
+                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
+                   
+                 end,
+               
+               NonTrivialDegreePerColumn :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   return StringToIntList( L );
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerColumn :=
+                 function( M, weights )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumn(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   
+                   return StringToIntList( L );
+                   
+                 end,
+               
+               NonTrivialDegreePerColumnWithRowPosition :=
+                 function( M )
+                   
+                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerColumnWithRowPosition :=
+                 function( M, weights )
+                   
+                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumnWithRowPosition(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
                    
                  end,
                
