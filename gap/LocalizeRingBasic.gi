@@ -38,36 +38,152 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                BasisOfRowsCoeff :=
                  function( M, T )
-                   local R, globalR, m;
+                   local R, ComputationRing, TT, result;
                    
                    R := HomalgRing( M );
                    
-                   globalR := AssociatedComputationRing( R );
+                   ComputationRing := AssociatedComputationRing( R );
                    
-                   m := Eval( M );
+                   SetEval( T, [ Denominator( M ) * HomalgIdentityMatrix( NrRows( M ), ComputationRing ), One( globalR ) ] );
                    
-                   SetEval( T, [ m[2] * HomalgIdentityMatrix( NrRows( M ), globalR ), One( globalR ) ] );
+                   TT := HomalgVoidMatrix( ComputationRing );
                    
-                   return HomalgLocalMatrix( m[1], R );
+                   result := HomalgLocalMatrix( BasisOfRowModuleCoeff( Numerator( M ) , TT ), R );
+                   
+                   #stimmt die reihenfolge? benutze den hook der basisbestimung...
+                   T := T * TT;
+                   
+                   return result;
                    
                  end,
                
                BasisOfColumnsCoeff :=
                  function( M, T )
-                   local R, globalR, m;
+                   local R, ComputationRing, TT, result;
                    
                    R := HomalgRing( M );
                    
-                   globalR := AssociatedComputationRing( R );
+                   ComputationRing := AssociatedComputationRing( R );
                    
-                   m := Eval( M );
+                   SetEval( T, [ Denominator( M ) * HomalgIdentityMatrix( NrColumns( M ), ComputationRing ), One( globalR ) ] );
                    
-                   SetEval( T, [ m[2] * HomalgIdentityMatrix( NrColumns( M ), globalR ), One( globalR ) ] );
+                   TT := HomalgVoidMatrix( ComputationRing );
                    
-                   return HomalgLocalMatrix( m[1], R );
+                   result := HomalgLocalMatrix( BasisOfColumnModuleCoeff( Numerator( M ), TT ), R );
+                   
+                   #stimmt die reihenfolge? benutze den hook der basisbestimung...
+                   T := T * TT;
+                   
+                   return result;
                    
                  end,
                
+               DecideZeroRows :=
+                 function( A, B )
+
+                   return DecideZeroRows( Numerator( A ) , Numerator( B ) );
+
+                 end,
+               
+               DecideZeroColumns :=
+                 function( A, B )
+                   
+                   return DecideZeroColumns( Numerator( A ) , Numerator( B ) );
+                   
+                 end,
+               
+               DecideZeroRowsEffectively :=
+                 function( A, B, T )
+                   local result;
+                   
+                   result := DecideZeroRowsEffectively( Numerator( A ) , Numerator ( B ) );
+                   
+                   return result;
+                   
+                 end,
+               
+               DecideZeroColumnsEffectively :=
+                 function( A, B, T )
+                   local R, N;
+                   
+                   R := HomalgRing( A );
+                   
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   
+                   homalgSendBlocking( [ "list l=DecideZeroColumnsEffectively(", A, B, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   
+                   return N;
+                   
+                 end,
+               
+               
+               SyzygiesGeneratorsOfRows :=
+                 function( arg )
+                   local M, R, M2, M3, N;
+                   
+                   M := arg[1];
+                   
+                   R := HomalgRing( M );
+                   
+                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
+                       
+                       M2 := arg[2];
+                       
+                       M3 := UnionOfRows( M, M2 );
+                       
+                       M := CertainRows( M3, [ 1 .. NrRows( M ) ] );
+                       
+                       M2 := CertainRows( M3, [ NrRows( M ) + 1 .. NrRows( M3 ) ] );
+                       
+                       N := SyzygiesGeneratorsOfRows( Numerator( M ), Numerator( M2 ) );
+                       
+                   else
+                       
+                       N := SyzygiesGeneratorsOfRows( Numerator( M ) );
+                       
+                   fi;
+                   
+                   return HomalgLocalMatrix( N, R );
+                   
+                 end,
+               
+               SyzygiesGeneratorsOfColumns :=
+                 function( arg )
+                   local M, R, M2, M3, N;
+                   
+                   M := arg[1];
+                   
+                   R := HomalgRing( M );
+                   
+                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
+                       
+                       M2 := arg[2];
+                       
+                       M3 := UnionOfColumns( M, M2 );
+                       
+                       M := CertainColumns( M3, [ 1 .. NrColumns( M ) ] );
+                       
+                       M2 := CertainColumns( M3, [ NrColumns( M ) + 1 .. NrColumns( M3 ) ] );
+                       
+                       N := SyzygiesGeneratorsOfColumns( Numerator( M ), Numerator( M2 ) );
+                       
+                   else
+                       
+                       N := SyzygiesGeneratorsOfColumns( Numerator( M ) );
+                       
+                   fi;
+                   
+                   return HomalgLocalMatrix( N, R );
+                   
+                 end,
+               
+        )
+ );
+
+InstallValue( HomalgTableReductionMethodsForLocalizedRingsBasic,
+        
+        rec(
+        
                DecideZeroRows :=
                  function( A, B )
                    local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2, A3;
@@ -391,66 +507,6 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    N := HomalgRingElement( one , denA , R ) * N;
                   
                    return N;
-                   
-                 end,
-               
-               SyzygiesGeneratorsOfRows :=
-                 function( arg )
-                   local M, R, M2, M3, N;
-                   
-                   M := arg[1];
-                   
-                   R := HomalgRing( M );
-                   
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-                       
-                       M3 := UnionOfRows( M, M2 );
-                       
-                       M := CertainRows( M3, [ 1 .. NrRows( M ) ] );
-                       
-                       M2 := CertainRows( M3, [ NrRows( M ) + 1 .. NrRows( M3 ) ] );
-                       
-                       N := SyzygiesGeneratorsOfRows( Numerator( M ), Numerator( M2 ) );
-                       
-                   else
-                       
-                       N := SyzygiesGeneratorsOfRows( Numerator( M ) );
-                       
-                   fi;
-                   
-                   return HomalgLocalMatrix( N, R );
-                   
-                 end,
-               
-               SyzygiesGeneratorsOfColumns :=
-                 function( arg )
-                   local M, R, M2, M3, N;
-                   
-                   M := arg[1];
-                   
-                   R := HomalgRing( M );
-                   
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-                       
-                       M3 := UnionOfColumns( M, M2 );
-                       
-                       M := CertainColumns( M3, [ 1 .. NrColumns( M ) ] );
-                       
-                       M2 := CertainColumns( M3, [ NrColumns( M ) + 1 .. NrColumns( M3 ) ] );
-                       
-                       N := SyzygiesGeneratorsOfColumns( Numerator( M ), Numerator( M2 ) );
-                       
-                   else
-                       
-                       N := SyzygiesGeneratorsOfColumns( Numerator( M ) );
-                       
-                   fi;
-                   
-                   return HomalgLocalMatrix( N, R );
                    
                  end,
                

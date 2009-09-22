@@ -6,9 +6,9 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
 
     RP := CreateHomalgTableForLocalizedRingsWithMora( R );
     
-    Rloc := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    Rloc := LocalizePolynomialRingAtZero( R );
     
-    Rloc := LocalizePolynomialRingAtZero( R )
+    var := IndeterminatesOfPolynomialRing( R );
     
     S := CreateHomalgRing( Rloc, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
     

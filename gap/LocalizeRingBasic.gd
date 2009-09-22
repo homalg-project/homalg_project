@@ -18,3 +18,4 @@
 
 DeclareGlobalVariable( "CommonHomalgTableForLocalizedRingsBasic" );
 
+DeclareGlobalVariable( "HomalgTableReductionMethodsForLocalizedRingsBasic" );

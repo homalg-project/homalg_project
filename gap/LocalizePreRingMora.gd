@@ -1,1 +1,0 @@
-DeclareGlobalVariable( "CommonHomalgTableForSingularBasicMoraPreRing" );

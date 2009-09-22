@@ -658,10 +658,14 @@ InstallMethod( LocalizeAt,
         [ IsHomalgRing and IsCommutative, IsList ],
         
   function( globalR, ideal_gens )
-    local RP, localR, n_gens, gens;
+    local RP, component, localR, n_gens, gens;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForLocalizedRings( globalR );
+    
+    for component in NamesOfComponents( HomalgTableReductionMethodsForLocalizedRingsBasic ) do
+        RP.(component) := HomalgTableReductionMethodsForLocalizedRingsBasic.(component);
+    od;
     
     ## create the local ring
     localR := CreateHomalgRing( globalR, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
@@ -807,17 +811,24 @@ InstallMethod( HomalgLocalMatrix,
         [ IsHomalgMatrix, IsRingElement, IsHomalgLocalRingRep ],
         
   function( A, r, R )
-    local G, type, matrix, computationring, AA;
+    local G, type, matrix, HookDenom, ComputationRing, AA;
     
     G := HomalgRing( A );
     
-    computationring := AssociatedComputationRing( R );
+    ComputationRing := AssociatedComputationRing( R );
+    
+    if IsBound( A!.hook ) then
+      HookDenom := ComputationRing!.( A!.hook )();
+      Unbind( A!.hook )
+    else
+      HookDenom := One( ComputationRing );
+    fi;
     
     matrix := rec( ring := R );
     
     ObjectifyWithAttributes(
         matrix, TheTypeHomalgLocalMatrix,
-        Eval, [ A, r ]
+        Eval, [ A, r * HookDenom ]
     );
     
     BlindlyCopyMatrixPropertiesToLocalMatrix( A, matrix );
