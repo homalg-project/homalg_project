@@ -813,31 +813,12 @@ InstallMethod( HomalgLocalMatrix,
     
     computationring := AssociatedComputationRing( R );
     
-#     if IsHomalgRingElement( r ) and not IsIdenticalObj( HomalgRing( r ), G ) then
-#         Error( "the ring of the element and the ring of the matrix are not identical\n" );
-#     fi;
-    
-#     if not IsIdenticalObj( G, AssociatedGlobalRing( R ) ) then
-#         Error( "the ring the matrix and the global ring of the specified local ring are not identical\n" );
-#     fi;
-    
     matrix := rec( ring := R );
     
-    if not IsIdenticalObj( computationring , AssociatedGlobalRing( R ) ) then
-    
-      #AA := G!.CopyMatrix( A , computationring );
-      AA := HomalgMatrix( homalgSendBlocking( [ "imap(", G, A, ")" ], [ "matrix" ], computationring, HOMALG_IO.Pictograms.CopyMatrix ) , computationring);
-    else
-      
-      AA := A;
-      
-    fi;
-    
-        ObjectifyWithAttributes(
-            matrix, TheTypeHomalgLocalMatrix,
-#            Eval, [ A / computationring, r / computationring ] );
-            #Eval, [ AA, r ] );
-            Eval, [ AA, r ] );
+    ObjectifyWithAttributes(
+        matrix, TheTypeHomalgLocalMatrix,
+        Eval, [ A, r ]
+    );
     
     BlindlyCopyMatrixPropertiesToLocalMatrix( A, matrix );
     
