@@ -763,28 +763,28 @@ end );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> dd := Hom( d );
+##  <An acyclic cocomplex containing a single morphism of right modules at degrees\
+##   [ 0 .. 1 ]>
 ##  <A non-zero acyclic cocomplex containing a single morphism of right modules at\
 ##   degrees [ 0 .. 1 ]>
 ##  gap> C := Resolution( dd );
 ##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
 ##  es [ 0 .. 1 ]>
 ##  gap> CC := Hom( C );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
-##  t degrees [ 0 .. 1 ]>
+##  <An acyclic complex containing a single morphism of left cocomplexes at degree\
+##  s [ 0 .. 1 ]>
 ##  gap> BC := HomalgBicomplex( CC );
-##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
-##  [ -1 .. 0 ]>
+##  <A bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> Display( BC );
 ##   * *
 ##   * *
 ##  gap> UU := UnderlyingComplex( BC );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
-##  t degrees [ 0 .. 1 ]>
+##  <An acyclic complex containing a single morphism of left cocomplexes at degree\
+##  s [ 0 .. 1 ]>
 ##  gap> IsIdenticalObj( UU, CC );
 ##  true
 ##  gap> tBC := TransposedBicomplex( BC );
-##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x
-##  [ 0 .. 1 ]>
+##  <A bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
 ##  gap> Display( tBC );
 ##   * *
 ##   * *

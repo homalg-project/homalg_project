@@ -67,16 +67,48 @@ BindGlobal( "TheTypeHomalgRelationsOfRightModule",
 #
 ####################################
 
+## strictly less relations than generators => not IsTorsion
+InstallImmediateMethod( IsTorsion,
+        IsHomalgRelations and HasEvaluatedMatrixOfRelations, 0,
+        
+  function( rel )
+    
+    if HasNrGenerators( rel ) and HasNrRelations( rel ) and
+       NrGenerators( rel ) > NrRelations( rel ) then
+        
+        ## this is the true reason for this immediate method
+        if HasParent( rel ) then
+            SetIsTorsion( Parent( rel ), false );
+        fi;
+        
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ##
 InstallImmediateMethod( IsInjectivePresentation,
         IsHomalgRelationsOfRightModule and HasEvaluatedMatrixOfRelations, 0,
         
   function( rel )
-    local mat;
+    local mat, M, rk;
     
     mat := MatrixOfRelations( rel );
     
     if HasIsRightRegularMatrix( mat ) and IsRightRegularMatrix( mat ) then
+        
+        if HasParent( rel ) then
+            M := Parent( rel );
+            rk := NrGenerators( rel ) - NrRelations( rel );
+            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            else
+                SetRankOfModule( M, rk );	## the Euler characteristic
+            fi;
+        fi;
+        
         return true;
     fi;
     
@@ -89,11 +121,22 @@ InstallImmediateMethod( IsInjectivePresentation,
         IsHomalgRelationsOfLeftModule and HasEvaluatedMatrixOfRelations, 0,
         
   function( rel )
-    local mat;
+    local mat, M, rk;
     
     mat := MatrixOfRelations( rel );
     
     if HasIsLeftRegularMatrix( mat ) and IsLeftRegularMatrix( mat ) then
+        
+        if HasParent( rel ) then
+            M := Parent( rel );
+            rk := NrGenerators( rel ) - NrRelations( rel );
+            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            else
+                SetRankOfModule( M, rk );	## the Euler characteristic
+            fi;
+        fi;
+        
         return true;
     fi;
     
@@ -526,7 +569,7 @@ InstallMethod( BasisOfModule,
         [ IsHomalgRelationsOfRightModule ],
         
   function( rel )
-    local mat, bas, inj;
+    local mat, bas, inj, M, rk;
     
     if not IsBound( rel!.BasisOfModule ) then
         mat := MatrixOfRelations( rel );
@@ -540,6 +583,15 @@ InstallMethod( BasisOfModule,
             rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
+                if HasParent( rel ) then
+                    M := Parent( rel );
+                    rk := NrGenerators( rel ) - NrRelations( rel );
+                    if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
+                        Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+                    else
+                        SetRankOfModule( M, rk );	## the Euler characteristic
+                    fi;
+                fi;
             fi;
             return rel;
         else
@@ -555,6 +607,15 @@ InstallMethod( BasisOfModule,
     
     if inj then
         SetIsInjectivePresentation( bas, true );
+        if HasParent( bas ) then
+            M := Parent( bas );
+            rk := NrGenerators( bas ) - NrRelations( bas );
+            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            else
+                SetRankOfModule( M, rk );	## the Euler characteristic
+            fi;
+        fi;
     fi;
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
@@ -568,7 +629,7 @@ InstallMethod( BasisOfModule,
         [ IsHomalgRelationsOfLeftModule ],
         
   function( rel )
-    local mat, bas, inj;
+    local mat, bas, inj, M, rk;
     
     if not IsBound( rel!.BasisOfModule ) then
         mat := MatrixOfRelations( rel );
@@ -582,6 +643,15 @@ InstallMethod( BasisOfModule,
             rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
+                if HasParent( rel ) then
+                    M := Parent( rel );
+                    rk := NrGenerators( rel ) - NrRelations( rel );
+                    if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
+                        Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+                    else
+                        SetRankOfModule( M, rk );	## the Euler characteristic
+                    fi;
+                fi;
             fi;
             return rel;
         else
@@ -597,6 +667,15 @@ InstallMethod( BasisOfModule,
     
     if inj then
         SetIsInjectivePresentation( bas, true );
+        if HasParent( bas ) then
+            M := Parent( bas );
+            rk := NrGenerators( bas ) - NrRelations( bas );
+            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            else
+                SetRankOfModule( M, rk );	## the Euler characteristic
+            fi;
+        fi;
     fi;
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
@@ -918,7 +997,9 @@ end );
 ##
 InstallGlobalFunction( HomalgRelationsForLeftModule,
   function( arg )
-    local relations, mat;
+    local l, relations, mat, M;
+    
+    l := Length( arg );
     
     relations := rec( );
     
@@ -926,20 +1007,58 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
         mat := arg[1];
         ResetFilterObj( mat, IsMutableMatrix );
     elif IsFunction( arg[1] ) then
-        ## Objectify:
-        ObjectifyWithAttributes(
-                relations, TheTypeHomalgRelationsOfLeftModule,
-                EvalMatrixOfRelations, arg );
+        
+        if not ( l > 1 and IsList( arg[2] ) ) then
+            Error( "if the first argument is a function then the second argument must be the list of arguments\n" );
+        fi;
+        
+        if IsHomalgModule( arg[l] ) then
+            
+            M := arg[l];
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    relations, TheTypeHomalgRelationsOfLeftModule,
+                    EvalMatrixOfRelations, arg{[ 1 .. 2 ]} );
+            SetParent( relations, M );
+            if HasIsTorsion( relations ) then
+                SetIsTorsion( M, IsTorsion( relations ) );
+            fi;
+            if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
+                SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+            fi;
+        else
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    relations, TheTypeHomalgRelationsOfLeftModule,
+                    EvalMatrixOfRelations, arg{[ 1 .. 2 ]} );
+        fi;
         
         return relations;
     else
         mat := CallFuncList( HomalgMatrix, arg );
     fi;
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            relations, TheTypeHomalgRelationsOfLeftModule,
-            EvaluatedMatrixOfRelations, mat );
+    if l > 1 and IsHomalgModule( arg[l] ) then
+        
+        M := arg[l];
+        
+        ObjectifyWithAttributes(
+                relations, TheTypeHomalgRelationsOfLeftModule,
+                EvaluatedMatrixOfRelations, mat );
+        SetParent( relations, M );
+        if HasIsTorsion( relations ) then
+            SetIsTorsion( M, IsTorsion( relations ) );
+        fi;
+        if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
+            SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+        fi;
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                relations, TheTypeHomalgRelationsOfLeftModule,
+                EvaluatedMatrixOfRelations, mat );
+    fi;
     
     return relations;
     
@@ -948,7 +1067,9 @@ end );
 ##
 InstallGlobalFunction( HomalgRelationsForRightModule,
   function( arg )
-    local relations, mat;
+    local l, relations, mat, M;
+    
+    l := Length( arg );
     
     relations := rec( );
     
@@ -956,22 +1077,92 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
         mat := arg[1];
         ResetFilterObj( mat, IsMutableMatrix );
     elif IsFunction( arg[1] ) then
-        ## Objectify:
-        ObjectifyWithAttributes(
-                relations, TheTypeHomalgRelationsOfRightModule,
-                EvalMatrixOfRelations, arg );
+        
+        if not ( l > 1 and IsList( arg[2] ) ) then
+            Error( "if the first argument is a function then the second argument must be the list of arguments\n" );
+        fi;
+        
+        if IsHomalgModule( arg[l] ) then
+            
+            M := arg[l];
+            
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    relations, TheTypeHomalgRelationsOfRightModule,
+                    EvalMatrixOfRelations, arg{[ 1 .. 2 ]} );
+            SetParent( relations, M );
+            if HasIsTorsion( relations ) then
+                SetIsTorsion( M, IsTorsion( relations ) );
+            fi;
+            if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
+                SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+            fi;
+        else
+            ## Objectify:
+            ObjectifyWithAttributes(
+                    relations, TheTypeHomalgRelationsOfRightModule,
+                    EvalMatrixOfRelations, arg{[ 1 .. 2 ]} );
+        fi;
         
         return relations;
     else
         mat := CallFuncList( HomalgMatrix, arg );
     fi;
     
-    ## Objectify:
-    ObjectifyWithAttributes(
-            relations, TheTypeHomalgRelationsOfRightModule,
-            EvaluatedMatrixOfRelations, mat );
+    if l > 1 and IsHomalgModule( arg[l] ) then
+        
+        M := arg[l];
+        
+        ObjectifyWithAttributes(
+                relations, TheTypeHomalgRelationsOfRightModule,
+                EvaluatedMatrixOfRelations, mat );
+        SetParent( relations, M );
+        if HasIsTorsion( relations ) then
+            SetIsTorsion( M, IsTorsion( relations ) );
+        fi;
+        if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
+            SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+        fi;
+    else
+        ## Objectify:
+        ObjectifyWithAttributes(
+                relations, TheTypeHomalgRelationsOfRightModule,
+                EvaluatedMatrixOfRelations, mat );
+    fi;
     
     return relations;
+    
+end );
+
+##
+InstallMethod( ShallowCopy,
+        "for homalg relations",
+        [ IsHomalgRelations ],
+        
+  function( rel )
+    local rel_new, c;
+    
+    if HasEvaluatedMatrixOfRelations( rel ) then
+        if IsHomalgRelationsOfLeftModule( rel ) then
+            rel_new := HomalgRelationsForLeftModule( EvaluatedMatrixOfRelations( rel ) );
+        else
+            rel_new := HomalgRelationsForRightModule( EvaluatedMatrixOfRelations( rel ) );
+        fi;
+    elif HasEvalMatrixOfRelations( rel ) then
+        if IsHomalgRelationsOfLeftModule( rel ) then
+            rel_new := CallFuncList( HomalgRelationsForLeftModule, EvalMatrixOfRelations( rel ) );
+        else
+            rel_new := CallFuncList( HomalgRelationsForRightModule, EvalMatrixOfRelations( rel ) );
+        fi;
+    fi;
+    
+    for c in [ "DegreesOfGenerators", "BasisOfModule", "MaximumNumberOfResolutionSteps" ] do
+        if IsBound( rel!.( c ) ) then
+            rel_new!.( c ) := rel!.( c );
+        fi;
+    od;
+    
+    return rel_new;
     
 end );
 

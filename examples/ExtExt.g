@@ -15,7 +15,7 @@
 ##  gap> M := LeftPresentation( imat );
 ##  <A left module presented by 5 relations for 4 generators>
 ##  gap> N := Hom( ZZ, M );
-##  <A non-torsion right module on 4 generators satisfying 3 relations>
+##  <A right module on 4 generators satisfying an unknown number of relations>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom, 2, N, "TensorN" );
 ##  <The functor TensorN>
 ##  gap> G := LeftDualizingFunctor( ZZ );;
@@ -65,16 +65,16 @@
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E, 0 );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A non-zero left module presented by 3 relations for 4 generators>
+##     0:	<A non-torsion left module presented by 3 relations for 4 generators>
 ##    -1:	<A non-zero left module presented by 33 relations for 8 generators>
 ##  of
 ##  <A non-zero left module presented by 27 relations for 19 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A non-zero left module presented by 2 relations for 3 generators>
+##     0:	<A non-torsion left module presented by 2 relations for 3 generators>
 ##    -1:	<A non-zero left module presented by 6 relations for 6 generators>
 ##  of
-##  <A non-zero left module presented by 8 relations for 9 generators>>
+##  <A non-torsion left module presented by 8 relations for 9 generators>>
 ##  gap> m := IsomorphismOfFiltration( filt );
 ##  <An isomorphism of left modules>
 ##  ]]></Example>

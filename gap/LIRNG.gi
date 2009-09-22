@@ -623,7 +623,7 @@ InstallMethod( \*,	## check if both elements reside in the same ring
   function( r, s )
     
     if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
-        Error( "the two ring are not defined over identically the same ring\n" );
+        Error( "the two ring elements are not defined over identically the same ring\n" );
     fi;
     
     TryNextMethod( );
@@ -682,7 +682,7 @@ InstallMethod( \+,	## check if both elements reside in the same ring
   function( r, s )
     
     if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
-        Error( "the two ring are not defined over identically the same ring\n" );
+        Error( "the two ring elements are not defined over identically the same ring\n" );
     fi;
     
     TryNextMethod( );
@@ -741,7 +741,7 @@ InstallMethod( \-,	## check if both elements reside in the same ring
   function( r, s )
     
     if not IsIdenticalObj( HomalgRing( r ), HomalgRing( s ) ) then
-        Error( "the two ring are not defined over identically the same ring\n" );
+        Error( "the two ring elements are not defined over identically the same ring\n" );
     fi;
     
     TryNextMethod( );

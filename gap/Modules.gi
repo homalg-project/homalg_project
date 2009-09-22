@@ -921,7 +921,7 @@ InstallMethod( AsEpimorphicImage,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local M, rel, TI, T;
+    local M, rel, pos, TI, psi, T;
     
     if not ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) and
        not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
@@ -932,12 +932,22 @@ InstallMethod( AsEpimorphicImage,
     
     rel := RelationsOfModule( M );
     
-    TI := MatrixOfMap( phi );
+    ## copying phi is important for the lazy evaluation below
+    ## otherwise phi will be part of the transition matrix data
+    ## of M, which might be needed to compute phi!
+    psi := ShallowCopy( phi );
     
-    T := HomalgMatrix( NrColumns( TI ), NrRows( TI ), HomalgRing( TI ) );
+    pos := PairOfPositionsOfTheDefaultSetOfRelations( psi );
+    
+    TI := MatrixOfMap( psi );
+    
+    T := HomalgMatrix( HomalgRing( TI ) );
+    
+    SetNrRows( T, NrColumns( TI ) );
+    SetNrColumns( T, NrRows( TI ) );
     
     ## phi^-1 is not necessarily a morphism
-    SetEvalMatrixOperation( T, [ a -> MatrixOfMap( a^-1 ), [ phi ] ] );		## Source( phi ) does not play any role!!!
+    SetEvalMatrixOperation( T, [ a -> MatrixOfMap( a^-1, pos[2], pos[1] ), [ psi ] ] );		## Source( psi ) does not play any role!!!
     
     return AddANewPresentation( M, rel * T, T, TI );
     

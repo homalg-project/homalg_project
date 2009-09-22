@@ -153,6 +153,8 @@ DeclareGlobalFunction( "LogicalImplicationsForHomalgSubobjects" );
 
 DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgSubobjects" );
 
+DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
+
 DeclareGlobalFunction( "AddToAhomalgTable" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );

@@ -23,7 +23,8 @@
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
 ##  gap> N := Kernel( pi );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A cyclic left module presented by an unknown number of relations for a cyclic\
+##   generator>
 ##  gap> Display( N );
 ##  Z/< 4 >
 ##  gap> C := HomalgComplex( pi );

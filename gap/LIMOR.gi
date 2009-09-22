@@ -20,7 +20,24 @@
 
 InstallValue( LIMOR,
         rec(
-            color := "\033[4;30;46m" )
+            color := "\033[4;30;46m",
+            intrinsic_properties :=
+            [ "IsZero",
+              "IsMorphism",
+              "IsGeneralizedMorphism",
+              "IsGeneralizedEpimorphism",
+              "IsGeneralizedMonomorphism",
+              "IsGeneralizedIsomorphism",
+              "IsIdentityMorphism",
+              "IsMonomorphism",
+              "IsEpimorphism",
+              "IsSplitMonomorphism",
+              "IsSplitEpimorphism",
+              "IsIsomorphism",
+	      "IsAutomorphism" ],
+            intrinsic_attributes :=
+            [ "DegreeOfMorphism" ]
+	    )
         );
 
 ##

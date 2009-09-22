@@ -959,8 +959,11 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
         M := CallFuncList( ReducedBasisOfModule,
                      Concatenation( [ RelationsOfModule( arg[1] ) ], arg{[2..nargs]} ) );
-        if HasIsInjectivePresentation( M ) and IsInjectivePresentation( M ) then
-            RankOfModule( arg[1] );	## will be figured out by an immediate method in LIMOD
+        if not HasRankOfModule( arg[1] ) and HasIsInjectivePresentation( M ) and IsInjectivePresentation( M ) then
+            SetRankOfModule( arg[1], NrGenerators( M ) - NrRelations( M ) );
+        fi;
+        if not HasIsTorsion( arg[1] ) and HasIsTorsion( M ) then
+            SetIsTorsion( arg[1], IsTorsion( M ) );
         fi;
         return M;
     fi;

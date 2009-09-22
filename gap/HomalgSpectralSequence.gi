@@ -761,11 +761,10 @@ end );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> CC := Hom( dM, dM );
-##  <A non-zero acyclic cocomplex containing a single morphism of right complexes \
-##  at degrees [ 0 .. 1 ]>
+##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
+##  es [ 0 .. 1 ]>
 ##  gap> B := HomalgBicomplex( CC );
-##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x
-##  [ -1 .. 0 ]>
+##  <A bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  ]]></Example>
 ##    Now we construct the spectral sequence associated to the bicomplex <M>B</M>, also called the <E>first</E>
 ##    spectral sequence:
@@ -804,8 +803,7 @@ end );
 ##    the transposed bicomplex:
 ##      <Example><![CDATA[
 ##  gap> tB := TransposedBicomplex( B );
-##  <A non-zero bicocomplex containing right modules at bidegrees [ -1 .. 0 ]x
-##  [ 0 .. 1 ]>
+##  <A bicocomplex containing right modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
 ##  gap> II_E := HomalgSpectralSequence( tB, 2 );
 ##  <A stable cohomological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x

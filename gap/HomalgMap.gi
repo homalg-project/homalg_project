@@ -510,11 +510,11 @@ end );
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
 ##  gap> M;
-##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  <A rank 1 left module presented by 1 relation for 2 generators>
 ##  gap> Display( M );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> N;
-##  <A non-torsion left module presented by 1 relation for 3 generators>
+##  <A rank 2 left module presented by 1 relation for 3 generators>
 ##  gap> Display( N );
 ##  Z/< 4 > + Z^(1 x 2)
 ##  ]]></Example>
@@ -897,7 +897,7 @@ end );
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> ByASmallerPresentation( M );
-##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  <A rank 1 left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> Display( phi );
@@ -906,7 +906,7 @@ end );
 ##  
 ##  the map is currently represented by the above 2 x 4 matrix
 ##  gap> ByASmallerPresentation( N );
-##  <A non-torsion left module presented by 1 relation for 3 generators>
+##  <A rank 2 left module presented by 1 relation for 3 generators>
 ##  gap> Display( N );
 ##  Z/< 4 > + Z^(1 x 2)
 ##  gap> Display( phi );
@@ -1274,11 +1274,11 @@ InstallGlobalFunction( HomalgMap,
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( source )
            and ( NrGenerators( source, pos_s ) <> NrRows( matrix )
                  or NrGenerators( target, pos_t ) <> NrColumns( matrix ) ) then
-            Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
+            Error( "the dimensions of the matrix do not match the numbers of generators of the modules\n" );
         elif IsHomalgRightObjectOrMorphismOfRightObjects( source )
            and ( NrGenerators( source, pos_s ) <> NrColumns( matrix )
                  or NrGenerators( target, pos_t ) <> NrRows( matrix ) ) then
-            Error( "the dimensions of the matrix do not match numbers of generators of the modules\n" );
+            Error( "the dimensions of the matrix do not match the numbers of generators of the modules\n" );
         fi;
         
         matrices.( String( index_pair ) ) := matrix;
@@ -1492,53 +1492,37 @@ InstallMethod( \*,
 end );
 
 ##
+InstallMethod( ShallowCopy,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local psi;
+    
+    if HasMorphismAidMap( phi ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsHomalgEndomorphism( phi ) then
+        psi := HomalgMap( MatrixOfMap( phi ), ShallowCopy( Source( phi ) ) );
+    else
+        psi := HomalgMap( MatrixOfMap( phi ), ShallowCopy( Source( phi ) ), ShallowCopy( Range( phi ) ) );
+    fi;
+    
+    MatchPropertiesAndAttributes( phi, psi, LIMOR.intrinsic_properties, LIMOR.intrinsic_attributes );
+    
+    return psi;
+    
+end );
+
+##
 InstallMethod( UpdateModulesByMap,
         "for homalg maps",
         [ IsHomalgMap and IsIsomorphism ],
         
   function( phi )
-    local S, T, propertiesS, propertiesT, attributesS, attributesT, p, a;
     
-    S := Source( phi );
-    T := Range( phi );
-    
-    propertiesS := KnownPropertiesOfObject( S );
-    propertiesT := KnownPropertiesOfObject( T );
-    
-    attributesS := Intersection2( KnownAttributesOfObject( S ), LIMOD.intrinsic_attributes );
-    attributesT := Intersection2( KnownAttributesOfObject( T ), LIMOD.intrinsic_attributes );
-    
-    ## for properties:
-    for p in propertiesS do	## also check if properties already set for both modules coincide
-        Setter( ValueGlobal( p ) )( T, ValueGlobal( p )( S ) );
-    od;
-    
-    ## now backwards
-    for p in Difference( propertiesT, propertiesS ) do
-        Setter( ValueGlobal( p ) )( S, ValueGlobal( p )( T ) );
-    od;
-    
-    ## for attributes:
-    for a in Difference( attributesS, attributesT ) do
-        Setter( ValueGlobal( a ) )( T, ValueGlobal( a )( S ) );
-    od;
-    
-    ## now backwards
-    for a in Difference( attributesT, attributesS ) do
-        Setter( ValueGlobal( a ) )( S, ValueGlobal( a )( T ) );
-    od;
-    
-    ## also check if properties already set for both modules coincide
-    
-    ## by now, more attributes than the union might be konwn
-    attributesS := Intersection2( KnownAttributesOfObject( S ), LIMOD.intrinsic_attributes );
-    attributesT := Intersection2( KnownAttributesOfObject( T ), LIMOD.intrinsic_attributes );
-    
-    for a in Intersection2( attributesS, attributesT ) do
-        if ValueGlobal( a )( S ) <> ValueGlobal( a )( T ) then
-            Error( "the attribute ", a, " has different values for source and target modules\n" );
-        fi;
-    od;
+    MatchPropertiesAndAttributes( Source( phi ), Range( phi ), LIMOD.intrinsic_properties, LIMOD.intrinsic_attributes );
     
 end );
 
@@ -1548,9 +1532,14 @@ InstallMethod( AnIsomorphism,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local N, iso;
+    local rel, left, N, iso;
     
-    N := Presentation( GeneratorsOfModule( M ), RelationsOfModule( M ) );
+    rel := RelationsOfModule( M );
+    
+    ## important since each set of relations knows the module it represents
+    rel := ShallowCopy( rel );
+    
+    N := Presentation( GeneratorsOfModule( M ), rel );
     
     ## define the obvious isomorphism between N an M
     iso := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );

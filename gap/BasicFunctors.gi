@@ -979,7 +979,7 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ##  gap> coker := Cokernel( phi );
 ##  <A left module presented by 5 relations for 4 generators>
 ##  gap> ByASmallerPresentation( coker );
-##  <A left module presented by 1 relation for 2 generators>
+##  <A rank 1 left module presented by 1 relation for 2 generators>
 ##  gap> Display( coker );
 ##  Z/< 8 > + Z^(1 x 1)
 ##  gap> nu := CokernelEpi( phi );
@@ -1049,7 +1049,7 @@ InstallFunctor( functor_Cokernel );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> im := ImageModule( phi );
-##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  <A left module presented by an unknown number of relations for 3 generators>
 ##  gap> ByASmallerPresentation( im );
 ##  <A free left module of rank 1 on a free generator>
 ##  gap> pi := ImageModuleEpi( phi );
@@ -1103,7 +1103,8 @@ InstallFunctorOnObjects( functor_ImageModule );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> ker := Kernel( phi );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A cyclic left module presented by an unknown number of relations for a cyclic\
+##   generator>
 ##  gap> Display( ker );
 ##  Z/< -3 >
 ##  gap> ByASmallerPresentation( last );
@@ -1185,7 +1186,8 @@ InstallFunctor( functor_Kernel );
 ##  gap> hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );
 ##  <A homomorphism of right modules>
 ##  gap> DefectOfExactness( hom_iota, hom_phi );
-##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
+##  <A cyclic right module on a cyclic generator satisfying an unknown number of r\
+##  elations>
 ##  gap> ByASmallerPresentation( last );
 ##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> Display( last );
@@ -1305,7 +1307,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##      If for example the source <M>N</M> gets a new presentation, you will see the effect on the generators:
 ##      <Example><![CDATA[
 ##  gap> ByASmallerPresentation( N );
-##  <A non-torsion left module presented by 1 relation for 3 generators>
+##  <A rank 2 left module presented by 1 relation for 3 generators>
 ##  gap> GeneratorsOfModule( homNM );
 ##  <A set of 4 generators of a homalg right module>
 ##  gap> Display( last );
@@ -1332,11 +1334,10 @@ InstallFunctor( functor_DefectOfExactness );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> hMM := Hom( dM, dM );
-##  <A non-zero acyclic cocomplex containing a single morphism of right complexes \
-##  at degrees [ 0 .. 1 ]>
+##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
+##  es [ 0 .. 1 ]>
 ##  gap> BMM := HomalgBicomplex( hMM );
-##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x
-##  [ -1 .. 0 ]>
+##  <A bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> II_E := SecondSpectralSequenceWithFiltration( BMM );
 ##  <A stable cohomological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x
@@ -1383,12 +1384,11 @@ InstallFunctor( functor_DefectOfExactness );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    
-##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 
+##    -1:	<A non-zero cyclic right module on a cyclic generator satisfying
 ##  1 relation>
 ##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
-##  <A non-torsion right module on 4 generators satisfying 3 relations>>
+##  <A right module on 4 generators satisfying an unknown number of relations>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
@@ -1457,9 +1457,9 @@ InstallFunctor( Functor_Hom );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> L := Hom( ZZ, M );
-##  <A non-torsion right module on 3 generators satisfying 2 relations>
+##  <A right module on 3 generators satisfying an unknown number of relations>
 ##  gap> ByASmallerPresentation( L );
-##  <A non-torsion right module on 2 generators satisfying 1 relation>
+##  <A rank 1 right module on 2 generators satisfying 1 relation>
 ##  gap> Display( L );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> L;	## the display method found out further information about the module L
@@ -1477,11 +1477,11 @@ InstallFunctor( Functor_Hom );
 ##  the map is currently represented by the above 4 x 4 matrix
 ##  
 ##  gap> ML := Source( psi );
-##  <A right module on 4 generators satisfying 3 relations>
+##  <A non-torsion right module on 4 generators satisfying 3 relations>
 ##  gap> IsIdenticalObj( ML, M * L );	## the caching at work
 ##  true
 ##  gap> NL := Range( psi );
-##  <A right module on 4 generators satisfying 2 relations>
+##  <A non-torsion right module on 4 generators satisfying 2 relations>
 ##  gap> IsIdenticalObj( NL, N * L );	## the caching at work
 ##  true
 ##  gap> Display( ML );
@@ -1495,17 +1495,16 @@ InstallFunctor( Functor_Hom );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> GP := Hom( P );
-##  <A non-zero acyclic cocomplex containing a single morphism of right modules at\
-##   degrees [ 0 .. 1 ]>
+##  <An acyclic cocomplex containing a single morphism of right modules at degrees\
+##   [ 0 .. 1 ]>
 ##  gap> CE := Resolution( GP );
 ##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
 ##  es [ 0 .. 1 ]>
 ##  gap> FCE := Hom( CE, L );
-##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
-##  t degrees [ 0 .. 1 ]>
+##  <An acyclic complex containing a single morphism of left cocomplexes at degree\
+##  s [ 0 .. 1 ]>
 ##  gap> BC := HomalgBicomplex( FCE );
-##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
-##  [ -1 .. 0 ]>
+##  <A bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
 ##  gap> II_E := SecondSpectralSequenceWithFiltration( BC );
 ##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
@@ -1552,16 +1551,16 @@ InstallFunctor( Functor_Hom );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A non-zero left module presented by 1 relation for 2 generators>
+##     0:	<A non-torsion left module presented by 1 relation for 2 generators>
 ##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
 ##  of
 ##  <A non-zero left module presented by 10 relations for 6 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A non-zero left module presented by 1 relation for 2 generators>
+##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
 ##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
 ##  of
-##  <A non-zero left module presented by 3 relations for 4 generators>>
+##  <A non-torsion left module presented by 3 relations for 4 generators>>
 ##  gap> Display( filt );
 ##  Degree 0:
 ##  
@@ -1656,7 +1655,8 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := TorsionSubmodule( M );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A cyclic torsion left module presented by an unknown number of relations for \
+##  a cyclic generator>
 ##  gap> iota := TorsionSubmoduleEmb( M );
 ##  <A monomorphism of left modules>
 ##  gap> psi := Ext( 1, iota, N );
@@ -1672,7 +1672,7 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  gap> IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work
 ##  true
 ##  gap> extMN := Source( psi );
-##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> IsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work
 ##  true
 ##  gap> Display( extNN );
@@ -1727,7 +1727,8 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := TorsionSubmodule( M );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A cyclic torsion left module presented by an unknown number of relations for \
+##  a cyclic generator>
 ##  gap> iota := TorsionSubmoduleEmb( M );
 ##  <A monomorphism of left modules>
 ##  gap> psi := Tor( 1, iota, N );
@@ -1739,7 +1740,7 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> torNN := Source( psi );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work
 ##  true
 ##  gap> torMN := Range( psi );

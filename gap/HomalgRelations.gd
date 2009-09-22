@@ -93,6 +93,10 @@ DeclareProperty( "CanBeUsedToDecideZeroEffectively",
 DeclareProperty( "IsInjectivePresentation",
         IsHomalgRelations );
 
+##
+DeclareProperty( "IsTorsion",
+        IsHomalgRelations );
+
 ####################################
 #
 # attributes:

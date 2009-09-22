@@ -933,6 +933,8 @@ InstallMethod( AddANewPresentation,
     
     if NrGenerators( gen ) = 0 then
         SetIsZero( M, true );
+    elif NrGenerators( gen ) = 1 then
+        SetIsCyclic( M, true );
     fi;
     
     return M;
@@ -1047,7 +1049,16 @@ InstallMethod( AddANewPresentation,
     
     if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
+        SetRankOfModule( M, NrGenerators( rel ) );
+    elif HasIsInjectivePresentation( rel ) and IsInjectivePresentation( rel ) then
+        SetRankOfModule( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
     fi;
+    
+    if HasIsTorsion( rel ) then
+        SetIsTorsion( M, IsTorsion( rel ) );
+    fi;
+    
+    SetParent( rel, M );
     
     return M;
     
@@ -1131,13 +1142,24 @@ InstallMethod( AddANewPresentation,
         SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     fi;
     
-    if NrGenerators( gen ) = 0 then
+    if NrGenerators( rel ) = 0 then
         SetIsZero( M, true );
+    elif NrGenerators( rel ) = 1 then
+        SetIsCyclic( M, true );
     fi;
     
     if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
+        SetRankOfModule( M, NrGenerators( rel ) );
+    elif HasIsInjectivePresentation( rel ) and IsInjectivePresentation( rel ) then
+        SetRankOfModule( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
     fi;
+    
+    if HasIsTorsion( rel ) then
+        SetIsTorsion( M, IsTorsion( rel ) );
+    fi;
+    
+    SetParent( rel, M );
     
     return M;
     
@@ -1328,7 +1350,7 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
             if diagonal <> fail and diagonal then
                 SetIsDiagonalMatrix( rel, true );
             fi;
-            rel := HomalgRelationsForLeftModule( rel );
+            rel := HomalgRelationsForLeftModule( rel, M );
             T := CertainColumns( id, bl );
             TI := CertainRows( id, bl );
         else
@@ -1337,14 +1359,14 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
             if diagonal <> fail and diagonal then
                 SetIsDiagonalMatrix( rel, true );
             fi;
-            rel := HomalgRelationsForRightModule( rel );
+            rel := HomalgRelationsForRightModule( rel, M );
             T := CertainRows( id, bl );
             TI := CertainColumns( id, bl );
         fi;
         
         AddANewPresentation( M, rel, T, TI );
         
-        if HasNrGenerators( M ) and NrGenerators( M ) = 1 then
+        if NrGenerators( M ) = 1 then
             SetIsCyclic( M, true );
         fi;
     fi;
@@ -1378,7 +1400,7 @@ InstallMethod( OnLessGenerators,
         return GetRidOfObsoleteGenerators( M );
     fi;
     
-    rel := HomalgRelationsForRightModule( rel );
+    rel := HomalgRelationsForRightModule( rel, M );
     
     AddANewPresentation( M, rel, U, UI );
     
@@ -1407,7 +1429,7 @@ InstallMethod( OnLessGenerators,
         return GetRidOfObsoleteGenerators( M );
     fi;
     
-    rel := HomalgRelationsForLeftModule( rel );
+    rel := HomalgRelationsForLeftModule( rel, M );
     
     AddANewPresentation( M, rel, V, VI );
     
@@ -1492,7 +1514,7 @@ end );
 ##  
 ##  currently represented by the above matrix
 ##  gap> ByASmallerPresentation( M );
-##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  <A rank 1 left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> SetsOfGenerators( M );
@@ -1913,7 +1935,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -1965,7 +1987,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2015,7 +2037,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2067,7 +2089,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2118,7 +2140,7 @@ InstallMethod( LeftPresentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2157,7 +2179,7 @@ InstallMethod( LeftPresentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2189,7 +2211,7 @@ end );
 ##  
 ##  currently represented by the above matrix
 ##  gap> ByASmallerPresentation( M );
-##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  <A rank 1 left module presented by 1 relation for 2 generators>
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  ]]></Example>
@@ -2252,7 +2274,7 @@ InstallMethod( RightPresentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2291,7 +2313,7 @@ InstallMethod( RightPresentation,
     fi;
     
 #    SetParent( gens, M );
-#    SetParent( rels, M );
+    SetParent( rels, M );
     
     return M;
     
@@ -2314,7 +2336,7 @@ end );
 ##  gap> M := RightPresentation( M );
 ##  <A right module on 2 generators satisfying 3 relations>
 ##  gap> ByASmallerPresentation( M );
-##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> Display( last );
 ##  Z/< 3 >
 ##  ]]></Example>
@@ -2856,7 +2878,7 @@ InstallMethod( \*,
     local mat, degrees, graded, left, distinguished, ow1, N;
     
     if IsIdenticalObj( HomalgRing( M ), R ) then
-        TryNextMethod( );
+        TryNextMethod( );	## i.e. the tensor product with the ring
     fi;
     
     mat := MatrixOfRelations( M );
@@ -2946,7 +2968,18 @@ InstallMethod( \*,
         
   function( M, R )
     
-    return  R * M;
+    return R * M;
+    
+end );
+
+##
+InstallMethod( ShallowCopy,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return Source( AnIsomorphism( M ) );
     
 end );
 

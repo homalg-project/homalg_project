@@ -202,7 +202,11 @@ InstallMethod( \=,
         
   function( r1, r2 )
     
-    return IsZero( r1 - r2 );
+    if IsIdenticalObj( HomalgRing( r1 ), HomalgRing( r2 ) ) then
+        return IsZero( r1 - r2 );
+    fi;
+    
+    return false;
     
 end );
 
