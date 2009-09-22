@@ -404,7 +404,13 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A homalg external ring" );
+    Print( "<A " );
+    
+    if IsPreHomalgRing( o ) then
+        Print( "pre-" );
+    fi;
+    
+    Print( "homalg external ring" );
     
     if not ( IsBound( HOMALG_IO.suppress_CAS ) and HOMALG_IO.suppress_CAS = true ) then
         
