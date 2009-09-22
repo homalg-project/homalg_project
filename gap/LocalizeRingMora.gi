@@ -2,43 +2,24 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep ],
   function( R )
-    local var, properties, stream, ext_obj, Rloc, S, v, RP, c, n_gens, gens;
+    local var, Rloc, S, v, RP, c, n_gens, gens;
 
-    #check whether base ring is polynomial and then extract needed data
-    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
-      var := IndeterminatesOfPolynomialRing( R );
-    else
-      Error( "base ring is not a polynomial ring" );
-    fi;
-    
-    properties := [ IsCommutative, IsLocalRing ];
-    
-    if Length( var ) <= 1 then
-        Add( properties, IsPrincipalIdealRing );
-    fi;
-    
     RP := CreateHomalgTableForLocalizedRingsWithMora( R );
     
-    ## create the new ring
-    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ], [ "ring" ], R, properties, TheTypeHomalgExternalRingObjectInSingular, HOMALG_IO.Pictograms.CreateHomalgRing );
-    
-    ##!!create homalg external pseudo ring
     Rloc := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
-    _Singular_SetRing( Rloc );
-    
-    RP!.SetInvolution :=
-      function( R )
-        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", Rloc, HOMALG_IO.Pictograms.define );
-    end;
+    Rloc := LocalizePolynomialRingAtZero( R )
     
     S := CreateHomalgRing( Rloc, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
+    
+    ## for the view method: <A homalg local matrix>
+    S!.description := "local";
     
     S!.AssociatedGlobalRing := R;
     
     S!.AssociatedComputationRing := Rloc;
     
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", R, HOMALG_IO.Pictograms.initialize );
+    SetIsLocalRing( S, true );
     
     n_gens := Length( var );
     
