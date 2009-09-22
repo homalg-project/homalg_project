@@ -223,16 +223,6 @@ InstallMethod( Numerator,
         
   function( r )
     
-    return r!.numer / AssociatedGlobalRing(r);
-    
-end );
-
-InstallMethod( NumeratorInternal,
-        "for homalg local ring elements",
-        [ IsHomalgLocalRingElementRep ],
-        
-  function( r )
-    
     return r!.numer;
     
 end );
@@ -248,15 +238,6 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( Denominator,
-        "for homalg local ring elements",
-        [ IsHomalgLocalRingElementRep ],
-        
-  function( r )
-    
-    return r!.denom / AssociatedGlobalRing(r);
-    
-end );
-InstallMethod( DenominatorInternal,
         "for homalg local ring elements",
         [ IsHomalgLocalRingElementRep ],
         
@@ -282,15 +263,6 @@ InstallMethod( Numerator,
         
   function( M )
     
-    return Eval( M )[1] / AssociatedGlobalRing( M );
-    
-end );
-InstallMethod( NumeratorInternal,
-        "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep ],
-        
-  function( M )
-    
     return Eval( M )[1];
     
 end );
@@ -306,15 +278,6 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( Denominator,
-        "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep ],
-        
-  function( M )
-    
-    return Eval( M )[2] / AssociatedGlobalRing( M );
-    
-end );
-InstallMethod( DenominatorInternal,
         "for homalg local matrices",
         [ IsHomalgLocalMatrixRep ],
         
@@ -340,7 +303,7 @@ InstallMethod( Name,
 
   function( o )
     
-    return Flat( [ Name( NumeratorInternal( o ) ), "/",  Name( DenominatorInternal( o ) ) ] );
+    return Flat( [ Name( Numerator( o ) ), "/",  Name( Denominator( o ) ) ] );
 
 end );
 
@@ -391,11 +354,11 @@ InstallMethod( SetEntryOfHomalgMatrix,
     
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
     
-    SetEntryOfHomalgMatrix( N, r, c, NumeratorInternal( s ) );
+    SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
     
     ResetFilterObj( N, IsInitialMatrix );
     
-    N := HomalgLocalMatrix( N, DenominatorInternal( s ), R );
+    N := HomalgLocalMatrix( N, Denominator( s ), R );
     
     M2 := m[1];
     
@@ -429,11 +392,11 @@ InstallMethod( AddToEntryOfHomalgMatrix,
     
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
     
-    SetEntryOfHomalgMatrix( N, r, c, NumeratorInternal( s ) );
+    SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
     
     ResetFilterObj( N, IsInitialIdentityMatrix );
     
-    N := HomalgLocalMatrix( N, DenominatorInternal( s ), R );
+    N := HomalgLocalMatrix( N, Denominator( s ), R );
     
     e := Eval( M + N );
     
@@ -902,7 +865,7 @@ InstallMethod( SetIsMutableMatrix,
       ResetFilterObj( A, IsMutableMatrix );
     fi;
     
-    SetIsMutableMatrix( NumeratorInternal( A ), b );
+    SetIsMutableMatrix( Numerator( A ), b );
     
 end );
 

@@ -21,18 +21,18 @@
 InstallValue( CommonHomalgTableForLocalizedRingsTools,
 
     rec(
-               IsZero := a -> IsZero( NumeratorInternal( a ) ),
+               IsZero := a -> IsZero( Numerator( a ) ),
                
-               IsOne := a -> IsZero( NumeratorInternal( a ) - DenominatorInternal( a ) ),
+               IsOne := a -> IsZero( Numerator( a ) - Denominator( a ) ),
                
                Minus :=
                  function( a, b )
                  local c;
-                   c := Cancel( DenominatorInternal( a ), DenominatorInternal( b ) );
+                   c := Cancel( Denominator( a ), Denominator( b ) );
                    return HomalgLocalRingElement(
-                                  NumeratorInternal( a ) * c[2]
-                                  -NumeratorInternal( b ) * c[1],
-                                  DenominatorInternal( a ) * c[2],
+                                  Numerator( a ) * c[2]
+                                  -Numerator( b ) * c[1],
+                                  Denominator( a ) * c[2],
                                   HomalgRing( a ) );
                  end,
                
@@ -40,8 +40,8 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                DivideByUnit :=
                  function( a, u )
                    return HomalgLocalRingElement(
-                                  NumeratorInternal( a ) * DenominatorInternal( u ),
-                                  DenominatorInternal( a ) * NumeratorInternal( u ),
+                                  Numerator( a ) * Denominator( u ),
+                                  Denominator( a ) * Numerator( u ),
                                   HomalgRing( a ) );
                  end,
                
@@ -51,18 +51,18 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    
                    globalR := AssociatedComputationRing( R );
                    
-                   return not IsZero( DecideZeroRows( HomalgMatrix ( [ NumeratorInternal( u ) ], 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
+                   return not IsZero( DecideZeroRows( HomalgMatrix ( [ Numerator( u ) ], 1, 1, globalR ), GeneratorsOfMaximalLeftIdeal( R ) ) );
                    
                  end,
                
                Sum :=
                  function( a, b )
                  local c;
-                   c := Cancel( DenominatorInternal( a ), DenominatorInternal( b ) );
+                   c := Cancel( Denominator( a ), Denominator( b ) );
                    return HomalgLocalRingElement(
-                                  NumeratorInternal( a ) * c[2]
-                                  +NumeratorInternal( b ) * c[1],
-                                  DenominatorInternal( a ) * c[2],
+                                  Numerator( a ) * c[2]
+                                  +Numerator( b ) * c[1],
+                                  Denominator( a ) * c[2],
                                   HomalgRing( a ) );
                  end,
                
@@ -70,8 +70,8 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                Product :=
                  function( a, b )
                    return HomalgLocalRingElement(
-                                  NumeratorInternal( a ) * NumeratorInternal( b ),
-                                  DenominatorInternal( a ) * DenominatorInternal( b ),
+                                  Numerator( a ) * Numerator( b ),
+                                  Denominator( a ) * Denominator( b ),
                                   HomalgRing( a ) );
                  end,
                
@@ -228,7 +228,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    local e, c;
                    
                    e := Eval( A );
-                   c := Cancel( NumeratorInternal( a ), DenominatorInternal( a ) * e[2] );
+                   c := Cancel( Numerator( a ), Denominator( a ) * e[2] );
                    
                    return [
                       c[1] * e[1],
@@ -277,11 +277,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    ];
                  end,
                
-               NrRows := C -> NrRows( NumeratorInternal( C ) ),
+               NrRows := C -> NrRows( Numerator( C ) ),
                
-               NrColumns := C -> NrColumns( NumeratorInternal( C ) ),
+               NrColumns := C -> NrColumns( Numerator( C ) ),
                
-               IsZeroMatrix := M -> IsZero( NumeratorInternal( M ) ),
+               IsZeroMatrix := M -> IsZero( Numerator( M ) ),
                
 #  -> fallback
 #               IsIdentityMatrix :=
@@ -289,11 +289,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
 #                   
 #                 end,
                
-               IsDiagonalMatrix := M -> IsDiagonalMatrix( NumeratorInternal( M ) ),
+               IsDiagonalMatrix := M -> IsDiagonalMatrix( Numerator( M ) ),
                
-               ZeroRows := C -> ZeroRows( NumeratorInternal( C ) ),
+               ZeroRows := C -> ZeroRows( Numerator( C ) ),
                
-               ZeroColumns := C -> ZeroColumns( NumeratorInternal( C ) ),
+               ZeroColumns := C -> ZeroColumns( Numerator( C ) ),
                
 #               GetColumnIndependentUnitPositions :=
 #                 function( M, pos_list )

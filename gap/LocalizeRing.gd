@@ -101,18 +101,6 @@ DeclareOperation( "Numerator",
 DeclareOperation( "Denominator",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "NumeratorInternal",
-        [ IsHomalgRingElement ] );
-
-DeclareOperation( "DenominatorInternal",
-        [ IsHomalgRingElement ] );
-
-DeclareOperation( "NumeratorInternal",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "DenominatorInternal",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "HomalgLocalMatrix",
         [ IsHomalgMatrix, IsRingElement, IsHomalgRing ] );
 
