@@ -710,6 +710,100 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
   }\n\
   return(m);\n\
 }\n\n",
+
+#trying something local
+# division(A^t,B^t) returns (TT^t, M^t, U^t) with
+#                A^t*U^t = B^t*TT^t + M^t
+# <=> (ignore U) M^t = A^t*U^t - B^t*TT^tr
+# <=>            M   = u*A     + (-TT) * B
+# <=> (T:=-TT)   M   = U*A     + T * B
+# <=>         U^-1 M = A       + U^-1 * T * B
+#here U should be made into a scalar matrix by changing M and T (lcm computation etc.)
+
+#remark: in
+#list l = l2[1],l2[2],l3[1],l3[2];
+#the values l2[2] and l3[2] should be the same
+    DecideZeroRowsEffectivelyLocal := "\n\
+proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
+{\n\
+  list l = division(B,A);\n\
+  list l2 = CreateInputForLocalMatrixRows(l[2],l[3]);\n\
+  list l3 = CreateInputForLocalMatrixRows(-l[1],l[3]);\n\
+  list l = l2[1],l2[2],l3[1],l3[2];\n\
+  return(l);\n\
+}\n\n",
+
+    DecideZeroColumnsEffectivelyLocal := "\n\
+proc DecideZeroColumnsEffectivelyLocal (matrix A, matrix B)\n\
+{\n\
+  list l = DecideZeroRowsEffectivelyLocal(Involution(A),Involution(B));\n\
+  matrix B = l[1];\n\
+  matrix T = l[3];\n\
+  l = Involution(B),l[2],Involution(T),l[4];\n\
+  return(l);\n\
+}\n\n",
+
+    DecideZeroRowsLocal := "\n\
+proc DecideZeroRowsLocal (matrix A, matrix B)\n\
+{\n\
+  list l=DecideZeroRowsEffectivelyLocal(A,B);\n\
+  l=l[1],l[2];\n\
+  return(l);\n\
+}\n\n",
+
+    DecideZeroColumnsLocal := "\n\
+proc DecideZeroColumnsLocal (matrix A, matrix B)\n\
+{\n\
+  list l=DecideZeroColumnsEffectivelyLocal(A,B);\n\
+  l=l[1],l[2];\n\
+  return(l);\n\
+}\n\n",
+
+    BasisOfRowsCoeffLocal := "\n\
+proc BasisOfRowsCoeffLocal (matrix M)\n\
+{\n\
+  matrix B = std(M);\n\
+  matrix U;\n\
+  matrix T = lift(M,B,U); //never use stdlift, also because it might differ from std!!!\n\
+  list l = CreateInputForLocalMatrixRows(T,U);\n\
+  l = B,1,l[1],l[2];\n\
+  return(l)\n\
+}\n\n",
+
+    BasisOfColumnsCoeffLocal := "\n\
+proc BasisOfColumnsCoeffLocal (matrix M)\n\
+{\n\
+  list l = BasisOfRowsCoeff(Involution(M));\n\
+  matrix B = l[1];\n\
+  matrix T = l[2];\n\
+  l = Involution(B),Involution(T);\n\
+  return(l);\n\
+}\n\n",
+
+## A * U^-1 -> u^-1 A2
+    CreateInputForLocalMatrixRows := "\n\
+proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
+{\n\
+  poly u=1;\n\
+  matrix A2=A;\n\
+  for (int i=1; i<=ncols(U); i=i+1)\n\
+  {\n\
+    poly u=lcm(u,U[i,i]);\n\
+  }\n\
+  for (int i=1; i<=ncols(U); i=i+1)\n\
+  {\n\
+    poly uu=U[i,i];\n\
+    poly gg=u/uu;\n\
+    if(gg!=1)\n\
+    {\n\
+      for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+    }\n\
+  }\n\
+  list l=A2,u;\n\
+  return(l);\n\
+}\n\n";
+
+
     
     )
 );
@@ -753,7 +847,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
         stream := LaunchCAS( HOMALG_IO_Singular );
         
         ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"finvar.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
