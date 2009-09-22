@@ -25,14 +25,14 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                BasisOfRowModule :=
                  function( M )
 
-                   return HomalgLocalMatrix( BasisOfRowModule( Numerator( M ) ), HomalgRing( M ) );
+                   return HomalgLocalMatrix( BasisOfRowModule( NumeratorInternal( M ) ), HomalgRing( M ) );
                    
                  end,
                
                BasisOfColumnModule :=
                  function( M )
                    
-                   return HomalgLocalMatrix( BasisOfColumnModule( Numerator( M ) ), HomalgRing( M ) );
+                   return HomalgLocalMatrix( BasisOfColumnModule( NumeratorInternal( M ) ), HomalgRing( M ) );
                    
                  end,
                
@@ -42,7 +42,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    R := HomalgRing( M );
                    
-                   globalR := AssociatedGlobalRing( R );
+                   globalR := AssociatedComputationRing( R );
                    
                    m := Eval( M );
                    
@@ -58,7 +58,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    R := HomalgRing( M );
                    
-                   globalR := AssociatedGlobalRing( R );
+                   globalR := AssociatedComputationRing( R );
                    
                    m := Eval( M );
                    
@@ -82,7 +82,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    n := NrRows( gens );
                    
-                   GlobalR := AssociatedGlobalRing( R );
+                   GlobalR := AssociatedComputationRing( R );
                    
                    one := One( GlobalR );
                    
@@ -93,7 +93,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    numA := a[1];
                    denA := a[2];
                    
-                   B1 := Numerator( B );
+                   B1 := NumeratorInternal( B );
                    
                    for i in [ 1 .. NrRows( A ) ] do
                    
@@ -141,7 +141,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    n := NrColumns( gens );
                    
-                   GlobalR := AssociatedGlobalRing( R );
+                   GlobalR := AssociatedComputationRing( R );
                    
                    one := One( GlobalR );
                    
@@ -152,7 +152,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    numA := a[1];
                    denA := a[2];
                    
-                   B1 := Numerator( B );
+                   B1 := NumeratorInternal( B );
                    
                    for i in [ 1 .. NrColumns( A ) ] do
                    
@@ -198,7 +198,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    n := NrRows( gens );
                    
-                   GlobalR := AssociatedGlobalRing( R );
+                   GlobalR := AssociatedComputationRing( R );
                    
                    one := One( GlobalR );
                    
@@ -298,7 +298,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                    
                    n := NrColumns( gens );
                    
-                   GlobalR := AssociatedGlobalRing( R );
+                   GlobalR := AssociatedComputationRing( R );
                    
                    one := One( GlobalR );
                    
@@ -412,11 +412,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        M2 := CertainRows( M3, [ NrRows( M ) + 1 .. NrRows( M3 ) ] );
                        
-                       N := SyzygiesGeneratorsOfRows( Numerator( M ), Numerator( M2 ) );
+                       N := SyzygiesGeneratorsOfRows( NumeratorInternal( M ), NumeratorInternal( M2 ) );
                        
                    else
                        
-                       N := SyzygiesGeneratorsOfRows( Numerator( M ) );
+                       N := SyzygiesGeneratorsOfRows( NumeratorInternal( M ) );
                        
                    fi;
                    
@@ -442,11 +442,11 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                        
                        M2 := CertainColumns( M3, [ NrColumns( M ) + 1 .. NrColumns( M3 ) ] );
                        
-                       N := SyzygiesGeneratorsOfColumns( Numerator( M ), Numerator( M2 ) );
+                       N := SyzygiesGeneratorsOfColumns( NumeratorInternal( M ), NumeratorInternal( M2 ) );
                        
                    else
                        
-                       N := SyzygiesGeneratorsOfColumns( Numerator( M ) );
+                       N := SyzygiesGeneratorsOfColumns( NumeratorInternal( M ) );
                        
                    fi;
                    

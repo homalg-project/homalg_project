@@ -20,3 +20,5 @@ ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingBasic.gi" );
 ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingTools.gi" );
 
 ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingGroebner.gi" );
+
+ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingMora.gi" );

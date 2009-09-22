@@ -98,6 +98,47 @@ InstallMethod( HomalgRing,
     
 end );
 
+##
+InstallMethod( AssociatedComputationRing,
+        "for homalg local rings",
+        [ IsHomalgLocalRingRep ],
+        
+  function( R )
+    
+    if IsBound( R!.AssociatedComputationRing ) then
+    
+      return R!.AssociatedComputationRing;
+    
+    else
+    
+      return R!.ring;
+    
+    fi;
+    
+end );
+
+##
+InstallMethod( AssociatedComputationRing,
+        "for homalg local ring elements",
+        [ IsHomalgLocalRingElementRep ],
+        
+  function( r )
+    
+    return AssociatedComputationRing( HomalgRing( r ) );
+    
+end );
+
+##
+InstallMethod( AssociatedComputationRing,
+        "for homalg local matrices",
+        [ IsHomalgLocalMatrixRep ],
+        
+  function( A )
+    
+    return AssociatedComputationRing( HomalgRing(A) );
+    
+end );
+
 ##  <#GAPDoc Label="AssociatedGlobalRing:ring">
 ##  <ManSection>
 ##    <Oper Arg="R" Name="AssociatedGlobalRing" Label="for homalg local rings"/>
@@ -114,7 +155,15 @@ InstallMethod( AssociatedGlobalRing,
         
   function( R )
     
-    return R!.ring;
+    if IsBound( R!.AssociatedGlobalRing ) then
+    
+      return R!.AssociatedGlobalRing;
+    
+    else
+    
+      return R!.ring;
+    
+    fi;
     
 end );
 
@@ -174,6 +223,16 @@ InstallMethod( Numerator,
         
   function( r )
     
+    return r!.numer / AssociatedGlobalRing(r);
+    
+end );
+
+InstallMethod( NumeratorInternal,
+        "for homalg local ring elements",
+        [ IsHomalgLocalRingElementRep ],
+        
+  function( r )
+    
     return r!.numer;
     
 end );
@@ -189,6 +248,15 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( Denominator,
+        "for homalg local ring elements",
+        [ IsHomalgLocalRingElementRep ],
+        
+  function( r )
+    
+    return r!.denom / AssociatedGlobalRing(r);
+    
+end );
+InstallMethod( DenominatorInternal,
         "for homalg local ring elements",
         [ IsHomalgLocalRingElementRep ],
         
@@ -214,6 +282,15 @@ InstallMethod( Numerator,
         
   function( M )
     
+    return Eval( M )[1] / AssociatedGlobalRing( M );
+    
+end );
+InstallMethod( NumeratorInternal,
+        "for homalg local matrices",
+        [ IsHomalgLocalMatrixRep ],
+        
+  function( M )
+    
     return Eval( M )[1];
     
 end );
@@ -229,6 +306,15 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( Denominator,
+        "for homalg local matrices",
+        [ IsHomalgLocalMatrixRep ],
+        
+  function( M )
+    
+    return Eval( M )[2] / AssociatedGlobalRing( M );
+    
+end );
+InstallMethod( DenominatorInternal,
         "for homalg local matrices",
         [ IsHomalgLocalMatrixRep ],
         
@@ -254,7 +340,7 @@ InstallMethod( Name,
 
   function( o )
     
-    return Flat( [ Name( Numerator( o ) ), "/",  Name( Denominator( o ) ) ] );
+    return Flat( [ Name( NumeratorInternal( o ) ), "/",  Name( DenominatorInternal( o ) ) ] );
 
 end );
 
@@ -305,11 +391,11 @@ InstallMethod( SetEntryOfHomalgMatrix,
     
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
     
-    SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
+    SetEntryOfHomalgMatrix( N, r, c, NumeratorInternal( s ) );
     
     ResetFilterObj( N, IsInitialMatrix );
     
-    N := HomalgLocalMatrix( N, Denominator( s ), R );
+    N := HomalgLocalMatrix( N, DenominatorInternal( s ), R );
     
     M2 := m[1];
     
@@ -343,11 +429,11 @@ InstallMethod( AddToEntryOfHomalgMatrix,
     
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
     
-    SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
+    SetEntryOfHomalgMatrix( N, r, c, NumeratorInternal( s ) );
     
     ResetFilterObj( N, IsInitialIdentityMatrix );
     
-    N := HomalgLocalMatrix( N, Denominator( s ), R );
+    N := HomalgLocalMatrix( N, DenominatorInternal( s ), R );
     
     e := Eval( M + N );
     
@@ -668,7 +754,7 @@ end );
 ##
 InstallGlobalFunction( HomalgLocalRingElement,
   function( arg )
-    local nargs, numer, ring, ar, properties, denom, c, r;
+    local nargs, numer, ring, ar, properties, denom, computationring, c, r;
     
     nargs := Length( arg );
     
@@ -710,13 +796,15 @@ InstallGlobalFunction( HomalgLocalRingElement,
         fi;
     od;
     
+    computationring := AssociatedComputationRing( ring );
+    
     if not IsBound( denom ) then
         denom := One( numer );
     fi;
     
     c := Cancel( numer, denom );
-    numer := c[1];
-    denom := c[2];
+    numer := c[1] / computationring;
+    denom := c[2] / computationring;
     
     if IsBound( ring ) then
         
@@ -752,23 +840,37 @@ InstallMethod( HomalgLocalMatrix,
         [ IsHomalgMatrix, IsRingElement, IsHomalgLocalRingRep ],
         
   function( A, r, R )
-    local G, type, matrix;
+    local G, type, matrix, computationring, AA;
     
     G := HomalgRing( A );
     
-    if IsHomalgRingElement( r ) and not IsIdenticalObj( HomalgRing( r ), G ) then
-        Error( "the ring of the element and the ring of the matrix are not identical\n" );
-    fi;
+    computationring := AssociatedComputationRing( R );
     
-    if not IsIdenticalObj( G, AssociatedGlobalRing( R ) ) then
-        Error( "the ring the matrix and the global ring of the specified local ring are not identical\n" );
-    fi;
+#     if IsHomalgRingElement( r ) and not IsIdenticalObj( HomalgRing( r ), G ) then
+#         Error( "the ring of the element and the ring of the matrix are not identical\n" );
+#     fi;
+    
+#     if not IsIdenticalObj( G, AssociatedGlobalRing( R ) ) then
+#         Error( "the ring the matrix and the global ring of the specified local ring are not identical\n" );
+#     fi;
     
     matrix := rec( ring := R );
     
-    ObjectifyWithAttributes(
+    if not IsIdenticalObj( computationring , AssociatedGlobalRing( R ) ) then
+    
+      #AA := G!.CopyMatrix( A , computationring );
+      AA := HomalgMatrix( homalgSendBlocking( [ "imap(", G, A, ")" ], [ "matrix" ], computationring, HOMALG_IO.Pictograms.CopyMatrix ) , computationring);
+    else
+      
+      AA := A;
+      
+    fi;
+    
+        ObjectifyWithAttributes(
             matrix, TheTypeHomalgLocalMatrix,
-            Eval, [ A, r ] );
+#            Eval, [ A / computationring, r / computationring ] );
+            #Eval, [ AA, r ] );
+            Eval, [ AA, r ] );
     
     BlindlyCopyMatrixPropertiesToLocalMatrix( A, matrix );
     
@@ -783,7 +885,7 @@ InstallMethod( HomalgLocalMatrix,
         
   function( A, R )
     
-    return HomalgLocalMatrix( A, One( AssociatedGlobalRing( R ) ), R );
+    return HomalgLocalMatrix( A, One( AssociatedComputationRing( R ) ), R );
     
 end );
 
@@ -800,7 +902,7 @@ InstallMethod( SetIsMutableMatrix,
       ResetFilterObj( A, IsMutableMatrix );
     fi;
     
-    SetIsMutableMatrix( Numerator( A ), b );
+    SetIsMutableMatrix( NumeratorInternal( A ), b );
     
 end );
 

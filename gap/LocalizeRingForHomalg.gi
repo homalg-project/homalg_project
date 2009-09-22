@@ -36,12 +36,12 @@ InstallValue( CommonHomalgTableForLocalizedRings,
                 fi;
                 
                 if HasCoefficientsRing( R ) then
-                    r := RingName( CoefficientsRing( R ) );
+                    r := Flat( [ "localization of " , RingName( CoefficientsRing( R ) ) ] );
                 else
                     r := "(some ring)";
                 fi;
                 
-                return "some Ring";
+                return r;
                 
             end,
               

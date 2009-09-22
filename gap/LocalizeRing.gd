@@ -53,6 +53,9 @@ DeclareAttribute( "GeneratorsOfMaximalRightIdeal",
 DeclareOperation( "CreateHomalgTableForLocalizedRings",
         [ IsHomalgRing ] );
 
+DeclareOperation( "CreateHomalgTableForLocalizedRingsWithMora",
+        [ IsHomalgRing ] );
+
 DeclareGlobalFunction( "CreateHomalgLocalizedRing" );
 
 DeclareOperation( "LocalizeAt",
@@ -68,6 +71,15 @@ DeclareOperation( "BlindlyCopyMatrixPropertiesToLocalMatrix",
 
 # basic operations:
 
+DeclareOperation( "AssociatedComputationRing",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "AssociatedComputationRing",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "AssociatedComputationRing",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "AssociatedGlobalRing",
         [ IsHomalgRing ] );
 
@@ -87,6 +99,18 @@ DeclareOperation( "Numerator",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "Denominator",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "NumeratorInternal",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "DenominatorInternal",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "NumeratorInternal",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "DenominatorInternal",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "HomalgLocalMatrix",
