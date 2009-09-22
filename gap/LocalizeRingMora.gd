@@ -1,0 +1,2 @@
+DeclareOperation( "LocalizePolynomialRingAtZeroWithMora",
+        [ IsHomalgRing ] );
