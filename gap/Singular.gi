@@ -73,10 +73,14 @@ BindGlobal( "TheTypeHomalgExternalRingObjectInSingular",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingObjectInSingularRep ) );
 
-# a new type:
+# two new types:
 BindGlobal( "TheTypeHomalgExternalRingInSingular",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgExternalRingInSingularRep ) );
+
+BindGlobal( "TheTypePreHomalgExternalRingInSingular",
+        NewType( TheFamilyOfHomalgRings,
+                IsPreHomalgRing and IsHomalgExternalRingInSingularRep ) );
 
 ####################################
 #
@@ -1100,7 +1104,7 @@ InstallMethod( LocalizePolynomialRingAtZero,
         [ IsHomalgExternalRingInSingularRep ],
         
   function( R )
-    local var, properties, stream, ext_obj, S, v, RP, c;
+    local var, properties, ext_obj, S, RP;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -1118,11 +1122,11 @@ InstallMethod( LocalizePolynomialRingAtZero,
     ## create the new ring
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),ds" ] , [ "ring" ], R, properties, TheTypeHomalgExternalRingObjectInSingular, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    S := CreateHomalgExternalRing( ext_obj, TheTypePreHomalgExternalRingInSingular );
     
     _Singular_SetRing( S );
     
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     RP := homalgTable( S );
     
