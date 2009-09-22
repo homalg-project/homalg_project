@@ -29,9 +29,10 @@ InstallValue( HOMALG_IO_Macaulay2,
             CUT_POS_END := -1,		## not important for Macaulay2
             eoc_verbose := "",
             eoc_quiet := ";",
-            #break_lists := true,		## a Macaulay2 specific
+            break_lists := true,		## a Macaulay2 specific
             setring := _Macaulay2_SetRing,	## a Macaulay2 specific
             setinvol := _Macaulay2_SetInvolution,## a Macaulay2 specific
+            remove_enter := true,       	## a Macaulay2 specific
             only_warning := "--warning",	## a Macaulay2 specific
             define := "=",
             garbage_collector := function( stream ) homalgSendBlocking( [ "collectGarbage()" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
@@ -200,8 +201,22 @@ GetCleanRowsPositions = (M, l) -> (\n\
 BasisOfRowModule = M -> (\n\
   local G,R;\n\
   R = ring M;\n\
-  G = gens gb image matrix transpose M;\n\
-  transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
+  if isCommutative(R) then (\n\
+    G = gens gb image matrix transpose M;\n\
+    transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
+  )\n\
+  else if isSkewCommutative(R) then (\n\
+    G = gens gb image matrix transpose apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a)));\n\
+    L := leadTerm G;\n\
+    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
+    map(R^(numgens source G), R^(numgens target G),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        transpose apply(entries G, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j))\n\
+  )\n\
+  else (\n\
+    error \"BasisOfRowModule is not defined for this ring\"\n\
+  )\n\
 );\n\n",
     # forget degrees!
     
@@ -218,10 +233,29 @@ BasisOfColumnModule = M -> (\n\
 BasisOfRowsCoeff = M -> (\n\
   local G,R,T;\n\
   R = ring M;\n\
-  G = gb(image matrix transpose M, ChangeMatrix=>true);\n\
-  T = getChangeMatrix G;\n\
-  (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
-   transpose map(R^(numgens target T), R^(numgens source T), T))\n\
+  if isCommutative(R) then (\n\
+    G = gb(image matrix transpose M, ChangeMatrix=>true);\n\
+    T = getChangeMatrix G;\n\
+    (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
+     transpose map(R^(numgens target T), R^(numgens source T), T))\n\
+  )\n\
+  else if isSkewCommutative(R) then (\n\
+    G = gb(image matrix transpose apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))), ChangeMatrix=>true);\n\
+    T = getChangeMatrix G;\n\
+    L := leadTerm gens G;\n\
+    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
+    (map(R^(numgens source L), R^(numgens target L),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose apply(entries gens G, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)),\n\
+     map(R^(numgens source T), R^(numgens target T),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose apply(entries T, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)))\n\
+  )\n\
+  else (\n\
+    error \"BasisOfRowsCoeff is not defined for this ring\"\n\
+  )\n\
 );\n\n",
     # forget degrees!
     
@@ -275,19 +309,120 @@ SyzygiesGeneratorsOfColumns = M -> (\n\
 SyzygiesGeneratorsOfColumns2 = (M, N) -> (\n\
   local K,R;\n\
   R = ring M;\n\
-  K = gens kernel map(cokernel N, source M, M);\n\
+  K = mingens kernel map(cokernel N, source M, M);\n\
   map(R^(numgens target K), R^(numgens source K), K)\n\
 );\n\n",
+
+    DegreeForHomalg := "\n\
+DegreeForHomalg = r -> (\n\
+  if zero r then -1 else sum degree(r)\n\
+);\n\n",
+    # degree(0) = -infinity in Macaulay2
     
     Deg := "\n\
 Deg = (r,weights,R) -> (\n\
   sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
 );\n\n",
+    # degree(x, 0) = -1 in Macaulay2
     
     MultiDeg := "\n\
 MultiDeg = (r,weights,R) -> (\n\
   concatenate between( \",\", apply(apply(0..#weights-1,i->Deg(r,weights#i,R)),toString))\n\
 );\n\n",
+    
+    DegreesOfEntries := "\n\
+DegreesOfEntries = M -> (\n\
+  concatenate between(\",\", apply(\n\
+    flatten apply(entries M, i->apply(i, DegreeForHomalg)),\n\
+      toString))\n\
+);\n\n",
+    
+    WeightedDegreesOfEntries := "\n\
+WeightedDegreesOfEntries = (M,weights,R) -> (\n\
+  concatenate between(\",\", apply(\n\
+    flatten apply(entries M, i->apply(i, j->Deg(j,weights,R))),\n\
+      toString))\n\
+);\n\n",
+    
+    NonTrivialDegreePerRow := "\n\
+NonTrivialDegreePerRow = M -> ( local n,p;\n\
+  n = numgens(source M)-1;\n\
+  concatenate between(\",\", apply(\n\
+    for r in entries(M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {sum degree r#j} );\n\
+      if p == {} then 0 else p#0\n\
+    ), toString))\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerRow := "\n\
+NonTrivialWeightedDegreePerRow = (M,weights,R) -> ( local n,p;\n\
+  n = numgens(source M)-1;\n\
+  concatenate between(\",\", apply(\n\
+    for r in entries(M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {Deg(r#j,weights,R)} );\n\
+      if p == {} then 0 else p#0\n\
+    ), toString))\n\
+)\n\n",
+    
+    NonTrivialDegreePerRowWithColPosition := "\n\
+NonTrivialDegreePerRowWithColPosition = M -> ( local n,p;\n\
+  n = numgens(source M)-1;\n\
+  concatenate({\"[\"} | between(\",\",\n\
+    for r in entries(M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(sum degree r#j), \",\", toString(j+1), \"]\"})} );\n\
+      if p == {} then \"[0,0]\" else p#0\n\
+    )) | {\"]\"})\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
+NonTrivialWeightedDegreePerRowWithColPosition = (M,weights,R) -> ( local n,p;\n\
+  n = numgens(source M)-1;\n\
+  concatenate({\"[\"} | between(\",\",\n\
+    for r in entries(M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(Deg(r#j,weights,R)), \",\", toString(j+1), \"]\"})} );\n\
+      if p == {} then \"[0,0]\" else p#0\n\
+    )) | {\"]\"})\n\
+)\n\n",
+    
+    NonTrivialDegreePerColumn := "\n\
+NonTrivialDegreePerColumn = M -> ( local n,p;\n\
+  n = numgens(target M)-1;\n\
+  concatenate between(\",\", apply(\n\
+    for r in entries(transpose M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {sum degree r#j} );\n\
+      if p == {} then 0 else p#0\n\
+    ), toString))\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerColumn := "\n\
+NonTrivialWeightedDegreePerColumn = (M,weights,R) -> ( local n,p;\n\
+  n = numgens(target M)-1;\n\
+  concatenate between(\",\", apply(\n\
+    for r in entries(transpose M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {Deg(r#j,weights,R)} );\n\
+      if p == {} then 0 else p#0\n\
+    ), toString))\n\
+)\n\n",
+    
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
+NonTrivialDegreePerColumnWithRowPosition = M -> ( local n,p;\n\
+  n = numgens(target M)-1;\n\
+  concatenate({\"[\"} | between(\",\",\n\
+    for r in entries(transpose M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(sum degree r#j), \",\", toString(j+1), \"]\"})} );\n\
+      if p == {} then \"[0,0]\" else p#0\n\
+    )) | {\"]\"})\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
+NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;\n\
+  n = numgens(target M)-1;\n\
+  concatenate({\"[\"} | between(\",\",\n\
+    for r in entries(transpose M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(Deg(r#j,weights,R)), \",\", toString(j+1), \"]\"})} );\n\
+      if p == {} then \"[0,0]\" else p#0\n\
+    )) | {\"]\"})\n\
+)\n\n",
     
     )
 );
@@ -430,7 +565,11 @@ InstallMethod( PolynomialRing,
     properties := ar[3];
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, properties, HOMALG_IO.Pictograms.CreateHomalgRing );
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        ext_obj := homalgSendBlocking( [ "(coefficientRing ", R, ")[", var, "]" ], TheTypeHomalgExternalRingObjectInMacaulay2, properties, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ R, "[", var, "]" ], TheTypeHomalgExternalRingObjectInMacaulay2, properties, HOMALG_IO.Pictograms.CreateHomalgRing );
+    fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
@@ -471,7 +610,11 @@ InstallMethod( RingOfDerivations,
     homalgSendBlocking( "needs \"Dmodules.m2\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( Concatenation( [ R, "[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), "break_lists", TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        ext_obj := homalgSendBlocking( Concatenation( [ "(coefficientRing ", R, ")[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( Concatenation( [ R, "[", var, der, ",WeylAlgebra => {" ], [ JoinStringsWithSeparator( ListN( var, der, function(i, j) return Concatenation( i, "=>", j ); end ) ) ], [ "}]" ] ), TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+    fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
     
@@ -499,6 +642,7 @@ InstallMethod( RingOfDerivations,
     # forget degrees!
     end;
     
+    # load Dmodules.m2 before using Dtransposition!
     BasisOfRowModule := "\n\
 BasisOfRowModule = M -> (\n\
   local G,R;\n\
@@ -506,6 +650,15 @@ BasisOfRowModule = M -> (\n\
   if isCommutative(R) then (\n\
     G = gens gb image matrix transpose M;\n\
     transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
+  )\n\
+  else if isSkewCommutative(R) then (\n\
+    G = gens gb image matrix transpose apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a)));\n\
+    L := leadTerm G;\n\
+    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
+    map(R^(numgens source G), R^(numgens target G),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        transpose apply(entries G, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j))\n\
   )\n\
   else (\n\
     G = gens gb image matrix transpose Dtransposition M;\n\
@@ -527,6 +680,20 @@ BasisOfRowsCoeff = M -> (\n\
     T = getChangeMatrix G;\n\
     (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
      transpose map(R^(numgens target T), R^(numgens source T), T))\n\
+  )\n\
+  else if isSkewCommutative(R) then (\n\
+    G = gb(image matrix transpose apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))), ChangeMatrix=>true);\n\
+    T = getChangeMatrix G;\n\
+    L := leadTerm gens G;\n\
+    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
+    (map(R^(numgens source L), R^(numgens target L),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose apply(entries gens G, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)),\n\
+     map(R^(numgens source T), R^(numgens target T),\n\
+      apply(toList(0..(numgens source L)-1),\n\
+        entries transpose apply(entries T, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
+          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)))\n\
   )\n\
   else (\n\
     G = gb(image matrix transpose Dtransposition M, ChangeMatrix=>true);\n\
@@ -554,6 +721,70 @@ BasisOfRowsCoeff = M -> (\n\
 end );
 
 ##
+InstallMethod( ExteriorRing,
+        "for homalg rings in Macaulay2",
+        [ IsHomalgExternalRingInMacaulay2Rep, IsHomalgExternalRingInMacaulay2Rep, IsList ],
+        
+  function( R, T, indets )
+    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP;
+    
+    ar := _PrepareInputForExteriorRing( R, T, indets );
+    
+    var := ar[1];
+    anti := ar[2];
+    comm := ar[3];
+    
+    stream := homalgStream( R );
+    
+    ## create the new ring
+    if HasIndeterminatesOfPolynomialRing( T ) then
+        # create the new ring in one go in order to ensure standard grading
+        ext_obj := homalgSendBlocking( [ "(coefficientRing ", T, ")[", comm, anti, ",SkewCommutative => {", [ Length( comm )..( Length( comm ) + Length( anti ) - 1 ) ], "}]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ T, "[", anti, ",SkewCommutative => true]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+    fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
+
+    anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( anti, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    comm := List( comm , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( comm, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    SetIsExteriorRing( S, true );
+    
+    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
+        SetBaseRing( S, T );
+    fi;
+    
+    SetRingProperties( S, R, anti );
+    
+    _Macaulay2_SetRing( S );
+    
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( [ "\nInvolution = M -> ( local R; R = ring M; transpose map(R^(numgens target M), R^(numgens source M), apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a)))) )\n\n" ], "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    RP!.SetInvolution( S );
+    
+    RP!.Compose :=
+      function( A, B )
+        
+        return homalgSendBlocking( [ "Involution( Involution(", B, ") * Involution(", A, ") )" ], HOMALG_IO.Pictograms.Compose );
+        
+    end;
+    
+    return S;
+    
+end );
+
+##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMacaulay2Rep ],
@@ -574,7 +805,7 @@ InstallMethod( CreateHomalgMatrixFromString,
     
     S := ShallowCopy( s );
     RemoveCharacters(S, "[]");
-    ext_obj := homalgSendBlocking( [ "map(", R, "^", r, R, "^", c, ", pack(", c, ", ", Flat(['{', S, '}']), "))" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "map(", R, "^", r, R, "^", c, ", pack(", c, ", {", S, "}))" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, r, c, R );
     
