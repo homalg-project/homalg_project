@@ -681,6 +681,10 @@ InstallMethod( LocalizeAt,
     
     SetGeneratorsOfMaximalRightIdeal( localR, gens );
     
+    localR!.AssociatedGlobalRing := globalR;
+    
+    localR!.AssociatedComputationRing := globalR;
+    
     return localR;
     
 end );
