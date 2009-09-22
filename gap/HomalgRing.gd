@@ -14,7 +14,7 @@
 #
 ####################################
 
-# two new GAP-category:
+# three new GAP-categories:
 
 ##  <#GAPDoc Label="IsHomalgRing">
 ##  <ManSection>
@@ -29,6 +29,21 @@
 ##
 DeclareCategory( "IsHomalgRing",
         IsHomalgRingOrModule );
+
+##  <#GAPDoc Label="IsPreHomalgRing">
+##  <ManSection>
+##    <Filt Type="Category" Arg="R" Name="IsPreHomalgRing"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of pre &homalg; rings. <Br/><Br/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgRing</C>. These are rings
+##       with an incomplete homalgTable that are not meant for users!)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareCategory( "IsPreHomalgRing",
+        IsHomalgRing );
 
 ##  <#GAPDoc Label="IsHomalgRingElement">
 ##  <ManSection>

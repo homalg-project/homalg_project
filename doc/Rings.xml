@@ -16,6 +16,8 @@
 
 <#Include Label="IsHomalgRing">
 
+<#Include Label="IsPreHomalgRing">
+
 <#Include Label="IsHomalgRingElement">
 
 <#Include Label="IsHomalgInternalRingRep">
