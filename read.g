@@ -24,6 +24,9 @@ ReadPackage( "homalg", "gap/SetsOfRelations.gi" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gi" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
 
+## residue class rings
+ReadPackage( "homalg", "gap/HomalgResidueClassRing.gi" );
+
 ## modules
 ReadPackage( "homalg", "gap/HomalgModule.gi" );
 

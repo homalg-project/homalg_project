@@ -2,7 +2,7 @@
 ##
 ##  HomalgRing.gd               homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2009 Mohamed Barakat, RWTH Aachen
 ##
 ##  Declaration stuff for homalg rings.
 ##
@@ -1063,6 +1063,53 @@ DeclareAttribute( "StableRank",
 #
 ####################################
 
+# constructors:
+
+DeclareGlobalFunction( "CreateHomalgRing" );
+
+DeclareGlobalFunction( "HomalgRingOfIntegers" );
+
+DeclareGlobalFunction( "HomalgFieldOfRationals" );
+
+DeclareGlobalFunction( "HomalgRingElement" );
+
+DeclareOperation( "/",
+        [ IsRingElement, IsHomalgRing ] );
+
+DeclareGlobalFunction( "StringToElementStringList" );
+
+DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
+
+DeclareOperation( "ParseListOfIndeterminates",
+        [ IsList ] );
+
+DeclareOperation( "PolynomialRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "RingOfDerivations",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "RingOfDerivations",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "ExteriorRing",
+        [ IsHomalgRing, IsHomalgRing, IsList ] );
+
+DeclareOperation( "ExteriorRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "KoszulDualRing",
+        [ IsHomalgRing, IsHomalgRing, IsList ] );
+
+DeclareOperation( "KoszulDualRing",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "KoszulDualRing",
+        [ IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
@@ -1118,57 +1165,4 @@ DeclareOperation( "homalgSetName",
 
 DeclareOperation( "homalgSetName",
         [ IsHomalgRingElement, IsString, IsHomalgRing ] );
-
-# constructors:
-
-DeclareGlobalFunction( "CreateHomalgRing" );
-
-DeclareGlobalFunction( "HomalgRingOfIntegers" );
-
-DeclareGlobalFunction( "HomalgFieldOfRationals" );
-
-DeclareGlobalFunction( "HomalgRingElement" );
-
-DeclareOperation( "/",
-        [ IsRingElement, IsHomalgRing ] );
-
-DeclareGlobalFunction( "StringToElementStringList" );
-
-DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
-
-DeclareOperation( "ParseListOfIndeterminates",
-        [ IsList ] );
-
-DeclareOperation( "PolynomialRing",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "*",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "RingOfDerivations",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "RingOfDerivations",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "ExteriorRing",
-        [ IsHomalgRing, IsHomalgRing, IsList ] );
-
-DeclareOperation( "ExteriorRing",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "KoszulDualRing",
-        [ IsHomalgRing, IsHomalgRing, IsList ] );
-
-DeclareOperation( "KoszulDualRing",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "KoszulDualRing",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "/",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "/",
-        [ IsHomalgRing, IsRingElement ] );
 

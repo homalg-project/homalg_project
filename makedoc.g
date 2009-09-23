@@ -25,6 +25,8 @@ list := [
          "../gap/HomalgRelations.gi",
          "../gap/HomalgGenerators.gd",
          "../gap/HomalgGenerators.gi",
+         "../gap/HomalgResidueClassRing.gd",
+         "../gap/HomalgResidueClassRing.gi",
          "../gap/HomalgModule.gd",
          "../gap/HomalgModule.gi",
          "../gap/HomalgMap.gd",

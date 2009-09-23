@@ -136,9 +136,6 @@ DeclareGlobalFunction( "HomalgRelationsForLeftModule" );
 
 DeclareGlobalFunction( "HomalgRelationsForRightModule" );
 
-DeclareOperation( "/",
-        [ IsHomalgRing, IsHomalgRelations ] );
-
 # basic operations:
 
 DeclareOperation( "DegreesOfGenerators",
