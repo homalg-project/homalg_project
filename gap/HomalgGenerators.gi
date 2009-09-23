@@ -30,8 +30,6 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsHomalgGenerators:
-
 ##  <#GAPDoc Label="IsGeneratorsOfFinitelyGeneratedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="rel" Name="IsGeneratorsOfFinitelyGeneratedModuleRep"/>

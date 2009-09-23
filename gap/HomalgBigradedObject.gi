@@ -18,8 +18,6 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsHomalgBigradedObject
-
 ##  <#GAPDoc Label="IsBigradedObjectOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="Er" Name="IsBigradedObjectOfFinitelyPresentedObjectsRep"/>

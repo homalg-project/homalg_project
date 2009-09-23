@@ -23,8 +23,6 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgBicomplex
-
 ##  <#GAPDoc Label="IsBicomplexOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="BC" Name="IsBicomplexOfFinitelyPresentedObjectsRep"/>

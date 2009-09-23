@@ -27,8 +27,6 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsHomalgMap
-
 ##  <#GAPDoc Label="IsMapOfFinitelyGeneratedModulesRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="phi" Name="IsMapOfFinitelyGeneratedModulesRep"/>

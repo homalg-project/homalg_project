@@ -20,8 +20,6 @@
 #
 ####################################
 
-# new representations for the GAP-category IsHomalgModule
-
 ##  <#GAPDoc Label="IsHomalgRingMapRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="phi" Name="IsHomalgRingMapRep"/>

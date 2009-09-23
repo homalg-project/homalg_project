@@ -22,8 +22,6 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgSpectralSequence
-
 ##  <#GAPDoc Label="IsSpectralSequenceOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="E" Name="IsSpectralSequenceOfFinitelyPresentedObjectsRep"/>

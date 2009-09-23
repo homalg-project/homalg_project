@@ -14,8 +14,6 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgComplex
-
 ##  <#GAPDoc Label="IsComplexOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="C" Name="IsComplexOfFinitelyPresentedObjectsRep"/>

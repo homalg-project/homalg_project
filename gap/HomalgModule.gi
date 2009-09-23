@@ -36,8 +36,6 @@
 #
 ####################################
 
-# new representations for the GAP-category IsHomalgModule
-
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleOrSubmoduleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleOrSubmoduleRep"/>

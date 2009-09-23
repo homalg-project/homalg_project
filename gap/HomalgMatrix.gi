@@ -14,14 +14,10 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsInternalMatrixHull:
-
 ##
 DeclareRepresentation( "IshomalgInternalMatrixHullRep",
         IsInternalMatrixHull,
         [ ] );
-
-# a new representation for the GAP-category IsHomalgMatrix:
 
 ##  <#GAPDoc Label="IsHomalgInternalMatrixRep">
 ##  <ManSection>

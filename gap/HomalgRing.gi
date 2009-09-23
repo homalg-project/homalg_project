@@ -14,9 +14,6 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsHomalgRing
-# which is a subrepresentation of IsHomalgRingOrFinitelyPresentedModuleRep:
-
 ##  <#GAPDoc Label="IsHomalgInternalRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgInternalRingRep"/>

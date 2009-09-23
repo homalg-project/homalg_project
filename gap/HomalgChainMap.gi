@@ -14,8 +14,6 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgChainMap
-
 ##  <#GAPDoc Label="IsChainMapOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="c" Name="IsChainMapOfFinitelyPresentedObjectsRep"/>

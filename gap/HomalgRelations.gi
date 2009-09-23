@@ -25,8 +25,6 @@
 #
 ####################################
 
-# a new representation for the GAP-category IsHomalgRelations:
-
 ##  <#GAPDoc Label="IsRelationsOfFinitelyPresentedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="rel" Name="IsRelationsOfFinitelyPresentedModuleRep"/>

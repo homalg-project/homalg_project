@@ -14,7 +14,7 @@
 #
 ####################################
 
-# two new representations for the GAP-category IsHomalgFiltration:
+# a new representation for the GAP-category IsHomalgDiagram:
 DeclareRepresentation( "IsHomalgDiagramRep",
         IsHomalgDiagram,
         [ "matrix", "range", "total", "display" ] );
