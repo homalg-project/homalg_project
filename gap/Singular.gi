@@ -726,7 +726,7 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     DecideZeroRowsEffectivelyLocal := "\n\
 proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
 {\n\
-  list l = division(B,A);\n\
+  list l = division(A,B);\n\
   list l2 = CreateInputForLocalMatrixRows(l[2],l[3]);\n\
   list l3 = CreateInputForLocalMatrixRows(-l[1],l[3]);\n\
   list l = l2[1],l2[2],l3[1],l3[2];\n\
@@ -766,17 +766,17 @@ proc BasisOfRowsCoeffLocal (matrix M)\n\
   matrix U;\n\
   matrix T = lift(M,B,U); //never use stdlift, also because it might differ from std!!!\n\
   list l = CreateInputForLocalMatrixRows(T,U);\n\
-  l = B,1,l[1],l[2];\n\
+  l = B,l[1],l[2];\n\
   return(l)\n\
 }\n\n",
 
     BasisOfColumnsCoeffLocal := "\n\
 proc BasisOfColumnsCoeffLocal (matrix M)\n\
 {\n\
-  list l = BasisOfRowsCoeff(Involution(M));\n\
+  list l = BasisOfRowsCoeffLocal(Involution(M));\n\
   matrix B = l[1];\n\
   matrix T = l[2];\n\
-  l = Involution(B),Involution(T);\n\
+  l = Involution(B),Involution(T),l[3];\n\
   return(l);\n\
 }\n\n",
 
@@ -788,12 +788,16 @@ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   matrix A2=A;\n\
   for (int i=1; i<=ncols(U); i=i+1)\n\
   {\n\
-    poly u=lcm(u,U[i,i]);\n\
+    if(U[i,i]!=0){poly u=lcm(u,U[i,i]);};\n\
   }\n\
   for (int i=1; i<=ncols(U); i=i+1)\n\
   {\n\
-    poly uu=U[i,i];\n\
-    poly gg=u/uu;\n\
+    if(U[i,i]==0){\n\
+      poly gg=1;\n\
+    } else {\n\
+      poly uu=U[i,i];\n\
+      poly gg=u/uu;\n\
+    };\n\
     if(gg!=1)\n\
     {\n\
       for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
@@ -801,10 +805,8 @@ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   }\n\
   list l=A2,u;\n\
   return(l);\n\
-}\n\n";
+}\n\n",
 
-
-    
     )
 );
 
@@ -1198,7 +1200,7 @@ InstallMethod( LocalizePolynomialRingAtZero,
         [ IsHomalgExternalRingInSingularRep ],
         
   function( R )
-    local var, properties, ext_obj, S, RP;
+    local var, properties, ext_obj, S, RP, component;
 
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -1227,9 +1229,13 @@ InstallMethod( LocalizePolynomialRingAtZero,
     RP!.SetInvolution :=
       function( R )
         homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
-    end;
+      end;
     
     RP!.SetInvolution( S );
+    
+    for component in NamesOfComponents( CommonHomalgTableForSingularBasicMoraPreRing ) do
+        RP!.(component) := CommonHomalgTableForSingularBasicMoraPreRing.(component);
+    od;
     
     return S;
     

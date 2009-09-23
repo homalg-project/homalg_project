@@ -40,6 +40,8 @@ ReadPackage( "RingsForHomalg", "gap/SingularGF2.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularQX.gd" );
 ReadPackage( "RingsForHomalg", "gap/SingularGroebner.gd" );
 
+ReadPackage( "RingsForHomalg", "gap/LocalizePreRingMora.gd" );
+
 ## Macaulay2
 ReadPackage( "RingsForHomalg", "gap/Macaulay2Basic.gd" );
 ReadPackage( "RingsForHomalg", "gap/Macaulay2Tools.gd" );
