@@ -664,7 +664,7 @@ InstallMethod( LocalizeAt,
     RP := CreateHomalgTableForLocalizedRings( globalR );
     
     for component in NamesOfComponents( HomalgTableReductionMethodsForLocalizedRingsBasic ) do
-        RP.(component) := HomalgTableReductionMethodsForLocalizedRingsBasic.(component);
+        RP!.(component) := HomalgTableReductionMethodsForLocalizedRingsBasic.(component);
     od;
     
     ## create the local ring
@@ -745,7 +745,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
         ## extract the properties of the global ring element
         if IsHomalgRing( arg[2] ) then
             ring := arg[2];
-            ar := [ numer, ring ];
+            ar := [ numer, One( AssociatedComputationRing( ring ) ), ring ];
             properties := KnownTruePropertiesOfObject( numer );
             Append( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
             return CallFuncList( HomalgLocalRingElement, ar );
@@ -811,7 +811,7 @@ InstallMethod( HomalgLocalMatrix,
         [ IsHomalgMatrix, IsRingElement, IsHomalgLocalRingRep ],
         
   function( A, r, R )
-    local G, type, matrix, HookDenom, ComputationRing, AA;
+    local G, type, matrix, HookDenom, ComputationRing, rr, AA;
     
     G := HomalgRing( A );
     
@@ -819,21 +819,50 @@ InstallMethod( HomalgLocalMatrix,
     
     if IsBound( A!.hook ) then
       HookDenom := ComputationRing!.( A!.hook )();
-      Unbind( A!.hook )
+      Unbind( A!.hook );
     else
       HookDenom := One( ComputationRing );
+    fi;
+    
+    if not IsIdenticalObj( ComputationRing , HomalgRing( r ) ) then
+      rr := r / ComputationRing;
+    else
+      rr := r;
+    fi;
+    if not IsIdenticalObj( ComputationRing , HomalgRing( A ) ) then
+      AA := ComputationRing * A;
+    else
+      AA := A;
     fi;
     
     matrix := rec( ring := R );
     
     ObjectifyWithAttributes(
         matrix, TheTypeHomalgLocalMatrix,
-        Eval, [ A, r * HookDenom ]
+        Eval, [ AA, rr * HookDenom ]
     );
     
     BlindlyCopyMatrixPropertiesToLocalMatrix( A, matrix );
     
     return matrix;
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg ring elements",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local s;
+    
+    if IsHomalgMatrix( M ) and IsIdenticalObj( HomalgRing( M ), R ) then
+       return M;
+    else
+       s := GetListOfHomalgMatrixAsString( M );
+    fi;
+    
+    return HomalgMatrix( s, NrRows( M ), NrColumns( M ), R );
     
 end );
 

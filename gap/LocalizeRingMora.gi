@@ -23,11 +23,11 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     
     n_gens := Length( var );
     
-    gens := HomalgMatrix( var, n_gens, 1, R );
+    gens := Rloc * HomalgMatrix( var, n_gens, 1, R );
     
     SetGeneratorsOfMaximalLeftIdeal( S, gens );
     
-    gens := HomalgMatrix( var, 1, n_gens, R );
+    gens := Rloc * HomalgMatrix( var, 1, n_gens, R );
     
     SetGeneratorsOfMaximalRightIdeal( S, gens );
     

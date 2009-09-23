@@ -38,20 +38,19 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                BasisOfRowsCoeff :=
                  function( M, T )
-                   local R, ComputationRing, TT, result;
+                   local R, ComputationRing, TT, result, hook;
                    
                    R := HomalgRing( M );
                    
                    ComputationRing := AssociatedComputationRing( R );
                    
-                   SetEval( T, [ Denominator( M ) * HomalgIdentityMatrix( NrRows( M ), ComputationRing ), One( globalR ) ] );
-                   
                    TT := HomalgVoidMatrix( ComputationRing );
                    
-                   result := HomalgLocalMatrix( BasisOfRowModuleCoeff( Numerator( M ) , TT ), R );
+                   result := BasisOfRowsCoeff( Numerator( M ) , TT );
                    
-                   #stimmt die reihenfolge? benutze den hook der basisbestimung...
-                   T := T * TT;
+                   SetEval( T, [ Denominator( M ) * TT, One ( ComputationRing ) ] );
+                   
+                   result := HomalgLocalMatrix( result, R );
                    
                    return result;
                    
@@ -59,20 +58,19 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                BasisOfColumnsCoeff :=
                  function( M, T )
-                   local R, ComputationRing, TT, result;
+                   local R, ComputationRing, TT, result, hook;
                    
                    R := HomalgRing( M );
                    
                    ComputationRing := AssociatedComputationRing( R );
                    
-                   SetEval( T, [ Denominator( M ) * HomalgIdentityMatrix( NrColumns( M ), ComputationRing ), One( globalR ) ] );
-                   
                    TT := HomalgVoidMatrix( ComputationRing );
                    
-                   result := HomalgLocalMatrix( BasisOfColumnModuleCoeff( Numerator( M ), TT ), R );
+                   result := BasisOfColumnsCoeff( Numerator( M ), TT );
                    
-                   #stimmt die reihenfolge? benutze den hook der basisbestimung...
-                   T := T * TT;
+                   SetEval( T, [ Denominator( M ) * TT, One ( ComputationRing ) ] );
+                   
+                   result := HomalgLocalMatrix( result, R );
                    
                    return result;
                    
@@ -80,23 +78,46 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroRows :=
                  function( A, B )
-
-                   return DecideZeroRows( Numerator( A ) , Numerator( B ) );
+                   local R, ComputationRing, hook, result;
+                   
+                   R := HomalgRing( A );
+                   
+                   ComputationRing := AssociatedComputationRing( R );
+                   
+                   result := DecideZeroRows( Numerator( A ) , Numerator( B ) );
+                   
+                   return HomalgLocalMatrix( result, Denominator( A ) , R );
 
                  end,
                
                DecideZeroColumns :=
                  function( A, B )
+                   local R, ComputationRing, hook, result;
                    
-                   return DecideZeroColumns( Numerator( A ) , Numerator( B ) );
+                   R := HomalgRing( A );
                    
+                   ComputationRing := AssociatedComputationRing( R );
+                   
+                   result := DecideZeroColumns( Numerator( A ) , Numerator( B ) );
+                   
+                   return HomalgLocalMatrix( result, Denominator( A ) , R );
+
                  end,
                
                DecideZeroRowsEffectively :=
                  function( A, B, T )
-                   local result;
+                   local R, T1, result, ComputationRing;
                    
-                   result := DecideZeroRowsEffectively( Numerator( A ) , Numerator ( B ) );
+                   R := HomalgRing( A );
+                   
+                   ComputationRing := AssociatedComputationRing( R );
+                   
+                   T1 := HomalgVoidMatrix( ComputationRing );
+                   
+                   result := HomalgLocalMatrix( DecideZeroRowsEffectively( Numerator( A ) , Numerator ( B ) , T1 ), R );
+                   
+                   SetEval( T, [ T1, Denominator( A ) ] );
+                   T := HomalgLocalRingElement( Denominator( A ), R ) * T;
                    
                    return result;
                    
@@ -104,18 +125,22 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
                
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
-                   local R, N;
+                   local R, T1, result, ComputationRing;
                    
                    R := HomalgRing( A );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   ComputationRing := AssociatedComputationRing( R );
                    
-                   homalgSendBlocking( [ "list l=DecideZeroColumnsEffectively(", A, B, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   T1 := HomalgVoidMatrix( ComputationRing );
                    
-                   return N;
+                   result := HomalgLocalMatrix( DecideZeroColumnsEffectively( Numerator( A ) , Numerator ( B ) , T1 ), R );
+                   
+                   SetEval( T, [ T1, Denominator( A ) ] );
+                   T := HomalgLocalRingElement( Denominator( A ), R ) * T;
+                   
+                   return result;
                    
                  end,
-               
                
                SyzygiesGeneratorsOfRows :=
                  function( arg )
