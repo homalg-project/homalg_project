@@ -903,7 +903,7 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for homalg rings",
+        "for homalg local rings",
         [ IsHomalgLocalRingRep ],
         
   function( o )
@@ -919,7 +919,7 @@ InstallMethod( Display,
         
   function( r )
     
-    Print( Flat( [ Name(r), "\n" ] ) );
+    Print( Name( r ), "\n" );
     
 end );
 
@@ -934,6 +934,6 @@ InstallMethod( Display,
     a := Eval( A );
     
     Display( a[1] );
-    Print( Flat( [ "/ ", Name( a[2] ), "\n" ] ) );
+    Print( "/ ", Name( a[2] ), "\n" );
     
 end );

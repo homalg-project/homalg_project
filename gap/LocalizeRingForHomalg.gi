@@ -35,14 +35,9 @@ InstallValue( CommonHomalgTableForLocalizedRings,
                     return Name( R );
                 fi;
                 
-                if HasCoefficientsRing( R ) then
-                    r := Flat( [ "localization of " , RingName( CoefficientsRing( R ) ) ] );
-                else
-                    r := "(some ring)";
-                fi;
+                return Concatenation( RingName( AssociatedGlobalRing( R ) ), "_<", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ), Name ) ), ">" );
                 
-                return r;
-                
+
             end,
               
          )
