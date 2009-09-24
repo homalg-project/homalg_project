@@ -330,7 +330,11 @@ InstallMethod( Name,
 
   function( o )
     
-    return Flat( [ Name( Numerator( o ) ), "/",  Name( Denominator( o ) ) ] );
+    if IsHomalgInternalRingRep( AssociatedComputationRing( o ) ) then
+      return Flat( [ String( Numerator( o ) ), "/",  String( Denominator( o ) ) ] );
+    else
+      return Flat( [ Name( Numerator( o ) ), "/",  Name( Denominator( o ) ) ] );
+    fi;
 
 end );
 
@@ -924,7 +928,7 @@ InstallMethod( HomalgLocalMatrix,
       HookDenom := One( ComputationRing );
     fi;
     
-    if not IsIdenticalObj( ComputationRing , HomalgRing( r ) ) then
+    if not ( IsHomalgRingElement( r ) and IsIdenticalObj( ComputationRing , HomalgRing( r ) ) ) then
       rr := r / ComputationRing;
     else
       rr := r;

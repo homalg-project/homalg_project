@@ -6,7 +6,7 @@ LoadPackage( "LocalizeRingForHomalg" );
 
 SetAssertionLevel( 4 );
 
-R0 := LocalizeAt( Qxyz );
+R0 := LocalizeAtZero( Qxyz );
 
 wmat := HomalgMatrix( "[ \
 x*y,  y*z,    z,        0,         0,    \

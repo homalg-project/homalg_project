@@ -63,6 +63,8 @@ end,
                    
                    result := HomalgLocalMatrix( result, R );
                    
+                   Assert( 4, result = T * M );
+                   
                    return result;
                    
                  end,
@@ -82,6 +84,8 @@ end,
                    SetEval( T, [ Denominator( M ) * TT, One ( ComputationRing ) ] );
                    
                    result := HomalgLocalMatrix( result, R );
+                   
+                   Assert( 4, result = M * T );
                    
                    return result;
                    
@@ -134,10 +138,18 @@ DecideZeroRows :=
                    
                    T1 := HomalgVoidMatrix( ComputationRing );
                    
-                   result := HomalgLocalMatrix( DecideZeroRowsEffectively( Numerator( A ) , Numerator ( B ) , T1 ), R );
+                   result := HomalgLocalMatrix( DecideZeroRowsEffectively( Numerator( A ), Numerator ( B ), T1 ), Denominator( A ), R );
                    
-                   SetEval( T, [ T1, Denominator( A ) ] );
-                   T := HomalgLocalRingElement( Denominator( A ), R ) * T;
+#                    SetEval( T, [ T1, Denominator( A ) ] );
+#                    T := HomalgLocalRingElement( Denominator( A ), R ) * T;
+                   if IsBound(T1!.Denominator) then
+                     SetEval( T, [ T1, T1!.Denominator * Denominator( A ) ] );
+                     Unbind(T1!.Denominator);
+                   else
+                     SetEval( T, [ T1, Denominator( A ) ] );
+                   fi;
+                   
+                   Assert( 4, result = A + T * B );
                    
                    return result;
                    
@@ -153,44 +165,62 @@ DecideZeroRows :=
                    
                    T1 := HomalgVoidMatrix( ComputationRing );
                    
-                   result := HomalgLocalMatrix( DecideZeroColumnsEffectively( Numerator( A ) , Numerator ( B ) , T1 ), R );
+                   result := HomalgLocalMatrix( DecideZeroColumnsEffectively( Numerator( A ), Numerator ( B ), T1 ), Denominator( A ), R );
                    
-                   SetEval( T, [ T1, Denominator( A ) ] );
-                   T := HomalgLocalRingElement( Denominator( A ), R ) * T;
+#                    SetEval( T, [ T1, Denominator( A ) ] );
+#                    T := HomalgLocalRingElement( Denominator( A ), R ) * T;
+                   
+                   if IsBound(T1!.Denominator) then
+                     SetEval( T, [ T1, T1!.Denominator * Denominator( A ) ] );
+                     Unbind(T1!.Denominator);
+                   else
+                     SetEval( T, [ T1, Denominator( A ) ] );
+                   fi;
+                   
+                   Assert( 4, result = A + B * T );
                    
                    return result;
                    
                  end,
                
-               SyzygiesGeneratorsOfRows :=
-                 function( arg )
-                   local M, R, M2, M3, N;
-                   
-                   M := arg[1];
-                   
-                   R := HomalgRing( M );
-                   
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-                       
-                       M3 := UnionOfRows( M, M2 );
-                       
-                       M := CertainRows( M3, [ 1 .. NrRows( M ) ] );
-                       
-                       M2 := CertainRows( M3, [ NrRows( M ) + 1 .. NrRows( M3 ) ] );
-                       
-                       N := SyzygiesGeneratorsOfRows( Numerator( M ), Numerator( M2 ) );
-                       
-                   else
-                       
-                       N := SyzygiesGeneratorsOfRows( Numerator( M ) );
-                       
-                   fi;
-                   
-                   return HomalgLocalMatrix( N, R );
-                   
-                 end,
+##  <#GAPDoc Label="SyzygiesGeneratorsOfRows">
+##  <ManSection>
+##    <Meth Arg="M" Name="SyzygiesGeneratorsOfRows" Label="for local rings"/>
+##    <Meth Arg="M, N" Name="SyzygiesGeneratorsOfRows" Label="for local rings using further relations"/>
+##    <Returns>a "basis" of the syzygies of the arguments (for details consult the homalg help)</Returns>
+##    <Description>
+##    It is easy to see, that a global syzygy is also a local syzygy and vice versa when clearing the local Syzygy of its denominators. So this procedure brings the matrices to compute syzygies for on a common denominator if needed (in case <A>N</A> is given) and then calls the syzygy method of the underlying computation ring.
+##      <Listing Type="Code"><![CDATA[
+SyzygiesGeneratorsOfRows :=
+  function( arg )
+    local M, R, M2, M3, N;
+    
+    M := arg[1];
+    
+    R := HomalgRing( M );
+    
+    if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
+        
+        M2 := arg[2];
+        M3 := UnionOfRows( M, M2 );
+        M := CertainRows( M3, [ 1 .. NrRows( M ) ] );
+        M2 := CertainRows( M3, [ NrRows( M ) + 1 .. NrRows( M3 ) ] );
+        
+        N := SyzygiesGeneratorsOfRows( Numerator( M ), Numerator( M2 ) );
+        
+    else
+        
+        N := SyzygiesGeneratorsOfRows( Numerator( M ) );
+        
+    fi;
+    
+    return HomalgLocalMatrix( N, R );
+    
+  end,
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
                
                SyzygiesGeneratorsOfColumns :=
                  function( arg )
@@ -229,64 +259,65 @@ InstallValue( HomalgTableReductionMethodsForLocalizedRingsBasic,
         
         rec(
         
-               DecideZeroRows :=
-                 function( A, B )
-                   local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2, A3;
-                   
-                   R := HomalgRing( A );
-                   
-                   T := HomalgVoidMatrix( R );
-                   
-                   m := NrRows( B );
-                   
-                   gens := GeneratorsOfMaximalLeftIdeal( R );
-                   
-                   n := NrRows( gens );
-                   
-                   GlobalR := AssociatedComputationRing( R );
-                   
-                   one := One( GlobalR );
-                   
-                   N := HomalgZeroMatrix( 0, NrColumns( A ), R );
-                   
-                   a := Eval( A );
-                   
-                   numA := a[1];
-                   denA := a[2];
-                   
-                   B1 := Numerator( B );
-                   
-                   for i in [ 1 .. NrRows( A ) ] do
-                   
-                       A1 := CertainRows( numA, [ i ] );
-                           
-                       A2 := HomalgLocalMatrix( DecideZeroRows( A1, B1 ), R );
-                       
-                       if not IsZero( A2 ) then
-                       
-                         B2 := UnionOfRows( B1, gens * A1 );
-                       
-                         B2 := BasisOfRows( B2 );
-                       
-                         A3 := HomalgLocalMatrix( DecideZeroRows( A1, B2 ), R );
-                         
-                         if IsZero( A3 ) then
-                         
-                           A2 := A3;
-                           
-                         fi;
-                       
-                       fi;
-                       
-                       N := UnionOfRows( N, A2 );
-                       
-                   od;
-                   
-                   N := HomalgRingElement( One( GlobalR ), denA, R ) * N;
-                   
-                   return N;
-                   
-                 end,
+##  <#GAPDoc Label="DecideZeroRows">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="DecideZeroRows" Label="for local rings"/>
+##    <Returns>a "reduced" form of <A>A</A> with respect to <A>B</A></Returns>
+##    <Description>
+##    This procedure is the mathematical core procedure of this package. We use a trick to decide locally, whether <A>A</A> can be reduced to zero by <A>B</A> with a global computation.
+##
+##    First a heuristic is used by just checking, whether the element lies inside the global module, generated by the generators of the local module. this of course implies this for the local module. This has the advantage of a short computation time and leaving a normal form free of denominators.
+##
+##    If this check fails, we use our trick to check for each row of <A>A</A> independently, whether it lies in the Module generated by <A>B</A>.
+##      <Listing Type="Code"><![CDATA[
+DecideZeroRows :=
+  function( A, B )
+    local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2, A3;
+    
+    R := HomalgRing( A );
+    GlobalR := AssociatedComputationRing( R );
+    T := HomalgVoidMatrix( R );
+    gens := GeneratorsOfMaximalLeftIdeal( R );
+    n := NrRows( gens );
+    one := One( GlobalR );
+    
+    m := NrRows( B );
+    B1 := Numerator( B );
+    
+    N := HomalgZeroMatrix( 0, NrColumns( A ), R );
+    a := Eval( A );
+    numA := a[1];
+    denA := a[2];
+    
+    for i in [ 1 .. NrRows( A ) ] do
+    
+        #use global reduction as heuristic
+        A1 := CertainRows( numA, [ i ] );
+        A2 := HomalgLocalMatrix( DecideZeroRows( A1, B1 ), R );
+        
+        #if it is nonzero, check whether local reduction makes it zero
+        if not IsZero( A2 ) then
+          B2 := UnionOfRows( B1, gens * A1 );
+          B2 := BasisOfRows( B2 );
+          A3 := HomalgLocalMatrix( DecideZeroRows( A1, B2 ), R );
+          if IsZero( A3 ) then
+            A2 := A3;
+          fi;
+        fi;
+        
+        N := UnionOfRows( N, A2 );
+        
+    od;
+    
+    N := HomalgRingElement( One( GlobalR ), denA, R ) * N;
+    
+    return N;
+    
+  end,
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
                
                DecideZeroColumns :=
                  function( A, B )
