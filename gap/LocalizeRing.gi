@@ -817,9 +817,9 @@ InstallMethod( HomalgLocalMatrix,
     
     ComputationRing := AssociatedComputationRing( R );
     
-    if IsBound( A!.hook ) then
-      HookDenom := ComputationRing!.( A!.hook )();
-      Unbind( A!.hook );
+    if IsBound( A!.Denominator ) then
+      HookDenom := A!.Denominator;
+      Unbind( A!.Denominator );
     else
       HookDenom := One( ComputationRing );
     fi;
