@@ -727,6 +727,13 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
 {\n\
   list l = division(A,B);\n\
+  matrix U=l[3];\n\
+  for (int i=1; i<=ncols(U); i=i+1)\n\
+  {\n\
+    if(U[i,i]==0){U[i,i]=1;};\n\
+  }\n\
+  l[3]=U;\n\
+  l[2] = A * l[3] - B * l[1];\n\
   list l2 = CreateInputForLocalMatrixRows(l[2],l[3]);\n\
   list l3 = CreateInputForLocalMatrixRows(-l[1],l[3]);\n\
   list l = l2[1],l2[2],l3[1],l3[2];\n\
@@ -788,7 +795,7 @@ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   matrix A2=A;\n\
   for (int i=1; i<=ncols(U); i=i+1)\n\
   {\n\
-    if(U[i,i]!=0){poly u=lcm(u,U[i,i]);};\n\
+    if(U[i,i]!=0){u=lcm(u,U[i,i]);};\n\
   }\n\
   for (int i=1; i<=ncols(U); i=i+1)\n\
   {\n\
@@ -1195,7 +1202,7 @@ end );
 #    
 #end );
 
-InstallMethod( LocalizePolynomialRingAtZero,
+InstallMethod( LocalizePolynomialRingWithMoraAtZero,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep ],
         
