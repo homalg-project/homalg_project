@@ -98,6 +98,15 @@ InstallMethod( HomalgRing,
     
 end );
 
+##  <#GAPDoc Label="AssociatedComputationRing:ring">
+##  <ManSection>
+##    <Oper Arg="R" Name="AssociatedComputationRing" Label="for homalg local rings"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external ring in &Singular; with Mora's algorithm.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( AssociatedComputationRing,
         "for homalg local rings",
@@ -117,6 +126,15 @@ InstallMethod( AssociatedComputationRing,
     
 end );
 
+##  <#GAPDoc Label="AssociatedComputationRing:element">
+##  <ManSection>
+##    <Oper Arg="r" Name="AssociatedComputationRing" Label="for homalg local ring elements"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external ring in &Singular; with Mora's algorithm.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( AssociatedComputationRing,
         "for homalg local ring elements",
@@ -128,6 +146,15 @@ InstallMethod( AssociatedComputationRing,
     
 end );
 
+##  <#GAPDoc Label="AssociatedComputationRing:matrix">
+##  <ManSection>
+##    <Oper Arg="mat" Name="AssociatedComputationRing" Label="for homalg local matrices"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) pre ring in &Singular; with Mora's algorithm.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( AssociatedComputationRing,
         "for homalg local matrices",
@@ -212,7 +239,7 @@ end );
 ##    <Oper Arg="r" Name="Numerator" Label="for homalg local ring elements"/>
 ##    <Returns>a (global) &homalg; ring element</Returns>
 ##    <Description>
-##      The numerator from a local ring element <A>r</A>, which is a global &homalg; ring element.
+##      The numerator from a local ring element <A>r</A>, which is a &homalg; ring element from the computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -232,7 +259,7 @@ end );
 ##    <Oper Arg="r" Name="Denominator" Label="for homalg local ring elements"/>
 ##    <Returns>a (global) &homalg; ring element</Returns>
 ##    <Description>
-##      The denominator from a local ring element <A>r</A>, which is a global &homalg; ring element.
+##      The denominator from a local ring element <A>r</A>, which is a &homalg; ring element from the computation ring
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -252,7 +279,7 @@ end );
 ##    <Oper Arg="mat" Name="Numerator" Label="for homalg local matrices"/>
 ##    <Returns>a (global) &homalg; matrix</Returns>
 ##    <Description>
-##      The numerator from a local matrix <A>mat</A>, which is a global &homalg; matrix.
+##      The numerator from a local matrix <A>mat</A>, which is a &homalg; matrix from the computation ring
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -272,7 +299,7 @@ end );
 ##    <Oper Arg="mat" Name="Denominator" Label="for homalg local matrices"/>
 ##    <Returns>a (global) &homalg; ring element</Returns>
 ##    <Description>
-##      The denominator from a local matrix <A>mat</A>, which is a global &homalg; ring element.
+##      The denominator from a local matrix <A>mat</A>, which is a &homalg; matrix from the computation ring
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -336,7 +363,7 @@ end );
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> to the value <A>r</A>, where <A>R</A> is the corresponding global ring.
+##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -346,13 +373,13 @@ InstallMethod( SetEntryOfHomalgMatrix,
         [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
   function( M, r, c, s, R )
-    local m, N, globalR, M2, e;
+    local m, cR, N, M2, e;
     
     m := Eval( M );
     
-    globalR := AssociatedGlobalRing( R );
+    cR := AssociatedComputationRing( R );
     
-    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
+    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), cR );
     
     SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
     
@@ -362,7 +389,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
     
     M2 := m[1];
     
-    SetEntryOfHomalgMatrix( M2, r, c, Zero( globalR ) );
+    SetEntryOfHomalgMatrix( M2, r, c, Zero( cR ) );
     
     e := Eval( HomalgLocalMatrix( M2, m[2], R ) + N );
     
@@ -376,7 +403,7 @@ end );
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> by adding the value <A>r</A> to it, where <A>R</A> is the corresponding global ring.
+##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -386,11 +413,9 @@ InstallMethod( AddToEntryOfHomalgMatrix,
         [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
   function( M, r, c, s, R )
-    local globalR, N, e;
+    local N, e;
     
-    globalR := AssociatedGlobalRing( R );
-    
-    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), globalR );
+    N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
     
     SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
     
@@ -411,7 +436,7 @@ end );
 ##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg local matrices"/>
 ##    <Returns>a string</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A> as a string, where <A>R</A> is the corresponding global ring.
+##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A> as a string. Here <A>R</A> is the &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -425,7 +450,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
     
     m := Eval( M );
     
-    return Concatenation( [ "(", GetEntryOfHomalgMatrixAsString( m[1], r, c, AssociatedGlobalRing( R ) ), ")/(", Name( m[2] ), ")" ] );
+    return Concatenation( [ "(", GetEntryOfHomalgMatrixAsString( m[1], r, c, AssociatedComputationRing( R ) ), ")/(", Name( m[2] ), ")" ] );
     
 end );
 
@@ -434,7 +459,7 @@ end );
 ##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Returns>a local ring element</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A>, where <A>R</A> is the corresponding global ring.
+##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A>. Here <A>R</A> is the &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -448,22 +473,83 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
     m :=Eval( M );
     
-    return HomalgLocalRingElement( GetEntryOfHomalgMatrix( m[1], r, c, AssociatedGlobalRing( R ) ), m[2], R );
+    return HomalgLocalRingElement( GetEntryOfHomalgMatrix( m[1], r, c, AssociatedComputationRing( R ) ), m[2], R );
     
 end );
 
 ##  <#GAPDoc Label="Cancel">
 ##  <ManSection>
-##    <Oper Arg="a, b" Name="Cancel" Label="for pairs of global ring elements"/>
-##    <Returns>two local ring elements</Returns>
+##    <Oper Arg="a, b" Name="Cancel" Label="for pairs of ring elements"/>
+##    <Returns>two ring elements</Returns>
 ##    <Description>
-##      For <M>a=a'*c</M> and <M>b=b'*c</M> return <M>a'</M> and <M>b'</M>. Finding <M>c</M> depends on whether a gcd is included in the ring package .
+##      For <M><A>a</A>=a'*c</M> and <M><A>b</A>=b'*c</M> return <M>a'</M> and <M>b'</M>. The exact form of <M>c</M> depends on whether a procedure for gcd computation is included in the ring package.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( Cancel,
-        "for pairs of global ring elements",
+        "for pairs of ring elements from the computation ring",
+        [ IsRingElement, IsRingElement ],
+        
+  function( a, b )
+    local za, zb, z, ma, mb, o, g;
+    
+    za := IsZero( a );
+    zb := IsZero( b );
+    
+    if za and zb then
+        
+        z := Zero( a );
+        
+        return [ z, z ];
+        
+    elif za then
+        
+        return [ Zero( a ), One( a ) ];
+        
+    elif zb then
+        
+        return [ One( a ), Zero( a ) ];
+        
+    fi;
+    
+    if IsOne( a ) then
+        
+        return [ One( a ), b ];
+        
+    elif IsOne( b ) then
+        
+        return [ a, One( a ) ];
+        
+    fi;
+    
+    ma := a = -One( a );
+    mb := b = -One( b );
+    
+    if ma and mb then
+        
+        o := One( a );
+        
+        return [ o, o ];
+        
+    elif ma then
+        
+        return [ One( a ), -b ];
+        
+    elif mb then
+        
+        return [ -a, One( b ) ];
+        
+    fi;
+    
+    g := Gcd( a, b );
+    
+    return [ a / g, b / g ];
+    
+end );
+
+InstallMethod( Cancel,
+        "for pairs of ring elements from the computation ring",
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( a, b )
@@ -645,7 +731,7 @@ end );
 
 ##  <#GAPDoc Label="LocalizeAt">
 ##  <ManSection>
-##    <Oper Arg="R, l" Name="LocalizeAt" Label= "constructor for homalg localized rings"/>
+##    <Oper Arg="R, l" Name="LocalizeAt" Label= "for a commutative ring and a maximal ideal"/>
 ##    <Returns>a local ring</Returns>
 ##    <Description>
 ##      If <A>l</A> is a list of elements of the global ring <A>R</A> generating a maximal ideal, the method creates the corresponding localization of <A>R</A> at the complement of the maximal ideal.
@@ -693,16 +779,16 @@ InstallMethod( LocalizeAt,
     
 end );
 
-##  <#GAPDoc Label="LocalizeAt:poly">
+##  <#GAPDoc Label="LocalizeAtZero">
 ##  <ManSection>
-##    <Oper Arg="R" Name="LocalizeAt" Label= "constructor for homalg localized rings for polynomial rings at zero"/>
+##    <Oper Arg="R" Name="LocalizeAtZero" Label= "for a free polynomial ring"/>
 ##    <Returns>a local ring</Returns>
 ##    <Description>
-##      If <A>R</A> is a free polynomial ring, this method creates the corresponding localization of <A>R</A> at the complement of the maximal ideal generated by the indeterminates.
+##      This method creates the corresponding localization of <A>R</A> at the complement of the maximal ideal generated by the indeterminates ("at zero").
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-InstallMethod( LocalizeAt,
+InstallMethod( LocalizeAtZero,
         "constructor for homalg localized rings",
         [ IsHomalgRing and IsFreePolynomialRing ],
         
@@ -712,13 +798,27 @@ InstallMethod( LocalizeAt,
     
 end );
 
+InstallMethod( LocalizePolynomialRingAtZero,
+        "for homalg rings",
+        [ IsHomalgRing ],
+  function( R )
+
+    if LoadPackage( "RingsForHomalg" ) <> true then
+        Error( "the package RingsForHomalg failed to load\n" );
+    fi;
+    
+    return ValueGlobal( "LocalizePolynomialRingWithMoraAtZero" )( R );
+
+  end
+);
+
 ##  <#GAPDoc Label="HomalgLocalRingElement">
 ##  <ManSection>
 ##    <Func Arg="numer, denom, R" Name="HomalgLocalRingElement" Label="constructor for local ring elements using numerator and denominator"/>
 ##    <Func Arg="numer, R" Name="HomalgLocalRingElement" Label="constructor for local ring elements using a given numerator and one as denominator"/>
 ##    <Returns>a local ring element</Returns>
 ##    <Description>
-##      Creates the local ring element <A>numer</A><M>/</M><A>denom</A> or in the second case <M>numer/1</M> for the local ring <A>R</A>.
+##      Creates the local ring element <A>numer</A><M>/</M><A>denom</A> or in the second case <M>numer/1</M> for the local ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -801,7 +901,7 @@ end );
 ##    <Func Arg="numer, R" Name="HomalgLocalRingElement" Label="constructor for local matrices using a given numerator and one as denominator"/>
 ##    <Returns>a local matrix</Returns>
 ##    <Description>
-##      Creates the local matrix <A>numer</A><M>/</M><A>denom</A> or in the second case <M>numer/1</M> for the local ring <A>R</A>. Here <A>numer</A> is a global matrix and denom a global ring element.
+##      Creates the local matrix <A>numer</A><M>/</M><A>denom</A> or in the second case <M>numer/1</M> for the local ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -934,6 +1034,11 @@ InstallMethod( Display,
     a := Eval( A );
     
     Display( a[1] );
-    Print( "/ ", Name( a[2] ), "\n" );
+    
+    if IsHomalgInternalRingRep( AssociatedComputationRing( A ) ) then
+      Print( "/ ", a[2], "\n" );
+    else
+      Print( "/ ", Name( a[2] ), "\n" );
+    fi;
     
 end );

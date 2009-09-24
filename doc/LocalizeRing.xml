@@ -26,18 +26,6 @@
     <#Include Label="IsHomalgLocalMatrixRep">
   
   </Section>
-
-  <Section Label="Rings:Category">
-
-    <Heading>Category and Representations</Heading>
-    
-    <#Include Label="IsHomalgLocalRingRep">
-    
-    <#Include Label="IsHomalgLocalRingElementRep">
-    
-    <#Include Label="IsHomalgLocalMatrixRep">
-  
-  </Section>
   
   <Section Label="Rings:Attributes">
     <Heading>Rings: Attributes</Heading>
@@ -81,7 +69,9 @@
       
     <#Include Label="LocalizeAt">
       
-    <#Include Label="LocalizeAt:poly">
+    <#Include Label="LocalizeAtZero">
+      
+    <#Include Label="LocalizePolynomialRingAtZeroWithMora">
       
     <#Include Label="HomalgLocalRingElement">
       

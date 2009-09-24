@@ -1,8 +1,22 @@
+##  <#GAPDoc Label="LocalizePolynomialRingAtZeroWithMora">
+##  <ManSection>
+##    <Oper Arg="R" Name="LocalizePolynomialRingAtZeroWithMora" Label= "constructor for homalg localized rings using Mora's algorithm"/>
+##    <Returns>a local ring</Returns>
+##    <Description>
+##      This method localizes the ring <A>R</A> at zero and this localized ring is returned. The ring table uses Mora's algorithm as implemented &Singular; for low level computations.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( LocalizePolynomialRingAtZeroWithMora,
-        "for homalg rings in Singular",
-        [ IsHomalgExternalRingInSingularRep ],
+        "for homalg rings",
+        [ IsHomalgRing and IsFreePolynomialRing ],
   function( R )
     local var, Rloc, S, v, RP, c, n_gens, gens;
+
+    if LoadPackage( "RingsForHomalg" ) <> true then
+        Error( "the package RingsForHomalg failed to load\n" );
+    fi;
 
     RP := CreateHomalgTableForLocalizedRingsWithMora( R );
     
@@ -31,6 +45,13 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     
     SetGeneratorsOfMaximalRightIdeal( S, gens );
     
+#if IsBound(S!.asserts) then
+      S!.asserts.BasisOfRowsCoeff := function( arg ) return true; end;
+      S!.asserts.BasisOfColumnsCoeff := function( arg ) return true; end;
+      S!.asserts.DecideZeroRowsEffectively := function( arg ) return true; end;
+      S!.asserts.DecideZeroColumnsEffectively := function( arg ) return true; end;
+#    fi;
+    
     return S;
     
 end );
@@ -57,16 +78,6 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
                         One := globalRP!.One,
 
                         MinusOne := globalRP!.MinusOne,
-                        
-#                         IsUnit :=
-#                           function( R, u )
-#                           local globalR;
-#                             
-#                             globalR := AssociatedComputationRing( R );
-#                             
-#                             return IsUnit( globalR, Numerator( u ) ) ;
-#                             
-#                           end,
                         
                         );
     

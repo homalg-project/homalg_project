@@ -29,14 +29,19 @@ InstallValue( CommonHomalgTableForLocalizedRings,
         rec(
             RingName :=
               function( R )
-                local r, var, local_var;
+                local GlobalRing;
+                
+                GlobalRing := AssociatedGlobalRing( R );
                 
                 if HasName( R ) then
                     return Name( R );
                 fi;
                 
-                return Concatenation( RingName( AssociatedGlobalRing( R ) ), "_<", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ), Name ) ), ">" );
-                
+                if IsHomalgInternalRingRep( GlobalRing ) then
+                  return Concatenation( RingName( GlobalRing ), "_<", JoinStringsWithSeparator( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ) ), ">" );
+                else
+                  return Concatenation( RingName( GlobalRing ), "_<", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ), Name ) ), ">" );
+                fi;
 
             end,
               

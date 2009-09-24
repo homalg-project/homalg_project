@@ -13,7 +13,11 @@ LoadPackage( "GAPDoc" );
 
 list := [
          "../gap/LocalizeRing.gd",
-         "../gap/LocalizeRing.gi"
+         "../gap/LocalizeRing.gi",
+         "../gap/LocalizeRingBasic.gd",
+         "../gap/LocalizeRingBasic.gi",
+         "../gap/LocalizeRingMora.gd",
+         "../gap/LocalizeRingMora.gi"
           ];
 
 TestManualExamples( "doc", "LocalizeRingForHomalg.xml", list );

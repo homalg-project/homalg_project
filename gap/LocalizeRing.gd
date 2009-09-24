@@ -21,7 +21,7 @@
 ##    <Attr Arg="R" Name="GeneratorsOfMaximalLeftIdeal"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      The &homalg; matrix is a 1-column matrix containing the generators of the maximal ideal considered as a left ideal.
+##      Returns the generators of the maximal ideal, at which R was created. The generators are given as a column over the associated global ring.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -34,7 +34,7 @@ DeclareAttribute( "GeneratorsOfMaximalLeftIdeal",
 ##    <Attr Arg="R" Name="GeneratorsOfMaximalRightIdeal"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      The &homalg; matrix is a 1-column matrix containing the generators of the maximal ideal considered as a right ideal.
+##      Returns the generators of the maximal ideal, at which R was created. The generators are given as a row over the associated global ring.
 ##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -61,7 +61,7 @@ DeclareGlobalFunction( "CreateHomalgLocalizedRing" );
 DeclareOperation( "LocalizeAt",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "LocalizeAt",
+DeclareOperation( "LocalizeAtZero",
         [ IsHomalgRing ] );
 
 DeclareGlobalFunction( "HomalgLocalRingElement" );
@@ -112,3 +112,6 @@ DeclareOperation( "Cancel",
 
 DeclareOperation( "/",
         [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation ( "LocalizePolynomialRingAtZero",
+        [ IsHomalgRing ] );

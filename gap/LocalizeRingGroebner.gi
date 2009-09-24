@@ -22,9 +22,7 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
         [ IsHomalgRing and IsCommutative ],
         
   function( globalR )
-    local globalRP, RP, RP_General, RP_Basic, RP_specific, component;
-    
-    globalRP := homalgTable( globalR );
+    local RP, RP_General, RP_Basic, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
     
@@ -33,11 +31,12 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
     RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
     
     RP_specific := rec (
-                        Zero := globalRP!.Zero,
 
-                        One := globalRP!.One,
+                        Zero := Zero( globalR ),
 
-                        MinusOne := globalRP!.MinusOne,
+                        One := One( globalR ),
+
+                        MinusOne := MinusOne( globalR ),
                         );
     
     for component in NamesOfComponents( RP_General ) do
