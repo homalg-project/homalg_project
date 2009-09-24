@@ -152,7 +152,7 @@ end );
 
 ####################################
 #
-# global functions:
+# global functions and variables:
 #
 ####################################
 
@@ -164,6 +164,20 @@ InstallGlobalFunction( _Maple_multiple_delete,
     str := [ "for _del in ", String( var_list ), " do unassign(convert(_del,symbol)) od" ];
     
     homalgSendBlocking( str, "need_command", stream, HOMALG_IO.Pictograms.multiple_delete );
+    
+end );
+
+InstallValue( MapleTools,
+        rec(
+    
+    )
+);
+
+##
+InstallGlobalFunction( InitializeMapleTools,
+    function( stream )
+    
+    InitializeMacros( MapleTools, stream );
     
 end );
 
@@ -194,11 +208,14 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
         if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
+        
         homalgSendBlocking( [ "libname := \"", stream.path_to_maple_packages, "\",libname" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
         o := 0;
     else
         o := 1;
     fi;
+    
+    InitializeMapleTools( stream );
     
     homalgSendBlocking( "with(PIR)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
