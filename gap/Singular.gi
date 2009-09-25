@@ -723,6 +723,9 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 #remark: in
 #list l = l2[1],l2[2],l3[1],l3[2];
 #the values l2[2] and l3[2] should be the same
+#here are also some workarounds for Singular bugs
+#U is filled with a zero at the diagonal, when we reduce zero. we may replace this zero with any unit, so for smaller somputations we choose 1.
+#And division does not allway compute l[2] correctly, so we use the relation between the input and output of division to compute l[2] correctly.
     DecideZeroRowsEffectivelyLocal := "\n\
 proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
 {\n\
@@ -788,6 +791,7 @@ proc BasisOfColumnsCoeffLocal (matrix M)\n\
 }\n\n",
 
 ## A * U^-1 -> u^-1 A2
+#above code should allready have caught this, but still: U is filled with a zero at the diagonal, when we reduce zero. we may replace this zero with any unit, so for smaller somputations we choose 1.
     CreateInputForLocalMatrixRows := "\n\
 proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
 {\n\
