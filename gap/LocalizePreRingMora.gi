@@ -12,7 +12,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    homalgSendBlocking( [ "l=BasisOfRowsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
-                   N!.Denominator := homalgSendBlocking( [ "l[3]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   T!.Denominator := homalgSendBlocking( [ "l[3]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
                    
                    return N;
                    
@@ -28,7 +28,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    homalgSendBlocking( [ "l=BasisOfColumnsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
-                   N!.Denominator := homalgSendBlocking( [ "l[3]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   T!.Denominator := homalgSendBlocking( [ "l[3]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
                    
                    return N;
                    
