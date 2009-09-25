@@ -351,15 +351,32 @@ InstallMethod( Name,
         [ IsHomalgLocalRingElementRep ],
 
   function( o )
-    local name;
+    local name, nnumer, ndenom, s1, s2, s3, s4;
     
     if IsHomalgInternalRingRep( AssociatedComputationRing( o ) ) then
       name := String;
     else
       name := Name;
     fi;
-    
-    return Flat( [ name( Numerator( o ) ), "/",  name( Denominator( o ) ) ] );
+
+    nnumer := name( Numerator( o ) );
+    ndenom := name( Denominator( o ) );
+
+    if Length( nnumer ) <= 2 or not ( '+' in nnumer or '-' in nnumer ) then 
+      s1 := "";
+      s2 := "";
+    else
+      s1 := "(";
+      s2 := ")";
+    fi;
+    if Length( ndenom ) <= 2 or not ( '+' in ndenom or '-' in ndenom ) then 
+      s3 := "";
+      s4 := "";
+    else
+      s3 := "(";
+      s4 := ")";
+    fi;
+    return Flat( [ s1, nnumer, s2, "/", s3, ndenom, s4 ] );
     
   end
 
@@ -1072,7 +1089,11 @@ InstallMethod( Display,
     if IsHomalgInternalRingRep( AssociatedComputationRing( A ) ) then
       Print( "/ ", a[2], "\n" );
     else
-      Print( "/ ", Name( a[2] ), "\n" );
+      if IsOne( a[2] ) or IsMinusOne( a[2] ) then
+        Print( "/ ", Name( a[2] ), "\n" );
+      else
+        Print( "/(", Name( a[2] ), ")\n" );
+      fi;
     fi;
     
 end );
