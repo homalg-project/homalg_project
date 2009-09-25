@@ -96,7 +96,9 @@ InstallMethod( HomalgRing,
     
     return r!.ring;
     
-end );
+  end
+  
+);
 
 ##  <#GAPDoc Label="AssociatedComputationRing:ring">
 ##  <ManSection>
@@ -124,7 +126,9 @@ InstallMethod( AssociatedComputationRing,
     
     fi;
     
-end );
+  end
+  
+);
 
 ##  <#GAPDoc Label="AssociatedComputationRing:element">
 ##  <ManSection>
@@ -144,7 +148,9 @@ InstallMethod( AssociatedComputationRing,
     
     return AssociatedComputationRing( HomalgRing( r ) );
     
-end );
+  end
+  
+);
 
 ##  <#GAPDoc Label="AssociatedComputationRing:matrix">
 ##  <ManSection>
@@ -164,7 +170,9 @@ InstallMethod( AssociatedComputationRing,
     
     return AssociatedComputationRing( HomalgRing(A) );
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="AssociatedGlobalRing:ring">
 ##  <ManSection>
@@ -192,7 +200,9 @@ InstallMethod( AssociatedGlobalRing,
     
     fi;
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="AssociatedGlobalRing:element">
 ##  <ManSection>
@@ -212,7 +222,9 @@ InstallMethod( AssociatedGlobalRing,
     
     return AssociatedGlobalRing( HomalgRing( r ) );
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="AssociatedGlobalRing:matrix">
 ##  <ManSection>
@@ -232,7 +244,9 @@ InstallMethod( AssociatedGlobalRing,
     
     return AssociatedGlobalRing( HomalgRing(A) );
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="Numerator:element">
 ##  <ManSection>
@@ -252,7 +266,9 @@ InstallMethod( Numerator,
     
     return r!.numer;
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="Denominator:element">
 ##  <ManSection>
@@ -272,7 +288,9 @@ InstallMethod( Denominator,
     
     return r!.denom;
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="Numerator:matrix">
 ##  <ManSection>
@@ -292,7 +310,9 @@ InstallMethod( Numerator,
     
     return Eval( M )[1];
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="Denominator:matrix">
 ##  <ManSection>
@@ -312,7 +332,9 @@ InstallMethod( Denominator,
     
     return Eval( M )[2];
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="Name:localmatrix">
 ##  <ManSection>
@@ -336,7 +358,9 @@ InstallMethod( Name,
       return Flat( [ Name( Numerator( o ) ), "/",  Name( Denominator( o ) ) ] );
     fi;
 
-end );
+  end
+
+);
 
 ##
 InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
@@ -361,7 +385,9 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
         SetIsIdentityMatrix( T, IsIdentityMatrix( S ) );
     fi;
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="SetEntryOfHomalgMatrix:localmatrix">
 ##  <ManSection>
@@ -379,29 +405,27 @@ InstallMethod( SetEntryOfHomalgMatrix,
   function( M, r, c, s, R )
     local m, cR, N, M2, e;
     
-    m := Eval( M );
-    
     cR := AssociatedComputationRing( R );
     
+    #Create a new matrix with only the one entry
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), cR );
-    
     SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
-    
     ResetFilterObj( N, IsInitialMatrix );
-    
     N := HomalgLocalMatrix( N, Denominator( s ), R );
     
+    #set the corresponding entry to zero in the other matrix
+    m := Eval( M );
     M2 := m[1];
-    
     SetEntryOfHomalgMatrix( M2, r, c, Zero( cR ) );
     
+    #add these matrices
     e := Eval( HomalgLocalMatrix( M2, m[2], R ) + N );
-    
     SetIsMutableMatrix( e[1], true );
-    
     M!.Eval := e;
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="AddToEntryOfHomalgMatrix:localmatrix">
 ##  <ManSection>
@@ -419,21 +443,20 @@ InstallMethod( AddToEntryOfHomalgMatrix,
   function( M, r, c, s, R )
     local N, e;
     
+    #create a matrix with just one entry (i,j), which is s
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
-    
     SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
-    
     ResetFilterObj( N, IsInitialIdentityMatrix );
-    
     N := HomalgLocalMatrix( N, Denominator( s ), R );
     
+    #and add this matrix to M
     e := Eval( M + N );
-    
     SetIsMutableMatrix( e[1], true );
-    
     M!.Eval := e;
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString:localmatrix">
 ##  <ManSection>
@@ -453,10 +476,11 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
     local m;
     
     m := Eval( M );
-    
     return Concatenation( [ "(", GetEntryOfHomalgMatrixAsString( m[1], r, c, AssociatedComputationRing( R ) ), ")/(", Name( m[2] ), ")" ] );
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="GetEntryOfHomalgMatrix:localmatrix">
 ##  <ManSection>
@@ -476,10 +500,11 @@ InstallMethod( GetEntryOfHomalgMatrix,
     local m;
     
     m :=Eval( M );
-    
     return HomalgLocalRingElement( GetEntryOfHomalgMatrix( m[1], r, c, AssociatedComputationRing( R ) ), m[2], R );
     
-end );
+  end
+
+);
 
 ##  <#GAPDoc Label="Cancel">
 ##  <ManSection>
@@ -760,23 +785,19 @@ InstallMethod( LocalizeAt,
     ## create the local ring
     localR := CreateHomalgRing( globalR, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
     
-    ## for the view method: <A homalg local matrix>
+    ## for the view method: <A homalg local ring>
     localR!.description := "local";
     
     SetIsLocalRing( localR, true );
     
+    #Set the ideal, at which we localize
     n_gens := Length( ideal_gens );
-    
     gens := HomalgMatrix( ideal_gens, n_gens, 1, globalR );
-    
     SetGeneratorsOfMaximalLeftIdeal( localR, gens );
-    
     gens := HomalgMatrix( ideal_gens, 1, n_gens, globalR );
-    
     SetGeneratorsOfMaximalRightIdeal( localR, gens );
     
     localR!.AssociatedGlobalRing := globalR;
-    
     localR!.AssociatedComputationRing := globalR;
     
     return localR;
@@ -841,7 +862,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
     
     if IsHomalgLocalRingElementRep( numer ) then
         
-        ## otherwise simply return it
+        ##a local ring element as first argument will just be returned
         return numer;
         
     elif nargs = 2 then
@@ -882,9 +903,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
     denom := c[2] / computationring;
     
     if IsBound( ring ) then
-        
         r := rec( numer := numer, denom := denom, ring := ring );
-        
         ## Objectify:
         Objectify( TheTypeHomalgLocalRingElement, r );
     fi;
