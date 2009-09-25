@@ -20,6 +20,10 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
 
     RP := CreateHomalgTableForLocalizedRingsWithMora( R );
     Rloc := LocalizePolynomialRingAtZero( R );
+    Rloc!.asserts.BasisOfRowsCoeff := function( arg ) return true; end;
+    Rloc!.asserts.BasisOfColumnsCoeff := function( arg ) return true; end;
+    Rloc!.asserts.DecideZeroRowsEffectively := function( arg ) return true; end;
+    Rloc!.asserts.DecideZeroColumnsEffectively := function( arg ) return true; end;
     var := IndeterminatesOfPolynomialRing( R );
     
     S := CreateHomalgRing( Rloc, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
@@ -34,11 +38,6 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     SetGeneratorsOfMaximalLeftIdeal( S, gens );
     gens := Rloc * HomalgMatrix( var, 1, n_gens, R );
     SetGeneratorsOfMaximalRightIdeal( S, gens );
-    
-    S!.asserts.BasisOfRowsCoeff := function( arg ) return true; end;
-    S!.asserts.BasisOfColumnsCoeff := function( arg ) return true; end;
-    S!.asserts.DecideZeroRowsEffectively := function( arg ) return true; end;
-    S!.asserts.DecideZeroColumnsEffectively := function( arg ) return true; end;
     
     return S;
     
