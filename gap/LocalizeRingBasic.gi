@@ -49,15 +49,20 @@ BasisOfColumnModule :=
 
 BasisOfRowsCoeff :=
   function( M, T )
-    local R, ComputationRing, TT, result, hook;
+    local R, ComputationRing, TT, result;
     
     R := HomalgRing( M );
     ComputationRing := AssociatedComputationRing( R );
     
     TT := HomalgVoidMatrix( ComputationRing );
     result := BasisOfRowsCoeff( Numerator( M ) , TT );
-    SetEval( T, [ Denominator( M ) * TT, One ( ComputationRing ) ] );
-    result := HomalgLocalMatrix( result, R );
+    if IsBound(TT!.Denominator) then
+      SetEval( T, [ TT, TT!.Denominator ] );
+      Unbind(TT!.Denominator);
+    else
+      SetEval( T, [ TT, One ( ComputationRing ) ] );
+    fi;
+    result := HomalgLocalRingElement( One( ComputationRing), Denominator( M ), R ) * HomalgLocalMatrix( result, R );
     
     Assert( 4, result = T * M );
     
@@ -67,15 +72,20 @@ BasisOfRowsCoeff :=
 
 BasisOfColumnsCoeff :=
   function( M, T )
-    local R, ComputationRing, TT, result, hook;
+    local R, ComputationRing, TT, result;
     
     R := HomalgRing( M );
     ComputationRing := AssociatedComputationRing( R );
     
     TT := HomalgVoidMatrix( ComputationRing );
     result := BasisOfColumnsCoeff( Numerator( M ), TT );
-    SetEval( T, [ Denominator( M ) * TT, One ( ComputationRing ) ] );
-    result := HomalgLocalMatrix( result, R );
+    if IsBound(TT!.Denominator) then
+      SetEval( T, [ TT, TT!.Denominator ] );
+      Unbind(TT!.Denominator);
+    else
+      SetEval( T, [ TT, One ( ComputationRing ) ] );
+    fi;
+    result := HomalgLocalRingElement( One( ComputationRing), Denominator( M ), R ) * HomalgLocalMatrix( result, R );
     
     Assert( 4, result = M * T );
     
