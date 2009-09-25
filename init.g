@@ -24,9 +24,6 @@ ReadPackage( "homalg", "gap/SetsOfRelations.gd" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gd" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gd" );
 
-## residue class rings
-ReadPackage( "homalg", "gap/HomalgResidueClassRing.gd" );
-
 ## modules
 ReadPackage( "homalg", "gap/HomalgModule.gd" );
 
@@ -87,3 +84,9 @@ ReadPackage( "homalg", "gap/COLEM.gd" );
 ReadPackage( "homalg", "gap/LIMOD.gd" );
 ReadPackage( "homalg", "gap/LIMOR.gd" );
 ReadPackage( "homalg", "gap/LICPX.gd" );
+
+## the subpackage ResidueClassRingForHomalg
+ReadPackage( "homalg", "gap/ResidueClassRingForHomalg.gd" );
+ReadPackage( "homalg", "gap/ResidueClassRing.gd" );
+ReadPackage( "homalg", "gap/ResidueClassRingBasic.gd" );
+ReadPackage( "homalg", "gap/ResidueClassRingTools.gd" );

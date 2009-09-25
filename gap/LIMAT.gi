@@ -33,9 +33,6 @@ InstallValue( LogicalImplicationsForHomalgMatrices,
           [ IsEmptyMatrix,
             "implies", IsSubidentityMatrix ],
           
-          [ IsZero,
-            "implies", IsReducedModuloRingRelations ],
-          
           ## follows from the rest, but this gives a direct way
           [ IsZero,
             "implies", IsDiagonalMatrix ],
@@ -219,20 +216,6 @@ InstallImmediateMethod( IsZero,
   function( M )
     
     return Length( ZeroColumns( M ) ) = NrColumns( M );
-    
-end );
-
-##
-InstallImmediateMethod( IsReducedModuloRingRelations,
-        IsHomalgMatrix, 0,
-        
-  function( M )
-    
-    if not HasRingRelations( HomalgRing( M ) ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
     
 end );
 
@@ -453,7 +436,7 @@ end );
 
 ##
 InstallImmediateMethod( ZeroRows,
-        IsHomalgMatrix and IsIdentityMatrix and IsReducedModuloRingRelations, 0,
+        IsHomalgMatrix and IsIdentityMatrix, 0,
         
   function( M )
     
@@ -490,7 +473,7 @@ end );
 
 ##
 InstallImmediateMethod( ZeroColumns,
-        IsHomalgMatrix and IsIdentityMatrix and IsReducedModuloRingRelations, 0,
+        IsHomalgMatrix and IsIdentityMatrix, 0,
         
   function( M )
     
@@ -527,7 +510,7 @@ end );
 
 ##
 InstallImmediateMethod( NonZeroRows,
-        IsHomalgMatrix and IsIdentityMatrix and IsReducedModuloRingRelations and HasNrRows, 0,
+        IsHomalgMatrix and IsIdentityMatrix and HasNrRows, 0,
         
   function( M )
     
@@ -547,7 +530,7 @@ end );
 
 ##
 InstallImmediateMethod( NonZeroColumns,
-        IsHomalgMatrix and IsIdentityMatrix and IsReducedModuloRingRelations and HasNrColumns, 0,
+        IsHomalgMatrix and IsIdentityMatrix and HasNrColumns, 0,
         
   function( M )
     
@@ -567,7 +550,7 @@ end );
 
 ##
 InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
-        IsHomalgMatrix and IsIdentityMatrix and IsReducedModuloRingRelations and HasNrRows, 0,
+        IsHomalgMatrix and IsIdentityMatrix and HasNrRows, 0,
         
   function( M )
     

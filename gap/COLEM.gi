@@ -1431,6 +1431,18 @@ InstallMethod( CertainRows,
     
 end );
 
+##
+InstallMethod( CertainRows,
+        "COLEM: for homalg matrices (IsEmpty)",
+        [ IsHomalgMatrix, IsList and IsEmpty ], 1001,
+        
+  function( M, plist )
+    
+    ## forgetting M may save memory
+    return HomalgZeroMatrix( 0, NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
 #-----------------------------------
 # CertainColumns
 #-----------------------------------
@@ -1560,6 +1572,18 @@ InstallMethod( CertainColumns,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CertainColumns,
+        "COLEM: for homalg matrices (IsEmpty)",
+        [ IsHomalgMatrix, IsList and IsEmpty ], 1001,
+        
+  function( M, plist )
+    
+    ## forgetting M may save memory
+    return HomalgZeroMatrix( NrRows( M ), 0, HomalgRing( M ) );
     
 end );
 

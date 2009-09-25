@@ -24,9 +24,6 @@ ReadPackage( "homalg", "gap/SetsOfRelations.gi" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gi" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
 
-## residue class rings
-ReadPackage( "homalg", "gap/HomalgResidueClassRing.gi" );
-
 ## modules
 ReadPackage( "homalg", "gap/HomalgModule.gi" );
 
@@ -91,4 +88,10 @@ ReadPackage( "homalg", "gap/LICPX.gi" );
 ## specific GAP4 internal rings
 ReadPackage( "homalg", "gap/Integers.gi" );
 #ReadPackage( "homalg", "gap/EDIM.gi" );
+
+## the subpackage ResidueClassRingForHomalg
+ReadPackage( "homalg", "gap/ResidueClassRingForHomalg.gi" );
+ReadPackage( "homalg", "gap/ResidueClassRing.gi" );
+ReadPackage( "homalg", "gap/ResidueClassRingBasic.gi" );
+ReadPackage( "homalg", "gap/ResidueClassRingTools.gi" );
 

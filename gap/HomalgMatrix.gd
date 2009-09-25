@@ -102,19 +102,6 @@ DeclareProperty( "IsInitialIdentityMatrix",
 DeclareProperty( "IsVoidMatrix",
         IsHomalgMatrix );
 
-##  <#GAPDoc Label="IsReducedModuloRingRelations">
-##  <ManSection>
-##    <Prop Arg="A" Name="IsReducedModuloRingRelations"/>
-##    <Returns>true or false</Returns>
-##    <Description>
-##      <A>A</A> is a &homalg; matrix.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsReducedModuloRingRelations",
-        IsHomalgMatrix );
-
 ##  <#GAPDoc Label="IsZero:matrix">
 ##  <ManSection>
 ##    <Prop Arg="A" Name="IsZero" Label="for matrices"/>

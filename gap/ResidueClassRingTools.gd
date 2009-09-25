@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgResidueClassRing.gd   homalg package               Mohamed Barakat
+##  ResidueClassRingTools.gd    homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
 ##
@@ -10,18 +10,9 @@
 
 ####################################
 #
-# global functions and operations:
+# global variables:
 #
 ####################################
 
-# constructors:
-
-DeclareOperation( "/",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "/",
-        [ IsHomalgRing, IsRingElement ] );
-
-DeclareOperation( "/",
-        [ IsHomalgRing, IsHomalgRelations ] );
+DeclareGlobalVariable( "CommonHomalgTableForResidueClassRingsTools" );
 

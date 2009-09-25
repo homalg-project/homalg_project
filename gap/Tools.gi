@@ -94,10 +94,6 @@ InstallMethod( IsZero,
     
     R := HomalgRing( r );
     
-    if R = fail then
-        TryNextMethod( );
-    fi;
-    
     RP := homalgTable( R );
     
     if IsBound(RP!.IsZero) then
@@ -117,10 +113,6 @@ InstallMethod( IsOne,
     local R, RP;
     
     R := HomalgRing( r );
-    
-    if R = fail then
-        TryNextMethod( );
-    fi;
     
     RP := homalgTable( R );
     
@@ -153,9 +145,7 @@ InstallMethod( AdditiveInverseMutable,
     
     R := HomalgRing( r );
     
-    if R = fail then
-        TryNextMethod( );
-    elif not HasRingElementConstructor( R ) then
+    if not HasRingElementConstructor( R ) then
         Error( "no ring element constructor found in the ring\n" );
     fi;
     
@@ -183,9 +173,7 @@ InstallMethod( \/,
     
     R := HomalgRing( a );
     
-    if R = fail then
-        TryNextMethod( );
-    elif not HasRingElementConstructor( R ) then
+    if not HasRingElementConstructor( R ) then
         Error( "no ring element constructor found in the ring\n" );
     fi;
     
@@ -208,10 +196,6 @@ InstallMethod( DegreeMultivariatePolynomial,
     local R, RP, weights, minus_r;
     
     R := HomalgRing( r );
-    
-    if R = fail then
-        TryNextMethod( );
-    fi;
     
     RP := homalgTable( R );
     
@@ -251,12 +235,18 @@ end );
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IsZeroMatrix</C> is bound then
 ##      <M>RP</M>!.<C>IsZeroMatrix</C><M>(</M> <A>A</A> <M>)</M> is returned.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( ) / [ 2 ];
+##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
 ##  gap> A := HomalgMatrix( "[ 2 ]", ZZ );
 ##  <A homalg internal 1 by 1 matrix>
+##  gap> Z2 := ZZ / 2;
+##  <A homalg residue class ring>
+##  gap> A := Z2 * A;
+##  <A homalg residue class 1 by 1 matrix>
 ##  gap> Display( A );
 ##  [ [  2 ] ]
+##  
+##  modulo [ 2 ]
 ##  gap> IsZero( A );
 ##  true
 ##  ]]></Example>
@@ -266,7 +256,7 @@ end );
 ##
 InstallMethod( IsZero,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsReducedModuloRingRelations ],
+        [ IsHomalgMatrix ],
         
   function( M )
     local R, RP;
@@ -770,16 +760,7 @@ InstallMethod( Eval,				### defines: MulMat
     A := e[2];
     
     if IsBound(RP!.MulMat) then
-        
-        e := RP!.MulMat( a, A );
-        
-        if HasRingRelations( R ) then
-            e := HomalgMatrix( e, R );
-            return Eval( DecideZero( e ) );
-        fi;
-        
-        return e;
-        
+        return RP!.MulMat( a, A );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
@@ -788,14 +769,7 @@ InstallMethod( Eval,				### defines: MulMat
     
     #=====# begin of the core procedure #=====#
     
-    e := a * Eval( A );
-    
-    if HasRingRelations( R ) then
-        e := HomalgMatrix( e, R );
-        return Eval( DecideZero( e ) );
-    fi;
-    
-    return e;
+    return a * Eval( A );
     
 end );
 
@@ -831,16 +805,7 @@ InstallMethod( Eval,				### defines: AddMat
     B := e[2];
     
     if IsBound(RP!.AddMat) then
-        
-        e := RP!.AddMat( A, B );
-        
-        if HasRingRelations( R ) then
-            e := HomalgMatrix( e, R );
-            return Eval( DecideZero( e ) );
-        fi;
-        
-        return e;
-        
+        return RP!.AddMat( A, B );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
@@ -849,14 +814,7 @@ InstallMethod( Eval,				### defines: AddMat
     
     #=====# begin of the core procedure #=====#
     
-    e := Eval( A ) + Eval( B );
-    
-    if HasRingRelations( R ) then
-        e := HomalgMatrix( e, R );
-        return Eval( DecideZero( e ) );
-    fi;
-    
-    return e;
+    return Eval( A ) + Eval( B );
     
 end );
 
@@ -892,16 +850,7 @@ InstallMethod( Eval,				### defines: SubMat
     B := e[2];
     
     if IsBound(RP!.SubMat) then
-        
-        e := RP!.SubMat( A, B );
-        
-        if HasRingRelations( R ) then
-            e := HomalgMatrix( e, R );
-            return Eval( DecideZero( e ) );
-        fi;
-        
-        return e;
-        
+        return RP!.SubMat( A, B );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
@@ -910,14 +859,7 @@ InstallMethod( Eval,				### defines: SubMat
     
     #=====# begin of the core procedure #=====#
     
-    e := Eval( A ) - Eval( B );
-    
-    if HasRingRelations( R ) then
-        e := HomalgMatrix( e, R );
-        return Eval( DecideZero( e ) );
-    fi;
-    
-    return e;
+    return Eval( A ) - Eval( B );
     
 end );
 
@@ -953,16 +895,7 @@ InstallMethod( Eval,				### defines: Compose
     B := e[2];
     
     if IsBound(RP!.Compose) then
-        
-        e := RP!.Compose( A, B );
-        
-        if HasRingRelations( R ) then
-            e := HomalgMatrix( e, R );
-            return Eval( DecideZero( e ) );
-        fi;
-        
-        return e;
-        
+        return RP!.Compose( A, B );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
@@ -971,14 +904,7 @@ InstallMethod( Eval,				### defines: Compose
     
     #=====# begin of the core procedure #=====#
     
-    e := Eval( A ) * Eval( B );
-    
-    if HasRingRelations( R ) then
-        e := HomalgMatrix( e, R );
-        return Eval( DecideZero( e ) );
-    fi;
-    
-    return e;
+    return Eval( A ) * Eval( B );
     
 end );
 
@@ -1054,7 +980,8 @@ InstallMethod( Eval,				### defines: ZeroMap
     
     RP := homalgTable( R );
     
-    if NrRows( C ) = 0 or NrColumns( C ) = 0 then
+    if ( NrRows( C ) = 0 or NrColumns( C ) = 0 ) and
+       not ( IsBound( R!.SafeToEvaluateEmptyMatrices ) and R!.SafeToEvaluateEmptyMatrices = true ) then
         Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix is about to get evaluated!\033[0m" );
     fi;
     
@@ -1202,17 +1129,6 @@ InstallMethod( IsUnit,
         [ IsHomalgRing, IsRingElement ],
         
   function( R, r )
-    
-    return IsUnit( R!.ring, r );
-    
-end );
-
-##
-InstallMethod( IsUnit,
-        "for homalg ring elements",
-        [ IsHomalgRing, IsRingElement ],
-        
-  function( R, r )
     local RP;
     
     if HasIsZero( r ) and IsZero( r ) then
@@ -1221,11 +1137,7 @@ InstallMethod( IsUnit,
         return true;
     fi;
     
-    if IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) ) then
-        return false;
-    fi;
-    
-    return true;
+    return not IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) );
     
 end );
 
@@ -1245,15 +1157,22 @@ InstallMethod( IsUnit,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.IsUnit) and not HasRingRelations( R ) then
+    if IsBound(RP!.IsUnit) then
         return RP!.IsUnit( R, r );
     fi;
     
-    if IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) ) then
-        return false;
-    fi;
+    return not IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) );
     
-    return true;
+end );
+
+##
+InstallMethod( IsUnit,
+        "for homalg ring elements",
+        [ IsHomalgInternalRingRep, IsRingElement ],
+        
+  function( R, r )
+    
+    return IsUnit( R!.ring, r );
     
 end );
 
@@ -1286,23 +1205,21 @@ InstallMethod( ZeroRows,			### defines: ZeroRows
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, M, z;
+    local R, RP, z;
     
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    M := DecideZero( C );
-    
     if IsBound(RP!.ZeroRows) then
-        return RP!.ZeroRows( M );
+        return RP!.ZeroRows( C );
     fi;
     
     #=====# begin of the core procedure #=====#
     
     z := HomalgZeroMatrix( 1, NrColumns( C ), R );
     
-    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( M, [ a ] ) = z );
+    return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( C, [ a ] ) = z );
     
 end );
 
@@ -1324,23 +1241,21 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, M, z;
+    local R, RP, z;
     
     R := HomalgRing( C );
     
     RP := homalgTable( R );
     
-    M := DecideZero( C );
-    
     if IsBound(RP!.ZeroColumns) then
-        return RP!.ZeroColumns( M );
+        return RP!.ZeroColumns( C );
     fi;
     
     #=====# begin of the core procedure #=====#
     
     z := HomalgZeroMatrix( NrRows( C ), 1, R );
     
-    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( M, [ a ] ) = z );
+    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( C, [ a ] ) = z );
     
 end );
 
@@ -1357,7 +1272,7 @@ InstallMethod( GetRidOfObsoleteRows,			### defines: GetRidOfObsoleteRows (Better
     RP := homalgTable( R );
     
     if IsBound(RP!.GetRidOfObsoleteRows) then
-        M := HomalgMatrix( RP!.GetRidOfObsoleteRows( DecideZero( C ) ), R );
+        M := HomalgMatrix( RP!.GetRidOfObsoleteRows( C ), R );
         if HasNrColumns( C ) then
             SetNrColumns( M, NrColumns( C ) );
         fi;
@@ -1367,10 +1282,21 @@ InstallMethod( GetRidOfObsoleteRows,			### defines: GetRidOfObsoleteRows (Better
     
     #=====# begin of the core procedure #=====#
     
-    ## get rid of the rows containing the ring relations
+    ## get rid of zero rows
+    ## (e.g. those rows containing the ring relations)
+    
     M := CertainRows( C, NonZeroRows( C ) );
     
     SetZeroRows( M, [ ] );
+    
+    ## forgetting C may save memory
+    if HasEvalCertainRows( M ) then
+        if not IsEmptyMatrix( M ) then
+            Eval( M );
+        fi;
+        ResetFilterObj( M, EvalCertainRows );
+        Unbind( M!.EvalCertainRows );
+    fi;
     
     return M;
     
@@ -1389,7 +1315,7 @@ InstallMethod( GetRidOfObsoleteColumns,			### defines: GetRidOfObsoleteColumns (
     RP := homalgTable( R );
     
     if IsBound(RP!.GetRidOfObsoleteColumns) then
-        M := HomalgMatrix( RP!.GetRidOfObsoleteColumns( DecideZero( C ) ), R );
+        M := HomalgMatrix( RP!.GetRidOfObsoleteColumns( C ), R );
         if HasNrRows( C ) then
             SetNrRows( M, NrRows( C ) );
         fi;
@@ -1399,10 +1325,21 @@ InstallMethod( GetRidOfObsoleteColumns,			### defines: GetRidOfObsoleteColumns (
     
     #=====# begin of the core procedure #=====#
     
-    ## get rid of the columns containing the ring relations
+    ## get rid of zero columns
+    ## (e.g. those columns containing the ring relations)
+    
     M := CertainColumns( C, NonZeroColumns( C ) );
     
     SetZeroColumns( M, [ ] );
+    
+    ## forgetting C may save memory
+    if HasEvalCertainColumns( M ) then
+        if not IsEmptyMatrix( M ) then
+            Eval( M );
+        fi;
+        ResetFilterObj( M, EvalCertainColumns );
+        Unbind( M!.EvalCertainColumns );
+    fi;
     
     return M;
     
@@ -1418,12 +1355,18 @@ end );
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>AreEqualMatrices</C> is bound then
 ##      <M>RP</M>!.<C>AreEqualMatrices</C><M>(</M> <A>A</A>, <A>B</A> <M>)</M> is returned.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( ) / [ 2 ];
+##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
 ##  gap> A := HomalgMatrix( "[ 2 ]", ZZ );
 ##  <A homalg internal 1 by 1 matrix>
+##  gap> Z2 := ZZ / 2;
+##  <A homalg residue class ring>
+##  gap> A := Z2 * A;
+##  <A homalg residue class 1 by 1 matrix>
 ##  gap> Display( A );
 ##  [ [  2 ] ]
+##  
+##  modulo [ 2 ]
 ##  gap> IsZero( A );
 ##  true
 ##  ]]></Example>
@@ -1433,15 +1376,10 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable matrices",
-        [ IsHomalgMatrix and IsReducedModuloRingRelations,
-          IsHomalgMatrix and IsReducedModuloRingRelations ],
+        [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
     local R, RP;
-    
-    if not AreComparableMatrices( M1, M2 ) then
-        return false;
-    fi;
     
     R := HomalgRing( M1 );
     
@@ -1480,7 +1418,7 @@ InstallMethod( IsIdentityMatrix,
     RP := homalgTable( R );
     
     if IsBound(RP!.IsIdentityMatrix) then
-        return RP!.IsIdentityMatrix( DecideZero( M ) );
+        return RP!.IsIdentityMatrix( M );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1502,7 +1440,7 @@ InstallMethod( IsDiagonalMatrix,
     RP := homalgTable( R );
     
     if IsBound(RP!.IsDiagonalMatrix) then
-        return RP!.IsDiagonalMatrix( DecideZero ( M ) );
+        return RP!.IsDiagonalMatrix( M );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -2389,9 +2327,7 @@ InstallMethod( SUM,
     
     R := HomalgRing( r1 );
     
-    if R = fail then
-        TryNextMethod( );
-    elif not HasRingElementConstructor( R ) then
+    if not HasRingElementConstructor( R ) then
         Error( "no ring element constructor found in the ring\n" );
     fi;
     
@@ -2421,9 +2357,7 @@ InstallMethod( PROD,
     
     R := HomalgRing( r1 );
     
-    if R = fail then
-        TryNextMethod( );
-    elif not HasRingElementConstructor( R ) then
+    if not HasRingElementConstructor( R ) then
         Error( "no ring element constructor found in the ring\n" );
     fi;
     

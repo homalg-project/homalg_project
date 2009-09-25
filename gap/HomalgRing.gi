@@ -19,7 +19,7 @@
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgInternalRingRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The internal representation of &homalg; rings. <Br/><Br/>
+##      The internal representation of &homalg; rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
 ##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
@@ -145,7 +145,7 @@ InstallMethod( HomalgRing,
         
   function( r )
     
-    return fail;
+    return r!.ring;
     
 end );
 
@@ -265,34 +265,6 @@ InstallMethod( RingName,
     
     return "couldn't find a way to display";
         
-end );
-
-##
-InstallMethod( RingName,
-        "for homalg rings",
-        [ IsHomalgRing and HasRingRelations ],
-        
-  function( R )
-    local ring_rel, l, name;
-    
-    ring_rel := RingRelations( R );
-    ring_rel := MatrixOfRelations( ring_rel );
-    ring_rel := EntriesOfHomalgMatrix( ring_rel );
-    
-    l := Length( ring_rel );
-    
-    if ring_rel = [ ] then
-        TryNextMethod( );
-    elif IsHomalgInternalRingRep( R ) then
-        ring_rel := Concatenation( Flat( List( ring_rel{[ 1 .. l - 1 ]}, a -> Concatenation( " ", String( a ), "," ) ) ), Concatenation( " ", String( ring_rel[l] ) ) );
-    else
-        ring_rel := Concatenation( Flat( List( ring_rel{[ 1 .. l - 1 ]}, a -> Concatenation( " ", Name( a ), "," ) ) ), Concatenation( " ", Name( ring_rel[l] ) ) );
-    fi;
-    
-    name := RingName( AmbientRing( R ) );
-    
-    return Flat( [ name, "/(", ring_rel, " )" ] );
-    
 end );
 
 ##
@@ -567,7 +539,7 @@ end );
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, r, statistics, homalg_ring, table, properties,
+    local nargs, r, statistics, asserts, homalg_ring, table, properties,
           ar, type, matrix_type, ring_element_constructor, c, el;
     
     nargs := Length( arg );
@@ -589,19 +561,36 @@ InstallGlobalFunction( CreateHomalgRing,
                       DecideZeroColumnsEffectively := 0,
                       SyzygiesGeneratorsOfRows := 0,
                       SyzygiesGeneratorsOfColumns := 0,
+                      RelativeSyzygiesGeneratorsOfRows := 0,
+                      RelativeSyzygiesGeneratorsOfColumns := 0,
                       ReducedBasisOfRowModule := 0,
                       ReducedBasisOfColumnModule := 0,
                       ReducedSyzygiesGeneratorsOfRows := 0,
                       ReducedSyzygiesGeneratorsOfColumns := 0
                       );
     
-    homalg_ring := rec( ring := r, statistics := statistics );
+    asserts := rec(
+                   BasisOfRowsCoeff := function( B, T, M ) return B = T * M; end,
+                   BasisOfColumnsCoeff := function( B, M, T ) return B = M * T; end,
+                   DecideZeroRowsEffectively := function( M, A, T, B ) return M = A + T * B; end,
+                   DecideZeroColumnsEffectively := function( M, A, B, T ) return M = A + B * T; end,
+                  );
+    
+    homalg_ring := rec( ring := r, statistics := statistics, asserts := asserts );
     
     if nargs > 1 and IshomalgTable( arg[nargs] ) then
         table := arg[nargs];
     else
         table := CreateHomalgTable( r );
     fi;
+    
+    ## compatibility mode:
+    for c in [ "SyzygiesGeneratorsOfRows", "SyzygiesGeneratorsOfColumns" ] do
+        if not IsBound( table!.(Flat( [ "Relative", c ] )) ) and
+           IsBound( table!.( c ) ) then
+            table!.(Flat( [ "Relative", c ] )) := table!.( c );
+        fi;
+    od;
     
     properties := [ ];
     

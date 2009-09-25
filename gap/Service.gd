@@ -45,11 +45,11 @@ DeclareOperation( "DecideZeroColumns",
 DeclareOperation( "SyzygiesGeneratorsOfRows",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "SyzygiesGeneratorsOfRows",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
-
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "SyzygiesGeneratorsOfRows",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );

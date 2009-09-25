@@ -24,22 +24,25 @@ InstallGlobalFunction( ColoredInfoForService,
     
     if l{[1]} = "T" then
         l := 4;
-        color := HOMALG.color_BOT;
+        color := HOMALG.color_BOT;	## Basic Operation: Triangular
     elif l{[1]} = "B" then
         l := 3;
-        color := HOMALG.color_BOB;
+        color := HOMALG.color_BOB;	## Basic Operation: Basis
     elif l{[1 .. 8]} = "ReducedB" then
         l := 3;
-        color := HOMALG.color_BOB;
+        color := HOMALG.color_BOB;	## Basic Operation: reduced Basis
     elif l{[1]} = "D" then
         l := 2;
-        color := HOMALG.color_BOD;
+        color := HOMALG.color_BOD;	## Basic Operation: DecideZero
     elif l{[1]} = "S" then
         l := 2;
-        color := HOMALG.color_BOH;
+        color := HOMALG.color_BOH;	## Basic Operation: solutions of Homogeneous system
+    elif l{[1 .. 9]} = "RelativeS" then
+        l := 2;
+        color := HOMALG.color_BOH;	## Basic Operation: relative solutions of Homogeneous system
     elif l{[1 .. 8]} = "ReducedS" then
         l := 2;
-        color := HOMALG.color_BOH;
+        color := HOMALG.color_BOH;	## Basic Operation: reduced solutions of Homogeneous system
     fi;
     
     if arg[1] = "busy" then
@@ -89,12 +92,8 @@ end );
 ## CAUTION: !!!
 ##
 ## the following procedures never take ring relations into
-## account; the user should call the following higher level
-## procedures instead:
-## . BasisOfRows/Columns
-## . DecideZero
-## . SyzygiesOfRows/Columns
-## . ReducedSyzygiesOfRows/Columns
+## account and hence should never be part of a homalgTable
+## of a homalg residue class ring
 ##
 ################################################################
 
@@ -246,7 +245,7 @@ InstallMethod( TriangularBasisOfColumns,
     
 end );
 
-#### could become lazy
+#### Basis, DecideZero, Syzygies:
 
 ##
 InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
@@ -620,13 +619,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
-            fi;
+            SetIsLeftRegularMatrix( M, true );
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
@@ -648,13 +643,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
-            fi;
+            SetIsLeftRegularMatrix( M, true );
             
-            C := HomalgZeroMatrix( 0, NrRows( M ), R );
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
             
         else
             
@@ -686,103 +677,13 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     if IsZero( C ) then
         
-        ## the procedure we are in now is the one of the ambient ring
-        ## which does not take ring relations into account
-        if not HasRingRelations( R ) then
-            SetIsLeftRegularMatrix( M, true );
-        fi;
+        SetIsLeftRegularMatrix( M, true );
         
         C := HomalgZeroMatrix( 0, NrRows( M ), R );
         
     fi;
     
     M!.SyzygiesGeneratorsOfRows := C;
-    
-    ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
-    
-    IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
-    
-    return C;
-    
-end );
-
-##
-InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( M1, M2 )
-    local R, RP, t, M, C, nz;
-    
-    R := HomalgRing( M1 );
-    
-    RP := homalgTable( R );
-    
-    t := homalgTotalRuntimes( );
-    
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ) );
-    
-    if IsBound(RP!.SyzygiesGeneratorsOfRows) then
-        
-        C := RP!.SyzygiesGeneratorsOfRows( M1, M2 );
-        
-        if IsZero( C ) then
-            
-            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
-            
-        else
-            
-            SetNrColumns( C, NrRows( M1 ) );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
-        
-        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
-        
-        return C;
-        
-    elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
-        
-        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M1 ), Involution( M2 ) ) );
-        
-        if IsZero( C ) then
-            
-            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
-            
-        else
-            
-            SetNrColumns( C, NrRows( M1 ) );
-            
-        fi;
-        
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
-        
-        DecreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
-        
-        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
-        
-        return C;
-        
-    fi;
-    
-    #=====# begin of the core procedure #=====#
-    
-    M := UnionOfRows( M1, M2 );
-    
-    C := HomalgVoidMatrix( R );
-    
-    M := TriangularBasisOfRows( M, C );
-    
-    nz := Length( NonZeroRows( M ) );
-    
-    C := CertainColumns( CertainRows( C, [ nz + 1 .. NrRows( C ) ] ), [ 1 .. NrRows( M1 ) ] );
-    
-    if IsZero( C ) then
-        
-        C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
-        
-    fi;
     
     ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
     
@@ -818,11 +719,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
-            fi;
+            SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -846,11 +743,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
-            fi;
+            SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -884,11 +777,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     if IsZero( C ) then
         
-        ## the procedure we are in now is the one of the ambient ring
-        ## which does not take ring relations into account
-        if not HasRingRelations( R ) then
-            SetIsRightRegularMatrix( M, true );
-        fi;
+        SetIsRightRegularMatrix( M, true );
         
         C := HomalgZeroMatrix( NrColumns( M ), 0, R );
         
@@ -904,6 +793,110 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
 end );
 
+#### Relative:
+
+##
+InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    local R, RP, t, M, C, nz;
+    
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
+    
+    R := HomalgRing( M1 );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfRows", "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ) );
+    
+    if IsBound(RP!.RelativeSyzygiesGeneratorsOfRows) then
+        
+        C := RP!.RelativeSyzygiesGeneratorsOfRows( M1, M2 );
+        
+        if IsZero( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        else
+            
+            SetNrColumns( C, NrRows( M1 ) );
+            
+        fi;
+        
+        ColoredInfoForService( t, "RelativeSyzygiesGeneratorsOfRows", NrRows( C ) );
+        
+        IncreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfRows" );
+        
+        return C;
+        
+    elif IsBound(RP!.RelativeSyzygiesGeneratorsOfColumns) then
+        
+        C := Involution( RP!.RelativeSyzygiesGeneratorsOfColumns( Involution( M1 ), Involution( M2 ) ) );
+        
+        if IsZero( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M1 ), R );
+            
+        else
+            
+            SetNrColumns( C, NrRows( M1 ) );
+            
+        fi;
+        
+        ColoredInfoForService( t, "RelativeSyzygiesGeneratorsOfRows", NrRows( C ) );
+        
+        DecreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfRows" );
+        
+        IncreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfColumns" );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    M := UnionOfRows( M1, M2 );
+    
+    C := SyzygiesGeneratorsOfRows( M );
+    
+    C := CertainColumns( C, [ 1 .. NrRows( M1 ) ] );
+    
+    ## since we first compute the syzygies matrix of
+    ## the stack of M1 and M2, and then keep only
+    ## those columns C corresponding to M1,
+    ## zero rows can potentially exist in C
+    ## (and we like to remove them)
+    
+    C := GetRidOfObsoleteRows( C );
+    
+    if IsZero( C ) then
+        
+        SetIsLeftRegularMatrix( M1, true );
+        
+    fi;
+    
+    ## forgetting the original obsolete C may save memory
+    if HasEvalCertainColumns( C ) then
+        if not IsEmptyMatrix( C ) then
+            Eval( C );
+        fi;
+        ResetFilterObj( C, EvalCertainColumns );
+        Unbind( C!.EvalCertainColumns );
+    fi;
+    
+    ColoredInfoForService( t, "RelativeSyzygiesGeneratorsOfRows", NrRows( C ) );
+    
+    DecreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfRows" );
+    
+    return C;
+    
+end );
+
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
         "for homalg matrices",
@@ -912,17 +905,20 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
   function( M1, M2 )
     local R, RP, t, M, C, nz;
     
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
+    
     R := HomalgRing( M1 );
     
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )" );
+    ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfColumns", NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )" );
     
-    if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
+    if IsBound(RP!.RelativeSyzygiesGeneratorsOfColumns) then
         
-        C := RP!.SyzygiesGeneratorsOfColumns( M1, M2 );
+        C := RP!.RelativeSyzygiesGeneratorsOfColumns( M1, M2 );
         
         if IsZero( C ) then
             
@@ -934,15 +930,15 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
             
         fi;
         
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        ColoredInfoForService( t, "RelativeSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
-        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
+        IncreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfColumns" );
         
         return C;
         
-    elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
+    elif IsBound(RP!.RelativeSyzygiesGeneratorsOfRows) then
         
-        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
+        C := Involution( RP!.RelativeSyzygiesGeneratorsOfRows( Involution( M1 ), Involution( M2 ) ) );
         
         if IsZero( C ) then
             
@@ -954,11 +950,11 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
             
         fi;
         
-        ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        ColoredInfoForService( t, "RelativeSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
-        DecreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
+        DecreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfColumns" );
         
-        IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
+        IncreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfRows" );
         
         return C;
         
@@ -968,23 +964,36 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     M := UnionOfColumns( M1, M2 );
     
-    C := HomalgVoidMatrix( R );
+    C := SyzygiesGeneratorsOfColumns( M );
     
-    M := TriangularBasisOfColumns( M, C );
+    C := CertainRows( C, [ 1 .. NrColumns( M1 ) ] );
     
-    nz := Length( NonZeroColumns( M ) );
+    ## since we first computes the syzygies matrix of
+    ## the augmentation of M1 and M2, and then keep
+    ## only those rows C corresponding to M1,
+    ## zero columns can potentially exist in C
+    ## (and we like to remove them)
     
-    C := CertainRows( CertainColumns( C, [ nz + 1 .. NrColumns( C ) ] ), [ 1 .. NrColumns( M1 ) ] );
+    C := GetRidOfObsoleteColumns( C );
     
     if IsZero( C ) then
         
-        C := HomalgZeroMatrix( NrColumns( M1 ), 0, R );
+        SetIsRightRegularMatrix( M1, true );
         
     fi;
     
-    ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
+    ## forgetting the original obsolete C may save memory
+    if HasEvalCertainRows( C ) then
+        if not IsEmptyMatrix( C ) then
+            Eval( C );
+        fi;
+        ResetFilterObj( C, EvalCertainRows );
+        Unbind( C!.EvalCertainRows );
+    fi;
     
-    IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
+    ColoredInfoForService( t, "RelativeSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+    
+    DecreaseRingStatistics( R, "RelativeSyzygiesGeneratorsOfColumns" );
     
     return C;
     
@@ -1072,7 +1081,7 @@ InstallMethod( ReducedBasisOfRowModule,
     
     ## iterate the syzygy trick
     while true do
-        S := SyzygiesOfRows( B );
+        S := SyzygiesGeneratorsOfRows( B );
         
         unit_pos := GetColumnIndependentUnitPositions( S );
         unit_pos := List( unit_pos, a -> a[2] );
@@ -1176,7 +1185,7 @@ InstallMethod( ReducedBasisOfColumnModule,
     
     ## iterate the syzygy trick
     while true do
-        S := SyzygiesOfColumns( B );
+        S := SyzygiesGeneratorsOfColumns( B );
         
         unit_pos := GetRowIndependentUnitPositions( S );
         unit_pos := List( unit_pos, a -> a[2] );
@@ -1226,11 +1235,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
-            fi;
+            SetIsLeftRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -1254,11 +1259,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
-            fi;
+            SetIsLeftRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -1322,11 +1323,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
-            fi;
+            SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -1350,11 +1347,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
-            fi;
+            SetIsRightRegularMatrix( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -1435,7 +1428,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetNrRows( T, nr );
         
         ## check assertion
-        Assert( 4, B = T * M );
+        Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
         
         return B;
         
@@ -1478,7 +1471,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetNrColumns( TI, nr );
         
         ## check assertion
-        Assert( 4, B = T * M );
+        Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
         
         return B;
         
@@ -1506,7 +1499,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
     
     ## check assertion
-    Assert( 4, B = T * M );
+    Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
     
     return B;
     
@@ -1553,7 +1546,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetNrColumns( T, nr );
         
         ## check assertion
-        Assert( 4, B = M * T );
+        Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
         
         return B;
         
@@ -1596,7 +1589,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetNrRows( TI, nr );
         
         ## check assertion
-        Assert( 4, B = M * T );
+        Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
         
         return B;
         
@@ -1623,7 +1616,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
     
     ## check assertion
-    Assert( 4, B = M * T );
+    Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
     
     return B;
     
@@ -1657,7 +1650,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
         ## check assertion
-        Assert( 4, M = A + T * B );
+        Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
         
         return M;
         
@@ -1676,7 +1669,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
         ## check assertion
-        Assert( 4, M = A + T * B );
+        Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
         
         return M;
         
@@ -1714,7 +1707,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
     
     ## check assertion
-    Assert( 4, M = A + T * B );
+    Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
     
     return M;
     
@@ -1748,7 +1741,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
         ## check assertion
-        Assert( 4, M = A + B * T );
+        Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
         
         return M;
         
@@ -1767,7 +1760,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
         ## check assertion
-        Assert( 4, M = A + B * T );
+        Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
         
         return M;
         
@@ -1805,7 +1798,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
     
     ## check assertion
-    Assert( 4, M = A + B * T );
+    Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
     
     return M;
     

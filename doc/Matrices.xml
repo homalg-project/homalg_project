@@ -42,7 +42,6 @@
 <#Include Label="IsInitialIdentityMatrix">
 <#Include Label="IsVoidMatrix">
 -->
-<#Include Label="IsReducedModuloRingRelations">
 <#Include Label="IsZero:matrix">
 <#Include Label="IsIdentityMatrix">
 <#Include Label="IsPermutationMatrix">

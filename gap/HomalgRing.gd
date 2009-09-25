@@ -62,7 +62,7 @@ DeclareCategory( "IsHomalgRingElement",
         and IsAdditiveElementWithInverse
         and IsMultiplicativeElementWithInverse
         and IsAssociativeElement
-        and IsAdditivelyCommutativeElement
+        and IsAdditivelyCommutativeElement	## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)
         and IsAttributeStoringRep );
 
 ####################################
@@ -729,6 +729,63 @@ DeclareProperty( "IsMinusOne",
 #
 ####################################
 
+##  <#GAPDoc Label="Zero:ring_element">
+##  <ManSection>
+##    <Attr Arg="r" Name="Zero" Label="for homalg ring elements"/>
+##    <Returns>the zero of the &homalg; ring element <A>r</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "Zero",
+        IsHomalgRingElement );
+
+##  <#GAPDoc Label="One:ring_element">
+##  <ManSection>
+##    <Attr Arg="r" Name="One" Label="for homalg ring elements"/>
+##    <Returns>the one of the &homalg; ring element <A>r</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "One",
+        IsHomalgRingElement );
+
+##
+DeclareAttribute( "Eval",
+        IsHomalgRingElement );
+
+DeclareOperation( "MinusOneMutable",
+        [ IsHomalgRingElement ] );
+
+##  <#GAPDoc Label="Zero:ring">
+##  <ManSection>
+##    <Attr Arg="R" Name="Zero" Label="for homalg rings"/>
+##    <Returns>the zero of the &homalg; ring <A>R</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "Zero",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="One:ring">
+##  <ManSection>
+##    <Attr Arg="R" Name="One" Label="for homalg rings"/>
+##    <Returns>the one of the &homalg; ring <A>R</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "One",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="MinusOne">
+##  <ManSection>
+##    <Attr Arg="R" Name="MinusOne"/>
+##    <Returns>the minus one of the &homalg; ring <A>R</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MinusOne",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="homalgTable">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="homalgTable"/>
@@ -769,70 +826,6 @@ DeclareAttribute( "RingElementConstructor",
 ##
 DeclareAttribute( "TypeOfHomalgMatrix",
         IsHomalgRing );
-
-##  <#GAPDoc Label="RingRelations">
-##  <ManSection>
-##    <Attr Arg="R" Name="RingRelations"/>
-##    <Returns>a set of &homalg; relations on one generator</Returns>
-##    <Description>
-##      In case <A>R</A> was constructed as a residue class ring <M>S/I</M>, and only in this case,
-##      the generators of the ideal of relations <M>I</M> are returned as a
-##      set of &homalg; relations on one generator. It assumed that either <A>R</A> is commutative,
-##      or that the specified <C>Involution</C> in the <C>homalgTable</C> of <A>R</A> fixes the ideal <M>I</M>.
-##   </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "RingRelations",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="DefiningIdeal">
-##  <ManSection>
-##    <Attr Arg="R" Name="DefiningIdeal"/>
-##    <Returns>a set of &homalg; relations on one generator</Returns>
-##    <Description>
-##      In case <A>R</A> was constructed as a residue class ring <M>S/J</M>, and only in this case,
-##      the ideal <M>J</M>. It assumed that either <A>R</A> is commutative, or that the specified
-##      <C>Involution</C> in the <C>homalgTable</C> of <A>R</A> fixes the ideal <M>I</M>.
-##   </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "DefiningIdeal",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="Zero">
-##  <ManSection>
-##    <Attr Arg="R" Name="Zero"/>
-##    <Returns>the zero of the &homalg; ring <A>R</A></Returns>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "Zero",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="One">
-##  <ManSection>
-##    <Attr Arg="R" Name="One"/>
-##    <Returns>the one of the &homalg; ring <A>R</A></Returns>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "One",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="MinusOne">
-##  <ManSection>
-##    <Attr Arg="R" Name="MinusOne"/>
-##    <Returns>the minus one of the &homalg; ring <A>R</A></Returns>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "MinusOne",
-        IsHomalgRing );
-
-DeclareOperation( "MinusOneMutable",
-        [ IsHomalgRingElement ] );
 
 ##  <#GAPDoc Label="IndeterminatesOfPolynomialRing">
 ##  <ManSection>
@@ -948,20 +941,6 @@ DeclareAttribute( "CoefficientsRing",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "BaseRing",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="AmbientRing">
-##  <ManSection>
-##    <Attr Arg="R" Name="AmbientRing"/>
-##    <Returns>a &homalg; ring</Returns>
-##    <Description>
-##      In case <A>R</A> was constructed as a residue class ring <M>S/I</M>, and only in this case,
-##      the &homalg; ring <M>S</M> is returned.
-##   </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "AmbientRing",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="KrullDimension">

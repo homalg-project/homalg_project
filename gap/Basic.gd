@@ -29,13 +29,16 @@ DeclareOperation( "BasisOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix ] );
+        [ IsRingElement, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix, IsList ] );
+        [ IsRingElement, IsHomalgRelations ] );
 
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "DecideZero",
+        [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "SyzygiesOfRows",
         [ IsHomalgMatrix ] );

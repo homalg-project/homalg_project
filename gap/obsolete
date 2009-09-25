@@ -1851,3 +1851,85 @@ DeclareOperation( "NumberOfKnownPresentations",
         [ IsHomalgModule ] );
 
 
+## from Service.gi
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
+            
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
+            
+        ## the procedure we are in now is the one of the ambient ring
+        ## which does not take ring relations into account
+        if not HasRingRelations( R ) then
+            SetIsLeftRegularMatrix( M, true );
+        fi;
+        
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
+            
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
+            
+        ## the procedure we are in now is the one of the ambient ring
+        ## which does not take ring relations into account
+        if not HasRingRelations( R ) then
+            SetIsRightRegularMatrix( M, true );
+        fi;
+        
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
+            
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegularMatrix( M, true );
+            fi;
+            
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
+            
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegularMatrix( M, true );
+            fi;
+            
+## from HomalgMatrix.gi
+
+##
+InstallMethod( IsZero,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    ## first reduce modulo possible ring relations
+    ## and mark M as IsReducedModuloRingRelations,
+    ## then hand it over to a more specialized method
+    
+    return IsZero( DecideZero( M ) );
+    
+    ## since DecideZero calls IsZero,
+    ## the attribute IsReducedModuloRingRelations is used
+    ## in DecideZero to avoid infinite loops
+    
+end );
+

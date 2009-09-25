@@ -160,7 +160,7 @@ end );
 
 ##
 InstallMethod( ShallowCopy,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep ],
         
   function( M )
@@ -244,8 +244,8 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
+        "for homalg internal matrices",
+        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
         
   function( M, r, c, s, R )
     
@@ -277,8 +277,8 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+        "for homalg internal matrices",
+        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
         
   function( M, r, c, a, R )
     
@@ -347,7 +347,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
         
   function( M, r, c, R )
@@ -369,16 +369,16 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
         
   function( M, r, c, R )
     
-    if not IsInternalMatrixHull( Eval( M ) ) then
-        TryNextMethod( );
+    if IsInternalMatrixHull( Eval( M ) ) then
+        return Eval( M )!.matrix[r][c];
     fi;
     
-    return Eval( M )!.matrix[r][c];
+    TryNextMethod( );
     
 end );
 
@@ -406,7 +406,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
@@ -450,7 +450,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
@@ -494,7 +494,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
@@ -609,25 +609,6 @@ InstallMethod( AreComparableMatrices,
 end );
 
 ##
-InstallMethod( IsZero,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    
-    ## first reduce modulo possible ring relations
-    ## and mark M as IsReducedModuloRingRelations,
-    ## then hand it over to a more specialized method
-    
-    return IsZero( DecideZero( M ) );
-    
-    ## since DecideZero calls IsZero,
-    ## the attribute IsReducedModuloRingRelations is used
-    ## in DecideZero to avoid infinite loops
-    
-end );
-
-##
 InstallMethod( \=,
         "for internal matrix hulls",
         [ IsInternalMatrixHull, IsInternalMatrixHull ],
@@ -641,7 +622,7 @@ end );
 ##
 InstallMethod( \=,
         "for homalg comparable matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( M1, M2 )
     
@@ -649,21 +630,16 @@ InstallMethod( \=,
         return false;
     fi;
     
-    return DecideZero( M1 ) = DecideZero( M2 );
+    TryNextMethod( );
     
 end );
 
 ##
 InstallMethod( \=,
-        "for homalg comparable matrices",
-        [ IsHomalgInternalMatrixRep and IsReducedModuloRingRelations,
-          IsHomalgInternalMatrixRep and IsReducedModuloRingRelations ],
+        "for homalg comparable internal matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalMatrixRep ],
         
   function( M1, M2 )
-    
-    if not AreComparableMatrices( M1, M2 ) then
-        return false;
-    fi;
     
     return Eval( M1 ) = Eval( M2 );
     
@@ -2113,16 +2089,18 @@ end );
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
-##  gap> Z4 := ZZ / [ 4 ];
-##  <A homalg internal ring>
+##  gap> Z4 := ZZ / 4;
+##  <A homalg residue class ring>
 ##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
 ##  gap> d2 := Z4 * d ; ## or d2 := d * Z4;
-##  <A homalg internal 3 by 3 matrix>
+##  <A homalg residue class 3 by 3 matrix>
 ##  gap> Display( d2 );
 ##  [ [  2,  0,  0 ],
 ##    [  0,  3,  0 ],
 ##    [  0,  0,  4 ] ]
+##  
+##  modulo [ 4 ]
 ##  gap> d;
 ##  <A diagonal homalg internal 3 by 3 matrix>
 ##  gap> ZeroRows( d );
@@ -2132,7 +2110,7 @@ end );
 ##  gap> d;
 ##  <A non-zero diagonal homalg internal 3 by 3 matrix>
 ##  gap> d2;
-##  <A non-zero homalg internal 3 by 3 matrix>
+##  <A non-zero homalg residue class 3 by 3 matrix>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2171,7 +2149,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "for homalg matrices",
+        "for homalg internal matrices",
         [ IsHomalgInternalRingRep, IsHomalgInternalMatrixRep ],
         
   function( R, m )
