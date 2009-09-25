@@ -128,8 +128,6 @@ DecideZeroRowsEffectively :=
     T1 := HomalgVoidMatrix( ComputationRing );
     result := HomalgLocalMatrix( DecideZeroRowsEffectively( Numerator( A ), Numerator ( B ), T1 ), Denominator( A ), R );
     
-    #SetEval( T, [ T1, Denominator( A ) ] );
-    #T := HomalgLocalRingElement( Denominator( A ), R ) * T;
     if IsBound(T1!.Denominator) then
       SetEval( T, [ T1, T1!.Denominator * Denominator( A ) ] );
       Unbind(T1!.Denominator);
@@ -152,9 +150,6 @@ DecideZeroColumnsEffectively :=
     
     T1 := HomalgVoidMatrix( ComputationRing );
     result := HomalgLocalMatrix( DecideZeroColumnsEffectively( Numerator( A ), Numerator ( B ), T1 ), Denominator( A ), R );
-    
-    #SetEval( T, [ T1, Denominator( A ) ] );
-    #T := HomalgLocalRingElement( Denominator( A ), R ) * T;
     
     if IsBound(T1!.Denominator) then
       SetEval( T, [ T1, T1!.Denominator * Denominator( A ) ] );

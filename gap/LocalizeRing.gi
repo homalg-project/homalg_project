@@ -351,13 +351,16 @@ InstallMethod( Name,
         [ IsHomalgLocalRingElementRep ],
 
   function( o )
+    local name;
     
     if IsHomalgInternalRingRep( AssociatedComputationRing( o ) ) then
-      return Flat( [ String( Numerator( o ) ), "/",  String( Denominator( o ) ) ] );
+      name := String;
     else
-      return Flat( [ Name( Numerator( o ) ), "/",  Name( Denominator( o ) ) ] );
+      name := Name;
     fi;
-
+    
+    return Flat( [ name( Numerator( o ) ), "/",  name( Denominator( o ) ) ] );
+    
   end
 
 );
@@ -885,7 +888,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
             ring := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
-        elif not IsBound( denom ) and (IsRingElement( ar ) or IsString( ar )) then
+        elif not IsBound( denom ) and ( IsRingElement( ar ) or IsString( ar ) ) then
             denom := ar;
         else
             Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsRingElement, IsFilterm, IsString }\n" );
