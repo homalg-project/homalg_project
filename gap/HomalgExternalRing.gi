@@ -192,17 +192,6 @@ InstallMethod( homalgNrOfWarnings,
 end );
 
 ##
-InstallMethod( HomalgRing,
-        "for external homalg ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( r )
-    
-    return r!.ring;
-    
-end );
-
-##
 InstallMethod( homalgSetName,
         "for external homalg ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingRep ],
