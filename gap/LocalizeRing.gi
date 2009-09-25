@@ -885,17 +885,25 @@ InstallGlobalFunction( HomalgLocalRingElement,
             ring := ar;
         elif IsFilter( ar ) then
             Add( properties, ar );
-        elif not IsBound( denom ) and IsRingElement( ar ) then
+        elif not IsBound( denom ) and (IsRingElement( ar ) or IsString( ar )) then
             denom := ar;
         else
-            Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsRingElement, IsFilter }\n" );
+            Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsRingElement, IsFilterm, IsString }\n" );
         fi;
     od;
     
     computationring := AssociatedComputationRing( ring );
     
     if not IsBound( denom ) then
-        denom := One( numer );
+       denom := One( numer );
+    fi;
+    
+    if not IsHomalgRingElement( numer ) then
+      numer := HomalgRingElement( numer, computationring );
+    fi;
+    
+    if not IsHomalgRingElement( denom ) then
+      denom := HomalgRingElement( denom, computationring );
     fi;
     
     c := Cancel( numer, denom );
