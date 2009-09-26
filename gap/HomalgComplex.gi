@@ -1547,24 +1547,8 @@ InstallMethod( \*,
         [ IsHomalgRing, IsHomalgComplex ],
         
   function( R, C )
-    local l, o, RC, m;
     
-    l := LowestDegree( C );
-    o := LowestDegreeObject( C );
-    
-    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        RC := HomalgComplex( R * o, l );
-        for m in MorphismsOfComplex( C ) do
-            Add( RC, HomalgMap( R * MatrixOfMap( m ), R * Source( m ), HighestDegreeObject( RC ) ) );
-        od;
-    else
-        RC := HomalgCocomplex( R * o, l );
-        for m in MorphismsOfComplex( C ) do
-            Add( RC, HomalgMap( R * MatrixOfMap( m ), HighestDegreeObject( RC ), R * Range( m ) ) );
-        od;
-    fi;
-    
-    return RC;
+    return BaseChange( R, C );
     
 end );
 

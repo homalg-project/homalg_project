@@ -253,6 +253,12 @@ DeclareProperty( "IsChainMapForPushout",
 
 DeclareGlobalFunction( "HomalgChainMap" );
 
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgChainMap ] );
+
+DeclareOperation( "*",
+        [ IsHomalgChainMap, IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "homalgResetFilters",

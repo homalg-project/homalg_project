@@ -2827,135 +2827,14 @@ InstallMethod( \*,
     
 end );
 
-##  <#GAPDoc Label="\*:ModuleBaseChange">
-##  <ManSection>
-##    <Oper Arg="R, M" Name="\*" Label="transfer a module over a different ring"/>
-##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring (right)"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      Transfers the <M>S</M>-module <A>M</A> over the &homalg; ring <A>R</A>. This works only in three cases:
-##      <Enum>
-##        <Item><M>S</M> is a subring of <A>R</A>.</Item>
-##        <Item><A>R</A> is a residue class ring of <M>S</M> constructed using <C>/</C>
-##        (&see; <Ref Oper="\/" Label="constructor for residue class rings" Style="Number"/>).</Item>
-##        <Item><A>R</A> is a subring of <M>S</M> and the entries of the current matrix of <M>S</M>-relations of <A>M</A>
-##          lie in <A>R</A>.</Item>
-##      </Enum>
-##      CAUTION: So it not suited for general base change.
-##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> Z4 := ZZ / 4;;
-##  gap> Display( Z4 );
-##  Z/( 4 )
-##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
-##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
-##  gap> M := LeftPresentation( M );
-##  <A left module presented by 3 relations for 3 generators>
-##  gap> Display( M );
-##  Z/< 2 > + Z/< 3 > + Z/< 4 >
-##  gap> M;
-##  <A torsion left module presented by 3 relations for 3 generators>
-##  gap> N := Z4 * M; ## or N := M * Z4;
-##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> ByASmallerPresentation( N );
-##  <A non-torsion left module presented by 1 relation for 2 generators>
-##  gap> Display( N );
-##  Z/( 4 )/< [ 2 ] > + Z/( 4 )^(1 x 1)
-##  gap> N;
-##  <A non-torsion left module presented by 1 relation for 2 generators>
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
 ##
 InstallMethod( \*,
         "for homalg modules",
         [ IsHomalgRing, IsFinitelyPresentedModuleRep ], 10001,
         
   function( R, M )
-    local mat, degrees, graded, left, distinguished, ow1, N;
     
-    if IsIdenticalObj( HomalgRing( M ), R ) then
-        TryNextMethod( );	## i.e. the tensor product with the ring
-    fi;
-    
-    mat := MatrixOfRelations( M );
-    degrees := DegreesOfGenerators( M );
-    
-    graded := IsList( degrees ) and degrees <> [ ];
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
-    distinguished := IsBound( M!.distinguished ) and M!.distinguished = true;
-    
-    if not distinguished then
-        mat := R * mat;
-        if HasRingRelations( R ) then
-            if left then
-                mat := GetRidOfObsoleteRows( mat );
-            else
-                mat := GetRidOfObsoleteColumns( mat );
-            fi;
-        fi;
-    fi;
-    
-    if graded then
-        
-        WeightsOfIndeterminates( R );	## this eventually sets R!.WeightsCompatibleWithBaseRing
-        
-        if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), HomalgRing( M ) ) and
-           IsBound( R!.WeightsCompatibleWithBaseRing ) and R!.WeightsCompatibleWithBaseRing = true then
-            if ForAll( degrees, IsInt ) then
-                degrees := List( degrees, d -> [ d, 0 ] );
-            else
-                degrees := List( degrees, d -> Concatenation( d, [ 0 ] ) );
-            fi;
-        fi;
-        
-        if left then
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := 0 * R;
-                else
-                    N := ( 1 * R )^degrees;
-                fi;
-            else
-                N := LeftPresentationWithDegrees( mat, degrees );
-            fi;
-        else
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := R * 0;
-                else
-                    N := ( R * 1 )^degrees;
-                fi;
-            else
-                N := RightPresentationWithDegrees( mat, degrees );
-            fi;
-        fi;
-    else
-        if left then
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := 0 * R;
-                else
-                    N := 1 * R;
-                fi;
-            else
-                N := LeftPresentation( mat );
-            fi;
-        else
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := R * 0;
-                else
-                    N := R * 1;
-                fi;
-            else
-                N := RightPresentation( mat );
-            fi;
-        fi;
-    fi;
-    
-    return N;
+    return BaseChange( R, M );
     
 end );
 

@@ -204,6 +204,10 @@ InstallMethod( UnionOfRows,
   function( M, ring_rel )
     local R, rel;
     
+    if NrColumns( M ) = 0 then
+        return Eval( M );
+    fi;
+    
     R := HomalgRing( M );
     
     rel := MatrixOfRelations( ring_rel );
@@ -240,6 +244,10 @@ InstallMethod( UnionOfColumns,
         
   function( M, ring_rel )
     local R, rel;
+    
+    if NrRows( M ) = 0 then
+        return Eval( M );
+    fi;
     
     R := HomalgRing( M );
     

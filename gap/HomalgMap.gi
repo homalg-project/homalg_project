@@ -1474,7 +1474,7 @@ InstallMethod( \*,
         
   function( R, phi )
     
-    return HomalgMap( R * MatrixOfMap( phi ), R * Source( phi ), R * Range( phi ) );
+    return BaseChange( R, phi );
     
 end );
 

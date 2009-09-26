@@ -48,6 +48,11 @@ DeclareGlobalFunction( "_Functor_TensorProduct_OnMorphisms" );
 
 DeclareGlobalVariable( "Functor_TensorProduct" );
 
+## BaseChange
+DeclareGlobalFunction( "_functor_BaseChange_OnObjects" );
+
+DeclareGlobalVariable( "functor_BaseChange" );
+
 ####################################
 #
 # attributes:
@@ -177,6 +182,9 @@ DeclareOperation( "RightDualizingFunctor",
 
 DeclareOperation( "TensorProduct",
         [ IsHomalgModule, IsHomalgModule ] );
+
+DeclareOperation( "BaseChange",
+        [ IsHomalgRing, IsHomalgModule ] );
 
 ####################################
 #

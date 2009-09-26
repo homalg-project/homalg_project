@@ -611,6 +611,7 @@ InstallGlobalFunction( _Functor_Hom_OnObjects,		### defines: Hom (object part)
     
 end );
 
+##
 InstallGlobalFunction( _Functor_Hom_OnMorphisms,	### defines: Hom (morphism part)
   function( M_or_mor, N_or_mor )
     local phi, L, R, idL;
@@ -854,6 +855,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnObjects,		### defines: TensorPro
     
 end );
 
+##
 InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorProduct (morphism part)
   function( M_or_mor, N_or_mor )
     local R, rl, phi, L, idL;
@@ -932,6 +934,154 @@ Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+## BaseChange
+##
+
+##
+InstallGlobalFunction( _functor_BaseChange_OnObjects,		### defines: BaseChange (object part)
+  function( _R, M )
+    local R, S, lift, mat, degrees, graded, left, distinguished, N;
+    
+    R := HomalgRing( _R );
+    
+    if IsIdenticalObj( HomalgRing( M ), R ) then
+        TryNextMethod( );	## i.e. the tensor product with the ring
+    fi;
+    
+    S := HomalgRing( M );
+    
+    lift := HasRingRelations( S ) and IsIdenticalObj( R, AmbientRing( S ) );
+    
+    mat := MatrixOfRelations( M );
+    degrees := DegreesOfGenerators( M );
+    
+    graded := IsList( degrees ) and degrees <> [ ];
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    distinguished := IsBound( M!.distinguished ) and M!.distinguished = true;
+    
+    distinguished := distinguished and not lift;
+    
+    if not distinguished then
+        if lift then
+            if left then
+                mat := UnionOfRows( mat );
+            else
+                mat := UnionOfColumns( mat );
+            fi;
+        else
+            mat := R * mat;
+            if HasRingRelations( R ) then
+                if left then
+                    mat := GetRidOfObsoleteRows( mat );
+                else
+                    mat := GetRidOfObsoleteColumns( mat );
+                fi;
+            fi;
+        fi;
+    fi;
+    
+    if graded then
+        
+        WeightsOfIndeterminates( R );	## this eventually sets R!.WeightsCompatibleWithBaseRing
+        
+        if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), HomalgRing( M ) ) and
+           IsBound( R!.WeightsCompatibleWithBaseRing ) and R!.WeightsCompatibleWithBaseRing = true then
+            if ForAll( degrees, IsInt ) then
+                degrees := List( degrees, d -> [ d, 0 ] );
+            else
+                degrees := List( degrees, d -> Concatenation( d, [ 0 ] ) );
+            fi;
+        fi;
+        
+        if left then
+            if distinguished then
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := 0 * R;
+                else
+                    N := ( 1 * R )^degrees;
+                fi;
+            else
+                N := LeftPresentationWithDegrees( mat, degrees );
+            fi;
+        else
+            if distinguished then
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := R * 0;
+                else
+                    N := ( R * 1 )^degrees;
+                fi;
+            else
+                N := RightPresentationWithDegrees( mat, degrees );
+            fi;
+        fi;
+    else
+        if left then
+            if distinguished then
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := 0 * R;
+                else
+                    N := 1 * R;
+                fi;
+            else
+                N := LeftPresentation( mat );
+            fi;
+        else
+            if distinguished then
+                if HasIsZero( M ) and IsZero( M ) then
+                    N := R * 0;
+                else
+                    N := R * 1;
+                fi;
+            else
+                N := RightPresentation( mat );
+            fi;
+        fi;
+    fi;
+    
+    return N;
+    
+end );
+
+##
+InstallOtherMethod( BaseChange,
+        "for homalg maps",
+        [ IsHomalgRing, IsMapOfFinitelyGeneratedModulesRep ], 1001,
+        
+  function( R, phi )
+    
+    return HomalgMap( R * MatrixOfMap( phi ), R * Source( phi ), R * Range( phi ) );
+    
+end );
+
+##
+InstallOtherMethod( BaseChange,
+        "for homalg maps",
+        [ IsHomalgModule, IsMapOfFinitelyGeneratedModulesRep ], 1001,
+        
+  function( _R, phi )
+    local R;
+    
+    return BaseChange( HomalgRing( _R ), phi );
+    
+end );
+
+InstallValue( functor_BaseChange,
+        CreateHomalgFunctor(
+                [ "name", "BaseChange" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ] ] ],
+                [ "2", [ [ "covariant" ] ] ],
+                [ "OnObjects", _functor_BaseChange_OnObjects ]
+                )
+        );
+
+functor_BaseChange!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+#functor_BaseChange!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
 #
@@ -1610,6 +1760,112 @@ InstallOtherMethod( \*,
     return TensorProduct( M, N );
     
 end );
+
+##  <#GAPDoc Label="\*:ModuleBaseChange">
+##  <ManSection>
+##    <Oper Arg="R, M" Name="\*" Label="transfer a module over a different ring"/>
+##    <Oper Arg="M, R" Name="\*" Label="transfer a module over a different ring (right)"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      Transfers the <M>S</M>-module <A>M</A> over the &homalg; ring <A>R</A>. This works only in three cases:
+##      <Enum>
+##        <Item><M>S</M> is a subring of <A>R</A>.</Item>
+##        <Item><A>R</A> is a residue class ring of <M>S</M> constructed using <C>/</C>
+##        (&see; <Ref Oper="\/" Label="constructor for residue class rings" Style="Number"/>).</Item>
+##        <Item><A>R</A> is a subring of <M>S</M> and the entries of the current matrix of <M>S</M>-relations of <A>M</A>
+##          lie in <A>R</A>.</Item>
+##      </Enum>
+##      CAUTION: So it is not suited for general base change.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> Z4 := ZZ / 4;;
+##  gap> Display( Z4 );
+##  Z/( 4 )
+##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
+##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A left module presented by 3 relations for 3 generators>
+##  gap> Display( M );
+##  Z/< 2 > + Z/< 3 > + Z/< 4 >
+##  gap> M;
+##  <A torsion left module presented by 3 relations for 3 generators>
+##  gap> N := Z4 * M; ## or N := M * Z4;
+##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  gap> ByASmallerPresentation( N );
+##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  gap> Display( N );
+##  Z/( 4 )/< [ 2 ] > + Z/( 4 )^(1 x 1)
+##  gap> N;
+##  <A non-torsion left module presented by 1 relation for 2 generators>
+##  ]]></Example>
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ \
+##  > 2, 3, 4, \
+##  > 5, 6, 7  \
+##  > ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  gap> Z4 := ZZ / 4;;
+##  gap> Display( Z4 );
+##  Z/( 4 )
+##  gap> M4 := Z4 * M;
+##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  gap> Display( M4 );
+##  [ [  2,  3,  4 ],
+##    [  5,  6,  7 ] ]
+##  
+##  modulo [ 4 ]
+##  
+##  Cokernel of the map
+##  
+##  Z/( 4 )^(1x2) --> Z/( 4 )^(1x3),
+##  
+##  currently represented by the above matrix
+##  gap> d := Resolution( 2, M4 );
+##  <A right acyclic complex containing 2 morphisms of left modules at degrees 
+##  [ 0 .. 2 ]>
+##  gap> Hom( d, Z4 );
+##  <A cocomplex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
+##  gap> dd := Hom( d, Z4 );
+##  <A cocomplex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
+##  gap> DD := Resolution( 2, dd );
+##  <A cocomplex containing 2 morphisms of right complexes at degrees [ 0 .. 2 ]>
+##  gap> D := Hom( DD, Z4 );
+##  <A complex containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]>
+##  gap> C := ZZ * D;
+##  <A "complex" containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]>
+##  gap> LowestDegreeObject( C );
+##  <A "cocomplex" containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>
+##  gap> Display( last );
+##  -------------------------
+##  at cohomology degree: 2
+##  0
+##  ------------^------------
+##  (an empty 1 x 0 matrix)
+##  
+##  the map is currently represented by the above 1 x 0 matrix
+##  -------------------------
+##  at cohomology degree: 1
+##  Z/< 4 > 
+##  ------------^------------
+##  [ [  0 ],
+##    [  1 ],
+##    [  2 ],
+##    [  1 ] ]
+##  
+##  the map is currently represented by the above 4 x 1 matrix
+##  -------------------------
+##  at cohomology degree: 0
+##  Z/< 4 > + Z/< 4 > + Z/< 4 > + Z/< 4 > 
+##  -------------------------
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallFunctor( functor_BaseChange );
 
 ##
 ## Ext( c, M, N )

@@ -1192,6 +1192,28 @@ InstallGlobalFunction( HomalgChainMap,
     
 end );
 
+##
+InstallMethod( \*,
+        "for homalg chain maps",
+        [ IsHomalgRing, IsHomalgChainMap ],
+        
+  function( R, cm )
+    
+    return BaseChange( R, cm );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgRing ],
+        
+  function( cm, R )
+    
+    return R * cm;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

@@ -48,6 +48,7 @@ The package &homalg; is the foundational part of the project. It
 provides procedures to construct basic objects in homological algebra:
 <List>
   <Item>rings</Item>
+  <Item>ring maps</Item>
   <Item>matrices</Item>
   <Item>modules (generators, relations)</Item>
   <Item>maps</Item>
