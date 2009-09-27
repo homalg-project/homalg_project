@@ -134,52 +134,56 @@ InstallValue( CommonHomalgTableForMapleHomalgBasic,
                  end,
                
                SyzygiesGeneratorsOfRows :=
-                 function( arg )
-                   local M, R, N, M2;
-                   
-                   M := arg[1];
+                 function( M )
+                   local R, N;
                    
                    R := HomalgRing( M );
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), R );
                    
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-                       
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, M2, R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   else
-                       
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, ",[],", R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   fi;
+                   homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, ",[],", R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                    
                    return N;
                    
                  end,
                
                SyzygiesGeneratorsOfColumns :=
-                 function( arg )
-                   local M, R, N, M2;
-                   
-                   M := arg[1];
+                 function( M )
+                   local R, N;
                    
                    R := HomalgRing( M );
                    
                    N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", R );
                    
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-                       
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, M2, R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   else
-                       
-                       homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, ",[],", R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   fi;
+                   homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, ",[],", R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
+               RelativeSyzygiesGeneratorsOfRows :=
+                 function( M, M2 )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), R );
+                   
+                   homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfRows`(", M, M2, R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
+               RelativeSyzygiesGeneratorsOfColumns :=
+                 function( M, M2 )
+                   local R, N;
+                   
+                   R := HomalgRing( M );
+                   
+                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", R );
+                   
+                   homalgSendBlocking( [ N, " := `homalg/SyzygiesGeneratorsOfColumns`(", M, M2, R, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                    
                    return N;
                    

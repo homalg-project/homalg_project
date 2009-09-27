@@ -167,17 +167,18 @@ InstallGlobalFunction( _Maple_multiple_delete,
     
 end );
 
-InstallValue( MapleTools,
+##
+InstallValue( MapleMacros,
         rec(
     
     )
 );
 
 ##
-InstallGlobalFunction( InitializeMapleTools,
-    function( stream )
+InstallGlobalFunction( InitializeMapleMacros,
+  function( stream )
     
-    InitializeMacros( MapleTools, stream );
+    InitializeMacros( MapleMacros, stream );
     
 end );
 
@@ -215,7 +216,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
         o := 1;
     fi;
     
-    InitializeMapleTools( stream );
+    InitializeMapleMacros( stream );
     
     homalgSendBlocking( "with(PIR)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     

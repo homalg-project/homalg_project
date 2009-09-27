@@ -22,25 +22,21 @@ InstallValue( CommonHomalgTableForMacaulay2Basic,
                
                BasisOfRowModule :=
                  function( M )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( M );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
                    
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
-		   
                    homalgSendBlocking( [ N, " = BasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
-		   
+                   
                    return N;
                    
                  end,
                
                BasisOfColumnModule :=
                  function( M )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( M );
-                   
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
+                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
                    homalgSendBlocking( [ N, " = BasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisOfModule );
                    
@@ -50,11 +46,9 @@ InstallValue( CommonHomalgTableForMacaulay2Basic,
                
                BasisOfRowsCoeff :=
                  function( M, T )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( M );
-                   
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
                    
                    homalgSendBlocking( [ "(", N, T, ") = BasisOfRowsCoeff(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
@@ -64,39 +58,33 @@ InstallValue( CommonHomalgTableForMacaulay2Basic,
                
                BasisOfColumnsCoeff :=
                  function( M, T )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( M );
+                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
-		   
                    homalgSendBlocking( [ "(", N, T, ") = BasisOfColumnsCoeff(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
-		   
+                   
                    return N;
                    
                  end,
                
                DecideZeroRows :=
                  function( A, B )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( A );
-                   
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ N, " = DecideZeroRows(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
-		                      
+                                      
                    return N;
                    
                  end,
                
                DecideZeroColumns :=
                  function( A, B )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( A );
-                   
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ N, " = DecideZeroColumns(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
@@ -106,11 +94,9 @@ InstallValue( CommonHomalgTableForMacaulay2Basic,
                
                DecideZeroRowsEffectively :=
                  function( A, B, T )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( A );
-                   
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
                    
                    homalgSendBlocking( [ "(", N, T, ") = DecideZeroRowsEffectively(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
@@ -120,65 +106,59 @@ InstallValue( CommonHomalgTableForMacaulay2Basic,
                
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
-                   local R, N;
+                   local N;
                    
-                   R := HomalgRing( A );
+                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
                    
-                   N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
-		   
                    homalgSendBlocking( [ "(", N, T, ") = DecideZeroColumnsEffectively(", A, B, ")" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
-		   
+                   
                    return N;
                    
                  end,
                
                SyzygiesGeneratorsOfRows :=
-                 function( arg )
-                   local M, R, N, M2;
+                 function( M )
+                   local N;
                    
-                   M := arg[1];
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
                    
-                   R := HomalgRing( M );
-                   
-                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), R );
-                   
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-                       
-                       homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfRows2(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   else
-                       
-                       homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   fi;
+                   homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                    
                    return N;
                    
                  end,
                
                SyzygiesGeneratorsOfColumns :=
-                 function( arg )
-                   local M, R, N, M2;
+                 function( M )
+                   local N;
                    
-                   M := arg[1];
+                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
                    
-                   R := HomalgRing( M );
+                   homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                    
-                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", R );
+                   return N;
                    
-                   if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-                       
-                       M2 := arg[2];
-		       
-                       homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfColumns2(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-		       
-                   else
-                       
-                       homalgSendBlocking( [ N, " = SyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
-                       
-                   fi;
+                 end,
+               
+               RelativeSyzygiesGeneratorsOfRows :=
+                 function( M, M2 )
+                   local N;
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   
+                   homalgSendBlocking( [ N, " = RelativeSyzygiesGeneratorsOfRows(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
+               RelativeSyzygiesGeneratorsOfColumns :=
+                 function( M, M2 )
+                   local N;
+                   
+                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   
+                   homalgSendBlocking( [ N, " = RelativeSyzygiesGeneratorsOfColumns(", M, M2, ")" ], "need_command", HOMALG_IO.Pictograms.SyzygiesGenerators );
                    
                    return N;
                    

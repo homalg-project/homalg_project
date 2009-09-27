@@ -82,12 +82,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
-               ShallowCopy :=
-                 function( C )
-                   
-                   return homalgSendBlocking( [ "ShallowCopy(", C, ")" ], HOMALG_IO.Pictograms.CopyMatrix );
-                   
-                 end,
+               ShallowCopy := C -> homalgSendBlocking( [ "ShallowCopy(", C, ")" ], HOMALG_IO.Pictograms.CopyMatrix ),
                
                CopyMatrix :=
                  function( C, R )
@@ -117,12 +112,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                    
                  end,
                
-               Involution :=
-                 function( M )
-                   
-                   return homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution );
-                   
-                 end,
+               Involution := M -> homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution ),
                
                CertainRows :=
                  function( M, plist )

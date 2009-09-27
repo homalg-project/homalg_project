@@ -88,13 +88,8 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
-               ShallowCopy :=
-                 function( C )
-                   
-                   return homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix );
-                   
-                 end,
-
+               ShallowCopy := C -> homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix ),
+               
                CopyMatrix :=
                  function( C, R )
 
@@ -124,12 +119,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
-               Involution :=
-                 function( M )
-                   
-                   return homalgSendBlocking( [ "Transpose(", M, ")" ], HOMALG_IO.Pictograms.Involution );
-                   
-                 end,
+               Involution := M -> homalgSendBlocking( [ "Transpose(", M, ")" ], HOMALG_IO.Pictograms.Involution ),
                
                CertainRows :=
                  function( M, plist )

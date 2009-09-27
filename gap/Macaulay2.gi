@@ -111,7 +111,7 @@ InstallGlobalFunction( _Macaulay2_SetInvolution,
 end );
 
 ##
-InstallValue( Macaulay2Tools,
+InstallValue( Macaulay2Macros,
         rec(
             
     IsIdentityMatrix := "\n\
@@ -294,9 +294,6 @@ DecideZeroColumnsEffectively = (A, B) -> ( local q,r;\n\
     SyzygiesGeneratorsOfRows := "\n\
 SyzygiesGeneratorsOfRows = M -> Involution(SyzygiesGeneratorsOfColumns(Involution(M)));\n\n",
     
-    SyzygiesGeneratorsOfRows2 := "\n\
-SyzygiesGeneratorsOfRows2 = (M, N) -> Involution(SyzygiesGeneratorsOfColumns2(Involution(M), Involution(N)));\n\n",
-    
     SyzygiesGeneratorsOfColumns := "\n\
 SyzygiesGeneratorsOfColumns = M -> (\n\
   local R,S;\n\
@@ -305,8 +302,11 @@ SyzygiesGeneratorsOfColumns = M -> (\n\
   map(R^(numgens target S), R^(numgens source S), S)\n\
 );\n\n",
     
-    SyzygiesGeneratorsOfColumns2 := "\n\
-SyzygiesGeneratorsOfColumns2 = (M, N) -> (\n\
+    RelativeSyzygiesGeneratorsOfRows := "\n\
+RelativeSyzygiesGeneratorsOfRows = (M, N) -> Involution(RelativeSyzygiesGeneratorsOfColumns(Involution(M), Involution(N)));\n\n",
+    
+    RelativeSyzygiesGeneratorsOfColumns := "\n\
+RelativeSyzygiesGeneratorsOfColumns = (M, N) -> (\n\
   local K,R;\n\
   R = ring M;\n\
   K = mingens kernel map(cokernel N, source M, M);\n\
@@ -428,10 +428,10 @@ NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;
 );
 
 ##
-InstallGlobalFunction( InitializeMacaulay2Tools,
+InstallGlobalFunction( InitializeMacaulay2Macros,
   function( stream )
     
-    InitializeMacros( Macaulay2Tools, stream );
+    InitializeMacros( Macaulay2Macros, stream );
     
 end );
 
@@ -463,7 +463,7 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
         o := 1;
     fi;
     
-    InitializeMacaulay2Tools( stream );
+    InitializeMacaulay2Macros( stream );
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInMacaulay2, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
@@ -937,3 +937,34 @@ InstallMethod( LoadHomalgMatrixFromFile,
     return M;
     
 end );
+
+##
+InstallMethod( Display,
+        "for homalg matrices in Singular",
+        [ IsHomalgExternalMatrixRep ], 1,
+        
+  function( o )
+    
+    if IsHomalgExternalRingInMacaulay2Rep( HomalgRing( o ) ) then
+        
+        Print( "        ", homalgSendBlocking( [ o ], "need_display", HOMALG_IO.Pictograms.Display ) );
+        
+    else
+        
+        TryNextMethod( );
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( DisplayRing,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInMacaulay2Rep ], 1,
+        
+  function( o )
+    
+    homalgDisplay( [ "describe ", o ] );
+    
+end );
+

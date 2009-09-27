@@ -16,7 +16,7 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Macaulay2" );
 
-DeclareGlobalVariable( "Macaulay2Tools" );
+DeclareGlobalVariable( "Macaulay2Macros" );
 
 ####################################
 #
@@ -30,7 +30,7 @@ DeclareGlobalFunction( "_Macaulay2_SetInvolution" );
 
 DeclareGlobalFunction( "_Macaulay2_multiple_delete" );
 
-DeclareGlobalFunction( "InitializeMacaulay2Tools" );
+DeclareGlobalFunction( "InitializeMacaulay2Macros" );
 
 # constructor methods:
 

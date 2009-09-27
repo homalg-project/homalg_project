@@ -22,7 +22,7 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Singular" );
 
-DeclareGlobalVariable( "SingularTools" );
+DeclareGlobalVariable( "SingularMacros" );
 
 ####################################
 #
@@ -36,7 +36,7 @@ DeclareGlobalFunction( "_Singular_SetInvolution" );
 
 DeclareGlobalFunction( "_Singular_multiple_delete" );
 
-DeclareGlobalFunction( "InitializeSingularTools" );
+DeclareGlobalFunction( "InitializeSingularMacros" );
 
 # constructor methods:
 

@@ -109,37 +109,24 @@ InstallGlobalFunction( _MAGMA_multiple_delete,
 end );
 
 ##
-InstallGlobalFunction( InitializeMAGMATools,
-  function( stream )
-    local IsDiagonalMatrix, ZeroRows, ZeroColumns,
-          GetColumnIndependentUnitPositions, GetRowIndependentUnitPositions,
-          GetUnitPosition, DivideRowByUnit, DivideColumnByUnit,
-          CopyRowToIdentityMatrix, CopyRowToIdentityMatrix2,
-          CopyColumnToIdentityMatrix, CopyColumnToIdentityMatrix2,
-          SetColumnToZero, GetCleanRowsPositions, MyRowspace,
-          BasisOfRowModule, BasisOfColumnModule,
-          BasisOfRowsCoeff, BasisOfColumnsCoeff,
-          DecideZeroRows, DecideZeroColumns,
-          DecideZeroRowsEffectively, DecideZeroColumnsEffectively,
-          SyzygiesGeneratorsOfRows, SyzygiesGeneratorsOfColumns,
-          NonTrivialDegreePerRow, NonTrivialDegreePerRowWithColPosition,
-          NonTrivialDegreePerColumn, NonTrivialDegreePerColumnWithRowPosition;
-
+InstallValue( MAGMAMacros,
+        rec(
+            
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix := function(M)\n\
   for i:= 1 to Min(Nrows(M),Ncols(M)) do M[i,i]:= 0; end for;\n\
   return IsZero(M);\n\
-end function;\n\n";
+end function;\n\n",
     
     ZeroRows := "\n\
 ZeroRows := function(M)\n\
   return [i: i in [ 1 .. Nrows(M) ] | IsZero(M[i]) ];\n\
-end function;\n\n";
+end function;\n\n",
     
     ZeroColumns := "\n\
 ZeroColumns := function(M)\n\
   return [i: i in [ 1 .. Ncols(M) ] | IsZero(ColumnSubmatrixRange(M,i,i)) ];\n\
-end function;\n\n";
+end function;\n\n",
     
     GetColumnIndependentUnitPositions := "\n\
 GetColumnIndependentUnitPositions:= function(M, pos_list)\n\
@@ -155,7 +142,7 @@ GetColumnIndependentUnitPositions:= function(M, pos_list)\n\
     end for;\n\
   end for;\n\
   return pos;\n\
-end function;\n\n";
+end function;\n\n",
     
     GetRowIndependentUnitPositions := "\n\
 GetRowIndependentUnitPositions:= function(M, pos_list)\n\
@@ -171,14 +158,14 @@ GetRowIndependentUnitPositions:= function(M, pos_list)\n\
     end for;\n\
   end for;\n\
   return pos;\n\
-end function;\n\n";
+end function;\n\n",
     
     GetUnitPosition := "\n\
 GetUnitPosition:= function(M, pos_list)\n\
   collist:= [ x : x in [1 .. Ncols(M)] | x notin pos_list ];\n\
   ok:= exists(l){ [i, j]: i in [1 .. Nrows(M) ], j in collist | IsUnit( M[i, j] ) };\n\
   return ok select l else \"fail\";\n\
-end function;\n\n";
+end function;\n\n",
     
     DivideRowByUnit := "\n\
 DivideRowByUnit:= procedure( ~M, i, u, j )\n\
@@ -188,7 +175,7 @@ DivideRowByUnit:= procedure( ~M, i, u, j )\n\
   if j gt 0 then\n\
     M[i, j]:= R ! 1;\n\
   end if;\n\
-end procedure;\n\n";
+end procedure;\n\n",
     
     DivideColumnByUnit := "\n\
 DivideColumnByUnit:= procedure( ~M, j, u, i )\n\
@@ -201,14 +188,14 @@ DivideColumnByUnit:= procedure( ~M, j, u, i )\n\
   if i gt 0 then\n\
     M[i, j]:= R ! 1;\n\
   end if;\n\
-end procedure;\n\n";
+end procedure;\n\n",
     
     CopyRowToIdentityMatrix := "\n\
 CopyRowToIdentityMatrix := procedure( M, i, ~I, j, e)\n\
   I[j]:= M[i];\n\
   if e eq -1 then I[j] *:= -1; end if;\n\
   I[j,j]:= 1;\n\
-end procedure;\n\n";
+end procedure;\n\n",
 
     CopyRowToIdentityMatrix2 := "\n\
 CopyRowToIdentityMatrix2 := procedure( M, i, ~I1, ~I2, j)\n\
@@ -216,7 +203,7 @@ CopyRowToIdentityMatrix2 := procedure( M, i, ~I1, ~I2, j)\n\
   I1[j,j]:= 1;\n\
   I2[j]:= M[i];\n\
   I2[j,j]:= 1;\n\
-end procedure;\n\n";
+end procedure;\n\n",
 
     CopyColumnToIdentityMatrix := "\n\
 CopyColumnToIdentityMatrix := procedure( M, j, ~I, i , e)\n\
@@ -230,7 +217,7 @@ CopyColumnToIdentityMatrix := procedure( M, j, ~I, i , e)\n\
       I[k,i] := -M[k,j];\n\
     end for;\n\
   end if;\n\
-end procedure;\n\n";
+end procedure;\n\n",
     
     CopyColumnToIdentityMatrix2 := "\n\
 CopyColumnToIdentityMatrix2 := procedure( M, j, ~I1, ~I2, i )\n\
@@ -240,7 +227,7 @@ CopyColumnToIdentityMatrix2 := procedure( M, j, ~I1, ~I2, i )\n\
     I1[k,i] := -x;\n\
     I2[k,i] := x;\n\
   end for;\n\
-end procedure;\n\n";
+end procedure;\n\n",
     
     SetColumnToZero := "\n\
 SetColumnToZero:= procedure( ~M, i, j )\n\
@@ -248,7 +235,7 @@ SetColumnToZero:= procedure( ~M, i, j )\n\
   for k in rowlist do\n\
     M[k,j]:= 0;\n\
   end for;\n\
-end procedure;\n\n";
+end procedure;\n\n",
     
     GetCleanRowsPositions := "\n\
 GetCleanRowsPositions:= function( M, clean_columns )\n\
@@ -263,7 +250,7 @@ GetCleanRowsPositions:= function( M, clean_columns )\n\
      end for;\n\
   end for;\n\
   return clean_rows;\n\
-end function;\n\n";
+end function;\n\n",
     
     MyRowspace := "\n\
 MyRowspace := function(M)\n\
@@ -275,44 +262,44 @@ MyRowspace := function(M)\n\
   else\n\
     return Rowspace(M);\n\
   end if;\n\
-end function;\n\n";
+end function;\n\n",
     
     BasisOfRowModule := "\n\
 BasisOfRowModule := function(M)\n\
   S := MyRowspace(M);\n\
   Groebner(S);\n\
   return BasisMatrix(S);\n\
-end function;\n\n";
+end function;\n\n",
     
     BasisOfColumnModule := "\n\
 BasisOfColumnModule := function(M)\n\
   return Transpose(BasisOfRowModule(Transpose(M)));\n\
-end function;\n\n";
+end function;\n\n",
     
     BasisOfRowsCoeff := "\n\
 BasisOfRowsCoeff:= function(M)\n\
   B := BasisOfRowModule(M);\n\
   T := Solution(M, B);\n\
   return B, T;\n\
-end function;\n\n";
+end function;\n\n",
     
     BasisOfColumnsCoeff := "\n\
 BasisOfColumnsCoeff:= function(M)\n\
   B, T := BasisOfRowsCoeff(Transpose(M));\n\
   return Transpose(B), Transpose(T);\n\
-end function;\n\n";
+end function;\n\n",
     
     DecideZeroRows := "\n\
 DecideZeroRows:= function(A, B)\n\
   S := MyRowspace(B);\n\
   F := Generic(S);\n\
   return Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
-end function;\n\n";
+end function;\n\n",
     
     DecideZeroColumns := "\n\
 DecideZeroColumns:= function(A, B)\n\
   return Transpose(DecideZeroRows(Transpose(A),Transpose(B)));\n\
-end function;\n\n";
+end function;\n\n",
     
     DecideZeroRowsEffectively := "\n\
 DecideZeroRowsEffectively:= function(A, B)\n\
@@ -320,35 +307,38 @@ DecideZeroRowsEffectively:= function(A, B)\n\
   F := Generic(S);\n\
   M := Matrix( [Eltseq(NormalForm(F ! A[i], S)): i in [1..Nrows(A)]] );\n\
   return M, Solution( B, M-A );\n\
-end function;\n\n";
+end function;\n\n",
     
     DecideZeroColumnsEffectively := "\n\
 DecideZeroColumnsEffectively:= function(A, B)\n\
   M, T := DecideZeroRowsEffectively(Transpose(A),Transpose(B));\n\
   return Transpose(M), Transpose(T);\n\
-end function;\n\n";
+end function;\n\n",
     
     SyzygiesGeneratorsOfRows := "\n\
-SyzygiesGeneratorsOfRows:= function(M1, M2)\n\
-  if M2 cmpeq [] then\n\
-    S := MyRowspace(M1);\n\
+SyzygiesGeneratorsOfRows:= function(M)\n\
+    S := MyRowspace(M);\n\
     SM := SyzygyModule(S);\n\
-  else\n\
-    S := MyRowspace( VerticalJoin(M1, M2) );\n\
-    SM := SyzygyModule(S);\n\
-    SM := MyRowspace( ColumnSubmatrix( BasisMatrix(SM), 1, Nrows(M1) ) );\n\
-  end if;\n\
-  return Matrix( BaseRing(M1), Degree(SM), &cat [Eltseq(x) : x in MinimalBasis(SM)] );\n\
-end function;\n\n";
+  return Matrix( BaseRing(M), Degree(SM), &cat [Eltseq(x) : x in MinimalBasis(SM)] );\n\
+end function;\n\n",
     
     SyzygiesGeneratorsOfColumns := "\n\
-SyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
-  if M2 cmpeq [] then\n\
-    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),[]));\n\
-  else\n\
-    return Transpose(SyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
-  end if;\n\
-end function;\n\n";
+SyzygiesGeneratorsOfColumns:= function(M)\n\
+  return Transpose(SyzygiesGeneratorsOfRows(Transpose(M)));\n\
+end function;\n\n",
+
+    RelativeSyzygiesGeneratorsOfRows := "\n\
+RelativeSyzygiesGeneratorsOfRows:= function(M1, M2)\n\
+  S := MyRowspace( VerticalJoin(M1, M2) );\n\
+  SM := SyzygyModule(S);\n\
+  SM := MyRowspace( ColumnSubmatrix( BasisMatrix(SM), 1, Nrows(M1) ) );\n\
+  return Matrix( BaseRing(M1), Degree(SM), &cat [Eltseq(x) : x in MinimalBasis(SM)] );\n\
+end function;\n\n",
+    
+    RelativeSyzygiesGeneratorsOfColumns := "\n\
+RelativeSyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
+  return Transpose(RelativeSyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
+end function;\n\n",
 
     NonTrivialDegreePerRow := "\n\
 NonTrivialDegreePerRow := function(M)\n\
@@ -358,7 +348,7 @@ NonTrivialDegreePerRow := function(M)\n\
   else\n\
     return X[1];\n\
   end if;\n\
-end function;\n\n";
+end function;\n\n",
 
     NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition := function(M)\n\
@@ -370,7 +360,7 @@ NonTrivialDegreePerRowWithColPosition := function(M)\n\
     Append(~Y, d);\n\
   end for;\n\
   return X cat Y;\n\
-end function;\n\n";
+end function;\n\n",
 
     NonTrivialDegreePerColumn := "\n\
 NonTrivialDegreePerColumn := function(M)\n\
@@ -385,7 +375,7 @@ NonTrivialDegreePerColumn := function(M)\n\
   else\n\
     return X[1];\n\
   end if;\n\
-end function;\n\n";
+end function;\n\n",
 
     NonTrivialDegreePerColumnWithRowPosition := "\n\
 NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
@@ -398,39 +388,18 @@ NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
     Append(~Y, i);\n\
   end for;\n\
   return X cat Y;\n\
-end function;\n\n";
+end function;\n\n",
+    
+    )
+);
 
-
+##   
+InstallGlobalFunction( InitializeMAGMAMacros,
+  function( stream )
+    
     homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    homalgSendBlocking( IsDiagonalMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( ZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetColumnIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetRowIndependentUnitPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetUnitPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DivideRowByUnit, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DivideColumnByUnit, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( CopyRowToIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( CopyRowToIdentityMatrix2, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( CopyColumnToIdentityMatrix, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( CopyColumnToIdentityMatrix2, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SetColumnToZero, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( GetCleanRowsPositions, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( MyRowspace, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnModule, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfRowsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( BasisOfColumnsCoeff, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroRowsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( DecideZeroColumnsEffectively, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfRows, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( SyzygiesGeneratorsOfColumns, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerRow, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerRowWithColPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerColumn, "need_command", stream, HOMALG_IO.Pictograms.define );
-    homalgSendBlocking( NonTrivialDegreePerColumnWithRowPosition, "need_command", stream, HOMALG_IO.Pictograms.define );
+
+    InitializeMacros( MAGMAMacros, stream );
     
 end );
 
@@ -462,7 +431,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
         o := 1;
     fi;
     
-    InitializeMAGMATools( stream );
+    InitializeMAGMAMacros( stream );
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     

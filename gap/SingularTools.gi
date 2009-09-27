@@ -117,12 +117,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               ShallowCopy :=
-                 function( C )
-                   
-                   return homalgSendBlocking( [ C ], [ "matrix" ], HOMALG_IO.Pictograms.CopyMatrix );
-                   
-                 end,
+               ShallowCopy := C -> homalgSendBlocking( [ C ], [ "matrix" ], HOMALG_IO.Pictograms.CopyMatrix ),
                
                CopyMatrix :=
                  function( C, R )
@@ -353,54 +348,67 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                DivideRowByUnit :=
                  function( M, i, u, j )
+                   local v;
                    
-                   homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", M, "[k,i]=", M, "[k,i]/", u, ";};if(j>0){", M, "[j,i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                   v := homalgStream( HomalgRing( M ) )!.variable_name;
+                   
+                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", M, "[", v, "k,", v, "i]=", M, "[", v, "k,", v, "i]/", u, ";};if(", v, "j>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
                    
                  end,
                
                DivideColumnByUnit :=
                  function( M, j, u, i )
+                   local v;
                    
-                   homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", M, "[j,k]=", M, "[j,k]/", u, ";};if(i>0){", M, "[j,i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
+                   v := homalgStream( HomalgRing( M ) )!.variable_name;
+                   
+                   homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=", M, "[", v, "j,", v, "k]/", u, ";};if(", v, "i>0){", M, "[", v, "j,", v, "i]=1;}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
                    
                  end,
                
                CopyRowToIdentityMatrix :=
                  function( M, i, L, j )
-                   local l;
+                   local v, l;
+                   
+                   v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                       homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", L[1], "[k,j]=-", M, "[k,i];", L[2], "[k,j]=", M, "[k,i];", "};", L[1], "[j,j]=1;", L[2], "[j,j]=1" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[1], "[", v, "j,", v, "j]=1;", L[2], "[", v, "j,", v, "j]=1" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-                       homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", L[1], "[k,j]=-", M, "[k,i];};", L[1], "[j,j]=1;" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "k,", v, "j]=-", M, "[", v, "k,", v, "i];};", L[1], "[", v, "j,", v, "j]=1;" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-                       homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<=", NrColumns( M ), ";k=k+1){", L[2], "[k,j]=", M, "[k,i];", "};", L[2], "[j,j]=1" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<=", NrColumns( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "k,", v, "j]=", M, "[", v, "k,", v, "i];", "};", L[2], "[", v, "j,", v, "j]=1" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
                    fi;
                    
                  end,
                
                CopyColumnToIdentityMatrix :=
                  function( M, j, L, i )
-                   local l;
+                   local v, l;
+                   
+                   v := homalgStream( HomalgRing( M ) )!.variable_name;
                    
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-                       homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", L[1], "[i,k]=-", M, "[j,k];", L[2], "[i,k]=", M, "[j,k];", "};", L[1], "[i,i]=1;", L[2], "[i,i]=1" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[1], "[", v, "i,", v, "i]=1;", L[2], "[", v, "i,", v, "i]=1" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-                       homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", L[1], "[i,k]=-", M, "[j,k];", L[1], "[i,i]=1;" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[1], "[", v, "i,", v, "k]=-", M, "[", v, "j,", v, "k];", L[1], "[", v, "i,", v, "i]=1;" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-                       homalgSendBlocking( [ "j=", j, ";i=", i, ";for(k=1;k<=", NrRows( M ), ";k=k+1){", L[2], "[i,k]=", M, "[j,k];", "};", L[2], "[i,i]=1" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
+                       homalgSendBlocking( [ v, "j=", j, ";", v, "i=", i, ";for(", v, "k=1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", L[2], "[", v, "i,", v, "k]=", M, "[", v, "j,", v, "k];", "};", L[2], "[", v, "i,", v, "i]=1" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
                    fi;
                    
                  end,
                
                SetColumnToZero :=
                  function( M, i, j )
+                   local v;
                    
-                   homalgSendBlocking( [ "i=", i, ";j=", j, ";for(k=1;k<i;k=k+1){", M, "[j,k]=0;};for(k=i+1;k<=", NrRows( M ), ";k=k+1){", M, "[j,k]=0;}" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
+                   v := homalgStream( HomalgRing( M ) )!.variable_name;
+                   
+                   homalgSendBlocking( [ v, "i=", i, ";", v, "j=", j, ";for(", v, "k=1;", v, "k<", v, "i;", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;};for(", v, "k=", v, "i+1;", v, "k<=", NrRows( M ), ";", v, "k=", v, "k+1){", M, "[", v, "j,", v, "k]=0;}" ], "need_command", HOMALG_IO.Pictograms.SetColumnToZero );
                    
                  end,
                

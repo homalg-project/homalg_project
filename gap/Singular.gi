@@ -133,7 +133,8 @@ InstallGlobalFunction( _Singular_multiple_delete,
     
 end );
 
-InstallValue( SingularTools,
+##
+InstallValue( SingularMacros,
         rec(
             
     IsMemberOfList := "\n\
@@ -384,19 +385,13 @@ proc BasisOfRowModule (matrix M)\n\
     BasisOfColumnModule := "\n\
 proc BasisOfColumnModule (matrix M)\n\
 {\n\
-  return(Involution(std(Involution(M))));\n\
+  return(Involution(BasisOfRowModule(Involution(M))));\n\
 }\n\n",
     
     ReducedBasisOfRowModule := "\n\
 proc ReducedBasisOfRowModule (matrix M)\n\
 {\n\
-  matrix l = matrix(mres(M,1)[1]);\n\
-  matrix k = matrix(mres(l,1)[1]);\n\
-  if (l == k)\n\
-  {\n\
-    return(k);\n\
-  }\n\
-  return(ReducedBasisOfRowModule(k));\n\
+  return(mstd(M)[2]);\n\
 }\n\n",
     
     ReducedBasisOfColumnModule := "\n\
@@ -487,22 +482,22 @@ proc SyzygiesGeneratorsOfRows (matrix M)\n\
   return(SyzForHomalg(M));\n\
 }\n\n",
     
-    SyzygiesGeneratorsOfRows2 := "\n\
-proc SyzygiesGeneratorsOfRows2 (matrix M1, matrix M2)\n\
-{\n\
-  return(std(modulo(M1, M2)));\n\
-}\n\n",
-    
     SyzygiesGeneratorsOfColumns := "\n\
 proc SyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
   return(Involution(SyzForHomalg(Involution(M))));\n\
 }\n\n",
     
-    SyzygiesGeneratorsOfColumns2 := "\n\
-proc SyzygiesGeneratorsOfColumns2 (matrix M1, matrix M2)\n\
+    RelativeSyzygiesGeneratorsOfRows := "\n\
+proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\
 {\n\
-  return(Involution(SyzygiesGeneratorsOfRows2(Involution(M1),Involution(M2))));\n\
+  return(std(modulo(M1, M2)));\n\
+}\n\n",
+    
+    RelativeSyzygiesGeneratorsOfColumns := "\n\
+proc RelativeSyzygiesGeneratorsOfColumns (matrix M1, matrix M2)\n\
+{\n\
+  return(Involution(RelativeSyzygiesGeneratorsOfRows(Involution(M1),Involution(M2))));\n\
 }\n\n",
     
     ReducedSyzForHomalg := "\n\
@@ -822,12 +817,15 @@ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
 );
 
 ##
-InstallGlobalFunction( InitializeSingularTools,
-    function( stream )
+InstallGlobalFunction( InitializeSingularMacros,
+  function( stream )
+    local v;
     
-    homalgSendBlocking( "int i; int j; int k; list l;\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    v := stream.variable_name;
     
-    InitializeMacros( SingularTools, stream );
+    homalgSendBlocking( [ "int ", v, "i; int ", v, "j; int ", v, "k; list ", v, "l;\n\n" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    InitializeMacros( SingularMacros, stream );
     
 end );
 
@@ -866,7 +864,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
         o := 1;
     fi;
     
-    InitializeSingularTools( stream );
+    InitializeSingularMacros( stream );
     
     ##this will lead to the call
     ##ring homalg_variable_something = arg[1];

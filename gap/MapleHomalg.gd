@@ -16,7 +16,7 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Maple" );
 
-DeclareGlobalVariable( "MapleTools" );
+DeclareGlobalVariable( "MapleMacros" );
 
 ####################################
 #
@@ -26,7 +26,7 @@ DeclareGlobalVariable( "MapleTools" );
 
 DeclareGlobalFunction( "_Maple_multiple_delete" );
 
-DeclareGlobalFunction( "InitializeMapleTools" );
+DeclareGlobalFunction( "InitializeMapleMacros" );
 
 # constructor methods:
 

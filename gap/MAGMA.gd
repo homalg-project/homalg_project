@@ -17,6 +17,8 @@
 
 DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 
+DeclareGlobalVariable( "MAGMAMacros" );
+
 ####################################
 #
 # global functions and operations:
@@ -25,7 +27,7 @@ DeclareGlobalVariable( "HOMALG_IO_MAGMA" );
 
 DeclareGlobalFunction( "_MAGMA_multiple_delete" );
 
-DeclareGlobalFunction( "InitializeMAGMATools" );
+DeclareGlobalFunction( "InitializeMAGMAMacros" );
 
 # constructor methods:
 

@@ -87,12 +87,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               ShallowCopy :=
-                 function( C )
-                   
-                   return homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix );
-                   
-                 end,
+               ShallowCopy := C -> homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix ),
                
                CopyMatrix :=
                  function( C, R )
@@ -127,12 +122,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
-               Involution :=
-                 function( M )
-                   
-                   return homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution );
-                   
-                 end,
+               Involution := M -> homalgSendBlocking( [ "Involution(", M, ")" ], HOMALG_IO.Pictograms.Involution ),
                
                CertainRows :=
                  function( M, plist )
