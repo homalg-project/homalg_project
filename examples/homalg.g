@@ -1,5 +1,5 @@
 LoadPackage( "homalg" );
-R := HomalgRingOfIntegers( );
+R := HOMALG.ZZ; ## HomalgRingOfIntegers( );
 mm1 := [[262, -33, 75, -40],
         [682, -86, 196, -104],
 	[1186, -151, 341, -180],

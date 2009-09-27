@@ -103,8 +103,7 @@ DeclareGlobalFunction( "HomalgResidueClassRingElement" );
 DeclareOperation( "BlindlyCopyMatrixPropertiesToResidueClassMatrix",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "HomalgResidueClassMatrix",
-        [ IsHomalgMatrix, IsHomalgRing ] );
+DeclareGlobalFunction( "HomalgResidueClassMatrix" );
 
 # basic operations:
 

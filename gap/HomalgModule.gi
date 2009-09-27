@@ -3013,13 +3013,9 @@ InstallMethod( LeftSubmodule,
 end );
 ##  ]]></Listing>
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
-##  gap> Z4 := ZZ / 4;
+##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
 ##  <A homalg residue class ring>
-##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, ZZ );
-##  <A homalg internal 1 by 1 matrix>
-##  gap> J := Z4 * J;
+##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A homalg residue class 1 by 1 matrix>
 ##  gap> J := LeftSubmodule( J );
 ##  <A principal (left) ideal given by a cyclic generator>
@@ -3129,13 +3125,9 @@ InstallMethod( RightSubmodule,
 end );
 ##  ]]></Listing>
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
-##  gap> Z4 := ZZ / 4;
+##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
 ##  <A homalg residue class ring>
-##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, ZZ );
-##  <A homalg internal 1 by 1 matrix>
-##  gap> J := Z4 * J;
+##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A homalg residue class 1 by 1 matrix>
 ##  gap> J := RightSubmodule( J );
 ##  <A principal (right) ideal given by a cyclic generator>
@@ -3497,9 +3489,6 @@ InstallMethod( RingMap,
     return RingMap( GeneratorsOfModule( M ), S, T );
     
 end );
-
-## create a globally defined ring of integers
-HOMALG.ZZ := HomalgRingOfIntegers( );
 
 ####################################
 #

@@ -608,6 +608,7 @@ InstallGlobalFunction( CreateHomalgRing,
         matrix_type := type[2];
         type := type[1];
     elif IsSemiringWithOneAndZero( r ) then
+        matrix_type := ValueGlobal( "TheTypeHomalgInternalMatrix" ); ## will be defined later in HomalgMatrix.gi
         type := TheTypeHomalgInternalRing;
     else
         Error( "the types of the ring and matrices were not specified\n" );

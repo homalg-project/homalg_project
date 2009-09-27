@@ -142,11 +142,9 @@ InstallMethod( ShallowCopy,
     
     if IsBound(RP!.ShallowCopy) then
         
-        MM := HomalgMatrix( R );
-        
-        ## this is quicker and safer than calling the
-        ## constructor HomalgMatrix with all arguments
-        SetEval( MM, RP!.ShallowCopy( M ) );
+        MM := HomalgMatrixWithAttributes( [
+                      Eval, RP!.ShallowCopy( M )
+                      ], R );
         
         BlindlyCopyMatrixProperties( M, MM );
         
@@ -171,11 +169,9 @@ InstallMethod( ShallowCopy,
     
     if IsBound(RP!.ShallowCopy) then
         
-        MM := HomalgMatrix( R );
-        
-        ## this is quicker and safer than calling the
-        ## constructor HomalgMatrix with all arguments
-        SetEval( MM, RP!.ShallowCopy( M ) );
+        MM := HomalgMatrixWithAttributes( [
+                      Eval, RP!.ShallowCopy( M )
+                      ], R );
         
         if not IsIdenticalObj( Eval( M ), Eval( MM ) ) then
             
@@ -662,21 +658,14 @@ InstallMethod( Involution,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, C;
+    local C;
     
-    R := HomalgRing( M );
+    C := HomalgMatrixWithAttributes( [
+                 EvalInvolution, M,
+                 NrRows, NrColumns( M ),
+                 NrColumns, NrRows( M ),
+                 ], HomalgRing( M ) );
     
-    C := HomalgMatrix( R );
-    
-    if HasNrColumns( M ) then
-        SetNrRows( C, NrColumns( M ) );
-    fi;
-    
-    if HasNrRows( M ) then
-        SetNrColumns( C, NrRows( M ) );
-    fi;
-    
-    SetEvalInvolution( C, M );
     SetItsInvolution( M, C );
     
     return C;
@@ -700,18 +689,12 @@ InstallMethod( CertainRows,
         [ IsHomalgMatrix, IsList ],
         
   function( M, plist )
-    local R, C;
     
-    R := HomalgRing( M );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, Length( plist ) );
-    SetNrColumns( C, NrColumns( M ) );
-    
-    SetEvalCertainRows( C, [ M, plist ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalCertainRows, [ M, plist ],
+                   NrRows, Length( plist ),
+                   NrColumns, NrColumns( M )
+                   ], HomalgRing( M ) );
     
 end );
 
@@ -721,18 +704,12 @@ InstallMethod( CertainColumns,
         [ IsHomalgMatrix, IsList ],
         
   function( M, plist )
-    local R, C;
     
-    R := HomalgRing( M );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrColumns( C, Length( plist ) );
-    SetNrRows( C, NrRows( M ) );
-    
-    SetEvalCertainColumns( C, [ M, plist ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalCertainColumns, [ M, plist ],
+                   NrColumns, Length( plist ),
+                   NrRows, NrRows( M )
+                   ], HomalgRing( M ) );
     
 end );
 
@@ -742,18 +719,12 @@ InstallMethod( UnionOfRows,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) + NrRows( B ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalUnionOfRows( C, [ A, B ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalUnionOfRows, [ A, B ],
+                   NrRows, NrRows( A ) + NrRows( B ),
+                   NrColumns, NrColumns( A )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -763,18 +734,12 @@ InstallMethod( UnionOfColumns,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) + NrColumns( B ) );
-    
-    SetEvalUnionOfColumns( C, [ A, B ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalUnionOfColumns, [ A, B ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( A ) + NrColumns( B )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -784,18 +749,12 @@ InstallMethod( DiagMat,
         [ IsHomogeneousList ],
         
   function( l )
-    local R, C;
     
-    R := HomalgRing( l[1] );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, Sum( List( l, NrRows ) ) );
-    SetNrColumns( C, Sum( List( l, NrColumns ) ) );
-    
-    SetEvalDiagMat( C, l );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalDiagMat, l,
+                   NrRows, Sum( List( l, NrRows ) ),
+                   NrColumns, Sum( List( l, NrColumns ) )
+                   ], HomalgRing( l[1] ) );
     
 end );
 
@@ -805,18 +764,12 @@ InstallMethod( KroneckerMat,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) * NrRows( B ) );
-    SetNrColumns( C, NrColumns( A ) * NrColumns ( B ) );
-    
-    SetEvalKroneckerMat( C, [ A, B ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalKroneckerMat, [ A, B ],
+                   NrRows, NrRows( A ) * NrRows( B ),
+                   NrColumns, NrColumns( A ) * NrColumns ( B )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -871,18 +824,12 @@ InstallMethod( \*,
         [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24 (if this value is increased, the corresonding values in LIMAT must be increased as well!!!)
         
   function( a, A )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalMulMat( C, [ a, A ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalMulMat, [ a, A ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( A )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -903,18 +850,12 @@ InstallMethod( \+,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalAddMat( C, [ A, B ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalAddMat, [ A, B ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( A )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -977,18 +918,12 @@ InstallMethod( \-,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( A ) );
-    
-    SetEvalSubMat( C, [ A, B ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalSubMat, [ A, B ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( A )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -1009,18 +944,12 @@ InstallMethod( \*,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B )
-    local R, C;
     
-    R := HomalgRing( A );
-    
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrRows( A ) );
-    SetNrColumns( C, NrColumns( B ) );
-    
-    SetEvalCompose( C, [ A, B ] );
-    
-    return C;
+    return HomalgMatrixWithAttributes( [
+                   EvalCompose, [ A, B ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( B )
+                   ], HomalgRing( A ) );
     
 end );
 
@@ -1058,16 +987,14 @@ InstallMethod( LeftInverse,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, C;
+    local C;
     
-    R := HomalgRing( M );
+    C := HomalgMatrixWithAttributes( [
+                 EvalLeftInverse, M,
+                 NrRows, NrColumns( M ),
+                 NrColumns, NrRows( M )
+                 ], HomalgRing( M ) );
     
-    C := HomalgMatrix( R );
-    
-    SetNrRows( C, NrColumns( M ) );
-    SetNrColumns( C, NrRows( M ) );
-    
-    SetEvalLeftInverse( C, M );
     SetItsLeftInverse( M, C );
     
     return C;
@@ -1091,16 +1018,14 @@ InstallMethod( RightInverse,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, C;
+    local C;
     
-    R := HomalgRing( M );
+    C := HomalgMatrixWithAttributes( [
+                 EvalRightInverse, M,
+                 NrColumns, NrRows( M ),
+                 NrRows, NrColumns( M )
+                 ], HomalgRing( M ) );
     
-    C := HomalgMatrix( R );
-    
-    SetNrColumns( C, NrRows( M ) );
-    SetNrRows( C, NrColumns( M ) );
-    
-    SetEvalRightInverse( C, M );
     SetItsRightInverse( M, C );
     
     return C;
@@ -1358,6 +1283,10 @@ InstallGlobalFunction( HomalgMatrix,
     
     if nargs > 1 and arg[1] <> [ ] then
         
+        if HasConstructorForHomalgMatrices( arg[nargs] ) then
+            return CallFuncList( ConstructorForHomalgMatrices( arg[nargs] ), arg );
+        fi;
+        
         if IsString( arg[1] ) then
             
             if IsHomalgInternalRingRep( arg[nargs] ) then
@@ -1533,6 +1462,25 @@ InstallGlobalFunction( HomalgMatrix,
     
 end );
   
+##
+InstallGlobalFunction( HomalgMatrixWithAttributes,
+  function( attributes, R )
+    local matrix;
+    
+    ## for performance reasons this internal function
+    ## should not perform syntax checks
+    
+    matrix := rec( ring := R );
+    
+    ## ObjectifyWithAttributes:
+    CallFuncList( ObjectifyWithAttributes,
+            Concatenation( [ matrix, TypeOfHomalgMatrix( R ) ], attributes )
+            );
+    
+    return matrix;
+    
+end );
+
 ##  <#GAPDoc Label="HomalgZeroMatrix">
 ##  <ManSection>
 ##    <Func Arg="m, n, R" Name="HomalgZeroMatrix" Label="constructor for zero matrices"/>

@@ -447,19 +447,40 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
   function( R, ring_rel )
     local RP, S, mat, rel, left, rel_old, mat_old, left_old, c;
     
+    if NrGenerators( ring_rel ) <> 1 then
+        Error( "the second argument is not a set of relations on a single generator\n" );
+    fi;
+    
     RP := CreateHomalgTableForResidueClassRings( R );
     
     S := CreateHomalgRing( R, [ TheTypeHomalgResidueClassRing, TheTypeHomalgResidueClassMatrix ], HomalgResidueClassRingElement, RP );
+    
+    SetConstructorForHomalgMatrices( S,
+            function( arg )
+              local ar, M, R;
+              
+              ar := List( arg,
+                          function( i )
+                            if IsHomalgResidueClassRingRep( i ) then
+                                return AmbientRing( i );
+                            else
+                                return i;
+                            fi;
+                          end );
+              
+              M := CallFuncList( HomalgMatrix, ar );
+              
+              R := arg[Length( arg )];
+              
+              return HomalgResidueClassMatrix( M, R );
+              
+            end );
     
     ## for the view method: <A homalg residue class matrix>
     S!.description := "residue class";
     
     ## it is safe to evaluate empty residue class matrices
     S!.SafeToEvaluateEmptyMatrices := true;
-    
-    if NrGenerators( ring_rel ) <> 1 then
-        Error( "the second argument is not a set of relations on a single generator\n" );
-    fi;
     
     mat := MatrixOfRelations( ring_rel );
     
@@ -626,18 +647,13 @@ InstallGlobalFunction( HomalgResidueClassRingElement,
 end );
 
 ##
-InstallMethod( HomalgResidueClassMatrix,
-        "constructor for matrices over residue class rings",
-        [ IsHomalgMatrix, IsHomalgResidueClassRingRep ],
-        
+InstallGlobalFunction( HomalgResidueClassMatrix,
   function( M, R )
-    local A, type, matrix;
+    local matrix;
     
-    A := HomalgRing( M );
-    
-    if not IsIdenticalObj( A, AmbientRing( R ) ) then
-        Error( "the ring the matrix and the ambient ring of the specified residue class ring are not identical\n" );
-    fi;
+    #if not IsIdenticalObj( HomalgRing( M ), AmbientRing( R ) ) then
+    #    Error( "the ring the matrix and the ambient ring of the specified residue class ring are not identical\n" );
+    #fi;
     
     matrix := rec( ring := R );
     

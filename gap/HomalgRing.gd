@@ -827,6 +827,19 @@ DeclareAttribute( "RingElementConstructor",
 DeclareAttribute( "TypeOfHomalgMatrix",
         IsHomalgRing );
 
+##  <#GAPDoc Label="ConstructorForHomalgMatrices">
+##  <ManSection>
+##    <Attr Arg="R" Name="ConstructorForHomalgMatrices"/>
+##    <Returns>a type</Returns>
+##    <Description>
+##      The constructor for &homalg; matrices over the &homalg; ring <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ConstructorForHomalgMatrices",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IndeterminatesOfPolynomialRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminatesOfPolynomialRing"/>

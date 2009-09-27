@@ -141,6 +141,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="homalgTable">
 <#Include Label="RingElementConstructor">
 <#Include Label="TypeOfHomalgMatrix">
+<#Include Label="ConstructorForHomalgMatrices">
 <#Include Label="Zero:ring">
 <#Include Label="One:ring">
 <#Include Label="MinusOne">

@@ -627,6 +627,8 @@ DeclareGlobalFunction( "homalgInternalMatrixHull" );
 
 DeclareGlobalFunction( "HomalgMatrix" );
 
+DeclareGlobalFunction( "HomalgMatrixWithAttributes" );
+
 DeclareGlobalFunction( "HomalgZeroMatrix" );
 
 DeclareGlobalFunction( "HomalgIdentityMatrix" );

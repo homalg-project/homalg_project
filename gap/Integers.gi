@@ -173,3 +173,6 @@ InstallMethod( CreateHomalgTable,
     return RP;
     
 end );
+
+## create a globally defined ring of integers
+HOMALG.ZZ := HomalgRingOfIntegers( );
