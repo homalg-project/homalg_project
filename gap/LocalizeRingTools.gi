@@ -27,8 +27,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                Minus :=
                  function( a, b )
-                 local c;
+                   local c;
+                   
                    c := Cancel( Denominator( a ), Denominator( b ) );
+                   
                    return HomalgLocalRingElement(
                                   Numerator( a ) * c[2]
                                   -Numerator( b ) * c[1],
@@ -47,7 +49,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                IsUnit :=
                  function( R, u )
-                 local globalR;
+                   local globalR;
                    
                    globalR := AssociatedComputationRing( R );
                    
@@ -57,8 +59,10 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                Sum :=
                  function( a, b )
-                 local c;
+                   local c;
+                   
                    c := Cancel( Denominator( a ), Denominator( b ) );
+                   
                    return HomalgLocalRingElement(
                                   Numerator( a ) * c[2]
                                   +Numerator( b ) * c[1],

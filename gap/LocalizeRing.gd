@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  LocalRing.gd    LocalizeRingForHomalg package            Mohamed Barakat
+##  LocalizeRing.gd LocalizeRingForHomalg package            Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
@@ -69,6 +69,12 @@ DeclareGlobalFunction( "HomalgLocalRingElement" );
 DeclareOperation( "BlindlyCopyMatrixPropertiesToLocalMatrix",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "HomalgLocalMatrix",
+        [ IsHomalgMatrix, IsRingElement, IsHomalgRing ] );
+
+DeclareOperation( "HomalgLocalMatrix",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "AssociatedComputationRing",
@@ -100,12 +106,6 @@ DeclareOperation( "Numerator",
 
 DeclareOperation( "Denominator",
         [ IsHomalgMatrix ] );
-
-DeclareOperation( "HomalgLocalMatrix",
-        [ IsHomalgMatrix, IsRingElement, IsHomalgRing ] );
-
-DeclareOperation( "HomalgLocalMatrix",
-        [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "Cancel",
         [ IsRingElement, IsRingElement ] );

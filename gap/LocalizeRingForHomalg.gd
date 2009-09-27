@@ -21,11 +21,3 @@ DeclareGlobalVariable( "HOMALG_LOCALIZE_RING" );
 ##
 DeclareGlobalVariable( "CommonHomalgTableForLocalizedRings" );
 
-####################################
-#
-# global functions and operations:
-#
-####################################
-
-# constructor methods:
-

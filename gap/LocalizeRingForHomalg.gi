@@ -48,9 +48,3 @@ InstallValue( CommonHomalgTableForLocalizedRings,
          )
 );
 
-####################################
-#
-# constructor functions and methods:
-#
-####################################
-

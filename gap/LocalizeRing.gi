@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  LocalRing.gi    LocalizeRingForHomalg package            Mohamed Barakat
+##  LocalizeRing.gi LocalizeRingForHomalg package            Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
@@ -10,15 +10,12 @@
 ##
 #############################################################################
 
-# a new representation for the GAP-category IsHomalgRing
-# which are subrepresentations of IsHomalgRingOrFinitelyPresentedModuleRep:
-
 ##  <#GAPDoc Label="IsHomalgLocalRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgLocalRingRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The representation of &homalg; local rings. <Br/><Br/>
+##      The representation of &homalg; local rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
 ##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
@@ -27,14 +24,14 @@
 ##
 DeclareRepresentation( "IsHomalgLocalRingRep",
         IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
-        [ "ring", "homalgTable" ] );
+        [ "ring" ] );
 
 ##  <#GAPDoc Label="IsHomalgLocalRingElementRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="r" Name="IsHomalgLocalRingElementRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The representation of elements of local &homalg; rings. <P/>
+##      The representation of elements of &homalg; local rings. <P/>
 ##      (It is a representation of the &GAP; category <C>IsHomalgRingElement</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -77,28 +74,6 @@ BindGlobal( "TheTypeHomalgLocalMatrix",
 # methods for operations:
 #
 ####################################
-
-##  <#GAPDoc Label="HomalgRing:localringelement">
-##  <ManSection>
-##    <Oper Arg="r" Name="HomalgRing" Label="for homalg local ring elements"/>
-##    <Returns>a &homalg; local ring</Returns>
-##    <Description>
-##      The &homalg; local ring from the &LocalizeRingForHomalg; package from a local ring element <A>r</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( HomalgRing,
-        "for homalg local ring elements",
-        [ IsHomalgLocalRingElementRep ],
-        
-  function( r )
-    
-    return r!.ring;
-    
-  end
-  
-);
 
 ##  <#GAPDoc Label="AssociatedComputationRing:ring">
 ##  <ManSection>
@@ -388,22 +363,19 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
         [ IsHomalgMatrix, IsHomalgLocalMatrixRep ],
         
   function( S, T )
+    local c;
     
-    if HasNrRows( S ) then
-        SetNrRows( T, NrRows( S ) );
-    fi;
+    for c in [ NrRows, NrColumns ] do
+        if Tester( c )( S ) then
+            Setter( c )( T, c( S ) );
+        fi;
+    od;
     
-    if HasNrColumns( S ) then
-        SetNrColumns( T, NrColumns( S ) );
-    fi;
-    
-    if HasIsZero( S ) then
-        SetIsZero( T, IsZero( S ) );
-    fi;
-    
-    if HasIsIdentityMatrix( S ) then
-        SetIsIdentityMatrix( T, IsIdentityMatrix( S ) );
-    fi;
+    for c in [ IsZero, IsIdentityMatrix, IsDiagonalMatrix ] do
+        if Tester( c )( S ) and c( S ) then
+            Setter( c )( T, c( S ) );
+        fi;
+    od;
     
   end
 
@@ -805,6 +777,27 @@ InstallMethod( LocalizeAt,
     ## create the local ring
     localR := CreateHomalgRing( globalR, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
     
+    SetConstructorForHomalgMatrices( localR,
+            function( arg )
+              local ar, M, R;
+              
+              ar := List( arg,
+                          function( i )
+                            if IsHomalgLocalRingRep( i ) then
+                                return AssociatedComputationRing( i );
+                            else
+                                return i;
+                            fi;
+                          end );
+              
+              M := CallFuncList( HomalgMatrix, ar );
+              
+              R := arg[Length( arg )];
+              
+              return HomalgLocalMatrix( M, R );
+              
+            end );
+    
     ## for the view method: <A homalg local ring>
     localR!.description := "local";
     
@@ -875,7 +868,7 @@ InstallGlobalFunction( HomalgLocalRingElement,
     nargs := Length( arg );
     
     if nargs = 0 then
-         Error( "empty input\n" );
+        Error( "empty input\n" );
     fi;
     
     numer := arg[1];
@@ -891,8 +884,8 @@ InstallGlobalFunction( HomalgLocalRingElement,
         if IsHomalgRing( arg[2] ) then
             ring := arg[2];
             ar := [ numer, One( AssociatedComputationRing( ring ) ), ring ];
-            properties := KnownTruePropertiesOfObject( numer );
-            Append( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
+            properties := KnownTruePropertiesOfObject( numer );	## FIXME: a huge potential for problems
+            Add( ar, List( properties, ValueGlobal ) );  ## at least an empty list is inserted; avoids infinite loops
             return CallFuncList( HomalgLocalRingElement, ar );
         fi;
         
@@ -903,12 +896,12 @@ InstallGlobalFunction( HomalgLocalRingElement,
     for ar in arg{[ 2 .. nargs ]} do
         if not IsBound( ring ) and IsHomalgRing( ar ) then
             ring := ar;
-        elif IsFilter( ar ) then
-            Add( properties, ar );
+        elif IsList( ar ) and ForAll( ar, IsFilter ) then
+            Append( properties, ar );
         elif not IsBound( denom ) and ( IsRingElement( ar ) or IsString( ar ) ) then
             denom := ar;
         else
-            Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsRingElement, IsFilterm, IsString }\n" );
+            Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsList( IsFilter ), IsRingElement, IsString }\n" );
         fi;
     od;
     
@@ -1044,7 +1037,6 @@ InstallMethod( SetIsMutableMatrix,
     SetIsMutableMatrix( Numerator( A ), b );
     
 end );
-
 
 ####################################
 #

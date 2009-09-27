@@ -17,7 +17,8 @@ list := [
          "../gap/LocalizeRingBasic.gd",
          "../gap/LocalizeRingBasic.gi",
          "../gap/LocalizeRingMora.gd",
-         "../gap/LocalizeRingMora.gi"
+         "../gap/LocalizeRingMora.gi",
+         "../examples/Hom\(Hom\(-\,Z128\)\,Z16\)_On_Seq.g",
           ];
 
 TestManualExamples( "doc", "LocalizeRingForHomalg.xml", list );

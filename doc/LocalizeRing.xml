@@ -39,8 +39,6 @@
   
     <Heading>Operations and Functions</Heading>
       
-    <#Include Label="HomalgRing:localringelement">
-      
     <#Include Label="AssociatedGlobalRing:ring">
     
     <#Include Label="AssociatedGlobalRing:element">

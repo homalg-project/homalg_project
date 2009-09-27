@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  LocalRingGroebner.gi    LocalizeRingForHomalg package    Mohamed Barakat
+##  LocalizeRingGroebner.gi LocalizeRingForHomalg package    Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
