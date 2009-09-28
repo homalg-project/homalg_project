@@ -34,24 +34,8 @@ DeclareOperation( "homalgExternalCASystemPID",
 
 # constructor methods:
 
-## ConvertHomalgMatrix have been declared in homalg since it is called there
+## ConvertHomalgMatrix has been declared in homalg since it is called there
 
 DeclareOperation( "ConvertHomalgMatrixViaFile",
-        [ IsHomalgMatrix, IsHomalgRing ]
-        );
+        [ IsHomalgMatrix, IsHomalgRing ] );
 
-DeclareOperation( "SaveHomalgMatrixToFile",
-        [ IsString, IsHomalgMatrix, IsHomalgRing ]
-        );
-
-DeclareOperation( "SaveHomalgMatrixToFile",
-        [ IsString, IsHomalgMatrix ]
-        );
-
-DeclareOperation( "LoadHomalgMatrixFromFile",
-        [ IsString, IsHomalgRing ]
-        );
-
-DeclareOperation( "LoadHomalgMatrixFromFile",
-        [ IsString, IsInt, IsInt, IsHomalgRing ]
-        );
