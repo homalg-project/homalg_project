@@ -744,6 +744,60 @@ InstallMethod( Cancel,
     
 end );
 
+InstallMethod( SaveHomalgMatrixToFile,
+        "for local rings",
+        [ IsString, IsHomalgMatrix, IsLocalRing ],
+        
+  function( filename, M, R )
+  local ComputationRing;
+    
+    if LoadPackage( "HomalgToCAS" ) <> true then
+       Error( "the package HomalgToCAS failed to load\n" );
+    fi;
+    
+    ComputationRing := AssociatedComputationRing( M );
+    SaveHomalgMatrixToFile( Concatenation( filename, "_numerator" ), Numerator( M ), ComputationRing );
+    SaveHomalgMatrixToFile( Concatenation( filename, "_denominator" ), HomalgMatrix( [ Denominator( M ) ], 1, 1, ComputationRing ), ComputationRing );
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( LoadHomalgMatrixFromFile,
+        "for local rings",
+        [ IsString, IsInt, IsInt, IsLocalRing ],
+        
+  function( filename, r, c, R )
+    local ComputationRing, numer, denom;
+    
+    if LoadPackage( "HomalgToCAS" ) <> true then
+       Error( "the package HomalgToCAS failed to load\n" );
+    fi;
+    
+    ComputationRing := AssociatedComputationRing( R );
+    
+    if IsExistingFile( Concatenation( filename, "_numerator" ) ) and IsExistingFile( Concatenation( filename, "_denominator" ) ) then
+    
+    numer := LoadHomalgMatrixFromFile( Concatenation( filename, "_numerator" ), r, c, ComputationRing );
+    denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
+    denom := GetEntryOfHomalgMatrix( denom, 1, 1 );
+    
+    elif IsExistingFile( filename ) then
+    
+      numer := LoadHomalgMatrixFromFile( filename, r, c, ComputationRing );
+      denom := One( ComputationRing );
+    
+    else
+    
+      Error( "file does not exist" );
+    
+    fi;
+    
+    return HomalgLocalMatrix( numer, denom, R );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
