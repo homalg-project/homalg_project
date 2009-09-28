@@ -392,6 +392,10 @@ DecideZeroRowsEffectively :=
             u := one + u;
             S := HomalgLocalMatrix( CertainColumns( S, [ 1 .. m ] ), u, R );
             A2 := HomalgRingElement( one , u , R ) * A3;
+          else
+            S := HomalgVoidMatrix( GlobalR );
+            A2 := HomalgLocalMatrix( DecideZeroRowsEffectively( A1 , B1 , S ) , one , R );
+            S := HomalgLocalMatrix( S , one , R );
           fi;
         else
           S := HomalgLocalMatrix( S1 , one , R );
