@@ -833,14 +833,16 @@ InstallMethod( LocalizeAt,
     
     SetConstructorForHomalgMatrices( localR,
             function( arg )
-              local mat, ar, M, R;
+              local R, r, ar, M;
               
               R := arg[Length( arg )];
               
               #at least be able to construct 1x1-matrices from lists of ring elements for the fallback IsUnit
               if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsHomalgLocalRingElementRep( arg[1][1] ) then
               
-                HomalgLocalMatrix( HomalgMatrix( [ Numerator( arg[1] ) ], AssociatedComputationRing( arg[1] ) ), Denominator( arg[1] ), R );
+                r := arg[1][1];
+              
+                return HomalgLocalMatrix( HomalgMatrix( [ Numerator( r ) ], 1, 1, AssociatedComputationRing( R ) ), Denominator( r ), R );
               
               fi;
               
