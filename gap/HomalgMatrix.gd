@@ -656,6 +656,18 @@ DeclareOperation( "CreateHomalgMatrixFromString",
 DeclareOperation( "CreateHomalgSparseMatrixFromString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 
+DeclareOperation( "SaveHomalgMatrixToFile",
+        [ IsString, IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "SaveHomalgMatrixToFile",
+        [ IsString, IsHomalgMatrix ] );
+
+DeclareOperation( "LoadHomalgMatrixFromFile",
+        [ IsString, IsHomalgRing ] );
+
+DeclareOperation( "LoadHomalgMatrixFromFile",
+        [ IsString, IsInt, IsInt, IsHomalgRing ] );
+
 DeclareOperation( "*",
         [ IsHomalgRing, IsHomalgMatrix ] );
 
