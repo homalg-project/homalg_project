@@ -384,7 +384,7 @@ DecideZeroRowsEffectively :=
           B2 := BasisOfRowsCoeff( B2, SS );
           S := HomalgVoidMatrix( GlobalR );
           A3 := HomalgLocalMatrix( DecideZeroRowsEffectively( A1, B2, S ), R );
-          if IsZero( A3) then
+          if IsZero( A3 ) then
             S := S * SS;
             u := CertainColumns( S, [ m + 1 .. n + m ] ) * gens;
             u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );

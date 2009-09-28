@@ -6,54 +6,95 @@
 ##  <P/>and we want to use the functor Hom(Hom(-,&ZZ;/2^7&ZZ;),&ZZ;/2^4&ZZ;).
 ##  <Example>
 ##    <![CDATA[
-##    gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );
-##    <A homalg external ring residing in the CAS GAP running with pid 22107>
-##    gap> R := LocalizeAt( GlobalR , [ 2 ] );
-##    <A homalg local ring>
-##    gap> M := LeftPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^5 ], GlobalR ) , R ) );
-##    <A cyclic left module presented by an unknown number of relations for a cyclic generator>
-##    gap> _M := LeftPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^3 ], GlobalR ) , R ) );
-##    <A cyclic left module presented by an unknown number of relations for a cyclic generator>
-##    gap> alpha2 := HomalgMap( HomalgLocalMatrix( HomalgMatrix( [ 1 ] , GlobalR ) , R ) , M, _M );
-##    <A "homomorphism" of left modules>
-##    gap> M_ := Kernel( alpha2 );
-##    <A cyclic left module presented by 1 relation for a cyclic generator>
-##    gap> alpha1 := KernelEmb( alpha2 );
-##    <A monomorphism of left modules>
-##    gap> seq := HomalgComplex( alpha2 );
-##    <A "complex" containing a single morphism of left modules at degrees [ 0 .. 1 ]>
-##    gap> Add( seq, alpha1 );
-##    gap>
-##    gap> IsShortExactSequence( seq );
-##    true
-##    gap> K := LeftPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^7 ], GlobalR ) , R ));
-##    <A cyclic left module presented by an unknown number of relations for a cyclic generator>
-##    gap> L := RightPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^4 ], GlobalR ) , R ));
-##    <A cyclic right module on a cyclic generator satisfying an unknown number of relations>
-##    gap> triangle := LHomHom( 4, seq, K, L, "t" );
-##    <An exact triangle containing 3 morphisms of left complexes at degrees [ 1, 2, 3, 1 ]>
-##    gap> lehs := LongSequence( triangle );
-##    <A sequence containing 14 morphisms of left modules at degrees [ 0 .. 14 ]>
-##    gap> ByASmallerPresentation( lehs );
-##    <A non-zero sequence containing 14 morphisms of left modules at degrees [ 0 .. 14 ]>
-##    gap> IsExactSequence( lehs );
-##    true
+# # gap> LoadPackage( "RingsForHomalg" );;
+##   gap> LoadPackage( "LocalizeRingForHomalg" );;
+##   gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );
+##   <A homalg external ring residing in the CAS GAP running with pid 13033>
+##   gap> R := LocalizeAt( GlobalR , [ 2 ] );
+##   <A homalg local ring>
+##   gap> M := LeftPresentation(\
+##   >        HomalgLocalMatrix(\
+##   >          HomalgMatrix( [ 2^5 ], GlobalR ),\
+##   >        R )\
+##   >      );
+##   <A cyclic left module presented by an unknown number of relations for a cyclic\
+##    generator>
+##   gap> _M := LeftPresentation(\
+##   >         HomalgLocalMatrix(\
+##   >           HomalgMatrix( [ 2^3 ], GlobalR ),\
+##   >         R ) \
+##   >       );
+##   <A cyclic left module presented by an unknown number of relations for a cyclic\
+##    generator>
+##   gap> alpha2 := HomalgMap(\
+##   >             HomalgLocalMatrix( HomalgMatrix( [ 1 ], GlobalR ), R ),\
+##   >             M,\
+##   >             _M\
+##   >           );
+##   <A "homomorphism" of left modules>
+##   gap> M_ := Kernel( alpha2 );
+##   <A cyclic left module presented by an unknown number of relations for a cyclic\
+##    generator>
+##   gap> alpha1 := KernelEmb( alpha2 );
+##   <A monomorphism of left modules>
+##   gap> seq := HomalgComplex( alpha2 );
+##   <A "complex" containing a single morphism of left modules at degrees
+##   [ 0 .. 1 ]>
+##   gap> Add( seq, alpha1 );
+##   gap> IsShortExactSequence( seq );
+##   true
+##   gap> K := LeftPresentation(\
+##   >        HomalgLocalMatrix(\
+##   >          HomalgMatrix( [ 2^7 ], GlobalR ),
+##   >        R )
+##   >      );
+##   <A cyclic left module presented by an unknown number of relations for a cyclic\
+##    generator>
+##   gap> L := RightPresentation(\
+##   >        HomalgLocalMatrix(\
+##   >          HomalgMatrix( [ 2^4 ], GlobalR ),\
+##   >        R )\
+##   >      );
+##   <A cyclic right module on a cyclic generator satisfying an unknown number of r\
+##   elations>
+##   gap> triangle := LHomHom( 4, seq, K, L, "t" );
+##   <An exact triangle containing 3 morphisms of left complexes at degrees
+##   [ 1, 2, 3, 1 ]>
+##   gap> lehs := LongSequence( triangle );
+##   <A sequence containing 14 morphisms of left modules at degrees [ 0 .. 14 ]>
+##   gap> ByASmallerPresentation( lehs );
+##   <A non-zero sequence containing 14 morphisms of left modules at degrees
+##   [ 0 .. 14 ]>
+##   gap> IsExactSequence( lehs );
+##   true
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
 
-LoadPackage( "RingsForHomalg" );
+LoadPackage( "RingsForHomalg" );;
 
-LoadPackage( "LocalizeRingForHomalg" );
+LoadPackage( "LocalizeRingForHomalg" );;
 
 GlobalR := HomalgRingOfIntegersInExternalGAP(  );
 
 R := LocalizeAt( GlobalR , [ 2 ] );
 
-M := LeftPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^5 ], GlobalR ) , R ) );
-_M := LeftPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^3 ], GlobalR ) , R ) );
+M := LeftPresentation(\
+       HomalgLocalMatrix(\
+         HomalgMatrix( [ 2^5 ], GlobalR ),\
+       R )\
+     );
+_M := LeftPresentation(\
+        HomalgLocalMatrix(\
+          HomalgMatrix( [ 2^3 ], GlobalR ),\
+        R ) \
+      );
 
-alpha2 := HomalgMap( HomalgLocalMatrix( HomalgMatrix( [ 1 ] , GlobalR ) , R ) , M, _M );
+alpha2 := HomalgMap(\
+            HomalgLocalMatrix( HomalgMatrix( [ 1 ], GlobalR ), R ),\
+            M,\
+            _M\
+          );
 M_ := Kernel( alpha2 );
 alpha1 := KernelEmb( alpha2 );
 seq := HomalgComplex( alpha2 );
@@ -61,8 +102,16 @@ Add( seq, alpha1 );
 
 IsShortExactSequence( seq );
 
-K := LeftPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^7 ], GlobalR ) , R ));
-L := RightPresentation( HomalgLocalMatrix( HomalgMatrix( [ 2^4 ], GlobalR ) , R ));
+K := LeftPresentation(\
+       HomalgLocalMatrix(\
+         HomalgMatrix( [ 2^7 ], GlobalR ),
+       R )
+     );
+L := RightPresentation(\
+       HomalgLocalMatrix(\
+         HomalgMatrix( [ 2^4 ], GlobalR ),\
+       R )\
+     );
 
 triangle := LHomHom( 4, seq, K, L, "t" );
 lehs := LongSequence( triangle );

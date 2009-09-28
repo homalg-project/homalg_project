@@ -152,7 +152,7 @@ InstallMethod( AssociatedComputationRing,
 ##  <#GAPDoc Label="AssociatedGlobalRing:ring">
 ##  <ManSection>
 ##    <Oper Arg="R" Name="AssociatedGlobalRing" Label="for homalg local rings"/>
-##    <Returns>a global &homalg; ring</Returns>
+##    <Returns>a (global) &homalg; ring</Returns>
 ##    <Description>
 ##      The global &homalg; ring, from which the local ring <A>R</A> was created.
 ##    </Description>
@@ -182,7 +182,7 @@ InstallMethod( AssociatedGlobalRing,
 ##  <#GAPDoc Label="AssociatedGlobalRing:element">
 ##  <ManSection>
 ##    <Oper Arg="r" Name="AssociatedGlobalRing" Label="for homalg local ring elements"/>
-##    <Returns>a global &homalg; ring</Returns>
+##    <Returns>a (global) &homalg; ring</Returns>
 ##    <Description>
 ##      The global &homalg; ring, from which the local ring element <A>r</A> was created.
 ##    </Description>
@@ -204,7 +204,7 @@ InstallMethod( AssociatedGlobalRing,
 ##  <#GAPDoc Label="AssociatedGlobalRing:matrix">
 ##  <ManSection>
 ##    <Oper Arg="mat" Name="AssociatedGlobalRing" Label="for homalg local matrices"/>
-##    <Returns>a global &homalg; ring</Returns>
+##    <Returns>a (global) &homalg; ring</Returns>
 ##    <Description>
 ##      The global &homalg; ring, from which the local matrix <A>mat</A> was created.
 ##    </Description>
@@ -385,7 +385,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the &homalg; ring involved in these computations.
+##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -423,7 +423,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the &homalg; ring involved in these computations.
+##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -455,7 +455,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 ##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg local matrices"/>
 ##    <Returns>a string</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A> as a string. Here <A>R</A> is the &homalg; ring involved in these computations.
+##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A> as a string. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -479,7 +479,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
 ##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Returns>a local ring element</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A>. Here <A>R</A> is the &homalg; ring involved in these computations.
+##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A>. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
