@@ -36,7 +36,7 @@ InstallValue( LIMOR,
               "IsIsomorphism",
 	      "IsAutomorphism" ],
             intrinsic_attributes :=
-            [ "DegreeOfMorphism" ]
+            [ "DegreeOfMorphism" ],
 	    )
         );
 

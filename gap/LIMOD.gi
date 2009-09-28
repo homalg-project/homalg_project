@@ -43,7 +43,7 @@ InstallValue( LIMOD,
               "PurityFiltration",
               "CodegreeOfPurity",
               "BettiDiagram",
-              "CastelnuovoMumfordRegularity" ]
+              "CastelnuovoMumfordRegularity" ],
             )
         );
 

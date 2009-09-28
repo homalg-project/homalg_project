@@ -146,7 +146,7 @@ InstallMethod( ShallowCopy,
                       Eval, RP!.ShallowCopy( M )
                       ], R );
         
-        BlindlyCopyMatrixProperties( M, MM );
+        MatchPropertiesAndAttributes( M, MM, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
         
         return MM;
     fi;
@@ -175,7 +175,7 @@ InstallMethod( ShallowCopy,
         
         if not IsIdenticalObj( Eval( M ), Eval( MM ) ) then
             
-            BlindlyCopyMatrixProperties( M, MM );
+            MatchPropertiesAndAttributes( M, MM, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
             
             return MM;
             

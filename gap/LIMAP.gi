@@ -20,7 +20,8 @@
 
 InstallValue( LIMAP,
         rec(
-            color := "\033[4;30;46m" )
+            color := "\033[4;30;46m",
+            )
         );
 
 ##

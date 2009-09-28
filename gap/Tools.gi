@@ -1464,7 +1464,11 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
     RP := homalgTable( R );
     
     if IsBound(RP!.GetColumnIndependentUnitPositions) then
-        return RP!.GetColumnIndependentUnitPositions( M, pos_list );
+        pos := RP!.GetColumnIndependentUnitPositions( M, pos_list );
+        if pos <> [ ] then
+            SetIsZero( M, false );
+        fi;
+        return pos;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1483,6 +1487,10 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
         od;
     od;
     
+    if pos <> [ ] then
+        SetIsZero( M, false );
+    fi;
+    
     return pos;
     
 end );
@@ -1500,7 +1508,11 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
     RP := homalgTable( R );
     
     if IsBound(RP!.GetRowIndependentUnitPositions) then
-        return RP!.GetRowIndependentUnitPositions( M, pos_list );
+        pos := RP!.GetRowIndependentUnitPositions( M, pos_list );
+        if pos <> [ ] then
+            SetIsZero( M, false );
+        fi;
+        return pos;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1519,6 +1531,10 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
         od;
     od;
     
+    if pos <> [ ] then
+        SetIsZero( M, false );
+    fi;
+    
     return pos;
     
 end );
@@ -1529,14 +1545,18 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, pos_list )
-    local R, RP, m, n, i, j;
+    local R, RP, pos, m, n, i, j;
     
     R := HomalgRing( M );
     
     RP := homalgTable( R );
     
     if IsBound(RP!.GetUnitPosition) then
-        return RP!.GetUnitPosition( M, pos_list );
+        pos := RP!.GetUnitPosition( M, pos_list );
+        if IsList( pos ) and IsPosInt( pos[1] ) and IsPosInt( pos[2] ) then
+            SetIsZero( M, false );
+        fi;
+        return pos;
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -1547,6 +1567,7 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
             if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
+                SetIsZero( M, false );
                 return [ i, j ];
             fi;
         od;
@@ -1557,7 +1578,7 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
 end );
 
 ##
-InstallMethod( DivideEntryByUnit,		### defines: DivideRowByUnit
+InstallMethod( DivideEntryByUnit,		### defines: DivideEntryByUnit
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsPosInt, IsRingElement ],
         
@@ -1584,7 +1605,7 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
         [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
         
   function( M, i, u, j )
-    local R, RP, a;
+    local R, RP, a, mat;
     
     R := HomalgRing( M );
     
@@ -1616,11 +1637,17 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
     ## since all what we did had a side effect on Eval( M ) ignoring
     ## possible other Eval's, e.g. EvalCompose, we want to return
     ## a new homalg matrix object only containing Eval( M )
-    return HomalgMatrixWithAttributes( [
-                 Eval, Eval( M ),
-                 NrRows, NrRows( M ),
-                 NrColumns, NrColumns( M ),
-                 ], R );
+    mat := HomalgMatrixWithAttributes( [
+                   Eval, Eval( M ),
+                   NrRows, NrRows( M ),
+                   NrColumns, NrColumns( M ),
+                   ], R );
+    
+    if HasIsZero( M ) and not IsZero( M ) then
+        SetIsZero( mat, false );
+    fi;
+    
+    return mat;
     
 end );
 
@@ -1630,7 +1657,7 @@ InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
         [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
         
   function( M, j, u, i )
-    local R, RP, a;
+    local R, RP, a, mat;
     
     R := HomalgRing( M );
     
@@ -1662,11 +1689,17 @@ InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
     ## since all what we did had a side effect on Eval( M ) ignoring
     ## possible other Eval's, e.g. EvalCompose, we want to return
     ## a new homalg matrix object only containing Eval( M )
-    return HomalgMatrixWithAttributes( [
-                 Eval, Eval( M ),
-                 NrRows, NrRows( M ),
-                 NrColumns, NrColumns( M ),
-                 ], R );
+    mat := HomalgMatrixWithAttributes( [
+                   Eval, Eval( M ),
+                   NrRows, NrRows( M ),
+                   NrColumns, NrColumns( M ),
+                   ], R );
+    
+    if HasIsZero( M ) and not IsZero( M ) then
+        SetIsZero( mat, false );
+    fi;
+    
+    return mat;
     
 end );
 

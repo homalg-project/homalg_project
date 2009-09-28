@@ -20,7 +20,43 @@
 
 InstallValue( LIMAT,
         rec(
-            color := "\033[4;30;46m" )
+            color := "\033[4;30;46m",
+            intrinsic_properties :=
+            [ "IsZero",
+              "IsIdentityMatrix",
+              "IsPermutationMatrix",
+              "IsSubidentityMatrix",
+              "IsLeftRegularMatrix",
+              "IsRightRegularMatrix",
+              "IsInvertibleMatrix",
+              "IsLeftInvertibleMatrix",
+              "IsRightInvertibleMatrix",
+              "IsEmptyMatrix",
+              "IsDiagonalMatrix",
+              "IsScalarMatrix",
+              "IsUpperTriangularMatrix",
+              "IsLowerTriangularMatrix",
+              "IsStrictUpperTriangularMatrix",
+              "IsStrictLowerTriangularMatrix",
+              "IsUpperStairCaseMatrix",
+              "IsLowerStairCaseMatrix",
+              "IsBasisOfRowsMatrix",
+              "IsBasisOfColumnsMatrix",
+              "IsReducedBasisOfRowsMatrix",
+              "IsReducedBasisOfColumnsMatrix" ],
+            intrinsic_attributes :=
+            [ "NrRows",
+              "NrColumns",
+              "RowRankOfMatrix",
+              "ColumnRankOfMatrix",
+              "ZeroRows",
+              "ZeroColumns",
+              "NonZeroRows",
+              "NonZeroColumns",
+              "PositionOfFirstNonZeroEntryPerRow",
+              "PositionOfFirstNonZeroEntryPerColumn",
+              "DegreesOfEntries" ],
+            )
         );
 
 ##
