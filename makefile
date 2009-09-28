@@ -16,7 +16,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL maketest.g
+	gapL -x 80 maketest.g
 
 archive: doc
 	(mkdir -p ../tar; cd ..; tar czvf tar/LocalizeRingForHomalg.tar.gz --exclude ".DS_Store" LocalizeRingForHomalg/doc/*.* LocalizeRingForHomalg/gap/*.{gi,gd} LocalizeRingForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} LocalizeRingForHomalg/examples/*.g)

@@ -4,7 +4,7 @@ Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 LoadPackage( "LocalizeRingForHomalg" );
 
-SetAssertionLevel( 4 );
+#SetAssertionLevel( 4 );
 
 R0 := LocalizeAtZero( Qxyz );
 

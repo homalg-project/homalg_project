@@ -19,6 +19,9 @@ list := [
          "../gap/LocalizeRingMora.gd",
          "../gap/LocalizeRingMora.gi",
          "../examples/Hom\(Hom\(-\,Z128\)\,Z16\)_On_Seq.g",
+         "../examples/QuickstartZ.g",
+         "../examples/ResidueClass.g",
+         "../examples/EasyPoly.g"
          ];
 
 MakeGAPDocDoc( "doc", "LocalizeRingForHomalg", list, "LocalizeRingForHomalg" );

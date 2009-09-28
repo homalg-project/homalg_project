@@ -136,6 +136,7 @@ DecideZeroRowsEffectively :=
     ComputationRing := AssociatedComputationRing( R );
     
     T1 := HomalgVoidMatrix( ComputationRing );
+    #little remark: the return value of DecideZeroRowsEffectively also has a denominator as an attribute, which is used in HomalgLocalMatrix
     result := HomalgLocalMatrix( DecideZeroRowsEffectively( Numerator( A ), Numerator ( B ), T1 ), Denominator( A ), R );
     
     if IsBound(T1!.Denominator) then
@@ -159,6 +160,7 @@ DecideZeroColumnsEffectively :=
     ComputationRing := AssociatedComputationRing( R );
     
     T1 := HomalgVoidMatrix( ComputationRing );
+    #little remark: the return value of DecideZeroColumnsEffectively also has a denominator as an attribute, which is used in HomalgLocalMatrix
     result := HomalgLocalMatrix( DecideZeroColumnsEffectively( Numerator( A ), Numerator ( B ), T1 ), Denominator( A ), R );
     
     if IsBound(T1!.Denominator) then

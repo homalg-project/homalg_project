@@ -856,7 +856,7 @@ InstallMethod( LocalizePolynomialRingAtZero,
 ##    <Func Arg="numer, R" Name="HomalgLocalRingElement" Label="constructor for local ring elements using a given numerator and one as denominator"/>
 ##    <Returns>a local ring element</Returns>
 ##    <Description>
-##      Creates the local ring element <A>numer</A><M>/</M><A>denom</A> or in the second case <M>numer/1</M> for the local ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.
+##      Creates the local ring element <A>numer</A><M>/</M><A>denom</A> or in the second case <M>numer/1</M> for the local ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be a string describing a valid global ring element or from the global ring or computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
