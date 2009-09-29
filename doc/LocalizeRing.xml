@@ -13,9 +13,9 @@
   
   <Heading>Localize rings</Heading>
   
-  The package &LocalizeRingForHomalg; defines the classes of local(ized) rings, local ring elements and local matrices. 
+  The package &LocalizeRingForHomalg; defines the classes of local(ized) rings, local ring elements and local matrices. These three objects can be used as data structures &homalg; can rely on to do homological computations.
   
-  <P/>A &homalg; local ring element contains two &homalg; ring elements numerator and denominator. A &homalg; local matrix contains a global &homalg; matrix as a numerator and a ring element as a denominator.
+  <P/>A &homalg; local ring element contains two &homalg; ring elements numerator (&see; <Ref Attr="Numerator" Label="for homalg local ring elements"/>) and denominator (&see; <Ref Attr="Denominator" Label="for homalg local ring elements"/>). A &homalg; local matrix contains a global &homalg; matrix as a numerator (&see; <Ref Attr="Numerator" Label="for homalg local matrices"/>) and a ring element as a denominator (&see; <Ref Attr="Denominator" Label="for homalg local matrices"/>). Their constructors are <Ref Attr="HomalgLocalRingElement" Label="constructor for local ring elements using numerator and denominator"/> and <Ref Attr="HomalgLocalMatrix" Label="constructor for local matrices using numerator and denominator"/>.
   
   <P/>The local rings most prominently can be used with methods known from general &homalg; rings. The methods for doing the computations are presented in the appendix (<Ref Appendix="FileOverview" />), since they are not for external use. The new attributes and operations are documented here.
   
