@@ -22,6 +22,7 @@ list := [
          "../examples/QuickstartZ.g",
          "../examples/ResidueClass.g",
          "../examples/EasyPoly.g",
+         "../examples/Intersection.g",
           ];
 
 TestManualExamples( "doc", "LocalizeRingForHomalg.xml", list );

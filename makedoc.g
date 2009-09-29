@@ -22,6 +22,7 @@ list := [
          "../examples/QuickstartZ.g",
          "../examples/ResidueClass.g",
          "../examples/EasyPoly.g",
+         "../examples/Intersection.g",
          ];
 
 MakeGAPDocDoc( "doc", "LocalizeRingForHomalg", list, "LocalizeRingForHomalg" );
