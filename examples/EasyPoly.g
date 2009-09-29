@@ -63,51 +63,40 @@
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
-
 LoadPackage("RingsForHomalg");;
 LoadPackage("LocalizeRingForHomalg");;
 F3xy:=HomalgRingOfIntegersInSingular(3) * "x,y";;
-
 x1 := HomalgRingElement( "x+2", F3xy );;
 y0 := HomalgRingElement( "y", F3xy );;
-
 R00 := LocalizeAtZero( F3xy );;
 R10 := LocalizeAt( F3xy, [ x1, y0 ] );;
-
 RMora := LocalizePolynomialRingAtZeroWithMora( F3xy );;
-
 M := HomalgMatrix( "[\
        y^3+2*y^2+x+x^2+2*x*y+y^4+x*y^2, \
        x*y^3+2*x^2*y+y^3+y^2+x+2*y+x^2, \
        x^2*y^2+2*x^3+x^2*y+y^3+2*x^2+2*x*y+y^2+2*y\
      ]", 1, 3, F3xy );;
 I := RightPresentation( M );;
-
 M00 := HomalgLocalMatrix( M, R00 );;
 M10 := HomalgLocalMatrix( M, R10 );;
 MMora := HomalgLocalMatrix( M, RMora );;
-
 I00 := RightPresentation( M00 );;
 I10 := RightPresentation( M10 );;
 IMora := RightPresentation( MMora );;
-
 #This ring is able to compute a standard basis of the module.
 Display(IMora);
 ByASmallerPresentation(IMora);
 Display(IMora);
-
 #This ring recognizes, that the module is not zero,
 #but is not able to find better generators...
 Display(I00);
 ByASmallerPresentation(I00);
 Display(I00);
-
 #...but we are able to change the ring, to compute a nicer basis.
 I00ToMora := RMora * I00;
 Display(I00ToMora);
 ByASmallerPresentation(I00ToMora);
 Display(I00ToMora);
-
 #We are able to find out, that this module is actually zero.
 Display(I10);
 ByASmallerPresentation(I10);

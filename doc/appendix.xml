@@ -13,7 +13,7 @@
 
 <Heading>Overview of the &LocalizeRingForHomalg; Package Source Code</Heading>
 
-  This appendix is included in the documentation to shine some light on the mathematical backgrounds of this Package. Neither is it needed to work with this package nor can the methods presented here be called directly.
+  This appendix is included in the documentation to shine some light on the mathematical backgrounds of this Package. Neither is it needed to work with this package nor should the methods presented here be called directly.
   
   <P/>We only present the simpler procedures, where no transformation matrices are computed, since the computation of transformation matrices carries no further mathematical ideas.
   
@@ -21,7 +21,7 @@
 
      <Heading>The generic Methods</Heading>
      
-     There are some methods in localized rings, where homalg is able to fall back on procedures of the corresponding global ring. This is quite easy to see in these cases. Furthermore these methods work quite is together with Mora's algorithm as implemented in Singular, since we can treat it like a global ring.
+     There are some methods in localized rings, where homalg is able to fall back on procedures of the corresponding global ring. Furthermore these methods work quite good together with Mora's algorithm as implemented in Singular, since we can treat it like a global ring.
      
      We will present some methods as an example, to show the idea:
      

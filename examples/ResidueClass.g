@@ -135,18 +135,14 @@
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
-
 LoadPackage( "RingsForHomalg" );;
 LoadPackage( "LocalizeRingForHomalg" );;
-
 Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
 wmat := HomalgMatrix( "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]", 2, 2, Qxy );
 ec := HomalgRingElement( "-x^3-x^2+2*y^2", Qxy );
-
 #compute globally
 W := LeftPresentation( wmat );
 Res := Resolution( 3 , W );
-
 #try a localization of a residue class ring
 R1 := Qxy / ec;
 wmat1 := R1 * wmat;
@@ -155,7 +151,6 @@ wmat10 := HomalgLocalMatrix( wmat, R10 );
 #wmat10 := R10 * wmat;
 W10 := LeftPresentation( wmat10 );
 Res10 := Resolution( 3 , W10 );
-
 #try a residue class ring of a localization
 R0 := LocalizeAtZero( Qxy );
 wmat0 := R0 * wmat;
@@ -163,7 +158,6 @@ R01 := R0 / ( ec / R0 );
 wmat01 := R01 * wmat0;
 W01 := LeftPresentation( wmat01 );
 Res01 := Resolution( 3 , W01 );
-
 Display( Res );
 Display( Res01 );
 Display( Res10 );

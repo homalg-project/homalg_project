@@ -6,10 +6,9 @@
 ##  <P/>and we want to use the functor Hom(Hom(-,&ZZ;/2^7&ZZ;),&ZZ;/2^4&ZZ;).
 ##  <Example>
 ##    <![CDATA[
-# # gap> LoadPackage( "RingsForHomalg" );;
+##   gap> LoadPackage( "RingsForHomalg" );;
 ##   gap> LoadPackage( "LocalizeRingForHomalg" );;
-##   gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );
-##   <A homalg external ring residing in the CAS GAP running with pid 13033>
+##   gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );;
 ##   gap> R := LocalizeAt( GlobalR , [ 2 ] );
 ##   <A homalg local ring>
 ##   gap> M := LeftPresentation(\
@@ -70,15 +69,10 @@
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
-
 LoadPackage( "RingsForHomalg" );;
-
 LoadPackage( "LocalizeRingForHomalg" );;
-
-GlobalR := HomalgRingOfIntegersInExternalGAP(  );
-
+GlobalR := HomalgRingOfIntegersInExternalGAP(  );;
 R := LocalizeAt( GlobalR , [ 2 ] );
-
 M := LeftPresentation(\
        HomalgLocalMatrix(\
          HomalgMatrix( [ 2^5 ], GlobalR ),\
@@ -89,7 +83,6 @@ _M := LeftPresentation(\
           HomalgMatrix( [ 2^3 ], GlobalR ),\
         R ) \
       );
-
 alpha2 := HomalgMap(\
             HomalgLocalMatrix( HomalgMatrix( [ 1 ], GlobalR ), R ),\
             M,\
@@ -99,9 +92,7 @@ M_ := Kernel( alpha2 );
 alpha1 := KernelEmb( alpha2 );
 seq := HomalgComplex( alpha2 );
 Add( seq, alpha1 );
-
 IsShortExactSequence( seq );
-
 K := LeftPresentation(\
        HomalgLocalMatrix(\
          HomalgMatrix( [ 2^7 ], GlobalR ),
@@ -112,9 +103,7 @@ L := RightPresentation(\
          HomalgMatrix( [ 2^4 ], GlobalR ),\
        R )\
      );
-
 triangle := LHomHom( 4, seq, K, L, "t" );
 lehs := LongSequence( triangle );
 ByASmallerPresentation( lehs );
-
 IsExactSequence( lehs );
