@@ -195,6 +195,21 @@ InstallMethod( RandomProjectivePlaneCurve,
     
 end );
 
+
+##
+InstallMethod( RandomProjectivePlaneCurve,
+        "constructor for projective plane curves specified by degree and base points",
+        [ IsInt, IsList ],
+        
+  function( d, points )
+    local mults;
+    
+    mults := ListWithIdenticalEntries( Length( points ), 1 );
+    
+    return RandomProjectivePlaneCurve( d, points, mults );
+    
+end );
+
 ##
 InstallMethod( RandomProjectivePlaneCurve,
         "constructor for projective plane curves specified by degree",

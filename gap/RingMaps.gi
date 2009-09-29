@@ -10,7 +10,7 @@
 
 ####################################
 #
-# methods for operations:
+# methods for attributes:
 #
 ####################################
 
@@ -57,6 +57,57 @@ InstallMethod( KernelSubmodule,
     fi;
     
     return Subobject( rel, S );
+    
+end );
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##  <#GAPDoc Label="SegreEmbedding">
+##  <ManSection>
+##    <Meth Arg="R" Name="SegreEmbedding"/>
+##    <Returns>a &homalg; ring map</Returns>
+##    <Description>
+##      The Segre embedding.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( SegreEmbedding,
+        "for homalg ring maps",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, s )
+    local weights, l, segre, N, S;
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    if weights = [ ] then
+        Error( "empty list of weights\n" );
+    elif not ForAll( weights, IsList ) then
+        Error( "not all weights are multi-weights\n" );
+    fi;
+    
+    l := Length( weights[1] );
+    
+    segre := MonomialMatrix( ListWithIdenticalEntries( l, 1 ), R );
+    
+    N := NrRows( segre );
+    
+    S := Concatenation( s, String( 0 ), "..", s, String( N - 1 ) );
+    
+    S := CoefficientsRing( R ) * S;
+    
+    segre := RingMap( segre, S, R );
+    
+    SetIsEpimorphism( segre, true );
+    
+    SetDegreeOfMorphism( segre, 0 );
+    
+    return segre;
     
 end );
 

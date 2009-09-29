@@ -129,3 +129,145 @@ InstallMethod( Diff,
     
 end );
 
+##
+InstallMethod( AffineDimension,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, RP;
+    
+    if IsBound( M!.AffineDimension ) then
+        return M!.AffineDimension;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        return -1;
+    elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
+        return KrullDimension( R );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.AffineDimension) then
+        M!.AffineDimension := RP!.AffineDimension( M );
+        return M!.AffineDimension;
+    fi;
+    
+    if IsHomalgExternalRingRep( R ) then
+        Error( "could not find a procedure called AffineDimension in the homalgTable of the external ring\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( AffineDegree,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, RP;
+    
+    if IsBound( M!.AffineDegree ) then
+        return M!.AffineDegree;
+    fi;
+    
+    if IsZero( M ) then
+        return 0;
+    elif NrRelations( M ) = 0 then
+        return Rank( M );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.AffineDegree) then
+        M!.AffineDegree := RP!.AffineDegree( M );
+	return M!.AffineDegree;
+    fi;
+    
+    if IsHomalgExternalRingRep( R ) then
+        Error( "could not find a procedure called AffineDegree in the homalgTable of the external ring\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( ConstantTermOfHilbertPolynomial,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, RP;
+    
+    if IsBound( M!.ConstantTermOfHilbertPolynomial ) then
+        return M!.ConstantTermOfHilbertPolynomial;
+    fi;
+    
+    if IsZero( M ) then
+        return 0;
+    elif NrRelations( M ) = 0 then
+        return Rank( M );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ConstantTermOfHilbertPolynomial) then
+        M!.ConstantTermOfHilbertPolynomial := RP!.ConstantTermOfHilbertPolynomial( M );
+	return M!.ConstantTermOfHilbertPolynomial;
+    fi;
+    
+    if IsHomalgExternalRingRep( R ) then
+        Error( "could not find a procedure called ConstantTermOfHilbertPolynomial in the homalgTable of the external ring\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( PrimaryDecomposition,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, RP;
+    
+    if IsBound( M!.PrimaryDecomposition ) then
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.PrimaryDecomposition) then
+        M!.PrimaryDecomposition := RP!.PrimaryDecomposition( M );
+	return M!.PrimaryDecomposition;
+    fi;
+    
+    if IsHomalgExternalRingRep( R ) then
+        Error( "could not find a procedure called PrimaryDecomposition in the homalgTable of the external ring\n" );
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    TryNextMethod( );
+    
+end );
+

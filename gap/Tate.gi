@@ -29,8 +29,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##    <Description>
 ##      Compute the Tate resolution of the sheaf <A>M</A>.
 ##      <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2,x3";;
-##  gap> A := KoszulDualRing( S, "e0,e1,e2,e3" );;
+##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";;
+##  gap> A := KoszulDualRing( S, "e0..e3" );;
 ##  ]]></Example>
 ##  In the following we construct the different exterior powers of the cotangent bundle
 ##  shifted by <M>1</M>. Observe how a single <M>1</M> travels along the diagnoal

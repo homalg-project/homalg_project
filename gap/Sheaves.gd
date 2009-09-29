@@ -26,7 +26,7 @@ DeclareCategory( "IsSetOfUnderlyingModules",
 ##    <Filt Type="Category" Arg="O" Name="IsHomalgSheafOfRings"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of sheaves of rings. <Br/><Br/>
+##      The &GAP; category of sheaves of rings. <P/>
 ##      (It is a subcategory of the &GAP; category
 ##      <C>IsHomalgRingOrObject</C>.)
 ##    </Description>
@@ -41,7 +41,7 @@ DeclareCategory( "IsHomalgSheafOfRings",
 ##    <Filt Type="Category" Arg="E" Name="IsHomalgSheaf"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of sheaves. <Br/><Br/>
+##      The &GAP; category of sheaves. <P/>
 ##      (It is a subcategory of the &GAP; categories
 ##      <C>IsHomalgRingOrObject</C> and <C>IsHomalgObject</C>.)
 ##    </Description>
@@ -56,7 +56,7 @@ DeclareCategory( "IsHomalgSheaf",
 ##    <Filt Type="Category" Arg="phi" Name="IsHomalgSheafMap"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of sheaf maps. <Br/><Br/>
+##      The &GAP; category of sheaf maps. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgMorphism</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -70,7 +70,7 @@ DeclareCategory( "IsHomalgSheafMap",
 ##    <Filt Type="Category" Arg="phi" Name="IsHomalgSheafSelfMap"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of sheaf self-maps. <Br/><Br/>
+##      The &GAP; category of sheaf self-maps. <P/>
 ##      (It is a subcategory of the &GAP; categories
 ##       <C>IsHomalgSheafMap</C> and <C>IsHomalgEndomorphism</C>.)
 ##    </Description>

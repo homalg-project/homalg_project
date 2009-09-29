@@ -23,5 +23,8 @@ DeclareOperation( "RandomProjectivePlaneCurve",
         [ IsInt, IsList, IsList ] );
 
 DeclareOperation( "RandomProjectivePlaneCurve",
+        [ IsInt, IsList ] );
+
+DeclareOperation( "RandomProjectivePlaneCurve",
         [ IsInt, IsHomalgModule ] );
 

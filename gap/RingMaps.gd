@@ -16,3 +16,6 @@
 
 # basic operations:
 
+DeclareOperation( "SegreEmbedding",
+        [ IsHomalgRing, IsString ] );
+

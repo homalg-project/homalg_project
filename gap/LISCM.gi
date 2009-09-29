@@ -27,6 +27,7 @@ InstallValue( LISCM,
               "IsSmooth" ],
             intrinsic_attributes :=
             [ "Genus",
+              "ArithmeticGenus",
               "Dimension" ]
             )
         );
@@ -117,4 +118,83 @@ end );
 # methods for attributes:
 #
 ####################################
+
+##
+InstallMethod( DegreeAsSubscheme,
+        "for schemes",
+        [ IsProjSchemeRep ],
+        
+  function( X )
+    
+    if AffineDimension( UnderlyingModule( X ) ) <= 0 then
+        return 0;
+    fi;
+    
+    return AffineDegree( UnderlyingModule( X ) );
+    
+end );
+
+##
+InstallMethod( Degree,
+        "for schemes",
+        [ IsProjSchemeRep ],
+        
+  function( X )
+    
+    return DegreeAsSubscheme( X );
+    
+end );
+
+##
+InstallMethod( Dimension,
+        "for schemes",
+        [ IsProjSchemeRep ],
+        
+  function( X )
+    
+    return AffineDimension( UnderlyingModule( X ) ) - 1;
+    
+end );
+
+##
+InstallMethod( ArithmeticGenus,
+        "for schemes",
+        [ IsProjSchemeRep ],
+        
+  function( X )
+    local P_0;
+    
+    P_0 := ConstantTermOfHilbertPolynomial( UnderlyingModule( X ) );
+    
+    return (-1)^Dimension( X ) * ( P_0 - 1 );
+    
+end );
+
+##
+InstallMethod( IrreducibleComponents,
+        "for schemes",
+        [ IsProjSchemeRep ],
+        
+  function( X )
+    local primary_decomposition;
+    
+    primary_decomposition := PrimaryDecomposition( UnderlyingModule( X ) );
+    
+    return List( primary_decomposition, J -> Scheme( J[1] ) );
+    
+end );
+
+##
+InstallMethod( ReducedScheme,
+        "for schemes",
+        [ IsProjSchemeRep ],
+        
+  function( X )
+    local primary_decomposition;
+    
+    primary_decomposition := PrimaryDecomposition( UnderlyingModule( X ) );
+    
+    return Scheme( Intersect( List( primary_decomposition, J -> J[2] ) ) );
+    
+end );
 

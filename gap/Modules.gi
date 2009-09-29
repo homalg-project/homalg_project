@@ -192,7 +192,7 @@ InstallMethod( MonomialMatrix,
     
     w := ListOfDegreesOfMultiGradedRing( l, R, weights );
     
-    mon := List( [ 1 .. l ] , i -> MonomialMatrix( d[ l - i + 1 ], R, w[i] ) );
+    mon := List( [ 1 .. l ] , i -> MonomialMatrix( d[i], R, w[i] ) );
     
     return Iterated( mon, KroneckerMat );
     
@@ -211,11 +211,11 @@ end );
 
 ##  <#GAPDoc Label="MonomialMap">
 ##  <ManSection>
-##    <Oper Arg="i, M" Name="MonomialMap"/>
+##    <Oper Arg="d, M" Name="MonomialMap"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
 ##      The map from a free graded module onto all degree <A>d</A> monomial generators
-##      of the finitely generated &homalg; module <M>M</M>.
+##      of the finitely generated &homalg; module <A>M</A>.
 ##      <Example><![CDATA[
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;

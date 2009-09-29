@@ -11,10 +11,17 @@
 <Chapter Label="RingMaps">
 <Heading>Ring Maps</Heading>
 
+<Section Label="RingMaps:Attributes">
+<Heading>Ring Maps: Attributes</Heading>
+
+<#Include Label="KernelSubmodule">
+
+</Section>
+
 <Section Label="RingMaps:Operations and Functions">
 <Heading>Ring Maps: Operations and Functions</Heading>
 
-<#Include Label="KernelSubmodule">
+<#Include Label="SegreEmbedding">
 
 </Section>
 

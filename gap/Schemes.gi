@@ -47,6 +47,17 @@ BindGlobal( "TheTypeProjSchemes",
 ####################################
 
 ##
+InstallMethod( StructureSheafOfAmbientSpace,
+        "for schemes",
+        [ IsScheme ],
+        
+  function( X )
+    
+    return StructureSheafOfAmbientSpace( IdealSheaf( X ) );
+    
+end );
+
+##
 InstallMethod( DimensionOfAmbientSpace,
         "for schemes",
         [ IsScheme ],
@@ -99,7 +110,14 @@ InstallMethod( Proj,
         [ IsHomalgRing ],
         
   function( S )
-    local X, O, J;
+    local R, X, O, J;
+    
+    ## the ring carrying the weights
+    if HasAmbientRing( S ) then
+        R := AmbientRing( S );
+    else
+        R := S;
+    fi;
     
     if IsBound( S!.Proj ) then
         return S!.Proj;
@@ -154,7 +172,10 @@ InstallMethod( ViewObj,
         [ IsScheme ],
         
   function( X )
-    local prop_attr, print_non_empty, dim;
+    local first_property, second_property, prop_attr, print_non_empty, dim;
+    
+    first_property := false;
+    second_property := false;
     
     Print( "<A" );
     
@@ -193,18 +214,36 @@ InstallMethod( ViewObj,
     fi;
     
     if HasGenus( X ) then
-        Append( prop_attr, Concatenation( " of genus ", String( Genus( X ) ) ) );
+        Append( prop_attr, Concatenation( " with g=", String( Genus( X ) ) ) );
+	first_property := true;
+    fi;
+    
+    if HasArithmeticGenus( X ) then
+        if first_property then
+            Append( prop_attr, "," );
+            second_property := true;
+        else
+            Append( prop_attr, " with" );
+        fi;
+        Append( prop_attr, Concatenation( " p_a=", String( ArithmeticGenus( X ) ) ) );
     fi;
     
     if HasDegreeAsSubscheme( X ) then
-        Append( prop_attr, Concatenation( " and degree ", String( DegreeAsSubscheme( X ) ) ) );
+        if second_property then
+            Append( prop_attr, ", and" );
+        elif first_property then
+            Append( prop_attr, " and" );
+        else
+            Append( prop_attr, " of" );
+        fi;
+        Append( prop_attr, Concatenation( " degree ", String( DegreeAsSubscheme( X ) ) ) );
     fi;
     
     if print_non_empty and HasIsEmpty( X ) and not IsEmpty( X ) then
         Print( " non-empty" );
     fi;
     
-    Print( prop_attr, ">" );
+    Print( prop_attr, " in P^", DimensionOfAmbientSpace( X ),">" );
     
 end );
 

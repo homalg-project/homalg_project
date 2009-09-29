@@ -122,19 +122,6 @@ DeclareAttribute( "IdealSheaf",
 DeclareAttribute( "StructureSheaf",
         IsScheme );
 
-##  <#GAPDoc Label="DegreeAsSubscheme">
-##  <ManSection>
-##    <Attr Arg="X" Name="DegreeAsSubscheme"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      The degree of the scheme <A>X</A> viewed as a subscheme in its ambient space of definition.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "DegreeAsSubscheme",
-        IsScheme );
-
 ##  <#GAPDoc Label="SingularLocus">
 ##  <ManSection>
 ##    <Attr Arg="X" Name="SingularLocus"/>
@@ -174,6 +161,45 @@ DeclareAttribute( "CanonicalSheafOnAmbientSpace",
 DeclareAttribute( "CanonicalSheaf",
         IsScheme );
 
+##  <#GAPDoc Label="IrreducibleComponents">
+##  <ManSection>
+##    <Attr Arg="X" Name="IrreducibleComponents"/>
+##    <Returns>a list of schemes</Returns>
+##    <Description>
+##      The list irreducible components of the scheme <A>X</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IrreducibleComponents",
+        IsScheme );
+
+##  <#GAPDoc Label="ReducedScheme">
+##  <ManSection>
+##    <Attr Arg="X" Name="ReducedScheme"/>
+##    <Returns>a scheme</Returns>
+##    <Description>
+##      The reduced scheme associated to <A>X</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ReducedScheme",
+        IsScheme );
+
+##  <#GAPDoc Label="DegreeAsSubscheme">
+##  <ManSection>
+##    <Attr Arg="X" Name="DegreeAsSubscheme"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The degree of the scheme <A>X</A> viewed as a subscheme in its ambient space of definition.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreeAsSubscheme",
+        IsScheme );
+
 ## intrinsic attributes:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -191,6 +217,19 @@ DeclareAttribute( "CanonicalSheaf",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Genus",
+        IsScheme );
+
+##  <#GAPDoc Label="ArithmeticGenus">
+##  <ManSection>
+##    <Attr Arg="X" Name="ArithmeticGenus"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The arithmetic genus of the scheme <A>X</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ArithmeticGenus",
         IsScheme );
 
 ##  <#GAPDoc Label="Dimension:scheme">
