@@ -38,9 +38,9 @@ InstallValue( CommonHomalgTableForLocalizedRings,
                 fi;
                 
                 if IsHomalgInternalRingRep( GlobalRing ) then
-                  return Concatenation( RingName( GlobalRing ), "_<", JoinStringsWithSeparator( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ) ), ">" );
+                  return Concatenation( RingName( GlobalRing ), "_< ", JoinStringsWithSeparator( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ), ", " ), " >" );
                 else
-                  return Concatenation( RingName( GlobalRing ), "_<", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ), Name ) ), ">" );
+                  return Concatenation( RingName( GlobalRing ), "_< ", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfMaximalRightIdeal( R ) ), Name ), ", " ), " >" );
                 fi;
 
             end,
