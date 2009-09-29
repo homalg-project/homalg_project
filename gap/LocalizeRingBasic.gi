@@ -179,15 +179,16 @@ DecideZeroColumnsEffectively :=
 ##  <#GAPDoc Label="SyzygiesGeneratorsOfRows">
 ##  <ManSection>
 ##    <Meth Arg="M" Name="SyzygiesGeneratorsOfRows" Label="for local rings"/>
-##    <Meth Arg="M, N" Name="SyzygiesGeneratorsOfRows" Label="for local rings using further relations"/>
 ##    <Returns>a "basis" of the syzygies of the arguments (for details consult the homalg help)</Returns>
 ##    <Description>
-##    It is easy to see, that a global syzygy is also a local syzygy and vice versa when clearing the local Syzygy of its denominators. So this procedure brings the matrices to compute syzygies for on a common denominator if needed (in case <A>N</A> is given) and then calls the syzygy method of the underlying computation ring.
+##    It is easy to see, that a global syzygy is also a local syzygy and vice versa when clearing the local Syzygy of its denominators. So this procedure just calls the syzygy method of the underlying computation ring.
 ##      <Listing Type="Code"><![CDATA[
 SyzygiesGeneratorsOfRows :=
   function( M )
     
-    return HomalgLocalMatrix( SyzygiesGeneratorsOfRows( Numerator( M ) ), HomalgRing( M ) );
+    return HomalgLocalMatrix(\
+             SyzygiesGeneratorsOfRows( Numerator( M ) ), HomalgRing( M )\
+           );
     
   end,
 ##  ]]></Listing>
