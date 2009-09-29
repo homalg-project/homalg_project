@@ -104,7 +104,7 @@
 ##    -1:	<A non-zero left module presented by 25 relations for 12 generators>
 ##     0:	<A non-zero left module presented by 13 relations for 10 generators>
 ##  of
-##  <A left module presented by 38 relations for 24 generators>>
+##  <A left module presented by an unknown number of relations for 24 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -3 .. 0 ] and graded parts:
 ##    -3:	<A non-zero cyclic left module presented by 

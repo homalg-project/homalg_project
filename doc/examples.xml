@@ -22,6 +22,7 @@ This chapter gives examples for the usage of this package.
 <#Include Label="TorExt-Grothendieck">
 <#Include Label="TorExt">
 <#Include Label="CodegreeOfPurity">
+<#Include Label="HomHom">
 
 </Section>
 
@@ -31,6 +32,13 @@ This chapter gives examples for the usage of this package.
 <#Include Label="Schenck-3.2">
 <#Include Label="Schenck-8.3">
 <#Include Label="Schenck-8.3.3">
+
+</Section>
+
+<Section Label="CommutativeAlgebra">
+<Heading>Commutative Algebra</Heading>
+
+<#Include Label="Saturate">
 
 </Section>
 

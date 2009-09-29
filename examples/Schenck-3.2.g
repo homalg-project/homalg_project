@@ -22,8 +22,7 @@
 ##       2:  . 1 1
 ##  --------------
 ##  degree:  0 1 2
-##  gap> R := Qxyz * "w";;
-##  gap> SetWeightsOfIndeterminates( R, [ 1, 1, 1, 1 ] );
+##  gap> R := CoefficientsRing( Qxyz ) * "x,y,z,w";;
 ##  gap> nmat := HomalgMatrix( "[ z^2 - y*w, y*z - x*w, y^2 - x*z ]", 1, 3, R );
 ##  <A homalg external 1 by 3 matrix>
 ##  gap> N := RightPresentationWithDegrees( nmat );
@@ -57,7 +56,7 @@ Mr := Resolution( M );
 
 bettiM := BettiDiagram( Mr );
 
-R := Qxyz * "w";
+R := CoefficientsRing( Qxyz ) * "x,y,z,w";
 
 nmat := HomalgMatrix( "[ z^2 - y*w, y*z - x*w, y^2 - x*z ]", 1, 3, R );
 
