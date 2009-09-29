@@ -584,14 +584,6 @@ InstallGlobalFunction( CreateHomalgRing,
         table := CreateHomalgTable( r );
     fi;
     
-    ## compatibility mode:
-    for c in [ "SyzygiesGeneratorsOfRows", "SyzygiesGeneratorsOfColumns" ] do
-        if not IsBound( table!.(Flat( [ "Relative", c ] )) ) and
-           IsBound( table!.( c ) ) then
-            table!.(Flat( [ "Relative", c ] )) := table!.( c );
-        fi;
-    od;
-    
     properties := [ ];
     
     for ar in arg{[ 2 .. nargs ]} do
@@ -997,22 +989,27 @@ end );
 
 ##
 InstallMethod( \/,
-        "for homalg ring elements",
+        "for ring elements",
         [ IsRingElement, IsHomalgRing ],
         
   function( r, R )
-    local s;
     
-    if IsHomalgRingElement( r ) then
-        if IsIdenticalObj( HomalgRing( r ), R ) then
-            return r;
-        fi;
-        s := Name( r );
-    else
-        s := String( r );
+    return HomalgRingElement( String( r ), R );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg ring elements",
+        [ IsHomalgRingElement, IsHomalgRing ],
+        
+  function( r, R )
+    
+    if IsIdenticalObj( HomalgRing( r ), R ) then
+        return r;
     fi;
     
-    return HomalgRingElement( s, R );
+    return HomalgRingElement( String( r ), R );
     
 end );
 

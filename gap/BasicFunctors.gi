@@ -1794,7 +1794,7 @@ end );
 ##  gap> ByASmallerPresentation( N );
 ##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  gap> Display( N );
-##  Z/( 4 )/< [ 2 ] > + Z/( 4 )^(1 x 1)
+##  Z/( 4 )/< |[ 2 ]| > + Z/( 4 )^(1 x 1)
 ##  gap> N;
 ##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  ]]></Example>

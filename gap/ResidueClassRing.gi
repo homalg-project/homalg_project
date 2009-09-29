@@ -80,6 +80,17 @@ BindGlobal( "TheTypeHomalgResidueClassMatrix",
 ####################################
 
 ##
+InstallMethod( String,
+        "for homalg residue class ring elements",
+        [ IsHomalgResidueClassRingElementRep ],
+
+  function( o )
+    
+    return String( Eval( o ) );
+    
+end );
+
+##
 InstallMethod( Name,
         "for homalg residue class ring elements",
         [ IsHomalgResidueClassRingElementRep ],
@@ -93,7 +104,7 @@ InstallMethod( Name,
         name := String;
     fi;
     
-    return Flat( [ "[ ",  name( Eval( o ) ), " ]" ] );
+    return Flat( [ "|[ ",  name( Eval( o ) ), " ]|" ] );
     
 end );
 
@@ -457,9 +468,17 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
     
     SetConstructorForHomalgMatrices( S,
             function( arg )
-              local ar, M, R;
+              local mat, l, ar, M, R;
               
-              ar := List( arg,
+              l := Length( arg );
+              
+              mat := arg[1];
+              
+              if IsList( mat ) and ForAll( mat, IsHomalgResidueClassRingElementRep ) then
+                  mat := List( mat, Eval );
+              fi;
+              
+              ar := List( arg{[ 2 .. l ]},
                           function( i )
                             if IsHomalgResidueClassRingRep( i ) then
                                 return AmbientRing( i );
@@ -468,9 +487,9 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
                             fi;
                           end );
               
-              M := CallFuncList( HomalgMatrix, ar );
+              M := CallFuncList( HomalgMatrix, Concatenation( [ mat ], ar ) );
               
-              R := arg[Length( arg )];
+              R := arg[l];
               
               return HomalgResidueClassMatrix( M, R );
               
@@ -773,9 +792,19 @@ InstallMethod( Display,
         [ IsHomalgResidueClassMatrixRep ],
         
   function( A )
+    local rel, l;
     
     Display( Eval( A ) );
     Print( "\nmodulo " );
-    Print( EntriesOfHomalgMatrix( MatrixOfRelations( RingRelations( HomalgRing( A ) ) ) ), "\n" );
+    
+    rel := EntriesOfHomalgMatrix( MatrixOfRelations( RingRelations( HomalgRing( A ) ) ) );
+    
+    if ForAll( rel, IsHomalgRingElement ) then
+        l := Length( rel );
+        rel := Concatenation( Flat( List( rel{[ 1 .. l - 1 ]}, a -> Concatenation( " ", Name( a ), "," ) ) ), Concatenation( " ", Name( rel[l] ) ) );
+        Print( "[", rel, " ]\n" );
+    else
+        Print( rel, "\n" );	## we assume that rel is a list of GAP4 ring elements that can be properly displayed
+    fi;
     
 end );

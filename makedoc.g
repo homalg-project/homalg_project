@@ -61,6 +61,7 @@ list := [
          "../examples/Purity.g",
          "../examples/torext.g",
          "../examples/TorExt.g",
+         "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          ];
 
 MakeGAPDocDoc( "doc", "homalg", list, "homalg" );

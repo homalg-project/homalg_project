@@ -1962,3 +1962,14 @@ InstallMethod( \*,
     
 end );
 
+
+## from HomalgRing.gi
+
+    ## compatibility mode:
+    for c in [ "SyzygiesGeneratorsOfRows", "SyzygiesGeneratorsOfColumns" ] do
+        if not IsBound( table!.(Flat( [ "Relative", c ] )) ) and
+           IsBound( table!.( c ) ) then
+            table!.(Flat( [ "Relative", c ] )) := table!.( c );
+        fi;
+    od;
+    
