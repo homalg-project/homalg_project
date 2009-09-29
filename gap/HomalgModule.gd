@@ -818,6 +818,15 @@ DeclareOperation( "UnderlyingObject",
 DeclareOperation( "IsSubset",
         [ IsHomalgModule, IsHomalgModule ] );
 
+DeclareOperation( "AffineDimension",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "AffineDegree",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "ConstantTermOfHilbertPolynomial",
+        [ IsHomalgModule ] );
+
 ####################################
 #
 # synonyms:

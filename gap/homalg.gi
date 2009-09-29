@@ -129,6 +129,8 @@ InstallValue( HOMALG,
             
             MaximumNumberOfResolutionSteps := 1001,
             
+            RandomSource := RandomSource(IsMersenneTwister),
+            
            )
 );
 

@@ -792,7 +792,7 @@ InstallMethod( Display,
         [ IsHomalgResidueClassMatrixRep ],
         
   function( A )
-    local rel, l;
+    local rel;
     
     Display( Eval( A ) );
     Print( "\nmodulo " );
@@ -800,9 +800,8 @@ InstallMethod( Display,
     rel := EntriesOfHomalgMatrix( MatrixOfRelations( RingRelations( HomalgRing( A ) ) ) );
     
     if ForAll( rel, IsHomalgRingElement ) then
-        l := Length( rel );
-        rel := Concatenation( Flat( List( rel{[ 1 .. l - 1 ]}, a -> Concatenation( " ", Name( a ), "," ) ) ), Concatenation( " ", Name( rel[l] ) ) );
-        Print( "[", rel, " ]\n" );
+        rel := JoinStringsWithSeparator( List( rel, Name ), ", " );
+        Print( "[ ", rel, " ]\n" );
     else
         Print( rel, "\n" );	## we assume that rel is a list of GAP4 ring elements that can be properly displayed
     fi;
