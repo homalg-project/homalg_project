@@ -185,29 +185,9 @@ DecideZeroColumnsEffectively :=
 ##    It is easy to see, that a global syzygy is also a local syzygy and vice versa when clearing the local Syzygy of its denominators. So this procedure brings the matrices to compute syzygies for on a common denominator if needed (in case <A>N</A> is given) and then calls the syzygy method of the underlying computation ring.
 ##      <Listing Type="Code"><![CDATA[
 SyzygiesGeneratorsOfRows :=
-  function( arg )
-    local M, R, M2, M3, N;
+  function( M )
     
-    M := arg[1];
-    
-    R := HomalgRing( M );
-    
-    if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-        
-        M2 := arg[2];
-        M3 := UnionOfRows( M, M2 );
-        M := CertainRows( M3, [ 1 .. NrRows( M ) ] );
-        M2 := CertainRows( M3, [ NrRows( M ) + 1 .. NrRows( M3 ) ] );
-        
-        N := SyzygiesGeneratorsOfRows( Numerator( M ), Numerator( M2 ) );
-        
-    else
-        
-        N := SyzygiesGeneratorsOfRows( Numerator( M ) );
-        
-    fi;
-    
-    return HomalgLocalMatrix( N, R );
+    return HomalgLocalMatrix( SyzygiesGeneratorsOfRows( Numerator( M ) ), HomalgRing( M ) );
     
   end,
 ##  ]]></Listing>
@@ -215,30 +195,34 @@ SyzygiesGeneratorsOfRows :=
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+RelativeSyzygiesGeneratorsOfRows :=
+  function( M, N )
+    local CommonDenomMatrix, M2, N2;
+    
+    CommonDenomMatrix := UnionOfRows( M, N );
+    M2 := CertainRows( CommonDenomMatrix, [ 1 .. NrRows( M ) ] );
+    N2 := CertainRows( CommonDenomMatrix, [ NrRows( M ) + 1 .. NrRows( CommonDenomMatrix ) ] );
+    
+    return HomalgLocalMatrix( SyzygiesGeneratorsOfRows( Numerator( M2 ), Numerator( N2 ) ), HomalgRing( M ) );
+    
+  end,
+
 SyzygiesGeneratorsOfColumns :=
-  function( arg )
-    local M, R, M2, M3, N;
+  function( M )
     
-    M := arg[1];
+    return HomalgLocalMatrix( SyzygiesGeneratorsOfColumns( Numerator( M ) ), HomalgRing( M ) );
     
-    R := HomalgRing( M );
+  end,
+  
+RelativeSyzygiesGeneratorsOfColumns :=
+  function( M, N )
+    local CommonDenomMatrix, M2, N2;
     
-    if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-        
-        M2 := arg[2];
-        M3 := UnionOfColumns( M, M2 );
-        M := CertainColumns( M3, [ 1 .. NrColumns( M ) ] );
-        M2 := CertainColumns( M3, [ NrColumns( M ) + 1 .. NrColumns( M3 ) ] );
-        
-        N := SyzygiesGeneratorsOfColumns( Numerator( M ), Numerator( M2 ) );
-        
-    else
-        
-        N := SyzygiesGeneratorsOfColumns( Numerator( M ) );
-        
-    fi;
+    CommonDenomMatrix := UnionOfColumns( M, N );
+    M2 := CertainColumns( CommonDenomMatrix, [ 1 .. NrColumns( M ) ] );
+    N2 := CertainColumns( CommonDenomMatrix, [ NrColumns( M ) + 1 .. NrColumns( CommonDenomMatrix ) ] );
     
-    return HomalgLocalMatrix( N, R );
+    return HomalgLocalMatrix( SyzygiesGeneratorsOfColumns( Numerator( M2 ), Numerator( N2 ) ), HomalgRing( M ) );
     
   end,
 
