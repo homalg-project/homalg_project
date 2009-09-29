@@ -1,3 +1,53 @@
+##
+InstallMethod( AffineDegree,
+        "for homalg modules",
+        [ IsHomalgModule ],
+  function( M )
+    local R, G;
+    
+    R := HomalgRing( M );
+    
+    if not IsHomalgLocalRingRep( R ) then
+        TryNextMethod( );
+    fi;
+    
+    G := Numerator( MatrixOfRelations( M ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        G := LeftPresentation( G );
+    else
+        G := RightPresentation( G );
+    fi;
+    
+    return AffineDegree( G );
+    
+end );
+
+##
+InstallMethod( ConstantTermOfHilbertPolynomial,
+        "for homalg modules",
+        [ IsHomalgModule ],
+  function( M )
+    local R, G;
+    
+    R := HomalgRing( M );
+    
+    if not IsHomalgLocalRingRep( R ) then
+        TryNextMethod( );
+    fi;
+    
+    G := Numerator( MatrixOfRelations( M ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        G := LeftPresentation( G );
+    else
+        G := RightPresentation( G );
+    fi;
+    
+    return ConstantTermOfHilbertPolynomial( G );
+    
+end );
+
 ##  <#GAPDoc Label="LocalizePolynomialRingAtZeroWithMora">
 ##  <ManSection>
 ##    <Oper Arg="R" Name="LocalizePolynomialRingAtZeroWithMora" Label= "constructor for homalg localized rings using Mora's algorithm"/>
