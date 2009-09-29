@@ -250,7 +250,7 @@ InstallMethod( Numerator,
 ##    <Oper Arg="r" Name="Denominator" Label="for homalg local ring elements"/>
 ##    <Returns>a (global) &homalg; ring element</Returns>
 ##    <Description>
-##      The denominator from a local ring element <A>r</A>, which is a &homalg; ring element from the computation ring
+##      The denominator from a local ring element <A>r</A>, which is a &homalg; ring element from the computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -272,7 +272,7 @@ InstallMethod( Denominator,
 ##    <Oper Arg="mat" Name="Numerator" Label="for homalg local matrices"/>
 ##    <Returns>a (global) &homalg; matrix</Returns>
 ##    <Description>
-##      The numerator from a local matrix <A>mat</A>, which is a &homalg; matrix from the computation ring
+##      The numerator from a local matrix <A>mat</A>, which is a &homalg; matrix from the computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -294,7 +294,7 @@ InstallMethod( Numerator,
 ##    <Oper Arg="mat" Name="Denominator" Label="for homalg local matrices"/>
 ##    <Returns>a (global) &homalg; ring element</Returns>
 ##    <Description>
-##      The denominator from a local matrix <A>mat</A>, which is a &homalg; matrix from the computation ring
+##      The denominator from a local matrix <A>mat</A>, which is a &homalg; matrix from the computation ring.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -352,6 +352,18 @@ InstallMethod( Name,
       s4 := ")";
     fi;
     return Flat( [ s1, nnumer, s2, "/", s3, ndenom, s4 ] );
+    
+  end
+
+);
+
+InstallMethod( String,
+        "for homalg local ring elements",
+        [ IsHomalgLocalRingElementRep ],
+
+  function( o )
+    
+    return Name( o );
     
   end
 

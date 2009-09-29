@@ -26,40 +26,38 @@
 ##   gap> IMora := RightPresentation( MMora );;
 ##   gap> #This ring is able to compute a standard basis of the module.
 ##   gap> Display(IMora);
-##   GF(3)[x,y]_<x,y>/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+x*y\
-##   ^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >
+##   GF(3)[x,y]_< x, y >/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+\
+##   x*y^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >
 ##   gap> ByASmallerPresentation(IMora);
 ##   <A cyclic right module on a cyclic generator satisfying 2 relations>
 ##   gap> Display(IMora);
-##   GF(3)[x,y]_<x,y>/< x/1, y/1 >
+##   GF(3)[x,y]_< x, y >/< x/1, y/1 >
 ##   gap> #This ring recognizes, that the module is not zero,
 ##   gap> #but is not able to find better generators...
 ##   gap> Display(I00);
-##   GF(3)[x,y]_<x,y>/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^2+x\
-##   -y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
+##   GF(3)[x,y]_< x, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^\
+##   2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
 ##   gap> ByASmallerPresentation(I00);
 ##   <A cyclic right module on a cyclic generator satisfying 3 relations>
 ##   gap> Display(I00);
-##   GF(3)[x,y]_<x,y>/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^2+x\
-##   -y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
+##   GF(3)[x,y]_< x, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^\
+##   2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
 ##   gap> #...but we are able to change the ring, to compute a nicer basis.
 ##   gap> I00ToMora := RMora * I00;
 ##   <A cyclic right module on a cyclic generator satisfying 3 relations>
 ##   gap> Display(I00ToMora);
-##   GF(3)[x,y]_<x,y>/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+x*y\
-##   ^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >
+##   GF(3)[x,y]_< x, y >/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+\
+##   x*y^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >
 ##   gap> ByASmallerPresentation(I00ToMora);
 ##   <A cyclic right module on a cyclic generator satisfying 2 relations>
 ##   gap> Display(I00ToMora);
-##   GF(3)[x,y]_<x,y>/< x/1, y/1 >
+##   GF(3)[x,y]_< x, y >/< x/1, y/1 >
 ##   gap> #We are able to find out, that this module is actually zero.
 ##   gap> Display(I10);
-##   GF(3)[x,y]_<x-1,y>/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^2\
-##   +x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
+##   GF(3)[x,y]_< x-1, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+\
+##   y^2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
 ##   gap> ByASmallerPresentation(I10);
 ##   <A zero right module>
-##   gap> Display(I10);
-##   0
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
