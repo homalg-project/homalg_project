@@ -1016,7 +1016,7 @@ end );
 ##  <#GAPDoc Label="HomalgLocalMatrix">
 ##  <ManSection>
 ##    <Func Arg="numer, denom, R" Name="HomalgLocalMatrix" Label="constructor for local matrices using numerator and denominator"/>
-##    <Func Arg="numer, R" Name="HomalgLocalRingElement" Label="constructor for local matrices using a given numerator and one as denominator"/>
+##    <Func Arg="numer, R" Name="HomalgLocalMatrix" Label="constructor for local matrices using a given numerator and one as denominator"/>
 ##    <Returns>a local matrix</Returns>
 ##    <Description>
 ##      Creates the local matrix <M><A>numer</A>/<A>denom</A></M> or in the second case <M><A>numer</A>/1</M> for the local ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.

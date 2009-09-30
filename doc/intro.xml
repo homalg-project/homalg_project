@@ -19,7 +19,7 @@ behind the package.
   <Section Label="role">
     <Heading>What is the Role of the &LocalizeRingForHomalg; Package in the &homalg; Project?</Heading>
 
-    The &homalg; project <Cite Key="homalg.new"/> aims at providing a general and abstract framework for homological computations. This package enables homalg to extend commutative rings to their localizations at maximal ideals.
+    The &homalg; project <Cite Key="homalg.new"/> aims at providing a general and abstract framework for homological computations. This package enables homalg to contruct from commutative rings in &homalg; their localizations at maximal ideals.
 
   </Section>
 
@@ -46,4 +46,3 @@ behind the package.
   </Section>
 
 </Chapter>
-

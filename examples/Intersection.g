@@ -1,6 +1,6 @@
 ##  <#GAPDoc Label="Intersection">
 ##  <Section Label="Intersection">
-##  <Heading>Testing the Itersection Formula</Heading>
+##  <Heading>Testing the Intersection Formula</Heading>
 ##  We want to check Serre's intersection formula <M>i(I_1, I_2; 0)=\sum_i(-1)^i length(Tor^{R_0}_i(R_0/I_1,R_0/I_2))</M> on an easy affine example.
 ##  <Example>
 ##   <![CDATA[
@@ -25,7 +25,7 @@
 ##  gap> List( ObjectsOfComplex( T ), AffineDegree );
 ##  [ 12, 4, 0, 0 ]
 ##  ]]></Example>
-##  We read, that there are 12-4=8 intersection points.
+##  We read, that the intersection multiplicity is 12-4=8 globally.
 ##  <Example><![CDATA[
 ##  gap> M10 := R0 * M1;
 ##  <A homalg local 1 by 4 matrix>
@@ -38,7 +38,7 @@
 ##  gap> List( ObjectsOfComplex( T0 ), AffineDegree );
 ##  [ 3, 1, 0, 0 ]
 ##  ]]></Example>
-##  We have a (3-1=2) double intersection points at zero.
+##  The intersection multiplicity at zero if 3-1=2.
 ##  </Section>
 ##  <#/GAPDoc>
 LoadPackage("Sheaves");;
@@ -59,11 +59,11 @@ RmodI1 := RightPresentation( M1 );;
 RmodI2 := RightPresentation( M2 );;
 T:=Tor( RmodI1, RmodI2 );
 List( ObjectsOfComplex( T ), AffineDegree );
-#We read, that there are 12-4=8 intersection points.
+#We read, that the intersection multiplicity is 12-4=8 globally.
 M10 := R0 * M1;
 M20 := R0 * M2;
 R0modI10 := RightPresentation( M10 );;
 R0modI20 := RightPresentation( M20 );;
 T0 := Tor( R0modI10, R0modI20 );
 List( ObjectsOfComplex( T0 ), AffineDegree );
-#We have a (3-1=2) double intersection points at zero.
+#The intersection multiplicity at zero if 3-1=2.
