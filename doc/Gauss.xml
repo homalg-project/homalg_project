@@ -30,13 +30,13 @@
 	  (Germany)
 	  </Address>
   </Author>
-  <Date>January 2009</Date>
+  <Date>September 2009</Date>
   <Abstract>This document explains the primary uses of the &Gauss; package.
             Included is a documented list of the most important methods
             and functions needed to work with sparse matrices and the
             algorithms provided by the &Gauss; package.
   </Abstract>
-  <Copyright>&copyright; 2007-2008 by Simon Goertzen<P/>
+  <Copyright>&copyright; 2007-2009 by Simon Goertzen<P/>
   This package may be distributed under the terms and conditions of
   the GNU Public License Version 2.
   </Copyright>
@@ -480,11 +480,11 @@ in source code should just check out the files in the
      <#Include Label="UnionOfRows">
      <#Include Label="UnionOfColumns">
      <#Include Label="SparseDiagMat">
-     <#Include Label="nrows">
-     <#Include Label="ncols">
-     <#Include Label="indices">
-     <#Include Label="entries">
-     <#Include Label="ring">
+     <#Include Label="Nrows">
+     <#Include Label="Ncols">
+     <#Include Label="IndicesOfSparseMatrix">
+     <#Include Label="EntriesOfSparseMatrix">
+     <#Include Label="RingOfDefinition">
  </Section>
 
 </Chapter>

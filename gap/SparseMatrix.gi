@@ -660,61 +660,61 @@ InstallMethod( \-,
 );
   
 
-##  <#GAPDoc Label="nrows">
+##  <#GAPDoc Label="Nrows">
 ##  <ManSection >
-##  <Meth Arg="sm" Name="nrows" />
+##  <Meth Arg="sm" Name="Nrows" />
 ##  <Returns>the number of rows of the sparse matrix <A>sm</A>.
 ##  This should be preferred to the equivalent <C>sm!.nrows</C>.</Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( nrows,
+InstallMethod( Nrows,
         [ IsSparseMatrix ],
   function( M )
     return M!.nrows;
   end
 );
 
-##  <#GAPDoc Label="ncols">
+##  <#GAPDoc Label="Ncols">
 ##  <ManSection >
-##  <Meth Arg="sm" Name="ncols" />
+##  <Meth Arg="sm" Name="Ncols" />
 ##  <Returns>the number of columns of the sparse matrix <A>sm</A>.
 ##  This should be preferred to the equivalent <C>sm!.ncols</C>.</Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( ncols,
+InstallMethod( Ncols,
         [ IsSparseMatrix ],
   function( M )
     return M!.ncols;
   end
 );
 
-##  <#GAPDoc Label="indices">
+##  <#GAPDoc Label="IndicesOfSparseMatrix">
 ##  <ManSection >
-##  <Meth Arg="sm" Name="indices" />
+##  <Meth Arg="sm" Name="IndicesOfSparseMatrix" />
 ##  <Returns>the indices of the sparse matrix <A>sm</A> as a ListList.
 ##  This should be preferred to the equivalent <C>sm!.indices</C>.</Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( indices,
+InstallMethod( IndicesOfSparseMatrix,
         [ IsSparseMatrix ],
   function( M )
     return M!.indices;
   end
 );
-  
-##  <#GAPDoc Label="entries">
+
+##  <#GAPDoc Label="EntriesOfSparseMatrix">
 ##  <ManSection >
-##  <Meth Arg="sm" Name="entries" />
+##  <Meth Arg="sm" Name="EntriesOfSparseMatrix" />
 ##  <Returns>the entries of the sparse matrix <A>sm</A> as a ListList of ring elements.
 ##  This should be preferred to the equivalent <C>sm!.entries</C> and has the additional
 ##  advantage of working for sparse matrices over GF(2) which do not have any entries.</Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( entries,
+InstallMethod( EntriesOfSparseMatrix,
         [ IsSparseMatrix ],
   function( M )
     if IsSparseMatrixGF2Rep( M ) then
@@ -725,15 +725,15 @@ InstallMethod( entries,
   end
 );
 
-##  <#GAPDoc Label="ring">
+##  <#GAPDoc Label="RingOfDefinition">
 ##  <ManSection >
-##  <Meth Arg="sm" Name="ring" />
+##  <Meth Arg="sm" Name="RingOfDefinition" />
 ##  <Returns>the base ring of the sparse matrix <A>sm</A>.
 ##  This should be preferred to the equivalent <C>sm!.ring</C>.</Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( ring,
+InstallMethod( RingOfDefinition,
         [ IsSparseMatrix ],
   function( M )
     return M!.ring;

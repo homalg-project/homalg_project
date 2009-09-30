@@ -94,7 +94,7 @@ InstallMethod( EchelonMat,
 ##  `coeffs'<P/>
 ##      the transformation matrix needed to obtain the RREF from <A>mat</A>.<P/>
 ##  `relations'<P/>
-##      the kernel of the matrix <A>mat</A> if ring(<A>mat</A>) is a field.
+##      the kernel of the matrix <A>mat</A> if RingOfDefinition(<A>mat</A>) is a field.
 ##      Otherwise these are only the obvious row relations of <A>mat</A>,
 ##      there might be more kernel vectors - &see; <Ref Func="KernelMat" Style="Number"/>.
 ##  </Returns>

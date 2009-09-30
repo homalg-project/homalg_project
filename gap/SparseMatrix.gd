@@ -65,19 +65,19 @@ DeclareOperation( "+",
 DeclareOperation( "-",
         [ IsSparseMatrix, IsSparseMatrix ] );
 
-DeclareOperation( "nrows",
+DeclareOperation( "Nrows",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "ncols",
+DeclareOperation( "Ncols",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "indices",
+DeclareOperation( "IndicesOfSparseMatrix",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "entries",
+DeclareOperation( "EntriesOfSparseMatrix",
         [ IsSparseMatrix ] );
 
-DeclareOperation( "ring",
+DeclareOperation( "RingOfDefinition",
         [ IsSparseMatrix ] );
 
 DeclareOperation( "IsSparseZeroMatrix",
