@@ -24,8 +24,9 @@
 ##  <A graded homology object consisting of 4 right modules at degrees [ 0 .. 3 ]>
 ##  gap> List( ObjectsOfComplex( T ), AffineDegree );
 ##  [ 12, 4, 0, 0 ]
-##  gap> #From the Hilbert series we read,
-##  gap> #that there are 12-4=8 intersection points.
+##  ]]></Example>
+##  We read, that there are 12-4=8 intersection points.
+##  <Example><![CDATA[
 ##  gap> M10 := R0 * M1;
 ##  <A homalg local 1 by 4 matrix>
 ##  gap> M20 := R0 * M2;
@@ -36,9 +37,8 @@
 ##  <A graded homology object consisting of 4 right modules at degrees [ 0 .. 3 ]>
 ##  gap> List( ObjectsOfComplex( T0 ), AffineDegree );
 ##  [ 3, 1, 0, 0 ]
-##  gap> #So locally the Hilbert Series tells us,
-##  gap> #that we have a (3-1=2) double intersection points at zero.
 ##  ]]></Example>
+##  We have a (3-1=2) double intersection points at zero.
 ##  </Section>
 ##  <#/GAPDoc>
 LoadPackage("Sheaves");;
@@ -59,13 +59,11 @@ RmodI1 := RightPresentation( M1 );;
 RmodI2 := RightPresentation( M2 );;
 T:=Tor( RmodI1, RmodI2 );
 List( ObjectsOfComplex( T ), AffineDegree );
-#From the Hilbert series we read,
-#that there are 12-4=8 intersection points.
+#We read, that there are 12-4=8 intersection points.
 M10 := R0 * M1;
 M20 := R0 * M2;
 R0modI10 := RightPresentation( M10 );;
 R0modI20 := RightPresentation( M20 );;
 T0 := Tor( R0modI10, R0modI20 );
 List( ObjectsOfComplex( T0 ), AffineDegree );
-#So locally the Hilbert Series tells us,
-#that we have a (3-1=2) double intersection points at zero.
+#We have a (3-1=2) double intersection points at zero.
