@@ -786,8 +786,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
     if LoadPackage( "HomalgToCAS" ) <> true then
        Error( "the package HomalgToCAS failed to load\n" );
     fi;
-    if LoadPackage( "HomalgIO" ) <> true then
-       Error( "the package HomalgToCAS failed to load\n" );
+    if LoadPackage( "IO_ForHomalg" ) <> true then
+       Error( "the package IO_ForHomalg failed to load\n" );
     fi;
     
     ComputationRing := AssociatedComputationRing( R );
