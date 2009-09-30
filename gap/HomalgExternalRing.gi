@@ -105,7 +105,7 @@ BindGlobal( "TheTypeContainerForWeakPointersOnHomalgExternalRings",
 
 ##
 InstallMethod( homalgPointer,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -116,7 +116,7 @@ end );
 
 ##
 InstallMethod( homalgExternalCASystem,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -127,7 +127,7 @@ end );
 
 ##
 InstallMethod( homalgExternalCASystemVersion,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -138,7 +138,7 @@ end );
 
 ##
 InstallMethod( homalgStream,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -160,7 +160,7 @@ end );
 
 ##
 InstallMethod( homalgExternalCASystemPID,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -171,7 +171,7 @@ end );
 
 ##
 InstallMethod( homalgLastWarning,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -182,7 +182,7 @@ end );
 
 ##
 InstallMethod( homalgNrOfWarnings,
-        "for homalg rings",
+        "for homalg external rings",
         [ IsHomalgExternalRingRep ],
         
   function( R )
@@ -192,8 +192,19 @@ InstallMethod( homalgNrOfWarnings,
 end );
 
 ##
+InstallMethod( String,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    
+    return Name( r );
+    
+end );
+
+##
 InstallMethod( homalgSetName,
-        "for external homalg ring elements",
+        "for homalg external ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingRep ],
         
   function( r, name, R )
@@ -204,7 +215,7 @@ end );
 
 ##
 InstallMethod( homalgSetName,
-        "for external homalg ring elements",
+        "for homalg external ring elements",
         [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString ],
         
   function( r, name )
