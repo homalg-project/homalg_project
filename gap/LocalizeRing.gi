@@ -761,17 +761,20 @@ InstallMethod( SaveHomalgMatrixToFile,
         [ IsString, IsHomalgMatrix, IsLocalRing ],
         
   function( filename, M, R )
-  local ComputationRing;
+  local ComputationRing, NumerString, DenomString;
     
     if LoadPackage( "HomalgToCAS" ) <> true then
        Error( "the package HomalgToCAS failed to load\n" );
     fi;
     
-    ComputationRing := AssociatedComputationRing( M );
-    SaveHomalgMatrixToFile( Concatenation( filename, "_numerator" ), Numerator( M ), ComputationRing );
-    SaveHomalgMatrixToFile( Concatenation( filename, "_denominator" ), HomalgMatrix( [ Denominator( M ) ], 1, 1, ComputationRing ), ComputationRing );
+    NumerString := Concatenation( filename, "_numerator" );
+    DenomString := Concatenation( filename, "_denominator" );
     
-    return true;
+    ComputationRing := AssociatedComputationRing( M );
+    SaveHomalgMatrixToFile( NumerString, Numerator( M ), ComputationRing );
+    SaveHomalgMatrixToFile( DenomString, HomalgMatrix( [ Denominator( M ) ], 1, 1, ComputationRing ), ComputationRing );
+    
+    return [ NumerString, DenomString ];
     
 end );
 
@@ -783,26 +786,13 @@ InstallMethod( LoadHomalgMatrixFromFile,
   function( filename, r, c, R )
     local ComputationRing, numer, denom, homalgIO;
     
-    if LoadPackage( "HomalgToCAS" ) <> true then
-       Error( "the package HomalgToCAS failed to load\n" );
-    fi;
-    if LoadPackage( "IO_ForHomalg" ) <> true then
-       Error( "the package IO_ForHomalg failed to load\n" );
-    fi;
-    
     ComputationRing := AssociatedComputationRing( R );
     
     if IsExistingFile( Concatenation( filename, "_numerator" ) ) and IsExistingFile( Concatenation( filename, "_denominator" ) ) then
     
-    numer := LoadHomalgMatrixFromFile( Concatenation( filename, "_numerator" ), r, c, ComputationRing );
-    denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
-    denom := GetEntryOfHomalgMatrix( denom, 1, 1 );
-    
-    homalgIO := ValueGlobal( "HOMALG_IO" );
-    if not ( IsBound( homalgIO.DoNotDeleteTemporaryFiles ) and homalgIO.DoNotDeleteTemporaryFiles = true ) then
-        Exec( Concatenation( "/bin/rm -f \"", Concatenation( filename, "_numerator" ), "\"" ) );
-        Exec( Concatenation( "/bin/rm -f \"", Concatenation( filename, "_denominator" ), "\"" ) );
-    fi;
+      numer := LoadHomalgMatrixFromFile( Concatenation( filename, "_numerator" ), r, c, ComputationRing );
+      denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
+      denom := GetEntryOfHomalgMatrix( denom, 1, 1 );
     
     elif IsExistingFile( filename ) then
     
