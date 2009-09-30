@@ -10,25 +10,11 @@
 ##  gap> ZZ := HomalgRingOfIntegers(  );;
 ##  gap> R := LocalizeAt( ZZ , [ 2 ] );
 ##  <A homalg local ring>
-##  gap> M := LeftPresentation(\
-##  >        HomalgLocalMatrix(\
-##  >          HomalgMatrix( [ 2^5 ], ZZ ),\
-##  >        R )\
-##  >       );
+##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
 ##  <A cyclic left module presented by 1 relation for a cyclic generator>
-##  gap> _M := LeftPresentation(\
-##  >         HomalgLocalMatrix(\
-##  >           HomalgMatrix( [ 2^3 ], ZZ ),\
-##  >         R )\
-##  >       );
+##  gap> _M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
 ##  <A cyclic left module presented by 1 relation for a cyclic generator>
-##  gap> alpha2 := HomalgMap(\
-##  >             HomalgLocalMatrix(\
-##  >               HomalgMatrix( [ 1 ] , ZZ ),\
-##  >             R ),
-##  >           M,\
-##  >           _M\
-##  >          );
+##  gap> alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );
 ##  <A "homomorphism" of left modules>
 ##  gap> M_ := Kernel( alpha2 );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
@@ -53,23 +39,9 @@
 LoadPackage( "LocalizeRingForHomalg" );;
 ZZ := HomalgRingOfIntegers(  );;
 R := LocalizeAt( ZZ , [ 2 ] );
-M := LeftPresentation(\
-       HomalgLocalMatrix(\
-         HomalgMatrix( [ 2^5 ], ZZ ),\
-       R )\
-      );
-_M := LeftPresentation(\
-        HomalgLocalMatrix(\
-          HomalgMatrix( [ 2^3 ], ZZ ),\
-        R )\
-      );
-alpha2 := HomalgMap(\
-            HomalgLocalMatrix(\
-              HomalgMatrix( [ 1 ] , ZZ ),\
-            R ),
-          M,\
-          _M\
-         );
+M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
+_M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
+alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );
 M_ := Kernel( alpha2 );
 alpha1 := KernelEmb( alpha2 );
 Display( M_ );

@@ -6,8 +6,8 @@
 ##  gap> LoadPackage( "RingsForHomalg" );;
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
 ##  gap> Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
-##  gap> wmat := HomalgMatrix(\
-##  >           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",\
+##  gap> wmat := HomalgMatrix(
+##  >           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",
 ##  >           2, 2, Qxy );
 ##  <A homalg external 2 by 2 matrix>
 ##  gap> ec := HomalgRingElement( "-x^3-x^2+2*y^2", Qxy );
@@ -47,9 +47,9 @@
 ##  <A homalg residue class ring>
 ##  gap> wmat1 := R1 * wmat;
 ##  <A homalg residue class 2 by 2 matrix>
-##  gap> R10 := LocalizeAt( R1 ,\
-##  >          [ HomalgRingElement( "x", R1 ),\
-##  >            HomalgRingElement( "y", R1 ) ]\
+##  gap> R10 := LocalizeAt( R1 ,
+##  >          [ HomalgRingElement( "x", R1 ),
+##  >            HomalgRingElement( "y", R1 ) ]
 ##  >        );
 ##  <A homalg local ring>
 ##  gap> wmat10 := HomalgLocalMatrix( wmat, R10 );
@@ -127,8 +127,8 @@
 LoadPackage( "RingsForHomalg" );;
 LoadPackage( "LocalizeRingForHomalg" );;
 Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
-wmat := HomalgMatrix(\
-          "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",\
+wmat := HomalgMatrix(
+          "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",
           2, 2, Qxy );
 ec := HomalgRingElement( "-x^3-x^2+2*y^2", Qxy );
 #Compute globally:
@@ -138,9 +138,9 @@ Display(Res);
 #Try a localization of a residue class ring:
 R1 := Qxy / ec;
 wmat1 := R1 * wmat;
-R10 := LocalizeAt( R1 ,\
-         [ HomalgRingElement( "x", R1 ),\
-           HomalgRingElement( "y", R1 ) ]\
+R10 := LocalizeAt( R1 ,
+         [ HomalgRingElement( "x", R1 ),
+           HomalgRingElement( "y", R1 ) ]
        );
 wmat10 := HomalgLocalMatrix( wmat, R10 );
 W10 := LeftPresentation( wmat10 );

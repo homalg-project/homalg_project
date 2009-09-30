@@ -11,25 +11,13 @@
 ##  gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );;
 ##  gap> R := LocalizeAt( GlobalR , [ 2 ] );
 ##  <A homalg local ring>
-##  gap> M := LeftPresentation(\
-##  >        HomalgLocalMatrix(\
-##  >          HomalgMatrix( [ 2^5 ], GlobalR ),\
-##  >        R )\
-##  >      );
+##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>
-##  gap> _M := LeftPresentation(\
-##  >         HomalgLocalMatrix(\
-##  >           HomalgMatrix( [ 2^3 ], GlobalR ),\
-##  >         R ) \
-##  >       );
+##  gap> _M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>
-##  gap> alpha2 := HomalgMap(\
-##  >             HomalgLocalMatrix( HomalgMatrix( [ 1 ], GlobalR ), R ),\
-##  >             M,\
-##  >             _M\
-##  >           );
+##  gap> alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );
 ##  <A "homomorphism" of left modules>
 ##  gap> M_ := Kernel( alpha2 );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
@@ -42,18 +30,10 @@
 ##  gap> Add( seq, alpha1 );
 ##  gap> IsShortExactSequence( seq );
 ##  true
-##  gap> K := LeftPresentation(\
-##  >        HomalgLocalMatrix(\
-##  >          HomalgMatrix( [ 2^7 ], GlobalR ),
-##  >        R )
-##  >      );
+##  gap> K := LeftPresentation( HomalgMatrix( [ 2^7 ], R ) );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>
-##  gap> L := RightPresentation(\
-##  >        HomalgLocalMatrix(\
-##  >          HomalgMatrix( [ 2^4 ], GlobalR ),\
-##  >        R )\
-##  >      );
+##  gap> L := RightPresentation( HomalgMatrix( [ 2^4 ], R ) );
 ##  <A cyclic right module on a cyclic generator satisfying an unknown number of r\
 ##  elations>
 ##  gap> triangle := LHomHom( 4, seq, K, L, "t" );
@@ -73,36 +53,16 @@ LoadPackage( "RingsForHomalg" );;
 LoadPackage( "LocalizeRingForHomalg" );;
 GlobalR := HomalgRingOfIntegersInExternalGAP(  );;
 R := LocalizeAt( GlobalR , [ 2 ] );
-M := LeftPresentation(\
-       HomalgLocalMatrix(\
-         HomalgMatrix( [ 2^5 ], GlobalR ),\
-       R )\
-     );
-_M := LeftPresentation(\
-        HomalgLocalMatrix(\
-          HomalgMatrix( [ 2^3 ], GlobalR ),\
-        R ) \
-      );
-alpha2 := HomalgMap(\
-            HomalgLocalMatrix( HomalgMatrix( [ 1 ], GlobalR ), R ),\
-            M,\
-            _M\
-          );
+M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
+_M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
+alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );
 M_ := Kernel( alpha2 );
 alpha1 := KernelEmb( alpha2 );
 seq := HomalgComplex( alpha2 );
 Add( seq, alpha1 );
 IsShortExactSequence( seq );
-K := LeftPresentation(\
-       HomalgLocalMatrix(\
-         HomalgMatrix( [ 2^7 ], GlobalR ),
-       R )
-     );
-L := RightPresentation(\
-       HomalgLocalMatrix(\
-         HomalgMatrix( [ 2^4 ], GlobalR ),\
-       R )\
-     );
+K := LeftPresentation( HomalgMatrix( [ 2^7 ], R ) );
+L := RightPresentation( HomalgMatrix( [ 2^4 ], R ) );
 triangle := LHomHom( 4, seq, K, L, "t" );
 lehs := LongSequence( triangle );
 ByASmallerPresentation( lehs );
