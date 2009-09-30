@@ -781,9 +781,12 @@ InstallMethod( LoadHomalgMatrixFromFile,
         [ IsString, IsInt, IsInt, IsLocalRing ],
         
   function( filename, r, c, R )
-    local ComputationRing, numer, denom;
+    local ComputationRing, numer, denom, homalgIO;
     
     if LoadPackage( "HomalgToCAS" ) <> true then
+       Error( "the package HomalgToCAS failed to load\n" );
+    fi;
+    if LoadPackage( "HomalgIO" ) <> true then
        Error( "the package HomalgToCAS failed to load\n" );
     fi;
     
@@ -795,7 +798,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
     denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
     denom := GetEntryOfHomalgMatrix( denom, 1, 1 );
     
-    if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
+    homalgIO := ValueGlobal( "HOMALG_IO" );
+    if not ( IsBound( homalgIO.DoNotDeleteTemporaryFiles ) and homalgIO.DoNotDeleteTemporaryFiles = true ) then
         Exec( Concatenation( "/bin/rm -f \"", Concatenation( filename, "_numerator" ), "\"" ) );
         Exec( Concatenation( "/bin/rm -f \"", Concatenation( filename, "_denominator" ), "\"" ) );
     fi;
