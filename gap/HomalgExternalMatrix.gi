@@ -278,7 +278,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         
   function( M, RR )
     
-    local R, r, c, separator, directory, pointer, pid, file, filename, fs, MM;
+    local R, r, c, separator, directory, pointer, pid, file, filename, fs, remove, MM;
     
     R := HomalgRing( M ); # the source ring
     
@@ -347,14 +347,24 @@ InstallMethod( ConvertHomalgMatrixViaFile,
     
     Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
     
-    SaveHomalgMatrixToFile( filename, M );
+    remove := SaveHomalgMatrixToFile( filename, M );
     
     MM := LoadHomalgMatrixFromFile( filename, r, c, RR ); # matrix in target ring
     
     ResetFilterObj( MM, IsVoidMatrix );
     
     if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
-        Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+        if not IsBool( remove ) then
+            if IsList( remove ) and ForAll( remove, IsString ) then
+                for file in remove do
+                    Exec( Concatenation( "/bin/rm -f \"", file, "\"" ) );
+                od;
+            else
+                Error( "expecting a list of strings indicating file names to be deleted\n" );
+            fi;
+        else
+            Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+        fi;
     fi;
     
     return MM;
