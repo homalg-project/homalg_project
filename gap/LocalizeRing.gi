@@ -795,6 +795,11 @@ InstallMethod( LoadHomalgMatrixFromFile,
     denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
     denom := GetEntryOfHomalgMatrix( denom, 1, 1 );
     
+    if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
+        Exec( Concatenation( "/bin/rm -f \"", Concatenation( filename, "_numerator" ), "\"" ) );
+        Exec( Concatenation( "/bin/rm -f \"", Concatenation( filename, "_denominator" ), "\"" ) );
+    fi;
+    
     elif IsExistingFile( filename ) then
     
       numer := LoadHomalgMatrixFromFile( filename, r, c, ComputationRing );
