@@ -43,5 +43,44 @@
     
   </Section>
 
+  <Section Label="LocalizeRing:Tools">
+    
+    <Heading>Tools</Heading>
+    
+    The package &LocalizeRingForHomalg; also implements tool functions. These are refered to from &homalg; automatically. We list the implemented methods here are and refer to the &homalg; documentation for details. All tools functions from &homalg; not listed here are also supported by fallback tools.
+
+    <List>
+        <Item>IsZero </Item>
+        <Item>IsOne </Item>
+        <Item>Minus </Item>
+        <Item>DivideByUnit </Item>
+        <Item>IsUnit</Item>
+        <Item>Sum </Item>
+        <Item>Product </Item>
+        <Item>ShallowCopy </Item>
+        <Item>ZeroMatrix </Item>
+        <Item>IdentityMatrix </Item>
+        <Item>AreEqualMatrices </Item>
+        <Item>Involution </Item>
+        <Item>CertainRows </Item>
+        <Item>CertainColumns </Item>
+        <Item>UnionOfRows </Item>
+        <Item>UnionOfColumns </Item>
+        <Item>DiagMat </Item>
+        <Item>KroneckerMat</Item>
+        <Item>MulMat</Item>
+        <Item>AddMat</Item>
+        <Item>SubMat</Item>
+        <Item>Compose</Item>
+        <Item>NrRows</Item>
+        <Item>NrColumns</Item>
+        <Item>IsZeroMatrix</Item>
+        <Item>IsDiagonalMatrix</Item>
+        <Item>ZeroRows</Item>
+        <Item>ZeroColumns</Item>
+    </List>
+
+  </Section>
+
 
 </Appendix>
