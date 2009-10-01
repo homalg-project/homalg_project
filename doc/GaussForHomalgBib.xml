@@ -10,27 +10,18 @@
   <key>GAP</key>
   <keywords>groups; *; gap; manual</keywords>
 </manual></entry>
-<entry id="homalg"><manual>
-  <author>
-    <name><first>Mohamed</first><last>Barakat</last></name>
-    <name><first>Daniel</first><last>Robertz</last></name>
-  </author>  
-  <title>homalg project</title>
-  <year>2003-2008</year>
-  <note><URL>http://homalg.math.rwth-aachen.de/</URL></note>
-</manual></entry>
 <entry id="BREACA"><inproceedings>
   <author>
     <name><first>Mohamed</first><last>Barakat</last></name>
     <name><first>Daniel</first><last>Robertz</last></name>
   </author>  
-  <title><M>\mathtt{homalg}</M>: First steps to an abstract package for
+  <title><M>homalg</M>: First steps to an abstract package for
       homological algebra</title>
   <booktitle><C>Proceedings of the X meeting on computational algebra and its
       applications (<C>EACA 2006</C>), Sevilla (Spain)</C></booktitle>
   <year>2006</year>
   <pages>29--32</pages>
-  <note>http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf</note>
+  <note><URL>http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf</URL></note>
 </inproceedings></entry>
 <entry id="homalg-package"><manual>
   <author>
@@ -38,7 +29,7 @@
   </author>  
   <title>The homalg package -- GAP4</title>
   <year>2007-2009</year>
-  <note>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</note>
+  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</URL></note>
 </manual></entry>
 <entry id="BR"><article>
   <author>
@@ -52,12 +43,11 @@
   <volume>7</volume>
   <number>3</number>
   <pages>299--317</pages>
-  <note><URL Link="http://arxiv.org/abs/math.AC/0701146">arXiv:math.AC/0701146</URL></note>
+  <note>arXiv:math.AC/0701146</note>
   <issn>0219-4988</issn>
   <mrnumber>MR2431811</mrnumber>
   <mrclass>16E30 (16-04)</mrclass>
   <other type="fjournal">Journal of Algebra and its Applications</other>
-  <other type="eprint">arXiv:math.AC/0701146</other>
 </article></entry>
 <entry id="MP_SCO"><article>
   <author>
