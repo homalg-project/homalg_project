@@ -26,13 +26,13 @@ Subtitle := "A &homalg; based Package for Localization of Polynomial Rings",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.09.29",
+Version := "2009.09.30",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "28/09/2009",
+Date := "30/09/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "28/09/2009",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/LocalizeRingForHomalg",
+ArchiveURL := "http://wwwb.math.rwth-aachen.de/~markus/LocalizeRingForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -260,7 +260,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2009.09.29"]],
+  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["homalg", ">= 2009.09.30"]],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -318,7 +318,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["homological", "ext", "tor", "local"]
+Keywords := ["homological", "ext", "tor", "local", "mora"]
 
 ));
 

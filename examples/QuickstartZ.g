@@ -17,8 +17,8 @@
 ##  gap> alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );
 ##  <A "homomorphism" of left modules>
 ##  gap> M_ := Kernel( alpha2 );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by yet unknown relations for a cyclic generato\
+##  r>
 ##  gap> alpha1 := KernelEmb( alpha2 );
 ##  <A monomorphism of left modules>
 ##  gap> Display( M_ );

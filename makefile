@@ -15,7 +15,7 @@ doc/manual.six: makedoc.g maketest.g \
 clean:
 	(cd doc ; ./clean)
 
-test:	doc
+test:	#doc
 	gapL -x 80 maketest.g
 
 archive: doc
