@@ -50,6 +50,7 @@ define. On the other hand, <Ref Func="ImportMatrix"/> and
 <#Include Label="DecideZeroRows">
 <#Include Label="DecideZeroRowsEffectively">
 <#Include Label="SyzygiesGeneratorsOfRows">
+<#Include Label="RelativeSyzygiesGeneratorsOfRows">
 <!-- GaussFQI.gi -->
 <#Include Label="TriangularBasisOfRows">
 <#Include Label="CreateHomalgTable">

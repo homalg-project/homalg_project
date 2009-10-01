@@ -38,14 +38,6 @@ InstallMethod( SetMyEval, "to circumvent the Eval(M)!.matrix problem",
 );
 
 ##
-InstallMethod( nrows, "for dense GAP matrices",
-        [ IsList ],
-  function( M )
-    return Length( M );
-  end
-);
-
-##
 InstallMethod( UnionOfRows, "for dense GAP matrices",
         [ IsList, IsList ],
   function( M, N )
@@ -78,11 +70,9 @@ InstallValue( CommonHomalgTableForGaussBasic,
 ##  <#/GAPDoc>
     #this uses ReduceMat from the Gauss Package to reduce A with B
     DecideZeroRows :=
-    function( A, B )
-      local R;
-      R := HomalgRing( A );
-      return HomalgMatrix( ReduceMat( MyEval( A ), MyEval( B ) ).reduced_matrix, NrRows( A ), NrColumns( A ), R );
-    end,
+      function( A, B )
+        return HomalgMatrix( ReduceMat( MyEval( A ), MyEval( B ) ).reduced_matrix, NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+      end,
       
 ##  <#GAPDoc Label="DecideZeroRowsEffectively">
 ##  <ManSection>
@@ -98,41 +88,50 @@ InstallValue( CommonHomalgTableForGaussBasic,
 ##  <#/GAPDoc>
     #this uses ReduceMatTransformation from the Gauss Package to reduce A with B to M and return T such that M = A + T * B
     DecideZeroRowsEffectively :=
-    function( A, B, T )
-      local R, RMT;
-      R := HomalgRing( A );
-      RMT := ReduceMatTransformation( MyEval( A ), MyEval( B ) );
-      SetMyEval( T, RMT.transformation );
-      ResetFilterObj( T, IsVoidMatrix );
-      return HomalgMatrix( RMT.reduced_matrix, NrRows( A ), NrColumns( A ), R );
-    end,
+      function( A, B, T )
+        local RMT;
+        RMT := ReduceMatTransformation( MyEval( A ), MyEval( B ) );
+        SetMyEval( T, RMT.transformation );
+        ResetFilterObj( T, IsVoidMatrix );
+        return HomalgMatrix( RMT.reduced_matrix, NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+      end,
     
 ##  <#GAPDoc Label="SyzygiesGeneratorsOfRows">
 ##  <ManSection>
-##  <Func Arg="M, [N]" Name="SyzygiesGeneratorsOfRows"/>
+##  <Func Arg="M" Name="SyzygiesGeneratorsOfRows"/>
 ##  <Returns>a &homalg; matrix</Returns>
 ##  <Description>
-##  If one argument is given, this returns the row syzygies of the &homalg;
+##  This returns the row syzygies of the &homalg;
 ##  matrix <A>M</A>, again as a &homalg; matrix.
-##  In case of two arguments, still only the row syzygies of <A>M</A> are
-##  returned, but the computation interpretes the rows of the &homalg;
-##  matrix <A>N</A> as additional zero relations.
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
     #this uses KernelMat from the Gauss Package to compute Syzygies
     SyzygiesGeneratorsOfRows :=
-    function( arg )
-      local M, R, syz;
-      M := arg[1];
-      R := HomalgRing( M );
-      if Length( arg ) > 1 and IsHomalgMatrix( arg[2] ) then
-          syz := KernelMat( MyEval( UnionOfRows( M, arg[2] ) ), [1..NrRows( M )] ).relations;
-      else
-          syz := KernelMat( MyEval( M ) ).relations;
-      fi;
-      return HomalgMatrix( syz, nrows( syz ), NrRows( M ), R );
-    end,
+      function( M )
+        local syz;
+        syz := KernelMat( MyEval( M ) ).relations;
+        return HomalgMatrix( syz, Nrows( syz ), NrRows( M ), HomalgRing( M ) );
+      end,
+    
+##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfRows">
+##  <ManSection>
+##  <Func Arg="M, N" Name="RelativeSyzygiesGeneratorsOfRows"/>
+##  <Returns>a &homalg; matrix</Returns>
+##  <Description>
+##  The row syzygies of <A>M</A> are returned,
+##  but now the computation interpretes the rows of the &homalg;
+##  matrix <A>N</A> as additional zero relations.
+##  </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+    #this uses KernelMat from the Gauss Package to compute Syzygies
+    RelativeSyzygiesGeneratorsOfRows :=
+      function( M, N )
+        local syz;
+        syz := KernelMat( MyEval( UnionOfRows( M, N ) ), [ 1 .. NrRows( M ) ] ).relations;
+        return HomalgMatrix( syz, Nrows( syz ), NrRows( M ), HomalgRing( M ) );
+      end,
     
   )
 );

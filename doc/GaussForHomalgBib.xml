@@ -19,6 +19,27 @@
   <year>2003-2008</year>
   <note><URL>http://homalg.math.rwth-aachen.de/</URL></note>
 </manual></entry>
+<entry id="BREACA"><inproceedings>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title><M>\mathtt{homalg}</M>: First steps to an abstract package for
+      homological algebra</title>
+  <booktitle><C>Proceedings of the X meeting on computational algebra and its
+      applications (<C>EACA 2006</C>), Sevilla (Spain)</C></booktitle>
+  <year>2006</year>
+  <pages>29--32</pages>
+  <note>http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf</note>
+</inproceedings></entry>
+<entry id="homalg-package"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+  </author>  
+  <title>The homalg package -- GAP4</title>
+  <year>2007-2009</year>
+  <note>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</note>
+</manual></entry>
 <entry id="BR"><article>
   <author>
     <name><first>Mohamed</first><last>Barakat</last></name>

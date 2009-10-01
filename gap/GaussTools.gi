@@ -20,8 +20,16 @@ if IsBound( HOMALG.OtherInternalMatrixTypes ) then
 else
     HOMALG.OtherInternalMatrixTypes := [ IsSparseMatrix ];
 fi;
-##
 
+##
+InstallMethod( Nrows, "for dense GAP matrices",
+        [ IsList ],
+  function( M )
+    return Length( M );
+  end
+);
+
+##
 InstallValue( CommonHomalgTableForGaussTools,
         
         # most of these functions just call the corresponding operation
@@ -260,7 +268,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                NrRows :=
                  function( C )
                    
-                   return nrows( Eval( C ) );
+                   return Nrows( Eval( C ) );
                    
                  end,
 ##  <#GAPDoc Label="NrColumns">
@@ -276,7 +284,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                NrColumns :=
                  function( C )
                    
-                   return ncols( Eval( C ) );
+                   return Ncols( Eval( C ) );
                    
                  end,
 ##  <#GAPDoc Label="IsZeroMatrix">
