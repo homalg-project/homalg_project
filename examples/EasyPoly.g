@@ -2,8 +2,7 @@
 ##  <Section Label="EasyPoly">
 ##  <Heading>An Easy Polynomial Example</Heading>
 ##  The ground ring used in this example is <M>F_3[x,y]</M>. We want to see, how the different rings in this package can be used to localize at different points and how the results differ.
-##  <Example>
-##   <![CDATA[
+##  <Example><![CDATA[
 ##  gap> LoadPackage("RingsForHomalg");;
 ##  gap> LoadPackage("LocalizeRingForHomalg");;
 ##  gap> F3xy := HomalgRingOfIntegersInSingular(3) * "x,y";;

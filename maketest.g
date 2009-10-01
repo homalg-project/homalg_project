@@ -6,10 +6,11 @@
 
 LoadPackage( "Sheaves" );
 LoadPackage( "LocalizeRingForHomalg" );
-LoadPackage( "HomalgToCAS" );
 LoadPackage( "IO_ForHomalg" );
+LoadPackage( "GAPDoc" );
 
 HOMALG_IO.show_banners := false;
+HOMALG_IO.suppress_PID := true;
 
 LoadPackage( "GAPDoc" );
 

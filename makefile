@@ -3,19 +3,15 @@ all: doc test
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		doc/LocalizeRingForHomalg.xml doc/title.xml \
-		doc/intro.xml doc/install.xml \
-		doc/LocalizeRingForHomalg.bib gap/*.gd gap/*.gi \
-		doc/LocalizeRing.xml \
-		doc/examples.xml doc/appendix.xml \
-		examples/* \
-		VERSION PackageInfo.g
+		PackageInfo.g VERSION \
+		doc/LocalizeRingForHomalg.bib doc/*.xml \
+		gap/*.gd gap/*.gi examples/*.g
 	        gapL makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
-test:	#doc
+test:	doc
 	gapL -x 80 maketest.g
 
 archive: doc
@@ -34,5 +30,5 @@ towww: archive
 	cp doc/manual.pdf ${WEBPOS}/LocalizeRingForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-#	cp ../tar/LocalizeRingForHomalg.tar.gz ${WEBPOS}
+	cp ../tar/LocalizeRingForHomalg.tar.gz ${WEBPOS}
 

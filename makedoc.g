@@ -30,4 +30,3 @@ MakeGAPDocDoc( "doc", "LocalizeRingForHomalg", list, "LocalizeRingForHomalg" );
 GAPDocManualLab("LocalizeRingForHomalg");
 
 quit;
-
