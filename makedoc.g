@@ -14,6 +14,8 @@ WriteBibXMLextFile( "doc/RingsForHomalgBib.xml", bib );
 list := [
          "../gap/RingsForHomalg.gd",
          "../gap/RingsForHomalg.gi",
+         "../gap/Singular.gi",
+         "../gap/SingularBasic.gi",
          ];
 
 MakeGAPDocDoc( "doc", "RingsForHomalg", list, "RingsForHomalg" );

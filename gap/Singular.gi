@@ -376,17 +376,39 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
   return(string(rows));\n\
 }\n\n",
     
+##  <#GAPDoc Label="BasisOfRowModule:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="BasisOfRowModule" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     BasisOfRowModule := "\n\
 proc BasisOfRowModule (matrix M)\n\
 {\n\
   return(std(M));\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
+##  <#GAPDoc Label="BasisOfColumnModule:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="BasisOfColumnModule" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     BasisOfColumnModule := "\n\
 proc BasisOfColumnModule (matrix M)\n\
 {\n\
   return(Involution(BasisOfRowModule(Involution(M))));\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
     ReducedBasisOfRowModule := "\n\
 proc ReducedBasisOfRowModule (matrix M)\n\
@@ -410,16 +432,35 @@ proc ReducedBasisOfColumnModule (matrix M)\n\
 #  list l = transpose(transpose(T)*transpose(M)),T;\n\
 #  return(l)\n\
 #}\n\n",
-    
+
+#never use stdlift, also because it might differ from std!!!
+##  <#GAPDoc Label="BasisOfRowsCoeff:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M, T" Name="BasisOfRowsCoeff" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     BasisOfRowsCoeff := "\n\
 proc BasisOfRowsCoeff (matrix M)\n\
 {\n\
   matrix B = std(M);\n\
-  matrix T = lift(M,B); //never use stdlift, also because it might differ from std!!!\n\
+  matrix T = lift(M,B);
   list l = B,T;\n\
   return(l)\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="BasisOfColumnsCoeff:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M, T" Name="BasisOfColumnsCoeff" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     BasisOfColumnsCoeff := "\n\
 proc BasisOfColumnsCoeff (matrix M)\n\
 {\n\
@@ -429,28 +470,59 @@ proc BasisOfColumnsCoeff (matrix M)\n\
   l = Involution(B),Involution(T);\n\
   return(l);\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
+##  <#GAPDoc Label="DecideZeroRows:SingularMacro">
+##  <ManSection>
+##    <Func Arg="A, B" Name="DecideZeroRows" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     DecideZeroRows := "\n\
 proc DecideZeroRows (matrix A, matrix B)\n\
 {\n\
   return(reduce(A,B));\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="DecideZeroColumns:SingularMacro">
+##  <ManSection>
+##    <Func Arg="A, B" Name="DecideZeroColumns" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     DecideZeroColumns := "\n\
 proc DecideZeroColumns (matrix A, matrix B)\n\
 {\n\
   return(Involution(reduce(Involution(A),Involution(B))));\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
-#todo: read part of the unit matrix in singular help!
-#      it is ignored right now.
 # division(A^t,B^t) returns (TT^t, M^t, U^t) with
 #                A^t*U^t = B^t*TT^t + M^t
 # <=> (ignore U) M^t = A^t - B^t*TT^tr
 # <=>            M   = A   + (-TT) * B
 # <=> (T:=-TT)   M   = A   + T * B
 #M^t=A^t-T^t*B^t
-    
+
+##  <#GAPDoc Label="DecideZeroRowsEffectively:SingularMacro">
+##  <ManSection>
+##    <Func Arg="A, B, T" Name="DecideZeroRowsEffectively" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     DecideZeroRowsEffectively := "\n\
 proc DecideZeroRowsEffectively (matrix A, matrix B)\n\
 {\n\
@@ -459,7 +531,18 @@ proc DecideZeroRowsEffectively (matrix A, matrix B)\n\
   list l = M,T;\n\
   return(l);\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="DecideZeroColumnsEffectively:SingularMacro">
+##  <ManSection>
+##    <Func Arg="A, B, T" Name="DecideZeroColumnsEffectively" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     DecideZeroColumnsEffectively := "\n\
 proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
 {\n\
@@ -469,54 +552,128 @@ proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
   l = Involution(B),Involution(T);\n\
   return(l);\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
     SyzForHomalg := "\n\
 proc SyzForHomalg (matrix M)\n\
 {\n\
   return(syz(M));\n\
 }\n\n",
-    
+
+##  <#GAPDoc Label="SyzygiesGeneratorsOfRows:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="SyzygiesGeneratorsOfRows" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     SyzygiesGeneratorsOfRows := "\n\
 proc SyzygiesGeneratorsOfRows (matrix M)\n\
 {\n\
   return(SyzForHomalg(M));\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="SyzygiesGeneratorsOfColumns:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="SyzygiesGeneratorsOfColumns" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     SyzygiesGeneratorsOfColumns := "\n\
 proc SyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
   return(Involution(SyzForHomalg(Involution(M))));\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfRows:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M, M2" Name="RelativeSyzygiesGeneratorsOfRows" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     RelativeSyzygiesGeneratorsOfRows := "\n\
 proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\
 {\n\
   return(std(modulo(M1, M2)));\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfColumns:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M, M2" Name="RelativeSyzygiesGeneratorsOfColumns" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     RelativeSyzygiesGeneratorsOfColumns := "\n\
 proc RelativeSyzygiesGeneratorsOfColumns (matrix M1, matrix M2)\n\
 {\n\
   return(Involution(RelativeSyzygiesGeneratorsOfRows(Involution(M1),Involution(M2))));\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="ReducedSyzygiesGeneratorsOfRows:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="ReducedSyzygiesGeneratorsOfRows" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     ReducedSyzForHomalg := "\n\
 proc ReducedSyzForHomalg (matrix M)\n\
 {\n\
   return(matrix(nres(M,2)[2]));\n\
 }\n\n",
-    
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="ReducedSyzygiesGeneratorsOfColumns:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="ReducedSyzygiesGeneratorsOfColumns" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     ReducedSyzygiesGeneratorsOfRows := "\n\
 proc ReducedSyzygiesGeneratorsOfRows (matrix M)\n\
 {\n\
   return(ReducedSyzForHomalg(M));\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
     ReducedSyzygiesGeneratorsOfColumns := "\n\
 proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
   return(Involution(ReducedSyzForHomalg(Involution(M))));\n\
 }\n\n",
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
     
     Deg := "\n\
 ring r;\n\

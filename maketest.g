@@ -13,6 +13,8 @@ LoadPackage( "GAPDoc" );
 list := [
          "../gap/RingsForHomalg.gd",
          "../gap/RingsForHomalg.gi",
+         "../gap/Singular.gi",
+         "../gap/SingularBasic.gi",
          ];
 
 TestManualExamples( "doc", "RingsForHomalg.xml", list );
