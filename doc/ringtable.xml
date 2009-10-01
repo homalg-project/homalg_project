@@ -1,0 +1,54 @@
+<!-- 
+
+  ring table.xml            RingsForHomalg package documentation        Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the chapter of the documentation describing the installation.
+
+-->
+
+<Chapter Label="ring table">
+  <Heading>The Ring Table</Heading>
+
+  <Section Label="HomalgTable:Generic">
+
+    <Heading>An Example for a Ring Table - Singular</Heading>
+
+    todo: introductory text, 
+          mention: transposed matrices, the macros, refer to the philosophy
+
+    <#Include Label="BasisOfRowModule:Singular">
+    <#Include Label="BasisOfRowModule:SingularMacro">
+    <#Include Label="BasisOfColumnModule:Singular">
+    <#Include Label="BasisOfColumnModule:SingularMacro">
+    <#Include Label="DecideZeroRows:Singular">
+    <#Include Label="DecideZeroRows:SingularMacro">
+    <#Include Label="DecideZeroColumns:Singular">
+    <#Include Label="DecideZeroColumns:SingularMacro">
+    <#Include Label="SyzygiesGeneratorsOfRows:Singular">
+    <#Include Label="SyzygiesGeneratorsOfRows:SingularMacro">
+    <#Include Label="SyzygiesGeneratorsOfColumns:Singular">
+    <#Include Label="SyzygiesGeneratorsOfColumns:SingularMacro">
+    <#Include Label="BasisOfRowsCoeff:Singular">
+    <#Include Label="BasisOfRowsCoeff:SingularMacro">
+    <#Include Label="BasisOfColumnsCoeff:Singular">
+    <#Include Label="BasisOfColumnsCoeff:SingularMacro">
+    <#Include Label="DecideZeroRowsEffectively:Singular">
+    <#Include Label="DecideZeroRowsEffectively:SingularMacro">
+    <#Include Label="DecideZeroColumnsEffectively:Singular">
+    <#Include Label="DecideZeroColumnsEffectively:SingularMacro">
+    <#Include Label="RelativeSyzygiesGeneratorsOfRows:Singular">
+    <#Include Label="RelativeSyzygiesGeneratorsOfRows:SingularMacro">
+    <#Include Label="RelativeSyzygiesGeneratorsOfColumns:Singular">
+    <#Include Label="RelativeSyzygiesGeneratorsOfColumns:SingularMacro">
+    <#Include Label="ReducedSyzygiesGeneratorsOfRows:Singular">
+    <#Include Label="ReducedSyzygiesGeneratorsOfRows:SingularMacro">
+    <#Include Label="ReducedSyzygiesGeneratorsOfColumns:Singular">
+    <#Include Label="ReducedSyzygiesGeneratorsOfColumns:SingularMacro">
+
+
+  </Section>
+
+</Chapter>
