@@ -445,7 +445,7 @@ proc ReducedBasisOfColumnModule (matrix M)\n\
 proc BasisOfRowsCoeff (matrix M)\n\
 {\n\
   matrix B = std(M);\n\
-  matrix T = lift(M,B);
+  matrix T = lift(M,B);\n\
   list l = B,T;\n\
   return(l)\n\
 }\n\n",
