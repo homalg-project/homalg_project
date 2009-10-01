@@ -13,7 +13,7 @@
 
 <Heading>Overview of the &LocalizeRingForHomalg; Package Source Code</Heading>
 
-  This appendix is included in the documentation to shine some light on the mathematical backgrounds of this Package. Neither is it needed to work with this package nor should the methods presented here be called directly.
+  This appendix is included in the documentation to shine some light on the mathematical backgrounds of this Package. Neither is it needed to work with this package nor should the methods presented here be called directly. The functions documented here are entries of the so called ring table and not to be called directly. There are higher level methods in declared and installed in &homalg;, which call this functions.
   
   <P/>We only present the simpler procedures, where no transformation matrices are computed, since the computation of transformation matrices carries no further mathematical ideas.
   

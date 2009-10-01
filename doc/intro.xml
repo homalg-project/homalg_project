@@ -26,9 +26,9 @@ behind the package.
   <Section Label="math">
     <Heading>The Math Behind This Package</Heading>
 
-    The math behind this package is a simple trick in allowing global computation to be done instead of local computations. This works on any commutative computable ring (in the sense of &homalg; <Cite Key="homalg.new"/>) without need of implementing new low level algorithms. Details can be found in the paper <Cite Key="BL"/>. This ring can be constructed by <Ref Attr="LocalizeAt" Label= "for a commutative ring and a maximal ideal"/> and <Ref Attr="LocalizeAtZero" Label= "for a free polynomial ring"/>.
+    The math behind this package is a simple trick in allowing global computation to be done instead of local computations. This works on any commutative computable ring (in the sense of &homalg; <Cite Key="homalg.new"/>) without need of implementing new low level algorithms. Details can be found in the paper <Cite Key="BL"/>. This ring can be constructed by <Ref Oper="LocalizeAt" Label= "for a commutative ring and a maximal ideal"/> and <Ref Oper="LocalizeAtZero" Label= "for a free polynomial ring"/>.
 
-    <P/>Furthermore we use the package &RingsForHomalg; to communicate with &Singular; and use the implementation of Mora's algorithm there. This is restricted to polynomial rings and needs the package &RingsForHomalg;. This ring can be constructed by <Ref Attr="LocalizePolynomialRingAtZeroWithMora" Label= "constructor for homalg localized rings using Mora's algorithm"/>.
+    <P/>Furthermore we use the package &RingsForHomalg; to communicate with &Singular; and use the implementation of Mora's algorithm there. This is restricted to polynomial rings and needs the package &RingsForHomalg;. This ring can be constructed by <Ref Oper="LocalizePolynomialRingAtZeroWithMora" Label= "constructor for homalg localized rings using Mora's algorithm"/>.
     
   </Section>
   
