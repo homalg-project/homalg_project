@@ -303,19 +303,43 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
 #                 function( M, pos_list )
 #                   
 #                 end,
-               
+#                
 #               GetRowIndependentUnitPositions :=
 #                  function( M, pos_list )
 #                    
-#                    
 #                  end,
                
-#                GetUnitPosition :=
-#                  function( M, pos_list )
-#                    
-#                    
-#                  end,
-               
+               GetUnitPosition :=
+                 function( M, pos_list )
+                 local R, A, i, N, l;
+                 
+                   R:= AssociatedComputationRing( M );
+                   if not IsIdenticalObj( R, AssociatedGlobalRing( M ) ) then
+                   
+                     #mora:
+                     return GetUnitPosition( Numerator( M ), pos_list );
+                     
+                   else
+                   
+                     #our stuff
+                     A := R * GeneratorsOfMaximalLeftIdeal( HomalgRing( M ) );
+                     for i in [ 1 .. NrColumns( M ) ] do
+                        if not i in pos_list then
+                          N := CertainColumns( Numerator( M ) , [ i ] );
+                          N := DecideZero( N, A );
+                          l := GetUnitPosition( N, List( Filtered( pos_list, a->IsList(a) and a[2]=i ), b->[b[1],i] ));
+                          if l <> fail then 
+                            return [l[1],i];
+                          fi;
+                        fi;
+                     od;
+                   
+                   fi;
+                   
+                   return fail;
+                   
+                 end,
+#                
 #                DivideEntryByUnit :=
 #                  function( M, i, j, u )
 #                    
