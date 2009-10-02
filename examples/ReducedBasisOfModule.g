@@ -4,6 +4,9 @@ Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 LoadPackage( "LocalizeRingForHomalg" );
 
+SetInfoLevel( InfoLocalizeRingForHomalgShowUnits, 1 );;
+SetInfoLevel( InfoLocalizeRingForHomalg, 2 );;
+
 #SetAssertionLevel( 4 );
 
 R0 := LocalizeAtZero( Qxyz );

@@ -32,6 +32,13 @@ InstallValue( CommonHomalgTableForLocalizedRingsBasic,
 BasisOfRowModule :=
   function( M )
 
+    Info(
+      InfoLocalizeRingForHomalg,
+      2,
+      "Start BasisOfRowModule with ",
+      NrRows( M ), "x", NrColumns( M )
+    );
+
     return HomalgLocalMatrix( BasisOfRowModule( Numerator( M ) ), HomalgRing( M ) );
     
 end,
@@ -43,6 +50,8 @@ end,
 BasisOfColumnModule :=
   function( M )
     
+    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfColumnModule with ", NrRows( M ), "x", NrColumns( M ) );
+    
     return HomalgLocalMatrix( BasisOfColumnModule( Numerator( M ) ), HomalgRing( M ) );
     
   end,
@@ -50,6 +59,8 @@ BasisOfColumnModule :=
 BasisOfRowsCoeff :=
   function( M, T )
     local R, ComputationRing, TT, result;
+
+    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfRowsCoeff with ", NrRows( M ), "x", NrColumns( M ) );
     
     R := HomalgRing( M );
     ComputationRing := AssociatedComputationRing( R );
@@ -65,7 +76,9 @@ BasisOfRowsCoeff :=
     result := HomalgLocalRingElement( One( ComputationRing), Denominator( M ), R ) * HomalgLocalMatrix( result, R );
     
     Assert( 4, result = T * M );
-    
+
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "BasisOfRowsCoeff: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name(Denominator(T)) );
+
     return result;
     
   end,
@@ -73,6 +86,8 @@ BasisOfRowsCoeff :=
 BasisOfColumnsCoeff :=
   function( M, T )
     local R, ComputationRing, TT, result;
+
+    Info( InfoLocalizeRingForHomalg, 2, "Start BasisOfColumnsCoeff with ", NrRows( M ), "x", NrColumns( M ) );
     
     R := HomalgRing( M );
     ComputationRing := AssociatedComputationRing( R );
@@ -89,6 +104,8 @@ BasisOfColumnsCoeff :=
     
     Assert( 4, result = M * T );
     
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "BasisOfColumnsCoeff: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name(Denominator(T)) );
+
     return result;
     
   end,
@@ -104,11 +121,22 @@ DecideZeroRows :=
   function( A, B )
     local R, ComputationRing, hook, result;
     
+    Info(
+      InfoLocalizeRingForHomalg,
+      2,
+      "Start DecideZeroRows with ",
+      NrRows( A ), "x", NrColumns( A ),
+      " and ",
+      NrRows( B ), "x", NrColumns( B )
+    );
+    
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
     
     result := DecideZeroRows( Numerator( A ) , Numerator( B ) );
-    return HomalgLocalMatrix( result, Denominator( A ) , R );
+    result := HomalgLocalMatrix( result, Denominator( A ) , R );
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroRows: produces denominator: ", Name( Denominator( result ) ) );
+    return result;
 
   end,
 ##  ]]></Listing>
@@ -120,17 +148,23 @@ DecideZeroColumns :=
   function( A, B )
     local R, ComputationRing, hook, result;
     
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumns with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
+    
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
     
     result := DecideZeroColumns( Numerator( A ) , Numerator( B ) );
-    return HomalgLocalMatrix( result, Denominator( A ) , R );
+    result := HomalgLocalMatrix( result, Denominator( A ) , R );
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroColumns: produces denominator: ", Name( Denominator( result ) ) );
+    return result;
 
   end,
 
 DecideZeroRowsEffectively :=
   function( A, B, T )
     local R, T1, result, ComputationRing;
+    
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroRowsEffectively with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
     
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
@@ -148,6 +182,8 @@ DecideZeroRowsEffectively :=
     
     Assert( 4, result = A + T * B );
     
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroRowsEffectively: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name( Denominator( T ) ) );
+    
     return result;
     
   end,
@@ -155,6 +191,8 @@ DecideZeroRowsEffectively :=
 DecideZeroColumnsEffectively :=
   function( A, B, T )
     local R, T1, result, ComputationRing;
+    
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumnsEffectively with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
     
     R := HomalgRing( A );
     ComputationRing := AssociatedComputationRing( R );
@@ -172,6 +210,8 @@ DecideZeroColumnsEffectively :=
     
     Assert( 4, result = A + B * T );
     
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroColumnsEffectively: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name( Denominator( T ) ) );
+    
     return result;
     
   end,
@@ -186,6 +226,13 @@ DecideZeroColumnsEffectively :=
 SyzygiesGeneratorsOfRows :=
   function( M )
     
+    Info(
+      InfoLocalizeRingForHomalg,
+      2,
+      "Start SyzygiesGeneratorsOfRows with ",
+      NrRows( M ), "x", NrColumns( M )
+    );
+
     return HomalgLocalMatrix(\
              SyzygiesGeneratorsOfRows( Numerator( M ) ), HomalgRing( M )\
            );
@@ -200,6 +247,8 @@ RelativeSyzygiesGeneratorsOfRows :=
   function( M, N )
     local CommonDenomMatrix, M2, N2;
     
+    Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfRows with ", NrRows( M ), "x", NrColumns( M ), " and ", NrRows( N ), "x", NrColumns( N ) );
+    
     CommonDenomMatrix := UnionOfRows( M, N );
     M2 := CertainRows( CommonDenomMatrix, [ 1 .. NrRows( M ) ] );
     N2 := CertainRows( CommonDenomMatrix, [ NrRows( M ) + 1 .. NrRows( CommonDenomMatrix ) ] );
@@ -211,6 +260,7 @@ RelativeSyzygiesGeneratorsOfRows :=
 SyzygiesGeneratorsOfColumns :=
   function( M )
     
+    Info( InfoLocalizeRingForHomalg, 2, "Start SyzygiesGeneratorsOfColumns with ", NrRows( M ), "x", NrColumns( M ) );
     return HomalgLocalMatrix( SyzygiesGeneratorsOfColumns( Numerator( M ) ), HomalgRing( M ) );
     
   end,
@@ -218,6 +268,8 @@ SyzygiesGeneratorsOfColumns :=
 RelativeSyzygiesGeneratorsOfColumns :=
   function( M, N )
     local CommonDenomMatrix, M2, N2;
+    
+    Info( InfoLocalizeRingForHomalg, 2, "Start RelativeSyzygiesGeneratorsOfColumns with ", NrRows( M ), "x", NrColumns( M ), " and ", NrRows( N ), "x", NrColumns( N ) );
     
     CommonDenomMatrix := UnionOfColumns( M, N );
     M2 := CertainColumns( CommonDenomMatrix, [ 1 .. NrColumns( M ) ] );
@@ -244,6 +296,15 @@ InstallValue( HomalgTableReductionMethodsForLocalizedRingsBasic,
 DecideZeroRows :=
   function( A, B )
     local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2, A3;
+    
+    Info( 
+       InfoLocalizeRingForHomalg,
+       2,
+       "Start DecideZeroRows with ",
+       NrRows( A ), "x", NrColumns( A ),
+       " and ",
+       NrRows( B ), "x", NrColumns( B ) 
+    );
     
     R := HomalgRing( A );
     GlobalR := AssociatedComputationRing( R );
@@ -281,6 +342,9 @@ DecideZeroRows :=
     od;
     
     N := HomalgRingElement( One( GlobalR ), denA, R ) * N;
+    
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroRows: produces denominator: ", Name( Denominator( N ) ) );
+    
     return N;
     
   end,
@@ -292,6 +356,8 @@ DecideZeroRows :=
 DecideZeroColumns :=
   function( A, B )
     local R, T, m, gens, n, GlobalR, one, N, a, numA, denA, i, A1, B1, A2, B2, A3;
+    
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumns with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
     
     R := HomalgRing( A );
     GlobalR := AssociatedComputationRing( R );
@@ -327,6 +393,9 @@ DecideZeroColumns :=
     od;
     
     N := HomalgRingElement( One( GlobalR ), denA, R ) * N;
+    
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroColumns: produces denominator: ", Name(Denominator(N)) );
+    
     return N;
     
   end,
@@ -334,6 +403,8 @@ DecideZeroColumns :=
 DecideZeroRowsEffectively :=
   function( A, B, T )
     local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, S1, u, SS, A3;
+    
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroRowsEffectively with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
     
     R := HomalgRing( A );
     GlobalR := AssociatedComputationRing( R );
@@ -400,6 +471,9 @@ DecideZeroRowsEffectively :=
     fi;
     
     N := HomalgRingElement( one , denA , R ) * N;
+    
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroRowsEffectively: produces denominator: ", Name( Denominator( N ) ), " and for the transformation matrix: ", Name( Denominator( T ) ) );
+    
     return N;
     
   end,
@@ -407,6 +481,8 @@ DecideZeroRowsEffectively :=
 DecideZeroColumnsEffectively :=
   function( A, B, T )
     local R, m, gens, n, GlobalR, one, N, TT, a, numA, denA, b, numB, denB, i, A1, B1, A2, B2, S, S1, u, SS, A3;
+    
+    Info( InfoLocalizeRingForHomalg, 2, "Start DecideZeroColumnsEffectively with ", NrRows( A ), "x", NrColumns( A ), " and ", NrRows( B ), "x", NrColumns( B ) );
     
     R := HomalgRing( A );
     GlobalR := AssociatedComputationRing( R );
@@ -476,6 +552,9 @@ DecideZeroColumnsEffectively :=
     fi;
   
     N := HomalgRingElement( one , denA , R ) * N;
+    
+    Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroColumnsEffectively: produces denominator: ", Name( Denominator( N ) ), " and for the transformation matrix: ", Name( Denominator( T ) ) );
+    
     return N;
     
   end,
