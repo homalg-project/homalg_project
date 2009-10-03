@@ -15,10 +15,10 @@ test:	doc
 	gapL -x 80 maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" GaussForHomalg/doc/*.* GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} GaussForHomalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" GaussForHomalg/doc/*.* GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} GaussForHomalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/GaussForHomalg/public_html
-WEBPOS_FINAL=~/Sites/GaussForHomalg
+WEBPOS_FINAL=~/Sites/homalg-project/GaussForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
