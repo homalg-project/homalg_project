@@ -15,10 +15,10 @@ test:	doc
 	gapL -x 80 maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/RingsForHomalg.tar.gz --exclude ".DS_Store" RingsForHomalg/doc/*.* RingsForHomalg/gap/*.{gi,gd} RingsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} RingsForHomalg/maple/{homalg.*,PIR.*,Involutive.*,Janet.*,JanetOre.*} RingsForHomalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/RingsForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" RingsForHomalg/doc/*.* RingsForHomalg/gap/*.{gi,gd} RingsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} RingsForHomalg/maple/{homalg.*,PIR.*,Involutive.*,Janet.*,JanetOre.*} RingsForHomalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/RingsForHomalg/public_html
-WEBPOS_FINAL=~/Sites/RingsForHomalg
+WEBPOS_FINAL=~/Sites/homalg-project/RingsForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
