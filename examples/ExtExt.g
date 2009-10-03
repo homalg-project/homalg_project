@@ -16,7 +16,7 @@
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 6 relations for 5 generators>
 ##  gap> Y := Hom( Qxyz, W );
-##  <A right module on 5 generators satisfying an unknown number of relations>
+##  <A right module on 5 generators satisfying yet unknown relations>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom, 2, Y, "TensorY" );
 ##  <The functor TensorY>
 ##  gap> G := LeftDualizingFunctor( Qxyz );;

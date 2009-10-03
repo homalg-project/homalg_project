@@ -17,10 +17,10 @@ test:	doc
 	gapL -x 80 maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" ExamplesForHomalg/doc/*.* ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ExamplesForHomalg/doc/*.* ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/ExamplesForHomalg/public_html
-WEBPOS_FINAL=~/Sites/ExamplesForHomalg
+WEBPOS_FINAL=~/Sites/homalg-project/ExamplesForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
