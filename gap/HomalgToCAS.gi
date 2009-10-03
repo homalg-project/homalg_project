@@ -82,7 +82,7 @@ InstallValue( HOMALG_IO,
                 HomalgMatrix				:= "A:=",	## define a matrix
                 CopyMatrix				:= "A>A",	## copy a matrix
                 LoadHomalgMatrixFromFile 		:= "A<<",	## load a matrix from file
-                SaveHomalgMatrixToFile		:= "A>>",	## save a matrix to file
+                SaveHomalgMatrixToFile			:= "A>>",	## save a matrix to file
                 GetEntryOfHomalgMatrix			:= "<ij",	## get a matrix entry as a string
                 SetEntryOfHomalgMatrix			:= ">ij",	## set a matrix entry from a string
                 AddToEntryOfHomalgMatrix		:= "+ij",	## add to a matrix entry from a string
@@ -92,9 +92,17 @@ InstallValue( HOMALG_IO,
                 sparse					:= "spr",	## assign a "sparse" list of matrix entries to a variable
                 
                 ## mandatory matrix operations:
+                IsZeroMatrix				:= "A=0",	## test if a matrix is the zero matrix
+                                                                        ## CAUTION: the external system must be able to check
+                                                                        ## if the matrix is zero modulo possible ring relations
+                                                                        ## only known to the external system!
+                NrRows					:= "#==",	## number of rows
+                NrColumns				:= "#||",	## number of columns
+                Determinant				:= "det",	## determinant of a matrix over a (commutative) ring
+                
                 ZeroMatrix				:= "(0)",	## create a zero matrix
-                IdentityMatrix				:= "(1)",	## create an identity matrix                                     
-                AreEqualMatrices			:= "A=B",	## test if two matrices are equal	(CAUTION: the external system must be able to check equality modulo possible ring relations!)
+                IdentityMatrix				:= "(1)",	## create an identity matrix
+                
                 Involution				:= "A^*",	## "transpose" a matrix (with "the" involution of the ring)
                 CertainRows				:= "===",	## get certain rows of a matrix
                 CertainColumns				:= "|||",	## get certain columns of a matrix
@@ -106,15 +114,16 @@ InstallValue( HOMALG_IO,
                 AddMat					:= "A+B",	## add two matrices
                 SubMat					:= "A-B",	## substract two matrices
                 Compose					:= "A*B",	## multiply two matrices
-                NrRows					:= "#==",	## number of rows
-                NrColumns				:= "#||",	## number of columns
-                Determinant				:= "det",	## determinant of a matrix over a (commutative) ring
                 
                 ## important matrix operations:
-                ## (important for performance since existing fall-back methods cause a lot of traffic):
-                IsZeroMatrix				:= "A=0",	## test if a matrix is the zero matrix	(CAUTION: the external system must be able to check equality modulo possible ring relations!)
+                ## (important for performance since existing fallback methods cause a lot of traffic):
+                AreEqualMatrices			:= "A=B",	## test if two matrices are equal
+                                                                        ## CAUTION: the external system must be able to check
+                                                                        ## equality of the two matrices modulo possible ring relations
+                                                                        ## only known to the external system!
                 IsIdentityMatrix			:= "A=1",	## test if a matrix is the identity matrix
                 IsDiagonalMatrix			:= "A=\\",	## test if a matrix is diagonal (needed by the display method)
+                
                 ZeroRows				:= "0==",	## get the positions of the zero rows
                 ZeroColumns				:= "0||",	## get the positions of the zero columns
                 GetColumnIndependentUnitPositions	:= "ciu",	## get "column-independent" unit positions (needed by ReducedBasisOfModule)

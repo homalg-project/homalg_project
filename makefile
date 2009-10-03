@@ -15,10 +15,10 @@ test:	doc
 	gapL -x 80 maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/HomalgToCAS.tar.gz --exclude ".DS_Store" HomalgToCAS/doc/*.* HomalgToCAS/gap/*.{gi,gd} HomalgToCAS/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
+	(mkdir -p ../tar; cd ..; tar czvf tar/HomalgToCAS.tar.gz --exclude ".DS_Store" --exclude "*~" HomalgToCAS/doc/*.* HomalgToCAS/gap/*.{gi,gd} HomalgToCAS/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
 WEBPOS=~/gap/pkg/HomalgToCAS/public_html
-WEBPOS_FINAL=~/Sites/HomalgToCAS
+WEBPOS_FINAL=~/Sites/homalg-project/HomalgToCAS
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
