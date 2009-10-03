@@ -18,7 +18,7 @@ archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" Sheaves/doc/*.* Sheaves/gap/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Sheaves/examples/*.g)
 
 WEBPOS=~/gap/pkg/Sheaves/public_html
-WEBPOS_FINAL=~/Sites/Sheaves
+WEBPOS_FINAL=~/Sites/homalg-project/Sheaves
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
