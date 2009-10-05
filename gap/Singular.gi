@@ -288,6 +288,48 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
   return(string(pos));\n\
 }\n\n",
     
+    GetColumnIndependentUnitPositionsLocal := "\n\
+proc GetColumnIndependentUnitPositionsLocal (matrix M, list pos_list, matrix max_ideal)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list rest;\n\
+  for (int o=1; o<=m; o=o+1)\n\
+  {\n\
+    rest[size(rest)+1] = o;\n\
+  }\n\
+  int r = m;\n\
+  list e;\n\
+  list rest2;\n\
+  list pos;\n\
+  int i; int k; int a;\n\
+  \n\
+  for (int j=1; j<=n; j=j+1)\n\
+  {\n\
+    for (i=1; i<=r; i=i+1)\n\
+    {\n\
+      k = rest[r-i+1];\n\
+      if (reduce(M[k,j],max_ideal) != 0) //IsUnit\n\
+      {\n\
+        rest2 = e;\n\
+        pos[size(pos)+1] = list(j,k);\n\
+        for (a=1; a<=r; a=a+1)\n\
+        {\n\
+          if (M[rest[a],j] == 0)\n\
+          {\n\
+            rest2[size(rest2)+1] = rest[a];\n\
+          }\n\
+        }\n\
+        rest = rest2;\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}\n\n",
+    
     GetRowIndependentUnitPositions := "\n\
 proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
 {\n\
@@ -311,6 +353,48 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
     {\n\
       k = rest[r-j+1];\n\
       if (deg(leadmonom(M[i,k])) == 0) //IsUnit\n\
+      {\n\
+        rest2 = e;\n\
+        pos[size(pos)+1] = list(i,k);\n\
+        for (a=1; a<=r; a=a+1)\n\
+        {\n\
+          if (M[i,rest[a]] == 0)\n\
+          {\n\
+            rest2[size(rest2)+1] = rest[a];\n\
+          }\n\
+        }\n\
+        rest = rest2;\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}\n\n",
+    
+    GetRowIndependentUnitPositionsLocal := "\n\
+proc GetRowIndependentUnitPositionsLocal (matrix M, list pos_list, matrix max_ideal)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list rest;\n\
+  for (int o=1; o<=n; o=o+1)\n\
+  {\n\
+    rest[size(rest)+1] = o;\n\
+  }\n\
+  int r = n;\n\
+  list e;\n\
+  list rest2;\n\
+  list pos;\n\
+  int j; int k; int a;\n\
+  \n\
+  for (int i=1; i<=m; i=i+1)\n\
+  {\n\
+    for (j=1; j<=r; j=j+1)\n\
+    {\n\
+      k = rest[r-j+1];\n\
+      if (reduce(M[i,k],max_ideal) != 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
         pos[size(pos)+1] = list(i,k);\n\
@@ -355,7 +439,7 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
 }\n\n",
     
     GetUnitPositionLocal := "\n\
-proc GetUnitPosition (matrix M, list pos_list, matrix max_ideal)\n\
+proc GetUnitPositionLocal (matrix M, list pos_list, matrix max_ideal)\n\
 {\n\
   int m = nrows(M);\n\
   int n = ncols(M);\n\
