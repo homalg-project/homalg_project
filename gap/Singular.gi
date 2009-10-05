@@ -354,6 +354,30 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
   return(\"fail\");\n\
 }\n\n",
     
+    GetUnitPositionLocal := "\n\
+proc GetUnitPosition (matrix M, list pos_list, matrix max_ideal)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  list rest;\n\
+  for (int o=1; o<=m; o=o+1)\n\
+  {\n\
+    rest[size(rest)+1] = o;\n\
+  }\n\
+  rest=Difference(rest,pos_list);\n\
+  for (int j=1; j<=n; j=j+1)\n\
+  {\n\
+    for (int i=1; i<=size(rest); i=i+1)\n\
+    {\n\
+      if (reduce(M[rest[i],j],max_ideal) != 0)//IsUnit\n\
+      {\n\
+        return(string(j,\",\",rest[i])); // this is not a mistake\n\
+      }\n\
+    }\n\
+  }\n\
+  return(\"fail\");\n\
+}\n\n",
+    
     GetCleanRowsPositions := "\n\
 proc GetCleanRowsPositions (matrix m, list l)\n\
 {\n\
