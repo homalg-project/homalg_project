@@ -102,3 +102,106 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                
         )
  );
+
+#this table will be copied from LocalizeRingForHomalg, so the ValueGlobals are justified
+ InstallValue( CommonHomalgTableForSingularToolsMoraPreRing,
+        
+        rec(
+               
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                     list := [ 0 ];
+                   else
+                     Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                     list := pos_list;
+                   fi;
+                    
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", ValueGlobal( "Numerator" )( M ), ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+               
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list, pos;
+                   
+                   if pos_list = [ ] then
+                     list := [ 0 ];
+                   else
+                     Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                     list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", ValueGlobal( "Numerator" )( M ), ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+               
+               GetUnitPosition :=
+                 function( M, pos_list )
+                 local R, A, i, N, l, list_string;
+                   
+                   return GetUnitPosition( ValueGlobal( "Numerator" )( M ), pos_list );
+                   
+                 end,
+               
+        )
+ );
+ 
+#this table will be copied from LocalizeRingForHomalg, so the ValueGlobals are justified
+InstallValue( HomalgTableForLocalizedRingsInSingularTools,
+
+    rec(
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                     if pos_list = [ ] then
+                       list := [ 0 ];
+                     else
+                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                     fi;
+                      
+                     return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositionsLocal(", ValueGlobal( "Numerator" )( M ), ", list (", list, "), ", ValueGlobal( "GeneratorsOfMaximalLeftIdeal" )( HomalgRing( M ) ), ")" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+
+                   
+                 end,
+               
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local list;
+                   
+                     if pos_list = [ ] then
+                       list := [ 0 ];
+                     else
+                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                     fi;
+                   
+                     return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositionsLocal(", ValueGlobal( "Numerator" )( M ), ", list (", list, "), ", ValueGlobal( "GeneratorsOfMaximalLeftIdeal" )( HomalgRing( M ) ), ")" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   
+                 end,
+               
+               GetUnitPosition :=
+                 function( M, pos_list )
+                 local l, list_string;
+                   
+                     if pos_list = [ ] then
+                       l := [ 0 ];
+                     else
+                       l := pos_list;
+                     fi;
+                   
+                     list_string := homalgSendBlocking( [ "GetUnitPositionLocal(", ValueGlobal( "Numerator" )( M ), ", list (", l, "), ", ValueGlobal( "GeneratorsOfMaximalLeftIdeal" )( HomalgRing( M ) ), ")" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                  
+                     if list_string = "fail" then
+                       return fail;
+                     else
+                       return StringToIntList( list_string );
+                     fi;
+                    
+                 end,
+        )
+ );
