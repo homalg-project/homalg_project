@@ -99,7 +99,7 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
         [ IsHomalgRing and IsCommutative and IsFreePolynomialRing ],
         
   function( globalR )
-    local globalRP, RP, RP_General, RP_Basic, RP_specific, component;
+    local globalRP, RP, RP_General, RP_Basic, RP_Tools, RP_specific, component;
     
     globalRP := homalgTable( globalR );
     
@@ -108,6 +108,8 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
     RP_General := ShallowCopy( CommonHomalgTableForLocalizedRings );
     
     RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
+    
+    RP_Tools := ShallowCopy( CommonHomalgTableForSingularToolsMoraPreRing );
     
     RP_specific := rec (
                         Zero := globalRP!.Zero,
@@ -124,6 +126,10 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
     
     for component in NamesOfComponents( RP_Basic ) do
         RP.(component) := RP_Basic.(component);
+    od;
+    
+    for component in NamesOfComponents( RP_Tools ) do
+        RP.(component) := RP_Tools.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

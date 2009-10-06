@@ -301,41 +301,104 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
 #               GetColumnIndependentUnitPositions :=
 #                 function( M, pos_list )
-#                   
+#                 local pos, f;
+#                   f := function( a )
+#                     if IsList(a) then
+#                       return [a[2],a[1]];
+#                     else 
+#                       return a;
+#                     fi;
+#                   end;
+#                   pos:=GetRowIndependentUnitPositions( Involution( M ), List( pos_list, f ) );
+#                   if pos <> [ ] then
+#                       SetIsZero( M, false );
+#                   fi;
+#                   return pos;
 #                 end,
 #                
 #               GetRowIndependentUnitPositions :=
 #                  function( M, pos_list )
-#                    
+#                  local rest, pos, j, l, k;
+#                   rest := [ 1 .. NrRows( M ) ];
+#                   pos := [ ];
+#                   for j in [ 1 .. NrColumns( M ) ] do
+#                     l := GetUnitPosition( CertainColumns( M, [ j ] ), List( Filtered( [ 1 .. NrRows( M ) ], a->not( a in rest )), b->[b,1] ) );
+#                     if l <> fail then
+#                       k := l[1];
+#                       Add( pos, [ j, k ] );
+#                       rest := Filtered( rest, a -> IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) );
+#                     fi;
+#                       
+#                   od;
+#                   
+#                   if pos <> [ ] then
+#                       SetIsZero( M, false );
+#                   fi;
+#                   return pos;
 #                  end,
+
+               GetColumnIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local pos, f;
+                     
+                   f := function( a )
+                     if IsList(a) then
+                       return [a[2],a[1]];
+                     else 
+                       return a;
+                     fi;
+                   end;
+                   pos:=GetRowIndependentUnitPositions( Involution( M ), List( pos_list, f ) );
+                   if pos <> [ ] then
+                       SetIsZero( M, false );
+                   fi;
+                   return pos;
+                   
+                 end,
+               
+               GetRowIndependentUnitPositions :=
+                 function( M, pos_list )
+                   local rest, pos, j, l, k;
+                   
+                   rest := [ 1 .. NrRows( M ) ];
+                   pos := [ ];
+                   for j in [ 1 .. NrColumns( M ) ] do
+                     l := GetUnitPosition( CertainColumns( M, [ j ] ), List( Filtered( [ 1 .. NrRows( M ) ], a->not( a in rest )), b->[b,1] ) );
+                     if l <> fail then
+                       k := l[1];
+                       Add( pos, [ j, k ] );
+                       rest := Filtered( rest, a -> IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) );
+                     fi;
+                       
+                   od;
+                   
+                   if pos <> [ ] then
+                       SetIsZero( M, false );
+                   fi;
+                   return pos;
+                   
+                 end,
                
                GetUnitPosition :=
                  function( M, pos_list )
                  local R, A, i, N, l;
                  
                    R:= AssociatedComputationRing( M );
-                   if not IsIdenticalObj( R, AssociatedGlobalRing( M ) ) then
+                   Assert( 4, IsIdenticalObj( R, AssociatedGlobalRing( M ) ) );#should not be called by mora
                    
-                     #mora:
-                     return GetUnitPosition( Numerator( M ), pos_list );
+                   #our stuff
+                   A := R * GeneratorsOfMaximalLeftIdeal( HomalgRing( M ) );
+                   for i in [ 1 .. NrColumns( M ) ] do
+                     if not i in pos_list then
+                       N := CertainColumns( Numerator( M ) , [ i ] );
+                       N := DecideZero( N, A );
+                       l := GetUnitPosition( N, List( Filtered( pos_list, a->IsList(a) and a[2]=i ), b->[b[1],i] ));
+                       if l <> fail then 
+                         return [l[1],i];
+                       fi;
+                     fi;
+                   od;
                      
-                   else
-                   
-                     #our stuff
-                     A := R * GeneratorsOfMaximalLeftIdeal( HomalgRing( M ) );
-                     for i in [ 1 .. NrColumns( M ) ] do
-                        if not i in pos_list then
-                          N := CertainColumns( Numerator( M ) , [ i ] );
-                          N := DecideZero( N, A );
-                          l := GetUnitPosition( N, List( Filtered( pos_list, a->IsList(a) and a[2]=i ), b->[b[1],i] ));
-                          if l <> fail then 
-                            return [l[1],i];
-                          fi;
-                        fi;
-                     od;
-                   
-                   fi;
-                   
                    return fail;
                    
                  end,

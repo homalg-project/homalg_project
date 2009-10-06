@@ -839,6 +839,14 @@ InstallMethod( LocalizeAt,
         RP!.(component) := HomalgTableReductionMethodsForLocalizedRingsBasic.(component);
     od;
     
+    if IsBoundGlobal( "HomalgTableForLocalizedRingsInSingularTools" ) then
+      if ValueGlobal( "IsHomalgExternalRingInSingularRep" )( globalR ) then
+        for component in NamesOfComponents( HomalgTableForLocalizedRingsInSingularTools ) do
+          RP!.(component) := HomalgTableForLocalizedRingsInSingularTools.(component);
+        od;
+      fi;
+    fi;
+    
     ## create the local ring
     localR := CreateHomalgRing( globalR, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
     
