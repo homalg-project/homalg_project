@@ -4,10 +4,10 @@ Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 LoadPackage( "LocalizeRingForHomalg" );
 
-SetInfoLevel( InfoLocalizeRingForHomalgShowUnits, 1 );;
-SetInfoLevel( InfoLocalizeRingForHomalg, 2 );;
+# SetInfoLevel( InfoLocalizeRingForHomalgShowUnits, 1 );;
+# SetInfoLevel( InfoLocalizeRingForHomalg, 2 );;
 
-#SetAssertionLevel( 4 );
+# SetAssertionLevel( 4 );
 
 R0:=LocalizePolynomialRingAtZeroWithMora( Qxyz );
 
