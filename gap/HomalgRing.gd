@@ -753,11 +753,12 @@ DeclareAttribute( "One",
         IsHomalgRingElement );
 
 ##
-DeclareAttribute( "Eval",
-        IsHomalgRingElement );
-
 DeclareOperation( "MinusOneMutable",
         [ IsHomalgRingElement ] );
+
+##
+DeclareAttribute( "EvalRingElement",
+        IsHomalgRingElement );
 
 ##  <#GAPDoc Label="Zero:ring">
 ##  <ManSection>

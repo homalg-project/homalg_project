@@ -86,7 +86,7 @@ InstallMethod( String,
 
   function( o )
     
-    return String( Eval( o ) );
+    return String( EvalRingElement( o ) );
     
 end );
 
@@ -98,13 +98,13 @@ InstallMethod( Name,
   function( o )
     local name;
     
-    if IsHomalgRingElement( Eval( o ) ) then
+    if IsHomalgRingElement( EvalRingElement( o ) ) then
         name := Name;
     else
         name := String;
     fi;
     
-    return Flat( [ "|[ ",  name( Eval( o ) ), " ]|" ] );
+    return Flat( [ "|[ ",  name( EvalRingElement( o ) ), " ]|" ] );
     
 end );
 
@@ -148,7 +148,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
         
   function( M, r, c, a, R )
     
-    SetEntryOfHomalgMatrix( Eval( M ), r, c, Eval( a ), AmbientRing( R ) );
+    SetEntryOfHomalgMatrix( Eval( M ), r, c, EvalRingElement( a ), AmbientRing( R ) );
     
 end );
 
@@ -314,7 +314,7 @@ InstallMethod( DecideZero,
     
     R := HomalgRing( r );
     
-    red := DecideZero( Eval( r ), R );
+    red := DecideZero( EvalRingElement( r ), R );
     
     red := HomalgResidueClassRingElement( red, R );
     
@@ -475,7 +475,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
               mat := arg[1];
               
               if IsList( mat ) and ForAll( mat, IsHomalgResidueClassRingElementRep ) then
-                  mat := List( mat, Eval );
+                  mat := List( mat, EvalRingElement );
               fi;
               
               ar := List( arg{[ 2 .. l ]},
@@ -650,7 +650,7 @@ InstallGlobalFunction( HomalgResidueClassRingElement,
         ## Objectify:
         ObjectifyWithAttributes(
                 r, TheTypeHomalgResidueClassRingElement,
-                Eval, a );
+                EvalRingElement, a );
     else
         r := a;
     fi;

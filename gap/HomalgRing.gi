@@ -639,8 +639,8 @@ InstallGlobalFunction( CreateHomalgRing,
     if IsBound( ring_element_constructor ) then
         
         for c in NamesOfComponents( table ) do
-            if IsRingElement( table!.( c ) ) then
-                table!.( c ) := ring_element_constructor( table!.( c ), homalg_ring );
+            if IsRingElement( table!.(c) ) then
+                table!.(c) := ring_element_constructor( table!.(c), homalg_ring );
             fi;
         od;
         

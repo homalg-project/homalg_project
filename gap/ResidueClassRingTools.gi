@@ -18,14 +18,14 @@
 InstallValue( CommonHomalgTableForResidueClassRingsTools,
 
         rec(
-               IsZero := r -> IsZero( DecideZero( Eval( r ), HomalgRing( r ) ) ),
+               IsZero := r -> IsZero( DecideZero( EvalRingElement( r ), HomalgRing( r ) ) ),
                
-               IsOne := r -> IsOne( DecideZero( Eval( r ), HomalgRing( r ) ) ),
+               IsOne := r -> IsOne( DecideZero( EvalRingElement( r ), HomalgRing( r ) ) ),
                
                Minus :=
                  function( a, b )
                    
-                   return DecideZero( Eval( a ) - Eval( b ), HomalgRing( a ) );
+                   return DecideZero( EvalRingElement( a ) - EvalRingElement( b ), HomalgRing( a ) );
                    
                  end,
                
@@ -37,9 +37,9 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                    S := AmbientRing( R );
                    
-                   A := HomalgMatrix( [ Eval( a ) ], 1, 1, S );
+                   A := HomalgMatrix( [ EvalRingElement( a ) ], 1, 1, S );
                    
-                   U := HomalgMatrix( [ Eval( u ) ], 1, 1, S );
+                   U := HomalgMatrix( [ EvalRingElement( u ) ], 1, 1, S );
                    
                    rel := RingRelations( R );
                    
@@ -63,7 +63,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                  function( R, u )
                    local U;
                    
-                   U := HomalgMatrix( [ Eval( u ) ], 1, 1, AmbientRing( R ) );
+                   U := HomalgMatrix( [ EvalRingElement( u ) ], 1, 1, AmbientRing( R ) );
                    
                    U := HomalgResidueClassMatrix( U, R );
                    
@@ -74,14 +74,14 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                Sum :=
                  function( a, b )
                    
-                   return DecideZero( Eval( a ) + Eval( b ), HomalgRing( a ) );
+                   return DecideZero( EvalRingElement( a ) + EvalRingElement( b ), HomalgRing( a ) );
                    
                  end,
                
                Product :=
                  function( a, b )
                    
-                   return DecideZero( Eval( a ) * Eval( b ), HomalgRing( a ) );
+                   return DecideZero( EvalRingElement( a ) * EvalRingElement( b ), HomalgRing( a ) );
                    
                  end,
                
@@ -366,7 +366,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                MulMat :=
                  function( a, A )
                    
-                   return DecideZero( Eval( a ) * Eval( A ), HomalgRing( A ) );
+                   return DecideZero( EvalRingElement( a ) * Eval( A ), HomalgRing( A ) );
                    
                  end,
                ##  ]]></Listing>
