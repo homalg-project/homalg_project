@@ -33,7 +33,7 @@
 ##  <#GAPDoc Label="IsGeneratorsOfFinitelyGeneratedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="rel" Name="IsGeneratorsOfFinitelyGeneratedModuleRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of a finite set of generators of a finitely generated &homalg; module. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgGenerators"/>)

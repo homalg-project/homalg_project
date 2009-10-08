@@ -19,7 +19,7 @@
 ##  <#GAPDoc Label="IsHomalgRingMap">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="phi" Name="IsHomalgRingMap"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of ring maps.
 ##    </Description>
@@ -32,9 +32,9 @@ DeclareCategory( "IsHomalgRingMap",
 ##  <#GAPDoc Label="IsHomalgRingSelfMap">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="phi" Name="IsHomalgRingSelfMap"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of ring self-maps. <Br/><Br/>
+##      The &GAP; category of ring self-maps. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRingMap</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -52,7 +52,7 @@ DeclareCategory( "IsHomalgRingSelfMap",
 ##  <#GAPDoc Label="IsMorphism:ringmap">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsMorphism" Label="for ring maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a well-defined map, i.e. independent of all involved presentations.
 ##    </Description>
@@ -65,7 +65,7 @@ DeclareProperty( "IsMorphism",
 ##  <#GAPDoc Label="IsIdentityMorphism:ringmap">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsIdentityMorphism" Label="for ring maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; ring map <A>phi</A> is the identity morphism.
 ##    </Description>
@@ -78,7 +78,7 @@ DeclareProperty( "IsIdentityMorphism",
 ##  <#GAPDoc Label="IsMonomorphism:ringmap">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsMonomorphism" Label="for ring maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; ring map <A>phi</A> is a monomorphism.
 ##    </Description>
@@ -91,7 +91,7 @@ DeclareProperty( "IsMonomorphism",
 ##  <#GAPDoc Label="IsEpimorphism:ringmap">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsEpimorphism" Label="for ring maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; ring map <A>phi</A> is an epimorphism.
 ##    </Description>
@@ -104,7 +104,7 @@ DeclareProperty( "IsEpimorphism",
 ##  <#GAPDoc Label="IsIsomorphism:ringmap">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsIsomorphism" Label="for ring maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; ring map <A>phi</A> is an isomorphism.
 ##    </Description>
@@ -117,7 +117,7 @@ DeclareProperty( "IsIsomorphism",
 ##  <#GAPDoc Label="IsAutomorphism:ringmap">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsAutomorphism" Label="for ring maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; ring map <A>phi</A> is an automorphism.
 ##    </Description>

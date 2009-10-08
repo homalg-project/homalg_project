@@ -25,7 +25,7 @@
 ##  <#GAPDoc Label="IsSpectralSequenceOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="E" Name="IsSpectralSequenceOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of homological spectral sequences of finitley generated &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSpectralSequence"/>,
@@ -41,7 +41,7 @@ DeclareRepresentation( "IsSpectralSequenceOfFinitelyPresentedObjectsRep",
 ##  <#GAPDoc Label="IsSpectralCosequenceOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="E" Name="IsSpectralCosequenceOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of cohomological spectral sequences of finitley generated &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSpectralSequence"/>,

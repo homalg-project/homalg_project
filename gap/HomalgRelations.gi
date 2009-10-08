@@ -17,6 +17,8 @@
 ##  The data structure of a module in &homalg; is designed to contain not only one but several sets of relations
 ##  (together with corresponding sets of generators (&see; Chapter <Ref Chap="Generators"/>)).
 ##  The different sets of relations are linked with so-called transition matrices (&see; Chapter <Ref Chap="Modules"/>).
+##  <P/>
+##  The relations of a &homalg; module are evaluated in a lazy way. This avoids unnecessary computations.
 ##  <#/GAPDoc>
 
 ####################################
@@ -28,7 +30,7 @@
 ##  <#GAPDoc Label="IsRelationsOfFinitelyPresentedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="rel" Name="IsRelationsOfFinitelyPresentedModuleRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of a finite set of relations of a finitely presented &homalg; module. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRelations"/>)

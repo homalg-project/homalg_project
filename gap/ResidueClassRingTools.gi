@@ -91,7 +91,10 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                    M := ShallowCopy( Eval( C ) );
                    
-                   if not ( HasIsReducedModuloRingRelations( C ) and IsReducedModuloRingRelations( C ) ) then
+                   if not ( HasIsReducedModuloRingRelations( C ) and
+                            IsReducedModuloRingRelations( C ) ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        M := DecideZero( M, HomalgRing( C ) );
                    fi;
                    
@@ -106,17 +109,61 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                  end,
                
-               ZeroMatrix := C -> HomalgZeroMatrix( NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+               ##  <#GAPDoc Label="ZeroMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="ZeroMatrix" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry for initial matrices"/> and
+               ##     <Ref Meth="ZeroMatrix" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               ZeroMatrix := C -> HomalgZeroMatrix(
+                                     NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
-               IdentityMatrix := C -> HomalgIdentityMatrix( NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+               ##  <#GAPDoc Label="IdentityMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="IdentityMatrix" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry for initial identity matrices"/> and
+               ##     <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               IdentityMatrix := C -> HomalgIdentityMatrix(
+                       NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="AreEqualMatrices:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="A, B" Name="AreEqualMatrices" Label="ResidueClassRing"/>
+               ##    <Returns><C>true</C> or <C>false</C></Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="AreEqualMatrices" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                AreEqualMatrices :=
                  function( A, B )
                    
                    return IsZero( DecideZero( Eval( A ) - Eval( B ), HomalgRing( A ) ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="Involution:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="Involution" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="Involution" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                Involution :=
                  function( M )
                    local N, R;
@@ -126,141 +173,366 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    R := HomalgRing( N );
                    
                    if not ( HasIsCommutative( R ) and IsCommutative( R ) and
-                            HasIsReducedModuloRingRelations( M ) and IsReducedModuloRingRelations( M ) ) then
+                            HasIsReducedModuloRingRelations( M ) and
+                            IsReducedModuloRingRelations( M ) ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( M ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="CertainRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="CertainRows" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="CertainRows" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                CertainRows :=
                  function( M, plist )
                    local N;
                    
                    N := CertainRows( Eval( M ), plist );
                    
-                   if not ( HasIsReducedModuloRingRelations( M ) and IsReducedModuloRingRelations( M ) ) then
+                   if not ( HasIsReducedModuloRingRelations( M ) and
+                            IsReducedModuloRingRelations( M ) ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( M ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="CertainColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="CertainColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="CertainColumns" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                CertainColumns :=
                  function( M, plist )
                    local N;
                    
                    N := CertainColumns( Eval( M ), plist );
                    
-                   if not ( HasIsReducedModuloRingRelations( M ) and IsReducedModuloRingRelations( M ) ) then
+                   if not ( HasIsReducedModuloRingRelations( M ) and
+                            IsReducedModuloRingRelations( M ) ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( M ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="UnionOfRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="UnionOfRows" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="UnionOfRows" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                UnionOfRows :=
                  function( A, B )
                    local N;
                    
                    N := UnionOfRows( Eval( A ), Eval( B ) );
                    
-                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and IsReducedModuloRingRelations ) then
+                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                              IsReducedModuloRingRelations ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( A ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="UnionOfColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="UnionOfColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                UnionOfColumns :=
                  function( A, B )
                    local N;
                    
                    N := UnionOfColumns( Eval( A ), Eval( B ) );
                    
-                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and IsReducedModuloRingRelations ) then
+                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                              IsReducedModuloRingRelations ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( A ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="DiagMat:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="DiagMat" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="DiagMat" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                DiagMat :=
                  function( e )
                    local N;
                    
                    N := DiagMat( List( e, Eval ) );
                    
-                   if not ForAll( e, HasIsReducedModuloRingRelations and IsReducedModuloRingRelations ) then
+                   if not ForAll( e, HasIsReducedModuloRingRelations and
+                              IsReducedModuloRingRelations ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( e[1] ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="KroneckerMat:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="KroneckerMat" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="KroneckerMat" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                KroneckerMat :=
                  function( A, B )
                    local N;
                    
                    N := KroneckerMat( Eval( A ), Eval( B ) );
                    
-                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and IsReducedModuloRingRelations ) then
+                   if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and
+                              IsReducedModuloRingRelations ) then
+                       
+                       ## reduce the matrix N w.r.t. the ring relations
                        N := DecideZero( N, HomalgRing( A ) );
                    fi;
                    
                    return N;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="MulMat:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="MulMat" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="MulMat" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                MulMat :=
                  function( a, A )
                    
                    return DecideZero( Eval( a ) * Eval( A ), HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="AddMat:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="AddMat" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="AddMat" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                AddMat :=
                  function( A, B )
                    
                    return DecideZero( Eval( A ) + Eval( B ), HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="SubMat:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="SubMat" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="SubMat" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                SubMat :=
                  function( A, B )
                    
                    return DecideZero( Eval( A ) - Eval( B ), HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="Compose:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="Compose" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="Compose" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                Compose :=
                  function( A, B )
                    
                    return DecideZero( Eval( A ) * Eval( B ), HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="NrRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="C" Name="NrRows" Label="ResidueClassRing"/>
+               ##    <Returns>a nonnegative integer</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="NrRows" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                NrRows := C -> NrRows( Eval( C ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="NrColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="C" Name="NrColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a nonnegative integer</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="NrColumns" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                NrColumns := C -> NrColumns( Eval( C ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="Determinant:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="C" Name="Determinant" Label="ResidueClassRing"/>
+               ##    <Returns>an element of ambient &homalg; ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="Determinant" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                Determinant := C -> DecideZero( Determinant( Eval( C ) ), HomalgRing( C ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="IsZeroMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="IsZeroMatrix" Label="ResidueClassRing"/>
+               ##    <Returns><C>true</C> or <C>false</C></Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="IsZeroMatrix" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                IsZeroMatrix := M -> IsZero( DecideZero( Eval( M ), HomalgRing( M ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
-               IsIdentityMatrix := M -> IsIdentityMatrix( DecideZero( Eval( M ), HomalgRing( M ) ) ),
+               ##  <#GAPDoc Label="IsIdentityMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="IsIdentityMatrix" Label="ResidueClassRing"/>
+               ##    <Returns><C>true</C> or <C>false</C></Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="IsIdentityMatrix" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               IsIdentityMatrix := M ->
+                         IsIdentityMatrix( DecideZero( Eval( M ), HomalgRing( M ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
-               IsDiagonalMatrix := M -> IsDiagonalMatrix( DecideZero( Eval( M ), HomalgRing( M ) ) ),
+               ##  <#GAPDoc Label="IsDiagonalMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="IsDiagonalMatrix" Label="ResidueClassRing"/>
+               ##    <Returns><C>true</C> or <C>false</C></Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="IsDiagonalMatrix" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               IsDiagonalMatrix := M ->
+                         IsDiagonalMatrix( DecideZero( Eval( M ), HomalgRing( M ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="ZeroRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="C" Name="ZeroRows" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="ZeroRows" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                ZeroRows := C -> ZeroRows( DecideZero( Eval( C ), HomalgRing( C ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="ZeroColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="C" Name="ZeroColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="ZeroColumns" Label="homalgTable entry"/>)
+               ##    <Listing Type="Code"><![CDATA[
                ZeroColumns := C -> ZeroColumns( DecideZero( Eval( C ), HomalgRing( C ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
                X_CopyRowToIdentityMatrix :=
                  function( M, i, L, j )

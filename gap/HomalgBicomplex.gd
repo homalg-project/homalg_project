@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgBicomplex">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="BC" Name="IsHomalgBicomplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; bi(co)complexes. <Br/><Br/>
+##      The &GAP; category of &homalg; bi(co)complexes. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgObject</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -39,7 +39,7 @@ DeclareCategory( "IsHomalgBicomplex",
 ##  <#GAPDoc Label="IsBisequence">
 ##  <ManSection>
 ##    <Prop Arg="BC" Name="IsBisequence"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if all maps in <A>BC</A> are well-defined.
 ##    </Description>
@@ -52,7 +52,7 @@ DeclareProperty( "IsBisequence",
 ##  <#GAPDoc Label="IsBicomplex">
 ##  <ManSection>
 ##    <Prop Arg="BC" Name="IsBicomplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>BC</A> is bicomplex.
 ##    </Description>
@@ -65,7 +65,7 @@ DeclareProperty( "IsBicomplex",
 ##  <#GAPDoc Label="IsTransposedWRTTheAssociatedComplex">
 ##  <ManSection>
 ##    <Prop Arg="BC" Name="IsTransposedWRTTheAssociatedComplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>BC</A> is transposed with respect to the associated complex of complexes. <Br/>
 ##      (no method installed).

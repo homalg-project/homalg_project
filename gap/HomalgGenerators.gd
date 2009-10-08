@@ -19,7 +19,7 @@
 ##  <#GAPDoc Label="IsHomalgGenerators">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgGenerators"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; generators.
 ##    </Description>
@@ -35,9 +35,9 @@ DeclareCategory( "IsHomalgGenerators",
 ##  <#GAPDoc Label="IsHomalgGeneratorsOfLeftModule">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgGeneratorsOfLeftModule"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; generators of a left module. <Br/><Br/>
+##      The &GAP; category of &homalg; generators of a left module. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgGenerators</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -49,9 +49,9 @@ DeclareCategory( "IsHomalgGeneratorsOfLeftModule",
 ##  <#GAPDoc Label="IsHomalgGeneratorsOfRightModule">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgGeneratorsOfRightModule"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; generators of a right module. <Br/><Br/>
+##      The &GAP; category of &homalg; generators of a right module. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgGenerators</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -69,7 +69,7 @@ DeclareCategory( "IsHomalgGeneratorsOfRightModule",
 ##  <#GAPDoc Label="IsReduced">
 ##  <ManSection>
 ##    <Prop Arg="gen" Name="IsReduced"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; set of generators <A>gen</A> is marked reduced. <Br/>
 ##      (no method installed)

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Logic.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Appendix Label="Logic">
+<Heading>Logic Subpackages</Heading>
+
+<Section Label="Matrices:LIMAT">
+<Heading>&LIMAT;: Logical Implications for Matrices</Heading>
+
+</Section>
+
+<Section Label="Matrices:COLEM">
+<Heading>&COLEM;: Clever Operations for Lazy Evaluated Matrices</Heading>
+
+Most of the above described matrix tool operations in &homalg; which
+return a new matrix are lazy evaluated. The value of a &homalg; matrix
+is stored in the attribute <C>Eval</C>. Below is the list of the
+installed methods for the attribute <C>Eval</C>.
+
+<#Include Label="Eval:IsInitialMatrix">
+<#Include Label="Eval:IsInitialIdentityMatrix">
+
+<#Include Label="Eval:IsZeroMatrix">
+<#Include Label="Eval:IsIdentityMatrix">
+
+<#Include Label="Eval:HasEvalInvolution">
+<#Include Label="Eval:HasEvalCertainRows">
+<#Include Label="Eval:HasEvalCertainColumns">
+<#Include Label="Eval:HasEvalUnionOfRows">
+<#Include Label="Eval:HasEvalUnionOfColumns">
+<#Include Label="Eval:HasEvalDiagMat">
+<#Include Label="Eval:HasEvalKroneckerMat">
+<#Include Label="Eval:HasEvalMulMat">
+<#Include Label="Eval:HasEvalAddMat">
+<#Include Label="Eval:HasEvalSubMat">
+<#Include Label="Eval:HasEvalCompose">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Appendix>

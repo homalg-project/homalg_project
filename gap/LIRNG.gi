@@ -28,14 +28,21 @@ InstallValue( LIRNG,
 InstallValue( LogicalImplicationsForHomalgRings,
         [ ## from special to general, at least try it:
           
-          ## IsFieldForHomalg (a field)
+##------------------------------------
+## IsFieldForHomalg (a field) implies:
+##
+          
+          ## by definition:
           [ IsFieldForHomalg,
-            "implies", IsCommutative ],			## by definition
+            "implies", IsCommutative ],
           
           [ IsFieldForHomalg,
             "implies", IsDivisionRingForHomalg ],
           
-          ## IsDivisionRingForHomalg (a division ring)
+##---------------------------------------------------
+## IsDivisionRingForHomalg (a division ring) implies:
+##
+          
           [ IsDivisionRingForHomalg,
             "implies", IsIntegralDomain ],
           
@@ -51,89 +58,133 @@ InstallValue( LogicalImplicationsForHomalgRings,
           [ IsDivisionRingForHomalg,
             "implies", IsSimpleRing ],
           
+          ## as its center:
           [ IsDivisionRingForHomalg,
-            "implies", ContainsAField ],		## as its center
+            "implies", ContainsAField ],
           
           [ IsDivisionRingForHomalg, "and", IsCommutative,
             "implies", IsFieldForHomalg ],
           
-          ## IsIntegersForHomalg (the ring of integers)
+##----------------------------------------------------
+## IsIntegersForHomalg (the ring of integers) implies:
+##
+          
           [ IsIntegersForHomalg,
             "implies", IsCommutative ],
           
+          ## Euclid: even true for euclidean rings:
           [ IsIntegersForHomalg,
-            "implies", IsPrincipalIdealRing ],		## Euclid: even a euclidean ring
+            "implies", IsPrincipalIdealRing ],
           
           [ IsIntegersForHomalg,
             "implies", IsIntegralDomain ],
           
-          ## IsResidueClassRingOfTheIntegers
+##-----------------------------------------
+## IsResidueClassRingOfTheIntegers implies:
+##
+          
           [ IsResidueClassRingOfTheIntegers,
             "implies", IsCommutative ],
           
+          ## quotients of PIR are PIR:
           [ IsResidueClassRingOfTheIntegers,
-            "implies", IsPrincipalIdealRing ],		## quotients of PIR are PIR
+            "implies", IsPrincipalIdealRing ],
           
-          ## IsKaplanskyHermite (each GL(2,R)-orbit of 1x2-rows has an element of the form (d,0), cf. [Lam06, Appendix of I.4, Prop. 4.24])
+##----------------------------
+## IsKaplanskyHermite implies:
+## (Def: a commutative ring for which each GL(2,R)-orbit of 1x2-rows
+##  has an element of the form (d,0), cf. [Lam06, Appendix of I.4, Prop. 4.24])
+##
+          
+          ## by definition
           [ IsKaplanskyHermite,
-            "implies", IsCommutative ],			## by definition
+            "implies", IsCommutative ],
           
+          ## [Lam06, Theorem I.4.26,(A)]:
           [ IsKaplanskyHermite,
-            "implies", IsHermite ],			## [Lam06, Theorem I.4.26,(A)]
+            "implies", IsHermite ],
           
+          ## [Lam06, Theorem I.4.26,(A)]:
           [ IsKaplanskyHermite,
-            "implies", IsBezoutRing ],			## [Lam06, Theorem I.4.26,(A)]
+            "implies", IsBezoutRing ],
           
-          ## IsBezoutRing (a commutative ring in which every f.g. ideal is principal (e.g. the ring of entire functions on \C), cf. [Lam06, Example I.4.7,(5)])
+##----------------------
+## IsBezoutRing implies:
+## (a commutative ring in which every f.g. ideal is principal
+## (e.g. the ring of entire functions on \C), cf. [Lam06, Example I.4.7,(5)])
+          
+          ## by definition
           [ IsBezoutRing,
-            "implies", IsCommutative ],			## by definition
+            "implies", IsCommutative ],
           
+          ## trivial
           [ IsBezoutRing, "and", IsNoetherian,
-            "imply", IsPrincipalIdealRing ],		## trivial
+            "imply", IsPrincipalIdealRing ],
           
+          ## [Lam06, Example I.4.7,(5) and Corollary I.4.28]:
           [ IsBezoutRing, "and", IsIntegralDomain,
-            "imply", IsKaplanskyHermite ],		## [Lam06, Example I.4.7,(5) and Corollary I.4.28]
+            "imply", IsKaplanskyHermite ],
           
+          ## [Lam06, Corollary I.4.28]:
           [ IsBezoutRing, "and", IsLocalRing,
-            "imply", IsKaplanskyHermite ],		## [Lam06, Corollary I.4.28]
+            "imply", IsKaplanskyHermite ],
           
-          ## IsDedekindDomain (integrally closed noetherian with Krull dimension at most 1)
+##--------------------------
+## IsDedekindDomain implies:
+## (integrally closed noetherian with Krull dimension at most 1)
+          
+          ## by definition:
           [ IsDedekindDomain,
-            "implies", IsCommutative ],			## by definition
+            "implies", IsIntegrallyClosedDomain ],
           
+          ## by definition:
           [ IsDedekindDomain,
-            "implies", IsNoetherian ],			## by definition
+            "implies", IsNoetherian ],
           
+          ## by definition (should follow from the above):
           [ IsDedekindDomain,
-            "implies", IsIntegralDomain ],		## by definition
+            "implies", IsCommutative ],
           
+          ## by definition (should follow from the above):
           [ IsDedekindDomain,
-            "implies", IsIntegrallyClosedDomain ],	## by definition
+            "implies", IsIntegralDomain ],
           
+          ## [Lam06, Example I.4.7,(4)]:
           [ IsDedekindDomain,
-            "implies", IsHermite ],			## [Lam06, Example I.4.7,(4)]
+            "implies", IsHermite ],
           
+          ## [Lam06, footnote on p. 72]:
           [ IsDedekindDomain,
-            "implies", IsHereditary ],			## [Lam06, footnote on p. 72]
+            "implies", IsHereditary ],
           
+          ## ................
           [ IsDedekindDomain, "and", IsUniqueFactorizationDomain,
-            "imply", IsPrincipalIdealRing ],		## ................
+            "imply", IsPrincipalIdealRing ],
           
+          ## [Weibel, Kbook.I.pdf Examples on p. 18]:
           [ IsDedekindDomain, "and", IsLocalRing,
-            "imply", IsDiscreteValuationRing ],		## [Weibel, Kbook.I.pdf Examples on p. 18]
+            "imply", IsDiscreteValuationRing ],
           
+          ## the Steinitz theory
           [ IsDedekindDomain, "and", IsFiniteFreePresentationRing,
-            "imply", IsPrincipalIdealRing ],		## the Steinitz theory
+            "imply", IsPrincipalIdealRing ],
           
-          ## IsDiscreteValuationRing (a valuation ring with valuation group = Z, cf. [Hart, Definition and Theorem I.6.2A])
-          [ IsDiscreteValuationRing,
-            "implies", IsCommutative ],			## by definition
+##---------------------------------
+## IsDiscreteValuationRing implies:
+## (a valuation ring with valuation group = Z,
+##  cf. [Hart, Definition and Theorem I.6.2A]):
           
+          ## by definition
           [ IsDiscreteValuationRing,
-            "implies", IsIntegralDomain ],		## by definition
+            "implies", IsCommutative ],
           
+          ## by definition
           [ IsDiscreteValuationRing,
-            "implies", IsPrincipalIdealRing ],		## [Weibel, Kbook.I.pdf Lemma 2.2]
+            "implies", IsIntegralDomain ],
+          
+          ## [Weibel, Kbook.I.pdf Lemma 2.2]
+          [ IsDiscreteValuationRing,
+            "implies", IsPrincipalIdealRing ],
           
           ## Is/Left/Right/Hereditary (every left/right ideal is projective, cf. [Lam06, Definition II.2.1])
           [ IsHereditary, "and", IsCommutative, "and", IsIntegralDomain,
@@ -141,7 +192,7 @@ InstallValue( LogicalImplicationsForHomalgRings,
           
           ## IsIntegrallyClosedDomain (closed in its field of fractions)
           [ IsIntegrallyClosedDomain,
-            "implies", IsIntegralDomain ],		## trivial
+            "implies", IsIntegralDomain ],		## by definition
           
           ## IsUniqueFactorizationDomain (unique factorization domain)
           [ IsUniqueFactorizationDomain,
@@ -228,13 +279,22 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "implies", IsNoetherian ],
           
           [ IsFreePolynomialRing,
-            "implies", IsUniqueFactorizationDomain ],
-          
-          [ IsFreePolynomialRing,
             "implies", IsFiniteFreePresentationRing ],	## Hilbert Syzygies Theorem
           
           [ IsFreePolynomialRing,
+            "implies", IsUniqueFactorizationDomain ],
+          
+          [ IsFreePolynomialRing,
             "implies", IsHermite ],			## Quillen-Suslin theorem: IsFreePolynomialRing => IsHermite
+          
+##--------------------------------------
+## IsFiniteFreePresentationRing implies:
+## (synonym IsFiniteFreeResolutionRing)
+          
+          ## [ Kaplansky, Commutative Rings, Thm. 184 ],
+          ## [ Rotman, Thm. 8.66 ]
+          [ IsFiniteFreePresentationRing, "and", IsNoetherian, "and", IsIntegralDomain,
+            "imply", IsUniqueFactorizationDomain ],
           
           ] );
 

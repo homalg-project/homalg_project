@@ -14,9 +14,11 @@
 #
 ####################################
 
+################################
 ##
 ## operations for ring elements:
 ##
+################################
 
 ##
 InstallMethod( Zero,
@@ -221,39 +223,21 @@ InstallMethod( DegreeMultivariatePolynomial,
     
 end );
 
+###########################
 ##
 ## operations for matrices:
 ##
+###########################
 
-##  <#GAPDoc Label="IsZero:matrix_method">
+##  <#GAPDoc Label="IsZeroMatrix:homalgTable_entry">
 ##  <ManSection>
-##    <Meth Arg="A" Name="IsZero" Label="a method for matrices"/>
-##    <Returns>true or false</Returns>
+##    <Func Arg="M" Name="IsZeroMatrix" Label="homalgTable entry"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; matrix <A>A</A> is zero or not, taking possible ring relations into account. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IsZeroMatrix</C> is bound then
-##      <M>RP</M>!.<C>IsZeroMatrix</C><M>(</M> <A>A</A> <M>)</M> is returned.
-##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
-##  gap> A := HomalgMatrix( "[ 2 ]", ZZ );
-##  <A homalg internal 1 by 1 matrix>
-##  gap> Z2 := ZZ / 2;
-##  <A homalg residue class ring>
-##  gap> A := Z2 * A;
-##  <A homalg residue class 1 by 1 matrix>
-##  gap> Display( A );
-##  [ [  2 ] ]
-##  
-##  modulo [ 2 ]
-##  gap> IsZero( A );
-##  true
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>M</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IsZeroMatrix</C> is bound then the standard method
+##      for the property <Ref Prop="IsZero" Label="for matrices"/> returns <M>RP</M>!.<C>IsZeroMatrix</C><M>(</M> <A>M</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
 InstallMethod( IsZero,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -266,36 +250,57 @@ InstallMethod( IsZero,
     RP := homalgTable( R );
     
     if IsBound(RP!.IsZeroMatrix) then
-        ## CAUTION: the external system must be able to check zero modulo possible ring relations!
+        ## CAUTION: the external system must be able
+        ## to check zero modulo possible ring relations!
+        
         return RP!.IsZeroMatrix( M ); ## with this, \= can fall back to IsZero
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
-    ## From the documentation ?Zero: `ZeroSameMutability( <obj> )' is equivalent to `0 * <obj>'.
+    ## from the GAP4 documentation: ?Zero
+    ## `ZeroSameMutability( <obj> )' is equivalent to `0 * <obj>'.
     
     return M = 0 * M; ## hence, by default, IsZero falls back to \= (see below)
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##----------------------
+## the methods for Eval:
+##----------------------
 
 ##  <#GAPDoc Label="Eval:IsInitialMatrix">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with HomalgInitialMatrix"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>IsInitialMatrix</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroMatrix</C> is bound then
-##      <M>RP</M>!.<C>ZeroMatrix</C><M>(</M> <A>A</A> <M>)</M> is returned.
-##      The filter <C>IsInitialMatrix</C> is reset.
+##      In case the matrix <A>A</A> was created using
+##      <Ref Meth="HomalgInitialMatrix" Label="constructor for initial matrices filled with zeros"/>
+##      then the filter <C>IsInitialMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry for initial matrices"/>)
+##      will be used to set the attribute <C>Eval</C> and resets the filter <C>IsInitialMatrix</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: an initial matrix filled with zeros
+
+##  <#GAPDoc Label="InitialMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="ZeroMatrix" Label="homalgTable entry for initial matrices"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroMatrix</C> is bound then the method
+##      <Ref Meth="Eval" Label="for matrices created with HomalgInitialMatrix"/> shown below
+##      resets the filter <C>IsInitialMatrix</C> and returns <M>RP</M>!.<C>ZeroMatrix</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (IsInitialMatrix)",
-        [ IsHomalgMatrix and IsInitialMatrix and HasNrRows and HasNrColumns ],
+        [ IsHomalgMatrix and IsInitialMatrix and
+          HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, z, zz;
@@ -310,39 +315,55 @@ InstallMethod( Eval,				### defines: an initial matrix filled with zeros
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate a non-internal initial matrix\n" );
+        Error( "could not find a procedure called ZeroMatrix in the ",
+               "homalgTable to evaluate a non-internal initial matrix\n" );
     fi;
     
-    z := Zero( HomalgRing( C ) );
+    #=====# can only work for homalg internal matrices #=====#
     
-    #=====# begin of the core procedure #=====#
+    z := Zero( HomalgRing( C ) );
     
     ResetFilterObj( C, IsInitialMatrix );
     
     zz := ListWithIdenticalEntries( NrColumns( C ), z );
     
-    return homalgInternalMatrixHull( List( [ 1 .. NrRows( C ) ],  i -> ShallowCopy( zz ) ) );
+    return homalgInternalMatrixHull(
+                   List( [ 1 .. NrRows( C ) ], i -> ShallowCopy( zz ) ) );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:IsInitialIdentityMatrix">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with HomalgInitialIdentityMatrix"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>IsInitialIdentityMatrix</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IdentityMatrix</C> is bound then
-##      <M>RP</M>!.<C>IdentityMatrix</C><M>(</M> <A>A</A> <M>)</M> is returned.
-##      The filter <C>IsInitialIdentityMatrix</C> is reset.
+##      In case the matrix <A>A</A> was created using
+##      <Ref Meth="HomalgInitialIdentityMatrix" Label="constructor for initial quadratic matrices with ones on the diagonal"/>
+##      then the filter <C>IsInitialIdentityMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry for initial identity matrices"/>)
+##      will be used to set the attribute <C>Eval</C> and resets the filter <C>IsInitialIdentityMatrix</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: an initial quadratic matrix filled with ones on the diagonal and zeros otherwise
+
+##  <#GAPDoc Label="InitialIdentityMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="IdentityMatrix" Label="homalgTable entry for initial identity matrices"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IdentityMatrix</C> is bound then the method
+##      <Ref Meth="Eval" Label="for matrices created with HomalgInitialIdentityMatrix"/> shown below
+##      resets the filter <C>IsInitialIdentityMatrix</C> and returns <M>RP</M>!.<C>IdentityMatrix</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (IsInitialIdentityMatrix)",
-        [ IsHomalgMatrix and IsInitialIdentityMatrix and HasNrRows and HasNrColumns ],
+        [ IsHomalgMatrix and IsInitialIdentityMatrix and
+          HasNrRows and HasNrColumns ],
         
   function( C )
     local R, RP, o, z, zz, id;
@@ -357,24 +378,32 @@ InstallMethod( Eval,				### defines: an initial quadratic matrix filled with one
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate a non-internal initial identity matrix\n" );
+        Error( "could not find a procedure called IdentityMatrix in the ",
+               "homalgTable to evaluate a non-internal initial identity matrix\n" );
     fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
     
     z := Zero( HomalgRing( C ) );
     o := One( HomalgRing( C ) );
-    
-    #=====# begin of the core procedure #=====#
     
     ResetFilterObj( C, IsInitialIdentityMatrix );
     
     zz := ListWithIdenticalEntries( NrColumns( C ), z );
     
     id := List( [ 1 .. NrRows( C ) ],
-                function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
+                function(i)
+                  local z;
+                  z := ShallowCopy( zz ); z[i] := o; return z;
+                end );
     
     return homalgInternalMatrixHull( id );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
 InstallMethod( Eval,
@@ -400,16 +429,26 @@ end );
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with Involution"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalInvolution</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Involution</C> is bound then
-##      <M>RP</M>!.<C>Involution</C> applied to the content of the attribute <C>EvalInvolution</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##      In case the matrix was created using
+##      <Ref Meth="Involution" Label="for matrices"/>
+##      then the filter <C>HasEvalInvolution</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="Involution" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: Involution
+
+##  <#GAPDoc Label="Involution:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="Involution" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Involution</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with Involution"/> shown below returns
+##      <M>RP</M>!.<C>Involution</C> applied to the content of the attribute <C>EvalInvolution</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalInvolution)",
         [ IsHomalgMatrix and HasEvalInvolution ],
         
@@ -427,30 +466,45 @@ InstallMethod( Eval,				### defines: Involution
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called Involution in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called Involution in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return homalgInternalMatrixHull( TransposedMat( Eval( M )!.matrix ) );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalCertainRows">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with CertainRows"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalCertainRows</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>CertainRows</C> is bound then
-##      <M>RP</M>!.<C>CertainRows</C> applied to the content of the attribute <C>EvalCertainRows</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##      In case the matrix was created using
+##      <Ref Meth="CertainRows" Label="for matrices"/>
+##      then the filter <C>HasEvalCertainRows</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="CertainRows" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: CertainRows
+
+##  <#GAPDoc Label="CertainRows:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="CertainRows" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>CertainRows</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with CertainRows"/> shown below returns
+##      <M>RP</M>!.<C>CertainRows</C> applied to the content of the attribute <C>EvalCertainRows</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalCertainRows)",
         [ IsHomalgMatrix and HasEvalCertainRows ],
         
@@ -471,31 +525,45 @@ InstallMethod( Eval,				### defines: CertainRows
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainRows in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called CertainRows in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return homalgInternalMatrixHull( Eval( M )!.matrix{ plist } );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalCertainColumns">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with CertainColumns"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalCertainColumns</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>CertainColumns</C> is bound then
-##      <M>RP</M>!.<C>CertainColumns</C> applied to the content of the attribute <C>EvalCertainColumns</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="CertainColumns" Label="for matrices"/>
+##      then the filter <C>HasEvalCertainColumns</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="CertainColumns" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: CertainColumns
+
+##  <#GAPDoc Label="CertainColumns:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="CertainColumns" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>CertainColumns</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with CertainColumns"/> shown below returns
+##      <M>RP</M>!.<C>CertainColumns</C> applied to the content of the attribute <C>EvalCertainColumns</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalCertainColumns)",
         [ IsHomalgMatrix and HasEvalCertainColumns ],
         
@@ -516,31 +584,46 @@ InstallMethod( Eval,				### defines: CertainColumns
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainColumns in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called CertainColumns in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
-    return homalgInternalMatrixHull( Eval( M )!.matrix{[ 1 .. NrRows( M ) ]}{plist} );
+    return homalgInternalMatrixHull(
+                   Eval( M )!.matrix{[ 1 .. NrRows( M ) ]}{plist} );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalUnionOfRows">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with UnionOfRows"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalUnionOfRows</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfRows</C> is bound then
-##      <M>RP</M>!.<C>UnionOfRows</C> applied to the content of the attribute <C>EvalUnionOfRows</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="UnionOfRows" Label="for matrices"/>
+##      then the filter <C>HasEvalUnionOfRows</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="UnionOfRows" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: UnionOfRows
+
+##  <#GAPDoc Label="UnionOfRows:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="UnionOfRows" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfRows</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfRows"/> shown below returns
+##      <M>RP</M>!.<C>UnionOfRows</C> applied to the content of the attribute <C>EvalUnionOfRows</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalUnionOfRows)",
         [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
@@ -561,10 +644,11 @@ InstallMethod( Eval,				### defines: UnionOfRows
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfRows in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called UnionOfRows in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     U := ShallowCopy( Eval( A )!.matrix );
     
@@ -573,23 +657,36 @@ InstallMethod( Eval,				### defines: UnionOfRows
     return homalgInternalMatrixHull( U );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalUnionOfColumns">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with UnionOfColumns"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalUnionOfColumns</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is bound then
-##      <M>RP</M>!.<C>UnionOfColumns</C> applied to the content of the attribute <C>EvalUnionOfColumns</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="UnionOfColumns" Label="for matrices"/>
+##      then the filter <C>HasEvalUnionOfColumns</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: UnionOfColumns
+
+##  <#GAPDoc Label="UnionOfColumns:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="UnionOfColumns" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>UnionOfColumns</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/> shown below returns
+##      <M>RP</M>!.<C>UnionOfColumns</C> applied to the content of the attribute <C>EvalUnionOfColumns</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalUnionOfColumns)",
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
@@ -610,35 +707,51 @@ InstallMethod( Eval,				### defines: UnionOfColumns
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfColumns in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called UnionOfColumns in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     U := List( Eval( A )!.matrix, ShallowCopy );
     
-    U{ [ 1 .. NrRows( A ) ] }{ [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] } := Eval( B )!.matrix;
+    U{ [ 1 .. NrRows( A ) ] }
+      { [ NrColumns( A ) + 1 .. NrColumns( A ) + NrColumns( B ) ] }
+      := Eval( B )!.matrix;
     
     return homalgInternalMatrixHull( U );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalDiagMat">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with DiagMat"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalDiagMat</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>DiagMat</C> is bound then
-##      <M>RP</M>!.<C>DiagMat</C> applied to the content of the attribute <C>EvalDiagMat</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="DiagMat" Label="for matrices"/>
+##      then the filter <C>HasEvalDiagMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="DiagMat" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: DiagMat
+
+##  <#GAPDoc Label="DiagMat:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="DiagMat" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>DiagMat</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with DiagMat"/> shown below returns
+##      <M>RP</M>!.<C>DiagMat</C> applied to the content of the attribute <C>EvalDiagMat</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalDiagMat)",
         [ IsHomalgMatrix and HasEvalDiagMat ],
         
@@ -656,8 +769,11 @@ InstallMethod( Eval,				### defines: DiagMat
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called DiagMat in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called DiagMat in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
     
     z := Zero( R );
     
@@ -666,13 +782,13 @@ InstallMethod( Eval,				### defines: DiagMat
     
     diag := List( [ 1 .. m ],  a -> List( [ 1 .. n ], b -> z ) );
     
-    #=====# begin of the core procedure #=====#
-    
     m := 0;
     n := 0;
     
     for mat in e do
-        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] } := Eval( mat )!.matrix;
+        diag{ [ m + 1 .. m + NrRows( mat ) ] }{ [ n + 1 .. n + NrColumns( mat ) ] }
+          := Eval( mat )!.matrix;
+        
         m := m + NrRows( mat );
         n := n + NrColumns( mat );
     od;
@@ -680,23 +796,36 @@ InstallMethod( Eval,				### defines: DiagMat
     return homalgInternalMatrixHull( diag );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalKroneckerMat">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with KroneckerMat"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalKroneckerMat</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>KroneckerMat</C> is bound then
-##      <M>RP</M>!.<C>KroneckerMat</C> applied to the content of the attribute <C>EvalKroneckerMat</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="KroneckerMat" Label="for matrices"/>
+##      then the filter <C>HasEvalKroneckerMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="KroneckerMat" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: KroneckerMat
+
+##  <#GAPDoc Label="KroneckerMat:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="KroneckerMat" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>KroneckerMat</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with KroneckerMat"/> shown below returns
+##      <M>RP</M>!.<C>KroneckerMat</C> applied to the content of the attribute <C>EvalKroneckerMat</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalKroneckerMat)",
         [ IsHomalgMatrix and HasEvalKroneckerMat ],
         
@@ -706,7 +835,9 @@ InstallMethod( Eval,				### defines: KroneckerMat
     R := HomalgRing( C );
     
     if HasIsCommutative( R ) and not IsCommutative( R ) then
-        Info( InfoWarning, 1, "\033[01m\033[5;31;47mthe Kronecker product is only defined for commutative rings!\033[0m" );
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
+              "the Kronecker product is only defined for commutative rings!",
+              "\033[0m" );
     fi;
     
     RP := homalgTable( R );
@@ -719,31 +850,47 @@ InstallMethod( Eval,				### defines: KroneckerMat
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called KroneckerMat in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called KroneckerMat in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
-    return homalgInternalMatrixHull( KroneckerProduct( Eval( A )!.matrix, Eval( B )!.matrix ) ); ## this was easy :)
+    return homalgInternalMatrixHull(
+                   KroneckerProduct( Eval( A )!.matrix, Eval( B )!.matrix ) );
+    ## this was easy, thanks GAP :)
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalMulMat">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with MulMat"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalMulMat</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>MulMat</C> is bound then
-##      <M>RP</M>!.<C>MulMat</C> applied to the content of the attribute <C>EvalMulMat</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="\*" Label="for ring elements and matrices"/>
+##      then the filter <C>HasEvalMulMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="MulMat" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: MulMat
+
+##  <#GAPDoc Label="MulMat:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="MulMat" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>MulMat</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with MulMat"/> shown below returns
+##      <M>RP</M>!.<C>MulMat</C> applied to the content of the attribute <C>EvalMulMat</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalMulMat)",
         [ IsHomalgMatrix and HasEvalMulMat ],
         
@@ -764,31 +911,45 @@ InstallMethod( Eval,				### defines: MulMat
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called MulMat in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called MulMat in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return a * Eval( A );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalAddMat">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with AddMat"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalAddMat</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>AddMat</C> is bound then
-##      <M>RP</M>!.<C>AddMat</C> applied to the content of the attribute <C>EvalAddMat</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="\+" Label="for matrices"/>
+##      then the filter <C>HasEvalAddMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="AddMat" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: AddMat
+
+##  <#GAPDoc Label="AddMat:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="AddMat" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>AddMat</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with AddMat"/> shown below returns
+##      <M>RP</M>!.<C>AddMat</C> applied to the content of the attribute <C>EvalAddMat</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalAddMat)",
         [ IsHomalgMatrix and HasEvalAddMat ],
         
@@ -809,31 +970,45 @@ InstallMethod( Eval,				### defines: AddMat
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called AddMat in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called AddMat in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return Eval( A ) + Eval( B );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalSubMat">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with SubMat"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalSubMat</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>SubMat</C> is bound then
-##      <M>RP</M>!.<C>SubMat</C> applied to the content of the attribute <C>EvalSubMat</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="\-" Label="for matrices"/>
+##      then the filter <C>HasEvalSubMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="SubMat" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: SubMat
+
+##  <#GAPDoc Label="SubMat:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="SubMat" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>SubMat</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with SubMat"/> shown below returns
+##      <M>RP</M>!.<C>SubMat</C> applied to the content of the attribute <C>EvalSubMat</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalSubMat)",
         [ IsHomalgMatrix and HasEvalSubMat ],
         
@@ -854,31 +1029,45 @@ InstallMethod( Eval,				### defines: SubMat
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called SubMat in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called SubMat in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return Eval( A ) - Eval( B );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:HasEvalCompose">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with Compose"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>HasEvalCompose</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Compose</C> is bound then
-##      <M>RP</M>!.<C>Compose</C> applied to the content of the attribute <C>EvalCompose</C><M>(</M> <A>A</A> <M>)</M>
-##      is returned.
+##      In case the matrix was created using
+##      <Ref Meth="\*" Label="for composable matrices"/>
+##      then the filter <C>HasEvalCompose</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      <Ref Meth="Compose" Label="homalgTable entry"/>
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: Compose
+
+##  <#GAPDoc Label="Compose:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="Compose" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Compose</C> is bound then
+##      the method <Ref Meth="Eval" Label="for matrices created with Compose"/> shown below returns
+##      <M>RP</M>!.<C>Compose</C> applied to the content of the attribute <C>EvalCompose</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (HasEvalCompose)",
         [ IsHomalgMatrix and HasEvalCompose ],
         
@@ -899,30 +1088,45 @@ InstallMethod( Eval,				### defines: Compose
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called Compose in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called Compose in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return Eval( A ) * Eval( B );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:IsIdentityMatrix">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with HomalgIdentityMatrix"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>IsIdentityMatrix</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IdentityMatrix</C> is bound then
-##      <M>RP</M>!.<C>IdentityMatrix</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##      In case the matrix <A>A</A> was created using
+##      <Ref Meth="HomalgIdentityMatrix" Label="constructor for identity matrices"/>
+##      then the filter <C>IsIdentityMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: IdentityMap
+
+##  <#GAPDoc Label="IdentityMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="IdentityMatrix" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IdentityMatrix</C> is bound then the method
+##      <Ref Meth="Eval" Label="for matrices created with HomalgIdentityMatrix"/> shown below returns
+##      <M>RP</M>!.<C>IdentityMatrix</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows and HasNrColumns ], 10,
         
@@ -938,38 +1142,56 @@ InstallMethod( Eval,				### defines: IdentityMap
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the homalgTable to evaluate a non-internal identity matrix\n" );
+        Error( "could not find a procedure called IdentityMatrix in the ",
+               "homalgTable to evaluate a non-internal identity matrix\n" );
     fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
     
     z := Zero( HomalgRing( C ) );
     o := One( HomalgRing( C ) );
     
-    #=====# begin of the core procedure #=====#
-    
     zz := ListWithIdenticalEntries( NrColumns( C ), z );
     
     id := List( [ 1 .. NrRows( C ) ],
-                function(i) local z; z := ShallowCopy( zz ); z[i] := o; return z; end );
+                function(i)
+                  local z;
+                  z := ShallowCopy( zz ); z[i] := o; return z;
+                end );
     
     return homalgInternalMatrixHull( id );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Eval:IsZeroMatrix">
 ##  <ManSection>
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with HomalgZeroMatrix"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      This method of the attribute <C>Eval</C> is triggered in case the filter <C>IsZeroMatrix</C> for the matrix <A>A</A>
-##      is set to true.
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroMatrix</C> is bound then
-##      <M>RP</M>!.<C>ZeroMatrix</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##      In case the matrix <A>A</A> was created using
+##      <Ref Meth="HomalgZeroMatrix" Label="constructor for zero matrices"/>
+##      then the filter <C>IsZeroMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry"/>)
+##      will be used to set the attribute <C>Eval</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Eval,				### defines: ZeroMap
+
+##  <#GAPDoc Label="ZeroMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="" Name="ZeroMatrix" Label="homalgTable entry"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroMatrix</C> is bound then the method
+##      <Ref Meth="Eval" Label="for matrices created with HomalgZeroMatrix"/> shown below returns
+##      <M>RP</M>!.<C>ZeroMatrix</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero and HasNrRows and HasNrColumns ], 20,
         
@@ -981,8 +1203,11 @@ InstallMethod( Eval,				### defines: ZeroMap
     RP := homalgTable( R );
     
     if ( NrRows( C ) = 0 or NrColumns( C ) = 0 ) and
-       not ( IsBound( R!.SafeToEvaluateEmptyMatrices ) and R!.SafeToEvaluateEmptyMatrices = true ) then
-        Info( InfoWarning, 1, "\033[01m\033[5;31;47man empty matrix is about to get evaluated!\033[0m" );
+       not ( IsBound( R!.SafeToEvaluateEmptyMatrices ) and
+             R!.SafeToEvaluateEmptyMatrices = true ) then
+        Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
+              "an empty matrix is about to get evaluated!",
+              "\033[0m" );
     fi;
     
     if IsBound( RP!.ZeroMatrix ) then
@@ -990,33 +1215,37 @@ InstallMethod( Eval,				### defines: ZeroMap
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the homalgTable to evaluate a non-internal zero matrix\n" );
+        Error( "could not find a procedure called ZeroMatrix in the ",
+               "homalgTable to evaluate a non-internal zero matrix\n" );
     fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
     
     z := Zero( HomalgRing( C ) );
     
-    #=====# begin of the core procedure #=====#
-    
     ## copying the rows saves memory;
     ## we assume that the entries are never modified!!!
-    return homalgInternalMatrixHull( ListWithIdenticalEntries( NrRows( C ),  ListWithIdenticalEntries( NrColumns( C ), z ) ) );
+    return homalgInternalMatrixHull(
+                   ListWithIdenticalEntries( NrRows( C ),
+                           ListWithIdenticalEntries( NrColumns( C ), z ) ) );
     
 end );
-
-##  <#GAPDoc Label="NrRows:meth">
-##  <ManSection>
-##    <Meth Arg="A" Name="NrRows" Label="for matrices"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      Return the number of rows of the matrix <A>A</A>. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NrRows</C> is bound then
-##      <M>RP</M>!.<C>NrRows</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( NrRows,				### defines: NrRows
+
+##  <#GAPDoc Label="NrRows:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="C" Name="NrRows" Label="homalgTable entry"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NrRows</C> is bound then the standard method
+##      for the attribute <Ref Attr="NrRows"/> shown below returns
+##      <M>RP</M>!.<C>NrRows</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( NrRows,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1032,29 +1261,31 @@ InstallMethod( NrRows,				### defines: NrRows
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrRows in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called NrRows in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return Length( Eval( C )!.matrix );
     
 end );
-
-##  <#GAPDoc Label="NrColumns:meth">
-##  <ManSection>
-##    <Meth Arg="A" Name="NrColumns" Label="for matrices"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      Return the number of columns of the matrix <A>A</A>. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NrColumns</C> is bound then
-##      <M>RP</M>!.<C>NrColumns</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( NrColumns,			### defines: NrColumns
+
+##  <#GAPDoc Label="NrColumns:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="C" Name="NrColumns" Label="homalgTable entry"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>NrColumns</C> is bound then the standard method
+##      for the attribute <Ref Attr="NrColumns"/> shown below returns
+##      <M>RP</M>!.<C>NrColumns</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( NrColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1070,29 +1301,31 @@ InstallMethod( NrColumns,			### defines: NrColumns
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrColumns in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called NrColumns in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return Length( Eval( C )!.matrix[ 1 ] );
     
 end );
-
-##  <#GAPDoc Label="Determinant:meth">
-##  <ManSection>
-##    <Meth Arg="A" Name="Determinant" Label="for matrices"/>
-##    <Returns>a ring element</Returns>
-##    <Description>
-##      Return the determinant of <A>A</A>. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Determinant</C> is bound then
-##      <M>RP</M>!.<C>Determinant</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( Determinant,
+
+##  <#GAPDoc Label="Determinant:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="C" Name="Determinant" Label="homalgTable entry"/>
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>Determinant</C> is bound then the standard method
+##      for the attribute <Ref Attr="DeterminantMat"/> shown below returns
+##      <M>RP</M>!.<C>Determinant</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( DeterminantMat,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1103,19 +1336,39 @@ InstallMethod( Determinant,
     
     RP := homalgTable( R );
     
+    if NrRows( C ) <> NrColumns( C ) then
+        Error( "the matrix is not quadratic\n" );
+    fi;
+    
     if IsBound(RP!.Determinant) then
         return RingElementConstructor( R )( RP!.Determinant( C ), R );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called Determinant in the homalgTable to apply on a non-internal matrix\n" );
+        Error( "could not find a procedure called Determinant in the ",
+               "homalgTable to apply to a non-internal matrix\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# can only work for homalg internal matrices #=====#
     
     return Determinant( Eval( C )!.matrix );
     
 end );
+
+##
+InstallMethod( Determinant,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    
+    return DeterminantMat( C );
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #
@@ -1161,6 +1414,8 @@ InstallMethod( IsUnit,
         return RP!.IsUnit( R, r );
     fi;
     
+    #=====# the fallback method #=====#
+    
     return not IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) );
     
 end );
@@ -1187,20 +1442,17 @@ InstallMethod( IsUnit,
     
 end );
 
-##  <#GAPDoc Label="ZeroRows:meth">
+##  <#GAPDoc Label="ZeroRows:homalgTable_entry">
 ##  <ManSection>
-##    <Oper Arg="A" Name="ZeroRows" Label="for matrices"/>
-##    <Returns>a list of positive integers</Returns>
+##    <Func Arg="C" Name="ZeroRows" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of positive integers</Returns>
 ##    <Description>
-##      Return the list of zero rows of the matrix <A>A</A>. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroRows</C> is bound then
-##      <M>RP</M>!.<C>ZeroRows</C><M>(</M> <A>A</A> <M>)</M> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( ZeroRows,			### defines: ZeroRows
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroRows</C> is bound then the standard method
+##      of the attribute <Ref Attr="ZeroRows"/> shown below returns
+##      <M>RP</M>!.<C>ZeroRows</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( ZeroRows,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1215,28 +1467,29 @@ InstallMethod( ZeroRows,			### defines: ZeroRows
         return RP!.ZeroRows( C );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     z := HomalgZeroMatrix( 1, NrColumns( C ), R );
     
     return Filtered( [ 1 .. NrRows( C ) ], a -> CertainRows( C, [ a ] ) = z );
     
 end );
-
-##  <#GAPDoc Label="ZeroColumns:meth">
-##  <ManSection>
-##    <Oper Arg="A" Name="ZeroColumns" Label="for matrices"/>
-##    <Returns>a list of positive integers</Returns>
-##    <Description>
-##      Return the list of zero columns of the matrix <A>A</A>. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroColumns</C> is bound then
-##      <M>RP</M>!.<C>ZeroColumns</C><M>(</M> <A>A</A> <M>)</M> is returned.
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( ZeroColumns,			### defines: ZeroColumns
+
+##  <#GAPDoc Label="ZeroColumns:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="C" Name="ZeroColumns" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of positive integers</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroColumns</C> is bound then the standard method
+##      of the attribute <Ref Attr="ZeroColumns"/> shown below returns
+##      <M>RP</M>!.<C>ZeroColumns</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( ZeroColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1251,16 +1504,20 @@ InstallMethod( ZeroColumns,			### defines: ZeroColumns
         return RP!.ZeroColumns( C );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     z := HomalgZeroMatrix( NrRows( C ), 1, R );
     
-    return Filtered( [ 1 .. NrColumns( C ) ], a ->  CertainColumns( C, [ a ] ) = z );
+    return Filtered( [ 1 .. NrColumns( C ) ], a -> CertainColumns( C, [ a ] ) = z );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
-InstallMethod( GetRidOfObsoleteRows,			### defines: GetRidOfObsoleteRows (BetterBasis)
+InstallMethod( GetRidOfObsoleteRows,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1280,7 +1537,7 @@ InstallMethod( GetRidOfObsoleteRows,			### defines: GetRidOfObsoleteRows (Better
         return M;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     ## get rid of zero rows
     ## (e.g. those rows containing the ring relations)
@@ -1303,7 +1560,7 @@ InstallMethod( GetRidOfObsoleteRows,			### defines: GetRidOfObsoleteRows (Better
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteColumns,			### defines: GetRidOfObsoleteColumns (BetterBasis)
+InstallMethod( GetRidOfObsoleteColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -1323,7 +1580,7 @@ InstallMethod( GetRidOfObsoleteColumns,			### defines: GetRidOfObsoleteColumns (
         return M;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     ## get rid of zero columns
     ## (e.g. those columns containing the ring relations)
@@ -1345,35 +1602,16 @@ InstallMethod( GetRidOfObsoleteColumns,			### defines: GetRidOfObsoleteColumns (
     
 end );
 
-##  <#GAPDoc Label="EQ:matrix_method">
+##  <#GAPDoc Label="AreEqualMatrices:homalgTable_entry">
 ##  <ManSection>
-##    <Meth Arg="A,B" Name="=" Label="a method for matrices"/>
-##    <Returns>true or false</Returns>
+##    <Func Arg="M1,M2" Name="AreEqualMatrices" Label="homalgTable entry"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; matrices <A>A</A> and <A>B</A> are equal, taking possible ring relations into account. <Br/>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>A</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>AreEqualMatrices</C> is bound then
-##      <M>RP</M>!.<C>AreEqualMatrices</C><M>(</M> <A>A</A>, <A>B</A> <M>)</M> is returned.
-##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
-##  gap> A := HomalgMatrix( "[ 2 ]", ZZ );
-##  <A homalg internal 1 by 1 matrix>
-##  gap> Z2 := ZZ / 2;
-##  <A homalg residue class ring>
-##  gap> A := Z2 * A;
-##  <A homalg residue class 1 by 1 matrix>
-##  gap> Display( A );
-##  [ [  2 ] ]
-##  
-##  modulo [ 2 ]
-##  gap> IsZero( A );
-##  true
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>M1</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>AreEqualMatrices</C> is bound then the standard method
+##      for the operation <Ref Oper="\=" Label="for matrices"/> shown below returns
+##      <M>RP</M>!.<C>AreEqualMatrices</C><M>(</M> <A>M1</A>, <A>M2</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
 InstallMethod( \=,
         "for homalg comparable matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -1386,32 +1624,41 @@ InstallMethod( \=,
     RP := homalgTable( R );
     
     if IsBound(RP!.AreEqualMatrices) then
-        ## CAUTION: the external system must be able to check equality modulo possible ring relations (known to the external system)!
+        ## CAUTION: the external system must be able to check equality
+        ## modulo possible ring relations (known to the external system)!
         return RP!.AreEqualMatrices( M1, M2 );
     elif IsBound(RP!.Equal) then
-        ## CAUTION: the external system must be able to check equality modulo possible ring relations (known to the external system)!
+        ## CAUTION: the external system must be able to check equality
+        ## modulo possible ring relations (known to the external system)!
         return RP!.Equal( M1, M2 );
-    elif IsBound(RP!.IsZeroMatrix) then	## ensuring this avoids infinite loops
+    elif IsBound(RP!.IsZeroMatrix) then   ## ensuring this avoids infinite loops
         return IsZero( M1 - M2 );
     fi;
     
     TryNextMethod( );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##
+##  <#GAPDoc Label="IsIdentityMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M" Name="IsIdentityMatrix" Label="homalgTable entry"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IsIdentityMatrix</C> is bound then the standard method
+##      for the property <Ref Prop="IsIdentityMatrix"/> shown below returns
+##      <M>RP</M>!.<C>IsIdentityMatrix</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
 InstallMethod( IsIdentityMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
     local R, RP;
-    
-    if NrRows( M ) <> NrColumns( M ) then
-        return false;
-    elif NrRows( M ) = 0 then
-        return true;
-    fi;
     
     R := HomalgRing( M );
     
@@ -1421,13 +1668,26 @@ InstallMethod( IsIdentityMatrix,
         return RP!.IsIdentityMatrix( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##
+##  <#GAPDoc Label="IsDiagonalMatrix:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M" Name="IsDiagonalMatrix" Label="homalgTable entry"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IsDiagonalMatrix</C> is bound then the standard method
+##      for the property <Ref Meth="IsDiagonalMatrix"/> shown below returns
+##      <M>RP</M>!.<C>IsDiagonalMatrix</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
 InstallMethod( IsDiagonalMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -1443,16 +1703,46 @@ InstallMethod( IsDiagonalMatrix,
         return RP!.IsDiagonalMatrix( M );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     diag := DiagonalEntries( M );
     
     return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##
-InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndependentUnitPositions (GetIndependentUnitPositions)
+##  <#GAPDoc Label="GetColumnIndependentUnitPositions">
+##  <ManSection>
+##    <Oper Arg="A" Name="GetColumnIndependentUnitPositions" Label="for matrices"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      The list of column independet unit position of the matrix <A>A</A>.
+##      We say that a unit <A>A</A><M>[i,k]</M> is column independet from the unit <A>A</A><M>[l,j]</M>
+##      if <M>i>l</M> and <A>A</A><M>[l,k]=0</M>.
+##      The rows are scanned from top to bottom and within each row the columns are
+##      scanned from right to left searching for new units, column independent from the preceding ones.
+##      If <A>A</A><M>[i,k]</M> is a new column independent unit then <M>[i,k]</M> is added to the
+##      output list. If <A>A</A> has no units the empty list is returned.<P/>
+##      (&see; installed method <Ref Meth="GetColumnIndependentUnitPositions" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="GetColumnIndependentUnitPositions:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M" Name="GetColumnIndependentUnitPositions" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>GetColumnIndependentUnitPositions</C> is bound then the standard method
+##      of the operation <Ref Meth="GetColumnIndependentUnitPositions" Label="for matrices"/> shown below returns
+##      <M>RP</M>!.<C>GetColumnIndependentUnitPositions</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( GetColumnIndependentUnitPositions,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomogeneousList ],
         
@@ -1471,7 +1761,7 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
         return pos;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     rest := [ 1 .. NrColumns( M ) ];
     
@@ -1479,9 +1769,11 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
     
     for i in [ 1 .. NrRows( M ) ] do
         for k in Reversed( rest ) do
-            if not [ i, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, k ) ) then
+            if not [ i, k ] in pos_list and
+               IsUnit( R, GetEntryOfHomalgMatrix( M, i, k ) ) then
                 Add( pos, [ i, k ] );
-                rest := Filtered( rest, a -> IsZero( GetEntryOfHomalgMatrix( M, i, a ) ) );
+                rest := Filtered( rest,
+                                a -> IsZero( GetEntryOfHomalgMatrix( M, i, a ) ) );
                 break;
             fi;
         od;
@@ -1494,9 +1786,39 @@ InstallMethod( GetColumnIndependentUnitPositions,	### defines: GetColumnIndepend
     return pos;
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##
-InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUnitPositions (GetIndependentUnitPositions)
+##  <#GAPDoc Label="GetRowIndependentUnitPositions">
+##  <ManSection>
+##    <Oper Arg="A" Name="GetRowIndependentUnitPositions" Label="for matrices"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      The list of row independet unit position of the matrix <A>A</A>.
+##      We say that a unit <A>A</A><M>[k,j]</M> is row independet from the unit <A>A</A><M>[i,l]</M>
+##      if <M>j>l</M> and <A>A</A><M>[k,l]=0</M>.
+##      The columns are scanned from left to right and within each column the rows are
+##      scanned from bottom to top searching for new units, row independent from the preceding ones.
+##      If <A>A</A><M>[k,j]</M> is a new row independent unit then <M>[j,k]</M> (yes <M>[j,k]</M>) is added to the
+##      output list. If <A>A</A> has no units the empty list is returned.<P/>
+##      (&see; installed method <Ref Meth="GetRowIndependentUnitPositions" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="GetRowIndependentUnitPositions:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M" Name="GetRowIndependentUnitPositions" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>GetRowIndependentUnitPositions</C> is bound then the standard method
+##      of the operation <Ref Meth="GetRowIndependentUnitPositions" Label="for matrices"/> shown below returns
+##      <M>RP</M>!.<C>GetRowIndependentUnitPositions</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( GetRowIndependentUnitPositions,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomogeneousList ],
         
@@ -1515,7 +1837,7 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
         return pos;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     rest := [ 1 .. NrRows( M ) ];
     
@@ -1523,9 +1845,11 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
     
     for j in [ 1 .. NrColumns( M ) ] do
         for k in Reversed( rest ) do
-            if not [ j, k ] in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, k, j ) ) then
+            if not [ j, k ] in pos_list and
+               IsUnit( R, GetEntryOfHomalgMatrix( M, k, j ) ) then
                 Add( pos, [ j, k ] );
-                rest := Filtered( rest, a -> IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) );
+                rest := Filtered( rest,
+                                a -> IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) );
                 break;
             fi;
         od;
@@ -1538,9 +1862,36 @@ InstallMethod( GetRowIndependentUnitPositions,	### defines: GetRowIndependentUni
     return pos;
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##
-InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
+##  <#GAPDoc Label="GetUnitPosition">
+##  <ManSection>
+##    <Oper Arg="A" Name="GetUnitPosition" Label="for matrices"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      The position <M>[i,j]</M> of the first unit <A>A</A><M>[i,j]</M> in the matrix <A>A</A>, where
+##      the rows are scanned from top to bottom and within each row the columns are
+##      scanned from left to right. If <A>A</A><M>[i,j]</M> is the first occurrence of a unit
+##      then the position pair <M>[i,j]</M> is returned. Otherwise <C>fail</C> is returned.<P/>
+##      (&see; installed method <Ref Meth="GetUnitPosition" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="GetUnitPosition:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M" Name="GetUnitPosition" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>GetUnitPosition</C> is bound then the standard method
+##      of the operation <Ref Meth="GetUnitPosition" Label="for matrices"/> shown below returns
+##      <M>RP</M>!.<C>GetUnitPosition</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( GetUnitPosition,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomogeneousList ],
         
@@ -1559,26 +1910,31 @@ InstallMethod( GetUnitPosition,			### defines: GetUnitPosition
         return pos;
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     m := NrRows( M );
     n := NrColumns( M );
     
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
-            if not [ i, j ] in pos_list and not j in pos_list and IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
+            if not [ i, j ] in pos_list and not j in pos_list and
+               IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
                 SetIsZero( M, false );
                 return [ i, j ];
             fi;
         od;
     od;
     
-    return fail;	## the Maple version returns NULL and we return fail
+    return fail;
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
-InstallMethod( DivideEntryByUnit,		### defines: DivideEntryByUnit
+InstallMethod( DivideEntryByUnit,
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsPosInt, IsRingElement ],
         
@@ -1600,7 +1956,7 @@ InstallMethod( DivideEntryByUnit,		### defines: DivideEntryByUnit
 end );
     
 ##
-InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
+InstallMethod( DivideRowByUnit,
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
         
@@ -1615,7 +1971,7 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
         RP!.DivideRowByUnit( M, i, u, j );
     else
         
-        #=====# begin of the core procedure #=====#
+        #=====# the fallback method #=====#
         
         if j > 0 then
             ## the two for's avoid creating non-dense lists:
@@ -1652,7 +2008,7 @@ InstallMethod( DivideRowByUnit,			### defines: DivideRowByUnit
 end );
 
 ##
-InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
+InstallMethod( DivideColumnByUnit,
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsRingElement, IsInt ],
         
@@ -1667,7 +2023,7 @@ InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
         RP!.DivideColumnByUnit( M, j, u, i );
     else
         
-        #=====# begin of the core procedure #=====#
+        #=====# the fallback method #=====#
         
         if i > 0 then
             ## the two for's avoid creating non-dense lists:
@@ -1704,7 +2060,7 @@ InstallMethod( DivideColumnByUnit,		### defines: DivideColumnByUnit
 end );
 
 ##
-InstallMethod( CopyRowToIdentityMatrix,		### defines: CopyRowToIdentityMatrix
+InstallMethod( CopyRowToIdentityMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsList, IsPosInt ],
         
@@ -1719,7 +2075,7 @@ InstallMethod( CopyRowToIdentityMatrix,		### defines: CopyRowToIdentityMatrix
         RP!.CopyRowToIdentityMatrix( M, i, L, j );
     else
         
-        #=====# begin of the core procedure #=====#
+        #=====# the fallback method #=====#
         
         if Length( L ) > 0 and IsHomalgMatrix( L[1] ) then
             v := L[1];
@@ -1772,7 +2128,7 @@ InstallMethod( CopyRowToIdentityMatrix,		### defines: CopyRowToIdentityMatrix
 end );
 
 ##
-InstallMethod( CopyColumnToIdentityMatrix,	### defines: CopyColumnToIdentityMatrix
+InstallMethod( CopyColumnToIdentityMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsList, IsPosInt ],
         
@@ -1787,7 +2143,7 @@ InstallMethod( CopyColumnToIdentityMatrix,	### defines: CopyColumnToIdentityMatr
         RP!.CopyColumnToIdentityMatrix( M, j, L, i );
     else
         
-        #=====# begin of the core procedure #=====#
+        #=====# the fallback method #=====#
         
         if Length( L ) > 0 and IsHomalgMatrix( L[1] ) then
             u := L[1];
@@ -1840,7 +2196,7 @@ InstallMethod( CopyColumnToIdentityMatrix,	### defines: CopyColumnToIdentityMatr
 end );
 
 ##
-InstallMethod( SetColumnToZero,			### defines: SetColumnToZero
+InstallMethod( SetColumnToZero,
         "for homalg matrices",
         [ IsHomalgMatrix, IsPosInt, IsPosInt ],
         
@@ -1855,7 +2211,7 @@ InstallMethod( SetColumnToZero,			### defines: SetColumnToZero
         RP!.SetColumnToZero( M, i, j );
     else
         
-        #=====# begin of the core procedure #=====#
+        #=====# the fallback method #=====#
         
         zero := Zero( R );
         
@@ -1882,7 +2238,7 @@ InstallMethod( SetColumnToZero,			### defines: SetColumnToZero
 end );
 
 ##
-InstallMethod( GetCleanRowsPositions,		### defines: GetCleanRowsPositions
+InstallMethod( GetCleanRowsPositions,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomogeneousList ],
         
@@ -1899,7 +2255,7 @@ InstallMethod( GetCleanRowsPositions,		### defines: GetCleanRowsPositions
     
     one := One( R );
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     clean_rows := [ ];
     
@@ -1919,7 +2275,7 @@ InstallMethod( GetCleanRowsPositions,		### defines: GetCleanRowsPositions
 end );
 
 ##
-InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
+InstallMethod( ConvertRowToMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt ],
         
@@ -1943,7 +2299,7 @@ InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
         return HomalgMatrix( ext_obj, r, c, R );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     ## to use
     ## CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), c, r, R )
@@ -1965,7 +2321,7 @@ InstallMethod( ConvertRowToMatrix,		### defines: ConvertRowToMatrix
 end );
 
 ##
-InstallMethod( ConvertColumnToMatrix,		### defines: ConvertColumnToMatrix
+InstallMethod( ConvertColumnToMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsInt, IsInt ],
         
@@ -1989,14 +2345,14 @@ InstallMethod( ConvertColumnToMatrix,		### defines: ConvertColumnToMatrix
         return HomalgMatrix( ext_obj, r, c, R );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     return CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), r, c, R ); ## delicate
     
 end );
 
 ##
-InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
+InstallMethod( ConvertMatrixToRow,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -2016,7 +2372,7 @@ InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
         return HomalgMatrix( ext_obj, 1, NrRows( M ) * NrColumns( M ), R );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     r := NrRows( M );
     c := NrColumns( M );
@@ -2040,7 +2396,7 @@ InstallMethod( ConvertMatrixToRow,		### defines: ConvertMatrixToRow
 end );
 
 ##
-InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
+InstallMethod( ConvertMatrixToColumn,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -2060,7 +2416,7 @@ InstallMethod( ConvertMatrixToColumn,		### defines: ConvertMatrixToColumn
         return HomalgMatrix( ext_obj, NrColumns( M ) * NrRows( M ), 1, R );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     return CreateHomalgMatrixFromString( GetListOfHomalgMatrixAsString( M ), NrColumns( M ) * NrRows( M ), 1, R ); ## delicate
     
@@ -2084,13 +2440,22 @@ InstallMethod( Eval,
         return RP!.PreEval( e );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     return Eval( e );
     
 end );
 
-##
+##  <#GAPDoc Label="DegreesOfEntries:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="C" Name="DegreesOfEntries" Label="homalgTable entry"/>
+##    <Returns>a listlist of degrees/multi-degrees</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>(</M> <A>C</A> <M>)</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>DegreesOfEntries</C> is bound then the standard method
+##      for the attribute <Ref Attr="DegreesOfEntries"/> shown below returns
+##      <M>RP</M>!.<C>DegreesOfEntries</C><M>(</M> <A>C</A> <M>)</M>.
+##    <Listing Type="Code"><![CDATA[
 InstallMethod( DegreesOfEntries,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -2099,7 +2464,8 @@ InstallMethod( DegreesOfEntries,
     local R, RP, weights, e, c;
     
     if IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), ListWithIdenticalEntries( NrColumns( C ), -1 ) );
+        return ListWithIdenticalEntries( NrRows( C ),
+                       ListWithIdenticalEntries( NrColumns( C ), -1 ) );
     fi;
     
     R := HomalgRing( C );
@@ -2122,7 +2488,7 @@ InstallMethod( DegreesOfEntries,
         return RP!.DegreesOfEntries( C );
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     e := EntriesOfHomalgMatrix( C );
     
@@ -2133,6 +2499,10 @@ InstallMethod( DegreesOfEntries,
     return List( [ 1 .. NrRows( C ) ], r -> e{[ ( r - 1 ) * c + 1 .. r * c ]} );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
 InstallMethod( NonTrivialDegreePerRow,
@@ -2168,7 +2538,7 @@ InstallMethod( NonTrivialDegreePerRow,
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     e := DegreesOfEntries( C );
     
@@ -2235,7 +2605,7 @@ InstallMethod( NonTrivialDegreePerRow,
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     e := DegreesOfEntries( C );
     
@@ -2279,7 +2649,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     e := DegreesOfEntries( C );
     
@@ -2346,7 +2716,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    #=====# the fallback method #=====#
     
     e := DegreesOfEntries( C );
     

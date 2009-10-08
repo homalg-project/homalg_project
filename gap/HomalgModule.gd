@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgModule">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="M" Name="IsHomalgModule"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; modules. <Br/><Br/>
+##      The &GAP; category of &homalg; modules. <P/>
 ##      (It is a subcategory of the &GAP; categories
 ##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgObject</C>.)
 ##    </Description>
@@ -40,7 +40,7 @@ DeclareCategory( "IsHomalgModule",
 ##  <#GAPDoc Label="IsFree">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsFree"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is free.
 ##    </Description>
@@ -53,7 +53,7 @@ DeclareProperty( "IsFree",
 ##  <#GAPDoc Label="IsStablyFree">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsStablyFree"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is stably free.
 ##    </Description>
@@ -66,7 +66,7 @@ DeclareProperty( "IsStablyFree",
 ##  <#GAPDoc Label="IsProjective">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsProjective"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is projective.
 ##    </Description>
@@ -79,7 +79,7 @@ DeclareProperty( "IsProjective",
 ##  <#GAPDoc Label="FiniteFreeResolutionExists">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="FiniteFreeResolutionExists"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> allows a finite free resolution. <Br/>
 ##      (no method installed)
@@ -93,7 +93,7 @@ DeclareProperty( "FiniteFreeResolutionExists",
 ##  <#GAPDoc Label="IsReflexive">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsReflexive"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is reflexive.
 ##    </Description>
@@ -106,7 +106,7 @@ DeclareProperty( "IsReflexive",
 ##  <#GAPDoc Label="IsTorsionFree">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsTorsionFree"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is torsion-free.
 ##    </Description>
@@ -119,7 +119,7 @@ DeclareProperty( "IsTorsionFree",
 ##  <#GAPDoc Label="IsArtinian:module">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsArtinian" Label="for modules"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is artinian.
 ##    </Description>
@@ -132,7 +132,7 @@ DeclareProperty( "IsArtinian",
 ##  <#GAPDoc Label="IsCyclic">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsCyclic"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is cyclic.
 ##    </Description>
@@ -145,7 +145,7 @@ DeclareProperty( "IsCyclic",
 ##  <#GAPDoc Label="IsTorsion">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsTorsion"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is torsion.
 ##    </Description>
@@ -158,7 +158,7 @@ DeclareProperty( "IsTorsion",
 ##  <#GAPDoc Label="IsHolonomic">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsHolonomic"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is holonomic.
 ##    </Description>
@@ -171,7 +171,7 @@ DeclareProperty( "IsHolonomic",
 ##  <#GAPDoc Label="IsPure">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsPure"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is pure.
 ##    </Description>
@@ -184,7 +184,7 @@ DeclareProperty( "IsPure",
 ##  <#GAPDoc Label="HasConstantRank">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="HasConstantRank"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> has constant rank. <Br/>
 ##      (no method installed)
@@ -198,7 +198,7 @@ DeclareProperty( "HasConstantRank",
 ##  <#GAPDoc Label="ConstructedAsAnIdeal">
 ##  <ManSection>
 ##    <Prop Arg="J" Name="ConstructedAsAnIdeal"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; submodule <A>J</A> was constructed as an ideal. <Br/>
 ##      (no method installed)
@@ -212,7 +212,7 @@ DeclareProperty( "ConstructedAsAnIdeal",
 ##  <#GAPDoc Label="IsPrimeIdeal">
 ##  <ManSection>
 ##    <Prop Arg="J" Name="IsPrimeIdeal"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; submodule <A>J</A> is a prime ideal. The ring has to be commutative. <Br/>
 ##      (no method installed)

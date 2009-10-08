@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgRing">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="R" Name="IsHomalgRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; rings. <Br/><Br/>
+##      The &GAP; category of &homalg; rings. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRingOrModule</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -33,11 +33,14 @@ DeclareCategory( "IsHomalgRing",
 ##  <#GAPDoc Label="IsPreHomalgRing">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="R" Name="IsPreHomalgRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of pre &homalg; rings. <Br/><Br/>
-##      (It is a subcategory of the &GAP; category <C>IsHomalgRing</C>. These are rings
-##       with an incomplete homalgTable that are not meant for users!)
+##      The &GAP; category of pre &homalg; rings. <P/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgRing</C>.) <Br/><Br/>
+##      These are rings with an incomplete <C>homalgTable</C>.
+##      They provide flexibility for developers to support a wider class of rings,
+##      as was necessary for the development of the &LocalizeRingForHomalg; package.
+##      They are not suited for direct usage.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -48,7 +51,7 @@ DeclareCategory( "IsPreHomalgRing",
 ##  <#GAPDoc Label="IsHomalgRingElement">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="r" Name="IsHomalgRingElement"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of elements of &homalg; rings which are not GAP4 built-in.
 ##    </Description>
@@ -76,7 +79,7 @@ DeclareCategory( "IsHomalgRingElement",
 ##  <#GAPDoc Label="ContainsAField">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="ContainsAField"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -89,7 +92,7 @@ DeclareProperty( "ContainsAField",
 ##  <#GAPDoc Label="IsRationalsForHomalg">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRationalsForHomalg"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -102,7 +105,7 @@ DeclareProperty( "IsRationalsForHomalg",
 ##  <#GAPDoc Label="IsFieldForHomalg">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsFieldForHomalg"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -115,7 +118,7 @@ DeclareProperty( "IsFieldForHomalg",
 ##  <#GAPDoc Label="IsDivisionRingForHomalg">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsDivisionRingForHomalg"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -128,7 +131,7 @@ DeclareProperty( "IsDivisionRingForHomalg",
 ##  <#GAPDoc Label="IsIntegersForHomalg">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsIntegersForHomalg"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -141,7 +144,7 @@ DeclareProperty( "IsIntegersForHomalg",
 ##  <#GAPDoc Label="IsResidueClassRingOfTheIntegers">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsResidueClassRingOfTheIntegers"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -154,7 +157,7 @@ DeclareProperty( "IsResidueClassRingOfTheIntegers",
 ##  <#GAPDoc Label="IsBezoutRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsBezoutRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -167,7 +170,7 @@ DeclareProperty( "IsBezoutRing",
 ##  <#GAPDoc Label="IsIntegrallyClosedDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsIntegrallyClosedDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -180,7 +183,7 @@ DeclareProperty( "IsIntegrallyClosedDomain",
 ##  <#GAPDoc Label="IsUniqueFactorizationDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsUniqueFactorizationDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -193,7 +196,7 @@ DeclareProperty( "IsUniqueFactorizationDomain",
 ##  <#GAPDoc Label="IsKaplanskyHermite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsKaplanskyHermite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -206,7 +209,7 @@ DeclareProperty( "IsKaplanskyHermite",
 ##  <#GAPDoc Label="IsDedekindDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsDedekindDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -219,7 +222,7 @@ DeclareProperty( "IsDedekindDomain",
 ##  <#GAPDoc Label="IsDiscreteValuationRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsDiscreteValuationRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -232,7 +235,7 @@ DeclareProperty( "IsDiscreteValuationRing",
 ##  <#GAPDoc Label="IsFreePolynomialRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsFreePolynomialRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -245,7 +248,7 @@ DeclareProperty( "IsFreePolynomialRing",
 ##  <#GAPDoc Label="IsWeylRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsWeylRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -258,7 +261,7 @@ DeclareProperty( "IsWeylRing",
 ##  <#GAPDoc Label="IsExteriorRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsExteriroRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -271,7 +274,7 @@ DeclareProperty( "IsExteriorRing",
 ##  <#GAPDoc Label="IsGlobalDimensionFinite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsGlobalDimensionFinite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -284,7 +287,7 @@ DeclareProperty( "IsGlobalDimensionFinite",
 ##  <#GAPDoc Label="IsLeftGlobalDimensionFinite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftGlobalDimensionFinite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -297,7 +300,7 @@ DeclareProperty( "IsLeftGlobalDimensionFinite",
 ##  <#GAPDoc Label="IsRightGlobalDimensionFinite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightGlobalDimensionFinite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -310,7 +313,7 @@ DeclareProperty( "IsRightGlobalDimensionFinite",
 ##  <#GAPDoc Label="HasInvariantBasisProperty">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="HasInvariantBasisProperty"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -323,7 +326,7 @@ DeclareProperty( "HasInvariantBasisProperty",
 ##  <#GAPDoc Label="HasLeftInvariantBasisProperty">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="HasLeftInvariantBasisProperty"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -336,7 +339,7 @@ DeclareProperty( "HasLeftInvariantBasisProperty",
 ##  <#GAPDoc Label="HasRightInvariantBasisProperty">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="HasRightInvariantBasisProperty"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -349,7 +352,7 @@ DeclareProperty( "HasRightInvariantBasisProperty",
 ##  <#GAPDoc Label="IsLocalRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLocalRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -362,7 +365,7 @@ DeclareProperty( "IsLocalRing",
 ##  <#GAPDoc Label="IsSemiLocalRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsSemiLocalRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -375,7 +378,7 @@ DeclareProperty( "IsSemiLocalRing",
 ##  <#GAPDoc Label="IsIntegralDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsIntegralDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -388,7 +391,7 @@ DeclareProperty( "IsIntegralDomain",
 ##  <#GAPDoc Label="IsHereditary">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsHereditary"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -401,7 +404,7 @@ DeclareProperty( "IsHereditary",
 ##  <#GAPDoc Label="IsLeftHereditary">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftHereditary"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -414,7 +417,7 @@ DeclareProperty( "IsLeftHereditary",
 ##  <#GAPDoc Label="IsRightHereditary">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightHereditary"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -427,7 +430,7 @@ DeclareProperty( "IsRightHereditary",
 ##  <#GAPDoc Label="IsHermite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsHermite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -440,7 +443,7 @@ DeclareProperty( "IsHermite",
 ##  <#GAPDoc Label="IsLeftHermite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftHermite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -453,7 +456,7 @@ DeclareProperty( "IsLeftHermite",
 ##  <#GAPDoc Label="IsRightHermite">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightHermite"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -466,7 +469,7 @@ DeclareProperty( "IsRightHermite",
 ##  <#GAPDoc Label="IsNoetherian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsNoetherian"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -479,7 +482,7 @@ DeclareProperty( "IsNoetherian",
 ##  <#GAPDoc Label="IsLeftNoetherian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftNoetherian"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -492,7 +495,7 @@ DeclareProperty( "IsLeftNoetherian",
 ##  <#GAPDoc Label="IsRightNoetherian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightNoetherian"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -505,7 +508,7 @@ DeclareProperty( "IsRightNoetherian",
 ##  <#GAPDoc Label="IsArtinian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsArtinian" Label="for rings"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -518,7 +521,7 @@ DeclareProperty( "IsArtinian",
 ##  <#GAPDoc Label="IsLeftArtinian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftArtinian"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -531,7 +534,7 @@ DeclareProperty( "IsLeftArtinian",
 ##  <#GAPDoc Label="IsRightArtinian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightArtinian"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -544,7 +547,7 @@ DeclareProperty( "IsRightArtinian",
 ##  <#GAPDoc Label="IsOreDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsOreDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -557,7 +560,7 @@ DeclareProperty( "IsOreDomain",
 ##  <#GAPDoc Label="IsLeftOreDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftOreDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -570,7 +573,7 @@ DeclareProperty( "IsLeftOreDomain",
 ##  <#GAPDoc Label="IsRightOreDomain">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightOreDomain"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -583,7 +586,7 @@ DeclareProperty( "IsRightOreDomain",
 ##  <#GAPDoc Label="IsPrincipalIdealRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsPrincipalIdealRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -596,7 +599,7 @@ DeclareProperty( "IsPrincipalIdealRing",
 ##  <#GAPDoc Label="IsLeftPrincipalIdealRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftPrincipalIdealRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -609,7 +612,7 @@ DeclareProperty( "IsLeftPrincipalIdealRing",
 ##  <#GAPDoc Label="IsRightPrincipalIdealRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightPrincipalIdealRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -622,7 +625,7 @@ DeclareProperty( "IsRightPrincipalIdealRing",
 ##  <#GAPDoc Label="IsRegular">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRegular"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -635,7 +638,7 @@ DeclareProperty( "IsRegular",
 ##  <#GAPDoc Label="IsFiniteFreePresentationRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsFiniteFreePresentationRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -648,7 +651,7 @@ DeclareProperty( "IsFiniteFreePresentationRing",
 ##  <#GAPDoc Label="IsLeftFiniteFreePresentationRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsLeftFiniteFreePresentationRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -661,7 +664,7 @@ DeclareProperty( "IsLeftFiniteFreePresentationRing",
 ##  <#GAPDoc Label="IsRightFiniteFreePresentationRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsRightFiniteFreePresentationRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -674,7 +677,7 @@ DeclareProperty( "IsRightFiniteFreePresentationRing",
 ##  <#GAPDoc Label="IsSimpleRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsSimpleRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -687,7 +690,7 @@ DeclareProperty( "IsSimpleRing",
 ##  <#GAPDoc Label="IsSemiSimpleRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsSemiSimpleRing"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -700,7 +703,7 @@ DeclareProperty( "IsSemiSimpleRing",
 ##  <#GAPDoc Label="BasisAlgorithmRespectsPrincipalIdeals">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="BasisAlgorithmRespectsPrincipalIdeals"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>
@@ -713,7 +716,7 @@ DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
 ##  <#GAPDoc Label="IsMinusOne">
 ##  <ManSection>
 ##    <Prop Arg="r" Name="IsMinusOne"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>r</A> is a &homalg; ring element.
 ##    </Description>

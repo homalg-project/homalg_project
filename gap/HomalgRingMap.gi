@@ -23,7 +23,7 @@
 ##  <#GAPDoc Label="IsHomalgRingMapRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="phi" Name="IsHomalgRingMapRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingMap"/>.)

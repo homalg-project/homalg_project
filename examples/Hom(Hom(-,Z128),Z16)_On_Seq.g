@@ -1,9 +1,23 @@
 ##  <#GAPDoc Label="HomHom">
-##  <Section Label="HomHom">
+##  <Subsection Label="HomHom">
 ##  <Heading>HomHom</Heading>
-##  This corresponds to the example of Section 2 in <Cite Key="BREACA"/>.
+##  The following example is taken from Section 2 of <Cite Key="BREACA"/>. <Br/><Br/>
+##  The computation takes place over the residue class ring <M>R=&ZZ;/2^8&ZZ;</M>
+##  using the generic support for residue class rings provided by
+##  the subpackage &ResidueClassRingForHomalg; (&see; Appendix <Ref Sect="ResidueClassRingForHomalg"/>).
+##  For a native support of the rings <M>R=&ZZ;/p^n&ZZ;</M> use the &GaussForHomalg; package. <P/>
+##  Here we compute the (infinite) long exact homology sequence of the
+##  covariant functor <M>Hom(Hom(-,&ZZ;/2^7&ZZ;),&ZZ;/2^4&ZZ;)</M> (and its left derived functors)
+##  applied to the short exact sequence<Br/><Br/>
+##  <Alt Not="Text,HTML"><Math>0 \longrightarrow M\_=&ZZ;/2^2&ZZ; \stackrel{\alpha_1}{\longrightarrow}
+##  M=&ZZ;/2^5&ZZ; \stackrel{\alpha_2}{\longrightarrow} \_M=&ZZ;/2^3&ZZ; \longrightarrow 0</Math></Alt>
+##  <Alt Only="Text,HTML"><M>0 -> M_=&ZZ;/2^2&ZZ; --alpha_1--> M=&ZZ;/2^5&ZZ; --alpha_2--> \_M=&ZZ;/2^3&ZZ; -> 0</M></Alt>.
 ##  <Example><![CDATA[
-##  gap> R := HomalgRingOfIntegers( ) / 2^8;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> Display( ZZ );
+##  Z
+##  gap> R := ZZ / 2^8;
 ##  <A homalg residue class ring>
 ##  gap> Display( R );
 ##  Z/( 256 )
@@ -28,8 +42,8 @@
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> M_ := Kernel( alpha2 );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by yet unknown relations for a cyclic generato\
+##  r>
 ##  gap> alpha1 := KernelEmb( alpha2 );
 ##  <A monomorphism of left modules>
 ##  gap> seq := HomalgComplex( alpha2 );
@@ -216,12 +230,13 @@
 ##  Z/( 256 )/< |[ 8 ]| > 
 ##  -------------------------
 ##  ]]></Example>
-##  </Section>
+##  </Subsection>
 ##  <#/GAPDoc>
 
 LoadPackage( "homalg" );
 
-R := HomalgRingOfIntegers( ) / 2^8;
+ZZ := HomalgRingOfIntegers( );
+R := ZZ / 2^8;
 
 M := LeftPresentation( [ 2^5 ], R );
 _M := LeftPresentation( [ 2^3 ], R );

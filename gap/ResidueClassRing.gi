@@ -17,7 +17,7 @@
 ##  <#GAPDoc Label="IsHomalgResidueClassRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgResidueClassRingRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The representation of &homalg; residue class rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
@@ -33,7 +33,7 @@ DeclareRepresentation( "IsHomalgResidueClassRingRep",
 ##  <#GAPDoc Label="IsHomalgResidueClassRingElementRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="r" Name="IsHomalgResidueClassRingElementRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The representation of elements of &homalg; residue class rings. <P/>
 ##      (It is a representation of the &GAP; category <C>IsHomalgRingElement</C>.)
@@ -48,7 +48,7 @@ DeclareRepresentation( "IsHomalgResidueClassRingElementRep",
 ##  <#GAPDoc Label="IsHomalgResidueClassMatrixRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="A" Name="IsHomalgResidueClassMatrixRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The representation of &homalg; matrices with entries in a &homalg; residue class ring. <P/>
 ##      (It is a representation of the &GAP; category <C>IsHomalgMatrix</C>.)

@@ -199,6 +199,20 @@ InstallImmediateMethod( IsIdentityMatrix,
         
   function( M )
     
+    if NrRows( M ) = 0 or NrColumns( M ) = 0 then
+        return NrRows( M ) = NrColumns( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsIdentityMatrix,
+        IsHomalgMatrix and HasNrRows and HasNrColumns, 0,
+        
+  function( M )
+    
     if NrRows( M ) <> NrColumns( M ) then
         return false;
     fi;

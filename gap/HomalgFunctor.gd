@@ -19,7 +19,7 @@
 ##  <#GAPDoc Label="IsHomalgFunctor">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="F" Name="IsHomalgFunctor"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; (multi-)functors.
 ##    </Description>

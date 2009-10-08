@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgSpectralSequence">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="E" Name="IsHomalgSpectralSequence"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; (co)homological spectral sequences. <Br/><Br/>
+##      The &GAP; category of &homalg; (co)homological spectral sequences. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgObject</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -35,9 +35,9 @@ DeclareCategory( "IsHomalgSpectralSequence",
 ##  <#GAPDoc Label="IsHomalgSpectralSequenceAssociatedToAnExactCouple">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="E" Name="IsHomalgSpectralSequenceAssociatedToAnExactCouple"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; associated to an exact couple. <Br/><Br/>
+##      The &GAP; category of &homalg; associated to an exact couple. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgSpectralSequence</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -49,12 +49,12 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToAnExactCouple",
 ##  <#GAPDoc Label="IsHomalgSpectralSequenceAssociatedToAFilteredComplex">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="E" Name="IsHomalgSpectralSequenceAssociatedToAFilteredComplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; associated to a filtered complex. <Br/>
+##      The &GAP; category of &homalg; associated to a filtered complex. <P/>
+##      (It is a subcategory of the &GAP; category <C>IsHomalgSpectralSequence</C>.) <Br/><Br/>
 ##      The <M>0</M>-th spectral sheet <M>E_0</M> stemming from a filtration is a bigraded (differential) object,
-##      which, in general, does not stem from an exact couple (although <M>E_1</M>, <M>E_2</M>, ... do). <Br/><Br/>
-##      (It is a subcategory of the &GAP; category <C>IsHomalgSpectralSequence</C>.)
+##      which, in general, does not stem from an exact couple (although <M>E_1</M>, <M>E_2</M>, ... do).
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -65,9 +65,9 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToAFilteredComplex",
 ##  <#GAPDoc Label="IsHomalgSpectralSequenceAssociatedToABicomplex">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="E" Name="IsHomalgSpectralSequenceAssociatedToABicomplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; associated to a bicomplex. <Br/><Br/>
+##      The &GAP; category of &homalg; associated to a bicomplex. <P/>
 ##      (It is a subcategory of the &GAP; category <Br/>
 ##       <C>IsHomalgSpectralSequenceAssociatedToAFilteredComplex</C>.)
 ##    </Description>

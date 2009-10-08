@@ -21,7 +21,7 @@
 ##  <#GAPDoc Label="IsBigradedObjectOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="Er" Name="IsBigradedObjectOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of bigraded objects of finitley generated &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgBigradedObject"/>,

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Basic.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2008, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Appendix Label="Basic Operations">
+<Heading>The Matrix Basic Operations</Heading>
+
+<Section Label="Main">
+<Heading>Main</Heading>
+
+<List>
+  <Item><C>BasisOfRowModule</C></Item>
+  <Item><C>BasisOfColumnModule</C></Item>
+</List>
+
+<List>
+  <Item><C>DecideZeroRows</C></Item>
+  <Item><C>DecideZeroColumns</C></Item>
+</List>
+
+<List>
+  <Item><C>SyzygiesGeneratorsOfRows</C></Item>
+  <Item><C>SyzygiesGeneratorsOfColumns</C></Item>
+</List>
+
+</Section>
+
+<Section Label="Effective">
+<Heading>Effective</Heading>
+
+<List>
+  <Item><C>BasisOfRowsCoeff</C></Item>
+  <Item><C>BasisOfColumnsCoeff</C></Item>
+</List>
+
+<List>
+  <Item><C>DecideZeroRowsEffectively</C></Item>
+  <Item><C>DecideZeroColumnsEffectively</C></Item>
+</List>
+
+</Section>
+
+<Section Label="Relative">
+<Heading>Relative</Heading>
+
+<List>
+  <Item><C>RelativeSyzygiesGeneratorsOfRows</C></Item>
+  <Item><C>RelativeSyzygiesGeneratorsOfColumns</C></Item>
+</List>
+
+</Section>
+
+<Section Label="Reduced">
+<Heading>Reduced</Heading>
+
+<List>
+  <Item><C>ReducedBasisOfRowModule</C></Item>
+  <Item><C>ReducedBasisOfColumnModule</C></Item>
+</List>
+
+<List>
+  <Item><C>ReducedSyzygiesGeneratorsOfRows</C></Item>
+  <Item><C>ReducedSyzygiesGeneratorsOfColumns</C></Item>
+</List>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Appendix>
+

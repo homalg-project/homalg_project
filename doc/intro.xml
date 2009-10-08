@@ -115,6 +115,13 @@ internal matrix (resp. ring) is simply a wrapper containing a
 define further classes or extend existing classes of rings and
 matrices <E>together</E> with their operations. For example:
 <List>
+  <Item>The &homalg; subpackage &ResidueClassRingForHomalg; (&see;
+  Appendix <Ref Label="ResidueClassRingForHomalg"/>) defines the
+  classes of residue class rings, residue class ring elements, and
+  matrices over residue class rings. Such a matrix is defined by a
+  matrix over the ambient ring which is nevertheless interpreted
+  modulo the ring relations, i.e. modulo the generators of the
+  defining ideal. </Item>
   <Item>The package &GaussForHomalg; extends the class of internal
   matrices enabling it to wrap sparse matrices provided by the
   package &Gauss;. &GaussForHomalg; delegates the essential part of
@@ -123,25 +130,27 @@ matrices <E>together</E> with their operations. For example:
   external rings and matrices and the package &RingsForHomalg;
   delegates the essential part of the matrix creation and all matrix
   operations to external computer algebra systems like &Singular;,
-  &Sage;, &Maple;, &MAGMA;, ... . The package &homalg; accesses
-  external matrices via pointers. The pointer of an external matrix is
-  simply its name in the external system. &HomalgToCAS; chooses these
-  names.</Item>
+  &Macaulay2;, &Sage;, &MAGMA;, &Maple;, ... . The package &homalg;
+  accesses external matrices via pointers. The pointer of an external
+  matrix is simply its name in the external system. &HomalgToCAS;
+  chooses these names.</Item>
   <Item>The package &LocalizeRingForHomalg; defines the classes of
-  local(ized) rings and local matrices. A &homalg; local matrix
-  contains a &homalg; matrix as a numerator and an element of the
-  global ring as a denominator.</Item>
+  local(ized) rings, local ring elements, and local matrices. A
+  &homalg; local matrix contains a &homalg; matrix as a numerator and
+  an element of the global ring as a denominator.</Item>
 </List>
   
 <P/>
 
-The matrix operations are divided into two classes called "Tool" and
-"Basic". The "Tool" operations include addition, subtraction,
-multiplication, extracting certain rows or columns, stacking, and
-augmenting matrices. The "Basic" operations include the two basic
+The matrix operations are divided into two classes called <Q>Tools</Q>
+and <Q>Basic</Q>. The <Q>Tools</Q> operations include addition,
+subtraction, multiplication, extracting certain rows or columns,
+stacking, and augmenting matrices
+(&see; Appendix <Ref Label="Tool Operations"/>).
+The <Q>Basic</Q> operations include the two basic
 operations in linear algebra needed to solve an inhomogeneous linear
 system <M>XA=B</M> with coefficients in a not necessarily commutative
-ring <M>R</M>:
+ring <M>R</M> (&see; Appendix <Ref Label="Basic Operations"/>):
 <List>
   <Item>Effectively reducing <M>B</M> modulo <M>A</M>,
     i.e. effectively deciding if a row (or a set of rows) <M>B</M>
@@ -157,8 +166,21 @@ The first operation is nothing but deciding the solvability of the
 inhomogeneous system <M>XA=B</M> and if solvable to compute a
 particular solution <M>X</M>, while the second is to compute an
 <M>R</M>-generating set for the homogeneous solution space, i.e. the
-solution space of the homogeneous system <M>YA=0</M>. The above is of
-course also valid for the column convention. <P/>
+solution space of the homogeneous system <M>YA=0</M> (&see;
+<Ref Label="SufficientSupport" Text="Rings supported in a sufficient
+way"/>). The above is of course also valid for the column convention.
+
+</Subsection>
+
+<Subsection Label="SufficientSupport">
+<Heading>Rings supported in a sufficient way</Heading>
+
+Through out this manual the following terminology is used.  We say
+that a computer algebra system <Q>sufficiently supports</Q> a
+ring <M>R</M>, if it contains procedures to effectively solve
+one-sided inhomogeneous linear systems <M>XA=B</M> and <M>AX=B</M>
+with coefficients over <M>R</M> (&see; <Ref Label="homalg-limitation"
+Text="Principal limitation"/>).
 
 </Subsection>
 
@@ -190,7 +212,7 @@ one-sided form. For more details see <Cite Key="BR"/>. <P/>
 
 <P/>
 
-Now we address the following concern: Wouldn't the idea of using
+Now we address the following concerns: Wouldn't the idea of using
 algorithms like the Gröbnerbasis algorithm(s) as a black box (&see;
 <Ref Sect="homalg-delegates" Text="homalg delegates ..."/>) contradict
 the following facts?
@@ -200,12 +222,12 @@ the following facts?
     implementation of the algorithm depends on the ground ring (or
     field) <M>k</M>.</Item>
   <Item> Often enough highly specialized implementations are used to
-    address specific types of linear systems (occuring in specific
-    homological problems) in order to increase the speed or reduce the
-    space needed for the computations.</Item>
+    address specific types of linear systems of equations (occuring in
+    specific homological problems) in order to increase the speed or
+    reduce the space needed for the computations.</Item>
 </List>
 
-The following should clarify the above concern.
+The following should clarify the above concerns.
 <List>
   <Item> Since each ring comes with its own black box, the first point
     is automatically resolved.</Item>
@@ -653,8 +675,9 @@ In particular, &Sage; can make use of all of &homalg;, but for in
 order to make full use, &Sage; needs to understand the internals of
 the &homalg; objects. On the contrary, &homalg; can only make limited
 use of &Sage; (or of virtually any computer algebra system that
-supports rings in a sufficient way), but without the need to delve
-into the inner life of the &Sage; objects. <P/>
+supports rings in a sufficient way (&see;
+<Ref Sect="SufficientSupport"/>)), but without the need to delve into the
+inner life of the &Sage; objects. <P/>
 
 </Subsection>
 
@@ -665,11 +688,10 @@ into the inner life of the &Sage; objects. <P/>
 
 Chapter <Ref Chap="install"/> describes the installation of this
 package, while Chapter <Ref Chap="QuickStart"/> provides a short quick
-guide to build your first own example. There the separate package
-&ExamplesForHomalg; is introduced and used. The remaining chapters are
-each devoted to one of the &homalg; objects (&see;
-<Ref Label="homalg-provides"/>) with its constructors, properties,
-attributes, and operations.
+guide to build your first own example, using the package
+&ExamplesForHomalg;. The remaining chapters are each devoted to one of
+the &homalg; objects (&see; <Ref Label="homalg-provides"/>) with its
+constructors, properties, attributes, and operations.
 
 <!--
 Finally, Chapter <Ref Chap="examples"/> shows some instructive
@@ -682,5 +704,5 @@ examples for the usage of this package.
 
 </Chapter>
 
-<!--  LocalWords:  outsourcing
+<!--  LocalWords:  ExamplesForHomalg
  -->

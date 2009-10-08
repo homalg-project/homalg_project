@@ -22,30 +22,58 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                ## Must only then be provided by the RingPackage in case the default
                ## "service" function does not match the Ring
                
+               ##  <#GAPDoc Label="BasisOfRowModule:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="BasisOfRowModule" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                BasisOfRowModule :=
                  function( M )
                    local Mrel;
                    
                    Mrel := UnionOfRows( M );
                    
-                   Mrel := HomalgResidueClassMatrix( BasisOfRowModule( Mrel ), HomalgRing( M ) );
+                   Mrel := HomalgResidueClassMatrix(
+                                   BasisOfRowModule( Mrel ), HomalgRing( M ) );
                    
                    return GetRidOfObsoleteRows( Mrel );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="BasisOfColumnModule:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="BasisOfColumnModule" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                BasisOfColumnModule :=
                  function( M )
                    local Mrel;
                    
                    Mrel := UnionOfColumns( M );
                    
-                   Mrel := HomalgResidueClassMatrix( BasisOfColumnModule( Mrel ), HomalgRing( M ) );
+                   Mrel := HomalgResidueClassMatrix(
+                                   BasisOfColumnModule( Mrel ), HomalgRing( M ) );
                    
                    return GetRidOfObsoleteColumns( Mrel );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="BasisOfRowsCoeff:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M, T" Name="BasisOfRowsCoeff" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                BasisOfRowsCoeff :=
                  function( M, T )
                    local Mrel, TT, bas;
@@ -56,12 +84,25 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    bas := BasisOfRowsCoeff( Mrel, TT );
                    
-                   SetEval( T, CertainColumns( TT, [ 1 .. NrRows( M ) ] ) ); ResetFilterObj( T, IsVoidMatrix );
+                   SetEval( T, CertainColumns( TT, [ 1 .. NrRows( M ) ] ) );
                    
-                   return HomalgResidueClassMatrix( bas, HomalgRing( M ) );	## FIXME: GetRidOfObsoleteRows and correct T
+                   ResetFilterObj( T, IsVoidMatrix );
+                   
+                   ## FIXME: GetRidOfObsoleteRows and correct T
+                   return HomalgResidueClassMatrix( bas, HomalgRing( M ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="BasisOfColumnsCoeff:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M, T" Name="BasisOfColumnsCoeff" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                BasisOfColumnsCoeff :=
                  function( M, T )
                    local Mrel, TT, bas;
@@ -72,32 +113,67 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    bas := BasisOfColumnsCoeff( Mrel, TT );
                    
-                   SetEval( T, CertainRows( TT, [ 1 .. NrColumns( M ) ] ) ); ResetFilterObj( T, IsVoidMatrix );
+                   SetEval( T, CertainRows( TT, [ 1 .. NrColumns( M ) ] ) );
                    
-                   return HomalgResidueClassMatrix( bas, HomalgRing( M ) );	## FIXME: GetRidOfObsoleteColumns and correct T
+                   ResetFilterObj( T, IsVoidMatrix );
+                   
+                   ## FIXME: GetRidOfObsoleteColumns and correct T
+                   return HomalgResidueClassMatrix( bas, HomalgRing( M ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="DecideZeroRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="A, B" Name="DecideZeroRows" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                DecideZeroRows :=
                  function( A, B )
                    local Brel;
                    
                    Brel := UnionOfRows( B );
                    
-                   return HomalgResidueClassMatrix( DecideZeroRows( Eval( A ), Brel ), HomalgRing( A ) );
+                   return HomalgResidueClassMatrix(
+                                  DecideZeroRows( Eval( A ), Brel ), HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="DecideZeroColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="A, B" Name="DecideZeroColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                DecideZeroColumns :=
                  function( A, B )
                    local Brel;
                    
                    Brel := UnionOfColumns( B );
                    
-                   return HomalgResidueClassMatrix( DecideZeroColumns( Eval( A ), Brel ), HomalgRing( A ) );
+                   return HomalgResidueClassMatrix(
+                                  DecideZeroColumns( Eval( A ), Brel ), HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="DecideZeroRowsEffectively:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="A, B, T" Name="DecideZeroRowsEffectively" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                DecideZeroRowsEffectively :=
                  function( A, B, T )
                    local Brel, TT, red;
@@ -108,12 +184,24 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    red := DecideZeroRowsEffectively( Eval( A ), Brel, TT );
                    
-                   SetEval( T, CertainColumns( TT, [ 1 .. NrRows( B ) ] ) ); ResetFilterObj( T, IsVoidMatrix );
+                   SetEval( T, CertainColumns( TT, [ 1 .. NrRows( B ) ] ) );
+                   
+                   ResetFilterObj( T, IsVoidMatrix );
                    
                    return HomalgResidueClassMatrix( red, HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="DecideZeroColumnsEffectively:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="A, B, T" Name="DecideZeroColumnsEffectively" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                DecideZeroColumnsEffectively :=
                  function( A, B, T )
                    local Brel, TT, red;
@@ -124,12 +212,24 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    red := DecideZeroColumnsEffectively( Eval( A ), Brel, TT );
                    
-                   SetEval( T, CertainRows( TT, [ 1 .. NrColumns( B ) ] ) ); ResetFilterObj( T, IsVoidMatrix );
+                   SetEval( T, CertainRows( TT, [ 1 .. NrColumns( B ) ] ) );
+                   
+                   ResetFilterObj( T, IsVoidMatrix );
                    
                    return HomalgResidueClassMatrix( red, HomalgRing( A ) );
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="SyzygiesGeneratorsOfRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="SyzygiesGeneratorsOfRows" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                SyzygiesGeneratorsOfRows :=
                  function( M )
                    local R, ring_rel, rel, S;
@@ -161,7 +261,17 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    return S;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="SyzygiesGeneratorsOfColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M" Name="SyzygiesGeneratorsOfColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                SyzygiesGeneratorsOfColumns :=
                  function( M )
                    local R, ring_rel, rel, S;
@@ -193,7 +303,17 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    return S;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfRows:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M, M2" Name="RelativeSyzygiesGeneratorsOfRows" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                RelativeSyzygiesGeneratorsOfRows :=
                  function( M, M2 )
                    local M2rel, S;
@@ -215,7 +335,17 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    return S;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
+               ##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfColumns:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="M, M2" Name="RelativeSyzygiesGeneratorsOfColumns" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    <Listing Type="Code"><![CDATA[
                RelativeSyzygiesGeneratorsOfColumns :=
                  function( M, M2 )
                    local M2rel, S;
@@ -237,6 +367,10 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    return S;
                    
                  end,
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
                
                X_ReducedBasisOfRowModule :=
                  function( M )

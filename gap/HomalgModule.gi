@@ -39,7 +39,7 @@
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleOrSubmoduleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleOrSubmoduleRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>.)
@@ -54,7 +54,7 @@ DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
@@ -76,7 +76,7 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 ##  <#GAPDoc Label="IsFinitelyPresentedSubmoduleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedSubmoduleRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley generated &homalg; submodules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
@@ -3503,7 +3503,7 @@ InstallMethod( ViewObj,
         
   function( o )
     local is_submodule, M, R, left_module, num_gen, properties, nz, num_rel,
-          gen_string, rel_string, locked;
+          gen_string, rel_string, rel, locked;
     
     is_submodule := IsFinitelyPresentedSubmoduleRep( o );
     
@@ -3708,8 +3708,11 @@ InstallMethod( ViewObj,
                     rel_string := " relations for ";
                 fi;
             else
-                if RelationsOfModule( o ) = "unknown relations" then
+                rel := RelationsOfModule( o );
+                if rel = "unknown relations" then
                     num_rel := "unknown";
+                elif not HasEvaluatedMatrixOfRelations( rel ) then
+                    num_rel := "yet unknown";
                 else
                     num_rel := "an unknown number of";
                 fi;
@@ -3765,8 +3768,11 @@ InstallMethod( ViewObj,
                     rel_string := " relations";
                 fi;
             else
-                if RelationsOfModule( o ) = "unknown relations" then
+                rel := RelationsOfModule( o );
+                if rel = "unknown relations" then
                     num_rel := "unknown";
+                elif not HasEvaluatedMatrixOfRelations( rel ) then
+                    num_rel := "yet unknown";
                 else
                     num_rel := "an unknown number of";
                 fi;

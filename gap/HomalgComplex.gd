@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgComplex">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="C" Name="IsHomalgComplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; (co)complexes. <Br/><Br/>
+##      The &GAP; category of &homalg; (co)complexes. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgObject</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -39,7 +39,7 @@ DeclareCategory( "IsHomalgComplex",
 ##  <#GAPDoc Label="IsSequence">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsSequence"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if all maps in <A>C</A> are well-defined.
 ##    </Description>
@@ -52,7 +52,7 @@ DeclareProperty( "IsSequence",
 ##  <#GAPDoc Label="IsComplex">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsComplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>C</A> is complex.
 ##    </Description>
@@ -65,7 +65,7 @@ DeclareProperty( "IsComplex",
 ##  <#GAPDoc Label="IsAcyclic">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsAcyclic"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at its boundaries.
 ##    </Description>
@@ -78,7 +78,7 @@ DeclareProperty( "IsAcyclic",
 ##  <#GAPDoc Label="IsRightAcyclic">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsRightAcyclic"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at its left boundary.
 ##    </Description>
@@ -91,7 +91,7 @@ DeclareProperty( "IsRightAcyclic",
 ##  <#GAPDoc Label="IsLeftAcyclic">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsLeftAcyclic"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is acyclic, i.e. exact except at its right boundary.
 ##    </Description>
@@ -104,7 +104,7 @@ DeclareProperty( "IsLeftAcyclic",
 ##  <#GAPDoc Label="IsGradedObject">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsGradedObject"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is a graded object, i.e. if all maps between the objects in <A>C</A> vanish.
 ##    </Description>
@@ -117,7 +117,7 @@ DeclareProperty( "IsGradedObject",
 ##  <#GAPDoc Label="IsExactSequence">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsExactSequence"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is exact.
 ##    </Description>
@@ -130,7 +130,7 @@ DeclareProperty( "IsExactSequence",
 ##  <#GAPDoc Label="IsShortExactSequence">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsShortExactSequence"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is a short exact sequence.
 ##    </Description>
@@ -143,7 +143,7 @@ DeclareProperty( "IsShortExactSequence",	## we also need this as property!!!
 ##  <#GAPDoc Label="IsSplitShortExactSequence">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsSplitShortExactSequence"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is a split short exact sequence.
 ##    </Description>
@@ -156,7 +156,7 @@ DeclareProperty( "IsSplitShortExactSequence",
 ##  <#GAPDoc Label="IsTriangle">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsTriangle"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Set to true if the &homalg; complex <A>C</A> is a triangle.
 ##    </Description>
@@ -169,7 +169,7 @@ DeclareProperty( "IsTriangle",
 ##  <#GAPDoc Label="IsExactTriangle">
 ##  <ManSection>
 ##    <Prop Arg="C" Name="IsExactTriangle"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; complex <A>C</A> is an exact triangle.
 ##    </Description>

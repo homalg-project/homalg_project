@@ -19,7 +19,7 @@
 ##  <#GAPDoc Label="IsHomalgDiagram">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="filt" Name="IsHomalgDiagram"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; diagrams.
 ##    </Description>

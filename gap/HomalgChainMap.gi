@@ -17,7 +17,7 @@
 ##  <#GAPDoc Label="IsChainMapOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="c" Name="IsChainMapOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of chain maps of finitley generated &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
@@ -33,7 +33,7 @@ DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
 ##  <#GAPDoc Label="IsCochainMapOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="c" Name="IsCochainMapOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of cochain maps of finitley generated &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,

@@ -17,7 +17,7 @@
 ##  <#GAPDoc Label="IsHomalgRingOrFinitelyPresentedObjectRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsHomalgRingOrFinitelyPresentedObjectRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley generated &homalg; objects. <P/>
 ##      It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>.
@@ -32,7 +32,7 @@ DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedObjectRep",
 ##  <#GAPDoc Label="IsFinitelyPresentedObjectRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedObjectRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,
@@ -49,7 +49,7 @@ DeclareRepresentation( "IsFinitelyPresentedObjectRep",
 ##  <#GAPDoc Label="IsFinitelyPresentedSubobjectRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedSubobjectRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,

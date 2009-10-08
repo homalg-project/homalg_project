@@ -1263,7 +1263,7 @@ end );
 ##  <#GAPDoc Label="IsHomalgGradedModule">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="M" Name="IsHomalgGradedModule"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; graded modules. <Br/><Br/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgModule</C>.)
@@ -1350,7 +1350,7 @@ proc NonTrivialDegreePerColumnWithRowWeights (matrix M, list row_weights)\n\
 ##  <#GAPDoc Label="IsReducedSetOfRelations">
 ##  <ManSection>
 ##    <Prop Arg="rel" Name="IsReducedSetOfRelations"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; set of relations <A>rel</A> is marked reduced. <Br/>
 ##      (no method installed)
@@ -1831,7 +1831,7 @@ end );
 ##  <#GAPDoc Label="SyzygiesAlgorithmReturnsMinimalSyzygies">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="SyzygiesAlgorithmReturnsMinimalSyzygies"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
 ##    </Description>

@@ -10,14 +10,13 @@ This chapter gives examples for the usage of this package.
 
 -->
 
-<Chapter Label="examples">
+<Chapter Label="Examples">
 <Heading>Examples</Heading>
 
 <#Include Label="ExtExt">
 <#Include Label="Purity">
 <#Include Label="TorExt-Grothendieck">
 <#Include Label="TorExt">
-<#Include Label="HomHom">
 
 <!-- ############################################################ -->
 

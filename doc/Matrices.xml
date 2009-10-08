@@ -23,11 +23,11 @@
 <Section Label="Matrices:Constructors">
 <Heading>Matrices: Constructors</Heading>
 
-<#Include Label="HomalgMatrix">
-<#Include Label="HomalgZeroMatrix">
-<#Include Label="HomalgIdentityMatrix">
 <#Include Label="HomalgInitialMatrix">
 <#Include Label="HomalgInitialIdentityMatrix">
+<#Include Label="HomalgZeroMatrix">
+<#Include Label="HomalgIdentityMatrix">
+<#Include Label="HomalgMatrix">
 <#Include Label="HomalgDiagonalMatrix">
 <#Include Label="\*:MatrixBaseChange">
 
@@ -36,12 +36,6 @@
 <Section Label="Matrices:Properties">
 <Heading>Matrices: Properties</Heading>
 
-<#Include Label="IsMutableMatrix">
-<!--
-<#Include Label="IsInitialMatrix">
-<#Include Label="IsInitialIdentityMatrix">
-<#Include Label="IsVoidMatrix">
--->
 <#Include Label="IsZero:matrix">
 <#Include Label="IsIdentityMatrix">
 <#Include Label="IsPermutationMatrix">
@@ -65,6 +59,10 @@
 <#Include Label="IsBasisOfColumnsMatrix">
 <#Include Label="IsReducedBasisOfRowsMatrix">
 <#Include Label="IsReducedBasisOfColumnsMatrix">
+<#Include Label="IsMutableMatrix">
+<#Include Label="IsInitialMatrix">
+<#Include Label="IsInitialIdentityMatrix">
+<#Include Label="IsVoidMatrix">
 
 </Section>
 
@@ -73,8 +71,7 @@
 
 <#Include Label="NrRows">
 <#Include Label="NrColumns">
-<#Include Label="RowRankOfMatrix">
-<#Include Label="ColumnRankOfMatrix">
+<#Include Label="DeterminantMat">
 <#Include Label="ZeroRows">
 <#Include Label="ZeroColumns">
 <#Include Label="NonZeroRows">
@@ -82,44 +79,8 @@
 <#Include Label="PositionOfFirstNonZeroEntryPerRow">
 <#Include Label="PositionOfFirstNonZeroEntryPerColumn">
 <#Include Label="DegreesOfEntries">
-
-</Section>
-
-<Section Label="Matrices:LIMAT">
-<Heading>&LIMAT;: Logical Implications for Matrices</Heading>
-
-</Section>
-
-<Section Label="Matrices:COLEM">
-<Heading>&COLEM;: Clever Operations for Lazy Evaluated Matrices</Heading>
-
-</Section>
-
-<Section Label="Matrices:Tools">
-<Heading>Matrices: Tool-Operations</Heading>
-
-<#Include Label="IsZero:matrix_method">
-<#Include Label="Eval:IsInitialMatrix">
-<#Include Label="Eval:IsInitialIdentityMatrix">
-<#Include Label="Eval:HasEvalInvolution">
-<#Include Label="Eval:HasEvalCertainRows">
-<#Include Label="Eval:HasEvalCertainColumns">
-<#Include Label="Eval:HasEvalUnionOfRows">
-<#Include Label="Eval:HasEvalUnionOfColumns">
-<#Include Label="Eval:HasEvalDiagMat">
-<#Include Label="Eval:HasEvalKroneckerMat">
-<#Include Label="Eval:HasEvalMulMat">
-<#Include Label="Eval:HasEvalAddMat">
-<#Include Label="Eval:HasEvalSubMat">
-<#Include Label="Eval:HasEvalCompose">
-<#Include Label="Eval:IsIdentityMatrix">
-<#Include Label="Eval:IsZeroMatrix">
-<#Include Label="NrRows:meth">
-<#Include Label="NrColumns:meth">
-<#Include Label="Determinant:meth">
-<#Include Label="ZeroRows:meth">
-<#Include Label="ZeroColumns:meth">
-<#Include Label="EQ:matrix_method">
+<#Include Label="RowRankOfMatrix">
+<#Include Label="ColumnRankOfMatrix">
 
 </Section>
 
@@ -127,6 +88,24 @@
 <Heading>Matrices: Operations and Functions</Heading>
 
 <#Include Label="HomalgRing:matrix">
+
+<#Include Label="Involution">
+<#Include Label="CertainRows">
+<#Include Label="CertainColumns">
+<#Include Label="UnionOfRows">
+<#Include Label="UnionOfColumns">
+<#Include Label="DiagMat">
+<#Include Label="KroneckerMat">
+<#Include Label="MulMat">
+<#Include Label="AddMat">
+<#Include Label="SubMat">
+<#Include Label="Compose:matrix">
+
+<#Include Label="EQ:matrix">
+
+<#Include Label="GetColumnIndependentUnitPositions">
+<#Include Label="GetRowIndependentUnitPositions">
+<#Include Label="GetUnitPosition">
 
 </Section>
 

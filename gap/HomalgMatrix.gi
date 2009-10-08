@@ -22,7 +22,7 @@ DeclareRepresentation( "IshomalgInternalMatrixHullRep",
 ##  <#GAPDoc Label="IsHomalgInternalMatrixRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="A" Name="IsHomalgInternalMatrixRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The internal representation of &homalg; matrices. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)
@@ -615,6 +615,41 @@ InstallMethod( \=,
     
 end );
 
+##  <#GAPDoc Label="EQ:matrix">
+##  <ManSection>
+##    <Oper Arg="A, B" Name="\=" Label="for matrices"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; matrices <A>A</A> and <A>B</A> are equal (enter: <A>A</A> <C>=</C> <A>B</A>;),
+##      taking possible ring relations into account.<P/>
+##      (&see; installed method <Ref Meth="AreEqualMatrices" Label="homalgTable entry"/>)
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> A := HomalgMatrix( "[ 1 ]", ZZ );
+##  <A homalg internal 1 by 1 matrix>
+##  gap> B := HomalgMatrix( "[ 3 ]", ZZ );
+##  <A homalg internal 1 by 1 matrix>
+##  gap> Z2 := ZZ / 2;
+##  <A homalg residue class ring>
+##  gap> A := Z2 * A;
+##  <A homalg residue class 1 by 1 matrix>
+##  gap> B := Z2 * B;
+##  <A homalg residue class 1 by 1 matrix>
+##  gap> Display( A );
+##  [ [  1 ] ]
+##  
+##  modulo [ 2 ]
+##  gap> Display( B );
+##  [ [  3 ] ]
+##  
+##  modulo [ 2 ]
+##  gap> A = B;
+##  true
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( \=,
         "for homalg comparable matrices",
@@ -652,6 +687,16 @@ InstallMethod( ZeroMutable,
     
 end );
 
+##  <#GAPDoc Label="Involution">
+##  <ManSection>
+##    <Meth Arg="M" Name="Involution" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The twisted transpose of the &homalg; matrix <A>M</A>.<P/>
+##      (&see; installed method <Ref Meth="Involution" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( Involution,
         "for homalg matrices",
@@ -683,6 +728,17 @@ InstallMethod( Involution,
     
 end );
 
+##  <#GAPDoc Label="CertainRows">
+##  <ManSection>
+##    <Meth Arg="M, plist" Name="CertainRows" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The matrix of which the <M>i</M>-th row is the <M>k</M>-th row of the &homalg; matrix <A>M</A>,
+##      where <M>k=</M><A>plist</A><M>[i]</M>.<P/>
+##      (&see; installed method <Ref Meth="CertainRows" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( CertainRows,
         "for homalg matrices",
@@ -698,6 +754,17 @@ InstallMethod( CertainRows,
     
 end );
 
+##  <#GAPDoc Label="CertainColumns">
+##  <ManSection>
+##    <Meth Arg="M, plist" Name="CertainColumns" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The matrix of which the <M>j</M>-th column is the <M>l</M>-th column of the &homalg; matrix <A>M</A>,
+##      where <M>l=</M><A>plist</A><M>[i]</M>.<P/>
+##      (&see; installed method <Ref Meth="CertainColumns" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( CertainColumns,
         "for homalg matrices",
@@ -713,6 +780,16 @@ InstallMethod( CertainColumns,
     
 end );
 
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="UnionOfRows" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Stack the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
+##      (&see; installed method <Ref Meth="UnionOfRows" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfRows,
         "of two homalg matrices",
@@ -728,6 +805,16 @@ InstallMethod( UnionOfRows,
     
 end );
 
+##  <#GAPDoc Label="UnionOfColumns">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="UnionOfColumns" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Augment the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
+##      (&see; installed method <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( UnionOfColumns,
         "of two homalg matrices",
@@ -743,21 +830,48 @@ InstallMethod( UnionOfColumns,
     
 end );
 
+##  <#GAPDoc Label="DiagMat">
+##  <ManSection>
+##    <Meth Arg="list" Name="DiagMat" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Build the block diagonal matrix out of the &homalg; matrices listed in <A>list</A>.
+##      An error is issued if <A>list</A> is empty or if one of the arguments is not a &homalg; matrix.<P/>
+##      (&see; installed method <Ref Meth="DiagMat" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( DiagMat,
         "of two homalg matrices",
         [ IsHomogeneousList ],
         
-  function( l )
+  function( list )
+    
+    if IsEmpty( list ) then
+        Error( "the given list of diagonal blocks is empty\n" );
+    elif not ForAll( list, IsHomalgMatrix ) then
+        Error( "expected a list of homalg matrices\n" );
+    fi;
     
     return HomalgMatrixWithAttributes( [
-                   EvalDiagMat, l,
-                   NrRows, Sum( List( l, NrRows ) ),
-                   NrColumns, Sum( List( l, NrColumns ) )
-                   ], HomalgRing( l[1] ) );
+                   EvalDiagMat, list,
+                   NrRows, Sum( List( list, NrRows ) ),
+                   NrColumns, Sum( List( list, NrColumns ) )
+                   ], HomalgRing( list[1] ) );
     
 end );
 
+##  <#GAPDoc Label="KroneckerMat">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="KroneckerMat" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The Kronecker (or tensor) product of the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
+##      (&see; installed method <Ref Meth="KroneckerMat" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( KroneckerMat,
         "of two homalg matrices",
@@ -784,40 +898,16 @@ InstallMethod( \*,
     
 end );
 
-##
-InstallMethod( POW,
-        "for homalg maps",
-        [ IsHomalgMatrix, IsInt ],
-        
-  function( A, pow )
-    local R;
-    
-    if NrRows( A ) <> NrColumns( A ) then
-        Error( "the matrix is not quadratic\n" );
-    fi;
-    
-    R := HomalgRing( A );
-    
-    if pow < 0 then
-        
-        Error( "not implemented yet\n" );
-        
-    elif pow = 0 then
-        
-        return HomalgIdentityMatrix( NrRows( A ), R );
-        
-    elif pow = 1 then
-        
-        return A;
-        
-    else
-        
-        return Iterated( ListWithIdenticalEntries( pow, A ), \* );
-        
-    fi;
-    
-end );
-
+##  <#GAPDoc Label="MulMat">
+##  <ManSection>
+##    <Meth Arg="a, A" Name="\*" Label="for ring elements and matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The product of the ring element <A>a</A> with the &homalg; matrix <A>A</A> (enter: <A>a</A> <C>*</C> <A>A</A>;).<P/>
+##      (&see; installed method <Ref Meth="MulMat" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( \*,
         "for homalg matrices",
@@ -844,6 +934,16 @@ InstallMethod( \+,
     
 end );
 
+##  <#GAPDoc Label="AddMat">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="\+" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The sum of the two &homalg; matrices <A>A</A> and <A>B</A> (enter: <A>A</A> <C>+</C> <A>B</A>;).<P/>
+##      (&see; installed method <Ref Meth="AddMat" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( \+,
         "for pairs of homalg matrices",
@@ -912,6 +1012,16 @@ InstallMethod( \-,
     
 end );
 
+##  <#GAPDoc Label="SubMat">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="\-" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The difference of the two &homalg; matrices <A>A</A> and <A>B</A> (enter: <A>A</A> <C>-</C> <A>B</A>;).<P/>
+##      (&see; installed method <Ref Meth="SubMat" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( \-,
         "for pairs of of homalg matrices",
@@ -938,6 +1048,16 @@ InstallMethod( \*,
     
 end );
 
+##  <#GAPDoc Label="Compose:matrix">
+##  <ManSection>
+##    <Meth Arg="A, B" Name="\*" Label="for composable matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The matrix product of the two &homalg; matrices <A>A</A> and <A>B</A> (enter: <A>A</A> <C>*</C> <A>B</A>;).<P/>
+##      (&see; installed method <Ref Meth="Compose" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( \*,
         "for pairs of homalg matrices",
@@ -950,6 +1070,40 @@ InstallMethod( \*,
                    NrRows, NrRows( A ),
                    NrColumns, NrColumns( B )
                    ], HomalgRing( A ) );
+    
+end );
+
+##
+InstallMethod( POW,
+        "for homalg maps",
+        [ IsHomalgMatrix, IsInt ],
+        
+  function( A, pow )
+    local R;
+    
+    if NrRows( A ) <> NrColumns( A ) then
+        Error( "the matrix is not quadratic\n" );
+    fi;
+    
+    R := HomalgRing( A );
+    
+    if pow < 0 then
+        
+        Error( "not implemented yet\n" );
+        
+    elif pow = 0 then
+        
+        return HomalgIdentityMatrix( NrRows( A ), R );
+        
+    elif pow = 1 then
+        
+        return A;
+        
+    else
+        
+        return Iterated( ListWithIdenticalEntries( pow, A ), \* );
+        
+    fi;
     
 end );
 
@@ -1492,12 +1646,6 @@ end );
 ##  <A homalg internal ring>
 ##  gap> z := HomalgZeroMatrix( 2, 3, ZZ );
 ##  <An unevaluated homalg internal 2 by 3 zero matrix>
-##  gap> HasIsZero( z );
-##  true
-##  gap> IsZero( z );
-##  true
-##  gap> z;
-##  <An unevaluated homalg internal 2 by 3 zero matrix>
 ##  gap> Display( z );
 ##  [ [  0,  0,  0 ],
 ##    [  0,  0,  0 ] ]
@@ -1577,10 +1725,6 @@ end );
 ##  <A homalg internal ring>
 ##  gap> id := HomalgIdentityMatrix( 3, ZZ );
 ##  <An unevaluated homalg internal 3 by 3 identity matrix>
-##  gap> IsIdentityMatrix( id );
-##  true
-##  gap> id;
-##  <An unevaluated homalg internal 3 by 3 identity matrix>
 ##  gap> Display( id );
 ##  [ [  1,  0,  0 ],
 ##    [  0,  1,  0 ],
@@ -1638,7 +1782,7 @@ end );
 ##      A mutable unevaluated initial <A>m</A> <M>x</M> <A>n</A> &homalg; matrix filled with zeros
 ##      over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define a matrix
 ##      by assigning its nonzero entries. Avoid asking about properties or attributes of the matrix until
-##      you finish filling , since already computed values of properties and attributes will be cached
+##      you finish filling it, since already computed values of properties and attributes will be cached
 ##      and not recomputed unless the values are explicitly reset (&see; <Ref Func="ResetFilterObj"
 ##      BookName="Prg Tutorial" Style="Number"/>);
 ##      <Example><![CDATA[
@@ -2039,6 +2183,8 @@ end );
 ##  <A homalg internal ring>
 ##  gap> Z4 := ZZ / 4;
 ##  <A homalg residue class ring>
+##  gap> Display( Z4 );
+##  Z/( 4 )
 ##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
 ##  gap> d2 := Z4 * d ; ## or d2 := d * Z4;

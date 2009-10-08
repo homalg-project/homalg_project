@@ -17,7 +17,7 @@
 ##  <#GAPDoc Label="IsHomalgInternalRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgInternalRingRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The internal representation of &homalg; rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
@@ -678,7 +678,7 @@ end );
 ##  <#GAPDoc Label="HomalgRingOfIntegers">
 ##  <ManSection>
 ##    <Func Arg="" Name="HomalgRingOfIntegers" Label="constructor for the integers"/>
-##    <Returns>the ring of integers <M>&ZZ;</M> for &homalg;</Returns>
+##    <Returns>a &homalg; ring</Returns>
 ##    <Func Arg="c" Name="HomalgRingOfIntegers" Label="constructor for the residue class rings of the integers"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>

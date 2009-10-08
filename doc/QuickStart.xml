@@ -20,37 +20,43 @@ As the reader might notice, all examples in this manual will be either
 over &ZZ; or over one of its residue class rings
 <M>&ZZ;/m&ZZ;</M>. There are two reasons for this. The first reason is
 that &GAP; does not natively support rings other than &ZZ; in a
-<E>sufficient</E> way. We say that a computer algebra system
-<Q>sufficiently supports</Q> a ring <M>R</M>, if it contains
-procedures to effectively solve one-sided inhomogeneous linear systems
-<M>XA=B</M> and <M>AX=B</M> with coefficients over <M>R</M>.
+<E>sufficient</E> way (&see; <Ref Sect="SufficientSupport" Text="Rings
+supported in a sufficient way"/>).
 
 <P/>
 
 The second and more important reason is to underline the fact the all
-effective homological constructions has only as much to do with the
-Gröbnerbasis algorithm as they do with the Hermite algorithm for the
-ring &ZZ;; they are both used to effectively solve inhomogeneous
-linear systems over the respective ring. And &homalg; is designed to
-use rings and matrices over these rings together with all their
-operations as a black box. In other words: Because &homalg; works
-for <M>&ZZ;</M>, it works by its design for all other computable rings
-(see also <Ref Sect="black box" Text="The black box concept"/>).
+effective homological constructions that are relevant for &homalg;
+have only as much to do with the Gröbnerbasis algorithm as they do
+with the Hermite algorithm for the ring &ZZ;; both algorithms are used
+to effectively solve inhomogeneous linear systems over the respective
+ring. And &homalg; is designed to use rings and matrices over these
+rings together with all their operations as a black box. In other
+words: Because &homalg; works for <M>&ZZ;</M>, it works by its design
+for all other computable rings (see also <Ref Sect="black box"
+Text="The black box concept"/>).
 
 </Section>
 
-<Section Label="QuickStart:LoadPackage(ExamplesForHomalg)">
-<Heading>LoadPackage( "&ExamplesForHomalg;" );</Heading>
+<Section Label="gap> ExamplesForHomalg();">
+<Heading><C>gap> ExamplesForHomalg();</C></Heading>
 
-<Subsection Label="QuickStart:ExamplesForHomalg()">
-  <Heading>ExamplesForHomalg();</Heading>
+To quickly create a ring for use with &homalg; enter<Br/><Br/>
 
-</Subsection>
+<C>ExamplesForHomalg();</C><Br/><Br/>
 
-<Subsection Label="QuickStart:Example">
-  <Heading>Your First Example</Heading>
+which will load the package &ExamplesForHomalg; (if installed) and
+provide a step by step guide to create the ring.  For the full core
+functionality you need to install the packages &HomalgToCAS;,
+&IO_ForHomalg;, &RingsForHomalg;, &Gauss;, and &GaussForHomalg;.  They
+are part of the &homalg; project.
 
-</Subsection>
+</Section>
+
+<Section Label="Example">
+<Heading>A typical example</Heading>
+
+<#Include Label="HomHom">
 
 </Section>
 

@@ -19,7 +19,7 @@
 ##  <#GAPDoc Label="IsHomalgRelations">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgRelations"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; relations.
 ##    </Description>
@@ -35,9 +35,9 @@ DeclareCategory( "IsHomalgRelations",
 ##  <#GAPDoc Label="IsHomalgRelationsOfLeftModule">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgRelationsOfLeftModule"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; relations of a left module. <Br/><Br/>
+##      The &GAP; category of &homalg; relations of a left module. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRelations</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -49,9 +49,9 @@ DeclareCategory( "IsHomalgRelationsOfLeftModule",
 ##  <#GAPDoc Label="IsHomalgRelationsOfRightModule">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgRelationsOfRightModule"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; relations of a right module. <Br/><Br/>
+##      The &GAP; category of &homalg; relations of a right module. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRelations</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -69,7 +69,7 @@ DeclareCategory( "IsHomalgRelationsOfRightModule",
 ##  <#GAPDoc Label="CanBeUsedToDecideZeroEffectively">
 ##  <ManSection>
 ##    <Prop Arg="rel" Name="CanBeUsedToDecideZeroEffectively"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; set of relations <A>rel</A> can be used for normal form reductions. <Br/>
 ##      (no method installed)
@@ -83,7 +83,7 @@ DeclareProperty( "CanBeUsedToDecideZeroEffectively",
 ##  <#GAPDoc Label="IsInjectivePresentation">
 ##  <ManSection>
 ##    <Prop Arg="rel" Name="IsInjectivePresentation"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; set of relations <A>rel</A> has zero syzygies.
 ##    </Description>

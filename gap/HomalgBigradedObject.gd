@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgBigradedObject">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="Er" Name="IsHomalgBigradedObject"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; bigraded objects. <Br/><Br/>
+##      The &GAP; category of &homalg; bigraded objects. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgObject</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -35,9 +35,9 @@ DeclareCategory( "IsHomalgBigradedObject",
 ##  <#GAPDoc Label="IsHomalgBigradedObjectAssociatedToAnExactCouple">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="Er" Name="IsHomalgBigradedObjectAssociatedToAnExactCouple"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; bigraded objects associated to an exact couple. <Br/><Br/>
+##      The &GAP; category of &homalg; bigraded objects associated to an exact couple. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgBigradedObject</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -49,11 +49,11 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToAnExactCouple",
 ##  <#GAPDoc Label="IsHomalgBigradedObjectAssociatedToAFilteredComplex">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="Er" Name="IsHomalgBigradedObjectAssociatedToAFilteredComplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; bigraded objects associated to a filtered complex. <Br/>
 ##      The <M>0</M>-th spectral sheet <M>E_0</M> stemming from a filtration is a bigraded (differential) object,
-##      which, in general, does not stem from an exact couple (although <M>E_1</M>, <M>E_2</M>, ... do). <Br/><Br/>
+##      which, in general, does not stem from an exact couple (although <M>E_1</M>, <M>E_2</M>, ... do). <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgBigradedObject</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -65,9 +65,9 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToAFilteredComplex",
 ##  <#GAPDoc Label="IsHomalgBigradedObjectAssociatedToABicomplex">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="Er" Name="IsHomalgBigradedObjectAssociatedToABicomplex"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; bigraded objects associated to a bicmplex. <Br/><Br/>
+##      The &GAP; category of &homalg; bigraded objects associated to a bicmplex. <P/>
 ##      (It is a subcategory of the &GAP; category <Br/>
 ##       <C>IsHomalgBigradedObjectAssociatedToAFilteredComplex</C>.)
 ##    </Description>
@@ -86,7 +86,7 @@ DeclareCategory( "IsHomalgBigradedObjectAssociatedToABicomplex",
 ##  <#GAPDoc Label="IsEndowedWithDifferential">
 ##  <ManSection>
 ##    <Prop Arg="Er" Name="IsEndowedWithDifferential"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>Er</A> is a differential bigraded object. <Br/>
 ##      (no method installed)
@@ -100,7 +100,7 @@ DeclareProperty( "IsEndowedWithDifferential",
 ##  <#GAPDoc Label="IsStableSheet">
 ##  <ManSection>
 ##    <Prop Arg="Er" Name="IsStableSheet"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>Er</A> is stable. <Br/>
 ##      (no method installed)

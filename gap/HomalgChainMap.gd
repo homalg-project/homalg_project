@@ -19,9 +19,9 @@
 ##  <#GAPDoc Label="IsHomalgChainMap">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="cm" Name="IsHomalgChainMap"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; (co)chain maps. <Br/><Br/>
+##      The &GAP; category of &homalg; (co)chain maps. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgMorphism</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -33,9 +33,9 @@ DeclareCategory( "IsHomalgChainMap",
 ##  <#GAPDoc Label="IsHomalgChainSelfMap">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="cm" Name="IsHomalgChainSelfMap"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; (co)chain self-maps. <Br/><Br/>
+##      The &GAP; category of &homalg; (co)chain self-maps. <P/>
 ##      (It is a subcategory of the &GAP; categories
 ##       <C>IsHomalgChainMap</C> and <C>IsHomalgEndomorphism</C>.)
 ##    </Description>
@@ -57,7 +57,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsMorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsMorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>cm</A> is a well-defined chain map, i.e. independent of all involved presentations.
 ##    </Description>
@@ -67,7 +67,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsGeneralizedMorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsGeneralizedMorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>cm</A> is a generalized morphism.
 ##    </Description>
@@ -77,7 +77,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsGeneralizedEpimorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsGeneralizedEpimorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>cm</A> is a generalized epimorphism.
 ##    </Description>
@@ -87,7 +87,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsGeneralizedMonomorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsGeneralizedMonomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>cm</A> is a generalized monomorphism.
 ##    </Description>
@@ -97,7 +97,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsGeneralizedIsomorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsGeneralizedIsomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>cm</A> is a generalized isomorphism.
 ##    </Description>
@@ -107,7 +107,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsIdentityMorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsIdentityMorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is the identity chain map.
 ##    </Description>
@@ -117,7 +117,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsMonomorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsMonomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is a monomorphism.
 ##    </Description>
@@ -127,7 +127,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsEpimorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsEpimorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is an epimorphism.
 ##    </Description>
@@ -137,7 +137,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsSplitMonomorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsSplitMonomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is a split monomorphism. <Br/>
 ##    </Description>
@@ -147,7 +147,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsSplitEpimorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsSplitEpimorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is a split epimorphism. <Br/>
 ##    </Description>
@@ -157,7 +157,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsIsomorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsIsomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is an isomorphism.
 ##    </Description>
@@ -167,7 +167,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsAutomorphism:chainmap">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsAutomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is an automorphism.
 ##    </Description>
@@ -177,7 +177,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  <#GAPDoc Label="IsGradedMorphism">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsGradedMorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the source and target complex of the &homalg; chain map <A>cm</A> are graded objects, i.e. if all their morphisms vanish.
 ##    </Description>
@@ -190,7 +190,7 @@ DeclareProperty( "IsGradedMorphism",
 ##  <#GAPDoc Label="IsQuasiIsomorphism">
 ##  <ManSection>
 ##    <Prop Arg="cm" Name="IsQuasiIsomorphism" Label="for chain maps"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is a quasi-isomorphism.
 ##    </Description>

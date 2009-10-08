@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  ResidueClassRingForHomalg.xml     homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, Universität des Saarlandes
+
+-->
+
+<Appendix Label="ResidueClassRingForHomalg">
+<Heading>The subpackage &ResidueClassRingForHomalg; as a sample ring package</Heading>
+
+For an example see <Ref Label="HomHom"/>.
+
+<Section Label="ResidueClassRingForHomalg:BasicNoFallBack">
+<Heading>The Mandatory Basic Operations</Heading>
+
+<#Include Label="BasisOfRowModule:ResidueClassRing">
+<#Include Label="BasisOfColumnModule:ResidueClassRing">
+<#Include Label="DecideZeroRows:ResidueClassRing">
+<#Include Label="DecideZeroColumns:ResidueClassRing">
+<#Include Label="SyzygiesGeneratorsOfRows:ResidueClassRing">
+<#Include Label="SyzygiesGeneratorsOfColumns:ResidueClassRing">
+<#Include Label="BasisOfRowsCoeff:ResidueClassRing">
+<#Include Label="BasisOfColumnsCoeff:ResidueClassRing">
+<#Include Label="DecideZeroRowsEffectively:ResidueClassRing">
+<#Include Label="DecideZeroColumnsEffectively:ResidueClassRing">
+<#Include Label="RelativeSyzygiesGeneratorsOfRows:ResidueClassRing">
+<#Include Label="RelativeSyzygiesGeneratorsOfColumns:ResidueClassRing">
+
+</Section>
+
+<Section Label="ResidueClassRingForHomalg:ToolsNoFallBack">
+<Heading>The Mandatory Tool Operations</Heading>
+
+Here we list those matrix operations for which &homalg; provides no
+fallback method.
+
+<#Include Label="ZeroMatrix:ResidueClassRing">
+<#Include Label="IdentityMatrix:ResidueClassRing">
+
+<#Include Label="Involution:ResidueClassRing">
+<#Include Label="CertainRows:ResidueClassRing">
+<#Include Label="CertainColumns:ResidueClassRing">
+<#Include Label="UnionOfRows:ResidueClassRing">
+<#Include Label="UnionOfColumns:ResidueClassRing">
+<#Include Label="DiagMat:ResidueClassRing">
+<#Include Label="KroneckerMat:ResidueClassRing">
+<#Include Label="MulMat:ResidueClassRing">
+<#Include Label="AddMat:ResidueClassRing">
+<#Include Label="SubMat:ResidueClassRing">
+<#Include Label="Compose:ResidueClassRing">
+
+<#Include Label="IsZeroMatrix:ResidueClassRing">
+<#Include Label="NrRows:ResidueClassRing">
+<#Include Label="NrColumns:ResidueClassRing">
+<#Include Label="Determinant:ResidueClassRing">
+
+</Section>
+
+<Section Label="ResidueClassRingForHomalg:ToolsFallBack">
+<Heading>Some of the Recommended Tool Operations</Heading>
+
+Here we list those matrix operations for which &homalg; does provide a
+fallback method. But specifying the below <C>homalgTable</C> functions
+increases the performance by replacing the fallback method.
+
+<#Include Label="AreEqualMatrices:ResidueClassRing">
+<#Include Label="IsIdentityMatrix:ResidueClassRing">
+<#Include Label="IsDiagonalMatrix:ResidueClassRing">
+
+<#Include Label="ZeroRows:ResidueClassRing">
+<#Include Label="ZeroColumns:ResidueClassRing">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Appendix>
+

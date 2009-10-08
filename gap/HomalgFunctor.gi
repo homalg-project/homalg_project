@@ -62,7 +62,7 @@
 ##  <#GAPDoc Label="IsHomalgFunctorRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="E" Name="IsHomalgFunctorRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of &homalg; (multi-)functors. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgFunctor"/>.)

@@ -1199,7 +1199,7 @@ InstallFunctor( functor_Cokernel );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> im := ImageModule( phi );
-##  <A left module presented by an unknown number of relations for 3 generators>
+##  <A left module presented by yet unknown relations for 3 generators>
 ##  gap> ByASmallerPresentation( im );
 ##  <A free left module of rank 1 on a free generator>
 ##  gap> pi := ImageModuleEpi( phi );
@@ -1253,8 +1253,8 @@ InstallFunctorOnObjects( functor_ImageModule );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> ker := Kernel( phi );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by yet unknown relations for a cyclic generato\
+##  r>
 ##  gap> Display( ker );
 ##  Z/< -3 >
 ##  gap> ByASmallerPresentation( last );
@@ -1336,8 +1336,7 @@ InstallFunctor( functor_Kernel );
 ##  gap> hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );
 ##  <A homomorphism of right modules>
 ##  gap> DefectOfExactness( hom_iota, hom_phi );
-##  <A cyclic right module on a cyclic generator satisfying an unknown number of r\
-##  elations>
+##  <A cyclic right module on a cyclic generator satisfying yet unknown relations>
 ##  gap> ByASmallerPresentation( last );
 ##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> Display( last );
@@ -1538,7 +1537,7 @@ InstallFunctor( functor_DefectOfExactness );
 ##  1 relation>
 ##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
-##  <A right module on 4 generators satisfying an unknown number of relations>>
+##  <A right module on 4 generators satisfying yet unknown relations>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
@@ -1607,7 +1606,7 @@ InstallFunctor( Functor_Hom );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> L := Hom( ZZ, M );
-##  <A right module on 3 generators satisfying an unknown number of relations>
+##  <A right module on 3 generators satisfying yet unknown relations>
 ##  gap> ByASmallerPresentation( L );
 ##  <A rank 1 right module on 2 generators satisfying 1 relation>
 ##  gap> Display( L );
@@ -1777,8 +1776,10 @@ end );
 ##      </Enum>
 ##      CAUTION: So it is not suited for general base change.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> Z4 := ZZ / 4;;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  <A homalg internal ring>
+##  gap> Z4 := ZZ / 4;
+##  <A homalg residue class ring>
 ##  gap> Display( Z4 );
 ##  Z/( 4 )
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
@@ -1911,8 +1912,8 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := TorsionSubmodule( M );
-##  <A cyclic torsion left module presented by an unknown number of relations for \
-##  a cyclic generator>
+##  <A cyclic torsion left module presented by yet unknown relations for a cyclic \
+##  generator>
 ##  gap> iota := TorsionSubmoduleEmb( M );
 ##  <A monomorphism of left modules>
 ##  gap> psi := Ext( 1, iota, N );
@@ -1983,8 +1984,8 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> N := TorsionSubmodule( M );
-##  <A cyclic torsion left module presented by an unknown number of relations for \
-##  a cyclic generator>
+##  <A cyclic torsion left module presented by yet unknown relations for a cyclic \
+##  generator>
 ##  gap> iota := TorsionSubmoduleEmb( M );
 ##  <A monomorphism of left modules>
 ##  gap> psi := Tor( 1, iota, N );

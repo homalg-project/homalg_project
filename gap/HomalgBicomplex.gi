@@ -26,7 +26,7 @@
 ##  <#GAPDoc Label="IsBicomplexOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="BC" Name="IsBicomplexOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of bicomplexes (homological bicomplexes) of finitley generated &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgBicomplex"/>,
@@ -42,7 +42,7 @@ DeclareRepresentation( "IsBicomplexOfFinitelyPresentedObjectsRep",
 ##  <#GAPDoc Label="IsBicocomplexOfFinitelyPresentedObjectsRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="BC" Name="IsBicocomplexOfFinitelyPresentedObjectsRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of bicocomplexes (cohomological bicomplexes) of finitley generated &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgBicomplex"/>,

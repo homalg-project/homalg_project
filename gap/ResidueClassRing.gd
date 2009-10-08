@@ -17,7 +17,7 @@
 ##  <#GAPDoc Label="IsReducedModuloRingRelations">
 ##  <ManSection>
 ##    <Prop Arg="A" Name="IsReducedModuloRingRelations"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
 ##    </Description>
