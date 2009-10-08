@@ -59,9 +59,9 @@ HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMapleRep",
-        IshomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectRep,
         [  ] );
 
 # five new subrepresentations of the representation IsHomalgExternalRingObjectInMapleRep:
@@ -199,7 +199,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -287,7 +287,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -378,7 +378,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -455,7 +455,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -533,7 +533,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -609,7 +609,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMaple,
     if nargs > 0 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -1054,7 +1054,7 @@ end );
 ##
 InstallMethod( homalgSetName,
         "for homalg ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMapleRep ],
+        [ IshomalgExternalObjectRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMapleRep ],
         
   function( r, name, R )
     

@@ -50,9 +50,9 @@ HOMALG_IO_Macaulay2.READY_LENGTH := Length( HOMALG_IO_Macaulay2.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
-        IshomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -451,7 +451,7 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -500,7 +500,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMacaulay2,
     if nargs > 0 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -828,15 +828,18 @@ InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
+    local ext_obj;
     
-    return homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    
+    return HomalgExternalRingElement( ext_obj, R );
     
 end );
 
 ##
 InstallMethod( homalgSetName,
         "for homalg ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        [ IshomalgExternalObjectRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( r, name, R )
     

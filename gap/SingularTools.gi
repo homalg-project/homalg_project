@@ -31,7 +31,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "-(", b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Minus );
+                   return homalgSendBlocking( [ a, "-(", b, ")" ], [ "def" ], HOMALG_IO.Pictograms.Minus );
                    
                  end,
                
@@ -46,9 +46,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                    fi;
                    if e{[1]} = "-" then
                        #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", e );
-                       return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.DivideByUnit );
+                       return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
                    else
-                       return homalgSendBlocking( [ "(",  a, ")/", e ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.DivideByUnit );
+                       return homalgSendBlocking( [ "(",  a, ")/", e ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
                    fi;
                    
                  end,
@@ -87,21 +87,21 @@ InstallValue( CommonHomalgTableForSingularTools,
                Sum :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "+(", b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Sum );
+                   return homalgSendBlocking( [ a, "+(", b, ")" ], [ "def" ], HOMALG_IO.Pictograms.Sum );
                    
                  end,
                
                Product :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Product );
+                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], [ "def" ], HOMALG_IO.Pictograms.Product );
                    
                  end,
                
                Gcd :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Gcd );
+                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], HOMALG_IO.Pictograms.Gcd );
                    
                  end,
                
@@ -109,9 +109,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( a, b )
                    local g, a_g, b_g;
                    
-                   g := homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Gcd );
-                   a_g := homalgSendBlocking( [ "(", a, ") / (", g, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "(", b, ") / (", g, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.CancelGcd );
+                   g := homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], HOMALG_IO.Pictograms.Gcd );
+                   a_g := homalgSendBlocking( [ "(", a, ") / (", g, ")" ], [ "def" ], HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "(", b, ") / (", g, ")" ], [ "def" ], HOMALG_IO.Pictograms.CancelGcd );
                    
                    return [ a_g, b_g ];
                    
@@ -244,7 +244,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                Determinant :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "det(", C, ")" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.Determinant );
+                   return homalgSendBlocking( [ "det(", C, ")" ], [ "def" ], HOMALG_IO.Pictograms.Determinant );
                    
                  end,
                

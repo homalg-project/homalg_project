@@ -46,9 +46,9 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
-        IshomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -105,7 +105,7 @@ InstallGlobalFunction( RingForHomalgInSage,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -138,7 +138,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSage,
     if nargs > 0 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;

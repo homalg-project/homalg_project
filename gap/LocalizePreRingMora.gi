@@ -10,9 +10,9 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ "l=BasisOfRowsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ "list l=BasisOfRowsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
-                   T!.Denominator := homalgSendBlocking( [ "l[3]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   T!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[3]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
                    return N;
                    
@@ -26,9 +26,9 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ "l=BasisOfColumnsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ "list l=BasisOfColumnsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
-                   T!.Denominator := homalgSendBlocking( [ "l[3]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   T!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[3]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
                    return N;
                    
@@ -44,7 +44,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    homalgSendBlocking( [ "list l = DecideZeroRowsLocal(", A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
-                   N!.Denominator := homalgSendBlocking( [ "l[2]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
                    return N;
                    
@@ -60,7 +60,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    homalgSendBlocking( [ "list l = DecideZeroColumnsLocal(",  A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
-                   N!.Denominator := homalgSendBlocking( [ "l[2]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
                    return N;
                    
@@ -74,10 +74,11 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "l=DecideZeroRowsEffectivelyLocal(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ "list l=DecideZeroRowsEffectivelyLocal(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
-                   N!.Denominator := homalgSendBlocking( [ "l[2]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
-                   T!.Denominator := homalgSendBlocking( [ "l[2]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
+                   
+                   T!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
                    return N;
                    
@@ -91,10 +92,11 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "l=DecideZeroColumnsEffectivelyLocal(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ "list l=DecideZeroColumnsEffectivelyLocal(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
-                   N!.Denominator := homalgSendBlocking( [ "l[2]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
-                   T!.Denominator := homalgSendBlocking( [ "l[2]" ], [ "poly" ], "return_ring_element", R, HOMALG_IO.Pictograms.BasisCoeff );
+                   N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
+                   
+                   T!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
                    return N;
                    

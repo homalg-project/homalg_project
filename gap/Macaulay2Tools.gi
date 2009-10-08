@@ -220,7 +220,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                Determinant :=
                  function( C )
                    
-                   return homalgSendBlocking( [ "det(", C, ")" ], "return_ring_element", HOMALG_IO.Pictograms.Determinant );
+                   return homalgSendBlocking( [ "det(", C, ")" ], HOMALG_IO.Pictograms.Determinant );
                    
                  end,
                

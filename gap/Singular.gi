@@ -52,9 +52,9 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectWithIOStreamRep:
+# a new subrepresentation of the representation IshomalgExternalObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
-        IshomalgExternalObjectWithIOStreamRep,
+        IshomalgExternalObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -1112,7 +1112,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     if nargs > 1 then
         if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
             stream := arg[nargs];
-        elif IshomalgExternalObjectWithIOStreamRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
+        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
             stream := homalgStream( arg[nargs] );
         fi;
     fi;
@@ -1572,8 +1572,11 @@ InstallMethod( GetEntryOfHomalgMatrix,
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
+    local ext_obj;
     
-    return homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], "return_ring_element", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    ext_obj := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    
+    return HomalgExternalRingElement( ext_obj, R );
     
 end );
 
