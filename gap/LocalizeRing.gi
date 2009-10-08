@@ -650,6 +650,8 @@ InstallMethod( Cancel,
         
         result := RP!.CancelGcd( a, b );
         
+        result := List( result, x -> HomalgRingElement( x, R ) );
+        
         Assert( 4, result[1] * b = result[2] * a );
         
         return result;
