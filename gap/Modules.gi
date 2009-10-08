@@ -105,16 +105,14 @@ end );
 ##  6
 ##  gap> m;
 ##  <A homalg external 6 by 1 matrix>
+##   gap> Display( m );
+##   z^2,
+##   y*z,
+##   y^2,
+##   x*z,
+##   x*y,
+##   x^2 
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( m );
-##  z^2,
-##  y*z,
-##  y^2,
-##  x*z,
-##  x*y,
-##  x^2 
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -223,24 +221,22 @@ end );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := MonomialMap( 1, M );
 ##  <A homomorphism of left modules>
+##   gap> Display( m );
+##   z^2,0,0,
+##   y*z,0,0,
+##   y^2,0,0,
+##   x*z,0,0,
+##   x*y,0,0,
+##   x^2,0,0,
+##   0,  x,0,
+##   0,  y,0,
+##   0,  z,0,
+##   0,  0,1 
+##   
+##   (target generators degrees: [ -1, 0, 1 ])
+##   
+##   the map is currently represented by the above 10 x 3 matrix
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( m );
-##  z^2,0,0,
-##  y*z,0,0,
-##  y^2,0,0,
-##  x*z,0,0,
-##  x*y,0,0,
-##  x^2,0,0,
-##  0,  x,0,
-##  0,  y,0,
-##  0,  z,0,
-##  0,  0,1 
-##  
-##  (target generators degrees: [ -1, 0, 1 ])
-##  
-##  the map is currently represented by the above 10 x 3 matrix
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -295,13 +291,11 @@ end );
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], R );
 ##  <A homalg external 3 by 2 matrix>
+##   gap> Display( rand );
+##   a-2*b+2*c,                                                2,                 
+##   a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
+##   2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( rand );
-##  a-2*b+2*c,                                                2,                 
-##  a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
-##  2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -360,12 +354,10 @@ end );
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> rand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], R );
 ##  <A homalg external 2 by 3 matrix>
+##   gap> Display( rand );
+##   a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
+##   -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( rand );
-##  a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
-##  -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -421,12 +413,11 @@ end );
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> rand := RandomMatrix( ( R * 1 )^[ 1, 2 ], ( R * 1 )^[ 2, 3, 4 ] );
 ##  <A homalg external 3 by 2 matrix>
+##   gap> Display( rand );
+##   -3*a-b,                                                  -1,                   
+##   -a^2+a*b+2*b^2-2*a*c+2*b*c+c^2,                          -a+c,                 
+##   -2*a^3+5*a^2*b-3*b^3+3*a*b*c+3*b^2*c+2*a*c^2+2*b*c^2+c^3,-3*b^2-2*a*c-2*b*c+c^2
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  -3*a-b,                                                  -1,                   
-##  -a^2+a*b+2*b^2-2*a*c+2*b*c+c^2,                          -a+c,                 
-##  -2*a^3+5*a^2*b-3*b^3+3*a*b*c+3*b^2*c+2*a*c^2+2*b*c^2+c^3,-3*b^2-2*a*c-2*b*c+c^2
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -478,17 +469,15 @@ end );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := BasisOfHomogeneousPart( 1, M );
 ##  <An unevaluated homalg external 7 by 3 matrix>
+##   gap> Display( m );
+##   y^2,0,0,
+##   x*y,0,0,
+##   x^2,0,0,
+##   0,  x,0,
+##   0,  y,0,
+##   0,  z,0,
+##   0,  0,1 
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( m );
-##  y^2,0,0,
-##  x*y,0,0,
-##  x^2,0,0,
-##  0,  x,0,
-##  0,  y,0,
-##  0,  z,0,
-##  0,  0,1 
-##  ]]></Log>
 ##  Compare with <Ref Oper="MonomialMap"/>.
 ##    </Description>
 ##  </ManSection>
@@ -534,73 +523,63 @@ end );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> n := SubmoduleGeneratedByHomogeneousPart( 1, M );
 ##  <A graded left submodule given by 7 generators>
-##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( M );
-##  z,  0,    0,  
-##  0,  y^2*z,z^2,
-##  x^3,y^2,  z   
-##  
-##  (graded, generators degrees: [ -1, 0, 1 ])
-##  
-##  Cokernel of the map
-##  
-##  Q[x,y,z]^(1x3) --> Q[x,y,z]^(1x3),
-##  
-##  currently represented by the above matrix
-##  gap> Display( n );
-##  x^2,0,0,
-##  x*y,0,0,
-##  y^2,0,0,
-##  0,  x,0,
-##  0,  y,0,
-##  0,  z,0,
-##  0,  0,1 
-##  
-##  A left submodule generated by the 7 rows of the above matrix
-##  ]]></Log>
-##      <Example><![CDATA[
+##   gap> Display( M );
+##   z,  0,    0,  
+##   0,  y^2*z,z^2,
+##   x^3,y^2,  z   
+##   
+##   (graded, generators degrees: [ -1, 0, 1 ])
+##   
+##   Cokernel of the map
+##   
+##   Q[x,y,z]^(1x3) --> Q[x,y,z]^(1x3),
+##   
+##   currently represented by the above matrix
+##   gap> Display( n );
+##   x^2,0,0,
+##   x*y,0,0,
+##   y^2,0,0,
+##   0,  x,0,
+##   0,  y,0,
+##   0,  z,0,
+##   0,  0,1 
+##   
+##   A left submodule generated by the 7 rows of the above matrix
 ##  gap> N := UnderlyingObject( n );
 ##  <A graded left module presented by yet unknown relations for 7 generators>
-##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( N );
-##  z,0, 0, 0,    0,  0,0,   
-##  0,z, 0, 0,    0,  0,0,   
-##  0,0, z, 0,    0,  0,0,   
-##  0,0, 0, 0,    -z, y,0,   
-##  x,-y,0, 0,    0,  0,0,   
-##  0,x, -y,0,    0,  0,0,   
-##  0,0, x, 0,    y,  0,z,   
-##  0,0, 0, -y,   x,  0,0,   
-##  0,0, 0, -z,   0,  x,0,   
-##  0,0, 0, 0,    y*z,0,z^2, 
-##  0,0, 0, y^2*z,0,  0,x*z^2
-##  
-##  (graded, generators degrees: [ 1, 1, 1, 1, 1, 1, 1 ])
-##  
-##  Cokernel of the map
-##  
-##  Q[x,y,z]^(1x11) --> Q[x,y,z]^(1x7),
-##  
-##  currently represented by the above matrix
-##  ]]></Log>
-##      <Example><![CDATA[
+##   gap> Display( N );
+##   z,0, 0, 0,    0,  0,0,   
+##   0,z, 0, 0,    0,  0,0,   
+##   0,0, z, 0,    0,  0,0,   
+##   0,0, 0, 0,    -z, y,0,   
+##   x,-y,0, 0,    0,  0,0,   
+##   0,x, -y,0,    0,  0,0,   
+##   0,0, x, 0,    y,  0,z,   
+##   0,0, 0, -y,   x,  0,0,   
+##   0,0, 0, -z,   0,  x,0,   
+##   0,0, 0, 0,    y*z,0,z^2, 
+##   0,0, 0, y^2*z,0,  0,x*z^2
+##   
+##   (graded, generators degrees: [ 1, 1, 1, 1, 1, 1, 1 ])
+##   
+##   Cokernel of the map
+##   
+##   Q[x,y,z]^(1x11) --> Q[x,y,z]^(1x7),
+##   
+##   currently represented by the above matrix
 ##  gap> gens := GeneratorsOfModule( N );
 ##  <A set of 7 generators of a homalg left module>
+##   gap> Display( gens );
+##   a set of 7 generators given by the rows of the matrix
+##   
+##   y^2,0,0,
+##   x*y,0,0,
+##   x^2,0,0,
+##   0,  x,0,
+##   0,  y,0,
+##   0,  z,0,
+##   0,  0,1 
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( gens );
-##  a set of 7 generators given by the rows of the matrix
-##  
-##  y^2,0,0,
-##  x*y,0,0,
-##  x^2,0,0,
-##  0,  x,0,
-##  0,  y,0,
-##  0,  z,0,
-##  0,  0,1 
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -646,13 +625,11 @@ end );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationOfRingElement( x, M, 0 );
 ##  <An unevaluated homalg external 3 by 7 matrix>
+##   gap> Display( m );
+##   0,0,1,0,0,0,0,
+##   0,1,0,0,0,0,0,
+##   0,0,0,1,0,0,0 
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( m );
-##  0,0,1,0,0,0,0,
-##  0,1,0,0,0,0,0,
-##  0,0,0,1,0,0,0 
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -696,13 +673,11 @@ end );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMatrixOfKoszulId( 0, M );
 ##  <An unevaluated homalg external 3 by 7 matrix>
+##   gap> Display( m );
+##   0,b,a,0,0,0,0,
+##   b,a,0,0,0,0,0,
+##   0,0,0,a,b,c,0 
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( m );
-##  0,b,a,0,0,0,0,
-##  b,a,0,0,0,0,0,
-##  0,0,0,a,b,c,0 
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -777,17 +752,15 @@ end );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMapOfKoszulId( 0, M );
 ##  <A homomorphism of left modules>
+##   gap> Display( m );
+##   0,b,a,0,0,0,0,
+##   b,a,0,0,0,0,0,
+##   0,0,0,a,b,c,0 
+##   
+##   (target generators degrees: [ -1, -1, -1, -1, -1, -1, -1 ])
+##   
+##   the map is currently represented by the above 3 x 7 matrix
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( m );
-##  0,b,a,0,0,0,0,
-##  b,a,0,0,0,0,0,
-##  0,0,0,a,b,c,0 
-##  
-##  (target generators degrees: [ -1, -1, -1, -1, -1, -1, -1 ])
-##  
-##  the map is currently represented by the above 3 x 7 matrix
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -920,15 +893,13 @@ end );
 ##  <A zero left module>
 ##  gap> Cohomology( R, 4 );
 ##  <A zero left module>
+##   gap> Display( Cohomology( R, -1 ) );
+##   Q{a,b,c}/< b, a >	(graded, generator degree: 3)
+##   gap> Display( Cohomology( R, 0 ) );
+##   Q{a,b,c}/< c, b, a >	(graded, generator degree: 3)
+##   gap> Display( Cohomology( R, 1 ) );
+##   Q{a,b,c}/< b, a >	(graded, generator degree: 1)
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( Cohomology( R, -1 ) );
-##  Q{a,b,c}/< b, a >	(graded, generator degree: 3)
-##  gap> Display( Cohomology( R, 0 ) );
-##  Q{a,b,c}/< c, b, a >	(graded, generator degree: 3)
-##  gap> Display( Cohomology( R, 1 ) );
-##  Q{a,b,c}/< b, a >	(graded, generator degree: 1)
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1084,32 +1055,30 @@ end );
 ##  Q^(1 x 9)
 ##  gap> gen3 := GeneratorsOfModule( M3 );
 ##  <A set of 9 generators of a homalg left module>
+##   gap> Display( gen1 );
+##   x
+##   
+##   a set consisting of a single generator given by (the row of) the above matrix
+##   gap> Display( gen2 );
+##   x^2,
+##   x*y,
+##   x*z,
+##   y^2 
+##   
+##   a set of 4 generators given by the rows of the above matrix
+##   gap> Display( gen3 );
+##   x^3,  
+##   x^2*y,
+##   x^2*z,
+##   x*y*z,
+##   x*z^2,
+##   x*y^2,
+##   y^3,  
+##   y^2*z,
+##   z^3   
+##   
+##   a set of 9 generators given by the rows of the above matrix
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( gen1 );
-##  x
-##  
-##  a set consisting of a single generator given by (the row of) the above matrix
-##  gap> Display( gen2 );
-##  x^2,
-##  x*y,
-##  x*z,
-##  y^2 
-##  
-##  a set of 4 generators given by the rows of the above matrix
-##  gap> Display( gen3 );
-##  x^3,  
-##  x^2*y,
-##  x^2*z,
-##  x*y*z,
-##  x*z^2,
-##  x*y^2,
-##  y^3,  
-##  y^2*z,
-##  z^3   
-##  
-##  a set of 9 generators given by the rows of the above matrix
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

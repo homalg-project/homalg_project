@@ -84,16 +84,14 @@ end );
 ##  <A homalg external 2 by 4 matrix>
 ##  gap> H := Diff( D, N );
 ##  <A homalg external 6 by 8 matrix>
+##   gap> Display( H );
+##   2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  
+##   1,       y,     0,a*b,0,       2*x,   0,  0,  
+##   -3*a*y^2,-z^2,  x,0,  -y^3,    0,     0,  0,  
+##   0,       x,     0,0,  0,       0,     1,  b*x,
+##   0,       -2*y*z,0,x,  -3*a*y^2,-z^2,  x+1,0,  
+##   0,       0,     0,0,  0,       x,     1,  -a*x
 ##  ]]></Example>
-##      <Log><![CDATA[
-##  gap> Display( H );
-##  2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  
-##  1,       y,     0,a*b,0,       2*x,   0,  0,  
-##  -3*a*y^2,-z^2,  x,0,  -y^3,    0,     0,  0,  
-##  0,       x,     0,0,  0,       0,     1,  b*x,
-##  0,       -2*y*z,0,x,  -3*a*y^2,-z^2,  x+1,0,  
-##  0,       0,     0,0,  0,       x,     1,  -a*x
-##  ]]></Log>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
