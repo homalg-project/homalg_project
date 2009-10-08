@@ -392,7 +392,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                      if not i in pos_list then
                        N := CertainColumns( Numerator( M ) , [ i ] );
                        N := DecideZero( N, A );
-                       l := GetUnitPosition( N, List( Filtered( pos_list, a->IsList(a) and a[2]=i ), b->[b[1],i] ));
+                       l := GetUnitPosition( N );
                        if l <> fail then 
                          return [l[1],i];
                        fi;
