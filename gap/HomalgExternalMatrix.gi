@@ -17,7 +17,7 @@
 
 ##
 InstallMethod( homalgPointer,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
@@ -28,7 +28,7 @@ end );
 
 ##
 InstallMethod( homalgExternalCASystem,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
@@ -46,7 +46,7 @@ end );
 
 ##
 InstallMethod( homalgExternalCASystemVersion,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
@@ -64,7 +64,7 @@ end );
 
 ##
 InstallMethod( homalgStream,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
@@ -82,7 +82,7 @@ end );
 
 ##
 InstallMethod( homalgExternalCASystemPID,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgExternalMatrixRep ],
         
   function( M )
@@ -100,7 +100,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep ],
         
   function( M, r, c, s )
@@ -111,7 +111,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
         
   function( M, r, c, s, R )
@@ -504,7 +504,7 @@ end );
 ####################################
 
 InstallMethod( Display,
-        "for homalg matrices",
+        "for homalg external matrices",
         [ IsHomalgExternalMatrixRep ], 0, ## never higher!!!
         
   function( o )

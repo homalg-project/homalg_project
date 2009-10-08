@@ -16,6 +16,21 @@
 
 # basic operations:
 
+DeclareOperation( "homalgPointer",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "homalgExternalCASystem",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "homalgExternalCASystemVersion",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "homalgStream",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "homalgExternalCASystemPID",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "homalgExternalCASystem",
         [ IsHomalgRing ] );
 

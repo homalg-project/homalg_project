@@ -315,10 +315,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                              if IsStringRep( L[a] ) then
                                  return L[a];
                              else
-                                 if IshomalgExternalObjectRep( L[a] )
-                                    or IsHomalgExternalRingRep( L[a] ) then
-                                     t := homalgPointer( L[a] );
-                                 elif IsHomalgExternalMatrixRep( L[a] ) then
+                                 if IsHomalgExternalMatrixRep( L[a] ) then
                                      if not ( HasIsVoidMatrix( L[a] ) and IsVoidMatrix( L[a] ) )
                                         or HasEval( L[a] ) then
                                          t := homalgPointer( L[a] ); ## now we enforce evaluation!!!
@@ -332,6 +329,10 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          _SetElmWPObj_ForHomalg( stream, Eval( L[a] ) );
                                          ResetFilterObj( L[a], IsVoidMatrix );
                                      fi;
+                                 elif IsHomalgExternalRingElementRep( L[a] ) or
+                                    IsHomalgExternalRingRep( L[a] ) or
+                                    IshomalgExternalObjectRep( L[a] ) then
+                                     t := homalgPointer( L[a] );
                                  elif break_lists and IsList( L[a] ) and not IsStringRep( L[a] ) then
                                      if ForAll( L[a], IsStringRep ) then
                                          t := JoinStringsWithSeparator( L[a] );
@@ -359,7 +360,7 @@ end );
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
     local L, nargs, io_info_level, info_level, properties,
-          need_command, need_display, need_output, ar, pictogram, ring_element,
+          need_command, need_display, need_output, ar, pictogram,
           option, break_lists, R, ext_obj, stream, type, prefix, suffix, e,
           RP, CAS, PID, homalg_variable, l, eoc, enter, fs, max, display_color;
     
@@ -382,7 +383,7 @@ InstallGlobalFunction( homalgSendBlocking,
     io_info_level := InfoLevel( InfoHomalgToCAS );
     info_level := 7;
     
-    properties := [];
+    properties := [ ];
     
     need_command := false;
     need_display := false;
@@ -395,17 +396,20 @@ InstallGlobalFunction( homalgSendBlocking,
             prefix := ar;
         elif not IsBound( suffix ) and IsList( ar ) and not IsStringRep( ar ) then
             suffix := ar;
-        elif not IsBound( R ) and IsHomalgExternalMatrixRep( ar ) then
-            R := HomalgRing( ar );
-            ext_obj := R;
-            stream := homalgStream( ext_obj );
         elif not IsBound( R ) and IsHomalgExternalRingRep( ar ) then
             R := ar;
             ext_obj := R;
             stream := homalgStream( ext_obj );
-        elif not IsBound( ext_obj ) and IshomalgExternalObject( ar )
-          and IshomalgExternalObjectWithIOStreamRep( ar ) then
+        elif not IsBound( ext_obj ) and IshomalgExternalObjectRep( ar ) then
             ext_obj := ar;
+            stream := homalgStream( ext_obj );
+        elif not IsBound( R ) and IsHomalgExternalMatrixRep( ar ) then
+            R := HomalgRing( ar );
+            ext_obj := R;
+            stream := homalgStream( ext_obj );
+        elif not IsBound( ext_obj ) and IsHomalgExternalRingElementRep( ar ) then
+            R := HomalgRing( ar );
+            ext_obj := R;
             stream := homalgStream( ext_obj );
         elif IsRecord( ar ) and IsBound( ar.lines ) and IsBound( ar.pid ) then
             if not IsBound( stream ) or not IsBound( ext_obj ) then
@@ -416,8 +420,6 @@ InstallGlobalFunction( homalgSendBlocking,
             fi;
         elif not IsBound( pictogram ) and IsStringRep( ar ) and Length( ar ) <= 5 then
             pictogram := ar;
-        elif not IsBound( ring_element ) and ar = "return_ring_element"  then
-            ring_element := true;
         elif not IsBound( option ) and IsStringRep( ar ) and Length( ar ) > 5 and ar <> "break_lists" then ## the first occurrence of an option decides
             if PositionSublist( LowercaseString( ar ), "command" ) <> fail then
                 need_command := true;
@@ -427,7 +429,7 @@ InstallGlobalFunction( homalgSendBlocking,
             elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
                 need_output := true;
             else
-                Error( "option must be one of { \"need_command\", \"need_display\", \"need_output\", \"return_ring_element\" }, but received: ", ar, "\n" );
+                Error( "option must be one of { \"need_command\", \"need_display\", \"need_output\" }, but received: ", ar, "\n" );
             fi;
             option := ar;
         elif not IsBound( type ) and IsType( ar ) then
@@ -437,13 +439,18 @@ InstallGlobalFunction( homalgSendBlocking,
         elif not IsBound( break_lists ) and ar = "break_lists" then
             break_lists := ar;
         else
-            Error( "this argument should be in { IsList, IsStringRep, IsFilter, IsRecord, IshomalgExternalObjectWithIOStreamRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
+            Error( "this argument should be in { IsList, IsStringRep, IsFilter, IsRecord, IshomalgExternalObjectRep, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep, IsHomalgExternalMatrixRep } but recieved: ", ar,"\n" );
         fi;
     od;
     
     if not IsBound( ext_obj ) then ## R is also not yet defined
         
-        e := Filtered( L, a -> IsHomalgExternalMatrixRep( a ) or IsHomalgExternalRingRep( a ) or IshomalgExternalObjectWithIOStreamRep( a ) );
+        e := Filtered( L, a ->
+                     IsHomalgExternalMatrixRep( a ) or
+                     IsHomalgExternalRingElementRep( a ) or
+                     IsHomalgExternalRingRep( a ) or
+                     IshomalgExternalObjectRep( a )
+                     );
         
         if e <> [ ] then
             ext_obj := e[1];
@@ -460,7 +467,7 @@ InstallGlobalFunction( homalgSendBlocking,
                 fi;
             od;
         else
-            Error( "either the list provided by the first argument must contain at least one external matrix or an external ring or one of the remaining arguments must be an external ring or an external object with IO stream\n" );
+            Error( "either the list provided by the first argument must contain at least one external matrix or an external ring or one of the remaining arguments must be an external ring or an external object\n" );
         fi;
         
         stream := homalgStream( ext_obj );
@@ -567,21 +574,13 @@ InstallGlobalFunction( homalgSendBlocking,
         ## before we start executing commands in the external CAS,
         ## that might cause an error (this would then lead to an
         ## inconsistency in the weak pointer list of external objects)
-        if IsBound( ring_element ) then
-            if not IsBound( type ) then
-                ext_obj := HomalgExternalRingElement( homalg_variable, R );
-            else
-                ext_obj := HomalgExternalRingElement( homalg_variable, R, type );
-            fi;
+        if not IsBound( type ) then
+            ext_obj := homalgExternalObject( homalg_variable, CAS, stream );
         else
-            if not IsBound( type ) then
-                ext_obj := homalgExternalObject( homalg_variable, CAS, stream );
-            else
-                ext_obj := homalgExternalObject( homalg_variable, CAS, stream, type );
-            fi;
+            ext_obj := homalgExternalObject( homalg_variable, CAS, stream, type );
         fi;
         
-        if properties <> [ ] and IshomalgExternalObjectWithIOStreamRep( ext_obj ) then
+        if properties <> [ ] and IshomalgExternalObjectRep( ext_obj ) then
             for ar in properties do
                 Setter( ar )( ext_obj, true );
             od;
@@ -808,7 +807,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg external objects with an IO stream",
-        [ IshomalgExternalObjectWithIOStreamRep ],
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     

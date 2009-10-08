@@ -39,8 +39,8 @@ DeclareRepresentation( "IsHomalgExternalRingRep",
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsHomalgExternalRingElementRep",
-        IshomalgExternalObjectRep and IsHomalgRingElement,
-        [ "pointer", "cas" ] );
+        IsHomalgRingElement,
+        [ ] );
 
 # a new subrepresentation of the representation IsContainerForWeakPointersRep:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalRingsRep",
@@ -79,10 +79,6 @@ BindGlobal( "TheTypeHomalgExternalRing",
 BindGlobal( "TheTypeHomalgExternalRingElement",
         NewType( TheFamilyOfHomalgRingElements,
                 IsHomalgExternalRingElementRep ) );
-
-BindGlobal( "TheTypeHomalgExternalRingElementWithIOStream",
-        NewType( TheFamilyOfHomalgRingElements,
-                IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ) );
 
 BindGlobal( "TheTypeHomalgExternalMatrix",
         NewType( TheFamilyOfHomalgMatrices,
@@ -148,17 +144,6 @@ InstallMethod( homalgStream,
 end );
 
 ##
-InstallMethod( homalgStream,
-        "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
-        
-  function( o )
-    
-    return homalgStream( HomalgRing( o ) );
-    
-end );
-
-##
 InstallMethod( homalgExternalCASystemPID,
         "for homalg external rings",
         [ IsHomalgExternalRingRep ],
@@ -192,6 +177,98 @@ InstallMethod( homalgNrOfWarnings,
 end );
 
 ##
+InstallMethod( homalgPointer,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local e;
+    
+    e := EvalRingElement( r );	## here we must evaluate
+    
+    if IshomalgExternalObjectRep( e ) then
+        return homalgPointer( e );
+    elif IsString( e ) or IsFunction( e ) then
+        return e;
+    fi;
+    
+    Error( "the value of EvalRingElement of an external ring element must be either an external object, a string, or a function\n" );
+    
+end );
+
+##
+InstallMethod( homalgExternalCASystem,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R;
+    
+    R := HomalgRing( r );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return homalgExternalCASystem( R ); ## avoid evaluating the ring element
+    else
+        return homalgExternalCASystem( EvalRingElement( r ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( homalgExternalCASystemVersion,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R;
+    
+    R := HomalgRing( r );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return homalgExternalCASystemVersion( R ); ## avoid evaluating the ring element
+    else
+        return homalgExternalCASystemVersion( EvalRingElement( r ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( homalgStream,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R;
+    
+    R := HomalgRing( r );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return homalgStream( R ); ## avoid evaluating the ring element
+    else
+        return homalgStream( EvalRingElement( r ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( homalgExternalCASystemPID,
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep ],
+        
+  function( r )
+    local R;
+    
+    R := HomalgRing( r );
+    
+    if IsHomalgExternalRingRep( R ) then
+        return homalgExternalCASystemPID( R ); ## avoid evaluating the ring element
+    else
+        return homalgExternalCASystemPID( EvalRingElement( r ) );
+    fi;
+    
+end );
+
+##
 InstallMethod( String,
         "for homalg external ring elements",
         [ IsHomalgExternalRingElementRep ],
@@ -205,7 +282,7 @@ end );
 ##
 InstallMethod( homalgSetName,
         "for homalg external ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingRep ],
+        [ IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingRep ],
         
   function( r, name, R )
     
@@ -216,7 +293,7 @@ end );
 ##
 InstallMethod( homalgSetName,
         "for homalg external ring elements",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep, IsString ],
+        [ IsHomalgExternalRingElementRep, IsString ],
         
   function( r, name )
     
@@ -226,15 +303,14 @@ end );
 
 ##
 InstallMethod( \=,
-        "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep,
-          IshomalgExternalObjectWithIOStreamRep and IsHomalgExternalRingElementRep ],
+        "for homalg external ring elements",
+        [ IsHomalgExternalRingElementRep, IsHomalgExternalRingElementRep ],
         
   function( r1, r2 )
     
     if not IsIdenticalObj( homalgStream( r1 ), homalgStream( r2 ) ) then
         return false;
-    elif homalgPointer( r1 ) = homalgPointer( r2 ) then
+    elif EvalRingElement( r1 ) = EvalRingElement( r2 ) then
         return true;
     fi;
     
@@ -320,21 +396,13 @@ InstallGlobalFunction( HomalgExternalRingElement,
         ## rebuild an external ring element
         ## only if it does not already contain a ring and
         ## if a ring is provided as a second argument
-        ## CAUTION: creating an external ring element r2
-        ## from another one, say r1, that was created using
-        ## homalgSendBlocking using the option "return_ring_element"
-        ## will eventually lead to an error: r1 and r2 will have
-        ## the SAME pointer homalg_variable_XXX, and if r1 gets
-        ## deleted by the GAP garbage collector, HomalgToCAS will
-        ## delete the pointer in the external CAS (this is because
-        ## r1 is registered in the weak pointer list of external
-        ## objects associated to the stream of the ring), and
-        ## now if r2 enters a computation, the external CAS will
-        ## run into the error: `homalg_variable_XXX` not defined
         if not IsBound( el!.ring ) and
            nargs > 1 and IsHomalgRing( arg[2] ) then
             pointer := homalgPointer( el );
             ring := arg[2];
+            if IsFunction( pointer ) then
+                pointer := pointer( ring );
+            fi;
             cas := homalgExternalCASystem( ring );
             ar := [ pointer, cas, ring ];
             properties := KnownTruePropertiesOfObject( el );
@@ -370,16 +438,16 @@ InstallGlobalFunction( HomalgExternalRingElement,
             pointer := pointer( ring );
         fi;
         
-        r := rec( pointer := pointer, cas := cas, ring := ring );
-        
-        ## Objectify:
-        Objectify( TheTypeHomalgExternalRingElementWithIOStream, r );
+        r := rec( cas := cas, ring := ring );
     else
-        r := rec( pointer := pointer, cas := cas );
+        r := rec( cas := cas );
         
-        ## Objectify:
-        Objectify( TheTypeHomalgExternalRingElement, r );
     fi;
+    
+    ## Objectify:
+    ObjectifyWithAttributes(
+            r, TheTypeHomalgExternalRingElement,
+            EvalRingElement, pointer );
     
     if properties <> [ ] then
         for ar in properties do

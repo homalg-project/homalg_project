@@ -19,11 +19,6 @@ DeclareRepresentation( "IshomalgExternalObjectRep",
         IshomalgExternalObject,
         [ "pointer", "cas" ] );
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
-DeclareRepresentation( "IshomalgExternalObjectWithIOStreamRep",
-        IshomalgExternalObjectRep,
-        [ "pointer", "cas" ] );
-
 # a new subrepresentation of the representation IsContainerForWeakPointersRep:
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalObjectsRep",
         IsContainerForWeakPointersRep,
@@ -43,11 +38,6 @@ BindGlobal( "TheFamilyOfHomalgExternalObjects",
 BindGlobal( "TheTypeHomalgExternalObject",
         NewType( TheFamilyOfHomalgExternalObjects,
                 IshomalgExternalObjectRep ) );
-
-# a new type:
-BindGlobal( "TheTypeHomalgExternalObjectWithIOStream",
-        NewType( TheFamilyOfHomalgExternalObjects,
-                IshomalgExternalObjectWithIOStreamRep ) );
 
 # a new family:
 BindGlobal( "TheFamilyOfContainersForWeakPointersOnHomalgExternalObjects",
@@ -134,7 +124,7 @@ end );
 ##
 InstallMethod( homalgStream,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep ],
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
@@ -149,7 +139,7 @@ end );
 ##
 InstallMethod( homalgExternalCASystemPID,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep ],
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     
@@ -164,7 +154,7 @@ end );
 ##
 InstallMethod( homalgLastWarning,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep ],
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     local stream;
@@ -182,7 +172,7 @@ end );
 ##
 InstallMethod( homalgNrOfWarnings,
         "for homalg external objects",
-        [ IshomalgExternalObjectWithIOStreamRep ],
+        [ IshomalgExternalObjectRep ],
         
   function( o )
     local stream;
@@ -245,16 +235,12 @@ InstallGlobalFunction( homalgExternalObject,
     
     if IsBound( stream ) then
         obj := rec( pointer := arg[1], cas := arg[2], stream := stream );
-        
-        if not IsBound( type ) then
-            type := TheTypeHomalgExternalObjectWithIOStream;
-        fi;
     else
-        obj := rec( pointer := arg[1], cas := arg[2] );
-        
-        if not IsBound( type ) then
-            type := TheTypeHomalgExternalObject;
-        fi;
+        Error( "no stream specified\n" );
+    fi;
+    
+    if not IsBound( type ) then
+        type := TheTypeHomalgExternalObject;
     fi;
     
     ## Objectify:
