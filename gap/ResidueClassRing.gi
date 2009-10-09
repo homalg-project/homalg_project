@@ -742,6 +742,31 @@ InstallMethod( CreateHomalgSparseMatrixFromString,
 end );
 
 ##
+InstallMethod( SaveHomalgMatrixToFile,
+        "for external matrices in GAP",
+        [ IsString, IsHomalgResidueClassMatrixRep, IsHomalgResidueClassRingRep ],
+        
+  function( filename, M, R )
+    
+    return SaveHomalgMatrixToFile( filename, Eval( M ), AmbientRing( R ) );
+    
+end );
+
+##
+InstallMethod( LoadHomalgMatrixFromFile,
+        "for external rings in GAP",
+        [ IsString, IsHomalgResidueClassRingRep ],
+        
+  function( filename, R )
+    local M;
+    
+    M := LoadHomalgMatrixFromFile( filename, AmbientRing( R ) );
+    
+    return HomalgResidueClassMatrix( M, R );
+    
+end );
+
+##
 InstallMethod( SetIsMutableMatrix,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsBool ],
