@@ -56,6 +56,25 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               Gcd :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "need_output" ], HOMALG_IO.Pictograms.Gcd );
+                   
+                 end,
+               
+               CancelGcd :=
+                 function( a, b )
+                   local g, a_g, b_g;
+                   
+                   g := homalgSendBlocking( [ "gcd(", a, b, ")" ], "need_output", HOMALG_IO.Pictograms.Gcd );
+                   a_g := homalgSendBlocking( [ "normal((", a, ") / (", g, "))" ], "need_output", HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "normal((", b, ") / (", g, "))" ], "need_output", HOMALG_IO.Pictograms.CancelGcd );
+                   
+                   return [ a_g, b_g ];
+                   
+                 end,
+               
                DegreeMultivariatePolynomial :=
                  function( r, R )
                    local deg;
