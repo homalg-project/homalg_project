@@ -1162,28 +1162,6 @@ InstallGlobalFunction( RingForHomalgInSingular,
 end );
 
 ##
-InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
-  function( arg )
-    local ar, R;
-    
-    ##It seems that Singular does not know the fields.
-    ##Instead we create Q[dummy_variable] and feed only expressions
-    ##without "dummy_variable" to Singular. Since homalg in GAP
-    ##does not know of the dummy_variable, during the next ring extension
-    ##it will vanish and not slow down basis calculations.
-    ar := Concatenation( [ "0,dummy_variable,dp" ], [ IsPrincipalIdealRing ], arg );
-    
-    R := CallFuncList( RingForHomalgInSingular, ar );
-    
-    SetIsFieldForHomalg( R, true );
-    
-    SetRingProperties( R, 0 );
-    
-    return R;
-    
-end );
-
-##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( arg )
     local nargs, m, c, l, ar, R;
@@ -1223,6 +1201,28 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     SetIsResidueClassRingOfTheIntegers( R, true );
     
     SetRingProperties( R, c );
+    
+    return R;
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
+  function( arg )
+    local ar, R;
+    
+    ##It seems that Singular does not know the fields.
+    ##Instead we create Q[dummy_variable] and feed only expressions
+    ##without "dummy_variable" to Singular. Since homalg in GAP
+    ##does not know of the dummy_variable, during the next ring extension
+    ##it will vanish and not slow down basis calculations.
+    ar := Concatenation( [ "0,dummy_variable,dp" ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInSingular, ar );
+    
+    SetIsFieldForHomalg( R, true );
+    
+    SetRingProperties( R, 0 );
     
     return R;
     
