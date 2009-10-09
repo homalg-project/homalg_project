@@ -426,6 +426,13 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
+  <Item><F>LIMAP</F></Item>
+  <Item>logical implications for ring maps</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
   <Item><F>LIMAT</F></Item>
   <Item>logical implications for matrices</Item>
 </Row>
@@ -454,7 +461,7 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>LIMAT</F></Item>
+  <Item><F>LICPX</F></Item>
   <Item>logical implications for complexes</Item>
 </Row>
 

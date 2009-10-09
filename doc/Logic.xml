@@ -11,6 +11,16 @@
 <Appendix Label="Logic">
 <Heading>Logic Subpackages</Heading>
 
+<Section Label="Rings:LIRNG">
+<Heading>&LIRNG;: Logical Implications for Rings</Heading>
+
+</Section>
+
+<Section Label="RingMaps:LIMAP">
+<Heading>&LIMAP;: Logical Implications for Ring Maps</Heading>
+
+</Section>
+
 <Section Label="Matrices:LIMAT">
 <Heading>&LIMAT;: Logical Implications for Matrices</Heading>
 
@@ -41,6 +51,21 @@ installed methods for the attribute <C>Eval</C>.
 <#Include Label="Eval:HasEvalAddMat">
 <#Include Label="Eval:HasEvalSubMat">
 <#Include Label="Eval:HasEvalCompose">
+
+</Section>
+
+<Section Label="Modules:LIMOD">
+<Heading>&LIMOD;: Logical Implications for Modules</Heading>
+
+</Section>
+
+<Section Label="Maps:LIMOR">
+<Heading>&LIMOR;: Logical Implications for Morphisms</Heading>
+
+</Section>
+
+<Section Label="Complexes:LICPX">
+<Heading>&LICPX;: Logical Implications for Complexes</Heading>
 
 </Section>
 
