@@ -88,3 +88,27 @@ InstallMethod( AddToEntryOfHomalgMatrix,
     fi;
   end
 );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for sparse matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
+        
+  function( M, R )
+    local m, r;
+    
+    m := Eval( M );
+    
+    if IsSparseMatrix( m ) then
+        r := HomalgRing( R );
+        m := ConvertSparseMatrixToMatrix( m );
+        if Characteristic( m ) > 0 then
+            return String( List( m, r -> List( r, Int ) ) );
+        fi;
+        return String( m );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
