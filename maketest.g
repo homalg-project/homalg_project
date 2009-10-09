@@ -5,8 +5,10 @@
 ##
 
 LoadPackage( "RingsForHomalg" );
+LoadPackage( "IO_ForHomalg" );
 
 HOMALG_IO.show_banners := false;
+HOMALG_IO.suppress_PID := true;
 
 LoadPackage( "GAPDoc" );
 
@@ -15,6 +17,12 @@ list := [
          "../gap/RingsForHomalg.gi",
          "../gap/Singular.gi",
          "../gap/SingularBasic.gi",
+         "../examples/RingConstructionsExternalGAP.g",
+         "../examples/RingConstructionsSingular.g",
+         "../examples/RingConstructionsMAGMA.g",
+         "../examples/RingConstructionsMacaulay2.g",
+         "../examples/RingConstructionsSage.g",
+         "../examples/RingConstructionsMaple.g",
          ];
 
 TestManualExamples( "doc", "RingsForHomalg.xml", list );

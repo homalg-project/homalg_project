@@ -131,44 +131,36 @@ end );
 
 InstallGlobalFunction( HomalgRingOfIntegersInSage,
   function( arg )
-    local nargs, stream, c, properties, R, command;
+    local nargs, m, c, l, ar, R;
     
     nargs := Length( arg );
     
-    if nargs > 0 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
+    if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        m := "GF(";
+        c := AbsInt( arg[1] );
+	l := 2;
+    else
+        m := "IntegerModRing(";
+        c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            l := 2;
+        else
+            l := 1;
         fi;
     fi;
     
-    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
-        c := 0;
+    if nargs = 0 or arg[1] = 0 then
+	l := 1;
     elif IsInt( arg[1] ) then
-        c := AbsInt( arg[1] );
-    else
-        Error( "the first argument must be an integer\n" );
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
-        Error( "there is no support for Z/nZ, n nonprime, in Sage!\n" );
+        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Sage!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    properties := [ IsPrincipalIdealRing ];
-      
-    if IsPrime( c ) then
-        command := "GF(";
-        Add( properties, IsFieldForHomalg );
-    else
-        command := "IntegerModRing(";
-    fi;
+    ar := Concatenation( [ [ m, c, ")" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    if IsBound( stream ) then
-        R := RingForHomalgInSage( [ command, c, ")" ], properties, stream );
-    else
-        R := RingForHomalgInSage( [ command, c, ")" ], properties );
-    fi;
+    R := CallFuncList( RingForHomalgInSage, ar );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     

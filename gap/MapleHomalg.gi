@@ -602,39 +602,37 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMaple,
   function( arg )
-    local nargs, stream, m, c, R;
+    local nargs, m, c, l, ar, R;
     
     nargs := Length( arg );
     
-    if nargs > 0 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
-    
-    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
-        m := "";
-        c := 0;
-        R := "[ ]";
-    elif IsInt( arg[1] ) then
-        m := AbsInt( arg[1] );
-        c := m;
+    if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        c := AbsInt( arg[1] );
         if IsPrime( c ) then
-            R := [ c ];
+            m := [ c ];
         else
-            R := [ [ ], [ c ] ];
+            m := [ [ ], [ c ] ];
         fi;
+        l := 2;
     else
-        Error( "the first argument must be an integer\n" );
+        m := "[ ]";
+        c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            l := 2;
+        else
+            l := 1;
+        fi;
     fi;
     
-    if IsBound( stream ) then
-        R := RingForHomalgInMapleUsingPIR( R, stream );
-    else
-        R := RingForHomalgInMapleUsingPIR( R );
+    if nargs = 0 or arg[1] = 0 then
+        l := 1;
+    elif IsInt( arg[1] ) then
+        l := 2;
     fi;
+    
+    ar := Concatenation( [ [ m ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -711,7 +709,7 @@ InstallMethod( PolynomialRing,
             if IsPrime( c ) then
                 homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"char\",", c, ")" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
             else
-                Error( "the coefficient ring Z/", c, "Z (", c, " non-prime) is not directly supported by Involutive yet\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring over the integers\nfor help type: ?homalg: constructor for residue class rings\n" );
+                Error( "the coefficient ring Z/", c, "Z (", c, " non-prime) is not directly supported by Involutive yet\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring over the integers\nfor help type: ?homalg: constructor for residue class rings\n" );
             fi;
         elif HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
             homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"rational\",false)" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
@@ -1054,7 +1052,7 @@ end );
 ##
 InstallMethod( homalgSetName,
         "for homalg ring elements",
-        [ IshomalgExternalObjectRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMapleRep ],
+        [ IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMapleRep ],
         
   function( r, name, R )
     

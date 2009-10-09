@@ -448,37 +448,31 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
   function( arg )
-    local nargs, stream, m, c, R;
+    local nargs, m, c, l, ar, R;
     
     nargs := Length( arg );
     
-    if nargs > 0 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
+    if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        m := AbsInt( arg[1] );
+        c := m;
+        l := 2;
+    else
+        m := "";
+        c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            l := 2;
+        else
+            l := 1;
         fi;
     fi;
     
-    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
-        m := "";
-        c := 0;
-    elif IsInt( arg[1] ) then
-        m := AbsInt( arg[1] );
-        c := m;
-    else
-        Error( "the first argument must be an integer\n" );
-    fi;
-    
     if not ( IsZero( c ) or IsPrime( c ) ) then
-        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for MAGMA!\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
+        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for MAGMA!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    if IsBound( stream ) then
-        R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing, stream );
-    else
-        R := RingForHomalgInMAGMA( [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing );
-    fi;
+    ar := Concatenation( [ [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInMAGMA, ar );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     

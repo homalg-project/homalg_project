@@ -1185,11 +1185,29 @@ end );
 
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
-  function( p )
-    local ar, R;
+  function( arg )
+    local nargs, m, c, l, ar, R;
     
-    if not IsPrime( p ) then
-      Error("given number ist not prime\n");
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        m := AbsInt( arg[1] );
+        c := m;
+        l := 2;
+    else
+        m := "";
+        c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            l := 2;
+        else
+            l := 1;
+        fi;
+    fi;
+    
+    if IsZero( c ) then
+        Error( "the ring of integers is not yet supported in all available versions of Singular!\n" );
+    elif not IsPrime( c ) then
+        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported in all available versions of Singular!\n" );
     fi;
     
     ##It seems that Singular does not know fields.
@@ -1197,13 +1215,14 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     ##without "dummy_variable" to Singular. Since homalg in GAP
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
-    ar := Concatenation( [ Concatenation( String(p), ",dummy_variable,dp") ], [ IsPrincipalIdealRing ] );
+    
+    ar := Concatenation( [ [ Concatenation( String( c ), ",dummy_variable,dp") ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
     R := CallFuncList( RingForHomalgInSingular, ar );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsResidueClassRingOfTheIntegers( R, true );
     
-    SetRingProperties( R, p );
+    SetRingProperties( R, c );
     
     return R;
     
@@ -1679,7 +1698,6 @@ end );
 #end );
 
 ##
-
 InstallMethod( SaveHomalgMatrixToFile,
         "for external matrices in Singular",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSingularRep ],

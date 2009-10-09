@@ -19,7 +19,22 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Cite Key="homalg-project"/>
+This package is part of the &homalg; project
+<Cite Key="homalg-project"/>. The role of the package is described in
+the manual of the &homalg; package.
+
+<Section Label="RingConstructions">
+<Heading>Ring Constructions for Supported External Computer Algebra Systems</Heading>
+
+Here are some of the supported ring constructions:
+
+<#Include Label="ExternalGAP">
+<#Include Label="Singular">
+<#Include Label="MAGMA">
+<#Include Label="Macaulay2">
+<#Include Label="Sage">
+<#Include Label="Maple">
+
+</Section>
 
 </Chapter>
-

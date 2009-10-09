@@ -137,33 +137,27 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
   function( arg )
-    local nargs, stream, m, c, R;
+    local nargs, m, c, l, ar, R;
     
     nargs := Length( arg );
     
-    if nargs > 0 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
+    if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        m := AbsInt( arg[1] );
+        c := m;
+        l := 2;
+    else
+        m := "";
+        c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            l := 2;
+        else
+            l := 1;
         fi;
     fi;
     
-    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
-        m := "";
-        c := 0;
-    elif IsInt( arg[1] ) then
-        m := AbsInt( arg[1] );
-        c := m;
-    else
-        Error( "the first argument must be an integer\n" );
-    fi;
+    ar := Concatenation( [ [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    if IsBound( stream ) then
-        R := RingForHomalgInExternalGAP( [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing, stream );
-    else
-        R := RingForHomalgInExternalGAP( [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing );
-    fi;
+    R := CallFuncList( RingForHomalgInExternalGAP, ar );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -358,7 +352,7 @@ InstallMethod( SaveHomalgMatrixToFile,
         command := [ "SaveHomalgMatrixToFile( \"", filename, "\", ", M, " )" ];
                 
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
-                
+        
     fi;
     
     return true;

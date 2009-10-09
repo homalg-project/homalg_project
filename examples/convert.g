@@ -1,49 +1,66 @@
-Read( "../examples/homalg.g" );
-LoadPackage( "RingsForHomalg" );
+Read( "homalg.g" );
+LoadPackage( "HomalgToCAS" );
+
+HOMALG_IO.color_display := true;
+
 b := true;
 nr := NrRows( imat );
 nc := NrColumns( imat );
 
-## a way to change the ring
+## GAP -> GAP (Gauss)
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
 S := HomalgFieldOfRationals( );
 
 Read( "convert_test.g" );
 
 ## GAP -> GAP
 
-## a way to change the ring
-S := HomalgRingOfIntegers( ) / [ 32001 ];
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
+S := HomalgRingOfIntegers( ) / 32003;
 
 Read( "convert_test.g" );
 
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LoadPackage( "RingsForHomalg" );
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ## GAP <-> External GAP
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
 
 S := HomalgRingOfIntegersInExternalGAP( );
 
 Read( "convert_test.g" );
 
-b;
-
 ## GAP <-> Maple
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
 
 S := HomalgRingOfIntegersInMaple( );
 
 Read( "convert_test.g" );
 
-b;
-
 ## GAP <-> Sage
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
 
 S := HomalgRingOfIntegersInSage( );
 
 Read( "convert_test.g" );
 
-b;
-
 ## GAP <-> MAGMA
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
 
 S := HomalgRingOfIntegersInMAGMA( );
 
 Read( "convert_test.g" );
 
-b;
+## result:
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
+Print( "Success: ", b, "\n\n" );

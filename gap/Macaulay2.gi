@@ -493,37 +493,31 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMacaulay2,
   function( arg )
-    local nargs, stream, m, c, R;
+    local nargs, m, c, l, ar, R;
     
     nargs := Length( arg );
     
-    if nargs > 0 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
-    
-    if nargs = 0 or arg[1] = 0 or ( nargs = 1 and IsBound( stream ) ) then
-        m := 0;
-        c := 0;
-    elif IsInt( arg[1] ) then
-        m := AbsInt( arg[1] );
-        c := m;
+    if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        c := AbsInt( arg[1] );
+        m := Concatenation( " / ", String( c ) );
+        l := 2;
     else
-        Error( "the first argument must be an integer\n" );
+        m := "";
+        c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            l := 2;
+        else
+            l := 1;
+        fi;
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Macaulay2!\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    if IsBound( stream ) then
-        R := RingForHomalgInMacaulay2( [ "ZZ / ", m ], IsPrincipalIdealRing, stream );
-    else
-        R := RingForHomalgInMacaulay2( [ "ZZ / ", m ], IsPrincipalIdealRing );
-    fi;
+    ar := Concatenation( [ [ "ZZ", m ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInMacaulay2, ar );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -839,7 +833,7 @@ end );
 ##
 InstallMethod( homalgSetName,
         "for homalg ring elements",
-        [ IshomalgExternalObjectRep and IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        [ IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( r, name, R )
     

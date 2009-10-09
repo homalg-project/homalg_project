@@ -1,4 +1,8 @@
-## via listlist
+Print( "S := " );
+
+Display( S );
+
+Print( "\n## via listlist:\n" );
 tmat := ShallowCopy( imat );
 SetExtractHomalgMatrixToFile( tmat, false );
 smat := tmat * S;
@@ -17,7 +21,8 @@ else
     b := b and ( Eval( tmat ) = Eval( kmat ) );
 fi;
 
-## via list
+Print( "\n## via list:\n" );
+
 tmat := ShallowCopy( imat );
 SetExtractHomalgMatrixToFile( tmat, false );
 smat := ConvertHomalgMatrix( tmat, nr, nc, S );
@@ -36,7 +41,7 @@ else
     b := b and ( Eval( tmat ) = Eval( kmat ) );
 fi;
 
-## via sparse (2 arguments call of ConvertHomalgMatrix)
+Print( "\n## via sparse (2 arguments call of ConvertHomalgMatrix):\n" );
 tmat := ShallowCopy( imat );
 SetExtractHomalgMatrixAsSparse( tmat, true );
 smat := tmat * S;
@@ -55,7 +60,7 @@ else
     b := b and ( Eval( tmat ) = Eval( kmat ) );
 fi;
 
-## via sparse (4 arguments call of ConvertHomalgMatrix)
+Print( "\n## via sparse (4 arguments call of ConvertHomalgMatrix):\n" );
 tmat := ShallowCopy( imat );
 SetExtractHomalgMatrixAsSparse( tmat, true );
 smat := ConvertHomalgMatrix( tmat, nr, nc, S );
@@ -74,9 +79,10 @@ else
     b := b and ( Eval( tmat ) = Eval( kmat ) );
 fi;
 
-## via file
+Print( "\n## via file:\n" );
 tmat := ShallowCopy( imat );
-smat := tmat * S;
+SetExtractHomalgMatrixToFile( tmat, true );
+smat := ConvertHomalgMatrix( tmat, S );
 Print( "\n" );
 Display( smat );
 if IsHomalgInternalRingRep( S ) then

@@ -7,6 +7,7 @@
 	  <!ENTITY Maple '<Package>Maple</Package>'>
 	  <!ENTITY Mathematica '<Package>Mathematica</Package>'>
 	  <!ENTITY Singular '<Package>Singular</Package>'>
+	  <!ENTITY Macaulay2 '<Package>Macaulay2</Package>'>
 	  <!ENTITY Plural '<Package>Plural</Package>'>
 	  <!ENTITY Sage '<Package>Sage</Package>'>
 	  <!ENTITY python '<Package>python</Package>'>
