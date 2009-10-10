@@ -448,31 +448,33 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := AbsInt( arg[1] );
-        c := m;
-        l := 2;
+	l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
+        R := [ "IntegerRing(", c, ")" ];
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
+        R := [ "IntegerRing()" ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for MAGMA!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    ar := Concatenation( [ [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    R := CallFuncList( RingForHomalgInMAGMA, ar );
+    R := CallFuncList( RingForHomalgInMAGMA, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -485,11 +487,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "Rationals()" ], [ IsPrincipalIdealRing ], arg );
+    R := "Rationals()";
     
-    R := CallFuncList( RingForHomalgInMAGMA, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInMAGMA, R );
     
     SetIsFieldForHomalg( R, true );
     

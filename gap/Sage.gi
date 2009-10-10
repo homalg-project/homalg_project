@@ -131,36 +131,33 @@ end );
 
 InstallGlobalFunction( HomalgRingOfIntegersInSage,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := "GF(";
-        c := AbsInt( arg[1] );
 	l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
+        R := [ "GF(", c, ")" ];
     else
-        m := "IntegerModRing(";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
-    fi;
-    
-    if nargs = 0 or arg[1] = 0 then
-	l := 1;
-    elif IsInt( arg[1] ) then
+        ## characteristic:
+        c := 0;
+        R := [ "IntegerModRing(", c, ")" ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Sage!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    ar := Concatenation( [ [ m, c, ")" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    R := CallFuncList( RingForHomalgInSage, ar );
+    R := CallFuncList( RingForHomalgInSage, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -173,11 +170,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSage,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "QQ" ], [ IsPrincipalIdealRing, IsFieldForHomalg ], arg );
+    R := "QQ";
     
-    R := CallFuncList( RingForHomalgInSage, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing, IsFieldForHomalg ], arg );
+    
+    R := CallFuncList( RingForHomalgInSage, R );
     
     SetIsFieldForHomalg( R, true );
     

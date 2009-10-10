@@ -90,20 +90,20 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                Gcd :=
                  function( a, b )
 
-                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], "need_output", HOMALG_IO.Pictograms.Gcd );
+                   return homalgSendBlocking( [ "toString(gcd(", a, b, "))" ], "need_output", HOMALG_IO.Pictograms.Gcd );
 
                  end,
                
                CancelGcd :=
                  function( a, b )
                    local g, a_g, b_g;
-               
-                   g := homalgSendBlocking( [ "gcd(", a, b, ")" ], "need_output", HOMALG_IO.Pictograms.Gcd );
-                   a_g := homalgSendBlocking( [ "(", a, ") // (", g, ")" ], "need_output", HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "(", b, ") // (", g, ")" ], "need_output", HOMALG_IO.Pictograms.CancelGcd );
-               
+                   
+                   g := homalgSendBlocking( [ "toString(gcd(", a, b, "))" ], "need_output", HOMALG_IO.Pictograms.Gcd );
+                   a_g := homalgSendBlocking( [ "(", a, ") // (", g, ")" ], HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "(", b, ") // (", g, ")" ], HOMALG_IO.Pictograms.CancelGcd );
+                   
                    return [ a_g, b_g ];
-               
+                   
                  end,
                
                ShallowCopy := C -> homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix ),

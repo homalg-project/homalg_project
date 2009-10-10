@@ -1164,22 +1164,22 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := AbsInt( arg[1] );
-        c := m;
         l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
     fi;
     
     if IsZero( c ) then
@@ -1194,9 +1194,11 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
     
-    ar := Concatenation( [ [ Concatenation( String( c ), ",dummy_variable,dp") ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := [ String( c ), "dummy_variable,dp" ];
     
-    R := CallFuncList( RingForHomalgInSingular, ar );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInSingular, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -1209,16 +1211,19 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
-    local ar, R;
+    local R;
     
     ##It seems that Singular does not know the fields.
     ##Instead we create Q[dummy_variable] and feed only expressions
     ##without "dummy_variable" to Singular. Since homalg in GAP
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
-    ar := Concatenation( [ "0,dummy_variable,dp" ], [ IsPrincipalIdealRing ], arg );
     
-    R := CallFuncList( RingForHomalgInSingular, ar );
+    R := "0,dummy_variable,dp";
+    
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInSingular, R );
     
     SetIsFieldForHomalg( R, true );
     

@@ -602,37 +602,33 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMaple,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        l := 2;
+        ## characteristic:
         c := AbsInt( arg[1] );
         if IsPrime( c ) then
-            m := [ c ];
+            R := [ c ];
         else
-            m := [ [ ], [ c ] ];
+            R := [ [ ], [ c ] ];
         fi;
-        l := 2;
     else
-        m := "[ ]";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
+        R := [ ];
     fi;
     
-    if nargs = 0 or arg[1] = 0 then
-        l := 1;
-    elif IsInt( arg[1] ) then
-        l := 2;
-    fi;
+    R := Concatenation( [ R ], arg{[ l .. nargs ]} );
     
-    ar := Concatenation( [ [ m ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
-    
-    R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
+    R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -645,11 +641,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "[0]" ], arg );
+    R := "[0]";
     
-    R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
+    R := Concatenation( [ R ], arg );
+    
+    R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
     SetIsFieldForHomalg( R, true );
     

@@ -137,27 +137,29 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := AbsInt( arg[1] );
-        c := m;
         l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
     fi;
     
-    ar := Concatenation( [ [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := [ "HomalgRingOfIntegers( ", c, " )" ];
     
-    R := CallFuncList( RingForHomalgInExternalGAP, ar );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInExternalGAP, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -170,11 +172,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "HomalgFieldOfRationals( )" ], [ IsPrincipalIdealRing ], arg );
+    R := "HomalgFieldOfRationals( )";
     
-    R := CallFuncList( RingForHomalgInExternalGAP, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInExternalGAP, R );
     
     SetIsFieldForHomalg( R, true );
     
