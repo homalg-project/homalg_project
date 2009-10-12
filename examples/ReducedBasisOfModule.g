@@ -2,8 +2,8 @@ LoadPackage( "RingsForHomalg" );
 
 # Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 #Qxyz := HomalgFieldOfRationalsInSingular( ) * "x,y,z";
-Qxyz := HomalgFieldOfRationalsInMAGMA( ) * "x,y,z";
-#Qxyz := HomalgFieldOfRationalsInMacaulay2( ) * "x,y,z";
+#Qxyz := HomalgFieldOfRationalsInMAGMA( ) * "x,y,z";
+Qxyz := HomalgFieldOfRationalsInMacaulay2( ) * "x,y,z";
 #Qxyz := HomalgFieldOfRationalsInMaple( ) * "x,y,z";
 
 LoadPackage( "LocalizeRingForHomalg" );
@@ -12,6 +12,9 @@ LoadPackage( "LocalizeRingForHomalg" );
 # SetInfoLevel( InfoLocalizeRingForHomalg, 2 );;
 
 SetAssertionLevel( 4 );
+
+# ProfileOperationsAndMethods( true );
+# ProfileGlobalFunctions( true );
 
 R0 := LocalizeAtZero( Qxyz );
 
