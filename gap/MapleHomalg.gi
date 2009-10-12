@@ -864,7 +864,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, s, R )
@@ -875,7 +875,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, a, R )
@@ -886,7 +886,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Maple",
+        "constructor for homalg external matrices in Maple",
         [ IsString, IsHomalgExternalRingInMapleRep ],
         
   function( S, R )
@@ -900,7 +900,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Maple",
+        "constructor for homalg external matrices in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( S, r, c, R )
@@ -914,7 +914,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a list of an external matrix in Maple",
+        "constructor for homalg external matrices in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( S, r, c, R )
@@ -932,7 +932,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, R )
@@ -943,7 +943,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, R )
@@ -957,7 +957,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
@@ -968,7 +968,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
@@ -979,7 +979,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
@@ -990,7 +990,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMapleRep ],
         
   function( filename, M, R )
@@ -1066,7 +1066,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )

@@ -784,7 +784,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, s, R )
@@ -795,7 +795,23 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Macaulay2",
+        "constructor for homalg external matrices in Macaulay2",
+        [ IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  function( s, R )
+    local r, c;
+    
+    r := Length( Positions( s, '[' ) ) - 1;
+    
+    c := ( Length( Positions( s, ',' ) ) + 1 ) / r;
+    
+    return CreateHomalgMatrixFromString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromString,
+        "constructor for homalg external matrices in Macaulay2",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( s, r, c, R )
@@ -811,7 +827,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
@@ -822,7 +838,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
@@ -847,7 +863,7 @@ end );
 
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
-        "for external matrices in Macaulay2",
+        "for external rings in Macaulay2",
         [ IsHomalgExternalRingInMacaulay2Rep and HasWeightsOfIndeterminates ],
         
   function( R )
@@ -878,7 +894,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( filename, M, R )
@@ -941,7 +957,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )

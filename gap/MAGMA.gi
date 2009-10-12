@@ -620,7 +620,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, s, R )
@@ -631,7 +631,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, a, R )
@@ -642,7 +642,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in MAGMA",
+        "constructor for homalg external matrices in MAGMA",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( S, R )
@@ -656,7 +656,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a list of an external matrix in MAGMA",
+        "constructor for homalg external matrices in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
   function( S, r, c, R )
     
@@ -670,7 +670,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a sparse list of an external matrix in MAGMA",
+        "constructor for homalg external matrices in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( S, r, c, R )
@@ -688,7 +688,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, R )
@@ -699,7 +699,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, R )
@@ -713,7 +713,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, R )
@@ -735,7 +735,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, R )
@@ -746,7 +746,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMAGMARep ],
         
   function( filename, M, R )

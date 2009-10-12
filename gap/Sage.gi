@@ -222,7 +222,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, s, R )
@@ -233,7 +233,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, a, R )
@@ -244,7 +244,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a listlist of an external matrix in Sage",
+        "constructor for homalg external matrices in Sage",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
   function( S, R )
@@ -258,7 +258,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a list of an external matrix in Sage",
+        "constructor for homalg external matrices in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
     local ext_obj;
@@ -271,7 +271,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a sparse list of an external matrix in Sage",
+        "constructor for homalg external matrices in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( S, r, c, R )
@@ -289,7 +289,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( M, r, c, R )
@@ -300,7 +300,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, R )
@@ -314,7 +314,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
@@ -325,7 +325,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
@@ -336,7 +336,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M , R )
@@ -347,7 +347,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSageRep ],
         
   function( filename, M, R )

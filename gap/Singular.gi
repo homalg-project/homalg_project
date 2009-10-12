@@ -168,6 +168,20 @@ proc Difference (list a, list b)\n\
   return(c);\n\
 }\n\n",
     
+    GetSparseListOfHomalgMatrixAsString := "\n\
+proc GetSparseListOfHomalgMatrixAsString (M)\n\
+{\n\
+  list l;int k;\n\
+  k = 1;\n\
+  for(int i=1;i<=ncols(M);i=i+1){\n\
+    for(int j=1;j<=nrows(M);j=j+1){\n\
+      def p=M[j,i]; // remark: matrices are saved transposed in Singular\n\
+      if(p!=0){l[k]=list(i,j,p); k = k+1;};\n\
+    };\n\
+  };\n\
+  return(string(l));\n\
+}\n\n",
+    
     CreateListListOfIntegers := "\n\
 proc CreateListListOfIntegers (degrees,m,n)\n\
 {\n\
@@ -1541,7 +1555,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, s, R )
@@ -1552,7 +1566,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, a, R )
@@ -1563,16 +1577,36 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Singular",
+        "constructor for homalg external matrices in Singular",
+        [ IsString, IsHomalgExternalRingInSingularRep ],
+        
+  function( s, R )
+    local r, c;
+    
+    r := Length( Positions( s, '[' ) ) - 1;
+    
+    c := ( Length( Positions( s, ',' ) ) + 1 ) / r;
+    
+    return CreateHomalgMatrixFromString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromString,
+        "constructor for homalg external matrices in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( s, r, c, R )
-    local ext_obj;
+    local str, ext_obj;
     
-    ext_obj := homalgSendBlocking( [ s ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
+    str := ShallowCopy( s );
+    
+    RemoveCharacters( str, "[]" );
+    
+    ext_obj := homalgSendBlocking( [ str ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
     
     if not ( r = 1 and c = 1 ) then
-        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix ); #added by Simon
+        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix );
     fi;
     
     return HomalgMatrix( ext_obj, r, c, R );
@@ -1581,7 +1615,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
@@ -1592,7 +1626,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
@@ -1606,7 +1640,7 @@ end );
 
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
-        "for external matrices in Singular",
+        "for homalg external rings in Singular",
         [ IsHomalgExternalRingInSingularRep and HasWeightsOfIndeterminates ],
         
   function( R )
@@ -1637,7 +1671,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, R )
@@ -1649,7 +1683,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, R )
@@ -1673,38 +1707,28 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
 end );
 
 ##
-#InstallMethod( GetSparseListOfHomalgMatrixAsString,
-#        "for external matrices in Singular",
-#        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
-#        
-#  function( M , R )
-#    local command,s;
-#
-#    command := [
-#          "list l;poly p;list l2;",
-#          "for(int i=1;i<=", NrRows( M ), ";i=i+1){",
-#            "for(int j=1;j<=", NrColumns( M ), ";j=j+1){",
-#              "p=", M, "[j,i];", #remark: matrices are saved transposed in singular
-#              "if(p!=0){l2=[i,j,p];l=insert(l,l2)};",
-#            "};",
-#          "};"
-#        ];
-#    
-#    homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString);
-#    
-#    s := homalgSendBlocking( "l", "need_output", R, HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString);
-#    
-#    if s <> "emptylist" then
-#      return s;
-#    else
-#      return "[]"
-#    fi;
-#    
-#end );
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for homalg external matrices in Singular",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, R )
+    local s;
+    
+    s := homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    
+    s := SplitString( s, "," );
+    
+    s := ListToListList( s, Length( s ) / 3, 3 );
+    
+    s := JoinStringsWithSeparator( List( s, JoinStringsWithSeparator ), "],[" );
+    
+    return Concatenation( "[[", s, "]]" );
+    
+end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSingularRep ],
         
   function( filename, M, R )
@@ -1739,7 +1763,7 @@ end );
 
 ##
 InstallMethod( LoadHomalgMatrixFromFile,
-        "for external rings in Singular",
+        "for homalg external rings in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( filename, r, c, R )
@@ -1812,7 +1836,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )

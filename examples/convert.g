@@ -59,6 +59,22 @@ S := HomalgRingOfIntegersInMAGMA( );
 
 Read( "convert_test.g" );
 
+## GAP <-> Singular
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
+S := HomalgFieldOfRationalsInSingular( );
+
+Read( "convert_test.g" );
+
+## GAP <-> Macaulay2
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
+S := HomalgFieldOfRationalsInMacaulay2( );
+
+Read( "convert_test.g" );
+
 ## result:
 
 Print( "~~~~~~~~~~~~~~~~~~\n\n" );

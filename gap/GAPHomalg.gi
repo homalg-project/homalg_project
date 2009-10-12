@@ -190,7 +190,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, s, R )
@@ -201,7 +201,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, a, R )
@@ -212,7 +212,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a listlist of an external matrix in GAP",
+        "constructor for homalg external matrices in GAP",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
   function( S, R )
@@ -227,7 +227,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a list of an external matrix in GAP",
+        "constructor for homalg external matrices in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
     local ext_obj;
@@ -240,7 +240,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a sparse list of an external matrix in GAP",
+        "constructor for homalg external matrices in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
     local ext_obj, s;
@@ -255,7 +255,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, R )
@@ -266,7 +266,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, R )
@@ -280,7 +280,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
@@ -300,7 +300,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
@@ -320,7 +320,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
@@ -340,7 +340,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInGAPRep ],
         
   function( filename, M, R )
