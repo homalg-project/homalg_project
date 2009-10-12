@@ -402,6 +402,24 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local c, s;
+    
+    c := NrColumns( M );
+    
+    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> GetEntryOfHomalgMatrixAsString( M, i, j ) ) );
+    
+    s := JoinStringsWithSeparator( Concatenation( s ) );
+    
+    return Concatenation( "[", s, "]" );
+    
+end );
+
+##
+InstallMethod( GetListOfHomalgMatrixAsString,
         "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
@@ -446,6 +464,24 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local c, s;
+    
+    c := NrColumns( M );
+    
+    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> GetEntryOfHomalgMatrixAsString( M, i, j ) ) );
+    
+    s := JoinStringsWithSeparator( List( s, JoinStringsWithSeparator ), "],[" );
+    
+    return Concatenation( "[[", s, "]]" );
+    
+end );
+
+##
+InstallMethod( GetListListOfHomalgMatrixAsString,
         "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
@@ -485,6 +521,33 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
   function( M )
     
     return GetSparseListOfHomalgMatrixAsString( M, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local c, s, i, j, e;
+    
+    c := NrColumns( M );
+    
+    s := [ ];
+    
+    for i in [ 1 .. NrRows( M ) ] do
+        for j in [ 1 .. c ] do
+            e := GetEntryOfHomalgMatrix( M, i, j );
+            if not IsZero( e ) then
+                Add( s, [ String( i ), String( j ), String( e ) ] );
+            fi;
+        od;
+    od;
+    
+    s := JoinStringsWithSeparator( List( s, JoinStringsWithSeparator ), "],[" );
+    
+    return Concatenation( "[[", s, "]]" );
     
 end );
 
@@ -1297,7 +1360,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices",
+        "constructor for homalg matrices",
         [ IsString, IsHomalgInternalRingRep ],
         
   function( S, R )
@@ -1313,7 +1376,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices",
+        "constructor for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
         
   function( S, r, c, R )
@@ -1337,7 +1400,33 @@ end );
 
 ##
 InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for homalg matrices",
+        "constructor for homalg matrices",
+        [ IsString, IsInt, IsInt, IsHomalgRing ],
+        
+  function( S, r, c, R )
+    local s, M, e;
+    
+    s := ShallowCopy( S );
+    
+    RemoveCharacters( s, "[]\\\n\" " );
+    
+    M := HomalgInitialMatrix( r, c, R );
+    
+    s := SplitString( s, "," );
+    
+    s := ListToListList( s, Length( s ) / 3, 3 );
+    
+    Perform( s, function( a ) SetEntryOfHomalgMatrix( M, Int( a[1] ), Int( a[2] ), a[3], R ); end );
+    
+    ResetFilterObj( M, IsMutableMatrix );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( CreateHomalgSparseMatrixFromString,
+        "constructor for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
         
   function( S, r, c, R )
@@ -1354,6 +1443,48 @@ InstallMethod( CreateHomalgSparseMatrixFromString,
     od;
     
     return HomalgMatrix( M, r, c, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromList,
+        "constructor for homalg matrices",
+        [ IsList, IsHomalgRing ],
+        
+  function( L, R )
+    local M;
+    
+    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsHomalgRingElement ) ) then
+        M := List( L, r -> List( r, String ) );
+        M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
+    elif IsList( L ) and ForAll( L, IsHomalgRingElement ) then
+        M := Concatenation( "[", JoinStringsWithSeparator( List( L, String ) ), "]" );
+    else
+        M := String( L );
+    fi;
+    
+    return CreateHomalgMatrixFromString( M, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromList,
+        "constructor for homalg matrices",
+        [ IsList, IsInt, IsInt, IsHomalgRing ],
+        
+  function( L, r, c, R )
+    local M;
+    
+    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsHomalgRingElement ) ) then
+        M := List( L, r -> List( r, String ) );
+        M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
+    elif IsList( L ) and ForAll( L, IsHomalgRingElement ) then
+        M := Concatenation( "[", JoinStringsWithSeparator( List( L, String ) ), "]" );
+    else
+        M := String( L );
+    fi;
+    
+    return CreateHomalgMatrixFromString( M, r, c, R );
     
 end );
 
@@ -1431,19 +1562,23 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, R, RP, M, ar, type, matrix, nr_rows, nr_columns;
+    local nargs, M, R, RP, ar, type, matrix, nr_rows, nr_columns;
     
     nargs := Length( arg );
     
-    if nargs > 1 and arg[1] <> [ ] then
+    M := arg[1];
+    
+    R := arg[nargs];
+    
+    if nargs > 1 and M <> [ ] then
         
-        if HasConstructorForHomalgMatrices( arg[nargs] ) then
-            return CallFuncList( ConstructorForHomalgMatrices( arg[nargs] ), arg );
+        if HasConstructorForHomalgMatrices( R ) then
+            return CallFuncList( ConstructorForHomalgMatrices( R ), arg );
         fi;
         
-        if IsString( arg[1] ) then
+        if IsString( M ) then
             
-            if IsHomalgInternalRingRep( arg[nargs] ) then
+            if IsHomalgInternalRingRep( R ) then
                 return CallFuncList( CreateHomalgMatrixFromString, arg );
             fi;
             
@@ -1453,16 +1588,16 @@ InstallGlobalFunction( HomalgMatrix,
             
             return CallFuncList( ConvertHomalgMatrix, arg );
             
-        elif not IsHomalgInternalRingRep( arg[nargs] ) and		## the ring arg[nargs] is not internal,
-          ( ( IsList( arg[1] ) and ForAll( arg[1], IsRingElement ) ) or	## while arg[1] is either a list of ring elements,
-            IsMatrix( arg[1] ) ) then					## or a matrix of ring elements
+        elif not IsHomalgInternalRingRep( R ) and		## the ring R is not internal,
+          ( ( IsList( M ) and ForAll( M, IsRingElement ) ) or	## while M is either a list of ring elements,
+            IsMatrix( M ) ) then				## or a matrix of (hopefully) ring elements
             
-            if Length( arg[1] ) > 0 and not IsList( arg[1][1] ) and
+            if Length( M ) > 0 and not IsList( M[1] ) and
                not ( nargs > 1 and IsInt( arg[2] ) ) and
                not ( nargs > 2 and IsInt( arg[3] ) ) then	## CAUTION: some CAS only accept a list and not a listlist
-                M := List( arg[1], a -> [ a ] );	## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
+                M := List( M, a -> [ a ] );		## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
             else
-                M := arg[1];
+                M := M;
             fi;
             
             ar := Concatenation( [ M ], arg{[ 2 .. nargs ]} );
@@ -1476,14 +1611,11 @@ InstallGlobalFunction( HomalgMatrix,
         fi;
     fi;
     
-    R := arg[nargs];
-    
     if not IsHomalgRing( R ) then
         Error( "the last argument must be an IsHomalgRing\n" );
     fi;
     
-    M := arg[1];
-    
+    ## here we take care of the degenerate input M = [ ] for all rings
     if nargs > 1 and M = [ ] then
         return HomalgZeroMatrix( 0, 0, R );
     fi;
@@ -1498,12 +1630,13 @@ InstallGlobalFunction( HomalgMatrix,
     
     matrix := rec( ring := R );
     
-    if nargs = 1 then ## only the ring is given
-    ## an empty matrix
+    ## here we take care of the case when only the ring is given
+    if nargs = 1 then
         
         ## Objectify:
         Objectify( type, matrix );
         
+        ## an empty matrix
         return matrix;
         
     fi;

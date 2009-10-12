@@ -109,7 +109,7 @@ InstallMethod( Name,
 end );
 
 ##
-InstallMethod( BlindlyCopyMatrixPropertiesToResidueClassMatrix,	## under construction
+InstallMethod( BlindlyCopyMatrixPropertiesToResidueClassMatrix,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgResidueClassMatrixRep ],
         
@@ -464,8 +464,10 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
     
     RP := CreateHomalgTableForResidueClassRings( R );
     
+    ## create the residue class ring
     S := CreateHomalgRing( R, [ TheTypeHomalgResidueClassRing, TheTypeHomalgResidueClassMatrix ], HomalgResidueClassRingElement, RP );
     
+    ## the constructor of matrices over residue class rings
     SetConstructorForHomalgMatrices( S,
             function( arg )
               local mat, l, ar, M, R;

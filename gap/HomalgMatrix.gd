@@ -689,6 +689,12 @@ DeclareOperation( "CreateHomalgMatrixFromString",
 DeclareOperation( "CreateHomalgSparseMatrixFromString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 
+DeclareOperation( "CreateHomalgMatrixFromList",
+        [ IsList, IsHomalgRing ] );
+
+DeclareOperation( "CreateHomalgMatrixFromList",
+        [ IsList, IsInt, IsInt, IsHomalgRing ] );
+
 DeclareOperation( "SaveHomalgMatrixToFile",
         [ IsString, IsHomalgMatrix, IsHomalgRing ] );
 
