@@ -843,8 +843,8 @@ InstallMethod( LocalizeAt,
     
     if IsBoundGlobal( "HomalgTableForLocalizedRingsInSingularTools" ) then
       if ValueGlobal( "IsHomalgExternalRingInSingularRep" )( globalR ) then
-        for component in NamesOfComponents( HomalgTableForLocalizedRingsInSingularTools ) do
-          RP!.(component) := HomalgTableForLocalizedRingsInSingularTools.(component);
+        for component in NamesOfComponents( ValueGlobal( "HomalgTableForLocalizedRingsInSingularTools" ) ) do
+          RP!.(component) := ValueGlobal( "HomalgTableForLocalizedRingsInSingularTools" ).(component);
         od;
       fi;
     fi;

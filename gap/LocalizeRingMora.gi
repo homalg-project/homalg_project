@@ -100,7 +100,11 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
         
   function( globalR )
     local globalRP, RP, RP_General, RP_Basic, RP_Tools, RP_specific, component;
-    
+
+    if LoadPackage( "RingsForHomalg" ) <> true then
+        Error( "the package RingsForHomalg failed to load\n" );
+    fi;
+
     globalRP := homalgTable( globalR );
     
     RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
@@ -109,7 +113,7 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
     
     RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
     
-    RP_Tools := ShallowCopy( CommonHomalgTableForSingularToolsMoraPreRing );
+    RP_Tools := ShallowCopy( ValueGlobal( "CommonHomalgTableForSingularToolsMoraPreRing" ) );
     
     RP_specific := rec (
                         Zero := globalRP!.Zero,
