@@ -162,13 +162,15 @@ end );
 ##
 InstallGlobalFunction( ConvertHomalgMatrix,
   function( arg )
-    local nargs, R, flatten, stream, M, o, r, c;
+    local nargs, M, R, flatten, stream, o, r, c;
     
     nargs := Length( arg );
     
-    if nargs = 2 and IsHomalgRing( arg[2] ) then
-        
-        R := arg[2];
+    M := arg[1];
+    
+    R := arg[nargs];
+    
+    if nargs = 2 and IsHomalgRing( R ) then
         
         flatten := false;
         
@@ -182,42 +184,35 @@ InstallGlobalFunction( ConvertHomalgMatrix,
             
         fi;
         
-        if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
-            M := arg[1];
-        elif IsMatrix( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
-        elif IsList( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], homalgPointer ) ), "]" );
-        elif IsMatrix( arg[1] ) and flatten then
-            M := arg[1];
-            r := Length( M );
-            c := Length( M[1] );
-            return ConvertHomalgMatrix( Flat( M ), r, c, R );
-        else
-            M := String( arg[1] );
-        fi;
-        
-        if IsHomalgMatrix( M ) then
-            
+        if IsStringRep( M ) then
+            ## do nothing
+        elif IsHomalgMatrix( M ) then
             if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
+                r := NrRows( M );
+                c := NrColumns( M );
                 M := GetSparseListOfHomalgMatrixAsString( M );
+                return CreateHomalgSparseMatrixFromString( M, r, c, R );
             elif not ( IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = false ) then
                 return ConvertHomalgMatrixViaFile( M, R );
             else
                 M := GetListListOfHomalgMatrixAsString( M );
+                return CreateHomalgMatrixFromString( M, R );
             fi;
-            
-        fi;
-        
-        if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-            return CreateHomalgSparseMatrixFromString( M, NrRows( arg[1] ), NrColumns( arg[1] ), R );
+        elif IsMatrix( M ) and flatten then
+            r := Length( M );
+            c := Length( M[1] );
+            return ConvertHomalgMatrix( Flat( M ), r, c, R );
+        elif IsMatrix( M ) and ForAll( M, r -> ForAll( r, IsHomalgExternalRingElementRep ) ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( M, row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
+        elif IsList( M ) and ForAll( M, IsHomalgExternalRingElementRep ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( M, homalgPointer ) ), "]" );
         else
-            return CreateHomalgMatrixFromString( M, R );
+            M := String( M );
         fi;
         
-    elif nargs = 4 and IsHomalgRing( arg[4] ) then
+        return CreateHomalgMatrixFromString( M, R );
         
-        R := arg[4];
+    elif nargs = 4 and IsHomalgRing( R ) then
         
         flatten := false;
         
@@ -234,36 +229,29 @@ InstallGlobalFunction( ConvertHomalgMatrix,
         r := arg[2];
         c := arg[3];
         
-        if IsHomalgMatrix( arg[1] ) or IsStringRep( arg[1] ) then
-            M := arg[1];
-        elif IsMatrix( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
-        elif IsList( arg[1] ) and ForAll( arg[1], IsHomalgExternalRingElementRep ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( arg[1], homalgPointer ) ), "]" );
-        elif IsMatrix( arg[1] ) and flatten then
-            M := arg[1];
-            return ConvertHomalgMatrix( Flat( M ), r, c, R );
-        else
-            M := String( arg[1] );
-        fi;
-        
-        if IsHomalgMatrix( M ) then
-            
+        if IsStringRep( M ) then
+            ## do nothing
+        elif IsHomalgMatrix( M ) then
             if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
                 M := GetSparseListOfHomalgMatrixAsString( M );
+                return CreateHomalgSparseMatrixFromString( M, r, c, R );
             elif not ( IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = false ) then
                 return ConvertHomalgMatrixViaFile( M, R );
             else
                 M := GetListOfHomalgMatrixAsString( M );
+                return CreateHomalgMatrixFromString( M, r, c, R );
             fi;
-            
+        elif IsMatrix( M ) and flatten then
+            return ConvertHomalgMatrix( Flat( M ), r, c, R );
+        elif IsMatrix( M ) and ForAll( M, r -> ForAll( r, IsHomalgExternalRingElementRep ) ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( M, row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
+        elif IsList( M ) and ForAll( M, IsHomalgExternalRingElementRep ) then
+            M := Concatenation( "[", JoinStringsWithSeparator( List( M, homalgPointer ) ), "]" );
+        else
+            M := String( M );
         fi;
         
-        if IsHomalgMatrix( arg[1] ) and IsBound( arg[1]!.ExtractHomalgMatrixAsSparse ) and arg[1]!.ExtractHomalgMatrixAsSparse = true then
-            return CreateHomalgSparseMatrixFromString( M, r, c, R );
-        else
-            return CreateHomalgMatrixFromString( M, r, c, R );
-        fi;
+        return CreateHomalgMatrixFromString( M, r, c, R );
         
     fi;
     
