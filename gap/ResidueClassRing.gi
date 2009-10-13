@@ -733,13 +733,13 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
+InstallMethod( CreateHomalgMatrixFromSparseString,
         "for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgResidueClassRingRep ],
         
   function( S, r, c, R )
     
-    return HomalgResidueClassMatrix( CreateHomalgSparseMatrixFromString( S, r, c, AmbientRing( R ) ), R );
+    return HomalgResidueClassMatrix( CreateHomalgMatrixFromSparseString( S, r, c, AmbientRing( R ) ), R );
     
 end );
 

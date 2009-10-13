@@ -836,7 +836,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         #        if LowercaseString( V[1]{[1..3]} ) = "inv" then
         #            VI := V[2];
         #            if compute_V then
-        #                V := LeftInverse( VI, arg[1], "NO_CHECK");
+        #                V := LeftInverse( VI, arg[1], "NO_CHECK" );
         #            fi;
         #        else
         #            Error( "Cannot interpret the first string in V ", V[1], "\n" );

@@ -217,24 +217,24 @@ InstallMethod( ShallowCopy,
 end );
 
 ##
-InstallMethod( SetExtractHomalgMatrixAsSparse,
+InstallMethod( SetConvertHomalgMatrixViaSparseString,
         "for homalg matrices",
         [ IsHomalgMatrix, IsBool ],
         
   function( M, b )
     
-    M!.ExtractHomalgMatrixAsSparse := b;
+    M!.ConvertHomalgMatrixViaSparseString := b;
     
 end );
 
 ##
-InstallMethod( SetExtractHomalgMatrixToFile,
+InstallMethod( SetConvertHomalgMatrixViaFile,
         "for homalg matrices",
         [ IsHomalgMatrix, IsBool ],
         
   function( M, b )
     
-    M!.ExtractHomalgMatrixToFile := b;
+    M!.ConvertHomalgMatrixViaFile := b;
     
 end );
 
@@ -1359,6 +1359,160 @@ InstallGlobalFunction( homalgInternalMatrixHull,
 end );
 
 ##
+InstallMethod( ConvertHomalgMatrixViaListListString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local s;
+    
+    s := GetListListOfHomalgMatrixAsString( M );
+    
+    return CreateHomalgMatrixFromString( s, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrixViaListListString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
+        
+  function( M, r, c, R )
+    local s;
+    
+    s := GetListListOfHomalgMatrixAsString( M );
+    
+    return CreateHomalgMatrixFromString( s, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrixViaListString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local r, c, s;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    s := GetListOfHomalgMatrixAsString( M );
+    
+    return CreateHomalgMatrixFromString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrixViaListString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
+        
+  function( M, r, c, R )
+    local s;
+    
+    s := GetListOfHomalgMatrixAsString( M );
+    
+    return CreateHomalgMatrixFromString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrixViaSparseString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    local r, c, s;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    s := GetSparseListOfHomalgMatrixAsString( M );
+    
+    return CreateHomalgMatrixFromSparseString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrixViaSparseString,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
+        
+  function( M, r, c, R )
+    local s;
+    
+    s := GetSparseListOfHomalgMatrixAsString( M );
+    
+    return CreateHomalgMatrixFromSparseString( s, r, c, R );
+    
+end );
+
+## the lowest priority method
+InstallMethod( ConvertHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    
+    if LoadPackage( "HomalgToCAS" ) <> true then
+        Error( "the package HomalgToCAS failed to load\n" );
+    fi;
+    
+    return ConvertHomalgMatrix( M, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
+    
+    if IsBound( M!.ConvertHomalgMatrixViaSparseString ) and M!.ConvertHomalgMatrixViaSparseString = true then
+        
+        return ConvertHomalgMatrixViaSparseString( M, R );
+        
+    fi;
+    
+    return ConvertHomalgMatrixViaListListString( M, R );
+    
+end );
+
+## the lowest priority method
+InstallMethod( ConvertHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
+        
+  function( M, r, c, R )
+    
+    if LoadPackage( "HomalgToCAS" ) <> true then
+        Error( "the package HomalgToCAS failed to load\n" );
+    fi;
+    
+    return ConvertHomalgMatrix( M, r, c, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
+        
+  function( M, r, c, R )
+    
+    if IsBound( M!.ConvertHomalgMatrixViaSparseString ) and M!.ConvertHomalgMatrixViaSparseString = true then
+        
+        return ConvertHomalgMatrixViaSparseString( M, r, c, R );
+        
+    fi;
+    
+    return ConvertHomalgMatrixViaListString( M, r, c, R );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrixFromString,
         "constructor for homalg matrices",
         [ IsString, IsHomalgInternalRingRep ],
@@ -1399,7 +1553,7 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
+InstallMethod( CreateHomalgMatrixFromSparseString,
         "constructor for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgRing ],
         
@@ -1425,7 +1579,7 @@ InstallMethod( CreateHomalgSparseMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
+InstallMethod( CreateHomalgMatrixFromSparseString,
         "constructor for homalg matrices",
         [ IsString, IsInt, IsInt, IsHomalgInternalRingRep ],
         
@@ -1562,7 +1716,7 @@ end );
 ##
 InstallGlobalFunction( HomalgMatrix,
   function( arg )
-    local nargs, M, R, RP, ar, type, matrix, nr_rows, nr_columns;
+    local nargs, M, R, RP, type, matrix, nr_rows, nr_columns;
     
     nargs := Length( arg );
     
@@ -1578,35 +1732,13 @@ InstallGlobalFunction( HomalgMatrix,
         
         if IsString( M ) then
             
-            if IsHomalgInternalRingRep( R ) then
-                return CallFuncList( CreateHomalgMatrixFromString, arg );
-            fi;
-            
-            if LoadPackage( "HomalgToCAS" ) <> true then
-                Error( "the package HomalgToCAS failed to load\n" );
-            fi;
-            
-            return CallFuncList( ConvertHomalgMatrix, arg );
+            return CallFuncList( CreateHomalgMatrixFromString, arg );
             
         elif not IsHomalgInternalRingRep( R ) and		## the ring R is not internal,
           ( ( IsList( M ) and ForAll( M, IsRingElement ) ) or	## while M is either a list of ring elements,
             IsMatrix( M ) ) then				## or a matrix of (hopefully) ring elements
             
-            if Length( M ) > 0 and not IsList( M[1] ) and
-               not ( nargs > 1 and IsInt( arg[2] ) ) and
-               not ( nargs > 2 and IsInt( arg[3] ) ) then	## CAUTION: some CAS only accept a list and not a listlist
-                M := List( M, a -> [ a ] );		## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
-            else
-                M := M;
-            fi;
-            
-            ar := Concatenation( [ M ], arg{[ 2 .. nargs ]} );
-            
-            if LoadPackage( "HomalgToCAS" ) <> true then
-                Error( "the package HomalgToCAS failed to load\n" );
-            fi;
-            
-            return CallFuncList( ConvertHomalgMatrix, ar );
+            return CallFuncList( CreateHomalgMatrixFromList, arg );
             
         fi;
     fi;
@@ -2360,10 +2492,6 @@ InstallMethod( \*,
             return mat;
         fi;
         
-    fi;
-    
-    if LoadPackage( "HomalgToCAS" ) <> true then
-        Error( "the package HomalgToCAS failed to load\n" );
     fi;
     
     mat := ConvertHomalgMatrix( m, R );

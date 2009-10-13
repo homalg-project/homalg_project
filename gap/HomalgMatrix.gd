@@ -676,8 +676,6 @@ DeclareGlobalFunction( "HomalgDiagonalMatrix" );
 
 DeclareGlobalFunction( "HomalgScalarMatrix" );
 
-DeclareGlobalFunction( "ConvertHomalgMatrix" );
-
 DeclareGlobalFunction( "ListToListList" );
 
 DeclareOperation( "CreateHomalgMatrixFromString",
@@ -686,7 +684,7 @@ DeclareOperation( "CreateHomalgMatrixFromString",
 DeclareOperation( "CreateHomalgMatrixFromString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 
-DeclareOperation( "CreateHomalgSparseMatrixFromString",
+DeclareOperation( "CreateHomalgMatrixFromSparseString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 
 DeclareOperation( "CreateHomalgMatrixFromList",
@@ -706,6 +704,30 @@ DeclareOperation( "LoadHomalgMatrixFromFile",
 
 DeclareOperation( "LoadHomalgMatrixFromFile",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrixViaListListString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrixViaListListString",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrixViaListString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrixViaListString",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrixViaSparseString",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrixViaSparseString",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrix",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "ConvertHomalgMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
 
 DeclareOperation( "*",
         [ IsHomalgRing, IsHomalgMatrix ] );
@@ -762,10 +784,10 @@ DeclareOperation( "NonTrivialDegreePerColumn",
 DeclareOperation( "NonTrivialDegreePerColumn",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "SetExtractHomalgMatrixAsSparse",
+DeclareOperation( "SetConvertHomalgMatrixViaSparseString",
         [ IsHomalgMatrix, IsBool ] );
 
-DeclareOperation( "SetExtractHomalgMatrixToFile",
+DeclareOperation( "SetConvertHomalgMatrixViaFile",
         [ IsHomalgMatrix, IsBool ] );
 
 DeclareOperation( "SetEntryOfHomalgMatrix",
