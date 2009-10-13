@@ -160,102 +160,32 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( ConvertHomalgMatrix,
-  function( arg )
-    local nargs, M, R, flatten, stream, o, r, c;
+InstallMethod( ConvertHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        
+  function( M, R )
     
-    nargs := Length( arg );
-    
-    M := arg[1];
-    
-    R := arg[nargs];
-    
-    if nargs = 2 and IsHomalgRing( R ) then
-        
-        flatten := false;
-        
-        if IsHomalgExternalRingRep( R ) then
-            
-            stream := homalgStream( R );
-            
-            if IsBound( stream.nolistlist ) and stream.nolistlist = true then
-                flatten := true;
-            fi;
-            
-        fi;
-        
-        if IsStringRep( M ) then
-            ## do nothing
-        elif IsHomalgMatrix( M ) then
-            if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
-                r := NrRows( M );
-                c := NrColumns( M );
-                M := GetSparseListOfHomalgMatrixAsString( M );
-                return CreateHomalgSparseMatrixFromString( M, r, c, R );
-            elif not ( IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = false ) then
-                return ConvertHomalgMatrixViaFile( M, R );
-            else
-                M := GetListListOfHomalgMatrixAsString( M );
-                return CreateHomalgMatrixFromString( M, R );
-            fi;
-        elif IsMatrix( M ) and flatten then
-            r := Length( M );
-            c := Length( M[1] );
-            return ConvertHomalgMatrix( Flat( M ), r, c, R );
-        elif IsMatrix( M ) and ForAll( M, r -> ForAll( r, IsHomalgExternalRingElementRep ) ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( M, row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
-        elif IsList( M ) and ForAll( M, IsHomalgExternalRingElementRep ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( M, homalgPointer ) ), "]" );
-        else
-            M := String( M );
-        fi;
-        
-        return CreateHomalgMatrixFromString( M, R );
-        
-    elif nargs = 4 and IsHomalgRing( R ) then
-        
-        flatten := false;
-        
-        if IsHomalgExternalRingRep( R ) then
-            
-            stream := homalgStream( R );
-            
-            if IsBound( stream.nolistlist ) and stream.nolistlist = true then
-                flatten := true;
-            fi;
-            
-        fi;
-        
-        r := arg[2];
-        c := arg[3];
-        
-        if IsStringRep( M ) then
-            ## do nothing
-        elif IsHomalgMatrix( M ) then
-            if IsBound( M!.ExtractHomalgMatrixAsSparse ) and M!.ExtractHomalgMatrixAsSparse = true then
-                M := GetSparseListOfHomalgMatrixAsString( M );
-                return CreateHomalgSparseMatrixFromString( M, r, c, R );
-            elif not ( IsBound( M!.ExtractHomalgMatrixToFile ) and M!.ExtractHomalgMatrixToFile = false ) then
-                return ConvertHomalgMatrixViaFile( M, R );
-            else
-                M := GetListOfHomalgMatrixAsString( M );
-                return CreateHomalgMatrixFromString( M, r, c, R );
-            fi;
-        elif IsMatrix( M ) and flatten then
-            return ConvertHomalgMatrix( Flat( M ), r, c, R );
-        elif IsMatrix( M ) and ForAll( M, r -> ForAll( r, IsHomalgExternalRingElementRep ) ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( M, row -> Concatenation( "[", JoinStringsWithSeparator( List( row, homalgPointer ) ), "]" ) ) ), "]" );
-        elif IsList( M ) and ForAll( M, IsHomalgExternalRingElementRep ) then
-            M := Concatenation( "[", JoinStringsWithSeparator( List( M, homalgPointer ) ), "]" );
-        else
-            M := String( M );
-        fi;
-        
-        return CreateHomalgMatrixFromString( M, r, c, R );
-        
+    if IsBound( M!.ConvertHomalgMatrixViaFile ) and M!.ConvertHomalgMatrixViaFile = false then
+        TryNextMethod( );
     fi;
     
-    Error( "no ring specified\n" );
+    return ConvertHomalgMatrixViaFile( M, R );
+    
+end );
+
+##
+InstallMethod( ConvertHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
+        
+  function( M, r, c, R )
+    
+    if IsBound( M!.ConvertHomalgMatrixViaFile ) and M!.ConvertHomalgMatrixViaFile = false then
+        TryNextMethod( );
+    fi;
+    
+    return ConvertHomalgMatrixViaFile( M, R );
     
 end );
 
