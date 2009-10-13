@@ -913,7 +913,7 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
+InstallMethod( CreateHomalgMatrixFromSparseString,
         "constructor for homalg external matrices in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         

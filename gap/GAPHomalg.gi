@@ -239,7 +239,7 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
+InstallMethod( CreateHomalgMatrixFromSparseString,
         "constructor for homalg external matrices in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
@@ -247,7 +247,7 @@ InstallMethod( CreateHomalgSparseMatrixFromString,
     
     s := homalgSendBlocking( [ "\"", S, "\"" ], R, HOMALG_IO.Pictograms.sparse );
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrixFromString( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrixFromSparseString( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     

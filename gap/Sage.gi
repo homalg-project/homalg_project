@@ -270,7 +270,7 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
+InstallMethod( CreateHomalgMatrixFromSparseString,
         "constructor for homalg external matrices in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
