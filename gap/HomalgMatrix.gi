@@ -1448,21 +1448,6 @@ InstallMethod( ConvertHomalgMatrixViaSparseString,
     
 end );
 
-## the lowest priority method
-InstallMethod( ConvertHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgRing ],
-        
-  function( M, R )
-    
-    if LoadPackage( "HomalgToCAS" ) <> true then
-        Error( "the package HomalgToCAS failed to load\n" );
-    fi;
-    
-    return ConvertHomalgMatrix( M, R );
-    
-end );
-
 ##
 InstallMethod( ConvertHomalgMatrix,
         "for homalg matrices",
@@ -1477,21 +1462,6 @@ InstallMethod( ConvertHomalgMatrix,
     fi;
     
     return ConvertHomalgMatrixViaListListString( M, R );
-    
-end );
-
-## the lowest priority method
-InstallMethod( ConvertHomalgMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ],
-        
-  function( M, r, c, R )
-    
-    if LoadPackage( "HomalgToCAS" ) <> true then
-        Error( "the package HomalgToCAS failed to load\n" );
-    fi;
-    
-    return ConvertHomalgMatrix( M, r, c, R );
     
 end );
 
