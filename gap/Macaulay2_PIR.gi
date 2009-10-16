@@ -48,7 +48,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               XTriangularBasisOfRows :=
+               XRowReducedEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -60,7 +60,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
@@ -68,10 +68,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasisC );
+                       homalgSendBlocking( [ N, U, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
+                       homalgSendBlocking( [ N, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );

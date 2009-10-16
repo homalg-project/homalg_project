@@ -27,14 +27,14 @@ InstallMethod( CreateHomalgTable,
     
     command := Concatenation(           
             
-            "def TriangularBasisOfRows_NU(M):\n",
+            "def RowReducedEchelonForm_NU(M):\n",
             "  MId = block_matrix([M,identity_matrix(M.base_ring(),M.nrows())],1,2)\n",
             "  MId.echelonize()\n",
             "  N = MId.matrix_from_columns(range( M.ncols() ))\n",
             "  U = MId.matrix_from_columns(range( M.ncols(), M.ncols() + M.nrows()))\n",
             "  return N, U\n\n",
                  
-            "def TriangularBasisOfRows_N_only(M):\n",
+            "def RowReducedEchelonForm_N_only(M):\n",
             "  return M.echelon_form()\n\n"
             
             );
@@ -56,7 +56,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               TriangularBasisOfRows :=
+               RowReducedEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -68,7 +68,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
@@ -76,10 +76,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, "=TriangularBasisOfRows_NU(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasisC );
+                       homalgSendBlocking( [ N, U, "=RowReducedEchelonForm_NU(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, "=TriangularBasisOfRows_N_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
+                       homalgSendBlocking( [ N, "=RowReducedEchelonForm_N_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );
