@@ -477,16 +477,14 @@ InstallGlobalFunction( homalgSendBlocking,
     if not IsBound( pictogram ) then
         pictogram := "   ";
     elif io_info_level >= 3 then
-        if pictogram = HOMALG_IO.Pictograms.TriangularBasis and IsBound( HOMALG.color_BOT ) then
-            pictogram := Concatenation( HOMALG.color_BOT, pictogram, "\033[0m" );
+        if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and IsBound( HOMALG.color_BOE ) then
+            pictogram := Concatenation( HOMALG.color_BOE, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and IsBound( HOMALG.color_BOB ) then
             pictogram := Concatenation( HOMALG.color_BOB, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.DecideZero and IsBound( HOMALG.color_BOD ) then
             pictogram := Concatenation( HOMALG.color_BOD, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and IsBound( HOMALG.color_BOH ) then
             pictogram := Concatenation( HOMALG.color_BOH, pictogram, "\033[0m" );
-        elif pictogram = HOMALG_IO.Pictograms.TriangularBasisC and IsBound( HOMALG.color_BOW ) then
-            pictogram := Concatenation( HOMALG.color_BOW, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and IsBound( HOMALG.color_BOC ) then
             pictogram := Concatenation( HOMALG.color_BOC, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and IsBound( HOMALG.color_BOP ) then
