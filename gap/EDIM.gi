@@ -105,7 +105,7 @@ InstallMethod( CreateHomalgTable,
                  end,
                    
                ## Must be defined if other functions are not defined
-               TriangularBasisOfRows :=
+               RowReducedEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, H;
                    
@@ -115,7 +115,7 @@ InstallMethod( CreateHomalgTable,
                    
                    nargs := Length( arg );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
                        ## compute N and U:
                        N := HermiteIntMatLLLTrans( Eval( M )!.matrix );
                        

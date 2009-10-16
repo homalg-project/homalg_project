@@ -107,8 +107,7 @@ InstallValue( HOMALG,
             TotalRuntimes := 0,
             OtherInternalMatrixTypes := [ ],
             
-            color_BOT := "\033[1;37;40m",		## (T)riangular basis: TriangularBasisOfRows/Columns
-            color_BOW := "\033[1;37;40m",		## Triangular basis: TriangularBasisOfRows/Columns( M, W )
+            color_BOE := "\033[1;37;40m",		## reduced (E)chelon form: RowReducedEchelonForm/Columns
             color_BOB := "\033[1;37;45m",		## (B)asis: BasisOfRow/ColumnModule
             color_BOC := "\033[1;37;45m",		## Basis: BasisOfRows/Columns(C)oeff
             color_BOD := "\033[1;37;42m",		## existence of a particular solution: (D)ecideZeroRows/Columns

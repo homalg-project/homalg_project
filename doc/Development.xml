@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  development.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Appendix Label="devel">
+<Heading>Development</Heading>
+
+<Section Label="WhyNotMaple">
+<Heading>Why was &homalg; discontinued in <Alt Only="Text">&Maple;</Alt><Alt Not="Text"><URL Text="Maple">http://www.maplesoft.com/</URL></Alt>?</Heading>
+
+The original implementation of &homalg; in &Maple; by Daniel Robertz
+and myself hit several walls. The speed of the Gröbner basis routines
+in &Maple; was the smallest issue. The rising complexity of data
+structures for high level algorithms (bicomplexes, functors, spectral
+sequences, ...) became the main problem. We very much felt the need
+for an object-oriented programming language, a language that allows
+defining complicated mathematical objects carrying properties and
+attributes and even containing other objects as subobjects. <P/>
+
+As we were pushed to look for an alternative to &Maple;, our wish list
+grew even further. Section <Ref Sect="WhyGAP4"/> is a summary of this
+wish list.
+
+</Section>
+
+<Section Label="WhyGAP4">
+<Heading>Why <Alt Only="Text">&GAP4;</Alt><Alt Not="Text"><URL Text="GAP4">http://www.gap-system.org/</URL></Alt>?</Heading>
+
+<Subsection Label="OpenGAP">
+<Heading>&GAP; is free and open software</Heading>
+
+In 1993 J. Neubüser <Alt Only="Text">addressed</Alt>
+<Alt Not="Text"><URL Text="addressed">http://www.gap-system.org/Doc/Talks/cgt.ps</URL></Alt>
+the necessity of free software in mathematics: <P/>
+
+<Quoted>You can read Sylow's Theorem and its proof in Huppert's book
+in the library without even buying the book and then you can use
+Sylow's Theorem for the rest of your life free of charge, but - and
+for understandable reasons of getting funds for the maintenance, the
+necessity of which I have pointed out [...] - for many computer
+algebra systems license fees have to be paid regularly for the total
+time of their use. In order to protect what you pay for, you do not
+get the source, but only an executable, i.e. a black box. You can
+press buttons and you get answers in the same way as you get the
+bright pictures from your television set but you cannot control how
+they were made in either case.<P/>
+With this situation two of the most basic rules of conduct in
+mathematics are violated. In mathematics information is passed on free
+of charge and everything is laid open for checking. Not applying these
+rules to computer algebra systems that are made for mathematical
+research [...] means moving in a most undesirable direction. Most
+important: Can we expect somebody to believe a result of a program
+that he is not allowed to see? [...] And even: If O'Nan and Scott
+would have to pay a license fee for using an implementation of their
+ideas about primitive groups, should not they in turn be entitled to
+charge a license fee for using their ideas in the
+implementation?</Quoted>
+
+<Par></Par>
+
+I had the pleasure of being one of his students. <P/>
+
+The detailed copyright for &GAP; can found on the &GAP; homepage under
+<Alt Only="Text">Start > Download > Copyright</Alt><Alt Only="HTML">
+<URL Text="Start > Download >
+Copyright">http://www.gap-system.org/Download/copyright.html#free</URL></Alt><Alt Only="LaTeX">
+<URL Text="Start -- Download --
+Copyright">http://www.gap-system.org/Download/copyright.html#free</URL></Alt>.
+
+</Subsection>
+
+<Subsection Label="ExpertGAP">
+<Heading>&GAP; has an area of expertise</Heading>
+
+Not only does &GAP; have the potential of natively supporting a wide
+range of mathematical structures, but finite groups and their
+representation theory are already an area of expertise. So there are
+at least some areas where one does not need to start from
+scratch. <P/>
+
+But one could argue that rings are more central for homological
+algebra than finite groups, and that &GAP4;, as for the time when the
+&homalg; project was shaping, does not seriously support important
+rings in a manner that enables homological computations. This drawback
+would favor, for
+example, <Alt Only="Text">&Singular;</Alt><Alt Not="Text">
+<URL Text="Singular">http://www.singular.uni-kl.de/</URL></Alt> (with
+its subsystem &Plural;) over &GAP4;. Point <Ref Sect="GAP-IO"/>
+indicates how this drawback was overcome in a way, that even gave the
+lead back to &GAP4;. <P/>
+
+One of my future plans for the &homalg; project is to address moduli
+problems in algebraic geometry (favorably via orbifold stacks), where
+discrete groups (and especially finite groups) play a central role. As
+of the time of writing these lines, discrete groups, finite groups,
+and orbifolds are already in the focus of part of the project: The
+package &SCO; by Simon Görtzen to compute the cohomology of orbifolds
+is part of the currently available &homalg; project. <P/>
+
+For the remaining points the choice of &GAP4; as the programming
+language for developing &homalg; was unavoidable.
+
+</Subsection>
+
+<Subsection Label="GAP-IO">
+<Heading>&GAP4; can communicate</Heading>
+
+With the excellent
+&IO; <Alt Not="Text"><URL Text="package">http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/io.html</URL></Alt>
+<Alt Only="Text">package</Alt> of Max Neunhöffer &GAP4; is able to
+communicate in an extremely efficient way with the outer world via
+bidirectional streams. This allows &homalg; to delegate things that
+cannot be done in &GAP; to an external system such as &Singular;,
+&Sage;, &Macaulay2;, &MAGMA;, or &Maple;.
+
+</Subsection>
+
+<Subsection Label="Objectify">
+<Heading>&GAP4; is a <E>mathematical</E> object-oriented programming language</Heading>
+
+The object-oriented programming philosophy of &GAP4; was developed by
+mathematicians who wanted to handle complex
+mathematical <Alt Only="HTML"><Ref Text="objects"
+Sect="Creating New Objects" BookName="Prg Tutorial"/></Alt>
+<Alt Not="HTML">objects</Alt>
+carrying <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
+BookName="Tutorial"/></Alt>
+<Alt Not="HTML"><E>properties</E></Alt>
+and <Alt Only="HTML"><Ref Text="attributes" Sect="attributes"
+BookName="Tutorial"/></Alt><Alt Not="HTML"><E>attributes</E></Alt>, as
+often encountered in algebra and geometry. &GAP4; was thus designed to
+address the needs of <E>mathematical</E> object-oriented programming
+more than any other language designed by computer scientists. This was
+primarily achieved by the advanced <Alt Only="HTML"><Ref Text="method
+selection" Sect="method selection" BookName="Prg Tutorial"/>
+</Alt> <Alt Not="HTML"><E>method selection</E></Alt> techniques that
+very much resemble the mathematical way of thinking. <P/>
+
+Unlike the common object-oriented programming languages, methods in
+&GAP4; are not bound to objects but
+to <Alt Only="HTML"><Ref Text="operations"
+Sect="Operations and Methods"
+BookName="Prg Tutorial"/></Alt><Alt Not="HTML">operations</Alt>.
+
+In particular one can also install methods that depend on two or more
+arguments. The index of a subgroup is an easy example of an operation
+illustrating this. While it would be sufficient to bind a method for
+computing the order of a group to the object representing the group,
+it is not clear what to do with the index, since its definition
+involves two objects: a group <M>G</M> and a subgroup <M>U</M>. Note
+that the index of <M>U</M> in a subgroup of <M>G</M>
+containing <M>U</M> might also be of interest. Things become even more
+complicated when the arguments of the operation are unrelated
+objects. Moreover, binding methods to operations makes it possible for
+the programming language to support the installation of one or more
+methods for the same operation, depending on already known properties
+or attributes of the involved objects. <P/>
+
+Moreover &GAP4; supports so-called
+<Alt Only="HTML"><Ref Text="immediate and true methods"
+Sect="Immediate and True Methods"
+BookName="Tutorial"/></Alt><Alt Not="HTML"><E>immediate and true
+methods</E></Alt>. This considerably simplifies teaching theorems to
+the computer. For example it takes one line of code to teach &GAP4;
+that a reflexive left module over a ring with left global dimension
+less or equal to two is projective. These logical implications are
+installed globally and &GAP4; immediately uses them as soon as the
+respective assumptions are fulfilled. This mechanism enables &GAP4; to
+draw arbitrary long lines of conclusions. The more one knows about the
+objects involved in the computation the more specialized efficient
+algorithms can be utilized, while other computations can be completely
+avoided. &homalg; is equipped with plenty of logical implications for
+rings, matrices, modules, morphisms, and complexes. <P/>
+
+When all these features become relevant to what you want to do, there
+is hardly an alternative to &GAP4;.
+
+</Subsection>
+
+<Subsection Label="BigGAP">
+<Heading>&GAP4; packages are easily extendible</Heading>
+
+Being able to install several methods for a single operation (&see;
+<Ref Label="Objectify"/>) has the additional advantage of making
+&GAP4; packages easily extendible. If you have an algorithm that, in a
+special case, performs better than existing algorithms you can install
+it as a method which gets triggered when the special case occurs. You
+don't need to break existing code to insert an additional <C>elif</C>
+section contributing to an increasing unreadability of the code. Even
+better, you don't even need to know <E>anything</E> about the code of
+other existing methods. In addition to that, you can add (maybe
+missing) properties and attributes (along with methods to compute
+them) to existing objects.
+
+</Subsection>
+
+</Section>
+
+<Section Label="WhyNotSage">
+<Heading>Why not <Alt Only="Text">&Sage;</Alt><Alt Not="Text"><URL Text="Sage">http://www.sagemath.org/</URL></Alt>?</Heading>
+
+Although the &python;-based &Sage; fulfills most of the above
+requirements, it was primarily the points expressed in
+<Ref Sect="Objectify"/> that finally favored &GAP4; over &Sage;: The
+object-orientedness of &python;, although very modern, does not cover
+the needs of the &homalg; package. At this place I would like to
+thank <Alt Only="Text">William Stein</Alt>
+<Alt Not="Text"><URL Text="William
+Stein">http://modular.math.washington.edu/</URL></Alt> for the helpful
+discussion about &Sage; during the early stage of developing &homalg;,
+and to Max Neunhöffer who explained me the advantages of the
+object-oriented programming in &GAP4;.
+
+</Section>
+
+<Section Label="Sage">
+<Heading>How does &homalg; compare to &Sage;?</Heading>
+
+In what follows &homalg; often refers to the whole &homalg;
+project. <P/>
+
+<Subsection Label="homalg-Sage-objectives">
+<Heading>They differ in objectives and scale</Heading>
+
+First of all, &Sage; is a huge project, that, among other things, is
+intended to replace commercial, general purpose computer algebra
+systems like &Maple; and &Mathematica;. So while &Sage; targets (a
+growing number of) different fields of computer algebra, &homalg; only
+focuses on homological, and hopefully in the near future also
+homotopical techniques (applicable to some of these different
+fields). The two projects simply follow different goals and are
+different in scale.
+
+</Subsection>
+
+<Subsection Label="homalg-Sage-language">
+<Heading>They differ in the programming language</Heading>
+
+&Sage; is based on &python; and the &C;-extension &cython; while
+&homalg; is based on &GAP4;. Quoting from an email response William
+Stein sent me on the 25. of February, 2008: <Q>Sage *is* Python + a
+library</Q>. Although I seriously considered developing &homalg; as
+part of &Sage;, for the reason mentioned in <Ref Sect="Objectify"/> I
+finally decided to use &GAP4; as the programming language.
+
+</Subsection>
+
+<Subsection Label="homalg-Sage-communicate">
+<Heading>They differ in the way they communicate with the outer world</Heading>
+
+Both &Sage; and &homalg; rely for many things on external computer
+algebra systems. But although one can simply invoke a &GAP; shell or a
+&Singular; shell from within &Sage;, &Sage; normally runs the external
+computer algebra systems in the background and tries to understand the
+internals of the objects residing in them. An object in the external
+computer algebra system is wrapped by an object in &Sage; and
+supporting this external object involves understanding its details in
+the external system. &homalg; follows a different strategy: The only
+external objects &homalg; needs (beside rings) are non-empty
+matrices. And being zero or not is basically the only thing &homalg;
+wants to know about a matrix after knowing its dimension. I myself was
+stunned by this insight, which culminated
+in <Alt Only="HTML"><Ref Text="the principle of least communication"
+Label="least-communication"/></Alt><Alt Not="HTML"><E>the principle of
+least communication</E> (&see;
+<Ref Label="least-communication"/>)</Alt>. <P/>
+
+In particular, &Sage; can make use of all of &homalg;, but for in
+order to make full use, &Sage; needs to understand the internals of
+the &homalg; objects. On the contrary, &homalg; can only make limited
+use of &Sage; (or of virtually any computer algebra system that
+supports rings in a sufficient way (&see;
+<Ref Sect="SufficientSupport"/>)), but without the need to delve into the
+inner life of the &Sage; objects. <P/>
+
+</Subsection>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Appendix>

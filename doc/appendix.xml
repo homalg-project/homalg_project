@@ -35,13 +35,6 @@ files.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>homalgExternalObject</F></Item>
-  <Item>pointers on external objects</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
   <Item><F>homalgTable</F></Item>
   <Item>dictionaries between &homalg;</Item>
 </Row>
@@ -65,7 +58,7 @@ files.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>Matrices</F></Item>
+  <Item><F>HomalgMatrix</F></Item>
   <Item>internal and external matrices</Item>
 </Row>
 
@@ -260,12 +253,7 @@ In the following CAS or CASystem mean computer algebra systems.
 
 <Row>
   <Item><F>Service</F></Item>
-  <Item>the three operations: basis,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>reduction, and syzygies;</Item>
+  <Item>the three operations: basis, reduction, and syzygies;</Item>
 </Row>
 
 <Row>
@@ -391,7 +379,12 @@ In the following CAS or CASystem mean computer algebra systems.
 
 <Row>
   <Item></Item>
-  <Item>Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom</Item>
+  <Item>Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>BaseChange (preliminary)</Item>
 </Row>
 
 <Row>
@@ -463,6 +456,63 @@ In the following CAS or CASystem mean computer algebra systems.
 <Row>
   <Item><F>LICPX</F></Item>
   <Item>logical implications for complexes</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+</Table>
+
+</Section>
+
+<Section Label="ResidueClassRingForHomalg_subpackage">
+
+<Heading>The subpackage &ResidueClassRingForHomalg;</Heading>
+
+<Table Align="l|l">
+<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
+
+<HorLine/>
+
+<Row>
+  <Item><F>ResidueClassRingForHomalg</F></Item>
+  <Item>some global variables</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>ResidueClassRing</F></Item>
+  <Item>residue class rings, their elements, and matrices,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>together with their constructors and operations</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>ResidueClassRingTools</F></Item>
+  <Item>the elementary matrix operations for matrices</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>over residue class rings</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>ResidueClassRingBasic</F></Item>
+  <Item>the three operations: basis, reduction, and syzygies</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>for matrices over residue class rings</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>

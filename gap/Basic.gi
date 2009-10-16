@@ -565,7 +565,7 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
         
         return CallFuncList( RP!.BestBasis, arg );
         
-    elif IsBound(RP!.TriangularBasisOfRows) then
+    elif IsBound(RP!.RowReducedEchelonForm) then
         
         nargs := Length( arg );
         
@@ -573,15 +573,15 @@ InstallGlobalFunction( BestBasis,		### defines: BestBasis
         n := NrColumns( M );
         
         if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not BestBasis( M, "", V )
-            B := TriangularBasisOfRows( M, arg[2] );
+            B := RowReducedEchelonForm( M, arg[2] );
         else
-            B := TriangularBasisOfRows( M );
+            B := RowReducedEchelonForm( M );
         fi;
         
         if nargs > 2 and IsHomalgMatrix( arg[3] ) then ## not BestBasis( M, U, "" )
-            B := TriangularBasisOfColumns( B, arg[3] );
+            B := ColumnReducedEchelonForm( B, arg[3] );
         else
-            B := TriangularBasisOfColumns( B );
+            B := ColumnReducedEchelonForm( B );
         fi;
         
         if m - NrRows( B ) = 0 and n - NrColumns( B ) = 0 then
@@ -815,8 +815,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     
     if not finished
        and ( IsBound( RP!.BestBasis )
-             or IsBound( RP!.TriangularBasisOfRows )
-             or IsBound( RP!.TriangularBasisOfColumns ) ) then
+             or IsBound( RP!.RowReducedEchelonForm )
+             or IsBound( RP!.ColumnReducedEchelonForm ) ) then
         
         if not ( compute_U or compute_UI or compute_V or compute_VI ) then
             barg := [ M ];

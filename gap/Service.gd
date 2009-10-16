@@ -18,16 +18,16 @@ DeclareGlobalFunction( "ColoredInfoForService" );
 
 # basic operations:
 
-DeclareOperation( "TriangularBasisOfRows",
+DeclareOperation( "RowReducedEchelonForm",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "TriangularBasisOfRows",
+DeclareOperation( "RowReducedEchelonForm",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "TriangularBasisOfColumns",
+DeclareOperation( "ColumnReducedEchelonForm",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "TriangularBasisOfColumns",
+DeclareOperation( "ColumnReducedEchelonForm",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfRowModule",

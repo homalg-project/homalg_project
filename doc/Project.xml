@@ -9,7 +9,7 @@
 -->
 
 <Appendix Label="homalg-Project">
-<Heading>The Idea behind splitting the Core Packages</Heading>
+<Heading>The Core Packages and the Idea behind their Splitting</Heading>
 
 I will try to explain the idea behind splitting the 5 <E>core packages</E>:
 

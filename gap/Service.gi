@@ -22,13 +22,16 @@ InstallGlobalFunction( ColoredInfoForService,
     
     l := arg[2];
     
-    if l{[1]} = "T" then
+    if l{[ 1 .. 6 ]} = "RowRed" then
         l := 4;
-        color := HOMALG.color_BOT;	## Basic Operation: Triangular
+        color := HOMALG.color_BOE;	## Basic Operation: reduced Echelon form
+    elif l{[ 1 .. 9 ]} = "ColumnRed" then
+        l := 4;
+        color := HOMALG.color_BOE;	## Basic Operation: reduced Echelon form
     elif l{[1]} = "B" then
         l := 3;
         color := HOMALG.color_BOB;	## Basic Operation: Basis
-    elif l{[1 .. 8]} = "ReducedB" then
+    elif l{[ 1 .. 8 ]} = "ReducedB" then
         l := 3;
         color := HOMALG.color_BOB;	## Basic Operation: reduced Basis
     elif l{[1]} = "D" then
@@ -37,10 +40,10 @@ InstallGlobalFunction( ColoredInfoForService,
     elif l{[1]} = "S" then
         l := 2;
         color := HOMALG.color_BOH;	## Basic Operation: solutions of Homogeneous system
-    elif l{[1 .. 9]} = "RelativeS" then
+    elif l{[ 1 .. 9 ]} = "RelativeS" then
         l := 2;
         color := HOMALG.color_BOH;	## Basic Operation: relative solutions of Homogeneous system
-    elif l{[1 .. 8]} = "ReducedS" then
+    elif l{[ 1 .. 8 ]} = "ReducedS" then
         l := 2;
         color := HOMALG.color_BOH;	## Basic Operation: reduced solutions of Homogeneous system
     fi;
@@ -98,7 +101,7 @@ end );
 ################################################################
 
 ##
-InstallMethod( TriangularBasisOfRows,
+InstallMethod( RowReducedEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -109,23 +112,23 @@ InstallMethod( TriangularBasisOfRows,
     
     RP := homalgTable( R );
     
-    ColoredInfoForService( "busy", "TriangularBasisOfRows", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "RowReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ) );
     
     t := homalgTotalRuntimes( );
     
-    if IsBound(RP!.TriangularBasisOfRows) then
+    if IsBound(RP!.RowReducedEchelonForm) then
         
-        B := RP!.TriangularBasisOfRows( M );
+        B := RP!.RowReducedEchelonForm( M );
         
-        ColoredInfoForService( t, "TriangularBasisOfRows", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "RowReducedEchelonForm", Length( NonZeroRows( B ) ) );
         
         return B;
         
-    elif IsBound(RP!.TriangularBasisOfColumns) then
+    elif IsBound(RP!.ColumnReducedEchelonForm) then
         
-        B := Involution( RP!.TriangularBasisOfColumns( Involution( M ) ) );
+        B := Involution( RP!.ColumnReducedEchelonForm( Involution( M ) ) );
         
-        ColoredInfoForService( t, "TriangularBasisOfRows", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "RowReducedEchelonForm", Length( NonZeroRows( B ) ) );
         
         return B;
         
@@ -136,7 +139,7 @@ InstallMethod( TriangularBasisOfRows,
 end );
 
 ##
-InstallMethod( TriangularBasisOfRows,
+InstallMethod( RowReducedEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -147,25 +150,25 @@ InstallMethod( TriangularBasisOfRows,
     
     RP := homalgTable( R );
     
-    ColoredInfoForService( "busy", "TriangularBasisOfRows (M,T)", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "RowReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ) );
     
     t := homalgTotalRuntimes( );
     
-    if IsBound(RP!.TriangularBasisOfRows) then
+    if IsBound(RP!.RowReducedEchelonForm) then
         
-        B := RP!.TriangularBasisOfRows( M, T );
+        B := RP!.RowReducedEchelonForm( M, T );
         
-        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "RowReducedEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
         
         return B;
         
-    elif IsBound(RP!.TriangularBasisOfColumns) then
+    elif IsBound(RP!.ColumnReducedEchelonForm) then
         
         TI := HomalgVoidMatrix( R );
         
-        B := Involution( RP!.TriangularBasisOfColumns( Involution( M ), TI ) );
+        B := Involution( RP!.ColumnReducedEchelonForm( Involution( M ), TI ) );
         
-        ColoredInfoForService( t, "TriangularBasisOfRows (M,T)", Length( NonZeroRows( B ) ) );
+        ColoredInfoForService( t, "RowReducedEchelonForm (M,T)", Length( NonZeroRows( B ) ) );
         
         SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
         
@@ -178,7 +181,7 @@ InstallMethod( TriangularBasisOfRows,
 end );
 
 ##
-InstallMethod( TriangularBasisOfColumns,
+InstallMethod( ColumnReducedEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -189,28 +192,28 @@ InstallMethod( TriangularBasisOfColumns,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.TriangularBasisOfColumns) then
+    if IsBound(RP!.ColumnReducedEchelonForm) then
         
         t := homalgTotalRuntimes( );
         
-        ColoredInfoForService( "busy", "TriangularBasisOfColumns", NrRows( M ), " x ", NrColumns( M ) );
+        ColoredInfoForService( "busy", "ColumnReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ) );
         
-        B := RP!.TriangularBasisOfColumns( M );
+        B := RP!.ColumnReducedEchelonForm( M );
         
-        ColoredInfoForService( t, "TriangularBasisOfColumns", Length( NonZeroColumns( B ) ) );
+        ColoredInfoForService( t, "ColumnReducedEchelonForm", Length( NonZeroColumns( B ) ) );
         
         return B;
         
     fi;
     
-    B := Involution( TriangularBasisOfRows( Involution( M ) ) );
+    B := Involution( RowReducedEchelonForm( Involution( M ) ) );
     
     return B;
     
 end );
 
 ##
-InstallMethod( TriangularBasisOfColumns,
+InstallMethod( ColumnReducedEchelonForm,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
@@ -221,15 +224,15 @@ InstallMethod( TriangularBasisOfColumns,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.TriangularBasisOfColumns) then
+    if IsBound(RP!.ColumnReducedEchelonForm) then
         
         t := homalgTotalRuntimes( );
         
-        ColoredInfoForService( "busy", "TriangularBasisOfColumns (M,T)", NrRows( M ), " x ", NrColumns( M ) );
+        ColoredInfoForService( "busy", "ColumnReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ) );
         
-        B := RP!.TriangularBasisOfColumns( M, T );
+        B := RP!.ColumnReducedEchelonForm( M, T );
         
-        ColoredInfoForService( t, "TriangularBasisOfColumns (M,T)", Length( NonZeroColumns( B ) ) );
+        ColoredInfoForService( t, "ColumnReducedEchelonForm (M,T)", Length( NonZeroColumns( B ) ) );
         
         return B;
         
@@ -237,7 +240,7 @@ InstallMethod( TriangularBasisOfColumns,
     
     TI := HomalgVoidMatrix( R );
     
-    B := Involution( TriangularBasisOfRows( Involution( M ), TI ) );
+    B := Involution( RowReducedEchelonForm( Involution( M ), TI ) );
     
     SetPreEval( T, Involution( TI ) ); ResetFilterObj( T, IsVoidMatrix );
     
@@ -247,7 +250,22 @@ end );
 
 #### Basis, DecideZero, Syzygies:
 
-##
+##  <#GAPDoc Label="BasisOfRowModule">
+##  <ManSection>
+##    <Oper Arg="M" Name="BasisOfRowModule" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing( </C><A>M</A><C> )</C>) and
+##      <M>S</M> be the row span of <A>M</A>, i.e. the <M>R</M>-submodule of the free module
+##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> spanned by the rows of <A>M</A>. A solution to the
+##      <Q>submodule membership problem</Q> is an algorithm which can decide if an element <M>m</M> in
+##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> is contained in <M>S</M> or not. And exactly like
+##      the Gaussian (resp. Hermite) normal form when <M>R</M> is a field (resp. principal ideal ring), the row span of
+##      the resulting matrix <M>B</M> coincides with the row span <M>S</M> of <A>M</A>, and computing <M>B</M> is normally
+##      the first step of such an algorithm. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -323,7 +341,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     #=====# begin of the core procedure #=====#
     
-    B := TriangularBasisOfRows( M );
+    B := RowReducedEchelonForm( M );
     
     nz := Length( NonZeroRows( B ) );
     
@@ -345,7 +363,22 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
 end );
 
-##
+##  <#GAPDoc Label="BasisOfColumnModule">
+##  <ManSection>
+##    <Oper Arg="M" Name="BasisOfColumnModule" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing( </C><A>M</A><C> )</C>) and
+##      <M>S</M> be the column span of <A>M</A>, i.e. the <M>R</M>-submodule of the free module
+##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> spanned by the columns of <A>M</A>. A solution to the
+##      <Q>submodule membership problem</Q> is an algorithm which can decide if an element <M>m</M> in
+##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> is contained in <M>S</M> or not. And exactly like
+##      the Gaussian (resp. Hermite) normal form when <M>R</M> is a field (resp. principal ideal ring), the column span of
+##      the resulting matrix <M>B</M> coincides with the column span <M>S</M> of <A>M</A>, and computing <M>B</M> is normally
+##      the first step of such an algorithm (&see; Appendix <Ref Chap="homalg-Idea"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfModule (low-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -421,7 +454,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     #=====# begin of the core procedure #=====#
     
-    B := TriangularBasisOfColumns( M );
+    B := ColumnReducedEchelonForm( M );
     
     nz := Length( NonZeroColumns( B ) );
     
@@ -443,7 +476,22 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
 end );
 
-##
+##  <#GAPDoc Label="DecideZeroRows">
+##  <ManSection>
+##    <Oper Arg="A,B" Name="DecideZeroRows" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <A>A</A> and <A>B</A> be matrices having the same number of columns and defined over the same ring <M>R</M>
+##      (<M>:=</M><C>HomalgRing( </C><A>A</A><C> )</C>) and <M>S</M> be the row span of <A>B</A>,
+##      i.e. the <M>R</M>-submodule of the free module <M>R^{(1 \times NrColumns( <A>B</A> ))}</M>
+##      spanned by the rows of <A>B</A>. The result is a matrix <M>C</M> having the same shape as <A>A</A>,
+##      for which the <M>i</M>-th row <M><A>C</A>^i</M> is equivalent to the <M>i</M>-th row <M><A>A</A>^i</M> of <A>A</A> modulo <M>S</M>,
+##      i.e. <M><A>C</A>^i-<A>A</A>^i</M> is an element of the row span <M>S</M> of <A>B</A>. Moreover, the row <M><A>C</A>^i</M> is zero,
+##      if and only if the row <M><A>A</A>^i</M> is an element of <M>S</M>. So <C>DecideZeroRows</C> decides which rows of <A>A</A>
+##      are zero modulo the rows of <A>B</A> (&see; Appendix <Ref Chap="homalg-Idea"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -506,7 +554,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     M := UnionOfRows( UnionOfColumns( id, A ), UnionOfColumns( zz, B ) );
     
-    M := TriangularBasisOfRows( M );
+    M := RowReducedEchelonForm( M );
     
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
@@ -518,7 +566,23 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
 end );
 
-##
+##  <#GAPDoc Label="DecideZeroColumns">
+##  <ManSection>
+##    <Oper Arg="A,B" Name="DecideZeroColumns" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <A>A</A> and <A>B</A> be matrices having the same number of rows and defined over the same ring <M>R</M>
+##      (<M>:=</M><C>HomalgRing( </C><A>A</A><C> )</C>) and <M>S</M> be the column span of <A>B</A>,
+##      i.e. the <M>R</M>-submodule of the free module <M>R^{(NrRows( <A>B</A> ) \times 1)}</M>
+##      spanned by the columns of <A>B</A>. The result is a matrix <M>C</M> having the same shape as <A>A</A>,
+##      for which the <M>i</M>-th column <M><A>C</A>_i</M> is equivalent to the <M>i</M>-th column <M><A>A</A>_i</M> of <A>A</A>
+##      modulo <M>S</M>, i.e. <M><A>C</A>_i-<A>A</A>_i</M> is an element of the column span <M>S</M> of <A>B</A>. Moreover,
+##      the column <M><A>C</A>_i</M> is zero, if and only if the column <M><A>A</A>_i</M> is an element of <M>S</M>.
+##      So <C>DecideZeroColumns</C> decides which columns of <A>A</A> are zero modulo the columns of <A>B</A>
+##      (&see; Appendix <Ref Chap="homalg-Idea"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -581,7 +645,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     M := UnionOfColumns( UnionOfRows( id, A ), UnionOfRows( zz, B ) );
     
-    M := TriangularBasisOfColumns( M );
+    M := ColumnReducedEchelonForm( M );
     
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
@@ -669,7 +733,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     C := HomalgVoidMatrix( R );
     
-    B := TriangularBasisOfRows( M, C );
+    B := RowReducedEchelonForm( M, C );
     
     nz := Length( NonZeroRows( B ) );
     
@@ -769,7 +833,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     C := HomalgVoidMatrix( R );
     
-    B := TriangularBasisOfColumns( M, C );
+    B := ColumnReducedEchelonForm( M, C );
     
     nz := Length( NonZeroColumns( B ) );
     
@@ -1481,7 +1545,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     TT := HomalgVoidMatrix( R );
     
-    B := TriangularBasisOfRows( M, TT );
+    B := RowReducedEchelonForm( M, TT );
     
     nz := Length( NonZeroRows( B ) );
     
@@ -1599,7 +1663,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     TT := HomalgVoidMatrix( R );
     
-    B := TriangularBasisOfColumns( M, TT );
+    B := ColumnReducedEchelonForm( M, TT );
     
     nz := Length( NonZeroColumns( B ) );
     
@@ -1694,7 +1758,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     TT := HomalgVoidMatrix( R );
     
-    M := TriangularBasisOfRows( M, TT );
+    M := RowReducedEchelonForm( M, TT );
     
     M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
@@ -1785,7 +1849,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     TT := HomalgVoidMatrix( R );
     
-    M := TriangularBasisOfColumns( M, TT );
+    M := ColumnReducedEchelonForm( M, TT );
     
     M := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     

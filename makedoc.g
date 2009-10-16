@@ -47,6 +47,7 @@ list := [
          "../gap/BasicFunctors.gi",
          "../gap/Modules.gi",
          "../gap/Tools.gi",
+         "../gap/Service.gi",
          "../gap/ResidueClassRingForHomalg.gd",
          "../gap/ResidueClassRingForHomalg.gi",
          "../gap/ResidueClassRing.gd",

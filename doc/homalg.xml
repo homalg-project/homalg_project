@@ -80,6 +80,7 @@
 <#Include SYSTEM "examples.xml">
 </Body>
 
+<#Include SYSTEM "Development.xml">
 <#Include SYSTEM "Idea.xml">
 <#Include SYSTEM "Basic.xml">
 <#Include SYSTEM "Tools.xml">

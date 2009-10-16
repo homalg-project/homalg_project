@@ -107,6 +107,11 @@
 <#Include Label="GetRowIndependentUnitPositions">
 <#Include Label="GetUnitPosition">
 
+<#Include Label="BasisOfRowModule">
+<#Include Label="BasisOfColumnModule">
+<#Include Label="DecideZeroRows">
+<#Include Label="DecideZeroColumns">
+
 </Section>
 
 <!-- ############################################################ -->
