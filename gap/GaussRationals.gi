@@ -32,7 +32,7 @@ InstallMethod( CreateHomalgTable,
     RP_specific := rec( 
                ## Must be defined if other functions are not defined
                
-               TriangularBasisOfRows := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
+               RowReducedEchelonForm := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
                  function( arg )
                    local M, R, nargs, result, N, H;
                    

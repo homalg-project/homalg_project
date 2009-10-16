@@ -68,7 +68,7 @@ method, <C>CreateHomalgTable</C>, using method selection to create the
 correct table. Depending on the properties of the ring, the basic
 functions are loaded and some more "specific" functions can be
 defined, in this case for example the function
-<Ref Func="TriangularBasisOfRows"/>, both in a one- and a two-argument
+<Ref Func="RowReducedEchelonForm"/>, both in a one- and a two-argument
 version. The tools should be universal enough to be loaded for every
 possible ring. If it is neccessary to overwrite a tool, this is the
 place to do it. An example for this could be <Ref Func="Involution"/>,

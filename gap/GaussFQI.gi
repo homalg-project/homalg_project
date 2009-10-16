@@ -47,9 +47,9 @@ InstallMethod( CreateHomalgTable,
     RP_specific := rec( 
                ## Must be defined if other functions are not defined
                
-##  <#GAPDoc Label="TriangularBasisOfRows">
+##  <#GAPDoc Label="RowReducedEchelonForm">
 ##  <ManSection>
-##  <Func Arg="M, [U]" Name="TriangularBasisOfRows"/>
+##  <Func Arg="M, [U]" Name="RowReducedEchelonForm"/>
 ##  <Returns>a &homalg; matrix <A>N</A></Returns>
 ##  <Description>
 ##  If one argument is given, this returns the triangular basis
@@ -62,7 +62,7 @@ InstallMethod( CreateHomalgTable,
 ##  </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-               TriangularBasisOfRows := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
+               RowReducedEchelonForm := #compute the reduced row echelon form N of M and, if nargs=2, transformation matrix U
                  function( arg )
                    local M, R, nargs, result, N, H;
                    

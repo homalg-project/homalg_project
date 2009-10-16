@@ -52,7 +52,7 @@ define. On the other hand, <Ref Func="ImportMatrix"/> and
 <#Include Label="SyzygiesGeneratorsOfRows">
 <#Include Label="RelativeSyzygiesGeneratorsOfRows">
 <!-- GaussFQI.gi -->
-<#Include Label="TriangularBasisOfRows">
+<#Include Label="RowReducedEchelonForm">
 <#Include Label="CreateHomalgTable">
 </Section>
 
