@@ -1375,6 +1375,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         
     end;
     
+    ## there exists a bug in Plural (3-0-4,3-1-0) that occurs with nres(M,2)[2];
+    Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+    Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
+    
     ## there seems to exists a bug in Plural that occurs with mres(M,1)[1];
     Unbind( RP!.ReducedBasisOfRowModule );
     Unbind( RP!.ReducedBasisOfColumnModule );
