@@ -25,6 +25,7 @@ InstallValue( LIMAT,
             [ "IsZero",
               "IsIdentityMatrix",
               "IsPermutationMatrix",
+              "IsSpecialSubidentityMatrix",
               "IsSubidentityMatrix",
               "IsLeftRegularMatrix",
               "IsRightRegularMatrix",
@@ -67,7 +68,7 @@ InstallValue( LogicalImplicationsForHomalgMatrices,
             "implies", IsZero ],
           
           [ IsEmptyMatrix,
-            "implies", IsSubidentityMatrix ],
+            "implies", IsSpecialSubidentityMatrix ],
           
           ## follows from the rest, but this gives a direct way
           [ IsZero,
@@ -107,6 +108,9 @@ InstallValue( LogicalImplicationsForHomalgMatrices,
             "implies", IsInvertibleMatrix ],
           
           [ IsPermutationMatrix,
+            "implies", IsSubidentityMatrix ],
+          
+          [ IsSpecialSubidentityMatrix,
             "implies", IsSubidentityMatrix ],
           
           ## a split injective morphism (of free modules) is injective
@@ -806,6 +810,47 @@ InstallMethod( IsLeftRegularMatrix,
   function( M )
     
     return NrRows( SyzygiesGeneratorsOfRows( M ) ) = 0;
+    
+end );
+
+##
+InstallMethod( IsSpecialSubidentityMatrix,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local r, c, nz, l;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    if r = 0 or c = 0 then
+        return true;
+    elif r = c then
+        return IsIdentityMatrix( M );
+    elif r < c then
+        nz := NonZeroColumns( M );
+        l := Length( nz );
+        if not ( l = 0  or l <> r or nz <> [ nz[1] .. nz[l] ] ) then
+            l := IsIdentityMatrix( CertainColumns( M, nz ) );
+            if l then
+                SetZeroRows( M, [ ] );
+                return true;
+            fi;
+        fi;
+    else
+        nz := NonZeroRows( M );
+        l := Length( nz );
+        if not ( l = 0  or l <> r or nz <> [ nz[1] .. nz[l] ] ) then
+            l := IsIdentityMatrix( CertainRows( M, nz ) );
+            if l then
+                SetZeroColumns( M, [ ] );
+                return true;
+            fi;
+        fi;
+    fi;
+    
+    return false;
     
 end );
 
@@ -2378,6 +2423,43 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
+        "LIMAT: for homalg matrices (IsSpecialSubidentityMatrix)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsSpecialSubidentityMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    local R, nz, l, r, c;
+    
+    R := HomalgRing( A );
+    
+    if HasRingRelations( R ) then
+        TryNextMethod( );	## FIXME: this can be improved
+    fi;
+    
+    nz := NonZeroColumns( B );
+    
+    l := Length( nz );
+    
+    if l = 0 then	## just to be on the safe side
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, IsSpecialSubidentityMatrix, T )", "\033[0m" );
+    
+    r := NrRows( A );
+    c := NrColumns( A );
+    
+    ## M = A + T * B
+    SetPreEval( T, -CertainColumns( A, nz ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return UnionOfColumns(
+                   UnionOfColumns( CertainColumns( A, [ 1 .. nz[1] - 1 ] ),
+                           HomalgZeroMatrix( r, l, R ) ),
+                   CertainColumns( A, [ nz[l] + 1 .. c ] ) );
+    
+end );
+
+##
+InstallMethod( DecideZeroRowsEffectively,
         "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsVoidMatrix ],
         
@@ -2479,6 +2561,43 @@ InstallMethod( DecideZeroColumnsEffectively,
     SetPreEval( T, ItsRightInverse( B ) * -A ); ResetFilterObj( T, IsVoidMatrix );
     
     return 0 * A;
+    
+end );
+
+##
+InstallMethod( DecideZeroColumnsEffectively,
+        "LIMAT: for homalg matrices (IsSpecialSubidentityMatrix)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsSpecialSubidentityMatrix, IsVoidMatrix ],
+        
+  function( A, B, T )
+    local R, nz, l, c, r;
+    
+    R := HomalgRing( A );
+    
+    if HasRingRelations( R ) then
+        TryNextMethod( );	## FIXME: this can be improved
+    fi;
+    
+    nz := NonZeroRows( B );
+    
+    l := Length( nz );
+    
+    if l = 0 then	## just to be on the safe side
+        TryNextMethod( );
+    fi;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, IsSpecialSubidentityMatrix, T )", "\033[0m" );
+    
+    c := NrColumns( A );
+    r := NrRows( A );
+    
+    ## M = A + B * T
+    SetPreEval( T, -CertainRows( A, nz ) ); ResetFilterObj( T, IsVoidMatrix );
+    
+    return UnionOfRows(
+                   UnionOfRows( CertainRows( A, [ 1 .. nz[1] - 1 ] ),
+                           HomalgZeroMatrix( l, c, R ) ),
+                   CertainRows( A, [ nz[l] + 1 .. r ] ) );
     
 end );
 

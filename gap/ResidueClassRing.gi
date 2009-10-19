@@ -547,7 +547,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         fi;
     fi;
     
-    SetRingRelations( S, rel );
+    SetRingRelations( S, BasisOfModule( rel ) );
     
     ## residue class rings of the integers
     if HasIsResidueClassRingOfTheIntegers( R ) and

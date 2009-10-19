@@ -39,6 +39,7 @@
 <#Include Label="IsZero:matrix">
 <#Include Label="IsIdentityMatrix">
 <#Include Label="IsPermutationMatrix">
+<#Include Label="IsSpecialSubidentityMatrix">
 <#Include Label="IsSubidentityMatrix">
 <#Include Label="IsLeftRegularMatrix">
 <#Include Label="IsRightRegularMatrix">

@@ -20,7 +20,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
-    local B, N, gen, S;
+    local B, N, gen, S, SF;
     
     # basis of the set of relations of M:
     B := BasisOfModule( M );
@@ -44,12 +44,15 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     # compute the syzygies of N modulo B, i.e. the relations among N modulo B:
     S := SyzygiesGenerators( N, B );	## using ReducedSyzygiesGenerators here causes too many operations (cf. the ex. Triangle.g)
     
-    S := Presentation( N, S );
+    # the subfactor module
+    SF := Presentation( N, S );
+    
+    SetParent( S, SF );
     
     # keep track of the original generators:
     gen := N * GeneratorsOfModule( M );
     
-    return AddANewPresentation( S, gen );
+    return AddANewPresentation( SF, gen );
     
 end );
 

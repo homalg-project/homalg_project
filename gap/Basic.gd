@@ -94,6 +94,12 @@ DeclareOperation( "LeftDivide",
 DeclareOperation( "LeftDivide",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "GenerateSameRowModule",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "GenerateSameColumnModule",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 # global functions:
 
 DeclareGlobalFunction( "BestBasis" );

@@ -501,6 +501,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     R := HomalgRing( B );
     
+    R!.asserts.DecideZeroRowsWRTNonBasis( B );
+    
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
@@ -591,6 +593,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     local R, RP, t, l, m, n, id, zz, M, C;
     
     R := HomalgRing( B );
+    
+    R!.asserts.DecideZeroColumnsWRTNonBasis( B );
     
     RP := homalgTable( R );
     
@@ -1105,6 +1109,9 @@ InstallMethod( ReducedBasisOfRowModule,
         
         IncreaseRingStatistics( R, "ReducedBasisOfRowModule" );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        
         return B;
         
     elif IsBound(RP!.ReducedBasisOfColumnModule) then
@@ -1134,6 +1141,9 @@ InstallMethod( ReducedBasisOfRowModule,
         DecreaseRingStatistics( R, "ReducedBasisOfRowModule" );
         
         IncreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
+        
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
         
         return B;
         
@@ -1209,6 +1219,9 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         IncreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        
         return B;
         
     elif IsBound(RP!.ReducedBasisOfRowModule) then
@@ -1238,6 +1251,9 @@ InstallMethod( ReducedBasisOfColumnModule,
         DecreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
         
         IncreaseRingStatistics( R, "ReducedBasisOfRowModule" );
+        
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
         
         return B;
         
@@ -1315,6 +1331,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
+        
         return C;
         
     elif IsBound(RP!.ReducedSyzygiesGeneratorsOfColumns) then
@@ -1340,6 +1359,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         DecreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
+        
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
         return C;
         
@@ -1403,6 +1425,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
+        
         return C;
         
     elif IsBound(RP!.ReducedSyzygiesGeneratorsOfRows) then
@@ -1428,6 +1453,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         DecreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
+        
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
         return C;
         
@@ -1555,6 +1583,10 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         B := CertainRows( B, [ 1 .. nz ] );
     fi;
     
+    SetIsBasisOfRowsMatrix( B, true );
+    
+    M!.BasisOfRowModule := B;
+    
     ## B = T * M;
     SetPreEval( T, CertainRows( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
@@ -1673,6 +1705,10 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         B := CertainColumns( B, [ 1 .. nz ] );
     fi;
     
+    SetIsBasisOfColumnsMatrix( B, true );
+    
+    M!.BasisOfColumnModule := B;
+    
     SetPreEval( T, CertainColumns( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
     
     ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
@@ -1699,6 +1735,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     R := HomalgRing( B );
     
+    R!.asserts.DecideZeroRowsWRTNonBasis( B );
+    
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
@@ -1713,8 +1751,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
-        ## check assertion
+        ## check assertions
         Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
+        Assert( 4, R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
         return M;
         
@@ -1732,8 +1771,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
-        ## check assertion
+        ## check assertions
         Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
+        Assert( 4, R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
         return M;
         
@@ -1770,8 +1810,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
     
-    ## check assertion
+    ## check assertions
     Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
+    Assert( 4, R!.asserts.DecideZeroRows_Effectively( M, A, B ) );	# M = DecideZeroRows( A, B )
     
     return M;
     
@@ -1790,6 +1831,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     R := HomalgRing( B );
     
+    R!.asserts.DecideZeroColumnsWRTNonBasis( B );
+    
     RP := homalgTable( R );
     
     t := homalgTotalRuntimes( );
@@ -1804,8 +1847,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
-        ## check assertion
+        ## check assertions
         Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
+        Assert( 4, R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
         
         return M;
         
@@ -1823,8 +1867,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
-        ## check assertion
+        ## check assertions
         Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
+        Assert( 4, R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
         
         return M;
         
@@ -1861,8 +1906,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
     
-    ## check assertion
+    ## check assertions
     Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
+    Assert( 4, R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
     
     return M;
     

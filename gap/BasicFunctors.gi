@@ -1533,7 +1533,8 @@ InstallFunctor( functor_DefectOfExactness );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
-##    -1:	<A non-zero cyclic right module on a cyclic generator satisfying
+##    
+##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 
 ##  1 relation>
 ##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
@@ -1997,7 +1998,7 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> torNN := Source( psi );
-##  <A cyclic left module presented by 1 relation for a cyclic generator>
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
 ##  gap> IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work
 ##  true
 ##  gap> torMN := Range( psi );

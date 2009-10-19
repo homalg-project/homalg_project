@@ -572,11 +572,52 @@ InstallGlobalFunction( CreateHomalgRing,
     asserts := rec(
                    BasisOfRowsCoeff := function( B, T, M ) return B = T * M; end,
                    BasisOfColumnsCoeff := function( B, M, T ) return B = M * T; end,
+                   DecideZeroRows_Effectively := function( M, A, B ) return M = DecideZeroRows( A, B ); end,
+                   DecideZeroColumns_Effectively := function( M, A, B ) return M = DecideZeroColumns( A, B ); end,
                    DecideZeroRowsEffectively := function( M, A, T, B ) return M = A + T * B; end,
                    DecideZeroColumnsEffectively := function( M, A, B, T ) return M = A + B * T; end,
+                   DecideZeroRowsWRTNonBasis :=
+                     function( B )
+                       local R;
+                       R := HomalgRing( B );
+                       if not ( HasIsBasisOfRowsMatrix( B ) and IsBasisOfRowsMatrix( B ) ) and
+                          IsBound( R!.DecideZeroWRTNonBasis ) then
+                           if R!.DecideZeroWRTNonBasis = "warn" then
+                               Info( InfoWarning, 1, "about to reduce with respect to a matrix with IsBasisOfRowsMatrix not set to true" );
+                           elif R!.DecideZeroWRTNonBasis = "error" then
+                               Error( "about to reduce with respect to a matrix with IsBasisOfRowsMatrix not set to true\n" );
+                           fi;
+                       fi;
+                     end,
+                   DecideZeroColumnsWRTNonBasis :=
+                     function( B )
+                       local R;
+                       R := HomalgRing( B );
+                       if not ( HasIsBasisOfColumnsMatrix( B ) and IsBasisOfColumnsMatrix( B ) ) and
+                          IsBound( R!.DecideZeroWRTNonBasis ) then
+                           if R!.DecideZeroWRTNonBasis = "warn" then
+                               Info( InfoWarning, 1, "about to reduce with respect to a matrix with IsBasisOfColumnsMatrix not set to true" );
+                           elif R!.DecideZeroWRTNonBasis = "error" then
+                               Error( "about to reduce with respect to a matrix with IsBasisOfColumnsMatrix not set to true\n" );
+                           fi;
+                       fi;
+                     end,
+                   ReducedBasisOfRowModule :=
+                     function( M, B ) return GenerateSameRowModule( B, BasisOfRowModule( M ) ); end,
+                   ReducedBasisOfColumnModule :=
+                     function( M, B ) return GenerateSameColumnModule( B, BasisOfColumnModule( M ) ); end,
+                   ReducedSyzygiesGeneratorsOfRows :=
+                     function( M, S ) return GenerateSameRowModule( S, SyzygiesGeneratorsOfRows( M ) ); end,
+                   ReducedSyzygiesGeneratorsOfColumns :=
+                     function( M, S ) return GenerateSameColumnModule( S, SyzygiesGeneratorsOfColumns( M ) ); end,
                   );
     
-    homalg_ring := rec( ring := r, statistics := statistics, asserts := asserts );
+    homalg_ring := rec(
+                       ring := r,
+                       statistics := statistics,
+                       asserts := asserts,
+                       DecideZeroWRTNonBasis := "warn/error"
+                       );
     
     if nargs > 1 and IshomalgTable( arg[nargs] ) then
         table := arg[nargs];

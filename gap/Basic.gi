@@ -278,6 +278,11 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     CA := HomalgVoidMatrix( R );
     IA := BasisOfRows( A, CA );
     
+    ## knowing this will avoid computations
+    IsIdentityMatrix( IA );
+    
+    ## IsSpecialSubidentityMatrix( IA );	## does not increase performance
+    
     ## NF = B + CB * IA
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroRowsEffectively( B, IA, CB );
@@ -320,6 +325,11 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     ## A * CA = IA
     CA := HomalgVoidMatrix( R );
     IA := BasisOfColumns( A, CA );
+    
+    ## knowing this will avoid computations
+    IsIdentityMatrix( IA );
+    
+    ## IsSpecialSubidentityMatrix( IA );	## does not increase performance
     
     ## NF = B + IA * CB
     CB := HomalgVoidMatrix( R );
@@ -375,6 +385,11 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     
     ## also reduce B modulo L
     ZB := DecideZero( B, BL );
+    
+    ## knowing this will avoid computations
+    IsIdentityMatrix( IAL );
+    
+    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
     
     ## NF = ZB + CB * IAL
     CB := HomalgVoidMatrix( R );
@@ -440,6 +455,11 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     ## also reduce B modulo L
     ZB := DecideZero( B, BL );
     
+    ## knowing this will avoid computations
+    IsIdentityMatrix( IAL );
+    
+    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
+    
     ## NF = ZB + IAL * CB
     CB := HomalgVoidMatrix( R );
     NF := DecideZeroColumnsEffectively( ZB, IAL, CB );
@@ -469,6 +489,28 @@ InstallMethod( LeftDivide,
   function( A, B, L )
     
     return LeftDivide( A, B, HomalgRelationsForRightModule( L ) );
+    
+end );
+
+##
+InstallMethod( GenerateSameRowModule,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, N )
+    
+    return not ( IsBool( RightDivide( N, M ) ) or IsBool( RightDivide( M, N ) ) );
+    
+end );
+
+##
+InstallMethod( GenerateSameColumnModule,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, N )
+    
+    return not ( IsBool( LeftDivide( M, N ) ) or IsBool( LeftDivide( N, M ) ) );
     
 end );
 

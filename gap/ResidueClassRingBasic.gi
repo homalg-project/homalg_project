@@ -138,6 +138,8 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    Brel := UnionOfRows( B );
                    
+                   Brel := BasisOfRowModule( Brel );
+                   
                    return HomalgResidueClassMatrix(
                                   DecideZeroRows( Eval( A ), Brel ), HomalgRing( A ) );
                    
@@ -158,6 +160,8 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    local Brel;
                    
                    Brel := UnionOfColumns( B );
+                   
+                   Brel := BasisOfColumnModule( Brel );
                    
                    return HomalgResidueClassMatrix(
                                   DecideZeroColumns( Eval( A ), Brel ), HomalgRing( A ) );

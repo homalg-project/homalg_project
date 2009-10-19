@@ -156,6 +156,19 @@ DeclareProperty( "IsIdentityMatrix",
 DeclareProperty( "IsPermutationMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsSpecialSubidentityMatrix">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsSpecialSubidentityMatrix"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsSpecialSubidentityMatrix",
+        IsHomalgMatrix );
+
 ##  <#GAPDoc Label="IsSubidentityMatrix">
 ##  <ManSection>
 ##    <Prop Arg="A" Name="IsSubidentityMatrix"/>

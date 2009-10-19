@@ -93,7 +93,7 @@ InstallImmediateMethod( IsInjectivePresentation,
         IsHomalgRelationsOfRightModule and HasEvaluatedMatrixOfRelations, 0,
         
   function( rel )
-    local mat, M, rk;
+    local mat, M, r, rk;
     
     mat := MatrixOfRelations( rel );
     
@@ -101,7 +101,11 @@ InstallImmediateMethod( IsInjectivePresentation,
         
         if HasParent( rel ) then
             M := Parent( rel );
-            rk := NrGenerators( rel ) - NrRelations( rel );
+            r := NrRelations( rel );
+            if r = 0 then
+                SetIsFree( M, true );
+            fi;
+            rk := NrGenerators( rel ) - r;
             if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
                 Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
             else
@@ -121,7 +125,7 @@ InstallImmediateMethod( IsInjectivePresentation,
         IsHomalgRelationsOfLeftModule and HasEvaluatedMatrixOfRelations, 0,
         
   function( rel )
-    local mat, M, rk;
+    local mat, M, r, rk;
     
     mat := MatrixOfRelations( rel );
     
@@ -129,7 +133,11 @@ InstallImmediateMethod( IsInjectivePresentation,
         
         if HasParent( rel ) then
             M := Parent( rel );
-            rk := NrGenerators( rel ) - NrRelations( rel );
+            r := NrRelations( rel );
+            if r = 0 then
+                SetIsFree( M, true );
+            fi;
+            rk := NrGenerators( rel ) - r;
             if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
                 Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
             else
@@ -700,11 +708,14 @@ InstallMethod( DecideZero,
         [ IsHomalgMatrix, IsHomalgRelations ],
         
   function( mat, rel )
+    local rel_mat;
+    
+    rel_mat := MatrixOfRelations( BasisOfModule( rel ) );
     
     if IsHomalgRelationsOfLeftModule( rel ) then
-        return DecideZeroRows( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+        return DecideZeroRows( mat, rel_mat );
     else
-        return DecideZeroColumns( mat, MatrixOfRelations( BasisOfModule( rel ) ) );
+        return DecideZeroColumns( mat, rel_mat );
     fi;
     
 end );

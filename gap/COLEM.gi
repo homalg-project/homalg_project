@@ -2326,13 +2326,16 @@ InstallMethod( BasisOfRowModule,
         [ IsHomalgMatrix and HasEvalDiagMat ],
         
   function( M )
-    local e;
+    local D;
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: BasisOfRowModule( DiagMat )", "\033[0m" );
     
-    e := EvalDiagMat( M );
+    D := DiagMat( List( EvalDiagMat( M ), BasisOfRowModule ) );
     
-    return DiagMat( List( e, BasisOfRowModule ) );
+    ## CAUTION: might cause problems
+    SetIsBasisOfRowsMatrix( D, true );
+    
+    return D;
     
 end );
 
@@ -2346,13 +2349,16 @@ InstallMethod( BasisOfColumnModule,
         [ IsHomalgMatrix and HasEvalDiagMat ],
         
   function( M )
-    local e;
+    local D;
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: BasisOfColumnModule( DiagMat )", "\033[0m" );
     
-    e := EvalDiagMat( M );
+    D := DiagMat( List( EvalDiagMat( M ), BasisOfColumnModule ) );
     
-    return DiagMat( List( e, BasisOfColumnModule ) );
+    ## CAUTION: might cause problems
+    SetIsBasisOfColumnsMatrix( D, true );
+    
+    return D;
     
 end );
 
