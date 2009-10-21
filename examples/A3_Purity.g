@@ -32,41 +32,42 @@
 ##  gap> II_E := SpectralSequence( filt );
 ##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x
-##  [ 0 .. 3 ]>
+##  [ 0 .. 4 ]>
 ##  gap> Display( II_E );
 ##  The associated transposed spectral sequence:
 ##  
 ##  a homological spectral sequence at bidegrees
-##  [ [ 0 .. 3 ], [ -3 .. 0 ] ]
+##  [ [ 0 .. 4 ], [ -3 .. 0 ] ]
 ##  ---------
 ##  Level 0:
 ##  
-##   * * * *
-##   . * * *
-##   . . * *
-##   . . . *
+##   * * * * *
+##   . * * * *
+##   . . * * *
+##   . . . * *
 ##  ---------
 ##  Level 1:
 ##  
-##   * * * *
-##   . . . .
-##   . . . .
-##   . . . .
+##   * * * * *
+##   . . . . .
+##   . . . . .
+##   . . . . .
 ##  ---------
 ##  Level 2:
 ##  
-##   s . . .
-##   . . . .
-##   . . . .
-##   . . . .
+##   s . . . .
+##   . . . . .
+##   . . . . .
+##   . . . . .
 ##  
 ##  Now the spectral sequence of the bicomplex:
 ##  
 ##  a homological spectral sequence at bidegrees
-##  [ [ -3 .. 0 ], [ 0 .. 3 ] ]
+##  [ [ -3 .. 0 ], [ 0 .. 4 ] ]
 ##  ---------
 ##  Level 0:
 ##  
+##   * * * *
 ##   * * * *
 ##   . * * *
 ##   . . * *
@@ -74,6 +75,7 @@
 ##  ---------
 ##  Level 1:
 ##  
+##   . . * *
 ##   * * * *
 ##   . * * *
 ##   . . * *
@@ -81,6 +83,7 @@
 ##  ---------
 ##  Level 2:
 ##  
+##   . . . .
 ##   s . . .
 ##   . s . .
 ##   . . s .
