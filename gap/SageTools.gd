@@ -14,7 +14,5 @@
 #
 ####################################
 
-DeclareGlobalFunction( "InitializeSageTools" );
-
 DeclareGlobalVariable( "CommonHomalgTableForSageTools" );
 

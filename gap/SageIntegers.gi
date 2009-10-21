@@ -10,6 +10,27 @@
 
 ####################################
 #
+# global variables:
+#
+####################################
+
+##
+SageMacros.ElementaryDivisors := "\n\
+def ElementaryDivisors(M):\n\
+  return M.transpose().elementary_divisors()\n\n";
+
+SageMacros.RowReducedEchelonForm_NU := "\n\
+def RowReducedEchelonForm_NU(M):\n\
+  N, U = M.hermite_form(transformation=True)\n\
+  return N, U\n\n";
+
+SageMacros.RowReducedEchelonForm := "\n\
+def RowReducedEchelonForm(M):\n\
+  N = M.hermite_form()\n\
+  return N\n\n";
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################
@@ -20,30 +41,11 @@ InstallMethod( CreateHomalgTable,
           and IsPrincipalIdealRing ],
         
   function( ext_ring_obj )
-    local RP, RP_BestBasis, command, RP_specific, component;
+    local RP, RP_BestBasis, RP_specific, component;
     
-    InitializeSageTools( ext_ring_obj );
     RP := ShallowCopy( CommonHomalgTableForSageTools );
     
-    InitializeSageBestBasis( ext_ring_obj );
     RP_BestBasis := ShallowCopy( CommonHomalgTableForSageBestBasis );
-    
-    command := Concatenation(
-            
-            "def ElementaryDivisors(M):\n",
-            "  return M.transpose().elementary_divisors()\n\n",
-            
-            "def RowReducedEchelonForm_NU(M):\n",
-            "  N, U = M.hermite_form(transformation=True)\n",
-            "  return N, U\n\n",
-            
-            "def RowReducedEchelonForm_N_only(M):\n",
-            "  N = M.hermite_form()\n",
-            "  return N\n\n"
-            
-            );
-            
-    homalgSendBlocking( [ command ], "need_command", ext_ring_obj, HOMALG_IO.Pictograms.define ); ## the last procedures to initialize
     
     RP_specific :=
           rec(
@@ -93,15 +95,15 @@ InstallMethod( CreateHomalgTable,
                        homalgSendBlocking( [ N, U, " = RowReducedEchelonForm_NU(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, " = RowReducedEchelonForm_N_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
-                   fi; 
-                                      
+                       homalgSendBlocking( [ N, " = RowReducedEchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
+                   fi;
+                   
                    SetIsUpperStairCaseMatrix( N, true );
 		   
                    return N;
                    
                  end
-
+               
 	);
     
     for component in NamesOfComponents( RP_BestBasis ) do

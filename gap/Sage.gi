@@ -89,6 +89,43 @@ InstallGlobalFunction( _Sage_multiple_delete,
     
 end );
 
+##
+InstallValue( SageMacros,
+        rec(
+            
+    ZeroRows := "\n\
+def ZeroRows(C):\n\
+  def check_rows(i):\n\
+    return RowChecklist[i]\n\
+  RowChecklist=[C.row(x).is_zero() for x in range(C.nrows())]\n\
+  return filter(check_rows,range(C.nrows()))\n\n",
+    
+    ZeroColumns := "\n\
+def ZeroColumns(C):\n\
+  def check_cols(i):\n\
+    return ColChecklist[i]\n\
+  ColChecklist=[C.column(x).is_zero() for x in range(C.ncols())]\n\
+  return filter(check_cols,range(C.ncols()))\n\n",
+    
+    FillMatrix := "\n\
+def FillMatrix(M,L):\n\
+  for x in L:\n\
+    M[x[0]-1,x[1]-1] = x[2]\n\n",
+    
+    )
+);
+
+##
+InstallGlobalFunction( InitializeSageMacros,
+  function( stream )
+    local v;
+    
+    v := stream.variable_name;
+    
+    InitializeMacros( SageMacros, stream );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -116,6 +153,8 @@ InstallGlobalFunction( RingForHomalgInSage,
     else
         o := 1;
     fi;
+    
+    InitializeSageMacros( stream );
     
     ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     

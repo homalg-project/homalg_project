@@ -14,7 +14,5 @@
 #
 ####################################
 
-DeclareGlobalFunction( "InitializeSageBestBasis" );
-
 DeclareGlobalVariable( "CommonHomalgTableForSageBestBasis" );
 
