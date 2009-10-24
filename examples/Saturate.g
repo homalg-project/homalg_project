@@ -8,13 +8,13 @@
 ##  <A graded (left) ideal given by 3 generators>
 ##  gap> J := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
 ##  <A graded (left) ideal given by 6 generators>
-##  gap> J_m := J - m;
+##  gap> Jm := SubmoduleQuotient( J, m );
 ##  <A graded (left) ideal given by 3 generators>
-##  gap> Js := Saturate( J, m );
+##  gap> J_m := Saturate( J, m );
 ##  <A graded principal (left) ideal given by a cyclic generator>
-##  gap> Jm := Saturate( J );
+##  gap> Js := Saturate( J );
 ##  <A graded principal (left) ideal given by a cyclic generator>
-##  gap> Assert( 0, Js = Jm );
+##  gap> Assert( 0, Js = J_m );
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -27,11 +27,11 @@ m := GradedLeftSubmodule( "x,y,z", R );
 
 J := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
 
-J_m := J - m;
+Jm := SubmoduleQuotient( J, m );
 
-Js := Saturate( J, m );
+J_m := Saturate( J, m );
 
-Jm := Saturate( J );
+Js := Saturate( J );
 
-Assert( 0, Js = Jm );
+Assert( 0, Js = J_m );
 
