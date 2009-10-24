@@ -86,7 +86,7 @@ DeclareCategory( "IsHomalgSpectralSequenceAssociatedToABicomplex",
 ##  <#GAPDoc Label="GeneralizedEmbeddingsInTotalObjects">
 ##  <ManSection>
 ##    <Attr Arg="E" Name="GeneralizedEmbeddingsInTotalObjects"/>
-##    <Returns>a record containing containing &homalg; maps</Returns>
+##    <Returns>a record containing &homalg; maps</Returns>
 ##    <Description>
 ##      The generalized embbedings of the objects in the stable sheet into the objects of the associated total complex.
 ##    </Description>
@@ -99,7 +99,7 @@ DeclareAttribute( "GeneralizedEmbeddingsInTotalObjects",
 ##  <#GAPDoc Label="GeneralizedEmbeddingsInTotalDefects">
 ##  <ManSection>
 ##    <Attr Arg="E" Name="GeneralizedEmbeddingsInTotalDefects"/>
-##    <Returns>a record containing containing &homalg; maps</Returns>
+##    <Returns>a record containing &homalg; maps</Returns>
 ##    <Description>
 ##      The generalized embbedings of the objects in the stable sheet into the defects of the associated total complex.
 ##    </Description>

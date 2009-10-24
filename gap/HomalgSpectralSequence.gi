@@ -690,7 +690,7 @@ end );
 ##  <#GAPDoc Label="ByASmallerPresentation:spectralsequence">
 ##  <ManSection>
 ##    <Meth Arg="E" Name="ByASmallerPresentation" Label="for spectral sequences"/>
-##    <Returns>a &homalg; bigraded object</Returns>
+##    <Returns>a &homalg; spectral sequence</Returns>
 ##    <Description>
 ##    See <Ref Meth="ByASmallerPresentation" Label="for bigraded objects"/> on bigraded object.
 ##      <Listing Type="Code"><![CDATA[

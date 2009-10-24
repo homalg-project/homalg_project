@@ -255,17 +255,18 @@ end );
 ##    <Oper Arg="M" Name="BasisOfRowModule" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing( </C><A>M</A><C> )</C>) and
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )) and
 ##      <M>S</M> be the row span of <A>M</A>, i.e. the <M>R</M>-submodule of the free module
 ##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> spanned by the rows of <A>M</A>. A solution to the
 ##      <Q>submodule membership problem</Q> is an algorithm which can decide if an element <M>m</M> in
 ##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> is contained in <M>S</M> or not. And exactly like
 ##      the Gaussian (resp. Hermite) normal form when <M>R</M> is a field (resp. principal ideal ring), the row span of
-##      the resulting matrix <M>B</M> coincides with the row span <M>S</M> of <A>M</A>, and computing <M>B</M> is normally
+##      the resulting matrix <M>B</M> coincides with the row span <M>S</M> of <A>M</A>, and computing <M>B</M> is typically
 ##      the first step of such an algorithm. (&see; Appendix <Ref Chap="homalg-Idea"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (low-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -368,17 +369,18 @@ end );
 ##    <Oper Arg="M" Name="BasisOfColumnModule" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing( </C><A>M</A><C> )</C>) and
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )) and
 ##      <M>S</M> be the column span of <A>M</A>, i.e. the <M>R</M>-submodule of the free module
 ##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> spanned by the columns of <A>M</A>. A solution to the
 ##      <Q>submodule membership problem</Q> is an algorithm which can decide if an element <M>m</M> in
 ##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> is contained in <M>S</M> or not. And exactly like
 ##      the Gaussian (resp. Hermite) normal form when <M>R</M> is a field (resp. principal ideal ring), the column span of
-##      the resulting matrix <M>B</M> coincides with the column span <M>S</M> of <A>M</A>, and computing <M>B</M> is normally
-##      the first step of such an algorithm (&see; Appendix <Ref Chap="homalg-Idea"/>).
+##      the resulting matrix <M>B</M> coincides with the column span <M>S</M> of <A>M</A>, and computing <M>B</M> is typically
+##      the first step of such an algorithm. (&see; Appendix <Ref Chap="homalg-Idea"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfModule (low-level))
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -478,20 +480,21 @@ end );
 
 ##  <#GAPDoc Label="DecideZeroRows">
 ##  <ManSection>
-##    <Oper Arg="A,B" Name="DecideZeroRows" Label="for matrices"/>
+##    <Oper Arg="A, B" Name="DecideZeroRows" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of columns and defined over the same ring <M>R</M>
-##      (<M>:=</M><C>HomalgRing( </C><A>A</A><C> )</C>) and <M>S</M> be the row span of <A>B</A>,
+##      (<M>:=</M><C>HomalgRing</C>( <A>A</A> )) and <M>S</M> be the row span of <A>B</A>,
 ##      i.e. the <M>R</M>-submodule of the free module <M>R^{(1 \times NrColumns( <A>B</A> ))}</M>
 ##      spanned by the rows of <A>B</A>. The result is a matrix <M>C</M> having the same shape as <A>A</A>,
 ##      for which the <M>i</M>-th row <M><A>C</A>^i</M> is equivalent to the <M>i</M>-th row <M><A>A</A>^i</M> of <A>A</A> modulo <M>S</M>,
 ##      i.e. <M><A>C</A>^i-<A>A</A>^i</M> is an element of the row span <M>S</M> of <A>B</A>. Moreover, the row <M><A>C</A>^i</M> is zero,
 ##      if and only if the row <M><A>A</A>^i</M> is an element of <M>S</M>. So <C>DecideZeroRows</C> decides which rows of <A>A</A>
-##      are zero modulo the rows of <A>B</A> (&see; Appendix <Ref Chap="homalg-Idea"/>).
+##      are zero modulo the rows of <A>B</A>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -570,21 +573,22 @@ end );
 
 ##  <#GAPDoc Label="DecideZeroColumns">
 ##  <ManSection>
-##    <Oper Arg="A,B" Name="DecideZeroColumns" Label="for matrices"/>
+##    <Oper Arg="A, B" Name="DecideZeroColumns" Label="for matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of rows and defined over the same ring <M>R</M>
-##      (<M>:=</M><C>HomalgRing( </C><A>A</A><C> )</C>) and <M>S</M> be the column span of <A>B</A>,
+##      (<M>:=</M><C>HomalgRing</C>( <A>A</A> )) and <M>S</M> be the column span of <A>B</A>,
 ##      i.e. the <M>R</M>-submodule of the free module <M>R^{(NrRows( <A>B</A> ) \times 1)}</M>
 ##      spanned by the columns of <A>B</A>. The result is a matrix <M>C</M> having the same shape as <A>A</A>,
 ##      for which the <M>i</M>-th column <M><A>C</A>_i</M> is equivalent to the <M>i</M>-th column <M><A>A</A>_i</M> of <A>A</A>
 ##      modulo <M>S</M>, i.e. <M><A>C</A>_i-<A>A</A>_i</M> is an element of the column span <M>S</M> of <A>B</A>. Moreover,
 ##      the column <M><A>C</A>_i</M> is zero, if and only if the column <M><A>A</A>_i</M> is an element of <M>S</M>.
-##      So <C>DecideZeroColumns</C> decides which columns of <A>A</A> are zero modulo the columns of <A>B</A>
-##      (&see; Appendix <Ref Chap="homalg-Idea"/>).
+##      So <C>DecideZeroColumns</C> decides which columns of <A>A</A> are zero modulo the columns of <A>B</A>.
+##      (&see; Appendix <Ref Chap="homalg-Idea"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+##
 InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -661,6 +665,19 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
 end );
 
+##  <#GAPDoc Label="SyzygiesGeneratorsOfRows">
+##  <ManSection>
+##    <Oper Arg="M" Name="SyzygiesGeneratorsOfRows" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
+##      The matrix of row syzygies <C>SyzygiesGeneratorsOfRows</C>( <A>M</A> ) is a matrix whose rows span
+##      the left kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free module <M>R^{(1 \times NrRows( <A>M</A> ))}</M>
+##      consisting of all rows <M>X</M> satisfying <M>X<A>M</A>=0</M>.
+##      (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
         "for homalg matrices",
@@ -761,6 +778,19 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
 end );
 
+##  <#GAPDoc Label="SyzygiesGeneratorsOfColumns">
+##  <ManSection>
+##    <Oper Arg="M" Name="SyzygiesGeneratorsOfColumns" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
+##      The matrix of column syzygies <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A> ) is a matrix whose columns span
+##      the right kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free module <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M>
+##      consisting of all columns <M>X</M> satisfying <M><A>M</A>X=0</M>.
+##      (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
         "for homalg matrices",
@@ -863,6 +893,19 @@ end );
 
 #### Relative:
 
+##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfRows">
+##  <ManSection>
+##    <Oper Arg="M, M2" Name="SyzygiesGeneratorsOfRows" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
+##      The matrix of <E>relative</E> row syzygies <C>SyzygiesGeneratorsOfRows</C>( <A>M</A>, <A>M2</A> ) is a matrix
+##      whose rows span the left kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free module
+##      <M>R^{(1 \times NrRows( <A>M</A> ))}</M> consisting of all rows <M>X</M> satisfying <M>X<A>M</A>+Y<A>M2</A>=0</M>
+##      for some row <M>Y \in R^{(1 \times NrRows( <A>M2</A> ))}</M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (SyzygiesGenerators)
         "for homalg matrices",
@@ -965,6 +1008,19 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
 end );
 
+##  <#GAPDoc Label="RelativeSyzygiesGeneratorsOfColumns">
+##  <ManSection>
+##    <Oper Arg="M, M2" Name="SyzygiesGeneratorsOfColumns" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Let <M>R</M> be the ring over which <A>M</A> is defined (<M>R:=</M><C>HomalgRing</C>( <A>M</A> )).
+##      The matrix of <E>relative</E> column syzygies <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A>, <A>M2</A> ) is a matrix
+##      whose columns span the right kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free module
+##      <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M> consisting of all columns <M>X</M> satisfying <M><A>M</A>X+<A>M2</A>Y=0</M>
+##      for some column <M>Y \in R^{(NrColumns( <A>M2</A> ) \times 1)}</M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfColumns (SyzygiesGenerators)
         "for homalg matrices",
@@ -1069,6 +1125,19 @@ end );
 
 #### Reduced:
 
+##  <#GAPDoc Label="ReducedBasisOfRowModule">
+##  <ManSection>
+##    <Oper Arg="M" Name="ReducedBasisOfRowModule" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Like <C>BasisOfRowModule</C>( <A>M</A> ) but where the matrix
+##      <C>SyzygiesGeneratorsOfRows</C>( <C>ReducedBasisOfRowModule</C>( <A>M</A> ) ) contains no units. This can easily
+##      be achieved starting from <M>B:=</M><C>BasisOfRowModule</C>( <A>M</A> )
+##      (and using <Ref Oper="GetColumnIndependentUnitPositions" Label="for matrices"/> applied to the matrix of row syzygies of <M>B</M>,
+##       etc). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ReducedBasisOfRowModule,
         "for homalg matrices",
@@ -1179,6 +1248,19 @@ InstallMethod( ReducedBasisOfRowModule,
     
 end );
 
+##  <#GAPDoc Label="ReducedBasisOfColumnModule">
+##  <ManSection>
+##    <Oper Arg="M" Name="ReducedBasisOfColumnModule" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Like <C>BasisOfColumnModule</C>( <A>M</A> ) but where the matrix
+##      <C>SyzygiesGeneratorsOfColumns</C>( <C>ReducedBasisOfColumnModule</C>( <A>M</A> ) ) contains no units. This can easily
+##      be achieved starting from <M>B:=</M><C>BasisOfColumnModule</C>( <A>M</A> )
+##      (and using <Ref Oper="GetRowIndependentUnitPositions" Label="for matrices"/> applied to the matrix of column syzygies of <M>B</M>,
+##       etc.). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ReducedBasisOfColumnModule,
         "for homalg matrices",
@@ -1289,6 +1371,19 @@ InstallMethod( ReducedBasisOfColumnModule,
     
 end );
 
+##  <#GAPDoc Label="ReducedSyzygiesGeneratorsOfRows">
+##  <ManSection>
+##    <Oper Arg="M" Name="ReducedSyzygiesGeneratorsOfRows" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Like <C>SyzygiesGeneratorsOfRows</C>( <A>M</A> ) but where the matrix
+##      <C>SyzygiesGeneratorsOfRows</C>( <C>ReducedSyzygiesGeneratorsOfRows</C>( <A>M</A> ) ) contains no units.
+##      This can easily be achieved starting from <M>C:=</M><C>SyzygiesGeneratorsOfRows</C>( <A>M</A> )
+##      (and using <Ref Oper="GetColumnIndependentUnitPositions" Label="for matrices"/> applied to the matrix of row syzygies of <M>C</M>,
+##       etc.). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         "for homalg matrices",
@@ -1383,6 +1478,19 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
     
 end );
 
+##  <#GAPDoc Label="ReducedSyzygiesGeneratorsOfColumns">
+##  <ManSection>
+##    <Oper Arg="M" Name="ReducedSyzygiesGeneratorsOfColumns" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Like <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A> ) but where the matrix
+##      <C>SyzygiesGeneratorsOfColumns</C>( <C>ReducedSyzygiesGeneratorsOfColumns</C>( <A>M</A> ) ) contains no units.
+##      This can easily be achieved starting from <M>C:=</M><C>SyzygiesGeneratorsOfColumns</C>( <A>M</A> )
+##      (and using <Ref Oper="GetRowIndependentUnitPositions" Label="for matrices"/> applied to the matrix of column syzygies of <M>C</M>,
+##       etc.). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         "for homalg matrices",
@@ -1479,6 +1587,17 @@ end );
 
 #### Effectively:
 
+##  <#GAPDoc Label="BasisOfRowsCoeff">
+##  <ManSection>
+##    <Oper Arg="M, T" Name="BasisOfRowsCoeff" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Returns <M>B:=</M><C>BasisOfRowModule</C>( <A>M</A> ) and assigns the <E>void</E> matrix <A>T</A>
+##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
+##      <M>B = <A>T</A> <A>M</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         "for a homalg matrix",
@@ -1601,6 +1720,17 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
 end );
 
+##  <#GAPDoc Label="BasisOfColumnsCoeff">
+##  <ManSection>
+##    <Oper Arg="M, T" Name="BasisOfColumnsCoeff" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Returns <M>B:=</M><C>BasisOfRowModule</C>( <A>M</A> ) and assigns the <E>void</E> matrix <A>T</A>
+##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
+##      <M>B = <A>M</A> <A>T</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoeff)
         "for a homalg matrix",
@@ -1722,6 +1852,17 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
 end );
 
+##  <#GAPDoc Label="DecideZeroRowsEffectively">
+##  <ManSection>
+##    <Oper Arg="A, B, T" Name="DecideZeroRowsEffectively" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Returns <M>M:=</M><C>DecideZeroRows</C>( <A>A</A>, <A>B</A> ) and assigns the <E>void</E> matrix <A>T</A>
+##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
+##      <M>M = <A>A</A> + <A>T</A><A>B</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively (ReduceCoeff)
         "for a homalg matrix",
@@ -1818,6 +1959,17 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
 end );
 
+##  <#GAPDoc Label="DecideZeroColumnsEffectively">
+##  <ManSection>
+##    <Oper Arg="A, B, T" Name="DecideZeroColumnsEffectively" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Returns <M>M:=</M><C>DecideZeroColumns</C>( <A>A</A>, <A>B</A> ) and assigns the <E>void</E> matrix <A>T</A>
+##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
+##      <M>M = <A>A</A> + <A>B</A><A>T</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffectively (ReduceCoeff)
         "for a homalg matrix",

@@ -48,6 +48,7 @@ list := [
          "../gap/Modules.gi",
          "../gap/Tools.gi",
          "../gap/Service.gi",
+         "../gap/Basic.gi",
          "../gap/ResidueClassRingForHomalg.gd",
          "../gap/ResidueClassRingForHomalg.gi",
          "../gap/ResidueClassRing.gd",
@@ -63,6 +64,7 @@ list := [
          "../examples/torext.g",
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
+         "../examples/Saturate.g",
          ];
 
 MakeGAPDocDoc( "doc", "homalg", list, "homalg" );

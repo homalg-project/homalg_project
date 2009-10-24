@@ -1198,6 +1198,16 @@ InstallMethod( NonZeroColumns,
     
 end );
 
+##  <#GAPDoc Label="Leftinverse">
+##  <ManSection>
+##    <Meth Arg="M" Name="Leftinverse" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A (lazy evaluated) left inverse <M>C</M> of the matrix <A>M</A>. If no left inverse exists then
+##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( LeftInverse,
         "for homalg matrices",
@@ -1229,6 +1239,16 @@ InstallMethod( LeftInverse,
     
 end );
 
+##  <#GAPDoc Label="Rightinverse">
+##  <ManSection>
+##    <Meth Arg="M" Name="Rightinverse" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A (lazy evaluated) right inverse <M>C</M> of the matrix <A>M</A>. If no right inverse exists then
+##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( RightInverse,
         "for homalg matrices",
@@ -1620,7 +1640,7 @@ end );
 ##    <Func Arg="str_list, m, n, R" Name="HomalgMatrix" Label="constructor for matrices using a string of a list"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      An immutable evaluated <A>m</A> <M>x</M> <A>n</A> &homalg; matrix over the &homalg; ring <A>R</A>.
+##      An immutable evaluated <M><A>m</A> \times <A>n</A></M> &homalg; matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -1875,7 +1895,7 @@ end );
 ##    <Func Arg="m, n, R" Name="HomalgZeroMatrix" Label="constructor for zero matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      An immutable unevaluated <A>m</A> <M>x</M> <A>n</A> &homalg; zero matrix over the &homalg; ring <A>R</A>.
+##      An immutable unevaluated <M><A>m</A> \times <A>n</A></M> &homalg; zero matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -1954,7 +1974,7 @@ end );
 ##    <Func Arg="m, R" Name="HomalgIdentityMatrix" Label="constructor for identity matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      An immutable unevaluated <A>m</A> <M>x</M> <A>m</A> &homalg; identity matrix over the &homalg; ring <A>R</A>.
+##      An immutable unevaluated <M><A>m</A> \times <A>m</A></M> &homalg; identity matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -2014,12 +2034,12 @@ end );
 ##    <Func Arg="m, n, R" Name="HomalgInitialMatrix" Label="constructor for initial matrices filled with zeros"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      A mutable unevaluated initial <A>m</A> <M>x</M> <A>n</A> &homalg; matrix filled with zeros
+##      A mutable unevaluated initial <M><A>m</A> \times <A>n</A></M> &homalg; matrix filled with zeros
 ##      over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define a matrix
 ##      by assigning its nonzero entries. Avoid asking about properties or attributes of the matrix until
 ##      you finish filling it, since already computed values of properties and attributes will be cached
 ##      and not recomputed unless the values are explicitly reset (&see; <Ref Func="ResetFilterObj"
-##      BookName="Prg Tutorial" Style="Number"/>);
+##      BookName="Prg Tutorial" Style="Number"/>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -2115,12 +2135,12 @@ end );
 ##    <Func Arg="m, R" Name="HomalgInitialIdentityMatrix" Label="constructor for initial quadratic matrices with ones on the diagonal"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      A mutable unevaluated initial <A>m</A> <M>x</M> <A>m</A> &homalg; quadratic matrix with ones
+##      A mutable unevaluated initial <M><A>m</A> \times <A>m</A></M> &homalg; quadratic matrix with ones
 ##      on the diagonal over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define
 ##      an elementary matrix by assigning its off-diagonal nonzero entries. Avoid asking about properties or
 ##      attributes of the matrix until you finish filling it, since already computed values of properties and
 ##      attributes will be cached and not recomputed unless the values are explicitly reset
-##      (&see; <Ref Func="ResetFilterObj"  BookName="Prg Tutorial" Style="Number"/>);
+##      (&see; <Ref Func="ResetFilterObj"  BookName="Prg Tutorial" Style="Number"/>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -2153,7 +2173,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallGlobalFunction( HomalgInitialIdentityMatrix,
-  function( arg )		## an square initial matrix having the flag IsInitialIdentityMatrix
+  function( arg )		## a square initial matrix having the flag IsInitialIdentityMatrix
     local R, type, matrix;	## and filled with an identity matrix BUT NOT marked as an IsIdentityMatrix
     
     R := arg[Length( arg )];
@@ -2192,7 +2212,16 @@ InstallGlobalFunction( HomalgInitialIdentityMatrix,
     
 end );
 
-## 
+##  <#GAPDoc Label="HomalgVoidMatrix">
+##  <ManSection>
+##    <Func Arg="[ m,][ n,] R" Name="HomalgVoidMatrix" Label="constructor for void matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A void <M><A>m</A> \times <A>n</A></M> &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( HomalgVoidMatrix,
   function( arg )	## a void matrix filled with nothing having the flag IsVoidMatrix
     local R, type, matrix, nr_rows, nr_columns;
@@ -2339,7 +2368,7 @@ end );
 ##    <Func Arg="r, n, R" Name="HomalgScalarMatrix" Label="constructor for scalar matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      An immutable unevaluated <A>n</A>x<A>n</A> scalar &homalg; matrix over the &homalg; ring <A>R</A> with
+##      An immutable unevaluated <M><A>n</A> \times <A>n</A></M> scalar &homalg; matrix over the &homalg; ring <A>R</A> with
 ##      the ring element <A>r</A> as diagonal scalar.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );

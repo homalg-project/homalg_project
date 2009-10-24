@@ -702,7 +702,12 @@ InstallMethod( BasisOfModule,
     
 end );
 
-##
+##  <#GAPDoc Label="DecideZero:matrix_rel">
+##  <ManSection>
+##    <Oper Arg="mat, rel" Name="DecideZero" Label="for matrices and relations"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##    <Listing Type="Code"><![CDATA[
 InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix, IsHomalgRelations ],
@@ -719,6 +724,11 @@ InstallMethod( DecideZero,
     fi;
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 
 ##
 InstallMethod( DecideZero,

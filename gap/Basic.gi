@@ -14,6 +14,17 @@
 #
 ####################################
 
+##  <#GAPDoc Label="BasisOfRows">
+##  <ManSection>
+##    <Oper Arg="M" Name="BasisOfRows" Label="for matrices"/>
+##    <Oper Arg="M, T" Name="BasisOfRows" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      With one argument it is a synonym of <Ref Oper="BasisOfRowModule" Label="for matrices"/>.
+##      with two arguments it is a synonym of <Ref Oper="BasisOfRowsCoeff" Label="for matrices"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( BasisOfRows,
         "for homalg matrices",
@@ -22,18 +33,29 @@ InstallMethod( BasisOfRows,
   BasisOfRowModule );
 
 ##
-InstallMethod( BasisOfColumns,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  BasisOfColumnModule );
-
-##
 InstallMethod( BasisOfRows,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix and IsVoidMatrix ],
         
   BasisOfRowsCoeff );
+
+##  <#GAPDoc Label="BasisOfColumns">
+##  <ManSection>
+##    <Oper Arg="M" Name="BasisOfColumns" Label="for matrices"/>
+##    <Oper Arg="M, T" Name="BasisOfColumns" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      With one argument it is a synonym of <Ref Oper="BasisOfColumnModule" Label="for matrices"/>.
+##      with two arguments it is a synonym of <Ref Oper="BasisOfColumnsCoeff" Label="for matrices"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( BasisOfColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  BasisOfColumnModule );
 
 ##
 InstallMethod( BasisOfColumns,
@@ -128,6 +150,17 @@ InstallMethod( DecideZero,
     
 end );
 
+##  <#GAPDoc Label="SyzygiesOfRows">
+##  <ManSection>
+##    <Oper Arg="M" Name="SyzygiesOfRows" Label="for matrices"/>
+##    <Oper Arg="M, M2" Name="SyzygiesOfRows" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      With one argument it is a synonym of <Ref Oper="SyzygiesGeneratorsOfRows" Label="for matrices"/>.
+##      with two arguments it is a synonym of <Ref Oper="SyzygiesGeneratorsOfRows" Label="for pairs of matrices"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( SyzygiesOfRows,
         "for homalg matrices",
@@ -136,6 +169,24 @@ InstallMethod( SyzygiesOfRows,
   SyzygiesGeneratorsOfRows );
 
 ##
+InstallMethod( SyzygiesOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  SyzygiesGeneratorsOfRows );
+
+##  <#GAPDoc Label="SyzygiesOfColumns">
+##  <ManSection>
+##    <Oper Arg="M" Name="SyzygiesOfColumns" Label="for matrices"/>
+##    <Oper Arg="M, M2" Name="SyzygiesOfColumns" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      With one argument it is a synonym of <Ref Oper="SyzygiesGeneratorsOfColumns" Label="for matrices"/>.
+##      with two arguments it is a synonym of <Ref Oper="SyzygiesGeneratorsOfColumns" Label="for pairs of matrices"/>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( SyzygiesOfColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -143,19 +194,25 @@ InstallMethod( SyzygiesOfColumns,
   SyzygiesGeneratorsOfColumns );
 
 ##
-InstallMethod( SyzygiesOfRows,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  SyzygiesGeneratorsOfRows );
-
-##
 InstallMethod( SyzygiesOfColumns,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   SyzygiesGeneratorsOfColumns );
 
+##  <#GAPDoc Label="ReducedSyzygiesOfRows">
+##  <ManSection>
+##    <Oper Arg="M" Name="ReducedSyzygiesOfRows" Label="for matrices"/>
+##    <Oper Arg="M, M2" Name="ReducedSyzygiesOfRows" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      With one argument it is a synonym of <Ref Oper="ReducedSyzygiesGeneratorsOfRows" Label="for matrices"/>.
+##      With two arguments it calls <C>ReducedBasisOfRowModule</C>( <C>SyzygiesGeneratorsOfRows</C>( <A>M</A>, <A>M2</A> ) ).
+##      (&see; <Ref Oper="ReducedBasisOfRowModule" Label="for matrices"/> and
+##       <Ref Oper="SyzygiesGeneratorsOfRows" Label="for pairs of matrices"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( ReducedSyzygiesOfRows,
         "for homalg matrices",
@@ -164,6 +221,35 @@ InstallMethod( ReducedSyzygiesOfRows,
   ReducedSyzygiesGeneratorsOfRows );
 
 ##
+InstallMethod( ReducedSyzygiesOfRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, M2 )
+    
+    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
+    ## checking IsZero( M2 ) causes too many obsolete calls
+    
+    ## a priori computing a basis of the syzygies matrix
+    ## causes obsolete computations, at least in general
+    return ReducedBasisOfRowModule( SyzygiesGeneratorsOfRows( M, M2 ) );
+    
+end );
+
+##  <#GAPDoc Label="ReducedSyzygiesOfColumns">
+##  <ManSection>
+##    <Oper Arg="M" Name="ReducedSyzygiesOfColumns" Label="for matrices"/>
+##    <Oper Arg="M, M2" Name="ReducedSyzygiesOfColumns" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      With one argument it is a synonym of <Ref Oper="ReducedSyzygiesGeneratorsOfColumns" Label="for matrices"/>.
+##      With two arguments it calls <C>ReducedBasisOfColumnModule</C>( <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A>, <A>M2</A> ) ).
+##      (&see; <Ref Oper="ReducedBasisOfColumnModule" Label="for matrices"/> and
+##       <Ref Oper="SyzygiesGeneratorsOfColumns" Label="for pairs of matrices"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( ReducedSyzygiesOfColumns,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -171,34 +257,18 @@ InstallMethod( ReducedSyzygiesOfColumns,
   ReducedSyzygiesGeneratorsOfColumns );
 
 ##
-InstallMethod( ReducedSyzygiesOfRows,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( M1, M2 )
-    
-    ## a LIMAT method takes care of the case when M2 is _known_ to be zero
-    ## checking IsZero( M2 ) causes too many obsolete calls
-    
-    ## a priori computing a basis of the syzygies matrix
-    ## causes obsolete computations, at least in general
-    return ReducedBasisOfRowModule( SyzygiesOfRows( M1, M2 ) );
-    
-end );
-
-##
 InstallMethod( ReducedSyzygiesOfColumns,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
-  function( M1, M2 )
+  function( M, M2 )
     
     ## a LIMAT method takes care of the case when M2 is _known_ to be zero
     ## checking IsZero( M2 ) causes too many obsolete calls
     
     ## a priori computing a basis of the syzygies matrix
     ## causes obsolete computations, at least in general
-    return ReducedBasisOfColumnModule( SyzygiesOfColumns( M1, M2 ) );
+    return ReducedBasisOfColumnModule( SyzygiesGeneratorsOfColumns( M, M2 ) );
     
 end );
 
@@ -213,20 +283,6 @@ InstallMethod( SyzygiesBasisOfRows,		### defines: SyzygiesBasisOfRows (SyzygiesB
     S := SyzygiesOfRows( M );
     
     return BasisOfRows( S );
-    
-end );
-
-##
-InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    local S;
-    
-    S := SyzygiesOfColumns( M );
-    
-    return BasisOfColumns( S );
     
 end );
 
@@ -247,6 +303,20 @@ end );
 ##
 InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
         "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local S;
+    
+    S := SyzygiesOfColumns( M );
+    
+    return BasisOfColumns( S );
+    
+end );
+
+##
+InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (SyzygiesBasis)
+        "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
@@ -258,13 +328,21 @@ InstallMethod( SyzygiesBasisOfColumns,		### defines: SyzygiesBasisOfColumns (Syz
     
 end );
 
-#=======================================================================
-# Right divide:
-# Solve the inhomogeneous linear system: B = XA
-# i.e.
-# perform the right division if possible B * A^(-1)
-# Generalizes Leftinverse: AI * A = Id <=> AI = Id * A^(-1)
-#_______________________________________________________________________
+##  <#GAPDoc Label="RightDivide">
+##  <ManSection>
+##    <Oper Arg="B, A" Name="RightDivide" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix or false</Returns>
+##    <Description>
+##      Let <A>B</A> and <A>A</A> be matrices having the same number of columns and defined over the same ring.
+##      The matrix <C>RightDivide</C>( <A>B</A>, <A>A</A> ) is a particular solution of the inhomogeneous (one sided) linear system
+##      of equations <M>X<A>A</A>=<A>B</A></M> in case it is solvable. Otherwise <C>false</C> is returned.
+##      The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M></Q>.
+##      This generalizes <C>Leftinverse</C> for which <A>B</A> becomes the identity matrix.
+##      (&see; <Ref Oper="SyzygiesGeneratorsOfRows" Label="for matrices"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -306,13 +384,21 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     
 end );
 
-#=======================================================================
-# Left divide:
-# Solve the inhomogeneous linear system: AX = B
-# i.e.
-# perform the left division if possible A^(-1) * B
-# Generalizes Rightinverse: A * AI = Id <=> AI = A^(-1) * Id
-#_______________________________________________________________________
+##  <#GAPDoc Label="LeftDivide">
+##  <ManSection>
+##    <Oper Arg="A, B" Name="LeftDivide" Label="for pairs of matrices"/>
+##    <Returns>a &homalg; matrix or false</Returns>
+##    <Description>
+##      Let <A>A</A> and <A>B</A> be matrices having the same number of rows and defined over the same ring.
+##      The matrix <C>LeftDivide</C>( <A>A</A>, <A>B</A> ) is a particular solution of the inhomogeneous (one sided) linear system
+##      of equations <M><A>A</A>X=<A>B</A></M> in case it is solvable. Otherwise <C>false</C> is returned.
+##      The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M></Q>.
+##      This generalizes <C>Rightinverse</C> for which <A>B</A> becomes the identity matrix.
+##      (&see; <Ref Oper="SyzygiesGeneratorsOfColumns" Label="for matrices"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
@@ -354,20 +440,25 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     
 end );
 
-#=======================================================================
-# Right divide modulo:	( cf. [BR, Subsection 3.1.1] )
-# Solve the inhomogeneous linear system: B = XA mod L
-# i.e.
-# solve the inhomogeneous linear system: B = XA + YL
-# i.e.
-# perform the right division if possible B * A^(-1) mod L
-# Leftinverse is a special case: Id = AI * A mod L <=> AI = Id * A^(-1) mod L
-#_______________________________________________________________________
-InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
+##  <#GAPDoc Label="RelativeRightDivide">
+##  <ManSection>
+##    <Oper Arg="B, A, L" Name="RightDivide" Label="for triples of matrices"/>
+##    <Oper Arg="B, A, L" Name="RightDivide" Label="for pairs matrices and a set of relations"/>
+##    <Returns>a &homalg; matrix or false</Returns>
+##    <Description>
+##      Let <A>B</A>, <A>A</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring
+##      (<A>L</A> might also be a set of relations for a left module with
+##       <C>NrGenerators</C>( <A>L</A> ) <M>=</M> <C>NrColumns</C>( <A>B</A> ) ).
+##      The matrix <C>RightDivide</C>( <A>B</A>, <A>A</A>, <A>L</A> ) is a particular solution of the inhomogeneous (one sided)
+##      linear system of equations <M>X<A>A</A>+Y<A>L</A>=<A>B</A></M> in case it is solvable (for some <M>Y</M> which is forgotten).
+##      Otherwise <C>false</C> is returned. The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M> modulo <A>L</A></Q>.
+##      (Cf. <Cite Key="BR" Where="Subsection 3.1.1"/>)
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( RightDivide,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
         
-  function( B, A, L )				## CAUTION: Do not use lazy evaluation here!!!
+  function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!!
     local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
     
     R := HomalgRing( B );
@@ -408,7 +499,8 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivide)
     
     return X;
     
-    ## technical: -CB * CA := (-CB) * CA and COLEM should take over since CB := -matrix
+    ## technical: -CB * CA := (-CB) * CA and COLEM should take over
+    ## since CB := -matrix
     
 end );
 
@@ -422,21 +514,30 @@ InstallMethod( RightDivide,
     return RightDivide( B, A, HomalgRelationsForLeftModule( L ) );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-#=======================================================================
-# Left divide modulo:	( cf. [BR, Subsection 3.1.1] )
-# Solve the inhomogeneous linear system: AX = B mod L
-# i.e.
-# solve the inhomogeneous linear system: B = AX + LY
-# i.e.
-# perform the right division if possible A^(-1) * B mod L
-# Rightinverse is a special case: Id = A * AI mod L <=> AI = A^(-1) * Id mod L
-#_______________________________________________________________________
-InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
+##  <#GAPDoc Label="RelativeLeftDivide">
+##  <ManSection>
+##    <Oper Arg="A, B, L" Name="LeftDivide" Label="for triples of matrices"/>
+##    <Oper Arg="A, B, L" Name="LeftDivide" Label="for pairs matrices and a set of relations"/>
+##    <Returns>a &homalg; matrix or false</Returns>
+##    <Description>
+##      Let <A>A</A>, <A>B</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring
+##      (<A>L</A> might also be a set of relations for a right module with
+##       <C>NrGenerators</C>( <A>L</A> ) <M>=</M> <C>NrRows</C>( <A>B</A> ) ).
+##      The matrix <C>LeftDivide</C>( <A>A</A>, <A>B</A>, <A>L</A> ) is a particular solution of the inhomogeneous (one sided)
+##      linear system of equations <M><A>A</A>X+<A>L</A>Y=<A>B</A></M> in case it is solvable (for some <M>Y</M> which is forgotten).
+##      Otherwise <C>false</C> is returned. The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M> modulo <A>L</A></Q>.
+##      (Cf. <Cite Key="BR" Where="Subsection 3.1.1"/>)
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( LeftDivide,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
-  function( A, B, L )				## CAUTION: Do not use lazy evaluation here!!!
+  function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!!
     local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
     
     R := HomalgRing( B );
@@ -477,7 +578,8 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivide)
     
     return X;
     
-    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since CB := -matrix
+    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since
+    ## CB := -matrix
     
 end );
 
@@ -491,7 +593,21 @@ InstallMethod( LeftDivide,
     return LeftDivide( A, B, HomalgRelationsForRightModule( L ) );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
+##  <#GAPDoc Label="GenerateSameRowModule">
+##  <ManSection>
+##    <Oper Arg="M, N" Name="GenerateSameRowModule" Label="for pairs of matrices"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the row span of <A>M</A> and of <A>N</A> are identical or not
+##      (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( GenerateSameRowModule,
         "for homalg matrices",
@@ -503,6 +619,16 @@ InstallMethod( GenerateSameRowModule,
     
 end );
 
+##  <#GAPDoc Label="GenerateSameColumnModule">
+##  <ManSection>
+##    <Oper Arg="M, N" Name="GenerateSameColumnModule" Label="for pairs of matrices"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the column span of <A>M</A> and of <A>N</A> are identical or not
+##      (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( GenerateSameColumnModule,
         "for homalg matrices",

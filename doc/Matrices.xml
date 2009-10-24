@@ -27,6 +27,7 @@
 <#Include Label="HomalgInitialIdentityMatrix">
 <#Include Label="HomalgZeroMatrix">
 <#Include Label="HomalgIdentityMatrix">
+<#Include Label="HomalgVoidMatrix">
 <#Include Label="HomalgMatrix">
 <#Include Label="HomalgDiagonalMatrix">
 <#Include Label="\*:MatrixBaseChange">
@@ -112,6 +113,41 @@
 <#Include Label="BasisOfColumnModule">
 <#Include Label="DecideZeroRows">
 <#Include Label="DecideZeroColumns">
+<#Include Label="SyzygiesGeneratorsOfRows">
+<#Include Label="SyzygiesGeneratorsOfColumns">
+
+<#Include Label="RelativeSyzygiesGeneratorsOfRows">
+<#Include Label="RelativeSyzygiesGeneratorsOfColumns">
+
+<#Include Label="ReducedBasisOfRowModule">
+<#Include Label="ReducedBasisOfColumnModule">
+<#Include Label="ReducedSyzygiesGeneratorsOfRows">
+<#Include Label="ReducedSyzygiesGeneratorsOfColumns">
+
+<#Include Label="BasisOfRowsCoeff">
+<#Include Label="BasisOfColumnsCoeff">
+<#Include Label="DecideZeroRowsEffectively">
+<#Include Label="DecideZeroColumnsEffectively">
+
+<#Include Label="BasisOfRows">
+<#Include Label="BasisOfColumns">
+<#Include Label="DecideZero:matrix_rel">
+<#Include Label="SyzygiesOfRows">
+<#Include Label="SyzygiesOfColumns">
+
+<#Include Label="ReducedSyzygiesOfRows">
+<#Include Label="ReducedSyzygiesOfColumns">
+
+<#Include Label="RightDivide">
+<#Include Label="LeftDivide">
+<#Include Label="RelativeRightDivide">
+<#Include Label="RelativeLeftDivide">
+
+<#Include Label="GenerateSameRowModule">
+<#Include Label="GenerateSameColumnModule">
+
+<#Include Label="Leftinverse">
+<#Include Label="Rightinverse">
 
 </Section>
 

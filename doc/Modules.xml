@@ -99,6 +99,7 @@
 <#Include Label="SuperObject">
 <#Include Label="SubmoduleOfIdealMultiples">
 <#Include Label="SubmoduleQuotient">
+<#Include Label="Saturate">
 
 </Section>
 

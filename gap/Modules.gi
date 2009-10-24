@@ -1282,8 +1282,8 @@ end );
 ##    <Oper Arg="J, M" Name="\*" Label="constructor for ideal multiples"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
-##      Compute the submodule <M>J</M><A>M</A> (resp. <A>M</A><M>J</M>) of the given left (resp. right)
-##      <M>R</M>-module <A>M</A>, where <M>J</M> is a left (resp. right) ideal in <M>R</M>.
+##      Compute the submodule <A>J</A><A>M</A> (resp. <A>M</A><A>J</A>) of the given left (resp. right)
+##      <M>R</M>-module <A>M</A>, where <A>J</A> is a left (resp. right) ideal in <M>R</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1317,10 +1317,10 @@ end );
 
 ##  <#GAPDoc Label="SubmoduleQuotient">
 ##  <ManSection>
-##    <Oper Arg="K, J" Name="SubmoduleQuotient" Label="the submodule quotient"/>
-##    <Returns>a &homalg; submodule</Returns>
+##    <Oper Arg="K, J" Name="SubmoduleQuotient" Label="for submodules"/>
+##    <Returns>a &homalg; ideal</Returns>
 ##    <Description>
-##      Compute the submodule quotient ideal <A>K</A><M>:</M><A>J</A> of the submodules <A>K</A> and <A>J</A>
+##      Compute the submodule quotient ideal <M><A>K</A>:<A>J</A></M> of the submodules <A>K</A> and <A>J</A>
 ##      of a common <M>R</M>-module <M>M</M>.
 ##    </Description>
 ##  </ManSection>
@@ -1331,7 +1331,7 @@ InstallOtherMethod( SubmoduleQuotient,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, R, degrees, graded, MK, gen_iso_K, coker_epi_K, mapJ;
+    local M, R, degrees, graded, M_K, gen_iso_K, coker_epi_K, mapJ;
     
     M := SuperObject( J );
     
@@ -1345,10 +1345,10 @@ InstallOtherMethod( SubmoduleQuotient,
     
     graded := IsList( degrees ) and degrees <> [ ];
     
-    MK := M / K;
+    M_K := M / K;
     
     ## the generalized isomorphism M/K -> M
-    gen_iso_K := NaturalGeneralizedEmbedding( MK );
+    gen_iso_K := NaturalGeneralizedEmbedding( M_K );
     
     Assert( 1, IsGeneralizedIsomorphism( gen_iso_K ) );
     
@@ -1379,7 +1379,7 @@ InstallOtherMethod( SubmoduleQuotient,
         mapJ := List( [ 1 .. NrColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
     fi;
     
-    mapJ := List( mapJ, g -> HomalgMap( g, R, MK ) );
+    mapJ := List( mapJ, g -> HomalgMap( g, R, M_K ) );
     
     if IsBound( HOMALG.SubQuotient_uses_Intersect ) and
        HOMALG.SubQuotient_uses_Intersect = true then
@@ -1395,19 +1395,17 @@ InstallOtherMethod( SubmoduleQuotient,
     
 end );
 
-##
-InstallOtherMethod( \-,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
-        
-  function( K, J )
-    
-    return SubmoduleQuotient( K, J );
-    
-end );
-
-##
-InstallOtherMethod( Saturate,
+##  <#GAPDoc Label="Saturate">
+##  <ManSection>
+##    <Oper Arg="K, J" Name="Saturate" Label="for ideals"/>
+##    <Returns>a &homalg; ideal</Returns>
+##    <Description>
+##      Compute the saturation ideal <M><A>K</A>:<A>J</A>^\infty</M> of the ideals <A>K</A> and <A>J</A>.
+##    <P/>
+##    <#Include Label="Saturate:example">
+##    <P/>
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Saturate,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
@@ -1428,7 +1426,22 @@ InstallOtherMethod( Saturate,
 end );
 
 ##
-InstallOtherMethod( Saturate,
+InstallMethod( \-,	## a geometrically motivated definition
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        
+  function( K, J )
+    
+    return Saturate( K, J );
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##
+InstallMethod( Saturate,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
         
