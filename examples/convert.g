@@ -7,11 +7,27 @@ b := true;
 nr := NrRows( imat );
 nc := NrColumns( imat );
 
-## GAP -> GAP (Gauss)
+## GAP -> GAP (Gauss Q)
 
 Print( "~~~~~~~~~~~~~~~~~~\n\n" );
 
 S := HomalgFieldOfRationals( );
+
+Read( "convert_test.g" );
+
+## GAP -> GAP (Gauss GF(32003))
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
+S := HomalgRingOfIntegers( 32003 );
+
+Read( "convert_test.g" );
+
+## GAP -> GAP (Gauss Z/2^15)
+
+Print( "~~~~~~~~~~~~~~~~~~\n\n" );
+
+S := HomalgRingOfIntegers( 2^15 );
 
 Read( "convert_test.g" );
 
