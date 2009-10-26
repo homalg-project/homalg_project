@@ -2005,3 +2005,31 @@ InstallMethod( ConvertHomalgMatrix,
     
 end );
 
+## from HomalgMatrix.gi
+
+    elif IsHomalgInternalMatrixRep( M ) and IsHomalgInternalRingRep( R ) then
+        RP := homalgTable( HomalgRing( M ) );
+        M := Eval( M );
+        if IsBound(RP!.ExportMatrix) then
+            M := RP!.ExportMatrix( M );
+        fi;
+        if IsInternalMatrixHull( M ) then
+            M := M!.matrix;
+        fi;
+        M := One( R ) * M;
+        RP := homalgTable( R );
+        if IsBound(RP!.ImportMatrix) then
+            M := RP!.ImportMatrix( M, R!.ring );
+        fi;
+
+##
+InstallMethod( \*,
+        "for homalg internal matrices",
+        [ IsHomalgInternalRingRep, IsHomalgInternalMatrixRep ],
+        
+  function( R, m )
+    
+    return HomalgMatrix( m, R );
+    
+end );
+

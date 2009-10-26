@@ -434,7 +434,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
-        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): c = Size( R ) !!!
+        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): m = Size( R ) !!!
             if IsPrime( m ) then
                 s := List( s, a -> List( a, IntFFE ) );
             else
@@ -496,7 +496,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
-        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): c = Size( R ) !!!
+        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): m = Size( R ) !!!
             if IsPrime( m ) then
                 s := List( s, a -> List( a, IntFFE ) );
             else
@@ -571,7 +571,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     
     if HasCharacteristic( R ) then
         m := Characteristic( R );
-        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): c = Size( R ) !!!
+        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): m = Size( R ) !!!
             if IsPrime( m ) then
                 s := List( s, a -> List( a, IntFFE ) );
             else
@@ -1763,6 +1763,8 @@ InstallGlobalFunction( HomalgMatrix,
         
     fi;
     
+    RP := homalgTable( R );
+    
     if IsList( M ) and Length( M ) > 0 and not IsList( M[1] ) and
        ForAll( M, IsRingElement ) then
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
@@ -1771,33 +1773,15 @@ InstallGlobalFunction( HomalgMatrix,
             M := List( M, a -> [ a ] );	## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
         fi;
         
-        RP := homalgTable( R );
         if IsBound(RP!.ImportMatrix) then
             M := RP!.ImportMatrix( One( R ) * M, R!.ring );
-        fi;
-    elif IsHomalgInternalMatrixRep( M ) and IsHomalgInternalRingRep( R ) then
-        RP := homalgTable( HomalgRing( M ) );
-        M := Eval( M );
-        if IsBound(RP!.ExportMatrix) then
-            M := RP!.ExportMatrix( M );
-        fi;
-        if IsInternalMatrixHull( M ) then
-            M := M!.matrix;
-        fi;
-        M := One( R ) * M;
-        RP := homalgTable( R );
-        if IsBound(RP!.ImportMatrix) then
-            M := RP!.ImportMatrix( M, R!.ring );
         fi;
     elif IsInternalMatrixHull( M ) then
         M := M!.matrix;
+    elif IsMatrix( M ) and IsBound(RP!.ImportMatrix) then
+        M := RP!.ImportMatrix( One( R ) * M, R!.ring );
     else
-        RP := homalgTable( R );
-        if IsMatrix( M ) and IsBound(RP!.ImportMatrix) then
-            M := RP!.ImportMatrix( One( R ) * M, R!.ring );
-        else
-            M := ShallowCopy( M );	## by this we are sure that possible changes to a mutable internal matrix arg[1] does not destroy the logic of homalg
-        fi;
+        M := ShallowCopy( M );	## by this we are sure that possible changes to a mutable GAP matrix arg[1] does not destroy the logic of homalg
     fi;
     
     if IsHomalgInternalRingRep( R ) then ## TheTypeHomalgInternalMatrix
@@ -2498,17 +2482,6 @@ InstallMethod( \*,
     BlindlyCopyMatrixProperties( m, mat );
     
     return mat;
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg internal matrices",
-        [ IsHomalgInternalRingRep, IsHomalgInternalMatrixRep ],
-        
-  function( R, m )
-    
-    return HomalgMatrix( m, R );
     
 end );
 
