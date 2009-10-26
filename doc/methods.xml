@@ -19,16 +19,14 @@ functions</Heading>
 Please note that there are more tool functions you can define,
 &GaussForHomalg; just provides homalg with a sufficient subset. This
 varies with the type and complexity of the rings you want to
-define. On the other hand, <Ref Func="ImportMatrix"/> and
-<Ref Func="ExportMatrix"/> are functions specifically designed for
-&GaussForHomalg;.
+define. On the other hand, <Ref Func="ImportMatrix"/> is a function
+specifically designed for &GaussForHomalg;.
 
 <!-- GaussTools.gi -->
 <#Include Label="ZeroMatrix">
 <#Include Label="IdentityMatrix">
 <#Include Label="CopyMatrix">
 <#Include Label="ImportMatrix">
-<#Include Label="ExportMatrix">
 <#Include Label="Involution">
 <#Include Label="CertainRows">
 <#Include Label="CertainColumns">

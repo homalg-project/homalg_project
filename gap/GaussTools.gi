@@ -105,21 +105,6 @@ InstallValue( CommonHomalgTableForGaussTools,
                  function( M, R )
                    return SparseMatrix( M, R );
                  end,
-##  <#GAPDoc Label="ExportMatrix">
-##  <ManSection>
-##  <Func Arg="M" Name="ExportMatrix"/>
-##  <Returns>a dense matrix</Returns>
-##  <Description>
-##  This returns the dense version of the matrix <A>M</A>.
-##  Note that this is not a "standard" tool but neccessary
-##  because of the new data type.
-##  </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-               ExportMatrix :=
-                 function( M )
-                   return ConvertSparseMatrixToMatrix( M );
-                 end,
 ##  <#GAPDoc Label="Involution">
 ##  <ManSection>
 ##  <Func Arg="M" Name="Involution"/>
