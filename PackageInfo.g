@@ -26,13 +26,13 @@ Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2008.08.20",
+Version := "2008.08.21",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "20/08/2008",
+Date := "21/08/2008",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -144,7 +144,7 @@ Persons := [
 ##    "other"         for all other packages
 ##
 # Status := "accepted",
-Status := "dev",
+Status := "deposited",
 
 ##  You must provide the next two entries if and only if the status is 
 ##  "accepted" because is was successfully refereed:
@@ -185,7 +185,10 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
-#PackageWWWHome := "http://www.math.rwth-aachen.de/~Greg.Gamble/Example",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/extensions/sco",
+AbstractHTML := 
+"The <span class=\"pkgname\">SCO</span> package provides functionality to compute simplicial cohomology of orbifolds",
+#
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
