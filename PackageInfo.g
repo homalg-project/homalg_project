@@ -29,13 +29,13 @@ Subtitle := "ExamplesForHomalg - Examples for the GAP package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.10.15",
+Version := "2009.10.16",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "15/10/2009",
+Date := "16/10/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -45,7 +45,7 @@ Date := "15/10/2009",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/gap/ExamplesForHomalg",
+ArchiveURL := "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ExamplesForHomalg/ExamplesForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -179,7 +179,7 @@ Persons := [
 ##    "other"         for all other packages
 ##
 # Status := "accepted",
-Status := "dev",
+Status := "deposited",
 
 ##  You must provide the next two entries if and only if the status is 
 ##  "accepted" because is was successfully refereed:
@@ -201,9 +201,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/ExamplesForHomalg/README.ExamplesForHomalg",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ExamplesForHomalg/README.ExamplesForHomalg",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/ExamplesForHomalg/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ExamplesForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -220,7 +220,10 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
-#PackageWWWHome := "http://www.math.rwth-aachen.de/~Greg.Gamble/Example",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/examplesforhomalg",
+AbstractHTML := 
+"The <span class=\"pkgname\">ExamplesForHomalg</span> package provides example scripts for the\
+ <span class=\"pkgname\">homalg</span> package that can be used with several computer algebra systems",
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -254,7 +257,7 @@ PackageDoc := rec(
   BookName  := "ExamplesForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/ExamplesForHomalg/ExamplesForHomalgDoc.tar.gz",
+    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ExamplesForHomalg/ExamplesForHomalgDoc.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
