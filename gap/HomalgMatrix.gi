@@ -1598,11 +1598,12 @@ InstallMethod( CreateHomalgMatrixFromList,
   function( L, R )
     local M;
     
-    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsHomalgRingElement ) ) then
+    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsRingElement ) ) then
         M := List( L, r -> List( r, String ) );
         M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
-    elif IsList( L ) and ForAll( L, IsHomalgRingElement ) then
-        M := Concatenation( "[", JoinStringsWithSeparator( List( L, String ) ), "]" );
+    elif IsList( L ) and ForAll( L, IsRingElement ) then
+        ## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
+        M := Concatenation( "[[", JoinStringsWithSeparator( List( L, String ), "],[" ), "]]" );
     else
         M := String( L );
     fi;
@@ -1619,10 +1620,10 @@ InstallMethod( CreateHomalgMatrixFromList,
   function( L, r, c, R )
     local M;
     
-    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsHomalgRingElement ) ) then
+    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsRingElement ) ) then
         M := List( L, r -> List( r, String ) );
         M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
-    elif IsList( L ) and ForAll( L, IsHomalgRingElement ) then
+    elif IsList( L ) and ForAll( L, IsRingElement ) then
         M := Concatenation( "[", JoinStringsWithSeparator( List( L, String ) ), "]" );
     else
         M := String( L );
