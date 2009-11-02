@@ -221,8 +221,8 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         q := _q;
     fi;
     
-    if HasAFreeResolution( rel ) then
-        d := AFreeResolution( rel );
+    if HasFreeResolution( rel ) then
+        d := FreeResolution( rel );
         degrees := ObjectDegreesOfComplex( d );
         j := Length( degrees );
         j := degrees[j];
@@ -233,7 +233,7 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         d_j := HomalgMap( d_j );
         d := HomalgComplex( d_j );
         
-        SetAFreeResolution( rel, d );
+        SetFreeResolution( rel, d );
     fi;
     
     #=====# begin of the core procedure #=====#

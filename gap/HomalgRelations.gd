@@ -111,9 +111,9 @@ DeclareAttribute( "EvalMatrixOfRelations",
 DeclareAttribute( "EvaluatedMatrixOfRelations",
         IsHomalgRelations );
 
-##  <#GAPDoc Label="AFreeResolution">
+##  <#GAPDoc Label="FreeResolution">
 ##  <ManSection>
-##    <Attr Arg="rel" Name="AFreeResolution"/>
+##    <Attr Arg="rel" Name="FreeResolution"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
 ##      The computed (part of a) free resolution of the module presented by &homalg; set of relations <A>rel</A>.
@@ -121,7 +121,7 @@ DeclareAttribute( "EvaluatedMatrixOfRelations",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "AFreeResolution",
+DeclareAttribute( "FreeResolution",
         IsHomalgRelations );
 
 ####################################

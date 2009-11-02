@@ -40,7 +40,7 @@
 <Section Label="Relations:Attributes">
 <Heading>Relations: Attributes</Heading>
 
-<#Include Label="AFreeResolution">
+<#Include Label="FreeResolution">
 
 </Section>
 

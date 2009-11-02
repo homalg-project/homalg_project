@@ -1075,10 +1075,10 @@ InstallMethod( Resolution,	### defines: Resolution
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
-            if HasAFreeResolution( relZ ) then
-                ResetFilterObj( relZ, AFreeResolution );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
             fi;
-            SetAFreeResolution( relZ, PZ );
+            SetFreeResolution( relZ, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[1] ) );
@@ -1114,10 +1114,10 @@ InstallMethod( Resolution,	### defines: Resolution
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
-            if HasAFreeResolution( relZ ) then
-                ResetFilterObj( relZ, AFreeResolution );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
             fi;
-            SetAFreeResolution( relZ, PZ );
+            SetFreeResolution( relZ, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[1] ) );
@@ -1151,10 +1151,10 @@ InstallMethod( Resolution,	### defines: Resolution
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
-            if HasAFreeResolution( relZ ) then
-                ResetFilterObj( relZ, AFreeResolution );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
             fi;
-            SetAFreeResolution( relZ, PZ );
+            SetFreeResolution( relZ, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
@@ -1189,10 +1189,10 @@ InstallMethod( Resolution,	### defines: Resolution
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
-            if HasAFreeResolution( relZ ) then
-                ResetFilterObj( relZ, AFreeResolution );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
             fi;
-            SetAFreeResolution( relZ, PZ );
+            SetFreeResolution( relZ, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
@@ -1326,10 +1326,10 @@ InstallMethod( Resolution,	### defines: Resolution
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
-            if HasAFreeResolution( relZ ) then
-                ResetFilterObj( relZ, AFreeResolution );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
             fi;
-            SetAFreeResolution( relZ, PZ );
+            SetFreeResolution( relZ, PZ );
             
             ## Z -> F -> B (horse shoe)
             ZFB := Resolution( q, KernelCosequence( mor[i] ) );
@@ -1367,10 +1367,10 @@ InstallMethod( Resolution,	### defines: Resolution
             
             ## make this horse shoe resolution of Z the standard one
             relZ := RelationsOfModule( Z );
-            if HasAFreeResolution( relZ ) then
-                ResetFilterObj( relZ, AFreeResolution );
+            if HasFreeResolution( relZ ) then
+                ResetFilterObj( relZ, FreeResolution );
             fi;
-            SetAFreeResolution( relZ, PZ );
+            SetFreeResolution( relZ, PZ );
             
             ## Z -> F -> B (horse shoe)
             ZFB := Resolution( q, KernelCosequence( mor[i] ) );
