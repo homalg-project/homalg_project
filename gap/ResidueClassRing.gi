@@ -558,9 +558,8 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         c := EntriesOfHomalgMatrix( c );
         if Length( c ) = 1 then
             c := c[1];
-            if IsHomalgRingElement( c ) and
-               IsInt( homalgPointer( c ) ) then
-                c := homalgPointer( c );
+            if IsHomalgRingElement( c ) and Int( Name( c ) ) <> fail then
+                c := Int( Name( c ) );
             fi;
         fi;
         if IsInt( c ) then

@@ -1138,9 +1138,6 @@ DeclareOperation( "RingName",
 DeclareOperation( "DisplayRing",
         [ IsHomalgRing ] );
 
-DeclareOperation( "homalgPointer",
-        [ IsHomalgRing ] );
-
 DeclareOperation( "homalgRingStatistics",
         [ IsHomalgRing ] );
 
