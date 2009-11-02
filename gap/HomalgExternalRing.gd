@@ -31,6 +31,9 @@ DeclareOperation( "homalgStream",
 DeclareOperation( "homalgExternalCASystemPID",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "homalgPointer",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "homalgExternalCASystem",
         [ IsHomalgRing ] );
 
