@@ -639,12 +639,14 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
     fi;
     
-    if io_info_level >= 7 then
-        Info( InfoHomalgToCAS, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
-    elif io_info_level >= 4 then
-        Info( InfoHomalgToCAS, 4, pictogram, " ", stream.prompt, "..." );
-    elif io_info_level >= 3 then
-        Info( InfoHomalgToCAS, 3, pictogram );
+    if io_info_level >= 3 then
+        if io_info_level >= 7 then
+            Info( InfoHomalgToCAS, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+        elif io_info_level >= 4 then
+            Info( InfoHomalgToCAS, 4, pictogram, " ", stream.prompt, "..." );
+        else
+            Info( InfoHomalgToCAS, 3, pictogram );
+        fi;
     fi;
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
