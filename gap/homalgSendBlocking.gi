@@ -115,13 +115,7 @@ InstallGlobalFunction( homalgFlush,
         
         if IsBound( stream.active_ring ) then
             
-            ## set the argument to be the active ring
-            if IsHomalgExternalRingRep( R ) and
-               not IsIdenticalObj( R, stream.active_ring ) then
-                homalgSendBlocking( "\"we've just reset the ring for garbage collection\"", "need_command", R, HOMALG_IO.Pictograms.initialize );
-            fi;
-            
-            active_ring_creation_number := stream.active_ring!.creation_number;
+            active_ring_creation_number := R!.creation_number;
             
             ring_creation_numbers := container!.ring_creation_numbers;
             
@@ -135,6 +129,12 @@ InstallGlobalFunction( homalgFlush,
             ## and of course remain zero when the matrix is mapped back to the original ring.
             
             var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) and IsBound( ring_creation_numbers[i] ) and ring_creation_numbers[i] = active_ring_creation_number );
+            
+            ## set the argument to be the active ring
+            if var <> [ ] and IsHomalgExternalRingRep( R ) and
+               not IsIdenticalObj( R, stream.active_ring ) then
+                homalgSendBlocking( "\"we've just reset the ring for garbage collection\"", "need_command", R, HOMALG_IO.Pictograms.initialize );
+            fi;
             
             ## free the entries corresponding to external objects about to be deleted
             Perform( var, function( i ) Unbind( ring_creation_numbers[i] ); end );
