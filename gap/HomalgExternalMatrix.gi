@@ -257,6 +257,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         else
             Error( "unable to open the file ", filename, " for writing\n" );
         fi;
+        HOMALG_IO.DirectoryForTemporaryFiles := directory;
     fi;
     
     if IO_Close( fs ) = fail then
