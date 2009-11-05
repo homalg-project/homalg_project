@@ -941,6 +941,29 @@ InstallMethod( IsTorsion,
 end );
 
 ##
+InstallMethod( IsHolonomic,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasGlobalDimension( R ) and	## FIXME: declare an appropriate property for such rings
+       ( ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) or
+         ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) ) then
+        
+        return IsArtinian( M );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( IsTorsionFree,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
