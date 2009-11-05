@@ -25,8 +25,13 @@ list := [
          "../gap/IO.gi",
          ];
 
-TestManualExamples( "doc", "HomalgToCAS.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "HomalgToCAS", "doc" )[1]![1], "HomalgToCAS.xml", list );
 
 GAPDocManualLab( "HomalgToCAS" );
+
+SizeScreen( size );
 
 quit;
