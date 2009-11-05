@@ -14,11 +14,10 @@
 ##  <#GAPDoc Label="IsHomalgExternalRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgExternalRingRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The external representation of &homalg; rings. <Br/><Br/>
-##      (It is a subrepresentation of the &GAP; representation <Br/>
-##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      The internal representation of &homalg; rings. <P/>
+##      (It is a representation of the &GAP; category <C>IsHomalgRing</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -30,7 +29,7 @@ DeclareRepresentation( "IsHomalgExternalRingRep",
 ##  <#GAPDoc Label="IsHomalgExternalRingElementRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="r" Name="IsHomalgExternalRingElementRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The representation of elements of external &homalg; rings. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingElement"/>.)
@@ -52,7 +51,7 @@ DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalRingsRep",
 ##  <#GAPDoc Label="IsHomalgExternalMatrixRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="A" Name="IsHomalgExternalMatrixRep"/>
-##    <Returns>true or false</Returns>
+##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The external representation of &homalg; matrices. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMatrix"/>.)

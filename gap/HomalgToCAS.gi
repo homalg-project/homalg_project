@@ -230,25 +230,110 @@ InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
     
 end );
 
-##
+##  <#GAPDoc Label="homalgIOMode">
+##  <ManSection>
+##    <Func Arg="str[, str2[, str3]]" Name="homalgIOMode"/>
+##    <Description>
+##      This function sets different modes which influence how much of the communication becomes visible.
+##      Handling the string <A>str</A> is <E>not</E> case-sensitive. <C>homalgIOMode</C> invokes
+##      the global function <C>homalgMode</C> defined in the &homalg; package with an <Q>appropriate</Q> argument (see code below).
+##      Alternatively, if a second or more strings are given, then <C>homalgMode</C> is invoked with the remaining strings
+##      <A>str2</A>, <A>str3</A>, ... at the end. In particular, you can use <C>homalgIOMode</C>( <A>str</A>, "" ) to reset the effect
+##      of invoking <C>homalgMode</C>.
+##      <Table Align="l|c|l">
+##      <Row>
+##        <Item><A>str</A></Item>
+##        <Item><A>str</A> (long form)</Item>
+##        <Item>mode description</Item>
+##      </Row>
+##      <HorLine/>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>""</Item>
+##        <Item>""</Item>
+##        <Item>the default mode, i.e. the communication protocol won't be visible</Item>
+##      </Row>
+##      <Row>
+##        <Item></Item>
+##        <Item></Item>
+##        <Item>(<C>homalgIOMode</C>( ) is a short form for <C>homalgIOMode</C>( "" ))</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"a"</Item>
+##        <Item>"all"</Item>
+##        <Item>combine the modes "debug" and "file"</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"b"</Item>
+##        <Item>"basic"</Item>
+##        <Item>the same as "picto" + <C>homalgMode</C>( "basic" )</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"d"</Item>
+##        <Item>"debug"</Item>
+##        <Item>view the complete communication protocol</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"f"</Item>
+##        <Item>"file"</Item>
+##        <Item>dump the communication protocol into a file with the name</Item>
+##      </Row>
+##      <Row>
+##        <Item></Item>
+##        <Item></Item>
+##        <Item><C>Concatenation</C>( "commands_file_of_", CAS, "_with_PID_", PID )</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"p"</Item>
+##        <Item>"picto"</Item>
+##        <Item>view the abbreviated communication protocol</Item>
+##      </Row>
+##      <Row>
+##        <Item></Item>
+##        <Item></Item>
+##        <Item>using the preassigned pictograms</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <HorLine/>
+##      </Table>
+##      All modes other than the "default"-mode only set their specific values and leave
+##      the other values untouched, which allows combining them to some extent. This also means that
+##      in order to get from one mode to a new mode (without the aim to combine them)
+##      one needs to reset to the "default"-mode first. <Br/><Br/>
+##      <E>Caution</E>:
+##      <List>
+##        <Item>In case you choose one of the modes "file" or "all" you might want to set
+##          the global variable <C>HOMALG_IO.DoNotDeleteTemporaryFiles</C> := <C>true</C>;
+##          this is only important if during the computations some matrices get converted via files
+##          (using <C>ConvertHomalgMatrixViaFile</C>), as reading these files will be part of the protocol!</Item>
+##        <Item>It makes sense for the dumped communication protocol to be (re)executed with the respective external system,
+##          only in case the latter is deterministic (i.e. same-input-same-output).</Item>
+##      </List>
+##      <Listing Type="Code"><![CDATA[
 InstallGlobalFunction( homalgIOMode,
   function( arg )
-    local nargs, mode, stream;
+    local nargs, mode, s;
     
     nargs := Length( arg );
     
     if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
         mode := "default";
     elif IsString( arg[1] ) then	## now we know, the string is not empty
-        if LowercaseString( arg[1]{[1]} ) = "a" then
+        s := arg[1];
+        if LowercaseString( s{[1]} ) = "a" then
             mode := "all";
-        elif LowercaseString( arg[1]{[1]} ) = "b" then
+        elif LowercaseString( s{[1]} ) = "b" then
             mode := "basic";
-        elif LowercaseString( arg[1]{[1]} ) = "d" then
+        elif LowercaseString( s{[1]} ) = "d" then
             mode := "debug";
-        elif LowercaseString( arg[1]{[1]} ) = "f" then
+        elif LowercaseString( s{[1]} ) = "f" then
             mode := "file";
-        elif LowercaseString( arg[1]{[1]} ) = "p" then
+        elif LowercaseString( s{[1]} ) = "p" then
             mode := "picto";
         else
             mode := "";
@@ -258,38 +343,44 @@ InstallGlobalFunction( homalgIOMode,
     fi;
     
     if mode = "default" then
-        HOMALG_IO.show_banners := true;
-        HOMALG_IO.InformAboutCASystemsWithoutActiveRings := true;
-        HOMALG_IO.SaveHomalgMaximumBackStream := false;
+        ## reset to the default values
         HOMALG_IO.color_display := false;
-        HOMALG_IO.DoNotDeleteTemporaryFiles := false;
-        HOMALG_IO.save_CAS_commands_to_file := false;
-        SetInfoLevel( InfoHomalgToCAS, 1 );
-    elif mode = "all" then
-        HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
-        HOMALG_IO.save_CAS_commands_to_file := true;
-        SetInfoLevel( InfoHomalgToCAS, 8 );
+        HOMALG_IO.save_CAS_commands_to_file := false;
+        HOMALG_IO.DoNotDeleteTemporaryFiles := false;
+        HOMALG_IO.SaveHomalgMaximumBackStream := false;
+        HOMALG_IO.InformAboutCASystemsWithoutActiveRings := true;
+        SetInfoLevel( InfoHomalgToCAS, 1 );
+	homalgMode( );
+    elif mode = "all" then
+        homalgIOMode( "debug" );
+        homalgIOMode( "file" );
     elif mode = "basic" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         SetInfoLevel( InfoHomalgToCAS, 4 );
+        homalgMode( "basic" );	## use homalgIOMode( "basic", "" ) to reset
     elif mode = "debug" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
         SetInfoLevel( InfoHomalgToCAS, 8 );
+        homalgMode( "debug" );	## use homalgIOMode( "debug", "" ) to reset
     elif mode = "file" then
-        HOMALG_IO.color_display := true;
-        HOMALG_IO.show_banners := true;
         HOMALG_IO.save_CAS_commands_to_file := true;
-        SetInfoLevel( InfoHomalgToCAS, 4 );
     elif mode = "picto" then
         HOMALG_IO.color_display := true;
         HOMALG_IO.show_banners := true;
-        HOMALG_IO.DirectoryForTemporaryFiles := "/dev/shm/";
         SetInfoLevel( InfoHomalgToCAS, 4 );
+	homalgMode( "logic" );	## use homalgIOMode( "picto", "" ) to reset
     fi;
     
-    CallFuncList( homalgMode, arg );
+    if nargs > 1 and IsString( arg[2] ) then
+        CallFuncList( homalgMode, arg{[ 2 .. nargs ]} );
+    fi;
     
 end );
+##  ]]></Listing>
+##    </Description>
+##    <#Include Label="homalgSendBlocking:view_communication">
+##  </ManSection>
+##  <#/GAPDoc>

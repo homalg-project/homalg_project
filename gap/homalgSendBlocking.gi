@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff to use the fantastic GAP4 I/O package of Max.
+##  Implementation stuff to manage the communication.
 ##
 #############################################################################
 
@@ -359,10 +359,10 @@ end );
 ##
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
-    local L, nargs, io_info_level, info_level, properties,
-          need_command, need_display, need_output, ar, pictogram,
-          option, break_lists, R, ext_obj, stream, type, prefix, suffix, e,
-          RP, CAS, PID, homalg_variable, l, eoc, enter, fs, max, display_color;
+    local L, nargs, properties, need_command, need_display, need_output, ar,
+          pictogram, option, break_lists, R, ext_obj, stream, type,
+          prefix, suffix, e, RP, CAS, PID, homalg_variable, l, eoc, enter,
+          fs, io_info_level, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -379,9 +379,6 @@ InstallGlobalFunction( homalgSendBlocking,
     fi;
     
     nargs := Length( arg );
-    
-    io_info_level := InfoLevel( InfoHomalgToCAS );
-    info_level := 7;
     
     properties := [ ];
     
@@ -425,7 +422,6 @@ InstallGlobalFunction( homalgSendBlocking,
                 need_command := true;
             elif PositionSublist( LowercaseString( ar ), "display" ) <> fail then
                 need_display := true;
-                info_level := 8;
             elif PositionSublist( LowercaseString( ar ), "output" ) <> fail then
                 need_output := true;
             else
@@ -472,28 +468,6 @@ InstallGlobalFunction( homalgSendBlocking,
         
         stream := homalgStream( ext_obj );
         
-    fi;
-    
-    if not IsBound( pictogram ) then
-        pictogram := "   ";
-    elif io_info_level >= 3 then
-        if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and IsBound( HOMALG.color_BOE ) then
-            pictogram := Concatenation( HOMALG.color_BOE, pictogram, "\033[0m" );
-        elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and IsBound( HOMALG.color_BOB ) then
-            pictogram := Concatenation( HOMALG.color_BOB, pictogram, "\033[0m" );
-        elif pictogram = HOMALG_IO.Pictograms.DecideZero and IsBound( HOMALG.color_BOD ) then
-            pictogram := Concatenation( HOMALG.color_BOD, pictogram, "\033[0m" );
-        elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and IsBound( HOMALG.color_BOH ) then
-            pictogram := Concatenation( HOMALG.color_BOH, pictogram, "\033[0m" );
-        elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and IsBound( HOMALG.color_BOC ) then
-            pictogram := Concatenation( HOMALG.color_BOC, pictogram, "\033[0m" );
-        elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and IsBound( HOMALG.color_BOP ) then
-            pictogram := Concatenation( HOMALG.color_BOP, pictogram, "\033[0m" );
-        elif need_output or need_display then
-            pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_output, pictogram, "\033[0m" );
-        else
-            pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_command, pictogram, "\033[0m" );
-        fi;
     fi;
     
     if IsBound( R ) then
@@ -639,15 +613,61 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
     fi;
     
+    ##  <#GAPDoc Label="homalgSendBlocking:view_communication">
+    ##    <Description>
+    ##      This is the part of the global function <C>homalgSendBlocking</C>
+    ##      that controls the visibility of the communication.
+    ##      <Listing Type="Code"><![CDATA[
+    io_info_level := InfoLevel( InfoHomalgToCAS );
+    
+    if not IsBound( pictogram ) then
+        pictogram := "   ";
+    elif io_info_level >= 3 then
+        ## add colors to the pictograms
+        if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
+           IsBound( HOMALG.color_BOE ) then
+            pictogram := Concatenation( HOMALG.color_BOE, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and
+          IsBound( HOMALG.color_BOB ) then
+            pictogram := Concatenation( HOMALG.color_BOB, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.DecideZero and
+          IsBound( HOMALG.color_BOD ) then
+            pictogram := Concatenation( HOMALG.color_BOD, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and
+          IsBound( HOMALG.color_BOH ) then
+            pictogram := Concatenation( HOMALG.color_BOH, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and
+          IsBound( HOMALG.color_BOC ) then
+            pictogram := Concatenation( HOMALG.color_BOC, pictogram, "\033[0m" );
+        elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and
+          IsBound( HOMALG.color_BOP ) then
+            pictogram := Concatenation( HOMALG.color_BOP, pictogram, "\033[0m" );
+        elif need_output or need_display then
+            pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_output,
+                                 pictogram, "\033[0m" );
+        else
+            pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_command,
+                                 pictogram, "\033[0m" );
+        fi;
+    fi;
+    
     if io_info_level >= 3 then
-        if io_info_level >= 7 then
-            Info( InfoHomalgToCAS, info_level, pictogram, " ", stream.prompt, L{[ 1 .. Length( L ) - 1 ]} );
+        if ( io_info_level >= 7 and not need_display ) or io_info_level >= 8 then
+            ## print the pictogram, the prompt of the external system,
+            ## and the sent command
+            Info( InfoHomalgToCAS, 7, pictogram, " ", stream.prompt,
+                  L{[ 1 .. Length( L ) - 1 ]} );
         elif io_info_level >= 4 then
+            ## print the pictogram and the prompt of the external system
             Info( InfoHomalgToCAS, 4, pictogram, " ", stream.prompt, "..." );
         else
+            ## print the pictogram only
             Info( InfoHomalgToCAS, 3, pictogram );
         fi;
     fi;
+    ##  ]]></Listing>
+    ##    </Description>
+    ##  <#/GAPDoc>
     
     stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
     

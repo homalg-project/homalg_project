@@ -22,23 +22,43 @@
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Universität des Saarlandes, <Br/>
-      66041 Saarbrücken, <Br/>
-      Building E2 4, <Br/>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 KaiserslauternBuilding, <Br/>
       Germany
     </Address>
-    <Email>barakat@math.uni-sb.de</Email>
+    <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Author>Thomas Breuer<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl D für Mathematik, RWTH-Aachen,<Br/>
+      Templergraben 64<Br/>
+      52062 Aachen<Br/>
+      Germany
+    </Address>
+    <Email>sam@math.rwth-aachen.de</Email>
+    <Homepage>http://www.math.rwth-aachen.de/~Thomas.Breuer/</Homepage>
   </Author>
   <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik<Br/>
+      Lehrstuhl B für Mathematik, RWTH-Aachen,<Br/>
       Templergraben 64<Br/>
       52062 Aachen<Br/>
       Germany
     </Address>
     <Email>simon.goertzen@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
+  </Author>
+  <Author>Frank Lübeck<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl D für Mathematik, RWTH-Aachen,<Br/>
+      Templergraben 64<Br/>
+      52062 Aachen<Br/>
+      Germany
+    </Address>
+    <Email>frank.luebeck@math.rwth-aachen.de</Email>
+    <Homepage>http://www.math.rwth-aachen.de/~Frank.Luebeck/</Homepage>
   </Author>
   <Date>October 2009</Date>
   

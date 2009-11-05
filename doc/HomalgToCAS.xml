@@ -13,9 +13,12 @@
 	  <!ENTITY cython '<Package>cython</Package>'>
 	  <!ENTITY C '<Package>C</Package>'>
 	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
+	  <!ENTITY Macaulay2 '<Package>Macaulay2</Package>'>
 	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
 	  <!ENTITY COLEM "<Package>COLEM</Package>">
 	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
@@ -27,6 +30,7 @@
 	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
 	  <!ENTITY HomalgToCAS "<Package>HomalgToCAS</Package>">
 	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+	  <!ENTITY MapleForHomalg "<Package>MapleForHomalg</Package>">
 	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
 	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
 	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
@@ -62,7 +66,12 @@
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
+<#Include SYSTEM "Watch.xml">
+<#Include SYSTEM "Rings.xml">
+
 </Body>
+
+<#Include SYSTEM "appendix.xml">
 
 <Bibliography Databases="HomalgToCASBib.xml"/>
 

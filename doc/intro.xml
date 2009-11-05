@@ -17,7 +17,54 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Cite Key="homalg-project"/>
+&HomalgToCAS; is one of the core packages of the &homalg; project
+<Cite Key="homalg-project"/>. But as one of the rather technical
+packages, this manual is probably not of interest for the average
+uers. The average user will usually not get in direct contact with the
+operations provided by this package. <P/>
+
+Quoting from the Appendix <Ref Appendix="The Core Packages"
+BookName="homalg"/> of the &homalg; package manual (&see;
+<Ref Sect="HomalgToCAS" BookName="homalg"/>): <P/>
+
+<Quoted>The package &HomalgToCAS; (which needs the &homalg; package)
+includes all what is needed to let the black boxes used by &homalg;
+reside in external computer algebra systems. So as mentioned above,
+&HomalgToCAS; is the right place to declare the three &GAP;
+representations external rings, external ring elements, and external
+matrices. Still, &HomalgToCAS; is independent from the external
+computer algebra system with which &GAP; will communicate <E>and</E>
+independent of how this communication physically looks like.</Quoted>
+
+<Section Label="HomalgToCAS-provides">
+<Heading>&HomalgToCAS; provides ...</Heading>
+
+<List>
+  <Item>Declaration and construction of
+    <List>
+      <Item>external objects (which are pointers to data (rings,ring
+	elements, matrices, ...) residing in external systems)</Item>
+      <Item>external rings (as a new representation for the
+	&GAP4;-category of homalg rings)</Item>
+      <Item>external ring elements (as a new representation for the
+	&GAP4;-category of homalg ring elements)</Item>
+      <Item>external matrices (as a new representation for the
+	&GAP4;-category of homalg matrices)</Item>
+    </List>
+  </Item>
+  <Item><C>LaunchCAS</C>: the standard interface used by &homalg; to launch
+    external systems</Item>
+  <Item><C>TerminateCAS</C>: the standard interface used by &homalg; to
+    terminate external systems</Item>
+  <Item><C>homalgSendBlocking</C>: the standard interface used by &homalg; to
+    send commands to external systems</Item>
+  <Item>External garbage collection: delete the data in the external
+    systems that became obsolete for &homalg;</Item>
+  <Item><C>homalgIOMode</C>: decide how much of the communication you
+    want to see</Item>
+</List>
+
+</Section>
 
 </Chapter>
 
