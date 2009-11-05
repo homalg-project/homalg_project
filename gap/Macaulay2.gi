@@ -724,15 +724,13 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInMacaulay2Rep, IsHomalgExternalRingInMacaulay2Rep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP;
+    local ar, var, anti, comm, ext_obj, S, RP;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
     var := ar[1];
     anti := ar[2];
     comm := ar[3];
-    
-    stream := homalgStream( R );
     
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( T ) then

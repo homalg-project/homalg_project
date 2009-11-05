@@ -545,47 +545,18 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings in MAGMA",
-        [ IsHomalgExternalRingInMAGMARep, IsList ],
+        [ IsHomalgExternalRingInMAGMARep, IsHomalgExternalRingInMAGMARep, IsList ],
         
-  function( R, indets )
-    local var, nr_var, anti, nr_anti, properties, stream, r,
-          ext_obj, S, v, RP;
+  function( R, T, indets )
+    local ar, var, anti, comm, r, ext_obj, S;
     
-    #check whether base ring is polynomial and then extract needed data
-    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
-        var := IndeterminatesOfPolynomialRing( R );
-        nr_var := Length( var );
-    else
-        Error( "base ring is not a polynomial ring" );
-    fi;
+    ar := _PrepareInputForExteriorRing( R, T, indets );
     
-    ##get the new indeterminates (the anti commuting variables) for the ring and save them in anti
-    if IsString( indets ) and indets <> "" then
-        anti := SplitString( indets, "," );
-    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
-        anti := indets;
-    else
-        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
-    fi;
+    var := ar[1];
+    anti := ar[2];
+    comm := ar[3];
     
-    nr_anti := Length( anti );
-    
-    if nr_var <> nr_anti then
-        Error( "number of indeterminates in base ring does not equal the number of anti commuting variables\n" );
-    fi;
-    
-    if Intersection2( anti, var ) <> [ ] then
-        Error( "the following indeterminate(s) are already elements of the base ring: ", Intersection2( anti, var ), "\n" );
-    fi;
-    
-    if not ForAll( var, HasName ) then
-        Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
-    fi;
-    
-    properties := [ ];
-    
-    stream := homalgStream( R );
-    
+    ## create the new ring
     r := CoefficientsRing( R );
     
     ext_obj := homalgSendBlocking( [ "ExteriorAlgebra(", r, Length( anti ), ")" ], [ ], [ "<", anti, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
@@ -596,23 +567,17 @@ InstallMethod( ExteriorRing,
     
     Perform( anti, function( v ) SetName( v, homalgPointer( v ) ); end );
     
+    comm := List( comm , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( comm, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
     SetIsExteriorRing( S, true );
     
+    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
+        SetBaseRing( S, T );
+    fi;
+    
     SetRingProperties( S, R, anti );
-    
-    RP := homalgTable( S );
-    
-#    RP!.SetInvolution :=
-#      function( R )
-#        homalgSendBlocking( Concatenation(
-#                [ "\nproc Involution (matrix M)\n{\n" ],
-#                [ "  map F = ", R ],
-#                Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ a ] ) ),
-#                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
-#                ), "need_command", HOMALG_IO.Pictograms.define );
-#    end;
-#    
-#    RP!.SetInvolution( S );
     
     return S;
     

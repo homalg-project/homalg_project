@@ -825,7 +825,9 @@ InstallMethod( ExteriorRing,
     
     SetIsExteriorRing( S, true );
     
-    SetBaseRing( S, T );
+    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
+        SetBaseRing( S, T );
+    fi;
     
     SetRingProperties( S, R, anti );
     
