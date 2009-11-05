@@ -4,29 +4,33 @@
 
   Basic.xml            homalg package documentation            Mohamed Barakat
 
-         Copyright (C) 2007-2008, Mohamed Barakat, RWTH-Aachen
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 -->
 
 <Appendix Label="Basic Operations">
-<Heading>The Matrix Basic Operations</Heading>
+<Heading>The Basic Matrix Operations</Heading>
 
 <Section Label="Main">
 <Heading>Main</Heading>
 
+These are the operations used to solve one-sided (in)homogeneous
+linear systems <M>XA=B</M> resp. <M>AX=B</M> (&see; Appendix
+<Ref Chap="homalg-Idea"/>).
+
 <List>
-  <Item><C>BasisOfRowModule</C></Item>
-  <Item><C>BasisOfColumnModule</C></Item>
+  <Item><Ref Oper="BasisOfRowModule" Label="for matrices"/></Item>
+  <Item><Ref Oper="BasisOfColumnModule" Label="for matrices"/></Item>
 </List>
 
 <List>
-  <Item><C>DecideZeroRows</C></Item>
-  <Item><C>DecideZeroColumns</C></Item>
+  <Item><Ref Oper="DecideZeroRows" Label="for pairs of matrices"/></Item>
+  <Item><Ref Oper="DecideZeroColumns" Label="for pairs of matrices"/></Item>
 </List>
 
 <List>
-  <Item><C>SyzygiesGeneratorsOfRows</C></Item>
-  <Item><C>SyzygiesGeneratorsOfColumns</C></Item>
+  <Item><Ref Oper="SyzygiesGeneratorsOfRows" Label="for matrices"/></Item>
+  <Item><Ref Oper="SyzygiesGeneratorsOfColumns" Label="for matrices"/></Item>
 </List>
 
 </Section>
@@ -35,13 +39,13 @@
 <Heading>Effective</Heading>
 
 <List>
-  <Item><C>BasisOfRowsCoeff</C></Item>
-  <Item><C>BasisOfColumnsCoeff</C></Item>
+  <Item><Ref Oper="BasisOfRowsCoeff" Label="for matrices"/></Item>
+  <Item><Ref Oper="BasisOfColumnsCoeff" Label="for matrices"/></Item>
 </List>
 
 <List>
-  <Item><C>DecideZeroRowsEffectively</C></Item>
-  <Item><C>DecideZeroColumnsEffectively</C></Item>
+  <Item><Ref Oper="DecideZeroRowsEffectively" Label="for pairs of matrices"/></Item>
+  <Item><Ref Oper="DecideZeroColumnsEffectively" Label="for pairs of matrices"/></Item>
 </List>
 
 </Section>
@@ -50,8 +54,8 @@
 <Heading>Relative</Heading>
 
 <List>
-  <Item><C>RelativeSyzygiesGeneratorsOfRows</C></Item>
-  <Item><C>RelativeSyzygiesGeneratorsOfColumns</C></Item>
+  <Item><Ref Oper="SyzygiesGeneratorsOfRows" Label="for pairs of matrices"/></Item>
+  <Item><Ref Oper="SyzygiesGeneratorsOfColumns" Label="for pairs of matrices"/></Item>
 </List>
 
 </Section>
@@ -60,13 +64,13 @@
 <Heading>Reduced</Heading>
 
 <List>
-  <Item><C>ReducedBasisOfRowModule</C></Item>
-  <Item><C>ReducedBasisOfColumnModule</C></Item>
+  <Item><Ref Oper="ReducedBasisOfRowModule" Label="for matrices"/></Item>
+  <Item><Ref Oper="ReducedBasisOfColumnModule" Label="for matrices"/></Item>
 </List>
 
 <List>
-  <Item><C>ReducedSyzygiesGeneratorsOfRows</C></Item>
-  <Item><C>ReducedSyzygiesGeneratorsOfColumns</C></Item>
+  <Item><Ref Oper="ReducedSyzygiesGeneratorsOfRows" Label="for matrices"/></Item>
+  <Item><Ref Oper="ReducedSyzygiesGeneratorsOfColumns" Label="for matrices"/></Item>
 </List>
 
 </Section>

@@ -12,6 +12,7 @@ bib := ParseBibFiles( "doc/homalg.bib" );
 WriteBibXMLextFile( "doc/homalgBib.xml", bib );
 
 list := [
+         "../gap/homalg.gi",
          "../gap/HomalgDiagram.gd",
          "../gap/HomalgDiagram.gi",
          "../gap/HomalgRing.gd",

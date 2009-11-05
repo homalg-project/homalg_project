@@ -480,7 +480,7 @@ end );
 
 ##  <#GAPDoc Label="DecideZeroRows">
 ##  <ManSection>
-##    <Oper Arg="A, B" Name="DecideZeroRows" Label="for matrices"/>
+##    <Oper Arg="A, B" Name="DecideZeroRows" Label="for pairs of matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of columns and defined over the same ring <M>R</M>
@@ -573,7 +573,7 @@ end );
 
 ##  <#GAPDoc Label="DecideZeroColumns">
 ##  <ManSection>
-##    <Oper Arg="A, B" Name="DecideZeroColumns" Label="for matrices"/>
+##    <Oper Arg="A, B" Name="DecideZeroColumns" Label="for pairs of matrices"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of rows and defined over the same ring <M>R</M>

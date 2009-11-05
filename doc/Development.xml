@@ -4,7 +4,7 @@
 
   development.xml            homalg package documentation            Mohamed Barakat
 
-         Copyright (C) 2007, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 This chapter gives a short introduction and explains the philosophy
 behind the package.
@@ -151,14 +151,14 @@ to <Alt Only="HTML"><Ref Text="operations"
 Sect="Operations and Methods"
 BookName="Prg Tutorial"/></Alt><Alt Not="HTML">operations</Alt>.
 
-In particular one can also install methods that depend on two or more
+In particular, one can also install methods that depend on two or more
 arguments. The index of a subgroup is an easy example of an operation
 illustrating this. While it would be sufficient to bind a method for
 computing the order of a group to the object representing the group,
 it is not clear what to do with the index, since its definition
 involves two objects: a group <M>G</M> and a subgroup <M>U</M>. Note
-that the index of <M>U</M> in a subgroup of <M>G</M>
-containing <M>U</M> might also be of interest. Things become even more
+that the index of <M>U</M> in a subgroup of <M>G</M> containing
+<M>U</M> might also be of interest. Things become even more
 complicated when the arguments of the operation are unrelated
 objects. Moreover, binding methods to operations makes it possible for
 the programming language to support the installation of one or more

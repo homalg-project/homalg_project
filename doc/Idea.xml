@@ -4,7 +4,7 @@
 
   Idea.xml            homalg package documentation            Mohamed Barakat
 
-         Copyright (C) 2007-2008, Mohamed Barakat, RWTH-Aachen
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 -->
 
@@ -25,53 +25,20 @@ Luckily such substitutes exist for many rings of interest. Beside the
 well-known Hermite normal form algorithm for principal ideal rings it
 turns out that apropriate generalizations of the classical Gröbner
 basis algorithm for polynomial rings provide the desired substitute
-for a wide class of commutative <E>and</E> noncommutative rings. (For
-noncommutative rings the above discussion has to be restricted to
-homological constructions leading to one-sided linear
-systems <M>XA=B</M> resp. <M>AX=B</M> (&see;
-<Ref Label="homalg-limitation" Text="Principal limitation"/>)).
+for a wide class of commutative <E>and</E> noncommutative rings. Note
+that for noncommutative rings the above discussion has to be
+restricted to homological constructions leading to one-sided linear
+systems <M>XA=B</M> resp. <M>AX=B</M> (&see; <Ref
+Label="homalg-limitation" Text="Principal limitation"/>). <P/>
+
+The two appendices <Ref Chap="Basic Operations"/> and
+<Ref Chap="Tool Operations"/> provide the list of matrix operations
+needed by &homalg; to perform homological computations. <P/>
+
+Subsection <Ref Sect="homalg-delegates"/> explains how these matrix
+operations can be delegated to external systems.
 
 
-
-<List>
-  <Item><C>BasisOfRowModule</C></Item>
-  <Item><C>BasisOfColumnModule</C></Item>
-</List>
-
-<List>
-  <Item><C>DecideZeroRows</C></Item>
-  <Item><C>DecideZeroColumns</C></Item>
-</List>
-
-<List>
-  <Item><C>SyzygiesGeneratorsOfRows</C></Item>
-  <Item><C>SyzygiesGeneratorsOfColumns</C></Item>
-</List>
-
-<List>
-  <Item><C>BasisOfRowsCoeff</C></Item>
-  <Item><C>BasisOfColumnsCoeff</C></Item>
-</List>
-
-<List>
-  <Item><C>DecideZeroRowsEffectively</C></Item>
-  <Item><C>DecideZeroColumnsEffectively</C></Item>
-</List>
-
-<List>
-  <Item><C>RelativeSyzygiesGeneratorsOfRows</C></Item>
-  <Item><C>RelativeSyzygiesGeneratorsOfColumns</C></Item>
-</List>
-
-<List>
-  <Item><C>ReducedBasisOfRowModule</C></Item>
-  <Item><C>ReducedBasisOfColumnModule</C></Item>
-</List>
-
-<List>
-  <Item><C>ReducedSyzygiesGeneratorsOfRows</C></Item>
-  <Item><C>ReducedSyzygiesGeneratorsOfColumns</C></Item>
-</List>
 
 <!-- ############################################################ -->
 

@@ -86,6 +86,7 @@
 <#Include SYSTEM "Tools.xml">
 <#Include SYSTEM "Logic.xml">
 <#Include SYSTEM "ResidueClassRingForHomalg.xml">
+<#Include SYSTEM "Debugging.xml">
 <#Include SYSTEM "Project.xml">
 <#Include SYSTEM "appendix.xml">
 

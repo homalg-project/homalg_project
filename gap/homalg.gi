@@ -714,26 +714,76 @@ InstallGlobalFunction( homalgNamesOfComponentsToIntLists,
                   b -> b <> fail );
 end );
 
-##
+##  <#GAPDoc Label="homalgMode">
+##  <ManSection>
+##    <Meth Arg="str[, str2]" Name="homalgMode"/>
+##    <Description>
+##      This function sets different modes which influence how much of the basic matrix operations and
+##      the logical matrix methods become visible (&see; Appendices <Ref Chap="Basic Operations"/>, <Ref Chap="Logic"/>).
+##      Handling the string <A>str</A> is <E>not</E> case-sensitive.
+##      If a second string <A>str2</A> is given, then <C>homalgMode</C>( <A>str2</A> ) is invoked at the end.
+##      In case you let &homalg; delegate matrix operations to an external system the you might also want to
+##      check <C>homalgIOMode</C> in the &HomalgToCAS; package manual.
+##      <Table Align="l|c|l">
+##      <Row>
+##        <Item><A>str</A></Item>
+##        <Item><A>str</A> (long form)</Item>
+##        <Item>mode description</Item>
+##      </Row>
+##      <HorLine/>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>""</Item>
+##        <Item>""</Item>
+##        <Item>the default mode, i.e. the computation protocol won't be visible</Item>
+##      </Row>
+##      <Row>
+##        <Item></Item>
+##        <Item></Item>
+##        <Item>(<C>homalgMode</C>( ) is a short form for <C>homalgMode</C>( "" ))</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"b"</Item>
+##        <Item>"basic"</Item>
+##        <Item>make the basic matrix operations visible + <C>homalgMode</C>( "logic" )</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"d"</Item>
+##        <Item>"debug"</Item>
+##        <Item>same as "basic" but also makes <C>Row/ColumnReducedEchelonForm</C> visible</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <Row>
+##        <Item>"l"</Item>
+##        <Item>"logic"</Item>
+##        <Item>make the logical methods in &LIMAT; and &COLEM; visible</Item>
+##      </Row>
+##      <Row><Item></Item><Item></Item><Item></Item></Row>
+##      <HorLine/>
+##      </Table>
+##      All modes other than the "default"-mode only set their specific values and leave
+##      the other values untouched, which allows combining them to some extent. This also means that
+##      in order to get from one mode to a new mode (without the aim to combine them)
+##      one needs to reset to the "default"-mode first. This can be done using <C>homalgMode</C>( "", new_mode );
+##      <Listing Type="Code"><![CDATA[
 InstallGlobalFunction( homalgMode,
   function( arg )
-    local nargs, mode;
+    local nargs, mode, s;
     
     nargs := Length( arg );
     
     if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
         mode := "default";
     elif IsString( arg[1] ) then	## now we know, the string is not empty
-        if LowercaseString( arg[1]{[1]} ) = "a" then
-            mode := "all";
-        elif LowercaseString( arg[1]{[1]} ) = "b" then
+        s := arg[1];
+        if LowercaseString( s{[1]} ) = "b" then
             mode := "basic";
-        elif LowercaseString( arg[1]{[1]} ) = "d" then
+        elif LowercaseString( s{[1]} ) = "d" then
             mode := "debug";
-        elif LowercaseString( arg[1]{[1]} ) = "f" then
-            mode := "file";
-        elif LowercaseString( arg[1]{[1]} ) = "p" then
-            mode := "picto";
+        elif LowercaseString( s{[1]} ) = "l" then
+            mode := "logic";
         else
             mode := "";
         fi;
@@ -746,34 +796,27 @@ InstallGlobalFunction( homalgMode,
         SetInfoLevel( InfoCOLEM, 1 );
         SetInfoLevel( InfoLIMAT, 1 );
         SetInfoLevel( InfoHomalgBasicOperations, 1 );
-    elif mode = "all" then
-        HOMALG.color_display := true;
-        SetInfoLevel( InfoCOLEM, 2 );
-        SetInfoLevel( InfoLIMAT, 2 );
-        SetInfoLevel( InfoHomalgBasicOperations, 4 );
     elif mode = "basic" then
-        HOMALG.color_display := true;
-        SetInfoLevel( InfoCOLEM, 2 );
-        SetInfoLevel( InfoLIMAT, 2 );
         SetInfoLevel( InfoHomalgBasicOperations, 3 );
+        homalgMode( "logic" );
     elif mode = "debug" then
-        HOMALG.color_display := true;
-        SetInfoLevel( InfoCOLEM, 2 );
-        SetInfoLevel( InfoLIMAT, 2 );
         SetInfoLevel( InfoHomalgBasicOperations, 4 );
-    elif mode = "file" then
+        homalgMode( "logic" );
+    elif mode = "logic" then
         HOMALG.color_display := true;
         SetInfoLevel( InfoCOLEM, 2 );
         SetInfoLevel( InfoLIMAT, 2 );
-        SetInfoLevel( InfoHomalgBasicOperations, 1 );
-    elif mode = "picto" then
-        HOMALG.color_display := true;
-        SetInfoLevel( InfoCOLEM, 2 );
-        SetInfoLevel( InfoLIMAT, 2 );
-        SetInfoLevel( InfoHomalgBasicOperations, 1 );
+    fi;
+    
+    if nargs > 1 and IsString( arg[2] ) then
+        homalgMode( arg[2] );
     fi;
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #

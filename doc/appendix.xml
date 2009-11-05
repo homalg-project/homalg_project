@@ -4,14 +4,14 @@
 
   appendix.xml            homalg package documentation            Mohamed Barakat
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 -->
 
 <Appendix Label="FileOverview">
 <Heading>Overview of the &homalg; Package Source Code</Heading>
 
-The &homalg; package reached more than 30.000 lines of &GAP4; code
+The &homalg; package reached more than 50.000 lines of &GAP4; code
 (excluding the documentation) before the first release was made. To
 keep this amount of code tracebale, the package was split in several
 files.
@@ -30,6 +30,10 @@ files.
 <Row>
   <Item><F>homalg</F></Item>
   <Item>definitions of the basic &GAP4; categories</Item>
+</Row>
+<Row>
+  <Item></Item>
+  <Item>and some tool functions (e.g. <C>homalgMode</C>)</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>

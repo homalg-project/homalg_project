@@ -8,6 +8,7 @@ LoadPackage( "homalg" );
 LoadPackage( "GAPDoc" );
 
 list := [
+         "../gap/homalg.gi",
          "../gap/HomalgDiagram.gd",
          "../gap/HomalgDiagram.gi",
          "../gap/HomalgRing.gd",
