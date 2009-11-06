@@ -135,6 +135,8 @@ DeclareAttribute( "AsKernel",
 
 DeclareGlobalFunction( "ContainerForWeakPointers" );
 
+DeclareGlobalFunction( "homalgTimeToString" );
+
 DeclareGlobalFunction( "homalgTotalRuntimes" );
 
 DeclareGlobalFunction( "AddLeftRightLogicalImplicationsForHomalg" );

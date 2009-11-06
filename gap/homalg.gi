@@ -189,7 +189,7 @@ InstallGlobalFunction( homalgTotalRuntimes,
         return HOMALG.TotalRuntimes;
     fi;
     
-    return TimeToString( HOMALG.TotalRuntimes - arg[1] );
+    return Concatenation( StringTime( HOMALG.TotalRuntimes - arg[1] ), " h" );
     
 end );
 
