@@ -15,8 +15,13 @@ list := [
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          ];
 
-TestManualExamples( "doc", "GaussForHomalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "GaussForHomalg", "doc" )[1]![1], "GaussForHomalg.xml", list );
 
 GAPDocManualLab( "GaussForHomalg" );
+
+SizeScreen( size );
 
 quit;

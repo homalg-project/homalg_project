@@ -28,6 +28,8 @@
 
 <Body>
 
+<Index>&GaussForHomalg;</Index>
+
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "usage.xml">
 <#Include SYSTEM "methods.xml">
