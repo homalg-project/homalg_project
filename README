@@ -22,8 +22,25 @@ of your GAP 4 installation. It creates a subdirectory called `RingsForHomalg'.
 
 This completes the installation of the package.
 
-Recompiling the documentation is possible by the command `gap makedoc.g'
+Recompiling the documentation is possible by the command `make doc'
 in the RingsForHomalg directory. But this should not be necessary.
+
+Testing the package is possible by the command `make test'
+in the RingsForHomalg directory.
+
+You need the computer algebra systems
+. Singular (version >= 3-0-4): executable -> Singular
+. Macaulay (version >= 1.2): executable -> M2
+. MAGMA (version >= 2.14): executable -> magma
+. Maple (version >= 9 (not 9.5)): executable -> maple
+. Sage (version >= 4.1.1): executable -> sage
+with their executables in the global PATH to run the tests.
+
+Under MacOSX you can only use Maple9 in conjunction with IO_ForHomalg
+as it is the last version (apart from the unusable Maple9.5) with
+the command-line-interface cmaple. The package MapleForHomalg
+of Thomas Bächler gives another alternative but for it you need a
+Maple as an Intel(R) or universal binary.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.

@@ -16,20 +16,32 @@
 <TitlePage>
   <Title>&RingsForHomalg;</Title>
   <Subtitle>Rings in External Computer Algebra Systems for the GAP-Package homalg</Subtitle>
-  <TitleComment>(<E>this manual is still under construction</E>) <Br/><Br/>
-    This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
-    <URL>http://homalg.math.rwth-aachen.de/~barakat/IO_ForHomalg/chap0.html</URL> <Br/><Br/>
-    An <B>offline</B> version should be included in the documentation subfolder of the package.
+  <TitleComment>(<E>this manual is still under construction</E>)
+    <Br/><Br/>
+    
+    This manual is best viewed as an <B>HTML</B> document. The latest
+    version is available <B>online</B> at: <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/RingsForHomalg/chap0.html</URL>
+    <Br/><Br/>
+    
+    An <B>offline</B> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the &homalg;-project:
+    <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Universität des Saarlandes, <Br/>
-      66041 Saarbrücken, <Br/>
-      Building E2 4, <Br/>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
       Germany
     </Address>
-    <Email>barakat@math.uni-sb.de</Email>
+    <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
   <Author>Simon Goertzen
@@ -88,7 +100,7 @@
     <Email>daniel@momo.math.rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
   </Author>
-  <Date>October 2009</Date>
+  <Date>November 2009</Date>
   
   <Copyright>
     &copyright; 2007-2009 by

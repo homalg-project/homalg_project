@@ -6,16 +6,16 @@ doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g VERSION \
 		doc/RingsForHomalg.bib doc/*.xml \
 		gap/*.gd gap/*.gi examples/*.g
-	        gapL makedoc.g
+	        gap makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL -x 80 maketest.g
+	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/RingsForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" RingsForHomalg/doc/*.* RingsForHomalg/gap/*.{gi,gd} RingsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} RingsForHomalg/maple/{homalg.*,PIR.*,Involutive.*,Janet.*,JanetOre.*} RingsForHomalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/RingsForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" RingsForHomalg/doc/*.* RingsForHomalg/doc/clean RingsForHomalg/gap/*.{gi,gd} RingsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} RingsForHomalg/maple/{homalg.*,PIR.*,Involutive.*,Janet.*,JanetOre.*} RingsForHomalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/RingsForHomalg/public_html
 WEBPOS_FINAL=~/Sites/homalg-project/RingsForHomalg
