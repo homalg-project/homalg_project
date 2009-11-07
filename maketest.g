@@ -12,8 +12,13 @@ list := [
          "../gap/SparseMatrix.gi"
          ];
 
-TestManualExamples( "doc", "Gauss.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "Gauss", "doc" )[1]![1], "Gauss.xml", list );
 
 GAPDocManualLab( "Gauss" );
+
+SizeScreen( size );
 
 quit;

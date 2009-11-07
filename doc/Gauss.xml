@@ -4,6 +4,7 @@
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
  [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+   <!ENTITY C "<Package>C</Package>">
    <!ENTITY Gauss "<Package>Gauss</Package>">
    <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
    <!ENTITY homalg "<Package>homalg</Package>">
@@ -30,7 +31,7 @@
 	  (Germany)
 	  </Address>
   </Author>
-  <Date>October 2009</Date>
+  <Date>November 2009</Date>
   <Abstract>This document explains the primary uses of the &Gauss; package.
             Included is a documented list of the most important methods
             and functions needed to work with sparse matrices and the

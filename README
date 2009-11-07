@@ -19,14 +19,17 @@ be compiled before you can load Gauss. To compile the code, first run
 
     ./configure
 
-If the package is not installed in the gap/pkg/Gauss directory you
-will need to provide the correct directory. This will create a
-makefile. Complete the installation of the package by running
+If the package is not installed in the pkg/ subdirectory of GAP's root
+directory you will need to provide the correct path to the latter. This will
+create a makefile. Complete the installation of the package by running
 
     make
 
 Recompiling the documentation is possible by the command `make doc'
 in the Gauss directory, but this should not be necessary.
+
+Testing the package is possible by the command `make test'
+in the Gauss directory.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.

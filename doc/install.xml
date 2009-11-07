@@ -15,12 +15,12 @@ This is the chapter of the documentation describing the installation.
 <Index>&Gauss;</Index>
 
 To install this package just extract the package's archive file to the
-GAP <F>pkg/</F> directory. The &Gauss; package utilizes some C-code by
+GAP <F>pkg/</F> directory. The &Gauss; package utilizes some &C;-code by
 Max Neunhoeffer that has to be compiled before you can load Gauss. To
 compile the code, first run <C>./configure</C>. If the package is not
-installed in the <F>gap/pkg/Gauss</F> directory you will need to
-provide the correct directory. This will create a makefile. Complete
-the installation of the package by running
+installed in the <F>pkg/</F> subdirectory of &GAP;'s root directory
+you will need to provide the correct path to the latter. This will
+create a makefile. Complete the installation of the package by running
 <C>make</C>. Recompiling the documentation is possible by the command
 <C>make doc</C> in the Gauss directory, but this should not be
 necessary.<P/>
