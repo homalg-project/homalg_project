@@ -108,7 +108,7 @@ DeclareProperty( "IsVoidMatrix",
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; matrix <A>A</A> is a zero matrix, taking possible ring relations into account.<P/>
-##      (&see; installed method <Ref Meth="IsZeroMatrix" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="IsZeroMatrix" Label="homalgTable entry"/>)
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -135,7 +135,7 @@ DeclareProperty( "IsVoidMatrix",
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; matrix <A>A</A> is an identity matrix, taking possible ring relations into account.<P/>
-##      (&see; installed method <Ref Meth="IsIdentityMatrix" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="IsIdentityMatrix" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -266,7 +266,7 @@ DeclareProperty( "IsEmptyMatrix",
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; matrix <A>A</A> is an identity matrix, taking possible ring relations into account.<P/>
-##      (&see; installed method <Ref Meth="IsDiagonalMatrix" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="IsDiagonalMatrix" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -502,7 +502,7 @@ DeclareAttribute( "PreEval",
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The number of rows of the matrix <A>A</A>.<P/>
-##      (&see; installed method <Ref Meth="NrRows" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="NrRows" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -516,7 +516,7 @@ DeclareAttribute( "NrRows",
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The number of columns of the matrix <A>A</A>.<P/>
-##      (&see; installed method <Ref Meth="NrColumns" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="NrColumns" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -531,7 +531,7 @@ DeclareAttribute( "NrColumns",
 ##    <Description>
 ##      The determinant of the quadratic matrix <A>A</A>.<P/>
 ##      You can invoke it with <C>Determinant</C>( <A>A</A> ).<P/>
-##      (&see; installed method <Ref Meth="Determinant" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Determinant" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -571,7 +571,7 @@ DeclareAttribute( "ColumnRankOfMatrix",
 ##    <Returns>a (possibly empty) list of positive integers</Returns>
 ##    <Description>
 ##      The list of zero rows of the matrix <A>A</A>. <P/>
-##      (&see; installed method <Ref Meth="ZeroRows" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="ZeroRows" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -585,7 +585,7 @@ DeclareAttribute( "ZeroRows",
 ##    <Returns>a (possibly empty) list of positive integers</Returns>
 ##    <Description>
 ##      The list of zero columns of the matrix <A>A</A>. <P/>
-##      (&see; installed method <Ref Meth="ZeroColumns" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="ZeroColumns" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -653,12 +653,43 @@ DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
 ##    <Returns>a listlist of degrees/multi-degrees</Returns>
 ##    <Description>
 ##      The matrix of degrees of the matrix <A>A</A>.<P/>
-##      (&see; installed method <Ref Meth="DegreesOfEntries" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="DegreesOfEntries" Label="homalgTable entry"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "DegreesOfEntries",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="LeftInverse">
+##  <ManSection>
+##    <Meth Arg="M" Name="LeftInverse" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A (lazy evaluated) left inverse <M>C</M> of the matrix <A>M</A>. If no left inverse exists then
+##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>) <P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with LeftInverse"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "LeftInverse",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="RightInverse">
+##  <ManSection>
+##    <Attr Arg="M" Name="RightInverse" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A (lazy evaluated) right inverse <M>C</M> of the matrix <A>M</A>. If no right inverse exists then
+##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>) <P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with RightInverse"/>)
+##
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RightInverse",
         IsHomalgMatrix );
 
 ####################################
@@ -914,12 +945,6 @@ DeclareOperation( "ConvertMatrixToColumn",
 DeclareOperation( "Involution",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "LeftInverse",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "RightInverse",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "CertainRows",
         [ IsHomalgMatrix, IsList ] );
 
@@ -961,10 +986,4 @@ DeclareOperation( "MaximalMinors",
 # synonyms:
 #
 ####################################
-
-DeclareSynonym( "Leftinverse",
-        LeftInverse );
-
-DeclareSynonym( "Rightinverse",
-        RightInverse );
 

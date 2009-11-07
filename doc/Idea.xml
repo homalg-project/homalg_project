@@ -31,12 +31,11 @@ restricted to homological constructions leading to one-sided linear
 systems <M>XA=B</M> resp. <M>AX=B</M> (&see; <Ref
 Label="homalg-limitation" Text="Principal limitation"/>). <P/>
 
-The two appendices <Ref Chap="Basic Operations"/> and
-<Ref Chap="Tool Operations"/> provide the list of matrix operations
-needed by &homalg; to perform homological computations. <P/>
-
-Subsection <Ref Sect="homalg-delegates"/> explains how these matrix
-operations can be delegated to external systems.
+The two appendices <Ref Chap="Basic_Operations"/> and <Ref
+Chap="Tool_Operations"/> provide the list of matrix operations needed
+by &homalg; to perform homological computations. Subsection <Ref
+Sect="homalg-delegates"/> explains how these matrix operations can be
+delegated to external systems.
 
 
 

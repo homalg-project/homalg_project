@@ -29,10 +29,11 @@
 <Section Label="Matrices:COLEM">
 <Heading>&COLEM;: Clever Operations for Lazy Evaluated Matrices</Heading>
 
-Most of the above described matrix tool operations in &homalg; which
-return a new matrix are lazy evaluated. The value of a &homalg; matrix
-is stored in the attribute <C>Eval</C>. Below is the list of the
-installed methods for the attribute <C>Eval</C>.
+Most of the matrix tool operations listed in Appendix
+<Ref Sect="ToolsNoFallBack"/> which return a new matrix are lazy
+evaluated. The value of a &homalg; matrix is stored in the
+attribute <C>Eval</C>. Below is the list of the installed methods for
+the attribute <C>Eval</C>.
 
 <#Include Label="Eval:IsInitialMatrix">
 <#Include Label="Eval:IsInitialIdentityMatrix">
@@ -51,6 +52,8 @@ installed methods for the attribute <C>Eval</C>.
 <#Include Label="Eval:HasEvalAddMat">
 <#Include Label="Eval:HasEvalSubMat">
 <#Include Label="Eval:HasEvalCompose">
+<#Include Label="Eval:HasEvalLeftInverse">
+<#Include Label="Eval:HasEvalRightInverse">
 
 </Section>
 

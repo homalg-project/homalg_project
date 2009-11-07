@@ -84,8 +84,13 @@ function ( arg )
     return res;
 end;
 
-MyTestManualExamples( "doc", "homalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+MyTestManualExamples( DirectoriesPackageLibrary( "homalg", "doc" )[1]![1], "homalg.xml", list );
 
 GAPDocManualLab( "homalg" );
+
+SizeScreen( size );
 
 quit;

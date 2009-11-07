@@ -337,7 +337,7 @@ end );
 ##      The matrix <C>RightDivide</C>( <A>B</A>, <A>A</A> ) is a particular solution of the inhomogeneous (one sided) linear system
 ##      of equations <M>X<A>A</A>=<A>B</A></M> in case it is solvable. Otherwise <C>false</C> is returned.
 ##      The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M></Q>.
-##      This generalizes <C>Leftinverse</C> for which <A>B</A> becomes the identity matrix.
+##      This generalizes <Ref Attr="LeftInverse" Label="for matrices"/> for which <A>B</A> becomes the identity matrix.
 ##      (&see; <Ref Oper="SyzygiesGeneratorsOfRows" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
@@ -393,7 +393,7 @@ end );
 ##      The matrix <C>LeftDivide</C>( <A>A</A>, <A>B</A> ) is a particular solution of the inhomogeneous (one sided) linear system
 ##      of equations <M><A>A</A>X=<A>B</A></M> in case it is solvable. Otherwise <C>false</C> is returned.
 ##      The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M></Q>.
-##      This generalizes <C>Rightinverse</C> for which <A>B</A> becomes the identity matrix.
+##      This generalizes <Ref Attr="RightInverse" Label="for matrices"/> for which <A>B</A> becomes the identity matrix.
 ##      (&see; <Ref Oper="SyzygiesGeneratorsOfColumns" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
@@ -646,8 +646,17 @@ end );
 ##
 ##---------------------
 
-##
-InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
+##  <#GAPDoc Label="Eval:HasEvalLeftInverse">
+##  <ManSection>
+##    <Meth Arg="A" Name="Eval" Label="for matrices created with LeftInverse"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      In case the matrix was created using
+##      <Ref Meth="LeftInverse" Label="for matrices"/>
+##      then the filter <C>HasEvalLeftInverse</C> for <A>A</A> is set to true and the method listed below
+##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>)
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices",
         [ IsHomalgMatrix and HasEvalLeftInverse ],
         
@@ -660,13 +669,14 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     
     Id := HomalgIdentityMatrix( NrColumns( RI ), R );
     
-    left_inv := RightDivide( Id, RI );		## ( cf. [BR, Subsection 3.1.3] )
+    left_inv := RightDivide( Id, RI );	## ( cf. [BR, Subsection 3.1.3] )
     
     if IsBool( left_inv ) then
         return false;
     fi;
     
-    ## CAUTION: for the following SetXXX RightDivide is assumed not to be lazy evaluated!!!
+    ## CAUTION: for the following SetXXX RightDivide is assumed
+    ## NOT to be lazy evaluated!!!
     
     SetIsLeftInvertibleMatrix( RI, true );
     
@@ -679,9 +689,22 @@ InstallMethod( Eval,				### defines: LeftInverse (LeftinverseF)
     return Eval( left_inv );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##
-InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
+##  <#GAPDoc Label="Eval:HasEvalRightInverse">
+##  <ManSection>
+##    <Meth Arg="A" Name="Eval" Label="for matrices created with RightInverse"/>
+##    <Returns>see below</Returns>
+##    <Description>
+##      In case the matrix was created using
+##      <Ref Meth="RightInverse" Label="for matrices"/>
+##      then the filter <C>HasEvalRightInverse</C> for <A>A</A> is set to true and the method listed below
+##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>)
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( Eval,
         "for homalg matrices",
         [ IsHomalgMatrix and HasEvalRightInverse ],
         
@@ -694,13 +717,14 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     
     Id := HomalgIdentityMatrix( NrRows( LI ), R );
     
-    right_inv := LeftDivide( LI, Id );		## ( cf. [BR, Subsection 3.1.3] )
+    right_inv := LeftDivide( LI, Id );	## ( cf. [BR, Subsection 3.1.3] )
     
     if IsBool( right_inv ) then
         return false;
     fi;
     
-    ## CAUTION: for the following SetXXX LeftDivide is assumed not to be lazy evaluated!!!
+    ## CAUTION: for the following SetXXX LeftDivide is assumed
+    ## NOT to be lazy evaluated!!!
     
     SetIsRightInvertibleMatrix( LI, true );
     
@@ -713,6 +737,10 @@ InstallMethod( Eval,				### defines: RightInverse (RightinverseF)
     return Eval( right_inv );
     
 end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##
 InstallGlobalFunction( BestBasis,		### defines: BestBasis

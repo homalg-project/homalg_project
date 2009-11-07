@@ -118,6 +118,12 @@ DeclareAttribute( "Source",
 DeclareAttribute( "Range",
         IsHomalgMorphism );
 
+DeclareAttribute( "LeftInverse",
+        IsHomalgMorphism );
+
+DeclareAttribute( "RightInverse",
+        IsHomalgMorphism );
+
 DeclareAttribute( "DegreeOfMorphism",
         IsHomalgMorphism );
 
@@ -173,12 +179,6 @@ DeclareOperation( "AreComparableMorphisms",
 
 DeclareOperation( "AreComposableMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "LeftInverse",
-        [ IsHomalgMorphism ] );
-
-DeclareOperation( "RightInverse",
-        [ IsHomalgMorphism ] );
 
 DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement

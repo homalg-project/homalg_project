@@ -685,7 +685,7 @@ end );
 ##    <Description>
 ##      Check if the &homalg; matrices <A>A</A> and <A>B</A> are equal (enter: <A>A</A> <C>=</C> <A>B</A>;),
 ##      taking possible ring relations into account.<P/>
-##      (&see; installed method <Ref Meth="AreEqualMatrices" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="AreEqualMatrices" Label="homalgTable entry"/>)
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -756,7 +756,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The twisted transpose of the &homalg; matrix <A>M</A>.<P/>
-##      (&see; installed method <Ref Meth="Involution" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with Involution"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -798,7 +798,7 @@ end );
 ##    <Description>
 ##      The matrix of which the <M>i</M>-th row is the <M>k</M>-th row of the &homalg; matrix <A>M</A>,
 ##      where <M>k=</M><A>plist</A><M>[i]</M>.<P/>
-##      (&see; installed method <Ref Meth="CertainRows" Label="homalgTable entry"/>)
+##      (&see; <Ref Meth="Eval" Label="for matrices created with CertainRows"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -824,7 +824,7 @@ end );
 ##    <Description>
 ##      The matrix of which the <M>j</M>-th column is the <M>l</M>-th column of the &homalg; matrix <A>M</A>,
 ##      where <M>l=</M><A>plist</A><M>[i]</M>.<P/>
-##      (&see; installed method <Ref Meth="CertainColumns" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with CertainColumns"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -849,7 +849,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Stack the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
-##      (&see; installed method <Ref Meth="UnionOfRows" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with UnionOfRows"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -874,7 +874,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      Augment the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
-##      (&see; installed method <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -900,7 +900,7 @@ end );
 ##    <Description>
 ##      Build the block diagonal matrix out of the &homalg; matrices listed in <A>list</A>.
 ##      An error is issued if <A>list</A> is empty or if one of the arguments is not a &homalg; matrix.<P/>
-##      (&see; installed method <Ref Meth="DiagMat" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with DiagMat"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -931,7 +931,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The Kronecker (or tensor) product of the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
-##      (&see; installed method <Ref Meth="KroneckerMat" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with KroneckerMat"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -967,7 +967,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The product of the ring element <A>a</A> with the &homalg; matrix <A>A</A> (enter: <A>a</A> <C>*</C> <A>A</A>;).<P/>
-##      (&see; installed method <Ref Meth="MulMat" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with MulMat"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1003,7 +1003,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The sum of the two &homalg; matrices <A>A</A> and <A>B</A> (enter: <A>A</A> <C>+</C> <A>B</A>;).<P/>
-##      (&see; installed method <Ref Meth="AddMat" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with AddMat"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1081,7 +1081,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The difference of the two &homalg; matrices <A>A</A> and <A>B</A> (enter: <A>A</A> <C>-</C> <A>B</A>;).<P/>
-##      (&see; installed method <Ref Meth="SubMat" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with SubMat"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1117,7 +1117,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      The matrix product of the two &homalg; matrices <A>A</A> and <A>B</A> (enter: <A>A</A> <C>*</C> <A>B</A>;).<P/>
-##      (&see; installed method <Ref Meth="Compose" Label="homalgTable entry"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with Compose"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1198,16 +1198,6 @@ InstallMethod( NonZeroColumns,
     
 end );
 
-##  <#GAPDoc Label="Leftinverse">
-##  <ManSection>
-##    <Meth Arg="M" Name="Leftinverse" Label="for matrices"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      A (lazy evaluated) left inverse <M>C</M> of the matrix <A>M</A>. If no left inverse exists then
-##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>).
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
 ##
 InstallMethod( LeftInverse,
         "for homalg matrices",
@@ -1239,16 +1229,6 @@ InstallMethod( LeftInverse,
     
 end );
 
-##  <#GAPDoc Label="Rightinverse">
-##  <ManSection>
-##    <Meth Arg="M" Name="Rightinverse" Label="for matrices"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      A (lazy evaluated) right inverse <M>C</M> of the matrix <A>M</A>. If no right inverse exists then
-##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>).
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
 ##
 InstallMethod( RightInverse,
         "for homalg matrices",
@@ -2426,7 +2406,7 @@ end );
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
 ##      An immutable evaluated &homalg; matrix over the &homalg; ring <A>R</A> having the
-##      same entries as the matrix <A>mat</A>.
+##      same entries as the matrix <A>mat</A>. Syntax: <A>R</A> <C>*</C> <A>mat</A> or <A>mat</A> <C>*</C> <A>R</A>
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <A homalg internal ring>
@@ -2436,7 +2416,7 @@ end );
 ##  Z/( 4 )
 ##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
-##  gap> d2 := Z4 * d ; ## or d2 := d * Z4;
+##  gap> d2 := Z4 * d; ## or d2 := d * Z4;
 ##  <A homalg residue class 3 by 3 matrix>
 ##  gap> Display( d2 );
 ##  [ [  2,  0,  0 ],

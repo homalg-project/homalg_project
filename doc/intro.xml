@@ -116,7 +116,7 @@ define further classes or extend existing classes of rings and
 matrices <E>together</E> with their operations. For example:
 <List>
   <Item>The &homalg; subpackage &ResidueClassRingForHomalg; (&see;
-  Appendix <Ref Label="ResidueClassRingForHomalg"/>) defines the
+  Appendix <Ref Chap="ResidueClassRingForHomalg"/>) defines the
   classes of residue class rings, residue class ring elements, and
   matrices over residue class rings. Such a matrix is defined by a
   matrix over the ambient ring which is nevertheless interpreted
@@ -145,12 +145,12 @@ matrices <E>together</E> with their operations. For example:
 The matrix operations are divided into two classes called <Q>Tools</Q>
 and <Q>Basic</Q>. The <Q>Tools</Q> operations include addition,
 subtraction, multiplication, extracting certain rows or columns,
-stacking, and augmenting matrices
-(&see; Appendix <Ref Label="Tool Operations"/>).
-The <Q>Basic</Q> operations include the two basic
-operations in linear algebra needed to solve an inhomogeneous linear
-system <M>XA=B</M> with coefficients in a not necessarily commutative
-ring <M>R</M> (&see; Appendix <Ref Label="Basic Operations"/>):
+stacking, and augmenting matrices (&see; Appendix
+<Ref Chap="Tool_Operations"/>).  The <Q>Basic</Q> operations include
+the two basic operations in linear algebra needed to solve an
+inhomogeneous linear system <M>XA=B</M> with coefficients in a not
+necessarily commutative ring <M>R</M> (&see; Appendix
+<Ref Chap="Basic_Operations"/>):
 <List>
   <Item>Effectively reducing <M>B</M> modulo <M>A</M>,
     i.e. effectively deciding if a row (or a set of rows) <M>B</M>

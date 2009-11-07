@@ -719,7 +719,7 @@ end );
 ##    <Meth Arg="str[, str2]" Name="homalgMode"/>
 ##    <Description>
 ##      This function sets different modes which influence how much of the basic matrix operations and
-##      the logical matrix methods become visible (&see; Appendices <Ref Chap="Basic Operations"/>, <Ref Chap="Logic"/>).
+##      the logical matrix methods become visible (&see; Appendices <Ref Chap="Basic_Operations"/>, <Ref Chap="Logic"/>).
 ##      Handling the string <A>str</A> is <E>not</E> case-sensitive.
 ##      If a second string <A>str2</A> is given, then <C>homalgMode</C>( <A>str2</A> ) is invoked at the end.
 ##      In case you let &homalg; delegate matrix operations to an external system the you might also want to

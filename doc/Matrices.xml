@@ -83,6 +83,8 @@
 <#Include Label="DegreesOfEntries">
 <#Include Label="RowRankOfMatrix">
 <#Include Label="ColumnRankOfMatrix">
+<#Include Label="LeftInverse">
+<#Include Label="RightInverse">
 
 </Section>
 
@@ -145,9 +147,6 @@
 
 <#Include Label="GenerateSameRowModule">
 <#Include Label="GenerateSameColumnModule">
-
-<#Include Label="Leftinverse">
-<#Include Label="Rightinverse">
 
 </Section>
 

@@ -8,7 +8,7 @@
 
 -->
 
-<Appendix Label="Tool Operations">
+<Appendix Label="Tool_Operations">
 <Heading>The Matrix Tool Operations</Heading>
 
 The functions listed below are components of the <C>homalgTable</C>
@@ -18,7 +18,7 @@ standard methods that invoke them.
 <Section Label="ToolsNoFallBack">
 <Heading>The Tool Operations <E>without</E> a Fallback Method</Heading>
 
-There are the matrix methods for which &homalg; needs a
+There are matrix methods for which &homalg; needs a
 <C>homalgTable</C> entry for non-internal rings, as it cannot provide
 a suitable fallback. Below is the list of these <C>homalgTable</C>
 entries.

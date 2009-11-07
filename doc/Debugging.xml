@@ -55,7 +55,8 @@ activated if the user increases the assertion level using <Br/><Br/>
 <Row><Item></Item><Item></Item></Row>
 <Row>
   <Item>4</Item>
-  <Item>assertions about basic matrix operations are checked (&see; Appendix <Ref Chap="Basic Operations"/>)</Item>
+  <Item>assertions about basic matrix operations are checked (&see;
+    Appendix <Ref Chap="Basic_Operations"/>)</Item>
 </Row>
 <Row>
   <Item></Item>
