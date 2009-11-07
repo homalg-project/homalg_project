@@ -14,8 +14,13 @@ list := [
          "../gap/SCO.gi"
          ];
 
-TestManualExamples( "doc", "SCO.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "SCO", "doc" )[1]![1], "SCO.xml", list );
 
 GAPDocManualLab( "SCO" );
+
+SizeScreen( size );
 
 quit;

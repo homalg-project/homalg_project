@@ -32,6 +32,8 @@
 
 <Body>
 
+<Index>&SCO;</Index>
+
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "usage.xml">
 <#Include SYSTEM "examples.xml">

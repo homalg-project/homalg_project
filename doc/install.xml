@@ -13,7 +13,6 @@ This is the chapter of the documentation describing the installation.
 
 <Section Label="install">
 <Heading>Installation of the &SCO; Package</Heading>
-<Index>&SCO;</Index>
 
 To install this package just extract the package's archive file to the
 GAP <F>pkg/</F> directory. By default the &SCO; package is not
