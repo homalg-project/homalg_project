@@ -15,8 +15,13 @@ list := [
          "../gap/IO_ForHomalg.gi",
          ];
 
-TestManualExamples( "doc", "IO_ForHomalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "IO_ForHomalg", "doc" )[1]![1], "IO_ForHomalg.xml", list );
 
 GAPDocManualLab( "IO_ForHomalg" );
+
+SizeScreen( size );
 
 quit;

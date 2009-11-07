@@ -6,16 +6,16 @@ doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g VERSION \
 		doc/IO_ForHomalg.bib doc/*.xml \
 		gap/*.gd gap/*.gi
-	        gapL makedoc.g
+	        gap makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL -x 80 maketest.g
+	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/IO_ForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" IO_ForHomalg/doc/*.* IO_ForHomalg/gap/*.{gi,gd} IO_ForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
+	(mkdir -p ../tar; cd ..; tar czvf tar/IO_ForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" IO_ForHomalg/doc/*.* IO_ForHomalg/doc/clean IO_ForHomalg/gap/*.{gi,gd} IO_ForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
 WEBPOS=~/gap/pkg/IO_ForHomalg/public_html
 WEBPOS_FINAL=~/Sites/homalg-project/IO_ForHomalg
