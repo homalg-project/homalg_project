@@ -57,9 +57,14 @@ function ( arg )
     return res;
 end;
 
-MyTestManualExamples( "doc", "SheavesForHomalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+MyTestManualExamples( DirectoriesPackageLibrary( "Sheaves", "doc" )[1]![1], "SheavesForHomalg.xml", list );
 
 GAPDocManualLab("Sheaves");
+
+SizeScreen( size );
 
 quit;
 

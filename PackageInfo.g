@@ -26,13 +26,13 @@ Subtitle := "A &homalg; based Package for Sheaf Algorithms",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.09.30",
+Version := "2009.11.06",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "30/09/2009",
+Date := "06/11/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "30/09/2009",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://wwwb.math.rwth-aachen.de/~barakat/Sheaves",
+ArchiveURL := "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/Sheaves",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -182,9 +182,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/Sheaves/README.Sheaves",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/README.Sheaves",
 PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~barakat/gap/Sheaves/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -201,7 +201,12 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
-#PackageWWWHome := "http://www.math.rwth-aachen.de/~Greg.Gamble/Example",
+AbstractHTML := 
+"The <span class=\"pkgname\">Sheaves</span> package, as its name suggests, \
+ is an example of how to create a <span class=\"pkgname\">GAP</span> \
+ package. It has little functionality except for being a package",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/unreleased/sheaves",
+#
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -235,7 +240,7 @@ PackageDoc := rec(
   BookName  := "Sheaves",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://wwwb.math.rwth-aachen.de/~barakat/gap/Sheaves/Sheaves.tar.gz",
+    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/Sheaves.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
