@@ -570,6 +570,16 @@ InstallMethod( FreeHullEpi,
     
 end );
 
+InstallMethod( FreeHullEpi,
+        "for homalg modules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return FreeHullEpi( UnderlyingObject( M ) );
+    
+end );
+
 ##
 InstallMethod( FreeHullModule,
         "for homalg modules",

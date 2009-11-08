@@ -375,6 +375,7 @@ InstallMethod( POW,
             SetIsIsomorphism( inv, IsIsomorphism( phi ) );
         fi;
         
+        ## CAUTION: inv might very well be non-well-defined
         return inv;
         
     fi;
@@ -599,6 +600,31 @@ InstallMethod( PreCompose,
     
 end );
 
+##  <#GAPDoc Label="PreInverse:map">
+##  <ManSection>
+##    <Oper Arg="phi" Name="PreInverse" Label="for maps"/>
+##    <Returns>a &homalg; map, <C>false</C>, or <C>fail</C></Returns>
+##    <Description>
+##      Compute a pre-inverse of the morphism <A>phi</A> in case one exists.
+##      For a pre-inverse to exist <A>phi</A> must be an epimorphism. For <E>commutative</E> rings
+##      &homalg; has an algorithm installed which decides the existence and returns
+##      a pre-inverse in case one exists. If a pre-inverse does not exist then <C>false</C>
+##      is returned. The algorithm finds a particular solution of a two-side inhomogeneous linear system
+##      over <M>R := </M><C>HomalgRing</C><M>( <A>phi</A> )</M>.
+##      For <E>non</E>commutative rings a heuristic method is installed. If it
+##      finds a pre-inverse it returns it, otherwise it returns <C>fail</C>
+##      (&see; <Ref Label="homalg-limitation" Text="Principal limitation"/>).
+##      The operation <C>PreInverse</C> is used to install a method for the property
+##      <Ref Prop="IsSplitEpimorphism" Label="for maps"/>. <P/>
+##      <C>PreInverse</C> checks if it can decide the projectivity of <C>Range</C><M>( <A>phi</A> )</M>.
+##      To decide the projectivity of a module <M>M</M> over a <E>commutative</E> ring you can use <Br/><Br/>
+##      
+##      <C>IsSplitEpimorphism</C>( <C>FreeHullEpi</C><M>( M )</M> ); <Br/><Br/>
+##      
+##      Of course you can use <C>IsProjective</C><M>( M )</M> which triggers other methods.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( PreInverse,
         "for homalg maps",
@@ -618,9 +644,12 @@ InstallMethod( PreInverse,
   function( phi )
     local R, S, T, M, p, Ib, Ic, b, c, P, d, Id, PI, B, A, L, sigma;
     
+    ## no need to search for phi!.PreInverse
+    ## as this is not the highest priority method
+    
     R := HomalgRing( phi );
     
-    if not( HasIsCommutative( R ) and IsCommutative( R ) ) then
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
         TryNextMethod( );
     fi;
     
@@ -664,8 +693,18 @@ InstallMethod( PreInverse,
         sigma := LeftDivide( A, B, L );
     fi;
     
-    if IsBool( sigma ) then
-        return false;
+    if IsBool( sigma ) then	## no split
+        
+        ## from a method below we already know that phi is an epimorphism
+        if IsEpimorphism( phi ) then	## to be sure ;)
+            ## so T is not projective since phi is not split
+            SetIsProjective( T, false );
+        fi;
+        
+        phi!.PreInverse := false;
+        
+        return phi!.PreInverse;
+        
     fi;
     
     ## we already have every thing to build the (matrix of the) split sigma
@@ -680,15 +719,21 @@ InstallMethod( PreInverse,
     
     sigma := HomalgMap( sigma, T, S );
     
-    Assert( 1, IsMonomorphism( sigma ) );
-    SetIsMonomorphism( sigma, true );
-    
     DecideZero( sigma );
+    
+    Assert( 1, IsMonomorphism( sigma ) );
     
     SetIsSplitEpimorphism( phi, true );
     SetIsSplitMonomorphism( sigma, true );
     
-    return sigma;
+    ## a direct summand of a projective module is again projective
+    if HasIsProjective( S ) and IsProjective( S ) then
+        SetIsProjective( T, true );
+    fi;
+    
+    phi!.PreInverse := sigma;
+    
+    return phi!.PreInverse;
     
 end );
 
@@ -698,12 +743,28 @@ InstallMethod( PreInverse,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local sigma;
+    local S, T, sigma;
+    
+    if IsBound(phi!.PreInverse) then
+        return phi!.PreInverse;
+    fi;
+    
+    S := Source( phi );
+    T := Range( phi );
     
     if not IsEpimorphism( phi ) then
+        
         return false;
+        
     elif IsIsomorphism( phi ) then
-        return phi ^ -1;
+        
+        ## only in case the standard method for IsIsomorphism wasn't triggered:
+        UpdateModulesByMap( phi );
+        
+        phi!.PreInverse := phi ^ -1;
+        
+        return phi!.PreInverse;
+        
     fi;
     
     DecideZero( phi );
@@ -716,26 +777,48 @@ InstallMethod( PreInverse,
     
     ## this must come before any Eval:
     if HasIsZero( sigma ) and IsZero( sigma ) then
-        return TheZeroMap( Range( phi ), Source( phi ) );
+        
+        SetIsZero( T, true );
+        
+        phi!.PreInverse := TheZeroMap( T, S );
+        
+        return phi!.PreInverse;
+        
     fi;
     
-    if IsBool( Eval( sigma ) ) then
-        return false;
+    ## Left/RightInverse are lazy evaluated!
+    if IsBool( Eval( sigma ) ) then	## no split even on the level of matrices
+        
+        ## from above we already know that phi is an epimorphism,
+        ## so T is not projective since phi is not split
+        SetIsProjective( T, false );
+        
+        phi!.PreInverse := false;
+        
+        return phi!.PreInverse;
+        
     fi;
     
     sigma := HomalgMap( sigma, Range( phi ), Source( phi ) );
     
     if IsMorphism( sigma ) then
         
-        Assert( 1, IsMonomorphism( sigma ) );
-        SetIsMonomorphism( sigma, true );
-        
         DecideZero( sigma );
+        
+        Assert( 1, IsMonomorphism( sigma ) );
         
         SetIsSplitEpimorphism( phi, true );
         SetIsSplitMonomorphism( sigma, true );
         
-        return sigma;
+        ## a direct summand of a projective module is again projective
+        if HasIsProjective( S ) and IsProjective( S ) then
+            SetIsProjective( T, true );
+        fi;
+        
+        phi!.PreInverse := sigma;
+        
+        return phi!.PreInverse;
+        
     fi;
     
     TryNextMethod( );
@@ -1510,6 +1593,17 @@ InstallMethod( ShallowCopy,
     MatchPropertiesAndAttributes( phi, psi, LIMOR.intrinsic_properties, LIMOR.intrinsic_attributes );
     
     return psi;
+    
+end );
+
+##
+InstallMethod( UpdateModulesByMap,
+        "for homalg maps",
+        [ IsHomalgMap ],
+        
+  function( phi )
+    
+    ## do nothing :)
     
 end );
 

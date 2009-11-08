@@ -71,6 +71,7 @@
 
 <#Include Label="HomalgRing:map">
 <#Include Label="ByASmallerPresentation:map">
+<#Include Label="PreInverse:map">
 
 </Section>
 

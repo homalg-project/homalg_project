@@ -448,6 +448,28 @@ InstallMethod( IsGeneralizedEpimorphism,
 end );
 
 ##
+InstallMethod( IsSplitEpimorphism,
+        "LIMOR: for homalg chain maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    local split;
+    
+    if not IsEpimorphism( phi ) then
+        return false;
+    fi;
+    
+    split := PreInverse( phi );
+    
+    if split = fail then
+        TryNextMethod( );
+    fi;
+    
+    return split <> false;
+    
+end );
+
+##
 InstallMethod( IsEpimorphism,
         "LIMOR: for homalg chain maps",
         [ IsHomalgChainMap ],
@@ -513,8 +535,16 @@ InstallMethod( IsIsomorphism,
         [ IsHomalgMorphism ],
         
   function( phi )
+    local iso;
     
-    return IsEpimorphism( phi ) and IsMonomorphism( phi );
+    iso := IsEpimorphism( phi ) and IsMonomorphism( phi );
+    
+    if iso then
+        SetIsIsomorphism( phi, true );	## needed for UpdateModulesByMap
+        UpdateModulesByMap( phi );
+    fi;
+    
+    return iso;
     
 end );
 
