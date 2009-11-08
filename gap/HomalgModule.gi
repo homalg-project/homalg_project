@@ -4287,6 +4287,8 @@ InstallMethod( Display,
                 Print( display, name, "^(", rk, " x 1)" );
             fi;
         fi;
+    elif HasIsZero( M ) and IsZero( M ) then	## MatrixOfRelations = [ [ 1 ] ]
+        Print( "0" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] } );
     fi;
