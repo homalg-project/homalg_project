@@ -28,8 +28,13 @@ list := [
          "../examples/Saturate.g",
          ];
 
-TestManualExamples( "doc", "ExamplesForHomalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "ExamplesForHomalg", "doc" )[1]![1], "ExamplesForHomalg.xml", list );
 
 GAPDocManualLab( "ExamplesForHomalg" );
+
+SizeScreen( size );
 
 quit;

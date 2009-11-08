@@ -8,16 +8,16 @@ doc/manual.six: makedoc.g maketest.g \
 		doc/ExamplesForHomalg.bib gap/*.gd gap/*.gi \
 		doc/examples.xml examples/*.g \
 		PackageInfo.g VERSION
-	        gapL makedoc.g
+	        gap makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gapL -x 80 maketest.g
+	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ExamplesForHomalg/doc/*.* ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ExamplesForHomalg/doc/*.* ExamplesForHomalg/doc/clean ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/ExamplesForHomalg/public_html
 WEBPOS_FINAL=~/Sites/homalg-project/ExamplesForHomalg

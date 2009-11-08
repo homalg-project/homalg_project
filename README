@@ -22,8 +22,14 @@ of your GAP 4 installation. It creates a subdirectory called `ExamplesForHomalg'
 
 This completes the installation of the package.
 
-Recompiling the documentation is possible by the command `gap makedoc.g'
+Recompiling the documentation is possible by the command `make doc'
 in the ExamplesForHomalg directory. But this should not be necessary.
+
+Testing the package is possible by the command `make test'
+in the ExamplesForHomalg directory.
+
+You need the computer algebra system Singular (version >= 3-0-4)
+to run the tests.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.
