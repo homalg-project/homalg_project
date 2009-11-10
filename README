@@ -25,11 +25,11 @@ create a makefile. Complete the installation of the package by running
 
     make
 
-Recompiling the documentation is possible by the command `make doc'
-in the Gauss directory, but this should not be necessary.
+Testing the package is possible by invoking
 
-Testing the package is possible by the command `make test'
-in the Gauss directory.
+ReadPackage( "Gauss", "maketest.g" );
+
+from within GAP.
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.
