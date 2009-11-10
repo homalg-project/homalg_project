@@ -270,18 +270,12 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
     fi;
     
     if IsBound( HOMALG_IO_CAS.executable ) then
-        Add( executables, HOMALG_IO_CAS.executable );
-    fi;
-    
-    e := 1;
-    while true do
-        if IsBound( HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) ) then
-            Add( executables, HOMALG_IO_CAS.( Concatenation( "executable_alt", String( e ) ) ) );
-            e := e + 1;
-        else
-            break;
+        if IsStringRep( HOMALG_IO_CAS.executable ) then
+            Add( executables, HOMALG_IO_CAS.executable );
+        elif ForAll( HOMALG_IO_CAS.executable, IsStringRep ) then
+            Append( executables, HOMALG_IO_CAS.executable );
         fi;
-    od;
+    fi;
     
     if executables = [ ] then
         Error( "either the name of the ", HOMALG_IO_CAS.name,  " executable must exist as a component of the CAS specific record (normally called HOMALG_IO_", HOMALG_IO_CAS.name, " and which probably have been provided as the first argument), or the name must be provided as a second argument:\n", HOMALG_IO_CAS, "\n" );
