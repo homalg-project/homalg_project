@@ -18,7 +18,7 @@ InstallValue( HOMALG_IO_Macaulay2,
         rec(
             cas := "macaulay2",		## normalized name on which the user should have no control
             name := "Macaulay2",
-            executable := "M2",
+            executable := [ "M2" ],	## this list is processed from left to right
             options := [ "--no-prompts", "--no-readline", "--print-width", "80" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",

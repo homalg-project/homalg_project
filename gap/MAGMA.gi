@@ -20,7 +20,7 @@ InstallValue( HOMALG_IO_MAGMA,
         rec(
             cas := "magma",		## normalized name on which the user should have no control
             name := "MAGMA",
-            executable := "magma",
+            executable := [ "magma" ],	## this list is processed from left to right
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",

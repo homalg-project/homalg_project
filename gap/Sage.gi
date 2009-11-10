@@ -18,7 +18,7 @@ InstallValue( HOMALG_IO_Sage,
         rec(
             cas := "sage",		## normalized name on which the user should have no control
             name := "Sage",
-            executable := "sage",
+            executable := [ "sage" ],	## this list is processed from left to right
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",

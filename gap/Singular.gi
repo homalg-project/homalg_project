@@ -20,7 +20,7 @@ InstallValue( HOMALG_IO_Singular,
         rec(
             cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
-            executable := "Singular",
+            executable := [ "Singular" ],	## this list is processed from left to right
             options := [ "-t", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",

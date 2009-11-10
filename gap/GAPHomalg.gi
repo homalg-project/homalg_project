@@ -18,7 +18,7 @@ InstallValue( HOMALG_IO_GAP,
         rec(
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
-            executable := "gapL",
+            executable := [ "gapL", "gap" ],	## this list is processed from left to right
             options := [ "-q -T -o 15g" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
