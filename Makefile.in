@@ -7,7 +7,7 @@ CC=cc
 
 GAPINCL=-I$(GAPPATH)/src -I$(GAPPATH)/bin/@GAPARCH@
 
-all: default clean doc
+all: default
 
 default: bindir bin/@GAPARCH@/gauss.so
 
