@@ -22,11 +22,11 @@ of your GAP 4 installation. It creates a subdirectory called `RingsForHomalg'.
 
 This completes the installation of the package.
 
-Recompiling the documentation is possible by the command `make doc'
-in the RingsForHomalg directory. But this should not be necessary.
+Testing the package is possible by invoking
 
-Testing the package is possible by the command `make test'
-in the RingsForHomalg directory.
+ReadPackage( "RingsForHomalg", "maketest.g" );
+
+from within GAP.
 
 You need the computer algebra systems
 . Singular (version >= 3-0-4): executable -> Singular
