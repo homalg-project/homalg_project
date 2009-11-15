@@ -19,7 +19,7 @@ list := [
          "../examples/Purity.g",
          "../examples/A3_Purity.g",
          "../examples/CodegreeOfPurity.g",
-         "../examples/torext.g",
+         "../examples/Grothendieck_TorExt.g",
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          "../examples/Schenck-3.2.g",

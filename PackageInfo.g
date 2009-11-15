@@ -29,13 +29,13 @@ Subtitle := "ExamplesForHomalg - Examples for the GAP package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.11.09",
+Version := "2009.11.10",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "09/11/2009",
+Date := "10/11/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -127,13 +127,12 @@ Persons := [
     Email         := "mohamed.barakat@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
     PostalAddress := Concatenation( [
-                       "Mohamed Barakat\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
                        "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
   ),
   rec(
     LastName      := "Görtzen",
@@ -143,7 +142,6 @@ Persons := [
     Email         := "simon.goertzen@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~simon/",
     PostalAddress := Concatenation( [
-                       "Simon Görtzen\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
@@ -159,7 +157,6 @@ Persons := [
     Email         := "markus.lange.hegermann@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
     PostalAddress := Concatenation( [
-                       "Markus Lange-Hegermann\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
