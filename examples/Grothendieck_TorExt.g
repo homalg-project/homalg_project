@@ -1,4 +1,3 @@
-
 ##  <#GAPDoc Label="TorExt-Grothendieck">
 ##  <Section Label="TorExt-Grothendieck">
 ##  <Heading>TorExt-Grothendieck</Heading>
