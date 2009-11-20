@@ -15,6 +15,7 @@ const char * Revision_gauss_c =
 /* The following seems to be necessary to run under modern gcc compilers
  * which have the ssp stack checking enabled. Hopefully this does not
  * hurt in future or other versions... */
+#if 0
 #ifdef __GNUC__
 #if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1))
 extern void __stack_chk_fail();
@@ -22,6 +23,7 @@ void __stack_chk_fail_local (void)
 {
   __stack_chk_fail ();
 }
+#endif
 #endif
 #endif
 
