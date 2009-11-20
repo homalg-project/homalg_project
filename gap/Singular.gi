@@ -34,6 +34,8 @@ InstallValue( HOMALG_IO_Singular,
 #            original_lines := true,		## a Singular specific
             check_output := true,		## a Singular specific looks for newlines without commas
             setring := _Singular_SetRing,	## a Singular specific
+            ## prints polynomials in a format compatible with other CASs
+            setring_post := [ "short=0;", "option(redTail);" ],	## a Singular specific
             setinvol := _Singular_SetInvolution,## a Singular specific
             define := "=",
             delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
@@ -100,6 +102,10 @@ InstallGlobalFunction( _Singular_SetRing,
     stream.active_ring := R;
     
     homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    if IsBound( HOMALG_IO_Singular.setring_post ) then
+        homalgSendBlocking( HOMALG_IO_Singular.setring_post, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    fi;
     
     ## never use imapall here
     
@@ -1159,9 +1165,6 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     _Singular_SetRing( R );
     
-    ##prints output in a compatible format
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    
     RP := homalgTable( R );
     
     RP!.SetInvolution :=
@@ -1280,8 +1283,6 @@ InstallMethod( PolynomialRing,
     
     _Singular_SetRing( S );
     
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
-    
     RP := homalgTable( S );
     
     RP!.SetInvolution :=
@@ -1350,8 +1351,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     SetRingProperties( S, R, der );
     
     _Singular_SetRing( S );
-    
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     RP := homalgTable( S );
     
@@ -1537,8 +1536,6 @@ InstallMethod( LocalizePolynomialRingWithMoraAtZero,
     S := CreateHomalgExternalRing( ext_obj, TheTypePreHomalgExternalRingInSingular );
     
     _Singular_SetRing( S );
-    
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     RP := homalgTable( S );
     
@@ -1763,7 +1760,6 @@ InstallMethod( SaveHomalgMatrixToFile,
     return true;
     
 end );
-
 
 ##
 InstallMethod( LoadHomalgMatrixFromFile,

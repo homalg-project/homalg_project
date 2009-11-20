@@ -32,13 +32,13 @@ Subtitle := "RingsForHomalg - Internal and External Rings for the GAP Package ho
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.11.09",
+Version := "2009.11.19",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "09/11/2009",
+Date := "19/11/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -142,7 +142,7 @@ Persons := [
     LastName      := "Goertzen",
     FirstNames    := "Simon",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "simon.goertzen@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen/",
     PostalAddress := Concatenation( [
@@ -207,7 +207,7 @@ Persons := [
     LastName      := "Robertz",
     FirstNames    := "Daniel",
     IsAuthor      := true,
-    IsMaintainer  := false,
+    IsMaintainer  := true,
     Email         := "daniel@momo.math.rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel/",
     PostalAddress := Concatenation( [
