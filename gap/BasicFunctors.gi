@@ -98,6 +98,7 @@ end );
 InstallValue( functor_Cokernel,
         CreateHomalgFunctor(
                 [ "name", "Cokernel" ],
+                [ "operation", "Cokernel" ],
                 [ "natural_transformation", "CokernelEpi" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],
@@ -213,6 +214,7 @@ end );
 InstallValue( functor_ImageModule,
         CreateHomalgFunctor(
                 [ "name", "ImageModule" ],
+                [ "operation", "ImageModule" ],
                 [ "natural_transformation", "ImageModuleEmb" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
@@ -341,6 +343,7 @@ end );
 InstallValue( functor_Kernel,
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
+                [ "operation", "Kernel" ],
                 [ "natural_transformation", "KernelEmb" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],
@@ -380,6 +383,7 @@ end );
 InstallValue( functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
+                [ "operation", "DefectOfExactness" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
@@ -665,6 +669,7 @@ end );
 InstallValue( Functor_Hom,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
+                [ "operation", "Hom" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
                 [ "2", [ [ "covariant", "left exact" ] ] ],
@@ -919,6 +924,7 @@ end );
 InstallValue( Functor_TensorProduct,
         CreateHomalgFunctor(
                 [ "name", "TensorProduct" ],
+                [ "operation", "TensorProduct" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
                 [ "2", [ [ "covariant", "left adjoint" ] ] ],
@@ -1070,6 +1076,7 @@ end );
 InstallValue( functor_BaseChange,
         CreateHomalgFunctor(
                 [ "name", "BaseChange" ],
+                [ "operation", "BaseChange" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ] ] ],
                 [ "2", [ [ "covariant" ] ] ],

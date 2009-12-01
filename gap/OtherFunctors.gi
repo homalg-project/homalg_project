@@ -44,6 +44,7 @@ end );
 InstallValue( Functor_TorsionSubmodule,
         CreateHomalgFunctor(
                 [ "name", "TorsionSubmodule" ],
+                [ "operation", "TorsionSubmodule" ],
                 [ "natural_transformation", "TorsionSubmoduleEmb" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "additive" ] ] ],
@@ -96,6 +97,7 @@ end );
 InstallValue( Functor_TorsionFreeFactor,
         CreateHomalgFunctor(
                 [ "name", "TorsionFreeFactor" ],
+                [ "operation", "TorsionFreeFactor" ],
                 [ "natural_transformation", "TorsionFreeFactorEpi" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "additive" ] ] ],
@@ -314,6 +316,7 @@ end );
 InstallValue( Functor_DirectSum,
         CreateHomalgFunctor(
                 [ "name", "DirectSum" ],
+                [ "operation", "DirectSumOp" ],
                 [ "natural_transformation1", "EpiOnLeftFactor" ],
                 [ "natural_transformation2", "EpiOnRightFactor" ],
                 [ "natural_transformation3", "MonoOfLeftSummand" ],
@@ -331,6 +334,35 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+## DirectSum might has been defined elsewhere
+if not IsBound( DirectSum ) then
+    
+    DeclareGlobalFunction( "DirectSum" );
+    
+    ##
+    InstallGlobalFunction( DirectSum,
+      function( arg )
+        local  d;
+        if Length( arg ) = 0  then
+            Error( "<arg> must be nonempty" );
+        elif Length( arg ) = 1 and IsList( arg[1] )  then
+            if IsEmpty( arg[1] )  then
+                Error( "<arg>[1] must be nonempty" );
+            fi;
+            arg := arg[1];
+        fi;
+        d := DirectSumOp( arg, arg[1] );
+        if ForAll( arg, HasSize )  then
+            if ForAll( arg, IsFinite )  then
+                SetSize( d, Product( List( arg, Size ) ) );
+            else
+                SetSize( d, infinity );
+            fi;
+        fi;
+        return d;
+    end );
+fi;
 
 ##
 ## Pullback
@@ -369,6 +401,7 @@ end );
 InstallValue( functor_Pullback,
         CreateHomalgFunctor(
                 [ "name", "Pullback" ],
+                [ "operation", "Pullback" ],
                 [ "natural_transformation", "PullbackPairOfMaps" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
@@ -427,6 +460,7 @@ end );
 InstallValue( functor_Pushout,
         CreateHomalgFunctor(
                 [ "name", "Pushout" ],
+                [ "operation", "Pushout" ],
                 [ "natural_transformation", "PushoutPairOfMaps" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
@@ -473,6 +507,7 @@ end );
 InstallValue( functor_AuslanderDual,
         CreateHomalgFunctor(
                 [ "name", "AuslanderDual" ],
+                [ "operation", "AuslanderDual" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "contravariant" ], [ IsHomalgModule ] ] ],
                 [ "OnObjects", _Functor_AuslanderDual_OnObjects ]
@@ -505,6 +540,17 @@ InstallFunctor( Functor_TorsionFreeFactor );
 ##
 
 InstallFunctor( Functor_DirectSum );
+
+##
+InstallMethod( DirectSumOp,
+        "for homalg objects",
+        [ IsList, IsHomalgRingOrObjectOrMorphism ],
+        
+  function( L, M )
+    
+    return Iterated( L, DirectSumOp );
+    
+end );
 
 ##
 InstallMethod( \+,

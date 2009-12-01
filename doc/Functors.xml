@@ -38,6 +38,8 @@
 <Section Label="Functors:Attributes">
 <Heading>Functors: Attributes</Heading>
 
+<#Include Label="NameOfFunctor">
+<#Include Label="OperationOfFunctor">
 <#Include Label="Genesis:functor">
 
 </Section>
@@ -94,7 +96,6 @@
 <Section Label="Functors:Operations">
 <Heading>Functors: Operations and Functions</Heading>
 
-<#Include Label="NameOfFunctor">
 <#Include Label="InstallFunctor">
 <#Include Label="InstallDeltaFunctor">
 

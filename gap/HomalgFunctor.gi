@@ -138,42 +138,18 @@ InstallMethod( NaturalGeneralizedEmbedding,
     
 end );
 
-##  <#GAPDoc Label="NameOfFunctor">
-##  <ManSection>
-##    <Oper Arg="F" Name="NameOfFunctor"/>
-##    <Returns>a string</Returns>
-##    <Description>
-##      The name of the &homalg; functor <A>F</A>.
-##      <Example><![CDATA[
-##  gap> NameOfFunctor( Functor_Ext );
-##  "Ext"
-##  gap> Display( Functor_Ext );
-##  Ext
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
 ##
 InstallMethod( NameOfFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
         
   function( Functor )
-    local functor_name;
     
-    if IsBound( Functor!.name ) then
-        functor_name := Functor!.name;
-        ## for this to work you need to declare one instance of the functor,
-        ## although all methods will be installed using InstallOtherMethod!
-        if not IsOperation( ValueGlobal( functor_name ) ) and
-           not IsFunction( ValueGlobal( functor_name ) ) then
-            Error( "the functor ", functor_name, " neither points to an operation nor to a function\n" );
-        fi;
-    else
+    if not IsBound( Functor!.name ) then
         Error( "the provided functor is nameless\n" );
     fi;
     
-    return functor_name;
+    return Functor!.name;
     
 end );
 
@@ -183,8 +159,22 @@ InstallMethod( OperationOfFunctor,
         [ IsHomalgFunctorRep ],
         
   function( Functor )
+    local functor_operation;
     
-    return ValueGlobal( NameOfFunctor( Functor ) );
+    if not IsBound( Functor!.operation ) then
+        Error( "unable to find the functor component \"operation\"\n" );
+    fi;
+    
+    functor_operation := ValueGlobal( Functor!.operation );
+    
+    ## for this to work you need to declare one instance of the functor,
+    ## although all methods will be installed using InstallOtherMethod!
+    if not IsOperation( functor_operation ) and
+       not IsFunction( functor_operation ) then
+        Error( "the functor ", NameOfFunctor( Functor ), " neither points to an operation nor to a function\n" );
+    fi;
+    
+    return functor_operation;
     
 end );
 
@@ -504,7 +494,7 @@ InstallMethod( FunctorMap,
     local container, weak_pointers, a, deleted, functor_name,
           number_of_arguments, pos0, arg_positions, S, T, pos,
           arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
-          arg_source, arg_target, F_source, F_target, genesis,
+          arg_source, arg_target, functor_operation, F_source, F_target, genesis,
           Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
           functor_orig_operation, m_orig, arg_orig,
@@ -593,8 +583,10 @@ InstallMethod( FunctorMap,
         Error( "the functor ", functor_name, " must be either co- or contravriant in its argument number ", pos, "\n" );
     fi;
     
-    F_source := CallFuncList( ValueGlobal( functor_name ), arg_source );
-    F_target := CallFuncList( ValueGlobal( functor_name ), arg_target );
+    functor_operation := OperationOfFunctor( Functor );
+    
+    F_source := CallFuncList( functor_operation, arg_source );
+    F_target := CallFuncList( functor_operation, arg_target );
     
     if HasGenesis( Functor ) then
         genesis := Genesis( Functor );
@@ -5699,9 +5691,9 @@ end );
 ##
 InstallMethod( InsertObjectInMultiFunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+        [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString, IsString ],
         
-  function( Functor, p, o, name )
+  function( Functor, p, o, name, operation )
     local m, functor_name, functor_operation, functor_data, data, i, Fp, fname;
     
     m := MultiplicityOfFunctor( Functor );
@@ -5714,7 +5706,7 @@ InstallMethod( InsertObjectInMultiFunctor,
     
     functor_name := NameOfFunctor( Functor );
     
-    functor_operation := ValueGlobal( functor_name );
+    functor_operation := OperationOfFunctor( Functor );
     
     if m = 1 then
         return functor_operation( o );
@@ -5737,7 +5729,9 @@ InstallMethod( InsertObjectInMultiFunctor,
     od;
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m - 1 ] ],
+                    [ [ "name", name ],
+                      [ "operation", operation ],
+                      [ "number_of_arguments", m - 1 ] ],
                     data );
     
     Fp := CallFuncList( CreateHomalgFunctor, data );
@@ -5766,6 +5760,17 @@ InstallMethod( InsertObjectInMultiFunctor,
     fi;
     
     return Fp;
+    
+end );
+
+##
+InstallMethod( InsertObjectInMultiFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+        
+  function( Functor, p, o, name )
+    
+    return InsertObjectInMultiFunctor( Functor, p, o, name, name );
     
 end );
 
@@ -5806,9 +5811,9 @@ end );
 ##
 InstallMethod( ComposeFunctors,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep, IsString ],
+        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep, IsString, IsString ],
         
-  function( Functor_post, p, Functor_pre, name )
+  function( Functor_post, p, Functor_pre, name, operation )
     local m_post, m_pre, data_post, data_pre, m, data, i, d, property, fname,
           GF;
     
@@ -5866,7 +5871,9 @@ InstallMethod( ComposeFunctors,
     od;
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "name", name ],
+                      [ "operation", operation ],
+                      [ "number_of_arguments", m ] ],
                     data );
     
     GF := CallFuncList( CreateHomalgFunctor, data );
@@ -5919,11 +5926,33 @@ end );
 ##
 InstallMethod( ComposeFunctors,
         "for homalg functors",
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsString, IsString ],
+        
+  function( Functor_post, Functor_pre, name, operation )
+    
+    return ComposeFunctors( Functor_post, 1, Functor_pre, name, operation );
+    
+end );
+
+##
+InstallMethod( ComposeFunctors,
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsString ],
         
   function( Functor_post, Functor_pre, name )
     
-    return ComposeFunctors( Functor_post, 1, Functor_pre, name );
+    return ComposeFunctors( Functor_post, Functor_pre, name, name );
+    
+end );
+
+##
+InstallMethod( ComposeFunctors,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsInt, IsHomalgFunctorRep, IsString ],
+        
+  function( Functor_post, p, Functor_pre, name )
+    
+    return ComposeFunctors( Functor_post, p, Functor_pre, name, name );
     
 end );
 
@@ -5972,9 +6001,9 @@ end );
 ##
 InstallMethod( RightSatelliteOfCofunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        [ IsHomalgFunctorRep, IsPosInt, IsString, IsString ],
         
-  function( Functor, p, name )
+  function( Functor, p, name, operation )
     local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
           m, z, data, i, SF, fname;
     
@@ -5984,7 +6013,7 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     functor_name :=  NameOfFunctor( Functor );
     
-    functor_operation := ValueGlobal( functor_name );
+    functor_operation := OperationOfFunctor( Functor );
     
     _Functor_OnObjects :=
       function( arg )
@@ -6070,7 +6099,9 @@ InstallMethod( RightSatelliteOfCofunctor,
     od;
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "name", name ],
+                      [ "operation", operation ],
+                      [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
                     [ [ "OnObjects", _Functor_OnObjects ] ],
@@ -6108,6 +6139,17 @@ end );
 ##
 InstallMethod( RightSatelliteOfCofunctor,
         "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        
+  function( Functor, p, name )
+    
+    return RightSatelliteOfCofunctor( Functor, p, name, name );
+    
+end );
+
+##
+InstallMethod( RightSatelliteOfCofunctor,
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsPosInt ],
         
   function( Functor, p )
@@ -6118,6 +6160,17 @@ InstallMethod( RightSatelliteOfCofunctor,
     name := Concatenation( "S", name );
     
     return RightSatelliteOfCofunctor( Functor, p, name );
+    
+end );
+
+##
+InstallMethod( RightSatelliteOfCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString, IsString ],
+        
+  function( Functor, name, operation )
+    
+    return RightSatelliteOfCofunctor( Functor, 1, name, operation );
     
 end );
 
@@ -6166,9 +6219,9 @@ end );
 ##
 InstallMethod( LeftSatelliteOfFunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        [ IsHomalgFunctorRep, IsPosInt, IsString, IsString ],
         
-  function( Functor, p, name )
+  function( Functor, p, name, operation )
     local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
           m, z, data, i, SF, fname;
     
@@ -6178,7 +6231,7 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     functor_name :=  NameOfFunctor( Functor );
     
-    functor_operation := ValueGlobal( functor_name );
+    functor_operation := OperationOfFunctor( Functor );
     
     _Functor_OnObjects :=
       function( arg )
@@ -6268,7 +6321,9 @@ InstallMethod( LeftSatelliteOfFunctor,
     od;
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "name", name ],
+                      [ "operation", operation ],
+                      [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
                     [ [ "OnObjects", _Functor_OnObjects ] ],
@@ -6306,6 +6361,17 @@ end );
 ##
 InstallMethod( LeftSatelliteOfFunctor,
         "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        
+  function( Functor, p, name )
+    
+    return LeftSatelliteOfFunctor( Functor, p, name, name );
+    
+end );
+
+##
+InstallMethod( LeftSatelliteOfFunctor,
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsPosInt ],
         
   function( Functor, p )
@@ -6316,6 +6382,17 @@ InstallMethod( LeftSatelliteOfFunctor,
     name := Concatenation( "S_", name );
     
     return LeftSatelliteOfFunctor( Functor, p, name );
+    
+end );
+
+##
+InstallMethod( LeftSatelliteOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString, IsString ],
+        
+  function( Functor, name, operation )
+    
+    return LeftSatelliteOfFunctor( Functor, 1, name, operation );
     
 end );
 
@@ -6364,9 +6441,9 @@ end );
 ##
 InstallMethod( RightDerivedCofunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        [ IsHomalgFunctorRep, IsPosInt, IsString, IsString ],
         
-  function( Functor, p, name )
+  function( Functor, p, name, operation )
     local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
           m, z, data, i, RF, fname;
     
@@ -6376,7 +6453,7 @@ InstallMethod( RightDerivedCofunctor,
     
     functor_name :=  NameOfFunctor( Functor );
     
-    functor_operation := ValueGlobal( functor_name );
+    functor_operation := OperationOfFunctor( Functor );
     
     _Functor_OnObjects :=
       function( arg )
@@ -6450,7 +6527,9 @@ InstallMethod( RightDerivedCofunctor,
     od;
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "name", name ],
+                      [ "operation", operation ],
+                      [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
                     [ [ "OnObjects", _Functor_OnObjects ] ],
@@ -6490,6 +6569,17 @@ end );
 ##
 InstallMethod( RightDerivedCofunctor,
         "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        
+  function( Functor, p, name )
+    
+    return RightDerivedCofunctor( Functor, p, name, name );
+    
+end );
+
+##
+InstallMethod( RightDerivedCofunctor,
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsPosInt ],
         
   function( Functor, p )
@@ -6500,6 +6590,17 @@ InstallMethod( RightDerivedCofunctor,
     name := Concatenation( "R", name );
     
     return RightDerivedCofunctor( Functor, p, name );
+    
+end );
+
+##
+InstallMethod( RightDerivedCofunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString, IsString ],
+        
+  function( Functor, name, operation )
+    
+    return RightDerivedCofunctor( Functor, 1, name, operation );
     
 end );
 
@@ -6550,9 +6651,9 @@ end );
 ##
 InstallMethod( LeftDerivedFunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        [ IsHomalgFunctorRep, IsPosInt, IsString, IsString ],
         
-  function( Functor, p, name )
+  function( Functor, p, name, operation )
     local functor_name, functor_operation, _Functor_OnObjects, _Functor_OnMorphisms,
           m, z, data, i, LF, fname;
     
@@ -6562,7 +6663,7 @@ InstallMethod( LeftDerivedFunctor,
     
     functor_name :=  NameOfFunctor( Functor );
     
-    functor_operation := ValueGlobal( functor_name );
+    functor_operation := OperationOfFunctor( Functor );
     
     _Functor_OnObjects :=
       function( arg )
@@ -6636,7 +6737,9 @@ InstallMethod( LeftDerivedFunctor,
     od;
     
     data := Concatenation(
-                    [ [ "name", name ], [ "number_of_arguments", m ] ],
+                    [ [ "name", name ],
+                      [ "operation", operation ],
+                      [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
                     data,
                     [ [ "OnObjects", _Functor_OnObjects ] ],
@@ -6676,6 +6779,17 @@ end );
 ##
 InstallMethod( LeftDerivedFunctor,
         "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt, IsString ],
+        
+  function( Functor, p, name )
+    
+    return LeftDerivedFunctor( Functor, p, name, name );
+    
+end );
+
+##
+InstallMethod( LeftDerivedFunctor,
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsPosInt ],
         
   function( Functor, p )
@@ -6686,6 +6800,17 @@ InstallMethod( LeftDerivedFunctor,
     name := Concatenation( "L", name );
     
     return LeftDerivedFunctor( Functor, p, name );
+    
+end );
+
+##
+InstallMethod( LeftDerivedFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsString, IsString ],
+        
+  function( Functor, name, operation )
+    
+    return LeftDerivedFunctor( Functor, 1, name, operation );
     
 end );
 

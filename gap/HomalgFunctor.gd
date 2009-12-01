@@ -41,6 +41,44 @@ DeclareCategory( "IsHomalgFunctor",
 #
 ####################################
 
+##  <#GAPDoc Label="NameOfFunctor">
+##  <ManSection>
+##    <Attr Arg="F" Name="NameOfFunctor"/>
+##    <Returns>a string</Returns>
+##    <Description>
+##      The name of the &homalg; functor <A>F</A>.
+##      <Example><![CDATA[
+##  gap> NameOfFunctor( Functor_Ext );
+##  "Ext"
+##  gap> Display( Functor_Ext );
+##  Ext
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "NameOfFunctor",
+        IsHomalgFunctor );
+
+##  <#GAPDoc Label="OperationOfFunctor">
+##  <ManSection>
+##    <Attr Arg="F" Name="OperationOfFunctor"/>
+##    <Returns>an operation</Returns>
+##    <Description>
+##      The operation of the functor <A>F</A>.
+##      <Example><![CDATA[
+##  gap> Functor_Ext;
+##  <The functor Ext>
+##  gap> OperationOfFunctor( Functor_Ext );
+##  <Operation "Ext">
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "OperationOfFunctor",
+        IsHomalgFunctor );
+
 ##  <#GAPDoc Label="Genesis:functor">
 ##  <ManSection>
 ##    <Attr Arg="F" Name="Genesis"/>
@@ -56,7 +94,8 @@ DeclareCategory( "IsHomalgFunctor",
 ##  gap> Functor_Hom;
 ##  <The functor Hom>
 ##  gap> Genesis( Functor_Hom );
-##  [ "CreateHomalgFunctor", [ "name", "Hom" ], [ "number_of_arguments", 2 ],
+##  [ "CreateHomalgFunctor", [ "name", "Hom" ], [ "operation", "Hom" ],
+##    [ "number_of_arguments", 2 ],
 ##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
 ##    [ "2", [ [ "covariant", "left exact" ] ] ],
 ##    [ "OnObjects", function( M, N ) ... end ],
@@ -125,13 +164,22 @@ DeclareAttribute( "Genesis",
 DeclareGlobalFunction( "CreateHomalgFunctor" );
 
 DeclareOperation( "InsertObjectInMultiFunctor",
+        [ IsHomalgFunctor, IsInt, IsHomalgRingOrObjectOrMorphism, IsString, IsString ] );
+
+DeclareOperation( "InsertObjectInMultiFunctor",
         [ IsHomalgFunctor, IsInt, IsHomalgRingOrObjectOrMorphism, IsString ] );
+
+DeclareOperation( "ComposeFunctors",
+        [ IsHomalgFunctor, IsInt, IsHomalgFunctor, IsString, IsString ] );
 
 DeclareOperation( "ComposeFunctors",
         [ IsHomalgFunctor, IsInt, IsHomalgFunctor, IsString ] );
 
 DeclareOperation( "ComposeFunctors",
         [ IsHomalgFunctor, IsInt, IsHomalgFunctor ] );
+
+DeclareOperation( "ComposeFunctors",
+        [ IsHomalgFunctor, IsHomalgFunctor, IsString, IsString ] );
 
 DeclareOperation( "ComposeFunctors",
         [ IsHomalgFunctor, IsHomalgFunctor, IsString ] );
@@ -143,10 +191,16 @@ DeclareOperation( "*",
         [ IsHomalgFunctor, IsHomalgFunctor ] );
 
 DeclareOperation( "RightSatelliteOfCofunctor",
+        [ IsHomalgFunctor, IsInt, IsString, IsString ] );
+
+DeclareOperation( "RightSatelliteOfCofunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "RightSatelliteOfCofunctor",
         [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "RightSatelliteOfCofunctor",
+        [ IsHomalgFunctor, IsString, IsString ] );
 
 DeclareOperation( "RightSatelliteOfCofunctor",
         [ IsHomalgFunctor, IsString ] );
@@ -155,10 +209,16 @@ DeclareOperation( "RightSatelliteOfCofunctor",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "LeftSatelliteOfFunctor",
+        [ IsHomalgFunctor, IsInt, IsString, IsString ] );
+
+DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "LeftSatelliteOfFunctor",
+        [ IsHomalgFunctor, IsString, IsString ] );
 
 DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor, IsString ] );
@@ -167,10 +227,16 @@ DeclareOperation( "LeftSatelliteOfFunctor",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "RightDerivedCofunctor",
+        [ IsHomalgFunctor, IsInt, IsString, IsString ] );
+
+DeclareOperation( "RightDerivedCofunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "RightDerivedCofunctor",
         [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "RightDerivedCofunctor",
+        [ IsHomalgFunctor, IsString, IsString ] );
 
 DeclareOperation( "RightDerivedCofunctor",
         [ IsHomalgFunctor, IsString ] );
@@ -179,10 +245,16 @@ DeclareOperation( "RightDerivedCofunctor",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "LeftDerivedFunctor",
+        [ IsHomalgFunctor, IsInt, IsString, IsString ] );
+
+DeclareOperation( "LeftDerivedFunctor",
         [ IsHomalgFunctor, IsInt, IsString ] );
 
 DeclareOperation( "LeftDerivedFunctor",
         [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "LeftDerivedFunctor",
+        [ IsHomalgFunctor, IsString, IsString ] );
 
 DeclareOperation( "LeftDerivedFunctor",
         [ IsHomalgFunctor, IsString ] );
@@ -194,12 +266,6 @@ DeclareOperation( "LeftDerivedFunctor",
 
 DeclareOperation( "NaturalGeneralizedEmbedding",
         [ IsHomalgModule ] );
-
-DeclareOperation( "NameOfFunctor",
-        [ IsHomalgFunctor ] );
-
-DeclareOperation( "OperationOfFunctor",
-        [ IsHomalgFunctor ] );
 
 DeclareOperation( "IsSpecialFunctor",
         [ IsHomalgFunctor ] );

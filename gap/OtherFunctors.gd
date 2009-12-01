@@ -90,8 +90,8 @@ DeclareOperation( "TorsionFreeFactor",
 DeclareOperation( "TorsionSubmodule",
         [ IsHomalgModule ] );
 
-DeclareOperation( "DirectSum",
-        [ IsHomalgModule, IsHomalgModule ] );
+DeclareOperation( "DirectSumOp",
+        [ IsList, IsHomalgRingOrObjectOrMorphism ] );
 
 DeclareOperation( "Pullback",
         [ IsHomalgChainMap ] );

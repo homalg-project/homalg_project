@@ -28,6 +28,7 @@ end );
 InstallValue( functor_TheZeroMap,
         CreateHomalgFunctor(
                 [ "name", "TheZeroMap" ],
+                [ "operation", "TheZeroMap" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant" ] ] ],
                 [ "2", [ [ "covariant" ] ] ],
@@ -73,6 +74,7 @@ end );
 InstallValue( functor_AsATwoSequence,
         CreateHomalgFunctor(
                 [ "name", "AsATwoSequence" ],
+                [ "operation", "AsATwoSequence" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -173,7 +175,8 @@ end );
 
 InstallValue( functor_MulMap,
         CreateHomalgFunctor(
-                [ "name", "MulMap" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
+                [ "name", "MulMap" ],
+                [ "operation", "MulMap" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsRingElement ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -221,6 +224,7 @@ end );
 InstallValue( functor_AddMap,
         CreateHomalgFunctor(
                 [ "name", "+" ],
+                [ "operation", "+" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -257,6 +261,7 @@ end );
 InstallValue( functor_SubMap,
         CreateHomalgFunctor(
                 [ "name", "-" ],
+                [ "operation", "-" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -363,6 +368,7 @@ end );
 InstallValue( functor_Compose,
         CreateHomalgFunctor(
                 [ "name", "Compose" ],
+                [ "operation", "Compose" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
                 [ "OnObjects", _Functor_Compose_OnObjects ]
@@ -449,6 +455,7 @@ end );
 InstallValue( functor_StackMaps,
         CreateHomalgFunctor(
                 [ "name", "StackMaps" ],
+                [ "operation", "StackMaps" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -504,6 +511,7 @@ end );
 InstallValue( functor_AugmentMaps,
         CreateHomalgFunctor(
                 [ "name", "AugmentMaps" ],
+                [ "operation", "AugmentMaps" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -544,6 +552,7 @@ end );
 InstallValue( functor_AsChainMapForPullback,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPullback" ],
+                [ "operation", "AsChainMapForPullback" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -646,6 +655,7 @@ end );
 InstallValue( functor_PostDivide,
         CreateHomalgFunctor(
                 [ "name", "PostDivide" ],
+                [ "operation", "PostDivide" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
                 [ "OnObjects", _Functor_PostDivide_OnObjects ]
@@ -714,6 +724,7 @@ end );
 InstallValue( functor_AsChainMapForPushout,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPushout" ],
+                [ "operation", "AsChainMapForPushout" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
