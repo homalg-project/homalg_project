@@ -36,27 +36,6 @@ BindGlobal( "TheTypeHomalgTable",
 
 ####################################
 #
-# constructor functions and methods:
-#
-####################################
-
-InstallMethod( CreateHomalgTable,
-        "for homalg ring package conversion tables",
-        [ IsSemiringWithOneAndZero ],
-        
-  function ( arg )
-    local RP;
-    
-    RP := rec( );
-    
-    Objectify( TheTypeHomalgTable, RP );
-    
-    return RP;
-    
-end );
-
-####################################
-#
 # View, Print, and Display methods:
 #
 ####################################

@@ -2033,3 +2033,26 @@ InstallMethod( \*,
     
 end );
 
+## from homalgTable.gi
+
+####################################
+#
+# constructor functions and methods:
+#
+####################################
+
+InstallMethod( CreateHomalgTable,
+        "for homalg ring package conversion tables",
+        [ IsSemiringWithOneAndZero ],
+        
+  function ( ring )
+    local RP;
+    
+    RP := rec( );
+    
+    Objectify( TheTypeHomalgTable, RP );
+    
+    return RP;
+    
+end );
+

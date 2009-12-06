@@ -37,6 +37,9 @@ For an example see <Ref Label="HomHom"/>.
 Here we list those matrix operations for which &homalg; provides no
 fallback method.
 
+<#Include Label="InitialMatrix:ResidueClassRing">
+<#Include Label="InitialIdentityMatrix:ResidueClassRing">
+
 <#Include Label="ZeroMatrix:ResidueClassRing">
 <#Include Label="IdentityMatrix:ResidueClassRing">
 

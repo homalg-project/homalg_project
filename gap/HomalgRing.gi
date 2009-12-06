@@ -667,6 +667,14 @@ InstallGlobalFunction( CreateHomalgRing,
         table := CreateHomalgTable( r );
     fi;
     
+    if not IsBound( table!.InitialMatrix ) and IsBound( table!.ZeroMatrix ) then
+        table!.InitialMatrix := table!.ZeroMatrix;
+    fi;
+    
+    if not IsBound( table!.InitialIdentityMatrix ) and IsBound( table!.IdentityMatrix ) then
+        table!.InitialIdentityMatrix := table!.IdentityMatrix;
+    fi;
+    
     properties := [ ];
     
     for ar in arg{[ 2 .. nargs ]} do

@@ -282,7 +282,7 @@ end );
 ##      In case the matrix <A>A</A> was created using
 ##      <Ref Meth="HomalgInitialMatrix" Label="constructor for initial matrices filled with zeros"/>
 ##      then the filter <C>IsInitialMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
-##      (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry for initial matrices"/>)
+##      (&see; <Ref Meth="InitialMatrix" Label="homalgTable entry for initial matrices"/>)
 ##      will be used to set the attribute <C>Eval</C> and resets the filter <C>IsInitialMatrix</C>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
@@ -297,13 +297,13 @@ InstallMethod( Eval,
     
     RP := homalgTable( R );
     
-    if IsBound( RP!.ZeroMatrix ) then
+    if IsBound( RP!.InitialMatrix ) then
         ResetFilterObj( C, IsInitialMatrix );
-        return RP!.ZeroMatrix( C );
+        return RP!.InitialMatrix( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the ",
+        Error( "could not find a procedure called InitialMatrix in the ",
                "homalgTable to evaluate a non-internal initial matrix\n" );
     fi;
     
@@ -326,7 +326,7 @@ end );
 
 ##  <#GAPDoc Label="InitialMatrix:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="C" Name="ZeroMatrix" Label="homalgTable entry for initial matrices"/>
+##    <Func Arg="C" Name="InitialMatrix" Label="homalgTable entry for initial matrices"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
@@ -345,7 +345,7 @@ end );
 ##      In case the matrix <A>A</A> was created using
 ##      <Ref Meth="HomalgInitialIdentityMatrix" Label="constructor for initial quadratic matrices with ones on the diagonal"/>
 ##      then the filter <C>IsInitialIdentityMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
-##      (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry for initial identity matrices"/>)
+##      (&see; <Ref Meth="InitialIdentityMatrix" Label="homalgTable entry for initial identity matrices"/>)
 ##      will be used to set the attribute <C>Eval</C> and resets the filter <C>IsInitialIdentityMatrix</C>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
@@ -360,13 +360,13 @@ InstallMethod( Eval,
     
     RP := homalgTable( R );
     
-    if IsBound( RP!.IdentityMatrix ) then
+    if IsBound( RP!.InitialIdentityMatrix ) then
         ResetFilterObj( C, IsInitialIdentityMatrix );
-        return RP!.IdentityMatrix( C );
+        return RP!.InitialIdentityMatrix( C );
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the ",
+        Error( "could not find a procedure called InitialIdentityMatrix in the ",
                "homalgTable to evaluate a non-internal initial identity matrix\n" );
     fi;
     
@@ -395,7 +395,7 @@ end );
 
 ##  <#GAPDoc Label="InitialIdentityMatrix:homalgTable_entry">
 ##  <ManSection>
-##    <Func Arg="C" Name="IdentityMatrix" Label="homalgTable entry for initial identity matrices"/>
+##    <Func Arg="C" Name="InitialIdentityMatrix" Label="homalgTable entry for initial identity matrices"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.

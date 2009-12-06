@@ -109,13 +109,40 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                  end,
                
+               ##  <#GAPDoc Label="InitialMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="InitialMatrix" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="InitialMatrix" Label="homalgTable entry for initial matrices"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               InitialMatrix := C -> HomalgInitialMatrix(
+                                     NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
+               
+               ##  <#GAPDoc Label="InitialIdentityMatrix:ResidueClassRing">
+               ##  <ManSection>
+               ##    <Func Arg="" Name="InitialIdentityMatrix" Label="ResidueClassRing"/>
+               ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
+               ##    <Description>
+               ##    (&see; <Ref Meth="InitialIdentityMatrix" Label="homalgTable entry for initial identity matrices"/>)
+               ##    <Listing Type="Code"><![CDATA[
+               InitialIdentityMatrix := C -> HomalgInitialIdentityMatrix(
+                       NrRows( C ), AmbientRing( HomalgRing( C ) ) ),
+               ##  ]]></Listing>
+               ##    </Description>
+               ##  </ManSection>
+               ##  <#/GAPDoc>
+               
                ##  <#GAPDoc Label="ZeroMatrix:ResidueClassRing">
                ##  <ManSection>
                ##    <Func Arg="" Name="ZeroMatrix" Label="ResidueClassRing"/>
                ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
                ##    <Description>
-               ##    (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry for initial matrices"/> and
-               ##     <Ref Meth="ZeroMatrix" Label="homalgTable entry"/>)
+               ##    (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                ZeroMatrix := C -> HomalgZeroMatrix(
                                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),
@@ -129,8 +156,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##    <Func Arg="" Name="IdentityMatrix" Label="ResidueClassRing"/>
                ##    <Returns>a &homalg; matrix over the ambient ring</Returns>
                ##    <Description>
-               ##    (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry for initial identity matrices"/> and
-               ##     <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
+               ##    (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                IdentityMatrix := C -> HomalgIdentityMatrix(
                        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),

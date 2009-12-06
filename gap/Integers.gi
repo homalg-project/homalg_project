@@ -18,7 +18,7 @@ InstallMethod( CreateHomalgTable,
         "for the integers",
         [ IsIntegers ],
         
-  function( ext_ring_obj )
+  function( ring )
     local RP;
     
     RP := rec( 
