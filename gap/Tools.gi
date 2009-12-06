@@ -330,9 +330,9 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>ZeroMatrix</C> is bound then the method
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>InitialMatrix</C> is bound then the method
 ##      <Ref Meth="Eval" Label="for matrices created with HomalgInitialMatrix"/>
-##      resets the filter <C>IsInitialMatrix</C> and returns <M>RP</M>!.<C>ZeroMatrix</C><M>( <A>C</A> )</M>.
+##      resets the filter <C>IsInitialMatrix</C> and returns <M>RP</M>!.<C>InitialMatrix</C><M>( <A>C</A> )</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -399,9 +399,9 @@ end );
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IdentityMatrix</C> is bound then the method
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>InitialIdentityMatrix</C> is bound then the method
 ##      <Ref Meth="Eval" Label="for matrices created with HomalgInitialIdentityMatrix"/>
-##      resets the filter <C>IsInitialIdentityMatrix</C> and returns <M>RP</M>!.<C>IdentityMatrix</C><M>( <A>C</A> )</M>.
+##      resets the filter <C>IsInitialIdentityMatrix</C> and returns <M>RP</M>!.<C>InitialIdentityMatrix</C><M>( <A>C</A> )</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
