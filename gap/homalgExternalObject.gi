@@ -262,6 +262,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( ViewObj,
         "for homalg external objects",
         [ IshomalgExternalObjectRep ],
@@ -273,6 +274,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( Display,
         "for homalg external objects",
         [ IshomalgExternalObjectRep ],
@@ -283,6 +285,7 @@ InstallMethod( Display,
     
 end );
 
+##
 InstallMethod( ViewObj,
         "for containers of weak pointers on homalg external objects",
         [ IsContainerForWeakPointersOnHomalgExternalObjectsRep ],
@@ -296,6 +299,7 @@ InstallMethod( ViewObj,
     
 end );
 
+##
 InstallMethod( Display,
         "for containers of weak pointers on homalg external objects",
         [ IsContainerForWeakPointersOnHomalgExternalObjectsRep ],

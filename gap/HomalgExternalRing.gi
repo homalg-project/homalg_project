@@ -8,8 +8,10 @@
 ##
 #############################################################################
 
-# a new representation for the GAP-category IsHomalgRing
-# which is a subrepresentation of IsHomalgRingOrFinitelyPresentedModuleRep:
+##
+DeclareRepresentation( "IshomalgExternalRingObjectRep",
+        IshomalgExternalObjectRep,
+        [ ] );
 
 ##  <#GAPDoc Label="IsHomalgExternalRingRep">
 ##  <ManSection>
@@ -45,8 +47,6 @@ DeclareRepresentation( "IsHomalgExternalRingElementRep",
 DeclareRepresentation( "IsContainerForWeakPointersOnHomalgExternalRingsRep",
         IsContainerForWeakPointersRep,
         [ "weak_pointers", "streams", "counter", "deleted" ] );
-
-# a new representation for the GAP-category IsHomalgMatrix:
 
 ##  <#GAPDoc Label="IsHomalgExternalMatrixRep">
 ##  <ManSection>
@@ -329,21 +329,91 @@ HOMALG.ContainerForWeakPointersOnHomalgExternalRings :=
 ##
 InstallGlobalFunction( CreateHomalgExternalRing,
   function( arg )
-    local nargs, r, ring_type, ar, R, container, weak_pointers, l, deleted, streams;
+    local nargs, r, l, HOMALG_IO_CAS, nar, stream, ring_type, ar, R, container, weak_pointers, deleted, streams;
     
     nargs := Length( arg );
     
     if nargs < 2 then
-        Error( "expecting a ring as the first argument and a ring type as the second argument\n" );
+        Error( "expecting a ring object or arguments to pass to homalgSendBlocking as the first argument and a ring type as the second argument\n" );
     fi;
     
     r := arg[1];
+    
+    if IsList( r ) then
+        
+        l := 4;
+        
+        HOMALG_IO_CAS := arg[3];
+        
+        nar := Length( r );
+        
+        ## check whether the last argument already has a stream pointing to a running
+        ## instance of the external CAS
+        if nargs > 1 then
+            if IsRecord( r[nar] ) and IsBound( r[nar].lines ) and IsBound( r[nar].pid ) then
+                stream := r[nar];
+            elif IshomalgExternalObjectRep( r[nar] ) or IsHomalgExternalRingRep( r[nar] ) then
+                stream := homalgStream( r[nar] );
+            fi;
+        fi;
+        
+        ## if no such stream is found in the last argument, start and initialize
+        ## a new instance of the external CAS
+        if not IsBound( stream ) then
+            
+            if IsBound( HOMALG_IO_CAS.common_stream ) then
+                
+                ## use the stream stored in HOMALG_IO_CAS to
+                ## avoid launching a new instance of the external CAS
+                ## (suggested by Oleksandr Motsak)
+                stream := HOMALG_IO_CAS.common_stream;
+                
+            else
+                
+                stream := LaunchCAS( HOMALG_IO_CAS );
+                
+                if IsBound( HOMALG_IO_CAS.init_string ) then
+                    
+                    ## send the init string
+                    homalgSendBlocking( HOMALG_IO_CAS.init_string, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+                fi;
+                
+                ## initialize the macros
+                if IsBound( HOMALG_IO_CAS.InitializeMacros ) then
+                    HOMALG_IO_CAS.InitializeMacros( stream );
+                fi;
+                
+                ## store stream as a common stream for later rings to
+                ## avoid launching a new instance of the external CAS
+                ## (suggested by Oleksandr Motsak)
+                if ( IsBound( HOMALG_IO_CAS.use_common_stream ) and
+                     HOMALG_IO_CAS.use_common_stream = true ) or
+                   ( not ( IsBound( HOMALG_IO_CAS.use_common_stream ) and
+                           HOMALG_IO_CAS.use_common_stream = false ) and
+                     IsBound( HOMALG_IO.use_common_stream ) and
+                     HOMALG_IO.use_common_stream = true ) then
+                    HOMALG_IO_CAS.common_stream := stream;
+                fi;
+                
+            fi;
+            
+        else
+            r := r{[ 1 .. nar - 1 ]};
+        fi;
+        
+        Append( r, [ stream, HOMALG_IO.Pictograms.CreateHomalgRing ] );
+        
+        r := CallFuncList( homalgSendBlocking, r );
+        
+    else
+        l := 3;
+    fi;
     
     ring_type := arg[2];
     
     ar := [ r, [ ring_type, TheTypeHomalgExternalMatrix ], HomalgExternalRingElement ];
     
-    ar := Concatenation( ar, arg{[ 3 .. nargs ]} );
+    ar := Concatenation( ar, arg{[ l .. nargs ]} );
     
     ## create the external ring
     R :=  CallFuncList( CreateHomalgRing, ar );
@@ -463,6 +533,18 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
+
+##
+InstallMethod( ViewObj,
+        "for homalg external ring objects",
+        [ IshomalgExternalRingObjectRep ],
+        
+  function( o )
+    
+    Print( "<A homalg external ring object residing in the CAS " );
+    Print( homalgExternalCASystem( o ), ">" );
+    
+end );
 
 ##
 InstallMethod( ViewObj,
