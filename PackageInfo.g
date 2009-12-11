@@ -26,13 +26,13 @@ Subtitle := "A &homalg; based Package for Sheaf Algorithms",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.11.06",
+Version := "2009.12.10",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "06/11/2009",
+Date := "10/12/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -121,16 +121,15 @@ Persons := [
     FirstNames    := "Mohamed",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "barakat@math.uni-sb.de",
+    Email         := "barakat@mathematik.uni-kl.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
     PostalAddress := Concatenation( [
-                       "Mohamed Barakat\n",
-                       "Universität des Saarlandes\n",
-                       "Building E2 4\n",
-                       "66041 Saarbrücken\n",
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
                        "Germany" ] ),
-    Place         := "Saarbrücken",
-    Institution   := "Universität des Saarlandes"
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
   ),
   rec(
     LastName      := "Lorenz",
