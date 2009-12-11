@@ -29,13 +29,13 @@ Subtitle := "ExamplesForHomalg - Examples for the GAP package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2009.11.10",
+Version := "2009.12.10",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "10/11/2009",
+Date := "10/12/2009",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -119,6 +119,21 @@ ArchiveFormats := ".tar.gz",
 ##     )
 ##  
 Persons := [
+  rec(
+    LastName      := "Barakat",
+    FirstNames    := "Mohamed",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "barakat@mathematik.uni-kl.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
+    PostalAddress := Concatenation( [
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ] ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
+  ),
   rec( 
     LastName      := "Barakat",
     FirstNames    := "Mohamed",

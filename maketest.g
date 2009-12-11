@@ -9,6 +9,7 @@ LoadPackage( "ExamplesForHomalg" );
 LoadPackage( "IO_ForHomalg" );
 
 HOMALG_IO.show_banners := false;
+HOMALG_IO.use_common_stream := true;
 
 LoadPackage( "GAPDoc" );
 
