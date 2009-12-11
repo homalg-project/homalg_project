@@ -43,6 +43,8 @@ InstallValue( HOMALG_IO_Singular,
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
+            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
+            InitializeMacros := InitializeSingularMacros,
            )
 );
 
@@ -54,9 +56,9 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -1123,45 +1125,25 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInSingular,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, ar, R, RP;
     
     nargs := Length( arg );
     
-    ##check whether the last argument already has a stream pointing to a running
-    ##instance of Singular
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
-
-    ##if no such stream is found in the last argument, start and initialize
-    ##a new Singular-process
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Singular );
-        
-        ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeSingularMacros( stream );
-    
     ##this will lead to the call
     ##ring homalg_variable_something = arg[1];
-    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    ar := [ arg[1], [ "ring" ] ];
+    
+    Add( ar, TheTypeHomalgExternalRingObjectInSingular );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInSingular ];
     
-    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    Add( ar, HOMALG_IO_Singular );
+    
+    R := CallFuncList( CreateHomalgExternalRing, ar );
     
     _Singular_SetRing( R );
     
@@ -1211,7 +1193,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
     
-    R := [ String( c ), "dummy_variable,dp" ];
+    R := [ String( c ), ",dummy_variable,dp" ];
     
     R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     

@@ -35,6 +35,7 @@ InstallValue( HOMALG_IO_Sage,
             prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
             display_color := "\033[0;34;43m",
+            InitializeMacros := InitializeSageMacros,
            )
 );
             
@@ -46,9 +47,9 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -135,36 +136,23 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInSage,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, ar;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Sage );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeSageMacros( stream );
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInSage );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInSage ];
     
-    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSage );
+    Add( ar, HOMALG_IO_Sage );
+    
+    return CallFuncList( CreateHomalgExternalRing, ar );
     
 end );
 

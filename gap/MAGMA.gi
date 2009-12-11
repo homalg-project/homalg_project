@@ -36,6 +36,7 @@ InstallValue( HOMALG_IO_MAGMA,
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
+            InitializeMacros := InitializeMAGMAMacros,
            )
 );
 
@@ -47,9 +48,9 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -412,36 +413,23 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMAGMA,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, ar;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_MAGMA );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeMAGMAMacros( stream );
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInMAGMA );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInMAGMA ];
     
-    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
+    Add( ar, HOMALG_IO_MAGMA );
+    
+    return CallFuncList( CreateHomalgExternalRing, ar );
     
 end );
 

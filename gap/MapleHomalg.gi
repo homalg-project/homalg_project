@@ -44,6 +44,7 @@ InstallValue( HOMALG_IO_Maple,
  \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
  <____ ____>  Waterloo Maple Inc.\n\
       |       ",
+            InitializeMacros := InitializeMapleMacros,
            )
 );
 
@@ -55,9 +56,9 @@ HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMapleRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # five new subrepresentations of the representation IsHomalgExternalRingObjectInMapleRep:

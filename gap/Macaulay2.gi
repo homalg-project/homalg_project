@@ -39,6 +39,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             prompt := "\033[01mM2>\033[0m ",
             output_prompt := "\033[1;30;43m<M2\033[0m ",
             banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
+            InitializeMacros := InitializeMacaulay2Macros,
            )
 );
             
@@ -50,9 +51,9 @@ HOMALG_IO_Macaulay2.READY_LENGTH := Length( HOMALG_IO_Macaulay2.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -444,36 +445,23 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMacaulay2,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, ar, R, RP;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Macaulay2 );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeMacaulay2Macros( stream );
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMacaulay2, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInMacaulay2 );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInMacaulay2 ];
     
-    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
+    Add( ar, HOMALG_IO_Macaulay2 );
+    
+    R := CallFuncList( CreateHomalgExternalRing, ar );
     
     _Macaulay2_SetRing( R );
     
@@ -955,7 +943,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg external matrices in Singular",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
@@ -974,7 +962,7 @@ end );
 
 ##
 InstallMethod( DisplayRing,
-        "for homalg rings in Singular",
+        "for homalg rings in Macaulay2",
         [ IsHomalgExternalRingInMacaulay2Rep ], 1,
         
   function( o )

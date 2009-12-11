@@ -33,7 +33,8 @@ InstallValue( HOMALG_IO_GAP,
             garbage_collector := function( stream ) homalgSendBlocking( [ "GASMAN( \"collect\" )" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
             prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
-            display_color := "\033[0;35m",           
+            display_color := "\033[0;35m",
+            init_string := "LoadPackage(\"HomalgToCAS\")",
            )
 );
 
@@ -45,9 +46,9 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -97,40 +98,29 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, ar, R;
     
     nargs := Length( arg );
     
+    ar := [ arg[1] ];
+    
+    Add( ar, TheTypeHomalgExternalRingObjectInGAP );
+    
     if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_GAP );
-        o := 0;
-    else
-        o := 1;
-    fi;
+    ar := [ ar, TheTypeHomalgExternalRingInGAP ];
     
-    homalgSendBlocking( "LoadPackage(\"HomalgToCAS\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    Add( ar, HOMALG_IO_GAP );
+    
+    R := CallFuncList( CreateHomalgExternalRing, ar );
     
     if IsBound( HOMALG.PreferDenseMatrices ) then
-        homalgSendBlocking( [ "HOMALG.PreferDenseMatrices := ", HOMALG.PreferDenseMatrices ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+        homalgSendBlocking( [ "HOMALG.PreferDenseMatrices := ", HOMALG.PreferDenseMatrices ], "need_command", R, HOMALG_IO.Pictograms.initialize );
     fi;
     
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
-    
-    if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
-    fi;
-    
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
-    
-    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInGAP );
+    return R;
     
 end );
 
