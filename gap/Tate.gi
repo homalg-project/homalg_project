@@ -70,7 +70,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  Another way of constructing the structure sheaf:
 ##      <Example><![CDATA[
 ##  gap> U0 := SyzygiesModule( 1, k );
-##  <A graded left module presented by yet unknown relations for 4 generators>
+##  <A graded torsion-free left module presented by yet unknown relations for 
+##  4 generators>
 ##  gap> T0 := TateResolution( U0, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
@@ -92,7 +93,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  The cotangent bundle:
 ##      <Example><![CDATA[
 ##  gap> cotangent := SyzygiesModule( 2, k );
-##  <A graded left module presented by yet unknown relations for 6 generators>
+##  <A graded torsion-free left module presented by yet unknown relations for 
+##  6 generators>
 ##  gap> IsFree( cotangent );
 ##  false
 ##  gap> Rank( cotangent );
@@ -151,8 +153,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##      <Example><![CDATA[
 ##  gap> U3 := SyzygiesModule( 4, k ) * S^3;
 ##  <A graded free left module of rank 1 on a free generator>
-##  Display( U3 );
-##  Q[x0,x1,x2,x3]^(1 x 1)	(graded, generators degrees: [ 1 ])
+##  gap> Display( U3 );
+##  Q[x0,x1,x2,x3]^(1 x 1)	 (graded, generators degrees: [ 1 ])
 ##  gap> T3 := TateResolution( U3, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
@@ -174,7 +176,8 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  Another way to construct <M>U^2=U^(3-1)</M>:
 ##      <Example><![CDATA[
 ##  gap> u2 := Hom( U1, S^(-1) );
-##  <A graded right module on 4 generators satisfying yet unknown relations>
+##  <A graded torsion-free right module on 
+##  4 generators satisfying yet unknown relations>
 ##  gap> t2 := TateResolution( u2, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of right modules at degrees 
 ##  [ -5 .. 5 ]>

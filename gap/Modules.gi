@@ -1034,7 +1034,7 @@ end );
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> M := HomalgMatrix( "[ x, y^2, z^3 ]", 3, 1, S );;
 ##  gap> M := Subobject( M, ( 1 * S )^0 );
-##  <A graded (left) ideal given by 3 generators>
+##  <A graded torsion-free (left) ideal given by 3 generators>
 ##  gap> CastelnuovoMumfordRegularity( M );
 ##  4
 ##  gap> M1 := HomogeneousPartOverCoefficientsRing( 1, M );
