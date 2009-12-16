@@ -2,10 +2,7 @@ LoadPackage( "RingsForHomalg" );
 
 Zx := HomalgRingOfIntegersInDefaultCAS( ) * "x";
 
-rel := HomalgMatrix( "[ x^2 + 5 ]", 1, 1, Zx );
-rel := HomalgRelationsForLeftModule( rel );
-
-ZIQ5 := Zx / rel;
+ZIQ5 := Zx / "x^2 + 5";
 
 SetIsDedekindDomain( ZIQ5, true );
 SetIsPrincipalIdealRing( ZIQ5, false );

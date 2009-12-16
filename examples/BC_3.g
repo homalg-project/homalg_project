@@ -2,10 +2,7 @@ LoadPackage( "RingsForHomalg" );
 
 Zx := HomalgRingOfIntegersInDefaultCAS( ) * "x";
 
-rel := HomalgMatrix( "[ x^3 - 1 ]", 1, 1, Zx );
-rel := HomalgRelationsForLeftModule( rel );
-
-ZC3 := Zx / rel;
+ZC3 := Zx / "x^3 - 1";
 
 zz := HomalgMatrix( "[ x - 1 ]", 1, 1, ZC3 );
 ZZ := LeftPresentation( zz );

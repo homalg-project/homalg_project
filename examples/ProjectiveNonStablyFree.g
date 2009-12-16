@@ -2,19 +2,13 @@ LoadPackage( "RingsForHomalg" );
 
 Zx := HomalgRingOfIntegersInDefaultCAS( ) * "x";
 
-rel := HomalgMatrix( "[ x^2 + 5 ]", 1, 1, Zx );
-rel := HomalgRelationsForLeftModule( rel );
+R := Zx / "x^2 + 5";
 
-R := Zx / rel;
+J := HomalgMatrix( "[ 2, 1+x ]", 2, 1, R );
 
-M := HomalgMatrix( "[ \
-2, \
-1+x \
-]", 2, 1, R );
+J := LeftSubmodule( J );
 
-M := HomalgMap( M, "free", "free" );
-
-M := ImageModule( M );
+M := UnderlyingObject( J );
 
 e := FreeHullEpi( M );
 
