@@ -6,6 +6,8 @@
 ##  <A left module presented by 2 relations for 2 generators>
 ##  gap> Display( M );
 ##  Z/< 8 > + Z/< 2 >
+##  gap> M;
+##  <A torsion left module presented by 2 relations for 2 generators>
 ##  gap> a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;
 ##  gap> alpha := HomalgMap( a, "free", M );
 ##  <A homomorphism of left modules>
@@ -23,8 +25,8 @@
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
 ##  gap> N := Kernel( pi );
-##  <A cyclic left module presented by yet unknown relations for a cyclic generato\
-##  r>
+##  <A cyclic torsion left module presented by yet unknown relations for a cyclic \
+##  generator>
 ##  gap> Display( N );
 ##  Z/< 4 >
 ##  gap> C := HomalgComplex( pi );

@@ -3018,7 +3018,7 @@ end );
 ##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A homalg residue class 1 by 1 matrix>
 ##  gap> J := LeftSubmodule( J );
-##  <A principal (left) ideal given by a cyclic generator>
+##  <A principal torsion-free (left) ideal given by a cyclic generator>
 ##  gap> IsFree( J );
 ##  false
 ##  gap> J;
@@ -3130,7 +3130,7 @@ end );
 ##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A homalg residue class 1 by 1 matrix>
 ##  gap> J := RightSubmodule( J );
-##  <A principal (right) ideal given by a cyclic generator>
+##  <A principal torsion-free (right) ideal given by a cyclic generator>
 ##  gap> IsFree( J );
 ##  false
 ##  gap> J;
@@ -3854,7 +3854,7 @@ InstallMethod( ViewObj,
     
     if HasRankOfModule( M ) then
         rk := RankOfModule( M );
-        Print( " of rank ", rk, " on " );
+        Print( " of rank ", rk, " given by " );
         if r = rk then
             if r = 1 then
                 Print( "a free generator" );
@@ -3874,7 +3874,11 @@ InstallMethod( ViewObj,
             fi;
         fi;
     else
-        Print( " on ", r, " generators"  );
+        if r = 1 then
+            Print( " given by a cyclic generator"  );
+        else
+            Print( " given by ", r, " generators"  );
+        fi;
         if HasNrRelations( M ) = true then
             l := NrRelations( M );
             Print( " satisfying " );

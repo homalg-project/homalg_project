@@ -2123,6 +2123,7 @@ LeftDerivedFunctor( Functor_TensorProduct );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+
 ##
 ## HomHom( M, K, N ) = Hom( Hom( M, K ), N )
 ##

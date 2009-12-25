@@ -598,6 +598,17 @@ InstallMethod( \/,
 end );
 
 ##
+InstallMethod( \/,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, ring_rel )
+    
+    return R / HomalgRingElement( ring_rel, R );
+    
+end );
+
+##
 InstallGlobalFunction( HomalgResidueClassRingElement,
   function( arg )
     local nargs, a, ring, ar, properties, r;

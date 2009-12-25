@@ -243,6 +243,40 @@ InstallImmediateMethod( IsCyclic,
     
 end );
 
+##
+InstallImmediateMethod( IsTorsion,
+        IsFinitelyPresentedSubmoduleRep and HasLeftActingDomain, 0,
+        
+  function( J )
+    local M;
+    
+    M := SuperObject( J );
+    
+    if HasIsTorsion( M ) and IsTorsion( M ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsion,
+        IsFinitelyPresentedSubmoduleRep and HasRightActingDomain, 0,
+        
+  function( J )
+    local M;
+    
+    M := SuperObject( J );
+    
+    if HasIsTorsion( M ) and IsTorsion( M ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ## strictly less relations than generators => not IsTorsion
 InstallImmediateMethod( IsTorsion,
         IsFinitelyPresentedModuleRep, 0,
@@ -310,6 +344,40 @@ InstallImmediateMethod( IsTorsion,
         return true;
     elif HasIsZero( M ) and not IsZero( M ) then
         return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsionFree,
+        IsFinitelyPresentedSubmoduleRep and HasLeftActingDomain, 0,
+        
+  function( J )
+    local M;
+    
+    M := SuperObject( J );
+    
+    if HasIsTorsionFree( M ) and IsTorsionFree( M ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsionFree,
+        IsFinitelyPresentedSubmoduleRep and HasRightActingDomain, 0,
+        
+  function( J )
+    local M;
+    
+    M := SuperObject( J );
+    
+    if HasIsTorsionFree( M ) and IsTorsionFree( M ) then
+        return true;
     fi;
     
     TryNextMethod( );
@@ -1715,8 +1783,13 @@ InstallMethod( EmbeddingInSuperObject,
         [ IsFinitelyPresentedSubmoduleRep ],
         
   function( M )
+    local emb;
     
-    return ImageModuleEmb( M!.map_having_subobject_as_its_image );
+    emb := ImageModuleEmb( M!.map_having_subobject_as_its_image );
+    
+    MatchPropertiesAndAttributes( M, Source( emb ), LIMOD.intrinsic_properties, LIMOD.intrinsic_attributes );
+    
+    return emb;
     
 end );
 

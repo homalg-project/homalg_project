@@ -415,8 +415,22 @@ InstallMethod( IsEpimorphism,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local b, S, T;
     
-    return IsMorphism( phi ) and IsZero( Cokernel( phi ) );
+    b := IsMorphism( phi ) and IsZero( Cokernel( phi ) );
+    
+    if b then
+        S := Source( phi );
+        T := Range( phi );
+        
+        if HasIsTorsion( T ) and not IsTorsion( T ) then
+            SetIsTorsion( S, false );
+        elif HasIsTorsion( S ) and IsTorsion( S ) then
+            SetIsTorsion( T, true );
+        fi;
+    fi;
+    
+    return b;
     
 end );
 
@@ -486,8 +500,28 @@ InstallMethod( IsMonomorphism,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local b, S, T;
     
-    return IsMorphism( phi ) and IsZero( Kernel( phi ) );
+    b := IsMorphism( phi ) and IsZero( Kernel( phi ) );
+    
+    if b then
+        S := Source( phi );
+        T := Range( phi );
+        
+        if HasIsTorsionFree( T ) and IsTorsionFree( T ) then
+            SetIsTorsionFree( S, true );
+        elif HasIsTorsionFree( S ) and not IsTorsionFree( S ) then
+            SetIsTorsionFree( T, false );
+        fi;
+        
+        if HasIsTorsion( T ) and IsTorsion( T ) then
+            SetIsTorsion( S, true );
+        elif HasIsTorsion( S ) and not IsTorsion( S ) then
+            SetIsTorsion( T, false );
+        fi;
+    fi;
+    
+    return b;
     
 end );
 
@@ -646,6 +680,10 @@ InstallMethod( ImageSubmodule,
                 ConstructedAsAnIdeal, ideal,
                 RightActingDomain, R );
     fi;
+    
+    ## immediate methods will check if they can set
+    ## SetIsTorsionFree( N, true ); and SetIsTorsion( N, true );
+    ## by checking if the corresponding property for T is true
     
     return N;
     
