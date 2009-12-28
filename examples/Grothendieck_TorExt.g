@@ -90,8 +90,9 @@
 ##   . . . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E, 0 );
 ##  <A descending filtration with degrees [ -3 .. 0 ] and graded parts:
-##    -3:	<A non-zero cyclic left module presented by 
-##  3 relations for a cyclic generator>
+##  
+##  -3:	<A non-zero cyclic left module presented by yet unknown relations for a cy\
+##  clic generator>
 ##    -2:	<A non-zero left module presented by 17 relations for 6 generators>
 ##    -1:	<A non-zero left module presented by 19 relations for 9 generators>
 ##     0:	<A non-zero left module presented by 13 relations for 10 generators>
