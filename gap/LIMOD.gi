@@ -945,12 +945,43 @@ end );
 
 ##
 InstallMethod( IsZero,
+        "LIMOD: for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    return IsZero( DecideZero( MatrixOfSubobjectGenerators( M ), SuperObject( M ) ) );
+    
+end );
+
+##
+InstallMethod( IsZero,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
     return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep and HasUnderlyingSubobject ],
+        
+  function( M )
+    local N;
+    
+    N := UnderlyingSubobject( M );
+    
+    if HasNrRelations( M ) and
+       NrGenerators( M ) <= NrGenerators( SuperObject( N ) ) then
+        TryNextMethod( );
+    fi;
+    
+    ## avoids computing syzygies
+    return IsZero( N );
     
 end );
 

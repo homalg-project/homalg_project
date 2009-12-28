@@ -1541,8 +1541,8 @@ InstallFunctor( functor_DefectOfExactness );
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
-##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 
-##  1 relation>
+##  -1:	<A non-zero cyclic right module on a cyclic generator satisfying yet unkno\
+##  wn relations>
 ##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
 ##  <A right module on 4 generators satisfying yet unknown relations>>
