@@ -4,7 +4,7 @@
 
   title.xml             homalg package documentation           Mohamed Barakat
 
-         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+         Copyright (C) 2007-2010, Mohamed Barakat, RWTH-Aachen
 
 -->
 <TitlePage>
@@ -38,10 +38,10 @@
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
-  <Date>December 2009</Date>
+  <Date>January 2010</Date>
   
   <Copyright>
-    &copyright; 2007-2009 by Mohamed Barakat <P/>
+    &copyright; 2007-2010 by Mohamed Barakat <P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.

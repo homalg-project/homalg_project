@@ -369,7 +369,7 @@ InstallMethod( POW,
         
         id := TheIdentityMorphism( Range( phi ) );
         
-        inv := id / phi;
+        inv := id / phi;	## mimic lift
         
         if HasIsIsomorphism( phi ) then
             SetIsIsomorphism( inv, IsIsomorphism( phi ) );
@@ -889,7 +889,7 @@ end );
 #=======================================================================
 # Complete an image-square
 #
-#  A_ is a free or beta1 is injective ( cf. [BR, Subsection 3.1.2] )
+#  A_ is a free or beta1 is injective ( cf. [BR08, Subsection 3.1.2] )
 #
 #     A_ --(alpha1)--> A
 #     |                |
@@ -909,7 +909,7 @@ InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteI
         
   function( alpha1, phi, beta1 )
     
-    return phi * alpha1 / beta1;
+    return phi * alpha1 / beta1;	## lift or projective lift
     
 end );
 
@@ -922,7 +922,7 @@ InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteI
         
   function( alpha1, phi, beta1 )
     
-    return alpha1 * phi / beta1;
+    return alpha1 * phi / beta1;	## lift or projective lift
     
 end );
 

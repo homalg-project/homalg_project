@@ -455,7 +455,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := FreeHullEpi( M );
         epsilonN := FreeHullEpi( N );
         
-        epsilonM := epsilonM / psi;
+        epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon := StackMaps( epsilonN, epsilonM );
@@ -497,7 +497,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := SyzygiesModuleEpi( j, M );
         epsilonN := SyzygiesModuleEpi( j, N );
         
-        epsilonM := epsilonM / psi;
+        epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon_j := StackMaps( epsilonN, epsilonM );
@@ -594,7 +594,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := FreeHullEpi( M );
         epsilonN := FreeHullEpi( N );
         
-        epsilonM := epsilonM / psi;
+        epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon := StackMaps( epsilonN, epsilonM );
@@ -636,7 +636,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := SyzygiesModuleEpi( j, M );
         epsilonN := SyzygiesModuleEpi( j, N );
         
-        epsilonM := epsilonM / psi;
+        epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
         epsilon_j := StackMaps( epsilonN, epsilonM );
@@ -725,9 +725,9 @@ InstallMethod( ConnectingHomomorphism,
     
     snake := iota_Hqn;
     snake := snake / jn;
-    snake := PreCompose( snake, bn );	## the connecting homomorphism is what b[n] induces between certain subquotients of C[n] and C[n-1]
-    snake := snake / in_1;
-    snake := snake / iota_Hsn_1;
+    snake := PreCompose( snake, bn );	## the connecting homomorphism is what b[n] induces between certain subfactors of C[n] and C[n-1]
+    snake := snake / in_1;		## lift
+    snake := snake / iota_Hsn_1;	## lift
     
     ## check assertion
     Assert( 1, IsMorphism( snake ) );
@@ -920,7 +920,7 @@ InstallMethod( DefectOfExactnessSequence,
     F_B := ImageModuleEmb( pre );
     
     ## read: Z <- B
-    Z_B := F_B / F_Z;
+    Z_B := F_B / F_Z;	## lift
     
     H := DefectOfExactness( cpx_post_pre );
     
@@ -928,7 +928,7 @@ InstallMethod( DefectOfExactnessSequence,
     F_H := NaturalGeneralizedEmbedding( H );
     
     ## read: H <- Z
-    H_Z := F_Z / F_H;
+    H_Z := F_Z / F_H;	## generalized lift
     
     C := HomalgComplex( H_Z );
     
@@ -970,7 +970,7 @@ InstallMethod( DefectOfExactnessCosequence,
     B_F := ImageModuleEmb( pre );
     
     ## read: B -> Z
-    B_Z := B_F / Z_F;
+    B_Z := B_F / Z_F;	## lift
     
     H := DefectOfExactness( cpx_post_pre );
     
@@ -978,7 +978,7 @@ InstallMethod( DefectOfExactnessCosequence,
     H_F := NaturalGeneralizedEmbedding( H );
     
     ## read: Z -> H
-    Z_H := Z_F / H_F;
+    Z_H := Z_F / H_F;	## generalized lift
     
     C := HomalgCocomplex( B_Z );
     

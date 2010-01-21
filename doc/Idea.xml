@@ -17,13 +17,13 @@ over <M>k</M>, the Gaussian algorithm makes the whole theory perfectly
 computable. <P/>
 
 Hence, for homological algebra (viewed as linear algebra over
-general rings) to be constructive one needs to find apropriate
+general rings) to be computable one needs to find appropriate
 substitutes for the Gaussian algorithm, where finite dimensionality
 has to be replaced by finite generatedness. <P/>
 
 Luckily such substitutes exist for many rings of interest. Beside the
 well-known Hermite normal form algorithm for principal ideal rings it
-turns out that apropriate generalizations of the classical Gröbner
+turns out that appropriate generalizations of the classical Gröbner
 basis algorithm for polynomial rings provide the desired substitute
 for a wide class of commutative <E>and</E> noncommutative rings. Note
 that for noncommutative rings the above discussion has to be

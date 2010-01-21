@@ -578,10 +578,10 @@ InstallMethod( AsDifferentialObject,
                                     aid := MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
                                     mor_v := GeneralizedMap( mor_v, aid );
                                 fi;
-                                mor := - mor / mor_v;
+                                mor := - mor / mor_v;	## generalized lift
                                 mor := PreCompose( mor, mor_h[r] );
                             fi;
-                            mor := mor / emb_target;
+                            mor := mor / emb_target;	## generalized lift
                         fi;
                         Assert( 1, IsMorphism( mor ) );
                         SetIsMorphism( mor, true );
@@ -615,10 +615,10 @@ InstallMethod( AsDifferentialObject,
                                     aid := MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
                                     mor_v := GeneralizedMap( mor_v, aid );
                                 fi;
-                                mor := - mor / mor_v;
+                                mor := - mor / mor_v;	## generalized lift
                                 mor := PreCompose( mor, mor_h[r] );
                             fi;
-                            mor := mor / emb_target;
+                            mor := mor / emb_target;	## generalized lift
                         fi;
                         Assert( 1, IsMorphism( mor ) );
                         SetIsMorphism( mor, true );
@@ -822,7 +822,7 @@ InstallMethod( DefectOfExactness,
                     ## construct the natural monomorphism/equivalence
                     ## F(G(P_p)) -> R^0(F)(G(P_p))
                     if compute_nat_trafos and q[j] = 0 then
-                        nat := outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) / emb;
+                        nat := outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) / emb;	## generalized lift
                         Assert( 1, IsMonomorphism( nat ) );
                         SetIsMonomorphism( nat, true );
                         natural_transformations.(String( [ p[i], 0 ] )) := nat;

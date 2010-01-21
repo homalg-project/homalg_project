@@ -78,7 +78,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
-    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
+    ## this is enough for us since we will always view it this way (cf. [BR08, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( id, [ coker, 1 ], [ T, p ] );
     SetMorphismAidMap( emb, phi );
     
@@ -238,7 +238,7 @@ InstallMethod( ImageModuleEpi,
     
     emb := ImageModuleEmb( phi );
     
-    epi := phi / emb;
+    epi := phi / emb;	## lift
     
     ## check assertion
     Assert( 4, IsEpimorphism( epi ) );

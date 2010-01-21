@@ -566,7 +566,7 @@ functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
 #=======================================================================
 # PostDivide
 #
-# M_ is free or beta is injective ( cf. [BR, Subsection 3.1.1] )
+# M_ is free or beta is injective ( cf. [BR08, Subsection 3.1.1] )
 #
 #     M_
 #     |   \
@@ -631,9 +631,9 @@ InstallGlobalFunction( _Functor_PostDivide_OnObjects,	### defines: PostDivide
     psi := HomalgMap( psi, M_, Source( beta ) );
     
     if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
-       ( ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR, Subsection 3.1.1,(1)]
-         ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR, Subsection 3.1.1,(2)]
-         ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then	## "generalizes" [BR, Subsection 3.1.1,(2)]
+       ( ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR08, Subsection 3.1.1,(1)]
+         ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR08, Subsection 3.1.1,(2)]
+         ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then	## "generalizes" [BR08, Subsection 3.1.1,(2)]
         
         Assert( 2, IsMorphism( psi ) );
         

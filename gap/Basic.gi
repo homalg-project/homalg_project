@@ -669,7 +669,7 @@ InstallMethod( Eval,
     
     Id := HomalgIdentityMatrix( NrColumns( RI ), R );
     
-    left_inv := RightDivide( Id, RI );	## ( cf. [BR, Subsection 3.1.3] )
+    left_inv := RightDivide( Id, RI );	## ( cf. [BR08, Subsection 3.1.3] )
     
     if IsBool( left_inv ) then
         return false;
@@ -717,7 +717,7 @@ InstallMethod( Eval,
     
     Id := HomalgIdentityMatrix( NrRows( LI ), R );
     
-    right_inv := LeftDivide( LI, Id );	## ( cf. [BR, Subsection 3.1.3] )
+    right_inv := LeftDivide( LI, Id );	## ( cf. [BR08, Subsection 3.1.3] )
     
     if IsBool( right_inv ) then
         return false;

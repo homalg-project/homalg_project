@@ -1790,7 +1790,7 @@ end );
     
     ## this is in general NOT a morphism,
     ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
-    ## this is enough for us since we will always view it this way (cf. [BR, 3.1.1,(2), 3.1.2] )
+    ## this is enough for us since we will always view it this way (cf. [BR08, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( emb, [ ker, 1 ], [ M, p ] );
     SetMorphismAidMap( emb, pre );
     

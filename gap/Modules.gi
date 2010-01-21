@@ -14,7 +14,7 @@
 #
 ####################################
 
-## ( cf. [BR, Subsection 3.2.2] )
+## ( cf. [BR08, Subsection 3.2.2] )
 InstallMethod( \/,				### defines: / (SubfactorModule)
         "for a homalg matrix",
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
@@ -200,7 +200,7 @@ InstallMethod( BoundForResolution,
     
 end );
 
-## ( cf. [BR, Subsection 3.2.1] )
+## ( cf. [BR08, Subsection 3.2.1] )
 InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
         [ IsInt, IsHomalgRelations ],
@@ -537,7 +537,7 @@ InstallMethod( SyzygiesModuleEpi,
     
     mu := SyzygiesModuleEmb( q, M );
     
-    epi := CertainMorphism( d, q ) / mu;
+    epi := CertainMorphism( d, q ) / mu;	## lift
     
     SetIsEpimorphism( epi, true );
     

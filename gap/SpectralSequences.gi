@@ -241,7 +241,7 @@ InstallMethod( AddSpectralFiltrationOfObjects,
             gen_emb2 := embeddings.(String( [ p, q ] ));
             
             ## [Ba, Cor. 3.3]: gen_emb1 lifts gen_emb2
-            filtration.(String( [ p, q ] )) := gen_emb2 / gen_emb1;
+            filtration.(String( [ p, q ] )) := gen_emb2 / gen_emb1;	## generalized lift
             
             ## this last line is one of the highlights in the code,
             ## where generalized embeddings play a decisive role
@@ -694,7 +694,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
     if IsCovariantFunctor( Functor_F ) then
         for p in p_degrees do
             if IsBound( natural_transformations.(p) ) then
-                nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);
+                nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
             else
                 nat_trafos.(p) := TheZeroMap( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;
@@ -704,7 +704,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
     else
         for p in p_degrees do
             if IsBound( natural_transformations.(p) ) then
-                nat_trafos.(p) := ( gen_embs.(p) / natural_transformations.(p) ) / Hgen_embs.(p);
+                nat_trafos.(p) := ( gen_embs.(p) / natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
             else
                 nat_trafos.(p) := TheZeroMap( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;

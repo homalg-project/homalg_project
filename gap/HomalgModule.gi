@@ -1469,7 +1469,7 @@ InstallMethod( OnLessGenerators,
     if HasEmbeddingInSuperObject( N ) then
         
         phi := ImageModuleEmb( phi );
-        phi := phi / EmbeddingInSuperObject( N );
+        phi := phi / EmbeddingInSuperObject( N );	## lift
         
         Assert( 2, IsEpimorphism( phi ) );
         

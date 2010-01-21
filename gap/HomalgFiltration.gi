@@ -294,12 +294,12 @@ InstallMethod( IsomorphismOfFiltration,
             fi;
             
             if HasMorphismAidMap( gen_emb ) then
-                mor_aid := MorphismAidMap( gen_emb ) / iotas;
+                mor_aid := MorphismAidMap( gen_emb ) / iotas;	## lift
             else
                 mor_aid := 0;
             fi;
             
-            gen_emb := gen_emb / iotas;
+            gen_emb := gen_emb / iotas;		## generalized lift
             
             if IsHomalgMap( mor_aid ) then
                 SetMorphismAidMap( gen_emb, mor_aid );
@@ -401,7 +401,7 @@ InstallMethod( IsomorphismOfFiltration,
             q := degrees[j];
             
             ## rewrite eta
-            eta := etas.(String( [ q, degrees{[ i .. l ]} ] )) / epi;
+            eta := etas.(String( [ q, degrees{[ i .. l ]} ] )) / epi;	## generalized lift
             
             ## the "generalized 1-cocycle" block between M_q and M_p
             etas.(String([ q, p ])) := PreCompose( eta, pr_Mp );
