@@ -167,8 +167,8 @@ InstallValue( SheavesHomalgTableForSingularTools,
                              primary := HomalgVoidMatrix( R );
                              prime := HomalgVoidMatrix( R );
                              
-                             homalgSendBlocking( [ "matrix ", primary, "=", v, "l[", i, "][1]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
-                             homalgSendBlocking( [ "matrix ", prime, "=", v, "l[", i, "][2]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ "matrix ", primary, "[1][size(", v, "l[", i, "][1])]=", v, "l[", i, "][1]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "][2])]=", v, "l[", i, "][2]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
                              
                              if left then
                                  if graded then
