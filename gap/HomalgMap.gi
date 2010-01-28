@@ -889,7 +889,8 @@ end );
 #=======================================================================
 # Complete an image-square
 #
-#  A_ is a free or beta1 is injective ( cf. [BR08, Subsection 3.1.2] )
+#  A_ is a free or beta1 is injective ( cf. [HS, Lemma III.3.1]
+#                                       and [BR08, Subsection 3.1.2] )
 #
 #     A_ --(alpha1)--> A
 #     |                |
@@ -903,26 +904,40 @@ end );
 ##
 InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep ],
         
   function( alpha1, phi, beta1 )
     
-    return phi * alpha1 / beta1;	## lift or projective lift
+    return PreCompose( alpha1, phi ) / beta1;	## lift or projective lift
     
 end );
 
+#=======================================================================
+# Complete a kernel-square
+#
+#  alpha2 is surjective ( cf. [HS, Lemma III.3.1] )
+#
+#     A --(alpha2)->> _A
+#     |                |
+#   (phi)   Sq2   (theta=?)
+#     |                |
+#     v                v
+#     B --(beta2)---> _B
+#
+#_______________________________________________________________________
+
 ##
-InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
+InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep ],
         
-  function( alpha1, phi, beta1 )
+  function( alpha2, phi, beta2 )
     
-    return alpha1 * phi / beta1;	## lift or projective lift
+    return PreDivide( alpha2, PreCompose( phi, beta2 ) );	## colift
     
 end );
 

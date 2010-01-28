@@ -667,7 +667,7 @@ functor_PostDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 ## for convenience
 InstallMethod( \/,
-        "for homalg composable maps",
+        "for homalg maps with the same target",
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( gamma, beta )
@@ -681,7 +681,7 @@ InstallMethod( \/,
 end );
 
 InstallMethod( PostDivide,
-        "for homalg composable maps",
+        "for homalg maps with the same target",
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
         
   function( gamma, beta )
@@ -694,6 +694,85 @@ InstallMethod( PostDivide,
     
 end );
 
+#=======================================================================
+# PreDivide
+#
+# beta is surjective ( cf. [BLH, 2.5,(13): colift] )
+#
+#     L
+#     |  ^
+# (eta0=?)  \ (eta)
+#     |        \
+#     v           \
+#     C <-(epsilon)- N
+#
+#
+# row convention (left modules): eta0 := epsilon^(-1) * eta
+# column convention (right modules): eta0 := eta * epsilon^(-1)
+#_______________________________________________________________________
+
+##
+## PreDivide
+##
+
+InstallGlobalFunction( _Functor_PreDivide_OnObjects,	### defines: PreDivide
+  function( chm_po )
+    local epsilon, eta, gen_iso, eta0;
+    
+    epsilon := HighestDegreeMorphism( Source( chm_po ) );
+    eta := HighestDegreeMorphism( chm_po );
+    
+    if not ( HasIsEpimorphism( epsilon ) and IsEpimorphism( epsilon ) ) then
+        Error( "the first morphism is either not an epimorphism or not yet known to be one\n" );
+    fi;
+    
+    ## this is in general not a morphism;
+    ## it would be a generalized isomorphism if we would
+    ## add the appropriate morphism aid, but we don't need this here
+    gen_iso := GeneralizedInverse( epsilon );
+    
+    ## make a copy without the morphism aid map
+    gen_iso := RemoveMorphismAidMap( gen_iso );
+    
+    eta0 := PreCompose( gen_iso, eta );
+    
+    ## check assertion
+    Assert( 2, IsMorphism( eta0 ) );
+    
+    SetIsMorphism( eta0, true );
+    
+    return eta0;
+    
+end );
+
+InstallValue( functor_PreDivide,
+        CreateHomalgFunctor(
+                [ "name", "PreDivide" ],
+                [ "operation", "PreDivide" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
+                [ "OnObjects", _Functor_PreDivide_OnObjects ]
+                )
+        );
+
+functor_PreDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+##
+InstallMethod( PreDivide,
+        "for homalg maps with the same source",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( epsilon, eta )
+    
+    if not IsIdenticalObj( Source( epsilon ), Source( eta ) ) then
+        Error( "the source modules of the two morphisms are not identical\n" );
+    fi;
+    
+    return PreDivide( AsChainMapForPushout( epsilon, eta ) );
+    
+end );
+
 ##
 ## AsChainMapForPushout
 ##
@@ -703,7 +782,7 @@ InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsC
     local S, T, c;
     
     S := HomalgComplex( alpha1 );
-    T := HomalgComplex( Range( psi ) );
+    T := HomalgComplex( Range( psi ), 1 );
     
     c := HomalgChainMap( psi, S, T, 1 );
     
@@ -800,6 +879,12 @@ InstallFunctorOnObjects( functor_AsChainMapForPullback );
 ##
 
 InstallFunctorOnObjects( functor_PostDivide );
+
+##
+## PreDivide( gamma, beta )
+##
+
+InstallFunctorOnObjects( functor_PreDivide );
 
 ##
 ## AsChainMapForPushout( alpha1, psi )

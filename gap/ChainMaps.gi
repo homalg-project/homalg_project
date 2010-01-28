@@ -285,15 +285,16 @@ InstallMethod( Cokernel,
                 break;
             fi;
             phi := CertainMorphism( T, l + 1 );
-            alpha := CokernelNaturalGeneralizedIsomorphism( cm_lp1 );
-            beta := CokernelNaturalGeneralizedIsomorphism( cm_l );
-            Add( coker, CompleteImageSquare( alpha, phi, beta ) );
+            alpha := CokernelEpi( cm_lp1 );
+            beta := CokernelEpi( cm_l );
+            Add( coker, CompleteKernelSquare( alpha, phi, beta ) );
             ## prepare for the next step
             cm_l := cm_lp1;
             l := l + 1;
         od;
         
     else
+        
         coker := HomalgCocomplex( Cokernel( cm_l ), l );
         
         while true do
@@ -302,9 +303,9 @@ InstallMethod( Cokernel,
                 break;
             fi;
             phi := CertainMorphism( T, l );
-            alpha := CokernelNaturalGeneralizedIsomorphism( cm_l );
-            beta := CokernelNaturalGeneralizedIsomorphism( cm_lp1 );
-            Add( coker, CompleteImageSquare( alpha, phi, beta ) );
+            alpha := CokernelEpi( cm_l );
+            beta := CokernelEpi( cm_lp1 );
+            Add( coker, CompleteKernelSquare( alpha, phi, beta ) );
             ## prepare for the next step
             cm_l := cm_lp1;
             l := l + 1;

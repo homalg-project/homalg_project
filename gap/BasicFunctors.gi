@@ -28,7 +28,7 @@
 ##
 InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
   function( phi )
-    local R, T, p, rel, gen, coker, id, epi, img_emb, emb;
+    local R, T, p, rel, gen, coker, id, epi, gen_iso, img_emb, emb;
     
     if HasCokernelEpi( phi ) then
         return Range( CokernelEpi( phi ) );
@@ -62,6 +62,16 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     
     ## set the attribute CokernelEpi (specific for Cokernel):
     SetCokernelEpi( phi, epi );
+    
+    ## the generalized inverse of the natural epimorphism
+    ## (cf. [Bar, Cor. 4.8])
+    gen_iso := HomalgMap( id, [ coker, 1 ], [ T, p ] );
+    
+    ## set the morphism aid map
+    SetMorphismAidMap( gen_iso, phi );
+    
+    ## set the generalized inverse of the natural epimorphism
+    SetGeneralizedInverse( epi, gen_iso );
     
     #=====# end of the core procedure #=====#
     
@@ -135,13 +145,8 @@ InstallMethod( CokernelNaturalGeneralizedIsomorphism,
     ## (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
     if not ( IsBound( emb ) and IsIdenticalObj( Range( emb ), Source( phi ) ) ) then
         
-        emb := CokernelEpi( phi )^-1;
-        SetMorphismAidMap( emb, phi );
+        emb := GeneralizedInverse( CokernelEpi( phi ) );
         
-        ## check assertion
-        Assert( 4, IsGeneralizedIsomorphism( emb ) );
-        
-        SetIsGeneralizedIsomorphism( emb, true );
     fi;
     
     return emb;

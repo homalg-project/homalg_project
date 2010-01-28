@@ -64,6 +64,11 @@ DeclareGlobalFunction( "_Functor_PostDivide_OnObjects" );
 
 DeclareGlobalVariable( "functor_PostDivide" );
 
+## PreDivide
+DeclareGlobalFunction( "_Functor_PreDivide_OnObjects" );
+
+DeclareGlobalVariable( "functor_PreDivide" );
+
 ## AsChainMapForPushout
 DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );
 
@@ -111,6 +116,9 @@ DeclareOperation( "/",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "PostDivide",
+        [ IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "PreDivide",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "AsChainMapForPushout",

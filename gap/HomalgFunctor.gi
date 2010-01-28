@@ -2279,17 +2279,17 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
                 "for homalg special chain maps",
                 [ filter_mor and filter_special ],
                 function( sq )
-            local dS, dT, phi, muS, muT;
+            local dS, dT, phi, epiS, epiT;
             
             dS := SourceOfSpecialChainMap( sq );
             dT := RangeOfSpecialChainMap( sq );
             
             phi := CertainMorphismOfSpecialChainMap( sq );
             
-            muS := CokernelNaturalGeneralizedIsomorphism( dS );
-            muT := CokernelNaturalGeneralizedIsomorphism( dT );
+            epiS := CokernelEpi( dS );
+            epiT := CokernelEpi( dT );
             
-            return CompleteImageSquare( muS, phi, muT );
+            return CompleteKernelSquare( epiS, phi, epiT );
             
         end );
         

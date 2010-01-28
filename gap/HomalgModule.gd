@@ -332,7 +332,7 @@ DeclareAttribute( "UnderlyingSubobject",
 ##    <Attr Arg="J" Name="PrimaryDecomposition"/>
 ##    <Returns>a list</Returns>
 ##    <Description>
-##      The primary decomposition of the ideal <A>J</A>. The ring has to be commutative.. <Br/>
+##      The primary decomposition of the ideal <A>J</A>. The ring has to be commutative. <Br/>
 ##      (no method installed)
 ##    </Description>
 ##  </ManSection>

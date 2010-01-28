@@ -838,14 +838,14 @@ InstallMethod( DefectOfExactness,
             elif IsHomalgMorphism( pre ) and not ( HasIsZero( Epq ) and IsZero( Epq ) ) then
                 def := Cokernel( pre );
                 emb := CokernelNaturalGeneralizedIsomorphism( pre );
-                    ## construct the natural epimorphism/equivalence
-                    ## L_0(F)(G(P_p)) -> F(G(P_p))
-                    if compute_nat_trafos and q[j] = 0 then
-                        nat := PreCompose( RemoveMorphismAidMap( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
-                        Assert( 1, IsEpimorphism( nat ) );
-                        SetIsEpimorphism( nat, true );
-                        natural_transformations.(String( [ p[i], 0 ] )) := nat;
-                    fi;
+                ## construct the natural epimorphism/equivalence
+                ## L_0(F)(G(P_p)) -> F(G(P_p))
+                if compute_nat_trafos and q[j] = 0 then
+                    nat := PreCompose( RemoveMorphismAidMap( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
+                    Assert( 1, IsEpimorphism( nat ) );
+                    SetIsEpimorphism( nat, true );
+                    natural_transformations.(String( [ p[i], 0 ] )) := nat;
+                fi;
                 if IsZero( def ) then
                     H.stability_table[lq-j+1][i] := '.';
                     SetIsZero( emb, true );

@@ -63,6 +63,7 @@
 <#Include Label="ImageModuleEmb">
 <#Include Label="ImageModuleEpi">
 <#Include Label="MorphismAidMap:map">
+<#Include Label="GeneralizedInverse:map">
 
 </Section>
 

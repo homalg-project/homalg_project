@@ -257,6 +257,19 @@ DeclareAttribute( "KernelSubmodule",
 DeclareAttribute( "MorphismAidMap",
         IsHomalgMap );
 
+##  <#GAPDoc Label="GeneralizedInverse:map">
+##  <ManSection>
+##    <Attr Arg="phi" Name="GeneralizedInverse" Label="for maps"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##      The generalized inverse of the epimorphism <A>phi</A> (cf. <Cite Key="BaSF" Where="Cor. 4.8"/>)).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "GeneralizedInverse",
+        IsHomalgMap );
+
 ####################################
 #
 # global functions and operations:
@@ -340,6 +353,9 @@ DeclareOperation( "PostInverse",
         [ IsHomalgMap ] );
 
 DeclareOperation( "CompleteImageSquare",
+        [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
+
+DeclareOperation( "CompleteKernelSquare",
         [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "UpdateModulesByMap",

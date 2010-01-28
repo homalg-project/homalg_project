@@ -242,7 +242,7 @@ InstallMethod( IsomorphismOfFiltration,
     local M, R, ByASmallerPresentation, degrees, l, nr_rels, nr_gens, Ids,
           etas, alphas, i, p, gen_emb, iotas, mor_aid, pi, Mp, Id_p, iota,
           d1, d0, eta0, epi, eta, emb, pr_P0, pr_Fp_1, pr_Mp, Fp_adapted, j,
-          q, gen_iso, alpha, compose, diagmat, transition, nr_rows, nr_cols,
+          q, chi, alpha, compose, diagmat, transition, nr_rows, nr_cols,
           stack, augment, presentation, rows, cols, triangular;
     
     M := UnderlyingObject( filt );
@@ -413,20 +413,17 @@ InstallMethod( IsomorphismOfFiltration,
             
         od;
         
-        ## Cokernel( K_1 -> P_0 + F_{p-1}( M ) ) -> P_0 + F_{p-1}( M )
-        ## the generalized isomorphism from the cokernel of K_1 -> P_0 + F_{p-1}( M )
-        ## into the direct sum P_0 + F_{p-1}( M ), where the former, by construction,
+        ## P_0 + F_{p-1}( M ) -> Cokernel( K_1 -> P_0 + F_{p-1}( M ) )
+        ## the natural epimorphism from the direct sum P_0 + F_{p-1}( M )
+        ## onto the cokernel of K_1 -> P_0 + F_{p-1}( M ), where the latter, by construction,
         ## 1) is isomorphic to F_p( M ) and
         ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
-        gen_iso := CokernelNaturalGeneralizedIsomorphism( emb );
-        
-        ## make a copy without the morphism aid map
-        gen_iso := RemoveMorphismAidMap( gen_iso );
+        chi := CokernelEpi( emb );
         
         ## the isomorphism between Cokernel( K_1 -> P_0 + F_{p-1}( M ) ) and F_p( M ),
         ## where the former is, by contruction, equipped with a presentation
         ## adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
-        alpha := PreCompose( gen_iso, epi );
+        alpha := PreDivide( chi, epi );
         
         Assert( 1, IsIsomorphism( alpha ) );
         

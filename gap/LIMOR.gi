@@ -700,3 +700,31 @@ InstallMethod( KernelSubmodule,
     
 end );
 
+## Cf. [Bar, Cor. 4.8]
+InstallMethod( GeneralizedInverse,
+        "LIMOR: for homalg maps",
+        [ IsHomalgMap and IsEpimorphism ],
+        
+  function( epsilon )
+    local gen_iso, aid;
+    
+    ## the generalized inverse of the epimorphism
+    gen_iso := epsilon^-1;
+    
+    ## the morphism aid map of the generalized inverse
+    aid := MapHavingSubobjectAsItsImage( KernelSubmodule( epsilon ) );
+    
+    ## set the morphism aid map
+    SetMorphismAidMap( gen_iso, aid );
+    
+    ## check assertion
+    Assert( 4, IsGeneralizedIsomorphism( gen_iso ) );
+    
+    SetIsGeneralizedIsomorphism( gen_iso, true );
+    
+    ## TODO: use PreDivide instead of the above stuff
+    
+    return gen_iso;
+    
+end );
+
