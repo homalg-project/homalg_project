@@ -488,7 +488,19 @@ InstallMethod( BasisOfHomogeneousPart,
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
   function( d, M )
-    local M_d, diff, bas;
+    local rel, bases, M_d, diff, bas;
+    
+    rel := RelationsOfModule( M );
+    
+    if IsBound( rel!.BasisOfHomogeneousPart ) and IsRecord( rel!.BasisOfHomogeneousPart ) then
+        bases := rel!.BasisOfHomogeneousPart;
+        if IsBound( bases.(String( d )) ) then
+            return bases.(String( d ));
+        fi;
+    else
+        bases := rec( );
+        rel!.BasisOfHomogeneousPart := bases;
+    fi;
     
     ## the map of generating monomials of degree d
     M_d := MonomialMap( d, M );
@@ -501,11 +513,15 @@ InstallMethod( BasisOfHomogeneousPart,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         bas := ZeroRows( diff );
-        return CertainRows( M_d, bas );
+        bas := CertainRows( M_d, bas );
     else
         bas := ZeroColumns( diff );
-        return CertainColumns( M_d, bas );
+        bas := CertainColumns( M_d, bas );
     fi;
+    
+    bases.(String( d )) := bas;
+    
+    return bas;
     
 end );
 
