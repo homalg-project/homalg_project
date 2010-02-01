@@ -19,6 +19,15 @@
 DeclareOperation( "Eliminate",
         [ IsList, IsList ] );
 
+DeclareOperation( "Eliminate",
+        [ IsList, IsHomalgRingElement ] );
+
+DeclareOperation( "Eliminate",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "Eliminate",
+        [ IsHomalgModule, IsHomalgRingElement ] );
+
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 

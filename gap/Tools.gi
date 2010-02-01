@@ -53,9 +53,51 @@ InstallMethod( Eliminate,
         Error( "could not find a procedure called Eliminate in the homalgTable of the external ring\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
-    
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Eliminate,
+        "for lists of ring elements",
+        [ IsList, IsHomalgRingElement ],
+        
+  function( rel, v )
+    
+    return Eliminate( rel, [ v ] );
+    
+end );
+
+##
+InstallMethod( Eliminate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsList ],
+        
+  function( N, indets )
+    local gen;
+    
+    gen := MatrixOfGenerators( N );
+    
+    gen := EntriesOfHomalgMatrix( gen );
+    
+    gen := Eliminate( gen, indets );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+        return LeftSubmodule( gen );
+    else
+        return RightSubmodule( gen );
+    fi;
+    
+end );
+
+##
+InstallMethod( Eliminate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRingElement ],
+        
+  function( N, v )
+    
+    return Eliminate( N, [ v ] );
     
 end );
 
