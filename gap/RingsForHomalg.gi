@@ -89,10 +89,16 @@ InstallValue( CommonHomalgTableForRings,
                 elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
                     
                     if Characteristic( R ) = 0 then
-                        return "Q";
+                        r := "Q";
                     else
-                        return Concatenation( "GF(", String( Characteristic( R ) ), ")" );
+                        r := Concatenation( "GF(", String( Characteristic( R ) ), ")" );
                     fi;
+                    
+                    if HasRationalParameters( R ) then
+                        r := Concatenation( r, "(", JoinStringsWithSeparator( List( RationalParameters( R ), String ) ), ")" );
+                    fi;
+                    
+                    return r;
                     
                 else
                     
@@ -173,7 +179,7 @@ end );
 ##
 InstallGlobalFunction( _PrepareInputForPolynomialRing,
   function( R, indets )
-    local var, nr_var, properties, r, var_of_base_ring;
+    local var, nr_var, properties, r, var_of_base_ring, param;
     
     if HasRingRelations( R ) then
         Error( "polynomial rings over homalg residue class rings are not supported yet\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring\nfor help type: ?homalg: constructor for residue class rings\n" );
@@ -217,7 +223,13 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
     
     var := Concatenation( var_of_base_ring, var );
     
-    return [ r, var, properties ];
+    if HasRationalParameters( r ) then
+        param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
+    else
+        param := "";
+    fi;
+    
+    return [ r, var, properties, param ];
     
 end );
 

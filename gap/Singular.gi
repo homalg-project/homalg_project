@@ -1210,7 +1210,7 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
-    local R;
+    local param, R;
     
     ##It seems that Singular does not know the fields.
     ##Instead we create Q[dummy_variable] and feed only expressions
@@ -1218,7 +1218,19 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
     
-    R := "0,dummy_variable,dp";
+    if Length( arg ) > 0 and IsString( arg[1] ) then
+        
+        param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
+        
+        R := Concatenation( "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" );
+        
+        arg := arg{[ 2 .. Length( arg ) ]};
+        
+    else
+        
+        R := "0,dummy_variable,dp";
+        
+    fi;
     
     R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
     
@@ -1227,6 +1239,16 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     SetIsFieldForHomalg( R, true );
     
     SetRingProperties( R, 0 );
+    
+    if IsBound( param ) then
+        
+        param := List( param, a -> HomalgExternalRingElement( a, R ) );
+        
+        Perform( param, function( v ) SetName( v, homalgPointer( v ) ); end );
+        
+        SetRationalParameters( R, param );
+        
+    fi;
     
     return R;
     
@@ -1238,16 +1260,17 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local ar, r, var, properties, ext_obj, S, RP;
+    local ar, r, var, properties, param, ext_obj, S, RP;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
     var := ar[2];
     properties := ar[3];
+    param := ar[4];
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
