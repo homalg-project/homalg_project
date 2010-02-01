@@ -964,6 +964,20 @@ InstallMethod( \*,
 end );
 
 ##
+InstallMethod( PolynomialRing,
+        "for homalg rings",
+        [ IsHomalgRing, IsString ], 1001,
+        
+  function( R, _var )
+    local var;
+    
+    var := ParseListOfIndeterminates( SplitString( _var, "," ) );
+    
+    return PolynomialRing( R, var );
+    
+end );
+
+##
 InstallMethod( RingOfDerivations,
         "for homalg rings",
         [ IsHomalgRing and IsCommutative, IsString ], 1001,

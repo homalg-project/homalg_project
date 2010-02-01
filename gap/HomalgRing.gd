@@ -844,6 +844,18 @@ DeclareAttribute( "TypeOfHomalgMatrix",
 DeclareAttribute( "ConstructorForHomalgMatrices",
         IsHomalgRing );
 
+##  <#GAPDoc Label="RationalParameters">
+##  <ManSection>
+##    <Attr Arg="R" Name="RationalParameters"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of rational parameters of the &homalg; ring <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "RationalParameters",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IndeterminatesOfPolynomialRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminatesOfPolynomialRing"/>

@@ -1836,6 +1836,17 @@ InstallMethod( FactorObject,
 end );
 
 ##
+InstallMethod( PrimaryDecomposition,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    
+    return PrimaryDecomposition( FactorObject( N ) );
+    
+end );
+
+##
 InstallMethod( ResidueClassRing,
         "for homalg ideals",
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
