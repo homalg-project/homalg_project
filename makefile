@@ -29,6 +29,6 @@ towww: archive
 	cp README ${WEBPOS}/README.Sheaves
 	cp doc/manual.pdf ${WEBPOS}/Sheaves.pdf
 	cp doc/*.{css,html} ${WEBPOS}
+	cp ../tar/Sheaves.tar.gz ${WEBPOS}
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-#	cp ../tar/Sheaves.tar.gz ${WEBPOS}
 
