@@ -15,7 +15,7 @@
 
 <TitlePage>
   <Title>&RingsForHomalg;</Title>
-  <Subtitle>Rings in External Computer Algebra Systems for the GAP-Package homalg</Subtitle>
+  <Subtitle>Dictionaries of External Rings for the &GAP; Package &homalg;</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
@@ -100,7 +100,7 @@
     <Email>daniel@momo.math.rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
   </Author>
-  <Date>January 2010</Date>
+  <Date>February 2010</Date>
   
   <Copyright>
     &copyright; 2007-2010 by

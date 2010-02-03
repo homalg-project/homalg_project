@@ -232,7 +232,7 @@ proc IsDiagonalMatrix (matrix m)\n\
 }\n\n",
     
     ZeroRows := "\n\
-proc ZeroRows (matrix m)\n\
+proc ZeroRows (module m)\n\
 {\n\
   list l;\n\
   for (int i=1;i<=ncols(m);i=i+1)\n\
@@ -252,7 +252,7 @@ proc ZeroRows (matrix m)\n\
     ZeroColumns := "\n\
 proc ZeroColumns (matrix n)\n\
 {\n\
-  matrix m=transpose(n);\n\
+  matrix m=module(transpose(n));\n\
   list l;\n\
   for (int i=1;i<=ncols(m);i=i+1)\n\
   {\n\
