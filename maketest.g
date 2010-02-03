@@ -28,9 +28,13 @@ list := [
          "../examples/Intersection.g",
           ];
 
-TestManualExamples( "doc", "LocalizeRingForHomalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
 
-GAPDocManualLab("LocalizeRingForHomalg");
+TestManualExamples( DirectoriesPackageLibrary( "LocalizeRingForHomalg", "doc" )[1]![1], "LocalizeRingForHomalg.xml", list );
+
+GAPDocManualLab( "LocalizeRingForHomalg" );
+
+SizeScreen( size );
 
 quit;
-

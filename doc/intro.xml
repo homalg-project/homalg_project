@@ -19,14 +19,14 @@ behind the package.
   <Section Label="role">
     <Heading>What is the Role of the &LocalizeRingForHomalg; Package in the &homalg; Project?</Heading>
 
-    The &homalg; project <Cite Key="homalg.new"/> aims at providing a general and abstract framework for homological computations. This package enables homalg to contruct from commutative rings in &homalg; their localizations at maximal ideals.
+    The &homalg; project <Cite Key="homalg-project"/> aims at providing a general and abstract framework for homological computations. This package enables homalg to contruct from commutative rings in &homalg; their localizations at maximal ideals.
 
   </Section>
 
   <Section Label="math">
     <Heading>The Math Behind This Package</Heading>
 
-    The math behind this package is a simple trick in allowing global computation to be done instead of local computations. This works on any commutative computable ring (in the sense of &homalg; <Cite Key="homalg.new"/>) without need of implementing new low level algorithms. Details can be found in the paper <Cite Key="BL"/>. This ring can be constructed by <Ref Oper="LocalizeAt" Label= "for a commutative ring and a maximal ideal"/> and <Ref Oper="LocalizeAtZero" Label= "for a free polynomial ring"/>.
+    The math behind this package is a simple trick in allowing global computation to be done instead of local computations. This works on any commutative computable ring (in the sense of &homalg; <Cite Key="homalg-package"/>) without need of implementing new low level algorithms. Details can be found in the paper <Cite Key="BL"/>. This ring can be constructed by <Ref Oper="LocalizeAt" Label= "for a commutative ring and a maximal ideal"/> and <Ref Oper="LocalizeAtZero" Label= "for a free polynomial ring"/>.
 
     <P/>Furthermore we use the package &RingsForHomalg; to communicate with &Singular; and use the implementation of Mora's algorithm there. This is restricted to polynomial rings and needs the package &RingsForHomalg;. This ring can be constructed by <Ref Oper="LocalizePolynomialRingAtZeroWithMora" Label= "constructor for homalg localized rings using Mora's algorithm"/>.
     

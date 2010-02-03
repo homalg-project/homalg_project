@@ -81,13 +81,37 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                
                ShallowCopy := C -> List( Eval( C ), ShallowCopy ),
                
+               InitialMatrix :=
+                 function( C )
+                   local R;
+                   
+                   R := AssociatedComputationRing( C );
+                   
+                   return [
+                     HomalgInitialMatrix( NrRows( C ), NrColumns( C ), R ),
+                     One( R )
+                   ];
+                 end,
+               
+               InitialIdentityMatrix :=
+                 function( C )
+                   local R;
+                   
+                   R := AssociatedComputationRing( C );
+                   
+                   return [
+                     HomalgInitialIdentityMatrix( NrRows( C ), R ),
+                     One( R )
+                   ];
+                 end,
+               
                ZeroMatrix :=
                  function( C )
                    local R;
                    
                    R := AssociatedComputationRing( C );
                    
-                   return [ 
+                   return [
                      HomalgZeroMatrix( NrRows( C ), NrColumns( C ), R ),
                      One( R )
                    ];

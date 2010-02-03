@@ -22,11 +22,22 @@ of your GAP 4 installation. It creates a subdirectory called `LocalizeRingForHom
 
 This completes the installation of the package.
 
-Recompiling the documentation is possible by the command `gap makedoc.g'
-in the LocalizeRingForHomalg directory. But this should not be necessary.
+Testing the package is possible by invoking
 
-E-mail me if there are any questions, remarks, suggestions. Also, I
+ReadPackage( "LocalizeRingForHomalg", "maketest.g" );
+
+from within GAP.
+
+You need the computer algebra system Singular (version >= 3-0-4)
+to run the tests.
+
+You also need the package Sheaves from the homalg project to run the test.
+You can download from:
+http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/Sheaves.tar.gz
+
+E-mail us if there are any questions, remarks, suggestions. Also, we
 would like to hear about applications of this package.
 
 
-Mohamed Barakat, e-mail: barakat@math.uni-sb.de
+Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de
+Markus Lange-Hegermann, e-mail: markus.lange.hegermann@rwth-aachen.de
