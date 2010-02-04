@@ -4,6 +4,7 @@
 ##                                                            Simon Goertzen
 ##                                                          Markus Kirschmer
 ##                                                    Markus Lange-Hegermann
+##                                                          Oleksandr Motsak
 ##                                                           Max Neunhoeffer
 ##                                                            Daniel Robertz
 ##
@@ -32,13 +33,13 @@ Subtitle := "Dictionaries of External Rings",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.02.03",
+Version := "2010.02.04",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "03/02/2010",
+Date := "04/02/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -184,6 +185,21 @@ Persons := [
                        "Germany" ] ),
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
+  ),
+  rec(
+    LastName      := "Oleksandr",
+    FirstNames    := "Motsak",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "motsak@mathematik.uni-kl.de",
+    WWWHome       := "http://www.mathematik.uni-kl.de/~motsak/",
+    PostalAddress := Concatenation( [
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ] ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
   ),
   rec(
     LastName      := "Neunhöffer",
@@ -380,6 +396,8 @@ BannerString := Concatenation(
         " (", ~.Persons[5].WWWHome, ")\n",
   "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
         " (", ~.Persons[6].WWWHome, ")\n",
+  "   ", ~.Persons[7].FirstNames, " ", ~.Persons[7].LastName,
+        " (", ~.Persons[7].WWWHome, ")\n",
   "For help, type: ?RingsForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 
