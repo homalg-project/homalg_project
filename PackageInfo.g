@@ -187,8 +187,8 @@ Persons := [
     Institution   := "RWTH Aachen University"
   ),
   rec(
-    LastName      := "Oleksandr",
-    FirstNames    := "Motsak",
+    LastName      := "Motsak",
+    FirstNames    := "Oleksandr",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "motsak@mathematik.uni-kl.de",

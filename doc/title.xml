@@ -54,7 +54,7 @@
       Germany
     </Address>
     <Email>simon.goertzen@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;simon</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;simon/</Homepage>
   </Author>
   <Author>Markus Kirschmer<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -65,7 +65,7 @@
       Germany
     </Address>
     <Email>markus.kirschmer@math.rwth-aachen.de</Email>
-    <Homepage>http://www.math.rwth-aachen.de/&tilde;Markus.Kirschmer</Homepage>
+    <Homepage>http://www.math.rwth-aachen.de/&tilde;Markus.Kirschmer/</Homepage>
   </Author>
   <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -76,7 +76,7 @@
       Germany
     </Address>
     <Email>markus.lange-hegermann@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;markus</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;markus/</Homepage>
   </Author>
   <Author>Motsak Oleksandr<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -86,7 +86,7 @@
       Germany
     </Address>
     <Email>motsak@mathematik.uni-kl.de</Email>
-    <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak</Homepage>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak/</Homepage>
   </Author>
   <Author>Max Neunhöffer<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -97,8 +97,8 @@
       St Andrews, Fife KY16 9SS, <Br/>
       Scotland, UK
     </Address>
-    <Email>daniel@momo.math.rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+    <Email>neunhoef@mcs.st-and.ac.uk</Email>
+    <Homepage>http://www-groups.mcs.st-and.ac.uk/&tilde;neunhoef/</Homepage>
   </Author>
   <Author>Daniel Robertz<Alt Only="LaTeX"><Br/></Alt>
     <Address>
