@@ -35,7 +35,7 @@
     <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
-  <Author>Mohamed Barakat
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Department of Mathematics, <Br/>
       University of Kaiserslautern, <Br/>
@@ -45,7 +45,7 @@
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
-  <Author>Simon Goertzen
+  <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl B für Mathematik, <Br/>
       RWTH Aachen, <Br/>
@@ -56,7 +56,7 @@
     <Email>simon.goertzen@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;simon</Homepage>
   </Author>
-  <Author>Markus Kirschmer
+  <Author>Markus Kirschmer<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl D für Mathematik, <Br/>
       RWTH Aachen, <Br/>
@@ -67,7 +67,7 @@
     <Email>markus.kirschmer@math.rwth-aachen.de</Email>
     <Homepage>http://www.math.rwth-aachen.de/&tilde;Markus.Kirschmer</Homepage>
   </Author>
-  <Author>Markus Lange-Hegermann
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl B für Mathematik, <Br/>
       RWTH Aachen, <Br/>
@@ -78,7 +78,7 @@
     <Email>markus.lange-hegermann@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;markus</Homepage>
   </Author>
-  <Author>Motsak Oleksandr
+  <Author>Motsak Oleksandr<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Department of Mathematics, <Br/>
       University of Kaiserslautern, <Br/>
@@ -88,7 +88,7 @@
     <Email>motsak@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak</Homepage>
   </Author>
-  <Author>Max Neunhöffer
+  <Author>Max Neunhöffer<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       St Andrews University, <Br/>
       School of Mathematics and Statistics, <Br/>
@@ -100,7 +100,7 @@
     <Email>daniel@momo.math.rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
   </Author>
-  <Author>Daniel Robertz
+  <Author>Daniel Robertz<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl B für Mathematik, <Br/>
       RWTH Aachen, <Br/>
