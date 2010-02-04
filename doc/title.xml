@@ -32,7 +32,7 @@
     <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ioforhomalg</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
-  <Author>Thomas Bächler
+  <Author>Thomas Bächler<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl B für Mathematik,
       RWTH Aachen,
@@ -41,7 +41,7 @@
       Germany
     </Address>
     <Email>thomas@momo.math.rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;thomas/</Homepage>
   </Author>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -53,7 +53,7 @@
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
-  <Author>Max Neunhöffer
+  <Author>Max Neunhöffer<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       St Andrews University,
       School of Mathematics and Statistics,
@@ -62,10 +62,10 @@
       St Andrews, Fife KY16 9SS,
       Scotland, UK
     </Address>
-    <Email>daniel@momo.math.rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+    <Email>neunhoef@mcs.st-and.ac.uk</Email>
+    <Homepage>http://www-groups.mcs.st-and.ac.uk/~neunhoef/</Homepage>
   </Author>
-  <Author>Daniel Robertz
+  <Author>Daniel Robertz<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl B für Mathematik,
       RWTH Aachen,
@@ -74,7 +74,7 @@
       Germany
     </Address>
     <Email>daniel@momo.math.rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel/</Homepage>
   </Author>
   <Date>February 2010</Date>
   
