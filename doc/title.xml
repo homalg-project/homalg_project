@@ -11,7 +11,7 @@
 -->
 <TitlePage>
   <Title>GAP 4 Package <Package>ExamplesForHomalg</Package></Title>
-  <Subtitle>ExamplesForHomalg --- Examples for the GAP package homalg</Subtitle>
+  <Subtitle>Examples for the GAP package homalg</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
@@ -49,7 +49,7 @@
       Germany
     </Address>
     <Email>simon.goertzen@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
   </Author>
   <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -60,7 +60,7 @@
       Germany
     </Address>
     <Email>markus.lange.hegermann@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus/</Homepage>
   </Author>
   <Date>February 2010</Date>
   
