@@ -22,14 +22,15 @@ of your GAP 4 installation. It creates a subdirectory called `Sheaves'.
 
 This completes the installation of the package.
 
-Recompiling the documentation is possible by the command `make doc'
-in the Sheaves directory. But this should not be necessary.
+Testing the package is possible by invoking
 
-Testing the package is possible by the command `make test'
-in the Sheaves directory.
+ReadPackage( "Sheaves", "maketest.g" );
 
-E-mail me if there are any questions, remarks, suggestions. Also, I
+from within GAP.
+
+E-mail us if there are any questions, remarks, suggestions. Also, we
 would like to hear about applications of this package.
 
 
-Mohamed Barakat, e-mail: barakat@math.uni-sb.de
+Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de
+Oleksandr Motsak, e-mail: motsak@mathematik.uni-kl.de

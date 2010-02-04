@@ -3,6 +3,7 @@
 <!-- 
 
   title.xml             Sheaves package documentation           Mohamed Barakat
+                                                               Motsak Oleksandr
 
          Copyright (C) 2008-2010, Mohamed Barakat, Universität des Saarlandes
 
@@ -28,7 +29,7 @@
     <URL>http://homalg.math.rwth-aachen.de/index.php/unreleased/sheaves</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
-  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+  <Author>Mohamed Barakat
     <Address>
       Department of Mathematics, <Br/>
       University of Kaiserslautern, <Br/>
@@ -36,7 +37,17 @@
       Germany
     </Address>
     <Email>barakat@mathematik.uni-kl.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat</Homepage>
+  </Author>
+  <Author>Motsak Oleksandr
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>motsak@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak</Homepage>
   </Author>
   <Date>February 2010</Date>
   
@@ -49,7 +60,7 @@
   
 <Acknowledgements>
   
-  I am very much indebted to Wolfram Decker and Frank-Olaf Schreyer
+  We are very much indebted to Wolfram Decker and Frank-Olaf Schreyer
   for all their help and support.
   
 </Acknowledgements>
