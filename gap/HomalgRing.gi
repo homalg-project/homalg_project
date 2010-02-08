@@ -740,21 +740,6 @@ InstallGlobalFunction( CreateHomalgRing,
         
     fi;
     
-    homalg_ring!.AsLeftModule := HomalgFreeLeftModule( 1, homalg_ring );
-    homalg_ring!.AsRightModule := HomalgFreeRightModule( 1, homalg_ring );
-    
-    homalg_ring!.AsLeftModule!.distinguished := true;
-    homalg_ring!.AsRightModule!.distinguished := true;
-    
-    homalg_ring!.AsLeftModule!.not_twisted := true;
-    homalg_ring!.AsRightModule!.not_twisted := true;
-    
-    homalg_ring!.ZeroLeftModule := HomalgZeroLeftModule( homalg_ring );
-    homalg_ring!.ZeroRightModule := HomalgZeroRightModule( homalg_ring );
-    
-    homalg_ring!.ZeroLeftModule!.distinguished := true;
-    homalg_ring!.ZeroRightModule!.distinguished := true;
-    
     if IsBound( HOMALG.ByASmallerPresentation ) and HOMALG.ByASmallerPresentation = true then
         homalg_ring!.ByASmallerPresentation := true;
     fi;

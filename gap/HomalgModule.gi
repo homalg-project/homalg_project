@@ -173,7 +173,7 @@ InstallOtherMethod( Zero,
         
   function( M )
     
-    return HomalgRing( M )!.ZeroRightModule;
+    return ZeroRightModule( HomalgRing( M ) );
     
 end );
 
@@ -184,7 +184,7 @@ InstallOtherMethod( Zero,
         
   function( M )
     
-    return HomalgRing( M )!.ZeroLeftModule;
+    return ZeroLeftModule( HomalgRing( M ) );
     
 end );
 
@@ -195,7 +195,7 @@ InstallOtherMethod( One,
         
   function( M )
     
-    return HomalgRing( M )!.AsRightModule;
+    return AsRightModule( HomalgRing( M ) );
     
 end );
 
@@ -206,7 +206,7 @@ InstallOtherMethod( One,
         
   function( M )
     
-    return HomalgRing( M )!.AsLeftModule;
+    return AsLeftModule( HomalgRing( M ) );
     
 end );
 
@@ -1868,13 +1868,70 @@ end );
 ####################################
 
 ##
+InstallMethod( ZeroLeftModule,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local zero;
+    
+    if IsBound(R!.ZeroLeftModule) then
+        return R!.ZeroLeftModule;
+    fi;
+    
+    zero := HomalgZeroLeftModule( R );
+    
+    zero!.distinguished := true;
+    
+    R!.ZeroLeftModule := zero;
+    
+    return zero;
+    
+end );
+
+##
+InstallMethod( ZeroRightModule,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local zero;
+    
+    if IsBound(R!.ZeroRightModule) then
+        return R!.ZeroRightModule;
+    fi;
+    
+    zero := HomalgZeroRightModule( R );
+    
+    zero!.distinguished := true;
+    
+    R!.ZeroRightModule := zero;
+    
+    return zero;
+    
+end );
+
+##
 InstallMethod( AsLeftModule,
         "for homalg rings",
         [ IsHomalgRing ],
         
   function( R )
+    local left;
     
-    return R!.AsLeftModule;
+    if IsBound(R!.AsLeftModule) then
+        return R!.AsLeftModule;
+    fi;
+    
+    left := HomalgFreeLeftModule( 1, R );
+    
+    left!.distinguished := true;
+    
+    left!.not_twisted := true;
+    
+    R!.AsLeftModule := left;
+    
+    return left;
     
 end );
 
@@ -1884,8 +1941,21 @@ InstallMethod( AsRightModule,
         [ IsHomalgRing ],
         
   function( R )
+    local right;
     
-    return R!.AsRightModule;
+    if IsBound(R!.AsRightModule) then
+        return R!.AsRightModule;
+    fi;
+    
+    right := HomalgFreeRightModule( 1, R );
+    
+    right!.distinguished := true;
+    
+    right!.not_twisted := true;
+    
+    R!.AsRightModule := right;
+    
+    return right;
     
 end );
 
@@ -2476,7 +2546,7 @@ InstallMethod( \*,
   function( rank, R )
     
     if rank = 0 then
-        return R!.ZeroLeftModule;
+        return ZeroLeftModule( R );
     elif rank = 1 then
         return AsLeftModule( R );
     elif rank > 1 then
@@ -2495,7 +2565,7 @@ InstallMethod( \*,
   function( R, rank )
     
     if rank = 0 then
-        return R!.ZeroRightModule;
+        return ZeroRightModule( R );
     elif rank = 1 then
         return AsRightModule( R );
     elif rank > 1 then

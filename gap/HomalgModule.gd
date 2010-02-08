@@ -482,6 +482,12 @@ DeclareOperation( "AsLeftModule",
 DeclareOperation( "AsRightModule",
         [ IsHomalgRing ] );
 
+DeclareOperation( "ZeroLeftModule",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "ZeroRightModule",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "Presentation",
         [ IsHomalgRelations ] );
 
