@@ -296,7 +296,7 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
     od;
     
     if s = fail then
-        Error( "found no ",  HOMALG_IO_CAS.executable, " executable in PATH while searching the following list:\n", executables, "\n" );
+        Error( "found no ",  HOMALG_IO_CAS.name, " executable in PATH while searching the following list:\n", executables, "\n" );
     fi;
     
     s.stdout!.rbufsize := false;   # switch off buffering
