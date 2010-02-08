@@ -183,6 +183,12 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "BasisCoeff",
         [ IsHomalgRelations ] );
 
+DeclareOperation( "RightDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelations ] );
+
+DeclareOperation( "LeftDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelations ] );
+
 DeclareOperation( "SyzygiesGenerators",
         [ IsHomalgRelations ] );
 

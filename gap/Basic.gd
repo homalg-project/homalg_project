@@ -79,17 +79,11 @@ DeclareOperation( "SyzygiesBasisOfColumns",
 DeclareOperation( "RightDivide",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "RightDivide",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelations ] );
-
-DeclareOperation( "RightDivide",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
-
 DeclareOperation( "LeftDivide",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "LeftDivide",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelations ] );
+DeclareOperation( "RightDivide",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "LeftDivide",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );

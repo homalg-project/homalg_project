@@ -795,6 +795,34 @@ InstallMethod( BasisCoeff,
 end );
 
 ##
+InstallMethod( RightDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
+        
+  function( B, A, L )
+    local BL;
+    
+    BL := BasisOfModule( L );
+    
+    return RightDivide( B, A, MatrixOfRelations( BL ) );
+    
+end );
+
+##
+InstallMethod( LeftDivide,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
+        
+  function( A, B, L )
+    local BL;
+    
+    BL := BasisOfModule( L );
+    
+    return LeftDivide( A, B, MatrixOfRelations( BL ) );
+    
+end );
+
+##
 InstallMethod( SyzygiesGenerators,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],

@@ -443,12 +443,9 @@ end );
 ##  <#GAPDoc Label="RelativeRightDivide">
 ##  <ManSection>
 ##    <Oper Arg="B, A, L" Name="RightDivide" Label="for triples of matrices"/>
-##    <Oper Arg="B, A, L" Name="RightDivide" Label="for pairs matrices and a set of relations"/>
 ##    <Returns>a &homalg; matrix or false</Returns>
 ##    <Description>
-##      Let <A>B</A>, <A>A</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring
-##      (<A>L</A> might also be a set of relations for a left module with
-##       <C>NrGenerators</C>( <A>L</A> ) <M>=</M> <C>NrColumns</C>( <A>B</A> ) ).
+##      Let <A>B</A>, <A>A</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring.
 ##      The matrix <C>RightDivide</C>( <A>B</A>, <A>A</A>, <A>L</A> ) is a particular solution of the inhomogeneous (one sided)
 ##      linear system of equations <M>X<A>A</A>+Y<A>L</A>=<A>B</A></M> in case it is solvable (for some <M>Y</M> which is forgotten).
 ##      Otherwise <C>false</C> is returned. The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M> modulo <A>L</A></Q>.
@@ -456,26 +453,26 @@ end );
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( RightDivide,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!!
     local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
     
     R := HomalgRing( B );
     
-    BL := BasisOfModule( L );
+    BL := BasisOfRows( L );
     
     ## first reduce A modulo L
-    ZA := DecideZero( A, BL );
+    ZA := DecideZeroRows( A, BL );
     
-    AL := UnionOfRows( ZA, MatrixOfRelations( BL ) );
+    AL := UnionOfRows( ZA, BL );
     
     ## CA * AL = IAL
     CA := HomalgVoidMatrix( R );
     IAL := BasisOfRows( AL, CA );
     
     ## also reduce B modulo L
-    ZB := DecideZero( B, BL );
+    ZB := DecideZeroRows( B, BL );
     
     ## knowing this will avoid computations
     IsIdentityMatrix( IAL );
@@ -503,17 +500,6 @@ InstallMethod( RightDivide,
     ## since CB := -matrix
     
 end );
-
-##
-InstallMethod( RightDivide,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( B, A, L )
-    
-    return RightDivide( B, A, HomalgRelationsForLeftModule( L ) );
-    
-end );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -522,12 +508,9 @@ end );
 ##  <#GAPDoc Label="RelativeLeftDivide">
 ##  <ManSection>
 ##    <Oper Arg="A, B, L" Name="LeftDivide" Label="for triples of matrices"/>
-##    <Oper Arg="A, B, L" Name="LeftDivide" Label="for pairs matrices and a set of relations"/>
 ##    <Returns>a &homalg; matrix or false</Returns>
 ##    <Description>
-##      Let <A>A</A>, <A>B</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring
-##      (<A>L</A> might also be a set of relations for a right module with
-##       <C>NrGenerators</C>( <A>L</A> ) <M>=</M> <C>NrRows</C>( <A>B</A> ) ).
+##      Let <A>A</A>, <A>B</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring.
 ##      The matrix <C>LeftDivide</C>( <A>A</A>, <A>B</A>, <A>L</A> ) is a particular solution of the inhomogeneous (one sided)
 ##      linear system of equations <M><A>A</A>X+<A>L</A>Y=<A>B</A></M> in case it is solvable (for some <M>Y</M> which is forgotten).
 ##      Otherwise <C>false</C> is returned. The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M> modulo <A>L</A></Q>.
@@ -535,26 +518,26 @@ end );
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( LeftDivide,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!!
     local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;
     
     R := HomalgRing( B );
     
-    BL := BasisOfModule( L );
+    BL := BasisOfColumns( L );
     
     ## first reduce A modulo L
-    ZA := DecideZero( A, BL );
+    ZA := DecideZeroColumns( A, BL );
     
-    AL := UnionOfColumns( ZA, MatrixOfRelations( BL ) );
+    AL := UnionOfColumns( ZA, BL );
     
     ## AL * CA = IAL
     CA := HomalgVoidMatrix( R );
     IAL := BasisOfColumns( AL, CA );
     
     ## also reduce B modulo L
-    ZB := DecideZero( B, BL );
+    ZB := DecideZeroColumns( B, BL );
     
     ## knowing this will avoid computations
     IsIdentityMatrix( IAL );
@@ -580,17 +563,6 @@ InstallMethod( LeftDivide,
     
     ## technical: CA * -CB := CA * (-CB) and COLEM should take over since
     ## CB := -matrix
-    
-end );
-
-##
-InstallMethod( LeftDivide,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
-        
-  function( A, B, L )
-    
-    return LeftDivide( A, B, HomalgRelationsForRightModule( L ) );
     
 end );
 ##  ]]></Listing>
