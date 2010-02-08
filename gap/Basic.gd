@@ -104,7 +104,5 @@ DeclareOperation( "GenerateSameColumnModule",
 
 DeclareGlobalFunction( "BestBasis" );
 
-DeclareGlobalFunction( "ReducedBasisOfModule" );
-
 DeclareGlobalFunction( "SimplerEquivalentMatrix" );
 

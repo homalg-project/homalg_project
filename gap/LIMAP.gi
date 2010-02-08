@@ -122,7 +122,7 @@ InstallMethod( IsAutomorphism,
         
   function( phi )
     
-    return IsHomalgSelfMap( phi ) and IsIsomorphism( phi );
+    return IsHomalgRingSelfMap( phi ) and IsIsomorphism( phi );
     
 end );
 

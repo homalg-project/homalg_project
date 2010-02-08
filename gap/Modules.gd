@@ -14,6 +14,8 @@
 #
 ####################################
 
+DeclareGlobalFunction( "ReducedBasisOfModule" );
+
 DeclareGlobalFunction( "ParametrizeModule" );
 
 # basic operations:
