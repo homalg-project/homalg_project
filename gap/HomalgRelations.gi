@@ -1285,6 +1285,12 @@ InstallMethod( Display,
             Print( "on ", n, " generators\n" );
         fi;
     else
+        if n > 0 then
+            Display( MatrixOfRelations( o ) );
+            
+            Print( "\n" );
+        fi;
+        
         if m = 1 then
             Print( "a single relation " );
         else
@@ -1320,9 +1326,7 @@ InstallMethod( Display,
                 Print( "s of" );
             fi;
             
-            Print( " the matrix \n\n" );
-            
-            Display( MatrixOfRelations( o ) );
+            Print( " the above matrix\n" );
         fi;
     fi;
     
