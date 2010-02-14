@@ -24,8 +24,9 @@ ReadPackage( "homalg", "gap/SetsOfRelations.gi" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gi" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
 
-## modules
+## modules/submodules
 ReadPackage( "homalg", "gap/HomalgModule.gi" );
+ReadPackage( "homalg", "gap/HomalgSubmodule.gi" );
 
 ## morphisms
 ReadPackage( "homalg", "gap/HomalgMap.gi" );

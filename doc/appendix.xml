@@ -105,12 +105,19 @@ files.
 
 <Row>
   <Item><F>HomalgModule</F></Item>
-  <Item>modules and submodules allowing several</Item>
+  <Item>modules allowing several presentations</Item>
 </Row>
 
 <Row>
   <Item></Item>
-  <Item>presentations linked with transition matrices</Item>
+  <Item>linked with transition matrices</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgSubmodule</F></Item>
+  <Item>submodules allowing several sets of generators</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
