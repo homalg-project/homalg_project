@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ResidueClassRing.gd         homalg package               Mohamed Barakat
+##  ResidueClassRing.gi         MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
 ##
@@ -96,7 +96,7 @@ DeclareOperation( "/",
         [ IsHomalgRing, IsRingElement ] );
 
 DeclareOperation( "/",
-        [ IsHomalgRing, IsHomalgRelations ] );
+        [ IsHomalgRing, IsHomalgRingRelations ] );
 
 DeclareGlobalFunction( "HomalgResidueClassRingElement" );
 
@@ -108,13 +108,13 @@ DeclareGlobalFunction( "HomalgResidueClassMatrix" );
 # basic operations:
 
 DeclareOperation( "UnionOfRows",
-        [ IsHomalgMatrix, IsHomalgRelations ] );
+        [ IsHomalgMatrix, IsHomalgRingRelations ] );
 
 DeclareOperation( "UnionOfRows",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "UnionOfColumns",
-        [ IsHomalgMatrix, IsHomalgRelations ] );
+        [ IsHomalgMatrix, IsHomalgRingRelations ] );
 
 DeclareOperation( "UnionOfColumns",
         [ IsHomalgMatrix ] );

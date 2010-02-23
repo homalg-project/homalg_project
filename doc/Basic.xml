@@ -2,7 +2,7 @@
 
 <!-- 
 
-  Basic.xml            homalg package documentation            Mohamed Barakat
+  Basic.xml            MatricesForHomalg package documentation            Mohamed Barakat
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
@@ -12,8 +12,11 @@
 <Heading>The Basic Matrix Operations</Heading>
 
 These are the operations used to solve one-sided (in)homogeneous
-linear systems <M>XA=B</M> resp. <M>AX=B</M> (&see; Appendix
-<Ref Chap="homalg-Idea"/>).
+linear systems <M>XA=B</M> resp. <M>AX=B</M>.
+
+<!--
+(&see; Appendix <Ref Chap="homalg-Idea"/>)
+-->
 
 <Section Label="Main">
 <Heading>Main</Heading>

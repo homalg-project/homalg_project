@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgRingMaps.gi           homalg package               Mohamed Barakat
+##  HomalgRingMaps.gi           MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
 ##
@@ -62,26 +62,6 @@ InstallMethod( ImagesOfRingMap,
   function( phi )
     
     return phi!.images;
-    
-end );
-
-##  <#GAPDoc Label="Kernel:ringmap">
-##  <ManSection>
-##    <Meth Arg="phi" Name="Kernel" Label="for ring maps"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      The kernel ideal of the ring map <A>phi</A> as an abstract module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( Kernel,
-        "for homalg ring maps",
-        [ IsHomalgRingMap ],
-        
-  function( phi )
-    
-    return UnderlyingObject( KernelSubmodule( phi ) );
     
 end );
 
@@ -219,13 +199,7 @@ InstallMethod( ViewObj,
         Print( " \"endomorphism\" of" );
     fi;
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
-    else
-        Print( " a right" );
-    fi;
-    
-    Print( " module>" );
+    Print( " rings>" );
     
 end );
 

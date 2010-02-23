@@ -2,7 +2,7 @@
 
 <!-- 
 
-  ResidueClassRingForHomalg.xml     homalg package documentation            Mohamed Barakat
+  ResidueClassRingForHomalg.xml     MatricesForHomalg package documentation            Mohamed Barakat
 
          Copyright (C) 2007-2009, Mohamed Barakat, Universität des Saarlandes
 
@@ -10,8 +10,6 @@
 
 <Appendix Label="ResidueClassRingForHomalg">
 <Heading>The subpackage &ResidueClassRingForHomalg; as a sample ring package</Heading>
-
-For an example see <Ref Label="HomHom"/>.
 
 <Section Label="ResidueClassRingForHomalg:BasicNoFallBack">
 <Heading>The Mandatory Basic Operations</Heading>

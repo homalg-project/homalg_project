@@ -2,26 +2,21 @@
 
 <!-- 
 
-  appendix.xml            homalg package documentation            Mohamed Barakat
+  appendix.xml            MatricesForHomalg package documentation            Mohamed Barakat
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 -->
 
 <Appendix Label="FileOverview">
-<Heading>Overview of the &homalg; Package Source Code</Heading>
+<Heading>Overview of the &MatricesForHomalg; Package Source Code</Heading>
 
-The &homalg; package reached more than 50.000 lines of &GAP4; code
-(excluding the documentation) before the first release was made. To
-keep this amount of code tracebale, the package was split in several
-files.
+<Section Label="RingsMapsMatrices">
 
-<Section Label="ModuleInternals">
-
-<Heading>Rings, Ring Maps, Matrices, Relations, and Generators</Heading>
+<Heading>Rings, Ring Maps, Matrices, Ring Relations</Heading>
 
 <Table Align="l|l">
-<Caption><E>The &homalg; package files</E></Caption>
+<Caption><E>The &MatricesForHomalg; package files</E></Caption>
 
 <Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
@@ -40,7 +35,7 @@ files.
 
 <Row>
   <Item><F>homalgTable</F></Item>
-  <Item>dictionaries between &homalg;</Item>
+  <Item>dictionaries between &MatricesForHomalg;</Item>
 </Row>
 <Row>
   <Item></Item>
@@ -69,156 +64,8 @@ files.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>HomalgRelations</F></Item>
-  <Item>a set of relations</Item>
-</Row>
-
-<Row>
-  <Item><F>SetsOfRelations</F></Item>
-  <Item>several sets of relations</Item>
-</Row>
-
-<Row>
-  <Item><F>HomalgGenerators</F></Item>
-  <Item>a set of generators</Item>
-</Row>
-
-<Row>
-  <Item><F>SetsOfGenerators</F></Item>
-  <Item>several sets of generators</Item>
-</Row>
-
-</Table>
-
-</Section>
-
-<Section Label="The Basic Objects">
-
-<Heading>The Basic Objects</Heading>
-
-<Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
-
-<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
-
-<HorLine/>
-
-<Row>
-  <Item><F>HomalgModule</F></Item>
-  <Item>modules and submodules allowing several</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>presentations linked with transition matrices</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgMap</F></Item>
-  <Item>maps allowing several presentations</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>of their source and target</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgFiltration</F></Item>
-  <Item>filtration of a module</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgComplex</F></Item>
-  <Item>(co)complexes of modules or of (co)complexes</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgChainMap</F></Item>
-  <Item>chain maps of (co)complexes</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>consisting of maps or chain maps</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgBicomplex</F></Item>
-  <Item>bicomplexes of modules or of (co)complexes</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgBigradedObject</F></Item>
-  <Item>(differential) bigraded modules</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgSpectralSequence</F></Item>
-  <Item>homological and cohomological</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>spectral sequences</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgFunctor</F></Item>
-  <Item>constructors of (multi) functors of</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>module categories (yet over the same ring),</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>left derivation of covariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>right derivation of contravariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>left satellites of covariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>right satellites of contravariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>and composition of functors</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgDiagram</F></Item>
-  <Item>Betti diagrams</Item>
+  <Item><F>HomalgRingRelations</F></Item>
+  <Item>a set of ring relations</Item>
 </Row>
 
 </Table>
@@ -232,7 +79,7 @@ files.
 In the following CAS or CASystem mean computer algebra systems.
 
 <Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Caption><E>The &MatricesForHomalg; package files (continued)</E></Caption>
 
 <Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
@@ -286,131 +133,12 @@ In the following CAS or CASystem mean computer algebra systems.
 
 </Section>
 
-<Section Label="Hight Level Algorithms">
-
-<Heading>The High Level Algorithms</Heading>
-
-<Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
-<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
-
-<HorLine/>
-
-<Row>
-  <Item><F>Modules</F></Item>
-  <Item>subfactors, resolutions, syzygy modules,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>parameterizations, intersections, annihilators</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>Maps</F></Item>
-  <Item>resolutions, (co)kernel sequences</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>Complexes</F></Item>
-  <Item>(co)homology, horse shoe lemma, connecting</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>homomorphisms, Cartan-Eilenberg resolution</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>ChainMaps</F></Item>
-  <Item>(co)homology</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>SpectralSequences</F></Item>
-  <Item>Grothendieck bicomplexes associated to two</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>composable functors, spectral sequences</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>of bicomplexes, Grothendieck spectral sequences</Item>
-</Row>
-
-<Row>
-  <Item><F>Filtrations</F></Item>
-  <Item>spectral filtrations, i.e. filtrations induced</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>by spectral sequences of bicomplexes,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>purity filtration</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>ToolFunctors</F></Item>
-  <Item>composition, addition, substraction,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>stacking, augmentation, and post dividing maps</Item>
-</Row>
-
-<Row>
-  <Item><F>BasicFunctors</F></Item>
-  <Item>cokernel, image, kernel, tensor product, Hom,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>BaseChange (preliminary)</Item>
-</Row>
-
-<Row>
-  <Item><F>OtherFunctors</F></Item>
-  <Item>torsion submodule, torsion free factor,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>direct sum, pullback, pushout, Auslander dual</Item>
-</Row>
-
-</Table>
-
-</Section>
-
 <Section Label="Logical Implications">
 
-<Heading>Logical Implications for &homalg; Objects</Heading>
+<Heading>Logical Implications for &MatricesForHomalg; Objects</Heading>
 
 <Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Caption><E>The &MatricesForHomalg; package files (continued)</E></Caption>
 <Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
@@ -443,27 +171,6 @@ In the following CAS or CASystem mean computer algebra systems.
 
 <Row><Item></Item><Item></Item></Row>
 
-<Row>
-  <Item><F>LIMOD</F></Item>
-  <Item>logical implications for modules</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>LIMOR</F></Item>
-  <Item>logical implications for morphisms</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>LICPX</F></Item>
-  <Item>logical implications for complexes</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
 </Table>
 
 </Section>
@@ -473,7 +180,7 @@ In the following CAS or CASystem mean computer algebra systems.
 <Heading>The subpackage &ResidueClassRingForHomalg;</Heading>
 
 <Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Caption><E>The &MatricesForHomalg; package files (continued)</E></Caption>
 <Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
 
 <HorLine/>
@@ -537,7 +244,7 @@ and group rings do not statisfy the minimum requirements of
 &homalg; requirements for prime fields, and <M>&ZZ; / p^n</M>.
 
 <Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Caption><E>The &MatricesForHomalg; package files (continued)</E></Caption>
 <Row><Item>Filename .gi</Item><Item>Content</Item></Row>
 
 <HorLine/>

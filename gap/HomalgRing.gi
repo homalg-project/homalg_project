@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgRing.gi               homalg package               Mohamed Barakat
+##  HomalgRing.gi               MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, RWTH Aachen
 ##
@@ -712,15 +712,15 @@ InstallGlobalFunction( CreateHomalgRing,
         od;
     fi;
     
-    if IsBound( HOMALG.RingCounter ) then
-        HOMALG.RingCounter := HOMALG.RingCounter + 1;
+    if IsBound( HOMALG_MATRICES.RingCounter ) then
+        HOMALG_MATRICES.RingCounter := HOMALG_MATRICES.RingCounter + 1;
     else
-        HOMALG.RingCounter := 1;
+        HOMALG_MATRICES.RingCounter := 1;
     fi;
     
     ## this has to be done before we call
     ## ring_element_constructor below
-    homalg_ring!.creation_number := HOMALG.RingCounter;
+    homalg_ring!.creation_number := HOMALG_MATRICES.RingCounter;
     
     ## do not invoke SetRingProperties here, since I might be
     ## the first step of creating a residue class ring!
@@ -740,7 +740,7 @@ InstallGlobalFunction( CreateHomalgRing,
         
     fi;
     
-    if IsBound( HOMALG.ByASmallerPresentation ) and HOMALG.ByASmallerPresentation = true then
+    if IsBound( HOMALG_MATRICES.ByASmallerPresentation ) and HOMALG_MATRICES.ByASmallerPresentation = true then
         homalg_ring!.ByASmallerPresentation := true;
     fi;
     
@@ -797,7 +797,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
             fi;
         else
             R := HomalgRingOfIntegers( );
-            rel := HomalgRelationsForLeftModule( [ c ], R );
+            rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( [ c ], R );
             return R / rel;
         fi;
     else

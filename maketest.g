@@ -4,13 +4,11 @@
 ##  Call this with GAP.
 ##
 
-LoadPackage( "homalg" );
+LoadPackage( "MatricesForHomalg" );
 LoadPackage( "GAPDoc" );
 
 list := [
-         "../gap/homalg.gi",
-         "../gap/HomalgDiagram.gd",
-         "../gap/HomalgDiagram.gi",
+         "../gap/MatricesForHomalg.gi",
          "../gap/HomalgRing.gd",
          "../gap/HomalgRing.gi",
          "../gap/HomalgRingMap.gd",
@@ -18,31 +16,8 @@ list := [
          "../gap/LIRNG.gi",
          "../gap/HomalgMatrix.gd",
          "../gap/HomalgMatrix.gi",
-         "../gap/HomalgRelations.gd",
-         "../gap/HomalgRelations.gi",
-         "../gap/HomalgGenerators.gd",
-         "../gap/HomalgGenerators.gi",
-         "../gap/HomalgModule.gd",
-         "../gap/HomalgModule.gi",
-         "../gap/HomalgMap.gd",
-         "../gap/HomalgMap.gi",
-         "../gap/HomalgFiltration.gd",
-         "../gap/HomalgFiltration.gi",
-         "../gap/HomalgComplex.gd",
-         "../gap/HomalgComplex.gi",
-         "../gap/HomalgChainMap.gd",
-         "../gap/HomalgChainMap.gi",
-         "../gap/HomalgBicomplex.gd",
-         "../gap/HomalgBicomplex.gi",
-         "../gap/HomalgBigradedObject.gd",
-         "../gap/HomalgBigradedObject.gi",
-         "../gap/HomalgSpectralSequence.gd",
-         "../gap/HomalgSpectralSequence.gi",
-         "../gap/HomalgFunctor.gd",
-         "../gap/HomalgFunctor.gi",
-         "../gap/BasicFunctors.gd",
-         "../gap/BasicFunctors.gi",
-         "../gap/Modules.gi",
+         "../gap/HomalgRingRelations.gd",
+         "../gap/HomalgRingRelations.gi",
          "../gap/Tools.gi",
          "../gap/Service.gi",
          "../gap/Basic.gi",
@@ -54,14 +29,6 @@ list := [
          "../gap/ResidueClassRingBasic.gi",
          "../gap/ResidueClassRingTools.gd",
          "../gap/ResidueClassRingTools.gi",
-         "../examples/RHom_Z.g",
-         "../examples/LTensorProduct_Z.g",
-         "../examples/ExtExt.g",
-         "../examples/Purity.g",
-         "../examples/Grothendieck_TorExt.g",
-         "../examples/TorExt.g",
-         "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
-         "../examples/Saturate.g",
          ];
 
 MyTestManualExamples :=
@@ -87,9 +54,9 @@ end;
 size := SizeScreen( );
 SizeScreen([80]);
 
-MyTestManualExamples( DirectoriesPackageLibrary( "homalg", "doc" )[1]![1], "homalg.xml", list );
+MyTestManualExamples( DirectoriesPackageLibrary( "MatricesForHomalg", "doc" )[1]![1], "MatricesForHomalg.xml", list );
 
-GAPDocManualLab( "homalg" );
+GAPDocManualLab( "MatricesForHomalg" );
 
 SizeScreen( size );
 

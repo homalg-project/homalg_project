@@ -2,7 +2,7 @@
 
 <!-- 
 
-  RingMaps.xml           homalg package documentation            Mohamed Barakat
+  RingMaps.xml           MatricesForHomalg package documentation            Mohamed Barakat
 
          Copyright (C) 2009, Mohamed Barakat, Universität des Saarlandes
 
@@ -49,15 +49,11 @@
 <#Include Label="Range:ringmap">
 <#Include Label="DegreeOfMorphism:ringmap">
 <#Include Label="CoordinateRingOfGraph">
-<#Include Label="KernelSubmodule:ringmap">
-<#Include Label="KernelEmb:ringmap">
 
 </Section>
 
 <Section Label="RingMaps:Operations and Functions">
 <Heading>Ring Maps: Operations and Functions</Heading>
-
-<#Include Label="Kernel:ringmap">
 
 </Section>
 

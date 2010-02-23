@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ResidueClassRingTools.gi    homalg package               Mohamed Barakat
+##  ResidueClassRingTools.gi    MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
 ##
@@ -45,7 +45,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                    rel := MatrixOfRelations( rel );
                    
-                   if IsHomalgRelationsOfRightModule( rel ) then
+                   if IsHomalgRingRelationsAsGeneratorsOfRightIdeal( rel ) then
                        rel := Involution( rel );	## I prefer row convention
                    fi;
                    

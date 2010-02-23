@@ -16,6 +16,7 @@
 	  <!ENTITY Macaulay2 '<Package>Macaulay2</Package>'>
 	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
 	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
 	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
@@ -43,13 +44,13 @@
 
 <!--
 
-  homalg.xml          homalg package documentation              Mohamed Barakat
+  MatricesForHomalg.xml          MatricesForHomalg package documentation              Mohamed Barakat
 
-  Copyright (C) 2007-2009, Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH-Aachen University
+  Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen University
 
 -->
 
-<Book Name="homalg">
+<Book Name="MatricesForHomalg">
 
 <#Include SYSTEM "title.xml">
 
@@ -59,38 +60,24 @@
 <!--  chapters of the book  -->
 <Body>
 
-<Index>&homalg;</Index>
+<Index>&MatricesForHomalg;</Index>
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
-<#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "Rings.xml">
 <#Include SYSTEM "RingMaps.xml">
 <#Include SYSTEM "Matrices.xml">
-<#Include SYSTEM "Relations.xml">
-<#Include SYSTEM "Generators.xml">
-<#Include SYSTEM "Modules.xml">
-<#Include SYSTEM "Maps.xml">
-<#Include SYSTEM "Complexes.xml">
-<#Include SYSTEM "ChainMaps.xml">
-<#Include SYSTEM "Bicomplexes.xml">
-<#Include SYSTEM "BigradedObjects.xml">
-<#Include SYSTEM "SpectralSequences.xml">
-<#Include SYSTEM "Functors.xml">
-<#Include SYSTEM "examples.xml">
+<#Include SYSTEM "RingRelations.xml">
 </Body>
 
-<#Include SYSTEM "Development.xml">
-<#Include SYSTEM "Idea.xml">
 <#Include SYSTEM "Basic.xml">
 <#Include SYSTEM "Tools.xml">
 <#Include SYSTEM "Logic.xml">
 <#Include SYSTEM "ResidueClassRingForHomalg.xml">
 <#Include SYSTEM "Debugging.xml">
-<#Include SYSTEM "Project.xml">
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="homalgBib.xml"/>
+<Bibliography Databases="MatricesForHomalgBib.xml"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

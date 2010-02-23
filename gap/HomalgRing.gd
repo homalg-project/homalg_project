@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgRing.gd               homalg package               Mohamed Barakat
+##  HomalgRing.gd               MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, RWTH Aachen
 ##

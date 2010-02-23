@@ -173,9 +173,9 @@ InstallValue( LogicalImplicationsForHomalgMatricesOverSpecialRings,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMatrices, IsHomalgMatrix );
+InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgMatrices, IsHomalgMatrix );
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMatricesOverSpecialRings, IsHomalgMatrix, IsHomalgRing );
+InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgMatricesOverSpecialRings, IsHomalgMatrix, IsHomalgRing );
 
 ####################################
 #
@@ -1593,7 +1593,7 @@ end );
 ##
 InstallMethod( RightDivide,
         "LIMAT: for homalg matrices (check input)",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ], 10001,
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( B, A, L )
     
@@ -1601,8 +1601,8 @@ InstallMethod( RightDivide,
         Error( "the first and the second matrix must have the same number of columns\n" );
     fi;
     
-    if NrColumns( A ) <> NrGenerators( L ) then
-        Error( "the number of columns of the first matrix and the number of generators of the last argment do not coincide\n" );
+    if NrColumns( A ) <> NrColumns( L ) then
+        Error( "the first and the third matrix must have the same number of columns\n" );
     fi;
     
     TryNextMethod( );
@@ -1612,11 +1612,11 @@ end );
 ##
 InstallMethod( RightDivide,
         "LIMAT: for homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
   function( B, A, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsHomalgMatrix, IsIdentityMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsHomalgMatrix, IsIdentityMatrix, IsHomalgMatrix )", "\033[0m" );
     
     return B;
     
@@ -1625,11 +1625,11 @@ end );
 ##
 InstallMethod( RightDivide,
         "LIMAT: for homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsHomalgRelationsOfLeftModule ],
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( B, A, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix, IsHomalgMatrix )", "\033[0m" );
     
     return HomalgZeroMatrix( NrRows( B ), NrRows( A ), HomalgRing( B ) );
     
@@ -1683,7 +1683,7 @@ end );
 ##
 InstallMethod( LeftDivide,
         "LIMAT: for homalg matrices (check input)",
-        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ], 10001,
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
   function( A, B, L )
     
@@ -1691,8 +1691,8 @@ InstallMethod( LeftDivide,
         Error( "the first and the second matrix must have the same number of rows\n" );
     fi;
     
-    if NrRows( A ) <> NrGenerators( L ) then
-        Error( "the number of rows of the first matrix and the number of generators of the last argment do not coincide\n" );
+    if NrRows( A ) <> NrRows( L ) then
+        Error( "the first and the third matrix must have the same number of rows\n" );
     fi;
     
     TryNextMethod( );
@@ -1702,11 +1702,11 @@ end );
 ##
 InstallMethod( LeftDivide,
         "LIMAT: for homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
+        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix, IsHomalgMatrix ],
         
   function( A, B, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsIdentityMatrix, IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsIdentityMatrix, IsHomalgMatrix, IsHomalgMatrix )", "\033[0m" );
     
     return B;
     
@@ -1715,11 +1715,11 @@ end );
 ##
 InstallMethod( LeftDivide,
         "LIMAT: for homalg matrices (IsZero)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsHomalgRelationsOfRightModule ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero, IsHomalgMatrix ],
         
   function( A, B, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix), IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix), IsHomalgMatrix )", "\033[0m" );
     
     return HomalgZeroMatrix( NrColumns( A ), NrColumns( B ), HomalgRing( B ) );
     

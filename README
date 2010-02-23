@@ -1,15 +1,15 @@
-    README file for the `homalg' GAP4 package
+    README file for the `MatricesForHomalg' GAP4 package
         
 To get the newest version of this GAP 4 package download one of the
 archive files
-    homalg-x.x.tar.gz
-    homalg-x.x.zoo
-    homalg-x.x.tar.bz2
-    homalg-x.x.zip
+    MatricesForHomalg-x.x.tar.gz
+    MatricesForHomalg-x.x.zoo
+    MatricesForHomalg-x.x.tar.bz2
+    MatricesForHomalg-x.x.zip
 and unpack it using 
-    gunzip homalg-x.x.tar.gz; tar xvf homalg-x.x.tar
+    gunzip MatricesForHomalg-x.x.tar.gz; tar xvf MatricesForHomalg-x.x.tar
 respectively
-    unzoo -x homalg-x.x.zoo
+    unzoo -x MatricesForHomalg-x.x.zoo
 and so on.
 
 (Note that if you use a browser like `netscape' for downloading the
@@ -18,13 +18,13 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `homalg'.
+of your GAP 4 installation. It creates a subdirectory called `MatricesForHomalg'.
 
 This completes the installation of the package.
 
 Testing the package is possible by invoking
 
-ReadPackage( "homalg", "maketest.g" );
+ReadPackage( "MatricesForHomalg", "maketest.g" );
 
 from within GAP.
 

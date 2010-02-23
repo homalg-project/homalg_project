@@ -2,7 +2,7 @@
 
 <!-- 
 
-  Logic.xml            homalg package documentation            Mohamed Barakat
+  Logic.xml            MatricesForHomalg package documentation            Mohamed Barakat
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
@@ -54,21 +54,6 @@ the attribute <C>Eval</C>.
 <#Include Label="Eval:HasEvalCompose">
 <#Include Label="Eval:HasEvalLeftInverse">
 <#Include Label="Eval:HasEvalRightInverse">
-
-</Section>
-
-<Section Label="Modules:LIMOD">
-<Heading>&LIMOD;: Logical Implications for Modules</Heading>
-
-</Section>
-
-<Section Label="Maps:LIMOR">
-<Heading>&LIMOR;: Logical Implications for Morphisms</Heading>
-
-</Section>
-
-<Section Label="Complexes:LICPX">
-<Heading>&LICPX;: Logical Implications for Complexes</Heading>
 
 </Section>
 

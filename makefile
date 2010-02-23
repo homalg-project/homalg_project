@@ -4,7 +4,7 @@ doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g VERSION \
-		doc/homalg.bib doc/*.xml \
+		doc/MatricesForHomalg.bib doc/*.xml \
 		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
 
@@ -15,10 +15,10 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "*~" homalg/doc/*.* homalg/doc/clean homalg/gap/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} homalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/MatricesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" MatricesForHomalg/doc/*.* MatricesForHomalg/doc/clean MatricesForHomalg/gap/*.{gi,gd} MatricesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} MatricesForHomalg/examples/*.g)
 
-WEBPOS=~/gap/pkg/homalg/public_html
-WEBPOS_FINAL=~/Sites/homalg-project/homalg
+WEBPOS=~/gap/pkg/MatricesForHomalg/public_html
+WEBPOS_FINAL=~/Sites/homalg-project/MatricesForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
@@ -26,9 +26,9 @@ towww: archive
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
 	cp PackageInfo.g ${WEBPOS}
-	cp README ${WEBPOS}/README.homalg
-	cp doc/manual.pdf ${WEBPOS}/homalg.pdf
+	cp README ${WEBPOS}/README.MatricesForHomalg
+	cp doc/manual.pdf ${WEBPOS}/MatricesForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/homalg.tar.gz ${WEBPOS}
+	cp ../tar/MatricesForHomalg.tar.gz ${WEBPOS}
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 

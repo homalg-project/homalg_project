@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ResidueClassRingForHomalg.gd   homalg package            Mohamed Barakat
+##  ResidueClassRingForHomalg.gd  MatricesForHomalg package  Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
 ##

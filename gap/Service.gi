@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Service.gi                  homalg package               Mohamed Barakat
+##  Service.gi                  MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -24,33 +24,33 @@ InstallGlobalFunction( ColoredInfoForService,
     
     if l{[ 1 .. 6 ]} = "RowRed" then
         l := 4;
-        color := HOMALG.color_BOE;	## Basic Operation: reduced Echelon form
+        color := HOMALG_MATRICES.color_BOE;	## Basic Operation: reduced Echelon form
     elif l{[ 1 .. 9 ]} = "ColumnRed" then
         l := 4;
-        color := HOMALG.color_BOE;	## Basic Operation: reduced Echelon form
+        color := HOMALG_MATRICES.color_BOE;	## Basic Operation: reduced Echelon form
     elif l{[1]} = "B" then
         l := 3;
-        color := HOMALG.color_BOB;	## Basic Operation: Basis
+        color := HOMALG_MATRICES.color_BOB;	## Basic Operation: Basis
     elif l{[ 1 .. 8 ]} = "ReducedB" then
         l := 3;
-        color := HOMALG.color_BOB;	## Basic Operation: reduced Basis
+        color := HOMALG_MATRICES.color_BOB;	## Basic Operation: reduced Basis
     elif l{[1]} = "D" then
         l := 2;
-        color := HOMALG.color_BOD;	## Basic Operation: DecideZero
+        color := HOMALG_MATRICES.color_BOD;	## Basic Operation: DecideZero
     elif l{[1]} = "S" then
         l := 2;
-        color := HOMALG.color_BOH;	## Basic Operation: solutions of Homogeneous system
+        color := HOMALG_MATRICES.color_BOH;	## Basic Operation: solutions of Homogeneous system
     elif l{[ 1 .. 9 ]} = "RelativeS" then
         l := 2;
-        color := HOMALG.color_BOH;	## Basic Operation: relative solutions of Homogeneous system
+        color := HOMALG_MATRICES.color_BOH;	## Basic Operation: relative solutions of Homogeneous system
     elif l{[ 1 .. 8 ]} = "ReducedS" then
         l := 2;
-        color := HOMALG.color_BOH;	## Basic Operation: reduced solutions of Homogeneous system
+        color := HOMALG_MATRICES.color_BOH;	## Basic Operation: reduced solutions of Homogeneous system
     fi;
     
     if arg[1] = "busy" then
         
-        s := Concatenation( HOMALG.color_busy, "BUSY>\033[0m ", color );
+        s := Concatenation( HOMALG_MATRICES.color_busy, "BUSY>\033[0m ", color );
         
         s := Concatenation( s, arg[2], "\033[0m \033[7m", color );
         
@@ -66,7 +66,7 @@ InstallGlobalFunction( ColoredInfoForService,
     
     else
         
-        s := Concatenation( HOMALG.color_done, "<DONE\033[0m ", color );
+        s := Concatenation( HOMALG_MATRICES.color_done, "<DONE\033[0m ", color );
         
         s := Concatenation( s, arg[2], "\033[0m \033[7m", color );
         
@@ -262,7 +262,7 @@ end );
 ##      <M>R^{(1 \times NrColumns( <A>M</A> ))}</M> is contained in <M>S</M> or not. And exactly like
 ##      the Gaussian (resp. Hermite) normal form when <M>R</M> is a field (resp. principal ideal ring), the row span of
 ##      the resulting matrix <M>B</M> coincides with the row span <M>S</M> of <A>M</A>, and computing <M>B</M> is typically
-##      the first step of such an algorithm. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      the first step of such an algorithm. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -376,7 +376,7 @@ end );
 ##      <M>R^{(NrRows( <A>M</A> ) \times 1)}</M> is contained in <M>S</M> or not. And exactly like
 ##      the Gaussian (resp. Hermite) normal form when <M>R</M> is a field (resp. principal ideal ring), the column span of
 ##      the resulting matrix <M>B</M> coincides with the column span <M>S</M> of <A>M</A>, and computing <M>B</M> is typically
-##      the first step of such an algorithm. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      the first step of such an algorithm. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -490,7 +490,7 @@ end );
 ##      for which the <M>i</M>-th row <M><A>C</A>^i</M> is equivalent to the <M>i</M>-th row <M><A>A</A>^i</M> of <A>A</A> modulo <M>S</M>,
 ##      i.e. <M><A>C</A>^i-<A>A</A>^i</M> is an element of the row span <M>S</M> of <A>B</A>. Moreover, the row <M><A>C</A>^i</M> is zero,
 ##      if and only if the row <M><A>A</A>^i</M> is an element of <M>S</M>. So <C>DecideZeroRows</C> decides which rows of <A>A</A>
-##      are zero modulo the rows of <A>B</A>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      are zero modulo the rows of <A>B</A>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -584,7 +584,7 @@ end );
 ##      modulo <M>S</M>, i.e. <M><A>C</A>_i-<A>A</A>_i</M> is an element of the column span <M>S</M> of <A>B</A>. Moreover,
 ##      the column <M><A>C</A>_i</M> is zero, if and only if the column <M><A>A</A>_i</M> is an element of <M>S</M>.
 ##      So <C>DecideZeroColumns</C> decides which columns of <A>A</A> are zero modulo the columns of <A>B</A>.
-##      (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -674,7 +674,7 @@ end );
 ##      The matrix of row syzygies <C>SyzygiesGeneratorsOfRows</C>( <A>M</A> ) is a matrix whose rows span
 ##      the left kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free module <M>R^{(1 \times NrRows( <A>M</A> ))}</M>
 ##      consisting of all rows <M>X</M> satisfying <M>X<A>M</A>=0</M>.
-##      (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -787,7 +787,7 @@ end );
 ##      The matrix of column syzygies <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A> ) is a matrix whose columns span
 ##      the right kernel of <A>M</A>, i.e. the <M>R</M>-submodule of the free module <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M>
 ##      consisting of all columns <M>X</M> satisfying <M><A>M</A>X=0</M>.
-##      (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -902,7 +902,7 @@ end );
 ##      The matrix of <E>relative</E> row syzygies <C>SyzygiesGeneratorsOfRows</C>( <A>M</A>, <A>M2</A> ) is a matrix
 ##      whose rows span the left kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free module
 ##      <M>R^{(1 \times NrRows( <A>M</A> ))}</M> consisting of all rows <M>X</M> satisfying <M>X<A>M</A>+Y<A>M2</A>=0</M>
-##      for some row <M>Y \in R^{(1 \times NrRows( <A>M2</A> ))}</M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      for some row <M>Y \in R^{(1 \times NrRows( <A>M2</A> ))}</M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1017,7 +1017,7 @@ end );
 ##      The matrix of <E>relative</E> column syzygies <C>SyzygiesGeneratorsOfColumns</C>( <A>M</A>, <A>M2</A> ) is a matrix
 ##      whose columns span the right kernel of <A>M</A> modulo <A>M2</A>, i.e. the <M>R</M>-submodule of the free module
 ##      <M>R^{(NrColumns( <A>M</A> ) \times 1)}</M> consisting of all columns <M>X</M> satisfying <M><A>M</A>X+<A>M2</A>Y=0</M>
-##      for some column <M>Y \in R^{(NrColumns( <A>M2</A> ) \times 1)}</M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      for some column <M>Y \in R^{(NrColumns( <A>M2</A> ) \times 1)}</M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1134,7 +1134,7 @@ end );
 ##      <C>SyzygiesGeneratorsOfRows</C>( <C>ReducedBasisOfRowModule</C>( <A>M</A> ) ) contains no units. This can easily
 ##      be achieved starting from <M>B:=</M><C>BasisOfRowModule</C>( <A>M</A> )
 ##      (and using <Ref Oper="GetColumnIndependentUnitPositions" Label="for matrices"/> applied to the matrix of row syzygies of <M>B</M>,
-##       etc). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##       etc). (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1257,7 +1257,7 @@ end );
 ##      <C>SyzygiesGeneratorsOfColumns</C>( <C>ReducedBasisOfColumnModule</C>( <A>M</A> ) ) contains no units. This can easily
 ##      be achieved starting from <M>B:=</M><C>BasisOfColumnModule</C>( <A>M</A> )
 ##      (and using <Ref Oper="GetRowIndependentUnitPositions" Label="for matrices"/> applied to the matrix of column syzygies of <M>B</M>,
-##       etc.). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##       etc.). (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1380,7 +1380,7 @@ end );
 ##      <C>SyzygiesGeneratorsOfRows</C>( <C>ReducedSyzygiesGeneratorsOfRows</C>( <A>M</A> ) ) contains no units.
 ##      This can easily be achieved starting from <M>C:=</M><C>SyzygiesGeneratorsOfRows</C>( <A>M</A> )
 ##      (and using <Ref Oper="GetColumnIndependentUnitPositions" Label="for matrices"/> applied to the matrix of row syzygies of <M>C</M>,
-##       etc.). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##       etc.). (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1487,7 +1487,7 @@ end );
 ##      <C>SyzygiesGeneratorsOfColumns</C>( <C>ReducedSyzygiesGeneratorsOfColumns</C>( <A>M</A> ) ) contains no units.
 ##      This can easily be achieved starting from <M>C:=</M><C>SyzygiesGeneratorsOfColumns</C>( <A>M</A> )
 ##      (and using <Ref Oper="GetRowIndependentUnitPositions" Label="for matrices"/> applied to the matrix of column syzygies of <M>C</M>,
-##       etc.). (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##       etc.). (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1594,7 +1594,7 @@ end );
 ##    <Description>
 ##      Returns <M>B:=</M><C>BasisOfRowModule</C>( <A>M</A> ) and assigns the <E>void</E> matrix <A>T</A>
 ##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
-##      <M>B = <A>T</A> <A>M</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      <M>B = <A>T</A> <A>M</A></M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1727,7 +1727,7 @@ end );
 ##    <Description>
 ##      Returns <M>B:=</M><C>BasisOfRowModule</C>( <A>M</A> ) and assigns the <E>void</E> matrix <A>T</A>
 ##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
-##      <M>B = <A>M</A> <A>T</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      <M>B = <A>M</A> <A>T</A></M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1859,7 +1859,7 @@ end );
 ##    <Description>
 ##      Returns <M>M:=</M><C>DecideZeroRows</C>( <A>A</A>, <A>B</A> ) and assigns the <E>void</E> matrix <A>T</A>
 ##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
-##      <M>M = <A>A</A> + <A>T</A><A>B</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      <M>M = <A>A</A> + <A>T</A><A>B</A></M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1966,7 +1966,7 @@ end );
 ##    <Description>
 ##      Returns <M>M:=</M><C>DecideZeroColumns</C>( <A>A</A>, <A>B</A> ) and assigns the <E>void</E> matrix <A>T</A>
 ##      (&see; <Ref Func="HomalgVoidMatrix" Label="constructor for void matrices"/>) such that
-##      <M>M = <A>A</A> + <A>B</A><A>T</A></M>. (&see; Appendix <Ref Chap="homalg-Idea"/>)
+##      <M>M = <A>A</A> + <A>B</A><A>T</A></M>. (&see; Appendix <Ref Chap="Basic_Operations"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

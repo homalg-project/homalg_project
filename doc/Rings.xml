@@ -2,9 +2,9 @@
 
 <!-- 
 
-  Rings.xml            homalg package documentation            Mohamed Barakat
+  Rings.xml            MatricesForHomalg package documentation            Mohamed Barakat
 
-         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+         Copyright (C) 2007-2010, Mohamed Barakat, RWTH-Aachen University
 
 -->
 
@@ -27,16 +27,16 @@
 <Section Label="Rings:Constructors">
 <Heading>Rings: Constructors</Heading>
 
-This section describes how to construct rings for use with &homalg;,
+This section describes how to construct rings for use with &MatricesForHomalg;,
 which exploit the &GAP4;-built-in abilities to perform the necessary
 ring operations. By this we also mean necessary matrix operations over
-such rings. For the purposes of &homalg; only the ring of integers is
+such rings. For the purposes of &MatricesForHomalg; only the ring of integers is
 properly supported in &GAP4;. The &GAP4; extension packages &Gauss;
 and &GaussForHomalg; extend these built-in abilities to operations
 with sparse matrices over the ring <M>&ZZ; / p^n</M> for <M>p</M>
 prime and <M>n</M> positive.<P/>
 
-If a ring <M>R</M> is supported in &homalg; any of its residue class
+If a ring <M>R</M> is supported in &MatricesForHomalg; any of its residue class
 rings <M>R/I</M> is supported as well, provided the ideal <M>I</M> of
 relations admits a finite set of generators as a left resp. right
 ideal (&see; <Ref Oper="\/"

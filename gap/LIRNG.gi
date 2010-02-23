@@ -318,7 +318,7 @@ AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings, IsHomalgRing );
+InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgRings, IsHomalgRing );
 
 ##
 InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );

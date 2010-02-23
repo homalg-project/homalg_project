@@ -2,23 +2,23 @@
 
 <!-- 
 
-  Debugging.xml            homalg package documentation            Mohamed Barakat
+  Debugging.xml            MatricesForHomalg package documentation            Mohamed Barakat
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 -->
 
 <Appendix Label="Debugging">
-<Heading>Debugging &homalg;</Heading>
+<Heading>Debugging &MatricesForHomalg;</Heading>
 
 Beside the &GAP; builtin debugging facilities (&see;
-<Ref Sect="Debugging" BookName="Tutorial"/>) &homalg; provides two
+<Ref Sect="Debugging" BookName="Tutorial"/>) &MatricesForHomalg; provides two
 ways to debug the computations.
 
 <Section Label="SetAssertionLevel">
 <Heading>Increase the assertion level</Heading>
 
-&homalg; comes with numerous builtin assertion checks. They are
+&MatricesForHomalg; comes with numerous builtin assertion checks. They are
 activated if the user increases the assertion level using <Br/><Br/>
 
 <C>SetAssertionLevel</C>( <A>level</A> ); <Br/><Br/>
@@ -39,21 +39,6 @@ activated if the user increases the assertion level using <Br/><Br/>
 </Row>
 <Row><Item></Item><Item></Item></Row>
 <Row>
-  <Item>1</Item>
-  <Item><Q>high</Q>-level homological assertions are checked</Item>
-</Row>
-<Row><Item></Item><Item></Item></Row>
-<Row>
-  <Item>2</Item>
-  <Item><Q>mid</Q>-level homological assertions are checked</Item>
-</Row>
-<Row><Item></Item><Item></Item></Row>
-<Row>
-  <Item>3</Item>
-  <Item><Q>low</Q>-level homological assertions are checked</Item>
-</Row>
-<Row><Item></Item><Item></Item></Row>
-<Row>
   <Item>4</Item>
   <Item>assertions about basic matrix operations are checked (&see;
     Appendix <Ref Chap="Basic_Operations"/>)</Item>
@@ -66,16 +51,16 @@ activated if the user increases the assertion level using <Br/><Br/>
 <HorLine/>
 </Table>
 
-In particular, if &homalg; delegates matrix operations to an external
-system then <C>SetAssertionLevel</C>( 4 ); can be used to let &homalg;
+In particular, if &MatricesForHomalg; delegates matrix operations to an external
+system then <C>SetAssertionLevel</C>( 4 ); can be used to let &MatricesForHomalg;
 debug the external system. <Br/><Br/>
 
 <#Include Label="asserts">
 
 </Section>
 
-<Section Label="use homalgMode">
-<Heading>Use <C>homalgMode</C></Heading>
+<Section Label="using homalgMode">
+<Heading><C>Using homalgMode</C></Heading>
 
 <#Include Label="homalgMode">
 

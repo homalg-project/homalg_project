@@ -34,9 +34,6 @@ InstallValue( LogicalImplicationsForHomalgRingMaps,
           [ IsEpimorphism,
             "implies", IsMorphism ],
           
-          [ IsEpimorphism,
-            "implies", IsGeneralizedEpimorphism ],
-          
           [ IsAutomorphism,
             "implies", IsIsomorphism ],
           
@@ -63,9 +60,9 @@ InstallValue( LogicalImplicationsForHomalgRingSelfMaps,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRingMaps, IsHomalgRingMap );
+InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgRingMaps, IsHomalgRingMap );
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRingSelfMaps, IsHomalgRingSelfMap );
+InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgRingSelfMaps, IsHomalgRingSelfMap );
 
 ####################################
 #
@@ -75,7 +72,7 @@ InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRingSelfMaps, I
 
 ##
 InstallImmediateMethod( IsAutomorphism,
-        IsHomalgMorphism, 0,
+        IsHomalgRingMap, 0,
         
   function( phi )
     
@@ -94,20 +91,9 @@ end );
 ####################################
 
 ##
-InstallMethod( IsMonomorphism,
-        "LIMAP: for homalg ring maps",
-        [ IsHomalgRingMapRep ],
-        
-  function( phi )
-    
-    return IsMorphism( phi ) and IsZero( Kernel( phi ) );
-    
-end );
-
-##
 InstallMethod( IsIsomorphism,
         "LIMAP: for homalg morphisms",
-        [ IsHomalgMorphism ],
+        [ IsHomalgRingMap ],
         
   function( phi )
     
@@ -209,7 +195,7 @@ InstallMethod( CoordinateRingOfGraph,
         rel := UnionOfRows( rel, relT );
     fi;
     
-    rel := HomalgRelationsForLeftModule( rel );
+    rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );
     
     G := ST / rel;
     
@@ -217,17 +203,6 @@ InstallMethod( CoordinateRingOfGraph,
     G!.indetsT := List( indetsT, x -> x / ST );
     
     return G;
-    
-end );
-
-##
-InstallMethod( KernelEmb,
-        "for homalg ring maps",
-        [ IsHomalgRingMap ],
-        
-  function( phi )
-    
-    return EmbeddingInSuperObject( KernelSubmodule( phi ) );
     
 end );
 

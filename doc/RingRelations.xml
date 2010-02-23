@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Relations.xml            MatricesForHomalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="RingRelations">
+<Heading>Ring Relations</Heading>
+
+<Section Label="RingRelations:Category">
+<Heading>Ring Relations: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgRingRelations">
+<#Include Label="IsHomalgRingRelationsAsGeneratorsOfLeftIdeal">
+<#Include Label="IsHomalgRingRelationsAsGeneratorsOfRightIdeal">
+
+<#Include Label="IsRingRelationsRep">
+
+</Section>
+
+<Section Label="RingRelations:Constructors">
+<Heading>Ring Relations: Constructors</Heading>
+
+</Section>
+
+<Section Label="RingRelations:Properties">
+<Heading>Ring Relations: Properties</Heading>
+
+<#Include Label="CanBeUsedToDecideZero">
+<#Include Label="IsInjectivePresentation">
+
+</Section>
+
+<Section Label="RingRelations:Attributes">
+<Heading>Ring Relations: Attributes</Heading>
+
+</Section>
+
+<Section Label="RingRelations:Operations">
+<Heading>Ring Relations: Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

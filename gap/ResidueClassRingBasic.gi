@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ResidueClassRingBasic.gi    homalg package               Mohamed Barakat
+##  ResidueClassRingBasic.gi    MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2009 Mohamed Barakat, Universität des Saarlandes
 ##
@@ -244,7 +244,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    rel := MatrixOfRelations( ring_rel );
                    
-                   if IsHomalgRelationsOfRightModule( ring_rel ) then
+                   if IsHomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel ) then
                        rel := Involution( rel );
                    fi;
                    
@@ -286,7 +286,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    rel := MatrixOfRelations( ring_rel );
                    
-                   if IsHomalgRelationsOfLeftModule( ring_rel ) then
+                   if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel ) then
                        rel := Involution( rel );
                    fi;
                    

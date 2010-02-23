@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Integers.gi                 homalg package               Mohamed Barakat
+##  Integers.gi                 MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -175,4 +175,4 @@ InstallMethod( CreateHomalgTable,
 end );
 
 ## create a globally defined ring of integers
-HOMALG.ZZ := HomalgRingOfIntegers( );
+HOMALG_MATRICES.ZZ := HomalgRingOfIntegers( );

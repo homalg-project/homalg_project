@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  homalg.gi                   homalg package               Mohamed Barakat
+##  homalg.gi                   MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -29,49 +29,10 @@ DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedObjectRep",
         IsHomalgRingOrObject,
         [ ] );
 
-##  <#GAPDoc Label="IsFinitelyPresentedObjectRep">
-##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedObjectRep"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; representation of finitley presented &homalg; objects. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,
-##       which is a subrepresentation of the &GAP; representations
-##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsFinitelyPresentedObjectRep",
-        IsHomalgObject and IsHomalgRingOrFinitelyPresentedObjectRep,
-        [ ] );
-
-##  <#GAPDoc Label="IsFinitelyPresentedSubobjectRep">
-##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedSubobjectRep"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; representation of finitley presented &homalg; objects. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,
-##       which is a subrepresentation of the &GAP; representations
-##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsFinitelyPresentedSubobjectRep",
-        IsHomalgObject and IsHomalgRingOrFinitelyPresentedObjectRep,
-        [ ] );
-
 # a new representation for the GAP-category IsHomalgObject
 # which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep:
 DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
         IsHomalgRingOrFinitelyPresentedObjectRep,
-        [ ] );
-
-# a new representation for the GAP-category IsHomalgMorphism:
-DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
-        IsHomalgMorphism,
         [ ] );
 
 # a new representation for the GAP-category IsContainerForWeakPointers:
@@ -102,7 +63,7 @@ BindGlobal( "TheTypeContainerForWeakPointers",
 
 # a central place for configuration variables:
 
-InstallValue( HOMALG,
+InstallValue( HOMALG_MATRICES,
         rec(
             TotalRuntimes := 0,
             OtherInternalMatrixTypes := [ ],
@@ -171,25 +132,25 @@ InstallGlobalFunction( homalgTotalRuntimes,
     
     r := Runtimes( );
     
-    HOMALG.TotalRuntimes := r.user_time;
+    HOMALG_MATRICES.TotalRuntimes := r.user_time;
     
     if IsBound( r.system_time ) then
-        HOMALG.TotalRuntimes := HOMALG.TotalRuntimes + r.system_time;
+        HOMALG_MATRICES.TotalRuntimes := HOMALG_MATRICES.TotalRuntimes + r.system_time;
     fi;
     
     if IsBound( r.user_time_children ) then
-        HOMALG.TotalRuntimes := HOMALG.TotalRuntimes + r.user_time_children;
+        HOMALG_MATRICES.TotalRuntimes := HOMALG_MATRICES.TotalRuntimes + r.user_time_children;
     fi;
     
     if IsBound( r.system_time_children ) then
-        HOMALG.TotalRuntimes := HOMALG.TotalRuntimes + r.system_time_children;
+        HOMALG_MATRICES.TotalRuntimes := HOMALG_MATRICES.TotalRuntimes + r.system_time_children;
     fi;
     
     if Length( arg ) = 0 then
-        return HOMALG.TotalRuntimes;
+        return HOMALG_MATRICES.TotalRuntimes;
     fi;
     
-    return Concatenation( StringTime( HOMALG.TotalRuntimes - arg[1] ), " h" );
+    return Concatenation( StringTime( HOMALG_MATRICES.TotalRuntimes - arg[1] ), " h" );
     
 end );
 
@@ -375,112 +336,8 @@ InstallGlobalFunction( LogicalImplicationsForOneHomalgObject,
     
 end );
 
-## a global function for logical implications:
-InstallGlobalFunction( LogicalImplicationsForTwoHomalgObjects,
-  function( statement, obj_filter, subobj_filter )
-    local len, prop_obj, prop_subobj, prop, subobject_getter, len_obj, len_subobj;
-    
-    len := Length( statement );
-    
-    if len <> 5 then
-        Error( "the first argument must be a list of length 5\n" );
-    fi;
-    
-    prop_obj := statement[1];
-    prop_subobj := statement[3];
-    
-    prop := statement[5];
-    
-    subobject_getter := statement[2];
-    
-    len_obj := Length( prop_obj );
-    len_subobj := Length( prop_subobj );
-    
-    if len_obj = 1 and len_subobj = 1 then
-        
-        prop_obj := prop_obj[1];
-        prop_subobj := prop_subobj[1];
-        
-        if IsList( prop_subobj ) then
-            len_subobj := Length( prop_subobj );
-        fi;
-        
-        if len_subobj = 3 then
-            
-            InstallImmediateMethod( prop,
-                    obj_filter and prop_obj and IsHomalgLeftObjectOrMorphismOfLeftObjects, 0,
-                    
-              function( o )
-                local subobj;
-                
-                subobj := subobject_getter( o );
-                
-                if Tester( prop_subobj[1] )( subobj ) and prop_subobj[1]( subobj ) then
-                    return true;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-            InstallImmediateMethod( prop,
-                    obj_filter and prop_obj and IsHomalgRightObjectOrMorphismOfRightObjects, 0,
-                    
-              function( o )
-                local subobj;
-                
-                subobj := subobject_getter( o );
-                
-                if Tester( prop_subobj[2] )( subobj ) and prop_subobj[2]( subobj ) then
-                    return true;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-            InstallImmediateMethod( prop_obj,
-                    obj_filter and Tester( prop ) and IsHomalgLeftObjectOrMorphismOfLeftObjects, 0,
-                    
-              function( o )
-                local subobj;
-                
-                subobj := subobject_getter( o );
-                
-                if Tester( prop_subobj[1] )( subobj ) and prop_subobj[1]( subobj ) and
-                   not prop( o ) then
-                    return false;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-            InstallImmediateMethod( prop_obj,
-                    obj_filter and Tester( prop ) and IsHomalgRightObjectOrMorphismOfRightObjects, 0,
-                    
-              function( o )
-                local subobj;
-                
-                subobj := subobject_getter( o );
-                
-                if Tester( prop_subobj[2] )( subobj ) and prop_subobj[2]( subobj ) and
-                   not prop( o ) then
-                    return false;
-                fi;
-                
-                TryNextMethod( );
-                
-            end );
-            
-        fi;
-        
-    fi;
-    
-end );
-
 ##
-InstallGlobalFunction( InstallLogicalImplicationsForHomalg,
+InstallGlobalFunction( InstallLogicalImplicationsForHomalgBasicObjects,
   function( arg )
     local nargs, properties, filter, subobj_filter, statement;
     
@@ -507,7 +364,7 @@ InstallGlobalFunction( InstallLogicalImplicationsForHomalg,
         
         for statement in properties do;
             
-            LogicalImplicationsForTwoHomalgObjects( statement, filter, subobj_filter );
+            LogicalImplicationsForTwoHomalgBasicObjects( statement, filter, subobj_filter );
             
         od;
         
@@ -592,45 +449,6 @@ InstallGlobalFunction( InstallLeftRightAttributesForHomalg,
         
         LeftRightAttributesForHomalg( attribute, filter );
         
-    od;
-    
-end );
-
-## a global function for logical implications of subobjects:
-InstallGlobalFunction( LogicalImplicationsForHomalgSubobjects,
-  function( prop_attr, filter_subobject, test_underlying_object, fetch_underlying_object )
-    
-    InstallImmediateMethod( prop_attr,
-            filter_subobject and test_underlying_object, 0,
-            
-      function( o )
-        if Tester( prop_attr )( fetch_underlying_object( o ) ) then
-            return prop_attr( fetch_underlying_object( o ) );
-        fi;
-        
-        TryNextMethod( );
-        
-      end );
-    
-    InstallMethod( prop_attr,
-        "LIMOD: for homalg submodules",
-        [ filter_subobject ],
-        
-      function( o )
-        
-        return prop_attr( fetch_underlying_object( o ) );
-        
-      end );
-    
-end );
-
-## a global function for logical implications of subobjects:
-InstallGlobalFunction( InstallLogicalImplicationsForHomalgSubobjects,
-  function( properties_attributes, filter_subobject, test_underlying_object, fetch_underlying_object )
-    local s;
-    
-    for s in properties_attributes do
-        LogicalImplicationsForHomalgSubobjects( s, filter_subobject, test_underlying_object, fetch_underlying_object );
     od;
     
 end );
@@ -792,7 +610,7 @@ InstallGlobalFunction( homalgMode,
     fi;
     
     if mode = "default" then
-        HOMALG.color_display := false;
+        HOMALG_MATRICES.color_display := false;
         SetInfoLevel( InfoCOLEM, 1 );
         SetInfoLevel( InfoLIMAT, 1 );
         SetInfoLevel( InfoHomalgBasicOperations, 1 );
@@ -803,7 +621,7 @@ InstallGlobalFunction( homalgMode,
         SetInfoLevel( InfoHomalgBasicOperations, 4 );
         homalgMode( "logic" );
     elif mode = "logic" then
-        HOMALG.color_display := true;
+        HOMALG_MATRICES.color_display := true;
         SetInfoLevel( InfoCOLEM, 2 );
         SetInfoLevel( InfoLIMAT, 2 );
     fi;

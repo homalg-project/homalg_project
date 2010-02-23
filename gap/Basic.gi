@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Basic.gi                    homalg package               Mohamed Barakat
+##  Basic.gi                    MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -89,14 +89,10 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg matrices",
-        [ IsRingElement, IsHomalgRelations ],
+        [ IsRingElement, IsHomalgRingRelations ],
         
   function( r, rel )
     local r_mat, red;
-    
-    if NrGenerators( rel ) <> 1 then
-        Error( "the second argument is not a set of relations on a single generator\n" );
-    fi;
     
     return DecideZero( r, MatrixOfRelations( rel ) );
     

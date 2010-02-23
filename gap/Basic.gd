@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Basic.gd                    homalg package               Mohamed Barakat
+##  Basic.gd                    MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -32,7 +32,7 @@ DeclareOperation( "DecideZero",
         [ IsRingElement, IsHomalgMatrix ] );
 
 DeclareOperation( "DecideZero",
-        [ IsRingElement, IsHomalgRelations ] );
+        [ IsRingElement, IsHomalgRingRelations ] );
 
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
