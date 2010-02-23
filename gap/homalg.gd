@@ -13,9 +13,6 @@
 DeclareInfoClass( "InfoHomalg" );
 SetInfoLevel( InfoHomalg, 1 );
 
-DeclareInfoClass( "InfoHomalgBasicOperations" );
-SetInfoLevel( InfoHomalgBasicOperations, 1 );
-
 # a central place for configurations:
 DeclareGlobalVariable( "HOMALG" );
 
@@ -25,16 +22,7 @@ DeclareGlobalVariable( "HOMALG" );
 #
 ####################################
 
-# seven new categories:
-
-DeclareCategory( "IsHomalgRingOrObjectOrMorphism",	## this is the super super GAP-category which will include the GAP-categories IsHomalgRingOrObject and IsHomalgObjectOrMorphism:
-        IsAttributeStoringRep );			## we need this GAP-category for convenience
-
-DeclareCategory( "IsHomalgRingOrObject",	## this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
-        IsHomalgRingOrObjectOrMorphism );
-
-DeclareCategory( "IsHomalgRingOrModule",	## this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule:
-        IsHomalgRingOrObject );			## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
+# four new categories:
 
 DeclareCategory( "IsHomalgObjectOrMorphism",	## this is the super GAP-category which will include the GAP-categories IsHomalgModule, IsHomalgMap, IsHomalgComplex and IsHomalgChainMap:
         IsExtLElement and			## with this GAP-category we can have a common declaration for things like OnLessGenerators, BasisOfModule, DecideZero
@@ -58,11 +46,6 @@ DeclareCategory( "IsHomalgLeftObjectOrMorphismOfLeftObjects",
 
 DeclareCategory( "IsHomalgRightObjectOrMorphismOfRightObjects",
         IsHomalgObjectOrMorphism );
-
-# a new GAP-category:
-
-DeclareCategory( "IsContainerForWeakPointers",
-        IsComponentObjectRep );
 
 ####################################
 #
@@ -139,35 +122,13 @@ DeclareAttribute( "AsKernel",
 #
 ####################################
 
-DeclareGlobalFunction( "ContainerForWeakPointers" );
-
-DeclareGlobalFunction( "homalgTimeToString" );
-
-DeclareGlobalFunction( "homalgTotalRuntimes" );
-
-DeclareGlobalFunction( "AddLeftRightLogicalImplicationsForHomalg" );
-
-DeclareGlobalFunction( "LogicalImplicationsForOneHomalgObject" );
-
 DeclareGlobalFunction( "LogicalImplicationsForTwoHomalgObjects" );
 
-DeclareGlobalFunction( "InstallLogicalImplicationsForHomalg" );
-
-DeclareGlobalFunction( "LeftRightAttributesForHomalg" );
-
-DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
+DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgObjects" );
 
 DeclareGlobalFunction( "LogicalImplicationsForHomalgSubobjects" );
 
 DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgSubobjects" );
-
-DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
-
-DeclareGlobalFunction( "AddToAhomalgTable" );
-
-DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
-
-DeclareGlobalFunction( "homalgMode" );
 
 # basic operations:
 
@@ -197,13 +158,4 @@ DeclareOperation( "OnLessGenerators",
 
 DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgObjectOrMorphism ] );
-
-DeclareOperation( "homalgLaTeX",
-        [ IsObject ] );
-
-DeclareOperation( "ExamplesForHomalg",
-        [ ] );
-
-DeclareOperation( "ExamplesForHomalg",
-        [ IsInt ] );
 

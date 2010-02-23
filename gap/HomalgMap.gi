@@ -1738,7 +1738,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgMap and IsMonomorphism ], 996,
+        [ IsHomalgMap and IsMonomorphism ], 896,
         
   function( o )
     
@@ -1757,7 +1757,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgMap and IsEpimorphism ], 997,
+        [ IsHomalgMap and IsEpimorphism ], 897,
         
   function( o )
     
@@ -1776,7 +1776,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgMap and IsSplitMonomorphism ], 998,
+        [ IsHomalgMap and IsSplitMonomorphism ], 1998,
         
   function( o )
     
@@ -1795,7 +1795,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgMap and IsSplitEpimorphism ], 999,
+        [ IsHomalgMap and IsSplitEpimorphism ], 1999,
         
   function( o )
     
@@ -1814,7 +1814,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgMap and IsIsomorphism ], 1000,
+        [ IsHomalgMap and IsIsomorphism ], 2000,
         
   function( o )
     
@@ -1833,7 +1833,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgMap and IsZero ], 1001,
+        [ IsHomalgMap and IsZero ], 2001,
         
   function( o )
     
@@ -1943,7 +1943,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgSelfMap and IsSplitEpimorphism ], 998,
+        [ IsHomalgSelfMap and IsSplitEpimorphism ], 2998,
         
   function( o )
     
@@ -1962,7 +1962,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgSelfMap and IsAutomorphism ], 999,
+        [ IsHomalgSelfMap and IsAutomorphism ], 2999,
         
   function( o )
     
@@ -1981,7 +1981,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgSelfMap and IsIdentityMorphism ], 1000,
+        [ IsHomalgSelfMap and IsIdentityMorphism ], 3000,
         
   function( o )
     
@@ -2000,7 +2000,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg maps",
-        [ IsHomalgSelfMap and IsZero ], 1001,
+        [ IsHomalgSelfMap and IsZero ], 3001,
         
   function( o )
     

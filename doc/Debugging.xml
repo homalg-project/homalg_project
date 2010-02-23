@@ -56,7 +56,7 @@ activated if the user increases the assertion level using <Br/><Br/>
 <Row>
   <Item>4</Item>
   <Item>assertions about basic matrix operations are checked (&see;
-    Appendix <Ref Chap="Basic_Operations"/>)</Item>
+    Appendices of the &MatricesForHomalg; package)</Item>
 </Row>
 <Row>
   <Item></Item>
@@ -68,16 +68,7 @@ activated if the user increases the assertion level using <Br/><Br/>
 
 In particular, if &homalg; delegates matrix operations to an external
 system then <C>SetAssertionLevel</C>( 4 ); can be used to let &homalg;
-debug the external system. <Br/><Br/>
-
-<#Include Label="asserts">
-
-</Section>
-
-<Section Label="use homalgMode">
-<Heading>Use <C>homalgMode</C></Heading>
-
-<#Include Label="homalgMode">
+debug the external system.
 
 </Section>
 

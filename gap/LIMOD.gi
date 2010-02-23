@@ -125,9 +125,9 @@ InstallValue( LogicalImplicationsForHomalgModulesOverSpecialRings,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgModules, IsHomalgModule );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModules, IsHomalgModule );
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgModulesOverSpecialRings, IsHomalgModule, IsHomalgRing );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModulesOverSpecialRings, IsHomalgModule, IsHomalgRing );
 
 InstallLogicalImplicationsForHomalgSubobjects(
         List( LIMOD.intrinsic_properties, ValueGlobal ),
@@ -1861,9 +1861,9 @@ InstallMethod( ResidueClassRing,
     ring_rel := MatrixOfGenerators( J );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        ring_rel := HomalgRelationsForLeftModule( ring_rel );
+        ring_rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel );
     else
-        ring_rel := HomalgRelationsForRightModule( ring_rel );
+        ring_rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel );
     fi;
     
     R := A / ring_rel;

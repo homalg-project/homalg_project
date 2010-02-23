@@ -136,11 +136,11 @@ InstallValue( LogicalImplicationsForHomalgChainMaps,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgMorphisms, IsHomalgMorphism );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgMorphisms, IsHomalgMorphism );
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgEndomorphisms, IsHomalgEndomorphism );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgEndomorphisms, IsHomalgEndomorphism );
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgChainMaps, IsHomalgChainMap );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgChainMaps, IsHomalgChainMap );
 
 ####################################
 #

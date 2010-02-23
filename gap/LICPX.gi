@@ -78,7 +78,7 @@ InstallValue( LogicalImplicationsForHomalgComplexes,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgComplexes, IsHomalgComplex );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgComplexes, IsHomalgComplex );
 
 ####################################
 #

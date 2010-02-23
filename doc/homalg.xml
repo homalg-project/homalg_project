@@ -15,6 +15,7 @@
 	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
 	  <!ENTITY Macaulay2 '<Package>Macaulay2</Package>'>
 	  <!ENTITY IO '<Package>IO</Package>'>
+	  <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
 	  <!ENTITY homalg "<Package>homalg</Package>">
 	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
@@ -64,9 +65,7 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
-<#Include SYSTEM "Rings.xml">
 <#Include SYSTEM "RingMaps.xml">
-<#Include SYSTEM "Matrices.xml">
 <#Include SYSTEM "Relations.xml">
 <#Include SYSTEM "Generators.xml">
 <#Include SYSTEM "Modules.xml">
@@ -80,12 +79,9 @@
 <#Include SYSTEM "examples.xml">
 </Body>
 
-<#Include SYSTEM "Development.xml">
 <#Include SYSTEM "Idea.xml">
-<#Include SYSTEM "Basic.xml">
-<#Include SYSTEM "Tools.xml">
+<#Include SYSTEM "Development.xml">
 <#Include SYSTEM "Logic.xml">
-<#Include SYSTEM "ResidueClassRingForHomalg.xml">
 <#Include SYSTEM "Debugging.xml">
 <#Include SYSTEM "Project.xml">
 <#Include SYSTEM "appendix.xml">

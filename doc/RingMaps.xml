@@ -11,44 +11,9 @@
 <Chapter Label="RingMaps">
 <Heading>Ring Maps</Heading>
 
-<#Include Label="RingMaps:intro">
-
-<Section Label="RingMaps:">
-<Heading>Ring Maps:  Category and Representations</Heading>
-
-<#Include Label="IsHomalgRingMap">
-<#Include Label="IsHomalgRingSelfMap">
-
-<#Include Label="IsHomalgRingMapRep">
-
-</Section>
-
-<Section Label="RingMaps:Constructors">
-<Heading>Ring Maps: Constructors</Heading>
-
-<#Include Label="RingMap">
-
-</Section>
-
-<Section Label="RingMaps:Properties">
-<Heading>Ring Maps: Properties</Heading>
-
-<#Include Label="IsMorphism:ringmap">
-<#Include Label="IsIdentityMorphism:ringmap">
-<#Include Label="IsMonomorphism:ringmap">
-<#Include Label="IsEpimorphism:ringmap">
-<#Include Label="IsIsomorphism:ringmap">
-<#Include Label="IsAutomorphism:ringmap">
-
-</Section>
-
 <Section Label="RingMaps:Attributes">
 <Heading>Ring Maps: Attributes</Heading>
 
-<#Include Label="Source:ringmap">
-<#Include Label="Range:ringmap">
-<#Include Label="DegreeOfMorphism:ringmap">
-<#Include Label="CoordinateRingOfGraph">
 <#Include Label="KernelSubmodule:ringmap">
 <#Include Label="KernelEmb:ringmap">
 

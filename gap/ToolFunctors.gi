@@ -700,10 +700,10 @@ end );
 # beta is surjective ( cf. [BLH, 2.5,(13): colift] )
 #
 #     L
-#     |  ^
-# (eta0=?)  \ (eta)
-#     |        \
-#     v           \
+#     ^  ^
+#     |     \ (eta)
+#  (eta0=?)    \
+#     |           \
 #     C <-(epsilon)- N
 #
 #

@@ -18,7 +18,7 @@ files.
 
 <Section Label="ModuleInternals">
 
-<Heading>Rings, Ring Maps, Matrices, Relations, and Generators</Heading>
+<Heading>Relations and Generators</Heading>
 
 <Table Align="l|l">
 <Caption><E>The &homalg; package files</E></Caption>
@@ -28,42 +28,8 @@ files.
 <HorLine/>
 
 <Row>
-  <Item><F>homalg</F></Item>
-  <Item>definitions of the basic &GAP4; categories</Item>
-</Row>
-<Row>
-  <Item></Item>
-  <Item>and some tool functions (e.g. <C>homalgMode</C>)</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>homalgTable</F></Item>
-  <Item>dictionaries between &homalg;</Item>
-</Row>
-<Row>
-  <Item></Item>
-  <Item>and the computing engines</Item>
-</Row>
-
-<Row>
-  <Item><F>HomalgRing</F></Item>
-  <Item>internal and external rings</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
   <Item><F>HomalgRingMap</F></Item>
-  <Item>ring maps</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgMatrix</F></Item>
-  <Item>internal and external matrices</Item>
+  <Item>operations and methods ring maps</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
@@ -232,70 +198,9 @@ files.
 
 </Section>
 
-<Section Label="Low Level Algorithms">
+<Section Label="High Level Homological Algorithms">
 
-<Heading>The Low Level Algorithms</Heading>
-
-In the following CAS or CASystem mean computer algebra systems.
-
-<Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
-
-<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
-
-<HorLine/>
-
-<Row>
-  <Item><F>Tools</F></Item>
-  <Item>the elementary matrix operations that can be</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>overwritten using the homalgTable</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>(and hence delegable even to other CASystems)</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>Service</F></Item>
-  <Item>the three operations: basis, reduction, and syzygies;</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>they can also be overwritten using the homalgTable</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>(and hence delegable even to other CASystems)</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>Basic</F></Item>
-  <Item>higher level operations for matrices</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>(cannot be overwritten using the homalgTable)</Item>
-</Row>
-
-</Table>
-
-</Section>
-
-<Section Label="Hight Level Algorithms">
-
-<Heading>The High Level Algorithms</Heading>
+<Heading>The High Level Homological Algorithms</Heading>
 
 <Table Align="l|l">
 <Caption><E>The &homalg; package files (continued)</E></Caption>
@@ -423,34 +328,6 @@ In the following CAS or CASystem mean computer algebra systems.
 <HorLine/>
 
 <Row>
-  <Item><F>LIRNG</F></Item>
-  <Item>logical implications for rings</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>LIMAP</F></Item>
-  <Item>logical implications for ring maps</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>LIMAT</F></Item>
-  <Item>logical implications for matrices</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>COLEM</F></Item>
-  <Item>clever operations for lazy evaluated matrices</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
   <Item><F>LIMOD</F></Item>
   <Item>logical implications for modules</Item>
 </Row>
@@ -470,89 +347,6 @@ In the following CAS or CASystem mean computer algebra systems.
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
-
-</Table>
-
-</Section>
-
-<Section Label="ResidueClassRingForHomalg_subpackage">
-
-<Heading>The subpackage &ResidueClassRingForHomalg;</Heading>
-
-<Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
-<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
-
-<HorLine/>
-
-<Row>
-  <Item><F>ResidueClassRingForHomalg</F></Item>
-  <Item>some global variables</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>ResidueClassRing</F></Item>
-  <Item>residue class rings, their elements, and matrices,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>together with their constructors and operations</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>ResidueClassRingTools</F></Item>
-  <Item>the elementary matrix operations for matrices</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>over residue class rings</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>ResidueClassRingBasic</F></Item>
-  <Item>the three operations: basis, reduction, and syzygies</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>for matrices over residue class rings</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-</Table>
-
-</Section>
-
-<Section Label="The built-in rings">
-
-<Heading>The homalgTable for &GAP4; built-in rings</Heading>
-
-For the purposes of &homalg;, the ring of integers is, at least up
-till now, the only ring which is properly supported in &GAP4;. The
-&GAP4; built-in cababilities for polynomial rings (also univariate)
-and group rings do not statisfy the minimum requirements of
-&homalg;. The &GAP4; package &Gauss; enables &GAP; to fullfil the
-&homalg; requirements for prime fields, and <M>&ZZ; / p^n</M>.
-
-<Table Align="l|l">
-<Caption><E>The &homalg; package files (continued)</E></Caption>
-<Row><Item>Filename .gi</Item><Item>Content</Item></Row>
-
-<HorLine/>
-
-<Row>
-  <Item><F>Integers</F></Item>
-  <Item>the homalgTable for the ring of integers</Item>
-</Row>
 
 </Table>
 

@@ -1782,8 +1782,7 @@ end );
 ##      Transfers the <M>S</M>-module <A>M</A> over the &homalg; ring <A>R</A>. This works only in three cases:
 ##      <Enum>
 ##        <Item><M>S</M> is a subring of <A>R</A>.</Item>
-##        <Item><A>R</A> is a residue class ring of <M>S</M> constructed using <C>/</C>
-##        (&see; <Ref Oper="\/" Label="constructor for residue class rings" Style="Number"/>).</Item>
+##        <Item><A>R</A> is a residue class ring of <M>S</M> constructed using <C>/</C>.</Item>
 ##        <Item><A>R</A> is a subring of <M>S</M> and the entries of the current matrix of <M>S</M>-relations of <A>M</A>
 ##          lie in <A>R</A>.</Item>
 ##      </Enum>

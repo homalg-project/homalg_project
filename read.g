@@ -11,12 +11,7 @@
 ReadPackage( "homalg", "gap/homalg.gi" );
 
 ## rings
-ReadPackage( "homalg", "gap/homalgTable.gi" );
-ReadPackage( "homalg", "gap/HomalgRing.gi" );
 ReadPackage( "homalg", "gap/HomalgRingMap.gi" );
-
-## matrices
-ReadPackage( "homalg", "gap/HomalgMatrix.gi" );
 
 ## relations/generators
 ReadPackage( "homalg", "gap/HomalgRelations.gi" );
@@ -55,11 +50,6 @@ ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
 ## diagrams
 ReadPackage( "homalg", "gap/HomalgDiagram.gi" );
 
-## tools/service/basic
-ReadPackage( "homalg", "gap/Tools.gi" );
-ReadPackage( "homalg", "gap/Service.gi" );
-ReadPackage( "homalg", "gap/Basic.gi" );
-
 ## main
 ReadPackage( "homalg", "gap/Modules.gi" );
 
@@ -78,21 +68,9 @@ ReadPackage( "homalg", "gap/BasicFunctors.gi" );
 ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
 ## LogicForHomalg subpackages
-ReadPackage( "homalg", "gap/LIRNG.gi" );
 ReadPackage( "homalg", "gap/LIMAP.gi" );
-ReadPackage( "homalg", "gap/LIMAT.gi" );
-ReadPackage( "homalg", "gap/COLEM.gi" );
+ReadPackage( "homalg", "gap/LIREL.gi" );
 ReadPackage( "homalg", "gap/LIMOD.gi" );
 ReadPackage( "homalg", "gap/LIMOR.gi" );
 ReadPackage( "homalg", "gap/LICPX.gi" );
-
-## specific GAP4 internal rings
-ReadPackage( "homalg", "gap/Integers.gi" );
-#ReadPackage( "homalg", "gap/EDIM.gi" );
-
-## the subpackage ResidueClassRingForHomalg
-ReadPackage( "homalg", "gap/ResidueClassRingForHomalg.gi" );
-ReadPackage( "homalg", "gap/ResidueClassRing.gi" );
-ReadPackage( "homalg", "gap/ResidueClassRingBasic.gi" );
-ReadPackage( "homalg", "gap/ResidueClassRingTools.gi" );
 

@@ -4,7 +4,7 @@
 ##  The following example is taken from Section 2 of <Cite Key="BREACA"/>. <Br/><Br/>
 ##  The computation takes place over the residue class ring <M>R=&ZZ;/2^8&ZZ;</M>
 ##  using the generic support for residue class rings provided by
-##  the subpackage &ResidueClassRingForHomalg; (&see; Appendix <Ref Sect="ResidueClassRingForHomalg"/>).
+##  the subpackage &ResidueClassRingForHomalg; of the &MatricesForHomalg; package.
 ##  For a native support of the rings <M>R=&ZZ;/p^n&ZZ;</M> use the &GaussForHomalg; package. <P/>
 ##  Here we compute the (infinite) long exact homology sequence of the
 ##  covariant functor <M>Hom(Hom(-,&ZZ;/2^7&ZZ;),&ZZ;/2^4&ZZ;)</M> (and its left derived functors)
