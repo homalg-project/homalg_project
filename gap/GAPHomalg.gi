@@ -116,8 +116,8 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     R := CallFuncList( CreateHomalgExternalRing, ar );
     
-    if IsBound( HOMALG.PreferDenseMatrices ) then
-        homalgSendBlocking( [ "HOMALG.PreferDenseMatrices := ", HOMALG.PreferDenseMatrices ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+    if IsBound( HOMALG_MATRICES.PreferDenseMatrices ) then
+        homalgSendBlocking( [ "HOMALG_MATRICES.PreferDenseMatrices := ", HOMALG_MATRICES.PreferDenseMatrices ], "need_command", R, HOMALG_IO.Pictograms.initialize );
     fi;
     
     return R;
