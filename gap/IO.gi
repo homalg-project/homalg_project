@@ -21,9 +21,9 @@ InstallGlobalFunction( TerminateCAS,
     
     nargs := Length( arg );
     
-    if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
+    if nargs = 0 and IsBound( HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings ) then
         
-        container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
+        container := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings;
         
         weak_pointers := container!.weak_pointers;
         

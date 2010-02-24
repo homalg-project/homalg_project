@@ -33,9 +33,9 @@ InstallGlobalFunction( homalgFlush,
         verbose := false;
     fi;
     
-    if nargs = 0 and IsBound( HOMALG.ContainerForWeakPointersOnHomalgExternalRings ) then
+    if nargs = 0 and IsBound( HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings ) then
         
-        container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
+        container := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings;
         
         weak_pointers := container!.weak_pointers;
         
@@ -625,23 +625,23 @@ InstallGlobalFunction( homalgSendBlocking,
     elif io_info_level >= 3 then
         ## add colors to the pictograms
         if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
-           IsBound( HOMALG.color_BOE ) then
-            pictogram := Concatenation( HOMALG.color_BOE, pictogram, "\033[0m" );
+           IsBound( HOMALG_MATRICES.color_BOE ) then
+            pictogram := Concatenation( HOMALG_MATRICES.color_BOE, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and
-          IsBound( HOMALG.color_BOB ) then
-            pictogram := Concatenation( HOMALG.color_BOB, pictogram, "\033[0m" );
+          IsBound( HOMALG_MATRICES.color_BOB ) then
+            pictogram := Concatenation( HOMALG_MATRICES.color_BOB, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.DecideZero and
-          IsBound( HOMALG.color_BOD ) then
-            pictogram := Concatenation( HOMALG.color_BOD, pictogram, "\033[0m" );
+          IsBound( HOMALG_MATRICES.color_BOD ) then
+            pictogram := Concatenation( HOMALG_MATRICES.color_BOD, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and
-          IsBound( HOMALG.color_BOH ) then
-            pictogram := Concatenation( HOMALG.color_BOH, pictogram, "\033[0m" );
+          IsBound( HOMALG_MATRICES.color_BOH ) then
+            pictogram := Concatenation( HOMALG_MATRICES.color_BOH, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and
-          IsBound( HOMALG.color_BOC ) then
-            pictogram := Concatenation( HOMALG.color_BOC, pictogram, "\033[0m" );
+          IsBound( HOMALG_MATRICES.color_BOC ) then
+            pictogram := Concatenation( HOMALG_MATRICES.color_BOC, pictogram, "\033[0m" );
         elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and
-          IsBound( HOMALG.color_BOP ) then
-            pictogram := Concatenation( HOMALG.color_BOP, pictogram, "\033[0m" );
+          IsBound( HOMALG_MATRICES.color_BOP ) then
+            pictogram := Concatenation( HOMALG_MATRICES.color_BOP, pictogram, "\033[0m" );
         elif need_output or need_display then
             pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_output,
                                  pictogram, "\033[0m" );

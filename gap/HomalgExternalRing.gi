@@ -323,7 +323,7 @@ end );
 #
 ####################################
 
-HOMALG.ContainerForWeakPointersOnHomalgExternalRings :=
+HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalRings, [ "streams", [ ] ] );
 
 ##
@@ -421,7 +421,7 @@ InstallGlobalFunction( CreateHomalgExternalRing,
     ## for the view method: <A homalg external matrix>
     R!.description := "external";
     
-    container := HOMALG.ContainerForWeakPointersOnHomalgExternalRings;
+    container := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings;
     
     weak_pointers := container!.weak_pointers;
     
