@@ -74,7 +74,7 @@ InstallValue( LogicalImplicationsForHomalgSheaves,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalg( LogicalImplicationsForHomalgSheaves, IsHomalgSheaf );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgSheaves, IsHomalgSheaf );
 
 ####################################
 #

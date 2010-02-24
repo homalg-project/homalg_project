@@ -40,7 +40,7 @@ InstallValue( LogicalImplicationsForLinearSystems,
 #
 ####################################
 
-#InstallLogicalImplicationsForHomalg( LogicalImplicationsForLinearSystems, IsLinearSystem );
+#InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForLinearSystems, IsLinearSystem );
 
 ####################################
 #

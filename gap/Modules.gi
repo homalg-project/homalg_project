@@ -331,7 +331,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
             mon := MonomialMatrix( weightsS[i] - weightsT[j], R );
-            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG.ZZ ) ) * mon;
+            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
             mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
@@ -393,7 +393,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
             mon := MonomialMatrix( weightsS[j] - weightsT[i], R );
-            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG.ZZ ) ) * mon;
+            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
             mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
             rand[ ( i - 1 ) * c + j ] := mon;
         od;

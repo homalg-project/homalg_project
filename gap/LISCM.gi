@@ -45,7 +45,7 @@ InstallValue( LogicalImplicationsForSchemes,
 #
 ####################################
 
-#InstallLogicalImplicationsForHomalg( LogicalImplicationsForSchemes, IsScheme );
+#InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForSchemes, IsScheme );
 
 ####################################
 #
