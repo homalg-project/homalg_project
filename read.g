@@ -8,6 +8,7 @@
 ##
 #############################################################################
 
+if not ( IsBound( LOADED_MatricesForHomalg_implementation ) and LOADED_MatricesForHomalg_implementation = true ) then
 ReadPackage( "MatricesForHomalg", "gap/MatricesForHomalg.gi" );
 
 ## rings
@@ -17,6 +18,7 @@ ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gi" );
 
 ## matrices
 ReadPackage( "MatricesForHomalg", "gap/HomalgMatrix.gi" );
+fi;
 
 ## ring relations
 ReadPackage( "MatricesForHomalg", "gap/HomalgRingRelations.gi" );
