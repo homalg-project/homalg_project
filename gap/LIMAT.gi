@@ -1566,6 +1566,25 @@ end );
 
 ##
 InstallMethod( RightDivide,
+        "LIMAT: for homalg matrices (IsIdenticalObj)",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( B, A )
+    
+    if IsIdenticalObj( B, A ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( A, A )", "\033[0m" );
+        
+        return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RightDivide,
         "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
         
@@ -1603,6 +1622,25 @@ InstallMethod( RightDivide,
     
     if NrColumns( A ) <> NrColumns( L ) then
         Error( "the first and the third matrix must have the same number of columns\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RightDivide,
+        "LIMAT: for homalg matrices (IsIdenticalObj)",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( B, A, L )
+    
+    if IsIdenticalObj( B, A ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( A, A, IsHomalgMatrix )", "\033[0m" );
+        
+        return HomalgIdentityMatrix( NrRows( A ), HomalgRing( A ) );
+        
     fi;
     
     TryNextMethod( );
@@ -1656,6 +1694,25 @@ end );
 
 ##
 InstallMethod( LeftDivide,
+        "LIMAT: for homalg matrices (IsIdenticalObj)",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    
+    if IsIdenticalObj( A, B ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( A, A )", "\033[0m" );
+        
+        return HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( LeftDivide,
         "LIMAT: for homalg matrices (IsIdentityMatrix)",
         [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
         
@@ -1693,6 +1750,25 @@ InstallMethod( LeftDivide,
     
     if NrRows( A ) <> NrRows( L ) then
         Error( "the first and the third matrix must have the same number of rows\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( LeftDivide,
+        "LIMAT: for homalg matrices (IsIdenticalObj)",
+        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B, L )
+    
+    if IsIdenticalObj( A, B ) then
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( A, A, IsHomalgMatrix )", "\033[0m" );
+        
+        return HomalgIdentityMatrix( NrColumns( A ), HomalgRing( A ) );
+        
     fi;
     
     TryNextMethod( );
