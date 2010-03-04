@@ -43,7 +43,7 @@ InstallValue( HOMALG_IO_Singular,
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
-            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
+            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
             InitializeMacros := InitializeSingularMacros,
            )
 );
