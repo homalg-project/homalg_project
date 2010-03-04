@@ -1078,7 +1078,7 @@ end );
 
 ##
 InstallMethod( \/,
-        "for homalg ring elements",
+        "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgRing ],
         
   function( M, R )
