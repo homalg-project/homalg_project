@@ -35,8 +35,8 @@ DeclareCategory( "IsInternalMatrixHull",
 ##
 DeclareCategory( "IsHomalgMatrix",
         IsAdditiveElementWithInverse
-        and IsExtLElement
-        and IsAttributeStoringRep ); ## CAUTION: never let homalg matrices be multiplicative elements!!
+        and IsMultiplicativeElementWithInverse
+        and IsAttributeStoringRep );
 
 ####################################
 #
@@ -965,12 +965,6 @@ DeclareOperation( "KroneckerMat",
 
 DeclareOperation( "*",						## this must remain, since an element in IsInternalMatrixHull
         [ IsInternalMatrixHull, IsInternalMatrixHull ] );	## is not a priori IsMultiplicativeElement
-
-DeclareOperation( "*",				## this must remain, since an element in IsHomalgMatrix
-        [ IsHomalgMatrix, IsHomalgMatrix ] );	## is not a priori IsMultiplicativeElement
-
-DeclareOperation( "POW",			## this must remain, since an element in IsHomalgMatrix
-        [ IsHomalgMatrix, IsInt ] );		## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "DiagonalEntries",
         [ IsHomalgMatrix ] );

@@ -126,8 +126,5 @@ DeclareOperation( "DecideZero",
         [ IsHomalgRingElement ] );
 
 DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
-DeclareOperation( "DecideZero",
         [ IsHomalgMatrix ] );
 

@@ -1945,7 +1945,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for homalg matrices (HasPreEval)",
-        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ], 15001,
         
   function( A, B )
     
@@ -1958,7 +1958,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for homalg matrices (HasPreEval)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
+        [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ], 15001,
         
   function( A, B )
     
@@ -1971,7 +1971,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfRows)",
-        [ IsHomalgMatrix and HasEvalUnionOfRows, IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalUnionOfRows, IsHomalgMatrix ], 15001,
         
   function( A, B )
     local AA;
@@ -1987,7 +1987,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfColumns)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfColumns ],
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfColumns ], 15001,
         
   function( A, B )
     local BB;
@@ -2003,7 +2003,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfColumns)",
-        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgMatrix ], 15001,
         
   function( A, B )
     local AA, a1, B1, B2;
@@ -2024,7 +2024,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalUnionOfRows)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfRows ],
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalUnionOfRows ], 15001,
         
   function( A, B )
     local BB, b1, A1, A2;
@@ -2045,7 +2045,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (IsSubidentityMatrix)",
-        [ IsHomalgMatrix and IsSubidentityMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix and IsSubidentityMatrix, IsHomalgMatrix ], 15001,
         
   function( A, B )
     
@@ -2064,7 +2064,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (IsSubidentityMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsSubidentityMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsSubidentityMatrix ], 15001,
         
   function( A, B )
     local pos, plist;
@@ -2088,7 +2088,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalLeftInverse)",
-        [ IsHomalgMatrix and HasEvalLeftInverse, IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalLeftInverse, IsHomalgMatrix ], 15001,
         
   function( A, B )
     
@@ -2107,7 +2107,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalRightInverse)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalRightInverse ],
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalRightInverse ], 15001,
         
   function( A, B )
     
@@ -2126,7 +2126,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalLeftInverse)",
-        [ IsHomalgMatrix and HasEvalLeftInverse, IsHomalgMatrix and HasEvalCertainColumns ],
+        [ IsHomalgMatrix and HasEvalLeftInverse, IsHomalgMatrix and HasEvalCertainColumns ], 15001,
         
   function( A, B )
     local C, D;
@@ -2155,7 +2155,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalCertainRows)",
-        [ IsHomalgMatrix and HasEvalCertainRows, IsHomalgMatrix and HasEvalRightInverse ],
+        [ IsHomalgMatrix and HasEvalCertainRows, IsHomalgMatrix and HasEvalRightInverse ], 15001,
         
   function( A, B )
     local C, D;
@@ -2185,7 +2185,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalCompose)",
-        [ IsHomalgMatrix and HasEvalCompose, IsHomalgMatrix ],
+        [ IsHomalgMatrix and HasEvalCompose, IsHomalgMatrix ], 15001,
         
   function( A, B )
     local AA, LI;
@@ -2209,7 +2209,7 @@ end );
 ##
 InstallMethod( \*,
         "COLEM: for two homalg matrices (HasEvalCompose)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalCompose ],
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalCompose ], 15001,
         
   function( A, B )
     local BB, RI;

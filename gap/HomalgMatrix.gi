@@ -973,8 +973,8 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( \*,
-        "for homalg matrices",
-        [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24 (if this value is increased, the corresonding values in LIMAT must be increased as well!!!)
+        "for a homalg ring element and a homalg matrix",
+        [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24 (if this value is increased, the corresonding values for \* in LIMAT, COLEM, and below must be increased as well!!!)
         
   function( a, A )
     
@@ -1124,7 +1124,7 @@ end );
 ##
 InstallMethod( \*,
         "for pairs of homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 14001, ## it could otherwise run into the method ``PROD: IsRingElement * IsHomalgMatrix'', value: 1001 (if this value is increased, the corresonding values in LIMAT must be increased as well!!!)
         
   function( A, B )
     

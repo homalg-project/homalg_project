@@ -101,7 +101,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix ], 1001,
         
   function( M, subs )
     local rel, red;

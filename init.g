@@ -29,8 +29,8 @@ ReadPackage( "MatricesForHomalg", "gap/Basic.gd" );
 ## LogicForHomalg subpackages
 ReadPackage( "MatricesForHomalg", "gap/LIRNG.gd" );
 ReadPackage( "MatricesForHomalg", "gap/LIMAP.gd" );
-ReadPackage( "MatricesForHomalg", "gap/LIMAT.gd" );
 ReadPackage( "MatricesForHomalg", "gap/COLEM.gd" );
+ReadPackage( "MatricesForHomalg", "gap/LIMAT.gd" );
 
 ## the subpackage ResidueClassRingForHomalg
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gd" );

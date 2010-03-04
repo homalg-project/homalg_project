@@ -31,8 +31,8 @@ ReadPackage( "MatricesForHomalg", "gap/Basic.gi" );
 ## LogicForHomalg subpackages
 ReadPackage( "MatricesForHomalg", "gap/LIRNG.gi" );
 ReadPackage( "MatricesForHomalg", "gap/LIMAP.gi" );
-ReadPackage( "MatricesForHomalg", "gap/LIMAT.gi" );
 ReadPackage( "MatricesForHomalg", "gap/COLEM.gi" );
+ReadPackage( "MatricesForHomalg", "gap/LIMAT.gi" );
 
 ## specific GAP4 internal rings
 ReadPackage( "MatricesForHomalg", "gap/Integers.gi" );

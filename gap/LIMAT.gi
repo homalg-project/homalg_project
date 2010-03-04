@@ -1265,8 +1265,8 @@ end );
 
 ##
 InstallMethod( \*,
-        "LIMAT: for homalg matrices (check input)",
-        [ IsHomalgRingElement, IsHomalgMatrix ], 10001,
+        "LIMAT: for a ring element and a homalg matrix (check input)",
+        [ IsHomalgRingElement, IsHomalgMatrix ], 12001,
         
   function( a, A )
     local R;
@@ -1469,7 +1469,7 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (check input)",
-        [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
+        [ IsHomalgMatrix, IsHomalgMatrix ], 20001,
         
   function( A, B )
     
@@ -1488,7 +1488,7 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ],
+        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix ], 17001,
         
   function( A, B )
     
@@ -1501,7 +1501,7 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix ], 17001,
         
   function( A, B )
     
@@ -1514,7 +1514,7 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (IsZero)",
-        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ],
+        [ IsHomalgMatrix and IsZero, IsHomalgMatrix ], 17001,
         
   function( A, B )
     
@@ -1531,7 +1531,7 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (IsZero)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ],
+        [ IsHomalgMatrix, IsHomalgMatrix and IsZero ], 17001,
         
   function( A, B )
     

@@ -152,9 +152,6 @@ DeclareOperation( "BasisOfModule",
         [ IsHomalgRingRelations ] );
 
 DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix, IsHomalgRingRelations ] );
-
-DeclareOperation( "DecideZero",
         [ IsHomalgRingRelations, IsHomalgRingRelations ] );
 
 DeclareOperation( "BasisCoeff",
