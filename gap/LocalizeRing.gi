@@ -1077,24 +1077,6 @@ InstallMethod( HomalgLocalMatrix,
 end );
 
 ##
-InstallMethod( \/,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsHomalgRing ],
-        
-  function( M, R )
-    local s;
-    
-    if IsHomalgMatrix( M ) and IsIdenticalObj( HomalgRing( M ), R ) then
-       return M;
-    else
-       s := GetListOfHomalgMatrixAsString( M );
-    fi;
-    
-    return HomalgMatrix( s, NrRows( M ), NrColumns( M ), R );
-    
-end );
-
-##
 InstallMethod( HomalgLocalMatrix,
         "constructor for matrices over localized rings",
         [ IsHomalgMatrix, IsHomalgLocalRingRep ],

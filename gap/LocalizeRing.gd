@@ -110,8 +110,5 @@ DeclareOperation( "Denominator",
 DeclareOperation( "Cancel",
         [ IsRingElement, IsRingElement ] );
 
-DeclareOperation( "/",
-        [ IsHomalgMatrix, IsHomalgRing ] );
-
 DeclareOperation ( "LocalizePolynomialRingAtZero",
         [ IsHomalgRing ] );
