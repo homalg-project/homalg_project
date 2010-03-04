@@ -1671,6 +1671,10 @@ InstallMethod( IsIdentityMatrix,
   function( M )
     local R, RP;
     
+    if NrRows( M ) <> NrColumns( M ) then
+        return false;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
