@@ -23,12 +23,13 @@
 ##    <Description>
 ##      The &GAP; category of &homalg; rings. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRingOrModule</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgRing",
+        IsHomalgRingOrModule );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgRing",
-        IsHomalgRingOrModule );
 
 ##  <#GAPDoc Label="IsPreHomalgRing">
 ##  <ManSection>
@@ -41,12 +42,13 @@ DeclareCategory( "IsHomalgRing",
 ##      They provide flexibility for developers to support a wider class of rings,
 ##      as was necessary for the development of the &LocalizeRingForHomalg; package.
 ##      They are not suited for direct usage.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsPreHomalgRing",
+        IsHomalgRing );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsPreHomalgRing",
-        IsHomalgRing );
 
 ##  <#GAPDoc Label="IsHomalgRingElement">
 ##  <ManSection>
@@ -54,19 +56,21 @@ DeclareCategory( "IsPreHomalgRing",
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of elements of &homalg; rings which are not GAP4 built-in.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgRingElement",
+        IsExtAElement and
+        IsExtLElement and
+        IsExtRElement and
+        IsAdditiveElementWithInverse and
+        IsMultiplicativeElementWithInverse and
+        IsAssociativeElement and
+        IsAdditivelyCommutativeElement and
+	## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)
+        IsAttributeStoringRep );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgRingElement",
-        IsExtAElement
-        and IsExtLElement
-        and IsExtRElement
-        and IsAdditiveElementWithInverse
-        and IsMultiplicativeElementWithInverse
-        and IsAssociativeElement
-        and IsAdditivelyCommutativeElement	## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)
-        and IsAttributeStoringRep );
 
 ####################################
 #

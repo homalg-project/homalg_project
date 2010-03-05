@@ -19,9 +19,9 @@
 ## this is introduced to allow internal matrices
 ## to remain mutable, although Eval is an attribute
 DeclareCategory( "IsInternalMatrixHull",
-        IsAdditiveElementWithInverse
-        and IsExtLElement
-        and IsComponentObjectRep ); ## CAUTION: never let such matrix hulls be multiplicative elements!!
+        IsAdditiveElementWithInverse and
+        IsExtLElement and
+        IsComponentObjectRep ); ## CAUTION: never let such matrix hulls be multiplicative elements!!
 
 ##  <#GAPDoc Label="IsHomalgMatrix">
 ##  <ManSection>
@@ -29,14 +29,27 @@ DeclareCategory( "IsInternalMatrixHull",
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; matrices.
+##    <Listing Type="Code"><![CDATA[
+if CompareVersionNumbers( "4.4.99", VERSION ) then
+    
+    ## GAP 4.4 style:
+    DeclareCategory( "IsHomalgMatrix",
+            IsAdditiveElementWithInverse and
+            IsMultiplicativeElementWithInverse and
+            IsAttributeStoringRep );
+    
+else
+    
+    ## GAP 4.5 style: Max's matrix category
+    DeclareCategory( "IsHomalgMatrix",
+            IsMatrixObj and
+            IsAttributeStoringRep );
+    
+fi;
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgMatrix",
-        IsAdditiveElementWithInverse
-        and IsMultiplicativeElementWithInverse
-        and IsAttributeStoringRep );
 
 ####################################
 #

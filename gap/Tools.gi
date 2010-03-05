@@ -279,9 +279,9 @@ end );
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with HomalgInitialMatrix"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
-##      In case the matrix <A>A</A> was created using
+##      In case the matrix <A>C</A> was created using
 ##      <Ref Meth="HomalgInitialMatrix" Label="constructor for initial matrices filled with zeros"/>
-##      then the filter <C>IsInitialMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>IsInitialMatrix</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      (&see; <Ref Meth="InitialMatrix" Label="homalgTable entry for initial matrices"/>)
 ##      will be used to set the attribute <C>Eval</C> and resets the filter <C>IsInitialMatrix</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -342,9 +342,9 @@ end );
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with HomalgInitialIdentityMatrix"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
-##      In case the matrix <A>A</A> was created using
+##      In case the matrix <A>C</A> was created using
 ##      <Ref Meth="HomalgInitialIdentityMatrix" Label="constructor for initial quadratic matrices with ones on the diagonal"/>
-##      then the filter <C>IsInitialIdentityMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>IsInitialIdentityMatrix</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      (&see; <Ref Meth="InitialIdentityMatrix" Label="homalgTable entry for initial identity matrices"/>)
 ##      will be used to set the attribute <C>Eval</C> and resets the filter <C>IsInitialIdentityMatrix</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -432,7 +432,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="Involution" Label="for matrices"/>
-##      then the filter <C>HasEvalInvolution</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalInvolution</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="Involution" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -488,7 +488,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="CertainRows" Label="for matrices"/>
-##      then the filter <C>HasEvalCertainRows</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalCertainRows</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="CertainRows" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -548,7 +548,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="CertainColumns" Label="for matrices"/>
-##      then the filter <C>HasEvalCertainColumns</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalCertainColumns</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="CertainColumns" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -609,7 +609,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="UnionOfRows" Label="for matrices"/>
-##      then the filter <C>HasEvalUnionOfRows</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalUnionOfRows</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfRows" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -673,7 +673,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="UnionOfColumns" Label="for matrices"/>
-##      then the filter <C>HasEvalUnionOfColumns</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalUnionOfColumns</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="UnionOfColumns" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -739,7 +739,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="DiagMat" Label="for matrices"/>
-##      then the filter <C>HasEvalDiagMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalDiagMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="DiagMat" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -814,7 +814,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="KroneckerMat" Label="for matrices"/>
-##      then the filter <C>HasEvalKroneckerMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalKroneckerMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="KroneckerMat" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -880,7 +880,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="\*" Label="for ring elements and matrices"/>
-##      then the filter <C>HasEvalMulMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalMulMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="MulMat" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -940,7 +940,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="\+" Label="for matrices"/>
-##      then the filter <C>HasEvalAddMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalAddMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="AddMat" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -1000,7 +1000,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="\-" Label="for matrices"/>
-##      then the filter <C>HasEvalSubMat</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalSubMat</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="SubMat" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -1060,7 +1060,7 @@ end );
 ##    <Description>
 ##      In case the matrix was created using
 ##      <Ref Meth="\*" Label="for composable matrices"/>
-##      then the filter <C>HasEvalCompose</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>HasEvalCompose</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      <Ref Meth="Compose" Label="homalgTable entry"/>
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -1118,9 +1118,9 @@ end );
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with HomalgIdentityMatrix"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
-##      In case the matrix <A>A</A> was created using
+##      In case the matrix <A>C</A> was created using
 ##      <Ref Meth="HomalgIdentityMatrix" Label="constructor for identity matrices"/>
-##      then the filter <C>IsIdentityMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>IsIdentityMatrix</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
@@ -1183,9 +1183,9 @@ end );
 ##    <Meth Arg="C" Name="Eval" Label="for matrices created with HomalgZeroMatrix"/>
 ##    <Returns>the <C>Eval</C> value of a &homalg; matrix <A>C</A></Returns>
 ##    <Description>
-##      In case the matrix <A>A</A> was created using
+##      In case the matrix <A>C</A> was created using
 ##      <Ref Meth="HomalgZeroMatrix" Label="constructor for zero matrices"/>
-##      then the filter <C>IsZeroMatrix</C> for <A>A</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>IsZeroMatrix</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      (&see; <Ref Meth="ZeroMatrix" Label="homalgTable entry"/>)
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[

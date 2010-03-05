@@ -619,9 +619,9 @@ end );
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with LeftInverse"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      In case the matrix was created using
+##      In case the matrix <A>LI</A> was created using
 ##      <Ref Meth="LeftInverse" Label="for matrices"/>
-##      then the filter <C>HasEvalLeftInverse</C> for <A>A</A> is set to true and the method listed below
+##      then the filter <C>HasEvalLeftInverse</C> for <A>LI</A> is set to true and the method listed below
 ##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>)
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
@@ -667,9 +667,9 @@ end );
 ##    <Meth Arg="A" Name="Eval" Label="for matrices created with RightInverse"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
-##      In case the matrix was created using
+##      In case the matrix <A>RI</A> was created using
 ##      <Ref Meth="RightInverse" Label="for matrices"/>
-##      then the filter <C>HasEvalRightInverse</C> for <A>A</A> is set to true and the method listed below
+##      then the filter <C>HasEvalRightInverse</C> for <A>RI</A> is set to true and the method listed below
 ##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>)
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
