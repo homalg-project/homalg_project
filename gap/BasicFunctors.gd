@@ -180,8 +180,18 @@ DeclareOperation( "RightDualizingFunctor",
 DeclareOperation( "RightDualizingFunctor",
         [ IsHomalgRing ] );
 
-DeclareOperation( "TensorProduct",
-        [ IsHomalgModule, IsHomalgModule ] );
+if IsOperation( TensorProduct ) then
+    
+    ## GAP 4.4 style
+    DeclareOperation( "TensorProduct",
+            [ IsHomalgModule, IsHomalgModule ] );
+    
+else
+        ## GAP 4.5 style
+    DeclareOperation( "TensorProductOp",
+	    [ IsList, IsHomalgRingOrObjectOrMorphism ] );
+    
+fi;
 
 DeclareOperation( "BaseChange",
         [ IsHomalgRing, IsHomalgModule ] );

@@ -335,7 +335,7 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicObjects :=
 Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-## DirectSum might has been defined elsewhere
+## DirectSum might have been defined elsewhere
 if not IsBound( DirectSum ) then
     
     DeclareGlobalFunction( "DirectSum" );

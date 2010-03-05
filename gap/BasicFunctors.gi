@@ -924,27 +924,76 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMorphisms,	### defines: TensorPr
     
 end );
 
-##  <#GAPDoc Label="Functor_TensorProduct:code">
-##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_TensorProduct,
-        CreateHomalgFunctor(
-                [ "name", "TensorProduct" ],
-                [ "operation", "TensorProduct" ],
-                [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
-                [ "2", [ [ "covariant", "left adjoint" ] ] ],
-                [ "OnObjects", _Functor_TensorProduct_OnObjects ],
-                [ "OnMorphisms", _Functor_TensorProduct_OnMorphisms ]
-                )
-        );
-##  ]]></Listing>
-##  <#/GAPDoc>
+if IsOperation( TensorProduct ) then
+    
+    ## GAP 4.4 style
+    InstallValue( Functor_TensorProduct,
+            CreateHomalgFunctor(
+                    [ "name", "TensorProduct" ],
+                    [ "operation", "TensorProduct" ],
+                    [ "number_of_arguments", 2 ],
+                    [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
+                    [ "2", [ [ "covariant", "left adjoint" ] ] ],
+                    [ "OnObjects", _Functor_TensorProduct_OnObjects ],
+                    [ "OnMorphisms", _Functor_TensorProduct_OnMorphisms ]
+                    )
+            );
+    
+else
+    
+    ## GAP 4.5 style
+    ##  <#GAPDoc Label="Functor_TensorProduct:code">
+    ##      <Listing Type="Code"><![CDATA[
+    InstallValue( Functor_TensorProduct,
+            CreateHomalgFunctor(
+                    [ "name", "TensorProduct" ],
+                    [ "operation", "TensorProductOp" ],
+                    [ "number_of_arguments", 2 ],
+                    [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
+                    [ "2", [ [ "covariant", "left adjoint" ] ] ],
+                    [ "OnObjects", _Functor_TensorProduct_OnObjects ],
+                    [ "OnMorphisms", _Functor_TensorProduct_OnMorphisms ]
+                    )
+            );
+    ##  ]]></Listing>
+    ##  <#/GAPDoc>
+    
+fi;
 
 Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+## TensorProduct might have been defined elsewhere
+if not IsBound( TensorProduct ) then
+    
+    DeclareGlobalFunction( "TensorProduct" );
+    
+    ##
+    InstallGlobalFunction( TensorProduct,
+      function ( arg )
+        local  d;
+        if Length( arg ) = 0  then
+            Error( "<arg> must be nonempty" );
+        elif Length( arg ) = 1 and IsList( arg[1] )  then
+            if IsEmpty( arg[1] )  then
+                Error( "<arg>[1] must be nonempty" );
+            fi;
+            arg := arg[1];
+        fi;
+        d := TensorProductOp( arg, arg[1] );
+        if ForAll( arg, HasSize )  then
+            if ForAll( arg, IsFinite )  then
+                SetSize( d, Product( List( arg, Size ) ) );
+            else
+                SetSize( d, infinity );
+            fi;
+        fi;
+        return d;
+    end );
+fi;
 
 ##
 ## BaseChange
@@ -1739,6 +1788,22 @@ InstallFunctor( Functor_Hom );
 ##  <#/GAPDoc>
 ##
 InstallFunctor( Functor_TensorProduct );
+
+if not IsOperation( TensorProduct ) then
+    
+    ## GAP 4.5 style
+    ##
+    InstallMethod( TensorProductOp,
+            "for homalg objects",
+            [ IsList, IsHomalgRingOrObjectOrMorphism ],
+            
+      function( L, M )
+        
+        return Iterated( L, TensorProductOp );
+        
+    end );
+    
+fi;
 
 ## for convenience
 InstallOtherMethod( \*,
