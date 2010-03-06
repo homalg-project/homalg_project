@@ -218,7 +218,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                IsIdentityMatrix :=
                  function( M )
                    
-                   return homalgSendBlocking( [ "IsIdentityMatrix(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
+                   return homalgSendBlocking( [ "IsOne(", M, ")" ] , "need_output", HOMALG_IO.Pictograms.IsIdentityMatrix ) = "true";
                    
                  end,
                
