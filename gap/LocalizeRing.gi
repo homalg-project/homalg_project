@@ -383,7 +383,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
         fi;
     od;
     
-    for c in [ IsZero, IsIdentityMatrix, IsDiagonalMatrix ] do
+    for c in [ IsZero, IsOne, IsDiagonalMatrix ] do
         if Tester( c )( S ) and c( S ) then
             Setter( c )( T, c( S ) );
         fi;
