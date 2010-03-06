@@ -594,7 +594,7 @@ InstallTrueMethod( IsReducedModuloRingRelations, IsHomalgMatrix and IsZero );
 InstallTrueMethod( IsZero, IsHomalgMatrix and IsEmptyMatrix );
 
 ##
-InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsIdentityMatrix );
+InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsOne );
 
 ##
 InstallTrueMethod( IsPermutationMatrix, IsHomalgMatrix and IsSubidentityMatrix and IsInvertibleMatrix );
@@ -666,7 +666,7 @@ InstallTrueMethod( IsStrictUpperTriangularMatrix, IsHomalgMatrix and IsZero );
 InstallTrueMethod( IsStrictLowerTriangularMatrix, IsHomalgMatrix and IsZero );
 
 ##
-InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsIdentityMatrix );
+InstallTrueMethod( IsDiagonalMatrix, IsHomalgMatrix and IsOne );
 
 ##
 InstallTrueMethod( IsZero, IsHomalgMatrix and IsStrictUpperTriangularMatrix and IsStrictLowerTriangularMatrix );

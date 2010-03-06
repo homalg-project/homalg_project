@@ -121,7 +121,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     
     # this matrix of generators is often enough the identity matrix
     # and knowing this will avoid computations:
-    IsIdentityMatrix( MatrixOfGenerators( N ) );
+    IsOne( MatrixOfGenerators( N ) );
     
     # compute the syzygies of N modulo B, i.e. the relations among N modulo B:
     S := SyzygiesGenerators( N, B );	## using ReducedSyzygiesGenerators here causes too many operations (cf. the ex. Triangle.g)
@@ -624,7 +624,7 @@ InstallMethod( SyzygiesModuleEpi,
     SetIsEpimorphism( epi, true );
     
     ## this might simplify things later:
-    IsIdentityMatrix( MatrixOfMap( epi ) );
+    IsOne( MatrixOfMap( epi ) );
     
     return epi;
     

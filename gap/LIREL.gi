@@ -59,12 +59,12 @@ end );
 
 ##
 InstallMethod( RightDivide,
-        "LIREL: for homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsIdentityMatrix, IsHomalgRelationsOfLeftModule ],
+        "LIREL: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix, IsHomalgMatrix and IsOne, IsHomalgRelationsOfLeftModule ],
         
   function( B, A, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsHomalgMatrix, IsIdentityMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsHomalgMatrix, IsOne(Matrix), IsHomalgRelations )", "\033[0m" );
     
     return B;
     
@@ -108,12 +108,12 @@ end );
 
 ##
 InstallMethod( LeftDivide,
-        "LIREL: for homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix and IsIdentityMatrix, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
+        "LIREL: for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne, IsHomalgMatrix, IsHomalgRelationsOfRightModule ],
         
   function( A, B, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsIdentityMatrix, IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsOne(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
     
     return B;
     
