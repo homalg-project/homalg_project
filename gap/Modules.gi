@@ -148,7 +148,7 @@ InstallMethod( MonomialMatrix,
         mon := HomalgMatrix( mon, R );
         SetNrColumns( mon, 1 );
         if d = 0 then
-            IsIdentityMatrix( mon );
+            IsOne( mon );
         fi;
         return mon;
     fi;
