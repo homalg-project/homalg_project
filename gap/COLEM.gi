@@ -218,7 +218,7 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
-InstallImmediateMethod( IsIdentityMatrix,
+InstallImmediateMethod( IsOne,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
@@ -226,8 +226,8 @@ InstallImmediateMethod( IsIdentityMatrix,
     
     e := PreEval( M );
     
-    if HasIsIdentityMatrix( e ) then
-        return IsIdentityMatrix( e );
+    if HasIsOne( e ) then
+        return IsOne( e );
     fi;
     
     TryNextMethod( );
@@ -235,7 +235,7 @@ InstallImmediateMethod( IsIdentityMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsIdentityMatrix,
+InstallImmediateMethod( IsOne,
         IsHomalgMatrix and IsPermutationMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasNrRows, 0,
         
   function( M )

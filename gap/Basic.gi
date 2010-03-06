@@ -353,7 +353,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     IA := BasisOfRows( A, CA );
     
     ## knowing this will avoid computations
-    IsIdentityMatrix( IA );
+    IsOne( IA );
     
     ## IsSpecialSubidentityMatrix( IA );	## does not increase performance
     
@@ -409,7 +409,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     IA := BasisOfColumns( A, CA );
     
     ## knowing this will avoid computations
-    IsIdentityMatrix( IA );
+    IsOne( IA );
     
     ## IsSpecialSubidentityMatrix( IA );	## does not increase performance
     
@@ -471,7 +471,7 @@ InstallMethod( RightDivide,
     ZB := DecideZeroRows( B, BL );
     
     ## knowing this will avoid computations
-    IsIdentityMatrix( IAL );
+    IsOne( IAL );
     
     ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
     
@@ -536,7 +536,7 @@ InstallMethod( LeftDivide,
     ZB := DecideZeroColumns( B, BL );
     
     ## knowing this will avoid computations
-    IsIdentityMatrix( IAL );
+    IsOne( IAL );
     
     ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance
     

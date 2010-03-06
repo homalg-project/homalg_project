@@ -38,7 +38,7 @@
 <Heading>Matrices: Properties</Heading>
 
 <#Include Label="IsZero:matrix">
-<#Include Label="IsIdentityMatrix">
+<#Include Label="IsOne:matrix">
 <#Include Label="IsPermutationMatrix">
 <#Include Label="IsSpecialSubidentityMatrix">
 <#Include Label="IsSubidentityMatrix">

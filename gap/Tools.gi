@@ -1120,13 +1120,13 @@ end );
 ##    <Description>
 ##      In case the matrix <A>C</A> was created using
 ##      <Ref Meth="HomalgIdentityMatrix" Label="constructor for identity matrices"/>
-##      then the filter <C>IsIdentityMatrix</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
+##      then the filter <C>IsOne</C> for <A>C</A> is set to true and the <C>homalgTable</C> function
 ##      (&see; <Ref Meth="IdentityMatrix" Label="homalgTable entry"/>)
 ##      will be used to set the attribute <C>Eval</C>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
-        "for homalg matrices (IsIdentityMatrix)",
-        [ IsHomalgMatrix and IsIdentityMatrix and HasNrRows and HasNrColumns ], 10,
+        "for homalg matrices (IsOne)",
+        [ IsHomalgMatrix and IsOne and HasNrRows and HasNrColumns ], 10,
         
   function( C )
     local R, RP, o, z, zz, id;
@@ -1661,10 +1661,10 @@ end );
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>IsIdentityMatrix</C> is bound then the standard method
-##      for the property <Ref Prop="IsIdentityMatrix"/> shown below returns
+##      for the property <Ref Prop="IsOne"/> shown below returns
 ##      <M>RP</M>!.<C>IsIdentityMatrix</C><M>( <A>M</A> )</M>.
 ##    <Listing Type="Code"><![CDATA[
-InstallMethod( IsIdentityMatrix,
+InstallMethod( IsOne,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         

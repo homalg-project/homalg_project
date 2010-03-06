@@ -193,7 +193,7 @@ end );
 ##
 InstallMethod( ShallowCopy,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
+        [ IsHomalgMatrix and IsOne ],
         
   function( M )
     
@@ -1982,12 +1982,12 @@ InstallGlobalFunction( HomalgIdentityMatrix,
                 matrix, type,
                 NrRows, arg[1],
                 NrColumns, arg[1],
-                IsIdentityMatrix, true );
+                IsOne, true );
     else
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
-                IsIdentityMatrix, true );
+                IsOne, true );
     fi;
     
     return matrix;
@@ -2111,9 +2111,9 @@ end );
 ##  <A homalg internal ring>
 ##  gap> id := HomalgInitialIdentityMatrix( 3, ZZ );
 ##  <An initial identity homalg internal 3 by 3 matrix>
-##  gap> HasIsIdentityMatrix( id );
+##  gap> HasIsOne( id );
 ##  false
-##  gap> IsIdentityMatrix( id );
+##  gap> IsOne( id );
 ##  true
 ##  gap> id;
 ##  <A homalg internal 3 by 3 identity matrix>
@@ -2128,7 +2128,7 @@ end );
 ##  [ [   1,   1,   0 ],
 ##    [  -1,   1,   0 ],
 ##    [   0,   0,   1 ] ]
-##  gap> IsIdentityMatrix( e );
+##  gap> IsOne( e );
 ##  false
 ##  gap> e;
 ##  <A homalg internal 3 by 3 matrix>
@@ -2139,7 +2139,7 @@ end );
 ##
 InstallGlobalFunction( HomalgInitialIdentityMatrix,
   function( arg )		## a square initial matrix having the flag IsInitialIdentityMatrix
-    local R, type, matrix;	## and filled with an identity matrix BUT NOT marked as an IsIdentityMatrix
+    local R, type, matrix;	## and filled with an identity matrix BUT NOT marked as an IsOne
     
     R := arg[Length( arg )];
     
@@ -2480,7 +2480,7 @@ end );
 ##
 InstallMethod( \*,
         "for homalg matrices",
-        [ IsHomalgRing, IsHomalgMatrix and IsIdentityMatrix ], 10001,
+        [ IsHomalgRing, IsHomalgMatrix and IsOne ], 10001,
         
   function( R, m )
     
@@ -2710,7 +2710,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsIdentityMatrix ],
+        [ IsHomalgMatrix and IsOne ],
         
   function( o )
     local R;

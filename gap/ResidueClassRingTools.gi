@@ -508,13 +508,13 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                
                ##  <#GAPDoc Label="IsIdentityMatrix:ResidueClassRing">
                ##  <ManSection>
-               ##    <Func Arg="M" Name="IsIdentityMatrix" Label="ResidueClassRing"/>
+               ##    <Func Arg="M" Name="IsOne" Label="ResidueClassRing"/>
                ##    <Returns><C>true</C> or <C>false</C></Returns>
                ##    <Description>
                ##    (&see; <Ref Meth="IsIdentityMatrix" Label="homalgTable entry"/>)
                ##    <Listing Type="Code"><![CDATA[
                IsIdentityMatrix := M ->
-                         IsIdentityMatrix( DecideZero( Eval( M ), HomalgRing( M ) ) ),
+                         IsOne( DecideZero( Eval( M ), HomalgRing( M ) ) ),
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>

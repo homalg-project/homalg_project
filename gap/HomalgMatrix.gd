@@ -142,9 +142,9 @@ DeclareProperty( "IsVoidMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsIdentityMatrix">
+##  <#GAPDoc Label="IsOne:matrix">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsIdentityMatrix"/>
+##    <Prop Arg="A" Name="IsOne"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; matrix <A>A</A> is an identity matrix, taking possible ring relations into account.<P/>
@@ -153,8 +153,6 @@ DeclareProperty( "IsVoidMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsIdentityMatrix",
-        IsHomalgMatrix );
 
 ##  <#GAPDoc Label="IsPermutationMatrix">
 ##  <ManSection>
