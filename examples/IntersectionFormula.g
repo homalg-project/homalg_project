@@ -1,77 +1,48 @@
 LoadPackage( "Sheaves" );
-
-R := HomalgRingOfIntegersInSingular( 5 ) * "x,y,z,v,w";
-
+R := HomalgRingOfIntegersInSingular( 5 ) * "x,y,z,v,w";;
 LoadPackage( "LocalizeRingForHomalg" );
+R0 := LocalizeAtZero( R );;
+S0 := LocalizePolynomialRingAtZeroWithMora( R );;
 
-R0 := LocalizeAtZero( R );
-
-S0 := LocalizePolynomialRingAtZeroWithMora( R );
-
-m1 := HomalgMatrix( "[ \
+i1 := HomalgMatrix( "[ \
 x-z, \
 y-w  \
-]", 2, 1, R );
-
-m2 := HomalgMatrix( "[ \
-y^6*v^2*w-y^3*v*w^2+1,\
+]", 2, 1, R );;
+i2 := HomalgMatrix( "[ \
+y^6*v^2*w-y^3*v*w^20+1,         \
 x*y^4*z^4*w-z^5*w^5+x^3*y*z^2-1 \
-]", 2, 1, R );
-
-M := Intersect( LeftSubmodule( m1 ), LeftSubmodule( m2 ) );
-
-M0 := R0 * M;
-
-LocM := S0 * M;
-
-n1 := HomalgMatrix( "[ \
+]", 2, 1, R );;
+I := Intersect( LeftSubmodule( i1 ), LeftSubmodule( i2 ) );;
+I0 := R0 * I;
+OI0 := FactorObject( I0 );
+j1 := HomalgMatrix( "[ \
 x*z, \
 x*w, \
 y*z, \
 y*w, \
 v^2  \
-]", 5, 1, R );
+]", 5, 1, R );;
+j2 := HomalgMatrix( "[ \
+y^6*v^2*w-y^3*v*w^2+1,           \
+x*y^4*z^4*w-z^5*w^5+x^3*y*z^2-1, \
+x^7                              \
+]", 3, 1, R );;
+J := Intersect( LeftSubmodule( j1 ), LeftSubmodule( j2 ) );;
+J0 := R0 * J;;
+OJ0 := FactorObject( J0 );
 
-n2 := HomalgMatrix( "[ \
-y*z^3*w^6-y^2*z^3*w^4+x*y*z*v*w+1, \
-y^6*z^4+y^5*z^4*w, \
--2*z^2*w^4+x^2*y   \
-]", 3, 1, R );
+Print( "0" );
 
-n3 := HomalgMatrix( "[ \
-x^7 \
-]", 1, 1, R );
+#T0 := Tor( OI0 , OJ0 );
+T := Tor( FactorObject( I ) , FactorObject( J ) );
 
-N := Intersect( LeftSubmodule( n1 ), LeftSubmodule( UnionOfRows( n3, m2 ) ) );
+# T0Mora := S0 * T0;
+T0Mora := S0 * T;
+List ( ObjectsOfComplex ( T0Mora ), AffineDegree );
 
-N0 := R0 * N;
+Print( "1" );
 
-LocN := S0 * N;
-
-OM := FactorObject( M );
-
-ON := FactorObject( N );
-
-OM0 := FactorObject( M0 );
-
-ByASmallerPresentation( OM0 );
-
-ON0 := FactorObject( N0 );
-
-ByASmallerPresentation( ON0 );
-
-OLocM := FactorObject( LocM );
-
-ByASmallerPresentation( OLocM );
-
-OLocN := FactorObject( LocN );
-
-ByASmallerPresentation( OLocN );
-
-T0 := Tor(OM0,ON0);
-
-#monster output
-
-T0Mora := S0 * T0;
-
-List ( ObjectsOfComplex ( T0Mora ), AffineDegree ); 
+II := S0 * OI0;
+JJ := S0 * OJ0;
+TT := Tor( II , JJ );
+List ( ObjectsOfComplex ( TT ) , AffineDegree );
