@@ -1074,33 +1074,65 @@ proc BasisOfColumnsCoeffLocal (matrix M)\n\
 
 ## A * U^-1 -> u^-1 A2
 #above code should allready have caught this, but still: U is filled with a zero at the diagonal, when we reduce zero. we may replace this zero with any unit, so for smaller somputations we choose 1.
+
     CreateInputForLocalMatrixRows := "\n\
-proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
-{\n\
-  poly u=1;\n\
-  matrix A2=A;\n\
-  for (int i=1; i<=ncols(U); i=i+1)\n\
+ring r= 0,(x),ds;\n\
+matrix M[2][2]=[1,0,0,0];\n\
+matrix NN[2][1]=[1,0];\n\
+module N=std(NN);\n\
+list l=division(M,N);\n\
+if( l[3][2,2]==0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-1-0\n\
+{ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   {\n\
-    if(U[i,i]!=0){u=lcm(u,U[i,i]);};\n\
+    poly u=1;\n\
+    matrix A2=A;\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
+      if(U[i,i]!=0){u=lcm(u,U[i,i]);};\n\
+    }\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
+      if(U[i,i]==0){\n\
+        poly gg=1;\n\
+      } else {\n\
+        poly uu=U[i,i];\n\
+        poly gg=u/uu;\n\
+      };\n\
+      if(gg!=1)\n\
+      {\n\
+        for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+      }\n\
+    }\n\
+    list l=A2,u;\n\
+    return(l);\n\
   }\n\
-  for (int i=1; i<=ncols(U); i=i+1)\n\
+}\n\
+else\n\
+{ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   {\n\
-    if(U[i,i]==0){\n\
-      poly gg=1;\n\
-    } else {\n\
+    poly u=1;\n\
+    matrix A2=A;\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
+      u=lcm(u,U[i,i]);\n\
+    }\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
       poly uu=U[i,i];\n\
       poly gg=u/uu;\n\
-    };\n\
-    if(gg!=1)\n\
-    {\n\
-      for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+      if(gg!=1)\n\
+      {\n\
+        for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+      }\n\
     }\n\
+    list l=A2,u;\n\
+    return(l);\n\
   }\n\
-  list l=A2,u;\n\
-  return(l);\n\
-}\n\n",
+}\n\
+kill r;"
 
     )
+
 );
 
 ##
