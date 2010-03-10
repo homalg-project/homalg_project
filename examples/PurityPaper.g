@@ -1,3 +1,4 @@
+#This is the first example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
 LoadPackage( "RingsForHomalg" );;
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) *  "a,b,c,d,e";;

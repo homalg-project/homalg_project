@@ -1,4 +1,4 @@
-#This is the example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
+#This is the second example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
 #in the version where Mora's algorithm fails (using ByASmallerPresentation)
 
 LoadPackage( "Sheaves" );
