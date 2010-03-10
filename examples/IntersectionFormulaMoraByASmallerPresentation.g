@@ -1,4 +1,6 @@
 #This is the example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
+#in the version where Mora's algorithm fails (using ByASmallerPresentation)
+
 LoadPackage( "Sheaves" );
 R := HomalgRingOfIntegersInSingular( 5 ) * "x,y,z,v,w";;
 LoadPackage( "LocalizeRingForHomalg" );
@@ -32,7 +34,9 @@ J := Intersect( LeftSubmodule( j1 ), LeftSubmodule( j2 ) );;
 J0 := R0 * J;;
 OJ0 := FactorObject( J0 );
 
-T0 := Tor( OI0 , OJ0 );
-
-T0Mora := S0 * T0;
-List ( ObjectsOfComplex ( T0Mora ), AffineDegree );
+II := S0 * OI0;
+JJ := S0 * OJ0;
+ByASmallerPresentation(II);
+ByASmallerPresentation(JJ);
+TT := Tor( II , JJ );
+List ( ObjectsOfComplex ( TT ) , AffineDegree );
