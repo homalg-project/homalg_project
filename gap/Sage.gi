@@ -18,7 +18,7 @@ InstallValue( HOMALG_IO_Sage,
         rec(
             cas := "sage",		## normalized name on which the user should have no control
             name := "Sage",
-            executable := "sage",
+            executable := [ "sage" ],	## this list is processed from left to right
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
@@ -35,6 +35,7 @@ InstallValue( HOMALG_IO_Sage,
             prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
             display_color := "\033[0;34;43m",
+            InitializeMacros := InitializeSageMacros,
            )
 );
             
@@ -46,9 +47,9 @@ HOMALG_IO_Sage.READY_LENGTH := Length( HOMALG_IO_Sage.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSageRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -89,6 +90,43 @@ InstallGlobalFunction( _Sage_multiple_delete,
     
 end );
 
+##
+InstallValue( SageMacros,
+        rec(
+            
+    ZeroRows := "\n\
+def ZeroRows(C):\n\
+  def check_rows(i):\n\
+    return RowChecklist[i]\n\
+  RowChecklist=[C.row(x).is_zero() for x in range(C.nrows())]\n\
+  return filter(check_rows,range(C.nrows()))\n\n",
+    
+    ZeroColumns := "\n\
+def ZeroColumns(C):\n\
+  def check_cols(i):\n\
+    return ColChecklist[i]\n\
+  ColChecklist=[C.column(x).is_zero() for x in range(C.ncols())]\n\
+  return filter(check_cols,range(C.ncols()))\n\n",
+    
+    FillMatrix := "\n\
+def FillMatrix(M,L):\n\
+  for x in L:\n\
+    M[x[0]-1,x[1]-1] = x[2]\n\n",
+    
+    )
+);
+
+##
+InstallGlobalFunction( InitializeSageMacros,
+  function( stream )
+    local v;
+    
+    v := stream.variable_name;
+    
+    InitializeMacros( SageMacros, stream );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -98,69 +136,55 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInSage,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, ar;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Sage );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInSage, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInSage );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInSage ];
     
-    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSage );
+    Add( ar, HOMALG_IO_Sage );
+    
+    return CallFuncList( CreateHomalgExternalRing, ar );
     
 end );
 
 InstallGlobalFunction( HomalgRingOfIntegersInSage,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := "GF(";
-        c := AbsInt( arg[1] );
 	l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
+        R := [ "GF(", c, ")" ];
     else
-        m := "IntegerModRing(";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
-    fi;
-    
-    if nargs = 0 or arg[1] = 0 then
-	l := 1;
-    elif IsInt( arg[1] ) then
+        ## characteristic:
+        c := 0;
+        R := [ "IntegerModRing(", c, ")" ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Sage!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    ar := Concatenation( [ [ m, c, ")" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    R := CallFuncList( RingForHomalgInSage, ar );
+    R := CallFuncList( RingForHomalgInSage, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -173,11 +197,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSage,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "QQ" ], [ IsPrincipalIdealRing, IsFieldForHomalg ], arg );
+    R := "QQ";
     
-    R := CallFuncList( RingForHomalgInSage, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing, IsFieldForHomalg ], arg );
+    
+    R := CallFuncList( RingForHomalgInSage, R );
     
     SetIsFieldForHomalg( R, true );
     
@@ -223,7 +249,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, s, R )
@@ -234,7 +260,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, a, R )
@@ -245,7 +271,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a listlist of an external matrix in Sage",
+        "constructor for homalg external matrices in Sage",
         [ IsString, IsHomalgExternalRingInSageRep ],
         
   function( S, R )
@@ -259,7 +285,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a list of an external matrix in Sage",
+        "constructor for homalg external matrices in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
  function( S, r, c, R )
     local ext_obj;
@@ -271,8 +297,8 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a sparse list of an external matrix in Sage",
+InstallMethod( CreateHomalgMatrixFromSparseString,
+        "constructor for homalg external matrices in Sage",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( S, r, c, R )
@@ -290,7 +316,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( M, r, c, R )
@@ -301,7 +327,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, R )
@@ -315,7 +341,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
@@ -326,7 +352,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M, R )
@@ -337,7 +363,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSageRep ],
         
   function( M , R )
@@ -348,7 +374,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Sage",
+        "for homalg external matrices in Sage",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSageRep ],
         
   function( filename, M, R )

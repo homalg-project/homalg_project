@@ -14,7 +14,5 @@
 #
 ####################################
 
-DeclareGlobalVariable( "InitializeSingularBestBasis" );
-
 DeclareGlobalVariable( "CommonHomalgTableForSingularBestBasis" );
 

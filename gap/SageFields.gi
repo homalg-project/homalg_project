@@ -1,12 +1,31 @@
 #############################################################################
 ##
-##  SageFields.gd              RingsForHomalg package            Simon Goertzen
+##  SageFields.gd             RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  Implementations for GF(p) and Q in Sage.
 ##
 #############################################################################
+
+####################################
+#
+# global variables:
+#
+####################################
+
+##
+SageMacros.RowReducedEchelonForm_NU_Fields := "\n\
+def RowReducedEchelonForm_NU_Fields(M):\n\
+  MId = block_matrix([M,identity_matrix(M.base_ring(),M.nrows())],1,2)\n\
+  MId.echelonize()\n\
+  N = MId.matrix_from_columns(range( M.ncols() ))\n\
+  U = MId.matrix_from_columns(range( M.ncols(), M.ncols() + M.nrows()))\n\
+  return N, U\n\n";
+
+SageMacros.RowReducedEchelonForm_Fields := "\n\
+def RowReducedEchelonForm_Fields(M):\n\
+  return M.echelon_form()\n\n";
 
 ####################################
 #
@@ -20,26 +39,9 @@ InstallMethod( CreateHomalgTable,
           and IsFieldForHomalg ],
         
   function( ext_ring_obj )
-    local RP, command, RP_specific, component;
+    local RP, RP_specific, component;
     
-    InitializeSageTools( ext_ring_obj );
     RP := ShallowCopy( CommonHomalgTableForSageTools );
-    
-    command := Concatenation(           
-            
-            "def TriangularBasisOfRows_NU(M):\n",
-            "  MId = block_matrix([M,identity_matrix(M.base_ring(),M.nrows())],1,2)\n",
-            "  MId.echelonize()\n",
-            "  N = MId.matrix_from_columns(range( M.ncols() ))\n",
-            "  U = MId.matrix_from_columns(range( M.ncols(), M.ncols() + M.nrows()))\n",
-            "  return N, U\n\n",
-                 
-            "def TriangularBasisOfRows_N_only(M):\n",
-            "  return M.echelon_form()\n\n"
-            
-            );
-    
-    homalgSendBlocking( [ command ], "need_command", ext_ring_obj, HOMALG_IO.Pictograms.define ); ## the last procedures to initialize
     
     RP_specific :=
           rec(
@@ -56,7 +58,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               TriangularBasisOfRows :=
+               RowReducedEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -68,7 +70,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
@@ -76,10 +78,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, "=TriangularBasisOfRows_NU(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasisC );
+                       homalgSendBlocking( [ N, U, "=RowReducedEchelonForm_NU_Fields(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, "=TriangularBasisOfRows_N_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
+                       homalgSendBlocking( [ N, "=RowReducedEchelonForm_Fields(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );

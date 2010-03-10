@@ -6,6 +6,7 @@
                                                                            Simon Goertzen
                                                                          Markus Kirschmer
                                                                    Markus Lange-Hegermann
+                                                                         Motsak Oleksandr
                                                                           Max Neunhoeffer
                                                                            Daniel Robertz
 
@@ -15,85 +16,107 @@
 
 <TitlePage>
   <Title>&RingsForHomalg;</Title>
-  <Subtitle>Rings in External Computer Algebra Systems for the GAP-Package homalg</Subtitle>
-  <TitleComment>(<E>this manual is still under construction</E>) <Br/><Br/>
-    This manual is best viewed as an <B>HTML</B> document. The latest version is available <B>online</B> at: <Br/><Br/>
-    <URL>http://homalg.math.rwth-aachen.de/~barakat/IO_ForHomalg/chap0.html</URL> <Br/><Br/>
-    An <B>offline</B> version should be included in the documentation subfolder of the package.
+  <Subtitle>Dictionaries of External Rings for the &GAP; Package &homalg;</Subtitle>
+  <TitleComment>(<E>this manual is still under construction</E>)
+    <Br/><Br/>
+    
+    This manual is best viewed as an <B>HTML</B> document. The latest
+    version is available <B>online</B> at: <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/RingsForHomalg/chap0.html</URL>
+    <Br/><Br/>
+    
+    An <B>offline</B> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the &homalg;-project:
+    <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Universität des Saarlandes, <Br/>
-      66041 Saarbrücken, <Br/>
-      Building E2 4, <Br/>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
       Germany
     </Address>
-    <Email>barakat@math.uni-sb.de</Email>
+    <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;barakat/</Homepage>
   </Author>
-  <Author>Simon Goertzen
+  <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik,
-      RWTH Aachen,
-      Templergraben 64,
-      52056 Aachen,
+      Lehrstuhl B für Mathematik, <Br/>
+      RWTH Aachen, <Br/>
+      Templergraben 64, <Br/>
+      52056 Aachen, <Br/>
       Germany
     </Address>
     <Email>simon.goertzen@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;simon</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;simon/</Homepage>
   </Author>
-  <Author>Markus Kirschmer
+  <Author>Markus Kirschmer<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl D für Mathematik,
-      RWTH Aachen,
-      Templergraben 64,
-      52056 Aachen,
+      Lehrstuhl D für Mathematik, <Br/>
+      RWTH Aachen, <Br/>
+      Templergraben 64, <Br/>
+      52056 Aachen, <Br/>
       Germany
     </Address>
     <Email>markus.kirschmer@math.rwth-aachen.de</Email>
-    <Homepage>http://www.math.rwth-aachen.de/&tilde;Markus.Kirschmer</Homepage>
+    <Homepage>http://www.math.rwth-aachen.de/&tilde;Markus.Kirschmer/</Homepage>
   </Author>
-  <Author>Markus Lange-Hegermann
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik,
-      RWTH Aachen,
-      Templergraben 64,
-      52056 Aachen,
+      Lehrstuhl B für Mathematik, <Br/>
+      RWTH Aachen, <Br/>
+      Templergraben 64, <Br/>
+      52056 Aachen, <Br/>
       Germany
     </Address>
     <Email>markus.lange-hegermann@rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;markus</Homepage>
+    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;markus/</Homepage>
   </Author>
-  <Author>Max Neunhöffer
+  <Author>Motsak Oleksandr<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      St Andrews University,
-      School of Mathematics and Statistics,
-      Mathematical Institute,
-      North Haugh,
-      St Andrews, Fife KY16 9SS,
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>motsak@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak/</Homepage>
+  </Author>
+  <Author>Max Neunhöffer<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      St Andrews University, <Br/>
+      School of Mathematics and Statistics, <Br/>
+      Mathematical Institute, <Br/>
+      North Haugh, <Br/>
+      St Andrews, Fife KY16 9SS, <Br/>
       Scotland, UK
     </Address>
-    <Email>daniel@momo.math.rwth-aachen.de</Email>
-    <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
+    <Email>neunhoef@mcs.st-and.ac.uk</Email>
+    <Homepage>http://www-groups.mcs.st-and.ac.uk/&tilde;neunhoef/</Homepage>
   </Author>
-  <Author>Daniel Robertz
+  <Author>Daniel Robertz<Alt Only="LaTeX"><Br/></Alt>
     <Address>
-      Lehrstuhl B für Mathematik,
-      RWTH Aachen,
-      Templergraben 64,
-      52056 Aachen,
+      Lehrstuhl B für Mathematik, <Br/>
+      RWTH Aachen, <Br/>
+      Templergraben 64, <Br/>
+      52056 Aachen, <Br/>
       Germany
     </Address>
     <Email>daniel@momo.math.rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
   </Author>
-  <Date>October 2009</Date>
+  <Date>March 2010</Date>
   
   <Copyright>
-    &copyright; 2007-2009 by
+    &copyright; 2007-2010 by
     Mohamed Barakat, Simon Görtzen, Markus Kirschmer,
-    Markus Lange-Hegermann, Max Neunhöffer, and Daniel Robertz.<P/>
+    Markus Lange-Hegermann, Motsak Oleksandr, Max Neunhöffer, and Daniel Robertz.<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.

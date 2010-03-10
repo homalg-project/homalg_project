@@ -20,7 +20,7 @@ InstallValue( HOMALG_IO_MAGMA,
         rec(
             cas := "magma",		## normalized name on which the user should have no control
             name := "MAGMA",
-            executable := "magma",
+            executable := [ "magma" ],	## this list is processed from left to right
             options := [ ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
@@ -36,6 +36,7 @@ InstallValue( HOMALG_IO_MAGMA,
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
+            InitializeMacros := InitializeMAGMAMacros,
            )
 );
 
@@ -47,9 +48,9 @@ HOMALG_IO_MAGMA.READY_LENGTH := Length( HOMALG_IO_MAGMA.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMAGMARep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -412,67 +413,56 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMAGMA,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, ar;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_MAGMA );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeMAGMAMacros( stream );
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMAGMA, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInMAGMA );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInMAGMA ];
     
-    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
+    Add( ar, HOMALG_IO_MAGMA );
+    
+    return CallFuncList( CreateHomalgExternalRing, ar );
     
 end );
 
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := AbsInt( arg[1] );
-        c := m;
-        l := 2;
+	l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
+        R := [ "IntegerRing(", c, ")" ];
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
+        R := [ "IntegerRing()" ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for MAGMA!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    ar := Concatenation( [ [ "IntegerRing(", m, ")" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    R := CallFuncList( RingForHomalgInMAGMA, ar );
+    R := CallFuncList( RingForHomalgInMAGMA, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -485,11 +475,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "Rationals()" ], [ IsPrincipalIdealRing ], arg );
+    R := "Rationals()";
     
-    R := CallFuncList( RingForHomalgInMAGMA, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInMAGMA, R );
     
     SetIsFieldForHomalg( R, true );
     
@@ -541,47 +533,18 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings in MAGMA",
-        [ IsHomalgExternalRingInMAGMARep, IsList ],
+        [ IsHomalgExternalRingInMAGMARep, IsHomalgExternalRingInMAGMARep, IsList ],
         
-  function( R, indets )
-    local var, nr_var, anti, nr_anti, properties, stream, r,
-          ext_obj, S, v, RP;
+  function( R, T, indets )
+    local ar, var, anti, comm, r, ext_obj, S;
     
-    #check whether base ring is polynomial and then extract needed data
-    if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
-        var := IndeterminatesOfPolynomialRing( R );
-        nr_var := Length( var );
-    else
-        Error( "base ring is not a polynomial ring" );
-    fi;
+    ar := _PrepareInputForExteriorRing( R, T, indets );
     
-    ##get the new indeterminates (the anti commuting variables) for the ring and save them in anti
-    if IsString( indets ) and indets <> "" then
-        anti := SplitString( indets, "," );
-    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
-        anti := indets;
-    else
-        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
-    fi;
+    var := ar[1];
+    anti := ar[2];
+    comm := ar[3];
     
-    nr_anti := Length( anti );
-    
-    if nr_var <> nr_anti then
-        Error( "number of indeterminates in base ring does not equal the number of anti commuting variables\n" );
-    fi;
-    
-    if Intersection2( anti, var ) <> [ ] then
-        Error( "the following indeterminate(s) are already elements of the base ring: ", Intersection2( anti, var ), "\n" );
-    fi;
-    
-    if not ForAll( var, HasName ) then
-        Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
-    fi;
-    
-    properties := [ ];
-    
-    stream := homalgStream( R );
-    
+    ## create the new ring
     r := CoefficientsRing( R );
     
     ext_obj := homalgSendBlocking( [ "ExteriorAlgebra(", r, Length( anti ), ")" ], [ ], [ "<", anti, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
@@ -592,23 +555,17 @@ InstallMethod( ExteriorRing,
     
     Perform( anti, function( v ) SetName( v, homalgPointer( v ) ); end );
     
+    comm := List( comm , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( comm, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
     SetIsExteriorRing( S, true );
     
+    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
+        SetBaseRing( S, T );
+    fi;
+    
     SetRingProperties( S, R, anti );
-    
-    RP := homalgTable( S );
-    
-#    RP!.SetInvolution :=
-#      function( R )
-#        homalgSendBlocking( Concatenation(
-#                [ "\nproc Involution (matrix M)\n{\n" ],
-#                [ "  map F = ", R ],
-#                Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ a ] ) ),
-#                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
-#                ), "need_command", HOMALG_IO.Pictograms.define );
-#    end;
-#    
-#    RP!.SetInvolution( S );
     
     return S;
     
@@ -616,7 +573,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, s, R )
@@ -627,7 +584,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, a, R )
@@ -638,7 +595,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in MAGMA",
+        "constructor for homalg external matrices in MAGMA",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( S, R )
@@ -652,7 +609,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a list of an external matrix in MAGMA",
+        "constructor for homalg external matrices in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
   function( S, r, c, R )
     
@@ -665,8 +622,8 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a sparse list of an external matrix in MAGMA",
+InstallMethod( CreateHomalgMatrixFromSparseString,
+        "constructor for homalg external matrices in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( S, r, c, R )
@@ -684,7 +641,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, R )
@@ -695,7 +652,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, R )
@@ -709,7 +666,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, R )
@@ -731,7 +688,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, R )
@@ -742,7 +699,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in MAGMA",
+        "for homalg external matrices in MAGMA",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMAGMARep ],
         
   function( filename, M, R )

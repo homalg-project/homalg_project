@@ -18,7 +18,7 @@ InstallValue( HOMALG_IO_Macaulay2,
         rec(
             cas := "macaulay2",		## normalized name on which the user should have no control
             name := "Macaulay2",
-            executable := "M2",
+            executable := [ "M2" ],	## this list is processed from left to right
             options := [ "--no-prompts", "--no-readline", "--print-width", "80" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
@@ -39,6 +39,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             prompt := "\033[01mM2>\033[0m ",
             output_prompt := "\033[1;30;43m<M2\033[0m ",
             banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
+            InitializeMacros := InitializeMacaulay2Macros,
            )
 );
             
@@ -50,9 +51,9 @@ HOMALG_IO_Macaulay2.READY_LENGTH := Length( HOMALG_IO_Macaulay2.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMacaulay2Rep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -444,36 +445,23 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMacaulay2,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, ar, R, RP;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Macaulay2 );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeMacaulay2Macros( stream );
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInMacaulay2, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInMacaulay2 );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInMacaulay2 ];
     
-    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
+    Add( ar, HOMALG_IO_Macaulay2 );
+    
+    R := CallFuncList( CreateHomalgExternalRing, ar );
     
     _Macaulay2_SetRing( R );
     
@@ -493,31 +481,33 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMacaulay2,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        c := AbsInt( arg[1] );
-        m := Concatenation( " / ", String( c ) );
         l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
+        R :=  [ "ZZ / ", c ];
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
+	R := [ "ZZ" ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Macaulay2!\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    ar := Concatenation( [ [ "ZZ", m ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
-    R := CallFuncList( RingForHomalgInMacaulay2, ar );
+    R := CallFuncList( RingForHomalgInMacaulay2, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -530,11 +520,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMacaulay2,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "QQ" ], [ IsPrincipalIdealRing ], arg );
+    R := "QQ";
     
-    R := CallFuncList( RingForHomalgInMacaulay2, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInMacaulay2, R );
     
     SetIsFieldForHomalg( R, true );
     
@@ -720,15 +712,13 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInMacaulay2Rep, IsHomalgExternalRingInMacaulay2Rep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP;
+    local ar, var, anti, comm, ext_obj, S, RP;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
     var := ar[1];
     anti := ar[2];
     comm := ar[3];
-    
-    stream := homalgStream( R );
     
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( T ) then
@@ -780,7 +770,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, s, R )
@@ -791,7 +781,23 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Macaulay2",
+        "constructor for homalg external matrices in Macaulay2",
+        [ IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  function( s, R )
+    local r, c;
+    
+    r := Length( Positions( s, '[' ) ) - 1;
+    
+    c := ( Length( Positions( s, ',' ) ) + 1 ) / r;
+    
+    return CreateHomalgMatrixFromString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromString,
+        "constructor for homalg external matrices in Macaulay2",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( s, r, c, R )
@@ -807,7 +813,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
@@ -818,7 +824,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
@@ -843,7 +849,7 @@ end );
 
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
-        "for external matrices in Macaulay2",
+        "for external rings in Macaulay2",
         [ IsHomalgExternalRingInMacaulay2Rep and HasWeightsOfIndeterminates ],
         
   function( R )
@@ -874,7 +880,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Macaulay2",
+        "for homalg external matrices in Macaulay2",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( filename, M, R )
@@ -937,7 +943,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg matrices in Singular",
+        "for homalg external matrices in Macaulay2",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
@@ -956,7 +962,7 @@ end );
 
 ##
 InstallMethod( DisplayRing,
-        "for homalg rings in Singular",
+        "for homalg rings in Macaulay2",
         [ IsHomalgExternalRingInMacaulay2Rep ], 1,
         
   function( o )

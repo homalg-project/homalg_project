@@ -1,3 +1,4 @@
+Read( "homalg.g" );
 LoadPackage( "RingsForHomalg" );
 HOMALG_IO.color_display := true;
 ZZ := HomalgRingOfIntegersInMaple( );

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SageBestBasis.gi          RingsForHomalg package           Simon Goertzen
+##  SageBestBasis.gi          RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -14,36 +14,15 @@
 #
 ####################################
 
-InstallGlobalFunction( InitializeSageBestBasis,
-        
-        function( R )
-          local command;
-          command := Concatenation(
+SageMacros.BestBasis_S_only := "\n\
+def BestBasis_S_only(M):\n\
+  elemdivlist=M.elementary_divisors()\n\
+  TempMat=matrix(M.base_ring(),M.nrows(),M.ncols())\n\
+  for i in range(len(elemdivlist)):\n\
+    TempMat[i,i]=elemdivlist[i]\n\
+  return TempMat\n\n";
 
-            "def BestBasis_SUV( M ):\n",
-            "  S, U, V = M.smith_form()\n",
-            "  InvertedRowList = range(M.nrows()-1,-1,-1)\n",
-            "  InvertedColumnList = range(M.ncols()-1,-1,-1)\n",
-            "  S = S.matrix_from_rows_and_columns(InvertedRowList, InvertedColumnList)\n",
-            "  U = U.matrix_from_rows( InvertedRowList )\n",
-            "  V = V.matrix_from_columns( InvertedColumnList )\n",
-            "  return S, U, V\n\n",
-            
-            "def BestBasis_S_only(M):\n",
-            "  elemdivlist=M.elementary_divisors()\n",
-            "  TempMat=matrix(M.base_ring(),M.nrows(),M.ncols())\n",
-            "  for i in range(len(elemdivlist)):\n",
-            "    TempMat[i,i]=elemdivlist[i]\n",
-            "  return TempMat\n\n"
-            
-          );
-            
-          homalgSendBlocking( [ command ], "need_command", R, HOMALG_IO.Pictograms.define );
-          
-        end
-);
-
-
+##
 InstallValue( CommonHomalgTableForSageBestBasis,
         
         rec(
@@ -86,7 +65,7 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                        fi;
                        
                        ## compute S, U and (if nargs > 2) V: S = U*M*V
-                       homalgSendBlocking( [ S, U, V, "= BestBasis_SUV(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
+                       homalgSendBlocking( [ S, U, V, "=", M, ".smith_form()" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
                    else
                        ## compute S only:
                        homalgSendBlocking( [ S, " = BestBasis_S_only(", M, ")" ], "need_command", HOMALG_IO.Pictograms.BestBasis );
@@ -95,6 +74,6 @@ InstallValue( CommonHomalgTableForSageBestBasis,
                    return S;
                    
                  end
-
+               
         )
  );

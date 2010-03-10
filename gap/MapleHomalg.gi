@@ -19,11 +19,7 @@ InstallValue( HOMALG_IO_Maple,
         rec(
             cas := "maple",		## normalized name on which the user should have no control
             name := "Maple",
-            executable := "maple_for_homalg",
-            executable_alt1 := "maple10",
-            executable_alt2 := "maple11",
-            executable_alt3 := "maple9",
-            executable_alt4 := "maple",
+            executable := [ "maple_for_homalg", "maple10", "maple11", "maple9", "maple" ],	## this list is processed from left to right
             options := [ "-q" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
@@ -48,6 +44,7 @@ InstallValue( HOMALG_IO_Maple,
  \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
  <____ ____>  Waterloo Maple Inc.\n\
       |       ",
+            InitializeMacros := InitializeMapleMacros,
            )
 );
 
@@ -59,9 +56,9 @@ HOMALG_IO_Maple.READY_LENGTH := Length( HOMALG_IO_Maple.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInMapleRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # five new subrepresentations of the representation IsHomalgExternalRingObjectInMapleRep:
@@ -602,37 +599,33 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMaple,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
+        l := 2;
+        ## characteristic:
         c := AbsInt( arg[1] );
         if IsPrime( c ) then
-            m := [ c ];
+            R := [ c ];
         else
-            m := [ [ ], [ c ] ];
+            R := [ [ ], [ c ] ];
         fi;
-        l := 2;
     else
-        m := "[ ]";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
+        R := [ ];
     fi;
     
-    if nargs = 0 or arg[1] = 0 then
-        l := 1;
-    elif IsInt( arg[1] ) then
-        l := 2;
-    fi;
+    R := Concatenation( [ R ], arg{[ l .. nargs ]} );
     
-    ar := Concatenation( [ [ m ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
-    
-    R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
+    R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -645,11 +638,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "[0]" ], arg );
+    R := "[0]";
     
-    R := CallFuncList( RingForHomalgInMapleUsingPIR, ar );
+    R := Concatenation( [ R ], arg );
+    
+    R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
     SetIsFieldForHomalg( R, true );
     
@@ -827,7 +822,9 @@ InstallMethod( ExteriorRing,
     
     SetIsExteriorRing( S, true );
     
-    SetBaseRing( S, T );
+    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
+        SetBaseRing( S, T );
+    fi;
     
     SetRingProperties( S, R, anti );
     
@@ -866,7 +863,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, s, R )
@@ -877,7 +874,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, a, R )
@@ -888,7 +885,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Maple",
+        "constructor for homalg external matrices in Maple",
         [ IsString, IsHomalgExternalRingInMapleRep ],
         
   function( S, R )
@@ -902,7 +899,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Maple",
+        "constructor for homalg external matrices in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( S, r, c, R )
@@ -915,8 +912,8 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a list of an external matrix in Maple",
+InstallMethod( CreateHomalgMatrixFromSparseString,
+        "constructor for homalg external matrices in Maple",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( S, r, c, R )
@@ -934,7 +931,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, R )
@@ -945,7 +942,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMapleRep ],
         
   function( M, r, c, R )
@@ -959,7 +956,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
@@ -970,7 +967,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
@@ -981,7 +978,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInMapleRep ],
         
   function( M, R )
@@ -992,7 +989,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInMapleRep ],
         
   function( filename, M, R )
@@ -1068,7 +1065,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )

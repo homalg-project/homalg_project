@@ -18,7 +18,7 @@ InstallValue( HOMALG_IO_GAP,
         rec(
             cas := "gap",		## normalized name on which the user should have no control
             name := "GAP",
-            executable := "gapL",
+            executable := [ "gapL", "gap" ],	## this list is processed from left to right
             options := [ "-q -T -o 15g" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
@@ -33,7 +33,8 @@ InstallValue( HOMALG_IO_GAP,
             garbage_collector := function( stream ) homalgSendBlocking( [ "GASMAN( \"collect\" )" ], "need_command", stream, HOMALG_IO.Pictograms.garbage_collector ); end,
             prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
-            display_color := "\033[0;35m",           
+            display_color := "\033[0;35m",
+            init_string := "LoadPackage(\"HomalgToCAS\")",
            )
 );
 
@@ -45,9 +46,9 @@ HOMALG_IO_GAP.READY_LENGTH := Length( HOMALG_IO_GAP.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInGAPRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -97,67 +98,58 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
-    local nargs, stream, o, ar, ext_obj;
+    local nargs, ar, R;
     
     nargs := Length( arg );
     
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
+    ar := [ arg[1] ];
     
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_GAP );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    homalgSendBlocking( "LoadPackage(\"HomalgToCAS\")", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    
-    if IsBound( HOMALG.PreferDenseMatrices ) then
-        homalgSendBlocking( [ "HOMALG.PreferDenseMatrices := ", HOMALG.PreferDenseMatrices ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    fi;
-    
-    ar := [ arg[1], TheTypeHomalgExternalRingObjectInGAP, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    Add( ar, TheTypeHomalgExternalRingObjectInGAP );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInGAP ];
     
-    return CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInGAP );
+    Add( ar, HOMALG_IO_GAP );
+    
+    R := CallFuncList( CreateHomalgExternalRing, ar );
+    
+    if IsBound( HOMALG_MATRICES.PreferDenseMatrices ) then
+        homalgSendBlocking( [ "HOMALG_MATRICES.PreferDenseMatrices := ", HOMALG_MATRICES.PreferDenseMatrices ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+    fi;
+    
+    return R;
     
 end );
 
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := AbsInt( arg[1] );
-        c := m;
         l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
     fi;
     
-    ar := Concatenation( [ [ "HomalgRingOfIntegers( ", m, " )" ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := [ "HomalgRingOfIntegers( ", c, " )" ];
     
-    R := CallFuncList( RingForHomalgInExternalGAP, ar );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInExternalGAP, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -170,11 +162,13 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
   function( arg )
-    local ar, R;
+    local R;
     
-    ar := Concatenation( [ "HomalgFieldOfRationals( )" ], [ IsPrincipalIdealRing ], arg );
+    R := "HomalgFieldOfRationals( )";
     
-    R := CallFuncList( RingForHomalgInExternalGAP, ar );
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInExternalGAP, R );
     
     SetIsFieldForHomalg( R, true );
     
@@ -186,7 +180,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, s, R )
@@ -197,7 +191,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, a, R )
@@ -208,7 +202,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a listlist of an external matrix in GAP",
+        "constructor for homalg external matrices in GAP",
         [ IsString, IsHomalgExternalRingInGAPRep ],
         
   function( S, R )
@@ -223,7 +217,7 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for a list of an external matrix in GAP",
+        "constructor for homalg external matrices in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
     local ext_obj;
@@ -235,15 +229,15 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( CreateHomalgSparseMatrixFromString,
-        "for a sparse list of an external matrix in GAP",
+InstallMethod( CreateHomalgMatrixFromSparseString,
+        "constructor for homalg external matrices in GAP",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
   function( S, r, c, R )
     local ext_obj, s;
     
     s := homalgSendBlocking( [ "\"", S, "\"" ], R, HOMALG_IO.Pictograms.sparse );
     
-    ext_obj := homalgSendBlocking( [ "CreateHomalgSparseMatrixFromString( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "CreateHomalgMatrixFromSparseString( ", s, r, c , R, " )" ], HOMALG_IO.Pictograms.HomalgMatrix );
     
     return HomalgMatrix( ext_obj, R );
     
@@ -251,7 +245,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, R )
@@ -262,7 +256,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, R )
@@ -276,7 +270,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
@@ -296,7 +290,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
@@ -316,7 +310,7 @@ end );
 
 ##
 InstallMethod( GetSparseListOfHomalgMatrixAsString,
-        "for external matrices in Maple",
+        "for homalg external matrices in Maple",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, R )
@@ -336,7 +330,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in GAP",
+        "for homalg external matrices in GAP",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInGAPRep ],
         
   function( filename, M, R )

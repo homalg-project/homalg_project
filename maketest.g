@@ -25,8 +25,13 @@ list := [
          "../examples/RingConstructionsMaple.g",
          ];
 
-TestManualExamples( "doc", "RingsForHomalg.xml", list );
+size := SizeScreen( );
+SizeScreen([80]);
+
+TestManualExamples( DirectoriesPackageLibrary( "RingsForHomalg", "doc" )[1]![1], "RingsForHomalg.xml", list );
 
 GAPDocManualLab( "RingsForHomalg" );
+
+SizeScreen( size );
 
 quit;

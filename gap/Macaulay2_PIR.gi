@@ -20,9 +20,11 @@ InstallMethod( CreateHomalgTable,
           and IsPrincipalIdealRing ],
         
   function( ext_ring_obj )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMacaulay2Tools );
+    
+    RP_Basic := ShallowCopy( CommonHomalgTableForMacaulay2Basic );
     
     #RP_BestBasis := ShallowCopy( CommonHomalgTableForMacaulay2BestBasis );
     
@@ -48,7 +50,7 @@ InstallMethod( CreateHomalgTable,
                
                ## Must be defined if other functions are not defined
                
-               XTriangularBasisOfRows :=
+               XRowReducedEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, U;
                    
@@ -60,7 +62,7 @@ InstallMethod( CreateHomalgTable,
                    
                    N := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
                    
-                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not TriangularBasisOfRows( M, "" )
+                   if nargs > 1 and IsHomalgMatrix( arg[2] ) then ## not RowReducedEchelonForm( M, "" )
                        # assign U:
                        U := arg[2];
                        SetNrRows( U, NrRows( M ) );
@@ -68,10 +70,10 @@ InstallMethod( CreateHomalgTable,
                        SetIsInvertibleMatrix( U, true );
                        
                        ## compute N and U:
-                       homalgSendBlocking( [ N, U, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasisC );
+                       homalgSendBlocking( [ N, U, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonFormC );
                    else
                        ## compute N only:
-                       homalgSendBlocking( [ N, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.TriangularBasis );
+                       homalgSendBlocking( [ N, " := EchelonForm(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedEchelonForm );
                    fi;
                    
                    SetIsUpperStairCaseMatrix( N, true );
@@ -81,6 +83,10 @@ InstallMethod( CreateHomalgTable,
                  end
                
           );
+    
+    for component in NamesOfComponents( RP_Basic ) do
+        RP.(component) := RP_Basic.(component);
+    od;
     
     #for component in NamesOfComponents( RP_BestBasis ) do
     #    RP.(component) := RP_BestBasis.(component);

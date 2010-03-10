@@ -16,6 +16,8 @@
 
 DeclareGlobalVariable( "HOMALG_IO_Sage" );
 
+DeclareGlobalVariable( "SageMacros" );
+
 ####################################
 #
 # global functions and operations:
@@ -23,6 +25,8 @@ DeclareGlobalVariable( "HOMALG_IO_Sage" );
 ####################################
 
 DeclareGlobalFunction( "_Sage_multiple_delete" );
+
+DeclareGlobalFunction( "InitializeSageMacros" );
 
 # constructor methods:
 

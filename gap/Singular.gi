@@ -20,7 +20,7 @@ InstallValue( HOMALG_IO_Singular,
         rec(
             cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
-            executable := "Singular",
+            executable := [ "Singular" ],	## this list is processed from left to right
             options := [ "-t", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",
@@ -34,6 +34,8 @@ InstallValue( HOMALG_IO_Singular,
 #            original_lines := true,		## a Singular specific
             check_output := true,		## a Singular specific looks for newlines without commas
             setring := _Singular_SetRing,	## a Singular specific
+            ## prints polynomials in a format compatible with other CASs
+            setring_post := [ "short=0;", "option(redTail);" ],	## a Singular specific
             setinvol := _Singular_SetInvolution,## a Singular specific
             define := "=",
             delete := function( var, stream ) homalgSendBlocking( [ "kill ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
@@ -41,6 +43,8 @@ InstallValue( HOMALG_IO_Singular,
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
+            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
+            InitializeMacros := InitializeSingularMacros,
            )
 );
 
@@ -52,9 +56,9 @@ HOMALG_IO_Singular.READY_LENGTH := Length( HOMALG_IO_Singular.READY );
 #
 ####################################
 
-# a new subrepresentation of the representation IshomalgExternalObjectRep:
+# a new subrepresentation of the representation IshomalgExternalRingObjectRep:
 DeclareRepresentation( "IsHomalgExternalRingObjectInSingularRep",
-        IshomalgExternalObjectRep,
+        IshomalgExternalRingObjectRep,
         [  ] );
 
 # a new subrepresentation of the representation IsHomalgExternalRingRep:
@@ -100,6 +104,10 @@ InstallGlobalFunction( _Singular_SetRing,
     stream.active_ring := R;
     
     homalgSendBlocking( [ "setring ", R ], "need_command", HOMALG_IO.Pictograms.initialize );
+    
+    if IsBound( HOMALG_IO_Singular.setring_post ) then
+        homalgSendBlocking( HOMALG_IO_Singular.setring_post, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    fi;
     
     ## never use imapall here
     
@@ -168,6 +176,20 @@ proc Difference (list a, list b)\n\
   return(c);\n\
 }\n\n",
     
+    GetSparseListOfHomalgMatrixAsString := "\n\
+proc GetSparseListOfHomalgMatrixAsString (M)\n\
+{\n\
+  list l;int k;\n\
+  k = 1;\n\
+  for(int i=1;i<=ncols(M);i=i+1){\n\
+    for(int j=1;j<=nrows(M);j=j+1){\n\
+      def p=M[j,i]; // remark: matrices are saved transposed in Singular\n\
+      if(p!=0){l[k]=list(i,j,p); k = k+1;};\n\
+    };\n\
+  };\n\
+  return(string(l));\n\
+}\n\n",
+    
     CreateListListOfIntegers := "\n\
 proc CreateListListOfIntegers (degrees,m,n)\n\
 {\n\
@@ -210,7 +232,7 @@ proc IsDiagonalMatrix (matrix m)\n\
 }\n\n",
     
     ZeroRows := "\n\
-proc ZeroRows (matrix m)\n\
+proc ZeroRows (module m)\n\
 {\n\
   list l;\n\
   for (int i=1;i<=ncols(m);i=i+1)\n\
@@ -230,7 +252,7 @@ proc ZeroRows (matrix m)\n\
     ZeroColumns := "\n\
 proc ZeroColumns (matrix n)\n\
 {\n\
-  matrix m=transpose(n);\n\
+  matrix m=module(transpose(n));\n\
   list l;\n\
   for (int i=1;i<=ncols(m);i=i+1)\n\
   {\n\
@@ -1052,33 +1074,65 @@ proc BasisOfColumnsCoeffLocal (matrix M)\n\
 
 ## A * U^-1 -> u^-1 A2
 #above code should allready have caught this, but still: U is filled with a zero at the diagonal, when we reduce zero. we may replace this zero with any unit, so for smaller somputations we choose 1.
+
     CreateInputForLocalMatrixRows := "\n\
-proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
-{\n\
-  poly u=1;\n\
-  matrix A2=A;\n\
-  for (int i=1; i<=ncols(U); i=i+1)\n\
+ring r= 0,(x),ds;\n\
+matrix M[2][2]=[1,0,0,0];\n\
+matrix NN[2][1]=[1,0];\n\
+module N=std(NN);\n\
+list l=division(M,N);\n\
+if( l[3][2,2]==0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-1-0\n\
+{ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   {\n\
-    if(U[i,i]!=0){u=lcm(u,U[i,i]);};\n\
+    poly u=1;\n\
+    matrix A2=A;\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
+      if(U[i,i]!=0){u=lcm(u,U[i,i]);};\n\
+    }\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
+      if(U[i,i]==0){\n\
+        poly gg=1;\n\
+      } else {\n\
+        poly uu=U[i,i];\n\
+        poly gg=u/uu;\n\
+      };\n\
+      if(gg!=1)\n\
+      {\n\
+        for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+      }\n\
+    }\n\
+    list l=A2,u;\n\
+    return(l);\n\
   }\n\
-  for (int i=1; i<=ncols(U); i=i+1)\n\
+}\n\
+else\n\
+{ proc CreateInputForLocalMatrixRows (matrix A, matrix U)\n\
   {\n\
-    if(U[i,i]==0){\n\
-      poly gg=1;\n\
-    } else {\n\
+    poly u=1;\n\
+    matrix A2=A;\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
+      u=lcm(u,U[i,i]);\n\
+    }\n\
+    for (int i=1; i<=ncols(U); i=i+1)\n\
+    {\n\
       poly uu=U[i,i];\n\
       poly gg=u/uu;\n\
-    };\n\
-    if(gg!=1)\n\
-    {\n\
-      for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+      if(gg!=1)\n\
+      {\n\
+        for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+      }\n\
     }\n\
+    list l=A2,u;\n\
+    return(l);\n\
   }\n\
-  list l=A2,u;\n\
-  return(l);\n\
-}\n\n",
+}\n\
+kill r;"
 
     )
+
 );
 
 ##
@@ -1103,50 +1157,27 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInSingular,
   function( arg )
-    local nargs, stream, o, ar, ext_obj, R, RP;
+    local nargs, ar, R, RP;
     
     nargs := Length( arg );
     
-    ##check whether the last argument already has a stream pointing to a running
-    ##instance of Singular
-    if nargs > 1 then
-        if IsRecord( arg[nargs] ) and IsBound( arg[nargs].lines ) and IsBound( arg[nargs].pid ) then
-            stream := arg[nargs];
-        elif IshomalgExternalObjectRep( arg[nargs] ) or IsHomalgExternalRingRep( arg[nargs] ) then
-            stream := homalgStream( arg[nargs] );
-        fi;
-    fi;
-
-    ##if no such stream is found in the last argument, start and initialize
-    ##a new Singular-process
-    if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Singular );
-        
-        ##shut down the "redefining" messages
-        homalgSendBlocking( "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"control.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-        o := 0;
-    else
-        o := 1;
-    fi;
-    
-    InitializeSingularMacros( stream );
-    
     ##this will lead to the call
     ##ring homalg_variable_something = arg[1];
-    ar := [ [ arg[1] ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    ar := [ arg[1], [ "ring" ] ];
+    
+    Add( ar, TheTypeHomalgExternalRingObjectInSingular );
     
     if nargs > 1 then
-        ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
+        Append( ar, arg{[ 2 .. nargs ]} );
     fi;
     
-    ext_obj := CallFuncList( homalgSendBlocking, ar );
+    ar := [ ar, TheTypeHomalgExternalRingInSingular ];
     
-    R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    Add( ar, HOMALG_IO_Singular );
+    
+    R := CallFuncList( CreateHomalgExternalRing, ar );
     
     _Singular_SetRing( R );
-    
-    ##prints output in a compatible format
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     RP := homalgTable( R );
     
@@ -1164,22 +1195,22 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( arg )
-    local nargs, m, c, l, ar, R;
+    local nargs, l, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        m := AbsInt( arg[1] );
-        c := m;
         l := 2;
+        ## characteristic:
+        c := AbsInt( arg[1] );
     else
-        m := "";
-        c := 0;
         if nargs > 0 and arg[1] = 0 then
             l := 2;
         else
             l := 1;
         fi;
+        ## characteristic:
+        c := 0;
     fi;
     
     if IsZero( c ) then
@@ -1194,9 +1225,11 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
     
-    ar := Concatenation( [ [ Concatenation( String( c ), ",dummy_variable,dp") ], IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := [ String( c ), ",dummy_variable,dp" ];
     
-    R := CallFuncList( RingForHomalgInSingular, ar );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    
+    R := CallFuncList( RingForHomalgInSingular, R );
     
     SetIsResidueClassRingOfTheIntegers( R, true );
     
@@ -1209,20 +1242,45 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
-    local ar, R;
+    local param, R;
     
     ##It seems that Singular does not know the fields.
     ##Instead we create Q[dummy_variable] and feed only expressions
     ##without "dummy_variable" to Singular. Since homalg in GAP
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
-    ar := Concatenation( [ "0,dummy_variable,dp" ], [ IsPrincipalIdealRing ], arg );
     
-    R := CallFuncList( RingForHomalgInSingular, ar );
+    if Length( arg ) > 0 and IsString( arg[1] ) then
+        
+        param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
+        
+        R := Concatenation( "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" );
+        
+        arg := arg{[ 2 .. Length( arg ) ]};
+        
+    else
+        
+        R := "0,dummy_variable,dp";
+        
+    fi;
+    
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInSingular, R );
     
     SetIsFieldForHomalg( R, true );
     
     SetRingProperties( R, 0 );
+    
+    if IsBound( param ) then
+        
+        param := List( param, a -> HomalgExternalRingElement( a, R ) );
+        
+        Perform( param, function( v ) SetName( v, homalgPointer( v ) ); end );
+        
+        SetRationalParameters( R, param );
+        
+    fi;
     
     return R;
     
@@ -1234,16 +1292,17 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local ar, r, var, properties, ext_obj, S, RP;
+    local ar, r, var, properties, param, ext_obj, S, RP;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
     var := ar[2];
     properties := ar[3];
+    param := ar[4];
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -1260,8 +1319,6 @@ InstallMethod( PolynomialRing,
     SetRingProperties( S, r, var );
     
     _Singular_SetRing( S );
-    
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
     
     RP := homalgTable( S );
     
@@ -1332,8 +1389,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     _Singular_SetRing( S );
     
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    
     RP := homalgTable( S );
     
     RP!.SetInvolution :=
@@ -1355,6 +1410,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
         
     end;
+    
+    ## there exists a bug in Plural (3-0-4,3-1-0) that occurs with nres(M,2)[2];
+    Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+    Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
     
     ## there seems to exists a bug in Plural that occurs with mres(M,1)[1];
     Unbind( RP!.ReducedBasisOfRowModule );
@@ -1515,8 +1574,6 @@ InstallMethod( LocalizePolynomialRingWithMoraAtZero,
     
     _Singular_SetRing( S );
     
-    homalgSendBlocking( "option(redTail);short=0;", "need_command", ext_obj, HOMALG_IO.Pictograms.initialize );
-    
     RP := homalgTable( S );
     
     RP!.SetInvolution :=
@@ -1536,7 +1593,7 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, s, R )
@@ -1547,7 +1604,7 @@ end );
 
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, a, R )
@@ -1558,16 +1615,36 @@ end );
 
 ##
 InstallMethod( CreateHomalgMatrixFromString,
-        "for homalg matrices in Singular",
+        "constructor for homalg external matrices in Singular",
+        [ IsString, IsHomalgExternalRingInSingularRep ],
+        
+  function( s, R )
+    local r, c;
+    
+    r := Length( Positions( s, '[' ) ) - 1;
+    
+    c := ( Length( Positions( s, ',' ) ) + 1 ) / r;
+    
+    return CreateHomalgMatrixFromString( s, r, c, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromString,
+        "constructor for homalg external matrices in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( s, r, c, R )
-    local ext_obj;
+    local str, ext_obj;
     
-    ext_obj := homalgSendBlocking( [ s ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
+    str := ShallowCopy( s );
+    
+    RemoveCharacters( str, "[]" );
+    
+    ext_obj := homalgSendBlocking( [ str ], [ "matrix" ], [ "[", r, "][", c, "]" ], R, HOMALG_IO.Pictograms.HomalgMatrix );
     
     if not ( r = 1 and c = 1 ) then
-        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix ); #added by Simon
+        homalgSendBlocking( [ ext_obj, " = transpose(", ext_obj, ")" ], "need_command", HOMALG_IO.Pictograms.TransposedMatrix );
     fi;
     
     return HomalgMatrix( ext_obj, r, c, R );
@@ -1576,7 +1653,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
@@ -1587,7 +1664,7 @@ end );
 
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
@@ -1601,7 +1678,7 @@ end );
 
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
-        "for external matrices in Singular",
+        "for homalg external rings in Singular",
         [ IsHomalgExternalRingInSingularRep and HasWeightsOfIndeterminates ],
         
   function( R )
@@ -1632,7 +1709,7 @@ end );
 
 ##
 InstallMethod( GetListOfHomalgMatrixAsString,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, R )
@@ -1644,7 +1721,7 @@ end );
 
 ##
 InstallMethod( GetListListOfHomalgMatrixAsString,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, R )
@@ -1668,38 +1745,28 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
 end );
 
 ##
-#InstallMethod( GetSparseListOfHomalgMatrixAsString,
-#        "for external matrices in Singular",
-#        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
-#        
-#  function( M , R )
-#    local command,s;
-#
-#    command := [
-#          "list l;poly p;list l2;",
-#          "for(int i=1;i<=", NrRows( M ), ";i=i+1){",
-#            "for(int j=1;j<=", NrColumns( M ), ";j=j+1){",
-#              "p=", M, "[j,i];", #remark: matrices are saved transposed in singular
-#              "if(p!=0){l2=[i,j,p];l=insert(l,l2)};",
-#            "};",
-#          "};"
-#        ];
-#    
-#    homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString);
-#    
-#    s := homalgSendBlocking( "l", "need_output", R, HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString);
-#    
-#    if s <> "emptylist" then
-#      return s;
-#    else
-#      return "[]"
-#    fi;
-#    
-#end );
+InstallMethod( GetSparseListOfHomalgMatrixAsString,
+        "for homalg external matrices in Singular",
+        [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
+        
+  function( M, R )
+    local s;
+    
+    s := homalgSendBlocking( [ "GetSparseListOfHomalgMatrixAsString(", M, ")" ], "need_output", HOMALG_IO.Pictograms.GetSparseListOfHomalgMatrixAsString );
+    
+    s := SplitString( s, "," );
+    
+    s := ListToListList( s, Length( s ) / 3, 3 );
+    
+    s := JoinStringsWithSeparator( List( s, JoinStringsWithSeparator ), "],[" );
+    
+    return Concatenation( "[[", s, "]]" );
+    
+end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for external matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSingularRep ],
         
   function( filename, M, R )
@@ -1731,10 +1798,9 @@ InstallMethod( SaveHomalgMatrixToFile,
     
 end );
 
-
 ##
 InstallMethod( LoadHomalgMatrixFromFile,
-        "for external rings in Singular",
+        "for homalg external rings in Singular",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( filename, r, c, R )
@@ -1807,7 +1873,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg matrices in Singular",
+        "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep ], 1,
         
   function( o )
