@@ -43,7 +43,7 @@ InstallValue( HOMALG_IO_Singular,
             prompt := "\033[01msingular>\033[0m ",
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
-            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"ring.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
+            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
             InitializeMacros := InitializeSingularMacros,
            )
 );
@@ -1412,8 +1412,21 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     end;
     
     ## there exists a bug in Plural (3-0-4,3-1-0) that occurs with nres(M,2)[2];
-    Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
-    Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
+    if homalgSendBlocking( "\
+ring homalg_Weyl_1 = 0,(x,y,z,Dx,Dy,Dz),dp;\n\
+def homalg_Weyl_2 = Weyl();\n\
+setring homalg_Weyl_2;\n\
+option(redTail);short=0;\n\
+matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
+matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
+ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_1; kill homalg_Weyl_2; kill homalg_Weyl_3; kill homalg_Weyl_4;"
+    , "need_output", S ) = "1" then;
+    
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
+    fi;
+    
+    _Singular_SetRing( S );
     
     ## there seems to exists a bug in Plural that occurs with mres(M,1)[1];
     Unbind( RP!.ReducedBasisOfRowModule );
