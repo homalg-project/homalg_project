@@ -7,6 +7,7 @@
 ##                                                          Oleksandr Motsak
 ##                                                           Max Neunhoeffer
 ##                                                            Daniel Robertz
+##                                                           Hans Schönemann
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
@@ -33,13 +34,13 @@ Subtitle := "Dictionaries of External Rings",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.03.11",
+Version := "2010.03.12",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "11/03/2010",
+Date := "12/03/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -234,6 +235,21 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
+  rec(
+    LastName      := "Schönemann",
+    FirstNames    := "Hans",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "hannes@mathematik.uni-kl.de",
+    WWWHome       := "http://www.mathematik.uni-kl.de/~hannes/",
+    PostalAddress := Concatenation( [
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ] ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
+  ),
 # provide such a record for each author and/or maintainer ...
   
 ],
@@ -398,6 +414,8 @@ BannerString := Concatenation(
         " (", ~.Persons[6].WWWHome, ")\n",
   "   ", ~.Persons[7].FirstNames, " ", ~.Persons[7].LastName,
         " (", ~.Persons[7].WWWHome, ")\n",
+  "   ", ~.Persons[8].FirstNames, " ", ~.Persons[8].LastName,
+        " (", ~.Persons[8].WWWHome, ")\n",
   "For help, type: ?RingsForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 

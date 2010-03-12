@@ -2,6 +2,8 @@
 ##
 ##  Singular.gi               RingsForHomalg package         Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
+##                                                          Oleksandr Motsak
+##                                                           Hans Schönemann
 ##                                                    
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
@@ -150,7 +152,7 @@ proc IsMemberOfList (int i, list l)\n\
 {\n\
   int k = size(l);\n\
   \n\
-  for (int p=1; p<=k; p=p+1)\n\
+  for (int p=1; p<=k; p++)\n\
   {\n\
     if (l[p]==i)\n\
     {\n\
@@ -165,12 +167,13 @@ proc Difference (list a, list b)\n\
 {\n\
   list c;\n\
   int s=size(a);\n\
+  int l = 1;\n\
   \n\
-  for (int p=1; p<=s; p=p+1)\n\
+  for (int p=1; p<=s; p++)\n\
   {\n\
     if (IsMemberOfList(a[p],b)==0)\n\
     {\n\
-      c[size(c)+1] = a[p];\n\
+      c[l] = a[p]; l++;\n\
     }\n\
   }\n\
   return(c);\n\
@@ -181,10 +184,10 @@ proc GetSparseListOfHomalgMatrixAsString (M)\n\
 {\n\
   list l;int k;\n\
   k = 1;\n\
-  for(int i=1;i<=ncols(M);i=i+1){\n\
-    for(int j=1;j<=nrows(M);j=j+1){\n\
+  for(int i=1; i<=ncols(M); i++){\n\
+    for(int j=1; j<=nrows(M); j++){\n\
       def p=M[j,i]; // remark: matrices are saved transposed in Singular\n\
-      if(p!=0){l[k]=list(i,j,p); k = k+1;};\n\
+      if(p!=0){l[k]=list(i,j,p); k++;};\n\
     };\n\
   };\n\
   return(string(l));\n\
@@ -194,7 +197,7 @@ proc GetSparseListOfHomalgMatrixAsString (M)\n\
 proc CreateListListOfIntegers (degrees,m,n)\n\
 {\n\
   list l;\n\
-  for (int i=1; i<=m; i=i+1)\n\
+  for (int i=m; i>=1; i--)\n\
   {\n\
     l[i]=intvec(degrees[(i-1)*n+1..i*n]);\n\
   }\n\
@@ -224,7 +227,7 @@ proc IsDiagonalMatrix (matrix m)\n\
   }\n\
   matrix z[nrows(m)][ncols(m)];\n\
   matrix c = m;\n\
-  for (int i=1; i<=min; i=i+1)\n\
+  for (int i=1; i<=min; i++)\n\
   {\n\
     c[i,i]=0;\n\
   }\n\
@@ -235,11 +238,12 @@ proc IsDiagonalMatrix (matrix m)\n\
 proc ZeroRows (module m)\n\
 {\n\
   list l;\n\
-  for (int i=1;i<=ncols(m);i=i+1)\n\
+  int s = 1;\n\
+  for (int i=1;i<=ncols(m);i++)\n\
   {\n\
     if (m[i]==0)\n\
     {\n\
-      l[size(l)+1]=i;\n\
+      l[s]=i; s++;\n\
     }\n\
   }\n\
   if (size(l)==0)\n\
@@ -254,11 +258,12 @@ proc ZeroColumns (matrix n)\n\
 {\n\
   matrix m=module(transpose(n));\n\
   list l;\n\
-  for (int i=1;i<=ncols(m);i=i+1)\n\
+  int s = 1;\n\
+  for (int i=1;i<=ncols(m);i++)\n\
   {\n\
     if (m[i]==0)\n\
     {\n\
-      l[size(l)+1]=i;\n\
+      l[s]=i; s++;\n\
     }\n\
   }\n\
   if (size(l)==0)\n\
@@ -275,26 +280,26 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
   int n = ncols(M);\n\
   \n\
   list rest;\n\
-  for (int o=1; o<=m; o=o+1)\n\
+  for (int o=m; o>=1; o--)\n\
   {\n\
-    rest[size(rest)+1] = o;\n\
+    rest[o] = o;\n\
   }\n\
   int r = m;\n\
   list e;\n\
   list rest2;\n\
   list pos;\n\
-  int i; int k; int a;\n\
+  int i; int k; int a; int s = 1;\n\
   \n\
-  for (int j=1; j<=n; j=j+1)\n\
+  for (int j=1; j<=n; j++)\n\
   {\n\
-    for (i=1; i<=r; i=i+1)\n\
+    for (i=1; i<=r; i++)\n\
     {\n\
       k = rest[r-i+1];\n\
       if (deg(leadmonom(M[k,j])) == 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
-        pos[size(pos)+1] = list(j,k);\n\
-        for (a=1; a<=r; a=a+1)\n\
+        pos[s] = list(j,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
         {\n\
           if (M[rest[a],j] == 0)\n\
           {\n\
@@ -317,26 +322,26 @@ proc GetColumnIndependentUnitPositionsLocal (matrix M, list pos_list, matrix max
   int n = ncols(M);\n\
   \n\
   list rest;\n\
-  for (int o=1; o<=m; o=o+1)\n\
+  for (int o=m; o>=1; o--)\n\
   {\n\
-    rest[size(rest)+1] = o;\n\
+    rest[o] = o;\n\
   }\n\
   int r = m;\n\
   list e;\n\
   list rest2;\n\
   list pos;\n\
-  int i; int k; int a;\n\
+  int i; int k; int a; int s = 1;\n\
   \n\
-  for (int j=1; j<=n; j=j+1)\n\
+  for (int j=1; j<=n; j++)\n\
   {\n\
-    for (i=1; i<=r; i=i+1)\n\
+    for (i=1; i<=r; i++)\n\
     {\n\
       k = rest[r-i+1];\n\
       if (reduce(M[k,j],max_ideal) != 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
-        pos[size(pos)+1] = list(j,k);\n\
-        for (a=1; a<=r; a=a+1)\n\
+        pos[s] = list(j,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
         {\n\
           if (M[rest[a],j] == 0)\n\
           {\n\
@@ -359,26 +364,26 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
   int n = ncols(M);\n\
   \n\
   list rest;\n\
-  for (int o=1; o<=n; o=o+1)\n\
+  for (int o=n; o>=1; o--)\n\
   {\n\
-    rest[size(rest)+1] = o;\n\
+    rest[o] = o;\n\
   }\n\
   int r = n;\n\
   list e;\n\
   list rest2;\n\
   list pos;\n\
-  int j; int k; int a;\n\
+  int j; int k; int a; int s = 1;\n\
   \n\
-  for (int i=1; i<=m; i=i+1)\n\
+  for (int i=1; i<=m; i++)\n\
   {\n\
-    for (j=1; j<=r; j=j+1)\n\
+    for (j=1; j<=r; j++)\n\
     {\n\
       k = rest[r-j+1];\n\
       if (deg(leadmonom(M[i,k])) == 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
-        pos[size(pos)+1] = list(i,k);\n\
-        for (a=1; a<=r; a=a+1)\n\
+        pos[s] = list(i,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
         {\n\
           if (M[i,rest[a]] == 0)\n\
           {\n\
@@ -401,26 +406,26 @@ proc GetRowIndependentUnitPositionsLocal (matrix M, list pos_list, matrix max_id
   int n = ncols(M);\n\
   \n\
   list rest;\n\
-  for (int o=1; o<=n; o=o+1)\n\
+  for (int o=n; o>=1; o--)\n\
   {\n\
-    rest[size(rest)+1] = o;\n\
+    rest[o] = o;\n\
   }\n\
   int r = n;\n\
   list e;\n\
   list rest2;\n\
   list pos;\n\
-  int j; int k; int a;\n\
+  int j; int k; int a; int s = 1;\n\
   \n\
-  for (int i=1; i<=m; i=i+1)\n\
+  for (int i=1; i<=m; i++)\n\
   {\n\
-    for (j=1; j<=r; j=j+1)\n\
+    for (j=1; j<=r; j++)\n\
     {\n\
       k = rest[r-j+1];\n\
       if (reduce(M[i,k],max_ideal) != 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
-        pos[size(pos)+1] = list(i,k);\n\
-        for (a=1; a<=r; a=a+1)\n\
+        pos[s] = list(i,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
         {\n\
           if (M[i,rest[a]] == 0)\n\
           {\n\
@@ -441,15 +446,17 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
 {\n\
   int m = nrows(M);\n\
   int n = ncols(M);\n\
+  int r;\n\
   list rest;\n\
-  for (int o=1; o<=m; o=o+1)\n\
+  for (int o=m; o>=1; o--)\n\
   {\n\
-    rest[size(rest)+1] = o;\n\
+    rest[o] = o;\n\
   }\n\
   rest=Difference(rest,pos_list);\n\
-  for (int j=1; j<=n; j=j+1)\n\
+  r=size(rest);\n\
+  for (int j=1; j<=n; j++)\n\
   {\n\
-    for (int i=1; i<=size(rest); i=i+1)\n\
+    for (int i=1; i<=r; i++)\n\
     {\n\
       if (deg(leadmonom(M[rest[i],j])) == 0)//IsUnit\n\
       {\n\
@@ -465,15 +472,17 @@ proc GetUnitPositionLocal (matrix M, list pos_list, matrix max_ideal)\n\
 {\n\
   int m = nrows(M);\n\
   int n = ncols(M);\n\
+  int r;\n\
   list rest;\n\
-  for (int o=1; o<=m; o=o+1)\n\
+  for (int o=m; o>=1; o--)\n\
   {\n\
-    rest[size(rest)+1] = o;\n\
+    rest[o] = o;\n\
   }\n\
   rest=Difference(rest,pos_list);\n\
-  for (int j=1; j<=n; j=j+1)\n\
+  r=size(rest);\n\
+  for (int j=1; j<=n; j++)\n\
   {\n\
-    for (int i=1; i<=size(rest); i=i+1)\n\
+    for (int i=1; i<=r; i++)\n\
     {\n\
       if (reduce(M[rest[i],j],max_ideal) != 0)//IsUnit\n\
       {\n\
@@ -487,19 +496,20 @@ proc GetUnitPositionLocal (matrix M, list pos_list, matrix max_ideal)\n\
     GetCleanRowsPositions := "\n\
 proc GetCleanRowsPositions (matrix m, list l)\n\
 {\n\
-  list rows = list();\n\
-  for (int i=1;i<=size(l);i=i+1)\n\
+  list rows;\n\
+  int s = 1;\n\
+  for (int i=1;i<=size(l);i++)\n\
   {\n\
-    for (int j=1;j<=ncols(m);j=j+1)\n\
+    for (int j=1;j<=ncols(m);j++)\n\
     {\n\
       if (m[l[i],j]==1)\n\
       {\n\
-        rows[size(rows)+1] = j;\n\
+        rows[s] = j; s++;\n\
         break;\n\
       }\n\
     }\n\
   }\n\
-  if (size(rows)==0)\n\
+  if (s==0)\n\
   {\n\
     return(\"[]\"));\n\
   }\n\
@@ -830,7 +840,7 @@ proc MultiDeg (pol,weights)\n\
 {\n\
   int mul=size(weights);\n\
   intmat m[1][mul];\n\
-  for (int i=1; i<=mul; i=i+1)\n\
+  for (int i=1; i<=mul; i++)\n\
   {\n\
     m[1,i]=Deg(pol,weights[i]);\n\
   }\n\
@@ -841,9 +851,9 @@ proc MultiDeg (pol,weights)\n\
 proc DegreesOfEntries (matrix M)\n\
 {\n\
   intmat m[ncols(M)][nrows(M)];\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
+  for (int i=1; i<=ncols(M); i++)\n\
   {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
+    for (int j=1; j<=nrows(M); j++)\n\
     {\n\
       m[i,j] = deg(M[j,i]);\n\
     }\n\
@@ -855,9 +865,9 @@ proc DegreesOfEntries (matrix M)\n\
 proc WeightedDegreesOfEntries (matrix M, weights)\n\
 {\n\
   intmat m[ncols(M)][nrows(M)];\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
+  for (int i=1; i<=ncols(M); i++)\n\
   {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
+    for (int j=1; j<=nrows(M); j++)\n\
     {\n\
       m[i,j] = Deg(M[j,i],weights);\n\
     }\n\
@@ -871,9 +881,9 @@ proc NonTrivialDegreePerRow (matrix M)\n\
   int b = 1;\n\
   intmat m[1][ncols(M)];\n\
   int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
+  for (int i=1; i<=ncols(M); i++)\n\
   {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
+    for (int j=1; j<=nrows(M); j++)\n\
     {\n\
       if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); break; }\n\
     }\n\
@@ -888,9 +898,9 @@ proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
   int b = 1;\n\
   intmat m[1][ncols(M)];\n\
   int d = Deg(0,weights);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
+  for (int i=1; i<=ncols(M); i++)\n\
   {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
+    for (int j=1; j<=nrows(M); j++)\n\
     {\n\
       if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
     }\n\
@@ -904,9 +914,9 @@ proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
   int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
+  for (int i=1; i<=ncols(M); i++)\n\
   {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
+    for (int j=1; j<=nrows(M); j++)\n\
     {\n\
       if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
     }\n\
@@ -919,9 +929,9 @@ proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
   int d = Deg(0,weights);\n\
-  for (int i=1; i<=ncols(M); i=i+1)\n\
+  for (int i=1; i<=ncols(M); i++)\n\
   {\n\
-    for (int j=1; j<=nrows(M); j=j+1)\n\
+    for (int j=1; j<=nrows(M); j++)\n\
     {\n\
       if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
     }\n\
@@ -935,9 +945,9 @@ proc NonTrivialDegreePerColumn (matrix M)\n\
   int b = 1;\n\
   intmat m[1][nrows(M)];\n\
   int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
+  for (int j=1; j<=nrows(M); j++)\n\
   {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
+    for (int i=1; i<=ncols(M); i++)\n\
     {\n\
       if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); break; }\n\
     }\n\
@@ -952,9 +962,9 @@ proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
   int b = 1;\n\
   intmat m[1][nrows(M)];\n\
   int d = Deg(0,weights);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
+  for (int j=1; j<=nrows(M); j++)\n\
   {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
+    for (int i=1; i<=ncols(M); i++)\n\
     {\n\
       if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
     }\n\
@@ -968,9 +978,9 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
   int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
+  for (int j=1; j<=nrows(M); j++)\n\
   {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
+    for (int i=1; i<=ncols(M); i++)\n\
     {\n\
       if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
     }\n\
@@ -983,9 +993,9 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
   int d = Deg(0,weights);\n\
-  for (int j=1; j<=nrows(M); j=j+1)\n\
+  for (int j=1; j<=nrows(M); j++)\n\
   {\n\
-    for (int i=1; i<=ncols(M); i=i+1)\n\
+    for (int i=1; i<=ncols(M); i++)\n\
     {\n\
       if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
     }\n\
@@ -1013,7 +1023,7 @@ proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
 {\n\
   list l = division(A,B);\n\
   matrix U=l[3];\n\
-  for (int i=1; i<=ncols(U); i=i+1)\n\
+  for (int i=1; i<=ncols(U); i++)\n\
   {\n\
     if(U[i,i]==0){U[i,i]=1;};\n\
   }\n\
@@ -1086,11 +1096,11 @@ if( l[3][2,2]==0 ) // this is a workaround for a bug in the 64 bit versions of S
   {\n\
     poly u=1;\n\
     matrix A2=A;\n\
-    for (int i=1; i<=ncols(U); i=i+1)\n\
+    for (int i=1; i<=ncols(U); i++)\n\
     {\n\
       if(U[i,i]!=0){u=lcm(u,U[i,i]);};\n\
     }\n\
-    for (int i=1; i<=ncols(U); i=i+1)\n\
+    for (int i=1; i<=ncols(U); i++)\n\
     {\n\
       if(U[i,i]==0){\n\
         poly gg=1;\n\
@@ -1100,7 +1110,7 @@ if( l[3][2,2]==0 ) // this is a workaround for a bug in the 64 bit versions of S
       };\n\
       if(gg!=1)\n\
       {\n\
-        for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+        for(int k=1;k<=nrows(A2);k++){A2[k,i]=A2[k,i]*gg;};\n\
       }\n\
     }\n\
     list l=A2,u;\n\
@@ -1112,17 +1122,17 @@ else\n\
   {\n\
     poly u=1;\n\
     matrix A2=A;\n\
-    for (int i=1; i<=ncols(U); i=i+1)\n\
+    for (int i=1; i<=ncols(U); i++)\n\
     {\n\
       u=lcm(u,U[i,i]);\n\
     }\n\
-    for (int i=1; i<=ncols(U); i=i+1)\n\
+    for (int i=1; i<=ncols(U); i++)\n\
     {\n\
       poly uu=U[i,i];\n\
       poly gg=u/uu;\n\
       if(gg!=1)\n\
       {\n\
-        for(int k=1;k<=nrows(A2);k=k+1){A2[k,i]=A2[k,i]*gg;};\n\
+        for(int k=1;k<=nrows(A2);k++){A2[k,i]=A2[k,i]*gg;};\n\
       }\n\
     }\n\
     list l=A2,u;\n\
@@ -1743,7 +1753,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
       command := [
           "matrix m[", NrColumns( M ),"][1];",
           "string s = \"[\";",
-          "for(int i=1;i<=", NrRows( M ), ";i=i+1){",
+          "for(int i=1;i<=", NrRows( M ), ";i++){",
             "m = ", M, "[1..", NrColumns( M ), ",i];",#remark: matrices are saved transposed in singular
             "if(i!=1){s=s+\",\";};",
             "s=s+\"[\"+string(m)+\"]\";",
@@ -1796,7 +1806,7 @@ InstallMethod( SaveHomalgMatrixToFile,
         command := [ 
           "matrix m[", NrColumns( M ),"][1];",
           "string s = \"[\";",
-          "for(int i=1;i<=", NrRows( M ), ";i=i+1)",
+          "for(int i=1;i<=", NrRows( M ), ";i++)",
           "{m = ", M, "[1..", NrColumns( M ), ",i]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
           #remark: matrices are saved transposed in singular
           "s=s+\"]\";",

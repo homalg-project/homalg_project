@@ -6,9 +6,10 @@
                                                                            Simon Goertzen
                                                                          Markus Kirschmer
                                                                    Markus Lange-Hegermann
-                                                                         Motsak Oleksandr
+                                                                         Oleksandr Motsak
                                                                           Max Neunhoeffer
                                                                            Daniel Robertz
+                                                                          Hans Schönemann
 
   Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
 
@@ -78,7 +79,7 @@
     <Email>markus.lange-hegermann@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;markus/</Homepage>
   </Author>
-  <Author>Motsak Oleksandr<Alt Only="LaTeX"><Br/></Alt>
+  <Author>Oleksandr Motsak<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Department of Mathematics, <Br/>
       University of Kaiserslautern, <Br/>
@@ -111,12 +112,22 @@
     <Email>daniel@momo.math.rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/&tilde;daniel</Homepage>
   </Author>
+  <Author>Hans Schönemann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>hannes@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;hannes/</Homepage>
+  </Author>
   <Date>March 2010</Date>
   
   <Copyright>
-    &copyright; 2007-2010 by
-    Mohamed Barakat, Simon Görtzen, Markus Kirschmer,
-    Markus Lange-Hegermann, Motsak Oleksandr, Max Neunhöffer, and Daniel Robertz.<P/>
+    &copyright; 2007-2010 by Mohamed Barakat, Simon Görtzen, Markus
+    Kirschmer, Markus Lange-Hegermann, Oleksandr Motsak, Max
+    Neunhöffer, Daniel Robertz, and Hans Schönemann.<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
