@@ -753,7 +753,7 @@ InstallMethod( InstallFunctorOnObjects,
                     
                     if IsHomalgRing( o ) then
                         ## I personally prefer the row convention and hence left modules:
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
                         obj := o;
                     fi;
@@ -857,7 +857,7 @@ InstallMethod( InstallFunctorOnObjects,
                     
                     if IsHomalgRing( o ) then
                         ## I personally prefer the row convention and hence left modules:
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
                         obj := o;
                     fi;
@@ -970,17 +970,17 @@ InstallMethod( InstallFunctorOnObjects,
                         obj1 := o1;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
-                            obj2 := AsLeftModule( o2 );
+                            obj2 := AsLeftObject( o2 );
                         else
-                            obj2 := AsRightModule( o2 );
+                            obj2 := AsRightObject( o2 );
                         fi;
                     elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
                         obj2 := o2;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
-                            obj1 := AsLeftModule( o1 );
+                            obj1 := AsLeftObject( o1 );
                         else
-                            obj1 := AsRightModule( o1 );
+                            obj1 := AsRightObject( o1 );
                         fi;
                     elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
                         if not IsIdenticalObj( o1, o2 ) then
@@ -988,7 +988,7 @@ InstallMethod( InstallFunctorOnObjects,
                         fi;
                         
                         ## I personally prefer the row convention and hence left modules:
-                        obj1 := AsLeftModule( o1 );
+                        obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                     else
                         ## the default:
@@ -1113,17 +1113,17 @@ InstallMethod( InstallFunctorOnObjects,
                         obj1 := o1;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
-                            obj2 := AsLeftModule( o2 );
+                            obj2 := AsLeftObject( o2 );
                         else
-                            obj2 := AsRightModule( o2 );
+                            obj2 := AsRightObject( o2 );
                         fi;
                     elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
                         obj2 := o2;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
-                            obj1 := AsLeftModule( o1 );
+                            obj1 := AsLeftObject( o1 );
                         else
-                            obj1 := AsRightModule( o1 );
+                            obj1 := AsRightObject( o1 );
                         fi;
                     elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
                         if not IsIdenticalObj( o1, o2 ) then
@@ -1131,7 +1131,7 @@ InstallMethod( InstallFunctorOnObjects,
                         fi;
                         
                         ## I personally prefer the row convention and hence left modules:
-                        obj1 := AsLeftModule( o1 );
+                        obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                     else
                         ## the default:
@@ -1243,11 +1243,11 @@ InstallMethod( InstallFunctorOnObjects,
                         fi;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
-                            obj2 := AsLeftModule( o2 );
-                            obj3 := AsLeftModule( o3 );
+                            obj2 := AsLeftObject( o2 );
+                            obj3 := AsLeftObject( o3 );
                         else
-                            obj2 := AsRightModule( o2 );
-                            obj3 := AsRightModule( o3 );
+                            obj2 := AsRightObject( o2 );
+                            obj3 := AsRightObject( o3 );
                         fi;
                     ## FIXME: there are missing cases
                     elif ForAll( [ o1, o2, o3 ], IsHomalgRing ) then
@@ -1258,7 +1258,7 @@ InstallMethod( InstallFunctorOnObjects,
                         fi;
                         
                         ## I personally prefer the row convention and hence left modules:
-                        obj1 := AsLeftModule( o1 );
+                        obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                         obj3 := obj1;
                     else
@@ -1376,11 +1376,11 @@ InstallMethod( InstallFunctorOnObjects,
                         fi;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
-                            obj2 := AsLeftModule( o2 );
-                            obj3 := AsLeftModule( o3 );
+                            obj2 := AsLeftObject( o2 );
+                            obj3 := AsLeftObject( o3 );
                         else
-                            obj2 := AsRightModule( o2 );
-                            obj3 := AsRightModule( o3 );
+                            obj2 := AsRightObject( o2 );
+                            obj3 := AsRightObject( o3 );
                         fi;
                     ## FIXME: there are missing cases
                     elif ForAll( [ o1, o2, o3 ], IsHomalgRing ) then
@@ -1391,7 +1391,7 @@ InstallMethod( InstallFunctorOnObjects,
                         fi;
                         
                         ## I personally prefer the row convention and hence left modules:
-                        obj1 := AsLeftModule( o1 );
+                        obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                         obj3 := obj1;
                     else
@@ -1557,9 +1557,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj := AsLeftModule( o );
+                            obj := AsLeftObject( o );
                         else
-                            obj := AsRightModule( o );
+                            obj := AsRightObject( o );
                         fi;
                     else
                         ## the default:
@@ -1580,9 +1580,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj := AsLeftModule( o );
+                            obj := AsLeftObject( o );
                         else
-                            obj := AsRightModule( o );
+                            obj := AsRightObject( o );
                         fi;
                     else
                         ## the default:
@@ -1741,9 +1741,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj := AsLeftModule( o );
+                            obj := AsLeftObject( o );
                         else
-                            obj := AsRightModule( o );
+                            obj := AsRightObject( o );
                         fi;
                     else
                         ## the default:
@@ -1764,9 +1764,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj := AsLeftModule( o );
+                            obj := AsLeftObject( o );
                         else
-                            obj := AsRightModule( o );
+                            obj := AsRightObject( o );
                         fi;
                     else
                         ## the default:
@@ -1903,9 +1903,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj2 := AsLeftModule( o2 );
+                            obj2 := AsLeftObject( o2 );
                         else
-                            obj2 := AsRightModule( o2 );
+                            obj2 := AsRightObject( o2 );
                         fi;
                     else
                         ## the default:
@@ -1916,9 +1916,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj3 := AsLeftModule( o3 );
+                            obj3 := AsLeftObject( o3 );
                         else
-                            obj3 := AsRightModule( o3 );
+                            obj3 := AsRightObject( o3 );
                         fi;
                     else
                         ## the default:
@@ -1939,9 +1939,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj1 := o1;
                     elif IsHomalgRing( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj1 := AsLeftModule( o1 );
+                            obj1 := AsLeftObject( o1 );
                         else
-                            obj1 := AsRightModule( o1 );
+                            obj1 := AsRightObject( o1 );
                         fi;
                     else
                         ## the default:
@@ -1952,9 +1952,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj3 := AsLeftModule( o3 );
+                            obj3 := AsLeftObject( o3 );
                         else
-                            obj3 := AsRightModule( o3 );
+                            obj3 := AsRightObject( o3 );
                         fi;
                     else
                         ## the default:
@@ -1975,9 +1975,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj1 := o1;
                     elif IsHomalgRing( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj1 := AsLeftModule( o1 );
+                            obj1 := AsLeftObject( o1 );
                         else
-                            obj1 := AsRightModule( o1 );
+                            obj1 := AsRightObject( o1 );
                         fi;
                     else
                         ## the default:
@@ -1988,9 +1988,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj2 := AsLeftModule( o2 );
+                            obj2 := AsLeftObject( o2 );
                         else
-                            obj2 := AsRightModule( o2 );
+                            obj2 := AsRightObject( o2 );
                         fi;
                     else
                         ## the default:
@@ -2133,9 +2133,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj2 := AsLeftModule( o2 );
+                            obj2 := AsLeftObject( o2 );
                         else
-                            obj2 := AsRightModule( o2 );
+                            obj2 := AsRightObject( o2 );
                         fi;
                     else
                         ## the default:
@@ -2156,9 +2156,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj1 := o1;
                     elif IsHomalgRing( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj1 := AsLeftModule( o1 );
+                            obj1 := AsLeftObject( o1 );
                         else
-                            obj1 := AsRightModule( o1 );
+                            obj1 := AsRightObject( o1 );
                         fi;
                     else
                         ## the default:
@@ -2169,9 +2169,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj3 := AsLeftModule( o3 );
+                            obj3 := AsLeftObject( o3 );
                         else
-                            obj3 := AsRightModule( o3 );
+                            obj3 := AsRightObject( o3 );
                         fi;
                     else
                         ## the default:
@@ -2192,9 +2192,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj2 := AsLeftModule( o2 );
+                            obj2 := AsLeftObject( o2 );
                         else
-                            obj2 := AsRightModule( o2 );
+                            obj2 := AsRightObject( o2 );
                         fi;
                     else
                         ## the default:
@@ -2205,9 +2205,9 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
-                            obj3 := AsLeftModule( o3 );
+                            obj3 := AsLeftObject( o3 );
                         else
-                            obj3 := AsRightModule( o3 );
+                            obj3 := AsRightObject( o3 );
                         fi;
                     else
                         ## the default:
@@ -2533,9 +2533,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2588,9 +2588,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2653,9 +2653,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2708,9 +2708,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2774,9 +2774,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2829,9 +2829,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2878,9 +2878,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -2933,9 +2933,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3430,9 +3430,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3476,9 +3476,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3538,9 +3538,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3584,9 +3584,9 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3647,9 +3647,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3693,9 +3693,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3739,9 +3739,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:
@@ -3785,9 +3785,9 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
-                        obj := AsLeftModule( o );
+                        obj := AsLeftObject( o );
                     else
-                        obj := AsRightModule( o );
+                        obj := AsRightObject( o );
                     fi;
                 else
                     ## the default:

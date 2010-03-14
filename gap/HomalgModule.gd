@@ -409,12 +409,6 @@ DeclareAttribute( "CastelnuovoMumfordRegularity",
 
 # constructors:
 
-DeclareOperation( "AsLeftModule",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "AsRightModule",
-        [ IsHomalgRing ] );
-
 DeclareOperation( "ZeroLeftModule",
         [ IsHomalgRing ] );
 

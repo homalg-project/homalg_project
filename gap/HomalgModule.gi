@@ -187,7 +187,7 @@ InstallOtherMethod( One,
         
   function( M )
     
-    return AsRightModule( HomalgRing( M ) );
+    return AsRightObject( HomalgRing( M ) );
     
 end );
 
@@ -198,7 +198,7 @@ InstallOtherMethod( One,
         
   function( M )
     
-    return AsLeftModule( HomalgRing( M ) );
+    return AsLeftObject( HomalgRing( M ) );
     
 end );
 
@@ -1604,15 +1604,15 @@ InstallMethod( ZeroRightModule,
 end );
 
 ##
-InstallMethod( AsLeftModule,
+InstallMethod( AsLeftObject,
         "for homalg rings",
         [ IsHomalgRing ],
         
   function( R )
     local left;
     
-    if IsBound(R!.AsLeftModule) then
-        return R!.AsLeftModule;
+    if IsBound(R!.AsLeftObject) then
+        return R!.AsLeftObject;
     fi;
     
     left := HomalgFreeLeftModule( 1, R );
@@ -1621,22 +1621,22 @@ InstallMethod( AsLeftModule,
     
     left!.not_twisted := true;
     
-    R!.AsLeftModule := left;
+    R!.AsLeftObject := left;
     
     return left;
     
 end );
 
 ##
-InstallMethod( AsRightModule,
+InstallMethod( AsRightObject,
         "for homalg rings",
         [ IsHomalgRing ],
         
   function( R )
     local right;
     
-    if IsBound(R!.AsRightModule) then
-        return R!.AsRightModule;
+    if IsBound(R!.AsRightObject) then
+        return R!.AsRightObject;
     fi;
     
     right := HomalgFreeRightModule( 1, R );
@@ -1645,7 +1645,7 @@ InstallMethod( AsRightModule,
     
     right!.not_twisted := true;
     
-    R!.AsRightModule := right;
+    R!.AsRightObject := right;
     
     return right;
     
@@ -2240,7 +2240,7 @@ InstallMethod( \*,
     if rank = 0 then
         return ZeroLeftModule( R );
     elif rank = 1 then
-        return AsLeftModule( R );
+        return AsLeftObject( R );
     elif rank > 1 then
         return HomalgFreeLeftModule( rank, R );
     fi;
@@ -2259,7 +2259,7 @@ InstallMethod( \*,
     if rank = 0 then
         return ZeroRightModule( R );
     elif rank = 1 then
-        return AsRightModule( R );
+        return AsRightObject( R );
     elif rank > 1 then
         return HomalgFreeRightModule( rank, R );
     fi;

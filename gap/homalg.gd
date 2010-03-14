@@ -135,6 +135,12 @@ DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgSubobjects" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "AsLeftObject",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "AsRightObject",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "AreComparableMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 

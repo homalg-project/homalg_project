@@ -1400,7 +1400,7 @@ InstallGlobalFunction( HomalgComplex,
     if IsHomalgRingOrFinitelyPresentedObjectRep( arg[1] ) then
         object := true;
         if IsHomalgRing( arg[1] ) then
-            obj_or_mor := AsLeftModule( arg[1] );
+            obj_or_mor := AsLeftObject( arg[1] );
         else
             obj_or_mor := arg[1];
         fi;
