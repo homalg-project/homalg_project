@@ -24,22 +24,114 @@ DeclareGlobalVariable( "HOMALG" );
 
 # four new categories:
 
-DeclareCategory( "IsHomalgObjectOrMorphism",	## this is the super GAP-category which will include the GAP-categories IsHomalgModule, IsHomalgMap, IsHomalgComplex and IsHomalgChainMap:
-        IsExtLElement and			## with this GAP-category we can have a common declaration for things like OnLessGenerators, BasisOfModule, DecideZero
+##  <#GAPDoc Label="IsHomalgObjectOrMorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgObjectOrMorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <Ref Filt="IsHomalgObject"/> and <Ref Filt="IsHomalgMorphism"/>.
+##      With this GAP-category we can have a common declaration for things like
+##      <C>OnLessGenerators</C>, <C>BasisOfModule</C>, <C>DecideZero</C>.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgObjectOrMorphism",
+        IsExtLElement and
         IsHomalgRingOrObjectOrMorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-DeclareCategory( "IsHomalgObject",		## this is the super GAP-category which will include the GAP-categories IsHomalgModule and IsHomalgComplex:
-        IsHomalgObjectOrMorphism and		## we need this GAP-category to be able to build complexes with *objects* being modules or again complexes!
+##  <#GAPDoc Label="IsHomalgObject">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgObject"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <Ref Filt="IsHomalgStaticObject"/>, <Ref Filt="IsHomalgComplex"/>, <Ref Filt="IsHomalgBicomplex"/>,
+##      <Ref Filt="IsHomalgBigradedObject"/>, and <Ref Filt="IsHomalgSpectralSequence"/>.
+##      We need this &GAP;-category to be able to build complexes with *objects*
+##      being objects of &homalg; categories or again complexes.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgObject",
+        IsHomalgObjectOrMorphism and
         IsHomalgRingOrObject and
         IsAdditiveElementWithZero );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-DeclareCategory( "IsHomalgMorphism",		## this is the super GAP-category which will include the GAP-categories IsHomalgMap and IsHomalgChainMap:
-        IsHomalgObjectOrMorphism and		## we need this GAP-category to be able to build chain maps with *morphisms* being homomorphisms or again chain maps!
-        IsAdditiveElementWithInverse );		## CAUTION: never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!
+##  <#GAPDoc Label="IsHomalgStaticObject">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticObject"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <C>IsHomalgModule</C>, etc.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgStaticObject",
+        IsHomalgObject );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-DeclareCategory( "IsHomalgEndomorphism",	## this is the super GAP-category which will include the GAP-categories IsHomalgSelfMap and IsHomalgChainSelfMap
+##  <#GAPDoc Label="IsHomalgMorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgMorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <Ref Filt="IsHomalgStaticMorphism"/> and <Ref Filt="IsHomalgChainMap"/>.
+##      We need this &GAP;-category to be able to build complexes with *objects*
+##      being objects of &homalg; categories or again complexes.
+##      We need this GAP-category to be able to build chain maps with *morphisms*
+##      being morphisms of &homalg; categories or again chain maps. <Br/>
+##      CAUTION: Never let &homalg; morphisms (which are not endomorphisms)
+##      be multiplicative elements!!
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgMorphism",
+        IsHomalgObjectOrMorphism and
+        IsAdditiveElementWithInverse );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsHomalgStaticMorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticMorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <C>IsHomalgMap</C>, etc. <Br/>
+##      CAUTION: Never let homalg morphisms (which are not endomorphisms)
+##      be multiplicative elements!!
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgStaticMorphism",
+        IsHomalgMorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsHomalgStaticMorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticMorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <C>IsHomalgSelfMap</C>, <Ref Filt="IsHomalgChainSelfMap"/>, etc.
+##      be multiplicative elements!!
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgEndomorphism",
         IsHomalgMorphism and
         IsMultiplicativeElementWithInverse );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 DeclareCategory( "IsHomalgLeftObjectOrMorphismOfLeftObjects",
         IsHomalgObjectOrMorphism );

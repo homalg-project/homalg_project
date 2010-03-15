@@ -34,13 +34,13 @@
 ##    <Description>
 ##      The &GAP; representation of maps between finitley generated &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
-##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##       which is a subrepresentation of the &GAP; representation <C>IsStaticMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsMapOfFinitelyGeneratedModulesRep",
-        IsHomalgMap and IsMorphismOfFinitelyGeneratedModulesRep,
+        IsHomalgMap and IsStaticMorphismOfFinitelyGeneratedObjectsRep,
         [ "source", "target", "matrices", "index_pairs_of_presentations" ] );
 
 ####################################
@@ -780,7 +780,7 @@ InstallMethod( PreInverse,
         
         SetIsZero( T, true );
         
-        phi!.PreInverse := TheZeroMap( T, S );
+        phi!.PreInverse := TheZeroMorphism( T, S );
         
         return phi!.PreInverse;
         
@@ -860,7 +860,7 @@ InstallMethod( PostInverse,
     
     ## this must come before any Eval:
     if HasIsZero( inv ) and IsZero( inv ) then
-        return TheZeroMap( Range( phi ), Source( phi ) );
+        return TheZeroMorphism( Range( phi ), Source( phi ) );
     fi;
     
     if IsBool( Eval( inv ) ) then

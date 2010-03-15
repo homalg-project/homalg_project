@@ -65,7 +65,7 @@
 <Section Label="Modules:Attributes">
 <Heading>Modules: Attributes</Heading>
 
-<#Include Label="TheZeroMorphism">
+<#Include Label="TheMorphismToZero">
 <#Include Label="TheIdentityMorphism">
 <#Include Label="FullSubmodule">
 <#Include Label="EmbeddingInSuperObject">

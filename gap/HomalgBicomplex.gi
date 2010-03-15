@@ -636,7 +636,7 @@ InstallMethod( MorphismOfTotalComplex,
             elif diff = vertical then
                 Add( augment, CertainVerticalMorphism( B, pq_source ) );
             else
-                Add( augment, TheZeroMap( source, CertainObject( B, pq_target ) ) );
+                Add( augment, TheZeroMorphism( source, CertainObject( B, pq_target ) ) );
             fi;
         od;
         Add( stack, Iterated( augment, AugmentMaps ) );

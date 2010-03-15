@@ -696,7 +696,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
             if IsBound( natural_transformations.(p) ) then
                 nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
             else
-                nat_trafos.(p) := TheZeroMap( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
+                nat_trafos.(p) := TheZeroMorphism( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;
             Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
             SetIsMonomorphism( nat_trafos.(p), true );
@@ -706,7 +706,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
             if IsBound( natural_transformations.(p) ) then
                 nat_trafos.(p) := ( gen_embs.(p) / natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
             else
-                nat_trafos.(p) := TheZeroMap( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
+                nat_trafos.(p) := TheZeroMorphism( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;
             Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
             SetIsMonomorphism( nat_trafos.(p), true );

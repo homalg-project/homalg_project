@@ -15,28 +15,28 @@
 ####################################
 
 ##
-## TheZeroMap
+## TheZeroMorphism
 ##
 
-InstallGlobalFunction( _Functor_TheZeroMap_OnObjects,	### defines: TheZeroMap
+InstallGlobalFunction( _Functor_TheZeroMorphism_OnObjects,	### defines: TheZeroMorphism
   function( M, N )
     
     return HomalgZeroMap( M, N );
     
 end );
 
-InstallValue( functor_TheZeroMap,
+InstallValue( functor_TheZeroMorphism,
         CreateHomalgFunctor(
-                [ "name", "TheZeroMap" ],
-                [ "operation", "TheZeroMap" ],
+                [ "name", "TheZeroMorphism" ],
+                [ "operation", "TheZeroMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant" ] ] ],
                 [ "2", [ [ "covariant" ] ] ],
-                [ "OnObjects", _Functor_TheZeroMap_OnObjects ]
+                [ "OnObjects", _Functor_TheZeroMorphism_OnObjects ]
                 )
         );
 
-functor_TheZeroMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_TheZeroMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -821,10 +821,10 @@ functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
-## TheZeroMap( M, N )
+## TheZeroMorphism( M, N )
 ##
 
-InstallFunctorOnObjects( functor_TheZeroMap );
+InstallFunctorOnObjects( functor_TheZeroMorphism );
 
 ##
 ## AsATwoSequence( phi, psi )

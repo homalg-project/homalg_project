@@ -40,6 +40,3 @@ DeclareOperation( "CompleteChainMap",
 DeclareOperation( "CompleteChainMap",
         [ IsHomalgChainMap ] );
 
-DeclareOperation( "Cokernel",
-        [ IsHomalgChainMap ] );
-

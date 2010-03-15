@@ -60,14 +60,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
 ##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
-##      <C>IsFinitelyPresentedObjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsStaticFinitelyPresentedObjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
-        IsFinitelyPresentedObjectRep and
+        IsStaticFinitelyPresentedObjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
           "TransitionMatrices",
@@ -81,14 +81,14 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 ##      The &GAP; representation of finitley generated &homalg; submodules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
 ##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
-##      <C>IsFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##      <C>IsStaticFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
-        IsFinitelyPresentedSubobjectRep and
+        IsStaticFinitelyPresentedSubobjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "map_having_subobject_as_its_image" ] );
 
@@ -1671,7 +1671,9 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -1723,7 +1725,9 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -1773,7 +1777,9 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForRightModule( rel );
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -1825,7 +1831,9 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForRightModule( rel );
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -1876,7 +1884,9 @@ InstallMethod( LeftPresentation,
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -1922,7 +1932,9 @@ InstallMethod( LeftPresentation,
         rels := CreateSetsOfRelationsForLeftModule( rel, R );
     fi;
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -2010,7 +2022,9 @@ InstallMethod( RightPresentation,
     
     rels := CreateSetsOfRelationsForRightModule( rel, R );
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );
@@ -2056,7 +2070,9 @@ InstallMethod( RightPresentation,
         rels := CreateSetsOfRelationsForRightModule( rel, R );
     fi;
     
-    M := rec( SetsOfGenerators := gens,
+    M := rec( string := "module",
+              string_plural := "modules",
+              SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
               PositionOfTheDefaultSetOfRelations := 1 );

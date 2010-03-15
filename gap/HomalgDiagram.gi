@@ -52,7 +52,7 @@ HOMALG.SpectralSequenceConventionForBettiDiagramsOfCocomplexes := true;
 
 ##
 InstallMethod( MatrixOfDiagram,
-        "for filtrations of homalg modules",
+        "for homalg diagrams",
         [ IsHomalgDiagramRep ],
         
   function( diag )
@@ -63,7 +63,7 @@ end );
 
 ##
 InstallMethod( RowDegreesOfBettiDiagram,
-        "for filtrations of homalg modules",
+        "for homalg diagrams",
         [ IsHomalgBettiDiagram and IsHomalgDiagramRep ],
         
   function( diag )
@@ -74,7 +74,7 @@ end );
 
 ##
 InstallMethod( ColumnDegreesOfBettiDiagram,
-        "for filtrations of homalg modules",
+        "for homalg diagrams",
         [ IsHomalgBettiDiagram and IsHomalgDiagramRep ],
         
   function( diag )
@@ -167,11 +167,12 @@ InstallMethod( ViewObj,
         Print( ">" );
     else
         Print( "a homalg " );
-        if IsHomalgModule( o!.object ) then
-            Print( "module>" );
+        if IsBound( o!.object!.string ) then
+            Print( o!.object!.string );
         else
-            Print( "complex>" );
+            Print( "object" );
         fi;
+        Print( ">" );
     fi;
     
 end );

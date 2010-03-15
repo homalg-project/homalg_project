@@ -113,7 +113,7 @@ BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
 
 HOMALG.FunctorOn :=
   [ IsHomalgRingOrFinitelyPresentedObjectRep,
-    IsMapOfFinitelyGeneratedModulesRep,
+    IsStaticMorphismOfFinitelyGeneratedObjectsRep,
     [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
     [ IsChainMapOfFinitelyPresentedObjectsRep, IsCochainMapOfFinitelyPresentedObjectsRep ] ];
   
@@ -125,15 +125,15 @@ HOMALG.FunctorOn :=
 
 ##
 InstallMethod( NaturalGeneralizedEmbedding,
-        "for homalg modules being values of functors on objects",
-        [ IsFinitelyPresentedModuleRep ],
+        "for homalg objects being values of functors on objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( FM )
     
     if IsBound(FM!.NaturalGeneralizedEmbedding) then
         return FM!.NaturalGeneralizedEmbedding;
     else
-        Error( "the module does not have a component \"NaturalGeneralizedEmbedding\"; either the module is not the result of a functor or the functor is not properly implemented (cf. arXiv:math/0701146)\n" );
+        Error( "the object does not have a component \"NaturalGeneralizedEmbedding\"; either the object is not the result of a functor or the functor is not properly implemented (cf. arXiv:math/0701146)\n" );
     fi;
     
 end );
@@ -335,7 +335,7 @@ InstallMethod( FunctorObj,
     arguments_of_functor :=
       List( args_of_functor,
             function( a )
-              if IsFinitelyPresentedSubobjectRep( a ) then
+              if IsStaticFinitelyPresentedSubobjectRep( a ) then
                   return UnderlyingObject( a );
               else
                   return a;
@@ -360,7 +360,7 @@ InstallMethod( FunctorObj,
                 arg_old := Genesis( obj );
                 arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
                 if l = Length( arg_old[1] ) then
-                    if ForAny( arguments_of_functor, IsHomalgModule ) then
+                    if ForAny( arguments_of_functor, IsHomalgStaticObject ) then
                         if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) then
                             if ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
                                 return obj;
@@ -453,7 +453,7 @@ InstallMethod( FunctorObj,
         
     fi;
     
-    if IsHomalgModule( obj ) then
+    if IsHomalgStaticObject( obj ) then
         R := HomalgRing( obj );
         if IsBound( R!.ByASmallerPresentation ) then
             ByASmallerPresentation( obj );
@@ -488,7 +488,7 @@ end );
 ##
 InstallMethod( FunctorMap,
         "for homalg morphisms",
-        [ IsHomalgFunctorRep, IsMapOfFinitelyGeneratedModulesRep, IsList ],
+        [ IsHomalgFunctorRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsList ],
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
     local container, weak_pointers, a, deleted, functor_name,
@@ -692,7 +692,7 @@ end );
 ##
 InstallMethod( FunctorMap,
         "for homalg morphisms",
-        [ IsHomalgFunctorRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsHomalgFunctorRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( Functor, phi )
     
@@ -746,7 +746,7 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 InstallOtherMethod( functor_operation,
-                        "for homalg modules",
+                        "for homalg objects",
                         [ filter0, filter_obj ],
                   function( c, o )
                     local obj;
@@ -769,7 +769,7 @@ InstallMethod( InstallFunctorOnObjects,
                     natural_transformation := ValueGlobal( Functor!.natural_transformation );
                     
                     InstallOtherMethod( natural_transformation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter_obj ],
                       function( o )
                         
@@ -786,7 +786,7 @@ InstallMethod( InstallFunctorOnObjects,
                     natural_transformation1 := ValueGlobal( Functor!.natural_transformation1 );
                     
                     InstallOtherMethod( natural_transformation1,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter_obj ],
                       function( o )
                         
@@ -803,7 +803,7 @@ InstallMethod( InstallFunctorOnObjects,
                     natural_transformation2 := ValueGlobal( Functor!.natural_transformation2 );
                     
                     InstallOtherMethod( natural_transformation2,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter_obj ],
                       function( o )
                         
@@ -820,7 +820,7 @@ InstallMethod( InstallFunctorOnObjects,
                     natural_transformation3 := ValueGlobal( Functor!.natural_transformation3 );
                     
                     InstallOtherMethod( natural_transformation3,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter_obj ],
                       function( o )
                         
@@ -837,7 +837,7 @@ InstallMethod( InstallFunctorOnObjects,
                     natural_transformation4 := ValueGlobal( Functor!.natural_transformation4 );
                     
                     InstallOtherMethod( natural_transformation4,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter_obj ],
                       function( o )
                         
@@ -850,7 +850,7 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 InstallOtherMethod( functor_operation,
-                        "for homalg modules",
+                        "for homalg objects",
                         [ filter_obj ],
                   function( o )
                     local obj;
@@ -904,7 +904,7 @@ InstallMethod( InstallFunctorOnObjects,
                 if IsDistinguishedFirstArgumentOfFunctor( Functor ) then
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter0, filter1_obj ],
                       function( c, o )
                         local R;
@@ -920,7 +920,7 @@ InstallMethod( InstallFunctorOnObjects,
                     end );
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ IsInt, filter1_obj, IsString ],
                       function( c, o, s )
                         local R;
@@ -938,7 +938,7 @@ InstallMethod( InstallFunctorOnObjects,
                     if IsBound( der_arg ) and der_arg = 1 then
                         
                         InstallOtherMethod( functor_operation,
-                                "for homalg modules",
+                                "for homalg objects",
                                 [ filter1_obj ],
                           function( o )
                             local R;
@@ -958,15 +958,15 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 InstallOtherMethod( functor_operation,
-                        "for homalg modules",
+                        "for homalg objects",
                         [ filter0, filter1_obj, filter2_obj ],
                   function( c, o1, o2 )
                     local obj1, obj2;
                     
-                    if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) and IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj1 := o1;
                         obj2 := o2;
-                    elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) then
                         obj1 := o1;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
@@ -974,7 +974,7 @@ InstallMethod( InstallFunctorOnObjects,
                         else
                             obj2 := AsRightObject( o2 );
                         fi;
-                    elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
+                    elif IsHomalgRing( o1 ) and IsHomalgStaticObject( o2 ) then
                         obj2 := o2;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
@@ -1005,7 +1005,7 @@ InstallMethod( InstallFunctorOnObjects,
                     if IsCovariantFunctor( Functor, der_arg ) then
                         
                         InstallOtherMethod( functor_operation,
-                                "for homalg modules",
+                                "for homalg objects",
                                 [ IsInt, filter1_obj, filter2_obj, IsString ],
                           function( n, o1, o2, s )
                             local H, C, j;
@@ -1033,7 +1033,7 @@ InstallMethod( InstallFunctorOnObjects,
                     else
                         
                         InstallOtherMethod( functor_operation,
-                                "for homalg modules",
+                                "for homalg objects",
                                 [ IsInt, filter1_obj, filter2_obj, IsString ],
                           function( n, o1, o2, s )
                             local H, C, j;
@@ -1061,7 +1061,7 @@ InstallMethod( InstallFunctorOnObjects,
                     fi;
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter1_obj, filter2_obj ],
                       function( o1, o2 )
                         local n;
@@ -1083,7 +1083,7 @@ InstallMethod( InstallFunctorOnObjects,
                 if IsDistinguishedFirstArgumentOfFunctor( Functor ) then
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter1_obj ],
                       function( o )
                         local R;
@@ -1101,15 +1101,15 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 InstallOtherMethod( functor_operation,
-                        "for homalg modules",
+                        "for homalg objects",
                         [ filter1_obj, filter2_obj ],
                   function( o1, o2 )
                     local obj1, obj2;
                     
-                    if IsHomalgModule( o1 ) and IsHomalgModule( o2 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) and IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj1 := o1;
                         obj2 := o2;
-                    elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) then
                         obj1 := o1;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
@@ -1117,7 +1117,7 @@ InstallMethod( InstallFunctorOnObjects,
                         else
                             obj2 := AsRightObject( o2 );
                         fi;
-                    elif IsHomalgRing( o1 ) and IsHomalgModule( o2 ) then
+                    elif IsHomalgRing( o1 ) and IsHomalgStaticObject( o2 ) then
                         obj2 := o2;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
@@ -1190,7 +1190,7 @@ InstallMethod( InstallFunctorOnObjects,
                 if IsDistinguishedFirstArgumentOfFunctor( Functor ) then
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter0, filter1_obj ],
                       function( c, o )
                         local R;
@@ -1206,7 +1206,7 @@ InstallMethod( InstallFunctorOnObjects,
                     end );
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ IsInt, filter1_obj, IsString ],
                       function( c, o, s )
                         local R;
@@ -1224,18 +1224,18 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 InstallOtherMethod( functor_operation,
-                        "for homalg modules",
+                        "for homalg objects",
                         [ filter0, filter1_obj, filter2_obj, filter3_obj ],
                   function( c, o1, o2, o3 )
                     local obj1, obj2, obj3;
                     
-                    if IsHomalgModule( o1 ) and
-                       IsHomalgModule( o2 ) and
-                       IsHomalgModule( o3 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) and
+                       IsHomalgStaticObject( o2 ) and
+                       IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj1 := o1;
                         obj2 := o2;
                         obj3 := o3;
-                    elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) and IsHomalgRing( o3 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) and IsHomalgRing( o3 ) then
                         obj1 := o1;
                         
                         if not IsIdenticalObj( o2, o3 ) then
@@ -1277,7 +1277,7 @@ InstallMethod( InstallFunctorOnObjects,
                     if IsCovariantFunctor( Functor, der_arg ) then
                         
                         InstallOtherMethod( functor_operation,
-                                "for homalg modules",
+                                "for homalg objects",
                                 [ IsInt, filter1_obj, filter2_obj, filter3_obj, IsString ],
                           function( n, o1, o2, o3, s )
                             local H, C, j;
@@ -1305,7 +1305,7 @@ InstallMethod( InstallFunctorOnObjects,
                     else
                         
                         InstallOtherMethod( functor_operation,
-                                "for homalg modules",
+                                "for homalg objects",
                                 [ IsInt, filter1_obj, filter2_obj, filter3_obj, IsString ],
                           function( n, o1, o2, o3, s )
                             local H, C, j;
@@ -1339,7 +1339,7 @@ InstallMethod( InstallFunctorOnObjects,
                 if IsDistinguishedFirstArgumentOfFunctor( Functor ) then
                     
                     InstallOtherMethod( functor_operation,
-                            "for homalg modules",
+                            "for homalg objects",
                             [ filter1_obj ],
                       function( o )
                         local R;
@@ -1357,18 +1357,18 @@ InstallMethod( InstallFunctorOnObjects,
                 fi;
                 
                 InstallOtherMethod( functor_operation,
-                        "for homalg modules",
+                        "for homalg objects",
                         [ filter1_obj, filter2_obj, filter3_obj ],
                   function( o1, o2, o3 )
                     local obj1, obj2, obj3;
                     
-                    if IsHomalgModule( o1 ) and
-                       IsHomalgModule( o2 ) and
-                       IsHomalgModule( o3 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) and
+                       IsHomalgStaticObject( o2 ) and
+                       IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj1 := o1;
                         obj2 := o2;
                         obj3 := o3;
-                    elif IsHomalgModule( o1 ) and IsHomalgRing( o2 ) and IsHomalgRing( o3 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) and IsHomalgRing( o3 ) then
                         obj1 := o1;
                         
                         if not IsIdenticalObj( o2, o3 ) then
@@ -1553,7 +1553,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( c, m, o )
                     local obj;
                     
-                    if IsHomalgModule( o ) then	## the most probable case
+                    if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1576,7 +1576,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( c, o, m )
                     local obj;
                     
-                    if IsHomalgModule( o ) then	## the most probable case
+                    if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1737,7 +1737,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( m, o )
                     local obj;
                     
-                    if IsHomalgModule( o ) then	## the most probable case
+                    if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1760,7 +1760,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( o, m )
                     local obj;
                     
-                    if IsHomalgModule( o ) then	## the most probable case
+                    if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
                     elif IsHomalgRing( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1899,7 +1899,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( c, m, o2, o3 )
                     local obj2, obj3;
                     
-                    if IsHomalgModule( o2 ) then	## the most probable case
+                    if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1912,7 +1912,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     fi;
                     
-                    if IsHomalgModule( o3 ) then	## the most probable case
+                    if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1935,7 +1935,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( c, o1, m, o3 )
                     local obj1, obj3;
                     
-                    if IsHomalgModule( o1 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) then	## the most probable case
                         obj1 := o1;
                     elif IsHomalgRing( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1948,7 +1948,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj1 := o1;
                     fi;
                     
-                    if IsHomalgModule( o3 ) then	## the most probable case
+                    if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1971,7 +1971,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( c, o1, o2, m )
                     local obj1, obj2;
                     
-                    if IsHomalgModule( o1 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) then	## the most probable case
                         obj1 := o1;
                     elif IsHomalgRing( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -1984,7 +1984,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj1 := o1;
                     fi;
                     
-                    if IsHomalgModule( o2 ) then	## the most probable case
+                    if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -2129,7 +2129,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( m, o2, o3 )
                     local obj2, obj3;
                     
-                    if IsHomalgModule( o2 ) then	## the most probable case
+                    if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -2152,7 +2152,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( o1, m, o3 )
                     local obj1, obj3;
                     
-                    if IsHomalgModule( o1 ) then	## the most probable case
+                    if IsHomalgStaticObject( o1 ) then	## the most probable case
                         obj1 := o1;
                     elif IsHomalgRing( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -2165,7 +2165,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj1 := o1;
                     fi;
                     
-                    if IsHomalgModule( o3 ) then	## the most probable case
+                    if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -2188,7 +2188,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                   function( m, o2, o3 )
                     local obj2, obj3;
                     
-                    if IsHomalgModule( o2 ) then	## the most probable case
+                    if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
                     elif IsHomalgRing( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -2201,7 +2201,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     fi;
                     
-                    if IsHomalgModule( o3 ) then	## the most probable case
+                    if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
                     elif IsHomalgRing( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
@@ -2529,7 +2529,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
               function( q, c, o )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2584,7 +2584,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
               function( q, c, o )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2649,7 +2649,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
               function( c, o )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2704,7 +2704,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
               function( c, o )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2770,7 +2770,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
               function( q, o, c )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2825,7 +2825,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
               function( q, o, c )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2874,7 +2874,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
               function( o, c )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -2929,7 +2929,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
               function( o, c )
                 local obj, degrees, l, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3426,7 +3426,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
               function( q, c, o )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3472,7 +3472,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
               function( q, c, o )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3534,7 +3534,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
               function( c, o )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3580,7 +3580,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
               function( c, o )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3643,7 +3643,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
               function( q, o, c )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3689,7 +3689,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
               function( q, o, c )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3735,7 +3735,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
               function( o, c )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -3781,7 +3781,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
               function( o, c )
                 local obj, d, degrees, l, source, target, morphisms, Fc, m;
                 
-                if IsHomalgModule( o ) then	## the most probable case
+                if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
                 elif IsHomalgRing( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
@@ -6055,7 +6055,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             d := Resolution( 0, arg[p + 1] );
         fi;
         
-        if IsHomalgMap( arg[p + 1] ) then
+        if IsHomalgStaticMorphism( arg[p + 1] ) then
             if c = 0 then
                 mu := arg[p + 1];
             else
@@ -6277,7 +6277,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             d := Resolution( 0, arg[p + 1] );
         fi;
         
-        if IsHomalgMap( arg[p + 1] ) then
+        if IsHomalgStaticMorphism( arg[p + 1] ) then
             if c = 0 then
                 mu := arg[p + 1];
             else
@@ -6489,7 +6489,7 @@ InstallMethod( RightDerivedCofunctor,
         
         d := Resolution( c, arg[p + 1] );
         
-        if IsHomalgMap( arg[p + 1] ) then
+        if IsHomalgStaticMorphism( arg[p + 1] ) then
             d_c := CertainMorphism( d, c );
         else
             d_c := CertainObject( d, c );
@@ -6699,7 +6699,7 @@ InstallMethod( LeftDerivedFunctor,
         
         d := Resolution( c, arg[p + 1] );
         
-        if IsHomalgMap( arg[p + 1] ) then
+        if IsHomalgStaticMorphism( arg[p + 1] ) then
             d_c := CertainMorphism( d, c );
         else
             d_c := CertainObject( d, c );

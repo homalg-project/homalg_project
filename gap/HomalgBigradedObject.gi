@@ -563,7 +563,7 @@ InstallMethod( AsDifferentialObject,
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p - i, q + i ] ) );
                         mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p - i, q + i ] ) );
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
-                            mor := TheZeroMap( source, target );
+                            mor := TheZeroMorphism( source, target );
                         else
                             emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
                             emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));
@@ -600,7 +600,7 @@ InstallMethod( AsDifferentialObject,
                         mor_h := List( [ 0 .. r - 1 ], i -> CertainHorizontalMorphism( B, [ p + i, q - i ] ) );
                         mor_v := List( [ 1 .. r - 1 ], i -> CertainVerticalMorphism( B, [ p + i, q - i ] ) );
                         if ForAny( mor_h, IsZero ) or ForAny( mor_v, IsZero ) then
-                            mor := TheZeroMap( source, target );
+                            mor := TheZeroMorphism( source, target );
                         else
                             emb_source := Er!.absolute_embeddings.(String( [ p, q ] ));
                             emb_target := Er!.absolute_embeddings.(String( [ p, q ] + bidegree ));

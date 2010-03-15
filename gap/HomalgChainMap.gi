@@ -21,13 +21,13 @@
 ##    <Description>
 ##      The &GAP; representation of chain maps of finitley generated &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
-##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
-        IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
+        IsHomalgChainMap and IsMorphismOfFinitelyGeneratedObjectsRep,
         [  ] );
 
 ##  <#GAPDoc Label="IsCochainMapOfFinitelyPresentedObjectsRep">
@@ -37,13 +37,13 @@ DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
 ##    <Description>
 ##      The &GAP; representation of cochain maps of finitley generated &homalg; modules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
-##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedModulesRep</C>.)
+##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsCochainMapOfFinitelyPresentedObjectsRep",
-        IsHomalgChainMap and IsMorphismOfFinitelyGeneratedModulesRep,
+        IsHomalgChainMap and IsMorphismOfFinitelyGeneratedObjectsRep,
         [  ] );
 
 ####################################
@@ -388,7 +388,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg chain maps",
-        [ IsHomalgChainMap, IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsHomalgChainMap, IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( cm, phi )
     local d, degrees, l;
@@ -417,7 +417,7 @@ InstallMethod( Add,
         Error( "there is no module in the source complex with index ", l, "\n" );
     fi;
     
-    if IsHomalgModule( Source( phi ) ) then
+    if IsHomalgStaticObject( Source( phi ) ) then
         if not IsIdenticalObj( CertainObject( Source( cm ), l ), Source( phi ) ) then
             Error( "the ", l, ". module of the source complex in the chain map and the source of the new map are not identical\n" );
         elif not IsIdenticalObj( CertainObject( Range( cm ), l + d ), Range( phi ) ) then
@@ -1077,7 +1077,7 @@ InstallGlobalFunction( HomalgChainMap,
         Error( "too few arguments\n" );
     fi;
     
-    if IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+    if IsMorphismOfFinitelyGeneratedObjectsRep( arg[1] ) then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[1] );
         morphism := arg[1];
     elif nargs = 1 then

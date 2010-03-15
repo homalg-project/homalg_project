@@ -360,9 +360,9 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( F_j );
         for i in [ 1 .. q - j ] do
             if left then
-                d_j := TheZeroMap( 0 * R, F_j );
+                d_j := TheZeroMorphism( 0 * R, F_j );
             else
-                d_j := TheZeroMap( R * 0, F_j );
+                d_j := TheZeroMorphism( R * 0, F_j );
             fi;
             
             Add( d, d_j );
@@ -550,7 +550,7 @@ InstallMethod( SyzygiesModuleEmb,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         ## this is not really an embedding, but spares us case distinctions at several places (e.g. Left/RightSatelliteOfFunctor)
-        return TheZeroMorphism( M );
+        return TheMorphismToZero( M );
     elif q = 1 then
         return KernelEmb( FreeHullEpi( M ) );
     fi;
@@ -685,7 +685,7 @@ InstallMethod( SubResolution,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         dq1 := PresentationMap( M );
-        res := AsATwoSequence( dq1, TheZeroMorphism( FreeHullModule( M ) ) );
+        res := AsATwoSequence( dq1, TheMorphismToZero( FreeHullModule( M ) ) );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
             SetIsRightAcyclic( res, true );
         else
@@ -726,7 +726,7 @@ InstallMethod( SubResolution,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         dq1 := PresentationMap( M );
-        res := AsATwoSequence( TheZeroMorphism( FreeHullModule( M ) ), dq1 );
+        res := AsATwoSequence( TheMorphismToZero( FreeHullModule( M ) ), dq1 );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
             SetIsRightAcyclic( res, true );
         else
@@ -805,7 +805,7 @@ InstallMethod( ShortenResolution,
     
     if m > 2 then
         d_m_2 := CertainMorphism( d, mx - 2 );
-        d_m_1 := StackMaps( d_m_2, TheZeroMap( F_m, Range( d_m_2 ) ) );
+        d_m_1 := StackMaps( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
     fi;
     
     mx := mx - 1;
@@ -830,7 +830,7 @@ InstallMethod( ShortenResolution,
         
         if m > 2 then
             d_m_2 := CertainMorphism( d, mx - 2 );
-            d_m_1 := StackMaps( d_m_2, TheZeroMap( F_m, Range( d_m_2 ) ) );
+            d_m_1 := StackMaps( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
         fi;
         
         mx := mx - 1;

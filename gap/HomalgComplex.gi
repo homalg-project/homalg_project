@@ -19,7 +19,7 @@
 ##    <Filt Type="Representation" Arg="C" Name="IsComplexOfFinitelyPresentedObjectsRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of complexes of finitley generated &homalg; modules. <P/>
+##      The &GAP; representation of complexes of finitley presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgComplex"/>,
 ##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
@@ -35,7 +35,7 @@ DeclareRepresentation( "IsComplexOfFinitelyPresentedObjectsRep",
 ##    <Filt Type="Representation" Arg="C" Name="IsCocomplexOfFinitelyPresentedObjectsRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of cocomplexes of finitley generated &homalg; modules. <P/>
+##      The &GAP; representation of cocomplexes of finitley presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgComplex"/>,
 ##       which is a subrepresentation of the &GAP; representation <C>IsFinitelyPresentedObjectRep</C>.)
 ##    </Description>
@@ -238,7 +238,7 @@ InstallMethod( ObjectsOfComplex,
         [ IsHomalgComplex ],
         
   function( C )
-    local morphisms, l, modules;
+    local morphisms, l, objects;
     
     morphisms := MorphismsOfComplex( C );
     
@@ -247,14 +247,14 @@ InstallMethod( ObjectsOfComplex,
     if l = 0 then
         return [ CertainObject( C, ObjectDegreesOfComplex( C )[1] ) ];
     elif IsComplexOfFinitelyPresentedObjectsRep( C ) then
-        modules := List( morphisms, Range );
-        Add( modules, Source( morphisms[l] ) );
+        objects := List( morphisms, Range );
+        Add( objects, Source( morphisms[l] ) );
     else
-        modules := List( morphisms, Source );
-        Add( modules, Range( morphisms[l] ) );
+        objects := List( morphisms, Source );
+        Add( objects, Range( morphisms[l] ) );
     fi;
     
-    return modules;
+    return objects;
     
 end );
 
@@ -353,15 +353,15 @@ InstallMethod( SupportOfComplex,
         [ IsHomalgComplex ],
         
   function( C )
-    local degrees, l, modules;
+    local degrees, l, objects;
     
     degrees := ObjectDegreesOfComplex( C );
     
     l := Length( degrees );
     
-    modules := ObjectsOfComplex( C );
+    objects := ObjectsOfComplex( C );
     
-    return degrees{ Filtered( [ 1 .. l ], i -> not IsZero( modules[i] ) ) };
+    return degrees{ Filtered( [ 1 .. l ], i -> not IsZero( objects[i] ) ) };
     
 end );
 
@@ -435,7 +435,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( C, phi )
     local degrees, l, psi;
@@ -515,8 +515,8 @@ end );
 
 ##
 InstallMethod( Add,
-        "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedModulesRep ],
+        "for homalg cocomplexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( C, phi )
     local degrees, l, psi;
@@ -590,8 +590,8 @@ end );
 
 ##
 InstallMethod( Add,
-        "for homalg complexes",
-        [ IsMorphismOfFinitelyGeneratedModulesRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
+        "for homalg cocomplexes",
+        [ IsMorphismOfFinitelyGeneratedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( phi, C )
     local degrees, l, psi;
@@ -657,7 +657,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsComplexOfFinitelyPresentedObjectsRep, IsFinitelyPresentedModuleRep ],
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsStaticFinitelyPresentedObjectRep ],
         
   function( C, M )
     local T, grd, cpx, seq;
@@ -672,7 +672,7 @@ InstallMethod( Add,
         seq := IsSequence ( C );
     fi;
     
-    Add( C, TheZeroMap( M, T ) );
+    Add( C, TheZeroMorphism( M, T ) );
     
     if IsBound( grd ) then
         SetIsGradedObject( C, grd );
@@ -687,7 +687,7 @@ end );
 ##
 InstallMethod( Add,
         "for homalg complexes",
-        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsFinitelyPresentedModuleRep ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsStaticFinitelyPresentedObjectRep ],
         
   function( C, M )
     local S, grd, cpx, seq;
@@ -702,7 +702,7 @@ InstallMethod( Add,
         seq := IsSequence ( C );
     fi;
     
-    Add( C, TheZeroMap( S, M ) );
+    Add( C, TheZeroMorphism( S, M ) );
     
     if IsBound( grd ) then
         SetIsGradedObject( C, grd );
@@ -1384,14 +1384,18 @@ InstallGlobalFunction( HomalgComplex,
     
     if IsStringRep( arg[nargs] ) and ( arg[nargs] = "co" or arg[nargs] = "cocomplex" ) then
         complex := false;
+        C.string := "cocomplex";
+        C.string_plural := "cocomplexes";
     else
         complex := true;
+        C.string := "complex";
+        C.string_plural := "complexes";
     fi;
     
     if nargs > 1 and ( IsInt( arg[2] )
                or ( IsList( arg[2] ) and Length( arg[2] ) > 0 and ForAll( arg[2], IsInt ) ) ) then
         degrees := [ arg[2] ];
-    elif complex and IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+    elif complex and IsMorphismOfFinitelyGeneratedObjectsRep( arg[1] ) then
         degrees := [ 1 ];
     else
         degrees := [ 0 ];
@@ -1406,7 +1410,7 @@ InstallGlobalFunction( HomalgComplex,
         fi;
         C.degrees := degrees;
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( obj_or_mor );
-    elif IsMorphismOfFinitelyGeneratedModulesRep( arg[1] ) then
+    elif IsMorphismOfFinitelyGeneratedObjectsRep( arg[1] ) then
         object := false;
         obj_or_mor := arg[1];
         if complex then
@@ -1693,15 +1697,7 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        if IsHomalgModule( oi ) then
-            Print( " module" );
-        elif IsHomalgComplex( oi ) then
-            if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
-                Print( " complex" );
-            else
-                Print( " cocomplex" );
-            fi;
-        elif IsBound( oi!.string ) then
+        if IsBound( oi!.string ) then
             Print( " ", oi!.string );
         else
             Print( " object" );
@@ -1725,15 +1721,7 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        if IsHomalgModule( oi ) then
-            Print( " modules" );
-        elif IsHomalgComplex( oi ) then
-            if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
-                Print( " complexes" );
-            else
-                Print( " cocomplexes" );
-            fi;
-        elif IsBound( oi!.string_plural ) then
+        if IsBound( oi!.string_plural ) then
             Print( " ", oi!.string_plural );
         elif IsBound( oi!.string ) then
             Print( " ", oi!.string, "s" );
@@ -1795,24 +1783,21 @@ InstallMethod( ViewObj,
     
     oi := CertainObject( o, degrees[1] );
     
-    if IsHomalgModule( oi ) then
-        Print( " module" );
+    if IsBound( oi!.string ) then
+        if l = 1 then
+            Print( " ", oi!.string );
+        else
+            if IsBound( oi!.string_plural ) then
+                Print( " ", oi!.string_plural );
+            else
+                Print( " ", oi!.string, "s" );
+            fi;
+        fi;
+    else
+        Print( " object" );
         if l > 1 then
             Print( "s" );
         fi;
-    elif IsHomalgComplex( oi ) then
-        if IsComplexOfFinitelyPresentedObjectsRep( oi ) then
-            Print( " complex" );
-        else
-            Print( " cocomplex" );
-        fi;
-        if l > 1 then
-            Print( "es" );
-        fi;
-    elif IsBound( oi!.string ) then
-        Print( " ", oi!.string );
-    else
-        Print( " object" );
     fi;
     
     Print( " at degree" );

@@ -61,8 +61,8 @@ DeclareGlobalVariable( "functor_BaseChange" );
 
 ##  <#GAPDoc Label="CokernelEpi">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="CokernelEpi" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Attr Arg="phi" Name="CokernelEpi" Label="for morphisms"/>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural epimorphism from the <C>Range</C><M>(</M><A>phi</A><M>)</M>
 ##      onto the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
@@ -71,12 +71,12 @@ DeclareGlobalVariable( "functor_BaseChange" );
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "CokernelEpi",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="CokernelNaturalGeneralizedIsomorphism">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="CokernelNaturalGeneralizedIsomorphism" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Attr Arg="phi" Name="CokernelNaturalGeneralizedIsomorphism" Label="for morphisms"/>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural generalized isomorphism from the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M>
 ##      onto the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
@@ -85,12 +85,12 @@ DeclareAttribute( "CokernelEpi",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "CokernelNaturalGeneralizedIsomorphism",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="KernelEmb:map">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="KernelEmb" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Attr Arg="phi" Name="KernelEmb" Label="for morphisms"/>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural embedding of the <C>Kernel</C><M>(</M><A>phi</A><M>)</M>
 ##      into the <C>Source</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Kernel" Label="for maps"/>).
@@ -99,7 +99,7 @@ DeclareAttribute( "CokernelNaturalGeneralizedIsomorphism",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "KernelEmb",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="ImageModuleEmb">
 ##  <ManSection>
@@ -131,8 +131,8 @@ DeclareAttribute( "ImageModuleEpi",
 
 ##  <#GAPDoc Label="NatTrIdToHomHom_R">
 ##  <ManSection>
-##    <Attr Arg="M" Name="NatTrIdToHomHom_R" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Attr Arg="M" Name="NatTrIdToHomHom_R" Label="for morphisms"/>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural evaluation map from the &homalg; module <A>M</A>
 ##      to its double dual <C>HomHom</C><M>(</M><A>M</A><M>)</M> (cf. <Ref Oper="Functor_HomHom"/>).
@@ -141,7 +141,7 @@ DeclareAttribute( "ImageModuleEpi",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "NatTrIdToHomHom_R",
-        IsHomalgModule );
+        IsHomalgObject );
 
 ####################################
 #
@@ -152,7 +152,7 @@ DeclareAttribute( "NatTrIdToHomHom_R",
 # basic operations:
 
 DeclareOperation( "Cokernel",
-        [ IsHomalgMap ] );
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "ImageModule",	## Image is unfortunately declared in the GAP library as a global function :(
         [ IsHomalgMap ] );
@@ -163,10 +163,10 @@ DeclareOperation( "DefectOfExactness",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "DefectOfExactness",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Hom",
-        [ IsHomalgModule, IsHomalgModule ] );
+        [ IsHomalgObject, IsHomalgObject ] );
 
 DeclareOperation( "LeftDualizingFunctor",
         [ IsHomalgRing, IsString ] );
@@ -184,7 +184,7 @@ if IsOperation( TensorProduct ) then
     
     ## GAP 4.4 style
     DeclareOperation( "TensorProduct",
-            [ IsHomalgModule, IsHomalgModule ] );
+            [ IsHomalgObject, IsHomalgObject ] );
     
 else
         ## GAP 4.5 style

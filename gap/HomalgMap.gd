@@ -22,13 +22,13 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; maps. <P/>
-##      (It is a subcategory of the &GAP; category <C>IsHomalgMorphism</C>.)
+##      (It is a subcategory of the &GAP; category <C>IsHomalgStaticMorphism</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareCategory( "IsHomalgMap",
-        IsHomalgMorphism );
+        IsHomalgStaticMorphism );
 
 ##  <#GAPDoc Label="IsHomalgSelfMap">
 ##  <ManSection>

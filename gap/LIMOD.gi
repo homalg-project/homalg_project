@@ -1435,7 +1435,7 @@ end );
 ####################################
 
 ##
-InstallMethod( TheZeroMorphism,
+InstallMethod( TheMorphismToZero,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         

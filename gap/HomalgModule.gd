@@ -23,13 +23,13 @@
 ##    <Description>
 ##      The &GAP; category of &homalg; modules. <P/>
 ##      (It is a subcategory of the &GAP; categories
-##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgObject</C>.)
+##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgStaticObject</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareCategory( "IsHomalgModule",
-        IsHomalgRingOrModule and IsHomalgObject );
+        IsHomalgRingOrModule and IsHomalgStaticObject );
 
 ####################################
 #
@@ -201,17 +201,17 @@ DeclareProperty( "HasConstantRank",
 #
 ####################################
 
-##  <#GAPDoc Label="TheZeroMorphism">
+##  <#GAPDoc Label="TheMorphismToZero">
 ##  <ManSection>
-##    <Attr Arg="M" Name="TheZeroMorphism"/>
+##    <Attr Arg="M" Name="TheMorphismToZero"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
-##      The zero endomorphism of the &homalg; module <A>M</A>.
+##      The zero morphism from the &homalg; module <A>M</A> to zero.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "TheZeroMorphism",
+DeclareAttribute( "TheMorphismToZero",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="TheIdentityMorphism">

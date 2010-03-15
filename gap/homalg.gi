@@ -23,45 +23,88 @@
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,
 ##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsFinitelyPresentedObjectRep",
-        IsHomalgObject and IsHomalgRingOrFinitelyPresentedObjectRep,
+        IsHomalgObject and
+        IsHomalgRingOrFinitelyPresentedObjectRep,
         [ ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsFinitelyPresentedSubobjectRep">
+##  <#GAPDoc Label="IsStaticFinitelyPresentedObjectRep">
 ##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedSubobjectRep"/>
+##    <Filt Type="Representation" Arg="M" Name="IsStaticFinitelyPresentedObjectRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of finitley presented &homalg; objects. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,
+##      The &GAP; representation of finitley presented &homalg; static objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>,
 ##       which is a subrepresentation of the &GAP; representations
-##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
+        IsHomalgStaticObject and
+        IsFinitelyPresentedObjectRep,
+        [ ] );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsFinitelyPresentedSubobjectRep",
-        IsHomalgObject and IsHomalgRingOrFinitelyPresentedObjectRep,
-        [ ] );
 
-##  <#GAPDoc Label="IsMorphismOfFinitelyGeneratedModulesRep">
+##  <#GAPDoc Label="IsStaticFinitelyPresentedSubobjectRep">
 ##  <ManSection>
-##    <Filt Type="Representation" Arg="phi" Name="IsMorphismOfFinitelyGeneratedModulesRep"/>
+##    <Filt Type="Representation" Arg="M" Name="IsStaticFinitelyPresentedSubobjectRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of morphisms of finitley generated &homalg; modules. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMorphism"/>.)
+##      The &GAP; representation of finitley presented &homalg; subobjects of static objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>,
+##       which is a subrepresentation of the &GAP; representations
+##      <C>IsFinitelyPresentedObjectRep</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsStaticFinitelyPresentedSubobjectRep",
+        IsHomalgStaticObject and
+        IsFinitelyPresentedObjectRep,
+        [ ] );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsMorphismOfFinitelyGeneratedModulesRep",
+
+##  <#GAPDoc Label="IsMorphismOfFinitelyGeneratedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="phi" Name="IsMorphismOfFinitelyGeneratedObjectsRep"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; representation of morphisms of finitley generated &homalg; objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgMorphism"/>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsMorphismOfFinitelyGeneratedObjectsRep",
         IsHomalgMorphism,
         [ ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsStaticMorphismOfFinitelyGeneratedObjectsRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="phi" Name="IsStaticMorphismOfFinitelyGeneratedObjectsRep"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; representation of static morphisms of finitley generated &homalg; static objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticMorphism"/>,
+##       which is a subrepresentation of the &GAP; representation
+##       <Ref Filt="IsMorphismOfFinitelyGeneratedObjectsRep"/>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsStaticMorphismOfFinitelyGeneratedObjectsRep",
+        IsHomalgStaticMorphism and
+        IsMorphismOfFinitelyGeneratedObjectsRep,
+        [ ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #

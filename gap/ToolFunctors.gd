@@ -14,10 +14,10 @@
 #
 ####################################
 
-## TheZeroMap
-DeclareGlobalFunction( "_Functor_TheZeroMap_OnObjects" );
+## TheZeroMorphism
+DeclareGlobalFunction( "_Functor_TheZeroMorphism_OnObjects" );
 
-DeclareGlobalVariable( "functor_TheZeroMap" );
+DeclareGlobalVariable( "functor_TheZeroMorphism" );
 
 ## AsATwoSequence
 DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
@@ -82,11 +82,11 @@ DeclareGlobalVariable( "functor_AsChainMapForPushout" );
 
 # basic operations:
 
-DeclareOperation( "TheZeroMap",
-        [ IsHomalgModule, IsHomalgModule ] );
+DeclareOperation( "TheZeroMorphism",
+        [ IsHomalgObject, IsHomalgObject ] );
 
 DeclareOperation( "AsATwoSequence",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "AsATwoSequence",
         [ IsHomalgComplex ] );
@@ -101,26 +101,26 @@ DeclareOperation( "SubMap",
         [ IsHomalgMap, IsHomalgMap ] );
 
 DeclareOperation( "Compose",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "StackMaps",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "AugmentMaps",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "AsChainMapForPullback",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "/",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "PostDivide",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "PreDivide",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "AsChainMapForPushout",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 

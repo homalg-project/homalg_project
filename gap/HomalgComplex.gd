@@ -273,7 +273,7 @@ DeclareOperation( "Add",
         [ IsHomalgMorphism, IsHomalgComplex ] );
 
 DeclareOperation( "Add",
-        [ IsHomalgComplex, IsHomalgModule ] );
+        [ IsHomalgComplex, IsHomalgStaticObject ] );
 
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMatrix ] );

@@ -265,7 +265,7 @@ DeclareOperation( "LeftDerivedFunctor",
 # basic operations:
 
 DeclareOperation( "NaturalGeneralizedEmbedding",
-        [ IsHomalgModule ] );
+        [ IsHomalgStaticObject ] );
 
 DeclareOperation( "IsSpecialFunctor",
         [ IsHomalgFunctor ] );
@@ -295,10 +295,10 @@ DeclareOperation( "FunctorObj",
         [ IsHomalgFunctor, IsList ] );
 
 DeclareOperation( "FunctorMap",
-        [ IsHomalgFunctor, IsHomalgMap, IsList ] );
+        [ IsHomalgFunctor, IsHomalgStaticMorphism, IsList ] );
 
 DeclareOperation( "FunctorMap",
-        [ IsHomalgFunctor, IsHomalgMap ] );
+        [ IsHomalgFunctor, IsHomalgStaticMorphism ] );
 
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
