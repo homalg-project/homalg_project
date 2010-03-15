@@ -59,9 +59,9 @@
 <#Include Label="CokernelNaturalGeneralizedIsomorphism">
 <#Include Label="KernelSubmodule:map">
 <#Include Label="KernelEmb:map">
-<#Include Label="ImageSubmodule">
-<#Include Label="ImageModuleEmb">
-<#Include Label="ImageModuleEpi">
+<#Include Label="ImageSubobject">
+<#Include Label="ImageObjectEmb">
+<#Include Label="ImageObjectEpi">
 <#Include Label="MorphismAidMap:map">
 <#Include Label="GeneralizedInverse:map">
 

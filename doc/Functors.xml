@@ -50,8 +50,8 @@
 <#Include Label="functor_Cokernel">
 <#Include Label="Cokernel">
 
-<#Include Label="functor_ImageModule">
-<#Include Label="ImageModule">
+<#Include Label="functor_ImageObject">
+<#Include Label="ImageObject">
 
 <#Include Label="functor_Kernel">
 <#Include Label="Kernel:map">

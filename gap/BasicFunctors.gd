@@ -19,10 +19,10 @@ DeclareGlobalFunction( "_Functor_Cokernel_OnObjects" );
 
 DeclareGlobalVariable( "functor_Cokernel" );
 
-## ImageModule
-DeclareGlobalFunction( "_Functor_ImageModule_OnObjects" );
+## ImageObject
+DeclareGlobalFunction( "_Functor_ImageObject_OnObjects" );
 
-DeclareGlobalVariable( "functor_ImageModule" );
+DeclareGlobalVariable( "functor_ImageObject" );
 
 ## Kernel
 DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
@@ -101,33 +101,33 @@ DeclareAttribute( "CokernelNaturalGeneralizedIsomorphism",
 DeclareAttribute( "KernelEmb",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="ImageModuleEmb">
+##  <#GAPDoc Label="ImageObjectEmb">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="ImageModuleEmb" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Attr Arg="phi" Name="ImageObjectEmb" Label="for morphisms"/>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
-##      The natural embedding of the <C>ImageModule</C><M>(</M><A>phi</A><M>)</M>
-##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageModule"/>).
+##      The natural embedding of the <C>ImageObject</C><M>(</M><A>phi</A><M>)</M>
+##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageObject"/>).
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "ImageModuleEmb",
-        IsHomalgMap );
+DeclareAttribute( "ImageObjectEmb",
+        IsHomalgMorphism );
 
-##  <#GAPDoc Label="ImageModuleEpi">
+##  <#GAPDoc Label="ImageObjectEpi">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="ImageModuleEpi" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Attr Arg="phi" Name="ImageObjectEpi" Label="for morphisms"/>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural epimorphism from the <C>Source</C><M>(</M><A>phi</A><M>)</M>
-##      onto the <C>ImageModule</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageModule"/>).
+##      onto the <C>ImageObject</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageObject"/>).
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "ImageModuleEpi",
-        IsHomalgMap );
+DeclareAttribute( "ImageObjectEpi",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="NatTrIdToHomHom_R">
 ##  <ManSection>
@@ -154,8 +154,8 @@ DeclareAttribute( "NatTrIdToHomHom_R",
 DeclareOperation( "Cokernel",
         [ IsHomalgMorphism ] );
 
-DeclareOperation( "ImageModule",	## Image is unfortunately declared in the GAP library as a global function :(
-        [ IsHomalgMap ] );
+DeclareOperation( "ImageObject",	## Image is unfortunately declared in the GAP library as a global function :(
+        [ IsHomalgMorphism ] );
 
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
 

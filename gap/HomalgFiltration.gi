@@ -327,7 +327,7 @@ InstallMethod( IsomorphismOfFiltration,
         ## d1: K_1 -> P_0
         ## the embedding of the first syzygies module K_1 = K_1( M_p )
         ## into the free hull P_0 of M_p
-        d1 := SyzygiesModuleEmb( Mp );
+        d1 := SyzygiesObjectEmb( Mp );
         
         ## the identity map of P_0
         Id_p := TheIdentityMorphism( Range( d1 ) );

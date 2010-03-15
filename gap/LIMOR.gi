@@ -237,7 +237,7 @@ end );
 ## IsZero => IsMorphism
 ## are essential to avoid infinite loops that
 ## Assert( 4, IsMonomorphism( emb ) );
-## in _Functor_ImageModule_OnObjects may cause
+## in _Functor_ImageObject_OnObjects may cause
 ##
 InstallImmediateMethod( IsSplitMonomorphism,
         IsMapOfFinitelyGeneratedModulesRep and IsMorphism, 0,
@@ -651,7 +651,7 @@ end );
 ####################################
 
 ##
-InstallMethod( ImageSubmodule,
+InstallMethod( ImageSubobject,
         "LIMOR: submodule constructor",
         [ IsHomalgMap ],
         

@@ -213,9 +213,9 @@ DeclareCategory( "IsHomalgSelfMap",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="ImageSubmodule">
+##  <#GAPDoc Label="ImageSubobject">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="ImageSubmodule" Label="for maps"/>
+##    <Attr Arg="phi" Name="ImageSubobject" Label="for maps"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated image of the &homalg; map <A>phi</A>
@@ -225,7 +225,7 @@ DeclareCategory( "IsHomalgSelfMap",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "ImageSubmodule",
+DeclareAttribute( "ImageSubobject",
         IsHomalgMap );
 
 ##  <#GAPDoc Label="KernelSubmodule:map">

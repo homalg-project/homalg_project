@@ -59,22 +59,22 @@ DeclareOperation( "LengthOfResolution",
 DeclareOperation( "PresentationMap",
         [ IsHomalgModule ] );
 
-DeclareOperation( "SyzygiesModuleEmb",
+DeclareOperation( "SyzygiesObjectEmb",
         [ IsInt, IsHomalgModule ] );
 
-DeclareOperation( "SyzygiesModuleEmb",
+DeclareOperation( "SyzygiesObjectEmb",
         [ IsHomalgModule ] );
 
-DeclareOperation( "SyzygiesModule",
+DeclareOperation( "SyzygiesObject",
         [ IsInt, IsHomalgModule ] );
 
-DeclareOperation( "SyzygiesModule",
+DeclareOperation( "SyzygiesObject",
         [ IsHomalgModule ] );
 
-DeclareOperation( "SyzygiesModuleEpi",
+DeclareOperation( "SyzygiesObjectEpi",
         [ IsInt, IsHomalgModule ] );
 
-DeclareOperation( "SyzygiesModuleEpi",
+DeclareOperation( "SyzygiesObjectEpi",
         [ IsHomalgModule ] );
 
 DeclareOperation( "FreeHullModule",

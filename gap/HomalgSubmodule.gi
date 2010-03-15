@@ -130,7 +130,7 @@ InstallMethod( OnLessGenerators,
     
     if HasEmbeddingInSuperObject( N ) then
         
-        phi := ImageModuleEmb( phi );
+        phi := ImageObjectEmb( phi );
         phi := phi / EmbeddingInSuperObject( N );	## lift
         
         Assert( 2, IsEpimorphism( phi ) );
@@ -342,7 +342,7 @@ InstallMethod( \*,
         
   function( R, M )
     
-    return ImageSubmodule( R * OnAFreeSource( MapHavingSubobjectAsItsImage( M ) ) );
+    return ImageSubobject( R * OnAFreeSource( MapHavingSubobjectAsItsImage( M ) ) );
     
 end );
 
@@ -351,7 +351,7 @@ end );
 ##    <Oper Arg="phi" Name="Subobject" Label="constructor for submodules using maps"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
-##      A synonym of <Ref Attr="ImageSubmodule" Label="for maps"/>.
+##      A synonym of <Ref Attr="ImageSubobject" Label="for maps"/>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -360,7 +360,7 @@ InstallMethod( Subobject,
         "constructor for homalg submodules",
         [ IsHomalgMap ],
         
-  ImageSubmodule );
+  ImageSubobject );
 
 ##  <#GAPDoc Label="Subobject:matrix">
 ##  <ManSection>
@@ -396,7 +396,7 @@ InstallMethod( Subobject,
     
     gen_map := HomalgMap( gen, "free", M  );
     
-    return ImageSubmodule( gen_map );
+    return ImageSubobject( gen_map );
     
 end );
 

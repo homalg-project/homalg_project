@@ -168,7 +168,7 @@ InstallMethod( \/,
     
     phi := PreCompose( mapK, CokernelEpi( mapJ ) );
     
-    im := ImageModule( phi );
+    im := ImageObject( phi );
     
     ## recall that im was created as a submodule of
     ## Cokernel( mapJ ) which in turn is a factor module of M,
@@ -539,7 +539,7 @@ InstallMethod( PresentationMap,
 end );
 
 ##
-InstallMethod( SyzygiesModuleEmb,
+InstallMethod( SyzygiesObjectEmb,
         "for homalg modules",
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
@@ -562,18 +562,18 @@ InstallMethod( SyzygiesModuleEmb,
 end );
 
 ##
-InstallMethod( SyzygiesModuleEmb,
+InstallMethod( SyzygiesObjectEmb,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return SyzygiesModuleEmb( 1, M );
+    return SyzygiesObjectEmb( 1, M );
     
 end );
 
 ##
-InstallMethod( SyzygiesModule,
+InstallMethod( SyzygiesObject,
         "for homalg modules",
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
@@ -586,23 +586,23 @@ InstallMethod( SyzygiesModule,
         return M;
     fi;
     
-    return Source( SyzygiesModuleEmb( q, M ) );
+    return Source( SyzygiesObjectEmb( q, M ) );
     
 end );
 
 ##
-InstallMethod( SyzygiesModule,
+InstallMethod( SyzygiesObject,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return SyzygiesModule( 1, M );
+    return SyzygiesObject( 1, M );
     
 end );
 
 ##
-InstallMethod( SyzygiesModuleEpi,
+InstallMethod( SyzygiesObjectEpi,
         "for homalg modules",
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
@@ -617,7 +617,7 @@ InstallMethod( SyzygiesModuleEpi,
     
     d := Resolution( q, M );
     
-    mu := SyzygiesModuleEmb( q, M );
+    mu := SyzygiesObjectEmb( q, M );
     
     epi := CertainMorphism( d, q ) / mu;	## lift
     
@@ -631,13 +631,13 @@ InstallMethod( SyzygiesModuleEpi,
 end );
 
 ##
-InstallMethod( SyzygiesModuleEpi,
+InstallMethod( SyzygiesObjectEpi,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    return SyzygiesModuleEpi( 1, M );
+    return SyzygiesObjectEpi( 1, M );
     
 end );
 
@@ -648,7 +648,7 @@ InstallMethod( FreeHullEpi,
         
   function( M )
     
-    return SyzygiesModuleEpi( 0, M );
+    return SyzygiesObjectEpi( 0, M );
     
 end );
 
@@ -1403,7 +1403,7 @@ InstallOtherMethod( \*,
     
     scalar := HomalgMap( scalar, "free", M );
     
-    return ImageSubmodule( scalar );
+    return ImageSubobject( scalar );
     
 end );
 

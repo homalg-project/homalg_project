@@ -76,8 +76,8 @@ InstallGlobalFunction( _Functor_Cokernel_OnObjects,	### defines: Cokernel(Epi)
     #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]
-    if HasImageModuleEmb( phi ) then
-        img_emb := ImageModuleEmb( phi );
+    if HasImageObjectEmb( phi ) then
+        img_emb := ImageObjectEmb( phi );
         SetKernelEmb( epi, img_emb );
         if not HasCokernelEpi( img_emb ) then
             SetCokernelEpi( img_emb, epi );
@@ -154,15 +154,15 @@ InstallMethod( CokernelNaturalGeneralizedIsomorphism,
 end );
 
 ##
-## ImageModule
+## ImageObject
 ##
 
-InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(Emb)
+InstallGlobalFunction( _Functor_ImageObject_OnObjects,	### defines: ImageObject(Emb)
   function( phi )
     local T, p, img, emb, coker_epi, img_submodule;
     
-    if HasImageModuleEmb( phi ) then
-        return Source( ImageModuleEmb( phi ) );
+    if HasImageObjectEmb( phi ) then
+        return Source( ImageObjectEmb( phi ) );
     fi;
     
     T := Range( phi );
@@ -184,11 +184,11 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     
     SetIsMonomorphism( emb, true );
     
-    ## set the attribute ImageModuleEmb (specific for ImageModule):
-    ## (since ImageModuleEmb is listed below as a natural transformation
-    ##  for the functor ImageModule, a method will be automatically installed
-    ##  by InstallFunctor to fetch it by first invoking the main operation ImageModule)
-    SetImageModuleEmb( phi, emb );
+    ## set the attribute ImageObjectEmb (specific for ImageObject):
+    ## (since ImageObjectEmb is listed below as a natural transformation
+    ##  for the functor ImageObject, a method will be automatically installed
+    ##  by InstallFunctor to fetch it by first invoking the main operation ImageObject)
+    SetImageObjectEmb( phi, emb );
     
     #=====# end of the core procedure #=====#
     
@@ -202,7 +202,7 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     fi;
     
     ## at last define the image submodule
-    img_submodule := ImageSubmodule( phi );
+    img_submodule := ImageSubobject( phi );
     
     SetUnderlyingSubobject( img, img_submodule );
     SetEmbeddingInSuperObject( img_submodule, emb );
@@ -214,34 +214,34 @@ InstallGlobalFunction( _Functor_ImageModule_OnObjects,	### defines: ImageModule(
     
 end );
 
-##  <#GAPDoc Label="Functor_ImageModule:code">
+##  <#GAPDoc Label="Functor_ImageObject:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_ImageModule,
+InstallValue( functor_ImageObject,
         CreateHomalgFunctor(
-                [ "name", "ImageModule" ],
-                [ "operation", "ImageModule" ],
-                [ "natural_transformation", "ImageModuleEmb" ],
+                [ "name", "ImageObject" ],
+                [ "operation", "ImageObject" ],
+                [ "natural_transformation", "ImageObjectEmb" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
                         [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_ImageModule_OnObjects ]
+                [ "OnObjects", _Functor_ImageObject_OnObjects ]
                 )
         );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_ImageModule!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+functor_ImageObject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-InstallMethod( ImageModuleEpi,
+InstallMethod( ImageObjectEpi,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local emb, epi, ker_emb;
     
-    emb := ImageModuleEmb( phi );
+    emb := ImageObjectEmb( phi );
     
     epi := phi / emb;	## lift
     
@@ -293,8 +293,8 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]
-    if HasImageModuleEpi( psi ) then
-        img_epi := ImageModuleEpi( psi );
+    if HasImageObjectEpi( psi ) then
+        img_epi := ImageObjectEpi( psi );
         SetCokernelEpi( emb, img_epi );
         if not HasKernelEmb( img_epi ) then
             SetKernelEmb( img_epi, emb );
@@ -318,8 +318,8 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
                 elif IsBound( coker!.UpperBoundForProjectiveDimension ) then
                     SetUpperBoundForProjectiveDimension( ker, coker!.UpperBoundForProjectiveDimension - 2 );
                 fi;
-            elif HasImageModuleEmb( psi ) then
-                im := Source( ImageModuleEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
+            elif HasImageObjectEmb( psi ) then
+                im := Source( ImageObjectEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
                 if HasProjectiveDimension( im ) then
                     SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( im ) - 1 ) );
                 elif IsBound( im!.UpperBoundForProjectiveDimension ) then
@@ -328,8 +328,8 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
             fi;
         else
             SetUpperBoundForProjectiveDimension( ker, -1 );	## since ker = K_1( im )
-            if HasImageModuleEmb( psi ) then
-                im := Source( ImageModuleEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
+            if HasImageObjectEmb( psi ) then
+                im := Source( ImageObjectEmb( psi ) );	## S projective, then pd( ker ) = pd( im ) - 1
                 if HasProjectiveDimension( im ) then
                     SetProjectiveDimension( ker, Maximum( 0, ProjectiveDimension( im ) - 1 ) );
                 elif IsBound( im!.UpperBoundForProjectiveDimension ) then
@@ -379,7 +379,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     pre := HighestDegreeMorphism( cpx_post_pre );
     post := LowestDegreeMorphism( cpx_post_pre );
     
-    return KernelSubmodule( post ) / ImageSubmodule( pre );
+    return KernelSubmodule( post ) / ImageSubobject( pre );
     
 end );
 
@@ -1222,25 +1222,25 @@ functor_BaseChange!.ContainerForWeakPointersOnComputedBasicObjects :=
 InstallFunctor( functor_Cokernel );
 
 ##
-## ImageModule( phi ) and ImageModuleEmb( phi )
+## ImageObject( phi ) and ImageObjectEmb( phi )
 ##
 
-##  <#GAPDoc Label="functor_ImageModule">
+##  <#GAPDoc Label="functor_ImageObject">
 ##  <ManSection>
-##    <Var Name="functor_ImageModule"/>
+##    <Var Name="functor_ImageObject"/>
 ##    <Description>
 ##      The functor that associates to a map its image.
-##      <#Include Label="Functor_ImageModule:code">
+##      <#Include Label="Functor_ImageObject:code">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="ImageModule">
+##  <#GAPDoc Label="ImageObject">
 ##  <ManSection>
-##    <Oper Arg="phi" Name="ImageModule"/>
+##    <Oper Arg="phi" Name="ImageObject"/>
 ##    <Description>
-##      The following example also makes use of the natural transformations <C>ImageModuleEpi</C>
-##      and <C>ImageModuleEmb</C>.
+##      The following example also makes use of the natural transformations <C>ImageObjectEpi</C>
+##      and <C>ImageObjectEmb</C>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
@@ -1259,13 +1259,13 @@ InstallFunctor( functor_Cokernel );
 ##  true
 ##  gap> phi;
 ##  <A homomorphism of left modules>
-##  gap> im := ImageModule( phi );
+##  gap> im := ImageObject( phi );
 ##  <A left module presented by yet unknown relations for 3 generators>
 ##  gap> ByASmallerPresentation( im );
 ##  <A free left module of rank 1 on a free generator>
-##  gap> pi := ImageModuleEpi( phi );
+##  gap> pi := ImageObjectEpi( phi );
 ##  <A split epimorphism of left modules>
-##  gap> epsilon := ImageModuleEmb( phi );
+##  gap> epsilon := ImageObjectEmb( phi );
 ##  <A monomorphism of left modules>
 ##  gap> phi = pi * epsilon;
 ##  true
@@ -1274,7 +1274,7 @@ InstallFunctor( functor_Cokernel );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctorOnObjects( functor_ImageModule );
+InstallFunctorOnObjects( functor_ImageObject );
 
 ##
 ## Kernel( phi ) and KernelEmb( phi )

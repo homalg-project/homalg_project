@@ -1169,7 +1169,7 @@ InstallMethod( IsProjective,
         TryNextMethod( );
     fi;
     
-    K := SyzygiesModule( M );
+    K := SyzygiesObject( M );
     
     proj := IsZero( Ext( 1, M, K ) );
     
@@ -1816,7 +1816,7 @@ InstallMethod( EmbeddingInSuperObject,
   function( M )
     local emb;
     
-    emb := ImageModuleEmb( M!.map_having_subobject_as_its_image );
+    emb := ImageObjectEmb( M!.map_having_subobject_as_its_image );
     
     MatchPropertiesAndAttributes( M, Source( emb ), LIMOD.intrinsic_properties, LIMOD.intrinsic_attributes );
     

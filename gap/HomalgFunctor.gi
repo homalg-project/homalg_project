@@ -6025,7 +6025,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             Error( "the negative ", c, ". right satellite is not defined\n" );
         fi;
         
-        mu := SyzygiesModuleEmb( c, arg[p + 1] );
+        mu := SyzygiesObjectEmb( c, arg[p + 1] );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -6064,7 +6064,7 @@ InstallMethod( RightSatelliteOfCofunctor,
             fi;
         else
             ## the following is not really mu but Source( mu ):
-            mu := SyzygiesModule( c, arg[p + 1] );
+            mu := SyzygiesObject( c, arg[p + 1] );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
@@ -6245,7 +6245,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             Error( "the negative ", c, ". left satellite is not defined\n" );
         fi;
         
-        mu := SyzygiesModuleEmb( c, arg[p + 1] );
+        mu := SyzygiesObjectEmb( c, arg[p + 1] );
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
@@ -6286,7 +6286,7 @@ InstallMethod( LeftSatelliteOfFunctor,
             fi;
         else
             ## the following is not really mu but Source( mu ):
-            mu := SyzygiesModule( c, arg[p + 1] );
+            mu := SyzygiesObject( c, arg[p + 1] );
         fi;
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );

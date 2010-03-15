@@ -491,11 +491,11 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         mu := KernelEmb( dj );
         
-        psi := CompleteImageSquare( mu, psi, SyzygiesModuleEmb( j, M ) );
-        phi := CompleteImageSquare( SyzygiesModuleEmb( j, N ), phi, mu );
+        psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
+        phi := CompleteImageSquare( SyzygiesObjectEmb( j, N ), phi, mu );
         
-        epsilonM := SyzygiesModuleEpi( j, M );
-        epsilonN := SyzygiesModuleEpi( j, N );
+        epsilonM := SyzygiesObjectEpi( j, M );
+        epsilonN := SyzygiesObjectEpi( j, N );
         
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
@@ -630,11 +630,11 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         mu := KernelEmb( dj );
         
-        psi := CompleteImageSquare( mu, psi, SyzygiesModuleEmb( j, M ) );
-        phi := CompleteImageSquare( SyzygiesModuleEmb( j, N ), phi, mu );
+        psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
+        phi := CompleteImageSquare( SyzygiesObjectEmb( j, N ), phi, mu );
         
-        epsilonM := SyzygiesModuleEpi( j, M );
-        epsilonN := SyzygiesModuleEpi( j, N );
+        epsilonM := SyzygiesObjectEpi( j, M );
+        epsilonN := SyzygiesObjectEpi( j, N );
         
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
@@ -917,7 +917,7 @@ InstallMethod( DefectOfExactnessSequence,
     F_Z := KernelEmb( post );
     
     ## read: F <- B
-    F_B := ImageModuleEmb( pre );
+    F_B := ImageObjectEmb( pre );
     
     ## read: Z <- B
     Z_B := F_B / F_Z;	## lift
@@ -967,7 +967,7 @@ InstallMethod( DefectOfExactnessCosequence,
     Z_F := KernelEmb( post );
     
     ## read: B -> F
-    B_F := ImageModuleEmb( pre );
+    B_F := ImageObjectEmb( pre );
     
     ## read: B -> Z
     B_Z := B_F / Z_F;	## lift
