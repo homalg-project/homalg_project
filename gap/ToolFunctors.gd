@@ -14,30 +14,25 @@
 #
 ####################################
 
-## TheZeroMorphism
-DeclareGlobalFunction( "_Functor_TheZeroMorphism_OnObjects" );
-
-DeclareGlobalVariable( "functor_TheZeroMorphism" );
-
 ## AsATwoSequence
 DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsATwoSequence" );
 
-## MulMap
-DeclareGlobalFunction( "_Functor_MulMap_OnObjects" );
+## MulMorphism
+DeclareGlobalFunction( "_Functor_MulMorphism_OnObjects" );
 
-DeclareGlobalVariable( "functor_MulMap" );
+DeclareGlobalVariable( "functor_MulMorphism" );
 
-## AddMap
-DeclareGlobalFunction( "_Functor_AddMap_OnObjects" );
+## AddMorphisms
+DeclareGlobalFunction( "_Functor_AddMorphisms_OnObjects" );
 
-DeclareGlobalVariable( "functor_AddMap" );
+DeclareGlobalVariable( "functor_AddMorphisms" );
 
-## SubMap
-DeclareGlobalFunction( "_Functor_SubMap_OnObjects" );
+## SubMorphisms
+DeclareGlobalFunction( "_Functor_SubMorphisms_OnObjects" );
 
-DeclareGlobalVariable( "functor_SubMap" );
+DeclareGlobalVariable( "functor_SubMorphisms" );
 
 ## Compose
 DeclareGlobalFunction( "_Functor_Compose_OnObjects" );
@@ -91,14 +86,14 @@ DeclareOperation( "AsATwoSequence",
 DeclareOperation( "AsATwoSequence",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "MulMap",
-        [ IsHomalgMap, IsHomalgMap ] );
+DeclareOperation( "MulMorphism",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "AddMap",
-        [ IsHomalgMap, IsHomalgMap ] );
+DeclareOperation( "AddMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "SubMap",
-        [ IsHomalgMap, IsHomalgMap ] );
+DeclareOperation( "SubMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Compose",
         [ IsHomalgMorphism, IsHomalgMorphism ] );

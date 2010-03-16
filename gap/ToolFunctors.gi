@@ -15,31 +15,6 @@
 ####################################
 
 ##
-## TheZeroMorphism
-##
-
-InstallGlobalFunction( _Functor_TheZeroMorphism_OnObjects,	### defines: TheZeroMorphism
-  function( M, N )
-    
-    return HomalgZeroMap( M, N );
-    
-end );
-
-InstallValue( functor_TheZeroMorphism,
-        CreateHomalgFunctor(
-                [ "name", "TheZeroMorphism" ],
-                [ "operation", "TheZeroMorphism" ],
-                [ "number_of_arguments", 2 ],
-                [ "1", [ [ "contravariant" ] ] ],
-                [ "2", [ [ "covariant" ] ] ],
-                [ "OnObjects", _Functor_TheZeroMorphism_OnObjects ]
-                )
-        );
-
-functor_TheZeroMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
-##
 ## AsATwoSequence
 ##
 
@@ -138,10 +113,10 @@ InstallMethod( AsATwoSequence,
 end );
 
 ##
-## MulMap
+## MulMorphism
 ##
 
-InstallGlobalFunction( _Functor_MulMap_OnObjects,	### defines: MulMap
+InstallGlobalFunction( _Functor_MulMorphism_OnObjects,	### defines: MulMorphism
   function( a, phi )
     local a_phi;
     
@@ -173,18 +148,18 @@ InstallGlobalFunction( _Functor_MulMap_OnObjects,	### defines: MulMap
     
 end );
 
-InstallValue( functor_MulMap,
+InstallValue( functor_MulMorphism,
         CreateHomalgFunctor(
-                [ "name", "MulMap" ],
-                [ "operation", "MulMap" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
+                [ "name", "MulMorphism" ],
+                [ "operation", "MulMorphism" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsRingElement ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_MulMap_OnObjects ]
+                [ "OnObjects", _Functor_MulMorphism_OnObjects ]
                 )
         );
 
-functor_MulMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_MulMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
@@ -194,15 +169,15 @@ InstallMethod( \*,
         
   function( a, phi )
     
-    return MulMap( a, phi );
+    return MulMorphism( a, phi );
     
 end );
 
 ##
-## AddMap
+## AddMorphisms
 ##
 
-InstallGlobalFunction( _Functor_AddMap_OnObjects,	### defines: AddMap
+InstallGlobalFunction( _Functor_AddMorphisms_OnObjects,	### defines: AddMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -221,25 +196,25 @@ InstallGlobalFunction( _Functor_AddMap_OnObjects,	### defines: AddMap
     
 end );
 
-InstallValue( functor_AddMap,
+InstallValue( functor_AddMorphisms,
         CreateHomalgFunctor(
                 [ "name", "+" ],
                 [ "operation", "+" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_AddMap_OnObjects ]
+                [ "OnObjects", _Functor_AddMorphisms_OnObjects ]
                 )
         );
 
-functor_AddMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AddMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-## SubMap
+## SubMorphisms
 ##
 
-InstallGlobalFunction( _Functor_SubMap_OnObjects,	### defines: SubMap
+InstallGlobalFunction( _Functor_SubMorphisms_OnObjects,	### defines: SubMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -258,18 +233,18 @@ InstallGlobalFunction( _Functor_SubMap_OnObjects,	### defines: SubMap
     
 end );
 
-InstallValue( functor_SubMap,
+InstallValue( functor_SubMorphisms,
         CreateHomalgFunctor(
                 [ "name", "-" ],
                 [ "operation", "-" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_SubMap_OnObjects ]
+                [ "OnObjects", _Functor_SubMorphisms_OnObjects ]
                 )
         );
 
-functor_SubMap!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_SubMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -821,34 +796,28 @@ functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
-## TheZeroMorphism( M, N )
-##
-
-InstallFunctorOnObjects( functor_TheZeroMorphism );
-
-##
 ## AsATwoSequence( phi, psi )
 ##
 
 InstallFunctorOnObjects( functor_AsATwoSequence );
 
 ##
-## MulMap( a, phi ) = a * phi
+## MulMorphism( a, phi ) = a * phi
 ##
 
-InstallFunctorOnObjects( functor_MulMap );
+InstallFunctorOnObjects( functor_MulMorphism );
 
 ##
 ## phi1 + phi2
 ##
 
-InstallFunctorOnObjects( functor_AddMap );
+InstallFunctorOnObjects( functor_AddMorphisms );
 
 ##
 ## phi1 - phi2
 ##
 
-InstallFunctorOnObjects( functor_SubMap );
+InstallFunctorOnObjects( functor_SubMorphisms );
 
 ##
 ## Compose( phi, psi ) = phi * psi
