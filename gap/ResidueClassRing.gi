@@ -452,7 +452,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
-        "for homalg rings",
+        "constructor for homalg rings",
         [ IsHomalgRing, IsHomalgRingRelations ],
         
   function( R, ring_rel )
@@ -569,22 +569,43 @@ end );
 
 ##
 InstallMethod( \/,
-        "for homalg rings",
-        [ IsHomalgRing, IsList ],
+        "constructor for a homalg rings",
+        [ IsHomalgRing, IsHomalgMatrix ],
         
   function( R, ring_rel )
     
-    if not ForAll( ring_rel, IsRingElement ) then
-        TryNextMethod( );
+    if NrRows( ring_rel ) = 0 or NrColumns( ring_rel ) = 0  then
+        return R;
+    elif NrColumns( ring_rel ) = 1 then
+        return R / HomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel );
+    elif NrRows( ring_rel ) = 1 then
+        return R / HomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel );
     fi;
     
-    return R / HomalgRingRelationsAsGeneratorsOfLeftIdeal( HomalgMatrix( ring_rel, Length( ring_rel ), 1, R ) );
+    TryNextMethod( );
     
 end );
 
 ##
 InstallMethod( \/,
-        "for homalg rings",
+        "constructor for homalg rings",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, ring_rel )
+    
+    if ForAll( ring_rel, IsString ) then
+        return R / List( ring_rel, s -> HomalgRingElement( s, R ) );
+    elif not ForAll( ring_rel, IsRingElement ) then
+        TryNextMethod( );
+    fi;
+    
+    return R / HomalgMatrix( ring_rel, Length( ring_rel ), 1, R );
+    
+end );
+
+##
+InstallMethod( \/,
+        "constructor for homalg rings",
         [ IsHomalgRing, IsRingElement ],
         
   function( R, ring_rel )
@@ -595,7 +616,7 @@ end );
 
 ##
 InstallMethod( \/,
-        "for homalg rings",
+        "constructor for homalg rings",
         [ IsHomalgRing, IsString ],
         
   function( R, ring_rel )

@@ -90,13 +90,14 @@ DeclareOperation( "CreateHomalgTableForResidueClassRings",
         [ IsHomalgRing ] );
 
 DeclareOperation( "/",
-        [ IsHomalgRing, IsList ] );
+        [ IsHomalgRing, IsHomalgRingRelations ] );
 
+## also declares [ IsHomalgRing, IsHomalgMatrix ]
 DeclareOperation( "/",
         [ IsHomalgRing, IsRingElement ] );
 
 DeclareOperation( "/",
-        [ IsHomalgRing, IsHomalgRingRelations ] );
+        [ IsHomalgRing, IsList ] );
 
 DeclareGlobalFunction( "HomalgResidueClassRingElement" );
 
