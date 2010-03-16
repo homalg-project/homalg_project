@@ -1606,6 +1606,16 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
   function( M, T )
     local R, RP, t, nr, TI, MI, B, TT, nz;
     
+    if IsBound( M!.BasisOfRowsCoeff ) then
+        if HasEval( M!.BasisOfRowsCoeff ) then
+            SetEval( T, Eval( M!.BasisOfRowsCoeff ) );
+        else
+            SetPreEval( T, M!.BasisOfRowsCoeff );
+        fi;
+        ## M!.BasisOfRows should be bounded as well
+        return M!.BasisOfRows;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -1640,6 +1650,9 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         ## check assertion
         Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+        
+        M!.BasisOfRows := B;
+        M!.BasisOfRowsCoeff := T;
         
         return B;
         
@@ -1684,6 +1697,9 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         ## check assertion
         Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
         
+        M!.BasisOfRows := B;
+        M!.BasisOfRowsCoeff := T;
+        
         return B;
         
     fi;
@@ -1716,6 +1732,9 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     ## check assertion
     Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
     
+    M!.BasisOfRows := B;
+    M!.BasisOfRowsCoeff := T;
+    
     return B;
     
 end );
@@ -1738,6 +1757,16 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
   function( M, T )
     local R, RP, t, nr, TI, MI, B, TT, nz;
+    
+    if IsBound( M!.BasisOfColumnsCoeff ) then
+        if HasEval( M!.BasisOfColumnsCoeff ) then
+            SetEval( T, Eval( M!.BasisOfColumnsCoeff ) );
+        else
+            SetPreEval( T, M!.BasisOfColumnsCoeff );
+        fi;
+        ## M!.BasisOfColumns should be bounded as well
+        return M!.BasisOfColumns;
+    fi;
     
     R := HomalgRing( M );
     
@@ -1773,6 +1802,9 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         ## check assertion
         Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+        
+        M!.BasisOfColumns := B;
+        M!.BasisOfColumnsCoeff := T;
         
         return B;
         
@@ -1817,6 +1849,9 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         ## check assertion
         Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
         
+        M!.BasisOfColumns := B;
+        M!.BasisOfColumnsCoeff := T;
+        
         return B;
         
     fi;
@@ -1847,6 +1882,9 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     ## check assertion
     Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+    
+    M!.BasisOfColumns := B;
+    M!.BasisOfColumnsCoeff := T;
     
     return B;
     
