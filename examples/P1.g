@@ -18,7 +18,7 @@ p := RightPresentationWithDegrees( p );
 O := a -> S^a;
 
 ## the cotangent bundle
-cotangent := SyzygiesModule( 2, k );
+cotangent := SyzygiesObject( 2, k );
 
 ## the canonical bundle
 omega := S^(-1-1);

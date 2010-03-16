@@ -69,7 +69,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  ]]></Example>
 ##  Another way of constructing the structure sheaf:
 ##      <Example><![CDATA[
-##  gap> U0 := SyzygiesModule( 1, k );
+##  gap> U0 := SyzygiesObject( 1, k );
 ##  <A graded torsion-free left module presented by yet unknown relations for 
 ##  4 generators>
 ##  gap> T0 := TateResolution( U0, -5, 5 );
@@ -92,7 +92,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  ]]></Example>
 ##  The cotangent bundle:
 ##      <Example><![CDATA[
-##  gap> cotangent := SyzygiesModule( 2, k );
+##  gap> cotangent := SyzygiesObject( 2, k );
 ##  <A graded torsion-free left module presented by yet unknown relations for 
 ##  6 generators>
 ##  gap> IsFree( cotangent );
@@ -129,7 +129,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  ]]></Example>
 ##  The second power <M>U^2</M> of the shifted cotangent bundle <M>U=U^1</M> and its Tate resolution:
 ##      <Example><![CDATA[
-##  gap> U2 := SyzygiesModule( 3, k ) * S^2;
+##  gap> U2 := SyzygiesObject( 3, k ) * S^2;
 ##  <A graded rank 3 left module presented by 1 relation for 4 generators>
 ##  gap> T2 := TateResolution( U2, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
@@ -151,7 +151,7 @@ HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
 ##  ]]></Example>
 ##  The third power <M>U^3</M> of the shifted cotangent bundle <M>U=U^1</M> and its Tate resolution:
 ##      <Example><![CDATA[
-##  gap> U3 := SyzygiesModule( 4, k ) * S^3;
+##  gap> U3 := SyzygiesObject( 4, k ) * S^3;
 ##  <A graded free left module of rank 1 on a free generator>
 ##  gap> Display( U3 );
 ##  Q[x0,x1,x2,x3]^(1 x 1)	 (graded, generators degrees: [ 1 ])

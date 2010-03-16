@@ -43,14 +43,14 @@ DeclareRepresentation( "IsSetOfUnderlyingModulesRep",
 ##      The &GAP; representation of coherent sheaves. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheaf"/>,
 ##       which is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##      <C>IsStaticFinitelyPresentedObjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsCoherentSheafRep",
         IsHomalgSheaf and
-        IsFinitelyPresentedObjectRep,
+        IsStaticFinitelyPresentedObjectRep,
         [ "UnderlyingModules",
           "PositionOfTheDefaultUnderlyingModule" ] );
 
@@ -62,14 +62,14 @@ DeclareRepresentation( "IsCoherentSheafRep",
 ##      The &GAP; representation of coherent sheaves. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheaf"/>,
 ##       which is a subrepresentation of the &GAP; representation
-##      <C>IsFinitelyPresentedSubobjectRep</C>.)
+##      <C>IsStaticFinitelyPresentedSubobjectRep</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsCoherentSubsheafRep",
         IsHomalgSheaf and
-        IsFinitelyPresentedSubobjectRep,
+        IsStaticFinitelyPresentedSubobjectRep,
         [ "map_having_subobject_as_its_image" ] );
 
 ####################################
@@ -634,7 +634,7 @@ InstallMethod( ViewObj,
     
     S := HomalgRing( O );
     
-    is_subobject := IsFinitelyPresentedSubobjectRep( E );
+    is_subobject := IsStaticFinitelyPresentedSubobjectRep( E );
     
     if is_subobject then
         M := UnderlyingObject( E );
