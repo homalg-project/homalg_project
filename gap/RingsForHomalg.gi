@@ -236,7 +236,7 @@ end );
 ##
 InstallGlobalFunction( _PrepareInputForRingOfDerivations,
   function( R, indets )
-    local var, nr_var, der, nr_der;
+    local var, nr_var, der, nr_der, r, param;
     
     ## check whether the base ring is polynomial and then extract needed data
     if IsFreePolynomialRing( R ) then
@@ -271,7 +271,19 @@ InstallGlobalFunction( _PrepareInputForRingOfDerivations,
         Error( "the following indeterminate(s) are already elements of the polynomial ring: ", Intersection2( der, var ), "\n" );
     fi;
     
-    return [ var, der ];
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+    else
+        r := R;
+    fi;
+    
+    if HasRationalParameters( r ) then
+        param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
+    else
+        param := "";
+    fi;
+    
+    return [ var, der, param ];
     
 end );
 

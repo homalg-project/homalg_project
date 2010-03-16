@@ -1349,12 +1349,13 @@ InstallMethod( RingOfDerivations,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local ar, var, der, stream, display_color, ext_obj, S, RP;
+    local ar, var, der, param, stream, display_color, ext_obj, S, RP;
     
     ar := _PrepareInputForRingOfDerivations( R, indets );
     
     var := ar[1];
     der := ar[2];
+    param := ar[3];
     
     stream := homalgStream( R );
     
@@ -1382,7 +1383,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## create the new ring in 2 steps: expand polynomial ring with derivatives and then
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
-    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -1422,14 +1423,16 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     end;
     
     ## there exists a bug in Plural (3-0-4,3-1-0) that occurs with nres(M,2)[2];
-    if homalgSendBlocking( "\
+    if homalgSendBlocking( "\n\
+// start: check the nres-isHomog-bug in Plural:\n\
 ring homalg_Weyl_1 = 0,(x,y,z,Dx,Dy,Dz),dp;\n\
 def homalg_Weyl_2 = Weyl();\n\
 setring homalg_Weyl_2;\n\
 option(redTail);short=0;\n\
 matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
 matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
-ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_1; kill homalg_Weyl_2; kill homalg_Weyl_3; kill homalg_Weyl_4;"
+ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_1; kill homalg_Weyl_2; kill homalg_Weyl_3; kill homalg_Weyl_4;\n\
+// end: check the nres-isHomog-bug in Plural."
     , "need_output", S ) = "1" then;
     
         Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
