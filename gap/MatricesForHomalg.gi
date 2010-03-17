@@ -134,15 +134,15 @@ InstallGlobalFunction( homalgTotalRuntimes,
     
     HOMALG_MATRICES.TotalRuntimes := r.user_time;
     
-    if IsBound( r.system_time ) then
+    if IsBound( r.system_time ) and r.system_time <> fail then
         HOMALG_MATRICES.TotalRuntimes := HOMALG_MATRICES.TotalRuntimes + r.system_time;
     fi;
     
-    if IsBound( r.user_time_children ) then
+    if IsBound( r.user_time_children ) and r.user_time_children <> fail then
         HOMALG_MATRICES.TotalRuntimes := HOMALG_MATRICES.TotalRuntimes + r.user_time_children;
     fi;
     
-    if IsBound( r.system_time_children ) then
+    if IsBound( r.system_time_children ) and r.system_time_children <> fail then
         HOMALG_MATRICES.TotalRuntimes := HOMALG_MATRICES.TotalRuntimes + r.system_time_children;
     fi;
     
