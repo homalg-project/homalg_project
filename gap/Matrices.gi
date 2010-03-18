@@ -92,7 +92,7 @@ InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
     
     for k in [ 1 .. d + 1 ] do
         if Length( S(k) ) = 0 then
-            matrices[k] := HomalgInitialMatrix( Length( S(k-1) ), 1, R );
+            matrices[k] := HomalgZeroMatrix( Length( S(k-1) ), 0, R );
         else
             matrices[k] := HomalgInitialMatrix( Length( S(k-1) ), Length( S(k) ), R );
             for p in [ 1 .. Length( S(k) ) ] do #column iterator
@@ -107,9 +107,8 @@ InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
                     fi;
                 od;
             od;
+            ResetFilterObj( matrices[k], IsInitialMatrix );
         fi;
-	ResetFilterObj( matrices[k], IsInitialMatrix );
-	ResetFilterObj( matrices[k], IsMutableMatrix );
     od;
 
     return matrices;
@@ -159,7 +158,7 @@ InstallMethod( CreateBoundaryMatrices, "for internal and external rings",
     
     for k in [ 1 .. d + 1 ] do
         if Length( S(k) ) = 0 then
-            matrices[k] := HomalgInitialMatrix( 1, Length( S(k-1) ), R );
+            matrices[k] := HomalgZeroMatrix( 0, Length( S(k-1) ), R );
         else
             matrices[k] := HomalgInitialMatrix( Length( S(k) ), Length( S(k-1) ), R );
             for p in [ 1 .. Length( S(k) ) ] do #column iterator
@@ -174,9 +173,8 @@ InstallMethod( CreateBoundaryMatrices, "for internal and external rings",
                     fi;
                 od;
             od;
+            ResetFilterObj( matrices[k], IsInitialMatrix );
         fi;
-        ResetFilterObj( matrices[k], IsInitialMatrix );
-        ResetFilterObj( matrices[k], IsMutableMatrix );
     od;
     
     return matrices;
