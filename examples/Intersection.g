@@ -4,6 +4,7 @@
 ##  We want to check Serre's intersection formula <M>i(I_1, I_2; 0)=\sum_i(-1)^i length(Tor^{R_0}_i(R_0/I_1,R_0/I_2))</M> on an easy affine example.
 ##  <Example>
 ##   <![CDATA[
+##  gap> LoadPackage("RingsForHomalg");;
 ##  gap> LoadPackage("Sheaves");;
 ##  gap> LoadPackage("LocalizeRingForHomalg");;
 ##  gap> R := HomalgFieldOfRationalsInSingular() * "w,x,y,z";;
@@ -41,6 +42,7 @@
 ##  The intersection multiplicity at zero if 3-1=2.
 ##  </Section>
 ##  <#/GAPDoc>
+LoadPackage("RingsForHomalg");;
 LoadPackage("Sheaves");;
 LoadPackage("LocalizeRingForHomalg");;
 R := HomalgFieldOfRationalsInSingular() * "w,x,y,z";;

@@ -1,5 +1,6 @@
 #This is the first example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
 #in the version where Mora's algorithm fails (using ByASmallerPresentation)
+LoadPackage( "homalg" );;
 LoadPackage( "RingsForHomalg" );;
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) *  "a,b,c,d,e";;
@@ -30,13 +31,13 @@ LoadPackage( "LocalizeRingForHomalg" );;
 
 R0Mora:=LocalizePolynomialRingAtZeroWithMora(R);
 
-K10:=R0Mora*K1;
+K0:=R0Mora*K1;
 
-ByASmallerPresentation(K10);
+ByASmallerPresentation(K0);
 
-Display(K10);
+Display(K0);
 
-filt0:=PurityFiltration(K10);
+filt0:=PurityFiltration(K0);
 
 Display(filt0);
 Display(Source(IsomorphismOfFiltration(filt0)));
