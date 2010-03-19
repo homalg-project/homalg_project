@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 kx := HomalgFieldOfRationalsInDefaultCAS( ) * "x";
 
 F := 1 * kx;

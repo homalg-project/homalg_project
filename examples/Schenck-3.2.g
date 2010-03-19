@@ -46,6 +46,8 @@
 
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 mmat := HomalgMatrix( "[ x, x^3 + y^3 + z^3 ]", 1, 2, Qxyz );

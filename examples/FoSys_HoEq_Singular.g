@@ -1,11 +1,10 @@
 LoadPackage( "RingsForHomalg" );
 
-A1 := RingForHomalgInSingular( "(0,a,b,c),(t,D),dp" );
-homalgSendBlocking( [ A1, " = Weyl(1); setring ", A1 ], "need_command", A1 );
+LoadPackage( "homalg" );
 
-_Singular_SetRing( A1 );
+Qt := HomalgFieldOfRationalsInDefaultCAS( "a,b,c" ) * "t";
 
-SetName( A1, "K[t,a,b,c]<D>" );
+A1 := RingOfDerivations( Qt, "D" );
 
 Rskl := HomalgMatrix( "[ D^3 + a * D^2 + b * D + c ]", 1, 1, A1 );
 

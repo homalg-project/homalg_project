@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 ZZ := HomalgRingOfIntegersInDefaultCAS( );
 
 ## the line

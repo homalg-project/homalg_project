@@ -28,6 +28,8 @@
 
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 mat := HomalgMatrix( "[ x*y*z, x*y^2, x^2*z, x^2*y, x^3 ]", 1, 5, Qxyz );

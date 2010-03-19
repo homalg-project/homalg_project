@@ -1,11 +1,10 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Zxy := HomalgRingOfIntegersInDefaultCAS( ) * "x,y";
 
-rel := HomalgMatrix( "[ x^2 - 1, y^2 - 1 ]", 2, 1, Zxy );
-rel := HomalgRelationsForLeftModule( rel );
-
-ZV4 := Zxy / rel;
+ZV4 := Zxy / [ "x^2 - 1", "y^2 - 1" ];
 
 zz := HomalgMatrix( "[ x - 1, y - 1 ]", 2, 1, ZV4 );
 ZZ := LeftPresentation( zz );

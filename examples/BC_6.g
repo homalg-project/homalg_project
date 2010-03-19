@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Zx := HomalgRingOfIntegersInDefaultCAS( ) * "x";
 
 ZC6 := Zx / "x^6 - 1";

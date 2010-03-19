@@ -21,6 +21,8 @@
 
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 m := GradedLeftSubmodule( "x,y,z", R );

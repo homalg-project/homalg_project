@@ -2,6 +2,8 @@
 
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 old_RingOfIntegers := HOMALG_RINGS.RingOfIntegersDefaultCAS;
 HOMALG_RINGS.RingOfIntegersDefaultCAS := "Maple";
 old_FieldOfRationals := HOMALG_RINGS.FieldOfRationalsDefaultCAS;
@@ -155,7 +157,7 @@ elif mode = 1 then
     fi;
     
     if Length( HOMALG_RINGS.NamesOfDefinedRings ) = 1 then
-        Print( "\nThe ring \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m has been created. Use Display( ", HOMALG_RINGS.NamesOfDefinedRings, " ) to view." );
+        Print( "\nThe ring \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m has been created. Use Display( ", HOMALG_RINGS.NamesOfDefinedRings, " ) to view.\n" );
     else
         Print( "\nThe rings \033[01m", HOMALG_RINGS.NamesOfDefinedRings, "\033[m have been created. Use Display( . ) to view each.\n" );
     fi;

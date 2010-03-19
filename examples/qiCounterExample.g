@@ -1,4 +1,7 @@
 LoadPackage( "RingsForHomalg" );
+
+LoadPackage( "homalg" );
+
 R := HomalgRingOfIntegersInDefaultCAS( );
 M := 1 * R;
 N := LeftPresentation( [ 3 ], R );

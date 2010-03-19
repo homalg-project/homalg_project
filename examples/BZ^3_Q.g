@@ -1,11 +1,10 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 ZX := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,a,X,Y,A";
 
-rel := HomalgMatrix( "[ x*X-1, y*Y-1, a*A-1 ]", 3, 1, ZX );
-rel := HomalgRelationsForLeftModule( rel );
-
-ZZ3 := ZX / rel;
+ZZ3 := ZX / [ "x*X-1", "y*Y-1", "a*A-1" ];
 
 zz := HomalgMatrix( "[ x - 1, y - 1, a - 1 ]", 3, 1, ZZ3 );
 

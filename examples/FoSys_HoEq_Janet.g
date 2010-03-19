@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 B1 := RingForHomalgInMapleUsingJanet( "[x]" );
 
 Rskl := HomalgMap( " \

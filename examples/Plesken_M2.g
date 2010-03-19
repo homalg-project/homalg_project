@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c,d";
 
 A := HomalgMatrix( "[ \

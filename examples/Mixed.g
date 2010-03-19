@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Q := HomalgFieldOfRationalsInSingular( );
 
 rp := homalgSendBlocking( "0,(n,x,Sn,Dx),wp(1,1,10,10)", [ "ring" ], Q, HOMALG_IO.Pictograms.initialize );

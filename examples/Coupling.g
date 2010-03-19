@@ -2,6 +2,8 @@
 
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 A3 := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
 

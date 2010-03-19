@@ -229,6 +229,8 @@
 
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 R := HomalgRingOfIntegersInDefaultCAS( 2^8 );
 
 M := LeftPresentation( [ 2^5 ], R );

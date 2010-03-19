@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Qx := HomalgFieldOfRationalsInSingular() * "x";
 
 V := HomalgMatrix( "[ \
@@ -10,6 +12,6 @@ x, 1, 0, \
 
 V := LeftPresentation( V );
 
-L := HomalgMatrix( "[ x^4 ]", 1, 1, Qx );
+L := HomalgMatrix( "[ x^3 ]", 1, 1, Qx );
 
 L := LeftPresentation( L );

@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 wmat := HomalgMatrix( "[ \
@@ -10,6 +12,7 @@ x^4,  x^3*z,  0,        x^2*z,     -x*z, \
 0,    0,      x^2*z,    -x*y*z,    y*z,  \
 0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \
 ]", 6, 5, Qxyz );
+
 W := LeftPresentation( wmat );
 
 ## the module is isomorphic to LeftPresentation of the multiple extension:

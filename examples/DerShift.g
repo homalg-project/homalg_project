@@ -1,5 +1,7 @@
 LoadPackage( "RingsForHomalg" );
 
+LoadPackage( "homalg" );
+
 R := RingForHomalgInMapleUsingJanetOre( "[[t,D,delta],[],[weyl(D,t),shift(delta,t)]]" );
 
 A := HomalgMatrix( "[ \
