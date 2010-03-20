@@ -450,21 +450,23 @@ InstallMethod( Add,
     
     if l = 1 then
         
+        l := degrees[l];
+        
         if IsHomalgChainMap( phi ) then
-            if CertainObject( C, degrees[1] ) <> Range( phi ) then
+            if CertainObject( C, l ) <> Range( phi ) then
                 Error( "the unique object in the complex and the target of the new chain map are not equal\n" );
             fi;
         else
-            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
+            if not IsIdenticalObj( CertainObject( C, l ), Range( phi ) ) then
                 Error( "the unique object in the complex and the target of the new map are not identical\n" );
             fi;
         fi;
         
-        Unbind( C!.(String( degrees[1] )) );
+        Unbind( C!.(String( l )) );
         
-        Add( degrees, degrees[1] + 1 );
+        Add( degrees, l + 1 );
         
-        C!.(String( degrees[1] + 1 )) := phi;
+        C!.(String( l + 1 )) := phi;
         
     else
         
@@ -602,19 +604,21 @@ InstallMethod( Add,
     
     if l = 1 then
         
+        l := degrees[1];
+        
         if IsHomalgChainMap( phi ) then
-            if CertainObject( C, degrees[1] ) <> Range( phi ) then
+            if CertainObject( C, l ) <> Range( phi ) then
                 Error( "the unique object in the cocomplex and the range of the new chain map are not equal\n" );
             fi;
         else
-            if not IsIdenticalObj( CertainObject( C, degrees[1] ), Range( phi ) ) then
+            if not IsIdenticalObj( CertainObject( C, l ), Range( phi ) ) then
                 Error( "the unique object in the cocomplex and the range of the new map are not identical\n" );
             fi;
         fi;
         
-        C!.degrees := Concatenation( [ degrees[1] - 1 ], degrees );
+        C!.degrees := Concatenation( [ l - 1 ], degrees );
         
-        C!.(String( degrees[1] - 1 )) := phi;
+        C!.(String( l - 1 )) := phi;
         
     else
         
