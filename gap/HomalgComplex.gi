@@ -176,9 +176,16 @@ InstallMethod( CertainMorphism,
         [ IsHomalgComplex, IsInt ],
         
   function( C, i )
+    local m;
     
     if IsBound( C!.(String( i )) ) and IsHomalgMorphism( C!.(String( i )) ) then
         return C!.(String( i ));
+    fi;
+    
+    if IsBound( C!.MorphismConstructor ) then
+        m := C!.MorphismConstructor( i );
+        C!.(String( i )) := m;
+        return m;
     fi;
     
     return fail;
@@ -191,7 +198,7 @@ InstallMethod( CertainObject,
         [ IsHomalgComplex, IsInt ],
         
   function( C, i )
-    local degrees, l;
+    local degrees, l, o;
     
     if IsBound( C!.(String( i )) ) then
         if IsHomalgObject( C!.(String( i )) ) then
@@ -208,6 +215,12 @@ InstallMethod( CertainObject,
         return Range( CertainMorphism( C, i + 1 ) );
     elif IsCocomplexOfFinitelyPresentedObjectsRep( C ) and degrees[l] = i then
         return Range( CertainMorphism( C, i - 1 ) );
+    fi;
+    
+    if IsBound( C!.ObjectConstructor ) then
+        o := C!.ObjectConstructor( i );
+        C!.(String( i )) := o;
+        return o;
     fi;
     
     return fail;
