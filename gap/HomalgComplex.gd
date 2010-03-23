@@ -213,19 +213,10 @@ DeclareGlobalFunction( "HomalgComplex" );
 
 DeclareGlobalFunction( "HomalgCocomplex" );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgComplex ] );
-
-DeclareOperation( "*",
-        [ IsHomalgComplex, IsHomalgRing ] );
-
 # basic operations:
 
 DeclareOperation( "homalgResetFilters",
         [ IsHomalgComplex ] );
-
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgComplex ] );			## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "ObjectDegreesOfComplex",
         [ IsHomalgComplex ] );
@@ -274,9 +265,6 @@ DeclareOperation( "Add",
 
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgStaticObject ] );
-
-DeclareOperation( "Add",
-        [ IsHomalgComplex, IsHomalgMatrix ] );
 
 DeclareOperation( "Shift",
         [ IsHomalgComplex, IsInt ] );
