@@ -14,16 +14,6 @@
 #
 ####################################
 
-## Cokernel
-DeclareGlobalFunction( "_Functor_Cokernel_OnObjects" );
-
-DeclareGlobalVariable( "functor_Cokernel" );
-
-## ImageObject
-DeclareGlobalFunction( "_Functor_ImageObject_OnObjects" );
-
-DeclareGlobalVariable( "functor_ImageObject" );
-
 ## Kernel
 DeclareGlobalFunction( "_Functor_Kernel_OnObjects" );
 
@@ -33,25 +23,6 @@ DeclareGlobalVariable( "functor_Kernel" );
 DeclareGlobalFunction( "_Functor_DefectOfExactness_OnObjects" );
 
 DeclareGlobalVariable( "functor_DefectOfExactness" );
-
-## Hom
-DeclareGlobalFunction( "_Functor_Hom_OnObjects" );
-
-DeclareGlobalFunction( "_Functor_Hom_OnMorphisms" );
-
-DeclareGlobalVariable( "Functor_Hom" );
-
-## TensorProduct
-DeclareGlobalFunction( "_Functor_TensorProduct_OnObjects" );
-
-DeclareGlobalFunction( "_Functor_TensorProduct_OnMorphisms" );
-
-DeclareGlobalVariable( "Functor_TensorProduct" );
-
-## BaseChange
-DeclareGlobalFunction( "_functor_BaseChange_OnObjects" );
-
-DeclareGlobalVariable( "functor_BaseChange" );
 
 ####################################
 #
@@ -168,6 +139,12 @@ DeclareOperation( "DefectOfExactness",
 DeclareOperation( "Hom",
         [ IsHomalgObject, IsHomalgObject ] );
 
+DeclareOperation( "Ext",
+        [ IsInt, IsHomalgObject, IsHomalgObject ] );
+
+DeclareOperation( "Tor",
+        [ IsInt, IsHomalgObject, IsHomalgObject ] );
+
 DeclareOperation( "LeftDualizingFunctor",
         [ IsHomalgRing, IsString ] );
 
@@ -192,9 +169,6 @@ else
 	    [ IsList, IsHomalgRingOrObjectOrMorphism ] );
     
 fi;
-
-DeclareOperation( "BaseChange",
-        [ IsHomalgRing, IsHomalgModule ] );
 
 ####################################
 #

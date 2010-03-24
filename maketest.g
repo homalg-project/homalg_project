@@ -41,6 +41,7 @@ list := [
          "../gap/BasicFunctors.gi",
          "../gap/Modules.gi",
          "../gap/LIMAP.gi",
+         "../gap/Modules/BasicFunctors.gi",
          "../examples/RHom_Z.g",
          "../examples/LTensorProduct_Z.g",
          "../examples/ExtExt.g",

@@ -69,6 +69,7 @@ ReadPackage( "homalg", "gap/OtherFunctors.gd" );
 
 ReadPackage( "homalg", "gap/Modules/HomalgComplex.gd" );
 ReadPackage( "homalg", "gap/Modules/ToolFunctors.gd" );
+ReadPackage( "homalg", "gap/Modules/BasicFunctors.gd" );
 
 ## LogicForHomalg subpackages
 ReadPackage( "homalg", "gap/LIMAP.gd" );

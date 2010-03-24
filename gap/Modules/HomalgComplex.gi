@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgComplex.gi            homalg package               Mohamed Barakat
+##  HomalgComplex.gi            Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
 ##

@@ -2273,7 +2273,7 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
     filter_mor := Functor!.1[2][2][1];
     filter_special := Functor!.1[2][2][2];
     
-    if IsIdenticalObj( Functor, functor_Cokernel ) then
+    if IsIdenticalObj( OperationOfFunctor( Functor ), ValueGlobal( "Cokernel" ) ) then
         
         InstallOtherMethod( functor_operation,
                 "for homalg special chain maps",
