@@ -19,50 +19,10 @@ DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsATwoSequence" );
 
-## MulMorphism
-DeclareGlobalFunction( "_Functor_MulMorphism_OnObjects" );
-
-DeclareGlobalVariable( "functor_MulMorphism" );
-
-## AddMorphisms
-DeclareGlobalFunction( "_Functor_AddMorphisms_OnObjects" );
-
-DeclareGlobalVariable( "functor_AddMorphisms" );
-
-## SubMorphisms
-DeclareGlobalFunction( "_Functor_SubMorphisms_OnObjects" );
-
-DeclareGlobalVariable( "functor_SubMorphisms" );
-
-## Compose
-DeclareGlobalFunction( "_Functor_Compose_OnObjects" );
-
-DeclareGlobalVariable( "functor_Compose" );
-
-## StackMaps
-DeclareGlobalFunction( "_Functor_StackMaps_OnObjects" );
-
-DeclareGlobalVariable( "functor_StackMaps" );
-
-## AugmentMaps
-DeclareGlobalFunction( "_Functor_AugmentMaps_OnObjects" );
-
-DeclareGlobalVariable( "functor_AugmentMaps" );
-
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsChainMapForPullback" );
-
-## PostDivide
-DeclareGlobalFunction( "_Functor_PostDivide_OnObjects" );
-
-DeclareGlobalVariable( "functor_PostDivide" );
-
-## PreDivide
-DeclareGlobalFunction( "_Functor_PreDivide_OnObjects" );
-
-DeclareGlobalVariable( "functor_PreDivide" );
 
 ## AsChainMapForPushout
 DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );

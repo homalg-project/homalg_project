@@ -19,6 +19,46 @@ DeclareGlobalFunction( "_Functor_TheZeroMorphism_OnModules" );
 
 DeclareGlobalVariable( "functor_TheZeroMorphism_ForModules" );
 
+## MulMorphism
+DeclareGlobalFunction( "_Functor_MulMorphism_OnModules" );
+
+DeclareGlobalVariable( "functor_MulMorphism" );
+
+## AddMorphisms
+DeclareGlobalFunction( "_Functor_AddMorphisms_OnModules" );
+
+DeclareGlobalVariable( "functor_AddMorphisms" );
+
+## SubMorphisms
+DeclareGlobalFunction( "_Functor_SubMorphisms_OnModules" );
+
+DeclareGlobalVariable( "functor_SubMorphisms" );
+
+## Compose
+DeclareGlobalFunction( "_Functor_Compose_OnModules" );
+
+DeclareGlobalVariable( "functor_Compose" );
+
+## StackMaps
+DeclareGlobalFunction( "_Functor_StackMaps_OnModules" );
+
+DeclareGlobalVariable( "functor_StackMaps" );
+
+## AugmentMaps
+DeclareGlobalFunction( "_Functor_AugmentMaps_OnModules" );
+
+DeclareGlobalVariable( "functor_AugmentMaps" );
+
+## PostDivide
+DeclareGlobalFunction( "_Functor_PostDivide_OnModules" );
+
+DeclareGlobalVariable( "functor_PostDivide" );
+
+## PreDivide
+DeclareGlobalFunction( "_Functor_PreDivide_OnModules" );
+
+DeclareGlobalVariable( "functor_PreDivide" );
+
 ####################################
 #
 # global functions and operations:
