@@ -58,10 +58,10 @@ DeclareOperation( "SubMorphisms",
 DeclareOperation( "Compose",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "StackMaps",
+DeclareOperation( "StackMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "AugmentMaps",
+DeclareOperation( "AugmentMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "AsChainMapForPullback",

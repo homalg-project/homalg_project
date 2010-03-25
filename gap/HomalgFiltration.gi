@@ -216,7 +216,7 @@ InstallMethod( MatrixOfFiltration,
     
     stack := List( Filtered( DegreesOfFiltration( filt ), p -> p >= p_min ) , d -> CertainMorphism( filt, d ) );
     
-    stack := Iterated( stack, StackMaps );
+    stack := Iterated( stack, StackMorphisms );
     
     return MatrixOfMap( stack );
     
@@ -352,7 +352,7 @@ InstallMethod( IsomorphismOfFiltration,
         
         ## epi: P_0 + F_{p-1}( M ) -> F_p( M )
         ## the epimorphism from the direct sum P_0 + F_{p-1}( M ) onto F_p( M )
-        epi := StackMaps( -eta0, iota );
+        epi := StackMorphisms( -eta0, iota );
         
         LockModuleOnCertainPresentation( Source( epi ) );
         LockModuleOnCertainPresentation( Range( epi ) );
@@ -374,7 +374,7 @@ InstallMethod( IsomorphismOfFiltration,
         ## the cokernel of (the embedding) K_1 -> P_0 + F_{p-1}( M ) is
         ## 1) isomorphic to F_p( M )
         ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
-        emb := AugmentMaps( d1, eta );
+        emb := AugmentMorphisms( d1, eta );
         
         ## P_0 + F_{p-1}( M ) -> P_0,
         ## the projection on the first summand in the direct sum P_0 + F_{p-1}( M )
@@ -716,7 +716,7 @@ InstallGlobalFunction( HomalgFiltration,
         filtration.(String( i )) := gen_emb;
         
         ## prepare the next step
-        monomorphism_aid := StackMaps( monomorphism_aid, gen_map );
+        monomorphism_aid := StackMorphisms( monomorphism_aid, gen_map );
         
     od;
     

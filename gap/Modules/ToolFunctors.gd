@@ -39,15 +39,15 @@ DeclareGlobalFunction( "_Functor_Compose_OnModules" );
 
 DeclareGlobalVariable( "functor_Compose" );
 
-## StackMaps
-DeclareGlobalFunction( "_Functor_StackMaps_OnModules" );
+## StackMorphisms
+DeclareGlobalFunction( "_Functor_StackMorphisms_OnModules" );
 
-DeclareGlobalVariable( "functor_StackMaps" );
+DeclareGlobalVariable( "functor_StackMorphisms" );
 
-## AugmentMaps
-DeclareGlobalFunction( "_Functor_AugmentMaps_OnModules" );
+## AugmentMorphisms
+DeclareGlobalFunction( "_Functor_AugmentMorphisms_OnModules" );
 
-DeclareGlobalVariable( "functor_AugmentMaps" );
+DeclareGlobalVariable( "functor_AugmentMorphisms" );
 
 ## PostDivide
 DeclareGlobalFunction( "_Functor_PostDivide_OnModules" );

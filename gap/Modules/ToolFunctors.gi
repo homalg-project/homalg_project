@@ -224,7 +224,7 @@ InstallGlobalFunction( _Functor_Compose_OnModules,	### defines: Compose
         morphism_aid_pre := PreCompose( MorphismAidMap( pre ), RemoveMorphismAidMap( post ) );
         
         if HasMorphismAidMap( post ) then
-            SetMorphismAidMap( phi, StackMaps( MorphismAidMap( post ), morphism_aid_pre ) );
+            SetMorphismAidMap( phi, StackMorphisms( MorphismAidMap( post ), morphism_aid_pre ) );
         else
             SetMorphismAidMap( phi, morphism_aid_pre );
         fi;
@@ -313,10 +313,10 @@ InstallMethod( \*,
 end );
 
 ##
-## StackMaps
+## StackMorphisms
 ##
 
-InstallGlobalFunction( _Functor_StackMaps_OnModules,	### defines: StackMaps
+InstallGlobalFunction( _Functor_StackMorphisms_OnModules,	### defines: StackMorphisms
   function( phi, psi )
     local T, phi_psi, SpS, p;
     
@@ -354,25 +354,25 @@ InstallGlobalFunction( _Functor_StackMaps_OnModules,	### defines: StackMaps
     
 end );
 
-InstallValue( functor_StackMaps,
+InstallValue( functor_StackMorphisms,
         CreateHomalgFunctor(
-                [ "name", "StackMaps" ],
-                [ "operation", "StackMaps" ],
+                [ "name", "StackMorphisms" ],
+                [ "operation", "StackMorphisms" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_StackMaps_OnModules ]
+                [ "OnObjects", _Functor_StackMorphisms_OnModules ]
                 )
         );
 
-functor_StackMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_StackMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-## AugmentMaps
+## AugmentMorphisms
 ##
 
-InstallGlobalFunction( _Functor_AugmentMaps_OnModules,	### defines: AugmentMaps
+InstallGlobalFunction( _Functor_AugmentMorphisms_OnModules,	### defines: AugmentMorphisms
   function( phi, psi )
     local S, phi_psi, TpT, p;
     
@@ -410,18 +410,18 @@ InstallGlobalFunction( _Functor_AugmentMaps_OnModules,	### defines: AugmentMaps
     
 end );
 
-InstallValue( functor_AugmentMaps,
+InstallValue( functor_AugmentMorphisms,
         CreateHomalgFunctor(
-                [ "name", "AugmentMaps" ],
-                [ "operation", "AugmentMaps" ],
+                [ "name", "AugmentMorphisms" ],
+                [ "operation", "AugmentMorphisms" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_AugmentMaps_OnModules ]
+                [ "OnObjects", _Functor_AugmentMorphisms_OnModules ]
                 )
         );
 
-functor_AugmentMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AugmentMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 #=======================================================================
@@ -627,16 +627,16 @@ InstallFunctorOnObjects( functor_SubMorphisms );
 InstallFunctorOnObjects( functor_Compose );
 
 ##
-## StackMaps( phi, psi )
+## StackMorphisms( phi, psi )
 ##
 
-InstallFunctorOnObjects( functor_StackMaps );
+InstallFunctorOnObjects( functor_StackMorphisms );
 
 ##
-## AugmentMaps( phi, psi )
+## AugmentMorphisms( phi, psi )
 ##
 
-InstallFunctorOnObjects( functor_AugmentMaps );
+InstallFunctorOnObjects( functor_AugmentMorphisms );
 
 ##
 ## gamma / beta = PostDivide( gamma, beta )

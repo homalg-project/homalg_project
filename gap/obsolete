@@ -674,7 +674,7 @@ InstallTrueMethod( IsZero, IsHomalgMatrix and IsStrictUpperTriangularMatrix and 
 ## from HomalgMap.gi
 
 ##
-InstallMethod( StackMaps,
+InstallMethod( StackMorphisms,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
@@ -713,7 +713,7 @@ InstallMethod( StackMaps,
 end );
 
 ##
-InstallMethod( StackMaps,
+InstallMethod( StackMorphisms,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
@@ -752,7 +752,7 @@ InstallMethod( StackMaps,
 end );
 
 ##
-InstallMethod( AugmentMaps,
+InstallMethod( AugmentMorphisms,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
@@ -791,7 +791,7 @@ InstallMethod( AugmentMaps,
 end );
 
 ##
-InstallMethod( AugmentMaps,
+InstallMethod( AugmentMorphisms,
         "of two homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
@@ -845,7 +845,7 @@ end );
             ## stack all morphism aid maps together
             if HasMorphismAidMap( gen_emb2 ) then
                 if IsHomalgMap( monomorphism_aid_map ) then
-                    monomorphism_aid_map := StackMaps( monomorphism_aid_map, MorphismAidMap( gen_emb2 ) );
+                    monomorphism_aid_map := StackMorphisms( monomorphism_aid_map, MorphismAidMap( gen_emb2 ) );
                 else
                     monomorphism_aid_map := MorphismAidMap( gen_emb2 );
                 fi;
@@ -1008,7 +1008,7 @@ InstallMethod( GrothendieckSpectralSequence,
             
             if IsHomalgMap( monomorphism_aid_map ) then
                 SetMorphismAidMap( gen_emb, monomorphism_aid_map );
-                monomorphism_aid_map := StackMaps( monomorphism_aid_map, gen_map );
+                monomorphism_aid_map := StackMorphisms( monomorphism_aid_map, gen_map );
             else
                 monomorphism_aid_map := gen_map;
             fi;

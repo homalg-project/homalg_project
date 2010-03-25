@@ -177,7 +177,7 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
                 if IsHomalgMorphism( monomorphism_aid_map ) then
                     ## for this next line we need to run through
                     ## the bidegrees in the correct order
-                    monomorphism_aid_map := StackMaps( tot_embs.(String( [ pp, qq ] )), monomorphism_aid_map );
+                    monomorphism_aid_map := StackMorphisms( tot_embs.(String( [ pp, qq ] )), monomorphism_aid_map );
                 else
                     monomorphism_aid_map := tot_embs.(String( [ pp, qq ] ));
                 fi;
