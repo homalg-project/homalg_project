@@ -25,7 +25,7 @@
     This package is part of the &homalg;-project:
     <Br/><Br/>
     
-    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg-package</URL>
+    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
