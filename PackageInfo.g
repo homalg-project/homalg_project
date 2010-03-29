@@ -44,7 +44,7 @@ Date := "18/03/2010",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg",
+ArchiveURL := "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/LocalizeRingForHomalg",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
