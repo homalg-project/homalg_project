@@ -202,6 +202,9 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
+
+AbstractHTML := "This package is part of the homalg-project and allows localization of a (computable) commutative ring at a (finitely generated) maximal ideal.",
+
 PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/extensions/localizeringforhomalg",
 #               
 ##  Here is the information on the help books of the package, used for
