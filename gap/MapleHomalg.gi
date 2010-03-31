@@ -19,7 +19,7 @@ InstallValue( HOMALG_IO_Maple,
         rec(
             cas := "maple",		## normalized name on which the user should have no control
             name := "Maple",
-            executable := [ "maple_for_homalg", "maple10", "maple11", "maple9", "maple" ],	## this list is processed from left to right
+            executable := [ "maple_for_homalg", "maple14", "maple13", "maple12", "maple11", "maple10", "maple9", "maple" ],	## this list is processed from left to right
             options := [ "-q" ],
             BUFSIZE := 1024,
             READY := "!$%&/(",
