@@ -1,9 +1,9 @@
 <!-- 
 
-  title.xml            SCO package documentation                  Simon Goertzen
+  title.xml            SCO package documentation                  Simon Görtzen
                                                                      
 
-         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2010, Lehrstuhl B für Mathematik, RWTH-Aachen
 
 This is the title page.
 
@@ -15,7 +15,7 @@ This is the title page.
     <Version>
       Version <#Include SYSTEM "../VERSION">
     </Version>
-    <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
+    <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
 <Address>
 Lehrstuhl B für Mathematik<Br/>
 RWTH Aachen<Br/>
@@ -26,10 +26,10 @@ Templergraben 64<Br/>
     <Email>simon.goertzen@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
     </Author>
-    <Date>August 2008 </Date>
+    <Date>March 2010</Date>
 
 <Copyright>
-  &copyright; 2007-2008 by Simon Goertzen<P/>
+  &copyright; 2007-2010 by Simon Görtzen<P/>
   This package may be distributed under the terms and conditions of
   the GNU Public License Version 2.
 </Copyright>
