@@ -15,7 +15,7 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "*~" homalg/doc/*.* homalg/doc/clean homalg/gap/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} homalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/homalg.tar.gz --exclude ".DS_Store" --exclude "*~" homalg/doc/*.* homalg/doc/clean homalg/gap/*.{gi,gd} homalg/gap/Modules/*.{gi,gd} homalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} homalg/examples/*.g)
 
 WEBPOS=~/gap/pkg/homalg/public_html
 WEBPOS_FINAL=~/Sites/homalg-project/homalg
