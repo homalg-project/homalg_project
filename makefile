@@ -29,6 +29,8 @@ towww: archive
 	cp README ${WEBPOS}/README.HomalgToCAS
 	cp doc/manual.pdf ${WEBPOS}/HomalgToCAS.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/HomalgToCAS.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/HomalgToCAS.tar.gz ${WEBPOS}/HomalgToCAS-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-
+	ln -s HomalgToCAS-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/HomalgToCAS.tar.gz
