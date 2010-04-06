@@ -29,6 +29,9 @@ towww: archive
 	cp README ${WEBPOS}/README.LocalizeRingForHomalg
 	cp doc/manual.pdf ${WEBPOS}/LocalizeRingForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/LocalizeRingForHomalg.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/LocalizeRingForHomalg.tar.gz ${WEBPOS}/LocalizeRingForHomalg-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+	ln -s LocalizeRingForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/LocalizeRingForHomalg.tar.gz
 

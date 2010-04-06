@@ -30,14 +30,14 @@ Subtitle := "A homalg based Package for Localization of Polynomial Rings",
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
 "2010.03.18", ## Markus' version
-"2010.03.19", ## Mohamed's version
+"2010.04.03", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "18/03/2010",
+Date := "03/04/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -47,7 +47,7 @@ Date := "18/03/2010",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/LocalizeRingForHomalg",
+ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/LocalizeRingForHomalg-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
