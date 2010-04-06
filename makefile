@@ -3,11 +3,9 @@ all: doc test
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		doc/ExamplesForHomalg.xml doc/title.xml \
-		doc/intro.xml doc/install.xml \
-		doc/ExamplesForHomalg.bib gap/*.gd gap/*.gi \
-		doc/examples.xml examples/*.g \
-		PackageInfo.g VERSION
+		PackageInfo.g VERSION \
+		doc/ExamplesForHomalg.bib doc/*.xml \
+		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
 
 clean:
@@ -31,6 +29,8 @@ towww: archive
 	cp README ${WEBPOS}/README.ExamplesForHomalg
 	cp doc/manual.pdf ${WEBPOS}/ExamplesForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/ExamplesForHomalg.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/ExamplesForHomalg.tar.gz ${WEBPOS}/ExamplesForHomalg-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-
+	ln -s ExamplesForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/ExamplesForHomalg.tar.gz
