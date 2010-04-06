@@ -29,6 +29,9 @@ towww: archive
 	cp README ${WEBPOS}/README.MatricesForHomalg
 	cp doc/manual.pdf ${WEBPOS}/MatricesForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/MatricesForHomalg.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/MatricesForHomalg.tar.gz ${WEBPOS}/MatricesForHomalg-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+	ln -s MatricesForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/MatricesForHomalg.tar.gz
 
