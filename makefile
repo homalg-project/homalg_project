@@ -29,6 +29,8 @@ towww: archive
 	cp README ${WEBPOS}/README.SCO
 	cp doc/manual.pdf ${WEBPOS}/SCO.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/SCO.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/SCO.tar.gz ${WEBPOS}/SCO-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-
+	ln -s SCO-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/SCO.tar.gz
