@@ -29,6 +29,8 @@ towww: archive
 	cp README ${WEBPOS}/README.GaussForHomalg
 	cp doc/manual.pdf ${WEBPOS}/GaussForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/GaussForHomalg.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/GaussForHomalg.tar.gz ${WEBPOS}/GaussForHomalg-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-
+	ln -s GaussForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/GaussForHomalg.tar.gz
