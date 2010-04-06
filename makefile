@@ -29,6 +29,8 @@ towww: archive
 	cp README ${WEBPOS}/README.IO_ForHomalg
 	cp doc/manual.pdf ${WEBPOS}/IO_ForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/IO_ForHomalg.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/IO_ForHomalg.tar.gz ${WEBPOS}/IO_ForHomalg-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-
+	ln -s IO_ForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/IO_ForHomalg.tar.gz
