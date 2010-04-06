@@ -29,6 +29,8 @@ towww: archive
 	cp README ${WEBPOS}/README.RingsForHomalg
 	cp doc/manual.pdf ${WEBPOS}/RingsForHomalg.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/RingsForHomalg.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/RingsForHomalg.tar.gz ${WEBPOS}/RingsForHomalg-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-
+	ln -s RingsForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/RingsForHomalg.tar.gz
