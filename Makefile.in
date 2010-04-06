@@ -55,8 +55,11 @@ towww: archive
 	cp README ${WEBPOS}/README.Gauss
 	cp doc/manual.pdf ${WEBPOS}/Gauss.pdf
 	cp doc/*.{css,html} ${WEBPOS}
-	cp ../tar/Gauss.tar.gz ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/Gauss.tar.gz ${WEBPOS}/Gauss-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+	ln -s Gauss-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/Gauss.tar.gz
 
 ##
 ##  This program is free software; you can redistribute it and/or modify
