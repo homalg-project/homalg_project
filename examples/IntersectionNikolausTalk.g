@@ -24,7 +24,7 @@ M20 := R0 * M2;
 R0modI10 := RightPresentation( M10 );;
 R0modI20 := RightPresentation( M20 );;
 T0 := Tor( R0modI10, R0modI20 );
-T0Mora := TMora * T0;
+T0Mora := RMora * T0;
 List( ObjectsOfComplex( T0Mora ), AffineDegree );
 #The intersection multiplicity at zero is 3-1=2.
 M11 := R1 * M1;
