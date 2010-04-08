@@ -30,14 +30,14 @@ Subtitle := "A homalg based Package for Localization of Polynomial Rings",
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
 "2010.03.18", ## Markus' version
-"2010.04.03", ## Mohamed's version
+"2010.04.04", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "03/04/2010",
+Date := "04/04/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -267,10 +267,10 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [["GAPDoc", ">= 1.0"], ["MatricesForHomalg", ">= 2010.03.02"], ["homalg", ">= 2010.03.02"]],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2010.03.02" ], [ "homalg", ">= 2010.03.02" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [],
+  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information
