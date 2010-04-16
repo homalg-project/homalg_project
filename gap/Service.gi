@@ -513,7 +513,9 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     l := NrRows( A );
     m := NrColumns( A );
     
-    ColoredInfoForService( "busy", "DecideZeroRows", "( ", l, " + ", NrRows( B ), " ) x ", m );
+    n := NrRows( B );
+    
+    ColoredInfoForService( "busy", "DecideZeroRows", "( ", l, " + ", n, " ) x ", m );
     
     if IsBound(RP!.DecideZeroRows) then
         
@@ -546,8 +548,6 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    n := NrRows( B );
     
     if HasIsOne( A ) and IsOne( A ) then ## save as much new definitions as possible
         id := A;
@@ -607,7 +607,9 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     l := NrColumns( A );
     m := NrRows( A );
     
-    ColoredInfoForService( "busy", "DecideZeroColumns", m, " x ( ", l, " + ", NrColumns( B ), " )" );
+    n := NrColumns( B );
+    
+    ColoredInfoForService( "busy", "DecideZeroColumns", m, " x ( ", l, " + ", n, " )" );
     
     if IsBound(RP!.DecideZeroColumns) then
         
@@ -640,8 +642,6 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    n := NrColumns( B );
     
     if HasIsOne( A ) and IsOne( A ) then ## save as much new definitions as possible
         id := A;
@@ -1909,9 +1909,6 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
   function( A, B, T )
     local R, RP, t, TI, l, m, n, id, zz, M, TT, MM;
     
-    SetNrRows( T, NrRows( A ) );
-    SetNrColumns( T, NrRows( B ) );
-    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
@@ -1920,11 +1917,21 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "DecideZeroRowsEffectively", "( ", NrRows( A ), " + ", NrRows( B ), " ) x ", NrColumns( A ) );
+    l := NrRows( A );
+    m := NrColumns( A );
+    
+    n := NrRows( B );
+    
+    SetNrRows( T, l );
+    SetNrColumns( T, n );
+    
+    ColoredInfoForService( "busy", "DecideZeroRowsEffectively", "( ", l, " + ", n, " ) x ", m );
     
     if IsBound(RP!.DecideZeroRowsEffectively) then
         
         M := RP!.DecideZeroRowsEffectively( A, B, T ); ResetFilterObj( T, IsVoidMatrix );
+        
+        SetNrRows( M, l ); SetNrColumns( M, m );
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -1940,7 +1947,11 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         TI := HomalgVoidMatrix( R );
         
-        M := Involution( RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI ) );
+        M := RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI );
+        
+        SetNrRows( M, m ); SetNrColumns( M, l );
+        
+        M := Involution( M );
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
         
@@ -1959,11 +1970,6 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    l := NrRows( A );
-    m := NrColumns( A );
-    
-    n := NrRows( B );
     
     if HasIsOne( A ) and IsOne( A ) then ## save as much new definitions as possible
         id := A;
@@ -2016,9 +2022,6 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
   function( A, B, T )
     local R, RP, t, TI, l, m, n, id, zz, M, TT;
     
-    SetNrColumns( T, NrColumns( A ) );
-    SetNrRows( T, NrColumns( B ) );
-    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroColumnsWRTNonBasis( B );
@@ -2027,11 +2030,21 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "DecideZeroColumnsEffectively", NrRows( A ), " x ( ", NrColumns( A ), " + ", NrColumns( B ), " )" );
+    l := NrColumns( A );
+    m := NrRows( A );
+    
+    n := NrColumns( B );
+    
+    SetNrColumns( T, l );
+    SetNrRows( T, n );
+    
+    ColoredInfoForService( "busy", "DecideZeroColumnsEffectively", m, " x ( ", l, " + ", n, " )" );
     
     if IsBound(RP!.DecideZeroColumnsEffectively) then
         
         M := RP!.DecideZeroColumnsEffectively( A, B, T ); ResetFilterObj( T, IsVoidMatrix );
+        
+        SetNrColumns( M, l ); SetNrRows( M, m );
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
@@ -2047,7 +2060,11 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         TI := HomalgVoidMatrix( R );
         
-        M := Involution( RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI ) );
+        M := RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI );
+        
+        SetNrColumns( M, m ); SetNrRows( M, l );
+        
+        M := Involution( M );
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
         
@@ -2066,11 +2083,6 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     fi;
     
     #=====# begin of the core procedure #=====#
-    
-    l := NrColumns( A );
-    m := NrRows( A );
-    
-    n := NrColumns( B );
     
     if HasIsOne( A ) and IsOne( A ) then ## save as much new definitions as possible
         id := A;
