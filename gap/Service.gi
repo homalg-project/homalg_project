@@ -523,6 +523,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         SetNrRows( C, l ); SetNrColumns( C, m );
         
+        IsZero( C );
+        
         ColoredInfoForService( t, "DecideZeroRows" );
         
         IncreaseRingStatistics( R, "DecideZeroRows" );
@@ -534,6 +536,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         C := RP!.DecideZeroColumns( Involution( A ), Involution( B ) );
         
         SetNrRows( C, m ); SetNrColumns( C, l );
+        
+        IsZero( C );
         
         C := Involution( C );
         
@@ -562,6 +566,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     M := RowReducedEchelonForm( M );
     
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    IsZero( C );
     
     ColoredInfoForService( t, "DecideZeroRows" );
     
@@ -617,6 +623,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         SetNrRows( C, m ); SetNrColumns( C, l );
         
+        IsZero( C );
+        
         ColoredInfoForService( t, "DecideZeroColumns" );
         
         IncreaseRingStatistics( R, "DecideZeroColumns" );
@@ -628,6 +636,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         C := RP!.DecideZeroRows( Involution( A ), Involution( B ) );
         
         SetNrRows( C, l ); SetNrColumns( C, m );
+        
+        IsZero( C );
         
         C := Involution( C );
         
@@ -656,6 +666,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     M := ColumnReducedEchelonForm( M );
     
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    IsZero( C );
     
     ColoredInfoForService( t, "DecideZeroColumns" );
     
@@ -1933,6 +1945,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         SetNrRows( M, l ); SetNrColumns( M, m );
         
+        IsZero( M );
+        
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
@@ -1950,6 +1964,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         M := RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI );
         
         SetNrRows( M, m ); SetNrColumns( M, l );
+        
+        IsZero( M );
         
         M := Involution( M );
         
@@ -1986,6 +2002,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     M := RowReducedEchelonForm( M, TT );
     
     M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    IsZero( M );
     
     TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
@@ -2046,6 +2064,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         SetNrColumns( M, l ); SetNrRows( M, m );
         
+        IsZero( M );
+        
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
@@ -2063,6 +2083,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         M := RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI );
         
         SetNrColumns( M, m ); SetNrRows( M, l );
+        
+        IsZero( M );
         
         M := Involution( M );
         
@@ -2099,6 +2121,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     M := ColumnReducedEchelonForm( M, TT );
     
     M := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
+    
+    IsZero( M );
     
     TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
