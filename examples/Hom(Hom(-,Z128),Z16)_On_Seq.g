@@ -112,14 +112,14 @@
 ##  at homology degree: 13
 ##  Z/( 256 )/< |[ 8 ]| > 
 ##  -------------------------
-##  [ [  6 ] ]
+##  [ [  2 ] ]
 ##  
 ##  modulo [ 256 ]
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 12
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
 ##  [ [  2 ] ]
 ##  
@@ -128,7 +128,7 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 11
-##  Z/( 256 )/< |[ 4 ]| > 
+##  Z/( 256 )/< |[ 4 ]| >
 ##  -------------------------
 ##  [ [  4 ] ]
 ##  
@@ -137,16 +137,16 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 10
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
-##  [ [  6 ] ]
+##  [ [  2 ] ]
 ##  
 ##  modulo [ 256 ]
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 9
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
 ##  [ [  2 ] ]
 ##  
@@ -155,7 +155,7 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 8
-##  Z/( 256 )/< |[ 4 ]| > 
+##  Z/( 256 )/< |[ 4 ]| >
 ##  -------------------------
 ##  [ [  4 ] ]
 ##  
@@ -164,16 +164,16 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 7
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
-##  [ [  6 ] ]
+##  [ [  2 ] ]
 ##  
 ##  modulo [ 256 ]
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 6
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
 ##  [ [  2 ] ]
 ##  
@@ -182,7 +182,7 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 5
-##  Z/( 256 )/< |[ 4 ]| > 
+##  Z/( 256 )/< |[ 4 ]| >
 ##  -------------------------
 ##  [ [  4 ] ]
 ##  
@@ -191,16 +191,16 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 4
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
-##  [ [  6 ] ]
+##  [ [  2 ] ]
 ##  
 ##  modulo [ 256 ]
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 3
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
 ##  [ [  2 ] ]
 ##  
@@ -209,7 +209,7 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 2
-##  Z/( 256 )/< |[ 4 ]| > 
+##  Z/( 256 )/< |[ 4 ]| >
 ##  -------------------------
 ##  [ [  8 ] ]
 ##  
@@ -218,7 +218,7 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 1
-##  Z/( 256 )/< |[ 16 ]| > 
+##  Z/( 256 )/< |[ 16 ]| >
 ##  -------------------------
 ##  [ [  1 ] ]
 ##  
@@ -227,7 +227,7 @@
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  ------------v------------
 ##  at homology degree: 0
-##  Z/( 256 )/< |[ 8 ]| > 
+##  Z/( 256 )/< |[ 8 ]| >
 ##  -------------------------
 ##  ]]></Example>
 ##  </Subsection>
