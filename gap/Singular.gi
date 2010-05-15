@@ -1431,7 +1431,7 @@ setring homalg_Weyl_2;\n\
 option(redTail);short=0;\n\
 matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
 matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
-ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_1; kill homalg_Weyl_2; kill homalg_Weyl_3; kill homalg_Weyl_4;\n\
+ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
 // end: check the nres-isHomog-bug in Plural."
     , "need_output", S ) = "1" then;
     
