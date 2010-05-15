@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--$Id: Gauss.xml,  2008/07/01 -->
-
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
  [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
    <!ENTITY C "<Package>C</Package>">
@@ -31,13 +29,13 @@
 	  (Germany)
 	  </Address>
   </Author>
-  <Date>November 2009</Date>
+  <Date>May 2010</Date>
   <Abstract>This document explains the primary uses of the &Gauss; package.
             Included is a documented list of the most important methods
             and functions needed to work with sparse matrices and the
             algorithms provided by the &Gauss; package.
   </Abstract>
-  <Copyright>&copyright; 2007-2009 by Simon Goertzen<P/>
+  <Copyright>&copyright; 2007-2010 by Simon Goertzen<P/>
   This package may be distributed under the terms and conditions of
   the GNU Public License Version 2.
   </Copyright>
