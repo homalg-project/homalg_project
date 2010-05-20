@@ -1001,7 +1001,7 @@ InstallMethod( ViewObj,
             fi;
             Print( "ideal" );
         else
-            Print( "free left sumboule" );
+            Print( "free left submodule" );
         fi;
     else
         if ConstructedAsAnIdeal( J ) then
@@ -1013,7 +1013,7 @@ InstallMethod( ViewObj,
             fi;
             Print( "ideal" );
         else
-            Print( "free right sumboule" );
+            Print( "free right submodule" );
         fi;
     fi;
     
@@ -1086,7 +1086,7 @@ InstallMethod( ViewObj,
     if ConstructedAsAnIdeal( J ) then
         Print( "ideal" );
     else
-        Print( "sumboule" );
+        Print( "submodule" );
     fi;
     
     Print( ">" );
