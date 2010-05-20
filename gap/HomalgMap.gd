@@ -228,9 +228,9 @@ DeclareCategory( "IsHomalgSelfMap",
 DeclareAttribute( "ImageSubobject",
         IsHomalgMap );
 
-##  <#GAPDoc Label="KernelSubmodule:map">
+##  <#GAPDoc Label="KernelSubobject:map">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="KernelSubmodule" Label="for maps"/>
+##    <Attr Arg="phi" Name="KernelSubobject" Label="for maps"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated kernel of the &homalg; map <A>phi</A>
@@ -240,7 +240,7 @@ DeclareAttribute( "ImageSubobject",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "KernelSubmodule",
+DeclareAttribute( "KernelSubobject",
         IsHomalgMap );
 
 ##  <#GAPDoc Label="MorphismAidMap:map">

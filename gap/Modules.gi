@@ -1476,14 +1476,14 @@ InstallOtherMethod( SubmoduleQuotient,
     if IsBound( HOMALG.SubQuotient_uses_Intersect ) and
        HOMALG.SubQuotient_uses_Intersect = true then
         
-        mapJ := List( mapJ, KernelSubmodule );
+        mapJ := List( mapJ, KernelSubobject );
         
         return Intersect( mapJ );
     fi;
     
     mapJ := Iterated( mapJ, ProductMorphism );
     
-    return KernelSubmodule( mapJ );
+    return KernelSubobject( mapJ );
     
 end );
 

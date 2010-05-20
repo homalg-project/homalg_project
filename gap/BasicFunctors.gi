@@ -86,7 +86,7 @@ end );
 
 InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
   function( psi )
-    local S, ker_submodule, ker, emb, img_epi, T, coker, im;
+    local S, ker_subobject, ker, emb, img_epi, T, coker, im;
     
     if HasKernelEmb( psi ) then
         return Source( KernelEmb( psi ) );
@@ -94,15 +94,15 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     S := Source( psi );
     
-    ## this involves computing relative syzygies:
-    ker_submodule := KernelSubmodule( psi );
+    ## in case of modules: this involves computing relative syzygies:
+    ker_subobject := KernelSubobject( psi );
     
-    ## this involves a second syzygies computation:
-    ## (the number of generators of ker might be less than the number of generators of ker_submodule)
-    ker := UnderlyingObject( ker_submodule );
+    ## in case of modules: this involves a second syzygies computation:
+    ## (the number of generators of ker might be less than the number of generators of ker_subobject)
+    ker := UnderlyingObject( ker_subobject );
     
     ## the natural embedding of ker in Source( psi ):
-    emb := EmbeddingInSuperObject( ker_submodule );
+    emb := EmbeddingInSuperObject( ker_subobject );
     
     ## set the attribute KernelEmb (specific for Kernel):
     SetKernelEmb( psi, emb );
@@ -196,7 +196,7 @@ InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: Defect
     pre := HighestDegreeMorphism( cpx_post_pre );
     post := LowestDegreeMorphism( cpx_post_pre );
     
-    return KernelSubmodule( post ) / ImageSubobject( pre );
+    return KernelSubobject( post ) / ImageSubobject( pre );
     
 end );
 

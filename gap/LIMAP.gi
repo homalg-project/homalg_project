@@ -46,7 +46,7 @@ InstallMethod( KernelEmb,
         
   function( phi )
     
-    return EmbeddingInSuperObject( KernelSubmodule( phi ) );
+    return EmbeddingInSuperObject( KernelSubobject( phi ) );
     
 end );
 
@@ -83,7 +83,7 @@ InstallMethod( Kernel,
         
   function( phi )
     
-    return UnderlyingObject( KernelSubmodule( phi ) );
+    return UnderlyingObject( KernelSubobject( phi ) );
     
 end );
 

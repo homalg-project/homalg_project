@@ -20,9 +20,9 @@
 #
 ####################################
 
-##  <#GAPDoc Label="KernelSubmodule:ringmap">
+##  <#GAPDoc Label="KernelSubobject:ringmap">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="KernelSubmodule" Label="for ring maps"/>
+##    <Attr Arg="phi" Name="KernelSubobject" Label="for ring maps"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      The kernel ideal of the ring map <A>phi</A> (as a submodule).
@@ -30,7 +30,7 @@
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "KernelSubmodule",
+DeclareAttribute( "KernelSubobject",
         IsHomalgRingMap );
 
 ##  <#GAPDoc Label="KernelEmb:ringmap">

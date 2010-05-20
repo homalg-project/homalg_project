@@ -690,7 +690,7 @@ InstallMethod( ImageSubobject,
 end );
 
 ##
-InstallMethod( KernelSubmodule,
+InstallMethod( KernelSubobject,
         "LIMOR: for homalg maps",
         [ IsHomalgMap ],
         
@@ -712,7 +712,7 @@ InstallMethod( GeneralizedInverse,
     gen_iso := epsilon^-1;
     
     ## the morphism aid map of the generalized inverse
-    aid := MapHavingSubobjectAsItsImage( KernelSubmodule( epsilon ) );
+    aid := MapHavingSubobjectAsItsImage( KernelSubobject( epsilon ) );
     
     ## set the morphism aid map
     SetMorphismAidMap( gen_iso, aid );
