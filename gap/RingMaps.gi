@@ -14,9 +14,9 @@
 #
 ####################################
 
-##  <#GAPDoc Label="KernelSubmodule">
+##  <#GAPDoc Label="KernelSubobject">
 ##  <ManSection>
-##    <Meth Arg="phi" Name="KernelSubmodule"/>
+##    <Meth Arg="phi" Name="KernelSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      The kernel ideal of the ring map <A>phi</A> (as a submodule).
@@ -24,7 +24,7 @@
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( KernelSubmodule,
+InstallMethod( KernelSubobject,
         "for homalg ring maps",
         [ IsHomalgRingMap ],
         

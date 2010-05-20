@@ -14,7 +14,7 @@
 <Section Label="RingMaps:Attributes">
 <Heading>Ring Maps: Attributes</Heading>
 
-<#Include Label="KernelSubmodule">
+<#Include Label="KernelSubobject">
 
 </Section>
 

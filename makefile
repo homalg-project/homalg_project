@@ -17,7 +17,7 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" --exclude "*~" Sheaves/doc/*.* Sheaves/doc/clean Sheaves/gap/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Sheaves/examples/*.g)
 
-WEBPOS=~/gap/pkg/Sheaves/public_html
+WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/Sheaves
 
 towww: archive

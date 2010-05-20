@@ -67,7 +67,7 @@ InstallMethod( ImageScheme,
     
     phi := AssociatedRingMap( f );
     
-    ker := KernelSubmodule( phi );
+    ker := KernelSubobject( phi );
     
     return Scheme( ker );
     
