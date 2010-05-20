@@ -800,12 +800,12 @@ InstallMethod( ShortenResolution,
     
     SetIsEpimorphism( s_m_1, true );	## only during the first step
     
-    d_m := AugmentMorphisms( d_m_1, s_m_1 );
+    d_m := ProductMorphism( d_m_1, s_m_1 );
     SetIsMonomorphism( d_m, true );	## only during the first step
     
     if m > 2 then
         d_m_2 := CertainMorphism( d, mx - 2 );
-        d_m_1 := StackMorphisms( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
+        d_m_1 := CoproductMorphism( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
     fi;
     
     mx := mx - 1;
@@ -826,11 +826,11 @@ InstallMethod( ShortenResolution,
             break;
         fi;
         
-        d_m := AugmentMorphisms( d_m_1, s_m_1 );
+        d_m := ProductMorphism( d_m_1, s_m_1 );
         
         if m > 2 then
             d_m_2 := CertainMorphism( d, mx - 2 );
-            d_m_1 := StackMorphisms( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
+            d_m_1 := CoproductMorphism( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
         fi;
         
         mx := mx - 1;
@@ -1481,7 +1481,7 @@ InstallOtherMethod( SubmoduleQuotient,
         return Intersect( mapJ );
     fi;
     
-    mapJ := Iterated( mapJ, AugmentMorphisms );
+    mapJ := Iterated( mapJ, ProductMorphism );
     
     return KernelSubmodule( mapJ );
     

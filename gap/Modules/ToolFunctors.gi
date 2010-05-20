@@ -224,7 +224,7 @@ InstallGlobalFunction( _Functor_Compose_OnModules,	### defines: Compose
         morphism_aid_pre := PreCompose( MorphismAidMap( pre ), RemoveMorphismAidMap( post ) );
         
         if HasMorphismAidMap( post ) then
-            SetMorphismAidMap( phi, StackMorphisms( MorphismAidMap( post ), morphism_aid_pre ) );
+            SetMorphismAidMap( phi, CoproductMorphism( MorphismAidMap( post ), morphism_aid_pre ) );
         else
             SetMorphismAidMap( phi, morphism_aid_pre );
         fi;
@@ -313,10 +313,10 @@ InstallMethod( \*,
 end );
 
 ##
-## StackMorphisms
+## CoproductMorphism
 ##
 
-InstallGlobalFunction( _Functor_StackMorphisms_OnModules,	### defines: StackMorphisms
+InstallGlobalFunction( _Functor_CoproductMorphism_OnModules,	### defines: CoproductMorphism
   function( phi, psi )
     local T, phi_psi, SpS, p;
     
@@ -354,25 +354,25 @@ InstallGlobalFunction( _Functor_StackMorphisms_OnModules,	### defines: StackMorp
     
 end );
 
-InstallValue( functor_StackMorphisms,
+InstallValue( functor_CoproductMorphism,
         CreateHomalgFunctor(
-                [ "name", "StackMorphisms" ],
-                [ "operation", "StackMorphisms" ],
+                [ "name", "CoproductMorphism" ],
+                [ "operation", "CoproductMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_StackMorphisms_OnModules ]
+                [ "OnObjects", _Functor_CoproductMorphism_OnModules ]
                 )
         );
 
-functor_StackMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_CoproductMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-## AugmentMorphisms
+## ProductMorphism
 ##
 
-InstallGlobalFunction( _Functor_AugmentMorphisms_OnModules,	### defines: AugmentMorphisms
+InstallGlobalFunction( _Functor_ProductMorphism_OnModules,	### defines: ProductMorphism
   function( phi, psi )
     local S, phi_psi, TpT, p;
     
@@ -410,18 +410,18 @@ InstallGlobalFunction( _Functor_AugmentMorphisms_OnModules,	### defines: Augment
     
 end );
 
-InstallValue( functor_AugmentMorphisms,
+InstallValue( functor_ProductMorphism,
         CreateHomalgFunctor(
-                [ "name", "AugmentMorphisms" ],
-                [ "operation", "AugmentMorphisms" ],
+                [ "name", "ProductMorphism" ],
+                [ "operation", "ProductMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_AugmentMorphisms_OnModules ]
+                [ "OnObjects", _Functor_ProductMorphism_OnModules ]
                 )
         );
 
-functor_AugmentMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_ProductMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 #=======================================================================
@@ -627,16 +627,16 @@ InstallFunctorOnObjects( functor_SubMorphisms );
 InstallFunctorOnObjects( functor_Compose );
 
 ##
-## StackMorphisms( phi, psi )
+## CoproductMorphism( phi, psi )
 ##
 
-InstallFunctorOnObjects( functor_StackMorphisms );
+InstallFunctorOnObjects( functor_CoproductMorphism );
 
 ##
-## AugmentMorphisms( phi, psi )
+## ProductMorphism( phi, psi )
 ##
 
-InstallFunctorOnObjects( functor_AugmentMorphisms );
+InstallFunctorOnObjects( functor_ProductMorphism );
 
 ##
 ## gamma / beta = PostDivide( gamma, beta )

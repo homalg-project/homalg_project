@@ -39,15 +39,15 @@ DeclareGlobalFunction( "_Functor_Compose_OnModules" );
 
 DeclareGlobalVariable( "functor_Compose" );
 
-## StackMorphisms
-DeclareGlobalFunction( "_Functor_StackMorphisms_OnModules" );
+## CoproductMorphism
+DeclareGlobalFunction( "_Functor_CoproductMorphism_OnModules" );
 
-DeclareGlobalVariable( "functor_StackMorphisms" );
+DeclareGlobalVariable( "functor_CoproductMorphism" );
 
-## AugmentMorphisms
-DeclareGlobalFunction( "_Functor_AugmentMorphisms_OnModules" );
+## ProductMorphism
+DeclareGlobalFunction( "_Functor_ProductMorphism_OnModules" );
 
-DeclareGlobalVariable( "functor_AugmentMorphisms" );
+DeclareGlobalVariable( "functor_ProductMorphism" );
 
 ## PostDivide
 DeclareGlobalFunction( "_Functor_PostDivide_OnModules" );

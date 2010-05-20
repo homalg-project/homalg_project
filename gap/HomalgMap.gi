@@ -1536,7 +1536,7 @@ InstallMethod( AddToMorphismAidMap,
     if HasMorphismAidMap( phi ) then
         ## we don't need the source of the old morphism aid map
         morphism_aid_map0 := OnAFreeSource( MorphismAidMap( phi ) );
-        morphism_aid_map1 := StackMorphisms( morphism_aid_map0, morphism_aid_map1 );
+        morphism_aid_map1 := CoproductMorphism( morphism_aid_map0, morphism_aid_map1 );
     fi;
     
     return GeneralizedMap( phi, morphism_aid_map1 );

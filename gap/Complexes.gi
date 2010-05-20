@@ -458,7 +458,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
-        epsilon := StackMorphisms( epsilonN, epsilonM );
+        epsilon := CoproductMorphism( epsilonN, epsilonM );
         
         ## check assertion
         Assert( 2, IsEpimorphism( epsilon ) );
@@ -500,7 +500,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
-        epsilon_j := StackMorphisms( epsilonN, epsilonM );
+        epsilon_j := CoproductMorphism( epsilonN, epsilonM );
         
         Pj := Source( epsilon_j );
         
@@ -597,7 +597,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
-        epsilon := StackMorphisms( epsilonN, epsilonM );
+        epsilon := CoproductMorphism( epsilonN, epsilonM );
         
         ## check assertion
         Assert( 2, IsEpimorphism( epsilon ) );
@@ -639,7 +639,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
         
-        epsilon_j := StackMorphisms( epsilonN, epsilonM );
+        epsilon_j := CoproductMorphism( epsilonN, epsilonM );
         
         Pj := Source( epsilon_j );
         

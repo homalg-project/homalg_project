@@ -381,7 +381,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     phi := LowestDegreeMorphism( chm_phi_beta1 );
     beta1 := LowestDegreeMorphism( Range( chm_phi_beta1 ) );
     
-    phi_beta1 := StackMorphisms( phi, -beta1 );
+    phi_beta1 := CoproductMorphism( phi, -beta1 );
     
     emb := KernelEmb( phi_beta1 );
     
@@ -440,7 +440,7 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     psi := HighestDegreeMorphism( chm_alpha1_psi );
     alpha1 := HighestDegreeMorphism( Source( chm_alpha1_psi ) );
     
-    alpha1_psi := AugmentMorphisms( alpha1, psi );
+    alpha1_psi := ProductMorphism( alpha1, psi );
     
     epi := CokernelEpi( alpha1_psi );
     

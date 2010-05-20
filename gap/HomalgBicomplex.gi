@@ -639,10 +639,10 @@ InstallMethod( MorphismOfTotalComplex,
                 Add( augment, TheZeroMorphism( source, CertainObject( B, pq_target ) ) );
             fi;
         od;
-        Add( stack, Iterated( augment, AugmentMorphisms ) );
+        Add( stack, Iterated( augment, ProductMorphism ) );
     od;
     
-    stack := Iterated( stack, StackMorphisms );
+    stack := Iterated( stack, CoproductMorphism );
     
     return stack;
     
