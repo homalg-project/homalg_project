@@ -26,13 +26,13 @@ Subtitle := "A Meta-Package for Homological Algebra",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.05.19",
+Version := "2010.05.20",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "19/05/2010",
+Date := "20/05/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -122,7 +122,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
+    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
     PostalAddress := Concatenation( [
                        "Department of Mathematics\n",
                        "University of Kaiserslautern\n",

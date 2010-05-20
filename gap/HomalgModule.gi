@@ -2676,6 +2676,12 @@ InstallMethod( ViewObj,
     
     num_gen := NrGenerators( M );
     
+    ## NrGenerators might set IsZero to true
+    if HasIsZero( M ) and IsZero( M ) then
+        ViewObj( M );
+        return;
+    fi;
+    
     if num_gen = 1 then
         SetIsCyclic( M, true );
         num_gen := "a cyclic";
