@@ -2,7 +2,7 @@
 ##
 ##  Filtrations.gi              homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen
 ##
 ##  Declaration stuff for (spectral) filtrations.
 ##

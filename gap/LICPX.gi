@@ -4,7 +4,7 @@
 ##
 ##         LICPX = Logical Implications for homalg MODules
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen
 ##
 ##  Implementation stuff for the LICPX subpackage.
 ##
@@ -520,6 +520,23 @@ InstallMethod( BettiDiagram,
     fi;
     
     return CallFuncList( HomalgBettiDiagram, ar  );
+    
+end );
+
+##
+InstallMethod( FiltrationByShortExactSequence,
+        "for short exact sequences",
+        [ IsHomalgComplex and IsShortExactSequence ],
+        
+  function( C )
+    local gen_embs;
+    
+    gen_embs := rec( degrees := [ 0, 1 ] );
+    
+    gen_embs.0 := HighestDegreeMorphism( C );
+    gen_embs.1 := GeneralizedInverse( LowestDegreeMorphism( C ) );
+    
+    return HomalgAscendingFiltration( gen_embs, IsFiltration, true );
     
 end );
 

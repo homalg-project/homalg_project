@@ -66,6 +66,10 @@ InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
     ## set the generalized inverse of the natural epimorphism
     SetGeneralizedInverse( epi, gen_iso );
     
+    ## we cannot check this assertion, since
+    ## checking it would cause an infinite loop
+    SetIsGeneralizedIsomorphism( gen_iso, true );
+    
     #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]

@@ -201,6 +201,19 @@ DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only th
 DeclareAttribute( "BettiDiagram",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="FiltrationByShortExactSequence">
+##  <ManSection>
+##    <Attr Arg="C" Name="FiltrationByShortExactSequence" Label="for complexes"/>
+##    <Returns>a &homalg; diagram</Returns>
+##    <Description>
+##      The filtration induced by the short exact sequence <A>C</A> on its middle object.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "FiltrationByShortExactSequence",
+        IsHomalgComplex );
+
 ####################################
 #
 # global functions and operations:

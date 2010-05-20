@@ -2,7 +2,7 @@
 ##
 ##  Filtrations.gi              homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen
 ##
 ##  Implementation stuff for (spectral) filtrations.
 ##
@@ -14,7 +14,7 @@ InstallMethod( FiltrationOfTotalDefect,
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsInt ],
         
   function( E, n )
-    local gen_embs, bidegrees, degrees, gen_embs_n, gen_emb, pq;
+    local gen_embs, bidegrees, degrees, gen_embs_n, pq;
     
     if HasGeneralizedEmbeddingsInTotalDefects( E ) then
         
@@ -67,7 +67,7 @@ InstallMethod( FiltrationOfObjectInCollapsedSheetOfTransposedSpectralSequence,
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsInt ],
         
   function( E, n )
-    local BC, gen_embs, bidegrees, degrees, gen_embs_n, gen_emb, pq;
+    local BC, gen_embs, bidegrees, degrees, gen_embs_n, pq;
     
     BC := UnderlyingBicomplex( E );
     
@@ -189,7 +189,7 @@ InstallMethod( PurityFiltration,
             fi;
         end );
     
-    ## set the codegree of purity for the torsion free factor (in case it is already computed)
+    ## set the codegree of purity for the torsion-free factor (in case it is already computed)
     if HasTorsionFreeFactorEpi( M ) and CertainObject( II_E, [ 0, 0 ] ) <> fail then
         SetCodegreeOfPurity( TorsionFreeFactor( M ), StaircaseOfStability( II_E, [ 0, 0 ], 2 ) );
     fi;

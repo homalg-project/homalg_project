@@ -112,6 +112,11 @@ InstallMethod( homalgResetFilters,
         Unbind( C!.BettiDiagram );
     fi;
     
+    if HasFiltrationByShortExactSequence( C ) then
+        ResetFilterObj( C, FiltrationByShortExactSequence );
+        Unbind( C!.FiltrationByShortExactSequence );
+    fi;
+    
     if IsBound( C!.HomologyGradedObject ) then
         Unbind( C!.HomologyGradedObject );
     fi;
