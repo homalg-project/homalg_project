@@ -28,10 +28,7 @@ Subtitle := "A homalg based Package for Localization of Polynomial Rings",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := Maximum( [
-"2010.03.18", ## Markus' version
-"2010.04.04", ## Mohamed's version
-] ),
+Version := "2010.05.21",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
