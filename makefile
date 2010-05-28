@@ -17,7 +17,7 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/SCO.tar.gz --exclude ".DS_Store" --exclude "*~" SCO/doc/*.* SCO/doc/clean SCO/gap/*.{gi,gd} SCO/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} SCO/examples/*.g SCO/examples/orbifolds/*.g)
 
-WEBPOS=~/gap/pkg/SCO/public_html
+WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/SCO
 
 towww: archive
