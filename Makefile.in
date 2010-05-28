@@ -1,5 +1,7 @@
 #
-# makefile for the Gauss package                             Max Neunhoeffer
+# makefile for the Gauss package                             Mohamed Barakat
+#                                                              Simon Görtzen
+#                                                            Max Neunhoeffer
 #
 #  This file is free software, see license information at the end.
 #  
@@ -16,10 +18,9 @@ bindir:
 	if test ! -d bin;  then mkdir bin;  fi
 	if test ! -d bin/@GAPARCH@;  then mkdir bin/@GAPARCH@;  fi
 
-bin/@GAPARCH@/gauss.so: src/gauss.c
+bin/@GAPARCH@/gauss.o: src/gauss.c
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@
 	$(CC) -fPIC -g -Wall -O2 -o bin/@GAPARCH@/gauss.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/gauss.c
-	$(CC) -bundle -bundle_loader $(GAPPATH)/bin/@GAPARCH@/gap -o bin/@GAPARCH@/gauss.so bin/@GAPARCH@/gauss.o
 
 # make a statically linked GAP including the io module
 static:
@@ -42,9 +43,9 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" --exclude "*~" Gauss/doc/*.* Gauss/doc/clean Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile.in,configure,makedoc.g,maketest.g} Gauss/src/gauss.c)
+	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" --exclude "*~" Gauss/doc/*.* Gauss/doc/clean Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile*.in,configure,makedoc.g,maketest.g} Gauss/src/gauss.c)
 
-WEBPOS=~/software/pkg/Gauss/public_html
+WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/Gauss
 
 towww: archive

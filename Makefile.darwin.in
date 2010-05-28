@@ -1,0 +1,3 @@
+
+bin/@GAPARCH@/gauss.so: bin/@GAPARCH@/gauss.o
+	$(CC) @EXTRACOPTS@ -Wl,-bundle -Wl,-bundle_loader "$(GAPPATH)/bin/@GAPARCH@/gap" -fPIC -o bin/@GAPARCH@/gauss.so bin/@GAPARCH@/gauss.o

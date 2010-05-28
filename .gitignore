@@ -28,3 +28,4 @@ doc/*.toc
 doc/manual.lab
 *.DS_Store
 makefile
+Makefile

@@ -1,0 +1,3 @@
+
+bin/@GAPARCH@/gauss.so: bin/@GAPARCH@/gauss.o
+	$(CC) @EXTRACOPTS@ -fPIC -shared -o bin/@GAPARCH@/gauss.so bin/@GAPARCH@/gauss.o
