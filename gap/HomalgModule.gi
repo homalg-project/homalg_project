@@ -2653,16 +2653,24 @@ InstallMethod( ViewObj,
     local is_submodule, M, R, left_module, num_gen, properties, nz, num_rel,
           gen_string, rel_string, rel, locked;
     
+    num_gen := NrGenerators( o );
+    
+    ## NrGenerators might set IsZero or more generally IsFree to true
+    if HasIsFree( o ) and IsFree( o ) then
+        ViewObj( o );
+        return;
+    fi;
+    
     is_submodule := IsFinitelyPresentedSubmoduleRep( o );
     
     if is_submodule and HasEmbeddingInSuperObject( o ) then
         M := UnderlyingObject( o );
-        if HasIsFree( M ) and IsFree( M ) then
-            SetIsFree( o, true );
+        if HasIsZero( M ) and IsZero( M ) then
+            SetIsZero( o, true );
             ViewObj( o );
             return;
-        elif HasIsZero( M ) and IsZero( M ) then
-            SetIsZero( o, true );
+        elif HasIsFree( M ) and IsFree( M ) then
+            SetIsFree( o, true );
             ViewObj( o );
             return;
         fi;
@@ -2676,9 +2684,9 @@ InstallMethod( ViewObj,
     
     num_gen := NrGenerators( M );
     
-    ## NrGenerators might set IsZero to true
-    if HasIsZero( M ) and IsZero( M ) then
-        ViewObj( M );
+    ## NrGenerators might set IsZero or more generally IsFree to true
+    if HasIsFree( M ) and IsFree( M ) then
+        ViewObj( o );
         return;
     fi;
     

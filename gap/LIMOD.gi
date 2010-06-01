@@ -601,6 +601,22 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasRankOfModule, 0,
+        
+  function( M )
+    local R;
+    
+    if HasNrGenerators( M ) = true and	## HasNrGenerators is allowed to return fail
+       RankOfModule( M ) = NrGenerators( M ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFree,
         IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfModule and HasLeftActingDomain, 0,
         
   function( M )
