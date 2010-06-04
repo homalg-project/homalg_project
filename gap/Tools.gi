@@ -108,8 +108,8 @@ end );
 ##    <Description>
 ##      If <A>D</A> is a <M>f \times p</M>-matrix and <A>N</A> is a <M>g \times q</M>-matrix then
 ##      <M>H=Diff(</M><A>D</A>,<A>N</A><M>)</M> is an <M>fg \times pq</M>-matrix whose entry
-##      <M>H[g*(i-1)+j,q*(k-1)+l]</M> is the result of differentiating <A>D</A><M>[j,l]</M>
-##      by the differential operator corresponding to <A>N</A><M>[i,k]</M>. (Here we follow
+##      <M>H[g*(i-1)+j,q*(k-1)+l]</M> is the result of differentiating <A>N</A><M>[j,l]</M>
+##      by the differential operator corresponding to <A>D</A><M>[i,k]</M>. (Here we follow
 ##      the Macaulay2 convention.)
 ##      <Example><![CDATA[
 ##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c" * "x,y,z";;
