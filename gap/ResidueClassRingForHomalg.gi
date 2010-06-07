@@ -34,7 +34,7 @@ InstallValue( CommonHomalgTableForResidueClassRings,
                 ring_rel := EntriesOfHomalgMatrix( ring_rel );
                 
                 if ring_rel = [ ] then
-                    TryNextMethod( );
+                    ring_rel := "0";
                 elif IsHomalgInternalRingRep( AmbientRing( R ) ) then
                     ring_rel := JoinStringsWithSeparator( List( ring_rel, String ), ", " );
                 else

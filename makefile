@@ -17,7 +17,7 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/MatricesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" MatricesForHomalg/doc/*.* MatricesForHomalg/doc/clean MatricesForHomalg/gap/*.{gi,gd} MatricesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} MatricesForHomalg/examples/*.g)
 
-WEBPOS=~/gap/pkg/MatricesForHomalg/public_html
+WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/MatricesForHomalg
 
 towww: archive
@@ -34,4 +34,3 @@ towww: archive
 	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 	ln -s MatricesForHomalg-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/MatricesForHomalg.tar.gz
-

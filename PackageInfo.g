@@ -26,13 +26,13 @@ Subtitle := "Matrices for the homalg Project",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.04.16",
+Version := "2010.06.06",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "16/04/2010",
+Date := "06/06/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -122,7 +122,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "barakat@mathematik.uni-kl.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~barakat/",
+    WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
     PostalAddress := Concatenation( [
                        "Department of Mathematics\n",
                        "University of Kaiserslautern\n",
@@ -248,7 +248,7 @@ Dependencies := rec(
   NeededOtherPackages := [ ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [ ["GAPDoc", ">= 1.0"] ],
+  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information
@@ -306,4 +306,5 @@ Autoload := false,
 Keywords := [ "rings", "ring elements", "matrices", "lazy evaluated matrices", "clever operations for matrices", "submodule membership problem", "syzygies" ]
 
 ));
+
 
