@@ -30,9 +30,10 @@ DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedObjectRep",
         [ ] );
 
 # a new representation for the GAP-category IsHomalgObject
-# which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep:
+# which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep and IsHomalgRingOrModule:
 DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
-        IsHomalgRingOrFinitelyPresentedObjectRep,
+        IsHomalgRingOrFinitelyPresentedObjectRep and
+        IsHomalgRingOrModule,
         [ ] );
 
 # a new representation for the GAP-category IsContainerForWeakPointers:
