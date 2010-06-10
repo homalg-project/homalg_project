@@ -655,6 +655,9 @@ DeclareOperation( "SetUpperBoundForProjectiveDimension",
 DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgModule, IsInfinity ] );
 
+DeclareOperation( "Depth",
+        [ IsHomalgModule, IsHomalgModule ] );
+
 DeclareOperation( "AffineDimension",
         [ IsHomalgModule ] );
 

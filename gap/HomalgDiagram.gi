@@ -240,7 +240,7 @@ InstallMethod( homalgCreateDisplayString,
             o!.Euler := chi;
             
             if IsBound( higher_vanish ) and column_range[Length( column_range )] >= higher_vanish - 1 then
-                Append( chi, List( [ nr_cols - twist + 1 .. nr_cols ], j -> betti[nr_rows][j] ) );
+                Append( chi, List( [ Maximum( nr_cols - twist + 1, 1 ) .. nr_cols ], j -> betti[nr_rows][j] ) );
             else
                 Append( chi, ListWithIdenticalEntries( twist, "?" ) );
             fi;
@@ -404,9 +404,7 @@ InstallMethod( Display,
         [ IsHomalgDiagramRep and IsHomalgBettiDiagram ],
         
   function( o )
-    local SpectralSequenceConvention, betti, row_range, column_range,
-          twist, reverse, nr_rows, nr_cols, total, max, twist_range, chi, MAX,
-          display, ar, i, rows;
+    local SpectralSequenceConvention;
     
     ## the spectral sequence convention for Betti diagrams
     if IsBound( HOMALG.SpectralSequenceConventionForBettiDiagrams ) then

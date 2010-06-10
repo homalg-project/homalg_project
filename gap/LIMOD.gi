@@ -1708,6 +1708,72 @@ InstallMethod( ProjectiveDimension,
 end );
 
 ##
+InstallMethod( Depth,
+        "LIMOD: for two homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( M, N )
+    local R, left, gdim, bound, k;
+    
+    if IsZero( M ) or IsZero( N ) then
+        return infinity;
+    fi;
+    
+    R := HomalgRing( N );
+    
+    if not IsIdenticalObj( HomalgRing( M ), R ) then
+        Error( "the rings of the two modules are not identical\n" );
+    fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( N );
+    
+    if left then
+        if not HasLeftGlobalDimension( R ) then
+            TryNextMethod( );
+        fi;
+        gdim := LeftGlobalDimension( R );
+    else
+        if not HasRightGlobalDimension( R ) then
+            TryNextMethod( );
+        fi;
+        gdim := RightGlobalDimension( R );
+    fi;
+    
+    if gdim = infinity then
+        bound := BoundForResolution( N );
+    else
+        bound := gdim;
+    fi;
+    
+    k := 0;
+    
+    while k <= bound do
+        if not IsZero( Ext( k, M, N ) ) then
+            return k;
+        fi;
+        k := k + 1;
+    od;
+    
+    if gdim < infinity then
+        return gdim;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Depth,
+        "LIMOD: for a homalg ideal and a homalg module",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsFinitelyPresentedModuleRep ],
+        
+  function( J, N )
+    
+    return Depth( FactorObject( J ), N );
+    
+end );
+
+##
 InstallMethod( CodegreeOfPurity,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
