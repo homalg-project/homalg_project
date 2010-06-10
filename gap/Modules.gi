@@ -1236,7 +1236,7 @@ InstallMethod( Annihilator,
         [ IsHomalgMatrix, IsHomalgRelations ],
         
   function( mat, rel )
-    local syz;
+    local syz, graded;
     
     if IsHomalgRelationsOfLeftModule( rel ) then
         syz := List( [ 1 .. NrRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
@@ -1250,10 +1250,20 @@ InstallMethod( Annihilator,
     
     syz := MatrixOfRelations( syz );
     
+    graded := IsList( DegreesOfGenerators( rel ) );
+    
     if IsHomalgRelationsOfLeftModule( rel ) then
-        return LeftSubmodule( syz );
+        if graded then
+            return GradedLeftSubmodule( syz );
+        else
+            return LeftSubmodule( syz );
+        fi;
     else
-        return RightSubmodule( syz );
+        if graded then
+            return GradedRightSubmodule( syz );
+        else
+            return RightSubmodule( syz );
+        fi;
     fi;
     
 end );
