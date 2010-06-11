@@ -9,16 +9,16 @@
 #############################################################################
 
 ##
-ReadPackage( "Sheaves", "gap/RingMaps.gi" );
+ReadPackage( "Sheaves", "gap/Modules/RingMaps.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Modules.gi" );
+ReadPackage( "Sheaves", "gap/Modules/Modules.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Relative.gi" );
+ReadPackage( "Sheaves", "gap/Modules/Relative.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Tate.gi" );
+ReadPackage( "Sheaves", "gap/Modules/Tate.gi" );
 
 ##
 ReadPackage( "Sheaves", "gap/LinearSystems.gi" );
@@ -36,19 +36,22 @@ ReadPackage( "Sheaves", "gap/MorphismsOfSchemes.gi" );
 ReadPackage( "Sheaves", "gap/Curves.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Tools.gi" );
+ReadPackage( "Sheaves", "gap/Tate.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/SingularTools.gi" );
+ReadPackage( "Sheaves", "gap/Modules/Tools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Macaulay2Tools.gi" );
+ReadPackage( "Sheaves", "gap/Modules/SingularTools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/MAGMATools.gi" );
+ReadPackage( "Sheaves", "gap/Modules/Macaulay2Tools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/MapleHomalgTools.gi" );
+ReadPackage( "Sheaves", "gap/Modules/MAGMATools.gi" );
+
+##
+ReadPackage( "Sheaves", "gap/Modules/MapleHomalgTools.gi" );
 
 ##
 ReadPackage( "Sheaves", "gap/LILIN.gi" );

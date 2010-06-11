@@ -74,7 +74,7 @@ InstallValue( LogicalImplicationsForHomalgSheaves,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgSheaves, IsHomalgSheaf );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgSheaves, IsSheafOfModules );
 
 ####################################
 #
@@ -84,7 +84,7 @@ InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgSheaves,
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgSheaf and HasCodim, 0,
+        IsSheafOfModules and HasCodim, 0,
         
   function( E )
     
@@ -94,7 +94,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsHomalgSheaf, 0,
+        IsSheafOfModules, 0,
         
   function( E )
     local M;
@@ -111,7 +111,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsHomalgSheaf and HasRankOfSheaf, 0,
+        IsSheafOfModules and HasRankOfSheaf, 0,
         
   function( M )
     
@@ -121,7 +121,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsHomalgSheaf and HasTorsionFreeFactorEpi and HasIsZero, 0,
+        IsSheafOfModules and HasTorsionFreeFactorEpi and HasIsZero, 0,
         
   function( M )
     local F;
@@ -142,7 +142,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsHomalgSheaf and HasCodim, 0,
+        IsSheafOfModules and HasCodim, 0,
         
   function( M )
     
@@ -158,7 +158,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsHomalgSheaf and HasTorsionSubmoduleEmb and HasIsZero, 0,
+        IsSheafOfModules and HasTorsionSubmoduleEmb and HasIsZero, 0,
         
   function( M )
     local T;
@@ -179,7 +179,7 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsHomalgSheaf and IsTorsionFree and HasCodegreeOfPurity, 0,
+        IsSheafOfModules and IsTorsionFree and HasCodegreeOfPurity, 0,
         
   function( M )
     
@@ -195,7 +195,7 @@ end );
 
 ##
 InstallImmediateMethod( RankOfSheaf,
-        IsHomalgSheaf, 0,
+        IsSheafOfModules, 0,
         
   function( E )
     local M;
@@ -219,7 +219,7 @@ end );
 ##
 InstallMethod( IsZero,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M;
@@ -233,7 +233,7 @@ end );
 ##
 InstallMethod( IsTorsion,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M;
@@ -247,7 +247,7 @@ end );
 ##
 InstallMethod( IsTorsionFree,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M;
@@ -261,7 +261,7 @@ end );
 ##
 InstallMethod( IsReflexive,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M;
@@ -275,7 +275,7 @@ end );
 ## FIXME: why can't HasCodegreeOfPurity be put in the header?
 InstallMethod( IsReflexive,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -296,7 +296,7 @@ end );
 ##
 InstallMethod( RankOfSheaf,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M;
@@ -310,7 +310,7 @@ end );
 ##
 InstallMethod( Rank,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -321,7 +321,7 @@ end );
 ##
 InstallMethod( Codim,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M, codim;
@@ -341,7 +341,7 @@ end );
 ##
 InstallMethod( CodegreeOfPurity,
         "for sheaves",
-        [ IsHomalgSheaf ], 1001,
+        [ IsSheafOfModules ], 1001,
         
   function( E )
     
@@ -356,7 +356,7 @@ end );
 ##
 InstallMethod( CodegreeOfPurity,
         "for sheaves",
-        [ IsHomalgSheaf ], 1001,
+        [ IsSheafOfModules ], 1001,
         
   function( E )
     

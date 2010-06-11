@@ -107,7 +107,7 @@ DeclareProperty( "IsSmooth",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "IdealSheaf",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="StructureSheaf">
 ##  <ManSection>

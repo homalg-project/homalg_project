@@ -21,39 +21,54 @@ DeclareCategory( "IsSetOfUnderlyingModules",
 
 # four new GAP-categories:
 
-##  <#GAPDoc Label="IsHomalgSheafOfRings">
+##  <#GAPDoc Label="IsHomalgSheaf">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="O" Name="IsHomalgSheafOfRings"/>
+##    <Filt Type="Category" Arg="O" Name="IsHomalgSheaf"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of sheaves of rings. <P/>
+##      The &GAP; category of sheaves. <P/>
 ##      (It is a subcategory of the &GAP; category
 ##      <C>IsHomalgRingOrObject</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareCategory( "IsHomalgSheafOfRings",
+DeclareCategory( "IsHomalgSheaf",
         IsHomalgRingOrObject );
 
-##  <#GAPDoc Label="IsHomalgSheaf">
+##  <#GAPDoc Label="IsSheafOfRings">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="E" Name="IsHomalgSheaf"/>
+##    <Filt Type="Category" Arg="O" Name="IsSheafOfRings"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
-##      The &GAP; category of sheaves. <P/>
-##      (It is a subcategory of the &GAP; categories
-##      <C>IsHomalgRingOrObject</C> and <C>IsHomalgObject</C>.)
+##      The &GAP; category of sheaves of rings. <P/>
+##      (It is a subcategory of the &GAP; category
+##      <C>IsHomalgSheaf</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareCategory( "IsHomalgSheaf",
-        IsHomalgRingOrObject and IsHomalgObject );
+DeclareCategory( "IsSheafOfRings",
+        IsHomalgSheaf );
 
-##  <#GAPDoc Label="IsHomalgSheafMap">
+##  <#GAPDoc Label="IsSheafOfModules">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="phi" Name="IsHomalgSheafMap"/>
+##    <Filt Type="Category" Arg="E" Name="IsSheafOfModules"/>
+##    <Returns>true or false</Returns>
+##    <Description>
+##      The &GAP; category of sheaves. <P/>
+##      (It is a subcategory of the &GAP; categories
+##      <C>IsHomalgSheaf</C> and <C>IsHomalgObject</C>.)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareCategory( "IsSheafOfModules",
+        IsHomalgSheaf and IsHomalgObject );
+
+##  <#GAPDoc Label="IsSheafMap">
+##  <ManSection>
+##    <Filt Type="Category" Arg="phi" Name="IsSheafOfModulesMap"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; category of sheaf maps. <P/>
@@ -62,23 +77,23 @@ DeclareCategory( "IsHomalgSheaf",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareCategory( "IsHomalgSheafMap",
+DeclareCategory( "IsSheafOfModulesMap",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsHomalgSheafSelfMap">
+##  <#GAPDoc Label="IsSheafSelfMap">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="phi" Name="IsHomalgSheafSelfMap"/>
+##    <Filt Type="Category" Arg="phi" Name="IsSheafSelfMap"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; category of sheaf self-maps. <P/>
 ##      (It is a subcategory of the &GAP; categories
-##       <C>IsHomalgSheafMap</C> and <C>IsHomalgEndomorphism</C>.)
+##       <C>IsSheafOfModulesMap</C> and <C>IsHomalgEndomorphism</C>.)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareCategory( "IsHomalgSheafSelfMap",
-        IsHomalgSheafMap and
+DeclareCategory( "IsSheafSelfMap",
+        IsSheafOfModulesMap and
         IsHomalgEndomorphism );
 
 ####################################
@@ -98,7 +113,7 @@ DeclareCategory( "IsHomalgSheafSelfMap",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsFree",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsStablyFree">
 ##  <ManSection>
@@ -111,7 +126,7 @@ DeclareProperty( "IsFree",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsStablyFree",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsDirectSumOfLineBundles">
 ##  <ManSection>
@@ -124,7 +139,7 @@ DeclareProperty( "IsStablyFree",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsDirectSumOfLineBundles",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsLocallyFree">
 ##  <ManSection>
@@ -137,7 +152,7 @@ DeclareProperty( "IsDirectSumOfLineBundles",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsLocallyFree",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsReflexive">
 ##  <ManSection>
@@ -150,7 +165,7 @@ DeclareProperty( "IsLocallyFree",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsReflexive",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsTorsionFree">
 ##  <ManSection>
@@ -163,7 +178,7 @@ DeclareProperty( "IsReflexive",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsTorsionFree",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsTorsion">
 ##  <ManSection>
@@ -176,7 +191,7 @@ DeclareProperty( "IsTorsionFree",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsTorsion",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsPure">
 ##  <ManSection>
@@ -189,7 +204,7 @@ DeclareProperty( "IsTorsion",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsPure",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="FiniteLocallyFreeResolutionExists">
 ##  <ManSection>
@@ -203,7 +218,7 @@ DeclareProperty( "IsPure",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "FiniteLocallyFreeResolutionExists",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="HasConstantRank">
 ##  <ManSection>
@@ -217,7 +232,7 @@ DeclareProperty( "FiniteLocallyFreeResolutionExists",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "HasConstantRank",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ####################################
 #
@@ -250,7 +265,7 @@ DeclareAttribute( "StructureSheafOfProj",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "IdealSheaf",
-        IsHomalgSheafOfRings );
+        IsSheafOfRings );
 
 ##  <#GAPDoc Label="AsModuleOverStructureSheafOfAmbientSpace">
 ##  <ManSection>
@@ -263,7 +278,7 @@ DeclareAttribute( "IdealSheaf",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "AsModuleOverStructureSheafOfAmbientSpace",
-        IsHomalgSheafOfRings );
+        IsSheafOfRings );
 
 ## intrinsic attributes:
 ##
@@ -282,7 +297,7 @@ DeclareAttribute( "AsModuleOverStructureSheafOfAmbientSpace",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "RankOfSheaf",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="DegreeOfTorsionFreeness">
 ##  <ManSection>
@@ -296,7 +311,7 @@ DeclareAttribute( "RankOfSheaf",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "DegreeOfTorsionFreeness",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="Codim">
 ##  <ManSection>
@@ -310,7 +325,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Codim",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="PurityFiltration">
 ##  <ManSection>
@@ -323,7 +338,7 @@ DeclareAttribute( "Codim",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "PurityFiltration",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="CodegreeOfPurity">
 ##  <ManSection>
@@ -336,7 +351,7 @@ DeclareAttribute( "PurityFiltration",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "CodegreeOfPurity",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ##  <#GAPDoc Label="CastelnuovoMumfordRegularity">
 ##  <ManSection>
@@ -349,7 +364,7 @@ DeclareAttribute( "CodegreeOfPurity",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "CastelnuovoMumfordRegularity",
-        IsHomalgSheaf );
+        IsSheafOfModules );
 
 ####################################
 #
@@ -402,45 +417,45 @@ DeclareOperation( "DirectSumOfRightLineBundles",
         [ IsInt, IsHomalgRing ] );
 
 DeclareOperation( "POW",
-        [ IsHomalgSheafOfRings, IsInt ] );
+        [ IsSheafOfRings, IsInt ] );
 
 DeclareOperation( "POW",
-        [ IsHomalgSheafOfRings, IsList ] );
+        [ IsSheafOfRings, IsList ] );
 
 # basic operations:
 
 DeclareOperation( "StructureSheafOfAmbientSpace",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 DeclareOperation( "DimensionOfAmbientSpace",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 DeclareOperation( "HomalgRing",
-        [ IsHomalgSheafOfRings ] );
+        [ IsSheafOfRings ] );
 
 DeclareOperation( "PositionOfTheDefaultUnderlyingModule",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 DeclareOperation( "SetPositionOfTheDefaultUnderlyingModule",
-        [ IsHomalgSheaf, IsInt ] );
+        [ IsSheafOfModules, IsInt ] );
 
 DeclareOperation( "SetOfUnderlyingModules",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 DeclareOperation( "UnderlyingModule",
-        [ IsHomalgSheaf, IsInt ] );
+        [ IsSheafOfModules, IsInt ] );
 
 DeclareOperation( "UnderlyingModule",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 DeclareOperation( "homalgProjString",
         [ IsHomalgRing ] );
 
 DeclareOperation( "GlobalSections",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 DeclareOperation( "InducedMorphismToProjectiveSpace",
-        [ IsHomalgSheaf ] );
+        [ IsSheafOfModules ] );
 
 ####################################
 #

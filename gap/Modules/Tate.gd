@@ -2,7 +2,7 @@
 ##
 ##  Tate.gd                     Sheaves package              Mohamed Barakat
 ##
-##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
 ##
 ##  Declarations of procedures for the pair of adjoint Tate functors.
 ##
@@ -17,11 +17,8 @@
 # basic operations:
 
 DeclareOperation( "TateResolution",
-        [ IsSheafOfRings, IsInt, IsInt ] );
+        [ IsHomalgRingOrModule, IsHomalgRing, IsInt, IsInt ] );
 
 DeclareOperation( "TateResolution",
-        [ IsSheafOfModules, IsInt, IsInt ] );
-
-DeclareOperation( "TateResolution",
-        [ IsScheme, IsInt, IsInt ] );
+        [ IsHomalgRingOrModule, IsInt, IsInt ] );
 

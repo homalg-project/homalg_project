@@ -14,10 +14,11 @@
 <Section Label="Sheaves:Category">
 <Heading>Sheaves: Category and Representations</Heading>
 
-<#Include Label="IsHomalgSheafOfRings">
 <#Include Label="IsHomalgSheaf">
-<#Include Label="IsHomalgSheafMap">
-<#Include Label="IsHomalgSheafSelfMap">
+<#Include Label="IsSheafOfRings">
+<#Include Label="IsSheafOfModules">
+<#Include Label="IsSheafMap">
+<#Include Label="IsSheafSelfMap">
 
 </Section>
 

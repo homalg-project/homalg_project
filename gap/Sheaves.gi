@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-# a new representation for the GAP-category IsHomalgSheafOfRings
+# a new representation for the GAP-category IsSheafOfRings
 
 ##  <#GAPDoc Label="IsSheafOfRingsRep">
 ##  <ManSection>
@@ -16,7 +16,7 @@
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; representation of &homalg; sheaves of rings. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheafOfRings"/>,
+##      (It is a representation of the &GAP; category <Ref Filt="IsSheafOfRings"/>,
 ##       which is a subrepresentation of the &GAP; representation
 ##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
 ##    </Description>
@@ -24,7 +24,7 @@
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsSheafOfRingsRep",
-        IsHomalgSheafOfRings and
+        IsSheafOfRings and
         IsHomalgRingOrFinitelyPresentedObjectRep,
         [ "graded_ring" ] );
 
@@ -33,7 +33,7 @@ DeclareRepresentation( "IsSetOfUnderlyingModulesRep",
         IsSetOfUnderlyingModules,
         [ "ListOfPositionsOfKnownUnderlyingModules" ] );
 
-# a new representation for the GAP-category IsHomalgSheaf
+# a new representation for the GAP-category IsSheafOfModules
 
 ##  <#GAPDoc Label="IsCoherentSheafRep">
 ##  <ManSection>
@@ -41,7 +41,7 @@ DeclareRepresentation( "IsSetOfUnderlyingModulesRep",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; representation of coherent sheaves. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheaf"/>,
+##      (It is a representation of the &GAP; category <Ref Filt="IsSheafOfModules"/>,
 ##       which is a subrepresentation of the &GAP; representation
 ##      <C>IsStaticFinitelyPresentedObjectRep</C>.)
 ##    </Description>
@@ -49,7 +49,7 @@ DeclareRepresentation( "IsSetOfUnderlyingModulesRep",
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsCoherentSheafRep",
-        IsHomalgSheaf and
+        IsSheafOfModules and
         IsStaticFinitelyPresentedObjectRep,
         [ "UnderlyingModules",
           "PositionOfTheDefaultUnderlyingModule" ] );
@@ -60,7 +60,7 @@ DeclareRepresentation( "IsCoherentSheafRep",
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The &GAP; representation of coherent sheaves. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgSheaf"/>,
+##      (It is a representation of the &GAP; category <Ref Filt="IsSheafOfModules"/>,
 ##       which is a subrepresentation of the &GAP; representation
 ##      <C>IsStaticFinitelyPresentedSubobjectRep</C>.)
 ##    </Description>
@@ -68,7 +68,7 @@ DeclareRepresentation( "IsCoherentSheafRep",
 ##  <#/GAPDoc>
 ##
 DeclareRepresentation( "IsCoherentSubsheafRep",
-        IsHomalgSheaf and
+        IsSheafOfModules and
         IsStaticFinitelyPresentedSubobjectRep,
         [ "map_having_subobject_as_its_image" ] );
 
@@ -132,7 +132,7 @@ HOMALG_IO.Pictograms.PrimaryDecomposition := "YxZ";	## primary decomposition
 ##
 InstallMethod( StructureSheafOfAmbientSpace,
         "for sheaves",
-        [ IsHomalgSheaf and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsSheafOfModules and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( E )
     
@@ -143,7 +143,7 @@ end );
 ##
 InstallMethod( StructureSheafOfAmbientSpace,
         "for sheaves",
-        [ IsHomalgSheaf and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsSheafOfModules and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( E )
     
@@ -154,7 +154,7 @@ end );
 ##
 InstallMethod( DimensionOfAmbientSpace,
         "for sheaves of rings",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -165,7 +165,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for sheaves of rings",
-        [ IsHomalgSheafOfRings ],
+        [ IsSheafOfRings ],
         
   function( O )
     
@@ -180,7 +180,7 @@ end );
 ##
 InstallMethod( HomalgRing,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -191,7 +191,7 @@ end );
 ##
 InstallMethod( PositionOfTheDefaultUnderlyingModule,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -206,7 +206,7 @@ end );
 ##
 InstallMethod( SetPositionOfTheDefaultUnderlyingModule,
         "for sheaves",
-        [ IsHomalgSheaf, IsPosInt ],
+        [ IsSheafOfModules, IsPosInt ],
         
   function( E, pos )
     
@@ -217,7 +217,7 @@ end );
 ##
 InstallMethod( SetOfUnderlyingModules,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -232,7 +232,7 @@ end );
 ##
 InstallMethod( UnderlyingModule,
         "for sheaves",
-        [ IsHomalgSheaf, IsPosInt ],
+        [ IsSheafOfModules, IsPosInt ],
         
   function( E, pos )
     
@@ -247,7 +247,7 @@ end );
 ##
 InstallMethod( UnderlyingModule,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     
@@ -258,7 +258,7 @@ end );
 ##
 InstallMethod( GlobalSections,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local M, p, Gamma;
@@ -292,7 +292,7 @@ end );
 ##
 InstallMethod( InducedMorphismToProjectiveSpace,
         "for sheaves",
-        [ IsHomalgSheaf ],
+        [ IsSheafOfModules ],
         
   function( E )
     local Gamma, D;
@@ -313,7 +313,7 @@ end );
 
 ##
 InstallMethod( StructureSheafOfProj,
-        "constructor for sheaves",
+        "constructor for structure sheaves",
         [ IsHomalgRing and ContainsAField ],
         
   function( S )
@@ -535,7 +535,7 @@ end );
 ##
 InstallMethod( POW,
         "constructor",
-        [ IsHomalgSheafOfRings, IsInt ],
+        [ IsSheafOfRings, IsInt ],
         
   function( R, twist )
     
@@ -546,7 +546,7 @@ end );
 ##
 InstallMethod( POW,
         "constructor",
-        [ IsHomalgSheafOfRings, IsList ],
+        [ IsSheafOfRings, IsList ],
         
   function( R, twist )
     
