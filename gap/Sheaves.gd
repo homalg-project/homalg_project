@@ -280,6 +280,19 @@ DeclareAttribute( "IdealSheaf",
 DeclareAttribute( "AsModuleOverStructureSheafOfAmbientSpace",
         IsSheafOfRings );
 
+##  <#GAPDoc Label="Support">
+##  <ManSection>
+##    <Attr Arg="E" Name="Support"/>
+##    <Returns>a scheme</Returns>
+##    <Description>
+##      The support of the sheaf <A>E</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "Support",
+        IsHomalgSheaf );
+
 ## intrinsic attributes:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

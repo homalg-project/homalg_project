@@ -10,14 +10,6 @@
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
-
-####################################
-#
 # methods for operations:
 #
 ####################################

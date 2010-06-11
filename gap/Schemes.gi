@@ -53,6 +53,17 @@ InstallMethod( StructureSheafOfAmbientSpace,
         
   function( X )
     
+    return StructureSheaf( X );
+    
+end );
+
+##
+InstallMethod( StructureSheafOfAmbientSpace,
+        "for schemes",
+        [ IsScheme and HasIdealSheaf ],
+        
+  function( X )
+    
     return StructureSheafOfAmbientSpace( IdealSheaf( X ) );
     
 end );
@@ -98,6 +109,25 @@ InstallMethod( UnderlyingModule,
     
 end );
 
+##
+InstallMethod( EQ,
+        "for schemes",
+        [ IsScheme and HasIdealSheaf, IsScheme and HasIdealSheaf ],
+        
+  function( X, Y )
+    local b;
+    
+    ## TODO: install EQ for ideal sheaves
+    b := UnderlyingModule( IdealSheaf( X ) ) = UnderlyingModule( IdealSheaf( Y ) );
+    
+    if b then
+        MatchPropertiesAndAttributes( X, Y, LISCM.intrinsic_properties, LISCM.intrinsic_attributes );
+    fi;
+    
+    return b;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -112,15 +142,15 @@ InstallMethod( Proj,
   function( S )
     local R, X, O, J;
     
+    if IsBound( S!.Proj ) then
+        return S!.Proj;
+    fi;
+    
     ## the ring carrying the weights
     if HasAmbientRing( S ) then
         R := AmbientRing( S );
     else
         R := S;
-    fi;
-    
-    if IsBound( S!.Proj ) then
-        return S!.Proj;
     fi;
     
     X := rec( );

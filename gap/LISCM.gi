@@ -27,6 +27,7 @@ InstallValue( LISCM,
               "IsSmooth" ],
             intrinsic_attributes :=
             [ "Genus",
+              "DegreeAsSubscheme",
               "ArithmeticGenus",
               "Dimension" ]
             )

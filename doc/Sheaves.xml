@@ -49,6 +49,7 @@
 <#Include Label="StructureSheafOfProj">
 <#Include Label="IdealSheaf:sheaf">
 <#Include Label="AsModuleOverStructureSheafOfAmbientSpace">
+<#Include Label="Support">
 
 <!-- the following attributes are intrinsic in the sense that
      they can safely be attached to any copy of the sheaf -->

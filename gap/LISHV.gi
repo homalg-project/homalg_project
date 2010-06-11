@@ -294,6 +294,20 @@ end );
 ####################################
 
 ##
+InstallMethod( Support,
+        "for sheaves",
+        [ IsSheafOfModules ],
+        
+  function( E )
+    local M;
+    
+    M := UnderlyingModule( E );
+    
+    return Scheme( Annihilator( M ) );
+    
+end );
+
+##
 InstallMethod( RankOfSheaf,
         "for sheaves",
         [ IsSheafOfModules ],

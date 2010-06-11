@@ -111,20 +111,6 @@ BindGlobal( "TheTypeHomalgRightCoherentSheaf",
 
 ####################################
 #
-# global variables:
-#
-####################################
-
-HOMALG_IO.Pictograms.MonomialMatrix := "mon";	## create the i-th monomial matrix
-HOMALG_IO.Pictograms.Eliminate := "eli";	## eliminate variables
-HOMALG_IO.Pictograms.Diff := "dif";		## differentiate a matrix M w.r.t. a matrix D
-HOMALG_IO.Pictograms.AffineDimension := "dim";	## affine dimension of a module
-HOMALG_IO.Pictograms.AffineDegree := "adg";	## affine degree of a module
-HOMALG_IO.Pictograms.ConstantTermOfHilbertPolynomial := "P_0";	## the constant term of the hilbert polynomial
-HOMALG_IO.Pictograms.PrimaryDecomposition := "YxZ";	## primary decomposition
-
-####################################
-#
 # methods for operations:
 #
 ####################################
