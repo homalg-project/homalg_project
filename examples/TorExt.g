@@ -18,8 +18,8 @@
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> GP := Hom( P );
-##  <An acyclic cocomplex containing a single morphism of right modules at degrees\
-##   [ 0 .. 1 ]>
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at\
+##   degrees [ 0 .. 1 ]>
 ##  gap> FGP := GP * P;
 ##  <A non-zero acyclic cocomplex containing a single morphism of left complexes a\
 ##  t degrees [ 0 .. 1 ]>

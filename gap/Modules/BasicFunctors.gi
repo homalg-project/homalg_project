@@ -1195,10 +1195,11 @@ InstallFunctorOnObjects( functor_ImageObject );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> hMM := Hom( dM, dM );
-##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
-##  es [ 0 .. 1 ]>
+##  <A non-zero acyclic cocomplex containing a single morphism of right complexes \
+##  at degrees [ 0 .. 1 ]>
 ##  gap> BMM := HomalgBicomplex( hMM );
-##  <A bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> II_E := SecondSpectralSequenceWithFiltration( BMM );
 ##  <A stable cohomological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x
@@ -1319,7 +1320,7 @@ InstallFunctor( Functor_Hom );
 ##  gap> phi;
 ##  <A homomorphism of left modules>
 ##  gap> L := Hom( ZZ, M );
-##  <A right module on 3 generators satisfying yet unknown relations>
+##  <A rank 1 right module on 3 generators satisfying yet unknown relations>
 ##  gap> ByASmallerPresentation( L );
 ##  <A rank 1 right module on 2 generators satisfying 1 relation>
 ##  gap> Display( L );
@@ -1357,16 +1358,17 @@ InstallFunctor( Functor_Hom );
 ##  <A non-zero right acyclic complex containing a single morphism of left modules\
 ##   at degrees [ 0 .. 1 ]>
 ##  gap> GP := Hom( P );
-##  <An acyclic cocomplex containing a single morphism of right modules at degrees\
-##   [ 0 .. 1 ]>
+##  <A non-zero acyclic cocomplex containing a single morphism of right modules at\
+##   degrees [ 0 .. 1 ]>
 ##  gap> CE := Resolution( GP );
 ##  <An acyclic cocomplex containing a single morphism of right complexes at degre\
 ##  es [ 0 .. 1 ]>
 ##  gap> FCE := Hom( CE, L );
-##  <An acyclic complex containing a single morphism of left cocomplexes at degree\
-##  s [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+##  t degrees [ 0 .. 1 ]>
 ##  gap> BC := HomalgBicomplex( FCE );
-##  <A bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> II_E := SecondSpectralSequenceWithFiltration( BC );
 ##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
@@ -1653,7 +1655,7 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> extNN := Range( psi );
-##  <A cyclic right module on a cyclic generator satisfying 1 relation>
+##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
 ##  gap> IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work
 ##  true
 ##  gap> extMN := Source( psi );

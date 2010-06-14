@@ -303,6 +303,42 @@ InstallImmediateMethod( IsTorsion,
     
 end );
 
+## a non trivial set of relations for a single generator over a domain => IsTorsion
+InstallImmediateMethod( IsTorsion,
+        IsFinitelyPresentedModuleRep and IsCyclic, 0,
+        
+  function( M )
+    local l, p, rel, R, torsion;
+    
+    l := ListOfPositionsOfKnownSetsOfRelations( M );
+    for p in l do;
+        
+        rel := SetsOfRelations( M )!.(p);
+        
+        if IsHomalgRelations( rel ) and HasEvaluatedMatrixOfRelations( rel ) then
+            if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 and
+               HasIsZero( MatrixOfRelations( rel ) ) then
+                
+                R := HomalgRing( rel );
+                
+                if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+                    
+                    torsion := not IsZero( MatrixOfRelations( rel ) );
+                    
+                    SetIsTorsion( rel, torsion );
+                    
+                    return torsion;
+                    
+                fi;
+            fi;
+        fi;
+        
+    od;
+    
+    TryNextMethod( );
+    
+end );
+
 ##
 InstallImmediateMethod( IsTorsion,
         IsFinitelyPresentedModuleRep and HasRankOfModule, 0,
@@ -323,11 +359,7 @@ InstallImmediateMethod( IsTorsion,
     F := Range( TorsionFreeFactorEpi( M ) );
     
     if not IsZero( M ) and HasIsZero( F ) then
-        if IsZero( F ) then
-            return true;
-        else
-            return false;
-        fi;
+        return IsZero( F );
     fi;
     
     TryNextMethod( );

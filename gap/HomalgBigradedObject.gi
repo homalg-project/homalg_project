@@ -419,10 +419,11 @@ end );
 ##  gap> dd := Hom( d );;
 ##  gap> C := Resolution( dd );;
 ##  gap> CC := Hom( C );
-##  <An acyclic complex containing a single morphism of left cocomplexes at degree\
-##  s [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+##  t degrees [ 0 .. 1 ]>
 ##  gap> B := HomalgBicomplex( CC );
-##  <A bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  gap> E0 := HomalgBigradedObject( B );
 ##  <A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
 ##  [ -1 .. 0 ]>
@@ -664,10 +665,11 @@ end );
 ##  gap> dd := Hom( d );;
 ##  gap> C := Resolution( dd );;
 ##  gap> CC := Hom( C );
-##  <An acyclic complex containing a single morphism of left cocomplexes at degree\
-##  s [ 0 .. 1 ]>
+##  <A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+##  t degrees [ 0 .. 1 ]>
 ##  gap> B := HomalgBicomplex( CC );
-##  <A bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+##  [ -1 .. 0 ]>
 ##  ]]></Example>
 ##    Now we construct the spectral sequence associated to the bicomplex <M>B</M>, also called the <E>first</E>
 ##    spectral sequence:
@@ -720,7 +722,8 @@ end );
 ##    the transposed bicomplex:
 ##      <Example><![CDATA[
 ##  gap> tB := TransposedBicomplex( B );
-##  <A bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]>
+##  <A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x
+##  [ 0 .. 1 ]>
 ##  gap> II_E0 := HomalgBigradedObject( tB );
 ##  <A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
 ##  [ 0 .. 1 ]>

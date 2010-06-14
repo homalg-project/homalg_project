@@ -695,8 +695,20 @@ InstallMethod( KernelSubobject,
         [ IsHomalgMap ],
         
   function( psi )
+    local ker, S, T;
     
-    return Subobject( ReducedSyzygiesGenerators( psi ), Source( psi ) );
+    ker := Subobject( ReducedSyzygiesGenerators( psi ), Source( psi ) );
+    
+    S := Source( psi );
+    T := Range( psi );
+    
+    if HasRankOfModule( S ) and HasRankOfModule( T ) then
+        if RankOfModule( T ) = 0 then
+            SetRankOfModule( ker, RankOfModule( S ) );
+        fi;
+    fi;
+    
+    return ker;
     
 end );
 

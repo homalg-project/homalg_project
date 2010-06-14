@@ -298,7 +298,7 @@ InstallGlobalFunction( LogicalImplicationsForHomalgSubobjects,
       end );
     
     InstallMethod( prop_attr,
-        "LIMOD: for homalg submodules",
+        "for homalg subobjects",
         [ filter_subobject ],
         
       function( o )

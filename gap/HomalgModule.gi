@@ -1697,7 +1697,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( rel, M );
     
     return M;
     
@@ -1751,7 +1751,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( rel, M );
     
     return M;
     
@@ -1803,7 +1803,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( rel, M );
     
     return M;
     
@@ -1857,7 +1857,7 @@ InstallMethod( Presentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( rel, M );
     
     return M;
     
@@ -1910,7 +1910,7 @@ InstallMethod( LeftPresentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( RelationsOfModule( M ), M );
     
     return M;
     
@@ -1951,7 +1951,7 @@ InstallMethod( LeftPresentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( RelationsOfModule( M ), M );
     
     return M;
     
@@ -2048,7 +2048,7 @@ InstallMethod( RightPresentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( RelationsOfModule( M ), M );
     
     return M;
     
@@ -2089,7 +2089,7 @@ InstallMethod( RightPresentation,
     fi;
     
 #    SetParent( gens, M );
-    SetParent( rels, M );
+    SetParent( RelationsOfModule( M ), M );
     
     return M;
     

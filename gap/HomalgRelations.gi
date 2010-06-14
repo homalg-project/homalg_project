@@ -67,6 +67,36 @@ BindGlobal( "TheTypeHomalgRelationsOfRightModule",
 #
 ####################################
 
+## a non trivial set of relations for a single generator over a domain => IsTorsion
+InstallImmediateMethod( IsTorsion,
+        IsHomalgRelations and HasEvaluatedMatrixOfRelations, 0,
+        
+  function( rel )
+    local torsion, R;
+    
+    if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 and
+       HasIsZero( MatrixOfRelations( rel ) ) then
+        
+        R := HomalgRing( rel );
+        
+        if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+            
+            torsion := not IsZero( MatrixOfRelations( rel ) );
+            
+            ## this is the true reason for this immediate method
+            if HasParent( rel ) then
+                SetIsTorsion( Parent( rel ), torsion );
+            fi;
+            
+            return torsion;
+            
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ## strictly less relations than generators => not IsTorsion
 InstallImmediateMethod( IsTorsion,
         IsHomalgRelations and HasEvaluatedMatrixOfRelations, 0,

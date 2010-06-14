@@ -201,7 +201,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     if HasIsZero( M ) and HasIsZero( N ) then
         if IsZero( M ) and IsZero( N ) then
             SetIsZero( sum, true );
-        else	## the contra position is also true: trivial since we do not allow virtual modules
+        else	## the converse is also true: trivial since we do not allow virtual modules
             SetIsZero( sum, false );
         fi;
     fi;
@@ -226,8 +226,26 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     if HasIsArtinian( M ) and HasIsArtinian( N ) then
         if IsArtinian( M ) and IsArtinian( N ) then
             SetIsArtinian( sum, true );
-        else	## the contra position is also true: trivial
+        else	## the converse is also true: trivial
             SetIsArtinian( sum, false );
+        fi;
+    fi;
+    
+    ## IsTorsion (in the sense that the evaluation map is zero)
+    if HasIsTorsion( M ) and HasIsTorsion( N ) then
+        if IsTorsion( M ) and IsTorsion( N ) then
+            SetIsTorsion( sum, true );
+        else	## the converse is also true: Hom(-,R) commutes with finite direct sums
+            SetIsTorsion( sum, false );
+        fi;
+    fi;
+    
+    ## IsTorsionFree (in the sense of torionless, i.e. the kernel of the evaluation map is trivial)!!!
+    if HasIsTorsionFree( M ) and HasIsTorsionFree( N ) then
+        if IsTorsionFree( M ) and IsTorsionFree( N ) then
+            SetIsTorsionFree( sum, true );
+        else	## the converse is also true: Hom(-,R) commutes with finite direct sums
+            SetIsTorsionFree( sum, false );
         fi;
     fi;
     
@@ -235,6 +253,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     if HasIsReflexive( M ) and HasIsReflexive( N ) then
         if IsReflexive( M ) and IsReflexive( N ) then
             SetIsReflexive( sum, true );
+        else	## the converse is also true: Hom(-,R) commutes with finite direct sums
+            SetIsReflexive( sum, false );
         fi;
     fi;
     
@@ -242,7 +262,10 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     if HasIsProjective( M ) and HasIsProjective( N ) then
         if IsProjective( M ) and IsProjective( N ) then
             SetIsProjective( sum, true );
-        else	## the contra position is also true: a projective module is a direct summand of a free
+        else	## the converse is also true:
+                ## an argumentation valid for modules:
+                ## a direct summand of a projective module is projective
+                ## (sinse a projective module is a direct summand of a free)
             SetIsProjective( sum, false );
         fi;
     fi;
