@@ -21,7 +21,9 @@
 <Section Label="RingMaps:Operations and Functions">
 <Heading>Ring Maps: Operations and Functions</Heading>
 
-<#Include Label="SegreEmbedding">
+<#Include Label="SegreMap">
+<#Include Label="PlueckerMap">
+<#Include Label="VeroneseMap">
 
 </Section>
 

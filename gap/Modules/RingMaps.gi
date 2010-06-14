@@ -19,7 +19,7 @@
 ##    <Meth Arg="phi" Name="KernelSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
-##      The kernel ideal of the ring map <A>phi</A> (as a submodule).
+##      The kernel ideal of the ring map <A>phi</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -66,18 +66,19 @@ end );
 #
 ####################################
 
-##  <#GAPDoc Label="SegreEmbedding">
+##  <#GAPDoc Label="SegreMap">
 ##  <ManSection>
-##    <Meth Arg="R" Name="SegreEmbedding"/>
+##    <Meth Arg="R,s" Name="SegreMap"/>
 ##    <Returns>a &homalg; ring map</Returns>
 ##    <Description>
-##      The Segre embedding.
+##      The ring map corresponding to the Segre embedding of <M>MultiProj(<A>R</A>)</M> into the projective space according to
+##      <M>P(W_1)\times P(W_2) \to P(W_1\otimes W_2)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( SegreEmbedding,
-        "for homalg ring maps",
+InstallMethod( SegreMap,
+        "for homalg rings",
         [ IsHomalgRing, IsString ],
         
   function( R, s )
@@ -103,11 +104,99 @@ InstallMethod( SegreEmbedding,
     
     segre := RingMap( segre, S, R );
     
-    SetIsEpimorphism( segre, true );
+    SetIsMorphism( segre, true );
     
     SetDegreeOfMorphism( segre, 0 );
     
     return segre;
+    
+end );
+
+##  <#GAPDoc Label="PlueckerMap">
+##  <ManSection>
+##    <Meth Arg="l,n,A,s" Name="PlueckerMap"/>
+##    <Returns>a &homalg; ring map</Returns>
+##    <Description>
+##      The ring map corresponding to the Plücker embedding of the Grassmannian <M>G_l(P^{<A>n</A>}(<A>A</A>))=G_l(P(W))</M>
+##      into the projective space <M>P(\bigwedge^l W)</M>, where <M>W=V^*</M> is the <M><A>A</A></M>-dual of the free module
+##      <M>V=A^{<A>n</A>+1}</M> of rank <M><A>n</A>+1</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( PlueckerMap,
+        "for homalg rings",
+        [ IsPosInt, IsPosInt, IsHomalgRing, IsString ],
+        
+  function( l, n, A, s )
+    local var, R, mat, choose, S, pluecker;
+    
+    if l > n then
+        Error( "the first argument must be less or equal to the second one\n" );
+    fi;
+    
+    var := List( [ 0 .. n ], i -> List( [ 1 .. l ], j -> Concatenation( "x", String( j ), "_", String( i ) ) ) );
+    
+    var := Concatenation( var );
+    
+    R := PolynomialRing( A, var );
+    
+    mat := JoinStringsWithSeparator( var );
+    
+    mat := HomalgMatrix( mat, n+1, l, R );
+    
+    choose := Combinations( [ 1 .. n + 1 ], l );
+    
+    S := PolynomialRing( A, Concatenation( s, String( 0 ), "..", s, String( Length( choose ) - 1 ) ) );
+    
+    pluecker := List( choose, rows -> Determinant( CertainRows( mat, rows ) ) );
+    
+    pluecker := RingMap( pluecker, S, R );
+    
+    SetIsMorphism( pluecker, true );
+    
+    SetDegreeOfMorphism( pluecker, 0 );
+    
+    return pluecker;
+    
+end );
+
+##  <#GAPDoc Label="VeroneseMap">
+##  <ManSection>
+##    <Meth Arg="n,d,A,s" Name="VeroneseMap"/>
+##    <Returns>a &homalg; ring map</Returns>
+##    <Description>
+##      The ring map corresponding to the Veronese embedding of the projective space <M>P^{<A>n</A>}(<A>A</A>)=P(W)</M>
+##      into the projective space <M>P(S^d W)</M>, where <M>W=V^*</M> is the <M><A>A</A></M>-dual of the free module
+##      <M>V=A^{<A>n</A>+1}</M> of rank <M><A>n</A>+1</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( VeroneseMap,
+        "for homalg rings",
+        [ IsPosInt, IsPosInt, IsHomalgRing, IsString ],
+        
+  function( n, d, A, s )
+    local var, R, veronese, S;
+    
+    var := List( [ 0 .. n ], i -> Concatenation( "x", String( i ) ) );
+    
+    R := PolynomialRing( A, var );
+    
+    veronese := MonomialMatrix( d, R );
+    
+    S := PolynomialRing( A, Concatenation( s, String( 0 ), "..", s, String( NrRows( veronese ) - 1 ) ) );
+    
+    veronese := EntriesOfHomalgMatrix( veronese );
+    
+    veronese := RingMap( veronese, S, R );
+    
+    SetIsMorphism( veronese, true );
+    
+    SetDegreeOfMorphism( veronese, 0 );
+    
+    return veronese;
     
 end );
 

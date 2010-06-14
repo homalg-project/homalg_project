@@ -16,6 +16,12 @@
 
 # basic operations:
 
-DeclareOperation( "SegreEmbedding",
+DeclareOperation( "SegreMap",
         [ IsHomalgRing, IsString ] );
+
+DeclareOperation( "PlueckerMap",
+        [ IsInt, IsInt, IsHomalgRing, IsString ] );
+
+DeclareOperation( "VeroneseMap",
+        [ IsInt, IsInt, IsHomalgRing, IsString ] );
 

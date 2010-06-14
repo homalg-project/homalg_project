@@ -1,6 +1,8 @@
 LoadPackage( "Sheaves" );
 
-R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b";
+Q := HomalgFieldOfRationalsInDefaultCAS( );
+
+R := Q * "a,b";
 
 P1 := Proj( R );
 
