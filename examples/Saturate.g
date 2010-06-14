@@ -9,7 +9,7 @@
 ##  gap> J := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
 ##  <A graded torsion-free (left) ideal given by 6 generators>
 ##  gap> Jm := SubmoduleQuotient( J, m );
-##  <A graded torsion-free (left) ideal given by 3 generators>
+##  <A graded torsion-free rank 1 (left) ideal given by 3 generators>
 ##  gap> J_m := Saturate( J, m );
 ##  <A graded principal torsion-free (left) ideal given by a cyclic generator>
 ##  gap> Js := Saturate( J );

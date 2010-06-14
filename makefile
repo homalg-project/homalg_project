@@ -17,7 +17,7 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/ExamplesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ExamplesForHomalg/doc/*.* ExamplesForHomalg/doc/clean ExamplesForHomalg/gap/*.{gi,gd} ExamplesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} ExamplesForHomalg/examples/*.g)
 
-WEBPOS=~/gap/pkg/ExamplesForHomalg/public_html
+WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/ExamplesForHomalg
 
 towww: archive
