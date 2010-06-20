@@ -51,7 +51,7 @@ ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 ReadPackage( "homalg", "gap/HomalgDiagram.gd" );
 
 ## main
-ReadPackage( "homalg", "gap/Modules.gd" );
+ReadPackage( "homalg", "gap/StaticObjects.gd" );
 
 ReadPackage( "homalg", "gap/Maps.gd" );
 
@@ -67,6 +67,7 @@ ReadPackage( "homalg", "gap/ToolFunctors.gd" );
 ReadPackage( "homalg", "gap/BasicFunctors.gd" );
 ReadPackage( "homalg", "gap/OtherFunctors.gd" );
 
+ReadPackage( "homalg", "gap/Modules/Modules.gd" );
 ReadPackage( "homalg", "gap/Modules/HomalgComplex.gd" );
 ReadPackage( "homalg", "gap/Modules/ToolFunctors.gd" );
 ReadPackage( "homalg", "gap/Modules/BasicFunctors.gd" );
