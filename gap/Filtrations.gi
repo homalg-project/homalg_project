@@ -249,7 +249,7 @@ InstallMethod( PurityFiltration,
     SetIsIsomorphism( iso, true );
     
     ## transfer the known properties/attributes in both directions
-    UpdateModulesByMap( iso );
+    UpdateObjectsByMorphism( iso );
     
     ## enrich the filtration
     filt!.Isomorphism := iso;

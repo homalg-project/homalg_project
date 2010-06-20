@@ -516,7 +516,7 @@ InstallMethod( IsomorphismOfFiltration,
     triangular := HomalgMap( transition, triangular, M );
     
     if IsBound( filt!.Isomorphism ) then
-        UpdateModulesByMap( filt!.Isomorphism );	## this was invoked once before, but maybe more is known by now
+        UpdateObjectsByMorphism( filt!.Isomorphism );	## this was invoked once before, but maybe more is known by now
         triangular := PreCompose( triangular, filt!.Isomorphism );
     fi;
     

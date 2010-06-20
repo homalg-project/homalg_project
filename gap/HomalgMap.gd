@@ -364,6 +364,6 @@ DeclareOperation( "CompleteImageSquare",
 DeclareOperation( "CompleteKernelSquare",
         [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
 
-DeclareOperation( "UpdateModulesByMap",
+DeclareOperation( "UpdateObjectsByMorphism",
         [ IsHomalgMap ] );
 

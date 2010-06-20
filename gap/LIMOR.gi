@@ -574,8 +574,8 @@ InstallMethod( IsIsomorphism,
     iso := IsEpimorphism( phi ) and IsMonomorphism( phi );
     
     if iso then
-        SetIsIsomorphism( phi, true );	## needed for UpdateModulesByMap
-        UpdateModulesByMap( phi );
+        SetIsIsomorphism( phi, true );	## needed for UpdateObjectsByMorphism
+        UpdateObjectsByMorphism( phi );
     fi;
     
     return iso;

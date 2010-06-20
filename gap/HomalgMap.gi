@@ -807,7 +807,7 @@ InstallMethod( PreInverse,
     elif IsIsomorphism( phi ) then
         
         ## only in case the standard method for IsIsomorphism wasn't triggered:
-        UpdateModulesByMap( phi );
+        UpdateObjectsByMorphism( phi );
         
         phi!.PreInverse := phi ^ -1;
         
@@ -1660,7 +1660,7 @@ InstallMethod( ShallowCopy,
 end );
 
 ##
-InstallMethod( UpdateModulesByMap,
+InstallMethod( UpdateObjectsByMorphism,
         "for homalg maps",
         [ IsHomalgMap ],
         
@@ -1671,7 +1671,7 @@ InstallMethod( UpdateModulesByMap,
 end );
 
 ##
-InstallMethod( UpdateModulesByMap,
+InstallMethod( UpdateObjectsByMorphism,
         "for homalg maps",
         [ IsHomalgMap and IsIsomorphism ],
         
@@ -1704,7 +1704,7 @@ InstallMethod( AnIsomorphism,
     SetIsIsomorphism( iso, true );
     
     ## copy the known properties and attributes of im to def
-    UpdateModulesByMap( iso );
+    UpdateObjectsByMorphism( iso );
     
     return iso;
     
