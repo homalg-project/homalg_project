@@ -600,6 +600,54 @@ InstallMethod( PreCompose,
     
 end );
 
+##
+InstallMethod( Preimage,
+        "for a matrix and a homalg map",
+        [ IsHomalgMatrix, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( m, phi )
+    local M, rel, mat;
+    
+    M := Range( phi );
+    
+    rel := MatrixOfRelations( M );
+    
+    mat := MatrixOfMap( phi );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+        return RightDivide( m, mat, rel );
+    else
+        return LeftDivide( m, mat, rel );
+    fi;
+    
+end );
+
+##
+InstallMethod( SuccessivePreimages,
+        "for a matrix and a homalg selfmap",
+        [ IsHomalgMatrix, IsHomalgSelfMap and IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( m, phi )
+    local preimages, pre, n;
+    
+    preimages := [ m ];
+    
+    pre := Preimage( m, phi );
+    
+    while IsHomalgMatrix( pre ) do
+        
+        Add( preimages, pre );
+        
+        n := Length( preimages );
+        
+        pre := Preimage( preimages[n], phi );
+        
+    od;
+    
+    return preimages;
+    
+end );
+
 ##  <#GAPDoc Label="PreInverse:map">
 ##  <ManSection>
 ##    <Oper Arg="phi" Name="PreInverse" Label="for maps"/>

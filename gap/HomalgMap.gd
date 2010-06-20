@@ -346,6 +346,12 @@ DeclareOperation( "ReducedSyzygiesGenerators",
 DeclareOperation( "PreCompose",
         [ IsHomalgMap, IsHomalgMap ] );
 
+DeclareOperation( "Preimage",
+        [ IsHomalgMatrix, IsHomalgMap ] );
+
+DeclareOperation( "SuccessivePreimages",
+        [ IsHomalgMatrix, IsHomalgSelfMap ] );
+
 DeclareOperation( "PreInverse",
         [ IsHomalgMap ] );
 
