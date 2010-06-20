@@ -101,6 +101,9 @@ DeclareOperation( "ShortenResolution",
 DeclareOperation( "FiniteFreeResolution",
         [ IsHomalgModule ] );
 
+DeclareOperation( "PushPresentationByIsomorphism",
+        [ IsHomalgMap ] );
+
 DeclareOperation( "AsEpimorphicImage",
         [ IsHomalgMap ] );
 

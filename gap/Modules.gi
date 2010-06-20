@@ -134,6 +134,11 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     # keep track of the original generators:
     gen := N * GeneratorsOfModule( M );
     
+    # set properties and attributes
+    if HasRankOfModule( M ) and RankOfModule( M ) = 0 then
+        SetRankOfModule( SF, 0 );
+    fi;
+    
     return AddANewPresentation( SF, gen );
     
 end );
@@ -1016,21 +1021,35 @@ InstallMethod( AsEpimorphicImage,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local M, rel, pos, TI, iso, T;
+    local pos, iso;
     
     if not ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) and
        not IsZero( Cokernel( phi ) ) then	## I do not require phi to be a morphism, that's why I don't use IsEpimorphism
         Error( "the first argument must be an epimorphism\n" );
     fi;
     
-    M := Range( phi );
+    iso := ImageObjectEmb( phi );
     
-    rel := RelationsOfModule( M );
+    IsIsomorphism( iso );
+    
+    return PushPresentationByIsomorphism( iso );
+    
+end );
+
+##
+InstallMethod( PushPresentationByIsomorphism,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep and IsIsomorphism ],
+        
+  function( phi )
+    local M, iso, pos, TI, T;
+    
+    M := Range( phi );
     
     ## copying phi is important for the lazy evaluation below
     ## otherwise phi will be part of the transition matrix data
     ## of M, which might be needed to compute phi!
-    iso := ImageObjectEmb( ShallowCopy( phi ) );
+    iso := ShallowCopy( phi );
     
     pos := PairOfPositionsOfTheDefaultSetOfRelations( iso );
     
