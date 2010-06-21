@@ -33,6 +33,22 @@ DeclareRepresentation( "IsFinitelyPresentedObjectRep",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="IsStaticFinitelyPresentedObjectOrSubobjectRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="M" Name="IsStaticFinitelyPresentedObjectOrSubobjectRep"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; representation of finitley presented &homalg; static objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsStaticFinitelyPresentedObjectOrSubobjectRep",
+        IsHomalgStaticObject,
+        [ ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="IsStaticFinitelyPresentedObjectRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="M" Name="IsStaticFinitelyPresentedObjectRep"/>
@@ -41,10 +57,11 @@ DeclareRepresentation( "IsFinitelyPresentedObjectRep",
 ##      The &GAP; representation of finitley presented &homalg; static objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>,
 ##       which is a subrepresentation of the &GAP; representations
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##       <C>IsStaticFinitelyPresentedObjectOrSubobjectRep</C> and
+##       <C>IsFinitelyPresentedObjectRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
-        IsHomalgStaticObject and
+        IsStaticFinitelyPresentedObjectOrSubobjectRep and
         IsFinitelyPresentedObjectRep,
         [ ] );
 ##  ]]></Listing>
@@ -60,10 +77,11 @@ DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
 ##      The &GAP; representation of finitley presented &homalg; subobjects of static objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>,
 ##       which is a subrepresentation of the &GAP; representations
-##      <C>IsFinitelyPresentedObjectRep</C>.)
+##       <C>IsStaticFinitelyPresentedObjectOrSubobjectRep</C> and
+##       <C>IsFinitelyPresentedObjectRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsStaticFinitelyPresentedSubobjectRep",
-        IsHomalgStaticObject and
+        IsStaticFinitelyPresentedObjectOrSubobjectRep and
         IsFinitelyPresentedObjectRep,
         [ ] );
 ##  ]]></Listing>

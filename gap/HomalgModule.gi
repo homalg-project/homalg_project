@@ -41,15 +41,19 @@
 ##    <Filt Type="Representation" Arg="M" Name="IsFinitelyPresentedModuleOrSubmoduleRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of finitley presented &homalg; modules. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>.)
+##      The &GAP; representation of finitley presented &homalg; modules or submodules. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
+##       which is a subrepresentation of the &GAP; representations
+##      <C>IsStaticFinitelyPresentedObjectOrSubobjectRep</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
+        IsHomalgModule and
+        IsStaticFinitelyPresentedObjectOrSubobjectRep,
+        [ ] );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
-        IsHomalgModule,
-        [ ] );
 
 ##  <#GAPDoc Label="IsFinitelyPresentedModuleRep">
 ##  <ManSection>
@@ -61,10 +65,7 @@ DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
 ##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
 ##      <C>IsStaticFinitelyPresentedObjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
         IsStaticFinitelyPresentedObjectRep and
@@ -72,6 +73,10 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         [ "SetsOfGenerators", "SetsOfRelations",
           "TransitionMatrices",
           "PositionOfTheDefaultSetOfRelations" ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="IsFinitelyPresentedSubmoduleRep">
 ##  <ManSection>
@@ -80,17 +85,19 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
 ##    <Description>
 ##      The &GAP; representation of finitley generated &homalg; submodules. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgModule"/>,
+##       which is a subrepresentation of the &GAP; representations
 ##      <C>IsFinitelyPresentedModuleOrSubmoduleRep</C>,
 ##      <C>IsStaticFinitelyPresentedSubobjectRep</C>, and <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
         IsFinitelyPresentedModuleOrSubmoduleRep and
         IsStaticFinitelyPresentedSubobjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "map_having_subobject_as_its_image" ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #

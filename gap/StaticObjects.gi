@@ -16,8 +16,8 @@
 
 ##
 InstallMethod( \/,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
     local M, mapK, mapJ, phi, im, iso, def, emb;
@@ -35,8 +35,8 @@ InstallMethod( \/,
     
     im := ImageObject( phi );
     
-    ## recall that im was created as a submodule of
-    ## Cokernel( mapJ ) which in turn is a factor module of M,
+    ## recall that im was created as a subobject of
+    ## Cokernel( mapJ ) which in turn is a factor object of M,
     ## but since we need to view im as a subfactor of M
     ## we will construct an isomorphism iso onto im
     iso := AnIsomorphism( im );
@@ -63,8 +63,8 @@ end );
 
 ##
 InstallMethod( \/,
-        "for homalg submodules",
-        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedSubmoduleRep ],
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( M, N )	## M must be either the super object of N or 1 * R or R * 1
     local R;
@@ -85,8 +85,8 @@ end );
 
 ##
 InstallMethod( \/,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep and HasUnderlyingSubobject ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedObjectRep and HasUnderlyingSubobject ],
         
   function( M, N )	## M must be either the super object of N or 1 * R or R * 1
     
@@ -96,8 +96,8 @@ end );
 
 ##
 InstallMethod( Resolution,
-        "for homalg submodules",
-        [ IsInt, IsFinitelyPresentedSubmoduleRep ],
+        "for homalg subobjects of static objects",
+        [ IsInt, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( q, N )
     
@@ -107,8 +107,8 @@ end );
 
 ##
 InstallMethod( Resolution,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectOrSubobjectRep ],
         
   function( M )
     
@@ -118,8 +118,8 @@ end );
 
 ##
 InstallMethod( LengthOfResolution,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectOrSubobjectRep ],
         
   function( M )
     local d;
@@ -136,8 +136,8 @@ end );
 
 ##
 InstallMethod( PresentationMap,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectOrSubobjectRep ],
         
   function( M )
     local d;
@@ -150,8 +150,8 @@ end );
 
 ##
 InstallMethod( SyzygiesObjectEmb,
-        "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsInt, IsStaticFinitelyPresentedObjectRep ],
         
   function( q, M )
     local d;
@@ -173,8 +173,8 @@ end );
 
 ##
 InstallMethod( SyzygiesObjectEmb,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
@@ -184,8 +184,8 @@ end );
 
 ##
 InstallMethod( SyzygiesObject,
-        "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsInt, IsStaticFinitelyPresentedObjectRep ],
         
   function( q, M )
     local d;
@@ -202,8 +202,8 @@ end );
 
 ##
 InstallMethod( SyzygiesObject,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
@@ -213,8 +213,8 @@ end );
 
 ##
 InstallMethod( FreeHullEpi,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
@@ -223,8 +223,8 @@ InstallMethod( FreeHullEpi,
 end );
 
 InstallMethod( FreeHullEpi,
-        "for homalg modules",
-        [ IsFinitelyPresentedSubmoduleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep ],
         
   function( M )
     
@@ -234,8 +234,8 @@ end );
 
 ##
 InstallMethod( FreeHullModule,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
@@ -245,8 +245,8 @@ end );
 
 ##
 InstallMethod( SubResolution,
-        "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        "for homalg static objects",
+        [ IsInt, IsStaticFinitelyPresentedObjectRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( q, M )
     local d, dq1, res;
@@ -286,8 +286,8 @@ end );
 
 ##
 InstallMethod( SubResolution,
-        "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        "for homalg static objects",
+        [ IsInt, IsStaticFinitelyPresentedObjectRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( q, M )
     local d, dq1, res;
@@ -445,8 +445,8 @@ end );
 
 ##
 InstallMethod( ShortenResolution,
-        "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsInt, IsStaticFinitelyPresentedObjectRep ],
         
   function( q, M )
     local d, l;
@@ -473,8 +473,8 @@ end );
 
 ##
 InstallMethod( ShortenResolution,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
@@ -484,8 +484,8 @@ end );
 
 ##
 InstallMethod( AsEpimorphicImage,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        "for morphisms of static homalg objects",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local pos, iso;
@@ -510,11 +510,11 @@ InstallGlobalFunction( Intersect,
     
     nargs := Length( arg );
     
-    if nargs = 1 and IsFinitelyPresentedSubmoduleRep( arg[1] ) then
+    if nargs = 1 and IsStaticFinitelyPresentedSubobjectRep( arg[1] ) then
         return arg[1];
-    elif nargs = 1 and IsList( arg[1] ) and arg[1] <> [ ] and ForAll( arg[1], IsFinitelyPresentedSubmoduleRep ) then
+    elif nargs = 1 and IsList( arg[1] ) and arg[1] <> [ ] and ForAll( arg[1], IsStaticFinitelyPresentedSubobjectRep ) then
         return Iterated( arg[1], Intersect2 );
-    elif nargs > 1 and ForAll( arg, IsFinitelyPresentedSubmoduleRep ) then
+    elif nargs > 1 and ForAll( arg, IsStaticFinitelyPresentedSubobjectRep ) then
         return Iterated( arg, Intersect2 );
     fi;
     
@@ -542,7 +542,7 @@ InstallMethod( IntersectWithMultiplicity,
   function( ideals, mults )
     local s, left, intersection;
     
-    if not ForAll( ideals, p -> IsFinitelyPresentedSubmoduleRep( p ) and HasConstructedAsAnIdeal( p ) and ConstructedAsAnIdeal( p ) ) then
+    if not ForAll( ideals, p -> IsStaticFinitelyPresentedSubobjectRep( p ) and HasConstructedAsAnIdeal( p ) and ConstructedAsAnIdeal( p ) ) then
         Error( "the first argument is not a list of ideals\n" );
     fi;
     
@@ -574,8 +574,8 @@ end );
 
 ##
 InstallMethod( \+,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
     local M, mapK, mapJ, sum;
@@ -601,8 +601,8 @@ end );
 
 ##
 InstallMethod( EmbeddingsInCoproductObject,
-        "for homalg modules",
-        [ IsHomalgModule, IsList ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsList ],
         
   function( coproduct, degrees )
     local l, embeddings, emb_summand, summand, i;
@@ -649,8 +649,8 @@ end );
 
 ##
 InstallMethod( ProjectionsFromProductObject,
-        "for homalg modules",
-        [ IsHomalgModule, IsList ],
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsList ],
         
   function( product, degrees )
     local l, projections, prj_factor, factor, i;
@@ -706,8 +706,8 @@ end );
 ##    <P/>
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Saturate,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
     local quotient_last, quotient;
@@ -727,8 +727,8 @@ end );
 
 ##
 InstallMethod( \-,	## a geometrically motivated definition
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
     
