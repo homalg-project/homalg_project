@@ -233,7 +233,7 @@ InstallMethod( FreeHullEpi,
 end );
 
 ##
-InstallMethod( FreeHullModule,
+InstallMethod( HullObjectInResolution,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
@@ -255,7 +255,7 @@ InstallMethod( SubResolution,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         dq1 := PresentationMap( M );
-        res := AsATwoSequence( dq1, TheMorphismToZero( FreeHullModule( M ) ) );
+        res := AsATwoSequence( dq1, TheMorphismToZero( HullObjectInResolution( M ) ) );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
             SetIsRightAcyclic( res, true );
         else
@@ -296,7 +296,7 @@ InstallMethod( SubResolution,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         dq1 := PresentationMap( M );
-        res := AsATwoSequence( TheMorphismToZero( FreeHullModule( M ) ), dq1 );
+        res := AsATwoSequence( TheMorphismToZero( HullObjectInResolution( M ) ), dq1 );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
             SetIsRightAcyclic( res, true );
         else

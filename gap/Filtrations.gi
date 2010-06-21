@@ -237,7 +237,7 @@ InstallMethod( PurityFiltration,
     iso := PreCompose( iso, I_E!.NaturalGeneralizedEmbeddings.(String( [ 0, 0 ])) );
     
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M )
-    iso := iso / NatTrIdToHomHom_R( FreeHullModule( M ) );	## lift
+    iso := iso / NatTrIdToHomHom_R( HullObjectInResolution( M ) );	## lift
     
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M ) -> M
     ## finally giving the isomorphism

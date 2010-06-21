@@ -52,7 +52,7 @@ DeclareOperation( "SyzygiesObjectEpi",
 DeclareOperation( "SyzygiesObjectEpi",
         [ IsHomalgStaticObject ] );
 
-DeclareOperation( "FreeHullModule",
+DeclareOperation( "HullObjectInResolution",
         [ IsHomalgStaticObject ] );
 
 DeclareOperation( "FreeHullEpi",
