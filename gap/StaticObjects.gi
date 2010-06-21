@@ -69,11 +69,9 @@ InstallMethod( \/,
   function( M, N )	## M must be either the super object of N or 1 * R or R * 1
     local R;
     
-    R := HomalgRing( M );
+    CheckIfTheyLieInTheSameCategory( M, N );
     
-    if not IsIdenticalObj( HomalgRing( N ), R ) then
-        Error( "the ring of the module and the ring of the submodule are not identical\n" );
-    fi;
+    R := HomalgRing( M );
     
     if not ( IsIdenticalObj( M, SuperObject( N ) ) or IsIdenticalObj( M, 1 * R ) or IsIdenticalObj( M, R * 1 ) ) then
         TryNextMethod( );

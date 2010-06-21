@@ -150,6 +150,8 @@ InstallValue( HOMALG,
             
             MaximumNumberOfResolutionSteps := 1001,
             
+            AssertionLevel_CheckIfTheyLieInTheSameCategory := 0,
+            
            )
 );
 

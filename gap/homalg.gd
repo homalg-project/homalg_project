@@ -62,6 +62,21 @@ DeclareCategory( "IsHomalgObject",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="IsHomalgStaticObjectOrMorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticObjectOrMorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <Ref Filt="IsHomalgStaticObject"/> and <Ref Filt="IsHomalgStaticMorphism"/>.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgStaticObjectOrMorphism",
+        IsHomalgObjectOrMorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="IsHomalgStaticObject">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticObject"/>
@@ -71,6 +86,7 @@ DeclareCategory( "IsHomalgObject",
 ##      <C>IsHomalgModule</C>, etc.
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgStaticObject",
+        IsHomalgStaticObjectOrMorphism and
         IsHomalgObject );
 ##  ]]></Listing>
 ##    </Description>
@@ -92,7 +108,7 @@ DeclareCategory( "IsHomalgStaticObject",
 ##      be multiplicative elements!!
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgMorphism",
-        IsHomalgObjectOrMorphism and
+        IsHomalgStaticObjectOrMorphism and
         IsAdditiveElementWithInverse );
 ##  ]]></Listing>
 ##    </Description>
@@ -256,4 +272,7 @@ DeclareOperation( "OnLessGenerators",
 
 DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "CheckIfTheyLieInTheSameCategory",
+        [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );
 

@@ -114,26 +114,17 @@ Functor_TorsionFreeFactor!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
   function( M, N )
-    local R, matM, matN, sum, idM, idN, degMN, F, zeroMN, zeroNM,
+    local matM, matN, sum, R, idM, idN, degMN, F, zeroMN, zeroNM,
           iotaM, iotaN, piM, piN;
     
-    R := HomalgRing( M );
-    
-    if not IsIdenticalObj( R, HomalgRing( N ) ) then
-        Error( "the rings of the source and target modules are not identical\n" );
-    fi;
-    
-    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) )
-       and not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
-        Error( "the two modules must either be both left or both right modules\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
+    CheckIfTheyLieInTheSameCategory( M, N );
     
     matM := MatrixOfRelations( M );
     matN := MatrixOfRelations( N );
     
     sum := DiagMat( [ matM, matN ] );
+    
+    R := HomalgRing( M );
     
     idM := HomalgIdentityMatrix( NrGenerators( M ), R );
     idN := HomalgIdentityMatrix( NrGenerators( N ), R );
@@ -290,26 +281,17 @@ end );
 
 InstallGlobalFunction( _Functor_DirectSum_OnMorphisms,	### defines: DirectSum (morphism part)
   function( M_or_mor, N_or_mor )
-    local phi, L, R, idL;
+    local R, phi, L, idL;
+    
+    CheckIfTheyLieInTheSameCategory( M_or_mor, N_or_mor );
     
     R := HomalgRing( M_or_mor );
-    
-    if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
-        Error( "the module and the morphism are not defined over identically the same ring\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
     
     if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
        and IsFinitelyPresentedModuleRep( N_or_mor ) then
         
         phi := M_or_mor;
         L := N_or_mor;
-        
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
-           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
-            Error( "the morphism and the module must either be both left or both right\n" );
-        fi;
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
@@ -320,11 +302,6 @@ InstallGlobalFunction( _Functor_DirectSum_OnMorphisms,	### defines: DirectSum (m
         
         phi := N_or_mor;
         L := M_or_mor;
-        
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) )
-           and not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
-            Error( "the morphism and the module must either be both left or both right\n" );
-        fi;
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         

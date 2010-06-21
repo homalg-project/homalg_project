@@ -1751,11 +1751,9 @@ InstallMethod( Depth,
         return infinity;
     fi;
     
-    R := HomalgRing( N );
+    CheckIfTheyLieInTheSameCategory( M, N );
     
-    if not IsIdenticalObj( HomalgRing( M ), R ) then
-        Error( "the rings of the two modules are not identical\n" );
-    fi;
+    R := HomalgRing( N );
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( N );
     

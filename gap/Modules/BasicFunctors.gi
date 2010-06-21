@@ -211,25 +211,14 @@ functor_ImageObject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
   function( M, N )
-    local R, s, t, matM, matN, P1, l0, l1, _l0, HP0N, HP1N,
+    local s, t, matM, matN, P1, l0, l1, _l0, R, HP0N, HP1N,
           degM, degN, degP1, degHP0N, degHP1N, r, c, idN, alpha, hom, gen,
           proc_to_readjust_generators, proc_to_normalize_generators, p;
     
-    R := HomalgRing( M );
-    
-    if not IsIdenticalObj( R, HomalgRing( N ) ) then
-        Error( "the rings of the source and target modules are not identical\n" );
-    fi;
-    
-    if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) ) and
-       not ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) then
-        Error( "the two modules must either be both left or both right modules\n" );
-    fi;
+    CheckIfTheyLieInTheSameCategory( M, N );
     
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
-    
-    #=====# begin of the core procedure #=====#
     
     matM := PresentationMap( M );
     matN := PresentationMap( N );
@@ -243,6 +232,8 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
     
     matM := MatrixOfMap( matM );
     matN := MatrixOfMap( matN );
+    
+    R := HomalgRing( M );
     
     if l0 = 0 then
         HP0N := HomalgZeroMatrix( 0, 0, R );
@@ -411,26 +402,17 @@ end );
 ##
 InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
   function( M_or_mor, N_or_mor )
-    local phi, L, R, idL;
+    local R, phi, L, idL;
+    
+    CheckIfTheyLieInTheSameCategory( M_or_mor, N_or_mor );
     
     R := HomalgRing( M_or_mor );
-    
-    if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
-        Error( "the module and the morphism are not defined over identically the same ring\n" );
-    fi;
-    
-    #=====# begin of the core procedure #=====#
     
     if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
        and IsFinitelyPresentedModuleRep( N_or_mor ) then
         
         phi := M_or_mor;
         L := N_or_mor;
-        
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
-           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
-            Error( "the morphism and the module must either be both left or both right\n" );
-        fi;
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
@@ -441,11 +423,6 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
         
         phi := N_or_mor;
         L := M_or_mor;
-        
-        if not ( IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( L ) ) and
-           not ( IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( L ) ) then
-            Error( "the morphism and the module must either be both left or both right\n" );
-        fi;
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
@@ -580,6 +557,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
     
     R := HomalgRing( M );
     
+    ## do not use CheckIfTheyLieInTheSameCategory here
     if not IsIdenticalObj( R, HomalgRing( N ) ) then
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
@@ -597,8 +575,6 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
             rl := [ false, false ];
         fi;
     fi;
-    
-    #=====# begin of the core procedure #=====#
     
     l0 := NrGenerators( M );
     _l0 := NrGenerators( N );
@@ -660,6 +636,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
     
     R := HomalgRing( M_or_mor );
     
+    ## do not use CheckIfTheyLieInTheSameCategory here
     if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
         Error( "the module and the morphism are not defined over identically the same ring\n" );
     fi;
@@ -677,8 +654,6 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
             rl := [ false, false ];
         fi;
     fi;
-    
-    #=====# begin of the core procedure #=====#
     
     if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
        and IsFinitelyPresentedModuleRep( N_or_mor ) then

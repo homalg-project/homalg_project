@@ -14,7 +14,23 @@
 #
 ####################################
 
-# a new GAP-category:
+# two new GAP-categories:
+
+##  <#GAPDoc Label="IsHomalgModuleOrMap">
+##  <ManSection>
+##    <Filt Type="Category" Arg="M" Name="IsHomalgModuleOrMap"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; category of &homalg; modules or maps. <P/>
+##      (It is a subcategory of the &GAP; categories
+##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgStaticObject</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgModuleOrMap",
+        IsHomalgStaticObjectOrMorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="IsHomalgModule">
 ##  <ManSection>
@@ -24,12 +40,15 @@
 ##      The &GAP; category of &homalg; modules. <P/>
 ##      (It is a subcategory of the &GAP; categories
 ##      <C>IsHomalgRingOrModule</C> and <C>IsHomalgStaticObject</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgModule",
+        IsHomalgRingOrModule and
+        IsHomalgModuleOrMap and
+        IsHomalgStaticObject );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgModule",
-        IsHomalgRingOrModule and IsHomalgStaticObject );
 
 ####################################
 #

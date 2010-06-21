@@ -22,13 +22,16 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; maps. <P/>
-##      (It is a subcategory of the &GAP; category <C>IsHomalgStaticMorphism</C>.)
+##      (It is a subcategory of the &GAP; categories
+##      <C>IsHomalgModuleOrMap</C> and <C>IsHomalgStaticMorphism</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgMap",
+        IsHomalgModuleOrMap and
+        IsHomalgStaticMorphism );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgMap",
-        IsHomalgStaticMorphism );
 
 ##  <#GAPDoc Label="IsHomalgSelfMap">
 ##  <ManSection>
@@ -38,13 +41,14 @@ DeclareCategory( "IsHomalgMap",
 ##      The &GAP; category of &homalg; self-maps. <P/>
 ##      (It is a subcategory of the &GAP; categories
 ##       <C>IsHomalgMap</C> and <C>IsHomalgEndomorphism</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgSelfMap",
         IsHomalgMap and
         IsHomalgEndomorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ####################################
 #

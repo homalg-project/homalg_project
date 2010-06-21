@@ -96,6 +96,26 @@ end );
 #
 ####################################
 
+##
+InstallMethod( CheckIfTheyLieInTheSameCategory,
+        "for two homalg modules, submodules, or maps",
+        [ IsHomalgModuleOrMap, IsHomalgModuleOrMap ],
+        
+  function( M, N )
+    
+    if AssertionLevel( ) >= HOMALG.AssertionLevel_CheckIfTheyLieInTheSameCategory then
+        if not IsIdenticalObj( HomalgRing( M ), HomalgRing( N ) ) then
+            Error( "the rings of the two modules/submodules/maps are not identical\n" );
+        elif not ( ( IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) and
+                IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) ) or
+                ( IsHomalgRightObjectOrMorphismOfRightObjects( M ) and
+                  IsHomalgRightObjectOrMorphismOfRightObjects( N ) ) ) then
+            Error( "the two modules/submodules/maps must either be both left or both right modules/submodules/maps\n" );
+        fi;
+    fi;
+    
+end );
+
 ## ( cf. [BR08, Subsection 3.2.2] )
 InstallMethod( \/,				### defines: / (SubfactorModule)
         "for a homalg matrix",
