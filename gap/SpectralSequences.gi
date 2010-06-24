@@ -163,7 +163,7 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
             
             ## elevate the generalized embedding to the correct height
             ## (i.e. to the correct subfactor of the total complex)
-            gen_emb := AddToMorphismAidMap( gen_emb, monomorphism_aid_map );
+            gen_emb := AddToMorphismAid( gen_emb, monomorphism_aid_map );
             
             ## check assertion
             Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );

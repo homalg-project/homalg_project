@@ -272,9 +272,9 @@ DeclareAttribute( "ImageSubobject",
 DeclareAttribute( "KernelSubobject",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="MorphismAidMap:map">
+##  <#GAPDoc Label="MorphismAid:map">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="MorphismAidMap" Label="for maps"/>
+##    <Attr Arg="phi" Name="MorphismAid" Label="for maps"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
 ##      The morphism aid map of a true generalized map. <Br/>
@@ -283,7 +283,7 @@ DeclareAttribute( "KernelSubobject",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "MorphismAidMap",
+DeclareAttribute( "MorphismAid",
         IsHomalgMorphism );
 
 ##  <#GAPDoc Label="GeneralizedInverse:map">
@@ -307,16 +307,16 @@ DeclareAttribute( "GeneralizedInverse",
 
 # constructors:
 
-DeclareOperation( "RemoveMorphismAidMap",
+DeclareOperation( "RemoveMorphismAid",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "GeneralizedMap",
         [ IsHomalgMorphism, IsObject ] );
 
-DeclareOperation( "AddToMorphismAidMap",
+DeclareOperation( "AddToMorphismAid",
         [ IsHomalgMorphism, IsObject ] );
 
-DeclareOperation( "AssociatedMap",
+DeclareOperation( "AssociatedMorphism",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "AnIsomorphism",

@@ -61,7 +61,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
     gen_iso := HomalgMap( id, [ coker, 1 ], [ T, p ] );
     
     ## set the morphism aid map
-    SetMorphismAidMap( gen_iso, phi );
+    SetMorphismAid( gen_iso, phi );
     
     ## set the generalized inverse of the natural epimorphism
     SetGeneralizedInverse( epi, gen_iso );
@@ -87,7 +87,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
     ## BUT it is one modulo the image of phi in T, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR08, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( id, [ coker, 1 ], [ T, p ] );
-    SetMorphismAidMap( emb, phi );
+    SetMorphismAid( emb, phi );
     
     ## we cannot check this assertion, since
     ## checking it would cause an infinite loop

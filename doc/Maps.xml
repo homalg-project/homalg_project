@@ -62,7 +62,7 @@
 <#Include Label="ImageSubobject">
 <#Include Label="ImageObjectEmb">
 <#Include Label="ImageObjectEpi">
-<#Include Label="MorphismAidMap:map">
+<#Include Label="MorphismAid:map">
 <#Include Label="GeneralizedInverse:map">
 
 </Section>

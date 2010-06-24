@@ -264,14 +264,14 @@ InstallMethod( \=,
         return false;
     fi;
     
-    if HasMorphismAidMap( phi1 ) then
-        if not HasMorphismAidMap( phi2 ) or
-           MorphismAidMap( phi1 ) <> MorphismAidMap( phi2 ) then
+    if HasMorphismAid( phi1 ) then
+        if not HasMorphismAid( phi2 ) or
+           MorphismAid( phi1 ) <> MorphismAid( phi2 ) then
             return false;
         fi;
-    elif HasMorphismAidMap( phi2 ) then
-        if not HasMorphismAidMap( phi1 ) or
-           MorphismAidMap( phi1 ) <> MorphismAidMap( phi2 ) then
+    elif HasMorphismAid( phi2 ) then
+        if not HasMorphismAid( phi1 ) or
+           MorphismAid( phi1 ) <> MorphismAid( phi2 ) then
             return false;
         fi;
     fi;
@@ -1345,7 +1345,7 @@ InstallMethod( OnAFreeSource,
 end );
 
 ## works without side effects
-InstallMethod( RemoveMorphismAidMap,
+InstallMethod( RemoveMorphismAid,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
@@ -1377,14 +1377,14 @@ InstallMethod( GeneralizedMap,
     ## prepare a copy of phi
     psi := HomalgMap( MatrixOfMap( phi ), Source( phi ), Range( phi ) );
     
-    SetMorphismAidMap( psi, morphism_aid_map1 );
+    SetMorphismAid( psi, morphism_aid_map1 );
     
     return psi;
     
 end );
 
 ## works without side effects
-InstallMethod( AddToMorphismAidMap,
+InstallMethod( AddToMorphismAid,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
         
@@ -1402,9 +1402,9 @@ InstallMethod( AddToMorphismAidMap,
     ## we don't need the source of the new morphism aid map
     morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
     
-    if HasMorphismAidMap( phi ) then
+    if HasMorphismAid( phi ) then
         ## we don't need the source of the old morphism aid map
-        morphism_aid_map0 := OnAFreeSource( MorphismAidMap( phi ) );
+        morphism_aid_map0 := OnAFreeSource( MorphismAid( phi ) );
         morphism_aid_map1 := CoproductMorphism( morphism_aid_map0, morphism_aid_map1 );
     fi;
     
@@ -1413,14 +1413,14 @@ InstallMethod( AddToMorphismAidMap,
 end );
 
 ##
-InstallMethod( AssociatedMap,
+InstallMethod( AssociatedMorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     local mat, S, T;
     
-    if not HasMorphismAidMap( phi ) then
+    if not HasMorphismAid( phi ) then
         return phi;
     fi;
     
@@ -1428,7 +1428,7 @@ InstallMethod( AssociatedMap,
     
     S := Source( phi );
     
-    T := Presentation( UnionOfRelations( MorphismAidMap( phi ) ) );
+    T := Presentation( UnionOfRelations( MorphismAid( phi ) ) );
     
     return HomalgMap( mat, S, T );
     
@@ -1464,7 +1464,7 @@ InstallMethod( ShallowCopy,
   function( phi )
     local psi;
     
-    if HasMorphismAidMap( phi ) then
+    if HasMorphismAid( phi ) then
         TryNextMethod( );
     fi;
     
@@ -1542,7 +1542,7 @@ InstallMethod( ViewObj,
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
             Print( "homomorphism of" );
-        elif HasMorphismAidMap( o ) then	## otherwise the notion of generalized morphism is meaningless
+        elif HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphism( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
                     Print( "generalized isomorphism of" );
@@ -1562,7 +1562,7 @@ InstallMethod( ViewObj,
             Print( "non-well-defined map between" );
         fi;
     else
-        if HasMorphismAidMap( o ) then	## otherwise the notion of generalized morphism is meaningless
+        if HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphism( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
                     Print( "generalized isomorphism of" );

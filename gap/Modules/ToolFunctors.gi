@@ -219,14 +219,14 @@ InstallGlobalFunction( _Functor_Compose_OnModules,	### defines: Compose
     fi;
     
     ## the following is crucial for spectral sequences:
-    if HasMorphismAidMap( pre ) then
+    if HasMorphismAid( pre ) then
         
-        morphism_aid_pre := PreCompose( MorphismAidMap( pre ), RemoveMorphismAidMap( post ) );
+        morphism_aid_pre := PreCompose( MorphismAid( pre ), RemoveMorphismAid( post ) );
         
-        if HasMorphismAidMap( post ) then
-            SetMorphismAidMap( phi, CoproductMorphism( MorphismAidMap( post ), morphism_aid_pre ) );
+        if HasMorphismAid( post ) then
+            SetMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
         else
-            SetMorphismAidMap( phi, morphism_aid_pre );
+            SetMorphismAid( phi, morphism_aid_pre );
         fi;
         
         if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
@@ -243,9 +243,9 @@ InstallGlobalFunction( _Functor_Compose_OnModules,	### defines: Compose
             SetIsGeneralizedMorphism( phi, true );
         fi;
         
-    elif HasMorphismAidMap( post ) then
+    elif HasMorphismAid( post ) then
         
-        SetMorphismAidMap( phi, MorphismAidMap( post ) );
+        SetMorphismAid( phi, MorphismAid( post ) );
         
         if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
            HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
@@ -458,13 +458,13 @@ InstallGlobalFunction( _Functor_PostDivide_OnModules,	### defines: PostDivide
     ## so cheerfully and loudly, inspiring me to this idea :-)
     ## this is the most decisive part of the code
     ## (the idea of generalized embeddings in action):
-    if HasMorphismAidMap( beta ) then
-        N := UnionOfRelations( MorphismAidMap( beta ) );	## this replaces [BR08, Footnote 13]
-        if HasMorphismAidMap( gamma ) then
-            N := UnionOfRelations( N, MatrixOfMap( MorphismAidMap( gamma ) ) );
+    if HasMorphismAid( beta ) then
+        N := UnionOfRelations( MorphismAid( beta ) );	## this replaces [BR08, Footnote 13]
+        if HasMorphismAid( gamma ) then
+            N := UnionOfRelations( N, MatrixOfMap( MorphismAid( gamma ) ) );
         fi;
-    elif HasMorphismAidMap( gamma ) then
-        N := UnionOfRelations( MorphismAidMap( gamma ) );
+    elif HasMorphismAid( gamma ) then
+        N := UnionOfRelations( MorphismAid( gamma ) );
     else
         N := RelationsOfModule( N );
     fi;
@@ -500,11 +500,11 @@ InstallGlobalFunction( _Functor_PostDivide_OnModules,	### defines: PostDivide
         
         SetIsMorphism( psi, true );
         
-    elif HasMorphismAidMap( gamma ) and not HasMorphismAidMap( beta ) then
+    elif HasMorphismAid( gamma ) and not HasMorphismAid( beta ) then
         
-        #### we cannot activate the following lines, since MorphismAidMap( gamma ) / beta fails in general (cf. the example Grothendieck.g)
+        #### we cannot activate the following lines, since MorphismAid( gamma ) / beta fails in general (cf. the example Grothendieck.g)
         #### instead one should activate them where they make sense (cf. SpectralSequences.gi)
-        #SetMorphismAidMap( psi, MorphismAidMap( gamma ) / beta );
+        #SetMorphismAid( psi, MorphismAid( gamma ) / beta );
         #SetIsGeneralizedMorphism( psi, true );
         
     fi;
@@ -564,7 +564,7 @@ InstallGlobalFunction( _Functor_PreDivide_OnModules,	### defines: PreDivide
     gen_iso := GeneralizedInverse( epsilon );
     
     ## make a copy without the morphism aid map
-    gen_iso := RemoveMorphismAidMap( gen_iso );
+    gen_iso := RemoveMorphismAid( gen_iso );
     
     eta0 := PreCompose( gen_iso, eta );
     

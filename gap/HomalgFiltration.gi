@@ -293,8 +293,8 @@ InstallMethod( IsomorphismOfFiltration,
                 iotas := iota;
             fi;
             
-            if HasMorphismAidMap( gen_emb ) then
-                mor_aid := MorphismAidMap( gen_emb ) / iotas;	## lift
+            if HasMorphismAid( gen_emb ) then
+                mor_aid := MorphismAid( gen_emb ) / iotas;	## lift
             else
                 mor_aid := 0;
             fi;
@@ -302,7 +302,7 @@ InstallMethod( IsomorphismOfFiltration,
             gen_emb := gen_emb / iotas;		## generalized lift
             
             if IsHomalgMap( mor_aid ) then
-                SetMorphismAidMap( gen_emb, mor_aid );
+                SetMorphismAid( gen_emb, mor_aid );
             fi;
             
         fi;
@@ -344,7 +344,7 @@ InstallMethod( IsomorphismOfFiltration,
         d0 := FreeHullEpi( Mp );
         
         ## make a copy without the morphism aid map
-        gen_emb := RemoveMorphismAidMap( gen_emb );
+        gen_emb := RemoveMorphismAid( gen_emb );
         
         ## eta0: P_0 -> F_p( M )
         ## the first lift of the identity map of M_p to a map between P_0 and F_p( M )

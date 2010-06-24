@@ -844,7 +844,7 @@ InstallMethod( DefectOfExactness,
                 ## construct the natural epimorphism/equivalence
                 ## L_0(F)(G(P_p)) -> F(G(P_p))
                 if compute_nat_trafos and q[j] = 0 then
-                    nat := PreCompose( RemoveMorphismAidMap( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
+                    nat := PreCompose( RemoveMorphismAid( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
                     Assert( 1, IsEpimorphism( nat ) );
                     SetIsEpimorphism( nat, true );
                     natural_transformations.(String( [ p[i], 0 ] )) := nat;

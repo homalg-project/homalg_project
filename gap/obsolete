@@ -834,20 +834,20 @@ end );
             morphism_aids := rec( );	## this allows us to view the split monos (for q = 0) as generalized embeddings in the (first) filtration of the double complex (see GrothendieckSpectralSequence)
                 morphism_aids.(String(bidegrees_source[2])) := MonoOfLeftSummand( S );
                 morphism_aids.(String(bidegrees_source[l])) := MonoOfLeftSummand( S );
-            S!.MorphismAidMapsInObjectOfTotalComplex := morphism_aids;
+            S!.MorphismAidsInObjectOfTotalComplex := morphism_aids;
             morphism_aids := rec( );	## this allows us to view the split monos (for q = 0) as generalized embeddings in the (first) filtration of the double complex (see GrothendieckSpectralSequence)
                 morphism_aids.(String(bidegrees_target[2])) := MonoOfLeftSummand( T );
                 morphism_aids.(String(bidegrees_target[l])) := MonoOfLeftSummand( T );
-            T!.MorphismAidMapsInObjectOfTotalComplex := morphism_aids;
+            T!.MorphismAidsInObjectOfTotalComplex := morphism_aids;
 
 ## from SpectralSequences.gi
 
             ## stack all morphism aid maps together
-            if HasMorphismAidMap( gen_emb2 ) then
+            if HasMorphismAid( gen_emb2 ) then
                 if IsHomalgMap( monomorphism_aid_map ) then
-                    monomorphism_aid_map := CoproductMorphism( monomorphism_aid_map, MorphismAidMap( gen_emb2 ) );
+                    monomorphism_aid_map := CoproductMorphism( monomorphism_aid_map, MorphismAid( gen_emb2 ) );
                 else
-                    monomorphism_aid_map := MorphismAidMap( gen_emb2 );
+                    monomorphism_aid_map := MorphismAid( gen_emb2 );
                 fi;
             fi;
            
@@ -861,9 +861,9 @@ end );
                 
                 gen_emb2 := grothendieck2.(String([ p, q ]));
                 
-                RemoveMorphismAidMap( gen_emb2 );
+                RemoveMorphismAid( gen_emb2 );
                 
-                SetMorphismAidMap( gen_emb2, monomorphism_aid_map );
+                SetMorphismAid( gen_emb2, monomorphism_aid_map );
                 
             od;
         fi;
@@ -1007,7 +1007,7 @@ InstallMethod( GrothendieckSpectralSequence,
             gen_map := HomalgMap( MatrixOfMap( gen_emb ), "free", Range( gen_emb ) );
             
             if IsHomalgMap( monomorphism_aid_map ) then
-                SetMorphismAidMap( gen_emb, monomorphism_aid_map );
+                SetMorphismAid( gen_emb, monomorphism_aid_map );
                 monomorphism_aid_map := CoproductMorphism( monomorphism_aid_map, gen_map );
             else
                 monomorphism_aid_map := gen_map;
@@ -1068,28 +1068,28 @@ end );
 
 ## from HomalgMap.gd/gi
 
-DeclareOperation( "RemoveMorphismAidMap",
+DeclareOperation( "RemoveMorphismAid",
         [ IsHomalgMap ] );
 
-DeclareOperation( "ReplaceMorphismAidMap",
+DeclareOperation( "ReplaceMorphismAid",
         [ IsHomalgMap, IsObject ] );
 
 ##
-InstallMethod( RemoveMorphismAidMap,
+InstallMethod( RemoveMorphismAid,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
     
-    ResetFilterObj( phi, MorphismAidMap );
-    Unbind( phi!.MorphismAidMap );
+    ResetFilterObj( phi, MorphismAid );
+    Unbind( phi!.MorphismAid );
     
 end );
 
 ## never use this operation unless you know what you are doing
 ## (together with the caching of the functors PostDivide and Compose
 ##  it could lead to wrong results)
-InstallMethod( ReplaceMorphismAidMap,
+InstallMethod( ReplaceMorphismAid,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
         
@@ -1106,13 +1106,13 @@ InstallMethod( ReplaceMorphismAidMap,
         morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
         
         ## first clean up
-        RemoveMorphismAidMap( phi );
+        RemoveMorphismAid( phi );
         
         ## a generalized embedding may now become
 	## only a generalized homomorphism
         homalgResetFilters( phi );
         
-        SetMorphismAidMap( phi, morphism_aid_map1 );
+        SetMorphismAid( phi, morphism_aid_map1 );
         
     fi;
     
@@ -1122,7 +1122,7 @@ end );
 
         ## (this also avoids an error that occurs in CompleteImageSquare below
         ##  this pops up during the execution of A3_Purity.g)
-        RemoveMorphismAidMap( gen_emb );
+        RemoveMorphismAid( gen_emb );
 
 ## from SpectralSequence.gi
 
@@ -1792,7 +1792,7 @@ end );
     ## BUT it is one modulo the image of pre in M, and then even a monomorphism:
     ## this is enough for us since we will always view it this way (cf. [BR08, 3.1.1,(2), 3.1.2] )
     emb := HomalgMap( emb, [ ker, 1 ], [ M, p ] );
-    SetMorphismAidMap( emb, pre );
+    SetMorphismAid( emb, pre );
     
     ## check assertion
     Assert( 4, IsGeneralizedMonomorphism( emb ) );

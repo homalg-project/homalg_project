@@ -401,11 +401,11 @@ end );
 ##
 InstallMethod( IsGeneralizedMorphism,
         "LIMOR: for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
     
-    return IsMorphism( AssociatedMap( phi ) );
+    return IsMorphism( AssociatedMorphism( phi ) );
     
 end );
 
@@ -448,12 +448,12 @@ end );
 ##
 InstallMethod( IsGeneralizedEpimorphism,
         "LIMOR: for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
     local mu;
     
-    mu := AssociatedMap( phi );
+    mu := AssociatedMorphism( phi );
     
     SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
     
@@ -539,12 +539,12 @@ end );
 ##
 InstallMethod( IsGeneralizedMonomorphism,
         "LIMOR: for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
     local mu;
     
-    mu := AssociatedMap( phi );
+    mu := AssociatedMorphism( phi );
     
     SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
     
@@ -596,12 +596,12 @@ end );
 ##
 InstallMethod( IsGeneralizedIsomorphism,
         "LIMOR: for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAidMap ],
+        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
     local mu;
     
-    mu := AssociatedMap( phi );
+    mu := AssociatedMorphism( phi );
     
     SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
     
@@ -727,7 +727,7 @@ InstallMethod( GeneralizedInverse,
     aid := MapHavingSubobjectAsItsImage( KernelSubobject( epsilon ) );
     
     ## set the morphism aid map
-    SetMorphismAidMap( gen_iso, aid );
+    SetMorphismAid( gen_iso, aid );
     
     ## check assertion
     Assert( 4, IsGeneralizedIsomorphism( gen_iso ) );
