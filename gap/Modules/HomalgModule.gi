@@ -2,7 +2,7 @@
 ##
 ##  HomalgModule.gi             homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Implementation stuff for homalg modules.
 ##
@@ -2620,17 +2620,6 @@ InstallMethod( \*,
   function( M, R )
     
     return R * M;
-    
-end );
-
-##
-InstallMethod( ShallowCopy,
-        "for homalg modules",
-        [ IsHomalgModule ],
-        
-  function( M )
-    
-    return Source( AnIsomorphism( M ) );
     
 end );
 

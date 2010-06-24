@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Declarations for homalg morphisms of Abelian categories.
+##  Declarations for morphisms of (Abelian) categories.
 ##
 #############################################################################
 
@@ -320,7 +320,7 @@ DeclareOperation( "AssociatedMorphism",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "AnIsomorphism",
-        [ IsHomalgModule ] );
+        [ IsHomalgObject ] );
 
 DeclareOperation( "Subobject",
         [ IsHomalgMorphism ] );

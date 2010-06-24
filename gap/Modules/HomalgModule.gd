@@ -2,7 +2,7 @@
 ##
 ##  HomalgModule.gd             homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Declaration stuff for homalg modules.
 ##
@@ -82,72 +82,6 @@ DeclareProperty( "IsFree",
 DeclareProperty( "IsStablyFree",
         IsHomalgModule );
 
-##  <#GAPDoc Label="IsProjective">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsProjective"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is projective.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsProjective",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="FiniteFreeResolutionExists">
-##  <ManSection>
-##    <Prop Arg="M" Name="FiniteFreeResolutionExists"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> allows a finite free resolution. <Br/>
-##      (no method installed)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "FiniteFreeResolutionExists",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="IsReflexive">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsReflexive"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is reflexive.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsReflexive",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="IsTorsionFree">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsTorsionFree"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is torsion-free.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsTorsionFree",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="IsArtinian:module">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsArtinian" Label="for modules"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is artinian.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsArtinian",
-        IsHomalgModule );
-
 ##  <#GAPDoc Label="IsCyclic">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsCyclic"/>
@@ -161,19 +95,6 @@ DeclareProperty( "IsArtinian",
 DeclareProperty( "IsCyclic",
         IsHomalgModule );
 
-##  <#GAPDoc Label="IsTorsion">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsTorsion"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is torsion.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsTorsion",
-        IsHomalgModule );
-
 ##  <#GAPDoc Label="IsHolonomic">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsHolonomic"/>
@@ -185,19 +106,6 @@ DeclareProperty( "IsTorsion",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsHolonomic",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="IsPure">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsPure"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is pure.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsPure",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="HasConstantRank">
@@ -220,63 +128,7 @@ DeclareProperty( "HasConstantRank",
 #
 ####################################
 
-##  <#GAPDoc Label="TheMorphismToZero">
-##  <ManSection>
-##    <Attr Arg="M" Name="TheMorphismToZero"/>
-##    <Returns>a &homalg; map</Returns>
-##    <Description>
-##      The zero morphism from the &homalg; module <A>M</A> to zero.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "TheMorphismToZero",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="TheIdentityMorphism">
-##  <ManSection>
-##    <Attr Arg="M" Name="TheIdentityMorphism"/>
-##    <Returns>a &homalg; map</Returns>
-##    <Description>
-##      The identity automorphism of the &homalg; module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "TheIdentityMorphism",
-        IsHomalgModule );
-
-DeclareAttribute( "Genesis",
-        IsHomalgModule );
-
 DeclareAttribute( "AFiniteFreeResolution",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="FullSubmodule">
-##  <ManSection>
-##    <Attr Arg="M" Name="FullSubmodule"/>
-##    <Returns>a &homalg; submodule</Returns>
-##    <Description>
-##      The &homalg; module <A>M</A> as a submodule of itself.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "FullSubmodule",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="UnderlyingSubobject">
-##  <ManSection>
-##    <Attr Arg="M" Name="UnderlyingSubobject"/>
-##    <Returns>a &homalg; submodule</Returns>
-##    <Description>
-##      In case <A>M</A> was defined as the module underlying a submodule <M>L</M> then <M>L</M> is returned. <Br/>
-##      (no method installed)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "UnderlyingSubobject",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="PrimaryDecomposition">
@@ -325,73 +177,6 @@ DeclareAttribute( "ElementaryDivisors",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "RankOfModule",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="ProjectiveDimension">
-##  <ManSection>
-##    <Attr Arg="M" Name="ProjectiveDimension"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      The projective dimension of the &homalg; module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "ProjectiveDimension",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="DegreeOfTorsionFreeness">
-##  <ManSection>
-##    <Attr Arg="M" Name="DegreeOfTorsionFreeness"/>
-##    <Returns>a nonnegative integer of infinity</Returns>
-##    <Description>
-##      Auslander's degree of torsion-freeness of the &homalg; module <A>M</A>.
-##      It is set to infinity only for <A>M</A><M>=0</M>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "DegreeOfTorsionFreeness",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="Codim">
-##  <ManSection>
-##    <Attr Arg="M" Name="Codim"/>
-##    <Returns>a nonnegative integer of infinity</Returns>
-##    <Description>
-##      The codimension of the &homalg; module <A>M</A>.
-##      It is set to infinity only for <A>M</A><M>=0</M>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "Codim",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="PurityFiltration">
-##  <ManSection>
-##    <Attr Arg="M" Name="PurityFiltration"/>
-##    <Returns>a &homalg; filtration</Returns>
-##    <Description>
-##      The purity filtration of the &homalg; module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "PurityFiltration",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="CodegreeOfPurity">
-##  <ManSection>
-##    <Attr Arg="M" Name="CodegreeOfPurity"/>
-##    <Returns>a list of nonnegative integers</Returns>
-##    <Description>
-##      The codegree of purity of the &homalg; module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "CodegreeOfPurity",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="BettiDiagram:module">
@@ -667,12 +452,6 @@ DeclareOperation( "NonZeroGenerators",
 
 DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgModule ] );
-
-DeclareOperation( "SetUpperBoundForProjectiveDimension",
-        [ IsHomalgModule, IsInt ] );
-
-DeclareOperation( "SetUpperBoundForProjectiveDimension",
-        [ IsHomalgModule, IsInfinity ] );
 
 DeclareOperation( "Depth",
         [ IsHomalgModule, IsHomalgModule ] );

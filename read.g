@@ -19,12 +19,15 @@ ReadPackage( "homalg", "gap/SetsOfRelations.gi" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gi" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
 
-## modules/submodules
-ReadPackage( "homalg", "gap/HomalgModule.gi" );
-ReadPackage( "homalg", "gap/HomalgSubmodule.gi" );
+## objects
+ReadPackage( "homalg", "gap/HomalgObject.gi" );
 
 ## morphisms
 ReadPackage( "homalg", "gap/HomalgMorphism.gi" );
+
+## modules/submodules
+ReadPackage( "homalg", "gap/Modules/HomalgModule.gi" );
+ReadPackage( "homalg", "gap/HomalgSubmodule.gi" );
 
 ## gap/Modules/
 ReadPackage( "homalg", "gap/Modules/HomalgMap.gi" );

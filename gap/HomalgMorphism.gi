@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Implementation for homalg morphisms of Abelian categories.
+##  Implementation for morphisms of (Abelian) categories.
 ##
 #############################################################################
 
@@ -16,7 +16,7 @@
 
 ##
 InstallMethod( AreComparableMorphisms,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ],
         
   function( phi1, phi2 )
@@ -28,7 +28,7 @@ end );
 
 ##
 InstallMethod( AreComposableMorphisms,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
@@ -40,7 +40,7 @@ end );
 
 ##
 InstallMethod( AreComposableMorphisms,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
@@ -52,7 +52,7 @@ end );
 
 ## a synonym of `-<elm>':
 InstallMethod( AdditiveInverseMutable,
-        "of homalg maps",
+        "of homalg morphisms",
         [ IsHomalgMorphism and IsZero ],
         
   function( phi )
@@ -67,7 +67,7 @@ end );
 
 ##
 InstallMethod( POW,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism, IsInt ],
         
   function( phi, pow )
@@ -94,7 +94,7 @@ end );
 
 ##
 InstallMethod( PreCompose,
-        "of two homalg maps",
+        "of two homalg morphisms",
         [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
@@ -106,7 +106,7 @@ end );
 
 ##
 InstallMethod( PreCompose,
-        "of two homalg maps",
+        "of two homalg morphisms",
         [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
@@ -118,7 +118,7 @@ end );
 
 ## this should be the lowest rank method
 InstallMethod( PreInverse,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism ],
         
   function( phi )
@@ -129,7 +129,7 @@ end );
 
 ## this should be the lowest rank method
 InstallMethod( PostInverse,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism ],
         
   function( phi )
@@ -155,7 +155,7 @@ end );
 
 ##
 InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism,
           IsHomalgMorphism,
           IsHomalgMorphism ],
@@ -182,7 +182,7 @@ end );
 
 ##
 InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism,
           IsHomalgMorphism,
           IsHomalgMorphism ],
@@ -195,7 +195,7 @@ end );
 
 ## this should be the lowest rank method
 InstallMethod( UpdateObjectsByMorphism,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgMorphism ],
         
   function( phi )
