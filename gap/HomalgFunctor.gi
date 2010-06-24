@@ -11,7 +11,7 @@
 ##  <#GAPDoc Label="Functors:intro">
 ##    Functors and their natural transformations form the heart of the &homalg; package. Usually, a functor is realized
 ##    in computer algebra systems as a procedure which can be applied to a certain type of objects. In <Cite Key="BR"/>
-##    it was explained how to implement a functor of abelian categories -- by itself -- as an object which can be
+##    it was explained how to implement a functor of Abelian categories -- by itself -- as an object which can be
 ##    further manipulated (composed, derived, ...).
 ##    So in addition to the constructor <Ref Oper="CreateHomalgFunctor" Label="constructor for functors"/>
 ##    which is used to create functors from scratch, &homalg; provides further easy-to-use constructors

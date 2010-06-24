@@ -22,8 +22,6 @@ DeclareGlobalVariable( "HOMALG" );
 #
 ####################################
 
-# four new categories:
-
 ##  <#GAPDoc Label="IsHomalgObjectOrMorphism">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="F" Name="IsHomalgObjectOrMorphism"/>
@@ -37,6 +35,21 @@ DeclareGlobalVariable( "HOMALG" );
 DeclareCategory( "IsHomalgObjectOrMorphism",
         IsExtLElement and
         IsHomalgRingOrObjectOrMorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsHomalgStaticObjectOrMorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticObjectOrMorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <Ref Filt="IsHomalgStaticObject"/> and <Ref Filt="IsHomalgStaticMorphism"/>.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgStaticObjectOrMorphism",
+        IsHomalgObjectOrMorphism );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -62,21 +75,6 @@ DeclareCategory( "IsHomalgObject",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsHomalgStaticObjectOrMorphism">
-##  <ManSection>
-##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticObjectOrMorphism"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      This is the super &GAP;-category which will include the &GAP;-categories
-##      <Ref Filt="IsHomalgStaticObject"/> and <Ref Filt="IsHomalgStaticMorphism"/>.
-##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsHomalgStaticObjectOrMorphism",
-        IsHomalgObjectOrMorphism );
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
 ##  <#GAPDoc Label="IsHomalgStaticObject">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticObject"/>
@@ -93,62 +91,6 @@ DeclareCategory( "IsHomalgStaticObject",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsHomalgMorphism">
-##  <ManSection>
-##    <Filt Type="Category" Arg="F" Name="IsHomalgMorphism"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      This is the super &GAP;-category which will include the &GAP;-categories
-##      <Ref Filt="IsHomalgStaticMorphism"/> and <Ref Filt="IsHomalgChainMap"/>.
-##      We need this &GAP;-category to be able to build complexes with *objects*
-##      being objects of &homalg; categories or again complexes.
-##      We need this GAP-category to be able to build chain maps with *morphisms*
-##      being morphisms of &homalg; categories or again chain maps. <Br/>
-##      CAUTION: Never let &homalg; morphisms (which are not endomorphisms)
-##      be multiplicative elements!!
-##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsHomalgMorphism",
-        IsHomalgStaticObjectOrMorphism and
-        IsAdditiveElementWithInverse );
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
-##  <#GAPDoc Label="IsHomalgStaticMorphism">
-##  <ManSection>
-##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticMorphism"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      This is the super &GAP;-category which will include the &GAP;-categories
-##      <C>IsHomalgMap</C>, etc. <Br/>
-##      CAUTION: Never let homalg morphisms (which are not endomorphisms)
-##      be multiplicative elements!!
-##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsHomalgStaticMorphism",
-        IsHomalgMorphism );
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
-##  <#GAPDoc Label="IsHomalgStaticMorphism">
-##  <ManSection>
-##    <Filt Type="Category" Arg="F" Name="IsHomalgStaticMorphism"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      This is the super &GAP;-category which will include the &GAP;-categories
-##      <C>IsHomalgSelfMap</C>, <Ref Filt="IsHomalgChainSelfMap"/>, etc.
-##      be multiplicative elements!!
-##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsHomalgEndomorphism",
-        IsHomalgMorphism and
-        IsMultiplicativeElementWithInverse );
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
 DeclareCategory( "IsHomalgLeftObjectOrMorphismOfLeftObjects",
         IsHomalgObjectOrMorphism );
 
@@ -157,66 +99,9 @@ DeclareCategory( "IsHomalgRightObjectOrMorphismOfRightObjects",
 
 ####################################
 #
-# properties:
-#
-####################################
-
-DeclareProperty( "IsMorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsGeneralizedMorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsGeneralizedEpimorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsGeneralizedMonomorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsGeneralizedIsomorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsIdentityMorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsMonomorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsEpimorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsSplitMonomorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsSplitEpimorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsIsomorphism",
-        IsHomalgMorphism );
-
-DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
-        IsHomalgMorphism );
-
-####################################
-#
 # attributes:
 #
 ####################################
-
-DeclareAttribute( "Source",
-        IsHomalgMorphism );
-
-DeclareAttribute( "Range",
-        IsHomalgMorphism );
-
-DeclareAttribute( "LeftInverse",
-        IsHomalgMorphism );
-
-DeclareAttribute( "RightInverse",
-        IsHomalgMorphism );
-
-DeclareAttribute( "DegreeOfMorphism",
-        IsHomalgMorphism );
 
 DeclareAttribute( "AsCokernel",
         IsHomalgObjectOrMorphism );
@@ -243,23 +128,14 @@ DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgSubobjects" );
 DeclareOperation( "HomalgRing",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "homalgResetFilters",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "AsLeftObject",
         [ IsHomalgRing ] );
 
 DeclareOperation( "AsRightObject",
         [ IsHomalgRing ] );
-
-DeclareOperation( "AreComparableMorphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AreComposableMorphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
-        [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement
-
-DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMorphism
-        [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "BasisOfModule",
         [ IsHomalgObjectOrMorphism ] );

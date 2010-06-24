@@ -2,7 +2,7 @@
 ##
 ##  HomalgMap.gi                homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Implementation stuff for homalg maps ( = module homomorphisms ).
 ##
@@ -108,14 +108,14 @@ end );
 
 ##
 InstallMethod( homalgResetFilters,
-        "for homalg chain maps",
+        "for homalg maps",
         [ IsHomalgMap ],
         
   function( cm )
     local property;
     
-    if not IsBound( HOMALG.PropertiesOfChainMaps ) then
-        HOMALG.PropertiesOfChainMaps :=
+    if not IsBound( HOMALG.PropertiesOfMaps ) then
+        HOMALG.PropertiesOfMaps :=
           [ IsZero,
             IsMorphism,
             IsGeneralizedMorphism,
@@ -129,7 +129,7 @@ InstallMethod( homalgResetFilters,
             IsGeneralizedIsomorphism ];
     fi;
     
-    for property in HOMALG.PropertiesOfChainMaps do
+    for property in HOMALG.PropertiesOfMaps do
         ResetFilterObj( cm, property );
     od;
     
@@ -253,42 +253,6 @@ InstallMethod( MatrixOfMap,
 end );
 
 ##
-InstallMethod( AreComparableMorphisms,
-        "for homalg maps",
-        [ IsHomalgMap, IsHomalgMap ],
-        
-  function( phi1, phi2 )
-    
-    return IsIdenticalObj( Source( phi1 ), Source( phi2 ) ) and
-           IsIdenticalObj( Range( phi1 ), Range( phi2 ) );
-    
-end );
-
-##
-InstallMethod( AreComposableMorphisms,
-        "for homalg maps",
-        [ IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi2, phi1 )
-    
-    return IsIdenticalObj( Range( phi1 ), Source( phi2 ) );
-    
-end );
-
-##
-InstallMethod( AreComposableMorphisms,
-        "for homalg maps",
-        [ IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi1, phi2 )
-    
-    return IsIdenticalObj( Range( phi1 ), Source( phi2 ) );
-    
-end );
-
-##
 InstallMethod( \=,
         "for two comparable homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
@@ -339,48 +303,6 @@ InstallMethod( AdditiveInverseMutable,
   function( phi )
     
     return MinusOne( HomalgRing( phi ) ) * phi;
-    
-end );
-
-## a synonym of `-<elm>':
-InstallMethod( AdditiveInverseMutable,
-        "of homalg maps",
-        [ IsHomalgMap and IsZero ],
-        
-  function( phi )
-    
-    return phi;
-    
-end );
-
-##
-## composition is a bifunctor to profit from the caching mechanisms for functors (cf. ToolFunctors.gi)
-##
-
-##
-InstallMethod( POW,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsInt ],
-        
-  function( phi, pow )
-    local id, inv;
-    
-    if pow = -1 then
-        
-        id := TheIdentityMorphism( Range( phi ) );
-        
-        inv := id / phi;	## mimic lift
-        
-        if HasIsIsomorphism( phi ) then
-            SetIsIsomorphism( inv, IsIsomorphism( phi ) );
-        fi;
-        
-        ## CAUTION: inv might very well be non-well-defined
-        return inv;
-        
-    fi;
-    
-    TryNextMethod( );
     
 end );
 
@@ -577,30 +499,6 @@ InstallMethod( ReducedSyzygiesGenerators,
 end );
 
 ##
-InstallMethod( PreCompose,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi1, phi2 )
-    
-    return phi2 * phi1;
-    
-end );
-
-##
-InstallMethod( PreCompose,
-        "of two homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi1, phi2 )
-    
-    return phi1 * phi2;
-    
-end );
-
-##
 InstallMethod( Preimage,
         "for a matrix and a homalg map",
         [ IsHomalgMatrix, IsMapOfFinitelyGeneratedModulesRep ],
@@ -673,17 +571,6 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-InstallMethod( PreInverse,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return fail;
-    
-end );
-
 ##
 InstallMethod( PreInverse,
         "for homalg maps",
@@ -879,17 +766,6 @@ InstallMethod( PostInverse,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    
-    return fail;
-    
-end );
-
-##
-InstallMethod( PostInverse,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
     local inv;
     
     if not IsMonomorphism( phi ) then
@@ -931,61 +807,6 @@ InstallMethod( PostInverse,
     fi;
     
     TryNextMethod( );
-    
-end );
-
-#=======================================================================
-# Complete an image-square
-#
-#  A_ is a free or beta1 is injective ( cf. [HS, Lemma III.3.1]
-#                                       and [BR08, Subsection 3.1.2] )
-#
-#     A_ --(alpha1)--> A
-#     |                |
-#  (psi=?)    Sq1    (phi)
-#     |                |
-#     v                v
-#     B_ --(beta1)---> B
-#
-#_______________________________________________________________________
-
-##
-InstallMethod( CompleteImageSquare,		### defines: CompleteImageSquare (CompleteImSq)
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( alpha1, phi, beta1 )
-    
-    return PreCompose( alpha1, phi ) / beta1;	## lift or projective lift
-    
-end );
-
-#=======================================================================
-# Complete a kernel-square
-#
-#  alpha2 is surjective ( cf. [HS, Lemma III.3.1] )
-#
-#     A --(alpha2)->> _A
-#     |                |
-#   (phi)   Sq2   (theta=?)
-#     |                |
-#     v                v
-#     B --(beta2)---> _B
-#
-#_______________________________________________________________________
-
-##
-InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( alpha2, phi, beta2 )
-    
-    return PreDivide( alpha2, PreCompose( phi, beta2 ) );	## colift
     
 end );
 
@@ -1656,17 +1477,6 @@ InstallMethod( ShallowCopy,
     MatchPropertiesAndAttributes( phi, psi, LIMOR.intrinsic_properties, LIMOR.intrinsic_attributes );
     
     return psi;
-    
-end );
-
-##
-InstallMethod( UpdateObjectsByMorphism,
-        "for homalg maps",
-        [ IsHomalgMap ],
-        
-  function( phi )
-    
-    ## do nothing :)
     
 end );
 

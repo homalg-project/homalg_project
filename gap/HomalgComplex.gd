@@ -228,9 +228,6 @@ DeclareGlobalFunction( "HomalgCocomplex" );
 
 # basic operations:
 
-DeclareOperation( "homalgResetFilters",
-        [ IsHomalgComplex ] );
-
 DeclareOperation( "ObjectDegreesOfComplex",
         [ IsHomalgComplex ] );
 

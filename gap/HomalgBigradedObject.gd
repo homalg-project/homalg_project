@@ -130,9 +130,6 @@ DeclareOperation( "DefectOfExactness",
 
 # basic operations:
 
-DeclareOperation( "homalgResetFilters",
-        [ IsHomalgBigradedObject ] );
-
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgBigradedObject ] );			## provided to avoid branching in the code and always returns fail
 

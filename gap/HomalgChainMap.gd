@@ -261,9 +261,6 @@ DeclareOperation( "*",
 
 # basic operations:
 
-DeclareOperation( "homalgResetFilters",
-        [ IsHomalgChainMap ] );
-
 DeclareOperation( "SourceOfSpecialChainMap",
         [ IsHomalgChainMap ] );
 

@@ -132,9 +132,6 @@ DeclareOperation( "*",
 DeclareOperation( "UnderlyingComplex",
         [ IsHomalgBicomplex ] );
 
-DeclareOperation( "homalgResetFilters",
-        [ IsHomalgBicomplex ] );
-
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgBicomplex ] );			## provided to avoid branching in the code and always returns fail
 

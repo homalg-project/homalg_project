@@ -477,30 +477,6 @@ InstallMethod( AreComparableMorphisms,
 end );
 
 ##
-InstallMethod( AreComposableMorphisms,
-        "for homalg chain maps",
-        [ IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi1, phi2 )
-    
-    return Range( phi1 ) = Source( phi2 );
-    
-end );
-
-##
-InstallMethod( AreComposableMorphisms,
-        "for homalg chain maps",
-        [ IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi2, phi1 )
-    
-    return Range( phi1 ) = Source( phi2 );
-    
-end );
-
-##
 InstallMethod( \=,
         "for two comparable homalg chain maps",
         [ IsHomalgChainMap, IsHomalgChainMap ],

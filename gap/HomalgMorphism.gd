@@ -1,50 +1,64 @@
 #############################################################################
 ##
-##  HomalgMap.gd                homalg package               Mohamed Barakat
+##  HomalgMorphisms.gd          homalg package               Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Declaration stuff for homalg maps ( = module homomorphisms ).
+##  Declarations for homalg morphisms of Abelian categories.
 ##
 #############################################################################
 
-####################################
-#
-# categories:
-#
-####################################
-
-# two new categories:
-
-##  <#GAPDoc Label="IsHomalgMap">
+##  <#GAPDoc Label="IsHomalgMorphism">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="phi" Name="IsHomalgMap"/>
+##    <Filt Type="Category" Arg="phi" Name="IsHomalgMorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; maps. <P/>
-##      (It is a subcategory of the &GAP; categories
-##      <C>IsHomalgModuleOrMap</C> and <C>IsHomalgStaticMorphism</C>.)
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <Ref Filt="IsHomalgStaticMorphism"/> and <Ref Filt="IsHomalgChainMap"/>.
+##      We need this &GAP;-category to be able to build complexes with *objects*
+##      being objects of &homalg; categories or again complexes.
+##      We need this GAP-category to be able to build chain maps with *morphisms*
+##      being morphisms of &homalg; categories or again chain maps. <Br/>
+##      CAUTION: Never let &homalg; morphisms (which are not endomorphisms)
+##      be multiplicative elements!!
 ##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsHomalgMap",
-        IsHomalgModuleOrMap and
-        IsHomalgStaticMorphism );
+DeclareCategory( "IsHomalgMorphism",
+        IsHomalgStaticObjectOrMorphism and
+        IsAdditiveElementWithInverse );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsHomalgSelfMap">
+##  <#GAPDoc Label="IsHomalgStaticMorphism">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="phi" Name="IsHomalgSelfMap"/>
+##    <Filt Type="Category" Arg="phi" Name="IsHomalgStaticMorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; self-maps. <P/>
-##      (It is a subcategory of the &GAP; categories
-##       <C>IsHomalgMap</C> and <C>IsHomalgEndomorphism</C>.)
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <C>IsHomalgMap</C>, etc. <Br/>
+##      CAUTION: Never let homalg morphisms (which are not endomorphisms)
+##      be multiplicative elements!!
 ##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsHomalgSelfMap",
-        IsHomalgMap and
-        IsHomalgEndomorphism );
+DeclareCategory( "IsHomalgStaticMorphism",
+        IsHomalgMorphism );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="IsHomalgEndomorphism">
+##  <ManSection>
+##    <Filt Type="Category" Arg="phi" Name="IsHomalgEndomorphism"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      This is the super &GAP;-category which will include the &GAP;-categories
+##      <C>IsHomalgSelfMap</C>, <Ref Filt="IsHomalgChainSelfMap"/>, etc.
+##      be multiplicative elements!!
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgEndomorphism",
+        IsHomalgMorphism and
+        IsMultiplicativeElementWithInverse );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -56,8 +70,6 @@ DeclareCategory( "IsHomalgSelfMap",
 #
 ####################################
 
-## all properties are declared in homalg.gd for the bigger category IsHomalgMorphism
-
 ##  <#GAPDoc Label="IsMorphism:map">
 ##  <ManSection>
 ##    <Prop Arg="phi" Name="IsMorphism" Label="for maps"/>
@@ -67,6 +79,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsMorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsGeneralizedMorphism:map">
 ##  <ManSection>
@@ -77,6 +91,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsGeneralizedMorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsGeneralizedEpimorphism:map">
 ##  <ManSection>
@@ -87,6 +103,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsGeneralizedEpimorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsGeneralizedMonomorphism:map">
 ##  <ManSection>
@@ -97,6 +115,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsGeneralizedMonomorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsGeneralizedIsomorphism:map">
 ##  <ManSection>
@@ -107,6 +127,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsGeneralizedIsomorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsIdentityMorphism:map">
 ##  <ManSection>
@@ -117,6 +139,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsIdentityMorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsMonomorphism:map">
 ##  <ManSection>
@@ -127,6 +151,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsMonomorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsEpimorphism:map">
 ##  <ManSection>
@@ -137,6 +163,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsEpimorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsSplitMonomorphism:map">
 ##  <ManSection>
@@ -147,6 +175,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsSplitMonomorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsSplitEpimorphism:map">
 ##  <ManSection>
@@ -157,6 +187,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsSplitEpimorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsIsomorphism:map">
 ##  <ManSection>
@@ -167,6 +199,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsIsomorphism",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsAutomorphism:map">
 ##  <ManSection>
@@ -177,14 +211,14 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
+        IsHomalgMorphism );
 
 ####################################
 #
 # attributes:
 #
 ####################################
-
-## some attributes are already declared in homalg.gd for the bigger category IsHomalgMorphism
 
 ##  <#GAPDoc Label="Source:map">
 ##  <ManSection>
@@ -195,6 +229,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareAttribute( "Source",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="Range:map">
 ##  <ManSection>
@@ -205,17 +241,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-
-##  <#GAPDoc Label="DegreeOfMorphism:map">
-##  <ManSection>
-##    <Attr Arg="phi" Name="DegreeOfMorphism" Label="for maps"/>
-##    <Returns>an integer</Returns>
-##    <Description>
-##      The degree of the morphism <A>phi</A> of graded modules. <Br/>
-##      (no method installed)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
+DeclareAttribute( "Range",
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="ImageSubobject">
 ##  <ManSection>
@@ -228,9 +255,8 @@ DeclareCategory( "IsHomalgSelfMap",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
 DeclareAttribute( "ImageSubobject",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="KernelSubobject:map">
 ##  <ManSection>
@@ -243,9 +269,8 @@ DeclareAttribute( "ImageSubobject",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
 DeclareAttribute( "KernelSubobject",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="MorphismAidMap:map">
 ##  <ManSection>
@@ -259,7 +284,7 @@ DeclareAttribute( "KernelSubobject",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "MorphismAidMap",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ##  <#GAPDoc Label="GeneralizedInverse:map">
 ##  <ManSection>
@@ -272,7 +297,7 @@ DeclareAttribute( "MorphismAidMap",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "GeneralizedInverse",
-        IsHomalgMap );
+        IsHomalgMorphism );
 
 ####################################
 #
@@ -282,92 +307,53 @@ DeclareAttribute( "GeneralizedInverse",
 
 # constructors:
 
-DeclareGlobalFunction( "HomalgMap" );
-
-DeclareGlobalFunction( "HomalgZeroMap" );
-
-DeclareGlobalFunction( "HomalgIdentityMap" );
-
-DeclareOperation( "OnAFreeSource",
-        [ IsHomalgMap ] );
-
 DeclareOperation( "RemoveMorphismAidMap",
-        [ IsHomalgMap ] );
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "GeneralizedMap",
-        [ IsHomalgMap, IsObject ] );
+        [ IsHomalgMorphism, IsObject ] );
 
 DeclareOperation( "AddToMorphismAidMap",
-        [ IsHomalgMap, IsObject ] );
+        [ IsHomalgMorphism, IsObject ] );
 
 DeclareOperation( "AssociatedMap",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgMap ] );
-
-DeclareOperation( "*",
-        [ IsHomalgMap, IsHomalgRing ] );
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "AnIsomorphism",
         [ IsHomalgModule ] );
 
 DeclareOperation( "Subobject",
-        [ IsHomalgMap ] );
+        [ IsHomalgMorphism ] );
 
 # basic operations:
 
-DeclareOperation( "homalgResetFilters",
-        [ IsHomalgMap ] );
+DeclareOperation( "AreComparableMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgMap ] );	## provided to avoid branching in the code and always returns fail
+DeclareOperation( "AreComposableMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
-        [ IsHomalgMap ] );
+DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsHomalgMorphism ] );	## is not a priori IsMultiplicativeElement
 
-DeclareOperation( "MatrixOfMap",
-        [ IsHomalgMap, IsPosInt, IsPosInt ] );
-
-DeclareOperation( "MatrixOfMap",
-        [ IsHomalgMap, IsPosInt ] );
-
-DeclareOperation( "MatrixOfMap",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "DecideZero",
-        [ IsHomalgMap, IsHomalgRelations ] );
-
-DeclareOperation( "UnionOfRelations",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "SyzygiesGenerators",
-        [ IsHomalgMap ] );
-
-DeclareOperation( "ReducedSyzygiesGenerators",
-        [ IsHomalgMap ] );
+DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMorphism
+        [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
 
 DeclareOperation( "PreCompose",
-        [ IsHomalgMap, IsHomalgMap ] );
-
-DeclareOperation( "Preimage",
-        [ IsHomalgMatrix, IsHomalgMap ] );
-
-DeclareOperation( "SuccessivePreimages",
-        [ IsHomalgMatrix, IsHomalgSelfMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "PreInverse",
-        [ IsHomalgMap ] );
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "PostInverse",
-        [ IsHomalgMap ] );
+        [ IsHomalgMorphism ] );
 
 DeclareOperation( "CompleteImageSquare",
-        [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "CompleteKernelSquare",
-        [ IsHomalgMap, IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "UpdateObjectsByMorphism",
-        [ IsHomalgMap ] );
+        [ IsHomalgMorphism ] );
 

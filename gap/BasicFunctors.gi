@@ -67,7 +67,7 @@ InstallMethod( ImageObjectEpi,
     
     SetIsEpimorphism( epi, true );
     
-    ## abelian category: [HS, Prop. II.9.6]
+    ## Abelian category: [HS, Prop. II.9.6]
     if HasKernelEmb( phi ) then
         ker_emb := KernelEmb( phi );
         SetKernelEmb( epi, ker_emb );
@@ -109,7 +109,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     
     #=====# end of the core procedure #=====#
     
-    ## abelian category: [HS, Prop. II.9.6]
+    ## Abelian category: [HS, Prop. II.9.6]
     if HasImageObjectEpi( psi ) then
         img_epi := ImageObjectEpi( psi );
         SetCokernelEpi( emb, img_epi );
