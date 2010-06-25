@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
 ##
-##  Declaration stuff for homalg submodules.
+##  Declarations for homalg submodules.
 ##
 #############################################################################
 
@@ -47,32 +47,6 @@ DeclareProperty( "IsPrimeIdeal",
 # attributes:
 #
 ####################################
-
-##  <#GAPDoc Label="EmbeddingInSuperObject">
-##  <ManSection>
-##    <Attr Arg="N" Name="EmbeddingInSuperObject"/>
-##    <Returns>a &homalg; map</Returns>
-##    <Description>
-##      In case <A>N</A> was defined as a submodule of some module <M>L</M> the embedding of <A>N</A> in <M>L</M> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "EmbeddingInSuperObject",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="FactorObject">
-##  <ManSection>
-##    <Attr Arg="N" Name="FactorObject"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      In case <A>N</A> was defined as a submodule of some module <M>L</M> the factor module <M>L/</M><A>N</A> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "FactorObject",
-        IsHomalgModule );
 
 ##  <#GAPDoc Label="ResidueClassRing">
 ##  <ManSection>
@@ -175,23 +149,4 @@ DeclareOperation( "GradedRightIdealOfMinors",
 
 DeclareOperation( "GradedRightIdealOfMaximalMinors",
         [ IsHomalgMatrix ] );
-
-# global functions:
-
-# basic operations:
-
-DeclareOperation( "MapHavingSubobjectAsItsImage",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "MatrixOfSubobjectGenerators",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "SuperObject",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "UnderlyingObject",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "IsSubset",
-        [ IsHomalgModule, IsHomalgModule ] );
 

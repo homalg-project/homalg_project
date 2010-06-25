@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Implementation for objects of (Abelian) categories.
+##  Implementations for objects of (Abelian) categories.
 ##
 #############################################################################
 

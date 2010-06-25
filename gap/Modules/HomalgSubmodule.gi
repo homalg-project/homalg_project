@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
 ##
-##  Implementation stuff for homalg submodules.
+##  Implementations for homalg submodules.
 ##
 #############################################################################
 
@@ -59,20 +59,6 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,
   function( M )
     
     return PositionOfTheDefaultSetOfRelations( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( MapHavingSubobjectAsItsImage,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-  function( M )
-    
-    if HasEmbeddingInSuperObject( M ) then
-        return EmbeddingInSuperObject( M );
-    fi;
-    
-    return M!.map_having_subobject_as_its_image;
     
 end );
 
@@ -166,46 +152,6 @@ InstallMethod( ByASmallerPresentation,
     
 end );
 
-##  <#GAPDoc Label="UnderlyingObject">
-##  <ManSection>
-##    <Oper Arg="M" Name="UnderlyingObject" Label="for submodules"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the module underlying the submodule <M>M</M> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( UnderlyingObject,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return Source( EmbeddingInSuperObject( M ) );
-    
-end );
-
-##  <#GAPDoc Label="SuperObject">
-##  <ManSection>
-##    <Oper Arg="M" Name="SuperObject" Label="for submodules"/>
-##    <Returns>a &homalg; module</Returns>
-##    <Description>
-##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the super module <M>L</M> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( SuperObject,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    
-    return Range( MapHavingSubobjectAsItsImage( M ) );
-    
-end );
-
 ##
 InstallOtherMethod( \*,
         "for homalg submodules",
@@ -295,17 +241,6 @@ end );
 ##
 InstallMethod( \=,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
-        
-  function( J, K )
-    
-    return IsSubset( J, K ) and IsSubset( K, J );
-    
-end );
-
-##
-InstallMethod( \=,
-        "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsHomalgRing ],
         
   function( J, R )
@@ -345,22 +280,6 @@ InstallMethod( \*,
     return ImageSubobject( R * OnAFreeSource( MapHavingSubobjectAsItsImage( M ) ) );
     
 end );
-
-##  <#GAPDoc Label="Subobject:map">
-##  <ManSection>
-##    <Oper Arg="phi" Name="Subobject" Label="constructor for submodules using maps"/>
-##    <Returns>a &homalg; submodule</Returns>
-##    <Description>
-##      A synonym of <Ref Attr="ImageSubobject" Label="for maps"/>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( Subobject,
-        "constructor for homalg submodules",
-        [ IsHomalgMap ],
-        
-  ImageSubobject );
 
 ##  <#GAPDoc Label="Subobject:matrix">
 ##  <ManSection>
