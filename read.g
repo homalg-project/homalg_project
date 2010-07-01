@@ -20,6 +20,15 @@ ReadPackage( "homalg", "gap/HomalgMorphism.gi" );
 ## filtrations
 ReadPackage( "homalg", "gap/HomalgFiltration.gi" );
 
+## complexes
+ReadPackage( "homalg", "gap/HomalgComplex.gi" );
+
+## main
+
+##
+## ModulesForHomalg
+##
+
 ## init
 ReadPackage( "homalg", "gap/Modules/ModulesForHomalg.gi" );
 
@@ -43,7 +52,7 @@ ReadPackage( "homalg", "gap/Modules/HomalgMap.gi" );
 ReadPackage( "homalg", "gap/Modules/HomalgFiltration.gi" );
 
 ## complexes
-ReadPackage( "homalg", "gap/HomalgComplex.gi" );
+ReadPackage( "homalg", "gap/Modules/HomalgComplex.gi" );
 
 ## chain maps
 ReadPackage( "homalg", "gap/HomalgChainMap.gi" );
@@ -82,7 +91,6 @@ ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
 ## gap/Modules/
 ReadPackage( "homalg", "gap/Modules/Modules.gi" );
-ReadPackage( "homalg", "gap/Modules/HomalgComplex.gi" );
 ReadPackage( "homalg", "gap/Modules/ToolFunctors.gi" );
 ReadPackage( "homalg", "gap/Modules/BasicFunctors.gi" );
 

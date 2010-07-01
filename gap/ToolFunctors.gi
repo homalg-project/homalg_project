@@ -51,8 +51,8 @@ InstallValue( functor_AsATwoSequence,
                 [ "name", "AsATwoSequence" ],
                 [ "operation", "AsATwoSequence" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "OnObjects", _Functor_AsATwoSequence_OnObjects ]
                 )
         );
@@ -144,8 +144,8 @@ InstallValue( functor_AsChainMapForPullback,
                 [ "name", "AsChainMapForPullback" ],
                 [ "operation", "AsChainMapForPullback" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "OnObjects", _Functor_AsChainMapForPullback_OnObjects ]
                 )
         );
@@ -156,7 +156,7 @@ functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## for convenience
 InstallMethod( \/,
         "for homalg maps with the same target",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta )
     
@@ -170,7 +170,7 @@ end );
 
 InstallMethod( PostDivide,
         "for homalg maps with the same target",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta )
     
@@ -185,7 +185,7 @@ end );
 ##
 InstallMethod( PreDivide,
         "for homalg maps with the same source",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( epsilon, eta )
     
@@ -229,8 +229,8 @@ InstallValue( functor_AsChainMapForPushout,
                 [ "name", "AsChainMapForPushout" ],
                 [ "operation", "AsChainMapForPushout" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "OnObjects", _Functor_AsChainMapForPushout_OnObjects ]
                 )
         );

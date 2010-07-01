@@ -23,8 +23,8 @@
 
 ##
 InstallMethod( CokernelNaturalGeneralizedIsomorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        "for homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local coker, emb;
@@ -52,8 +52,8 @@ end );
 
 ##
 InstallMethod( ImageObjectEpi,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        "for homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local emb, epi, ker_emb;
@@ -226,7 +226,7 @@ functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## for convenience
 InstallMethod( DefectOfExactness,
         "for homalg composable maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi, psi )
     
