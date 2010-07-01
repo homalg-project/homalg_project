@@ -11,9 +11,9 @@
 ##  gap> Jm := SubmoduleQuotient( J, m );
 ##  <A graded torsion-free rank 1 (left) ideal given by 3 generators>
 ##  gap> J_m := Saturate( J, m );
-##  <A graded principal torsion-free (left) ideal given by a cyclic generator>
+##  <A graded principal (left) ideal of rank 1 given by a free generator>
 ##  gap> Js := Saturate( J );
-##  <A graded principal torsion-free (left) ideal given by a cyclic generator>
+##  <A graded principal (left) ideal of rank 1 given by a free generator>
 ##  gap> Assert( 0, Js = J_m );
 ##  ]]></Example>
 ##  </Subsection>

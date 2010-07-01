@@ -27,7 +27,7 @@ T := TorsionSubmodule( M );
 
 iota := TorsionSubmoduleEmb( M );
 
-alpha := StackMorphisms( NaturalGeneralizedEmbedding( T ), NaturalGeneralizedEmbedding( F ) );
+alpha := CoproductMorphism( NaturalGeneralizedEmbedding( T ), NaturalGeneralizedEmbedding( F ) );
 
 Assert( 0, IsIsomorphism( alpha ) );
 
