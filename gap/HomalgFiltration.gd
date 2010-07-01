@@ -30,12 +30,12 @@ DeclareCategory( "IsHomalgFiltration",
         IsAttributeStoringRep );
 
 ## CAUTION: in the code the following two categories are the only ones for sets of generators,
-##          i.e. IsHomalgFiltration and not IsHomalgFiltrationOfLeftModule => IsHomalgFiltrationOfRightModule
+##          i.e. IsHomalgFiltration and not IsHomalgFiltrationOfLeftObject => IsHomalgFiltrationOfRightObject
 
-DeclareCategory( "IsHomalgFiltrationOfLeftModule",
+DeclareCategory( "IsHomalgFiltrationOfLeftObject",
         IsHomalgFiltration );
 
-DeclareCategory( "IsHomalgFiltrationOfRightModule",
+DeclareCategory( "IsHomalgFiltrationOfRightObject",
         IsHomalgFiltration );
 
 DeclareCategory( "IsDescendingFiltration",
@@ -133,31 +133,10 @@ DeclareOperation( "HighestDegreeMorphism",
 DeclareOperation( "UnderlyingObject",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "MatrixOfFiltration",
-        [ IsHomalgFiltration, IsInt ] );
-
-DeclareOperation( "MatrixOfFiltration",
-        [ IsHomalgFiltration ] );
-
 DeclareOperation( "IsomorphismOfFiltration",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "BasisOfModule",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "DecideZero",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "OnLessGenerators",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "ByASmallerPresentation",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "UnlockModule",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "UnlockFiltration",
+DeclareOperation( "UnlockOjbect",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "AssociatedSecondSpectralSequence",

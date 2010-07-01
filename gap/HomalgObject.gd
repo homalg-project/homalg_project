@@ -298,9 +298,20 @@ DeclareOperation( "SetUpperBoundForProjectiveDimension",
 DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgObject, IsInfinity ] );
 
+DeclareOperation( "LockObjectOnCertainPresentation",
+        [ IsHomalgStaticObject, IsInt ] );
+
+DeclareOperation( "LockObjectOnCertainPresentation",
+        [ IsHomalgStaticObject ] );
+
+DeclareOperation( "UnlockObject",
+        [ IsHomalgStaticObject ] );
+
+DeclareOperation( "IsLockedObject",
+        [ IsHomalgStaticObject ] );
+
 DeclareOperation( "DecideZero",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgObjectOrMorphism ] );
-

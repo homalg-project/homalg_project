@@ -745,53 +745,53 @@ InstallMethod( TransitionMatrix,
 end );
 
 ##
-InstallMethod( LockModuleOnCertainPresentation,
+InstallMethod( LockObjectOnCertainPresentation,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep, IsInt ],
         
   function( M, p )
     
     ## first save the current setting
-    M!.LockModuleOnCertainPresentation := PositionOfTheDefaultSetOfRelations( M );
+    M!.LockObjectOnCertainPresentation := PositionOfTheDefaultSetOfRelations( M );
     
     SetPositionOfTheDefaultSetOfRelations( M, p );
     
 end );
 
 ##
-InstallMethod( LockModuleOnCertainPresentation,
+InstallMethod( LockObjectOnCertainPresentation,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
-    LockModuleOnCertainPresentation( M, PositionOfTheDefaultSetOfRelations( M ) );
+    LockObjectOnCertainPresentation( M, PositionOfTheDefaultSetOfRelations( M ) );
     
 end );
 
 ##
-InstallMethod( UnlockModule,
+InstallMethod( UnlockObject,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     
     ## first restore the saved settings
-    if IsBound( M!.LockModuleOnCertainPresentation ) then
-        SetPositionOfTheDefaultSetOfRelations( M, M!.LockModuleOnCertainPresentation );
-        Unbind( M!.LockModuleOnCertainPresentation );
+    if IsBound( M!.LockObjectOnCertainPresentation ) then
+        SetPositionOfTheDefaultSetOfRelations( M, M!.LockObjectOnCertainPresentation );
+        Unbind( M!.LockObjectOnCertainPresentation );
     fi;
     
 end );
 
 ##
-InstallMethod( IsLockedModule,
+InstallMethod( IsLockedObject,
         "for homalg modules",
         [ IsHomalgModule ],
         
   function( M )
     
-    return IsBound( M!.LockModuleOnCertainPresentation );
+    return IsBound( M!.LockObjectOnCertainPresentation );
     
 end );
 
@@ -865,8 +865,8 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    if IsLockedModule( M ) then
-        M!.LockModuleOnCertainPresentation := l+1;
+    if IsLockedObject( M ) then
+        M!.LockObjectOnCertainPresentation := l+1;
     else
         SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     fi;
@@ -903,8 +903,8 @@ InstallMethod( AddANewPresentation,
     for d in rev_lpos do
         if IsIdenticalObj( rel, rels!.(d) ) then
             
-            if IsLockedModule( M ) then
-                M!.LockModuleOnCertainPresentation := d;
+            if IsLockedObject( M ) then
+                M!.LockObjectOnCertainPresentation := d;
             else
                 SetPositionOfTheDefaultSetOfRelations( M, d );
             fi;
@@ -916,8 +916,8 @@ InstallMethod( AddANewPresentation,
     for d in rev_lpos do
         if MatrixOfRelations( rel ) = MatrixOfRelations( rels!.(d) ) then
             
-            if IsLockedModule( M ) then
-                M!.LockModuleOnCertainPresentation := d;
+            if IsLockedObject( M ) then
+                M!.LockObjectOnCertainPresentation := d;
             else
                 SetPositionOfTheDefaultSetOfRelations( M, d );
             fi;
@@ -981,8 +981,8 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    if IsLockedModule( M ) then
-        M!.LockModuleOnCertainPresentation := l+1;
+    if IsLockedObject( M ) then
+        M!.LockObjectOnCertainPresentation := l+1;
     else
         SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     fi;
@@ -1076,8 +1076,8 @@ InstallMethod( AddANewPresentation,
     fi;
     
     ## adjust the default position:
-    if IsLockedModule( M ) then
-        M!.LockModuleOnCertainPresentation := l+1;
+    if IsLockedObject( M ) then
+        M!.LockObjectOnCertainPresentation := l+1;
     else
         SetPositionOfTheDefaultSetOfRelations( M, l+1 );
     fi;
@@ -2878,7 +2878,7 @@ InstallMethod( ViewObj,
             fi;
         fi;
         
-        if IsLockedModule( o ) then
+        if IsLockedObject( o ) then
             locked := " (locked)";
         else
             locked := "";
@@ -2938,7 +2938,7 @@ InstallMethod( ViewObj,
             fi;
         fi;
         
-        if IsLockedModule( o ) then
+        if IsLockedObject( o ) then
             locked := " (locked)";
         else
             locked := "";

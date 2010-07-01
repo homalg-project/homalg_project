@@ -17,6 +17,9 @@ ReadPackage( "homalg", "gap/HomalgSubobject.gd" );
 ## morphisms
 ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
 
+## filtrations
+ReadPackage( "homalg", "gap/HomalgFiltration.gd" );
+
 ## init
 ReadPackage( "homalg", "gap/Modules/ModulesForHomalg.gd" );
 
@@ -37,7 +40,7 @@ ReadPackage( "homalg", "gap/Modules/HomalgSubmodule.gd" );
 ReadPackage( "homalg", "gap/Modules/HomalgMap.gd" );
 
 ## filtrations
-ReadPackage( "homalg", "gap/HomalgFiltration.gd" );
+ReadPackage( "homalg", "gap/Modules/HomalgFiltration.gd" );
 
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gd" );

@@ -408,18 +408,6 @@ DeclareOperation( "NrRelations",
 DeclareOperation( "TransitionMatrix",
         [ IsHomalgModule, IsPosInt, IsPosInt ] );
 
-DeclareOperation( "LockModuleOnCertainPresentation",
-        [ IsHomalgModule, IsInt ] );
-
-DeclareOperation( "LockModuleOnCertainPresentation",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "UnlockModule",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "IsLockedModule",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgGenerators ] );
 
