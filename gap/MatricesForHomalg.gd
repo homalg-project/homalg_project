@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  homalg.gd                   MatricesForHomalg package    Mohamed Barakat
+##  MatricesForHomalg.gd        MatricesForHomalg package    Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
