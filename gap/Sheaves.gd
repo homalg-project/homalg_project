@@ -163,9 +163,6 @@ DeclareProperty( "IsLocallyFree",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareProperty( "IsReflexive",
-        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsTorsionFree">
 ##  <ManSection>
@@ -176,9 +173,6 @@ DeclareProperty( "IsReflexive",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareProperty( "IsTorsionFree",
-        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsTorsion">
 ##  <ManSection>
@@ -189,9 +183,6 @@ DeclareProperty( "IsTorsionFree",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareProperty( "IsTorsion",
-        IsSheafOfModules );
 
 ##  <#GAPDoc Label="IsPure">
 ##  <ManSection>
@@ -336,9 +327,6 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareAttribute( "Codim",
-        IsSheafOfModules );
 
 ##  <#GAPDoc Label="PurityFiltration">
 ##  <ManSection>
@@ -362,9 +350,6 @@ DeclareAttribute( "PurityFiltration",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareAttribute( "CodegreeOfPurity",
-        IsSheafOfModules );
 
 ##  <#GAPDoc Label="CastelnuovoMumfordRegularity">
 ##  <ManSection>
