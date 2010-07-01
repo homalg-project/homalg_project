@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgModule.gi             homalg package               Mohamed Barakat
+##  HomalgModule.gi             Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
@@ -1435,8 +1435,8 @@ InstallMethod( ByASmallerPresentation,
         fi;
     od;
     
-    if not ( IsBound( HOMALG.ByASmallerPresentationDoesNotDecideZero ) and
-             HOMALG.ByASmallerPresentationDoesNotDecideZero = true ) then
+    if not ( IsBound( HOMALG_MODULES.ByASmallerPresentationDoesNotDecideZero ) and
+             HOMALG_MODULES.ByASmallerPresentationDoesNotDecideZero = true ) then
         DecideZero( M );
     fi;
     

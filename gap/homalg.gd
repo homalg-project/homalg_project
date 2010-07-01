@@ -89,9 +89,6 @@ DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgSubobjects" );
 
 # basic operations:
 
-DeclareOperation( "HomalgRing",
-        [ IsHomalgObjectOrMorphism ] );
-
 DeclareOperation( "homalgResetFilters",
         [ IsHomalgObjectOrMorphism ] );
 
@@ -100,18 +97,6 @@ DeclareOperation( "AsLeftObject",
 
 DeclareOperation( "AsRightObject",
         [ IsHomalgRing ] );
-
-DeclareOperation( "BasisOfModule",
-        [ IsHomalgObjectOrMorphism ] );
-
-DeclareOperation( "DecideZero",
-        [ IsHomalgObjectOrMorphism ] );
-
-DeclareOperation( "OnLessGenerators",
-        [ IsHomalgObjectOrMorphism ] );
-
-DeclareOperation( "ByASmallerPresentation",
-        [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "CheckIfTheyLieInTheSameCategory",
         [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );

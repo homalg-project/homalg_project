@@ -126,12 +126,6 @@ DeclareRepresentation( "IsStaticMorphismOfFinitelyGeneratedObjectsRep",
 
 ####################################
 #
-# families and types:
-#
-####################################
-
-####################################
-#
 # global variables:
 #
 ####################################
@@ -141,10 +135,6 @@ DeclareRepresentation( "IsStaticMorphismOfFinitelyGeneratedObjectsRep",
 InstallValue( HOMALG,
         rec(
             color_display := false,
-            
-            ByASmallerPresentationDoesNotDecideZero := false,
-            
-            Intersect_uses_ReducedBasisOfModule := true,
             
             SubQuotient_uses_Intersect := false,
             

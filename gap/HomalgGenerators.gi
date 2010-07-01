@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgGenerators.gi         homalg package               Mohamed Barakat
+##  HomalgGenerators.gi         Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

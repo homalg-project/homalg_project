@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgRingMaps.gi           homalg package               Mohamed Barakat
+##  HomalgRingMaps.gi           Modules package              Mohamed Barakat
 ##
 ##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
 ##

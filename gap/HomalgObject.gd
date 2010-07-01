@@ -298,3 +298,9 @@ DeclareOperation( "SetUpperBoundForProjectiveDimension",
 DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgObject, IsInfinity ] );
 
+DeclareOperation( "DecideZero",
+        [ IsHomalgObjectOrMorphism ] );
+
+DeclareOperation( "ByASmallerPresentation",
+        [ IsHomalgObjectOrMorphism ] );
+

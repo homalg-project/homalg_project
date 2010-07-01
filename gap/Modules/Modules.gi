@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Modules.gi                  homalg package               Mohamed Barakat
+##  Modules.gi                  Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
@@ -605,8 +605,8 @@ InstallMethod( Intersect2,
     
     im := HomalgRelationsForRightModule( MatrixOfMap( im ) );
     
-    if IsBound( HOMALG.Intersect_uses_ReducedBasisOfModule ) and
-       HOMALG.Intersect_uses_ReducedBasisOfModule = true then
+    if IsBound( HOMALG_MODULES.Intersect_uses_ReducedBasisOfModule ) and
+       HOMALG_MODULES.Intersect_uses_ReducedBasisOfModule = true then
         
         return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
     fi;
@@ -632,8 +632,8 @@ InstallMethod( Intersect2,
     
     im := HomalgRelationsForLeftModule( MatrixOfMap( im ) );
     
-    if IsBound( HOMALG.Intersect_uses_ReducedBasisOfModule ) and
-       HOMALG.Intersect_uses_ReducedBasisOfModule = true then
+    if IsBound( HOMALG_MODULES.Intersect_uses_ReducedBasisOfModule ) and
+       HOMALG_MODULES.Intersect_uses_ReducedBasisOfModule = true then
         
         return ReducedBasisOfModule( im, "COMPUTE_BASIS" );
     fi;
@@ -781,7 +781,7 @@ InstallOtherMethod( SubmoduleQuotient,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, R, degrees, graded, M_K, gen_iso_K, coker_epi_K, mapJ;
+    local M, R, degrees, graded, M_K, gen_iso_K, coker_epi_K, mapJ, ker;
     
     M := SuperObject( J );
     
@@ -834,9 +834,9 @@ InstallOtherMethod( SubmoduleQuotient,
     if IsBound( HOMALG.SubQuotient_uses_Intersect ) and
        HOMALG.SubQuotient_uses_Intersect = true then
         
-        mapJ := List( mapJ, KernelSubobject );
+        ker := List( mapJ, KernelSubobject );
         
-        return Intersect( mapJ );
+        return Intersect( ker );
     fi;
     
     mapJ := Iterated( mapJ, ProductMorphism );

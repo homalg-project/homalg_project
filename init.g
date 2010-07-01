@@ -2,13 +2,23 @@
 ##
 ##  init.g                homalg package                    Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Reading the declaration part of the homalg package.
 ##
 #############################################################################
 
 ReadPackage( "homalg", "gap/homalg.gd" );
+
+## objects/subobjects
+ReadPackage( "homalg", "gap/HomalgObject.gd" );
+ReadPackage( "homalg", "gap/HomalgSubobject.gd" );
+
+## morphisms
+ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
+
+## init
+ReadPackage( "homalg", "gap/Modules/ModulesForHomalg.gd" );
 
 ## rings
 ReadPackage( "homalg", "gap/HomalgRingMap.gd" );
@@ -18,13 +28,6 @@ ReadPackage( "homalg", "gap/HomalgRelations.gd" );
 ReadPackage( "homalg", "gap/SetsOfRelations.gd" );
 ReadPackage( "homalg", "gap/HomalgGenerators.gd" );
 ReadPackage( "homalg", "gap/SetsOfGenerators.gd" );
-
-## objects/subobjects
-ReadPackage( "homalg", "gap/HomalgObject.gd" );
-ReadPackage( "homalg", "gap/HomalgSubobject.gd" );
-
-## morphisms
-ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
 
 ## modules/submodules
 ReadPackage( "homalg", "gap/Modules/HomalgModule.gd" );

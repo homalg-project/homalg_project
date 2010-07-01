@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgMap.gi                homalg package               Mohamed Barakat
+##  HomalgMap.gi                Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgSubmodule.gd          homalg package               Mohamed Barakat
+##  HomalgSubmodule.gd          Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
 ##
