@@ -317,7 +317,7 @@ InstallGlobalFunction( HomalgFiltration,
         
         gen_map := pre_filtration!.(String( i ));
         
-        gen_emb := GeneralizedMap( gen_map, monomorphism_aid );
+        gen_emb := GeneralizedMorphism( gen_map, monomorphism_aid );
         
         ## check assertion
         Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
@@ -338,7 +338,7 @@ InstallGlobalFunction( HomalgFiltration,
         
         gen_map := pre_filtration!.(String( i ));
         
-        gen_emb := GeneralizedMap( gen_map, monomorphism_aid );
+        gen_emb := GeneralizedMorphism( gen_map, monomorphism_aid );
         
         ## the upper one but be a generalized isomorphism
         Assert( 1, IsGeneralizedIsomorphism( gen_emb ) );

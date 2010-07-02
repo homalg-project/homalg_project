@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for homalg bigraded objects.
+##  Declarations for homalg bigraded objects.
 ##
 #############################################################################
 
@@ -129,9 +129,6 @@ DeclareOperation( "DefectOfExactness",
         [ IsHomalgBigradedObject ] );
 
 # basic operations:
-
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgBigradedObject ] );			## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "ObjectDegreesOfBigradedObject",
         [ IsHomalgBigradedObject ] );

@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for homalg bigraded objects.
+##  Implementations for homalg bigraded objects.
 ##
 #############################################################################
 
@@ -139,17 +139,6 @@ InstallMethod( homalgResetFilters,
 end );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( Er )
-    
-    return fail;
-    
-end );
-
-##
 InstallMethod( ObjectDegreesOfBigradedObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
@@ -257,17 +246,6 @@ InstallMethod( HighestBidegreeObjectInBigradedObject,
 end );
 
 ##
-InstallMethod( HomalgRing,
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( Er )
-    
-    return HomalgRing( LowestBidegreeObjectInBigradedObject( Er ) );
-    
-end );
-
-##
 InstallMethod( CertainMorphism,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject, IsList ],
@@ -331,19 +309,6 @@ InstallMethod( UnderlyingBicomplex,
 end );
 
 ##
-InstallMethod( BasisOfModule,
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( Er )
-    
-    List( Flat( ObjectsOfBigradedObject( Er ) ), BasisOfModule );
-    
-    return Er;
-    
-end );
-
-##
 InstallMethod( DecideZero,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],
@@ -351,19 +316,6 @@ InstallMethod( DecideZero,
   function( Er )
     
     List( Flat( ObjectsOfBigradedObject( Er ) ), DecideZero );
-    
-    return Er;
-    
-end );
-
-##
-InstallMethod( OnLessGenerators,
-        "for homalg bigraded objects",
-        [ IsHomalgBigradedObject ],
-        
-  function( Er )
-    
-    List( Flat( ObjectsOfBigradedObject( Er ) ), OnLessGenerators );
     
     return Er;
     
@@ -577,7 +529,7 @@ InstallMethod( AsDifferentialObject,
                                 if r > 2 then
                                     bidegrees_source := List( [ 1 .. r - 2 ], i -> [ p - i, q + i ] );
                                     aid := MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
-                                    mor_v := GeneralizedMap( mor_v, aid );
+                                    mor_v := GeneralizedMorphism( mor_v, aid );
                                 fi;
                                 mor := - mor / mor_v;	## generalized lift
                                 mor := PreCompose( mor, mor_h[r] );
@@ -614,7 +566,7 @@ InstallMethod( AsDifferentialObject,
                                 if r > 2 then
                                     bidegrees_source := List( [ 1 .. r - 2 ], i -> [ p + i, q - i ] );
                                     aid := MorphismOfTotalComplex( B, bidegrees_source, bidegrees_target );
-                                    mor_v := GeneralizedMap( mor_v, aid );
+                                    mor_v := GeneralizedMorphism( mor_v, aid );
                                 fi;
                                 mor := - mor / mor_v;	## generalized lift
                                 mor := PreCompose( mor, mor_h[r] );

@@ -310,7 +310,7 @@ DeclareAttribute( "GeneralizedInverse",
 DeclareOperation( "RemoveMorphismAid",
         [ IsHomalgMorphism ] );
 
-DeclareOperation( "GeneralizedMap",
+DeclareOperation( "GeneralizedMorphism",
         [ IsHomalgMorphism, IsObject ] );
 
 DeclareOperation( "AddToMorphismAid",

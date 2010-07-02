@@ -69,7 +69,7 @@ InstallMethod( AddTotalEmbeddingsToCollapsedToZeroSpectralSequence,
         ## gen_emb needs to master the lifts it will be used for.
         ## We distinguish between complexes and cocomplexes
         ## (or between homological and cohomological spectral sequences)
-        gen_emb := GeneralizedMap( gen_emb, CertainMorphism( Tot, n + co ) );
+        gen_emb := GeneralizedMorphism( gen_emb, CertainMorphism( Tot, n + co ) );
         
         ## check assertion
         Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );

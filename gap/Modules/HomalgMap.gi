@@ -1356,7 +1356,7 @@ InstallMethod( RemoveMorphismAid,
 end );
 
 ## works without side effects
-InstallMethod( GeneralizedMap,
+InstallMethod( GeneralizedMorphism,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
         
@@ -1408,7 +1408,7 @@ InstallMethod( AddToMorphismAid,
         morphism_aid_map1 := CoproductMorphism( morphism_aid_map0, morphism_aid_map1 );
     fi;
     
-    return GeneralizedMap( phi, morphism_aid_map1 );
+    return GeneralizedMorphism( phi, morphism_aid_map1 );
     
 end );
 
