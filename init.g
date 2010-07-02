@@ -23,9 +23,17 @@ ReadPackage( "homalg", "gap/HomalgFiltration.gd" );
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gd" );
 
+## chain maps
+ReadPackage( "homalg", "gap/HomalgChainMap.gd" );
+
 ## functors
+ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 
 ## main
+ReadPackage( "homalg", "gap/StaticObjects.gd" );
+
+ReadPackage( "homalg", "gap/ToolFunctors.gd" );
+ReadPackage( "homalg", "gap/BasicFunctors.gd" );
 
 ##
 ## ModulesForHomalg
@@ -47,7 +55,7 @@ ReadPackage( "homalg", "gap/SetsOfGenerators.gd" );
 ReadPackage( "homalg", "gap/Modules/HomalgModule.gd" );
 ReadPackage( "homalg", "gap/Modules/HomalgSubmodule.gd" );
 
-## gap/Modules/
+## maps
 ReadPackage( "homalg", "gap/Modules/HomalgMap.gd" );
 
 ## filtrations
@@ -57,7 +65,7 @@ ReadPackage( "homalg", "gap/Modules/HomalgFiltration.gd" );
 ReadPackage( "homalg", "gap/Modules/HomalgComplex.gd" );
 
 ## chain maps
-ReadPackage( "homalg", "gap/HomalgChainMap.gd" );
+ReadPackage( "homalg", "gap/Modules/HomalgChainMap.gd" );
 
 ## bicomplexes
 ReadPackage( "homalg", "gap/HomalgBicomplex.gd" );
@@ -69,15 +77,12 @@ ReadPackage( "homalg", "gap/HomalgBigradedObject.gd" );
 ReadPackage( "homalg", "gap/HomalgSpectralSequence.gd" );
 
 ## functors
-ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
 ReadPackage( "homalg", "gap/Modules/HomalgFunctor.gd" );
 
 ## diagrams
 ReadPackage( "homalg", "gap/HomalgDiagram.gd" );
 
 ## main
-ReadPackage( "homalg", "gap/StaticObjects.gd" );
-
 ReadPackage( "homalg", "gap/Maps.gd" );
 
 ReadPackage( "homalg", "gap/Complexes.gd" );
@@ -88,11 +93,9 @@ ReadPackage( "homalg", "gap/SpectralSequences.gd" );
 
 ReadPackage( "homalg", "gap/Filtrations.gd" );
 
-ReadPackage( "homalg", "gap/ToolFunctors.gd" );
-ReadPackage( "homalg", "gap/BasicFunctors.gd" );
 ReadPackage( "homalg", "gap/OtherFunctors.gd" );
 
-## gap/Modules/
+## main
 ReadPackage( "homalg", "gap/Modules/Modules.gd" );
 ReadPackage( "homalg", "gap/Modules/ToolFunctors.gd" );
 ReadPackage( "homalg", "gap/Modules/BasicFunctors.gd" );

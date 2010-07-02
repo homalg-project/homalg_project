@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgFunctor.gi            homalg package               Mohamed Barakat
+##  HomalgFunctor.gi            Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##

@@ -2276,7 +2276,7 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
         
         InstallOtherMethod( functor_operation,
                 "for homalg special chain maps",
-                [ filter_mor and filter_special ],
+                [ filter_mor and filter_special ], 10001,
                 function( sq )
             local dS, dT, phi, epiS, epiT;
             
@@ -2296,7 +2296,7 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
         
         InstallOtherMethod( functor_operation,
                 "for homalg special chain maps",
-                [ filter_mor and filter_special ],
+                [ filter_mor and filter_special ], 10001,
                 function( sq )
             local dS, dT, phi, muS, muT;
             

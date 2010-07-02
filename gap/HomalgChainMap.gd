@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for homalg chain maps.
+##  Declarations for homalg chain maps.
 ##
 #############################################################################
 
@@ -52,7 +52,7 @@ DeclareCategory( "IsHomalgChainSelfMap",
 #
 ####################################
 
-## further properties are declared in homalg.gd for the bigger category IsHomalgMorphism
+## further properties are declared in HomalgMorphism.gd for the bigger category IsHomalgMorphism
 
 ##  <#GAPDoc Label="IsMorphism:chainmap">
 ##  <ManSection>
@@ -221,7 +221,7 @@ DeclareProperty( "IsChainMapForPushout",
 #
 ####################################
 
-## some attributes are already declared in homalg.gd for the bigger category IsHomalgMorphism
+## some attributes are already declared in HomalgMorphism.gd for the bigger category IsHomalgMorphism
 
 ##  <#GAPDoc Label="Source:chainmap">
 ##  <ManSection>
@@ -253,12 +253,6 @@ DeclareProperty( "IsChainMapForPushout",
 
 DeclareGlobalFunction( "HomalgChainMap" );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgChainMap ] );
-
-DeclareOperation( "*",
-        [ IsHomalgChainMap, IsHomalgRing ] );
-
 # basic operations:
 
 DeclareOperation( "SourceOfSpecialChainMap",
@@ -269,9 +263,6 @@ DeclareOperation( "RangeOfSpecialChainMap",
 
 DeclareOperation( "CertainMorphismOfSpecialChainMap",
         [ IsHomalgChainMap ] );
-
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgChainMap ] );	## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "DegreesOfChainMap",
         [ IsHomalgChainMap ] );
@@ -308,9 +299,6 @@ DeclareOperation( "SupportOfChainMap",
 
 DeclareOperation( "Add",
         [ IsHomalgChainMap, IsHomalgMorphism ] );
-
-DeclareOperation( "Add",
-        [ IsHomalgChainMap, IsHomalgMatrix ] );
 
 DeclareOperation( "CertainMorphismAsKernelSquare",
         [ IsHomalgChainMap, IsInt ] );

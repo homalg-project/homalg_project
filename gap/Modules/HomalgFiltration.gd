@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgFiltration.gd         homalg package               Mohamed Barakat
+##  HomalgFiltration.gd         Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
