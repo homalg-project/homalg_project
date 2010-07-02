@@ -26,6 +26,9 @@ ReadPackage( "homalg", "gap/HomalgComplex.gi" );
 ## chain maps
 ReadPackage( "homalg", "gap/HomalgChainMap.gi" );
 
+## bicomplexes
+ReadPackage( "homalg", "gap/HomalgBicomplex.gi" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
 
@@ -68,7 +71,7 @@ ReadPackage( "homalg", "gap/Modules/HomalgComplex.gi" );
 ReadPackage( "homalg", "gap/Modules/HomalgChainMap.gi" );
 
 ## bicomplexes
-ReadPackage( "homalg", "gap/HomalgBicomplex.gi" );
+ReadPackage( "homalg", "gap/Modules/HomalgBicomplex.gi" );
 
 ## bigraded objects
 ReadPackage( "homalg", "gap/HomalgBigradedObject.gi" );

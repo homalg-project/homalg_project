@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for homalg bicomplexes.
+##  Implementations for homalg bicomplexes.
 ##
 #############################################################################
 
@@ -202,17 +202,6 @@ InstallMethod( UnderlyingComplex,
 end );
 
 ##
-InstallMethod( HomalgRing,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    
-    return HomalgRing( UnderlyingComplex( B ) );
-    
-end );
-
-##
 InstallMethod( homalgResetFilters,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],
@@ -240,17 +229,6 @@ InstallMethod( homalgResetFilters,
         ResetFilterObj( B, SpectralSequence );
         Unbind( B!.SpectralSequence );
     fi;
-    
-end );
-
-##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    
-    return fail;
     
 end );
 
@@ -669,19 +647,6 @@ InstallMethod( MorphismOfTotalComplex,
 end );
     
 ##
-InstallMethod( BasisOfModule,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    
-    BasisOfModule( UnderlyingComplex( B ) );
-    
-    return B;
-    
-end );
-
-##
 InstallMethod( DecideZero,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],
@@ -691,19 +656,6 @@ InstallMethod( DecideZero,
     DecideZero( UnderlyingComplex( B ) );
     
     IsZero( B );
-    
-    return B;
-    
-end );
-
-##
-InstallMethod( OnLessGenerators,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    
-    OnLessGenerators( UnderlyingComplex( B ) );
     
     return B;
     
@@ -895,28 +847,6 @@ InstallMethod( TransposedBicomplex,
   function( tB )
     
     return tB!.TransposedBicomplex;
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg bicomplexes",
-        [ IsHomalgRing, IsHomalgBicomplex ],
-        
-  function( R, B )
-    
-    return HomalgBicomplex( R * UnderlyingComplex( B ) );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex, IsHomalgRing ],
-        
-  function( B, R )
-    
-    return R * B;
     
 end );
 

@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for homalg bicomplexes.
+##  Declarations for homalg bicomplexes.
 ##
 #############################################################################
 
@@ -121,19 +121,10 @@ DeclareGlobalFunction( "HomalgBicomplex" );
 DeclareOperation( "TransposedBicomplex",
         [ IsHomalgBicomplex ] );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgBicomplex ] );
-
-DeclareOperation( "*",
-        [ IsHomalgBicomplex, IsHomalgRing ] );
-
 # basic operations:
 
 DeclareOperation( "UnderlyingComplex",
         [ IsHomalgBicomplex ] );
-
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgBicomplex ] );			## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "ObjectDegreesOfBicomplex",
         [ IsHomalgBicomplex ] );

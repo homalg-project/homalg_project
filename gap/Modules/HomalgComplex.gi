@@ -2,7 +2,7 @@
 ##
 ##  HomalgComplex.gi            Modules package              Mohamed Barakat
 ##
-##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Implementation stuff for homalg complexes.
 ##

@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  HomalgComplex.gd            Modules package              Mohamed Barakat
+##  HomalgBicomplex.gd          Modules package              Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Declaration stuff for homalg complexes.
+##  Declarations for homalg bicomplexes.
 ##
 #############################################################################
 
@@ -17,16 +17,13 @@
 # constructors:
 
 DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgComplex ] );
+        [ IsHomalgRing, IsHomalgBicomplex ] );
 
 DeclareOperation( "*",
-        [ IsHomalgComplex, IsHomalgRing ] );
+        [ IsHomalgBicomplex, IsHomalgRing ] );
 
 # basic operations:
 
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgComplex ] );			## provided to avoid branching in the code and always returns fail
-
-DeclareOperation( "Add",
-        [ IsHomalgComplex, IsHomalgMatrix ] );
+        [ IsHomalgBicomplex ] );			## provided to avoid branching in the code and always returns fail
 
