@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for homalg spectral sequences.
+##  Declarations for homalg spectral sequences.
 ##
 #############################################################################
 
@@ -130,9 +130,6 @@ DeclareOperation( "HomalgSpectralSequence",
         [ IsHomalgBicomplex ] );
 
 # basic operations:
-
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgSpectralSequence ] );			## provided to avoid branching in the code and always returns fail
 
 DeclareOperation( "LevelsOfSpectralSequence",
         [ IsHomalgSpectralSequence ] );

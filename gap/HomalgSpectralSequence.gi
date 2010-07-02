@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for homalg spectral sequences.
+##  Implementations for homalg spectral sequences.
 ##
 #############################################################################
 
@@ -115,17 +115,6 @@ InstallMethod( homalgResetFilters,
     for property in HOMALG.PropertiesOfSpectralSequencees do
         ResetFilterObj( E, property );
     od;
-    
-end );
-
-##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
-        "for homalg spectral sequences",
-        [ IsHomalgSpectralSequence ],
-        
-  function( E )
-    
-    return fail;
     
 end );
 
@@ -448,17 +437,6 @@ InstallMethod( HighestBidegreeObjectInSpectralSequence,
 end );
 
 ##
-InstallMethod( HomalgRing,
-        "for homalg spectral sequences",
-        [ IsHomalgSpectralSequence ],
-        
-  function( E )
-    
-    return HomalgRing( LowestLevelSheetInSpectralSequence( E ) );
-    
-end );
-
-##
 InstallMethod( CertainMorphism,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence, IsList, IsInt ],
@@ -651,28 +629,6 @@ InstallMethod( StaircaseOfStability,
   function( E, pq )
     
     return StaircaseOfStability( E, pq, LevelsOfSpectralSequence( E )[1] );
-    
-end );
-
-##
-InstallMethod( OnLessGenerators,
-        "for homalg spectral sequences",
-        [ IsHomalgSpectralSequence ],
-        
-  function( E )
-    
-    return OnLessGenerators( HighestLevelSheetInSpectralSequence( E ) );
-    
-end );
-
-##
-InstallMethod( BasisOfModule,
-        "for homalg spectral sequences",
-        [ IsHomalgSpectralSequence ],
-        
-  function( E )
-    
-    return BasisOfModule( HighestLevelSheetInSpectralSequence( E ) );
     
 end );
 
