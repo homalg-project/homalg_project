@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for functors.
+##  Implementations for functors.
 ##
 #############################################################################
 
@@ -649,9 +649,8 @@ InstallMethod( FunctorMap,
             arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
             hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
             
-            if IsHomalgMatrix( hull_phi ) then
-                hull_phi :=
-                  HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
+            if IsBound( Functor!.ConstructMorphism ) then
+                hull_phi := Functor!.ConstructMorphism( hull_phi, Range( emb_source ), Range( emb_target ) );
                 
                 ## otherwise the result mor cannot automatically be marked IsMorphism
                 SetIsMorphism( hull_phi, true );

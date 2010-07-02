@@ -23,6 +23,8 @@ ReadPackage( "homalg", "gap/HomalgFiltration.gi" );
 ## complexes
 ReadPackage( "homalg", "gap/HomalgComplex.gi" );
 
+## functors
+
 ## main
 
 ##
@@ -68,6 +70,7 @@ ReadPackage( "homalg", "gap/HomalgSpectralSequence.gi" );
 
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
+ReadPackage( "homalg", "gap/Modules/HomalgFunctor.gi" );
 
 ## diagrams
 ReadPackage( "homalg", "gap/HomalgDiagram.gi" );

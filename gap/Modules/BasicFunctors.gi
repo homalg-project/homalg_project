@@ -444,7 +444,8 @@ InstallValue( Functor_Hom,
                 [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
                 [ "2", [ [ "covariant", "left exact" ] ] ],
                 [ "OnObjects", _Functor_Hom_OnModules ],
-                [ "OnMorphisms", _Functor_Hom_OnMaps ]
+                [ "OnMorphisms", _Functor_Hom_OnMaps ],
+                [ "ConstructMorphism", HOMALG_MODULES.ConstructMorphism ]
                 )
         );
 ##  ]]></Listing>
@@ -698,7 +699,8 @@ if IsOperation( TensorProduct ) then
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
                     [ "2", [ [ "covariant", "left adjoint" ] ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnMaps ]
+                    [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
+                    [ "ConstructMorphism", HOMALG_MODULES.ConstructMorphism ]
                     )
             );
     
@@ -715,7 +717,8 @@ else
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
                     [ "2", [ [ "covariant", "left adjoint" ] ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnMaps ]
+                    [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
+                    [ "ConstructMorphism", HOMALG_MODULES.ConstructMorphism ]
                     )
             );
     ##  ]]></Listing>
