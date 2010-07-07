@@ -781,7 +781,7 @@ InstallOtherMethod( SubmoduleQuotient,
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )
-    local M, R, degrees, graded, M_K, gen_iso_K, coker_epi_K, mapJ, ker;
+    local M, R, degrees, graded, MmodK, gen_iso_K, coker_epi_K, mapJ, ker;
     
     M := SuperObject( J );
     
@@ -795,10 +795,10 @@ InstallOtherMethod( SubmoduleQuotient,
     
     graded := IsList( degrees ) and degrees <> [ ];
     
-    M_K := M / K;
+    MmodK := M / K;
     
     ## the generalized isomorphism M/K -> M
-    gen_iso_K := NaturalGeneralizedEmbedding( M_K );
+    gen_iso_K := NaturalGeneralizedEmbedding( MmodK );
     
     Assert( 1, IsGeneralizedIsomorphism( gen_iso_K ) );
     
@@ -829,7 +829,7 @@ InstallOtherMethod( SubmoduleQuotient,
         mapJ := List( [ 1 .. NrColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
     fi;
     
-    mapJ := List( mapJ, g -> HomalgMap( g, R, M_K ) );
+    mapJ := List( mapJ, g -> HomalgMap( g, R, MmodK ) );
     
     if IsBound( HOMALG.SubQuotient_uses_Intersect ) and
        HOMALG.SubQuotient_uses_Intersect = true then
@@ -850,26 +850,26 @@ InstallMethod( Saturate,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
         
-  function( K )
+  function( I )
     local degrees, max;
     
-    degrees := DegreesOfGenerators( K );
+    degrees := DegreesOfGenerators( I );
     
     if not ( IsList( degrees ) and degrees <> [ ] ) then
         TryNextMethod( );
-    elif not ( HasConstructedAsAnIdeal( K ) and ConstructedAsAnIdeal( K ) ) then
+    elif not ( HasConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( I ) ) then
         TryNextMethod( );
     fi;
     
-    max := Indeterminates( HomalgRing( K ) );
+    max := Indeterminates( HomalgRing( I ) );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( K ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
         max := GradedLeftSubmodule( max );
     else
         max := GradedRightSubmodule( max );
     fi;
     
-    return Saturate( K, max );
+    return Saturate( I, max );
     
 end );
 

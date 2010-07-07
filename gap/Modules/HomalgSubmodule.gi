@@ -157,21 +157,21 @@ InstallOtherMethod( \*,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         
-  function( J, K )
-    local super, genJ, genK;
+  function( I, J )
+    local super, genI, genJ;
     
-    super := SuperObject( J );
+    super := SuperObject( I );
     
-    if not IsIdenticalObj( super, SuperObject( K ) ) then
+    if not IsIdenticalObj( super, SuperObject( J ) ) then
         Error( "the super objects must coincide\n" );
-    elif not ( ConstructedAsAnIdeal( J ) and ConstructedAsAnIdeal( K ) ) then
+    elif not ( ConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( J ) ) then
         Error( "can only multiply ideals in a common ring\n" );
     fi;
     
+    genI := MatrixOfSubobjectGenerators( I );
     genJ := MatrixOfSubobjectGenerators( J );
-    genK := MatrixOfSubobjectGenerators( K );
     
-    return Subobject( KroneckerMat( genJ, genK ), super );
+    return Subobject( KroneckerMat( genI, genJ ), super );
     
 end );
 
@@ -180,10 +180,10 @@ InstallOtherMethod( POW,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsInt ],
         
-  function( J, pow )
+  function( I, pow )
     local R;
     
-    R := HomalgRing( J );
+    R := HomalgRing( I );
     
     if pow < 0 then
         
@@ -191,15 +191,15 @@ InstallOtherMethod( POW,
         
     elif pow = 0 then
         
-        return Subobject( HomalgIdentityMatrix( 1, R ), SuperObject( J ) );
+        return Subobject( HomalgIdentityMatrix( 1, R ), SuperObject( I ) );
         
     elif pow = 1 then
         
-        return J;
+        return I;
         
     else
         
-        return Iterated( ListWithIdenticalEntries( pow, J ), \* );
+        return Iterated( ListWithIdenticalEntries( pow, I ), \* );
         
     fi;
     
@@ -420,13 +420,13 @@ end );
 ##      <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
 ##  <A homalg residue class ring>
-##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
+##  gap> I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A homalg residue class 1 by 1 matrix>
-##  gap> J := LeftSubmodule( J );
+##  gap> I := LeftSubmodule( I );
 ##  <A principal torsion-free (left) ideal given by a cyclic generator>
-##  gap> IsFree( J );
+##  gap> IsFree( I );
 ##  false
-##  gap> J;
+##  gap> I;
 ##  <A principal reflexive non-projective (left) ideal given by a cyclic generator\
 ##  >
 ##  ]]></Example>
@@ -532,13 +532,13 @@ end );
 ##      <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
 ##  <A homalg residue class ring>
-##  gap> J := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
+##  gap> I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A homalg residue class 1 by 1 matrix>
-##  gap> J := RightSubmodule( J );
+##  gap> I := RightSubmodule( I );
 ##  <A principal torsion-free (right) ideal given by a cyclic generator>
-##  gap> IsFree( J );
+##  gap> IsFree( I );
 ##  false
-##  gap> J;
+##  gap> I;
 ##  <A principal reflexive non-projective (right) ideal given by a cyclic generato\
 ##  r>
 ##  ]]></Example>

@@ -2,7 +2,7 @@ LoadPackage( "homalg" );
 
 ZZ := HomalgRingOfIntegers( );
 
-J := RightSubmodule( "4", ZZ );
+I := RightSubmodule( "4", ZZ );
 
-K := Subobject( HomalgMatrix( "[ 6 ]", 1, 1, ZZ ), UnderlyingObject( J ) );
+J := Subobject( HomalgMatrix( "[ 6 ]", 1, 1, ZZ ), UnderlyingObject( I ) );
 
