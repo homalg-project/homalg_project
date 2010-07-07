@@ -151,7 +151,7 @@ InstallMethod( RandomProjectivePlaneCurve,
     sing_pos := Filtered( [ 1 .. s ], i -> mults[i] > 1 );
     
     if sing_pos = [ ] then
-        sing_locus := FullSubmodule( O( 0 ) );
+        sing_locus := FullSubobject( O( 0 ) );
     else
         sing_locus := IntersectWithMultiplicity( points{ sing_pos }, mults{ sing_pos } );
     fi;
@@ -164,7 +164,7 @@ InstallMethod( RandomProjectivePlaneCurve,
     
     ## the adjoint system
     if sing_pos = [ ] then
-        adjoint_system := FullSubmodule( O( 0 ) ) * O( d - 2 - 1 );
+        adjoint_system := FullSubobject( O( 0 ) ) * O( d - 2 - 1 );
     else
         adjoint_system := IntersectWithMultiplicity( points{ sing_pos }, mults{ sing_pos } - 1 ) * O( d - 2 - 1 );
     fi;
@@ -217,6 +217,6 @@ InstallMethod( RandomProjectivePlaneCurve,
         
   function( d, R1 )	## R1 is a free module of rank 1
     
-    return RandomProjectivePlaneCurve( d, [ FullSubmodule( R1^0 ) ], [ 0 ] );
+    return RandomProjectivePlaneCurve( d, [ FullSubobject( R1^0 ) ], [ 0 ] );
     
 end );
