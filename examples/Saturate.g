@@ -6,15 +6,15 @@
 ##  <A graded torsion-free (left) ideal given by 3 generators>
 ##  gap> m := GradedLeftSubmodule( "x,y,z", R );
 ##  <A graded torsion-free (left) ideal given by 3 generators>
-##  gap> J := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
+##  gap> I := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
 ##  <A graded torsion-free (left) ideal given by 6 generators>
-##  gap> Jm := SubmoduleQuotient( J, m );
+##  gap> Im := SubmoduleQuotient( I, m );
 ##  <A graded torsion-free rank 1 (left) ideal given by 3 generators>
-##  gap> J_m := Saturate( J, m );
+##  gap> I_m := Saturate( I, m );
 ##  <A graded principal (left) ideal of rank 1 given by a free generator>
-##  gap> Js := Saturate( J );
+##  gap> Is := Saturate( I );
 ##  <A graded principal (left) ideal of rank 1 given by a free generator>
-##  gap> Assert( 0, Js = J_m );
+##  gap> Assert( 0, Is = I_m );
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -27,13 +27,13 @@ R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 m := GradedLeftSubmodule( "x,y,z", R );
 
-J := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
+I := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
 
-Jm := SubmoduleQuotient( J, m );
+Im := SubmoduleQuotient( I, m );
 
-J_m := Saturate( J, m );
+I_m := Saturate( I, m );
 
-Js := Saturate( J );
+Is := Saturate( I );
 
-Assert( 0, Js = J_m );
+Assert( 0, Is = I_m );
 

@@ -4,12 +4,11 @@ LoadPackage( "homalg" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 
-J := LeftSubmodule( "x", R );
-K := LeftSubmodule( "y", R );
+I := LeftSubmodule( "x", R );
+J := LeftSubmodule( "y", R );
 
-M := 1 * R / ( J * K );
+M := 1 * R / ( I * J );
 
-L := LeftSubmodule( "x,y", R );
+K := I + J;
 
-Display( Codim( M ) );
-Display( Depth( L, M ) );
+Display( Depth( K, M ) );

@@ -6,11 +6,11 @@ Zx := HomalgRingOfIntegersInDefaultCAS( ) * "x";
 
 R := Zx / "x^2 + 5";
 
-J := HomalgMatrix( "[ 2, 1+x ]", 2, 1, R );
+I := HomalgMatrix( "[ 2, 1+x ]", 2, 1, R );
 
-J := LeftSubmodule( J );
+I := LeftSubmodule( I );
 
-M := UnderlyingObject( J );
+M := UnderlyingObject( I );
 
 e := FreeHullEpi( M );
 

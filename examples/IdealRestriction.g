@@ -6,9 +6,9 @@ R := HomalgFieldOfRationalsInDefaultCAS() * "x,y,z";
 
 M := HomalgMatrix( "[x,y]", 2, 1, R );
 
-J := LeftSubmodule( M );
+I := LeftSubmodule( M );
 
-conormal := J / J^2;
+conormal := I / I^2;
 
 S := R / M;
 

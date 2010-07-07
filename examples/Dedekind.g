@@ -24,16 +24,16 @@ QQ := LeftSubmodule( QQ );
 P6 := HomalgMatrix( "[ 6 ]", 1, 1, ZIQ5 );
 P6 := LeftSubmodule( P6 );
 
-J := HomalgMatrix( "[ 2, 1 + x ]", 2, 1, ZIQ5 );
+I := HomalgMatrix( "[ 2, 1 + x ]", 2, 1, ZIQ5 );
+I := LeftSubmodule( I );
+
+J := HomalgMatrix( "[ 3, 1 + x ]", 2, 1, ZIQ5 );
 J := LeftSubmodule( J );
 
-K := HomalgMatrix( "[ 3, 1 + x ]", 2, 1, ZIQ5 );
+K := HomalgMatrix( "[ 3, 1 - x ]", 2, 1, ZIQ5 );
 K := LeftSubmodule( K );
 
-L := HomalgMatrix( "[ 3, 1 - x ]", 2, 1, ZIQ5 );
-L := LeftSubmodule( L );
-
-Display( P2 = J^2 );
-Display( P3 = K * L );
-Display( PP = K * J );
-Display( QQ = L * J );
+Display( P2 = I^2 );
+Display( P3 = J * K );
+Display( PP = J * I );
+Display( QQ = K * I );
