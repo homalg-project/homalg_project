@@ -1753,9 +1753,9 @@ InstallMethod( Depth,
     
     CheckIfTheyLieInTheSameCategory( M, N );
     
-    R := HomalgRing( N );
+    R := HomalgRing( M );
     
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( N );
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
     
     if left then
         if not HasLeftGlobalDimension( R ) then
@@ -1770,7 +1770,7 @@ InstallMethod( Depth,
     fi;
     
     if gdim = infinity then
-        bound := BoundForResolution( N );
+        bound := BoundForResolution( M );
     else
         bound := gdim;
     fi;
