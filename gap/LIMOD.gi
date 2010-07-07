@@ -1505,7 +1505,7 @@ InstallMethod( TheIdentityMorphism,
 end );
 
 ##
-InstallMethod( FullSubmodule,
+InstallMethod( FullSubobject,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1943,7 +1943,7 @@ InstallMethod( FactorObject,
         
   function( N )
     
-    return FullSubmodule( SuperObject( N ) ) / N;
+    return FullSubobject( SuperObject( N ) ) / N;
     
 end );
 

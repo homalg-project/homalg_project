@@ -67,7 +67,7 @@
 
 <#Include Label="TheMorphismToZero">
 <#Include Label="TheIdentityMorphism">
-<#Include Label="FullSubmodule">
+<#Include Label="FullSubobject">
 <#Include Label="EmbeddingInSuperObject">
 <#Include Label="FactorObject">
 <#Include Label="ResidueClassRing">

@@ -191,7 +191,7 @@ InstallOtherMethod( POW,
         
     elif pow = 0 then
         
-        return Subobject( HomalgIdentityMatrix( 1, R ), SuperObject( I ) );
+        return FullSubobject( SuperObject( I ) );
         
     elif pow = 1 then
         
@@ -249,7 +249,7 @@ InstallMethod( \=,
         Error( "the given ring and the ring of the submodule are not identical\n" );
     fi;
     
-    return IsSubset( J, FullSubmodule( SuperObject( J ) ) );
+    return IsSubset( J, FullSubobject( SuperObject( J ) ) );
     
 end );
 
@@ -344,7 +344,7 @@ InstallMethod( Subobject,
     l := Length( gens );
     
     if l = 0 then
-        return FullSubmodule( M );
+        return FullSubobject( M );
     fi;
     
     if not ForAll( gens, IsRingElement ) then
@@ -441,7 +441,7 @@ InstallMethod( LeftSubmodule,
         
   function( R )
     
-    return FullSubmodule( 1 * R );
+    return FullSubobject( 1 * R );
     
 end );
 
@@ -474,7 +474,7 @@ InstallMethod( LeftSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return FullSubmodule( 1 * R );
+        return FullSubobject( 1 * R );
     fi;
     
     Gen := List( gen,
@@ -553,7 +553,7 @@ InstallMethod( RightSubmodule,
         
   function( R )
     
-    return FullSubmodule( R * 1 );
+    return FullSubobject( R * 1 );
     
 end );
 
@@ -586,7 +586,7 @@ InstallMethod( RightSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return FullSubmodule( R * 1 );
+        return FullSubobject( R * 1 );
     fi;
     
     Gen := List( gen,

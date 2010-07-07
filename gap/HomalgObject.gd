@@ -183,9 +183,9 @@ DeclareAttribute( "TheIdentityMorphism",
 DeclareAttribute( "Genesis",
         IsHomalgObject );
 
-##  <#GAPDoc Label="FullSubmodule">
+##  <#GAPDoc Label="FullSubobject">
 ##  <ManSection>
-##    <Attr Arg="M" Name="FullSubmodule"/>
+##    <Attr Arg="M" Name="FullSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      The &homalg; module <A>M</A> as a submodule of itself.
@@ -193,7 +193,7 @@ DeclareAttribute( "Genesis",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "FullSubmodule",
+DeclareAttribute( "FullSubobject",
         IsHomalgObject );
 
 ##  <#GAPDoc Label="UnderlyingSubobject">
