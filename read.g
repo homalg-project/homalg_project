@@ -32,8 +32,14 @@ ReadPackage( "homalg", "gap/HomalgBicomplex.gi" );
 ## bigraded objects
 ReadPackage( "homalg", "gap/HomalgBigradedObject.gi" );
 
+## spectral sequences
+ReadPackage( "homalg", "gap/HomalgSpectralSequence.gi" );
+
 ## functors
 ReadPackage( "homalg", "gap/HomalgFunctor.gi" );
+
+## diagrams
+ReadPackage( "homalg", "gap/HomalgDiagram.gi" );
 
 ## main
 ReadPackage( "homalg", "gap/StaticObjects.gi" );
@@ -49,13 +55,13 @@ ReadPackage( "homalg", "gap/BasicFunctors.gi" );
 ReadPackage( "homalg", "gap/Modules/ModulesForHomalg.gi" );
 
 ## rings
-ReadPackage( "homalg", "gap/HomalgRingMap.gi" );
+ReadPackage( "homalg", "gap/Modules/HomalgRingMap.gi" );
 
 ## relations/generators
-ReadPackage( "homalg", "gap/HomalgRelations.gi" );
-ReadPackage( "homalg", "gap/SetsOfRelations.gi" );
-ReadPackage( "homalg", "gap/HomalgGenerators.gi" );
-ReadPackage( "homalg", "gap/SetsOfGenerators.gi" );
+ReadPackage( "homalg", "gap/Modules/HomalgRelations.gi" );
+ReadPackage( "homalg", "gap/Modules/SetsOfRelations.gi" );
+ReadPackage( "homalg", "gap/Modules/HomalgGenerators.gi" );
+ReadPackage( "homalg", "gap/Modules/SetsOfGenerators.gi" );
 
 ## modules/submodules
 ReadPackage( "homalg", "gap/Modules/HomalgModule.gi" );
@@ -79,14 +85,8 @@ ReadPackage( "homalg", "gap/Modules/HomalgBicomplex.gi" );
 ## bigraded objects
 ReadPackage( "homalg", "gap/Modules/HomalgBigradedObject.gi" );
 
-## spectral sequences
-ReadPackage( "homalg", "gap/HomalgSpectralSequence.gi" );
-
 ## functors
 ReadPackage( "homalg", "gap/Modules/HomalgFunctor.gi" );
-
-## diagrams
-ReadPackage( "homalg", "gap/HomalgDiagram.gi" );
 
 ## main
 ReadPackage( "homalg", "gap/Maps.gi" );
@@ -107,9 +107,9 @@ ReadPackage( "homalg", "gap/Modules/ToolFunctors.gi" );
 ReadPackage( "homalg", "gap/Modules/BasicFunctors.gi" );
 
 ## LogicForHomalg subpackages
-ReadPackage( "homalg", "gap/LIMAP.gi" );
-ReadPackage( "homalg", "gap/LIREL.gi" );
 ReadPackage( "homalg", "gap/LIMOD.gi" );
 ReadPackage( "homalg", "gap/LIMOR.gi" );
 ReadPackage( "homalg", "gap/LICPX.gi" );
 
+ReadPackage( "homalg", "gap/Modules/LIMAP.gi" );
+ReadPackage( "homalg", "gap/Modules/LIREL.gi" );
