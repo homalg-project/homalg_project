@@ -51,6 +51,10 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                    au := RightDivide( A, U, rel );
                    
+                   if au = false then
+                       return fail;
+                   fi;
+                   
                    au := GetEntryOfHomalgMatrix( au, 1, 1 );
                    
                    au := DecideZero( au, HomalgRing( a ) );

@@ -137,6 +137,7 @@ probably draw wrong conclusions and might return wrong results.
 
 <#Include Label="Zero:ring_element">
 <#Include Label="One:ring_element">
+<#Include Label="Inverse:ring_element">
 
 <#Include Label="homalgTable">
 <#Include Label="RingElementConstructor">

@@ -756,6 +756,13 @@ DeclareAttribute( "Zero",
 DeclareAttribute( "One",
         IsHomalgRingElement );
 
+##  <#GAPDoc Label="Inverse:ring_element">
+##  <ManSection>
+##    <Attr Arg="r" Name="Inverse" Label="for homalg ring elements"/>
+##    <Returns>the inverse of the &homalg; ring element <A>r</A></Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##
 DeclareOperation( "MinusOneMutable",
         [ IsHomalgRingElement ] );

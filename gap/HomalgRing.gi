@@ -89,7 +89,7 @@ end );
 
 ##
 InstallMethod( ZeroMutable,
-        "for homalg rings",
+        "for homalg ring elements",
         [ IsHomalgRingElement ],
         
   function( r )
@@ -100,7 +100,7 @@ end );
 
 ##
 InstallMethod( OneMutable,
-        "for homalg rings",
+        "for homalg ring elements",
         [ IsHomalgRingElement ],
         
   function( r )
@@ -110,8 +110,19 @@ InstallMethod( OneMutable,
 end );
 
 ##
+InstallMethod( Inverse,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return One( r ) / r;
+    
+end );
+
+##
 InstallMethod( MinusOneMutable,
-        "for homalg rings",
+        "for homalg ring elements",
         [ IsHomalgRingElement ],
         
   function( r )
@@ -145,6 +156,17 @@ InstallMethod( HomalgRing,
   function( r )
     
     return r!.ring;
+    
+end );
+
+##
+InstallMethod( INV,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return Inverse( r );
     
 end );
 

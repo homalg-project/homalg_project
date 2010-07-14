@@ -171,7 +171,7 @@ InstallMethod( \/,
         [ IsHomalgRingElement, IsHomalgRingElement ],
         
   function( a, u )
-    local R, RP;
+    local R, RP, au;
     
     R := HomalgRing( a );
     
@@ -182,7 +182,11 @@ InstallMethod( \/,
     RP := homalgTable( R );
     
     if IsBound(RP!.DivideByUnit) then
-        return RingElementConstructor( R )( RP!.DivideByUnit( a, u ), R );
+        au := RP!.DivideByUnit( a, u );
+        if au = fail then
+            return fail;
+        fi;
+        return RingElementConstructor( R )( au, R );
     fi;
     
     Error( "could not find a procedure called DivideByUnit in the homalgTable\n" );
