@@ -171,6 +171,58 @@ InstallMethod( INV,
 end );
 
 ##
+InstallMethod( \*,
+        "for homalg ring elements",
+        [ IS_RAT, IsHomalgRingElement ],
+        
+  function( a, b )
+    
+    if IS_INT( a ) then
+        TryNextMethod( );
+    fi;
+    
+    return ( NUMERATOR_RAT( a ) * b ) / ( DENOMINATOR_RAT( a ) * One( b ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg ring elements",
+        [ IsHomalgRingElement, IS_RAT ],
+        
+  function( a, b )
+    
+    if IS_INT( b ) then
+        TryNextMethod( );
+    fi;
+    
+    return ( NUMERATOR_RAT( b ) * a ) / ( DENOMINATOR_RAT( b ) * One( a ) );
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg ring elements",
+        [ IS_RAT, IsHomalgRingElement ],
+        
+  function( a, b )
+    
+    return a * One( b ) + b;
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg ring elements",
+        [ IsHomalgRingElement, IS_RAT ],
+        
+  function( a, b )
+    
+    return a + b * One( a );
+    
+end );
+
+##
 InstallMethod( Indeterminates,
         "for homalg rings",
         [ IsHomalgRing and HasIndeterminatesOfPolynomialRing ],

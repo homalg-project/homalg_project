@@ -739,7 +739,10 @@ DeclareProperty( "IsMinusOne",
 ##  <#GAPDoc Label="Zero:ring_element">
 ##  <ManSection>
 ##    <Attr Arg="r" Name="Zero" Label="for homalg ring elements"/>
-##    <Returns>the zero of the &homalg; ring element <A>r</A></Returns>
+##    <Returns>a &homalg; ring element</Returns>
+##    <Description>
+##      The zero of the &homalg; ring element <A>r</A>
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -749,7 +752,10 @@ DeclareAttribute( "Zero",
 ##  <#GAPDoc Label="One:ring_element">
 ##  <ManSection>
 ##    <Attr Arg="r" Name="One" Label="for homalg ring elements"/>
-##    <Returns>the one of the &homalg; ring element <A>r</A></Returns>
+##    <Returns>a &homalg; ring element</Returns>
+##    <Description>
+##      The one of the &homalg; ring element <A>r</A>.
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -759,7 +765,23 @@ DeclareAttribute( "One",
 ##  <#GAPDoc Label="Inverse:ring_element">
 ##  <ManSection>
 ##    <Attr Arg="r" Name="Inverse" Label="for homalg ring elements"/>
-##    <Returns>the inverse of the &homalg; ring element <A>r</A></Returns>
+##    <Returns>a &homalg; ring element or fail</Returns>
+##    <Description>
+##    The inverse of the &homalg; ring element <A>r</A>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> R := ZZ / 2^8;
+##  <A homalg residue class ring>
+##  gap> r := (1/3*One(R)+1/5)+3/7;
+##  |[ 157 ]|
+##  gap> 1 / r;	## = r^-1;
+##  |[ 181 ]|
+##  gap> s := (1/3*One(R)+2/5)+3/7;
+##  |[ 106 ]|
+##  gap> 1 / s;
+##  fail
+##  ]]></Example>
+##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 
