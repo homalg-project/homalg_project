@@ -61,7 +61,7 @@ DeclareCategory( "IsHomalgStaticObject",
 ##    <Prop Arg="M" Name="IsProjective"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; module <A>M</A> is projective.
+##      Check if the &homalg; object <A>M</A> is projective.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -146,6 +146,32 @@ DeclareProperty( "IsTorsion",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsPure",
+        IsHomalgObject );
+
+##  <#GAPDoc Label="IsInjective">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsInjective"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is (marked) injective.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsInjective",
+        IsHomalgObject );
+
+##  <#GAPDoc Label="IsInjectiveCogenerator">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsInjectiveCogenerator"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is (marked) an injective cogenerator.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsInjectiveCogenerator",
         IsHomalgObject );
 
 ####################################

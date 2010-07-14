@@ -33,7 +33,9 @@ InstallValue( LIMOD,
               "IsTorsion",
               "IsHolonomic",
               "IsPure",
-              "HasConstantRank" ],
+              "HasConstantRank",
+              "IsInjective",
+              "IsInjectiveCogenerator" ],
             intrinsic_attributes :=
             [ "ElementaryDivisors",
               "RankOfModule",
@@ -49,7 +51,16 @@ InstallValue( LIMOD,
 
 ##
 InstallValue( LogicalImplicationsForHomalgModules,
-        [ ## IsTorsionFree:
+        [ 
+          ## IsInjective(Cogenerator):
+          
+          [ IsInjectiveCogenerator,
+            "implies", IsInjective ],
+          
+          [ IsZero,
+            "implies", IsInjective ],
+          
+	  ## IsTorsionFree:
           
           [ IsZero,
             "implies", IsFree ],

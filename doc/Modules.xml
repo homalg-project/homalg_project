@@ -48,6 +48,7 @@
 <#Include Label="IsFree">
 <#Include Label="IsStablyFree">
 <#Include Label="IsProjective">
+<#Include Label="IsInjective">
 <#Include Label="FiniteFreeResolutionExists">
 <#Include Label="IsReflexive">
 <#Include Label="IsTorsionFree">
