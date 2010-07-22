@@ -462,6 +462,8 @@ InstallMethod( SetRingProperties,
     
     SetIsCommutative( S, false );
     
+    SetCenter( S, r );
+    
     SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
     
     SetIndeterminateDerivationsOfRingOfDerivations( S, der );
@@ -507,7 +509,18 @@ InstallMethod( SetRingProperties,
     
     SetCharacteristic( S, Characteristic( R ) );
     
-    SetIsCommutative( S, d = 0 );
+    if d <= 1 or Characteristic( S ) = 2 then
+        
+        ## the Center is then automatically set to S
+        SetIsCommutative( S, true );
+        
+    else
+        
+        ## the center is the even part, which is
+        ## bigger than the coefficients ring r
+        SetIsCommutative( S, false );
+        
+    fi;
     
     SetIsAnticommutative( S, true );
     

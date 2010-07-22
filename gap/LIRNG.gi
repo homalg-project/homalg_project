@@ -573,6 +573,15 @@ InstallImmediateMethod( KrullDimension,
     
 end );
 
+##
+InstallImmediateMethod( Center,
+        IsHomalgRing and IsCommutative, 0,
+        
+  function( R )
+    
+    return R;
+    
+end );
 
 ####################################
 #

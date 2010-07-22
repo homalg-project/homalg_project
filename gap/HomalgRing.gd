@@ -741,7 +741,7 @@ DeclareProperty( "IsMinusOne",
 ##    <Attr Arg="r" Name="Zero" Label="for homalg ring elements"/>
 ##    <Returns>a &homalg; ring element</Returns>
 ##    <Description>
-##      The zero of the &homalg; ring element <A>r</A>
+##      The zero of the &homalg; ring element <A>r</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
