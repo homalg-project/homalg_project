@@ -493,9 +493,19 @@ InstallMethod( AsEpimorphicImage,
         Error( "the first argument must be an epimorphism\n" );
     fi;
     
-    iso := ImageObjectEmb( phi );
-    
-    IsIsomorphism( iso );
+    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+        
+        iso := phi;
+        
+    else
+        
+        iso := ImageObjectEmb( phi );
+        
+        ## phi is not required to be a morphism, hence
+        ## the properties of iso might not have been set
+        IsIsomorphism( iso );
+        
+    fi;
     
     return PushPresentationByIsomorphism( iso );
     
