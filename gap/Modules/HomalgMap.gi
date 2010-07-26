@@ -331,25 +331,12 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsRelationsOfFinitelyPresentedModuleRep ],
-        
-  function( phi, rel )
-    
-    return DecideZero( MatrixOfMap( phi ), rel );
-    
-end );
-
-##
-InstallMethod( DecideZero,
-        "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local pos_t, rel, index_pair, matrix, reduced;
+    local rel, index_pair, matrix, reduced;
     
-    pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
-    
-    rel := RelationsOfModule( Range( phi ), pos_t );
+    rel := RelationsOfModule( Range( phi ) );
     
     index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
     
@@ -359,6 +346,8 @@ InstallMethod( DecideZero,
     
     if reduced = matrix then
         reduced := matrix;
+    else
+        phi!.matrices.(String( index_pair )) := reduced;
     fi;
     
     phi!.reduced_matrices.(String( index_pair )) := reduced;

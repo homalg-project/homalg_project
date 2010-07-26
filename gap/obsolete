@@ -2056,3 +2056,21 @@ InstallMethod( CreateHomalgTable,
     
 end );
 
+## from Modules/HomalgMap.gi
+
+##
+InstallMethod( DecideZero,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsRelationsOfFinitelyPresentedModuleRep ],
+        
+  function( phi, rel )
+    
+    return DecideZero( MatrixOfMap( phi ), rel );
+    
+end );
+
+## from Modules/HomalgMap.gd
+
+DeclareOperation( "DecideZero",
+        [ IsHomalgMap, IsHomalgRelations ] );
+

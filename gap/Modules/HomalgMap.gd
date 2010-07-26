@@ -109,9 +109,6 @@ DeclareOperation( "MatrixOfMap",
 DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap ] );
 
-DeclareOperation( "DecideZero",
-        [ IsHomalgMap, IsHomalgRelations ] );
-
 DeclareOperation( "UnionOfRelations",
         [ IsHomalgMap ] );
 
