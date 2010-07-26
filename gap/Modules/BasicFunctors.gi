@@ -1123,6 +1123,7 @@ InstallFunctorOnObjects( functor_ImageObject );
 ##    [   0,   0,  -2 ],
 ##    [   0,   1,   3 ] ]
 ##  
+##  a set of 3 generators given by the the above matrices
 ##  gap> GeneratorsOfModule( homNM );
 ##  <A set of 4 generators of a homalg right module>
 ##  gap> Display( last );
@@ -1146,6 +1147,7 @@ InstallFunctorOnObjects( functor_ImageObject );
 ##    [   0,   0,  -9 ],
 ##    [   0,   2,   6 ] ]
 ##  
+##  a set of 4 generators given by the the above matrices
 ##  ]]></Example>
 ##      If for example the source <M>N</M> gets a new presentation, you will see the effect on the generators:
 ##      <Example><![CDATA[
@@ -1170,6 +1172,7 @@ InstallFunctorOnObjects( functor_ImageObject );
 ##    [   0,   0,  -9 ],
 ##    [   0,   2,   6 ] ]
 ##  
+##  a set of 4 generators given by the the above matrices
 ##  ]]></Example>
 ##      Now we compute a certain natural filtration on <C>Hom</C><M>(M,M)</M>:
 ##      <Example><![CDATA[

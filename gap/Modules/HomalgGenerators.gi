@@ -823,21 +823,43 @@ InstallMethod( Display,
         [ IsHomalgGenerators and HasProcedureToReadjustGenerators ],
         
   function( o )
-    local mat, proc, l, i;
+    local g, mat, proc, l, i;
     
-    mat := MatrixOfGenerators( o );
+    g := NrGenerators( o );
     
-    proc := ProcedureToReadjustGenerators( o );
-    l := Length( proc );
-    
-    if IsHomalgGeneratorsOfLeftModule( o ) then
-        for i in [ 1 .. NrGenerators( o ) ] do
-            Display( CallFuncList( proc[1], Concatenation( [ CertainRows( mat, [ i ] ) ], proc{[ 2 .. l ]} ) ) ); Print( "\n" );
-        od;
+    if g = 0 then
+        Print( "an empty set of generators\n" );
     else
-        for i in [ 1 .. NrGenerators( o ) ] do
-            Display( CallFuncList( proc[1], Concatenation( [ CertainColumns( mat, [ i ] ) ], proc{[ 2 .. l ]} ) ) ); Print( "\n" );
-        od;
+        mat := MatrixOfGenerators( o );
+        
+        proc := ProcedureToReadjustGenerators( o );
+        l := Length( proc );
+    
+        if IsHomalgGeneratorsOfLeftModule( o ) then
+            for i in [ 1 .. NrGenerators( o ) ] do
+                Display( CallFuncList( proc[1], Concatenation( [ CertainRows( mat, [ i ] ) ], proc{[ 2 .. l ]} ) ) ); Print( "\n" );
+            od;
+        else
+            for i in [ 1 .. NrGenerators( o ) ] do
+                Display( CallFuncList( proc[1], Concatenation( [ CertainColumns( mat, [ i ] ) ], proc{[ 2 .. l ]} ) ) ); Print( "\n" );
+            od;
+        fi;
+        
+        Print( "a set " );
+        
+        if g = 1 then
+            Print( "consisting of a single generator" );
+        else
+            Print( "of ", g, " generators" );
+        fi;
+        
+        Print( " given by the the above " );
+        
+        if g = 1 then
+            Print( "matrix\n" );
+        else
+            Print( "matrices\n" );
+        fi;
     fi;
     
 end );
