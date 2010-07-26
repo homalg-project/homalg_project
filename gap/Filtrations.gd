@@ -26,3 +26,6 @@ DeclareOperation( "FiltrationBySpectralSequence",
 DeclareOperation( "FiltrationBySpectralSequence",
         [ IsHomalgSpectralSequence ] );
 
+DeclareOperation( "FilteredByPurity",
+        [ IsHomalgStaticObject ] );
+

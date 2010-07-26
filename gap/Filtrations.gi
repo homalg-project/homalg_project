@@ -258,3 +258,18 @@ InstallMethod( PurityFiltration,
     
 end );
 
+##
+InstallMethod( FilteredByPurity,
+        "for homalg modules",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local filt, iso;
+    
+    filt := PurityFiltration( M );
+    
+    iso := IsomorphismOfFiltration( filt );
+    
+    return AsEpimorphicImage( iso );
+    
+end );
