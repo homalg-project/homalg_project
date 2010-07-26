@@ -179,10 +179,22 @@ end );
 ##
 InstallMethod( MatrixOfMap,		## FIXME: make this optimal by finding shortest ways
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsPosInt, IsPosInt ],
+        [ IsMapOfFinitelyGeneratedModulesRep, IsInt, IsInt ],
         
-  function( phi, pos_s, pos_t )
-    local index_pair, l, dist, min, pos, matrix;
+  function( phi, _pos_s, _pos_t )
+    local pos_s, pos_t, index_pair, l, dist, min, pos, matrix;
+    
+    if _pos_s < 1 then
+        pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
+    else
+        pos_s := _pos_s;
+    fi;
+    
+    if _pos_t < 1 then
+        pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
+    else
+        pos_t := _pos_t;
+    fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         index_pair := [ pos_s, pos_t ];
@@ -243,12 +255,8 @@ InstallMethod( MatrixOfMap,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local pos_s, pos_t;
     
-    pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
-    pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
-    
-    return MatrixOfMap( phi, pos_s, pos_t );
+    return MatrixOfMap( phi, 0, 0 );
     
 end );
 

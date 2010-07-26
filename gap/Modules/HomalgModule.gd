@@ -406,7 +406,7 @@ DeclareOperation( "NrRelations",
         [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "TransitionMatrix",
-        [ IsHomalgModule, IsPosInt, IsPosInt ] );
+        [ IsHomalgModule, IsInt, IsInt ] );
 
 DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgGenerators ] );

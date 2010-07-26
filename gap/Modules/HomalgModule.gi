@@ -676,7 +676,7 @@ end );
 ##
 InstallMethod( TransitionMatrix,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt, IsPosInt ],
+        [ IsFinitelyPresentedModuleRep, IsInt, IsInt ],
         
   function( M, pos1, pos2 )
     local pres_a, pres_b, sets_of_generators, tr, sign, i, j;
@@ -687,6 +687,14 @@ InstallMethod( TransitionMatrix,
     else
         pres_a := pos1;
         pres_b := pos2;
+    fi;
+    
+    if pres_a < 1 then
+        pres_a := PositionOfTheDefaultSetOfRelations( M );
+    fi;
+    
+    if pres_b < 1 then
+        pres_b := PositionOfTheDefaultSetOfRelations( M );
     fi;
     
     sets_of_generators := M!.SetsOfGenerators;

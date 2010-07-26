@@ -101,7 +101,7 @@ DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
         [ IsHomalgMap ] );
 
 DeclareOperation( "MatrixOfMap",
-        [ IsHomalgMap, IsPosInt, IsPosInt ] );
+        [ IsHomalgMap, IsInt, IsInt ] );
 
 DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap, IsPosInt ] );
