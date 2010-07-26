@@ -212,7 +212,7 @@ end );
 ##
 InstallMethod( SetsOfGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
@@ -253,7 +253,7 @@ end );
 ##
 InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
@@ -268,7 +268,7 @@ end );
 ##
 InstallMethod( SetPositionOfTheDefaultSetOfRelations,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     
