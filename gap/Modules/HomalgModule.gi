@@ -309,8 +309,8 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
         
   function( M, pos )
     
-    if IsBound(SetsOfRelations(M)!.(pos)) then;
-        return SetsOfRelations(M)!.(pos);
+    if IsBound(SetsOfRelations( M )!.(pos)) then;
+        return SetsOfRelations( M )!.(pos);
     fi;
     
     return fail;
@@ -1713,7 +1713,8 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor for homalg modules",
-        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -1819,7 +1820,8 @@ end );
 ##
 InstallMethod( Presentation,
         "constructor for homalg modules",
-        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule, IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule,
+          IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfRightModule ],
         
   function( gen, rel )
     local R, is_zero_module, gens, rels, M;
@@ -3277,6 +3279,21 @@ InstallMethod( Display,
   function( M )
     
     Print( 0, "\n" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsHomalgModule ], 3001,
+        
+  function( M )
+    
+    if not IsBound( M!.DisplayString ) then
+        TryNextMethod( );
+    fi;
+    
+    Print( M!.DisplayString, "\n" );
     
 end );
 

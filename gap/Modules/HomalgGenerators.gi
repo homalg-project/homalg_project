@@ -30,20 +30,37 @@
 #
 ####################################
 
+##  <#GAPDoc Label="IsGeneratorsOfModuleRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="rel" Name="IsGeneratorsOfModuleRep"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; representation of a finite set of generators of a &homalg; module. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgGenerators"/>)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsGeneratorsOfModuleRep",
+        IsHomalgGenerators,
+        [ "generators" ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="IsGeneratorsOfFinitelyGeneratedModuleRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="rel" Name="IsGeneratorsOfFinitelyGeneratedModuleRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of a finite set of generators of a finitely generated &homalg; module. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgGenerators"/>)
+##      (It is a representation of the &GAP; representation <Ref Filt="IsGeneratorsOfModuleRep"/>)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsGeneratorsOfFinitelyGeneratedModuleRep",
+        IsGeneratorsOfModuleRep,
+        [ "generators", "relations_of_hullmodule" ] );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsGeneratorsOfFinitelyGeneratedModuleRep",
-        IsHomalgGenerators,
-        [ "generators", "relations_of_hullmodule" ] );
 
 ####################################
 #
@@ -55,12 +72,20 @@ DeclareRepresentation( "IsGeneratorsOfFinitelyGeneratedModuleRep",
 BindGlobal( "TheFamilyOfHomalgGenerators",
         NewFamily( "TheFamilyOfHomalgGenerators" ) );
 
-# two new types:
+# four new types:
 BindGlobal( "TheTypeHomalgGeneratorsOfLeftModule",
+        NewType(  TheFamilyOfHomalgGenerators,
+                IsGeneratorsOfModuleRep and IsHomalgGeneratorsOfLeftModule ) );
+
+BindGlobal( "TheTypeHomalgGeneratorsOfRightModule",
+        NewType(  TheFamilyOfHomalgGenerators,
+                IsGeneratorsOfModuleRep and IsHomalgGeneratorsOfRightModule ) );
+
+BindGlobal( "TheTypeHomalgGeneratorsOfFinitelyGeneratedLeftModule",
         NewType(  TheFamilyOfHomalgGenerators,
                 IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfLeftModule ) );
 
-BindGlobal( "TheTypeHomalgGeneratorsOfRightModule",
+BindGlobal( "TheTypeHomalgGeneratorsOfFinitelyGeneratedRightModule",
         NewType(  TheFamilyOfHomalgGenerators,
                 IsGeneratorsOfFinitelyGeneratedModuleRep and IsHomalgGeneratorsOfRightModule ) );
 
@@ -618,7 +643,7 @@ InstallGlobalFunction( HomalgGeneratorsForLeftModule,
                 relations_of_hullmodule := relations_of_hullmodule );
     
     ## Objectify:
-    Objectify( TheTypeHomalgGeneratorsOfLeftModule, gen );
+    Objectify( TheTypeHomalgGeneratorsOfFinitelyGeneratedLeftModule, gen );
     
     return gen;
     
@@ -683,7 +708,7 @@ InstallGlobalFunction( HomalgGeneratorsForRightModule,
                 relations_of_hullmodule := relations_of_hullmodule );
     
     ## Objectify:
-    Objectify( TheTypeHomalgGeneratorsOfRightModule, gen );
+    Objectify( TheTypeHomalgGeneratorsOfFinitelyGeneratedRightModule, gen );
     
     return gen;
     
