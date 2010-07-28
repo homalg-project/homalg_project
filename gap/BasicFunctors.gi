@@ -101,6 +101,11 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     ## (the number of generators of ker might be less than the number of generators of ker_subobject)
     ker := UnderlyingObject( ker_subobject );
     
+    ## IsMonomorphism?
+    if HasIsZero( ker ) then
+        SetIsMonomorphism( psi, IsZero( ker ) );
+    fi;
+    
     ## the natural embedding of ker in Source( psi ):
     emb := EmbeddingInSuperObject( ker_subobject );
     
