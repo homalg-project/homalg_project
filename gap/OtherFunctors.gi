@@ -26,7 +26,9 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,	### defines: Torsion
         return Source( TorsionSubmoduleEmb( M ) );
     fi;
     
-    par := ParametrizeModule( M, "ANY" );	## computing a "minimal parametrization" requires RankOfModule which would probably trigger Resolution
+    ## computing a "minimal parametrization" requires the
+    ## rank which if unknown would probably trigger Resolution
+    par := AnyParametrization( M );
     
     emb := KernelEmb( par );
     

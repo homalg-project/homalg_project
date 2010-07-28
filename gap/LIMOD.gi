@@ -1383,24 +1383,27 @@ InstallMethod( IsFree,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R, good_basis_algorithm, par, img, free;
+    local R, par, img, free;
     
     R := HomalgRing( M );
     
-    if HasBasisAlgorithmRespectsPrincipalIdeals( R ) and BasisAlgorithmRespectsPrincipalIdeals( R ) then
-        good_basis_algorithm := true;
-    else
-        good_basis_algorithm := false;
-    fi;
-    
     if not HasRankOfModule( M ) then
-        Resolution( M );			## automatically sets the rank if it succeeds to compute a complete free resolution
+        ## automatically sets the rank if it succeeds
+        ## to compute a complete free resolution:
+        Resolution( M );
     fi;
     
     if HasRankOfModule( M ) and RankOfModule( M ) = 1 then
-        par := ParametrizeModule( M );		## this returns a minimal parametrization of M (minimal = cokernel is torsion); I learned this from Alban Quadrat
+        
+        ## this returns a minimal parametrization of M
+        ## (minimal = cokernel is torsion);
+        ## I learned this from Alban Quadrat
+        par := MinimalParametrization( M );
+        
         if IsMonomorphism( par ) then
+            
             img := MatrixOfMap( par );
+            
             ## Plesken: a good notion of basis (involutive/groebner/...)
             ## should respect principal ideals and hence,
             ## due to the uniqueness of the basis,
@@ -1412,9 +1415,11 @@ InstallMethod( IsFree,
                 img := BasisOfColumns( img );
                 free := NrColumns( img ) <= 1;
             fi;
+            
             if free then
                 return true;
-            elif good_basis_algorithm then
+            elif HasBasisAlgorithmRespectsPrincipalIdeals( R ) and
+              BasisAlgorithmRespectsPrincipalIdeals( R ) then
                 return false;
             fi;
         else

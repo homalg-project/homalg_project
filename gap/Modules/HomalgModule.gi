@@ -3252,7 +3252,7 @@ InstallMethod( Display,
     fi;
     
     if rk <> 0 then
-        if IsHomalgLeftObjectOrMorphismOfLeftObjects ( M ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
             if color then
                 Print( display, name, "^(1 x", " \033[01m", rk, "\033[0m)" );
             else

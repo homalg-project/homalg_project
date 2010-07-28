@@ -459,7 +459,7 @@ Functor_Hom!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 ##
 InstallMethod( NatTrIdToHomHom_R,
-        "for homalg maps",
+        "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -481,7 +481,7 @@ InstallMethod( NatTrIdToHomHom_R,
     
     epsilon := HomalgMap( epsilon, M, HHM );
     
-    SetIsMorphism( epsilon, true );
+    SetPropertiesIfKernelIsTorsionSubobject( epsilon );
     
     return epsilon;
     

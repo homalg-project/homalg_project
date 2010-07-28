@@ -747,3 +747,33 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
+##
+InstallMethod( SetPropertiesIfKernelIsTorsionSubobject,
+        "for homalg morphisms of static object",
+        [ IsHomalgStaticMorphism ],
+        
+  function( par )
+    local M;
+    
+    M := Source( par );
+    
+    if HasIsTorsionFree( M ) then
+        ## never skip this HasIsTorsionFree since
+        ## the current procedure maybe have been invoked from
+        ## a procedure used to set IsTorsionFree,
+        ## which would then lead to infinite loops
+        
+        Assert( 2, IsMonomorphism( par ) = IsTorsionFree( M ) );
+        
+        SetIsMonomorphism( par, IsTorsionFree( M ) );
+        
+    else
+        
+        Assert( 2, IsMorphism( par ) );
+        
+        SetIsMorphism( par, true );
+        
+    fi;
+    
+end );

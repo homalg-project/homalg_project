@@ -108,3 +108,6 @@ DeclareOperation( "Saturate",
 DeclareOperation( "Saturate",
         [ IsHomalgStaticObject ] );
 
+DeclareOperation( "SetPropertiesIfKernelIsTorsionSubobject",
+        [ IsHomalgStaticMorphism ] );
+

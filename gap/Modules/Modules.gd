@@ -16,8 +16,6 @@
 
 DeclareGlobalFunction( "ReducedBasisOfModule" );
 
-DeclareGlobalFunction( "ParametrizeModule" );
-
 # basic operations:
 
 DeclareOperation( "/",
@@ -42,6 +40,21 @@ DeclareOperation( "Resolution",
         [ IsHomalgRelations ] );
 
 DeclareOperation( "FiniteFreeResolution",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "AnyParametrization",
+        [ IsHomalgRelations ] );
+
+DeclareOperation( "AnyParametrization",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "MinimalParametrization",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "SeveralMinimalParametrizations",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "Parametrization",
         [ IsHomalgModule ] );
 
 DeclareOperation( "Intersect2",

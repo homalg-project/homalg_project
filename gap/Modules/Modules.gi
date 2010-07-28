@@ -483,78 +483,104 @@ InstallMethod( FiniteFreeResolution,
 end );
 
 ##
-InstallGlobalFunction( ParametrizeModule,	### defines: ParametrizeModule
-  function( arg )
-    local nargs, ALL, ANY, ar, rel, R, left, mat, par, M, rk, F;
-    
-    nargs := Length( arg );
-    
-    ALL := false;
-    ANY := false;
-    
-    for ar in arg{[ 2 .. nargs ]} do
-        if ar = "ALL" then
-            ALL := true;
-        elif ar = "ANY" then
-            ANY := true;
-        fi;
-    od;
-    
-    if IsHomalgModule( arg[1] ) then
-        rel := RelationsOfModule( arg[1] );
-    elif IsHomalgRelations( arg[1] ) then
-        rel := arg[1];
-    else
-        Error( "the first argument must be a homalg module or a homalg set of relations\n" );
-    fi;
-    
-    R := HomalgRing( rel );
-    
-    left := IsHomalgRelationsOfLeftModule( rel );
+InstallMethod( AnyParametrization,
+        "for homalg relations",
+        [ IsHomalgRelations ],
+        
+  function( rel )
+    local mat;
     
     mat := MatrixOfRelations( rel );
     
-    if left then
-        par := SyzygiesOfColumns( mat );
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        return SyzygiesOfColumns( mat );
     else
-        par := SyzygiesOfRows( mat );
+        return SyzygiesOfRows( mat );
     fi;
     
-    if IsHomalgModule( arg[1] ) then
+end );
+
+##
+InstallMethod( AnyParametrization,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
         
-        M := arg[1];
-        
-        if not ANY then
-            if not HasRankOfModule( M ) then
-                Resolution( M );
-            fi;
-            if HasRankOfModule( M ) then
-                rk := RankOfModule( M );
-                if left then
-                    F := HomalgFreeLeftModule( rk, R );
-                    par := CertainColumns( par, [ 1 .. rk ] );	## a minimal parametrization due to Alban
-                else
-                    F := HomalgFreeRightModule( rk, R );
-                    par := CertainRows( par, [ 1 .. rk ] );	## a minimal parametrization due to Alban
-                fi;
-            fi;
-        fi;
-        
-        if ANY or not HasRankOfModule( M ) then
-            if left then
-                F := HomalgFreeLeftModule( NrColumns( par ), R );
-            else
-                F := HomalgFreeRightModule( NrRows( par ), R );
-            fi;
-        fi;
-        
-        par := HomalgMap( par, M, F );
-        
-        SetIsMorphism( par, true );
-        
-    fi;
+  function( M )
+    local rel, par;
+    
+    rel := RelationsOfModule( M );
+    
+    par := AnyParametrization( rel );
+    
+    par := HomalgMap( par, M, "free" );
+    
+    SetPropertiesIfKernelIsTorsionSubobject( par );
     
     return par;
+    
+end );
+
+##
+InstallMethod( MinimalParametrization,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local rel, par, pr;
+    
+    if not HasRankOfModule( M ) then
+        ## automatically sets the rank if it succeeds
+        ## to compute a complete free resolution:
+        Resolution( M );
+        
+        ## Resolution didn't succeed to set the rank
+        if not HasRankOfModule( M ) then
+            Error( "Unable to figure out the rank\n" );
+        fi;
+        
+    fi;
+    
+    rel := RelationsOfModule( M );
+    
+    par := AnyParametrization( rel );
+    
+    if IsHomalgRelationsOfLeftModule( rel ) then
+        pr := CertainColumns;
+    else
+        pr := CertainRows;
+    fi;
+    
+    ## a minimal parametrization due to Alban:
+    ## project the parametrization onto a free factor of rank = Rank( M )
+    par := pr( par, [ 1 .. RankOfModule( M ) ] );
+    
+    par := HomalgMap( par, M, "free" );
+    
+    SetPropertiesIfKernelIsTorsionSubobject( par );
+    
+    return par;
+    
+end );
+
+##
+InstallMethod( Parametrization,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    if not HasRankOfModule( M ) then
+        ## automatically sets the rank if it succeeds
+        ## to compute a complete free resolution:
+        Resolution( M );
+    fi;
+    
+    if HasRankOfModule( M ) then
+        return MinimalParametrization( M );
+    fi;
+    
+    ## Resolution didn't succeed to set the rank
+    return AnyParametrization( M );
     
 end );
 
