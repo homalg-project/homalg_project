@@ -490,19 +490,11 @@ end );
 
 InstallGlobalFunction( _Functor_AuslanderDual_OnObjects,	### defines: AuslanderDual
   function( M )
-    local rel, DM;
+    local d0;
     
-    rel := PresentationMap( M );
+    d0 := PresentationMap( M );
     
-    rel := MatrixOfMap( rel );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        DM := RightPresentation( rel );
-    else
-        DM := LeftPresentation( rel );
-    fi;
-    
-    return DM;
+    return Cokernel( Hom( d0 ) );
     
 end );
 
