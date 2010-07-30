@@ -2768,7 +2768,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsTorsion( M ) and IsTorsion( M ) then
-        if HasCodim( M ) then
+        if HasAbsoluteDepth( M ) then
             if HasIsPure( M ) then
                 if IsPure( M ) then
                     ## only display the purity information if the global dimension of the ring is > 1:
@@ -2792,7 +2792,7 @@ InstallMethod( ViewObj,
                 fi;
             fi;
             
-            ## only display the codimension if the global dimension of the ring is > 1:
+            ## only display the depth if the global dimension of the ring is > 1:
             if ( ( left_module and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) or
                  ( not left_module and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) )
                and ( HasIsZero( M ) and not IsZero( M ) )	## we actually no that IsZero( M ) = false (but anyway)
@@ -2800,8 +2800,8 @@ InstallMethod( ViewObj,
                 properties := Concatenation( " non-zero", properties );
                 Append( properties, " torsion" );
             else
-                Append( properties, " codim " );
-                Append( properties, String( Codim( M ) ) );
+                Append( properties, " depth " );
+                Append( properties, String( AbsoluteDepth( M ) ) );
             fi;
         else
             if HasIsPure( M ) then

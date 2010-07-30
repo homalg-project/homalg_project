@@ -270,18 +270,19 @@ DeclareAttribute( "ProjectiveDimension",
 DeclareAttribute( "DegreeOfTorsionFreeness",
         IsHomalgObject );
 
-##  <#GAPDoc Label="Codim">
+##  <#GAPDoc Label="AbsoluteDepth">
 ##  <ManSection>
-##    <Attr Arg="M" Name="Codim"/>
+##    <Attr Arg="M" Name="AbsoluteDepth"/>
 ##    <Returns>a nonnegative integer of infinity</Returns>
 ##    <Description>
-##      The codimension of the &homalg; module <A>M</A>.
+##      The depth of the &homalg; module <A>M</A>.
 ##      It is set to infinity only for <A>M</A><M>=0</M>.
+##      A short name for this operation is <C>Depth</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "Codim",
+DeclareAttribute( "AbsoluteDepth",
         IsHomalgObject );
 
 ##  <#GAPDoc Label="PurityFiltration">
@@ -317,6 +318,12 @@ DeclareAttribute( "CodegreeOfPurity",
 ####################################
 
 # basic operations:
+
+DeclareOperation( "Depth",
+        [ IsHomalgStaticObject, IsHomalgStaticObject ] );
+
+DeclareOperation( "Depth",
+        [ IsHomalgStaticObject ] );
 
 DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgObject, IsInt ] );

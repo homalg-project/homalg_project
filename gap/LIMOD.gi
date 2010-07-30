@@ -41,7 +41,7 @@ InstallValue( LIMOD,
               "RankOfModule",
               "ProjectiveDimension",
               "DegreeOfTorsionFreeness",
-              "Codim",
+              "AbsoluteDepth",
               "PurityFiltration",
               "CodegreeOfPurity",
               "BettiDiagram",
@@ -160,7 +160,7 @@ InstallLogicalImplicationsForHomalgSubobjects(
 
 ##
 InstallImmediateMethod( IsArtinian,
-        IsFinitelyPresentedModuleRep and HasCodim and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasLeftActingDomain, 0,
         
   function( M )
     local R;
@@ -171,7 +171,7 @@ InstallImmediateMethod( IsArtinian,
        ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
         
-        return Codim( M ) = LeftGlobalDimension( R );
+        return AbsoluteDepth( M ) = LeftGlobalDimension( R );
         
     fi;
     
@@ -181,7 +181,7 @@ end );
 
 ##
 InstallImmediateMethod( IsArtinian,
-        IsFinitelyPresentedModuleRep and HasCodim and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasRightActingDomain, 0,
         
   function( M )
     local R;
@@ -192,7 +192,7 @@ InstallImmediateMethod( IsArtinian,
        ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
         
-        return Codim( M ) = RightGlobalDimension( R );
+        return AbsoluteDepth( M ) = RightGlobalDimension( R );
         
     fi;
     
@@ -379,11 +379,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedModuleRep and HasCodim, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth, 0,
         
   function( M )
     
-    if Codim( M ) > 0 then
+    if AbsoluteDepth( M ) > 0 then
         return true;
     elif HasIsZero( M ) and not IsZero( M ) then
         return false;
@@ -484,11 +484,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleRep and HasCodim, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth, 0,
         
   function( M )
     
-    if IsPosInt( Codim( M ) ) then
+    if IsPosInt( AbsoluteDepth( M ) ) then
         return false;
     fi;
     
@@ -498,11 +498,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleRep and HasCodim and IsPure, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and IsPure, 0,
         
   function( M )
     
-    return Codim( M ) in [ 0, infinity ];
+    return AbsoluteDepth( M ) in [ 0, infinity ];
     
 end );
 
@@ -740,14 +740,14 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and HasCodim and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasLeftActingDomain, 0,
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) = Codim( M ) then
+    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) = AbsoluteDepth( M ) then
         return true;
     fi;
     
@@ -757,14 +757,14 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and HasCodim and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasRightActingDomain, 0,
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) = Codim( M ) then
+    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) = AbsoluteDepth( M ) then
         return true;
     fi;
     
@@ -901,7 +901,7 @@ InstallImmediateMethod( DegreeOfTorsionFreeness,
 end );
 
 ##
-InstallImmediateMethod( Codim,
+InstallImmediateMethod( AbsoluteDepth,
         IsFinitelyPresentedModuleRep and IsTorsionFree and HasIsZero, 0,
         
   function( M )
@@ -915,7 +915,7 @@ InstallImmediateMethod( Codim,
 end );
 
 ##
-InstallImmediateMethod( Codim,
+InstallImmediateMethod( AbsoluteDepth,
         IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero and HasLeftActingDomain, 0,
         
   function( M )
@@ -932,7 +932,7 @@ InstallImmediateMethod( Codim,
 end );
 
 ##
-InstallImmediateMethod( Codim,
+InstallImmediateMethod( AbsoluteDepth,
         IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero and HasRightActingDomain, 0,
         
   function( M )
@@ -949,7 +949,7 @@ InstallImmediateMethod( Codim,
 end );
 
 ##
-InstallImmediateMethod( Codim,
+InstallImmediateMethod( AbsoluteDepth,
         IsFinitelyPresentedModuleRep and IsZero, 10001,
         
   function( M )
@@ -1059,7 +1059,7 @@ InstallMethod( IsArtinian,
          ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) ) then
         
-        return Codim( M ) >= GlobalDimension( R );
+        return AbsoluteDepth( M ) >= GlobalDimension( R );
         
     fi;
     
@@ -1659,7 +1659,7 @@ InstallMethod( DegreeOfTorsionFreeness,
 end );
 
 ##
-InstallMethod( Codim,
+InstallMethod( AbsoluteDepth,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1710,6 +1710,13 @@ InstallMethod( Codim,
     TryNextMethod( );
     
 end );
+
+##
+InstallMethod( Depth,
+        "LIMOD: for homalg static objects",
+        [ IsHomalgStaticObject ],
+        
+  AbsoluteDepth );
 
 ##
 InstallMethod( ProjectiveDimension,

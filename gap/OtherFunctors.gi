@@ -202,8 +202,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     ## IsPure
     if HasIsPure( M ) and HasIsPure( N ) then
         if IsPure( M ) and IsPure( N ) then
-            if HasCodim( M ) and HasCodim( N ) then
-                if Codim( M ) = Codim( N ) or
+            if HasAbsoluteDepth( M ) and HasAbsoluteDepth( N ) then
+                if AbsoluteDepth( M ) = AbsoluteDepth( N ) or
                    IsZero( M ) or IsZero( N ) then
                     SetIsPure( sum, true );
                 else
@@ -272,9 +272,9 @@ InstallGlobalFunction( _Functor_DirectSum_OnObjects,	### defines: DirectSum
     
     ## attributes of the direct sum module
     
-    ## Codim
-    if HasCodim( M ) and HasCodim( N ) then
-        SetCodim( sum, Minimum( Codim( M ), Codim( N ) ) );
+    ## AbsoluteDepth
+    if HasAbsoluteDepth( M ) and HasAbsoluteDepth( N ) then
+        SetAbsoluteDepth( sum, Minimum( AbsoluteDepth( M ), AbsoluteDepth( N ) ) );
     fi;
     
     return sum;

@@ -441,9 +441,6 @@ DeclareOperation( "NonZeroGenerators",
 DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgModule ] );
 
-DeclareOperation( "Depth",
-        [ IsHomalgModule, IsHomalgModule ] );
-
 DeclareOperation( "AffineDimension",
         [ IsHomalgModule ] );
 

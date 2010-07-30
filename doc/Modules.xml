@@ -83,7 +83,7 @@
 <#Include Label="RankOfModule">
 <#Include Label="ProjectiveDimension">
 <#Include Label="DegreeOfTorsionFreeness">
-<#Include Label="Codim">
+<#Include Label="AbsoluteDepth">
 <#Include Label="PurityFiltration">
 <#Include Label="CodegreeOfPurity">
 <#Include Label="BettiDiagram:module">
