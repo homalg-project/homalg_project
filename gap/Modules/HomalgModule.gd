@@ -339,6 +339,9 @@ DeclareOperation( "PositionOfTheDefaultSetOfRelations",
 DeclareOperation( "SetPositionOfTheDefaultSetOfRelations",
         [ IsHomalgModule, IsInt ] );
 
+DeclareOperation( "PositionOfLastStoredSetOfRelations",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "GeneratorsOfModule",
         [ IsHomalgModule, IsPosInt ] );
 

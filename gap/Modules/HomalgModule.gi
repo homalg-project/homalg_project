@@ -277,6 +277,64 @@ InstallMethod( SetPositionOfTheDefaultSetOfRelations,
 end );
 
 ##
+InstallMethod( PositionOfLastStoredSetOfRelations,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return PositionOfLastStoredSetOfRelations( SetsOfRelations( M ) );
+    
+end );
+
+##
+InstallMethod( SetAsPreferredPresentation,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfTheDefaultSetOfRelations( M );
+    
+    M!.PositionOfPreferredPresentation := pos;
+    
+end );
+
+##
+InstallMethod( OnPreferredPresentation,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local pos;
+    
+    if IsBound( M!.PositionOfPreferredPresentation ) then
+        pos := M!.PositionOfPreferredPresentation;
+        SetPositionOfTheDefaultSetOfRelations( M, pos );
+    fi;
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( OnLastStoredPresentation,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfLastStoredSetOfRelations( M );
+    
+    SetPositionOfTheDefaultSetOfRelations( M, pos );
+    
+    return M;
+    
+end );
+
+##
 InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsOfPresentation)
         "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
