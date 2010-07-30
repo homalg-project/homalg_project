@@ -317,12 +317,12 @@ DeclareAttribute( "RankOfSheaf",
 DeclareAttribute( "DegreeOfTorsionFreeness",
         IsSheafOfModules );
 
-##  <#GAPDoc Label="Codim">
+##  <#GAPDoc Label="AbsoluteDepth">
 ##  <ManSection>
-##    <Attr Arg="E" Name="Codim"/>
+##    <Attr Arg="E" Name="AbsoluteDepth"/>
 ##    <Returns>a nonnegative integer or infinity</Returns>
 ##    <Description>
-##      The codimension of the sheaf <A>E</A>.
+##      The depth of the sheaf <A>E</A>.
 ##      It is set to infinity only for <A>E</A><M>=0</M>.
 ##    </Description>
 ##  </ManSection>

@@ -23,7 +23,7 @@ InstallValue( LISHV,
             color := "\033[4;30;46m",
             intrinsic_attributes :=
             [ "RankOfSheaf",
-              "Codim",
+              "AbsoluteDepth",
               "DegreeOfTorsionFreeness",
               "PurityFiltration",
               "CodegreeOfPurity",
@@ -84,11 +84,11 @@ InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgSheaves,
 
 ##
 InstallImmediateMethod( IsZero,
-        IsSheafOfModules and HasCodim, 0,
+        IsSheafOfModules and HasAbsoluteDepth, 0,
         
   function( E )
     
-    return Codim( E ) = infinity;
+    return AbsoluteDepth( E ) = infinity;
     
 end );
 
@@ -142,11 +142,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsSheafOfModules and HasCodim, 0,
+        IsSheafOfModules and HasAbsoluteDepth, 0,
         
   function( M )
     
-    if Codim( M ) > 0 then
+    if AbsoluteDepth( M ) > 0 then
         return true;
     elif HasIsZero( M ) and not IsZero( M ) then
         return false;
@@ -333,22 +333,22 @@ InstallMethod( Rank,
 end );
 
 ##
-InstallMethod( Codim,
+InstallMethod( AbsoluteDepth,
         "for sheaves",
         [ IsSheafOfModules ],
         
   function( E )
-    local M, codim;
+    local M, depth;
     
     M := UnderlyingModule( E );
     
-    codim := Codim( M );
+    depth := AbsoluteDepth( M );
     
-    if codim > DimensionOfAmbientSpace( E ) then
+    if depth > DimensionOfAmbientSpace( E ) then
        return infinity;
     fi;
     
-    return codim;
+    return depth;
     
 end );
 

@@ -702,7 +702,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsTorsion( M ) and IsTorsion( M ) then
-        if HasCodim( M ) then
+        if HasAbsoluteDepth( M ) then
             if HasIsPure( M ) then
                 if IsPure( M ) then
                     ## only display the purity information if the ambient space has dimension > 1:
@@ -724,8 +724,8 @@ InstallMethod( ViewObj,
                     Append( properties, " non-pure" );
                 fi;
             fi;
-            Append( properties, " codim " );
-            Append( properties, String( Codim( M ) ) );
+            Append( properties, " depth " );
+            Append( properties, String( AbsoluteDepth( M ) ) );
         else
             if HasIsPure( M ) then
                 if IsPure( M ) then

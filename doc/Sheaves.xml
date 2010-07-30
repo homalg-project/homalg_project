@@ -55,7 +55,7 @@
      they can safely be attached to any copy of the sheaf -->
 
 <#Include Label="RankOfSheaf">
-<#Include Label="Codim">
+<#Include Label="AbsoluteDepth">
 <#Include Label="CodegreeOfPurity">
 <#Include Label="CastelnuovoMumfordRegularity">
 
