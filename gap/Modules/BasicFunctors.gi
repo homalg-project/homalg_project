@@ -1626,10 +1626,10 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := TorsionSubmodule( M );
+##  gap> N := TorsionSubobject( M );
 ##  <A cyclic torsion left module presented by yet unknown relations for a cyclic \
 ##  generator>
-##  gap> iota := TorsionSubmoduleEmb( M );
+##  gap> iota := TorsionSubobjectEmb( M );
 ##  <A monomorphism of left modules>
 ##  gap> psi := Ext( 1, iota, N );
 ##  <A homomorphism of right modules>
@@ -1698,10 +1698,10 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := TorsionSubmodule( M );
+##  gap> N := TorsionSubobject( M );
 ##  <A cyclic torsion left module presented by yet unknown relations for a cyclic \
 ##  generator>
-##  gap> iota := TorsionSubmoduleEmb( M );
+##  gap> iota := TorsionSubobjectEmb( M );
 ##  <A monomorphism of left modules>
 ##  gap> psi := Tor( 1, iota, N );
 ##  <A homomorphism of left modules>

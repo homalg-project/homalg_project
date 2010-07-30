@@ -2,13 +2,13 @@ Read( "homalg.g" );
 
 SetAssertionLevel( 4 );
 
-iota := TorsionSubmoduleEmb( M );
+iota := TorsionSubobjectEmb( M );
 pi := TorsionFreeFactorEpi( M );
 
 C := HomalgComplex( pi );
 Add( C, iota );
 
-T := TorsionSubmodule( M );
+T := TorsionSubobject( M );
 
 triangle := RHom( C, T );
 lecs := LongSequence( triangle );

@@ -15,15 +15,15 @@
 ####################################
 
 ##
-## TorsionSubmodule
+## TorsionSubobject
 ##
 
-InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,	### defines: TorsionSubmodule(Emb)
+InstallGlobalFunction( _Functor_TorsionSubobject_OnObjects,	### defines: TorsionSubobject(Emb)
   function( M )
     local par, emb, tor;
     
-    if HasTorsionSubmoduleEmb( M ) then
-        return Source( TorsionSubmoduleEmb( M ) );
+    if HasTorsionSubobjectEmb( M ) then
+        return Source( TorsionSubobjectEmb( M ) );
     fi;
     
     ## computing a "minimal parametrization" requires the
@@ -32,8 +32,8 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,	### defines: Torsion
     
     emb := KernelEmb( par );
     
-    ## set the attribute TorsionSubmoduleEmb (specific for TorsionSubmodule):
-    SetTorsionSubmoduleEmb( M, emb );
+    ## set the attribute TorsionSubobjectEmb (specific for TorsionSubobject):
+    SetTorsionSubobjectEmb( M, emb );
     
     tor := Source( emb );
     
@@ -43,18 +43,18 @@ InstallGlobalFunction( _Functor_TorsionSubmodule_OnObjects,	### defines: Torsion
     
 end );
 
-InstallValue( Functor_TorsionSubmodule,
+InstallValue( Functor_TorsionSubobject,
         CreateHomalgFunctor(
-                [ "name", "TorsionSubmodule" ],
-                [ "operation", "TorsionSubmodule" ],
-                [ "natural_transformation", "TorsionSubmoduleEmb" ],
+                [ "name", "TorsionSubobject" ],
+                [ "operation", "TorsionSubobject" ],
+                [ "natural_transformation", "TorsionSubobjectEmb" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "additive" ] ] ],
-                [ "OnObjects", _Functor_TorsionSubmodule_OnObjects ]
+                [ "OnObjects", _Functor_TorsionSubobject_OnObjects ]
                 )
         );
 
-Functor_TorsionSubmodule!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_TorsionSubobject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -69,7 +69,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
         return Range( TorsionFreeFactorEpi( M ) );
     fi;
     
-    emb := TorsionSubmoduleEmb( M );
+    emb := TorsionSubobjectEmb( M );
     
     epi := CokernelEpi( emb );
     
@@ -518,10 +518,10 @@ functor_AuslanderDual!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
-## TorsionSubmodule( M ) and TorsionSubmoduleEmb( M )
+## TorsionSubobject( M ) and TorsionSubobjectEmb( M )
 ##
 
-InstallFunctor( Functor_TorsionSubmodule );
+InstallFunctor( Functor_TorsionSubobject );
 
 ##
 ## TorsionFreeFactor( M ) and TorsionFreeFactorEpi( M )

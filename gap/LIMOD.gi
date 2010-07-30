@@ -429,12 +429,12 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleRep and HasTorsionSubmoduleEmb and HasIsZero, 0,
+        IsFinitelyPresentedModuleRep and HasTorsionSubobjectEmb and HasIsZero, 0,
         
   function( M )
     local T;
     
-    T := Source( TorsionSubmoduleEmb( M ) );
+    T := Source( TorsionSubobjectEmb( M ) );
     
     if not IsZero( M ) and HasIsZero( T ) then
         if IsZero( T ) then
@@ -1128,7 +1128,7 @@ InstallMethod( IsTorsionFree,
         
   function( M )
     
-    return IsZero( TorsionSubmodule( M ) );
+    return IsZero( TorsionSubobject( M ) );
     
 end );
 
