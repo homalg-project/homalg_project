@@ -14,6 +14,6 @@ y^2-x*(x-1)*(x+1), 0, 0, \
 
 Y := LeftPresentation( Involution( YI ) );
 
-Yt := TorsionSubmodule( Y );
+Yt := TorsionSubobject( Y );
 
 Ann := Annihilator( Yt );

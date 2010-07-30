@@ -23,9 +23,9 @@ nu := TorsionFreeFactorEpi( M );
 
 chi := nu^-1;
 
-T := TorsionSubmodule( M );
+T := TorsionSubobject( M );
 
-iota := TorsionSubmoduleEmb( M );
+iota := TorsionSubobjectEmb( M );
 
 alpha := CoproductMorphism( NaturalGeneralizedEmbedding( T ), NaturalGeneralizedEmbedding( F ) );
 
