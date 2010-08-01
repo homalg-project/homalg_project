@@ -43,35 +43,13 @@ functor_TheZeroMorphism_ForModules!.ContainerForWeakPointersOnComputedBasicObjec
 ## MulMorphism
 ##
 
-InstallGlobalFunction( _Functor_MulMorphism_OnModules,	### defines: MulMorphism
+InstallGlobalFunction( _Functor_MulMorphism_OnMaps,	### defines: MulMorphism
   function( a, phi )
     local a_phi;
     
     a_phi := HomalgMap( a * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
     
-    if IsUnit( HomalgRing( phi ), a ) then
-        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-            SetIsIsomorphism( a_phi, true );
-        else
-            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
-                SetIsSplitMonomorphism( a_phi, true );
-            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
-                SetIsMonomorphism( a_phi, true );
-            fi;
-            
-            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
-                SetIsSplitEpimorphism( a_phi, true );
-            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-                SetIsEpimorphism( a_phi, true );
-            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-                SetIsMorphism( a_phi, true );
-            fi;
-        fi;
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-        SetIsMorphism( a_phi, true );
-    fi;
-    
-    return a_phi;
+    return SetPropertiesOfMulMorphism( a, phi, a_phi );
     
 end );
 
@@ -82,7 +60,7 @@ InstallValue( functor_MulMorphism,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsRingElement ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_MulMorphism_OnModules ]
+                [ "OnObjects", _Functor_MulMorphism_OnMaps ]
                 )
         );
 
@@ -104,7 +82,7 @@ end );
 ## AddMorphisms
 ##
 
-InstallGlobalFunction( _Functor_AddMorphisms_OnModules,	### defines: AddMorphisms
+InstallGlobalFunction( _Functor_AddMorphisms_OnMaps,	### defines: AddMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -114,12 +92,7 @@ InstallGlobalFunction( _Functor_AddMorphisms_OnModules,	### defines: AddMorphism
     
     phi := HomalgMap( MatrixOfMap( phi1 ) + MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
     
-    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( phi, true );
-    fi;
-    
-    return phi;
+    return SetPropertiesOfSumMorphism( phi1, phi2, phi );
     
 end );
 
@@ -130,7 +103,7 @@ InstallValue( functor_AddMorphisms,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_AddMorphisms_OnModules ]
+                [ "OnObjects", _Functor_AddMorphisms_OnMaps ]
                 )
         );
 
@@ -141,7 +114,7 @@ functor_AddMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## SubMorphisms
 ##
 
-InstallGlobalFunction( _Functor_SubMorphisms_OnModules,	### defines: SubMorphisms
+InstallGlobalFunction( _Functor_SubMorphisms_OnMaps,	### defines: SubMorphisms
   function( phi1, phi2 )
     local phi;
     
@@ -151,12 +124,7 @@ InstallGlobalFunction( _Functor_SubMorphisms_OnModules,	### defines: SubMorphism
     
     phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
     
-    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( phi, true );
-    fi;
-    
-    return phi;
+    return SetPropertiesOfDifferenceMorphism( phi1, phi2, phi );
     
 end );
 
@@ -167,7 +135,7 @@ InstallValue( functor_SubMorphisms,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_SubMorphisms_OnModules ]
+                [ "OnObjects", _Functor_SubMorphisms_OnMaps ]
                 )
         );
 
@@ -178,9 +146,9 @@ functor_SubMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## Compose
 ##
 
-InstallGlobalFunction( _Functor_Compose_OnModules,	### defines: Compose
+InstallGlobalFunction( _Functor_Compose_OnMaps,	### defines: Compose
   function( cpx_post_pre )
-    local pre, post, S, T, phi, morphism_aid_pre;
+    local pre, post, S, T, phi;
     
     if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
         Error( "expecting a complex containing two morphisms\n" );
@@ -198,72 +166,7 @@ InstallGlobalFunction( _Functor_Compose_OnModules,	### defines: Compose
         phi := HomalgMap( MatrixOfMap( post ) * MatrixOfMap( pre ), S, T );
     fi;
     
-    if HasIsSplitMonomorphism( pre ) and IsSplitMonomorphism( pre ) and
-       HasIsSplitMonomorphism( post ) and IsSplitMonomorphism( post ) then
-        SetIsSplitMonomorphism( phi, true );
-    elif HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
-       HasIsMonomorphism( post ) and IsMonomorphism( post ) then
-        SetIsMonomorphism( phi, true );
-    fi;
-    
-    ## cannot use elif here:
-    if HasIsSplitEpimorphism( pre ) and IsSplitEpimorphism( pre ) and
-       HasIsSplitEpimorphism( post ) and IsSplitEpimorphism( post ) then
-        SetIsSplitEpimorphism( phi, true );
-    elif HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
-       HasIsEpimorphism( post ) and IsEpimorphism( post ) then
-        SetIsEpimorphism( phi, true );
-    elif HasIsMorphism( pre ) and IsMorphism( pre ) and
-      HasIsMorphism( post ) and IsMorphism( post ) then
-        SetIsMorphism( phi, true );
-    fi;
-    
-    ## the following is crucial for spectral sequences:
-    if HasMorphismAid( pre ) then
-        
-        morphism_aid_pre := PreCompose( MorphismAid( pre ), RemoveMorphismAid( post ) );
-        
-        if HasMorphismAid( post ) then
-            SetMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
-        else
-            SetMorphismAid( phi, morphism_aid_pre );
-        fi;
-        
-        if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
-           HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
-            SetIsGeneralizedMonomorphism( phi, true );
-        fi;
-        
-        ## cannot use elif here:
-        if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
-           HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
-            SetIsGeneralizedEpimorphism( phi, true );
-        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
-          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
-            SetIsGeneralizedMorphism( phi, true );
-        fi;
-        
-    elif HasMorphismAid( post ) then
-        
-        SetMorphismAid( phi, MorphismAid( post ) );
-        
-        if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
-           HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
-            SetIsGeneralizedMonomorphism( phi, true );
-        fi;
-        
-        ## cannot use elif here:
-        if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
-           HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
-            SetIsGeneralizedEpimorphism( phi, true );
-        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
-          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
-            SetIsGeneralizedMorphism( phi, true );
-        fi;
-        
-    fi;
-    
-    return phi;
+    return SetPropertiesOfComposedMorphism( pre, post, phi );
     
 end );
 
@@ -273,7 +176,7 @@ InstallValue( functor_Compose,
                 [ "operation", "Compose" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
-                [ "OnObjects", _Functor_Compose_OnModules ]
+                [ "OnObjects", _Functor_Compose_OnMaps ]
                 )
         );
 
@@ -316,7 +219,7 @@ end );
 ## CoproductMorphism
 ##
 
-InstallGlobalFunction( _Functor_CoproductMorphism_OnModules,	### defines: CoproductMorphism
+InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps,	### defines: CoproductMorphism
   function( phi, psi )
     local T, phi_psi, SpS, p;
     
@@ -339,18 +242,7 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnModules,	### defines: Coprod
     
     phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
     
-    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
-        SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
-    fi;
-    
-    return phi_psi;
+    return SetPropertiesOfCoproductMorphism( phi, psi, phi_psi );
     
 end );
 
@@ -361,7 +253,7 @@ InstallValue( functor_CoproductMorphism,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_CoproductMorphism_OnModules ]
+                [ "OnObjects", _Functor_CoproductMorphism_OnMaps ]
                 )
         );
 
@@ -372,7 +264,7 @@ functor_CoproductMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## ProductMorphism
 ##
 
-InstallGlobalFunction( _Functor_ProductMorphism_OnModules,	### defines: ProductMorphism
+InstallGlobalFunction( _Functor_ProductMorphism_OnMaps,	### defines: ProductMorphism
   function( phi, psi )
     local S, phi_psi, TpT, p;
     
@@ -395,18 +287,7 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnModules,	### defines: ProductM
     
     phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
     
-    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
-        SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
-    fi;
-    
-    return phi_psi;
+    return SetPropertiesOfProductMorphism( phi, psi, phi_psi );
     
 end );
 
@@ -417,7 +298,7 @@ InstallValue( functor_ProductMorphism,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_ProductMorphism_OnModules ]
+                [ "OnObjects", _Functor_ProductMorphism_OnMaps ]
                 )
         );
 
@@ -445,7 +326,7 @@ functor_ProductMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## PostDivide
 ##
 
-InstallGlobalFunction( _Functor_PostDivide_OnModules,	### defines: PostDivide
+InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
   function( chm_pb )
     local gamma, beta, N, psi, M_;
     
@@ -519,7 +400,7 @@ InstallValue( functor_PostDivide,
                 [ "operation", "PostDivide" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
-                [ "OnObjects", _Functor_PostDivide_OnModules ]
+                [ "OnObjects", _Functor_PostDivide_OnMaps ]
                 )
         );
 
@@ -547,7 +428,7 @@ functor_PostDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## PreDivide
 ##
 
-InstallGlobalFunction( _Functor_PreDivide_OnModules,	### defines: PreDivide
+InstallGlobalFunction( _Functor_PreDivide_OnMaps,	### defines: PreDivide
   function( chm_po )
     local epsilon, eta, gen_iso, eta0;
     
@@ -583,7 +464,7 @@ InstallValue( functor_PreDivide,
                 [ "operation", "PreDivide" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
-                [ "OnObjects", _Functor_PreDivide_OnModules ]
+                [ "OnObjects", _Functor_PreDivide_OnMaps ]
                 )
         );
 

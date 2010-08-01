@@ -262,3 +262,205 @@ InstallFunctorOnObjects( functor_AsChainMapForPullback );
 
 InstallFunctorOnObjects( functor_AsChainMapForPushout );
 
+##
+## SetProperties
+##
+
+##
+InstallMethod( SetPropertiesOfMulMorphism,
+        "for a ring element and two homalg static morphisms",
+        [ IsRingElement,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( a, phi, a_phi )
+    
+    if IsUnit( HomalgRing( phi ), a ) then
+        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+            SetIsIsomorphism( a_phi, true );
+        else
+            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
+                SetIsSplitMonomorphism( a_phi, true );
+            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                SetIsMonomorphism( a_phi, true );
+            fi;
+            
+            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
+                SetIsSplitEpimorphism( a_phi, true );
+            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                SetIsEpimorphism( a_phi, true );
+            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+                SetIsMorphism( a_phi, true );
+            fi;
+        fi;
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( a_phi, true );
+    fi;
+    
+    return a_phi;
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfSumMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi1, phi2, phi )
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfDifferenceMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi1, phi2, phi )
+    
+    if HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
+       HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfComposedMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( pre, post, phi )
+    local morphism_aid_pre;
+    
+    if HasIsSplitMonomorphism( pre ) and IsSplitMonomorphism( pre ) and
+       HasIsSplitMonomorphism( post ) and IsSplitMonomorphism( post ) then
+        SetIsSplitMonomorphism( phi, true );
+    elif HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
+       HasIsMonomorphism( post ) and IsMonomorphism( post ) then
+        SetIsMonomorphism( phi, true );
+    fi;
+    
+    ## cannot use elif here:
+    if HasIsSplitEpimorphism( pre ) and IsSplitEpimorphism( pre ) and
+       HasIsSplitEpimorphism( post ) and IsSplitEpimorphism( post ) then
+        SetIsSplitEpimorphism( phi, true );
+    elif HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
+       HasIsEpimorphism( post ) and IsEpimorphism( post ) then
+        SetIsEpimorphism( phi, true );
+    elif HasIsMorphism( pre ) and IsMorphism( pre ) and
+      HasIsMorphism( post ) and IsMorphism( post ) then
+        SetIsMorphism( phi, true );
+    fi;
+    
+    ## the following is crucial for spectral sequences:
+    if HasMorphismAid( pre ) then
+        
+        morphism_aid_pre := PreCompose( MorphismAid( pre ), RemoveMorphismAid( post ) );
+        
+        if HasMorphismAid( post ) then
+            SetMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
+        else
+            SetMorphismAid( phi, morphism_aid_pre );
+        fi;
+        
+        if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
+           HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
+            SetIsGeneralizedMonomorphism( phi, true );
+        fi;
+        
+        ## cannot use elif here:
+        if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
+           HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
+            SetIsGeneralizedEpimorphism( phi, true );
+        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
+          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
+            SetIsGeneralizedMorphism( phi, true );
+        fi;
+        
+    elif HasMorphismAid( post ) then
+        
+        SetMorphismAid( phi, MorphismAid( post ) );
+        
+        if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
+           HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
+            SetIsGeneralizedMonomorphism( phi, true );
+        fi;
+        
+        ## cannot use elif here:
+        if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
+           HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
+            SetIsGeneralizedEpimorphism( phi, true );
+        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
+          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
+            SetIsGeneralizedMorphism( phi, true );
+        fi;
+        
+    fi;
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfCoproductMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi, psi, phi_psi )
+    
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+      HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetIsEpimorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+      HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfProductMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi, psi, phi_psi )
+    
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        SetIsMonomorphism( phi_psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
+    return phi_psi;
+    
+end );
+
