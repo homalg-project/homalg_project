@@ -66,6 +66,7 @@
 <Section Label="Modules:Attributes">
 <Heading>Modules: Attributes</Heading>
 
+<#Include Label="TorsionSubobject">
 <#Include Label="TheMorphismToZero">
 <#Include Label="TheIdentityMorphism">
 <#Include Label="FullSubobject">

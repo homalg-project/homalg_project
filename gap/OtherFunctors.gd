@@ -19,10 +19,10 @@ DeclareGlobalFunction( "_Functor_TorsionFreeFactor_OnObjects" );
 
 DeclareGlobalVariable( "Functor_TorsionFreeFactor" );
 
-## TorsionSubobject
-DeclareGlobalFunction( "_Functor_TorsionSubobject_OnObjects" );
+## TorsionObject
+DeclareGlobalFunction( "_Functor_TorsionObject_OnObjects" );
 
-DeclareGlobalVariable( "Functor_TorsionSubobject" );
+DeclareGlobalVariable( "Functor_TorsionObject" );
 
 ## DirectSum
 DeclareGlobalFunction( "_Functor_DirectSum_OnObjects" );
@@ -55,7 +55,7 @@ DeclareGlobalVariable( "functor_AuslanderDual" );
 DeclareAttribute( "TorsionFreeFactorEpi",
         IsHomalgMap );
 
-DeclareAttribute( "TorsionSubobjectEmb",
+DeclareAttribute( "TorsionObjectEmb",
         IsHomalgMap );
 
 DeclareAttribute( "MonoOfLeftSummand",
@@ -85,10 +85,10 @@ DeclareAttribute( "PushoutPairOfMaps",
 # basic operations:
 
 DeclareOperation( "TorsionFreeFactor",
-        [ IsHomalgModule ] );
+        [ IsHomalgObject ] );
 
-DeclareOperation( "TorsionSubobject",
-        [ IsHomalgModule ] );
+DeclareOperation( "TorsionObject",
+        [ IsHomalgObject ] );
 
 DeclareOperation( "DirectSumOp",
         [ IsList, IsHomalgRingOrObjectOrMorphism ] );

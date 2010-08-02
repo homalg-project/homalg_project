@@ -429,12 +429,12 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleRep and HasTorsionSubobjectEmb and HasIsZero, 0,
+        IsFinitelyPresentedModuleRep and HasTorsionObjectEmb and HasIsZero, 0,
         
   function( M )
     local T;
     
-    T := Source( TorsionSubobjectEmb( M ) );
+    T := Source( TorsionObjectEmb( M ) );
     
     if not IsZero( M ) and HasIsZero( T ) then
         if IsZero( T ) then
@@ -1128,7 +1128,7 @@ InstallMethod( IsTorsionFree,
         
   function( M )
     
-    return IsZero( TorsionSubobject( M ) );
+    return IsZero( TorsionObject( M ) );
     
 end );
 
@@ -1497,6 +1497,31 @@ end );
 # methods for attributes:
 #
 ####################################
+
+##
+InstallMethod( TorsionSubobject,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local par, emb, tor;
+    
+    if HasIsTorsion( M ) and IsTorsion( M ) then
+        return FullSubobject( M );
+    fi;
+    
+    ## compute any parametrization since computing
+    ## a "minimal" parametrization requires the
+    ## rank which if unknown would probably trigger Resolution
+    par := AnyParametrization( M );
+    
+    tor := KernelSubobject( par );
+    
+    SetIsTorsion( tor, true );
+    
+    return tor;
+    
+end );
 
 ##
 InstallMethod( TheMorphismToZero,

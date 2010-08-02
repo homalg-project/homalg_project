@@ -1,14 +1,12 @@
 Read( "homalg.g" );
 
-SetAssertionLevel( 4 );
-
-iota := TorsionSubobjectEmb( M );
+iota := TorsionObjectEmb( M );
 pi := TorsionFreeFactorEpi( M );
 
 C := HomalgComplex( pi );
 Add( C, iota );
 
-T := TorsionSubobject( M );
+T := TorsionObject( M );
 
 triangle := RHom( C, T );
 lecs := LongSequence( triangle );
@@ -18,7 +16,7 @@ lehs := LongSequence( Triangle );
 IsExactSequence( lehs );
 ByASmallerPresentation( lecs );
 homalgResetFilters( lecs );
-IsExactSequence( lecs );
+Assert( 0, IsExactSequence( lecs ) );
 ByASmallerPresentation( lehs );
 homalgResetFilters( lehs );
-IsExactSequence( lehs );
+Assert( 0, IsExactSequence( lehs ) );

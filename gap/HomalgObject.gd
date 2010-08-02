@@ -180,6 +180,18 @@ DeclareProperty( "IsInjectiveCogenerator",
 #
 ####################################
 
+##  <#GAPDoc Label="TorsionSubobject">
+##  <ManSection>
+##    <Attr Arg="M" Name="TorsionSubobject" Label="for maps"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      This constructor returns the finitely generated torsion submodule of the &homalg; module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "TorsionSubobject",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="TheMorphismToZero">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="TheMorphismToZero"/>

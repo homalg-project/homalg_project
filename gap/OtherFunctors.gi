@@ -15,46 +15,57 @@
 ####################################
 
 ##
-## TorsionSubobject
+## TorsionObject
 ##
 
-InstallGlobalFunction( _Functor_TorsionSubobject_OnObjects,	### defines: TorsionSubobject(Emb)
-  function( M )
-    local par, emb, tor;
+##
+InstallMethod( TorsionObject,
+        "LIMOR: for homalg modules",
+        [ IsHomalgStaticObject ], 10001,
+        
+  function( psi )
     
-    if HasTorsionSubobjectEmb( M ) then
-        return Source( TorsionSubobjectEmb( M ) );
+    if HasTorsionObjectEmb( psi ) then
+        return Source( TorsionObjectEmb( psi ) );
     fi;
     
-    ## computing a "minimal parametrization" requires the
-    ## rank which if unknown would probably trigger Resolution
-    par := AnyParametrization( M );
+    TryNextMethod( );
     
-    emb := KernelEmb( par );
+end );
+
+##
+InstallGlobalFunction( _Functor_TorsionObject_OnObjects,	### defines: TorsionObject(Emb)
+  function( M )
+    local tor_subobject, tor, emb;
     
-    ## set the attribute TorsionSubobjectEmb (specific for TorsionSubobject):
-    SetTorsionSubobjectEmb( M, emb );
+    tor_subobject := TorsionSubobject( M );
     
-    tor := Source( emb );
+    ## in case of modules: this involves a second syzygies computation:
+    ## (the number of generators of tor might be less than the number of generators of tor_subobject)
+    tor := UnderlyingObject( tor_subobject );
     
-    SetIsTorsion( tor, true );
+    ## the natural embedding of tor in M:
+    emb := EmbeddingInSuperObject( tor_subobject );
+    
+    ## set the attribute TorsionObjectEmb (specific for TorsionObject):
+    SetTorsionObjectEmb( M, emb );
     
     return tor;
     
 end );
 
-InstallValue( Functor_TorsionSubobject,
+InstallValue( Functor_TorsionObject,
         CreateHomalgFunctor(
-                [ "name", "TorsionSubobject" ],
-                [ "operation", "TorsionSubobject" ],
-                [ "natural_transformation", "TorsionSubobjectEmb" ],
+                [ "name", "TorsionObject" ],
+                [ "operation", "TorsionObject" ],
+                [ "natural_transformation", "TorsionObjectEmb" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "additive" ] ] ],
-                [ "OnObjects", _Functor_TorsionSubobject_OnObjects ]
+                [ "OnObjects", _Functor_TorsionObject_OnObjects ]
                 )
         );
 
-Functor_TorsionSubobject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_TorsionObject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -69,7 +80,7 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
         return Range( TorsionFreeFactorEpi( M ) );
     fi;
     
-    emb := TorsionSubobjectEmb( M );
+    emb := TorsionObjectEmb( M );
     
     epi := CokernelEpi( emb );
     
@@ -518,10 +529,10 @@ functor_AuslanderDual!.ContainerForWeakPointersOnComputedBasicObjects :=
 ####################################
 
 ##
-## TorsionSubobject( M ) and TorsionSubobjectEmb( M )
+## TorsionObject( M ) and TorsionObjectEmb( M )
 ##
 
-InstallFunctor( Functor_TorsionSubobject );
+InstallFunctor( Functor_TorsionObject );
 
 ##
 ## TorsionFreeFactor( M ) and TorsionFreeFactorEpi( M )

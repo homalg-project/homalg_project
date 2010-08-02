@@ -751,7 +751,7 @@ end );
 ##  <#/GAPDoc>
 
 ##
-InstallMethod( SetPropertiesIfKernelIsTorsionSubobject,
+InstallMethod( SetPropertiesIfKernelIsTorsionObject,
         "for homalg morphisms of static object",
         [ IsHomalgStaticMorphism ],
         

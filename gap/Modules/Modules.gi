@@ -514,7 +514,7 @@ InstallMethod( AnyParametrization,
     
     par := HomalgMap( par, M, "free" );
     
-    SetPropertiesIfKernelIsTorsionSubobject( par );
+    SetPropertiesIfKernelIsTorsionObject( par );
     
     return par;
     
@@ -556,7 +556,7 @@ InstallMethod( MinimalParametrization,
     
     par := HomalgMap( par, M, "free" );
     
-    SetPropertiesIfKernelIsTorsionSubobject( par );
+    SetPropertiesIfKernelIsTorsionObject( par );
     
     return par;
     

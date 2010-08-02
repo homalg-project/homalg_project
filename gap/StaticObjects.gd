@@ -108,7 +108,7 @@ DeclareOperation( "Saturate",
 DeclareOperation( "Saturate",
         [ IsHomalgStaticObject ] );
 
-DeclareOperation( "SetPropertiesIfKernelIsTorsionSubobject",
+DeclareOperation( "SetPropertiesIfKernelIsTorsionObject",
         [ IsHomalgStaticMorphism ] );
 
 DeclareOperation( "SetAsPreferredPresentation",
