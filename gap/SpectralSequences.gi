@@ -579,7 +579,7 @@ InstallMethod( GrothendieckBicomplex,
     
     ## a projective resolution of M
     ## (which is an injective resolution in the opposite category)
-    P := Resolution( M );
+    P := ShortenResolution( M );
     
     ## apply the inner functor G to the resolution P of M
     GP := G( P );

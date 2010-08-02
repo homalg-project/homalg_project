@@ -366,10 +366,11 @@ InstallMethod( ShortenResolution,
         return d;
     fi;
     
-    SetIsEpimorphism( s_m_1, true );	## only during the first step
-    
     d_m := ProductMorphism( d_m_1, s_m_1 );
-    SetIsMonomorphism( d_m, true );	## only during the first step
+    
+    Assert( 2, IsMonomorphism( d_m ) );
+    
+    SetIsMonomorphism( d_m, true );
     
     if m > 2 then
         d_m_2 := CertainMorphism( d, mx - 2 );
@@ -383,9 +384,6 @@ InstallMethod( ShortenResolution,
     ## iterate:
     while n <> 0 and m > 1 do
         
-        d_m := CertainMorphism( d, mx );
-        d_m_1 := CertainMorphism( d, mx - 1 );
-        
         F_m := Source( d_m );
         
         s_m_1 := PostInverse( d_m );
@@ -395,6 +393,10 @@ InstallMethod( ShortenResolution,
         fi;
         
         d_m := ProductMorphism( d_m_1, s_m_1 );
+        
+        Assert( 2, IsMonomorphism( d_m ) );
+        
+        SetIsMonomorphism( d_m, true );
         
         if m > 2 then
             d_m_2 := CertainMorphism( d, mx - 2 );
