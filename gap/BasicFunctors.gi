@@ -63,7 +63,7 @@ InstallMethod( ImageObjectEpi,
     epi := phi / emb;	## lift
     
     ## check assertion
-    Assert( 4, IsEpimorphism( epi ) );
+    Assert( 3, IsEpimorphism( epi ) );
     
     SetIsEpimorphism( epi, true );
     

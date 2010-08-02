@@ -236,7 +236,7 @@ end );
 ## this immediate method together with the above ture-method
 ## IsZero => IsMorphism
 ## are essential to avoid infinite loops that
-## Assert( 4, IsMonomorphism( emb ) );
+## Assert( 3, IsMonomorphism( emb ) );
 ## in _Functor_ImageObject_OnObjects may cause
 ##
 InstallImmediateMethod( IsSplitMonomorphism,
@@ -730,7 +730,7 @@ InstallMethod( GeneralizedInverse,
     SetMorphismAid( gen_iso, aid );
     
     ## check assertion
-    Assert( 4, IsGeneralizedIsomorphism( gen_iso ) );
+    Assert( 3, IsGeneralizedIsomorphism( gen_iso ) );
     
     SetIsGeneralizedIsomorphism( gen_iso, true );
     

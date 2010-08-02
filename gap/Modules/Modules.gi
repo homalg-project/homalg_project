@@ -318,14 +318,14 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
     if IsBound( S ) and NrRelations( S ) = 0 then
         
         ## check assertion
-        Assert( 4, IsRightAcyclic( d ) );
+        Assert( 3, IsRightAcyclic( d ) );
         
         SetIsRightAcyclic( d, true );
         
     else
         
         ## check assertion
-        Assert( 4, IsAcyclic( d ) );
+        Assert( 3, IsAcyclic( d ) );
         
         SetIsAcyclic( d, true );
     fi;

@@ -843,7 +843,7 @@ InstallMethod( DefectOfExactness,
                     fi;
                     
                     ## check assertion
-                    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+                    Assert( 3, IsGeneralizedMonomorphism( emb ) );
                     
                     SetIsGeneralizedMonomorphism( emb, true );
                     
@@ -871,7 +871,7 @@ InstallMethod( DefectOfExactness,
                     fi;
                     
                     ## check assertion
-                    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+                    Assert( 3, IsGeneralizedMonomorphism( emb ) );
                     
                     SetIsGeneralizedMonomorphism( emb, true );
                     

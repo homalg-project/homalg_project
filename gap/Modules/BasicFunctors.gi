@@ -148,7 +148,7 @@ InstallGlobalFunction( _Functor_ImageObject_OnModules,	### defines: ImageObject(
     emb := HomalgMap( emb, [ img, 1 ], [ T, p ] );
     
     ## check assertion
-    Assert( 4, IsMonomorphism( emb ) );
+    Assert( 3, IsMonomorphism( emb ) );
     
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
         SetIsIsomorphism( emb, true );

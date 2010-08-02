@@ -51,7 +51,7 @@ InstallMethod( \/,
     emb := PreCompose( emb, CokernelNaturalGeneralizedIsomorphism( mapJ ) );
     
     ## check assertion
-    Assert( 4, IsGeneralizedMonomorphism( emb ) );
+    Assert( 3, IsGeneralizedMonomorphism( emb ) );
     
     SetIsGeneralizedMonomorphism( emb, true );
     
