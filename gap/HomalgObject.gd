@@ -234,6 +234,19 @@ DeclareAttribute( "Genesis",
 DeclareAttribute( "FullSubobject",
         IsHomalgObject );
 
+##  <#GAPDoc Label="ZeroSubobject">
+##  <ManSection>
+##    <Attr Arg="M" Name="ZeroSubobject"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      The zero submodule of the &homalg; module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ZeroSubobject",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="UnderlyingSubobject">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="UnderlyingSubobject"/>

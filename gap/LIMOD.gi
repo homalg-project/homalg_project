@@ -1557,6 +1557,28 @@ InstallMethod( FullSubobject,
 end );
 
 ##
+InstallMethod( ZeroSubobject,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local n, R, zero;
+    
+    n := NrGenerators( M );
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        zero := HomalgZeroMatrix( 0, n, R );
+    else
+        zero := HomalgZeroMatrix( n, 0, R );
+    fi;
+    
+    return Subobject( zero, M );
+    
+end );
+
+##
 InstallMethod( RankOfModule,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],

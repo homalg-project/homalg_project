@@ -97,16 +97,16 @@ DeclareOperation( "Pullback",
         [ IsHomalgChainMap ] );
 
 DeclareOperation( "Pullback",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Pushout",
         [ IsHomalgChainMap ] );
 
 DeclareOperation( "Pushout",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "AuslanderDual",
-        [ IsHomalgModule ] );
+        [ IsHomalgObject ] );
 
 ####################################
 #
