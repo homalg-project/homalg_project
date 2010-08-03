@@ -1376,6 +1376,10 @@ InstallMethod( GeneralizedMorphism,
     
     SetMorphismAid( psi, morphism_aid_map1 );
     
+    ## some properties of the morphism phi imply
+    ## properties for the generalized morphism psi
+    SetPropertiesOfGeneralizedMorphism( psi, phi );
+    
     return psi;
     
 end );
@@ -1692,7 +1696,13 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<The zero morphism of" );
+    if HasMorphismAid( o ) then
+        Print( "<A zero generalized" );
+    else
+        Print( "<The zero" );
+    fi;
+    
+    Print( " morphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         Print( " left" );

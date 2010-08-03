@@ -357,3 +357,6 @@ DeclareOperation( "CompleteKernelSquare",
 DeclareOperation( "UpdateObjectsByMorphism",
         [ IsHomalgMorphism ] );
 
+DeclareOperation( "SetPropertiesOfGeneralizedMorphism",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
+

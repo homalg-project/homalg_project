@@ -43,9 +43,9 @@ InstallValue( LIMOR,
 ##
 InstallValue( LogicalImplicationsForHomalgMorphisms,
         [ 
-          
+          ## IsZero does not imply IsMorphism!!!
           [ IsZero,
-            "implies", IsMorphism ],
+            "implies", IsGeneralizedMorphism ],
           
           [ IsMorphism,
             "implies", IsGeneralizedMorphism ],
@@ -216,6 +216,20 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
+InstallImmediateMethod( IsMorphism,
+        IsHomalgMorphism and IsZero, 0,
+        
+  function( phi )
+    
+    if HasMorphismAid( phi ) then
+        TryNextMethod( );
+    fi;
+    
+    return true;
+    
+end );
+
+##
 InstallImmediateMethod( IsSplitEpimorphism,
         IsMapOfFinitelyGeneratedModulesRep and IsEpimorphism, 0,
         
@@ -328,7 +342,7 @@ InstallMethod( IsMorphism,
     
     mat := MatrixOfRelations( Source( phi ) ) * MatrixOfMap( phi );
     
-    return IsZero( DecideZero( mat , RelationsOfModule( Range( phi ) ) ) );
+    return IsZero( DecideZero( mat, Range( phi ) ) );
     
 end );
 
@@ -342,7 +356,22 @@ InstallMethod( IsMorphism,
     
     mat := MatrixOfMap( phi ) * MatrixOfRelations( Source( phi ) );
     
-    return IsZero( DecideZero( mat , RelationsOfModule( Range( phi ) ) ) );
+    return IsZero( DecideZero( mat, Range( phi ) ) );
+    
+end );
+
+##
+InstallMethod( IsMorphism,
+        "LIMOR: for homalg maps",
+        [ IsHomalgStaticMorphism and HasMorphismAid ], 10001,
+        
+  function( phi )
+    
+    if not IsZero( MorphismAid( phi ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -390,11 +419,15 @@ end );
 ##
 InstallMethod( IsGeneralizedMorphism,
         "LIMOR: for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsHomalgStaticMorphism ],
         
   function( phi )
     
-    return IsMorphism( phi );		## this is just the fall back method
+    if HasMorphismAid( phi ) then
+        TryNextMethod( );
+    fi;
+    
+    return IsMorphism( phi );
     
 end );
 
@@ -641,6 +674,32 @@ InstallMethod( IsQuasiIsomorphism,
   function( phi )
     
     return IsIsomorphism( DefectOfExactness( phi ) );
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfGeneralizedMorphism,
+        "for two homalg morphisms",
+        [ IsHomalgMorphism,
+          IsHomalgMorphism ],
+        
+  function( psi, phi )
+    
+    homalgResetFilters( psi );
+    
+    if HasIsZero( phi ) and IsZero( phi ) then
+        SetIsZero( psi, true );
+    fi;
+    
+    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+        SetIsGeneralizedIsomorphism( psi, true );
+    elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+        SetIsGeneralizedEpimorphism( psi, true );
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsGeneralizedMorphism( psi, true );
+    fi;
+    
+    return psi;
     
 end );
 
