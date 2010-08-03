@@ -84,13 +84,25 @@ end );
 ## Kernel
 ##
 
-InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
+##
+InstallMethod( Kernel,
+        "LIMOR: for homalg maps",
+        [ IsHomalgStaticMorphism ], 10001,
+        
   function( psi )
-    local S, ker_subobject, ker, emb, img_epi, T, coker, im;
     
     if HasKernelEmb( psi ) then
         return Source( KernelEmb( psi ) );
     fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
+  function( psi )
+    local S, ker_subobject, ker, emb, img_epi, T, coker, im;
     
     S := Source( psi );
     

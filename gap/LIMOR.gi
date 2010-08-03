@@ -754,11 +754,16 @@ InstallMethod( KernelSubobject,
         [ IsHomalgMap ],
         
   function( psi )
-    local ker, S, T;
-    
-    ker := Subobject( ReducedSyzygiesGenerators( psi ), Source( psi ) );
+    local S, ker, T;
     
     S := Source( psi );
+    
+    if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        ker := ZeroSubobject( S );
+    else
+        ker := Subobject( ReducedSyzygiesGenerators( psi ), S );
+    fi;
+    
     T := Range( psi );
     
     if HasRankOfModule( S ) and HasRankOfModule( T ) then
