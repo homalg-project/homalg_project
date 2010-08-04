@@ -344,6 +344,10 @@ InstallMethod( DecideZero,
     
     reduced := DecideZero( matrix, rel );
     
+    if not HasIsZero( phi ) then
+        SetIsZero( phi, IsZero( reduced ) );
+    fi;
+    
     if reduced = matrix then
         reduced := matrix;
     else
@@ -352,7 +356,7 @@ InstallMethod( DecideZero,
     
     phi!.reduced_matrices.(String( index_pair )) := reduced;
     
-    return reduced;
+    return phi;
     
 end );
 
@@ -385,9 +389,8 @@ InstallMethod( ByASmallerPresentation,
     
     ByASmallerPresentation( Source( phi ) );
     ByASmallerPresentation( Range( phi ) );
-    DecideZero( phi );
     
-    return phi;
+    return DecideZero( phi );
     
 end );
 ##  ]]></Listing>
@@ -421,7 +424,7 @@ end );
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> ByASmallerPresentation( phi );
-##  <A homomorphism of left modules>
+##  <A non-zero homomorphism of left modules>
 ##  gap> Display( phi );
 ##  [ [   0,   0,   0 ],
 ##    [   1,  -1,  -2 ] ]
@@ -877,7 +880,7 @@ end );
 ##  
 ##  the map is currently represented by the above 2 x 3 matrix
 ##  gap> ByASmallerPresentation( phi );
-##  <A homomorphism of left modules>
+##  <A non-zero homomorphism of left modules>
 ##  gap> Display( phi );
 ##  [ [   0,   0,   0 ],
 ##    [   1,  -1,  -2 ] ]

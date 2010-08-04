@@ -1085,7 +1085,7 @@ InstallFunctorOnObjects( functor_ImageObject );
 ##  gap> psi := Hom( phi, M );
 ##  <A homomorphism of right modules>
 ##  gap> ByASmallerPresentation( psi );
-##  <A homomorphism of right modules>
+##  <A non-zero homomorphism of right modules>
 ##  gap> Display( psi );
 ##  [ [   1,   1,   0,   1 ],
 ##    [   2,   2,   0,   0 ],
@@ -1315,7 +1315,7 @@ InstallFunctor( Functor_Hom );
 ##  gap> psi := phi * L;
 ##  <A homomorphism of right modules>
 ##  gap> ByASmallerPresentation( psi );
-##  <A homomorphism of right modules>
+##  <A non-zero homomorphism of right modules>
 ##  gap> Display( psi );
 ##  [ [   0,   0,   1,   1 ],
 ##    [   0,   0,   8,   1 ],
@@ -1634,7 +1634,7 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  gap> psi := Ext( 1, iota, N );
 ##  <A homomorphism of right modules>
 ##  gap> ByASmallerPresentation( psi );
-##  <A homomorphism of right modules>
+##  <A non-zero homomorphism of right modules>
 ##  gap> Display( psi );
 ##  [ [  2 ] ]
 ##  
@@ -1706,7 +1706,7 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  gap> psi := Tor( 1, iota, N );
 ##  <A homomorphism of left modules>
 ##  gap> ByASmallerPresentation( psi );
-##  <A homomorphism of left modules>
+##  <A non-zero homomorphism of left modules>
 ##  gap> Display( psi );
 ##  [ [  1 ] ]
 ##  

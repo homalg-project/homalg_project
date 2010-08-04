@@ -314,7 +314,7 @@ InstallMethod( IsZero,
         
   function( phi )
     
-    return IsZero( DecideZero( phi ) );
+    return IsZero( MatrixOfMap( DecideZero( phi ) ) );
     
 end );
 
