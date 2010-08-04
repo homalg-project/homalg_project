@@ -674,7 +674,12 @@ InstallMethod( \=,
         
   function( M1, M2 )
     
-    return M1!.matrix = M2!.matrix;
+    if M1!.matrix = M2!.matrix then
+        MatchPropertiesAndAttributes( M1, M2, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
+        return true;
+    fi;
+    
+    return false;
     
 end );
 
@@ -735,7 +740,12 @@ InstallMethod( \=,
         
   function( M1, M2 )
     
-    return Eval( M1 ) = Eval( M2 );
+    if Eval( M1 ) = Eval( M2 ) then
+        MatchPropertiesAndAttributes( M1, M2, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
+        return true;
+    fi;
+    
+    return false;
     
 end );
 
