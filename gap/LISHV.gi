@@ -158,12 +158,12 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsSheafOfModules and HasTorsionSubobjectEmb and HasIsZero, 0,
+        IsSheafOfModules and HasTorsionObjectEmb and HasIsZero, 0,
         
   function( M )
     local T;
     
-    T := Source( TorsionSubobjectEmb( M ) );
+    T := Source( TorsionObjectEmb( M ) );
     
     if not IsZero( M ) and HasIsZero( T ) then
         if IsZero( T ) then
@@ -254,7 +254,7 @@ InstallMethod( IsTorsionFree,
     
     M := UnderlyingModule( E );
     
-    return IsArtinian( TorsionSubobject( M ) );
+    return IsArtinian( TorsionObject( M ) );
     
 end );
 
