@@ -274,6 +274,115 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
+        
+  function( M )
+    local e, A, B;
+    
+    e := EvalUnionOfRows( M );
+    
+    A := e[1];
+    B := e[2];
+    
+    if HasIsZero( A ) then
+        if not IsZero( A ) then
+            return false;
+        elif HasIsZero( B ) then
+            ## A is zero
+            return IsZero( B );
+        fi;
+    elif HasIsZero( B ) and not IsZero( B ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
+        
+  function( M )
+    local e, A, B;
+    
+    e := EvalUnionOfColumns( M );
+    
+    A := e[1];
+    B := e[2];
+    
+    if HasIsZero( A ) then
+        if not IsZero( A ) then
+            return false;
+        elif HasIsZero( B ) then
+            ## A is zero
+            return IsZero( B );
+        fi;
+    elif HasIsZero( B ) and not IsZero( B ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasEvalDiagMat, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalDiagMat( M );
+    
+    if ForAll( e, B -> HasIsZero( B ) and IsZero( B ) ) then
+        return true;
+    elif ForAny( e, B -> HasIsZero( B ) and not IsZero( B ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasEvalMulMat, 0,
+        
+  function( M )
+    local e, a, A, R;
+    
+    e := EvalMulMat( M );
+    
+    a := e[1];
+    A := e[2];
+    
+    if HasIsZero( a ) and IsZero( a ) then
+        return true;
+    elif HasIsZero( A ) then
+        if IsZero( A ) then
+            return true;
+        elif IsHomalgRingElement( a ) and IsRegular( a ) then
+            ## A is not zero
+            return false;
+        else
+            R := HomalgRing( A );
+            if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+                ## A is not zero
+                return IsZero( a );
+            elif IsUnit( a ) then
+                ## A is not zero
+                return false;
+            fi;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsRightInvertibleMatrix,
         IsHomalgMatrix and IsSubidentityMatrix, 0,
         
@@ -788,6 +897,88 @@ InstallMethod( IsEmptyMatrix,
   function( M )
     
     return NrRows( M ) = 0 or NrColumns( M ) = 0;
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfRows ],
+        
+  function( M )
+    local e, A, B;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( UnionOfRows )", "\033[0m" );
+    
+    e := EvalUnionOfRows( M );
+    
+    A := e[1];
+    B := e[2];
+    
+    return IsZero( A ) and IsZero( B );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
+        
+  function( M )
+    local e, A, B;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( UnionOfColumns )", "\033[0m" );
+    
+    e := EvalUnionOfColumns( M );
+    
+    A := e[1];
+    B := e[2];
+    
+    return IsZero( A ) and IsZero( B );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalDiagMat ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( DiagMat )", "\033[0m" );
+    
+    e := EvalDiagMat( M );
+    
+    return ForAll( e, IsZero );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalMulMat ],
+        
+  function( M )
+    local e, a, A;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( a * A )", "\033[0m" );
+    
+    e := EvalMulMat( M );
+    
+    a := e[1];
+    A := e[2];
+    
+    if IsZero( a ) then
+        return true;
+    elif IsZero( A ) then
+        return true;
+    elif HasIsMinusOne( a ) and IsMinusOne( a ) then
+        ## A is not zero
+        return false;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
@@ -2339,6 +2530,9 @@ InstallMethod( DecideZeroRows,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRows( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
     
+    ## calling IsZero( L ) causes too much unnecessary trafic
+    #IsZero( L );
+    
     return L;
     
 end );
@@ -2419,6 +2613,9 @@ InstallMethod( DecideZeroColumns,
   function( L, B )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumns( IsHomalgMatrix, IsZero(Matrix) )", "\033[0m" );
+    
+    ## calling IsZero( L ) causes too much unnecessary trafic
+    #IsZero( L );
     
     return L;
     

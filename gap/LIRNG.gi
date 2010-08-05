@@ -349,6 +349,18 @@ InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
 ####################################
 
 ##
+InstallImmediateMethod( IsZero,
+        IsHomalgRingElement and IsOne, 0,
+        
+  ReturnFalse );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgRingElement and IsMinusOne, 0,
+        
+  ReturnFalse );
+
+##
 InstallImmediateMethod( IsLeftRegular,
         IsHomalgRingElement and HasIsZero, 0,
         
