@@ -127,7 +127,7 @@ InstallImmediateMethod( IsInjectivePresentation,
     
     mat := MatrixOfRelations( rel );
     
-    if HasIsRightRegularMatrix( mat ) and IsRightRegularMatrix( mat ) then
+    if HasIsRightRegular( mat ) and IsRightRegular( mat ) then
         
         if HasParent( rel ) then
             M := Parent( rel );
@@ -159,7 +159,7 @@ InstallImmediateMethod( IsInjectivePresentation,
     
     mat := MatrixOfRelations( rel );
     
-    if HasIsLeftRegularMatrix( mat ) and IsLeftRegularMatrix( mat ) then
+    if HasIsLeftRegular( mat ) and IsLeftRegular( mat ) then
         
         if HasParent( rel ) then
             M := Parent( rel );
@@ -614,7 +614,7 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfColumns( mat );
         
-        inj := HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas );
+        inj := HasIsRightRegular( bas ) and IsRightRegular( bas );
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
@@ -638,7 +638,7 @@ InstallMethod( BasisOfModule,
         fi;
     else
         bas := rel!.BasisOfModule;
-        inj := HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas );
+        inj := HasIsRightRegular( bas ) and IsRightRegular( bas );
     fi;
     
     bas := HomalgRelationsForRightModule( bas );
@@ -674,7 +674,7 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfRows( mat );
         
-        inj := HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas );
+        inj := HasIsLeftRegular( bas ) and IsLeftRegular( bas );
         
         if bas = mat then
             SetCanBeUsedToDecideZeroEffectively( rel, true );
@@ -698,7 +698,7 @@ InstallMethod( BasisOfModule,
         fi;
     else
         bas := rel!.BasisOfModule;
-        inj := HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas );
+        inj := HasIsLeftRegular( bas ) and IsLeftRegular( bas );
     fi;
     
     bas := HomalgRelationsForLeftModule( bas );

@@ -615,10 +615,10 @@ InstallTrueMethod( IsLeftInvertibleMatrix, IsHomalgMatrix and IsPermutationMatri
 InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsPermutationMatrix );
 
 ## a split injective morphism (of free modules) is injective
-InstallTrueMethod( IsLeftRegularMatrix, IsHomalgMatrix and IsRightInvertibleMatrix );
+InstallTrueMethod( IsLeftRegular, IsHomalgMatrix and IsRightInvertibleMatrix );
 
 ##
-InstallTrueMethod( IsRightRegularMatrix, IsHomalgMatrix and IsLeftInvertibleMatrix );
+InstallTrueMethod( IsRightRegular, IsHomalgMatrix and IsLeftInvertibleMatrix );
 
 ## an isomorphism is split injective
 InstallTrueMethod( IsRightInvertibleMatrix, IsHomalgMatrix and IsInvertibleMatrix );
@@ -1855,61 +1855,61 @@ DeclareOperation( "NumberOfKnownPresentations",
             ## the procedure we are in now is the one of the ambient ring
             ## which does not take ring relations into account
             if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
+                SetIsLeftRegular( M, true );
             fi;
             
             ## the procedure we are in now is the one of the ambient ring
             ## which does not take ring relations into account
             if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
-            fi;
-            
-        ## the procedure we are in now is the one of the ambient ring
-        ## which does not take ring relations into account
-        if not HasRingRelations( R ) then
-            SetIsLeftRegularMatrix( M, true );
-        fi;
-        
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
-            fi;
-            
-            ## the procedure we are in now is the one of the ambient ring
-            ## which does not take ring relations into account
-            if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
+                SetIsLeftRegular( M, true );
             fi;
             
         ## the procedure we are in now is the one of the ambient ring
         ## which does not take ring relations into account
         if not HasRingRelations( R ) then
-            SetIsRightRegularMatrix( M, true );
+            SetIsLeftRegular( M, true );
         fi;
         
             ## the procedure we are in now is the one of the ambient ring
             ## which does not take ring relations into account
             if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
+                SetIsRightRegular( M, true );
             fi;
             
             ## the procedure we are in now is the one of the ambient ring
             ## which does not take ring relations into account
             if not HasRingRelations( R ) then
-                SetIsLeftRegularMatrix( M, true );
+                SetIsRightRegular( M, true );
+            fi;
+            
+        ## the procedure we are in now is the one of the ambient ring
+        ## which does not take ring relations into account
+        if not HasRingRelations( R ) then
+            SetIsRightRegular( M, true );
+        fi;
+        
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsLeftRegular( M, true );
             fi;
             
             ## the procedure we are in now is the one of the ambient ring
             ## which does not take ring relations into account
             if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
+                SetIsLeftRegular( M, true );
             fi;
             
             ## the procedure we are in now is the one of the ambient ring
             ## which does not take ring relations into account
             if not HasRingRelations( R ) then
-                SetIsRightRegularMatrix( M, true );
+                SetIsRightRegular( M, true );
+            fi;
+            
+            ## the procedure we are in now is the one of the ambient ring
+            ## which does not take ring relations into account
+            if not HasRingRelations( R ) then
+                SetIsRightRegular( M, true );
             fi;
             
 ## from HomalgMatrix.gi

@@ -803,7 +803,7 @@ InstallImmediateMethod( RankOfModule,
         
         m := MatrixOfRelations( M );
         
-        if HasIsRightRegularMatrix( m ) and IsRightRegularMatrix( m ) then
+        if HasIsRightRegular( m ) and IsRightRegular( m ) then
             return NrRows( m ) - NrColumns( m );
         fi;
         
@@ -824,7 +824,7 @@ InstallImmediateMethod( RankOfModule,
         
         m := MatrixOfRelations( M );
         
-        if HasIsLeftRegularMatrix( m ) and IsLeftRegularMatrix( m ) then
+        if HasIsLeftRegular( m ) and IsLeftRegular( m ) then
             return NrColumns( m ) - NrRows( m );
         fi;
         
@@ -1611,11 +1611,11 @@ InstallMethod( RankOfModule,
         
         if IsHomalgMatrix( m ) then
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-                if IsLeftRegularMatrix( m ) then
+                if IsLeftRegular( m ) then
                     return NrColumns( m ) - NrRows( m );
                 fi;
             else
-                if IsRightRegularMatrix( m ) then
+                if IsRightRegular( m ) then
                     return NrRows( m ) - NrColumns( m );
                 fi;
             fi;
