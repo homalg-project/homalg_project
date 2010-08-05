@@ -222,6 +222,25 @@ InstallGlobalFunction( AddLeftRightLogicalImplicationsForHomalg,
                     
                     ];
             
+        elif IsList( prop ) and Length( prop ) = 3 and ForAll( prop{[ 1 .. 2 ]}, IsString ) and IsOperation( prop[3] ) then
+            
+            property := ValueGlobal( Concatenation( prop[1], prop[2] ) );
+            left_property := ValueGlobal( Concatenation( prop[1], "Left", prop[2] ) );
+            right_property := ValueGlobal( Concatenation( prop[1], "Right", prop[2] ) );
+            
+            add := [
+                    
+                    [ left_property, "and", right_property,
+                      "define", property ],
+                    
+                    [ property,
+                      "implies by definition", left_property ],
+                    
+                    [ property,
+                      "implies by definition", right_property ],
+                    
+                    ];
+            
         fi;
         
         Append( list, add );

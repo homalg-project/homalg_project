@@ -129,6 +129,9 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsSemiSimpleRing">
 <#Include Label="BasisAlgorithmRespectsPrincipalIdeals">
 <#Include Label="IsMinusOne">
+<#Include Label="IsLeftRegular">
+<#Include Label="IsRightRegular">
+<#Include Label="IsRegular">
 
 </Section>
 

@@ -25,3 +25,5 @@ DeclareGlobalVariable( "LIRNG" );
 
 DeclareGlobalVariable( "LogicalImplicationsForHomalgRings" );
 
+DeclareGlobalVariable( "LogicalImplicationsForHomalgRingElements" );
+

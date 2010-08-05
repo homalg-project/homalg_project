@@ -312,6 +312,23 @@ AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
          [ "Is", "PrincipalIdealRing", "<>" ],
          ] );
 
+##
+InstallValue( LogicalImplicationsForHomalgRingElements,
+        [
+          
+          [ IsOne,
+            "implies", IsRegular ],
+          
+          [ IsMinusOne,
+            "implies", IsRegular ],
+          
+         ] );
+
+AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRingElements,
+        [
+         [ "Is", "Regular", HomalgRing ],
+         ] );
+
 ####################################
 #
 # logical implications methods:
@@ -319,6 +336,8 @@ AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
 ####################################
 
 InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgRings, IsHomalgRing );
+
+InstallLogicalImplicationsForHomalgBasicObjects( LogicalImplicationsForHomalgRingElements, IsHomalgRingElement );
 
 ##
 InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
@@ -328,6 +347,86 @@ InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
 # immediate methods for properties:
 #
 ####################################
+
+##
+InstallImmediateMethod( IsLeftRegular,
+        IsHomalgRingElement and HasIsZero, 0,
+        
+  function( r )
+    local R;
+    
+    if IsZero( r ) then
+        return false;
+    fi;
+    
+    if IsBound( r!.ring ) then
+        R := HomalgRing( r );
+        if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+            return not IsZero( r );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftRegular,
+        IsHomalgRingElement and HasIsRightRegular, 0,
+        
+  function( r )
+    local R;
+    
+    if IsBound( r!.ring ) then
+        R := HomalgRing( r );
+        if HasIsCommutative( R ) and IsCommutative( R ) then
+            return IsRightRegular( r );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightRegular,
+        IsHomalgRingElement and HasIsZero, 0,
+        
+  function( r )
+    local R;
+    
+    if IsZero( r ) then
+        return false;
+    fi;
+    
+    if IsBound( r!.ring ) then
+        R := HomalgRing( r );
+        if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+            return not IsZero( r );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsRightRegular,
+        IsHomalgRingElement and HasIsLeftRegular, 0,
+        
+  function( r )
+    local R;
+    
+    if IsBound( r!.ring ) then
+        R := HomalgRing( r );
+        if HasIsCommutative( R ) and IsCommutative( R ) then
+            return IsLeftRegular( r );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallImmediateMethod( IsLeftGlobalDimensionFinite,
@@ -580,6 +679,95 @@ InstallImmediateMethod( Center,
   function( R )
     
     return R;
+    
+end );
+
+####################################
+#
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsLeftRegular,
+        "LIRNG: for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return IsLeftRegular( HomalgMatrix( [ r ], 1, 1, HomalgRing( r ) ) );
+    
+end );
+
+##
+InstallMethod( IsLeftRegular,
+        "LIRNG: for homalg ring elements",
+        [ IsHomalgRingElement ], 10001,
+        
+  function( r )
+    local R;
+    
+    if IsZero( r ) then
+        return false;
+    fi;
+    
+    R := HomalgRing( r );
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        return not IsZero( r );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsRightRegular,
+        "LIRNG: for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return IsRightRegular( HomalgMatrix( [ r ], 1, 1, HomalgRing( r ) ) );
+    
+end );
+
+##
+InstallMethod( IsRightRegular,
+        "LIRNG: for homalg ring elements",
+        [ IsHomalgRingElement ], 10001,
+        
+  function( r )
+    local R;
+    
+    if IsZero( r ) then
+        return false;
+    fi;
+    
+    R := HomalgRing( r );
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        return not IsZero( r );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsRegular,
+        "LIRNG: for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local r_mat;
+    
+    r_mat := HomalgMatrix( [ r ], 1, 1, HomalgRing( r ) );
+    
+    return ( ( HasIsLeftRegular( r ) and IsLeftRegular( r ) ) or
+             IsLeftRegular( r_mat ) ) and
+           ( ( HasIsRightRegular( r ) and IsRightRegular( r ) ) or
+             IsRightRegular( r_mat ) );
     
 end );
 

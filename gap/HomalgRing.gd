@@ -730,6 +730,45 @@ DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
 DeclareProperty( "IsMinusOne",
         IsHomalgRingElement );
 
+##  <#GAPDoc Label="IsLeftRegular">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsLeftRegular"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; ring element <A>r</A> is left regular.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsLeftRegular",
+        IsHomalgRingElement );
+
+##  <#GAPDoc Label="IsRightRegular">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsRightRegular"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; ring element <A>r</A> is right regular.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsRightRegular",
+        IsHomalgRingElement );
+
+##  <#GAPDoc Label="IsRegular">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsRegular"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; ring element <A>r</A> is regular, i.e. left and right regular.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsRegular",
+        IsHomalgRingElement );
+
 ####################################
 #
 # attributes:
