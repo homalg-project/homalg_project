@@ -722,7 +722,7 @@ DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
 ##    <Prop Arg="r" Name="IsMinusOne"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      <A>r</A> is a &homalg; ring element.
+##      Check if the &homalg; ring element <A>r</A> is the additive inverse of one.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

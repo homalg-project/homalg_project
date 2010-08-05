@@ -27,8 +27,8 @@ InstallValue( LIMAT,
               "IsPermutationMatrix",
               "IsSpecialSubidentityMatrix",
               "IsSubidentityMatrix",
-              "IsLeftRegularMatrix",
-              "IsRightRegularMatrix",
+              "IsLeftRegular",
+              "IsRightRegular",
               "IsInvertibleMatrix",
               "IsLeftInvertibleMatrix",
               "IsRightInvertibleMatrix",
@@ -115,10 +115,10 @@ InstallValue( LogicalImplicationsForHomalgMatrices,
           
           ## a split injective morphism (of free modules) is injective
           [ IsRightInvertibleMatrix,
-            "implies", IsLeftRegularMatrix ],
+            "implies", IsLeftRegular ],
           
           [ IsLeftInvertibleMatrix,
-            "implies", IsRightRegularMatrix ],
+            "implies", IsRightRegular ],
           
           ## an isomorphism is split injective
           [ IsInvertibleMatrix,
@@ -227,11 +227,11 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasIsRightRegularMatrix and HasIsEmptyMatrix, 0,
+        IsHomalgMatrix and HasIsRightRegular and HasIsEmptyMatrix, 0,
         
   function( M )
     
-    if not IsEmptyMatrix( M ) and IsRightRegularMatrix( M ) then
+    if not IsEmptyMatrix( M ) and IsRightRegular( M ) then
         return false;
     fi;
     
@@ -241,11 +241,11 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasIsLeftRegularMatrix and HasIsEmptyMatrix, 0,
+        IsHomalgMatrix and HasIsLeftRegular and HasIsEmptyMatrix, 0,
         
   function( M )
     
-    if not IsEmptyMatrix( M ) and IsLeftRegularMatrix( M ) then
+    if not IsEmptyMatrix( M ) and IsLeftRegular( M ) then
         return false;
     fi;
     
@@ -322,7 +322,7 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsRightRegularMatrix,
+InstallImmediateMethod( IsRightRegular,
         IsHomalgMatrix and HasNrColumns and HasIsZero, 0,
         
   function( M )
@@ -339,7 +339,7 @@ InstallImmediateMethod( IsRightRegularMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsLeftRegularMatrix,
+InstallImmediateMethod( IsLeftRegular,
         IsHomalgMatrix and HasNrRows and HasIsZero, 0,
         
   function( M )
@@ -792,7 +792,7 @@ InstallMethod( IsEmptyMatrix,
 end );
 
 ##
-InstallMethod( IsRightRegularMatrix,
+InstallMethod( IsRightRegular,
         "LIMAT: for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -803,7 +803,7 @@ InstallMethod( IsRightRegularMatrix,
 end );
 
 ##
-InstallMethod( IsLeftRegularMatrix,
+InstallMethod( IsLeftRegular,
         "LIMAT: for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -2767,15 +2767,15 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfRows,
-        "LIMAT: for homalg matrices (IsLeftRegularMatrix)",
-        [ IsHomalgMatrix and IsLeftRegularMatrix ],
+        "LIMAT: for homalg matrices (IsLeftRegular)",
+        [ IsHomalgMatrix and IsLeftRegular ],
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( IsLeftRegularMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( IsLeftRegular )", "\033[0m" );
     
     return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
     
@@ -2877,15 +2877,15 @@ end );
 
 ##
 InstallMethod( SyzygiesGeneratorsOfColumns,
-        "LIMAT: for homalg matrices (IsRightRegularMatrix)",
-        [ IsHomalgMatrix and IsRightRegularMatrix ],
+        "LIMAT: for homalg matrices (IsRightRegular)",
+        [ IsHomalgMatrix and IsRightRegular ],
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( IsRightRegularMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( IsRightRegular )", "\033[0m" );
     
     return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
     
@@ -2949,15 +2949,15 @@ end );
 
 ##
 InstallMethod( ReducedSyzygiesGeneratorsOfRows,
-        "LIMAT: for homalg matrices (IsLeftRegularMatrix)",
-        [ IsHomalgMatrix and IsLeftRegularMatrix ],
+        "LIMAT: for homalg matrices (IsLeftRegular)",
+        [ IsHomalgMatrix and IsLeftRegular ],
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfRows( IsLeftRegularMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfRows( IsLeftRegular )", "\033[0m" );
     
     return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
     
@@ -2982,15 +2982,15 @@ end );
 
 ##
 InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
-        "LIMAT: for homalg matrices (IsRightRegularMatrix)",
-        [ IsHomalgMatrix and IsRightRegularMatrix ],
+        "LIMAT: for homalg matrices (IsRightRegular)",
+        [ IsHomalgMatrix and IsRightRegular ],
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfColumns( IsRightRegularMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfColumns( IsRightRegular )", "\033[0m" );
     
     return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
     

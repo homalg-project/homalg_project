@@ -193,9 +193,9 @@ DeclareProperty( "IsSpecialSubidentityMatrix",
 DeclareProperty( "IsSubidentityMatrix",
         IsHomalgMatrix );
 
-##  <#GAPDoc Label="IsLeftRegularMatrix">
+##  <#GAPDoc Label="IsLeftRegular">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsLeftRegularMatrix"/>
+##    <Prop Arg="A" Name="IsLeftRegular"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
@@ -203,12 +203,12 @@ DeclareProperty( "IsSubidentityMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsLeftRegularMatrix",
+DeclareProperty( "IsLeftRegular",
         IsHomalgMatrix );
 
-##  <#GAPDoc Label="IsRightRegularMatrix">
+##  <#GAPDoc Label="IsRightRegular">
 ##  <ManSection>
-##    <Prop Arg="A" Name="IsRightRegularMatrix"/>
+##    <Prop Arg="A" Name="IsRightRegular"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
@@ -216,7 +216,7 @@ DeclareProperty( "IsLeftRegularMatrix",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsRightRegularMatrix",
+DeclareProperty( "IsRightRegular",
         IsHomalgMatrix );
 
 ##  <#GAPDoc Label="IsInvertibleMatrix">

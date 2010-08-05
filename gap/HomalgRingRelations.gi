@@ -332,7 +332,7 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfColumns( mat );
         
-        inj := HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas );
+        inj := HasIsRightRegular( bas ) and IsRightRegular( bas );
         
         if bas = mat then
             SetCanBeUsedToDecideZero( rel, true );
@@ -347,7 +347,7 @@ InstallMethod( BasisOfModule,
         fi;
     else
         bas := rel!.BasisOfModule;
-        inj := HasIsRightRegularMatrix( bas ) and IsRightRegularMatrix( bas );
+        inj := HasIsRightRegular( bas ) and IsRightRegular( bas );
     fi;
     
     bas := HomalgRingRelationsAsGeneratorsOfRightIdeal( bas );
@@ -374,7 +374,7 @@ InstallMethod( BasisOfModule,
         
         bas := BasisOfRows( mat );
         
-        inj := HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas );
+        inj := HasIsLeftRegular( bas ) and IsLeftRegular( bas );
         
         if bas = mat then
             SetCanBeUsedToDecideZero( rel, true );
@@ -389,7 +389,7 @@ InstallMethod( BasisOfModule,
         fi;
     else
         bas := rel!.BasisOfModule;
-        inj := HasIsLeftRegularMatrix( bas ) and IsLeftRegularMatrix( bas );
+        inj := HasIsLeftRegular( bas ) and IsLeftRegular( bas );
     fi;
     
     bas := HomalgRingRelationsAsGeneratorsOfLeftIdeal( bas );

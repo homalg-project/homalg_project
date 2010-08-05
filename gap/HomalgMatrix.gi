@@ -2633,13 +2633,13 @@ InstallMethod( ViewObj,
         else
             if HasIsRightInvertibleMatrix( o ) and IsRightInvertibleMatrix( o ) then
                 Print( " right invertible" );
-            elif HasIsLeftRegularMatrix( o ) and IsLeftRegularMatrix( o ) then
+            elif HasIsLeftRegular( o ) and IsLeftRegular( o ) then
                 Print( " left regular" );
             fi;
             
             if HasIsLeftInvertibleMatrix( o ) and IsLeftInvertibleMatrix( o ) then
                 Print( " left invertible" );
-            elif HasIsRightRegularMatrix( o ) and IsRightRegularMatrix( o ) then
+            elif HasIsRightRegular( o ) and IsRightRegular( o ) then
                 Print( " right regular" );
             fi;
         fi;

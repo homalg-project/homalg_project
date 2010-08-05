@@ -716,7 +716,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            SetIsLeftRegular( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
             
@@ -740,7 +740,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            SetIsLeftRegular( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
             
@@ -774,7 +774,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     if IsZero( C ) then
         
-        SetIsLeftRegularMatrix( M, true );
+        SetIsLeftRegular( M, true );
         
         C := HomalgZeroMatrix( 0, NrRows( M ), R );
         
@@ -829,7 +829,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            SetIsRightRegular( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -853,7 +853,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            SetIsRightRegular( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -887,7 +887,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     if IsZero( C ) then
         
-        SetIsRightRegularMatrix( M, true );
+        SetIsRightRegular( M, true );
         
         C := HomalgZeroMatrix( NrColumns( M ), 0, R );
         
@@ -999,7 +999,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     if IsZero( C ) then
         
-        SetIsLeftRegularMatrix( M1, true );
+        SetIsLeftRegular( M1, true );
         
     fi;
     
@@ -1114,7 +1114,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     if IsZero( C ) then
         
-        SetIsRightRegularMatrix( M1, true );
+        SetIsRightRegular( M1, true );
         
     fi;
     
@@ -1422,7 +1422,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            SetIsLeftRegular( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -1449,7 +1449,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
         if IsZero( C ) then
             
-            SetIsLeftRegularMatrix( M, true );
+            SetIsLeftRegular( M, true );
             
             C := HomalgZeroMatrix( 0, NrRows( M ), R );
             
@@ -1529,7 +1529,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            SetIsRightRegular( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             
@@ -1556,7 +1556,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
         if IsZero( C ) then
             
-            SetIsRightRegularMatrix( M, true );
+            SetIsRightRegular( M, true );
             
             C := HomalgZeroMatrix( NrColumns( M ), 0, R );
             

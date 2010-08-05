@@ -480,7 +480,7 @@ InstallImmediateMethod( IsLeftInvertibleMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsLeftRegularMatrix,
+InstallImmediateMethod( IsLeftRegular,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
@@ -488,8 +488,8 @@ InstallImmediateMethod( IsLeftRegularMatrix,
     
     e := PreEval( M );
     
-    if HasIsLeftRegularMatrix( e ) then
-        return IsLeftRegularMatrix( e );
+    if HasIsLeftRegular( e ) then
+        return IsLeftRegular( e );
     fi;
     
     TryNextMethod( );
@@ -497,7 +497,7 @@ InstallImmediateMethod( IsLeftRegularMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsLeftRegularMatrix,
+InstallImmediateMethod( IsLeftRegular,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
@@ -505,8 +505,8 @@ InstallImmediateMethod( IsLeftRegularMatrix,
     
     MI := EvalInvolution( M );
     
-    if HasIsRightRegularMatrix( MI ) then
-        return IsRightRegularMatrix( MI );
+    if HasIsRightRegular( MI ) then
+        return IsRightRegular( MI );
     fi;
     
     TryNextMethod( );
@@ -514,7 +514,7 @@ InstallImmediateMethod( IsLeftRegularMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsRightRegularMatrix,
+InstallImmediateMethod( IsRightRegular,
         IsHomalgMatrix and HasPreEval, 0,
         
   function( M )
@@ -522,8 +522,8 @@ InstallImmediateMethod( IsRightRegularMatrix,
     
     e := PreEval( M );
     
-    if HasIsRightRegularMatrix( e ) then
-        return IsRightRegularMatrix( e );
+    if HasIsRightRegular( e ) then
+        return IsRightRegular( e );
     fi;
     
     TryNextMethod( );
@@ -531,7 +531,7 @@ InstallImmediateMethod( IsRightRegularMatrix,
 end );
 
 ##
-InstallImmediateMethod( IsRightRegularMatrix,
+InstallImmediateMethod( IsRightRegular,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
   function( M )
@@ -539,8 +539,8 @@ InstallImmediateMethod( IsRightRegularMatrix,
     
     MI := EvalInvolution( M );
     
-    if HasIsLeftRegularMatrix( MI ) then
-        return IsLeftRegularMatrix( MI );
+    if HasIsLeftRegular( MI ) then
+        return IsLeftRegular( MI );
     fi;
     
     TryNextMethod( );
@@ -930,11 +930,11 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and HasIsLeftRegularMatrix and HasNrRows, 0,
+        IsHomalgMatrix and HasIsLeftRegular and HasNrRows, 0,
         
   function( M )
     
-    if IsLeftRegularMatrix( M ) then
+    if IsLeftRegular( M ) then
         return NrRows( M );
     fi;
     
@@ -1060,11 +1060,11 @@ end );
 
 ##
 InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and HasIsRightRegularMatrix and HasNrColumns, 0,
+        IsHomalgMatrix and HasIsRightRegular and HasNrColumns, 0,
         
   function( M )
     
-    if IsRightRegularMatrix( M ) then
+    if IsRightRegular( M ) then
         return NrColumns( M );
     fi;
     

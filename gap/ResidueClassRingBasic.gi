@@ -258,7 +258,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    if IsZero( S ) then
                        
-                       SetIsLeftRegularMatrix( M, true );
+                       SetIsLeftRegular( M, true );
                        
                    fi;
                    
@@ -300,7 +300,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    if IsZero( S ) then
                        
-                       SetIsRightRegularMatrix( M, true );
+                       SetIsRightRegular( M, true );
                        
                    fi;
                    
@@ -332,7 +332,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    if IsZero( S ) then
                        
-                       SetIsLeftRegularMatrix( M, true );
+                       SetIsLeftRegular( M, true );
                        
                    fi;
                    
@@ -364,7 +364,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    if IsZero( S ) then
                        
-                       SetIsRightRegularMatrix( M, true );
+                       SetIsRightRegular( M, true );
                        
                    fi;
                    
