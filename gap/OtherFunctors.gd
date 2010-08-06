@@ -25,10 +25,6 @@ DeclareGlobalFunction( "_Functor_TorsionObject_OnObjects" );
 DeclareGlobalVariable( "Functor_TorsionObject" );
 
 ## DirectSum
-DeclareGlobalFunction( "_Functor_DirectSum_OnObjects" );
-
-DeclareGlobalFunction( "_Functor_DirectSum_OnMorphisms" );
-
 DeclareGlobalVariable( "Functor_DirectSum" );
 
 ## Pullback
@@ -53,28 +49,28 @@ DeclareGlobalVariable( "functor_AuslanderDual" );
 ####################################
 
 DeclareAttribute( "TorsionFreeFactorEpi",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "TorsionObjectEmb",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "MonoOfLeftSummand",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "MonoOfRightSummand",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "EpiOnLeftFactor",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "EpiOnRightFactor",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "PullbackPairOfMaps",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 DeclareAttribute( "PushoutPairOfMaps",
-        IsHomalgMap );
+        IsHomalgStaticMorphism );
 
 ####################################
 #
@@ -92,6 +88,11 @@ DeclareOperation( "TorsionObject",
 
 DeclareOperation( "DirectSumOp",
         [ IsList, IsHomalgRingOrObjectOrMorphism ] );
+
+DeclareOperation( "SetPropertiesOfDirectSum",
+        [ IsList, IsHomalgObject,
+          IsHomalgMorphism, IsHomalgMorphism,
+          IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Pullback",
         [ IsHomalgChainMap ] );

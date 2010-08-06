@@ -46,6 +46,7 @@ ReadPackage( "homalg", "gap/StaticObjects.gi" );
 
 ReadPackage( "homalg", "gap/ToolFunctors.gi" );
 ReadPackage( "homalg", "gap/BasicFunctors.gi" );
+ReadPackage( "homalg", "gap/OtherFunctors.gi" );
 
 ##
 ## ModulesForHomalg
@@ -99,12 +100,11 @@ ReadPackage( "homalg", "gap/SpectralSequences.gi" );
 
 ReadPackage( "homalg", "gap/Filtrations.gi" );
 
-ReadPackage( "homalg", "gap/OtherFunctors.gi" );
-
 ## main
 ReadPackage( "homalg", "gap/Modules/Modules.gi" );
 ReadPackage( "homalg", "gap/Modules/ToolFunctors.gi" );
 ReadPackage( "homalg", "gap/Modules/BasicFunctors.gi" );
+ReadPackage( "homalg", "gap/Modules/OtherFunctors.gi" );
 
 ## LogicForHomalg subpackages
 ReadPackage( "homalg", "gap/LIMOD.gi" );
