@@ -31,7 +31,7 @@ DeclareOperation( "Resolution",
 DeclareOperation( "LengthOfResolution",
         [ IsHomalgStaticObject ] );
 
-DeclareOperation( "PresentationMap",
+DeclareOperation( "PresentationMorphism",
         [ IsHomalgStaticObject ] );
 
 DeclareOperation( "SyzygiesObjectEmb",

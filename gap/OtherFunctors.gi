@@ -503,7 +503,7 @@ InstallGlobalFunction( _Functor_AuslanderDual_OnObjects,	### defines: AuslanderD
   function( M )
     local d0;
     
-    d0 := PresentationMap( M );
+    d0 := PresentationMorphism( M );
     
     return Cokernel( Hom( d0 ) );
     

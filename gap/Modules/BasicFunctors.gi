@@ -220,8 +220,8 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
     
-    matM := PresentationMap( M );
-    matN := PresentationMap( N );
+    matM := PresentationMorphism( M );
+    matN := PresentationMorphism( N );
     
     P1 := Source( matM );
     
@@ -580,8 +580,8 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
     l0 := NrGenerators( M );
     _l0 := NrGenerators( N );
     
-    matM := MatrixOfMap( PresentationMap( M ) );
-    matN := MatrixOfMap( PresentationMap( N ) );
+    matM := MatrixOfMap( PresentationMorphism( M ) );
+    matN := MatrixOfMap( PresentationMorphism( N ) );
     
     if rl = [ true, true ] or rl = [ false, false ] then
         matM := Involution( matM );	## the first module follows the second

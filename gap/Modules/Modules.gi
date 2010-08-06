@@ -442,7 +442,7 @@ InstallMethod( SyzygiesObjectEpi,
     if q < 0 then
         Error( "a netative integer does not make sense\n" );
     elif q = 0 then
-        return CokernelEpi( PresentationMap( M ) );
+        return CokernelEpi( PresentationMorphism( M ) );
     fi;
     
     d := Resolution( q, M );
