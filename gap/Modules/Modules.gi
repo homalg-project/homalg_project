@@ -837,8 +837,8 @@ InstallMethod( RepresentationMapOfKoszulId,
         M_d := UnderlyingObject( M_d );
         M_dp1 := UnderlyingObject( M_dp1 );
         
-        m_d := PresentationMap( M_d );
-        m_dp1 := PresentationMap( M_dp1 );
+        m_d := PresentationMorphism( M_d );
+        m_dp1 := PresentationMorphism( M_dp1 );
         
         degrees_d := DegreesOfGenerators( Source( m_d ) );
         degrees_dp1 := DegreesOfGenerators( Source( m_dp1 ) );

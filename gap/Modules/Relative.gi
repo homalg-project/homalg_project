@@ -51,7 +51,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     ## End(A,M_0):
     
-    m0 := PresentationMap( M );
+    m0 := PresentationMorphism( M );
     
     degrees0 := DegreesOfGenerators( Source( m0 ) );
     
@@ -73,7 +73,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     
     M1 := UnderlyingObject( M1 );
     
-    m1 := PresentationMap( M1 );
+    m1 := PresentationMorphism( M1 );
     
     degrees1 := DegreesOfGenerators( Source( m1 ) );
     
