@@ -15,4 +15,4 @@ M := LeftPresentation( M );
 
 P := ShortenResolution( M );
 
-Assert( 0, IsIdenticalObj( Cokernel( PresentationMap( M ) ), M ) );
+Assert( 0, IsIdenticalObj( Cokernel( PresentationMorphism( M ) ), M ) );
