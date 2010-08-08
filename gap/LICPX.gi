@@ -2,7 +2,7 @@
 ##
 ##  LICPX.gi                    LICPX subpackage             Mohamed Barakat
 ##
-##         LICPX = Logical Implications for homalg MODules
+##         LICPX = Logical Implications for homalg ComPleXes
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, RWTH-Aachen
 ##
@@ -157,11 +157,11 @@ InstallMethod( IsZero,
         [ IsHomalgComplex ],
         
   function( C )
-    local modules;
+    local objects;
     
-    modules := ObjectsOfComplex( C );
+    objects := ObjectsOfComplex( C );
     
-    return ForAll( modules, IsZero );
+    return ForAll( objects, IsZero );
     
 end );
 
@@ -417,7 +417,7 @@ InstallMethod( IsShortExactSequence,
     
     if support = [ ] then			## the zero complex
         return true;
-    elif support[l] - support[1] > 2 then	## too many non-trivial modules
+    elif support[l] - support[1] > 2 then	## too many non-trivial objects
         return false;
     fi;
     
