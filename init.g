@@ -52,6 +52,8 @@ ReadPackage( "homalg", "gap/ChainMaps.gd" );
 
 ReadPackage( "homalg", "gap/SpectralSequences.gd" );
 
+ReadPackage( "homalg", "gap/Filtrations.gd" );
+
 ReadPackage( "homalg", "gap/ToolFunctors.gd" );
 ReadPackage( "homalg", "gap/BasicFunctors.gd" );
 ReadPackage( "homalg", "gap/OtherFunctors.gd" );
@@ -96,9 +98,6 @@ ReadPackage( "homalg", "gap/Modules/HomalgBigradedObject.gd" );
 
 ## functors
 ReadPackage( "homalg", "gap/Modules/HomalgFunctor.gd" );
-
-## main
-ReadPackage( "homalg", "gap/Filtrations.gd" );
 
 ## main
 ReadPackage( "homalg", "gap/Modules/Modules.gd" );

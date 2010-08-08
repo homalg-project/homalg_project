@@ -156,7 +156,7 @@ end );
 ##
 InstallMethod( PurityFiltration,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     local R, F, G, II_E, filt, M0, non_zero_p, l, p, I_E, iso;
