@@ -136,10 +136,10 @@ InstallImmediateMethod( IsInjectivePresentation,
                 SetIsFree( M, true );
             fi;
             rk := NrGenerators( rel ) - r;
-            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
-                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
             else
-                SetRankOfModule( M, rk );	## the Euler characteristic
+                SetRankOfObject( M, rk );	## the Euler characteristic
             fi;
         fi;
         
@@ -168,10 +168,10 @@ InstallImmediateMethod( IsInjectivePresentation,
                 SetIsFree( M, true );
             fi;
             rk := NrGenerators( rel ) - r;
-            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
-                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
             else
-                SetRankOfModule( M, rk );	## the Euler characteristic
+                SetRankOfObject( M, rk );	## the Euler characteristic
             fi;
         fi;
         
@@ -624,10 +624,10 @@ InstallMethod( BasisOfModule,
                 if HasParent( rel ) then
                     M := Parent( rel );
                     rk := NrGenerators( rel ) - NrRelations( rel );
-                    if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
-                        Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+                    if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
+                        Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
                     else
-                        SetRankOfModule( M, rk );	## the Euler characteristic
+                        SetRankOfObject( M, rk );	## the Euler characteristic
                     fi;
                 fi;
             fi;
@@ -648,10 +648,10 @@ InstallMethod( BasisOfModule,
         if HasParent( bas ) then
             M := Parent( bas );
             rk := NrGenerators( bas ) - NrRelations( bas );
-            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
-                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
             else
-                SetRankOfModule( M, rk );	## the Euler characteristic
+                SetRankOfObject( M, rk );	## the Euler characteristic
             fi;
         fi;
     fi;
@@ -684,10 +684,10 @@ InstallMethod( BasisOfModule,
                 if HasParent( rel ) then
                     M := Parent( rel );
                     rk := NrGenerators( rel ) - NrRelations( rel );
-                    if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
-                        Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+                    if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
+                        Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
                     else
-                        SetRankOfModule( M, rk );	## the Euler characteristic
+                        SetRankOfObject( M, rk );	## the Euler characteristic
                     fi;
                 fi;
             fi;
@@ -708,10 +708,10 @@ InstallMethod( BasisOfModule,
         if HasParent( bas ) then
             M := Parent( bas );
             rk := NrGenerators( bas ) - NrRelations( bas );
-            if HasRankOfModule( M ) and RankOfModule( M ) <> rk then
-                Error( "the rank of the module is already set to ", RankOfModule( M ), " but the injective presentation would imply rank ", rk, "\n"  );
+            if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
+                Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
             else
-                SetRankOfModule( M, rk );	## the Euler characteristic
+                SetRankOfObject( M, rk );	## the Euler characteristic
             fi;
         fi;
     fi;
@@ -1104,7 +1104,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
                 SetIsTorsion( M, IsTorsion( relations ) );
             fi;
             if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
-                SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+                SetRankOfObject( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
             fi;
         else
             ## Objectify:
@@ -1130,7 +1130,7 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
             SetIsTorsion( M, IsTorsion( relations ) );
         fi;
         if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
-            SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+            SetRankOfObject( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
         fi;
     else
         ## Objectify:
@@ -1174,7 +1174,7 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
                 SetIsTorsion( M, IsTorsion( relations ) );
             fi;
             if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
-                SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+                SetRankOfObject( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
             fi;
         else
             ## Objectify:
@@ -1200,7 +1200,7 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
             SetIsTorsion( M, IsTorsion( relations ) );
         fi;
         if HasIsInjectivePresentation( relations ) and IsInjectivePresentation( relations ) then
-            SetRankOfModule( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
+            SetRankOfObject( M, NrGenerators( relations ) - NrRelations( relations ) );	## the Euler characteristic
         fi;
     else
         ## Objectify:

@@ -92,8 +92,8 @@ InstallGlobalFunction( _Functor_TorsionFreeFactor_OnObjects,	### defines: Torsio
     SetIsTorsionFree( M0, true );
     
     ## set things already known for M
-    if HasRankOfModule( M ) then
-        SetRankOfModule( M0, RankOfModule( M ) );
+    if HasRankOfObject( M ) then
+        SetRankOfObject( M0, RankOfObject( M ) );
     fi;
     
     if HasPurityFiltration( M ) then

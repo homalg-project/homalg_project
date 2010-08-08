@@ -82,7 +82,7 @@
      they can safely be attached to any copy of the module -->
 
 <#Include Label="ElementaryDivisors">
-<#Include Label="RankOfModule">
+<#Include Label="RankOfObject">
 <#Include Label="ProjectiveDimension">
 <#Include Label="DegreeOfTorsionFreeness">
 <#Include Label="AbsoluteDepth">

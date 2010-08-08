@@ -18,8 +18,8 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     if nargs > 0 and IsFinitelyPresentedModuleRep( arg[1] ) then
         M := CallFuncList( ReducedBasisOfModule,
                      Concatenation( [ RelationsOfModule( arg[1] ) ], arg{[2..nargs]} ) );
-        if not HasRankOfModule( arg[1] ) and HasIsInjectivePresentation( M ) and IsInjectivePresentation( M ) then
-            SetRankOfModule( arg[1], NrGenerators( M ) - NrRelations( M ) );
+        if not HasRankOfObject( arg[1] ) and HasIsInjectivePresentation( M ) and IsInjectivePresentation( M ) then
+            SetRankOfObject( arg[1], NrGenerators( M ) - NrRelations( M ) );
         fi;
         if not HasIsTorsion( arg[1] ) and HasIsTorsion( M ) then
             SetIsTorsion( arg[1], IsTorsion( M ) );
@@ -155,8 +155,8 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     gen := N * GeneratorsOfModule( M );
     
     # set properties and attributes
-    if HasRankOfModule( M ) and RankOfModule( M ) = 0 then
-        SetRankOfModule( SF, 0 );
+    if HasRankOfObject( M ) and RankOfObject( M ) = 0 then
+        SetRankOfObject( SF, 0 );
     fi;
     
     return AddANewPresentation( SF, gen );
@@ -412,9 +412,9 @@ InstallMethod( Resolution,
         SetAFiniteFreeResolution( M, d );
         rank := Sum( ObjectDegreesOfComplex( d ),
                      i -> (-1)^i *  NrGenerators( CertainObject( d, i ) ) );
-        SetRankOfModule( M, rank );
+        SetRankOfObject( M, rank );
         if HasTorsionFreeFactorEpi( M ) then
-            SetRankOfModule( Range( TorsionFreeFactorEpi( M ) ), rank );
+            SetRankOfObject( Range( TorsionFreeFactorEpi( M ) ), rank );
         fi;
     fi;
     
@@ -528,13 +528,13 @@ InstallMethod( MinimalParametrization,
   function( M )
     local rel, par, pr;
     
-    if not HasRankOfModule( M ) then
+    if not HasRankOfObject( M ) then
         ## automatically sets the rank if it succeeds
         ## to compute a complete free resolution:
         Resolution( M );
         
         ## Resolution didn't succeed to set the rank
-        if not HasRankOfModule( M ) then
+        if not HasRankOfObject( M ) then
             Error( "Unable to figure out the rank\n" );
         fi;
         
@@ -552,7 +552,7 @@ InstallMethod( MinimalParametrization,
     
     ## a minimal parametrization due to Alban:
     ## project the parametrization onto a free factor of rank = Rank( M )
-    par := pr( par, [ 1 .. RankOfModule( M ) ] );
+    par := pr( par, [ 1 .. RankOfObject( M ) ] );
     
     par := HomalgMap( par, M, "free" );
     
@@ -569,13 +569,13 @@ InstallMethod( Parametrization,
         
   function( M )
     
-    if not HasRankOfModule( M ) then
+    if not HasRankOfObject( M ) then
         ## automatically sets the rank if it succeeds
         ## to compute a complete free resolution:
         Resolution( M );
     fi;
     
-    if HasRankOfModule( M ) then
+    if HasRankOfObject( M ) then
         return MinimalParametrization( M );
     fi;
     

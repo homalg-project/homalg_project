@@ -938,8 +938,8 @@ InstallMethod( ViewObj,
     
     r := NrGenerators( M );
     
-    if HasRankOfModule( M ) then
-        rk := RankOfModule( M );
+    if HasRankOfObject( M ) then
+        rk := RankOfObject( M );
         Print( " of rank ", rk, " given by " );
         if r = rk then
             if r = 1 then

@@ -200,11 +200,11 @@ InstallMethod( SetAttributesByPurityFiltration,
     M0 := CertainObject( filt, 0 );
     
     ## the rank of the 0-th part M0 is the rank of the module M
-    if HasRankOfModule( M ) and RankOfModule( M ) > 0 then
-        SetRankOfModule( M0, RankOfModule( M ) );
-    elif HasRankOfModule( M0 ) then
-        SetRankOfModule( M, RankOfModule( M0 ) );
-        SetRankOfModule( Mf, RankOfModule( M0 ) );
+    if HasRankOfObject( M ) and RankOfObject( M ) > 0 then
+        SetRankOfObject( M0, RankOfObject( M ) );
+    elif HasRankOfObject( M0 ) then
+        SetRankOfObject( M, RankOfObject( M0 ) );
+        SetRankOfObject( Mf, RankOfObject( M0 ) );
     fi;
     
 end );

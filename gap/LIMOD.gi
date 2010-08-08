@@ -38,7 +38,7 @@ InstallValue( LIMOD,
               "IsInjectiveCogenerator" ],
             intrinsic_attributes :=
             [ "ElementaryDivisors",
-              "RankOfModule",
+              "RankOfObject",
               "ProjectiveDimension",
               "DegreeOfTorsionFreeness",
               "AbsoluteDepth",
@@ -352,11 +352,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedModuleRep and HasRankOfModule, 0,
+        IsFinitelyPresentedModuleRep and HasRankOfObject, 0,
         
   function( M )
     
-    return RankOfModule( M ) = 0;
+    return RankOfObject( M ) = 0;
     
 end );
 
@@ -644,13 +644,13 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleRep and IsTorsionFree and HasRankOfModule, 0,
+        IsFinitelyPresentedModuleRep and IsTorsionFree and HasRankOfObject, 0,
         
   function( M )
     local R;
     
     if HasNrGenerators( M ) = true and	## HasNrGenerators is allowed to return fail
-       RankOfModule( M ) = NrGenerators( M ) then
+       RankOfObject( M ) = NrGenerators( M ) then
         return true;
     fi;
     
@@ -660,20 +660,20 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfModule and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfObject and HasLeftActingDomain, 0,
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    if HasIsCommutative( R ) and IsCommutative( R ) and RankOfModule( M ) = 1 then
+    if HasIsCommutative( R ) and IsCommutative( R ) and RankOfObject( M ) = 1 then
         return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
-    elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfModule( M ) then
+    elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfObject( M ) then
         return true;			## [McCRob, Theorem 11.1.14]
-    elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfModule( M ) then
+    elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfObject( M ) then
         return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-    elif HasStableRank( R ) and StableRank( R ) <= RankOfModule( M ) then
+    elif HasStableRank( R ) and StableRank( R ) <= RankOfObject( M ) then
         return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
     fi;
     
@@ -683,20 +683,20 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfModule and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfObject and HasRightActingDomain, 0,
         
   function( M )
     local R;
     
     R := HomalgRing( M );
     
-    if HasIsCommutative( R ) and IsCommutative( R ) and RankOfModule( M ) = 1 then
+    if HasIsCommutative( R ) and IsCommutative( R ) and RankOfObject( M ) = 1 then
         return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
-    elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfModule( M ) then
+    elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfObject( M ) then
         return true;			## [McCRob, Theorem 11.1.14]
-    elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfModule( M ) then
+    elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfObject( M ) then
         return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-    elif HasStableRank( R ) and StableRank( R ) <= RankOfModule( M ) then
+    elif HasStableRank( R ) and StableRank( R ) <= RankOfObject( M ) then
         return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
     fi;
     
@@ -793,7 +793,7 @@ end );
 ####################################
 
 ##
-InstallImmediateMethod( RankOfModule,
+InstallImmediateMethod( RankOfObject,
         IsFinitelyPresentedModuleRep and HasRightActingDomain, 0,
         
   function( M )
@@ -814,7 +814,7 @@ InstallImmediateMethod( RankOfModule,
 end );
 
 ##
-InstallImmediateMethod( RankOfModule,
+InstallImmediateMethod( RankOfObject,
         IsFinitelyPresentedModuleRep and HasLeftActingDomain, 0,
         
   function( M )
@@ -835,7 +835,7 @@ InstallImmediateMethod( RankOfModule,
 end );
 
 ##
-InstallImmediateMethod( RankOfModule,
+InstallImmediateMethod( RankOfObject,
         IsFinitelyPresentedModuleRep and HasPurityFiltration, 0,
         
   function( M )
@@ -843,8 +843,8 @@ InstallImmediateMethod( RankOfModule,
     
     M0 := CertainObject( PurityFiltration( M ), 0 );
     
-    if HasRankOfModule( M0 ) then
-        return RankOfModule( M0 );
+    if HasRankOfObject( M0 ) then
+        return RankOfObject( M0 );
     fi;
     
     TryNextMethod( );
@@ -852,7 +852,7 @@ InstallImmediateMethod( RankOfModule,
 end );
 
 ##
-InstallImmediateMethod( RankOfModule,
+InstallImmediateMethod( RankOfObject,
         IsFinitelyPresentedModuleRep and IsFree, 0,
         
   function( M )
@@ -866,7 +866,7 @@ InstallImmediateMethod( RankOfModule,
 end );
 
 ##
-InstallImmediateMethod( RankOfModule,
+InstallImmediateMethod( RankOfObject,
         IsFinitelyPresentedModuleRep and IsTorsion, 0,
         
   function( M )
@@ -1387,13 +1387,13 @@ InstallMethod( IsFree,
     
     R := HomalgRing( M );
     
-    if not HasRankOfModule( M ) then
+    if not HasRankOfObject( M ) then
         ## automatically sets the rank if it succeeds
         ## to compute a complete free resolution:
         Resolution( M );
     fi;
     
-    if HasRankOfModule( M ) and RankOfModule( M ) = 1 then
+    if HasRankOfObject( M ) and RankOfObject( M ) = 1 then
         
         ## this returns a minimal parametrization of M
         ## (minimal = cokernel is torsion);
@@ -1445,14 +1445,14 @@ InstallMethod( IsFree,
         return false;
     fi;
     
-    if not HasRankOfModule( M ) then
+    if not HasRankOfObject( M ) then
         ## this should set the rank if it doesn't fail
         if FiniteFreeResolution( M ) = fail then
             TryNextMethod( );
         fi;
     fi;
     
-    ## by now RankOfModule will exist and this
+    ## by now RankOfObject will exist and this
     ## should trigger immediate methods to check IsFree
     if  HasIsFree( M ) then
         return IsFree( M );
@@ -1460,13 +1460,13 @@ InstallMethod( IsFree,
     
     if IsStablyFree( M ) then
         ## FIXME: sometimes the immediate methods are not triggered and do not set IsFree
-        if HasIsCommutative( R ) and IsCommutative( R ) and RankOfModule( M ) = 1 then
+        if HasIsCommutative( R ) and IsCommutative( R ) and RankOfObject( M ) = 1 then
             return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
-        elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfModule( M ) then
+        elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfObject( M ) then
             return true;			## [McCRob, Theorem 11.1.14]
-        elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfModule( M ) then
+        elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfObject( M ) then
             return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-        elif HasStableRank( R ) and StableRank( R ) <= RankOfModule( M ) then
+        elif HasStableRank( R ) and StableRank( R ) <= RankOfObject( M ) then
             return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
         fi;
     fi;
@@ -1579,7 +1579,7 @@ InstallMethod( ZeroSubobject,
 end );
 
 ##
-InstallMethod( RankOfModule,
+InstallMethod( RankOfObject,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1587,8 +1587,8 @@ InstallMethod( RankOfModule,
     
     Resolution( M );
     
-    if HasRankOfModule( M ) then
-        return RankOfModule( M );
+    if HasRankOfObject( M ) then
+        return RankOfObject( M );
     fi;
     
     TryNextMethod( );
@@ -1596,7 +1596,7 @@ InstallMethod( RankOfModule,
 end );
 
 ##
-InstallMethod( RankOfModule,
+InstallMethod( RankOfObject,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1644,7 +1644,7 @@ InstallMethod( Rank,
         
   function( M )
     
-    return RankOfModule( M );
+    return RankOfObject( M );
     
 end );
 

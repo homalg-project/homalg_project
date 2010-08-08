@@ -766,9 +766,9 @@ InstallMethod( KernelSubobject,
     
     T := Range( psi );
     
-    if HasRankOfModule( S ) and HasRankOfModule( T ) then
-        if RankOfModule( T ) = 0 then
-            SetRankOfModule( ker, RankOfModule( S ) );
+    if HasRankOfObject( S ) and HasRankOfObject( T ) then
+        if RankOfObject( T ) = 0 then
+            SetRankOfObject( ker, RankOfObject( S ) );
         fi;
     fi;
     

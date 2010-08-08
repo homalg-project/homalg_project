@@ -166,9 +166,9 @@ DeclareAttribute( "PrimaryDecomposition",
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
-##  <#GAPDoc Label="RankOfModule">
+##  <#GAPDoc Label="RankOfObject">
 ##  <ManSection>
-##    <Attr Arg="M" Name="RankOfModule"/>
+##    <Attr Arg="M" Name="RankOfObject"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      The projective rank of the &homalg; module <A>M</A>.
@@ -176,7 +176,7 @@ DeclareAttribute( "ElementaryDivisors",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "RankOfModule",
+DeclareAttribute( "RankOfObject",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="BettiDiagram:module">
@@ -466,7 +466,7 @@ DeclareSynonym( "SetPositionOfTheDefaultSetOfGenerators",
         SetPositionOfTheDefaultSetOfRelations );
 
 DeclareSynonym( "EulerCharacteristicOfModule",
-        RankOfModule );
+        RankOfObject );
 
 DeclareSynonym( "BetterPresentation",
         GetRidOfObsoleteGenerators );

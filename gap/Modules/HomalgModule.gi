@@ -1086,9 +1086,9 @@ InstallMethod( AddANewPresentation,
     
     if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
-        SetRankOfModule( M, NrGenerators( rel ) );
+        SetRankOfObject( M, NrGenerators( rel ) );
     elif HasIsInjectivePresentation( rel ) and IsInjectivePresentation( rel ) then
-        SetRankOfModule( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
+        SetRankOfObject( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
     fi;
     
     if HasIsTorsion( rel ) then
@@ -1187,9 +1187,9 @@ InstallMethod( AddANewPresentation,
     
     if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
         SetIsFree( M, true );
-        SetRankOfModule( M, NrGenerators( rel ) );
+        SetRankOfObject( M, NrGenerators( rel ) );
     elif HasIsInjectivePresentation( rel ) and IsInjectivePresentation( rel ) then
-        SetRankOfModule( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
+        SetRankOfObject( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
     fi;
     
     if HasIsTorsion( rel ) then
@@ -1220,17 +1220,17 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         bas := rel;
     fi;
     
-    if not HasRankOfModule( M ) then
+    if not HasRankOfObject( M ) then
        mat := MatrixOfRelations( rel );
        R := HomalgRing( M );
        if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) and
           HasIsDiagonalMatrix( mat ) and IsDiagonalMatrix( mat ) then
            diag := DiagonalEntries( mat );
            rk := Length( Filtered( diag, IsZero ) ) + NrGenerators( M ) - Length( diag );
-           SetRankOfModule( M, rk );
+           SetRankOfObject( M, rk );
        elif HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
            rk := NrGenerators( M ) - NrRelations( M );	## the euler characteristic
-           SetRankOfModule( M, rk );
+           SetRankOfObject( M, rk );
        fi;
     fi;
     
@@ -1553,7 +1553,7 @@ InstallMethod( ElementaryDivisors,
     
     RP := homalgTable( R );
     
-    if IsBound( RP!.ElementaryDivisors ) and HasRankOfModule( M ) then
+    if IsBound( RP!.ElementaryDivisors ) and HasRankOfObject( M ) then
         e := RP!.ElementaryDivisors( MatrixOfRelations( M ) );
         if IsString( e ) then
             e := StringToElementStringList( e );
@@ -1564,7 +1564,7 @@ InstallMethod( ElementaryDivisors,
         ## conventions for elementary divisors, we fix our own here:
         e := Filtered( e, x -> not IsOne( x ) and not IsZero( x ) );
         
-        Append( e, ListWithIdenticalEntries( RankOfModule( M ), Zero( R ) ) );
+        Append( e, ListWithIdenticalEntries( RankOfObject( M ), Zero( R ) ) );
         
         return e;
     fi;
@@ -2836,7 +2836,7 @@ InstallMethod( ViewObj,
             else
                 Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure" ) );
             fi;
-            if not ( HasRankOfModule( M ) and RankOfModule( M ) > 0 ) then
+            if not ( HasRankOfObject( M ) and RankOfObject( M ) > 0 ) then
                 Print( " torsion-free" );
             fi;
             nz := true;
@@ -2925,9 +2925,9 @@ InstallMethod( ViewObj,
         if HasIsPure( M ) and not IsPure( M ) then
             Append( properties, " non-pure" );
         fi;
-        if HasRankOfModule( M ) then
+        if HasRankOfObject( M ) then
             Append( properties, " rank " );
-            Append( properties, String( RankOfModule( M ) ) );
+            Append( properties, String( RankOfObject( M ) ) );
         elif HasIsTorsion( M ) and not IsTorsion( M ) and not HasIsPure( M ) then
             Append( properties, " non-torsion" );
         elif HasIsZero( M ) and not IsZero( M ) and
@@ -3093,8 +3093,8 @@ InstallMethod( ViewObj,
     
     r := NrGenerators( M );
     
-    if HasRankOfModule( M ) then
-        rk := RankOfModule( M );
+    if HasRankOfObject( M ) then
+        rk := RankOfObject( M );
         Print( " of rank ", rk );
         
         if IsBound( M!.distinguished ) and M!.distinguished = true and
@@ -3310,8 +3310,8 @@ InstallMethod( Display,
     
     ## rk is the rank if R is a domain
     
-    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) and not HasRankOfModule( M ) then
-        SetRankOfModule( M, rk );
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) and not HasRankOfObject( M ) then
+        SetRankOfObject( M, rk );
     fi;
     
     diag := Filtered( diag, x -> not IsOne( x ) and not IsZero( x ) );
