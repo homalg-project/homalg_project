@@ -154,12 +154,70 @@ InstallMethod( FiltrationBySpectralSequence,
 end );
 
 ##
-InstallMethod( PurityFiltration,
+InstallMethod( SetAttributesByPurityFiltration,
+        "for ascending filtrations",
+        [ IsHomalgStaticObject,
+          IsFiltrationOfFinitelyPresentedObjectRep and
+          IsAscendingFiltration and
+          IsPurityFiltration ],
+        
+  function( M, filt )
+    local Mf, non_zero_p, l, p, M0;
+    
+    Mf := UnderlyingObject( filt );
+    
+    ## set different porperties and attributes of the pure parts
+    Perform( DegreesOfFiltration( filt ),
+        function( p )
+            local L;
+            L := CertainObject( filt, p );
+            if not IsZero( L ) then
+                SetAbsoluteDepth( L, -p );
+                SetIsPure( L, true );
+            fi;
+        end );
+    
+    non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
+    
+    l := Length( non_zero_p );
+    
+    ## if only one graded part is non-trivial, the module M is pure
+    if l > 0 then
+        p := non_zero_p[l];
+        
+        SetAbsoluteDepth( M, -p );
+        SetAbsoluteDepth( Mf, -p );
+        
+        if l = 1 then
+            SetIsPure( M, true );
+            SetIsPure( Mf, true );
+        else
+            SetIsPure( M, false );
+            SetIsPure( Mf, false );
+        fi;
+    fi;
+    
+    M0 := CertainObject( filt, 0 );
+    
+    ## the rank of the 0-th part M0 is the rank of the module M
+    if HasRankOfModule( M ) and RankOfModule( M ) > 0 then
+        SetRankOfModule( M0, RankOfModule( M ) );
+    elif HasRankOfModule( M0 ) then
+        SetRankOfModule( M, RankOfModule( M0 ) );
+        SetRankOfModule( Mf, RankOfModule( M0 ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
         "for homalg modules",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
-    local R, F, G, II_E, filt, M0, non_zero_p, l, p, I_E, iso;
+    local R, F, G, II_E, filt, non_zero_p, l, p, I_E, iso;
+    
+    ## does not set the attribute PurityFiltration
     
     R := HomalgRing( M );
     
@@ -175,7 +233,11 @@ InstallMethod( PurityFiltration,
     
     filt := FiltrationBySpectralSequence( II_E );
     
+    SetIsPurityFiltration( filt, true );
+    
     ByASmallerPresentation( filt );
+    
+    SetAttributesByPurityFiltration( M, filt );
     
     ## set different porperties and attributes of the pure parts
     Perform( DegreesOfFiltration( filt ),
@@ -183,8 +245,6 @@ InstallMethod( PurityFiltration,
             local L;
             L := CertainObject( filt, p );
             if not IsZero( L ) then
-                SetAbsoluteDepth( L, -p );
-                SetIsPure( L, true );
                 SetCodegreeOfPurity( L, StaircaseOfStability( II_E, [ p, -p ], 2 ) );
             fi;
         end );
@@ -192,15 +252,6 @@ InstallMethod( PurityFiltration,
     ## set the codegree of purity for the torsion-free factor (in case it is already computed)
     if HasTorsionFreeFactorEpi( M ) and CertainObject( II_E, [ 0, 0 ] ) <> fail then
         SetCodegreeOfPurity( TorsionFreeFactor( M ), StaircaseOfStability( II_E, [ 0, 0 ], 2 ) );
-    fi;
-    
-    M0 := CertainObject( filt, 0 );
-    
-    ## the rank of the 0-th part M0 is the rank of the module M
-    if HasRankOfModule( M ) and RankOfModule( M ) > 0 then
-        SetRankOfModule( M0, RankOfModule( M ) );
-    elif HasRankOfModule( M0 ) then
-        SetRankOfModule( M, RankOfModule( M0 ) );
     fi;
     
     non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
@@ -214,15 +265,11 @@ InstallMethod( PurityFiltration,
         SetAbsoluteDepth( M, -p );
         
         if l = 1 then
-            SetIsPure( M, true );
             SetCodegreeOfPurity( M, StaircaseOfStability( II_E, [ p, -p ], 2 ) );
         else
-            SetIsPure( M, false );
             SetCodegreeOfPurity( M, infinity );
         fi;
     fi;
-    
-    SetIsPurityFiltration( filt, true );
     
     ## construct the isomorphism
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FG( M ) -> M:
@@ -255,6 +302,17 @@ InstallMethod( PurityFiltration,
     filt!.Isomorphism := iso;
     
     return filt;
+    
+end );
+
+##
+InstallMethod( PurityFiltration,
+        "for homalg modules",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    
+    return PurityFiltrationViaBidualizingSpectralSequence( M );
     
 end );
 
