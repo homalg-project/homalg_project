@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Maps.gd                     homalg package               Mohamed Barakat
+##  Morphisms.gd                homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations of homalg procedures for maps ( = module homomorphisms ).
+##  Declarations of homalg procedures for morphisms of abelian categories.
 ##
 #############################################################################
 
@@ -17,20 +17,20 @@
 # basic operations:
 
 DeclareOperation( "Resolution",
-        [ IsInt, IsHomalgMap ] );
+        [ IsInt, IsHomalgStaticMorphism ] );
 
 DeclareOperation( "Resolution",
-        [ IsHomalgMap ] );
+        [ IsHomalgStaticMorphism ] );
 
 DeclareOperation( "CokernelSequence",
-        [ IsHomalgMap ] );
+        [ IsHomalgStaticMorphism ] );
 
 DeclareOperation( "CokernelCosequence",
-        [ IsHomalgMap ] );
+        [ IsHomalgStaticMorphism ] );
 
 DeclareOperation( "KernelSequence",
-        [ IsHomalgMap ] );
+        [ IsHomalgStaticMorphism ] );
 
 DeclareOperation( "KernelCosequence",
-        [ IsHomalgMap ] );
+        [ IsHomalgStaticMorphism ] );
 

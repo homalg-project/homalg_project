@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  Maps.gi                     homalg package               Mohamed Barakat
+##  Morphisms.gi                homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations of homalg procedures for maps ( = module homomorphisms ).
+##  Implementations of homalg procedures for morphisms of abelian categories.
 ##
 #############################################################################
 
@@ -17,7 +17,7 @@
 ##
 InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single map)
         "for homalg maps",
-        [ IsInt, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsInt, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( _q, phi  )
     local q, S, T, d_S, d_T, index_pair, j, d_S_j, d_T_j, phi_j, cm;
@@ -78,7 +78,7 @@ end );
 
 InstallMethod( Resolution,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     
@@ -89,7 +89,7 @@ end );
 ## [HS. Prop. II.9.6]
 InstallMethod( CokernelSequence,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local nu, epsilon, C;
@@ -109,7 +109,7 @@ end );
 ## [HS. Prop. II.9.6]
 InstallMethod( CokernelCosequence,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local nu, epsilon, C;
@@ -129,7 +129,7 @@ end );
 ## [HS. Prop. II.9.6]
 InstallMethod( KernelSequence,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local mu, eta, C;
@@ -149,7 +149,7 @@ end );
 ## [HS. Prop. II.9.6]
 InstallMethod( KernelCosequence,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
     local mu, eta, C;
