@@ -2785,6 +2785,8 @@ InstallMethod( ViewObj,
         return;
     fi;
     
+    Print( "<A" );
+    
     if num_gen = 1 then
         SetIsCyclic( M, true );
         num_gen := "a cyclic";
@@ -2986,15 +2988,15 @@ InstallMethod( ViewObj,
         if is_submodule then
             if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
-                    Print( "<A", properties, " (left) ideal given by ", num_gen, gen_string, locked, ">" );
+                    Print( properties, " (left) ideal given by ", num_gen, gen_string, locked, ">" );
                 else
-                    Print( "<A", properties, " left ideal given by ", num_gen, gen_string, locked, ">" );
+                    Print( properties, " left ideal given by ", num_gen, gen_string, locked, ">" );
                 fi;
             else
-                Print( "<A", properties, " left submodule given by ", num_gen, gen_string, locked, ">" );
+                Print( properties, " left submodule given by ", num_gen, gen_string, locked, ">" );
             fi;
         else
-            Print( "<A", properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, locked, ">" );
+            Print( properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, locked, ">" );
         fi;
         
     else
@@ -3046,15 +3048,15 @@ InstallMethod( ViewObj,
         if is_submodule then
             if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
-                    Print( "<A", properties, " (right) ideal given by ", num_gen, gen_string, locked, ">" );
+                    Print( properties, " (right) ideal given by ", num_gen, gen_string, locked, ">" );
                 else
-                    Print( "<A", properties, " right ideal given by ", num_gen, gen_string, locked, ">" );
+                    Print( properties, " right ideal given by ", num_gen, gen_string, locked, ">" );
                 fi;
             else
-                Print( "<A", properties, " right submodule given by ", num_gen, gen_string, locked, ">" );
+                Print( properties, " right submodule given by ", num_gen, gen_string, locked, ">" );
             fi;
         else
-            Print( "<A", properties, " right module on ", num_gen, gen_string, num_rel, rel_string, locked, ">" );
+            Print( properties, " right module on ", num_gen, gen_string, num_rel, rel_string, locked, ">" );
         fi;
         
     fi;
