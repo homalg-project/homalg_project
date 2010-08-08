@@ -38,7 +38,11 @@ DeclareOperation( "Resolution",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "ConnectingHomomorphism",
-        [ IsHomalgModule, IsHomalgMap, IsHomalgMap, IsHomalgMap, IsHomalgModule ] );
+        [ IsHomalgStaticObject,
+          IsHomalgStaticMorphism,
+          IsHomalgStaticMorphism,
+          IsHomalgStaticMorphism,
+          IsHomalgStaticObject ] );
 
 DeclareOperation( "ConnectingHomomorphism",
         [ IsHomalgComplex, IsInt ] );
@@ -53,11 +57,11 @@ DeclareOperation( "DefectOfExactnessSequence",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "DefectOfExactnessSequence",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgStaticMorphism, IsHomalgStaticMorphism ] );
 
 DeclareOperation( "DefectOfExactnessCosequence",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "DefectOfExactnessCosequence",
-        [ IsHomalgMap, IsHomalgMap ] );
+        [ IsHomalgStaticMorphism, IsHomalgStaticMorphism ] );
 

@@ -46,6 +46,8 @@ ReadPackage( "homalg", "gap/StaticObjects.gi" );
 
 ReadPackage( "homalg", "gap/Morphisms.gi" );
 
+ReadPackage( "homalg", "gap/Complexes.gi" );
+
 ReadPackage( "homalg", "gap/ToolFunctors.gi" );
 ReadPackage( "homalg", "gap/BasicFunctors.gi" );
 ReadPackage( "homalg", "gap/OtherFunctors.gi" );
@@ -92,8 +94,6 @@ ReadPackage( "homalg", "gap/Modules/HomalgBigradedObject.gi" );
 ReadPackage( "homalg", "gap/Modules/HomalgFunctor.gi" );
 
 ## main
-ReadPackage( "homalg", "gap/Complexes.gi" );
-
 ReadPackage( "homalg", "gap/ChainMaps.gi" );
 
 ReadPackage( "homalg", "gap/SpectralSequences.gi" );

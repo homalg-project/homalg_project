@@ -711,11 +711,11 @@ end );
 #_______________________________________________________________________
 InstallMethod( ConnectingHomomorphism,
         "for homalg complexes",
-        [ IsFinitelyPresentedModuleRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsFinitelyPresentedModuleRep ],
+        [ IsStaticFinitelyPresentedObjectRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticFinitelyPresentedObjectRep ],
         
   function( Hqn, jn, bn, in_1, Hsn_1 )
     local iota_Hqn, iota_Hsn_1, snake;
@@ -944,7 +944,8 @@ end );
 ## for convenience
 InstallMethod( DefectOfExactnessSequence,
         "for homalg composable maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi, psi )
     
@@ -994,7 +995,8 @@ end );
 ## for convenience
 InstallMethod( DefectOfExactnessCosequence,
         "for homalg composable maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi, psi )
     
