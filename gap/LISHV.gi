@@ -202,8 +202,8 @@ InstallImmediateMethod( RankOfSheaf,
     
     M := UnderlyingModule( E );
     
-    if HasRankOfModule( M ) then
-        return RankOfModule( M );
+    if HasRankOfObject( M ) then
+        return RankOfObject( M );
     fi;
     
     TryNextMethod( );
@@ -317,7 +317,7 @@ InstallMethod( RankOfSheaf,
     
     M := UnderlyingModule( E );
     
-    return RankOfModule( M );
+    return RankOfObject( M );
     
 end );
 
