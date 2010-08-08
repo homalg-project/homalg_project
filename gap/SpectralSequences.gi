@@ -568,7 +568,7 @@ end );
 ##
 InstallMethod( GrothendieckBicomplex,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsStaticFinitelyPresentedObjectRep ],
         
   function( Functor_F, Functor_G, M )
     local F, G, P, GP, CE, FCE, BC, p_degrees, FGP, HFGP, Hgen_embs, p,
@@ -722,7 +722,7 @@ end );
 ##
 InstallMethod( GrothendieckSpectralSequence,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep, IsList ],
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsStaticFinitelyPresentedObjectRep, IsList ],
         
   function( Functor_F, Functor_G, M, _p_range )
     local BC, p_range, II_E;
@@ -772,7 +772,7 @@ end );
 ##
 InstallMethod( GrothendieckSpectralSequence,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgFunctorRep, IsHomalgFunctorRep, IsStaticFinitelyPresentedObjectRep ],
         
   function( Functor_F, Functor_G, M )
     
