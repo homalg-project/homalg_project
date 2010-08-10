@@ -160,39 +160,24 @@ InstallLogicalImplicationsForHomalgSubobjects(
 
 ##
 InstallImmediateMethod( IsArtinian,
-        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and
-       ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
-         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
-        
-        return AbsoluteDepth( M ) = LeftGlobalDimension( R );
-        
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
     fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsArtinian,
-        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and
+    if Tester( global_dimension )( R ) and
        ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
         
-        return AbsoluteDepth( M ) = RightGlobalDimension( R );
+        return AbsoluteDepth( M ) = global_dimension( R );
         
     fi;
     
@@ -256,24 +241,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedSubmoduleRep and HasLeftActingDomain, 0,
-        
-  function( J )
-    local M;
-    
-    M := SuperObject( J );
-    
-    if HasIsTorsion( M ) and IsTorsion( M ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsTorsion,
-        IsFinitelyPresentedSubmoduleRep and HasRightActingDomain, 0,
+        IsFinitelyPresentedSubmoduleRep, 0,
         
   function( J )
     local M;
@@ -395,24 +363,7 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedSubmoduleRep and HasLeftActingDomain, 0,
-        
-  function( J )
-    local M;
-    
-    M := SuperObject( J );
-    
-    if HasIsTorsionFree( M ) and IsTorsionFree( M ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedSubmoduleRep and HasRightActingDomain, 0,
+        IsFinitelyPresentedSubmoduleRep, 0,
         
   function( J )
     local M;
@@ -450,31 +401,20 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleRep and HasIsProjective and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasIsProjective, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 and not IsProjective( M ) then
-        return false;
-    fi;			## the true case is taken care of elsewhere
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
+    fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsTorsionFree,
-        IsFinitelyPresentedModuleRep and HasIsProjective and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 and not IsProjective( M ) then
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 1 and not IsProjective( M ) then
         return false;
     fi;			## the true case is taken care of elsewhere
     
@@ -508,31 +448,20 @@ end );
 
 ##
 InstallImmediateMethod( IsReflexive,
-        IsFinitelyPresentedModuleRep and HasIsProjective and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasIsProjective, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 2 and not IsProjective( M ) then
-        return false;
-    fi;			## the true case is taken care of elsewhere
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
+    fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsReflexive,
-        IsFinitelyPresentedModuleRep and HasIsProjective and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 2 and not IsProjective( M ) then
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 2 and not IsProjective( M ) then
         return false;
     fi;			## the true case is taken care of elsewhere
     
@@ -552,65 +481,43 @@ end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleRep and IsTorsionFree and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsionFree, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 then
-        return true;
-    fi;			## the false case is taken care of elsewhere
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleRep and IsTorsionFree and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 then
-        return true;
-    fi;			## the false case is taken care of elsewhere
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleRep and IsReflexive and HasLeftActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 2 then
-        return true;
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
     fi;
     
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 1 then
+        return true;
+    fi;			## the false case is taken care of elsewhere
+    
     TryNextMethod( );
     
 end );
 
 ##
 InstallImmediateMethod( IsProjective,
-        IsFinitelyPresentedModuleRep and IsReflexive and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsReflexive, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 2 then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
+    fi;
+    
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 2 then
         return true;
     fi;
     
@@ -634,7 +541,8 @@ InstallImmediateMethod( IsFree,
         
   function( M )
     
-    if HasNrRelations( M ) = true and NrRelations( M ) = 0 then	## NrRelations is not an attribute and HasNrRelations might return fail!
+    ## NrRelations is not an attribute and HasNrRelations might return fail!
+    if HasNrRelations( M ) = true and NrRelations( M ) = 0 then
         return true;
     fi;
     
@@ -649,7 +557,8 @@ InstallImmediateMethod( IsFree,
   function( M )
     local R;
     
-    if HasNrGenerators( M ) = true and	## HasNrGenerators is allowed to return fail
+    ## HasNrGenerators is allowed to return fail
+    if HasNrGenerators( M ) = true and
        RankOfObject( M ) = NrGenerators( M ) then
         return true;
     fi;
@@ -660,7 +569,7 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfObject and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfObject, 0,
         
   function( M )
     local R;
@@ -668,52 +577,16 @@ InstallImmediateMethod( IsFree,
     R := HomalgRing( M );
     
     if HasIsCommutative( R ) and IsCommutative( R ) and RankOfObject( M ) = 1 then
-        return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
+        ## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
+        return true;
     elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfObject( M ) then
-        return true;			## [McCRob, Theorem 11.1.14]
+        ## [McCRob, Theorem 11.1.14]
+        return true;
     elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfObject( M ) then
-        return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+        ## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+        return true;
     elif HasStableRank( R ) and StableRank( R ) <= RankOfObject( M ) then
-        return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsFree,
-        IsFinitelyPresentedModuleRep and IsStablyFree and HasRankOfObject and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasIsCommutative( R ) and IsCommutative( R ) and RankOfObject( M ) = 1 then
-        return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
-    elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfObject( M ) then
-        return true;			## [McCRob, Theorem 11.1.14]
-    elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfObject( M ) then
-        return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-    elif HasStableRank( R ) and StableRank( R ) <= RankOfObject( M ) then
-        return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and IsTorsion and HasLeftActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 then
+        ## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
         return true;
     fi;
     
@@ -723,14 +596,20 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and IsTorsion and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
+    fi;
+    
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 1 then
         return true;
     fi;
     
@@ -740,31 +619,20 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and HasAbsoluteDepth, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) = AbsoluteDepth( M ) then
-        return true;
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
     fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and HasAbsoluteDepth and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) = AbsoluteDepth( M ) then
+    if Tester( global_dimension )( R ) and global_dimension( R ) = AbsoluteDepth( M ) then
         return true;
     fi;
     
@@ -794,38 +662,24 @@ end );
 
 ##
 InstallImmediateMethod( RankOfObject,
-        IsFinitelyPresentedModuleRep and HasRightActingDomain, 0,
+        IsFinitelyPresentedModuleRep, 0,
         
   function( M )
     local m;
     
-    if HasNrGenerators( M ) and HasNrRelations( M ) = true then	## NrRelations is not an attribute and HasNrRelations might return fail!
+    ## NrRelations is not an attribute and HasNrRelations might return fail!
+    if HasNrGenerators( M ) and HasNrRelations( M ) = true then
         
         m := MatrixOfRelations( M );
         
-        if HasIsRightRegular( m ) and IsRightRegular( m ) then
-            return NrRows( m ) - NrColumns( m );
-        fi;
-        
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( RankOfObject,
-        IsFinitelyPresentedModuleRep and HasLeftActingDomain, 0,
-        
-  function( M )
-    local m;
-    
-    if HasNrGenerators( M ) and HasNrRelations( M ) = true then	## NrRelations is not an attribute and HasNrRelations might return fail!
-        
-        m := MatrixOfRelations( M );
-        
-        if HasIsLeftRegular( m ) and IsLeftRegular( m ) then
-            return NrColumns( m ) - NrRows( m );
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            if HasIsLeftRegular( m ) and IsLeftRegular( m ) then
+                return NrColumns( m ) - NrRows( m );
+            fi;
+        else
+            if HasIsRightRegular( m ) and IsRightRegular( m ) then
+                return NrRows( m ) - NrColumns( m );
+            fi;
         fi;
         
     fi;
@@ -857,7 +711,8 @@ InstallImmediateMethod( RankOfObject,
         
   function( M )
     
-    if HasNrRelations( M ) = true and NrRelations( M ) = 0 then	## NrRelations is not an attribute and HasNrRelations might return fail!
+    ## NrRelations is not an attribute and HasNrRelations might return fail!
+    if HasNrRelations( M ) = true and NrRelations( M ) = 0 then
         return NrGenerators( M );
     fi;
     
@@ -916,31 +771,20 @@ end );
 
 ##
 InstallImmediateMethod( AbsoluteDepth,
-        IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero and HasLeftActingDomain, 0,
+        IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero, 0,
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if not IsZero( M ) and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) = 1 then
-        return 1;
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
     fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( AbsoluteDepth,
-        IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero and HasRightActingDomain, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if not IsZero( M ) and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) = 1 then
+    if not IsZero( M ) and Tester( global_dimension )( R ) and global_dimension( R ) = 1 then
         return 1;
     fi;
     
@@ -1157,32 +1001,20 @@ end );
 ##
 InstallMethod( IsReflexive,
         "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 then
-        return IsTorsionFree( M );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
     fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsReflexive,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 then
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 1 then
         return IsTorsionFree( M );
     fi;
     
@@ -1271,14 +1103,20 @@ end );
 ##
 InstallMethod( IsProjective,
         "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) < infinity then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
+    fi;
+    
+    if Tester( global_dimension )( R ) and global_dimension( R ) < infinity then
         return DegreeOfTorsionFreeness( M ) = infinity;
     fi;
     
@@ -1289,50 +1127,20 @@ end );
 ##
 InstallMethod( IsProjective,
         "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local R;
+    local R, global_dimension;
     
     R := HomalgRing( M );
     
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) < infinity then
-        return DegreeOfTorsionFreeness( M ) = infinity;
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        global_dimension := LeftGlobalDimension;
+    else
+        global_dimension := RightGlobalDimension;
     fi;
     
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsProjective,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep and HasLeftActingDomain ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 2 then
-        return IsReflexive( M );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsProjective,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep and HasRightActingDomain ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 2 then
+    if Tester( global_dimension )( R ) and global_dimension( R ) <= 2 then
         return IsReflexive( M );
     fi;
     
@@ -1461,13 +1269,17 @@ InstallMethod( IsFree,
     if IsStablyFree( M ) then
         ## FIXME: sometimes the immediate methods are not triggered and do not set IsFree
         if HasIsCommutative( R ) and IsCommutative( R ) and RankOfObject( M ) = 1 then
-            return true;			## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
+            ## [Lam06, Theorem I.4.11], this is in principle the Cauchy-Binet formula
+            return true;
         elif HasGeneralLinearRank( R ) and GeneralLinearRank( R ) <= RankOfObject( M ) then
-            return true;			## [McCRob, Theorem 11.1.14]
+            ## [McCRob, Theorem 11.1.14]
+            return true;
         elif HasElementaryRank( R ) and ElementaryRank( R ) <= RankOfObject( M ) then
-            return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+            ## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+            return true;
         elif HasStableRank( R ) and StableRank( R ) <= RankOfObject( M ) then
-            return true;			## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+            ## [McCRob, Theorem 11.1.14 and Proposition 11.3.11]
+            return true;
         fi;
     fi;
     

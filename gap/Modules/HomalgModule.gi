@@ -146,22 +146,11 @@ BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
 ##
 InstallMethod( HomalgRing,
         "for homalg modules",
-        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsHomalgModule ],
         
   function( M )
     
-    return RightActingDomain( M );
-    
-end );
-
-##
-InstallMethod( HomalgRing,
-        "for homalg modules",
-        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( M )
-    
-    return LeftActingDomain( M );
+    return M!.ring;
     
 end );
 
@@ -1777,6 +1766,7 @@ InstallMethod( Presentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -1832,6 +1822,7 @@ InstallMethod( Presentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -1884,6 +1875,7 @@ InstallMethod( Presentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -1939,6 +1931,7 @@ InstallMethod( Presentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -1992,6 +1985,7 @@ InstallMethod( LeftPresentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -2040,6 +2034,7 @@ InstallMethod( LeftPresentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -2130,6 +2125,7 @@ InstallMethod( RightPresentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
@@ -2178,6 +2174,7 @@ InstallMethod( RightPresentation,
     
     M := rec( string := "module",
               string_plural := "modules",
+              ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),

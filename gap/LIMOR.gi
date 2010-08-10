@@ -724,7 +724,10 @@ InstallMethod( ImageSubobject,
     ideal := IsBound( T!.distinguished ) and T!.distinguished = true and
              IsBound( T!.not_twisted ) and T!.not_twisted = true;
     
-    N := rec( map_having_subobject_as_its_image := phi );
+    N := rec(
+             ring := R,
+             map_having_subobject_as_its_image := phi
+             );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         ## Objectify:
