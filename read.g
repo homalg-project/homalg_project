@@ -109,8 +109,9 @@ ReadPackage( "homalg", "gap/Modules/BasicFunctors.gi" );
 ReadPackage( "homalg", "gap/Modules/OtherFunctors.gi" );
 
 ## LogicForHomalg subpackages
-ReadPackage( "homalg", "gap/LIMOD.gi" );
 ReadPackage( "homalg", "gap/LIMOR.gi" );
 
 ReadPackage( "homalg", "gap/Modules/LIMAP.gi" );
 ReadPackage( "homalg", "gap/Modules/LIREL.gi" );
+
+ReadPackage( "homalg", "gap/Modules/LIMOD.gi" );
