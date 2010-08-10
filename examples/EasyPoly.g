@@ -34,7 +34,7 @@
 ##  gap> Display( IMora );
 ##  GF(3)[x,y]_< x, y >/< x/1, y/1 >
 ##  ]]></Example>
-##  This ring recognizes, that the module is not zero, but is not able to find better generators...
+##  This ring recognizes, that the module is not zero, but is not able to find better generators.
 ##  <Example><![CDATA[
 ##  gap> Display( I00 );
 ##  GF(3)[x,y]_< x, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^\
@@ -45,7 +45,7 @@
 ##  GF(3)[x,y]_< x, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^\
 ##  2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >
 ##  ]]></Example>
-##  ...but we are able to change the ring, to compute a nicer basis.
+##  We are able to change the ring, to compute a nicer basis.
 ##  <Example><![CDATA[
 ##  gap> I00ToMora := RMora * I00;
 ##  <A cyclic right module on a cyclic generator satisfying 3 relations>

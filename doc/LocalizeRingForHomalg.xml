@@ -31,6 +31,7 @@
 	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
 	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
 	  <!ENTITY LocalizeRingForHomalg "<Package>LocalizeRingForHomalg</Package>">
+    <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
 	  <!ENTITY SCO "<Package>SCO</Package>">
 	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
 	  ]
