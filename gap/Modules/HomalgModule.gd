@@ -166,19 +166,6 @@ DeclareAttribute( "PrimaryDecomposition",
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
-##  <#GAPDoc Label="RankOfObject">
-##  <ManSection>
-##    <Attr Arg="M" Name="RankOfObject"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      The projective rank of the &homalg; module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "RankOfObject",
-        IsHomalgModule );
-
 ##  <#GAPDoc Label="BettiDiagram:module">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="BettiDiagram" Label="for modules"/>

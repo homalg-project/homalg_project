@@ -268,6 +268,19 @@ DeclareAttribute( "UnderlyingSubobject",
 ## should all be added by hand to LIMOD.intrinsic_attributes
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+##  <#GAPDoc Label="RankOfObject">
+##  <ManSection>
+##    <Attr Arg="M" Name="RankOfObject"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The projective rank of the &homalg; module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RankOfObject",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="ProjectiveDimension">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="ProjectiveDimension"/>
