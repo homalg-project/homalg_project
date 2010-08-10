@@ -21,45 +21,30 @@
 InstallValue( LIMOD,
         rec(
             color := "\033[4;30;46m",
-            intrinsic_properties :=
-            [ "IsZero",
-              "IsFree",
-              "IsStablyFree",
-              "IsProjective",
-              "IsReflexive",
-              "IsTorsionFree",
-              "IsArtinian",
-              "IsCyclic",
-              "IsTorsion",
-              "IsHolonomic",
-              "IsPure",
-              "HasConstantRank",
-              "IsInjective",
-              "IsInjectiveCogenerator" ],
-            intrinsic_attributes :=
-            [ "ElementaryDivisors",
-              "RankOfObject",
-              "ProjectiveDimension",
-              "DegreeOfTorsionFreeness",
-              "AbsoluteDepth",
-              "PurityFiltration",
-              "CodegreeOfPurity",
-              "BettiDiagram",
-              "CastelnuovoMumfordRegularity" ],
+            intrinsic_properties := LIOBJ.intrinsic_properties,
+            intrinsic_attributes := LIOBJ.intrinsic_attributes,
             )
         );
+
+Append( LIMOD.intrinsic_properties,
+        [ 
+          "IsFree",
+          "IsStablyFree",
+          "IsCyclic",
+          "IsHolonomic",
+          "HasConstantRank",
+          ] );
+
+Append( LIMOD.intrinsic_attributes,
+        [ 
+          "ElementaryDivisors",
+          "BettiDiagram",
+          "CastelnuovoMumfordRegularity"
+          ] );
 
 ##
 InstallValue( LogicalImplicationsForHomalgModules,
         [ 
-          ## IsInjective(Cogenerator):
-          
-          [ IsInjectiveCogenerator,
-            "implies", IsInjective ],
-          
-          [ IsZero,
-            "implies", IsInjective ],
-          
 	  ## IsTorsionFree:
           
           [ IsZero,
@@ -77,15 +62,6 @@ InstallValue( LogicalImplicationsForHomalgModules,
           [ IsProjective, "and", FiniteFreeResolutionExists,
             "imply", IsStablyFree ],
           
-          [ IsProjective,
-            "implies", IsReflexive ],
-          
-          [ IsReflexive,
-            "implies", IsTorsionFree ],
-          
-          [ IsTorsionFree,
-            "implies", IsPure ],
-          
           ## IsTorsion:
           
           [ IsZero,
@@ -97,36 +73,31 @@ InstallValue( LogicalImplicationsForHomalgModules,
           ## [ IsHolonomic,
           ##  "implies", IsArtinian ],	there is no clear definition of holonomic
           
-          [ IsZero,
-            "implies", IsArtinian ],
-          
-          [ IsZero,
-            "implies", IsTorsion ],
-          
-          ## IsCyclic:
-          
-          [ IsZero,
-            "implies", IsCyclic ],
-          
-          ## IsZero:
-          
-          [ IsTorsion, "and", IsTorsionFree,
-            "imply", IsZero ]
-          
           ] );
 
 ##
 InstallValue( LogicalImplicationsForHomalgModulesOverSpecialRings,
         [ ## logical implications for modules over special rings
           
-          [ [ IsTorsionFree ], HomalgRing, [ [ IsLeftHereditary, IsRightHereditary, IsHereditary ] ],
-            "imply", IsProjective ],									## Kaplansky's theorem [Lam06, Theorem II.2.2]
+          ## Kaplansky's theorem [Lam06, Theorem II.2.2]
+          [ [ IsTorsionFree ],
+            HomalgRing,
+            [ [ IsLeftHereditary, IsRightHereditary, IsHereditary ] ],
+            "imply", IsProjective ],
           
-          [ [ IsProjective ], HomalgRing, [ [ IsFiniteFreePresentationRing, IsLeftFiniteFreePresentationRing, IsRightFiniteFreePresentationRing ] ],
-            "imply", IsStablyFree ],									## Serre's 1955 remark
+          ## Serre's 1955 remark
+          [ [ IsProjective ],
+            HomalgRing,
+            [ [ IsFiniteFreePresentationRing,
+                IsLeftFiniteFreePresentationRing,
+                IsRightFiniteFreePresentationRing ] ],
+            "imply", IsStablyFree ],
           
-          [ [ IsStablyFree ], HomalgRing, [ [ IsLeftHermite, IsRightHermite, IsHermite ] ],
-            "imply", IsFree ],										## by definition [Lam06, Definition I.4.6]
+          ## by definition [Lam06, Definition I.4.6]
+          [ [ IsStablyFree ],
+            HomalgRing,
+            [ [ IsLeftHermite, IsRightHermite, IsHermite ] ],
+            "imply", IsFree ],
           
           ] );
 

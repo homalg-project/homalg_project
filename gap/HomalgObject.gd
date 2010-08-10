@@ -265,7 +265,7 @@ DeclareAttribute( "UnderlyingSubobject",
 ## the attributes below are intrinsic:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-## should all be added by hand to LIMOD.intrinsic_attributes
+## should all be added by hand to LIOBJ.intrinsic_attributes
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ##  <#GAPDoc Label="RankOfObject">
