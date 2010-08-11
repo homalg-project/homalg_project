@@ -1478,7 +1478,7 @@ InstallMethod( ShallowCopy,
         psi := HomalgMap( MatrixOfMap( phi ), ShallowCopy( Source( phi ) ), ShallowCopy( Range( phi ) ) );
     fi;
     
-    MatchPropertiesAndAttributes( phi, psi, LIMOR.intrinsic_properties, LIMOR.intrinsic_attributes );
+    MatchPropertiesAndAttributes( phi, psi, LIHOM.intrinsic_properties, LIHOM.intrinsic_attributes );
     
     return psi;
     

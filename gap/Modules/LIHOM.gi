@@ -1,12 +1,12 @@
 #############################################################################
 ##
-##  LIMOR.gi                    LIMOR subpackage             Mohamed Barakat
+##  LIHOM.gi                    LIHOM subpackage             Mohamed Barakat
 ##
-##         LIMOR = Logical Implications for homalg MORphisms
+##         LIHOM = Logical Implications for homalg module HOMomorphisms
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for the LIMOR subpackage.
+##  Implementation stuff for the LIHOM subpackage.
 ##
 #############################################################################
 
@@ -18,7 +18,7 @@
 
 # a central place for configuration variables:
 
-InstallValue( LIMOR,
+InstallValue( LIHOM,
         rec(
             color := "\033[4;30;46m",
             intrinsic_properties :=
@@ -309,7 +309,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -320,7 +320,7 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -334,7 +334,7 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( phi )
@@ -348,7 +348,7 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( phi )
@@ -362,7 +362,7 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsHomalgStaticMorphism and HasMorphismAid ], 10001,
         
   function( phi )
@@ -377,7 +377,7 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -418,7 +418,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedMorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsHomalgStaticMorphism ],
         
   function( phi )
@@ -433,7 +433,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedMorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
@@ -444,7 +444,7 @@ end );
 
 ##
 InstallMethod( IsEpimorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -469,7 +469,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedEpimorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -480,7 +480,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedEpimorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
@@ -496,7 +496,7 @@ end );
 
 ##
 InstallMethod( IsSplitEpimorphism,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -518,7 +518,7 @@ end );
 
 ##
 InstallMethod( IsEpimorphism,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -529,7 +529,7 @@ end );
 
 ##
 InstallMethod( IsMonomorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -560,7 +560,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedMonomorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -571,7 +571,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedMonomorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
@@ -587,7 +587,7 @@ end );
 
 ##
 InstallMethod( IsMonomorphism,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -598,7 +598,7 @@ end );
 
 ##
 InstallMethod( IsIsomorphism,
-        "LIMOR: for homalg morphisms",
+        "LIHOM: for homalg morphisms",
         [ IsHomalgMorphism ],
         
   function( phi )
@@ -617,7 +617,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedIsomorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -628,7 +628,7 @@ end );
 
 ##
 InstallMethod( IsGeneralizedIsomorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
         
   function( phi )
@@ -646,7 +646,7 @@ end );
 
 ##
 InstallMethod( IsAutomorphism,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
@@ -657,7 +657,7 @@ end );
 
 ##
 InstallMethod( IsGradedMorphism,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( phi )
@@ -668,7 +668,7 @@ end );
 
 ##
 InstallMethod( IsQuasiIsomorphism,
-        "LIMOR: for homalg chain maps",
+        "LIHOM: for homalg chain maps",
         [ IsHomalgChainMap ],
         
   function( phi )
@@ -711,7 +711,7 @@ end );
 
 ##
 InstallMethod( ImageSubobject,
-        "LIMOR: submodule constructor",
+        "LIHOM: submodule constructor",
         [ IsHomalgMap ],
         
   function( phi )
@@ -753,7 +753,7 @@ end );
 
 ##
 InstallMethod( KernelSubobject,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsHomalgMap ],
         
   function( psi )
@@ -781,7 +781,7 @@ end );
 
 ## Cf. [Bar, Cor. 4.8]
 InstallMethod( GeneralizedInverse,
-        "LIMOR: for homalg maps",
+        "LIHOM: for homalg module homomorphisms",
         [ IsHomalgMap and IsEpimorphism ],
         
   function( epsilon )

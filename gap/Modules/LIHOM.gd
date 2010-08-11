@@ -1,21 +1,21 @@
 #############################################################################
 ##
-##  LIMOR.gd                    LIMOR subpackage             Mohamed Barakat
+##  LIHOM.gd                    LIHOM subpackage             Mohamed Barakat
 ##
-##         LIMOR = Logical Implications for homalg MORphisms
+##         LIHOM = Logical Implications for homalg module HOMomorphisms
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declaration stuff for the LIMOR subpackage.
+##  Declaration stuff for the LIHOM subpackage.
 ##
 #############################################################################
 
 # our info class:
-DeclareInfoClass( "InfoLIMOR" );
-SetInfoLevel( InfoLIMOR, 1 );
+DeclareInfoClass( "InfoLIHOM" );
+SetInfoLevel( InfoLIHOM, 1 );
 
 # a central place for configurations:
-DeclareGlobalVariable( "LIMOR" );
+DeclareGlobalVariable( "LIHOM" );
 
 ####################################
 #
