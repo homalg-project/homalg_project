@@ -114,5 +114,4 @@ ReadPackage( "homalg", "gap/LIMOR.gi" );
 
 ReadPackage( "homalg", "gap/Modules/LIMAP.gi" );
 ReadPackage( "homalg", "gap/Modules/LIREL.gi" );
-
 ReadPackage( "homalg", "gap/Modules/LIMOD.gi" );
