@@ -23,9 +23,6 @@ DeclareGlobalVariable( "LIHOM" );
 #
 ####################################
 
-DeclareGlobalVariable( "LogicalImplicationsForHomalgMorphisms" );
+DeclareGlobalVariable( "LogicalImplicationsForHomalgMaps" );
 
-DeclareGlobalVariable( "LogicalImplicationsForHomalgEndomorphisms" );
-
-DeclareGlobalVariable( "LogicalImplicationsForHomalgChainMaps" );
-
+DeclareGlobalVariable( "LogicalImplicationsForHomalgSelfMaps" );

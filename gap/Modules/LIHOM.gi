@@ -21,112 +21,28 @@
 InstallValue( LIHOM,
         rec(
             color := "\033[4;30;46m",
-            intrinsic_properties :=
-            [ "IsZero",
-              "IsMorphism",
-              "IsGeneralizedMorphism",
-              "IsGeneralizedEpimorphism",
-              "IsGeneralizedMonomorphism",
-              "IsGeneralizedIsomorphism",
-              "IsIdentityMorphism",
-              "IsMonomorphism",
-              "IsEpimorphism",
-              "IsSplitMonomorphism",
-              "IsSplitEpimorphism",
-              "IsIsomorphism",
-	      "IsAutomorphism" ],
-            intrinsic_attributes :=
-            [ "DegreeOfMorphism" ],
-	    )
+            intrinsic_properties := LIMOR.intrinsic_properties,
+            intrinsic_attributes := LIMOR.intrinsic_attributes,
+            )
         );
 
-##
-InstallValue( LogicalImplicationsForHomalgMorphisms,
+Append( LIHOM.intrinsic_properties,
         [ 
-          ## IsZero does not imply IsMorphism!!!
-          [ IsZero,
-            "implies", IsGeneralizedMorphism ],
-          
-          [ IsMorphism,
-            "implies", IsGeneralizedMorphism ],
-          
-          [ IsMonomorphism,
-            "implies", IsMorphism ],
-          
-          [ IsMonomorphism,
-            "implies", IsGeneralizedMonomorphism ],
-          
-          [ IsGeneralizedMonomorphism,
-            "implies", IsGeneralizedMorphism ],
-          
-          [ IsEpimorphism,
-            "implies", IsMorphism ],
-          
-          [ IsEpimorphism,
-            "implies", IsGeneralizedEpimorphism ],
-          
-          [ IsGeneralizedEpimorphism,
-            "implies", IsGeneralizedMorphism ],
-          
-          [ IsAutomorphism,
-            "implies", IsIsomorphism ],
-          
-          [ IsIsomorphism,
-            "implies", IsGeneralizedIsomorphism ],
-          
-          [ IsIsomorphism,
-            "implies", IsSplitMonomorphism ],
-          
-          [ IsIsomorphism,
-            "implies", IsSplitEpimorphism ],
-          
-          [ IsSplitEpimorphism,
-            "implies", IsEpimorphism ],
-          
-          [ IsSplitMonomorphism,
-            "implies", IsMonomorphism ],
-          
-          [ IsEpimorphism, "and", IsMonomorphism,
-            "imply", IsIsomorphism ],
-          
-          [ IsGeneralizedIsomorphism,
-            "implies", IsGeneralizedMonomorphism ],
-          
-          [ IsGeneralizedIsomorphism,
-            "implies", IsGeneralizedEpimorphism ],
-          
-          [ IsGeneralizedEpimorphism, "and", IsGeneralizedMonomorphism,
-            "imply", IsGeneralizedIsomorphism ],
-          
-          [ IsGeneralizedEpimorphism, "and", IsMorphism,
-            "imply", IsEpimorphism ],
-          
-          [ IsGeneralizedMonomorphism, "and", IsMorphism,
-            "imply", IsMonomorphism ],
-          
-          [ IsIdentityMorphism,
-            "implies", IsAutomorphism ],
+          ] );
+
+Append( LIHOM.intrinsic_attributes,
+        [ 
+          ] );
+
+##
+InstallValue( LogicalImplicationsForHomalgMaps,
+        [ 
           
           ] );
 
 ##
-InstallValue( LogicalImplicationsForHomalgEndomorphisms,
+InstallValue( LogicalImplicationsForHomalgSelfMaps,
         [ 
-          
-          [ IsIsomorphism,
-            "implies", IsAutomorphism ],
-          
-          ] );
-
-##
-InstallValue( LogicalImplicationsForHomalgChainMaps,
-        [ 
-          
-          [ IsGradedMorphism,
-            "implies", IsMorphism ],
-          
-          [ IsIsomorphism,
-            "implies", IsQuasiIsomorphism ],
           
           ] );
 
@@ -136,47 +52,15 @@ InstallValue( LogicalImplicationsForHomalgChainMaps,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgMorphisms, IsHomalgMorphism );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgMaps, IsHomalgMap );
 
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgEndomorphisms, IsHomalgEndomorphism );
-
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgChainMaps, IsHomalgChainMap );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgSelfMaps, IsHomalgSelfMap );
 
 ####################################
 #
 # immediate methods for properties:
 #
 ####################################
-
-##
-InstallImmediateMethod( IsZero,
-        IsHomalgMorphism, 0,
-        
-  function( phi )
-    
-    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) and	## to place "or" here we need to know that phi is a morphism;
-       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then	## see the method below
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsZero,
-        IsHomalgMorphism and IsMorphism, 0,
-        
-  function( phi )
-    
-    if ( HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) ) or
-       ( HasIsZero( Range( phi ) ) and IsZero( Range( phi ) ) ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
 
 ##
 InstallImmediateMethod( IsZero,
@@ -215,92 +99,6 @@ InstallImmediateMethod( IsZero,
     
 end );
 
-##
-InstallImmediateMethod( IsMorphism,
-        IsHomalgMorphism and IsZero, 0,
-        
-  function( phi )
-    
-    if HasMorphismAid( phi ) then
-        TryNextMethod( );
-    fi;
-    
-    return true;
-    
-end );
-
-##
-InstallImmediateMethod( IsSplitEpimorphism,
-        IsMapOfFinitelyGeneratedModulesRep and IsEpimorphism, 0,
-        
-  function( phi )
-    local T;
-    
-    T := Range( phi );
-    
-    if HasIsProjective( T ) and IsProjective( T ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-## this immediate method together with the above ture-method
-## IsZero => IsMorphism
-## are essential to avoid infinite loops that
-## Assert( 3, IsMonomorphism( emb ) );
-## in _Functor_ImageObject_OnObjects may cause
-##
-InstallImmediateMethod( IsSplitMonomorphism,
-        IsMapOfFinitelyGeneratedModulesRep and IsMorphism, 0,
-        
-  function( phi )
-    local S;
-    
-    S := Source( phi );
-    
-    if HasIsZero( S ) and IsZero( S ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsAutomorphism,
-        IsHomalgMorphism, 0,
-        
-  function( phi )
-    
-    if not IsIdenticalObj( Source( phi ), Range( phi ) ) then
-        return false;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsGradedMorphism,
-        IsHomalgChainMap, 0,
-        
-  function( phi )
-    local S, T;
-    
-    S := Source( phi );
-    T := Range( phi );
-    
-    if HasIsGradedObject( S ) and HasIsGradedObject( T ) then
-        return IsGradedObject( S ) and IsGradedObject( T );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
 ####################################
 #
 # methods for properties:
@@ -315,20 +113,6 @@ InstallMethod( IsZero,
   function( phi )
     
     return IsZero( MatrixOfMap( DecideZero( phi ) ) );
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "LIHOM: for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( cm )
-    local morphisms;
-    
-    morphisms := MorphismsOfChainMap( cm );
-    
-    return ForAll( morphisms, IsZero );
     
 end );
 
@@ -357,349 +141,6 @@ InstallMethod( IsMorphism,
     mat := MatrixOfMap( phi ) * MatrixOfRelations( Source( phi ) );
     
     return IsZero( DecideZero( mat, Range( phi ) ) );
-    
-end );
-
-##
-InstallMethod( IsMorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsHomalgStaticMorphism and HasMorphismAid ], 10001,
-        
-  function( phi )
-    
-    if not IsZero( MorphismAid( phi ) ) then
-        return false;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( IsMorphism,
-        "LIHOM: for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( cm )
-    local degrees, l, S, T;
-    
-    if not IsComplex( Source( cm ) ) then
-        return false;
-    elif not IsComplex( Range( cm ) ) then
-        return false;
-    fi;
-    
-    degrees := DegreesOfChainMap( cm );
-    
-    l := Length( degrees );
-    
-    degrees := degrees{[ 1 .. l - 1 ]};
-    
-    S := Source( cm );
-    T := Range( cm );
-    
-    if l = 1 then
-        if Length( ObjectDegreesOfComplex( S ) ) = 1 then
-            return true;
-        else
-            Error( "not implemented for chain maps containing as single morphism\n" );
-        fi;
-    elif IsChainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( cm ) then
-        return ForAll( degrees, i -> CertainMorphism( cm, i + 1 ) * CertainMorphism( T, i + 1 ) = CertainMorphism( S, i + 1 ) * CertainMorphism( cm, i ) );
-    elif IsCochainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
-        return ForAll( degrees, i -> CertainMorphism( T, i ) * CertainMorphism( cm, i ) = CertainMorphism( cm, i + 1 ) * CertainMorphism( S, i ) );
-    elif IsChainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
-        return ForAll( degrees, i -> CertainMorphism( T, i + 1 ) * CertainMorphism( cm, i + 1 ) = CertainMorphism( cm, i ) * CertainMorphism( S, i + 1 ) );
-    else
-        return ForAll( degrees, i -> CertainMorphism( cm, i ) * CertainMorphism( T, i ) = CertainMorphism( S, i ) * CertainMorphism( cm, i + 1 ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( IsGeneralizedMorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsHomalgStaticMorphism ],
-        
-  function( phi )
-    
-    if HasMorphismAid( phi ) then
-        TryNextMethod( );
-    fi;
-    
-    return IsMorphism( phi );
-    
-end );
-
-##
-InstallMethod( IsGeneralizedMorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
-        
-  function( phi )
-    
-    return IsMorphism( AssociatedMorphism( phi ) );
-    
-end );
-
-##
-InstallMethod( IsEpimorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local b, S, T;
-    
-    b := IsMorphism( phi ) and IsZero( Cokernel( phi ) );
-    
-    if b then
-        S := Source( phi );
-        T := Range( phi );
-        
-        if HasIsTorsion( T ) and not IsTorsion( T ) then
-            SetIsTorsion( S, false );
-        elif HasIsTorsion( S ) and IsTorsion( S ) then
-            SetIsTorsion( T, true );
-        fi;
-    fi;
-    
-    return b;
-    
-end );
-
-##
-InstallMethod( IsGeneralizedEpimorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsEpimorphism( phi );	## this is just the fall back method
-    
-end );
-
-##
-InstallMethod( IsGeneralizedEpimorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
-        
-  function( phi )
-    local mu;
-    
-    mu := AssociatedMorphism( phi );
-    
-    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
-    
-    return IsEpimorphism( mu );
-    
-end );
-
-##
-InstallMethod( IsSplitEpimorphism,
-        "LIHOM: for homalg chain maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local split;
-    
-    if not IsEpimorphism( phi ) then
-        return false;
-    fi;
-    
-    split := PreInverse( phi );
-    
-    if split = fail then
-        TryNextMethod( );
-    fi;
-    
-    return split <> false;
-    
-end );
-
-##
-InstallMethod( IsEpimorphism,
-        "LIHOM: for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( cm )
-    
-    return IsMorphism( cm ) and ForAll( MorphismsOfChainMap( cm ), IsEpimorphism );	## not true for split epimorphisms
-    
-end );
-
-##
-InstallMethod( IsMonomorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local b, S, T;
-    
-    b := IsMorphism( phi ) and IsZero( Kernel( phi ) );
-    
-    if b then
-        S := Source( phi );
-        T := Range( phi );
-        
-        if HasIsTorsionFree( T ) and IsTorsionFree( T ) then
-            SetIsTorsionFree( S, true );
-        elif HasIsTorsionFree( S ) and not IsTorsionFree( S ) then
-            SetIsTorsionFree( T, false );
-        fi;
-        
-        if HasIsTorsion( T ) and IsTorsion( T ) then
-            SetIsTorsion( S, true );
-        elif HasIsTorsion( S ) and not IsTorsion( S ) then
-            SetIsTorsion( T, false );
-        fi;
-    fi;
-    
-    return b;
-    
-end );
-
-##
-InstallMethod( IsGeneralizedMonomorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsMonomorphism( phi );	## this is just the fall back method
-    
-end );
-
-##
-InstallMethod( IsGeneralizedMonomorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
-        
-  function( phi )
-    local mu;
-    
-    mu := AssociatedMorphism( phi );
-    
-    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
-    
-    return IsMonomorphism( mu );
-    
-end );
-
-##
-InstallMethod( IsMonomorphism,
-        "LIHOM: for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( cm )
-    
-    return IsMorphism( cm ) and ForAll( MorphismsOfChainMap( cm ), IsMonomorphism );	## not true for split monomorphisms
-    
-end );
-
-##
-InstallMethod( IsIsomorphism,
-        "LIHOM: for homalg morphisms",
-        [ IsHomalgMorphism ],
-        
-  function( phi )
-    local iso;
-    
-    iso := IsEpimorphism( phi ) and IsMonomorphism( phi );
-    
-    if iso then
-        SetIsIsomorphism( phi, true );	## needed for UpdateObjectsByMorphism
-        UpdateObjectsByMorphism( phi );
-    fi;
-    
-    return iso;
-    
-end );
-
-##
-InstallMethod( IsGeneralizedIsomorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsIsomorphism( phi );	## this is just the fall back method
-    
-end );
-
-##
-InstallMethod( IsGeneralizedIsomorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep and HasMorphismAid ],
-        
-  function( phi )
-    local mu;
-    
-    mu := AssociatedMorphism( phi );
-    
-    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
-    
-    SetIsGeneralizedMonomorphism( phi, IsMonomorphism( mu ) );
-    
-    return IsIsomorphism( mu );
-    
-end );
-
-##
-InstallMethod( IsAutomorphism,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    return IsHomalgSelfMap( phi ) and IsIsomorphism( phi );
-    
-end );
-
-##
-InstallMethod( IsGradedMorphism,
-        "LIHOM: for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( phi )
-    
-    return IsGradedObject( Source( phi ) ) and IsGradedObject( Range( phi ) );
-    
-end );
-
-##
-InstallMethod( IsQuasiIsomorphism,
-        "LIHOM: for homalg chain maps",
-        [ IsHomalgChainMap ],
-        
-  function( phi )
-    
-    return IsIsomorphism( DefectOfExactness( phi ) );
-    
-end );
-
-##
-InstallMethod( SetPropertiesOfGeneralizedMorphism,
-        "for two homalg morphisms",
-        [ IsHomalgMorphism,
-          IsHomalgMorphism ],
-        
-  function( psi, phi )
-    
-    homalgResetFilters( psi );
-    
-    if HasIsZero( phi ) and IsZero( phi ) then
-        SetIsZero( psi, true );
-    fi;
-    
-    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-        SetIsGeneralizedIsomorphism( psi, true );
-    elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-        SetIsGeneralizedEpimorphism( psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-        SetIsGeneralizedMorphism( psi, true );
-    fi;
-    
-    return psi;
     
 end );
 
@@ -776,34 +217,6 @@ InstallMethod( KernelSubobject,
     fi;
     
     return ker;
-    
-end );
-
-## Cf. [Bar, Cor. 4.8]
-InstallMethod( GeneralizedInverse,
-        "LIHOM: for homalg module homomorphisms",
-        [ IsHomalgMap and IsEpimorphism ],
-        
-  function( epsilon )
-    local gen_iso, aid;
-    
-    ## the generalized inverse of the epimorphism
-    gen_iso := epsilon^-1;
-    
-    ## the morphism aid map of the generalized inverse
-    aid := MapHavingSubobjectAsItsImage( KernelSubobject( epsilon ) );
-    
-    ## set the morphism aid map
-    SetMorphismAid( gen_iso, aid );
-    
-    ## check assertion
-    Assert( 3, IsGeneralizedIsomorphism( gen_iso ) );
-    
-    SetIsGeneralizedIsomorphism( gen_iso, true );
-    
-    ## TODO: use PreDivide instead of the above stuff
-    
-    return gen_iso;
     
 end );
 
