@@ -128,9 +128,6 @@ DeclareProperty( "HasConstantRank",
 #
 ####################################
 
-DeclareAttribute( "AFiniteFreeResolution",
-        IsHomalgModule );
-
 ##  <#GAPDoc Label="PrimaryDecomposition">
 ##  <ManSection>
 ##    <Attr Arg="J" Name="PrimaryDecomposition"/>

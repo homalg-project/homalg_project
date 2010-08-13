@@ -28,6 +28,9 @@ DeclareOperation( "Resolution",
 DeclareOperation( "Resolution",
         [ IsHomalgStaticObject ] );
 
+DeclareOperation( "FiniteFreeResolution",
+        [ IsHomalgStaticObject ] );
+
 DeclareOperation( "LengthOfResolution",
         [ IsHomalgStaticObject ] );
 

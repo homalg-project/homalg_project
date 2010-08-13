@@ -115,6 +115,28 @@ InstallMethod( Resolution,
 end );
 
 ##
+InstallMethod( FiniteFreeResolution,
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    
+    if HasAFiniteFreeResolution( M ) then
+        return AFiniteFreeResolution( M );
+    elif not HasFiniteFreeResolutionExists( M ) or FiniteFreeResolutionExists( M ) then	## in words: either a finite free resolution exists or its existence is not known yet
+        Resolution( M );
+    fi;
+    
+    ## now check again:
+    if HasAFiniteFreeResolution( M ) then
+        return AFiniteFreeResolution( M );
+    fi;
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( LengthOfResolution,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectOrSubobjectRep ],

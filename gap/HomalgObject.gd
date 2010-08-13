@@ -180,6 +180,9 @@ DeclareProperty( "IsInjectiveCogenerator",
 #
 ####################################
 
+DeclareAttribute( "AFiniteFreeResolution",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="TorsionSubobject">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="TorsionSubobject" Label="for maps"/>

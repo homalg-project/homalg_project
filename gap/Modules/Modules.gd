@@ -39,9 +39,6 @@ DeclareOperation( "Resolution",
 DeclareOperation( "Resolution",
         [ IsHomalgRelations ] );
 
-DeclareOperation( "FiniteFreeResolution",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "AnyParametrization",
         [ IsHomalgRelations ] );
 
