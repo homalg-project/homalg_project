@@ -485,31 +485,3 @@ InstallFunctorOnObjects( functor_Pushout );
 
 InstallFunctorOnObjects( functor_AuslanderDual );
 
-####################################
-#
-# temporary
-#
-####################################
-
-## works only for principal ideal domains
-InstallGlobalFunction( _UCT_Homology,
-  function( H, G )
-    local HG;
-    
-    HG := H * G + Tor( 1, Shift( H, -1 ), G );
-    
-    return ByASmallerPresentation( HG );
-    
-end );
-
-## works only for principal ideal domains
-InstallGlobalFunction( _UCT_Cohomology,
-  function( H, G )
-    local HG;
-    
-    HG := Hom( H, G ) + Ext( 1, Shift( H, -1 ), G );
-    
-    return ByASmallerPresentation( HG );
-    
-end );
-

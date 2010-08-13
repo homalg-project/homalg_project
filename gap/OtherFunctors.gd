@@ -109,13 +109,3 @@ DeclareOperation( "Pushout",
 DeclareOperation( "AuslanderDual",
         [ IsHomalgObject ] );
 
-####################################
-#
-# temporary
-#
-####################################
-
-DeclareGlobalFunction( "_UCT_Homology" );	## FIXME: generalize
-
-DeclareGlobalFunction( "_UCT_Cohomology" );	## FIXME: generalize
-
