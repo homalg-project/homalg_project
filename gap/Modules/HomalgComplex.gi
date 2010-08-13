@@ -79,6 +79,24 @@ InstallMethod( OnLessGenerators,
     
 end );
 
+##
+InstallMethod( SetAsStandardResolution,
+        "for a homalg module and a homalg complex",
+        [ IsHomalgModule, IsHomalgComplex ],
+        
+  function( M, P )
+    local rel;
+    
+    rel := RelationsOfModule( M );
+    
+    if HasFreeResolution( rel ) then
+        ResetFilterObj( rel, FreeResolution );
+    fi;
+    
+    SetFreeResolution( rel, P );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

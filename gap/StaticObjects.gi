@@ -335,7 +335,7 @@ end );
 #
 #_______________________________________________________________________
 InstallMethod( ShortenResolution,
-        "for homalg relations",
+        "for homalg complexes",
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsRightAcyclic ],
         
   function( q, d )
@@ -457,15 +457,12 @@ InstallMethod( ShortenResolution,
     
     l := Length( MorphismDegreesOfComplex( d ) );
     
-    if IsBound(M!.UpperBoundForProjectiveDimension) and
-       M!.UpperBoundForProjectiveDimension > l then
-        M!.UpperBoundForProjectiveDimension := l;
-    fi;
+    SetUpperBoundForProjectiveDimension( M, l );
     
     ResetFilterObj( M, AFiniteFreeResolution );
     SetAFiniteFreeResolution( M, d );
     
-    RelationsOfModule( M )!.FreeResolution := d;
+    SetAsStandardResolution( M, d );
     
     return d;
     

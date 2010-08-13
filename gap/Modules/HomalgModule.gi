@@ -1608,7 +1608,7 @@ InstallMethod( SetUpperBoundForProjectiveDimension,
     
     if not HasProjectiveDimension( M ) then	## otherwise don't do anything
         if ub_pd < 0 then
-            ## decrease the upper bound by |up_bd| *relative* to the left/right global dimension of the ring:
+            ## decrease the upper bound by |ub_pd| *relative* to the left/right global dimension of the ring:
             left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
             R := HomalgRing( M );
             if left and HasLeftGlobalDimension( R ) and IsInt( LeftGlobalDimension( R ) ) then
@@ -1627,7 +1627,7 @@ InstallMethod( SetUpperBoundForProjectiveDimension,
                 fi;
             fi;
         else
-            ## set the upper bound to up_bd:
+            ## set the upper bound to ub_pd:
             if IsBound( M!.UpperBoundForProjectiveDimension ) then
                 min := Minimum( M!.UpperBoundForProjectiveDimension, ub_pd );
             else
