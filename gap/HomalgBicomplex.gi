@@ -926,8 +926,12 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        if IsHomalgModule( opq ) then
-            Print( " module" );
+        if IsHomalgStaticObject( opq ) then
+            if IsBound( opq!.string ) then
+                Print( " ", opq!.string );
+            else
+                Print( " object" );
+            fi;
         else
             if IsComplexOfFinitelyPresentedObjectsRep( opq ) then
                 Print( " complex" );
@@ -946,8 +950,12 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        if IsHomalgModule( opq ) then
-            Print( " modules" );
+        if IsHomalgStaticObject( opq ) then
+            if IsBound( opq!.string_plural ) then
+                Print( " ", opq!.string_plural );
+            else
+                Print( " objects" );
+            fi;
         else
             if IsComplexOfFinitelyPresentedObjectsRep( opq ) then
                 Print( " complexes" );
