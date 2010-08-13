@@ -100,7 +100,7 @@ DeclareAttribute( "OperationOfFunctor",
 ##    [ "2", [ [ "covariant", "left exact" ] ] ],
 ##    [ "OnObjects", function( M, N ) ... end ],
 ##    [ "OnMorphisms", function( M_or_mor, N_or_mor ) ... end ],
-##    [ "ConstructMorphism", function( arg ) ... end ] ]
+##    [ "MorphismConstructor", function( arg ) ... end ] ]
 ##  ]]></Example></Item>
 ##        <Item> <C>InsertObjectInMultiFunctor</C>:
 ##      <Example><![CDATA[

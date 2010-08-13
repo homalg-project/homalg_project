@@ -8,4 +8,4 @@
 ##
 #############################################################################
 
-HOMALG_MODULES.ConstructMorphism := HomalgMap;
+HOMALG_MODULES.MorphismConstructor := HomalgMap;
