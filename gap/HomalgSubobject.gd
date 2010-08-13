@@ -10,6 +10,26 @@
 
 ####################################
 #
+# properties:
+#
+####################################
+
+##  <#GAPDoc Label="ConstructedAsAnIdeal">
+##  <ManSection>
+##    <Prop Arg="J" Name="ConstructedAsAnIdeal"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; subobject <A>J</A> was constructed as an ideal. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "ConstructedAsAnIdeal",
+        IsHomalgObject );
+
+####################################
+#
 # attributes:
 #
 ####################################
