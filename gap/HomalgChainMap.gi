@@ -986,7 +986,7 @@ end );
 InstallGlobalFunction( HomalgChainMap,
   function( arg )
     local nargs, morphism, left, source, target, degrees, degree,
-          chainmap, type, cm;
+          S, chainmap, type, cm;
     
     nargs := Length( arg );
     
@@ -1031,7 +1031,12 @@ InstallGlobalFunction( HomalgChainMap,
     
     if not IsBound( morphism ) then
         if IsHomalgMatrix( arg[1] ) then
-            morphism := HomalgMap( arg[1], CertainObject( source, degrees[1] ), CertainObject( target, degrees[1] + degree ) );
+            S := CertainObject( source, degrees[1] );
+            if IsBound( S!.MorphismConstructor ) then
+                morphism := S!.MorphismConstructor( arg[1], S, CertainObject( target, degrees[1] + degree ) );
+            else
+                Error( "didn't find the morphism constructor in the source object\n" );
+            fi;
         else
             Error( "the first argument must be a homalg matrix or a morphism\n" );
         fi;
