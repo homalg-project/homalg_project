@@ -136,7 +136,7 @@ DeclareOperation( "UnderlyingObject",
 DeclareOperation( "IsomorphismOfFiltration",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "UnlockOjbect",
+DeclareOperation( "UnlockObject",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "AssociatedSecondSpectralSequence",

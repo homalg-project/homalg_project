@@ -220,7 +220,7 @@ InstallMethod( UnlockObject,
 end );
 
 ##
-InstallMethod( UnlockOjbect,
+InstallMethod( UnlockObject,
         "for homalg filtrations",
         [ IsHomalgFiltration ],
         

@@ -34,6 +34,3 @@ DeclareOperation( "OnLessGenerators",
 DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "UnlockObject",
-        [ IsHomalgFiltration ] );
-
