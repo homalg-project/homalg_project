@@ -97,7 +97,7 @@ end );
 ##
 InstallMethod( Subobject,
         "constructor for homalg subobjects",
-        [ IsHomalgMap ],
+        [ IsHomalgStaticMorphism ],
         
   ImageSubobject );
 

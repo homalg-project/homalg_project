@@ -218,7 +218,7 @@ InstallMethod( CompleteChainMap,
   function( cm, d )
     local l, image_square;
     
-    if not IsHomalgMap( LowestDegreeMorphism( cm ) ) then
+    if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
     fi;
     
@@ -265,7 +265,7 @@ InstallMethod( Cokernel,
   function( cm )
     local T, l, cm_l, coker, cm_lp1, phi, alpha, beta;
     
-    if not IsHomalgMap( LowestDegreeMorphism( cm ) ) then
+    if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
     fi;
     
@@ -337,7 +337,7 @@ InstallMethod( Kernel,
   function( cm )
     local S, l, cm_l, ker, cm_lp1, phi, alpha, beta;
     
-    if not IsHomalgMap( LowestDegreeMorphism( cm ) ) then
+    if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
     fi;
     

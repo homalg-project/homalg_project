@@ -415,7 +415,7 @@ InstallValue( functor_AuslanderDual,
                 [ "name", "AuslanderDual" ],
                 [ "operation", "AuslanderDual" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "contravariant" ], [ IsHomalgModule ] ] ],
+                [ "1", [ [ "contravariant" ], [ IsHomalgStaticObject ] ] ],
                 [ "OnObjects", _Functor_AuslanderDual_OnObjects ]
                 )
         );

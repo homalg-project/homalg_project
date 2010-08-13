@@ -469,7 +469,7 @@ InstallMethod( IsAutomorphism,
         
   function( phi )
     
-    return IsHomalgSelfMap( phi ) and IsIsomorphism( phi );
+    return IsHomalgEndomorphism( phi ) and IsIsomorphism( phi );
     
 end );
 

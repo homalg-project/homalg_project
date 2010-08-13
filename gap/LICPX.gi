@@ -220,7 +220,7 @@ InstallMethod( \=,
     objects1 := ObjectsOfComplex( C1 );
     objects2 := ObjectsOfComplex( C2 );
     
-    if IsHomalgModule( objects1[1] ) then
+    if IsHomalgStaticObject( objects1[1] ) then
         b := ForAll( [ 1 .. l ], i -> IsIdenticalObj( objects1[i], objects2[i] ) );	## yes, identical.
         if not b then
             return false;
