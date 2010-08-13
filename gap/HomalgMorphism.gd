@@ -327,6 +327,9 @@ DeclareOperation( "Subobject",
 
 # basic operations:
 
+DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
+        [ IsHomalgMorphism ] );
+
 DeclareOperation( "AreComparableMorphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 

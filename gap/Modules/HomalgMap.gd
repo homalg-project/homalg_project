@@ -94,9 +94,6 @@ DeclareOperation( "*",
 
 # basic operations:
 
-DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
-        [ IsHomalgMap ] );
-
 DeclareOperation( "MatrixOfMap",
         [ IsHomalgMap, IsInt, IsInt ] );
 
