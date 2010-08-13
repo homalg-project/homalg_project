@@ -114,7 +114,7 @@ InstallMethod( DefectOfExactness,
         [ IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
-    local display, display_string, on_less_generators, left, degrees, l,
+    local display, display_string, SimplifyObject, left, degrees, l,
           morphisms, T, H, i, S;
     
     if HasIsATwoSequence( C ) and IsATwoSequence( C ) then
@@ -133,10 +133,16 @@ InstallMethod( DefectOfExactness,
         display_string := "";
     fi;
     
-    if IsBound( C!.HomologyOnLessGenerators ) and C!.HomologyOnLessGenerators = true then
-        on_less_generators := true;
+    if IsBound( C!.HomologyOnLessGenerators ) then
+        if C!.HomologyOnLessGenerators = true then
+            SimplifyObject := ValueGlobal( "OnLessGenerators" );
+        elif IsFunction( C!.HomologyOnLessGenerators ) then
+            SimplifyObject := C!.HomologyOnLessGenerators;
+        else
+            SimplifyObject := a -> a;
+        fi;
     else
-        on_less_generators := false;
+        SimplifyObject := a -> a;
     fi;
         
     ## never use the following:
@@ -148,9 +154,7 @@ InstallMethod( DefectOfExactness,
     fi;
     
     if IsBound( H ) then
-        if on_less_generators then
-            OnLessGenerators( H );
-        fi;
+        SimplifyObject( H );
         
         if display then
             for i in ObjectsOfComplex( H ) do
@@ -188,9 +192,7 @@ InstallMethod( DefectOfExactness,
         l := l - 1;
     fi;
     
-    if on_less_generators then
-        OnLessGenerators( T );
-    fi;
+    SimplifyObject( T );
     
     if display then
         Print( display_string );
@@ -206,9 +208,7 @@ InstallMethod( DefectOfExactness,
         Add( H, TheZeroMorphism( S, T ) );
         T := S;
         
-        if on_less_generators then
-            OnLessGenerators( T );
-        fi;
+        SimplifyObject( T );
         
         if display then
             Print( display_string );
@@ -220,9 +220,7 @@ InstallMethod( DefectOfExactness,
         S := Kernel( morphisms[l] );
         Add( H, TheZeroMorphism( S, T ) );
         
-        if on_less_generators then
-            OnLessGenerators( S );
-        fi;
+        SimplifyObject( S );
         
         if display then
             Print( display_string );
@@ -244,7 +242,7 @@ InstallMethod( DefectOfExactness,
         [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( C )
-    local display, display_string, on_less_generators, left, degrees, l,
+    local display, display_string, SimplifyObject, left, degrees, l,
           morphisms, S, H, i, T;
     
     if IsBound( C!.DisplayCohomology ) and C!.DisplayCohomology = true then
@@ -253,10 +251,16 @@ InstallMethod( DefectOfExactness,
         display := false;
     fi;
     
-    if IsBound( C!.CohomologyOnLessGenerators ) and C!.CohomologyOnLessGenerators = true then
-        on_less_generators := true;
+    if IsBound( C!.CohomologyOnLessGenerators ) then
+        if C!.CohomologyOnLessGenerators = true then
+            SimplifyObject := ValueGlobal( "OnLessGenerators" );
+        elif IsFunction( C!.CohomologyOnLessGenerators ) then
+            SimplifyObject := C!.CohomologyOnLessGenerators;
+        else
+            SimplifyObject := a -> a;
+        fi;
     else
-        on_less_generators := false;
+        SimplifyObject := a -> a;
     fi;
         
     if IsBound( C!.StringBeforeDisplay ) and IsStringRep( C!.StringBeforeDisplay ) then
@@ -274,9 +278,7 @@ InstallMethod( DefectOfExactness,
     fi;
     
     if IsBound( H ) then
-        if on_less_generators then
-            OnLessGenerators( H );
-        fi;
+        SimplifyObject( H );
         
         if display then
             for i in ObjectsOfComplex( H ) do
@@ -314,9 +316,7 @@ InstallMethod( DefectOfExactness,
         l := l - 1;
     fi;
     
-    if on_less_generators then
-        OnLessGenerators( S );
-    fi;
+    SimplifyObject( S );
     
     if display then
         Print( display_string );
@@ -332,9 +332,7 @@ InstallMethod( DefectOfExactness,
         Add( H, TheZeroMorphism( S, T ) );
         S := T;
         
-        if on_less_generators then
-            OnLessGenerators( S );
-        fi;
+        SimplifyObject( S );
         
         if display then
             Print( display_string );
@@ -346,9 +344,7 @@ InstallMethod( DefectOfExactness,
         T := Cokernel( morphisms[l] );
         Add( H, TheZeroMorphism( S, T ) );
         
-        if on_less_generators then
-            OnLessGenerators( T );
-        fi;
+        SimplifyObject( T );
         
         if display then
             Print( display_string );
