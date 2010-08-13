@@ -162,7 +162,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     if HasIsZero( M ) and HasIsZero( N ) then
         if IsZero( M ) and IsZero( N ) then
             SetIsZero( sum, true );
-        else	## the converse is also true: trivial since we do not allow virtual modules
+        else	## the converse is also true: trivial since we do not allow virtual objects
             SetIsZero( sum, false );
         fi;
     fi;
@@ -216,25 +216,6 @@ InstallMethod( SetPropertiesOfDirectSum,
             SetIsReflexive( sum, true );
         else	## the converse is also true: Hom(-,R) commutes with finite direct sums
             SetIsReflexive( sum, false );
-        fi;
-    fi;
-    
-    ## IsProjective
-    if HasIsProjective( M ) and HasIsProjective( N ) then
-        if IsProjective( M ) and IsProjective( N ) then
-            SetIsProjective( sum, true );
-        else	## the converse is also true:
-                ## an argumentation valid for modules:
-                ## a direct summand of a projective module is projective
-                ## (sinse a projective module is a direct summand of a free)
-            SetIsProjective( sum, false );
-        fi;
-    fi;
-    
-    ## IsFree
-    if HasIsFree( M ) and HasIsFree( N ) then
-        if IsFree( M ) and IsFree( N ) then
-            SetIsFree( sum, true );
         fi;
     fi;
     

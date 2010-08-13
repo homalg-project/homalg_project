@@ -148,6 +148,47 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 InstallFunctor( Functor_DirectSum );
 
+##
+InstallMethod( SetPropertiesOfDirectSum,
+        "for a list, a homalg module, and four homalg module homomorphisms",
+        [ IsList, IsFinitelyPresentedModuleRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( M_N, sum, iotaM, iotaN, piM, piN )
+    local M, N;
+    
+    M := M_N[1];
+    N := M_N[2];
+    
+    ## properties of the direct sum module
+    
+    ## IsProjective
+    if HasIsProjective( M ) and HasIsProjective( N ) then
+        if IsProjective( M ) and IsProjective( N ) then
+            SetIsProjective( sum, true );
+        else	## the converse is also true:
+                ## an argumentation valid for modules:
+                ## a direct summand of a projective module is projective
+                ## (since a projective module is a direct summand of a free)
+            SetIsProjective( sum, false );
+        fi;
+    fi;
+    
+    ## IsFree
+    if HasIsFree( M ) and HasIsFree( N ) then
+        if IsFree( M ) and IsFree( N ) then
+            SetIsFree( sum, true );
+        fi;
+    fi;
+    
+    ## pass over to the method of Abelian categories
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # temporary
