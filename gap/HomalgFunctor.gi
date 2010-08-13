@@ -370,8 +370,8 @@ InstallMethod( FunctorObj,
                                           return true;
                                       else
                                           return IsIdenticalObj(
-                                                         GeneratorsOfModule( arg_old[1][j+p], arg_old[2][j] ),
-                                                         GeneratorsOfModule( arguments_of_functor[j+p], context_of_arguments[j] ) );
+                                                         PartOfPresentationRelevantForOutputOfFunctors( arg_old[1][j+p], arg_old[2][j] ),
+                                                         PartOfPresentationRelevantForOutputOfFunctors( arguments_of_functor[j+p], context_of_arguments[j] ) );
                                       fi;
                                     end ) then
                                 return obj;

@@ -240,6 +240,13 @@ InstallMethod( ListOfPositionsOfKnownSetsOfRelations,
 end );
 
 ##
+InstallMethod( PartOfPresentationRelevantForOutputOfFunctors,
+        "for homalg modules",
+        [ IsHomalgModule, IsInt ],
+        
+  GeneratorsOfModule );
+
+##
 InstallMethod( PositionOfTheDefaultSetOfRelations,
         "for homalg modules",
         [ IsHomalgModule ],

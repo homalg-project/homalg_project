@@ -363,6 +363,9 @@ DeclareAttribute( "CodegreeOfPurity",
 DeclareOperation( "PositionOfTheDefaultSetOfRelations",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
+        [ IsHomalgStaticObject, IsInt ] );
+
 DeclareOperation( "Depth",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );
 
