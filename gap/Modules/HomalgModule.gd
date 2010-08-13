@@ -320,9 +320,6 @@ DeclareOperation( "SetsOfRelations",
 DeclareOperation( "ListOfPositionsOfKnownSetsOfRelations",
         [ IsHomalgModule ] );
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "SetPositionOfTheDefaultSetOfRelations",
         [ IsHomalgModule, IsInt ] );
 

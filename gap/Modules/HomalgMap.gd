@@ -94,9 +94,6 @@ DeclareOperation( "*",
 
 # basic operations:
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgMap ] );	## provided to avoid branching in the code and always returns fail
-
 DeclareOperation( "PairOfPositionsOfTheDefaultSetOfRelations",
         [ IsHomalgMap ] );
 

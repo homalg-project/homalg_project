@@ -26,17 +26,6 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
-        "for homalg bicomplexes",
-        [ IsHomalgBicomplex ],
-        
-  function( B )
-    
-    return fail;
-    
-end );
-
-##
 InstallMethod( BasisOfModule,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],

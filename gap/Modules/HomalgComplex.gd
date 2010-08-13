@@ -24,9 +24,6 @@ DeclareOperation( "*",
 
 # basic operations:
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgComplex ] );			## provided to avoid branching in the code and always returns fail
-
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgMatrix ] );
 

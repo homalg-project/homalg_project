@@ -233,6 +233,17 @@ InstallMethod( homalgResetFilters,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( ObjectDegreesOfBicomplex,
         "for homalg bicomplexes",
         [ IsHomalgBicomplex ],

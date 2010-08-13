@@ -139,6 +139,17 @@ InstallMethod( homalgResetFilters,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( ObjectDegreesOfBigradedObject,
         "for homalg bigraded objects",
         [ IsHomalgBigradedObject ],

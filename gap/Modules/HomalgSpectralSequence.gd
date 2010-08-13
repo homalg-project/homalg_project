@@ -16,6 +16,3 @@
 
 # basic operations:
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgSpectralSequence ] );			## provided to avoid branching in the code and always returns fail
-

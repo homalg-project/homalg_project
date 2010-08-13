@@ -26,17 +26,6 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
-        "for homalg maps",
-        [ IsHomalgChainMap ],
-        
-  function( M )
-    
-    return fail;
-    
-end );
-
-##
 InstallMethod( Add,
         "for homalg chain maps",
         [ IsHomalgChainMap, IsHomalgMatrix ],

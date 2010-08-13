@@ -16,6 +16,3 @@
 
 # basic operations:
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
-        [ IsHomalgBigradedObject ] );			## provided to avoid branching in the code and always returns fail
-

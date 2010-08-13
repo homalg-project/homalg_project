@@ -26,17 +26,6 @@ InstallMethod( HomalgRing,
 end );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
-        "for homalg spectral sequences",
-        [ IsHomalgSpectralSequence ],
-        
-  function( E )
-    
-    return fail;
-    
-end );
-
-##
 InstallMethod( OnLessGenerators,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],

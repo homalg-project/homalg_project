@@ -130,6 +130,17 @@ InstallMethod( homalgResetFilters,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+        "for homalg maps",
+        [ IsHomalgChainMap ],
+        
+  function( M )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( SourceOfSpecialChainMap,
         "for homalg image square chain maps",
         [ IsHomalgChainMap and IsImageSquare ],
