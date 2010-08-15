@@ -116,3 +116,4 @@ ReadPackage( "homalg", "gap/Modules/LIMAP.gd" );
 ReadPackage( "homalg", "gap/Modules/LIREL.gd" );
 ReadPackage( "homalg", "gap/Modules/LIMOD.gd" );
 ReadPackage( "homalg", "gap/Modules/LIHOM.gd" );
+ReadPackage( "homalg", "gap/Modules/LICPX.gd" );
