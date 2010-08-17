@@ -1,4 +1,4 @@
-LoadPackage( "Sheaves" );
+LoadPackage( "GradeModules" );
 
 ##
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a00,a01,a02,a03,a04,a10,a11,a12,a13,a14";
