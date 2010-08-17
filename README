@@ -1,15 +1,15 @@
-    README file for the `Sheaves' GAP4 package
+    README file for the `GradedModules' GAP4 package
         
 To get the newest version of this GAP 4 package download one of the
 archive files
-    Sheaves-x.x.tar.gz
-    Sheaves-x.x.zoo
-    Sheaves-x.x.tar.bz2
-    Sheaves-x.x.zip
+    GradedModules-x.x.tar.gz
+    GradedModules-x.x.zoo
+    GradedModules-x.x.tar.bz2
+    GradedModules-x.x.zip
 and unpack it using 
-    gunzip Sheaves-x.x.tar.gz; tar xvf Sheaves-x.x.tar
+    gunzip GradedModules-x.x.tar.gz; tar xvf GradedModules-x.x.tar
 respectively
-    unzoo -x Sheaves-x.x.zoo
+    unzoo -x GradedModules-x.x.zoo
 and so on.
 
 (Note that if you use a browser like `netscape' for downloading the
@@ -18,13 +18,13 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `Sheaves'.
+of your GAP 4 installation. It creates a subdirectory called `GradedModules'.
 
 This completes the installation of the package.
 
 Testing the package is possible by invoking
 
-ReadPackage( "Sheaves", "maketest.g" );
+ReadPackage( "GradedModules", "maketest.g" );
 
 from within GAP.
 

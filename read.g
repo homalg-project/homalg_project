@@ -1,64 +1,39 @@
 #############################################################################
 ##
-##  read.g                Sheaves package                    Mohamed Barakat
+##  read.g                GradedModules package              Mohamed Barakat
+##                                                    Markus Lange-Hegermann
 ##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen
 ##
-##  Reading the implementation part of the Sheaves package.
+##  Reading the implementation part of the GradedModules package.
 ##
 #############################################################################
 
 ##
-ReadPackage( "Sheaves", "gap/Modules/RingMaps.gi" );
+ReadPackage( "GradedModules", "gap/RingMaps.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Modules/Modules.gi" );
+ReadPackage( "GradedModules", "gap/Modules.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Modules/Relative.gi" );
+ReadPackage( "GradedModules", "gap/Relative.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Modules/Tate.gi" );
+ReadPackage( "GradedModules", "gap/Tate.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/LinearSystems.gi" );
+ReadPackage( "GradedModules", "gap/Tools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Sheaves.gi" );
+ReadPackage( "GradedModules", "gap/SingularTools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Schemes.gi" );
+ReadPackage( "GradedModules", "gap/Macaulay2Tools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/MorphismsOfSchemes.gi" );
+ReadPackage( "GradedModules", "gap/MAGMATools.gi" );
 
 ##
-ReadPackage( "Sheaves", "gap/Curves.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/Tate.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/Modules/Tools.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/Modules/SingularTools.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/Modules/Macaulay2Tools.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/Modules/MAGMATools.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/Modules/MapleHomalgTools.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/LILIN.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/LISHV.gi" );
-
-##
-ReadPackage( "Sheaves", "gap/LISCM.gi" );
+ReadPackage( "GradedModules", "gap/MapleHomalgTools.gi" );
 

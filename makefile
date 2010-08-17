@@ -4,8 +4,8 @@ doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g VERSION \
-		doc/Sheaves.bib doc/*.xml \
-		gap/*.gd gap/*.gi gap/Modules/*.gd gap/Modules/*.gi examples/*.g
+		doc/GradedModules.bib doc/*.xml \
+		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
 
 clean:
@@ -15,10 +15,10 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/Sheaves.tar.gz --exclude ".DS_Store" --exclude "*~" Sheaves/doc/*.* Sheaves/doc/clean Sheaves/gap/*.{gi,gd} Sheaves/gap/Modules/*.{gi,gd} Sheaves/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Sheaves/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/GradedModules.tar.gz --exclude ".DS_Store" --exclude "*~" GradedModules/doc/*.* GradedModules/doc/clean GradedModules/gap/*.{gi,gd} GradedModules/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} GradedModules/examples/*.g)
 
 WEBPOS=public_html
-WEBPOS_FINAL=~/Sites/homalg-project/Sheaves
+WEBPOS_FINAL=~/Sites/homalg-project/GradedModules
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
@@ -26,12 +26,12 @@ towww: archive
 	cat VERSION >>${WEBPOS}.version
 	echo '</mixer>' >>${WEBPOS}.version
 	cp PackageInfo.g ${WEBPOS}
-	cp README ${WEBPOS}/README.Sheaves
-	cp doc/manual.pdf ${WEBPOS}/Sheaves.pdf
+	cp README ${WEBPOS}/README.GradedModules
+	cp doc/manual.pdf ${WEBPOS}/GradedModules.pdf
 	cp doc/*.{css,html} ${WEBPOS}
 	rm -f ${WEBPOS}/*.tar.gz
-	mv ../tar/Sheaves.tar.gz ${WEBPOS}/Sheaves-`cat VERSION`.tar.gz
+	mv ../tar/GradedModules.tar.gz ${WEBPOS}/GradedModules-`cat VERSION`.tar.gz
 	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
-	ln -s Sheaves-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/Sheaves.tar.gz
+	ln -s GradedModules-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/GradedModules.tar.gz
 

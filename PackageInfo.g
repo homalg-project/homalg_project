@@ -1,6 +1,7 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `Sheaves'                    Mohamed Barakat
+##  PackageInfo.g for the package `GradedModules'              Mohamed Barakat
+##                                                      Markus Lange-Hegermann
 ##                                                                 Arne Lorenz
 ##                                                            Oleksandr Motsak
 ##  (created from Frank Lübeck's PackageInfo.g template file)
@@ -19,22 +20,22 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "Sheaves",
+PackageName := "GradedModules",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A homalg based Package for Sheaf Algorithms",
+Subtitle := "A homalg based Package for Graded Modules",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.08.09",
+Version := "2010.08.15",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "09/08/2010",
+Date := "15/08/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -44,7 +45,7 @@ Date := "09/08/2010",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/Sheaves-", ~.Version ),
+ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/GradedModules-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -134,10 +135,26 @@ Persons := [
     Institution   := "University of Kaiserslautern"
   ),
   rec(
+    LastName      := "Lange-Hegermann",
+    FirstNames    := "Markus",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "markus.lange.hegermann@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
+    PostalAddress := Concatenation( [
+                       "Markus Lange-Hegermann\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
     LastName      := "Lorenz",
     FirstNames    := "Arne",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "arne.lorenz@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~arne/",
     PostalAddress := Concatenation( [
@@ -153,7 +170,7 @@ Persons := [
     LastName      := "Motsak",
     FirstNames    := "Oleksandr",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "motsak@mathematik.uni-kl.de",
     WWWHome       := "http://www.mathematik.uni-kl.de/~motsak/",
     PostalAddress := Concatenation( [
@@ -198,9 +215,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/README.Sheaves",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/README.GradedModules",
 PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -217,7 +234,7 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
-PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/unreleased/sheaves",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/unreleased/gradedmodules",
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -248,10 +265,10 @@ PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/unreleased/sheave
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "Sheaves",
+  BookName  := "GradedModules",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/Sheaves.tar.gz",
+    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/GradedModules.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -260,7 +277,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "A homalg based Package for Sheaf Algorithms",
+  LongTitle := "A homalg based Package for Graded Modules",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -276,10 +293,10 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "RingsForHomalg", ">= 2010.02.17" ], [ "homalg", ">= 2010.08.09" ], [ "MatricesForHomalg", ">= 2010.06.07" ] ],
+  NeededOtherPackages := [ [ "homalg", ">= 2010.08.09" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
+  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "RingsForHomalg", ">= 2010.02.17" ], [ "MatricesForHomalg", ">= 2010.06.07" ] ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information
@@ -309,16 +326,18 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  Sheaves ", ~.Version, "\n",
+  "Loading  GradedModules ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
+  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+        " (", ~.Persons[4].WWWHome, ")\n",
   "Type:\n",
-  "  ?Sheaves:                   ## for the contents of the manual\n",
-  "  ?Sheaves:x                  ## for chapter/section/topic x\n",
+  "  ?GradedModules:                   ## for the contents of the manual\n",
+  "  ?GradedModules:x                  ## for chapter/section/topic x\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
@@ -334,7 +353,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["schemes", "sheaves", "tate resolution", "sheaf cohomology", "direct image sheaf"]
+Keywords := ["modules", "graded modules", "graduation", "multi-graded modules", "Tate resolution"]
 
 ));
 

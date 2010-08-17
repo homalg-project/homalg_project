@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  GradedModules.xml            GradedModules package documentation            Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+-->
+
+<Chapter Label="GradedModules">
+<Heading>GradedModules</Heading>
+
+<Section Label="GradedModules:Category">
+<Heading>GradedModules: Category and Representations</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Constructors">
+<Heading>GradedModules: Constructors</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Properties">
+<Heading>GradedModules: Properties</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Attributes">
+<Heading>GradedModules: Attributes</Heading>
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the sheaf -->
+
+</Section>
+
+<Section Label="GradedModules:LISHV">
+<Heading>&LISHV;: Logical Implications for GradedModules</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Operations">
+<Heading>GradedModules: Operations and Functions</Heading>
+
+</Section>
+<!-- ############################################################ -->
+
+</Chapter>

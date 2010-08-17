@@ -8,37 +8,27 @@ LoadPackage( "GAPDoc" );
 
 SetGapDocLaTeXOptions( "utf8" );
 
-bib := ParseBibFiles( "doc/Sheaves.bib" );
-WriteBibXMLextFile( "doc/SheavesBib.xml", bib );
+bib := ParseBibFiles( "doc/GradedModules.bib" );
+WriteBibXMLextFile( "doc/GradedModulesBib.xml", bib );
 
 list := [
-         "../gap/Modules/RingMaps.gd",
-         "../gap/Modules/RingMaps.gi",
-         "../gap/Modules/Modules.gd",
-         "../gap/Modules/Modules.gi",
-         "../gap/Modules/Tate.gd",
-         "../gap/Modules/Tate.gi",
-         "../gap/Modules/Relative.gd",
-         "../gap/Modules/Relative.gi",
-         "../gap/LinearSystems.gd",
-         "../gap/LinearSystems.gi",
-         "../gap/Sheaves.gd",
-         "../gap/Sheaves.gi",
-         "../gap/Schemes.gd",
-         "../gap/Schemes.gi",
-         "../gap/MorphismsOfSchemes.gd",
-         "../gap/MorphismsOfSchemes.gi",
-         "../gap/Curves.gd",
-         "../gap/Curves.gi",
-         "../gap/Modules/Tools.gd",
-         "../gap/Modules/Tools.gi",
+         "../gap/RingMaps.gd",
+         "../gap/RingMaps.gi",
+         "../gap/Modules.gd",
+         "../gap/Modules.gi",
+         "../gap/Tate.gd",
+         "../gap/Tate.gi",
+         "../gap/Relative.gd",
+         "../gap/Relative.gi",
+         "../gap/Tools.gd",
+         "../gap/Tools.gi",
          "../examples/DE-2.2.g",
          "../examples/DE-Code.g",
          ];
 
-MakeGAPDocDoc( "doc", "SheavesForHomalg", list, "SheavesForHomalg" );
+MakeGAPDocDoc( "doc", "GradedModulesForHomalg", list, "GradedModulesForHomalg" );
 
-GAPDocManualLab("Sheaves");
+GAPDocManualLab("GradedModules");
 
 quit;
 
