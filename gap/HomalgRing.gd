@@ -1204,7 +1204,7 @@ DeclareOperation( "Indeterminate",
 DeclareOperation( "Indeterminates",
         [ IsHomalgRing ] );
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
+DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsRingElement ] );
 
 DeclareOperation( "IsUnit",

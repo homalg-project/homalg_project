@@ -254,8 +254,8 @@ InstallMethod( Indeterminate,
     
 end );
 
-##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+## provided to avoid branching in the code and always returns fail
+InstallMethod( PositionOfTheDefaultPresentation,
         "for ring elements",
         [ IsRingElement ],
         
