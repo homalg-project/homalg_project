@@ -188,7 +188,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "Sheaves" );
+LoadPackage( "GradedModules" );
 
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
