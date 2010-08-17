@@ -69,6 +69,7 @@
 <#Include SYSTEM "Modules.xml">
 <#Include SYSTEM "Tate.xml">
 <#Include SYSTEM "GradedModules.xml">
+<#Include SYSTEM "examples.xml">
 <#Include SYSTEM "Tools.xml">
 </Body>
 

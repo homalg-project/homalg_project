@@ -24,7 +24,7 @@
 ##  --------------
 ##  degree:  0 1 2
 ##  gap> m := SubmoduleGeneratedByHomogeneousPart( 2, M );
-##  <A graded right module on 4 generators satisfying 8 relations>
+##  <A graded torsion right submodule given by 4 generators>
 ##  gap> d2 := Resolution( m );
 ##  <A right acyclic complex containing 2 morphisms of right modules at degrees
 ##  [ 0 .. 2 ]>

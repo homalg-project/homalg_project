@@ -28,7 +28,7 @@
 ##  degree:  0 1 2 3
 ##  gap> ## we are still below the Castelnuovo-Mumford regularity, which is 3:
 ##  gap> M2 := SubmoduleGeneratedByHomogeneousPart( 2, M );
-##  <A graded right module on 3 generators satisfying 9 relations>
+##  <A graded torsion right submodule given by 3 generators>
 ##  gap> d2 := Resolution( M2 );
 ##  <A right acyclic complex containing 3 morphisms of right modules at degrees
 ##  [ 0 .. 3 ]>
