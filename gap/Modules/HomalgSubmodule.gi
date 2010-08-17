@@ -52,13 +52,13 @@ InstallMethod( SetsOfRelations,
 end );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,
+InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
         
   function( M )
     
-    return PositionOfTheDefaultSetOfRelations( UnderlyingObject( M ) );
+    return PositionOfTheDefaultPresentation( UnderlyingObject( M ) );
     
 end );
 

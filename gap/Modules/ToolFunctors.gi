@@ -238,7 +238,7 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps,	### defines: Coproduct
     SpS := Source( phi ) + Source( psi );
     
     ## get the position of the set of relations immediately after creating SpS;
-    p := Genesis( SpS ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    p := Genesis( SpS ).("PositionOfTheDefaultPresentationOfTheOutput");
     
     phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
     
@@ -283,7 +283,7 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnMaps,	### defines: ProductMorp
     TpT := Range( phi ) + Range( psi );
     
     ## get the position of the set of relations immediately after creating TpT;
-    p := Genesis( TpT ).("PositionOfTheDefaultSetOfRelationsOfTheOutput");
+    p := Genesis( TpT ).("PositionOfTheDefaultPresentationOfTheOutput");
     
     phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
     

@@ -360,7 +360,7 @@ DeclareAttribute( "CodegreeOfPurity",
 
 # basic operations:
 
-DeclareOperation( "PositionOfTheDefaultSetOfRelations",
+DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",

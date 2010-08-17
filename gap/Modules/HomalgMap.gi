@@ -146,8 +146,8 @@ InstallMethod( DegreeOfMorphism,
     
 end );
 
-##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+## provided to avoid branching in the code and always returns fail
+InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
@@ -165,8 +165,8 @@ InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
   function( phi )
     local pos_s, pos_t;
     
-    pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
-    pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
+    pos_s := PositionOfTheDefaultPresentation( Source( phi ) );
+    pos_t := PositionOfTheDefaultPresentation( Range( phi ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         return [ pos_s, pos_t ];
@@ -185,13 +185,13 @@ InstallMethod( MatrixOfMap,		## FIXME: make this optimal by finding shortest way
     local pos_s, pos_t, index_pair, l, dist, min, pos, matrix;
     
     if _pos_s < 1 then
-        pos_s := PositionOfTheDefaultSetOfRelations( Source( phi ) );
+        pos_s := PositionOfTheDefaultPresentation( Source( phi ) );
     else
         pos_s := _pos_s;
     fi;
     
     if _pos_t < 1 then
-        pos_t := PositionOfTheDefaultSetOfRelations( Range( phi ) );
+        pos_t := PositionOfTheDefaultPresentation( Range( phi ) );
     else
         pos_t := _pos_t;
     fi;
@@ -945,7 +945,7 @@ InstallGlobalFunction( HomalgMap,
     if nargs > 1 then
         if IsHomalgModule( arg[2] ) then
             source := arg[2];
-            pos_s := PositionOfTheDefaultSetOfRelations( source );
+            pos_s := PositionOfTheDefaultPresentation( source );
         elif arg[2] = "free" and nargs > 2 and IsHomalgModule( arg[3] )
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
             if IsHomalgMatrix( arg[1] ) then
@@ -966,7 +966,7 @@ InstallGlobalFunction( HomalgMap,
                     source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
                 fi;
             fi;
-            pos_s := PositionOfTheDefaultSetOfRelations( source );
+            pos_s := PositionOfTheDefaultPresentation( source );
         elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then
             source := "ring";
         elif IsList( arg[2] ) and IsHomalgModule( arg[2][1] ) and IsPosInt( arg[2][2] ) then
@@ -1060,7 +1060,7 @@ InstallGlobalFunction( HomalgMap,
     if nargs > 2 then
         if IsHomalgModule( arg[3] ) then
             target := arg[3];
-            pos_t := PositionOfTheDefaultSetOfRelations( target );
+            pos_t := PositionOfTheDefaultPresentation( target );
         elif arg[3] = "free" and IsHomalgModule ( source )
           and ( IsHomalgMatrix( arg[1] ) or IsHomalgRelations( arg[1] ) ) then
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) then
@@ -1078,7 +1078,7 @@ InstallGlobalFunction( HomalgMap,
                 fi;
                 target := HomalgFreeRightModule( nr_rows, HomalgRing( arg[1] ) );
             fi;
-            pos_t := PositionOfTheDefaultSetOfRelations( target );
+            pos_t := PositionOfTheDefaultPresentation( target );
         elif IsHomalgRing( arg[3] ) then
             if source = "ring" then
                 source := HomalgFreeLeftModule( 1, arg[2] );
@@ -1086,11 +1086,11 @@ InstallGlobalFunction( HomalgMap,
                     Error( "the source and target modules must be defined over the same ring\n" );
                 fi;
                 target := source;	## we get an endomorphism
-                pos_s := PositionOfTheDefaultSetOfRelations( source );
+                pos_s := PositionOfTheDefaultPresentation( source );
                 pos_t := pos_s;
             else
                 target := HomalgFreeLeftModule( 1, arg[3] );
-                pos_t := PositionOfTheDefaultSetOfRelations( target );
+                pos_t := PositionOfTheDefaultPresentation( target );
             fi;
         elif IsList( arg[3] ) and IsHomalgModule( arg[3][1] ) and IsPosInt( arg[3][2] ) then
             target := arg[3][1];
@@ -1102,7 +1102,7 @@ InstallGlobalFunction( HomalgMap,
     elif source = "ring" then
         source := HomalgFreeLeftModule( 1, arg[2] );
         target := source;	## we get an endomorphism
-        pos_s := PositionOfTheDefaultSetOfRelations( source );
+        pos_s := PositionOfTheDefaultPresentation( source );
         pos_t := pos_s;
     else
         pos_t := pos_s;

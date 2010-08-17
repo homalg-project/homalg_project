@@ -72,7 +72,7 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
           "TransitionMatrices",
-          "PositionOfTheDefaultSetOfRelations" ] );
+          "PositionOfTheDefaultPresentation" ] );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -247,14 +247,14 @@ InstallMethod( PartOfPresentationRelevantForOutputOfFunctors,
   GeneratorsOfModule );
 
 ##
-InstallMethod( PositionOfTheDefaultSetOfRelations,
+InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg modules",
         [ IsHomalgModule ],
         
   function( M )
     
-    if IsBound(M!.PositionOfTheDefaultSetOfRelations) then
-        return M!.PositionOfTheDefaultSetOfRelations;
+    if IsBound(M!.PositionOfTheDefaultPresentation) then
+        return M!.PositionOfTheDefaultPresentation;
     fi;
     
     return fail;
@@ -262,13 +262,13 @@ InstallMethod( PositionOfTheDefaultSetOfRelations,
 end );
 
 ##
-InstallMethod( SetPositionOfTheDefaultSetOfRelations,
+InstallMethod( SetPositionOfTheDefaultPresentation,
         "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
         
   function( M, pos )
     
-    M!.PositionOfTheDefaultSetOfRelations := pos;
+    M!.PositionOfTheDefaultPresentation := pos;
     
 end );
 
@@ -291,7 +291,7 @@ InstallMethod( SetAsOriginalPresentation,
   function( M )
     local pos;
     
-    pos := PositionOfTheDefaultSetOfRelations( M );
+    pos := PositionOfTheDefaultPresentation( M );
     
     M!.PositionOfOriginalPresentation := pos;
     
@@ -307,7 +307,7 @@ InstallMethod( OnOriginalPresentation,
     
     if IsBound( M!.PositionOfOriginalPresentation ) then
         pos := M!.PositionOfOriginalPresentation;
-        SetPositionOfTheDefaultSetOfRelations( M, pos );
+        SetPositionOfTheDefaultPresentation( M, pos );
     fi;
     
     return M;
@@ -322,7 +322,7 @@ InstallMethod( SetAsPreferredPresentation,
   function( M )
     local pos;
     
-    pos := PositionOfTheDefaultSetOfRelations( M );
+    pos := PositionOfTheDefaultPresentation( M );
     
     M!.PositionOfPreferredPresentation := pos;
     
@@ -338,7 +338,7 @@ InstallMethod( OnPreferredPresentation,
     
     if IsBound( M!.PositionOfPreferredPresentation ) then
         pos := M!.PositionOfPreferredPresentation;
-        SetPositionOfTheDefaultSetOfRelations( M, pos );
+        SetPositionOfTheDefaultPresentation( M, pos );
     fi;
     
     return M;
@@ -355,7 +355,7 @@ InstallMethod( OnLastStoredPresentation,
     
     pos := PositionOfLastStoredSetOfRelations( M );
     
-    SetPositionOfTheDefaultSetOfRelations( M, pos );
+    SetPositionOfTheDefaultPresentation( M, pos );
     
     return M;
     
@@ -409,7 +409,7 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
         
   function( M )
     
-    return RelationsOfModule( M, PositionOfTheDefaultSetOfRelations( M ) );
+    return RelationsOfModule( M, PositionOfTheDefaultPresentation( M ) );
     
 end );
 
@@ -775,11 +775,11 @@ InstallMethod( TransitionMatrix,
     fi;
     
     if pres_a < 1 then
-        pres_a := PositionOfTheDefaultSetOfRelations( M );
+        pres_a := PositionOfTheDefaultPresentation( M );
     fi;
     
     if pres_b < 1 then
-        pres_b := PositionOfTheDefaultSetOfRelations( M );
+        pres_b := PositionOfTheDefaultPresentation( M );
     fi;
     
     sets_of_generators := M!.SetsOfGenerators;
@@ -845,9 +845,9 @@ InstallMethod( LockObjectOnCertainPresentation,
   function( M, p )
     
     ## first save the current setting
-    M!.LockObjectOnCertainPresentation := PositionOfTheDefaultSetOfRelations( M );
+    M!.LockObjectOnCertainPresentation := PositionOfTheDefaultPresentation( M );
     
-    SetPositionOfTheDefaultSetOfRelations( M, p );
+    SetPositionOfTheDefaultPresentation( M, p );
     
 end );
 
@@ -858,7 +858,7 @@ InstallMethod( LockObjectOnCertainPresentation,
         
   function( M )
     
-    LockObjectOnCertainPresentation( M, PositionOfTheDefaultSetOfRelations( M ) );
+    LockObjectOnCertainPresentation( M, PositionOfTheDefaultPresentation( M ) );
     
 end );
 
@@ -871,7 +871,7 @@ InstallMethod( UnlockObject,
     
     ## first restore the saved settings
     if IsBound( M!.LockObjectOnCertainPresentation ) then
-        SetPositionOfTheDefaultSetOfRelations( M, M!.LockObjectOnCertainPresentation );
+        SetPositionOfTheDefaultPresentation( M, M!.LockObjectOnCertainPresentation );
         Unbind( M!.LockObjectOnCertainPresentation );
     fi;
     
@@ -904,7 +904,7 @@ InstallMethod( AddANewPresentation,
     rels := SetsOfRelations( M );
     gens := SetsOfGenerators( M );
     
-    d := PositionOfTheDefaultSetOfRelations( M );
+    d := PositionOfTheDefaultPresentation( M );
     
     l := PositionOfLastStoredSetOfRelations( rels );
     
@@ -961,7 +961,7 @@ InstallMethod( AddANewPresentation,
     if IsLockedObject( M ) then
         M!.LockObjectOnCertainPresentation := l+1;
     else
-        SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+        SetPositionOfTheDefaultPresentation( M, l+1 );
     fi;
     
     if NrGenerators( gen ) = 0 then
@@ -999,7 +999,7 @@ InstallMethod( AddANewPresentation,
             if IsLockedObject( M ) then
                 M!.LockObjectOnCertainPresentation := d;
             else
-                SetPositionOfTheDefaultSetOfRelations( M, d );
+                SetPositionOfTheDefaultPresentation( M, d );
             fi;
             
             return M;
@@ -1012,7 +1012,7 @@ InstallMethod( AddANewPresentation,
             if IsLockedObject( M ) then
                 M!.LockObjectOnCertainPresentation := d;
             else
-                SetPositionOfTheDefaultSetOfRelations( M, d );
+                SetPositionOfTheDefaultPresentation( M, d );
             fi;
             
             return M;
@@ -1021,7 +1021,7 @@ InstallMethod( AddANewPresentation,
     
     gens := SetsOfGenerators( M );
     
-    d := PositionOfTheDefaultSetOfRelations( M );
+    d := PositionOfTheDefaultPresentation( M );
     
     l := PositionOfLastStoredSetOfRelations( rels );
     
@@ -1077,7 +1077,7 @@ InstallMethod( AddANewPresentation,
     if IsLockedObject( M ) then
         M!.LockObjectOnCertainPresentation := l+1;
     else
-        SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+        SetPositionOfTheDefaultPresentation( M, l+1 );
     fi;
     
     if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
@@ -1113,7 +1113,7 @@ InstallMethod( AddANewPresentation,
     rels := SetsOfRelations( M );
     gens := SetsOfGenerators( M );
     
-    d := PositionOfTheDefaultSetOfRelations( M );
+    d := PositionOfTheDefaultPresentation( M );
     
     l := PositionOfLastStoredSetOfRelations( rels );
     
@@ -1172,7 +1172,7 @@ InstallMethod( AddANewPresentation,
     if IsLockedObject( M ) then
         M!.LockObjectOnCertainPresentation := l+1;
     else
-        SetPositionOfTheDefaultSetOfRelations( M, l+1 );
+        SetPositionOfTheDefaultPresentation( M, l+1 );
     fi;
     
     if NrGenerators( rel ) = 0 then
@@ -1494,7 +1494,7 @@ end );
 ##  <A set containing 3 sets of relations of a homalg module>
 ##  gap> M;
 ##  <A rank 1 left module presented by 1 relation for 2 generators>
-##  gap> SetPositionOfTheDefaultSetOfRelations( M, 1 );
+##  gap> SetPositionOfTheDefaultPresentation( M, 1 );
 ##  gap> M;
 ##  <A rank 1 left module presented by 2 relations for 3 generators>
 ##  ]]></Example>
@@ -1777,7 +1777,7 @@ InstallMethod( Presentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1834,7 +1834,7 @@ InstallMethod( Presentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1888,7 +1888,7 @@ InstallMethod( Presentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1945,7 +1945,7 @@ InstallMethod( Presentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -2000,7 +2000,7 @@ InstallMethod( LeftPresentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -2050,7 +2050,7 @@ InstallMethod( LeftPresentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(
@@ -2142,7 +2142,7 @@ InstallMethod( RightPresentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -2192,7 +2192,7 @@ InstallMethod( RightPresentation,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
               TransitionMatrices := rec( ),
-              PositionOfTheDefaultSetOfRelations := 1 );
+              PositionOfTheDefaultPresentation := 1 );
     
     ## Objectify:
     ObjectifyWithAttributes(

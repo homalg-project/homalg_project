@@ -118,8 +118,8 @@ InstallMethod( homalgResetFilters,
     
 end );
 
-##
-InstallMethod( PositionOfTheDefaultSetOfRelations,	## provided to avoid branching in the code and always returns fail
+## provided to avoid branching in the code and always returns fail
+InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],
         

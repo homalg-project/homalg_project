@@ -317,7 +317,7 @@ DeclareOperation( "SetsOfRelations",
 DeclareOperation( "ListOfPositionsOfKnownSetsOfRelations",
         [ IsHomalgModule ] );
 
-DeclareOperation( "SetPositionOfTheDefaultSetOfRelations",
+DeclareOperation( "SetPositionOfTheDefaultPresentation",
         [ IsHomalgModule, IsInt ] );
 
 DeclareOperation( "PositionOfLastStoredSetOfRelations",
@@ -441,10 +441,10 @@ DeclareOperation( "ConstantTermOfHilbertPolynomial",
 ####################################
 
 DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
-        PositionOfTheDefaultSetOfRelations );
+        PositionOfTheDefaultPresentation );
 
 DeclareSynonym( "SetPositionOfTheDefaultSetOfGenerators",
-        SetPositionOfTheDefaultSetOfRelations );
+        SetPositionOfTheDefaultPresentation );
 
 DeclareSynonym( "EulerCharacteristicOfModule",
         RankOfObject );

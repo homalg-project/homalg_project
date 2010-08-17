@@ -353,7 +353,7 @@ InstallMethod( FunctorObj,
             p := 0;
         fi;
         l := Length( arguments_of_functor );
-        context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultSetOfRelations );
+        context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultPresentation );
         for i in Difference( [ 1 .. a ], deleted ) do
             obj := ElmWPObj( weak_pointers, i );
             if obj <> fail then
@@ -469,8 +469,8 @@ InstallMethod( FunctorObj,
         arg_all.("arguments_of_functor") := arguments_of_functor;
         arg_all.("context_of_arguments") := context_of_arguments;
         arg_all.("Functor") := Functor;
-        arg_all.("PositionOfTheDefaultSetOfRelationsOfTheOutput")
-          := PositionOfTheDefaultSetOfRelations( obj );
+        arg_all.("PositionOfTheDefaultPresentationOfTheOutput")
+          := PositionOfTheDefaultPresentation( obj );
         
         SetGenesis( obj, arg_all );
         
