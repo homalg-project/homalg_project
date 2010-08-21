@@ -1043,6 +1043,114 @@ InstallFunctor( functor_Cokernel );
 InstallFunctorOnObjects( functor_ImageObject );
 
 ##
+## Kernel( phi ) and KernelEmb( phi )
+##
+
+##  <#GAPDoc Label="Kernel:map">
+##  <ManSection>
+##    <Oper Arg="phi" Name="Kernel" Label="for maps"/>
+##    <Description>
+##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-torsion left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -3, -6, \
+##  > 0, 1,  6, 11, \
+##  > 1, 0, -3, -6  \
+##  > ]", 3, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> ker := Kernel( phi );
+##  <A cyclic left module presented by yet unknown relations for a cyclic generato\
+##  r>
+##  gap> Display( ker );
+##  Z/< -3 >
+##  gap> ByASmallerPresentation( last );
+##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  gap> Display( ker );
+##  Z/< 3 >
+##  gap> iota := KernelEmb( phi );
+##  <A monomorphism of left modules>
+##  gap> Display( iota );
+##  [ [  0,  2,  4 ] ]
+##  
+##  the map is currently represented by the above 1 x 3 matrix
+##  gap> DefectOfExactness( iota, phi );
+##  <A zero left module>
+##  gap> ByASmallerPresentation( iota );
+##  <A monomorphism of left modules>
+##  gap> Display( iota );
+##  [ [  2,  0 ] ]
+##  
+##  the map is currently represented by the above 1 x 2 matrix
+##  gap> PostInverse( iota );
+##  false
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##
+## DefectOfExactness( cpx_post_pre )
+##
+
+##  <#GAPDoc Label="DefectOfExactness">
+##  <ManSection>
+##    <Oper Arg="phi, psi" Name="DefectOfExactness"/>
+##    <Description>
+##      We follow the associative convention for applying maps.
+##      For left modules <A>phi</A> is applied first and from the right.
+##      For right modules <A>psi</A> is applied first and from the left.
+##      <P/>
+##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;
+##  gap> M := LeftPresentation( M );
+##  <A non-torsion left module presented by 2 relations for 4 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := LeftPresentation( N );
+##  <A non-torsion left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 3,  3,  3, \
+##  > 0, 3, 10, 17, \
+##  > 1, 3,  3,  3, \
+##  > 0, 0,  0,  0  \
+##  > ]", 4, 4, ZZ );;
+##  gap> phi := HomalgMap( mat, M, N );;
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> iota := KernelEmb( phi );
+##  <A monomorphism of left modules>
+##  gap> DefectOfExactness( iota, phi );
+##  <A zero left module>
+##  gap> hom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );
+##  <A homomorphism of right modules>
+##  gap> hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );
+##  <A homomorphism of right modules>
+##  gap> DefectOfExactness( hom_iota, hom_phi );
+##  <A cyclic right module on a cyclic generator satisfying yet unknown relations>
+##  gap> ByASmallerPresentation( last );
+##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
+##  gap> Display( last );
+##  Z/< 2 >
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##
 ## Hom( M, N )
 ##
 
