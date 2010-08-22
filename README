@@ -1,15 +1,15 @@
-    README file for the `homalg' GAP4 package
+    README file for the `Modules' GAP4 package
         
 To get the newest version of this GAP 4 package download one of the
 archive files
-    homalg-x.x.tar.gz
-    homalg-x.x.zoo
-    homalg-x.x.tar.bz2
-    homalg-x.x.zip
+    Modules-x.x.tar.gz
+    Modules-x.x.zoo
+    Modules-x.x.tar.bz2
+    Modules-x.x.zip
 and unpack it using 
-    gunzip homalg-x.x.tar.gz; tar xvf homalg-x.x.tar
+    gunzip Modules-x.x.tar.gz; tar xvf Modules-x.x.tar
 respectively
-    unzoo -x homalg-x.x.zoo
+    unzoo -x Modules-x.x.zoo
 and so on.
 
 (Note that if you use a browser like `netscape' for downloading the
@@ -18,13 +18,13 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `homalg'.
+of your GAP 4 installation. It creates a subdirectory called `Modules'.
 
 This completes the installation of the package.
 
 Testing the package is possible by invoking
 
-ReadPackage( "homalg", "maketest.g" );
+ReadPackage( "Modules", "maketest.g" );
 
 from within GAP.
 

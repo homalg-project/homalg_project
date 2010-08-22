@@ -16,13 +16,8 @@
 
 </Section>
 
-<Section Label="Maps:LIMOR">
-<Heading>&LIMOR;: Logical Implications for Morphisms</Heading>
-
-</Section>
-
-<Section Label="Complexes:LICPX">
-<Heading>&LICPX;: Logical Implications for Complexes</Heading>
+<Section Label="Maps:LIHOM">
+<Heading>&LIMOR;: Logical Implications for Homomorphisms of Modules</Heading>
 
 </Section>
 

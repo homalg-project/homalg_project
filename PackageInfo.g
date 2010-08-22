@@ -1,6 +1,6 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `homalg'                    Mohamed Barakat
+##  PackageInfo.g for the package `Modules'                   Mohamed Barakat
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
 
@@ -17,22 +17,22 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "homalg",
+PackageName := "Modules",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A Meta-Package for Homological Algebra",
+Subtitle := "A homalg based Package for the Abelian Category of Finitely Presented Modules",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.08.16",
+Version := "2010.08.17",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "16/08/2010",
+Date := "17/08/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -42,7 +42,7 @@ Date := "16/08/2010",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/homalg-", ~.Version ),
+ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/Modules-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -131,6 +131,22 @@ Persons := [
     Place         := "Kaiserslautern",
     Institution   := "University of Kaiserslautern"
   ),
+  rec(
+    LastName      := "Lange-Hegermann",
+    FirstNames    := "Markus",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "markus.lange.hegermann@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
+    PostalAddress := Concatenation( [
+                       "Markus Lange-Hegermann\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
 # provide such a record for each author and/or maintainer ...
   
 ],
@@ -165,9 +181,9 @@ Status := "deposited",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/README.homalg",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/README.Modules",
 PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -185,8 +201,8 @@ PackageInfoURL :=
 #   package. It has little functionality except for being a package",
 #
 AbstractHTML := 
-  "The <span class=\"pkgname\">homalg</span> package provides ring independent homological algebra functionality",
-PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package",
+  "The <span class=\"pkgname\">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/Modules-package",
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -217,10 +233,10 @@ PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/hom
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "homalg",
+  BookName  := "Modules",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/homalg.tar.gz",
+    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/Modules.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -245,7 +261,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2010.08.15" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2010.08.15" ], [ "homalg", ">=2010.08.17" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
@@ -278,17 +294,16 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  homalg ", ~.Version, "\n",
+  "Loading  Modules ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
-#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-#        " (", ~.Persons[2].WWWHome, ")\n",
+  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+        " (", ~.Persons[2].WWWHome, ")\n",
 #  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
 #        " (", ~.Persons[3].WWWHome, ")\n",
   "Type:\n",
-  "  ?homalg:                   ## for the contents of the manual\n",
-  "  ?homalg:x                  ## for chapter/section/topic x\n",
-  "  ExamplesForHomalg();       ## for a guide to create a ring\n",
+  "  ?Modules:                   ## for the contents of the manual\n",
+  "  ?Modules:x                  ## for chapter/section/topic x\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
@@ -304,7 +319,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["homological", "filtration", "bicomplex", "spectral sequence", "Grothendieck", "functor", "ext", "tor"]
+Keywords := ["modules", "module homomorphisms", "functor", "ext", "tor"]
 
 ));
 

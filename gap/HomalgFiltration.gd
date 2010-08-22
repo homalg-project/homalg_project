@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  HomalgFiltration.gd         homalg package               Mohamed Barakat
+##  HomalgFiltration.gd         Modules package              Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Declaration stuff for a filtration.
 ##
@@ -10,135 +10,27 @@
 
 ####################################
 #
-# categories:
-#
-####################################
-
-# A new GAP-category:
-
-##  <#GAPDoc Label="IsHomalgFiltration">
-##  <ManSection>
-##    <Filt Type="Category" Arg="filt" Name="IsHomalgFiltration"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; category of &homalg; filtrations.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgFiltration",
-        IsAttributeStoringRep );
-
-## CAUTION: in the code the following two categories are the only ones for sets of generators,
-##          i.e. IsHomalgFiltration and not IsHomalgFiltrationOfLeftObject => IsHomalgFiltrationOfRightObject
-
-DeclareCategory( "IsHomalgFiltrationOfLeftObject",
-        IsHomalgFiltration );
-
-DeclareCategory( "IsHomalgFiltrationOfRightObject",
-        IsHomalgFiltration );
-
-DeclareCategory( "IsDescendingFiltration",
-        IsHomalgFiltration );
-
-DeclareCategory( "IsAscendingFiltration",
-        IsHomalgFiltration );
-
-####################################
-#
-# properties:
-#
-####################################
-
-DeclareProperty( "IsGradation",
-        IsHomalgFiltration );
-
-DeclareProperty( "IsFiltration",
-        IsHomalgFiltration );
-
-DeclareProperty( "IsPurityFiltration",
-        IsHomalgFiltration );
-
-####################################
-#
-# attributes:
-#
-####################################
-
-##  <#GAPDoc Label="SpectralSequence:filt">
-##  <ManSection>
-##    <Attr Arg="BC" Name="SpectralSequence" Label="for filtrations"/>
-##    <Returns>a &homalg; (co)homological spectral sequence</Returns>
-##    <Description>
-##      The spectral sequence used to construct the filtration (if any).
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "SpectralSequence",
-        IsHomalgFiltration );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################
 
-# constructors:
-
-DeclareGlobalFunction( "HomalgFiltration" );
-
-DeclareGlobalFunction( "HomalgDescendingFiltration" );
-
-DeclareGlobalFunction( "HomalgAscendingFiltration" );
-
 # basic operations:
 
-DeclareOperation( "DegreesOfFiltration",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "LowestDegree",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "HighestDegree",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "CertainMorphism",
+DeclareOperation( "MatrixOfFiltration",
         [ IsHomalgFiltration, IsInt ] );
 
-DeclareOperation( "CertainObject",
-        [ IsHomalgFiltration, IsInt ] );
-
-DeclareOperation( "ObjectsOfFiltration",
+DeclareOperation( "MatrixOfFiltration",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "LowestDegreeObject",
+DeclareOperation( "BasisOfModule",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "HighestDegreeObject",
+DeclareOperation( "DecideZero",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "HomalgRing",
+DeclareOperation( "OnLessGenerators",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "MorphismsOfFiltration",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "LowestDegreeMorphism",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "HighestDegreeMorphism",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "UnderlyingObject",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "IsomorphismOfFiltration",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "UnlockObject",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "AssociatedSecondSpectralSequence",
+DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgFiltration ] );
 

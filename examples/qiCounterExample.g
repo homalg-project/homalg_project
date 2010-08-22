@@ -1,4 +1,4 @@
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 R := HomalgRingOfIntegers( );
 M := 1 * R;
 N := LeftPresentation( [ 3 ], R );

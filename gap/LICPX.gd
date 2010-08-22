@@ -10,18 +10,9 @@
 ##
 #############################################################################
 
-# our info class:
-DeclareInfoClass( "InfoLICPX" );
-SetInfoLevel( InfoLICPX, 1 );
-
-# a central place for configurations:
-DeclareGlobalVariable( "LICPX" );
-
 ####################################
 #
 # global variables:
 #
 ####################################
-
-DeclareGlobalVariable( "LogicalImplicationsForHomalgComplexes" );
 

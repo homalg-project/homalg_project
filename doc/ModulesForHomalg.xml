@@ -17,6 +17,7 @@
 	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
 	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY Modules "<Package>Modules</Package>">
 	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
 	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
@@ -70,23 +71,15 @@
 <#Include SYSTEM "Generators.xml">
 <#Include SYSTEM "Modules.xml">
 <#Include SYSTEM "Maps.xml">
-<#Include SYSTEM "Complexes.xml">
-<#Include SYSTEM "ChainMaps.xml">
-<#Include SYSTEM "Bicomplexes.xml">
-<#Include SYSTEM "BigradedObjects.xml">
-<#Include SYSTEM "SpectralSequences.xml">
 <#Include SYSTEM "Functors.xml">
 <#Include SYSTEM "examples.xml">
 </Body>
 
 <#Include SYSTEM "Idea.xml">
-<#Include SYSTEM "Development.xml">
 <#Include SYSTEM "Logic.xml">
-<#Include SYSTEM "Debugging.xml">
-<#Include SYSTEM "Project.xml">
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="homalgBib.xml"/>
+<Bibliography Databases="ModulesBib.xml"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

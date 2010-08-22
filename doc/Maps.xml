@@ -34,36 +34,13 @@
 <Section Label="Maps:Properties">
 <Heading>Maps: Properties</Heading>
 
-<#Include Label="IsMorphism:map">
-<#Include Label="IsGeneralizedMorphism:map">
-<#Include Label="IsGeneralizedEpimorphism:map">
-<#Include Label="IsGeneralizedMonomorphism:map">
-<#Include Label="IsGeneralizedIsomorphism:map">
-<#Include Label="IsIdentityMorphism:map">
-<#Include Label="IsMonomorphism:map">
-<#Include Label="IsEpimorphism:map">
-<#Include Label="IsSplitMonomorphism:map">
-<#Include Label="IsSplitEpimorphism:map">
-<#Include Label="IsIsomorphism:map">
-<#Include Label="IsAutomorphism:map">
 
 </Section>
 
 <Section Label="Maps:Attributes">
 <Heading>Maps: Attributes</Heading>
 
-<#Include Label="Source:map">
-<#Include Label="Range:map">
 <#Include Label="DegreeOfMorphism:map">
-<#Include Label="CokernelEpi">
-<#Include Label="CokernelNaturalGeneralizedIsomorphism">
-<#Include Label="KernelSubobject:map">
-<#Include Label="KernelEmb:map">
-<#Include Label="ImageSubobject">
-<#Include Label="ImageObjectEmb">
-<#Include Label="ImageObjectEpi">
-<#Include Label="MorphismAid:map">
-<#Include Label="GeneralizedInverse:map">
 
 </Section>
 
@@ -71,8 +48,7 @@
 <Heading>Maps: Operations and Functions</Heading>
 
 <#Include Label="HomalgRing:map">
-<#Include Label="ByASmallerPresentation:map">
-<#Include Label="PreInverse:map">
+<#Include Label="PreInverse">
 
 </Section>
 

@@ -17,44 +17,14 @@ behind the package.
 <Section Label="homalg-vs-homalg">
 <Heading>What is the role of the &homalg; package in the &homalg; project?</Heading>
 
-<Subsection Label="philosophy">
-<Heading>Philosophy</Heading>
-
-The package &homalg; is meant to be the first part of a continuously
-growing <Alt Only="Text">open source</Alt>
-<Alt Not="Text"><URL Text="open
-source">http://www.opensource.org/</URL></Alt> multi volume book about
-<Alt Only="Text">homological</Alt><Alt Not="Text">
-<URL Text="homological">http://en.wikipedia.org/wiki/Homological_algebra</URL></Alt>
-and <Alt Only="Text">homotopical
-algebra</Alt><Alt Not="Text"><URL Text="homotopical
-algebra">http://en.wikipedia.org/wiki/Homotopical_algebra</URL></Alt>.
-&homalg; is an attempt to translate as much as possible of homological
-algebra, as can be found in books like <Cite Key="ce"/>,
-<Cite Key="ML"/>, <Cite Key="HS"/>, <Cite Key="rot"/>,
-<Cite Key="weihom"/>, and <Cite Key="GM"/>, into a language that a
-computer can directly understand. But just like the aforementioned
-books, &homalg; should, to a great extent, be readable by a
-mathematician, even without deep programming knowledge. For the
-reasons mentioned in (&see; Appendix <Ref Sect="WhyGAP4" Text="Why GAP4?"/>)
-&GAP4; was chosen as the language of &homalg;.
-
-</Subsection>
-
 <Subsection Label="homalg-provides">
-<Heading>&homalg; provides ...</Heading>
+<Heading>&Modules; provides ...</Heading>
 
 The package &homalg; is the foundational part of the project. It
 provides procedures to construct basic objects in homological algebra:
 <List>
   <Item>modules (generators, relations)</Item>
   <Item>maps</Item>
-  <Item>filtrations</Item>
-  <Item>complexes (of modules and of complexes)</Item>
-  <Item>chain maps</Item>
-  <Item>bicomplexes</Item>
-  <Item>bigraded (differential) objects</Item>
-  <Item>spectral sequences</Item>
   <Item>functors</Item>
 </List>
 Beside these so-called constructors &homalg;
@@ -158,39 +128,6 @@ package of Max Neunhöffer. Furthermore, for all structures beyond
 matrices (from relations, generators, and modules, to functors and
 spectral sequences) &homalg; no longer distinguishes between internal
 and external. <P/>
-
-</Subsection>
-
-<Subsection Label="outsource">
-<Heading>The advantages of the outsourcing concept</Heading>
-
-Linking different systems to achieve one task is a highly attractive
-idea, especially if it helps to avoid reinventing wheels over and over
-again. This was essential for &homalg;, since &Singular; and &MAGMA;
-provide the fastest and most advanced Gröbner basis algorithms, while
-&GAP4; is by far the most convenient programming language to realize
-complex mathematical structures (&see; Appendix <Ref Sect="WhyGAP4"
-Text="Why GAP4?"/>).  Second, the implementation of the homological
-constructions is automatically universal, since it is independent of
-where the matrices reside and how the several matrix operations are
-realized. In particular, &homalg; will always be able to use the
-system with the fastest Gröbner basis implementation. In this respect
-is &homalg; and all packages that build upon it future proof.
-
-</Subsection>
-
-<Subsection Label="also-special">
-<Heading>Does this mean that &homalg; has only algorithms for the generic case?</Heading>
-
-No, on the contrary. There are a lot of specialized algorithms
-installed in &homalg;. These algorithms are based on properties and
-attributes that -- thanks to &GAP4; -- &homalg; objects can carry
-(&see; Appendix <Ref Label="Objectify"/>): Not only can &homalg; take
-the special nature of the underlying ring into account, it also deals
-with modules, complexes, ... depending on their special
-properties. Still, these special algorithms, like all algorithms in
-&homalg;, are independent of the computer algebra system which hosts
-the matrices and which will perform the several matrix operations.
 
 </Subsection>
 

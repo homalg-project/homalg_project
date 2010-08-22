@@ -115,7 +115,7 @@
 ##  ]]></Example>
 ##  <#/GAPDoc>
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 ZZ := HomalgRingOfIntegers( );
 m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );
 M := LeftPresentation( m );

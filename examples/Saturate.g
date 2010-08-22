@@ -39,7 +39,7 @@
 ##  ]]></Example>
 ##  <#/GAPDoc>
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 ZZ := HomalgRingOfIntegers( );
 

@@ -10,8 +10,8 @@
 
 ##  <#GAPDoc Label="Maps:intro">
 ##    A &homalg; map is a data structures for maps (module homomorphisms) between finitely generated modules.
-##    Each map in &homalg; knows its source (&see; <Ref Attr="Source" Label="for maps"/>) and its target
-##    (&see; <Ref Attr="Range" Label="for maps"/>). A map is represented by a &homalg; matrix relative to the
+##    Each map in &homalg; knows its source (&see; <Ref BookName="homalg" Attr="Source"/>) and its target
+##    (&see; <Ref BookName="homalg" Attr="Range"/>). A map is represented by a &homalg; matrix relative to the
 ##    current set of generators of the source resp. target &homalg; module. As with modules
 ##    (&see; Chapter <Ref Chap="Modules"/>), maps in &homalg; are realized in an intrinsic manner:
 ##    If the presentations of the source or/and target module are altered after the map was constructed,
@@ -33,7 +33,7 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of maps between finitley generated &homalg; modules. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
+##      (It is a representation of the &GAP; category <Ref BookName="homalg" Filt="IsHomalgChainMap"/>,
 ##       which is a subrepresentation of the &GAP; representation <C>IsStaticMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -78,7 +78,7 @@ BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
 
 ##  <#GAPDoc Label="HomalgRing:map">
 ##  <ManSection>
-##    <Oper Arg="phi" Name="HomalgRing" Label="for maps"/>
+##    <Oper Arg="phi" Name="HomalgRing"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
 ##      The &homalg; ring of the &homalg; map <A>phi</A>.
@@ -374,75 +374,6 @@ InstallMethod( OnLessGenerators,
     
 end );
 
-##  <#GAPDoc Label="ByASmallerPresentation:map">
-##  <ManSection>
-##    <Meth Arg="phi" Name="ByASmallerPresentation" Label="for maps"/>
-##    <Returns>a &homalg; map</Returns>
-##    <Description>
-##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
-##      <Listing Type="Code"><![CDATA[
-InstallMethod( ByASmallerPresentation,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    
-    ByASmallerPresentation( Source( phi ) );
-    ByASmallerPresentation( Range( phi ) );
-    
-    return DecideZero( phi );
-    
-end );
-##  ]]></Listing>
-##      This method performs side effects on its argument <A>phi</A> and returns it.
-##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
-##  gap> M := LeftPresentation( M );
-##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
-##  <A homalg internal 2 by 4 matrix>
-##  gap> N := LeftPresentation( N );
-##  <A non-torsion left module presented by 2 relations for 4 generators>
-##  gap> mat := HomalgMatrix( "[ \
-##  > 1, 0, -2, -4, \
-##  > 0, 1,  4,  7, \
-##  > 1, 0, -2, -4  \
-##  > ]", 3, 4, ZZ );;
-##  <A homalg internal 3 by 4 matrix>
-##  gap> phi := HomalgMap( mat, M, N );
-##  <A "homomorphism" of left modules>
-##  gap> IsMorphism( phi );
-##  true
-##  gap> phi;
-##  <A homomorphism of left modules>
-##  gap> Display( phi );
-##  [ [   1,   0,  -2,  -4 ],
-##    [   0,   1,   4,   7 ],
-##    [   1,   0,  -2,  -4 ] ]
-##  
-##  the map is currently represented by the above 3 x 4 matrix
-##  gap> ByASmallerPresentation( phi );
-##  <A non-zero homomorphism of left modules>
-##  gap> Display( phi );
-##  [ [   0,   0,   0 ],
-##    [   1,  -1,  -2 ] ]
-##  
-##  the map is currently represented by the above 2 x 3 matrix
-##  gap> M;
-##  <A rank 1 left module presented by 1 relation for 2 generators>
-##  gap> Display( M );
-##  Z/< 3 > + Z^(1 x 1)
-##  gap> N;
-##  <A rank 2 left module presented by 1 relation for 3 generators>
-##  gap> Display( N );
-##  Z/< 4 > + Z^(1 x 2)
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
 ##
 InstallMethod( UnionOfRelations,
         "for homalg maps",
@@ -546,9 +477,9 @@ InstallMethod( SuccessivePreimages,
     
 end );
 
-##  <#GAPDoc Label="PreInverse:map">
+##  <#GAPDoc Label="PreInverse">
 ##  <ManSection>
-##    <Oper Arg="phi" Name="PreInverse" Label="for maps"/>
+##    <Oper Arg="phi" Name="PreInverse"/>
 ##    <Returns>a &homalg; map, <C>false</C>, or <C>fail</C></Returns>
 ##    <Description>
 ##      Compute a pre-inverse of the morphism <A>phi</A> in case one exists.
@@ -561,7 +492,7 @@ end );
 ##      finds a pre-inverse it returns it, otherwise it returns <C>fail</C>
 ##      (&see; <Ref Label="homalg-limitation" Text="Principal limitation"/>).
 ##      The operation <C>PreInverse</C> is used to install a method for the property
-##      <Ref Prop="IsSplitEpimorphism" Label="for maps"/>. <P/>
+##      <Ref BookName="homalg" Prop="IsSplitEpimorphism"/>. <P/>
 ##      <C>PreInverse</C> checks if it can decide the projectivity of <C>Range</C><M>( <A>phi</A> )</M>.
 ##      To decide the projectivity of a module <M>M</M> over a <E>commutative</E> ring you can use <Br/><Br/>
 ##      
@@ -827,7 +758,7 @@ end );
 ##      and target module <A>N</A> (&see; <Ref Sect="Modules:Constructors"/>). Unless the source module is free
 ##      <E>and</E> given on free generators the returned map will cautiously be indicated using
 ##      parenthesis: <Q>homomorphism</Q>. To verify if the result is indeed a well defined map use
-##      <Ref Prop="IsMorphism" Label="for maps"/>. If the presentations of the source or/and
+##      <Ref BookName="homalg" Prop="IsMorphism"/>. If the presentations of the source or/and
 ##      target module are altered after the map was constructed, a new adapted representation matrix of the map is
 ##      automatically computed whenever needed. For this the internal transition matrices of the modules are used.
 ##      If source and target are identical objects, and only then, the map is created as a selfmap (endomorphism).

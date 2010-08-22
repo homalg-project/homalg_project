@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  init.g                homalg package                    Mohamed Barakat
+##  init.g                Modules package                    Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
@@ -8,112 +8,52 @@
 ##
 #############################################################################
 
-ReadPackage( "homalg", "gap/homalg.gd" );
-
-## objects/subobjects
-ReadPackage( "homalg", "gap/HomalgObject.gd" );
-ReadPackage( "homalg", "gap/HomalgSubobject.gd" );
-
-## morphisms
-ReadPackage( "homalg", "gap/HomalgMorphism.gd" );
-
-## filtrations
-ReadPackage( "homalg", "gap/HomalgFiltration.gd" );
-
-## complexes
-ReadPackage( "homalg", "gap/HomalgComplex.gd" );
-
-## chain maps
-ReadPackage( "homalg", "gap/HomalgChainMap.gd" );
-
-## bicomplexes
-ReadPackage( "homalg", "gap/HomalgBicomplex.gd" );
-
-## bigraded objects
-ReadPackage( "homalg", "gap/HomalgBigradedObject.gd" );
-
-## spectral sequences
-ReadPackage( "homalg", "gap/HomalgSpectralSequence.gd" );
-
-## functors
-ReadPackage( "homalg", "gap/HomalgFunctor.gd" );
-
-## diagrams
-ReadPackage( "homalg", "gap/HomalgDiagram.gd" );
-
-## main
-ReadPackage( "homalg", "gap/StaticObjects.gd" );
-
-ReadPackage( "homalg", "gap/Morphisms.gd" );
-
-ReadPackage( "homalg", "gap/Complexes.gd" );
-
-ReadPackage( "homalg", "gap/ChainMaps.gd" );
-
-ReadPackage( "homalg", "gap/SpectralSequences.gd" );
-
-ReadPackage( "homalg", "gap/Filtrations.gd" );
-
-ReadPackage( "homalg", "gap/ToolFunctors.gd" );
-ReadPackage( "homalg", "gap/BasicFunctors.gd" );
-ReadPackage( "homalg", "gap/OtherFunctors.gd" );
-
-## LogicForHomalg subpackages
-ReadPackage( "homalg", "gap/LIOBJ.gd" );
-ReadPackage( "homalg", "gap/LIMOR.gd" );
-ReadPackage( "homalg", "gap/LICPX.gd" );
-ReadPackage( "homalg", "gap/LICHM.gd" );
-
-##
-## ModulesForHomalg
-##
-
 ## init
-ReadPackage( "homalg", "gap/Modules/ModulesForHomalg.gd" );
+ReadPackage( "Modules", "gap/ModulesForHomalg.gd" );
 
 ## rings
-ReadPackage( "homalg", "gap/Modules/HomalgRingMap.gd" );
+ReadPackage( "Modules", "gap/HomalgRingMap.gd" );
 
 ## relations/generators
-ReadPackage( "homalg", "gap/Modules/HomalgRelations.gd" );
-ReadPackage( "homalg", "gap/Modules/SetsOfRelations.gd" );
-ReadPackage( "homalg", "gap/Modules/HomalgGenerators.gd" );
-ReadPackage( "homalg", "gap/Modules/SetsOfGenerators.gd" );
+ReadPackage( "Modules", "gap/HomalgRelations.gd" );
+ReadPackage( "Modules", "gap/SetsOfRelations.gd" );
+ReadPackage( "Modules", "gap/HomalgGenerators.gd" );
+ReadPackage( "Modules", "gap/SetsOfGenerators.gd" );
 
 ## modules/submodules
-ReadPackage( "homalg", "gap/Modules/HomalgModule.gd" );
-ReadPackage( "homalg", "gap/Modules/HomalgSubmodule.gd" );
+ReadPackage( "Modules", "gap/HomalgModule.gd" );
+ReadPackage( "Modules", "gap/HomalgSubmodule.gd" );
 
 ## maps
-ReadPackage( "homalg", "gap/Modules/HomalgMap.gd" );
+ReadPackage( "Modules", "gap/HomalgMap.gd" );
 
 ## filtrations
-ReadPackage( "homalg", "gap/Modules/HomalgFiltration.gd" );
+ReadPackage( "Modules", "gap/HomalgFiltration.gd" );
 
 ## complexes
-ReadPackage( "homalg", "gap/Modules/HomalgComplex.gd" );
+ReadPackage( "Modules", "gap/HomalgComplex.gd" );
 
 ## chain maps
-ReadPackage( "homalg", "gap/Modules/HomalgChainMap.gd" );
+ReadPackage( "Modules", "gap/HomalgChainMap.gd" );
 
 ## bicomplexes
-ReadPackage( "homalg", "gap/Modules/HomalgBicomplex.gd" );
+ReadPackage( "Modules", "gap/HomalgBicomplex.gd" );
 
 ## bigraded objects
-ReadPackage( "homalg", "gap/Modules/HomalgBigradedObject.gd" );
+ReadPackage( "Modules", "gap/HomalgBigradedObject.gd" );
 
 ## functors
-ReadPackage( "homalg", "gap/Modules/HomalgFunctor.gd" );
+ReadPackage( "Modules", "gap/HomalgFunctor.gd" );
 
 ## main
-ReadPackage( "homalg", "gap/Modules/Modules.gd" );
-ReadPackage( "homalg", "gap/Modules/ToolFunctors.gd" );
-ReadPackage( "homalg", "gap/Modules/BasicFunctors.gd" );
-ReadPackage( "homalg", "gap/Modules/OtherFunctors.gd" );
+ReadPackage( "Modules", "gap/Modules.gd" );
+ReadPackage( "Modules", "gap/ToolFunctors.gd" );
+ReadPackage( "Modules", "gap/BasicFunctors.gd" );
+ReadPackage( "Modules", "gap/OtherFunctors.gd" );
 
 ## LogicForHomalg subpackages
-ReadPackage( "homalg", "gap/Modules/LIMAP.gd" );
-ReadPackage( "homalg", "gap/Modules/LIREL.gd" );
-ReadPackage( "homalg", "gap/Modules/LIMOD.gd" );
-ReadPackage( "homalg", "gap/Modules/LIHOM.gd" );
-ReadPackage( "homalg", "gap/Modules/LICPX.gd" );
+ReadPackage( "Modules", "gap/LIMAP.gd" );
+ReadPackage( "Modules", "gap/LIREL.gd" );
+ReadPackage( "Modules", "gap/LIMOD.gd" );
+ReadPackage( "Modules", "gap/LIHOM.gd" );
+ReadPackage( "Modules", "gap/LICPX.gd" );

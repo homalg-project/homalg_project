@@ -11,36 +11,18 @@
 <Chapter Label="Functors">
 <Heading>Functors</Heading>
 
-<#Include Label="Functors:intro">
-
 <Section Label="Functors:Category">
 <Heading>Functors: Category and Representations</Heading>
-
-<#Include Label="IsHomalgFunctor">
-
-<#Include Label="IsHomalgFunctorRep">
 
 </Section>
 
 <Section Label="Functors:Constructors">
 <Heading>Functors: Constructors</Heading>
 
-<#Include Label="CreateHomalgFunctor">
-<#Include Label="InsertObjectInMultiFunctor">
-<#Include Label="RightSatelliteOfCofunctor">
-<#Include Label="LeftSatelliteOfFunctor">
-<#Include Label="RightDerivedCofunctor">
-<#Include Label="LeftDerivedFunctor">
-<#Include Label="ComposeFunctors">
-
 </Section>
 
 <Section Label="Functors:Attributes">
 <Heading>Functors: Attributes</Heading>
-
-<#Include Label="NameOfFunctor">
-<#Include Label="OperationOfFunctor">
-<#Include Label="Genesis:functor">
 
 </Section>
 
@@ -53,10 +35,8 @@
 <#Include Label="functor_ImageObject">
 <#Include Label="ImageObject">
 
-<#Include Label="functor_Kernel">
 <#Include Label="Kernel:map">
 
-<#Include Label="functor_DefectOfExactness">
 <#Include Label="DefectOfExactness">
 
 <#Include Label="Functor_Hom">
@@ -95,9 +75,6 @@
 
 <Section Label="Functors:Operations">
 <Heading>Functors: Operations and Functions</Heading>
-
-<#Include Label="InstallFunctor">
-<#Include Label="InstallDeltaFunctor">
 
 </Section>
 

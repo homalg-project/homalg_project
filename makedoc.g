@@ -5,54 +5,29 @@
 ##
 
 LoadPackage( "GAPDoc" );
+LoadPackage( "homalg" );
 
 SetGapDocLaTeXOptions( "utf8" );
 
-bib := ParseBibFiles( "doc/homalg.bib" );
-WriteBibXMLextFile( "doc/homalgBib.xml", bib );
+bib := ParseBibFiles( "doc/Modules.bib" );
+WriteBibXMLextFile( "doc/ModulesBib.xml", bib );
 
 list := [
-         "../gap/homalg.gi",
-         "../gap/HomalgDiagram.gd",
-         "../gap/HomalgDiagram.gi",
-         "../gap/Modules/HomalgRingMap.gd",
-         "../gap/Modules/HomalgRingMap.gi",
-         "../gap/Modules/HomalgRelations.gd",
-         "../gap/Modules/HomalgRelations.gi",
-         "../gap/Modules/HomalgGenerators.gd",
-         "../gap/Modules/HomalgGenerators.gi",
-         "../gap/HomalgObject.gd",
-         "../gap/HomalgObject.gi",
-         "../gap/HomalgSubobject.gd",
-         "../gap/HomalgSubobject.gi",
-         "../gap/HomalgMorphism.gd",
-         "../gap/HomalgMorphism.gi",
-         "../gap/HomalgFiltration.gd",
-         "../gap/HomalgFiltration.gi",
-         "../gap/HomalgComplex.gd",
-         "../gap/HomalgComplex.gi",
-         "../gap/HomalgChainMap.gd",
-         "../gap/HomalgChainMap.gi",
-         "../gap/HomalgBicomplex.gd",
-         "../gap/HomalgBicomplex.gi",
-         "../gap/HomalgBigradedObject.gd",
-         "../gap/HomalgBigradedObject.gi",
-         "../gap/HomalgSpectralSequence.gd",
-         "../gap/HomalgSpectralSequence.gi",
-         "../gap/HomalgFunctor.gd",
-         "../gap/HomalgFunctor.gi",
-         "../gap/BasicFunctors.gd",
+         "../gap/HomalgRingMap.gd",
+         "../gap/HomalgRingMap.gi",
+         "../gap/HomalgRelations.gd",
+         "../gap/HomalgRelations.gi",
+         "../gap/HomalgGenerators.gd",
+         "../gap/HomalgGenerators.gi",
+         "../gap/HomalgModule.gd",
+         "../gap/HomalgModule.gi",
+         "../gap/HomalgSubmodule.gd",
+         "../gap/HomalgSubmodule.gi",
+         "../gap/HomalgMap.gd",
+         "../gap/HomalgMap.gi",
+         "../gap/Modules.gi",
+         "../gap/LIMAP.gi",
          "../gap/BasicFunctors.gi",
-         "../gap/StaticObjects.gi",
-         "../gap/Modules/HomalgModule.gd",
-         "../gap/Modules/HomalgModule.gi",
-         "../gap/Modules/HomalgSubmodule.gd",
-         "../gap/Modules/HomalgSubmodule.gi",
-         "../gap/Modules/HomalgMap.gd",
-         "../gap/Modules/HomalgMap.gi",
-         "../gap/Modules/Modules.gi",
-         "../gap/Modules/LIMAP.gi",
-         "../gap/Modules/BasicFunctors.gi",
          "../examples/RHom_Z.g",
          "../examples/LTensorProduct_Z.g",
          "../examples/ExtExt.g",
@@ -63,8 +38,8 @@ list := [
          "../examples/Saturate.g",
          ];
 
-MakeGAPDocDoc( "doc", "homalg", list, "homalg" );
+MakeGAPDocDoc( "doc", "ModulesForHomalg", list, "ModulesForHomalg" );
 
-GAPDocManualLab( "homalg" );
+GAPDocManualLab( "Modules" );
 
 quit;

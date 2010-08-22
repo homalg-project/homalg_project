@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  ToolFunctors.gd             homalg package               Mohamed Barakat
+##  ToolFunctors.gd             Modules package              Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
 ##
 ##  Declaration stuff for some tool functors.
 ##
@@ -14,20 +14,50 @@
 #
 ####################################
 
-## AsATwoSequence
-DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
+## TheZeroMorphism
+DeclareGlobalFunction( "_Functor_TheZeroMorphism_OnModules" );
 
-DeclareGlobalVariable( "functor_AsATwoSequence" );
+DeclareGlobalVariable( "functor_TheZeroMorphism_ForModules" );
 
-## AsChainMapForPullback
-DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
+## MulMorphism
+DeclareGlobalFunction( "_Functor_MulMorphism_OnMaps" );
 
-DeclareGlobalVariable( "functor_AsChainMapForPullback" );
+DeclareGlobalVariable( "functor_MulMorphism" );
 
-## AsChainMapForPushout
-DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );
+## AddMorphisms
+DeclareGlobalFunction( "_Functor_AddMorphisms_OnMaps" );
 
-DeclareGlobalVariable( "functor_AsChainMapForPushout" );
+DeclareGlobalVariable( "functor_AddMorphisms" );
+
+## SubMorphisms
+DeclareGlobalFunction( "_Functor_SubMorphisms_OnMaps" );
+
+DeclareGlobalVariable( "functor_SubMorphisms" );
+
+## Compose
+DeclareGlobalFunction( "_Functor_Compose_OnMaps" );
+
+DeclareGlobalVariable( "functor_Compose" );
+
+## CoproductMorphism
+DeclareGlobalFunction( "_Functor_CoproductMorphism_OnMaps" );
+
+DeclareGlobalVariable( "functor_CoproductMorphism" );
+
+## ProductMorphism
+DeclareGlobalFunction( "_Functor_ProductMorphism_OnMaps" );
+
+DeclareGlobalVariable( "functor_ProductMorphism" );
+
+## PostDivide
+DeclareGlobalFunction( "_Functor_PostDivide_OnMaps" );
+
+DeclareGlobalVariable( "functor_PostDivide" );
+
+## PreDivide
+DeclareGlobalFunction( "_Functor_PreDivide_OnMaps" );
+
+DeclareGlobalVariable( "functor_PreDivide" );
 
 ####################################
 #
@@ -36,64 +66,4 @@ DeclareGlobalVariable( "functor_AsChainMapForPushout" );
 ####################################
 
 # basic operations:
-
-DeclareOperation( "TheZeroMorphism",
-        [ IsHomalgObject, IsHomalgObject ] );
-
-DeclareOperation( "AsATwoSequence",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AsATwoSequence",
-        [ IsHomalgComplex ] );
-
-DeclareOperation( "MulMorphism",
-        [ IsRingElement, IsHomalgMorphism ] );
-
-DeclareOperation( "SetPropertiesOfMulMorphism",
-        [ IsRingElement, IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AddMorphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "SetPropertiesOfSumMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "SubMorphisms",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "SetPropertiesOfDifferenceMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "Compose",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "SetPropertiesOfComposedMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "CoproductMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "SetPropertiesOfCoproductMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "ProductMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "SetPropertiesOfProductMorphism",
-        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AsChainMapForPullback",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "/",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "PostDivide",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "PreDivide",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AsChainMapForPushout",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
 

@@ -233,7 +233,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 ZZ := HomalgRingOfIntegers( );
 R := ZZ / 2^8;

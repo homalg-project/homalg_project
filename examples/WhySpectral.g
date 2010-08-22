@@ -1,4 +1,4 @@
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 ZZ := HomalgRingOfIntegers( );
 

@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  OtherFunctors.gd            homalg package               Mohamed Barakat
+##  OtherFunctors.gd            Modules package              Mohamed Barakat
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
 ##
 ##  Declaration stuff for some other functors.
 ##
@@ -14,98 +14,18 @@
 #
 ####################################
 
-## TorsionFreeFactor
-DeclareGlobalFunction( "_Functor_TorsionFreeFactor_OnObjects" );
-
-DeclareGlobalVariable( "Functor_TorsionFreeFactor" );
-
-## TorsionObject
-DeclareGlobalFunction( "_Functor_TorsionObject_OnObjects" );
-
-DeclareGlobalVariable( "Functor_TorsionObject" );
-
 ## DirectSum
-DeclareGlobalVariable( "Functor_DirectSum" );
+DeclareGlobalFunction( "_Functor_DirectSum_OnModules" );
 
-## Pullback
-DeclareGlobalFunction( "_Functor_Pullback_OnObjects" );
-
-DeclareGlobalVariable( "functor_Pullback" );
-
-## Pushout
-DeclareGlobalFunction( "_Functor_Pushout_OnObjects" );
-
-DeclareGlobalVariable( "functor_Pushout" );
-
-## AuslanderDual
-DeclareGlobalFunction( "_Functor_AuslanderDual_OnObjects" );
-
-DeclareGlobalVariable( "functor_AuslanderDual" );
+DeclareGlobalFunction( "_Functor_DirectSum_OnMaps" );
 
 ####################################
 #
-# attributes:
+# temporary
 #
 ####################################
 
-DeclareAttribute( "TorsionFreeFactorEpi",
-        IsHomalgStaticMorphism );
+DeclareGlobalFunction( "_UCT_Homology" );	## FIXME: generalize
 
-DeclareAttribute( "TorsionObjectEmb",
-        IsHomalgStaticMorphism );
-
-DeclareAttribute( "MonoOfLeftSummand",
-        IsHomalgStaticMorphism );
-
-DeclareAttribute( "MonoOfRightSummand",
-        IsHomalgStaticMorphism );
-
-DeclareAttribute( "EpiOnLeftFactor",
-        IsHomalgStaticMorphism );
-
-DeclareAttribute( "EpiOnRightFactor",
-        IsHomalgStaticMorphism );
-
-DeclareAttribute( "PullbackPairOfMaps",
-        IsHomalgStaticMorphism );
-
-DeclareAttribute( "PushoutPairOfMaps",
-        IsHomalgStaticMorphism );
-
-####################################
-#
-# global functions and operations:
-#
-####################################
-
-# basic operations:
-
-DeclareOperation( "TorsionFreeFactor",
-        [ IsHomalgObject ] );
-
-DeclareOperation( "TorsionObject",
-        [ IsHomalgObject ] );
-
-DeclareOperation( "DirectSumOp",
-        [ IsList, IsHomalgRingOrObjectOrMorphism ] );
-
-DeclareOperation( "SetPropertiesOfDirectSum",
-        [ IsList, IsHomalgObject,
-          IsHomalgMorphism, IsHomalgMorphism,
-          IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "Pullback",
-        [ IsHomalgChainMap ] );
-
-DeclareOperation( "Pullback",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "Pushout",
-        [ IsHomalgChainMap ] );
-
-DeclareOperation( "Pushout",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
-DeclareOperation( "AuslanderDual",
-        [ IsHomalgObject ] );
+DeclareGlobalFunction( "_UCT_Cohomology" );	## FIXME: generalize
 
