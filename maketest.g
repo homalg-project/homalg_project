@@ -5,18 +5,13 @@
 ##
 
 LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 LoadPackage( "GAPDoc" );
 
 list := [
          "../gap/homalg.gi",
          "../gap/HomalgDiagram.gd",
          "../gap/HomalgDiagram.gi",
-         "../gap/Modules/HomalgRingMap.gd",
-         "../gap/Modules/HomalgRingMap.gi",
-         "../gap/Modules/HomalgRelations.gd",
-         "../gap/Modules/HomalgRelations.gi",
-         "../gap/Modules/HomalgGenerators.gd",
-         "../gap/Modules/HomalgGenerators.gi",
          "../gap/HomalgObject.gd",
          "../gap/HomalgObject.gi",
          "../gap/HomalgSubobject.gd",
@@ -40,15 +35,6 @@ list := [
          "../gap/BasicFunctors.gd",
          "../gap/BasicFunctors.gi",
          "../gap/StaticObjects.gi",
-         "../gap/Modules/HomalgModule.gd",
-         "../gap/Modules/HomalgModule.gi",
-         "../gap/Modules/HomalgSubmodule.gd",
-         "../gap/Modules/HomalgSubmodule.gi",
-         "../gap/Modules/HomalgMap.gd",
-         "../gap/Modules/HomalgMap.gi",
-         "../gap/Modules/Modules.gi",
-         "../gap/Modules/LIMAP.gi",
-         "../gap/Modules/BasicFunctors.gi",
          "../examples/RHom_Z.g",
          "../examples/LTensorProduct_Z.g",
          "../examples/ExtExt.g",

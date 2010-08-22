@@ -211,7 +211,7 @@ end );
 
 ##
 InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
-        "for homalg modules",
+        "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
@@ -307,7 +307,7 @@ end );
 
 ##
 InstallMethod( PurityFiltration,
-        "for homalg modules",
+        "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
@@ -318,7 +318,7 @@ end );
 
 ##
 InstallMethod( FilteredByPurity,
-        "for homalg modules",
+        "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )

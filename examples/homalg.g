@@ -1,4 +1,4 @@
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 R := HOMALG_MATRICES.ZZ; ## HomalgRingOfIntegers( );
 mm1 := [[262, -33, 75, -40],
         [682, -86, 196, -104],

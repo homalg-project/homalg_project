@@ -36,7 +36,7 @@ DeclareGlobalVariable( "functor_DefectOfExactness" );
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural epimorphism from the <C>Range</C><M>(</M><A>phi</A><M>)</M>
-##      onto the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
+##      onto the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -50,7 +50,7 @@ DeclareAttribute( "CokernelEpi",
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural generalized isomorphism from the <C>Cokernel</C><M>(</M><A>phi</A><M>)</M>
-##      onto the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Cokernel"/>).
+##      onto the <C>Range</C><M>(</M><A>phi</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -58,13 +58,13 @@ DeclareAttribute( "CokernelEpi",
 DeclareAttribute( "CokernelNaturalGeneralizedIsomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="KernelEmb:map">
+##  <#GAPDoc Label="KernelEmb">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="KernelEmb" Label="for morphisms"/>
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural embedding of the <C>Kernel</C><M>(</M><A>phi</A><M>)</M>
-##      into the <C>Source</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="Kernel" Label="for maps"/>).
+##      into the <C>Source</C><M>(</M><A>phi</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -78,7 +78,7 @@ DeclareAttribute( "KernelEmb",
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural embedding of the <C>ImageObject</C><M>(</M><A>phi</A><M>)</M>
-##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageObject"/>).
+##      into the <C>Range</C><M>(</M><A>phi</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -92,7 +92,7 @@ DeclareAttribute( "ImageObjectEmb",
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural epimorphism from the <C>Source</C><M>(</M><A>phi</A><M>)</M>
-##      onto the <C>ImageObject</C><M>(</M><A>phi</A><M>)</M> (cf. <Ref Oper="ImageObject"/>).
+##      onto the <C>ImageObject</C><M>(</M><A>phi</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -106,7 +106,7 @@ DeclareAttribute( "ImageObjectEpi",
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The natural evaluation map from the &homalg; module <A>M</A>
-##      to its double dual <C>HomHom</C><M>(</M><A>M</A><M>)</M> (cf. <Ref Oper="Functor_HomHom"/>).
+##      to its double dual <C>HomHom</C><M>(</M><A>M</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

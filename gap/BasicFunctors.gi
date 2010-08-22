@@ -86,7 +86,7 @@ end );
 
 ##
 InstallMethod( Kernel,
-        "LIMOR: for homalg maps",
+        "LIMOR: for homalg morphisms",
         [ IsHomalgStaticMorphism ], 10001,
         
   function( psi )

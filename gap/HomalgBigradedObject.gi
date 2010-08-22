@@ -337,7 +337,7 @@ end );
 ##    <Meth Arg="Er" Name="ByASmallerPresentation" Label="for bigraded objects"/>
 ##    <Returns>a &homalg; bigraded object</Returns>
 ##    <Description>
-##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
+##    It invokes <C>ByASmallerPresentation</C> for &homalg; (static) objects.
 ##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg bigraded objects",

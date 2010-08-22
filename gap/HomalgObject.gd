@@ -109,9 +109,9 @@ DeclareProperty( "IsReflexive",
 DeclareProperty( "IsTorsionFree",
         IsHomalgObject );
 
-##  <#GAPDoc Label="IsArtinian:module">
+##  <#GAPDoc Label="IsArtinian">
 ##  <ManSection>
-##    <Prop Arg="M" Name="IsArtinian" Label="for modules"/>
+##    <Prop Arg="M" Name="IsArtinian"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; module <A>M</A> is artinian.
@@ -185,7 +185,7 @@ DeclareAttribute( "AFiniteFreeResolution",
 
 ##  <#GAPDoc Label="TorsionSubobject">
 ##  <ManSection>
-##    <Attr Arg="M" Name="TorsionSubobject" Label="for maps"/>
+##    <Attr Arg="M" Name="TorsionSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated torsion submodule of the &homalg; module <A>M</A>.

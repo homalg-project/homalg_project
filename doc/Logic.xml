@@ -11,18 +11,18 @@
 <Appendix Label="Logic">
 <Heading>Logic Subpackages</Heading>
 
-<Section Label="Modules:LIMOD">
-<Heading>&LIMOD;: Logical Implications for Modules</Heading>
+<Section Label="Modules:LIOBJ">
+<Heading>&LIMOD;: Logical Implications for Objects of Abelian Categories</Heading>
 
 </Section>
 
 <Section Label="Maps:LIMOR">
-<Heading>&LIMOR;: Logical Implications for Morphisms</Heading>
+<Heading>&LIMOR;: Logical Implications for Morphisms of Abelian Categories</Heading>
 
 </Section>
 
 <Section Label="Complexes:LICPX">
-<Heading>&LICPX;: Logical Implications for Complexes</Heading>
+<Heading>&LICPX;: Logical Implications for Complexes in Abelian Categories</Heading>
 
 </Section>
 

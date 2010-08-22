@@ -131,7 +131,7 @@ end );
 
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
-        "for homalg maps",
+        "for homalg morphisms",
         [ IsHomalgChainMap ],
         
   function( M )
@@ -929,8 +929,7 @@ end );
 ##    <Returns>a &homalg; chain map</Returns>
 ##    <Description>
 ##      The constructor creates a (co)chain map given a source &homalg; (co)chain complex <A>C</A>,
-##      a target &homalg; (co)chain complex <A>D</A> (&see; <Ref Sect="Modules:Constructors"/>), and a
-##      &homalg; map <A>phi</A> (&see; <Ref Sect="Maps:Constructors"/>)at (co)homological degree <A>d</A>.
+##      a target &homalg; (co)chain complex <A>D</A>, and a &homalg; map <A>phi</A> at (co)homological degree <A>d</A>.
 ##      The returned (co)chain map will cautiously be indicated using parenthesis: <Q>chain map</Q>.
 ##      To verify if the result is indeed a (co)chain map use <Ref Prop="IsMorphism" Label="for chain maps"/>.
 ##      If source and target are identical objects, and only then, the (co)chain map is created as a (co)chain selfmap.

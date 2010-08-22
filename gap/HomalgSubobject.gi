@@ -30,7 +30,7 @@ end );
 
 ##  <#GAPDoc Label="UnderlyingObject">
 ##  <ManSection>
-##    <Oper Arg="M" Name="UnderlyingObject" Label="for submodules"/>
+##    <Oper Arg="M" Name="UnderlyingObject" Label="for subobjects"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the module underlying the submodule <M>M</M> is returned.
@@ -50,7 +50,7 @@ end );
 
 ##  <#GAPDoc Label="SuperObject">
 ##  <ManSection>
-##    <Oper Arg="M" Name="SuperObject" Label="for submodules"/>
+##    <Oper Arg="M" Name="SuperObject" Label="for subobjects"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      In case <A>M</A> was defined as a submodule of some module <M>L</M> the super module <M>L</M> is returned.
@@ -85,12 +85,12 @@ end );
 #
 ####################################
 
-##  <#GAPDoc Label="Subobject:map">
+##  <#GAPDoc Label="Subobject">
 ##  <ManSection>
-##    <Oper Arg="phi" Name="Subobject" Label="constructor for submodules using maps"/>
+##    <Oper Arg="phi" Name="Subobject" Label="constructor for subobjects using morphisms"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
-##      A synonym of <Ref Attr="ImageSubobject" Label="for maps"/>.
+##      A synonym of <Ref Attr="ImageSubobject"/>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Morphisms.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Morphisms">
+<Heading>Morphisms</Heading>
+
+<Section Label="Morphisms:Category">
+<Heading>Morphisms: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgMorphism">
+<#Include Label="IsHomalgStaticMorphism">
+<#Include Label="IsHomalgEndomorphism">
+<#Include Label="IsMorphismOfFinitelyGeneratedObjectsRep">
+<#Include Label="IsStaticMorphismOfFinitelyGeneratedObjectsRep">
+
+</Section>
+
+<Section Label="Morphisms:Constructors">
+<Heading>Morphisms: Constructors</Heading>
+
+</Section>
+
+<Section Label="Morphisms:Properties">
+<Heading>Morphisms: Properties</Heading>
+
+<#Include Label="IsMorphism">
+<#Include Label="IsGeneralizedMorphism">
+<#Include Label="IsGeneralizedEpimorphism">
+<#Include Label="IsGeneralizedMonomorphism">
+<#Include Label="IsGeneralizedIsomorphism">
+<#Include Label="IsIdentityMorphism">
+<#Include Label="IsMonomorphism">
+<#Include Label="IsEpimorphism">
+<#Include Label="IsSplitMonomorphism">
+<#Include Label="IsSplitEpimorphism">
+<#Include Label="IsIsomorphism">
+<#Include Label="IsAutomorphism">
+
+</Section>
+
+<Section Label="Morphisms:Attributes">
+<Heading>Morphisms: Attributes</Heading>
+
+<#Include Label="Source">
+<#Include Label="Range">
+<#Include Label="CokernelEpi">
+<#Include Label="CokernelNaturalGeneralizedIsomorphism">
+<#Include Label="KernelSubobject">
+<#Include Label="KernelEmb">
+<#Include Label="ImageSubobject">
+<#Include Label="ImageObjectEmb">
+<#Include Label="ImageObjectEpi">
+<#Include Label="MorphismAid">
+<#Include Label="GeneralizedInverse">
+
+</Section>
+
+<Section Label="Morphisms:Operations and Functions">
+<Heading>Morphisms: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:morphism">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

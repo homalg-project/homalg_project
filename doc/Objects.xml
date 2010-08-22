@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Objects.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Objects">
+<Heading>Objects</Heading>
+
+<Section Label="Objects:Category">
+<Heading>Objects: Category and Representations</Heading>
+
+<#Include Label="IsHomalgObject">
+<#Include Label="IsHomalgStaticObject">
+
+<#Include Label="IsFinitelyPresentedObjectRep">
+<#Include Label="IsStaticFinitelyPresentedObjectOrSubobjectRep">
+<#Include Label="IsStaticFinitelyPresentedObjectRep">
+<#Include Label="IsStaticFinitelyPresentedSubobjectRep">
+
+</Section>
+
+<Section Label="Objects:Constructors">
+<Heading>Objects: Constructors</Heading>
+
+<#Include Label="Subobject">
+
+</Section>
+
+<Section Label="Objects:Properties">
+<Heading>Objects: Properties</Heading>
+
+<#Include Label="IsProjective">
+<#Include Label="IsInjective">
+<#Include Label="FiniteFreeResolutionExists">
+<#Include Label="IsReflexive">
+<#Include Label="IsTorsionFree">
+<#Include Label="IsArtinian">
+<#Include Label="IsTorsion">
+<#Include Label="IsPure">
+<#Include Label="ConstructedAsAnIdeal">
+
+</Section>
+
+<Section Label="Objects:Attributes">
+<Heading>Objects: Attributes</Heading>
+
+<#Include Label="TorsionSubobject">
+<#Include Label="TheMorphismToZero">
+<#Include Label="TheIdentityMorphism">
+<#Include Label="FullSubobject">
+<#Include Label="ZeroSubobject">
+<#Include Label="EmbeddingInSuperObject">
+<#Include Label="FactorObject">
+<#Include Label="UnderlyingSubobject">
+<#Include Label="NatTrIdToHomHom_R">
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the module -->
+
+<#Include Label="RankOfObject">
+<#Include Label="ProjectiveDimension">
+<#Include Label="DegreeOfTorsionFreeness">
+<#Include Label="AbsoluteDepth">
+<#Include Label="PurityFiltration">
+<#Include Label="CodegreeOfPurity">
+
+</Section>
+
+<Section Label="Objects:Operations">
+<Heading>Objects: Operations and Functions</Heading>
+
+<#Include Label="UnderlyingObject">
+<#Include Label="SuperObject">
+<#Include Label="Saturate">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

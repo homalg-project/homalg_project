@@ -16,7 +16,7 @@
 
 ##
 InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single map)
-        "for homalg maps",
+        "for homalg static morphisms",
         [ IsInt, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( _q, phi  )
@@ -77,7 +77,7 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
 end );
 
 InstallMethod( Resolution,
-        "for homalg maps",
+        "for homalg static morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
@@ -88,7 +88,7 @@ end );
 
 ## [HS. Prop. II.9.6]
 InstallMethod( CokernelSequence,
-        "for homalg maps",
+        "for homalg static morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
@@ -108,7 +108,7 @@ end );
 
 ## [HS. Prop. II.9.6]
 InstallMethod( CokernelCosequence,
-        "for homalg maps",
+        "for homalg static morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
@@ -128,7 +128,7 @@ end );
 
 ## [HS. Prop. II.9.6]
 InstallMethod( KernelSequence,
-        "for homalg maps",
+        "for homalg static morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )
@@ -148,7 +148,7 @@ end );
 
 ## [HS. Prop. II.9.6]
 InstallMethod( KernelCosequence,
-        "for homalg maps",
+        "for homalg static morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi )

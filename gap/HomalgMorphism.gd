@@ -70,9 +70,9 @@ DeclareCategory( "IsHomalgEndomorphism",
 #
 ####################################
 
-##  <#GAPDoc Label="IsMorphism:map">
+##  <#GAPDoc Label="IsMorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsMorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsMorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a well-defined map, i.e. independent of all involved presentations.
@@ -82,9 +82,9 @@ DeclareCategory( "IsHomalgEndomorphism",
 DeclareProperty( "IsMorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsGeneralizedMorphism:map">
+##  <#GAPDoc Label="IsGeneralizedMorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsGeneralizedMorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsGeneralizedMorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a generalized morphism.
@@ -94,9 +94,9 @@ DeclareProperty( "IsMorphism",
 DeclareProperty( "IsGeneralizedMorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsGeneralizedEpimorphism:map">
+##  <#GAPDoc Label="IsGeneralizedEpimorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsGeneralizedEpimorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsGeneralizedEpimorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a generalized epimorphism.
@@ -106,9 +106,9 @@ DeclareProperty( "IsGeneralizedMorphism",
 DeclareProperty( "IsGeneralizedEpimorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsGeneralizedMonomorphism:map">
+##  <#GAPDoc Label="IsGeneralizedMonomorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsGeneralizedMonomorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsGeneralizedMonomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a generalized monomorphism.
@@ -118,9 +118,9 @@ DeclareProperty( "IsGeneralizedEpimorphism",
 DeclareProperty( "IsGeneralizedMonomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsGeneralizedIsomorphism:map">
+##  <#GAPDoc Label="IsGeneralizedIsomorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsGeneralizedIsomorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsGeneralizedIsomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a generalized isomorphism.
@@ -130,9 +130,9 @@ DeclareProperty( "IsGeneralizedMonomorphism",
 DeclareProperty( "IsGeneralizedIsomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsIdentityMorphism:map">
+##  <#GAPDoc Label="IsIdentityMorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsIdentityMorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsIdentityMorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is the identity morphism.
@@ -142,9 +142,9 @@ DeclareProperty( "IsGeneralizedIsomorphism",
 DeclareProperty( "IsIdentityMorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsMonomorphism:map">
+##  <#GAPDoc Label="IsMonomorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsMonomorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsMonomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is a monomorphism.
@@ -154,9 +154,9 @@ DeclareProperty( "IsIdentityMorphism",
 DeclareProperty( "IsMonomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsEpimorphism:map">
+##  <#GAPDoc Label="IsEpimorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsEpimorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsEpimorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is an epimorphism.
@@ -166,9 +166,9 @@ DeclareProperty( "IsMonomorphism",
 DeclareProperty( "IsEpimorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsSplitMonomorphism:map">
+##  <#GAPDoc Label="IsSplitMonomorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsSplitMonomorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsSplitMonomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is a split monomorphism. <Br/>
@@ -178,9 +178,9 @@ DeclareProperty( "IsEpimorphism",
 DeclareProperty( "IsSplitMonomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsSplitEpimorphism:map">
+##  <#GAPDoc Label="IsSplitEpimorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsSplitEpimorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsSplitEpimorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is a split epimorphism. <Br/>
@@ -190,9 +190,9 @@ DeclareProperty( "IsSplitMonomorphism",
 DeclareProperty( "IsSplitEpimorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsIsomorphism:map">
+##  <#GAPDoc Label="IsIsomorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsIsomorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsIsomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is an isomorphism.
@@ -202,9 +202,9 @@ DeclareProperty( "IsSplitEpimorphism",
 DeclareProperty( "IsIsomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsAutomorphism:map">
+##  <#GAPDoc Label="IsAutomorphism">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsAutomorphism" Label="for maps"/>
+##    <Prop Arg="phi" Name="IsAutomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is an automorphism.
@@ -220,9 +220,9 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 #
 ####################################
 
-##  <#GAPDoc Label="Source:map">
+##  <#GAPDoc Label="Source">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="Source" Label="for maps"/>
+##    <Attr Arg="phi" Name="Source"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      The source of the &homalg; map <A>phi</A>.
@@ -232,9 +232,9 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 DeclareAttribute( "Source",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="Range:map">
+##  <#GAPDoc Label="Range">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="Range" Label="for maps"/>
+##    <Attr Arg="phi" Name="Range"/>
 ##    <Returns>a &homalg; module</Returns>
 ##    <Description>
 ##      The target (range) of the &homalg; map <A>phi</A>.
@@ -246,7 +246,7 @@ DeclareAttribute( "Range",
 
 ##  <#GAPDoc Label="ImageSubobject">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="ImageSubobject" Label="for maps"/>
+##    <Attr Arg="phi" Name="ImageSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated image of the &homalg; map <A>phi</A>
@@ -258,9 +258,9 @@ DeclareAttribute( "Range",
 DeclareAttribute( "ImageSubobject",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="KernelSubobject:map">
+##  <#GAPDoc Label="KernelSubobject">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="KernelSubobject" Label="for maps"/>
+##    <Attr Arg="phi" Name="KernelSubobject"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated kernel of the &homalg; map <A>phi</A>
@@ -272,9 +272,9 @@ DeclareAttribute( "ImageSubobject",
 DeclareAttribute( "KernelSubobject",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="MorphismAid:map">
+##  <#GAPDoc Label="MorphismAid">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="MorphismAid" Label="for maps"/>
+##    <Attr Arg="phi" Name="MorphismAid"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
 ##      The morphism aid map of a true generalized map. <Br/>
@@ -286,9 +286,9 @@ DeclareAttribute( "KernelSubobject",
 DeclareAttribute( "MorphismAid",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="GeneralizedInverse:map">
+##  <#GAPDoc Label="GeneralizedInverse">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="GeneralizedInverse" Label="for maps"/>
+##    <Attr Arg="phi" Name="GeneralizedInverse"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
 ##      The generalized inverse of the epimorphism <A>phi</A> (cf. <Cite Key="BaSF" Where="Cor. 4.8"/>)).

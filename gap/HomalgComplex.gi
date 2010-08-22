@@ -1160,7 +1160,7 @@ end );
 ##    <Meth Arg="C" Name="ByASmallerPresentation" Label="for complexes"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##    See <Ref Meth="ByASmallerPresentation" Label="for modules"/> on modules.
+##    It invokes <C>ByASmallerPresentation</C> for &homalg; (static) objects.
 ##      <Listing Type="Code"><![CDATA[
 InstallMethod( ByASmallerPresentation,
         "for homalg complexes",
@@ -1273,9 +1273,8 @@ end );
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
 ##      The first syntax creates a complex (i.e. chain complex) with the single &homalg; module <A>M</A>
-##      (&see; <Ref Sect="Modules:Constructors"/>) at (homological) degree <A>d</A>. <P/>
-##      The second syntax creates a complex with the single &homalg; map <A>phi</A>
-##      (&see; <Ref Func="HomalgMap" Label="constructor for maps"/>), its source placed at
+##      at (homological) degree <A>d</A>. <P/>
+##      The second syntax creates a complex with the single &homalg; map <A>phi</A>, its source placed at
 ##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
 ##      The third syntax creates a complex (i.e. chain complex) with the single &homalg; (co)complex <A>C</A>
 ##      at (homological) degree <A>d</A>. <P/>
@@ -1441,8 +1440,7 @@ end );
 ##    <Description>
 ##      The first syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; module <A>M</A> at
 ##      (cohomological) degree <A>d</A>. <P/>
-##      The second syntax creates a cocomplex with the single &homalg; map <A>phi</A>
-##      (&see; <Ref Func="HomalgMap" Label="constructor for maps"/>), its source placed at (cohomological)
+##      The second syntax creates a cocomplex with the single &homalg; map <A>phi</A>, its source placed at (cohomological)
 ##      degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
 ##      The third syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; cocomplex <A>C</A> at
 ##      (cohomological) degree <A>d</A>. <P/>

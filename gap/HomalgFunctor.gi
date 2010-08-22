@@ -46,7 +46,7 @@
 ##    <C>R!.ByASmallerPresentation := true</C>;
 ##    <Br/><Br/>
 ##    any functor which returns an object over <M>R</M> will first apply
-##    <Ref Oper="ByASmallerPresentation" Label="for modules"/> to its result before returning it. <P/>
+##    <C>ByASmallerPresentation</C> to its result before returning it. <P/>
 ##    One of the highlights in &homalg; is the computation of Grothendieck's spectral sequences connecting
 ##    the composition of the derivations of two functors with the derived functor of their composite.
 ##  <#/GAPDoc>
@@ -5793,8 +5793,6 @@ end );
 ##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
 ##      under the name <A>H</A>.
 ##      <P/>
-##      <#Include Label="ComposeFunctors:example">
-##      <P/>
 ##      Check this:
 ##      <Example><![CDATA[
 ##  gap> Functor_Hom * Functor_TensorProduct;
@@ -5992,8 +5990,6 @@ end );
 ##      <P/>
 ##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
 ##      under the name <A>H</A>.
-##      <P/>
-##      <#Include Label="RightSatelliteOfCofunctor:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -6210,8 +6206,6 @@ end );
 ##      <P/>
 ##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> which installs several necessary operations
 ##      under the name <A>H</A>.
-##      <P/>
-##      <#Include Label="LeftSatelliteOfFunctor:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -6432,8 +6426,6 @@ end );
 ##      <P/>
 ##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> and <Ref Oper="InstallDeltaFunctor"/>
 ##      which install several necessary operations under the name <A>H</A>.
-##      <P/>
-##      <#Include Label="RightDerivedCofunctor:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -6640,10 +6632,6 @@ end );
 ##      <P/>
 ##      The constructor automatically invokes <Ref Oper="InstallFunctor"/> and <Ref Oper="InstallDeltaFunctor"/>
 ##      which install several necessary operations under the name <A>H</A>.
-##      <P/>
-##      <#Include Label="LeftDerivedFunctor:example">
-##      <P/>
-##      <#Include Label="LeftDerivedFunctor:example2">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

@@ -133,6 +133,75 @@ InstallMethod( POW,
     
 end );
 
+##  <#GAPDoc Label="ByASmallerPresentation:morphism">
+##  <ManSection>
+##    <Meth Arg="phi" Name="ByASmallerPresentation" Label="for morphisms"/>
+##    <Returns>a &homalg; map</Returns>
+##    <Description>
+##    It invokes <C>ByASmallerPresentation</C> for &homalg; (static) objects.
+##      <Listing Type="Code"><![CDATA[
+InstallMethod( ByASmallerPresentation,
+        "for homalg morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi )
+    
+    ByASmallerPresentation( Source( phi ) );
+    ByASmallerPresentation( Range( phi ) );
+    
+    return DecideZero( phi );
+    
+end );
+##  ]]></Listing>
+##      This method performs side effects on its argument <A>phi</A> and returns it.
+##      <Example><![CDATA[
+##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A homalg internal 2 by 3 matrix>
+##  gap> M := LeftPresentation( M );
+##  <A non-torsion left module presented by 2 relations for 3 generators>
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A homalg internal 2 by 4 matrix>
+##  gap> N := LeftPresentation( N );
+##  <A non-torsion left module presented by 2 relations for 4 generators>
+##  gap> mat := HomalgMatrix( "[ \
+##  > 1, 0, -2, -4, \
+##  > 0, 1,  4,  7, \
+##  > 1, 0, -2, -4  \
+##  > ]", 3, 4, ZZ );;
+##  <A homalg internal 3 by 4 matrix>
+##  gap> phi := HomalgMap( mat, M, N );
+##  <A "homomorphism" of left modules>
+##  gap> IsMorphism( phi );
+##  true
+##  gap> phi;
+##  <A homomorphism of left modules>
+##  gap> Display( phi );
+##  [ [   1,   0,  -2,  -4 ],
+##    [   0,   1,   4,   7 ],
+##    [   1,   0,  -2,  -4 ] ]
+##  
+##  the map is currently represented by the above 3 x 4 matrix
+##  gap> ByASmallerPresentation( phi );
+##  <A non-zero homomorphism of left modules>
+##  gap> Display( phi );
+##  [ [   0,   0,   0 ],
+##    [   1,  -1,  -2 ] ]
+##  
+##  the map is currently represented by the above 2 x 3 matrix
+##  gap> M;
+##  <A rank 1 left module presented by 1 relation for 2 generators>
+##  gap> Display( M );
+##  Z/< 3 > + Z^(1 x 1)
+##  gap> N;
+##  <A rank 2 left module presented by 1 relation for 3 generators>
+##  gap> Display( N );
+##  Z/< 4 > + Z^(1 x 2)
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##
 InstallMethod( PreCompose,
         "of two homalg morphisms",

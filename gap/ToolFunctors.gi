@@ -155,7 +155,7 @@ functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 ## for convenience
 InstallMethod( \/,
-        "for homalg maps with the same target",
+        "for homalg morphisms with the same target",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta )
@@ -169,7 +169,7 @@ InstallMethod( \/,
 end );
 
 InstallMethod( PostDivide,
-        "for homalg maps with the same target",
+        "for homalg morphisms with the same target",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta )
@@ -184,7 +184,7 @@ end );
 
 ##
 InstallMethod( PreDivide,
-        "for homalg maps with the same source",
+        "for homalg morphisms with the same source",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( epsilon, eta )

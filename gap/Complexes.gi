@@ -900,7 +900,7 @@ end );
 
 ## [HS. Proof of Lemma. VIII.9.4]
 InstallMethod( DefectOfExactnessSequence,
-        "for homalg maps",
+        "for homalg two-morphisms complexes",
         [ IsHomalgComplex and IsATwoSequence ],
         
   function( cpx_post_pre )
@@ -939,7 +939,7 @@ end );
 
 ## for convenience
 InstallMethod( DefectOfExactnessSequence,
-        "for homalg composable maps",
+        "for composable homalg morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
           IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
@@ -951,7 +951,7 @@ end );
 
 ## [HS. Proof of Lemma. VIII.9.4]
 InstallMethod( DefectOfExactnessCosequence,
-        "for homalg maps",
+        "for homalg two-morphisms complexes",
         [ IsHomalgComplex and IsATwoSequence ],
         
   function( cpx_post_pre )

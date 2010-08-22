@@ -20,7 +20,7 @@
 
 ##
 InstallMethod( TorsionObject,
-        "LIMOR: for homalg modules",
+        "LIMOR: for homalg static objects",
         [ IsHomalgStaticObject ], 10001,
         
   function( psi )
@@ -309,7 +309,7 @@ functor_Pullback!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 ## for convenience
 InstallMethod( Pullback,
-        "for homalg maps with identical target",
+        "for homalg static morphisms with identical target",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi, beta1 )
@@ -368,7 +368,7 @@ functor_Pushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 
 ## for convenience
 InstallMethod( Pushout,
-        "for homalg maps with identical source",
+        "for homalg static morphisms with identical source",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( alpha1, psi )
@@ -439,7 +439,7 @@ end );
 
 ##
 InstallMethod( \+,
-        "for homalg modules",
+        "for two homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedObjectRep ],
         
   function( M, N )

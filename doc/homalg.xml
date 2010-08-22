@@ -65,11 +65,8 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
-<#Include SYSTEM "RingMaps.xml">
-<#Include SYSTEM "Relations.xml">
-<#Include SYSTEM "Generators.xml">
-<#Include SYSTEM "Modules.xml">
-<#Include SYSTEM "Maps.xml">
+<#Include SYSTEM "Objects.xml">
+<#Include SYSTEM "Morphisms.xml">
 <#Include SYSTEM "Complexes.xml">
 <#Include SYSTEM "ChainMaps.xml">
 <#Include SYSTEM "Bicomplexes.xml">
