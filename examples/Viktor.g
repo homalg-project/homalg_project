@@ -10,7 +10,7 @@
 
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 Qx := HomalgFieldOfRationalsInDefaultCAS( ) * "x";
 A1 := RingOfDerivations( Qx, "d" );

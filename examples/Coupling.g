@@ -2,8 +2,6 @@
 
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
-
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 A3 := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
 
@@ -46,6 +44,8 @@ tau3 := HomalgMatrix( "[ \
 ]", 3, 3, A3 );
 
 tau := tau1 * tau2 * tau3;
+
+LoadPackage( "Modules" );
 
 N := LeftPresentation( M * tau );
 

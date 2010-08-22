@@ -229,7 +229,7 @@
 
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 R := HomalgRingOfIntegersInDefaultCAS( 2^8 );
 

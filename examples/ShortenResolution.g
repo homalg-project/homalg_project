@@ -9,7 +9,7 @@ t^2, \
 t * Dt + 2 \
 ]", 2, 1, A1 );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 M := LeftPresentation( M );
 

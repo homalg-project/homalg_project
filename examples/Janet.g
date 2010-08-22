@@ -2,7 +2,7 @@
 
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "d1,d2,d3";
 

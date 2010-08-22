@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 Qt := HomalgFieldOfRationalsInMaple( ) * "t";
 A1 := RingOfDerivations( Qt, "D" );

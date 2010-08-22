@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 LoadPackage( "LocalizeRingForHomalg" );
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 

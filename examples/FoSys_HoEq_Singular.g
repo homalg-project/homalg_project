@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 Qt := HomalgFieldOfRationalsInDefaultCAS( "a,b,c" ) * "t";
 

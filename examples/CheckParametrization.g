@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 Qt := HomalgFieldOfRationalsInDefaultCAS( ) * "t";
 A1 := RingOfDerivations( Qt, "D" );

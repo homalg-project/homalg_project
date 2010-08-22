@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 ZX := HomalgRingOfIntegersInDefaultCAS( ) * "x,y,a,X,Y,A";
 

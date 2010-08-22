@@ -2,7 +2,7 @@
 
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 old_RingOfIntegers := HOMALG_RINGS.RingOfIntegersDefaultCAS;
 HOMALG_RINGS.RingOfIntegersDefaultCAS := "Maple";

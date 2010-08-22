@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 R := HomalgRingOfIntegersInDefaultCAS( );
 k := LeftPresentation( [[1,2,3],[3,4,5]], R );

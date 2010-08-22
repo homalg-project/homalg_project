@@ -1,6 +1,6 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 ## Define the ring of integers:
 R := HomalgRingOfIntegersInDefaultCAS( );

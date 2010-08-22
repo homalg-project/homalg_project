@@ -2,7 +2,7 @@ LoadPackage( "RingsForHomalg" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 P1 := LeftSubmodule( "x*y+y*z+z*x", R );
 P2 := LeftSubmodule( "x^2+y,y*z+2", R );

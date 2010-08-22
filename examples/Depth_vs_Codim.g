@@ -1,7 +1,7 @@
 ## Eisenbud [CA, p226]
 LoadPackage( "RingsForHomalg" );
 LoadPackage( "LocalizeRingForHomalg" );
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
